@@ -8,6 +8,17 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(benchmark)
 
+FetchContent_Declare(
+        glm
+        GIT_REPOSITORY https://github.com/g-truc/glm.git
+        GIT_TAG 1.0.1
+)
+
+set(GLM_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(GLM_BUILD_INSTALL OFF CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(benchmark glm)
+
+
 file(GLOB_RECURSE BENCHMARK_FILES "*.benchmark.cpp")
 
 foreach(BENCHMARK_FILE ${BENCHMARK_FILES})
@@ -20,7 +31,11 @@ foreach(BENCHMARK_FILE ${BENCHMARK_FILES})
 
     add_executable(${UNIQUE_TARGET} ${BENCHMARK_FILE})
 
-    target_link_libraries(${UNIQUE_TARGET} PRIVATE helios benchmark::benchmark)
+    target_link_libraries(${UNIQUE_TARGET} PRIVATE
+            helios
+            benchmark::benchmark
+            glm::glm
+    )
 
     set_target_properties(${UNIQUE_TARGET} PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/benchmarks/${SUBDIR}

@@ -1,7 +1,5 @@
 #include <gtest/gtest.h>
 
-#include "../../../../.build/cmake_build_debug/_deps/googletest-src/googletest/include/gtest/gtest.h"
-
 import helios.math;
 
 namespace math = helios::math;

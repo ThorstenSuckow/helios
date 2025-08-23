@@ -4,19 +4,19 @@
 import helios.math;
 
 
-static void BM_vec3(benchmark::State& state) {
+static void BM_vec3Constructor(benchmark::State& state) {
     for (auto _ : state) {
         benchmark::DoNotOptimize(helios::math::vec3());
     }
 }
-BENCHMARK(BM_vec3)->UseRealTime();
+BENCHMARK(BM_vec3Constructor)->UseRealTime();
 
-static void BM_glm_vec3(benchmark::State& state) {
+static void BM_glm_vec3Constructor(benchmark::State& state) {
     for (auto _ : state) {
         benchmark::DoNotOptimize(glm::vec3());
     }
 }
-BENCHMARK(BM_glm_vec3)->UseRealTime();
+BENCHMARK(BM_glm_vec3Constructor)->UseRealTime();
 
 
 BENCHMARK_MAIN();

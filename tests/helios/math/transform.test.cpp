@@ -19,11 +19,13 @@ TEST(TransformTest, rotateModel) {
     float* v = math::value_ptr(model);
     float* glm_v = glm::value_ptr(glm_model);
 
-    for (int i = 0; i < 16; i++) {
+    for (int i = 0; i < 15; i++) {
         int z = std::rand();
         v[i] = z;
         glm_v[i] = z;
     }
+    v[3] = glm_v[3] = v[7] = glm_v[7] = v[11] = glm_v[11] = 0;
+    v[15] = glm_v[15] = 1;
 
 
     constexpr float angle = 45;

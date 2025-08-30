@@ -1,6 +1,6 @@
 module;
 
-#include <assert.h>
+#include <cassert>
 
 export module helios.math.core:mat4;
 
@@ -14,10 +14,10 @@ export namespace helios::math {
         float m[16];
 
     public:
-        constexpr mat4() = default;
+        explicit constexpr mat4() noexcept : m{}{};
 
-        explicit constexpr mat4(float f) noexcept
-            : m(f, 0, 0, 0, 0, f, 0, 0, 0, 0, f, 0, 0, 0, 0, f) {}
+        explicit constexpr mat4(const float f) noexcept
+            : m{f, 0, 0, 0, 0, f, 0, 0, 0, 0, f, 0, 0, 0, 0, f} {}
 
         /**
          * fi_j (i==row, j == col)
@@ -45,7 +45,7 @@ export namespace helios::math {
         }
 
         constexpr mat4 operator*(const mat4& matrix) const {
-            mat4 A;
+            mat4 A{};
             for (int row = 0; row < 4; row++) {
                 for (int col = 0; col < 4; col++) {
                     float sum = 0.0f;
@@ -61,5 +61,8 @@ export namespace helios::math {
         }
     };
 
+    const float* value_ptr(const mat4& m) noexcept {
+        return &m(0, 0);
+    }
 
 }

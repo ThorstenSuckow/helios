@@ -1,8 +1,20 @@
 #include <gtest/gtest.h>
-
+#include <numbers>
 import helios.math;
 
 namespace math = helios::math;
+
+TEST(Mat4Tests, defaultConstructor) {
+
+    math::mat4 M {};
+
+    const float* m = math::value_ptr(M);
+
+    for (int i = 0; i < 16; i++) {
+        EXPECT_FLOAT_EQ(0.0f, m[i]);
+    }
+
+}
 
 TEST(Mat4Tests, accessor) {
 

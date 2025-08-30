@@ -65,4 +65,8 @@ export namespace helios::math {
         return &m(0, 0);
     }
 
+    float* value_ptr(mat4& m) noexcept {
+        return &m(0, 0);
+    }
+
 }

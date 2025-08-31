@@ -2,7 +2,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
+#include <array>
 #include "../../../.build/cmake_build_release/_deps/benchmark-src/src/arraysize.h"
 
 
@@ -10,9 +10,18 @@ import helios.math;
 
 namespace math = helios::math;
 
-TEST(TransformTest, rotateModel) {
+struct test_data {
+    math::mat4 model;
+    glm::mat4 glm_model;
+    std::array<float, 3> vector;
+    float angle;
+};
 
-    std::srand(time(0));
+test_data setup() {
+
+    time_t seed = time(0);
+    std::cout << "using seed: " << seed << std::endl;
+    std::srand(seed);
 
     auto model = math::mat4{1.0f};
     auto glm_model = glm::mat4{1.0f};
@@ -27,17 +36,57 @@ TEST(TransformTest, rotateModel) {
     v[3] = glm_v[3] = v[7] = glm_v[7] = v[11] = glm_v[11] = 0;
     v[15] = glm_v[15] = 1;
 
+    float angle = 45;
+    float x = 0.0f;
+    float y = 1.0f;
+    float z = 0.0f;
 
-    constexpr float angle = 45;
-    constexpr float x = 0.0f;
-    constexpr float y = 1.0f;
-    constexpr float z = 0.0f;
+    return test_data{
+        .model = model,
+        .glm_model = glm_model,
+        .vector = {x, y, z},
+        .angle = angle
+    };
+}
 
-    constexpr auto axis = math::vec3(x, y, z);
+
+TEST(TransformTest, rotateModel) {
+
+    // init data
+    test_data data = setup();
+    float x = data.vector[0], y = data.vector[1], z = data.vector[2];
+    float angle = data.angle;
+    math::mat4 model = data.model;
+    glm::mat4 glm_model = data.glm_model;
+
+    // apply rotations
+    auto axis = math::vec3(x, y, z);
     const math::mat4 R = math::rotate(model, math::radians(angle), axis);
-
     auto glm_axis = glm::normalize(glm::vec3(x, y, z));
     glm::mat4 glm_R = glm::rotate(glm_model, glm::radians(angle), glm_axis);
+    const float* ptr = math::value_ptr(R);
+    const float* glm_ptr = glm::value_ptr(glm_R);
+
+    for (int i = 0; i < 16; i++) {
+        EXPECT_FLOAT_EQ(ptr[i], glm_ptr[i]);
+    }
+}
+
+
+TEST(TransformTest, translateModel) {
+
+    // init data
+    test_data data = setup();
+    float x = data.vector[0], y = data.vector[1], z = data.vector[2];
+    math::mat4 model = data.model;
+    glm::mat4 glm_model = data.glm_model;
+
+    // apply translation
+    auto axis = math::vec3(x, y, z);
+    const math::mat4 R = math::translate(model, axis);
+
+    auto glm_axis = glm::vec3(x, y, z);
+    glm::mat4 glm_R = glm::translate(glm_model, glm_axis);
 
     const float* ptr = math::value_ptr(R);
     const float* glm_ptr = glm::value_ptr(glm_R);

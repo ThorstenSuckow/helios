@@ -47,15 +47,13 @@ namespace helios::math {
 
     mat4 rotate(const mat4& model, const float radians, const vec3& axis) noexcept {
 
-        vec3 normalized_axis = axis.normalize();
-
         return model * transform::make_rodrigues_rotation_matrix(
             std::cos(radians),
             std::sin(radians),
-            normalized_axis
+        axis.normalize()
         );
-
     };
+
 
 };
 

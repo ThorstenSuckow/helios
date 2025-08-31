@@ -83,13 +83,59 @@ TEST(TransformTest, translateModel) {
 
     // apply translation
     auto axis = math::vec3(x, y, z);
-    const math::mat4 R = math::translate(model, axis);
+    const math::mat4 T = math::translate(model, axis);
 
     auto glm_axis = glm::vec3(x, y, z);
-    glm::mat4 glm_R = glm::translate(glm_model, glm_axis);
+    glm::mat4 glm_T = glm::translate(glm_model, glm_axis);
 
-    const float* ptr = math::value_ptr(R);
-    const float* glm_ptr = glm::value_ptr(glm_R);
+    const float* ptr = math::value_ptr(T);
+    const float* glm_ptr = glm::value_ptr(glm_T);
+
+    for (int i = 0; i < 16; i++) {
+        EXPECT_FLOAT_EQ(ptr[i], glm_ptr[i]);
+    }
+}
+
+TEST(TransformTest, scaleModel_vec3) {
+
+    // init data
+    test_data data = setup();
+    float x = data.vector[0], y = data.vector[1], z = data.vector[2];
+    math::mat4 model = data.model;
+    glm::mat4 glm_model = data.glm_model;
+
+    // apply translation
+    auto axis = math::vec3(x, y, z);
+    const math::mat4 S = math::scale(model, axis);
+
+    auto glm_axis = glm::vec3(x, y, z);
+    glm::mat4 glm_S = glm::scale(glm_model, glm_axis);
+
+    const float* ptr = math::value_ptr(S);
+    const float* glm_ptr = glm::value_ptr(glm_S);
+
+    for (int i = 0; i < 16; i++) {
+        EXPECT_FLOAT_EQ(ptr[i], glm_ptr[i]);
+    }
+}
+
+TEST(TransformTest, scaleModel_float) {
+
+    // init data
+    test_data data = setup();
+    float x = data.vector[0];
+    math::mat4 model = data.model;
+    glm::mat4 glm_model = data.glm_model;
+
+    // apply translation
+    const float scale_by = x;
+    const math::mat4 S = math::scale(model, scale_by);
+
+    auto glm_axis = glm::vec3(scale_by, scale_by, scale_by);
+    glm::mat4 glm_S = glm::scale(glm_model, glm_axis);
+
+    const float* ptr = math::value_ptr(S);
+    const float* glm_ptr = glm::value_ptr(glm_S);
 
     for (int i = 0; i < 16; i++) {
         EXPECT_FLOAT_EQ(ptr[i], glm_ptr[i]);

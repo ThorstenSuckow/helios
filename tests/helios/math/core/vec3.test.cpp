@@ -72,15 +72,20 @@ TEST(Vec3Tests, normalize) {
 
 
 TEST(CoreTest, cross) {
-
-    // init data
-    test_data data = setup();
+   test_data data = setup();
 
     auto vec_c = math::cross(data.vec_a, data.vec_b);
 
     EXPECT_FLOAT_EQ(vec_c[0], data.vec_a[1]*data.vec_b[2] - data.vec_a[2]*data.vec_b[1]);
     EXPECT_FLOAT_EQ(vec_c[1], data.vec_a[2]*data.vec_b[0] - data.vec_a[0]*data.vec_b[2]);
     EXPECT_FLOAT_EQ(vec_c[2], data.vec_a[0]*data.vec_b[1] - data.vec_a[1]*data.vec_b[0]);
+}
 
+TEST(CoreTest, subtraction) {
 
+    auto vec_c = math::vec3{1.0f, 2.0f, 3.0f} - math::vec3{4.0f, 4.0f, 4.0f};
+
+    EXPECT_FLOAT_EQ(vec_c[0], -3.0f);
+    EXPECT_FLOAT_EQ(vec_c[1], -2.0f);
+    EXPECT_FLOAT_EQ(vec_c[2], -1.0f);
 }

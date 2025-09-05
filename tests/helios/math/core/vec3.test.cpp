@@ -1,8 +1,35 @@
 #include <gtest/gtest.h>
+#include <ctime>
 
 import helios.math;
 
 namespace math = helios::math;
+
+ struct test_data {
+    math::vec3 vec_a;
+    math::vec3 vec_b;
+};
+
+static test_data setup() {
+
+    time_t seed = time(0);
+    std::cout << "using seed: " << seed << std::endl;
+    std::srand(seed);
+
+    return test_data{
+        .vec_a = math::vec3{
+            static_cast<float>(std::rand()),
+            static_cast<float>(std::rand()),
+            static_cast<float>(std::rand())
+        },
+        .vec_b = math::vec3{
+            static_cast<float>(std::rand()),
+            static_cast<float>(std::rand()),
+            static_cast<float>(std::rand())
+        },
+    };
+}
+
 
 TEST(Vec3Tests, accessor) {
 
@@ -41,4 +68,19 @@ TEST(Vec3Tests, normalize) {
     EXPECT_FLOAT_EQ(v[0], 1 / norm);
     EXPECT_FLOAT_EQ(v[1], 2 / norm);
     EXPECT_FLOAT_EQ(v[2], 3 / norm);
+}
+
+
+TEST(CoreTest, cross) {
+
+    // init data
+    test_data data = setup();
+
+    auto vec_c = math::cross(data.vec_a, data.vec_b);
+
+    EXPECT_FLOAT_EQ(vec_c[0], data.vec_a[1]*data.vec_b[2] - data.vec_a[2]*data.vec_b[1]);
+    EXPECT_FLOAT_EQ(vec_c[1], data.vec_a[2]*data.vec_b[0] - data.vec_a[0]*data.vec_b[2]);
+    EXPECT_FLOAT_EQ(vec_c[2], data.vec_a[0]*data.vec_b[1] - data.vec_a[1]*data.vec_b[0]);
+
+
 }

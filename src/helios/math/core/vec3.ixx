@@ -57,6 +57,10 @@ export namespace helios::math {
         };
     }
 
+    constexpr float dot(const vec3& x, const vec3& y) noexcept {
+        return x[0]*y[0] + x[1]*y[1] + x[2]*y[2];
+    }
+
     constexpr vec3 operator-(const vec3& x, const vec3& y) noexcept {
         return vec3{x[0] - y[0], x[1] - y[1], x[2] - y[2]};
     }

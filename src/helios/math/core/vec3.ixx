@@ -48,4 +48,12 @@ export namespace helios::math {
     }
 
     inline vec3 vec3::normalize() const noexcept { return (*this) * (1.0f / this->norm()); }
+
+    constexpr vec3 cross(const vec3& x, const vec3& y) noexcept {
+        return vec3{
+            x[1]*y[2] - x[2]*y[1],
+            x[2]*y[0] - x[0]*y[2],
+            x[0]*y[1] - x[1]*y[0]
+        };
+    }
 }

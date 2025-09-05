@@ -3,7 +3,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <array>
-#include "../../../.build/cmake_build_release/_deps/benchmark-src/src/arraysize.h"
 
 
 import helios.math;
@@ -17,7 +16,7 @@ struct test_data {
     float angle;
 };
 
-test_data setup() {
+static test_data setup() {
 
     time_t seed = time(0);
     std::cout << "using seed: " << seed << std::endl;

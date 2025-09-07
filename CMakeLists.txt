@@ -17,3 +17,8 @@ option(BUILD_BENCHMARKS "Build benchmarks" ON)
 if(BUILD_BENCHMARKS)
     add_subdirectory(benchmarks)
 endif()
+
+option(BUILD_EXAMPLES "Build examples" ON)
+if(BUILD_EXAMPLES)
+    add_subdirectory(examples)
+endif()

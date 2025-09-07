@@ -7,7 +7,19 @@ FetchContent_Declare(
     CMAKE_ARGS -DCMAKE_CXX_SCAN_FOR_MODULES=OFF
 )
 
-FetchContent_MakeAvailable(googletest)
+FetchContent_Declare(
+        glm
+        GIT_REPOSITORY https://github.com/g-truc/glm.git
+        GIT_TAG 1.0.1
+)
+
+set(GLM_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(GLM_BUILD_INSTALL OFF CACHE BOOL "" FORCE)
+
+
+FetchContent_MakeAvailable(googletest glm)
+
+
 
 file(GLOB_RECURSE TEST_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_LIST_DIR}/**/*.test.cpp"
@@ -21,6 +33,7 @@ add_executable(helios_tests
 target_link_libraries(helios_tests PRIVATE
     helios
     GTest::gtest_main
+        glm::glm
 )
 
 target_compile_features(helios_tests PRIVATE cxx_std_20)

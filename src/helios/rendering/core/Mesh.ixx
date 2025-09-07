@@ -17,7 +17,7 @@ export namespace helios::rendering {
         explicit Mesh(std::shared_ptr<const MeshData> meshData) noexcept
             : mesh_data_(std::move(meshData)) {}
 
-        const std::shared_ptr<const MeshData>& mesh_data() const noexcept {
+        [[nodiscard]] const std::shared_ptr<const MeshData>& mesh_data() const noexcept {
             return mesh_data_;
         }
     };

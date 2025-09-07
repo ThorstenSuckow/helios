@@ -2,12 +2,10 @@ module;
 
 #include <memory>
 
-import helios.rendering.core;
-import helios.util.Guid;
-
 export module helios.scene.Node;
 
-
+import helios.rendering.core;
+import helios.util.Guid;
 
 export namespace helios::scene {
 

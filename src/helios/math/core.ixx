@@ -1,7 +1,5 @@
 module;
 
-#include <numbers>
-
 export module helios.math.core;
 
 export import :mat4;

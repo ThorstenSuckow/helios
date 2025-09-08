@@ -5,7 +5,7 @@ module;
 #include <memory>
 
 
-export module helios.math.core:vec3;
+export module helios.math.types:vec3;
 
 export namespace helios::math {
 

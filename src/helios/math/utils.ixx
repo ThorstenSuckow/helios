@@ -2,7 +2,7 @@ module;
 
 #include <numbers>
 
-export module helios.math.core:utils;
+export module helios.math.utils;
 
 export namespace helios::math {
 

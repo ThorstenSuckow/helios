@@ -2,7 +2,7 @@ module;
 
 #include <cassert>
 
-export module helios.math.core:mat4;
+export module helios.math.types:mat4;
 
 export namespace helios::math {
 

@@ -1,4 +1,6 @@
-import helios.math;
+import helios.math.types;
+
+import helios.math.transform;
 
 namespace helios::math {
 

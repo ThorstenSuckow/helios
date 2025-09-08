@@ -1,9 +1,9 @@
 module;
 
 
-export module helios.math.camera;
+export module helios.math.transform:camera;
 
-import helios.math.core;
+import helios.math.types;
 
 export namespace helios::math {
 

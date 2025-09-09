@@ -2,7 +2,7 @@ module;
 
 export module helios.rendering.core:Vertex;
 
-import helios.math.core;
+import helios.math.types;
 
 export namespace helios::rendering {
 

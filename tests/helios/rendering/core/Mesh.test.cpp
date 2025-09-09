@@ -2,9 +2,7 @@
 
 
 import helios.rendering.core;
-import helios.math.core;
 
-namespace math = helios::math;
 namespace rendering = helios::rendering;
 
 
@@ -22,5 +20,4 @@ TEST(MeshTest, data) {
 
     EXPECT_EQ(mesh_data_ptr, mesh.mesh_data());
 }
-
 

@@ -6,9 +6,12 @@ using Guid = helios::util::Guid;
 
 TEST(Guid, generateAndValue) {
 
+    // get initial value
+    Guid start = Guid::generate();
+
     for (int i = 0; i < 10; i++) {
         Guid id = Guid::generate();
-        EXPECT_EQ(i + 1, id.value());
+        EXPECT_EQ((i + 1) + start.value(), id.value());
     }
 }
 

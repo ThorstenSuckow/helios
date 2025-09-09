@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
 
-import helios.scene.Node;
+import helios.scene;
 import helios.rendering.core;
 
 namespace scene = helios::scene;

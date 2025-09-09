@@ -1,6 +1,6 @@
 #include <cmath>
 
-import helios.math.transform;
+import helios.math.transform.core;
 import helios.math.types;
 
 namespace helios::math::transform {

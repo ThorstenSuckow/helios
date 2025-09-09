@@ -2,9 +2,7 @@
 
 
 import helios.rendering.core;
-import helios.math.core;
 
-namespace math = helios::math;
 namespace rendering = helios::rendering;
 
 

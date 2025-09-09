@@ -2,7 +2,7 @@ module;
 
 #include <memory>
 
-export module helios.scene.Node;
+export module helios.scene:Node;
 
 import helios.rendering.core;
 import helios.util.Guid;

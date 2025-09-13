@@ -1,25 +1,5 @@
 project(demo LANGUAGES C CXX)
 
-include(FetchContent)
-
-FetchContent_Declare(glad
-        GIT_REPOSITORY https://github.com/Dav1dde/glad.git
-        GIT_TAG        v2.0.8
-        SOURCE_SUBDIR  cmake
-)
-FetchContent_Declare(glfw
-        GIT_REPOSITORY https://github.com/glfw/glfw.git
-        GIT_TAG        3.4
-)
-set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-
-FetchContent_MakeAvailable(glad glfw)
-
-glad_add_library(glad_gl_core_46 STATIC REPRODUCIBLE LOADER API gl:core=4.6)
-target_link_libraries(glad_gl_core_46 glfw)
-
 file(GLOB_RECURSE EXAMPLE_FILES "*.cpp")
 
 foreach(EXAMPLE_FILE ${EXAMPLE_FILES})
@@ -34,15 +14,13 @@ foreach(EXAMPLE_FILE ${EXAMPLE_FILES})
 
     target_link_libraries(${UNIQUE_TARGET} PRIVATE
             helios
-            benchmark::benchmark
-            glad_gl_core_46
-            glfw
+            thirdparty::opengl
     )
 
     target_compile_definitions(${UNIQUE_TARGET} PRIVATE GLFW_INCLUDE_NONE)
 
     set_target_properties(${UNIQUE_TARGET} PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/demos/${SUBDIR}
+        RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/examples/${SUBDIR}
         OUTPUT_NAME ${TARGET_NAME}
     )
 endforeach()

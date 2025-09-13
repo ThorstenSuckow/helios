@@ -2,11 +2,13 @@ module;
 
 #include <GLFW/glfw3.h>
 
-export module helios.platform.glfw:GLFWWindowConfig;
+export module helios.platform.window.glfw:GLFWWindowConfig;
 
-import helios.platform.core;
+import helios.platform.window.core;
 
-export namespace helios::platform::glfw {
+using namespace helios::platform::window::core;
+
+export namespace helios::platform::window::glfw {
 
     struct GLFWWindowConfig : public WindowConfig {
         GLFWframebuffersizefun frameBufferSizeCallback = nullptr;

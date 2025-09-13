@@ -2,9 +2,11 @@ module;
 
 
 import helios.platform.input.types;
-import helios.platform.core;
+import helios.platform.window.core;
 
 export module helios.platform.input.core:InputAdapter;
+
+using namespace helios::platform::window::core;
 
 export namespace helios::platform::input::core {
 

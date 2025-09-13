@@ -7,12 +7,14 @@ export module helios.scene:Node;
 import helios.rendering.core;
 import helios.util.Guid;
 
+using namespace helios::rendering::core;
+
 export namespace helios::scene {
 
     class Node {
 
         private:
-        std::shared_ptr<rendering::Mesh> mesh_;
+        std::shared_ptr<Mesh> mesh_;
         const util::Guid guid_;
 
         public:
@@ -22,12 +24,12 @@ export namespace helios::scene {
                 return guid_;
             };
 
-            Node& set_mesh(std::shared_ptr<rendering::Mesh> mesh) noexcept {
+            Node& set_mesh(std::shared_ptr<Mesh> mesh) noexcept {
                 mesh_ = std::move(mesh);
                 return *this;
             }
 
-            const std::shared_ptr<rendering::Mesh>& mesh() const noexcept {
+            const std::shared_ptr<Mesh>& mesh() const noexcept {
                 return mesh_;
             }
 

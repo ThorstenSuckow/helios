@@ -3,12 +3,11 @@
 
 import helios.rendering.core;
 
-namespace rendering = helios::rendering;
-
+using namespace helios::rendering::core;
 
 TEST(VertextTest, position) {
 
-    const auto v = rendering::Vertex{
+    const auto v = Vertex{
         .position = {1.0f, 0.5f, 0.2f}
     };
 

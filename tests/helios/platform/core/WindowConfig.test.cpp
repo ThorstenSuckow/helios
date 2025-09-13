@@ -1,9 +1,10 @@
 #include <gtest/gtest.h>
 
 
-import helios.platform.core;
+import helios.platform.window.core;
 
-namespace platform = helios::platform;
+
+using namespace helios::platform::window::core;
 
 struct test_data {
 
@@ -17,7 +18,7 @@ static test_data setup() {
 TEST(WindowConfigTest, data) {
 
     // init data
-    const platform::WindowConfig data{};
+    const WindowConfig data{};
 
     EXPECT_EQ(600, data.height);
     EXPECT_EQ(800, data.width);

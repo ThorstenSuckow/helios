@@ -6,7 +6,9 @@ export module helios.platform.input:InputManager;
 
 import helios.platform.input.core;
 import helios.platform.input.types;
-import helios.platform.core;
+import helios.platform.window.core;
+
+using namespace helios::platform::window::core;
 
 export namespace helios::platform::input {
 

@@ -8,16 +8,19 @@ export module helios.platform.input.glfw:GLFWInput;
 
 import helios.platform.input.core;
 import helios.platform.input.types;
-import helios.platform.core;
-import helios.platform.glfw;
+import helios.platform.window.core;
+import helios.platform.window.glfw;
 import :GLFWKeyLookup;
+
+using namespace helios::platform::window::core;
+using namespace helios::platform::window::glfw;
 
 export namespace helios::platform::input::glfw {
 
     class GLFWInput : public core::InputAdapter {
 
         [[nodiscard]] bool isKeyPressed(Key key, const Window& win) const override {
-            auto const* win_ptr = dynamic_cast<platform::glfw::GLFWWindow const*>(&win);
+            auto const* win_ptr = dynamic_cast<window::glfw::GLFWWindow const*>(&win);
 
             if (!win_ptr) {
                 throw std::runtime_error("GLFWInput requires GLFWWindow");
@@ -28,7 +31,7 @@ export namespace helios::platform::input::glfw {
 
 
         [[nodiscard]] bool isKeyPressed(Key key,
-            const platform::glfw::GLFWWindow& win) const noexcept {
+            const window::glfw::GLFWWindow& win) const noexcept {
 
             return glfwGetKey(
                 win.nativeHandle(),

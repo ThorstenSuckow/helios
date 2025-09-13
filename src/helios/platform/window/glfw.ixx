@@ -1,8 +1,7 @@
 module;
 
 
-export module helios.platform.glfw;
+export module helios.platform.window.glfw;
 
 export import :GLFWWindow;
-export import :GLFWApplication;
 export import :GLFWWindowConfig;

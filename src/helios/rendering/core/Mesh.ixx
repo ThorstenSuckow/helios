@@ -6,7 +6,7 @@ export module helios.rendering.core:Mesh;
 
 import :MeshData;
 
-export namespace helios::rendering {
+export namespace helios::rendering::core {
 
     class Mesh {
 

@@ -4,17 +4,19 @@ module;
 #include <memory>
 #include <stdexcept>
 
-#include "../../../../.build/cmake_build_release/_deps/benchmark-src/src/arraysize.h"
 
-export module helios.platform.glfw:GLFWApplication;
+export module helios.platform.application.glfw:GLFWApplication;
 
-import helios.platform.core;
+import helios.platform.application.core;
 import helios.rendering.core;
-import :GLFWWindow;
-import :GLFWWindowConfig;
+import helios.platform.window.glfw;
+import helios.platform.window.core;
 
+using namespace helios::platform::application::core;
+using namespace helios::platform::window::glfw;
+using namespace helios::platform::window::core;
 
-export namespace helios::platform::glfw {
+export namespace helios::platform::application::glfw {
 
     class GLFWApplication : public Application {
 

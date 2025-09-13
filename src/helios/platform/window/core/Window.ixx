@@ -2,12 +2,12 @@ module;
 
 #include <string>
 
-export module helios.platform.core:Window;
+export module helios.platform.window.core:Window;
 
 import helios.util.Guid;
 import :WindowConfig;
 
-export namespace helios::platform {
+export namespace helios::platform::window::core {
 
     class Window {
 

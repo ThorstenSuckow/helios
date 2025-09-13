@@ -2,18 +2,22 @@ module;
 
 #include <memory>
 
-export module helios.platform.core:Application;
+export module helios.platform.application.core:Application;
 
 import helios.rendering.core;
-import :Window;
+import helios.platform.input;
+import helios.platform.window.core;
 
 
-export namespace helios::platform {
+using namespace helios::platform::window::core;
+
+export namespace helios::platform::application::core {
 
     class Application {
 
     protected:
         std::unique_ptr<Window> window_;
+        std::unique_ptr<input::InputManager> inputManager_;
         rendering::core::RenderingDevice* renderingDevice_;
 
     public:
@@ -36,13 +40,29 @@ export namespace helios::platform {
 
         /**
          * Inits the Application. Calls necessary operations on the rendering
-         * device passed to this application and shows the window
+         * device passed to this application and shows the window. Initializes
+         * the InputManager.
          *
          * @return
          *
          * @throws std::runtime_error
          */
         virtual Application& init() = 0;
+
+        /**
+         * Returns the InputManager owned by this Application.
+         * @return
+         */
+        //virtual input::InputManager& inputManager() = 0;
+
+        /**
+         * Set's the application's active window. Advises the
+         * InputManager to poll this window's events.
+         *
+         * @param win
+         * @return
+         */
+       // virtual Application& focus(window::Window& win) = 0;
     };
 
 }

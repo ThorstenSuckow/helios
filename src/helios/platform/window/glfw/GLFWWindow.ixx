@@ -4,12 +4,12 @@ module;
 #include <GLFW/glfw3.h>
 #include <string>
 
-export module helios.platform.glfw:GLFWWindow;
+export module helios.platform.window.glfw:GLFWWindow;
 
-import helios.platform.core;
+import helios.platform.window.core;
 import :GLFWWindowConfig;
 
-export namespace helios::platform::glfw {
+export namespace helios::platform::window::glfw {
 
     class GLFWWindow : public Window {
 

@@ -3,12 +3,11 @@
 
 import helios.rendering.core;
 
-namespace rendering = helios::rendering;
-
+using namespace helios::rendering::core;
 
 TEST(MeshDataTest, data) {
 
-    auto meshData = rendering::MeshData();//{{}};
+    auto meshData = MeshData();//{{}};
 
 
     EXPECT_EQ(meshData.vertices.size(), 0);

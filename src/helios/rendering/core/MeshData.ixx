@@ -6,7 +6,7 @@ export module helios.rendering.core:MeshData;
 
 import :Vertex;
 
-export namespace helios::rendering {
+export namespace helios::rendering::core {
 
     struct MeshData {
         std::vector<Vertex> vertices;

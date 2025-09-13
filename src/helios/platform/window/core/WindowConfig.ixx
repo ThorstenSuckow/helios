@@ -2,10 +2,10 @@ module;
 
 #include <string>
 
-export module helios.platform.core:WindowConfig;
+export module helios.platform.window.core:WindowConfig;
 
 
-export namespace helios::platform {
+export namespace helios::platform::window::core {
 
     struct WindowConfig {
         int width{800};

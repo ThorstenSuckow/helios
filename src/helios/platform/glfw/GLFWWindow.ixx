@@ -8,7 +8,6 @@ export module helios.platform.glfw:GLFWWindow;
 
 import helios.platform.core;
 import :GLFWWindowConfig;
-import helios.util.Guid;
 
 export namespace helios::platform::glfw {
 
@@ -16,23 +15,17 @@ export namespace helios::platform::glfw {
 
     private:
         GLFWwindow* nativeHandle_ = nullptr;
-        const util::Guid guid_;
         const GLFWframebuffersizefun framebufferSizeCallback_;
 
     public:
         explicit GLFWWindow(const GLFWWindowConfig& cfg) :
             Window(cfg),
-            guid_(util::Guid::generate()),
-            framebufferSizeCallback_(cfg.frame_buffer_size_callback) {};
+            framebufferSizeCallback_(cfg.frameBufferSizeCallback) {};
 
-        [[nodiscard]] bool shouldClose() const override {
-            if (nativeHandle_ == nullptr) {
-                return true;
-            }
-            return glfwWindowShouldClose(nativeHandle_);
-        }
-
-        [[nodiscard]] GLFWWindow& show() override {
+            /********************
+             * Overrides
+             *******************/
+            [[nodiscard]] GLFWWindow& show() override {
             if (nativeHandle_ != nullptr) {
                 throw std::runtime_error("Window already shown.");
             }
@@ -45,15 +38,6 @@ export namespace helios::platform::glfw {
             }
 
             return (*this);
-        }
-
-
-        [[nodiscard]] GLFWframebuffersizefun framebufferSizeCallback() const noexcept  {
-            return framebufferSizeCallback_;
-        }
-
-        [[nodiscard]] GLFWwindow* nativeHandle() const {
-            return nativeHandle_;
         }
 
         GLFWWindow& swapBuffers() override {
@@ -69,6 +53,25 @@ export namespace helios::platform::glfw {
 
         ~GLFWWindow() override {
             destroy();
+        }
+
+        [[nodiscard]] bool shouldClose() const override {
+            if (nativeHandle_ == nullptr) {
+                return true;
+            }
+            return glfwWindowShouldClose(nativeHandle_);
+        }
+
+
+        /********************
+         * Specifics
+         *******************/
+        [[nodiscard]] GLFWframebuffersizefun framebufferSizeCallback() const noexcept  {
+            return framebufferSizeCallback_;
+        }
+
+        [[nodiscard]] GLFWwindow* nativeHandle() const {
+            return nativeHandle_;
         }
 
         void destroy() {

@@ -11,6 +11,12 @@ add_library(helios STATIC)
 ###
 
 
+target_link_libraries(
+        helios
+        PUBLIC
+        thirdparty::opengl
+)
+
 set_property(TARGET helios PROPERTY CXX_SCAN_FOR_MODULES ON)
 target_compile_features(helios PUBLIC cxx_std_20)
 

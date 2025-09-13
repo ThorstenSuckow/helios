@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 4.0)
+
 include(FetchContent)
 FetchContent_Declare(
     googletest
@@ -33,7 +35,7 @@ add_executable(helios_tests
 target_link_libraries(helios_tests PRIVATE
     helios
     GTest::gtest_main
-        glm::glm
+    glm::glm
 )
 
 target_compile_features(helios_tests PRIVATE cxx_std_20)

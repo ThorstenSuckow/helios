@@ -3,55 +3,44 @@
 #include <GLFW/glfw3.h>
 #include <cstdlib>
 
-#include "../../.build/cmake_build_release/_deps/glfw-src/include/GLFW/glfw3.h"
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
-    glViewport(0, 0, width, height);
-}
+import helios.platform.glfw;
+import helios.rendering.opengl;
+import helios.platform.input;
+import helios.platform.input.glfw;
+import helios.platform.input.core;
+import helios.platform.input.types;
+
+namespace heliosGlfw = helios::platform::glfw;
+namespace heliosOpenGl = helios::rendering::opengl;
+namespace heliosInput = helios::platform::input;
 
 int main() {
 
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    const auto opengl = std::make_unique<heliosOpenGl::OpenGLDevice>();
 
-    const unsigned short width = 800;
-    const unsigned short height = 600;
+    const auto app = std::make_unique<heliosGlfw::GLFWApplication>(opengl.get());
+    auto cfg = heliosGlfw::GLFWWindowConfig{};
+    cfg.title = "helios - Simple Cube Renderer";
+    cfg.frameBufferSizeCallback = [](GLFWwindow* win, const int width, const int height) {
+        glViewport(0, 0, width, height);
+    };
 
-    GLFWwindow* window = glfwCreateWindow(
-        width, height,
-        "Simple Cube Rendering", nullptr, nullptr);
+    heliosGlfw::GLFWWindow& win = app->createWindow(cfg);
+    app->init();
 
-    if (window == nullptr) {
-        std::cout << "Failed to create GLFW window" << std::endl;
-        glfwTerminate();
-        return EXIT_FAILURE;
-    }
+    auto glfwInput = std::make_unique<heliosInput::glfw::GLFWInput>();
+    std::unique_ptr<heliosInput::core::InputAdapter> input = std::move(glfwInput);
+    heliosInput::InputManager inputManager{std::move(input)};
 
-    glfwMakeContextCurrent(window);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-    int gl_ver = gladLoadGL(glfwGetProcAddress);
-    if (gl_ver == 0) {
-       std::fprintf(stderr, "Failed to load OpenGL\n");
-       return EXIT_FAILURE;
-    }
-    std::printf(
-        "OpenGL %d.%d loaded\n",
-        GLAD_VERSION_MAJOR(gl_ver), GLAD_VERSION_MINOR(gl_ver)
-    );
+    while (!win.shouldClose()) {
 
-    glViewport(0,0,800, 600);
-
-    while (!glfwWindowShouldClose(window)) {
-        if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-            glfwSetWindowShouldClose(window, true);
+        if (inputManager.isKeyPressed(heliosInput::Key::ESC, win)) {
+            std::cout << "Key Pressed [ESC]" << std::endl;
         }
 
-
-        glfwSwapBuffers(window);
-        glfwPollEvents();
+        win.swapBuffers().pollEvents();
     }
 
 

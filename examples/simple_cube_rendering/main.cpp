@@ -4,6 +4,7 @@
 #include <cstdlib>
 
 
+import helios.util;
 import helios.platform.application.glfw;
 import helios.rendering.opengl;
 import helios.platform.input;
@@ -17,32 +18,40 @@ namespace heliosAppGlfw = helios::platform::application::glfw;
 namespace heliosWinGlfw = helios::platform::window::glfw;
 namespace heliosOpenGl = helios::rendering::opengl;
 namespace heliosInput = helios::platform::input;
+namespace heliosUtil = helios::util;
+
+namespace heliosGLFWUtil = heliosUtil::glfw;
 
 int main() {
 
+
+    // 1. create the rendering device
     const auto opengl = std::make_unique<heliosOpenGl::OpenGLDevice>();
+    // 2. create the config for the main window
+    auto cfg = heliosGLFWUtil::GLFWFactory::makeWindowCfg("helios - Simple Cube Renderer");
 
-    const auto app = std::make_unique<heliosAppGlfw::GLFWApplication>(opengl.get());
-    auto cfg = heliosWinGlfw::GLFWWindowConfig{};
-    cfg.title = "helios - Simple Cube Renderer";
-    cfg.frameBufferSizeCallback = [](GLFWwindow* win, const int width, const int height) {
-        glViewport(0, 0, width, height);
-    };
+    // 3. create the app.
+    const auto app = heliosGLFWUtil::GLFWFactory::makeApplication(opengl.get());
 
+    // 4. create the main window
     heliosWinGlfw::GLFWWindow& win = app->createWindow(cfg);
-    app->init();
-    //app->focus(win);
 
-    auto glfwInput = std::make_unique<heliosInput::glfw::GLFWInput>();
-    std::unique_ptr<heliosInput::core::InputAdapter> input = std::move(glfwInput);
-    heliosInput::InputManager inputManager{std::move(input)};
+    // 5. initialize the app
+    app->init();
+    // ... and set focus to the window
+    app->focus(win);
+
+    // get the InputManager
+    auto& inputManager = app->inputManager();
 
     while (!win.shouldClose()) {
-        if (inputManager.isKeyPressed(heliosInput::Key::ESC, win)) {
+        inputManager.tick(0.0f);
+
+        if (inputManager.isKeyPressed(heliosInput::Key::ESC)) {
             std::cout << "Key Pressed [ESC]" << std::endl;
         }
 
-        win.swapBuffers().pollEvents();
+        win.swapBuffers();
     }
 
     return EXIT_SUCCESS;

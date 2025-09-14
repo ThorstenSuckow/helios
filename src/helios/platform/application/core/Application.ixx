@@ -8,7 +8,6 @@ import helios.rendering.core;
 import helios.platform.input;
 import helios.platform.window.core;
 
-
 using namespace helios::platform::window::core;
 
 export namespace helios::platform::application::core {
@@ -17,12 +16,18 @@ export namespace helios::platform::application::core {
 
     protected:
         std::unique_ptr<Window> window_;
-        std::unique_ptr<input::InputManager> inputManager_;
         rendering::core::RenderingDevice* renderingDevice_;
+        std::unique_ptr<input::InputManager> inputManager_;
+
 
     public:
-        explicit Application(rendering::core::RenderingDevice* renderingDevice):
-            renderingDevice_(renderingDevice)
+
+        explicit Application(
+            rendering::core::RenderingDevice* renderingDevice,
+            std::unique_ptr<input::InputManager> inputManager
+            ):
+            renderingDevice_(renderingDevice),
+            inputManager_(std::move(inputManager))
         {};
 
         virtual ~Application() = default;
@@ -50,19 +55,22 @@ export namespace helios::platform::application::core {
         virtual Application& init() = 0;
 
         /**
-         * Returns the InputManager owned by this Application.
-         * @return
-         */
-        //virtual input::InputManager& inputManager() = 0;
-
-        /**
          * Set's the application's active window. Advises the
          * InputManager to poll this window's events.
          *
          * @param win
          * @return
          */
-       // virtual Application& focus(window::Window& win) = 0;
+        virtual Application& focus(Window& win) = 0;
+
+        /**
+         * Returns the InputManager owned by this Application.
+         * @return
+         */
+        [[nodiscard]] input::InputManager& inputManager() const {
+            return *inputManager_;
+        };
+
     };
 
 }

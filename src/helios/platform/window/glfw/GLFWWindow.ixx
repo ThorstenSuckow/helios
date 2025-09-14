@@ -40,10 +40,12 @@ export namespace helios::platform::window::glfw {
             return (*this);
         }
 
+
         GLFWWindow& swapBuffers() override {
             glfwSwapBuffers(nativeHandle_);
             return *this;
         }
+
 
         GLFWWindow& pollEvents() override {
             glfwPollEvents();
@@ -54,6 +56,7 @@ export namespace helios::platform::window::glfw {
         ~GLFWWindow() override {
             destroy();
         }
+
 
         [[nodiscard]] bool shouldClose() const override {
             if (nativeHandle_ == nullptr) {

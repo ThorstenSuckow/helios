@@ -11,19 +11,26 @@ import helios.platform.application.core;
 import helios.rendering.core;
 import helios.platform.window.glfw;
 import helios.platform.window.core;
+import helios.platform.input.core;
+import helios.platform.input;
+
 
 using namespace helios::platform::application::core;
 using namespace helios::platform::window::glfw;
 using namespace helios::platform::window::core;
 
+
 export namespace helios::platform::application::glfw {
 
     class GLFWApplication : public Application {
 
+
     public:
 
-        explicit GLFWApplication(rendering::core::RenderingDevice* renderingDevice):
-            Application(renderingDevice)
+        explicit GLFWApplication(
+            rendering::core::RenderingDevice* renderingDevice,
+            std::unique_ptr<input::InputManager> inputManager):
+            Application(renderingDevice, std::move(inputManager))
         {
             glfwInit();
             glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -34,8 +41,17 @@ export namespace helios::platform::application::glfw {
         GLFWWindow& createWindow(const GLFWWindowConfig& cfg) {
             if (!window_) {
                 window_ = std::make_unique<GLFWWindow>(cfg);
+            } else {
+                throw std::runtime_error("A window was already created for this app instance.");
             }
+
             return dynamic_cast<GLFWWindow&>(*window_);
+        }
+
+        GLFWApplication& focus(Window& win) override {
+            inputManager_->observe(win);
+
+            return dynamic_cast<GLFWApplication&>(*this);
         }
 
 
@@ -56,6 +72,7 @@ export namespace helios::platform::application::glfw {
 
 
         GLFWApplication& init() override {
+
             if (const auto glfw_window  = dynamic_cast<GLFWWindow*>(window_.get())) {
                 std::ignore = glfw_window->show();
                 glfwMakeContextCurrent(glfw_window->nativeHandle());
@@ -67,6 +84,7 @@ export namespace helios::platform::application::glfw {
                 throw std::runtime_error("Cannot init: Missing GLFWWindow.");
             }
 
+            focus(*window_);
             renderingDevice_->init();
 
             return dynamic_cast<GLFWApplication&>(*this);

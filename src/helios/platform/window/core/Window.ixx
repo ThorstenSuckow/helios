@@ -6,6 +6,7 @@ export module helios.platform.window.core:Window;
 
 import helios.util.Guid;
 import :WindowConfig;
+import helios.math.types;
 
 export namespace helios::platform::window::core {
 
@@ -18,10 +19,12 @@ export namespace helios::platform::window::core {
         int width_;
         int height_;
         std::string title_;
+        math::vec4 viewport_;
 
     public:
         explicit Window(const WindowConfig& cfg) :
             width_(cfg.width), height_(cfg.height), title_(cfg.title),
+            viewport_(cfg.viewport),
             guid_(util::Guid::generate()){};
 
         virtual ~Window() = default;
@@ -73,6 +76,17 @@ export namespace helios::platform::window::core {
         [[nodiscard]] int height() const noexcept {
             return width_;
         }
+
+        /**
+         * Returns the viewport used with this window, encoded in a vec4.
+         *
+         * @return
+         */
+        [[nodiscard]] const math::vec4& viewport() const noexcept {
+            return viewport_;
+        }
+
+
     };
 
 }

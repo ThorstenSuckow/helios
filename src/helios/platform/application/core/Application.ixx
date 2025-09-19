@@ -27,8 +27,8 @@ export namespace helios::platform::application::core {
             std::unique_ptr<input::InputManager> inputManager
             ):
             renderingDevice_(renderingDevice),
-            inputManager_(std::move(inputManager))
-        {};
+            inputManager_(std::move(inputManager)) {
+        };
 
         virtual ~Application() = default;
 
@@ -44,9 +44,9 @@ export namespace helios::platform::application::core {
         virtual Window& createWindow(const WindowConfig& cfg) = 0;
 
         /**
-         * Inits the Application. Calls necessary operations on the rendering
-         * device passed to this application and shows the window. Initializes
-         * the InputManager.
+         * Inits the Application. Any bootstrapping necessary for this application
+         * should be done here and provide an idiomatic entry point for any
+         * API using this Application.
          *
          * @return
          *

@@ -57,6 +57,10 @@ export namespace helios::platform::window::glfw {
             destroy();
         }
 
+        [[nodiscard]] Window& setShouldClose(bool close) override {
+            glfwSetWindowShouldClose(nativeHandle_, close);
+            return dynamic_cast<GLFWWindow&>(*this);
+        }
 
         [[nodiscard]] bool shouldClose() const override {
             if (nativeHandle_ == nullptr) {

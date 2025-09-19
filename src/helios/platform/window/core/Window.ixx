@@ -28,6 +28,13 @@ export namespace helios::platform::window::core {
         [[nodiscard]] virtual bool shouldClose() const = 0;
 
         /**
+         * Sets the close flag of this window to true.
+         * Implementing APIs should consider this flag in each tick
+         * to determine whether this window should be closed.
+         */
+        [[nodiscard]] virtual Window& setShouldClose(bool close) = 0;
+
+        /**
          * Returns the guid for this instance.
          *
          * @return util::Guid

@@ -8,6 +8,7 @@ export module helios.platform.window.glfw:GLFWWindow;
 
 import helios.platform.window.core;
 import :GLFWWindowConfig;
+import :GLFWWindowUserPointer;
 
 export namespace helios::platform::window::glfw {
 
@@ -15,12 +16,12 @@ export namespace helios::platform::window::glfw {
 
     private:
         GLFWwindow* nativeHandle_ = nullptr;
-        const GLFWframebuffersizefun framebufferSizeCallback_;
+        GLFWframebuffersizefun framebufferSizeCallback_ = [](GLFWwindow* win, int with, int height){};
+        std::unique_ptr<GLFWWindowUserPointer> windowUserPointer_;
 
     public:
         explicit GLFWWindow(const GLFWWindowConfig& cfg) :
-            Window(cfg),
-            framebufferSizeCallback_(cfg.frameBufferSizeCallback) {};
+            Window(cfg) {};
 
             /********************
              * Overrides
@@ -77,12 +78,26 @@ export namespace helios::platform::window::glfw {
             return framebufferSizeCallback_;
         }
 
+        void setFramebufferSizeCallback(GLFWframebuffersizefun framebufferSizeCallback) noexcept {
+            framebufferSizeCallback_ = framebufferSizeCallback;
+        }
+
         [[nodiscard]] GLFWwindow* nativeHandle() const {
             return nativeHandle_;
         }
 
         void destroy() {
             glfwDestroyWindow(nativeHandle_);
+        }
+
+        GLFWWindow& setWindowUserPointer(std::unique_ptr<GLFWWindowUserPointer> windowUserPointer) noexcept {
+            windowUserPointer_ = std::move(windowUserPointer);
+            glfwSetWindowUserPointer(nativeHandle_, windowUserPointer_.get());
+            return *this;
+        }
+
+        [[nodiscard]] const GLFWWindowUserPointer& windowUserPointer() const noexcept {
+            return *windowUserPointer_;
         }
     };
 

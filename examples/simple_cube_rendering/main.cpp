@@ -24,25 +24,31 @@ namespace heliosGLFWUtil = heliosUtil::glfw;
 
 int main() {
 
+    auto glfwGuard = heliosAppGlfw::GLFWRAIIGuard();
 
     // 1. create the rendering device
     const auto opengl = std::make_unique<heliosOpenGl::OpenGLDevice>();
+
     // 2. create the config for the main window
-    auto cfg = heliosGLFWUtil::GLFWFactory::makeWindowCfg("helios - Simple Cube Renderer");
+    auto cfg = heliosGLFWUtil::GLFWFactory::makeWindowCfg(
+        "helios - Simple Cube Renderer");
 
     // 3. create the app.
-    const auto app = heliosGLFWUtil::GLFWFactory::makeApplication(opengl.get());
+    const auto app = heliosGLFWUtil::GLFWFactory::makeApplication(
+        opengl.get()
+    );
 
-    // 4. create the main window
+    // 4. initialize the app
+    app->init();
+
+    // 5. create the main window and focus it
     heliosWinGlfw::GLFWWindow& win = app->createWindow(cfg);
 
-    // 5. initialize the app
-    app->init();
     // ... and set focus to the window
     app->focus(win);
 
     // get the InputManager
-    auto& inputManager = app->inputManager();
+    heliosInput::InputManager& inputManager = app->inputManager();
 
     while (!win.shouldClose()) {
         inputManager.tick(0.0f);

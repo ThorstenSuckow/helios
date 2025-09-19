@@ -44,6 +44,20 @@ int main() {
     // 5. create the main window and focus it
     heliosWinGlfw::GLFWWindow& win = app->createWindow(cfg);
 
+    win.setWindowUserPointer(std::make_unique<heliosWinGlfw::GLFWWindowUserPointer>(
+        opengl.get(), &win
+    ));
+
+    win.setFramebufferSizeCallback([] (GLFWwindow* nativeWin, const int width, const int height) {
+        if (const auto* ptr = static_cast<heliosWinGlfw::GLFWWindowUserPointer*>(glfwGetWindowUserPointer(nativeWin))) {
+            auto* win = dynamic_cast<heliosWinGlfw::GLFWWindow*>(ptr->window);
+            const auto& viewport = win->viewport();
+            std::cout << width << height;
+            ptr->renderingDevice->setViewport(viewport[0], viewport[1], width, height);
+        }
+    });
+
+
     // ... and set focus to the window
     app->focus(win);
 
@@ -55,6 +69,7 @@ int main() {
 
         if (inputManager.isKeyPressed(heliosInput::Key::ESC)) {
             std::cout << "Key Pressed [ESC]" << std::endl;
+            std::ignore = win.setShouldClose(true);
         }
 
         win.swapBuffers();

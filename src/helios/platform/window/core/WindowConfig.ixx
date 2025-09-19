@@ -4,6 +4,7 @@ module;
 
 export module helios.platform.window.core:WindowConfig;
 
+import helios.math.types;
 
 export namespace helios::platform::window::core {
 
@@ -11,6 +12,7 @@ export namespace helios::platform::window::core {
         int width{800};
         int height{600};
         std::string title{"helios - Window"};
+        math::vec4 viewport{0,0, 800, 600};
         virtual ~WindowConfig() = default;
     };
 

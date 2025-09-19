@@ -76,11 +76,10 @@ export namespace helios::platform::application::glfw {
                 );
 
                 // 3. set the viewport for the rendering device
-                // we will leave this code here for now, knowing that the design is
-                // somewhat brittle: The window itself should know about the viewport,
-                // not the application
-                renderingDevice_->setViewport(
-                    0, 0, glfw_window->width(), glfw_window->height());
+                const math::vec4& viewport = glfw_window->viewport();
+                renderingDevice_->setViewport(viewport[0], viewport[1],
+                    viewport[2], viewport[3]
+                );
 
             } else {
                 throw std::runtime_error("Cannot init: Missing GLFWWindow.");

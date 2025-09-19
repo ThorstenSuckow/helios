@@ -59,6 +59,13 @@ export namespace helios::platform::window::core {
          */
         virtual Window& pollEvents() = 0;
 
+        [[nodiscard]] int width() const noexcept {
+            return width_;
+        }
+
+        [[nodiscard]] int height() const noexcept {
+            return width_;
+        }
     };
 
 }

@@ -34,9 +34,6 @@ export namespace helios::util::glfw {
         static window::glfw::GLFWWindowConfig makeWindowCfg(std::string title) {
             auto cfg = window::glfw::GLFWWindowConfig{};
             cfg.title = std::move(title);
-            cfg.frameBufferSizeCallback = [](GLFWwindow* win, const int width, const int height) {
-                glViewport(0, 0, width, height);
-            };
 
             return cfg;
         }

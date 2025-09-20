@@ -71,14 +71,14 @@ export namespace helios::platform::application::core {
          * @param win
          * @return
          */
-        virtual Application& focus(Window& win) = 0;
+        virtual Application& setCurrent(Window& win) = 0;
 
         /**
          * Returns the currently focused window, or nullptr
-         * if none exists / no window is being treated as focused()
+         * if none exists / no window is being treated as current()
          * @return
          */
-        [[nodiscard]] virtual Window* focused() const noexcept = 0;
+        [[nodiscard]] virtual Window* current() const noexcept = 0;
 
         /**
          * Returns the InputManager owned by this Application.

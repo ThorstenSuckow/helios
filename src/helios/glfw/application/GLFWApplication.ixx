@@ -14,7 +14,7 @@ import helios.glfw.window;
 import helios.platform.window.core;
 import helios.platform.input.core;
 import helios.platform.input;
-
+import helios.event.core;
 
 using namespace helios::platform::application::core;
 using namespace helios::glfw::window;
@@ -25,13 +25,19 @@ export namespace helios::glfw::application {
 
     class GLFWApplication : public Application {
 
+    private:
+        Window* focusedWindow_ = nullptr;
 
     public:
 
         explicit GLFWApplication(
-            rendering::core::RenderingDevice* renderingDevice,
-            std::unique_ptr<InputManager> inputManager):
-            Application(renderingDevice, std::move(inputManager)) {
+            std::unique_ptr<rendering::core::RenderingDevice> renderingDevice,
+            std::unique_ptr<InputManager> inputManager,
+            std::unique_ptr<event::core::EventQueue> eventQueue):
+            Application(
+                std::move(renderingDevice),
+                std::move(inputManager),
+                std::move(eventQueue)) {
 
         }
 
@@ -51,7 +57,7 @@ export namespace helios::glfw::application {
                     glfwMakeContextCurrent(glfw_window->nativeHandle());
                     renderingDevice_->init();
                     // we intentionally set the previous context to NULL
-                    // to enforce call to focus()
+                    // to enforce call to setCurrent()
                     glfwMakeContextCurrent(nullptr);
                 }
             } else {
@@ -61,7 +67,7 @@ export namespace helios::glfw::application {
             return dynamic_cast<GLFWWindow&>(*window_);
         }
 
-        GLFWApplication& focus(Window& win) override {
+        GLFWApplication& setCurrent(Window& win) override {
 
             if (const auto glfw_window  = dynamic_cast<GLFWWindow*>(&win)) {
 
@@ -72,7 +78,7 @@ export namespace helios::glfw::application {
                 // 2. set the framebuffersize callback
                 glfwSetFramebufferSizeCallback(
                     glfw_window->nativeHandle(),
-                    glfw_window->framebufferSizeCallback()
+                    glfw_window->frameBufferSizeCallback()
                 );
 
                 // 3. set the viewport for the rendering device
@@ -86,9 +92,15 @@ export namespace helios::glfw::application {
             }
 
             inputManager_->observe(win);
+            focusedWindow_ = &win;
 
             return dynamic_cast<GLFWApplication&>(*this);
         }
+
+
+        [[nodiscard]] Window* current() const noexcept override  {
+            return focusedWindow_;
+        };
 
 
         GLFWWindow& createWindow(const WindowConfig& cfg) override {

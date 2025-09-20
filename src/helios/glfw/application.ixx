@@ -1,7 +1,7 @@
 module;
 
-
-export module helios.platform.application.glfw;
+export module helios.glfw.application;
 
 export import :GLFWApplication;
 export import :GLFWRAIIGuard;
+export import :GLFWFactory;

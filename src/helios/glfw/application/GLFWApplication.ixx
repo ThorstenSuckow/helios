@@ -6,22 +6,22 @@ module;
 #include <stdexcept>
 
 
-export module helios.platform.application.glfw:GLFWApplication;
+export module helios.glfw.application:GLFWApplication;
 
 import helios.platform.application.core;
 import helios.rendering.core;
-import helios.platform.window.glfw;
+import helios.glfw.window;
 import helios.platform.window.core;
 import helios.platform.input.core;
 import helios.platform.input;
 
 
 using namespace helios::platform::application::core;
-using namespace helios::platform::window::glfw;
+using namespace helios::glfw::window;
 using namespace helios::platform::window::core;
+using namespace helios::platform::input;
 
-
-export namespace helios::platform::application::glfw {
+export namespace helios::glfw::application {
 
     class GLFWApplication : public Application {
 
@@ -30,7 +30,7 @@ export namespace helios::platform::application::glfw {
 
         explicit GLFWApplication(
             rendering::core::RenderingDevice* renderingDevice,
-            std::unique_ptr<input::InputManager> inputManager):
+            std::unique_ptr<InputManager> inputManager):
             Application(renderingDevice, std::move(inputManager)) {
 
         }

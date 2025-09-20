@@ -2,11 +2,14 @@ module;
 
 #include <memory>
 
+
 export module helios.platform.application.core:Application;
 
 import helios.rendering.core;
 import helios.platform.input;
 import helios.platform.window.core;
+import helios.event.core;
+
 
 using namespace helios::platform::window::core;
 
@@ -15,21 +18,28 @@ export namespace helios::platform::application::core {
     class Application {
 
     protected:
+        std::unique_ptr<event::core::EventQueue> eventQueue_;
         std::unique_ptr<Window> window_;
-        rendering::core::RenderingDevice* renderingDevice_;
+        std::unique_ptr<rendering::core::RenderingDevice> renderingDevice_;
         std::unique_ptr<input::InputManager> inputManager_;
 
 
     public:
 
         explicit Application(
-            rendering::core::RenderingDevice* renderingDevice,
-            std::unique_ptr<input::InputManager> inputManager
+            std::unique_ptr<rendering::core::RenderingDevice> renderingDevice,
+            std::unique_ptr<input::InputManager> inputManager,
+            std::unique_ptr<event::core::EventQueue> eventQueue
             ):
-            renderingDevice_(renderingDevice),
-            inputManager_(std::move(inputManager)) {
+            renderingDevice_(std::move(renderingDevice)),
+            inputManager_(std::move(inputManager)),
+            eventQueue_(std::move(eventQueue)) {
         };
 
+        /**
+         * @todo free resource allocations from renderingDevice,
+         * window and InputManager
+         */
         virtual ~Application() = default;
 
         /**
@@ -64,12 +74,35 @@ export namespace helios::platform::application::core {
         virtual Application& focus(Window& win) = 0;
 
         /**
+         * Returns the currently focused window, or nullptr
+         * if none exists / no window is being treated as focused()
+         * @return
+         */
+        [[nodiscard]] virtual Window* focused() const noexcept = 0;
+
+        /**
          * Returns the InputManager owned by this Application.
          * @return
          */
         [[nodiscard]] input::InputManager& inputManager() const {
             return *inputManager_;
         };
+
+        /**
+         * Returns the InputManager owned by this Application.
+         * @return
+         */
+        [[nodiscard]] rendering::core::RenderingDevice& renderingDevice() const {
+            return *renderingDevice_;
+        };
+
+        /**
+         *Returns the EventQueue owned by this application
+         *
+         */
+        [[nodiscard]] event::core::EventQueue& eventQueue() const {
+            return *eventQueue_;
+        }
 
     };
 

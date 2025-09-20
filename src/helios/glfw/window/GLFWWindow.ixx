@@ -16,12 +16,13 @@ export namespace helios::glfw::window {
 
     private:
         GLFWwindow* nativeHandle_ = nullptr;
-        GLFWframebuffersizefun framebufferSizeCallback_ = [](GLFWwindow* win, int with, int height){};
+        GLFWframebuffersizefun frameBufferSizeCallback_ = [](GLFWwindow* win, int with, int height){};
         std::unique_ptr<GLFWWindowUserPointer> windowUserPointer_;
 
     public:
         explicit GLFWWindow(const GLFWWindowConfig& cfg) :
-            Window(cfg) {};
+            Window(cfg),
+            frameBufferSizeCallback_(cfg.frameBufferSizeCallback){};
 
             /********************
              * Overrides
@@ -74,12 +75,12 @@ export namespace helios::glfw::window {
         /********************
          * Specifics
          *******************/
-        [[nodiscard]] GLFWframebuffersizefun framebufferSizeCallback() const noexcept  {
-            return framebufferSizeCallback_;
+        [[nodiscard]] GLFWframebuffersizefun frameBufferSizeCallback() const noexcept  {
+            return frameBufferSizeCallback_;
         }
 
-        void setFramebufferSizeCallback(GLFWframebuffersizefun framebufferSizeCallback) noexcept {
-            framebufferSizeCallback_ = framebufferSizeCallback;
+        void setFrameBufferSizeCallback(GLFWframebuffersizefun framebufferSizeCallback) noexcept {
+            frameBufferSizeCallback_ = framebufferSizeCallback;
         }
 
         [[nodiscard]] GLFWwindow* nativeHandle() const {

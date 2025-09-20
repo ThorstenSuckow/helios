@@ -2,10 +2,10 @@
 #include <type_traits>
 
 import helios.platform.window.core;
-import helios.platform.window.glfw;
+import helios.glfw.window;
 
 using namespace helios::platform::window::core;
-using namespace helios::platform::window::glfw;
+using namespace helios::glfw::window;
 
 
 

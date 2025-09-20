@@ -1,15 +1,15 @@
 module;
 
-export module helios.platform.window.glfw:GLFWWindowUserPointer;
+export module helios.glfw.window:GLFWWindowUserPointer;
 
 import helios.rendering.core;
 import helios.platform.window.core;
 
-export namespace helios::platform::window::glfw {
+export namespace helios::glfw::window {
 
     struct GLFWWindowUserPointer {
         rendering::core::RenderingDevice* renderingDevice;
-        core::Window* window;
+        platform::window::core::Window* window;
     };
 
 }

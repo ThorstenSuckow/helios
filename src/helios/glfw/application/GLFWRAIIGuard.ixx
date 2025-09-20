@@ -3,10 +3,10 @@ module;
 #include <GLFW/glfw3.h>
 #include <stdexcept>
 
-export module helios.platform.application.glfw:GLFWRAIIGuard;
+export module helios.glfw.application:GLFWRAIIGuard;
 
 
-export namespace helios::platform::application::glfw {
+export namespace helios::glfw::application {
 
     class GLFWRAIIGuard {
 

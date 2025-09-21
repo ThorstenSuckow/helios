@@ -14,7 +14,7 @@ using namespace helios::platform::window::core;
 
 export namespace helios::platform::input {
 
-    class InputManager : public engine::core::Tickable {
+    class InputManager  {
 
         private:
             Window* observedWin_ = nullptr;
@@ -34,7 +34,7 @@ export namespace helios::platform::input {
             return observedWin_;
         }
 
-        Tickable& tick(float deltaTime) override {
+        InputManager& poll(float deltaTime) noexcept {
             if (observedWin_ != nullptr) {
                 observedWin_->pollEvents();
             }

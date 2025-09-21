@@ -29,7 +29,8 @@ int main() {
     // get the InputManager
     helios::platform::input::InputManager& inputManager = app->inputManager();
     while (!win->shouldClose()) {
-        inputManager.tick(0.0f);
+        app->eventManager().dispatchAll();
+        inputManager.poll(0.0f);
 
         if (inputManager.isKeyPressed(helios::platform::input::Key::ESC)) {
             std::cout << "Key Pressed [ESC]" << std::endl;

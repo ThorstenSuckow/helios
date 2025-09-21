@@ -26,18 +26,19 @@ export namespace helios::glfw::application {
     class GLFWApplication : public Application {
 
     private:
-        Window* focusedWindow_ = nullptr;
+        Window* current_ = nullptr;
 
     public:
 
         explicit GLFWApplication(
             std::unique_ptr<rendering::core::RenderingDevice> renderingDevice,
             std::unique_ptr<InputManager> inputManager,
-            std::unique_ptr<event::core::EventQueue> eventQueue):
+            std::unique_ptr<event::core::EventManager> eventManager):
             Application(
                 std::move(renderingDevice),
                 std::move(inputManager),
-                std::move(eventQueue)) {
+                std::move(eventManager)
+                ) {
 
         }
 
@@ -92,14 +93,14 @@ export namespace helios::glfw::application {
             }
 
             inputManager_->observe(win);
-            focusedWindow_ = &win;
+            current_ = &win;
 
             return dynamic_cast<GLFWApplication&>(*this);
         }
 
 
         [[nodiscard]] Window* current() const noexcept override  {
-            return focusedWindow_;
+            return current_;
         };
 
 

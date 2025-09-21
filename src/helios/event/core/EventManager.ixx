@@ -45,7 +45,9 @@ export namespace helios::event::core {
         }
 
 
-
+        Dispatcher& dispatcher() const noexcept {
+            return *dispatcher_;
+        }
 
     };
 

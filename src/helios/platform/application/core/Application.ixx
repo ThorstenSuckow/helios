@@ -1,9 +1,13 @@
 module;
 
 #include <memory>
+#include <vector>
 
+#include "../../../../../.build/cmake_build_debug/_deps/benchmark-src/src/arraysize.h"
 
 export module helios.platform.application.core:Application;
+
+import :Controller;
 
 import helios.rendering.core;
 import helios.platform.input;
@@ -23,6 +27,7 @@ export namespace helios::platform::application::core {
         std::unique_ptr<event::core::EventManager> eventManager_;
         std::unique_ptr<Window> window_;
 
+        std::vector<std::unique_ptr<Controller>> controller_;
 
     public:
 
@@ -36,6 +41,13 @@ export namespace helios::platform::application::core {
             eventManager_(std::move(eventManager))
         {
         };
+
+
+        Application& addController(std::unique_ptr<Controller> controller) {
+            controller->subscribeTo(eventManager_->dispatcher());
+            controller_.push_back(std::move(controller));
+            return *this;
+        }
 
         /**
          * @todo free resource allocations from renderingDevice,
@@ -63,7 +75,13 @@ export namespace helios::platform::application::core {
          *
          * @throws std::runtime_error
          */
-        virtual Application& init() = 0;
+        virtual Application& init() {
+
+            for (auto& ctrl: controller_) {
+                ctrl->init();
+            }
+            return *this;
+        };
 
         /**
          * Set's the application's active window. Advises the

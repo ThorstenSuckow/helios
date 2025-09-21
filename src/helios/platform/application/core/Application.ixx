@@ -18,10 +18,10 @@ export namespace helios::platform::application::core {
     class Application {
 
     protected:
-        std::unique_ptr<event::core::EventQueue> eventQueue_;
-        std::unique_ptr<Window> window_;
         std::unique_ptr<rendering::core::RenderingDevice> renderingDevice_;
         std::unique_ptr<input::InputManager> inputManager_;
+        std::unique_ptr<event::core::EventManager> eventManager_;
+        std::unique_ptr<Window> window_;
 
 
     public:
@@ -29,11 +29,12 @@ export namespace helios::platform::application::core {
         explicit Application(
             std::unique_ptr<rendering::core::RenderingDevice> renderingDevice,
             std::unique_ptr<input::InputManager> inputManager,
-            std::unique_ptr<event::core::EventQueue> eventQueue
+            std::unique_ptr<event::core::EventManager> eventManager
             ):
             renderingDevice_(std::move(renderingDevice)),
             inputManager_(std::move(inputManager)),
-            eventQueue_(std::move(eventQueue)) {
+            eventManager_(std::move(eventManager))
+        {
         };
 
         /**
@@ -97,12 +98,13 @@ export namespace helios::platform::application::core {
         };
 
         /**
-         *Returns the EventQueue owned by this application
+         *Returns the EventManager owned by this application
          *
          */
-        [[nodiscard]] event::core::EventQueue& eventQueue() const {
-            return *eventQueue_;
+        [[nodiscard]] event::core::EventManager& eventManager() const {
+            return *eventManager_;
         }
+
 
     };
 

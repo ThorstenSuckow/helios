@@ -16,6 +16,14 @@ import helios.rendering.core;
 import helios.rendering.opengl;
 import helios.event.core;
 import helios.platform.window.core.event;
+import helios.platform.application.controller;
+
+
+using namespace helios::platform::application::controller;
+using namespace helios::platform::window::core::event;
+using namespace helios::rendering::core;
+using namespace helios::rendering::opengl;
+using namespace helios::event::core;
 
 export namespace helios::glfw::application {
 
@@ -26,13 +34,13 @@ export namespace helios::glfw::application {
 
         static std::unique_ptr<GLFWApplication> makeOpenGLApp(std::string title) {
 
-            auto openGLDevice = std::make_unique<rendering::opengl::OpenGLDevice>();
+            auto openGLDevice = std::make_unique<OpenGLDevice>();
             auto inputManager = std::make_unique<InputManager>(
                 std::make_unique<input::GLFWInput>()
                 );
-            auto eventManager = std::make_unique<event::core::EventManager>(
-            std::make_unique<event::core::EventQueue>(),
-            std::make_unique<event::core::Dispatcher>()
+            auto eventManager = std::make_unique<EventManager>(
+            std::make_unique<EventQueue>(),
+            std::make_unique<Dispatcher>()
             );
 
             std::unique_ptr<GLFWApplication> app = std::make_unique<GLFWApplication>(
@@ -40,6 +48,10 @@ export namespace helios::glfw::application {
                 std::move(inputManager),
                 std::move(eventManager)
             );
+
+            app->addController(std::make_unique<WindowRenderingController>(
+                &(app->renderingDevice())
+            ));
 
             app->init();
             auto cfg = makeWindowCfg(std::move(title));
@@ -54,12 +66,12 @@ export namespace helios::glfw::application {
 
             //app.renderingDevice()->subscribe<platform::window::core::event::FrameBufferResizeEvent>(dispatcher);
 
-            app->eventManager().subscribe<platform::window::core::event::FrameBufferResizeEvent>(
+            /*app->eventManager().subscribe<platform::window::core::event::FrameBufferResizeEvent>(
                 [app = app.get(), w = &win] (const platform::window::core::event::FrameBufferResizeEvent& e) {
                 if (app->current()->guid().value() == w->guid().value() && w->guid().value() == e.sourceGuid.value()) {
                     app->renderingDevice().setViewport(0, 0, e.width, e.height);
                 }
-            });
+            });*/
 
             app->setCurrent(win);
 

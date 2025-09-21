@@ -3,11 +3,9 @@ module;
 #include <memory>
 #include <vector>
 
-#include "../../../../../.build/cmake_build_debug/_deps/benchmark-src/src/arraysize.h"
-
 export module helios.platform.application.core:Application;
 
-import :Controller;
+import helios.platform.application.core.controller;
 
 import helios.rendering.core;
 import helios.platform.input;
@@ -16,6 +14,7 @@ import helios.event.core;
 
 
 using namespace helios::platform::window::core;
+using namespace helios::platform::application::core::controller;
 
 export namespace helios::platform::application::core {
 

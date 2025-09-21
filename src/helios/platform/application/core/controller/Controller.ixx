@@ -1,10 +1,10 @@
 module;
 
-export module helios.platform.application.core:Controller;
+export module helios.platform.application.core.controller:Controller;
 
 import helios.event.core;
 
-export namespace helios::platform::application::core {
+export namespace helios::platform::application::core::controller {
 
     class Controller {
 

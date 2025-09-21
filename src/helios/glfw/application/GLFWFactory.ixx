@@ -30,12 +30,15 @@ export namespace helios::glfw::application {
             auto inputManager = std::make_unique<InputManager>(
                 std::make_unique<input::GLFWInput>()
                 );
-            auto eventQueue = std::make_unique<event::core::EventQueue>();
+            auto eventManager = std::make_unique<event::core::EventManager>(
+            std::make_unique<event::core::EventQueue>(),
+            std::make_unique<event::core::Dispatcher>()
+            );
 
             std::unique_ptr<GLFWApplication> app = std::make_unique<GLFWApplication>(
                 std::move(openGLDevice),
                 std::move(inputManager),
-                std::move(eventQueue)
+                std::move(eventManager)
             );
 
             app->init();
@@ -48,6 +51,15 @@ export namespace helios::glfw::application {
                 app.get(),
                 &win
             ));
+
+            //app.renderingDevice()->subscribe<platform::window::core::event::FrameBufferResizeEvent>(dispatcher);
+
+            app->eventManager().subscribe<platform::window::core::event::FrameBufferResizeEvent>(
+                [app = app.get(), w = &win] (const platform::window::core::event::FrameBufferResizeEvent& e) {
+                if (app->current()->guid().value() == w->guid().value() && w->guid().value() == e.sourceGuid.value()) {
+                    app->renderingDevice().setViewport(0, 0, e.width, e.height);
+                }
+            });
 
             app->setCurrent(win);
 
@@ -64,15 +76,7 @@ export namespace helios::glfw::application {
                     auto event = std::make_unique<platform::window::core::event::FrameBufferResizeEvent>(
                         ptr->window->guid(), width, height
                     );
-                    ptr->application->eventQueue().push(std::move(event));
-                    //ptr->window->addEvent(PendingEvent(FRAME_BUFFER_RESIZE, ));
-                   /* std::cout << width << " " << height;
-                    const math::vec4& viewport = ptr->window->viewport();
-                    ptr->renderingDevice->setViewport(
-                        static_cast<int>(viewport[0]),
-                        static_cast<int>(viewport[1]),
-                        width, height
-                    )*/;
+                    ptr->application->eventManager().post(std::move(event));
                 }
             };
 

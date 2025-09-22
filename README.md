@@ -5,7 +5,7 @@
 **helios** is a custom game engine built from first principles, written in C++.
 
 ## Project Overview
-helios is an educational project to explore the intricacies of game engine architecture. Each component is built from first principles: The primary goal is not to create a commercial product, but to apply and analyze modern software engineering in a performance-critical domain while implementing the mathematical building blocks of 2D and 3D graphics.
+helios is an educational project to explore the intricacies of game engine architecture. Each component is built from first principles: The primary goal is to apply and analyze modern software engineering in a performance-critical domain while implementing the mathematical building blocks of 2D and 3D graphics.
 
 The engine strives for a modern C++20 module-based architecture, providing a clean and robust dependency graph for fast compilation. 
 

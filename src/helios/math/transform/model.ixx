@@ -1,6 +1,6 @@
 module;
 
-export module helios.math.transform.core:model;
+export module helios.math.transform:model;
 
 import helios.math.types;
 

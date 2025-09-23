@@ -1,7 +1,7 @@
 module;
 
 
-export module helios.math.transform.core:camera;
+export module helios.math.transform:camera;
 
 import helios.math.types;
 

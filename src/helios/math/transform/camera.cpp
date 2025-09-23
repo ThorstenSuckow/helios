@@ -1,6 +1,8 @@
-import helios.math.types;
+module helios.math.transform.core;
 
-import helios.math.transform.core;
+import :camera;
+
+import helios.math.types;
 
 namespace helios::math {
 

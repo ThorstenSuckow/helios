@@ -11,10 +11,7 @@ export namespace helios::platform::application::controller::core {
     public:
         virtual Controller& subscribeTo(event::core::Dispatcher& dispatcher) = 0;
 
-        virtual Controller& init() {
-            // intentionally left empty
-            return *this;
-        }
+        virtual Controller& init();
 
         virtual ~Controller() = default;
     };

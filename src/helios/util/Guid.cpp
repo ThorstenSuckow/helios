@@ -4,6 +4,7 @@ module;
 
 module helios.util.Guid;
 
+
 namespace helios::util {
     Guid::Guid(const uint64_t value) noexcept : val(value) {}
 

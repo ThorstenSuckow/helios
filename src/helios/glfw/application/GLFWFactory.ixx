@@ -15,13 +15,13 @@ import helios.glfw.window;
 import helios.rendering.core;
 import helios.rendering.opengl;
 import helios.event.core;
-import helios.platform.window.core.event;
+import helios.platform.window;
 import helios.platform.application.controller;
 
 
 using namespace helios::platform::application::controller::core;
 using namespace helios::platform::application::controller;
-using namespace helios::platform::window::core::event;
+using namespace helios::platform::window::event;
 using namespace helios::rendering::opengl;
 using namespace helios::rendering::core;
 using namespace helios::event::core;
@@ -86,7 +86,7 @@ export namespace helios::glfw::application {
 
             cfg.frameBufferSizeCallback = [] (GLFWwindow* nativeWin, const int width, const int height) {
                 if (const auto* ptr = static_cast<GLFWWindowUserPointer*>(glfwGetWindowUserPointer(nativeWin))) {
-                    auto event = std::make_unique<platform::window::core::event::FrameBufferResizeEvent>(
+                    auto event = std::make_unique<FrameBufferResizeEvent>(
                         ptr->window->guid(), width, height
                     );
                     ptr->application->eventManager().post(std::move(event));

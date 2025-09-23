@@ -1,13 +1,15 @@
 module;
 
 
-export module helios.platform.window.core.event:FrameBufferResizeEvent;
+export module helios.platform.window.event:FrameBufferResizeEvent;
 
-import :WindowEvent;
+import helios.platform.window.event.core;
 
 import helios.util.Guid;
 
-export namespace helios::platform::window::core::event {
+using namespace helios::platform::window::event::core;
+
+export namespace helios::platform::window::event {
 
     struct FrameBufferResizeEvent final : WindowEvent {
         float width;

@@ -6,10 +6,10 @@ import :Controller;
 import helios.rendering.core;
 import helios.event.core;
 import helios.platform.window.core;
-
+import helios.platform.window.event;
 
 using namespace helios::platform::application::controller;
-using namespace helios::platform::window::core::event;
+using namespace helios::platform::window::event;
 using namespace helios::rendering::core;
 using namespace helios::event::core;
 

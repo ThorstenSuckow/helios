@@ -10,13 +10,13 @@ import helios.platform.application.controller.core;
 import helios.platform.application.core;
 import helios.rendering.core;
 import helios.event.core;
-import helios.platform.window.core;
+import helios.platform.window;
 
 
 using namespace helios::platform::application::controller::core;
 using namespace helios::platform::application;
 using namespace helios::platform::application::core;
-using namespace helios::platform::window::core::event;
+using namespace helios::platform::window::event;
 using namespace helios::rendering::core;
 using namespace helios::event::core;
 

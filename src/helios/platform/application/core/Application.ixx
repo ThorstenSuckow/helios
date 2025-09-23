@@ -42,11 +42,7 @@ export namespace helios::platform::application::core {
         };
 
 
-        Application& addController(std::unique_ptr<Controller> controller) {
-            controller->subscribeTo(eventManager_->dispatcher());
-            controller_.push_back(std::move(controller));
-            return *this;
-        }
+        Application& addController(std::unique_ptr<Controller> controller);
 
         /**
          * @todo free resource allocations from renderingDevice,

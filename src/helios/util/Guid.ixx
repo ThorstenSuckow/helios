@@ -2,7 +2,6 @@ module;
 
 #include <atomic>
 #include <cstdint>
-#include <memory>
 
 
 export module helios.util.Guid;

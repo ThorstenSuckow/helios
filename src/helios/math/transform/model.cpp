@@ -1,6 +1,11 @@
+module;
+
 #include <cmath>
 
-import helios.math.transform.core;
+module helios.math.transform.core;
+
+import :model;
+
 import helios.math.types;
 
 namespace helios::math::transform {

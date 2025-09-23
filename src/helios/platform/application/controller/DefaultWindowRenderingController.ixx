@@ -2,10 +2,10 @@ module;
 
 #include <iostream>
 
-export module helios.platform.application.controller:WindowRenderingController;
+export module helios.platform.application.controller:DefaultWindowRenderingController;
 
 
-import helios.platform.application.core.controller;
+import helios.platform.application.controller.core;
 
 import helios.platform.application.core;
 import helios.rendering.core;
@@ -13,6 +13,8 @@ import helios.event.core;
 import helios.platform.window.core;
 
 
+using namespace helios::platform::application::controller::core;
+using namespace helios::platform::application;
 using namespace helios::platform::application::core;
 using namespace helios::platform::window::core::event;
 using namespace helios::rendering::core;
@@ -20,13 +22,13 @@ using namespace helios::event::core;
 
 export namespace helios::platform::application::controller {
 
-    class WindowRenderingController : public core::controller::WindowRenderingController {
+    class DefaultWindowRenderingController final : public WindowRenderingController {
 
     private:
         RenderingDevice* renderingDevice_ = nullptr;
 
     public:
-        WindowRenderingController(RenderingDevice* renderingDevice):
+        explicit DefaultWindowRenderingController(RenderingDevice* renderingDevice):
             renderingDevice_(renderingDevice)
         {}
 

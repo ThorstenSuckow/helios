@@ -5,7 +5,7 @@ module;
 
 export module helios.platform.application.core:Application;
 
-import helios.platform.application.core.controller;
+import helios.platform.application.controller.core;
 
 import helios.rendering.core;
 import helios.platform.input;
@@ -14,7 +14,7 @@ import helios.event.core;
 
 
 using namespace helios::platform::window::core;
-using namespace helios::platform::application::core::controller;
+using namespace helios::platform::application::controller::core;
 
 export namespace helios::platform::application::core {
 

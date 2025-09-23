@@ -19,10 +19,11 @@ import helios.platform.window.core.event;
 import helios.platform.application.controller;
 
 
+using namespace helios::platform::application::controller::core;
 using namespace helios::platform::application::controller;
 using namespace helios::platform::window::core::event;
-using namespace helios::rendering::core;
 using namespace helios::rendering::opengl;
+using namespace helios::rendering::core;
 using namespace helios::event::core;
 
 export namespace helios::glfw::application {
@@ -49,7 +50,7 @@ export namespace helios::glfw::application {
                 std::move(eventManager)
             );
 
-            app->addController(std::make_unique<WindowRenderingController>(
+            app->addController(std::make_unique<helios::platform::application::controller::DefaultWindowRenderingController>(
                 &(app->renderingDevice())
             ));
 

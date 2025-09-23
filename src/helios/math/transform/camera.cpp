@@ -1,4 +1,4 @@
-module helios.math.transform.core;
+module helios.math.transform;
 
 import :camera;
 

@@ -2,7 +2,7 @@ module;
 
 #include <cmath>
 
-module helios.math.transform.core;
+module helios.math.transform;
 
 import :model;
 

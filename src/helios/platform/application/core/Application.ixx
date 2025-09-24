@@ -10,7 +10,7 @@ import helios.platform.application.controller.core;
 import helios.rendering.core;
 import helios.platform.input;
 import helios.platform.window.core;
-import helios.event.core;
+import helios.event;
 
 
 using namespace helios::platform::window::core;
@@ -23,7 +23,7 @@ export namespace helios::platform::application::core {
     protected:
         std::unique_ptr<rendering::core::RenderingDevice> renderingDevice_;
         std::unique_ptr<input::InputManager> inputManager_;
-        std::unique_ptr<event::core::EventManager> eventManager_;
+        std::unique_ptr<event::EventManager> eventManager_;
         std::unique_ptr<Window> window_;
 
         std::vector<std::unique_ptr<Controller>> controller_;
@@ -33,7 +33,7 @@ export namespace helios::platform::application::core {
         explicit Application(
             std::unique_ptr<rendering::core::RenderingDevice> renderingDevice,
             std::unique_ptr<input::InputManager> inputManager,
-            std::unique_ptr<event::core::EventManager> eventManager
+            std::unique_ptr<event::EventManager> eventManager
             ):
             renderingDevice_(std::move(renderingDevice)),
             inputManager_(std::move(inputManager)),
@@ -114,7 +114,7 @@ export namespace helios::platform::application::core {
          *Returns the EventManager owned by this application
          *
          */
-        [[nodiscard]] event::core::EventManager& eventManager() const {
+        [[nodiscard]] event::EventManager& eventManager() const {
             return *eventManager_;
         }
 

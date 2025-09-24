@@ -14,10 +14,10 @@ import helios.glfw.input;
 import helios.glfw.window;
 import helios.rendering.core;
 import helios.rendering.opengl;
-import helios.event.core;
+import helios.event;
 import helios.platform.window;
 import helios.platform.application.controller;
-
+import helios.util;
 
 using namespace helios::platform::application::controller::core;
 using namespace helios::platform::application::controller;
@@ -25,6 +25,8 @@ using namespace helios::platform::window::event;
 using namespace helios::rendering::opengl;
 using namespace helios::rendering::core;
 using namespace helios::event::core;
+using namespace helios::event;
+using namespace helios::util;
 
 namespace helios::glfw::application {
 
@@ -60,14 +62,6 @@ namespace helios::glfw::application {
             &win
         ));
 
-        //app.renderingDevice()->subscribe<platform::window::core::event::FrameBufferResizeEvent>(dispatcher);
-
-        /*app->eventManager().subscribe<platform::window::core::event::FrameBufferResizeEvent>(
-            [app = app.get(), w = &win] (const platform::window::core::event::FrameBufferResizeEvent& e) {
-            if (app->current()->guid().value() == w->guid().value() && w->guid().value() == e.sourceGuid.value()) {
-                app->renderingDevice().setViewport(0, 0, e.width, e.height);
-            }
-        });*/
 
         app->setCurrent(win);
 
@@ -80,11 +74,16 @@ namespace helios::glfw::application {
         cfg.title = std::move(title);
 
         cfg.frameBufferSizeCallback = [] (GLFWwindow* nativeWin, const int width, const int height) {
+            static const auto evtGuid = Guid::generate();
+
             if (const auto* ptr = static_cast<GLFWWindowUserPointer*>(glfwGetWindowUserPointer(nativeWin))) {
                 auto event = std::make_unique<FrameBufferResizeEvent>(
-                    ptr->window->guid(), width, height
+                    ptr->window->guid(), width, height, ptr->window->guid().value()
                 );
-                ptr->application->eventManager().post(std::move(event));
+                ptr->application->eventManager().post(
+                    std::move(event),
+                    PostPolicy::LATEST_WINS
+                );
             }
         };
 

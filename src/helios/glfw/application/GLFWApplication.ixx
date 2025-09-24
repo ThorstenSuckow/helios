@@ -30,7 +30,7 @@ export namespace helios::glfw::application {
         explicit GLFWApplication(
             std::unique_ptr<rendering::core::RenderingDevice> renderingDevice,
             std::unique_ptr<InputManager> inputManager,
-            std::unique_ptr<event::core::EventManager> eventManager):
+            std::unique_ptr<event::EventManager> eventManager):
             Application(
                 std::move(renderingDevice),
                 std::move(inputManager),

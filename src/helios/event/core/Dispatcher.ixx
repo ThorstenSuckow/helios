@@ -30,8 +30,6 @@ export namespace helios::event::core {
             };
 
             callbacks_[idx].push_back(wrapper);
-
-
         }
 
 

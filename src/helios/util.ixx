@@ -1,3 +1,3 @@
 export module helios.util;
 
-export import helios.util.Guid;
+export import :Guid;

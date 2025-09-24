@@ -78,7 +78,9 @@ namespace helios::glfw::application {
 
             if (const auto* ptr = static_cast<GLFWWindowUserPointer*>(glfwGetWindowUserPointer(nativeWin))) {
                 auto event = std::make_unique<FrameBufferResizeEvent>(
-                    ptr->window->guid(), width, height, ptr->window->guid().value()
+                    ptr->window->guid(), width, height,
+                    // we will use the window's guid as the tag
+                    ptr->window->guid().value()
                 );
                 ptr->application->eventManager().post(
                     std::move(event),

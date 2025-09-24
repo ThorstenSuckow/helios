@@ -4,18 +4,18 @@ module;
 #include <cstdint>
 
 
-export module helios.util.Guid;
+export module helios.util:Guid;
 
 
 export namespace helios::util {
 
-    class Guid {
+    class Guid final {
     private:
         explicit Guid(uint64_t value) noexcept;
         uint64_t val;
 
     public:
-        constexpr uint64_t value() const noexcept { return this->val; }
+        [[nodiscard]] constexpr uint64_t value() const noexcept { return this->val; }
 
         static Guid generate() noexcept;
 

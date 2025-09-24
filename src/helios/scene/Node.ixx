@@ -5,7 +5,7 @@ module;
 export module helios.scene:Node;
 
 import helios.rendering.core;
-import helios.util.Guid;
+import helios.util;
 
 using namespace helios::rendering::core;
 

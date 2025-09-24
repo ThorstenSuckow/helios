@@ -11,15 +11,9 @@ export namespace helios::glfw::application {
     class GLFWRAIIGuard {
 
     public:
-        GLFWRAIIGuard() {
-            if (glfwInit() == GLFW_FALSE) {
-                throw std::runtime_error("Failed to initialize GLFW");
-            }
-        }
+        GLFWRAIIGuard();
 
-        ~GLFWRAIIGuard() {
-            glfwTerminate();
-        }
+        ~GLFWRAIIGuard();
 
         GLFWRAIIGuard(const GLFWRAIIGuard&) = delete;
 

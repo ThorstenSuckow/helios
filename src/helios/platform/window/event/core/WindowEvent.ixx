@@ -8,14 +8,18 @@ import helios.event.core;
 
 export namespace helios::platform::window::event::core {
 
-    struct WindowEvent : helios::event::core::Event {
-        helios::util::Guid sourceGuid;
+    class  WindowEvent : public helios::event::core::Event {
 
     protected:
         explicit WindowEvent(helios::util::Guid sourceGuid):
         sourceGuid(sourceGuid)  {}
 
+        explicit WindowEvent(helios::util::Guid sourceGuid, uint64_t tag):
+        Event(tag), sourceGuid(sourceGuid)  {}
+
     public:
+        helios::util::Guid sourceGuid;
+
         virtual ~WindowEvent() = default;
     };
 

@@ -35,11 +35,23 @@ export namespace helios::event {
         {}
 
 
+        /**
+         * Posts the event based on the specified Policy.
+         * func serves as a comparision function, e.g. if LATEST_WINS
+         * is used.
+         *
+         * @param e
+         * @param policy
+         * @param func
+         * @return
+         */
         EventManager& post(
             std::unique_ptr<const Event> e,
             PostPolicy policy=APPEND,
-            const std::function<bool(const std::unique_ptr<const Event>& evt,
-                                                    const std::unique_ptr<const Event>& e)>& func=nullptr);
+            const std::function<bool(
+                const std::unique_ptr<const Event>& evt,
+                const std::unique_ptr<const Event>& e)>& func=nullptr
+        );
 
 
         EventManager& dispatchAll();

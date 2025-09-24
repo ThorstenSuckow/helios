@@ -53,7 +53,11 @@ export namespace helios::event {
                 const std::unique_ptr<const Event>& e)>& func=nullptr
         );
 
-
+        /**
+         * Dispatches all events and flushes the queue.
+         *
+         * @return
+         */
         EventManager& dispatchAll();
 
         template<typename EventType>

@@ -1,6 +1,6 @@
 module;
 
-export module helios.platform.application.controller:DefaultWindowRenderingController;
+export module helios.platform.application.controller:BasicWindowRenderingController;
 
 import helios.platform.application.controller.core;
 
@@ -16,13 +16,13 @@ using namespace helios::event::core;
 
 export namespace helios::platform::application::controller {
 
-    class DefaultWindowRenderingController final : public WindowRenderingController {
+    class BasicWindowRenderingController final : public WindowRenderingController {
 
     private:
         RenderingDevice* renderingDevice_ = nullptr;
 
     public:
-        explicit DefaultWindowRenderingController(RenderingDevice* renderingDevice):
+        explicit BasicWindowRenderingController(RenderingDevice* renderingDevice):
         renderingDevice_(renderingDevice)
         {}
 

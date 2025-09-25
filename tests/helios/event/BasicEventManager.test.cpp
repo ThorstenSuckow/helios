@@ -15,12 +15,12 @@ public:
     TestEvent(uint64_t tag): Event(tag) {}
 };
 
-TEST(EventManagerTest, dispatchAll) {
+TEST(BasicEventManagerTest, dispatchAll) {
 
     auto e = std::make_unique<TestEvent>();
 
     auto eventManager = BasicEventManager(
-    std::make_unique<EventQueue>(),
+    std::make_unique<DequeEventQueue>(),
     std::make_unique<Dispatcher>()
     );
 
@@ -47,7 +47,7 @@ TEST(PostTest, uniqueevent) {
     auto e3 = std::make_unique<TestEvent>(tag);
 
     auto eventManager = BasicEventManager(
-    std::make_unique<EventQueue>(),
+    std::make_unique<DequeEventQueue>(),
     std::make_unique<Dispatcher>()
     );
 

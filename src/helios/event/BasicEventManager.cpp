@@ -11,7 +11,7 @@ using namespace helios::event::core;
 
 namespace helios::event {
 
-    EventManager& EventManager::post(
+    EventManager& BasicEventManager::post(
         std::unique_ptr<const Event> e,
         const PostPolicy policy,
         const std::function<bool(
@@ -55,7 +55,7 @@ namespace helios::event {
     }
 
 
-    EventManager& EventManager::dispatchAll() {
+    EventManager& BasicEventManager::dispatchAll() {
         while (!eventQueue_->empty()) {
             auto e = eventQueue_->popFront();
             dispatcher_->dispatch(std::move(e));

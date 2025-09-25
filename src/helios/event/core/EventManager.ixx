@@ -4,28 +4,28 @@ module;
 #include <memory>
 #include <utility>
 
-export module helios.event:EventManager;
+export module helios.event.core:EventManager;
 
-import helios.event.core;
+import :Event;
+import :EventQueue;
+import :Dispatcher;
 
-using namespace helios::event::core;
-
-export namespace helios::event {
+export namespace helios::event::core{
 
 
     enum PostPolicy {
         LATEST_WINS,
-        APPEND,
-
-        POLICY_COUNT
+        APPEND
     };
 
 
     class EventManager {
 
-    private:
+    protected:
         std::unique_ptr<EventQueue> eventQueue_;
         std::unique_ptr<Dispatcher> dispatcher_;
+
+        EventManager() = default;
 
     public:
         EventManager(std::unique_ptr<EventQueue> eventQueue,
@@ -34,6 +34,7 @@ export namespace helios::event {
             dispatcher_(std::move(dispatcher))
         {}
 
+        virtual ~EventManager() = default;
 
         /**
          * Posts the event based on the specified Policy.
@@ -45,20 +46,28 @@ export namespace helios::event {
          * @param func
          * @return
          */
-        EventManager& post(
+        virtual EventManager& post(
             std::unique_ptr<const Event> e,
-            PostPolicy policy=APPEND,
+            PostPolicy policy,
             const std::function<bool(
                 const std::unique_ptr<const Event>& evt,
-                const std::unique_ptr<const Event>& e)>& func=nullptr
-        );
+                const std::unique_ptr<const Event>& e)>& func
+        ) = 0;
+
+        EventManager& post(std::unique_ptr<const Event> e) {
+            return post(std::move(e), APPEND, nullptr);
+        };
+
+        EventManager& post(std::unique_ptr<const Event> e, PostPolicy policy) {
+            return post(std::move(e), policy, nullptr);
+        };
 
         /**
          * Dispatches all events and flushes the queue.
          *
          * @return
          */
-        EventManager& dispatchAll();
+        virtual EventManager& dispatchAll() = 0;
 
         template<typename EventType>
         EventManager& subscribe(std::function<void(const EventType&)> callback) {

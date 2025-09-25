@@ -19,7 +19,7 @@ TEST(EventManagerTest, dispatchAll) {
 
     auto e = std::make_unique<TestEvent>();
 
-    auto eventManager = EventManager(
+    auto eventManager = BasicEventManager(
     std::make_unique<EventQueue>(),
     std::make_unique<Dispatcher>()
     );
@@ -46,7 +46,7 @@ TEST(PostTest, uniqueevent) {
     auto e2 = std::make_unique<TestEvent>(tag);
     auto e3 = std::make_unique<TestEvent>(tag);
 
-    auto eventManager = EventManager(
+    auto eventManager = BasicEventManager(
     std::make_unique<EventQueue>(),
     std::make_unique<Dispatcher>()
     );

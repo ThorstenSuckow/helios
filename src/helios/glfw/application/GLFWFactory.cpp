@@ -37,7 +37,7 @@ namespace helios::glfw::application {
             std::make_unique<input::GLFWInput>()
             );
         auto eventManager = std::make_unique<BasicEventManager>(
-        std::make_unique<EventQueue>(),
+        std::make_unique<DequeEventQueue>(),
         std::make_unique<Dispatcher>()
         );
 

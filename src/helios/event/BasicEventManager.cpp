@@ -23,7 +23,7 @@ namespace helios::event {
 
         switch (policy) {
             case APPEND:
-                eventQueue_->push(std::move(e));
+                eventQueue_->add(std::move(e));
             break;
             case LATEST_WINS:
 
@@ -44,7 +44,7 @@ namespace helios::event {
                  * @todo use hashmap instead of queue for faster
                  * lookup
                  */
-                eventQueue_->pushOrReplace(std::move(e), cmpFunc);
+                eventQueue_->addOrReplace(std::move(e), cmpFunc);
                 break;
             default:
                 std::unreachable();
@@ -57,7 +57,7 @@ namespace helios::event {
 
     EventManager& BasicEventManager::dispatchAll() {
         while (!eventQueue_->empty()) {
-            auto e = eventQueue_->popFront();
+            auto e = eventQueue_->next();
             dispatcher_->dispatch(std::move(e));
         }
 

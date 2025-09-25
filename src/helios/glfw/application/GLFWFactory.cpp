@@ -47,7 +47,7 @@ namespace helios::glfw::application {
             std::move(eventManager)
         );
 
-        app->addController(std::make_unique<DefaultWindowRenderingController>(
+        app->addController(std::make_unique<BasicWindowRenderingController>(
             &(app->renderingDevice())
         ));
 

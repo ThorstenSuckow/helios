@@ -21,11 +21,11 @@ using namespace helios::event::core;
 
 namespace helios::platform::application::controller {
 
-    void DefaultWindowRenderingController::onFrameBufferResize(const FrameBufferResizeEvent& e) {
+    void BasicWindowRenderingController::onFrameBufferResize(const FrameBufferResizeEvent& e) {
         std::cout << e.width << " " << e.height << std::endl;
     }
 
-    Controller& DefaultWindowRenderingController::subscribeTo(Dispatcher& dispatcher) {
+    Controller& BasicWindowRenderingController::subscribeTo(Dispatcher& dispatcher) {
 
         dispatcher.subscribe<FrameBufferResizeEvent>(
             [this](const FrameBufferResizeEvent& e) {

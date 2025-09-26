@@ -6,8 +6,16 @@ import helios.math.types;
 
 export namespace helios::rendering::core {
 
-    struct Vertex {
-        math::vec3 position;
+    class Vertex {
+    private:
+        const math::vec3 position_;
+
+    public:
+        explicit Vertex(const math::vec3 position) : position_(position) {}
+
+        [[nodiscard]] const math::vec3& position() const {
+            return position_;
+        }
     };
 
 

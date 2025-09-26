@@ -23,6 +23,20 @@ foreach(EXAMPLE_FILE ${EXAMPLE_FILES})
         RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/examples/${SUBDIR}
         OUTPUT_NAME ${TARGET_NAME}
     )
+
+    set(RESOURCES_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/${SUBDIR}/resources")
+    set(RESOURCES_DEST_DIR "${CMAKE_BINARY_DIR}/examples/${SUBDIR}/resources")
+
+    if(EXISTS "${RESOURCES_SOURCE_DIR}")
+        add_custom_command(
+                TARGET ${UNIQUE_TARGET}
+                POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy_directory
+                    "${RESOURCES_SOURCE_DIR}"
+                    "${RESOURCES_DEST_DIR}"
+        )
+    endif()
+
 endforeach()
 
 

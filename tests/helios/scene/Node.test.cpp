@@ -2,7 +2,7 @@
 
 
 import helios.scene;
-import helios.rendering.core;
+import helios.rendering.model;
 
 namespace scene = helios::scene;
 namespace rendering = helios::rendering;
@@ -14,7 +14,7 @@ static test_data setup() {
     return test_data{};
 }
 
-using namespace helios::rendering::core;
+using namespace helios::rendering::model;
 
 TEST(NodeTest, Constructor) {
 

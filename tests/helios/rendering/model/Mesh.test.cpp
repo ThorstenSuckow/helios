@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
 
 
-import helios.rendering.core;
+import helios.rendering.model;
 
-using namespace helios::rendering::core;
+using namespace helios::rendering::model;
 
 TEST(MeshTest, data) {
 

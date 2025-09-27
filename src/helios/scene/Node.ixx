@@ -4,10 +4,10 @@ module;
 
 export module helios.scene:Node;
 
-import helios.rendering.core;
+import helios.rendering.model;
 import helios.util;
 
-using namespace helios::rendering::core;
+using namespace helios::rendering::model;
 
 export namespace helios::scene {
 

@@ -3,11 +3,11 @@ module;
 #include <memory>
 #include <vector>
 
-export module helios.rendering.core:MeshData;
+export module helios.rendering.model:MeshData;
 
 import :Vertex;
 
-export namespace helios::rendering::core {
+export namespace helios::rendering::model {
 
     class MeshData {
     private:

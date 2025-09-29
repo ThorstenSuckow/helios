@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-import helios.util;
+import helios.util.Guid;
 
 using Guid = helios::util::Guid;
 

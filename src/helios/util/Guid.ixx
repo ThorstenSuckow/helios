@@ -4,7 +4,7 @@ module;
 #include <cstdint>
 
 
-export module helios.util:Guid;
+export module helios.util.Guid;
 
 
 export namespace helios::util {

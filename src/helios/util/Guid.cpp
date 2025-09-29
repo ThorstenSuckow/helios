@@ -2,7 +2,7 @@ module;
 
 #include <atomic>
 
-module helios.util;
+module helios.util.Guid;
 
 
 namespace helios::util {

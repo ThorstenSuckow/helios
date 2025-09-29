@@ -4,7 +4,7 @@ module;
 
 export module helios.platform.window.core:Window;
 
-import helios.util;
+import helios.util.Guid;
 import :WindowConfig;
 import helios.math.types;
 

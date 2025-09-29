@@ -3,7 +3,7 @@
 
 
 import helios.event;
-import helios.util;
+import helios.util.Guid;
 
 
 using namespace helios::event::core;

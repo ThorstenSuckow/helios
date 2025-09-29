@@ -5,7 +5,7 @@ export module helios.platform.window.event:FrameBufferResizeEvent;
 
 import helios.platform.window.event.core;
 
-import helios.util;
+import helios.util.Guid;
 
 using namespace helios::platform::window::event::core;
 

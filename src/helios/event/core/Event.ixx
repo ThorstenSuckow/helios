@@ -4,7 +4,7 @@ module;
 
 export module helios.event.core:Event;
 
-import helios.util;
+import helios.util.Guid;
 
 
 using namespace helios::util;

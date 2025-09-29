@@ -12,12 +12,12 @@ import :GLFWApplication;
 import helios.platform.input;
 import helios.glfw.input;
 import helios.glfw.window;
-import helios.rendering.core;
+import helios.rendering.core.RenderingDevice;
 import helios.rendering.opengl;
 import helios.event;
 import helios.platform.window;
 import helios.platform.application.controller;
-import helios.util;
+import helios.util.Guid;
 
 using namespace helios::platform::application::controller::core;
 using namespace helios::platform::application::controller;

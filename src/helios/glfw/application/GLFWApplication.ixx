@@ -6,7 +6,7 @@ module;
 export module helios.glfw.application:GLFWApplication;
 
 import helios.platform.application.core;
-import helios.rendering.core;
+import helios.rendering.core.RenderingDevice;
 import helios.glfw.window;
 import helios.platform.window.core;
 import helios.platform.input.core;

@@ -1,8 +1,11 @@
 module;
 
-export module helios.rendering.core:RenderingDevice;
+export module helios.rendering.core.RenderingDevice;
+
+import helios.math.types;
 
 export namespace helios::rendering::core {
+
 
     class RenderingDevice {
 
@@ -20,6 +23,14 @@ export namespace helios::rendering::core {
          * @return
          */
         virtual RenderingDevice& init() = 0;
+
+        /**
+         * Enters rendering.
+         *
+         */
+        virtual RenderingDevice& beginRenderPass() {
+            return *this;
+        };
 
         /**
          * Sets the viewport for this RenderingDevice.

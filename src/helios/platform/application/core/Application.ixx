@@ -7,7 +7,7 @@ export module helios.platform.application.core:Application;
 
 import helios.platform.application.controller.core;
 
-import helios.rendering.core;
+import helios.rendering.core.RenderingDevice;
 import helios.platform.input;
 import helios.platform.window.core;
 import helios.event;

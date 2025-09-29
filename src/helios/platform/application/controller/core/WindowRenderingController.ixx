@@ -3,7 +3,7 @@ module;
 export module helios.platform.application.controller.core:WindowRenderingController;
 
 import :Controller;
-import helios.rendering.core;
+import helios.rendering.core.RenderingDevice;
 import helios.event.core;
 import helios.platform.window.core;
 import helios.platform.window.event;

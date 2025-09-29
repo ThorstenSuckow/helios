@@ -2,7 +2,7 @@
 #include <cstdint>
 #include <memory>
 
-import helios.util;
+import helios.util.Guid;
 
 struct GuidPimpl {
     private:

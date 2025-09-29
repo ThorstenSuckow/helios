@@ -4,7 +4,7 @@ module;
 #include <fstream>
 #include <string>
 
-export module helios.util:IOUtil;
+export module helios.util.IOUtil;
 
 
 export namespace helios::util {
@@ -12,8 +12,7 @@ export namespace helios::util {
     class IOUtil {
 
     public:
-        static std::string getContents( std::string filename) {
-
+        static std::string getContents(const std::string& filename) {
             std::ifstream infile {filename};
 
             if (!infile) {
@@ -21,31 +20,29 @@ export namespace helios::util {
             }
 
             std::string line;
-            std::string fileContents = "";
+            std::string fileContents;
             while (getline(infile, line)) {
                 fileContents += line + "\n";
             }
-
             return fileContents;
         }
 
-        static void readInto( std::string filename,  std::string& contents) {
 
+        static bool readInto( const std::string& filename,  std::string& contents) {
             std::ifstream infile{ filename };
 
             if (!infile) {
-                std::cerr << "Cannot open " << filename <<  std::endl;
-                return;
+                return false;
             }
-
             std::string line;
-            std::string fileContents = "";
+            std::string fileContents;
 
             while (getline(infile, line)) {
                 fileContents += line + "\n";
             }
 
             contents = fileContents;
+            return true;
         }
 
 

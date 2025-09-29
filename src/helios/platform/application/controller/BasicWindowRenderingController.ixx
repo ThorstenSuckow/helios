@@ -4,7 +4,7 @@ export module helios.platform.application.controller:BasicWindowRenderingControl
 
 import helios.platform.application.controller.core;
 
-import helios.rendering.core;
+import helios.rendering.core.RenderingDevice;
 import helios.event.core;
 import helios.platform.window;
 

@@ -7,16 +7,14 @@ import helios.math.types;
 export namespace helios::rendering::core {
 
     /**
-     * Vertex data structure for maintaining
-     * position, normal and texture coordinates.
+     * Represents a standard vertex with position, normal,
+     * and texture coordinates.
      *
      * @see [Vri20, pp. 160]
      */
     struct Vertex {
         math::vec3 position;
-        math::vec3 normal;
-        math::vec2 texCoords;
+        math::vec3 normal = {0.0f, 0.0f, 0.0f};;
+        math::vec2 texCoords = {0.0f, 0.0f};;
     };
-
-
 }

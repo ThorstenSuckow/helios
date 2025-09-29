@@ -3,7 +3,7 @@ module;
 
 export module helios.platform.window.event.core:WindowEvent;
 
-import helios.util;
+import helios.util.Guid;
 import helios.event.core;
 
 export namespace helios::platform::window::event::core {

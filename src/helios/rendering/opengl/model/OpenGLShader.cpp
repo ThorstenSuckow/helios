@@ -1,14 +1,14 @@
-module helios.rendering.opengl.model:OpenGLShader;
+module;
 
 #include <glad/gl.h>
 #include <iostream>
-#include <stdexcept>
+
+module helios.rendering.opengl.model;
 
 
 import helios.rendering.model;
 import helios.util.IOUtil;
 import helios.util.Log;
-
 
 using namespace helios::rendering::model;
 using namespace helios::util;
@@ -24,7 +24,7 @@ namespace helios::rendering::opengl::model {
         }
 
 
-    bool OpenGLShader::load() noexcept override {
+    bool OpenGLShader::load() noexcept {
 
         if (!vertexShaderSource_.empty()  || !fragmentShaderSource_.empty()) {
             Log::warn("Shader already loaded");
@@ -41,7 +41,7 @@ namespace helios::rendering::opengl::model {
     }
 
 
-     bool OpenGLShader::compile() noexcept override {
+     bool OpenGLShader::compile() noexcept {
         if (progId_ != 0) {
             return true;
         }
@@ -97,7 +97,7 @@ namespace helios::rendering::opengl::model {
     }
 
 
-    void OpenGLShader::use() const noexcept override {
+    void OpenGLShader::use() const noexcept {
         glUseProgram(progId_);
     }
 

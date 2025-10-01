@@ -12,28 +12,28 @@ export namespace helios::rendering::opengl {
     public:
         ~OpenGLDevice() override = default;
 
-        bool init() noexcept override;
+        void init() noexcept override;
 
         void beginRenderPass() const noexcept override;
 
-        void clear() const  noexcept;
-
-        void clearColor(const math::vec4& color) const noexcept;
-
-        /**
-         * Wrapper for glViewport
-         *
-         * @see https://registry.khronos.org/OpenGL-Refpages/gl4/html/glViewport.xhtml
-         *
-         * @param x
-         * @param y
-         * @param width
-         * @param height
-         * @return
-         */
         void setViewport(int x, int y, int width, int height) const noexcept override;
 
+        /**
+         * Clears the color buffer to preset values.
+         *
+         * @see clearColor
+         */
+        void clear() const  noexcept;
 
+        /**
+         * Specifies the RGBa values clamped to [0, 1] when color
+         * buffers are cleared.
+         *
+         * @param color
+         *
+         * @see clear
+         */
+        void clearColor(const math::vec4& color) const noexcept;
 
     };
 }

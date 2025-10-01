@@ -12,17 +12,17 @@ using namespace helios::util;
 
 namespace helios::rendering::opengl {
 
-    bool OpenGLDevice::init() noexcept {
+    void OpenGLDevice::init() noexcept {
 
         if (initialized_) {
-            return true;
+            return ;
         }
         const GLADloadfunc procAddressLoader = glfwGetProcAddress;
         const int gl_ver = gladLoadGL(procAddressLoader);
 
         if (gl_ver == 0) {
             Log::error("Failed to load OpenGL");
-            return false;
+            throw std::runtime_error("Failed to load OpenGL");
         }
 
         Log::debug(std::format(
@@ -31,8 +31,6 @@ namespace helios::rendering::opengl {
         );
 
         initialized_ = true;
-
-        return true;
     };
 
 
@@ -49,6 +47,9 @@ namespace helios::rendering::opengl {
     };
 
     void OpenGLDevice::setViewport(const int x, const int y, const int width, const int height) const noexcept {
+        /**
+         * @see https://registry.khronos.org/OpenGL-Refpages/gl4/html/glViewport.xhtml
+         */
         glViewport(x, y, width, height);
     }
 

@@ -15,35 +15,39 @@ using namespace helios::util;
 
 namespace helios::rendering::opengl::model {
 
+
+
     OpenGLShader::OpenGLShader(
         const std::string& vertexShaderPath,
         const std::string& fragmentShaderPath) :
         vertexShaderPath_(vertexShaderPath),
         fragmentShaderPath_(fragmentShaderPath) {
-            OpenGLShader::load();
+
+        try{
+            load();
+            compile();
+        } catch (std::runtime_error e) {
+            Log::error("Could not initialize shader");
+            throw std::runtime_error("Could not initialize shader");
         }
+    }
 
 
-    bool OpenGLShader::load() noexcept {
-
-        if (!vertexShaderSource_.empty()  || !fragmentShaderSource_.empty()) {
-            Log::warn("Shader already loaded");
-            return false;
-        }
+    void OpenGLShader::load() {
 
         if (!IOUtil::readInto(fragmentShaderPath_, fragmentShaderSource_) ||
             !IOUtil::readInto(vertexShaderPath_, vertexShaderSource_)) {
             Log::error("Could not load shader");
-            return false;
+            throw std::runtime_error("Could not load shader");
         }
-
-        return true;
     }
 
 
-     bool OpenGLShader::compile() noexcept {
+     void OpenGLShader::compile() {
+
         if (progId_ != 0) {
-            return true;
+            Log::warn("Shader already compiled");
+            return;
         }
 
         const GLchar* vertexSrc = vertexShaderSource_.c_str();
@@ -66,14 +70,14 @@ namespace helios::rendering::opengl::model {
             glGetShaderInfoLog(vertexShader, 512, nullptr, infoLog);
 
             Log::error("VERTEX::COMPILATION_FAILED\n" + static_cast<std::string>(infoLog));
-            return false;
+            throw std::runtime_error("Vertex Shader Compilation failed.");
         }
 
         glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
         if (!success) {
             glGetShaderInfoLog(fragmentShader, 512, nullptr, infoLog);
             Log::error("SHADER::FRAGMENT::COMPILATION_FAILED\n" + static_cast<std::string>(infoLog));
-            return false;
+            throw std::runtime_error("Fragment Shader Compilation failed.");
         }
 
         progId_ = glCreateProgram();
@@ -86,18 +90,21 @@ namespace helios::rendering::opengl::model {
         if (!success) {
             glGetProgramInfoLog(progId_, 512, nullptr, infoLog);
             Log::error("PROGRAM_LINKING_FAILED\n" + static_cast<std::string>(infoLog));
-            return false;
+            throw std::runtime_error("Program linking failed.");
         }
-
 
         glDeleteShader(vertexShader);
         glDeleteShader(fragmentShader);
 
-        return true;
+        vertexShaderSource_.clear();
+        fragmentShaderSource_.clear();
     }
 
 
     void OpenGLShader::use() const noexcept {
+        if (!progId_) {
+            Log::error("Cannot use shader, progId_ is invalid");
+        }
         glUseProgram(progId_);
     }
 

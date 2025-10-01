@@ -22,15 +22,15 @@ export namespace helios::rendering::core {
          *
          * @return
          */
-        virtual RenderingDevice& init() = 0;
+        virtual bool init() noexcept = 0;
 
         /**
-         * Enters rendering.
+         * Signals this device that the application is now ready to begin rendering.
+         * Implementing APIs should take means to reset the rendering surface,
+         * clear color buffers and so on.
          *
          */
-        virtual RenderingDevice& beginRenderPass() {
-            return *this;
-        };
+        virtual void beginRenderPass() const noexcept = 0;
 
         /**
          * Sets the viewport for this RenderingDevice.
@@ -41,7 +41,7 @@ export namespace helios::rendering::core {
          * @param height
          * @return
          */
-        virtual RenderingDevice& setViewport(int x, int y, int width, int height) = 0;
+        virtual void setViewport(int x, int y, int width, int height) const noexcept = 0;
 
         /**
          * Returns the initialized state of this rendering device.

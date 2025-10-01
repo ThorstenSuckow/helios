@@ -3,38 +3,53 @@ module;
 #include <iostream>
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
-#include <exception>
 
 module helios.rendering.opengl;
 
-import helios.rendering.core;
+import helios.util.Log;
+
+using namespace helios::util;
 
 namespace helios::rendering::opengl {
 
-    OpenGLDevice& OpenGLDevice::init() {
+    bool OpenGLDevice::init() noexcept {
 
         if (initialized_) {
-            return dynamic_cast<OpenGLDevice&>(*this);
+            return true;
         }
         const GLADloadfunc procAddressLoader = glfwGetProcAddress;
         const int gl_ver = gladLoadGL(procAddressLoader);
 
         if (gl_ver == 0) {
-            throw std::exception("Failed to load OpenGL");
+            Log::error("Failed to load OpenGL");
+            return false;
         }
-        std::printf(  "OpenGL %d.%d loaded\n",  GLAD_VERSION_MAJOR(gl_ver), GLAD_VERSION_MINOR(gl_ver));
+
+        Log::debug(std::format(
+            "OpenGL {0}.{1} loaded\n",
+            GLAD_VERSION_MAJOR(gl_ver), GLAD_VERSION_MINOR(gl_ver))
+        );
 
         initialized_ = true;
 
-        return dynamic_cast<OpenGLDevice&>(*this);
+        return true;
     };
 
 
-    OpenGLDevice& OpenGLDevice::setViewport(const int x, const int y, const int width, const int height) {
+    void OpenGLDevice::clear() const noexcept {
+        glClear(GL_COLOR_BUFFER_BIT);
+    }
 
+    void OpenGLDevice::clearColor(const math::vec4& color) const  noexcept {
+        glClearColor(color[0], color[1], color[2], color[3]);
+    }
+
+    void OpenGLDevice::beginRenderPass() const noexcept {
+        clear();
+    };
+
+    void OpenGLDevice::setViewport(const int x, const int y, const int width, const int height) const noexcept {
         glViewport(x, y, width, height);
-
-        return dynamic_cast<OpenGLDevice&>(*this);
     }
 
 

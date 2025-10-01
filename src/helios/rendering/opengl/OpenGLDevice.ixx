@@ -2,19 +2,23 @@ module;
 
 export module helios.rendering.opengl:OpenGLDevice;
 
-import helios.rendering.core;
+import helios.math.types;
+import helios.rendering.core.RenderingDevice;
 
 export namespace helios::rendering::opengl {
 
     class OpenGLDevice : public  core::RenderingDevice {
 
-
     public:
         ~OpenGLDevice() override = default;
 
+        bool init() noexcept override;
 
-        OpenGLDevice& init() override;
+        void beginRenderPass() const noexcept override;
 
+        void clear() const  noexcept;
+
+        void clearColor(const math::vec4& color) const noexcept;
 
         /**
          * Wrapper for glViewport
@@ -27,7 +31,7 @@ export namespace helios::rendering::opengl {
          * @param height
          * @return
          */
-        OpenGLDevice& setViewport(int x, int y, int width, int height) override;
+        void setViewport(int x, int y, int width, int height) const noexcept override;
 
 
 

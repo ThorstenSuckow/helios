@@ -10,7 +10,6 @@ export namespace helios::rendering::opengl::model {
     class OpenGLShader : public rendering::model::Shader {
 
     private:
-
         /**
          * Source of the shader. Not guaranteed to be persisted
          * once compilation was successful.

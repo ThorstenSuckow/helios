@@ -34,7 +34,7 @@ export namespace helios::rendering::model {
          *
          * @todo constructor injection
          */
-        const helios::util::log::Logger& logger_ = helios::util::log::LogManager::logger(
+        const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().logger(
             HELIOS_LOG_SCOPE
         );
     public:

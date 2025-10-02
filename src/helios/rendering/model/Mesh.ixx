@@ -6,10 +6,11 @@ module;
 
 export module helios.rendering.model:Mesh;
 
-import helios.util.Log;
+import helios.util.log;
 import helios.math.types;
 import :MeshData;
 
+#define HELIOS_LOG_SCOPE "helios::rendering::model::Mesh"
 export namespace helios::rendering::model {
 
     /**
@@ -29,7 +30,8 @@ export namespace helios::rendering::model {
         const std::shared_ptr<const MeshData> meshData_;
 
         /**
-         * Initializes the Mesh by setting up vertex attributes and buffers.
+         * Initializes the Mesh by setting up vertex attributes and buffers with the
+         * underlying GL API.
          * This method should be called _once_ by the derived class before using
          * this Mesh in a rendering pass.
          *
@@ -37,33 +39,36 @@ export namespace helios::rendering::model {
          */
         virtual void init() = 0;
 
+        /**
+         * The logger used with this MaterialData instance.
+         * Defaults to HELIOS_LOG_SCOPE
+         *
+         * @todo constructor injection
+         */
+        const helios::util::log::Logger& logger_ = helios::util::log::LogManager::logger(
+            HELIOS_LOG_SCOPE
+        );
+
     public:
+
+        virtual ~Mesh() = default;
 
         /**
          * Creates a new Mesh instance.
          *
          * @param meshData A shared pointer to the immutable shared raw MeshData.
          *
-         * @throws if MeshData is a null shared pointer, or if initializing failed.
+         * @throws std::invalid_argument if meshData is a null shared pointer.
          */
-        explicit Mesh(std::shared_ptr<const MeshData> meshData)
-            : meshData_(std::move(meshData)) {
-            if (!meshData_) {
-                helios::util::Log::error("Mesh constructor received a null MeshData shared pointer.");
-                throw std::invalid_argument("Mesh constructor received a null MeshData shared pointer.");
-            }
-        }
-
-        virtual ~Mesh() = default;
+        explicit Mesh(std::shared_ptr<const MeshData> meshData);
 
         /**
-         * Returns a const reference to the underlying shared  MeshData.
+         * Returns a const reference to the underlying shared MeshData.
          * The returned data is guaranteed to be a valid reference to existing data.
+         *
          * @return MeshData
          */
-        [[nodiscard]] const MeshData& meshData() const noexcept {
-            return *meshData_;
-        }
+        [[nodiscard]] const MeshData& meshData() const noexcept;
 
     };
 

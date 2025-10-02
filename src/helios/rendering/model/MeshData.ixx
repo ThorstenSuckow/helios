@@ -39,12 +39,12 @@ export namespace helios::rendering::model {
          */
 
         /**
-         * The logger used with this Material instance.
+         * The logger used with this MeshData instance.
          * Defaults to HELIOS_LOG_SCOPE
          *
          * @todo constructor injection
          */
-        const helios::util::log::Logger& logger_ = helios::util::log::LogManager::logger(
+        const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().logger(
             HELIOS_LOG_SCOPE
         );
 

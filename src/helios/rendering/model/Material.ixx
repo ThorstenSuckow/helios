@@ -15,6 +15,8 @@ export namespace helios::rendering::model {
      * Representative of a parametrizable Material instance.
      * A Material instance contains a reference to its raw shared MaterialData
      * and allows for individual configurations.
+     *
+     * @see [RTR, pp. 125]
      */
     class Material {
 

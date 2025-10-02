@@ -18,6 +18,8 @@ export namespace helios::rendering::model {
      * A Mesh instance contains a reference to its raw shared MeshData and allows
      * for individual configurations.
      * Concrete implementations will handle resource management.
+     *
+     * @see [Gre19, 631]
      */
     class Mesh {
 

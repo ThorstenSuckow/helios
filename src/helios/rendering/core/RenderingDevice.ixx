@@ -3,7 +3,9 @@ module;
 export module helios.rendering.core.RenderingDevice;
 
 import helios.math.types;
+import helios.util.log;
 
+#define HELIOS_LOG_SCOPE "helios::rendering::core::RenderingDevice"
 export namespace helios::rendering::core {
 
 
@@ -20,6 +22,16 @@ export namespace helios::rendering::core {
          * Reflects the initialization state of this viewport.
          */
         bool initialized_ = false;
+
+        /**
+         * The logger used with this Material instance.
+         * Defaults to HELIOS_LOG_SCOPE
+         *
+         * @todo constructor injection
+         */
+        const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().logger(
+            HELIOS_LOG_SCOPE
+        );
 
     public:
         virtual ~RenderingDevice() = default;

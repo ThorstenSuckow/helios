@@ -64,9 +64,6 @@ export namespace helios::rendering::opengl::model {
         OpenGLShader(const std::string& vertexShaderPath,  const std::string& fragmentShaderPath);
 
 
-        /**
-         * @inheritdoc
-         */
         void use() const noexcept override;
 
     };

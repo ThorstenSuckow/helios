@@ -9,7 +9,7 @@ module helios.rendering.opengl.model;
 
 import helios.rendering.model;
 import helios.rendering.core.Vertex;
-import helios.util.Log;
+
 
 using namespace helios::rendering::model;
 using namespace helios::rendering::core;
@@ -42,6 +42,11 @@ namespace helios::rendering::opengl::model {
         OpenGLMesh::init();
     }
 
+    OpenGLMesh::~OpenGLMesh() {
+        glDeleteVertexArrays(1, &vao_);
+        glDeleteBuffers(1, &vbo_);
+        glDeleteBuffers(1, &ebo_);
+    }
 
     void OpenGLMesh::init() {
 

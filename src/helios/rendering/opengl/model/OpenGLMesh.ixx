@@ -58,6 +58,11 @@ export namespace helios::rendering::opengl::model {
         explicit OpenGLMesh(std::shared_ptr<const MeshData> meshData);
 
         /**
+         * Frees allocated resources bv this instance.
+         */
+        ~OpenGLMesh() override;
+
+        /**
          * Returns the OpenGL Vertex Array Object Handle.
          *
          * @return VAO handle

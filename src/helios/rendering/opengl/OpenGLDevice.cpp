@@ -6,9 +6,9 @@ module;
 
 module helios.rendering.opengl;
 
-import helios.util.Log;
 
 using namespace helios::util;
+
 
 namespace helios::rendering::opengl {
 
@@ -21,11 +21,11 @@ namespace helios::rendering::opengl {
         const int gl_ver = gladLoadGL(procAddressLoader);
 
         if (gl_ver == 0) {
-            Log::error("Failed to load OpenGL");
+            logger_.error("Failed to load OpenGL");
             throw std::runtime_error("Failed to load OpenGL");
         }
 
-        Log::debug(std::format(
+        logger_.debug(std::format(
             "OpenGL {0}.{1} loaded\n",
             GLAD_VERSION_MAJOR(gl_ver), GLAD_VERSION_MINOR(gl_ver))
         );

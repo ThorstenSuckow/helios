@@ -7,6 +7,9 @@ import helios.rendering.core.RenderingDevice;
 
 export namespace helios::rendering::opengl {
 
+    /**
+     * OpenGL RenderingDevice representative.
+     */
     class OpenGLDevice : public  core::RenderingDevice {
 
     public:

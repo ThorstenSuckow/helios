@@ -1,18 +1,43 @@
 #include <gtest/gtest.h>
+#include <vector>
 
+import helios.rendering.Vertex;
+import helios.rendering.model;
+
+using namespace helios::rendering::model;
+using namespace helios::rendering;
 
 import helios.rendering.model;
 
 using namespace helios::rendering::model;
+using namespace helios::rendering;
+
+class MyMesh : public Mesh {
+
+public:
+    explicit MyMesh(std::shared_ptr<const MeshData> meshData) noexcept
+            : Mesh(std::move(meshData)) {}
+
+protected:
+    void init() override {
+
+    }
+
+};
 
 TEST(MeshTest, data) {
 
-    auto mesh_data = MeshData::from({{1.0f, 0.5f, 0.2f}});
 
-    auto mesh_data_ptr = std::make_shared<const MeshData>(mesh_data);
+    std::vector<Vertex> vertices{{{1.0f, 2.0f, 3.0f}}};
+    auto vertices_ptr = std::make_shared<std::vector<Vertex>>(vertices);
+    auto indices_ptr =  std::make_shared<std::vector<unsigned int>>(
+        std::vector<unsigned int>{1, 2, 3}
+    );
 
-    const auto mesh = Mesh{mesh_data_ptr};
+    auto meshData_ptr = std::make_shared<const MeshData>(vertices_ptr, indices_ptr);
 
-    EXPECT_EQ(mesh_data_ptr, mesh.meshData());
+    auto mesh = MyMesh{meshData_ptr};
+
+    EXPECT_EQ(meshData_ptr.get(), &mesh.meshData());
 }
 

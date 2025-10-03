@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
 
 
-import helios.rendering.model;
+import helios.rendering.Vertex;
 
-using namespace helios::rendering::model;
+using namespace helios::rendering;
 
 TEST(VertextTest, position) {
 

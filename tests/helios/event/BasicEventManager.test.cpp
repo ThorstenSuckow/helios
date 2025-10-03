@@ -1,12 +1,9 @@
 #include <gtest/gtest.h>
 #include <type_traits>
 
-
 import helios.event;
 import helios.util.Guid;
 
-
-using namespace helios::event::core;
 using namespace helios::event;
 
 class TestEvent : public Event {

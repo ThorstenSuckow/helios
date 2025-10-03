@@ -2,14 +2,14 @@
 #include <type_traits>
 
 
-import helios.event.core;
+import helios.event;
 
-class TestEvent : public helios::event::core::Event {
+class TestEvent : public helios::event::Event {
 };
 
 TEST(DispatcherTest, dispatch) {
 
-    auto dispatcher = helios::event::core::Dispatcher();
+    auto dispatcher = helios::event::Dispatcher();
     std::string result;
     dispatcher.subscribe<TestEvent>([&result](const TestEvent& e) {
         result = "bar";

@@ -4,10 +4,12 @@ module;
 #include <string>
 #include <stdexcept>
 
-export module helios.rendering.model:MaterialData;
+export module helios.rendering.model.MaterialData;
 
-import :Shader;
-import helios.util.log;
+import helios.rendering.model.Shader;
+import helios.util.log.LogManager;
+import helios.util.log.Logger;
+
 
 #define HELIOS_LOG_SCOPE "helios::rendering::model::MaterialData"
 export namespace helios::rendering::model {

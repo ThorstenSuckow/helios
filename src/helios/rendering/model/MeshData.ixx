@@ -5,14 +5,13 @@ module;
 #include <vector>
 #include <stdexcept>
 
-export module helios.rendering.model:MeshData;
+export module helios.rendering.model.MeshData;
 
-import helios.util.log;
-import helios.rendering.core.Vertex;
+import helios.util.log.LogManager;
+import helios.util.log.Logger;
+import helios.rendering.Vertex;
 import helios.rendering.asset.shape.Shape;
 
-using namespace helios::rendering::asset::shape;
-using namespace helios::rendering::core;
 
 #define HELIOS_LOG_SCOPE "helios::rendering::model::MeshData"
 export namespace helios::rendering::model {
@@ -75,7 +74,7 @@ export namespace helios::rendering::model {
          *
          * @throws std::invalid_argument if either "vertices" or "indices" is a null shared pointer
          */
-        explicit MeshData(const Shape& shape);
+        explicit MeshData(const helios::rendering::asset::shape::Shape& shape);
 
 
         /**

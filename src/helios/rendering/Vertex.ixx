@@ -1,10 +1,10 @@
 module;
 
-export module helios.rendering.core.Vertex;
+export module helios.rendering.Vertex;
 
 import helios.math.types;
 
-export namespace helios::rendering::core {
+export namespace helios::rendering {
 
     /**
      * Represents a standard vertex with position, normal,

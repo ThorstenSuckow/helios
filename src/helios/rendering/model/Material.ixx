@@ -3,9 +3,9 @@ module;
 #include <memory>
 #include <stdexcept>
 
-export module helios.rendering.model:Material;
+export module helios.rendering.model.Material;
 
-import :MaterialData;
+import helios.rendering.model.MaterialData;
 import helios.util.log;
 
 #define HELIOS_LOG_SCOPE "helios::rendering::model::Material"

@@ -4,10 +4,8 @@ module;
 #include <string>
 #include <stdexcept>
 
-module helios.rendering.model;
+module helios.rendering.model.MaterialData;
 
-import :Shader;
-import helios.util.log;
 
 #define HELIOS_LOG_SCOPE "helios::rendering::model::MaterialData"
 namespace helios::rendering::model {

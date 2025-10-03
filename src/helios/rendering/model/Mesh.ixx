@@ -4,11 +4,13 @@ module;
 #include <stdexcept>
 
 
-export module helios.rendering.model:Mesh;
+export module helios.rendering.model.Mesh;
 
-import helios.util.log;
 import helios.math.types;
-import :MeshData;
+import helios.rendering.model.MeshData;
+import helios.util.log.LogManager;
+import helios.util.log.Logger;
+
 
 #define HELIOS_LOG_SCOPE "helios::rendering::model::Mesh"
 export namespace helios::rendering::model {

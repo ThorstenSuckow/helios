@@ -18,13 +18,6 @@ export namespace helios::util::log {
     class LogManager {
 
     private:
-        /**
-         * Enforce singleton (see meyer's Singleton)
-         * @see https://en.wikipedia.org/wiki/Singleton_pattern
-         */
-        LogManager(const LogManager&) = delete;
-        LogManager& operator=(const LogManager&) = delete;
-
 
         /**
          * Unordered map holding unique pointers to the loggers managed
@@ -54,6 +47,14 @@ export namespace helios::util::log {
     public:
 
         ~LogManager() = default;
+
+        /**
+         * Enforce singleton (see meyer's Singleton)
+         * @see https://en.wikipedia.org/wiki/Singleton_pattern
+         */
+        LogManager(const LogManager&) = delete;
+        LogManager& operator=(const LogManager&) = delete;
+
 
         /**
          * Returns the LogManager singleton instance.

@@ -27,7 +27,7 @@ namespace helios::rendering::model {
     }
 
 
-    MeshData::MeshData(const helios::rendering::shape::Shape& shape) :
+    MeshData::MeshData(const helios::rendering::asset::shape::Shape& shape) :
         vertices_(shape.vertices),
         indices_(shape.indices) {
 

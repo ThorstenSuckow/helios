@@ -4,13 +4,13 @@ module;
 #include <memory>
 #include <utility>
 
-export module helios.event.core:EventManager;
+export module helios.event.EventManager;
 
-import :Event;
-import :EventQueue;
-import :Dispatcher;
+import helios.event.Event;
+import helios.event.EventQueue;
+import helios.event.Dispatcher;
 
-export namespace helios::event::core{
+export namespace helios::event {
 
 
     enum PostPolicy {

@@ -4,12 +4,12 @@ module;
 #include <memory>
 #include <typeindex>
 
-export module helios.event.core:Dispatcher;
+export module helios.event.Dispatcher;
 
-import :Event;
+import helios.event.Event;
 
 
-export namespace helios::event::core {
+export namespace helios::event {
 
     class Dispatcher {
 

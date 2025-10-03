@@ -4,11 +4,13 @@ module;
 #include <functional>
 #include <memory>
 
-export module helios.event:DequeEventQueue;
+export module helios.event.DequeEventQueue;
 
-import helios.event.core;
+import helios.event.EventQueue;
+import helios.event.Event;
 
-using namespace helios::event::core;
+
+using namespace helios::event;
 
 export namespace helios::event {
 

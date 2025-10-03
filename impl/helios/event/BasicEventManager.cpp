@@ -5,9 +5,9 @@ module;
 
 module helios.event;
 
-import helios.event.core;
+import helios.event;
 
-using namespace helios::event::core;
+using namespace helios::event;
 
 namespace helios::event {
 

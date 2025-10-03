@@ -2,14 +2,14 @@ module;
 
 #include <memory>
 
-export module helios.event.core:Event;
+export module helios.event.Event;
 
 import helios.util.Guid;
 
 
 using namespace helios::util;
 
-export namespace helios::event::core {
+export namespace helios::event {
 
     /**
      * @todo can we reset the value for Guids in between frames, if events

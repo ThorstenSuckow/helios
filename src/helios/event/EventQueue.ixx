@@ -4,11 +4,11 @@ module;
 #include <functional>
 #include <memory>
 
-export module helios.event.core:EventQueue;
+export module helios.event.EventQueue;
 
-import :Event;
+import helios.event.Event;
 
-export namespace helios::event::core {
+export namespace helios::event {
 
     class EventQueue {
 

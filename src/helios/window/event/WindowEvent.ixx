@@ -1,14 +1,15 @@
 module;
 
+#include <cstdint>
 
-export module helios.platform.window.event.core:WindowEvent;
+export module helios.window.event.WindowEvent;
 
 import helios.util.Guid;
-import helios.event.core;
+import helios.event.Event;
 
-export namespace helios::platform::window::event::core {
+export namespace helios::window::event {
 
-    class  WindowEvent : public helios::event::core::Event {
+    class  WindowEvent : public helios::event::Event {
 
     protected:
         explicit WindowEvent(helios::util::Guid sourceGuid):

@@ -1,15 +1,16 @@
 module;
 
+#include <cstdint>
 
-export module helios.platform.window.event:FrameBufferResizeEvent;
+export module helios.window.event.FrameBufferResizeEvent;
 
-import helios.platform.window.event.core;
+import helios.window.event.WindowEvent;
 
 import helios.util.Guid;
 
-using namespace helios::platform::window::event::core;
+using namespace helios::window::event;
 
-export namespace helios::platform::window::event {
+export namespace helios::window::event {
 
     class FrameBufferResizeEvent final : public WindowEvent {
 

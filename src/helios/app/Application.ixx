@@ -3,37 +3,33 @@ module;
 #include <memory>
 #include <vector>
 
-export module helios.platform.application.core:Application;
+export module helios.app.Application;
 
-import helios.platform.application.controller.core;
+import helios.app.controller.Controller;
+import helios.rendering.RenderingDevice;
+import helios.input.InputManager;
+import helios.event.EventManager;
+import helios.window.Window;
+import helios.window.WindowConfig;
 
-import helios.rendering.core.RenderingDevice;
-import helios.platform.input;
-import helios.platform.window.core;
-import helios.event;
-
-
-using namespace helios::platform::window::core;
-using namespace helios::platform::application::controller::core;
-
-export namespace helios::platform::application::core {
+export namespace helios::app {
 
     class Application {
 
     protected:
-        std::unique_ptr<rendering::core::RenderingDevice> renderingDevice_;
+        std::unique_ptr<helios::rendering::RenderingDevice> renderingDevice_;
         std::unique_ptr<input::InputManager> inputManager_;
-        std::unique_ptr<event::core::EventManager> eventManager_;
-        std::unique_ptr<Window> window_;
+        std::unique_ptr<event::EventManager> eventManager_;
+        std::unique_ptr<helios::window::Window> window_;
 
-        std::vector<std::unique_ptr<Controller>> controller_;
+        std::vector<std::unique_ptr<helios::app::controller::Controller>> controller_;
 
     public:
 
         explicit Application(
-            std::unique_ptr<rendering::core::RenderingDevice> renderingDevice,
+            std::unique_ptr<rendering::RenderingDevice> renderingDevice,
             std::unique_ptr<input::InputManager> inputManager,
-            std::unique_ptr<event::core::EventManager> eventManager
+            std::unique_ptr<event::EventManager> eventManager
             ):
             renderingDevice_(std::move(renderingDevice)),
             inputManager_(std::move(inputManager)),
@@ -42,7 +38,7 @@ export namespace helios::platform::application::core {
         };
 
 
-        Application& addController(std::unique_ptr<Controller> controller);
+        Application& addController(std::unique_ptr<helios::app::controller::Controller> controller);
 
         /**
          * @todo free resource allocations from renderingDevice,
@@ -59,7 +55,7 @@ export namespace helios::platform::application::core {
          *
          * @throws std::invalid_argument if the configuration was invalid
          */
-        virtual Window& createWindow(const WindowConfig& cfg) = 0;
+        virtual helios::window::Window& createWindow(const helios::window::WindowConfig& cfg) = 0;
 
         /**
          * Inits the Application. Any bootstrapping necessary for this application
@@ -85,14 +81,14 @@ export namespace helios::platform::application::core {
          * @param win
          * @return
          */
-        virtual Application& setCurrent(Window& win) = 0;
+        virtual Application& setCurrent(helios::window::Window& win) = 0;
 
         /**
          * Returns the currently focused window, or nullptr
          * if none exists / no window is being treated as current()
          * @return
          */
-        [[nodiscard]] virtual Window* current() const noexcept = 0;
+        [[nodiscard]] virtual helios::window::Window* current() const noexcept = 0;
 
         /**
          * Returns the InputManager owned by this Application.
@@ -106,7 +102,7 @@ export namespace helios::platform::application::core {
          * Returns the InputManager owned by this Application.
          * @return
          */
-        [[nodiscard]] rendering::core::RenderingDevice& renderingDevice() const {
+        [[nodiscard]] rendering::RenderingDevice& renderingDevice() const {
             return *renderingDevice_;
         };
 
@@ -114,7 +110,7 @@ export namespace helios::platform::application::core {
          *Returns the EventManager owned by this application
          *
          */
-        [[nodiscard]] event::core::EventManager& eventManager() const {
+        [[nodiscard]] event::EventManager& eventManager() const {
             return *eventManager_;
         }
 

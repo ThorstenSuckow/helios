@@ -3,14 +3,14 @@ module;
 #include <glad/gl.h>
 #include <memory>
 
-module helios.rendering.opengl.model;
+module helios.ext.opengl.rendering.model.OpenGLNode;
 
 import helios.rendering.model;
-import :OpenGLMesh;
+import helios.ext.opengl.rendering.model.OpenGLMesh;
 
 using namespace helios::rendering::model;
 
-namespace helios::rendering::opengl::model {
+namespace helios::ext::opengl::rendering::model {
 
         OpenGLNode::OpenGLNode(
             std::unique_ptr<Mesh> mesh,

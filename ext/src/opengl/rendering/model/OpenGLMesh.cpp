@@ -5,18 +5,17 @@ module;
 #include <vector>
 #include <stdexcept>
 
-module helios.rendering.opengl.model;
+module helios.ext.opengl.rendering.model.OpenGLMesh;
 
-import helios.rendering.model;
-import helios.rendering.core.Vertex;
+import helios.rendering.Vertex;
 
 
 using namespace helios::rendering::model;
-using namespace helios::rendering::core;
+using namespace helios::rendering;
 using namespace helios::util;
 
 
-namespace helios::rendering::opengl::model {
+namespace helios::ext::opengl::rendering::model {
 
 
     unsigned int OpenGLMesh::generateGLVertexArray() noexcept {

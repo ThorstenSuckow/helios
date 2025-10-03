@@ -1,9 +1,9 @@
 module;
 
-export module helios.engine.core:Tickable;
+export module helios.engine.Tickable;
 
 
-export namespace helios::engine::core {
+export namespace helios::engine {
 
     class Tickable {
     public:

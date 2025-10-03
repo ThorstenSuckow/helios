@@ -18,6 +18,7 @@ namespace helios::event {
         return *this;
     }
 
+
     EventQueue& DequeEventQueue::addOrReplace(
         std::unique_ptr<const Event> event,
         const std::function<bool(const std::unique_ptr<const Event>& evt,
@@ -30,9 +31,11 @@ namespace helios::event {
         return *this;
     }
 
+
     [[nodiscard]] bool DequeEventQueue::empty() const noexcept {
         return events.empty();
     }
+
 
     std::unique_ptr<const Event> DequeEventQueue::next() {
         if (events.empty()) {
@@ -44,6 +47,7 @@ namespace helios::event {
 
         return event;
     }
+
 
 };
 

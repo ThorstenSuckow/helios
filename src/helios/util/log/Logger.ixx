@@ -3,7 +3,7 @@ module;
 #include <iostream>
 #include <string>
 
-export module helios.util.log:Logger;
+export module helios.util.log.Logger;
 
 export namespace helios::util::log {
 

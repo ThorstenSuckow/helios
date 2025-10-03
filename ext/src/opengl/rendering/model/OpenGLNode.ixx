@@ -3,14 +3,14 @@ module;
 
 #include <memory>
 
-export module helios.rendering.opengl.model:OpenGLNode;
+export module helios.ext.opengl.rendering.model.OpenGLNode;
 
 import helios.rendering.model;
-import :OpenGLMesh;
+import helios.ext.opengl.rendering.model.OpenGLMesh;
 
 using namespace helios::rendering::model;
 
-export namespace helios::rendering::opengl::model {
+export namespace helios::ext::opengl::rendering::model {
 
     /**
      * OpenGL Node representative-

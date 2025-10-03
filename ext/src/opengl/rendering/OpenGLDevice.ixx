@@ -1,16 +1,16 @@
 module;
 
-export module helios.rendering.opengl:OpenGLDevice;
+export module helios.ext.opengl.rendering.OpenGLDevice;
 
 import helios.math.types;
-import helios.rendering.core.RenderingDevice;
+import helios.rendering.RenderingDevice;
 
-export namespace helios::rendering::opengl {
+export namespace helios::ext::opengl::rendering {
 
     /**
      * OpenGL RenderingDevice representative.
      */
-    class OpenGLDevice : public  core::RenderingDevice {
+    class OpenGLDevice : public  helios::rendering::RenderingDevice {
 
     public:
         ~OpenGLDevice() override = default;

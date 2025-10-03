@@ -4,13 +4,13 @@ module;
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 
-module helios.rendering.opengl;
+module helios.ext.opengl.rendering.OpenGLDevice;
 
 
 using namespace helios::util;
 
 
-namespace helios::rendering::opengl {
+namespace helios::ext::opengl::rendering {
 
     void OpenGLDevice::init() noexcept {
 

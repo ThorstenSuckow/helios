@@ -3,7 +3,7 @@ module;
 #include <glad/gl.h>
 #include <iostream>
 
-module helios.rendering.opengl.model;
+module helios.ext.opengl.rendering.model.OpenGLShader;
 
 
 import helios.rendering.model;
@@ -12,8 +12,7 @@ import helios.util.IOUtil;
 using namespace helios::rendering::model;
 using namespace helios::util;
 
-namespace helios::rendering::opengl::model {
-
+namespace helios::ext::opengl::rendering::model {
 
 
     OpenGLShader::OpenGLShader(

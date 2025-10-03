@@ -2,12 +2,13 @@ module;
 
 #include <iostream>
 
-export module helios.rendering.opengl.model:OpenGLShader;
+export module helios.ext.opengl.rendering.model.OpenGLShader;
 
-import helios.rendering.model;
+import helios.rendering.model.Shader;
 
-export namespace helios::rendering::opengl::model {
-    class OpenGLShader : public rendering::model::Shader {
+export namespace helios::ext::opengl::rendering::model {
+
+    class OpenGLShader : public helios::rendering::model::Shader {
 
     private:
         /**

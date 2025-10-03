@@ -2,21 +2,18 @@ module;
 
 #include <memory>
 
-export module helios.rendering.opengl.model:OpenGLMesh;
+export module helios.ext.opengl.rendering.model.OpenGLMesh;
 
-import helios.rendering.model;
-import helios.rendering.core.Vertex;
+import helios.rendering.model.Mesh;
+import helios.rendering.model.MeshData;
 
-using namespace helios::rendering::model;
-using namespace helios::rendering::core;
-
-export namespace helios::rendering::opengl::model {
+export namespace helios::ext::opengl::rendering::model {
 
     /**
      * Representative of an OpenGLMesh.
      *
      */
-    class OpenGLMesh : public Mesh{
+    class OpenGLMesh : public helios::rendering::model::Mesh {
 
     protected:
         /**
@@ -55,7 +52,7 @@ export namespace helios::rendering::opengl::model {
 
     public:
 
-        explicit OpenGLMesh(std::shared_ptr<const MeshData> meshData);
+        explicit OpenGLMesh(std::shared_ptr<const helios::rendering::model::MeshData> meshData);
 
         /**
          * Frees allocated resources bv this instance.

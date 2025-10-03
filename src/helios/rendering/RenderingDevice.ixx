@@ -1,12 +1,12 @@
 module;
 
-export module helios.rendering.core.RenderingDevice;
+export module helios.rendering.RenderingDevice;
 
 import helios.math.types;
 import helios.util.log;
 
-#define HELIOS_LOG_SCOPE "helios::rendering::core::RenderingDevice"
-export namespace helios::rendering::core {
+#define HELIOS_LOG_SCOPE "helios::rendering::RenderingDevice"
+export namespace helios::rendering {
 
 
     /**

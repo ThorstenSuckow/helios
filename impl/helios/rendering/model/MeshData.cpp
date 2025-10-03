@@ -5,14 +5,9 @@ module;
 #include <vector>
 #include <stdexcept>
 
-module helios.rendering.model;
+module helios.rendering.model.MeshData;
 
-import helios.util.log;
-import helios.rendering.core.Vertex;
 import helios.rendering.asset.shape.Shape;
-
-using namespace helios::rendering::asset::shape;
-using namespace helios::rendering::core;
 
 #define HELIOS_LOG_SCOPE "helios::rendering::model::MeshData"
 namespace helios::rendering::model {
@@ -32,7 +27,7 @@ namespace helios::rendering::model {
     }
 
 
-    MeshData::MeshData(const Shape& shape) :
+    MeshData::MeshData(const helios::rendering::shape::Shape& shape) :
         vertices_(shape.vertices),
         indices_(shape.indices) {
 

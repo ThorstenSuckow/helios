@@ -4,12 +4,7 @@ module;
 #include <stdexcept>
 
 
-module helios.rendering.model;
-
-import :MeshData;
-import helios.util.log;
-import helios.math.types;
-
+module helios.rendering.model.Mesh;
 
 
 namespace helios::rendering::model {

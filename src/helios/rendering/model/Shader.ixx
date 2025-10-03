@@ -1,8 +1,9 @@
 module;
 
-export module helios.rendering.model:Shader;
+export module helios.rendering.model.Shader;
 
-import helios.util.log;
+import helios.util.log.LogManager;
+import helios.util.log.Logger;
 
 #define HELIOS_LOG_SCOPE "helios::rendering::model::Shader"
 export namespace helios::rendering::model {

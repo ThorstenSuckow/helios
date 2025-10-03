@@ -3,12 +3,13 @@ module;
 #include <memory>
 #include <stdexcept>
 
-export module helios.rendering.model:Node;
+export module helios.rendering.model.Node;
 
-import :Mesh;
-import :Material;
+import helios.rendering.model.Mesh;
+import helios.rendering.model.Material;
 
-import helios.util.log;
+import helios.util.log.LogManager;
+import helios.util.log.Logger;
 
 #define HELIOS_LOG_SCOPE "helios::rendering::model::Node"
 export namespace helios::rendering::model {

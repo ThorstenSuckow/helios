@@ -3,10 +3,8 @@ module;
 #include <memory>
 #include <stdexcept>
 
-module helios.rendering.model;
+module helios.rendering.model.Material;
 
-import :MaterialData;
-import helios.util.log;
 
 namespace helios::rendering::model {
 

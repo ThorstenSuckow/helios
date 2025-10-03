@@ -5,8 +5,8 @@ module;
 
 module helios.rendering.model;
 
-import :Mesh;
-import :Material;
+import helios.rendering.model.Mesh;
+import helios.rendering.model.Material;
 
 import helios.util.log;
 

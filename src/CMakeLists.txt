@@ -1,10 +1,14 @@
 file(MAKE_DIRECTORY ${CMAKE_IFC_OUTPUT_DIRECTORY})
 
 file(GLOB_RECURSE CPP_FILES CONFIGURE_DEPENDS
-       # helios base impl
+        # extension directory with implementations for glfw and OpenGL >= 4.6
+        "${CMAKE_CURRENT_SOURCE_DIR}/../ext/**/*.cpp"
+        # helios base impl
         "${CMAKE_CURRENT_SOURCE_DIR}/../impl/**/*.cpp")
 
 file(GLOB_RECURSE MODULE_INTERFACE_FILES CONFIGURE_DEPENDS
+        # extension directory with implementations for glfw and OpenGL >= 4.6
+        "${CMAKE_CURRENT_SOURCE_DIR}/../ext/**/*.ixx"
         # helios base src
         "${CMAKE_CURRENT_SOURCE_DIR}/**/*.ixx"
 )
@@ -35,10 +39,13 @@ target_sources(helios PRIVATE ${CPP_FILES})
 if(MODULE_INTERFACE_FILES)
     target_sources(helios PUBLIC
             FILE_SET modules TYPE CXX_MODULES
+            BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}"
+            BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/../ext"
             FILES ${MODULE_INTERFACE_FILES}
     )
 endif()
 
 target_include_directories(helios PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../ext>
 )

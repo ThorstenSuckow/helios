@@ -3,34 +3,31 @@ module;
 #include <memory>
 #include <stdexcept>
 
-export module helios.platform.input:InputManager;
+export module helios.input.InputManager;
 
-import helios.platform.input.core;
-import helios.platform.input.types;
-import helios.platform.window.core;
-import helios.engine.core;
+import helios.input.InputAdapter;
+import helios.input.types.Key;
+import helios.window.Window;
 
-using namespace helios::platform::window::core;
-
-export namespace helios::platform::input {
+export namespace helios::input {
 
     class InputManager  {
 
         private:
-            Window* observedWin_ = nullptr;
-            std::unique_ptr<const core::InputAdapter> input_;
+            helios::window::Window* observedWin_ = nullptr;
+            std::unique_ptr<const helios::input::InputAdapter> input_;
 
         public:
 
-        explicit InputManager(std::unique_ptr<const core::InputAdapter> input):
+        explicit InputManager(std::unique_ptr<const helios::input::InputAdapter> input):
         input_(std::move(input)) {}
 
-        InputManager& observe(Window& win) noexcept {
+        InputManager& observe(helios::window::Window& win) noexcept {
             observedWin_ = &win;
             return *this;
         }
 
-        const Window* observedWindow() const {
+        const helios::window::Window* observedWindow() const {
             return observedWin_;
         }
 
@@ -43,7 +40,7 @@ export namespace helios::platform::input {
         }
 
 
-        [[nodiscard]] bool isKeyPressed(const Key& key) const {
+        [[nodiscard]] bool isKeyPressed(const helios::input::types::Key& key) const {
             if (observedWin_ == nullptr) {
                 throw std::runtime_error("Expected observedWin_ to be available, but none found.");
             }

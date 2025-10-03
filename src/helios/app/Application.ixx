@@ -30,12 +30,7 @@ export namespace helios::app {
             std::unique_ptr<rendering::RenderingDevice> renderingDevice,
             std::unique_ptr<input::InputManager> inputManager,
             std::unique_ptr<event::EventManager> eventManager
-            ):
-            renderingDevice_(std::move(renderingDevice)),
-            inputManager_(std::move(inputManager)),
-            eventManager_(std::move(eventManager))
-        {
-        };
+            );
 
 
         Application& addController(std::unique_ptr<helios::app::controller::Controller> controller);

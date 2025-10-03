@@ -1,116 +1,75 @@
 #include <iostream>
-#include <glad/gl.h>
-#include <GLFW/glfw3.h>
 #include <cstdlib>
 
 
-import helios.util;
-import helios.glfw.application;
-import helios.rendering.opengl;
-import helios.platform.input;
-import helios.glfw.input;
-import helios.platform.input.core;
-import helios.platform.input.types;
-import helios.platform.window.core;
-import helios.glfw.window;
+import helios.math.types;
 
+import helios.ext.glfw.app.GLFWFactory;
+import helios.ext.glfw.app.GLFWApplication;
+import helios.ext.glfw.app.GLFWRAIIGuard;
+import helios.ext.glfw.window.GLFWWindow;
 
-using namespace helios::glfw::window;
-using namespace helios::rendering::opengl;
-using namespace helios::util;
+import helios.input.InputManager;
+import helios.input.types.Key;
+import helios.rendering.model.MaterialData;
+import helios.rendering.model.MeshData;
+import helios.rendering.asset.shape.basic.Cube;
 
-unsigned int load(const GLFWWindow& window) {
-    std::string vertexShader;
-    std::string fragmentShader;
+import helios.ext.opengl.rendering.model.OpenGLShader;
+import helios.ext.opengl.rendering.model.OpenGLMaterial;
+import helios.ext.opengl.rendering.model.OpenGLMesh;
+import helios.ext.opengl.rendering.model.OpenGLNode;
 
-    IOUtil::readInto("./resources/cube.frag", fragmentShader);
-    IOUtil::readInto("./resources/cube.vert", vertexShader);
-
-    return OpenGLShaderCompiler::compile(
-        vertexShader.c_str(), fragmentShader.c_str()
-    );
-}
-
-void render (const GLFWWindow& window, const unsigned int progId) {
-
-
-    glUseProgram(progId);
-
-
-    float vertices[] = {
-        0.5f, 0.5f, 0.5f,
-        0.5f, -0.5f, 0.5f,
-        -0.5f,  -0.5f, 0.5f,
-        -0.5f, 0.5f, 0.5f,
-
-        0.5f, 0.5f, -0.5f,
-        0.5f, -0.5f, -0.5f,
-        -0.5f,  -0.5f, -0.5f,
-        -0.5f, 0.5f, -0.5f
-       };
-
-    unsigned int indices[] = {
-        0, 1, 3,
-        1, 2, 3,
-
-        4, 5, 7,
-        5, 6, 7
-    };
-
-
-    unsigned int VAO;
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
-
-    unsigned int VBO;
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    unsigned int EBO;
-    glGenBuffers(1, &EBO);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    glBindVertexArray(VAO);
-    glDrawElements(GL_LINE_LOOP, 12, GL_UNSIGNED_INT, 0);
-    glBindVertexArray(0);
-}
-
+using namespace helios::ext::glfw::app;
+using namespace helios::rendering::model;
+using namespace helios::ext::opengl::rendering::model;
+using namespace helios::rendering::asset::shape::basic;
+using namespace helios::input::types;
+using namespace helios::ext::glfw::window;
 
 int main() {
 
-    auto glfwGuard = helios::glfw::application::GLFWRAIIGuard();
+    auto glfwGuard = GLFWRAIIGuard();
 
-    const auto app = helios::glfw::application::GLFWFactory::makeOpenGLApp(
+    const auto app = GLFWFactory::makeOpenGLApp(
         "helios - Simple Cube Renderer"
     );
 
-    auto win = dynamic_cast<helios::glfw::window::GLFWWindow*>(app->current());
+    auto win = dynamic_cast<GLFWWindow*>(app->current());
 
 
     // get the InputManager
-    helios::platform::input::InputManager& inputManager = app->inputManager();
+    helios::input::InputManager& inputManager = app->inputManager();
 
-    const unsigned int progId = load(*win);
+    // model
+    auto shader_ptr = std::make_shared<OpenGLShader>(
+        "./resources/cube.vert",
+        "./resources/cube.frag"
+    );
+    auto materialData_ptr = std::make_shared<MaterialData>(shader_ptr);
+    auto material_ptr = std::make_unique<OpenGLMaterial>(materialData_ptr);
+
+    auto cube = Cube{};
+    auto meshData = std::make_shared<const MeshData>(cube);
+    auto mesh_ptr = std::make_unique<OpenGLMesh>(meshData);
+    auto node = OpenGLNode(std::move(mesh_ptr), std::move(material_ptr));
+
+
 
     while (!win->shouldClose()) {
         app->eventManager().dispatchAll();
+
         inputManager.poll(0.0f);
 
-        if (inputManager.isKeyPressed(helios::platform::input::Key::ESC)) {
+        if (inputManager.isKeyPressed(Key::ESC)) {
             std::cout << "Key Pressed [ESC]" << std::endl;
             std::ignore = win->setShouldClose(true);
         }
 
-        //update();
-        render(*win, progId);
+        app->renderingDevice().beginRenderPass();
+
+        // model
+        node.draw();
 
         win->swapBuffers();
     }

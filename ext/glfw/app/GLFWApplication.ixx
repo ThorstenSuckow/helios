@@ -37,7 +37,7 @@ export namespace helios::ext::glfw::app {
 
         helios::ext::glfw::window::GLFWWindow& createWindow(const helios::ext::glfw::window::GLFWWindowConfig& cfg);
 
-        GLFWApplication& setCurrent(helios::window::Window& win) override;
+        void setCurrent(helios::window::Window& win) override;
 
         [[nodiscard]] helios::window::Window* current() const noexcept override;
 
@@ -45,7 +45,7 @@ export namespace helios::ext::glfw::app {
         helios::ext::glfw::window::GLFWWindow& createWindow(const helios::window::WindowConfig& cfg) override;
 
 
-        GLFWApplication& init() override;
+        void init() override;
 
     };
 

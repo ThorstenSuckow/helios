@@ -1,12 +1,9 @@
 module;
 
-#include <GLFW/glfw3.h>
-#include <stdexcept>
-
-export module helios.glfw.application:GLFWRAIIGuard;
+export module helios.ext.glfw.app.GLFWRAIIGuard;
 
 
-export namespace helios::glfw::application {
+export namespace helios::ext::glfw::app {
 
     class GLFWRAIIGuard {
 

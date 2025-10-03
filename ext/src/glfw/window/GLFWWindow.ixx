@@ -4,15 +4,17 @@ module;
 #include <GLFW/glfw3.h>
 #include <string>
 
-export module helios.glfw.window:GLFWWindow;
+export module helios.ext.glfw.window.GLFWWindow;
 
-import helios.platform.window.core;
-import :GLFWWindowConfig;
-import :GLFWWindowUserPointer;
+import helios.window.Window;
 
-export namespace helios::glfw::window {
+import helios.ext.glfw.window.GLFWWindowUserPointer;
+import helios.ext.glfw.window.GLFWWindowConfig;
 
-    class GLFWWindow : public Window {
+
+export namespace helios::ext::glfw::window {
+
+    class GLFWWindow : public helios::window::Window {
 
     private:
         GLFWwindow* nativeHandle_ = nullptr;

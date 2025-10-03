@@ -4,11 +4,14 @@ module;
 #include <memory>
 #include <utility>
 
-export module helios.event:BasicEventManager;
+export module helios.event.BasicEventManager;
 
-import helios.event.core;
+import helios.event.EventManager;
+import helios.event.EventQueue;
+import helios.event.Dispatcher;
+import helios.event.Event;
 
-using namespace helios::event::core;
+using namespace helios::event;
 
 export namespace helios::event {
 

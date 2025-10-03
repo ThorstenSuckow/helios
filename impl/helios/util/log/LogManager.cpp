@@ -5,9 +5,9 @@ module;
 #include <memory>
 #include <mutex>
 
-module helios.util.log;
+module helios.util.log.Logger;
 
-import :Logger;
+import helios.util.log.LogManager;
 
 namespace helios::util::log {
 

@@ -11,8 +11,7 @@ export namespace helios::rendering::core {
 
     /**
      * Abstract interface for low level rendering device.
-     * This class provides fundamental API for managing the rendering
-     * pipeline.
+     * This class provides fundamental API for managing the rendering pipeline.
      * Concrete implementations provide API specific logic.
      */
     class RenderingDevice {

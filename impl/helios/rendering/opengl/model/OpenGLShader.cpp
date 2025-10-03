@@ -25,7 +25,7 @@ namespace helios::rendering::opengl::model {
         try{
             load();
             compile();
-        } catch (std::runtime_error e) {
+        } catch (std::runtime_error& e) {
             logger_.error("Could not initialize shader");
             throw std::runtime_error("Could not initialize shader");
         }

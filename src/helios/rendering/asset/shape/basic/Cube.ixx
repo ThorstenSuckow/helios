@@ -7,9 +7,9 @@ export module helios.rendering.asset.shape.basic.Cube;
 
 import helios.rendering.asset.shape.Shape;
 
-import helios.rendering.core.Vertex;
+import helios.rendering.Vertex;
 
-using namespace helios::rendering::core;
+using namespace helios::rendering;
 
 export namespace helios::rendering::asset::shape::basic {
 

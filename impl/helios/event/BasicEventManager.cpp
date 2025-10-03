@@ -1,40 +1,49 @@
 module;
 
+#include <functional>
 #include <memory>
 #include <utility>
 
-module helios.event;
+module helios.event.BasicEventManager;
 
-import helios.event;
+import helios.event.EventManager;
 
 using namespace helios::event;
 
 namespace helios::event {
 
-    EventManager& BasicEventManager::post(
-        std::unique_ptr<const Event> e,
-        const PostPolicy policy,
-        const std::function<bool(
-            const std::unique_ptr<const Event>& evt,
-            const std::unique_ptr<const Event>& e)>& func) {
 
-        std::function<bool(const std::unique_ptr<const Event>& evt,
-                                const std::unique_ptr<const Event>& e)> cmpFunc;
+    BasicEventManager::BasicEventManager(std::unique_ptr<EventQueue> eventQueue,
+               std::unique_ptr<Dispatcher> dispatcher) :
+               EventManager(std::move(eventQueue), std::move(dispatcher))
+    {}
+
+    EventManager& BasicEventManager::post(
+        std::unique_ptr<const Event> event,
+        const PostPolicy policy,
+        const std::function
+            <bool(
+            const std::unique_ptr<const Event>& event,
+            const std::unique_ptr<const Event>& evt
+            )>& func) {
+
+        std::function<bool(const std::unique_ptr<const Event>& event,
+                                const std::unique_ptr<const Event>& evt)> cmpFunc;
 
         switch (policy) {
             case APPEND:
-                eventQueue_->add(std::move(e));
+                eventQueue_->add(std::move(event));
             break;
             case LATEST_WINS:
 
                 if (!func) {
                     cmpFunc = [](
-                        const std::unique_ptr<const Event>& evt,
-                        const std::unique_ptr<const Event>& e) {
-                            if (!evt  || !e) {
+                        const std::unique_ptr<const Event>& event,
+                        const std::unique_ptr<const Event>& evt) {
+                            if (!event  || !evt) {
                                 return false;
                             }
-                            return typeid(*evt) == typeid(*e) && evt->tag() == e->tag();
+                            return typeid(*event) == typeid(*evt) && event->tag() == evt->tag();
                     };
                 } else {
                     cmpFunc = func;
@@ -44,7 +53,7 @@ namespace helios::event {
                  * @todo use hashmap instead of queue for faster
                  * lookup
                  */
-                eventQueue_->addOrReplace(std::move(e), cmpFunc);
+                eventQueue_->addOrReplace(std::move(event), cmpFunc);
                 break;
             default:
                 std::unreachable();

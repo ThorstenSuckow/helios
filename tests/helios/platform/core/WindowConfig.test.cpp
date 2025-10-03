@@ -1,10 +1,10 @@
 #include <gtest/gtest.h>
 
 
-import helios.platform.window.core;
+import helios.window;
 
 
-using namespace helios::platform::window::core;
+using namespace helios::window;
 
 struct test_data {
 

@@ -4,9 +4,8 @@ module;
 
 module helios.util.Guid;
 
-
 namespace helios::util {
-    Guid::Guid(const uint64_t value) noexcept : val(value) {}
+    Guid::Guid(const uint64_t value) noexcept : value_(value) {}
 
     Guid Guid::generate() noexcept {
         static std::atomic<uint64_t> counter{1};

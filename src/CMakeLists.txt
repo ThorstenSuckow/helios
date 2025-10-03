@@ -1,9 +1,11 @@
 file(MAKE_DIRECTORY ${CMAKE_IFC_OUTPUT_DIRECTORY})
 
 file(GLOB_RECURSE CPP_FILES CONFIGURE_DEPENDS
-        "${CMAKE_CURRENT_SOURCE_DIR}/**/*.cpp")
+       # helios base impl
+        "${CMAKE_CURRENT_SOURCE_DIR}/../impl/**/*.cpp")
 
 file(GLOB_RECURSE MODULE_INTERFACE_FILES CONFIGURE_DEPENDS
+        # helios base src
         "${CMAKE_CURRENT_SOURCE_DIR}/**/*.ixx"
 )
 

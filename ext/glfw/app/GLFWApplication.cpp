@@ -45,7 +45,7 @@ namespace helios::ext::glfw::app {
     }
 
 
-    GLFWApplication& GLFWApplication::setCurrent(Window& win) {
+    void GLFWApplication::setCurrent(Window& win) {
 
         if (const auto glfw_window  = dynamic_cast<GLFWWindow*>(&win)) {
 
@@ -71,8 +71,6 @@ namespace helios::ext::glfw::app {
 
         inputManager_->observe(win);
         current_ = &win;
-
-        return dynamic_cast<GLFWApplication&>(*this);
     }
 
 
@@ -97,7 +95,7 @@ namespace helios::ext::glfw::app {
     }
 
 
-    GLFWApplication& GLFWApplication::init() {
+    void GLFWApplication::init() {
 
         Application::init();
 
@@ -105,7 +103,6 @@ namespace helios::ext::glfw::app {
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-        return dynamic_cast<GLFWApplication&>(*this);
     }
 
 };

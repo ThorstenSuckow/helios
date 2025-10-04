@@ -40,7 +40,19 @@ export namespace helios::event {
          * function should accept `const EventType&` as its single argument.
          */
         template<typename EventType>
-        void subscribe(std::function<void(const EventType&)> callback);
+            void subscribe(std::function<void(const EventType&)> callback) {
+            static_assert(std::is_base_of_v<Event, EventType>, "EventType is not of type Event");
+
+            const auto idx = std::type_index(typeid(EventType));
+
+            auto wrapper = [callback](const Event& event) {
+                const auto& typedEvent = static_cast<const EventType&>(event);
+                callback(typedEvent);
+            };
+
+            callbacks_[idx].push_back(wrapper);
+        }
+
 
         /**
          * Dispatches an event to all subscribed callbacks (i.e. listeners) of the

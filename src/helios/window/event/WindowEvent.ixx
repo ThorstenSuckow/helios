@@ -36,8 +36,6 @@ export namespace helios::window::event {
 
     public:
 
-        virtual ~WindowEvent() = default;
-
         /**
          * The unique and immutable Guid of the source of this event, i.e.
          * the Window that trigegred the event.

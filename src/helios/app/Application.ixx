@@ -27,15 +27,32 @@ export namespace helios::app {
     class Application {
 
     protected:
+        bool initialized_ = false;
+
         std::unique_ptr<helios::rendering::RenderingDevice> renderingDevice_;
         std::unique_ptr<input::InputManager> inputManager_;
         std::unique_ptr<event::EventManager> eventManager_;
         std::unique_ptr<helios::window::Window> window_;
 
-        std::vector<std::unique_ptr<helios::app::controller::Controller>> controller_;
+        std::vector<std::unique_ptr<helios::app::controller::Controller>> controllers_;
 
     public:
 
+        /**
+         * @todo free resource allocations from renderingDevice,
+         * window and InputManager
+         */
+        virtual ~Application() = default;
+
+
+        /**
+         * Creates a new Application instance.
+         * The Application will take ownership of the specified constructor arguments.
+         *
+         * @param renderingDevice
+         * @param inputManager
+         * @param eventManager
+         */
         explicit Application(
             std::unique_ptr<helios::rendering::RenderingDevice> renderingDevice,
             std::unique_ptr<helios::input::InputManager> inputManager,
@@ -43,13 +60,22 @@ export namespace helios::app {
             );
 
 
-        Application& addController(std::unique_ptr<helios::app::controller::Controller> controller);
-
         /**
-         * @todo free resource allocations from renderingDevice,
-         * window and InputManager
+         * Registers a new controller with this application.
+         * Makes sure that the controller subscribes to the EventManager's Dispatcher
+         * of this Application.
+         * The Application receives ownership of the specified controller.
+         *
+         * @note This implementation assumes that controllers are added before
+         * initializing the app. If controllers are added after the Application was
+         * initialized, the current implementation will throw a runtime exception.
+         * Future-iterations should consider whether this constraint should be softened.
+         *
+         * @param controller a unique_ptr to the controller to add.
+         *
+         * @throws std::runtime_error if the Application was already initialized.
          */
-        virtual ~Application() = default;
+        void addController(std::unique_ptr<helios::app::controller::Controller> controller);
 
         /**
          * Creates the container for the native window and performs all
@@ -67,17 +93,15 @@ export namespace helios::app {
          * Inits the Application. Any bootstrapping necessary for this application
          * should be done here and provide an idiomatic entry point for any
          * API using this Application.
+         * This method makes sure that the controllers are initialized and subscribe
+         * to this Application's EventManager's dispatcher.
          *
          * @return void
          *
-         * @throws std::runtime_error
+         * @throws std::runtime_error if the Application was already initialized.
          */
-        virtual void init() {
+        virtual void init();
 
-            for (auto& ctrl: controller_) {
-                ctrl->init();
-            }
-        };
 
         /**
          * Set's the application's active window. Advises the
@@ -89,6 +113,7 @@ export namespace helios::app {
          */
         virtual void setCurrent(helios::window::Window& win) = 0;
 
+
         /**
          * Returns the currently focused window, or nullptr
          * if none exists / no window is being treated as current()
@@ -96,6 +121,7 @@ export namespace helios::app {
          * @return Window
          */
         [[nodiscard]] virtual helios::window::Window* current() const noexcept = 0;
+
 
         /**
          * Returns the InputManager owned by this Application.

@@ -10,7 +10,7 @@ import helios.math;
 namespace math = helios::math;
 
 struct test_data {
-    math::mat4 model;
+    math::mat4f model;
     glm::mat4 glm_model;
     std::array<float, 3> vector;
     float angle;
@@ -22,7 +22,7 @@ static test_data setup() {
     std::cout << "using seed: " << seed << std::endl;
     std::srand(seed);
 
-    auto model = math::mat4{1.0f};
+    auto model = math::mat4f{1.0f};
     auto glm_model = glm::mat4{1.0f};
     float* v = math::value_ptr(model);
     float* glm_v = glm::value_ptr(glm_model);
@@ -55,12 +55,12 @@ TEST(TransformTest, rotateModel) {
     test_data data = setup();
     float x = data.vector[0], y = data.vector[1], z = data.vector[2];
     float angle = data.angle;
-    math::mat4 model = data.model;
+    math::mat4f model = data.model;
     glm::mat4 glm_model = data.glm_model;
 
     // apply rotations
     auto axis = math::vec3(x, y, z);
-    const math::mat4 R = math::rotate(model, math::radians(angle), axis);
+    const math::mat4f R = math::rotate(model, math::radians(angle), axis);
     auto glm_axis = glm::normalize(glm::vec3(x, y, z));
     glm::mat4 glm_R = glm::rotate(glm_model, glm::radians(angle), glm_axis);
     const float* ptr = math::value_ptr(R);
@@ -77,12 +77,12 @@ TEST(TransformTest, translateModel) {
     // init data
     test_data data = setup();
     float x = data.vector[0], y = data.vector[1], z = data.vector[2];
-    math::mat4 model = data.model;
+    math::mat4f model = data.model;
     glm::mat4 glm_model = data.glm_model;
 
     // apply translation
     auto axis = math::vec3(x, y, z);
-    const math::mat4 T = math::translate(model, axis);
+    const math::mat4f T = math::translate(model, axis);
 
     auto glm_axis = glm::vec3(x, y, z);
     glm::mat4 glm_T = glm::translate(glm_model, glm_axis);
@@ -100,12 +100,12 @@ TEST(TransformTest, scaleModel_vec3) {
     // init data
     test_data data = setup();
     float x = data.vector[0], y = data.vector[1], z = data.vector[2];
-    math::mat4 model = data.model;
+    math::mat4f model = data.model;
     glm::mat4 glm_model = data.glm_model;
 
     // apply translation
     auto axis = math::vec3(x, y, z);
-    const math::mat4 S = math::scale(model, axis);
+    const math::mat4f S = math::scale(model, axis);
 
     auto glm_axis = glm::vec3(x, y, z);
     glm::mat4 glm_S = glm::scale(glm_model, glm_axis);
@@ -123,12 +123,12 @@ TEST(TransformTest, scaleModel_float) {
     // init data
     test_data data = setup();
     float x = data.vector[0];
-    math::mat4 model = data.model;
+    math::mat4f model = data.model;
     glm::mat4 glm_model = data.glm_model;
 
     // apply translation
     const float scale_by = x;
-    const math::mat4 S = math::scale(model, scale_by);
+    const math::mat4f S = math::scale(model, scale_by);
 
     auto glm_axis = glm::vec3(scale_by, scale_by, scale_by);
     glm::mat4 glm_S = glm::scale(glm_model, glm_axis);

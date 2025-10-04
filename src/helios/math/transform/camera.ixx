@@ -30,6 +30,6 @@ export namespace helios::math {
      * @param up
      * @return
      */
-    mat4 lookAt(const vec3f& eye, const vec3f& center, const vec3f& up) noexcept;
+    mat4f lookAt(const vec3f& eye, const vec3f& center, const vec3f& up) noexcept;
 
 }

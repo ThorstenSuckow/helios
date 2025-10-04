@@ -12,7 +12,7 @@ export namespace helios::window {
         int width{800};
         int height{600};
         std::string title{"helios - Window"};
-        math::vec4 viewport{0,0, 800, 600};
+        math::vec4i viewport{0,0, 800, 600};
         virtual ~WindowConfig() = default;
     };
 

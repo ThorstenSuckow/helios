@@ -10,9 +10,9 @@ glm::vec3 glm_vec_up{4, 5, 6};
 glm::vec3 glm_vec_center{7, 8, 9};
 
 
-helios::math::vec3 vec_eye{1, 2, 3};
-helios::math::vec3 vec_up{4, 5, 6};
-helios::math::vec3 vec_center{7, 8, 9};
+helios::math::vec3f vec_eye{1, 2, 3};
+helios::math::vec3f vec_up{4, 5, 6};
+helios::math::vec3f vec_center{7, 8, 9};
 
 /**
  * lookAt

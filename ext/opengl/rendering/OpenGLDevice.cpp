@@ -38,7 +38,7 @@ namespace helios::ext::opengl::rendering {
         glClear(GL_COLOR_BUFFER_BIT);
     }
 
-    void OpenGLDevice::clearColor(const math::vec4& color) const  noexcept {
+    void OpenGLDevice::clearColor(const math::vec4f& color) const  noexcept {
         glClearColor(color[0], color[1], color[2], color[3]);
     }
 

@@ -7,8 +7,8 @@ import helios.math;
 glm::vec3 glm_vec_a{1, 2, 3};
 glm::vec3 glm_vec_b{4, 5, 6};
 
-helios::math::vec3 vec_a{1, 2, 3};
-helios::math::vec3 vec_b{4, 5, 6};
+helios::math::vec3f vec_a{1, 2, 3};
+helios::math::vec3f vec_b{4, 5, 6};
 
 
 /**
@@ -16,7 +16,7 @@ helios::math::vec3 vec_b{4, 5, 6};
  */
 static void BM_vec3Constructor(benchmark::State& state) {
     for (auto _ : state) {
-        benchmark::DoNotOptimize(helios::math::vec3());
+        benchmark::DoNotOptimize(helios::math::vec3f());
     }
 }
 BENCHMARK(BM_vec3Constructor)->UseRealTime();

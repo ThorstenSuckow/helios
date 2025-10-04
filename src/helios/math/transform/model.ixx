@@ -16,7 +16,7 @@ export namespace helios::math {
      * @param axis
      * @return
      */
-    mat4 rotate(const mat4& model, float radians, const vec3& axis) noexcept;
+    mat4 rotate(const mat4& model, float radians, const vec3f& axis) noexcept;
 
     /**
      * Creates an affine transformation matrix M' = M * T by "baking" the translation part into the model
@@ -28,7 +28,7 @@ export namespace helios::math {
      * @param v
      * @return
      */
-     constexpr mat4 translate(const mat4& model, const vec3& v) noexcept {
+     constexpr mat4 translate(const mat4& model, const vec3f& v) noexcept {
          mat4 t = model;
          t(0, 3) += t(0,0) * v[0] + t(0, 1) * v[1] + t(0, 2) * v[2];
          t(1, 3) += t(1,0) * v[0] + t(1, 1) * v[1] + t(1, 2) * v[2];
@@ -46,7 +46,7 @@ export namespace helios::math {
       * @param v
       * @return
       */
-    constexpr mat4 scale(const mat4& model, const vec3& v) noexcept {
+    constexpr mat4 scale(const mat4& model, const vec3f& v) noexcept {
         mat4 t = model;
 
         t(0, 0) *= v[0]; t(0, 1) *= v[1]; t(0, 2) *= v[2];

@@ -13,8 +13,8 @@ export namespace helios::rendering {
      * @see [Vri20, pp. 160]
      */
     struct Vertex {
-        math::vec3 position;
-        math::vec3 normal = {0.0f, 0.0f, 0.0f};;
+        math::vec3f position;
+        math::vec3f normal = {0.0f, 0.0f, 0.0f};;
         math::vec2f texCoords = {0.0f, 0.0f};;
     };
 }

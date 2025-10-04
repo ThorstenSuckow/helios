@@ -1,6 +1,7 @@
 module;
 
 #include <memory>
+#include <stdexcept>
 
 module helios.app.Application;
 
@@ -22,9 +23,23 @@ namespace helios::app {
     {
     };
 
-    Application& Application::addController(std::unique_ptr<helios::app::controller::Controller> controller) {
-        controller->subscribeTo(eventManager_->dispatcher());
-        controller_.push_back(std::move(controller));
-        return *this;
+    void Application::init () {
+        if (initialized_) {
+            throw std::runtime_error("Application was already initialized.");
+        }
+        for (auto& ctrl: controllers_) {
+            if (ctrl->init()) {
+                ctrl->subscribeTo(eventManager_->dispatcher());
+            }
+        }
+
+        initialized_ = true;
+    }
+
+    void Application::addController(std::unique_ptr<helios::app::controller::Controller> controller) {
+        if (initialized_) {
+            throw std::runtime_error("Application was already initialized.");
+        }
+        controllers_.push_back(std::move(controller));
     }
 }

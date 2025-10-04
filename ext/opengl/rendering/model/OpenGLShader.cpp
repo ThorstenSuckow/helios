@@ -5,24 +5,23 @@ module;
 
 module helios.ext.opengl.rendering.model.OpenGLShader;
 
-
 import helios.rendering.model;
-import helios.util.IOUtil;
+import helios.util.io;
 
 using namespace helios::rendering::model;
-using namespace helios::util;
+using namespace helios::util::io;
 
 namespace helios::ext::opengl::rendering::model {
 
 
     OpenGLShader::OpenGLShader(
         const std::string& vertexShaderPath,
-        const std::string& fragmentShaderPath) :
-        vertexShaderPath_(vertexShaderPath),
-        fragmentShaderPath_(fragmentShaderPath) {
+        const std::string& fragmentShaderPath,
+        const StringFileReader& stringFileReader
+    ) {
 
         try{
-            load();
+            load(vertexShaderPath, fragmentShaderPath, stringFileReader);
             compile();
         } catch (std::runtime_error& e) {
             logger_.error("Could not initialize shader");
@@ -31,10 +30,14 @@ namespace helios::ext::opengl::rendering::model {
     }
 
 
-    void OpenGLShader::load() {
-
-        if (!IOUtil::readInto(fragmentShaderPath_, fragmentShaderSource_) ||
-            !IOUtil::readInto(vertexShaderPath_, vertexShaderSource_)) {
+    void OpenGLShader::load(
+        const std::string& vertexShaderPath,
+        const std::string& fragmentShaderPath,
+        const StringFileReader& stringFileReader)
+    {
+        logger_.info(std::format("Loading shader from {0}, {1}", vertexShaderPath, fragmentShaderPath));
+        if (!stringFileReader.readInto(fragmentShaderPath, fragmentShaderSource_) ||
+            !stringFileReader.readInto(vertexShaderPath, vertexShaderSource_)) {
             logger_.error("Could not load shader");
             throw std::runtime_error("Could not load shader");
         }

@@ -6,6 +6,8 @@ export module helios.ext.opengl.rendering.model.OpenGLShader;
 
 import helios.rendering.model.Shader;
 
+import helios.util.io.StringFileReader;
+
 export namespace helios::ext::opengl::rendering::model {
 
     class OpenGLShader : public helios::rendering::model::Shader {
@@ -31,7 +33,11 @@ export namespace helios::ext::opengl::rendering::model {
          *
          * @throws if loading the specified files failed.
          */
-        void load();
+        void load(
+            const std::string& vertexShaderPath,
+            const std::string& fragmentShaderPath,
+            const helios::util::io::StringFileReader& stringFileReader
+        );
 
 
         /**
@@ -46,9 +52,6 @@ export namespace helios::ext::opengl::rendering::model {
 
         protected:
             unsigned int progId_ = 0;
-            const std::string vertexShaderPath_;
-            const std::string fragmentShaderPath_;
-
 
     public:
 
@@ -57,12 +60,17 @@ export namespace helios::ext::opengl::rendering::model {
          * An instance of this class is guaranteed to have a progId_ != 0,
          * hence GLSL-files where successfully loaded and compiled, ready to be used.
          *
-         * @param vertexShaderPath
-         * @param fragmentShaderPath
+         * @param vertexShaderPath The path to the vertex shader.
+         * @param fragmentShaderPath The path to the fragment shader.
+         * @param stringFileReader The StringFileReader used for loading the shader source files.
          *
          * @throws if creating this shader failed.
          */
-        OpenGLShader(const std::string& vertexShaderPath,  const std::string& fragmentShaderPath);
+        OpenGLShader(
+            const std::string& vertexShaderPath,
+            const std::string& fragmentShaderPath,
+            const helios::util::io::StringFileReader& stringFileReader
+        );
 
 
         void use() const noexcept override;

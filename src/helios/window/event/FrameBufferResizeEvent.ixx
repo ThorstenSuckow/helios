@@ -43,7 +43,7 @@ export namespace helios::window::event {
          * @param height The new height of the framebuffer.
          */
         FrameBufferResizeEvent(
-            util::Guid sourceGuid, const int width, const int height
+            const util::Guid sourceGuid, const int width, const int height
         ) noexcept;
 
 
@@ -56,10 +56,8 @@ export namespace helios::window::event {
          * @param tag A `uint64_t` tag for identifying/categorizing the event.
          */
         FrameBufferResizeEvent(
-            util::Guid sourceGuid,
-            int width,
-            const int height,
-            const uint64_t tag
+            const util::Guid sourceGuid,
+            const int width, const int height, const uint64_t tag
         ) noexcept;
 
     };

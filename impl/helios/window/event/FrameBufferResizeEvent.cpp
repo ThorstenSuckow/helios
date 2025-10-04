@@ -13,7 +13,7 @@ using namespace helios::window::event;
 namespace helios::window::event {
 
     FrameBufferResizeEvent::FrameBufferResizeEvent(
-        util::Guid sourceGuid, const int width, const int height
+        const util::Guid sourceGuid, const int width, const int height
     ) noexcept :
     WindowEvent(sourceGuid),
     width(width),
@@ -22,7 +22,7 @@ namespace helios::window::event {
 
 
     FrameBufferResizeEvent::FrameBufferResizeEvent(
-        util::Guid sourceGuid, const int width, const int height, const uint64_t tag
+        const util::Guid sourceGuid, const int width, const int height, const uint64_t tag
     ) noexcept :
     WindowEvent(sourceGuid, tag),
     width(width),

@@ -14,6 +14,7 @@ import helios.input.types.Key;
 import helios.rendering.model.MaterialData;
 import helios.rendering.model.MeshData;
 import helios.rendering.asset.shape.basic.Cube;
+import helios.util.io.BasicStringFileReader;
 
 import helios.ext.opengl.rendering.model.OpenGLShader;
 import helios.ext.opengl.rendering.model.OpenGLMaterial;
@@ -26,6 +27,7 @@ using namespace helios::ext::opengl::rendering::model;
 using namespace helios::rendering::asset::shape::basic;
 using namespace helios::input::types;
 using namespace helios::ext::glfw::window;
+using namespace helios::util::io;
 
 int main() {
 
@@ -41,10 +43,13 @@ int main() {
     // get the InputManager
     helios::input::InputManager& inputManager = app->inputManager();
 
+    const auto basicStringFileReader = BasicStringFileReader();
+
     // model
     auto shader_ptr = std::make_shared<OpenGLShader>(
         "./resources/cube.vert",
-        "./resources/cube.frag"
+        "./resources/cube.frag",
+        basicStringFileReader
     );
     auto materialData_ptr = std::make_shared<MaterialData>(shader_ptr);
     auto material_ptr = std::make_unique<OpenGLMaterial>(materialData_ptr);
@@ -63,7 +68,7 @@ int main() {
 
         if (inputManager.isKeyPressed(Key::ESC)) {
             std::cout << "Key Pressed [ESC]" << std::endl;
-            std::ignore = win->setShouldClose(true);
+            win->setShouldClose(true);
         }
 
         app->renderingDevice().beginRenderPass();

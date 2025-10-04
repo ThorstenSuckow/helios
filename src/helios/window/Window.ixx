@@ -7,7 +7,10 @@ export module helios.window.Window;
 import helios.util.Guid;
 import helios.window.WindowConfig;
 import helios.math.types;
+import helios.util.log.Logger;
+import helios.util.log.LogManager;
 
+#define HELIOS_LOG_SCOPE "helios::window::Window"
 export namespace helios::window {
 
     class Window {
@@ -16,6 +19,13 @@ export namespace helios::window {
         util::Guid guid_;
 
     protected:
+
+        /**
+         * The const reference to the logger used with this Adapter.
+         */
+        const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().registerLogger(HELIOS_LOG_SCOPE);
+
+
         int width_;
         int height_;
         std::string title_;
@@ -35,7 +45,8 @@ export namespace helios::window {
          * Implementing APIs should consider this flag in each tick
          * to determine whether this window should be closed.
          */
-        [[nodiscard]] virtual Window& setShouldClose(bool close) = 0;
+        virtual void setShouldClose(bool close) = 0;
+
 
         /**
          * Returns the guid for this instance.
@@ -46,32 +57,37 @@ export namespace helios::window {
             return guid_;
         }
 
+
         /**
          * Shows the underlying native window.
          *
-         * @return
+         * @return true if showing the window succeeded, otherwise false.
          *
          * throws std::runtime_error if the window is already shown or
          * couldn't be created
          */
-        virtual Window& show() = 0;
+        virtual bool show() noexcept = 0;
+
 
         /**
          * Advise to swap front- and backbuffer.
          *
          * @return
          */
-        virtual Window& swapBuffers() = 0;
+        virtual void swapBuffers() const noexcept = 0;
+
 
         /**
          * Poll this window for window related events.
          * @return
          */
-        virtual Window& pollEvents() = 0;
+        virtual void pollEvents() const noexcept = 0;
+
 
         [[nodiscard]] int width() const noexcept {
             return width_;
         }
+
 
         [[nodiscard]] int height() const noexcept {
             return width_;

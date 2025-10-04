@@ -31,14 +31,13 @@ export namespace helios::math {
     public:
 
         /**
-         * Creates a new vec2 with its values initialized to (0, 0)-
+         * Creates a new vec2 with its values initialized to (0, 0)
          */
         constexpr vec2() noexcept : v{static_cast<T>(0), static_cast<T>(0)} {}
 
 
         /**
          * Constructs a new vec2 with the specified x, y components.
-         * Bounds checking is performed via `assert` in debug builds.
          *
          * @param x The value for the x component.
          * @param y The value for the y component.
@@ -61,7 +60,7 @@ export namespace helios::math {
 
 
         /**
-         * Provides read-wrote  access to the vector components.
+         * Provides read-write  access to the vector components.
          * Bounds checking is performed via `assert` in debug builds.
          *
          * @param i The index to query
@@ -75,8 +74,8 @@ export namespace helios::math {
 
     };
 
-    using vec2f      = vec2<float>;
-    using vec2double = vec2<double>;
-    using vec2i      = vec2<int>;
+    using vec2f = vec2<float>;
+    using vec2d = vec2<double>;
+    using vec2i = vec2<int>;
 
 }

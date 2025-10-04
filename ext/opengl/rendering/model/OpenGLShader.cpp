@@ -99,6 +99,9 @@ namespace helios::ext::opengl::rendering::model {
 
         vertexShaderSource_.clear();
         fragmentShaderSource_.clear();
+
+        logger_.info("Shader loaded and linked");
+
     }
 
 

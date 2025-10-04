@@ -26,7 +26,7 @@ namespace helios::ext::opengl::rendering {
         }
 
         logger_.info(std::format(
-            "OpenGL {0}.{1} loaded\n",
+            "OpenGL {0}.{1} loaded",
             GLAD_VERSION_MAJOR(gl_ver), GLAD_VERSION_MINOR(gl_ver))
         );
 

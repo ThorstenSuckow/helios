@@ -24,8 +24,13 @@ namespace helios::app {
     };
 
     void Application::init () {
+
+        logger_.info("Initializing application.");
+
         if (initialized_) {
-            throw std::runtime_error("Application was already initialized.");
+            std::string msg = "Application was already initialized.";
+            logger_.error(msg);
+            throw std::runtime_error(msg);
         }
         for (auto& ctrl: controllers_) {
             if (ctrl->init()) {
@@ -38,7 +43,9 @@ namespace helios::app {
 
     void Application::addController(std::unique_ptr<helios::app::controller::Controller> controller) {
         if (initialized_) {
-            throw std::runtime_error("Application was already initialized.");
+            std::string msg = "Application was already initialized.";
+            logger_.error(msg);
+            throw std::runtime_error(msg);
         }
         controllers_.push_back(std::move(controller));
     }

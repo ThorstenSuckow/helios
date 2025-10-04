@@ -24,19 +24,17 @@ export namespace helios::app::controller {
          * by the specified Dispatcher.
          *
          * @param dispatcher
-         *
-         * @return
          */
         virtual void subscribeTo(helios::event::Dispatcher& dispatcher) = 0;
 
         /**
          * Initializes this controller.
+         * The initialization state is defined by deriving classes.
          *
-         * Deriving controllers should make sure that they are only initialized once.
-         *
-         * @return
+         * @return bool true if the controller was successfully initialized and is
+         * in a valid state, otherwise false, signaling this controller should not be used further.
          */
-        virtual Controller& init() = 0;
+        virtual bool init() = 0;
     };
 
 

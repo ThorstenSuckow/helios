@@ -86,9 +86,9 @@ namespace helios::ext::glfw::app {
 
         auto const* tmp_cfg = dynamic_cast<GLFWWindowConfig const*>(&cfg);
         if (!tmp_cfg) {
-            throw std::invalid_argument(
-                "GLFWApplication requires GLFWWindowConfig"
-            );
+            std::string msg = "GLFWApplication requires GLFWWindowConfig";
+            logger_.error(msg);
+            throw std::invalid_argument(msg);
         }
 
         return createWindow(*tmp_cfg);

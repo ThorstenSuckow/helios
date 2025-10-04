@@ -12,7 +12,7 @@ using namespace helios::util;
 
 namespace helios::ext::opengl::rendering {
 
-    void OpenGLDevice::init() noexcept {
+    void OpenGLDevice::init() {
 
         if (initialized_) {
             return ;
@@ -25,7 +25,7 @@ namespace helios::ext::opengl::rendering {
             throw std::runtime_error("Failed to load OpenGL");
         }
 
-        logger_.debug(std::format(
+        logger_.info(std::format(
             "OpenGL {0}.{1} loaded\n",
             GLAD_VERSION_MAJOR(gl_ver), GLAD_VERSION_MINOR(gl_ver))
         );

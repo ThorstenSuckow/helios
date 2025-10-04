@@ -26,34 +26,34 @@ export namespace helios::ext::glfw::window {
             Window(cfg),
             frameBufferSizeCallback_(cfg.frameBufferSizeCallback){};
 
-            /********************
-             * Overrides
-             *******************/
-            [[nodiscard]] GLFWWindow& show() override {
+        /********************
+         * Overrides
+         *******************/
+        bool show() noexcept override {
             if (nativeHandle_ != nullptr) {
-                throw std::runtime_error("Window already shown.");
+                logger_.warn("Window already shown.");
+                return true;
             }
 
             nativeHandle_ = glfwCreateWindow(
                 width_, height_, title_.c_str(), nullptr, nullptr);
 
             if (nativeHandle_ == nullptr) {
-                throw std::runtime_error("Failed to creat GLFW window");
+                logger_.error("Failed to creat GLFW window");
+                return false;
             }
 
-            return (*this);
+            return true;
         }
 
 
-        GLFWWindow& swapBuffers() override {
+        void swapBuffers() const noexcept override {
             glfwSwapBuffers(nativeHandle_);
-            return *this;
         }
 
 
-        GLFWWindow& pollEvents() override {
+        void pollEvents() const noexcept override {
             glfwPollEvents();
-            return *this;
         }
 
 
@@ -61,9 +61,8 @@ export namespace helios::ext::glfw::window {
             destroy();
         }
 
-        [[nodiscard]] Window& setShouldClose(bool close) override {
+        void setShouldClose(bool close) override {
             glfwSetWindowShouldClose(nativeHandle_, close);
-            return dynamic_cast<GLFWWindow&>(*this);
         }
 
         [[nodiscard]] bool shouldClose() const override {

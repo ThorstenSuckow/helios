@@ -75,7 +75,7 @@ export namespace helios::util::log {
         /**
          * Returns a const reference to the logger instance for the specified scope.
          * Will fall back to the default logger if the scope was not registered yet.
-         * This method is thread safe for map look-ups..
+         * This method is thread safe for map look-ups.
          *
          * @param scope The scope of the requested logger.
          *

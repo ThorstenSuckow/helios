@@ -12,7 +12,7 @@ import helios.util.log.LogManager;
 namespace helios::util::log {
 
 
-    LogManager::LogManager() : defaultLogger_(std::make_unique<Logger>()) {}
+    LogManager::LogManager() : defaultLogger_(std::make_unique<Logger>("default")) {}
 
 
     LogManager& LogManager::getInstance() noexcept {
@@ -48,7 +48,7 @@ namespace helios::util::log {
             return *(log->second);
         }
 
-        auto logger = std::make_unique<Logger>();
+        auto logger = std::make_unique<Logger>(scope);
         loggers_[scope] = std::move(logger);
         return *loggers_[scope];
     }

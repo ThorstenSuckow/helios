@@ -6,7 +6,7 @@ namespace math = helios::math;
 
 TEST(Mat4Tests, defaultConstructor) {
 
-    math::mat4 M {};
+    math::mat4f M {};
 
     const float* m = math::value_ptr(M);
 
@@ -18,7 +18,7 @@ TEST(Mat4Tests, defaultConstructor) {
 
 TEST(Mat4Tests, accessor) {
 
-    math::mat4 M{
+    math::mat4f M{
         0, 1, 2, 3,
         4, 5, 6, 7,
         8, 9, 10, 11,
@@ -37,21 +37,21 @@ TEST(Mat4Tests, accessor) {
 }
 
 TEST(Mat4Tests, multiply) {
-    math::mat4 M{
+    math::mat4f M{
         0, 1, 2, 3,
         4, 5, 6, 7,
         8, 9, 10, 11,
         12, 13, 14, 15
     };
 
-    math::mat4 A{
+    math::mat4f A{
         0, 1, 2, 3,
         4, 5, 6, 7,
         8, 9, 10, 11,
         12, 13, 14, 15
     };
 
-    math::mat4 B = A * M;
+    math::mat4f B = A * M;
 
     for (int row = 0; row < 4; row++) {
         for (int col = 0; col < 4; col++) {

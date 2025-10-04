@@ -10,7 +10,7 @@ import helios.math.types;
 
 namespace helios::math::transform {
 
-    constexpr mat4 make_rodrigues_rotation_matrix(
+    constexpr mat4f make_rodrigues_rotation_matrix(
         const float cos_theta,
         const float sin_theta,
         const vec3f& normalized_axis
@@ -23,7 +23,7 @@ namespace helios::math::transform {
             z = normalized_axis[2];
 
 
-        return mat4{
+        return mat4f{
             cos_theta + x * x * t,
             x * y *t + z * sin_theta,
             x * z * t - y * sin_theta,
@@ -49,7 +49,7 @@ namespace helios::math::transform {
 namespace helios::math {
 
 
-    mat4 rotate(const mat4& model, const float radians, const vec3f& axis) noexcept {
+    mat4f rotate(const mat4f& model, const float radians, const vec3f& axis) noexcept {
 
         return model * transform::make_rodrigues_rotation_matrix(
             std::cos(radians),

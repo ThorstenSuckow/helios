@@ -16,7 +16,7 @@ export namespace helios::math {
      * @param axis
      * @return
      */
-    mat4 rotate(const mat4& model, float radians, const vec3f& axis) noexcept;
+    mat4f rotate(const mat4f& model, float radians, const vec3f& axis) noexcept;
 
     /**
      * Creates an affine transformation matrix M' = M * T by "baking" the translation part into the model
@@ -28,7 +28,7 @@ export namespace helios::math {
      * @param v
      * @return
      */
-     constexpr mat4 translate(const mat4& model, const vec3f& v) noexcept {
+     constexpr mat4f translate(const mat4f& model, const vec3f& v) noexcept {
          mat4 t = model;
          t(0, 3) += t(0,0) * v[0] + t(0, 1) * v[1] + t(0, 2) * v[2];
          t(1, 3) += t(1,0) * v[0] + t(1, 1) * v[1] + t(1, 2) * v[2];
@@ -46,8 +46,8 @@ export namespace helios::math {
       * @param v
       * @return
       */
-    constexpr mat4 scale(const mat4& model, const vec3f& v) noexcept {
-        mat4 t = model;
+    constexpr mat4f scale(const mat4f& model, const vec3f& v) noexcept {
+        mat4f t = model;
 
         t(0, 0) *= v[0]; t(0, 1) *= v[1]; t(0, 2) *= v[2];
         t(1, 0) *= v[0]; t(1, 1) *= v[1]; t(1, 2) *= v[2];
@@ -57,7 +57,7 @@ export namespace helios::math {
     }
 
     /**
-     * Creates an affine transformation matrix S' = M * S by ""baking" the scaling part into
+     * Creates an affine transformation matrix S' = M * S by "baking" the scaling part into
      * the model matrix.
      * Any operation S' * v will make sure that v is scaled in local space, then transformed into world
      * space.
@@ -66,8 +66,8 @@ export namespace helios::math {
      * @param scale_by
      * @return
      */
-    constexpr mat4 scale(const mat4& model, const float scale_by) noexcept {
-         mat4 t = model;
+    constexpr mat4f scale(const mat4f& model, const float scale_by) noexcept {
+         mat4f t = model;
 
         t(0, 0) *= scale_by; t(0, 1) *= scale_by; t(0, 2) *= scale_by;
         t(1, 0) *= scale_by; t(1, 1) *= scale_by; t(1, 2) *= scale_by;

@@ -30,14 +30,6 @@ namespace helios::event {
     };
 
 
-    template<typename EventType>
-    EventManager& EventManager::subscribe(std::function<void(const EventType&)> callback) {
-        dispatcher_->subscribe(callback);
-
-        return *this;
-    }
-
-
     [[nodiscard]] Dispatcher& EventManager::dispatcher() const noexcept {
         return *dispatcher_;
     }

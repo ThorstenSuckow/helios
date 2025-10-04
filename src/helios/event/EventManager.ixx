@@ -145,7 +145,11 @@ export namespace helios::event {
          * @return EventManager
          */
         template<typename EventType>
-        EventManager& subscribe(std::function<void(const EventType&)> callback);
+        EventManager& subscribe(std::function<void(const EventType&)> callback) {
+            dispatcher_->subscribe(callback);
+
+            return *this;
+        }
 
 
         /**

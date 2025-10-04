@@ -6,8 +6,8 @@ import helios.math;
 namespace math = helios::math;
 
  struct test_data {
-    math::vec3 vec_a;
-    math::vec3 vec_b;
+    math::vec3f vec_a;
+    math::vec3f vec_b;
 };
 
 static test_data setup() {
@@ -17,12 +17,12 @@ static test_data setup() {
     std::srand(seed);
 
     return test_data{
-        .vec_a = math::vec3{
+        .vec_a = math::vec3f{
             static_cast<float>(std::rand()),
             static_cast<float>(std::rand()),
             static_cast<float>(std::rand())
         },
-        .vec_b = math::vec3{
+        .vec_b = math::vec3f{
             static_cast<float>(std::rand()),
             static_cast<float>(std::rand()),
             static_cast<float>(std::rand())
@@ -33,7 +33,7 @@ static test_data setup() {
 
 TEST(Vec3Tests, accessor) {
 
-    math::vec3 v = math::vec3();
+    math::vec3f v = math::vec3f();
 
     EXPECT_FLOAT_EQ(v[0], 0.0f);
     EXPECT_FLOAT_EQ(v[1], 0.0f);
@@ -58,13 +58,13 @@ TEST(Vec3Tests, normalize) {
 
     // norm
     EXPECT_FLOAT_EQ(
-        math::vec3(1, 2, 3 ).norm(),
+        math::vec3f(1, 2, 3 ).norm(),
         std::sqrt( std::pow(1, 2) +  std::pow(2, 2) + std::pow(3, 2) )
     );
 
     // normalize
-    math::vec3 v = (math::vec3(1, 2, 3)).normalize();
-    const float norm = math::vec3( 1, 2, 3 ).norm();
+    math::vec3f v = (math::vec3f(1, 2, 3)).normalize();
+    const float norm = math::vec3f( 1, 2, 3 ).norm();
     EXPECT_FLOAT_EQ(v[0], 1 / norm);
     EXPECT_FLOAT_EQ(v[1], 2 / norm);
     EXPECT_FLOAT_EQ(v[2], 3 / norm);
@@ -83,7 +83,7 @@ TEST(CoreTest, cross) {
 
 TEST(CoreTest, subtraction) {
 
-    auto vec_c = math::vec3{1.0f, 2.0f, 3.0f} - math::vec3{4.0f, 4.0f, 4.0f};
+    auto vec_c = math::vec3f{1.0f, 2.0f, 3.0f} - math::vec3f{4.0f, 4.0f, 4.0f};
 
     EXPECT_FLOAT_EQ(vec_c[0], -3.0f);
     EXPECT_FLOAT_EQ(vec_c[1], -2.0f);

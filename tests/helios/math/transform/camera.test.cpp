@@ -11,9 +11,9 @@ import helios.math;
 namespace math = helios::math;
 
 struct test_data {
-    math::vec3 up;
-    math::vec3 eye;
-    math::vec3 center;
+    math::vec3f up;
+    math::vec3f eye;
+    math::vec3f center;
 
     glm::vec3 glm_up;
     glm::vec3 glm_eye;
@@ -37,9 +37,9 @@ static test_data setup() {
     float z3 = static_cast<float>(std::rand());
 
     return test_data{
-        .up = math::vec3{x1, y1, z1},
-        .eye = math::vec3{x2, y2, z2},
-        .center = math::vec3{x3, y3, z3},
+        .up = math::vec3f{x1, y1, z1},
+        .eye = math::vec3f{x2, y2, z2},
+        .center = math::vec3f{x3, y3, z3},
 
         .glm_up = glm::vec3{x1, y1, z1},
         .glm_eye = glm::vec3{x2, y2, z2},
@@ -53,9 +53,9 @@ TEST(CameraTest, lookAt) {
     // init data
     test_data data = setup();
 
-    math::vec3 up = data.up;
-    math::vec3 eye = data.eye;
-    math::vec3 center = data.center;
+    math::vec3f up = data.up;
+    math::vec3f eye = data.eye;
+    math::vec3f center = data.center;
 
     glm::vec3 glm_up = data.glm_up;
     glm::vec3 glm_eye = data.glm_eye;

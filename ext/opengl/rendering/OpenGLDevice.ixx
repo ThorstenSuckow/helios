@@ -36,7 +36,7 @@ export namespace helios::ext::opengl::rendering {
          *
          * @see clear
          */
-        void clearColor(const math::vec4& color) const noexcept;
+        void clearColor(const math::vec4f& color) const noexcept;
 
     };
 }

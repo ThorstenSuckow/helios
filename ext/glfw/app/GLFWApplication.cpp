@@ -60,7 +60,7 @@ namespace helios::ext::glfw::app {
             );
 
             // 3. set the viewport for the rendering device
-            const math::vec4& viewport = glfw_window->viewport();
+            const math::vec4i& viewport = glfw_window->viewport();
             renderingDevice_->setViewport(viewport[0], viewport[1],
                 viewport[2], viewport[3]
             );

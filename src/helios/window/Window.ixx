@@ -29,7 +29,7 @@ export namespace helios::window {
         int width_;
         int height_;
         std::string title_;
-        math::vec4 viewport_;
+        math::vec4i viewport_;
 
     public:
         explicit Window(const WindowConfig& cfg) :
@@ -98,7 +98,7 @@ export namespace helios::window {
          *
          * @return
          */
-        [[nodiscard]] const math::vec4& viewport() const noexcept {
+        [[nodiscard]] const math::vec4i& viewport() const noexcept {
             return viewport_;
         }
 

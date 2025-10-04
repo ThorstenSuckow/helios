@@ -13,7 +13,7 @@ namespace helios::math::transform {
     constexpr mat4 make_rodrigues_rotation_matrix(
         const float cos_theta,
         const float sin_theta,
-        const vec3& normalized_axis
+        const vec3f& normalized_axis
     ) noexcept {
 
         const float t = 1.0f - cos_theta;
@@ -49,7 +49,7 @@ namespace helios::math::transform {
 namespace helios::math {
 
 
-    mat4 rotate(const mat4& model, const float radians, const vec3& axis) noexcept {
+    mat4 rotate(const mat4& model, const float radians, const vec3f& axis) noexcept {
 
         return model * transform::make_rodrigues_rotation_matrix(
             std::cos(radians),

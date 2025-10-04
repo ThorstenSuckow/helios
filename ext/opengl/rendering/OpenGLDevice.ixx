@@ -15,7 +15,7 @@ export namespace helios::ext::opengl::rendering {
     public:
         ~OpenGLDevice() override = default;
 
-        void init() noexcept override;
+        void init() override;
 
         void beginRenderPass() const noexcept override;
 

@@ -39,6 +39,10 @@ export namespace helios::app::controller {
          */
         void subscribeTo(helios::event::Dispatcher& dispatcher) override;
 
+        /**
+         * Initializes this BasicWindowRenderingController.
+         */
+        bool init() override;
     };
 
 

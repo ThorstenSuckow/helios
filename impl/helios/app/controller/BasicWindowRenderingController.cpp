@@ -20,7 +20,6 @@ namespace helios::app::controller {
         std::cout << e.width << " " << e.height << std::endl;
     }
 
-
     void BasicWindowRenderingController::subscribeTo(helios::event::Dispatcher& dispatcher) {
 
         dispatcher.subscribe<helios::window::event::FrameBufferResizeEvent>(
@@ -29,6 +28,10 @@ namespace helios::app::controller {
             }
         );
     };
+
+    bool BasicWindowRenderingController::init() {
+        return true;
+    }
 
 };
 

@@ -14,18 +14,51 @@ export namespace helios::util::log {
      */
     class Logger {
 
+    private:
+        const std::string scope_ = "default";
+
     public:
+        /**
+         * Creates a new Logger, tagged with specific scope.
+         *
+         * @param scope
+         */
+        explicit Logger(std::string scope) :
+            scope_(std::move(scope)) {}
+
+        /**
+         * Couts a warning.
+         * @param msg
+         */
         void inline warn(const std::string& msg) const noexcept{
-            std::cout << "[WARN] " << msg << std::endl;
+            std::cout << "[WARN]" << "[" << scope_ << "] " << msg << std::endl;
         }
+
+
+        /**
+         * Couts a msg.
+         * @param msg
+         */
         void inline debug(const std::string& msg) const noexcept {
-            std::cout << "[DEBUG] " << msg << std::endl;
+            std::cout << "[DEBUG]" << "[" << scope_ << "] " << msg << std::endl;
         }
+
+
+        /**
+         * Couts an info.
+         * @param msg
+         */
         void inline info(const std::string& msg)  const noexcept{
-            std::cout << "[INFO] " << msg << std::endl;
+            std::cout << "[INFO]" << "[" << scope_ << "] " << msg << std::endl;
         }
+
+
+        /**
+         * Couts an error.
+         * @param msg
+         */
         void inline error(const std::string& msg) const noexcept {
-            std::cout << "[ERROR] " << msg << std::endl;
+            std::cout << "[ERROR]" << "[" << scope_ << "] " << msg << std::endl;
         }
 
     };

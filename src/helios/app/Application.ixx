@@ -11,7 +11,10 @@ import helios.input.InputManager;
 import helios.event.EventManager;
 import helios.window.Window;
 import helios.window.WindowConfig;
+import helios.util.log.Logger;
+import helios.util.log.LogManager;
 
+#define HELIOS_LOG_SCOPE "helios::app::Application"
 export namespace helios::app {
 
     /**
@@ -27,6 +30,11 @@ export namespace helios::app {
     class Application {
 
     protected:
+        /**
+         * The const reference to the logger used with this Adapter.
+         */
+        const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().registerLogger(HELIOS_LOG_SCOPE);
+
         bool initialized_ = false;
 
         std::unique_ptr<helios::rendering::RenderingDevice> renderingDevice_;

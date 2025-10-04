@@ -23,10 +23,10 @@ export namespace helios::input {
     class InputAdapter {
 
         protected:
-            /**
-             * The const reference to the logger used with this Adapter.
-             */
-            const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().logger(HELIOS_LOG_SCOPE);
+        /**
+         * The const reference to the logger used with this Adapter.
+         */
+        const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().registerLogger(HELIOS_LOG_SCOPE);
 
         public:
 

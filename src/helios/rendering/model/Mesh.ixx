@@ -74,6 +74,14 @@ export namespace helios::rendering::model {
          */
         [[nodiscard]] const MeshData& meshData() const noexcept;
 
+
+        /**
+         * Returns the index count of the underlying MeshData.
+         *
+         * @return The number of indices handled by the raw MeshData.
+         */
+        [[nodiscard]] const int indexCount() const noexcept;
+
     };
 
 }

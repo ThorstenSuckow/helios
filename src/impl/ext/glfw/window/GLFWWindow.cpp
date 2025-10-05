@@ -30,6 +30,8 @@ namespace helios::ext::glfw::window {
             return true;
         }
 
+
+        logger_.info("Calling glfwCreateWindow().");
         nativeHandle_ = glfwCreateWindow(
             width_, height_, title_.c_str(), nullptr, nullptr);
 

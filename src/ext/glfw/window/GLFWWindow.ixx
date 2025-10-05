@@ -127,6 +127,10 @@ export namespace helios::ext::glfw::window {
         /**
          * Sets the callback function for framebuffer resize events.
          *
+         * Implementing APIs should consider this method as "package protected": It's purpose is
+         * to register a function that delegates the native event into the Application's
+         * EventQueue.
+         *
          * @param framebufferSizeCallback The `GLFWframebuffersizefun` to set.
          */
         void setFrameBufferSizeCallback(GLFWframebuffersizefun framebufferSizeCallback) noexcept;

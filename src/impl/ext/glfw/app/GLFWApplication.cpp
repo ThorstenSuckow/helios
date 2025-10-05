@@ -1,10 +1,10 @@
 module;
 
 #include <glad/gl.h>
-#include <GLFW/glfw3.h>
+#include <glfw/glfw3.h>
 #include <memory>
 #include <stdexcept>
-
+#include <iostream>
 
 module helios.ext.glfw.app.GLFWApplication;
 
@@ -18,15 +18,29 @@ using namespace helios::ext::glfw::window;
 
 namespace helios::ext::glfw::app {
 
-    GLFWWindow& GLFWApplication::createWindow(const GLFWWindowConfig& cfg) {
-        if (!window_) {
-            window_ = std::make_unique<GLFWWindow>(cfg);
-        } else {
-            throw std::runtime_error("A window was already created for this app instance.");
-        }
 
-        if (const auto glfw_window  = dynamic_cast<GLFWWindow*>(window_.get())) {
-            std::ignore = glfw_window->show();
+    GLFWApplication::GLFWApplication(
+               std::unique_ptr<helios::rendering::RenderingDevice> renderingDevice,
+               std::unique_ptr<helios::input::InputManager> inputManager,
+               std::unique_ptr<helios::event::EventManager> eventManager):
+               Application(
+                   std::move(renderingDevice),
+                   std::move(inputManager),
+                   std::move(eventManager)
+                   ),
+                    glfwRaiiGuard_(){}
+
+
+    GLFWWindow& GLFWApplication::createWindow(const GLFWWindowConfig& cfg) {
+
+        auto window = std::make_unique<GLFWWindow>(cfg);
+
+        if (const auto glfw_window  = window.get()) {
+            if (!glfw_window->show()) {
+                const std::string msg = "Cannot show window.";
+                logger_.error(msg);
+                throw std::runtime_error(msg);
+            }
 
             // the first window inits the rendering device in this case, since glad requires
             // context created by glfw window
@@ -41,14 +55,23 @@ namespace helios::ext::glfw::app {
             throw std::runtime_error("Cannot create: Missing GLFWWindow.");
         }
 
-        return dynamic_cast<GLFWWindow&>(*window_);
+        windowList_.emplace_back(std::move(window));
+
+        return *static_cast<GLFWWindow*>(windowList_.back().get());
     }
 
 
     void GLFWApplication::setCurrent(Window& win) {
 
+        if (!hasWindow(win)) {
+            const std::string msg = "Window is not owned by this Application.";
+            logger_.error(msg);
+            throw std::runtime_error(msg);
+        }
+
         if (const auto glfw_window  = dynamic_cast<GLFWWindow*>(&win)) {
 
+            logger_.info(std::format("Setting Window {0} as current", win.guid().value()));
             // 1. makes the context of the specified window current
             //    for the calling thread (@todo extract?)
             glfwMakeContextCurrent(glfw_window->nativeHandle());
@@ -66,7 +89,9 @@ namespace helios::ext::glfw::app {
             );
 
         } else {
-            throw std::runtime_error("Cannot init: Missing GLFWWindow.");
+            const std::string msg = "Cannot init: Missing GLFWWindow.";
+            logger_.error(msg);
+            throw std::runtime_error(msg);
         }
 
         inputManager_->observe(win);
@@ -80,9 +105,6 @@ namespace helios::ext::glfw::app {
 
 
     GLFWWindow& GLFWApplication::createWindow(const WindowConfig& cfg) {
-        if (window_ != nullptr) {
-            return dynamic_cast<GLFWWindow&>(*window_);
-        }
 
         auto const* tmp_cfg = dynamic_cast<GLFWWindowConfig const*>(&cfg);
         if (!tmp_cfg) {

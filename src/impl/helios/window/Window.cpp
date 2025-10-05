@@ -39,5 +39,8 @@ namespace helios::window {
         return viewport_;
     }
 
+    bool Window::operator==(const Window& win) const noexcept {
+        return guid_ == win.guid();
+    };
 
 };

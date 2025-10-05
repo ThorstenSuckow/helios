@@ -148,6 +148,7 @@ export namespace helios::window {
          */
         [[nodiscard]] int height() const noexcept;
 
+
         /**
          * Returns the viewport configuration used with this window,
          * encoded in a `vec4i`, encoding x, y, width, height.
@@ -157,6 +158,16 @@ export namespace helios::window {
         [[nodiscard]] const math::vec4i& viewport() const noexcept;
 
 
+        /**
+         * Compares two window instances for equality.
+         * This implementation treats two windows as equal if their
+         * guids are of the same value.
+         *
+         * @param win The window that should be compared for equality with this window.
+         *
+         * @return true if both Windows are treated as equal, otherwise false.
+         */
+        virtual bool operator==(const Window& win) const noexcept;
     };
 
 }

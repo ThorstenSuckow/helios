@@ -66,7 +66,7 @@ export namespace helios::rendering {
          * @param height height of the viewport, in pixels
          * @return
          */
-        virtual void setViewport(int x, int y, int width, int height) const noexcept = 0;
+        virtual void setViewport(const int x, const int y, const int width, const int height) const noexcept = 0;
 
 
         /**

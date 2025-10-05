@@ -23,6 +23,17 @@ namespace helios::app {
     {
     };
 
+
+    [[nodiscard]] bool Application::hasWindow(const helios::window::Window& win) const noexcept {
+        auto it = std::find_if(
+       windowList_.begin(),
+       windowList_.end(),
+       [&win](const auto& window){return *window == win;});
+
+        return it != windowList_.end();
+    }
+
+
     void Application::init () {
 
         logger_.info("Initializing application.");

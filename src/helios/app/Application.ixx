@@ -2,6 +2,7 @@ module;
 
 #include <memory>
 #include <vector>
+#include <list>
 
 export module helios.app.Application;
 
@@ -40,7 +41,11 @@ export namespace helios::app {
         std::unique_ptr<helios::rendering::RenderingDevice> renderingDevice_;
         std::unique_ptr<input::InputManager> inputManager_;
         std::unique_ptr<event::EventManager> eventManager_;
-        std::unique_ptr<helios::window::Window> window_;
+
+        /**
+         * A list containing all Windows managed by this Application.
+         */
+        std::list<std::unique_ptr<helios::window::Window>> windowList_;
 
         std::vector<std::unique_ptr<helios::app::controller::Controller>> controllers_;
 
@@ -89,7 +94,7 @@ export namespace helios::app {
          * Creates the container for the native window and performs all
          * necessary steps to properly initialize it.
          *
-         * @param WindowConfig
+         * @param cfg
          *
          * @return Window
          *
@@ -120,6 +125,18 @@ export namespace helios::app {
          * @return Window
          */
         virtual void setCurrent(helios::window::Window& win) = 0;
+
+
+        /**
+         * Returns true if the specified window is owned by this application,
+         * otherwise false.
+         *
+         * @param win The window to look up in this Application's windowList_.
+         *
+         * @return return true if the window is owned by this Application,
+         * otherwise false.
+         */
+        [[nodiscard]] bool hasWindow(const helios::window::Window& win) const noexcept;
 
 
         /**

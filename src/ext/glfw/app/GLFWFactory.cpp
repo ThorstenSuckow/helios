@@ -21,7 +21,7 @@ import helios.ext.glfw.app.GLFWApplication;
 import helios.ext.glfw.window.GLFWWindowConfig;
 import helios.ext.glfw.window.GLFWWindowUserPointer;
 import helios.ext.glfw.window.GLFWWindow;
-import helios.ext.glfw.input.GLFWInput;
+import helios.ext.glfw.input.GLFWInputAdapter;
 
 import helios.ext.glfw.window.GLFWWindowConfig;
 import helios.ext.opengl.rendering.model.OpenGLMaterial;
@@ -46,7 +46,7 @@ namespace helios::ext::glfw::app {
 
         auto openGLDevice = std::make_unique<OpenGLDevice>();
         auto inputManager = std::make_unique<InputManager>(
-            std::make_unique<GLFWInput>()
+            std::make_unique<GLFWInputAdapter>()
             );
         auto eventManager = std::make_unique<BasicEventManager>(
         std::make_unique<DequeEventQueue>(),

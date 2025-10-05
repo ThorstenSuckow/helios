@@ -112,4 +112,11 @@ namespace helios::ext::opengl::rendering::model {
         glUseProgram(progId_);
     }
 
+
+    OpenGLShader::~OpenGLShader() {
+        if (progId_ != 0) {
+            glDeleteProgram(progId_);
+        }
+    }
+
 };

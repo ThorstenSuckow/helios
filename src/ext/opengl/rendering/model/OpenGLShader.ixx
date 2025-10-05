@@ -10,6 +10,15 @@ import helios.util.io.StringFileReader;
 
 export namespace helios::ext::opengl::rendering::model {
 
+    /**
+     * An OpenGL-specific implementation of a Shader program,
+     * consisting of a vertex and a fragment shader.
+     *
+     * This class manages the lifecycle of the Shaders. Source files are
+     * getting loaded via a StringFileReader and immediately  compiled after loading.
+     * Any occupied memory for source-files and file-paths to the shader is being cleared
+     * once compilation succeeded and are not guaranteed to persist the compilation process.
+     */
     class OpenGLShader : public helios::rendering::model::Shader {
 
     private:
@@ -73,7 +82,21 @@ export namespace helios::ext::opengl::rendering::model {
         );
 
 
+        /**
+         * Activates this OpenGLShader for subsequent draw calls.
+         * This implementation calls `glUseProgram` with the `progId_` received after
+         * compilation.
+         *
+         * @see https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUseProgram.xhtml
+         */
         void use() const noexcept override;
+
+        /**
+         * Deletes the program object upon destruction of this instance.
+         *
+         * @see https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDeleteProgram.xhtml
+         */
+        ~OpenGLShader() override;
 
     };
 }

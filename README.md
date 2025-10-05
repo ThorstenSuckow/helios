@@ -43,12 +43,17 @@ Contains the source code for selected examples of scenes and gameplay elements r
 #### `src`
 The root source folder for interface and implementation units directly related with the helios project. The `src`-folder is further separated into
 
- - `src/helios`: Module interface units for teh helios framework
+ - `src/helios`: Module interface units for the helios framework
  - `src/ext`: Extensions and platform specific interface units, providing concrete interfaces for various vendor libraries such as **glfw** and **opengl**
  - `src/impl`: Module implementation units for interface units found in `ext` and `helios`.
 
 #### `tests`
-Various test cases for selected classes anf funcionality.
+Various test cases for selected classes anf functionality.
 
 
-
+## Bibliography
+[Vri20] de Vries, Joey: Learn OpenGL (2020), Kendall & Wells
+\
+[RTR] Akenine-Möller, Tomas and Haines, Eric and Hoffman, Naty: Real-Time Rendering (2018), A. K. Peters, Ltd.  Real Time Rendering
+\
+[Gre19] Gregory, J: Game Engine Architecture ,3rd ed. (2018). A K Peters/CRC Press. 

@@ -74,8 +74,8 @@ export namespace helios::ext::opengl::rendering::model {
          * @see https://wikis.khronos.org/opengl/Common_Mistakes#RAII_and_hidden_destructor_calls
          * @see https://en.cppreference.com/w/cpp/language/rule_of_three.html
          */
-        OpenGLMesh(const OpenGLMesh&)=delete;
-        OpenGLMesh& operator =(const OpenGLMesh&) = delete;
+        OpenGLMesh(const OpenGLMesh&) = delete;
+        OpenGLMesh& operator=(const OpenGLMesh&) = delete;
 
 
         /**

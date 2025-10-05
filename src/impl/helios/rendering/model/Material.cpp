@@ -22,9 +22,4 @@ namespace helios::rendering::model {
         return *materialData_;
     }
 
-
-    void Material::use() const noexcept {
-        materialData_->use();
-    }
-
 }

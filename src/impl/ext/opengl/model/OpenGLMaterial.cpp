@@ -13,4 +13,8 @@ namespace helios::ext::opengl::rendering::model {
     OpenGLMaterial::OpenGLMaterial(std::shared_ptr<const MaterialData> materialData)
         : Material(std::move(materialData)) {}
 
+
+    void OpenGLMaterial::use() const noexcept {
+        materialData_->use();
+    }
 }

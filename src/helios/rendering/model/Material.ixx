@@ -66,7 +66,7 @@ export namespace helios::rendering::model {
          *
          * @see MaterialData::use()
          */
-        virtual void use() const noexcept;
+        virtual void use() const noexcept = 0;
 
     };
 

@@ -3,7 +3,7 @@ module;
 #include <GLFW/glfw3.h>
 #include <stdexcept>
 
-module helios.ext.glfw.input.GLFWInput;
+module helios.ext.glfw.input.GLFWInputAdapter;
 
 import helios.input.InputAdapter;
 import helios.window.Window;
@@ -14,7 +14,7 @@ import helios.ext.glfw.window.GLFWWindow;
 
 namespace helios::ext::glfw::input {
 
-    [[nodiscard]] bool GLFWInput::isKeyPressed(helios::input::types::Key key, const helios::window::Window& win) const noexcept {
+    [[nodiscard]] bool GLFWInputAdapter::isKeyPressed(helios::input::types::Key key, const helios::window::Window& win) const noexcept {
         auto const* win_ptr = dynamic_cast<helios::ext::glfw::window::GLFWWindow const*>(&win);
 
         if (!win_ptr) {
@@ -26,7 +26,7 @@ namespace helios::ext::glfw::input {
     }
 
 
-    [[nodiscard]] bool GLFWInput::isKeyPressed(helios::input::types::Key key,
+    [[nodiscard]] bool GLFWInputAdapter::isKeyPressed(helios::input::types::Key key,
         const helios::ext::glfw::window::GLFWWindow& win) const noexcept {
         return glfwGetKey(
             win.nativeHandle(),

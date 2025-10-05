@@ -1,5 +1,8 @@
-# src/helios
-
+# ./helios
 Provides the module interface units for `helios.` 
 
-The module implementation units can be found in the folder [`impl`](../impl/).
+# ./ext
+Provides the module interface units for extensions found with `helios.ext`
+
+# ./impl
+Provides the module implementation units for `helios` and `helios.ext`

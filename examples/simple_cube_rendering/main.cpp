@@ -6,7 +6,6 @@ import helios.math.types;
 
 import helios.ext.glfw.app.GLFWFactory;
 import helios.ext.glfw.app.GLFWApplication;
-import helios.ext.glfw.app.GLFWRAIIGuard;
 import helios.ext.glfw.window.GLFWWindow;
 
 import helios.input.InputManager;
@@ -30,8 +29,6 @@ using namespace helios::ext::glfw::window;
 using namespace helios::util::io;
 
 int main() {
-
-    auto glfwGuard = GLFWRAIIGuard();
 
     const auto app = GLFWFactory::makeOpenGLApp(
         "helios - Simple Cube Renderer"

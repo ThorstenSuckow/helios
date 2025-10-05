@@ -7,9 +7,24 @@ import helios.window.Window;
 
 export namespace helios::ext::glfw::window {
 
+    /**
+     * A structure to hold user defined data associated with a GLFWwindow.
+     *
+     * This struct is intended to be used with `glfwSetWindowUserPointer` to allow
+     * GLFW callbacks access data held within this struct.
+     *
+     * @see https://www.glfw.org/docs/latest/group__window.html#ga3d2fc6026e690ab31a13f78bc9fd3651
+     */
     struct GLFWWindowUserPointer {
-        helios::app::Application* application;
-        helios::window::Window* window;
+        /**
+         * Non-owning pointer to the Application instance the window belongs to.
+         */
+        helios::app::Application* application = nullptr;
+
+        /**
+         * A non-owning pointer to the Window instance owning this struct.
+         */
+        helios::window::Window* window = nullptr;
     };
 
 }

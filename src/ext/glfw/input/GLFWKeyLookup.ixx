@@ -9,6 +9,13 @@ import helios.input.types.Key;
 
 export namespace helios::ext::glfw::input::GLFWKeyLookup {
 
+    /**
+     * Provides a lookup for converting helios key codes to glfw-specific key codes.
+     *
+     * @param key The helios key to map to the key codes registered by GLFW
+     *
+     * @return A key-code in glfw space.
+     */
     inline int from(const helios::input::types::Key key) noexcept {
 
         static constexpr std::array<int, helios::input::types::Key::SIZE> HELIOS_TO_GLFW=[] {

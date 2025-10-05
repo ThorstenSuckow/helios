@@ -49,9 +49,6 @@ namespace helios::ext::opengl::rendering::model {
 
     void OpenGLMesh::init() {
 
-        /**
-         * @see [Vri20, 162]
-         */
         const std::vector<Vertex>& vertices = meshData_->vertices();
         const std::vector<unsigned int>& indices = meshData_->indices();
 

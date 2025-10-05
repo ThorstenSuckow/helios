@@ -3,9 +3,7 @@ module;
 #include <memory>
 #include <stdexcept>
 
-
 module helios.rendering.model.Mesh;
-
 
 namespace helios::rendering::model {
 
@@ -20,6 +18,10 @@ namespace helios::rendering::model {
 
     [[nodiscard]] const MeshData& Mesh::meshData() const noexcept {
         return *meshData_;
+    }
+
+    [[nodiscard]] const int Mesh::indexCount() const noexcept {
+        return meshData_->indices().size();
     }
 
 ;

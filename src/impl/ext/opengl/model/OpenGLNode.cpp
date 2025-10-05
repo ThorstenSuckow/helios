@@ -24,7 +24,7 @@ namespace helios::ext::opengl::rendering::model {
             material_->use();
 
             glBindVertexArray(glMesh.vao());
-            glDrawElements(GL_TRIANGLES,
+            glDrawElements(GL_LINE_LOOP,
                 mesh_->meshData().indices().size() ,
                 GL_UNSIGNED_INT, nullptr
             );

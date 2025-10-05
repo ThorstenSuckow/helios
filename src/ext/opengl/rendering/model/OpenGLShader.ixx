@@ -63,6 +63,16 @@ export namespace helios::ext::opengl::rendering::model {
             unsigned int progId_ = 0;
 
     public:
+        /**
+         * Rule of three.
+         * @see https://wikis.khronos.org/opengl/Common_Mistakes#RAII_and_hidden_destructor_calls
+         * @see https://en.cppreference.com/w/cpp/language/rule_of_three.html
+         *
+         * Prevent copying.
+         */
+        OpenGLShader(const OpenGLShader&)=delete;
+        OpenGLShader& operator =(const OpenGLShader&) = delete;
+
 
         /**
          * Creates and initializes this OpenGLShader.

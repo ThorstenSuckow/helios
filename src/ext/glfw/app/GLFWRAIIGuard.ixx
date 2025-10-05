@@ -10,8 +10,6 @@ export namespace helios::ext::glfw::app {
      * This class makes sure that GLFW is properly initialized when an instance is created
      * and terminated when this instance is destroyed.
      *
-     * It should be called at the begin of the implementing `main()`-function.
-     *
      * @see https://en.cppreference.com/w/cpp/language/raii.html
      */
     class GLFWRAIIGuard {

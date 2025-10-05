@@ -25,8 +25,7 @@ namespace helios::ext::opengl::rendering {
             throw std::runtime_error("Failed to load OpenGL");
         }
 
-        logger_.info(std::format(
-            "OpenGL {0}.{1} loaded",
+        logger_.info(std::format("OpenGL {0}.{1} loaded",
             GLAD_VERSION_MAJOR(gl_ver), GLAD_VERSION_MINOR(gl_ver))
         );
 

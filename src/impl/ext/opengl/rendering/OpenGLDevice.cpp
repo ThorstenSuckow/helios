@@ -47,9 +47,6 @@ namespace helios::ext::opengl::rendering {
     };
 
     void OpenGLDevice::setViewport(const int x, const int y, const int width, const int height) const noexcept {
-        /**
-         * @see https://registry.khronos.org/OpenGL-Refpages/gl4/html/glViewport.xhtml
-         */
         glViewport(x, y, width, height);
     }
 

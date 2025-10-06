@@ -1,6 +1,7 @@
 module;
 
 #include <cassert>
+#include <functional>
 #include <utility>
 
 export module helios.math.types:mat4;
@@ -126,6 +127,19 @@ export namespace helios::math {
             return A;
         }
     };
+
+
+    /**
+     * Convenient method to construct a 4x4 identity matrix
+     *
+     * @tparam T The numeric type of the matrix components.
+     *
+     * @return A new mat4<T>-identity matrix-
+     */
+    template<helios::math::Numeric T>
+    mat4<T> identity() noexcept {
+        return mat4<T>(1);
+    }
 
 
     /**

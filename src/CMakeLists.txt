@@ -8,7 +8,7 @@ file(GLOB_RECURSE CPP_FILES CONFIGURE_DEPENDS
 file(GLOB_RECURSE MODULE_INTERFACE_FILES CONFIGURE_DEPENDS
         # extension directory with implementations for glfw and OpenGL >= 4.6,
         # helios base src
-        "${CMAKE_CURRENT_SOURCE_DIR}/**/*.ixx"
+        "${CMAKE_CURRENT_SOURCE_DIR}/../include/**/*.ixx"
 )
 
 
@@ -38,7 +38,7 @@ if(MODULE_INTERFACE_FILES)
     target_sources(helios PUBLIC
             FILE_SET modules TYPE CXX_MODULES
             BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}"
-            BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/../ext"
+            BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/../include"
             FILES ${MODULE_INTERFACE_FILES}
     )
 endif()

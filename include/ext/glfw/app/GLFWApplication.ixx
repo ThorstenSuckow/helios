@@ -92,7 +92,7 @@ export namespace helios::ext::glfw::app {
          * @throws if the specified Window is not a GLFWWindow or if the window is
          * not owned by this application.
          *
-         * @todo the window should be signaled that it now is the curent window, for setting
+         * @todo the window should be signaled that it's now current window, for setting
          * the frameBufferSizeCallback and calling glfwMakeContextCurrent.
          */
         void setCurrent(helios::window::Window& win) override;

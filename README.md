@@ -24,10 +24,12 @@ The project is structured as follows:
 ├── benchmarks/
 ├── docs/
 ├── examples/
-├── src/
-│   ├── helios/
+├── include/
 │   ├── ext/
-│   └── impl/
+│   └── helios/
+├── src/
+│   ├── ext/
+│   └── helios/
 └── tests/
 ```
 
@@ -40,15 +42,17 @@ Contains documentation for helios source files and usage.
 #### `examples`
 Contains the source code for selected examples of scenes and gameplay elements rendered with helios.
 
-#### `src`
-The root source folder for interface and implementation units directly related with the helios project. The `src`-folder is further separated into
+#### `include`
+The root source folder for interface units directly related to the helios project. The `include`-folder is further separated into
 
- - `src/helios`: Module interface units for the helios framework
- - `src/ext`: Extensions and platform specific interface units, providing concrete interfaces for various vendor libraries such as **glfw** and **opengl**
- - `src/impl`: Module implementation units for interface units found in `ext` and `helios`.
+ - `include/helios`: Module interface units for the helios framework
+ - `include/ext`: Extensions and platform specific interface units, providing interfaces based on the helios framework using vendor libraries such as **glfw** and **opengl**.
+
+#### `src`
+Module implementation units for interface units found in `include/ext` and `include/helios`.
 
 #### `tests`
-Various test cases for selected classes anf functionality.
+Various test cases for selected classes and functionality.
 
 
 ## Bibliography

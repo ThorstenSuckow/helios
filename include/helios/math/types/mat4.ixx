@@ -6,7 +6,9 @@ module;
 
 export module helios.math.types:mat4;
 
+import :vec3;
 import helios.math.concepts;
+
 
 export namespace helios::math {
 
@@ -51,6 +53,18 @@ export namespace helios::math {
                 T{}, T{}, T{},  f} {}
 
         /**
+        * Creates a diagonal matrix with the components of vec3<T> as the
+        * diagonal elements. Element at [4, 4] is set to 1.
+        *
+        * @param f The scalar value for the diagonal components.
+        */
+        explicit constexpr mat4(const vec3<T> f) noexcept
+            : m{ f[0],  T{}, T{}, T{},
+                T{},  f[1],  T{}, T{},
+                T{}, T{},  f[2],  T{},
+                T{}, T{}, T{},  static_cast<T>(1)} {}
+
+        /**
          * Constructs a new `mat4` with all 16 components explicitly
          * specified.
          * The values are stored in column major order, that is, the first 4 arguments
@@ -69,6 +83,18 @@ export namespace helios::math {
              f0_2,  f1_2,  f2_2,  f3_2,
              f0_3,  f1_3,  f2_3,  f3_3
         } { }
+
+
+        /**
+         * Convenient method to construct a 4x4 identity matrix
+         *
+         * @tparam T The numeric type of the matrix components.
+         *
+         * @return A new mat4<T>-identity matrix-
+         */
+        static mat4<T> identity() noexcept {
+            return mat4<T>(1);
+        }
 
 
         /**
@@ -104,6 +130,64 @@ export namespace helios::math {
 
 
         /**
+         * Compares this matrix element's with the rgt matrix considering
+         * an epsilon value.
+         * Returns true if for all elements the equation |a-b| <= EPSILON
+         * holds.
+         *
+         * EPSILON is set to 0.00001
+         *
+         * @param rgt The other matix to compare with this matrix for equality.
+         *
+         * @return True is the elements of the matrices are considered equal,
+         * otherwise false.
+         *
+         * @see https://realtimecollisiondetection.net/blog/?p=89
+         *
+         * @todo account for abs (values close to zero) and rel
+         * (larger values), move EPSILON to global constant
+         */
+        constexpr bool same(const mat4<T>& rgt) const {
+
+            static const T EPSILON = static_cast<T>(0.00001);
+
+            const auto* leftPtr = value_ptr(*this);
+            const auto* rgtPtr  = value_ptr(rgt);
+
+            for (int i = 0; i < 16; i++) {
+                if (std::fabs(leftPtr[i] - rgtPtr[i])  > EPSILON) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+
+        /**
+         * Strictly compares the elements of this matrix with the elements
+         * of the rgt matrix.
+         *
+         * @param rgt The right matrix to compare for equal values
+         *
+         * @return Trie if all elements are equal (==), false otherwise.
+         */
+        constexpr bool operator==(const mat4<T>& rgt) const {
+
+            const auto* leftPtr = value_ptr(*this);
+            const auto* rgtPtr  = value_ptr(rgt);
+
+            for (int i = 0; i < 16; i++) {
+                if (leftPtr[i] != rgtPtr[i]) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+
+        /**
          * Performs matrix-multiplication with another `mat4`.
          * This matrix is the left operand, while `m` is the right operand.
          *
@@ -127,19 +211,6 @@ export namespace helios::math {
             return A;
         }
     };
-
-
-    /**
-     * Convenient method to construct a 4x4 identity matrix
-     *
-     * @tparam T The numeric type of the matrix components.
-     *
-     * @return A new mat4<T>-identity matrix-
-     */
-    template<helios::math::Numeric T>
-    mat4<T> identity() noexcept {
-        return mat4<T>(1);
-    }
 
 
     /**

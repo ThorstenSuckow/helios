@@ -50,6 +50,15 @@ export namespace helios::math {
 
 
         /**
+         * Constructs a new vec3 with the specified value as the x,y,z components.
+         *
+         * @param v The value for the components.
+         *
+         */
+        constexpr explicit vec3(const T v) noexcept : v{v, v, v} {}
+
+
+        /**
          * Provides read only access to the vector components.
          * Bounds checking is performed via `assert` in debug builds.
          *

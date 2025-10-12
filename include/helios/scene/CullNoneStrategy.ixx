@@ -4,7 +4,6 @@ module;
 
 import helios.scene.FrustumCullingStrategy;
 import helios.scene.Camera;
-import helios.scene.Scene;
 import helios.scene.SceneNode;
 
 
@@ -41,12 +40,12 @@ export namespace helios::scene {
          * relative to the camera's view frustum.
          *
          * @param camera The camera defining the view frustum.
-         * @param scene The Scene to be culled.
+         * @param root The parent of the hierarchy to cull.
          *
          * @return A vector with const pointers to the SceneNodes visible.
          */
         [[nodiscard]] std::vector<const helios::scene::SceneNode*> cull(
-            const helios::scene::Camera& camera, const helios::scene::Scene& scene
+            const helios::scene::Camera& camera, const helios::scene::SceneNode& root
         ) override;
 
 

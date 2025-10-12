@@ -60,4 +60,8 @@ Various test cases for selected classes and functionality.
 \
 [RTR] Akenine-Möller, Tomas and Haines, Eric and Hoffman, Naty: Real-Time Rendering (2018), A. K. Peters, Ltd.  Real Time Rendering
 \
-[Gre19] Gregory, J: Game Engine Architecture ,3rd ed. (2018). A K Peters/CRC Press. 
+[Gre19] Gregory, J: Game Engine Architecture, 3rd ed. (2018). A K Peters/CRC Press. 
+\
+[She07] Sherrod, Allen: Data Structures and Algorithms for Game Developers (2007), Charles River Media, Boston, Massachusetts 
+\
+[HDMS+14]: Hughes, John F. and van Dam, Andries and McGuire, Morgan and Sklar, David F. and Foley, James D. and Feiner, Steven K. and Akeley, Kurt: Computer Graphics - Principles and Practice (2014), Addison-Wesley Educational 

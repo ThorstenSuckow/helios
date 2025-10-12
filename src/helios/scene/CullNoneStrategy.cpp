@@ -23,12 +23,12 @@ namespace helios::scene {
     }
 
     [[nodiscard]] std::vector<const helios::scene::SceneNode*> CullNoneStrategy::cull(
-        const helios::scene::Camera& camera, const helios::scene::Scene& scene
+        const helios::scene::Camera& camera, const helios::scene::SceneNode& root
     )  {
 
         auto nodes = std::vector<const helios::scene::SceneNode*>();
 
-        cull(nodes, scene.root());
+        cull(nodes, root);
 
         return nodes;
     }

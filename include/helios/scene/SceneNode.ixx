@@ -9,11 +9,10 @@ import helios.rendering.Renderable;
 import helios.util.Guid;
 import helios.scene.Transform;
 import helios.math.types;
-
+import helios.scene.SceneFwd;
 
 export namespace helios::scene {
 
-    class Scene;
 
     /**
      * SceneGraphKey as passkey idiom for accessing
@@ -23,7 +22,7 @@ export namespace helios::scene {
      */
     struct SceneGraphKey {
     private:
-        friend class Scene;
+        friend class helios::scene::Scene;
         SceneGraphKey() = default;
     };
 

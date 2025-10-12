@@ -137,8 +137,8 @@ export namespace helios::scene {
              * represents in a Scene.
              */
             explicit SceneNode(
-                        std::shared_ptr<helios::rendering::Renderable> renderable
-                    ) noexcept;
+                std::shared_ptr<helios::rendering::Renderable> renderable
+            ) noexcept;
 
             /**
              * Returns the globally unique identifier for this SceneNode.

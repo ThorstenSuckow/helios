@@ -50,6 +50,12 @@ namespace helios::scene {
         }
     }
 
+    Scene::Scene(std::unique_ptr<helios::scene::FrustumCullingStrategy> frustumCullingStrategy) :
+    sceneGraphKey_(),
+    frustumCullingStrategy_(std::move(frustumCullingStrategy)),
+    root_(std::make_unique<SceneNode>()) {}
+
+
 
     SceneNode& Scene::addNode(std::unique_ptr<SceneNode> node) const {
         assert(root && "Unexpected null-root");

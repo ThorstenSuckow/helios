@@ -99,10 +99,7 @@ export namespace helios::scene {
          * Constructs a new Scene.
          * The root node for this scene is automatically created.
          */
-        explicit Scene(std::unique_ptr<helios::scene::FrustumCullingStrategy> frustumCullingStrategy) :
-        sceneGraphKey_(),
-        frustumCullingStrategy_(std::move(frustumCullingStrategy)),
-        root_(std::make_unique<SceneNode>()) {}
+        explicit Scene(std::unique_ptr<helios::scene::FrustumCullingStrategy> frustumCullingStrategy);
 
 
         /**

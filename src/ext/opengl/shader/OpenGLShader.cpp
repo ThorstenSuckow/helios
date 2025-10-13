@@ -3,15 +3,18 @@ module;
 #include <glad/gl.h>
 #include <iostream>
 
-module helios.ext.opengl.rendering.model.OpenGLShader;
+module helios.ext.opengl.rendering.shader.OpenGLShader;
 
 import helios.rendering.model;
 import helios.util.io;
 
+import helios.ext.opengl.rendering.shader.OpenGLUniformLocationMap;
+import helios.ext.opengl.rendering.shader.OpenGLUniformSemantics;
+
 using namespace helios::rendering::model;
 using namespace helios::util::io;
 
-namespace helios::ext::opengl::rendering::model {
+namespace helios::ext::opengl::rendering::shader {
 
 
     OpenGLShader::OpenGLShader(
@@ -117,6 +120,19 @@ namespace helios::ext::opengl::rendering::model {
         if (progId_ != 0) {
             glDeleteProgram(progId_);
         }
+    }
+
+    void OpenGLShader::setUniformLocationMap(
+        std::unique_ptr<const OpenGLUniformLocationMap> uniformLocationMap) noexcept {
+        uniformLocationMap_ = std::move(uniformLocationMap);
+    }
+
+    int OpenGLShader::locateUniform(OpenGLUniformSemantics uniformSemantics) const noexcept {
+        if (uniformLocationMap_) {
+            return uniformLocationMap_->get(uniformSemantics);
+        }
+
+        return -1;
     }
 
 };

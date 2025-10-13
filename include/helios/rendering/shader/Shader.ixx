@@ -1,12 +1,18 @@
 module;
 
-export module helios.rendering.model.Shader;
+#include <memory>
+#include <optional>
+
+export module helios.rendering.shader.Shader;
 
 import helios.util.log.LogManager;
 import helios.util.log.Logger;
 
-#define HELIOS_LOG_SCOPE "helios::rendering::model::Shader"
-export namespace helios::rendering::model {
+import helios.rendering.shader.UniformLocationMap;
+import helios.rendering.shader.UniformSemantics;
+
+#define HELIOS_LOG_SCOPE "helios::rendering::shader::Shader"
+export namespace helios::rendering::shader {
 
     /**
      * Abstract representation of a Shader program (e.g. composed of vertex/fragment shader).
@@ -26,7 +32,6 @@ export namespace helios::rendering::model {
         const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().registerLogger(
             HELIOS_LOG_SCOPE
         );
-
 
     public:
 

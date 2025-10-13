@@ -2,11 +2,10 @@ module;
 
 #include <memory>
 #include <string>
-#include <stdexcept>
 
 export module helios.rendering.model.MaterialData;
 
-import helios.rendering.model.Shader;
+import helios.rendering.shader.Shader;
 import helios.util.log.LogManager;
 import helios.util.log.Logger;
 
@@ -28,7 +27,7 @@ export namespace helios::rendering::model {
         /**
          * Shared pointer to the immutable Shader.
          */
-        std::shared_ptr<const Shader> shader_;
+        std::shared_ptr<const helios::rendering::shader::Shader> shader_;
 
         /**
          * The logger used with this MaterialData instance.
@@ -51,7 +50,7 @@ export namespace helios::rendering::model {
          *
          * @throws std::invalid_argument if shader is a null shared pointer.
          */
-        explicit MaterialData(std::shared_ptr<const Shader> shader);
+        explicit MaterialData(std::shared_ptr<const helios::rendering::shader::Shader> shader);
 
 
         /**
@@ -61,7 +60,7 @@ export namespace helios::rendering::model {
          *
          * @return Shader
          */
-        [[nodiscard]] virtual const Shader& shader() const noexcept;
+        [[nodiscard]] virtual const helios::rendering::shader::Shader& shader() const noexcept;
 
 
         /**

@@ -2,13 +2,15 @@ module;
 
 #include <iostream>
 
-export module helios.ext.opengl.rendering.model.OpenGLShader;
+export module helios.ext.opengl.rendering.shader.OpenGLShader;
 
-import helios.rendering.model.Shader;
+import helios.rendering.shader.Shader;
 
 import helios.util.io.StringFileReader;
+import helios.ext.opengl.rendering.shader.OpenGLUniformLocationMap;
+import helios.ext.opengl.rendering.shader.OpenGLUniformSemantics;
 
-export namespace helios::ext::opengl::rendering::model {
+export namespace helios::ext::opengl::rendering::shader {
 
     /**
      * An OpenGL-specific implementation of a Shader program,
@@ -19,21 +21,21 @@ export namespace helios::ext::opengl::rendering::model {
      * Any occupied memory for source-files and file-paths to the shader is being cleared
      * once compilation succeeded and are not guaranteed to persist the compilation process.
      */
-    class OpenGLShader : public helios::rendering::model::Shader {
+    class OpenGLShader : public helios::rendering::shader::Shader {
 
     private:
         /**
          * Source of the shader. Not guaranteed to be persisted
          * once compilation was successful.
          */
-        std::string vertexShaderSource_ = "";
+        std::string vertexShaderSource_;
 
 
         /**
          * Source of the shader. Not guaranteed to be persisted
          * once compilation was successful.
          */
-        std::string fragmentShaderSource_ = "";
+        std::string fragmentShaderSource_;
 
         /**
          * Loads the specified vertex and fragment shader.
@@ -60,7 +62,15 @@ export namespace helios::ext::opengl::rendering::model {
 
 
         protected:
+            /**
+             * The program id as assigned by the underlying rendering backend.
+             */
             unsigned int progId_ = 0;
+
+            /**
+             * A unique pointer to the OpenGLUniformLocationMap this shader uses.
+             */
+            std::unique_ptr<const OpenGLUniformLocationMap> uniformLocationMap_;
 
     public:
         /**
@@ -77,7 +87,7 @@ export namespace helios::ext::opengl::rendering::model {
         /**
          * Creates and initializes this OpenGLShader.
          * An instance of this class is guaranteed to have a progId_ != 0,
-         * hence GLSL-files where successfully loaded and compiled, ready to be used.
+         * hence shader-files where successfully loaded and compiled, ready to be used.
          *
          * @param vertexShaderPath The path to the vertex shader.
          * @param fragmentShaderPath The path to the fragment shader.
@@ -107,6 +117,27 @@ export namespace helios::ext::opengl::rendering::model {
          * @see https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDeleteProgram.xhtml
          */
         ~OpenGLShader() override;
+
+        /**
+         * Sets the OpenGLUniformLocationMap for this OpenGLShader.
+         * Ownership is transferred to this instance.
+         *
+         * @param uniformLocationMap The OpenGLUniformMap providing the mappings for the uniforms
+         * of the underlying GLSL shader.
+         */
+        void setUniformLocationMap(std::unique_ptr<const OpenGLUniformLocationMap> uniformLocationMap) noexcept;
+
+        /**
+         * Returns the uniform location for the uniform represented by the specified
+         * OpenGLUniformSemantics.
+         *
+         * @param uniformSemantics The `OpenGLUniformSemantics` identifier.
+         *
+         * @return The integer representing the uniform variable location in the shader, or
+         * -1 if no location map was registered with this shader or if the uniform with the
+         * specified semantics was not found.
+         */
+        int locateUniform(OpenGLUniformSemantics uniformSemantics) const noexcept;
 
     };
 }

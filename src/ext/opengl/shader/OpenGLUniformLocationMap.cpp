@@ -11,7 +11,7 @@ import helios.ext.opengl.rendering.shader.OpenGLUniformSemantics;
 
 namespace helios::ext::opengl::rendering::shader {
 
-    bool OpenGLUniformLocationMap::set(const OpenGLUniformSemantics& uniform, int position) {
+    bool OpenGLUniformLocationMap::set(OpenGLUniformSemantics uniform, int position) {
         assert(position >= 0 && "position must not be less than 0");
 
         if (position < 0) {
@@ -22,7 +22,7 @@ namespace helios::ext::opengl::rendering::shader {
         return true;
     }
 
-    int OpenGLUniformLocationMap::get(const OpenGLUniformSemantics& uniformSemantics) const noexcept {
+    int OpenGLUniformLocationMap::get(OpenGLUniformSemantics uniformSemantics) const noexcept {
         if (map_.contains(uniformSemantics)) {
             return map_.at(uniformSemantics);
         }

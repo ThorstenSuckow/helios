@@ -46,7 +46,7 @@ export namespace helios::ext::opengl::rendering::shader {
          * Sets or updates the OpenGLUniform.
          * If the semantics already exists in the map, it is updated with `position`.
          *
-         * @param uniformSemantics A const ref to the uniformSemantics to register with `position`
+         * @param uniformSemantics The uniformSemantics to register with `position`
          * @param position A positive integer value as the location of the uniform represented by
          * uniformSemantics.
          *
@@ -54,7 +54,7 @@ export namespace helios::ext::opengl::rendering::shader {
          * map, otherwise false (e.g. if position was < 0)
          */
         [[nodiscard]] bool set(
-            const OpenGLUniformSemantics& uniformSemantics,
+            OpenGLUniformSemantics uniformSemantics,
             int position
         ) noexcept;
 
@@ -72,7 +72,7 @@ export namespace helios::ext::opengl::rendering::shader {
          * @see glGetUniformLocation
          * @see [KSS17, 47]
          */
-        int get(const OpenGLUniformSemantics& uniformSemantics) const noexcept;
+        int get(OpenGLUniformSemantics uniformSemantics) const noexcept;
     };
 
 

@@ -4,15 +4,15 @@ Contains (abstract) classes in regard to rendering [shapes](../asset/shape/READM
 
 ## Hierarchical model
 
-### Node
-A node owns the **Mesh** and also has **Material** information. 
-**Material** is shared with other entities.
+### Renderable
+A Renderable owns the **Mesh** and also has **Material** information. 
+**Material** is shared with other entities. A Renderable has no hierarchical information.
 
 
 #### Mesh 
  - `stateful`
  - `unique` \
-A **Mesh** shares **MeshData** with other entities. The purpose of **Mesh** is to provide a unique, stateful instance, exclusively owned by a **Node**.
+A **Mesh** shares **MeshData** with other entities. The purpose of **Mesh** is to provide a unique, stateful instance, exclusively owned by a **Renderable**.
 
 ##### MeshData
 - `stateless / const`
@@ -22,12 +22,12 @@ A **Mesh** shares **MeshData** with other entities. The purpose of **Mesh** is t
 #### Material
 - `stateful`
 - `unique` \
-A **Material** shares **MaterialData** with other entities. The purpose of **Material** is to provide a unique,  stateful instance, exclusively owned by a **Node**.
+A **Material** shares **MaterialData** with other entities. The purpose of **Material** is to provide a unique,  stateful instance, exclusively owned by a **Renderable**.
 
 #### MaterialData
 - `stateless / const`
 - `shared` \
-**Material** encapsulates a **Shader** and is shared among multiple entities. To this time, no further material properties are provided with the implementation
+**MaterialData** encapsulates a **Shader** and is shared among multiple entities. To this time, no further material properties are provided with the implementation
 
 
 ##### Shader

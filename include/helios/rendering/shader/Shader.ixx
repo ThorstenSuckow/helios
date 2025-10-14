@@ -8,8 +8,7 @@ export module helios.rendering.shader.Shader;
 import helios.util.log.LogManager;
 import helios.util.log.Logger;
 
-import helios.rendering.shader.UniformLocationMap;
-import helios.rendering.shader.UniformSemantics;
+import helios.rendering.shader.UniformValueMap;
 
 #define HELIOS_LOG_SCOPE "helios::rendering::shader::Shader"
 export namespace helios::rendering::shader {
@@ -43,6 +42,17 @@ export namespace helios::rendering::shader {
          * until no or another shader is bound.
          */
         virtual void use() const noexcept = 0;
+
+        /**
+         * Applies the specified UniformValueMap to the uniforms defined by the shader.
+         * This method does not change the state of the shader, but it passes the uniform
+         * values to the underlying rendering backend. Implementing APIs should make sure
+         * that the shader is properly bound before the method is called.
+         *
+         * @param uniformValueMap The `UniformValueMap` containing the values for the
+         * uniforms in this shader.
+         */
+        virtual void applyUniformValues(const UniformValueMap& uniformValueMap) = 0;
     };
 
 }

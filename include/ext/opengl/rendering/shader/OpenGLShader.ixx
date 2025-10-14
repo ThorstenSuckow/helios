@@ -70,7 +70,7 @@ export namespace helios::ext::opengl::rendering::shader {
             /**
              * A unique pointer to the OpenGLUniformLocationMap this shader uses.
              */
-            std::unique_ptr<const OpenGLUniformLocationMap> uniformLocationMap_;
+            std::unique_ptr<const OpenGLUniformLocationMap> uniformLocationMap_ = nullptr;
 
     public:
         /**
@@ -137,7 +137,7 @@ export namespace helios::ext::opengl::rendering::shader {
          * -1 if no location map was registered with this shader or if the uniform with the
          * specified semantics was not found.
          */
-        int locateUniform(OpenGLUniformSemantics uniformSemantics) const noexcept;
+        [[nodiscard]] int uniformLocation(OpenGLUniformSemantics uniformSemantics) const noexcept;
 
     };
 }

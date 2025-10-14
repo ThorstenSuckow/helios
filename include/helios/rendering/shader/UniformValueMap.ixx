@@ -1,15 +1,15 @@
 module;
 
-#include <map>
+#include <unordered_map>
 #include <variant>
 
-export module helios.ext.opengl.rendering.shader.OpenGLUniformValueMap;
+export module helios.rendering.shader.UniformValueMap;
 
-import helios.ext.opengl.rendering.shader.OpenGLUniformSemantics;
+import helios.rendering.shader.UniformSemantics;
 
 import helios.math.types;
 
-export namespace helios::ext::opengl::rendering::shader {
+export namespace helios::rendering::shader {
 
     /**
      * A type alias for the variant containing all supported
@@ -22,7 +22,7 @@ export namespace helios::ext::opengl::rendering::shader {
     >;
 
     /**
-     * Manages a collection of values for mapping them to their OpenGLUniformSemantics
+     * Manages a collection of values for mapping them to their UniformSemantics
      * identifier.
      *
      * This class allows for storing different types of uniform values (e.g. mat4f, vec3f, ...)
@@ -35,37 +35,37 @@ export namespace helios::ext::opengl::rendering::shader {
      * @note this class goes intentionally without templates as we assume that instances of the
      * value maps are directly used in the rendering hot path.
      */
-    class OpenGLUniformValueMap {
+    class UniformValueMap {
 
     private:
         /**
          * Internal map storing the association between a uniform semantic and
          * a concrete value.
          */
-        std::map<OpenGLUniformSemantics, UniformValue> map_;
+        std::unordered_map<UniformSemantics, UniformValue> map_;
 
     public:
-        ~OpenGLUniformValueMap() = default;
+        ~UniformValueMap() = default;
 
-        OpenGLUniformValueMap() = default;
+        UniformValueMap() = default;
 
         /**
          * Sets or updates a helios::math::mat4f uniform value for a given semantic.
          *
-         * @param uniformSemantics The `OpenGLUniformSemantics` identifier for the uniform.
+         * @param uniformSemantics The `UniformSemantics` identifier for the uniform.
          * @param mat4f A const ref to the mat4f value to set.
          */
-        void set(OpenGLUniformSemantics uniformSemantics, const helios::math::mat4f& mat4f);
+        void set(UniformSemantics uniformSemantics, const helios::math::mat4f& mat4f);
 
         /**
          * Returns a raw const pointer to the mat4f for the specified uniform semantics.
          *
-         * @param uniformSemantics The `OpenGLUniformSemantics` identifier for the uniform.
+         * @param uniformSemantics The `UniformSemantics` identifier for the uniform.
          *
          * @return A raw const pointer to the associated mat4f, or `nullptr` if no mat4f is
          * associated with this semantics.
          */
-        const float* mat4f_ptr(OpenGLUniformSemantics uniformSemantics) const noexcept;
+        const float* mat4f_ptr(UniformSemantics uniformSemantics) const noexcept;
 
     };
 

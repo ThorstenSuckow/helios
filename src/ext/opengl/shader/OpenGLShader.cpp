@@ -127,7 +127,7 @@ namespace helios::ext::opengl::rendering::shader {
         uniformLocationMap_ = std::move(uniformLocationMap);
     }
 
-    int OpenGLShader::locateUniform(OpenGLUniformSemantics uniformSemantics) const noexcept {
+    int OpenGLShader::uniformLocation(OpenGLUniformSemantics uniformSemantics) const noexcept {
         if (uniformLocationMap_) {
             return uniformLocationMap_->get(uniformSemantics);
         }

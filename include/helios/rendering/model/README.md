@@ -1,6 +1,6 @@
 # helios.rendering.model
 
-Contains (abstract) classes in regard to rendering [shapes](../asset/shape/README.md) consisting of geometric [primitives](../core/README.md).
+Contains (abstract) classes in regard to rendering [shapes](../asset/shape/README.md) consisting of geometric primitives.
 
 ## Hierarchical model
 
@@ -22,13 +22,12 @@ A **Mesh** shares **MeshData** with other entities. The purpose of **Mesh** is t
 #### Material
 - `stateful`
 - `unique` \
-A **Material** shares **MaterialData** with other entities. The purpose of **Material** is to provide a unique,  stateful instance, exclusively owned by a **Renderable**.
+A **Material** shares **Shader** and **MaterialData** with other entities. The purpose of **Material** is to provide a unique,  stateful instance, exclusively owned by a **Renderable**.
 
 #### MaterialData
 - `stateless / const`
 - `shared` \
-**MaterialData** encapsulates a **Shader** and is shared among multiple entities. To this time, no further material properties are provided with the implementation
-
+**MaterialData** shares material specifics for Material instances. To this time, no further material properties are provided with the implementation.
 
 ##### Shader
 - `stateful`

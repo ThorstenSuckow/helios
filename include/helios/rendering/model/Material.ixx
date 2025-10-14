@@ -8,13 +8,16 @@ export module helios.rendering.model.Material;
 import helios.rendering.model.MaterialData;
 import helios.util.log;
 
+import helios.rendering.shader.Shader;
+
 #define HELIOS_LOG_SCOPE "helios::rendering::model::Material"
 export namespace helios::rendering::model {
 
     /**
      * Representative of a parametrizable Material instance.
-     * A Material instance contains a reference to its raw shared MaterialData
-     * and allows for individual configurations.
+     * A Material instance contains a reference to its raw shared Shader
+     * and optionally MaterialData.
+     * A Material instance allows for individual configurations.
      *
      * @see [RTR, pp. 125]
      */
@@ -30,6 +33,11 @@ export namespace helios::rendering::model {
         std::shared_ptr<const MaterialData> materialData_;
 
         /**
+         * Shared pointer to the immutable Shader.
+         */
+        std::shared_ptr<const helios::rendering::shader::Shader> shader_{};
+
+        /**
          * The logger used with this Material instance.
          * Defaults to HELIOS_LOG_SCOPE
          *
@@ -43,13 +51,29 @@ export namespace helios::rendering::model {
         virtual ~Material() = default;
 
         /**
-         * Creates a new Material instance.
+         * Creates a new MaterialData instance.
          *
-         * @param materialData A shared pointer to the immutable shared MaterialData
+         * @param shader A shared pointer to the immutable Shader used by
+         * this instance.
          *
-         * @throws std::invalid_argument if materialData is a null shared pointer.
+         * @throws std::invalid_argument if shader is a null shared pointer.
          */
-        explicit Material(std::shared_ptr<const MaterialData> materialData);
+        explicit Material(std::shared_ptr<const helios::rendering::shader::Shader> shader);
+
+        /**
+         * Creates a new MaterialData instance.
+         *
+         * @param shader A shared pointer to the immutable Shader used by
+         * this instance.
+         * @param materialData
+         *
+         * @throws std::invalid_argument if shader or materialData is a null shared pointer.
+         */
+        explicit Material(
+            std::shared_ptr<const helios::rendering::shader::Shader> shader,
+            std::shared_ptr<const MaterialData> materialData
+        );
+
 
 
         /**
@@ -67,6 +91,16 @@ export namespace helios::rendering::model {
          * @see MaterialData::use()
          */
         virtual void use() const noexcept = 0;
+
+        /**
+         * Returns a const reference to the Shader used by this instance.
+         *
+         * The returned data is guaranteed to be a valid reference to existing data.
+         *
+         * @return Shader
+         */
+        [[nodiscard]] virtual const helios::rendering::shader::Shader& shader() const noexcept;
+
 
     };
 

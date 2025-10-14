@@ -68,4 +68,4 @@ Various test cases for selected classes and functionality.
 \
 [KSS17]: Kessenich, John and Sellers, Graham and Shreiner, Dave: The OpenGL Programming Guide (2017), Addison Wesley
 \
-[Str13]: Stroustrup, Bjarne: A Tour of C++ (2013), Addison-Wesley
+[Str22]: Stroustrup, Bjarne: A Tour of C++ (2022), Addison-Wesley

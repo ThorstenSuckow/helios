@@ -49,10 +49,10 @@ export namespace helios::rendering::shader {
          * values to the underlying rendering backend. Implementing APIs should make sure
          * that the shader is properly bound before the method is called.
          *
-         * @param uniformValueMap The `UniformValueMap` containing the values for the
+         * @param uniformValueMap A const ref to the `UniformValueMap` containing the values for the
          * uniforms in this shader.
          */
-        virtual void applyUniformValues(const UniformValueMap& uniformValueMap) = 0;
+        virtual void applyUniformValues(const UniformValueMap& uniformValueMap) const noexcept = 0;
     };
 
 }

@@ -8,6 +8,8 @@ module;
 module helios.scene.Scene;
 
 import helios.scene.SceneNode;
+
+import helios.rendering.Renderable;
 import helios.rendering.RenderQueue;
 import helios.rendering.RenderableContext;
 import helios.math.types;
@@ -71,7 +73,7 @@ namespace helios::scene {
     }
 
 
-    [[nodiscard]] std::vector<const helios::scene::SceneNode*> Scene::findVisibleNodes(const helios::scene::Camera& camera) const {
+    std::vector<const helios::scene::SceneNode*> Scene::findVisibleNodes(const helios::scene::Camera& camera) const {
         assert(root && "Unexpected null-root");
         if (!root_) {
             logger_.error("Unexpected nullptr for this Scene's root.");
@@ -83,12 +85,30 @@ namespace helios::scene {
     }
 
 
-    [[nodiscard]] helios::scene::SceneNode& Scene::root() const noexcept {
+    helios::scene::SceneNode& Scene::root() const noexcept {
         assert(root && "Unexpected null-root");
         if (!root_) {
             logger_.error("Unexpected nullptr for this Scene's root.");
         }
         return *root_;
+    }
+
+    helios::scene::Snapshot Scene::createSnapshot(const helios::scene::Camera& camera) const {
+        const auto nodes = findVisibleNodes(camera);
+
+        std::vector<const helios::rendering::Renderable*> renderables;
+        renderables.reserve(nodes.size());
+        for (const auto& node : nodes) {
+            if (node->renderable()) {
+                renderables.push_back(node->renderable().get());
+            }
+        }
+
+        return Snapshot(
+            camera.projectionMatrix(),
+            camera.viewMatrix(),
+            std::move(renderables)
+        );
     }
 
 }

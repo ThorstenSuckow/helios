@@ -13,6 +13,7 @@ import helios.rendering.RenderableContext;
 import helios.math.types;
 
 import helios.scene.Camera;
+import helios.scene.Snapshot;
 import helios.scene.FrustumCullingStrategy;
 
 #define HELIOS_LOG_SCOPE "helios::scene::Scene"
@@ -138,6 +139,17 @@ export namespace helios::scene {
          * @return the root node of this Scene.
          */
         [[nodiscard]] helios::scene::SceneNode& root() const noexcept;
+
+        /**
+         * Creates a Snapshot of the Scene and returns it.
+         * Taking a snapshot will frustum cull the SceneNodes and place their Renderables
+         * along with the current matrices of this scene's matrix into the Snapshot object.
+         *
+         * @param camera The camera used to observe the Scene.
+         *
+         * @return The snapshot created for this Scene.
+         */
+        [[nodiscard]] Snapshot createSnapshot(const helios::scene::Camera& camera) const;
 
     };
 

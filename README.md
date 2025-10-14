@@ -65,3 +65,7 @@ Various test cases for selected classes and functionality.
 [She07] Sherrod, Allen: Data Structures and Algorithms for Game Developers (2007), Charles River Media, Boston, Massachusetts 
 \
 [HDMS+14]: Hughes, John F. and van Dam, Andries and McGuire, Morgan and Sklar, David F. and Foley, James D. and Feiner, Steven K. and Akeley, Kurt: Computer Graphics - Principles and Practice (2014), Addison-Wesley Educational 
+\
+[KSS17]: Kessenich, John and Sellers, Graham and Shreiner, Dave: The OpenGL Programming Guide (2017), Addison Wesley
+\
+[Str13]: Stroustrup, Bjarne: A Tour of C++ (2013), Addison-Wesley

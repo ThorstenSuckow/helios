@@ -8,7 +8,10 @@ import helios.rendering.shader.Shader;
 
 import helios.util.io.StringFileReader;
 import helios.ext.opengl.rendering.shader.OpenGLUniformLocationMap;
-import helios.ext.opengl.rendering.shader.OpenGLUniformSemantics;
+import helios.rendering.shader.UniformSemantics;
+import helios.rendering.shader.UniformValueMap;
+import helios.ext.opengl.rendering.shader.OpenGLUniformLocationMap;
+
 
 export namespace helios::ext::opengl::rendering::shader {
 
@@ -125,19 +128,27 @@ export namespace helios::ext::opengl::rendering::shader {
          * @param uniformLocationMap The OpenGLUniformMap providing the mappings for the uniforms
          * of the underlying GLSL shader.
          */
-        void setUniformLocationMap(std::unique_ptr<const OpenGLUniformLocationMap> uniformLocationMap) noexcept;
+        void setUniformLocationMap(
+            std::unique_ptr<const OpenGLUniformLocationMap> uniformLocationMap) noexcept;
 
         /**
          * Returns the uniform location for the uniform represented by the specified
-         * OpenGLUniformSemantics.
+         * UniformSemantics.
          *
-         * @param uniformSemantics The `OpenGLUniformSemantics` identifier.
+         * @param uniformSemantics The `UniformSemantics` identifier.
          *
          * @return The integer representing the uniform variable location in the shader, or
          * -1 if no location map was registered with this shader or if the uniform with the
          * specified semantics was not found.
          */
-        [[nodiscard]] int uniformLocation(OpenGLUniformSemantics uniformSemantics) const noexcept;
+        [[nodiscard]] int uniformLocation(
+            helios::rendering::shader::UniformSemantics uniformSemantics) const noexcept;
+
+        /**
+         * @copydoc helios::rendering::shader::Shader::applyUniformValues()
+         */
+        void applyUniformValues(
+            const ::helios::rendering::shader::UniformValueMap& uniformValueMap) const noexcept override;
 
     };
 }

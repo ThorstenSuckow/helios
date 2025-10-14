@@ -9,8 +9,10 @@ import helios.rendering.model;
 import helios.util.io;
 
 import helios.ext.opengl.rendering.shader.OpenGLUniformLocationMap;
-import helios.ext.opengl.rendering.shader.OpenGLUniformSemantics;
+import helios.rendering.shader.UniformSemantics;
+import helios.rendering.shader.UniformValueMap;
 
+using namespace helios::rendering::shader;
 using namespace helios::rendering::model;
 using namespace helios::util::io;
 
@@ -127,12 +129,22 @@ namespace helios::ext::opengl::rendering::shader {
         uniformLocationMap_ = std::move(uniformLocationMap);
     }
 
-    int OpenGLShader::uniformLocation(OpenGLUniformSemantics uniformSemantics) const noexcept {
+    int OpenGLShader::uniformLocation(const helios::rendering::shader::UniformSemantics uniformSemantics) const noexcept {
         if (uniformLocationMap_) {
             return uniformLocationMap_->get(uniformSemantics);
         }
 
         return -1;
+    }
+
+    void OpenGLShader::applyUniformValues(
+            const ::helios::rendering::shader::UniformValueMap& uniformValueMap) const noexcept {
+
+        if (const auto worldMatrixUniform = uniformLocation(UniformSemantics::WorldMatrix) != -1) {
+            if (const auto* mat4f_ptr = uniformValueMap.mat4f_ptr(UniformSemantics::WorldMatrix)) {
+                glUniformMatrix4fv(worldMatrixUniform, 1, false, mat4f_ptr);
+            }
+        }
     }
 
 };

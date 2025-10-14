@@ -100,7 +100,7 @@ export namespace helios::scene {
         void setParent(SceneNode* parentNode);
 
         public:
-            ~SceneNode() = default;
+            virtual ~SceneNode() = default;
 
             /**
              * Constructs a new SceneNode that represents no renderable object.
@@ -155,7 +155,7 @@ export namespace helios::scene {
              *
              * @return The **newly added** SceneNode.
              */
-            SceneNode& addChild(std::unique_ptr<SceneNode> sceneNode);
+            virtual SceneNode& addChild(std::unique_ptr<SceneNode> sceneNode);
 
             /**
              * Returns a const ref to the list of this node's children.

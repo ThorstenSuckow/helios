@@ -5,6 +5,7 @@ module;
 
 export module helios.rendering.model.Material;
 
+import helios.rendering.shader.UniformValueMap;
 import helios.rendering.model.MaterialData;
 import helios.util.log;
 
@@ -86,13 +87,6 @@ export namespace helios::rendering::model {
 
 
         /**
-         * Activates this Material instance for subsequent rendering operations.
-         *
-         * @see MaterialData::use()
-         */
-        virtual void use() const noexcept = 0;
-
-        /**
          * Returns a const reference to the Shader used by this instance.
          *
          * The returned data is guaranteed to be a valid reference to existing data.
@@ -101,6 +95,12 @@ export namespace helios::rendering::model {
          */
         [[nodiscard]] virtual const helios::rendering::shader::Shader& shader() const noexcept;
 
+        /**
+         * Writes this Material's uniform values into the given map.
+         *
+         * @param uniformValueMap Target map receiving the uniform values.
+         */
+        virtual void writeUniformValues(helios::rendering::shader::UniformValueMap& uniformValueMap) const noexcept = 0;
 
     };
 

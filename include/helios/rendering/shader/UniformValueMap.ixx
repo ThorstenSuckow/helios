@@ -1,6 +1,7 @@
 module;
 
-#include <unordered_map>
+#include <array>
+#include <optional>
 #include <variant>
 
 export module helios.rendering.shader.UniformValueMap;
@@ -15,7 +16,7 @@ export namespace helios::rendering::shader {
      * A type alias for the variant containing all supported
      * uniform types.
      *
-     * @see [Str13, 100]
+     * @see [Str22, 100]
      */
     using UniformValue = std::variant<
         helios::math::mat4f
@@ -39,10 +40,10 @@ export namespace helios::rendering::shader {
 
     private:
         /**
-         * Internal map storing the association between a uniform semantic and
+         * Internal data structure storing the association between a uniform semantic and
          * a concrete value.
          */
-        std::unordered_map<UniformSemantics, UniformValue> map_;
+        std::array<std::optional<UniformValue>, std::to_underlying(UniformSemantics::count)> map_;
 
     public:
         ~UniformValueMap() = default;
@@ -55,7 +56,7 @@ export namespace helios::rendering::shader {
          * @param uniformSemantics The `UniformSemantics` identifier for the uniform.
          * @param mat4f A const ref to the mat4f value to set.
          */
-        void set(UniformSemantics uniformSemantics, const helios::math::mat4f& mat4f);
+        void set(UniformSemantics uniformSemantics, const helios::math::mat4f& mat4f) noexcept;
 
         /**
          * Returns a raw const pointer to the mat4f for the specified uniform semantics.
@@ -65,7 +66,7 @@ export namespace helios::rendering::shader {
          * @return A raw const pointer to the associated mat4f, or `nullptr` if no mat4f is
          * associated with this semantics.
          */
-        const float* mat4f_ptr(UniformSemantics uniformSemantics) const noexcept;
+        [[nodiscard]] const float* mat4f_ptr(UniformSemantics uniformSemantics) const noexcept;
 
     };
 

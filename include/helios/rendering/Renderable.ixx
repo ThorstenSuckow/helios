@@ -9,7 +9,6 @@ export module helios.rendering.Renderable;
 import helios.rendering.model.Mesh;
 import helios.rendering.model.Material;
 
-import helios.rendering.RenderableDrawCallConfig;
 
 import helios.math.types;
 
@@ -24,8 +23,6 @@ export namespace helios::rendering {
      *
      * A Renderable is an aggregate consisting of Material and a Mesh, providing
      * geometric primitives and material information.
-     *
-     * @todo parent-child relationship
      */
     class Renderable {
 

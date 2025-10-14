@@ -5,7 +5,7 @@ module;
 
 export module helios.ext.opengl.rendering.shader.OpenGLUniformLocationMap;
 
-import helios.ext.opengl.rendering.shader.OpenGLUniformSemantics;
+import helios.rendering.shader.UniformSemantics;
 import helios.util.log.LogManager;
 import helios.util.log.Logger;
 
@@ -25,7 +25,7 @@ export namespace helios::ext::opengl::rendering::shader {
         /**
          * The internal map used for mapping uniform semantics to positions.
          */
-        std::map<OpenGLUniformSemantics, int> map_;
+        std::map<helios::rendering::shader::UniformSemantics, int> map_;
 
         /**
          * The logger used with this OpenGLUniformLocationMap.
@@ -54,16 +54,16 @@ export namespace helios::ext::opengl::rendering::shader {
          * map, otherwise false (e.g. if position was < 0)
          */
         [[nodiscard]] bool set(
-            OpenGLUniformSemantics uniformSemantics,
+            helios::rendering::shader::UniformSemantics uniformSemantics,
             int position
         ) noexcept;
 
         /**
-         * Returns the index of the uniform variable for the specified OpenGLUniformSemantics
+         * Returns the index of the uniform variable for the specified UniformSemantics
          * as configured with this location map.
          * This method returns -1 if the specified semantics is not configured with this map.
          *
-         * @param uniformSemantics The OpenGLUniformSemantics for which the location index
+         * @param uniformSemantics The UniformSemantics for which the location index
          * should be returned.
          *
          * @return The index as previously set for the specified uniformSemantics, or -1
@@ -72,7 +72,7 @@ export namespace helios::ext::opengl::rendering::shader {
          * @see glGetUniformLocation
          * @see [KSS17, 47]
          */
-        int get(OpenGLUniformSemantics uniformSemantics) const noexcept;
+        [[nodiscard]] int get(helios::rendering::shader::UniformSemantics uniformSemantics) const noexcept;
     };
 
 

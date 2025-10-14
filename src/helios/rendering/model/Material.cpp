@@ -5,6 +5,9 @@ module;
 
 module helios.rendering.model.Material;
 
+import helios.rendering.shader.Shader;
+import helios.rendering.model.MaterialData;
+import helios.rendering.shader.UniformValueMap;
 
 namespace helios::rendering::model {
 
@@ -45,5 +48,6 @@ namespace helios::rendering::model {
     [[nodiscard]] const MaterialData& Material::materialData() const noexcept {
         return *materialData_;
     }
+
 
 }

@@ -2,6 +2,7 @@ module;
 
 
 export module helios.rendering.shader.UniformSemantics;
+#include <cwchar>
 
 export namespace helios::rendering::shader {
 
@@ -23,7 +24,7 @@ export namespace helios::rendering::shader {
         /**
          * Represents the world transformation matrix of an object.
          */
-        WorldMatrix,
+        WorldMatrix = 0,
 
         /**
          * Represents the projection matrix.
@@ -33,6 +34,13 @@ export namespace helios::rendering::shader {
         /**
          * Represents the (camera) view space, transforming world space to view space.
          */
-        ViewMatrix
+        ViewMatrix,
+
+        /**
+         * Representant for the number of entries in this enum.
+         */
+        count
     };
+
+
 }

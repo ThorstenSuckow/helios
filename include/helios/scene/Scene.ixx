@@ -9,12 +9,15 @@ export module helios.scene.Scene;
 
 import helios.scene.SceneNode;
 import helios.rendering.RenderQueue;
-import helios.rendering.RenderableContext;
+import helios.rendering.RenderCommand;
 import helios.math.types;
 
 import helios.scene.Camera;
 import helios.scene.Snapshot;
 import helios.scene.FrustumCullingStrategy;
+
+import helios.util.log.Logger;
+import helios.util.log.LogManager;
 
 #define HELIOS_LOG_SCOPE "helios::scene::Scene"
 export namespace helios::scene {
@@ -36,9 +39,9 @@ export namespace helios::scene {
 
         /**
          * SceneGraphKey for internal use.
-         * see helios::scene::SceneNode::setWorldTransform()
+         * @see helios::scene::SceneNode::setWorldTransform()
          */
-        const SceneGraphKey sceneGraphKey_;
+        const SceneGraphKey sceneGraphKey_{};
 
         /**
          * 4x4 identity matrix for internal use.
@@ -75,9 +78,6 @@ export namespace helios::scene {
          */
         void updateNodes(SceneNode& node, const math::mat4f& wt) const;
 
-
-
-    protected:
         /**
          * The FrustumCullingStrategy used with this Scene.
          */
@@ -109,10 +109,11 @@ export namespace helios::scene {
          *
          * @param node The Scene node to add to this Scene.
          *
-         * @return A reference to the **newly added SceneNode**.
+         * @return The raw pointer to the newly added node, or `nullptr` if
+         * the was not added.
          *
          */
-        SceneNode& addNode(std::unique_ptr<SceneNode> node) const;
+        [[nodiscard]] SceneNode* addNode(std::unique_ptr<SceneNode> node) const;
 
         /**
          * Updates the world transformations of SceneNodes in the graph.

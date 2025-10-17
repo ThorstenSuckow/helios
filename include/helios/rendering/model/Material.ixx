@@ -56,51 +56,39 @@ export namespace helios::rendering::model {
          *
          * @param shader A shared pointer to the immutable Shader used by
          * this instance.
-         *
-         * @throws std::invalid_argument if shader is a null shared pointer.
-         */
-        explicit Material(std::shared_ptr<const helios::rendering::shader::Shader> shader);
-
-        /**
-         * Creates a new MaterialData instance.
-         *
-         * @param shader A shared pointer to the immutable Shader used by
-         * this instance.
-         * @param materialData
+         * @param materialData An optional shared pointer to the MaterialData this
+         * Material uses. Defaults to `nullptr`.
          *
          * @throws std::invalid_argument if shader or materialData is a null shared pointer.
          */
         explicit Material(
             std::shared_ptr<const helios::rendering::shader::Shader> shader,
-            std::shared_ptr<const MaterialData> materialData
+            std::shared_ptr<const MaterialData> materialData = nullptr
         );
 
+        /**
+         * Returns a shared pointer to the underlying MaterialData.
+         * If this Material does not use MaterialData, this method returns a `nullptr`.
+         *
+         * @return The MaterialData of this Material, or `nullptr` if this Material has none.
+         */
+        [[nodiscard]] std::shared_ptr<const MaterialData> materialData() const noexcept;
 
 
         /**
-         * Returns a const reference to the underlying shared MaterialData.
+         * Returns a shared pointer to the shader used by this instance.
          * The returned data is guaranteed to be a valid reference to existing data.
          *
-         * @return MaterialData
+         * @return The Shader this Material uses.
          */
-        [[nodiscard]] const MaterialData& materialData() const noexcept;
-
-
-        /**
-         * Returns a const reference to the Shader used by this instance.
-         *
-         * The returned data is guaranteed to be a valid reference to existing data.
-         *
-         * @return Shader
-         */
-        [[nodiscard]] virtual const helios::rendering::shader::Shader& shader() const noexcept;
+        [[nodiscard]] std::shared_ptr<const helios::rendering::shader::Shader> shader() const noexcept;
 
         /**
          * Writes this Material's uniform values into the given map.
          *
          * @param uniformValueMap Target map receiving the uniform values.
          */
-        virtual void writeUniformValues(helios::rendering::shader::UniformValueMap& uniformValueMap) const noexcept = 0;
+        virtual void writeUniformValues(helios::rendering::shader::UniformValueMap& uniformValueMap) const noexcept;
 
     };
 

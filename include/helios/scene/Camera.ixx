@@ -34,15 +34,14 @@ export namespace helios::scene {
         /**
          * The projection matrix of this Camera.
          */
-        helios::math::mat4f projectionMatrix_;
+        mutable helios::math::mat4f projectionMatrix_;
 
         /**
          * The view matrix of this Camera.
          */
-        helios::math::mat4f viewMatrix_;
+        mutable helios::math::mat4f viewMatrix_;
 
     public:
-
         /**
          * Constructor for this class.
          * Initializes projectionMatrix and viewMatrix with the identity matrix.
@@ -67,7 +66,7 @@ export namespace helios::scene {
          *
          * @return A const ref to this `Camera`'s projection matrix.
          */
-        [[nodiscard]] const helios::math::mat4f& projectionMatrix() noexcept;
+        [[nodiscard]] const helios::math::mat4f& projectionMatrix() const noexcept;
 
         /**
          * Returns a constant ref to this camera' view matrix.
@@ -76,7 +75,7 @@ export namespace helios::scene {
          *
          * @return A const ref to this `Camera`s view matrix.
          */
-        [[nodiscard]] const helios::math::mat4f& viewMatrix() noexcept;
+        [[nodiscard]] const helios::math::mat4f& viewMatrix() const noexcept;
 
     };
 

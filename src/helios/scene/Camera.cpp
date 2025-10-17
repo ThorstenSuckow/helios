@@ -14,11 +14,11 @@ namespace helios::scene {
         viewMatrix_(helios::math::mat4f::identity())
     {}
 
-    const helios::math::mat4f& Camera::projectionMatrix() noexcept {
+    const helios::math::mat4f& Camera::projectionMatrix() const noexcept {
         return projectionMatrix_;
     }
 
-    const helios::math::mat4f& Camera::viewMatrix() noexcept {
+    const helios::math::mat4f& Camera::viewMatrix() const noexcept {
         return viewMatrix_;
     }
 

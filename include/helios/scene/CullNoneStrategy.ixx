@@ -2,13 +2,11 @@ module;
 
 #include <vector>
 
+export module helios.scene.CullNoneStrategy;
+
 import helios.scene.FrustumCullingStrategy;
 import helios.scene.Camera;
 import helios.scene.SceneNode;
-
-
-export module helios.scene.CullNoneStrategy;
-
 
 export namespace helios::scene {
 
@@ -50,7 +48,4 @@ export namespace helios::scene {
 
 
     };
-
-
-
 }

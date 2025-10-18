@@ -15,10 +15,13 @@ export namespace helios::scene {
 
 
     /**
-     * SceneGraphKey as passkey idiom for accessing
-     * `setWorldTransform()`
+     * SceneGraphKey as passkey idiom for accessing `setWorldTransform()`.
+     * All friend classes are able to construct the SceneGraphKey for accessing
+     * pass key guarded methods like `setWorldTransform`.
      *
      * @see `setWorldTransform`
+     *
+     * @see https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2024/p2893r3.html#passkey-idiom
      */
     struct SceneGraphKey {
     private:
@@ -33,6 +36,17 @@ export namespace helios::scene {
      * a Renderable object (the representative of a visible element).
      * Furthermore, a SceneNode can have multiple child nodes uniquely owned by
      * **this** SceneNode.
+     *
+     * A SceneNode holds a global unique identifier and tracks a dirty state (`needsUpdate_`)
+     * related to any transformations that occurred on the SceneNode.
+     * Ownership is managed by a collection of unique pointers of the child nodes.
+     * SceneNodes are designed to be not copyable and not assignable to prevent duplication
+     * and to enforce the hierarchical tree structure.
+     *
+     * The `worldTransform_` is derived from a SceneNode's `localTransform_` and the SceneNode's
+     * parent's `worldTransform`s. A call to `worldTransform()` will update the particular subtree
+     * of the SceneNode bottom-up to make sure the actual values are available with the SceneNode's
+     * `worldTransform`. A Scene might also propagate changes top-bottom - see `Scene:.udpateNodes()`.
      *
      */
     class SceneNode {
@@ -103,11 +117,28 @@ export namespace helios::scene {
             virtual ~SceneNode() = default;
 
             /**
+             * Delete copy constructor.
+             * A SceneNode is not copyable.
+             */
+            SceneNode(const SceneNode &) = delete;
+
+            /**
+             * Delete copy assignment constructor.
+             * A SceneNode ist not indtended to be copied.
+             */
+            SceneNode& operator=(const SceneNode&) = delete;
+
+            /**
+             * @todo explicitly implement move (assignment) constructor if required,
+             * since we have deleted the copy constructors
+             */
+
+            /**
              * Constructs a new SceneNode that represents no renderable object.
              * Nodes constructed in this way should be treated as transformation
              * nodes.
              */
-            explicit SceneNode() noexcept;
+            SceneNode() noexcept;
 
             /**
              * Constructs a new SceneNode that represents no renderable object.
@@ -153,9 +184,10 @@ export namespace helios::scene {
              *
              * @param sceneNode The node to add as a child.
              *
-             * @return The **newly added** SceneNode.
+             * @return The raw pointer to the newly added node, or nullptr if
+             * adding failed
              */
-            virtual SceneNode& addChild(std::unique_ptr<SceneNode> sceneNode);
+            [[nodiscard]] virtual SceneNode* addChild(std::unique_ptr<SceneNode> sceneNode);
 
             /**
              * Returns a const ref to the list of this node's children.

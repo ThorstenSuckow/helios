@@ -8,20 +8,16 @@ module;
 
 module helios.scene.Scene;
 
+import helios.scene.Snapshot;
 import helios.scene.SceneNode;
 
-import helios.rendering.Renderable;
-import helios.rendering.RenderQueue;
-import helios.rendering.RenderCommand;
 import helios.math.types;
 
 import helios.scene.Camera;
 import helios.scene.FrustumCullingStrategy;
-import helios.scene.SnapshotRenderItem;
-
+import helios.scene.SnapshotItem;
 
 using namespace helios::math;
-using namespace helios::rendering;
 
 namespace helios::scene {
 
@@ -100,7 +96,7 @@ namespace helios::scene {
     Snapshot Scene::createSnapshot(const Camera& camera) const {
         const auto nodes = findVisibleNodes(camera);
 
-        std::vector<SnapshotRenderItem> renderables;
+        std::vector<SnapshotItem> renderables;
         renderables.reserve(nodes.size());
         for (const auto& node : nodes) {
             if (node->renderable()) {

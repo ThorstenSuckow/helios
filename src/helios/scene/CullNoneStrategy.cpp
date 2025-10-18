@@ -2,14 +2,12 @@ module;
 
 #include <vector>
 
+module helios.scene.CullNoneStrategy;
+
 import helios.scene.FrustumCullingStrategy;
 import helios.scene.Camera;
 import helios.scene.Scene;
 import helios.scene.SceneNode;
-
-
-module helios.scene.CullNoneStrategy;
-
 
 namespace helios::scene {
 

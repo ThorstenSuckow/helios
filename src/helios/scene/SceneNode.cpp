@@ -54,10 +54,10 @@ namespace helios::scene {
     };
 
 
-    SceneNode& SceneNode::addChild(std::unique_ptr<SceneNode> sceneNode) {
+    SceneNode* SceneNode::addChild(std::unique_ptr<SceneNode> sceneNode) {
         auto& ref = *children_.emplace_back(std::move(sceneNode));
         ref.setParent(this);
-        return ref;
+        return &ref;
     }
 
 

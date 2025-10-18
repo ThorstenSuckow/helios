@@ -1,20 +1,18 @@
 module;
 
-#include <cassert>
 #include <memory>
 #include <stdexcept>
 #include <vector>
 
 export module helios.scene.Scene;
 
+import helios.scene.Snapshot;
 import helios.scene.SceneNode;
-import helios.rendering.RenderQueue;
-import helios.rendering.RenderCommand;
 import helios.math.types;
 
 import helios.scene.Camera;
-import helios.scene.Snapshot;
 import helios.scene.FrustumCullingStrategy;
+import helios.scene.SnapshotItem;
 
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
@@ -30,8 +28,18 @@ export namespace helios::scene {
      * Every scene has one implicit root node all nodes are appended to when
      * `addNode` is called.
      *
+     * A Scene is responsible for managing the SceneGraph, consisting of SceneNodes;
+     * it provides methods to frustum cull SceneNodes based on a specific `FrustumCullingStrategy`
+     * and a particular `Camera` and also allows for propagating world transformations
+     * through the contained subtrees.
      *
-     * @see [RTR, pp. 828], [Gre19, pp. 693], [HDMS+14, pp. 138]
+     *
+     * @see [RTR, pp. 828]
+     * @see [Gre19, pp. 693]
+     * @see [HDMS+14, pp. 138]
+     *
+     * @note By default, we're not allowing copying/moving Scenes.
+     * These constraints may be relaxed in the future, depending on valid use cases.
      */
     class Scene {
 
@@ -94,6 +102,28 @@ export namespace helios::scene {
         );
 
     public:
+        /**
+         * Prevent copying.
+         * A Scene is not intended to be copied.
+         */
+        Scene(const Scene&)=delete;
+
+        /**
+         * Prevent copy assignment.
+         * A scene is not intended to be copied.
+         */
+        Scene& operator=(const Scene&)=delete;
+
+        /**
+         * Prevent move constructor.
+         */
+        Scene(Scene&&) noexcept = delete;
+
+        /**
+         * Prevent move assignment operator.
+         */
+        Scene& operator=(Scene&&) noexcept = delete;
+
         ~Scene() = default;
 
         /**

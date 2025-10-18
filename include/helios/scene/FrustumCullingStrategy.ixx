@@ -2,10 +2,10 @@ module;
 
 #include <vector>
 
+export module helios.scene.FrustumCullingStrategy;
+
 import helios.scene.Camera;
 import helios.scene.SceneNode;
-
-export module helios.scene.FrustumCullingStrategy;
 
 
 export namespace helios::scene {
@@ -18,9 +18,11 @@ export namespace helios::scene {
      *
      * @see [She07, pp. 443]
      *
-     * @todo The returned list should be considered as is for now, i.e. one entry = one
-     * renderable to consider. Later iterations should probably use an individual struct
-     * that provide a hint whether for a given node a whole subtree should be considered,
+     * @todo The returned list should be considered "as is" for now: Each entry in the
+     * list a single renderable entity to consider. It child nodes (i.e. the sub tree **this** node is
+     * the root of) should _not_ be automatically considered for rendering.
+     * Later iterations should probably use an individual struct
+     * that provides a hint whether for a given node a whole subtree should be considered,
      * saving time for culling and memory when constructing the list.
      */
     class FrustumCullingStrategy {

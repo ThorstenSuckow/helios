@@ -61,12 +61,12 @@ export namespace helios::rendering {
         /**
          * Delete move constructor.
          */
-        RenderCommand(const RenderCommand&&) noexcept = delete;
+        RenderCommand(RenderCommand&&) noexcept = delete;
 
         /**
          * Delete move assignment constructor.
          */
-        RenderCommand& operator=(const RenderCommand&&) noexcept = delete;
+        RenderCommand& operator=(RenderCommand&&) noexcept = delete;
 
         ~RenderCommand() = default;
 

@@ -4,15 +4,23 @@ export module helios.rendering.RenderingDevice;
 
 import helios.math.types;
 import helios.util.log;
+import helios.rendering.Renderable;
+import helios.rendering.RenderQueue;
+import helios.rendering.RenderPass;
 
 #define HELIOS_LOG_SCOPE "helios::rendering::RenderingDevice"
 export namespace helios::rendering {
 
-
     /**
      * Abstract interface for low level rendering device.
-     * This class provides fundamental API for managing the rendering pipeline.
-     * Concrete implementations provide API specific logic.
+     *
+     * This pure virtual class provides the fundamental API for managing
+     * the rendering pipeline and respective contracts for concrete
+     * implementations using a specific rendering backend (e.g. OpenGL,
+     * Vulkan...).
+     *
+     * Implementations of `RenderingDevice` are responsible for managing
+     * render passes, and configuring the viewport.
      */
     class RenderingDevice {
 
@@ -40,21 +48,56 @@ export namespace helios::rendering {
          * Should be called when the graphics context was created and before
          * any rendering operations are performed.
          * Implementing APIs should load pointers to underlying GL functions
-         * por provide similar API-specific setup.
+         * or provide similar API-specific setup.
          *
          * @throws if initializing this device failed.
          */
         virtual void init() = 0;
-
 
         /**
          * Signals this device that the application is now ready to begin a new render pass.
          * Implementing APIs should consider to prepare the rendering surface at this point and
          * clear specific buffers.
          * This method should be called at the start of each frame before any drawing occurs.
+         *
+         * @param renderPass The RenderPass that is about to be processed by the rendering device.
          */
-        virtual void beginRenderPass() const noexcept = 0;
+        virtual void beginRenderPass(helios::rendering::RenderPass& renderPass) const noexcept = 0;
 
+
+        /**
+         * Advises this RenderingDevice to process the specified RenderPass.
+         * A `RenderPass` consists of `RenderCommand`s this RenderDevice executes, i.e.
+         * binding meshes, materials and shaders as well as drawing geometry.
+         *
+         * @param renderPass A ref to the RenderQueue that holds the `RenderCommand`s
+         * to be executed.
+         */
+        virtual void doRender(helios::rendering::RenderPass& renderPass) const noexcept = 0;
+
+
+        /**
+         * Ends the specified render pass of this RenderingDevice.
+         * This method should be called when the renderPass was processed by the RenderingDevice,
+         * before the window swaps the buffers.
+         * Implementing classes should take care of unbinding frame buffers and / or flushing
+         * command bufefrs.
+         *
+        * @param renderPass The RenderPass that was processed by the rendering device.
+         */
+        virtual void endRenderPass(helios::rendering::RenderPass& renderPass) const noexcept = 0;
+
+        /**
+         * Convenient method to subsequently call `beginRenderPass`,
+         * `doRender`, `endRenderPass` (in this order) with the specified `RenderPass`.
+         *
+         * @param renderPass The RenderPass to process by this RenderingDevice.
+         */
+        void render(helios::rendering::RenderPass& renderPass) {
+            beginRenderPass(renderPass);
+            doRender(renderPass);
+            endRenderPass(renderPass);
+        }
 
         /**
          * Sets the viewport for this RenderingDevice.

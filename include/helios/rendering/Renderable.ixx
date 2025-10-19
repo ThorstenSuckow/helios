@@ -30,9 +30,9 @@ export namespace helios::rendering {
         Renderable() = default;
 
         /**
-         * A unique pointer to the Mesh owned by this Renderable.
+         * A shared pointer to the Mesh this Renderable uses.
          */
-        std::unique_ptr<helios::rendering::model::Mesh> mesh_ = nullptr;
+        std::shared_ptr<helios::rendering::model::Mesh> mesh_ = nullptr;
 
         /**
          * A unique pointer to the Material owned by the Renderable.
@@ -53,26 +53,47 @@ export namespace helios::rendering {
 
         virtual ~Renderable() = default;
 
+
+        /**
+         * Delete copy constructor.
+         */
+        Renderable(const Renderable&) = delete;
+
+        /**
+         * Delete copy assignment operator.
+         */
+        Renderable& operator=(const Renderable&)= delete;
+
+        /**
+         * Delete move constructor.
+         */
+        Renderable(Renderable&&) noexcept = delete;
+
+        /**
+         * Delete move assignment operator.
+         */
+        Renderable& operator=(Renderable&&) noexcept = delete;
+
         /**
          * Creates a new Renderable instance.
          *
-         * @param mesh A unique pointer to the Mesh owned by this Renderable.
+         * @param mesh A shared pointer to the Mesh associated with this Renderable.
          * @param material A unique pointer to the Material owned by this Renderable.
          *
          * @throws std::invalid_argument if either mesh or material are null.
          */
         explicit Renderable(
-            std::unique_ptr<helios::rendering::model::Mesh> mesh,
+            std::shared_ptr<helios::rendering::model::Mesh> mesh,
             std::unique_ptr<helios::rendering::model::Material> material);
 
 
         /**
-         * Returns a const reference to the Mesh owned by this Renderable.
+         * Returns a shared ptr to the Mesh this Renderable uses.
          * The returned data is guaranteed to be a valid reference to existing data.
          *
          * @return Mesh
          */
-        [[nodiscard]] const helios::rendering::model::Mesh& mesh() const noexcept;
+        [[nodiscard]] std::shared_ptr<const helios::rendering::model::Mesh> mesh() const noexcept;
 
 
         /**

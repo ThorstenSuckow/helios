@@ -15,7 +15,7 @@ using namespace helios::rendering::model;
 namespace helios::rendering {
 
     Renderable::Renderable(
-        std::unique_ptr<Mesh> mesh,
+        std::shared_ptr<Mesh> mesh,
         std::unique_ptr<Material> material) :
         mesh_(std::move(mesh)),
         material_(std::move(material)) {
@@ -27,8 +27,8 @@ namespace helios::rendering {
     }
 
 
-    [[nodiscard]] const Mesh& Renderable::mesh() const noexcept {
-        return *mesh_;
+    [[nodiscard]] std::shared_ptr<const Mesh> Renderable::mesh() const noexcept {
+        return mesh_;
     };
 
 

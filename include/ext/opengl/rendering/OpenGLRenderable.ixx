@@ -20,13 +20,13 @@ export namespace helios::ext::opengl::rendering {
     /**
      * An OpenGL specific implementation of a Renderable.
      */
-    class OpenGLRenderable : public helios::rendering::Renderable {
+    class OpenGLRenderable final : public helios::rendering::Renderable {
 
     public:
         /**
          * @copydoc helios::rendering::Renderable()
          */
-        explicit OpenGLRenderable(std::unique_ptr<helios::rendering::model::Mesh> mesh,
+        explicit OpenGLRenderable(std::shared_ptr<helios::rendering::model::Mesh> mesh,
             std::unique_ptr<helios::rendering::model::Material> material);
 
 

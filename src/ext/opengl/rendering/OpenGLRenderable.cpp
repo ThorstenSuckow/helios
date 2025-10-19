@@ -19,7 +19,7 @@ using namespace helios::ext::opengl::rendering::model;
 namespace helios::ext::opengl::rendering {
 
         OpenGLRenderable::OpenGLRenderable(
-            std::unique_ptr<Mesh> mesh,
+            std::shared_ptr<Mesh> mesh,
             std::unique_ptr<Material> material) :
             Renderable(std::move(mesh), std::move(material)) {
         }

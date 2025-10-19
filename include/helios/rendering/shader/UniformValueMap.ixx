@@ -30,11 +30,17 @@ export namespace helios::rendering::shader {
      * under a single semantic identifier, for convenient assignment to uniform locations
      * of an underlying shader in the rendering process.
      *
+     * @note this class goes intentionally without templates as we assume that instances of the
+     * value maps are directly used in the rendering hot path.
+     *
      * @todo UniformMap must allow only one index for all datastructures,
      * i.e. if mat4fMap_[semantics] is set, vec3fMap_[semantics] must not be allowed
      *
-     * @note this class goes intentionally without templates as we assume that instances of the
-     * value maps are directly used in the rendering hot path.
+     * @todo UniformValueMaps should be scope, e.g. per frame (world matrix,
+     * projection, view, view projection...), per Material (colos, emmissive...),
+     * per object (World matrix...) Which allws for better handling of assigning uniforms,
+     * e.g. per frame gets changed once, per object gets changed per object etc...
+     *
      */
     class UniformValueMap {
 

@@ -23,8 +23,9 @@ import helios.ext.glfw.window.GLFWWindowUserPointer;
 import helios.ext.glfw.window.GLFWWindow;
 import helios.ext.glfw.input.GLFWInputAdapter;
 
+import helios.rendering.model.Material;
+
 import helios.ext.glfw.window.GLFWWindowConfig;
-import helios.ext.opengl.rendering.model.OpenGLMaterial;
 import helios.ext.opengl.rendering.OpenGLDevice;
 
 using namespace helios::app::controller;
@@ -76,6 +77,7 @@ namespace helios::ext::glfw::app {
 
 
         app->setCurrent(win);
+        static_cast<OpenGLDevice*>(&app->renderingDevice())->setClearColor(math::vec4f(0.0f, 0.0f, 0.0f, 1.0f));
 
         return app;
     }

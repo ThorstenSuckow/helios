@@ -11,8 +11,8 @@ import helios.math.types;
 
 namespace helios::rendering::shader {
 
-    void UniformValueMap::set(UniformSemantics uniformSemantics, const helios::math::mat4f& mat4f) {
-        map_[std::to_underlying(uniformSemantics)] = mat4f;
+    void UniformValueMap::set(const UniformSemantics uniformSemantics, const helios::math::mat4f& mat4f) noexcept {
+        map_[std::to_underlying(uniformSemantics)].emplace(mat4f);
     }
 
 
@@ -24,7 +24,7 @@ namespace helios::rendering::shader {
             return nullptr;
         }
 
-        if (const auto el = map_[index]; el.has_value()) {
+        if (const auto& el = map_[index]; el.has_value()) {
             if (const auto* it = std::get_if<helios::math::mat4f>(&el.value())) {
                 return helios::math::value_ptr(*it);
             }

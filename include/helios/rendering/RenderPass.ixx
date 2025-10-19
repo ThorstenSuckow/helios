@@ -23,6 +23,9 @@ export namespace helios::rendering {
      *
      * `RenderPass`es are typically processed sequentially by an API-specific implementation
      * of the pure virtual `RenderingDevice`-class.
+     *
+     * @note A `RenderPass` should be configurable with other properties relevant to the underlying
+     * rendering backend, e.g. depth testing, draw mode etc.
      */
     class RenderPass {
 

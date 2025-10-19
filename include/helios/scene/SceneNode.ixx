@@ -5,11 +5,12 @@ module;
 
 export module helios.scene.SceneNode;
 
+import :SceneFwd;
+
 import helios.rendering.Renderable;
 import helios.util.Guid;
 import helios.scene.Transform;
 import helios.math.types;
-import helios.scene.SceneFwd;
 
 export namespace helios::scene {
 

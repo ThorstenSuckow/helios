@@ -38,6 +38,10 @@ namespace helios::ext::opengl::rendering::model {
         vao_(generateGLVertexArray()),
         vbo_(generateGLBuffer()),
         ebo_(generateGLBuffer()) {
+        /**
+         * @todo this should not be part of the constructor,
+         * instead, lazy init in render pass, then reuse.
+         */
         OpenGLMesh::init();
     }
 

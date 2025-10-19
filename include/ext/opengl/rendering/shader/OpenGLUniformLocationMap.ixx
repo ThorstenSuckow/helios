@@ -1,7 +1,8 @@
 module;
 
 
-#include <map>
+#include <array>
+#include <optional>
 
 export module helios.ext.opengl.rendering.shader.OpenGLUniformLocationMap;
 
@@ -11,6 +12,7 @@ import helios.util.log.Logger;
 
 #define HELIOS_LOG_SCOPE "helios::ext::opengl::rendering::shader::OpenGLUniformLocationMap"
 export namespace helios::ext::opengl::rendering::shader {
+
 
     /**
      * Manages the mapping between OpenGL uniform semantics and their locations
@@ -23,9 +25,16 @@ export namespace helios::ext::opengl::rendering::shader {
 
     private:
         /**
+         * Bit mask serving as sentinel to keep track of set indices.
+         * Since position 0 is allowed for uniform locations, this bitmask keeps
+         * track of set indices in `map_`.
+         */
+        unsigned int sentinel_ = 0;
+
+        /**
          * The internal map used for mapping uniform semantics to positions.
          */
-        std::map<helios::rendering::shader::UniformSemantics, int> map_;
+        std::array<int, std::to_underlying(helios::rendering::shader::UniformSemantics::count)> map_ = {};
 
         /**
          * The logger used with this OpenGLUniformLocationMap.
@@ -40,6 +49,17 @@ export namespace helios::ext::opengl::rendering::shader {
     public:
         ~OpenGLUniformLocationMap() = default;
 
+        /**
+         * Make sure the sentinel has enough bits to keep track of the entries
+         * of the UniformSemantics enum.
+         */
+        static_assert(
+           static_cast<size_t>(helios::rendering::shader::UniformSemantics::count)
+           <= (sizeof(sentinel_) * 8)  && "sentinel type is too narrow");
+
+        /**
+         * Default constructor for a OpenGLUniformLocationMap.
+         */
         OpenGLUniformLocationMap() = default;
 
         /**

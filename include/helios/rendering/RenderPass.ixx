@@ -5,7 +5,6 @@ module;
 export module helios.rendering.RenderPass;
 
 import helios.rendering.RenderQueue;
-import helios.rendering.NullRenderQueue;
 import helios.rendering.shader.UniformValueMap;
 
 import helios.util.log.Logger;
@@ -83,7 +82,6 @@ export namespace helios::rendering {
          * Ownership of both objects is transferred to **this** `RenderPass`.
          *
          * @param renderQueue A unique ptr to the `RenderQueue` that should be processes with this pass.
-         * If a nullptr was submitted, an implicit default NullRenderQueue is created.
          * @param frameUniformValues A unique ptr to the UniformValueMap associated with this pass, i.e.
          * frame specific Uniform Values. If no values are specified, a default empty set is created.
          */
@@ -94,10 +92,8 @@ export namespace helios::rendering {
 
         /**
          * Returns a const ref to the `RenderQueue` this `RenderPass` holds.
-         * Might be a `NullRenderQueue` if the caller of the constructor did not pass a valid
-         * `RenderQueue`
          *
-         * @ return A const ref to this `RenderPass` `RenderQueue`, which might be a `NullRenderQueue.`
+         * @return A const ref to this `RenderPass` `RenderQueue`.`
          */
         [[nodiscard]] const RenderQueue& renderQueue() const noexcept;
 

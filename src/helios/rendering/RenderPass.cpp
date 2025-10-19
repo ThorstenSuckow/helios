@@ -1,5 +1,6 @@
 module;
 
+#include <cassert>
 #include <memory>
 
 module helios.rendering.RenderPass;
@@ -16,9 +17,9 @@ namespace helios::rendering {
         :
         renderQueue_(std::move(renderQueue)),
         frameUniformValues_(std::move(frameUniformValues)) {
+        assert(renderQueue_ && "Received nullptr RenderQueue.");
         if (!renderQueue_) {
-            logger_.warn("Constructor received a nullptr RenderQueue.");
-            renderQueue_ = std::make_unique<helios::rendering::NullRenderQueue>();
+            logger_.error("Constructor received a nullptr RenderQueue.");
         }
         if (frameUniformValues_ == nullptr) {
             logger_.warn("Constructor received a nullptr UniformValueMap.");

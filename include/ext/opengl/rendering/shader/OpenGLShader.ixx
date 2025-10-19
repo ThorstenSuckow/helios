@@ -148,7 +148,7 @@ export namespace helios::ext::opengl::rendering::shader {
          * @copydoc helios::rendering::shader::Shader::applyUniformValues()
          */
         void applyUniformValues(
-            const ::helios::rendering::shader::UniformValueMap& uniformValueMap) const noexcept override;
+            const helios::rendering::shader::UniformValueMap& uniformValueMap) const noexcept override;
 
     };
 }

@@ -65,3 +65,45 @@ TEST(Mat4Tests, multiply) {
     }
 
 }
+
+
+TEST(Mat4Same, same) {
+    math::mat4f M{
+        0, 1, 2, 3,
+        4, 5, 6, 7,
+        8, 9, 10, 11,
+        12, 13, 14, 15
+    };
+
+    math::mat4f A{
+        0, 1, 2, 3,
+        4, 5, 6, 7,
+        8, 9, 10, 11,
+        12, 13, 14, 15
+    };
+
+    math::mat4f B{
+        0, 1.00004f, 2, 3,
+        4, 5, 6, 7,
+        8, 9, 10, 11,
+        12, 13, 14, 15
+    };
+
+    math::mat4f C{
+        0, 1.000004f, 2, 3,
+        4, 5, 6, 7,
+        8, 9, 10, 11,
+        12, 13, 14, 15
+    };
+
+
+    EXPECT_TRUE(A == M);
+    EXPECT_TRUE(A.same(M));
+
+    EXPECT_FALSE(B == M);
+    EXPECT_FALSE(B.same(M));
+
+    EXPECT_FALSE(B == M);
+    EXPECT_TRUE(C.same(M));
+
+}

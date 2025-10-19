@@ -4,6 +4,8 @@ export module helios.ext.opengl.rendering.OpenGLDevice;
 
 import helios.math.types;
 import helios.rendering.RenderingDevice;
+import helios.rendering.RenderQueue;
+import helios.rendering.RenderPass;
 
 export namespace helios::ext::opengl::rendering {
 
@@ -30,7 +32,6 @@ export namespace helios::ext::opengl::rendering {
          */
         void init() override;
 
-
         /**
          * Begins a new render pass.
          * This implementation makes sure that the rendering surface is cleared
@@ -39,8 +40,22 @@ export namespace helios::ext::opengl::rendering {
          * @see clear()
          * @see clearColor();
          */
-        void beginRenderPass() const noexcept override;
+        void beginRenderPass(helios::rendering::RenderPass& renderPass) const noexcept override;
 
+        /**
+         * Binds the vaos and draws the elements based on the RenderCommands available with the
+         * `RenderPass`-
+         *
+         * @param renderPass
+         */
+        void doRender(helios::rendering::RenderPass& renderPass) const noexcept override;
+
+        /**
+         * Ends the specified render pass. The current implementation does nothing.
+         *
+         * @param renderPass
+         */
+        void endRenderPass(helios::rendering::RenderPass& renderPass) const noexcept override;
 
         /**
          * @copydoc helios::rendering::RenderingDevice::setViewport()
@@ -49,14 +64,12 @@ export namespace helios::ext::opengl::rendering {
          */
         void setViewport(const int x, const int y, const int width, const int height) const noexcept override;
 
-
         /**
          * Clears the color buffer to preset values.
          *
          * @see clearColor
          */
         void clear() const  noexcept;
-
 
         /**
          * Specifies the RGBa values clamped to [0, 1] when color
@@ -66,7 +79,7 @@ export namespace helios::ext::opengl::rendering {
          *
          * @see clear
          */
-        void clearColor(const math::vec4f& color) const noexcept;
+        void setClearColor(const math::vec4f& color) const noexcept;
 
     };
 }

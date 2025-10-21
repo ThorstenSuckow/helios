@@ -199,7 +199,7 @@ export namespace helios::math {
             mat4<T> A{};
             for (int row = 0; row < 4; row++) {
                 for (int col = 0; col < 4; col++) {
-                    float sum = 0.0f;
+                    T sum = T{};
                     sum += (*this)(row, 0) * m(0, col);
                     sum += (*this)(row, 1) * m(1, col);
                     sum += (*this)(row, 2) * m(2, col);

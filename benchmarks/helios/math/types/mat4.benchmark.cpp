@@ -8,7 +8,7 @@ namespace math = helios::math;
 static void BM_mat4Constructor(benchmark::State& state) {
     for (auto _ : state) {
         benchmark::DoNotOptimize(
-            math::mat4{
+            math::mat4f{
             0, 1, 2, 3,
             4, 5, 6, 7,
             8, 9, 10, 11,
@@ -34,14 +34,14 @@ BENCHMARK(BM_glm_mat4Constructor)->UseRealTime();
 
 static void BM_mat4Multiply(benchmark::State& state) {
 
-    math::mat4 M{
+    math::mat4f M{
         0, 1, 2, 3,
         4, 5, 6, 7,
         8, 9, 10, 11,
         12, 13, 14, 15
     };
 
-    math::mat4 A{
+    math::mat4f A{
         0, 1, 2, 3,
         4, 5, 6, 7,
         8, 9, 10, 11,
@@ -49,7 +49,7 @@ static void BM_mat4Multiply(benchmark::State& state) {
     };
 
     auto multiply_matrices = [&]( ) {
-        math::mat4 B = A * M;
+        math::mat4f B = A * M;
     };
 
     for (auto _ : state) {

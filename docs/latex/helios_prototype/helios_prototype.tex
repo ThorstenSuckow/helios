@@ -1,0 +1,103 @@
+
+%% Template for ENG 401 reports
+%% by Robin Turner
+%% Adapted from the IEEE peer review template
+
+%
+% note that the "draftcls" or "draftclsnofoot", not "draft", option
+% should be used if it is desired that the figures are to be displayed in
+% draft mode.
+
+\documentclass[peerreview]{IEEEtran}
+\usepackage{url} % Provides better formatting of URLs.
+\usepackage[utf8]{inputenc} % Allows Turkish characters.
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables for horizontal lines
+\usepackage{graphicx}
+
+\usepackage[backend=biber, style=alphabetic, isbn=true, doi=true]{biblatex}
+\usepackage{csquotes}
+\hyphenation{op-tical net-works semi-conduc-tor} % Corrects some bad hyphenation
+
+\addbibresource{literatur.bib}
+
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegray}{gray}{0.9}
+\definecolor{commentgreen}{rgb}{0,0.6,0}
+\definecolor{keywordblue}{rgb}{0.2,0.2,0.8}
+
+\lstdefinestyle{c++style}{
+    backgroundcolor=\color{white},
+    commentstyle=\color{commentgreen}\itshape,
+    keywordstyle=\color{keywordblue}\bfseries,
+    numberstyle=\tiny\color{gray},
+    stringstyle=\color{red},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=C++
+}
+
+\usepackage{amsmath,amsthm}
+\theoremstyle{definition} % Kein Kursiv, normaler Text
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma} % zählt mit theorem mit
+\newtheorem{definition}[theorem]{Definition}
+
+\begin{document}
+%\begin{titlepage}
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{helios, ein Entwurf einer Game Engine \\zur Entwicklung eines Spiels}
+
+
+% author names and affiliations
+
+\author{Thorsten Suckow-Homberg \\
+Master's Student M.C.Sc.\\
+Trier University of Applied Science
+}
+\date{24.10.2025}
+
+% make the title area
+\maketitle
+\tableofcontents
+\listoffigures
+\listoftables
+%\end{titlepage}
+
+\IEEEpeerreviewmaketitle
+
+
+
+\input{index}
+
+
+
+
+
+%\bibliographystyle{geralpha}			% Literaturverzeichnis
+%\bibliography{literatur}     			% BibTeX-File literatur.bib
+%\raggedright
+\clearpage
+\sloppy
+\printbibliography
+\fussy
+
+
+
+
+
+
+
+
+\end{document}

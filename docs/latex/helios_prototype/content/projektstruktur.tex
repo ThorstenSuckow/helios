@@ -95,9 +95,9 @@ Der Ordner enthält außerdem formale Dokumentation, wie den \LaTeX-Quelltext de
 \noindent
 Für das Unit Testing verwendet helios \textit{Google Test}~\cite[]{googletestgithub}.
 Wir streben eine kurzfristige Erhöhung der Entwicklungsgeschwindigkeit unter Annahme eventueller Projektinstabilität an, weshalb wir zu Projektbeginn keine hohe Testabdeckung eingeplant haben.
-Aus diesem Grund liegt der Schwerpunkt der Tests derzeit auf den mathematischen Funktionen, um beispielsweise Transformationen innerhalb des Szenengraphen zu validieren. Auch hier nutzt helios \texttt{glm} als Referenzimplementierung, um Ergebnisse abzugleichen: \texttt{glm} wird als \textit{Test Orakel} behandelt\footnote{
-    Alternativ lässt sich \texttt{glm} als \textit{baseline} auffassen, gegen die die Funktionen in helios (als \textit{delta version}) in Regressions-Test verglichen werden. Uns ist bewusst, das sich eventuelle Fehler in \texttt{glm} direkt auf die Implementierung in helios auswirken. Wir bewerten dieses Risiko aufgrund der Projektreife von \textit{glm} als äußerst gering.
-}~\cite[917 ff.]{Bin99}.
+Aus diesem Grund liegt der Schwerpunkt der Tests derzeit auf den mathematischen Funktionen, um beispielsweise Transformationen innerhalb des Szenengraphen zu validieren. helios nutzt \texttt{glm} als Testorakel~\cite[917 ff.]{Bin99}, um Ergebnisse abzugleichen\footnote{
+    Alternativ lässt sich \texttt{glm} als \textit{baseline} auffassen, gegen die die Funktionen in helios (als \textit{delta version}) in Regressions-Tests verglichen werden. Uns ist bewusst, das sich eventuelle Fehler in \texttt{glm} direkt auf die Implementierung in helios auswirken. Wir bewerten dieses Risiko aufgrund der Projektreife von \textit{glm} als äußerst gering.
+}.
 
 
 \noindent
@@ -118,9 +118,9 @@ Wir können somit den Fokus auf die benötigten Schnittstellen einzelner Subsyst
 
 \subsection*{\texttt{/include, /src}}
 Mit C++23 nutzt helios durchweg Module Interface und Implementation Units, die in \texttt{include} bzw. \texttt{src} abgelegt werden.\\
-Module, die nicht in interface/implementation units unterteilt werden, sind direkt in \texttt{include} abgelegt - beispielsweise Klassen wie \texttt{helios::math::vec3}, die als Repräsentanten für dreidimensionale Vektoren überwiegend als \texttt{constexpr}\footnote{
+Module, die nicht in interface/implementation units unterteilt werden, sind direkt in \texttt{include} abgelegt - beispielsweise Klassen wie \texttt{helios::math::vec3}, welche dreidimensionale Vektoren repräsentieren und überwiegend als \texttt{constexpr}\footnote{
 \texttt{contexpr} erlaubt die Evaluierung eines Ausdrucks zur Kompilierzeit
-} definiert sind.\\
+} deklariert sind.\\
 Die Verzeichnisse sind weiter unterteilt in \textt{ext} und \texttt{helios}:
 \begin{itemize}
     \itemsep0.5em

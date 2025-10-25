@@ -1,0 +1,132 @@
+\section{Pojektstruktur}
+Wir stellen im Folgenden die Strukturierung des Projektes sowie das Build-System vor.
+Außerdem führen wir kurz in den Inhalt einzelner Verzeichnisse ein.\\
+
+Die oberste Ebene der Verzeichnisstruktur von helios bietet Zugriff auf Tests, ausführbare Beispielprogramme, Benchmarks sowie Dokumentation und Quelldateien.
+Die gewählte Struktur lehnt sich dabei an die durch das \textit{Pitchfork}-Projekt definierten Konventionen für C++-Projekte an~\cite[]{Pitchfork}.
+Die Verzeichnisnamen geben dabei Aufschluss über den durch sie verwalteten Inhalt und ist wie in Abbildung~\ref{fig:verzeichnisstruktur} angegeben.\\
+
+\begin{figure}[htbp]
+    \setlength{\DTbaselineskip}{18pt}
+    \dirtree{%
+        .1 ./.
+        .2 .build/.
+        .2 benchmarks/.
+        .2 docs/.
+        .2 examples/.
+        .2 include/.
+        .2 src/.
+        .2 tests/.
+    }
+    \caption{Projektverzeichnis von helios (Ausschnitt). Der \texttt{.build}-Ordner wird beim Build-Vorgang automatisch erstellt. Von der Versionsverwaltung wird er folglich ignoriert.}
+    \label{fig:verzeichnisstruktur}
+\end{figure}
+
+Das Projekt besitzt verschiedene Build-Schritte, um sowohl die Sourcen zu kompilieren, als auch die Tests und die Beispielprogramme zu erzeugen.
+Zur Automatisierung nutzen wir \texttt{CMake}~\cite[]{CMake}, womit wir gleichzeitig ein einfaches Dependency-Management realisieren.
+Die für die Entwicklung benötigten \textit{Third-Party Libraries} (TPL) (u.a. \texttt{gflw}~\cite[]{glfwHomepage} und \texttt{glad}~\cite[]{gladgithub}) können somit direkt aus externen Quellen geladen, statisch kompiliert und eingebunden werden (siehe Listing~\ref{lst:cmake}).\\
+
+Damit entfällt zunächst eine aufwändige Vorkonfiguration des Projektes mit den TPLs sowie ein manuelles (und oft fehleranfälliges~\cite[]{FG22}) Einbinden der benötigten Quellen.
+
+\vspace{4mm}
+\begin{lstlisting}[style=c++style, caption={Ausschnitt aus der CMakeLists.txt des helios Projekts: Dieser Abschnitt deklaiert und bezieht GLFW v3.4 und GLAD v2.0.8 per FetchContent von den jeweiligen Github-Repositories (URLs der Übersicht halber ausgelassen). Im Anschluss wird ein GLAD-Loader für OpenGL 4.6 als statische Bibliothek erzeugt.}, label=lst:cmake]
+    ...
+    FetchContent_Declare(glfw
+        GIT_REPOSITORY [url]
+        GIT_TAG        3.4
+    )
+
+    FetchContent_Declare(glad
+        GIT_REPOSITORY [url]
+        GIT_TAG        v2.0.8
+        SOURCE_SUBDIR  cmake
+    )
+    FetchContent_MakeAvailable(glfw glad)
+
+    #GLAD v2: Core GL 4.6
+    glad_add_library(
+        glad_gl_core_46
+        STATIC REPRODUCIBLE LOADER API
+        gl:core=4.6
+    )
+    ...
+\end{lstlisting}
+\vspace{4mm}
+
+\subsection{Verzeichnisinhalte}
+
+Im Folgenden stellen wir die Hauptverzeichnisse in alphabetischer Reihenfolge vor.
+Wir gehen dabei auch auf die Inhalte der Verzeichnisse ein.
+
+
+\subsection*{\texttt{benchmarks}}
+\noindent
+Zum Benchmarking einzelner Funktionen nutzt helios \textit{Google Benchmark}~\cite[]{googlebenchmarkgithub}.
+Es existieren derzeit Benchmarks für mathematische Typen und Funktionen.
+Wir nutzen diese für einen Vergleich mit der Implementierung in \texttt{glm}~\cite[]{glmGithub}, die wir als Referenz betrachten.
+Hierdurch sollen frühzeitig Flaschenhälse in der \textit{Game Loop} - bspw.  durch affine Transformationsmatrizen und deren Operationen - erkannt werden.\\
+Weitere Benchmarks, die das Verhalten ausgewählter Funktionen der \textit{Rendering Pipeline} bzw. der \textit{Application Stage}~\cite[687]{Gre19} messen (bspw. beim Culling), sollen folgen.
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{lrrrr}
+        \hline
+        \textbf{Benchmark} & \textbf{Time} & \textbf{CPU} & \textbf{Iterations} \\
+        \hline
+        BM\_mat4Constructor/real\_time         & 5.81 ns  & 5.85 ns  & 106{,}874{,}145 \\
+        BM\_glm\_mat4Constructor/real\_time    & 13.0 ns  & 13.1 ns  & 53{,}781{,}740 \\
+        BM\_mat4Multiply/real\_time            & 175 ns   & 168 ns   & 3{,}896{,}895 \\
+        BM\_glm\_mat4Multiply/real\_time       & 430 ns   & 434 ns   & 1{,}655{,}019 \\
+        \hline\\
+    \end{tabular}
+    \label{tab:mat4-benchmark}
+    \caption{Beispielausgabe von Benchmark-Ergebnissen, hier anhand der eigenen \texttt{mat4}-Implementierung im Vergleich zu \texttt{glm::mat4}.}
+\end{table}
+
+\noindent
+Eine Evaluation fand nicht statt, es wurden keine Benchmarking-Frameworks miteinander verglichen.
+Die Auswahl richtete sich nach Popularität und Empfehlungen.
+
+\subsection*{\texttt{/docs}}
+\noindent
+Das Verzeichnis enthält die auf den Quelldateien beruhende und von \texttt{doxygen}~\cite[]{Doxygen} erzeugte API-Dokumentation.
+\texttt{doxygen} hat den Vorteil, dass es eine Überführung in verschiedene Formate erlaubt. Hierdurch können wir die erstellte Dokumentation als html-Dateien speichern und durch einen gesonderten Build-Schritt in die helios-Projektwebseite~\cite[]{helios} einbinden.\\
+Der Ordner enthält außerdem formale Dokumentation, wie den \LaTeX-Quelltext des vorliegenden Dokuments.
+
+\subsection*{/tests}
+\noindent
+Für das Unit Testing verwendet helios \textit{Google Test}~\cite[]{googletestgithub}.
+Wir streben eine kurzfristige Erhöhung der Entwicklungsgeschwindigkeit unter Annahme eventueller Projektinstabilität an, weshalb wir zu Projektbeginn keine hohe Testabdeckung eingeplant haben.
+Aus diesem Grund liegt der Schwerpunkt der Tests derzeit auf den mathematischen Funktionen, um beispielsweise Transformationen innerhalb des Szenengraphen zu validieren. Auch hier nutzt helios \texttt{glm} als Referenzimplementierung, um Ergebnisse abzugleichen: \texttt{glm} wird als \textit{Test Orakel} behandelt\footnote{
+    Alternativ lässt sich \texttt{glm} als \textit{baseline} auffassen, gegen die die Funktionen in helios (als \textit{delta version}) in Regressions-Test verglichen werden. Uns ist bewusst, das sich eventuelle Fehler in \texttt{glm} direkt auf die Implementierung in helios auswirken. Wir bewerten dieses Risiko aufgrund der Projektreife von \textit{glm} als äußerst gering.
+}~\cite[917 ff.]{Bin99}.
+
+
+\noindent
+Wie bei dem Benchmarking fand keine Evaluation unterschiedlicher Unit-Test-Frameworks statt.
+Wir haben uns an Popularität und Empfehlungen orientiert.
+
+\subsection*{\texttt{/examples}}
+Hier liegen Beispielprogramme, die das helios Framework nutzen.
+Während des Entwicklungsprozess wird von uns die Semantik einzelner Objekte festgelegt, Funktionalitäten definieren wir in einem \textit{Top-Down-Ansatz}~\cite[]{Wir71}.
+Wir können somit den Fokus auf die benötigten Schnittstellen einzelner Subsysteme richten und verlieren uns nicht in Implementierungsdetails, die in einer späteren Iteration nachgeliefert werden können.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=1\columnwidth]{img/cube_example}
+    \caption{Screenshot des \texttt{simple\_cube\_rendering}-demos, der zur Fertigstellung des ersten Meilensteins genutzt wurde.}
+    \label{fig:simple-cube-rendering-demo}
+\end{figure}
+
+\subsection*{\texttt{/include, /src}}
+Mit C++23 nutzt helios durchweg Module Interface und Implementation Units, die in \texttt{include} bzw. \texttt{src} abgelegt werden.\\
+Module, die nicht in interface/implementation units unterteilt werden, sind direkt in \texttt{include} abgelegt - beispielsweise Klassen wie \texttt{helios::math::vec3}, die als Repräsentanten für dreidimensionale Vektoren überwiegend als \texttt{constexpr}\footnote{
+\texttt{contexpr} erlaubt die Evaluierung eines Ausdrucks zur Kompilierzeit
+} definiert sind.\\
+Die Verzeichnisse sind weiter unterteilt in \textt{ext} und \texttt{helios}:
+\begin{itemize}
+    \itemsep0.5em
+    \item \texttt{ext} beinhaltet Plattformspezifische Schnittstellen, die das helios Framework nutzen, wie bspw. Applikations-Abstraktion auf Basis von \texttt{glfw}, oder die Implementierung des OpenGL-Rendering-Backends auf Basis von \texttt{glad}.
+    \item \texttt{helios} beinhaltet den eigentlichen Framework-Code
+\end{itemize}
+
+Wir gehen im nachfolgenden Abschnitt auf die Inhalte der Verzeichnisse detaillierter ein.

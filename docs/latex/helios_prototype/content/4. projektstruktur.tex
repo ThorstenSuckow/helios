@@ -87,9 +87,14 @@ Eine Evaluation von Benchmarking-Frameworks fand nicht statt, die Auswahl richte
 
 \subsection*{\texttt{/docs}}
 \noindent
-Das Verzeichnis enthält die auf den Quelldateien beruhende und von \texttt{doxygen}~\cite[]{Doxygen} erzeugte API-Dokumentation.
-\texttt{doxygen} hat den Vorteil, dass es eine Überführung in verschiedene Formate erlaubt. Hierdurch können wir die erstellte Dokumentation als html-Dateien speichern und durch einen gesonderten Build-Schritt in die helios-Projektwebseite~\cite[]{helios} einbinden.\\
-Der Ordner enthält außerdem formale Dokumentation, wie den \LaTeX-Quelltext des vorliegenden Dokuments.
+Das Verzeichnis enthält neben formaler Dokumentation\footnote{wie den \LaTeX-Quelltext des vorliegenden Dokuments} die auf den Quelldateien beruhende und von \texttt{doxygen}~\cite[]{Doxygen} erzeugte API-Dokumentation.
+\texttt{doxygen} hat den Vorteil, dass es eine Überführung in verschiedene Formate erlaubt.
+Hierdurch können wir die Dokumentation im html- bzw. xml-Format exportieren und durch einen gesonderten Build-Schritt in die helios-Projektwebseite~\cite[]{helios} einbinden.\\
+
+Eine formale Evaluation von Software-Dokumentationstolls hat nicht stattgefunden.
+Die Auswahl basierte auf Grundlage der leichten Integration von \texttt{doxygen} und seiner Baknntheit.
+Zudem sehen wir die umfangreiche Auswahl an verschiedenen Ausgabeformate (u.a. PDF, Markdown) zur Unterstützung der Projektdokumentation als Vorteil.
+
 
 \subsection*{/tests}
 \noindent
@@ -105,8 +110,7 @@ Wie bei dem Benchmarking fand keine Evaluation unterschiedlicher Unit-Test-Frame
 Wir haben uns an Popularität und Empfehlungen orientiert.
 
 \subsection*{\texttt{/examples}}
-Hier liegen Beispielprogramme, die das helios Framework nutzen.
-Während des Entwicklungsprozess wird von uns die Semantik einzelner Objekte festgelegt, Funktionalitäten definieren wir in einem \textit{Top-Down-Ansatz}~\cite[]{Wir71}.
+Hier liegen Beispielprogramme, die das helios Framework nutzen, die wir während des Entwicklungsprozess nutzen, um Funktionalitäten in einem \textit{Top-Down-Ansatz} zu definieren und im weiteren Verlauf auszulagern und zu verfeinern~\cite[]{Wir71}.
 Wir können somit den Fokus auf die benötigten Schnittstellen einzelner Subsysteme richten und verlieren uns nicht in Implementierungsdetails, die in einer späteren Iteration nachgeliefert werden können.
 
 \begin{figure}[!h]
@@ -117,15 +121,13 @@ Wir können somit den Fokus auf die benötigten Schnittstellen einzelner Subsyst
 \end{figure}
 
 \subsection*{\texttt{/include, /src}}
-Mit C++23 nutzt helios durchweg Module Interface und Implementation Units, die in \texttt{include} bzw. \texttt{src} abgelegt werden.\\
-Module, die nicht in interface/implementation units unterteilt werden, sind direkt in \texttt{include} abgelegt - beispielsweise Klassen wie \texttt{helios::math::vec3}, welche dreidimensionale Vektoren repräsentieren und überwiegend als \texttt{constexpr}\footnote{
+Mit C++23 nutzt helios durchweg Module Interface und Implementation Units~\cite[211 f-]{Str24}, die in \texttt{include} bzw. \texttt{src} abgelegt werden.\\
+Module, die nicht in interface/implementation units unterteilt werden, sind direkt in \texttt{include} abgelegt - beispielsweise Klassen wie \texttt{helios::math::vec3}, welche dreidimensionale Vektoren repräsentieren und deren Funktionen überwiegend als \texttt{constexpr}\footnote{
 \texttt{contexpr} erlaubt die Evaluierung eines Ausdrucks zur Kompilierzeit
 } deklariert sind.\\
 Die Verzeichnisse sind weiter unterteilt in \textt{ext} und \texttt{helios}:
 \begin{itemize}
     \itemsep0.5em
-    \item \texttt{ext} beinhaltet Plattformspezifische Schnittstellen, die das helios Framework nutzen, wie bspw. Applikations-Abstraktion auf Basis von \texttt{glfw}, oder die Implementierung des OpenGL-Rendering-Backends auf Basis von \texttt{glad}.
+    \item \texttt{ext} beinhaltet plattformspezifische Implementierungen von Schnittstellen, die vom helios Framework vertraglich vorgegeben werden (hardwarenahe Window-/Applikations-Abstraktionen, außerdem Spezifika der Rendering-Pipeline).
     \item \texttt{helios} beinhaltet den eigentlichen Framework-Code
 \end{itemize}
-
-Wir gehen im nachfolgenden Abschnitt auf die Inhalte der Verzeichnisse detaillierter ein.

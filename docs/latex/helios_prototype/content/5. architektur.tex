@@ -27,7 +27,7 @@ im allgemeinen Sprachgebrauch wird diese Strukturierung auch als ``package by fe
 
 \subsection*{\texttt{app}: Applikationsschicht}
 Als zentrale Steuereinheit der Anwendung (also des Spiels) sehen wir eine \texttt{Application}-Klasse vor, die über Event-System, Eingabeverarbeitung und Fenstermanagement verfügt sowie das Rendering-Backend - repräsentiert durch \texttt{RenderDevice} - initialisiert.\\
-helios unterstützt an dieser Stelle außerdem dynamisches Hinzufügen von Applikations-Controllern zur Definition von isolierter, ereignisbasierter Steuerungslogik, bspw. dem Verhalten bei einem Window-Resize (\cite[379]{Fow03})\footnote{
+helios unterstützt an dieser Stelle außerdem dynamisches Hinzufügen von Applikations-Controllern~\cite[379]{Fow03} zur Definition von isolierter, ereignisbasierter Steuerungslogik, bspw. dem Verhalten bei einem Window-Resize\footnote{
 Tatsächlich wurden die Applikations-Controller zunächst implementiert, um ``Framebuffer-Resize``-Ereignisse von dem verwendeten Rendering Backend zu abstrahieren.
 }.
 
@@ -71,7 +71,7 @@ Diese Snapshots sind Basis zur Erstellung eines (oder mehreren) \texttt{RenderPa
 In Listing~\ref{lst:gameloop} ist ein Code-Auszug des beschriebenen Ablaufs dargestellt.
 
 \vspace{4mm}
-\begin{lstlisting}[style=c++style, caption={Game Loop in helios.}, label=lst:gameloop]
+\begin{lstlisting}[style=c++style, caption={Implementierung einer einfachen Game Loop in helios.}, label=lst:gameloop]
 while (!win->shouldClose()) {
   app->eventManager().dispatchAll();
 

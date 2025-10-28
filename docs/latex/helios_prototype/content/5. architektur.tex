@@ -1,6 +1,6 @@
 \section{Architektur}
-Wir beschreiben im Folgenden die Architektur von helios, die derzeit wie in Abbildung ~\ref{fig:hardarchitecture}) konzipiert ist: helios stellt Schnittstellen bereit, die vom Spiel - verstanden als Echtzeit-Datenmodell~\cite[525]{Gre19} - genutzt werden.\\
-Das Framework visualisiert den aktuellen Zustand des Spiels und leitet Daten der Eingabeverarbeitung als Steuerkommandos an dieses weiter.\\
+Wir beschreiben im Folgenden die Architektur von helios, die derzeit wie in Abbildung ~\ref{fig:hardarchitecture} konzipiert ist: helios fungiert als Vermittlungsschicht zwischen dem Spiel als Echtzeit-Datenmodell~\cite[525]{Gre19} und der technischen Infrastruktur.\par
+Das Framework visualisiert den Spielzustand und überträgt Eingabedaten als Steuerkommandos an das Spiel weiter.\par
 
 \begin{figure}[!h]
     \centering
@@ -9,45 +9,45 @@ Das Framework visualisiert den aktuellen Zustand des Spiels und leitet Daten der
     \label{fig:hardarchitecture}
 \end{figure}
 
-In Abbildung~\ref{fig:package_diagram} ist eine detailliertere Sicht auf die Module und ausgewählter Komponenten dargestellt.
-Die Verzeichnisstruktur von helios spiegelt die Gliederung seiner Kernfunktionalitäten wieder.
-Im Sinne von \textit{Evans} ist dies entscheidend für die Realisierung einer hohen Kohäsion: Die Verzeichnisnamen kommunizieren die enthaltenen Funktionalitäten~\cite[180 f.]{Eva03}.
+In Abbildung~\ref{fig:package_diagram} ist eine detailliertere Sicht auf die Module und ausgewählte Komponenten dargestellt.
+Die Verzeichnisstruktur von helios spiegelt die Gliederung seiner Kernfunktionalitäten wider.
+Im Sinne von \textit{Evans} ist dies entscheidend für eine hohe Kohäsion: Die Verzeichnisnamen kommunizieren die enthaltenen Funktionalitäten~\cite[180 f.]{Eva03}.
 Innerhalb der Module findet, wo erforderlich, eine weitere Unterteilung nach Schichten statt (etwa \texttt{controller})\footnote{
-im allgemeinen Sprachgebrauch wird diese Strukturierung auch als ``package by feature`` bezeichnet
-}.\\
+Diese zweistufige Strukturierung wird auch als ``package-by-feature und -by-layer`` bezeichnet.
+}.\par
 
 
 \begin{figure*}[t]
     \centering
     \includegraphics[width=1\textwidth]{img/package_diagram.svg}% \linewidth == Spaltenbreite
-    \caption{Aufbau des helios Framework und der Zusammenhang einiger ausgewählter Komponenten. Die Strukturierung der Module orientiert sich an einem ``by Feature, by Layer``-Konzept. (Quelle: eigene)}
+    \caption{Aufbau des helios Framework und der Zusammenhang ausgewählter Komponenten. Die Strukturierung der Module orientiert sich an einem ``by Feature, by Layer``-Konzept. (Quelle: eigene)}
     \label{fig:package_diagram}
 \end{figure*}
 
 
 \subsection*{\texttt{app}: Applikationsschicht}
-Als zentrale Steuereinheit der Anwendung (also des Spiels) sehen wir eine \texttt{Application}-Klasse vor, die über Event-System, Eingabeverarbeitung und Fenstermanagement verfügt sowie das Rendering-Backend - repräsentiert durch \texttt{RenderDevice} - initialisiert.\\
-helios unterstützt an dieser Stelle außerdem dynamisches Hinzufügen von Applikations-Controllern~\cite[379]{Fow03} zur Definition von isolierter, ereignisbasierter Steuerungslogik, bspw. dem Verhalten bei einem Window-Resize\footnote{
-Tatsächlich wurden die Applikations-Controller zunächst implementiert, um ``Framebuffer-Resize``-Ereignisse von dem verwendeten Rendering Backend zu abstrahieren.
+Die zentrale Steuereinheit der Anwendung bzw. des Spiels bildet die Klasse \texttt{Application}, die über Event-System, Eingabeverarbeitung und Fenstermanagement verfügt sowie das Rendering-Backend - repräsentiert durch \texttt{RenderDevice} - initialisiert.\par
+helios unterstützt an dieser Stelle außerdem dynamisches Hinzufügen von Applikations-Controllern~\cite[379]{Fow03} zur Definition isolierter, ereignisbasierter Steuerungslogik, bspw. dem Verhalten bei einem Window-Resize\footnote{
+Die Applikations-Controller wurden ursprünglich eingeführt, um ``Framebuffer-Resize``-Ereignisse gegenüber dem Rendering-Backend zu abstrahieren.
 }.
 
 \subsection*{\texttt{input}: Eingabeverarbeitung}
-Die Eingabeverarbeitung orchestriert der \texttt{InputManager}, der exklusiv von der Anwendung verwaltet und von dieser an das derzeit aktive Fenster gebunden wird.\\
-Zu Beginn der Game Loop findet ein Polling über die gerade aktiven Eingabeereignisse statt, die nachfolgend über die Schnittstelle des \texttt{InputManager}s abgefragt werden können.
-Die Abstraktion der Ereignisse übernimmt hierbei ein \texttt{InputAdapter}, der die durch die TPLs zur Verfügung gestellten Eingabeereignisse abstrahiert.\\
-Im weiteren Verlauf der Entwicklung soll eine Factory aus den Eingabeereignissen \texttt{ControlCommand}s erzeugen, die als Eingabeparameter zur Steuerung des Spiels weitergeleitet werden~\cite[21 ff.]{Nys14}.
+Der \texttt{InputManager} orchestriert die Eingabeverarbeitung.
+Er wird ausschließlich von der Anwendung verwaltet und an das aktive Fenster gebunden.\par
+Ein spezialisierter \texttt{InputAdapter} abstrahiert von den durch die TPLs bereitgestellten Eingabeereignisse und übersetzt sie für den \texttt{InputManager}.
+Zu Beginn der Game Loop werden aktive Eingabeereignisse gepollt (\texttt{InputManager::poll}). Eine Abfrage der Ereignisse erfolgt über Methoden wie \texttt{isKeyPressed()}.
 
 \subsection*{\texttt{event}: Ereignisverarbeitung}
 Ereignisse können über den \texttt{EventManager} in eine \texttt{EventQueue} geschrieben werden (``post``).
-Interessierte Entitäten (die ``Beobachter`` bzw. \textit{Observer}) können sich über Callbacks mittels \texttt{subscribe} bei dem EventManager registrieren~\cite[293 ff.]{GHJV94}.
-\texttt{EventManager::dispatchAll()} wird zu Beginn der Game Loop aufgerufen und sorgt dann dafür, dass die \texttt{EventQueue} die registrierten Beobachter über vorhandene Ereignisse informiert.
+Interessierte Beobachter (\textit{Observer}) können sich über Callbacks mittels \texttt{subscribe} bei dem \texttt{EventManager} registrieren~\cite[293 ff.]{GHJV94}.
+Die Methode \texttt{EventManager::dispatchAll()} informiert die Observer dann über vorhandene Ereignisse.
 
 \subsection*{\texttt{window}: Fensterklasse}
-Die \texttt{Window}-Klasse stellt Schnittstellen zur Steuerung des Anwendungsfensters bereit, außerdem zur Abfrage von im Fensterkontext aufgetretenen Ereignissen sowie Anweisungen zum Wechseln des Fensterpuffers.
+Die \texttt{Window}-Klasse stellt Schnittstellen zur Steuerung des Anwendungsfensters, zur Abfrage von Fensterereignissen und zur Anweisung des \textit{Buffer-Swappings} bereit.
 
 
 \subsection*{\texttt{math}: Mathematische Typen und Operationen}
-Dieses Modul stellt im Namespace \texttt{helios::math} trigonometrische Funktionen und Repräsentanten für in der Linearen Algebra verankerte Datentypen wie Vektoren und Matrizen zur Verfügung.
+Dieses Modul stellt im Namespace \texttt{helios::math} trigonometrische Funktionen und Repräsentanten für in der Linearen Algebra verankerte Datentypen wie Vektoren und Matrizen bereit.
 Es unterstützt außerdem Operationen für lineare und affine Transformationen und realisiert damit den in der  3D-Computergrafik gebräuchlichen Koordinatenraumwechsel
 
 \[
@@ -59,19 +59,19 @@ Es unterstützt außerdem Operationen für lineare und affine Transformationen u
 Die Schnittstellen orientieren sich bei den Methodensignaturen an populären Bibliotheken wie dem bereits erwähnten \texttt{glm}.
 
 \subsection*{\texttt{scene}: Szenengraph}
-Der Szenengraph \texttt{helios::scene::Scene} folgt etablierten Implementierungen aus der Literatur  (u.a. aus~\cite[]{She07} sowie~\cite[]{Gre19}).\\
-\texttt{Scene} besitzt einen impliziten Wurzelknoten, der eine beliebige Anzahl von Kindknoten besitzen kann.
-Jeder \texttt{SceneNode} verfügt über ein \texttt{Transform}-Objekt, das das Modelltransformation im lokalen Koordinatensystem beschreibt.\\
+Der Szenengraph \texttt{helios::scene::Scene} folgt etablierten Implementierungen aus der Literatur\footnote{siehe unter anderem~\cite[]{She07} sowie~\cite[]{Gre19}}.\par
+\texttt{Scene} besitzt einen impliziten Wurzelknoten, der eine beliebige Anzahl von Kindknoten enthalten kann.
+Jeder \texttt{SceneNode} verfügt über ein \texttt{Transform}-Objekt, das die Modelltransformation im lokalen Koordinatensystem beschreibt.\par
 \texttt{SceneNodes} können ``darstellbar`` sein, das heißt, sie sind mit einem \texttt{Renderable} konfiguriert.
-Sie können aber auch einfach nur eine Kamera (\texttt{helios::scene::Camera}) repräsentieren\footnote{oder positionierbare \texttt{LightNodes}, also Lichtquellen}.\\
-Szenenknoten, die mit einem \texttt{Renderable} konfiguriert sind, werden beim \textit{Culling} berücksichtigt.
-Cullings werden in der rein virtuellen Klasse \textit{FrustumCullingStrategy} vertraglich vereinbart und \texttt{Scene} bei der Instanziierung übergeben.\\
-In der Application Stage~\cite[687]{Gre19}) erstellt helios dann aus einer Szene über eine zu konfigurierende Kamera einen \texttt{Snapshot}, aus dem wir mit Hilfe der angegebenen Culling-Strategie alle im sichtbaren Bereich der Kamera befindlichen \texttt{SceneNode}s sammeln.
-Diese Snapshots sind Basis zur Erstellung eines (oder mehreren) \texttt{RenderPass}, der dann die nötigen Anweisungen (\texttt{RenderCommand}) für das eigentliche \textit{Rendering} beinhaltet.\\
-In Listing~\ref{lst:gameloop} ist ein Code-Auszug des beschriebenen Ablaufs dargestellt.
+Sie können aber auch einfach nur eine Kamera (\texttt{helios::scene::Camera}) repräsentieren\footnote{oder positionierbare \texttt{LightNodes}, also Lichtquellen}.\par
+Szenenknoten mit \texttt{Renderable} werden beim \textit{Culling} berücksichtigt.
+Das Culling-Verfahren wird in der rein virtuellen Klasse \textit{FrustumCullingStrategy} abstrakt definiert. Spezialisierungen werden der \texttt{Scene} bei der Instanziierung übergeben.\par
+In der Application Stage~\cite[687]{Gre19} erstellt helios aus einer Szene und einer Kamera einen \texttt{Snapshot}, für den die konfigurierte Culling-Strategie alle im sichtbaren Bereich der Kamera befindlichen \texttt{SceneNode}s sammelt.
+Ein einzelner Snapshot bildet die Grundlage für einen \texttt{RenderPass}, der die nötigen Anweisungen (\texttt{RenderCommand}s) für den eigentlichen Rendering-Prozess enthält.
+Listing~\ref{lst:gameloop} zeigt den Ablauf einer einfachen Game Loop.
 
 \vspace{4mm}
-\begin{lstlisting}[style=c++style, caption={Implementierung einer einfachen Game Loop in helios.}, label=lst:gameloop]
+\begin{lstlisting}[style=c++style, caption={Implementierung einer einfachen Game Loop in helios. Von der Szene wird ein \texttt{Snapshot} erstellt, der als Grundlage für den \texttt{RenderPass} dient.}, label=lst:gameloop]
 while (!win->shouldClose()) {
   app->eventManager().dispatchAll();
 
@@ -94,17 +94,15 @@ while (!win->shouldClose()) {
 \vspace{4mm}
 
 
-\subsection{Render Pipeline}
-Ordner: rendering
-Das Rendering System befindet sich im Ordner render und ist in verschiedene Teilmodule aufgeteilt, u.a. asset, dass Vertex und Index-Daten für verschiedene geometrische Figuren beinhaltet, einem Ordner Model, in dem Klassen zur Kapselung von Material und RenderBackend spezifischen Mesh-Daten zur Verfügung stellt sowie einen shader-Ordner, in dem ebenfalls Render spezifische Implementierungen für die Shader vorliegent.\\
-Diese Typen werden als Teil einer Aggregation genutzt, die durch Renderable repreäsentiert wird: Ein Renderable ist eine Backend-unabhängige Basisklasse, die einen shared pointer auf eine Mesh-Instanz hält sowie einen unique pointer auf ein Material., welches wiederum einen shared pointer auf Shader beinhaltet und Materialdata.
-Damit haben wir zunächst die Möglichkeit geschaffen, Shader MNesh und MaterialData unter den Renderables zu teilen, gleichzeitig können wir über eine MaterialINstanz intsanzspezifische Parameter festlegen (Quelle; außerdem Illustration erstellen mit den Kardinalitäten).\\
-Den im vorherigen Abschnitt erwähnten Snapshot übergeben wir an eine RenderPassFactory, die aus dem Snapshot und den enthaltenen Daten einen RenderPass erzeugt. Ein RenderPass enthält eine RenderQueue, die besagte Renderables enthält. Wir hoffen, durch dieses Design später ein optimales vcorortieren der Rednderables erreichen zu können, bevor diese von dem unterliegenden Rendering Backend verabrietet werden ([https://realtimecollisiondetection.net/blog/?p=86]).\\
-Ein Render Pass - von dem es theoretisch beliebig viele ausprägungen gibt, und der für den derzeitigen Renderpass benötigte Informationen wie die view und projektionsmatrix für die shader uniforms beinhaltet, wird dann an das RenderDevice übergeben, das mit der Applikation konfiguriert und in einem FensterContext erstellt wurde. In einer pre, do und post Methode wird der Renderpass dann abgerabeitet und die Daten in den entsprechenfd aktiven Fensterbuffer geschrieben, zu dem am Ender der main loop dann umgeschaltet wird.
+\subsection*{\texttt{rendering}: Render Pipeline}
+Das Rendering-System von helios ist in verschiedene Module aufgeteilt, darunter \texttt{shader} für Shader/GLSL-spezifischen Code sowie \texttt{model} für Abstraktionen von Material- und Mesh-Daten.\par
+\texttt{Renderable}s sind Repräsentanten ``darstellbarer`` Objekte.
+Sie kapseln für den Rendering-Prozess notwendige Informationen und sind als Aggregationen modelliert.
+Sie bestehen aus individuell konfigurierbaren \texttt{Material}- und \texttt{Mesh}-Instanzen, die wiederum \textit{shared}  \texttt{MaterialData}- und \texttt{MeshData}-Objekte zur einfachen und ressourcenschonenden Wiederverwendung mit anderen Instanzen teilen~\cite[126]{AHHP+18}.\par
 
-ForwardRendering, Deferred Rendering, Memory Allocations langsam, arbeiten mit vector, eine ausnahme aray mit sentinel, Data Driven Programming explici array, minimize vtable lookups, cache firendly, branch predicting as possible
+Die für einen \texttt{RenderPass} benötigten Informationen werden als \texttt{RenderCommand}-Objekte in einer \texttt{RenderQueue} gesammelt, die vom eigentlichen \texttt{RenderDevice} verarbeitet werden: \texttt{RenderCommand}s besitzen Zeiger auf die darzustellende Geometrie (\texttt{Mesh}), die zu nutzenden \texttt{Shader} sowie Daten-Objekte, in denen Informationen zu \texttt{Uniform} Variablen (bspw. Transformationsmatrizen) gespeichert sind.\par
+Das \texttt{RenderDevice} verarbeitet einen \texttt{RenderPass} über Template-Methoden \texttt{preRender, doRender} und \texttt{postRender}.
 
-\subsection{Utility Klassen}
-ordner: util
-nicht domänenspezifischer code
-Beinhaltet ein Modul, das Logginfunktionalität bereitstsellt, sowie eine Threadsicher Implementierung einer Guid (global unique identifier), die für Entitären wie SceneNodes zur eindeutigen Identtifizierung verwendet werden kann. log ausweichen auf spdlog
+
+\subsection*{\texttt{util}: Utility-Klassen}
+Im Modul \texttt{helios::util} liegt nicht-domänenspezifischer Code, wie der \texttt{LogManager} für einfache Logging-Funktionalitäten sowie eine \texttt{Guid}-Implementierung zur Konfiguration von Objekten mit einem globalen eindeutigen Identifikator (\textit{global unique identifier}).

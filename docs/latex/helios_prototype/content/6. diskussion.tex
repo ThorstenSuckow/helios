@@ -15,18 +15,18 @@ Dies verbessert die Wartbarkeit und Testbarkeit einzelner Komponenten.\par
 Da in der aktuellen Implementierung kein dedizierter DI-Container zur Anwendung kommt, entsteht durch die Verwaltung der Abhängigkeiten im eigentlichen Quelltext zusätzlicher Boilerplate-Code, der jedoch weitgehend durch die Auslagerung von Erzeugungslogik in statische Factory-Klassen reduziert wird.
 Davon profitieren gerade die Implementierungen der Beispielprogramme während der Entwicklung, die auch als Testprogramme dienen.
 In anderen Subsystemen unterstützen darüber hinaus Factory-Methoden die Kapselung der Objekterzeugung innerhalb jener Entitäten, denen auch fachliche Verantwortlichkeit im Sinne der Geschäftslogik zugeordnet ist~\cite[139 f.]{Eva03}.
-Auf diese Weise bleibt helios Architektur kohärent, und Abhängigkeiten zwischen den Schichten sind auf das notwendige Minimum beschränkt.
+Auf diese Weise bleibt die Architektur von helios kohärent, und Abhängigkeiten zwischen den Schichten sind auf das notwendige Minimum beschränkt.
 \par
 
 Als eher herausfordernd empfinden wir den Umgang mit modernen Sprachfeatures, die eine bewährte, aber auch ``traditionelle`` Programmiersprache wie C++ in den letzten Jahren erfahren hat - etwa das Modulsystem oder den Einsatz von Smart-Pointern: Dabei sehen wir uns im Spannungsfeld, etablierte C++-Idiome~\cite[]{IdiomaticCpp} und bewährte Konzepte in einer Entwicklungsumgebung anzuwenden, die überwiegend von Erfahrungen aus einfacheren Hochsprachen wie Java geprägt ist.
-Gerade zu Beginn des Projekts wurde die Projektstruktur sowie Bezeichner von Namensräumen immer wieder angepasst.\par
+Gerade zu Beginn des Projekts wurde die Projektstruktur sowie Bezeichner von Namensräumen deshalb immer wieder angepasst.\par
 
 Bei der Objektverwaltung über \textit{Ownership} und \textit{Pointer}-Arithmetik verzichten wir weitgehend auf \textit{raw pointer} und greifen stattdessen auf die in der Standardbibliothek definierten \texttt{unique\_ptr}, \texttt{shared\_ptr} oder \texttt{weak\_ptr}-Typen zurück, um \texttt{move}-Semantiken konsistent umzusetzen.
 Inwieweit die durch den Einsatz von Smart Pointern entstehenden zusätzlichen CPU-Instruktionen - die insbesondere durch die Referenzzählung entstehen\footnote{Einen Performance-Vergleich bietet beispielsweise~\cite[]{Val25}} - beim Aufbau und der Bearbeitung der Rendering-Pipeline messbare Auswirkungen auf die Effizienz haben, muss gegebenenfalls zu einem späteren Zeitpunkt evaluiert werden.\par
 
 Wir sehen hierin ein mögliches Optimierungspotenzial, entscheiden uns in der frühen Entwicklungsphase jedoch bewusst für Stabilität und eine klare Semantik.
 Spätere  Refactorings zugunsten einer höheren Effizienz\footnote{
-Diese beschränken sich nicht unbedingt auf das Design der Komponenten oder die Architektur selbst, sondern können sich bis auf niedrige Abstraktionsebenen erstrecken - etwa ``bare metal`` auf compileroptimierte Implementierungen der Mathebibliothek durch SIMD-Unterstützung, wie sie von \texttt{glm}~\cite[]{glmSimd} bereitgestellt wird (SIMD, als Abkürzung für \textit{single instruction, multiple data}, beschreibt das Konzept, bei dem eine einzelne Instruktion parallel auf unterschiedliche Daten ausgeführt wird).
+Diese beschränken sich nicht unbedingt auf das Design der Komponenten oder die Architektur selbst, sondern können sich bis auf niedrige Abstraktionsebenen erstrecken - etwa ``bare metal`` hin zu Implementierungen der Mathebibliothek mittels SIMD-Instruktionen, wie sie von \texttt{glm}~\cite[]{glmSimd} bereitgestellt wird (SIMD, als Abkürzung für \textit{single instruction, multiple data}, beschreibt das Konzept, bei dem eine einzelne Instruktion parallel auf unterschiedliche Daten ausgeführt wird).
 } nehmen wir also in Kauf, zumal solche Maßnahmen ohnehin erst dann sinnvoll werden, wenn die Domäne sowohl fachlich als auch technisch hinreichend durchdrungen ist\footnote{
    siehe ``Refactoring toward Deeper Insight``~\cite[]{Eva03}.
 }.\par

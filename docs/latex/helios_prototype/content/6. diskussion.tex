@@ -7,7 +7,7 @@ Handelt es sich zudem um ein Projekt mit einer fachlich unbekannten Domäne, das
 Mit helios verfolgen wir daher einen Top-Down-Ansatz, um ein schnelles Prototyping zu ermöglichen und unter Anwendung des Framework-Gedankens die schrittweise Entwicklung und Integration des \textit{Geometry Wars}-Klons voranzutreiben.
 Wir betrachten deshalb einige technische Kernprinzipien der agilen Softwareentwicklung als unverzichtbar, da sie in engem Zusammenhang mit einem ``sauberen Softwaredesign`` stehen und sich im bisherigen Entwicklungsprozess bereits als wertvoll erwiesen haben\footnote{Einen Katalog dieser sogenannten \textit{SOLID}-Prinzipien bietet \textit{Martin} in~\cite[]{Mar03}}.\par
 
-Um nicht Gefahr zu laufen, am Ende der Projektphase den von \textit{Foote und Yoder} beschriebenen  \textit{Big Ball of Mud}~\cite[]{FY99} zu erzeugen, setzen wir auf eine klare Trennung der Verantwortlichkeiten, die sich in der Architektur durch die verschiedenen Feature-Layer widerspiegelt.
+Um nicht Gefahr zu laufen, am Ende der Projektphase einen \textit{Big Ball of Mud}~\cite[]{FY99} zu erzeugen, setzen wir auf eine klare Trennung der Verantwortlichkeiten, die sich in der Architektur durch die verschiedenen Feature-Layer widerspiegelt.
 Über \textit{Dependency Injection}\footnote{
     Weitestgehend realisiert über Constructor Injection~\cite[]{FowlerDI}.
 } wird zudem der Kopplungsgrad zwischen den beteiligten Akteuren gering gehalten~\cite[]{SZ10}.
@@ -42,7 +42,7 @@ Dabei ist zu berücksichtigen, dass entsprechende Schnittstellen dem Spiel zur V
 Darüber hinaus soll eine Mechanik geschaffen werden, welche aus den Eingabeereignissen entsprechende \texttt{ControlCommand}s erzeugen, die vom Spiel als eigentliche  Steuerparameter interpretiert werden~\cite[21 ff.]{Nys14}.\par
 
 Bei der Architektur des Rendering-Systems sehen wir eine Grundlage für eine modulare und erweiterbare Rendering-Pipeline, die derzeit eine klare Trennung zwischen Szenenbeschreibung und eigentlichem Rendering realisiert.
-Der Vorteil des gewählten Designs liegt darin, dass die individuellen \texttt{RenderPass}-Instanzen mit zusätzlichen Optionen konfiguriert werden können (bspw. \textit{Depth Testing}, \textit{Draw Mode}, \textit{Aliasing} u.a.) und die \texttt{RenderQueue}s so sortiert werden können, dass die Kommunikation mit der GPU möglichst effizient stattfinden kann\footnote{
+Der Vorteil des gewählten Designs liegt darin, dass die individuellen \texttt{RenderPass}-Instanzen mit zusätzlichen Optionen konfiguriert werden können (bspw. \textit{Depth Testing}, \textit{Draw Mode}, \textit{Anti-Aliasing} u.a.) und die \texttt{RenderQueue}s so sortiert werden können, dass die Kommunikation mit der GPU möglichst effizient stattfinden kann\footnote{
     Unity~\cite[]{UnityRenderQueue} und OGRE~\cite[]{OgreRenderQueue} verfolgen ähnliche Konzepte; auch Diskussionen von Christer Ericson~\cite[]{ChristerEricson} thematisieren die Sortierung des Render-Pass. Vulkan bietet explizite Render-Pass-Semantik~\cite[]{VulkanRenderPass}
 }.
 Ob sich das Design im Rahmen der Implementierung des eigentlichen Spiels bewährt - und diese Features überhaupt benötigt werden - wird sich in der weiteren Entwicklung zeigen.\par

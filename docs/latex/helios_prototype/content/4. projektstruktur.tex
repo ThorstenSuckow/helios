@@ -1,10 +1,10 @@
-\section{Pojektstruktur}
+\section{Projektstruktur}
 Wir stellen im Folgenden die Strukturierung des Projektes sowie das Build-System vor.
 Außerdem führen wir kurz in den Inhalt einzelner Verzeichnisse ein.\par
 
 Die oberste Ebene der Verzeichnisstruktur von helios bietet Zugriff auf Tests, ausführbare Beispielprogramme, Benchmarks sowie Dokumentation und Quelldateien.
 Die gewählte Struktur lehnt sich dabei an die durch das \textit{Pitchfork}-Projekt definierten Konventionen für C++-Projekte an~\cite[]{Pitchfork}.
-Die Verzeichnisnamen geben dabei Aufschluss über den durch sie verwalteten Inhalt und ist wie in Abbildung~\ref{fig:verzeichnisstruktur} angegeben.\par
+Die Verzeichnisnamen geben dabei Aufschluss über den durch sie verwalteten Inhalt und sind wie in Abbildung~\ref{fig:verzeichnisstruktur} angegeben.\par
 
 \begin{figure}[htbp]
     \setlength{\DTbaselineskip}{18pt}
@@ -23,7 +23,7 @@ Die Verzeichnisnamen geben dabei Aufschluss über den durch sie verwalteten Inha
 
 Das Projekt besitzt verschiedene Build-Schritte, um sowohl die Sourcen zu kompilieren, als auch die Tests und die Beispielprogramme zu erzeugen.
 Zur Automatisierung nutzen wir \texttt{CMake}~\cite[]{CMake}, womit wir gleichzeitig ein einfaches Dependency-Management realisieren.
-Die für die Entwicklung benötigten \textit{Third-Party Libraries} (TPL) (u.a. \texttt{gflw}~\cite[]{glfwHomepage} und \texttt{glad}~\cite[]{gladgithub}) können somit direkt aus externen Quellen geladen, statisch kompiliert und eingebunden werden (siehe Listing~\ref{lst:cmake}).\par
+Die für die Entwicklung benötigten \textit{Third-Party Libraries} (TPL) (u.a. \texttt{glfw}~\cite[]{glfwHomepage} und \texttt{glad}~\cite[]{gladgithub}) können somit direkt aus externen Quellen geladen, statisch kompiliert und eingebunden werden (siehe Listing~\ref{lst:cmake}).\par
 
 Damit automatisieren wir die Vorkonfiguration des Projektes und vermeiden manuelles (und oft fehleranfälliges~\cite[]{FG22}) Einbinden der benötigten TPLs.
 
@@ -76,13 +76,11 @@ Weitere Benchmarks, die das Verhalten ausgewählter Funktionen der \textit{Rende
         \textbf{Benchmark} & \textbf{Time} & \textbf{CPU} & \textbf{Iterations} \\
         \hline
         BM\_mat4Constructor/real\_time         & 5.81 ns  & 5.85 ns  & 106{,}874{,}145 \\
-        BM\_glm\_mat4Constructor/real\_time    & 13.0 ns  & 13.1 ns  & 53{,}781{,}740 \\
         BM\_mat4Multiply/real\_time            & 175 ns   & 168 ns   & 3{,}896{,}895 \\
-        BM\_glm\_mat4Multiply/real\_time       & 430 ns   & 434 ns   & 1{,}655{,}019 \\
         \hline\\
     \end{tabular}}
-    \caption{Beispielausgabe von Benchmark-Ergebnissen, hier anhand der eigenen \texttt{mat4}
-    \label{tab:mat4-benchmark}-Implementierung im Vergleich zu \texttt{glm::mat4} unter (nicht repräsentativen) Laborbedingungen.}
+    \caption{Beispielausgabe von Benchmark-Ergebnissen, hier anhand der eigenen \texttt{mat4}-Implementierung.}
+    \label{tab:mat4-benchmark}
 \end{table}
 
 
@@ -121,8 +119,8 @@ Wir können somit den Fokus auf die benötigten Schnittstellen einzelner Subsyst
 \end{figure}
 
 \subsection*{\texttt{/include, /src}}
-Mit C++23 nutzt helios durchweg Module Interface und Implementation Units~\cite[211 f.]{Str24}, die in \texttt{/include} bzw. \texttt{/src} abgelegt werden.\par
-Module, die nicht in interface und implementation units aufgeteilt werden, liegen ausschließlich in \texttt{/include} als ``header-only``-Komponenten.
+Mit C++23 realisiert helios seine Klassen und Funktionen durchweg über Module Interface und Implementation Units~\cite[211 f.]{Str24}. Diese werden in \texttt{/include} bzw. \texttt{/src} abgelegt.\par
+Module, die nicht in Interface und Implementation Units aufgeteilt werden, liegen ausschließlich in \texttt{/include} als ``header-only``-Komponenten.
 Hierzu gehören Klassen wie \texttt{helios::math::vec3}, die einen dreidimensionalen Vektor-Typ repräsentieren und deren Funktionen überwiegend als \texttt{constexpr} deklariert sind\footnote{
     \texttt{constexpr} erlaubt die Evaluierung eines Ausdrucks zur Kompilierzeit. Hierzu wird dessen vollständige Definition zur Übersetzungszeit benötigt~\cite[330 f.]{Gre24}.
 }.\par

@@ -1,26 +1,37 @@
+\documentclass[runningheads]{llncs}
 
-%% Template for ENG 401 reports
-%% by Robin Turner
-%% Adapted from the IEEE peer review template
-
-%
-% note that the "draftcls" or "draftclsnofoot", not "draft", option
-% should be used if it is desired that the figures are to be displayed in
-% draft mode.
-
-\documentclass[peerreview]{IEEEtran}
-\usepackage{url} % Provides better formatting of URLs.
-\usepackage[utf8]{inputenc} % Allows Turkish characters.
-\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables for horizontal lines
+% PACKAGES
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{textcomp}
 \usepackage{graphicx}
-\usepackage{dirtree}
+\usepackage{booktabs}
+\usepackage[indentfirst=false,font={itshape},begintext=``,endtext='']{quoting}
+\usepackage{subcaption}
+\usepackage[hyphens,spaces,obeyspaces]{url}
+\usepackage{hyperref}
+\usepackage[backend=biber,style=acmnumeric,doi=true,url=true]{biblatex}
+\addbibresource{helios_prototype.bib}
+\usepackage[most]{tcolorbox}
+\usepackage{tabularx,ragged2e}
+\newtcolorbox{summarybox}{
+    enhanced,
+    breakable,
+    sharp corners,
+    boxrule=0.3pt,
+    colback=white,
+    colframe=black!40,
+    coltitle=black,
+    fonttitle=\bfseries,
+    toptitle=2mm,
+    bottomtitle=2mm,
+    colbacktitle=white,
+}
+\usepackage{cleveref}
+\usepackage{longtable}
 
-\usepackage[backend=biber, style=alphabetic, isbn=true, doi=true]{biblatex}
-\usepackage{csquotes}
-\hyphenation{op-tical net-works semi-conduc-tor} % Corrects some bad hyphenation
-
-\addbibresource{literatur.bib}
-
+\DeclareFieldFormat{doi}{\textsc{doi}: \texttt{#1}}
+\DeclareFieldFormat{isbn}{\textsc{isbn}: \texttt{#1}}
 
 \usepackage{listings}
 \usepackage{xcolor}
@@ -48,57 +59,42 @@
     language=C++
 }
 
-\usepackage{amsmath,amsthm}
-\theoremstyle{definition} % Kein Kursiv, normaler Text
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}[theorem]{Lemma} % zählt mit theorem mit
-\newtheorem{definition}[theorem]{Definition}
+% linksbündig und automatischer Umbruch
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+
+
+\usepackage[english, ngerman]{babel}
+\usepackage{bibgerm}
 
 \begin{document}
-%\begin{titlepage}
-% paper title
-% can use linebreaks \\ within to get better formatting as desired
-\title{Konzeption und prototypische Umsetzung von \textit{helios}, einem Game Framework in C++}
+
+% title and authors
+    \title{helios: Konzeption und prototypische Umsetzung eines C++ Game Frameworks}
+    \titlerunning{helios: Konzeption und prototypische Umsetzung}
+    \author{
+        Thorsten Suckow-Homberg
+    }
+
+% First names are abbreviated in the running head.
+% If there are more than two authors, 'et al.' is used.
+    \authorrunning{T. Suckow-Homberg}
+    \institute{Trier University of Applied Sciences \\ \email{thorsten@suckow-homberg.de} }
+
+% typeset the header of the contribution
+    \maketitle
+
+% sub names
+% eg
+%\newcommand{\saud}[1]{\textit{Audio (AUD)}}
 
 
-% author names and affiliations
+    \input{index}
 
-\author{Thorsten Suckow-Homberg \\
-Master's Student M.C.Sc.\\
-Trier University of Applied Science
-}
-\date{28.10.2025}
-
-% make the title area
-\maketitle
-\tableofcontents
-\listoffigures
-\listoftables
-%\end{titlepage}
-
-\IEEEpeerreviewmaketitle
-
-
-
-\input{index}
-
-
-
-
-
-%\bibliographystyle{geralpha}			% Literaturverzeichnis
-%\bibliography{literatur}     			% BibTeX-File literatur.bib
-%\raggedright
-\clearpage
-\sloppy
-\printbibliography
-\fussy
-
-
-
-
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \clearpage
+    \sloppy
+    \printbibliography
+    \fussy
 
 
 \end{document}

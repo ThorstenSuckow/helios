@@ -12,7 +12,7 @@ Das Framework visualisiert den Spielzustand und überträgt Eingabedaten als Ste
 In Abbildung~\ref{fig:package_diagram} ist eine detailliertere Sicht auf die Module und ausgewählte Komponenten dargestellt.
 Die Verzeichnisstruktur von helios spiegelt die Gliederung seiner Kernfunktionalitäten wider.
 Im Sinne von \textit{Evans} ist dies entscheidend für eine hohe Kohäsion: Die Verzeichnisnamen kommunizieren die enthaltenen Funktionalitäten~\cite[180 f.]{Eva03}.
-Innerhalb der Module findet eine weitere Unterteilung nach Schichten statt (etwa \texttt{controller}), was ingesamt als ``package-by-feature und -by-layer`` bezeichnet wird.
+Innerhalb der Module findet eine weitere Unterteilung nach Schichten statt (etwa \texttt{controller}), was insgesamt als ``package-by-feature und -by-layer`` bezeichnet wird.
 
 
 \begin{figure*}[t]
@@ -36,7 +36,7 @@ Die Applikations-Controller wurden ursprünglich eingeführt, um ``Framebuffer-R
 \subsection*{\texttt{input}: Eingabeverarbeitung}
 Der \texttt{InputManager} orchestriert die Eingabeverarbeitung.
 Er wird ausschließlich von der Anwendung verwaltet und an das aktive Fenster gebunden.\par
-Ein spezialisierter \texttt{InputAdapter} abstrahiert von den durch die TPLs bereitgestellten Eingabeereignisse und übersetzt sie für den \texttt{InputManager}.
+Ein spezialisierter \texttt{InputAdapter} abstrahiert von den durch die TPLs bereitgestellten Eingabeereignissen und übersetzt sie für den \texttt{InputManager}.
 Zu Beginn der Game Loop werden aktive Eingabeereignisse gepollt (\texttt{InputManager::poll()}). Eine Abfrage der Ereignisse erfolgt über Methoden wie \texttt{InputManager::isKeyPressed()}.
 
 \subsection*{\texttt{event}: Ereignisverarbeitung}

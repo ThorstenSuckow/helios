@@ -1,8 +1,8 @@
 \section{Einleitung}
 
-Zur Programmierung eines Spiel, das dem Shooter \textit{Geometry Wars}\footnote{siehe~\cite[]{WikipediaGeometryWars}} ähnelt, orientieren wir uns bei der Umsetzung des technischen Fundaments teilweise an einer in der Industrie weit verbreiteten, von \textit{Gregory} in~\cite[]{Gre19} beschriebenen \textit{Game Engine Architektur}, reduzieren jedoch bewusst die Anzahl der Abstraktionsschichten und verzichten auf Systeme wie Tooling, Sound oder Scripting (vgl.~\cite[\textbf{Figure 1.16}, 39]{Gre19}).
-Damit entspricht die \textit{Hard Architecture}~\cite[]{RM04} einem Framework, welches Schnittstellen für benötigte Hardware und andere Subsysteme bereitstellt.
-Das eigentliche Spiel kann die Schnittstellen des Frameworks nutzen, wird von diesem aber als \textit{Black Box}~\cite[]{RB88} betrachtet.\\
+Wir programmieren einen \textit{Geometry Wars}\footnote{siehe~\cite[]{WikipediaGeometryWars}} Klon in C++.
+Bei der Umsetzung orientieren wir uns teilweise an einer in der Industrie weit verbreiteten, von \textit{Gregory} in~\cite[]{Gre19} beschriebenen \textit{Game Engine Architektur}, reduzieren jedoch bewusst die Anzahl der Abstraktionsschichten und verzichten auf Systeme wie Tooling, Sound oder Scripting (vgl.~\cite[\textbf{Figure 1.16}, 39]{Gre19}), so dass der technische Unterbau eher einem Framework als einer Game Engine entspricht.
+Das eigentliche Spiel kann die Schnittstellen des Frameworks für benötigte Hardware und andere Subsysteme nutzen, wird vom Framework aber als \textit{Black Box}~\cite[]{RB88} betrachtet.\\
 
 \begin{figure}[!h]
     \centering
@@ -27,9 +27,8 @@ In Abschnitt~\ref{sec:projektdaten} wird noch einmal gesondert auf die Anforderu
 \end{figure}
 
 
-Wir betrachten auch Probleme und Schwierigkeiten, die bei der bisherigen Umsetzung aufgetaucht sind.
-Diese ergeben sich u.a. durch den Umstand, dass das in vergleichsweise kurzer Zeit zu erstellende Softwareprodukt nicht nur anhand \textit{objektiver} Maße bewertet werden soll (etwa der Fehleranzahl, Software-Designentscheidungen, Kopplungsgrad der Objekte etc.), sondern auch anhand \textit{subjektiver} Maße~\cite[385]{Bal08}.\\
+Wir betrachten auch Probleme und Schwierigkeiten, die bisher bei der Umsetzung aufgetreten sind.
+Diese ergeben sich u.a. durch den Umstand, dass das in vergleichsweise kurzer Zeit zu erstellende Softwareprodukt nicht nur anhand objektiver Maße bewertet werden soll (etwa der Fehleranzahl, Software-Designentscheidungen, Kopplungsgrad der Objekte etc.), sondern auch anhand subjektiver Maße~\cite[385]{Bal08}.\\
 Zwar ist keine Klassifizierung des fertigen Produkts nach Nutzungsqualitätsmerkmalen wie bspw. ISO/IEC 9126 angedacht\footnote{bspw. ``Nutzungsqualität nach ISO/IEC 9126``,~\cite[466]{Bal08}; Studien und Untersuchungen u.a. bei~\cite[]{AZMK17},~\cite[]{Ber10}}.
-Dennoch soll das Ergebnis nicht nur technisch ausgereift sein, sondern auch für den Anwender angenehm zu bedienen.
-Dieses Nutzererlebnis wird im Weiteren formal eher unscharf, aber mit dem in der Spieleentwicklung etablierten Begriff des \textit{Game Feel}~\cite[]{Swi08} zusammengefasst: Einem möglichst \textit{angenehmen} und in jeglicher Hinsicht \textit{positiven Spielerlebnis}.
-
+Dennoch soll das Ergebnis nicht nur technisch ausgereift, sondern für Anwenderinnen und Anwender angenehm zu bedienen sein.
+Das Nutzererlebnis fassen wir im Weiteren formal eher unscharf, aber mit dem in der Spieleentwicklung etablierten Begriff des \textit{Game Feel}~\cite[]{Swi08} zusammen.

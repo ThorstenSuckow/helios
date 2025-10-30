@@ -5,7 +5,7 @@ Das Framework visualisiert den Spielzustand und überträgt Eingabedaten als Ste
 \begin{figure}[!h]
     \centering
     \includegraphics[width=1\columnwidth]{img/hardarchitecture.svg}
-    \caption{Aufteilung der Architektur des helios Frameworks in \textit{Hard} und \textit{Soft Architecture} nach Rollings und Morris~\cite[612 ff.]{RM04}. Die Ball-/Socket-Notation deutet an, dass helios Schnittstellen zur Verfügung stellt, die ein (beliebiges) Spiel nutzen kann. (Quelle: eigene)}
+    \caption{Aufteilung der Architektur des helios Frameworks in \textit{Hard} und \textit{Soft Architecture} nach Rollings und Morris~\cite[612 ff.]{RM04}. Die Ball-/Socket-Notation verdeutlicht, dass helios Schnittstellen zur Verfügung stellt, die von einem (beliebigen) Spiel genutzt werden können. (Quelle: eigene)}
     \label{fig:hardarchitecture}
 \end{figure}
 
@@ -50,10 +50,12 @@ Die \texttt{Window}-Klasse stellt Schnittstellen zur Steuerung des Anwendungsfen
 
 \subsection*{\texttt{math}: Mathematische Typen und Operationen}
 Dieses Modul stellt im Namespace \texttt{helios::math} trigonometrische Funktionen und Repräsentanten für in der Linearen Algebra verankerte Datentypen wie Vektoren und Matrizen bereit.
-Es unterstützt außerdem Operationen für lineare und affine Transformationen und realisiert damit den in der  3D-Computergrafik gebräuchlichen Koordinatenraumwechsel
+Es unterstützt außerdem Operationen für lineare und affine Transformationen und realisiert damit den in der  3D-Computergrafik gebräuchlichen Koordinatenraumwechsel\footnote{
+    Nach der Projektion liegen die Koordinaten im sogenannten \textit{Clip-Space} vor. Typischerweise sorgt das Rendering-Backend mittels perspektivischer Division dafür, dass diese Koordinaten in die für den Raterizer relevanten NDC (\textit{Normalized Device Coordinates}) umgewandelt werden~\cite[18]{AHHP+18}.
+}
 
 \[
-    \text{Model}\rightarrow\text{World}\rightarrow\text{View}\rightarrow\text{Projection}\rightarrow\text{Clip}
+    \text{Model}\rightarrow\text{World}\rightarrow\text{View}\rightarrow\text{Projection}
 \]
 
 \noindent
@@ -61,11 +63,11 @@ Es unterstützt außerdem Operationen für lineare und affine Transformationen u
 Die Schnittstellen orientieren sich bei den Methodensignaturen an populären Bibliotheken wie dem bereits erwähnten \texttt{glm}.
 
 \subsection*{\texttt{scene}: Szenengraph}
-Der Szenengraph \texttt{helios::scene::Scene} folgt etablierten Implementierungen aus der Literatur\footnote{siehe unter anderem~\cite[]{She07} sowie~\cite[]{Gre19}}.
+Der Szenengraph \texttt{helios::scene::Scene} folgt etablierten Implementierungen aus der Literatur\footnote{Siehe unter anderem~\cite[]{She07} sowie~\cite[]{Gre19}.}.
 \texttt{Scene} besitzt einen impliziten Wurzelknoten, der eine beliebige Anzahl von Kindknoten enthalten kann.
 Jeder \texttt{SceneNode} verfügt über ein \texttt{Transform}-Objekt, das die Modelltransformation im lokalen Koordinatensystem beschreibt.\par
 \texttt{SceneNodes} können ``darstellbar`` sein, das heißt, sie sind mit einem \texttt{Renderable} konfiguriert.
-Sie können aber auch einfach nur eine Kamera (\texttt{helios::scene::Camera}) repräsentieren\footnote{oder positionierbare \texttt{LightNodes}, also Lichtquellen}.\par
+Sie können aber auch einfach nur eine Kamera (\texttt{helios::scene::Camera}) repräsentieren\footnote{Oder auch positionierbare \texttt{LightNodes}, also Lichtquellen.}.\par
 Szenenknoten mit \texttt{Renderable} werden beim \textit{Culling} berücksichtigt.
 Das Culling-Verfahren wird in der rein virtuellen Klasse \textit{FrustumCullingStrategy} abstrakt definiert. Spezialisierungen werden der \texttt{Scene} bei der Instanziierung übergeben.\par
 In der Application Stage~\cite[687]{Gre19} erstellt helios aus einer Szene und einer Kamera einen \texttt{Snapshot}, für den die konfigurierte Culling-Strategie alle im sichtbaren Bereich der Kamera befindlichen \texttt{SceneNode}s sammelt.
@@ -97,7 +99,7 @@ while (!win->shouldClose()) {
 
 
 \subsection*{\texttt{rendering}: Render Pipeline}
-Das Rendering-System von helios ist in verschiedene Module aufgeteilt, darunter \texttt{shader} für Shader/GLSL-spezifischen Code sowie \texttt{model} für Abstraktionen von Material- und Mesh-Daten.\par
+Das Rendering-System von helios ist in verschiedene Module aufgeteilt, darunter \texttt{shader} für Shader-/GLSL-spezifischen Code sowie \texttt{model} für Abstraktionen von Material- und Mesh-Daten.\par
 \texttt{Renderable}s sind Repräsentanten ``darstellbarer`` Objekte.
 Sie kapseln für den Rendering-Prozess notwendige Informationen und sind als Aggregation modelliert.
 Sie bestehen aus individuell konfigurierbaren \texttt{Material}- und \texttt{Mesh}-Instanzen, die wiederum \texttt{MaterialData}- und \texttt{MeshData}-Objekte zur einfachen und ressourcenschonenden Wiederverwendung mit anderen Instanzen teilen~\cite[126]{AHHP+18}.\par

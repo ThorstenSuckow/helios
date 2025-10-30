@@ -28,12 +28,12 @@ Wir sehen hierin ein mögliches Optimierungspotenzial, entscheiden uns in der fr
 Spätere  Refactorings zugunsten einer höheren Effizienz\footnote{
 Diese beschränken sich nicht unbedingt auf das Design der Komponenten oder die Architektur selbst, sondern können sich bis auf niedrige Abstraktionsebenen erstrecken - etwa ``bare metal`` hin zu Implementierungen der Mathebibliothek mittels SIMD-Instruktionen, wie sie von \texttt{glm}~\cite[]{glmSimd} bereitgestellt wird (SIMD, als Abkürzung für \textit{single instruction, multiple data}, beschreibt das Konzept, bei dem eine einzelne Instruktion parallel auf unterschiedliche Daten ausgeführt wird).
 } nehmen wir also in Kauf, zumal solche Maßnahmen ohnehin erst dann sinnvoll scheinen, wenn die Domäne sowohl fachlich als auch technisch hinreichend durchdrungen ist\footnote{
-   siehe ``Refactoring toward Deeper Insight``~\cite[]{Eva03}.
+   Siehe ``Refactoring toward Deeper Insight``~\cite[]{Eva03}.
 }.\par
 
 
-Nicht unerwähnt soll an dieser Stelle die Wahl der Datenstrukturen und der Programmierparadigmen bleiben: Unsere Objektbeziehungen sind derzeit sehr ausdrucksstark (\texttt{Snapshot}, \texttt{Renderable}, \texttt{Material}, \texttt{Shader}, usw.), übermäßig tiefe Vererbungshierarchien haben wir bislang vermeiden können\footnote{
-leistungsfähige Spieleengines setzen aus Effizienzgründen häufig nicht durchgehend auf klassische OOP-Paradigmen, sondern verwenden in performance-kritischen Subsystemen einen datenorientierten Ansatz, bei dem flache Verbünde von Komponenten nach dem \textit{ECS Pattern}~\cite[]{RCCK25} deutliche Performancevorteile aufweisen~\cite[]{WWM22}.
+Nicht unerwähnt bleiben soll an dieser Stelle die Wahl der Datenstrukturen und der Programmierparadigmen: Unsere Objektbeziehungen sind derzeit sehr ausdrucksstark (\texttt{Snapshot}, \texttt{Renderable}, \texttt{Material}, \texttt{Shader}, usw.), übermäßig tiefe Vererbungshierarchien haben wir bislang vermeiden können\footnote{
+Leistungsfähige Spieleengines setzen aus Effizienzgründen häufig nicht durchgehend auf klassische OOP-Paradigmen, sondern verwenden in performance-kritischen Subsystemen einen datenorientierten Ansatz, bei dem flache Verbünde von Komponenten nach dem \textit{ECS Pattern}~\cite[]{RCCK25} deutliche Performancevorteile aufweisen können~\cite[]{WWM22}.
 }.
 Die Entscheidung, Vektoren als primäre Datencontainer zu verwenden, kann sich potenziell negativ auf die Rendering-Pipeline auswirken, wenn die Render-Queue nach einer Aktualisierung der Szene neu aufgebaut und dabei zusätzlicher Speicher zur Laufzeit alloziiert werden muss.\par
 

@@ -1,23 +1,28 @@
 \section{Abschluss und Ausblick}
 
-Wir haben helios vorgestellt, einen Prototypen für ein Game Framework zur Umsetzung eines Geometry Wars Klon.
+Wir haben \textit{helios} vorgestellt, einen Prototypen für ein Game Framework zur Umsetzung eines \textit{Geometry Wars}-Klon.
 
-Es folgte ein Überblick über die Projektdaten und Aufbau und Architektur des C++-Projektes.
-Hierbei sind wir auf die Toolchain eingegangen und haben verwendete Bibliotheken von Drittanbietern vorgestellt.\\
+Es folgte ein Überblick über die Projektdaten sowie über Aufbau und Architektur des C++-Projekts.
+Dabei sind wir auf die Toolchain eingegangen und haben die verwendeten Bibliotheken von Drittanbietern vorgestellt.\\
 
 Schwierigkeiten bei der Umsetzung haben wir in einer Diskussion reflektiert.
-Aus diesen Reflektionen haben sich für uns interessante Fragen ergeben, von denen wir denken, dass sie einer näheren Betrachtung wert sind: Wi wirken sich verschiedenen Formen der Game Loop~\cite[534 ff.]{Gre19} auf das Game Feel aus?
-Welchen Einfluss auf die Laufzeit haben die aus der Standardbibliothek übernommenen Datenstrukturen bei Neuallokation im \textit{Hot Path} des Renderings.
-Welchen Performancevorteil würden wir durch den Einsatz von \textit{Raw Pointern} im Gegensatz zu \textit{Smart Pointern} erhalten?\\
+Aus diesen Reflexionen haben sich für uns interessante Fragen ergeben, die einer näheren Betrachtung wert sind:
+Wie wirken sich verschiedene Formen der Game Loop~\cite[534 ff.]{Gre19} auf das \textit{Game Feel} aus?
+Welchen Einfluss auf die Laufzeit haben die aus der Standardbibliothek übernommenen Datenstrukturen bei Neuallokation im \textit{Hot Path} des Renderings?
+Und welchen Performancevorteil würden wir durch den Einsatz von \textit{raw pointern} im Gegensatz zu \textit{Smart Pointern} erzielen?\\
 
-Aufgrund der konsequenten Anwendung von allgemein anerkannten Entwicklungsprinzipien sehen wir wenig Bedarf an strukturellen Änderungen.
-Es empfiehlt sich jedoch, hier keine voreiligen Schlüsse zu ziehen: Bevor die technische Domäne komplett durchdrungen ist, steht noch eine fachliche Auseinandersetzung mit den intrinsischen Eigenschaften von Kollisionsbehandlungsstrategien sowie (künstlicher) Gegnerintelligenz an.
-Hier sehen wir durchaus mehrere Entwicklungsschleifen.
-In gleichem Zusammenhang betrachten wir deshalb auch den Entwurf der Rendering-Pipeline vorsichtig optimistisch.
-Zwar folgt dieser klaren semantischen Strukturen und orientiert sich am \textit{Mental Model} eines Entwicklers.
-Aber auch für diesen Teil hat die Recherche ergeben, dass effiziente Datenstrukturen und hardwarenahe Optimierungen durchaus zum Usus in der Spielentwicklung gehören - was gleichzeitig gute Kenntnisse über das verwendete Rendering-Backend voraussetzt.\\
+Aufgrund der konsequenten Anwendung allgemein anerkannter Entwicklungsprinzipien sehen wir derzeit wenig Bedarf an strukturellen Änderungen.
+Es empfiehlt sich jedoch, hier keine voreiligen Schlüsse zu ziehen:
+Bevor die technische Domäne vollständig durchdrungen ist, steht noch eine fachliche Auseinandersetzung mit den intrinsischen Eigenschaften von Kollisionsbehandlungsstrategien sowie (künstlicher) Gegnerintelligenz an.
+Hier erwarten wir mehrere weitere Entwicklungsschleifen.
+Im gleichen Zusammenhang betrachten wir auch den Entwurf der Rendering-Pipeline vorsichtig optimistisch.
+Zwar folgt dieser klaren semantischen Strukturen und orientiert sich am \textit{mental model} eines Entwicklers.
+Unsere Recherche hat jedoch gezeigt, dass datengetriebene Entwicklung~\cite{Bay22} und hardwarenahe Optimierungen durchaus zum Usus effizienter Spiele gehören.\\
 
-Bei alldem soll nicht vergessen werden, dass wir in dieser Frühphase des Projektes bewusst eine robuste Implementierung bevorzugt haben.
-Wir schauen deshalb den nachfolgenden Iterationen gespannt entgegen.
-Mit dem Projektziel ``$16ms$  pro Frame`` vor Augen schließen wir deshalb zunächst - ruhigen Gewissens - mit dem Zitat von Donald E. Knuth: ``premature optimization is the root of all evil.``~\cite[]{Knu74}.
-
+Bei alldem soll nicht vergessen werden, dass wir in dieser frühen Phase des Projekts bewusst eine robuste Implementierung bevorzugt haben.
+Wir blicken den nachfolgenden Iterationen daher gespannt entgegen.
+Mit dem Projektziel ``16 ms pro Frame`` vor Augen schließen wir diesen Abschnitt mit einem Zitat von Donald E. Knuth:
+\begin{quote}
+    \centering
+    \textit{``Premature optimization is the root of all evil.``}~\cite{Knu74}
+\end{quote}

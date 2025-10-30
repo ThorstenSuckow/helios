@@ -20,7 +20,7 @@ Innerhalb der Module findet eine weitere Unterteilung nach Schichten statt (etwa
     \makebox[\textwidth][c]{% Box ist textbreit, Inhalt darf überstehen
     \includegraphics[width=1.4\textwidth]{img/package_diagram.svg}% \linewidth == Spaltenbreite
     }
-    \caption{Aufbau des helios Framework und Zusammenhang einiger ausgewählter Komponenten. Die Strukturierung der Module orientiert sich an einem ``by-Feature, by-Layer``-Konzept, bei dem Features intern in funktionale Schichten geglidert sind. (Quelle: eigene)}
+    \caption{Aufbau des helios Framework und Zusammenhang einiger ausgewählter Komponenten. Die Strukturierung der Module orientiert sich an einem ``by-Feature, by-Layer``-Konzept, bei dem Features intern in funktionale Schichten geglidert sind. (Quelle: Eigene Darstellung)}
 
     \label{fig:package_diagram}
 
@@ -72,7 +72,7 @@ In der Application Stage~\cite[687]{Gre19} erstellt helios aus einer Szene und e
 Ein einzelner Snapshot bildet die Grundlage für einen \texttt{RenderPass}, der die nötigen Anweisungen (\texttt{RenderCommand}s) für den eigentlichen Rendering-Prozess enthält.
 Listing~\ref{lst:gameloop} zeigt den Ablauf einer einfachen Game Loop.
 
-\vspace{4mm}
+
 \begin{lstlisting}[style=c++style, caption={Implementierung einer einfachen Game Loop in helios. Von der Szene wird ein \texttt{Snapshot} erstellt, der als Grundlage für den \texttt{RenderPass} dient.}, label=lst:gameloop]
 while (!win->shouldClose()) {
   app->eventManager().dispatchAll();
@@ -93,7 +93,7 @@ while (!win->shouldClose()) {
   win->swapBuffers();
 }
 \end{lstlisting}
-\vspace{4mm}
+
 
 
 \subsection*{\texttt{rendering}: Render Pipeline}

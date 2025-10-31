@@ -39,6 +39,7 @@ jobs:
           echo "=== XML ==="
           ls -la docs/api/xml/ | head -20
 
+
       - name: Upload HTML Docs
         uses: actions/upload-artifact@v4
         with:
@@ -53,17 +54,10 @@ jobs:
           path: docs/api/xml/
           retention-days: 30
 
-      - name: Prepare publish dir (XML + archive)
-        run: |
-          rm -rf publish
-          mkdir -p publish/api/xml
-          rsync -a docs/api/html/ publish/api/
-          rsync -a docs/api/xml/  publish/api/xml/
-          tar -C docs/api -czf publish/api/xml.tgz xml
-
       - name: Deploy to GitHub Pages
         if: (github.event_name == 'push' && (github.ref == 'refs/heads/main')) || github.event_name == 'workflow_dispatch'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./publish
+          publish_dir: ./docs/api/html
+          destination_dir: api

@@ -11,7 +11,7 @@ import helios.event.Dispatcher;
 export namespace helios::app::controller {
 
     /**
-     * Basic implementation of a WindowRenderingController.
+     * @brief Basic implementation of a WindowRenderingController.
      *
      */
     class BasicWindowRenderingController final : public WindowRenderingController {
@@ -23,7 +23,8 @@ export namespace helios::app::controller {
         explicit BasicWindowRenderingController(helios::rendering::RenderingDevice* renderingDevice);
 
         /**
-         * Handles FrameBufferResizeEvent.
+         * @brief Handles FrameBufferResizeEvent.
+         *
          * The current implementation simply logs the dimensions to the console.
          *
          * @param e
@@ -31,7 +32,7 @@ export namespace helios::app::controller {
         void onFrameBufferResize(const helios::window::event::FrameBufferResizeEvent& e) override;
 
         /**
-         * Registers to the FrameBufferResizeEvent of the specified dispatcher.
+         * @brief Registers to the FrameBufferResizeEvent of the specified dispatcher.
          *
          * @param dispatcher
          *
@@ -40,7 +41,7 @@ export namespace helios::app::controller {
         void subscribeTo(helios::event::Dispatcher& dispatcher) override;
 
         /**
-         * Initializes this BasicWindowRenderingController.
+         * @brief Initializes this BasicWindowRenderingController.
          */
         bool init() override;
     };

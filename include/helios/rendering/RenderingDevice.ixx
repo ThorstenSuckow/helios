@@ -12,7 +12,7 @@ import helios.rendering.RenderPass;
 export namespace helios::rendering {
 
     /**
-     * Abstract interface for low level rendering device.
+     * @brief Abstract interface for low level rendering device.
      *
      * This pure virtual class provides the fundamental API for managing
      * the rendering pipeline and respective contracts for concrete
@@ -26,12 +26,12 @@ export namespace helios::rendering {
 
     protected:
         /**
-         * Reflects the initialization state of this viewport.
+         * @brief Reflects the initialization state of this viewport.
          */
         bool initialized_ = false;
 
         /**
-         * The logger used with this Material instance.
+         * @brief The logger used with this Material instance.
          * Defaults to HELIOS_LOG_SCOPE
          *
          * @todo constructor injection
@@ -44,7 +44,7 @@ export namespace helios::rendering {
         virtual ~RenderingDevice() = default;
 
         /**
-         * Initializes this rendering device.
+         * @brief Initializes this rendering device.
          * Should be called when the graphics context was created and before
          * any rendering operations are performed.
          * Implementing APIs should load pointers to underlying GL functions
@@ -55,7 +55,7 @@ export namespace helios::rendering {
         virtual void init() = 0;
 
         /**
-         * Signals this device that the application is now ready to begin a new render pass.
+         * @brief Signals this device that the application is now ready to begin a new render pass.
          * Implementing APIs should consider to prepare the rendering surface at this point and
          * clear specific buffers.
          * This method should be called at the start of each frame before any drawing occurs.
@@ -66,7 +66,7 @@ export namespace helios::rendering {
 
 
         /**
-         * Advises this RenderingDevice to process the specified RenderPass.
+         * @brief Advises this RenderingDevice to process the specified RenderPass.
          * A `RenderPass` consists of `RenderCommand`s this RenderDevice executes, i.e.
          * binding meshes, materials and shaders as well as drawing geometry.
          *
@@ -77,7 +77,7 @@ export namespace helios::rendering {
 
 
         /**
-         * Ends the specified render pass of this RenderingDevice.
+         * @brief Ends the specified render pass of this RenderingDevice.
          * This method should be called when the renderPass was processed by the RenderingDevice,
          * before the window swaps the buffers.
          * Implementing classes should take care of unbinding frame buffers and / or flushing
@@ -88,7 +88,7 @@ export namespace helios::rendering {
         virtual void endRenderPass(helios::rendering::RenderPass& renderPass) const noexcept = 0;
 
         /**
-         * Convenient method to subsequently call `beginRenderPass`,
+         * @brief Convenient method to subsequently call `beginRenderPass`,
          * `doRender`, `endRenderPass` (in this order) with the specified `RenderPass`.
          *
          * @param renderPass The RenderPass to process by this RenderingDevice.
@@ -100,7 +100,7 @@ export namespace helios::rendering {
         }
 
         /**
-         * Sets the viewport for this RenderingDevice.
+         * @brief Sets the viewport for this RenderingDevice.
          * The viewport defines the rectangular area where the final image is drawn.
          *
          * @param x x-coordinate of the lower left corner of the viewport
@@ -113,7 +113,7 @@ export namespace helios::rendering {
 
 
         /**
-         * Returns the initialized state of this rendering device.
+         * @brief Returns the initialized state of this rendering device.
          * This method is guaranteed to return true if the device was successfully
          * initialized, otherwise false.
          *

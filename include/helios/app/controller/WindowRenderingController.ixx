@@ -9,7 +9,7 @@ import helios.window.event.FrameBufferResizeEvent;
 export namespace helios::app::controller {
 
     /**
-     * Abstract base controller for handling window related events.
+     * @brief Abstract base controller for handling window related events.
      *
      * Concrete implementations will typically update the rendering device's viewport when the framebuffer
      * dimension changes.
@@ -18,7 +18,7 @@ export namespace helios::app::controller {
 
     public:
         /**
-         * Handles FrameBuffer resize events.
+         * @brief Handles FrameBuffer resize events.
          *
          * @param A const reference to the FrameBufferResizeEvent describing the event.
          */

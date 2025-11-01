@@ -14,7 +14,7 @@ using namespace helios::rendering;
 export namespace helios::rendering::asset::shape::basic {
 
     /**
-     * Basic Cube Shape.
+     * @brief Basic Cube Shape.
      */
     struct Cube : public Shape {
 

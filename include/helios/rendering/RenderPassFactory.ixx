@@ -21,7 +21,7 @@ import helios.util.log.LogManager;
 export namespace helios::rendering {
 
     /**
-     * A factory class for constructing `RenderPass` objects and populate
+     * @brief A factory class for constructing `RenderPass` objects and populate
      * their `RenderQueue`s based on a `helios::scene::Snapshot`.
      *
      * @note This class implements a singleton pattern. The conversion of high-level
@@ -32,7 +32,7 @@ export namespace helios::rendering {
 
     protected:
         /**
-         * The logger used with this SRenderPassFactory.
+         * @brief The logger used with this SRenderPassFactory.
          * Defaults to HELIOS_LOG_SCOPE
          *
          * @todo constructor injection
@@ -43,14 +43,14 @@ export namespace helios::rendering {
 
     public:
         /**
-         * Returns the singleton instance of `RenderPassFactory`.
+         * @brief Returns the singleton instance of `RenderPassFactory`.
          *
          * @return A reference to the single `RenderPassFactory` instance.
          */
         static RenderPassFactory& getInstance();
 
         /**
-         * Builds a `RenderPass` from a given `helios::scene::Snapshot`.
+         * @brief Builds a `RenderPass` from a given `helios::scene::Snapshot`.
          *
          * This method orchestrates the creation of a `RenderQueue` and populates it
          * with `RenderCommand`s derived from the `SnaphotItem`s within the snapshot.
@@ -68,7 +68,7 @@ export namespace helios::rendering {
         [[nodiscard]] RenderPass buildRenderPass(const helios::scene::Snapshot& snapshot) const;
 
         /**
-         * Populates an existing `RenderQueue` with `RenderCommand`s based on a `Snapshot`.
+         * @brief Populates an existing `RenderQueue` with `RenderCommand`s based on a `Snapshot`.
          *
          * This method clears the specified `RenderQueue` before adding new `RenderCommand`s to it.
          *
@@ -82,7 +82,7 @@ export namespace helios::rendering {
             const helios::scene::Snapshot& snapshot, helios::rendering::RenderQueue& renderQueue) const;
 
         /**
-         * Creates a single `RenderCommand` from a `helios::scene::SnapshotItem`.
+         * @brief Creates a single `RenderCommand` from a `helios::scene::SnapshotItem`.
          *
          * This method extracts necessary data from the `SnapshotItem` and bundles them
          * into a `RenderCommand` object.

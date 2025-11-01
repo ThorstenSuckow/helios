@@ -16,7 +16,7 @@ import helios.util.log.Logger;
 export namespace helios::rendering::model {
 
     /**
-     * Representative of a renderable 3D mesh.
+     * @brief Representative of a renderable 3D mesh.
      * A Mesh instance contains a reference to its raw shared MeshData and allows
      * for individual configurations.
      * Concrete implementations will handle resource management.
@@ -29,12 +29,12 @@ export namespace helios::rendering::model {
         Mesh() = default;
 
         /**
-         * Shared pointer to the raw, immutable MeshData.
+         * @brief Shared pointer to the raw, immutable MeshData.
          */
         const std::shared_ptr<const MeshData> meshData_;
 
         /**
-         * Initializes the Mesh by setting up vertex attributes and buffers with the
+         * @brief Initializes the Mesh by setting up vertex attributes and buffers with the
          * underlying GL API.
          * This method should be called _once_ by the derived class before using
          * this Mesh in a rendering pass.
@@ -44,7 +44,7 @@ export namespace helios::rendering::model {
         virtual void init() = 0;
 
         /**
-         * The logger used with this Mesh instance.
+         * @brief The logger used with this Mesh instance.
          * Defaults to HELIOS_LOG_SCOPE
          *
          * @todo constructor injection
@@ -58,7 +58,7 @@ export namespace helios::rendering::model {
         virtual ~Mesh() = default;
 
         /**
-         * Creates a new Mesh instance.
+         * @brief Creates a new Mesh instance.
          *
          * @param meshData A shared pointer to the immutable shared raw MeshData.
          *
@@ -67,7 +67,7 @@ export namespace helios::rendering::model {
         explicit Mesh(std::shared_ptr<const MeshData> meshData);
 
         /**
-         * Returns a const reference to the underlying shared MeshData.
+         * @brief Returns a const reference to the underlying shared MeshData.
          * The returned data is guaranteed to be a valid reference to existing data.
          *
          * @return MeshData
@@ -76,7 +76,7 @@ export namespace helios::rendering::model {
 
 
         /**
-         * Returns the index count of the underlying MeshData.
+         * @brief Returns the index count of the underlying MeshData.
          *
          * @return The number of indices handled by the raw MeshData.
          */

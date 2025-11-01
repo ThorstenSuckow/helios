@@ -12,7 +12,7 @@ export namespace helios::math {
 
 
     /**
-     * Represents a 3-dimensional vector of the generic type <T>.
+     * @brief Represents a 3-dimensional vector of the generic type <T>.
      *
      * The `vec3` struct provides a lightweight and efficient way to handle 3D
      * vector mathematics for the numeric types float, int, double. For convenient access,
@@ -25,7 +25,7 @@ export namespace helios::math {
 
     private:
         /**
-         * Internal array storing the vector components.
+         * @brief Internal array storing the vector components.
          */
         T v[3];
 
@@ -33,13 +33,13 @@ export namespace helios::math {
 
 
         /**
-         * Creates a new vec3 with its values initialized to (0, 0, 0)
+         * @brief Creates a new vec3 with its values initialized to (0, 0, 0)
          */
         constexpr vec3() noexcept : v{static_cast<T>(0), static_cast<T>(0), static_cast<T>(0)} {}
 
 
         /**
-         * Constructs a new vec3 with the specified x, y, z components.
+         * @brief Constructs a new vec3 with the specified x, y, z components.
          *
          * @param x The value for the x component.
          * @param y The value for the y component.
@@ -50,7 +50,7 @@ export namespace helios::math {
 
 
         /**
-         * Constructs a new vec3 with the specified value as the x,y,z components.
+         * @brief Constructs a new vec3 with the specified value as the x,y,z components.
          *
          * @param v The value for the components.
          *
@@ -59,7 +59,7 @@ export namespace helios::math {
 
 
         /**
-         * Provides read only access to the vector components.
+         * @brief Provides read only access to the vector components.
          * Bounds checking is performed via `assert` in debug builds.
          *
          * @param i The index to query
@@ -73,7 +73,7 @@ export namespace helios::math {
 
 
         /**
-         * Provides read-write access to the vector components.
+         * @brief Provides read-write access to the vector components.
          * Bounds checking is performed via `assert` in debug builds.
          *
          * @param i The index to query
@@ -87,7 +87,7 @@ export namespace helios::math {
 
 
         /**
-         * Computes the Euclidean norm of this vector and returns it.
+         * @brief Computes the Euclidean norm of this vector and returns it.
          *
          * @return The norm (magnitude) of this vector,
          */
@@ -106,7 +106,7 @@ export namespace helios::math {
 
 
     /**
-     * Multiplies a 3D vector by a scalar value.
+     * @brief Multiplies a 3D vector by a scalar value.
      *
      * @tparam T The numeric type of the vector components.
      * @param v The vec3<T> vector to be multiplied.
@@ -122,7 +122,7 @@ export namespace helios::math {
 
 
     /**
-     * Multiplies a a scalar value by a 3D vector.
+     * @brief Multiplies a a scalar value by a 3D vector.
      *
      * @tparam T The numeric type of the vector components.
      * @param n The scalar vector to multiplay the vector by.
@@ -138,7 +138,7 @@ export namespace helios::math {
 
 
     /**
-     * Returns a normalized version of this vector.
+     * @brief Returns a normalized version of this vector.
      *
      * @tparam T The numeric type of the vector components.
      *
@@ -149,7 +149,7 @@ export namespace helios::math {
 
 
     /**
-     * Computes the cross product of two 3D vectors.
+     * @brief Computes the cross product of two 3D vectors.
      *
      * @tparam T The numeric type of the vector components.
      * @param v1 The first vec3<T> vector.
@@ -168,7 +168,7 @@ export namespace helios::math {
 
 
     /**
-     * Computes the dot product of two 3D vectors.
+     * @brief Computes the dot product of two 3D vectors.
      *
      * @tparam T The numeric type of the vector components.
      * @param v1 The first vec3<T> vector.
@@ -183,7 +183,7 @@ export namespace helios::math {
 
 
     /**
-     * Computes the difference between two vectors (vector subtraction).
+     * @brief Computes the difference between two vectors (vector subtraction).
      *
      * @tparam T The numeric type of the vector components.
      * @param v1 The first vec3<T> vector.

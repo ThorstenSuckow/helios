@@ -12,7 +12,7 @@ import helios.util.log.LogManager;
 export namespace helios::input {
 
     /**
-     * Abstract interface for querying various input states.
+     * @brief Abstract interface for querying various input states.
      *
      * The `InputAdapter` defines a contract for classes that provide
      * platform-specific querying.
@@ -24,7 +24,7 @@ export namespace helios::input {
 
         protected:
         /**
-         * The const reference to the logger used with this Adapter.
+         * @brief The const reference to the logger used with this Adapter.
          */
         const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().registerLogger(HELIOS_LOG_SCOPE);
 
@@ -35,7 +35,7 @@ export namespace helios::input {
         virtual ~InputAdapter() = default;
 
         /**
-         * Returns true if the key is pressed, otherwise false.
+         * @brief Returns true if the key is pressed, otherwise false.
          *
          * @param key The key to query for the `pressed` state.
          * @param win The window instance from which the state should be queried.

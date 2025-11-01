@@ -12,7 +12,7 @@ import helios.util.log.Logger;
 export namespace helios::util::log {
 
     /**
-     * LogManger for managing various scoped Loggers.
+     * @brief LogManger for managing various scoped Loggers.
      *
      */
     class LogManager {
@@ -20,27 +20,27 @@ export namespace helios::util::log {
     private:
 
         /**
-         * Unordered map holding unique pointers to the loggers managed
+         * @brief Unordered map holding unique pointers to the loggers managed
          * by this class, guaranteed to be not null.
          */
         std::unordered_map<std::string, std::unique_ptr<Logger>> loggers_;
 
 
         /**
-         * Default logger if a logger for a specific scope was not
+         * @brief Default logger if a logger for a specific scope was not
          * found.
          */
         const std::unique_ptr<Logger> defaultLogger_;
 
 
         /**
-         * Mutex providing mutual exclusive access to the logger_-map.
+         * @brief Mutex providing mutual exclusive access to the logger_-map.
          */
         mutable std::mutex mapMutex_;
 
 
         /**
-         * Creates the LogManager and registers an unscoped default logger.
+         * @brief Creates the LogManager and registers an unscoped default logger.
          */
         LogManager();
 
@@ -57,7 +57,7 @@ export namespace helios::util::log {
 
 
         /**
-         * Returns the LogManager singleton instance.
+         * @brief Returns the LogManager singleton instance.
          *
          * @return
          */
@@ -65,7 +65,7 @@ export namespace helios::util::log {
 
 
         /**
-         * Returns a const reference to the default logger managed with this LogManager.
+         * @brief Returns a const reference to the default logger managed with this LogManager.
          *
          * @return Logger
          */
@@ -73,7 +73,8 @@ export namespace helios::util::log {
 
 
         /**
-         * Returns a const reference to the logger instance for the specified scope.
+         * @brief Returns a const reference to the logger instance for the specified scope.
+         *
          * Will fall back to the default logger if the scope was not registered yet.
          * This method is thread safe for map look-ups.
          *
@@ -86,7 +87,8 @@ export namespace helios::util::log {
 
 
         /**
-         * Registers a new logger with this manager.
+         * @brief Registers a new logger with this manager.
+         *
          * This method is thread safe for map modifications.
          *
          * @param scope The scope requested for the logger to create.

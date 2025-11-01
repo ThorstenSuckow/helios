@@ -10,7 +10,7 @@ import helios.event.Event;
 export namespace helios::window::event {
 
     /**
-     * Abstract base class for Window related events.
+     * @brief Abstract base class for Window related events.
      *
      * The WindowEvent extends the Event-base class by adding a unique
      * sourceGuid, so the source of the event can be identified.
@@ -19,14 +19,14 @@ export namespace helios::window::event {
 
     protected:
         /**
-         * Constructs a new WindowEvent with the specific source Guid.
+         * @brief Constructs a new WindowEvent with the specific source Guid.
          *
          * @param sourceGuid The Guid of the Window that triggered the event.
          */
         explicit WindowEvent(helios::util::Guid sourceGuid);
 
         /**
-         * Constructs a new WindowEvent with the specific source Guid and
+         * @brief Constructs a new WindowEvent with the specific source Guid and
          * the specific tag.
          *
          * @param sourceGuid The Guid of the Window that triggered the event.
@@ -37,7 +37,7 @@ export namespace helios::window::event {
     public:
 
         /**
-         * The unique and immutable Guid of the source of this event, i.e.
+         * @brief The unique and immutable Guid of the source of this event, i.e.
          * the Window that trigegred the event.
          */
         const helios::util::Guid sourceGuid;

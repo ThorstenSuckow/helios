@@ -7,7 +7,7 @@ import helios.event.Dispatcher;
 export namespace helios::app::controller {
 
     /**
-     * Abstract base class for application controllers.
+     * @brief Abstract base class for application controllers.
      *
      * Derived classes are expected to implement methods for event subscription/handling
      * and optional initialization.
@@ -18,7 +18,7 @@ export namespace helios::app::controller {
         virtual ~Controller() = default;
 
         /**
-         * Registers this controller with the specified Dispatcher.
+         * @brief Registers this controller with the specified Dispatcher.
          *
          * This method should be called whenever a controller is interested in abn event dispatched
          * by the specified Dispatcher.
@@ -28,7 +28,8 @@ export namespace helios::app::controller {
         virtual void subscribeTo(helios::event::Dispatcher& dispatcher) = 0;
 
         /**
-         * Initializes this controller.
+         * @brief Initializes this controller.
+         *
          * The initialization state is defined by deriving classes.
          *
          * @return bool true if the controller was successfully initialized and is

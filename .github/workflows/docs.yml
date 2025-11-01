@@ -1,0 +1,69 @@
+name: API Docs
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Doxygen, Graphviz
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y doxygen graphviz
+
+      - name: Verify Graphviz
+        run: |
+          which dot
+          dot -V
+
+      - name: Generate API Dos
+        run: doxygen docs/Doxyfile.in
+
+      - name: List Generated Files
+        run: |
+          echo "=== HTML ==="
+          ls -la docs/api/html/ | head -20
+          echo ""
+          echo "=== XML ==="
+          ls -la docs/api/xml/ | head -20
+
+      - name: Upload HTML Docs
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-docs-html
+          path: docs/api/html/
+          retention-days: 30
+
+      - name: Upload XML Docs
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-docs-xml
+          path: docs/api/xml/
+          retention-days: 30
+
+      - name: Prepare publish dir (XML + archive)
+        run: |
+          rm -rf publish
+          mkdir -p publish/api/xml
+          rsync -a docs/api/html/ publish/api/
+          rsync -a docs/api/xml/  publish/api/xml/
+          tar -C docs/api -czf publish/api/xml.tgz xml
+
+      - name: Deploy to GitHub Pages
+        if: (github.event_name == 'push' && (github.ref == 'refs/heads/main')) || github.event_name == 'workflow_dispatch'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./publish

@@ -7,7 +7,7 @@ import helios.math.types;
 export namespace helios::rendering {
 
     /**
-     * Represents a standard vertex with position, normal,
+     * @brief Represents a standard vertex with position, normal,
      * and texture coordinates.
      *
      * @see [Vri20, pp. 160]

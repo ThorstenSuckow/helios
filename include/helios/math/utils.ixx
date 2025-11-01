@@ -7,7 +7,7 @@ export module helios.math.utils;
 export namespace helios::math {
 
     /**
-     * Converts an angle from degrees to radians.
+     * @brief Converts an angle from degrees to radians.
      *
      * @param angle The angle value in degrees.
      *

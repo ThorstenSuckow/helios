@@ -11,7 +11,7 @@ import helios.math.concepts;
 export namespace helios::math {
 
     /**
-     * Represents a 2-dimensional vector of the generic type <T>.
+     * @brief Represents a 2-dimensional vector of the generic type <T>.
      *
      * The `vec2` struct provides a lightweight and efficient way to handle 2D
      * vector mathematics for the numeric types float, int, double. For convenient access,
@@ -24,20 +24,20 @@ export namespace helios::math {
 
     private:
         /**
-         * Internal array storing the vector components.
+         * @brief Internal array storing the vector components.
          */
         T v[2];
 
     public:
 
         /**
-         * Creates a new vec2 with its values initialized to (0, 0)
+         * @brief Creates a new vec2 with its values initialized to (0, 0)
          */
         constexpr vec2() noexcept : v{static_cast<T>(0), static_cast<T>(0)} {}
 
 
         /**
-         * Constructs a new vec2 with the specified x, y components.
+         * @brief Constructs a new vec2 with the specified x, y components.
          *
          * @param x The value for the x component.
          * @param y The value for the y component.
@@ -46,7 +46,7 @@ export namespace helios::math {
 
 
         /**
-         * Provides read only access to the vector components.
+         * @brief Provides read only access to the vector components.
          * Bounds checking is performed via `assert` in debug builds.
          *
          * @param i The index to query
@@ -60,7 +60,7 @@ export namespace helios::math {
 
 
         /**
-         * Provides read-write  access to the vector components.
+         * @brief Provides read-write  access to the vector components.
          * Bounds checking is performed via `assert` in debug builds.
          *
          * @param i The index to query

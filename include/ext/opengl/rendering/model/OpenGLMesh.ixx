@@ -10,7 +10,7 @@ import helios.rendering.model.MeshData;
 export namespace helios::ext::opengl::rendering::model {
 
     /**
-     * Representative of an OpenGLMesh.
+     * @brief Representative of an OpenGLMesh.
      * This class manages the OpenGL Vertex Array Object (VAO), the
      * Vertex Buffer Object (VBO) and Element Buffer Object (EBO) handles.
      * The raw MeshData is uploaded to the GPU, preparing it for subsequent
@@ -22,27 +22,27 @@ export namespace helios::ext::opengl::rendering::model {
 
 
         /**
-         * Vertex Array Object handle.
+         * @brief Vertex Array Object handle.
          */
         const unsigned int vao_;
 
 
         /**
-         * Vertex Buffer Object handle.
+         * @brief Vertex Buffer Object handle.
          * Stores vertex attributes such as normals and texture coordinates.
          */
         const unsigned int vbo_;
 
 
         /**
-         * Element Buffer Object handle.
+         * @brief Element Buffer Object handle.
          * Stores the indices used for indexed drawing.
          */
         const unsigned int ebo_;
 
 
         /**
-         * Helper function for generating a Vertex Array Object identifier.
+         * @brief Helper function for generating a Vertex Array Object identifier.
          *
          * @return Vertex Array Object handle.
          */
@@ -50,7 +50,7 @@ export namespace helios::ext::opengl::rendering::model {
 
 
         /**
-         * Helper function for generating a Buffer Object identifier,
+         * @brief Helper function for generating a Buffer Object identifier,
          * to be used with vertex buffer or element buffer.
          *
          * @return Vertex Array Object handle.
@@ -59,7 +59,7 @@ export namespace helios::ext::opengl::rendering::model {
 
 
         /**
-         * Initializes all buffer objects required by OpenGL from the provided MeshData.
+         * @brief Initializes all buffer objects required by OpenGL from the provided MeshData.
          * The current implementation generates all VAO, VBO and EBO handles, loads the
          * vertex and index data to the GPU. It follows [Vri20, 162] in this regard.
          *
@@ -70,7 +70,7 @@ export namespace helios::ext::opengl::rendering::model {
     public:
 
         /**
-         * Rule of three.
+         * @brief Rule of three.
          * @see https://wikis.khronos.org/opengl/Common_Mistakes#RAII_and_hidden_destructor_calls
          * @see https://en.cppreference.com/w/cpp/language/rule_of_three.html
          */
@@ -79,14 +79,14 @@ export namespace helios::ext::opengl::rendering::model {
 
 
         /**
-         * Constructs a new OpenGLMesh instance from raw MeshData.
+         * @brief Constructs a new OpenGLMesh instance from raw MeshData.
          *
          * @param meshData A shared_ptr to the immutable raw MeshData.
          */
         explicit OpenGLMesh(std::shared_ptr<const helios::rendering::model::MeshData> meshData);
 
         /**
-         * Frees allocated resources bv this instance.
+         * @brief Frees allocated resources bv this instance.
          * If an instance of this class is destructed, `glDeleteBuffers`/`glDeleteVertexArrays`
          * is called to free the associated resources.
          *
@@ -97,21 +97,21 @@ export namespace helios::ext::opengl::rendering::model {
         ~OpenGLMesh() override;
 
         /**
-         * Returns the OpenGL Vertex Array Object Handle.
+         * @brief Returns the OpenGL Vertex Array Object Handle.
          *
          * @return VAO handle
          */
         [[nodiscard]] const unsigned int& vao() const noexcept;
 
         /**
-         * Returns the OpenGL Vertex Buffer Object handle.
+         * @brief Returns the OpenGL Vertex Buffer Object handle.
          *
          * @return VBO handle
          */
         [[nodiscard]] const unsigned int& vbo() const noexcept;
 
         /**
-         * Returns the OpenGL Element Buffer Object handle for indexed rendering.
+         * @brief Returns the OpenGL Element Buffer Object handle for indexed rendering.
          *
          * @return EBO handle
          */

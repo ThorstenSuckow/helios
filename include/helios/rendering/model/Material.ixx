@@ -15,7 +15,7 @@ import helios.rendering.shader.Shader;
 export namespace helios::rendering::model {
 
     /**
-     * Representative of a parametrizable Material instance.
+     * @brief Representative of a parametrizable Material instance.
      * A Material instance contains a reference to its raw shared Shader
      * and optionally MaterialData.
      * A Material instance allows for individual configurations.
@@ -29,17 +29,17 @@ export namespace helios::rendering::model {
         Material() = default;
 
         /**
-         * Shared pointer for the raw, immutable MaterialData.
+         * @brief Shared pointer for the raw, immutable MaterialData.
          */
         std::shared_ptr<const MaterialData> materialData_;
 
         /**
-         * Shared pointer to the immutable Shader.
+         * @brief Shared pointer to the immutable Shader.
          */
         std::shared_ptr<const helios::rendering::shader::Shader> shader_{};
 
         /**
-         * The logger used with this Material instance.
+         * @brief The logger used with this Material instance.
          * Defaults to HELIOS_LOG_SCOPE
          *
          * @todo constructor injection
@@ -52,14 +52,14 @@ export namespace helios::rendering::model {
         virtual ~Material() = default;
 
         /**
-         * Creates a new MaterialData instance.
+         * @brief Creates a new MaterialData instance.
          *
          * @param shader A shared pointer to the immutable Shader used by
          * this instance.
          * @param materialData An optional shared pointer to the MaterialData this
          * Material uses. Defaults to `nullptr`.
          *
-         * @throws std::invalid_argument if shader or materialData is a null shared pointer.
+         * @throws std::invalid_argument if shader is a null shared pointer.
          */
         explicit Material(
             std::shared_ptr<const helios::rendering::shader::Shader> shader,
@@ -67,7 +67,7 @@ export namespace helios::rendering::model {
         );
 
         /**
-         * Returns a shared pointer to the underlying MaterialData.
+         * @brief Returns a shared pointer to the underlying MaterialData.
          * If this Material does not use MaterialData, this method returns a `nullptr`.
          *
          * @return The MaterialData of this Material, or `nullptr` if this Material has none.
@@ -76,7 +76,7 @@ export namespace helios::rendering::model {
 
 
         /**
-         * Returns a shared pointer to the shader used by this instance.
+         * @brief Returns a shared pointer to the shader used by this instance.
          * The returned data is guaranteed to be a valid reference to existing data.
          *
          * @return The Shader this Material uses.
@@ -84,7 +84,7 @@ export namespace helios::rendering::model {
         [[nodiscard]] std::shared_ptr<const helios::rendering::shader::Shader> shader() const noexcept;
 
         /**
-         * Writes this Material's uniform values into the given map.
+         * @brief Writes this Material's uniform values into the given map.
          *
          * @param uniformValueMap Target map receiving the uniform values.
          */

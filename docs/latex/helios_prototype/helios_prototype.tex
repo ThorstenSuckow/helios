@@ -1,0 +1,110 @@
+\documentclass[runningheads]{llncs}
+
+% PACKAGES
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[indentfirst=false,font={itshape},begintext=``,endtext='']{quoting}
+\usepackage{subcaption}
+\usepackage[hyphens,spaces,obeyspaces]{url}
+\usepackage{hyperref}
+\usepackage[backend=biber,style=acmnumeric,doi=true,url=true]{biblatex}
+\addbibresource{helios_prototype.bib}
+\usepackage[most]{tcolorbox}
+\usepackage{tabularx,ragged2e}
+\newtcolorbox{summarybox}{
+    enhanced,
+    breakable,
+    sharp corners,
+    boxrule=0.3pt,
+    colback=white,
+    colframe=black!40,
+    coltitle=black,
+    fonttitle=\bfseries,
+    toptitle=2mm,
+    bottomtitle=2mm,
+    colbacktitle=white,
+}
+\usepackage{cleveref}
+\usepackage{longtable}
+\usepackage[titletoc,title,page, header]{appendix} %
+
+\DeclareFieldFormat{doi}{\textsc{doi}: \texttt{#1}}
+\DeclareFieldFormat{isbn}{\textsc{isbn}: \texttt{#1}}
+\usepackage{dirtree}
+\renewcommand*\DTstyle{\ttfamily}
+\usepackage{listings}
+\usepackage{xcolor}
+\definecolor{codegray}{gray}{0.9}
+\definecolor{commentgreen}{rgb}{0,0.6,0}
+\definecolor{keywordblue}{rgb}{0.2,0.2,0.8}
+
+\lstdefinestyle{c++style}{
+    backgroundcolor=\color{white},
+    commentstyle=\color{commentgreen}\itshape,
+    keywordstyle=\color{keywordblue}\bfseries,
+    numberstyle=\tiny\color{gray},
+    stringstyle=\color{red},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=C++
+}
+
+% linksbündig und automatischer Umbruch
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+
+
+\usepackage[english, ngerman]{babel}
+\usepackage{bibgerm}
+
+\hyphenation{
+    Ren-de-ring-Back-end
+    Game-Loop
+    Smart-Poin-ter
+    Kol-li-sions-be-hand-lung
+    er-strek-ken
+}
+
+\begin{document}
+
+% title and authors
+    \title{helios: Konzeption und prototypische Umsetzung eines C++ Game Frameworks}
+    \titlerunning{helios: Konzeption und prototypische Umsetzung}
+    \author{
+        Thorsten Suckow-Homberg
+    }
+
+% First names are abbreviated in the running head.
+% If there are more than two authors, 'et al.' is used.
+    \authorrunning{T. Suckow-Homberg}
+    \institute{Trier University of Applied Sciences \\ \email{thorsten@suckow-homberg.de} \\
+    01.11.2025}
+
+% typeset the header of the contribution
+    \maketitle
+
+% sub names
+% eg
+%\newcommand{\saud}[1]{\textit{Audio (AUD)}}
+
+
+    \input{index}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \clearpage
+    \sloppy
+    \printbibliography
+    \fussy
+
+
+\end{document}

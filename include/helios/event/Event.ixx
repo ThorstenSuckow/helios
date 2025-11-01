@@ -9,7 +9,7 @@ import helios.util.Guid;
 export namespace helios::event {
 
     /**
-     * Base class for events in the helios framework.
+     * @brief Base class for events in the helios framework.
      *
      * `Event` provides a common interface for all application related events.
      * Each event instance is uniquely identified by a `Guid` generated upon
@@ -24,12 +24,12 @@ export namespace helios::event {
     class Event {
     private:
         /**
-         * The guid uniquely identifying _this_ event.
+         * @brief The guid uniquely identifying _this_ event.
          */
         const helios::util::Guid guid_;
 
         /**
-         * An optional tag for this event. Defaults to 0.
+         * @brief An optional tag for this event. Defaults to 0.
          */
         const uint64_t tag_;
 
@@ -38,13 +38,13 @@ export namespace helios::event {
 
 
         /**
-         * Constructs a new event with a unique Guid and a default tag of 0.
+         * @brief Constructs a new event with a unique Guid and a default tag of 0.
          */
         Event();
 
 
         /**
-         * Constructs a new event with a unique Guid and teh specified default tag.
+         * @brief Constructs a new event with a unique Guid and teh specified default tag.
          *
          * @param tag
          */
@@ -52,7 +52,7 @@ export namespace helios::event {
 
 
         /**
-         * Returns a const reference to this event's unique Guid.
+         * @brief Returns a const reference to this event's unique Guid.
          *
          * @return
          */
@@ -60,7 +60,7 @@ export namespace helios::event {
 
 
         /**
-         * Returns the tag for this event.
+         * @brief Returns the tag for this event.
          * Will be 0 if none was specified.
          *
          * @return
@@ -69,7 +69,7 @@ export namespace helios::event {
 
 
         /**
-         * Compares two event instances based on their unique Guids.
+         * @brief Compares two event instances based on their unique Guids.
          * @param e
          * @return
          */

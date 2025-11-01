@@ -22,7 +22,7 @@ export namespace helios::scene {
 
 
     /**
-     * Represents a hierarchical SceneGraph that organizes all renderable
+     * @brief Represents a hierarchical SceneGraph that organizes all renderable
      * and non-renderable objects within a scene.
      *
      * Every scene has one implicit root node all nodes are appended to when
@@ -46,24 +46,24 @@ export namespace helios::scene {
     private:
 
         /**
-         * SceneGraphKey for internal use.
+         * @brief SceneGraphKey for internal use.
          * @see helios::scene::SceneNode::setWorldTransform()
          */
         const SceneGraphKey sceneGraphKey_{};
 
         /**
-         * 4x4 identity matrix for internal use.
+         * @brief 4x4 identity matrix for internal use.
          */
         const helios::math::mat4f mat4fid = helios::math::mat4f::identity();
 
         /**
-         * The root node of this scene. All other SceneNodes are (in)direct
+         * @brief The root node of this scene. All other SceneNodes are (in)direct
          * children of this node.
          */
         std::unique_ptr<SceneNode> root_;
 
         /**
-         * Internal helper function to force-propagate the worldTransformation of SceneNodes
+         * @brief Internal helper function to force-propagate the worldTransformation of SceneNodes
          * to their child nodes.
          * Propagation is cancelled for this node if the world transform submitted
          * is considered equal to the current world transform of the SceneNode.
@@ -76,7 +76,7 @@ export namespace helios::scene {
         void propagateWorldTransform(SceneNode& node, const math::mat4f& wt) const;
 
         /**
-         * Selectively updates the world transformation of SceneNodes in the scene graph.
+         * @brief Selectively updates the world transformation of SceneNodes in the scene graph.
          * A SceneNode is forced to update its own world transformation and the
          * world transformation of its children as soon as a check for the dirty-state of the
          * node is true.
@@ -87,12 +87,12 @@ export namespace helios::scene {
         void updateNodes(SceneNode& node, const math::mat4f& wt) const;
 
         /**
-         * The FrustumCullingStrategy used with this Scene.
+         * @brief The FrustumCullingStrategy used with this Scene.
          */
         std::unique_ptr<helios::scene::FrustumCullingStrategy> frustumCullingStrategy_;
 
         /**
-         * The logger used with this Scene instance.
+         * @brief The logger used with this Scene instance.
          * Defaults to HELIOS_LOG_SCOPE
          *
          * @todo constructor injection
@@ -103,38 +103,38 @@ export namespace helios::scene {
 
     public:
         /**
-         * Prevent copying.
+         * @brief Prevent copying.
          * A Scene is not intended to be copied.
          */
         Scene(const Scene&)=delete;
 
         /**
-         * Prevent copy assignment.
+         * @brief Prevent copy assignment.
          * A scene is not intended to be copied.
          */
         Scene& operator=(const Scene&)=delete;
 
         /**
-         * Prevent move constructor.
+         * @brief Prevent move constructor.
          */
         Scene(Scene&&) noexcept = delete;
 
         /**
-         * Prevent move assignment operator.
+         * @brief Prevent move assignment operator.
          */
         Scene& operator=(Scene&&) noexcept = delete;
 
         ~Scene() = default;
 
         /**
-         * Constructs a new Scene.
+         * @brief Constructs a new Scene.
          * The root node for this scene is automatically created.
          */
         explicit Scene(std::unique_ptr<helios::scene::FrustumCullingStrategy> frustumCullingStrategy);
 
 
         /**
-         * Adds a new SceneNode to this scene.
+         * @brief Adds a new SceneNode to this scene.
          * The SceneNode becomes a direct descendant of this scene's root.
          *
          * @param node The Scene node to add to this Scene.
@@ -146,14 +146,14 @@ export namespace helios::scene {
         [[nodiscard]] SceneNode* addNode(std::unique_ptr<SceneNode> node) const;
 
         /**
-         * Updates the world transformations of SceneNodes in the graph.
+         * @brief Updates the world transformations of SceneNodes in the graph.
          * The method traverses the Scene and propagates updated world transformations
          * to their respective child nodes if the processed node is considered to be dirty.
          */
         void updateNodes() const;
 
         /**
-         * This method applies this Scene's frustumCullingStrategy and returns all nodes
+         * @brief This method applies this Scene's frustumCullingStrategy and returns all nodes
          * visible for the specified Camera.
          * This method makes also sure that all nodes' world geometry is properly updated
          * before culling is applied.
@@ -165,14 +165,14 @@ export namespace helios::scene {
         [[nodiscard]] std::vector<const helios::scene::SceneNode*> findVisibleNodes(const helios::scene::Camera& camera) const;
 
         /**
-         * Returns the root not of this Scene.
+         * @brief Returns the root not of this Scene.
          * Thr root node is considered to be always existing.
          * @return the root node of this Scene.
          */
         [[nodiscard]] helios::scene::SceneNode& root() const noexcept;
 
         /**
-         * Creates a Snapshot of the Scene and returns it.
+         * @brief Creates a Snapshot of the Scene and returns it.
          * Taking a snapshot will frustum cull the SceneNodes and place their Renderables
          * along with the current matrices of this scene's matrix into the Snapshot object.
          *

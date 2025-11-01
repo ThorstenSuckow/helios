@@ -8,7 +8,7 @@ import helios.math.types;
 export namespace helios::math {
 
     /**
-     * Returns the 4x4 lookAt-matrix for transforming world coordinates
+     * @brief Returns the 4x4 lookAt-matrix for transforming world coordinates
      * to camera space.
      * The method creates the camera coordinate system based on the
      * parameters eye, i.e. the vantage point in world space, the camera's

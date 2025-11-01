@@ -5,7 +5,7 @@ export module helios.ext.glfw.app.GLFWRAIIGuard;
 export namespace helios::ext::glfw::app {
 
     /**
-     * A RAII Guard for GLFW.
+     * @brief A RAII Guard for GLFW.
      *
      * This class makes sure that GLFW is properly initialized when an instance is created
      * and terminated when this instance is destroyed.
@@ -16,7 +16,7 @@ export namespace helios::ext::glfw::app {
 
     public:
         /**
-         * Initializes the glfw library by calling `glfwInit()`.
+         * @brief Initializes the glfw library by calling `glfwInit()`.
          *
          * @throws std::runtime_error if initialization fails
          *
@@ -26,14 +26,14 @@ export namespace helios::ext::glfw::app {
 
 
         /**
-         * Terminates the glfw library by calling `glfwTerminate()`.
+         * @brief Terminates the glfw library by calling `glfwTerminate()`.
          *
          * @see https://www.glfw.org/docs/latest/group__init.html#gaaae48c0a18607ea4a4ba951d939f0901
          */
         ~GLFWRAIIGuard();
 
         /**
-         * No copy or move.
+         * @brief No copy or move.
          */
         GLFWRAIIGuard(const GLFWRAIIGuard&) = delete;
         GLFWRAIIGuard& operator=(const GLFWRAIIGuard&) = delete;

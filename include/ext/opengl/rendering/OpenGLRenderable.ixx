@@ -18,7 +18,7 @@ import helios.ext.opengl.rendering.model.OpenGLMesh;
 export namespace helios::ext::opengl::rendering {
 
     /**
-     * An OpenGL specific implementation of a Renderable.
+     * @brief An OpenGL specific implementation of a Renderable.
      */
     class OpenGLRenderable final : public helios::rendering::Renderable {
 

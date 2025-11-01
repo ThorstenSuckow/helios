@@ -13,26 +13,27 @@ import helios.event.Dispatcher;
 export namespace helios::event {
 
     /**
-     * Defines the posting policy for events.
+     * @brief Defines the posting policy for events.
+     *
      * This enum specifies how events should be handled when posted
      * to the EventQueue.
      */
     enum PostPolicy {
         /**
-         * Policy for removing an event in favor of a newer one based
+         * @brief Policy for removing an event in favor of a newer one based
          * on specific criteria.
          */
         LATEST_WINS,
 
         /**
-         * Policy for simply adding an event to the underlying EventQueue.
+         * @brief Policy for simply adding an event to the underlying EventQueue.
          */
         APPEND
     };
 
 
     /**
-     * An abstract EventManager managing the buffering and dispatching of
+     * @brief An abstract EventManager managing the buffering and dispatching of
      * events, acting as a central hub for event management.
      *
      * Concrete implementations take care of `dispatchAll()`, that is, the
@@ -42,12 +43,12 @@ export namespace helios::event {
 
     protected:
         /**
-         * A unique_ptr to the EventQueue this EventManager owns.
+         * @brief A unique_ptr to the EventQueue this EventManager owns.
          */
         std::unique_ptr<EventQueue> eventQueue_;
 
         /**
-         * A unique_ptr to the Dispatcher this EventManager owns.
+         * @brief A unique_ptr to the Dispatcher this EventManager owns.
         */
         std::unique_ptr<Dispatcher> dispatcher_;
 
@@ -58,7 +59,7 @@ export namespace helios::event {
         virtual ~EventManager() = default;
 
         /**
-         * Creates a new EventManager using the specified EventQueue and Dispatcher.
+         * @brief Creates a new EventManager using the specified EventQueue and Dispatcher.
          *
          * The EventManger takes onwership of the EventQueue and the Dispatcher.
          *
@@ -72,7 +73,7 @@ export namespace helios::event {
 
 
         /**
-         * Posts  the event to the queue using the APPEND policy,
+         * @brief Posts  the event to the queue using the APPEND policy,
          * passing ownership of the event to the underlying queue.
          *
          * Calling this function is functionally identical to calling post()
@@ -86,8 +87,9 @@ export namespace helios::event {
 
 
         /**
-         * Posts  the event to the queue, passing ownership of the event
+         * @brief Posts  the event to the queue, passing ownership of the event
          * to the underlying queue.
+         *
          * Calling this function is identical to calling post() with the third argument
          * func set to nullptr, relying on the default implementations.
          *
@@ -100,8 +102,9 @@ export namespace helios::event {
 
 
         /**
-         * Posts the event to the underlying EventQueue using the specified
+         * @brief Posts the event to the underlying EventQueue using the specified
          * policy and the specified func.
+         *
          * Implementing classes are responsible to treating func according to the
          * specified policy, e.g. APPEND for adding the event to the queue,
          * LATEST_WINS for removing a particular event in favor of the submitted
@@ -123,7 +126,7 @@ export namespace helios::event {
 
 
         /**
-         * Dispatches all events currently held in the event queue.
+         * @brief Dispatches all events currently held in the event queue.
          *
          * This method retrieves and removes events one by one from the underlying
          * `EventQueue`, passing ownership to the underlying Dispatcher.
@@ -134,7 +137,7 @@ export namespace helios::event {
 
 
         /**
-         * Subscribes a callback to the specified EventType.
+         * @brief Subscribes a callback to the specified EventType.
          *
          * Delegates to the subscribe() method of the underlying dispatcher.
          *
@@ -153,7 +156,8 @@ export namespace helios::event {
 
 
         /**
-         * Returns a reference to the dispatcher used with this EventManager.
+         * @brief Returns a reference to the dispatcher used with this EventManager.
+         *
          * Provides direct access to the dispatcher, allowing for modification
          * of the Dispatcher, e.g. managing subscriptions.
          *

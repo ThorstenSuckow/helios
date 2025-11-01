@@ -19,7 +19,14 @@ Auf diese Weise bleibt die Architektur von helios kohärent, und Abhängigkeiten
 \par
 
 Als eher herausfordernd empfinden wir den Umgang mit modernen Sprachfeatures, die eine bewährte, aber auch ``traditionelle`` Programmiersprache wie C++ in den letzten Jahren erfahren hat - etwa das Modulsystem oder den Einsatz von Smart-Pointern: Dabei sehen wir uns im Spannungsfeld, etablierte C++-Idiome~\cite[]{IdiomaticCpp} und bewährte Konzepte in einer Entwicklungsumgebung anzuwenden, die überwiegend von Erfahrungen aus einfacheren Hochsprachen wie Java geprägt ist.
-Gerade zu Beginn des Projekts wurde die Projektstruktur sowie Bezeichner von Namensräumen deshalb immer wieder angepasst.\par
+Gerade zu Beginn des Projekts wurde die Projektstruktur sowie Bezeichner von Namensräumen deshalb immer wieder angepasst (siehe Abbildung~\ref{fig:code_frequency}).\par
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.8\columnwidth]{img/code_frequency}
+    \caption{Code-Frequenz Graph für das helios-Repository. Die in der Frühphase erfolgten Änderungen an der Projektstruktur spiegeln sich in der nahezu symmetrischen Verteilung von hinzugefügtem (grün) und entferntem Code (rot) wider. (Quelle: GitHub)}
+    \label{fig:code_frequency}
+\end{figure}
 
 Bei der Objektverwaltung über \textit{Ownership} und \textit{Pointer}-Arithmetik verzichten wir weitgehend auf \textit{raw pointer} und greifen stattdessen auf die in der Standardbibliothek definierten \texttt{unique\_ptr}, \texttt{shared\_ptr} oder \texttt{weak\_ptr}-Typen zurück, um \texttt{move}-Semantiken konsistent umzusetzen.
 Inwieweit die durch den Einsatz von Smart Pointern entstehenden zusätzlichen CPU-Instruktionen - die insbesondere durch die Referenzzählung entstehen\footnote{Einen Performance-Vergleich bietet beispielsweise~\cite[]{Val25}} - beim Aufbau und der Bearbeitung der Rendering-Pipeline messbare Auswirkungen auf die Effizienz haben, muss gegebenenfalls zu einem späteren Zeitpunkt evaluiert werden.\par

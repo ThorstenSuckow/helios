@@ -11,7 +11,7 @@ import helios.scene.SceneNode;
 export namespace helios::scene {
 
     /**
-     * Abstract base class for implementing frustum culling strategies.
+     * @brief Abstract base class for implementing frustum culling strategies.
      *
      * A FrustumCullingStrategy determines which SceneNodes are visible, relative to
      * the view frustum of a given camera.
@@ -36,7 +36,7 @@ export namespace helios::scene {
 
 
         /**
-         * Culls the scene graph to identify the visible SceneNodes.
+         * @brief Culls the scene graph to identify the visible SceneNodes.
          *
          * @param camera The camera defining the view frustum.
          * @param root The parent of the hierarchy to cull.

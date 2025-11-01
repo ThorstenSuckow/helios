@@ -13,7 +13,7 @@ using namespace helios::window::event;
 export namespace helios::window::event {
 
     /**
-     * Event representing a change in the framebuffer's size.
+     * @brief Event representing a change in the framebuffer's size.
      *
      * The event should be triggered whenever a change in the underlying
      * framebuffer of a window is detected, indicating that the rendering context
@@ -24,19 +24,19 @@ export namespace helios::window::event {
 
     public:
         /**
-         * The width of the framebuffer in pixels.
+         * @brief The width of the framebuffer in pixels.
          */
         const int width;
 
 
         /**
-         * The height of the framebuffer in pixels
+         * @brief The height of the framebuffer in pixels
          */
         const int height;
 
 
         /**
-         * Constructs a `FrameBufferResizeEvent`.
+         * @brief Constructs a `FrameBufferResizeEvent`.
          *
          * @param sourceGuid The Guid of the source of the event.
          * @param width The new width of the framebuffer.
@@ -48,7 +48,7 @@ export namespace helios::window::event {
 
 
         /**
-         * Constructs a `FrameBufferResizeEvent`.
+         * @brief Constructs a `FrameBufferResizeEvent`.
          *
          * @param sourceGuid The Guid of the source of the event.
          * @param width The new width of the framebuffer.

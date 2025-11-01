@@ -10,7 +10,7 @@ export namespace helios::util::io {
 
 
     /**
-     * Basic implementation of a string file reader.
+     * @brief Basic implementation of a string file reader.
      */
     class BasicStringFileReader : public StringFileReader {
 

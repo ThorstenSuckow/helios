@@ -15,7 +15,7 @@ export namespace helios::ext::opengl::rendering::shader {
 
 
     /**
-     * Manages the mapping between OpenGL uniform semantics and their locations
+     * @brief Manages the mapping between OpenGL uniform semantics and their locations
      * in an underlying OpenGL shader.
      *
      * This class should be used to store and retrieve the uniform locations, e.g.
@@ -25,19 +25,19 @@ export namespace helios::ext::opengl::rendering::shader {
 
     private:
         /**
-         * Bit mask serving as sentinel to keep track of set indices.
+         * @brief Bit mask serving as sentinel to keep track of set indices.
          * Since position 0 is allowed for uniform locations, this bitmask keeps
          * track of set indices in `map_`.
          */
         unsigned int sentinel_ = 0;
 
         /**
-         * The internal map used for mapping uniform semantics to positions.
+         * @brief The internal map used for mapping uniform semantics to positions.
          */
         std::array<int, std::to_underlying(helios::rendering::shader::UniformSemantics::count)> map_ = {};
 
         /**
-         * The logger used with this OpenGLUniformLocationMap.
+         * @brief The logger used with this OpenGLUniformLocationMap.
          * Defaults to HELIOS_LOG_SCOPE
          *
          * @todo constructor injection
@@ -58,12 +58,12 @@ export namespace helios::ext::opengl::rendering::shader {
            <= (sizeof(sentinel_) * 8)  && "sentinel type is too narrow");
 
         /**
-         * Default constructor for a OpenGLUniformLocationMap.
+         * @brief Default constructor for a OpenGLUniformLocationMap.
          */
         OpenGLUniformLocationMap() = default;
 
         /**
-         * Sets or updates the OpenGLUniform.
+         * @brief Sets or updates the OpenGLUniform.
          * If the semantics already exists in the map, it is updated with `position`.
          *
          * @param uniformSemantics The uniformSemantics to register with `position`
@@ -79,7 +79,7 @@ export namespace helios::ext::opengl::rendering::shader {
         ) noexcept;
 
         /**
-         * Returns the index of the uniform variable for the specified UniformSemantics
+         * @brief Returns the index of the uniform variable for the specified UniformSemantics
          * as configured with this location map.
          * This method returns -1 if the specified semantics is not configured with this map.
          *

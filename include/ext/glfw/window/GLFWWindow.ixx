@@ -15,7 +15,7 @@ import helios.ext.glfw.window.GLFWWindowConfig;
 export namespace helios::ext::glfw::window {
 
     /**
-     * An OpenGL focused window implementation using GLFW.
+     * @brief An OpenGL focused window implementation using GLFW.
      *
      * This class manages a `GLFWwindow` handle, providing methods for
      * creation, display, event polling and resource cleanup.
@@ -26,38 +26,38 @@ export namespace helios::ext::glfw::window {
 
     private:
         /**
-         * The native GLFWwindow handle.
+         * @brief The native GLFWwindow handle.
          */
         GLFWwindow* nativeHandle_ = nullptr;
 
 
         /**
-         * C-style callback function for framebuffer resize events.
+         * @brief C-style callback function for framebuffer resize events.
          * This function pointer is passed to `glfwSetFramebufferSizeCallback`.
          */
         GLFWframebuffersizefun frameBufferSizeCallback_;
 
         /**
-         * A unique_ptr to the to an object holding user defined data for the native GLFWwindow.
+         * @brief A unique_ptr to the to an object holding user defined data for the native GLFWwindow.
          * This information gets forwarded using `glfwSetWindowUserPointer`
          */
         std::unique_ptr<GLFWWindowUserPointer> windowUserPointer_;
 
     public:
         /**
-         * Do not copy instances of GLFWWindow.
+         * @brief Do not copy instances of GLFWWindow.
          */
         GLFWWindow(const GLFWWindow&) = delete;
         GLFWWindow& operator=(const GLFWWindow&) = delete;
 
         /**
-         * Destructor. Delegates to #destroy()
+         * @brief Destructor. Delegates to #destroy()
          */
         ~GLFWWindow() override;
 
 
         /**
-         * Constructs a new GLFWWindow based in the provided configuration.
+         * @brief Constructs a new GLFWWindow based in the provided configuration.
          * The underlying native window is not created until #show() is called.
          *
          * @param cfg A const ref to this window's configuration-
@@ -69,7 +69,7 @@ export namespace helios::ext::glfw::window {
          *******************/
 
         /**
-         * Creates and displays the underlying native `GlFWwindow`.
+         * @brief Creates and displays the underlying native `GlFWwindow`.
          *
          * This method initializes the native window. It does not set the current context,
          * which is actually done by GLFWApplication::setCurrent().
@@ -80,7 +80,7 @@ export namespace helios::ext::glfw::window {
 
 
         /**
-         * Swaps the front and back buffers of the window.
+         * @brief Swaps the front and back buffers of the window.
          *
          * @see https://www.glfw.org/docs/latest/group__window.html#ga15a5a1ee5b3c2ca6b15ca209a12efd14
          */
@@ -88,7 +88,7 @@ export namespace helios::ext::glfw::window {
 
 
         /**
-         * Processes all events in the underlying Window's EventQueue.
+         * @brief Processes all events in the underlying Window's EventQueue.
          *
          * This method should be called regularly in the main loop.
          *
@@ -117,7 +117,7 @@ export namespace helios::ext::glfw::window {
          * Specifics
          *******************/
         /**
-         * Returns the framebuffer resize callback function.
+         * @brief Returns the framebuffer resize callback function.
          *
          * @return the `GLFWframebuffersizefun` currently registered with this Window.
          */
@@ -125,7 +125,7 @@ export namespace helios::ext::glfw::window {
 
 
         /**
-         * Sets the callback function for framebuffer resize events.
+         * @brief Sets the callback function for framebuffer resize events.
          *
          * Implementing APIs should consider this method as "package protected": It's purpose is
          * to register a function that delegates the native event into the Application's
@@ -137,7 +137,7 @@ export namespace helios::ext::glfw::window {
 
 
         /**
-         * Returns the raw native GLFWwindow handle.
+         * @brief Returns the raw native GLFWwindow handle.
          *
          * This method should only be used in GLFW-related API parts, where underlying
          * glfw-functions require the native window handle.
@@ -148,7 +148,7 @@ export namespace helios::ext::glfw::window {
 
 
         /**
-         * Removed the underlying native handle of the GLFWwindow.
+         * @brief Removed the underlying native handle of the GLFWwindow.
          *
          * @see https://www.glfw.org/docs/latest/group__window.html#gacdf43e51376051d2c091662e9fe3d7b2
          */
@@ -156,7 +156,7 @@ export namespace helios::ext::glfw::window {
 
 
         /**
-         * Sets the user-defined pointer for his GLFWWindow.
+         * @brief Sets the user-defined pointer for his GLFWWindow.
          *
          * This transfers ownership of the `GLFWWindowUserPointer`-object to this
          * Window and additionally associates its raw pointer with this Window's
@@ -170,7 +170,7 @@ export namespace helios::ext::glfw::window {
 
 
         /**
-         * Returns a const reference to the `GLFWWindowUserPointer` managed by this class.
+         * @brief Returns a const reference to the `GLFWWindowUserPointer` managed by this class.
          *
          * @return A const ref to this object's `GLFWWindowUserPointer`, or `nullptr` if
          * not available.

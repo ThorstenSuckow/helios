@@ -15,7 +15,7 @@ import helios.util.log.LogManager;
 export namespace helios::rendering {
 
     /**
-     * Manages a collection of `RenderCommand` objects for a single rendering pass.
+     * @brief Manages a collection of `RenderCommand` objects for a single rendering pass.
      *
      * `RenderQueue` acts as a container for all render commands, represented by a `RenderCommand`.
      * A `RenderQueue` holds unique ownership of the render commands.
@@ -30,12 +30,12 @@ export namespace helios::rendering {
 
     protected:
         /**
-         * Stores the unique ptrs to the RenderCommand objects of this queue.
+         * @brief Stores the unique ptrs to the RenderCommand objects of this queue.
          */
         std::vector<std::unique_ptr<const helios::rendering::RenderCommand>> renderCommands_;
 
         /**
-         * Logger instance for this RenderQueue.
+         * @brief Logger instance for this RenderQueue.
          */
         const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().registerLogger(HELIOS_LOG_SCOPE);
 
@@ -43,32 +43,32 @@ export namespace helios::rendering {
         ~RenderQueue() = default;
 
         /**
-         * Delete copy constructor.
+         * @brief Delete copy constructor.
          */
         RenderQueue(const RenderQueue&) = delete;
 
         /**
-         * Delete copy assignment operator.
+         * @brief Delete copy assignment operator.
          */
         RenderQueue& operator=(const RenderQueue&) = delete;
 
         /**
-         * Delete move constructor.
+         * @brief Delete move constructor.
          */
         RenderQueue(RenderQueue&&) noexcept = delete;
 
         /**
-         * Delete move assignment operator.
+         * @brief Delete move assignment operator.
          */
         RenderQueue& operator=(RenderQueue&&) noexcept = delete;
 
         /**
-         * Constructs a new empty RenderQueue.
+         * @brief Constructs a new empty RenderQueue.
          */
         RenderQueue() = default;
 
         /**
-         * Adds a `RenderCommand` to this `RenderQueue`.
+         * @brief Adds a `RenderCommand` to this `RenderQueue`.
          * Ownership of the `RenderCommand` is transferred to this `RenderQueue`.
          *
          * @param renderCommand A unique_ptr to the RenderCommand. This
@@ -79,21 +79,21 @@ export namespace helios::rendering {
         void add(std::unique_ptr<const helios::rendering::RenderCommand> renderCommand);
 
         /**
-         * Returns a const ref to the internal vector of `RenderableCommand`.
+         * @brief Returns a const ref to the internal vector of `RenderableCommand`.
          *
          * @return A const ref to the list of `RenderCommand`s of this queue.
          */
         [[nodiscard]] const std::vector<std::unique_ptr<const helios::rendering::RenderCommand>>& renderCommands() const noexcept;
 
         /**
-         * Clears all `RenderableCommand` objects from the queue.
+         * @brief Clears all `RenderableCommand` objects from the queue.
          *
          * This prepares this queue to be reused in a new rendering pass.
          */
         void clear();
 
         /**
-         * Returns the number of `RenderCommand`s this queue contains.
+         * @brief Returns the number of `RenderCommand`s this queue contains.
          *
          * @return The number of RenderCommands in this Queue.
          */

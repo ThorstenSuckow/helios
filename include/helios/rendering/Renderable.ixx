@@ -19,7 +19,7 @@ import helios.util.log.Logger;
 export namespace helios::rendering {
 
     /**
-     * Representative of a configurable Renderable rendered by the underlying GL API.
+     * @brief Representative of a configurable Renderable rendered by the underlying GL API.
      *
      * A Renderable is an aggregate consisting of Material and a Mesh, providing
      * geometric primitives and material information.
@@ -30,17 +30,17 @@ export namespace helios::rendering {
         Renderable() = default;
 
         /**
-         * A shared pointer to the Mesh this Renderable uses.
+         * @brief A shared pointer to the Mesh this Renderable uses.
          */
         std::shared_ptr<helios::rendering::model::Mesh> mesh_ = nullptr;
 
         /**
-         * A unique pointer to the Material owned by the Renderable.
+         * @brief A unique pointer to the Material owned by the Renderable.
          */
         std::unique_ptr<helios::rendering::model::Material> material_ = nullptr;
 
         /**
-         * The logger used with this Renderable instance.
+         * @brief The logger used with this Renderable instance.
          * Defaults to HELIOS_LOG_SCOPE
          *
          * @todo constructor injection
@@ -55,27 +55,27 @@ export namespace helios::rendering {
 
 
         /**
-         * Delete copy constructor.
+         * @brief Delete copy constructor.
          */
         Renderable(const Renderable&) = delete;
 
         /**
-         * Delete copy assignment operator.
+         * @brief Delete copy assignment operator.
          */
         Renderable& operator=(const Renderable&)= delete;
 
         /**
-         * Delete move constructor.
+         * @brief Delete move constructor.
          */
         Renderable(Renderable&&) noexcept = delete;
 
         /**
-         * Delete move assignment operator.
+         * @brief Delete move assignment operator.
          */
         Renderable& operator=(Renderable&&) noexcept = delete;
 
         /**
-         * Creates a new Renderable instance.
+         * @brief Creates a new Renderable instance.
          *
          * @param mesh A shared pointer to the Mesh associated with this Renderable.
          * @param material A unique pointer to the Material owned by this Renderable.
@@ -88,7 +88,7 @@ export namespace helios::rendering {
 
 
         /**
-         * Returns a shared ptr to the Mesh this Renderable uses.
+         * @brief Returns a shared ptr to the Mesh this Renderable uses.
          * The returned data is guaranteed to be a valid reference to existing data.
          *
          * @return Mesh
@@ -97,7 +97,7 @@ export namespace helios::rendering {
 
 
         /**
-         * Returns a const reference to the Material owned by this Renderable.
+         * @brief Returns a const reference to the Material owned by this Renderable.
          * The returned data is guaranteed to be a valid reference to existing data.
          *
          * @return Material

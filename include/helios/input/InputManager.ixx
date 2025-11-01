@@ -15,7 +15,7 @@ import helios.util.log.LogManager;
 export namespace helios::input {
 
     /**
-     * InputManager providing access to various input states.
+     * @brief InputManager providing access to various input states.
      *
      * The `InputManager` acts as an intermediary between the application and
      * the underlying systems which require some sort of input mechanism.
@@ -26,25 +26,26 @@ export namespace helios::input {
 
         private:
         /**
-         * A pointer to the currently observed window, which might be nullptr.
+         * @brief A pointer to the currently observed window, which might be nullptr.
          */
         const helios::window::Window* observedWin_ = nullptr;
 
         /**
-         * The InputAdapter owned by this InputManager.
+         * @brief The InputAdapter owned by this InputManager.
          */
         std::unique_ptr<const helios::input::InputAdapter> input_;
 
         protected:
         /**
-         * The const reference to the logger used with this Adapter.
+         * @brief The const reference to the logger used with this Adapter.
          */
         const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().registerLogger(HELIOS_LOG_SCOPE);
 
 
         public:
         /**
-         * Creates a new InputManager with the specified InputAdapter.
+         * @brief Creates a new InputManager with the specified InputAdapter.
+         *
          * Ownership of the InputAdapter is transferred to this InputManager.
          *
          * @param input The InputAdapter used with this InputManager.
@@ -53,7 +54,8 @@ export namespace helios::input {
 
 
         /**
-         * Sets the window this InputManager will observe for input.
+         * @brief Sets the window this InputManager will observe for input.
+         *
          * All subsequent input queries will be performed
          * on this window.
          *
@@ -63,7 +65,8 @@ export namespace helios::input {
 
 
         /**
-         * Returns a non-owning pointer to the currently observed window.
+         * @brief Returns a non-owning pointer to the currently observed window.
+         *
          * Returns a nullptr if no window is currently observed.
          *
          * @return The currently observed window as a non owning cont pointer,
@@ -73,7 +76,8 @@ export namespace helios::input {
 
 
         /**
-         * Polls events from the currently observed window.
+         * @brief Polls events from the currently observed window.
+         *
          * Calls the `pollEvents()` method of the observed window to process
          * any pending window-related input events.
          * This method should be called regularly, preferably once per frame.
@@ -86,7 +90,8 @@ export namespace helios::input {
 
 
         /**
-         * Returns true if the specified key is currently pressed, otherwise false.
+         * @brief Returns true if the specified key is currently pressed, otherwise false.
+         *
          * This method delegates to the underlying InputAdapter.
          *
          * @see InputAdapter::isKeyPressed

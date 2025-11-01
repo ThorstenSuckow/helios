@@ -11,7 +11,7 @@ import helios.rendering.shader.UniformValueMap;
 export namespace helios::rendering {
 
     /**
-     * DTO  for storing rendering specific command information to be
+     * @brief DTO  for storing rendering specific command information to be
      * passed to the RenderQueue.
      *
      * A `RenderCommand` does not extend the lifetime of the `shader_` and the `mesh_`,
@@ -22,24 +22,24 @@ export namespace helios::rendering {
      */
     class RenderCommand {
         /**
-         *A non-owning, weak ref to the shader program to be used.
+         * @brief A non-owning, weak ref to the shader program to be used.
          */
         std::weak_ptr<const helios::rendering::shader::Shader> shader_;
 
         /**
-         *A non-owning, weak ref to the mesh this command uses.
+         * @brief A non-owning, weak ref to the mesh this command uses.
          */
         std::weak_ptr<const helios::rendering::model::Mesh> mesh_;
 
         /**
-         * An owning, unique pointer to the uniform values specific for the object to be rendered.
+         * @brief An owning, unique pointer to the uniform values specific for the object to be rendered.
          * This map contains uniforms that change per object instance, such as the world
          * transformation matrix.
          */
         std::unique_ptr<const helios::rendering::shader::UniformValueMap> objectUniformValues_;
 
         /**
-         * An owning, unique pointer to the uniform values specific to the material of the object to
+         * @brief An owning, unique pointer to the uniform values specific to the material of the object to
          * be rendered.
          * This map contains uniforms related to the surface properties of a material,
          */
@@ -47,31 +47,31 @@ export namespace helios::rendering {
 
         public:
         /**
-         * Prevent copying.
+         * @brief Prevent copying.
          * A RenderCommand is not intended to be copied.
          */
         RenderCommand(const RenderCommand&)=delete;
 
         /**
-         * Prevent copy assignment.
+         * @brief Prevent copy assignment.
          * A RenderCommand is not intended to be copied.
          */
         RenderCommand& operator=(const RenderCommand&)=delete;
 
         /**
-         * Delete move constructor.
+         * @brief Delete move constructor.
          */
         RenderCommand(RenderCommand&&) noexcept = delete;
 
         /**
-         * Delete move assignment constructor.
+         * @brief Delete move assignment constructor.
          */
         RenderCommand& operator=(RenderCommand&&) noexcept = delete;
 
         ~RenderCommand() = default;
 
         /**
-         * Constructs a new `RenderCommand`.
+         * @brief Constructs a new `RenderCommand`.
          * Initializes this `RenderCommand` with weak pointers to the shader and mesh, and
          * takes ownership of the provided `UniformValueMaps`.
          *
@@ -90,7 +90,7 @@ export namespace helios::rendering {
             ) noexcept;
 
         /**
-         * Returns a weak ptr to the shader associated with this command.
+         * @brief Returns a weak ptr to the shader associated with this command.
          * Use `shader.lock()` on the return value to lock the shader into a shared ptr.
          * If lock() returns a nullptr, the Shader is no longer available.
          *
@@ -99,7 +99,7 @@ export namespace helios::rendering {
         [[nodiscard]] std::weak_ptr<const helios::rendering::shader::Shader> shader() const noexcept;
 
         /**
-         * Returns a weak ptr to the mesh associated with this command.
+         * @brief Returns a weak ptr to the mesh associated with this command.
          * Use `mesh.lock()` on the return value to lock the mesh into a shared ptr.
          * If lock() returns a nullptr, the Mesh is no longer available.
          *
@@ -108,14 +108,14 @@ export namespace helios::rendering {
         [[nodiscard]] std::weak_ptr<const helios::rendering::model::Mesh> mesh() const noexcept;
 
         /**
-         * Returns a const ref to this command's UniformValueMap for the object.
+         * @brief Returns a const ref to this command's UniformValueMap for the object.
          *
          * @return A const ref to this command's UniformValueMap for the object.
          */
         [[nodiscard]] const helios::rendering::shader::UniformValueMap& objectUniformValues() const noexcept;
 
         /**
-         * Returns a const ref to this command's UniformValueMap for the material.
+         * @brief Returns a const ref to this command's UniformValueMap for the material.
          *
          * @return A const ref to this command's UniformValueMap for the material.
          */

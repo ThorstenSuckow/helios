@@ -7,7 +7,7 @@ export module helios.rendering.shader.UniformSemantics;
 export namespace helios::rendering::shader {
 
     /**
-     * Enumeration class defining common semantic meanings for uniform variables in
+     * @brief Enumeration class defining common semantic meanings for uniform variables in
      * Shaders.
      *
      * This enum class provides a strongly typed way to refer to **standard** uniform
@@ -22,22 +22,22 @@ export namespace helios::rendering::shader {
     enum class UniformSemantics {
 
         /**
-         * Represents the world transformation matrix of an object.
+         * @brief Represents the world transformation matrix of an object.
          */
         WorldMatrix = 0,
 
         /**
-         * Represents the projection matrix.
+         * @brief Represents the projection matrix.
          */
         ProjectionMatrix,
 
         /**
-         * Represents the (camera) view space, transforming world space to view space.
+         * @brief Represents the (camera) view space, transforming world space to view space.
          */
         ViewMatrix,
 
         /**
-         * Representant for the number of entries in this enum.
+         * @brief Representant for the number of entries in this enum.
          */
         count
     };

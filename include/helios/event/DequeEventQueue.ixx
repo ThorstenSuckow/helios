@@ -15,7 +15,7 @@ using namespace helios::event;
 export namespace helios::event {
 
     /**
-     * Concrete implementation of an EventQueue that uses a Deque
+     * @brief Concrete implementation of an EventQueue that uses a Deque
      * as its underlying queue strategy.
      * Adding and removing events follows a FIFO strategy.
      *
@@ -24,14 +24,14 @@ export namespace helios::event {
 
     private:
         /**
-         * The internal deque for storing the events.
+         * @brief The internal deque for storing the events.
          */
         std::deque<std::unique_ptr<const Event>> events;
 
     public:
 
         /**
-         * Takes ownership of the event and moves it at the end of the queue.
+         * @brief Takes ownership of the event and moves it at the end of the queue.
          *
          * @param event A unique_ptr to the event that should be managed by this class.
          *
@@ -41,7 +41,7 @@ export namespace helios::event {
 
 
         /**
-         * Adds an event to the queue or replaces an existing one.
+         * @brief Adds an event to the queue or replaces an existing one.
          *
          * @param event A unique_ptr to the event this queue takes the ownership of.
          * @param cmpFunc The cmp function that is used for looking up and replacing an existing
@@ -56,7 +56,7 @@ export namespace helios::event {
 
 
         /**
-         * Returns true if the queue is empty, otherwise false.
+         * @brief Returns true if the queue is empty, otherwise false.
          *
          * @return True if the queue is empty, otherwise false.
          */
@@ -64,7 +64,7 @@ export namespace helios::event {
 
 
         /**
-         * Retrieves and returns the next event from the front of the queue.
+         * @brief Retrieves and returns the next event from the front of the queue.
          *
          * @return A unique_ptr to the next event in teh queue, i.e. from the front
          * position of the queue.

@@ -12,7 +12,7 @@ import helios.event.Event;
 export namespace helios::event {
 
     /**
-     * A generic event Dispatcher for type-safe event handling.
+     * @brief A generic event Dispatcher for type-safe event handling.
      *
      * The `Dispatcher` allows interested entities to subscribe to specific
      * event types and dispatch events in a decoupled manner.
@@ -24,13 +24,13 @@ export namespace helios::event {
 
     private:
         /**
-         * Internal map to store registered callbacks for various event types.
+         * @brief Internal map to store registered callbacks for various event types.
          */
         std::unordered_map<std::type_index, std::vector<std::function<void(const Event&)>>> callbacks_;
 
     public:
         /**
-         * Subscribes a callback to a specific event type.
+         * @brief Subscribes a callback to a specific event type.
          *
          * Registers a `std::function`  to be invoked when an event of `EventType`
          * is dispatched. The callback will receive the dispatched event as a const reference.
@@ -55,8 +55,9 @@ export namespace helios::event {
 
 
         /**
-         * Dispatches an event to all subscribed callbacks (i.e. listeners) of the
+         * @brief Dispatches an event to all subscribed callbacks (i.e. listeners) of the
          * specific EventType.
+         *
          * This method will take ownership of the event to dispatch.
          * Once this method returns, the unique_ptr to the `Event` will be a nullptr.
          *

@@ -13,7 +13,7 @@ import helios.math.types;
 export namespace helios::rendering::shader {
 
     /**
-     * A type alias for the variant containing all supported
+     * @brief A type alias for the variant containing all supported
      * uniform types.
      *
      * @see [Str22, 100]
@@ -23,7 +23,7 @@ export namespace helios::rendering::shader {
     >;
 
     /**
-     * Manages a collection of values for mapping them to their UniformSemantics
+     * @brief Manages a collection of values for mapping them to their UniformSemantics
      * identifier.
      *
      * This class allows for storing different types of uniform values (e.g. mat4f, vec3f, ...)
@@ -46,7 +46,7 @@ export namespace helios::rendering::shader {
 
     private:
         /**
-         * Internal data structure storing the association between a uniform semantic and
+         * @brief Internal data structure storing the association between a uniform semantic and
          * a concrete value.
          */
         std::array<std::optional<UniformValue>, std::to_underlying(UniformSemantics::count)> map_;
@@ -57,7 +57,7 @@ export namespace helios::rendering::shader {
         UniformValueMap() = default;
 
         /**
-         * Sets or updates a helios::math::mat4f uniform value for a given semantic.
+         * @brief Sets or updates a helios::math::mat4f uniform value for a given semantic.
          *
          * @param uniformSemantics The `UniformSemantics` identifier for the uniform.
          * @param mat4f A const ref to the mat4f value to set.
@@ -65,7 +65,7 @@ export namespace helios::rendering::shader {
         void set(UniformSemantics uniformSemantics, const helios::math::mat4f& mat4f) noexcept;
 
         /**
-         * Returns a raw const pointer to the mat4f for the specified uniform semantics.
+         * @brief Returns a raw const pointer to the mat4f for the specified uniform semantics.
          *
          * @param uniformSemantics The `UniformSemantics` identifier for the uniform.
          *

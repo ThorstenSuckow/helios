@@ -3,7 +3,7 @@
  *
  * @details This module provides comprehensive mathematical functionality including
  * vector and matrix types, transformation utilities, mathematical concepts,
- * and utility functions for 3D graphics and game engine computations.
+ * and utility functions for 3D graphics and game framework computations.
  */
 export module helios.math;
 

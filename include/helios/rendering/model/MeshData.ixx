@@ -17,18 +17,18 @@ import helios.rendering.asset.shape.Shape;
 export namespace helios::rendering::model {
 
     /**
-     * Representative of vertex data and indices provided by geometric shapes.
+     * @brief Representative of vertex data and indices provided by geometric shapes.
      * MeshData contains references to immutable, shared Vertex Data and indices.
      */
     class MeshData {
     private:
         /**
-         * Shared pointer to the raw, immutable vertices.
+         * @brief Shared pointer to the raw, immutable vertices.
          */
         std::shared_ptr<const std::vector<Vertex>> vertices_ = nullptr;
 
         /**
-         * Shared pointer to the raw, immutable indices.
+         * @brief Shared pointer to the raw, immutable indices.
          */
         std::shared_ptr<const std::vector<unsigned int>> indices_ = nullptr;
 
@@ -38,7 +38,7 @@ export namespace helios::rendering::model {
          */
 
         /**
-         * The logger used with this MeshData instance.
+         * @brief The logger used with this MeshData instance.
          * Defaults to HELIOS_LOG_SCOPE
          *
          * @todo constructor injection
@@ -54,7 +54,7 @@ export namespace helios::rendering::model {
         ~MeshData() = default;
 
         /**
-         * Creates a new MeshData instance.
+         * @brief Creates a new MeshData instance.
          *
          * @param vertices A shared pointer to a vector of const Vertex
          * @param indices A shared pointer to a vector of indices
@@ -68,7 +68,7 @@ export namespace helios::rendering::model {
 
 
         /**
-         * Creates a new MeshData instance from the specified Shape.
+         * @brief Creates a new MeshData instance from the specified Shape.
          *
          * @param shape A const reference to the Shape.
          *
@@ -78,7 +78,7 @@ export namespace helios::rendering::model {
 
 
         /**
-         * Returns a const reference to the underlying vertices.
+         * @brief Returns a const reference to the underlying vertices.
          * The returned data is guaranteed to be a valid reference to existing data.
          *
          * @return std::vector<Vertex>
@@ -86,7 +86,7 @@ export namespace helios::rendering::model {
         [[nodiscard]] const std::vector<Vertex>& vertices() const noexcept;
 
         /**
-         * Returns a const reference to the underlying indices.
+         * @brief Returns a const reference to the underlying indices.
          * The returned data is guaranteed to be a valid reference to existing data.
          *
          * @return std::vector<unsigned int>

@@ -16,7 +16,7 @@ export namespace helios::scene {
 
 
     /**
-     * SceneGraphKey as passkey idiom for accessing `setWorldTransform()`.
+     * @brief SceneGraphKey as passkey idiom for accessing `setWorldTransform()`.
      * All friend classes are able to construct the SceneGraphKey for accessing
      * pass key guarded methods like `setWorldTransform`.
      *
@@ -31,7 +31,7 @@ export namespace helios::scene {
     };
 
     /**
-     * Represents a SceneNode within a SceneGraph.
+     * @brief Represents a SceneNode within a SceneGraph.
      *
      * A SceneNode holds its local transformation and a (shared) pointer to
      * a Renderable object (the representative of a visible element).
@@ -54,14 +54,14 @@ export namespace helios::scene {
 
         private:
         /**
-         * A unique identifier for this SceneNode, computed automatically
+         * @brief A unique identifier for this SceneNode, computed automatically
          * during instantiation.
          */
         const util::Guid guid_;
 
         protected:
         /**
-         * Boolean flag to represent the dirty-state of this node.
+         * @brief Boolean flag to represent the dirty-state of this node.
          * Should be set to false if the current `worldTransform_`
          * for this node was computed, otherwise true, e.g. if the node's
          * local transform has been changed.
@@ -69,14 +69,14 @@ export namespace helios::scene {
         bool needsUpdate_ = true;
 
         /**
-         * A shared pointer to the Renderable this node represents in the
+         * @brief A shared pointer to the Renderable this node represents in the
          * SceneGraph. May be nullptr if this node does not represent a
          * renderable object.
          */
         std::shared_ptr<const helios::rendering::Renderable> renderable_;
 
         /**
-         * The paren node of **this** node.
+         * @brief The paren node of **this** node.
          * This will be nullptr for any root node. Implementing APIs must
          * take care of properly assigning parent nodes when adding
          * child nodes.
@@ -84,13 +84,13 @@ export namespace helios::scene {
         SceneNode* parent_ = nullptr;
 
         /**
-         * A list of unique pointers to this node's children.
+         * @brief A list of unique pointers to this node's children.
          * Ensures ownership of the child nodes withing the graph hierarchy.
          */
         std::vector<std::unique_ptr<SceneNode>> children_;
 
         /**
-         * The 4x4 worldTransform-Matrix of this node.
+         * @brief The 4x4 worldTransform-Matrix of this node.
          * This matrix is initially set to the identity matrix.
          * Implementing APIs MUST make sure to recompute the worldTransform
          * before each rendering pass.
@@ -98,14 +98,14 @@ export namespace helios::scene {
         math::mat4f worldTransform_ = math::mat4f::identity();
 
         /**
-         * A local transformation representing affine transformation
+         * @brief A local transformation representing affine transformation
          * information for this SceneNode. Encapsulates rotation, scaling and
          * translation.
          */
         Transform localTransform_;
 
         /**
-         * Sets the parent of this SceneNode.
+         * @brief Sets the parent of this SceneNode.
          * Internally used once a child was added to this SceneNode.
          *
          * @param parentNode The parent of this SceneNode
@@ -118,13 +118,13 @@ export namespace helios::scene {
             virtual ~SceneNode() = default;
 
             /**
-             * Delete copy constructor.
+             * @brief Delete copy constructor.
              * A SceneNode is not copyable.
              */
             SceneNode(const SceneNode &) = delete;
 
             /**
-             * Delete copy assignment constructor.
+             * @brief Delete copy assignment constructor.
              * A SceneNode ist not indtended to be copied.
              */
             SceneNode& operator=(const SceneNode&) = delete;
@@ -135,14 +135,14 @@ export namespace helios::scene {
              */
 
             /**
-             * Constructs a new SceneNode that represents no renderable object.
+             * @brief Constructs a new SceneNode that represents no renderable object.
              * Nodes constructed in this way should be treated as transformation
              * nodes.
              */
             SceneNode() noexcept;
 
             /**
-             * Constructs a new SceneNode that represents no renderable object.
+             * @brief Constructs a new SceneNode that represents no renderable object.
              * Nodes constructed in this way should be treated as transformation
              * nodes.
              *
@@ -151,7 +151,7 @@ export namespace helios::scene {
             explicit SceneNode(const Transform& transform) noexcept;
 
             /**
-             * Constructs a new SceneNode representing a renderable object.
+             * @brief Constructs a new SceneNode representing a renderable object.
              *
              * @param renderable A shred pointer to the Renderable this SceneNode
              * represents in a Scene.
@@ -163,7 +163,7 @@ export namespace helios::scene {
             ) noexcept;
 
             /**
-             * Constructs a new SceneNode representing a renderable object.
+             * @brief Constructs a new SceneNode representing a renderable object.
              *
              * @param renderable A shred pointer to the Renderable this SceneNode
              * represents in a Scene.
@@ -173,14 +173,14 @@ export namespace helios::scene {
             ) noexcept;
 
             /**
-             * Returns the globally unique identifier for this SceneNode.
+             * @brief Returns the globally unique identifier for this SceneNode.
              *
              * @return The unique identifier for this SceneNode.
              */
             [[nodiscard]] const helios::util::Guid& guid() const noexcept;
 
             /**
-             * Adds a new child node to this SceneNode.
+             * @brief Adds a new child node to this SceneNode.
              * The node's parent is automatically set to **this** node
              *
              * @param sceneNode The node to add as a child.
@@ -191,21 +191,21 @@ export namespace helios::scene {
             [[nodiscard]] virtual SceneNode* addChild(std::unique_ptr<SceneNode> sceneNode);
 
             /**
-             * Returns a const ref to the list of this node's children.
+             * @brief Returns a const ref to the list of this node's children.
              *
              * @return A const ref to the list of children of this node.
              */
             [[nodiscard]] const std::vector<std::unique_ptr<SceneNode>>& children() const noexcept;
 
             /**
-             * Returns a shared pointer to the Renderable of this SceneNode.
+             * @brief Returns a shared pointer to the Renderable of this SceneNode.
              *
              * @return
              */
             [[nodiscard]] std::shared_ptr<const helios::rendering::Renderable> renderable() const noexcept;
 
             /**
-             * Applies a scaling transformation to this node's **local** transform.
+             * @brief Applies a scaling transformation to this node's **local** transform.
              * Marks the node dirty. Implementing APIs should consider updating the
              * worldTransform of this node before rendering.
              *
@@ -216,7 +216,7 @@ export namespace helios::scene {
             SceneNode& scale(const helios::math::vec3f& scale) noexcept;
 
             /**
-             * Applies rotation to this node's **local** transform.
+             * @brief Applies rotation to this node's **local** transform.
              * Marks the node dirty. Implementing APIs should consider updating the
              * worldTransform of this node before rendering.
              *
@@ -227,7 +227,7 @@ export namespace helios::scene {
             SceneNode& rotate(const helios::math::mat4f& rotation) noexcept;
 
             /**
-             * Applies translation to this node's **local** transform.
+             * @brief Applies translation to this node's **local** transform.
              * Marks the node dirty. Implementing APIs should consider updating the
              * worldTransform of this node before rendering.
              *
@@ -239,14 +239,14 @@ export namespace helios::scene {
             SceneNode& translate(const helios::math::vec3f& translation) noexcept;
 
             /**
-             * Returns this SceneNode's localTransform.
+             * @brief Returns this SceneNode's localTransform.
              *
              * @return A const reference to this SceneNode's `Transform` object.
              */
             [[nodiscard]] const Transform& localTransform() const noexcept;
 
             /**
-             * Returns a pointer to this node's parent node.
+             * @brief Returns a pointer to this node's parent node.
              *
              * @return The pointer to this node's parent, or nullptr if no parent exists,
              * e.g. for the root node.
@@ -254,7 +254,7 @@ export namespace helios::scene {
             [[nodiscard]] SceneNode* parent() const noexcept;
 
             /**
-             * Sets the world transform for this SceneNode.
+             * @brief Sets the world transform for this SceneNode.
              * Does nothing if the current SceneNode's world transform is considered
              * equal to the specified world transform.
              *
@@ -269,7 +269,7 @@ export namespace helios::scene {
                 ) noexcept;
 
             /**
-             * Computes and returns the world transform for this SceneNode.
+             * @brief Computes and returns the world transform for this SceneNode.
              * Will request the current world transform from the
              * parent node to calculate this SceneNode's world transform.
              * For efficiency, this method should cache the result
@@ -280,7 +280,7 @@ export namespace helios::scene {
             const helios::math::mat4f& worldTransform() noexcept;
 
             /**
-             * Returns the current worldTransform matrix of this SceneNode
+             * @brief Returns the current worldTransform matrix of this SceneNode
              * **without triggering any recomputation**.
              * This method is efficient for access when the world transform is
              * known to be up-to-date.
@@ -290,7 +290,7 @@ export namespace helios::scene {
             const helios::math::mat4f& cachedWorldTransform() const noexcept;
 
             /**
-             * Checks whether this SceneNode needs to be updated, e.g. because the
+             * @brief Checks whether this SceneNode needs to be updated, e.g. because the
              * local transformation changed.
              *
              * @return true if this SceneNode is considered to be dirty, otherwise

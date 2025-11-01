@@ -13,7 +13,7 @@ import helios.math.concepts;
 export namespace helios::math {
 
     /**
-     * Represents a 4x4 matrix, stored in column-major order.
+     * @brief Represents a 4x4 matrix, stored in column-major order.
      *
      * The `mat4` struct provides a lightweight and efficient way to handle 4D
      * matrix mathematics for numeric data types.
@@ -27,7 +27,7 @@ export namespace helios::math {
     struct mat4 {
     private:
         /**
-         * Internal array storing matrix components.
+         * @brief Internal array storing matrix components.
          *
          * Components are stored in column-major order, that is, each 4 subsequent elements
          * represent a matrix column.
@@ -36,12 +36,12 @@ export namespace helios::math {
 
     public:
         /**
-         * Default constructor. Initializes all components to 0.
+         * @brief Default constructor. Initializes all components to 0.
          */
         explicit constexpr mat4() noexcept : m{}{};
 
         /**
-         * Creates a diagonal matrix. The diagonal components are initialized
+         * @brief Creates a diagonal matrix. The diagonal components are initialized
          * with the value f.
          *
          * @param f The scalar value for the diagonal components.
@@ -53,7 +53,7 @@ export namespace helios::math {
                 T{}, T{}, T{},  f} {}
 
         /**
-        * Creates a diagonal matrix with the components of vec3<T> as the
+        * @brief Creates a diagonal matrix with the components of vec3<T> as the
         * diagonal elements. Element at [4, 4] is set to 1.
         *
         * @param f The scalar value for the diagonal components.
@@ -65,7 +65,7 @@ export namespace helios::math {
                 T{}, T{}, T{},  static_cast<T>(1)} {}
 
         /**
-         * Constructs a new `mat4` with all 16 components explicitly
+         * @brief Constructs a new `mat4` with all 16 components explicitly
          * specified.
          * The values are stored in column major order, that is, the first 4 arguments
          * represent the first column, and so on.
@@ -86,7 +86,7 @@ export namespace helios::math {
 
 
         /**
-         * Convenient method to construct a 4x4 identity matrix
+         * @brief Convenient method to construct a 4x4 identity matrix
          *
          * @tparam T The numeric type of the matrix components.
          *
@@ -98,7 +98,7 @@ export namespace helios::math {
 
 
         /**
-         * Provides read-only access to a matrix component.
+         * @brief Provides read-only access to a matrix component.
          * Elements are accessed in column major order: `m[row + col * 4]`.
          * Bounds checking is performed via `assert` in debug builds.
          *
@@ -114,7 +114,7 @@ export namespace helios::math {
 
 
         /**
-         * Provides read-write access to a matrix component.
+         * @brief Provides read-write access to a matrix component.
          * Elements are accessed in column major order: `m[row + col * 4]`.
          * Bounds checking is performed via `assert` in debug builds.
          *
@@ -130,7 +130,7 @@ export namespace helios::math {
 
 
         /**
-         * Compares this matrix element's with the rgt matrix considering
+         * @brief Compares this matrix element's with the rgt matrix considering
          * an epsilon value.
          * Returns true if for all elements the equation |a-b| <= EPSILON
          * holds.
@@ -165,7 +165,7 @@ export namespace helios::math {
 
 
         /**
-         * Strictly compares the elements of this matrix with the elements
+         * @brief Strictly compares the elements of this matrix with the elements
          * of the rgt matrix.
          *
          * @param rgt The right matrix to compare for equal values
@@ -188,7 +188,7 @@ export namespace helios::math {
 
 
         /**
-         * Performs matrix-multiplication with another `mat4`.
+         * @brief Performs matrix-multiplication with another `mat4`.
          * This matrix is the left operand, while `m` is the right operand.
          *
          * @param m The right-hand side `mat4<T>` for multiplication.
@@ -214,7 +214,7 @@ export namespace helios::math {
 
 
     /**
-     * Returns a const pointer to the first element of the matrix's components.
+     * @brief Returns a const pointer to the first element of the matrix's components.
      *
      * Useful for APIs that expect a pointer to matrix data, like OpenGL.
      *
@@ -231,7 +231,7 @@ export namespace helios::math {
 
 
     /**
-     * Returns a pointer to the first element of the matrix's components.
+     * @brief Returns a pointer to the first element of the matrix's components.
      *
      * Useful for APIs that expect a pointer to matrix data, like OpenGL.
      *

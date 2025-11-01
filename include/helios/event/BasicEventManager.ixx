@@ -16,7 +16,7 @@ export namespace helios::event {
 
 
     /**
-     * Basic implementation of the EventManager.
+     * @brief Basic implementation of the EventManager.
      *
      * This implementation provides the concrete logic for
      * post() and dispatchAll().
@@ -27,7 +27,7 @@ export namespace helios::event {
         using EventManager::post;
 
         /**
-         * Constructs a new BasicEventManager, using the specified EventQueue
+         * @brief Constructs a new BasicEventManager, using the specified EventQueue
          * and the Dispatcher.
          *
          * @param eventQueue
@@ -38,7 +38,7 @@ export namespace helios::event {
 
 
         /**
-         * Posts an event based on the specified policy to the EventQueue.
+         * @brief Posts an event based on the specified policy to the EventQueue.
          *
          * @param event A unique_ptr to the event that should be posted
          * @param policy The policy to use for positing the event.
@@ -57,7 +57,7 @@ export namespace helios::event {
 
 
         /**
-         * Dispatches all events of the queue, passing ownership to the
+         * @brief Dispatches all events of the queue, passing ownership to the
          * underlying Dispatcher.
          * Clears the underlying EventQueue.
          *

@@ -14,7 +14,7 @@ import helios.util.log.LogManager;
 export namespace helios::window {
 
     /**
-     * Abstract base class representing a generic window.
+     * @brief Abstract base class representing a generic window.
      *
      * This class provides a common interface for window management
      * without depending on the underlying native window implementation.
@@ -30,27 +30,27 @@ export namespace helios::window {
     protected:
 
         /**
-         * The const reference to the logger used with this Adapter.
+         * @brief The const reference to the logger used with this Adapter.
          */
         const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().registerLogger(HELIOS_LOG_SCOPE);
 
         /**
-         * The current width of the window.
+         * @brief The current width of the window.
          */
         int width_;
 
         /**
-         * The current height of the window.
+         * @brief The current height of the window.
          */
         int height_;
 
         /**
-         * The title of the window.
+         * @brief The title of the window.
          */
         std::string title_;
 
         /**
-         * The viewport configuration of the window, in terms of (x, y, width, height)
+         * @brief The viewport configuration of the window, in terms of (x, y, width, height)
          */
         math::vec4i viewport_;
 
@@ -58,7 +58,7 @@ export namespace helios::window {
         virtual ~Window() = default;
 
         /**
-         * Constructs a new Window based on the provided configuration.
+         * @brief Constructs a new Window based on the provided configuration.
          *
          * Initializes basic properties such as width, height and the viewport
          * of the window.
@@ -69,7 +69,7 @@ export namespace helios::window {
 
 
         /**
-         * Checks if the window has received a close request.
+         * @brief Checks if the window has received a close request.
          *
          * Implementing APIs should consider this flag in constant intervals
          * (e.g. each frame) to determine whether this window should be closed.
@@ -82,7 +82,7 @@ export namespace helios::window {
 
 
         /**
-         * Sets the close flag of this window.
+         * @brief Sets the close flag of this window.
          *
          * @param close True to indicate this window should be closed,
          * false otherwise.
@@ -93,7 +93,7 @@ export namespace helios::window {
 
 
         /**
-         * Returns the unique guid for this window instance.
+         * @brief Returns the unique guid for this window instance.
          *
          * @return A const ref to the Guid of this window.
          */
@@ -101,7 +101,7 @@ export namespace helios::window {
 
 
         /**
-         * Shows the underlying native window.
+         * @brief Shows the underlying native window.
          *
          * Derived classes must implement the platform-specific logic to
          * show this window.
@@ -115,7 +115,7 @@ export namespace helios::window {
 
 
         /**
-         * Advise the rendering system to swap the front and back buffers.
+         * @brief Advise the rendering system to swap the front and back buffers.
          *
          * Makes the back buffers content visible on the screen.
          * Derived classes must implement the platform-specific buffer mechanisms.
@@ -124,7 +124,7 @@ export namespace helios::window {
 
 
         /**
-         * Poll this window for window related events.
+         * @brief Poll this window for window related events.
          *
          * This method processes pending events form the native window system.
          * Implementing APIs should call this method in constant intervals, e.g.
@@ -134,7 +134,7 @@ export namespace helios::window {
 
 
         /**
-         * Returns the current with of this window.
+         * @brief Returns the current with of this window.
          *
          * @return The current width of this window.
          */
@@ -142,7 +142,7 @@ export namespace helios::window {
 
 
         /**
-         * Returns the current height of this window.
+         * @brief Returns the current height of this window.
          *
          * @return The current height of this window.
          */
@@ -150,7 +150,7 @@ export namespace helios::window {
 
 
         /**
-         * Returns the viewport configuration used with this window,
+         * @brief Returns the viewport configuration used with this window,
          * encoded in a `vec4i`, encoding x, y, width, height.
          *
          * @return A constant reference to the `vec4i` representing this window's viewport.
@@ -159,7 +159,8 @@ export namespace helios::window {
 
 
         /**
-         * Compares two window instances for equality.
+         * @brief Compares two window instances for equality.
+         *
          * This implementation treats two windows as equal if their
          * guids are of the same value.
          *

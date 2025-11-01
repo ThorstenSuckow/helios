@@ -11,7 +11,7 @@ import helios.util.log.Logger;
 export namespace helios::rendering::model {
 
     /**
-     * Immutable MaterialData.
+     * @brief Immutable MaterialData.
      *
      * MaterialData can safely be shared among Material instances.
      */

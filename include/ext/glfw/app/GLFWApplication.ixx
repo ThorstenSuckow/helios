@@ -20,7 +20,7 @@ import helios.ext.glfw.app.GLFWRAIIGuard;
 export namespace helios::ext::glfw::app {
 
     /**
-     * An Application implementation for glfw-based environments.
+     * @brief An Application implementation for glfw-based environments.
      *
      * This application owns a `GLFWRAIIGuard`.
      */
@@ -28,19 +28,19 @@ export namespace helios::ext::glfw::app {
 
     private:
         /**
-         * A pointer to the currently active window of the Application, or `nullptr`
+         * @brief A pointer to the currently active window of the Application, or `nullptr`
          * if there is no currently active window.
          */
         helios::window::Window* current_ = nullptr;
 
         /**
-         * RAII Guard for glfw initialization and termination.
+         * @brief RAII Guard for glfw initialization and termination.
          */
         GLFWRAIIGuard glfwRaiiGuard_;
 
     public:
         /**
-         * Constructs a new `GLFWApplication` instance.
+         * @brief Constructs a new `GLFWApplication` instance.
          *
          * @param renderingDevice
          * @param inputManager
@@ -59,7 +59,7 @@ export namespace helios::ext::glfw::app {
 
 
         /**
-         * Creates a new GLFWWindow and add it to this Application's windows collection.
+         * @brief Creates a new GLFWWindow and add it to this Application's windows collection.
          * The Application takes ownership of the window.
          * Delegates to Window::show() for showing the window and initializes the associated rendering
          * device if necessary, e.g. for glfw an additional `glfwMakeContextCurrent()` is called
@@ -81,7 +81,7 @@ export namespace helios::ext::glfw::app {
 
 
         /**
-         * Sets the current Window for this Application.
+         * @brief Sets the current Window for this Application.
          * Makes sure that `glfwContextCurrent` is called for setting a
          * current context for glfw and subsequent glfw-operations.
          * It also re-registers `glfwSetFramebufferSizeCallback` with the

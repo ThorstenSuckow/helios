@@ -14,7 +14,7 @@ import helios.rendering.shader.UniformValueMap;
 export namespace helios::rendering::shader {
 
     /**
-     * Abstract representation of a Shader program (e.g. composed of vertex/fragment shader).
+     * @brief Abstract representation of a Shader program (e.g. composed of vertex/fragment shader).
      *
      * This class defines common operations for managing and utilizing shaders.
      * Derived classes provide rendering API-specifics for loading and compiling the shaders.
@@ -23,7 +23,7 @@ export namespace helios::rendering::shader {
 
     protected:
         /**
-         * The logger used with this Shader instance.
+         * @brief The logger used with this Shader instance.
          * Defaults to HELIOS_LOG_SCOPE.
          *
          * @todo constructor injection
@@ -37,14 +37,14 @@ export namespace helios::rendering::shader {
         virtual ~Shader() = default;
 
         /**
-         * Activates this shader for subsequent rendering operations.
+         * @brief Activates this shader for subsequent rendering operations.
          * Draw calls of the current rendering pass will use _this_ shader
          * until no or another shader is bound.
          */
         virtual void use() const noexcept = 0;
 
         /**
-         * Applies the specified UniformValueMap to the uniforms defined by the shader.
+         * @brief Applies the specified UniformValueMap to the uniforms defined by the shader.
          * This method does not change the state of the shader, but it passes the uniform
          * values to the underlying rendering backend. Implementing APIs should make sure
          * that the shader is properly bound before the method is called.

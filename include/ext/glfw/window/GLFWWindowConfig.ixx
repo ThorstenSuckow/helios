@@ -9,7 +9,7 @@ import helios.window.WindowConfig;
 export namespace helios::ext::glfw::window {
 
     /**
-     * Configuration structure for a GLFWWindow.
+     * @brief Configuration structure for a GLFWWindow.
      *
      * Extends helios::window::WindowConfig by adding a `GLFWframebuffersizefun`,
      * which represents a C-style callback for framebuffer size events.
@@ -18,7 +18,7 @@ export namespace helios::ext::glfw::window {
      */
     struct GLFWWindowConfig : public helios::window::WindowConfig {
         /**
-         *The GLFW framebuffer size callback.
+         * @brief The GLFW framebuffer size callback.
          */
         GLFWframebuffersizefun frameBufferSizeCallback = nullptr;
         ~GLFWWindowConfig() override = default;

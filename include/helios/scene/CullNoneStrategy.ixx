@@ -12,7 +12,7 @@ export namespace helios::scene {
 
 
     /**
-     * A default FrustumCullingStrategy that simply returns all
+     * @brief A default FrustumCullingStrategy that simply returns all
      * SceneNodes found, e.g. no culling is applied.
      */
     class CullNoneStrategy final : public helios::scene::FrustumCullingStrategy  {
@@ -20,7 +20,7 @@ export namespace helios::scene {
 
     protected:
         /**
-         * Internal function to populate the vector recursively with the node and its children.
+         * @brief Internal function to populate the vector recursively with the node and its children.
          *
          * @param nodes The vector holding the const pointers to the SceneNodes
          * @param node The current node to process. This node is added to nodes, then this
@@ -34,7 +34,7 @@ export namespace helios::scene {
     public:
 
         /**
-         * Returns all SceneNode of the specified scenes, regardless of their visibility
+         * @brief Returns all SceneNode of the specified scenes, regardless of their visibility
          * relative to the camera's view frustum.
          *
          * @param camera The camera defining the view frustum.

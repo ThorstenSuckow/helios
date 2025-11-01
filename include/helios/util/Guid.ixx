@@ -10,7 +10,7 @@ export module helios.util.Guid;
 export namespace helios::util {
 
     /**
-     * Representative of a Globally Unique Identifier.
+     * @brief Representative of a Globally Unique Identifier.
      *
      * Generating guids with this class is considered thread-safe.
      */
@@ -25,14 +25,14 @@ export namespace helios::util {
         constexpr bool operator!=(const Guid& guid) const = default;
 
         /**
-         * Generates a new Guid.
+         * @brief Generates a new Guid.
          *
          * @return Guid an immutable Guid-instance
          */
         static Guid generate() noexcept;
 
         /**
-         * Returns the raw value of this Guid.
+         * @brief Returns the raw value of this Guid.
          *
          * @return uint64_t
          */

@@ -10,7 +10,7 @@ import helios.math.types;
 export namespace helios::scene {
 
     /**
-     * Structure for representing a snapshot item of a renderable's object
+     * @brief Structure for representing a snapshot item of a renderable's object
      * state at a specific point in time.
      *
      * The structure bundles a weak pointer to a Renderable and a pre-calculated
@@ -44,30 +44,30 @@ export namespace helios::scene {
     struct SnapshotItem {
     private:
         /**
-         * A weak pointer to the actual Renderable object.
+         * @brief A weak pointer to the actual Renderable object.
          */
         std::weak_ptr<const helios::rendering::Renderable> renderable_;
 
         /**
-         * A copy of the world transformation matrix for the Renderable.
+         * @brief A copy of the world transformation matrix for the Renderable.
          */
         const helios::math::mat4f worldMatrix_;
 
     public:
         /**
-         * Prevent copying.
+         * @brief Prevent copying.
          */
         SnapshotItem(const SnapshotItem&)=delete;
         SnapshotItem& operator=(const SnapshotItem&)=delete;
 
         /**
-         * Provide custom move constructor
+         * @brief Provide custom move constructor
          * @see https://en.cppreference.com/w/cpp/language/move_constructor.html
          */
         SnapshotItem(SnapshotItem&&) noexcept = default;
 
         /**
-         * Constructs a new SnapshotItem with the specified renderable
+         * @brief Constructs a new SnapshotItem with the specified renderable
          * and the worldMatrix.
          *
          * @param renderable A weak ptr to the Renderable.
@@ -79,7 +79,7 @@ export namespace helios::scene {
         );
 
         /**
-         * Returns a weak ptr to the Renderable of this SnapshotItem.
+         * @brief Returns a weak ptr to the Renderable of this SnapshotItem.
          * Use .lock() on the returned weak pointer to obtain a shared pointer for
          * the Renderable, if it still exists. If the Renderable does not exist,
          * the SnapshotItem should be ignored for further processing.
@@ -89,7 +89,7 @@ export namespace helios::scene {
         [[nodiscard]] std::weak_ptr<const helios::rendering::Renderable> renderable() const noexcept;
 
         /**
-         * Returns a const ref to the worldMatrix of this SnapshotItem.
+         * @brief Returns a const ref to the worldMatrix of this SnapshotItem.
          * The world transformation matrix is a copy from the world transformation matrix
          * created with this SnapshotItem.
          *

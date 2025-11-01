@@ -16,7 +16,7 @@ import helios.ext.opengl.rendering.shader.OpenGLUniformLocationMap;
 export namespace helios::ext::opengl::rendering::shader {
 
     /**
-     * An OpenGL-specific implementation of a Shader program,
+     * @brief An OpenGL-specific implementation of a Shader program,
      * consisting of a vertex and a fragment shader.
      *
      * This class manages the lifecycle of the Shaders. Source files are
@@ -28,20 +28,20 @@ export namespace helios::ext::opengl::rendering::shader {
 
     private:
         /**
-         * Source of the shader. Not guaranteed to be persisted
+         * @brief Source of the shader. Not guaranteed to be persisted
          * once compilation was successful.
          */
         std::string vertexShaderSource_;
 
 
         /**
-         * Source of the shader. Not guaranteed to be persisted
+         * @brief Source of the shader. Not guaranteed to be persisted
          * once compilation was successful.
          */
         std::string fragmentShaderSource_;
 
         /**
-         * Loads the specified vertex and fragment shader.
+         * @brief Loads the specified vertex and fragment shader.
          *
          * @return true if loading succeeded, otherwise false.
          *
@@ -55,7 +55,7 @@ export namespace helios::ext::opengl::rendering::shader {
 
 
         /**
-         * Compiles the vertex and fragment shader represented by this instance.
+         * @brief Compiles the vertex and fragment shader represented by this instance.
          *
          * @return true if compilation succeeded, otherwise false.
          *
@@ -66,18 +66,18 @@ export namespace helios::ext::opengl::rendering::shader {
 
         protected:
             /**
-             * The program id as assigned by the underlying rendering backend.
+             * @brief The program id as assigned by the underlying rendering backend.
              */
             unsigned int progId_ = 0;
 
             /**
-             * A unique pointer to the OpenGLUniformLocationMap this shader uses.
+             * @brief A unique pointer to the OpenGLUniformLocationMap this shader uses.
              */
             std::unique_ptr<const OpenGLUniformLocationMap> uniformLocationMap_ = nullptr;
 
     public:
         /**
-         * Rule of three.
+         * @brief Rule of three.
          * @see https://wikis.khronos.org/opengl/Common_Mistakes#RAII_and_hidden_destructor_calls
          * @see https://en.cppreference.com/w/cpp/language/rule_of_three.html
          *
@@ -88,7 +88,7 @@ export namespace helios::ext::opengl::rendering::shader {
 
 
         /**
-         * Creates and initializes this OpenGLShader.
+         * @brief Creates and initializes this OpenGLShader.
          * An instance of this class is guaranteed to have a progId_ != 0,
          * hence shader-files where successfully loaded and compiled, ready to be used.
          *
@@ -106,7 +106,7 @@ export namespace helios::ext::opengl::rendering::shader {
 
 
         /**
-         * Activates this OpenGLShader for subsequent draw calls.
+         * @brief Activates this OpenGLShader for subsequent draw calls.
          * This implementation calls `glUseProgram` with the `progId_` received after
          * compilation.
          *
@@ -115,14 +115,14 @@ export namespace helios::ext::opengl::rendering::shader {
         void use() const noexcept override;
 
         /**
-         * Deletes the program object upon destruction of this instance.
+         * @brief Deletes the program object upon destruction of this instance.
          *
          * @see https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDeleteProgram.xhtml
          */
         ~OpenGLShader() override;
 
         /**
-         * Sets the OpenGLUniformLocationMap for this OpenGLShader.
+         * @brief Sets the OpenGLUniformLocationMap for this OpenGLShader.
          * Ownership is transferred to this instance.
          *
          * @param uniformLocationMap The OpenGLUniformMap providing the mappings for the uniforms
@@ -132,7 +132,7 @@ export namespace helios::ext::opengl::rendering::shader {
             std::unique_ptr<const OpenGLUniformLocationMap> uniformLocationMap) noexcept;
 
         /**
-         * Returns the uniform location for the uniform represented by the specified
+         * @brief Returns the uniform location for the uniform represented by the specified
          * UniformSemantics.
          *
          * @param uniformSemantics The `UniformSemantics` identifier.

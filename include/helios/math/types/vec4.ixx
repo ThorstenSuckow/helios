@@ -14,7 +14,7 @@ import :vec3;
 export namespace helios::math {
 
     /**
-     * Represents a 4-dimensional vector of the generic type <T>.
+     * @brief Represents a 4-dimensional vector of the generic type <T>.
      *
      * The `vec4` struct provides a lightweight and efficient way to handle 4D
      * vector mathematics for the numeric types float, int, double. For convenient access,
@@ -27,20 +27,20 @@ export namespace helios::math {
 
     private:
         /**
-         * Internal array storing the vector components.
+         * @brief Internal array storing the vector components.
          */
         T v[4];
 
     public:
 
         /**
-         * Creates a new vec3 with its values initialized to (0, 0, 0, 0)
+         * @brief Creates a new vec3 with its values initialized to (0, 0, 0, 0)
          */
         constexpr vec4() noexcept : v{static_cast<T>(0), static_cast<T>(0), static_cast<T>(0), static_cast<T>(0)} {}
 
 
         /**
-         * Constructs a new vec4 with the specified x, y, z, w components.
+         * @brief Constructs a new vec4 with the specified x, y, z, w components.
          *
          * @param x The value for the x component.
          * @param y The value for the y component.
@@ -52,7 +52,7 @@ export namespace helios::math {
 
 
         /**
-         * Constructs a new vec4 from the vec3 vector and the w value.
+         * @brief Constructs a new vec4 from the vec3 vector and the w value.
          *
          * @param vec The vec3<T> vector.
          * @param w The value for the w component.
@@ -61,7 +61,7 @@ export namespace helios::math {
 
 
         /**
-         * Constructs a new vec4 from the vec3 vector and the w value.
+         * @brief Constructs a new vec4 from the vec3 vector and the w value.
          *
          * @param vec The vec3<T> vector.
          * @param w The value for the w component.
@@ -70,7 +70,7 @@ export namespace helios::math {
 
 
         /**
-         * Provides read only access to the vector components.
+         * @brief Provides read only access to the vector components.
          * Bounds checking is performed via `assert` in debug builds.
          *
          * @param i The index to query
@@ -84,7 +84,7 @@ export namespace helios::math {
 
 
         /**
-         * Provides read-write access to the vector components.
+         * @brief Provides read-write access to the vector components.
          * Bounds checking is performed via `assert` in debug builds.
          *
          * @param i The index to query

@@ -8,7 +8,7 @@ export module helios.util.log.Logger;
 export namespace helios::util::log {
 
     /**
-     * Simple Logger implementation.
+     * @brief Simple Logger implementation.
      *
      * @todo configure log stream
      */
@@ -19,7 +19,7 @@ export namespace helios::util::log {
 
     public:
         /**
-         * Creates a new Logger, tagged with specific scope.
+         * @brief Creates a new Logger, tagged with specific scope.
          *
          * @param scope
          */
@@ -27,7 +27,8 @@ export namespace helios::util::log {
             scope_(std::move(scope)) {}
 
         /**
-         * Couts a warning.
+         * @brief Couts a warning.
+         *
          * @param msg
          */
         void inline warn(const std::string& msg) const noexcept{
@@ -36,7 +37,8 @@ export namespace helios::util::log {
 
 
         /**
-         * Couts a msg.
+         * @brief Couts a msg.
+         *
          * @param msg
          */
         void inline debug(const std::string& msg) const noexcept {
@@ -45,7 +47,8 @@ export namespace helios::util::log {
 
 
         /**
-         * Couts an info.
+         * @brief Couts an info.
+         *
          * @param msg
          */
         void inline info(const std::string& msg)  const noexcept{
@@ -54,7 +57,8 @@ export namespace helios::util::log {
 
 
         /**
-         * Couts an error.
+         * @brief Couts an error.
+         *
          * @param msg
          */
         void inline error(const std::string& msg) const noexcept {

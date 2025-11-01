@@ -19,7 +19,7 @@ import helios.util.log.LogManager;
 export namespace helios::app {
 
     /**
-     * Class providing the entry point for a helios application.
+     * @brief Class providing the entry point for a helios application.
      *
      * `Application` serves as the central hub for the helios framework, offering convenient access
      * and management for key subsystems such as the EventManager, the InputManager and the
@@ -32,7 +32,7 @@ export namespace helios::app {
 
     protected:
         /**
-         * The const reference to the logger used with this Adapter.
+         * @brief The const reference to the logger used with this Adapter.
          */
         const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().registerLogger(HELIOS_LOG_SCOPE);
 
@@ -43,7 +43,7 @@ export namespace helios::app {
         std::unique_ptr<event::EventManager> eventManager_;
 
         /**
-         * A list containing all Windows managed by this Application.
+         * @brief A list containing all Windows managed by this Application.
          */
         std::list<std::unique_ptr<helios::window::Window>> windowList_;
 
@@ -59,7 +59,8 @@ export namespace helios::app {
 
 
         /**
-         * Creates a new Application instance.
+         * @brief Creates a new Application instance.
+         *
          * The Application will take ownership of the specified constructor arguments.
          *
          * @param renderingDevice
@@ -74,7 +75,8 @@ export namespace helios::app {
 
 
         /**
-         * Registers a new controller with this application.
+         * @brief Registers a new controller with this application.
+         *
          * Makes sure that the controller subscribes to the EventManager's Dispatcher
          * of this Application.
          * The Application receives ownership of the specified controller.
@@ -91,7 +93,7 @@ export namespace helios::app {
         void addController(std::unique_ptr<helios::app::controller::Controller> controller);
 
         /**
-         * Creates the container for the native window and performs all
+         * @brief Creates the container for the native window and performs all
          * necessary steps to properly initialize it.
          *
          * @param cfg
@@ -103,9 +105,10 @@ export namespace helios::app {
         [[nodiscard]] virtual helios::window::Window& createWindow(const helios::window::WindowConfig& cfg) = 0;
 
         /**
-         * Inits the Application. Any bootstrapping necessary for this application
+         * @brief Inits the Application. Any bootstrapping necessary for this application
          * should be done here and provide an idiomatic entry point for any
          * API using this Application.
+         *
          * This method makes sure that the controllers are initialized and subscribe
          * to this Application's EventManager's dispatcher.
          *
@@ -117,7 +120,7 @@ export namespace helios::app {
 
 
         /**
-         * Set's the application's active window. Advises the
+         * @brief Set's the application's active window. Advises the
          * InputManager to poll this window's events.
          *
          * @param win
@@ -128,7 +131,7 @@ export namespace helios::app {
 
 
         /**
-         * Returns true if the specified window is owned by this application,
+         * @brief Returns true if the specified window is owned by this application,
          * otherwise false.
          *
          * @param win The window to look up in this Application's windowList_.
@@ -140,7 +143,7 @@ export namespace helios::app {
 
 
         /**
-         * Returns the currently focused window, or nullptr
+         * @brief Returns the currently focused window, or nullptr
          * if none exists / no window is being treated as current()
          *
          * @return Window
@@ -149,7 +152,7 @@ export namespace helios::app {
 
 
         /**
-         * Returns the InputManager owned by this Application.
+         * @brief Returns the InputManager owned by this Application.
          *
          * @return InputManager
          */
@@ -158,7 +161,7 @@ export namespace helios::app {
         };
 
         /**
-         * Returns the InputManager owned by this Application.
+         * @brief Returns the RenderingDevice owned by this Application.
          *
          * @return RenderingDevice
          */
@@ -167,7 +170,7 @@ export namespace helios::app {
         };
 
         /**
-         * Returns the EventManager owned by this application
+         * @brief Returns the EventManager owned by this application
          *
          * @return EventManager
          */

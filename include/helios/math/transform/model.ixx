@@ -7,7 +7,7 @@ import helios.math.types;
 export namespace helios::math {
 
     /**
-     * Creates an affine rotation matrix R' = M * R by "baking" the rotation part into the model matrix.
+     * @brief Creates an affine rotation matrix R' = M * R by "baking" the rotation part into the model matrix.
      * Any operation R' * v will make sure that v is rotated around the local origin, then transformed into
      * world space.
      *
@@ -19,7 +19,7 @@ export namespace helios::math {
     mat4f rotate(const mat4f& model, float radians, const vec3f& axis) noexcept;
 
     /**
-     * Creates an affine transformation matrix M' = M * T by "baking" the translation part into the model
+     * @brief Creates an affine transformation matrix M' = M * T by "baking" the translation part into the model
      * matrix.
      * Any operation M' * v will make sure that v is translated in local space, then transformed into
      * world space.
@@ -37,7 +37,7 @@ export namespace helios::math {
      };
 
      /**
-      * Creates an affine transformation matrix S' = M * S by ""baking" the scaling part into
+      * @brief Creates an affine transformation matrix S' = M * S by ""baking" the scaling part into
       * the model matrix.
       * Any operation S' * v will make sure that v is scaled in local space, then transformed into world
       * space.
@@ -57,7 +57,7 @@ export namespace helios::math {
     }
 
     /**
-     * Creates an affine transformation matrix S' = M * S by "baking" the scaling part into
+     * @brief Creates an affine transformation matrix S' = M * S by "baking" the scaling part into
      * the model matrix.
      * Any operation S' * v will make sure that v is scaled in local space, then transformed into world
      * space.

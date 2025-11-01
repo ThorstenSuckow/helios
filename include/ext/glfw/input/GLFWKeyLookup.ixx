@@ -10,7 +10,7 @@ import helios.input.types.Key;
 export namespace helios::ext::glfw::input::GLFWKeyLookup {
 
     /**
-     * Provides a lookup for converting helios key codes to glfw-specific key codes.
+     * @brief Provides a lookup for converting helios key codes to glfw-specific key codes.
      *
      * @param key The helios key to map to the key codes registered by GLFW
      *

@@ -10,7 +10,7 @@ import helios.rendering.RenderPass;
 export namespace helios::ext::opengl::rendering {
 
     /**
-     * OpenGL RenderingDevice representative.
+     * @brief OpenGL RenderingDevice representative.
      */
     class OpenGLDevice : public  helios::rendering::RenderingDevice {
 
@@ -18,7 +18,7 @@ export namespace helios::ext::opengl::rendering {
         ~OpenGLDevice() override = default;
 
         /**
-         * Initializes the OpenGL device to access modern OpenGL.
+         * @brief Initializes the OpenGL device to access modern OpenGL.
          * This method must be called **after** the helios-Application's
          * setCurrent() was called for creating a current context. This
          * OpenGL-Device will then load from this context.
@@ -33,7 +33,7 @@ export namespace helios::ext::opengl::rendering {
         void init() override;
 
         /**
-         * Begins a new render pass.
+         * @brief Begins a new render pass.
          * This implementation makes sure that the rendering surface is cleared
          * with the current clear-color, which can be configured via clearColor().-
          *
@@ -43,7 +43,7 @@ export namespace helios::ext::opengl::rendering {
         void beginRenderPass(helios::rendering::RenderPass& renderPass) const noexcept override;
 
         /**
-         * Binds the vaos and draws the elements based on the RenderCommands available with the
+         * @brief Binds the vaos and draws the elements based on the RenderCommands available with the
          * `RenderPass`-
          *
          * @param renderPass
@@ -51,7 +51,7 @@ export namespace helios::ext::opengl::rendering {
         void doRender(helios::rendering::RenderPass& renderPass) const noexcept override;
 
         /**
-         * Ends the specified render pass. The current implementation does nothing.
+         * @brief Ends the specified render pass. The current implementation does nothing.
          *
          * @param renderPass
          */
@@ -65,14 +65,14 @@ export namespace helios::ext::opengl::rendering {
         void setViewport(const int x, const int y, const int width, const int height) const noexcept override;
 
         /**
-         * Clears the color buffer to preset values.
+         * @brief Clears the color buffer to preset values.
          *
          * @see clearColor
          */
         void clear() const  noexcept;
 
         /**
-         * Specifies the RGBa values clamped to [0, 1] when color
+         * @brief Specifies the RGBa values clamped to [0, 1] when color
          * buffers are cleared.
          *
          * @param color

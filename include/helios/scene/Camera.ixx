@@ -10,7 +10,7 @@ import helios.scene.SceneNode;
 export namespace helios::scene {
 
     /**
-     * Represents a camera for perspective or orthographic projection, deriving from SceneNode
+     * @brief Represents a camera for perspective or orthographic projection, deriving from SceneNode
      * to allow for spatial positioning and transformation within the scene graph.
      *
      * The camera provides the view and projection matrix, whereas the view matrix
@@ -32,24 +32,24 @@ export namespace helios::scene {
 
     protected:
         /**
-         * The projection matrix of this Camera.
+         * @brief The projection matrix of this Camera.
          */
         mutable helios::math::mat4f projectionMatrix_;
 
         /**
-         * The view matrix of this Camera.
+         * @brief The view matrix of this Camera.
          */
         mutable helios::math::mat4f viewMatrix_;
 
     public:
         /**
-         * Constructor for this class.
+         * @brief Constructor for this class.
          * Initializes projectionMatrix and viewMatrix with the identity matrix.
          */
         Camera();
 
         /**
-         * This method will do nothing but returning a `nullptr`, indicating that a `Camera`
+         * @brief This method will do nothing but returning a `nullptr`, indicating that a `Camera`
          * must not have child modes.
          *
          * @param sceneNode
@@ -61,7 +61,7 @@ export namespace helios::scene {
         [[nodiscard]] SceneNode* addChild(std::unique_ptr<SceneNode> sceneNode) override;
 
         /**
-         * Returns a constant ref to this camera's current projection matrix.
+         * @brief Returns a constant ref to this camera's current projection matrix.
          * Typically set to the perspective / orthographic projection.
          *
          * @return A const ref to this `Camera`'s projection matrix.
@@ -69,7 +69,7 @@ export namespace helios::scene {
         [[nodiscard]] const helios::math::mat4f& projectionMatrix() const noexcept;
 
         /**
-         * Returns a constant ref to this camera' view matrix.
+         * @brief Returns a constant ref to this camera' view matrix.
          * Automatically computed as inverse from the camera's world
          * transform (i.e. [v]_c = P_{C <- W } [v]_w) = P_{W <- C}^{-1} [v]_w
          *

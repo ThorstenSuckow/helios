@@ -11,7 +11,7 @@ import helios.event.Event;
 export namespace helios::event {
 
     /**
-     * Abstract base class defining an interface for an EventQueue.
+     * @brief Abstract base class defining an interface for an EventQueue.
      *
      * The `EventQueue` provides mechanism to buffer and retrieve events in
      * a structured manner. Implementing classes must define how events
@@ -27,7 +27,7 @@ export namespace helios::event {
 
 
         /**
-         * Adds a new event to the queue.
+         * @brief Adds a new event to the queue.
          * The queue will take ownership of the provided event.
          * The concrete position in the queue for the event will depend on the concrete
          * implementation.
@@ -40,7 +40,7 @@ export namespace helios::event {
 
 
         /**
-         * Adds a new Event to the queue or replaces an existing one.
+         * @brief Adds a new Event to the queue or replaces an existing one.
          *
          * This method allows for event management of events that should only be buffered
          * once, but are added to the queue from different sources in the application, such
@@ -64,7 +64,7 @@ export namespace helios::event {
                 const std::unique_ptr<const Event>& e)>& cmpFunc) = 0;
 
         /**
-         * Returns true if the queue is empty, otherwise false.
+         * @brief Returns true if the queue is empty, otherwise false.
          *
          * @return True if the queue is empty, otherwise false.
          */
@@ -72,7 +72,7 @@ export namespace helios::event {
 
 
         /**
-         * Retrieves and removes the "next" event in the queue.
+         * @brief Retrieves and removes the "next" event in the queue.
          * Implementing classes are responsible for defining the meaning of "next",
          * i.e., FIFO, LIFO, ordered after a particular criteria etc.
          *

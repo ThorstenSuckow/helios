@@ -12,7 +12,7 @@ using namespace helios::rendering;
 export namespace helios::rendering::asset::shape {
 
     /**
-     * Struct representing geometric primitives and indices for various shapes.
+     * @brief Struct representing geometric primitives and indices for various shapes.
      * provides immutable, shared access to vertices and indices of the
      * represented geometric shape.
      */
@@ -21,17 +21,17 @@ export namespace helios::rendering::asset::shape {
         virtual ~Shape() = default;
 
         /**
-         * Shared pointer to an immutable vector of vertices for this shape.
+         * @brief Shared pointer to an immutable vector of vertices for this shape.
          */
         std::shared_ptr<const std::vector<Vertex>> vertices = {};
 
         /**
-         * Shared pointer to an immutable vector of indices for this shape.
+         * @brief Shared pointer to an immutable vector of indices for this shape.
          */
         std::shared_ptr<const std::vector<unsigned int>> indices = {};
 
         /**
-         * Creates a new shape from the given vertices and indices.
+         * @brief Creates a new shape from the given vertices and indices.
          * The data is copied into immutable shared vectors.
          *
          * @param vertices A vector of vertices representing the shape's geometry

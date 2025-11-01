@@ -59,7 +59,7 @@ export namespace helios::rendering::model {
          * @param materialData An optional shared pointer to the MaterialData this
          * Material uses. Defaults to `nullptr`.
          *
-         * @throws std::invalid_argument if shader or materialData is a null shared pointer.
+         * @throws std::invalid_argument if shader is a null shared pointer.
          */
         explicit Material(
             std::shared_ptr<const helios::rendering::shader::Shader> shader,

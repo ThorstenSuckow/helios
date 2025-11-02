@@ -18,10 +18,15 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Install Doxygen, Graphviz
+      - name: Install Doxygen 1.15.0 and Graphviz
         run: |
           sudo apt-get update
-          sudo apt-get install -y doxygen graphviz
+          sudo apt-get install -y graphviz
+          curl -fsSL "https://sourceforge.net/projects/doxygen/files/rel-1.15.0/doxygen-1.15.0.linux.bin.tar.gz/download" \
+            -o /tmp/doxygen.tar.gz
+          tar -xzf /tmp/doxygen.tar.gz -C /tmp
+          sudo mv /tmp/doxygen-1.15.0/bin/doxygen /usr/local/bin/doxygen
+          doxygen --version
 
       - name: Verify Graphviz
         run: |

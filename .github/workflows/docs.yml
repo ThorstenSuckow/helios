@@ -29,7 +29,9 @@ jobs:
           dot -V
 
       - name: Generate API Dos
-        run: doxygen docs/Doxyfile.in
+        run: |
+          rm -rf docs/api
+          doxygen docs/Doxyfile.in
 
       - name: List Generated Files
         run: |

@@ -1,10 +1,15 @@
-# ext
-This folder provides extensions and platform specific interfaces for the `helios` framework using 3rd party libraries.
+## helios::ext
 
-## ext/opengl
-`helios.ext.opengl`\
-An extension that provides access to the OpenGL API with `helios`.
+This namespace contains platform-specific implementations for various subsystems including GLFW window management and OpenGL rendering.
 
-## ext/glfw
-`helios.ext.glfw`\
-An extension that provides access to GLFW functionality with `helios`.
+---
+<details>
+<summary>Doxygen</summary><p>
+@namespace helios::ext
+@brief Platform-specific extensions and implementations.
+@details This namespace contains platform-specific implementations for various subsystems including GLFW window management and OpenGL rendering.
+</p></details>
+
+
+
+

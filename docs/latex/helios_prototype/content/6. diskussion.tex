@@ -9,12 +9,9 @@ In diesem Zusammenhang verstehen wir die SOLID\footnote{
 \textbf{S}ingle-Responsibility-Prinzip, \textbf{O}pen-Closed-Prinzip, \textbf{L}iskovsches Substitutionsprinzip, \textbf{I}nterface-Segregation-Prinzip, \textbf{D}ependency-Inversion-Prinzip
 }-Prinzipien~\cite[]{Mar03} als unverzichtbare Basis agiler Softwareentwicklung, da sie in engem Zusammenhang mit einem ``sauberen Softwaredesign`` stehen und sich im bisherigen Entwicklungsprozess bereits als wertvoll erwiesen haben\footnote{Vgl. Cabral et al., die in~\cite[]{CKME+24} SOLID im Machine-Learning-Umfeld untersuchen - einem Umfeld, das von ``iterativen Experimenten mit Daten, Modellen und Algorithmen`` (Übersetzung eigene) geprägt ist. Sie kommen zu dem Schluss, dass die Anwendung der Prinzipien wesentlich zum Quellcodeverständnis beiträgt.}.\par
 
-Um nicht Gefahr zu laufen, am Ende der Projektphase einen \textit{Big Ball of Mud}~\cite[]{FY99} zu erzeugen, setzen wir auf eine klare Trennung der Verantwortlichkeiten, die sich in der Architektur durch die verschiedenen Feature-Layer widerspiegelt.
-Über \textit{Dependency Injection}\footnote{
-    Weitestgehend realisiert über Constructor Injection~\cite[]{FowlerDI}.
-} wird zudem der Kopplungsgrad zwischen den beteiligten Akteuren gering gehalten~\cite[]{SZ10}.
-Dies verbessert die Wartbarkeit und Testbarkeit einzelner Komponenten.\par
-Da in der aktuellen Implementierung kein dedizierter DI-Container zur Anwendung kommt, entsteht durch die Verwaltung der Abhängigkeiten im eigentlichen Quelltext zusätzlicher Boilerplate-Code, der jedoch weitgehend durch die Auslagerung von Erzeugungslogik in statische Factory-Klassen reduziert wird.
+Um die Entstehung einer unstrukturierten, schwer wartbaren Architektur (\textit{Big Ball of Mud}~\cite[]{FY99}) zu vermeiden, setzen wir auf eine klare Trennung der Verantwortlichkeiten, die sich in dem Projekt durch die verschiedenen Feature-Layer widerspiegelt.
+Zur Reduktion des Kopplungsgrads zwischen beteiligten Komponenten - und somit zur Verbesserung von Wartbarkeit und Testbarkeit - nutzen wir \textit{Dependency Injection}~\cite[]{SZ10}, was überwiegend durch \textit{Constructor Injection}~\cite[]{FowlerDI} realisiert wird.
+Da in der aktuellen Implementierung kein dedizierter DI-Container zur Anwendung kommt, entsteht durch die Verwaltung der Abhängigkeiten (``\textit{wiring}``) im eigentlichen Quelltext zusätzlicher Boilerplate-Code, der jedoch weitgehend durch die Auslagerung von Erzeugungslogik in statische Factory-Klassen reduziert wird.
 Davon profitieren gerade die Implementierungen der Beispielprogramme während der Entwicklung, die auch als Testprogramme dienen.
 In anderen Subsystemen unterstützen darüber hinaus Factory-Methoden die Kapselung der Objekterzeugung innerhalb jener Entitäten, denen auch fachliche Verantwortlichkeit im Sinne der Geschäftslogik zugeordnet ist~\cite[139 f.]{Eva03}.
 Auf diese Weise bleibt die Architektur von helios kohärent, und Abhängigkeiten zwischen den Schichten sind auf das notwendige Minimum beschränkt.
@@ -30,10 +27,11 @@ Gerade zu Beginn des Projekts wurde die Projektstruktur sowie Bezeichner von Nam
     \label{fig:code_frequency}
 \end{figure}
 
-Bei der Objektverwaltung über \textit{Ownership} und \textit{Pointer}-Arithmetik verzichten wir weitgehend auf \textit{raw pointer} und greifen stattdessen auf die in der Standardbibliothek definierten \texttt{unique\_ptr}, \texttt{shared\_ptr} oder \texttt{weak\_ptr}-Typen zurück, um \texttt{move}-Semantiken konsistent umzusetzen.
-Inwieweit die durch den Einsatz von Smart Pointern entstehenden zusätzlichen CPU-Instruktionen - die insbesondere durch die Referenzzählung entstehen\footnote{Einen Performance-Vergleich bietet beispielsweise~\cite[]{Val25}} - beim Aufbau und der Bearbeitung der Rendering-Pipeline messbare Auswirkungen auf die Effizienz haben, muss gegebenenfalls zu einem späteren Zeitpunkt evaluiert werden.\par
+Um bei der Objektverwaltung klare Besitzverhältnisse auszudrücken, verzichten wir an vielen Stellen auf \textit{raw pointer}.
+Stattdessen greifen wir auf die in der Standardbibliothek definierten \texttt{unique\_ptr}, \texttt{shared\_ptr} oder \texttt{weak\_ptr}-Typen zurück, die Besitzsemantiken exklusiv (durch \textit{move}-Operationen) oder gemeinsam (durch Referenzzählung) verwalten.
+Inwieweit die hierdurch entstehenden zusätzlichen CPU-Instruktionen\footnote{Einen Performance-Vergleich bietet beispielsweise~\cite[]{Val25}} beim Aufbau und der Bearbeitung der Rendering-Pipeline messbare Auswirkungen auf die Effizienz haben, muss gegebenenfalls zu einem späteren Zeitpunkt evaluiert werden.\par
 
-Wir sehen hierin ein mögliches Optimierungspotenzial, entscheiden uns in der frühen Entwicklungsphase jedoch bewusst für Stabilität und eine klare Semantik.
+Wir sehen hierin ein mögliches Optimierungspotenzial, entscheiden uns in der frühen Entwicklungsphase jedoch bewusst für Stabilität und klare Semantik.
 Spätere  Refactorings zugunsten einer höheren Effizienz\footnote{
 Diese beschränken sich nicht unbedingt auf das Design der Komponenten oder die Architektur selbst, sondern können sich bis auf niedrige Abstraktionsebenen erstrecken - etwa ``bare metal`` hin zu Implementierungen der Mathebibliothek mittels SIMD-Instruktionen, wie sie von \texttt{glm}~\cite[]{glmSimd} bereitgestellt wird (SIMD, als Abkürzung für \textit{single instruction, multiple data}, beschreibt das Konzept, bei dem eine einzelne Instruktion parallel auf unterschiedliche Daten ausgeführt wird).
 } nehmen wir also in Kauf, zumal solche Maßnahmen ohnehin erst dann sinnvoll scheinen, wenn die Domäne sowohl fachlich als auch technisch hinreichend durchdrungen ist\footnote{

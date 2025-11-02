@@ -27,7 +27,7 @@ Die für die Entwicklung benötigten \textit{Third-Party Libraries} (TPL) (u.a. 
 
 Damit automatisieren wir die Vorkonfiguration des Projektes und vermeiden manuelles (und oft fehleranfälliges~\cite[]{FG22}) Einbinden der benötigten TPLs.
 
-\begin{lstlisting}[style=c++style, caption={Ausschnitt aus der CMakeLists.txt von helios: Dieser Abschnitt deklariert und bezieht GLFW v3.4 und GLAD v2.0.8 per FetchContent von den jeweiligen Github-Repositories (URLs der Übersicht halber ausgelassen). Im Anschluss wird ein GLAD-Loader für OpenGL 4.6 als statische Bibliothek erzeugt.}, label=lst:cmake]
+\begin{lstlisting}[style=c++style, caption={Ausschnitt aus der CMakeLists.txt von helios: Dieser Abschnitt deklariert und bezieht GLFW v3.4 und GLAD v2.0.8 per \texttt{FetchContent} von den jeweiligen Github-Repositories (URLs der Übersicht halber ausgelassen). Im Anschluss wird ein GLAD-Loader für OpenGL 4.6 als statische Bibliothek erzeugt.}, label=lst:cmake]
     ...
     FetchContent_Declare(glfw
         GIT_REPOSITORY [url]
@@ -60,8 +60,8 @@ Im Folgenden stellen wir die Hauptverzeichnisse in alphabetischer Reihenfolge vo
 Zum Benchmarking einzelner Funktionen nutzt helios \textit{Google Benchmark}~\cite[]{googlebenchmarkgithub}.
 Es existieren derzeit Benchmarks für mathematische Typen und Funktionen.
 Wir nutzen diese für einen Vergleich mit der Implementierung in \texttt{glm}~\cite[]{glmGithub}, die wir als Referenz betrachten.
-Hierdurch sollen frühzeitig Flaschenhälse in der \textit{Game Loop} - bspw. durch Operationen auf affinen Transformationsmatrizen - erkannt werden.
-Weitere Benchmarks, die das Verhalten ausgewählter Funktionen der \textit{Rendering Pipeline} bzw. der \textit{Application Stage}~\cite[687]{Gre19} messen (bspw. beim Culling), sollen folgen.
+Hierdurch sollen frühzeitig Flaschenhälse in der \textit{Game Loop} - etwa durch Operationen auf affinen Transformationsmatrizen - erkannt werden.
+Weitere Benchmarks, die das Verhalten ausgewählter Funktionen der \textit{Rendering Pipeline} bzw. der \textit{Application Stage}~\cite[687]{Gre19} messen (zum Beispiel beim \textit{Culling}), sollen folgen.
 
 
 
@@ -113,7 +113,7 @@ Wir können somit den Fokus auf die benötigten Schnittstellen einzelner Subsyst
 \begin{figure}[!h]
     \centering
     \includegraphics[width=1\columnwidth]{img/cube_example}
-    \caption{Screenshot des \texttt{simple\_cube\_rendering}-demos, der zur Fertigstellung des ersten Meilensteins genutzt wurde. (Quelle: eigene)}
+    \caption{Screenshot des \texttt{simple\_cube\_rendering}-demos, das in einem Top-Down-Ansatz zur schrittweisen Implementierung des im ersten Meilenstein definierten Funktionsumfangs diente. (Quelle: eigene Aufnahme)}
     \label{fig:simple-cube-rendering-demo}
 \end{figure}
 

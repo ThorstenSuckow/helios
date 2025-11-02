@@ -5,7 +5,7 @@ Das Framework visualisiert den Spielzustand und überträgt Eingabedaten als Ste
 \begin{figure}[!h]
     \centering
     \includegraphics[width=1\columnwidth]{img/hardarchitecture.svg}
-    \caption{Aufteilung der Architektur des helios Frameworks in \textit{Hard} und \textit{Soft Architecture} nach Rollings und Morris~\cite[612 ff.]{RM04}. Die Ball-/Socket-Notation verdeutlicht, dass helios Schnittstellen zur Verfügung stellt, die von einem (beliebigen) Spiel genutzt werden können. (Quelle: eigene)}
+    \caption{Aufteilung der Architektur des helios Frameworks in \textit{Hard} und \textit{Soft Architecture} nach Rollings und Morris~\cite[612 ff.]{RM04}. Die Ball-/Socket-Notation verdeutlicht, dass helios Schnittstellen zur Verfügung stellt, die von einem (beliebigen) Spiel genutzt werden können. (Quelle: eigene Darstellung)}
     \label{fig:hardarchitecture}
 \end{figure}
 
@@ -20,7 +20,7 @@ Innerhalb der Module findet eine weitere Unterteilung nach Schichten statt (etwa
     \makebox[\textwidth][c]{% Box ist textbreit, Inhalt darf überstehen
     \includegraphics[width=1.4\textwidth]{img/package_diagram.svg}% \linewidth == Spaltenbreite
     }
-    \caption{Aufbau des helios Framework und Zusammenhang einiger ausgewählter Komponenten. Die Strukturierung der Module orientiert sich an einem ``by-Feature, by-Layer``-Konzept, bei dem Features intern in funktionale Schichten geglidert sind. (Quelle: Eigene Darstellung)}
+    \caption{Aufbau des helios Framework und Zusammenhang einiger ausgewählter Komponenten. Die Strukturierung der Module orientiert sich an einem ``by-Feature, by-Layer``-Konzept, bei dem Features intern in funktionale Schichten gegliedert sind. (Quelle: eigene Darstellung)}
 
     \label{fig:package_diagram}
 
@@ -67,7 +67,9 @@ Der Szenengraph \texttt{helios::scene::Scene} folgt etablierten Implementierunge
 \texttt{Scene} besitzt einen impliziten Wurzelknoten, der eine beliebige Anzahl von Kindknoten enthalten kann.
 Jeder \texttt{SceneNode} verfügt über ein \texttt{Transform}-Objekt, das die Modelltransformation im lokalen Koordinatensystem beschreibt.\par
 \texttt{SceneNodes} können ``darstellbar`` sein, das heißt, sie sind mit einem \texttt{Renderable} konfiguriert.
-Sie können aber auch einfach nur eine Kamera (\texttt{helios::scene::Camera}) repräsentieren\footnote{Oder auch positionierbare \texttt{LightNodes}, also Lichtquellen.}.\par
+Sie können aber auch einfach nur eine Kamera (\texttt{helios::scene::Camera}) repräsentieren\footnote{
+    Als weitere Knotentypen sind in diesem Kontext üblicherweise (frei positionierbare) \texttt{LightNodes}, also Lichtquellen, vorgesehen.
+}.\par
 Szenenknoten mit \texttt{Renderable} werden beim \textit{Culling} berücksichtigt.
 Das Culling-Verfahren wird in der rein virtuellen Klasse \textit{FrustumCullingStrategy} abstrakt definiert. Spezialisierungen werden der \texttt{Scene} bei der Instanziierung übergeben.\par
 In der Application Stage~\cite[687]{Gre19} erstellt helios aus einer Szene und einer Kamera einen \texttt{Snapshot}, für den die konfigurierte Culling-Strategie alle im sichtbaren Bereich der Kamera befindlichen \texttt{SceneNode}s sammelt.
@@ -104,7 +106,7 @@ Das Rendering-System von helios ist in verschiedene Module aufgeteilt, darunter 
 Sie kapseln für den Rendering-Prozess notwendige Informationen und sind als Aggregation modelliert.
 Sie bestehen aus individuell konfigurierbaren \texttt{Material}- und \texttt{Mesh}-Instanzen, die wiederum \texttt{MaterialData}- und \texttt{MeshData}-Objekte zur einfachen und ressourcenschonenden Wiederverwendung mit anderen Instanzen teilen~\cite[126]{AHHP+18}.\par
 
-Die für einen \texttt{RenderPass} benötigten Informationen werden als \texttt{RenderCommand}-Objekte in einer \texttt{RenderQueue} gesammelt, die vom eigentlichen \texttt{RenderDevice} verarbeitet werden: \texttt{RenderCommand}s besitzen Zeiger auf die darzustellende Geometrie (\texttt{Mesh}), die zu nutzenden \texttt{Shader} sowie Daten-Objekte, in denen Informationen zu \texttt{Uniform}-Variablen (bspw. Transformationsmatrizen) gespeichert sind.\par
+Die für einen \texttt{RenderPass} benötigten Informationen werden als \texttt{RenderCommand}-Objekte in einer \texttt{RenderQueue} gesammelt, die vom eigentlichen \texttt{RenderDevice} verarbeitet werden: \texttt{RenderCommand}s besitzen Zeiger auf die darzustellende Geometrie (\texttt{Mesh}), die zu nutzenden \texttt{Shader} sowie Daten-Objekte, in denen Informationen zu \texttt{Uniform}-Variablen (Transformationsmatrizen etc.) gespeichert sind.\par
 Das \texttt{RenderDevice} verarbeitet einen \texttt{RenderPass} über Template-Methoden \texttt{preRender, doRender} und \texttt{postRender}.
 
 

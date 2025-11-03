@@ -40,7 +40,7 @@ Ein spezialisierter \texttt{InputAdapter} abstrahiert von den durch die TPLs ber
 Zu Beginn der Game Loop werden aktive Eingabeereignisse gepollt (\texttt{InputManager::poll()}). Eine Abfrage der Ereignisse erfolgt über Methoden wie \texttt{InputManager::isKeyPressed()}.
 
 \subsection*{\texttt{event}: Ereignisverarbeitung}
-Ereignisse können über den \texttt{EventManager} in eine \texttt{EventQueue} geschrieben werden (``post``).
+Ereignisse können über den \texttt{EventManager} in eine \texttt{EventQueue} geschrieben werden (``\textit{post}``).
 Interessierte Beobachter (\textit{Observer}) können sich über Callbacks mittels \texttt{subscribe} bei dem \texttt{EventManager} registrieren~\cite[293 ff.]{GHJV94}.
 Die Methode \texttt{EventManager::dispatchAll()} informiert die Observer über vorhandene Ereignisse.
 
@@ -101,7 +101,7 @@ while (!win->shouldClose()) {
 
 
 \subsection*{\texttt{rendering}: Render Pipeline}
-Das Rendering-System von helios ist in verschiedene Module aufgeteilt, darunter \texttt{shader} für Shader-/GLSL-spezifischen Code sowie \texttt{model} für Abstraktionen von Material- und Mesh-Daten.\par
+Das Rendering-System von helios ist in verschiedene Module aufgeteilt, darunter \texttt{shader} für Shader- und GLSL\footnote{\textit{OpenGL Shading Language}}-spezifischen Code sowie \texttt{model} für Abstraktionen von Material- und Mesh-Daten.\par
 \texttt{Renderable}s sind Repräsentanten ``darstellbarer`` Objekte.
 Sie kapseln für den Rendering-Prozess notwendige Informationen und sind als Aggregation modelliert.
 Sie bestehen aus individuell konfigurierbaren \texttt{Material}- und \texttt{Mesh}-Instanzen, die wiederum \texttt{MaterialData}- und \texttt{MeshData}-Objekte zur einfachen und ressourcenschonenden Wiederverwendung mit anderen Instanzen teilen~\cite[126]{AHHP+18}.\par

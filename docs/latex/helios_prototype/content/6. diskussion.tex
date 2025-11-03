@@ -45,8 +45,8 @@ Leistungsfähige Spieleengines setzen aus Effizienzgründen häufig nicht durchg
 Die Entscheidung, Vektoren als primäre Datencontainer zu verwenden, kann sich potenziell negativ auf die Rendering-Pipeline auswirken, wenn die Render-Queue nach einer Aktualisierung der Szene neu aufgebaut und dabei zusätzlicher Speicher zur Laufzeit alloziiert werden muss.\par
 
 Weitere Optimierungspotenziale sehen wir im Design des \texttt{EventManagers} und der Eingabeverarbeitung: Beide Systeme können zusammengeführt werden, sodass auch Eingabebefehle nach dem Prinzip ``Don't call us, we call you`` als Ereignisse an interessierte Beobachter weitergeleitet werden.
-Dabei ist zu berücksichtigen, dass entsprechende Schnittstellen dem Spiel zur Verfügung gestellt werden müssen und eine Bottom-up Kommunikation erlaubt sein muss~\cite[]{BMRS+96}.
-Darüber hinaus soll eine Mechanik geschaffen werden, welche aus den Eingabeereignissen entsprechende \texttt{ControlCommand}s erzeugen, die vom Spiel als eigentliche  Steuerparameter interpretiert werden~\cite[21 ff.]{Nys14}.\par
+Dabei ist zu berücksichtigen, dass dem Spiel hierzu Schnittstellen zur Verfügung gestellt werden müssen und eine Bottom-up Kommunikation erlaubt sein muss~\cite[]{BMRS+96}.
+Darüber hinaus soll eine Mechanik geschaffen werden, die aus Eingabeereignissen spielspezifische \texttt{ControlCommand}s ableitet~\cite[21 ff.]{Nys14}.\par
 
 Bei der Architektur des Rendering-Systems sehen wir eine Grundlage für eine modulare und erweiterbare Rendering-Pipeline, die derzeit eine klare Trennung zwischen Szenenbeschreibung und eigentlichem Rendering realisiert.
 Der Vorteil des gewählten Designs liegt darin, dass die individuellen \texttt{RenderPass}-Instanzen mit zusätzlichen Optionen konfiguriert werden können (beispielsweise \textit{Depth Testing}, \textit{Draw Mode}, \textit{Anti-Aliasing} u.a.) und die \texttt{RenderQueue}s so sortiert werden können, dass die Kommunikation mit der GPU möglichst effizient stattfinden kann\footnote{

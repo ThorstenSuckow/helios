@@ -1,0 +1,61 @@
+\section{Discussion of the implementation}
+
+In~\cite[]{PPTD08}, Petrillo et al. describe several causes that lead to \textit{feature creep} in game development.
+These include developing proprietary solutions instead of using existing libraries, as well as adding supposedly ``attractive`` features that, considering the YAGNI\footnote{\textit{You Aren't Gonna Need It}~\cite[]{Sch07}} maxim, offer no added value for the actual project goal.
+As the authors point out, this puts game development on a par with ``ordinary`` software development, for example in the context of contract work.
+If the project also involves a technically unfamiliar domain that has to be implemented within a tight timeframe, a sense of proportion and discipline are essential when implementing functionality.
+With helios, we therefore pursue a top-down approach to enable rapid prototyping and, applying the framework concept, to drive forward the step-by-step development and integration of the \textit{Geometry Wars} clone.
+In this context, we understand the SOLID\footnote{
+    \textbf{S}ingle Responsibility Principle, \textbf{O}pen-Closed Principle, \textbf{L}iskov Substitution Principle, \textbf{I}nterface Segregation Principle, \textbf{D}ependency Inversion Principle
+} principles~\cite[]{Mar03} as an indispensable basis for agile software development, as they are closely related to ``clean software design`` and have already proven valuable in the development process to date\footnote{See Cabral et al., who examine SOLID in the machine learning environment in~\cite[]{CKME+24} - an environment they characterize with ``iterative experimentation with data, models, and algorithms.`` They conclude that applying the principles contributes significantly to understanding the source code.
+}.
+
+To avoid the emergence of an unstructured, difficult-to-maintain architecture (\textit{Big Ball of Mud}~\cite[]{FY99}), we rely on a clear separation of responsibilities, which is reflected in the project by the various feature layers.
+To reduce the degree of coupling between the components involved - and thus improve maintainability and testability - we use \textit{Dependency Injection}~\cite[]{SZ10}, which is mainly implemented through \textit{Constructor Injection}~\cite[]{FowlerDI}.
+Since no dedicated DI container is used in the current implementation, the management of dependencies (``\textit{wiring}``) in the actual source code results in additional boilerplate code, which is, however, largely reduced by outsourcing the creation logic to static factory classes.
+This particularly benefits the implementations of the sample programs during development, which also serve as test programs.
+In other subsystems, factory methods also support the encapsulation of object creation within those entities that are also assigned technical responsibility in terms of business logic~\cite[139 f.]{Eva03}.
+In this way, the architecture of helios remains coherent, and dependencies between the layers are kept to the necessary minimum.
+
+
+We find it rather challenging to deal with modern language features that a proven but also ``traditional`` programming language such as C++ has experienced in recent years - such as the module system or the use of smart pointers: We find ourselves caught between the conflicting demands of applying established C++ idioms~\cite[]{IdiomaticCpp} and proven concepts in a development environment that is predominantly shaped by experience with simpler high-level languages such as Java.
+Especially at the beginning of the project, the project structure and namespace identifiers were therefore repeatedly adjusted (see Figure~\ref{fig:code_frequency}).
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.8\columnwidth]{img/code_frequency}
+
+    \caption{Code frequency graph for the helios repository. The changes made to the project structure in the early phase are reflected in the almost symmetrical distribution of added (green) and removed code (red). (Source: GitHub)}
+    \label{fig:code_frequency}
+\end{figure}
+
+In order to express clear ownership relationships in object management, we refrain from using raw pointers in many places.
+Instead, we use the \texttt{unique\_ptr}, \texttt{shared\_ptr}, or \texttt{weak\_ptr} types defined in the standard library, which manage ownership semantics exclusively (through \textit{move} operations) or jointly (through reference counting).
+The extent to which the additional CPU instructions resulting from this have a measurable impact on efficiency when building and processing the rendering pipeline must be evaluated at a later date, if necessary\footnote{
+A performance comparison is provided, for example, by~\cite[]{Val25}.
+}.
+
+We see potential for optimization here, but in the early development phase we have consciously opted for stability and clear semantics.
+We accept later refactorings in favor of greater efficiency\footnote{
+    These are not necessarily limited to the design of the components or the architecture itself, but can extend to low levels of abstraction - such as ``bare metal`` - to implementations of the math library using SIMD instructions, as provided by \texttt{glm}~\cite[]{glmSimd} (SIMD, short for \textit {single instruction, multiple data}, describes the concept in which a single instruction is executed in parallel on different data).
+}, especially since such measures only seem to make sense once the domain has been sufficiently explored, both technically and in terms of the domain\footnote{
+    See ``Refactoring toward Deeper Insight``~\cite[]{Eva03}.
+}.
+
+
+The choice of data structures and programming paradigms should also be mentioned at this point: Our object relationships are currently very expressive (\texttt{Snapshot}, \texttt{Renderable}, \texttt{Material}, \texttt{Shader}, etc.), and we have so far been able to avoid excessively deep inheritance hierarchies.
+For efficiency reasons, powerful game engines often do not rely entirely on classic OOP paradigms, but instead use a data-oriented approach in performance-critical subsystems, in which flat associations of components according to the \textit{ECS pattern}~\cite[]{RCCK25} can offer significant performance advantages~\cite[]{WWM22}\footnote{See the data-oriented framework \textit{ECS for Unity}~\cite{UnityECS} for Unity. The Unreal Engine also offers \textit{MassEntity}~\cite{UnrealMassEntity}, a ``gameplay-focused framework for data-oriented calculations``}.
+This is something we do not consider in this phase of development - but it is something we should keep in mind as an established design and data structure paradigm in this domain.
+Additionally, our decision to use vectors as the primary data container can potentially have a negative impact on the rendering pipeline if the render queue has to be rebuilt after a scene update, requiring additional memory to be allocated at runtime.
+
+We see further optimization potential in the design of the \texttt{EventManager} and input processing: Both systems can be merged so that input commands are also forwarded as events to interested observers according to the principle ``Don't call us, we call you.``
+It should be noted that interfaces must be made available to the game for this purpose and bottom-up communication must be allowed~\cite[]{BMRS+96}.
+In addition, a mechanism should be created that derives game-specific \texttt{ControlCommand}s from input events~\cite[21 ff.]{Nys14}.
+
+In the architecture of the rendering system, we see a basis for a modular and extensible rendering pipeline, which currently implements a clear separation between scene description and actual rendering.
+The advantage of the chosen design is that the individual \texttt{RenderPass} instances can be configured with additional options (e.g., \textit{Depth Testing}, \textit{Draw Mode}, \textit{Anti-Aliasing}, etc.) and the \texttt{RenderQueue}s can be sorted so that communication with the GPU can take place as efficiently as possible\footnote{
+    Unity~\cite[]{UnityRenderQueue} and OGRE~\cite[]{OgreRenderQueue} pursue similar concepts; Discussions by Christer Ericson~\cite[]{ChristerEricson} also address the sorting of the render pass. Vulkan offers explicit render pass semantics~\cite[]{VulkanRenderPass}
+}.
+Whether the design will prove itself in the implementation of the actual game - and whether these features are even needed - will become clear in further development.
+
+

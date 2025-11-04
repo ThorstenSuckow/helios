@@ -1,5 +1,6 @@
 module;
 
+#include <cassert>
 #include <memory>
 #include <stdexcept>
 
@@ -14,7 +15,7 @@ import helios.util.log.LogManager;
 namespace helios::input {
 
     InputManager::InputManager(
-        std::unique_ptr<const helios::input::InputAdapter> input)
+        std::unique_ptr<helios::input::InputAdapter> input)
             : input_(std::move(input)) {}
 
     void InputManager::observe(const helios::window::Window& win) noexcept {
@@ -27,16 +28,17 @@ namespace helios::input {
     }
 
 
-    void InputManager::poll(float deltaTime) const noexcept {
+    void InputManager::poll(float deltaTime) noexcept {
         if (observedWin_ != nullptr) {
             observedWin_->pollEvents();
         } else {
             logger_.warn("No window to observe.");
         }
+        input_->updateGamepadState(gamepadMask_);
     }
 
 
-    [[nodiscard]] bool InputManager::isKeyPressed(const helios::input::types::Key& key) const noexcept {
+    bool InputManager::isKeyPressed(const helios::input::types::Key& key) const noexcept {
         if (observedWin_ == nullptr) {
             logger_.warn("No window to observe.");
             return false;
@@ -45,5 +47,22 @@ namespace helios::input {
         return input_->isKeyPressed(key, *observedWin_);
     }
 
+    const GamepadState& InputManager::gamepadState(helios::input::types::Gamepad gamepadId) const noexcept {
+        return input_->gamepadState(gamepadId);
+    }
+
+    bool InputManager::isConnected(helios::input::types::Gamepad gamepadId) const noexcept {
+        return input_->isConnected(gamepadId);
+    }
+
+    unsigned int InputManager::registerGamepads(unsigned int mask) noexcept {
+
+        assert(mask <= (pow(helios::input::types::Gamepad::SIZE, 2) - 1) && "mask out of bounds");
+
+        gamepadMask_ = mask;
+
+        return gamepadMask_;
+
+    }
 
 };

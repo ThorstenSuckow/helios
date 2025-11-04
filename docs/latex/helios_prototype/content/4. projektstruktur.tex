@@ -4,7 +4,7 @@ Außerdem führen wir kurz in den Inhalt einzelner Verzeichnisse ein.\\
 
 Die oberste Ebene der Verzeichnisstruktur von helios bietet Zugriff auf Tests, ausführbare Beispielprogramme, Benchmarks sowie Dokumentation und Quelldateien.
 Die gewählte Struktur lehnt sich dabei an die durch das \textit{Pitchfork}-Projekt definierten Konventionen für C++-Projekte an~\cite[]{Pitchfork}.
-Die Verzeichnisnamen geben dabei Aufschluss über den durch sie verwalteten Inhalt und sind wie in Abbildung~\ref{fig:verzeichnisstruktur} angegeben.\par
+Die Verzeichnisnamen geben dabei Aufschluss über den durch sie verwalteten Inhalt und sind wie in Abbildung~\ref{fig:verzeichnisstruktur} angegeben.
 
 \begin{figure}[htbp]
     \setlength{\DTbaselineskip}{18pt}
@@ -23,7 +23,7 @@ Die Verzeichnisnamen geben dabei Aufschluss über den durch sie verwalteten Inha
 
 Das Projekt besitzt verschiedene Build-Schritte, um sowohl die Sourcen zu kompilieren, als auch die Tests und die Beispielprogramme zu erzeugen.
 Zur Automatisierung nutzen wir \texttt{CMake}~\cite[]{CMake}, womit wir gleichzeitig ein einfaches Dependency-Management realisieren.
-Die für die Entwicklung benötigten \textit{Third-Party Libraries} (TPL) (u.a. \texttt{glfw}~\cite[]{glfwHomepage} und \texttt{glad}~\cite[]{gladgithub}) können somit direkt aus externen Quellen geladen, statisch kompiliert und eingebunden werden (siehe Listing~\ref{lst:cmake}).\par
+Die für die Entwicklung benötigten \textit{Third-Party Libraries} (TPL) (u.a. \texttt{glfw}~\cite[]{glfwHomepage} und \texttt{glad}~\cite[]{gladgithub}) können somit direkt aus externen Quellen geladen, statisch kompiliert und eingebunden werden (siehe Listing~\ref{lst:cmake}).
 
 Damit automatisieren wir die Vorkonfiguration des Projektes und vermeiden manuelles (und oft fehleranfälliges~\cite[]{FG22}) Einbinden der benötigten TPLs.
 
@@ -88,7 +88,7 @@ Eine Evaluation von Benchmarking-Frameworks fand nicht statt, die Auswahl richte
 \subsection*{\texttt{/docs}}
 Das Verzeichnis enthält neben formaler Dokumentation\footnote{Wie den \LaTeX-Quelltext des vorliegenden Dokuments.} die auf den Quelldateien beruhende und von \texttt{doxygen}~\cite[]{Doxygen} erzeugte API-Dokumentation.
 \texttt{doxygen} hat den Vorteil, dass es eine Überführung in verschiedene Formate erlaubt.
-Hierdurch können wir die Dokumentation im html- bzw. xml-Format exportieren und durch einen gesonderten Build-Schritt in die helios-Projektwebseite~\cite[]{helios} einbinden.\par
+Hierdurch können wir die Dokumentation im html- bzw. xml-Format exportieren und durch einen gesonderten Build-Schritt in die helios-Projektwebseite~\cite[]{helios} einbinden.
 
 Eine formale Evaluation von Software-Dokumentationstools hat nicht stattgefunden.
 Die Auswahl basierte auf Grundlage der leichten Integration von \texttt{doxygen} und seiner Bekanntheit.
@@ -118,11 +118,11 @@ Wir können somit den Fokus auf die benötigten Schnittstellen einzelner Subsyst
 \end{figure}
 
 \subsection*{\texttt{/include, /src}}
-Mit C++23 realisiert helios seine Klassen und Funktionen durchweg über Module Interface und Implementation Units~\cite[211 f.]{Str24}. Diese werden in \texttt{/include} bzw. \texttt{/src} abgelegt.\par
+Mit C++23 realisiert helios seine Klassen und Funktionen durchweg über Module Interface und Implementation Units~\cite[211 f.]{Str24}. Diese werden in \texttt{/include} bzw. \texttt{/src} abgelegt.
 Module, die nicht in Interface und Implementation Units aufgeteilt werden, liegen ausschließlich in \texttt{/include} als ``header-only``-Komponenten.
 Hierzu gehören Klassen wie \texttt{helios::math::vec3}, die einen dreidimensionalen Vektor-Typ repräsentieren und deren Funktionen überwiegend als \texttt{constexpr} deklariert sind\footnote{
     \texttt{constexpr} erlaubt die Evaluierung eines Ausdrucks zur Kompilierzeit. Hierzu wird dessen vollständige Definition zur Übersetzungszeit benötigt~\cite[330 f.]{Gre24}.
-}.\par
+}.
 Die Verzeichnisse sind weiter unterteilt in \textt{ext} und \texttt{helios}:
 \begin{itemize}
     \itemsep0.5em

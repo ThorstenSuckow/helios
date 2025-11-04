@@ -7,7 +7,7 @@ Handelt es sich zudem um ein Projekt mit einer fachlich unbekannten Domäne, das
 Mit helios verfolgen wir daher einen Top-Down-Ansatz, um ein schnelles Prototyping zu ermöglichen und unter Anwendung des Framework-Gedankens die schrittweise Entwicklung und Integration des \textit{Geometry Wars}-Klons voranzutreiben.
 In diesem Zusammenhang verstehen wir die SOLID\footnote{
 \textbf{S}ingle-Responsibility-Prinzip, \textbf{O}pen-Closed-Prinzip, \textbf{L}iskovsches Substitutionsprinzip, \textbf{I}nterface-Segregation-Prinzip, \textbf{D}ependency-Inversion-Prinzip
-}-Prinzipien~\cite[]{Mar03} als unverzichtbare Basis agiler Softwareentwicklung, da sie in engem Zusammenhang mit einem ``sauberen Softwaredesign`` stehen und sich im bisherigen Entwicklungsprozess bereits als wertvoll erwiesen haben\footnote{Vgl. Cabral et al., die in~\cite[]{CKME+24} SOLID im Machine-Learning-Umfeld untersuchen - einem Umfeld, das von ``iterativen Experimenten mit Daten, Modellen und Algorithmen`` (Übersetzung eigene) geprägt ist. Sie kommen zu dem Schluss, dass die Anwendung der Prinzipien wesentlich zum Quellcodeverständnis beiträgt.}.\par
+}-Prinzipien~\cite[]{Mar03} als unverzichtbare Basis agiler Softwareentwicklung, da sie in engem Zusammenhang mit einem ``sauberen Softwaredesign`` stehen und sich im bisherigen Entwicklungsprozess bereits als wertvoll erwiesen haben\footnote{Vgl. Cabral et al., die in~\cite[]{CKME+24} SOLID im Machine-Learning-Umfeld untersuchen - einem Umfeld, das von ``iterativen Experimenten mit Daten, Modellen und Algorithmen`` (Übersetzung eigene) geprägt ist. Sie kommen zu dem Schluss, dass die Anwendung der Prinzipien wesentlich zum Quellcodeverständnis beiträgt.}.
 
 Um die Entstehung einer unstrukturierten, schwer wartbaren Architektur (\textit{Big Ball of Mud}~\cite[]{FY99}) zu vermeiden, setzen wir auf eine klare Trennung der Verantwortlichkeiten, die sich in dem Projekt durch die verschiedenen Feature-Layer widerspiegelt.
 Zur Reduktion des Kopplungsgrads zwischen beteiligten Komponenten - und somit zur Verbesserung von Wartbarkeit und Testbarkeit - nutzen wir \textit{Dependency Injection}~\cite[]{SZ10}, was überwiegend durch \textit{Constructor Injection}~\cite[]{FowlerDI} realisiert wird.
@@ -15,10 +15,10 @@ Da in der aktuellen Implementierung kein dedizierter DI-Container zur Anwendung 
 Davon profitieren gerade die Implementierungen der Beispielprogramme während der Entwicklung, die auch als Testprogramme dienen.
 In anderen Subsystemen unterstützen darüber hinaus Factory-Methoden die Kapselung der Objekterzeugung innerhalb jener Entitäten, denen auch fachliche Verantwortlichkeit im Sinne der Geschäftslogik zugeordnet ist~\cite[139 f.]{Eva03}.
 Auf diese Weise bleibt die Architektur von helios kohärent, und Abhängigkeiten zwischen den Schichten sind auf das notwendige Minimum beschränkt.
-\par
+
 
 Als eher herausfordernd empfinden wir den Umgang mit modernen Sprachfeatures, die eine bewährte, aber auch ``traditionelle`` Programmiersprache wie C++ in den letzten Jahren erfahren hat - etwa das Modulsystem oder den Einsatz von Smart-Pointern: Dabei sehen wir uns im Spannungsfeld, etablierte C++-Idiome~\cite[]{IdiomaticCpp} und bewährte Konzepte in einer Entwicklungsumgebung anzuwenden, die überwiegend von Erfahrungen aus einfacheren Hochsprachen wie Java geprägt ist.
-Gerade zu Beginn des Projekts wurde die Projektstruktur sowie Bezeichner von Namensräumen deshalb immer wieder angepasst (siehe Abbildung~\ref{fig:code_frequency}).\par
+Gerade zu Beginn des Projekts wurde die Projektstruktur sowie Bezeichner von Namensräumen deshalb immer wieder angepasst (siehe Abbildung~\ref{fig:code_frequency}).
 
 \begin{figure}[!h]
     \centering
@@ -29,24 +29,24 @@ Gerade zu Beginn des Projekts wurde die Projektstruktur sowie Bezeichner von Nam
 
 Um bei der Objektverwaltung klare Besitzverhältnisse auszudrücken, verzichten wir an vielen Stellen auf \textit{raw pointer}.
 Stattdessen greifen wir auf die in der Standardbibliothek definierten \texttt{unique\_ptr}, \texttt{shared\_ptr} oder \texttt{weak\_ptr}-Typen zurück, die Besitzsemantiken exklusiv (durch \textit{move}-Operationen) oder gemeinsam (durch Referenzzählung) verwalten.
-Inwieweit die hierdurch entstehenden zusätzlichen CPU-Instruktionen\footnote{Einen Performance-Vergleich bietet beispielsweise~\cite[]{Val25}} beim Aufbau und der Bearbeitung der Rendering-Pipeline messbare Auswirkungen auf die Effizienz haben, muss gegebenenfalls zu einem späteren Zeitpunkt evaluiert werden.\par
+Inwieweit die hierdurch entstehenden zusätzlichen CPU-Instruktionen\footnote{Einen Performance-Vergleich bietet beispielsweise~\cite[]{Val25}} beim Aufbau und der Bearbeitung der Rendering-Pipeline messbare Auswirkungen auf die Effizienz haben, muss gegebenenfalls zu einem späteren Zeitpunkt evaluiert werden.
 
 Wir sehen hierin ein mögliches Optimierungspotenzial, entscheiden uns in der frühen Entwicklungsphase jedoch bewusst für Stabilität und klare Semantik.
 Spätere  Refactorings zugunsten einer höheren Effizienz\footnote{
 Diese beschränken sich nicht unbedingt auf das Design der Komponenten oder die Architektur selbst, sondern können sich bis auf niedrige Abstraktionsebenen erstrecken - etwa ``bare metal`` hin zu Implementierungen der Mathebibliothek mittels SIMD-Instruktionen, wie sie von \texttt{glm}~\cite[]{glmSimd} bereitgestellt wird (SIMD, als Abkürzung für \textit{single instruction, multiple data}, beschreibt das Konzept, bei dem eine einzelne Instruktion parallel auf unterschiedliche Daten ausgeführt wird).
 } nehmen wir also in Kauf, zumal solche Maßnahmen ohnehin erst dann sinnvoll scheinen, wenn die Domäne sowohl fachlich als auch technisch hinreichend durchdrungen ist\footnote{
    Siehe ``Refactoring toward Deeper Insight``~\cite[]{Eva03}.
-}.\par
+}.
 
 
 Nicht unerwähnt bleiben soll an dieser Stelle die Wahl der Datenstrukturen und der Programmierparadigmen: Unsere Objektbeziehungen sind derzeit sehr ausdrucksstark (\texttt{Snapshot}, \texttt{Renderable}, \texttt{Material}, \texttt{Shader}, usw.), übermäßig tiefe Vererbungshierarchien haben wir bislang vermeiden können\footnote{
 Leistungsfähige Spieleengines setzen aus Effizienzgründen häufig nicht durchgehend auf klassische OOP-Paradigmen, sondern verwenden in performance-kritischen Subsystemen einen datenorientierten Ansatz, bei dem flache Verbünde von Komponenten nach dem \textit{ECS Pattern}~\cite[]{RCCK25} deutliche Performancevorteile aufweisen können~\cite[]{WWM22}. Siehe in diesem Zusammenhang auch das datenorientierte Framework \textit{ECS for Unity}~\cite{UnityECS} für Unity. Auch die Unreal Engine bietet mit \textit{MassEntity}~\cite{UnrealMassEntity} ein ``Framework für datenorientierte Berechnungen`` (Übersetzung eigene).
 }.
-Die Entscheidung, Vektoren als primäre Datencontainer zu verwenden, kann sich potenziell negativ auf die Rendering-Pipeline auswirken, wenn die Render-Queue nach einer Aktualisierung der Szene neu aufgebaut und dabei zusätzlicher Speicher zur Laufzeit alloziiert werden muss.\par
+Die Entscheidung, Vektoren als primäre Datencontainer zu verwenden, kann sich potenziell negativ auf die Rendering-Pipeline auswirken, wenn die Render-Queue nach einer Aktualisierung der Szene neu aufgebaut und dabei zusätzlicher Speicher zur Laufzeit alloziiert werden muss.
 
 Weitere Optimierungspotenziale sehen wir im Design des \texttt{EventManagers} und der Eingabeverarbeitung: Beide Systeme können zusammengeführt werden, sodass auch Eingabebefehle nach dem Prinzip ``Don't call us, we call you`` als Ereignisse an interessierte Beobachter weitergeleitet werden.
 Dabei ist zu berücksichtigen, dass dem Spiel hierzu Schnittstellen zur Verfügung gestellt werden müssen und eine Bottom-up Kommunikation erlaubt sein muss~\cite[]{BMRS+96}.
-Darüber hinaus soll eine Mechanik geschaffen werden, die aus Eingabeereignissen spielspezifische \texttt{ControlCommand}s ableitet~\cite[21 ff.]{Nys14}.\par
+Darüber hinaus soll eine Mechanik geschaffen werden, die aus Eingabeereignissen spielspezifische \texttt{ControlCommand}s ableitet~\cite[21 ff.]{Nys14}.
 
 Bei der Architektur des Rendering-Systems sehen wir eine Grundlage für eine modulare und erweiterbare Rendering-Pipeline, die derzeit eine klare Trennung zwischen Szenenbeschreibung und eigentlichem Rendering realisiert.
 Der Vorteil des gewählten Designs liegt darin, dass die individuellen \texttt{RenderPass}-Instanzen mit zusätzlichen Optionen konfiguriert werden können (beispielsweise \textit{Depth Testing}, \textit{Draw Mode}, \textit{Anti-Aliasing} u.a.) und die \texttt{RenderQueue}s so sortiert werden können, dass die Kommunikation mit der GPU möglichst effizient stattfinden kann\footnote{

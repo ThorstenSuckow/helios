@@ -145,9 +145,7 @@ namespace helios::ext::opengl::rendering::shader {
         logger_.info("Applying uniform values");
         if (const auto worldMatrixUniform = uniformLocation(UniformSemantics::WorldMatrix); worldMatrixUniform != -1) {
             if (const auto* mat4f_ptr = uniformValueMap.mat4f_ptr(UniformSemantics::WorldMatrix)) {
-                logger_.info(std::format("worldMatrix at {0}", worldMatrixUniform));
                 glUniformMatrix4fv(worldMatrixUniform, 1, false, mat4f_ptr);
-                logger_.info(std::format("worldMatrix: {0}", mat4f_ptr[0]));
             }
         }
     }

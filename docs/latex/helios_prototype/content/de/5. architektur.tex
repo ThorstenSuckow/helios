@@ -73,7 +73,7 @@ Sie können aber auch einfach nur eine Kamera (\texttt{helios::scene::Camera}) r
 Szenenknoten mit \texttt{Renderable} werden beim \textit{Culling} berücksichtigt.
 Das Culling-Verfahren wird in der rein virtuellen Klasse \textit{FrustumCullingStrategy} abstrakt definiert. Spezialisierungen werden der \texttt{Scene} bei der Instanziierung übergeben.
 In der Application Stage~\cite[687]{Gre19} erstellt helios aus einer Szene und einer Kamera einen \texttt{Snapshot}, für den die konfigurierte Culling-Strategie alle im sichtbaren Bereich der Kamera befindlichen \texttt{SceneNode}s sammelt.
-Ein einzelner Snapshot bildet die Grundlage für einen \texttt{RenderPass}, der die nötigen Anweisungen (\texttt{RenderCommand}s) für den eigentlichen Rendering-Prozess enthält.
+Ein einzelner \texttt{Snapshot} bildet die Grundlage für einen \texttt{RenderPass}, der die nötigen Anweisungen (\texttt{RenderCommand}s) für den eigentlichen Rendering-Prozess enthält.
 Listing~\ref{lst:gameloop} zeigt den Ablauf einer einfachen Game Loop.
 
 

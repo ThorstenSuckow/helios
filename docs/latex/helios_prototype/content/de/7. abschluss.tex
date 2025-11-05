@@ -7,7 +7,7 @@ Dabei sind wir auf die Toolchain eingegangen und haben die verwendeten Bibliothe
 
 Schwierigkeiten bei der Umsetzung haben wir in einer Diskussion reflektiert.
 Aus diesen Reflexionen haben sich für uns interessante Fragen ergeben, die einer näheren Betrachtung wert sind:
-Wie wirken sich verschiedene Formen der Game Loop~\cite[534 ff.]{Gre19} auf das \textit{Game Feel} aus?
+Wie wirken sich verschiedene Formen der Game Loop~\cite[534 ff.]{Gre19} auf das Game Feel aus?
 Welchen Einfluss auf die Laufzeit haben die aus der Standardbibliothek übernommenen Datenstrukturen bei Neuallokation im \textit{Hot Path} des Renderings?
 Und welchen Performancevorteil würden wir durch den Einsatz von \textit{raw pointern} im Gegensatz zu \textit{Smart Pointern} erzielen?\\
 
@@ -17,7 +17,13 @@ Bevor die technische Domäne vollständig durchdrungen ist, steht noch eine fach
 Hier erwarten wir mehrere weitere Entwicklungsschleifen.
 Im gleichen Zusammenhang betrachten wir auch das Design der Rendering-Pipeline vorsichtig optimistisch.
 Zwar folgt ihr Entwurf klaren semantischen Strukturen und orientiert sich an einer konzeptuellen Vorstellung (\textit{mental model}) der Datenverarbeitung.
-Unsere Recherche hat jedoch gezeigt, dass nicht nur datenorientierte Systeme gemeinhin den Unterbau effizienter Spiele(-Engines) bilden~\cite{Bay22}, sondern auch eine möglichst optimale Vorbereitung und Weitergabe der Renderinstruktionen an das Rendering-Backend dazugehört.
+Unsere Recherche hat jedoch gezeigt, dass datenorientierte Systeme gemeinhin den Unterbau effizienter Spiele(-Engines) bilden~\cite{Bay22}:
+Diese setzen nicht durchgehend klassische OOP-Paradigmen ein, sondern verwenden in performance-kritischen Subsystemen einen datenorientierten Ansatz, bei dem flache Verbünde von Komponenten nach dem \textit{ECS\footnote{\textit{Entity Component System}} Pattern}~\cite[]{RCCK25} deutliche Performancevorteile aufweisen können~\cite[]{WWM22}\footnote{Siehe in diesem Zusammenhang auch das datenorientierte Framework \textit{ECS for Unity}~\cite{UnityECS} für Unity. Auch die Unreal Engine bietet mit \textit{MassEntity}~\cite{UnrealMassEntity} ein ``Framework für datenorientierte Berechnungen`` (eigene Übersetzung).
+}.
+Obwohl wir diesen Ansatz nicht verfolgen, ist es dennoch hilfreich, ihn als etabliertes Paradigma im Bereich leistungsfähiger Spieleengines zu kennen.
+Im weiteren Verlauf könnten somit Lösungen zur Laufzeitoptimierung umgesetzt werden, die sich zumindest konzeptionell daran orientieren.
+
+Darüber hinaus gehört eine möglichst optimale Vorbereitung und Weitergabe der Renderinstruktionen an das Rendering-Backend zur Leistungsverbesserung von Spielen.
 Hier wird sich unser Entwurf erst in der Praxis beweisen müssen.
 \\
 

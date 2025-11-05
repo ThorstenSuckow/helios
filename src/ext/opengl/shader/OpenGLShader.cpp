@@ -148,6 +148,11 @@ namespace helios::ext::opengl::rendering::shader {
                 glUniformMatrix4fv(worldMatrixUniform, 1, false, mat4f_ptr);
             }
         }
+        if (const auto materialColorUniform = uniformLocation(UniformSemantics::MaterialColor); materialColorUniform != -1) {
+            if (const auto* vec4f_ptr = uniformValueMap.vec4f_ptr(UniformSemantics::MaterialColor)) {
+                glUniform4fv(materialColorUniform, 1, vec4f_ptr);
+            }
+        }
     }
 
 };

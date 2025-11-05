@@ -1,0 +1,148 @@
+#include <cassert>
+#include <cstdlib>
+#include <iostream>
+#include <print>
+
+
+import helios.math.types;
+
+import helios.ext.glfw.app.GLFWFactory;
+import helios.ext.glfw.app.GLFWApplication;
+import helios.ext.glfw.window.GLFWWindow;
+
+import helios.input.InputManager;
+import helios.input.GamepadState;
+import helios.input.types.Key;
+import helios.input.types.Gamepad;
+
+// math
+import helios.math.types;
+
+// io
+import helios.util.io.BasicStringFileReader;
+
+// rendering
+import helios.ext.opengl.rendering.shader.OpenGLShader;
+import helios.ext.opengl.rendering.shader.OpenGLUniformLocationMap;
+import helios.rendering.shader.UniformSemantics;
+import helios.ext.opengl.rendering.model.OpenGLMesh;
+import helios.ext.opengl.rendering.OpenGLRenderable;
+import helios.rendering.model.MaterialData;
+import helios.rendering.model.Material;
+import helios.rendering.model.MeshData;
+import helios.rendering.RenderPassFactory;
+import helios.ext.opengl.rendering.OpenGLDevice;
+
+// model data
+import helios.rendering.asset.shape.basic.Circle;
+
+
+// scene
+import helios.scene.Scene;
+import helios.scene.SceneNode;
+import helios.scene.CullNoneStrategy;
+import helios.scene.Camera;
+
+using namespace helios::input;
+using namespace helios::input::types;
+using namespace helios::ext::glfw::app;
+using namespace helios::ext::glfw::window;
+
+int main() {
+
+    const auto app = GLFWFactory::makeOpenGLApp(
+        "helios - Simple Cube Renderer"
+    );
+
+    auto win = dynamic_cast<GLFWWindow*>(app->current());
+
+
+
+    // helper
+    auto stringFileReader = helios::util::io::BasicStringFileReader();
+
+
+    // ------------------------------
+    // Rendering: Rendering Device, Renderable and Uniforms
+    // ------------------------------
+    auto renderingDevice = dynamic_cast<helios::ext::opengl::rendering::OpenGLDevice&>(app->renderingDevice());
+    auto shader = std::make_shared<helios::ext::opengl::rendering::shader::OpenGLShader>(
+        "./resources/simple_vertex_shader.vert",
+        "./resources/simple_fragment_shader.frag",
+        stringFileReader
+    );
+    auto circleShape      = helios::rendering::asset::shape::basic::Circle();
+    auto meshData         = std::make_shared<helios::rendering::model::MeshData>(circleShape);
+    auto mesh             = std::make_shared<helios::ext::opengl::rendering::model::OpenGLMesh>(meshData);
+    auto materialData     = std::make_shared<helios::rendering::model::MaterialData>(helios::math::vec4f(1.0f, 0.0f, 1.0f, 0.5f));
+    auto material         = std::make_unique<helios::rendering::model::Material>(shader, materialData);
+    auto circleRenderable = std::make_shared<helios::ext::opengl::rendering::OpenGLRenderable>(mesh, std::move(material));
+
+    auto uniformLocationMap = std::make_unique<helios::ext::opengl::rendering::shader::OpenGLUniformLocationMap>();
+    bool uniformAssigned    = uniformLocationMap->set(helios::rendering::shader::UniformSemantics::WorldMatrix, 1);
+    assert(uniformAssigned && "could not assign the world matrix uniform");
+    uniformAssigned    = uniformLocationMap->set(helios::rendering::shader::UniformSemantics::MaterialColor, 2);
+    assert(uniformAssigned && "could not assign the world matrix uniform");
+
+    shader->setUniformLocationMap(std::move(uniformLocationMap));
+
+    // ------------------------------
+    //  Scene
+    // ------------------------------
+    auto cullingStrategy = std::make_unique<helios::scene::CullNoneStrategy>();
+    auto scene = helios::scene::Scene(std::move(cullingStrategy));
+
+    // camera
+    const auto camera_ptr = scene.addNode(std::make_unique<helios::scene::Camera>());
+    assert(camera_ptr != nullptr && "unexpected nullptr for circleNode");
+
+    // scene nodes
+    const auto circleNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>(circleRenderable));
+    assert(circleNode_ptr != nullptr && "unexpected nullptr for circleNode");
+
+
+    // ------------------------------
+    //  Input
+    // ------------------------------
+    InputManager& inputManager = app->inputManager();
+    // register the gamepads
+    unsigned int mask = inputManager.registerGamepads(Gamepad::ONE);
+    assert(mask == 1 && "unexpected return value for mask");
+
+
+    // game loop
+    while (!win->shouldClose()) {
+        app->eventManager().dispatchAll();
+
+        inputManager.poll(0.0f);
+
+        if (inputManager.isKeyPressed(Key::ESC)) {
+            std::cout << "Key Pressed [ESC]" << std::endl;
+            win->setShouldClose(true);
+        }
+
+
+        const GamepadState& gamepadState = inputManager.gamepadState(Gamepad::ONE);
+        const float leftTrigger = gamepadState.triggerLeft();
+        const float rightTrigger = gamepadState.triggerRight();
+
+        const float axisLeftX  = gamepadState.leftX();
+        const float axisLeftY  = gamepadState.leftY();
+        const float axisRightX = gamepadState.rightX();
+        const float axisRightY = gamepadState.rightY();
+
+        std::cout << std::format(
+            "\rCTRL: LFT ({0:.2f}, {1:.2f}) - RGT ({2:.2f}, {3:.2f}) - TR [{4:.2f}] [{5:.2f}]",
+            axisLeftX, axisLeftY, axisRightX, axisRightY,
+            leftTrigger, rightTrigger
+        ) << std::flush;
+
+        auto snapshot = scene.createSnapshot(dynamic_cast<helios::scene::Camera&>(*camera_ptr));
+        auto renderPass = helios::rendering::RenderPassFactory::getInstance().buildRenderPass(snapshot);
+        app->renderingDevice().render(renderPass);
+
+        win->swapBuffers();
+    }
+
+    return EXIT_SUCCESS;
+}

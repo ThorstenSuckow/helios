@@ -1,0 +1,28 @@
+\section{Conclusion and Outlook}
+
+We have presented \textit{helios}, a prototype for a game framework for implementing a \textit{Geometry Wars} clone.
+
+This was followed by an overview of the project data and the structure and architecture of the C++ project.
+We discussed the toolchain and presented the third-party libraries used.\\
+
+We reflected on difficulties encountered during implementation in a discussion.
+These reflections raised interesting questions that are worth examining more closely:
+How do different forms of the game loop~\cite[534 ff.]{Gre19} affect the \textit{game feel}?
+What influence do the data structures taken from the standard library have on runtime when reallocated in the \textit{hot path} of the rendering?
+And what performance advantage would we achieve by using \textit{raw pointers} as opposed to \textit{smart pointers}?\\
+
+Due to the consistent application of generally accepted development principles, we currently see little need for structural changes.
+However, it is advisable not to jump to conclusions here:
+Before the technical domain is fully understood, a technical examination of the intrinsic properties of collision handling strategies and (artificial) enemy intelligence is still pending.
+We expect several more development loops here.
+In the same context, we are also cautiously optimistic about the design of the rendering pipeline.
+Although its design follows clear semantic structures and is based on a conceptual idea (\textit{mental model}) of data processing, our research has shown that it is not only data-oriented systems that commonly form the foundation of efficient game engines~\cite{Bay22} - but also the optimal preparation and transfer of rendering instructions to the rendering backend.
+This is where our design will have to prove itself in practice.\\
+
+With all this in mind, it should not be forgotten that we have deliberately opted for a robust implementation at this early stage of the project.
+We therefore look forward to the subsequent iterations.
+With the project goal of ``16 ms per frame`` in mind, we conclude this document with a quote from Donald E. Knuth:
+\begin{quote}
+    \centering
+    \textit{``Premature optimization is the root of all evil.``}~\cite{Knu74}
+\end{quote}

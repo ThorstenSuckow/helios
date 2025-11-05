@@ -1,8 +1,12 @@
 module;
 
+#include <array>
+
 export module helios.ext.glfw.input.GLFWInputAdapter;
 
+import helios.input.GamepadState;
 import helios.input.InputAdapter;
+import helios.input.types.Gamepad;
 import helios.window.Window;
 import helios.input.types.Key;
 
@@ -21,6 +25,15 @@ export namespace helios::ext::glfw::input {
      */
     class GLFWInputAdapter final : public helios::input::InputAdapter {
 
+
+
+    private:
+        /**
+         * @brief The const array to reference GamepadState objects.
+         */
+        std::array<helios::input::GamepadState, std::to_underlying(helios::input::types::Gamepad::SIZE)> gamepadStates_= {};
+
+    public:
         /**
          * @brief Checks if a specific key is currently pressed for the given window.
          * If the specified window is not of tyoe GLFWWindow, this method always returns false.
@@ -41,6 +54,23 @@ export namespace helios::ext::glfw::input {
         [[nodiscard]] bool isKeyPressed(helios::input::types::Key key,
             const helios::ext::glfw::window::GLFWWindow& win) const noexcept;
 
+        /**
+         * @copydoc helios::input::InputAdapter::gamepadState()
+         */
+        [[nodiscard]] const helios::input::GamepadState& GLFWInputAdapter::gamepadState(
+            helios::input::types::Gamepad gamepadId) const noexcept override;
+
+        /**
+         * @copydoc helios::input::InputAdapter::updateGamepadState()
+         */
+        void GLFWInputAdapter::updateGamepadState(
+            unsigned int mask) noexcept override;
+
+        /**
+         * @copydoc helios::input::InputAdapter::isConnected()
+         */
+        [[nodiscard]] bool GLFWInputAdapter::isConnected(
+            helios::input::types::Gamepad gamepadId) const noexcept override;
     };
 
 

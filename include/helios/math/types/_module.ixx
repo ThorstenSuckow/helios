@@ -1,5 +1,12 @@
 module;
 
+/**
+ * @brief Vector and matrix type definitions.
+ *
+ * @details This module provides fundamental mathematical types including 2D, 3D,
+ * and 4D vectors, as well as 4x4 matrices used for graphics transformations
+ * and spatial computations.
+ */
 export module helios.math.types;
 
 export import :mat4;

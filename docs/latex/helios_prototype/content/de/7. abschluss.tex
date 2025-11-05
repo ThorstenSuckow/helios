@@ -1,13 +1,12 @@
 \section{Abschluss und Ausblick}
 
 Wir haben \textit{helios} vorgestellt, einen Prototypen für ein Game Framework zur Umsetzung eines \textit{Geometry Wars}-Klon.
-
-Es folgte ein Überblick über die Projektdaten sowie über Aufbau und Architektur des C++-Projekts.
-Dabei sind wir auf die Toolchain eingegangen und haben die verwendeten Bibliotheken von Drittanbietern vorgestellt.\\
+Dabei sind wir auf die Projektdaten und die Toolchain eingegangen und haben die verwendeten Drittanbieter-Bibliotheken vorgestellt.
+Es folgte ein Überblick über Aufbau und Architektur des C++-Projekts.
 
 Schwierigkeiten bei der Umsetzung haben wir in einer Diskussion reflektiert.
 Aus diesen Reflexionen haben sich für uns interessante Fragen ergeben, die einer näheren Betrachtung wert sind:
-Wie wirken sich verschiedene Formen der Game Loop~\cite[534 ff.]{Gre19} auf das \textit{Game Feel} aus?
+Wie wirken sich verschiedene Formen der Game Loop~\cite[534 ff.]{Gre19} auf das Game Feel aus?
 Welchen Einfluss auf die Laufzeit haben die aus der Standardbibliothek übernommenen Datenstrukturen bei Neuallokation im \textit{Hot Path} des Renderings?
 Und welchen Performancevorteil würden wir durch den Einsatz von \textit{raw pointern} im Gegensatz zu \textit{Smart Pointern} erzielen?\\
 
@@ -15,11 +14,17 @@ Aufgrund der konsequenten Anwendung allgemein anerkannter Entwicklungsprinzipien
 Es empfiehlt sich jedoch, hier keine voreiligen Schlüsse zu ziehen:
 Bevor die technische Domäne vollständig durchdrungen ist, steht noch eine fachliche Auseinandersetzung mit den intrinsischen Eigenschaften von Kollisionsbehandlungsstrategien sowie (künstlicher) Gegnerintelligenz an.
 Hier erwarten wir mehrere weitere Entwicklungsschleifen.
+
 Im gleichen Zusammenhang betrachten wir auch das Design der Rendering-Pipeline vorsichtig optimistisch.
 Zwar folgt ihr Entwurf klaren semantischen Strukturen und orientiert sich an einer konzeptuellen Vorstellung (\textit{mental model}) der Datenverarbeitung.
-Unsere Recherche hat jedoch gezeigt, dass nicht nur datenorientierte Systeme gemeinhin den Unterbau effizienter Spiele(-Engines) bilden~\cite{Bay22}, sondern auch eine möglichst optimale Vorbereitung und Weitergabe der Renderinstruktionen an das Rendering-Backend dazugehört.
-Hier wird sich unser Entwurf erst in der Praxis beweisen müssen.
-\\
+Allerdings zählt auch eine möglichst optimale Vorbereitung und Weitergabe der Renderinstruktionen an das Rendering-Backend zur Leistungsverbesserung von Spielen.
+Hier wird sich unser Entwurf in der praktischen Anwendung bewähren müssen.
+
+Darüber hinaus hat unsere Recherche gezeigt, dass datenorientierte Systeme gemeinhin den Unterbau effizienter Spiele(-Engines) bilden~\cite{Bay22}:
+Diese setzen nicht durchgehend klassische OOP-Paradigmen ein, sondern verwenden in performance-kritischen Subsystemen einen datenorientierten Ansatz, bei dem flache Verbünde von Komponenten nach dem \textit{ECS\footnote{\textit{Entity Component System}} Pattern}~\cite[]{RCCK25} deutliche Performancevorteile aufweisen können~\cite[]{WWM22}\footnote{Siehe in diesem Zusammenhang auch das datenorientierte Framework \textit{ECS for Unity}~\cite{UnityECS} für Unity. Auch die Unreal Engine bietet mit \textit{MassEntity}~\cite{UnrealMassEntity} ein ``Framework für datenorientierte Berechnungen`` (eigene Übersetzung).
+}.
+Obwohl wir diesen Ansatz nicht verfolgen, ist es dennoch hilfreich, ihn als etabliertes Paradigma im Bereich leistungsfähiger Spieleengines zu kennen.
+Im weiteren Verlauf könnten somit Lösungen zur Laufzeitoptimierung umgesetzt werden, die sich zumindest konzeptionell daran orientieren.\\
 
 Bei alldem soll nicht vergessen werden, dass wir in dieser frühen Phase des Projekts bewusst eine robuste Implementierung bevorzugt haben.
 Wir blicken den nachfolgenden Iterationen daher gespannt entgegen.

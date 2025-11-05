@@ -37,6 +37,11 @@ export namespace helios::rendering::shader {
         ViewMatrix,
 
         /**
+         * @brief Represents the (material) color.
+         */
+        MaterialColor,
+
+        /**
          * @brief Representant for the number of entries in this enum.
          */
         count

@@ -140,7 +140,7 @@ export namespace helios::scene {
          * @param node The Scene node to add to this Scene.
          *
          * @return The raw pointer to the newly added node, or `nullptr` if
-         * the was not added.
+         * the node wasn't added.
          *
          */
         [[nodiscard]] SceneNode* addNode(std::unique_ptr<SceneNode> node) const;

@@ -98,6 +98,22 @@ export namespace helios::math {
 
     };
 
+    /**
+     * @brief Returns a const pointer to the first element of the vector's components.
+     *
+     * Useful for APIs that expect a pointer to vector data, like OpenGL.
+     *
+     * @tparam T The numeric type of the vector components.
+     *
+     * @param m A reference to the `vec4<T>` vector.
+     *
+     * @return A const pointer to the element at [0]
+     */
+    template<helios::math::Numeric T>
+    const float* value_ptr(const vec4<T>& m) noexcept {
+        return &m[0];
+    }
+
     using vec4f = vec4<float>;
     using vec4d = vec4<double>;
     using vec4i = vec4<int>;

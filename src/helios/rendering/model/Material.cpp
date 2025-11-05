@@ -8,6 +8,7 @@ module helios.rendering.model.Material;
 import helios.rendering.shader.Shader;
 import helios.rendering.model.MaterialData;
 import helios.rendering.shader.UniformValueMap;
+import helios.rendering.shader.UniformSemantics;
 
 using namespace helios::rendering::shader;
 
@@ -43,7 +44,12 @@ namespace helios::rendering::model {
      * @todo implement
      */
     void Material::writeUniformValues(UniformValueMap& uniformValueMap) const noexcept {
-        /* intentionally left empty */
+
+        if (materialData_ != nullptr) {
+            uniformValueMap.set(UniformSemantics::MaterialColor, materialData_->color());
+        }
+
+
     };
 
 

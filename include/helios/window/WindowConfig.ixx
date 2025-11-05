@@ -27,7 +27,7 @@ export namespace helios::window {
         /**
          * @brief Initial height of the Window.
          */
-        int height{600};
+        int height{800};
 
 
         /**
@@ -39,7 +39,7 @@ export namespace helios::window {
         /**
          * @brief Initial viewport configuration (x, y, width, height).
          */
-        math::vec4i viewport{0,0, 800, 600};
+        math::vec4i viewport{0,0, 800, 800};
 
     };
 

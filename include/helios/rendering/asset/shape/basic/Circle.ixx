@@ -84,9 +84,9 @@ export namespace helios::rendering::asset::shape::basic {
 
     public:
         /**
-         * @brief Creates a default circle (radius 0.5, 64 segments).
+         * @brief Creates a default circle (radius 1.0, 64 segments).
          */
-        Circle() : Circle(0.5f, 64) {}
+        Circle() : Circle(1.0f, 64) {}
 
         /**
          * @brief Creates a circle with a specific radius and segment count.

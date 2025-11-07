@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <print>
+#include <glad/gl.h>
 
 
 import helios.math.types;
@@ -30,11 +31,14 @@ import helios.ext.opengl.rendering.OpenGLRenderable;
 import helios.rendering.model.MaterialData;
 import helios.rendering.model.Material;
 import helios.rendering.model.MeshData;
+import helios.rendering.model.config.MeshConfig;
+import helios.rendering.model.config.PrimitiveTopology;
 import helios.rendering.RenderPassFactory;
 import helios.ext.opengl.rendering.OpenGLDevice;
 
 // model data
 import helios.rendering.asset.shape.basic.Circle;
+import helios.rendering.asset.shape.basic.Line;
 
 
 // scene
@@ -66,25 +70,41 @@ int main() {
     // Rendering: Rendering Device, Renderable and Uniforms
     // ------------------------------
     auto renderingDevice = dynamic_cast<helios::ext::opengl::rendering::OpenGLDevice&>(app->renderingDevice());
+
+    // shader configuration
     auto shader = std::make_shared<helios::ext::opengl::rendering::shader::OpenGLShader>(
         "./resources/simple_vertex_shader.vert",
         "./resources/simple_fragment_shader.frag",
         stringFileReader
     );
-    auto circleShape      = helios::rendering::asset::shape::basic::Circle();
-    auto meshData         = std::make_shared<helios::rendering::model::MeshData>(circleShape);
-    auto mesh             = std::make_shared<helios::ext::opengl::rendering::model::OpenGLMesh>(meshData);
-    auto materialData     = std::make_shared<helios::rendering::model::MaterialData>(helios::math::vec4f(1.0f, 0.0f, 1.0f, 0.5f));
-    auto material         = std::make_unique<helios::rendering::model::Material>(shader, materialData);
-    auto circleRenderable = std::make_shared<helios::ext::opengl::rendering::OpenGLRenderable>(mesh, std::move(material));
-
     auto uniformLocationMap = std::make_unique<helios::ext::opengl::rendering::shader::OpenGLUniformLocationMap>();
     bool uniformAssigned    = uniformLocationMap->set(helios::rendering::shader::UniformSemantics::WorldMatrix, 1);
     assert(uniformAssigned && "could not assign the world matrix uniform");
     uniformAssigned    = uniformLocationMap->set(helios::rendering::shader::UniformSemantics::MaterialColor, 2);
     assert(uniformAssigned && "could not assign the world matrix uniform");
-
     shader->setUniformLocationMap(std::move(uniformLocationMap));
+
+    // set up mesh configs
+    auto circleMeshConfig = std::make_shared<const helios::rendering::model::config::MeshConfig>(
+        helios::rendering::model::config::PrimitiveTopology::Triangles
+    );
+    auto lineMeshConfig = std::make_shared<const helios::rendering::model::config::MeshConfig>(
+        helios::rendering::model::config::PrimitiveTopology::Lines
+    );
+    auto circleShape      = helios::rendering::asset::shape::basic::Circle();
+    auto meshData         = std::make_shared<helios::rendering::model::MeshData>(circleShape, circleMeshConfig);
+    auto mesh             = std::make_shared<helios::ext::opengl::rendering::model::OpenGLMesh>(meshData);
+    auto materialData     = std::make_shared<helios::rendering::model::MaterialData>(helios::math::vec4f(1.0f, 0.0f, 1.0f, 0.5f));
+    auto material         = std::make_unique<helios::rendering::model::Material>(shader, materialData);
+    auto circleRenderable = std::make_shared<helios::ext::opengl::rendering::OpenGLRenderable>(mesh, std::move(material));
+
+    auto lineShape        = helios::rendering::asset::shape::basic::Line();
+    auto lineMeshData     = std::make_shared<helios::rendering::model::MeshData>(lineShape, lineMeshConfig);
+    auto lineMesh         = std::make_shared<helios::ext::opengl::rendering::model::OpenGLMesh>(lineMeshData);
+    auto lineMaterialData = std::make_shared<helios::rendering::model::MaterialData>(helios::math::vec4f(1.0f, 1.0f, 1.0f, 1.0f));
+    auto lineMaterial     = std::make_unique<helios::rendering::model::Material>(shader, lineMaterialData);
+    auto lineRenderable   = std::make_shared<helios::ext::opengl::rendering::OpenGLRenderable>(lineMesh, std::move(lineMaterial));
+
 
     // ------------------------------
     //  Scene
@@ -99,6 +119,9 @@ int main() {
     // scene nodes
     const auto circleNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>(circleRenderable));
     assert(circleNode_ptr != nullptr && "unexpected nullptr for circleNode");
+
+    auto lineNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>(lineRenderable));
+    assert(lineNode_ptr != nullptr && "unexpected nullptr for lineNode");
 
 
     // ------------------------------
@@ -136,6 +159,8 @@ int main() {
             axisLeftX, axisLeftY, axisRightX, axisRightY,
             leftTrigger, rightTrigger
         ) << std::flush;
+
+        lineNode_ptr->scale(helios::math::vec3f(gamepadState.left()));
 
         auto snapshot = scene.createSnapshot(dynamic_cast<helios::scene::Camera&>(*camera_ptr));
         auto renderPass = helios::rendering::RenderPassFactory::getInstance().buildRenderPass(snapshot);

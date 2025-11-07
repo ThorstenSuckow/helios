@@ -1,27 +1,35 @@
 \section{Conclusion and Outlook}
 
-We have presented \textit{helios}, a prototype for a game framework for implementing a \textit{Geometry Wars} clone.
+We have presented \textit{helios}, a prototype game framework developed in C++ for implementing a \textit{Geometry Wars} clone.
+We discussed the project data and toolchain, introduced the third-party libraries used, and provided an overview of the project’s structure and architecture.
 
-This was followed by an overview of the project data and the structure and architecture of the C++ project.
-We discussed the toolchain and presented the third-party libraries used.\\
+In the discussion section, we reflected on several challenges encountered during implementation.
+These reflections raise questions that merit further investigation:
+How do different forms of the game loop~\cite[pp.~534]{Gre19} affect the game feel?
+What influence do data structures from the standard library have on runtime when reallocated within the \textit{hot path} of rendering?
+And what measurable performance gain might result from using \textit{raw pointers} instead of \textit{smart pointers}?
 
-We reflected on difficulties encountered during implementation in a discussion.
-These reflections raised interesting questions that are worth examining more closely:
-How do different forms of the game loop~\cite[534 ff.]{Gre19} affect the \textit{game feel}?
-What influence do the data structures taken from the standard library have on runtime when reallocated in the \textit{hot path} of the rendering?
-And what performance advantage would we achieve by using \textit{raw pointers} as opposed to \textit{smart pointers}?\\
+Thanks to the consistent application of well-established development principles, we currently see little need for structural changes.
+Nevertheless, it would be premature to draw definitive conclusions:
+Before the technical domain is fully understood, a deeper examination of the intrinsic properties of collision-handling strategies and (artificial) opponent intelligence is still required.
+We therefore expect several further development iterations in these areas.
 
-Due to the consistent application of generally accepted development principles, we currently see little need for structural changes.
-However, it is advisable not to jump to conclusions here:
-Before the technical domain is fully understood, a technical examination of the intrinsic properties of collision handling strategies and (artificial) enemy intelligence is still pending.
-We expect several more development loops here.
-In the same context, we are also cautiously optimistic about the design of the rendering pipeline.
-Although its design follows clear semantic structures and is based on a conceptual idea (\textit{mental model}) of data processing, our research has shown that it is not only data-oriented systems that commonly form the foundation of efficient game engines~\cite{Bay22} - but also the optimal preparation and transfer of rendering instructions to the rendering backend.
-This is where our design will have to prove itself in practice.\\
+In the same context, we remain cautiously optimistic about the design of the rendering pipeline.
+Its layout follows clear semantic structures and is based on a conceptual idea (\textit{mental model}) of data processing.
+However, optimal preparation and transfer of rendering instructions to the rendering backend are equally crucial for achieving high performance.
+Here, our design will have to prove its efficiency in practical application.
 
-With all this in mind, it should not be forgotten that we have deliberately opted for a robust implementation at this early stage of the project.
-We therefore look forward to the subsequent iterations.
-With the project goal of ``16 ms per frame`` in mind, we conclude this document with a quote from Donald E. Knuth:
+Furthermore, our research indicates that DOD\footnote{\textit{Data-Oriented Design}}-based systems commonly form the foundation of efficient game engines~\cite{Bay22}.
+These systems do not rely solely on classical OOP paradigms but employ data-oriented approaches in performance-critical subsystems, where flat component structures according to the \textit{ECS\footnote{\textit{Entity-Component System}} pattern}~\cite[]{RCCK25} can provide significant performance benefits~\cite[]{WWM22}.\footnote{
+    See also the data-oriented framework \textit{ECS for Unity}~\cite{UnityECS} in this context.
+    Unreal Engine likewise offers \textit{MassEntity}~\cite{UnrealMassEntity}, a ``gameplay-focused framework for data-oriented calculations``.
+}
+Although we are not currently pursuing this approach, it remains valuable to consider it as an established paradigm in high-performance game engine design.
+Future optimizations could incorporate concepts inspired by this methodology.
+
+With all this in mind, it should not be forgotten that we have deliberately prioritized robustness over optimization at this early stage of development.
+We therefore look forward to subsequent iterations with anticipation.
+Keeping the project goal of ``16 ms per frame`` in view, we conclude this document with a quote by Donald E. Knuth:
 \begin{quote}
     \centering
     \textit{``Premature optimization is the root of all evil.``}~\cite{Knu74}

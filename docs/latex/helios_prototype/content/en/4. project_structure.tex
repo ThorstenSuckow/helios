@@ -1,12 +1,12 @@
-
 \section{Project Structure}
-We present the structure of the project and the toolchain.We also briefly introduce the contents of individual directories.\\
 
-The top level of the helios directory structure provides access to tests, executable sample programs, benchmarks, documentation, and source files.
-The chosen structure is based on the conventions for C++ projects defined by the \textit{Pitchfork} project~\cite[]{Pitchfork}.
-The directory names provide information about the content they manage and are as shown in Figure~\ref{fig:directory_structure}.
+We present the structure of the project and the associated toolchain.
+We also briefly introduce the contents of the individual directories.\\
 
-
+The top level of the \textit{helios} directory structure provides access to tests, executable sample programs, benchmarks, documentation, and source files.
+The chosen structure follows the conventions for C++ projects defined by the \textit{Pitchfork} project~\cite[]{Pitchfork}.
+The directory names are self-explanatory and are shown in Figure~\ref{fig:directory_structure}.
+\vspace{4mm}
 \begin{figure}[htbp]
     \setlength{\DTbaselineskip}{18pt}
     \dirtree{%
@@ -18,47 +18,54 @@ The directory names provide information about the content they manage and are as
         .2 src/.
         .2 tests/.
     }
-    \caption{Project directory of helios (excerpt).}
+    \caption{Project directory of \textit{helios} (excerpt).}
     \label{fig:directory_structure}
 \end{figure}
+\vspace{4mm}
+The project comprises several build stages to compile the source files and generate the tests and example programs.
+For automation, we use \texttt{CMake}~\cite[]{CMake}, which also allows us to perform simple dependency management.
+The third-party libraries (TPLs) required for development (including \texttt{glfw}~\cite[]{glfwHomepage} and \texttt{glad}~\cite[]{gladgithub}) can thus be fetched directly from external sources, statically compiled, and integrated (see Listing~\ref{lst:cmake}).
+This approach enables us to automate the project’s preconfiguration and avoid manual (and often error-prone~\cite[]{FG22}) integration of TPLs.
 
+\vspace{4mm}
+\begin{lstlisting}[style=c++style,
+    caption={Excerpt from helios' CMakeLists.txt.
+    This section declares and fetches GLFW v3.4 and GLAD v2.0.8 via \texttt{FetchContent} from the respective GitHub repositories (URLs omitted for clarity).
+    Subsequently, a GLAD loader for OpenGL 4.6 is created as a static library.},
+    label=lst:cmake]
+...
+FetchContent_Declare(glfw
+    GIT_REPOSITORY [url]
+    GIT_TAG        3.4
+)
 
+FetchContent_Declare(glad
+    GIT_REPOSITORY [url]
+    GIT_TAG        v2.0.8
+    SOURCE_SUBDIR cmake
+)
 
-The project has various build steps to compile the sources and generate the tests and example programs.For automation, we use \texttt{CMake}~\cite[]{CMake}, which also allows us to implement simple dependency management.The \textit{third-party libraries} (TPL) (including \texttt{glfw}~\cite[]{glfwHomepage} and \texttt{glad}~\cite[]{gladgithub}) required for development can thus be loaded directly from external sources, statically compiled, and integrated (see Listing~\ref{lst:cmake}).
-This allows us to automate the preconfiguration of the project and avoid manual (and often error-prone~\cite[]{FG22}) integration of the required TPLs.
-\begin{lstlisting}[style=c++style, caption={Excerpt from helios' CMakeLists.txt: This section declares and fetches GLFW v3.4 and GLAD v2.0.8 via \texttt{FetchContent} from the respective Github repositories (URLs omitted for clarity). Subsequently, a GLAD loader for OpenGL 4.6 is created as a static library.}, label=lst:cmake]
-    ...
-    FetchContent_Declare(glfw
-        GIT_REPOSITORY [url]
-        GIT_TAG        3.4
-    )
+FetchContent_MakeAvailable(glfw glad)
 
-    FetchContent_Declare(glad
-        GIT_REPOSITORY [url]
-        GIT_TAG        v2.0.8
-        SOURCE_SUBDIR  cmake
-    )
-    FetchContent_MakeAvailable(glfw glad)
-
-    #GLAD v2: Core GL 4.6
-    glad_add_library(
-        glad_gl_core_46
-        STATIC REPRODUCIBLE LOADER API
-        gl:core=4.6
-    )
-    ...
+# GLAD v2: Core GL 4.6
+glad_add_library(
+    glad_gl_core_46 STATIC REPRODUCIBLE LOADER API 
+    gl:core=4.6
+)
+...
 \end{lstlisting}
 
 \subsection{Directory Contents}
+
 In the following, we present the main directories in alphabetical order and briefly discuss their contents.
 
 \subsection*{\texttt{/benchmarks}}
-For benchmarking individual functions, helios uses \textit{Google Benchmark}~\cite[]{googlebenchmarkgithub}.There are currently benchmarks for mathematical types and functions.
-We use these for comparison with the implementation in \texttt{glm}~\cite[]{glmGithub}, which we consider as a reference.
-This is intended to identify bottlenecks in the \textit{Game Loop} at an early stage, for example, due to operations on affine transformation matrices.
-Further benchmarks measuring the behavior of selected functions of the \textit{Rendering Pipeline} or the \textit{Application Stage}~\cite[687]{Gre19} (for example, during \textit{Culling}) are to follow.
 
-
+For benchmarking individual functions, \textit{helios} uses \textit{Google Benchmark}~\cite[]{googlebenchmarkgithub}.
+Currently, there are benchmarks for mathematical types and functions.
+We use these to compare our implementations with those of \texttt{glm}~\cite[]{glmGithub}, which serves as a reference.
+This allows us to identify potential bottlenecks in the \textit{Game Loop} at an early stage, for example in operations involving affine transformation matrices.
+Further benchmarks - measuring the performance of selected functions in the \textit{Rendering Pipeline} or \textit{Application Stage}~\cite[687]{Gre19} (e.g., during \textit{Culling}) - are planned.
 
 \setlength{\tabcolsep}{8pt}
 \begin{table}[t]
@@ -68,57 +75,62 @@ Further benchmarks measuring the behavior of selected functions of the \textit{R
             \hline
             \textbf{Benchmark} & \textbf{Time} & \textbf{CPU} & \textbf{Iterations} \\
             \hline
-            BM\_mat4Constructor/real\_time         & 5.81 ns  & 5.85 ns  & 106{,}874{,}145 \\
-            BM\_mat4Multiply/real\_time            & 175 ns   & 168 ns   & 3{,}896{,}895 \\
+            BM\_mat4Constructor/real\_time & 5.81 ns & 5.85 ns & 106,874,145 \\
+            BM\_mat4Multiply/real\_time    & 175 ns  & 168 ns  & 3,896,895 \\
             \hline\\
         \end{tabular}}
-\caption{Sample output of benchmark results, here based on our own \texttt{mat4} implementation.}
-\label{tab:mat4-benchmark}
+    \caption{Sample output of benchmark results based on our custom \texttt{mat4} implementation.}
+    \label{tab:mat4-benchmark}
 \end{table}
 
-No evaluation of benchmarking frameworks was performed; the selection was based on popularity and recommendations.
+No evaluation of alternative benchmarking frameworks was conducted; the choice was based on popularity and community recommendations.
 
 \subsection*{\texttt{/docs}}
-In addition to formal documentation\footnote{Such as the \LaTeX source code of this document.}, the directory contains API documentation based on the source files and generated by \texttt{doxygen}~\cite[]{Doxygen}.
 
-\texttt{doxygen} has the advantage of allowing conversion to various formats.
-This allows us to export the documentation in \texttt{html} or \texttt{xml} format and integrate it into the helios project website~\cite[]{helios} through a separate build step.
+In addition to formal documentation\footnote{Such as the \LaTeX\ source code of this document.},
+this directory contains API documentation generated from the source files using \texttt{Doxygen}~\cite[]{Doxygen}.
+A key advantage of \texttt{Doxygen} is its ability to export to multiple formats.
+This allows us to generate HTML or XML documentation and integrate it into the \textit{helios} project website~\cite[]{helios} via a dedicated build step.
 
-A formal evaluation of software documentation tools has not been performed.
-The selection was based on the ease of integration of \texttt{doxygen} and its popularity.
-We also consider the extensive selection of different output formats (including PDF and Markdown) to support project documentation to be an advantage.
+A formal evaluation of documentation tools was not performed.
+The selection was guided by ease of integration and widespread adoption.
+We also consider the extensive range of output formats (including PDF and Markdown) beneficial for maintaining project documentation.
 
-\subsection*{/tests}
-For unit testing, helios uses \textit{Google Test}~\cite[]{googletestgithub}.
-We are aiming for a short-term increase in development speed, assuming possible project instability, which is why we did not plan for high test coverage at the start of the project.
-For this reason, the tests currently focus on mathematical functions, for example to validate transformations within the scene graph.
-helios uses \texttt{glm} as a test oracle~\cite[917 ff.]{Bin99} to compare results\footnote{Alternatively, \texttt{glm} can be regarded as a \textit{baseline} against which the functions in helios (as \textit{delta version}) are compared in regression tests.
-We are aware that any errors in \texttt{glm} will directly affect the implementation in helios. We consider this risk to be extremely low due to the maturity of the \textit{glm} project.}.
+\subsection*{\texttt{/tests}}
 
-As with benchmarking, no evaluation of different unit test frameworks was performed.We based our decision on popularity and recommendations.
+For unit testing, \textit{helios} employs \textit{Google Test}~\cite[]{googletestgithub}.
+To increase development speed, especially during the early and potentially unstable project phase, we initially decided against pursuing high test coverage.
+Current tests therefore focus on mathematical functions - for instance, validating transformations within the scene graph.
+\textit{helios} uses \texttt{glm} as a test oracle~\cite[pp.~917]{Bin99} for comparison purposes.\footnote{
+    Alternatively, \texttt{glm} can be regarded as a \textit{baseline} against which \textit{helios} functions (as a \textit{delta version}) are compared in regression tests.
+    We acknowledge that any errors in \texttt{glm} would propagate to \textit{helios}; however, given the maturity of the \textit{glm} project, this risk is considered minimal.}
 
+As with benchmarking, no formal evaluation of unit testing frameworks was conducted.
+The decision was based on popularity and recommendations.
 
 \subsection*{\texttt{/examples}}
-The directory contains sample programs that demonstrate the individual functions of the framework.
-During the development process, the programs are used to define functionalities in a \textit{top-down approach} and refine them as the process progresses~\cite[]{Wir71}.
-This allows us to focus on the required interfaces of individual subsystems and not get lost in implementation details that can be added in a later iteration.
+
+This directory contains example programs that demonstrate the individual functionalities of the framework.
+During development, these programs help define functionalities in a \textit{top-down approach} and refine them iteratively~\cite[]{Wir71}.
+This approach allows us to focus on the required interfaces of individual subsystems without getting lost in implementation details that can be added in later iterations.
 
 \begin{figure}[!h]
     \centering
     \includegraphics[width=1\columnwidth]{img/cube_example}
-\caption{Screenshot of the \texttt{simple\_cube\_rendering} demo, which was used in a top-down approach to gradually implement the functional scope defined in the first milestone. (Source: own recording)}
+    \caption{Screenshot of the \texttt{simple\_cube\_rendering} demo, used in a top-down approach to incrementally implement the functionality defined in the first milestone. (Source: own recording)}
     \label{fig:simple-cube-rendering-demo}
 \end{figure}
 
 \subsection*{\texttt{/include, /src}}
-With C++23, helios implements its classes and functions entirely via Modules Interface and Implementation Units~\cite[211 f.]{Str24}.
+
+With C++23, \textit{helios} implements its classes and functions entirely through Module Interface and Implementation Units~\cite[pp.~211]{Str24}.
 These are stored in \texttt{/include} and \texttt{/src}, respectively.
-Modules that are not divided into interface and implementation units are located exclusively in \texttt{/include} as ``header-only`` components. These include classes such as \texttt{helios::math::vec3}, which represent a three-dimensional vector type and whose functions are predominantly declared as \texttt{constexpr}\footnote{
-\texttt{constexpr} allows an expression to be evaluated at compile time. This requires its complete definition at translation time~\cite[330 f.]{Gre24}.
-}.
-The directories are further subdivided into \textt{ext} and \texttt{helios}:
+Modules not divided into Interface and Implementation Units reside exclusively in \texttt{/include} as ``header-only`` components.
+These include classes such as \texttt{helios::math::vec3}, which represents a three-dimensional vector type whose functions are predominantly declared as \texttt{constexpr}\footnote{
+    The \texttt{constexpr} keyword allows expressions to be evaluated at compile time, requiring their complete definition at translation time~\cite[p.~330]{Gre24}.}.
+The directories are further subdivided into \texttt{ext} and \texttt{helios}:
 \begin{itemize}
     \itemsep0.5em
-    \item \texttt{ext} contains platform-specific implementations of interfaces that are contractually specified by the helios framework (hardware-related window/application abstractions, as well as specifics of the rendering pipeline).
+    \item \texttt{ext} contains platform-specific implementations of interfaces contractually defined by the \textit{helios} framework (hardware-related window and application abstractions, as well as rendering pipeline specifics).
     \item \texttt{helios} contains the actual framework code.
 \end{itemize}

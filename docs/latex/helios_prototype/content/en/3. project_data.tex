@@ -1,49 +1,46 @@
 \section{Project Data and Goals}\label{sec:projectdata}
 
-The objective of this project is to create a stable prototype of the twin-stick shooter\footnote{%
-    For genre classification, see also~\cite[]{GameDeveloper}.%
-} \textit{Geometry Wars} (see Figure~\ref{fig:geometry_wars}) using the programming language C++23 and the OpenGL~API~\cite[]{OpenGLHomepage}.\\
+The goal of this project is to create a stable prototype of the twin-stick shooter\footnote{
+    For genre classification, see also~\cite[]{GameDeveloper}.
+} \textit{Geometry Wars} (see Figure~\ref{fig:geometry_wars}) using the C++23 programming language and the OpenGL API~\cite[]{OpenGLHomepage}.\\
 
 \begin{figure}[tbp]
     \centering
-    \includegraphics[width=\textwidth]{img/geometry_wars}
-    \caption{\textit{Geometry Wars} first appeared in 2003 as an Easter egg in the game \textit{Project Gotham Racing 2} (Microsoft Game Studios).
-    Due to its popularity, several sequels were released, the most recent being \textit{Geometry Wars~3: Dimensions Evolved} (Activision,~2016).
-        (Source: Activision Publishing, Inc.)}
+    \includegraphics[width=1\columnwidth]{img/geometry_wars}
+    \caption{\textit{Geometry Wars} first appeared in 2003 as an Easter egg in the game \textit{Project Gotham Racing 2} (Microsoft Game Studios). Due to its great popularity, several sequels were released, most recently in 2016 with \textit{Geometry Wars 3: Dimensions Evolved} (Activision). (Source: Activision Publishing, Inc.)}
     \label{fig:geometry_wars}
 \end{figure}
 
-The following features were defined as project goals:
+The following features were agreed upon for implementation:
 
-\begin{itemize}\itemsep0.5em
-\item Playable 2D grid-based level
-\item Time-attack mode with a duration of three minutes
-\item High-score system
-\item Controller-based input
-\item Stable frame rate of at least 60 FPS with the simultaneous rendering of over a hundred enemies and objects
-\item Three enemy types with simple AI (``spawn and chase'')
-\item Enhanced game feel through graphical effects
-\item Buildable and executable under Windows 11
+\begin{itemize}
+    \itemsep0.5em
+    \item Playable level (2D grid)
+    \item Time attack mode with a duration of 3 minutes
+    \item High score system
+    \item Controller support
+    \item Stable frame rate of at least 60 FPS with simultaneous display of over one hundred enemies and objects
+    \item Three enemy types with simple AI (``spawn and chase``)
+    \item Enhancement of the game feel through graphical effects
+    \item Compilable and executable under Windows~11
 \end{itemize}
 
-While some criteria are quantitatively measurable (e.g., frame rate), others are intentionally left vague (e.g., game feel) to emphasize the exploratory nature of the project.
-Formal requirements engineering is therefore not part of this work, particularly since the original game on which the implementation is based on also serves as a benchmark.
+While some criteria are specifically measurable (e.g., frame rate), other requirements are deliberately vague (e.g., game feel) and underscore the exploratory nature of the project.
+Formal requirements engineering is therefore not part of this work, especially since the original game on which the implementation is based also serves as a reference and benchmark.
 
-The learning process itself is considered a key objective of this work and is not evaluated by formal metrics.
-Instead, the acquired experience and resulting insights are documented in this report and critically reflected upon.
+The learning process itself is considered a key objective of this project; no formal metrics are used for its evaluation.
+Instead, the experiences and results obtained are documented in writing, and the present report will serve as a critical reflection of them at the end of the project.
 
-Against this background, the chosen approach can be regarded as a form of dynamic requirements engineering ``with significantly greater degrees of freedom'' (own translation)~\cite[60]{MRP21}.
-The aforementioned \textit{Tracer Bullet Development}, which primarily provides a platform for continuous integration, corresponds to the prototype described by~\textit{Pflug et al.} as a ``living lab``, which is iteratively evolved using agile methods (\textit{ibid.}, p.~61).\footnote{%
-    Kasurinen et al.~\cite[]{KMS14} examine whether requirements management, rooted in traditional engineering, has a place in game development, which is strongly driven by creative processes.
-    They show that many developers consciously derive parts of the requirements through user testing.
-    Accordingly, games user research has become an important branch of the industry, helping studios understand and improve player experience (cf.~\cite[26]{Zam18}).
-    Further discussions of software engineering in game development can be found in~\cite[]{KH09}.%
-}
+
+Against this background, the approach can be regarded as a form of dynamic requirements engineering ``with significantly greater degrees of freedom`` (own translation)~\cite[60]{MRP21}.
+The aforementioned \textit{Tracer Bullet Development} process, which primarily provides a platform for integration, corresponds to the prototype referred to by \textit{Pflug et~al.} as a ``living lab``, which is further developed using agile methods (\textit{ibid., p.~61})\footnote{
+    In~\cite[]{KMS14}, Kasurinen et~al.\ explore whether requirements management, which is rooted in engineering, has a place in game development, a field strongly influenced by creative processes. They show that some requirements are consciously derived through \textit{user testing}. Accordingly, games user research has become an important branch of the games industry that helps developers understand and improve the player experience (\cite[p.~26]{Zam18}). Further discussions regarding software engineering in game development can be found in Kanode and Haddad~\cite[]{KH09}.
+}, allowing for the contribution of original creative ideas.\\
 
 \subsection{Schedule}
 
-The schedule and associated milestones are shown in Table~\ref{tab:schedule}.
-The timeline serves as a guideline for implementation; the sequential order does not imply a waterfall process.
+The schedule and associated milestones are presented in Table~\ref{tab:schedule}.
+The timeline serves as a guideline for implementation; the sequential listing does not imply a waterfall model.
 
 \setlength{\tabcolsep}{8pt}
 \begin{table}[t]
@@ -53,30 +50,28 @@ The timeline serves as a guideline for implementation; the sequential order does
             \toprule
             \textbf{Milestone} & \textbf{Date} & \textbf{Content} \\
             \midrule
-            \texttt{milestone\_1} & 20 Oct 2025 &
+            \texttt{milestone\_1} & 2025-10-20 &
             Provision of the application layer, including implementation of the event system,
-            the input manager, and integration with the low-level API layer. \\
-            \texttt{milestone\_2} & 17 Nov 2025 &
+            the input manager, and connection to the low-level API subsystem. \\
+            \texttt{milestone\_2} & 2025-11-17 &
             Provision of the rendering engine; initial design of the playing field, including display of the player's ship. \\
-            \texttt{milestone\_3} & 22 Dec 2025 &
-            Implementation of physics and player input for ship control; firing mechanics. \\
-            \texttt{milestone\_4} & 19 Jan 2026 &
+            \texttt{milestone\_3} & 2025-12-22 &
+            Implementation of physics and player input for ship control; fire mechanics. \\
+            \texttt{milestone\_4} & 2026-01-19 &
             Implementation of the core game rules and mechanics; playable prototype. \\
-            \texttt{milestone\_5} & 09 Feb 2026 &
-            Prototype refinement and fine-tuning. \\
-            \texttt{milestone\_6} & 16 Mar 2026 &
-            Submission of documentation and project presentation. \\
+            \texttt{milestone\_5} & 2026-02-09 &
+            Provision of the prototype; fine-tuning. \\
+            \texttt{milestone\_6} & 2026-03-16 &
+            Submission of documentation and presentation of the project. \\
             \bottomrule
         \end{tabularx}}
     \caption{Planned milestones for the implementation of the \textit{Geometry Wars} clone.
-    At the time of publication of this document, the first milestone has been completed:
-    \textit{helios} already provides simple window management, rudimentary input processing,
-        a logging system, and a functional rendering layer interfacing with the OpenGL API.}
+    At the time of publication of this document, the first milestone has been completed: \textit{helios} already provides simple window management, rudimentary input processing, a logging system, and a functional rendering layer with a connection to the OpenGL API.}
     \label{tab:schedule}
 \end{table}
 
 \noindent
-Since the gameplay concept to be implemented is already specified, no preliminary prototyping is required.
-The current development phase is classified as the \textit{hard-architecture design} phase, following Rollings and Morris~\cite[628]{RM04}.
+Since the game concept to be implemented is already defined, there is no need for an exploratory prototype phase.
+The current stage of development can be classified as the \textit{hard-architecture design} phase, following Rollings and Morris~\cite[628]{RM04}.
 
-The project is published on GitHub under the MIT license; both the source code and the issue tracker are publicly accessible~\cite[]{heliosgithub}.
+The project is published under the MIT license on GitHub, with both the source code and the issue tracker publicly accessible~\cite[]{heliosgithub}.

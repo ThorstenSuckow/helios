@@ -74,6 +74,20 @@ export namespace helios::math {
 
     };
 
+    /**
+     * @brief Computes the dot product of two 2D vectors.
+     *
+     * @tparam T The numeric type of the vector components.
+     * @param v1 The first vec2<T> vector.
+     * @param v2 The second vec2<T> vector.
+     *
+     * @return A new vec2<T> instance representing the dot product.
+     */
+    template<helios::math::Numeric T>
+    constexpr float dot(const vec2<T>& x, const vec2<T>& y) noexcept {
+        return x[0]*y[0] + x[1]*y[1];
+    }
+
     using vec2f = vec2<float>;
     using vec2d = vec2<double>;
     using vec2i = vec2<int>;

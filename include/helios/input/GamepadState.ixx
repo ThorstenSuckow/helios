@@ -32,14 +32,18 @@ export namespace helios::input {
      * For convenient access of the axis in 2D coordinates, the class provides accessors
      * to the sticks' axes in vec2f-form.
      *
+     * @note  It should be emphasized that implementing APIs must account for
+     * joystick **drift**: Achieving 0.00 for x/y-axis
+     * when no (human) input occurred is probably rare. Consider adding a dead zone
+     * in your game when processing the GamepadState.
+     * Also, axis values are individually clipped to [-1.0, 1.0], but the magnitude of the
+     * resulting (x, y) vector may exceed 1.0. Applications should normalize input vectors
+     * where appropriate and possibly offer calibration.
+     *
      * This implementation is heavily inspired by the glfw-implementation
      * of the gamepad input state.
      * @see https://www.glfw.org/docs/latest/input_guide.html#joystick
      *
-     *  @Note
-     *  It should be emphasized that implementing APIs must account for
-     *  joystick **drift**: Achieving 0.00 for both the x- as well as the y-axis
-     *  when no (human) input occurred is probably rare.
      */
     class GamepadState {
 

@@ -1,9 +1,9 @@
 \section{Introduction}
 
-We are developing a \textit{Geometry Wars}\footnote{See~\cite[]{WikipediaGeometryWars}} clone in~C++.
-In doing so, we partly base our implementation on a widely used game engine architecture described by Gregory in~\cite[]{Gre19}, while deliberately reducing the number of abstraction layers and omitting systems such as tooling, sound, and scripting (cf.~\cite[Figure~1.16, p.~39]{Gre19}).
-The technical foundation therefore resembles a framework rather than a complete engine.
-The actual game - conceived as a \textit{black box}~\cite[]{RB88} - is intended to use the framework's interfaces to access the required hardware and other subsystems.
+We are developing a \textit{Geometry Wars}\footnote{See~\cite[]{WikipediaGeometryWars}} clone in C++.
+Our implementation is partly based on the widely used game engine architecture described by Gregory~\cite[]{Gre19}, although we deliberately reduce the number of abstraction layers and omit systems such as tooling, sound, and scripting (cf.~\cite[Figure~1.16, 39]{Gre19}).
+The resulting technical foundation therefore resembles a framework rather than a full-fledged engine.
+The actual game - as a \textit{black box}~\cite[]{RB88} - is designed to use this framework’s interfaces to access hardware and other subsystems.
 
 \begin{figure}[tbp]
     \centering
@@ -12,14 +12,16 @@ The actual game - conceived as a \textit{black box}~\cite[]{RB88} - is intended 
     \label{fig:helios_logo}
 \end{figure}
 
-The following sections present the architecture of the framework, referred to as \textbf{helios}\footnote{
-    Helios, who “looks sharply about with shining eyes” (\textit{Homers Ilias}, Gesang~14, own translation), is the sun god in Greek mythology.
-}, and discuss its prototypical development stage.
-The software is being created within an agile \textit{Tracer Bullet Development} process~\cite[pp.~50~f.]{TH20}, which allows the entire system to be adapted at short notice if necessary.
-From this, the architectural requirements are derived.
-The project data and objectives are presented separately in Section~\ref{sec:projectdata}.
+The following sections present the architecture of the framework referred to as \textbf{helios}\footnote{
+    Helios, who ``looks around sharply with shining eyes`` (\textit{Homers Ilias}, Gesang 14, own translation), is the sun god in Greek mythology.
+}.
+We explicitly take into account its prototypical development status:
+the software is being created as part of an agile \textit{Tracer Bullet Development} process~\cite[pp.~50]{TH20}, allowing the entire system to be adapted on short notice if necessary.
+Requirements for the architecture are derived accordingly.
+Project data and objectives are presented separately in Section~\ref{sec:projectdata}.
 
-Furthermore, we discuss challenges and difficulties encountered during implementation.
-These arise, among other factors, from the fact that the software - to be developed within a comparatively short time frame - is evaluated not only according to objective measures (such as the number of defects, software design choices, or object coupling), but also according to subjective criteria~\cite[385]{Bal08}.
-Although there are no plans to classify the finished product according to usability quality characteristics such as ISO/IEC~9126\footnote{Usability quality according to ISO/IEC~9126,~\cite[466]{Bal08}; see also studies and investigations in~\cite[]{AZMK17} and~\cite[]{Ber10}.}, the result should not only be technically sound but also pleasant to use.
-We summarize this user experience in general terms using the expression \textit{game feel}~\cite[]{Swi08}, established in contemporary game development.
+We also address the problems and challenges encountered during the implementation so far.
+These arise, among other things, from the fact that the software product - developed within a comparatively short time frame - is to be evaluated not only on the basis of objective measures (such as the number of defects, software design decisions, or the degree of object coupling) but also on the basis of subjective criteria~\cite[385]{Bal08}.
+Although there are no plans to classify the finished product according to usability quality characteristics such as those defined in ISO/IEC 9126\footnote{``Usability quality according to ISO/IEC 9126''~\cite[466]{Bal08}; see also studies and investigations in~\cite[]{AZMK17},~\cite[]{Ber10}.},
+the result should not only be technically robust but also enjoyable to use.
+In the following, we summarize this user experience in the more informal but established term \textit{game feel}~\cite[]{Swi08}, widely used in game development.

@@ -6,6 +6,7 @@ module;
 
 export module helios.math.types:vec3;
 
+import :vec2;
 import helios.math.concepts;
 
 export namespace helios::math {
@@ -57,6 +58,14 @@ export namespace helios::math {
          */
         constexpr explicit vec3(const T v) noexcept : v{v, v, v} {}
 
+        /**
+         * @brief Constructs a new vec3 with x,y components initialized to those of the vec2
+         * and vec3 set to 0.
+         *
+         * @param v The vec2 to use for the x,y components.
+         *
+         */
+        constexpr explicit vec3(const helios::math::vec2<T> v) noexcept : v{v[0], v[1],  static_cast<T>(0)} {}
 
         /**
          * @brief Provides read only access to the vector components.

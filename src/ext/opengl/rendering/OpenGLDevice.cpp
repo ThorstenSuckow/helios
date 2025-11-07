@@ -1,18 +1,39 @@
 module;
 
-#include <iostream>
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
+#include <iostream>
+#include <optional>
 
 module helios.ext.opengl.rendering.OpenGLDevice;
 
 import helios.ext.opengl.rendering.model.OpenGLMesh;
+import helios.rendering.model.config.MeshConfig;
+import helios.rendering.model.config.PrimitiveTopology;
+
 
 using namespace helios::util;
 using namespace helios::ext::opengl::rendering::model;
+using namespace helios::rendering::model::config;
 
 
 namespace helios::ext::opengl::rendering {
+
+    GLenum OpenGLDevice::toOpenGL(const PrimitiveTopology primitiveTopology) const noexcept {
+        switch (primitiveTopology) {
+            case PrimitiveTopology::Points: return GL_POINTS;
+            case PrimitiveTopology::Lines: return GL_LINES;
+            case PrimitiveTopology::LineLoop: return GL_LINE_LOOP;
+            case PrimitiveTopology::LineStrip: return GL_LINE_STRIP;
+            case PrimitiveTopology::Triangles: return GL_TRIANGLES;
+            case PrimitiveTopology::TriangleStrip: return GL_TRIANGLE_STRIP;
+            case PrimitiveTopology::TriangleFan: return GL_TRIANGLE_FAN;
+            default:
+                logger_.warn("Failed to resolve primitive type, falling back to GL_TRIANGLES.");
+                return GL_TRIANGLES;
+        }
+
+    }
 
     void OpenGLDevice::init() {
 
@@ -55,20 +76,27 @@ namespace helios::ext::opengl::rendering {
         logger_.info(std::format("Rendering {0} item(s)...", renderQueue.count()));
 
         for (auto& rc: renderQueue.renderCommands()) {
+
             if (const auto shader_ptr = rc->shader().lock()) {
                 logger_.info("activating shader...");
                 shader_ptr->use();
                 shader_ptr->applyUniformValues(rc->objectUniformValues());
                 shader_ptr->applyUniformValues(rc->materialUniformValues());
             }
+
             if (const auto mesh_ptr = rc->mesh().lock()) {
                 const auto mesh =  std::dynamic_pointer_cast<const OpenGLMesh>(mesh_ptr);
+                const auto [primitiveTopology] = mesh->meshData().meshConfig();
+
                 logger_.info(std::format("Binding vao {0}", mesh->vao()));
                 glBindVertexArray(mesh->vao());
-
-                glDrawElements(GL_LINE_LOOP,
+                glEnable(GL_BLEND);
+                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+                glDrawElements(
+                    toOpenGL(primitiveTopology),
                     mesh_ptr->indexCount() ,
-                    GL_UNSIGNED_INT, nullptr
+                    GL_UNSIGNED_INT,
+                    nullptr
                 );
                 glBindVertexArray(0);
             }

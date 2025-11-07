@@ -11,6 +11,7 @@ import helios.util.log.LogManager;
 import helios.util.log.Logger;
 import helios.rendering.Vertex;
 import helios.rendering.asset.shape.Shape;
+import helios.rendering.model.config.MeshConfig;
 
 
 #define HELIOS_LOG_SCOPE "helios::rendering::model::MeshData"
@@ -31,6 +32,11 @@ export namespace helios::rendering::model {
          * @brief Shared pointer to the raw, immutable indices.
          */
         std::shared_ptr<const std::vector<unsigned int>> indices_ = nullptr;
+
+        /**
+          * @brief Shared pointer to the MeshConfig used with this MeshData.
+          */
+        std::shared_ptr<const helios::rendering::model::config::MeshConfig> meshConfig_;
 
         /**
          * @todo
@@ -58,12 +64,14 @@ export namespace helios::rendering::model {
          *
          * @param vertices A shared pointer to a vector of const Vertex
          * @param indices A shared pointer to a vector of indices
+         * @param meshConfig A shared ptr to the const MeshConfig used with this MeshData.
          *
-         * @throws std::invalid_argument if either "vertices" or "indices" is a null shared pointer
+         * @throws std::invalid_argument if either "vertices", "indices" or meshConfig is a null shared pointer
          */
         explicit MeshData(
             std::shared_ptr<const std::vector<Vertex>> vertices,
-            std::shared_ptr<const std::vector<unsigned int>> indices
+            std::shared_ptr<const std::vector<unsigned int>> indices,
+            std::shared_ptr<const helios::rendering::model::config::MeshConfig> meshConfig
         );
 
 
@@ -71,10 +79,15 @@ export namespace helios::rendering::model {
          * @brief Creates a new MeshData instance from the specified Shape.
          *
          * @param shape A const reference to the Shape.
+         * @param meshConfig A shared ptr to the const MeshConfig used with this MeshData.
          *
-         * @throws std::invalid_argument if either "vertices" or "indices" is a null shared pointer
+         * @throws std::invalid_argument if meshConfig is a null shared pointer, or if the
+         * shape contained null data
          */
-        explicit MeshData(const helios::rendering::asset::shape::Shape& shape);
+        explicit MeshData(
+            const helios::rendering::asset::shape::Shape& shape,
+            std::shared_ptr<const helios::rendering::model::config::MeshConfig> meshConfig
+        );
 
 
         /**
@@ -93,6 +106,13 @@ export namespace helios::rendering::model {
          */
         [[nodiscard]] const std::vector<unsigned int>& indices() const noexcept;
 
+        /**
+         * @brief Returns a const reference to MeshConfig used with this MeshData.
+         * The returned MeshConfig is guaranteed to be a valid reference to existing data.
+         *
+         * @return The MeshConfig used with this MeshData.
+         */
+        [[nodiscard]] const helios::rendering::model::config::MeshConfig& meshConfig() const noexcept;
     };
 
 }

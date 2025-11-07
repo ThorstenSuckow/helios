@@ -16,6 +16,8 @@ import helios.rendering.RenderQueue;
 import helios.rendering.RenderPassFactory;
 import helios.rendering.model.MaterialData;
 import helios.rendering.model.MeshData;
+import helios.rendering.model.config.MeshConfig;
+import helios.rendering.model.config.PrimitiveTopology;
 import helios.rendering.asset.shape.basic.Cube;
 
 import helios.util.io.BasicStringFileReader;
@@ -38,6 +40,7 @@ import helios.math;
 using namespace helios::ext::glfw::app;
 using namespace helios::rendering;
 using namespace helios::rendering::model;
+using namespace helios::rendering::model::config;
 using namespace helios::rendering::shader;
 using namespace helios::ext::opengl::rendering;
 using namespace helios::ext::opengl::rendering::shader;
@@ -81,8 +84,10 @@ int main() {
 
     auto cube = Cube{};
 
-
-    auto meshData = std::make_shared<const MeshData>(cube);
+    auto meshConfig = std::make_shared<const MeshConfig>(
+        PrimitiveTopology::LineLoop
+    );
+    auto meshData = std::make_shared<const MeshData>(cube, meshConfig);
     auto mesh_ptr = std::make_shared<OpenGLMesh>(meshData);
     auto cubeRenderable = std::make_shared<OpenGLRenderable>(
         std::move(mesh_ptr), std::move(material_ptr)
@@ -114,13 +119,17 @@ int main() {
             std::cout << "Key Pressed [ESC]" << std::endl;
             win->setShouldClose(true);
         }
-        rad = helios::math::radians(degrees+=2.25);
+        degrees+=2.25f;
+        if (degrees >= 360.0f) {
+            degrees -= 360.0f;
+        }
+
+        rad = helios::math::radians(degrees);
         cubeNode->rotate(helios::math::rotate(
         helios::math::mat4f::identity(),
             rad,
         helios::math::vec3f(0.4f, 0.6, 0.2f)
         ));
-        degrees = degrees > 360 ? 0 : degrees;
 
         // create the snapshot of the scene for the rendering pass
         const auto& snapshot = scene->createSnapshot(*camera);

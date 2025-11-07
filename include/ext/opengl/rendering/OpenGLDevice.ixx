@@ -1,11 +1,14 @@
 module;
 
+#include <glad/gl.h>
+
 export module helios.ext.opengl.rendering.OpenGLDevice;
 
 import helios.math.types;
 import helios.rendering.RenderingDevice;
 import helios.rendering.RenderQueue;
 import helios.rendering.RenderPass;
+import helios.rendering.model.config.PrimitiveTopology;
 
 export namespace helios::ext::opengl::rendering {
 
@@ -13,6 +16,21 @@ export namespace helios::ext::opengl::rendering {
      * @brief OpenGL RenderingDevice representative.
      */
     class OpenGLDevice : public  helios::rendering::RenderingDevice {
+
+        /**
+         * @brief Translates helios abstract PrimitiveTopology enum to its corresponding
+         * OpenGL GLenum value.
+         *
+         * This ia a utility function used exclusively by the OpenGLDevice to interpret the
+         * API-agnostic primitive type requested by the helios' configuration.
+         *
+         * @param primitiveTopology The API-agnostic PrimitiveTopology value.
+         *
+         * @return The corresponding OpenGL primitive type as a GLenum. If mapping didn't
+         * succeed, the function falls back to GL_TRIANGLES.
+         */
+        [[nodiscard]] GLenum toOpenGL(helios::rendering::model::config::PrimitiveTopology primitiveTopology) const noexcept;
+
 
     public:
         ~OpenGLDevice() override = default;

@@ -10,6 +10,7 @@ using namespace helios::rendering;
 import helios.rendering.model;
 
 using namespace helios::rendering::model;
+using namespace helios::rendering::model::config;
 using namespace helios::rendering;
 
 class MyMesh : public Mesh {
@@ -33,8 +34,9 @@ TEST(MeshTest, data) {
     auto indices_ptr =  std::make_shared<std::vector<unsigned int>>(
         std::vector<unsigned int>{1, 2, 3}
     );
+    auto meshConfig = std::make_shared<const MeshConfig>();
 
-    auto meshData_ptr = std::make_shared<const MeshData>(vertices_ptr, indices_ptr);
+    auto meshData_ptr = std::make_shared<const MeshData>(vertices_ptr, indices_ptr, meshConfig);
 
     auto mesh = MyMesh{meshData_ptr};
 

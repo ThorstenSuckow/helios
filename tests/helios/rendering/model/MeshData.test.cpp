@@ -5,6 +5,7 @@ import helios.rendering.Vertex;
 import helios.rendering.model;
 
 using namespace helios::rendering::model;
+using namespace helios::rendering::model::config;
 using namespace helios::rendering;
 
 TEST(MeshDataTest, data) {
@@ -15,8 +16,9 @@ TEST(MeshDataTest, data) {
     auto indices_ptr =  std::make_shared<std::vector<unsigned int>>(
         std::vector<unsigned int>{1, 2, 3}
     );
+    auto meshConfig = std::make_shared<const MeshConfig>();
 
-    auto meshData = MeshData(std::move(vertices_ptr), std::move(indices_ptr));
+    const auto meshData = MeshData(std::move(vertices_ptr), std::move(indices_ptr), meshConfig);
 
     EXPECT_EQ(meshData.vertices().size(), 1);
 

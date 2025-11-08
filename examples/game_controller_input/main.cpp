@@ -91,19 +91,25 @@ int main() {
     auto lineMeshConfig = std::make_shared<const helios::rendering::model::config::MeshConfig>(
         helios::rendering::model::config::PrimitiveType::Lines
     );
+
+    auto circleBaseColor = helios::math::vec4f(1.0f, 0.0f, 1.0f, 0.5f);
+    auto lineBaseColor   = helios::math::vec4f(1.0f, 1.0f, 1.0f, 1.0f);
+
     auto circleShape      = helios::rendering::asset::shape::basic::Circle();
     auto meshData         = std::make_shared<helios::rendering::model::MeshData>(circleShape, circleMeshConfig);
     auto mesh             = std::make_shared<helios::ext::opengl::rendering::model::OpenGLMesh>(meshData);
-    auto materialData     = std::make_shared<helios::rendering::model::MaterialData>(helios::math::vec4f(1.0f, 0.0f, 1.0f, 0.5f));
+    auto materialData     = std::make_shared<helios::rendering::model::MaterialData>(circleBaseColor);
     auto material         = std::make_unique<helios::rendering::model::Material>(shader, materialData);
     auto circleRenderable = std::make_shared<helios::ext::opengl::rendering::OpenGLRenderable>(mesh, std::move(material));
 
     auto lineShape        = helios::rendering::asset::shape::basic::Line();
     auto lineMeshData     = std::make_shared<helios::rendering::model::MeshData>(lineShape, lineMeshConfig);
     auto lineMesh         = std::make_shared<helios::ext::opengl::rendering::model::OpenGLMesh>(lineMeshData);
-    auto lineMaterialData = std::make_shared<helios::rendering::model::MaterialData>(helios::math::vec4f(1.0f, 1.0f, 1.0f, 1.0f));
+    auto lineMaterialData = std::make_shared<helios::rendering::model::MaterialData>(lineBaseColor);
     auto lineMaterial     = std::make_unique<helios::rendering::model::Material>(shader, lineMaterialData);
     auto lineRenderable   = std::make_shared<helios::ext::opengl::rendering::OpenGLRenderable>(lineMesh, std::move(lineMaterial));
+
+
 
 
     // ------------------------------
@@ -117,13 +123,24 @@ int main() {
     assert(camera_ptr != nullptr && "unexpected nullptr for circleNode");
 
     // scene nodes
-    const auto circleNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>(circleRenderable));
-    assert(circleNode_ptr != nullptr && "unexpected nullptr for circleNode");
+    // left stick
+    float scalingFactor = 1.0f/5.0f;
 
-    auto lineNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>(lineRenderable));
-    assert(lineNode_ptr != nullptr && "unexpected nullptr for lineNode");
+    const auto stickLeftNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>(circleRenderable));
+    assert(stickLeftNode_ptr != nullptr && "unexpected nullptr for stickLeftNode_ptr");
+    auto stickAxisLeft_ptr = stickLeftNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(lineRenderable));
+    assert(stickAxisLeft_ptr != nullptr && "unexpected nullptr for stickAxisLeft_ptr");
+    stickLeftNode_ptr->scale(helios::math::vec3f(scalingFactor, scalingFactor, 0.0f));
+    stickLeftNode_ptr->translate(helios::math::vec3f(-0.5f, 0.0f, 0.0f));
 
-
+    // right stick
+    const auto stickRightNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>(circleRenderable));
+    assert(stickRightNode_ptr != nullptr && "unexpected nullptr for stickRightNode_ptr");
+    auto stickAxisRight_ptr = stickRightNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(lineRenderable));
+    assert(stickAxisRight_ptr != nullptr && "unexpected nullptr for stickAxisRight_ptr");
+    stickRightNode_ptr->scale(helios::math::vec3f(scalingFactor, scalingFactor, 0.0f));
+    stickRightNode_ptr->translate(helios::math::vec3f(0.0f, 0.0f, 0.0f));
+    
     // ------------------------------
     //  Input
     // ------------------------------
@@ -132,6 +149,11 @@ int main() {
     unsigned int mask = inputManager.registerGamepads(Gamepad::ONE);
     assert(mask == 1 && "unexpected return value for mask");
 
+    // ------------------------------
+    //  Logging
+    // ------------------------------
+    // disable logging
+    helios::util::log::LogManager::getInstance().enableLogging(false);
 
     // game loop
     while (!win->shouldClose()) {
@@ -143,7 +165,6 @@ int main() {
             std::cout << "Key Pressed [ESC]" << std::endl;
             win->setShouldClose(true);
         }
-
 
         const GamepadState& gamepadState = inputManager.gamepadState(Gamepad::ONE);
         const float leftTrigger = gamepadState.triggerLeft();
@@ -160,7 +181,8 @@ int main() {
             leftTrigger, rightTrigger
         ) << std::flush;
 
-        lineNode_ptr->scale(helios::math::vec3f(gamepadState.left()));
+        stickAxisLeft_ptr->scale(helios::math::vec3f(gamepadState.left()));
+        stickAxisRight_ptr->scale(helios::math::vec3f(gamepadState.right()));
 
         auto snapshot = scene.createSnapshot(dynamic_cast<helios::scene::Camera&>(*camera_ptr));
         auto renderPass = helios::rendering::RenderPassFactory::getInstance().buildRenderPass(snapshot);

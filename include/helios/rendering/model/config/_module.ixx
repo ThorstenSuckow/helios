@@ -9,4 +9,6 @@ module;
 export module helios.rendering.model.config;
 
 export import helios.rendering.model.config.MeshConfig;
+export import helios.rendering.model.config.MaterialProperties;
+export import helios.rendering.model.config.MaterialPropertiesOverride;
 export import helios.rendering.model.config.PrimitiveType;

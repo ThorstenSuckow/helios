@@ -23,6 +23,10 @@ export namespace helios::rendering {
      *
      * A Renderable is an aggregate consisting of Material and a Mesh, providing
      * geometric primitives and material information.
+     *
+     * @todo a Renderable should be configured with optional, selected overrides for the
+     * associated mesh/material, so that for the used shared mesh/material objects, individual
+     * draw configs are possible.
      */
     class Renderable {
 

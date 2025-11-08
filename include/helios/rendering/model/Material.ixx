@@ -55,7 +55,7 @@ export namespace helios::rendering::model {
          * this instance.
          * @param materialProperties A  shared pointer to the MaterialProperties for this Material.
          *
-         * @throws std::invalid_argument if shader or materialConfig is a null shared pointer.
+         * @throws std::invalid_argument if shader or materialProperties is a null shared pointer.
          */
         explicit Material(
             std::shared_ptr<const helios::rendering::shader::Shader> shader,

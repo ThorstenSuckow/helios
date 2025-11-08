@@ -34,7 +34,7 @@ namespace helios::rendering::model {
     }
 
 
-    const MaterialProperties&  Material::materialProperties() const noexcept {
+    const MaterialProperties& Material::materialProperties() const noexcept {
         return *materialProperties_;
     }
 

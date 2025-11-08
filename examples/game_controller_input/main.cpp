@@ -28,9 +28,11 @@ import helios.ext.opengl.rendering.shader.OpenGLUniformLocationMap;
 import helios.rendering.shader.UniformSemantics;
 import helios.ext.opengl.rendering.model.OpenGLMesh;
 import helios.ext.opengl.rendering.OpenGLRenderable;
-import helios.rendering.model.MaterialData;
+import helios.rendering.model.MaterialInstance;
 import helios.rendering.model.Material;
 import helios.rendering.model.config.MeshConfig;
+import helios.rendering.model.config.MaterialProperties;
+import helios.rendering.model.config.MaterialPropertiesOverride;
 import helios.rendering.model.config.PrimitiveType;
 import helios.rendering.RenderPassFactory;
 import helios.ext.opengl.rendering.OpenGLDevice;
@@ -91,20 +93,28 @@ int main() {
         helios::rendering::model::config::PrimitiveType::Lines
     );
 
-    auto circleBaseColor = helios::math::vec4f(1.0f, 0.0f, 1.0f, 0.5f);
-    auto lineBaseColor   = helios::math::vec4f(1.0f, 1.0f, 1.0f, 1.0f);
+    auto circleMaterialConfig = std::make_shared<helios::rendering::model::config::MaterialProperties>(
+        helios::math::vec4f(1.0f, 0.0f, 1.0f, 0.5f)
+    );
+    auto lineMaterialConfig = std::make_shared<helios::rendering::model::config::MaterialProperties>(
+        helios::math::vec4f(1.0f, 1.0f, 1.0f, 1.0f)
+    );
 
-    auto circleShape      = helios::rendering::asset::shape::basic::Circle();
-    auto mesh             = std::make_shared<helios::ext::opengl::rendering::model::OpenGLMesh>(circleShape, circleMeshConfig);
-    auto materialData     = std::make_shared<helios::rendering::model::MaterialData>(circleBaseColor);
-    auto material         = std::make_unique<helios::rendering::model::Material>(shader, materialData);
-    auto circleRenderable = std::make_shared<helios::ext::opengl::rendering::OpenGLRenderable>(mesh, std::move(material));
+    auto circleShape             = helios::rendering::asset::shape::basic::Circle();
+    auto circleMesh             = std::make_shared<helios::ext::opengl::rendering::model::OpenGLMesh>(circleShape, circleMeshConfig);
+    auto circleMaterial         = std::make_shared<helios::rendering::model::Material>(shader, circleMaterialConfig);
+    auto circleMaterialInstance = std::make_shared<helios::rendering::model::MaterialInstance>(circleMaterial);
+    auto circleRenderable       = std::make_shared<helios::ext::opengl::rendering::OpenGLRenderable>(
+        circleMesh, circleMaterialInstance
+    );
 
-    auto lineShape        = helios::rendering::asset::shape::basic::Line();
-    auto lineMesh         = std::make_shared<helios::ext::opengl::rendering::model::OpenGLMesh>(lineShape, lineMeshConfig);
-    auto lineMaterialData = std::make_shared<helios::rendering::model::MaterialData>(lineBaseColor);
-    auto lineMaterial     = std::make_unique<helios::rendering::model::Material>(shader, lineMaterialData);
-    auto lineRenderable   = std::make_shared<helios::ext::opengl::rendering::OpenGLRenderable>(lineMesh, std::move(lineMaterial));
+    auto lineShape            = helios::rendering::asset::shape::basic::Line();
+    auto lineMesh             = std::make_shared<helios::ext::opengl::rendering::model::OpenGLMesh>(lineShape, lineMeshConfig);
+    auto lineMaterial         = std::make_shared<helios::rendering::model::Material>(shader, lineMaterialConfig);
+    auto lineMaterialInstance = std::make_shared<helios::rendering::model::MaterialInstance>(lineMaterial);
+    auto lineRenderable       = std::make_shared<helios::ext::opengl::rendering::OpenGLRenderable>(
+        lineMesh, std::move(lineMaterialInstance)
+    );
 
 
 

@@ -17,6 +17,11 @@ export namespace helios::util::log {
     private:
         const std::string scope_ = "default";
 
+        /**
+         * @brief flag to indicate whether this Logger's output is enabled.
+         */
+        bool enabled_ = true;
+
     public:
         /**
          * @brief Creates a new Logger, tagged with specific scope.
@@ -26,13 +31,23 @@ export namespace helios::util::log {
         explicit Logger(std::string scope) :
             scope_(std::move(scope)) {}
 
+
+        /**
+         * @brief Enables/disables log output for this Logger-instance.
+         *
+         * @param enable true to enable this log output, false to disable.
+         */
+        void enable(const bool enable) noexcept {
+            enabled_ = enable;
+        }
+
         /**
          * @brief Couts a warning.
          *
          * @param msg
          */
         void inline warn(const std::string& msg) const noexcept{
-            std::cout << "[WARN]" << "[" << scope_ << "] " << msg << std::endl;
+            enabled_ && std::cout << "[WARN]" << "[" << scope_ << "] " << msg << std::endl;
         }
 
 
@@ -42,7 +57,7 @@ export namespace helios::util::log {
          * @param msg
          */
         void inline debug(const std::string& msg) const noexcept {
-            std::cout << "[DEBUG]" << "[" << scope_ << "] " << msg << std::endl;
+            enabled_ && std::cout << "[DEBUG]" << "[" << scope_ << "] " << msg << std::endl;
         }
 
 
@@ -52,7 +67,7 @@ export namespace helios::util::log {
          * @param msg
          */
         void inline info(const std::string& msg)  const noexcept{
-            std::cout << "[INFO]" << "[" << scope_ << "] " << msg << std::endl;
+            enabled_ && std::cout << "[INFO]" << "[" << scope_ << "] " << msg << std::endl;
         }
 
 
@@ -62,7 +77,7 @@ export namespace helios::util::log {
          * @param msg
          */
         void inline error(const std::string& msg) const noexcept {
-            std::cout << "[ERROR]" << "[" << scope_ << "] " << msg << std::endl;
+            enabled_ && std::cout << "[ERROR]" << "[" << scope_ << "] " << msg << std::endl;
         }
 
     };

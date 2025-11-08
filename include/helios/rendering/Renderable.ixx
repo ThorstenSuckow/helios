@@ -7,7 +7,7 @@ module;
 export module helios.rendering.Renderable;
 
 import helios.rendering.model.Mesh;
-import helios.rendering.model.Material;
+import helios.rendering.model.MaterialInstance;
 
 
 import helios.math.types;
@@ -23,6 +23,10 @@ export namespace helios::rendering {
      *
      * A Renderable is an aggregate consisting of Material and a Mesh, providing
      * geometric primitives and material information.
+     *
+     * @todo a Renderable should be configured with optional, selected overrides for the
+     * associated mesh/material, so that for the used shared mesh/material objects, individual
+     * draw configs are possible.
      */
     class Renderable {
 
@@ -35,9 +39,9 @@ export namespace helios::rendering {
         std::shared_ptr<helios::rendering::model::Mesh> mesh_ = nullptr;
 
         /**
-         * @brief A unique pointer to the Material owned by the Renderable.
+         * @brief A shared pointer to the MaterialInstance owned by the Renderable.
          */
-        std::unique_ptr<helios::rendering::model::Material> material_ = nullptr;
+        std::shared_ptr<helios::rendering::model::MaterialInstance> materialInstance_ = nullptr;
 
         /**
          * @brief The logger used with this Renderable instance.
@@ -78,13 +82,13 @@ export namespace helios::rendering {
          * @brief Creates a new Renderable instance.
          *
          * @param mesh A shared pointer to the Mesh associated with this Renderable.
-         * @param material A unique pointer to the Material owned by this Renderable.
+         * @param materialInstance A shared pointer to the MaterialInstance owned by this Renderable.
          *
          * @throws std::invalid_argument if either mesh or material are null.
          */
         explicit Renderable(
             std::shared_ptr<helios::rendering::model::Mesh> mesh,
-            std::unique_ptr<helios::rendering::model::Material> material);
+            std::shared_ptr<helios::rendering::model::MaterialInstance> materialInstance);
 
 
         /**
@@ -97,12 +101,12 @@ export namespace helios::rendering {
 
 
         /**
-         * @brief Returns a const reference to the Material owned by this Renderable.
+         * @brief Returns a const reference to the Material shared with this Renderable.
          * The returned data is guaranteed to be a valid reference to existing data.
          *
-         * @return Material
+         * @return MaterialInstance
          */
-        [[nodiscard]] const helios::rendering::model::Material& material() const noexcept;
+        [[nodiscard]] const helios::rendering::model::MaterialInstance& materialInstance() const noexcept;
 
 
     };

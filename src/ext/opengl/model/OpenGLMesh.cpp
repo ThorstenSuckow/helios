@@ -32,18 +32,59 @@ namespace helios::ext::opengl::rendering::model {
     }
 
 
-    OpenGLMesh::OpenGLMesh(std::shared_ptr<const MeshData> meshData)
+    OpenGLMesh::OpenGLMesh(
+        std::shared_ptr<const std::vector<helios::rendering::Vertex>> vertices,
+        std::shared_ptr<const std::vector<unsigned int>> indices,
+        std::shared_ptr<const helios::rendering::model::config::MeshConfig> meshConfig
+    )
        :
-        Mesh(std::move(meshData)),
+        Mesh(
+            std::move(vertices),
+            std::move(indices),
+            std::move(meshConfig)
+        ),
         vao_(generateGLVertexArray()),
         vbo_(generateGLBuffer()),
         ebo_(generateGLBuffer()) {
+
+        if (!vertices_ || !indices_ || !meshConfig_) {
+            const std::string msg = "Mesh constructor received a null shared pointer.";
+            logger_.error(msg);
+            throw std::invalid_argument(msg);
+        }
         /**
          * @todo this should not be part of the constructor,
          * instead, lazy init in render pass, then reuse.
          */
         OpenGLMesh::init();
     }
+
+
+    OpenGLMesh::OpenGLMesh(
+    const helios::rendering::asset::shape::Shape& shape,
+        std::shared_ptr<const helios::rendering::model::config::MeshConfig> meshConfig
+    )
+       :
+        Mesh(
+            shape,
+            std::move(meshConfig)
+        ),
+        vao_(generateGLVertexArray()),
+        vbo_(generateGLBuffer()),
+        ebo_(generateGLBuffer()) {
+
+            if (!vertices_ || !indices_ || !meshConfig_) {
+                const std::string msg = "Mesh constructor received a null shared pointer.";
+                logger_.error(msg);
+                throw std::invalid_argument(msg);
+            }
+
+            /**
+             * @todo this should not be part of the constructor,
+             * instead, lazy init in render pass, then reuse.
+             */
+            OpenGLMesh::init();
+        }
 
     OpenGLMesh::~OpenGLMesh() {
         glDeleteVertexArrays(1, &vao_);
@@ -53,24 +94,21 @@ namespace helios::ext::opengl::rendering::model {
 
     void OpenGLMesh::init() {
 
-        const std::vector<Vertex>& vertices = meshData_->vertices();
-        const std::vector<unsigned int>& indices = meshData_->indices();
-
         glBindVertexArray(vao_);
         glBindBuffer(GL_ARRAY_BUFFER, vbo_);
 
         glBufferData(
             GL_ARRAY_BUFFER,
-            vertices.size() * sizeof(Vertex),
-            &vertices[0],
+            vertices_->size() * sizeof(Vertex),
+            &(*vertices_)[0],
             GL_STATIC_DRAW
         );
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_);
         glBufferData(
             GL_ELEMENT_ARRAY_BUFFER,
-            indices.size() * sizeof(unsigned int),
-            &indices[0],
+            indices_->size() * sizeof(unsigned int),
+            &(*indices_)[0],
             GL_STATIC_DRAW
         );
 

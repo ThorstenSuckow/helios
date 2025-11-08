@@ -27,6 +27,22 @@ namespace helios::util::log {
     }
 
 
+    void LogManager::enableLogging(const bool enable) noexcept {
+        std::lock_guard<std::mutex> lock(mapMutex_);
+
+        if (loggingEnabled_ == enable) {
+            return;
+        }
+
+        loggingEnabled_ = enable;
+
+        for (auto& [fst, snd]: loggers_) {
+            snd->enable(enable);
+        }
+
+    }
+
+
     [[nodiscard]] const Logger& LogManager::logger(const std::string& scope) const noexcept {
         // mapMutex_ is automatically released when going out of scope
         std::lock_guard<std::mutex> lock(mapMutex_);
@@ -50,6 +66,7 @@ namespace helios::util::log {
 
         auto logger = std::make_unique<Logger>(scope);
         loggers_[scope] = std::move(logger);
+        loggers_[scope]->enable(loggingEnabled_);
         return *loggers_[scope];
     }
 };

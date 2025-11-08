@@ -20,7 +20,7 @@ namespace helios::rendering {
         mesh_(std::move(mesh)),
         materialInstance_(std::move(materialInstance)) {
         if (!mesh_ || !materialInstance_) {
-            const std::string msg = "Renderable constructor received a null unique pointer.";
+            const std::string msg = "Renderable constructor received a null shared pointer.";
             logger_.error(msg);
             throw std::invalid_argument(msg);
         }

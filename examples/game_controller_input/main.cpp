@@ -93,10 +93,10 @@ int main() {
         helios::rendering::model::config::PrimitiveType::Lines
     );
 
-    auto circleMaterialConfig = std::make_shared<helios::rendering::model::config::MaterialProperties>(
+    auto circleMaterialConfig = std::make_shared<const helios::rendering::model::config::MaterialProperties>(
         helios::math::vec4f(1.0f, 0.0f, 1.0f, 0.5f)
     );
-    auto lineMaterialConfig = std::make_shared<helios::rendering::model::config::MaterialProperties>(
+    auto lineMaterialConfig = std::make_shared<const helios::rendering::model::config::MaterialProperties>(
         helios::math::vec4f(1.0f, 1.0f, 1.0f, 1.0f)
     );
 

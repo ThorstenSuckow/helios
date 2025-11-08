@@ -21,7 +21,7 @@ export namespace helios::rendering::model {
      * for the provided Material.
      *
      * This class represents a specific instance of a Material, combining a base Material
-     * definition (including chader and default properties) with an optional MaterialPropertiesOverride
+     * definition (including shader and default properties) with an optional MaterialPropertiesOverride
      * that specializes the Material's appearance for a particular object or use case.
      * This allows for efficient customization while reusing common material logic.
      *

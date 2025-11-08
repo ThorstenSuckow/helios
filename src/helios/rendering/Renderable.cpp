@@ -16,10 +16,10 @@ namespace helios::rendering {
 
     Renderable::Renderable(
         std::shared_ptr<Mesh> mesh,
-        std::unique_ptr<Material> material) :
+        std::shared_ptr<MaterialInstance> materialInstance) :
         mesh_(std::move(mesh)),
-        material_(std::move(material)) {
-        if (!mesh_ || !material_) {
+        materialInstance_(std::move(materialInstance)) {
+        if (!mesh_ || !materialInstance_) {
             const std::string msg = "Renderable constructor received a null unique pointer.";
             logger_.error(msg);
             throw std::invalid_argument(msg);
@@ -32,8 +32,8 @@ namespace helios::rendering {
     };
 
 
-    [[nodiscard]] const Material& Renderable::material() const noexcept {
-        return *material_;
+    [[nodiscard]] const MaterialInstance& Renderable::materialInstance() const noexcept {
+        return *materialInstance_;
     };
 
 

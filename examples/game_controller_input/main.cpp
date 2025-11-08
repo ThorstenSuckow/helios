@@ -32,7 +32,7 @@ import helios.rendering.model.MaterialData;
 import helios.rendering.model.Material;
 import helios.rendering.model.MeshData;
 import helios.rendering.model.config.MeshConfig;
-import helios.rendering.model.config.PrimitiveTopology;
+import helios.rendering.model.config.PrimitiveType;
 import helios.rendering.RenderPassFactory;
 import helios.ext.opengl.rendering.OpenGLDevice;
 
@@ -55,7 +55,7 @@ using namespace helios::ext::glfw::window;
 int main() {
 
     const auto app = GLFWFactory::makeOpenGLApp(
-        "helios - Simple Cube Renderer"
+        "helios - Game Controller Input Demo"
     );
 
     auto win = dynamic_cast<GLFWWindow*>(app->current());
@@ -86,10 +86,10 @@ int main() {
 
     // set up mesh configs
     auto circleMeshConfig = std::make_shared<const helios::rendering::model::config::MeshConfig>(
-        helios::rendering::model::config::PrimitiveTopology::Triangles
+        helios::rendering::model::config::PrimitiveType::Triangles
     );
     auto lineMeshConfig = std::make_shared<const helios::rendering::model::config::MeshConfig>(
-        helios::rendering::model::config::PrimitiveTopology::Lines
+        helios::rendering::model::config::PrimitiveType::Lines
     );
     auto circleShape      = helios::rendering::asset::shape::basic::Circle();
     auto meshData         = std::make_shared<helios::rendering::model::MeshData>(circleShape, circleMeshConfig);

@@ -26,7 +26,7 @@ export namespace helios::rendering::model {
         Material() = default;
 
         /**
-         * @brief Shared pointer for the raw, immutable MaterialConfig.
+         * @brief Shared pointer for the raw, immutable MaterialProperties.
          */
         std::shared_ptr<const helios::rendering::model::config::MaterialProperties> materialProperties_;
 

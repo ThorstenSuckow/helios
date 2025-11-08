@@ -2,7 +2,7 @@ module;
 
 export module helios.rendering.model.config.MeshConfig;
 
-import helios.rendering.model.config.PrimitiveTopology;
+import helios.rendering.model.config.PrimitiveType;
 
 
 export namespace helios::rendering::model::config {
@@ -18,7 +18,7 @@ export namespace helios::rendering::model::config {
         /**
          * @brief Topology config for the draw call, e.g. setting the draw mode.
          */
-        PrimitiveTopology primitiveTopology = PrimitiveTopology::Triangles;
+        PrimitiveType primitiveType = PrimitiveType::Triangles;
 
     };
 }

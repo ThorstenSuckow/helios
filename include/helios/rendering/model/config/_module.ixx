@@ -9,4 +9,4 @@ module;
 export module helios.rendering.model.config;
 
 export import helios.rendering.model.config.MeshConfig;
-export import helios.rendering.model.config.PrimitiveTopology;
+export import helios.rendering.model.config.PrimitiveType;

@@ -113,7 +113,7 @@ int main() {
     auto lineMaterial         = std::make_shared<helios::rendering::model::Material>(shader, lineMaterialConfig);
     auto lineMaterialInstance = std::make_shared<helios::rendering::model::MaterialInstance>(lineMaterial);
     auto lineRenderable       = std::make_shared<helios::ext::opengl::rendering::OpenGLRenderable>(
-        lineMesh, std::move(lineMaterialInstance)
+        lineMesh, lineMaterialInstance
     );
 
 

@@ -16,8 +16,16 @@ using namespace helios::rendering;
 class MyMesh : public Mesh {
 
 public:
-    explicit MyMesh(std::shared_ptr<const MeshData> meshData) noexcept
-            : Mesh(std::move(meshData)) {}
+    explicit MyMesh(
+        std::shared_ptr<const std::vector<helios::rendering::Vertex>> vertices,
+        std::shared_ptr<const std::vector<unsigned int>> indices,
+        std::shared_ptr<const helios::rendering::model::config::MeshConfig> meshConfig
+        ) noexcept
+            : Mesh(
+                std::move(vertices),
+                std::move(indices),
+                std::move(meshConfig)
+            ) {}
 
 protected:
     void init() override {
@@ -36,10 +44,8 @@ TEST(MeshTest, data) {
     );
     auto meshConfig = std::make_shared<const MeshConfig>();
 
-    auto meshData_ptr = std::make_shared<const MeshData>(vertices_ptr, indices_ptr, meshConfig);
+    auto mesh = MyMesh{vertices_ptr, indices_ptr, meshConfig};
 
-    auto mesh = MyMesh{meshData_ptr};
-
-    EXPECT_EQ(meshData_ptr.get(), &mesh.meshData());
+    EXPECT_EQ(meshConfig.get(), &mesh.meshConfig());
 }
 

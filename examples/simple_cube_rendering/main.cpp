@@ -14,10 +14,11 @@ import helios.input.types.Key;
 
 import helios.rendering.RenderQueue;
 import helios.rendering.RenderPassFactory;
-import helios.rendering.model.MaterialData;
-import helios.rendering.model.MeshData;
+import helios.rendering.model.Material;
+import helios.rendering.model.MaterialInstance;
 import helios.rendering.model.config.MeshConfig;
-import helios.rendering.model.config.PrimitiveTopology;
+import helios.rendering.model.config.MaterialProperties;
+import helios.rendering.model.config.PrimitiveType;
 import helios.rendering.asset.shape.basic.Cube;
 
 import helios.util.io.BasicStringFileReader;
@@ -80,17 +81,23 @@ int main() {
     }
     shader_ptr->setUniformLocationMap(std::move(uniformLocationMap));
 
-    auto material_ptr = std::make_unique<Material>(shader_ptr);
+    auto materialProperties = std::make_shared<MaterialProperties>(
+        helios::math::vec4f(1.0f, 0.0f, 1.0f, 1.0f)
+    );
+
+    auto material_ptr = std::make_shared<Material>(
+        shader_ptr, materialProperties
+    );
+    auto materialInstance = std::make_shared<MaterialInstance>(material_ptr);
 
     auto cube = Cube{};
 
     auto meshConfig = std::make_shared<const MeshConfig>(
-        PrimitiveTopology::LineLoop
+        PrimitiveType::LineLoop
     );
-    auto meshData = std::make_shared<const MeshData>(cube, meshConfig);
-    auto mesh_ptr = std::make_shared<OpenGLMesh>(meshData);
+    auto mesh_ptr = std::make_shared<OpenGLMesh>(cube, meshConfig);
     auto cubeRenderable = std::make_shared<OpenGLRenderable>(
-        std::move(mesh_ptr), std::move(material_ptr)
+        mesh_ptr, materialInstance
     );
 
     auto frustumCullingStrategy = std::make_unique<CullNoneStrategy>();

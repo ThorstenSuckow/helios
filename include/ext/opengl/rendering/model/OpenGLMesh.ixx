@@ -1,11 +1,14 @@
 module;
 
 #include <memory>
+#include <vector>
 
 export module helios.ext.opengl.rendering.model.OpenGLMesh;
 
 import helios.rendering.model.Mesh;
-import helios.rendering.model.MeshData;
+import helios.rendering.model.config.MeshConfig;
+import helios.rendering.asset.shape.Shape;
+import helios.rendering.Vertex;
 
 export namespace helios::ext::opengl::rendering::model {
 
@@ -13,7 +16,7 @@ export namespace helios::ext::opengl::rendering::model {
      * @brief Representative of an OpenGLMesh.
      * This class manages the OpenGL Vertex Array Object (VAO), the
      * Vertex Buffer Object (VBO) and Element Buffer Object (EBO) handles.
-     * The raw MeshData is uploaded to the GPU, preparing it for subsequent
+     * The raw mesh data is uploaded to the GPU, preparing it for subsequent
      * rendering commands / draw calls.
      */
     class OpenGLMesh final : public helios::rendering::model::Mesh {
@@ -59,7 +62,7 @@ export namespace helios::ext::opengl::rendering::model {
 
 
         /**
-         * @brief Initializes all buffer objects required by OpenGL from the provided MeshData.
+         * @brief Initializes all buffer objects required by OpenGL from the provided mesh data.
          * The current implementation generates all VAO, VBO and EBO handles, loads the
          * vertex and index data to the GPU. It follows [Vri20, 162] in this regard.
          *
@@ -79,11 +82,33 @@ export namespace helios::ext::opengl::rendering::model {
 
 
         /**
-         * @brief Constructs a new OpenGLMesh instance from raw MeshData.
+         * @brief Constructs a new OpenGLMesh instance from raw mesh data.
          *
-         * @param meshData A shared_ptr to the immutable raw MeshData.
+         * @param vertices A shared pointer to a vector of const Vertex
+         * @param indices A shared pointer to a vector of indices
+         * @param meshConfig A shared ptr to the const MeshConfig used with this Mesh.
+         *
+         * @throws std::invalid_argument if either "vertices", "indices" or meshConfig is a null shared pointer
          */
-        explicit OpenGLMesh(std::shared_ptr<const helios::rendering::model::MeshData> meshData);
+        explicit OpenGLMesh(
+            std::shared_ptr<const std::vector<helios::rendering::Vertex>> vertices,
+            std::shared_ptr<const std::vector<unsigned int>> indices,
+            std::shared_ptr<const helios::rendering::model::config::MeshConfig> meshConfig
+        );
+
+        /**
+         * @brief Creates a new OpenGLMesh instance from the specified Shape.
+         *
+         * @param shape A const reference to the Shape.
+         * @param meshConfig A shared ptr to the const MeshConfig used with this OpenGLMesh.
+         *
+         * @throws std::invalid_argument if meshConfig is a null shared pointer, or if the
+         * shape contained null data
+         */
+        explicit OpenGLMesh(
+            const helios::rendering::asset::shape::Shape& shape,
+            std::shared_ptr<const helios::rendering::model::config::MeshConfig> meshConfig
+        );
 
         /**
          * @brief Frees allocated resources bv this instance.

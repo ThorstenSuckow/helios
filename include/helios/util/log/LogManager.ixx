@@ -9,15 +9,24 @@ export module helios.util.log.LogManager;
 
 import helios.util.log.Logger;
 
+#define LOGGING_ENABLED true
 export namespace helios::util::log {
 
     /**
      * @brief LogManger for managing various scoped Loggers.
      *
+     * A LogManager allows for globally suppressing all log output by calling enableLogging().
+     * Logging is enabled by default.
+     *
      */
     class LogManager {
 
     private:
+
+        /**
+         * @brief Flag indicating whether log output should be globally enabled or disabled.
+         */
+        bool loggingEnabled_ = LOGGING_ENABLED;
 
         /**
          * @brief Unordered map holding unique pointers to the loggers managed
@@ -98,6 +107,13 @@ export namespace helios::util::log {
          */
         [[nodiscard]] Logger& registerLogger(const std::string& scope) noexcept;
 
+
+        /**
+         * @brief Enables or disables all log output of the Loggers registered with this LogManager.
+         *
+         * @param enable True to enable log output with the registered loggers, otherwise false.
+         */
+        void enableLogging(bool enable) noexcept;
     };
 
 

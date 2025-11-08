@@ -69,12 +69,15 @@ namespace helios::rendering {
 
         auto objectUniformValues = std::make_unique<helios::rendering::shader::UniformValueMap>();
         auto materialUniformValues = std::make_unique<helios::rendering::shader::UniformValueMap>();
-        objectUniformValues->set(helios::rendering::shader::UniformSemantics::WorldMatrix, snapshotItem.worldMatrix());
+        objectUniformValues->set(
+            helios::rendering::shader::UniformSemantics::WorldMatrix,
+            snapshotItem.worldMatrix()
+        );
 
         // make sure Material writes its uniform values
-        sharedRenderable->material().writeUniformValues(*materialUniformValues);
+        sharedRenderable->materialInstance().writeUniformValues(*materialUniformValues);
 
-        const auto shader = sharedRenderable->material().shader();
+        const auto shader = sharedRenderable->materialInstance().shader();
         if (!shader) {
             logger_.warn("Shader no longer available");
             return nullptr;

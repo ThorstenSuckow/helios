@@ -28,9 +28,9 @@ export namespace helios::rendering::model::config {
         std::optional<helios::math::vec4f> baseColor;
 
         /**
-         * @brief Writes this MaterialOverrides's values into the given map.
+         * @brief Writes this MaterialPropertiesOverride's values into the given map.
          *
-         * This method is typically called **after** the Material#s base properties were
+         * This method is typically called **after** the Material's base properties were
          * written into the map.
          *
          * @param uniformValueMap Target map receiving the uniform values.

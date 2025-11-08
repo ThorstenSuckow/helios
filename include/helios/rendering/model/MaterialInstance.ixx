@@ -51,7 +51,7 @@ export namespace helios::rendering::model {
         /**
          * @brief Constructs a new Material instance.
          *
-         * Initializes this instance with a base aterial definition and an optional set of property overrides.
+         * Initializes this instance with a base material definition and an optional set of property overrides.
          *
          * @param material A shared pointer to the base Material definition.
          * @param materialOverrides An optional shared pointer to a MaterialPropertiesOverride object,

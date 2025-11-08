@@ -86,7 +86,7 @@ namespace helios::ext::opengl::rendering {
 
             if (const auto mesh_ptr = rc->mesh().lock()) {
                 const auto mesh =  std::dynamic_pointer_cast<const OpenGLMesh>(mesh_ptr);
-                const auto [primitiveType] = mesh->meshData().meshConfig();
+                const auto [primitiveType] = mesh->meshConfig();
 
                 logger_.info(std::format("Binding vao {0}", mesh->vao()));
                 glBindVertexArray(mesh->vao());

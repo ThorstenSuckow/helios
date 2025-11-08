@@ -15,7 +15,6 @@ import helios.input.types.Key;
 import helios.rendering.RenderQueue;
 import helios.rendering.RenderPassFactory;
 import helios.rendering.model.MaterialData;
-import helios.rendering.model.MeshData;
 import helios.rendering.model.config.MeshConfig;
 import helios.rendering.model.config.PrimitiveType;
 import helios.rendering.asset.shape.basic.Cube;
@@ -87,8 +86,7 @@ int main() {
     auto meshConfig = std::make_shared<const MeshConfig>(
         PrimitiveType::LineLoop
     );
-    auto meshData = std::make_shared<const MeshData>(cube, meshConfig);
-    auto mesh_ptr = std::make_shared<OpenGLMesh>(meshData);
+    auto mesh_ptr = std::make_shared<OpenGLMesh>(cube, meshConfig);
     auto cubeRenderable = std::make_shared<OpenGLRenderable>(
         std::move(mesh_ptr), std::move(material_ptr)
     );

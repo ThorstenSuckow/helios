@@ -83,7 +83,7 @@ export namespace helios::rendering::model::config {
             [[nodiscard]] MaterialProperties withBaseColor(helios::math::vec4f baseColor) const noexcept;
 
             /**
-             * Creates a nre MaterialProperties instance with an updated roughness factor.
+             * Creates a new MaterialProperties instance with an updated roughness factor.
              *
              * This method returns a new MaterialProperties instance where only the roughness factor has been changed to the
              * provided value.

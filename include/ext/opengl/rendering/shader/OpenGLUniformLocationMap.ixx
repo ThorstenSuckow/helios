@@ -34,7 +34,7 @@ export namespace helios::ext::opengl::rendering::shader {
         /**
          * @brief The internal map used for mapping uniform semantics to positions.
          */
-        std::array<int, std::to_underlying(helios::rendering::shader::UniformSemantics::count)> map_ = {};
+        std::array<int, std::to_underlying(helios::rendering::shader::UniformSemantics::size_)> map_ = {};
 
         /**
          * @brief The logger used with this OpenGLUniformLocationMap.
@@ -54,7 +54,7 @@ export namespace helios::ext::opengl::rendering::shader {
          * of the UniformSemantics enum.
          */
         static_assert(
-           static_cast<size_t>(helios::rendering::shader::UniformSemantics::count)
+           static_cast<size_t>(helios::rendering::shader::UniformSemantics::size_)
            <= (sizeof(sentinel_) * 8)  && "sentinel type is too narrow");
 
         /**

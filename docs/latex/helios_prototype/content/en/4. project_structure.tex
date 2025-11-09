@@ -6,7 +6,7 @@ We also briefly introduce the contents of the individual directories.\\
 The top level of the \textit{helios} directory structure provides access to tests, executable sample programs, benchmarks, documentation, and source files.
 The chosen structure follows the conventions for C++ projects defined by the \textit{Pitchfork} project~\cite[]{Pitchfork}.
 The directory names are self-explanatory and are shown in Figure~\ref{fig:directory_structure}.
-\vspace{4mm}
+
 \begin{figure}[htbp]
     \setlength{\DTbaselineskip}{18pt}
     \dirtree{%
@@ -21,7 +21,7 @@ The directory names are self-explanatory and are shown in Figure~\ref{fig:direct
     \caption{Project directory of \textit{helios} (excerpt).}
     \label{fig:directory_structure}
 \end{figure}
-\vspace{4mm}
+
 The project comprises several build stages to compile the source files and generate the tests and example programs.
 For automation, we use \texttt{CMake}~\cite[]{CMake}, which also allows us to perform simple dependency management.
 The third-party libraries (TPLs) required for development (including \texttt{glfw}~\cite[]{glfwHomepage} and \texttt{glad}~\cite[]{gladgithub}) can thus be fetched directly from external sources, statically compiled, and integrated (see Listing~\ref{lst:cmake}).
@@ -88,8 +88,8 @@ No evaluation of alternative benchmarking frameworks was conducted; the choice w
 \subsection*{\texttt{/docs}}
 
 In addition to formal documentation\footnote{Such as the \LaTeX\ source code of this document.},
-this directory contains API documentation generated from the source files using \texttt{Doxygen}~\cite[]{Doxygen}.
-A key advantage of \texttt{Doxygen} is its ability to export to multiple formats.
+this directory contains API documentation generated from the source files using \texttt{doxygen}~\cite[]{Doxygen}.
+A key advantage of \texttt{doxygen} is its ability to export to multiple formats.
 This allows us to generate HTML or XML documentation and integrate it into the \textit{helios} project website~\cite[]{helios} via a dedicated build step.
 
 A formal evaluation of documentation tools was not performed.

@@ -8,14 +8,14 @@ With \textit{helios}, we therefore pursue a top-down approach to enable rapid pr
 In this context, we regard the SOLID\footnote{
     \textbf{S}ingle Responsibility Principle, \textbf{O}pen–Closed Principle, \textbf{L}iskov Substitution Principle, \textbf{I}nterface Segregation Principle, \textbf{D}ependency Inversion Principle.
 } principles~\cite[]{Mar03} as an indispensable basis for agile software development, as they are closely related to ``clean software design`` and have already proven valuable in the development process to date.\footnote{
-    See Cabral et al.\ \cite[]{CKME+24}, who examine the applicability of SOLID in a machine-learning context - an environment characterized by ``iterative experimentation with data, models, and algorithms.`` They argue that applying the principles can contribute significantly to code comprehensibility.
+    See Cabral et al.\ \cite[]{CKME+24}, who examine the applicability of SOLID in a machine-learning context - an environment characterized by ``iterative experimentation with data, models, and algorithms`` (\textit{ibid}). They argue that applying the principles can contribute significantly to code comprehensibility.
 }
 
 To avoid the emergence of an unstructured, hard-to-maintain architecture (\textit{Big Ball of Mud}~\cite[]{FY99}), we rely on a clear separation of responsibilities, reflected in the project’s feature layers.
 To reduce coupling between components - and thus improve maintainability and testability - we use \textit{Dependency Injection}~\cite[]{SZ10}, primarily via \textit{Constructor Injection}~\cite[]{FowlerDI}.
 Since no dedicated DI container is used in the current implementation, the management of dependencies (\textit{wiring}) in the source code results in some boilerplate, which is largely reduced by moving creation logic into static factory classes.
 This particularly benefits the example programs during development, which also serve as test drivers.
-In other subsystems, factory methods support the encapsulation of object creation within those entities that are also assigned technical responsibility in terms of domain logic~\cite[pp.~139]{Eva03}.
+In other subsystems, factory methods support the encapsulation of object creation within those entities that are also assigned technical responsibility in terms of domain logic~\cite[pp.~139-141]{Eva03}.
 In this way, the architecture of \textit{helios} remains coherent, and dependencies between layers are kept to the necessary minimum.
 
 Dealing with modern language features of a proven but also ``traditional`` language such as C++ - notably the module system and smart pointers - has been challenging.
@@ -31,9 +31,9 @@ Especially at the beginning of the project, the project structure and namespace 
 
 To express clear ownership in object management, we avoid raw pointers in many places.
 Instead, we use the standard library types \texttt{unique\_ptr}, \texttt{shared\_ptr}, and \texttt{weak\_ptr}, which manage ownership semantics exclusively (via \textit{move}) or jointly (via reference counting).
-To what extent the additional CPU instructions\footnote{
-For a performance comparison, see e.g.~\cite[]{Val25}.
-} resulting from this have a measurable impact on efficiency when building and processing the rendering pipeline remains to be evaluated if necessary.
+To what extent the additional CPU instructions resulting from this have a measurable impact on efficiency when building and processing the rendering pipeline remains to be evaluated if necessary.\footnote{
+    For a general performance comparison, see~\cite[]{Val25}.
+}
 
 We see potential for optimization here, but in the early development phase we have consciously opted for stability and clear semantics.
 Later refactorings in favor of higher efficiency\footnote{
@@ -48,8 +48,8 @@ The decision to use \texttt{std::vector} as the primary data container can negat
 
 We also see optimization potential in the design of the \texttt{EventManager} and input processing:
 both systems could be merged so that input commands are forwarded to interested observers as events according to the principle ``Don't call us, we'll call you``.
-It should be noted that appropriate interfaces must be exposed to the game and bottom-up communication must be allowed~\cite[]{BMRS+96}.
-In addition, a mechanism should derive game-specific \texttt{ControlCommand}s from input events~\cite[pp.~21]{Nys14}.
+It should be noted that appropriate interfaces must be exposed to the game and bottom-up communication must be allowed~\cite[41]{BMRS+96}.
+In addition, a mechanism should derive game-specific \texttt{ControlCommand}s from input events~\cite[pp.~21-26]{Nys14}.
 
 Within the rendering system, we see a foundation for a modular and extensible render pipeline that currently implements a clear separation between scene description and actual rendering.
 A key advantage of the chosen design is that individual \texttt{RenderPass} instances can be configured with additional options (e.g., \textit{Depth Testing}, \textit{Draw Mode}, \textit{Anti-Aliasing}) and \texttt{RenderQueue}s can be sorted so that communication with the GPU is as efficient as possible.\footnote{

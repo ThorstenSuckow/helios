@@ -6,7 +6,7 @@ We also briefly introduce the contents of the individual directories.\\
 The top level of the \textit{helios} directory structure provides access to tests, executable sample programs, benchmarks, documentation, and source files.
 The chosen structure follows the conventions for C++ projects defined by the \textit{Pitchfork} project~\cite[]{Pitchfork}.
 The directory names are self-explanatory and are shown in Figure~\ref{fig:directory_structure}.
-\vspace{4mm}
+
 \begin{figure}[htbp]
     \setlength{\DTbaselineskip}{18pt}
     \dirtree{%
@@ -21,7 +21,7 @@ The directory names are self-explanatory and are shown in Figure~\ref{fig:direct
     \caption{Project directory of \textit{helios} (excerpt).}
     \label{fig:directory_structure}
 \end{figure}
-\vspace{4mm}
+
 The project comprises several build stages to compile the source files and generate the tests and example programs.
 For automation, we use \texttt{CMake}~\cite[]{CMake}, which also allows us to perform simple dependency management.
 The third-party libraries (TPLs) required for development (including \texttt{glfw}~\cite[]{glfwHomepage} and \texttt{glad}~\cite[]{gladgithub}) can thus be fetched directly from external sources, statically compiled, and integrated (see Listing~\ref{lst:cmake}).
@@ -88,8 +88,8 @@ No evaluation of alternative benchmarking frameworks was conducted; the choice w
 \subsection*{\texttt{/docs}}
 
 In addition to formal documentation\footnote{Such as the \LaTeX\ source code of this document.},
-this directory contains API documentation generated from the source files using \texttt{Doxygen}~\cite[]{Doxygen}.
-A key advantage of \texttt{Doxygen} is its ability to export to multiple formats.
+this directory contains API documentation generated from the source files using \texttt{doxygen}~\cite[]{Doxygen}.
+A key advantage of \texttt{doxygen} is its ability to export to multiple formats.
 This allows us to generate HTML or XML documentation and integrate it into the \textit{helios} project website~\cite[]{helios} via a dedicated build step.
 
 A formal evaluation of documentation tools was not performed.
@@ -101,7 +101,7 @@ We also consider the extensive range of output formats (including PDF and Markdo
 For unit testing, \textit{helios} employs \textit{Google Test}~\cite[]{googletestgithub}.
 To increase development speed, especially during the early and potentially unstable project phase, we initially decided against pursuing high test coverage.
 Current tests therefore focus on mathematical functions - for instance, validating transformations within the scene graph.
-\textit{helios} uses \texttt{glm} as a test oracle~\cite[pp.~917]{Bin99} for comparison purposes.\footnote{
+\textit{helios} uses \texttt{glm} as a test oracle~\cite[pp.~917-919]{Bin99} for comparison purposes.\footnote{
     Alternatively, \texttt{glm} can be regarded as a \textit{baseline} against which \textit{helios} functions (as a \textit{delta version}) are compared in regression tests.
     We acknowledge that any errors in \texttt{glm} would propagate to \textit{helios}; however, given the maturity of the \textit{glm} project, this risk is considered minimal.}
 
@@ -123,7 +123,7 @@ This approach allows us to focus on the required interfaces of individual subsys
 
 \subsection*{\texttt{/include, /src}}
 
-With C++23, \textit{helios} implements its classes and functions entirely through Module Interface and Implementation Units~\cite[pp.~211]{Str24}.
+With C++23, \textit{helios} implements its classes and functions entirely through Module Interface and Implementation Units~\cite[pp.~211-213]{Str24}.
 These are stored in \texttt{/include} and \texttt{/src}, respectively.
 Modules not divided into Interface and Implementation Units reside exclusively in \texttt{/include} as ``header-only`` components.
 These include classes such as \texttt{helios::math::vec3}, which represents a three-dimensional vector type whose functions are predominantly declared as \texttt{constexpr}\footnote{

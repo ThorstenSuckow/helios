@@ -2,6 +2,7 @@ module;
 
 #include <glad/gl.h>
 #include <iostream>
+#include <helios/helios_config.h>
 
 module helios.ext.opengl.rendering.shader.OpenGLShader;
 
@@ -143,14 +144,26 @@ namespace helios::ext::opengl::rendering::shader {
         const UniformValueMap& uniformValueMap) const noexcept {
 
         logger_.info("Applying uniform values");
+
+        #if HELIOS_DEBUG
+        if (static_cast<size_t>(UniformSemantics::size_) > 1) {
+            logger_.warn(
+                std::format(
+                    "UniformSemantics has more entries ({0}) than considered in OpenGLShader::applyUniformSemantics",
+                    static_cast<size_t>(UniformSemantics::size_)
+                )
+            );
+        }
+        #endif
+
         if (const auto worldMatrixUniform = uniformLocation(UniformSemantics::WorldMatrix); worldMatrixUniform != -1) {
             if (const auto* mat4f_ptr = uniformValueMap.mat4f_ptr(UniformSemantics::WorldMatrix)) {
                 glUniformMatrix4fv(worldMatrixUniform, 1, false, mat4f_ptr);
             }
         }
-        if (const auto materialColorUniform = uniformLocation(UniformSemantics::MaterialColor); materialColorUniform != -1) {
-            if (const auto* vec4f_ptr = uniformValueMap.vec4f_ptr(UniformSemantics::MaterialColor)) {
-                glUniform4fv(materialColorUniform, 1, vec4f_ptr);
+        if (const auto materialBaseColorUniform = uniformLocation(UniformSemantics::MaterialBaseColor); materialBaseColorUniform != -1) {
+            if (const auto* vec4f_ptr = uniformValueMap.vec4f_ptr(UniformSemantics::MaterialBaseColor)) {
+                glUniform4fv(materialBaseColorUniform, 1, vec4f_ptr);
             }
         }
     }

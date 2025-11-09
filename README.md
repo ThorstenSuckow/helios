@@ -69,3 +69,5 @@ Various test cases for selected classes and functionality.
 [KSS17]: Kessenich, John and Sellers, Graham and Shreiner, Dave: The OpenGL Programming Guide (2017), Addison Wesley
 \
 [Str22]: Stroustrup, Bjarne: A Tour of C++ (2022), Addison-Wesley
+
+[PJH23]: Pharr, Matt and Jakob, Wenzel and Humphreys, Greg: Physically Based Rendering, 4th ed. (2023), MIT Press 

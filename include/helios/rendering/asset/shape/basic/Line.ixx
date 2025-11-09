@@ -6,8 +6,8 @@ module;
 export module helios.rendering.asset.shape.basic.Line;
 
 import helios.rendering.asset.shape.Shape;
-
 import helios.rendering.Vertex;
+import helios.rendering.model.config.PrimitiveType;
 
 using namespace helios::rendering;
 
@@ -33,6 +33,10 @@ export namespace helios::rendering::asset::shape::basic {
                 0, 1
             }
         ) {}
+
+        [[nodiscard]] helios::rendering::model::config::PrimitiveType primitiveType() const noexcept override {
+            return model::config::PrimitiveType::Lines;
+        }
 
     };
 

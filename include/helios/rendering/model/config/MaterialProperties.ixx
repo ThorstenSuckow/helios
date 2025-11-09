@@ -14,7 +14,7 @@ export namespace helios::rendering::model::config {
      *
      * This class acts as a Value Object, encapsulating fundamental material characteristics
      * like base color and roughness. Once an instance is created, its properties cannot
-     * be changed. MMethods prefixed with `with*` facilitate functional updates by returning a
+     * be changed. Methods prefixed with `with*` facilitate functional updates by returning a
      * **new** MaterialProperties instance with the specified property modified, leaving the
      * original object - which may still be in use by existing Renderables - untouched.
      *

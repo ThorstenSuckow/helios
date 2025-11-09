@@ -101,7 +101,7 @@ We also consider the extensive range of output formats (including PDF and Markdo
 For unit testing, \textit{helios} employs \textit{Google Test}~\cite[]{googletestgithub}.
 To increase development speed, especially during the early and potentially unstable project phase, we initially decided against pursuing high test coverage.
 Current tests therefore focus on mathematical functions - for instance, validating transformations within the scene graph.
-\textit{helios} uses \texttt{glm} as a test oracle~\cite[pp.~917]{Bin99} for comparison purposes.\footnote{
+\textit{helios} uses \texttt{glm} as a test oracle~\cite[pp.~917-919]{Bin99} for comparison purposes.\footnote{
     Alternatively, \texttt{glm} can be regarded as a \textit{baseline} against which \textit{helios} functions (as a \textit{delta version}) are compared in regression tests.
     We acknowledge that any errors in \texttt{glm} would propagate to \textit{helios}; however, given the maturity of the \textit{glm} project, this risk is considered minimal.}
 
@@ -123,7 +123,7 @@ This approach allows us to focus on the required interfaces of individual subsys
 
 \subsection*{\texttt{/include, /src}}
 
-With C++23, \textit{helios} implements its classes and functions entirely through Module Interface and Implementation Units~\cite[pp.~211]{Str24}.
+With C++23, \textit{helios} implements its classes and functions entirely through Module Interface and Implementation Units~\cite[pp.~211-213]{Str24}.
 These are stored in \texttt{/include} and \texttt{/src}, respectively.
 Modules not divided into Interface and Implementation Units reside exclusively in \texttt{/include} as ``header-only`` components.
 These include classes such as \texttt{helios::math::vec3}, which represents a three-dimensional vector type whose functions are predominantly declared as \texttt{constexpr}\footnote{

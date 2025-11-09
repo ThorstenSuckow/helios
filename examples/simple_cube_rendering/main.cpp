@@ -86,10 +86,10 @@ int main() {
         0.0
     );
 
-    auto cubeMaterialPops_shared = std::make_shared<MaterialProperties>(cubeMaterialProps);
+    auto cubeMaterialProps_shared = std::make_shared<MaterialProperties>(cubeMaterialProps);
 
     auto material_ptr = std::make_shared<Material>(
-        shader_ptr, cubeMaterialPops_shared
+        shader_ptr, cubeMaterialProps_shared
     );
     auto materialInstance = std::make_shared<MaterialInstance>(material_ptr);
 

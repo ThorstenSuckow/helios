@@ -20,7 +20,8 @@ export namespace helios::rendering::shader {
      */
     using UniformValue = std::variant<
         helios::math::mat4f,
-        helios::math::vec4f
+        helios::math::vec4f,
+        float
     >;
 
     /**
@@ -50,7 +51,7 @@ export namespace helios::rendering::shader {
          * @brief Internal data structure storing the association between a uniform semantic and
          * a concrete value.
          */
-        std::array<std::optional<UniformValue>, std::to_underlying(UniformSemantics::count)> map_;
+        std::array<std::optional<UniformValue>, std::to_underlying(UniformSemantics::size_)> map_;
 
     public:
         ~UniformValueMap() = default;
@@ -92,6 +93,24 @@ export namespace helios::rendering::shader {
          * associated with this semantics.
          */
         [[nodiscard]] const float* vec4f_ptr(UniformSemantics uniformSemantics) const noexcept;
+
+        /**
+         * @brief Sets or updates a float uniform value for a given semantic.
+         *
+         * @param uniformSemantics The `UniformSemantics` identifier for the uniform.
+         * @param value The float value to set.
+         */
+        void set(UniformSemantics uniformSemantics, float value) noexcept;
+
+        /**
+         * @brief Returns the float value for the specified uniform semantics.
+         *
+         * @param uniformSemantics The `UniformSemantics` identifier for the uniform.
+         *
+         * @return The std::optional representing the uniformSemantics, or std::nullopt
+         * if not available.
+         */
+        [[nodiscard]] std::optional<float> float_val(UniformSemantics uniformSemantics) const noexcept;
 
     };
 

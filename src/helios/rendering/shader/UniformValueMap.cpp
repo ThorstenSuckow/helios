@@ -1,6 +1,6 @@
 module;
 
-#include <map>
+#include <optional>
 #include <variant>
 
 module helios.rendering.shader.UniformValueMap;
@@ -17,6 +17,10 @@ namespace helios::rendering::shader {
 
     void UniformValueMap::set(const UniformSemantics uniformSemantics, const helios::math::vec4f& vec4f) noexcept {
         map_[std::to_underlying(uniformSemantics)].emplace(vec4f);
+    }
+
+    void UniformValueMap::set(const UniformSemantics uniformSemantics, const float value) noexcept {
+        map_[std::to_underlying(uniformSemantics)].emplace(value);
     }
 
     const float* UniformValueMap::mat4f_ptr(UniformSemantics uniformSemantics) const noexcept {
@@ -51,6 +55,23 @@ namespace helios::rendering::shader {
         }
 
         return nullptr;
+    }
+
+    std::optional<float> UniformValueMap::float_val(UniformSemantics uniformSemantics) const noexcept {
+
+        const auto index = std::to_underlying(uniformSemantics);
+
+        if (index >= map_.size()) {
+            return std::nullopt;
+        }
+
+        if (const auto& el = map_[index]; el.has_value()) {
+            if (const auto* it = std::get_if<float>(&el.value())) {
+                return *it;
+            }
+        }
+
+        return std::nullopt;
     }
 
 }

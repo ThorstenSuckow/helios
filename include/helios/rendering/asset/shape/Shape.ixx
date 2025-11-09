@@ -6,6 +6,7 @@ module;
 export module helios.rendering.asset.shape.Shape;
 
 import helios.rendering.Vertex;
+import helios.rendering.model.config.PrimitiveType;
 
 using namespace helios::rendering;
 
@@ -41,6 +42,16 @@ export namespace helios::rendering::asset::shape {
             vertices(std::make_shared<const std::vector<Vertex>>(std::move(vertices))),
             indices(std::make_shared<const std::vector<unsigned int>>(std::move(indices)))
         {}
+
+        /**
+         * @brief Returns the intended PrimitiveType for this Shape.
+         *
+         * This method returns the intended PrimitiveType for the Shape represented by this instance.
+         * This information can be used to properly set up the MeshConfig wrapping this Shape.
+         *
+         * @return The intended PrimitiveType of this Shape.
+         */
+        [[nodiscard]] virtual helios::rendering::model::config::PrimitiveType primitiveType() const noexcept = 0;
     };
 
 }

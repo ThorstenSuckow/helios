@@ -1,19 +1,15 @@
 file(MAKE_DIRECTORY ${CMAKE_IFC_OUTPUT_DIRECTORY})
 
 file(GLOB_RECURSE CPP_FILES CONFIGURE_DEPENDS
-        # extension directory with implementations for glfw and OpenGL >= 4.6,
-        # helios base impl
         "${CMAKE_CURRENT_SOURCE_DIR}/**/*.cpp")
 
 file(GLOB_RECURSE MODULE_INTERFACE_FILES CONFIGURE_DEPENDS
-        # extension directory with implementations for glfw and OpenGL >= 4.6,
-        # helios base src
         "${CMAKE_CURRENT_SOURCE_DIR}/../include/**/*.ixx"
 )
 
-
 list(FILTER CPP_FILES EXCLUDE REGEX "/CMakeFiles/|/CMakeTmp/|/cmake_build_|/\\.build/")
 list(FILTER MODULE_INTERFACE_FILES EXCLUDE REGEX "/CMakeFiles/|/CMakeTmp/|/cmake_build_|/\\.build/")
+
 
 ##########################
 # create lib target
@@ -46,4 +42,5 @@ endif()
 target_include_directories(helios PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../ext>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
 )

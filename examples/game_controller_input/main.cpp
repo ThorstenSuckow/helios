@@ -40,6 +40,7 @@ import helios.ext.opengl.rendering.OpenGLDevice;
 // model data
 import helios.rendering.asset.shape.basic.Circle;
 import helios.rendering.asset.shape.basic.Line;
+import helios.rendering.asset.shape.basic.Rectangle;
 
 
 // scene
@@ -81,43 +82,54 @@ int main() {
     auto uniformLocationMap = std::make_unique<helios::ext::opengl::rendering::shader::OpenGLUniformLocationMap>();
     bool uniformAssigned    = uniformLocationMap->set(helios::rendering::shader::UniformSemantics::WorldMatrix, 1);
     assert(uniformAssigned && "could not assign the world matrix uniform");
-    uniformAssigned    = uniformLocationMap->set(helios::rendering::shader::UniformSemantics::MaterialColor, 2);
+    uniformAssigned    = uniformLocationMap->set(helios::rendering::shader::UniformSemantics::MaterialBaseColor, 2);
     assert(uniformAssigned && "could not assign the world matrix uniform");
     shader->setUniformLocationMap(std::move(uniformLocationMap));
 
-    // set up mesh configs
+
+    // material configs
+    auto circleMaterialProps = helios::rendering::model::config::MaterialProperties(
+        helios::math::vec4f(1.0f, 0.0f, 1.0f, 0.5f),
+        0.0
+    );
+    auto lineMaterialProps = helios::rendering::model::config::MaterialProperties(
+        helios::math::vec4f(1.0f, 1.0f, 1.0f, 1.0f),
+        0.0
+    );
+    auto circleMaterialProps_shared = std::make_shared<helios::rendering::model::config::MaterialProperties>(circleMaterialProps);
+    auto lineMaterialProps_shared   = std::make_shared<helios::rendering::model::config::MaterialProperties>(lineMaterialProps);
+
+    auto circleShape      = helios::rendering::asset::shape::basic::Circle();
     auto circleMeshConfig = std::make_shared<const helios::rendering::model::config::MeshConfig>(
-        helios::rendering::model::config::PrimitiveType::Triangles
-    );
-    auto lineMeshConfig = std::make_shared<const helios::rendering::model::config::MeshConfig>(
-        helios::rendering::model::config::PrimitiveType::Lines
-    );
-
-    auto circleMaterialConfig = std::make_shared<const helios::rendering::model::config::MaterialProperties>(
-        helios::math::vec4f(1.0f, 0.0f, 1.0f, 0.5f)
-    );
-    auto lineMaterialConfig = std::make_shared<const helios::rendering::model::config::MaterialProperties>(
-        helios::math::vec4f(1.0f, 1.0f, 1.0f, 1.0f)
-    );
-
-    auto circleShape             = helios::rendering::asset::shape::basic::Circle();
+        circleShape.primitiveType()
+   );
     auto circleMesh             = std::make_shared<helios::ext::opengl::rendering::model::OpenGLMesh>(circleShape, circleMeshConfig);
-    auto circleMaterial         = std::make_shared<helios::rendering::model::Material>(shader, circleMaterialConfig);
+    auto circleMaterial         = std::make_shared<helios::rendering::model::Material>(shader, circleMaterialProps_shared);
     auto circleMaterialInstance = std::make_shared<helios::rendering::model::MaterialInstance>(circleMaterial);
     auto circleRenderable       = std::make_shared<helios::ext::opengl::rendering::OpenGLRenderable>(
         circleMesh, circleMaterialInstance
     );
 
-    auto lineShape            = helios::rendering::asset::shape::basic::Line();
+    auto lineShape      = helios::rendering::asset::shape::basic::Line();
+    auto lineMeshConfig = std::make_shared<const helios::rendering::model::config::MeshConfig>(
+        lineShape.primitiveType()
+    );
     auto lineMesh             = std::make_shared<helios::ext::opengl::rendering::model::OpenGLMesh>(lineShape, lineMeshConfig);
-    auto lineMaterial         = std::make_shared<helios::rendering::model::Material>(shader, lineMaterialConfig);
+    auto lineMaterial         = std::make_shared<helios::rendering::model::Material>(shader, lineMaterialProps_shared);
     auto lineMaterialInstance = std::make_shared<helios::rendering::model::MaterialInstance>(lineMaterial);
     auto lineRenderable       = std::make_shared<helios::ext::opengl::rendering::OpenGLRenderable>(
         lineMesh, lineMaterialInstance
     );
 
-
-
+    auto rectangleShape       = helios::rendering::asset::shape::basic::Rectangle();
+    auto rectangleShapeConfig = std::make_shared<const helios::rendering::model::config::MeshConfig>(
+        rectangleShape.primitiveType()
+    );
+    auto rectangleMesh             = std::make_shared<helios::ext::opengl::rendering::model::OpenGLMesh>(rectangleShape, rectangleShapeConfig);
+    auto rectangleMaterialInstance = std::make_shared<helios::rendering::model::MaterialInstance>(lineMaterial);
+    auto rectangleRenderable       = std::make_shared<helios::ext::opengl::rendering::OpenGLRenderable>(
+        rectangleMesh, rectangleMaterialInstance
+    );
 
     // ------------------------------
     //  Scene
@@ -147,7 +159,13 @@ int main() {
     assert(stickAxisRight_ptr != nullptr && "unexpected nullptr for stickAxisRight_ptr");
     stickRightNode_ptr->scale(helios::math::vec3f(scalingFactor, scalingFactor, 0.0f));
     stickRightNode_ptr->translate(helios::math::vec3f(0.0f, 0.0f, 0.0f));
-    
+
+    // left/right trigger
+    const auto triggerLeftNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>(rectangleRenderable));
+    assert(triggerLeftNode_ptr != nullptr && "unexpected nullptr for triggerLeftNode_ptr");
+    const auto triggerRightNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>(rectangleRenderable));
+    assert(triggerRightNode_ptr != nullptr && "unexpected nullptr for triggerRightNode_ptr");
+
     // ------------------------------
     //  Input
     // ------------------------------
@@ -188,8 +206,21 @@ int main() {
             leftTrigger, rightTrigger
         ) << std::flush;
 
+        // scaling
+        // sticks:
         stickAxisLeft_ptr->scale(helios::math::vec3f(gamepadState.left()));
         stickAxisRight_ptr->scale(helios::math::vec3f(gamepadState.right()));
+        // trigger
+        // @note the Rectangle shape has a default height of 2.0f and will grow and shrink equally in both
+        // x and y direction. This makes scaling and translating more complicated than it should be -
+        // the lib is in need of initializing a scenenode with a "fixed" translation, and subsequently
+        // translate the node by a specific amount, using "translateBy()".
+                triggerLeftNode_ptr->scale(helios::math::vec3f(scalingFactor * 0.5f, leftTrigger*scalingFactor, 0.0f));
+        triggerLeftNode_ptr->translate(helios::math::vec3f(-0.85f, leftTrigger*scalingFactor, 0.0f));
+
+        triggerRightNode_ptr->scale(helios::math::vec3f(scalingFactor * 0.5f, rightTrigger*scalingFactor, 0.0f));
+        triggerRightNode_ptr->translate(helios::math::vec3f(0.5f, rightTrigger*scalingFactor, 0.0f));
+
 
         auto snapshot = scene.createSnapshot(dynamic_cast<helios::scene::Camera&>(*camera_ptr));
         auto renderPass = helios::rendering::RenderPassFactory::getInstance().buildRenderPass(snapshot);

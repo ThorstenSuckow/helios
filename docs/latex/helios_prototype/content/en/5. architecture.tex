@@ -6,14 +6,14 @@ The framework visualizes the game state and transmits input data to the game as 
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.8\columnwidth]{img/hardarchitecture_en.svg}
-    \caption{Division of the architecture of the \textit{helios} framework into \textit{hard} and \textit{soft architecture} according to Rollings and Morris~\cite[pp.~612]{RM04}.
+    \caption{Division of the architecture of the \textit{helios} framework into \textit{hard} and \textit{soft architecture} according to Rollings and Morris~\cite[612]{RM04}.
     The ball-and-socket notation illustrates that \textit{helios} provides interfaces that can be used by any game. (Source: own representation)}
     \label{fig:hardarchitecture}
 \end{figure}
 
 Figure~\ref{fig:package_diagram} shows a more detailed view of the modules and selected components.
 The directory structure of \textit{helios} mirrors the structure of its core functionalities.
-In the sense of \textit{Evans}, this is crucial for high cohesion: the directory names communicate the functionalities they contain~\cite[pp.~180]{Eva03}.
+In the sense of \textit{Evans}, this is crucial for high cohesion: the directory names communicate the functionalities they contain~\cite[pp.~180-181]{Eva03}.
 Within the modules, there is a further subdivision into layers (such as \texttt{controller}), following a ``package-by-feature and -by-layer`` design approach.
 
 \begin{figure*}[t]
@@ -44,7 +44,7 @@ Events can be queried through convenience methods such as \texttt{InputManager::
 \subsection*{\texttt{event}: Event processing}
 
 Events are written to an \texttt{EventQueue} (``\textit{post}``) via the \texttt{EventManager}.
-Interested observers can register callbacks with the \texttt{EventManager} using \texttt{subscribe()}~\cite[pp.~293]{GHJV94}.
+Interested observers can register callbacks with the \texttt{EventManager} using \texttt{subscribe()}~\cite[pp.~293-303]{GHJV94}.
 The method \texttt{EventManager::dispatchAll()} then notifies all registered observers of existing events.
 
 \subsection*{\texttt{window}: Window management}

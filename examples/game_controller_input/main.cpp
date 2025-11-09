@@ -214,8 +214,8 @@ int main() {
         // @note the Rectangle shape has a default height of 2.0f and will grow and shrink equally in both
         // x and y direction. This makes scaling and translating more complicated than it should be -
         // the lib is in need of initializing a scenenode with a "fixed" translation, and subsequently
-        // translate tne node by a specific amount, using "translateBy()".
-        triggerLeftNode_ptr->scale(helios::math::vec3f(scalingFactor * 0.5f, leftTrigger*scalingFactor, 0.0f));
+        // translate the node by a specific amount, using "translateBy()".
+                triggerLeftNode_ptr->scale(helios::math::vec3f(scalingFactor * 0.5f, leftTrigger*scalingFactor, 0.0f));
         triggerLeftNode_ptr->translate(helios::math::vec3f(-0.85f, leftTrigger*scalingFactor, 0.0f));
 
         triggerRightNode_ptr->scale(helios::math::vec3f(scalingFactor * 0.5f, rightTrigger*scalingFactor, 0.0f));

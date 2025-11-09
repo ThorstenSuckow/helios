@@ -35,5 +35,4 @@ namespace helios::rendering::model::config {
         uniformValueMap.set(helios::rendering::shader::UniformSemantics::MaterialBaseColor, baseColor_);
         uniformValueMap.set(helios::rendering::shader::UniformSemantics::MaterialRoughness, roughness_);
     }
-    ;
 }

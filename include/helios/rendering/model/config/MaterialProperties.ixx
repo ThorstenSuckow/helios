@@ -96,7 +96,7 @@ export namespace helios::rendering::model::config {
 
 
             /**
-             * @brief Writes teh current properties into the given UniformValueMap.
+             * @brief Writes the current properties into the given UniformValueMap.
              *
              * @param uniformValueMap Target map receiving the uniform values.
              */

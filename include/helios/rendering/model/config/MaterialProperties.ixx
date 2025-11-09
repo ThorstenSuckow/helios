@@ -71,7 +71,7 @@ export namespace helios::rendering::model::config {
 
 
             /**
-             * Creates a nre MaterialProperties instance with an updated base color.
+             * Creates a new MaterialProperties instance with an updated base color.
              *
              * This method returns a new MaterialProperties instance where only the base color has been changed to the
              * provided value.

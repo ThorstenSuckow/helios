@@ -18,7 +18,7 @@ export namespace helios::rendering::asset::shape::basic {
      *
      * Creates vertex and index data for a single 2D rectangle.
      *
-     * @note the indices (0,1) suggest rendering with PrimitiveType::Lines.
+     * @note Uses indices {0, 1, 2, 3, 0} with PrimitiveType::LineStrip to render the rectangle outline.
      */
     struct Rectangle : public Shape {
 

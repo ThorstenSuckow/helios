@@ -3,14 +3,17 @@
  */
 module;
 
-#include <cassert>
 #include <algorithm>
+#include <helios/helios_config.h>
 
 export module helios.input.GamepadState;
 
 import helios.math.types;
+import helios.util.log.Logger;
+import helios.util.log.LogManager;
 
 
+#define HELIOS_LOG_SCOPE "helios::input::GamepadState"
 export namespace helios::input {
 
     /**
@@ -35,6 +38,9 @@ export namespace helios::input {
      * For convenient access of the axes in 2D coordinates, the class provides accessors
      * to the sticks' axes in `vec2f` form.
      *
+     * Button states are generally represented with boolean values, i.e. true for pressed,
+     * otherwise false.
+     *
      * @note Implementations must account for joystick drift: achieving exactly 0.0
      * for x/y when no human input occurred is rare. Consider applying a dead zone
      * when processing the GamepadState. Axis values are individually clipped to [-1.0, 1.0],
@@ -47,24 +53,87 @@ export namespace helios::input {
     class GamepadState {
 
     private:
+        /**
+         * @brief The const reference to the logger used with this Adapter.
+         */
+        const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().registerLogger(HELIOS_LOG_SCOPE);
 
-         bool buttonA_ = false;
-         bool buttonB_= false;
-         bool buttonX_= false;
-         bool buttonY_= false;
-         bool buttonStart_= false;
-         bool buttonBack_= false;
-         bool buttonGuide_= false;
-         bool buttonLeftBumper_= false;
-         bool buttonRightBumper_= false;
-         bool buttonLeftThumb_= false;
-         bool buttonRightThumb_= false;
-         bool buttonDpadUp_= false;
-         bool buttonDpadRight_= false;
-         bool buttonDpadDown_= false;
-         bool buttonDpadLeft_ = false;
 
-        
+        /**
+         * @brief State of the A button (true if pressed).
+         */
+        bool buttonA_ = false;
+
+        /**
+         * @brief State of the B button (true if pressed).
+         */
+        bool buttonB_ = false;
+
+        /**
+         * @brief State of the X button (true if pressed).
+         */
+        bool buttonX_ = false;
+
+        /**
+         * @brief State of the Y button (true if pressed).
+         */
+        bool buttonY_ = false;
+
+        /**
+         * @brief State of the Start button (true if pressed).
+         */
+        bool buttonStart_ = false;
+
+        /**
+         * @brief State of the Back button (true if pressed).
+         */
+        bool buttonBack_ = false;
+
+        /**
+         * @brief State of the Guide button (true if pressed).
+         */
+        bool buttonGuide_ = false;
+
+        /**
+         * @brief State of the left bumper button (true if pressed).
+         */
+        bool buttonLeftBumper_ = false;
+
+        /**
+         * @brief State of the right bumper button (true if pressed).
+         */
+        bool buttonRightBumper_ = false;
+
+        /**
+         * @brief State of the left thumbstick button (true if pressed).
+         */
+        bool buttonLeftThumb_ = false;
+
+        /**
+         * @brief State of the right thumbstick button (true if pressed).
+         */
+        bool buttonRightThumb_ = false;
+
+        /**
+         * @brief State of the D-pad up button (true if pressed).
+         */
+        bool buttonDpadUp_ = false;
+
+        /**
+         * @brief State of the D-pad right button (true if pressed).
+         */
+        bool buttonDpadRight_ = false;
+
+        /**
+         * @brief State of the D-pad down button (true if pressed).
+         */
+        bool buttonDpadDown_ = false;
+
+        /**
+         * @brief State of the D-pad left button (true if pressed).
+         */
+        bool buttonDpadLeft_ = false;
+
         /**
          * @brief Flag to indicate if the cached vec2f members need to be recalculated.
          */
@@ -129,7 +198,6 @@ export namespace helios::input {
         }
 
     public:
-
         ~GamepadState() = default;
 
         /**
@@ -147,53 +215,31 @@ export namespace helios::input {
          * @see updateAxes
          */
         explicit GamepadState(
-            const float axisLeftX, const float axisLeftY,
-            const float axisRightX, const float axisRightY,
-            const float triggerLeft, const float triggerRight,
+            const float axisLeftX, const float axisLeftY, const float axisRightX,
+            const float axisRightY, const float triggerLeft, const float triggerRight,
 
-            const bool buttonA,
-            const bool buttonB,
-            const bool buttonX,
-            const bool buttonY,
-            const bool buttonStart,
-            const bool buttonBack,
-            const bool buttonGuide,
-            const bool buttonLeftBumper,
-            const bool buttonRightBumper,
-            const bool buttonLeftThump,
-            const bool buttonRightThumb,
-            const bool buttonDpadUp,
-            const bool buttonDpadRight,
-            const bool buttonDpadDown,
-            const bool buttonDpadLeft
-            
+            const bool buttonA, const bool buttonB, const bool buttonX, const bool buttonY,
+            const bool buttonStart, const bool buttonBack, const bool buttonGuide,
+            const bool buttonLeftBumper, const bool buttonRightBumper, const bool buttonLeftThumb,
+            const bool buttonRightThumb, const bool buttonDpadUp, const bool buttonDpadRight,
+            const bool buttonDpadDown, const bool buttonDpadLeft
+
         ) noexcept {
             updateAxes(
-                axisLeftX, axisLeftY,
-                axisRightX, axisRightY,
-                triggerLeft, triggerRight,
+                axisLeftX, axisLeftY, axisRightX, axisRightY, triggerLeft, triggerRight,
 
-                 buttonA,
-                 buttonB,
-                 buttonX,
-                 buttonY,
-                 buttonStart,
-                 buttonBack,
-                 buttonGuide,
-                 buttonLeftBumper,
-                 buttonRightBumper,
-                 buttonLeftThump,
-                 buttonRightThumb,
-                 buttonDpadUp,
-                 buttonDpadRight,
-                 buttonDpadDown,
-                 buttonDpadLeft
-            );
+               buttonA, buttonB, buttonX, buttonY, buttonStart, buttonBack, buttonGuide, buttonLeftBumper,
+               buttonRightBumper, buttonLeftThumb, buttonRightThumb, buttonDpadUp, buttonDpadRight,
+               buttonDpadDown, buttonDpadLeft);
         }
 
 
         /**
-         * @brief Updates the axes of this GamepadState object.
+         * @brief Updates the axes and button states of this GamepadState object.
+         *
+         * This method updates raw axis and trigger values and stores the boolean
+         * state of all standard gamepad buttons. Float parameters are asserted to
+         * be in their expected ranges and then clamped.
          *
          * For the sticks' range [-1, 1] the following holds:
          * -1 means moved all the way left/down, 0 means not moved at all, 1 means moved all the way right/up.
@@ -201,65 +247,83 @@ export namespace helios::input {
          * For the triggers' range of [0, 1] the following holds:
          * 0 means not pressed, 1 means fully pressed.
          *
-         * @param axisLeftX The value of the x-axis of the left stick, in the range [-1, 1].
-         * @param axisLeftY The value of the y-axis of the left stick, in the range [-1, 1].
-         * @param axisRightX The value of the x-axis of the right stick, in the range [-1, 1].
-         * @param axisRightY The value of the y-axis of the right stick, in the range [-1, 1].
-         * @param triggerLeft The value of the left trigger, in the range [0, 1].
-         * @param triggerRight The value of the right trigger, in the range [0, 1].
+         * @param axisLeftX The x-axis of the left stick, expected in [-1, 1].
+         * @param axisLeftY The y-axis of the left stick, expected in [-1, 1].
+         * @param axisRightX The x-axis of the right stick, expected in [-1, 1].
+         * @param axisRightY The y-axis of the right stick, expected in [-1, 1].
+         * @param triggerLeft The left trigger value, expected in [0, 1].
+         * @param triggerRight The right trigger value, expected in [0, 1].
+         * @param buttonA True if the A button is pressed.
+         * @param buttonB True if the B button is pressed.
+         * @param buttonX True if the X button is pressed.
+         * @param buttonY True if the Y button is pressed.
+         * @param buttonStart True if the Start button is pressed.
+         * @param buttonBack True if the Back button is pressed.
+         * @param buttonGuide True if the Guide (platform) button is pressed.
+         * @param buttonLeftBumper True if the left bumper is pressed.
+         * @param buttonRightBumper True if the right bumper is pressed.
+         * @param buttonLeftThumb True if the left thumbstick button is pressed.
+         * @param buttonRightThumb True if the right thumbstick button is pressed.
+         * @param buttonDpadUp True if the D-pad Up button is pressed.
+         * @param buttonDpadRight True if the D-pad Right button is pressed.
+         * @param buttonDpadDown True if the D-pad Down button is pressed.
+         * @param buttonDpadLeft True if the D-pad Left button is pressed.
          */
-        void updateAxes (
-            const float axisLeftX, const float axisLeftY,
-            const float axisRightX, const float axisRightY,
+        void updateAxes(
+            const float axisLeftX, const float axisLeftY, const float axisRightX, const float axisRightY,
             const float triggerLeft, const float triggerRight,
-            
-            const bool buttonA,
-            const bool buttonB,
-            const bool buttonX,
-            const bool buttonY,
-            const bool buttonStart,
-            const bool buttonBack,
-            const bool buttonGuide,
-            const bool buttonLeftBumper,
-            const bool buttonRightBumper,
-            const bool buttonLeftThumb,
-            const bool buttonRightThumb,
-            const bool buttonDpadUp,
-            const bool buttonDpadRight,
-            const bool buttonDpadDown,
-            const bool buttonDpadLeft
-        ) noexcept{
 
-            assert(axisLeftX >= -1.0f && axisLeftX <= 1.0f && "axisLeftX is out of bounds.");
-            assert(axisLeftY >= -1.0f && axisLeftY <= 1.0f && "axisLeftY is out of bounds.");
-            assert(axisRightX >= -1.0f && axisRightX <= 1.0f && "axisRightX is out of bounds.");
-            assert(axisRightY >= -1.0f && axisRightY <= 1.0f && "axisRightY is out of bounds.");
-            assert(triggerLeft >= 0.0f && triggerLeft <= 1.0f && "triggerLeft is out of bounds.");
-            assert(triggerRight >= 0.0f && triggerRight <= 1.0f && "triggerRight is out of bounds.");
+            const bool buttonA, const bool buttonB, const bool buttonX, const bool buttonY,
+            const bool buttonStart, const bool buttonBack, const bool buttonGuide,
+            const bool buttonLeftBumper, const bool buttonRightBumper, const bool buttonLeftThumb,
+            const bool buttonRightThumb, const bool buttonDpadUp, const bool buttonDpadRight,
+            const bool buttonDpadDown, const bool buttonDpadLeft
+        ) noexcept {
 
-            axisLeftX_    = std::clamp(axisLeftX, -1.0f, 1.0f);
-            axisLeftY_    = std::clamp(axisLeftY, -1.0f, 1.0f);
-            axisRightX_   = std::clamp(axisRightX, -1.0f, 1.0f);
-            axisRightY_   = std::clamp(axisRightY, -1.0f, 1.0f);
-            triggerLeft_  = std::clamp(triggerLeft, 0.0f, 1.0f);
+            #if HELIOS_DEBUG
+            if(axisLeftX >= -1.0f && axisLeftX <= 1.0f) {
+                logger_.warn("axisLeftX is out of bounds.");
+            }
+            if(axisLeftY >= -1.0f && axisLeftY <= 1.0f) {
+                logger_.warn("axisLeftY is out of bounds.");
+            }
+            if(axisRightX >= -1.0f && axisRightX <= 1.0f) {
+                logger_.warn("axisRightX is out of bounds.");
+            }
+            if(axisRightY >= -1.0f && axisRightY <= 1.0f) {
+                logger_.warn("axisRightY is out of bounds.");
+            }
+            if(triggerLeft >= 0.0f && triggerLeft <= 1.0f) {
+                logger_.warn("triggerLeft is out of bounds.");
+            }
+            if(triggerRight >= 0.0f && triggerRight <= 1.0f) {
+                logger_.warn("triggerRight is out of bounds.");
+            }
+            #endif
+
+            axisLeftX_ = std::clamp(axisLeftX, -1.0f, 1.0f);
+            axisLeftY_ = std::clamp(axisLeftY, -1.0f, 1.0f);
+            axisRightX_ = std::clamp(axisRightX, -1.0f, 1.0f);
+            axisRightY_ = std::clamp(axisRightY, -1.0f, 1.0f);
+            triggerLeft_ = std::clamp(triggerLeft, 0.0f, 1.0f);
             triggerRight_ = std::clamp(triggerRight, 0.0f, 1.0f);
 
-             buttonA_ = buttonA;
-             buttonB_= buttonB;
-             buttonX_= buttonX;
-             buttonY_= buttonY;
-             buttonStart_= buttonStart;
-             buttonBack_= buttonBack;
-             buttonGuide_= buttonGuide;
-             buttonLeftBumper_= buttonLeftBumper;
-             buttonRightBumper_= buttonRightBumper;
-             buttonLeftThumb_= buttonLeftThumb;
-             buttonRightThumb_= buttonRightThumb;
-             buttonDpadUp_= buttonDpadUp;
-             buttonDpadRight_= buttonDpadRight;
-             buttonDpadDown_= buttonDpadDown;
-             buttonDpadLeft_ = buttonDpadLeft;
-            
+            buttonA_ = buttonA;
+            buttonB_ = buttonB;
+            buttonX_ = buttonX;
+            buttonY_ = buttonY;
+            buttonStart_ = buttonStart;
+            buttonBack_ = buttonBack;
+            buttonGuide_ = buttonGuide;
+            buttonLeftBumper_ = buttonLeftBumper;
+            buttonRightBumper_ = buttonRightBumper;
+            buttonLeftThumb_ = buttonLeftThumb;
+            buttonRightThumb_ = buttonRightThumb;
+            buttonDpadUp_ = buttonDpadUp;
+            buttonDpadRight_ = buttonDpadRight;
+            buttonDpadDown_ = buttonDpadDown;
+            buttonDpadLeft_ = buttonDpadLeft;
+
             needsUpdate_ = true;
         }
 
@@ -328,7 +392,7 @@ export namespace helios::input {
          *
          * @return A helios::math::vec2f, with the first component being the x-axis, the second component the y-axis.
          */
-        [[nodiscard]] helios::math::vec2f left()  const noexcept {
+        [[nodiscard]] helios::math::vec2f left() const noexcept {
             if (needsUpdate_) {
                 update();
             }
@@ -363,24 +427,140 @@ export namespace helios::input {
         }
 
 
-        [[nodiscard]] bool buttonA() const noexcept { return buttonA_; };
-        [[nodiscard]] bool buttonB() const noexcept { return buttonB_; };
-        [[nodiscard]] bool buttonX() const noexcept { return buttonX_; };
-        [[nodiscard]] bool buttonY() const noexcept { return buttonY_; };
-        [[nodiscard]] bool buttonStart() const noexcept { return buttonStart_; };
-        [[nodiscard]] bool buttonBack() const noexcept { return buttonBack_; };
-        [[nodiscard]] bool buttonGuide() const noexcept { return buttonGuide_; };
-        [[nodiscard]] bool buttonLeftBumper() const noexcept { return buttonLeftBumper_; };
-        [[nodiscard]] bool buttonRightBumper() const noexcept { return buttonRightBumper_; };
-        [[nodiscard]] bool buttonLeftThumb() const noexcept { return buttonLeftThumb_; };
-        [[nodiscard]] bool buttonRightThumb() const noexcept { return buttonRightThumb_; };
-        [[nodiscard]] bool buttonDpadUp() const noexcept { return buttonDpadUp_; };
-        [[nodiscard]] bool buttonDpadRight() const noexcept { return buttonDpadRight_; };
-        [[nodiscard]] bool buttonDpadDown() const noexcept { return buttonDpadDown_; };
-        [[nodiscard]] bool buttonDpadLeft() const noexcept { return buttonDpadLeft_; };
+        /**
+         * @brief Returns true when the A button is pressed.
+         * @return true if pressed, false otherwise.
+         */
+        [[nodiscard]] bool buttonA() const noexcept {
+            return buttonA_;
+        };
 
 
+        /**
+         * @brief Returns true when the B button is pressed.
+         * @return true if pressed, false otherwise.
+         */
+        [[nodiscard]] bool buttonB() const noexcept {
+            return buttonB_;
+        };
+
+
+        /**
+         * @brief Returns true when the X button is pressed.
+         * @return true if pressed, false otherwise.
+         */
+        [[nodiscard]] bool buttonX() const noexcept {
+            return buttonX_;
+        };
+
+
+        /**
+         * @brief Returns true when the Y button is pressed.
+         * @return true if pressed, false otherwise.
+         */
+        [[nodiscard]] bool buttonY() const noexcept {
+            return buttonY_;
+        };
+
+
+        /**
+         * @brief Returns true when the Start button is pressed.
+         * @return true if pressed, false otherwise.
+         */
+        [[nodiscard]] bool buttonStart() const noexcept {
+            return buttonStart_;
+        };
+
+
+        /**
+         * @brief Returns true when the Back button is pressed.
+         * @return true if pressed, false otherwise.
+         */
+        [[nodiscard]] bool buttonBack() const noexcept {
+            return buttonBack_;
+        };
+
+
+        /**
+         * @brief Returns true when the Guide button is pressed.
+         * @return true if pressed, false otherwise.
+         */
+        [[nodiscard]] bool buttonGuide() const noexcept {
+            return buttonGuide_;
+        };
+
+
+        /**
+         * @brief Returns true when the left bumper is pressed.
+         * @return true if pressed, false otherwise.
+         */
+        [[nodiscard]] bool buttonLeftBumper() const noexcept {
+            return buttonLeftBumper_;
+        };
+
+
+        /**
+         * @brief Returns true when the right bumper is pressed.
+         * @return true if pressed, false otherwise.
+         */
+        [[nodiscard]] bool buttonRightBumper() const noexcept {
+            return buttonRightBumper_;
+        };
+
+
+        /**
+         * @brief Returns true when the left thumbstick button is pressed.
+         * @return true if pressed, false otherwise.
+         */
+        [[nodiscard]] bool buttonLeftThumb() const noexcept {
+            return buttonLeftThumb_;
+        };
+
+
+        /**
+         * @brief Returns true when the right thumbstick button is pressed.
+         * @return true if pressed, false otherwise.
+         */
+        [[nodiscard]] bool buttonRightThumb() const noexcept {
+            return buttonRightThumb_;
+        };
+
+
+        /**
+         * @brief Returns true when the D-pad Up button is pressed.
+         * @return true if pressed, false otherwise.
+         */
+        [[nodiscard]] bool buttonDpadUp() const noexcept {
+            return buttonDpadUp_;
+        };
+
+
+        /**
+         * @brief Returns true when the D-pad Right button is pressed.
+         * @return true if pressed, false otherwise.
+         */
+        [[nodiscard]] bool buttonDpadRight() const noexcept {
+            return buttonDpadRight_;
+        };
+
+
+        /**
+         * @brief Returns true when the D-pad Down button is pressed.
+         * @return true if pressed, false otherwise.
+         */
+        [[nodiscard]] bool buttonDpadDown() const noexcept {
+            return buttonDpadDown_;
+        };
+
+
+        /**
+         * @brief Returns true when the D-pad Left button is pressed.
+         * @return true if pressed, false otherwise.
+         */
+        [[nodiscard]] bool buttonDpadLeft() const noexcept {
+            return buttonDpadLeft_;
+        };
     };
 
 
-}
+} // namespace helios::input

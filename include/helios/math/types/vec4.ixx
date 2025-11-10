@@ -1,3 +1,6 @@
+/**
+ * @brief 4D vector type and utilities.
+ */
 module;
 
 #include <cassert>
@@ -34,7 +37,7 @@ export namespace helios::math {
     public:
 
         /**
-         * @brief Creates a new vec3 with its values initialized to (0, 0, 0, 0)
+         * @brief Creates a new vec4 with its values initialized to (0, 0, 0, 0)
          */
         constexpr vec4() noexcept : v{static_cast<T>(0), static_cast<T>(0), static_cast<T>(0), static_cast<T>(0)} {}
 
@@ -46,7 +49,6 @@ export namespace helios::math {
          * @param y The value for the y component.
          * @param z The value for the z component.
          * @param w The value for the w component.
-         *
          */
         constexpr vec4(const T x, const T y, const T z, const T w) noexcept : v{x, y, z, w} {}
 
@@ -61,12 +63,11 @@ export namespace helios::math {
 
 
         /**
-         * @brief Constructs a new vec4 from the vec3 vector and the w value.
+         * @brief Constructs a new vec4 from the vec3 vector and sets w to 1.
          *
          * @param vec The vec3<T> vector.
-         * @param w The value for the w component.
          */
-        explicit constexpr vec4(const vec3<T>& vec) noexcept : v{vec[0], vec[1], vec[2], 1.0f} {}
+        explicit constexpr vec4(const vec3<T>& vec) noexcept : v{vec[0], vec[1], vec[2], static_cast<T>(1)} {}
 
 
         /**
@@ -89,7 +90,7 @@ export namespace helios::math {
          *
          * @param i The index to query
          *
-         * @return A const ref to the requested component.
+         * @return A ref to the requested component.
          */
         constexpr T& operator[](const size_t i) noexcept {
             assert(i <= 3 && "vec4 - Index out of bounds.");
@@ -104,13 +105,11 @@ export namespace helios::math {
      * Useful for APIs that expect a pointer to vector data, like OpenGL.
      *
      * @tparam T The numeric type of the vector components.
-     *
      * @param m A reference to the `vec4<T>` vector.
-     *
-     * @return A const pointer to the element at [0]
+     * @return A const pointer to the element at index 0.
      */
     template<helios::math::Numeric T>
-    const float* value_ptr(const vec4<T>& m) noexcept {
+    const T* value_ptr(const vec4<T>& m) noexcept {
         return &m[0];
     }
 

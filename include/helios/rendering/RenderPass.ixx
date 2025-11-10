@@ -1,3 +1,6 @@
+/**
+ * @brief Defines a render pass that executes a render queue with specific uniform values.
+ */
 module;
 
 #include <memory>
@@ -17,12 +20,11 @@ export namespace helios::rendering {
      * @brief Represents a single RenderPass under a set of specific uniform values.
      *
      * A `RenderPass` holds a `RenderQueue` that contains all `RenderCommands` that need
-     * to be processed in the subsequent rendering.
-     * The associated uniform values specified with this `RenderPass`remain constant
-     * during processing the `RenderCommmand`s.
+     * to be processed in the subsequent rendering. The associated uniform values specified
+     * with this `RenderPass` remain constant during processing of the `RenderCommand`s.
      *
      * `RenderPass`es are typically processed sequentially by an API-specific implementation
-     * of the pure virtual `RenderingDevice`-class.
+     * of the pure virtual `RenderingDevice` class.
      *
      * @note A `RenderPass` should be configurable with other properties relevant to the underlying
      * rendering backend, e.g. depth testing, draw mode etc.
@@ -31,22 +33,20 @@ export namespace helios::rendering {
 
     private:
         /**
-         * @brief An owning, unique pointer to the `RenderQueue` for this pass.
-         *
+         * @brief An owning unique pointer to the `RenderQueue` for this pass.
          */
         std::unique_ptr<helios::rendering::RenderQueue> renderQueue_;
 
         /**
-         * @brief An owning, unique pointer to the uniform values specific to the current pass (i.e.,
-         * the rendered "frame").
-         * This map contains uniforms that change once per frame, such as the view and the
+         * @brief An owning unique pointer to the uniform values specific to the current pass (i.e.,
+         * the rendered "frame"). This map contains uniforms that change once per frame, such as the view and the
          * projection matrix.
          */
         std::unique_ptr<const helios::rendering::shader::UniformValueMap> frameUniformValues_;
 
     protected:
         /**
-         * @brief The logger used with this Scene instance.
+         * @brief The logger used with this RenderPass instance.
          * Defaults to HELIOS_LOG_SCOPE
          *
          * @todo constructor injection
@@ -65,7 +65,7 @@ export namespace helios::rendering {
         RenderPass(const RenderPass&) = delete;
 
         /**
-         * @brief Prevent Copying.
+         * @brief Prevent copy assignment.
          * A RenderPass is not intended to be copied.
          */
         RenderPass& operator=(const RenderPass&) = delete;
@@ -84,9 +84,9 @@ export namespace helios::rendering {
          * @brief Create a new `RenderPass` with the specified `RenderQueue` and the `UniformValueMap`.
          * Ownership of both objects is transferred to **this** `RenderPass`.
          *
-         * @param renderQueue A unique ptr to the `RenderQueue` that should be processes with this pass.
-         * @param frameUniformValues A unique ptr to the UniformValueMap associated with this pass, i.e.
-         * frame specific Uniform Values. If no values are specified, a default empty set is created.
+         * @param renderQueue A unique ptr to the `RenderQueue` that should be processed with this pass.
+         * @param frameUniformValues A unique ptr to the `UniformValueMap` associated with this pass, i.e.
+         * frame-specific uniform values. If no values are specified, a default empty set is created.
          */
         explicit RenderPass(
             std::unique_ptr<helios::rendering::RenderQueue> renderQueue,
@@ -96,7 +96,7 @@ export namespace helios::rendering {
         /**
          * @brief Returns a const ref to the `RenderQueue` this `RenderPass` holds.
          *
-         * @return A const ref to this `RenderPass` `RenderQueue`.`
+         * @return A const ref to this `RenderPass`' `RenderQueue`.
          */
         [[nodiscard]] const RenderQueue& renderQueue() const noexcept;
 
@@ -112,11 +112,10 @@ export namespace helios::rendering {
          * @brief Returns a const ref to this `RenderPass`' `UniformValueMap`.
          * The map might be empty.
          *
-         * @return A const ref to this RenderPass' UniformValueMap for the frame.
+         * @return A const ref to this RenderPass' UniformValueMap for the current frame.
          */
         [[nodiscard]] const helios::rendering::shader::UniformValueMap& frameUniformValues() const noexcept;
     };
 
 
 }
-

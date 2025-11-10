@@ -1,3 +1,6 @@
+/**
+ * @brief Mesh abstraction: immutable vertex/index data and configuration.
+ */
 module;
 
 #include <memory>
@@ -22,7 +25,7 @@ export namespace helios::rendering::model {
      * @brief Representative of a renderable 3D mesh.
      *
      * A Mesh instance contains vertex data and indices provided by geometric shapes.
-     * Meshes contain references to immutable, shared Vertex Data and indices.
+     * Meshes contain references to immutable, shared vertex data and indices.
      * Concrete implementations will handle resource management.
      *
      * @see [Gre19, 631]
@@ -44,8 +47,8 @@ export namespace helios::rendering::model {
         std::shared_ptr<const std::vector<unsigned int>> indices_ = nullptr;
 
         /**
-          * @brief Shared pointer to the MeshConfig used with this Mesh.
-          */
+         * @brief Shared pointer to the MeshConfig used with this Mesh.
+         */
         std::shared_ptr<const helios::rendering::model::config::MeshConfig> meshConfig_;
 
         /**
@@ -80,11 +83,11 @@ export namespace helios::rendering::model {
         /**
          * @brief Creates a new Mesh instance.
          *
-         * @param vertices A shared pointer to a vector of const Vertex
-         * @param indices A shared pointer to a vector of indices
-         * @param meshConfig A shared ptr to the const MeshConfig used with this Mesh.
+         * @param vertices A shared_ptr to a vector of Vertex.
+         * @param indices A shared_ptr to a vector of indices.
+         * @param meshConfig A shared_ptr to the MeshConfig used with this Mesh.
          *
-         * @throws std::invalid_argument if either "vertices", "indices" or meshConfig is a null shared pointer
+         * @throws std::invalid_argument if either "vertices", "indices" or meshConfig is a null shared_ptr
          */
         explicit Mesh(
             std::shared_ptr<const std::vector<Vertex>> vertices,
@@ -96,10 +99,10 @@ export namespace helios::rendering::model {
          * @brief Creates a new Mesh instance from the specified Shape.
          *
          * @param shape A const reference to the Shape.
-         * @param meshConfig A shared ptr to the const MeshConfig used with this Mesh.
+         * @param meshConfig A shared_ptr to the MeshConfig used with this Mesh.
          *
-         * @throws std::invalid_argument if meshConfig is a null shared pointer, or if the
-         * shape contained null data
+         * @throws std::invalid_argument if meshConfig is a null shared_ptr, or if the
+         * shape contained null data.
          */
         explicit Mesh(
             const helios::rendering::asset::shape::Shape& shape,
@@ -117,7 +120,7 @@ export namespace helios::rendering::model {
          * @brief Returns a const reference to the underlying vertices.
          * The returned data is guaranteed to be a valid reference to existing data.
          *
-         * @return std::vector<Vertex>
+         * @return A const ref to the vector of Vertex.
          */
         [[nodiscard]] const std::vector<Vertex>& vertices() const noexcept;
 
@@ -125,7 +128,7 @@ export namespace helios::rendering::model {
          * @brief Returns a const reference to the underlying indices.
          * The returned data is guaranteed to be a valid reference to existing data.
          *
-         * @return std::vector<unsigned int>
+         * @return A const ref to the vector of indices.
          */
         [[nodiscard]] const std::vector<unsigned int>& indices() const noexcept;
 

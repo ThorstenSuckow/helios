@@ -1,3 +1,6 @@
+/**
+ * @brief Render queue holding a list of render commands for a render pass.
+ */
 module;
 
 #include <iostream>
@@ -79,14 +82,14 @@ export namespace helios::rendering {
         void add(std::unique_ptr<const helios::rendering::RenderCommand> renderCommand);
 
         /**
-         * @brief Returns a const ref to the internal vector of `RenderableCommand`.
+         * @brief Returns a const ref to the internal vector of `RenderCommand`.
          *
          * @return A const ref to the list of `RenderCommand`s of this queue.
          */
         [[nodiscard]] const std::vector<std::unique_ptr<const helios::rendering::RenderCommand>>& renderCommands() const noexcept;
 
         /**
-         * @brief Clears all `RenderableCommand` objects from the queue.
+         * @brief Clears all `RenderCommand` objects from the queue.
          *
          * This prepares this queue to be reused in a new rendering pass.
          */
@@ -95,7 +98,7 @@ export namespace helios::rendering {
         /**
          * @brief Returns the number of `RenderCommand`s this queue contains.
          *
-         * @return The number of RenderCommands in this Queue.
+         * @return The number of RenderCommands in this queue.
          */
         [[nodiscard]] size_t count() const noexcept;
     };

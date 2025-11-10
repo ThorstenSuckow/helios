@@ -1,3 +1,6 @@
+/**
+ * @brief Abstract base class for reading file contents into a string.
+ */
 module;
 
 #include <string>
@@ -19,7 +22,7 @@ export namespace helios::util::io {
 
     protected:
         /**
-         * @brief The Logegr used with this FileReader.
+         * @brief The logger used with this FileReader.
          */
         helios::util::log::Logger logger_ = helios::util::log::LogManager::getInstance().registerLogger(HELIOS_LOG_SCOPE);
 
@@ -33,25 +36,23 @@ export namespace helios::util::io {
         StringFileReader() = default;
 
         /**
-         * @brief Reads the file at the specified path.
+         * @brief Reads the entire contents of the file and returns them as a string.
          *
-         * @param filename The path to the file-object to read from.
+         * @param filename The path to the file to read.
+         * @return The contents of the file as a std::string. If reading fails, an empty string is returned.
          *
-         * @return The contents of the file as a string.
-         *
-         * @throws std::runtime_error
+         * @throws std::runtime_error if the file operation fails.
          */
-        virtual std::string getContents(const std::string& filename) const  = 0;
+        [[nodiscard]] virtual std::string getContents(const std::string& filename) const  = 0;
 
         /**
-         * @brief Reads the contents of the file into the specified string.
+         * @brief Attempts to read the entire contents of the file into the provided string.
          *
-         * @param filename The path to the file-object to read from.
-         * @param contents A ref to the string to write the file contents into.
-         *
-         * @return True if reading succeeded, otherwise false.
+         * @param filename The path to the file to read.
+         * @param contents Output parameter receiving the file contents on success.
+         * @return true if reading succeeded and `contents` was populated, otherwise false.
          */
-        virtual bool readInto( const std::string& filename,  std::string& contents) const noexcept = 0;
+        [[nodiscard]] virtual bool readInto( const std::string& filename,  std::string& contents) const noexcept = 0;
 
 
     };

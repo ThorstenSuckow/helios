@@ -1,3 +1,6 @@
+/**
+ * @brief Basic rectangle shape (2D outline).
+ */
 module;
 
 #include <vector>

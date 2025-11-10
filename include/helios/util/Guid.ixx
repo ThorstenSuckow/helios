@@ -1,3 +1,6 @@
+/**
+ * @brief Lightweight GUID (globally unique identifier) implementation.
+ */
 module;
 
 #include <atomic>
@@ -12,7 +15,7 @@ export namespace helios::util {
     /**
      * @brief Representative of a Globally Unique Identifier.
      *
-     * Generating guids with this class is considered thread-safe.
+     * Generating GUIDs with this class is considered thread-safe.
      */
     class Guid final {
     private:
@@ -27,14 +30,17 @@ export namespace helios::util {
         /**
          * @brief Generates a new Guid.
          *
-         * @return Guid an immutable Guid-instance
+         * This function produces a new, unique Guid value. It is safe to call from
+         * multiple threads.
+         *
+         * @return A newly generated `Guid` instance.
          */
         static Guid generate() noexcept;
 
         /**
-         * @brief Returns the raw value of this Guid.
+         * @brief Returns the raw 64-bit value of this Guid.
          *
-         * @return uint64_t
+         * @return The underlying uint64_t value representing this Guid.
          */
         [[nodiscard]] constexpr uint64_t value() const noexcept {
             return value_;

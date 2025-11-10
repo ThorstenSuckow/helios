@@ -1,3 +1,6 @@
+/**
+ * @brief A lightweight class for transferring the state of a Gamepad.
+ */
 module;
 
 #include <cassert>
@@ -15,35 +18,31 @@ export namespace helios::input {
      *
      * This class models a reusable object representing the input state of a gamepad.
      * The input state of a gamepad consists of the state of the left and right trigger,
-     * ranging from [0, 1], whereas 1 means fully pressed, 0 means not pressed at all.
+     * ranging from [0, 1], where 1 means fully pressed and 0 means not pressed at all.
      *
      * Similarly, a GamepadState provides information about the left and the right
-     * gamepad axis. Both the x- as well as the y-axis range from [-1, 1], whereas, for
-     * the x-axis, the following holds:
-     *  - 0.00 => not moved at all.
+     * gamepad axes. Both the x- and the y-axis range from [-1, 1]. For the x-axis,
+     * the following holds:
+     *  -  0.00 => not moved at all
      *  - -1.00 => moved all the way to the left
-     *  - 1.00 => moved all the way to the right
+     *  -  1.00 => moved all the way to the right
      *
-     * Analogously for the y-axis, whereas the up-position is positive, the
-     * down position is negative.
+     * For the y-axis the positive direction corresponds to "up" and the negative
+     * direction corresponds to "down".
      *
-     * Updating the values is done by calling `updateAxes` on this object
+     * Updating the values is done by calling `updateAxes` on this object.
      *
-     * For convenient access of the axis in 2D coordinates, the class provides accessors
-     * to the sticks' axes in vec2f-form.
+     * For convenient access of the axes in 2D coordinates, the class provides accessors
+     * to the sticks' axes in `vec2f` form.
      *
-     * @note  It should be emphasized that implementing APIs must account for
-     * joystick **drift**: Achieving 0.00 for x/y-axis
-     * when no (human) input occurred is probably rare. Consider adding a dead zone
-     * in your game when processing the GamepadState.
-     * Also, axis values are individually clipped to [-1.0, 1.0], but the magnitude of the
-     * resulting (x, y) vector may exceed 1.0. Applications should normalize input vectors
-     * where appropriate and possibly offer calibration.
+     * @note Implementations must account for joystick drift: achieving exactly 0.0
+     * for x/y when no human input occurred is rare. Consider applying a dead zone
+     * when processing the GamepadState. Axis values are individually clipped to [-1.0, 1.0],
+     * but the magnitude of the resulting (x, y) vector may exceed 1.0. Applications should
+     * normalize input vectors where appropriate and possibly offer calibration.
      *
-     * This implementation is heavily inspired by the glfw-implementation
-     * of the gamepad input state.
+     * This implementation is inspired by the GLFW gamepad input model.
      * @see https://www.glfw.org/docs/latest/input_guide.html#joystick
-     *
      */
     class GamepadState {
 
@@ -94,14 +93,14 @@ export namespace helios::input {
         mutable helios::math::vec2f right_;
 
         /**
-         * @brief Cached vec2f representation of the triggers (lft, rgt).
+         * @brief Cached vec2f representation of the triggers (left, right).
          */
         mutable helios::math::vec2f trigger_;
 
         /**
          * @brief Internal method to update the cached vec2f representations.
-         * This method should be called when the current values of the axis are queried
-         * in vec2f form, and needsUpdate_ evaluates to `true`.
+         * This method should be called when the current values of the axes are queried
+         * in vec2f form and `needsUpdate_` evaluates to `true`.
          */
         void update() const noexcept {
             left_ = helios::math::vec2f(axisLeftX_, axisLeftY_);
@@ -125,7 +124,7 @@ export namespace helios::input {
         /**
          * @brief Creates a new GamepadState object.
          *
-         * Delegates to updateAxes for value initialization.
+         * Delegates to `updateAxes` for value initialization.
          *
          * @see updateAxes
          */
@@ -143,20 +142,20 @@ export namespace helios::input {
 
 
         /**
-         * Updates the axes of this GamepadState-object.
+         * @brief Updates the axes of this GamepadState object.
          *
-         * For the sticks' range [-1, 1], the following holds:
+         * For the sticks' range [-1, 1] the following holds:
          * -1 means moved all the way left/down, 0 means not moved at all, 1 means moved all the way right/up.
          *
          * For the triggers' range of [0, 1] the following holds:
-         * 0 means not moved at all, 1 means moved all the way through
+         * 0 means not pressed, 1 means fully pressed.
          *
          * @param axisLeftX The value of the x-axis of the left stick, in the range [-1, 1].
          * @param axisLeftY The value of the y-axis of the left stick, in the range [-1, 1].
          * @param axisRightX The value of the x-axis of the right stick, in the range [-1, 1].
-         * @param axisRightY The value of the yaxis of the right stick, in the range [-1, 1].
-         * @param triggerLeft The value of the axis of the left trigger, in the range [0, 1]
-         * @param triggerRight The value of the x-axis of the right trigger, in the range [0, 1]
+         * @param axisRightY The value of the y-axis of the right stick, in the range [-1, 1].
+         * @param triggerLeft The value of the left trigger, in the range [0, 1].
+         * @param triggerRight The value of the right trigger, in the range [0, 1].
          */
         void updateAxes (
             const float axisLeftX, const float axisLeftY,
@@ -271,7 +270,7 @@ export namespace helios::input {
          * @brief Returns the state of the triggers as a helios::math::vec2f.
          *
          * @return A helios::math::vec2f, with the first component being the left trigger-axis,
-         * the second component the right trigger-axis..
+         * the second component the right trigger-axis.
          */
         [[nodiscard]] helios::math::vec2f trigger() const noexcept {
             if (needsUpdate_) {

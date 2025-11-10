@@ -1,3 +1,6 @@
+/**
+ * @brief Camera node providing view and projection matrices.
+ */
 module;
 
 #include <memory>
@@ -49,12 +52,11 @@ export namespace helios::scene {
         Camera();
 
         /**
-         * @brief This method will do nothing but returning a `nullptr`, indicating that a `Camera`
-         * must not have child modes.
+         * @brief This method will do nothing but return `nullptr`, indicating that a `Camera`
+         * must not have child nodes.
          *
-         * @param sceneNode
-         *
-         * @return This implementation returns a `nullptr.`
+         * @param sceneNode The attempted child node to add (ignored).
+         * @return This implementation returns `nullptr`.
          *
          * @see https://stackoverflow.com/questions/24609872/delete-virtual-function-from-a-derived-class
          */
@@ -69,11 +71,11 @@ export namespace helios::scene {
         [[nodiscard]] const helios::math::mat4f& projectionMatrix() const noexcept;
 
         /**
-         * @brief Returns a constant ref to this camera' view matrix.
-         * Automatically computed as inverse from the camera's world
-         * transform (i.e. [v]_c = P_{C <- W } [v]_w) = P_{W <- C}^{-1} [v]_w
+         * @brief Returns a constant ref to this camera's view matrix.
+         * Automatically computed as the inverse of the camera's world
+         * transform.
          *
-         * @return A const ref to this `Camera`s view matrix.
+         * @return A const ref to this `Camera`'s view matrix.
          */
         [[nodiscard]] const helios::math::mat4f& viewMatrix() const noexcept;
 

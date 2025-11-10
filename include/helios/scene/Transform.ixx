@@ -1,3 +1,7 @@
+/**
+ * @brief Represents a 3D transformation consisting of translation, rotation
+ * and scale.
+ */
 module;
 
 
@@ -12,11 +16,12 @@ export namespace helios::scene {
     /**
      * @brief Represents a 3D transformation consisting of translation, rotation
      * and scale.
+     *
      * This class encapsulates the components of a local transform for SceneNodes.
      * It uses lazy evaluation to compute the final transform.
      * The current scale, translation and rotation is queryable.
      * Changing the transformation is always considered against an
-     * "origin" of an object, that ist, a 4x4 identity matrix
+     * "origin" of an object, that is, a 4x4 identity matrix
      *
      * @todo use quaternions for rotation
      */
@@ -46,7 +51,7 @@ export namespace helios::scene {
 
         /**
          * @brief The cached 4x4 matrix, computed from scale, rotation and translation
-         * (in this order, that is, T*(R*S)
+         * (in this order: T * (R * S)).
          */
         mutable helios::math::mat4f cached_ = helios::math::mat4f::identity();
 
@@ -96,8 +101,8 @@ export namespace helios::scene {
             void translate(const math::vec3f& translation) noexcept;
 
             /**
-             * @brief Sets the scale component of this vector.
-             * Marks this Transformation object as dirty.
+             * @brief Sets the scale component of this Transform.
+             * Marks this Transform object as dirty.
              *
              * @param scale A const ref to the new scale vector.
              */

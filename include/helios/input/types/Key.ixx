@@ -1,3 +1,6 @@
+/**
+ * @brief Keyboard key identifiers (platform-agnostic)
+ */
 module;
 
 export module helios.input.types.Key;
@@ -18,7 +21,7 @@ export namespace helios::input::types {
 
 
         /**
-         * @brief Provides the total count of the items in this enumeration.
+         * @brief Number of entries in this enumeration.
          */
         SIZE
     };

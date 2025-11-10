@@ -1,3 +1,6 @@
+/**
+ * @brief Primitive assembly types used by rendering backends
+ */
 module;
 
 export module helios.rendering.model.config.PrimitiveType;

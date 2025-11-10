@@ -1,6 +1,9 @@
+/**
+ * @brief Represents an immutable snapshot of a SceneGraph at a given point in time.
+ */
 module;
 
-#include <memory>
+
 #include <vector>
 
 export module helios.scene.Snapshot;
@@ -13,8 +16,8 @@ export namespace helios::scene {
     /**
      * @brief Represents an immutable snapshot of a SceneGraph at a given point in time.
      *
-     * The class encapsulated all necessary data to render a single frame. It is
-     * designed to be a lightweight dto to pass information to the rendering
+     * The class encapsulates all necessary data to render a single frame. It is
+     * designed to be a lightweight DTO to pass information to the rendering
      * engine abstraction layer, such as the `RenderPass` class.
      *
      * A snapshot includes a camera's projection and view matrix that should be used
@@ -53,13 +56,13 @@ export namespace helios::scene {
 
         /**
          * @brief Delete copy constructor.
-         * Snapshots are not intended to by copied.
+         * Snapshots are not intended to be copied.
          */
         Snapshot(const Snapshot&) = delete;
 
         /**
          * @brief Delete copy assignment operator.
-         * Snapshots are not intended tp be copied.
+         * Snapshots are not intended to be copied.
          */
         Snapshot& operator=(const Snapshot&) = delete;
 
@@ -80,7 +83,7 @@ export namespace helios::scene {
          * @brief Returns a const ref to this `Snapshot`'s SnapshotItems.
          * The vector contains all renderable items in the scene.
          *
-         * @return A const ref to this Snapshot's colelction of SnapshotItems.
+         * @return A const ref to this Snapshot's collection of SnapshotItems.
          */
         [[nodiscard]] const std::vector<SnapshotItem>& snapshotItems() const noexcept;
 
@@ -101,4 +104,3 @@ export namespace helios::scene {
         [[nodiscard]] const helios::math::mat4f& viewMatrix() const noexcept;
     };
 }
-

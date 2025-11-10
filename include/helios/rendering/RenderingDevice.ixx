@@ -1,3 +1,6 @@
+/**
+ * @brief Abstract interface for low-level rendering devices.
+ */
 module;
 
 export module helios.rendering.RenderingDevice;
@@ -12,7 +15,7 @@ import helios.rendering.RenderPass;
 export namespace helios::rendering {
 
     /**
-     * @brief Abstract interface for low level rendering device.
+     * @brief Abstract interface for a low-level rendering device.
      *
      * This pure virtual class provides the fundamental API for managing
      * the rendering pipeline and respective contracts for concrete
@@ -20,18 +23,18 @@ export namespace helios::rendering {
      * Vulkan...).
      *
      * Implementations of `RenderingDevice` are responsible for managing
-     * render passes, and configuring the viewport.
+     * render passes and configuring the viewport.
      */
     class RenderingDevice {
 
     protected:
         /**
-         * @brief Reflects the initialization state of this viewport.
+         * @brief Reflects the initialization state of this device.
          */
         bool initialized_ = false;
 
         /**
-         * @brief The logger used with this Material instance.
+         * @brief The logger used with this RenderingDevice instance.
          * Defaults to HELIOS_LOG_SCOPE
          *
          * @todo constructor injection
@@ -50,13 +53,13 @@ export namespace helios::rendering {
          * Implementing APIs should load pointers to underlying GL functions
          * or provide similar API-specific setup.
          *
-         * @throws if initializing this device failed.
+         * @throws std::runtime_error if initialization of the device fails.
          */
         virtual void init() = 0;
 
         /**
          * @brief Signals this device that the application is now ready to begin a new render pass.
-         * Implementing APIs should consider to prepare the rendering surface at this point and
+         * Implementing APIs should prepare the rendering surface at this point and
          * clear specific buffers.
          * This method should be called at the start of each frame before any drawing occurs.
          *
@@ -70,7 +73,7 @@ export namespace helios::rendering {
          * A `RenderPass` consists of `RenderCommand`s this RenderDevice executes, i.e.
          * binding meshes, materials and shaders as well as drawing geometry.
          *
-         * @param renderPass A ref to the RenderQueue that holds the `RenderCommand`s
+         * @param renderPass A ref to the RenderPass that holds the `RenderCommand`s
          * to be executed.
          */
         virtual void doRender(helios::rendering::RenderPass& renderPass) const noexcept = 0;
@@ -80,8 +83,8 @@ export namespace helios::rendering {
          * @brief Ends the specified render pass of this RenderingDevice.
          * This method should be called when the renderPass was processed by the RenderingDevice,
          * before the window swaps the buffers.
-         * Implementing classes should take care of unbinding frame buffers and / or flushing
-         * command bufefrs.
+         * Implementing classes should take care of unbinding frame buffers and/or flushing
+         * command buffers.
          *
         * @param renderPass The RenderPass that was processed by the rendering device.
          */
@@ -93,7 +96,7 @@ export namespace helios::rendering {
          *
          * @param renderPass The RenderPass to process by this RenderingDevice.
          */
-        void render(helios::rendering::RenderPass& renderPass) {
+        void render(helios::rendering::RenderPass& renderPass) const {
             beginRenderPass(renderPass);
             doRender(renderPass);
             endRenderPass(renderPass);
@@ -107,9 +110,8 @@ export namespace helios::rendering {
          * @param y y-coordinate of the lower left corner of the viewport
          * @param width width of the viewport, in pixels
          * @param height height of the viewport, in pixels
-         * @return
          */
-        virtual void setViewport(const int x, const int y, const int width, const int height) const noexcept = 0;
+        virtual void setViewport(int x, int y, int width, int height) const noexcept = 0;
 
 
         /**

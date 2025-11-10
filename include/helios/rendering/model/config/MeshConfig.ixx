@@ -1,3 +1,6 @@
+/**
+ * @brief Mesh configuration for drawing/topology
+ */
 module;
 
 export module helios.rendering.model.config.MeshConfig;
@@ -10,8 +13,8 @@ export namespace helios::rendering::model::config {
     /**
      * @brief Configuration for how a Mesh's data should be interpreted and rendered.
      *
-     * This class defines rendering-specific properties for meshes, e.g. to be used
-     * with draw calls.
+     * This struct defines rendering-specific properties for meshes, for example
+     * the primitive topology used by draw calls.
      */
     struct MeshConfig {
 

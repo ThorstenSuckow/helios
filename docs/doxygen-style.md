@@ -7,7 +7,7 @@ This document summarizes the minimal rules we use for Doxygen comments in the He
 - Language: English for this translation (code comments in the repo are German by default). Technical terms may remain in English.
 - Every public/header file should have a short file header: a 1–2 line @brief description (e.g. `@brief Matrix utilities`).
 - Use these Doxygen tags as needed: `@brief, @param, @return, @tparam, @see, @note, @todo`.
-- No empty`@return` or `@param` tags. Omit tags if there is nothing to say.
+- No empty `@return` or `@param` tags. Omit tags if there is nothing to say.
 - Write complete sentences, simple phrasing, correct capitalization and punctuation.
 
 ## Format & Examples

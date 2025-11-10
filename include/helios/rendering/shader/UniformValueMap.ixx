@@ -104,13 +104,17 @@ export namespace helios::rendering::shader {
         void set(UniformSemantics uniformSemantics, float value) noexcept;
 
         /**
-         * @brief Returns the float value for the specified uniform semantics.
+         * @brief Returns a raw const pointer to the float value for the specified uniform semantics.
+         *
+         * This method retrieves the float value associated with a given `UniformSemantics` identifier.
+         * If no float value is associated with the specified semantics, the method returns `nullptr`.
          *
          * @param uniformSemantics The `UniformSemantics` identifier for the uniform.
-         * @return The std::optional representing the uniformSemantics, or std::nullopt
-         * if not available.
+         *
+         * @return A raw const pointer to the associated float value, or `nullptr` if no float value
+         * is associated with this semantics.
          */
-        [[nodiscard]] std::optional<float> float_val(UniformSemantics uniformSemantics) const noexcept;
+        [[nodiscard]] const float* float_ptr(UniformSemantics uniformSemantics) const noexcept;
 
     };
 

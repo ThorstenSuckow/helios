@@ -281,22 +281,22 @@ export namespace helios::input {
         ) noexcept {
 
             #if HELIOS_DEBUG
-            if(axisLeftX >= -1.0f && axisLeftX <= 1.0f) {
+            if(axisLeftX < -1.0f || axisLeftX > 1.0f) {
                 logger_.warn("axisLeftX is out of bounds.");
             }
-            if(axisLeftY >= -1.0f && axisLeftY <= 1.0f) {
+            if(axisLeftY < -1.0f || axisLeftY > 1.0f) {
                 logger_.warn("axisLeftY is out of bounds.");
             }
-            if(axisRightX >= -1.0f && axisRightX <= 1.0f) {
+            if(axisRightX < -1.0f || axisRightX > 1.0f) {
                 logger_.warn("axisRightX is out of bounds.");
             }
-            if(axisRightY >= -1.0f && axisRightY <= 1.0f) {
+            if(axisRightY < -1.0f || axisRightY > 1.0f) {
                 logger_.warn("axisRightY is out of bounds.");
             }
-            if(triggerLeft >= 0.0f && triggerLeft <= 1.0f) {
+            if(triggerLeft < 0.0f || triggerLeft > 1.0f) {
                 logger_.warn("triggerLeft is out of bounds.");
             }
-            if(triggerRight >= 0.0f && triggerRight <= 1.0f) {
+            if(triggerRight < 0.0f || triggerRight > 1.0f) {
                 logger_.warn("triggerRight is out of bounds.");
             }
             #endif

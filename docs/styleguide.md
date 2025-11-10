@@ -39,7 +39,7 @@ This document summarizes the coding style and module organization conventions us
 Example (interface):
 ```cpp 
 module;
-#include <string>;
+#include <string>
 export module helios.window.Window;
 import helios.util.Guid;
 export namespace helios::window { ... }
@@ -48,7 +48,7 @@ export namespace helios::window { ... }
 Example (implementation):
 ```cpp 
 module;
-#include <string>`
+#include <string>
 module helios.window.Window;
 import helios.util.Guid;
 namespace helios::window { ... }

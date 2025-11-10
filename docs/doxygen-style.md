@@ -1,4 +1,4 @@
-# Doxygen Styleguide — helios
+# helios Doxygen Styleguide
 
 ## Purpose
 This document summarizes the minimal rules we use for Doxygen comments in the Helios project. Goal: consistent, readable API documentation that Doxygen produces reliably.
@@ -47,7 +47,7 @@ This document summarizes the minimal rules we use for Doxygen comments in the He
 - Use @see to reference symbols or related classes/methods.
 - Avoid unexplained abbreviations (e.g. `rgt` -> `right`).
 - Keep comments in sync with implementation (e.g. make sure @return matches actual return type).
-- Do not repeat code in the documentation — explain the intention and side effects.
+- Do not repeat code in the documentation - explain the intention and side effects.
 
 ## Conventions for smart pointers & ownership
 - For return values: indicate whether a pointer/reference may be null and who owns the object.

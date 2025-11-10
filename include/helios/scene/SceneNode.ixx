@@ -1,3 +1,6 @@
+/**
+ * @brief Scene graph node representing a transform and optional renderable
+ */
 module;
 
 #include <memory>
@@ -76,7 +79,7 @@ export namespace helios::scene {
         std::shared_ptr<const helios::rendering::Renderable> renderable_;
 
         /**
-         * @brief The paren node of **this** node.
+         * @brief The parent node of **this** node.
          * This will be nullptr for any root node. Implementing APIs must
          * take care of properly assigning parent nodes when adding
          * child nodes.
@@ -153,7 +156,7 @@ export namespace helios::scene {
             /**
              * @brief Constructs a new SceneNode representing a renderable object.
              *
-             * @param renderable A shred pointer to the Renderable this SceneNode
+             * @param renderable A shared_ptr to the Renderable this SceneNode
              * represents in a Scene.
              * @param transform The initial local transform for this node.
              */
@@ -165,7 +168,7 @@ export namespace helios::scene {
             /**
              * @brief Constructs a new SceneNode representing a renderable object.
              *
-             * @param renderable A shred pointer to the Renderable this SceneNode
+             * @param renderable A shared_ptr to the Renderable this SceneNode
              * represents in a Scene.
              */
             explicit SceneNode(
@@ -200,7 +203,7 @@ export namespace helios::scene {
             /**
              * @brief Returns a shared pointer to the Renderable of this SceneNode.
              *
-             * @return
+             * @return A shared_ptr to the Renderable, may be nullptr if none is set.
              */
             [[nodiscard]] std::shared_ptr<const helios::rendering::Renderable> renderable() const noexcept;
 
@@ -287,7 +290,7 @@ export namespace helios::scene {
              *
              * @return The current worldTransform matrix of this SceneNode.
              */
-            const helios::math::mat4f& cachedWorldTransform() const noexcept;
+            [[nodiscard]] const helios::math::mat4f& cachedWorldTransform() const noexcept;
 
             /**
              * @brief Checks whether this SceneNode needs to be updated, e.g. because the
@@ -301,3 +304,4 @@ export namespace helios::scene {
     };
 
 }
+

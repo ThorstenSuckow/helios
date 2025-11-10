@@ -1,3 +1,6 @@
+/**
+ * @brief Abstract interface for platform-specific input adapters.
+ */
 module;
 
 export module helios.input.InputAdapter;
@@ -14,13 +17,7 @@ import helios.util.log.LogManager;
 export namespace helios::input {
 
     /**
-     * @brief Abstract interface for providing and querying various input states.
-     *
-     * The `InputAdapter` defines a contract for classes that provide
-     * platform-specific querying.
-     * Implementations are responsible for integrating native systems
-     * to determine the states of keyboards, game controllers etc.
-     *
+     * @brief Abstract interface for platform-specific input adapters.
      */
     class InputAdapter {
 
@@ -64,13 +61,13 @@ export namespace helios::input {
          * @brief Updates the GamepadState objects with the values queried from the
          * underlying Gamepad identified by the specified mask.
          *
-         * Updates the GamepadState-objects with the current values of the underlying
+         * Updates the GamepadState objects with the current values of the underlying
          * hardware. If querying the underlying hardware fails, this method will
-         * simply update the GamepadState-values to a valid initial state, i.e. indicating
-         * no movement/interaction at all (0.0f): Implementing APIs should consider using isConnected() to check whether
-         * to decide whether the current values of a GamepadState object can be trusted.
+         * update the GamepadState values to a valid initial state (no movement or interaction).
+         * Implementations should use `isConnected()` to check whether the current values of a
+         * `GamepadState` object can be trusted.
          *
-         * @param gamepadMask A bitmask representing all GamepadState-objects to update,
+         * @param gamepadMask A bitmask representing all GamepadState objects to update,
          * e.g. Gamepad::ONE | Gamepad::TWO...
          */
         virtual void updateGamepadState(unsigned int gamepadMask) noexcept = 0;

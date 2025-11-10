@@ -201,9 +201,24 @@ int main() {
         const float axisRightY = gamepadState.rightY();
 
         std::cout << std::format(
-            "\rCTRL: LFT ({0:.2f}, {1:.2f}) - RGT ({2:.2f}, {3:.2f}) - TR [{4:.2f}] [{5:.2f}]",
+            "\rCTRL: LFT ({0:.2f}, {1:.2f}) - RGT ({2:.2f}, {3:.2f}) - TR [{4:.2f}] [{5:.2f}] - A[{6}] B[{7}] X[{8}] Y[{9}] ST[{10}] BCK[{11}] G[{12}] LB[{13}] RB[{14}] LT[{15}] RT[{16}] DU[{17}] DR[{18}] DD[{19}] DL[{20}]",
             axisLeftX, axisLeftY, axisRightX, axisRightY,
-            leftTrigger, rightTrigger
+            leftTrigger, rightTrigger,
+            static_cast<int>(gamepadState.buttonA()),
+            static_cast<int>(gamepadState.buttonB()),
+            static_cast<int>(gamepadState.buttonX()),
+            static_cast<int>(gamepadState.buttonY()),
+            static_cast<int>(gamepadState.buttonStart()),
+            static_cast<int>(gamepadState.buttonBack()),
+            static_cast<int>(gamepadState.buttonGuide()),
+            static_cast<int>(gamepadState.buttonLeftBumper()),
+            static_cast<int>(gamepadState.buttonRightBumper()),
+            static_cast<int>(gamepadState.buttonLeftThumb()),
+            static_cast<int>(gamepadState.buttonRightThumb()),
+            static_cast<int>(gamepadState.buttonDpadUp()),
+            static_cast<int>(gamepadState.buttonDpadRight()),
+            static_cast<int>(gamepadState.buttonDpadDown()),
+            static_cast<int>(gamepadState.buttonDpadLeft())
         ) << std::flush;
 
         // scaling
@@ -215,7 +230,7 @@ int main() {
         // x and y direction. This makes scaling and translating more complicated than it should be -
         // the lib is in need of initializing a scenenode with a "fixed" translation, and subsequently
         // translate the node by a specific amount, using "translateBy()".
-                triggerLeftNode_ptr->scale(helios::math::vec3f(scalingFactor * 0.5f, leftTrigger*scalingFactor, 0.0f));
+        triggerLeftNode_ptr->scale(helios::math::vec3f(scalingFactor * 0.5f, leftTrigger*scalingFactor, 0.0f));
         triggerLeftNode_ptr->translate(helios::math::vec3f(-0.85f, leftTrigger*scalingFactor, 0.0f));
 
         triggerRightNode_ptr->scale(helios::math::vec3f(scalingFactor * 0.5f, rightTrigger*scalingFactor, 0.0f));

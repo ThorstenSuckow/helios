@@ -1,3 +1,6 @@
+/**
+ * @brief Simple synchronous logger that writes messages to stdout.
+ */
 module;
 
 #include <iostream>
@@ -10,7 +13,10 @@ export namespace helios::util::log {
     /**
      * @brief Simple Logger implementation.
      *
-     * @todo configure log stream
+     * This logger writes messages to standard output with a scope prefix.
+     * It is intended for lightweight diagnostic output in examples and tests.
+     *
+     * @todo configure log stream, severity filtering and thread-safety.
      */
     class Logger {
 
@@ -18,33 +24,33 @@ export namespace helios::util::log {
         const std::string scope_ = "default";
 
         /**
-         * @brief flag to indicate whether this Logger's output is enabled.
+         * @brief Flag to indicate whether this Logger's output is enabled.
          */
         bool enabled_ = true;
 
     public:
         /**
-         * @brief Creates a new Logger, tagged with specific scope.
+         * @brief Creates a new Logger, tagged with a specific scope.
          *
-         * @param scope
+         * @param scope The textual scope used as a prefix in log output (e.g. "helios::rendering").
          */
         explicit Logger(std::string scope) :
             scope_(std::move(scope)) {}
 
 
         /**
-         * @brief Enables/disables log output for this Logger-instance.
+         * @brief Enables or disables log output for this Logger instance.
          *
-         * @param enable true to enable this log output, false to disable.
+         * @param enable true to enable output, false to disable it.
          */
         void enable(const bool enable) noexcept {
             enabled_ = enable;
         }
 
         /**
-         * @brief Couts a warning.
+         * @brief Writes a warning message to stdout if logging is enabled.
          *
-         * @param msg
+         * @param msg The message to write.
          */
         void inline warn(const std::string& msg) const noexcept{
             enabled_ && std::cout << "[WARN]" << "[" << scope_ << "] " << msg << std::endl;
@@ -52,9 +58,9 @@ export namespace helios::util::log {
 
 
         /**
-         * @brief Couts a msg.
+         * @brief Writes a debug message to stdout if logging is enabled.
          *
-         * @param msg
+         * @param msg The message to write.
          */
         void inline debug(const std::string& msg) const noexcept {
             enabled_ && std::cout << "[DEBUG]" << "[" << scope_ << "] " << msg << std::endl;
@@ -62,9 +68,9 @@ export namespace helios::util::log {
 
 
         /**
-         * @brief Couts an info.
+         * @brief Writes an info message to stdout if logging is enabled.
          *
-         * @param msg
+         * @param msg The message to write.
          */
         void inline info(const std::string& msg)  const noexcept{
             enabled_ && std::cout << "[INFO]" << "[" << scope_ << "] " << msg << std::endl;
@@ -72,9 +78,9 @@ export namespace helios::util::log {
 
 
         /**
-         * @brief Couts an error.
+         * @brief Writes an error message to stdout if logging is enabled.
          *
-         * @param msg
+         * @param msg The message to write.
          */
         void inline error(const std::string& msg) const noexcept {
             enabled_ && std::cout << "[ERROR]" << "[" << scope_ << "] " << msg << std::endl;

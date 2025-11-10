@@ -1,3 +1,6 @@
+/**
+ * @brief Standard uniform semantics used by shader programs.
+ */
 module;
 
 
@@ -47,7 +50,7 @@ export namespace helios::rendering::shader {
         MaterialRoughness,
 
         /**
-         * @brief Representant for the number of entries in this enum.
+         * @brief Number of entries in this enum.
          */
         size_
     };

@@ -57,21 +57,21 @@ namespace helios::rendering::shader {
         return nullptr;
     }
 
-    std::optional<float> UniformValueMap::float_val(UniformSemantics uniformSemantics) const noexcept {
+    const float* UniformValueMap::float_ptr(UniformSemantics uniformSemantics) const noexcept {
 
         const auto index = std::to_underlying(uniformSemantics);
 
         if (index >= map_.size()) {
-            return std::nullopt;
+            return nullptr;
         }
 
         if (const auto& el = map_[index]; el.has_value()) {
-            if (const auto* it = std::get_if<float>(&el.value())) {
-                return *it;
+            if (const auto* floatPtr = std::get_if<float>(&el.value())) {
+                return floatPtr;
             }
         }
 
-        return std::nullopt;
+        return nullptr;
     }
 
 }

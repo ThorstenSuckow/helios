@@ -1,3 +1,6 @@
+/**
+ * @brief Snapshot item bundling a Renderable reference and its world matrix.
+ */
 module;
 
 #include <memory>
@@ -70,7 +73,7 @@ export namespace helios::scene {
          * @brief Constructs a new SnapshotItem with the specified renderable
          * and the worldMatrix.
          *
-         * @param renderable A weak ptr to the Renderable.
+         * @param renderable A weak_ptr to the Renderable.
          * @param worldMatrix A const ref to the world transformation matrix, which gets copied.
          */
         SnapshotItem(
@@ -79,12 +82,12 @@ export namespace helios::scene {
         );
 
         /**
-         * @brief Returns a weak ptr to the Renderable of this SnapshotItem.
-         * Use .lock() on the returned weak pointer to obtain a shared pointer for
+         * @brief Returns a weak_ptr to the Renderable of this SnapshotItem.
+         * Use `.lock()` on the returned weak_ptr to obtain a shared_ptr for
          * the Renderable, if it still exists. If the Renderable does not exist,
          * the SnapshotItem should be ignored for further processing.
          *
-         * @return A weak ptr of Renderable of this SnapshotItem.
+         * @return A weak_ptr to the Renderable of this SnapshotItem.
          */
         [[nodiscard]] std::weak_ptr<const helios::rendering::Renderable> renderable() const noexcept;
 

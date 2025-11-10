@@ -5,16 +5,14 @@ export module helios.input.types.Gamepad;
 export namespace helios::input::types {
 
     /**
-     * @brief Enumerates common keyboard keys.
+     * @brief Enumerates gamepad identifiers in bitmask-friendly values.
      *
      * This enumeration provides identifiers for gamepads, commonly identified
-     * by a name representing the "port" they are mapped to. Values are
-     * in convenient bitmask order.
+     * by the logical port they are mapped to. Values are chosen for convenient
+     * bitmask composition (ONE | TWO, ...).
      *
-     * It's intended to be a platform-agnostic representation of physical gamepads.
-     *
-     * Implementing APIs are advised to properly map their implementation against
-     * this enumeration.
+     * Implementing APIs should map their platform-specific gamepad indices to
+     * these identifiers.
      */
     enum Gamepad {
         ONE   = 1, // 0001
@@ -25,9 +23,9 @@ export namespace helios::input::types {
 
 
         /**
-         * @brief Provides the total count of the items in this enumeration.
+         * @brief Number of logical gamepad entries represented by this enum.
          */
-        SIZE = 4
+        size_ = 4
     };
 
 }

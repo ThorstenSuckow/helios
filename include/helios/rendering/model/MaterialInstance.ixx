@@ -1,3 +1,6 @@
+/**
+ * @brief Material instance combining a base Material with optional overrides.
+ */
 module;
 
 #include <memory>
@@ -17,17 +20,16 @@ import helios.math.types;
 export namespace helios::rendering::model {
 
     /**
-     * @brief MaterialInstance for providing Material definition and overrides
-     * for the provided Material.
+     * @brief MaterialInstance for providing a material definition with optional overrides.
      *
-     * This class represents a specific instance of a Material, combining a base Material
+     * This class represents a specific instance of a Material: it combines a base Material
      * definition (including shader and default properties) with an optional MaterialPropertiesOverride
-     * that specializes the Material's appearance for a particular object or use case.
-     * This allows for efficient customization while reusing common material logic.
+     * that customizes the Material's appearance for a particular object or use case.
+     * This allows efficient customization while reusing common material logic.
      *
      * @see [RTR, pp. 125]
      */
-    class MaterialInstance {
+    class MaterialInstance final {
 
     private:
 
@@ -46,10 +48,10 @@ export namespace helios::rendering::model {
         );
 
     public:
-        virtual ~MaterialInstance() = default;
+        ~MaterialInstance() = default;
 
         /**
-         * @brief Constructs a new Material instance.
+         * @brief Constructs a new MaterialInstance.
          *
          * Initializes this instance with a base material definition and an optional set of property overrides.
          *
@@ -71,7 +73,7 @@ export namespace helios::rendering::model {
          *
          * Delegates to Material::shader().
          *
-         * @return The Shader the underlying Material uses.
+         * @return A shared_ptr to the Shader that the underlying Material uses.
          */
         [[nodiscard]] std::shared_ptr<const helios::rendering::shader::Shader> shader() const noexcept;
 
@@ -80,7 +82,7 @@ export namespace helios::rendering::model {
          * @brief Writes this MaterialInstance's uniform values into the given map.
          *
          * This method first applies the default uniform values from the base Material definition and
-         * then overlays any any specific overrides provided by this instance's MaterialPropertiesOverride.
+         * then overlays any specific overrides provided by this instance's MaterialPropertiesOverride.
          *
          * @param uniformValueMap Target map receiving the uniform values.
          */

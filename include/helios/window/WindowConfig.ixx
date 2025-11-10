@@ -1,3 +1,6 @@
+/**
+ * @brief Window creation and initialization configuration.
+ */
 module;
 
 #include <string>
@@ -11,8 +14,7 @@ export namespace helios::window {
     /**
      * @brief Configuration structure for creating and initializing a Window.
      *
-     * The struct provides configuration of common parameters, such as
-     * width, height, the title and the viewport.
+     * The struct provides common parameters, such as width, height, title and viewport.
      */
     struct WindowConfig {
 

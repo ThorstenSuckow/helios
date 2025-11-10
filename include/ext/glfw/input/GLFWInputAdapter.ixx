@@ -31,7 +31,7 @@ export namespace helios::ext::glfw::input {
         /**
          * @brief The const array to reference GamepadState objects.
          */
-        std::array<helios::input::GamepadState, std::to_underlying(helios::input::types::Gamepad::SIZE)> gamepadStates_= {};
+        std::array<helios::input::GamepadState, std::to_underlying(helios::input::types::Gamepad::size_)> gamepadStates_= {};
 
     public:
         /**

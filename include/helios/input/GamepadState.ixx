@@ -47,6 +47,24 @@ export namespace helios::input {
     class GamepadState {
 
     private:
+
+         bool buttonA_ = false;
+         bool buttonB_= false;
+         bool buttonX_= false;
+         bool buttonY_= false;
+         bool buttonStart_= false;
+         bool buttonBack_= false;
+         bool buttonGuide_= false;
+         bool buttonLeftBumper_= false;
+         bool buttonRightBumper_= false;
+         bool buttonLeftThumb_= false;
+         bool buttonRightThumb_= false;
+         bool buttonDpadUp_= false;
+         bool buttonDpadRight_= false;
+         bool buttonDpadDown_= false;
+         bool buttonDpadLeft_ = false;
+
+        
         /**
          * @brief Flag to indicate if the cached vec2f members need to be recalculated.
          */
@@ -131,12 +149,45 @@ export namespace helios::input {
         explicit GamepadState(
             const float axisLeftX, const float axisLeftY,
             const float axisRightX, const float axisRightY,
-            const float triggerLeft, const float triggerRight
+            const float triggerLeft, const float triggerRight,
+
+            const bool buttonA,
+            const bool buttonB,
+            const bool buttonX,
+            const bool buttonY,
+            const bool buttonStart,
+            const bool buttonBack,
+            const bool buttonGuide,
+            const bool buttonLeftBumper,
+            const bool buttonRightBumper,
+            const bool buttonLeftThump,
+            const bool buttonRightThumb,
+            const bool buttonDpadUp,
+            const bool buttonDpadRight,
+            const bool buttonDpadDown,
+            const bool buttonDpadLeft
+            
         ) noexcept {
             updateAxes(
                 axisLeftX, axisLeftY,
                 axisRightX, axisRightY,
-                triggerLeft, triggerRight
+                triggerLeft, triggerRight,
+
+                 buttonA,
+                 buttonB,
+                 buttonX,
+                 buttonY,
+                 buttonStart,
+                 buttonBack,
+                 buttonGuide,
+                 buttonLeftBumper,
+                 buttonRightBumper,
+                 buttonLeftThump,
+                 buttonRightThumb,
+                 buttonDpadUp,
+                 buttonDpadRight,
+                 buttonDpadDown,
+                 buttonDpadLeft
             );
         }
 
@@ -160,7 +211,23 @@ export namespace helios::input {
         void updateAxes (
             const float axisLeftX, const float axisLeftY,
             const float axisRightX, const float axisRightY,
-            const float triggerLeft, const float triggerRight
+            const float triggerLeft, const float triggerRight,
+            
+            const bool buttonA,
+            const bool buttonB,
+            const bool buttonX,
+            const bool buttonY,
+            const bool buttonStart,
+            const bool buttonBack,
+            const bool buttonGuide,
+            const bool buttonLeftBumper,
+            const bool buttonRightBumper,
+            const bool buttonLeftThumb,
+            const bool buttonRightThumb,
+            const bool buttonDpadUp,
+            const bool buttonDpadRight,
+            const bool buttonDpadDown,
+            const bool buttonDpadLeft
         ) noexcept{
 
             assert(axisLeftX >= -1.0f && axisLeftX <= 1.0f && "axisLeftX is out of bounds.");
@@ -177,6 +244,22 @@ export namespace helios::input {
             triggerLeft_  = std::clamp(triggerLeft, 0.0f, 1.0f);
             triggerRight_ = std::clamp(triggerRight, 0.0f, 1.0f);
 
+             buttonA_ = buttonA;
+             buttonB_= buttonB;
+             buttonX_= buttonX;
+             buttonY_= buttonY;
+             buttonStart_= buttonStart;
+             buttonBack_= buttonBack;
+             buttonGuide_= buttonGuide;
+             buttonLeftBumper_= buttonLeftBumper;
+             buttonRightBumper_= buttonRightBumper;
+             buttonLeftThumb_= buttonLeftThumb;
+             buttonRightThumb_= buttonRightThumb;
+             buttonDpadUp_= buttonDpadUp;
+             buttonDpadRight_= buttonDpadRight;
+             buttonDpadDown_= buttonDpadDown;
+             buttonDpadLeft_ = buttonDpadLeft;
+            
             needsUpdate_ = true;
         }
 
@@ -278,6 +361,25 @@ export namespace helios::input {
             }
             return trigger_;
         }
+
+
+        [[nodiscard]] bool buttonA() const noexcept { return buttonA_; };
+        [[nodiscard]] bool buttonB() const noexcept { return buttonB_; };
+        [[nodiscard]] bool buttonX() const noexcept { return buttonX_; };
+        [[nodiscard]] bool buttonY() const noexcept { return buttonY_; };
+        [[nodiscard]] bool buttonStart() const noexcept { return buttonStart_; };
+        [[nodiscard]] bool buttonBack() const noexcept { return buttonBack_; };
+        [[nodiscard]] bool buttonGuide() const noexcept { return buttonGuide_; };
+        [[nodiscard]] bool buttonLeftBumper() const noexcept { return buttonLeftBumper_; };
+        [[nodiscard]] bool buttonRightBumper() const noexcept { return buttonRightBumper_; };
+        [[nodiscard]] bool buttonLeftThumb() const noexcept { return buttonLeftThumb_; };
+        [[nodiscard]] bool buttonRightThumb() const noexcept { return buttonRightThumb_; };
+        [[nodiscard]] bool buttonDpadUp() const noexcept { return buttonDpadUp_; };
+        [[nodiscard]] bool buttonDpadRight() const noexcept { return buttonDpadRight_; };
+        [[nodiscard]] bool buttonDpadDown() const noexcept { return buttonDpadDown_; };
+        [[nodiscard]] bool buttonDpadLeft() const noexcept { return buttonDpadLeft_; };
+
+
     };
 
 

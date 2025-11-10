@@ -20,12 +20,12 @@ export namespace helios::util::io {
 
     public:
         /**
-         * @copydoc BasicStringFileReader::getContents()
+         * @copydoc StringFileReader::getContents()
          */
         [[nodiscard]] std::string getContents(const std::string& filename) const  override;
 
         /**
-        * @copydoc BasicStringFileReader::readInto()
+        * @copydoc StringFileReader::readInto()
          */
         [[nodiscard]] bool readInto( const std::string& filename,  std::string& contents) const noexcept override;
     };

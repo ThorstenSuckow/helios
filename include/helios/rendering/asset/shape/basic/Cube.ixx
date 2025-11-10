@@ -1,3 +1,6 @@
+/**
+ * @brief Basic cube shape (unit cube centered at origin).
+ */
 module;
 
 

@@ -222,10 +222,10 @@ export namespace helios::math {
      *
      * @param m A reference to the `mat4<T>` matrix.
      *
-     * @return A const pointer to the element at [0, 0]
+     * @return A const pointer to the element at [0, 0].
      */
     template<helios::math::Numeric T>
-    const float* value_ptr(const mat4<T>& m) noexcept {
+    const T* value_ptr(const mat4<T>& m) noexcept {
         return &m(0, 0);
     }
 
@@ -239,10 +239,10 @@ export namespace helios::math {
      *
      * @param m A reference to the `mat4<T>` matrix.
      *
-     * @return A pointer to the element at [0, 0]
+     * @return A pointer to the element at [0, 0].
      */
     template<helios::math::Numeric T>
-    float* value_ptr(mat4<T>& m) noexcept {
+    T* value_ptr(mat4<T>& m) noexcept {
         return &m(0, 0);
     }
 

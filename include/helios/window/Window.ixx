@@ -1,3 +1,6 @@
+/**
+ * @brief Abstract window interface used by the Helios framework.
+ */
 module;
 
 #include <string>
@@ -20,7 +23,6 @@ export namespace helios::window {
      * without depending on the underlying native window implementation.
      *
      * A Window can be uniquely identified via its Guid.
-     *
      */
     class Window {
 
@@ -30,7 +32,7 @@ export namespace helios::window {
     protected:
 
         /**
-         * @brief The const reference to the logger used with this Adapter.
+         * @brief The logger used with this Window instance.
          */
         const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().registerLogger(HELIOS_LOG_SCOPE);
 
@@ -50,7 +52,7 @@ export namespace helios::window {
         std::string title_;
 
         /**
-         * @brief The viewport configuration of the window, in terms of (x, y, width, height)
+         * @brief The viewport configuration of the window, in terms of (x, y, width, height).
          */
         math::vec4i viewport_;
 
@@ -71,10 +73,10 @@ export namespace helios::window {
         /**
          * @brief Checks if the window has received a close request.
          *
-         * Implementing APIs should consider this flag in constant intervals
+         * Implementing APIs should consider this flag at regular intervals
          * (e.g. each frame) to determine whether this window should be closed.
          *
-         * @return bool True if the window should be closed, otherwise false.
+         * @return true if the window should be closed, otherwise false.
          *
          * @see setShouldClose()
          */
@@ -95,7 +97,7 @@ export namespace helios::window {
         /**
          * @brief Returns the unique guid for this window instance.
          *
-         * @return A const ref to the Guid of this window.
+         * @return A const reference to the Guid of this window.
          */
         [[nodiscard]] const util::Guid& guid() const noexcept;
 
@@ -107,34 +109,31 @@ export namespace helios::window {
          * show this window.
          *
          * @return true if showing the window succeeded, otherwise false.
-         *
-         * @throws std::runtime_error if the window is already shown or
-         * couldn't be created
          */
         virtual bool show() noexcept = 0;
 
 
         /**
-         * @brief Advise the rendering system to swap the front and back buffers.
+         * @brief Instructs the rendering system to swap the front and back buffers.
          *
-         * Makes the back buffers content visible on the screen.
-         * Derived classes must implement the platform-specific buffer mechanisms.
+         * Makes the back buffer's content visible on the screen.
+         * Derived classes must implement the platform-specific buffer mechanism.
          */
         virtual void swapBuffers() const noexcept = 0;
 
 
         /**
-         * @brief Poll this window for window related events.
+         * @brief Poll this window for native window events.
          *
-         * This method processes pending events form the native window system.
-         * Implementing APIs should call this method in constant intervals, e.g.
+         * This method processes pending events from the native window system.
+         * Implementing APIs should call this method at regular intervals, e.g.
          * once per frame.
          */
         virtual void pollEvents() const noexcept = 0;
 
 
         /**
-         * @brief Returns the current with of this window.
+         * @brief Returns the current width of this window.
          *
          * @return The current width of this window.
          */
@@ -151,7 +150,7 @@ export namespace helios::window {
 
         /**
          * @brief Returns the viewport configuration used with this window,
-         * encoded in a `vec4i`, encoding x, y, width, height.
+         * encoded in a `vec4i` as (x, y, width, height).
          *
          * @return A constant reference to the `vec4i` representing this window's viewport.
          */
@@ -161,12 +160,10 @@ export namespace helios::window {
         /**
          * @brief Compares two window instances for equality.
          *
-         * This implementation treats two windows as equal if their
-         * guids are of the same value.
+         * Two windows are considered equal if their GUIDs are equal.
          *
-         * @param win The window that should be compared for equality with this window.
-         *
-         * @return true if both Windows are treated as equal, otherwise false.
+         * @param win The window to compare with this window.
+         * @return true if both windows are equal, otherwise false.
          */
         virtual bool operator==(const Window& win) const noexcept;
     };

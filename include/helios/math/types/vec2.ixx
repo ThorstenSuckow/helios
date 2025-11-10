@@ -1,3 +1,6 @@
+/**
+ * @brief 2D vector type and utility functions.
+ */
 module;
 
 #include <cassert>
@@ -81,11 +84,11 @@ export namespace helios::math {
      * @param v1 The first vec2<T> vector.
      * @param v2 The second vec2<T> vector.
      *
-     * @return A new vec2<T> instance representing the dot product.
+     * @return The dot product as a value of type T.
      */
     template<helios::math::Numeric T>
-    constexpr float dot(const vec2<T>& x, const vec2<T>& y) noexcept {
-        return x[0]*y[0] + x[1]*y[1];
+    constexpr T dot(const vec2<T>& v1, const vec2<T>& v2) noexcept {
+        return v1[0]*v2[0] + v1[1]*v2[1];
     }
 
     using vec2f = vec2<float>;

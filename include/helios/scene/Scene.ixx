@@ -1,3 +1,7 @@
+/**
+ * @brief Represents a hierarchical SceneGraph that organizes all renderable
+ * and non-renderable objects within a scene.
+ */
 module;
 
 #include <memory>
@@ -158,15 +162,16 @@ export namespace helios::scene {
          * This method makes also sure that all nodes' world geometry is properly updated
          * before culling is applied.
          *
-         * @param camera The
+         * @param camera The camera used to determine the view frustum for culling.
          *
-         * @return a list of currently visible nodes
+         * @return a list of currently visible nodes (const pointers into the scene graph).
          */
         [[nodiscard]] std::vector<const helios::scene::SceneNode*> findVisibleNodes(const helios::scene::Camera& camera) const;
 
         /**
-         * @brief Returns the root not of this Scene.
-         * Thr root node is considered to be always existing.
+         * @brief Returns the root node of this Scene.
+         * The root node is guaranteed to exist.
+         *
          * @return the root node of this Scene.
          */
         [[nodiscard]] helios::scene::SceneNode& root() const noexcept;

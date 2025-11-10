@@ -1,3 +1,6 @@
+/**
+ * @brief Misc math utility functions.
+ */
 module;
 
 #include <numbers>
@@ -10,7 +13,6 @@ export namespace helios::math {
      * @brief Converts an angle from degrees to radians.
      *
      * @param angle The angle value in degrees.
-     *
      * @return The converted angle value in radians.
      */
     constexpr float radians(const float angle) noexcept {

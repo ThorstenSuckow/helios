@@ -25,7 +25,7 @@ export namespace helios::input::types {
         /**
          * @brief Number of logical gamepad entries represented by this enum.
          */
-        SIZE = 4
+        size_ = 4
     };
 
 }

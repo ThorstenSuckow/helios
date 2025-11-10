@@ -32,8 +32,8 @@ export namespace helios::ext::glfw::input::GLFWGamepadLookup {
      */
     inline int from(const helios::input::types::Gamepad gamepadId) noexcept {
 
-        static constexpr std::array<int, helios::input::types::Gamepad::SIZE> HELIOS_GAMEPAD_TO_GLFW=[] {
-            std::array<int, helios::input::types::Gamepad::SIZE> map{};
+        static constexpr std::array<int, helios::input::types::Gamepad::size_> HELIOS_GAMEPAD_TO_GLFW=[] {
+            std::array<int, helios::input::types::Gamepad::size_> map{};
 
             map[toArrayIndex(helios::input::types::Gamepad::ONE)] = GLFW_JOYSTICK_1;
             map[toArrayIndex(helios::input::types::Gamepad::TWO)] = GLFW_JOYSTICK_2;

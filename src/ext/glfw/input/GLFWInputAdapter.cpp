@@ -62,7 +62,7 @@ namespace helios::ext::glfw::input {
 
                     gamepadStates_[index].updateAxes(
                         axes[GLFW_GAMEPAD_AXIS_LEFT_X],
-                        // invert left Y, glfw uses down:1, up:-1, we need donw:-1, up:1
+                        // invert left Y, glfw uses down:1, up:-1, we need down:-1, up:1
                         -axes[GLFW_GAMEPAD_AXIS_LEFT_Y],
                         axes[GLFW_GAMEPAD_AXIS_RIGHT_X],
                         // invert right Y, same logic as left Y

@@ -18,8 +18,8 @@ export namespace helios::ext::glfw::input::GLFWKeyLookup {
      */
     inline int from(const helios::input::types::Key key) noexcept {
 
-        static constexpr std::array<int, helios::input::types::Key::SIZE> HELIOS_TO_GLFW=[] {
-            std::array<int, helios::input::types::Key::SIZE> map{};
+        static constexpr std::array<int, helios::input::types::Key::size_> HELIOS_TO_GLFW=[] {
+            std::array<int, helios::input::types::Key::size_> map{};
 
             map[helios::input::types::Key::ESC] = GLFW_KEY_ESCAPE;
 

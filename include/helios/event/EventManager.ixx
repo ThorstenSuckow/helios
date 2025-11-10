@@ -28,7 +28,12 @@ export namespace helios::event {
         /**
          * @brief Policy for simply adding an event to the underlying EventQueue.
          */
-        APPEND
+        APPEND,
+
+        /**
+         * @brief Number of entries in this enumeration.
+         */
+        size_
     };
 
 

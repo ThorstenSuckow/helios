@@ -57,7 +57,7 @@ namespace helios::input {
 
     unsigned int InputManager::registerGamepads(unsigned int mask) noexcept {
 
-        assert(mask <= (pow(helios::input::types::Gamepad::SIZE, 2) - 1) && "mask out of bounds");
+        assert(mask <= (pow(helios::input::types::Gamepad::size_, 2) - 1) && "mask out of bounds");
 
         gamepadMask_ = mask;
 

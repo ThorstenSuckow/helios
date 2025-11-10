@@ -23,7 +23,7 @@ export namespace helios::input::types {
         /**
          * @brief Number of entries in this enumeration.
          */
-        SIZE
+        size_
     };
 
 }

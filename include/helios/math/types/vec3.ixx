@@ -96,16 +96,16 @@ export namespace helios::math {
 
 
         /**
-         * @brief Computes the Euclidean norm of this vector and returns it.
+         * @brief Computes the Euclidean norm (magnitude) of this vector and returns it.
          *
-         * @return The norm (magnitude) of this vector,
+         * @return The norm (magnitude) of this vector as a value of type T.
          */
-        float norm() const noexcept {
-            return std::sqrt(
-                this->v[0] * this->v[0] +
-                this->v[1] * this->v[1] +
-                this->v[2] * this->v[2]
-            );
+        T norm() const noexcept {
+            return static_cast<T>(std::sqrt(
+                static_cast<double>(this->v[0]) * static_cast<double>(this->v[0]) +
+                static_cast<double>(this->v[1]) * static_cast<double>(this->v[1]) +
+                static_cast<double>(this->v[2]) * static_cast<double>(this->v[2])
+            ));
         }
 
 
@@ -131,18 +131,18 @@ export namespace helios::math {
 
 
     /**
-     * @brief Multiplies a a scalar value by a 3D vector.
+     * @brief Multiplies a scalar value by a 3D vector.
      *
      * @tparam T The numeric type of the vector components.
-     * @param n The scalar vector to multiplay the vector by.
+     * @param n The scalar value to multiply the vector by.
      * @param v The vec3<T> vector to be multiplied.
      *
-     * @return a new vec3<T> instance representing the result of the scalar
+     * @return A new vec3<T> instance representing the result of the scalar
      * multiplication.
      */
     template<helios::math::Numeric T>
-    constexpr vec3<T> operator*(const float n, const vec3<T>& v) noexcept {
-        return vec3{v[0] * n, v[1] * n, v[2] * n};
+    constexpr vec3<T> operator*(const T n, const vec3<T>& v) noexcept {
+        return vec3<T>{v[0] * n, v[1] * n, v[2] * n};
     }
 
 
@@ -154,7 +154,7 @@ export namespace helios::math {
      * @return A new vec3<T> instance representing the normalized vector.
      */
     template<helios::math::Numeric T>
-    inline vec3<T> vec3<T>::normalize() const noexcept { return (*this) * (1.0f / this->norm()); }
+    inline vec3<T> vec3<T>::normalize() const noexcept { return (*this) * (static_cast<T>(1) / this->norm()); }
 
 
     /**
@@ -183,11 +183,11 @@ export namespace helios::math {
      * @param v1 The first vec3<T> vector.
      * @param v2 The second vec3<T> vector.
      *
-     * @return A new vec3<T> instance representing the dot product.
+     * @return The dot product as a value of type T.
      */
     template<helios::math::Numeric T>
-    constexpr float dot(const vec3<T>& x, const vec3<T>& y) noexcept {
-        return x[0]*y[0] + x[1]*y[1] + x[2]*y[2];
+    constexpr T dot(const vec3<T>& v1, const vec3<T>& v2) noexcept {
+        return v1[0]*v2[0] + v1[1]*v2[1] + v1[2]*v2[2];
     }
 
 

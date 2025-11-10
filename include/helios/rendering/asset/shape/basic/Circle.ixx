@@ -1,3 +1,6 @@
+/**
+ * @brief Basic circle shape (2D triangle-fan approximation).
+ */
 module;
 
 #include <vector>
@@ -44,7 +47,7 @@ export namespace helios::rendering::asset::shape::basic {
             //  circumference vertices (Indices 1 to segments)
             for (unsigned int i = 0; i < segments; ++i) {
                 // calculate the angle for this segment
-                float angle = (static_cast<float>(i) / segments) * 2.0f * std::numbers::pi_v<float>;
+                const float angle = (static_cast<float>(i) / static_cast<float>(segments)) * 2.0f * std::numbers::pi_v<float>;
 
                 float x = radius * std::cos(angle);
                 float y = radius * std::sin(angle);

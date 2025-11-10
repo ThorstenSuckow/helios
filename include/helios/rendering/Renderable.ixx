@@ -1,7 +1,9 @@
+/**
+ * @brief Defines the Renderable abstraction: a mesh + material combination.
+ */
 module;
 
 #include <memory>
-#include <optional>
 #include <stdexcept>
 
 export module helios.rendering.Renderable;
@@ -93,18 +95,17 @@ export namespace helios::rendering {
 
         /**
          * @brief Returns a shared ptr to the Mesh this Renderable uses.
-         * The returned data is guaranteed to be a valid reference to existing data.
+         * The returned shared_ptr references the underlying Mesh object.
          *
-         * @return Mesh
+         * @return A shared pointer to the Mesh used by this Renderable.
          */
         [[nodiscard]] std::shared_ptr<const helios::rendering::model::Mesh> mesh() const noexcept;
 
 
         /**
-         * @brief Returns a const reference to the Material shared with this Renderable.
-         * The returned data is guaranteed to be a valid reference to existing data.
+         * @brief Returns a const reference to the MaterialInstance associated with this Renderable.
          *
-         * @return MaterialInstance
+         * @return A const reference to the MaterialInstance.
          */
         [[nodiscard]] const helios::rendering::model::MaterialInstance& materialInstance() const noexcept;
 

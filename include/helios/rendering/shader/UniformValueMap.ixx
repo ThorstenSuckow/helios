@@ -1,3 +1,6 @@
+/**
+ * @brief Mapping of `UniformSemantics` to concrete uniform values used by shaders.
+ */
 module;
 
 #include <array>
@@ -32,17 +35,17 @@ export namespace helios::rendering::shader {
      * under a single semantic identifier, for convenient assignment to uniform locations
      * of an underlying shader in the rendering process.
      *
-     * @note this class goes intentionally without templates as we assume that instances of the
-     * value maps are directly used in the rendering hot path.
+     * @note this class intentionally avoids templates as we assume that instances of the
+     * value maps are used in the rendering hot path.
      *
-     * @todo UniformMap must allow only one index for all datastructures,
-     * i.e. if mat4fMap_[semantics] is set, vec3fMap_[semantics] must not be allowed
+     * @todo UniformMap must allow only one index for all data structures,
+     * i.e. if map_[semantics] contains a mat4f, other types should not be allowed
+     * for the same semantics.
      *
-     * @todo UniformValueMaps should be scope, e.g. per frame (world matrix,
-     * projection, view, view projection...), per Material (colors, emmissive...),
-     * per object (World matrix...) Which allws for better handling of assigning uniforms,
-     * e.g. per frame gets changed once, per object gets changed per object etc...
-     *
+     * @todo UniformValueMaps should be scoped, e.g. per frame (world matrix,
+     * projection, view...), per material (colors, emissive...), per object (world matrix...),
+     * which allows for better handling of assigning uniforms: per-frame values change once per frame,
+     * while per-object values change per object.
      */
     class UniformValueMap {
 
@@ -59,7 +62,7 @@ export namespace helios::rendering::shader {
         UniformValueMap() = default;
 
         /**
-         * @brief Sets or updates a helios::math::mat4f uniform value for a given semantic.
+         * @brief Sets or updates a `helios::math::mat4f` uniform value for a given semantic.
          *
          * @param uniformSemantics The `UniformSemantics` identifier for the uniform.
          * @param mat4f A const ref to the mat4f value to set.
@@ -67,17 +70,16 @@ export namespace helios::rendering::shader {
         void set(UniformSemantics uniformSemantics, const helios::math::mat4f& mat4f) noexcept;
 
         /**
-         * @brief Returns a raw const pointer to the mat4f for the specified uniform semantics.
+         * @brief Returns a raw const pointer to the `mat4f` for the specified uniform semantics.
          *
          * @param uniformSemantics The `UniformSemantics` identifier for the uniform.
-         *
          * @return A raw const pointer to the associated mat4f, or `nullptr` if no mat4f is
          * associated with this semantics.
          */
         [[nodiscard]] const float* mat4f_ptr(UniformSemantics uniformSemantics) const noexcept;
 
         /**
-         * @brief Sets or updates a helios::math::vec4f uniform value for a given semantic.
+         * @brief Sets or updates a `helios::math::vec4f` uniform value for a given semantic.
          *
          * @param uniformSemantics The `UniformSemantics` identifier for the uniform.
          * @param vec4f A const ref to the vec4f value to set.
@@ -85,10 +87,9 @@ export namespace helios::rendering::shader {
         void set(UniformSemantics uniformSemantics, const helios::math::vec4f& vec4f) noexcept;
 
         /**
-         * @brief Returns a raw const pointer to the vec4f for the specified uniform semantics.
+         * @brief Returns a raw const pointer to the `vec4f` for the specified uniform semantics.
          *
          * @param uniformSemantics The `UniformSemantics` identifier for the uniform.
-         *
          * @return A raw const pointer to the associated vec4f, or `nullptr` if no vec4f is
          * associated with this semantics.
          */
@@ -106,7 +107,6 @@ export namespace helios::rendering::shader {
          * @brief Returns the float value for the specified uniform semantics.
          *
          * @param uniformSemantics The `UniformSemantics` identifier for the uniform.
-         *
          * @return The std::optional representing the uniformSemantics, or std::nullopt
          * if not available.
          */

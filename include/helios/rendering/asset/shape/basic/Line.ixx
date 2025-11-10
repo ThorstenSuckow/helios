@@ -1,3 +1,6 @@
+/**
+ * @brief Basic line shape (2D segment).
+ */
 module;
 
 
@@ -18,8 +21,6 @@ export namespace helios::rendering::asset::shape::basic {
      *
      * Creates vertex and index data for a single line segment. By default, this shape
      * defines a line spanning from the origin (0, 0 ,0) to the point (1, 1, 0).
-     *
-     * @note the indices (0,1) suggest rendering with PrimitiveType::Lines.
      */
     struct Line : public Shape {
 

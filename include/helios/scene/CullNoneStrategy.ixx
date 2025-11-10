@@ -1,3 +1,6 @@
+/**
+ * @brief Frustum culling strategy that returns all nodes (no culling).
+ */
 module;
 
 #include <vector>
@@ -34,13 +37,13 @@ export namespace helios::scene {
     public:
 
         /**
-         * @brief Returns all SceneNode of the specified scenes, regardless of their visibility
+         * @brief Returns all SceneNode of the specified scene, regardless of their visibility
          * relative to the camera's view frustum.
          *
          * @param camera The camera defining the view frustum.
          * @param root The parent of the hierarchy to cull.
          *
-         * @return A vector with const pointers to the SceneNodes visible.
+         * @return A vector with const pointers to the SceneNodes found under `root`.
          */
         [[nodiscard]] std::vector<const helios::scene::SceneNode*> cull(
             const helios::scene::Camera& camera, const helios::scene::SceneNode& root

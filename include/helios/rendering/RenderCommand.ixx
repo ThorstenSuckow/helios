@@ -1,3 +1,6 @@
+/**
+ * @brief Data-transfer object describing a single render command.
+ */
 module;
 
 #include <memory>
@@ -11,23 +14,22 @@ import helios.rendering.shader.UniformValueMap;
 export namespace helios::rendering {
 
     /**
-     * @brief DTO  for storing rendering specific command information to be
+     * @brief DTO for storing rendering-specific command information to be
      * passed to the RenderQueue.
      *
      * A `RenderCommand` does not extend the lifetime of the `shader_` and the `mesh_`,
      * as they are both referenced by weak pointers. If the referenced shader or the mesh
      * are no longer valid when this command is about to be executed,
      * this `RenderCommand` should be ignored for rendering.
-     *
      */
     class RenderCommand {
         /**
-         * @brief A non-owning, weak ref to the shader program to be used.
+         * @brief A non-owning, weak reference to the shader program to be used.
          */
         std::weak_ptr<const helios::rendering::shader::Shader> shader_;
 
         /**
-         * @brief A non-owning, weak ref to the mesh this command uses.
+         * @brief A non-owning, weak reference to the mesh this command uses.
          */
         std::weak_ptr<const helios::rendering::model::Mesh> mesh_;
 
@@ -40,8 +42,7 @@ export namespace helios::rendering {
 
         /**
          * @brief An owning, unique pointer to the uniform values specific to the material of the object to
-         * be rendered.
-         * This map contains uniforms related to the surface properties of a material,
+         * be rendered. This map contains uniforms related to the surface properties of a material.
          */
         std::unique_ptr<const helios::rendering::shader::UniformValueMap> materialUniformValues_;
 
@@ -64,7 +65,7 @@ export namespace helios::rendering {
         RenderCommand(RenderCommand&&) noexcept = delete;
 
         /**
-         * @brief Delete move assignment constructor.
+         * @brief Delete move assignment.
          */
         RenderCommand& operator=(RenderCommand&&) noexcept = delete;
 
@@ -80,7 +81,7 @@ export namespace helios::rendering {
          * @param objectUniformValues A unique ptr to a `UniformValueMap` containing all uniform
          * values for the rendered object.
          * @param materialUniformValues A unique ptr to a `UniformValueMap` containing all uniform
-         * values for material.
+         * values for the material.
          */
         RenderCommand(
         std::weak_ptr<const helios::rendering::shader::Shader> shader,
@@ -92,7 +93,7 @@ export namespace helios::rendering {
         /**
          * @brief Returns a weak ptr to the shader associated with this command.
          * Use `shader.lock()` on the return value to lock the shader into a shared ptr.
-         * If lock() returns a nullptr, the Shader is no longer available.
+         * If `lock()` returns a nullptr, the Shader is no longer available.
          *
          * @return A weak ptr to this command's Shader.
          */
@@ -101,7 +102,7 @@ export namespace helios::rendering {
         /**
          * @brief Returns a weak ptr to the mesh associated with this command.
          * Use `mesh.lock()` on the return value to lock the mesh into a shared ptr.
-         * If lock() returns a nullptr, the Mesh is no longer available.
+         * If `lock()` returns a nullptr, the Mesh is no longer available.
          *
          * @return A weak ptr to this command's Mesh.
          */

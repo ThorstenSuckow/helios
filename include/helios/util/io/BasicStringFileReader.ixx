@@ -1,3 +1,6 @@
+/**
+ * @brief Basic file-to-string reader implementation.
+ */
 module;
 
 #include <string>
@@ -16,9 +19,15 @@ export namespace helios::util::io {
 
 
     public:
-        std::string getContents(const std::string& filename) const  override;
+        /**
+         * @copydoc BasicStringFileReader::getContents()
+         */
+        [[nodiscard]] std::string getContents(const std::string& filename) const  override;
 
-        bool readInto( const std::string& filename,  std::string& contents) const noexcept override;
+        /**
+        * @copydoc BasicStringFileReader::readInto()
+         */
+        [[nodiscard]] bool readInto( const std::string& filename,  std::string& contents) const noexcept override;
     };
 
 

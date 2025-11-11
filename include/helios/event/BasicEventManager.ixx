@@ -1,3 +1,7 @@
+/**
+ * @file BasicEventManager.ixx
+ * @brief Default implementation of an EventManager.
+ */
 module;
 
 #include <functional>

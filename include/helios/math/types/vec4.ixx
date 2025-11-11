@@ -1,4 +1,5 @@
 /**
+ * @file vec4.ixx
  * @brief 4D vector type and utilities.
  */
 module;

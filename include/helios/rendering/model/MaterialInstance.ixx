@@ -1,5 +1,6 @@
 /**
- * @brief Material instance combining a base Material with optional overrides.
+ * @file MaterialInstance.ixx
+ * @brief Instance-specific material data for rendering.
  */
 module;
 

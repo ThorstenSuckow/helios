@@ -1,3 +1,7 @@
+/**
+ * @file GLFWApplication.ixx
+ * @brief GLFW-specific Application implementation.
+ */
 module;
 
 #include <memory>

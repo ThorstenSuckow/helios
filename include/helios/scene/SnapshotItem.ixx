@@ -1,4 +1,5 @@
 /**
+ * @file SnapshotItem.ixx
  * @brief Snapshot item bundling a Renderable reference and its world matrix.
  */
 module;

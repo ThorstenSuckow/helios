@@ -1,3 +1,7 @@
+/**
+ * @file model.ixx
+ * @brief Model transform helper functions.
+ */
 module;
 
 export module helios.math.transform:model;

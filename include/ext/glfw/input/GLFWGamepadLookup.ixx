@@ -1,3 +1,7 @@
+/**
+ * @file GLFWGamepadLookup.ixx
+ * @brief GLFW gamepad mapping helpers.
+ */
 module;
 
 #include <GLFW/glfw3.h>

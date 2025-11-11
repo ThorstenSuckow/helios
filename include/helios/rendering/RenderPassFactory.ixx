@@ -1,4 +1,5 @@
 /**
+ * @file RenderPassFactory.ixx
  * @brief Factory for creating RenderPass objects from scene snapshots.
  */
 module;

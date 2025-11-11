@@ -1,4 +1,9 @@
 /**
+ * @file _module.ixx
+ * @brief Module exports for shader abstractions and utilities.
+ */
+
+/**
  * @brief Shader management and uniform handling.
  *
  * @details This module provides shader program management, uniform semantics,

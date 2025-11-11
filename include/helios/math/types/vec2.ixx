@@ -1,4 +1,5 @@
 /**
+ * @file vec2.ixx
  * @brief 2D vector type and utility functions.
  */
 module;

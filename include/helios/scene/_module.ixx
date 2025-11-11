@@ -1,4 +1,9 @@
 /**
+ * @file _module.ixx
+ * @brief Module exports for scene-graph-related functionality.
+ */
+
+/**
  * @brief Scene graph and camera management.
  *
  * @details This module provides scene graph functionality including cameras,

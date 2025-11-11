@@ -1,5 +1,6 @@
 /**
- * @brief Mesh configuration for drawing/topology
+ * @file MeshConfig.ixx
+ * @brief Mesh configuration including primitive type.
  */
 module;
 

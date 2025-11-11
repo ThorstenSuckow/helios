@@ -1,3 +1,7 @@
+/**
+ * @file WindowEvent.ixx
+ * @brief Abstract base class for window-related events.
+ */
 module;
 
 #include <cstdint>

@@ -1,3 +1,7 @@
+/**
+ * @file GLFWKeyLookup.ixx
+ * @brief GLFW key code to `helios::input::types::Key` mapping.
+ */
 module;
 
 #include <GLFW/glfw3.h>
@@ -18,15 +22,15 @@ export namespace helios::ext::glfw::input::GLFWKeyLookup {
      */
     inline int from(const helios::input::types::Key key) noexcept {
 
-        static constexpr std::array<int, helios::input::types::Key::size_> HELIOS_TO_GLFW=[] {
-            std::array<int, helios::input::types::Key::size_> map{};
+        static const std::array<int, static_cast<size_t>(helios::input::types::Key::size_)> HELIOS_TO_GLFW = [] {
+            std::array<int, static_cast<size_t>(helios::input::types::Key::size_)> map{};
 
-            map[helios::input::types::Key::ESC] = GLFW_KEY_ESCAPE;
+            map[static_cast<size_t>(helios::input::types::Key::ESC)] = GLFW_KEY_ESCAPE;
 
             return map;
         }();
 
-        return HELIOS_TO_GLFW[key];
+        return HELIOS_TO_GLFW[static_cast<size_t>(key)];
     }
 
 }

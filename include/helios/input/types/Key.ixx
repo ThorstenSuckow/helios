@@ -1,5 +1,6 @@
 /**
- * @brief Keyboard key identifiers (platform-agnostic)
+ * @file Key.ixx
+ * @brief Key code definitions used across input adapters.
  */
 module;
 
@@ -16,7 +17,7 @@ export namespace helios::input::types {
      * Implementing APIs are advised to properly map their implementation against
      * this enumeration.
      */
-    enum Key {
+    enum class Key {
         ESC,
 
 

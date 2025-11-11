@@ -1,4 +1,5 @@
 /**
+ * @file StringFileReader.ixx
  * @brief Abstract base class for reading file contents into a string.
  */
 module;

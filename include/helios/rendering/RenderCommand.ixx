@@ -1,5 +1,6 @@
 /**
- * @brief Data-transfer object describing a single render command.
+ * @file RenderCommand.ixx
+ * @brief Representation of a low-level render command.
  */
 module;
 

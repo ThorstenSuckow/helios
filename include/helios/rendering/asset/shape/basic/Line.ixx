@@ -1,5 +1,6 @@
 /**
- * @brief Basic line shape (2D segment).
+ * @file Line.ixx
+ * @brief Basic line shape for rendering.
  */
 module;
 

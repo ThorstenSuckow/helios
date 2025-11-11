@@ -1,4 +1,5 @@
 /**
+ * @file Snapshot.ixx
  * @brief Represents an immutable snapshot of a SceneGraph at a given point in time.
  */
 module;

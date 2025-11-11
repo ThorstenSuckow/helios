@@ -1,3 +1,7 @@
+/**
+ * @file MaterialProperties.ixx
+ * @brief Default material properties used by materials and instances.
+ */
 module;
 
 export module helios.rendering.model.config.MaterialProperties;

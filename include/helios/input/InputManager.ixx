@@ -1,4 +1,5 @@
 /**
+ * @file InputManager.ixx
  * @brief InputManager providing access to various input states.
  */
 module;

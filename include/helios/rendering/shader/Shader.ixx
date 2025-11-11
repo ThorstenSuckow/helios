@@ -1,10 +1,8 @@
 /**
- * @brief Abstract shader interface used by rendering backends.
+ * @file Shader.ixx
+ * @brief Abstraction for a compiled shader program.
  */
 module;
-
-#include <memory>
-#include <optional>
 
 export module helios.rendering.shader.Shader;
 

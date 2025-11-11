@@ -1,4 +1,9 @@
 /**
+ * @file _module.ixx
+ * @brief Math concepts module exports.
+ */
+
+/**
  * @brief Mathematical concepts for type constraints.
  *
  * @details This module provides C++20 concept definitions for numeric

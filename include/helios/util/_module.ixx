@@ -1,4 +1,9 @@
 /**
+ * @file _module.ixx
+ * @brief Module exports for non-domain-specific utility functions.
+ */
+
+/**
  * @brief Utility functions and helper classes.
  *
  * @details This module provides various utility functionality including GUID
@@ -10,4 +15,3 @@ export import helios.util.Guid;
 
 export import helios.util.log;
 export import helios.util.io;
-

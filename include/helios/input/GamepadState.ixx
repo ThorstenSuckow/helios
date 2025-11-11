@@ -1,5 +1,6 @@
 /**
- * @brief A lightweight class for transferring the state of a Gamepad.
+ * @file GamepadState.ixx
+ * @brief Representation of current gamepad input state.
  */
 module;
 

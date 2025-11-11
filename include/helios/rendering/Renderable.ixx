@@ -1,5 +1,6 @@
 /**
- * @brief Defines the Renderable abstraction: a mesh + material combination.
+ * @file Renderable.ixx
+ * @brief Interface for objects that can be rendered by the rendering pipeline.
  */
 module;
 

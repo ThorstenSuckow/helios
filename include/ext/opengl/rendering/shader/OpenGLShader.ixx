@@ -1,3 +1,7 @@
+/**
+ * @file OpenGLShader.ixx
+ * @brief OpenGL implementation of shader program management.
+ */
 module;
 
 #include <iostream>

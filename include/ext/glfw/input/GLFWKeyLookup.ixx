@@ -1,3 +1,7 @@
+/**
+ * @file GLFWKeyLookup.ixx
+ * @brief GLFW key code to `helios::input::types::Key` mapping.
+ */
 module;
 
 #include <GLFW/glfw3.h>

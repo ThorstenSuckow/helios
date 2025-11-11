@@ -1,3 +1,7 @@
+/**
+ * @file MaterialPropertiesOverride.ixx
+ * @brief Overrides for material properties to customize rendering parameters.
+ */
 module;
 
 #include <optional>

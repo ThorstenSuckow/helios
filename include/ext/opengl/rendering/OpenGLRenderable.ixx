@@ -1,3 +1,7 @@
+/**
+ * @file OpenGLRenderable.ixx
+ * @brief OpenGL implementation of a Renderable wrapper.
+ */
 module;
 
 

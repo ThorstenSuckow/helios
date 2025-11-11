@@ -1,5 +1,6 @@
 /**
- * @brief Abstract interface for low-level rendering devices.
+ * @file RenderingDevice.ixx
+ * @brief Low-level rendering device abstraction (OpenGL/Vulkan/etc.).
  */
 module;
 

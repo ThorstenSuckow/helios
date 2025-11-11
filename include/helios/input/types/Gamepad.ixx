@@ -1,3 +1,7 @@
+/**
+ * @file Gamepad.ixx
+ * @brief Identifiers for supported gamepads.
+ */
 module;
 
 export module helios.input.types.Gamepad;

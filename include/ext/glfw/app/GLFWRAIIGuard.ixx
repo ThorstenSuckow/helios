@@ -1,3 +1,7 @@
+/**
+ * @file GLFWRAIIGuard.ixx
+ * @brief RAII guard class to initialize/terminate GLFW.
+ */
 module;
 
 export module helios.ext.glfw.app.GLFWRAIIGuard;
@@ -42,5 +46,3 @@ export namespace helios::ext::glfw::app {
     };
 
 }
-
-

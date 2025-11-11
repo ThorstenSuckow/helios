@@ -1,4 +1,5 @@
 /**
+ * @file InputAdapter.ixx
  * @brief Abstract interface for platform-specific input adapters.
  */
 module;

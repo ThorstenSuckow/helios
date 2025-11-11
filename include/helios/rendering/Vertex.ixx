@@ -1,5 +1,6 @@
 /**
- * @brief Vertex structure: position, normal and texture coordinates.
+ * @file Vertex.ixx
+ * @brief Vertex description and utilities for rendering.
  */
 module;
 

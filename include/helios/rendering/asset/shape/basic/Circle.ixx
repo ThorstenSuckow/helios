@@ -1,5 +1,6 @@
 /**
- * @brief Basic circle shape (2D triangle-fan approximation).
+ * @file Circle.ixx
+ * @brief Basic circle shape for rendering.
  */
 module;
 

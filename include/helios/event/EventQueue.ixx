@@ -1,6 +1,9 @@
+/**
+ * @file EventQueue.ixx
+ * @brief Thread-safe queue for Event objects.
+ */
 module;
 
-#include <deque>
 #include <functional>
 #include <memory>
 

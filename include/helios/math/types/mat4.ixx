@@ -41,11 +41,13 @@ export namespace helios::math {
         /**
          * @brief Default constructor. Initializes all components to 0.
          */
-        explicit constexpr mat4() noexcept : m(){};
+        explicit constexpr mat4() noexcept : m{};
 
         /**
          * @brief Creates a diagonal matrix. The diagonal components are initialized
          * with the value f.
+         *
+         * @param f The scalar value for the diagonal components.
          */
         explicit constexpr mat4(const T f) noexcept
             : m{ f,  T{}, T{}, T{},

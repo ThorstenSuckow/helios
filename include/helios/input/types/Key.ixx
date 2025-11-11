@@ -17,7 +17,7 @@ export namespace helios::input::types {
      * Implementing APIs are advised to properly map their implementation against
      * this enumeration.
      */
-    enum class Key {
+    enum Key {
         ESC,
 
 

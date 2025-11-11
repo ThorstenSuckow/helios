@@ -1,3 +1,7 @@
+/**
+ * @file EventManager.ixx
+ * @brief High-level event manager dispatching events to listeners.
+ */
 module;
 
 #include <functional>

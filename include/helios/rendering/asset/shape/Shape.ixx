@@ -1,3 +1,7 @@
+/**
+ * @file Shape.ixx
+ * @brief Interface for simple geometric shapes used for testing and debugging.
+ */
 module;
 
 #include <memory>

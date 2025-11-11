@@ -1,3 +1,7 @@
+/**
+ * @file GLFWFactory.ixx
+ * @brief Factory functions for creating GLFW-based Application and Window instances.
+ */
 module;
 
 #include <memory>

@@ -1,3 +1,7 @@
+/**
+ * @file vec3.ixx
+ * @brief 3D vector type and utilities.
+ */
 module;
 
 #include <cassert>

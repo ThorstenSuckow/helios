@@ -1,3 +1,7 @@
+/**
+ * @file BasicWindowRenderingController.ixx
+ * @brief Controller implementation for basic window rendering management.
+ */
 module;
 
 export module helios.app.controller.BasicWindowRenderingController;

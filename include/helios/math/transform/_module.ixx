@@ -1,4 +1,7 @@
-module;
+/**
+ * @file _module.ixx
+ * @brief Module exports for transformation utilities for camera/model.
+ */
 
 /**
  * @brief Transformation utilities for cameras and models.

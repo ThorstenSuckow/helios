@@ -1,4 +1,5 @@
 /**
+ * @file Guid.ixx
  * @brief Lightweight GUID (globally unique identifier) implementation.
  */
 module;

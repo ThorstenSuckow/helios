@@ -1,4 +1,9 @@
 /**
+ * @file _module.ixx
+ * @brief Module exports for window event types and handlers.
+ */
+
+/**
  * @brief Window event definitions and handlers.
  *
  * @details This module provides window-specific event types such as resize events

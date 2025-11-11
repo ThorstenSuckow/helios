@@ -1,3 +1,7 @@
+/**
+ * @file Dispatcher.ixx
+ * @brief Dispatches events to registered callbacks.
+ */
 module;
 
 #include <functional>

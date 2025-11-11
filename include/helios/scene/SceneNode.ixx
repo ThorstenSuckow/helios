@@ -1,4 +1,6 @@
 /**
+ * @file SceneNode.ixx
+ *
  * @brief Scene graph node representing a transform and optional renderable
  */
 module;

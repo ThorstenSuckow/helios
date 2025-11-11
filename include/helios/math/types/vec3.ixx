@@ -149,6 +149,36 @@ export namespace helios::math {
         return vec3<T>{v[0] * n, v[1] * n, v[2] * n};
     }
 
+    /**
+     * @brief Multiplies two vectors componentwise.
+     *
+     * @tparam T The numeric type of the vector components.
+     * @param v1 The left-hand vec3<T> vector to be multiplied.
+     * @param v2 The right-hand vec3<T> vector to be multiplied.
+     *
+     * @return A new vec3<T> instance representing the result of the componentwise multiplication
+     * of the two vectors.
+     */
+    template<helios::math::Numeric T>
+    constexpr vec3<T> operator*( const vec3<T>& v1, const vec3<T>& v2) noexcept {
+        return vec3<T>{v1[0] * v2[0], v1[1] * v2[1], v1[2] * v2[2]};
+    }
+
+    /**
+     * @brief Calculates the componentwise sum of the two vectors.
+     *
+     * @tparam T The numeric type of the vector components.
+     * @param v1 The left-hand vec3<T> vector to be added.
+     * @param v2 The right-hand vec3<T> vector to be added.
+     *
+     * @return A new vec3<T> instance representing the sum of the two vectors.
+     */
+    template<helios::math::Numeric T>
+    constexpr vec3<T> operator+( const vec3<T>& v1, const vec3<T>& v2) noexcept {
+        return vec3<T>{v1[0] + v2[0], v1[1] + v2[1], v1[2] + v2[2]};
+    }
+
+
 
     /**
      * @brief Returns a normalized version of this vector.

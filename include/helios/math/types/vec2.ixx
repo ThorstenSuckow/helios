@@ -79,6 +79,22 @@ export namespace helios::math {
     };
 
     /**
+     * @brief Multiplies a 2D vector by a scalar value.
+     *
+     * @tparam T The numeric type of the vector components.
+     * @param v The vec2<T> vector to be multiplied.
+     * @param n The scalar vector to multiplay the vector by.
+     *
+     * @return a new vec2<T> instance representing the result of the scalar
+     * multiplication.
+     */
+    template<helios::math::Numeric T>
+    constexpr vec2<T> operator*(const vec2<T>& v, const T n) noexcept {
+        return vec2<T>{v[0] * n, v[1] * n};
+    }
+
+
+    /**
      * @brief Computes the dot product of two 2D vectors.
      *
      * @tparam T The numeric type of the vector components.

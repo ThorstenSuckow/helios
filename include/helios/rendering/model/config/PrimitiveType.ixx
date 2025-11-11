@@ -1,5 +1,6 @@
 /**
- * @brief Primitive assembly types used by rendering backends.
+ * @file PrimitiveType.ixx
+ * @brief Enum of primitive types for mesh rendering.
  */
 module;
 

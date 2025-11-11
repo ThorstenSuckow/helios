@@ -1,4 +1,7 @@
-module;
+/**
+ * @file _module.ixx
+ * @brief Module exports for logging.
+ */
 
 /**
  * @brief Logging system for debugging and diagnostics.

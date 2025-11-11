@@ -1,3 +1,7 @@
+/**
+ * @file WindowRenderingController.ixx
+ * @brief Controller coordinating rendering for a window.
+ */
 module;
 
 export module helios.app.controller.WindowRenderingController;
@@ -20,7 +24,7 @@ export namespace helios::app::controller {
         /**
          * @brief Handles FrameBuffer resize events.
          *
-         * @param A const reference to the FrameBufferResizeEvent describing the event.
+         * @param e A const reference to the FrameBufferResizeEvent describing the event.
          */
         virtual void onFrameBufferResize(const helios::window::event::FrameBufferResizeEvent& e) = 0;
     };

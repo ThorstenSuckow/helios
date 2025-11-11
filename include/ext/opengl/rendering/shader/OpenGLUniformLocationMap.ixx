@@ -1,3 +1,7 @@
+/**
+ * @file OpenGLUniformLocationMap.ixx
+ * @brief Maps shader uniform semantics to OpenGL uniform locations.
+ */
 module;
 
 

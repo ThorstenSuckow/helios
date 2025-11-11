@@ -1,4 +1,5 @@
 /**
+ * @file FrustumCullingStrategy.ixx
  * @brief Abstract base class for implementing frustum culling strategies.
  */
 module;

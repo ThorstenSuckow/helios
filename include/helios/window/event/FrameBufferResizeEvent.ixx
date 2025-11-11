@@ -1,3 +1,7 @@
+/**
+ * @file FrameBufferResizeEvent.ixx
+ * @brief Event representing a change in the framebuffer size.
+ */
 module;
 
 #include <cstdint>
@@ -18,7 +22,7 @@ export namespace helios::window::event {
      * The event should be triggered whenever a change in the underlying
      * framebuffer of a window is detected, indicating that the rendering context
      * (e.g. OpenGL) might need adjustments. FramebufferResizeEvents
-     * carry the with and the height of the framebuffer.
+     * carry the width and the height of the framebuffer.
      */
     class FrameBufferResizeEvent final : public WindowEvent {
 
@@ -43,7 +47,7 @@ export namespace helios::window::event {
          * @param height The new height of the framebuffer.
          */
         FrameBufferResizeEvent(
-            const util::Guid sourceGuid, const int width, const int height
+            util::Guid sourceGuid, int width, int height
         ) noexcept;
 
 
@@ -56,8 +60,8 @@ export namespace helios::window::event {
          * @param tag A `uint64_t` tag for identifying/categorizing the event.
          */
         FrameBufferResizeEvent(
-            const util::Guid sourceGuid,
-            const int width, const int height, const uint64_t tag
+            util::Guid sourceGuid,
+            int width, int height, uint64_t tag
         ) noexcept;
 
     };

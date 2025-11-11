@@ -1,4 +1,5 @@
 /**
+ * @file Logger.ixx
  * @brief Simple synchronous logger that writes messages to stdout.
  */
 module;

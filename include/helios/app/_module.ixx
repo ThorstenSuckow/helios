@@ -1,4 +1,9 @@
 /**
+ * @file _module.ixx
+ * @brief Application module exports.
+ */
+
+/**
  * @brief Application module providing core application infrastructure.
  *
  * @details This module exports the Application class and related controller functionality
@@ -7,6 +12,4 @@
 export module helios.app;
 
 export import helios.app.Application;
-
 export import helios.app.controller;
-

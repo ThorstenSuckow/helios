@@ -1,4 +1,7 @@
-module;
+/**
+ * @file _module.ixx
+ * @brief Module exports for Model-related rendering constructs.
+ */
 
 /**
  * @brief Model and mesh management for 3D rendering.
@@ -8,9 +11,7 @@ module;
  */
 export module helios.rendering.model;
 
-export import helios.rendering.model.config;
-
 export import helios.rendering.model.Mesh;
 export import helios.rendering.model.Material;
 export import helios.rendering.model.MaterialInstance;
-
+export import helios.rendering.model.config;

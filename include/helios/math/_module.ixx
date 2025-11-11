@@ -1,4 +1,9 @@
 /**
+ * @file _module.ixx
+ * @brief Module exports for mathematical types and utilities.
+ */
+
+/**
  * @brief Mathematical operations and types module.
  *
  * @details This module provides comprehensive mathematical functionality including

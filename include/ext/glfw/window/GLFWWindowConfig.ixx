@@ -1,3 +1,7 @@
+/**
+ * @file GLFWWindowConfig.ixx
+ * @brief GLFW-specific window configuration structures.
+ */
 module;
 
 #include <GLFW/glfw3.h>

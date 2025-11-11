@@ -1,3 +1,7 @@
+/**
+ * @file Application.ixx
+ * @brief Entry point and central manager for helios applications.
+ */
 module;
 
 #include <memory>

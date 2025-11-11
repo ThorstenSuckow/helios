@@ -1,4 +1,9 @@
 /**
+ * @file _module.ixx
+ * @brief Module exports for window management and configuration.
+ */
+
+/**
  * @brief Window management and configuration.
  *
  * @details This module provides window creation, configuration, and event handling
@@ -6,9 +11,7 @@
  */
 export module helios.window;
 
-
 export import helios.window.Window;
 export import helios.window.WindowConfig;
 
 export import helios.window.event;
-

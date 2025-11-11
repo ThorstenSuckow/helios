@@ -1,3 +1,7 @@
+/**
+ * @file OpenGLMesh.ixx
+ * @brief OpenGL-specific Mesh implementation and buffer management.
+ */
 module;
 
 #include <memory>

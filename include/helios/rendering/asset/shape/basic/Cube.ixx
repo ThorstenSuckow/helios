@@ -1,5 +1,6 @@
 /**
- * @brief Basic cube shape (unit cube centered at origin).
+ * @file Cube.ixx
+ * @brief Basic cube shape for rendering.
  */
 module;
 

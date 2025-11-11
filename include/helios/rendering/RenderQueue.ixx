@@ -1,5 +1,6 @@
 /**
- * @brief Render queue holding a list of render commands for a render pass.
+ * @file RenderQueue.ixx
+ * @brief Container for enqueued render commands and renderables.
  */
 module;
 

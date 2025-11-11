@@ -1,4 +1,5 @@
 /**
+ * @file WindowConfig.ixx
  * @brief Window creation and initialization configuration.
  */
 module;

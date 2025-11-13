@@ -27,14 +27,14 @@ import helios.ext.opengl.rendering.shader.OpenGLShader;
 import helios.ext.opengl.rendering.shader.OpenGLUniformLocationMap;
 import helios.rendering.shader.UniformSemantics;
 import helios.ext.opengl.rendering.model.OpenGLMesh;
-import helios.ext.opengl.rendering.OpenGLRenderable;
-import helios.rendering.model.MaterialInstance;
 import helios.rendering.model.Material;
 import helios.rendering.model.config.MeshConfig;
 import helios.rendering.model.config.MaterialProperties;
 import helios.rendering.model.config.MaterialPropertiesOverride;
 import helios.rendering.model.config.PrimitiveType;
 import helios.rendering.RenderPassFactory;
+import helios.rendering.RenderPrototype;
+import helios.rendering.Renderable;
 import helios.ext.opengl.rendering.OpenGLDevice;
 
 // model data
@@ -53,6 +53,22 @@ using namespace helios::input;
 using namespace helios::input::types;
 using namespace helios::ext::glfw::app;
 using namespace helios::ext::glfw::window;
+
+#define SCALING_FACTOR 1.0f/5.0f
+
+void updateButton(
+    helios::scene::SceneNode& button,
+    const bool pressed,
+    helios::rendering::model::config::MaterialPropertiesOverride& originalOverride) {
+
+    button.scale(helios::math::vec3f(SCALING_FACTOR * (pressed ? 1.2f : 1.0f)));
+    if (button.renderable()->hasMaterialOverride()) {
+        const auto baseColor = *originalOverride.baseColor;
+        button.renderable()->materialOverride()->baseColor = helios::math::vec4f(baseColor[0], baseColor[1], baseColor[2], pressed ? 1.0f : baseColor[3]);
+    }
+
+}
+
 
 int main() {
 
@@ -88,47 +104,57 @@ int main() {
 
 
     // material configs
-    auto circleMaterialProps = helios::rendering::model::config::MaterialProperties(
+    auto circleMaterialProps = std::make_shared<helios::rendering::model::config::MaterialProperties>(
         helios::math::vec4f(1.0f, 0.0f, 1.0f, 0.5f),
-        0.0
+        0.0f
     );
-    auto lineMaterialProps = helios::rendering::model::config::MaterialProperties(
+
+    auto lineMaterialProps = std::make_shared<helios::rendering::model::config::MaterialProperties>(
         helios::math::vec4f(1.0f, 1.0f, 1.0f, 1.0f),
-        0.0
-    );
-    auto circleMaterialProps_shared = std::make_shared<helios::rendering::model::config::MaterialProperties>(circleMaterialProps);
-    auto lineMaterialProps_shared   = std::make_shared<helios::rendering::model::config::MaterialProperties>(lineMaterialProps);
-
-    auto circleShape      = helios::rendering::asset::shape::basic::Circle();
-    auto circleMeshConfig = std::make_shared<const helios::rendering::model::config::MeshConfig>(
-        circleShape.primitiveType()
-   );
-    auto circleMesh             = std::make_shared<helios::ext::opengl::rendering::model::OpenGLMesh>(circleShape, circleMeshConfig);
-    auto circleMaterial         = std::make_shared<helios::rendering::model::Material>(shader, circleMaterialProps_shared);
-    auto circleMaterialInstance = std::make_shared<helios::rendering::model::MaterialInstance>(circleMaterial);
-    auto circleRenderable       = std::make_shared<helios::ext::opengl::rendering::OpenGLRenderable>(
-        circleMesh, circleMaterialInstance
+        0.0f
     );
 
-    auto lineShape      = helios::rendering::asset::shape::basic::Line();
-    auto lineMeshConfig = std::make_shared<const helios::rendering::model::config::MeshConfig>(
-        lineShape.primitiveType()
-    );
-    auto lineMesh             = std::make_shared<helios::ext::opengl::rendering::model::OpenGLMesh>(lineShape, lineMeshConfig);
-    auto lineMaterial         = std::make_shared<helios::rendering::model::Material>(shader, lineMaterialProps_shared);
-    auto lineMaterialInstance = std::make_shared<helios::rendering::model::MaterialInstance>(lineMaterial);
-    auto lineRenderable       = std::make_shared<helios::ext::opengl::rendering::OpenGLRenderable>(
-        lineMesh, lineMaterialInstance
+    // create circle RenderPrototype
+    const auto circleShape      = helios::rendering::asset::shape::basic::Circle();
+    const auto circleMeshConfig = std::make_shared<const helios::rendering::model::config::MeshConfig>(circleShape.primitiveType());
+    const auto circleMesh       = std::make_shared<const helios::ext::opengl::rendering::model::OpenGLMesh>(circleShape, circleMeshConfig);
+    const auto circleMaterial   = std::make_shared<const helios::rendering::model::Material>(shader, circleMaterialProps);
+    const auto circlePrototype  = std::make_shared<const helios::rendering::RenderPrototype>(circleMaterial, circleMesh);
+
+    // create line RenderPrototype
+    const auto lineShape      = helios::rendering::asset::shape::basic::Line();
+    const auto lineMeshConfig = std::make_shared<const helios::rendering::model::config::MeshConfig>(lineShape.primitiveType());
+    const auto lineMesh       = std::make_shared<const helios::ext::opengl::rendering::model::OpenGLMesh>(lineShape, lineMeshConfig);
+    const auto lineMaterial   = std::make_shared<const helios::rendering::model::Material>(shader, lineMaterialProps);
+    const auto linePrototype  = std::make_shared<const helios::rendering::RenderPrototype>(lineMaterial, lineMesh);
+
+    // create rectangle RenderPrototype
+    const auto recShape       = helios::rendering::asset::shape::basic::Rectangle();
+    const auto recShapeConfig = std::make_shared<const helios::rendering::model::config::MeshConfig>(recShape.primitiveType());
+    const auto recMesh        = std::make_shared<const helios::ext::opengl::rendering::model::OpenGLMesh>(recShape, recShapeConfig);
+    const auto recMaterial    = std::make_shared<const helios::rendering::model::Material>(shader, lineMaterialProps);
+    const auto recPrototype   = std::make_shared<const helios::rendering::RenderPrototype>(recMaterial, recMesh);
+
+    const auto circleRenderable = std::make_shared<helios::rendering::Renderable>(circlePrototype);
+    const auto lineRenderable   = std::make_shared<helios::rendering::Renderable>(linePrototype);
+    const auto recRenderable    = std::make_shared<helios::rendering::Renderable>(recPrototype);
+
+    auto buttonMaterialPropsOverride = helios::rendering::model::config::MaterialPropertiesOverride(
+        helios::math::vec4f(0.25f, 0.96f, 0.35f, 0.5f),
+        0.0f
     );
 
-    auto rectangleShape       = helios::rendering::asset::shape::basic::Rectangle();
-    auto rectangleShapeConfig = std::make_shared<const helios::rendering::model::config::MeshConfig>(
-        rectangleShape.primitiveType()
+    auto buttonRenderableA = std::make_shared<helios::rendering::Renderable>(
+        circlePrototype, buttonMaterialPropsOverride
     );
-    auto rectangleMesh             = std::make_shared<helios::ext::opengl::rendering::model::OpenGLMesh>(rectangleShape, rectangleShapeConfig);
-    auto rectangleMaterialInstance = std::make_shared<helios::rendering::model::MaterialInstance>(lineMaterial);
-    auto rectangleRenderable       = std::make_shared<helios::ext::opengl::rendering::OpenGLRenderable>(
-        rectangleMesh, rectangleMaterialInstance
+    auto buttonRenderableB = std::make_shared<helios::rendering::Renderable>(
+        circlePrototype, buttonMaterialPropsOverride
+    );
+    auto buttonRenderableX = std::make_shared<helios::rendering::Renderable>(
+        circlePrototype, buttonMaterialPropsOverride
+    );
+    auto buttonRenderableY = std::make_shared<helios::rendering::Renderable>(
+        circlePrototype, buttonMaterialPropsOverride
     );
 
     // ------------------------------
@@ -142,29 +168,25 @@ int main() {
     assert(camera_ptr != nullptr && "unexpected nullptr for circleNode");
 
     // scene nodes
-    // left stick
-    float scalingFactor = 1.0f/5.0f;
-
     const auto stickLeftNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>(circleRenderable));
-    assert(stickLeftNode_ptr != nullptr && "unexpected nullptr for stickLeftNode_ptr");
     auto stickAxisLeft_ptr = stickLeftNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(lineRenderable));
-    assert(stickAxisLeft_ptr != nullptr && "unexpected nullptr for stickAxisLeft_ptr");
-    stickLeftNode_ptr->scale(helios::math::vec3f(scalingFactor, scalingFactor, 0.0f));
-    stickLeftNode_ptr->translate(helios::math::vec3f(-0.5f, 0.0f, 0.0f));
 
     // right stick
     const auto stickRightNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>(circleRenderable));
-    assert(stickRightNode_ptr != nullptr && "unexpected nullptr for stickRightNode_ptr");
     auto stickAxisRight_ptr = stickRightNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(lineRenderable));
-    assert(stickAxisRight_ptr != nullptr && "unexpected nullptr for stickAxisRight_ptr");
-    stickRightNode_ptr->scale(helios::math::vec3f(scalingFactor, scalingFactor, 0.0f));
-    stickRightNode_ptr->translate(helios::math::vec3f(0.0f, 0.0f, 0.0f));
 
     // left/right trigger
-    const auto triggerLeftNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>(rectangleRenderable));
-    assert(triggerLeftNode_ptr != nullptr && "unexpected nullptr for triggerLeftNode_ptr");
-    const auto triggerRightNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>(rectangleRenderable));
-    assert(triggerRightNode_ptr != nullptr && "unexpected nullptr for triggerRightNode_ptr");
+    const auto triggerLeftNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>(recRenderable));
+    const auto triggerRightNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>(recRenderable));
+
+    // buttons
+    const auto buttonGroupNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>());
+    const auto buttonA_ptr = buttonGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(buttonRenderableA));
+    const auto buttonB_ptr = buttonGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(buttonRenderableB));
+    const auto buttonX_ptr = buttonGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(buttonRenderableX));
+    const auto buttonY_ptr = buttonGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(buttonRenderableY));
+
+
 
     // ------------------------------
     //  Input
@@ -179,6 +201,30 @@ int main() {
     // ------------------------------
     // disable logging
     helios::util::log::LogManager::getInstance().enableLogging(false);
+
+    // ------------------------------
+    //  Positioning and resizing
+    // ------------------------------
+    float basePosX          = 0.40f;
+    float basePosY          = 0.40f;
+
+    stickLeftNode_ptr->scale(helios::math::vec3f(SCALING_FACTOR, SCALING_FACTOR, 0.0f));
+    stickLeftNode_ptr->translate(helios::math::vec3f(-basePosX, 0.0f, 0.0f));
+    stickRightNode_ptr->scale(helios::math::vec3f(SCALING_FACTOR, SCALING_FACTOR, 0.0f));
+    stickRightNode_ptr->translate(helios::math::vec3f(basePosX, 0.0f, 0.0f));
+
+    const auto triggerBaseScale       = helios::math::vec3f(0.20, 0.25f * SCALING_FACTOR, 0.0f);
+    auto triggerAabbWidth        = 2*triggerBaseScale[0];
+    const auto triggerLftBasePosition = helios::math::vec3f((-basePosX + SCALING_FACTOR), basePosY, 0.0f);
+    const auto triggerRgtBasePosition = helios::math::vec3f((basePosX - SCALING_FACTOR), basePosY, 0.0f);
+
+    buttonGroupNode_ptr->scale(helios::math::vec3f(SCALING_FACTOR));
+    buttonGroupNode_ptr->translate(helios::math::vec3f(basePosX, -basePosY, 0.0f));
+    buttonA_ptr->translate(helios::math::vec3f(0.0f, -0.5f, 0.0f));
+    buttonB_ptr->translate(helios::math::vec3f(0.5f, 0.0f, 0.0f));
+    buttonX_ptr->translate(helios::math::vec3f(-0.5f, 0.0f, 0.0f));
+    buttonY_ptr->translate(helios::math::vec3f(0.0f, 0.5f, 0.0f));
+
 
     // game loop
     while (!win->shouldClose()) {
@@ -223,18 +269,23 @@ int main() {
 
         // scaling
         // sticks:
-        stickAxisLeft_ptr->scale(helios::math::vec3f(gamepadState.left()));
-        stickAxisRight_ptr->scale(helios::math::vec3f(gamepadState.right()));
-        // trigger
-        // @note the Rectangle shape has a default height of 2.0f and will grow and shrink equally in both
-        // x and y direction. This makes scaling and translating more complicated than it should be -
-        // the lib is in need of initializing a scenenode with a "fixed" translation, and subsequently
-        // translate the node by a specific amount, using "translateBy()".
-        triggerLeftNode_ptr->scale(helios::math::vec3f(scalingFactor * 0.5f, leftTrigger*scalingFactor, 0.0f));
-        triggerLeftNode_ptr->translate(helios::math::vec3f(-0.85f, leftTrigger*scalingFactor, 0.0f));
+        stickAxisLeft_ptr->scale(helios::math::vec3f(gamepadState.left()*0.5f));
+        stickAxisLeft_ptr->translate(helios::math::vec3f(gamepadState.left()*0.5f));
 
-        triggerRightNode_ptr->scale(helios::math::vec3f(scalingFactor * 0.5f, rightTrigger*scalingFactor, 0.0f));
-        triggerRightNode_ptr->translate(helios::math::vec3f(0.5f, rightTrigger*scalingFactor, 0.0f));
+        stickAxisRight_ptr->scale(helios::math::vec3f(gamepadState.right()*0.5f));
+        stickAxisRight_ptr->translate(helios::math::vec3f(gamepadState.right()*0.5f));
+
+        triggerLeftNode_ptr->scale(helios::math::vec3f(triggerBaseScale[0]*leftTrigger, triggerBaseScale[1],  0.0f));
+        triggerLeftNode_ptr->translate(triggerLftBasePosition + (helios::math::vec3f(-(triggerAabbWidth/2.0f)*leftTrigger, 0.0f, 0.0f)));
+
+        triggerRightNode_ptr->scale(helios::math::vec3f(triggerBaseScale[0]*rightTrigger, triggerBaseScale[1],  0.0f));
+        triggerRightNode_ptr->translate(triggerRgtBasePosition + (helios::math::vec3f((triggerAabbWidth/2.0f)*rightTrigger, 0.0f, 0.0f)));
+
+        // buttons
+        updateButton(*buttonA_ptr, gamepadState.buttonA(), buttonMaterialPropsOverride);
+        updateButton(*buttonB_ptr, gamepadState.buttonB(), buttonMaterialPropsOverride);
+        updateButton(*buttonX_ptr, gamepadState.buttonX(), buttonMaterialPropsOverride);
+        updateButton(*buttonY_ptr, gamepadState.buttonY(), buttonMaterialPropsOverride);
 
 
         auto snapshot = scene.createSnapshot(dynamic_cast<helios::scene::Camera&>(*camera_ptr));

@@ -73,7 +73,7 @@ export namespace helios::rendering {
 
         /**
          * @brief Returns a const reference to the immutable Material used by this RenderPrototype.
-         * The Material contains shader information and default properties. it is guaranteed to exist
+         * The Material contains shader information and default properties. It is guaranteed to exist
          * and be valid
          *
          * @return A const ref to the Material object.

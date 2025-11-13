@@ -62,7 +62,7 @@ export namespace helios::rendering {
         );
 
         /**
-         * @brief Returns con ref to the immutable Mesh used by this RenderPrototype.
+         * @brief Returns const ref to the immutable Mesh used by this RenderPrototype.
          *
          * Represents a const reference to an unmodifiable Mesh object,
          * containing geometric data such as vertices and indices used

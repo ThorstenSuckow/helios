@@ -3,17 +3,18 @@ module;
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
-#include <optional>
 
 module helios.ext.opengl.rendering.OpenGLDevice;
 
 import helios.ext.opengl.rendering.model.OpenGLMesh;
+import helios.ext.opengl.rendering.shader.OpenGLShader;
 import helios.rendering.model.config.MeshConfig;
 import helios.rendering.model.config.PrimitiveType;
 
 
 using namespace helios::util;
 using namespace helios::ext::opengl::rendering::model;
+using namespace helios::ext::opengl::rendering::shader;
 using namespace helios::rendering::model::config;
 
 
@@ -77,24 +78,33 @@ namespace helios::ext::opengl::rendering {
 
         for (auto& rc: renderQueue.renderCommands()) {
 
-            if (const auto shader_ptr = rc->shader().lock()) {
+            if (const auto renderPrototype_ptr = rc->renderPrototype().lock()) {
+                const auto& baseShader = renderPrototype_ptr->material().shader();
+                const auto& baseMesh   = renderPrototype_ptr->mesh();
+
+                const auto* shader = dynamic_cast<const OpenGLShader*>(&baseShader);
+                if (!shader) {
+                    logger_.error("Failed to cast shader to OpenGLShader.");
+                    continue;
+                }
                 logger_.info("activating shader...");
-                shader_ptr->use();
-                shader_ptr->applyUniformValues(rc->objectUniformValues());
-                shader_ptr->applyUniformValues(rc->materialUniformValues());
-            }
+                shader->use();
+                shader->applyUniformValues(rc->objectUniformValues());
+                shader->applyUniformValues(rc->materialUniformValues());
 
-            if (const auto mesh_ptr = rc->mesh().lock()) {
-                const auto mesh =  std::dynamic_pointer_cast<const OpenGLMesh>(mesh_ptr);
+                const auto* mesh = dynamic_cast<const OpenGLMesh*>(&baseMesh);
+                if (!mesh) {
+                    logger_.error("Failed to cast mesh to OpenGLMesh.");
+                    continue;
+                }
                 const auto [primitiveType] = mesh->meshConfig();
-
                 logger_.info(std::format("Binding vao {0}", mesh->vao()));
                 glBindVertexArray(mesh->vao());
                 glEnable(GL_BLEND);
                 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
                 glDrawElements(
                     toOpenGL(primitiveType),
-                    mesh_ptr->indexCount() ,
+                    mesh->indexCount() ,
                     GL_UNSIGNED_INT,
                     nullptr
                 );

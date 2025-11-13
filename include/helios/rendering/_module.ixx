@@ -14,6 +14,7 @@ export module helios.rendering;
 export import helios.rendering.Vertex;
 export import helios.rendering.RenderQueue;
 export import helios.rendering.RenderPass;
+export import helios.rendering.RenderPrototype;
 export import helios.rendering.RenderPassFactory;
 export import helios.rendering.RenderingDevice;
 export import helios.rendering.RenderCommand;

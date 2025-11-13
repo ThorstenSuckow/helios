@@ -1,9 +1,9 @@
 # Agent Policy for helios
 
-Short description
+## Short description
 This document describes the rules for an automated coding agent (e.g., Copilot-like assistant / CI agent) that makes changes in the `helios` repository or automates development steps. Goal: provide fast, safe and high-quality assistance for implementation, refactoring and testing of the C++-based, modular engine.
 
-Scope
+## Scope
 - Code in `include/helios/*`, `src/helios/*`, `include/ext/*`, `src/ext/*`
 - The CMake build system, tests, examples, benchmarks
 - Documentation under `docs/` and `README.md`
@@ -80,4 +80,4 @@ Other notes
 - Every automated change must have a clear commit message and link to the related issue/PR.
 
 Versioning the agent policy
-- Place this file (`agent.md`) in the repo root or in `docs/`; update the policy version at the top when changes are made.
+- This file (`helios.agent.md`) is located in `.github/agents/`; update the policy version at the top when changes are made.

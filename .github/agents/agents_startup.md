@@ -1,7 +1,7 @@
 # agents_startup.md
 
 ## Purpose
-This file describes the agent's recommended startup behaviour when the repository is opened, cloned, or when an automated agent (IDE assistant / CI helper) is first invoked. The goal is to perform safe, fast, and reproducible repository checks without performing disruptive actions or leaking secrets.
+This file describes the agent's recommended startup behavior when the repository is opened, cloned, or when an automated agent (IDE assistant / CI helper) is first invoked. The goal is to perform safe, fast, and reproducible repository checks without performing disruptive actions or leaking secrets.
 
 ## When to run
 - On repository open (IDE), after clone, or in CI job initialization.
@@ -65,7 +65,8 @@ cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
 ```
 - Configure + quick build of a smoke target (only if allowed):
 ```
-cmake --build build --config Debug --target helios -- /m:1
+cmake --build build --config Debug --target helios_example_smoke -- /m:1
+# (replace 'helios_example_smoke' with the actual target name you wish to build)
 ```
 - Run fast tests only (if configured to run tests on startup):
 ```
@@ -93,8 +94,8 @@ ctest -C Debug -R quick -I 1,20 --output-on-failure
 - Produces machine-readable reports for automation and troubleshooting.
 
 ## Suggested placement and filename
-- `agents_startup.md` at repository root, or `docs/agents_startup.md`.
-- Keep short and link from `agents.md` to it.
+- Place `agents_startup.md` in `.github/agents/agents_startup.md` (preferred), or at repository root / `docs/agents_startup.md` if your workflow requires.
+- Keep short and link from `helios.agent.md` to it.
 
 ## Optional: an `agents_startup.yaml` (or `.json`) with runtime flags for the agent — this lets maintainers tune automatic behaviour per CI vs developer environment.
 

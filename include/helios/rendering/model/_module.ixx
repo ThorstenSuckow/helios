@@ -13,5 +13,4 @@ export module helios.rendering.model;
 
 export import helios.rendering.model.Mesh;
 export import helios.rendering.model.Material;
-export import helios.rendering.model.MaterialInstance;
 export import helios.rendering.model.config;

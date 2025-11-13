@@ -52,7 +52,7 @@ export namespace helios::rendering {
          * @brief Creates a new RenderPrototype using the specified Material and Mesh.
          *
          * @param material A shared pointer to the immutable Material this RenderPrototype uses.
-         * @param mesh A shared pointer to the immutable Mesh this RenderPrototype used.
+         * @param mesh A shared pointer to the immutable Mesh this RenderPrototype uses.
          *
          * @throws std::invalid_argument If either material or mesh represent a nullptr.
          */

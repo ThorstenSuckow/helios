@@ -83,12 +83,20 @@ namespace helios::ext::opengl::rendering {
                 const auto& baseMesh   = renderPrototype_ptr->mesh();
 
                 const auto* shader = dynamic_cast<const OpenGLShader*>(&baseShader);
+                if (!shader) {
+                    logger_.error("Failed to cast shader to OpenGLShader.");
+                    continue;
+                }
                 logger_.info("activating shader...");
                 shader->use();
                 shader->applyUniformValues(rc->objectUniformValues());
                 shader->applyUniformValues(rc->materialUniformValues());
 
                 const auto* mesh = dynamic_cast<const OpenGLMesh*>(&baseMesh);
+                if (!mesh) {
+                    logger_.error("Failed to cast mesh to OpenGLMesh.");
+                    continue;
+                }
                 const auto [primitiveType] = mesh->meshConfig();
                 logger_.info(std::format("Binding vao {0}", mesh->vao()));
                 glBindVertexArray(mesh->vao());

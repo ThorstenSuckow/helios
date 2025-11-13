@@ -78,7 +78,7 @@ export namespace helios::scene {
          * SceneGraph. May be nullptr if this node does not represent a
          * renderable object.
          */
-        std::shared_ptr<const helios::rendering::Renderable> renderable_;
+        std::shared_ptr<helios::rendering::Renderable> renderable_;
 
         /**
          * @brief The parent node of **this** node.
@@ -208,6 +208,13 @@ export namespace helios::scene {
              * @return A shared_ptr to the Renderable, may be nullptr if none is set.
              */
             [[nodiscard]] std::shared_ptr<const helios::rendering::Renderable> renderable() const noexcept;
+
+            /**
+             * @brief Returns a shared pointer to the non-const Renderable of this SceneNode.
+             *
+             * @return A shared_ptr to the Renderable, may be nullptr if none is set.
+             */
+            [[nodiscard]] std::shared_ptr<helios::rendering::Renderable> renderable() noexcept;
 
             /**
              * @brief Applies a scaling transformation to this node's **local** transform.

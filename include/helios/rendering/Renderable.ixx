@@ -21,11 +21,15 @@ export namespace helios::rendering {
 
 
     /**
-     * @brief Representative of a configurable Renderable rendered by the underlying GL API.
+     * @brief Representative of a configurable Renderable that references an immutable RenderPrototype
+     * and instance specific material property overrides.
      *
      * A Renderable aggregates a reference to an immutable RenderPrototype (the shared asset definition)
      * with optional instance-specific material property overrides. This separation enables efficient
      * batching of shared RenderPrototypes while allowing individual visual adjustments per Renderable instance.
+     *
+     * The Renderable's interface is API-agnostic, enabling efficient batching and per-instance customization,
+     * while abstracting the underlying API-specific rendering resources bundled within the RenderPrototype.
      *
      * Renderables are designed to be movable (e.g., in render queues) but not copyable to ensure unique
      * instance identity in processing.

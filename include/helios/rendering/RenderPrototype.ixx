@@ -10,7 +10,7 @@ export module helios.rendering.RenderPrototype;
 
 import helios.rendering.model.Material;
 import helios.rendering.model.Mesh;
-import helios.rendering.model.config.MaterialPropertiesOverride;
+
 
 
 export namespace helios::rendering {

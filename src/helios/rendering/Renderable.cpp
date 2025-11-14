@@ -9,13 +9,14 @@ import helios.rendering.model.config.MaterialPropertiesOverride;
 import helios.rendering.shader.UniformValueMap;
 import helios.util.log;
 
-using namespace helios::rendering::model;
-using namespace helios::util::log;
-using namespace helios::rendering::model::config;
-using namespace helios::rendering::shader;
-
 #define HELIOS_LOG_SCOPE "helios::rendering::Renderable"
 namespace helios::rendering {
+
+    using namespace helios::rendering::model;
+    using namespace helios::util::log;
+    using namespace helios::rendering::model::config;
+    using namespace helios::rendering::shader;
+
 
     Renderable::Renderable(
         std::shared_ptr<const RenderPrototype> renderPrototype,

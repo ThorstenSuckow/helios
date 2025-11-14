@@ -7,10 +7,9 @@ module helios.rendering.RenderCommand;
 import helios.rendering.RenderPrototype;
 import helios.rendering.shader.UniformValueMap;
 
-using namespace helios::rendering::shader;
-using namespace helios::rendering;
-
 namespace helios::rendering {
+
+    using namespace helios::rendering::shader;
 
     RenderCommand::RenderCommand(
     std::weak_ptr<const RenderPrototype> renderPrototype,

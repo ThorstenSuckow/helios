@@ -30,7 +30,7 @@ Before contributing, ensure you have:
 - C++23 compatible compiler (MSVC 19.38+, GCC 13.2+, or Clang 17+)
 - CMake 4.0 or higher
 - Git for version control
-- Familiarity with the [helios coding style guide](./styleguide.md)
+- Familiarity with the [helios coding style guide](/docs/contributing/styleguide)
 
 ### Setting Up Your Development Environment
 
@@ -341,7 +341,7 @@ Refs #178
 
 ## Code Style
 
-Please follow the [helios Coding Style Guide](./styleguide.md). Key points:
+Please follow the [helios Coding Style Guide](/docs/contributing/styleguide). Key points:
 
 - Use C++23 modules (`.ixx` for interfaces, `.cpp` for implementation)
 - Member variables end with `_` (e.g., `width_`)
@@ -397,7 +397,7 @@ ctest -C Debug -V
 ### Code Documentation
 
 - All public APIs **must** have Doxygen comments
-- Follow the [Doxygen Style Guide](./doxygen-style.md)
+- Follow the [Doxygen Style Guide](/docs/contributing/doxygen-style)
 - Include parameter descriptions and return values
 - Document exceptions that may be thrown
 

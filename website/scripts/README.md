@@ -23,6 +23,7 @@ Synchronizes markdown documentation from the repository root into the website's 
 | `docs/doxygen-style.md` | `docs/contributing/doxygen-style.md` | Documentation style |
 | `docs/CONTRIBUTING.md` | `docs/contributing/guide.md` | Contributing guide |
 | `docs/CHANGELOG_GUIDE.md` | `docs/contributing/changelog-guide.md` | Changelog maintenance |
+| `docs/testing.md` | `docs/testing.md` | Testing guide (CTest) |
 | `examples/README.md` | `docs/examples/overview.md` | Examples overview |
 | `examples/simple_cube_rendering/README.md` | `docs/examples/simple-cube.md` | Cube rendering tutorial |
 | `examples/game_controller_input/README.md` | `docs/examples/gamepad-input.md` | Gamepad input tutorial |
@@ -40,10 +41,26 @@ npm run build
 **How it works:**
 
 1. Reads source markdown files from repository
-2. Generates Docusaurus frontmatter (title, description, slug, tags, keywords)
-3. Escapes problematic MDX characters (e.g., `<`, `>` in prose)
-4. Adds sync banner comment (`<!-- Auto-synced from ... -->`)
-5. Writes to website `docs/` directory
+2. **Rewrites relative links** to match Docusaurus structure
+3. Generates Docusaurus frontmatter (title, description, slug, tags, keywords)
+4. Escapes problematic MDX characters (e.g., `<`, `>` in prose)
+5. Adds sync banner comment (`<!-- Auto-synced from ... -->`)
+6. Writes to website `docs/` directory
+
+**Link Rewriting:**
+
+The script automatically rewrites relative links from repository structure to website structure:
+
+| Repository Link | Website Link | Example |
+|-----------------|--------------|---------|
+| `./README.md` | `/docs` | Docs overview |
+| `../README.md` | `/` | Repository root → homepage |
+| `../../docs/heliosapi.md` | `/docs/api/overview` | API documentation |
+| `../../docs/styleguide.md` | `/docs/contributing/styleguide` | Style guide |
+| `./styleguide.md` | `/docs/contributing/styleguide` | Within docs/ |
+| `./simple_cube_rendering/README.md` | `/docs/examples/simple-cube` | Example tutorial |
+
+This ensures all internal links work correctly in the Docusaurus environment without manual editing.
 
 **Frontmatter Example:**
 
@@ -130,10 +147,25 @@ Check for unescaped special characters in metadata values. The script should aut
 
 ### Links broken after sync
 
-Relative links in source documents may need adjustment:
-- Use absolute paths from docs root: `/docs/...`
-- Or relative paths that work in both contexts
-- Consider using Docusaurus `@site` alias for internal links
+If Docusaurus shows warnings about unresolved links:
+
+1. **Check if link is in the rewrite map:** Open `sync-changelog.mjs` and find the `rewriteLinks()` function
+2. **Add missing mapping:**
+   ```javascript
+   const linkMap = {
+     './your-file.md': '/docs/destination',
+     // ... existing mappings
+   };
+   ```
+3. **Run sync again:** `node scripts/sync-changelog.mjs`
+4. **Verify in synced file:** Check that the link was rewritten correctly
+
+**Common patterns:**
+- `./file.md` → `/docs/section/file`
+- `../file.md` → `/docs/file`
+- `../../README.md` → `/` (homepage)
+
+**External links** (starting with `http://` or `https://`) are not modified.
 
 ### MDX compilation errors
 

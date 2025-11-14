@@ -22,6 +22,7 @@ function buildFrontmatter(meta) {
     tags = [],
     keywords = [],
     sidebar_label,
+    sidebar_position,
   } = meta;
 
   // Helper to escape YAML values (quote if contains special chars)
@@ -38,6 +39,7 @@ function buildFrontmatter(meta) {
   if (description) lines.push(`description: ${escapeYAML(description)}`);
   if (slug) lines.push(`slug: ${slug}`);
   if (sidebar_label) lines.push(`sidebar_label: ${escapeYAML(sidebar_label)}`);
+  if (sidebar_position !== undefined) lines.push(`sidebar_position: ${sidebar_position}`);
   if (tags.length) lines.push(`tags: [${tags.join(', ')}]`);
   if (keywords.length) lines.push(`keywords: [${keywords.join(', ')}]`);
   lines.push('---');
@@ -51,6 +53,49 @@ function ensureFrontmatter(content, meta) {
   }
   const fm = buildFrontmatter(meta);
   return { frontmatter: fm, body: content.replace(/^[\n\r]+/, '') };
+}
+
+/**
+ * Rewrite relative links to work in Docusaurus structure.
+ * Maps repository paths to website paths.
+ */
+function rewriteLinks(content, sourceFile) {
+  // Link mapping: repository path → website path
+  const linkMap = {
+    // Docs
+    './README.md': '/docs',
+    '../README.md': '/',
+    '../../README.md': '/',
+    '../docs/README.md': '/docs',
+    '../../docs/README.md': '/docs',
+    '../docs/api/': '/docs/api',
+    '../../docs/api/': '/docs/api',
+    '../docs/heliosapi.md': '/docs/api/overview',
+    '../../docs/heliosapi.md': '/docs/api/overview',
+    '../docs/styleguide.md': '/docs/contributing/styleguide',
+    '../../docs/styleguide.md': '/docs/contributing/styleguide',
+    './styleguide.md': '/docs/contributing/styleguide',
+    './doxygen-style.md': '/docs/contributing/doxygen-style',
+
+    // Examples
+    '../simple_cube_rendering/README.md': '/docs/examples/simple-cube',
+    './simple_cube_rendering/README.md': '/docs/examples/simple-cube',
+    '../game_controller_input/README.md': '/docs/examples/gamepad-input',
+    './game_controller_input/README.md': '/docs/examples/gamepad-input',
+    '../examples/README.md': '/docs/examples',
+    './examples/README.md': '/docs/examples',
+    '../README.md': '/',
+  };
+
+  let result = content;
+
+  // Replace markdown links: [text](url)
+  for (const [oldPath, newPath] of Object.entries(linkMap)) {
+    const regex = new RegExp(`\\]\\(${oldPath.replace(/\./g, '\\.').replace(/\//g, '\\/')}\\)`, 'g');
+    result = result.replace(regex, `](${newPath})`);
+  }
+
+  return result;
 }
 
 function escapeMDXCharacters(content) {
@@ -82,7 +127,8 @@ function escapeMDXCharacters(content) {
 async function copyMarkdown(src, dest, repoRoot, meta) {
   let raw = await fs.readFile(src, 'utf8');
   const { frontmatter, body } = ensureFrontmatter(raw, meta);
-  const escaped = escapeMDXCharacters(body);
+  const rewritten = rewriteLinks(body, src);
+  const escaped = escapeMDXCharacters(rewritten);
   const full = frontmatter + SYNC_BANNER + '\n' + escaped.trimEnd() + '\n';
   await fs.mkdir(path.dirname(dest), { recursive: true });
   await fs.writeFile(dest, full, 'utf8');
@@ -155,6 +201,19 @@ async function main() {
         tags: ['changelog', 'process'],
         keywords: ['helios', 'changelog maintenance', 'release process'],
         sidebar_label: 'Changelog Guide'
+      }
+    },
+    {
+      src: path.join(repoRoot, 'docs', 'testing.md'),
+      dest: path.join(websiteRoot, 'docs', 'testing.md'),
+      meta: {
+        title: 'Testing',
+        description: 'Running tests in helios: CTest usage, test patterns, debugging failures.',
+        slug: '/testing',
+        tags: ['testing', 'quality'],
+        keywords: ['helios', 'testing', 'ctest', 'unit tests'],
+        sidebar_label: 'Testing',
+        sidebar_position: 3
       }
     },
     {

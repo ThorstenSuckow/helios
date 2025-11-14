@@ -1,0 +1,142 @@
+.quickInstall {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  position: relative;
+}
+
+.quickInstall::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #ff3d00, transparent);
+}
+
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.header h2 {
+  color: #eaeaea;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.header p {
+  color: #b0b0b0;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.codeWrapper {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  background: #1e1e1e;
+  border: 1px solid #2d2d2d;
+}
+
+.copyButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #ff3d00;
+  color: #eaeaea;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  z-index: 10;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(255, 61, 0, 0.3);
+}
+
+.copyButton:hover {
+  background: #ff5722;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 61, 0, 0.5);
+}
+
+.copyButton:active {
+  transform: translateY(0);
+}
+
+.codeBlock {
+  background: #1e1e1e;
+}
+
+.codeBlock pre {
+  margin: 0;
+  padding: 2rem;
+  overflow-x: auto;
+  font-size: 0.95rem;
+}
+
+.codeBlock code {
+  color: #eaeaea;
+  font-family: 'Fira Code', 'Courier New', Courier, monospace;
+  line-height: 1.8;
+  display: block;
+}
+
+.comment {
+  color: #ff3d00;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+/* Light theme adjustments */
+[data-theme='light'] .quickInstall {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+[data-theme='light'] .quickInstall::before {
+  background: linear-gradient(90deg, transparent, #ff3d00, transparent);
+}
+
+[data-theme='light'] .header h2 {
+  color: #1a1a1a;
+}
+
+[data-theme='light'] .header p {
+  color: #586069;
+}
+
+[data-theme='light'] .codeWrapper {
+  background: #1e1e1e;
+  border: 1px solid #d1d5da;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .quickInstall {
+    padding: 3rem 0;
+  }
+
+  .header h2 {
+    font-size: 2rem;
+  }
+
+  .codeBlock pre {
+    padding: 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  .copyButton {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}
+

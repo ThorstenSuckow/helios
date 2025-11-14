@@ -1,4 +1,7 @@
-module;
+/**
+ * @file _module.ixx
+ * @brief Input type definitions module exports.
+ */
 
 /**
  * @brief Input type definitions for keyboard and other input devices.

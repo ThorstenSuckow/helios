@@ -31,7 +31,7 @@ namespace helios::window {
 
 
     [[nodiscard]] int Window::height() const noexcept {
-        return width_;
+        return height_;
     }
 
 

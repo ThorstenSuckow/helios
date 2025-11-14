@@ -1,4 +1,5 @@
 /**
+ * @file Camera.ixx
  * @brief Camera node providing view and projection matrices.
  */
 module;
@@ -80,6 +81,5 @@ export namespace helios::scene {
         [[nodiscard]] const helios::math::mat4f& viewMatrix() const noexcept;
 
     };
-
 
 }

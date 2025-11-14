@@ -1,11 +1,11 @@
 /**
- * @brief Standard uniform semantics used by shader programs.
+ * @file UniformSemantics.ixx
+ * @brief Definitions of uniform semantics used by shaders.
  */
 module;
 
-
 export module helios.rendering.shader.UniformSemantics;
-#include <cwchar>
+
 
 export namespace helios::rendering::shader {
 

@@ -1,64 +1,61 @@
 /**
- * @brief Defines the Renderable abstraction: a mesh + material combination.
+ * @file Renderable.ixx
+ * @brief Representative of a configurable Renderable rendered by the underlying GL API.
  */
 module;
 
 #include <memory>
+#include <optional>
 #include <stdexcept>
 
 export module helios.rendering.Renderable;
 
-import helios.rendering.model.Mesh;
-import helios.rendering.model.MaterialInstance;
+import helios.rendering.RenderPrototype;
+import helios.rendering.model.config.MaterialPropertiesOverride;
+import helios.rendering.shader.UniformValueMap;
 
-
-import helios.math.types;
-
-import helios.util.log.LogManager;
 import helios.util.log.Logger;
 
-#define HELIOS_LOG_SCOPE "helios::rendering::Renderable"
+
 export namespace helios::rendering {
 
+
     /**
-     * @brief Representative of a configurable Renderable rendered by the underlying GL API.
+     * @brief Representative of a configurable Renderable that references an immutable RenderPrototype
+     * and instance specific material property overrides.
      *
-     * A Renderable is an aggregate consisting of Material and a Mesh, providing
-     * geometric primitives and material information.
+     * A Renderable aggregates a reference to an immutable RenderPrototype (the shared asset definition)
+     * with optional instance-specific material property overrides. This separation enables efficient
+     * batching of shared RenderPrototypes while allowing individual visual adjustments per Renderable instance.
      *
-     * @todo a Renderable should be configured with optional, selected overrides for the
-     * associated mesh/material, so that for the used shared mesh/material objects, individual
-     * draw configs are possible.
+     * The Renderable's interface is API-agnostic, enabling efficient batching and per-instance customization,
+     * while abstracting the underlying API-specific rendering resources bundled within the RenderPrototype.
+     *
+     * Renderables are designed to be movable (e.g., in render queues) but not copyable to ensure unique
+     * instance identity in processing.
      */
-    class Renderable {
+    class Renderable final {
 
     protected:
-        Renderable() = default;
+
+        std::shared_ptr<const helios::rendering::RenderPrototype> renderPrototype_ = nullptr;
 
         /**
-         * @brief A shared pointer to the Mesh this Renderable uses.
+         * @brief The MaterialPropertiesOverride owned by this class. This will be std::nullopt if not
+         * available.
          */
-        std::shared_ptr<helios::rendering::model::Mesh> mesh_ = nullptr;
-
-        /**
-         * @brief A shared pointer to the MaterialInstance owned by the Renderable.
-         */
-        std::shared_ptr<helios::rendering::model::MaterialInstance> materialInstance_ = nullptr;
+        std::optional<helios::rendering::model::config::MaterialPropertiesOverride> materialOverride_;
 
         /**
          * @brief The logger used with this Renderable instance.
-         * Defaults to HELIOS_LOG_SCOPE
-         *
-         * @todo constructor injection
          */
-        const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().registerLogger(
-            HELIOS_LOG_SCOPE
-        );
+        const helios::util::log::Logger* logger_ = nullptr;
 
     public:
-
-        virtual ~Renderable() = default;
-
+        /**
+         * @brief Remove default constructor.
+         */
+        Renderable() = delete;
 
         /**
          * @brief Delete copy constructor.
@@ -70,44 +67,74 @@ export namespace helios::rendering {
          */
         Renderable& operator=(const Renderable&)= delete;
 
-        /**
-         * @brief Delete move constructor.
-         */
-        Renderable(Renderable&&) noexcept = delete;
-
-        /**
-         * @brief Delete move assignment operator.
-         */
-        Renderable& operator=(Renderable&&) noexcept = delete;
+        // allow move
+        Renderable(Renderable&&) noexcept = default;
+        Renderable& operator=(Renderable&&) noexcept = default;
 
         /**
          * @brief Creates a new Renderable instance.
          *
-         * @param mesh A shared pointer to the Mesh associated with this Renderable.
-         * @param materialInstance A shared pointer to the MaterialInstance owned by this Renderable.
+         * @param renderPrototype A shared pointer to the immutable RenderPrototype definition. Must not be nullptr.
+         * @param materialOverride An optional set of instance-specific material property overrides.
+         * If nullptr, the Renderable uses only the default properties from the RenderPrototype's Material.
+         * @param logger An (optional) pointer to a const logger instance. If not provided,
+         * a default logger is automatically created.
          *
-         * @throws std::invalid_argument if either mesh or material are null.
+         * @throws std::invalid_argument if `renderPrototype` is a nullptr.
          */
         explicit Renderable(
-            std::shared_ptr<helios::rendering::model::Mesh> mesh,
-            std::shared_ptr<helios::rendering::model::MaterialInstance> materialInstance);
+            std::shared_ptr<const helios::rendering::RenderPrototype> renderPrototype,
+            const std::optional<helios::rendering::model::config::MaterialPropertiesOverride>&
+            materialOverride = std::nullopt,
+            const helios::util::log::Logger* logger = nullptr
+        );
 
 
         /**
-         * @brief Returns a shared ptr to the Mesh this Renderable uses.
-         * The returned shared_ptr references the underlying Mesh object.
+         * @brief Returns a const reference to the immutable RenderPrototype used by this Renderable.
          *
-         * @return A shared pointer to the Mesh used by this Renderable.
+         * @return A const reference to the RenderPrototype.
          */
-        [[nodiscard]] std::shared_ptr<const helios::rendering::model::Mesh> mesh() const noexcept;
+        [[nodiscard]] std::shared_ptr<const helios::rendering::RenderPrototype> renderPrototype() const noexcept;
+
+        /**
+         * @brief Returns a const reference to the optional instance-specific MaterialPropertiesOverride.
+         *
+         * This allows read-only access to the overrides. Use `.has_value()` to check for existence
+         * and `.value()` or `->` to safely access the override data.
+         *
+         * @return A const reference to the std::optional<MaterialPropertiesOverride>.
+         */
+        [[nodiscard]] const std::optional<helios::rendering::model::config::MaterialPropertiesOverride>& materialOverride() const noexcept;
+
+        /**
+         * @brief Returns a non-const reference to the optional instance-specific MaterialPropertiesOverride.
+         *
+         * This allows modification of the overrides. If the optional currently has no value,
+         * it can be assigned to or `.emplace()` can be used to create a new MaterialPropertiesOverride.
+         *
+         * @return A non-const reference to the std::optional<MaterialPropertiesOverride>.
+         */
+        [[nodiscard]] std::optional<helios::rendering::model::config::MaterialPropertiesOverride>& materialOverride() noexcept;
+
+        /**
+         * @brief Returns true if this Renderable was configured with a MaterialPropertiesOverride.
+         *
+         * @return True if this Renderable was configured with a MaterialPropertiesOverride instance, otherwise false.
+         */
+        [[nodiscard]] bool hasMaterialOverride() const noexcept;
 
 
         /**
-         * @brief Returns a const reference to the MaterialInstance associated with this Renderable.
+         * @brief Writes uniform values into the given map.
          *
-         * @return A const reference to the MaterialInstance.
+         * This method first applies the default uniform values from the base Material definition and
+         * then overlays any specific overrides provided by this instance's MaterialPropertiesOverride.
+         *
+         * @param uniformValueMap Target map receiving the uniform values.
          */
-        [[nodiscard]] const helios::rendering::model::MaterialInstance& materialInstance() const noexcept;
+        void writeUniformValues(helios::rendering::shader::UniformValueMap& uniformValueMap) const noexcept;
+
 
 
     };

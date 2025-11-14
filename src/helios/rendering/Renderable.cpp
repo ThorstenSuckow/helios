@@ -5,36 +5,61 @@ module;
 
 module helios.rendering.Renderable;
 
-import helios.rendering.model.Mesh;
-import helios.rendering.model.Material;
-
+import helios.rendering.model.config.MaterialPropertiesOverride;
+import helios.rendering.shader.UniformValueMap;
 import helios.util.log;
 
-using namespace helios::rendering::model;
-
+#define HELIOS_LOG_SCOPE "helios::rendering::Renderable"
 namespace helios::rendering {
 
+    using namespace helios::rendering::model;
+    using namespace helios::util::log;
+    using namespace helios::rendering::model::config;
+    using namespace helios::rendering::shader;
+
+
     Renderable::Renderable(
-        std::shared_ptr<Mesh> mesh,
-        std::shared_ptr<MaterialInstance> materialInstance) :
-        mesh_(std::move(mesh)),
-        materialInstance_(std::move(materialInstance)) {
-        if (!mesh_ || !materialInstance_) {
+        std::shared_ptr<const RenderPrototype> renderPrototype,
+        const std::optional<MaterialPropertiesOverride>& materialOverride,
+        const Logger* logger
+    ) :
+        renderPrototype_(std::move(renderPrototype)),
+        materialOverride_(materialOverride),
+        logger_(!logger ? &LogManager::getInstance().registerLogger(HELIOS_LOG_SCOPE) : logger)
+    {
+
+        if (!renderPrototype_) {
             const std::string msg = "Renderable constructor received a null shared pointer.";
-            logger_.error(msg);
+            logger_->error(msg);
             throw std::invalid_argument(msg);
         }
+
     }
 
+    std::shared_ptr<const RenderPrototype> Renderable::renderPrototype() const noexcept {
+        return renderPrototype_;
+    }
 
-    [[nodiscard]] std::shared_ptr<const Mesh> Renderable::mesh() const noexcept {
-        return mesh_;
-    };
+    const std::optional<MaterialPropertiesOverride>& Renderable::materialOverride() const noexcept {
+        return materialOverride_;
+    }
 
+    std::optional<MaterialPropertiesOverride>& Renderable::materialOverride() noexcept {
+        return materialOverride_;
+    }
 
-    [[nodiscard]] const MaterialInstance& Renderable::materialInstance() const noexcept {
-        return *materialInstance_;
-    };
+    bool Renderable::hasMaterialOverride() const noexcept {
+        return materialOverride_.has_value();
+    }
+
+    void Renderable::writeUniformValues(
+        UniformValueMap& uniformValueMap) const noexcept {
+        renderPrototype_->material().writeUniformValues(uniformValueMap);
+
+        if (materialOverride_) {
+            materialOverride_->writeUniformValues(uniformValueMap);
+        }
+    }
 
 
 }

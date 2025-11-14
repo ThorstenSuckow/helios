@@ -1,3 +1,7 @@
+/**
+ * @file DequeEventQueue.ixx
+ * @brief Double-ended event queue implementation.
+ */
 module;
 
 #include <deque>

@@ -1,4 +1,5 @@
 /**
+ * @file BasicStringFileReader.ixx
  * @brief Basic file-to-string reader implementation.
  */
 module;

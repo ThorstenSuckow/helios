@@ -1,3 +1,7 @@
+/**
+ * @file Event.ixx
+ * @brief Base class for events in the helios framework.
+ */
 module;
 
 #include <memory>
@@ -48,7 +52,7 @@ export namespace helios::event {
          *
          * @param tag
          */
-        explicit Event(const uint64_t tag);
+        explicit Event(uint64_t tag);
 
 
         /**

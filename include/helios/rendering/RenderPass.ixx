@@ -1,5 +1,6 @@
 /**
- * @brief Defines a render pass that executes a render queue with specific uniform values.
+ * @file RenderPass.ixx
+ * @brief Abstraction representing a render pass (framebuffer, attachments, etc.).
  */
 module;
 

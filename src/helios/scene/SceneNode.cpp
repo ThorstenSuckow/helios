@@ -71,6 +71,12 @@ namespace helios::scene {
     }
 
 
+    [[nodiscard]] std::shared_ptr<helios::rendering::Renderable> SceneNode::renderable() noexcept {
+        return renderable_;
+    }
+
+
+
     SceneNode& SceneNode::scale(const helios::math::vec3f& scale) noexcept {
         localTransform_.scale(scale);
         needsUpdate_ = true;

@@ -1,4 +1,5 @@
 /**
+ * @file Mesh.ixx
  * @brief Mesh abstraction: immutable vertex/index data and configuration.
  */
 module;

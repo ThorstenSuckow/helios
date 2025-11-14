@@ -1,4 +1,5 @@
 /**
+ * @file Scene.ixx
  * @brief Represents a hierarchical SceneGraph that organizes all renderable
  * and non-renderable objects within a scene.
  */

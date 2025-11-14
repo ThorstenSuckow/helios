@@ -1,3 +1,7 @@
+/**
+ * @file GLFWWindow.ixx
+ * @brief GLFW-based Window implementation.
+ */
 module;
 
 #include <iostream>

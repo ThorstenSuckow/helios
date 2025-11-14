@@ -1,4 +1,7 @@
-module;
+/**
+ * @file _module.ixx
+ * @brief Module exports for shape definitions for rendering assets.
+ */
 
 /**
  * @brief Shape asset module for geometric shape definitions.

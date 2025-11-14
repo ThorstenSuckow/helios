@@ -1,5 +1,6 @@
 /**
- * @brief Basic rectangle shape (2D outline).
+ * @file Rectangle.ixx
+ * @brief Basic rectangle shape for rendering.
  */
 module;
 

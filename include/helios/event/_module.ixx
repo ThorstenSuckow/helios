@@ -1,4 +1,7 @@
-module;
+/**
+ * @file _module.ixx
+ * @brief Event system module exports.
+ */
 
 /**
  * @brief Event system module for event-driven architecture.

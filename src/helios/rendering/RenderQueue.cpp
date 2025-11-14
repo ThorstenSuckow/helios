@@ -13,6 +13,10 @@ namespace helios::rendering {
 
      void RenderQueue::add(std::unique_ptr<const helios::rendering::RenderCommand> renderCommand) {
         assert(renderCommand && "Received nullptr RenderCommand.");
+        if (!renderCommand) {
+            logger_.error("Attempted to add a nullptr RenderCommand to the queue.");
+            return; // silently skip nullptr to avoid crashes
+        }
         renderCommands_.emplace_back(std::move(renderCommand));
     }
 

@@ -1,3 +1,7 @@
+/**
+ * @file Controller.ixx
+ * @brief Base class for application controllers that integrate subsystems.
+ */
 module;
 
 export module helios.app.controller.Controller;

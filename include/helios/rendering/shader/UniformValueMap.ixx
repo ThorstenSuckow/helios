@@ -1,5 +1,6 @@
 /**
- * @brief Mapping of `UniformSemantics` to concrete uniform values used by shaders.
+ * @file UniformValueMap.ixx
+ * @brief Mapping of uniform names to values used by shader programs.
  */
 module;
 

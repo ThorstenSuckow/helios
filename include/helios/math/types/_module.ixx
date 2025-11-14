@@ -1,4 +1,7 @@
-module;
+/**
+ * @file _module.ixx
+ * @brief Module exports for vector and matrix type definitions.
+ */
 
 /**
  * @brief Vector and matrix type definitions.

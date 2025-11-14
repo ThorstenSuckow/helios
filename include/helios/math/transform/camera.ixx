@@ -1,3 +1,7 @@
+/**
+ * @file camera.ixx
+ * @brief Camera transform helpers.
+ */
 module;
 
 

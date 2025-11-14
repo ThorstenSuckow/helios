@@ -1,3 +1,7 @@
+/**
+ * @file GLFWWindowUserPointer.ixx
+ * @brief Helper storing user pointer data for GLFW windows.
+ */
 module;
 
 export module helios.ext.glfw.window.GLFWWindowUserPointer;

@@ -1,4 +1,7 @@
-module;
+/**
+ * @file _module.ixx
+ * @brief Input handling module exports.
+ */
 
 /**
  * @brief Input handling module for user input management.

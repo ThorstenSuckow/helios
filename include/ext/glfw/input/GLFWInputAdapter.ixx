@@ -1,3 +1,7 @@
+/**
+ * @file GLFWInputAdapter.ixx
+ * @brief GLFW-based InputAdapter implementation.
+ */
 module;
 
 #include <array>

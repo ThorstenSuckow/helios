@@ -51,7 +51,11 @@ namespace helios::rendering {
         const auto& snapshotItems = snapshot.snapshotItems();
 
         for (const auto& item : snapshotItems) {
-            renderQueue.add(makeRenderCommand(item));
+            auto renderCommand = makeRenderCommand(item);
+            if (renderCommand) {
+                renderQueue.add(std::move(renderCommand));
+            }
+            // if renderCommand is nullptr, it's already logged in makeRenderCommand, so we skip it
         }
     }
 
@@ -75,23 +79,16 @@ namespace helios::rendering {
         );
 
         // make sure Material writes its uniform values
-        sharedRenderable->materialInstance().writeUniformValues(*materialUniformValues);
+        /**
+         * @todo when batching is implemented, this could be refactored
+         * out of this factory method
+         */
+        sharedRenderable->writeUniformValues(*materialUniformValues);
 
-        const auto shader = sharedRenderable->materialInstance().shader();
-        if (!shader) {
-            logger_.warn("Shader no longer available");
-            return nullptr;
-        }
-
-        const auto& mesh = sharedRenderable->mesh();
-        if (!mesh) {
-            logger_.warn("Mesh no longer available");
-            return nullptr;
-        }
+        const auto renderPrototype = sharedRenderable->renderPrototype();
 
         return std::make_unique<RenderCommand>(
-            shader,
-            mesh,
+            renderPrototype,
             std::move(objectUniformValues),
             std::move(materialUniformValues)
         );

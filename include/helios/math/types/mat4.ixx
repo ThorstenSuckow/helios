@@ -1,8 +1,11 @@
+/**
+ * @file mat4.ixx
+ * @brief 4x4 matrix type and utilities.
+ */
 module;
 
 #include <cassert>
 #include <functional>
-#include <utility>
 
 export module helios.math.types:mat4;
 
@@ -38,7 +41,7 @@ export namespace helios::math {
         /**
          * @brief Default constructor. Initializes all components to 0.
          */
-        explicit constexpr mat4() noexcept : m{}{};
+        explicit constexpr mat4() noexcept : m{} {};
 
         /**
          * @brief Creates a diagonal matrix. The diagonal components are initialized

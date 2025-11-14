@@ -1,3 +1,7 @@
+/**
+ * @file OpenGLDevice.ixx
+ * @brief OpenGL-specific RenderingDevice implementation.
+ */
 module;
 
 #include <glad/gl.h>
@@ -80,7 +84,7 @@ export namespace helios::ext::opengl::rendering {
          *
          * @see https://registry.khronos.org/OpenGL-Refpages/gl4/html/glViewport.xhtml
          */
-        void setViewport(const int x, const int y, const int width, const int height) const noexcept override;
+        void setViewport(int x, int y, int width, int height) const noexcept override;
 
         /**
          * @brief Clears the color buffer to preset values.

@@ -1,4 +1,5 @@
 /**
+ * @file CullNoneStrategy.ixx
  * @brief Frustum culling strategy that returns all nodes (no culling).
  */
 module;

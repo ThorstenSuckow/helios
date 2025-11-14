@@ -1,0 +1,432 @@
+# Contributing to helios
+
+This document provides guidelines for making contributions, with a focus on commit conventions and best practices.
+
+## Table of Contents
+
+- [Getting Started](#getting-started)
+- [Commit Conventions](#commit-conventions)
+- [Pull Request Process](#pull-request-process)
+- [Code Style](#code-style)
+- [Testing](#testing)
+- [Documentation](#documentation)
+
+## Getting Started
+
+### Prerequisites
+
+Before contributing, ensure you have:
+
+- C++23 compatible compiler (MSVC 19.38+, GCC 13.2+, or Clang 17+)
+- CMake 4.0 or higher
+- Git for version control
+- Familiarity with the [helios coding style guide](./styleguide.md)
+
+### Setting Up Your Development Environment
+
+1. **Fork the repository** on GitHub
+2. **Clone your fork**:
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/helios.git
+   cd helios
+   ```
+3. **Add upstream remote**:
+   ```bash
+   git remote add upstream https://github.com/thorstensuckow/helios.git
+   ```
+4. **Create a feature branch**:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+## Commit Conventions
+
+helios follows the [Conventional Commits](https://www.conventionalcommits.org/) specification. This ensures a consistent commit history and enables automated changelog generation.
+
+### Commit Message Format
+
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+### Types
+
+The `type` must be one of the following:
+
+- **`feat:`** - A new feature
+  ```
+  feat: add particle system support to rendering module
+  ```
+
+- **`fix:`** - A bug fix
+  ```
+  fix: prevent null-pointer crash in RenderQueue::add()
+  ```
+
+- **`refactor:`** - Code change that neither fixes a bug nor adds a feature
+  ```
+  refactor: improve error handling in RenderPass constructor
+  ```
+
+- **`docs:`** - Documentation only changes
+  ```
+  docs: add tutorial for scene graph usage
+  ```
+
+- **`style:`** - Code style changes (formatting, missing semicolons, etc.)
+  ```
+  style: apply clang-format to rendering module
+  ```
+
+- **`test:`** - Adding or fixing tests
+  ```
+  test: add unit tests for Material class
+  ```
+
+- **`perf:`** - Performance improvements
+  ```
+  perf: optimize matrix multiplication in math library
+  ```
+
+- **`build:`** - Changes to build system or external dependencies
+  ```
+  build: update CMake configuration for C++23 modules
+  ```
+
+- **`ci:`** - Changes to CI configuration files and scripts
+  ```
+  ci: add GitHub Actions workflow for automated testing
+  ```
+
+- **`chore:`** - Other changes that don't modify src or test files
+  ```
+  chore: update .gitignore for Visual Studio 2022
+  ```
+
+### Scopes
+
+The `scope` is optional and can be anything specifying the place of the commit change. Examples:
+
+- `rendering` - Changes in the rendering system
+- `scene` - Changes in scene management
+- `input` - Changes in input handling
+- `math` - Changes in the math library
+- `window` - Changes in window management
+- `opengl` - Changes in OpenGL backend
+- `glfw` - Changes in GLFW integration
+- `util` - Changes in utility modules
+
+**Examples:**
+```
+feat(rendering): add support for custom render passes
+fix(input): resolve gamepad disconnect handling
+refactor(math): simplify quaternion operations
+```
+
+### Breaking Changes
+
+Breaking changes **MUST** be indicated by:
+1. A `!` after the type/scope
+2. A `BREAKING CHANGE:` footer
+
+**Example:**
+```
+refactor!: redesign Material API for better extensibility
+
+BREAKING CHANGE: Material constructor now requires MaterialProperties parameter.
+Migration guide available in docs/migration/v2.0.md
+```
+
+Or with scope:
+```
+feat(rendering)!: replace RenderPrototype with new RenderAsset API
+
+BREAKING CHANGE: RenderPrototype class has been removed.
+Use RenderAsset::create() instead.
+```
+
+### Description Guidelines
+
+The `description`:
+- **MUST** be in lowercase (except for proper nouns, acronyms, or code references)
+- **MUST** use imperative mood ("add feature" not "added feature" or "adds feature")
+- **MUST NOT** end with a period
+- **SHOULD** be concise (50 characters or less)
+
+**Good:**
+```
+fix: prevent race condition in scene graph updates
+feat: add support for HDR rendering
+```
+
+**Bad:**
+```
+Fix: Prevented race condition in scene graph updates.
+feat: Added support for HDR rendering
+Fixed a bug
+```
+
+### Body
+
+The optional `body`:
+- **SHOULD** provide additional context
+- **SHOULD** explain the "why" not the "what" (the diff shows the "what")
+- **SHOULD** wrap at 72 characters
+- **MAY** contain multiple paragraphs
+
+**Example:**
+```
+feat(scene): add frustum culling optimization
+
+Implements spatial partitioning using an octree data structure to
+improve culling performance for large scenes. This reduces the number
+of visibility checks from O(n) to O(log n) for most cases.
+
+Benchmarks show a 3x performance improvement for scenes with 10,000+
+objects.
+```
+
+### Footer
+
+The optional `footer` can contain:
+
+- **Issue references**: `Fixes #123`, `Closes #456`, `Refs #789`
+- **Breaking changes**: `BREAKING CHANGE: description`
+- **Co-authored-by**: For multiple authors
+- **Reviewed-by**: For code reviews
+
+**Example:**
+```
+fix(rendering): resolve memory leak in texture loading
+
+Textures were not being properly released when a Material was
+destroyed. This adds proper cleanup in the Material destructor.
+
+Fixes #234
+Reviewed-by: John Doe <john@example.com>
+```
+
+### Complete Examples
+
+#### Simple Feature
+```
+feat(input): add mouse wheel support
+```
+
+#### Bug Fix with Details
+```
+fix(window): prevent crash on window resize during rendering
+
+The window could be resized while a frame was being rendered,
+causing a race condition. This adds proper synchronization between
+the window resize callback and the rendering thread.
+
+Fixes #156
+```
+
+#### Breaking Change
+```
+refactor(math)!: change matrix storage to column-major
+
+BREAKING CHANGE: Matrix indices are now column-major to match OpenGL
+conventions. Code accessing matrix elements directly must be updated.
+
+Migration:
+- Before: matrix[row][col]
+- After:  matrix[col][row]
+
+Closes #245
+```
+
+#### Performance Improvement
+```
+perf(rendering): optimize batch rendering with state sorting
+
+Reduces GPU state changes by sorting render commands by material
+before submission. Benchmarks show 25% improvement in draw call
+overhead for complex scenes.
+
+Refs #178
+```
+
+## Pull Request Process
+
+### Before Submitting
+
+1. **Update your branch** with the latest upstream changes:
+   ```bash
+   git fetch upstream
+   git rebase upstream/main
+   ```
+
+2. **Run tests** and ensure they pass:
+   ```bash
+   cmake --build build --config Debug
+   cd build
+   ctest -C Debug --output-on-failure
+   ```
+
+3. **Format your code** according to the style guide:
+   ```bash
+   clang-format -i path/to/changed/files.cpp
+   ```
+
+4. **Build in both Debug and Release**:
+   ```bash
+   cmake --build build --config Debug
+   cmake --build build --config Release
+   ```
+
+### Creating a Pull Request
+
+1. **Push your branch** to your fork:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+
+2. **Open a Pull Request** on GitHub with:
+   - A clear title following commit conventions (e.g., `feat: add particle system`)
+   - A description that:
+     - References related issues (`Fixes #123`)
+     - Describes what changed and why
+     - Lists any breaking changes
+     - Includes testing instructions
+
+3. **PR Template Checklist**:
+   ```markdown
+   ## Description
+   Brief description of changes
+
+   ## Related Issues
+   Fixes #123
+
+   ## Type of Change
+   - [ ] Bug fix (non-breaking change which fixes an issue)
+   - [ ] New feature (non-breaking change which adds functionality)
+   - [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
+   - [ ] Documentation update
+
+   ## Testing
+   - [ ] All existing tests pass
+   - [ ] New tests added for changes
+   - [ ] Manual testing completed
+
+   ## Checklist
+   - [ ] Code follows the helios style guide
+   - [ ] Self-review completed
+   - [ ] Documentation updated
+   - [ ] No new warnings introduced
+   ```
+
+### Review Process
+
+- At least one maintainer must approve your PR
+- Address review feedback by adding new commits (don't force-push)
+- Once approved, a maintainer will merge your PR
+- Your commits may be squashed during merge for a clean history
+
+## Code Style
+
+Please follow the [helios Coding Style Guide](./styleguide.md). Key points:
+
+- Use C++23 modules (`.ixx` for interfaces, `.cpp` for implementation)
+- Member variables end with `_` (e.g., `width_`)
+- Use `[[nodiscard]]` for getters
+- Use `noexcept` where appropriate
+- 4 spaces for indentation (no tabs)
+- Opening braces on the same line
+
+## Testing
+
+### Writing Tests
+
+- Place tests in `tests/helios/<module>/`
+- Use descriptive test names: `TEST(ComponentTest, DescribesBehavior)`
+- Test both success and failure cases
+- Use assertions liberally: `EXPECT_EQ`, `EXPECT_THROW`, etc.
+
+**Example:**
+```cpp
+TEST(RenderQueueTest, AddsRenderCommandSuccessfully) {
+    auto queue = RenderQueue();
+    auto command = std::make_unique<RenderCommand>(...);
+    
+    queue.add(std::move(command));
+    
+    EXPECT_EQ(queue.count(), 1);
+}
+
+TEST(RenderQueueTest, HandlesNullRenderCommandGracefully) {
+    auto queue = RenderQueue();
+    
+    EXPECT_NO_THROW(queue.add(nullptr));
+    EXPECT_EQ(queue.count(), 0);
+}
+```
+
+### Running Tests
+
+```bash
+# Run all tests
+cd build
+ctest -C Debug --output-on-failure
+
+# Run specific test
+ctest -C Debug -R RenderQueueTest --output-on-failure
+
+# Run with verbose output
+ctest -C Debug -V
+```
+
+## Documentation
+
+### Code Documentation
+
+- All public APIs **must** have Doxygen comments
+- Follow the [Doxygen Style Guide](./doxygen-style.md)
+- Include parameter descriptions and return values
+- Document exceptions that may be thrown
+
+**Example:**
+```cpp
+/**
+ * @brief Adds a RenderCommand to the queue.
+ *
+ * Ownership of the RenderCommand is transferred to the queue.
+ * If the command is nullptr, it will be silently ignored and
+ * an error will be logged.
+ *
+ * @param renderCommand The command to add. May be nullptr.
+ *
+ * @warning This method is not thread-safe.
+ */
+void add(std::unique_ptr<const RenderCommand> renderCommand);
+```
+
+### Updating Documentation
+
+When your changes affect:
+
+- **Public APIs**: Update Doxygen comments
+- **Architecture**: Update relevant docs in `docs/`
+- **Features**: Add examples to `examples/`
+- **Breaking Changes**: Add migration guide
+
+## Questions?
+
+▸ **Discussions**: For questions, use [GitHub Discussions](https://github.com/thorstensuckow/helios/discussions)<br />
+▸ **Documentation**: Check the [docs/](.) directory<br />
+▸ **Issues**: Report bugs via [GitHub Issues](https://github.com/thorstensuckow/helios/issues)
+
+## License
+
+By contributing, you agree that your contributions will be licensed under the MIT License.
+
+---
+
+Thank you for contributing to helios! 🕹️
+

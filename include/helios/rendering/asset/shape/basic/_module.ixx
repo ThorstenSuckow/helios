@@ -1,4 +1,7 @@
-module;
+/**
+ * @file _module.ixx
+ * @brief Module exports for basic geometric primitive shapes.
+ */
 
 /**
  * @brief Basic primitive shapes for rendering.
@@ -8,5 +11,7 @@ module;
  */
 export module helios.rendering.asset.shape.basic;
 
+export import helios.rendering.asset.shape.basic.Rectangle;
+export import helios.rendering.asset.shape.basic.Line;
 export import helios.rendering.asset.shape.basic.Cube;
 export import helios.rendering.asset.shape.basic.Circle;

@@ -1,4 +1,5 @@
 /**
+ * @file LogManager.ixx
  * @brief Central manager for scoped loggers.
  */
 module;

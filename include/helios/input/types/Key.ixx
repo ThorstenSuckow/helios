@@ -1,5 +1,6 @@
 /**
- * @brief Keyboard key identifiers (platform-agnostic)
+ * @file Key.ixx
+ * @brief Key code definitions used across input adapters.
  */
 module;
 

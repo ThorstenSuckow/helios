@@ -8,9 +8,9 @@ module helios.rendering.model.Mesh;
 import helios.rendering.model.config.MeshConfig;
 import helios.rendering.asset.shape.Shape;
 
-using namespace helios::rendering::model::config;
-
 namespace helios::rendering::model {
+
+    using namespace helios::rendering::model::config;
 
     Mesh::Mesh(
         std::shared_ptr<const std::vector<Vertex>> vertices,

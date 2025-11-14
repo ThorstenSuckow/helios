@@ -47,7 +47,7 @@ namespace helios::input {
         return input_->isKeyPressed(key, *observedWin_);
     }
 
-    const GamepadState& InputManager::gamepadState(helios::input::types::Gamepad gamepadId) const noexcept {
+    const GamepadState& InputManager::gamepadState(const helios::input::types::Gamepad gamepadId) const noexcept {
         return input_->gamepadState(gamepadId);
     }
 
@@ -56,8 +56,13 @@ namespace helios::input {
     }
 
     unsigned int InputManager::registerGamepads(unsigned int mask) noexcept {
+        const unsigned int maxMask = static_cast<int>(pow(helios::input::types::Gamepad::size_, 2) - 1);
+        assert(mask <= maxMask && "mask out of bounds");
+        if (mask > maxMask) {
+            logger_.warn("Gamepad mask out of bounds. Clamping to maximum valid value.");
+            mask = maxMask;
+        }
 
-        assert(mask <= (pow(helios::input::types::Gamepad::size_, 2) - 1) && "mask out of bounds");
 
         gamepadMask_ = mask;
 

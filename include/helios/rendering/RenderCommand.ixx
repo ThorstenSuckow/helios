@@ -1,5 +1,6 @@
 /**
- * @brief Data-transfer object describing a single render command.
+ * @file RenderCommand.ixx
+ * @brief Representation of a low-level render command.
  */
 module;
 
@@ -7,8 +8,7 @@ module;
 
 export module helios.rendering.RenderCommand;
 
-import helios.rendering.model.Mesh;
-import helios.rendering.shader.Shader;
+import helios.rendering.RenderPrototype;
 import helios.rendering.shader.UniformValueMap;
 
 export namespace helios::rendering {
@@ -17,21 +17,16 @@ export namespace helios::rendering {
      * @brief DTO for storing rendering-specific command information to be
      * passed to the RenderQueue.
      *
-     * A `RenderCommand` does not extend the lifetime of the `shader_` and the `mesh_`,
-     * as they are both referenced by weak pointers. If the referenced shader or the mesh
-     * are no longer valid when this command is about to be executed,
+     * A `RenderCommand` does not extend the lifetime of the `renderPrototype_`
+     * as it's referenced by a weak pointer. If the referenced RenderPrototype
+     * is no longer valid when this command is about to be executed,
      * this `RenderCommand` should be ignored for rendering.
      */
     class RenderCommand {
         /**
-         * @brief A non-owning, weak reference to the shader program to be used.
+         * @brief A non-owning, weak reference to the RenderPrototype to be used.
          */
-        std::weak_ptr<const helios::rendering::shader::Shader> shader_;
-
-        /**
-         * @brief A non-owning, weak reference to the mesh this command uses.
-         */
-        std::weak_ptr<const helios::rendering::model::Mesh> mesh_;
+        std::weak_ptr<const helios::rendering::RenderPrototype> renderPrototype_;
 
         /**
          * @brief An owning, unique pointer to the uniform values specific for the object to be rendered.
@@ -76,37 +71,26 @@ export namespace helios::rendering {
          * Initializes this `RenderCommand` with weak pointers to the shader and mesh, and
          * takes ownership of the provided `UniformValueMaps`.
          *
-         * @param shader A weak_ptr to the `Shader` to be associated with this command.
-         * @param mesh A weak_ptr to the `Mesh` to be associated with this command.
+         * @param renderPrototype A weak_ptr to the `RenderPrototype` to be associated with this command.
          * @param objectUniformValues A unique ptr to a `UniformValueMap` containing all uniform
          * values for the rendered object.
          * @param materialUniformValues A unique ptr to a `UniformValueMap` containing all uniform
          * values for the material.
          */
         RenderCommand(
-        std::weak_ptr<const helios::rendering::shader::Shader> shader,
-        std::weak_ptr<const helios::rendering::model::Mesh> mesh,
+        std::weak_ptr<const helios::rendering::RenderPrototype> renderPrototype,
         std::unique_ptr<const helios::rendering::shader::UniformValueMap> objectUniformValues,
         std::unique_ptr<const helios::rendering::shader::UniformValueMap> materialUniformValues
             ) noexcept;
 
         /**
-         * @brief Returns a weak ptr to the shader associated with this command.
-         * Use `shader.lock()` on the return value to lock the shader into a shared ptr.
-         * If `lock()` returns a nullptr, the Shader is no longer available.
+         * @brief Returns a weak ptr to the RenderPrototype associated with this command.
+         * Use `renderPrototype.lock()` on the return value to lock the RenderPrototype into a shared ptr.
+         * If `lock()` returns a nullptr, the RenderPrototype is no longer available.
          *
          * @return A weak ptr to this command's Shader.
          */
-        [[nodiscard]] std::weak_ptr<const helios::rendering::shader::Shader> shader() const noexcept;
-
-        /**
-         * @brief Returns a weak ptr to the mesh associated with this command.
-         * Use `mesh.lock()` on the return value to lock the mesh into a shared ptr.
-         * If `lock()` returns a nullptr, the Mesh is no longer available.
-         *
-         * @return A weak ptr to this command's Mesh.
-         */
-        [[nodiscard]] std::weak_ptr<const helios::rendering::model::Mesh> mesh() const noexcept;
+        [[nodiscard]] std::weak_ptr<const helios::rendering::RenderPrototype> renderPrototype() const noexcept;
 
         /**
          * @brief Returns a const ref to this command's UniformValueMap for the object.

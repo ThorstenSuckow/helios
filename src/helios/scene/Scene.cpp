@@ -17,9 +17,9 @@ import helios.scene.Camera;
 import helios.scene.FrustumCullingStrategy;
 import helios.scene.SnapshotItem;
 
-using namespace helios::math;
-
 namespace helios::scene {
+
+    using namespace helios::math;
 
 
     void Scene::propagateWorldTransform(SceneNode& node, const mat4f& wt) const {

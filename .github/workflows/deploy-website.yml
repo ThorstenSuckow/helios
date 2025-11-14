@@ -1,4 +1,5 @@
 name: Deploy Website to GitHub Pages
+
 on:
   push:
     branches:
@@ -13,6 +14,7 @@ permissions:
 concurrency:
   group: pages
   cancel-in-progress: false
+
 jobs:
   build:
     name: Build Doxygen + Website
@@ -20,27 +22,45 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Install Doxygen and Graphviz
         run: |
           sudo apt-get update
           sudo apt-get install -y doxygen graphviz
-      - name: Generate Doxygen XML
+
+      - name: Generate Doxygen XML (docs/api/xml)
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p website/doxygen
+
           {
-            cat docs/Doxyfile.in;
-            echo "OUTPUT_DIRECTORY=website/doxygen";
-            echo "GENERATE_XML=YES";
-            echo "XML_OUTPUT=xml";
+            cat docs/Doxyfile.in
+            echo "OUTPUT_DIRECTORY=docs"
+            echo "GENERATE_XML=YES"
+            echo "XML_OUTPUT=api/xml"
           } | doxygen -
-          test -d website/doxygen/xml
-          echo "XML files:" $(find website/doxygen/xml -type f | wc -l)
+
+          test -d docs/api/xml
+          echo "XML files in docs/api/xml:" $(find docs/api/xml -type f | wc -l)
+
+      - name: Copy XML into website/doxygen and static assets
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p website/doxygen/xml
+          rsync -a docs/api/xml/ website/doxygen/xml/
+          echo "XML files in website/doxygen/xml:" $(find website/doxygen/xml -type f | wc -l)
+
+          mkdir -p website/static/doxygen/xml
+          rsync -a website/doxygen/xml/ website/static/doxygen/xml/
+          echo "XML files in website/static/doxygen/xml:" $(find website/static/doxygen/xml -type f | wc -l)
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
+
       - name: Cache npm dependencies
         uses: actions/cache@v4
         with:
@@ -48,22 +68,32 @@ jobs:
           key: ${{ runner.os }}-npm-${{ hashFiles('website/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-npm-
+
       - name: Install dependencies
         run: cd website && npm ci
+
       - name: Build helios API docs (doxygen2docusaurus)
         run: cd website && npx doxygen2docusaurus --id helios
+
       - name: Build website
         run: cd website && npm run build
-      - name: Verify build
+
+      - name: Verify build + XML
         shell: bash
         run: |
           set -euo pipefail
           test -d website/build
+          if [ ! -d website/build/doxygen/xml ]; then
+            echo "WARN: XML-dir missing in build (website/build/doxygen/xml)"
+            ls -R website/build | head -n 100
+          fi
           echo "Build Größe:" $(du -sh website/build | cut -f1)
+
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: website/build
+
   deploy:
     name: Deploy to GitHub Pages
     needs: build

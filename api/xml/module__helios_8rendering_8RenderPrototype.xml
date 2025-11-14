@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8rendering_8RenderPrototype" kind="module">
+    <compoundname>helios.rendering.RenderPrototype</compoundname>
+    <innerfile refid="RenderPrototype_8ixx">RenderPrototype.ixx</innerfile>
+    <innerclass refid="classhelios_1_1rendering_1_1RenderPrototype" prot="public">helios::rendering::RenderPrototype</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1RenderPrototype_1a66271e27bd5d671651331bf0da75b8e7" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; const <ref refid="classhelios_1_1rendering_1_1model_1_1Material" kindref="compound">helios::rendering::model::Material</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;const helios::rendering::model::Material&gt; helios::rendering::RenderPrototype::material_</definition>
+        <argsstring></argsstring>
+        <name>material_</name>
+        <qualifiedname>helios::rendering::RenderPrototype::material_</qualifiedname>
+        <briefdescription>
+<para>A shared pointer to the base Material definition for this prototype. The Material contains shader information, default uniform values, and render states. It is shared and immutable. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/RenderPrototype.ixx" line="38" column="26" bodyfile="include/helios/rendering/RenderPrototype.ixx" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1RenderPrototype_1a11bcda8e6ed52bc6f12e3490ea959b39" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; const <ref refid="classhelios_1_1rendering_1_1model_1_1Mesh" kindref="compound">helios::rendering::model::Mesh</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;const helios::rendering::model::Mesh&gt; helios::rendering::RenderPrototype::mesh_</definition>
+        <argsstring></argsstring>
+        <name>mesh_</name>
+        <qualifiedname>helios::rendering::RenderPrototype::mesh_</qualifiedname>
+        <briefdescription>
+<para>A shared pointer to the Mesh (geometry) used by this prototype. The Mesh defines the geometric shape of the object. It is shared and immutable. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/RenderPrototype.ixx" line="44" column="25" bodyfile="include/helios/rendering/RenderPrototype.ixx" bodystart="44" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderPrototype_1a9d7a703fc94e50e17702027b029c9cb5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::rendering::RenderPrototype::~RenderPrototype</definition>
+        <argsstring>()=default</argsstring>
+        <name>~RenderPrototype</name>
+        <qualifiedname>helios::rendering::RenderPrototype::~RenderPrototype</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/RenderPrototype.ixx" line="49" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderPrototype_1aaf0b17fa2eac3cafa86b4294917c9778" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::rendering::RenderPrototype::RenderPrototype</definition>
+        <argsstring>(std::shared_ptr&lt; const helios::rendering::model::Material &gt; material, std::shared_ptr&lt; const helios::rendering::model::Mesh &gt; mesh)</argsstring>
+        <name>RenderPrototype</name>
+        <qualifiedname>helios::rendering::RenderPrototype::RenderPrototype</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; const <ref refid="classhelios_1_1rendering_1_1model_1_1Material" kindref="compound">helios::rendering::model::Material</ref> &gt;</type>
+          <declname>material</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; const <ref refid="classhelios_1_1rendering_1_1model_1_1Mesh" kindref="compound">helios::rendering::model::Mesh</ref> &gt;</type>
+          <declname>mesh</declname>
+        </param>
+        <briefdescription>
+<para>Creates a new <ref refid="classhelios_1_1rendering_1_1RenderPrototype" kindref="compound">RenderPrototype</ref> using the specified Material and Mesh. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>material</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A shared pointer to the immutable Material this <ref refid="classhelios_1_1rendering_1_1RenderPrototype" kindref="compound">RenderPrototype</ref> uses. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mesh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A shared pointer to the immutable Mesh this <ref refid="classhelios_1_1rendering_1_1RenderPrototype" kindref="compound">RenderPrototype</ref> uses.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If either material or mesh represent a nullptr. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/RenderPrototype.ixx" line="59" column="18"/>
+        <references refid="classhelios_1_1rendering_1_1RenderPrototype_1ac880fb4b9658ff4e2134c04b2136f668">helios::rendering::RenderPrototype::material</references>
+        <references refid="classhelios_1_1rendering_1_1RenderPrototype_1a210f31929a563db1bf8e9cb73fa6043e">helios::rendering::RenderPrototype::mesh</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderPrototype_1a210f31929a563db1bf8e9cb73fa6043e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classhelios_1_1rendering_1_1model_1_1Mesh" kindref="compound">helios::rendering::model::Mesh</ref> &amp;</type>
+        <definition>const helios::rendering::model::Mesh &amp; helios::rendering::RenderPrototype::mesh</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>mesh</name>
+        <qualifiedname>helios::rendering::RenderPrototype::mesh</qualifiedname>
+        <briefdescription>
+<para>Returns const ref to the immutable Mesh used by this <ref refid="classhelios_1_1rendering_1_1RenderPrototype" kindref="compound">RenderPrototype</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Represents a const reference to an unmodifiable Mesh object, containing geometric data such as vertices and indices used for rendering operations or computational tasks. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/RenderPrototype.ixx" line="71" column="47"/>
+        <referencedby refid="classhelios_1_1rendering_1_1RenderPrototype_1aaf0b17fa2eac3cafa86b4294917c9778">helios::rendering::RenderPrototype::RenderPrototype</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderPrototype_1ac880fb4b9658ff4e2134c04b2136f668" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classhelios_1_1rendering_1_1model_1_1Material" kindref="compound">helios::rendering::model::Material</ref> &amp;</type>
+        <definition>const helios::rendering::model::Material &amp; helios::rendering::RenderPrototype::material</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>material</name>
+        <qualifiedname>helios::rendering::RenderPrototype::material</qualifiedname>
+        <briefdescription>
+<para>Returns a const reference to the immutable Material used by this <ref refid="classhelios_1_1rendering_1_1RenderPrototype" kindref="compound">RenderPrototype</ref>. The Material contains shader information and default properties. It is guaranteed to exist and be valid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A const ref to the Material object. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/RenderPrototype.ixx" line="81" column="51"/>
+        <references refid="classhelios_1_1rendering_1_1RenderPrototype_1ac880fb4b9658ff4e2134c04b2136f668">helios::rendering::RenderPrototype::material</references>
+        <referencedby refid="classhelios_1_1rendering_1_1RenderPrototype_1ac880fb4b9658ff4e2134c04b2136f668">helios::rendering::RenderPrototype::material</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1RenderPrototype_1aaf0b17fa2eac3cafa86b4294917c9778">helios::rendering::RenderPrototype::RenderPrototype</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/rendering/RenderPrototype.ixx" line="9" column="15"/>
+  </compounddef>
+</doxygen>

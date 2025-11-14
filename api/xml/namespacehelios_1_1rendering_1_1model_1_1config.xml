@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="namespacehelios_1_1rendering_1_1model_1_1config" kind="namespace" language="C++">
+    <compoundname>helios::rendering::model::config</compoundname>
+    <innerclass refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties" prot="public">helios::rendering::model::config::MaterialProperties</innerclass>
+    <innerclass refid="structhelios_1_1rendering_1_1model_1_1config_1_1MaterialPropertiesOverride" prot="public">helios::rendering::model::config::MaterialPropertiesOverride</innerclass>
+    <innerclass refid="structhelios_1_1rendering_1_1model_1_1config_1_1MeshConfig" prot="public">helios::rendering::model::config::MeshConfig</innerclass>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespacehelios_1_1rendering_1_1model_1_1config_1a13a7711e9718d01b8f09dd183c6777d5" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>PrimitiveType</name>
+        <qualifiedname>helios::rendering::model::config::PrimitiveType</qualifiedname>
+        <enumvalue id="namespacehelios_1_1rendering_1_1model_1_1config_1a13a7711e9718d01b8f09dd183c6777d5a75dd5f1160a3f02b6fae89c54361a1b3" prot="public">
+          <name>Points</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Draw each vertex as a single point. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1rendering_1_1model_1_1config_1a13a7711e9718d01b8f09dd183c6777d5aa0b0293a2db49f5f93c15a62e095c819" prot="public">
+          <name>Lines</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Treat each pair of vertices as an independent line segment. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1rendering_1_1model_1_1config_1a13a7711e9718d01b8f09dd183c6777d5a2ba065d2b3004087cc8f111bf56f134b" prot="public">
+          <name>LineLoop</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Connect vertices in sequence and close the loop (last -&gt; first). </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1rendering_1_1model_1_1config_1a13a7711e9718d01b8f09dd183c6777d5ae7f9e73b8edd21f420a63b3ace5768a2" prot="public">
+          <name>LineStrip</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Connect vertices in sequence forming a continuous polyline. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1rendering_1_1model_1_1config_1a13a7711e9718d01b8f09dd183c6777d5a7ca66fdfaad3eb33fc65d7490178f856" prot="public">
+          <name>Triangles</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Interpret each group of three vertices as an independent triangle. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1rendering_1_1model_1_1config_1a13a7711e9718d01b8f09dd183c6777d5a1da0b9ead8b051940a89214bae22831c" prot="public">
+          <name>TriangleStrip</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Build a connected strip of triangles sharing vertices. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1rendering_1_1model_1_1config_1a13a7711e9718d01b8f09dd183c6777d5a18d58fde618e4a30e2dfdc122e693047" prot="public">
+          <name>TriangleFan</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Build triangles sharing the first vertex (fan topology). </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1rendering_1_1model_1_1config_1a13a7711e9718d01b8f09dd183c6777d5a4eecfb50c5a20eb78bc4d5304e9d8618" prot="public">
+          <name>size_</name>
+          <briefdescription>
+<para>Sentinel value equal to the number of primitive types. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Defines how vertices are assembled into primitives during rendering. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This enum provides API-agnostic representations for common primitive assembly modes (points, lines, triangles, and their strip/fan variants). Backends should map these values to the corresponding native topology constants.</para>
+<para>Example (pseudo-code mapping to OpenGL): <programlisting filename=".cpp"><codeline><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(primitiveType)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1rendering_1_1model_1_1config_1a13a7711e9718d01b8f09dd183c6777d5a75dd5f1160a3f02b6fae89c54361a1b3" kindref="member">PrimitiveType::Points</ref>:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GL_POINTS;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1rendering_1_1model_1_1config_1a13a7711e9718d01b8f09dd183c6777d5aa0b0293a2db49f5f93c15a62e095c819" kindref="member">PrimitiveType::Lines</ref>:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GL_LINES;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1rendering_1_1model_1_1config_1a13a7711e9718d01b8f09dd183c6777d5a2ba065d2b3004087cc8f111bf56f134b" kindref="member">PrimitiveType::LineLoop</ref>:<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GL_LINE_LOOP;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1rendering_1_1model_1_1config_1a13a7711e9718d01b8f09dd183c6777d5ae7f9e73b8edd21f420a63b3ace5768a2" kindref="member">PrimitiveType::LineStrip</ref>:<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GL_LINE_STRIP;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1rendering_1_1model_1_1config_1a13a7711e9718d01b8f09dd183c6777d5a7ca66fdfaad3eb33fc65d7490178f856" kindref="member">PrimitiveType::Triangles</ref>:<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GL_TRIANGLES;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1rendering_1_1model_1_1config_1a13a7711e9718d01b8f09dd183c6777d5a1da0b9ead8b051940a89214bae22831c" kindref="member">PrimitiveType::TriangleStrip</ref>:<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GL_TRIANGLE_STRIP;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1rendering_1_1model_1_1config_1a13a7711e9718d01b8f09dd183c6777d5a18d58fde618e4a30e2dfdc122e693047" kindref="member">PrimitiveType::TriangleFan</ref>:<sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>GL_TRIANGLE_FAN;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:<sp/></highlight><highlight class="comment">//<sp/>unreachable<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>GL_TRIANGLES;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para><simplesect kind="see"><para><ref refid="structhelios_1_1rendering_1_1model_1_1config_1_1MeshConfig" kindref="compound">MeshConfig</ref> (default is `PrimitiveType::Triangles`) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/model/config/PrimitiveType.ixx" line="36" column="5" bodyfile="include/helios/rendering/model/config/PrimitiveType.ixx" bodystart="36" bodyend="76"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Configuration structures for model/material properties. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This namespace provides configuration containers for providing configuration options for models, impacting draw calls. </para>
+    </detaileddescription>
+    <location file="include/helios/rendering/model/config/MaterialProperties.ixx" line="14" column="1"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,438 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structhelios_1_1math_1_1mat4" kind="struct" language="C++" prot="public">
+    <compoundname>helios::math::mat4</compoundname>
+    <templateparamlist>
+      <param>
+        <type><ref refid="concepthelios_1_1math_1_1Numeric" kindref="compound">helios::math::Numeric</ref></type>
+        <declname>T</declname>
+        <defname>T</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structhelios_1_1math_1_1mat4_1aeca084336768a1ffb7f8c9e5e093161c" prot="private" static="no" mutable="no">
+        <type>T</type>
+        <definition>T helios::math::mat4&lt; T &gt;::m[16]</definition>
+        <argsstring>[16]</argsstring>
+        <name>m</name>
+        <qualifiedname>helios::math::mat4::m</qualifiedname>
+        <briefdescription>
+<para>Internal array storing matrix components. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Components are stored in column-major order, that is, each 4 subsequent elements represent a matrix column. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/types/mat4.ixx" line="38" column="11" bodyfile="include/helios/math/types/mat4.ixx" bodystart="38" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structhelios_1_1math_1_1mat4_1a769b094f17ea9b06bee37f0dab69149f" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>helios::math::mat4&lt; T &gt;::mat4</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>mat4</name>
+        <qualifiedname>helios::math::mat4::mat4</qualifiedname>
+        <briefdescription>
+<para>Default constructor. Initializes all components to 0. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/types/mat4.ixx" line="44" column="28" bodyfile="include/helios/math/types/mat4.ixx" bodystart="44" bodyend="44"/>
+        <referencedby refid="structhelios_1_1math_1_1mat4_1ad856b4652346ff475b653e257d64428d" compoundref="mat4_8ixx" startline="98" endline="100">helios::math::mat4&lt; float &gt;::identity</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1math_1_1mat4_1a38b8e3efcc5733814107f5e01498fcaf" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>helios::math::mat4&lt; T &gt;::mat4</definition>
+        <argsstring>(const T f) noexcept</argsstring>
+        <name>mat4</name>
+        <qualifiedname>helios::math::mat4::mat4</qualifiedname>
+        <param>
+          <type>const T</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>Creates a diagonal matrix. The diagonal components are initialized with the value f. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The scalar value for the diagonal components. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/types/mat4.ixx" line="52" column="28" bodyfile="include/helios/math/types/mat4.ixx" bodystart="52" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1math_1_1mat4_1adb3a273b2c9fe0ca2bc7ad33af87a416" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>helios::math::mat4&lt; T &gt;::mat4</definition>
+        <argsstring>(const vec3&lt; T &gt; f) noexcept</argsstring>
+        <name>mat4</name>
+        <qualifiedname>helios::math::mat4::mat4</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1math_1_1vec3" kindref="compound">vec3</ref>&lt; T &gt;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>Creates a diagonal matrix with the components of <ref refid="structhelios_1_1math_1_1vec3" kindref="compound">vec3&lt;T&gt;</ref> as the diagonal elements. Element at [4, 4] is set to 1. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The scalar value for the diagonal components. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/types/mat4.ixx" line="64" column="28" bodyfile="include/helios/math/types/mat4.ixx" bodystart="64" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1math_1_1mat4_1a23dba42c9b3192c6c559333092d5f08a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>helios::math::mat4&lt; T &gt;::mat4</definition>
+        <argsstring>(const T f0_0, const T f1_0, const T f2_0, const T f3_0, const T f0_1, const T f1_1, const T f2_1, const T f3_1, const T f0_2, const T f1_2, const T f2_2, const T f3_2, const T f0_3, const T f1_3, const T f2_3, const T f3_3)</argsstring>
+        <name>mat4</name>
+        <qualifiedname>helios::math::mat4::mat4</qualifiedname>
+        <param>
+          <type>const T</type>
+          <declname>f0_0</declname>
+        </param>
+        <param>
+          <type>const T</type>
+          <declname>f1_0</declname>
+        </param>
+        <param>
+          <type>const T</type>
+          <declname>f2_0</declname>
+        </param>
+        <param>
+          <type>const T</type>
+          <declname>f3_0</declname>
+        </param>
+        <param>
+          <type>const T</type>
+          <declname>f0_1</declname>
+        </param>
+        <param>
+          <type>const T</type>
+          <declname>f1_1</declname>
+        </param>
+        <param>
+          <type>const T</type>
+          <declname>f2_1</declname>
+        </param>
+        <param>
+          <type>const T</type>
+          <declname>f3_1</declname>
+        </param>
+        <param>
+          <type>const T</type>
+          <declname>f0_2</declname>
+        </param>
+        <param>
+          <type>const T</type>
+          <declname>f1_2</declname>
+        </param>
+        <param>
+          <type>const T</type>
+          <declname>f2_2</declname>
+        </param>
+        <param>
+          <type>const T</type>
+          <declname>f3_2</declname>
+        </param>
+        <param>
+          <type>const T</type>
+          <declname>f0_3</declname>
+        </param>
+        <param>
+          <type>const T</type>
+          <declname>f1_3</declname>
+        </param>
+        <param>
+          <type>const T</type>
+          <declname>f2_3</declname>
+        </param>
+        <param>
+          <type>const T</type>
+          <declname>f3_3</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a new `mat4` with all 16 components explicitly specified. The values are stored in column major order, that is, the first 4 arguments represent the first column, and so on. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fi_j</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(i==row, j == col) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/types/mat4.ixx" line="78" column="19" bodyfile="include/helios/math/types/mat4.ixx" bodystart="78" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1math_1_1mat4_1a025319de588d6c29c57c92413a4a51b3" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T &amp; helios::math::mat4&lt; T &gt;::operator()</definition>
+        <argsstring>(const size_t row, const size_t col) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>helios::math::mat4::operator()</qualifiedname>
+        <param>
+          <type>const size_t</type>
+          <declname>row</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>col</declname>
+        </param>
+        <briefdescription>
+<para>Provides read-only access to a matrix component. Elements are accessed in column major order: `m[row + col * 4]`. Bounds checking is performed via `assert` in debug builds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>row</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The zero based row index. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>col</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The zero based col index.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A const ref to the component at the specified position. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/types/mat4.ixx" line="113" column="27" bodyfile="include/helios/math/types/mat4.ixx" bodystart="113" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1math_1_1mat4_1aecc9104aa657ee1df754a8d5cefd60a0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; helios::math::mat4&lt; T &gt;::operator()</definition>
+        <argsstring>(const size_t row, const size_t col)</argsstring>
+        <name>operator()</name>
+        <qualifiedname>helios::math::mat4::operator()</qualifiedname>
+        <param>
+          <type>const size_t</type>
+          <declname>row</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>col</declname>
+        </param>
+        <briefdescription>
+<para>Provides read-write access to a matrix component. Elements are accessed in column major order: `m[row + col * 4]`. Bounds checking is performed via `assert` in debug builds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>row</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The zero based row index. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>col</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The zero based col index.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A ref to the component at the specified position. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/types/mat4.ixx" line="129" column="21" bodyfile="include/helios/math/types/mat4.ixx" bodystart="129" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1math_1_1mat4_1a11484773381edf083309360d6c940d3f" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::math::mat4&lt; T &gt;::same</definition>
+        <argsstring>(const mat4&lt; T &gt; &amp;rgt) const</argsstring>
+        <name>same</name>
+        <qualifiedname>helios::math::mat4::same</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1math_1_1mat4_1a769b094f17ea9b06bee37f0dab69149f" kindref="member">mat4</ref>&lt; T &gt; &amp;</type>
+          <declname>rgt</declname>
+        </param>
+        <briefdescription>
+<para>Compares this matrix element&apos;s with the rgt matrix considering an epsilon value. Returns true if for all elements the equation |a-b| &lt;= EPSILON holds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>EPSILON is set to 0.00001</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rgt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The other matix to compare with this matrix for equality.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True is the elements of the matrices are considered equal, otherwise false.</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://realtimecollisiondetection.net/blog/?p=89">https://realtimecollisiondetection.net/blog/?p=89</ulink></para>
+</simplesect>
+<xrefsect id="todo_1_todo000007"><xreftitle>Todo</xreftitle><xrefdescription><para>account for abs (values close to zero) and rel (larger values), move EPSILON to global constant </para>
+</xrefdescription></xrefsect></para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/types/mat4.ixx" line="153" column="24" bodyfile="include/helios/math/types/mat4.ixx" bodystart="153" bodyend="167"/>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1math_1_1mat4_1a33c47f9920f5e88b98caca96a889d0aa" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::math::mat4&lt; T &gt;::operator==</definition>
+        <argsstring>(const mat4&lt; T &gt; &amp;rgt) const</argsstring>
+        <name>operator==</name>
+        <qualifiedname>helios::math::mat4::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1math_1_1mat4_1a769b094f17ea9b06bee37f0dab69149f" kindref="member">mat4</ref>&lt; T &gt; &amp;</type>
+          <declname>rgt</declname>
+        </param>
+        <briefdescription>
+<para>Strictly compares the elements of this matrix with the elements of the rgt matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rgt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The right matrix to compare for equal values</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Trie if all elements are equal (==), false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/types/mat4.ixx" line="178" column="24" bodyfile="include/helios/math/types/mat4.ixx" bodystart="178" bodyend="190"/>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1math_1_1mat4_1a1a4063671f96b4e127f18ae6453afda9" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structhelios_1_1math_1_1mat4_1a769b094f17ea9b06bee37f0dab69149f" kindref="member">mat4</ref>&lt; T &gt;</type>
+        <definition>mat4&lt; T &gt; helios::math::mat4&lt; T &gt;::operator*</definition>
+        <argsstring>(const mat4&lt; T &gt; &amp;m) const</argsstring>
+        <name>operator*</name>
+        <qualifiedname>helios::math::mat4::operator*</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1math_1_1mat4_1a769b094f17ea9b06bee37f0dab69149f" kindref="member">mat4</ref>&lt; T &gt; &amp;</type>
+          <declname>m</declname>
+        </param>
+        <briefdescription>
+<para>Performs matrix-multiplication with another `mat4`. This matrix is the left operand, while `m` is the right operand. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>m</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The right-hand side `mat4&lt;T&gt;` for multiplication.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new `mat4&lt;T&gt;`, representing the result of the matrix-multiplication. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/types/mat4.ixx" line="201" column="24" bodyfile="include/helios/math/types/mat4.ixx" bodystart="201" bodyend="215"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structhelios_1_1math_1_1mat4_1ad856b4652346ff475b653e257d64428d" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structhelios_1_1math_1_1mat4_1a769b094f17ea9b06bee37f0dab69149f" kindref="member">mat4</ref>&lt; T &gt;</type>
+        <definition>static mat4&lt; T &gt; helios::math::mat4&lt; T &gt;::identity</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>identity</name>
+        <qualifiedname>helios::math::mat4::identity</qualifiedname>
+        <briefdescription>
+<para>Convenient method to construct a 4x4 identity matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The numeric type of the matrix components.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new mat4&lt;T&gt;-identity matrix- </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/types/mat4.ixx" line="98" column="21" bodyfile="include/helios/math/types/mat4.ixx" bodystart="98" bodyend="100"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Represents a 4x4 matrix, stored in column-major order. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The `mat4` struct provides a lightweight and efficient way to handle 4D matrix mathematics for numeric data types. It stores its components as type `T`. For convenient access, type aliases `mat4f`, `mat4d` and `mat4i` are available, providing float/double/integer matrix representatives.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the numeric type of the matrix components. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="include/helios/math/types/mat4.ixx" line="30" column="5" bodyfile="include/helios/math/types/mat4.ixx" bodystart="30" bodyend="216"/>
+    <listofallmembers>
+      <member refid="structhelios_1_1math_1_1mat4_1ad856b4652346ff475b653e257d64428d" prot="public" virt="non-virtual"><scope>helios::math::mat4</scope><name>identity</name></member>
+      <member refid="structhelios_1_1math_1_1mat4_1aeca084336768a1ffb7f8c9e5e093161c" prot="private" virt="non-virtual"><scope>helios::math::mat4</scope><name>m</name></member>
+      <member refid="structhelios_1_1math_1_1mat4_1a769b094f17ea9b06bee37f0dab69149f" prot="public" virt="non-virtual"><scope>helios::math::mat4</scope><name>mat4</name></member>
+      <member refid="structhelios_1_1math_1_1mat4_1a38b8e3efcc5733814107f5e01498fcaf" prot="public" virt="non-virtual"><scope>helios::math::mat4</scope><name>mat4</name></member>
+      <member refid="structhelios_1_1math_1_1mat4_1adb3a273b2c9fe0ca2bc7ad33af87a416" prot="public" virt="non-virtual"><scope>helios::math::mat4</scope><name>mat4</name></member>
+      <member refid="structhelios_1_1math_1_1mat4_1a23dba42c9b3192c6c559333092d5f08a" prot="public" virt="non-virtual"><scope>helios::math::mat4</scope><name>mat4</name></member>
+      <member refid="structhelios_1_1math_1_1mat4_1a025319de588d6c29c57c92413a4a51b3" prot="public" virt="non-virtual"><scope>helios::math::mat4</scope><name>operator()</name></member>
+      <member refid="structhelios_1_1math_1_1mat4_1aecc9104aa657ee1df754a8d5cefd60a0" prot="public" virt="non-virtual"><scope>helios::math::mat4</scope><name>operator()</name></member>
+      <member refid="structhelios_1_1math_1_1mat4_1a1a4063671f96b4e127f18ae6453afda9" prot="public" virt="non-virtual"><scope>helios::math::mat4</scope><name>operator*</name></member>
+      <member refid="structhelios_1_1math_1_1mat4_1a33c47f9920f5e88b98caca96a889d0aa" prot="public" virt="non-virtual"><scope>helios::math::mat4</scope><name>operator==</name></member>
+      <member refid="structhelios_1_1math_1_1mat4_1a11484773381edf083309360d6c940d3f" prot="public" virt="non-virtual"><scope>helios::math::mat4</scope><name>same</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

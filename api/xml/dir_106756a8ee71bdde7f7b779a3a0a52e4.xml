@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_106756a8ee71bdde7f7b779a3a0a52e4" kind="dir">
+    <compoundname>include/ext</compoundname>
+    <innerdir refid="dir_87bb11e6601443413726efc9dc479d01">include/ext/glfw</innerdir>
+    <innerdir refid="dir_e6d2024ed47421d40e989df615c8235b">include/ext/opengl</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md16">
+<title>helios::ext</title><para>This namespace contains <bold>platform-specific implementations</bold> and <bold>backend adapters</bold> for the helios framework. It bridges the abstract helios core APIs with concrete third-party libraries.</para>
+</sect1>
+<sect1 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md17">
+<title>Overview</title><para>The <computeroutput>ext</computeroutput> namespace follows a <bold>plugin architecture</bold>, allowing helios to support multiple windowing systems and rendering backends without coupling the core framework to specific implementations.</para>
+<sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md18">
+<title>Available Extensions</title><para><programlisting><codeline><highlight class="normal">ext/</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>glfw/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GLFW-based<sp/>windowing<sp/>and<sp/>input</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>window/<sp/><sp/><sp/>#<sp/>GLFWWindow<sp/>implementation</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>input/<sp/><sp/><sp/><sp/>#<sp/>GLFWInputAdapter<sp/>implementation</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>app/<sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GLFWApplication<sp/>and<sp/>factory</highlight></codeline>
+<codeline><highlight class="normal">└──<sp/>opengl/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>OpenGL<sp/>rendering<sp/>backend</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>├──<sp/>rendering/<sp/>#<sp/>OpenGL<sp/>RenderingDevice</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>├──<sp/>shader/<sp/><sp/><sp/><sp/>#<sp/>OpenGLShader<sp/>implementation</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>└──<sp/>model/<sp/><sp/><sp/><sp/><sp/>#<sp/>OpenGLMesh<sp/>implementation</highlight></codeline>
+</programlisting></para>
+</sect2>
+</sect1>
+<sect1 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md19">
+<title>Architecture</title><sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md20">
+<title>Extension Responsibilities</title><para><table rows="3" cols="2"><row>
+<entry thead="yes"><para>Extension  </para>
+</entry><entry thead="yes"><para>Responsibility  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><bold><computeroutput>glfw</computeroutput></bold>  </para>
+</entry><entry thead="no"><para>Window creation, event handling, input polling (keyboard, mouse, gamepad)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><bold><computeroutput>opengl</computeroutput></bold>  </para>
+</entry><entry thead="no"><para>GPU resource management, shader compilation, draw call submission  </para>
+</entry></row>
+</table>
+</para>
+</sect2>
+<sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md21">
+<title>Separation of Concerns</title><para><itemizedlist>
+<listitem><para><bold>helios core</bold> defines the <bold>interfaces</bold> (e.g., <computeroutput>Window</computeroutput>, <computeroutput>RenderingDevice</computeroutput>, <computeroutput>Shader</computeroutput>)</para>
+</listitem><listitem><para><bold><computeroutput>ext</computeroutput> modules</bold> provide the <bold>implementations</bold> (e.g., <computeroutput>GLFWWindow</computeroutput>, <computeroutput>OpenGLShader</computeroutput>)</para>
+</listitem><listitem><para>Applications use <bold>factories</bold> to instantiate concrete implementations</para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+</sect1>
+<sect1 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md22">
+<title>Using Extensions</title><sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md23">
+<title>Quick Start with GLFW + OpenGL</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8ext_8glfw_8app_8GLFWFactory" kindref="compound">helios.ext.glfw.app.GLFWFactory</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>main()<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Factory<sp/>creates<sp/>a<sp/>complete<sp/>GLFW+OpenGL<sp/>application</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>app<sp/>=<sp/>GLFWFactory::makeOpenGLApp(</highlight><highlight class="stringliteral">&quot;My<sp/>App&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>window<sp/>=<sp/>app-&gt;current();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>GLFWWindow</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>device<sp/>=<sp/>app-&gt;renderingDevice();<sp/></highlight><highlight class="comment">//<sp/>OpenGLRenderingDevice</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>input<sp/>=<sp/>app-&gt;inputManager();<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>GLFWInputAdapter</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(!window-&gt;shouldClose())<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Your<sp/>game<sp/>loop</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+</sect2>
+</sect1>
+<sect1 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md24">
+<title>Extension Modules</title><sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md25">
+<title><computeroutput>helios.ext.glfw</computeroutput></title><para>GLFW-based implementation for windowing and input.</para>
+<para><bold>Key Classes:</bold><itemizedlist>
+<listitem><para><computeroutput>GLFWWindow</computeroutput> - Window management (resize, close, swap buffers)</para>
+</listitem><listitem><para><computeroutput>GLFWInputAdapter</computeroutput> - Input polling (keyboard, mouse, gamepad)</para>
+</listitem><listitem><para><computeroutput>GLFWApplication</computeroutput> - Application lifecycle with event loop</para>
+</listitem><listitem><para><computeroutput>GLFWFactory</computeroutput> - Factory for creating GLFW-based apps</para>
+</listitem></itemizedlist>
+</para>
+<para><bold>Dependencies:</bold><itemizedlist>
+<listitem><para><ulink url="https://www.glfw.org/">GLFW 3.x</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>See:</bold> <ref refid="dir_87bb11e6601443413726efc9dc479d01" kindref="compound">glfw/README.md</ref></para>
+</sect2>
+<sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md26">
+<title><computeroutput>helios.ext.opengl</computeroutput></title><para>OpenGL 4.5+ rendering backend.</para>
+<para><bold>Key Classes:</bold><itemizedlist>
+<listitem><para><computeroutput>OpenGLRenderingDevice</computeroutput> - Main rendering interface</para>
+</listitem><listitem><para><computeroutput>OpenGLShader</computeroutput> - Shader compilation and linking</para>
+</listitem><listitem><para><computeroutput>OpenGLMesh</computeroutput> - VBO/IBO management</para>
+</listitem><listitem><para><computeroutput>OpenGLUniformLocationMap</computeroutput> - Uniform binding</para>
+</listitem></itemizedlist>
+</para>
+<para><bold>Dependencies:</bold><itemizedlist>
+<listitem><para>OpenGL 4.5+</para>
+</listitem><listitem><para><ulink url="https://glad.dav1d.de/">GLAD</ulink> (loader)</para>
+</listitem></itemizedlist>
+</para>
+<para><bold>See:</bold> <ref refid="dir_e6d2024ed47421d40e989df615c8235b" kindref="compound">opengl/README.md</ref></para>
+</sect2>
+</sect1>
+<sect1 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md27">
+<title>Creating a New Backend</title><para>To add support for a new platform or rendering API:</para>
+<sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md28">
+<title>1. Implement Core Interfaces</title><para>Create implementations for:<itemizedlist>
+<listitem><para><computeroutput><ref refid="classhelios_1_1window_1_1Window" kindref="compound">helios::window::Window</ref></computeroutput> (if new windowing system)</para>
+</listitem><listitem><para><computeroutput><ref refid="classhelios_1_1rendering_1_1RenderingDevice" kindref="compound">helios::rendering::RenderingDevice</ref></computeroutput> (if new rendering API)</para>
+</listitem><listitem><para><computeroutput>helios::rendering::Shader</computeroutput></para>
+</listitem><listitem><para><computeroutput><ref refid="classhelios_1_1rendering_1_1model_1_1Mesh" kindref="compound">helios::rendering::model::Mesh</ref></computeroutput></para>
+</listitem><listitem><para><computeroutput><ref refid="classhelios_1_1input_1_1InputAdapter" kindref="compound">helios::input::InputAdapter</ref></computeroutput> (if new input system)</para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+<sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md29">
+<title>2. Create Factory</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">helios::ext::vulkan<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">VulkanFactory<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::unique_ptr&lt;Application&gt;<sp/>makeVulkanApp(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>title</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>window<sp/>=<sp/>std::make_unique&lt;VulkanWindow&gt;(...);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>device<sp/>=<sp/>std::make_unique&lt;VulkanRenderingDevice&gt;(...);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>input<sp/>=<sp/>std::make_unique&lt;VulkanInputAdapter&gt;(...);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::make_unique&lt;Application&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::move(window),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::move(device),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::move(input)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md30">
+<title>3. Follow Module Structure</title><para><programlisting><codeline><highlight class="normal">include/ext/yourbackend/</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>_module.ixx<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Module<sp/>facade</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>rendering/</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>YourRenderingDevice.ixx</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>...</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>shader/</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>YourShader.ixx</highlight></codeline>
+<codeline><highlight class="normal">└──<sp/>...</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">src/ext/yourbackend/</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>rendering/</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>YourRenderingDevice.cpp</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>...</highlight></codeline>
+<codeline><highlight class="normal">└──<sp/>...</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md31">
+<title>4. Update CMake</title><para>Add your backend to the build system: <programlisting filename=".cmake"><codeline><highlight class="normal">#<sp/>In<sp/>src/ext/CMakeLists.txt</highlight></codeline>
+<codeline><highlight class="normal">add_subdirectory(yourbackend)</highlight></codeline>
+</programlisting></para>
+</sect2>
+</sect1>
+<sect1 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md32">
+<title>Design Principles</title><para>1. <bold>Abstract Interfaces</bold>: The core helios framework defines interfaces, not implementations. 2. <bold>Dependency Injection</bold>: Applications receive concrete implementations via factories. 3. <bold>Modularity</bold>: Each extension is an independent C++23 module. 4. <bold>Interchangeability</bold>: Backends can be swapped without changing application code (only the factory call).</para>
+</sect1>
+<sect1 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md33">
+<title>Examples</title><para>See <ulink url="../../examples/">examples/</ulink> for complete applications using the extensions:<itemizedlist>
+<listitem><para><computeroutput>simple_cube_rendering</computeroutput> - GLFW + OpenGL</para>
+</listitem><listitem><para><computeroutput>game_controller_input</computeroutput> - GLFW input handling</para>
+</listitem></itemizedlist>
+</para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="include/ext/"/>
+  </compounddef>
+</doxygen>

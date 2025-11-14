@@ -1,0 +1,257 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="heliosapi_8md" kind="file" language="Markdown">
+    <compoundname>heliosapi.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios<sp/>-<sp/>API<sp/>Reference</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Introduction</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">`helios`<sp/>is<sp/>an<sp/>ongoing,<sp/>educational<sp/>project<sp/>and<sp/>strives<sp/>for<sp/>providing<sp/>a<sp/>foundational<sp/>and<sp/>modular<sp/>technical<sp/>backbone<sp/>for<sp/>game<sp/>development.<sp/>Designed<sp/>with<sp/>a<sp/>top-down,<sp/>prototype-oriented<sp/>approach,<sp/>it<sp/>emphasizes<sp/>a<sp/>clear<sp/>separation<sp/>of<sp/>concerns<sp/>and<sp/>robust<sp/>architectural<sp/>patterns<sp/>to<sp/>help<sp/>with<sp/>creating<sp/>maintainable<sp/>games.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Core<sp/>Purpose</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>primary<sp/>objective<sp/>of<sp/>`helios`<sp/>is<sp/>to<sp/>offer<sp/>a<sp/>flexible<sp/>and<sp/>extensible<sp/>platform<sp/>for<sp/>interactive<sp/>games.<sp/>As<sp/>a<sp/>prototype,<sp/>it<sp/>provides<sp/>the<sp/>following<sp/>systems:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>**Rendering<sp/>Pipeline:**<sp/>A<sp/>rendering<sp/>layer<sp/>with<sp/>customizable<sp/>render<sp/>passes.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Modular<sp/>Subsystems:**<sp/>Well-defined<sp/>interfaces<sp/>for<sp/>core<sp/>components<sp/>such<sp/>as<sp/>Scene<sp/>Management<sp/>and<sp/>Rendering.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Modern<sp/>C++<sp/>Practices:**<sp/>Leveraging<sp/>C++(23)<sp/>Modules<sp/>for<sp/>improved<sp/>dependency<sp/>management<sp/>and<sp/>compile-time<sp/>efficiency.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Architecture<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>framework&apos;s<sp/>architecture<sp/>follows<sp/>a<sp/>component-based<sp/>philosophy,<sp/>providing<sp/>abstract<sp/>interfaces<sp/>that<sp/>decouple<sp/>high-level<sp/>scene<sp/>descriptions<sp/>from<sp/>underlying<sp/>hardware<sp/>implementations.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Core<sp/>Modules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">helios</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>rendering<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Rendering<sp/>pipeline<sp/>and<sp/>render<sp/>commands</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>model<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Mesh,<sp/>Material,<sp/>and<sp/>configuration</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>shader<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Shader<sp/>programs<sp/>and<sp/>uniform<sp/>management</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>asset<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Geometric<sp/>shapes<sp/>and<sp/>assets</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>scene<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Scene<sp/>graph,<sp/>camera,<sp/>and<sp/>culling</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>input<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Keyboard,<sp/>mouse,<sp/>and<sp/>gamepad<sp/>input</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>window<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Window<sp/>management<sp/>and<sp/>events</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>math<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Vectors,<sp/>matrices,<sp/>transforms</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>util<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Logging,<sp/>file<sp/>I/O,<sp/>utilities</highlight></codeline>
+<codeline><highlight class="normal">└──<sp/>app<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Application<sp/>lifecycle<sp/>and<sp/>event<sp/>management</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Extension<sp/>Modules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">helios.ext</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>glfw<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GLFW-based<sp/>window<sp/>and<sp/>input<sp/>implementation</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>window</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>input</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>app</highlight></codeline>
+<codeline><highlight class="normal">└──<sp/>opengl<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>OpenGL<sp/>rendering<sp/>backend</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>├──<sp/>rendering</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>└──<sp/>shader</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Core<sp/>Concepts</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>1.<sp/>Scene<sp/>Graph</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>scene<sp/>graph<sp/>organizes<sp/>objects<sp/>hierarchically,<sp/>with<sp/>automatic<sp/>transform<sp/>propagation<sp/>from<sp/>parent<sp/>to<sp/>child<sp/>nodes.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Key<sp/>Classes:**</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`Scene`<sp/>-<sp/>Root<sp/>container<sp/>for<sp/>all<sp/>scene<sp/>objects</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`SceneNode`<sp/>-<sp/>Node<sp/>in<sp/>the<sp/>hierarchy<sp/>with<sp/>transform<sp/>and<sp/>optional<sp/>renderable</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`Camera`<sp/>-<sp/>Defines<sp/>the<sp/>viewpoint<sp/>and<sp/>projection</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Example:**</highlight></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.scene.Scene;</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.scene.SceneNode;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">auto<sp/>scene<sp/>=<sp/>std::make_unique&lt;Scene&gt;(std::move(cullingStrategy));</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">auto<sp/>cubeNode<sp/>=<sp/>std::make_unique&lt;SceneNode&gt;(std::move(cubeRenderable));</highlight></codeline>
+<codeline><highlight class="normal">auto*<sp/>node<sp/>=<sp/>scene-&gt;addNode(std::move(cubeNode));</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">node-&gt;translate(vec3f(0.0f,<sp/>2.0f,<sp/>0.0f));</highlight></codeline>
+<codeline><highlight class="normal">node-&gt;rotate(rotationMatrix);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>2.<sp/>Rendering<sp/>Pipeline</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>rendering<sp/>pipeline<sp/>uses<sp/>a<sp/>deferred<sp/>command<sp/>pattern<sp/>with<sp/>render<sp/>passes.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Flow:**</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">Scene<sp/>→<sp/>Snapshot<sp/>→<sp/>RenderPass<sp/>→<sp/>RenderQueue<sp/>→<sp/>RenderCommand<sp/>→<sp/>GPU</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Key<sp/>Classes:**</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`RenderPrototype`<sp/>-<sp/>Immutable<sp/>combination<sp/>of<sp/>Mesh<sp/>+<sp/>Material</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`Renderable`<sp/>-<sp/>Instance<sp/>of<sp/>a<sp/>RenderPrototype<sp/>with<sp/>optional<sp/>overrides</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`RenderCommand`<sp/>-<sp/>Low-level<sp/>GPU<sp/>command</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`RenderQueue`<sp/>-<sp/>Collection<sp/>of<sp/>commands<sp/>for<sp/>a<sp/>pass</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`RenderPass`<sp/>-<sp/>Execution<sp/>unit<sp/>with<sp/>frame-specific<sp/>uniforms</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Example:**</highlight></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.rendering.RenderPrototype;</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.rendering.Renderable;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Create<sp/>prototype<sp/>(shared)</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>prototype<sp/>=<sp/>std::make_shared&lt;RenderPrototype&gt;(material,<sp/>mesh);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Create<sp/>instance</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>renderable<sp/>=<sp/>std::make_shared&lt;Renderable&gt;(prototype);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Optional<sp/>per-instance<sp/>material<sp/>override</highlight></codeline>
+<codeline><highlight class="normal">renderable-&gt;materialOverride()<sp/>=<sp/>MaterialPropertiesOverride{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.baseColor<sp/>=<sp/>vec4f(1.0f,<sp/>0.0f,<sp/>0.0f,<sp/>1.0f)</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>3.<sp/>Material<sp/>System</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Materials<sp/>define<sp/>surface<sp/>appearance<sp/>with<sp/>shaders<sp/>and<sp/>properties.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Key<sp/>Classes:**</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`Material`<sp/>-<sp/>Shader<sp/>+<sp/>default<sp/>MaterialProperties</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`MaterialProperties`<sp/>-<sp/>Immutable<sp/>value<sp/>object<sp/>(baseColor,<sp/>roughness,<sp/>etc.)</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`MaterialPropertiesOverride`<sp/>-<sp/>Per-instance<sp/>overrides</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Example:**</highlight></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.rendering.model.Material;</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.rendering.model.config.MaterialProperties;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">auto<sp/>materialProps<sp/>=<sp/>MaterialProperties(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>vec4f(1.0f,<sp/>0.0f,<sp/>1.0f,<sp/>1.0f),<sp/>//<sp/>Base<sp/>color<sp/>(magenta)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>0.5f<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Roughness</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">auto<sp/>material<sp/>=<sp/>std::make_shared&lt;Material&gt;(shader,<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>std::make_shared&lt;MaterialProperties&gt;(materialProps));</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>4.<sp/>Input<sp/>System</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Unified<sp/>input<sp/>handling<sp/>for<sp/>keyboard,<sp/>mouse,<sp/>and<sp/>gamepad.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Key<sp/>Classes:**</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`InputManager`<sp/>-<sp/>Central<sp/>input<sp/>coordinator</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`InputAdapter`<sp/>-<sp/>Platform-specific<sp/>input<sp/>implementation</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`GamepadState`<sp/>-<sp/>Current<sp/>state<sp/>of<sp/>a<sp/>gamepad</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Example:**</highlight></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.input.InputManager;</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.input.types.Key;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">auto&amp;<sp/>inputManager<sp/>=<sp/>app-&gt;inputManager();</highlight></codeline>
+<codeline><highlight class="normal">inputManager.poll(deltaTime);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">if<sp/>(inputManager.isKeyPressed(Key::SPACE))<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Handle<sp/>space<sp/>key</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">const<sp/>auto&amp;<sp/>gamepadState<sp/>=<sp/>inputManager.gamepadState(Gamepad::Gamepad1);</highlight></codeline>
+<codeline><highlight class="normal">if<sp/>(gamepadState.buttons.A)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Handle<sp/>A<sp/>button</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Quick<sp/>Start</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Creating<sp/>a<sp/>Simple<sp/>Application</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.ext.glfw.app.GLFWFactory;</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.scene.Scene;</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.scene.Camera;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">int<sp/>main()<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>1.<sp/>Create<sp/>application</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto<sp/>app<sp/>=<sp/>GLFWFactory::makeOpenGLApp(&quot;My<sp/>helios<sp/>App&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto*<sp/>window<sp/>=<sp/>app-&gt;current();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>2.<sp/>Create<sp/>scene</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto<sp/>scene<sp/>=<sp/>std::make_unique&lt;Scene&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::make_unique&lt;CullNoneStrategy&gt;()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>3.<sp/>Add<sp/>camera</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto<sp/>camera<sp/>=<sp/>std::make_unique&lt;Camera&gt;();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>scene-&gt;addNode(std::move(camera));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>4.<sp/>Create<sp/>and<sp/>add<sp/>renderable</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto<sp/>prototype<sp/>=<sp/>std::make_shared&lt;RenderPrototype&gt;(material,<sp/>mesh);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto<sp/>renderable<sp/>=<sp/>std::make_shared&lt;Renderable&gt;(prototype);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto<sp/>node<sp/>=<sp/>std::make_unique&lt;SceneNode&gt;(std::move(renderable));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>scene-&gt;addNode(std::move(node));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>5.<sp/>Main<sp/>loop</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>while<sp/>(!window-&gt;shouldClose())<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>app-&gt;eventManager().dispatchAll();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>auto<sp/>snapshot<sp/>=<sp/>scene-&gt;createSnapshot(*camera);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>auto<sp/>renderPass<sp/>=<sp/>RenderPassFactory::getInstance()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.buildRenderPass(snapshot);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>app-&gt;renderingDevice().render(renderPass);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>window-&gt;swapBuffers();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>return<sp/>0;</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Module<sp/>Details</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">For<sp/>detailed<sp/>information<sp/>about<sp/>each<sp/>module,<sp/>see:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>**[Rendering](../include/helios/rendering/README.md)**<sp/>-<sp/>Rendering<sp/>system<sp/>and<sp/>pipeline</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**[Scene](../include/helios/scene/README.md)**<sp/>-<sp/>Scene<sp/>graph<sp/>and<sp/>camera</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**[Input](../include/helios/input/README.md)**<sp/>-<sp/>Input<sp/>handling</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**[Math](../include/helios/math/README.md)**<sp/>-<sp/>Mathematical<sp/>operations</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**[Window](../include/helios/window/README.md)**<sp/>-<sp/>Window<sp/>management</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**[Utilities](../include/helios/util/README.md)**<sp/>-<sp/>Logging,<sp/>file<sp/>I/O</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Advanced<sp/>Topics</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Custom<sp/>Rendering<sp/>Backend</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">To<sp/>implement<sp/>a<sp/>custom<sp/>rendering<sp/>backend:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">1.<sp/>Implement<sp/>`RenderingDevice`<sp/>interface</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>Extend<sp/>`Mesh`<sp/>for<sp/>your<sp/>platform<sp/>(e.g.,<sp/>`VulkanMesh`)</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>Extend<sp/>`Shader`<sp/>for<sp/>your<sp/>platform<sp/>(e.g.,<sp/>`VulkanShader`)</highlight></codeline>
+<codeline><highlight class="normal">4.<sp/>Create<sp/>a<sp/>factory<sp/>(e.g.,<sp/>`VulkanFactory`)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Custom<sp/>Input<sp/>Adapter</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">To<sp/>implement<sp/>a<sp/>custom<sp/>input<sp/>adapter:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">1.<sp/>Implement<sp/>`InputAdapter`<sp/>interface</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>Map<sp/>platform-specific<sp/>events<sp/>to<sp/>helios<sp/>types</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>Update<sp/>`GamepadState`<sp/>on<sp/>polling</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>API<sp/>Documentation</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">For<sp/>detailed<sp/>class-by-class<sp/>documentation,<sp/>see<sp/>the<sp/>[Doxygen-generated<sp/>API<sp/>reference](./api/html/index.html).</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Examples</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Check<sp/>the<sp/>[examples/](../examples/)<sp/>directory<sp/>for<sp/>complete<sp/>working<sp/>examples:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>**[Simple<sp/>Cube<sp/>Rendering](../examples/simple_cube_rendering/README.md)**<sp/>-<sp/>Basic<sp/>rendering<sp/>tutorial</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Game<sp/>Controller<sp/>Input**<sp/>-<sp/>Input<sp/>handling<sp/>demo</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>License</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">`helios`<sp/>is<sp/>distributed<sp/>under<sp/>the<sp/>MIT-license.</highlight></codeline>
+    </programlisting>
+    <location file="docs/heliosapi.md"/>
+  </compounddef>
+</doxygen>

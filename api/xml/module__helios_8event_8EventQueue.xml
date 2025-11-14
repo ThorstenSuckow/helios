@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8event_8EventQueue" kind="module">
+    <compoundname>helios.event.EventQueue</compoundname>
+    <innerfile refid="EventQueue_8ixx">EventQueue.ixx</innerfile>
+    <innerclass refid="classhelios_1_1event_1_1EventQueue" prot="public">helios::event::EventQueue</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1event_1_1EventQueue_1afb677226c53f3fcfd7fe081573d3f8d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::event::EventQueue::~EventQueue</definition>
+        <argsstring>()=default</argsstring>
+        <name>~EventQueue</name>
+        <qualifiedname>helios::event::EventQueue::~EventQueue</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/event/EventQueue.ixx" line="29" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1event_1_1EventQueue_1a28eeb42988a14d9f1e9457bf39a00666" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>EventQueue &amp;</type>
+        <definition>virtual EventQueue &amp; helios::event::EventQueue::add</definition>
+        <argsstring>(std::unique_ptr&lt; const Event &gt; event)=0</argsstring>
+        <name>add</name>
+        <qualifiedname>helios::event::EventQueue::add</qualifiedname>
+        <reimplementedby refid="classhelios_1_1event_1_1DequeEventQueue_1ab1224ebbf6fd85dbc31df77d05df1945">add</reimplementedby>
+        <param>
+          <type>std::unique_ptr&lt; const Event &gt;</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+<para>Adds a new event to the queue. The queue will take ownership of the provided event. The concrete position in the queue for the event will depend on the concrete implementation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A unique_ptr to the event this queue should buffer.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classhelios_1_1event_1_1EventQueue" kindref="compound">EventQueue</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/event/EventQueue.ixx" line="42" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1event_1_1EventQueue_1ababbf4a41e5a10e17abb6a5c3b20b84d" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>EventQueue &amp;</type>
+        <definition>virtual EventQueue &amp; helios::event::EventQueue::addOrReplace</definition>
+        <argsstring>(std::unique_ptr&lt; const Event &gt; event, const std::function&lt; bool(const std::unique_ptr&lt; const Event &gt; &amp;evt, const std::unique_ptr&lt; const Event &gt; &amp;e)&gt; &amp;cmpFunc)=0</argsstring>
+        <name>addOrReplace</name>
+        <qualifiedname>helios::event::EventQueue::addOrReplace</qualifiedname>
+        <reimplementedby refid="classhelios_1_1event_1_1DequeEventQueue_1a3fe351df50c4bb50d575471cc0bc195b">addOrReplace</reimplementedby>
+        <param>
+          <type>std::unique_ptr&lt; const Event &gt;</type>
+          <declname>event</declname>
+        </param>
+        <param>
+          <type>const std::function&lt; bool(const std::unique_ptr&lt; const Event &gt; &amp;evt, const std::unique_ptr&lt; const Event &gt; &amp;e)&gt; &amp;</type>
+          <declname>cmpFunc</declname>
+        </param>
+        <briefdescription>
+<para>Adds a new <ref refid="classhelios_1_1event_1_1Event" kindref="compound">Event</ref> to the queue or replaces an existing one. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method allows for event management of events that should only be buffered once, but are added to the queue from different sources in the application, such that controlling the addition of events is not possible.</para>
+<para>Implementing classes ar responsible for treating the specified cmpFunc, provided by the caller.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A unique_ptr to a new or existing event that should be replaced. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cmpFunc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A compare function that provides the logic for looking up the event that should be replaced with the specified event. The compFunc must accept two event arguments, whereas the first argument is the <ref refid="classhelios_1_1event_1_1Event" kindref="compound">Event</ref> to add, and the second event is an existing event of the queue.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classhelios_1_1event_1_1EventQueue" kindref="compound">EventQueue</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/event/EventQueue.ixx" line="64" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1event_1_1EventQueue_1af36e46db487566d8d3c51a690c46ab86" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool helios::event::EventQueue::empty</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>empty</name>
+        <qualifiedname>helios::event::EventQueue::empty</qualifiedname>
+        <reimplementedby refid="classhelios_1_1event_1_1DequeEventQueue_1a594ade70466608e86045c4b1679772fc">empty</reimplementedby>
+        <briefdescription>
+<para>Returns true if the queue is empty, otherwise false. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if the queue is empty, otherwise false. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/event/EventQueue.ixx" line="74" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1event_1_1EventQueue_1a5a2fd34261a19ae471f4ede5bf474963" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::unique_ptr&lt; const Event &gt;</type>
+        <definition>virtual std::unique_ptr&lt; const Event &gt; helios::event::EventQueue::next</definition>
+        <argsstring>()=0</argsstring>
+        <name>next</name>
+        <qualifiedname>helios::event::EventQueue::next</qualifiedname>
+        <reimplementedby refid="classhelios_1_1event_1_1DequeEventQueue_1a400f3c1111c28d503e64464922147505">next</reimplementedby>
+        <briefdescription>
+<para>Retrieves and removes the &quot;next&quot; event in the queue. Implementing classes are responsible for defining the meaning of &quot;next&quot;, i.e., FIFO, LIFO, ordered after a particular criteria etc. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The ownership of the event is transferred to the caller.</para>
+<para><simplesect kind="return"><para>a unique_ptr to the next event. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/event/EventQueue.ixx" line="86" column="33"/>
+        <references refid="classhelios_1_1event_1_1EventQueue_1a5a2fd34261a19ae471f4ede5bf474963">helios::event::EventQueue::next</references>
+        <referencedby refid="classhelios_1_1event_1_1EventQueue_1a5a2fd34261a19ae471f4ede5bf474963">helios::event::EventQueue::next</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/event/EventQueue.ixx" line="10" column="15"/>
+  </compounddef>
+</doxygen>

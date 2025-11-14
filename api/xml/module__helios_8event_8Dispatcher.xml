@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8event_8Dispatcher" kind="module">
+    <compoundname>helios.event.Dispatcher</compoundname>
+    <innerfile refid="Dispatcher_8ixx">Dispatcher.ixx</innerfile>
+    <innerclass refid="classhelios_1_1event_1_1Dispatcher" prot="public">helios::event::Dispatcher</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1event_1_1Dispatcher_1afa5eef849fd9c7cb2b11d1929713de19" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::type_index, std::vector&lt; std::function&lt; void(const Event &amp;)&gt; &gt; &gt;</type>
+        <definition>std::unordered_map&lt;std::type_index, std::vector&lt;std::function&lt;void(const Event&amp;)&gt; &gt; &gt; helios::event::Dispatcher::callbacks_</definition>
+        <argsstring></argsstring>
+        <name>callbacks_</name>
+        <qualifiedname>helios::event::Dispatcher::callbacks_</qualifiedname>
+        <briefdescription>
+<para>Internal map to store registered callbacks for various event types. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/event/Dispatcher.ixx" line="33" column="28" bodyfile="include/helios/event/Dispatcher.ixx" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1event_1_1Dispatcher_1aee202c4c9b5815367964b788367a8741" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename EventType</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void helios::event::Dispatcher::subscribe</definition>
+        <argsstring>(std::function&lt; void(const EventType &amp;)&gt; callback)</argsstring>
+        <name>subscribe</name>
+        <qualifiedname>helios::event::Dispatcher::subscribe</qualifiedname>
+        <param>
+          <type>std::function&lt; void(const EventType &amp;)&gt;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+<para>Subscribes a callback to a specific event type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Registers a `std::function` to be invoked when an event of `EventType` is dispatched. The callback will receive the dispatched event as a const reference.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>EventType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The specific type of event to subscribe to. Must derive from `Event`. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>callback</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The callback function to be executed when the event is dispatched. The function should accept `const EventType&amp;` as its single argument. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/event/Dispatcher.ixx" line="47" column="18" bodyfile="include/helios/event/Dispatcher.ixx" bodystart="47" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1event_1_1Dispatcher_1a191d08252f8ad42a53c00dc90a3423da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::event::Dispatcher::dispatch</definition>
+        <argsstring>(std::unique_ptr&lt; const Event &gt; event)</argsstring>
+        <name>dispatch</name>
+        <qualifiedname>helios::event::Dispatcher::dispatch</qualifiedname>
+        <param>
+          <type>std::unique_ptr&lt; const Event &gt;</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+<para>Dispatches an event to all subscribed callbacks (i.e. listeners) of the specific EventType. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method will take ownership of the event to dispatch. Once this method returns, the unique_ptr to the `Event` will be a nullptr.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A unique_ptr to the event instance to be dispatched. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/event/Dispatcher.ixx" line="70" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/event/Dispatcher.ixx" line="11" column="15"/>
+  </compounddef>
+</doxygen>

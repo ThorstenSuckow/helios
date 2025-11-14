@@ -1,0 +1,304 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8rendering_8RenderingDevice" kind="module">
+    <compoundname>helios.rendering.RenderingDevice</compoundname>
+    <innerfile refid="RenderingDevice_8ixx">RenderingDevice.ixx</innerfile>
+    <innerclass refid="classhelios_1_1rendering_1_1RenderingDevice" prot="public">helios::rendering::RenderingDevice</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1RenderingDevice_1a4aa0809551525f58d3712a9aeb32dd6e" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::rendering::RenderingDevice::initialized_</definition>
+        <argsstring></argsstring>
+        <name>initialized_</name>
+        <qualifiedname>helios::rendering::RenderingDevice::initialized_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>Reflects the initialization state of this device. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/RenderingDevice.ixx" line="35" column="14" bodyfile="include/helios/rendering/RenderingDevice.ixx" bodystart="35" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1rendering_1_1RenderingDevice_1ab900c2b99f512ccdf6c33435db3da8b0" compoundref="RenderingDevice_8ixx" startline="125" endline="127">helios::rendering::RenderingDevice::initialized</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1RenderingDevice_1a30cb723bfe96390f00716c2c80693248" prot="protected" static="no" mutable="no">
+        <type>const <ref refid="classhelios_1_1util_1_1log_1_1Logger" kindref="compound">helios::util::log::Logger</ref> &amp;</type>
+        <definition>const helios::util::log::Logger&amp; helios::rendering::RenderingDevice::logger_</definition>
+        <argsstring></argsstring>
+        <name>logger_</name>
+        <qualifiedname>helios::rendering::RenderingDevice::logger_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1util_1_1log_1_1LogManager_1aeb3c579d6cd53e2ca50384ceadd5d3a6" kindref="member">helios::util::log::LogManager::getInstance</ref>().registerLogger(
+            <ref refid="OpenGLUniformLocationMap_8ixx_1acbc04f24078582c7d42b2085be5d5750" kindref="member">HELIOS_LOG_SCOPE</ref>
+        )</initializer>
+        <briefdescription>
+<para>The logger used with this <ref refid="classhelios_1_1rendering_1_1RenderingDevice" kindref="compound">RenderingDevice</ref> instance. Defaults to HELIOS_LOG_SCOPE. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><xrefsect id="todo_1_todo000011"><xreftitle>Todo</xreftitle><xrefdescription><para>constructor injection </para>
+</xrefdescription></xrefsect></para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/RenderingDevice.ixx" line="43" column="41" bodyfile="include/helios/rendering/RenderingDevice.ixx" bodystart="43" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderingDevice_1a062e66375a1f27b648d73f5e9c903944" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::rendering::RenderingDevice::~RenderingDevice</definition>
+        <argsstring>()=default</argsstring>
+        <name>~RenderingDevice</name>
+        <qualifiedname>helios::rendering::RenderingDevice::~RenderingDevice</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/RenderingDevice.ixx" line="48" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderingDevice_1af3fc1c63595e065986ed44b1754ed49a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void helios::rendering::RenderingDevice::init</definition>
+        <argsstring>()=0</argsstring>
+        <name>init</name>
+        <qualifiedname>helios::rendering::RenderingDevice::init</qualifiedname>
+        <reimplementedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1aa97dd0a5a8fb57989616b7fac5139f8b">init</reimplementedby>
+        <briefdescription>
+<para>Initializes this rendering device. Should be called when the graphics context was created and before any rendering operations are performed. Implementing APIs should load pointers to underlying GL functions or provide similar API-specific setup. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::runtime_error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if initialization of the device fails. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/RenderingDevice.ixx" line="59" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderingDevice_1a88169f8a968bce5a7d67446c61504d2f" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void helios::rendering::RenderingDevice::beginRenderPass</definition>
+        <argsstring>(helios::rendering::RenderPass &amp;renderPass) const noexcept=0</argsstring>
+        <name>beginRenderPass</name>
+        <qualifiedname>helios::rendering::RenderingDevice::beginRenderPass</qualifiedname>
+        <reimplementedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a2f589946c2ca4029fc3d3f3ba7820c99">beginRenderPass</reimplementedby>
+        <param>
+          <type><ref refid="classhelios_1_1rendering_1_1RenderPass" kindref="compound">helios::rendering::RenderPass</ref> &amp;</type>
+          <declname>renderPass</declname>
+        </param>
+        <briefdescription>
+<para>Signals this device that the application is now ready to begin a new render pass. Implementing APIs should prepare the rendering surface at this point and clear specific buffers. This method should be called at the start of each frame before any drawing occurs. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>renderPass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="classhelios_1_1rendering_1_1RenderPass" kindref="compound">RenderPass</ref> that is about to be processed by the rendering device. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/RenderingDevice.ixx" line="69" column="22"/>
+        <referencedby refid="classhelios_1_1rendering_1_1RenderingDevice_1abf7617082018d54e151c9399b57160f4" compoundref="RenderingDevice_8ixx" startline="100" endline="104">helios::rendering::RenderingDevice::render</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderingDevice_1a64e0eddc87562bc3e40ecc2cd9439e6b" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void helios::rendering::RenderingDevice::doRender</definition>
+        <argsstring>(helios::rendering::RenderPass &amp;renderPass) const noexcept=0</argsstring>
+        <name>doRender</name>
+        <qualifiedname>helios::rendering::RenderingDevice::doRender</qualifiedname>
+        <reimplementedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a205e92c86ad75f4a23903f80e092a9f0">doRender</reimplementedby>
+        <param>
+          <type><ref refid="classhelios_1_1rendering_1_1RenderPass" kindref="compound">helios::rendering::RenderPass</ref> &amp;</type>
+          <declname>renderPass</declname>
+        </param>
+        <briefdescription>
+<para>Advises this <ref refid="classhelios_1_1rendering_1_1RenderingDevice" kindref="compound">RenderingDevice</ref> to process the specified <ref refid="classhelios_1_1rendering_1_1RenderPass" kindref="compound">RenderPass</ref>. A `RenderPass` consists of `RenderCommand`s this RenderDevice executes, i.e. binding meshes, materials and shaders as well as drawing geometry. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>renderPass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A ref to the <ref refid="classhelios_1_1rendering_1_1RenderPass" kindref="compound">RenderPass</ref> that holds the `RenderCommand`s to be executed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/RenderingDevice.ixx" line="80" column="22"/>
+        <referencedby refid="classhelios_1_1rendering_1_1RenderingDevice_1abf7617082018d54e151c9399b57160f4" compoundref="RenderingDevice_8ixx" startline="100" endline="104">helios::rendering::RenderingDevice::render</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderingDevice_1a1e3cfb7c060175c9005102a121f4c36d" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void helios::rendering::RenderingDevice::endRenderPass</definition>
+        <argsstring>(helios::rendering::RenderPass &amp;renderPass) const noexcept=0</argsstring>
+        <name>endRenderPass</name>
+        <qualifiedname>helios::rendering::RenderingDevice::endRenderPass</qualifiedname>
+        <reimplementedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1aa9b366cbdb4aa227567d8a32f0fdca95">endRenderPass</reimplementedby>
+        <param>
+          <type><ref refid="classhelios_1_1rendering_1_1RenderPass" kindref="compound">helios::rendering::RenderPass</ref> &amp;</type>
+          <declname>renderPass</declname>
+        </param>
+        <briefdescription>
+<para>Ends the specified render pass of this <ref refid="classhelios_1_1rendering_1_1RenderingDevice" kindref="compound">RenderingDevice</ref>. This method should be called when the renderPass was processed by the <ref refid="classhelios_1_1rendering_1_1RenderingDevice" kindref="compound">RenderingDevice</ref>, before the window swaps the buffers. Implementing classes should take care of unbinding frame buffers and/or flushing command buffers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>renderPass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="classhelios_1_1rendering_1_1RenderPass" kindref="compound">RenderPass</ref> that was processed by the rendering device. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/RenderingDevice.ixx" line="92" column="22"/>
+        <referencedby refid="classhelios_1_1rendering_1_1RenderingDevice_1abf7617082018d54e151c9399b57160f4" compoundref="RenderingDevice_8ixx" startline="100" endline="104">helios::rendering::RenderingDevice::render</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderingDevice_1abf7617082018d54e151c9399b57160f4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::rendering::RenderingDevice::render</definition>
+        <argsstring>(helios::rendering::RenderPass &amp;renderPass) const</argsstring>
+        <name>render</name>
+        <qualifiedname>helios::rendering::RenderingDevice::render</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1rendering_1_1RenderPass" kindref="compound">helios::rendering::RenderPass</ref> &amp;</type>
+          <declname>renderPass</declname>
+        </param>
+        <briefdescription>
+<para>Convenient method to subsequently call `beginRenderPass`, `doRender`, `endRenderPass` (in this order) with the specified `RenderPass`. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>renderPass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="classhelios_1_1rendering_1_1RenderPass" kindref="compound">RenderPass</ref> to process by this <ref refid="classhelios_1_1rendering_1_1RenderingDevice" kindref="compound">RenderingDevice</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/RenderingDevice.ixx" line="100" column="14" bodyfile="include/helios/rendering/RenderingDevice.ixx" bodystart="100" bodyend="104"/>
+        <references refid="classhelios_1_1rendering_1_1RenderingDevice_1a88169f8a968bce5a7d67446c61504d2f">helios::rendering::RenderingDevice::beginRenderPass</references>
+        <references refid="classhelios_1_1rendering_1_1RenderingDevice_1a64e0eddc87562bc3e40ecc2cd9439e6b">helios::rendering::RenderingDevice::doRender</references>
+        <references refid="classhelios_1_1rendering_1_1RenderingDevice_1a1e3cfb7c060175c9005102a121f4c36d">helios::rendering::RenderingDevice::endRenderPass</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderingDevice_1a701d970cf1e0c0c71a24ab1b104a15ea" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void helios::rendering::RenderingDevice::setViewport</definition>
+        <argsstring>(int x, int y, int width, int height) const noexcept=0</argsstring>
+        <name>setViewport</name>
+        <qualifiedname>helios::rendering::RenderingDevice::setViewport</qualifiedname>
+        <reimplementedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1afc52da68a2755601e80268de38dc9ac3">setViewport</reimplementedby>
+        <param>
+          <type>int</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+<para>Sets the viewport for this <ref refid="classhelios_1_1rendering_1_1RenderingDevice" kindref="compound">RenderingDevice</ref>. The viewport defines the rectangular area where the final image is drawn. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>x-coordinate of the lower left corner of the viewport </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>y-coordinate of the lower left corner of the viewport </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>width</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the viewport, in pixels </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>height</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the viewport, in pixels </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/RenderingDevice.ixx" line="115" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderingDevice_1ab900c2b99f512ccdf6c33435db3da8b0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::rendering::RenderingDevice::initialized</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>initialized</name>
+        <qualifiedname>helios::rendering::RenderingDevice::initialized</qualifiedname>
+        <briefdescription>
+<para>Returns the initialized state of this rendering device. This method is guaranteed to return true if the device was successfully initialized, otherwise false. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if the device was successfully initialized, otherwise false. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/RenderingDevice.ixx" line="125" column="15" bodyfile="include/helios/rendering/RenderingDevice.ixx" bodystart="125" bodyend="127"/>
+        <references refid="classhelios_1_1rendering_1_1RenderingDevice_1a4aa0809551525f58d3712a9aeb32dd6e" compoundref="RenderingDevice_8ixx" startline="35">helios::rendering::RenderingDevice::initialized_</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/rendering/RenderingDevice.ixx" line="7" column="15"/>
+  </compounddef>
+</doxygen>

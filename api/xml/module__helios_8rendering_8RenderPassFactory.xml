@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8rendering_8RenderPassFactory" kind="module">
+    <compoundname>helios.rendering.RenderPassFactory</compoundname>
+    <innerfile refid="RenderPassFactory_8ixx">RenderPassFactory.ixx</innerfile>
+    <innerclass refid="classhelios_1_1rendering_1_1RenderPassFactory" prot="public">helios::rendering::RenderPassFactory</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1RenderPassFactory_1aab5f2c3ba19ec1b271108b51e96bd2ac" prot="protected" static="no" mutable="no">
+        <type>const <ref refid="classhelios_1_1util_1_1log_1_1Logger" kindref="compound">helios::util::log::Logger</ref> &amp;</type>
+        <definition>const helios::util::log::Logger&amp; helios::rendering::RenderPassFactory::logger_</definition>
+        <argsstring></argsstring>
+        <name>logger_</name>
+        <qualifiedname>helios::rendering::RenderPassFactory::logger_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1util_1_1log_1_1LogManager_1aeb3c579d6cd53e2ca50384ceadd5d3a6" kindref="member">helios::util::log::LogManager::getInstance</ref>().registerLogger(
+            <ref refid="OpenGLUniformLocationMap_8ixx_1acbc04f24078582c7d42b2085be5d5750" kindref="member">HELIOS_LOG_SCOPE</ref>
+        )</initializer>
+        <briefdescription>
+<para>The logger used with this <ref refid="classhelios_1_1rendering_1_1RenderPassFactory" kindref="compound">RenderPassFactory</ref>. Defaults to HELIOS_LOG_SCOPE. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><xrefsect id="todo_1_todo000013"><xreftitle>Todo</xreftitle><xrefdescription><para>constructor injection </para>
+</xrefdescription></xrefsect></para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/RenderPassFactory.ixx" line="44" column="41" bodyfile="include/helios/rendering/RenderPassFactory.ixx" bodystart="44" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderPassFactory_1aa496584b96f57e06cc53dc24e797f0b0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>RenderPassFactory &amp;</type>
+        <definition>static RenderPassFactory &amp; helios::rendering::RenderPassFactory::getInstance</definition>
+        <argsstring>()</argsstring>
+        <name>getInstance</name>
+        <qualifiedname>helios::rendering::RenderPassFactory::getInstance</qualifiedname>
+        <briefdescription>
+<para>Returns the singleton instance of `RenderPassFactory`. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A reference to the single `RenderPassFactory` instance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/RenderPassFactory.ixx" line="54" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderPassFactory_1ab3de082b56a0e7b2ca11da66453252ef" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>RenderPass</type>
+        <definition>RenderPass helios::rendering::RenderPassFactory::buildRenderPass</definition>
+        <argsstring>(const helios::scene::Snapshot &amp;snapshot) const</argsstring>
+        <name>buildRenderPass</name>
+        <qualifiedname>helios::rendering::RenderPassFactory::buildRenderPass</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">helios::scene::Snapshot</ref> &amp;</type>
+          <declname>snapshot</declname>
+        </param>
+        <briefdescription>
+<para>Builds a `RenderPass` from a given `helios::scene::Snapshot`. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method orchestrates the creation of a `RenderQueue` and populates it with `RenderCommand`s derived from the `SnapshotItem`s within the snapshot. It also sets up frame-specific uniform values for the `RenderPass`.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>snapshot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A const ref to the snapshot containing the scene data for which the `RenderPass` is to be built.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A fully constructed `RenderPass` object. The returned object owns the `RenderQueue` and the frame-specific `UniformValueMap`.</para>
+</simplesect>
+<simplesect kind="see"><para>::populateRenderQueue() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/RenderPassFactory.ixx" line="71" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderPassFactory_1ab24ad189d343ee9bdc7ed6395ee76bcb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::rendering::RenderPassFactory::populateRenderQueue</definition>
+        <argsstring>(const helios::scene::Snapshot &amp;snapshot, helios::rendering::RenderQueue &amp;renderQueue) const</argsstring>
+        <name>populateRenderQueue</name>
+        <qualifiedname>helios::rendering::RenderPassFactory::populateRenderQueue</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">helios::scene::Snapshot</ref> &amp;</type>
+          <declname>snapshot</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1rendering_1_1RenderQueue" kindref="compound">helios::rendering::RenderQueue</ref> &amp;</type>
+          <declname>renderQueue</declname>
+        </param>
+        <briefdescription>
+<para>Populates an existing `RenderQueue` with `RenderCommand`s based on a `Snapshot`. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method clears the specified `RenderQueue` before adding new `RenderCommand`s to it.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>snapshot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A const ref to the `Snapshot` providing scene data. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>renderQueue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A ref to the `RenderQueue` to be filled. This queue will be cleared before new commands are added.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para>::makeRenderCommand() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/RenderPassFactory.ixx" line="84" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1RenderPassFactory_1a18d1346e8e3c78358ccb1872da3125a3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::unique_ptr&lt; RenderCommand &gt;</type>
+        <definition>std::unique_ptr&lt; RenderCommand &gt; helios::rendering::RenderPassFactory::makeRenderCommand</definition>
+        <argsstring>(const helios::scene::SnapshotItem &amp;snapshotItem) const noexcept</argsstring>
+        <name>makeRenderCommand</name>
+        <qualifiedname>helios::rendering::RenderPassFactory::makeRenderCommand</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1scene_1_1SnapshotItem" kindref="compound">helios::scene::SnapshotItem</ref> &amp;</type>
+          <declname>snapshotItem</declname>
+        </param>
+        <briefdescription>
+<para>Creates a single `RenderCommand` from a `helios::scene::SnapshotItem`. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method extracts necessary data from the `SnapshotItem` and bundles them into a `RenderCommand` object.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>snapshotItem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A const ref to the `SnapshotItem` from which to create the `RenderCommand`.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A unique pointer to the newly created `RenderCommand`. Returns nullptr if the associated <ref refid="classhelios_1_1rendering_1_1Renderable" kindref="compound">Renderable</ref> is no longer available, or if the shader is not available from the `Renderable`&apos;s material, or if the mesh is no longer available.</para>
+</simplesect>
+<xrefsect id="todo_1_todo000014"><xreftitle>Todo</xreftitle><xrefdescription><para>future versions might want to use a FactoryMethod in <ref refid="classhelios_1_1rendering_1_1RenderCommand" kindref="compound">RenderCommand</ref> that takes a SnapshotItem and creates a <ref refid="classhelios_1_1rendering_1_1RenderCommand" kindref="compound">RenderCommand</ref> from it (e.g. `RenderCommand::fromSnapshotItem()`); or a Factory `RenderCommandBuilder()` with fluent configuration `.withShader().withMesh().build();` </para>
+</xrefdescription></xrefsect></para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/RenderPassFactory.ixx" line="106" column="26"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/rendering/RenderPassFactory.ixx" line="10" column="15"/>
+  </compounddef>
+</doxygen>

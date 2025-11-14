@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1app_1_1controller_1_1Controller" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>helios::app::controller::Controller</compoundname>
+    <derivedcompoundref refid="classhelios_1_1app_1_1controller_1_1WindowRenderingController" prot="public" virt="non-virtual">helios::app::controller::WindowRenderingController</derivedcompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1app_1_1controller_1_1Controller_1a139f608987cdf6c04c9aaef03aaeecda" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::app::controller::Controller::~Controller</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Controller</name>
+        <qualifiedname>helios::app::controller::Controller::~Controller</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/app/controller/Controller.ixx" line="22" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1app_1_1controller_1_1Controller_1aefb5f61bd95699abaeebad8f50e2647e" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void helios::app::controller::Controller::subscribeTo</definition>
+        <argsstring>(helios::event::Dispatcher &amp;dispatcher)=0</argsstring>
+        <name>subscribeTo</name>
+        <qualifiedname>helios::app::controller::Controller::subscribeTo</qualifiedname>
+        <reimplementedby refid="classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController_1ab3f4a1cc93fefe913ad49a25c7f28e25">subscribeTo</reimplementedby>
+        <param>
+          <type><ref refid="classhelios_1_1event_1_1Dispatcher" kindref="compound">helios::event::Dispatcher</ref> &amp;</type>
+          <declname>dispatcher</declname>
+        </param>
+        <briefdescription>
+<para>Registers this controller with the specified Dispatcher. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method should be called whenever a controller is interested in abn event dispatched by the specified Dispatcher.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dispatcher</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/app/controller/Controller.ixx" line="32" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1app_1_1controller_1_1Controller_1ae5ae6e79e200ac65022e2545de250741" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool helios::app::controller::Controller::init</definition>
+        <argsstring>()=0</argsstring>
+        <name>init</name>
+        <qualifiedname>helios::app::controller::Controller::init</qualifiedname>
+        <reimplementedby refid="classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController_1ae3243ccfbe78b6ec5365acd2d5aafbb4">init</reimplementedby>
+        <briefdescription>
+<para>Initializes this controller. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The initialization state is defined by deriving classes.</para>
+<para><simplesect kind="return"><para>bool true if the controller was successfully initialized and is in a valid state, otherwise false, signaling this controller should not be used further. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/app/controller/Controller.ixx" line="42" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Abstract base class for application controllers. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Derived classes are expected to implement methods for event subscription/handling and optional initialization. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>helios::app::controller::BasicWindowRenderingController</label>
+        <link refid="classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>helios::app::controller::Controller</label>
+        <link refid="classhelios_1_1app_1_1controller_1_1Controller"/>
+      </node>
+      <node id="2">
+        <label>helios::app::controller::WindowRenderingController</label>
+        <link refid="classhelios_1_1app_1_1controller_1_1WindowRenderingController"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="include/helios/app/controller/Controller.ixx" line="19" column="5" bodyfile="include/helios/app/controller/Controller.ixx" bodystart="19" bodyend="43"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1app_1_1controller_1_1Controller_1ae5ae6e79e200ac65022e2545de250741" prot="public" virt="pure-virtual"><scope>helios::app::controller::Controller</scope><name>init</name></member>
+      <member refid="classhelios_1_1app_1_1controller_1_1Controller_1aefb5f61bd95699abaeebad8f50e2647e" prot="public" virt="pure-virtual"><scope>helios::app::controller::Controller</scope><name>subscribeTo</name></member>
+      <member refid="classhelios_1_1app_1_1controller_1_1Controller_1a139f608987cdf6c04c9aaef03aaeecda" prot="public" virt="virtual"><scope>helios::app::controller::Controller</scope><name>~Controller</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

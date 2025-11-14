@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8scene_8CullNoneStrategy" kind="module">
+    <compoundname>helios.scene.CullNoneStrategy</compoundname>
+    <innerfile refid="CullNoneStrategy_8ixx">CullNoneStrategy.ixx</innerfile>
+    <innerclass refid="classhelios_1_1scene_1_1CullNoneStrategy" prot="public">helios::scene::CullNoneStrategy</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1scene_1_1CullNoneStrategy_1ae80f1dc83394827d2515e22d0f7ed7b5" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::scene::CullNoneStrategy::cull</definition>
+        <argsstring>(std::vector&lt; const helios::scene::SceneNode * &gt; &amp;nodes, const SceneNode &amp;node) const</argsstring>
+        <name>cull</name>
+        <qualifiedname>helios::scene::CullNoneStrategy::cull</qualifiedname>
+        <param>
+          <type>std::vector&lt; const <ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">helios::scene::SceneNode</ref> * &gt; &amp;</type>
+          <declname>nodes</declname>
+        </param>
+        <param>
+          <type>const SceneNode &amp;</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+<para>Internal function to populate the vector recursively with the node and its children. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>nodes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The vector holding the const pointers to the SceneNodes </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>node</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current node to process. This node is added to nodes, then this method is called for each child node of node. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/CullNoneStrategy.ixx" line="33" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1scene_1_1CullNoneStrategy_1a2f2c1bebab877da27e46516363ac7996" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="virtual">
+        <type>std::vector&lt; const <ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">helios::scene::SceneNode</ref> * &gt;</type>
+        <definition>std::vector&lt; const helios::scene::SceneNode * &gt; helios::scene::CullNoneStrategy::cull</definition>
+        <argsstring>(const helios::scene::Camera &amp;camera, const helios::scene::SceneNode &amp;root) override</argsstring>
+        <name>cull</name>
+        <qualifiedname>helios::scene::CullNoneStrategy::cull</qualifiedname>
+        <reimplements refid="classhelios_1_1scene_1_1FrustumCullingStrategy_1abd63e1dcf92b2a8fb7b019d3b4edf448">cull</reimplements>
+        <param>
+          <type>const <ref refid="classhelios_1_1scene_1_1Camera" kindref="compound">helios::scene::Camera</ref> &amp;</type>
+          <declname>camera</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">helios::scene::SceneNode</ref> &amp;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+<para>Returns all <ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">SceneNode</ref> of the specified scene, regardless of their visibility relative to the camera&apos;s view frustum. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>camera</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The camera defining the view frustum. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>root</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parent of the hierarchy to cull.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A vector with const pointers to the SceneNodes found under `root`. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/CullNoneStrategy.ixx" line="49" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/scene/CullNoneStrategy.ixx" line="9" column="15"/>
+  </compounddef>
+</doxygen>

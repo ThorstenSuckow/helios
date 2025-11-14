@@ -1,0 +1,333 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice" kind="class" language="C++" prot="public">
+    <compoundname>helios::ext::opengl::rendering::OpenGLDevice</compoundname>
+    <basecompoundref refid="classhelios_1_1rendering_1_1RenderingDevice" prot="public" virt="non-virtual">helios::rendering::RenderingDevice</basecompoundref>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a232b9959fd6bc53b3e012b6a2587ddad" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>GLenum</type>
+        <definition>GLenum helios::ext::opengl::rendering::OpenGLDevice::toOpenGL</definition>
+        <argsstring>(helios::rendering::model::config::PrimitiveType primitiveType) const noexcept</argsstring>
+        <name>toOpenGL</name>
+        <qualifiedname>helios::ext::opengl::rendering::OpenGLDevice::toOpenGL</qualifiedname>
+        <param>
+          <type><ref refid="namespacehelios_1_1rendering_1_1model_1_1config_1a13a7711e9718d01b8f09dd183c6777d5" kindref="member">helios::rendering::model::config::PrimitiveType</ref></type>
+          <declname>primitiveType</declname>
+        </param>
+        <briefdescription>
+<para>Translates helios abstract PrimitiveType enum to its corresponding OpenGL GLenum value. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This ia a utility function used exclusively by the <ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice" kindref="compound">OpenGLDevice</ref> to interpret the API-agnostic primitive type requested by the helios&apos; configuration.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>primitiveType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The API-agnostic PrimitiveType value.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The corresponding OpenGL primitive type as a GLenum. If mapping didn&apos;t succeed, the function falls back to GL_TRIANGLES. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/opengl/rendering/OpenGLDevice.ixx" line="36" column="17"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a8f15cee19cf071f05f1f320ca30243a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::ext::opengl::rendering::OpenGLDevice::~OpenGLDevice</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~OpenGLDevice</name>
+        <qualifiedname>helios::ext::opengl::rendering::OpenGLDevice::~OpenGLDevice</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/opengl/rendering/OpenGLDevice.ixx" line="40" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1aa97dd0a5a8fb57989616b7fac5139f8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void helios::ext::opengl::rendering::OpenGLDevice::init</definition>
+        <argsstring>() override</argsstring>
+        <name>init</name>
+        <qualifiedname>helios::ext::opengl::rendering::OpenGLDevice::init</qualifiedname>
+        <reimplements refid="classhelios_1_1rendering_1_1RenderingDevice_1af3fc1c63595e065986ed44b1754ed49a">init</reimplements>
+        <briefdescription>
+<para>Initializes the OpenGL device to access modern OpenGL. This method must be called **after** the helios-Application&apos;s setCurrent() was called for creating a current context. This OpenGL-Device will then load from this context. This method will use the `gladLoadGl`-method to in conjunction with `glfwGetProcAddress`, which returns the address of the specific OpenGL core. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ulink url="https://www.glfw.org/docs/latest/group__context.html#ga35f1837e6f666781842483937612f163">https://www.glfw.org/docs/latest/group__context.html#ga35f1837e6f666781842483937612f163</ulink></para>
+</simplesect>
+<xrefsect id="todo_1_todo000003"><xreftitle>Todo</xreftitle><xrefdescription><para>provide abstraction for glfwGetProcAddress </para>
+</xrefdescription></xrefsect></para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/opengl/rendering/OpenGLDevice.ixx" line="55" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a2f589946c2ca4029fc3d3f3ba7820c99" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::ext::opengl::rendering::OpenGLDevice::beginRenderPass</definition>
+        <argsstring>(helios::rendering::RenderPass &amp;renderPass) const noexcept override</argsstring>
+        <name>beginRenderPass</name>
+        <qualifiedname>helios::ext::opengl::rendering::OpenGLDevice::beginRenderPass</qualifiedname>
+        <reimplements refid="classhelios_1_1rendering_1_1RenderingDevice_1a88169f8a968bce5a7d67446c61504d2f">beginRenderPass</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1rendering_1_1RenderPass" kindref="compound">helios::rendering::RenderPass</ref> &amp;</type>
+          <declname>renderPass</declname>
+        </param>
+        <briefdescription>
+<para>Begins a new render pass. This implementation makes sure that the rendering surface is cleared with the current clear-color, which can be configured via clearColor().-. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a7d3e7296865c619715f7d367448874a3" kindref="member">clear()</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>clearColor(); </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/opengl/rendering/OpenGLDevice.ixx" line="65" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a205e92c86ad75f4a23903f80e092a9f0" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::ext::opengl::rendering::OpenGLDevice::doRender</definition>
+        <argsstring>(helios::rendering::RenderPass &amp;renderPass) const noexcept override</argsstring>
+        <name>doRender</name>
+        <qualifiedname>helios::ext::opengl::rendering::OpenGLDevice::doRender</qualifiedname>
+        <reimplements refid="classhelios_1_1rendering_1_1RenderingDevice_1a64e0eddc87562bc3e40ecc2cd9439e6b">doRender</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1rendering_1_1RenderPass" kindref="compound">helios::rendering::RenderPass</ref> &amp;</type>
+          <declname>renderPass</declname>
+        </param>
+        <briefdescription>
+<para>Binds the vaos and draws the elements based on the RenderCommands available with the `RenderPass`-. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>renderPass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/opengl/rendering/OpenGLDevice.ixx" line="73" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1aa9b366cbdb4aa227567d8a32f0fdca95" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::ext::opengl::rendering::OpenGLDevice::endRenderPass</definition>
+        <argsstring>(helios::rendering::RenderPass &amp;renderPass) const noexcept override</argsstring>
+        <name>endRenderPass</name>
+        <qualifiedname>helios::ext::opengl::rendering::OpenGLDevice::endRenderPass</qualifiedname>
+        <reimplements refid="classhelios_1_1rendering_1_1RenderingDevice_1a1e3cfb7c060175c9005102a121f4c36d">endRenderPass</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1rendering_1_1RenderPass" kindref="compound">helios::rendering::RenderPass</ref> &amp;</type>
+          <declname>renderPass</declname>
+        </param>
+        <briefdescription>
+<para>Ends the specified render pass. The current implementation does nothing. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>renderPass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/opengl/rendering/OpenGLDevice.ixx" line="80" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1afc52da68a2755601e80268de38dc9ac3" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::ext::opengl::rendering::OpenGLDevice::setViewport</definition>
+        <argsstring>(int x, int y, int width, int height) const noexcept override</argsstring>
+        <name>setViewport</name>
+        <qualifiedname>helios::ext::opengl::rendering::OpenGLDevice::setViewport</qualifiedname>
+        <reimplements refid="classhelios_1_1rendering_1_1RenderingDevice_1a701d970cf1e0c0c71a24ab1b104a15ea">setViewport</reimplements>
+        <param>
+          <type>int</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+<para>Sets the viewport for this RenderingDevice. The viewport defines the rectangular area where the final image is drawn.    </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>x-coordinate of the lower left corner of the viewport </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>y-coordinate of the lower left corner of the viewport </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>width</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the viewport, in pixels </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>height</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the viewport, in pixels   </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ulink url="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glViewport.xhtml">https://registry.khronos.org/OpenGL-Refpages/gl4/html/glViewport.xhtml</ulink> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/opengl/rendering/OpenGLDevice.ixx" line="87" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a7d3e7296865c619715f7d367448874a3" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::ext::opengl::rendering::OpenGLDevice::clear</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>clear</name>
+        <qualifiedname>helios::ext::opengl::rendering::OpenGLDevice::clear</qualifiedname>
+        <briefdescription>
+<para>Clears the color buffer to preset values. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para>clearColor </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/opengl/rendering/OpenGLDevice.ixx" line="94" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1abf0a9f95078406d2222e44ec2a28c269" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::ext::opengl::rendering::OpenGLDevice::setClearColor</definition>
+        <argsstring>(const math::vec4f &amp;color) const noexcept</argsstring>
+        <name>setClearColor</name>
+        <qualifiedname>helios::ext::opengl::rendering::OpenGLDevice::setClearColor</qualifiedname>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1math_1a08252f81850c5902e3c8dead272f3332" kindref="member">math::vec4f</ref> &amp;</type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+<para>Specifies the RGBa values clamped to [0, 1] when color buffers are cleared. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a7d3e7296865c619715f7d367448874a3" kindref="member">clear</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/opengl/rendering/OpenGLDevice.ixx" line="104" column="14"/>
+        <references refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1abf0a9f95078406d2222e44ec2a28c269">setClearColor</references>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1abf0a9f95078406d2222e44ec2a28c269">setClearColor</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>OpenGL RenderingDevice representative. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>helios::ext::opengl::rendering::OpenGLDevice</label>
+        <link refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::rendering::RenderingDevice</label>
+        <link refid="classhelios_1_1rendering_1_1RenderingDevice"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>helios::ext::opengl::rendering::OpenGLDevice</label>
+        <link refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::rendering::RenderingDevice</label>
+        <link refid="classhelios_1_1rendering_1_1RenderingDevice"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>logger_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::util::log::Logger</label>
+        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/ext/opengl/rendering/OpenGLDevice.ixx" line="22" column="5" bodyfile="include/ext/opengl/rendering/OpenGLDevice.ixx" bodystart="22" bodyend="106"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a2f589946c2ca4029fc3d3f3ba7820c99" prot="public" virt="virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>beginRenderPass</name></member>
+      <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a7d3e7296865c619715f7d367448874a3" prot="public" virt="non-virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>clear</name></member>
+      <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a205e92c86ad75f4a23903f80e092a9f0" prot="public" virt="virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>doRender</name></member>
+      <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1aa9b366cbdb4aa227567d8a32f0fdca95" prot="public" virt="virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>endRenderPass</name></member>
+      <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1aa97dd0a5a8fb57989616b7fac5139f8b" prot="public" virt="virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>init</name></member>
+      <member refid="classhelios_1_1rendering_1_1RenderingDevice_1ab900c2b99f512ccdf6c33435db3da8b0" prot="public" virt="non-virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>initialized</name></member>
+      <member refid="classhelios_1_1rendering_1_1RenderingDevice_1a4aa0809551525f58d3712a9aeb32dd6e" prot="protected" virt="non-virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>initialized_</name></member>
+      <member refid="classhelios_1_1rendering_1_1RenderingDevice_1a30cb723bfe96390f00716c2c80693248" prot="protected" virt="non-virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>logger_</name></member>
+      <member refid="classhelios_1_1rendering_1_1RenderingDevice_1abf7617082018d54e151c9399b57160f4" prot="public" virt="non-virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>render</name></member>
+      <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1abf0a9f95078406d2222e44ec2a28c269" prot="public" virt="non-virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>setClearColor</name></member>
+      <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1afc52da68a2755601e80268de38dc9ac3" prot="public" virt="virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>setViewport</name></member>
+      <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a232b9959fd6bc53b3e012b6a2587ddad" prot="private" virt="non-virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>toOpenGL</name></member>
+      <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a8f15cee19cf071f05f1f320ca30243a8" prot="public" virt="non-virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>~OpenGLDevice</name></member>
+      <member refid="classhelios_1_1rendering_1_1RenderingDevice_1a062e66375a1f27b648d73f5e9c903944" prot="public" virt="virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>~RenderingDevice</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

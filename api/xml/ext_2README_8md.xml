@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="ext_2README_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1ext">helios::ext</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">##<sp/>helios::ext</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>namespace<sp/>contains<sp/>**platform-specific<sp/>implementations**<sp/>and<sp/>**backend<sp/>adapters**<sp/>for<sp/>the<sp/>helios<sp/>framework.<sp/>It<sp/>bridges<sp/>the<sp/>abstract<sp/>helios<sp/>core<sp/>APIs<sp/>with<sp/>concrete<sp/>third-party<sp/>libraries.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>`ext`<sp/>namespace<sp/>follows<sp/>a<sp/>**plugin<sp/>architecture**,<sp/>allowing<sp/>helios<sp/>to<sp/>support<sp/>multiple<sp/>windowing<sp/>systems<sp/>and<sp/>rendering<sp/>backends<sp/>without<sp/>coupling<sp/>the<sp/>core<sp/>framework<sp/>to<sp/>specific<sp/>implementations.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Available<sp/>Extensions</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">ext/</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>glfw/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GLFW-based<sp/>windowing<sp/>and<sp/>input</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>window/<sp/><sp/><sp/>#<sp/>GLFWWindow<sp/>implementation</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>input/<sp/><sp/><sp/><sp/>#<sp/>GLFWInputAdapter<sp/>implementation</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>app/<sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GLFWApplication<sp/>and<sp/>factory</highlight></codeline>
+<codeline><highlight class="normal">└──<sp/>opengl/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>OpenGL<sp/>rendering<sp/>backend</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>├──<sp/>rendering/<sp/>#<sp/>OpenGL<sp/>RenderingDevice</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>├──<sp/>shader/<sp/><sp/><sp/><sp/>#<sp/>OpenGLShader<sp/>implementation</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>└──<sp/>model/<sp/><sp/><sp/><sp/><sp/>#<sp/>OpenGLMesh<sp/>implementation</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Architecture</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Extension<sp/>Responsibilities</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Extension<sp/>|<sp/>Responsibility<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-----------|----------------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>**`glfw`**<sp/>|<sp/>Window<sp/>creation,<sp/>event<sp/>handling,<sp/>input<sp/>polling<sp/>(keyboard,<sp/>mouse,<sp/>gamepad)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>**`opengl`**<sp/>|<sp/>GPU<sp/>resource<sp/>management,<sp/>shader<sp/>compilation,<sp/>draw<sp/>call<sp/>submission<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Separation<sp/>of<sp/>Concerns</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>**helios<sp/>core**<sp/>defines<sp/>the<sp/>**interfaces**<sp/>(e.g.,<sp/>`Window`,<sp/>`RenderingDevice`,<sp/>`Shader`)</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**`ext`<sp/>modules**<sp/>provide<sp/>the<sp/>**implementations**<sp/>(e.g.,<sp/>`GLFWWindow`,<sp/>`OpenGLShader`)</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Applications<sp/>use<sp/>**factories**<sp/>to<sp/>instantiate<sp/>concrete<sp/>implementations</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Using<sp/>Extensions</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Quick<sp/>Start<sp/>with<sp/>GLFW<sp/>+<sp/>OpenGL</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.ext.glfw.app.GLFWFactory;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">int<sp/>main()<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Factory<sp/>creates<sp/>a<sp/>complete<sp/>GLFW+OpenGL<sp/>application</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto<sp/>app<sp/>=<sp/>GLFWFactory::makeOpenGLApp(&quot;My<sp/>App&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto*<sp/>window<sp/>=<sp/>app-&gt;current();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>GLFWWindow</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto&amp;<sp/>device<sp/>=<sp/>app-&gt;renderingDevice();<sp/>//<sp/>OpenGLRenderingDevice</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto&amp;<sp/>input<sp/>=<sp/>app-&gt;inputManager();<sp/><sp/><sp/><sp/><sp/>//<sp/>GLFWInputAdapter</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>while<sp/>(!window-&gt;shouldClose())<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Your<sp/>game<sp/>loop</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Extension<sp/>Modules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>`helios.ext.glfw`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">GLFW-based<sp/>implementation<sp/>for<sp/>windowing<sp/>and<sp/>input.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Key<sp/>Classes:**</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`GLFWWindow`<sp/>-<sp/>Window<sp/>management<sp/>(resize,<sp/>close,<sp/>swap<sp/>buffers)</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`GLFWInputAdapter`<sp/>-<sp/>Input<sp/>polling<sp/>(keyboard,<sp/>mouse,<sp/>gamepad)</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`GLFWApplication`<sp/>-<sp/>Application<sp/>lifecycle<sp/>with<sp/>event<sp/>loop</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`GLFWFactory`<sp/>-<sp/>Factory<sp/>for<sp/>creating<sp/>GLFW-based<sp/>apps</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Dependencies:**</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>[GLFW<sp/>3.x](https://www.glfw.org/)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**See:**<sp/>[glfw/README.md](./glfw/README.md)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>`helios.ext.opengl`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">OpenGL<sp/>4.5+<sp/>rendering<sp/>backend.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Key<sp/>Classes:**</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`OpenGLRenderingDevice`<sp/>-<sp/>Main<sp/>rendering<sp/>interface</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`OpenGLShader`<sp/>-<sp/>Shader<sp/>compilation<sp/>and<sp/>linking</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`OpenGLMesh`<sp/>-<sp/>VBO/IBO<sp/>management</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`OpenGLUniformLocationMap`<sp/>-<sp/>Uniform<sp/>binding</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Dependencies:**</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>OpenGL<sp/>4.5+</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>[GLAD](https://glad.dav1d.de/)<sp/>(loader)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**See:**<sp/>[opengl/README.md](./opengl/README.md)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Creating<sp/>a<sp/>New<sp/>Backend</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">To<sp/>add<sp/>support<sp/>for<sp/>a<sp/>new<sp/>platform<sp/>or<sp/>rendering<sp/>API:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>1.<sp/>Implement<sp/>Core<sp/>Interfaces</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Create<sp/>implementations<sp/>for:</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`helios::window::Window`<sp/>(if<sp/>new<sp/>windowing<sp/>system)</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`helios::rendering::RenderingDevice`<sp/>(if<sp/>new<sp/>rendering<sp/>API)</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`helios::rendering::Shader`</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`helios::rendering::model::Mesh`</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`helios::input::InputAdapter`<sp/>(if<sp/>new<sp/>input<sp/>system)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>2.<sp/>Create<sp/>Factory</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">namespace<sp/>helios::ext::vulkan<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>class<sp/>VulkanFactory<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>static<sp/>std::unique_ptr&lt;Application&gt;<sp/>makeVulkanApp(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const<sp/>std::string&amp;<sp/>title</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>auto<sp/>window<sp/>=<sp/>std::make_unique&lt;VulkanWindow&gt;(...);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>auto<sp/>device<sp/>=<sp/>std::make_unique&lt;VulkanRenderingDevice&gt;(...);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>auto<sp/>input<sp/>=<sp/>std::make_unique&lt;VulkanInputAdapter&gt;(...);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>std::make_unique&lt;Application&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::move(window),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::move(device),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::move(input)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>3.<sp/>Follow<sp/>Module<sp/>Structure</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">include/ext/yourbackend/</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>_module.ixx<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Module<sp/>facade</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>rendering/</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>YourRenderingDevice.ixx</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>...</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>shader/</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>YourShader.ixx</highlight></codeline>
+<codeline><highlight class="normal">└──<sp/>...</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">src/ext/yourbackend/</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>rendering/</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>YourRenderingDevice.cpp</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>...</highlight></codeline>
+<codeline><highlight class="normal">└──<sp/>...</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>4.<sp/>Update<sp/>CMake</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Add<sp/>your<sp/>backend<sp/>to<sp/>the<sp/>build<sp/>system:</highlight></codeline>
+<codeline><highlight class="normal">```cmake</highlight></codeline>
+<codeline><highlight class="normal">#<sp/>In<sp/>src/ext/CMakeLists.txt</highlight></codeline>
+<codeline><highlight class="normal">add_subdirectory(yourbackend)</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Design<sp/>Principles</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">1.<sp/>**Abstract<sp/>Interfaces**:<sp/>The<sp/>core<sp/>helios<sp/>framework<sp/>defines<sp/>interfaces,<sp/>not<sp/>implementations.</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>**Dependency<sp/>Injection**:<sp/>Applications<sp/>receive<sp/>concrete<sp/>implementations<sp/>via<sp/>factories.</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>**Modularity**:<sp/>Each<sp/>extension<sp/>is<sp/>an<sp/>independent<sp/>C++23<sp/>module.</highlight></codeline>
+<codeline><highlight class="normal">4.<sp/>**Interchangeability**:<sp/>Backends<sp/>can<sp/>be<sp/>swapped<sp/>without<sp/>changing<sp/>application<sp/>code<sp/>(only<sp/>the<sp/>factory<sp/>call).</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Examples</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">See<sp/>[examples/](../../examples/)<sp/>for<sp/>complete<sp/>applications<sp/>using<sp/>the<sp/>extensions:</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`simple_cube_rendering`<sp/>-<sp/>GLFW<sp/>+<sp/>OpenGL</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`game_controller_input`<sp/>-<sp/>GLFW<sp/>input<sp/>handling</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::ext</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Platform-specific<sp/>extensions<sp/>and<sp/>backend<sp/>implementations.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>This<sp/>namespace<sp/>contains<sp/>concrete<sp/>implementations<sp/>of<sp/>helios<sp/>core<sp/>interfaces<sp/>for<sp/>various<sp/>platforms,<sp/>including<sp/>GLFW-based<sp/>windowing/input<sp/>and<sp/>OpenGL<sp/>rendering.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+<codeline></codeline>
+    </programlisting>
+    <location file="include/ext/README.md"/>
+  </compounddef>
+</doxygen>

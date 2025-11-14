@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8scene_8Camera" kind="module">
+    <compoundname>helios.scene.Camera</compoundname>
+    <innerfile refid="Camera_8ixx">Camera.ixx</innerfile>
+    <innerclass refid="classhelios_1_1scene_1_1Camera" prot="public">helios::scene::Camera</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1scene_1_1Camera_1a73a85eb4966fb4524dc6b87736500f62" prot="protected" static="no" mutable="yes">
+        <type><ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref></type>
+        <definition>helios::math::mat4f helios::scene::Camera::projectionMatrix_</definition>
+        <argsstring></argsstring>
+        <name>projectionMatrix_</name>
+        <qualifiedname>helios::scene::Camera::projectionMatrix_</qualifiedname>
+        <briefdescription>
+<para>The projection matrix of this <ref refid="classhelios_1_1scene_1_1Camera" kindref="compound">Camera</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/Camera.ixx" line="41" column="37" bodyfile="include/helios/scene/Camera.ixx" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1scene_1_1Camera_1a5c915d9ba00c11dcef1885f02e32945c" prot="protected" static="no" mutable="yes">
+        <type><ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref></type>
+        <definition>helios::math::mat4f helios::scene::Camera::viewMatrix_</definition>
+        <argsstring></argsstring>
+        <name>viewMatrix_</name>
+        <qualifiedname>helios::scene::Camera::viewMatrix_</qualifiedname>
+        <briefdescription>
+<para>The view matrix of this <ref refid="classhelios_1_1scene_1_1Camera" kindref="compound">Camera</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/Camera.ixx" line="46" column="37" bodyfile="include/helios/scene/Camera.ixx" bodystart="46" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1adb65c6af2c10921ccd7a5088a48adcf8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::scene::Camera::Camera</definition>
+        <argsstring>()</argsstring>
+        <name>Camera</name>
+        <qualifiedname>helios::scene::Camera::Camera</qualifiedname>
+        <briefdescription>
+<para>Constructor for this class. Initializes projectionMatrix and viewMatrix with the identity matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/Camera.ixx" line="53" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1a08c74a826af54a6de82dd64516df4017" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="virtual">
+        <type>SceneNode *</type>
+        <definition>SceneNode * helios::scene::Camera::addChild</definition>
+        <argsstring>(std::unique_ptr&lt; SceneNode &gt; sceneNode) override</argsstring>
+        <name>addChild</name>
+        <qualifiedname>helios::scene::Camera::addChild</qualifiedname>
+        <reimplements refid="classhelios_1_1scene_1_1SceneNode_1a8f13644573f0a5ffd64d11424937fdce">addChild</reimplements>
+        <param>
+          <type>std::unique_ptr&lt; SceneNode &gt;</type>
+          <declname>sceneNode</declname>
+        </param>
+        <briefdescription>
+<para>This method will do nothing but return `nullptr`, indicating that a `Camera` must not have child nodes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sceneNode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The attempted child node to add (ignored). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>This implementation returns `nullptr`.</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://stackoverflow.com/questions/24609872/delete-virtual-function-from-a-derived-class">https://stackoverflow.com/questions/24609872/delete-virtual-function-from-a-derived-class</ulink> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/Camera.ixx" line="64" column="20"/>
+        <references refid="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab">helios::scene::SceneNode::SceneNode</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1a1dc42ba642ae41f7028a4cb927a6feb0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref> &amp;</type>
+        <definition>const helios::math::mat4f &amp; helios::scene::Camera::projectionMatrix</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>projectionMatrix</name>
+        <qualifiedname>helios::scene::Camera::projectionMatrix</qualifiedname>
+        <briefdescription>
+<para>Returns a constant ref to this camera&apos;s current projection matrix. Typically set to the perspective / orthographic projection. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A const ref to this `Camera`&apos;s projection matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/Camera.ixx" line="72" column="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1a920bac1e84b874d725027e37d091cb34" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref> &amp;</type>
+        <definition>const helios::math::mat4f &amp; helios::scene::Camera::viewMatrix</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>viewMatrix</name>
+        <qualifiedname>helios::scene::Camera::viewMatrix</qualifiedname>
+        <briefdescription>
+<para>Returns a constant ref to this camera&apos;s view matrix. Automatically computed as the inverse of the camera&apos;s world transform. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A const ref to this `Camera`&apos;s view matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/Camera.ixx" line="81" column="36"/>
+        <references refid="classhelios_1_1scene_1_1Camera_1a920bac1e84b874d725027e37d091cb34">helios::scene::Camera::viewMatrix</references>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a920bac1e84b874d725027e37d091cb34">helios::scene::Camera::viewMatrix</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/scene/Camera.ixx" line="9" column="15"/>
+  </compounddef>
+</doxygen>

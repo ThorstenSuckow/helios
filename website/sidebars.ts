@@ -49,11 +49,7 @@ const sidebars: SidebarsConfig = {
   ],
   doxygenSidebar: [
     doxygenSidebarItems,
-  ],
-  // API Reference sidebar
-  apiSidebar: [
-    'api/overview',
-  ],
+  ]
 };
 
 export default sidebars;

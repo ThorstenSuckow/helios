@@ -1,4 +1,5 @@
 import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
+import doxygenSidebarItems from './sidebar-category-doxygen-helios.json';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -46,7 +47,9 @@ const sidebars: SidebarsConfig = {
       ],
     },
   ],
-
+  doxygenSidebar: [
+    doxygenSidebarItems,
+  ],
   // API Reference sidebar
   apiSidebar: [
     'api/overview',

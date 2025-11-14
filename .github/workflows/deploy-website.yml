@@ -28,12 +28,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y doxygen graphviz
 
-      - name: Generate Doxygen XML (docs/api/xml)
+      - name: Generate Doxygen Docs (XML + HTML/Assets)
         shell: bash
         run: |
           set -euo pipefail
 
-          # Doxyfile aus Template + Overrides zusammenbauen
           {
             cat docs/Doxyfile.in
 
@@ -44,23 +43,39 @@ jobs:
             echo "GENERATE_XML   = YES"
             echo "XML_OUTPUT     = api/xml"
 
-            echo "EXTENSION_MAPPING ="
+            echo "GENERATE_HTML  = YES"
+            echo "HTML_OUTPUT    = api/html"
+          
+            
+            echo "HAVE_DOT             = YES"
+            echo "DOT_IMAGE_FORMAT     = png"
+            echo "INTERACTIVE_DOT_GRAPHS = NO"
 
+            echo "EXTENSION_MAPPING ="
             echo "DOT_PATH ="
           } | doxygen -
 
           test -d docs/api/xml
+          test -d docs/api/html 
           echo "XML files in docs/api/xml:" $(find docs/api/xml -type f | wc -l)
+          echo "HTML/Assets in docs/api/html:" $(find docs/api/html -type f | wc -l)
 
-      - name: Copy XML into website/doxygen and static assets
+      - name: Copy XML and HTML Assets into website
         shell: bash
         run: |
           set -euo pipefail
 
+         
           mkdir -p website/doxygen/xml
           rsync -a docs/api/xml/ website/doxygen/xml/
           echo "XML files in website/doxygen/xml:" $(find website/doxygen/xml -type f | wc -l)
 
+        
+          mkdir -p website/static/doxygen/html
+          rsync -a docs/api/html/ website/static/doxygen/html/
+          echo "HTML/Assets in website/static/doxygen/html:" $(find website/static/doxygen/html -type f | wc -l)
+          
+        
           mkdir -p website/static/doxygen/xml
           rsync -a website/doxygen/xml/ website/static/doxygen/xml/
           echo "XML files in website/static/doxygen/xml:" $(find website/static/doxygen/xml -type f | wc -l)
@@ -92,11 +107,16 @@ jobs:
         run: |
           set -euo pipefail
           test -d website/build
+      
+          if [ ! -d website/build/doxygen/html ]; then
+            echo "WARN: HTML assets dir missing in build (website/build/doxygen/html)"
+            ls -R website/build | head -n 100
+          fi
           if [ ! -d website/build/doxygen/xml ]; then
             echo "WARN: XML-dir missing in build (website/build/doxygen/xml)"
             ls -R website/build | head -n 100
           fi
-          echo "Build Größe:" $(du -sh website/build | cut -f1)
+          echo "Build Size:" $(du -sh website/build | cut -f1)
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3

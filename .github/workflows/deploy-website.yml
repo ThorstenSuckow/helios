@@ -1,136 +1,111 @@
-name: Deploy Website to GitHub Pages
+name: API Docs
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: false
-
 jobs:
-  build:
-    name: Build Doxygen + Website
+  build-docs:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Install Doxygen and Graphviz
+      - name: Install Doxygen 1.15.0 and Graphviz
         run: |
           sudo apt-get update
-          sudo apt-get install -y doxygen graphviz
+          sudo apt-get install -y graphviz
+          wget https://github.com/doxygen/doxygen/releases/download/Release_1_15_0/doxygen-1.15.0.linux.bin.tar.gz
+          tar -xzf doxygen-1.15.0.linux.bin.tar.gz
+          sudo mv doxygen-1.15.0/bin/doxygen /usr/local/bin/doxygen
+          doxygen --version
 
-      - name: Generate Doxygen Docs (XML + HTML/Assets)
-        shell: bash
+      - name: Verify Graphviz
         run: |
-          set -euo pipefail
+          which dot
+          dot -V
 
-          {
-            cat docs/Doxyfile.in
-
-            echo ""
-
-            echo "OUTPUT_DIRECTORY = docs"
-
-            echo "GENERATE_XML   = YES"
-            echo "XML_OUTPUT     = api/xml"
-
-            echo "GENERATE_HTML  = YES"
-            echo "HTML_OUTPUT    = api/html"
-          
-            
-            echo "HAVE_DOT             = YES"
-            echo "DOT_IMAGE_FORMAT     = png"
-            echo "INTERACTIVE_DOT_GRAPHS = NO"
-
-            echo "EXTENSION_MAPPING ="
-            echo "DOT_PATH ="
-          } | doxygen -
-
-          test -d docs/api/xml
-          test -d docs/api/html 
-          echo "XML files in docs/api/xml:" $(find docs/api/xml -type f | wc -l)
-          echo "HTML/Assets in docs/api/html:" $(find docs/api/html -type f | wc -l)
-
-      - name: Copy XML and HTML Assets into website
-        shell: bash
+      - name: Generate API Docs
         run: |
-          set -euo pipefail
+          rm -rf docs/api
+          doxygen docs/Doxyfile.in
 
-         
-          mkdir -p website/doxygen/xml
-          rsync -a docs/api/xml/ website/doxygen/xml/
-          echo "XML files in website/doxygen/xml:" $(find website/doxygen/xml -type f | wc -l)
+      - name: List Generated Files
+        run: |
+          echo "=== HTML ==="
+          ls -la docs/api/html/ | head -20
+          echo ""
+          echo "=== XML ==="
+          ls -la docs/api/xml/ | head -20
 
-        
-          mkdir -p website/static/doxygen/html
-          rsync -a docs/api/html/ website/static/doxygen/html/
-          echo "HTML/Assets in website/static/doxygen/html:" $(find website/static/doxygen/html -type f | wc -l)
-          
-        
-          mkdir -p website/static/doxygen/xml
-          rsync -a website/doxygen/xml/ website/static/doxygen/xml/
-          echo "XML files in website/static/doxygen/xml:" $(find website/static/doxygen/xml -type f | wc -l)
+      - name: Upload HTML Docs
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-docs-html
+          path: docs/api/html/
+          retention-days: 30
+
+      - name: Upload XML Docs
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-docs-xml
+          path: docs/api/xml/
+          retention-days: 30
+
+      - name: Prepare publish dir (XML + archive)
+        run: |
+          rm -rf publish
+          mkdir -p publish/api/xml
+          rsync -a docs/api/html/ publish/api/
+          rsync -a docs/api/xml/  publish/api/xml/
+          tar -C docs/api -czf publish/api/xml.tgz xml
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: 20.x
+          cache: npm
+          cache-dependency-path: website/package-lock.json
 
-      - name: Cache npm dependencies
-        uses: actions/cache@v4
-        with:
-          path: website/node_modules
-          key: ${{ runner.os }}-npm-${{ hashFiles('website/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-
+      - name: Copy XML to website directory
+        run: |
+          rm -rf website/doxygen
+          mkdir -p website/doxygen
+          cp -r docs/api/xml/* website/doxygen/
 
       - name: Install dependencies
-        run: cd website && npm ci
+        working-directory: ./website
+        run: npm ci
 
-      - name: Build helios API docs (doxygen2docusaurus)
-        run: cd website && npx doxygen2docusaurus --id helios
+      - name: Build helios API docs
+        working-directory: ./website
+        run: npx doxygen2docusaurus --id helios
 
       - name: Build website
-        run: cd website && npm run build
+        working-directory: ./website
+        run: npm run build
 
-      - name: Verify build + XML
-        shell: bash
+      - name: Merge API docs and website
         run: |
-          set -euo pipefail
-          test -d website/build
-      
-          if [ ! -d website/build/doxygen/html ]; then
-            echo "WARN: HTML assets dir missing in build (website/build/doxygen/html)"
-            ls -R website/build | head -n 100
-          fi
-          if [ ! -d website/build/doxygen/xml ]; then
-            echo "WARN: XML-dir missing in build (website/build/doxygen/xml)"
-            ls -R website/build | head -n 100
-          fi
-          echo "Build Size:" $(du -sh website/build | cut -f1)
+          # Merge the Doxygen HTML docs with the website build
+          cp -r publish/api website/build/api
+          # Ensure the xml.tgz is also available
+          cp publish/api/xml.tgz website/build/api/
 
-      - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
         with:
-          path: website/build
-
-  deploy:
-    name: Deploy to GitHub Pages
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
-    steps:
-      - name: Deploy
-        id: deploy
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./website/build
+          user_name: github-actions[bot]
+          user_email: 41898282+github-actions[bot]@users.noreply.github.com

@@ -38,7 +38,7 @@ function HomepageHeader() {
         </div>
         <div style={{flexShrink: 0}}>
           <img
-            src="/helios/img/logo.png"
+            src="/img/logo.png"
             alt="helios logo"
             style={{height: '200px', width: 'auto', display: 'block'}}
           />

@@ -1,0 +1,96 @@
+# .github/workflows/deploy-docs.yml
+
+name: Deploy Docs to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+# Erforderliche Berechtigungen für GitHub Pages Deployment über Actions
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Verhindert parallele Deployments
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build Doxygen + Website
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Doxygen and Graphviz
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y doxygen graphviz
+
+      - name: Generate Doxygen XML (website/doxygen/xml)
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p website/doxygen/xml
+          {
+            cat docs/Doxyfile.in;
+            echo "OUTPUT_DIRECTORY=website/doxygen";
+            echo "GENERATE_XML=YES";
+            echo "XML_OUTPUT=xml";
+          } | doxygen -
+          test -d website/doxygen/xml
+          echo "XML files:" $(find website/doxygen/xml -type f | wc -l)
+
+      - name: Copy XML into static assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p website/static/doxygen/xml
+          rsync -a website/doxygen/xml/ website/static/doxygen/xml/
+          ls -1 website/static/doxygen/xml | head -n 5 || true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+          cache-dependency-path: 'website/package-lock.json'
+
+      - name: Install dependencies
+        working-directory: website
+        run: npm ci
+
+      - name: Build website
+        working-directory: website
+        run: npm run build
+
+      - name: Verify build + XML
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -d website/build
+          if [ ! -d website/build/doxygen/xml ]; then
+            echo "WARN: XML-Verzeichnis fehlt im Build (website/build/doxygen/xml)"; ls -R website/build | head -n 100; fi
+          echo "Build Größe:" $(du -sh website/build | cut -f1)
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: website/build
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deploy
+        uses: actions/deploy-pages@v4

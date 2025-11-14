@@ -100,12 +100,6 @@ const config: Config = {
         },
         doxygenApiNavbar,
         {
-          type: 'docSidebar',
-          sidebarId: 'apiSidebar',
-          position: 'left',
-          label: 'API Reference',
-        },
-        {
           to: '/docs/status',
           position: 'right',
           label: 'Status',

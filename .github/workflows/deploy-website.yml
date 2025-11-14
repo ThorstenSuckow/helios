@@ -1,4 +1,4 @@
-# .github/workflows/deploy-docs.yml
+# .github/workflows/deploy-website.yml
 
 name: Deploy Docs to GitHub Pages
 
@@ -64,6 +64,10 @@ jobs:
       - name: Install dependencies
         working-directory: website
         run: npm ci
+
+      - name: Build helios API docs (doxygen2docusaurus)
+        working-directory: website
+        run: npx doxygen2docusaurus --id helios
 
       - name: Build website
         working-directory: website

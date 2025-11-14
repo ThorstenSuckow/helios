@@ -1,0 +1,249 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1event_1_1BasicEventManager" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>helios::event::BasicEventManager</compoundname>
+    <basecompoundref refid="classhelios_1_1event_1_1EventManager" prot="public" virt="non-virtual">helios::event::EventManager</basecompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1event_1_1BasicEventManager_1a09c5a6c3edfa8b34e5858606be3e769b" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::event::BasicEventManager::BasicEventManager</definition>
+        <argsstring>(std::unique_ptr&lt; EventQueue &gt; eventQueue, std::unique_ptr&lt; Dispatcher &gt; dispatcher)</argsstring>
+        <name>BasicEventManager</name>
+        <qualifiedname>helios::event::BasicEventManager::BasicEventManager</qualifiedname>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1event_1_1EventQueue" kindref="compound">EventQueue</ref> &gt;</type>
+          <declname>eventQueue</declname>
+        </param>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1event_1_1Dispatcher" kindref="compound">Dispatcher</ref> &gt;</type>
+          <declname>dispatcher</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a new <ref refid="classhelios_1_1event_1_1BasicEventManager" kindref="compound">BasicEventManager</ref>, using the specified <ref refid="classhelios_1_1event_1_1EventQueue" kindref="compound">EventQueue</ref> and the <ref refid="classhelios_1_1event_1_1Dispatcher" kindref="compound">Dispatcher</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>eventQueue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dispatcher</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/event/BasicEventManager.ixx" line="40" column="18"/>
+        <references refid="classhelios_1_1event_1_1EventManager_1a575c31f89f8002b9c507e3a00da32cb1">helios::event::EventManager::dispatcher</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1event_1_1BasicEventManager_1a572c4c66409151b16992008849d9bbe6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classhelios_1_1event_1_1EventManager_1a4a28a6df832bab23b4f9ef4d867a197e" kindref="member">EventManager</ref> &amp;</type>
+        <definition>EventManager &amp; helios::event::BasicEventManager::post</definition>
+        <argsstring>(std::unique_ptr&lt; const Event &gt; event, PostPolicy policy, const std::function&lt; bool(const std::unique_ptr&lt; const Event &gt; &amp;event, const std::unique_ptr&lt; const Event &gt; &amp;evt)&gt; &amp;func) override</argsstring>
+        <name>post</name>
+        <qualifiedname>helios::event::BasicEventManager::post</qualifiedname>
+        <reimplements refid="classhelios_1_1event_1_1EventManager_1a50af37271c6a4d4d6364a61e3d6d3d31">post</reimplements>
+        <param>
+          <type>std::unique_ptr&lt; const <ref refid="classhelios_1_1event_1_1Event" kindref="compound">Event</ref> &gt;</type>
+          <declname>event</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacehelios_1_1event_1a68d7042f97d91ed8414724453213e7f0" kindref="member">PostPolicy</ref></type>
+          <declname>policy</declname>
+        </param>
+        <param>
+          <type>const std::function&lt; bool(const std::unique_ptr&lt; const <ref refid="classhelios_1_1event_1_1Event" kindref="compound">Event</ref> &gt; &amp;<ref refid="namespacehelios_1_1event" kindref="compound">event</ref>, const std::unique_ptr&lt; const <ref refid="classhelios_1_1event_1_1Event" kindref="compound">Event</ref> &gt; &amp;evt)&gt; &amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+<para>Posts an event based on the specified policy to the <ref refid="classhelios_1_1event_1_1EventQueue" kindref="compound">EventQueue</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A unique_ptr to the event that should be posted </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>policy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The policy to use for positing the event. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A comparison function for LATEST_WINS policy. If none is specified, this method will compare the events based on type and tag equality.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classhelios_1_1event_1_1EventManager" kindref="compound">EventManager</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/event/BasicEventManager.ixx" line="54" column="22"/>
+        <references refid="classhelios_1_1event_1_1EventManager_1a4a28a6df832bab23b4f9ef4d867a197e">helios::event::EventManager::EventManager</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1event_1_1BasicEventManager_1ac477416fc138acbb03df5e946dc99240" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classhelios_1_1event_1_1EventManager_1a4a28a6df832bab23b4f9ef4d867a197e" kindref="member">EventManager</ref> &amp;</type>
+        <definition>EventManager &amp; helios::event::BasicEventManager::dispatchAll</definition>
+        <argsstring>() override</argsstring>
+        <name>dispatchAll</name>
+        <qualifiedname>helios::event::BasicEventManager::dispatchAll</qualifiedname>
+        <reimplements refid="classhelios_1_1event_1_1EventManager_1a296603f6b1d157e9c3b2ccceb39d5787">dispatchAll</reimplements>
+        <briefdescription>
+<para>Dispatches all events of the queue, passing ownership to the underlying <ref refid="classhelios_1_1event_1_1Dispatcher" kindref="compound">Dispatcher</ref>. Clears the underlying <ref refid="classhelios_1_1event_1_1EventQueue" kindref="compound">EventQueue</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><ref refid="classhelios_1_1event_1_1EventManager" kindref="compound">EventManager</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/event/BasicEventManager.ixx" line="70" column="22"/>
+        <references refid="classhelios_1_1event_1_1EventManager_1a4a28a6df832bab23b4f9ef4d867a197e">helios::event::EventManager::EventManager</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1event_1_1BasicEventManager_1a1ce9ef29ac8f29915b027fdc888db6a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classhelios_1_1event_1_1EventManager_1a4a28a6df832bab23b4f9ef4d867a197e" kindref="member">EventManager</ref> &amp;</type>
+        <definition>EventManager &amp; helios::event::EventManager::post</definition>
+        <argsstring>(std::unique_ptr&lt; const Event &gt; event)</argsstring>
+        <name>post</name>
+        <qualifiedname>helios::event::BasicEventManager::post</qualifiedname>
+        <param>
+          <type>std::unique_ptr&lt; const <ref refid="classhelios_1_1event_1_1Event" kindref="compound">Event</ref> &gt;</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+<para>Posts the event to the queue using the APPEND policy, passing ownership of the event to the underlying queue. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Calling this function is functionally identical to calling <ref refid="classhelios_1_1event_1_1BasicEventManager_1a572c4c66409151b16992008849d9bbe6" kindref="member">post()</ref> with the second argument set to APPEND.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The event to post to the <ref refid="classhelios_1_1event_1_1EventQueue" kindref="compound">EventQueue</ref>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classhelios_1_1event_1_1EventManager" kindref="compound">EventManager</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/event/BasicEventManager.ixx" line="31" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1event_1_1BasicEventManager_1a7355384d93cdcebec0ee5f3fcb57bb2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classhelios_1_1event_1_1EventManager_1a4a28a6df832bab23b4f9ef4d867a197e" kindref="member">EventManager</ref> &amp;</type>
+        <definition>EventManager &amp; helios::event::EventManager::post</definition>
+        <argsstring>(std::unique_ptr&lt; const Event &gt; event, PostPolicy policy)</argsstring>
+        <name>post</name>
+        <qualifiedname>helios::event::BasicEventManager::post</qualifiedname>
+        <param>
+          <type>std::unique_ptr&lt; const <ref refid="classhelios_1_1event_1_1Event" kindref="compound">Event</ref> &gt;</type>
+          <declname>event</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacehelios_1_1event_1a68d7042f97d91ed8414724453213e7f0" kindref="member">PostPolicy</ref></type>
+          <declname>policy</declname>
+        </param>
+        <briefdescription>
+<para>Posts the event to the queue, passing ownership of the event to the underlying queue. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Calling this function is identical to calling <ref refid="classhelios_1_1event_1_1BasicEventManager_1a572c4c66409151b16992008849d9bbe6" kindref="member">post()</ref> with the third argument func set to nullptr, relying on the default implementations.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The event to post to the <ref refid="classhelios_1_1event_1_1EventQueue" kindref="compound">EventQueue</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>policy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The policy to use for posting the event.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classhelios_1_1event_1_1EventManager" kindref="compound">EventManager</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/event/BasicEventManager.ixx" line="31" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Basic implementation of the <ref refid="classhelios_1_1event_1_1EventManager" kindref="compound">EventManager</ref>. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This implementation provides the concrete logic for <ref refid="classhelios_1_1event_1_1BasicEventManager_1a572c4c66409151b16992008849d9bbe6" kindref="member">post()</ref> and <ref refid="classhelios_1_1event_1_1BasicEventManager_1ac477416fc138acbb03df5e946dc99240" kindref="member">dispatchAll()</ref>. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>helios::event::BasicEventManager</label>
+        <link refid="classhelios_1_1event_1_1BasicEventManager"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::event::EventManager</label>
+        <link refid="classhelios_1_1event_1_1EventManager"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>helios::event::BasicEventManager</label>
+        <link refid="classhelios_1_1event_1_1BasicEventManager"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::event::EventManager</label>
+        <link refid="classhelios_1_1event_1_1EventManager"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/event/BasicEventManager.ixx" line="28" column="5" bodyfile="include/helios/event/BasicEventManager.ixx" bodystart="28" bodyend="74"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1event_1_1BasicEventManager_1a09c5a6c3edfa8b34e5858606be3e769b" prot="public" virt="non-virtual"><scope>helios::event::BasicEventManager</scope><name>BasicEventManager</name></member>
+      <member refid="classhelios_1_1event_1_1BasicEventManager_1ac477416fc138acbb03df5e946dc99240" prot="public" virt="virtual"><scope>helios::event::BasicEventManager</scope><name>dispatchAll</name></member>
+      <member refid="classhelios_1_1event_1_1EventManager_1a575c31f89f8002b9c507e3a00da32cb1" prot="public" virt="non-virtual"><scope>helios::event::BasicEventManager</scope><name>dispatcher</name></member>
+      <member refid="classhelios_1_1event_1_1EventManager_1a1deac9e3799c2f473fdb16bddb4dada8" prot="protected" virt="non-virtual"><scope>helios::event::BasicEventManager</scope><name>dispatcher_</name></member>
+      <member refid="classhelios_1_1event_1_1EventManager_1a4a28a6df832bab23b4f9ef4d867a197e" prot="protected" virt="non-virtual"><scope>helios::event::BasicEventManager</scope><name>EventManager</name></member>
+      <member refid="classhelios_1_1event_1_1EventManager_1a3c5b42ff27558661f8fdb53873caa80a" prot="public" virt="non-virtual"><scope>helios::event::BasicEventManager</scope><name>EventManager</name></member>
+      <member refid="classhelios_1_1event_1_1EventManager_1a06528b307d0e99a55a4aea8b608f6f8b" prot="protected" virt="non-virtual"><scope>helios::event::BasicEventManager</scope><name>eventQueue_</name></member>
+      <member refid="classhelios_1_1event_1_1BasicEventManager_1a572c4c66409151b16992008849d9bbe6" prot="public" virt="virtual"><scope>helios::event::BasicEventManager</scope><name>post</name></member>
+      <member refid="classhelios_1_1event_1_1BasicEventManager_1a1ce9ef29ac8f29915b027fdc888db6a9" prot="public" virt="non-virtual"><scope>helios::event::BasicEventManager</scope><name>post</name></member>
+      <member refid="classhelios_1_1event_1_1BasicEventManager_1a7355384d93cdcebec0ee5f3fcb57bb2f" prot="public" virt="non-virtual"><scope>helios::event::BasicEventManager</scope><name>post</name></member>
+      <member refid="classhelios_1_1event_1_1EventManager_1ac25503abf074331900fa19d5a44a5ad0" prot="public" virt="non-virtual"><scope>helios::event::BasicEventManager</scope><name>subscribe</name></member>
+      <member refid="classhelios_1_1event_1_1EventManager_1a5c5d184dd800b3d7cab4f1c473f6d270" prot="public" virt="virtual"><scope>helios::event::BasicEventManager</scope><name>~EventManager</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

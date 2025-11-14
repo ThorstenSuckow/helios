@@ -1,0 +1,236 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1input_1_1InputAdapter" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>helios::input::InputAdapter</compoundname>
+    <derivedcompoundref refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter" prot="public" virt="non-virtual">helios::ext::glfw::input::GLFWInputAdapter</derivedcompoundref>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classhelios_1_1input_1_1InputAdapter_1a7e70390747059f6c7dc6665c59819a86" prot="protected" static="no" mutable="no">
+        <type>const <ref refid="classhelios_1_1util_1_1log_1_1Logger" kindref="compound">helios::util::log::Logger</ref> &amp;</type>
+        <definition>const helios::util::log::Logger&amp; helios::input::InputAdapter::logger_</definition>
+        <argsstring></argsstring>
+        <name>logger_</name>
+        <qualifiedname>helios::input::InputAdapter::logger_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1util_1_1log_1_1LogManager_1aeb3c579d6cd53e2ca50384ceadd5d3a6" kindref="member">helios::util::log::LogManager::getInstance</ref>().registerLogger(<ref refid="OpenGLUniformLocationMap_8ixx_1acbc04f24078582c7d42b2085be5d5750" kindref="member">HELIOS_LOG_SCOPE</ref>)</initializer>
+        <briefdescription>
+<para>The const reference to the logger used with this Adapter. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/input/InputAdapter.ixx" line="29" column="41" bodyfile="include/helios/input/InputAdapter.ixx" bodystart="29" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1input_1_1InputAdapter_1a9d0ad5cfffd1efd405cc0b4aa4ce9c79" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::input::InputAdapter::InputAdapter</definition>
+        <argsstring>()=default</argsstring>
+        <name>InputAdapter</name>
+        <qualifiedname>helios::input::InputAdapter::InputAdapter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/input/InputAdapter.ixx" line="33" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1input_1_1InputAdapter_1ac0e01bc42c45d7bce722836e162259bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::input::InputAdapter::~InputAdapter</definition>
+        <argsstring>()=default</argsstring>
+        <name>~InputAdapter</name>
+        <qualifiedname>helios::input::InputAdapter::~InputAdapter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/input/InputAdapter.ixx" line="35" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1input_1_1InputAdapter_1a8896a83d1b86578aa3c1f13be1c5e63f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool helios::input::InputAdapter::isKeyPressed</definition>
+        <argsstring>(helios::input::types::Key key, const helios::window::Window &amp;win) const noexcept=0</argsstring>
+        <name>isKeyPressed</name>
+        <qualifiedname>helios::input::InputAdapter::isKeyPressed</qualifiedname>
+        <reimplementedby refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a7f04d04c60d95fc596929ed1b2bc345c">isKeyPressed</reimplementedby>
+        <param>
+          <type><ref refid="namespacehelios_1_1input_1_1types_1a963e220296531c047308439c3425bcc5" kindref="member">helios::input::types::Key</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1window_1_1Window" kindref="compound">helios::window::Window</ref> &amp;</type>
+          <declname>win</declname>
+        </param>
+        <briefdescription>
+<para>Returns true if the key is pressed, otherwise false. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The key to query for the `pressed` state. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>win</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The window instance from which the state should be queried.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the key is pressed, otherwise false. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/input/InputAdapter.ixx" line="45" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1input_1_1InputAdapter_1a3a5e1e0e577c8af5877f10d9578d4875" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool helios::input::InputAdapter::isConnected</definition>
+        <argsstring>(helios::input::types::Gamepad gamepadId) const noexcept=0</argsstring>
+        <name>isConnected</name>
+        <qualifiedname>helios::input::InputAdapter::isConnected</qualifiedname>
+        <param>
+          <type><ref refid="namespacehelios_1_1input_1_1types_1a4dd39c1a113edbe36b92b088d8dbf2ff" kindref="member">helios::input::types::Gamepad</ref></type>
+          <declname>gamepadId</declname>
+        </param>
+        <briefdescription>
+<para>Returns a boolean value indicating the availability (i.e., connect state) of the gamepad identified by the specified gamepadId. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gamepadId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The gamepadId to query for availability.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the Gamepad identified by gamepadId is connected, otherwise false. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/input/InputAdapter.ixx" line="58" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1input_1_1InputAdapter_1a5b3852c685d7321d2faeb2de79aad538" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void helios::input::InputAdapter::updateGamepadState</definition>
+        <argsstring>(unsigned int gamepadMask) noexcept=0</argsstring>
+        <name>updateGamepadState</name>
+        <qualifiedname>helios::input::InputAdapter::updateGamepadState</qualifiedname>
+        <param>
+          <type>unsigned int</type>
+          <declname>gamepadMask</declname>
+        </param>
+        <briefdescription>
+<para>Updates the <ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">GamepadState</ref> objects with the values queried from the underlying Gamepad identified by the specified mask. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Updates the <ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">GamepadState</ref> objects with the current values of the underlying hardware. If querying the underlying hardware fails, this method will update the <ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">GamepadState</ref> values to a valid initial state (no movement or interaction). Implementations should use `isConnected()` to check whether the current values of a `GamepadState` object can be trusted.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gamepadMask</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A bitmask representing all <ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">GamepadState</ref> objects to update, e.g. Gamepad::ONE | Gamepad::TWO... </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/input/InputAdapter.ixx" line="74" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1input_1_1InputAdapter_1ae64e5b1f78b57e9cce3c092c379605d6" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>const <ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">GamepadState</ref> &amp;</type>
+        <definition>virtual const GamepadState &amp; helios::input::InputAdapter::gamepadState</definition>
+        <argsstring>(helios::input::types::Gamepad gamepadId) const noexcept=0</argsstring>
+        <name>gamepadState</name>
+        <qualifiedname>helios::input::InputAdapter::gamepadState</qualifiedname>
+        <param>
+          <type><ref refid="namespacehelios_1_1input_1_1types_1a4dd39c1a113edbe36b92b088d8dbf2ff" kindref="member">helios::input::types::Gamepad</ref></type>
+          <declname>gamepadId</declname>
+        </param>
+        <briefdescription>
+<para>Returns a const ref to the GamepadState-object for the specified gamepadId. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Implementing APIs can call this method in each frame to retrieve the current state for the gamepad, as computed by <ref refid="classhelios_1_1input_1_1InputAdapter_1a5b3852c685d7321d2faeb2de79aad538" kindref="member">updateGamepadState()</ref>. This method guarantees that for a given gamepadId, a single <ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">GamepadState</ref> object is reused across calls, avoiding re-instantiation overhead.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gamepadId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The id of the gamepad to query</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Returns a const ref to the <ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">GamepadState</ref>. If the <ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">GamepadState</ref> was never queried before, or if a recent call to updateGamepadState did not succeed, the values of the <ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">GamepadState</ref> will not hold representative values. Implementing APIs should verify the availability of the Gamepad by calling <ref refid="classhelios_1_1input_1_1InputAdapter_1a3a5e1e0e577c8af5877f10d9578d4875" kindref="member">isConnected()</ref></para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1input_1_1InputAdapter_1a5b3852c685d7321d2faeb2de79aad538" kindref="member">updateGamepadState</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1input_1_1InputAdapter_1a3a5e1e0e577c8af5877f10d9578d4875" kindref="member">isConnected</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/input/InputAdapter.ixx" line="95" column="37"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Abstract interface for platform-specific input adapters. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::ext::glfw::input::GLFWInputAdapter</label>
+        <link refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>helios::input::InputAdapter</label>
+        <link refid="classhelios_1_1input_1_1InputAdapter"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>helios::input::InputAdapter</label>
+        <link refid="classhelios_1_1input_1_1InputAdapter"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>logger_</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::util::log::Logger</label>
+        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/input/InputAdapter.ixx" line="23" column="5" bodyfile="include/helios/input/InputAdapter.ixx" bodystart="23" bodyend="98"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1input_1_1InputAdapter_1ae64e5b1f78b57e9cce3c092c379605d6" prot="public" virt="pure-virtual"><scope>helios::input::InputAdapter</scope><name>gamepadState</name></member>
+      <member refid="classhelios_1_1input_1_1InputAdapter_1a9d0ad5cfffd1efd405cc0b4aa4ce9c79" prot="public" virt="non-virtual"><scope>helios::input::InputAdapter</scope><name>InputAdapter</name></member>
+      <member refid="classhelios_1_1input_1_1InputAdapter_1a3a5e1e0e577c8af5877f10d9578d4875" prot="public" virt="pure-virtual"><scope>helios::input::InputAdapter</scope><name>isConnected</name></member>
+      <member refid="classhelios_1_1input_1_1InputAdapter_1a8896a83d1b86578aa3c1f13be1c5e63f" prot="public" virt="pure-virtual"><scope>helios::input::InputAdapter</scope><name>isKeyPressed</name></member>
+      <member refid="classhelios_1_1input_1_1InputAdapter_1a7e70390747059f6c7dc6665c59819a86" prot="protected" virt="non-virtual"><scope>helios::input::InputAdapter</scope><name>logger_</name></member>
+      <member refid="classhelios_1_1input_1_1InputAdapter_1a5b3852c685d7321d2faeb2de79aad538" prot="public" virt="pure-virtual"><scope>helios::input::InputAdapter</scope><name>updateGamepadState</name></member>
+      <member refid="classhelios_1_1input_1_1InputAdapter_1ac0e01bc42c45d7bce722836e162259bc" prot="public" virt="virtual"><scope>helios::input::InputAdapter</scope><name>~InputAdapter</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

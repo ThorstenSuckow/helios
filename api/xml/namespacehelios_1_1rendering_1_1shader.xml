@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="namespacehelios_1_1rendering_1_1shader" kind="namespace" language="Markdown">
+    <compoundname>helios::rendering::shader</compoundname>
+    <innerclass refid="classhelios_1_1rendering_1_1shader_1_1Shader" prot="public">helios::rendering::shader::Shader</innerclass>
+    <innerclass refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap" prot="public">helios::rendering::shader::UniformValueMap</innerclass>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespacehelios_1_1rendering_1_1shader_1a0a320e03bcf6f60bc90428c450dfb329" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>UniformSemantics</name>
+        <qualifiedname>helios::rendering::shader::UniformSemantics</qualifiedname>
+        <enumvalue id="namespacehelios_1_1rendering_1_1shader_1a0a320e03bcf6f60bc90428c450dfb329ae10b6dfca8d323f6ec5779344835885e" prot="public">
+          <name>WorldMatrix</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>Represents the world transformation matrix of an object. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1rendering_1_1shader_1a0a320e03bcf6f60bc90428c450dfb329a5c79d4241e5a2978c699473b01f82fe9" prot="public">
+          <name>ProjectionMatrix</name>
+          <briefdescription>
+<para>Represents the projection matrix. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1rendering_1_1shader_1a0a320e03bcf6f60bc90428c450dfb329ab3184e06babbab03e639eed0554b29eb" prot="public">
+          <name>ViewMatrix</name>
+          <briefdescription>
+<para>Represents the (camera) view space, transforming world space to view space. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1rendering_1_1shader_1a0a320e03bcf6f60bc90428c450dfb329aaaf9abb4ecf0d3618eac3e02b50ab5a7" prot="public">
+          <name>MaterialBaseColor</name>
+          <briefdescription>
+<para>Represents the (material&apos;s) base color. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1rendering_1_1shader_1a0a320e03bcf6f60bc90428c450dfb329ae555f11be67c1dc8afe22845d052682a" prot="public">
+          <name>MaterialRoughness</name>
+          <briefdescription>
+<para>Represents the (material&apos;s) roughness factor. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1rendering_1_1shader_1a0a320e03bcf6f60bc90428c450dfb329a4eecfb50c5a20eb78bc4d5304e9d8618" prot="public">
+          <name>size_</name>
+          <briefdescription>
+<para>Number of entries in this enum. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Enumeration class defining common semantic meanings for uniform variables in Shaders. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This enum class provides a strongly typed way to refer to **standard** uniform variables that represent essential matrices or other global data typically passed to shaders.</para>
+<para>Concrete shader implementations use these semantics to map actual uniform names and their respective uniform locations.</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap" kindref="compound">UniformValueMap</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/shader/UniformSemantics.ixx" line="25" column="5" bodyfile="include/helios/rendering/shader/UniformSemantics.ixx" bodystart="25" bodyend="56"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacehelios_1_1rendering_1_1shader_1ab80163b13aee26b5d5a100c01e4804c9" prot="public" static="no">
+        <type>std::variant&lt; <ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref>, <ref refid="namespacehelios_1_1math_1a08252f81850c5902e3c8dead272f3332" kindref="member">helios::math::vec4f</ref>, float &gt;</type>
+        <definition>using helios::rendering::shader::UniformValue =  std::variant&lt;
+        helios::math::mat4f,
+        helios::math::vec4f,
+        float
+    &gt;</definition>
+        <argsstring></argsstring>
+        <name>UniformValue</name>
+        <qualifiedname>helios::rendering::shader::UniformValue</qualifiedname>
+        <briefdescription>
+<para>A type alias for the variant containing all supported uniform types. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para>[Str22, 100] </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/shader/UniformValueMap.ixx" line="25" column="5" bodyfile="include/helios/rendering/shader/UniformValueMap.ixx" bodystart="25" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para><ref refid="classhelios_1_1rendering_1_1shader_1_1Shader" kindref="compound">Shader</ref> program management. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This namespace provides shader program management, uniform semantics, and value mapping for shader parameter configuration in the rendering pipeline. Manages shader programs and their parameters, providing a type-safe interface for configuring shader uniforms and semantics. </para>
+    </detaileddescription>
+    <location file="include/helios/rendering/shader/README.md" line="8" column="1"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8util_8io_8StringFileReader" kind="module">
+    <compoundname>helios.util.io.StringFileReader</compoundname>
+    <innerfile refid="StringFileReader_8ixx">StringFileReader.ixx</innerfile>
+    <innerclass refid="classhelios_1_1util_1_1io_1_1StringFileReader" prot="public">helios::util::io::StringFileReader</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1util_1_1io_1_1StringFileReader_1a807677d6c32c3746599d0d459a1bd07f" prot="protected" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1util_1_1log_1_1Logger" kindref="compound">helios::util::log::Logger</ref></type>
+        <definition>helios::util::log::Logger helios::util::io::StringFileReader::logger_</definition>
+        <argsstring></argsstring>
+        <name>logger_</name>
+        <qualifiedname>helios::util::io::StringFileReader::logger_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1util_1_1log_1_1LogManager_1aeb3c579d6cd53e2ca50384ceadd5d3a6" kindref="member">helios::util::log::LogManager::getInstance</ref>().registerLogger(<ref refid="OpenGLUniformLocationMap_8ixx_1acbc04f24078582c7d42b2085be5d5750" kindref="member">HELIOS_LOG_SCOPE</ref>)</initializer>
+        <briefdescription>
+<para>The logger used with this FileReader. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/io/StringFileReader.ixx" line="28" column="35" bodyfile="include/helios/util/io/StringFileReader.ixx" bodystart="28" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1util_1_1io_1_1StringFileReader_1a4ba4553c81cc82a40278d3ecd02088fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::util::io::StringFileReader::~StringFileReader</definition>
+        <argsstring>()=default</argsstring>
+        <name>~StringFileReader</name>
+        <qualifiedname>helios::util::io::StringFileReader::~StringFileReader</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/io/StringFileReader.ixx" line="32" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1util_1_1io_1_1StringFileReader_1a0d4a6a9707c98f149b7f80064562f427" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::util::io::StringFileReader::StringFileReader</definition>
+        <argsstring>()=default</argsstring>
+        <name>StringFileReader</name>
+        <qualifiedname>helios::util::io::StringFileReader::StringFileReader</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Default constructor. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/io/StringFileReader.ixx" line="37" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1util_1_1io_1_1StringFileReader_1af89ef5d54bd420db553b9c34e3363b76" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::string</type>
+        <definition>virtual std::string helios::util::io::StringFileReader::getContents</definition>
+        <argsstring>(const std::string &amp;filename) const =0</argsstring>
+        <name>getContents</name>
+        <qualifiedname>helios::util::io::StringFileReader::getContents</qualifiedname>
+        <reimplementedby refid="classhelios_1_1util_1_1io_1_1BasicStringFileReader_1a6ef8e2249dde8a230ef4e4205be95308">getContents</reimplementedby>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <briefdescription>
+<para>Reads the entire contents of the file and returns them as a string. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The path to the file to read. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The contents of the file as a std::string. If reading fails, an empty string is returned.</para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::runtime_error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the file operation fails. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/io/StringFileReader.ixx" line="47" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1util_1_1io_1_1StringFileReader_1a2fdb8416f82ef48c666b159152a606ae" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool helios::util::io::StringFileReader::readInto</definition>
+        <argsstring>(const std::string &amp;filename, std::string &amp;contents) const noexcept=0</argsstring>
+        <name>readInto</name>
+        <qualifiedname>helios::util::io::StringFileReader::readInto</qualifiedname>
+        <reimplementedby refid="classhelios_1_1util_1_1io_1_1BasicStringFileReader_1a5c6f5d7806705be33e1f58807999bc2e">readInto</reimplementedby>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>contents</declname>
+        </param>
+        <briefdescription>
+<para>Attempts to read the entire contents of the file into the provided string. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The path to the file to read. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>contents</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Output parameter receiving the file contents on success. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if reading succeeded and `contents` was populated, otherwise false. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/io/StringFileReader.ixx" line="56" column="23"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/util/io/StringFileReader.ixx" line="9" column="15"/>
+  </compounddef>
+</doxygen>

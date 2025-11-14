@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8ext_8glfw_8input_8GLFWInputAdapter" kind="module">
+    <compoundname>helios.ext.glfw.input.GLFWInputAdapter</compoundname>
+    <innerfile refid="GLFWInputAdapter_8ixx">GLFWInputAdapter.ixx</innerfile>
+    <innerclass refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter" prot="public">helios::ext::glfw::input::GLFWInputAdapter</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a2adea2135cad571616b29af5ffb645cb" prot="private" static="no" mutable="no">
+        <type>std::array&lt; <ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">helios::input::GamepadState</ref>, std::to_underlying(<ref refid="namespacehelios_1_1input_1_1types_1a963e220296531c047308439c3425bcc5a501d3c1d3d31f70db984de48396437f6" kindref="member">helios::input::types::Gamepad::size_</ref>)&gt;</type>
+        <definition>std::array&lt;helios::input::GamepadState, std::to_underlying(helios::input::types::Gamepad::size_)&gt; helios::ext::glfw::input::GLFWInputAdapter::gamepadStates_</definition>
+        <argsstring></argsstring>
+        <name>gamepadStates_</name>
+        <qualifiedname>helios::ext::glfw::input::GLFWInputAdapter::gamepadStates_</qualifiedname>
+        <initializer>= {}</initializer>
+        <briefdescription>
+<para>The const array to reference GamepadState objects. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/glfw/input/GLFWInputAdapter.ixx" line="38" column="20" bodyfile="include/ext/glfw/input/GLFWInputAdapter.ixx" bodystart="38" bodyend="38"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a7f04d04c60d95fc596929ed1b2bc345c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool helios::ext::glfw::input::GLFWInputAdapter::isKeyPressed</definition>
+        <argsstring>(helios::input::types::Key key, const helios::window::Window &amp;win) const noexcept override</argsstring>
+        <name>isKeyPressed</name>
+        <qualifiedname>helios::ext::glfw::input::GLFWInputAdapter::isKeyPressed</qualifiedname>
+        <reimplements refid="classhelios_1_1input_1_1InputAdapter_1a8896a83d1b86578aa3c1f13be1c5e63f">isKeyPressed</reimplements>
+        <param>
+          <type><ref refid="namespacehelios_1_1input_1_1types_1a963e220296531c047308439c3425bcc5" kindref="member">helios::input::types::Key</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1window_1_1Window" kindref="compound">helios::window::Window</ref> &amp;</type>
+          <declname>win</declname>
+        </param>
+        <briefdescription>
+<para>Checks if a specific key is currently pressed for the given window. If the specified window is not of tyoe GLFWWindow, this method always returns false. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns true if the key is pressed, otherwise false.   </para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The key to query for the `pressed` state. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>win</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The window instance from which the state should be queried.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the key is pressed, otherwise false.    </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/glfw/input/GLFWInputAdapter.ixx" line="47" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a611ca19866aa15359d01b8a8ef791c84" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::ext::glfw::input::GLFWInputAdapter::isKeyPressed</definition>
+        <argsstring>(helios::input::types::Key key, const helios::ext::glfw::window::GLFWWindow &amp;win) const noexcept</argsstring>
+        <name>isKeyPressed</name>
+        <qualifiedname>helios::ext::glfw::input::GLFWInputAdapter::isKeyPressed</qualifiedname>
+        <param>
+          <type><ref refid="namespacehelios_1_1input_1_1types_1a963e220296531c047308439c3425bcc5" kindref="member">helios::input::types::Key</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow" kindref="compound">helios::ext::glfw::window::GLFWWindow</ref> &amp;</type>
+          <declname>win</declname>
+        </param>
+        <briefdescription>
+<para>Checks if a specific key is currently pressed for the given GLFWWindow. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The helios key to check. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>win</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The `GLFWWindow` instance to query for the key-press.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the key is pressed, otherwise false. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/glfw/input/GLFWInputAdapter.ixx" line="58" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a9c0e5c21620b816d973db51d72950cd2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">helios::input::GamepadState</ref> &amp;</type>
+        <definition>const helios::input::GamepadState &amp; helios::ext::glfw::input::GLFWInputAdapter::GLFWInputAdapter::gamepadState</definition>
+        <argsstring>(helios::input::types::Gamepad gamepadId) const noexcept override</argsstring>
+        <name>GLFWInputAdapter::gamepadState</name>
+        <qualifiedname>helios::ext::glfw::input::GLFWInputAdapter::gamepadState</qualifiedname>
+        <param>
+          <type><ref refid="namespacehelios_1_1input_1_1types_1a4dd39c1a113edbe36b92b088d8dbf2ff" kindref="member">helios::input::types::Gamepad</ref></type>
+          <declname>gamepadId</declname>
+        </param>
+        <briefdescription>
+<para>Returns a const ref to the GamepadState-object for the specified gamepadId.    </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Implementing APIs can call this method in each frame to retrieve the current state for the gamepad, as computed by <ref refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a1334fd6083a02d0e07b889bba4578211" kindref="member">updateGamepadState()</ref>. This method guarantees that for a given gamepadId, a single GamepadState object is reused across calls, avoiding re-instantiation overhead.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gamepadId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The id of the gamepad to query</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Returns a const ref to the GamepadState. If the GamepadState was never queried before, or if a recent call to updateGamepadState did not succeed, the values of the GamepadState will not hold representative values. Implementing APIs should verify the availability of the Gamepad by calling <ref refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1acc76f54185f1a1c1de91a0cad400a806" kindref="member">isConnected()</ref></para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a1334fd6083a02d0e07b889bba4578211" kindref="member">updateGamepadState</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1acc76f54185f1a1c1de91a0cad400a806" kindref="member">isConnected</ref>    </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/glfw/input/GLFWInputAdapter.ixx" line="64" column="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a1334fd6083a02d0e07b889bba4578211" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::ext::glfw::input::GLFWInputAdapter::GLFWInputAdapter::updateGamepadState</definition>
+        <argsstring>(unsigned int mask) noexcept override</argsstring>
+        <name>GLFWInputAdapter::updateGamepadState</name>
+        <qualifiedname>helios::ext::glfw::input::GLFWInputAdapter::updateGamepadState</qualifiedname>
+        <param>
+          <type>unsigned int</type>
+          <declname>mask</declname>
+        </param>
+        <briefdescription>
+<para>Updates the GamepadState objects with the values queried from the underlying Gamepad identified by the specified mask.    </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Updates the GamepadState objects with the current values of the underlying hardware. If querying the underlying hardware fails, this method will update the GamepadState values to a valid initial state (no movement or interaction). Implementations should use `isConnected()` to check whether the current values of a `GamepadState` object can be trusted.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gamepadMask</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A bitmask representing all GamepadState objects to update, e.g. Gamepad::ONE | Gamepad::TWO...    </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/glfw/input/GLFWInputAdapter.ixx" line="70" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1acc76f54185f1a1c1de91a0cad400a806" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::ext::glfw::input::GLFWInputAdapter::GLFWInputAdapter::isConnected</definition>
+        <argsstring>(helios::input::types::Gamepad gamepadId) const noexcept override</argsstring>
+        <name>GLFWInputAdapter::isConnected</name>
+        <qualifiedname>helios::ext::glfw::input::GLFWInputAdapter::isConnected</qualifiedname>
+        <param>
+          <type><ref refid="namespacehelios_1_1input_1_1types_1a4dd39c1a113edbe36b92b088d8dbf2ff" kindref="member">helios::input::types::Gamepad</ref></type>
+          <declname>gamepadId</declname>
+        </param>
+        <briefdescription>
+<para>Returns a boolean value indicating the availability (i.e., connect state) of the gamepad identified by the specified gamepadId.    </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gamepadId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The gamepadId to query for availability.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the Gamepad identified by gamepadId is connected, otherwise false.    </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/glfw/input/GLFWInputAdapter.ixx" line="76" column="15"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/ext/glfw/input/GLFWInputAdapter.ixx" line="9" column="15"/>
+  </compounddef>
+</doxygen>

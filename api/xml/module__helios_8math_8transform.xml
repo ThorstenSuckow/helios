@@ -1,0 +1,261 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8math_8transform" kind="module">
+    <compoundname>helios.math.transform</compoundname>
+    <innerfile refid="math_2transform_2__module_8ixx">_module.ixx</innerfile>
+    <innerfile refid="camera_8ixx">camera.ixx</innerfile>
+    <innerfile refid="model_8ixx">model.ixx</innerfile>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespacehelios_1_1math_1aef6bef7ca3d31a4908a66e16c9771420" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>mat4f</type>
+        <definition>mat4f helios::math::lookAt</definition>
+        <argsstring>(const vec3f &amp;eye, const vec3f &amp;center, const vec3f &amp;up) noexcept</argsstring>
+        <name>lookAt</name>
+        <qualifiedname>helios::math::lookAt</qualifiedname>
+        <param>
+          <type>const vec3f &amp;</type>
+          <declname>eye</declname>
+        </param>
+        <param>
+          <type>const vec3f &amp;</type>
+          <declname>center</declname>
+        </param>
+        <param>
+          <type>const vec3f &amp;</type>
+          <declname>up</declname>
+        </param>
+        <briefdescription>
+<para>Returns the 4x4 lookAt-matrix for transforming world coordinates to camera space. The method creates the camera coordinate system based on the parameters eye, i.e. the vantage point in world space, the camera&apos;s up direction and center, representing the point of interest. Note that the returned matrix is essentially a composition of a change of coordinates matrix P(C &lt;- W) and a translation to the origin, i.e. the camera is sitting at the origin (0, 0, 0) looking down the negative z-axis, i.e. conceptually. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>P(W&lt;-C) * T(-eye)</para>
+<para>The 4x4 matrix can then be used for computing the perspective projection for creating the clip space</para>
+<para>clip = P * V * W * M</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>eye</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>center</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>up</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/transform/camera.ixx" line="37" column="11" declfile="include/helios/math/transform/camera.ixx" declline="37" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacehelios_1_1math_1a643691235959c2f53d144a4ee9a0e251" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>mat4f</type>
+        <definition>mat4f helios::math::rotate</definition>
+        <argsstring>(const mat4f &amp;model, float radians, const vec3f &amp;axis) noexcept</argsstring>
+        <name>rotate</name>
+        <qualifiedname>helios::math::rotate</qualifiedname>
+        <param>
+          <type>const mat4f &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>radians</declname>
+        </param>
+        <param>
+          <type>const vec3f &amp;</type>
+          <declname>axis</declname>
+        </param>
+        <briefdescription>
+<para>Creates an affine rotation matrix R&apos; = M * R by &quot;baking&quot; the rotation part into the model matrix. Any operation R&apos; * v will make sure that v is rotated around the local origin, then transformed into world space. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>radians</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>axis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/transform/model.ixx" line="23" column="11" declfile="include/helios/math/transform/model.ixx" declline="23" declcolumn="11"/>
+        <references refid="namespacehelios_1_1math_1a4949642a7cca09c7950bb6a1b75260c9" compoundref="utils_8ixx" startline="19" endline="21">helios::math::radians</references>
+      </memberdef>
+      <memberdef kind="function" id="namespacehelios_1_1math_1addafb8dbe33d09352658b55cee9a0898" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>mat4f</type>
+        <definition>mat4f helios::math::translate</definition>
+        <argsstring>(const mat4f &amp;model, const vec3f &amp;v) noexcept</argsstring>
+        <name>translate</name>
+        <qualifiedname>helios::math::translate</qualifiedname>
+        <param>
+          <type>const mat4f &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const vec3f &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+<para>Creates an affine transformation matrix M&apos; = M * T by &quot;baking&quot; the translation part into the model matrix. Any operation M&apos; * v will make sure that v is translated in local space, then transformed into world space. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/transform/model.ixx" line="35" column="22" bodyfile="include/helios/math/transform/model.ixx" bodystart="35" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacehelios_1_1math_1ae230dbf0f416c8c868d5fea73d6babdb" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>mat4f</type>
+        <definition>mat4f helios::math::scale</definition>
+        <argsstring>(const mat4f &amp;model, const vec3f &amp;v) noexcept</argsstring>
+        <name>scale</name>
+        <qualifiedname>helios::math::scale</qualifiedname>
+        <param>
+          <type>const mat4f &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const vec3f &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+<para>Creates an affine transformation matrix S&apos; = M * S by &quot;&quot;baking" the scaling part into the model matrix. Any operation S&apos; * v will make sure that v is scaled in local space, then transformed into world space. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/transform/model.ixx" line="53" column="21" bodyfile="include/helios/math/transform/model.ixx" bodystart="53" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacehelios_1_1math_1a8cc238c96b9b131d26357870e87ed668" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>mat4f</type>
+        <definition>mat4f helios::math::scale</definition>
+        <argsstring>(const mat4f &amp;model, const float scale_by) noexcept</argsstring>
+        <name>scale</name>
+        <qualifiedname>helios::math::scale</qualifiedname>
+        <param>
+          <type>const mat4f &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>scale_by</declname>
+        </param>
+        <briefdescription>
+<para>Creates an affine transformation matrix S&apos; = M * S by &quot;baking&quot; the scaling part into the model matrix. Any operation S&apos; * v will make sure that v is scaled in local space, then transformed into world space. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>scale_by</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/transform/model.ixx" line="73" column="21" bodyfile="include/helios/math/transform/model.ixx" bodystart="73" bodyend="81"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Transformation utilities for cameras and models. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This module provides transformation functions and utilities for camera and model transformations. </para>
+    </detaileddescription>
+    <location file="include/helios/math/transform/_module.ixx" line="12" column="15"/>
+  </compounddef>
+</doxygen>

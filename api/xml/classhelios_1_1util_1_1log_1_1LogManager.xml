@@ -1,0 +1,300 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1util_1_1log_1_1LogManager" kind="class" language="C++" prot="public">
+    <compoundname>helios::util::log::LogManager</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1util_1_1log_1_1LogManager_1afda5d748a094815f399bc8135c301f94" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::util::log::LogManager::loggingEnabled_</definition>
+        <argsstring></argsstring>
+        <name>loggingEnabled_</name>
+        <qualifiedname>helios::util::log::LogManager::loggingEnabled_</qualifiedname>
+        <initializer>= <ref refid="LogManager_8ixx_1a3ccdf5e151cf4faa7bea9d68a1af829a" kindref="member">LOGGING_ENABLED</ref></initializer>
+        <briefdescription>
+<para>Flag indicating whether log output should be globally enabled or disabled. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="32" column="14" bodyfile="include/helios/util/log/LogManager.ixx" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1util_1_1log_1_1LogManager_1a2fbbbd91631c609a8104eeff9b66bddb" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, std::unique_ptr&lt; <ref refid="classhelios_1_1util_1_1log_1_1Logger" kindref="compound">Logger</ref> &gt; &gt;</type>
+        <definition>std::unordered_map&lt;std::string, std::unique_ptr&lt;Logger&gt; &gt; helios::util::log::LogManager::loggers_</definition>
+        <argsstring></argsstring>
+        <name>loggers_</name>
+        <qualifiedname>helios::util::log::LogManager::loggers_</qualifiedname>
+        <briefdescription>
+<para>Unordered map holding unique pointers to the loggers managed by this class, guaranteed to be not null. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="38" column="28" bodyfile="include/helios/util/log/LogManager.ixx" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1util_1_1log_1_1LogManager_1aeaf0830fffbfa40414886f4594a2bcfa" prot="private" static="no" mutable="no">
+        <type>const std::unique_ptr&lt; <ref refid="classhelios_1_1util_1_1log_1_1Logger" kindref="compound">Logger</ref> &gt;</type>
+        <definition>const std::unique_ptr&lt;Logger&gt; helios::util::log::LogManager::defaultLogger_</definition>
+        <argsstring></argsstring>
+        <name>defaultLogger_</name>
+        <qualifiedname>helios::util::log::LogManager::defaultLogger_</qualifiedname>
+        <briefdescription>
+<para>Default logger if a logger for a specific scope was not found. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="45" column="31" bodyfile="include/helios/util/log/LogManager.ixx" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1util_1_1log_1_1LogManager_1abcc8180a40241988b4ad98c5a238c761" prot="private" static="no" mutable="yes">
+        <type>std::mutex</type>
+        <definition>std::mutex helios::util::log::LogManager::mapMutex_</definition>
+        <argsstring></argsstring>
+        <name>mapMutex_</name>
+        <qualifiedname>helios::util::log::LogManager::mapMutex_</qualifiedname>
+        <briefdescription>
+<para>Mutex providing mutually exclusive access to the loggers map. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="51" column="28" bodyfile="include/helios/util/log/LogManager.ixx" bodystart="51" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1a3d2329ccf3af176be69ce3148fc5b731" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::util::log::LogManager::LogManager</definition>
+        <argsstring>()</argsstring>
+        <name>LogManager</name>
+        <qualifiedname>helios::util::log::LogManager::LogManager</qualifiedname>
+        <briefdescription>
+<para>Creates the <ref refid="classhelios_1_1util_1_1log_1_1LogManager" kindref="compound">LogManager</ref> and registers an unscoped default logger. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="57" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1a7ffda8e8a0051befb5ec47fd61c316c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::util::log::LogManager::~LogManager</definition>
+        <argsstring>()=default</argsstring>
+        <name>~LogManager</name>
+        <qualifiedname>helios::util::log::LogManager::~LogManager</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="61" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1afb10a34aeaaa1fb36b8eefd42b184049" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::util::log::LogManager::LogManager</definition>
+        <argsstring>(const LogManager &amp;)=delete</argsstring>
+        <name>LogManager</name>
+        <qualifiedname>helios::util::log::LogManager::LogManager</qualifiedname>
+        <param>
+          <type>const LogManager &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Enforce singleton (see Meyer&apos;s Singleton) <simplesect kind="see"><para><ulink url="https://en.wikipedia.org/wiki/Singleton_pattern">https://en.wikipedia.org/wiki/Singleton_pattern</ulink> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="67" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1a2e8452f2fe3524c7897c49b7d9b76e5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>LogManager &amp;</type>
+        <definition>LogManager &amp; helios::util::log::LogManager::operator=</definition>
+        <argsstring>(const LogManager &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>helios::util::log::LogManager::operator=</qualifiedname>
+        <param>
+          <type>const LogManager &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="68" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1a9495818e6f7568653f36886d43aa75cf" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classhelios_1_1util_1_1log_1_1Logger" kindref="compound">Logger</ref> &amp;</type>
+        <definition>const Logger &amp; helios::util::log::LogManager::logger</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>logger</name>
+        <qualifiedname>helios::util::log::LogManager::logger</qualifiedname>
+        <briefdescription>
+<para>Returns a const reference to the default logger managed with this <ref refid="classhelios_1_1util_1_1log_1_1LogManager" kindref="compound">LogManager</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The default <ref refid="classhelios_1_1util_1_1log_1_1Logger" kindref="compound">Logger</ref> instance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="84" column="23"/>
+        <references refid="classhelios_1_1util_1_1log_1_1LogManager_1a9495818e6f7568653f36886d43aa75cf">logger</references>
+        <referencedby refid="classhelios_1_1util_1_1log_1_1LogManager_1a9495818e6f7568653f36886d43aa75cf">logger</referencedby>
+        <referencedby refid="classhelios_1_1util_1_1log_1_1LogManager_1a4b85719776951cd826d2fb3a4ab40e59">logger</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1a4b85719776951cd826d2fb3a4ab40e59" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classhelios_1_1util_1_1log_1_1Logger" kindref="compound">Logger</ref> &amp;</type>
+        <definition>const Logger &amp; helios::util::log::LogManager::logger</definition>
+        <argsstring>(const std::string &amp;scope) const noexcept</argsstring>
+        <name>logger</name>
+        <qualifiedname>helios::util::log::LogManager::logger</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>scope</declname>
+        </param>
+        <briefdescription>
+<para>Returns a const reference to the logger instance for the specified scope. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Will fall back to the default logger if the scope was not registered yet. This method is thread safe for map look-ups.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scope</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The textual scope name of the requested logger. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The logger registered with the scope, or the default logger if none was found. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="97" column="23"/>
+        <references refid="classhelios_1_1util_1_1log_1_1LogManager_1a9495818e6f7568653f36886d43aa75cf">logger</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1ac04d603885ef13b734099c4c812e2eb9" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1util_1_1log_1_1Logger" kindref="compound">Logger</ref> &amp;</type>
+        <definition>Logger &amp; helios::util::log::LogManager::registerLogger</definition>
+        <argsstring>(const std::string &amp;scope) noexcept</argsstring>
+        <name>registerLogger</name>
+        <qualifiedname>helios::util::log::LogManager::registerLogger</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>scope</declname>
+        </param>
+        <briefdescription>
+<para>Registers a new logger with this manager. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method is thread safe for map modifications.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scope</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The scope requested for the logger to create. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The logger registered with the scope, or the logger already registered with the <ref refid="classhelios_1_1util_1_1log_1_1LogManager" kindref="compound">LogManager</ref> under the given scope. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="109" column="17"/>
+        <references refid="classhelios_1_1util_1_1log_1_1LogManager_1ac04d603885ef13b734099c4c812e2eb9">registerLogger</references>
+        <referencedby refid="classhelios_1_1util_1_1log_1_1LogManager_1ac04d603885ef13b734099c4c812e2eb9">registerLogger</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1adab66fefed9700defd5199358f4f9874" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::util::log::LogManager::enableLogging</definition>
+        <argsstring>(bool enable) noexcept</argsstring>
+        <name>enableLogging</name>
+        <qualifiedname>helios::util::log::LogManager::enableLogging</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enable</declname>
+        </param>
+        <briefdescription>
+<para>Enables or disables all log output of the Loggers registered with this <ref refid="classhelios_1_1util_1_1log_1_1LogManager" kindref="compound">LogManager</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>True to enable log output with the registered loggers, otherwise false. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="117" column="14"/>
+        <references refid="classhelios_1_1util_1_1log_1_1LogManager_1adab66fefed9700defd5199358f4f9874">enableLogging</references>
+        <referencedby refid="classhelios_1_1util_1_1log_1_1LogManager_1adab66fefed9700defd5199358f4f9874">enableLogging</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1aeb3c579d6cd53e2ca50384ceadd5d3a6" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>LogManager &amp;</type>
+        <definition>static LogManager &amp; helios::util::log::LogManager::getInstance</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>getInstance</name>
+        <qualifiedname>helios::util::log::LogManager::getInstance</qualifiedname>
+        <briefdescription>
+<para>Returns the <ref refid="classhelios_1_1util_1_1log_1_1LogManager" kindref="compound">LogManager</ref> singleton instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Reference to the global <ref refid="classhelios_1_1util_1_1log_1_1LogManager" kindref="compound">LogManager</ref> instance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="76" column="27"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para><ref refid="classhelios_1_1util_1_1log_1_1LogManager" kindref="compound">LogManager</ref> for managing various scoped Loggers. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>A <ref refid="classhelios_1_1util_1_1log_1_1LogManager" kindref="compound">LogManager</ref> allows for globally suppressing all log output by calling <ref refid="classhelios_1_1util_1_1log_1_1LogManager_1adab66fefed9700defd5199358f4f9874" kindref="member">enableLogging()</ref>. Logging is enabled by default. </para>
+    </detaileddescription>
+    <location file="include/helios/util/log/LogManager.ixx" line="25" column="5" bodyfile="include/helios/util/log/LogManager.ixx" bodystart="25" bodyend="118"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1util_1_1log_1_1LogManager_1aeaf0830fffbfa40414886f4594a2bcfa" prot="private" virt="non-virtual"><scope>helios::util::log::LogManager</scope><name>defaultLogger_</name></member>
+      <member refid="classhelios_1_1util_1_1log_1_1LogManager_1adab66fefed9700defd5199358f4f9874" prot="public" virt="non-virtual"><scope>helios::util::log::LogManager</scope><name>enableLogging</name></member>
+      <member refid="classhelios_1_1util_1_1log_1_1LogManager_1aeb3c579d6cd53e2ca50384ceadd5d3a6" prot="public" virt="non-virtual"><scope>helios::util::log::LogManager</scope><name>getInstance</name></member>
+      <member refid="classhelios_1_1util_1_1log_1_1LogManager_1a9495818e6f7568653f36886d43aa75cf" prot="public" virt="non-virtual"><scope>helios::util::log::LogManager</scope><name>logger</name></member>
+      <member refid="classhelios_1_1util_1_1log_1_1LogManager_1a4b85719776951cd826d2fb3a4ab40e59" prot="public" virt="non-virtual"><scope>helios::util::log::LogManager</scope><name>logger</name></member>
+      <member refid="classhelios_1_1util_1_1log_1_1LogManager_1a2fbbbd91631c609a8104eeff9b66bddb" prot="private" virt="non-virtual"><scope>helios::util::log::LogManager</scope><name>loggers_</name></member>
+      <member refid="classhelios_1_1util_1_1log_1_1LogManager_1afda5d748a094815f399bc8135c301f94" prot="private" virt="non-virtual"><scope>helios::util::log::LogManager</scope><name>loggingEnabled_</name></member>
+      <member refid="classhelios_1_1util_1_1log_1_1LogManager_1a3d2329ccf3af176be69ce3148fc5b731" prot="private" virt="non-virtual"><scope>helios::util::log::LogManager</scope><name>LogManager</name></member>
+      <member refid="classhelios_1_1util_1_1log_1_1LogManager_1afb10a34aeaaa1fb36b8eefd42b184049" prot="public" virt="non-virtual"><scope>helios::util::log::LogManager</scope><name>LogManager</name></member>
+      <member refid="classhelios_1_1util_1_1log_1_1LogManager_1abcc8180a40241988b4ad98c5a238c761" prot="private" virt="non-virtual"><scope>helios::util::log::LogManager</scope><name>mapMutex_</name></member>
+      <member refid="classhelios_1_1util_1_1log_1_1LogManager_1a2e8452f2fe3524c7897c49b7d9b76e5e" prot="public" virt="non-virtual"><scope>helios::util::log::LogManager</scope><name>operator=</name></member>
+      <member refid="classhelios_1_1util_1_1log_1_1LogManager_1ac04d603885ef13b734099c4c812e2eb9" prot="public" virt="non-virtual"><scope>helios::util::log::LogManager</scope><name>registerLogger</name></member>
+      <member refid="classhelios_1_1util_1_1log_1_1LogManager_1a7ffda8e8a0051befb5ec47fd61c316c7" prot="public" virt="non-virtual"><scope>helios::util::log::LogManager</scope><name>~LogManager</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

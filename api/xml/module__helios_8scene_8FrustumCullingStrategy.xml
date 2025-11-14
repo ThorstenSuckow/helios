@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8scene_8FrustumCullingStrategy" kind="module">
+    <compoundname>helios.scene.FrustumCullingStrategy</compoundname>
+    <innerfile refid="FrustumCullingStrategy_8ixx">FrustumCullingStrategy.ixx</innerfile>
+    <innerclass refid="classhelios_1_1scene_1_1FrustumCullingStrategy" prot="public">helios::scene::FrustumCullingStrategy</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1scene_1_1FrustumCullingStrategy_1ad9f145bb29b43f0142eb417f14e83498" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::scene::FrustumCullingStrategy::~FrustumCullingStrategy</definition>
+        <argsstring>()=default</argsstring>
+        <name>~FrustumCullingStrategy</name>
+        <qualifiedname>helios::scene::FrustumCullingStrategy::~FrustumCullingStrategy</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/FrustumCullingStrategy.ixx" line="37" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1scene_1_1FrustumCullingStrategy_1a6132bcbaab01c563b08a97036f985e5a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::scene::FrustumCullingStrategy::FrustumCullingStrategy</definition>
+        <argsstring>()=default</argsstring>
+        <name>FrustumCullingStrategy</name>
+        <qualifiedname>helios::scene::FrustumCullingStrategy::FrustumCullingStrategy</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/FrustumCullingStrategy.ixx" line="39" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1scene_1_1FrustumCullingStrategy_1abd63e1dcf92b2a8fb7b019d3b4edf448" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::vector&lt; const <ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">helios::scene::SceneNode</ref> * &gt;</type>
+        <definition>virtual std::vector&lt; const helios::scene::SceneNode * &gt; helios::scene::FrustumCullingStrategy::cull</definition>
+        <argsstring>(const helios::scene::Camera &amp;camera, const helios::scene::SceneNode &amp;root)=0</argsstring>
+        <name>cull</name>
+        <qualifiedname>helios::scene::FrustumCullingStrategy::cull</qualifiedname>
+        <reimplementedby refid="classhelios_1_1scene_1_1CullNoneStrategy_1a2f2c1bebab877da27e46516363ac7996">cull</reimplementedby>
+        <param>
+          <type>const <ref refid="classhelios_1_1scene_1_1Camera" kindref="compound">helios::scene::Camera</ref> &amp;</type>
+          <declname>camera</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">helios::scene::SceneNode</ref> &amp;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+<para>Culls the scene graph to identify the visible SceneNodes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>camera</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The camera defining the view frustum. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>root</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The parent of the hierarchy to cull.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A vector with const pointers to the SceneNodes visible.</para>
+</simplesect>
+<simplesect kind="note"><para>Ownership of the SceneNodes remains with their respective owners. Implementing APIs have to make sure that the origins of the pointers returned with the vector are not destroyed in between. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/FrustumCullingStrategy.ixx" line="54" column="30"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/scene/FrustumCullingStrategy.ixx" line="9" column="15"/>
+  </compounddef>
+</doxygen>

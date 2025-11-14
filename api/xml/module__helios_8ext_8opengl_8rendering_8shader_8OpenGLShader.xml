@@ -1,0 +1,386 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8ext_8opengl_8rendering_8shader_8OpenGLShader" kind="module">
+    <compoundname>helios.ext.opengl.rendering.shader.OpenGLShader</compoundname>
+    <innerfile refid="OpenGLShader_8ixx">OpenGLShader.ixx</innerfile>
+    <innerclass refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader" prot="public">helios::ext::opengl::rendering::shader::OpenGLShader</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1af3feab079198d2b0f80e128a42649d21" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string helios::ext::opengl::rendering::shader::OpenGLShader::vertexShaderSource_</definition>
+        <argsstring></argsstring>
+        <name>vertexShaderSource_</name>
+        <qualifiedname>helios::ext::opengl::rendering::shader::OpenGLShader::vertexShaderSource_</qualifiedname>
+        <briefdescription>
+<para>Source of the shader. Not guaranteed to be persisted once compilation was successful. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/opengl/rendering/shader/OpenGLShader.ixx" line="38" column="21" bodyfile="include/ext/opengl/rendering/shader/OpenGLShader.ixx" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1a2ca5e3eb8f0df5bcf5d8a023a1d8bc0b" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string helios::ext::opengl::rendering::shader::OpenGLShader::fragmentShaderSource_</definition>
+        <argsstring></argsstring>
+        <name>fragmentShaderSource_</name>
+        <qualifiedname>helios::ext::opengl::rendering::shader::OpenGLShader::fragmentShaderSource_</qualifiedname>
+        <briefdescription>
+<para>Source of the shader. Not guaranteed to be persisted once compilation was successful. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/opengl/rendering/shader/OpenGLShader.ixx" line="45" column="21" bodyfile="include/ext/opengl/rendering/shader/OpenGLShader.ixx" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1a8026bd0761ea2fcf7a95a180dd04c6da" prot="protected" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int helios::ext::opengl::rendering::shader::OpenGLShader::progId_</definition>
+        <argsstring></argsstring>
+        <name>progId_</name>
+        <qualifiedname>helios::ext::opengl::rendering::shader::OpenGLShader::progId_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>The program id as assigned by the underlying rendering backend. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/opengl/rendering/shader/OpenGLShader.ixx" line="75" column="26" bodyfile="include/ext/opengl/rendering/shader/OpenGLShader.ixx" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1aa28d2974cd5dee7707bedb4474b149b1" prot="protected" static="no" mutable="no">
+        <type>std::unique_ptr&lt; const OpenGLUniformLocationMap &gt;</type>
+        <definition>std::unique_ptr&lt;const OpenGLUniformLocationMap&gt; helios::ext::opengl::rendering::shader::OpenGLShader::uniformLocationMap_</definition>
+        <argsstring></argsstring>
+        <name>uniformLocationMap_</name>
+        <qualifiedname>helios::ext::opengl::rendering::shader::OpenGLShader::uniformLocationMap_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>A unique pointer to the <ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLUniformLocationMap" kindref="compound">OpenGLUniformLocationMap</ref> this shader uses. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/opengl/rendering/shader/OpenGLShader.ixx" line="80" column="29" bodyfile="include/ext/opengl/rendering/shader/OpenGLShader.ixx" bodystart="80" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1abc3db11fff319ba8094d8502d47718ae" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::ext::opengl::rendering::shader::OpenGLShader::load</definition>
+        <argsstring>(const std::string &amp;vertexShaderPath, const std::string &amp;fragmentShaderPath, const helios::util::io::StringFileReader &amp;stringFileReader)</argsstring>
+        <name>load</name>
+        <qualifiedname>helios::ext::opengl::rendering::shader::OpenGLShader::load</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>vertexShaderPath</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>fragmentShaderPath</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1util_1_1io_1_1StringFileReader" kindref="compound">helios::util::io::StringFileReader</ref> &amp;</type>
+          <declname>stringFileReader</declname>
+        </param>
+        <briefdescription>
+<para>Loads the specified vertex and fragment shader. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if loading succeeded, otherwise false.</para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>if</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>loading the specified files failed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/opengl/rendering/shader/OpenGLShader.ixx" line="54" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1a5bd1807e4598f7e495f318e8186a45cd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::ext::opengl::rendering::shader::OpenGLShader::compile</definition>
+        <argsstring>()</argsstring>
+        <name>compile</name>
+        <qualifiedname>helios::ext::opengl::rendering::shader::OpenGLShader::compile</qualifiedname>
+        <briefdescription>
+<para>Compiles the vertex and fragment shader represented by this instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if compilation succeeded, otherwise false.</para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>if</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>compilation failed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/opengl/rendering/shader/OpenGLShader.ixx" line="68" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1ad8d11452ce5d18c63378b2c11c12391c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::ext::opengl::rendering::shader::OpenGLShader::OpenGLShader</definition>
+        <argsstring>(const OpenGLShader &amp;)=delete</argsstring>
+        <name>OpenGLShader</name>
+        <qualifiedname>helios::ext::opengl::rendering::shader::OpenGLShader::OpenGLShader</qualifiedname>
+        <param>
+          <type>const OpenGLShader &amp;</type>
+        </param>
+        <briefdescription>
+<para>Rule of three. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ulink url="https://wikis.khronos.org/opengl/Common_Mistakes#RAII_and_hidden_destructor_calls">https://wikis.khronos.org/opengl/Common_Mistakes#RAII_and_hidden_destructor_calls</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://en.cppreference.com/w/cpp/language/rule_of_three.html">https://en.cppreference.com/w/cpp/language/rule_of_three.html</ulink></para>
+</simplesect>
+Prevent copying. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/opengl/rendering/shader/OpenGLShader.ixx" line="90" column="9"/>
+        <references refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1ad8d11452ce5d18c63378b2c11c12391c">helios::ext::opengl::rendering::shader::OpenGLShader::OpenGLShader</references>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1ad8d11452ce5d18c63378b2c11c12391c">helios::ext::opengl::rendering::shader::OpenGLShader::OpenGLShader</referencedby>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1aa190c03967578f7fe516a67372b5a0a1">helios::ext::opengl::rendering::shader::OpenGLShader::operator=</referencedby>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1a1edfbbae34556a588fa0bf3902d19b2a">helios::ext::opengl::rendering::shader::OpenGLShader::~OpenGLShader</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1aa190c03967578f7fe516a67372b5a0a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>OpenGLShader &amp;</type>
+        <definition>OpenGLShader &amp; helios::ext::opengl::rendering::shader::OpenGLShader::operator=</definition>
+        <argsstring>(const OpenGLShader &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>helios::ext::opengl::rendering::shader::OpenGLShader::operator=</qualifiedname>
+        <param>
+          <type>const OpenGLShader &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/opengl/rendering/shader/OpenGLShader.ixx" line="91" column="22"/>
+        <references refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1ad8d11452ce5d18c63378b2c11c12391c">helios::ext::opengl::rendering::shader::OpenGLShader::OpenGLShader</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1a2e0a1c6678431161c00330fae430c83c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::ext::opengl::rendering::shader::OpenGLShader::OpenGLShader</definition>
+        <argsstring>(const std::string &amp;vertexShaderPath, const std::string &amp;fragmentShaderPath, const helios::util::io::StringFileReader &amp;stringFileReader)</argsstring>
+        <name>OpenGLShader</name>
+        <qualifiedname>helios::ext::opengl::rendering::shader::OpenGLShader::OpenGLShader</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>vertexShaderPath</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>fragmentShaderPath</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1util_1_1io_1_1StringFileReader" kindref="compound">helios::util::io::StringFileReader</ref> &amp;</type>
+          <declname>stringFileReader</declname>
+        </param>
+        <briefdescription>
+<para>Creates and initializes this <ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader" kindref="compound">OpenGLShader</ref>. An instance of this class is guaranteed to have a progId_ != 0, hence shader-files where successfully loaded and compiled, ready to be used. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vertexShaderPath</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The path to the vertex shader. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fragmentShaderPath</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The path to the fragment shader. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stringFileReader</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The StringFileReader used for loading the shader source files.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>if</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>creating this shader failed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/opengl/rendering/shader/OpenGLShader.ixx" line="105" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1a50ea56d9f86a3f7d8342c7e5792a61a1" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::ext::opengl::rendering::shader::OpenGLShader::use</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>use</name>
+        <qualifiedname>helios::ext::opengl::rendering::shader::OpenGLShader::use</qualifiedname>
+        <reimplements refid="classhelios_1_1rendering_1_1shader_1_1Shader_1a2d052ed4e9ac589782122c0a81df1840">use</reimplements>
+        <briefdescription>
+<para>Activates this <ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader" kindref="compound">OpenGLShader</ref> for subsequent draw calls. This implementation calls `glUseProgram` with the `progId_` received after compilation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ulink url="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUseProgram.xhtml">https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUseProgram.xhtml</ulink> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/opengl/rendering/shader/OpenGLShader.ixx" line="119" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1a1edfbbae34556a588fa0bf3902d19b2a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::ext::opengl::rendering::shader::OpenGLShader::~OpenGLShader</definition>
+        <argsstring>() override</argsstring>
+        <name>~OpenGLShader</name>
+        <qualifiedname>helios::ext::opengl::rendering::shader::OpenGLShader::~OpenGLShader</qualifiedname>
+        <briefdescription>
+<para>Deletes the program object upon destruction of this instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ulink url="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDeleteProgram.xhtml">https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDeleteProgram.xhtml</ulink> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/opengl/rendering/shader/OpenGLShader.ixx" line="126" column="9"/>
+        <references refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1ad8d11452ce5d18c63378b2c11c12391c">helios::ext::opengl::rendering::shader::OpenGLShader::OpenGLShader</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1a34f079494ece1f6ac21569a09f7e9807" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::ext::opengl::rendering::shader::OpenGLShader::setUniformLocationMap</definition>
+        <argsstring>(std::unique_ptr&lt; const OpenGLUniformLocationMap &gt; uniformLocationMap) noexcept</argsstring>
+        <name>setUniformLocationMap</name>
+        <qualifiedname>helios::ext::opengl::rendering::shader::OpenGLShader::setUniformLocationMap</qualifiedname>
+        <param>
+          <type>std::unique_ptr&lt; const OpenGLUniformLocationMap &gt;</type>
+          <declname>uniformLocationMap</declname>
+        </param>
+        <briefdescription>
+<para>Sets the <ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLUniformLocationMap" kindref="compound">OpenGLUniformLocationMap</ref> for this <ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader" kindref="compound">OpenGLShader</ref>. Ownership is transferred to this instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>uniformLocationMap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The OpenGLUniformMap providing the mappings for the uniforms of the underlying GLSL shader. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/opengl/rendering/shader/OpenGLShader.ixx" line="135" column="14"/>
+        <references refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1a34f079494ece1f6ac21569a09f7e9807">helios::ext::opengl::rendering::shader::OpenGLShader::setUniformLocationMap</references>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1a34f079494ece1f6ac21569a09f7e9807">helios::ext::opengl::rendering::shader::OpenGLShader::setUniformLocationMap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1a0b546d47e3c28955b5acf2d622087f55" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int helios::ext::opengl::rendering::shader::OpenGLShader::uniformLocation</definition>
+        <argsstring>(helios::rendering::shader::UniformSemantics uniformSemantics) const noexcept</argsstring>
+        <name>uniformLocation</name>
+        <qualifiedname>helios::ext::opengl::rendering::shader::OpenGLShader::uniformLocation</qualifiedname>
+        <param>
+          <type><ref refid="namespacehelios_1_1rendering_1_1shader_1a0a320e03bcf6f60bc90428c450dfb329" kindref="member">helios::rendering::shader::UniformSemantics</ref></type>
+          <declname>uniformSemantics</declname>
+        </param>
+        <briefdescription>
+<para>Returns the uniform location for the uniform represented by the specified UniformSemantics. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>uniformSemantics</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The `UniformSemantics` identifier.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The integer representing the uniform variable location in the shader, or -1 if no location map was registered with this shader or if the uniform with the specified semantics was not found. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/opengl/rendering/shader/OpenGLShader.ixx" line="148" column="14"/>
+        <references refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1a0b546d47e3c28955b5acf2d622087f55">helios::ext::opengl::rendering::shader::OpenGLShader::uniformLocation</references>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1a0b546d47e3c28955b5acf2d622087f55">helios::ext::opengl::rendering::shader::OpenGLShader::uniformLocation</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1a976375b582a059aa61e4ee92b5407bd0" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::ext::opengl::rendering::shader::OpenGLShader::applyUniformValues</definition>
+        <argsstring>(const helios::rendering::shader::UniformValueMap &amp;uniformValueMap) const noexcept override</argsstring>
+        <name>applyUniformValues</name>
+        <qualifiedname>helios::ext::opengl::rendering::shader::OpenGLShader::applyUniformValues</qualifiedname>
+        <reimplements refid="classhelios_1_1rendering_1_1shader_1_1Shader_1a62e042796d6c0a946bea3ea0cebc1fd2">applyUniformValues</reimplements>
+        <param>
+          <type>const <ref refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap" kindref="compound">helios::rendering::shader::UniformValueMap</ref> &amp;</type>
+          <declname>uniformValueMap</declname>
+        </param>
+        <briefdescription>
+<para>Applies the specified UniformValueMap to the uniforms defined by the shader. This method does not change the binding state of the shader, but it passes the uniform values to the underlying rendering backend. Implementations should ensure that the shader is properly bound before this method is called.    </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>uniformValueMap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A const ref to the `UniformValueMap` containing the values for the uniforms in this shader.    </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/opengl/rendering/shader/OpenGLShader.ixx" line="154" column="14"/>
+        <references refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1a976375b582a059aa61e4ee92b5407bd0">helios::ext::opengl::rendering::shader::OpenGLShader::applyUniformValues</references>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader_1a976375b582a059aa61e4ee92b5407bd0">helios::ext::opengl::rendering::shader::OpenGLShader::applyUniformValues</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/ext/opengl/rendering/shader/OpenGLShader.ixx" line="9" column="15"/>
+  </compounddef>
+</doxygen>

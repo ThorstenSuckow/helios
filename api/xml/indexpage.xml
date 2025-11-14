@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="indexpage" kind="page">
+    <compoundname>index</compoundname>
+    <title>helios - API Reference</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><anchor id="index_1md_docs_2heliosapi"/></para>
+<sect1 id="index_1autotoc_md80">
+<title>Introduction</title><para><computeroutput><ref refid="namespacehelios" kindref="compound">helios</ref></computeroutput> is an ongoing, educational project and strives for providing a foundational and modular technical backbone for game development. Designed with a top-down, prototype-oriented approach, it emphasizes a clear separation of concerns and robust architectural patterns to help with creating maintainable games.</para>
+</sect1>
+<sect1 id="index_1autotoc_md81">
+<title>Core Purpose</title><para>The primary objective of <computeroutput><ref refid="namespacehelios" kindref="compound">helios</ref></computeroutput> is to offer a flexible and extensible platform for interactive games. As a prototype, it provides the following systems:</para>
+<para><itemizedlist>
+<listitem><para><bold>Rendering Pipeline:</bold> A rendering layer with customizable render passes.</para>
+</listitem><listitem><para><bold>Modular Subsystems:</bold> Well-defined interfaces for core components such as Scene Management and Rendering.</para>
+</listitem><listitem><para><bold>Modern C++ Practices:</bold> Leveraging C++(23) Modules for improved dependency management and compile-time efficiency.</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="index_1autotoc_md82">
+<title>Architecture Overview</title><para>The framework&apos;s architecture follows a component-based philosophy, providing abstract interfaces that decouple high-level scene descriptions from underlying hardware implementations.</para>
+<sect2 id="index_1autotoc_md83">
+<title>Core Modules</title><para><programlisting><codeline><highlight class="normal">helios</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>rendering<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Rendering<sp/>pipeline<sp/>and<sp/>render<sp/>commands</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>model<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Mesh,<sp/>Material,<sp/>and<sp/>configuration</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>shader<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Shader<sp/>programs<sp/>and<sp/>uniform<sp/>management</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>asset<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Geometric<sp/>shapes<sp/>and<sp/>assets</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>scene<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Scene<sp/>graph,<sp/>camera,<sp/>and<sp/>culling</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>input<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Keyboard,<sp/>mouse,<sp/>and<sp/>gamepad<sp/>input</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>window<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Window<sp/>management<sp/>and<sp/>events</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>math<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Vectors,<sp/>matrices,<sp/>transforms</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>util<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Logging,<sp/>file<sp/>I/O,<sp/>utilities</highlight></codeline>
+<codeline><highlight class="normal">└──<sp/>app<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Application<sp/>lifecycle<sp/>and<sp/>event<sp/>management</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="index_1autotoc_md84">
+<title>Extension Modules</title><para><programlisting><codeline><highlight class="normal">helios.ext</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>glfw<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GLFW-based<sp/>window<sp/>and<sp/>input<sp/>implementation</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>window</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>input</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>app</highlight></codeline>
+<codeline><highlight class="normal">└──<sp/>opengl<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>OpenGL<sp/>rendering<sp/>backend</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>├──<sp/>rendering</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>└──<sp/>shader</highlight></codeline>
+</programlisting></para>
+</sect2>
+</sect1>
+<sect1 id="index_1autotoc_md85">
+<title>Core Concepts</title><sect2 id="index_1autotoc_md86">
+<title>1. Scene Graph</title><para>The scene graph organizes objects hierarchically, with automatic transform propagation from parent to child nodes.</para>
+<para><bold>Key Classes:</bold><itemizedlist>
+<listitem><para><computeroutput>Scene</computeroutput> - Root container for all scene objects</para>
+</listitem><listitem><para><computeroutput>SceneNode</computeroutput> - Node in the hierarchy with transform and optional renderable</para>
+</listitem><listitem><para><computeroutput>Camera</computeroutput> - Defines the viewpoint and projection</para>
+</listitem></itemizedlist>
+</para>
+<para><bold>Example:</bold> <programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8scene_8Scene" kindref="compound">helios.scene.Scene</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8scene_8SceneNode" kindref="compound">helios.scene.SceneNode</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>scene<sp/>=<sp/>std::make_unique&lt;Scene&gt;(std::move(cullingStrategy));</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cubeNode<sp/>=<sp/>std::make_unique&lt;SceneNode&gt;(std::move(cubeRenderable));</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>node<sp/>=<sp/>scene-&gt;addNode(std::move(cubeNode));</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">node-&gt;translate(<ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">vec3f</ref>(0.0f,<sp/>2.0f,<sp/>0.0f));</highlight></codeline>
+<codeline><highlight class="normal">node-&gt;rotate(rotationMatrix);</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="index_1autotoc_md87">
+<title>2. Rendering Pipeline</title><para>The rendering pipeline uses a deferred command pattern with render passes.</para>
+<para><bold>Flow:</bold> <programlisting><codeline><highlight class="normal">Scene<sp/>→<sp/>Snapshot<sp/>→<sp/>RenderPass<sp/>→<sp/>RenderQueue<sp/>→<sp/>RenderCommand<sp/>→<sp/>GPU</highlight></codeline>
+</programlisting></para>
+<para><bold>Key Classes:</bold><itemizedlist>
+<listitem><para><computeroutput>RenderPrototype</computeroutput> - Immutable combination of Mesh + Material</para>
+</listitem><listitem><para><computeroutput>Renderable</computeroutput> - Instance of a RenderPrototype with optional overrides</para>
+</listitem><listitem><para><computeroutput>RenderCommand</computeroutput> - Low-level GPU command</para>
+</listitem><listitem><para><computeroutput>RenderQueue</computeroutput> - Collection of commands for a pass</para>
+</listitem><listitem><para><computeroutput>RenderPass</computeroutput> - Execution unit with frame-specific uniforms</para>
+</listitem></itemizedlist>
+</para>
+<para><bold>Example:</bold> <programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8rendering_8RenderPrototype" kindref="compound">helios.rendering.RenderPrototype</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8rendering_8Renderable" kindref="compound">helios.rendering.Renderable</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Create<sp/>prototype<sp/>(shared)</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>prototype<sp/>=<sp/>std::make_shared&lt;RenderPrototype&gt;(material,<sp/>mesh);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Create<sp/>instance</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>renderable<sp/>=<sp/>std::make_shared&lt;Renderable&gt;(prototype);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Optional<sp/>per-instance<sp/>material<sp/>override</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">renderable-&gt;materialOverride()<sp/>=<sp/>MaterialPropertiesOverride{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.baseColor<sp/>=<sp/><ref refid="namespacehelios_1_1math_1a08252f81850c5902e3c8dead272f3332" kindref="member">vec4f</ref>(1.0f,<sp/>0.0f,<sp/>0.0f,<sp/>1.0f)</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="index_1autotoc_md88">
+<title>3. Material System</title><para>Materials define surface appearance with shaders and properties.</para>
+<para><bold>Key Classes:</bold><itemizedlist>
+<listitem><para><computeroutput>Material</computeroutput> - Shader + default MaterialProperties</para>
+</listitem><listitem><para><computeroutput>MaterialProperties</computeroutput> - Immutable value object (baseColor, roughness, etc.)</para>
+</listitem><listitem><para><computeroutput>MaterialPropertiesOverride</computeroutput> - Per-instance overrides</para>
+</listitem></itemizedlist>
+</para>
+<para><bold>Example:</bold> <programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8rendering_8model_8Material" kindref="compound">helios.rendering.model.Material</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8rendering_8model_8config_8MaterialProperties" kindref="compound">helios.rendering.model.config.MaterialProperties</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>materialProps<sp/>=<sp/>MaterialProperties(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1math_1a08252f81850c5902e3c8dead272f3332" kindref="member">vec4f</ref>(1.0f,<sp/>0.0f,<sp/>1.0f,<sp/>1.0f),<sp/></highlight><highlight class="comment">//<sp/>Base<sp/>color<sp/>(magenta)</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>0.5f<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Roughness</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>material<sp/>=<sp/>std::make_shared&lt;Material&gt;(shader,<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>std::make_shared&lt;MaterialProperties&gt;(materialProps));</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="index_1autotoc_md89">
+<title>4. Input System</title><para>Unified input handling for keyboard, mouse, and gamepad.</para>
+<para><bold>Key Classes:</bold><itemizedlist>
+<listitem><para><computeroutput>InputManager</computeroutput> - Central input coordinator</para>
+</listitem><listitem><para><computeroutput>InputAdapter</computeroutput> - Platform-specific input implementation</para>
+</listitem><listitem><para><computeroutput>GamepadState</computeroutput> - Current state of a gamepad</para>
+</listitem></itemizedlist>
+</para>
+<para><bold>Example:</bold> <programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8input_8InputManager" kindref="compound">helios.input.InputManager</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8input_8types_8Key" kindref="compound">helios.input.types.Key</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>inputManager<sp/>=<sp/>app-&gt;inputManager();</highlight></codeline>
+<codeline><highlight class="normal">inputManager.poll(deltaTime);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(inputManager.isKeyPressed(Key::SPACE))<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Handle<sp/>space<sp/>key</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>gamepadState<sp/>=<sp/>inputManager.gamepadState(Gamepad::Gamepad1);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(gamepadState.buttons.A)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Handle<sp/>A<sp/>button</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+</sect2>
+</sect1>
+<sect1 id="index_1autotoc_md90">
+<title>Quick Start</title><sect2 id="index_1autotoc_md91">
+<title>Creating a Simple Application</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8ext_8glfw_8app_8GLFWFactory" kindref="compound">helios.ext.glfw.app.GLFWFactory</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8scene_8Scene" kindref="compound">helios.scene.Scene</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8scene_8Camera" kindref="compound">helios.scene.Camera</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>main()<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>1.<sp/>Create<sp/>application</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>app<sp/>=<sp/>GLFWFactory::makeOpenGLApp(</highlight><highlight class="stringliteral">&quot;My<sp/>helios<sp/>App&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>window<sp/>=<sp/>app-&gt;current();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>2.<sp/>Create<sp/>scene</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>scene<sp/>=<sp/>std::make_unique&lt;Scene&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::make_unique&lt;CullNoneStrategy&gt;()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>3.<sp/>Add<sp/>camera</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>camera<sp/>=<sp/>std::make_unique&lt;Camera&gt;();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>scene-&gt;addNode(std::move(camera));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>4.<sp/>Create<sp/>and<sp/>add<sp/>renderable</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>prototype<sp/>=<sp/>std::make_shared&lt;RenderPrototype&gt;(material,<sp/>mesh);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>renderable<sp/>=<sp/>std::make_shared&lt;Renderable&gt;(prototype);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>node<sp/>=<sp/>std::make_unique&lt;SceneNode&gt;(std::move(renderable));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>scene-&gt;addNode(std::move(node));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>5.<sp/>Main<sp/>loop</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(!window-&gt;shouldClose())<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>app-&gt;eventManager().dispatchAll();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>snapshot<sp/>=<sp/>scene-&gt;createSnapshot(*camera);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>renderPass<sp/>=<sp/>RenderPassFactory::getInstance()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.buildRenderPass(snapshot);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>app-&gt;renderingDevice().render(renderPass);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>window-&gt;swapBuffers();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+</sect2>
+</sect1>
+<sect1 id="index_1autotoc_md92">
+<title>Module Details</title><para>For detailed information about each module, see:</para>
+<para><itemizedlist>
+<listitem><para><bold><ref refid="dir_9ba586a504c756f19720715161f17166" kindref="compound">Rendering</ref></bold> - Rendering system and pipeline</para>
+</listitem><listitem><para><bold><ref refid="dir_b6e017bc8c299f04fc1162fc4677be61" kindref="compound">Scene</ref></bold> - Scene graph and camera</para>
+</listitem><listitem><para><bold><ref refid="dir_58a7612d3773fb780b0e5d4a861b7b53" kindref="compound">Input</ref></bold> - Input handling</para>
+</listitem><listitem><para><bold><ref refid="dir_0046d781185df00694c70533b055a138" kindref="compound">Math</ref></bold> - Mathematical operations</para>
+</listitem><listitem><para><bold><ref refid="dir_f420875d55816fb78e81b706f36fb7ba" kindref="compound">Window</ref></bold> - Window management</para>
+</listitem><listitem><para><bold><ref refid="dir_7f0768799dd37ef2f2adcdfec91ab1e9" kindref="compound">Utilities</ref></bold> - Logging, file I/O</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="index_1autotoc_md93">
+<title>Advanced Topics</title><sect2 id="index_1autotoc_md94">
+<title>Custom Rendering Backend</title><para>To implement a custom rendering backend:</para>
+<para>1. Implement <computeroutput>RenderingDevice</computeroutput> interface 2. Extend <computeroutput>Mesh</computeroutput> for your platform (e.g., <computeroutput>VulkanMesh</computeroutput>) 3. Extend <computeroutput>Shader</computeroutput> for your platform (e.g., <computeroutput>VulkanShader</computeroutput>) 4. Create a factory (e.g., <computeroutput>VulkanFactory</computeroutput>)</para>
+</sect2>
+<sect2 id="index_1autotoc_md95">
+<title>Custom Input Adapter</title><para>To implement a custom input adapter:</para>
+<para>1. Implement <computeroutput>InputAdapter</computeroutput> interface 2. Map platform-specific events to helios types 3. Update <computeroutput>GamepadState</computeroutput> on polling</para>
+</sect2>
+</sect1>
+<sect1 id="index_1autotoc_md96">
+<title>API Documentation</title><para>For detailed class-by-class documentation, see the <ulink url="./api/html/index.html">Doxygen-generated API reference</ulink>.</para>
+</sect1>
+<sect1 id="index_1autotoc_md97">
+<title>Examples</title><para>Check the <ulink url="../examples/">examples/</ulink> directory for complete working examples:</para>
+<para><itemizedlist>
+<listitem><para><bold>Simple Cube Rendering</bold> - Basic rendering tutorial</para>
+</listitem><listitem><para><bold>Game Controller Input</bold> - Input handling demo</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="index_1autotoc_md98">
+<title>License</title><para><computeroutput><ref refid="namespacehelios" kindref="compound">helios</ref></computeroutput> is distributed under the MIT-license. </para>
+</sect1>
+    </detaileddescription>
+    <location file="docs/heliosapi.md"/>
+  </compounddef>
+</doxygen>

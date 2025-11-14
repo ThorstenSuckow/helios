@@ -1,24 +1,18 @@
-# .github/workflows/deploy-website.yml
-
 name: Deploy Website to GitHub Pages
-
 on:
   push:
     branches:
       - main
   workflow_dispatch:
 
-# Erforderliche Berechtigungen für GitHub Pages Deployment über Actions
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Verhindert parallele Deployments
 concurrency:
   group: pages
   cancel-in-progress: false
-
 jobs:
   build:
     name: Build Doxygen + Website
@@ -26,17 +20,15 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Install Doxygen and Graphviz
         run: |
           sudo apt-get update
           sudo apt-get install -y doxygen graphviz
-
-      - name: Generate Doxygen XML (website/doxygen/xml)
+      - name: Generate Doxygen XML
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p website/doxygen/xml
+          mkdir -p website/doxygen
           {
             cat docs/Doxyfile.in;
             echo "OUTPUT_DIRECTORY=website/doxygen";
@@ -45,20 +37,10 @@ jobs:
           } | doxygen -
           test -d website/doxygen/xml
           echo "XML files:" $(find website/doxygen/xml -type f | wc -l)
-
-      - name: Copy XML into static assets
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p website/static/doxygen/xml
-          rsync -a website/doxygen/xml/ website/static/doxygen/xml/
-          ls -1 website/static/doxygen/xml | head -n 5 || true
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
-
       - name: Cache npm dependencies
         uses: actions/cache@v4
         with:
@@ -66,30 +48,22 @@ jobs:
           key: ${{ runner.os }}-npm-${{ hashFiles('website/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-npm-
-
       - name: Install dependencies
         run: cd website && npm ci
-
       - name: Build helios API docs (doxygen2docusaurus)
         run: cd website && npx doxygen2docusaurus --id helios
-
       - name: Build website
         run: cd website && npm run build
-
-      - name: Verify build + XML
+      - name: Verify build
         shell: bash
         run: |
           set -euo pipefail
           test -d website/build
-          if [ ! -d website/build/doxygen/xml ]; then
-            echo "WARN: XML-Verzeichnis fehlt im Build (website/build/doxygen/xml)"; ls -R website/build | head -n 100; fi
           echo "Build Größe:" $(du -sh website/build | cut -f1)
-
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: website/build
-
   deploy:
     name: Deploy to GitHub Pages
     needs: build

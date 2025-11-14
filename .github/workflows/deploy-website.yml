@@ -33,11 +33,20 @@ jobs:
         run: |
           set -euo pipefail
 
+          # Doxyfile aus Template + Overrides zusammenbauen
           {
             cat docs/Doxyfile.in
-            echo "OUTPUT_DIRECTORY=docs"
-            echo "GENERATE_XML=YES"
-            echo "XML_OUTPUT=api/xml"
+
+            echo ""
+
+            echo "OUTPUT_DIRECTORY = docs"
+
+            echo "GENERATE_XML   = YES"
+            echo "XML_OUTPUT     = api/xml"
+
+            echo "EXTENSION_MAPPING ="
+
+            echo "DOT_PATH ="
           } | doxygen -
 
           test -d docs/api/xml

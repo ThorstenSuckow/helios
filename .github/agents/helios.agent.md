@@ -6,7 +6,7 @@ This document describes the rules for an automated coding agent (e.g., Copilot-l
 ## Scope
 - Code in `include/helios/*`, `src/helios/*`, `include/ext/*`, `src/ext/*`
 - The CMake build system, tests, examples, benchmarks
-- Documentation under `docs/` and `README.md`
+- Documentation under `docs/`, `website/` and `README.md`
 
 ## Primary goals of the agent
 - Prefer small, self-contained changes (one topic / PR).
@@ -19,7 +19,7 @@ This document describes the rules for an automated coding agent (e.g., Copilot-l
 - Project builds without new errors (locally, Debug/Release).
 - Relevant unit tests pass (or a justified test extension is provided).
 - Formatting follows project conventions (use existing `.clang-format` if present).
-- Modifications to public APIs are noted in `CHANGELOG.md` and `docs/`.
+- Modifications to public APIs are noted in `CHANGELOG.md` and `docs/` as well as in `website/`.
 
 ## Forbidden actions
 - Do not commit credentials/secrets (tokens, private keys) into the repo.

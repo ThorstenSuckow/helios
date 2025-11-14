@@ -56,7 +56,19 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     colorMode: {
-      respectPrefersColorScheme: true,
+      defaultMode: 'dark',
+      disableSwitch: true,
+      respectPrefersColorScheme: false,
+    },
+    algolia: {
+      appId: "LK14YGETTG",
+      apiKey: "dbbc28aec6e30ac87f0e1c52f26d841d",
+      indexName: "garagecraft.games",
+      contextualSearch: true,
+      externalUrlRegex: 'external\\.com|domain\\.com',
+
+      searchParameters: {},
+      searchPagePath: 'search',
     },
     announcementBar: {
       id: 'alpha-status',
@@ -94,7 +106,7 @@ const config: Config = {
         },
         {
           href: 'https://github.com/thorstensuckow/helios',
-          label: 'GitHub',
+          className: "header-github-link",
           position: 'right',
         },
       ],
@@ -146,7 +158,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} <a href="https://thorsten.suckow-homberg.de">Thorsten Suckow-Homberg</a> / <a href="https://garagecraft.games">GarageCraft Games</a>. helios is in <strong>ALPHA</strong> – not production ready. Licensed under MIT. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} <a href="https://thorsten.suckow-homberg.de">Thorsten Suckow-Homberg</a> / <a href="https://garagecraft.games">GarageCraft Games</a>. Licensed under MIT. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,

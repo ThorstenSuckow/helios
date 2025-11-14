@@ -8,9 +8,9 @@ module helios.rendering.RenderPrototype;
 import helios.rendering.model.Mesh;
 import helios.rendering.model.Material;
 
-using namespace helios::rendering::model;
-
 namespace helios::rendering {
+
+    using namespace helios::rendering::model;
 
     RenderPrototype::RenderPrototype(
         std::shared_ptr<const Material> material,

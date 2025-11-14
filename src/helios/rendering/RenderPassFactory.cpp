@@ -51,7 +51,11 @@ namespace helios::rendering {
         const auto& snapshotItems = snapshot.snapshotItems();
 
         for (const auto& item : snapshotItems) {
-            renderQueue.add(makeRenderCommand(item));
+            auto renderCommand = makeRenderCommand(item);
+            if (renderCommand) {
+                renderQueue.add(std::move(renderCommand));
+            }
+            // if renderCommand is nullptr, it's already logged in makeRenderCommand, so we skip it
         }
     }
 

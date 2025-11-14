@@ -11,12 +11,13 @@ import helios.rendering.shader.UniformValueMap;
 import helios.rendering.shader.UniformSemantics;
 import helios.util.log;
 
-using namespace helios::rendering::shader;
-using namespace helios::rendering::model::config;
-using namespace helios::util::log;
-
 #define HELIOS_LOG_SCOPE "helios::rendering::model::Material"
 namespace helios::rendering::model {
+
+    using namespace helios::rendering::shader;
+    using namespace helios::rendering::model::config;
+    using namespace helios::util::log;
+
 
 
     Material::Material(

@@ -1,8 +1,39 @@
+[![Tests](https://github.com/thorstensuckow/helios/actions/workflows/tests.yml/badge.svg)](https://github.com/thorstensuckow/helios/actions/workflows/tests.yml)
+
 # helios
 
 ![](./docs/logo.png)
 
 **helios** is a custom game ~~engine~~ framework built from first principles, written in C++.
+
+## Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/thorstensuckow/helios.git
+cd helios
+
+# Configure with CMake
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+
+# Build
+cmake --build build --config Release
+
+# Run an example
+cd build/examples/simple_cube_rendering/Release
+./simple_cube_rendering
+```
+
+## Features
+
+- **Modern C++23**: Module-based architecture with clean dependency management
+- **Scene Graph**: Hierarchical scene management with transform propagation
+- **Rendering Pipeline**: Flexible render passes with batching support
+- **Input System**: Unified input handling
+- **Math Library**: Vector, matrix operations for 3D graphics
+- **OpenGL Backend**: Initial rendering implementation using OpenGL 4.5+
+- **Cross-Platform**: Windows, Linux, and macOS support
+- **Extensible**: Plugin architecture for different rendering backends
 
 ### Project Overview
 helios is an educational project to explore the intricacies of game engine architecture. Each component is built from first principles: The primary goal is to apply and analyze modern software engineering in a performance-critical domain while implementing the mathematical building blocks of 2D and 3D graphics.
@@ -14,6 +45,11 @@ The initial rendering backend is implemented using **OpenGL**.
 ### Development Philosophy
 The development process emphasizes understanding both the mathematical foundations and the rationale behind established patterns, such as trade-offs between indirect and direct data storage or the division of labor between CPU-side culling and GPU-side clipping.
 
+### Academic Context
+
+This project originated as a semester project for a computer science degree. The design principles, architecture, and prototypical implementation for the [first milestone](https://github.com/ThorstenSuckow/helios/milestone/1) are documented in the following technical report:
+
+- **[Suc25]** Suckow-Homberg, Thorsten: *helios: Design and prototypical implementation of a C++ game framework* (2025), [ResearchGate](https://www.researchgate.net/publication/397445662_helios_Design_and_prototypical_implementation_of_a_C_game_framework)
 
 ### Directory layout
 
@@ -54,20 +90,123 @@ Module implementation units for interface units found in `include/ext` and `incl
 #### `tests`
 Various test cases for selected classes and functionality.
 
+## Building from Source
+
+### Prerequisites
+
+- **C++23 compatible compiler**:
+  - MSVC 19.38+ (Visual Studio 2022)
+  - GCC 13.2+
+  - Clang 17+
+- **CMake 4.0+**
+- **Git**
+
+### Windows (Visual Studio)
+
+```powershell
+# Configure
+cmake -S . -B build -G "Visual Studio 17 2022" -A x64
+
+# Build
+cmake --build build --config Release
+
+# Run tests
+cd build
+ctest -C Release --output-on-failure
+```
+
+### Linux / macOS
+
+```bash
+# Configure
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+
+# Build
+cmake --build build
+
+# Run tests
+cd build
+ctest --output-on-failure
+```
+
+### Build Options
+
+- `-DCMAKE_BUILD_TYPE=Debug` - Build with debug symbols
+- `-DCMAKE_BUILD_TYPE=Release` - Build optimized release version
+
+## Running Examples
+
+After building, example executables are located in:
+```
+build/examples/<example_name>/Release/
+```
+
+Available examples:
+- **simple_cube_rendering** - Rotating wireframe cube ([Tutorial](examples/simple_cube_rendering/README.md))
+- **game_controller_input** - Gamepad input demonstration
+
+## Documentation
+
+▸ **[API Documentation](docs/heliosapi.md)** - Overview of the helios framework<br />
+▸ **[Coding Style Guide](docs/styleguide.md)** - C++ coding conventions and module structure<br />
+▸ **[Doxygen Style Guide](docs/doxygen-style.md)** - Documentation standards<br />
+▸ **[Contributing Guide](docs/CONTRIBUTING.md)** - How to contribute, commit conventions<br />
+▸ **[Examples](examples/README.md)** - Tutorials and code samples
+
+### Generating API Documentation
+
+```bash
+external/doxygen/doxygen.exe docs/Doxyfile.in
+```
+
+The generated HTML documentation will be available in `docs/api/html/`.
+
+## Contributing
+
+We welcome contributions! Please read our [Contributing Guide](docs/CONTRIBUTING.md) for details on:
+
+- Commit conventions (Conventional Commits)
+- Code style requirements
+- Pull request process
+- Testing guidelines
+
+### Quick Contribution Guidelines
+
+- Follow [Conventional Commits](https://www.conventionalcommits.org/):
+  - `feat:` for new features
+  - `fix:` for bug fixes
+  - `refactor:` for code improvements
+  - Use `!` for breaking changes (e.g., `feat!:`)
+- Write tests for new features
+- Update documentation
+- Run `clang-format` before committing
+
+## License
+
+This project is licensed under the **MIT License**. See [LICENSE](LICENSE) file for details.
+
+## Community & Support
+
+▸ **[Discussions](https://github.com/thorstensuckow/helios/discussions)** - Ask questions, share ideas<br />
+▸ **[Issues](https://github.com/thorstensuckow/helios/issues)** - Report bugs or request features<br />
+▸ **Contact**: [thorsten@suckow-homberg.de](mailto:thorsten@suckow-homberg.de)
+
+## Project Status
+
+**Active Development** - This is an educational project under active development. APIs may change as the framework evolves.
+
+## Acknowledgments
+
+This project is inspired by and builds upon concepts from industry-standard game engines and graphics frameworks. Special thanks to the authors of the referenced literature below.
 
 ## Bibliography
-[Vri20] de Vries, Joey: Learn OpenGL (2020), Kendall & Wells
-\
-[RTR] Akenine-Möller, Tomas and Haines, Eric and Hoffman, Naty: Real-Time Rendering (2018), A. K. Peters, Ltd.  Real Time Rendering
-\
-[Gre19] Gregory, J: Game Engine Architecture, 3rd ed. (2018). A K Peters/CRC Press. 
-\
-[She07] Sherrod, Allen: Data Structures and Algorithms for Game Developers (2007), Charles River Media, Boston, Massachusetts 
-\
-[HDMS+14]: Hughes, John F. and van Dam, Andries and McGuire, Morgan and Sklar, David F. and Foley, James D. and Feiner, Steven K. and Akeley, Kurt: Computer Graphics - Principles and Practice (2014), Addison-Wesley Educational 
-\
-[KSS17]: Kessenich, John and Sellers, Graham and Shreiner, Dave: The OpenGL Programming Guide (2017), Addison Wesley
-\
-[Str22]: Stroustrup, Bjarne: A Tour of C++ (2022), Addison-Wesley
 
-[PJH23]: Pharr, Matt and Jakob, Wenzel and Humphreys, Greg: Physically Based Rendering, 4th ed. (2023), MIT Press 
+- **[Vri20]** de Vries, Joey: *Learn OpenGL* (2020), Kendall & Wells
+- **[RTR]** Akenine-Möller, Tomas; Haines, Eric; Hoffman, Naty: *Real-Time Rendering, 4th ed.* (2018), A. K. Peters, Ltd.
+- **[Gre19]** Gregory, Jason: *Game Engine Architecture, 3rd ed.* (2018), A K Peters/CRC Press
+- **[She07]** Sherrod, Allen: *Data Structures and Algorithms for Game Developers* (2007), Charles River Media
+- **[HDMS+14]** Hughes, John F. et al.: *Computer Graphics - Principles and Practice, 3rd ed.* (2014), Addison-Wesley
+- **[KSS17]** Kessenich, John; Sellers, Graham; Shreiner, Dave: *The OpenGL Programming Guide, 9th ed.* (2017), Addison Wesley
+- **[Str22]** Stroustrup, Bjarne: *A Tour of C++, 3rd ed.* (2022), Addison-Wesley
+- **[PJH23]** Pharr, Matt; Jakob, Wenzel; Humphreys, Greg: *Physically Based Rendering, 4th ed.* (2023), MIT Press
+

@@ -1,8 +1,9 @@
-## helios coding Styleguide
+# helios Code Style Guide
+
 This document summarizes the coding style and module organization conventions used in the `helios` project. It is intended to ensure consistency and maintainability across the codebase.
 
 ### Quick summary
-- Use C++20 modules (.ixx for interface/export, .cpp for implementation units) where appropriate.
+- Use C++23 modules (.ixx for interface/export, .cpp for implementation units) where appropriate.
 - Filenames should reflect module and type names (PascalCase for modules/types, e.g. `Window.ixx` / `Window.cpp`).
 - Namespace hierarchies mirror module paths (e.g. `helios::window`).
 - Getters should be `[[nodiscard]]`; methods that do not throw should be `noexcept`.

@@ -230,7 +230,7 @@ To implement a custom input adapter:
 
 ## API Documentation
 
-For detailed class-by-class documentation, see the [Doxygen-generated API reference](./api/html/index.html).
+For detailed class-by-class documentation, see the [Doxygen-generated API reference](https://helios.garagecraft.games/docs/helios/).
 
 ## Examples
 

@@ -53,7 +53,6 @@ TEST(RenderPassTest, HandlesNullUniformValueMapGracefully) {
     EXPECT_EQ(pass.frameUniformValues().mat4f_ptr(UniformSemantics::WorldMatrix), nullptr);
 }
 TEST(RenderPassTest, HandlesBothNullArgsGracefully) {
-    auto renderQueue = std::make_unique<RenderQueue>();
     auto pass = RenderPass(nullptr, nullptr);
 
     EXPECT_EQ(pass.renderQueue().count(), 0);

@@ -47,13 +47,13 @@ TEST(RenderPassTest, HandlesNullRenderQueueGracefully) {
     EXPECT_EQ(pass.renderQueue().count(), 0);
 }
 TEST(RenderPassTest, HandlesNullUniformValueMapGracefully) {
-    auto uniformValues = std::make_unique<RenderQueue>();
-    auto pass = RenderPass(std::move(uniformValues), nullptr);
+    auto renderQueue = std::make_unique<RenderQueue>();
+    auto pass = RenderPass(std::move(renderQueue), nullptr);
 
     EXPECT_EQ(pass.frameUniformValues().mat4f_ptr(UniformSemantics::WorldMatrix), nullptr);
 }
 TEST(RenderPassTest, HandlesBothNullArgsGracefully) {
-    auto uniformValues = std::make_unique<RenderQueue>();
+    auto renderQueue = std::make_unique<RenderQueue>();
     auto pass = RenderPass(nullptr, nullptr);
 
     EXPECT_EQ(pass.renderQueue().count(), 0);

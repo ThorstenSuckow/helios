@@ -41,6 +41,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'contributing/overview',
         'contributing/guide',
+        'contributing/issue-submission',
         'contributing/changelog-guide',
         'contributing/styleguide',
         'contributing/doxygen-style',

@@ -37,14 +37,14 @@ cd build/examples/simple_cube_rendering/Release
 
 ## Features
 
-- ✅ **Modern C++23**: Module-based architecture with clean dependency management
-- ✅ **Scene Graph**: Hierarchical scene management with transform propagation
-- ✅ **Rendering Pipeline**: Flexible render passes with batching support
-- ✅ **Input System**: Unified input handling for keyboard, mouse, and gamepad
-- ✅ **Math Library**: Vector, matrix, and transform operations for 3D graphics
-- ✅ **OpenGL Backend**: Initial rendering implementation using OpenGL 4.5+
-- ✅ **Cross-Platform**: Windows, Linux, and macOS support
-- ✅ **Extensible**: Plugin architecture for different rendering backends
+-  **Modern C++23**: Module-based architecture with clean dependency management
+-  **Scene Graph**: Hierarchical scene management with transform propagation
+-  **Rendering Pipeline**: Flexible render passes with batching support
+-  **Input System**: Unified input handling for keyboard, mouse, and gamepad
+-  **Math Library**: Vector, matrix, and transform operations for 3D graphics
+-  **OpenGL Backend**: Initial rendering implementation using OpenGL 4.5+
+-  **Cross-Platform**: Windows, Linux, and macOS support
+-  **Extensible**: Plugin architecture for different rendering backends
 
 ## Learning Path
 
@@ -60,6 +60,14 @@ Code snippets in this documentation are often simplified to focus on specific co
 ## Project Philosophy
 
 The development process emphasizes understanding both the mathematical foundations and the rationale behind established patterns, such as trade-offs between indirect and direct data storage or the division of labor between CPU-side culling and GPU-side clipping.
+
+## Contributing
+
+We welcome contributions to helios - before you get started, please review:
+
+- **[Contributing Guide](/docs/contributing/guide)** - Complete guide for the contribution process, commit conventions, and pull requests
+- **[Issue Submission Guide](/docs/contributing/issue-submission)** - Guidelines for submitting bug reports, feature requests, and refactoring proposals
+- **[Code Style Guide](/docs/contributing/styleguide)** - C++ coding conventions and formatting standards
 
 ## Academic Context
 

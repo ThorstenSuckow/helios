@@ -2,6 +2,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import doxygenApiNavbar from './docusaurus-config-navbar-doxygen-helios.json'
+import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-directives";
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -45,6 +46,7 @@ const config: Config = {
       'classic',
       {
         docs: {
+          beforeDefaultRemarkPlugins: [remarkGithubAdmonitionsToDirectives],
           sidebarPath: './sidebars.ts',
           editUrl:
             'https://github.com/thorstensuckow/helios/tree/main/website/',

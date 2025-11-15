@@ -12,7 +12,8 @@ Here's an overview of the available documents:
 | ▸ **[Coding Styleguide (`styleguide.md`)](./styleguide.md)** | Defines the C++ coding conventions, module structure, and formatting rules for the project. |
 | ▸  **[Doxygen Styleguide (`doxygen-style.md`)](./doxygen-style.md)** | Guidelines for writing consistent and effective Doxygen comments for the public API. |
 | ▸  **[Contributing Guide (`CONTRIBUTING.md`)](./CONTRIBUTING.md)** | A comprehensive guide on how to contribute, including commit conventions and the PR process. |
-| ▸  **[Issue Templates (`../.github/ISSUE_TEMPLATE/README.md`)](../.github/ISSUE_TEMPLATE/README.md)** | Instructions and best practices for creating bug reports, feature requests, and refactoring proposals. |
+| ▸  **[Issue Submission Guide (`issue_submission_guide.md`)](./issue_submission_guide.md)** | Guidelines for submitting well-structured bug reports, feature requests, and refactoring proposals. |
+
 
 ## API Docs (Doxygen)
 
@@ -36,5 +37,4 @@ After generation, you can open the main page here:
 We welcome contributions! Before you start, please read the following documents:
 
 1.  **[Contributing Guide (`CONTRIBUTING.md`)](./CONTRIBUTING.md)**: Our main guide for the entire contribution process.
-2.  **[Issue Templates Guide (`../.github/ISSUE_TEMPLATE/README.md`)](../.github/ISSUE_TEMPLATE/README.md)**: For creating well-structured issues.
-
+2.  **[Issue Submission Guide (`issue_submission_guide.md`)](./issue_submission_guide.md)**: For creating well-structured bug reports, feature requests, and refactoring proposals.

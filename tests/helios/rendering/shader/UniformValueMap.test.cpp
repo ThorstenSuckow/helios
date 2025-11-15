@@ -5,7 +5,7 @@ import helios.rendering.shader.UniformSemantics;
 
 using namespace helios::rendering::shader;
 
-TEST(UniformValueMap, HandlesFloatValuesCorrect) {
+TEST(UniformValueMap, HandlesFloatValuesCorrectly) {
 
     auto map = UniformValueMap();
 

@@ -2,7 +2,6 @@
 #include <cstdlib>
 #include <iostream>
 #include <print>
-#include <glad/gl.h>
 
 
 import helios.math.types;
@@ -66,9 +65,17 @@ void updateButton(
         const auto baseColor = *originalOverride.baseColor;
         button.renderable()->materialOverride()->baseColor = helios::math::vec4f(baseColor[0], baseColor[1], baseColor[2], pressed ? 1.0f : baseColor[3]);
     }
-
 }
 
+
+void updateDpad(helios::scene::SceneNode& dpadButton, const bool pressed) {
+
+    dpadButton.scale(helios::math::vec3f(SCALING_FACTOR * (pressed ? 1.2f : 1.0f)));
+    if (dpadButton.renderable()->hasMaterialOverride()) {
+        const auto baseColor = *dpadButton.renderable()->materialOverride()->baseColor;
+        dpadButton.renderable()->materialOverride()->baseColor = helios::math::vec4f(baseColor[0], baseColor[1], baseColor[2], pressed ? 1.0f : 0.5f);
+    }
+}
 
 int main() {
 
@@ -139,6 +146,7 @@ int main() {
     const auto lineRenderable   = std::make_shared<helios::rendering::Renderable>(linePrototype);
     const auto recRenderable    = std::make_shared<helios::rendering::Renderable>(recPrototype);
 
+    // create the button renderables
     auto buttonMaterialPropsOverride = helios::rendering::model::config::MaterialPropertiesOverride(
         helios::math::vec4f(0.25f, 0.96f, 0.35f, 0.5f),
         0.0f
@@ -157,6 +165,31 @@ int main() {
         circlePrototype, buttonMaterialPropsOverride
     );
 
+    //create the dpad renderables
+    auto dpadRenderableLft = std::make_shared<helios::rendering::Renderable>(
+    recPrototype, helios::rendering::model::config::MaterialPropertiesOverride(
+        helios::math::vec4f(1.0f, 1.0f, 0.0f, 0.5f),
+        0.0f
+    )
+    );
+    auto dpadRenderableRgt = std::make_shared<helios::rendering::Renderable>(
+    recPrototype, helios::rendering::model::config::MaterialPropertiesOverride(
+        helios::math::vec4f(0.0f, 1.0f, 1.0f, 0.5f),
+        0.0f
+    )
+    );
+    auto dpadRenderableUp = std::make_shared<helios::rendering::Renderable>(
+    recPrototype, helios::rendering::model::config::MaterialPropertiesOverride(
+        helios::math::vec4f(1.0f, 0.0f, 1.0f, 0.5f),
+        0.0f
+    )
+    );
+    auto dpadRenderableDown = std::make_shared<helios::rendering::Renderable>(
+    recPrototype, helios::rendering::model::config::MaterialPropertiesOverride(
+        helios::math::vec4f(1.0f, 1.0f, 1.0f, 0.5f),
+        0.0f
+    )
+    );
     // ------------------------------
     //  Scene
     // ------------------------------
@@ -185,6 +218,14 @@ int main() {
     const auto buttonB_ptr = buttonGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(buttonRenderableB));
     const auto buttonX_ptr = buttonGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(buttonRenderableX));
     const auto buttonY_ptr = buttonGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(buttonRenderableY));
+
+    // dpad
+
+    const auto dpadGroupNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>());
+    const auto dpadLft_ptr = dpadGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(dpadRenderableLft));
+    const auto dpadRgt_ptr = dpadGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(dpadRenderableRgt));
+    const auto dpadUp_ptr = dpadGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(dpadRenderableUp));
+    const auto dpadDown_ptr = dpadGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(dpadRenderableDown));
 
 
 
@@ -224,6 +265,18 @@ int main() {
     buttonB_ptr->translate(helios::math::vec3f(0.5f, 0.0f, 0.0f));
     buttonX_ptr->translate(helios::math::vec3f(-0.5f, 0.0f, 0.0f));
     buttonY_ptr->translate(helios::math::vec3f(0.0f, 0.5f, 0.0f));
+
+    dpadGroupNode_ptr->scale(helios::math::vec3f(SCALING_FACTOR));
+    dpadUp_ptr->scale(helios::math::vec3f(SCALING_FACTOR));
+    dpadLft_ptr->scale(helios::math::vec3f(SCALING_FACTOR));
+    dpadDown_ptr->scale(helios::math::vec3f(SCALING_FACTOR));
+    dpadRgt_ptr->scale(helios::math::vec3f(SCALING_FACTOR));
+
+    dpadGroupNode_ptr->translate(helios::math::vec3f(-basePosX, -basePosY, 0.0f));
+    dpadUp_ptr->translate(helios::math::vec3f(0.0f, 0.5f, 0.0f));
+    dpadLft_ptr->translate(helios::math::vec3f(-0.5f, 0.0f, 0.0f));
+    dpadDown_ptr->translate(helios::math::vec3f(0.0f, -0.5f, 0.0f));
+    dpadRgt_ptr->translate(helios::math::vec3f(0.5f, 0.0f, 0.0f));
 
 
     // game loop
@@ -281,11 +334,17 @@ int main() {
         triggerRightNode_ptr->scale(helios::math::vec3f(triggerBaseScale[0]*rightTrigger, triggerBaseScale[1],  0.0f));
         triggerRightNode_ptr->translate(triggerRgtBasePosition + (helios::math::vec3f((triggerAabbWidth/2.0f)*rightTrigger, 0.0f, 0.0f)));
 
-        // buttons
+        // buttons activation
         updateButton(*buttonA_ptr, gamepadState.buttonA(), buttonMaterialPropsOverride);
         updateButton(*buttonB_ptr, gamepadState.buttonB(), buttonMaterialPropsOverride);
         updateButton(*buttonX_ptr, gamepadState.buttonX(), buttonMaterialPropsOverride);
         updateButton(*buttonY_ptr, gamepadState.buttonY(), buttonMaterialPropsOverride);
+
+        // dpad activation
+        updateDpad(*dpadUp_ptr, gamepadState.buttonDpadUp());
+        updateDpad(*dpadDown_ptr, gamepadState.buttonDpadDown());
+        updateDpad(*dpadRgt_ptr, gamepadState.buttonDpadRight());
+        updateDpad(*dpadLft_ptr, gamepadState.buttonDpadLeft());
 
 
         auto snapshot = scene.createSnapshot(dynamic_cast<helios::scene::Camera&>(*camera_ptr));

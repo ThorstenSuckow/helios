@@ -17,12 +17,14 @@ namespace helios::rendering {
         :
         renderQueue_(std::move(renderQueue)),
         frameUniformValues_(std::move(frameUniformValues)) {
-        assert(renderQueue_ && "Received nullptr RenderQueue.");
+        
         if (!renderQueue_) {
-            logger_.error("Constructor received a nullptr RenderQueue.");
+            logger_.error("Constructor received a nullptr RenderQueue. Creating a default empty queue.");
+            renderQueue_ = std::make_unique<helios::rendering::RenderQueue>();
         }
-        if (frameUniformValues_ == nullptr) {
-            logger_.warn("Constructor received a nullptr UniformValueMap.");
+        
+        if (!frameUniformValues_) {
+            logger_.warn("Constructor received a nullptr UniformValueMap. Creating a default empty map.");
             frameUniformValues_ = std::make_unique<helios::rendering::shader::UniformValueMap>();
         }
     }

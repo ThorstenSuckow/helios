@@ -15,6 +15,7 @@ This guide provides an overview of the contribution process and links to detaile
 ## Quick Links
 
 - **[Contributing Guide](./guide.md)** – Complete guide for getting started, commit conventions, pull requests, and testing
+- **[Issue Submission Guide](/docs/contributing/issue-submission)** – Guidelines for bug reports, feature requests, and refactoring proposals
 - **[Code Style](./styleguide.md)** – C++23 modules, naming conventions, formatting, and logging
 - **[Doxygen Style](./doxygen-style.md)** – API documentation guidelines
 - **[Changelog Guide](./changelog-guide.md)** – How to maintain the CHANGELOG
@@ -95,12 +96,12 @@ See the [Contributing Guide](./guide.md#commit-conventions) for detailed commit 
 
 Before submitting a PR, ensure:
 
-- ✅ **Code compiles** in both Debug and Release modes
-- ✅ **All tests pass** (`ctest -C Debug --output-on-failure`)
-- ✅ **Code is formatted** (`clang-format -i <files>`)
-- ✅ **No new warnings** introduced
-- ✅ **Public APIs documented** with Doxygen comments
-- ✅ **CHANGELOG updated** (if applicable)
+-  **Code compiles** in both Debug and Release modes
+-  **All tests pass** (`ctest -C Debug --output-on-failure`)
+-  **Code is formatted** (`clang-format -i <files>`)
+-  **No new warnings** introduced
+-  **Public APIs documented** with Doxygen comments
+-  **CHANGELOG updated** (if applicable)
 
 :::tip Automated Checks
 GitHub Actions automatically runs build and test workflows on all pull requests. You can view the CI status in your PR.

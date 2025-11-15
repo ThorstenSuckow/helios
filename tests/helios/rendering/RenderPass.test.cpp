@@ -38,20 +38,22 @@ TEST(RenderPassTest, HandlesArgsProperly) {
 }
 
 
-/**
- * @see helios/#74
- */
+// --------------------
+// @see helios/#74
+// --------------------
 TEST(RenderPassTest, HandlesNullRenderQueueGracefully) {
     auto uniformValues = std::make_unique<UniformValueMap>();
     auto pass = RenderPass(nullptr, std::move(uniformValues));
     EXPECT_EQ(pass.renderQueue().count(), 0);
 }
+
 TEST(RenderPassTest, HandlesNullUniformValueMapGracefully) {
     auto renderQueue = std::make_unique<RenderQueue>();
     auto pass = RenderPass(std::move(renderQueue), nullptr);
 
     EXPECT_EQ(pass.frameUniformValues().mat4f_ptr(UniformSemantics::WorldMatrix), nullptr);
 }
+
 TEST(RenderPassTest, HandlesBothNullArgsGracefully) {
     auto renderQueue = std::make_unique<RenderQueue>();
     auto pass = RenderPass(nullptr, nullptr);
@@ -59,3 +61,5 @@ TEST(RenderPassTest, HandlesBothNullArgsGracefully) {
     EXPECT_EQ(pass.renderQueue().count(), 0);
     EXPECT_EQ(pass.frameUniformValues().mat4f_ptr(UniformSemantics::WorldMatrix), nullptr);
 }
+// --------------------
+// --------------------

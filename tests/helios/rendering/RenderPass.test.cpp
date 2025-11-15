@@ -55,7 +55,6 @@ TEST(RenderPassTest, HandlesNullUniformValueMapGracefully) {
 }
 
 TEST(RenderPassTest, HandlesBothNullArgsGracefully) {
-    auto renderQueue = std::make_unique<RenderQueue>();
     auto pass = RenderPass(nullptr, nullptr);
 
     EXPECT_EQ(pass.renderQueue().count(), 0);

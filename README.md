@@ -151,6 +151,7 @@ Available examples:
 ▸ **[Coding Style Guide](docs/styleguide.md)** - C++ coding conventions and module structure<br />
 ▸ **[Doxygen Style Guide](docs/doxygen-style.md)** - Documentation standards<br />
 ▸ **[Contributing Guide](docs/CONTRIBUTING.md)** - How to contribute, commit conventions<br />
+▸ **[Issue Submission Guide](docs/issue_submission_guide.md)** - Guidelines for bug reports, feature requests, and refactoring proposals<br />
 ▸ **[Examples](examples/README.md)** - Tutorials and code samples
 
 ### Generating API Documentation
@@ -163,12 +164,13 @@ The generated HTML documentation will be available in `docs/api/html/`.
 
 ## Contributing
 
-We welcome contributions! Please read our [Contributing Guide](docs/CONTRIBUTING.md) for details on:
+Please read our [Contributing Guide](docs/CONTRIBUTING.md) and [Issue Submission Guide](docs/issue_submission_guide.md) for details on:
 
 - Commit conventions (Conventional Commits)
 - Code style requirements
 - Pull request process
 - Testing guidelines
+- Submitting bug reports, feature requests, and refactoring proposals
 
 ### Quick Contribution Guidelines
 

@@ -9,7 +9,7 @@ This document describes the rules for an automated coding agent (e.g., Copilot-l
 - Documentation under `docs/`, `website/` and `README.md`
 
 ## Project language
-- Primary language: **English** for every change log, commit, issue, pull request, code comment, documentation page and automated assistant response.
+- Primary language: **English** for every changelog, commit, issue, pull request, code comment, documentation page and automated assistant response.
 - Only deviate from English when a maintainer explicitly requests another language in the current thread.
 
 ## Primary goals of the agent

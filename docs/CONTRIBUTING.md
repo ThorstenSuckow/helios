@@ -166,7 +166,7 @@ The `description`:
 
 **Good (✅ all under 50 chars):**
 ```
-fix: prevent race condition in scene graph (44 chars)
+fix: prevent race condition in scene graph (46 chars)
 feat: add HDR rendering support (30 chars)
 refactor: simplify matrix operations (35 chars)
 ```

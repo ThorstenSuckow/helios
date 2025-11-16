@@ -5,8 +5,8 @@ A well-written issue is the first step to improving **helios**. It helps us unde
 ## General Criteria
 
 - **Clear and Concise Title**: The title should briefly summarize the topic. Use the appropriate prefix (`fix:`, `feat:`, `refactor:`).
-  - **Character Limit**: Issue titles with Conventional Commits prefixes must not exceed **72 characters** for readability and GitHub display compatibility.
-  - **Recommended Length**: Aim for **≤50 characters** in the subject (same rule as commit messages) when possible; keep additional clarification for the body.
+  - **Character Limit**: Issue titles with Conventional Commits prefixes should aim for **≤50 characters** (preferred) but **MUST NOT exceed 72 characters** for readability and GitHub display compatibility.
+  - **Recommended Length**: Keep additional clarification for the body if needed.
   - **Capitalization & Style**: The word after the prefix starts lowercase and uses **imperative mood** (e.g. `feat: add scissor rect support`, not `Adds` / `Added`).
   - **Breaking Changes Indicator**: Use `!` after the type (`feat!:` / `refactor!:`) if the change breaks public API or behavior.
   - **Examples of well-scoped titles (with char count)**:

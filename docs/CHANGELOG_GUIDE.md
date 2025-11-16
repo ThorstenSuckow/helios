@@ -4,6 +4,9 @@
 
 The CHANGELOG is **manually curated** to provide high-quality, user-focused release notes. While we use conventional commits and GitHub issues for tracking, the CHANGELOG focuses on **what matters to users**, not individual commits.
 
+**Note on Commit Conventions:**
+All commits must follow [Conventional Commits](https://www.conventionalcommits.org/) format with a subject line that is **≤50 characters preferred** and **MUST NOT exceed 72 characters**. This applies to commit subjects and should also guide PR/issue titles for consistency. Body lines should wrap at ~72 characters. See [`docs/CONTRIBUTING.md`](./CONTRIBUTING.md#description-guidelines) for detailed guidelines.
+
 ## Workflow
 
 ### During Development
@@ -216,4 +219,3 @@ See:
 - [Keep a Changelog](https://keepachangelog.com/)
 - [Semantic Versioning](https://semver.org/)
 - [Conventional Commits](https://www.conventionalcommits.org/)
-

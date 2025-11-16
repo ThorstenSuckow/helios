@@ -2,20 +2,21 @@
 sidebar_position: 2
 ---
 
-# Getting Started
+# Installation
 
 This guide will help you set up helios and run your first example.
 
 ## Prerequisites
 
-Before you begin, ensure you have:
-
-- **C++23 compatible compiler**:
-  - MSVC 19.38+ (Visual Studio 2022)
-  - GCC 13.2+
-  - Clang 17+
-- **CMake 4.0+**
-- **Git**
+> [!IMPORTANT] 
+> Before you begin, ensure your system meets all requirements listed in the [Prerequisites](./prerequisites.md) guide. This includes:
+>
+> - **C++23 compatible compiler** (MSVC 2022, GCC 13+, Clang 17+)
+> - **CMake 4.0+**
+> - **OpenGL 4.5+** support
+> - **Git** (optional for cloning)
+>
+> For detailed installation instructions for your platform, see [Prerequisites](./prerequisites.md).
 
 ## Installation
 

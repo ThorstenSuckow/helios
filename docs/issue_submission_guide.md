@@ -5,6 +5,15 @@ A well-written issue is the first step to improving **helios**. It helps us unde
 ## General Criteria
 
 - **Clear and Concise Title**: The title should briefly summarize the topic. Use the appropriate prefix (`fix:`, `feat:`, `refactor:`).
+  - **Character Limit**: Issue titles with Conventional Commits prefixes must not exceed **72 characters** for readability and GitHub display compatibility.
+  - **Recommended Length**: Aim for **≤50 characters** in the subject (same rule as commit messages) when possible; keep additional clarification for the body.
+  - **Capitalization & Style**: The word after the prefix starts lowercase and uses **imperative mood** (e.g. `feat: add scissor rect support`, not `Adds` / `Added`).
+  - **Breaking Changes Indicator**: Use `!` after the type (`feat!:` / `refactor!:`) if the change breaks public API or behavior.
+  - **Examples of well-scoped titles (with char count)**:
+    - `fix: window resize causes input events to map to incorrect coordinates` (71 chars) ✅
+    - `feat: add viewport scissor rect support for UI rendering` (57 chars) ✅
+    - `refactor: simplify Material initialization and memory management` (64 chars) ✅
+  - **Anti-pattern (exceeds limit)**: `fix: prevent the race condition that occurs in scene graph updates when modifying transforms at runtime` (110 chars) ❌
 - **One Issue per Topic**: Please open separate issues for each bug, feature, or refactoring proposal.
 
 ---
@@ -346,4 +355,3 @@ test: add unit tests for EventBus listener removal
 ---
 
 Thank you for helping us improve **helios**!
-

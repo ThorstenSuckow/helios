@@ -6,15 +6,15 @@
 
 **helios** is a custom game ~~engine~~ framework built from first principles, written in C++.
 
-## Quick Start
+## Prerequisites
 
-```bash
-# Clone the repository
-git clone https://github.com/thorstensuckow/helios.git
-cd helios
+Before building helios, ensure your system meets the required software prerequisites. See [PREREQUISITES.md](docs/PREREQUISITES.md) for detailed installation instructions for your platform.
 
-# Configure with CMake
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+**Quick Summary:**
+- **CMake** 4.0+
+- **C++23-capable compiler** (MSVC 2022, GCC 13+, Clang 16+)
+- **OpenGL 4.5+** support
+- **Ninja** or **Make** (optional but recommended)
 
 # Build
 cmake --build build --config Release
@@ -34,8 +34,8 @@ cd build/examples/simple_cube_rendering/Release
 - **OpenGL Backend**: Initial rendering implementation using OpenGL 4.5+
 - **Cross-Platform**: Windows, Linux, and macOS support
 - **Extensible**: Plugin architecture for different rendering backends
+> **Note:** If the build fails due to compiler or CMake version issues, refer to [PREREQUISITES.md](docs/PREREQUISITES.md).
 
-### Project Overview
 helios is an educational project to explore the intricacies of game engine architecture. Each component is built from first principles: The primary goal is to apply and analyze modern software engineering in a performance-critical domain while implementing the mathematical building blocks of 2D and 3D graphics.
 
 The engine strives for a modern **C++23** module-based architecture, providing a clean and robust dependency graph for fast compilation. 

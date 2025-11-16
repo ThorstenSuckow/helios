@@ -17,7 +17,17 @@ const sidebars: SidebarsConfig = {
   // Main documentation sidebar
   tutorialSidebar: [
     'intro',
-    'getting-started',
+    {
+      type : 'category',
+      label : 'Installation',
+      link: {
+        type: 'doc',
+        id: 'getting-started'
+      },
+      items : [
+          'prerequisites'
+      ]
+    },
     {
       type: 'category',
       label: 'Core Concepts',
@@ -28,8 +38,11 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Examples',
+      link: {
+        type: 'doc',
+        id: 'examples/overview'
+      },
       items: [
-        'examples/overview',
         'examples/simple-cube',
         'examples/gamepad-input',
       ],
@@ -38,8 +51,11 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Contributing',
+      link: {
+        type: 'doc',
+        id: 'contributing/overview'
+      },
       items: [
-        'contributing/overview',
         'contributing/guide',
         'contributing/issue-submission',
         'contributing/changelog-guide',

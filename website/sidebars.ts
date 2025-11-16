@@ -18,13 +18,13 @@ const sidebars: SidebarsConfig = {
   tutorialSidebar: [
     'intro',
     {
-      type : 'category',
-      label : 'Installation',
+      type: 'category',
+      label: 'Installation',
       link: {
         type: 'doc',
         id: 'getting-started'
       },
-      items : [
+      items: [
           'prerequisites'
       ]
     },

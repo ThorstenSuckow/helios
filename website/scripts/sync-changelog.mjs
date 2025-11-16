@@ -44,6 +44,14 @@ function rewriteLinksDynamic(content, sourceFile, mappings, repoRoot) {
     }
     const normalized = url.replace(/\\/g, '/');
     const key = (normalized.includes('#') ? normalized.slice(0, normalized.indexOf('#')) : normalized).trim();
+
+    // Special-case: PREREQUISITES.md should link Quick Start to website getting-started
+    try {
+      if (path.basename(sourceFile).toLowerCase() === 'prerequisites.md' && key === '../README.md') {
+        return `[${text}](\/docs\/getting-started)`;
+      }
+    } catch {}
+
     const simpleMap = new Map([
       ['../docs/heliosapi.md', '/docs/api/overview'],
       ['./docs/heliosapi.md', '/docs/api/overview'],
@@ -157,6 +165,11 @@ async function main() {
       src: path.join(repoRoot, 'docs', 'testing.md'),
       dest: path.join(websiteRoot, 'docs', 'testing.md'),
       meta: { title: 'Testing', description: 'Running tests in helios: CTest usage, test patterns, debugging failures.', slug: '/testing', tags: ['testing', 'quality'], keywords: ['helios', 'testing', 'ctest', 'unit tests'], sidebar_label: 'Testing', sidebar_position: 3 }
+    },
+    {
+      src: path.join(repoRoot, 'docs', 'PREREQUISITES.md'),
+      dest: path.join(websiteRoot, 'docs', 'prerequisites.md'),
+      meta: { title: 'Prerequisites', description: 'Required tools and environment for building helios: CMake 4.0+, C++23 compilers, OpenGL, platform setup.', slug: '/prerequisites', tags: ['setup', 'requirements'], keywords: ['helios', 'prerequisites', 'C++23', 'CMake', 'OpenGL'], sidebar_label: 'Prerequisites', sidebar_position: 1 }
     },
     {
       src: path.join(repoRoot, 'examples', 'README.md'),

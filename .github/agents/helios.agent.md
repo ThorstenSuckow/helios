@@ -8,6 +8,10 @@ This document describes the rules for an automated coding agent (e.g., Copilot-l
 - The CMake build system, tests, examples, benchmarks
 - Documentation under `docs/`, `website/` and `README.md`
 
+## Project language
+- Primary language: **English** for every changelog, commit, issue, pull request, code comment, documentation page and automated assistant response.
+- Only deviate from English when a maintainer explicitly requests another language in the current thread.
+
 ## Primary goals of the agent
 - Prefer small, self-contained changes (one topic / PR).
 - Preserve buildability: every commit must be buildable locally.
@@ -33,11 +37,33 @@ This document describes the rules for an automated coding agent (e.g., Copilot-l
 4. Minimal smoke test (e.g., run a small example binary if available).
 5. Commit + PR: small, descriptive commit messages, PR including tests + CI info.
 
+## Commit Message Conventions
+
+**All commits MUST follow [Conventional Commits](https://www.conventionalcommits.org/) specification:**
+
+- **Subject line format**: `<type>[optional scope]: <description>`
+- **Subject line length**: **≤50 characters preferred**, MUST NOT exceed **72 characters** (applies to commit subjects and should guide PR/issue titles)
+- **Description case**: lowercase (except proper nouns, acronyms, code references)
+- **Imperative mood**: "add feature" not "added" or "adds"
+- **No trailing period** on subject line
+- **Breaking changes**: Indicated by `!` after type/scope + `BREAKING CHANGE:` footer
+- **Body wrapping**: Wrap body lines at ~72 characters for readability
+
+Examples:
+```
+feat(rendering): add support for custom render passes
+fix(input): resolve gamepad disconnect handling
+refactor!: redesign Material API
+```
+
+For tickets created via GitHub Issues: subject lines follow the same 50-character limit and Conventional Commits prefix (`fix:`, `feat:`, `refactor:`, etc.).
+
 ## Branching and PR guidelines
 - Branch names: `feature/<short-description>`, `fix/<ticket>`, `chore/<description>`
 - PR description: problem, solution, files changed, test instructions, risk assessment
 - At least 1 reviewer (core maintainer) before merge
 - If a change breaks an API, mark the PR as "major" and add a CHANGELOG entry
+- All commit messages in PR MUST follow Conventional Commits format with 50/72-char subject limit
 
 ## Security rules
 - Never write system or environment variables containing secret values into PRs or logs.

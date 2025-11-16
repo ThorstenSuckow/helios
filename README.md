@@ -12,7 +12,7 @@ Before building helios, ensure your system meets the required software prerequis
 
 **Quick Summary:**
 - **CMake** 4.0+
-- **C++23-capable compiler** (MSVC 2022, GCC 13+, Clang 16+)
+- **C++23-capable compiler** (MSVC 2022, GCC 13+, Clang 17+)
 - **OpenGL 4.5+** support
 - **Ninja** or **Make** (optional but recommended)
 

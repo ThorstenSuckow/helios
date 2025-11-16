@@ -155,20 +155,29 @@ The `description`:
 - **MUST** be in lowercase (except for proper nouns, acronyms, or code references)
 - **MUST** use imperative mood ("add feature" not "added feature" or "adds feature")
 - **MUST NOT** end with a period
-- **SHOULD** be concise (50 characters or less)
+- **SHOULD NOT** exceed **50 characters** 
+- **MUST NOT** exceed **72 characters** (strict limit for subject line readability and tool compatibility)
+- **SHOULD** be concise and descriptive
 
-**Good:**
+**Character Limit Rationale:**
+- GitHub UI truncates longer subject lines, reducing readability in logs and workflows
+- Many tools (e.g., changelog generators, commit browsers) expect subject lines ≤ 50 characters
+- Enforces clarity: if your change cannot be summarized in 50 characters, consider breaking it into smaller commits
+
+**Good (✅ all under 50 chars):**
 ```
-fix: prevent race condition in scene graph updates
-feat: add support for HDR rendering
+fix: prevent race condition in scene graph (46 chars)
+feat: add HDR rendering support (30 chars)
+refactor: simplify matrix operations (35 chars)
 ```
 
-**Bad:**
+**Bad (❌ exceeds 50 chars):**
 ```
-Fix: Prevented race condition in scene graph updates.
-feat: Added support for HDR rendering
-Fixed a bug
+fix: prevent the race condition that occurs in scene graph updates when modifying transforms (92 chars!)
+feat: Added support for HDR rendering to the framework which should improve visual quality (91 chars!)
 ```
+
+**Tip:** Count characters carefully. If you need more than 50 characters, use the body section instead.
 
 ### Body
 

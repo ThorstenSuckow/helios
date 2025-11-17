@@ -1,0 +1,52 @@
+name: Windows Modules Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'src/**'
+      - 'include/**'
+      - 'tests/**'
+      - 'CMakeLists.txt'
+      - '.github/workflows/windows-modules-tests.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'src/**'
+      - 'include/**'
+      - 'tests/**'
+      - 'CMakeLists.txt'
+      - '.github/workflows/windows-modules-tests.yml'
+  workflow_dispatch:
+
+jobs:
+  test-windows-msvc-modules:
+    name: MSVC C++23 Modules Tests
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        build_type: [Debug, Release]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup CMake
+        uses: lukka/get-cmake@latest
+
+      - name: Configure CMake for MSVC with C++23 Modules
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DCMAKE_CXX_STANDARD=23
+
+      - name: Build Project
+        run: cmake --build build --config ${{ matrix.build_type }} -j
+
+      - name: Run Tests
+        working-directory: build
+        run: ctest -C ${{ matrix.build_type }} --output-on-failure --verbose
+
+      - name: Upload Test Results (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-windows-msvc-${{ matrix.build_type }}
+          path: build/Testing/Temporary/LastTest.log

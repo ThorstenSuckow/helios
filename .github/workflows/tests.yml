@@ -41,23 +41,37 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install jinja2
-          python -c "import sys, jinja2; print('Python:', sys.executable); print('Jinja2:', jinja2.__file__)"
+          # Verify installation
+          python -c "import sys; print('Python:', sys.executable)"
+          python -c "import jinja2; print('Jinja2 version:', jinja2.__version__)"
         shell: pwsh
 
       - name: Setup CMake
         uses: lukka/get-cmake@latest
 
       - name: Configure CMake for MSVC with C++23 Modules
-        run: >
-          cmake -S . -B build
-          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-          -DCMAKE_CXX_STANDARD=23
-          -DPython3_EXECUTABLE="${{ env.pythonLocation }}\python.exe"
+        run: |
+          # Ensure Python environment is available
+          $env:PYTHON = (Get-Command python).Path
+          Write-Host "Using Python: $env:PYTHON"
+          
+          cmake -S . -B build `
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} `
+            -DCMAKE_CXX_STANDARD=23 `
+            -DPython3_EXECUTABLE="$env:PYTHON" `
+            -DPython_EXECUTABLE="$env:PYTHON"
         shell: pwsh
+        env:
+          PYTHONPATH: ${{ env.pythonLocation }}
 
       - name: Build Project
-        run: cmake --build build --config ${{ matrix.build_type }} -j
+        run: |
+          # Ensure Python packages are available during build
+          $env:PYTHONPATH = "${{ env.pythonLocation }}"
+          cmake --build build --config ${{ matrix.build_type }} -j
         shell: pwsh
+        env:
+          PYTHONPATH: ${{ env.pythonLocation }}
 
       - name: Run Tests
         working-directory: build

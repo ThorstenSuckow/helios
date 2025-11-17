@@ -27,28 +27,41 @@ jobs:
     strategy:
       matrix:
         build_type: [Debug, Release]
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
       - name: Install Python dependencies for GLAD
         run: |
           python -m pip install --upgrade pip
-          pip install jinja2
+          python -m pip install jinja2
         shell: pwsh
 
       - name: Setup CMake
         uses: lukka/get-cmake@latest
 
       - name: Configure CMake for MSVC with C++23 Modules
-        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DCMAKE_CXX_STANDARD=23
+        run: >
+          cmake -S . -B build
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+          -DCMAKE_CXX_STANDARD=23
+          -DPython3_EXECUTABLE="${{ env.pythonLocation }}\python.exe"
+        shell: pwsh
 
       - name: Build Project
         run: cmake --build build --config ${{ matrix.build_type }} -j
+        shell: pwsh
 
       - name: Run Tests
         working-directory: build
         run: ctest -C ${{ matrix.build_type }} --output-on-failure --verbose
+        shell: pwsh
 
       - name: Upload Test Results (on failure)
         if: failure()

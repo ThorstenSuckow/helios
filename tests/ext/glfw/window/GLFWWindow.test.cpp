@@ -16,7 +16,7 @@ TEST(GLFWWindowConfigTest, data) {
 
     const auto cfg = std::make_unique<GLFWWindowConfig>();
 
-    EXPECT_EQ(600, cfg->height);
+    EXPECT_EQ(800, cfg->height);
     EXPECT_EQ(800, cfg->width);
     EXPECT_FALSE(cfg->frameBufferSizeCallback);
     EXPECT_EQ(std::string{"helios - Window"}, cfg->title);

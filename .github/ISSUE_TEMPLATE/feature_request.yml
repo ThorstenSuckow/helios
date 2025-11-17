@@ -1,0 +1,80 @@
+name: Feature Request
+description: Suggest an idea for this project (helios is a high-performance C++ game framework)
+title: "feat: "
+labels: ["feature", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for contributing a feature idea to helios.
+        Please keep scope focused and performance implications in mind.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / Motivation
+      description: What problem does this feature solve? (User perspective – avoid implementation details.)
+      placeholder: "As a developer, I need ... because ..."
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution (High-Level)
+      description: Describe the behavior or capability you propose. Avoid deep API details here.
+    validations:
+      required: true
+  - type: textarea
+    id: performance
+    attributes:
+      label: Performance Considerations (Optional)
+      description: Expected impact on CPU, GPU, memory, frame time. If heavy, note mitigation ideas.
+      placeholder: "No significant impact expected / May allocate per frame / Requires batching to stay efficient"
+  - type: textarea
+    id: api-sketch
+    attributes:
+      label: Optional API Sketch
+      description: Rough draft of potential API surface (C++ pseudo or module outline). Keep concise.
+      placeholder: |
+        // Example
+        // module; import helios.rendering;
+        // struct ParticleEmitterConfig { ... };
+        // class ParticleEmitter { void emit(const ParticleEmitterConfig&); };
+  - type: checkboxes
+    id: affected-components
+    attributes:
+      label: Affected Components (Estimate)
+      options:
+        - label: rendering
+        - label: scene
+        - label: input
+        - label: math
+        - label: window
+        - label: util
+        - label: ext.opengl
+        - label: ext.glfw
+        - label: build / cmake
+        - label: docs
+        - label: examples
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered (Optional)
+      description: List other approaches you evaluated and why they were rejected.
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks / Potential Downsides (Optional)
+      description: Compatibility concerns, maintenance load, potential perf regressions.
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context (Optional)
+      description: References, links, benchmarks, prior art.
+  - type: markdown
+    attributes:
+      value: |
+        Submission checklist (please confirm before posting):
+        - I searched existing issues / discussions.
+        - Scope is limited to a single feature.
+        - Performance impact has been at least briefly considered.
+        - API sketch (if provided) avoids unnecessary complexity.

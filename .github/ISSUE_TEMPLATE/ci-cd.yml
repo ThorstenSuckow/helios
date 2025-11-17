@@ -1,0 +1,99 @@
+name: CI/CD Issue
+description: Report issues with GitHub Actions workflows, builds, or deployments
+title: "[CI/CD]: "
+labels: ["ci/cd", "infrastructure"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a CI/CD issue! Please provide details to help us resolve it.
+
+  - type: dropdown
+    id: workflow
+    attributes:
+      label: Affected Workflow
+      description: Which workflow is experiencing issues?
+      options:
+        - Build and Test
+        - Deploy Website
+        - Custom Workflows
+        - All workflows
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      description: Which platform is affected? (if applicable)
+      options:
+        - Windows
+        - Linux (Ubuntu)
+        - macOS
+        - All platforms
+        - Not platform-specific
+    validations:
+      required: false
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Issue Description
+      description: Describe the problem with the workflow or build.
+      placeholder: |
+        Example: Website deployment fails with "Module not found" error
+    validations:
+      required: true
+
+  - type: textarea
+    id: workflow-run
+    attributes:
+      label: Workflow Run Link
+      description: Provide a link to the failed workflow run (if applicable)
+      placeholder: https://github.com/thorstensuckow/helios/actions/runs/...
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Logs
+      description: Paste relevant error logs or output
+      render: shell
+      placeholder: |
+        Error: Module not found: Can't resolve '@site/...'
+        ...
+    validations:
+      required: false
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce the issue?
+      placeholder: |
+        1. Push commit to main
+        2. Workflow runs
+        3. Fails at step X
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What should happen instead?
+      placeholder: Workflow should complete successfully and deploy website
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other information that might help
+      placeholder: This started happening after commit abc123
+    validations:
+      required: false
+

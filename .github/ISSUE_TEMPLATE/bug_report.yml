@@ -1,0 +1,112 @@
+name: Bug Report
+description: Create a report to help us improve
+title: "fix: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+        Please ensure the issue is reproducible on a clean build.
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: Exact ordered steps. If not reproducible reliably, describe frequency.
+      placeholder: |
+        1. Clean build: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+        2. Run example ...
+        3. Trigger action ...
+        4. Observe crash / incorrect output
+    validations:
+      required: true
+  - type: textarea
+    id: minimal-example
+    attributes:
+      label: Minimal Code Example (Optional but strongly recommended)
+      description: Provide smallest possible code snippet or config to reproduce.
+      placeholder: |
+        ```cpp
+        // Remove unrelated code. Show only what triggers the bug.
+        import helios.rendering; // ...
+        int main() { /* ... */ }
+        ```
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: What you expected to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: Actual behavior / Output
+      description: What actually happened (include error messages, stack traces, screenshots).
+    validations:
+      required: true
+  - type: textarea
+    id: performance-impact
+    attributes:
+      label: Performance Impact (Optional)
+      description: FPS drop, memory leak indications, CPU/GPU spikes, frame pacing issues.
+      placeholder: "e.g. FPS from 120 -> 45 after enabling shadows"
+  - type: checkboxes
+    id: regression
+    attributes:
+      label: Regression Check
+      description: Did this work before?
+      options:
+        - label: Worked on previous release
+        - label: New in current main
+        - label: Intermittent (flaky)
+        - label: Unknown
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: |
+        Provide complete environment:
+         - OS: (e.g. Windows 11 23H2)
+         - CPU: (e.g. Ryzen 7 5800X)
+         - GPU: (e.g. NVIDIA RTX 4070 Ti driver 551.xx)
+         - RAM: (e.g. 32GB)
+         - Compiler: (MSVC 19.38 / Clang 18 / GCC 13)
+         - CMake: (Need >= 4.0)
+         - Build Type: (Debug / Release / RelWithDebInfo)
+         - helios Commit / Tag: (commit SHA)
+         - Custom CMake flags: (if any)
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / Crash dumps
+      description: Paste relevant log excerpts. Attach files if large.
+      placeholder: |
+        ```
+        [2025-11-15 10:22:11][helios.rendering] ERROR: ...
+        Assertion failed: ...
+        ```
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Workaround (Optional)
+      description: Temporary steps you found to mitigate.
+  - type: markdown
+    attributes:
+      value: |
+        Submission checklist:
+        - Reproduced on a clean build directory.
+        - Searched existing issues.
+        - Provided environment + reproduction steps.
+        - Included minimal example OR reasoning why not possible.
+        - Considered whether performance regression
+

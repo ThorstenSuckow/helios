@@ -9,13 +9,13 @@ The following templates are available when you create a new issue:
 - **Bug Report** (`bug_report.yml`) – Report bugs, crashes, or unexpected behavior
 - **Feature Request** (`feature_request.yml`) – Propose new features or enhancements
 - **Refactoring Proposal** (`refactoring.yml`) – Propose code improvements or technical debt reduction
-- **CI/CD Issues** (`ci-cd.yml`) – Report issues with the ci/cd-pipeline
+- **CI/CD Issues** (`ci-cd.yml`) – Report issues with the CI/CD pipeline
 
 ---
 
 ## Complete Guide
 
-For comprehensive guidelines on submitting issues see the [Issue Submission Guide](../../docs/issue_submission_guide.md)**
+For comprehensive guidelines on submitting issues see the [Issue Submission Guide](../../docs/issue_submission_guide.md)
 
 This guide is also available on the [helios website](https://helios.garagecraft.games/docs/contributing/issue-submission).
 

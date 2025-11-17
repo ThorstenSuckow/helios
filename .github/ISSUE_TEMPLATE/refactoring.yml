@@ -1,0 +1,76 @@
+name: Refactoring Proposal
+description: Propose a code refactoring
+title: "refactor: "
+labels: ["refactoring", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for proposing a refactoring! Focus on clarity, measurable benefits and limited scope.
+  - type: textarea
+    id: area
+    attributes:
+      label: Area of the codebase to refactor
+      description: "Which part of the code does this refactoring affect? (e.g., a specific module, class, or function)"
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: "Primary reasons: performance, readability, maintainability, memory usage, API clarity."
+    validations:
+      required: true
+  - type: textarea
+    id: current-issues
+    attributes:
+      label: Current Issues (Optional)
+      description: Bullet list of concrete pain points (duplication, branching complexity, cache misses, allocation churn).
+      placeholder: "- Excessive dynamic allocations in hot loop\n- Tight coupling between renderer and window system"
+  - type: textarea
+    id: proposed-changes
+    attributes:
+      label: Proposed Changes
+      description: "Describe the changes you plan to make. Keep it scoped; split large efforts into multiple issues."
+    validations:
+      required: true
+  - type: textarea
+    id: performance-focus
+    attributes:
+      label: Performance / Memory Impact (Optional)
+      description: Expected wins (reduced allocations, better data locality, fewer virtual calls, SIMD potential). Provide rough estimate if possible.
+      placeholder: "Reduce per-frame allocations from ~120 to <5; collapse AoS to SoA for cache locality"
+  - type: checkboxes
+    id: risk
+    attributes:
+      label: Risk Level (Self-assessment)
+      options:
+        - label: low (internal only, easy revert)
+        - label: medium (limited API touch, migration doc required)
+        - label: high (public API change / architectural shift)
+  - type: textarea
+    id: deprecation
+    attributes:
+      label: Deprecation / Migration Plan (If breaking)
+      description: Outline staged approach (mark deprecated -> transition examples -> remove).
+  - type: textarea
+    id: test-impact
+    attributes:
+      label: Test Impact
+      description: List tests to adapt/add. If none, justify.
+      placeholder: "Update RenderPass tests; add benchmark for new batching function"
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context (Optional)
+      description: Links, prior art, benchmarks, flame graphs.
+  - type: markdown
+    attributes:
+      value: |
+        Submission checklist:
+        - Scope is narrow and well-defined.
+        - Benefits are clear and measurable (qualitative or quantitative).
+        - Risk level selected.
+        - Tests impact considered.
+        - Migration plan included if breaking.
+

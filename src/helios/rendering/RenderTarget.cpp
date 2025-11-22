@@ -40,7 +40,7 @@ namespace helios::rendering {
         return *(viewports_.back());
     }
 
-    void RenderTarget::setSize(const int width, const int height) noexcept {
+    void RenderTarget::setSize(const unsigned int width, const unsigned int height) noexcept {
         width_  = width;
         height_ = height;
 

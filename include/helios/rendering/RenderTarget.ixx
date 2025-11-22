@@ -31,12 +31,12 @@ export namespace helios::rendering {
     class RenderTarget {
     private:
         /**
-         * @brief The width of the render target in pixels
+         * @brief The width of the render target in pixels.
          */
         unsigned int width_ = 0;
 
         /**
-         * @brief The height of the render target in pixels
+         * @brief The height of the render target in pixels.
          */
         unsigned int height_ = 0;
 
@@ -51,8 +51,8 @@ export namespace helios::rendering {
          * @todo The list should be sorted after a meaningful key, like the viewport's z-Index.
          */
         std::vector<std::shared_ptr<helios::rendering::Viewport>> viewports_;
-    public:
 
+    public:
         /**
          * @brief Default constructor.
          */
@@ -83,7 +83,7 @@ export namespace helios::rendering {
          * @return A const reference to the newly added viewport.
          *
          * @throws std::invalid_argument if viewport is a nullptr, or if the viewport already
-         * has a parent RenderTarget.
+         *         has a parent RenderTarget.
          */
         const helios::rendering::Viewport& addViewport(
             std::shared_ptr<helios::rendering::Viewport> viewport);

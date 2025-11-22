@@ -2,12 +2,8 @@ module;
 
 #include <memory>
 #include <stdexcept>
-#include <vector>
 
 module helios.rendering.RenderTarget;
-
-using namespace helios::rendering;
-
 
 namespace helios::rendering {
     RenderTarget::RenderTarget(
@@ -25,7 +21,6 @@ namespace helios::rendering {
 
     const Viewport& RenderTarget::addViewport(
         std::shared_ptr<Viewport> viewport) {
-
         if (!viewport) {
             throw std::invalid_argument("addViewport() received a null shared pointer");
         }

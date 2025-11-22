@@ -10,53 +10,50 @@ using namespace helios::rendering;
 
 
 namespace helios::rendering {
-
-         RenderTarget::RenderTarget(
-            std::shared_ptr<Viewport> viewport,
-            const unsigned int width,
-            const unsigned int height) :
-        width_(width), height_(height) {
-
-            if (!viewport) {
-                throw std::invalid_argument("Constructor received a null shared pointer");
-            }
-
-            addViewport(std::move(viewport));
+    RenderTarget::RenderTarget(
+        std::shared_ptr<Viewport> viewport,
+        const unsigned int width,
+        const unsigned int height)
+        : width_(width),
+          height_(height) {
+        if (!viewport) {
+            throw std::invalid_argument("Constructor received a null shared pointer");
         }
 
-        const Viewport&  RenderTarget::addViewport(
-            std::shared_ptr<Viewport> viewport) {
+        addViewport(std::move(viewport));
+    }
 
-            if (viewport->hasRenderTarget()) {
-                throw std::invalid_argument("Viewport already belongs to a RenderTarget.");
-            }
-
-            const auto viewportKey = ViewportKey();
-
-            viewport->setRenderTarget(&*this, ViewportKey());
-            viewport->notify(*this,  width_, height_);
-            viewports_.emplace_back(std::move(viewport));
-
-            return *(viewports_.back());
+    const Viewport& RenderTarget::addViewport(
+        std::shared_ptr<Viewport> viewport) {
+        if (viewport->hasRenderTarget()) {
+            throw std::invalid_argument("Viewport already belongs to a RenderTarget.");
         }
 
-        void RenderTarget::setSize(const int width, const int height) noexcept {
-            width_ = width;
-            height_ = height;
+        const auto viewportKey = ViewportKey();
 
-            for (auto& it: viewports_) {
-                it->notify(*this, width_, height_);
-            }
+        viewport->setRenderTarget(&*this, ViewportKey());
+        viewport->notify(*this, width_, height_);
+        viewports_.emplace_back(std::move(viewport));
+
+        return *(viewports_.back());
+    }
+
+    void RenderTarget::setSize(const int width, const int height) noexcept {
+        width_  = width;
+        height_ = height;
+
+        for (auto& it : viewports_) {
+            it->notify(*this, width_, height_);
         }
+    }
 
-        unsigned int RenderTarget::width() const noexcept {
-            return width_;
-        }
+    unsigned int RenderTarget::width() const noexcept {
+        return width_;
+    }
 
-        unsigned int RenderTarget::height() const noexcept {
-            return height_;
-        }
+    unsigned int RenderTarget::height() const noexcept {
+        return height_;
+    }
 
-
-}
+} // namespace helios::rendering
 

@@ -120,4 +120,4 @@ export namespace helios::rendering {
 
     };
 
-}
+} // namespace helios::rendering

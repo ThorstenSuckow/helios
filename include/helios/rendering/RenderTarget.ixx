@@ -82,27 +82,23 @@ export namespace helios::rendering {
          *
          * @return A const reference to the newly added viewport.
          *
-         * @throws std::invalid_argument if the viewport already has a parent RenderTarget.
+         * @throws std::invalid_argument if viewport is a nullptr, or if the viewport already
+         * has a parent RenderTarget.
          */
         const helios::rendering::Viewport&  addViewport(
             std::shared_ptr<helios::rendering::Viewport> viewport);
 
         /**
-         * @brief Resizes this RenderTarget to the specified dimensions and notifies all viewports.
+         * @brief Resizes this RenderTarget to the specified dimensions and propagates the change to every viewport.
          *
          * @param width The new width of the render target in pixels.
          * @param height The new height of the render target in pixels.
          *
          * @todo A LayoutManager could be introduced to manage the arrangement of multiple viewports.
+         *
+         * @see helios::rendering::Viewport::onRenderTargetResize()
          */
-        void setSize(const int width, const int height) noexcept {
-            width_ = width;
-            height_ = height;
-
-            for (auto& it: viewports_) {
-                it->notify(*this, width_, height_);
-            }
-        }
+        void setSize(const int width, const int height) noexcept;
 
         /**
          * @brief Gets the width of the render target.

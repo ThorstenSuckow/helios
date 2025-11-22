@@ -25,14 +25,16 @@ namespace helios::rendering {
 
     const Viewport& RenderTarget::addViewport(
         std::shared_ptr<Viewport> viewport) {
-        if (viewport->hasRenderTarget()) {
+
+        if (!viewport) {
+            throw std::invalid_argument("addViewport() received a null shared pointer");
+        }
+
+        if (viewport->renderTarget()) {
             throw std::invalid_argument("Viewport already belongs to a RenderTarget.");
         }
 
-        const auto viewportKey = ViewportKey();
-
-        viewport->setRenderTarget(&*this, ViewportKey());
-        viewport->notify(*this, width_, height_);
+        viewport->setRenderTarget(&*this, viewportKey_);
         viewports_.emplace_back(std::move(viewport));
 
         return *(viewports_.back());
@@ -43,7 +45,7 @@ namespace helios::rendering {
         height_ = height;
 
         for (auto& it : viewports_) {
-            it->notify(*this, width_, height_);
+            it->onRenderTargetResize(*this, width_, height_);
         }
     }
 

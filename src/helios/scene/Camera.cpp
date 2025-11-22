@@ -9,7 +9,7 @@ import helios.scene.SceneNode;
 
 namespace helios::scene {
 
-     Camera::Camera() :
+    Camera::Camera() noexcept :
         projectionMatrix_(helios::math::mat4f::identity()),
         viewMatrix_(helios::math::mat4f::identity())
     {}
@@ -22,8 +22,8 @@ namespace helios::scene {
         return viewMatrix_;
     }
 
-    SceneNode* Camera::addChild(std::unique_ptr<SceneNode> sceneNode) {
-        return nullptr;
-    };
+    void Camera::setAspectRatio(const float aspectRatio) noexcept {
+        aspectRatio_ = aspectRatio;
+    }
 
-}
+} // namespace helios::scene

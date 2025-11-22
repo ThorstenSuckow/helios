@@ -85,7 +85,7 @@ export namespace helios::rendering {
          * @throws std::invalid_argument if viewport is a nullptr, or if the viewport already
          * has a parent RenderTarget.
          */
-        const helios::rendering::Viewport&  addViewport(
+        const helios::rendering::Viewport& addViewport(
             std::shared_ptr<helios::rendering::Viewport> viewport);
 
         /**
@@ -98,7 +98,7 @@ export namespace helios::rendering {
          *
          * @see helios::rendering::Viewport::onRenderTargetResize()
          */
-        void setSize(const int width, const int height) noexcept;
+        void setSize(unsigned int width, unsigned int height) noexcept;
 
         /**
          * @brief Gets the width of the render target.

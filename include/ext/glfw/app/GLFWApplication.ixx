@@ -18,6 +18,7 @@ import helios.rendering.RenderingDevice;
 import helios.event.EventManager;
 import helios.ext.glfw.window.GLFWWindow;
 import helios.ext.glfw.window.GLFWWindowConfig;
+import helios.rendering.RenderTarget;
 
 import helios.ext.glfw.app.GLFWRAIIGuard;
 
@@ -46,9 +47,9 @@ export namespace helios::ext::glfw::app {
         /**
          * @brief Constructs a new `GLFWApplication` instance.
          *
-         * @param renderingDevice
-         * @param inputManager
-         * @param eventManager
+         * @param renderingDevice Unique rendering device owned by the application.
+         * @param inputManager Unique input manager instance.
+         * @param eventManager Unique event manager instance.
          */
         explicit GLFWApplication(
             std::unique_ptr<helios::rendering::RenderingDevice> renderingDevice,
@@ -65,39 +66,45 @@ export namespace helios::ext::glfw::app {
         /**
          * @brief Creates a new GLFWWindow and add it to this Application's windows collection.
          * The Application takes ownership of the window.
+         *
          * Delegates to Window::show() for showing the window and initializes the associated rendering
          * device if necessary, e.g. for glfw an additional `glfwMakeContextCurrent()` is called
          * so the rendering device can be safely initialized, then immediately passes a
          * `nullptr` to the `glfwMakeContextCurrent()` to force calling APIs to explicitly
          * call setCurrent() on the constructed window.
+         * The render target size is synced to the current framebuffer dimensions reported by
+         * `glfwGetFramebufferSize()`.
          *
-         * @param cfg The `GLFWWindowConfig` used for initializing the window.
+         * @return Reference to the created window instance.
          *
+         * @see https://www.glfw.org/docs/latest/group__window.html#ga0e2637a4161afb283f5300c7f94785c9
          * @return A ref to the window created.
          */
-        helios::ext::glfw::window::GLFWWindow& createWindow(const helios::ext::glfw::window::GLFWWindowConfig& cfg);
+        helios::ext::glfw::window::GLFWWindow& createWindow(
+            std::unique_ptr<helios::rendering::RenderTarget> renderTarget,
+            const helios::ext::glfw::window::GLFWWindowConfig& cfg
+        );
 
 
         /**
          * @copydoc helios::app::Application::createWindow()
          */
-        helios::ext::glfw::window::GLFWWindow& createWindow(const helios::window::WindowConfig& cfg) override;
+        helios::ext::glfw::window::GLFWWindow& createWindow(
+            std::unique_ptr<helios::rendering::RenderTarget> renderTarget,
+            const helios::window::WindowConfig& cfg
+        ) override;
 
 
         /**
-         * @brief Sets the current Window for this Application.
-         * Makes sure that `glfwContextCurrent` is called for setting a
-         * current context for glfw and subsequent glfw-operations.
-         * It also re-registers `glfwSetFramebufferSizeCallback` with the
-         * callback function of the Window.
+         * @brief Sets the current window for this application.
          *
-         * @param win A ref to the window to set as current.
+         * Ensures `glfwMakeContextCurrent()` is called to bind the correct context for
+         * subsequent glfw operations and re-registers the framebuffer size callback on
+         * the targeted window.
          *
-         * @throws if the specified Window is not a GLFWWindow or if the window is
-         * not owned by this application.
+         * @param win Reference to the window that becomes the current context owner.
          *
-         * @todo the window should be signaled that it's now current window, for setting
-         * the frameBufferSizeCallback and calling glfwMakeContextCurrent.
+         * @throws std::invalid_argument If `win` is not a `GLFWWindow` or not owned by this application.
          */
         void setCurrent(helios::window::Window& win) override;
 

@@ -35,12 +35,11 @@ export namespace helios::rendering {
         bool initialized_ = false;
 
         /**
-         * @brief The logger used with this RenderingDevice instance.
-         * Defaults to HELIOS_LOG_SCOPE
+         * @brief The logger used with this RenderingDevice class.
          *
-         * @todo constructor injection
+         * Defaults to HELIOS_LOG_SCOPE.
          */
-        const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().registerLogger(
+        inline static const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(
             HELIOS_LOG_SCOPE
         );
 
@@ -49,9 +48,11 @@ export namespace helios::rendering {
 
         /**
          * @brief Initializes this rendering device.
+         *
          * Should be called when the graphics context was created and before
          * any rendering operations are performed.
-         * Implementing APIs should load pointers to underlying GL functions
+         *
+         * Implementing classes should load pointers to underlying GL functions
          * or provide similar API-specific setup.
          *
          * @throws std::runtime_error if initialization of the device fails.
@@ -60,8 +61,10 @@ export namespace helios::rendering {
 
         /**
          * @brief Signals this device that the application is now ready to begin a new render pass.
-         * Implementing APIs should prepare the rendering surface at this point and
+         *
+         * Implementing classes should prepare the rendering surface at this point and
          * clear specific buffers.
+         *
          * This method should be called at the start of each frame before any drawing occurs.
          *
          * @param renderPass The RenderPass that is about to be processed by the rendering device.
@@ -71,29 +74,30 @@ export namespace helios::rendering {
 
         /**
          * @brief Advises this RenderingDevice to process the specified RenderPass.
+         *
          * A `RenderPass` consists of `RenderCommand`s this RenderDevice executes, i.e.
          * binding meshes, materials and shaders as well as drawing geometry.
          *
-         * @param renderPass A ref to the RenderPass that holds the `RenderCommand`s
-         * to be executed.
+         * @param renderPass A reference to the RenderPass that holds the `RenderCommand`s to be executed.
          */
         virtual void doRender(helios::rendering::RenderPass& renderPass) const noexcept = 0;
 
 
         /**
          * @brief Ends the specified render pass of this RenderingDevice.
+         *
          * This method should be called when the renderPass was processed by the RenderingDevice,
          * before the window swaps the buffers.
+         *
          * Implementing classes should take care of unbinding frame buffers and/or flushing
          * command buffers.
          *
-        * @param renderPass The RenderPass that was processed by the rendering device.
+         * @param renderPass The RenderPass that was processed by the rendering device.
          */
         virtual void endRenderPass(helios::rendering::RenderPass& renderPass) const noexcept = 0;
 
         /**
-         * @brief Convenient method to subsequently call `beginRenderPass`,
-         * `doRender`, `endRenderPass` (in this order) with the specified `RenderPass`.
+         * @brief Convenience method to subsequently call `beginRenderPass`, `doRender`, and `endRenderPass` (in this order) with the specified `RenderPass`.
          *
          * @param renderPass The RenderPass to process by this RenderingDevice.
          */
@@ -103,24 +107,15 @@ export namespace helios::rendering {
             endRenderPass(renderPass);
         }
 
-        /**
-         * @brief Sets the viewport for this RenderingDevice.
-         * The viewport defines the rectangular area where the final image is drawn.
-         *
-         * @param x x-coordinate of the lower left corner of the viewport
-         * @param y y-coordinate of the lower left corner of the viewport
-         * @param width width of the viewport, in pixels
-         * @param height height of the viewport, in pixels
-         */
-        virtual void setViewport(int x, int y, int width, int height) const noexcept = 0;
 
 
         /**
          * @brief Returns the initialized state of this rendering device.
-         * This method is guaranteed to return true if the device was successfully
-         * initialized, otherwise false.
          *
-         * @return true if the device was successfully initialized, otherwise false.
+         * This method is guaranteed to return `true` if the device was successfully
+         * initialized, otherwise `false`.
+         *
+         * @return `true` if the device was successfully initialized, `false` otherwise.
          */
         [[nodiscard]] bool initialized() const noexcept{
             return initialized_;
@@ -128,3 +123,4 @@ export namespace helios::rendering {
     };
 
 }
+

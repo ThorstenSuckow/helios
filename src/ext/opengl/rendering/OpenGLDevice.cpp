@@ -10,7 +10,9 @@ import helios.ext.opengl.rendering.model.OpenGLMesh;
 import helios.ext.opengl.rendering.shader.OpenGLShader;
 import helios.rendering.model.config.MeshConfig;
 import helios.rendering.model.config.PrimitiveType;
-
+import helios.rendering.ClearFlags;
+import helios.rendering.RenderTarget;
+import helios.rendering.Viewport;
 
 using namespace helios::util;
 using namespace helios::ext::opengl::rendering::model;
@@ -57,16 +59,39 @@ namespace helios::ext::opengl::rendering {
     };
 
 
-    void OpenGLDevice::clear() const noexcept {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    }
-
-    void OpenGLDevice::setClearColor(const math::vec4f& color) const  noexcept {
-        glClearColor(color[0], color[1], color[2], color[3]);
-    }
-
     void OpenGLDevice::beginRenderPass(helios::rendering::RenderPass& renderPass) const noexcept {
-        clear();
+
+        const auto& viewport = renderPass.viewport();
+
+        if (!viewport.renderTarget()) {
+            logger_.warn("Viewport has no render target, skipping renderPass");
+            return;
+        }
+
+        logger_.info("Begin RenderPass.");
+
+        const helios::rendering::RenderTarget& renderTarget = *(viewport.renderTarget());
+        const auto viewportBounds = viewport.bounds();
+        const auto col = viewport.clearColor();
+        glViewport(
+            static_cast<int>(renderTarget.width() * viewportBounds[0]),
+            static_cast<int>(renderTarget.height() * viewportBounds[1]),
+            static_cast<int>(renderTarget.width() * viewportBounds[2]),
+            static_cast<int>(renderTarget.height()*viewportBounds[3])
+        );
+
+
+        glClearColor(col[0], col[1], col[2], col[3]);
+
+        const int clearFlags = viewport.clearFlags();
+        glClear(
+            ((clearFlags & std::to_underlying(helios::rendering::ClearFlags::Color)) ?  GL_COLOR_BUFFER_BIT : 0)
+            |
+            ((clearFlags & std::to_underlying(helios::rendering::ClearFlags::Depth)) ?  GL_DEPTH_BUFFER_BIT : 0)
+            |
+            ((clearFlags & std::to_underlying(helios::rendering::ClearFlags::Stencil)) ?  GL_STENCIL_BUFFER_BIT : 0)
+        );
+
     };
 
 
@@ -118,9 +143,6 @@ namespace helios::ext::opengl::rendering {
 
     };
 
-    void OpenGLDevice::setViewport(const int x, const int y, const int width, const int height) const noexcept {
-        glViewport(x, y, width, height);
-    }
 
 
 

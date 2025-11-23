@@ -1,6 +1,6 @@
 /**
  * @file Window.ixx
- * @brief Abstract window interface used by the Helios framework.
+ * @brief Abstract window interface used by the helios framework.
  */
 module;
 

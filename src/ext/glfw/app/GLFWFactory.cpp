@@ -24,6 +24,8 @@ import helios.ext.glfw.window.GLFWWindow;
 import helios.ext.glfw.input.GLFWInputAdapter;
 
 import helios.rendering.model.Material;
+import helios.rendering.RenderTarget;
+
 
 import helios.ext.glfw.window.GLFWWindowConfig;
 import helios.ext.opengl.rendering.OpenGLDevice;
@@ -39,7 +41,7 @@ using namespace helios::ext::glfw::window;
 using namespace helios::ext::glfw::input;
 
 using namespace helios::ext::opengl::rendering;
-
+using namespace helios::rendering;
 
 namespace helios::ext::glfw::app {
 
@@ -60,14 +62,12 @@ namespace helios::ext::glfw::app {
             std::move(eventManager)
         );
 
-        app->addController(std::make_unique<BasicWindowRenderingController>(
-            &(app->renderingDevice())
-        ));
-
         app->init();
         auto cfg = makeWindowCfg(std::move(title));
+        auto renderTarget = std::make_unique<RenderTarget>();
 
-        GLFWWindow& win = app->createWindow(cfg);
+        GLFWWindow& win = app->createWindow(std::move(renderTarget), cfg);
+        app->addController(std::make_unique<BasicWindowRenderingController>(win));
 
         // set the window user pointer so the frameBufferSizeCallback does not break
         win.setWindowUserPointer(std::make_unique<GLFWWindowUserPointer>(
@@ -77,7 +77,6 @@ namespace helios::ext::glfw::app {
 
 
         app->setCurrent(win);
-        static_cast<OpenGLDevice*>(&app->renderingDevice())->setClearColor(math::vec4f(0.0f, 0.0f, 0.0f, 1.0f));
 
         return app;
     }

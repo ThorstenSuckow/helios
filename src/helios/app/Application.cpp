@@ -52,11 +52,9 @@ namespace helios::app {
         initialized_ = true;
     }
 
-    void Application::addController(std::unique_ptr<helios::app::controller::Controller> controller) {
+    void Application::addController(std::unique_ptr<helios::app::controller::Controller> controller) noexcept {
         if (initialized_) {
-            std::string msg = "Application was already initialized.";
-            logger_.error(msg);
-            throw std::runtime_error(msg);
+            logger_.info("Adding an Controller to an already initialized Application.");
         }
         controllers_.push_back(std::move(controller));
     }

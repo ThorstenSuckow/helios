@@ -6,9 +6,11 @@ module;
 
 
 #include <vector>
+#include <memory>
 
 export module helios.scene.Snapshot;
 
+import helios.rendering.Viewport;
 import helios.scene.SnapshotItem;
 import helios.math.types;
 
@@ -34,22 +36,29 @@ export namespace helios::scene {
     protected:
         /**
          * @brief The projection matrix that should be used with this Snapshot.
+         *
          * The projection matrix transforms camera space into clip space.
          */
         const helios::math::mat4f projectionMatrix_;
 
         /**
          * @brief The view matrix that should be used with this Snapshot.
+         *
          * The view matrix transforms world space coordinates into camera space.
          */
         const helios::math::mat4f viewMatrix_;
 
         /**
-         * @brief A const collection of `SnapshotItem`s representing all renderable objects along with
-         * their world transformation visible in this Snapshot.
+         * @brief A const collection of `SnapshotItem`s representing all renderable objects visible in this Snapshot.
+         *
+         * Each item contains the world transformation along with the renderable object.
          */
         const std::vector<SnapshotItem> snapshotItems_;
 
+        /**
+         * @brief The viewport associated with this Snapshot.
+         */
+        std::shared_ptr<const helios::rendering::Viewport> viewport_;
 
     public:
 
@@ -57,12 +66,14 @@ export namespace helios::scene {
 
         /**
          * @brief Delete copy constructor.
+         *
          * Snapshots are not intended to be copied.
          */
         Snapshot(const Snapshot&) = delete;
 
         /**
          * @brief Delete copy assignment operator.
+         *
          * Snapshots are not intended to be copied.
          */
         Snapshot& operator=(const Snapshot&) = delete;
@@ -70,38 +81,53 @@ export namespace helios::scene {
         /**
          * @brief Constructs a new immutable Snapshot from the given data.
          *
+         * @param viewport The viewport associated with this snapshot.
          * @param projectionMatrix The projection matrix of the camera for this snapshot.
          * @param viewMatrix The view matrix of the camera for this snapshot.
-         * @param snapshotItems A std::vector of snapshot items. The vector is moved into the Snapshot,
-         * transferring ownership to **this** instance.
+         * @param snapshotItems A vector of snapshot items. The vector is moved into the Snapshot,
+         * transferring ownership to this instance.
          */
         Snapshot(
+            std::shared_ptr<const helios::rendering::Viewport> viewport,
             const math::mat4f& projectionMatrix,
             const math::mat4f& viewMatrix,
             std::vector<SnapshotItem> snapshotItems) noexcept;
 
         /**
-         * @brief Returns a const ref to this `Snapshot`'s SnapshotItems.
+         * @brief Returns a const reference to this Snapshot's SnapshotItems.
+         *
          * The vector contains all renderable items in the scene.
          *
-         * @return A const ref to this Snapshot's collection of SnapshotItems.
+         * @return A const reference to this Snapshot's collection of SnapshotItems.
          */
         [[nodiscard]] const std::vector<SnapshotItem>& snapshotItems() const noexcept;
 
         /**
-         * @brief Returns a const ref to the projection matrix for this Snapshot.
+         * @brief Returns the viewport associated with this Snapshot.
+         *
+         * @return A shared pointer to the const Viewport.
+         */
+        [[nodiscard]] std::shared_ptr<const helios::rendering::Viewport> viewport() const noexcept;
+
+        /**
+         * @brief Returns a const reference to the projection matrix for this Snapshot.
+         *
          * The matrix represents the projection matrix of the camera that was used to
          * capture this scene.
-         * @return A const ref to the projection matrix used for creating this Snapshot.
+         *
+         * @return A const reference to the projection matrix used for creating this Snapshot.
          */
         [[nodiscard]] const helios::math::mat4f& projectionMatrix() const noexcept;
 
         /**
-         * @brief Returns a const ref to the view matrix for this Snapshot.
+         * @brief Returns a const reference to the view matrix for this Snapshot.
+         *
          * The matrix represents the view matrix of the camera that was used to
          * capture this scene.
-         * @return A const ref to the view matrix used for creating this Snapshot.
+         *
+         * @return A const reference to the view matrix used for creating this Snapshot.
          */
         [[nodiscard]] const helios::math::mat4f& viewMatrix() const noexcept;
     };
 }
+

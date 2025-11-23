@@ -1,10 +1,11 @@
 module;
 
 #include <cassert>
+#include <iostream>
 #include <memory>
+#include <optional>
 #include <stdexcept>
 #include <vector>
-#include <iostream>
 
 module helios.scene.Scene;
 
@@ -16,6 +17,10 @@ import helios.math.types;
 import helios.scene.Camera;
 import helios.scene.FrustumCullingStrategy;
 import helios.scene.SnapshotItem;
+
+import helios.rendering.Viewport;
+
+using namespace helios::rendering;
 
 namespace helios::scene {
 
@@ -93,8 +98,16 @@ namespace helios::scene {
         return *root_;
     }
 
-    Snapshot Scene::createSnapshot(const Camera& camera) const {
-        const auto nodes = findVisibleNodes(camera);
+    std::optional<Snapshot> Scene::createSnapshot(const std::shared_ptr<const Viewport>& viewport) const {
+
+        const auto camera = viewport->camera();
+
+        if (!camera) {
+            logger_.warn("Viewport was not configured with a camera, skipping createSnapshot()...");
+            return std::nullopt;
+        }
+
+        const auto nodes = findVisibleNodes(*camera);
 
         std::vector<SnapshotItem> renderables;
         renderables.reserve(nodes.size());
@@ -107,11 +120,13 @@ namespace helios::scene {
             }
         }
 
-        return {
-            camera.projectionMatrix(),
-            camera.viewMatrix(),
+        return std::make_optional<Snapshot>(
+            viewport,
+            camera->projectionMatrix(),
+            camera->viewMatrix(),
             std::move(renderables)
-        };
+        );
+;
     }
 
 }

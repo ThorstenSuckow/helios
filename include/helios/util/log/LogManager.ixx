@@ -24,6 +24,7 @@ export namespace helios::util::log {
      */
     class LogManager {
 
+
     private:
 
         /**
@@ -57,6 +58,8 @@ export namespace helios::util::log {
         LogManager();
 
     public:
+
+        static const Logger& loggerForScope(const std::string& scope) noexcept;
 
         ~LogManager() = default;
 

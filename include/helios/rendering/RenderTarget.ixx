@@ -25,7 +25,7 @@ export namespace helios::rendering {
      * their states accordingly (e.g., camera aspect ratio).
      *
      * @todo This implementation currently represents only the **default framebuffer**. Future extensions
-     *       should allow it to represent arbitrary framebuffer objects (FBOs), using indizes.
+     *       should allow it to represent arbitrary framebuffer objects (FBOs), using indices.
      * @see glGenFramebuffers
      */
     class RenderTarget {

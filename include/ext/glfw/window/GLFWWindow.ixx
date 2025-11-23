@@ -14,7 +14,7 @@ import helios.window.Window;
 
 import helios.ext.glfw.window.GLFWWindowUserPointer;
 import helios.ext.glfw.window.GLFWWindowConfig;
-
+import helios.rendering.RenderTarget;
 
 export namespace helios::ext::glfw::window {
 
@@ -66,7 +66,10 @@ export namespace helios::ext::glfw::window {
          *
          * @param cfg A const ref to this window's configuration-
          */
-        explicit GLFWWindow(const GLFWWindowConfig& cfg);
+        explicit GLFWWindow(
+            std::unique_ptr<helios::rendering::RenderTarget> renderTarget,
+            const GLFWWindowConfig& cfg
+        );
 
         /********************
          * Overrides
@@ -176,8 +179,7 @@ export namespace helios::ext::glfw::window {
         /**
          * @brief Returns a const reference to the `GLFWWindowUserPointer` managed by this class.
          *
-         * @return A const ref to this object's `GLFWWindowUserPointer`, or `nullptr` if
-         * not available.
+         * @return A const reference to this object's `GLFWWindowUserPointer`.
          */
         [[nodiscard]] const GLFWWindowUserPointer& windowUserPointer() const noexcept;
     };

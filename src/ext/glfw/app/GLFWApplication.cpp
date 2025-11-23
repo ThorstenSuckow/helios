@@ -12,8 +12,10 @@ import helios.window.Window;
 import helios.ext.glfw.app.GLFWApplication;
 import helios.ext.glfw.window.GLFWWindow;
 import helios.ext.glfw.window.GLFWWindowConfig;
+import helios.rendering.RenderTarget;
 
 using namespace helios::window;
+using namespace helios::rendering;
 using namespace helios::ext::glfw::window;
 
 namespace helios::ext::glfw::app {
@@ -31,9 +33,9 @@ namespace helios::ext::glfw::app {
                     glfwRaiiGuard_(){}
 
 
-    GLFWWindow& GLFWApplication::createWindow(const GLFWWindowConfig& cfg) {
+    GLFWWindow& GLFWApplication::createWindow(std::unique_ptr<RenderTarget> renderTarget,  const GLFWWindowConfig& cfg) {
 
-        auto window = std::make_unique<GLFWWindow>(cfg);
+        auto window = std::make_unique<GLFWWindow>(std::move(renderTarget), cfg);
 
         if (const auto glfw_window  = window.get()) {
             if (!glfw_window->show()) {
@@ -51,13 +53,17 @@ namespace helios::ext::glfw::app {
                 // to enforce call to setCurrent()
                 glfwMakeContextCurrent(nullptr);
             }
+            int width, height;
+            glfwGetFramebufferSize(glfw_window->nativeHandle(), &width, &height);
+            glfw_window->renderTarget().setSize(width, height);
+
         } else {
             throw std::runtime_error("Cannot create: Missing GLFWWindow.");
         }
 
         windowList_.emplace_back(std::move(window));
 
-        return *static_cast<GLFWWindow*>(windowList_.back().get());
+        return *dynamic_cast<GLFWWindow*>(windowList_.back().get());
     }
 
 
@@ -82,12 +88,6 @@ namespace helios::ext::glfw::app {
                 glfw_window->frameBufferSizeCallback()
             );
 
-            // 3. set the viewport for the rendering device
-            const math::vec4i& viewport = glfw_window->viewport();
-            renderingDevice_->setViewport(viewport[0], viewport[1],
-                viewport[2], viewport[3]
-            );
-
         } else {
             const std::string msg = "Cannot init: Missing GLFWWindow.";
             logger_.error(msg);
@@ -104,7 +104,7 @@ namespace helios::ext::glfw::app {
     };
 
 
-    GLFWWindow& GLFWApplication::createWindow(const WindowConfig& cfg) {
+    GLFWWindow& GLFWApplication::createWindow(std::unique_ptr<RenderTarget> renderTarget, const WindowConfig& cfg) {
 
         auto const* tmp_cfg = dynamic_cast<GLFWWindowConfig const*>(&cfg);
         if (!tmp_cfg) {
@@ -113,7 +113,7 @@ namespace helios::ext::glfw::app {
             throw std::invalid_argument(msg);
         }
 
-        return createWindow(*tmp_cfg);
+        return createWindow(std::move(renderTarget), *tmp_cfg);
     }
 
 

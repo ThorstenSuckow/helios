@@ -184,4 +184,4 @@ export namespace helios::ext::glfw::window {
         [[nodiscard]] const GLFWWindowUserPointer& windowUserPointer() const noexcept;
     };
 
-}
+} // namespace helios::ext::glfw::window

@@ -1,6 +1,6 @@
 module;
 
-#include <string>
+#include <stdexcept>
 
 module helios.window.Window;
 
@@ -10,8 +10,10 @@ import helios.math.types;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
 import helios.rendering.RenderTarget;
+import helios.rendering.Viewport;
 
 using namespace helios::rendering;
+
 namespace helios::window {
 
 
@@ -21,7 +23,12 @@ namespace helios::window {
     ) :
     renderTarget_(std::move(renderTarget)),
     width_(cfg.width), height_(cfg.height), title_(cfg.title),
-    guid_(util::Guid::generate()){};
+    guid_(util::Guid::generate()) {
+
+        if (!renderTarget_) {
+            throw std::invalid_argument("Window received a nullptr renderTarget");
+        }
+    }
 
 
     const util::Guid& Window::guid() const noexcept {
@@ -41,6 +48,10 @@ namespace helios::window {
 
     RenderTarget& Window::renderTarget() const noexcept {
         return *renderTarget_;
+    }
+
+    std::shared_ptr<Viewport> Window::addViewport(std::shared_ptr<Viewport> viewport) const {
+        return renderTarget_->addViewport(std::move(viewport));
     }
 
 

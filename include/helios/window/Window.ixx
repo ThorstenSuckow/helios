@@ -15,6 +15,7 @@ import helios.math.types;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
 import helios.rendering.RenderTarget;
+import helios.rendering.Viewport;
 
 #define HELIOS_LOG_SCOPE "helios::window::Window"
 export namespace helios::window {
@@ -80,6 +81,8 @@ export namespace helios::window {
          *
          * @param renderTarget
          * @param cfg A const ref to the window configuration used for this instance.
+         *
+         * @throws std::invalid_argument if renderTarget is a nullptr
          */
         explicit Window(
             std::unique_ptr<helios::rendering::RenderTarget> renderTarget,
@@ -172,6 +175,14 @@ export namespace helios::window {
          */
         [[nodiscard]] helios::rendering::RenderTarget& renderTarget() const noexcept;
 
+        /**
+         * @brief Adds the viewport to the underlying RenderTarget of this Window.
+         *
+         * @param viewport The Viewport instance to add to the RenderTarget owned by this Window.
+         *
+         * @return The Viewport added to the Window's RenderTarget as a shared pointer.
+         */
+        std::shared_ptr<helios::rendering::Viewport> addViewport(std::shared_ptr<helios::rendering::Viewport> viewport) const;
 
         /**
          * @brief Compares two window instances for equality.

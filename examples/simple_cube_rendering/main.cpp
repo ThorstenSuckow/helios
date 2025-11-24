@@ -24,6 +24,7 @@ import helios.rendering.model.config.MeshConfig;
 import helios.rendering.model.config.MaterialProperties;
 import helios.rendering.model.config.PrimitiveType;
 import helios.rendering.asset.shape.basic.Cube;
+import helios.rendering.Viewport;
 
 // File I/O
 import helios.util.io.BasicStringFileReader;
@@ -39,7 +40,7 @@ import helios.scene.Scene;
 import helios.scene.SceneNode;
 import helios.scene.CullNoneStrategy;
 import helios.scene.Camera;
-
+import helios.scene.CameraSceneNode;
 
 using namespace helios::ext::glfw::app;
 using namespace helios::rendering;
@@ -67,6 +68,10 @@ int main() {
     );
 
     auto win = dynamic_cast<GLFWWindow*>(app->current());
+    auto mainViewport = std::make_shared<Viewport>();
+    win->addViewport(mainViewport);
+
+    mainViewport->setCamera(std::make_shared<Camera>());
 
     // Get the InputManager for handling keyboard input
     helios::input::InputManager& inputManager = app->inputManager();
@@ -133,9 +138,8 @@ int main() {
     // ========================================
     // 7. Camera Setup
     // ========================================
-    auto cam = std::make_unique<helios::scene::Camera>();
-    auto* cameraNode = scene->addNode(std::move(cam));
-    const auto* camera = dynamic_cast<const Camera*>(cameraNode);
+    auto cameraSceneNode = std::make_unique<helios::scene::CameraSceneNode>(mainViewport->camera());
+    std::ignore = scene->addNode(std::move(cameraSceneNode));
 
     // ========================================
     // 8. Main Render Loop
@@ -170,9 +174,11 @@ int main() {
         ));
 
         // Create a snapshot of the scene and render it
-        const auto& snapshot = scene->createSnapshot(*camera);
-        auto renderPass = RenderPassFactory::getInstance().buildRenderPass(snapshot);
-        app->renderingDevice().render(renderPass);
+        const auto snapshot = scene->createSnapshot(mainViewport);
+        if (snapshot.has_value()) {
+            auto renderPass = RenderPassFactory::getInstance().buildRenderPass(*snapshot);
+            app->renderingDevice().render(renderPass);
+        }
 
         // Swap front and back buffers
         win->swapBuffers();

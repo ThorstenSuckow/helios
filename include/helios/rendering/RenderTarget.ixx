@@ -1,5 +1,5 @@
 /**
- * @file
+ * @file RenderTarget.ixx
  * @brief Defines the RenderTarget class, which encapsulates a destination for rendering operations.
  */
 module;

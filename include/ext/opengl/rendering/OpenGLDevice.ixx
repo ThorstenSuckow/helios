@@ -85,5 +85,4 @@ export namespace helios::ext::opengl::rendering {
 
 
     };
-}
-
+} // namespace helios::ext::opengl::rendering

@@ -18,7 +18,7 @@ import :RenderTargetFwd;
 import helios.util.log.LogManager;
 import helios.util.log.Logger;
 
-#define HELIOS_LOG_SCOPE "helios::rendering::LogScope"
+#define HELIOS_LOG_SCOPE "helios::rendering::Viewport"
 export namespace helios::rendering {
 
     /**
@@ -143,7 +143,7 @@ export namespace helios::rendering {
          * @param zIndex The z-index that determines the rendering order.
          */
         explicit Viewport(
-            const float x, const float y, const float width, const float height, int zIndex = 0
+            float x, float y, float width, float height, int zIndex = 0
         ) noexcept;
 
         /**
@@ -250,7 +250,7 @@ export namespace helios::rendering {
          *
          * @return A reference to this viewport to allow fluent chaining.
          */
-        Viewport& setZIndex(const int zIndex) noexcept;
+        Viewport& setZIndex(int zIndex) noexcept;
 
 
         /**
@@ -269,4 +269,4 @@ export namespace helios::rendering {
              const helios::rendering::RenderTarget& source,
              unsigned int width, unsigned int height) noexcept;
     };
-}
+} // namespace helios::rendering

@@ -117,14 +117,14 @@ export namespace helios::scene {
          *
          * A Scene is not intended to be copied.
          */
-        Scene(const Scene&)=delete;
+        Scene(const Scene&) = delete;
 
         /**
          * @brief Prevent copy assignment.
          *
          * A Scene is not intended to be copied.
          */
-        Scene& operator=(const Scene&)=delete;
+        Scene& operator=(const Scene&) = delete;
 
         /**
          * @brief Prevent move constructor.
@@ -205,5 +205,5 @@ export namespace helios::scene {
 
     };
 
-}
+} // namespace helios::scene
 

@@ -104,4 +104,4 @@ export namespace helios::rendering {
         [[nodiscard]] size_t count() const noexcept;
     };
 
-}
+} // namespace helios::rendering

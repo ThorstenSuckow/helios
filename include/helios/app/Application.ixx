@@ -37,9 +37,9 @@ export namespace helios::app {
 
     protected:
         /**
-         * @brief The const reference to the logger used with this application.
+         * @brief Shared logger instance for all Application objects.
          */
-        const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().registerLogger(HELIOS_LOG_SCOPE);
+        inline static const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(HELIOS_LOG_SCOPE);
 
         /**
          * @brief Flag indicating whether the application has been initialized.

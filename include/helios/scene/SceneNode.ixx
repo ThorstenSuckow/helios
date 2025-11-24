@@ -312,5 +312,5 @@ export namespace helios::scene {
 
     };
 
-}
+} // namespace helios::scene
 

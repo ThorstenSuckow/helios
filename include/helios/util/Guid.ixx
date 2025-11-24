@@ -49,4 +49,4 @@ export namespace helios::util {
 
     };
 
-}
+} // namespace helios::util

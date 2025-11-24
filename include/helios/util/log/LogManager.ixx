@@ -24,6 +24,7 @@ export namespace helios::util::log {
      */
     class LogManager {
 
+
     private:
 
         /**
@@ -58,10 +59,23 @@ export namespace helios::util::log {
 
     public:
 
+        /**
+         * @brief Convenience accessor to obtain a logger for a textual scope via the singleton.
+         *
+         * This static helper forwards to `LogManager::getInstance().logger(scope)` and
+         * returns a reference to the logger registered for the given scope.
+         *
+         * @param scope The textual scope name of the requested logger.
+         *
+         * @return The logger registered with the scope, or the default logger if none was found.
+         */
+        static const Logger& loggerForScope(const std::string& scope) noexcept;
+
         ~LogManager() = default;
 
         /**
          * Enforce singleton (see Meyer's Singleton)
+         *
          * @see https://en.wikipedia.org/wiki/Singleton_pattern
          */
         LogManager(const LogManager&) = delete;
@@ -91,6 +105,7 @@ export namespace helios::util::log {
          * This method is thread safe for map look-ups.
          *
          * @param scope The textual scope name of the requested logger.
+         *
          * @return The logger registered with the scope, or the default logger if
          * none was found.
          */
@@ -103,6 +118,7 @@ export namespace helios::util::log {
          * This method is thread safe for map modifications.
          *
          * @param scope The scope requested for the logger to create.
+         *
          * @return The logger registered with the scope, or the logger already registered
          * with the LogManager under the given scope.
          */

@@ -43,4 +43,4 @@ export namespace helios::app::controller {
     };
 
 
-}
+} // namespace helios::app::controller

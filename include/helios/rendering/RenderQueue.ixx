@@ -39,9 +39,9 @@ export namespace helios::rendering {
         std::vector<std::unique_ptr<const helios::rendering::RenderCommand>> renderCommands_;
 
         /**
-         * @brief Logger instance for this RenderQueue.
+         * @brief Shared logger instance for all RenderQueue objects.
          */
-        const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().registerLogger(HELIOS_LOG_SCOPE);
+        inline static const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(HELIOS_LOG_SCOPE);
 
     public:
         ~RenderQueue() = default;
@@ -104,4 +104,4 @@ export namespace helios::rendering {
         [[nodiscard]] size_t count() const noexcept;
     };
 
-}
+} // namespace helios::rendering

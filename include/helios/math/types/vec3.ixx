@@ -112,11 +112,54 @@ export namespace helios::math {
             ));
         }
 
+        /**
+         * @brief Computes the cross product of this vector and v2.
+         *
+         * @tparam T The numeric type of the vector components.
+         * @param v2 The second vec3<T> vector.
+         *
+         * @return The cross product as a value of type vec3<T>.
+         */
+        [[nodiscard]] vec3<T> cross(const helios::math::vec3<T>& v2) const noexcept;
 
+        /**
+         * @brief Computes the dot product of this vector and v2.
+         *
+         * @tparam T The numeric type of the vector components.
+         * @param v2 The second vec3<T> vector.
+         *
+         * @return The dot product as a value of type T.
+         */
+        [[nodiscard]] T dot(const helios::math::vec3<T>& v2) const noexcept;
 
-        vec3<T> normalize() const noexcept;
+        /**
+         * @brief Returns a normalized version of this vector.
+         *
+         * @tparam T The numeric type of the vector components.
+         *
+         * @return A new vec3<T> instance representing the normalized vector.
+         */
+        [[nodiscard]] vec3<T> normalize() const noexcept;
     };
 
+    template<helios::math::Numeric T>
+        inline vec3<T> vec3<T>::cross(const vec3<T>& v2) const noexcept {
+        return vec3{
+            v[1]*v2[2] - v[2]*v2[1],
+            v[2]*v2[0] - v[0]*v2[2],
+            v[0]*v2[1] - v[1]*v2[0]
+        };
+    }
+
+
+    template<helios::math::Numeric T>
+    inline T vec3<T>::dot(const vec3<T>& v2) const noexcept {
+        return v[0]*v2[0] + v[1]*v2[1] + v[2]*v2[2];
+    }
+
+
+    template<helios::math::Numeric T>
+    inline vec3<T> vec3<T>::normalize() const noexcept { return (*this) * (static_cast<T>(1) / this->norm()); }
 
     /**
      * @brief Multiplies a 3D vector by a scalar value.
@@ -177,18 +220,6 @@ export namespace helios::math {
     constexpr vec3<T> operator+(const vec3<T>& v1, const vec3<T>& v2) noexcept {
         return vec3<T>{v1[0] + v2[0], v1[1] + v2[1], v1[2] + v2[2]};
     }
-
-
-
-    /**
-     * @brief Returns a normalized version of this vector.
-     *
-     * @tparam T The numeric type of the vector components.
-     *
-     * @return A new vec3<T> instance representing the normalized vector.
-     */
-    template<helios::math::Numeric T>
-    inline vec3<T> vec3<T>::normalize() const noexcept { return (*this) * (static_cast<T>(1) / this->norm()); }
 
 
     /**

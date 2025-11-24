@@ -38,7 +38,11 @@ namespace helios::rendering {
         frameUniformValues->set(helios::rendering::shader::UniformSemantics::ProjectionMatrix, projectionMatrix);
         frameUniformValues->set(helios::rendering::shader::UniformSemantics::ViewMatrix, viewMatrix);
 
-        return RenderPass(std::move(renderQueue), std::move(frameUniformValues));
+        return RenderPass(
+            snapshot.viewport(),
+            std::move(renderQueue),
+            std::move(frameUniformValues)
+        );
     }
 
 

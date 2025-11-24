@@ -6,6 +6,7 @@
 module;
 
 #include <memory>
+#include <optional>
 #include <stdexcept>
 #include <vector>
 
@@ -13,9 +14,10 @@ export module helios.scene.Scene;
 
 import helios.scene.Snapshot;
 import helios.scene.SceneNode;
+import helios.scene.Camera;
 import helios.math.types;
 
-import helios.scene.Camera;
+import helios.rendering.Viewport;
 import helios.scene.FrustumCullingStrategy;
 import helios.scene.SnapshotItem;
 
@@ -38,7 +40,6 @@ export namespace helios::scene {
      * and a particular `Camera` and also allows for propagating world transformations
      * through the contained subtrees.
      *
-     *
      * @see [RTR, pp. 828]
      * @see [Gre19, pp. 693]
      * @see [HDMS+14, pp. 138]
@@ -52,6 +53,7 @@ export namespace helios::scene {
 
         /**
          * @brief SceneGraphKey for internal use.
+         *
          * @see helios::scene::SceneNode::setWorldTransform()
          */
         const SceneGraphKey sceneGraphKey_{};
@@ -62,14 +64,15 @@ export namespace helios::scene {
         const helios::math::mat4f mat4fid = helios::math::mat4f::identity();
 
         /**
-         * @brief The root node of this scene. All other SceneNodes are (in)direct
-         * children of this node.
+         * @brief The root node of this scene.
+         *
+         * All other SceneNodes are (in)direct children of this node.
          */
         std::unique_ptr<SceneNode> root_;
 
         /**
-         * @brief Internal helper function to force-propagate the worldTransformation of SceneNodes
-         * to their child nodes.
+         * @brief Internal helper function to force-propagate the worldTransformation of SceneNodes to their child nodes.
+         *
          * Propagation is cancelled for this node if the world transform submitted
          * is considered equal to the current world transform of the SceneNode.
          *
@@ -82,6 +85,7 @@ export namespace helios::scene {
 
         /**
          * @brief Selectively updates the world transformation of SceneNodes in the scene graph.
+         *
          * A SceneNode is forced to update its own world transformation and the
          * world transformation of its children as soon as a check for the dirty-state of the
          * node is true.
@@ -98,24 +102,27 @@ export namespace helios::scene {
 
         /**
          * @brief The logger used with this Scene instance.
-         * Defaults to HELIOS_LOG_SCOPE
+         *
+         * Defaults to HELIOS_LOG_SCOPE.
          *
          * @todo constructor injection
          */
-        const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().registerLogger(
+        inline static const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(
             HELIOS_LOG_SCOPE
         );
 
     public:
         /**
          * @brief Prevent copying.
+         *
          * A Scene is not intended to be copied.
          */
         Scene(const Scene&)=delete;
 
         /**
          * @brief Prevent copy assignment.
-         * A scene is not intended to be copied.
+         *
+         * A Scene is not intended to be copied.
          */
         Scene& operator=(const Scene&)=delete;
 
@@ -133,61 +140,70 @@ export namespace helios::scene {
 
         /**
          * @brief Constructs a new Scene.
+         *
          * The root node for this scene is automatically created.
+         *
+         * @param frustumCullingStrategy The frustum culling strategy to use with this Scene.
          */
         explicit Scene(std::unique_ptr<helios::scene::FrustumCullingStrategy> frustumCullingStrategy);
 
 
         /**
          * @brief Adds a new SceneNode to this scene.
+         *
          * The SceneNode becomes a direct descendant of this scene's root.
          *
-         * @param node The Scene node to add to this Scene.
+         * @param node The SceneNode to add to this Scene.
          *
-         * @return The raw pointer to the newly added node, or `nullptr` if
-         * the node wasn't added.
-         *
+         * @return The raw pointer to the newly added node, or `nullptr` if the node was not added.
          */
         [[nodiscard]] SceneNode* addNode(std::unique_ptr<SceneNode> node) const;
 
         /**
          * @brief Updates the world transformations of SceneNodes in the graph.
+         *
          * The method traverses the Scene and propagates updated world transformations
          * to their respective child nodes if the processed node is considered to be dirty.
          */
         void updateNodes() const;
 
         /**
-         * @brief This method applies this Scene's frustumCullingStrategy and returns all nodes
-         * visible for the specified Camera.
-         * This method makes also sure that all nodes' world geometry is properly updated
+         * @brief Applies this Scene's frustumCullingStrategy and returns all nodes visible for the specified Camera.
+         *
+         * This method ensures that all nodes' world geometry is properly updated
          * before culling is applied.
          *
          * @param camera The camera used to determine the view frustum for culling.
          *
-         * @return a list of currently visible nodes (const pointers into the scene graph).
+         * @return A list of currently visible nodes (const pointers into the scene graph).
          */
         [[nodiscard]] std::vector<const helios::scene::SceneNode*> findVisibleNodes(const helios::scene::Camera& camera) const;
 
         /**
          * @brief Returns the root node of this Scene.
+         *
          * The root node is guaranteed to exist.
          *
-         * @return the root node of this Scene.
+         * @return The root node of this Scene.
          */
         [[nodiscard]] helios::scene::SceneNode& root() const noexcept;
 
         /**
          * @brief Creates a Snapshot of the Scene and returns it.
+         *
          * Taking a snapshot will frustum cull the SceneNodes and place their Renderables
-         * along with the current matrices of this scene's matrix into the Snapshot object.
+         * along with the current matrices of this scene into the Snapshot object.
          *
-         * @param camera The camera used to observe the Scene.
+         * @param viewport The viewport for which the Snapshot is created.
          *
-         * @return The snapshot created for this Scene.
+         * @return An optional Snapshot created for this Scene, or `std::nullopt` if creation failed.
+         *
+         * @todo This should be refactored into a factory to prevent domain leakage between Scene and Rendering.
          */
-        [[nodiscard]] Snapshot createSnapshot(const helios::scene::Camera& camera) const;
+        [[nodiscard]] std::optional<Snapshot>
+        createSnapshot(const std::shared_ptr<const rendering::Viewport>& viewport) const;
 
     };
 
 }
+

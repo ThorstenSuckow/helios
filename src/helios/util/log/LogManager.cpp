@@ -9,10 +9,15 @@ module helios.util.log.Logger;
 
 import helios.util.log.LogManager;
 
+
 namespace helios::util::log {
 
 
     LogManager::LogManager() : defaultLogger_(std::make_unique<Logger>("default")) {}
+
+    const Logger& LogManager::loggerForScope(const std::string& scope) noexcept {
+        return LogManager::getInstance().logger(scope);
+    }
 
 
     LogManager& LogManager::getInstance() noexcept {

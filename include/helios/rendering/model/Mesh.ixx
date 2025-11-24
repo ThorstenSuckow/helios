@@ -68,12 +68,9 @@ export namespace helios::rendering::model {
         virtual void init() = 0;
 
         /**
-         * @brief The logger used with this Mesh instance.
-         * Defaults to HELIOS_LOG_SCOPE
-         *
-         * @todo constructor injection
+         * @brief Shared logger instance for all Mesh objects.
          */
-        const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().registerLogger(
+        inline static const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(
             HELIOS_LOG_SCOPE
         );
 

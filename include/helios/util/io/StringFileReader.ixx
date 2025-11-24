@@ -23,9 +23,9 @@ export namespace helios::util::io {
 
     protected:
         /**
-         * @brief The logger used with this FileReader.
+         * @brief Shared logger instance for all StringFileReader objects.
          */
-        helios::util::log::Logger logger_ = helios::util::log::LogManager::getInstance().registerLogger(HELIOS_LOG_SCOPE);
+        inline static const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(HELIOS_LOG_SCOPE);
 
 
     public:

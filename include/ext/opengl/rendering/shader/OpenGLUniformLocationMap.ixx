@@ -41,12 +41,9 @@ export namespace helios::ext::opengl::rendering::shader {
         std::array<int, std::to_underlying(helios::rendering::shader::UniformSemantics::size_)> map_ = {};
 
         /**
-         * @brief The logger used with this OpenGLUniformLocationMap.
-         * Defaults to HELIOS_LOG_SCOPE
-         *
-         * @todo constructor injection
+         * @brief Shared logger instance for all OpenGLUniformLocationMap objects.
          */
-        const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().registerLogger(
+        inline static const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(
             HELIOS_LOG_SCOPE
         );
 

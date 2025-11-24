@@ -80,12 +80,12 @@ export namespace helios::rendering {
          *
          * @param viewport A shared pointer to the `Viewport` to be added.
          *
-         * @return A const reference to the newly added viewport.
+         * @return The newly added viewport as a shared pointer.
          *
          * @throws std::invalid_argument if viewport is a nullptr, or if the viewport already
          *         has a parent RenderTarget.
          */
-        const helios::rendering::Viewport& addViewport(
+        std::shared_ptr<helios::rendering::Viewport> addViewport(
             std::shared_ptr<helios::rendering::Viewport> viewport);
 
         /**

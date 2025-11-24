@@ -64,8 +64,10 @@ export namespace helios::rendering {
 
         /**
          * @brief Bitmask of buffers to clear.
+         *
+         * Defaults to ClearFlags::Color.
          */
-        int clearFlags_ = std::to_underlying(ClearFlags::None);
+        int clearFlags_ = std::to_underlying(ClearFlags::Color);
 
         /**
          * @brief Color used when clearing the color buffer. Defaults to "black", i.e. no color at all.

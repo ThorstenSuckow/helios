@@ -20,27 +20,19 @@ TEST(RenderPassTest, HandlesArgsProperly) {
 
     auto objectUniformValues = std::make_unique<UniformValueMap>();
     std::weak_ptr<RenderPrototype> weak;
-    auto renderCommand = std::make_unique<RenderCommand>(
-        weak,
-        std::move(objectUniformValues),
-        nullptr
-    );
+    auto renderCommand = std::make_unique<RenderCommand>(weak, std::move(objectUniformValues), nullptr);
 
     auto queue = std::make_unique<RenderQueue>();
     queue->add(std::move(renderCommand));
 
-    const auto viewport = std::make_shared<const helios::rendering::Viewport>(
-        0.0f, 0.0f, 1.0f, 1.0f
-    );
+    const auto viewport = std::make_shared<const helios::rendering::Viewport>(0.0f, 0.0f, 1.0f, 1.0f);
 
     auto pass = RenderPass(viewport, std::move(queue), std::move(frameUniformValues));
 
     EXPECT_EQ(pass.renderQueue().count(), 1);
-    const float* roughness = pass.frameUniformValues()
-                                 .float_ptr(UniformSemantics::MaterialRoughness);
+    const float* roughness = pass.frameUniformValues().float_ptr(UniformSemantics::MaterialRoughness);
     ASSERT_NE(roughness, nullptr);
     EXPECT_EQ(*roughness, 1.0f);
-
 }
 
 

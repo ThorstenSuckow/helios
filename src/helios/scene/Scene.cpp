@@ -42,7 +42,6 @@ namespace helios::scene {
                 propagateWorldTransform(*child, parentWt);
             }
         }
-
     }
 
 
@@ -59,9 +58,7 @@ namespace helios::scene {
     }
 
     Scene::Scene(std::unique_ptr<FrustumCullingStrategy> frustumCullingStrategy) :
-    frustumCullingStrategy_(std::move(frustumCullingStrategy)),
-    root_(std::make_unique<SceneNode>()) {}
-
+        frustumCullingStrategy_(std::move(frustumCullingStrategy)), root_(std::make_unique<SceneNode>()) {}
 
 
     SceneNode* Scene::addNode(std::unique_ptr<SceneNode> node) const {
@@ -73,9 +70,7 @@ namespace helios::scene {
     }
 
 
-    void Scene::updateNodes() const {
-        updateNodes(*root_, mat4fid);
-    }
+    void Scene::updateNodes() const { updateNodes(*root_, mat4fid); }
 
 
     std::vector<const SceneNode*> Scene::findVisibleNodes(const Camera& camera) const {
@@ -111,22 +106,14 @@ namespace helios::scene {
 
         std::vector<SnapshotItem> renderables;
         renderables.reserve(nodes.size());
-        for (const auto& node : nodes) {
+        for (const auto& node: nodes) {
             if (node->renderable()) {
-                renderables.emplace_back(
-                    node->renderable(),
-                    node->cachedWorldTransform()
-                );
+                renderables.emplace_back(node->renderable(), node->cachedWorldTransform());
             }
         }
 
-        return std::make_optional<Snapshot>(
-            viewport,
-            camera->projectionMatrix(),
-            camera->viewMatrix(),
-            std::move(renderables)
-        );
-;
+        return std::make_optional<Snapshot>(viewport, camera->projectionMatrix(), camera->viewMatrix(),
+                                            std::move(renderables));
     }
 
-}
+} // namespace helios::scene

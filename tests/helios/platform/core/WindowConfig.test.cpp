@@ -20,7 +20,7 @@ TEST(WindowConfigTest, data) {
     // init data
     const WindowConfig data{};
 
-    EXPECT_EQ(600, data.height);
+    EXPECT_EQ(800, data.height);
     EXPECT_EQ(800, data.width);
     EXPECT_STREQ("helios - Window", data.title.c_str());
 }

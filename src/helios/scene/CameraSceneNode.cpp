@@ -14,7 +14,7 @@ namespace helios::scene {
 
     CameraSceneNode::CameraSceneNode(std::shared_ptr<Camera> camera) :
         camera_(camera) {
-        // intenionally test the shared_ptr,
+        // intentionally test the shared_ptr,
         // we can check later if camera_ is expired
         if (!camera) {
             throw std::invalid_argument("CameraSceneNode received a Camera nullptr.");

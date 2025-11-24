@@ -15,8 +15,9 @@ import helios.rendering.model.config.MaterialPropertiesOverride;
 import helios.rendering.shader.UniformValueMap;
 
 import helios.util.log.Logger;
+import helios.util.log.LogManager;
 
-
+#define HELIOS_LOG_SCOPE "helios::rendering::Renderable"
 export namespace helios::rendering {
 
 
@@ -47,9 +48,9 @@ export namespace helios::rendering {
         std::optional<helios::rendering::model::config::MaterialPropertiesOverride> materialOverride_;
 
         /**
-         * @brief The logger used with this Renderable instance.
+         * @brief Shared logger instance for all Renderable objects.
          */
-        const helios::util::log::Logger* logger_ = nullptr;
+        inline static const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(HELIOS_LOG_SCOPE);
 
     public:
         /**
@@ -77,16 +78,13 @@ export namespace helios::rendering {
          * @param renderPrototype A shared pointer to the immutable RenderPrototype definition. Must not be nullptr.
          * @param materialOverride An optional set of instance-specific material property overrides.
          * If nullptr, the Renderable uses only the default properties from the RenderPrototype's Material.
-         * @param logger An (optional) pointer to a const logger instance. If not provided,
-         * a default logger is automatically created.
          *
          * @throws std::invalid_argument if `renderPrototype` is a nullptr.
          */
         explicit Renderable(
             std::shared_ptr<const helios::rendering::RenderPrototype> renderPrototype,
             const std::optional<helios::rendering::model::config::MaterialPropertiesOverride>&
-            materialOverride = std::nullopt,
-            const helios::util::log::Logger* logger = nullptr
+            materialOverride = std::nullopt
         );
 
 

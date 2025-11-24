@@ -184,4 +184,4 @@ export namespace helios::window {
         virtual bool operator==(const Window& win) const noexcept;
     };
 
-}
+} // namespace helios::window

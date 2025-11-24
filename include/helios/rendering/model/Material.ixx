@@ -1,4 +1,5 @@
 /**
+ * @file Material.ixx
  * @brief Material abstraction: shader + material properties.
  */
 module;
@@ -90,4 +91,4 @@ export namespace helios::rendering::model {
         void writeUniformValues(helios::rendering::shader::UniformValueMap& uniformValueMap) const noexcept;
     };
 
-}
+} // namespace helios::rendering::model

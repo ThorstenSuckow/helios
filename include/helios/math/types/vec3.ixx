@@ -160,7 +160,7 @@ export namespace helios::math {
      * of the two vectors.
      */
     template<helios::math::Numeric T>
-    constexpr vec3<T> operator*( const vec3<T>& v1, const vec3<T>& v2) noexcept {
+    constexpr vec3<T> operator*(const vec3<T>& v1, const vec3<T>& v2) noexcept {
         return vec3<T>{v1[0] * v2[0], v1[1] * v2[1], v1[2] * v2[2]};
     }
 
@@ -174,7 +174,7 @@ export namespace helios::math {
      * @return A new vec3<T> instance representing the sum of the two vectors.
      */
     template<helios::math::Numeric T>
-    constexpr vec3<T> operator+( const vec3<T>& v1, const vec3<T>& v2) noexcept {
+    constexpr vec3<T> operator+(const vec3<T>& v1, const vec3<T>& v2) noexcept {
         return vec3<T>{v1[0] + v2[0], v1[1] + v2[1], v1[2] + v2[2]};
     }
 
@@ -243,4 +243,4 @@ export namespace helios::math {
     using vec3f = vec3<float>;
     using vec3i = vec3<int>;
     using vec3d = vec3<double>;
-}
+} // namespace helios::math

@@ -1,7 +1,7 @@
 module;
 
-#include <glad/gl.h>
 #include <GLFW/glfw3.h>
+#include <glad/gl.h>
 #include <iostream>
 
 module helios.ext.opengl.rendering.OpenGLDevice;
@@ -24,24 +24,30 @@ namespace helios::ext::opengl::rendering {
 
     GLenum OpenGLDevice::toOpenGL(const PrimitiveType primitiveType) const noexcept {
         switch (primitiveType) {
-            case PrimitiveType::Points: return GL_POINTS;
-            case PrimitiveType::Lines: return GL_LINES;
-            case PrimitiveType::LineLoop: return GL_LINE_LOOP;
-            case PrimitiveType::LineStrip: return GL_LINE_STRIP;
-            case PrimitiveType::Triangles: return GL_TRIANGLES;
-            case PrimitiveType::TriangleStrip: return GL_TRIANGLE_STRIP;
-            case PrimitiveType::TriangleFan: return GL_TRIANGLE_FAN;
+            case PrimitiveType::Points:
+                return GL_POINTS;
+            case PrimitiveType::Lines:
+                return GL_LINES;
+            case PrimitiveType::LineLoop:
+                return GL_LINE_LOOP;
+            case PrimitiveType::LineStrip:
+                return GL_LINE_STRIP;
+            case PrimitiveType::Triangles:
+                return GL_TRIANGLES;
+            case PrimitiveType::TriangleStrip:
+                return GL_TRIANGLE_STRIP;
+            case PrimitiveType::TriangleFan:
+                return GL_TRIANGLE_FAN;
             default:
                 logger_.warn("Failed to resolve primitive type, falling back to GL_TRIANGLES.");
                 return GL_TRIANGLES;
         }
-
     }
 
     void OpenGLDevice::init() {
 
         if (initialized_) {
-            return ;
+            return;
         }
         const GLADloadfunc procAddressLoader = glfwGetProcAddress;
         const int gl_ver = gladLoadGL(procAddressLoader);
@@ -51,9 +57,7 @@ namespace helios::ext::opengl::rendering {
             throw std::runtime_error("Failed to load OpenGL");
         }
 
-        logger_.info(std::format("OpenGL {0}.{1} loaded",
-            GLAD_VERSION_MAJOR(gl_ver), GLAD_VERSION_MINOR(gl_ver))
-        );
+        logger_.info(std::format("OpenGL {0}.{1} loaded", GLAD_VERSION_MAJOR(gl_ver), GLAD_VERSION_MINOR(gl_ver)));
 
         initialized_ = true;
     };
@@ -73,25 +77,19 @@ namespace helios::ext::opengl::rendering {
         const helios::rendering::RenderTarget& renderTarget = *(viewport.renderTarget());
         const auto viewportBounds = viewport.bounds();
         const auto col = viewport.clearColor();
-        glViewport(
-            static_cast<int>(renderTarget.width() * viewportBounds[0]),
-            static_cast<int>(renderTarget.height() * viewportBounds[1]),
-            static_cast<int>(renderTarget.width() * viewportBounds[2]),
-            static_cast<int>(renderTarget.height()*viewportBounds[3])
-        );
+        glViewport(static_cast<int>(renderTarget.width() * viewportBounds[0]),
+                   static_cast<int>(renderTarget.height() * viewportBounds[1]),
+                   static_cast<int>(renderTarget.width() * viewportBounds[2]),
+                   static_cast<int>(renderTarget.height() * viewportBounds[3]));
 
 
         glClearColor(col[0], col[1], col[2], col[3]);
 
         const int clearFlags = viewport.clearFlags();
-        glClear(
-            ((clearFlags & std::to_underlying(helios::rendering::ClearFlags::Color)) ?  GL_COLOR_BUFFER_BIT : 0)
-            |
-            ((clearFlags & std::to_underlying(helios::rendering::ClearFlags::Depth)) ?  GL_DEPTH_BUFFER_BIT : 0)
-            |
-            ((clearFlags & std::to_underlying(helios::rendering::ClearFlags::Stencil)) ?  GL_STENCIL_BUFFER_BIT : 0)
-        );
-
+        glClear(((clearFlags & std::to_underlying(helios::rendering::ClearFlags::Color)) ? GL_COLOR_BUFFER_BIT : 0) |
+                ((clearFlags & std::to_underlying(helios::rendering::ClearFlags::Depth)) ? GL_DEPTH_BUFFER_BIT : 0) |
+                ((clearFlags & std::to_underlying(helios::rendering::ClearFlags::Stencil)) ? GL_STENCIL_BUFFER_BIT
+                                                                                           : 0));
     };
 
 
@@ -105,7 +103,7 @@ namespace helios::ext::opengl::rendering {
 
             if (const auto renderPrototype_ptr = rc->renderPrototype().lock()) {
                 const auto& baseShader = renderPrototype_ptr->material().shader();
-                const auto& baseMesh   = renderPrototype_ptr->mesh();
+                const auto& baseMesh = renderPrototype_ptr->mesh();
 
                 const auto* shader = dynamic_cast<const OpenGLShader*>(&baseShader);
                 if (!shader) {
@@ -127,12 +125,7 @@ namespace helios::ext::opengl::rendering {
                 glBindVertexArray(mesh->vao());
                 glEnable(GL_BLEND);
                 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-                glDrawElements(
-                    toOpenGL(primitiveType),
-                    mesh->indexCount() ,
-                    GL_UNSIGNED_INT,
-                    nullptr
-                );
+                glDrawElements(toOpenGL(primitiveType), mesh->indexCount(), GL_UNSIGNED_INT, nullptr);
                 glBindVertexArray(0);
             }
         }
@@ -144,6 +137,4 @@ namespace helios::ext::opengl::rendering {
     };
 
 
-
-
-};
+}; // namespace helios::ext::opengl::rendering

@@ -49,7 +49,7 @@ TEST(RenderPassTest, HandlesArgsProperly) {
 // --------------------
 TEST(RenderPassTest, HandlesNullRenderQueueGracefully) {
     auto uniformValues = std::make_unique<UniformValueMap>();
-    const auto viewport = std::make_shared<const helios::rendering::Viewport>(0.0f,0.0f,1.0f, 1.0f);
+    const auto viewport = std::make_shared<const helios::rendering::Viewport>(0.0f, 0.0f, 1.0f, 1.0f);
 
     auto pass = RenderPass(viewport, nullptr, std::move(uniformValues));
     EXPECT_EQ(pass.renderQueue().count(), 0);
@@ -57,7 +57,7 @@ TEST(RenderPassTest, HandlesNullRenderQueueGracefully) {
 
 TEST(RenderPassTest, HandlesNullUniformValueMapGracefully) {
     auto renderQueue = std::make_unique<RenderQueue>();
-    const auto viewport = std::make_shared<const helios::rendering::Viewport>(0.0f,0.0f,1.0f, 1.0f);
+    const auto viewport = std::make_shared<const helios::rendering::Viewport>(0.0f, 0.0f, 1.0f, 1.0f);
 
     auto pass = RenderPass(viewport, std::move(renderQueue), nullptr);
 
@@ -65,7 +65,7 @@ TEST(RenderPassTest, HandlesNullUniformValueMapGracefully) {
 }
 
 TEST(RenderPassTest, HandlesBothNullArgsGracefully) {
-    const auto viewport = std::make_shared<const helios::rendering::Viewport>(0.0f,0.0f,1.0f, 1.0f);
+    const auto viewport = std::make_shared<const helios::rendering::Viewport>(0.0f, 0.0f, 1.0f, 1.0f);
 
     auto pass = RenderPass(viewport, nullptr, nullptr);
 

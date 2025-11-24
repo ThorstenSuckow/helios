@@ -1,9 +1,10 @@
 /**
  * @file Window.ixx
- * @brief Abstract window interface used by the Helios framework.
+ * @brief Abstract window interface used by the helios framework.
  */
 module;
 
+#include <memory>
 #include <string>
 
 export module helios.window.Window;
@@ -13,6 +14,8 @@ import helios.window.WindowConfig;
 import helios.math.types;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
+import helios.rendering.RenderTarget;
+import helios.rendering.Viewport;
 
 #define HELIOS_LOG_SCOPE "helios::window::Window"
 export namespace helios::window {
@@ -35,7 +38,7 @@ export namespace helios::window {
         /**
          * @brief The logger used with this Window instance.
          */
-        const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().registerLogger(HELIOS_LOG_SCOPE);
+        inline static const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(HELIOS_LOG_SCOPE);
 
         /**
          * @brief The current width of the window.
@@ -52,13 +55,23 @@ export namespace helios::window {
          */
         std::string title_;
 
+
         /**
-         * @brief The viewport configuration of the window, in terms of (x, y, width, height).
+         * @brief The default render target for this Window.
+         * The default RenderTarget represents the default framebuffer, e.g. the "0" FBO in OpenGL.
          */
-        math::vec4i viewport_;
+        std::unique_ptr<helios::rendering::RenderTarget> renderTarget_;
 
     public:
         virtual ~Window() = default;
+
+        // not copyable
+        Window(const Window&) = delete;
+        Window& operator=(const Window&) = delete;
+
+        // moveable
+        Window(Window&&) noexcept = default;
+        Window& operator=(Window&&) noexcept = default;
 
         /**
          * @brief Constructs a new Window based on the provided configuration.
@@ -66,9 +79,15 @@ export namespace helios::window {
          * Initializes basic properties such as width, height and the viewport
          * of the window.
          *
+         * @param renderTarget
          * @param cfg A const ref to the window configuration used for this instance.
+         *
+         * @throws std::invalid_argument if renderTarget is a nullptr
          */
-        explicit Window(const WindowConfig& cfg);
+        explicit Window(
+            std::unique_ptr<helios::rendering::RenderTarget> renderTarget,
+            const WindowConfig& cfg
+        );
 
 
         /**
@@ -150,13 +169,20 @@ export namespace helios::window {
 
 
         /**
-         * @brief Returns the viewport configuration used with this window,
-         * encoded in a `vec4i` as (x, y, width, height).
+         * @brief Returns the RenderTarget associated with this Window.
          *
-         * @return A constant reference to the `vec4i` representing this window's viewport.
+         * @return A reference to the RenderTarget of this window.
          */
-        [[nodiscard]] const math::vec4i& viewport() const noexcept;
+        [[nodiscard]] helios::rendering::RenderTarget& renderTarget() const noexcept;
 
+        /**
+         * @brief Adds the viewport to the underlying RenderTarget of this Window.
+         *
+         * @param viewport The Viewport instance to add to the RenderTarget owned by this Window.
+         *
+         * @return The Viewport added to the Window's RenderTarget as a shared pointer.
+         */
+        std::shared_ptr<helios::rendering::Viewport> addViewport(std::shared_ptr<helios::rendering::Viewport> viewport) const;
 
         /**
          * @brief Compares two window instances for equality.
@@ -169,4 +195,4 @@ export namespace helios::window {
         virtual bool operator==(const Window& win) const noexcept;
     };
 
-}
+} // namespace helios::window

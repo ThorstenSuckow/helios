@@ -1,6 +1,6 @@
 /**
  * @file Camera.ixx
- * @brief Camera node providing view and projection matrices.
+ * @brief Defines the Camera class providing view and projection matrices.
  */
 module;
 
@@ -14,71 +14,64 @@ import helios.scene.SceneNode;
 export namespace helios::scene {
 
     /**
-     * @brief Represents a camera for perspective or orthographic projection, deriving from SceneNode
-     * to allow for spatial positioning and transformation within the scene graph.
+     * @brief Represents a camera for perspective or orthographic projection.
      *
-     * The camera provides the view and projection matrix, whereas the view matrix
+     * The camera provides the view and projection matrices, whereas the view matrix
      * is computed as the inverse of the camera's world transform.
      *
-     * A Camera behaves just like a (non-renderable) SceneNode, except for the fact that
-     * it does not accept child nodes.
-     *
-     * An instance of `Camera` is added as a direct descendant of the scene's root node
-     * for free transform. It can be a child of a model hierarchy to inherit the
-     * corresponding positioning in the world.
-     *
-     * @todo implement class. Make sure localTransforms mark this class as dirty,
-     * for proper recalculating projection-/viewMatrix if needed.
-     * @todo check whether nodes should further be divided into Parent- and LeafNodes.
-     * Cameras would be LeafNodes then, not allowing to have child nodes.
+     * @todo Implement automatic recalculation of projection and view matrices when
+     *       local transforms change (dirty flag pattern).
      */
-    class Camera : public SceneNode {
+    class Camera {
 
     protected:
         /**
-         * @brief The projection matrix of this Camera.
+         * @brief The projection matrix of this camera.
          */
         mutable helios::math::mat4f projectionMatrix_;
 
         /**
-         * @brief The view matrix of this Camera.
+         * @brief The view matrix of this camera.
          */
         mutable helios::math::mat4f viewMatrix_;
 
+        /**
+         * @brief The aspect ratio of the camera (width/height).
+         *
+         * Defaults to 1.0.
+         */
+        float aspectRatio_ = 1.0f;
+
     public:
         /**
-         * @brief Constructor for this class.
-         * Initializes projectionMatrix and viewMatrix with the identity matrix.
+         * @brief Constructs a camera with identity projection and view matrices.
          */
-        Camera();
+        Camera() noexcept;
 
         /**
-         * @brief This method will do nothing but return `nullptr`, indicating that a `Camera`
-         * must not have child nodes.
+         * @brief Gets the current projection matrix.
          *
-         * @param sceneNode The attempted child node to add (ignored).
-         * @return This implementation returns `nullptr`.
+         * Typically set to a perspective or orthographic projection.
          *
-         * @see https://stackoverflow.com/questions/24609872/delete-virtual-function-from-a-derived-class
-         */
-        [[nodiscard]] SceneNode* addChild(std::unique_ptr<SceneNode> sceneNode) override;
-
-        /**
-         * @brief Returns a constant ref to this camera's current projection matrix.
-         * Typically set to the perspective / orthographic projection.
-         *
-         * @return A const ref to this `Camera`'s projection matrix.
+         * @return A const reference to this camera's projection matrix.
          */
         [[nodiscard]] const helios::math::mat4f& projectionMatrix() const noexcept;
 
         /**
-         * @brief Returns a constant ref to this camera's view matrix.
-         * Automatically computed as the inverse of the camera's world
-         * transform.
+         * @brief Gets the current view matrix.
          *
-         * @return A const ref to this `Camera`'s view matrix.
+         * The view matrix represents the inverse of the camera's world transform.
+         *
+         * @return A const reference to this camera's view matrix.
          */
         [[nodiscard]] const helios::math::mat4f& viewMatrix() const noexcept;
+
+        /**
+         * @brief Sets the aspect ratio used by the camera.
+         *
+         * @param aspectRatio The new aspect ratio (width/height).
+         */
+        void setAspectRatio(float aspectRatio) noexcept;
 
     };
 

@@ -20,17 +20,15 @@ namespace helios::rendering {
 
     Renderable::Renderable(
         std::shared_ptr<const RenderPrototype> renderPrototype,
-        const std::optional<MaterialPropertiesOverride>& materialOverride,
-        const Logger* logger
+        const std::optional<MaterialPropertiesOverride>& materialOverride
     ) :
         renderPrototype_(std::move(renderPrototype)),
-        materialOverride_(materialOverride),
-        logger_(!logger ? &LogManager::getInstance().registerLogger(HELIOS_LOG_SCOPE) : logger)
+        materialOverride_(materialOverride)
     {
 
         if (!renderPrototype_) {
             const std::string msg = "Renderable constructor received a null shared pointer.";
-            logger_->error(msg);
+            logger_.error(msg);
             throw std::invalid_argument(msg);
         }
 

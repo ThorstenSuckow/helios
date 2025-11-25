@@ -12,9 +12,9 @@ export module helios.math.types:vec3;
 
 import :vec2;
 import helios.math.concepts;
+import helios.math.traits.FloatingPointType;
 
 export namespace helios::math {
-
 
     /**
      * @brief Represents a 3-dimensional vector of the generic type <T>.
@@ -102,10 +102,10 @@ export namespace helios::math {
         /**
          * @brief Computes the Euclidean norm (magnitude) of this vector and returns it.
          *
-         * @return The norm (magnitude) of this vector as a value of type T.
+         * @return The norm (magnitude) of this vector as a value of type FloatingPointType<T>.
          */
-        T norm() const noexcept {
-            return static_cast<T>(std::sqrt(
+        FloatingPointType<T> norm() const noexcept {
+            return static_cast<FloatingPointType<T>>(std::sqrt(
                 static_cast<double>(this->v[0]) * static_cast<double>(this->v[0]) +
                 static_cast<double>(this->v[1]) * static_cast<double>(this->v[1]) +
                 static_cast<double>(this->v[2]) * static_cast<double>(this->v[2])
@@ -137,29 +137,11 @@ export namespace helios::math {
          *
          * @tparam T The numeric type of the vector components.
          *
-         * @return A new vec3<T> instance representing the normalized vector.
+         * @return A new vec3<FloatingPointType<T>> instance representing the normalized vector.
          */
-        [[nodiscard]] vec3<T> normalize() const noexcept;
+        [[nodiscard]] vec3<FloatingPointType<T>> normalize() const noexcept;
     };
 
-    template<helios::math::Numeric T>
-        inline vec3<T> vec3<T>::cross(const vec3<T>& v2) const noexcept {
-        return vec3{
-            v[1]*v2[2] - v[2]*v2[1],
-            v[2]*v2[0] - v[0]*v2[2],
-            v[0]*v2[1] - v[1]*v2[0]
-        };
-    }
-
-
-    template<helios::math::Numeric T>
-    inline T vec3<T>::dot(const vec3<T>& v2) const noexcept {
-        return v[0]*v2[0] + v[1]*v2[1] + v[2]*v2[2];
-    }
-
-
-    template<helios::math::Numeric T>
-    inline vec3<T> vec3<T>::normalize() const noexcept { return (*this) * (static_cast<T>(1) / this->norm()); }
 
     /**
      * @brief Multiplies a 3D vector by a scalar value.
@@ -268,6 +250,31 @@ export namespace helios::math {
     template<helios::math::Numeric T>
     constexpr vec3<T> operator-(const vec3<T>& v1, const vec3<T>& v2) noexcept {
         return vec3{v1[0] - v2[0], v1[1] - v2[1], v1[2] - v2[2]};
+    }
+
+    template<helios::math::Numeric T>
+        inline vec3<T> vec3<T>::cross(const vec3<T>& v2) const noexcept {
+        return vec3{
+            v[1]*v2[2] - v[2]*v2[1],
+            v[2]*v2[0] - v[0]*v2[2],
+            v[0]*v2[1] - v[1]*v2[0]
+        };
+    }
+
+
+    template<helios::math::Numeric T>
+    inline T vec3<T>::dot(const vec3<T>& v2) const noexcept {
+        return v[0]*v2[0] + v[1]*v2[1] + v[2]*v2[2];
+    }
+
+
+    template<helios::math::Numeric T>
+    inline vec3<FloatingPointType<T>> vec3<T>::normalize() const noexcept {
+        return vec3<FloatingPointType<T>>(
+            static_cast<FloatingPointType<T>>(v[0]) / this->norm(),
+            static_cast<FloatingPointType<T>>(v[1]) / this->norm(),
+            static_cast<FloatingPointType<T>>(v[2]) / this->norm()
+        );
     }
 
 

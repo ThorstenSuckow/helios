@@ -7,7 +7,6 @@ var module__helios_8rendering_8RenderingDevice =
     [ "helios::rendering::RenderingDevice::doRender", "module__helios_8rendering_8RenderingDevice.html#a64e0eddc87562bc3e40ecc2cd9439e6b", null ],
     [ "helios::rendering::RenderingDevice::endRenderPass", "module__helios_8rendering_8RenderingDevice.html#a1e3cfb7c060175c9005102a121f4c36d", null ],
     [ "helios::rendering::RenderingDevice::render", "module__helios_8rendering_8RenderingDevice.html#abf7617082018d54e151c9399b57160f4", null ],
-    [ "helios::rendering::RenderingDevice::setViewport", "module__helios_8rendering_8RenderingDevice.html#a701d970cf1e0c0c71a24ab1b104a15ea", null ],
     [ "helios::rendering::RenderingDevice::initialized", "module__helios_8rendering_8RenderingDevice.html#ab900c2b99f512ccdf6c33435db3da8b0", null ],
     [ "helios::rendering::RenderingDevice::initialized_", "module__helios_8rendering_8RenderingDevice.html#a4aa0809551525f58d3712a9aeb32dd6e", null ],
     [ "helios::rendering::RenderingDevice::logger_", "module__helios_8rendering_8RenderingDevice.html#a30cb723bfe96390f00716c2c80693248", null ]

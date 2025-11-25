@@ -106,12 +106,16 @@
         </inbodydescription>
         <location file="include/ext/glfw/window/GLFWWindow.ixx" line="60" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a74b2cacf2dc049c8b2965d3258fe5f97" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a84dddea91bf91d467587888d9c28b55d" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
         <type></type>
         <definition>helios::ext::glfw::window::GLFWWindow::GLFWWindow</definition>
-        <argsstring>(const GLFWWindowConfig &amp;cfg)</argsstring>
+        <argsstring>(std::unique_ptr&lt; helios::rendering::RenderTarget &gt; renderTarget, const GLFWWindowConfig &amp;cfg)</argsstring>
         <name>GLFWWindow</name>
         <qualifiedname>helios::ext::glfw::window::GLFWWindow::GLFWWindow</qualifiedname>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1rendering_1_1RenderTarget" kindref="compound">helios::rendering::RenderTarget</ref> &gt;</type>
+          <declname>renderTarget</declname>
+        </param>
         <param>
           <type>const <ref refid="structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowConfig" kindref="compound">GLFWWindowConfig</ref> &amp;</type>
           <declname>cfg</declname>
@@ -134,6 +138,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="include/ext/glfw/window/GLFWWindow.ixx" line="69" column="18"/>
+        <references refid="classhelios_1_1window_1_1Window_1a6bf6b252e26575dfced4453a3184994d">helios::window::Window::renderTarget</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a29029e93c4fe4a789c3c8353a339261f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>bool</type>
@@ -153,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/window/GLFWWindow.ixx" line="83" column="14"/>
+        <location file="include/ext/glfw/window/GLFWWindow.ixx" line="86" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1aadd3957b6e0d29e7d9ee08973bd25709" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -172,7 +177,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/window/GLFWWindow.ixx" line="91" column="14"/>
+        <location file="include/ext/glfw/window/GLFWWindow.ixx" line="94" column="14"/>
         <references refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1aadd3957b6e0d29e7d9ee08973bd25709">swapBuffers</references>
         <referencedby refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1aadd3957b6e0d29e7d9ee08973bd25709">swapBuffers</referencedby>
       </memberdef>
@@ -194,7 +199,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/window/GLFWWindow.ixx" line="101" column="14"/>
+        <location file="include/ext/glfw/window/GLFWWindow.ixx" line="104" column="14"/>
         <references refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1acfd10a52a9bdfb4bb4cb8fb10d15789d">pollEvents</references>
         <referencedby refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1acfd10a52a9bdfb4bb4cb8fb10d15789d">pollEvents</referencedby>
       </memberdef>
@@ -230,7 +235,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/window/GLFWWindow.ixx" line="109" column="14"/>
+        <location file="include/ext/glfw/window/GLFWWindow.ixx" line="112" column="14"/>
         <references refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1aa947fb54ea09837b28a293c265f563b0">setShouldClose</references>
         <referencedby refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1aa947fb54ea09837b28a293c265f563b0">setShouldClose</referencedby>
       </memberdef>
@@ -256,7 +261,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/window/GLFWWindow.ixx" line="117" column="15"/>
+        <location file="include/ext/glfw/window/GLFWWindow.ixx" line="120" column="15"/>
         <references refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1ae81673542c2bfd20a38a2a0f16e2ecf0">shouldClose</references>
         <referencedby refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1ae81673542c2bfd20a38a2a0f16e2ecf0">shouldClose</referencedby>
       </memberdef>
@@ -276,7 +281,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/window/GLFWWindow.ixx" line="128" column="33"/>
+        <location file="include/ext/glfw/window/GLFWWindow.ixx" line="131" column="33"/>
         <references refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1ac059798b32743ed8a710358bc660316f">frameBufferSizeCallback</references>
         <referencedby refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1ac059798b32743ed8a710358bc660316f">frameBufferSizeCallback</referencedby>
       </memberdef>
@@ -308,7 +313,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/window/GLFWWindow.ixx" line="140" column="14"/>
+        <location file="include/ext/glfw/window/GLFWWindow.ixx" line="143" column="14"/>
         <references refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a85a8b89983a1dbb446aee10b74383733">setFrameBufferSizeCallback</references>
         <referencedby refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a85a8b89983a1dbb446aee10b74383733">setFrameBufferSizeCallback</referencedby>
       </memberdef>
@@ -329,7 +334,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/window/GLFWWindow.ixx" line="151" column="21"/>
+        <location file="include/ext/glfw/window/GLFWWindow.ixx" line="154" column="21"/>
         <references refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a84d2fb73f8eb3c1610f4159cff592be2">nativeHandle</references>
         <referencedby refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a84d2fb73f8eb3c1610f4159cff592be2">nativeHandle</referencedby>
       </memberdef>
@@ -349,7 +354,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/window/GLFWWindow.ixx" line="159" column="14"/>
+        <location file="include/ext/glfw/window/GLFWWindow.ixx" line="162" column="14"/>
         <references refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a23367b706abec70b54e45031a43f9185">destroy</references>
         <referencedby refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a23367b706abec70b54e45031a43f9185">destroy</referencedby>
       </memberdef>
@@ -383,7 +388,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/window/GLFWWindow.ixx" line="173" column="14"/>
+        <location file="include/ext/glfw/window/GLFWWindow.ixx" line="176" column="14"/>
         <references refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a6f87a50c434301ffd60bb96906c4ea02">setWindowUserPointer</references>
         <references refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a7af89366a1d6c25a7db318172697a491">windowUserPointer</references>
         <referencedby refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a6f87a50c434301ffd60bb96906c4ea02">setWindowUserPointer</referencedby>
@@ -398,13 +403,13 @@
 <para>Returns a const reference to the `GLFWWindowUserPointer` managed by this class. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>A const ref to this object&apos;s `GLFWWindowUserPointer`, or `nullptr` if not available. </para>
+<para><simplesect kind="return"><para>A const reference to this object&apos;s `GLFWWindowUserPointer`. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/window/GLFWWindow.ixx" line="182" column="38"/>
+        <location file="include/ext/glfw/window/GLFWWindow.ixx" line="184" column="38"/>
         <references refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a7af89366a1d6c25a7db318172697a491">windowUserPointer</references>
         <referencedby refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a6f87a50c434301ffd60bb96906c4ea02">setWindowUserPointer</referencedby>
         <referencedby refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a7af89366a1d6c25a7db318172697a491">windowUserPointer</referencedby>
@@ -415,7 +420,7 @@
     </briefdescription>
     <detaileddescription>
 <para>This class manages a `GLFWwindow` handle, providing methods for creation, display, event polling and resource cleanup.</para>
-<para><xrefsect id="todo_1_todo000002"><xreftitle>Todo</xreftitle><xrefdescription><para>add glfwSetWindowRefreshCallback </para>
+<para><xrefsect id="todo_1_todo000001"><xreftitle>Todo</xreftitle><xrefdescription><para>add glfwSetWindowRefreshCallback </para>
 </xrefdescription></xrefsect></para>
     </detaileddescription>
     <inheritancegraph>
@@ -449,13 +454,14 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="include/ext/glfw/window/GLFWWindow.ixx" line="29" column="5" bodyfile="include/ext/glfw/window/GLFWWindow.ixx" bodystart="29" bodyend="183"/>
+    <location file="include/ext/glfw/window/GLFWWindow.ixx" line="29" column="5" bodyfile="include/ext/glfw/window/GLFWWindow.ixx" bodystart="29" bodyend="185"/>
     <listofallmembers>
+      <member refid="classhelios_1_1window_1_1Window_1a27293cbb3681a49f31960ac9487c7f92" prot="public" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>addViewport</name></member>
       <member refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a23367b706abec70b54e45031a43f9185" prot="public" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>destroy</name></member>
       <member refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1ac059798b32743ed8a710358bc660316f" prot="public" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>frameBufferSizeCallback</name></member>
       <member refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1ae9b8a485c32db8582a69667dcc20c8a7" prot="private" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>frameBufferSizeCallback_</name></member>
       <member refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1acc9a44c5828b5cf4a0c7fb4c5a844e88" prot="public" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>GLFWWindow</name></member>
-      <member refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a74b2cacf2dc049c8b2965d3258fe5f97" prot="public" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>GLFWWindow</name></member>
+      <member refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a84dddea91bf91d467587888d9c28b55d" prot="public" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>GLFWWindow</name></member>
       <member refid="classhelios_1_1window_1_1Window_1aa79cbb2b38cc1418eba3b3bd3cfdaae4" prot="public" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>guid</name></member>
       <member refid="classhelios_1_1window_1_1Window_1a36cf16dcb794e5cc07a363673e4787a5" prot="public" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>height</name></member>
       <member refid="classhelios_1_1window_1_1Window_1ae04994b1582ad5d5a1e9a5b9f4b12304" prot="protected" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>height_</name></member>
@@ -463,8 +469,12 @@
       <member refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a84d2fb73f8eb3c1610f4159cff592be2" prot="public" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>nativeHandle</name></member>
       <member refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1afacadab776352a7bddc67600c2baf0db" prot="private" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>nativeHandle_</name></member>
       <member refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1aadcd85a250a053d34b933b4870b47a3b" prot="public" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>operator=</name></member>
+      <member refid="classhelios_1_1window_1_1Window_1a88c1b862df250edf1d7f4b0c662b9770" prot="public" virt="non-virtual" ambiguityscope="helios::window::Window::"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>operator=</name></member>
+      <member refid="classhelios_1_1window_1_1Window_1ae29fdde83651998bc644fc150e8e3edb" prot="public" virt="non-virtual" ambiguityscope="helios::window::Window::"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>operator=</name></member>
       <member refid="classhelios_1_1window_1_1Window_1aa5192a6c6fbaf5938b5e73515d66f4d9" prot="public" virt="virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>operator==</name></member>
       <member refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1acfd10a52a9bdfb4bb4cb8fb10d15789d" prot="public" virt="virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>pollEvents</name></member>
+      <member refid="classhelios_1_1window_1_1Window_1a6bf6b252e26575dfced4453a3184994d" prot="public" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>renderTarget</name></member>
+      <member refid="classhelios_1_1window_1_1Window_1a3aadafde86d1cf52080eda7a8209b8ba" prot="protected" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>renderTarget_</name></member>
       <member refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a85a8b89983a1dbb446aee10b74383733" prot="public" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>setFrameBufferSizeCallback</name></member>
       <member refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1aa947fb54ea09837b28a293c265f563b0" prot="public" virt="virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>setShouldClose</name></member>
       <member refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a6f87a50c434301ffd60bb96906c4ea02" prot="public" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>setWindowUserPointer</name></member>
@@ -472,11 +482,11 @@
       <member refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a29029e93c4fe4a789c3c8353a339261f" prot="public" virt="virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>show</name></member>
       <member refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1aadd3957b6e0d29e7d9ee08973bd25709" prot="public" virt="virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>swapBuffers</name></member>
       <member refid="classhelios_1_1window_1_1Window_1a27dc6e221464e5675b20816130a0e948" prot="protected" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>title_</name></member>
-      <member refid="classhelios_1_1window_1_1Window_1a9af7d4df1ce5456455a211ef146cee5c" prot="public" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>viewport</name></member>
-      <member refid="classhelios_1_1window_1_1Window_1a52a830727a6e6a4ed97fc07a10d7a254" prot="protected" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>viewport_</name></member>
       <member refid="classhelios_1_1window_1_1Window_1ade8ac18a3735ff647842042a061be1af" prot="public" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>width</name></member>
       <member refid="classhelios_1_1window_1_1Window_1a82e3d26ab8aeb610b1c92a6130802f11" prot="protected" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>width_</name></member>
-      <member refid="classhelios_1_1window_1_1Window_1ad6e926300eb56f4d767784b089670fb8" prot="public" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>Window</name></member>
+      <member refid="classhelios_1_1window_1_1Window_1ae93d386b3c4293fd5c8ec3ff80003343" prot="public" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>Window</name></member>
+      <member refid="classhelios_1_1window_1_1Window_1af053410db30c38792d85b6ce5d7e8b78" prot="public" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>Window</name></member>
+      <member refid="classhelios_1_1window_1_1Window_1a703abe43c865e2dd20708751493750d8" prot="public" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>Window</name></member>
       <member refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a7af89366a1d6c25a7db318172697a491" prot="public" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>windowUserPointer</name></member>
       <member refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a1a99c690c203fe855648b25a136bd20c" prot="private" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>windowUserPointer_</name></member>
       <member refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow_1a3065f8faf4edacb81c2d513e1b01b168" prot="public" virt="non-virtual"><scope>helios::ext::glfw::window::GLFWWindow</scope><name>~GLFWWindow</name></member>

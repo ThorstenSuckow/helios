@@ -38,6 +38,9 @@ var searchData=
   ['viewmatrix_35',['ViewMatrix',['../namespacehelios_1_1rendering_1_1shader.html#a0a320e03bcf6f60bc90428c450dfb329ab3184e06babbab03e639eed0554b29eb',1,'helios::rendering::shader']]],
   ['viewmatrix_36',['viewMatrix',['../classhelios_1_1scene_1_1Camera.html#a920bac1e84b874d725027e37d091cb34',1,'helios::scene::Camera::viewMatrix()'],['../classhelios_1_1scene_1_1Snapshot.html#a10d5c7307db942f3717c0ea07597020b',1,'helios::scene::Snapshot::viewMatrix()']]],
   ['viewmatrix_5f_37',['viewMatrix_',['../classhelios_1_1scene_1_1Camera.html#a5c915d9ba00c11dcef1885f02e32945c',1,'helios::scene::Camera::viewMatrix_'],['../classhelios_1_1scene_1_1Snapshot.html#ac0110b8cf9d487de2dc6c13ba721cb2b',1,'helios::scene::Snapshot::viewMatrix_']]],
-  ['viewport_38',['viewport',['../structhelios_1_1window_1_1WindowConfig.html#a7a56b70d7a6d7c46afc967c94c29aeca',1,'helios::window::WindowConfig::viewport'],['../classhelios_1_1window_1_1Window.html#a9af7d4df1ce5456455a211ef146cee5c',1,'helios::window::Window::viewport() const noexcept']]],
-  ['viewport_5f_39',['viewport_',['../classhelios_1_1window_1_1Window.html#a52a830727a6e6a4ed97fc07a10d7a254',1,'helios::window::Window']]]
+  ['viewport_38',['Viewport',['../classhelios_1_1rendering_1_1Viewport.html',1,'helios::rendering::Viewport'],['../classhelios_1_1rendering_1_1Viewport.html#acab3a95a725e2ce895c8cf5a075e5a8c',1,'helios::rendering::Viewport::Viewport() noexcept'],['../classhelios_1_1rendering_1_1Viewport.html#a219c81106b214b5e690210bd6258d2e2',1,'helios::rendering::Viewport::Viewport(float x, float y, float width, float height, int zIndex=0) noexcept']]],
+  ['viewport_39',['viewport',['../classhelios_1_1rendering_1_1RenderPass.html#ab0e71c167bc7d90cd4dc1be780cbe7d5',1,'helios::rendering::RenderPass::viewport()'],['../classhelios_1_1scene_1_1Snapshot.html#acf922e0ea3d04ec30e0fba9cf2592ae5',1,'helios::scene::Snapshot::viewport()']]],
+  ['viewport_2eixx_40',['Viewport.ixx',['../Viewport_8ixx.html',1,'']]],
+  ['viewport_5f_41',['viewport_',['../classhelios_1_1scene_1_1Snapshot.html#a5a32ec6b676b3b95d590764dda91e4a6',1,'helios::scene::Snapshot']]],
+  ['viewportkey_42',['ViewportKey',['../structhelios_1_1rendering_1_1ViewportKey.html',1,'helios::rendering']]]
 ];

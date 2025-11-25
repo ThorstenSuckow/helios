@@ -4,6 +4,7 @@ var dir_9ba586a504c756f19720715161f17166 =
     [ "model", "dir_93c18e872bfe9baf2066232ace9cc478.html", "dir_93c18e872bfe9baf2066232ace9cc478" ],
     [ "shader", "dir_869a74fcf9d0260a88bfc70b1dd6928c.html", "dir_869a74fcf9d0260a88bfc70b1dd6928c" ],
     [ "_module.ixx", "rendering_2__module_8ixx.html", null ],
+    [ "ClearFlags.ixx", "ClearFlags_8ixx.html", "ClearFlags_8ixx" ],
     [ "Renderable.ixx", "Renderable_8ixx.html", "Renderable_8ixx" ],
     [ "RenderCommand.ixx", "RenderCommand_8ixx.html", "RenderCommand_8ixx" ],
     [ "RenderingDevice.ixx", "RenderingDevice_8ixx.html", "RenderingDevice_8ixx" ],
@@ -11,5 +12,8 @@ var dir_9ba586a504c756f19720715161f17166 =
     [ "RenderPassFactory.ixx", "RenderPassFactory_8ixx.html", "RenderPassFactory_8ixx" ],
     [ "RenderPrototype.ixx", "RenderPrototype_8ixx.html", "RenderPrototype_8ixx" ],
     [ "RenderQueue.ixx", "RenderQueue_8ixx.html", "RenderQueue_8ixx" ],
-    [ "Vertex.ixx", "Vertex_8ixx.html", "Vertex_8ixx" ]
+    [ "RenderTarget.ixx", "RenderTarget_8ixx.html", "RenderTarget_8ixx" ],
+    [ "RenderTargetFwd.ixx", "RenderTargetFwd_8ixx.html", null ],
+    [ "Vertex.ixx", "Vertex_8ixx.html", "Vertex_8ixx" ],
+    [ "Viewport.ixx", "Viewport_8ixx.html", "Viewport_8ixx" ]
 ];

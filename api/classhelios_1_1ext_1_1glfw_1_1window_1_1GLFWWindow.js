@@ -2,7 +2,7 @@ var classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow =
 [
     [ "GLFWWindow", "classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow.html#acc9a44c5828b5cf4a0c7fb4c5a844e88", null ],
     [ "~GLFWWindow", "classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow.html#a3065f8faf4edacb81c2d513e1b01b168", null ],
-    [ "GLFWWindow", "classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow.html#a74b2cacf2dc049c8b2965d3258fe5f97", null ],
+    [ "GLFWWindow", "classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow.html#a84dddea91bf91d467587888d9c28b55d", null ],
     [ "destroy", "classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow.html#a23367b706abec70b54e45031a43f9185", null ],
     [ "frameBufferSizeCallback", "classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow.html#ac059798b32743ed8a710358bc660316f", null ],
     [ "nativeHandle", "classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow.html#a84d2fb73f8eb3c1610f4159cff592be2", null ],

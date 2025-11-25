@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/app/GLFWApplication.ixx" line="38" column="32" bodyfile="include/ext/glfw/app/GLFWApplication.ixx" bodystart="38" bodyend="-1"/>
+        <location file="include/ext/glfw/app/GLFWApplication.ixx" line="39" column="32" bodyfile="include/ext/glfw/app/GLFWApplication.ixx" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a017660898c54f7f291433f4090ade565" prot="private" static="no" mutable="no">
         <type><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard" kindref="compound">GLFWRAIIGuard</ref></type>
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/app/GLFWApplication.ixx" line="43" column="23" bodyfile="include/ext/glfw/app/GLFWApplication.ixx" bodystart="43" bodyend="-1"/>
+        <location file="include/ext/glfw/app/GLFWApplication.ixx" line="44" column="23" bodyfile="include/ext/glfw/app/GLFWApplication.ixx" bodystart="44" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -64,7 +64,7 @@
 <parametername>renderingDevice</parametername>
 </parameternamelist>
 <parameterdescription>
-<para></para>
+<para>Unique rendering device owned by the application. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -72,7 +72,7 @@
 <parametername>inputManager</parametername>
 </parameternamelist>
 <parameterdescription>
-<para></para>
+<para>Unique input manager instance. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -80,7 +80,7 @@
 <parametername>eventManager</parametername>
 </parameternamelist>
 <parameterdescription>
-<para></para>
+<para>Unique event manager instance. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -88,10 +88,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/app/GLFWApplication.ixx" line="53" column="18"/>
-        <references refid="classhelios_1_1app_1_1Application_1a6ea14c8bd591020cbd5d2baef551a804" compoundref="Application_8ixx" startline="181" endline="183">helios::app::Application::eventManager</references>
-        <references refid="classhelios_1_1app_1_1Application_1a11fe3ec9b45731268a0eff32ced9f06c" compoundref="Application_8ixx" startline="163" endline="165">helios::app::Application::inputManager</references>
-        <references refid="classhelios_1_1app_1_1Application_1a13d126308f1b5b61d9b87fc4dde57530" compoundref="Application_8ixx" startline="172" endline="174">helios::app::Application::renderingDevice</references>
+        <location file="include/ext/glfw/app/GLFWApplication.ixx" line="54" column="18"/>
+        <references refid="classhelios_1_1app_1_1Application_1a6ea14c8bd591020cbd5d2baef551a804" compoundref="Application_8ixx" startline="190" endline="192">helios::app::Application::eventManager</references>
+        <references refid="classhelios_1_1app_1_1Application_1a11fe3ec9b45731268a0eff32ced9f06c" compoundref="Application_8ixx" startline="172" endline="174">helios::app::Application::inputManager</references>
+        <references refid="classhelios_1_1app_1_1Application_1a13d126308f1b5b61d9b87fc4dde57530" compoundref="Application_8ixx" startline="181" endline="183">helios::app::Application::renderingDevice</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a30d27364d7c703e81f2f963bb2189fd6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -101,18 +101,16 @@
         <qualifiedname>helios::ext::glfw::app::GLFWApplication::init</qualifiedname>
         <reimplements refid="classhelios_1_1app_1_1Application_1a94b89541520f5b9e6e8f21c3f7ee1aa9">init</reimplements>
         <briefdescription>
-<para>Inits the Application. Any bootstrapping necessary for this application should be done here and provide an idiomatic entry point for any API using this Application.    </para>
+<para>Initializes the application.    </para>
         </briefdescription>
         <detaileddescription>
-<para>This method makes sure that the controllers are initialized and subscribe to this Application&apos;s EventManager&apos;s dispatcher.</para>
-<para><simplesect kind="return"><para>void</para>
-</simplesect>
-<parameterlist kind="exception"><parameteritem>
+<para>Performs any bootstrapping necessary for this application and provides an idiomatic entry point for APIs using this application. This method ensures that all controllers are initialized and subscribe to this application&apos;s event manager dispatcher.</para>
+<para><parameterlist kind="exception"><parameteritem>
 <parameternamelist>
 <parametername>std::runtime_error</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>if the Application was already initialized.    </para>
+<para>If the application was already initialized.    </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -120,46 +118,50 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/app/GLFWApplication.ixx" line="62" column="14"/>
+        <location file="include/ext/glfw/app/GLFWApplication.ixx" line="63" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1ad4ee6ee4079da8dc2fbb0a57fa790d82" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a2c1bfca7c426415f37fcefac7fc68b4d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow" kindref="compound">helios::ext::glfw::window::GLFWWindow</ref> &amp;</type>
         <definition>helios::ext::glfw::window::GLFWWindow &amp; helios::ext::glfw::app::GLFWApplication::createWindow</definition>
-        <argsstring>(const helios::ext::glfw::window::GLFWWindowConfig &amp;cfg)</argsstring>
+        <argsstring>(std::unique_ptr&lt; helios::rendering::RenderTarget &gt; renderTarget, const helios::ext::glfw::window::GLFWWindowConfig &amp;cfg)</argsstring>
         <name>createWindow</name>
         <qualifiedname>helios::ext::glfw::app::GLFWApplication::createWindow</qualifiedname>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1rendering_1_1RenderTarget" kindref="compound">helios::rendering::RenderTarget</ref> &gt;</type>
+          <declname>renderTarget</declname>
+        </param>
         <param>
           <type>const <ref refid="structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowConfig" kindref="compound">helios::ext::glfw::window::GLFWWindowConfig</ref> &amp;</type>
           <declname>cfg</declname>
         </param>
         <briefdescription>
-<para>Creates a new GLFWWindow and add it to this Application&apos;s windows collection. The Application takes ownership of the window. Delegates to Window::show() for showing the window and initializes the associated rendering device if necessary, e.g. for glfw an additional `glfwMakeContextCurrent()` is called so the rendering device can be safely initialized, then immediately passes a `nullptr` to the `glfwMakeContextCurrent()` to force calling APIs to explicitly call <ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1aec402bfa5500772acb4d47752e80fd3e" kindref="member">setCurrent()</ref> on the constructed window. </para>
+<para>Creates a new GLFWWindow and add it to this Application&apos;s windows collection. The Application takes ownership of the window. </para>
         </briefdescription>
         <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>cfg</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The `GLFWWindowConfig` used for initializing the window.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
+<para>Delegates to Window::show() for showing the window and initializes the associated rendering device if necessary, e.g. for glfw an additional `glfwMakeContextCurrent()` is called so the rendering device can be safely initialized, then immediately passes a `nullptr` to the `glfwMakeContextCurrent()` to force calling APIs to explicitly call <ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1aec402bfa5500772acb4d47752e80fd3e" kindref="member">setCurrent()</ref> on the constructed window. The render target size is synced to the current framebuffer dimensions reported by `glfwGetFramebufferSize()`.</para>
+<para><simplesect kind="return"><para>Reference to the created window instance.</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.glfw.org/docs/latest/group__window.html#ga0e2637a4161afb283f5300c7f94785c9">https://www.glfw.org/docs/latest/group__window.html#ga0e2637a4161afb283f5300c7f94785c9</ulink> </para>
+</simplesect>
 <simplesect kind="return"><para>A ref to the window created. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/app/GLFWApplication.ixx" line="78" column="47"/>
+        <location file="include/ext/glfw/app/GLFWApplication.ixx" line="83" column="47"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a0d2dafccab0d344f8f9b1daf0db8ab04" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a7f053a4162c99ce3219865cee668cd18" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow" kindref="compound">helios::ext::glfw::window::GLFWWindow</ref> &amp;</type>
         <definition>helios::ext::glfw::window::GLFWWindow &amp; helios::ext::glfw::app::GLFWApplication::createWindow</definition>
-        <argsstring>(const helios::window::WindowConfig &amp;cfg) override</argsstring>
+        <argsstring>(std::unique_ptr&lt; helios::rendering::RenderTarget &gt; renderTarget, const helios::window::WindowConfig &amp;cfg) override</argsstring>
         <name>createWindow</name>
         <qualifiedname>helios::ext::glfw::app::GLFWApplication::createWindow</qualifiedname>
-        <reimplements refid="classhelios_1_1app_1_1Application_1a91fa8a45e2a79d32dba31bc37deeb824">createWindow</reimplements>
+        <reimplements refid="classhelios_1_1app_1_1Application_1a8cc35c9dddb4f715d7d5c2b5197ef0d4">createWindow</reimplements>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1rendering_1_1RenderTarget" kindref="compound">helios::rendering::RenderTarget</ref> &gt;</type>
+          <declname>renderTarget</declname>
+        </param>
         <param>
           <type>const <ref refid="structhelios_1_1window_1_1WindowConfig" kindref="compound">helios::window::WindowConfig</ref> &amp;</type>
           <declname>cfg</declname>
@@ -170,20 +172,29 @@
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
+<parametername>renderTarget</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Render target that wraps the framebuffer used by the window.</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
 <parametername>cfg</parametername>
 </parameternamelist>
 <parameterdescription>
+<para>Window configuration defining properties such as title, dimensions, and hints.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>Window</para>
+<simplesect kind="return"><para>Reference to the created window instance.</para>
 </simplesect>
 <parameterlist kind="exception"><parameteritem>
 <parameternamelist>
 <parametername>std::invalid_argument</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>if the configuration was invalid    </para>
+<para>If the configuration was invalid.    </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -191,7 +202,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/app/GLFWApplication.ixx" line="84" column="47"/>
+        <location file="include/ext/glfw/app/GLFWApplication.ixx" line="92" column="47"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1aec402bfa5500772acb4d47752e80fd3e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -205,33 +216,33 @@
           <declname>win</declname>
         </param>
         <briefdescription>
-<para>Sets the current Window for this Application. Makes sure that `glfwContextCurrent` is called for setting a current context for glfw and subsequent glfw-operations. It also re-registers `glfwSetFramebufferSizeCallback` with the callback function of the Window. </para>
+<para>Sets the current window for this application. </para>
         </briefdescription>
         <detaileddescription>
+<para>Ensures `glfwMakeContextCurrent()` is called to bind the correct context for subsequent glfw operations and re-registers the framebuffer size callback on the targeted window.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>win</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A ref to the window to set as current.</para>
+<para>Reference to the window that becomes the current context owner.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
 <parameterlist kind="exception"><parameteritem>
 <parameternamelist>
-<parametername>if</parametername>
+<parametername>std::invalid_argument</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>the specified Window is not a GLFWWindow or if the window is not owned by this application.</para>
+<para>If `win` is not a `GLFWWindow` or not owned by this application. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<xrefsect id="todo_1_todo000001"><xreftitle>Todo</xreftitle><xrefdescription><para>the window should be signaled that it&apos;s now current window, for setting the frameBufferSizeCallback and calling glfwMakeContextCurrent. </para>
-</xrefdescription></xrefsect></para>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/app/GLFWApplication.ixx" line="102" column="14"/>
+        <location file="include/ext/glfw/app/GLFWApplication.ixx" line="109" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a6faec11965b694e027225da937c52364" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type><ref refid="classhelios_1_1window_1_1Window" kindref="compound">helios::window::Window</ref> *</type>
@@ -241,16 +252,16 @@
         <qualifiedname>helios::ext::glfw::app::GLFWApplication::current</qualifiedname>
         <reimplements refid="classhelios_1_1app_1_1Application_1a361bd11af60d329332662b5b5a940bb9">current</reimplements>
         <briefdescription>
-<para>Returns the currently focused window, or nullptr if none exists / no window is being treated as <ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a6faec11965b694e027225da937c52364" kindref="member">current()</ref>.    </para>
+<para>Returns the currently focused window, or nullptr if none exists or no window is being treated as current.    </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>Window    </para>
+<para><simplesect kind="return"><para>Pointer to the current window, or nullptr if none is active.    </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/app/GLFWApplication.ixx" line="107" column="33"/>
+        <location file="include/ext/glfw/app/GLFWApplication.ixx" line="114" column="33"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -290,13 +301,13 @@
         <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
       </node>
     </collaborationgraph>
-    <location file="include/ext/glfw/app/GLFWApplication.ixx" line="31" column="5" bodyfile="include/ext/glfw/app/GLFWApplication.ixx" bodystart="31" bodyend="109"/>
+    <location file="include/ext/glfw/app/GLFWApplication.ixx" line="32" column="5" bodyfile="include/ext/glfw/app/GLFWApplication.ixx" bodystart="32" bodyend="116"/>
     <listofallmembers>
-      <member refid="classhelios_1_1app_1_1Application_1ac74fe7518d57fe0892b44f956e73f970" prot="public" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>addController</name></member>
+      <member refid="classhelios_1_1app_1_1Application_1a7285d8f027a7cb17a31bf603fc84cc62" prot="public" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>addController</name></member>
       <member refid="classhelios_1_1app_1_1Application_1a770ed54a97c68d5ac40542f3a702121a" prot="public" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>Application</name></member>
       <member refid="classhelios_1_1app_1_1Application_1a2dfaeb4cd7c741b225bd968c827983d3" prot="protected" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>controllers_</name></member>
-      <member refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1ad4ee6ee4079da8dc2fbb0a57fa790d82" prot="public" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>createWindow</name></member>
-      <member refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a0d2dafccab0d344f8f9b1daf0db8ab04" prot="public" virt="virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>createWindow</name></member>
+      <member refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a2c1bfca7c426415f37fcefac7fc68b4d" prot="public" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>createWindow</name></member>
+      <member refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a7f053a4162c99ce3219865cee668cd18" prot="public" virt="virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>createWindow</name></member>
       <member refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a6faec11965b694e027225da937c52364" prot="public" virt="virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>current</name></member>
       <member refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a0aaae554af910f78c815351f503227c5" prot="private" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>current_</name></member>
       <member refid="classhelios_1_1app_1_1Application_1a6ea14c8bd591020cbd5d2baef551a804" prot="public" virt="non-virtual"><scope>helios::ext::glfw::app::GLFWApplication</scope><name>eventManager</name></member>

@@ -126,25 +126,19 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a8f15cee19cf071f05f1f320ca30243a8" id="r_a8f15cee19cf071f05f1f320ca30243a8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8f15cee19cf071f05f1f320ca30243a8">~OpenGLDevice</a> () override=default</td></tr>
 <tr class="memitem:aa97dd0a5a8fb57989616b7fac5139f8b" id="r_aa97dd0a5a8fb57989616b7fac5139f8b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa97dd0a5a8fb57989616b7fac5139f8b">init</a> () override</td></tr>
-<tr class="memdesc:aa97dd0a5a8fb57989616b7fac5139f8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the OpenGL device to access modern OpenGL. This method must be called **after** the helios-Application's setCurrent() was called for creating a current context. This OpenGL-Device will then load from this context. This method will use the `gladLoadGl`-method to in conjunction with `glfwGetProcAddress`, which returns the address of the specific OpenGL core.  <br /></td></tr>
+<tr class="memdesc:aa97dd0a5a8fb57989616b7fac5139f8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the OpenGL device to access modern OpenGL.  <br /></td></tr>
 <tr class="memitem:a2f589946c2ca4029fc3d3f3ba7820c99" id="r_a2f589946c2ca4029fc3d3f3ba7820c99"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2f589946c2ca4029fc3d3f3ba7820c99">beginRenderPass</a> (<a class="el" href="classhelios_1_1rendering_1_1RenderPass.html">helios::rendering::RenderPass</a> &amp;renderPass) const noexcept override</td></tr>
-<tr class="memdesc:a2f589946c2ca4029fc3d3f3ba7820c99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Begins a new render pass. This implementation makes sure that the rendering surface is cleared with the current clear-color, which can be configured via clearColor().-.  <br /></td></tr>
+<tr class="memdesc:a2f589946c2ca4029fc3d3f3ba7820c99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Begins a new render pass.  <br /></td></tr>
 <tr class="memitem:a205e92c86ad75f4a23903f80e092a9f0" id="r_a205e92c86ad75f4a23903f80e092a9f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a205e92c86ad75f4a23903f80e092a9f0">doRender</a> (<a class="el" href="classhelios_1_1rendering_1_1RenderPass.html">helios::rendering::RenderPass</a> &amp;renderPass) const noexcept override</td></tr>
-<tr class="memdesc:a205e92c86ad75f4a23903f80e092a9f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Binds the vaos and draws the elements based on the RenderCommands available with the `RenderPass`-.  <br /></td></tr>
+<tr class="memdesc:a205e92c86ad75f4a23903f80e092a9f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Binds the VAOs and draws the elements based on the RenderCommands available with the RenderPass.  <br /></td></tr>
 <tr class="memitem:aa9b366cbdb4aa227567d8a32f0fdca95" id="r_aa9b366cbdb4aa227567d8a32f0fdca95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa9b366cbdb4aa227567d8a32f0fdca95">endRenderPass</a> (<a class="el" href="classhelios_1_1rendering_1_1RenderPass.html">helios::rendering::RenderPass</a> &amp;renderPass) const noexcept override</td></tr>
-<tr class="memdesc:aa9b366cbdb4aa227567d8a32f0fdca95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ends the specified render pass. The current implementation does nothing.  <br /></td></tr>
-<tr class="memitem:afc52da68a2755601e80268de38dc9ac3" id="r_afc52da68a2755601e80268de38dc9ac3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afc52da68a2755601e80268de38dc9ac3">setViewport</a> (int x, int y, int width, int height) const noexcept override</td></tr>
-<tr class="memdesc:afc52da68a2755601e80268de38dc9ac3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the viewport for this RenderingDevice. The viewport defines the rectangular area where the final image is drawn.     <br /></td></tr>
-<tr class="memitem:a7d3e7296865c619715f7d367448874a3" id="r_a7d3e7296865c619715f7d367448874a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7d3e7296865c619715f7d367448874a3">clear</a> () const noexcept</td></tr>
-<tr class="memdesc:a7d3e7296865c619715f7d367448874a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the color buffer to preset values.  <br /></td></tr>
-<tr class="memitem:abf0a9f95078406d2222e44ec2a28c269" id="r_abf0a9f95078406d2222e44ec2a28c269"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abf0a9f95078406d2222e44ec2a28c269">setClearColor</a> (const <a class="el" href="namespacehelios_1_1math.html#a08252f81850c5902e3c8dead272f3332">math::vec4f</a> &amp;color) const noexcept</td></tr>
-<tr class="memdesc:abf0a9f95078406d2222e44ec2a28c269"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specifies the RGBa values clamped to [0, 1] when color buffers are cleared.  <br /></td></tr>
+<tr class="memdesc:aa9b366cbdb4aa227567d8a32f0fdca95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ends the specified render pass.  <br /></td></tr>
 <tr class="inherit_header pub_methods_classhelios_1_1rendering_1_1RenderingDevice"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classhelios_1_1rendering_1_1RenderingDevice')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html">helios::rendering::RenderingDevice</a></td></tr>
 <tr class="memitem:a062e66375a1f27b648d73f5e9c903944 inherit pub_methods_classhelios_1_1rendering_1_1RenderingDevice" id="r_a062e66375a1f27b648d73f5e9c903944"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html#a062e66375a1f27b648d73f5e9c903944">~RenderingDevice</a> ()=default</td></tr>
 <tr class="memitem:abf7617082018d54e151c9399b57160f4 inherit pub_methods_classhelios_1_1rendering_1_1RenderingDevice" id="r_abf7617082018d54e151c9399b57160f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html#abf7617082018d54e151c9399b57160f4">render</a> (<a class="el" href="classhelios_1_1rendering_1_1RenderPass.html">helios::rendering::RenderPass</a> &amp;renderPass) const</td></tr>
-<tr class="memdesc:abf7617082018d54e151c9399b57160f4 inherit pub_methods_classhelios_1_1rendering_1_1RenderingDevice"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient method to subsequently call `beginRenderPass`, `doRender`, `endRenderPass` (in this order) with the specified `RenderPass`.  <br /></td></tr>
+<tr class="memdesc:abf7617082018d54e151c9399b57160f4 inherit pub_methods_classhelios_1_1rendering_1_1RenderingDevice"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience method to subsequently call `beginRenderPass`, `doRender`, and `endRenderPass` (in this order) with the specified `RenderPass`.  <br /></td></tr>
 <tr class="memitem:ab900c2b99f512ccdf6c33435db3da8b0 inherit pub_methods_classhelios_1_1rendering_1_1RenderingDevice" id="r_ab900c2b99f512ccdf6c33435db3da8b0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html#ab900c2b99f512ccdf6c33435db3da8b0">initialized</a> () const noexcept</td></tr>
-<tr class="memdesc:ab900c2b99f512ccdf6c33435db3da8b0 inherit pub_methods_classhelios_1_1rendering_1_1RenderingDevice"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the initialized state of this rendering device. This method is guaranteed to return true if the device was successfully initialized, otherwise false.  <br /></td></tr>
+<tr class="memdesc:ab900c2b99f512ccdf6c33435db3da8b0 inherit pub_methods_classhelios_1_1rendering_1_1RenderingDevice"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the initialized state of this rendering device.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-inherited" class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -152,9 +146,10 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:a4aa0809551525f58d3712a9aeb32dd6e inherit pro_attribs_classhelios_1_1rendering_1_1RenderingDevice" id="r_a4aa0809551525f58d3712a9aeb32dd6e"><td class="memItemLeft" align="right" valign="top">
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>initialized_</b> = false</td></tr>
 <tr class="memdesc:a4aa0809551525f58d3712a9aeb32dd6e inherit pro_attribs_classhelios_1_1rendering_1_1RenderingDevice"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reflects the initialization state of this device. <br /></td></tr>
-<tr class="memitem:a30cb723bfe96390f00716c2c80693248 inherit pro_attribs_classhelios_1_1rendering_1_1RenderingDevice" id="r_a30cb723bfe96390f00716c2c80693248"><td class="memItemLeft" align="right" valign="top">
-const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::util::log::Logger</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>logger_</b></td></tr>
-<tr class="memdesc:a30cb723bfe96390f00716c2c80693248 inherit pro_attribs_classhelios_1_1rendering_1_1RenderingDevice"><td class="mdescLeft">&#160;</td><td class="mdescRight">The logger used with this <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html" title="Abstract interface for a low-level rendering device.">RenderingDevice</a> instance. Defaults to HELIOS_LOG_SCOPE. <br /></td></tr>
+<tr class="inherit_header pro_static_attribs_classhelios_1_1rendering_1_1RenderingDevice"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_static_attribs_classhelios_1_1rendering_1_1RenderingDevice')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Static Protected Attributes inherited from <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html">helios::rendering::RenderingDevice</a></td></tr>
+<tr class="memitem:a30cb723bfe96390f00716c2c80693248 inherit pro_static_attribs_classhelios_1_1rendering_1_1RenderingDevice" id="r_a30cb723bfe96390f00716c2c80693248"><td class="memItemLeft" align="right" valign="top">
+static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::util::log::Logger</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>logger_</b></td></tr>
+<tr class="memdesc:a30cb723bfe96390f00716c2c80693248 inherit pro_static_attribs_classhelios_1_1rendering_1_1RenderingDevice"><td class="mdescLeft">&#160;</td><td class="mdescRight">The logger used with this <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html" title="Abstract interface for a low-level rendering device.">RenderingDevice</a> class. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>OpenGL RenderingDevice representative. </p>
@@ -210,40 +205,19 @@ const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::uti
 </table>
 </div><div class="memdoc">
 
-<p>Begins a new render pass. This implementation makes sure that the rendering surface is cleared with the current clear-color, which can be configured via clearColor().-. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a7d3e7296865c619715f7d367448874a3" title="Clears the color buffer to preset values.">clear()</a> </dd>
+<p>Begins a new render pass. </p>
+<p>This implementation makes sure that the rendering surface is cleared with the current clear color, which can be configured via `clearColor()`.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderPass</td><td>The render pass to begin.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd>clear() </dd>
 <dd>
-clearColor(); </dd></dl>
+clearColor() </dd></dl>
 
 <p>Implements <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html#a88169f8a968bce5a7d67446c61504d2f">helios::rendering::RenderingDevice</a>.</p>
-
-</div>
-</div>
-<a id="a7d3e7296865c619715f7d367448874a3" name="a7d3e7296865c619715f7d367448874a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7d3e7296865c619715f7d367448874a3">&#9670;&#160;</a></span>clear()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void helios::ext::opengl::rendering::OpenGLDevice::clear </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Clears the color buffer to preset values. </p>
-<dl class="section see"><dt>See also</dt><dd>clearColor </dd></dl>
 
 </div>
 </div>
@@ -270,10 +244,10 @@ clearColor(); </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Binds the vaos and draws the elements based on the RenderCommands available with the `RenderPass`-. </p>
+<p>Binds the VAOs and draws the elements based on the RenderCommands available with the RenderPass. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">renderPass</td><td></td></tr>
+    <tr><td class="paramname">renderPass</td><td>The render pass containing the render queue to be processed. </td></tr>
   </table>
   </dd>
 </dl>
@@ -305,10 +279,11 @@ clearColor(); </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Ends the specified render pass. The current implementation does nothing. </p>
+<p>Ends the specified render pass. </p>
+<p>The current implementation does nothing.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">renderPass</td><td></td></tr>
+    <tr><td class="paramname">renderPass</td><td>The render pass to end. </td></tr>
   </table>
   </dd>
 </dl>
@@ -340,114 +315,13 @@ clearColor(); </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Initializes the OpenGL device to access modern OpenGL. This method must be called **after** the helios-Application's setCurrent() was called for creating a current context. This OpenGL-Device will then load from this context. This method will use the `gladLoadGl`-method to in conjunction with `glfwGetProcAddress`, which returns the address of the specific OpenGL core. </p>
+<p>Initializes the OpenGL device to access modern OpenGL. </p>
+<p>This method must be called **after** the helios application's `setCurrent()` was called for creating a current context. This OpenGL device will then load from this context.</p>
+<p>This method uses the `gladLoadGL` method in conjunction with `glfwGetProcAddress`, which returns the address of the specific OpenGL core.</p>
 <dl class="section see"><dt>See also</dt><dd><a href="https://www.glfw.org/docs/latest/group__context.html#ga35f1837e6f666781842483937612f163">https://www.glfw.org/docs/latest/group__context.html#ga35f1837e6f666781842483937612f163</a></dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo</a></b></dt><dd>provide abstraction for glfwGetProcAddress </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo</a></b></dt><dd>Provide abstraction for glfwGetProcAddress. </dd></dl>
 
 <p>Implements <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html#af3fc1c63595e065986ed44b1754ed49a">helios::rendering::RenderingDevice</a>.</p>
-
-</div>
-</div>
-<a id="abf0a9f95078406d2222e44ec2a28c269" name="abf0a9f95078406d2222e44ec2a28c269"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abf0a9f95078406d2222e44ec2a28c269">&#9670;&#160;</a></span>setClearColor()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void helios::ext::opengl::rendering::OpenGLDevice::setClearColor </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespacehelios_1_1math.html#a08252f81850c5902e3c8dead272f3332">math::vec4f</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>color</em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Specifies the RGBa values clamped to [0, 1] when color buffers are cleared. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">color</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a7d3e7296865c619715f7d367448874a3" title="Clears the color buffer to preset values.">clear</a> </dd></dl>
-
-<p class="reference">References <a class="el" href="#abf0a9f95078406d2222e44ec2a28c269">setClearColor()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="#abf0a9f95078406d2222e44ec2a28c269">setClearColor()</a>.</p>
-<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_abf0a9f95078406d2222e44ec2a28c269_cgraph.svg" width="207" height="90"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_abf0a9f95078406d2222e44ec2a28c269_icgraph.svg" width="207" height="90"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="afc52da68a2755601e80268de38dc9ac3" name="afc52da68a2755601e80268de38dc9ac3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc52da68a2755601e80268de38dc9ac3">&#9670;&#160;</a></span>setViewport()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void helios::ext::opengl::rendering::OpenGLDevice::setViewport </td>
-          <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>width</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>height</em></span>&#160;) const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel export">export</span><span class="mlabel virtual">virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Sets the viewport for this RenderingDevice. The viewport defines the rectangular area where the final image is drawn.    </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">x</td><td>x-coordinate of the lower left corner of the viewport </td></tr>
-    <tr><td class="paramname">y</td><td>y-coordinate of the lower left corner of the viewport </td></tr>
-    <tr><td class="paramname">width</td><td>width of the viewport, in pixels </td></tr>
-    <tr><td class="paramname">height</td><td>height of the viewport, in pixels   </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section see"><dt>See also</dt><dd><a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glViewport.xhtml">https://registry.khronos.org/OpenGL-Refpages/gl4/html/glViewport.xhtml</a> </dd></dl>
-
-<p>Implements <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html#a701d970cf1e0c0c71a24ab1b104a15ea">helios::rendering::RenderingDevice</a>.</p>
 
 </div>
 </div>

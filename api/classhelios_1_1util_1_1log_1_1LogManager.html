@@ -126,6 +126,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a750d8fd5b3ee3678600644756b0631e7" id="r_a750d8fd5b3ee3678600644756b0631e7"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">Logger</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a750d8fd5b3ee3678600644756b0631e7">loggerForScope</a> (const std::string &amp;scope) noexcept</td></tr>
+<tr class="memdesc:a750d8fd5b3ee3678600644756b0631e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience accessor to obtain a logger for a textual scope via the singleton.  <br /></td></tr>
 <tr class="memitem:aeb3c579d6cd53e2ca50384ceadd5d3a6" id="r_aeb3c579d6cd53e2ca50384ceadd5d3a6"><td class="memItemLeft" align="right" valign="top">static LogManager &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb3c579d6cd53e2ca50384ceadd5d3a6">getInstance</a> () noexcept</td></tr>
 <tr class="memdesc:aeb3c579d6cd53e2ca50384ceadd5d3a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing various scoped Loggers.">LogManager</a> singleton instance.  <br /></td></tr>
 </table>
@@ -182,7 +184,8 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Enforce singleton (see Meyer's Singleton) </p><dl class="section see"><dt>See also</dt><dd><a href="https://en.wikipedia.org/wiki/Singleton_pattern">https://en.wikipedia.org/wiki/Singleton_pattern</a> </dd></dl>
+<p>Enforce singleton (see Meyer's Singleton)</p>
+<dl class="section see"><dt>See also</dt><dd><a href="https://en.wikipedia.org/wiki/Singleton_pattern">https://en.wikipedia.org/wiki/Singleton_pattern</a> </dd></dl>
 
 </div>
 </div>
@@ -335,7 +338,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Will fall back to the default logger if the scope was not registered yet. This method is thread safe for map look-ups.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">scope</td><td>The textual scope name of the requested logger. </td></tr>
+    <tr><td class="paramname">scope</td><td>The textual scope name of the requested logger.</td></tr>
   </table>
   </dd>
 </dl>
@@ -348,6 +351,41 @@ Static Public Member Functions</h2></td></tr>
 <div id="dynsection-4-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_a4b85719776951cd826d2fb3a4ab40e59_cgraph.svg" width="360" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
+
+</div>
+</div>
+<a id="a750d8fd5b3ee3678600644756b0631e7" name="a750d8fd5b3ee3678600644756b0631e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a750d8fd5b3ee3678600644756b0631e7">&#9670;&#160;</a></span>loggerForScope()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">Logger</a> &amp; helios::util::log::LogManager::loggerForScope </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>scope</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convenience accessor to obtain a logger for a textual scope via the singleton. </p>
+<p>This static helper forwards to `LogManager::getInstance().logger(scope)` and returns a reference to the logger registered for the given scope.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">scope</td><td>The textual scope name of the requested logger.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The logger registered with the scope, or the default logger if none was found. </dd></dl>
 
 </div>
 </div>
@@ -403,7 +441,7 @@ Static Public Member Functions</h2></td></tr>
 <p>This method is thread safe for map modifications.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">scope</td><td>The scope requested for the logger to create. </td></tr>
+    <tr><td class="paramname">scope</td><td>The scope requested for the logger to create.</td></tr>
   </table>
   </dd>
 </dl>

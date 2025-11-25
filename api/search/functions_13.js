@@ -1,8 +1,8 @@
 var searchData=
 [
   ['warn_0',['warn',['../classhelios_1_1util_1_1log_1_1Logger.html#ad4232b55897e7681214aa47a5a6bb3ec',1,'helios::util::log::Logger']]],
-  ['width_1',['width',['../classhelios_1_1window_1_1Window.html#ade8ac18a3735ff647842042a061be1af',1,'helios::window::Window']]],
-  ['window_2',['Window',['../classhelios_1_1window_1_1Window.html#ad6e926300eb56f4d767784b089670fb8',1,'helios::window::Window']]],
+  ['width_1',['width',['../classhelios_1_1rendering_1_1RenderTarget.html#a4e5e2981a9a80dcf74936038c14d21f6',1,'helios::rendering::RenderTarget::width()'],['../classhelios_1_1window_1_1Window.html#ade8ac18a3735ff647842042a061be1af',1,'helios::window::Window::width() const noexcept']]],
+  ['window_2',['Window',['../classhelios_1_1window_1_1Window.html#ae93d386b3c4293fd5c8ec3ff80003343',1,'helios::window::Window::Window(const Window &amp;)=delete'],['../classhelios_1_1window_1_1Window.html#af053410db30c38792d85b6ce5d7e8b78',1,'helios::window::Window::Window(Window &amp;&amp;) noexcept=default'],['../classhelios_1_1window_1_1Window.html#a703abe43c865e2dd20708751493750d8',1,'helios::window::Window::Window(std::unique_ptr&lt; helios::rendering::RenderTarget &gt; renderTarget, const WindowConfig &amp;cfg)']]],
   ['windowevent_3',['WindowEvent',['../classhelios_1_1window_1_1event_1_1WindowEvent.html#aaa39eed04b768d8daa5dc65b5e14bed8',1,'helios::window::event::WindowEvent::WindowEvent(helios::util::Guid sourceGuid)'],['../classhelios_1_1window_1_1event_1_1WindowEvent.html#ab5286107303e5071ac3d87ac9ba69202',1,'helios::window::event::WindowEvent::WindowEvent(helios::util::Guid sourceGuid, uint64_t tag)']]],
   ['windowuserpointer_4',['windowUserPointer',['../classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow.html#a7af89366a1d6c25a7db318172697a491',1,'helios::ext::glfw::window::GLFWWindow']]],
   ['withbasecolor_5',['withBaseColor',['../classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties.html#af37039d81ae928ad4f314bc99fa1e283',1,'helios::rendering::model::config::MaterialProperties']]],

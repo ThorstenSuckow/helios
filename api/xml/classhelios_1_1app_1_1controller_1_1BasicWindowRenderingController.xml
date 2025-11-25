@@ -4,40 +4,51 @@
     <compoundname>helios::app::controller::BasicWindowRenderingController</compoundname>
     <basecompoundref refid="classhelios_1_1app_1_1controller_1_1WindowRenderingController" prot="public" virt="non-virtual">helios::app::controller::WindowRenderingController</basecompoundref>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController_1acd57644bf6769f5e817efacaf89e5fbc" prot="private" static="no" mutable="no">
-        <type><ref refid="classhelios_1_1rendering_1_1RenderingDevice" kindref="compound">helios::rendering::RenderingDevice</ref> *</type>
-        <definition>helios::rendering::RenderingDevice* helios::app::controller::BasicWindowRenderingController::renderingDevice_</definition>
+      <memberdef kind="variable" id="classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController_1af8552bc3c889326ea4197e1beb277fab" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1window_1_1Window" kindref="compound">helios::window::Window</ref> &amp;</type>
+        <definition>helios::window::Window&amp; helios::app::controller::BasicWindowRenderingController::window_</definition>
         <argsstring></argsstring>
-        <name>renderingDevice_</name>
-        <qualifiedname>helios::app::controller::BasicWindowRenderingController::renderingDevice_</qualifiedname>
-        <initializer>= nullptr</initializer>
+        <name>window_</name>
+        <qualifiedname>helios::app::controller::BasicWindowRenderingController::window_</qualifiedname>
         <briefdescription>
+<para>Reference to the window managed by this controller. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/app/controller/BasicWindowRenderingController.ixx" line="24" column="44" bodyfile="include/helios/app/controller/BasicWindowRenderingController.ixx" bodystart="24" bodyend="-1"/>
+        <location file="include/helios/app/controller/BasicWindowRenderingController.ixx" line="30" column="32" bodyfile="include/helios/app/controller/BasicWindowRenderingController.ixx" bodystart="30" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController_1aacfbaab940d3d1961950f1f4838d14c9" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController_1aaab3050af897d35dfcd1dd405512e9f1" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
         <type></type>
         <definition>helios::app::controller::BasicWindowRenderingController::BasicWindowRenderingController</definition>
-        <argsstring>(helios::rendering::RenderingDevice *renderingDevice)</argsstring>
+        <argsstring>(helios::window::Window &amp;window)</argsstring>
         <name>BasicWindowRenderingController</name>
         <qualifiedname>helios::app::controller::BasicWindowRenderingController::BasicWindowRenderingController</qualifiedname>
         <param>
-          <type><ref refid="classhelios_1_1rendering_1_1RenderingDevice" kindref="compound">helios::rendering::RenderingDevice</ref> *</type>
-          <declname>renderingDevice</declname>
+          <type><ref refid="classhelios_1_1window_1_1Window" kindref="compound">helios::window::Window</ref> &amp;</type>
+          <declname>window</declname>
         </param>
         <briefdescription>
+<para>Constructs a new <ref refid="classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController" kindref="compound">BasicWindowRenderingController</ref> instance. </para>
         </briefdescription>
         <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>window</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the window to be managed by this controller. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/app/controller/BasicWindowRenderingController.ixx" line="27" column="18"/>
+        <location file="include/helios/app/controller/BasicWindowRenderingController.ixx" line="38" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController_1ae7ab29a6c78a6459308f9a58a69c695c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -51,16 +62,15 @@
           <declname>e</declname>
         </param>
         <briefdescription>
-<para>Handles FrameBufferResizeEvent. </para>
+<para>Handles framebuffer resize events. </para>
         </briefdescription>
         <detaileddescription>
-<para>The current implementation simply logs the dimensions to the console.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>e</parametername>
 </parameternamelist>
 <parameterdescription>
-<para></para>
+<para>The framebuffer resize event containing the new dimensions. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -68,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/app/controller/BasicWindowRenderingController.ixx" line="36" column="14"/>
+        <location file="include/helios/app/controller/BasicWindowRenderingController.ixx" line="45" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController_1ab3f4a1cc93fefe913ad49a25c7f28e25" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -82,7 +92,7 @@
           <declname>dispatcher</declname>
         </param>
         <briefdescription>
-<para>Registers to the FrameBufferResizeEvent of the specified dispatcher. </para>
+<para>Registers this controller to the framebuffer resize event. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -90,6 +100,7 @@
 <parametername>dispatcher</parametername>
 </parameternamelist>
 <parameterdescription>
+<para>The event dispatcher to subscribe to.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -99,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/app/controller/BasicWindowRenderingController.ixx" line="45" column="14"/>
+        <location file="include/helios/app/controller/BasicWindowRenderingController.ixx" line="54" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController_1ae3243ccfbe78b6ec5365acd2d5aafbb4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -109,19 +120,23 @@
         <qualifiedname>helios::app::controller::BasicWindowRenderingController::init</qualifiedname>
         <reimplements refid="classhelios_1_1app_1_1controller_1_1Controller_1ae5ae6e79e200ac65022e2545de250741">init</reimplements>
         <briefdescription>
-<para>Initializes this <ref refid="classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController" kindref="compound">BasicWindowRenderingController</ref>. </para>
+<para>Initializes this controller. </para>
         </briefdescription>
         <detaileddescription>
+<para><simplesect kind="return"><para>True if initialization succeeded, otherwise false. </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/app/controller/BasicWindowRenderingController.ixx" line="50" column="14"/>
+        <location file="include/helios/app/controller/BasicWindowRenderingController.ixx" line="61" column="14"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>Basic implementation of a <ref refid="classhelios_1_1app_1_1controller_1_1WindowRenderingController" kindref="compound">WindowRenderingController</ref>. </para>
+<para>Basic implementation of a window rendering controller. </para>
     </briefdescription>
     <detaileddescription>
+<para>This controller handles framebuffer resize events and manages rendering for a single window instance. </para>
     </detaileddescription>
     <inheritancegraph>
       <node id="1">
@@ -159,13 +174,13 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="include/helios/app/controller/BasicWindowRenderingController.ixx" line="21" column="5" bodyfile="include/helios/app/controller/BasicWindowRenderingController.ixx" bodystart="21" bodyend="51"/>
+    <location file="include/helios/app/controller/BasicWindowRenderingController.ixx" line="24" column="5" bodyfile="include/helios/app/controller/BasicWindowRenderingController.ixx" bodystart="24" bodyend="62"/>
     <listofallmembers>
-      <member refid="classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController_1aacfbaab940d3d1961950f1f4838d14c9" prot="public" virt="non-virtual"><scope>helios::app::controller::BasicWindowRenderingController</scope><name>BasicWindowRenderingController</name></member>
+      <member refid="classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController_1aaab3050af897d35dfcd1dd405512e9f1" prot="public" virt="non-virtual"><scope>helios::app::controller::BasicWindowRenderingController</scope><name>BasicWindowRenderingController</name></member>
       <member refid="classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController_1ae3243ccfbe78b6ec5365acd2d5aafbb4" prot="public" virt="virtual"><scope>helios::app::controller::BasicWindowRenderingController</scope><name>init</name></member>
       <member refid="classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController_1ae7ab29a6c78a6459308f9a58a69c695c" prot="public" virt="virtual"><scope>helios::app::controller::BasicWindowRenderingController</scope><name>onFrameBufferResize</name></member>
-      <member refid="classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController_1acd57644bf6769f5e817efacaf89e5fbc" prot="private" virt="non-virtual"><scope>helios::app::controller::BasicWindowRenderingController</scope><name>renderingDevice_</name></member>
       <member refid="classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController_1ab3f4a1cc93fefe913ad49a25c7f28e25" prot="public" virt="virtual"><scope>helios::app::controller::BasicWindowRenderingController</scope><name>subscribeTo</name></member>
+      <member refid="classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController_1af8552bc3c889326ea4197e1beb277fab" prot="private" virt="non-virtual"><scope>helios::app::controller::BasicWindowRenderingController</scope><name>window_</name></member>
       <member refid="classhelios_1_1app_1_1controller_1_1Controller_1a139f608987cdf6c04c9aaef03aaeecda" prot="public" virt="virtual"><scope>helios::app::controller::BasicWindowRenderingController</scope><name>~Controller</name></member>
     </listofallmembers>
   </compounddef>

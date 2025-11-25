@@ -67,7 +67,8 @@ var annotated_dup =
               [ "Circle", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Circle.html", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Circle" ],
               [ "Cube", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Cube.html", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Cube" ],
               [ "Line", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Line.html", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Line" ],
-              [ "Rectangle", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Rectangle.html", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Rectangle" ]
+              [ "Rectangle", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Rectangle.html", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Rectangle" ],
+              [ "Triangle", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Triangle.html", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Triangle" ]
             ] ],
             [ "Shape", "structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape.html", "structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape" ]
           ] ]
@@ -92,10 +93,14 @@ var annotated_dup =
         [ "RenderPassFactory", "classhelios_1_1rendering_1_1RenderPassFactory.html", "classhelios_1_1rendering_1_1RenderPassFactory" ],
         [ "RenderPrototype", "classhelios_1_1rendering_1_1RenderPrototype.html", "classhelios_1_1rendering_1_1RenderPrototype" ],
         [ "RenderQueue", "classhelios_1_1rendering_1_1RenderQueue.html", "classhelios_1_1rendering_1_1RenderQueue" ],
-        [ "Vertex", "structhelios_1_1rendering_1_1Vertex.html", "structhelios_1_1rendering_1_1Vertex" ]
+        [ "RenderTarget", "classhelios_1_1rendering_1_1RenderTarget.html", "classhelios_1_1rendering_1_1RenderTarget" ],
+        [ "Vertex", "structhelios_1_1rendering_1_1Vertex.html", "structhelios_1_1rendering_1_1Vertex" ],
+        [ "ViewportKey", "structhelios_1_1rendering_1_1ViewportKey.html", "structhelios_1_1rendering_1_1ViewportKey" ],
+        [ "Viewport", "classhelios_1_1rendering_1_1Viewport.html", "classhelios_1_1rendering_1_1Viewport" ]
       ] ],
       [ "scene", "namespacehelios_1_1scene.html", [
         [ "Camera", "classhelios_1_1scene_1_1Camera.html", "classhelios_1_1scene_1_1Camera" ],
+        [ "CameraSceneNode", "classhelios_1_1scene_1_1CameraSceneNode.html", "classhelios_1_1scene_1_1CameraSceneNode" ],
         [ "CullNoneStrategy", "classhelios_1_1scene_1_1CullNoneStrategy.html", "classhelios_1_1scene_1_1CullNoneStrategy" ],
         [ "FrustumCullingStrategy", "classhelios_1_1scene_1_1FrustumCullingStrategy.html", "classhelios_1_1scene_1_1FrustumCullingStrategy" ],
         [ "Scene", "classhelios_1_1scene_1_1Scene.html", "classhelios_1_1scene_1_1Scene" ],

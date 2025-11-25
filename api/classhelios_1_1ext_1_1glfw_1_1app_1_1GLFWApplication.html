@@ -127,55 +127,61 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad50cfc2051b48c6c447df3b53b0734bd" id="r_ad50cfc2051b48c6c447df3b53b0734bd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad50cfc2051b48c6c447df3b53b0734bd">GLFWApplication</a> (std::unique_ptr&lt; <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html">helios::rendering::RenderingDevice</a> &gt; <a class="el" href="classhelios_1_1app_1_1Application.html#a13d126308f1b5b61d9b87fc4dde57530">renderingDevice</a>, std::unique_ptr&lt; <a class="el" href="classhelios_1_1input_1_1InputManager.html">helios::input::InputManager</a> &gt; <a class="el" href="classhelios_1_1app_1_1Application.html#a11fe3ec9b45731268a0eff32ced9f06c">inputManager</a>, std::unique_ptr&lt; <a class="el" href="classhelios_1_1event_1_1EventManager.html">helios::event::EventManager</a> &gt; <a class="el" href="classhelios_1_1app_1_1Application.html#a6ea14c8bd591020cbd5d2baef551a804">eventManager</a>)</td></tr>
 <tr class="memdesc:ad50cfc2051b48c6c447df3b53b0734bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new `GLFWApplication` instance.  <br /></td></tr>
 <tr class="memitem:a30d27364d7c703e81f2f963bb2189fd6" id="r_a30d27364d7c703e81f2f963bb2189fd6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a30d27364d7c703e81f2f963bb2189fd6">init</a> () override</td></tr>
-<tr class="memdesc:a30d27364d7c703e81f2f963bb2189fd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inits the Application. Any bootstrapping necessary for this application should be done here and provide an idiomatic entry point for any API using this Application.     <br /></td></tr>
-<tr class="memitem:ad4ee6ee4079da8dc2fbb0a57fa790d82" id="r_ad4ee6ee4079da8dc2fbb0a57fa790d82"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow.html">helios::ext::glfw::window::GLFWWindow</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad4ee6ee4079da8dc2fbb0a57fa790d82">createWindow</a> (const <a class="el" href="structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowConfig.html">helios::ext::glfw::window::GLFWWindowConfig</a> &amp;cfg)</td></tr>
-<tr class="memdesc:ad4ee6ee4079da8dc2fbb0a57fa790d82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new GLFWWindow and add it to this Application's windows collection. The Application takes ownership of the window. Delegates to Window::show() for showing the window and initializes the associated rendering device if necessary, e.g. for glfw an additional `glfwMakeContextCurrent()` is called so the rendering device can be safely initialized, then immediately passes a `nullptr` to the `glfwMakeContextCurrent()` to force calling APIs to explicitly call <a class="el" href="#aec402bfa5500772acb4d47752e80fd3e" title="Sets the current Window for this Application. Makes sure that `glfwContextCurrent` is called for sett...">setCurrent()</a> on the constructed window.  <br /></td></tr>
-<tr class="memitem:a0d2dafccab0d344f8f9b1daf0db8ab04" id="r_a0d2dafccab0d344f8f9b1daf0db8ab04"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow.html">helios::ext::glfw::window::GLFWWindow</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d2dafccab0d344f8f9b1daf0db8ab04">createWindow</a> (const <a class="el" href="structhelios_1_1window_1_1WindowConfig.html">helios::window::WindowConfig</a> &amp;cfg) override</td></tr>
-<tr class="memdesc:a0d2dafccab0d344f8f9b1daf0db8ab04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the container for the native window and performs all necessary steps to properly initialize it.     <br /></td></tr>
+<tr class="memdesc:a30d27364d7c703e81f2f963bb2189fd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the application.     <br /></td></tr>
+<tr class="memitem:a2c1bfca7c426415f37fcefac7fc68b4d" id="r_a2c1bfca7c426415f37fcefac7fc68b4d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow.html">helios::ext::glfw::window::GLFWWindow</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2c1bfca7c426415f37fcefac7fc68b4d">createWindow</a> (std::unique_ptr&lt; <a class="el" href="classhelios_1_1rendering_1_1RenderTarget.html">helios::rendering::RenderTarget</a> &gt; renderTarget, const <a class="el" href="structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowConfig.html">helios::ext::glfw::window::GLFWWindowConfig</a> &amp;cfg)</td></tr>
+<tr class="memdesc:a2c1bfca7c426415f37fcefac7fc68b4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new GLFWWindow and add it to this Application's windows collection. The Application takes ownership of the window.  <br /></td></tr>
+<tr class="memitem:a7f053a4162c99ce3219865cee668cd18" id="r_a7f053a4162c99ce3219865cee668cd18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow.html">helios::ext::glfw::window::GLFWWindow</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7f053a4162c99ce3219865cee668cd18">createWindow</a> (std::unique_ptr&lt; <a class="el" href="classhelios_1_1rendering_1_1RenderTarget.html">helios::rendering::RenderTarget</a> &gt; renderTarget, const <a class="el" href="structhelios_1_1window_1_1WindowConfig.html">helios::window::WindowConfig</a> &amp;cfg) override</td></tr>
+<tr class="memdesc:a7f053a4162c99ce3219865cee668cd18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the container for the native window and performs all necessary steps to properly initialize it.     <br /></td></tr>
 <tr class="memitem:aec402bfa5500772acb4d47752e80fd3e" id="r_aec402bfa5500772acb4d47752e80fd3e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aec402bfa5500772acb4d47752e80fd3e">setCurrent</a> (<a class="el" href="classhelios_1_1window_1_1Window.html">helios::window::Window</a> &amp;win) override</td></tr>
-<tr class="memdesc:aec402bfa5500772acb4d47752e80fd3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the current Window for this Application. Makes sure that `glfwContextCurrent` is called for setting a current context for glfw and subsequent glfw-operations. It also re-registers `glfwSetFramebufferSizeCallback` with the callback function of the Window.  <br /></td></tr>
+<tr class="memdesc:aec402bfa5500772acb4d47752e80fd3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the current window for this application.  <br /></td></tr>
 <tr class="memitem:a6faec11965b694e027225da937c52364" id="r_a6faec11965b694e027225da937c52364"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1window_1_1Window.html">helios::window::Window</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6faec11965b694e027225da937c52364">current</a> () const noexcept override</td></tr>
-<tr class="memdesc:a6faec11965b694e027225da937c52364"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the currently focused window, or nullptr if none exists / no window is being treated as <a class="el" href="#a6faec11965b694e027225da937c52364" title="Returns the currently focused window, or nullptr if none exists / no window is being treated as curre...">current()</a>.     <br /></td></tr>
+<tr class="memdesc:a6faec11965b694e027225da937c52364"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the currently focused window, or nullptr if none exists or no window is being treated as current.     <br /></td></tr>
 <tr class="inherit_header pub_methods_classhelios_1_1app_1_1Application"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classhelios_1_1app_1_1Application')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="classhelios_1_1app_1_1Application.html">helios::app::Application</a></td></tr>
 <tr class="memitem:aec579824c0704542d3f7d6c4f47851a1 inherit pub_methods_classhelios_1_1app_1_1Application" id="r_aec579824c0704542d3f7d6c4f47851a1"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Application.html#aec579824c0704542d3f7d6c4f47851a1">~Application</a> ()=default</td></tr>
 <tr class="memitem:a770ed54a97c68d5ac40542f3a702121a inherit pub_methods_classhelios_1_1app_1_1Application" id="r_a770ed54a97c68d5ac40542f3a702121a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Application.html#a770ed54a97c68d5ac40542f3a702121a">Application</a> (std::unique_ptr&lt; <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html">helios::rendering::RenderingDevice</a> &gt; <a class="el" href="classhelios_1_1app_1_1Application.html#a13d126308f1b5b61d9b87fc4dde57530">renderingDevice</a>, std::unique_ptr&lt; <a class="el" href="classhelios_1_1input_1_1InputManager.html">helios::input::InputManager</a> &gt; <a class="el" href="classhelios_1_1app_1_1Application.html#a11fe3ec9b45731268a0eff32ced9f06c">inputManager</a>, std::unique_ptr&lt; <a class="el" href="classhelios_1_1event_1_1EventManager.html">helios::event::EventManager</a> &gt; <a class="el" href="classhelios_1_1app_1_1Application.html#a6ea14c8bd591020cbd5d2baef551a804">eventManager</a>)</td></tr>
-<tr class="memdesc:a770ed54a97c68d5ac40542f3a702121a inherit pub_methods_classhelios_1_1app_1_1Application"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="classhelios_1_1app_1_1Application.html" title="Class providing the entry point for a helios application.">Application</a> instance.  <br /></td></tr>
-<tr class="memitem:ac74fe7518d57fe0892b44f956e73f970 inherit pub_methods_classhelios_1_1app_1_1Application" id="r_ac74fe7518d57fe0892b44f956e73f970"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Application.html#ac74fe7518d57fe0892b44f956e73f970">addController</a> (std::unique_ptr&lt; <a class="el" href="classhelios_1_1app_1_1controller_1_1Controller.html">helios::app::controller::Controller</a> &gt; <a class="el" href="namespacehelios_1_1app_1_1controller.html">controller</a>)</td></tr>
-<tr class="memdesc:ac74fe7518d57fe0892b44f956e73f970 inherit pub_methods_classhelios_1_1app_1_1Application"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a new controller with this application.  <br /></td></tr>
+<tr class="memdesc:a770ed54a97c68d5ac40542f3a702121a inherit pub_methods_classhelios_1_1app_1_1Application"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new application instance.  <br /></td></tr>
+<tr class="memitem:a7285d8f027a7cb17a31bf603fc84cc62 inherit pub_methods_classhelios_1_1app_1_1Application" id="r_a7285d8f027a7cb17a31bf603fc84cc62"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Application.html#a7285d8f027a7cb17a31bf603fc84cc62">addController</a> (std::unique_ptr&lt; <a class="el" href="classhelios_1_1app_1_1controller_1_1Controller.html">helios::app::controller::Controller</a> &gt; <a class="el" href="namespacehelios_1_1app_1_1controller.html">controller</a>) noexcept</td></tr>
+<tr class="memdesc:a7285d8f027a7cb17a31bf603fc84cc62 inherit pub_methods_classhelios_1_1app_1_1Application"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a new controller with this application.  <br /></td></tr>
 <tr class="memitem:a3cd9e39b64d771f2bc795cbc8c255a33 inherit pub_methods_classhelios_1_1app_1_1Application" id="r_a3cd9e39b64d771f2bc795cbc8c255a33"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Application.html#a3cd9e39b64d771f2bc795cbc8c255a33">hasWindow</a> (const <a class="el" href="classhelios_1_1window_1_1Window.html">helios::window::Window</a> &amp;win) const noexcept</td></tr>
 <tr class="memdesc:a3cd9e39b64d771f2bc795cbc8c255a33 inherit pub_methods_classhelios_1_1app_1_1Application"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the specified window is owned by this application, otherwise false.  <br /></td></tr>
 <tr class="memitem:a11fe3ec9b45731268a0eff32ced9f06c inherit pub_methods_classhelios_1_1app_1_1Application" id="r_a11fe3ec9b45731268a0eff32ced9f06c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1input_1_1InputManager.html">helios::input::InputManager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Application.html#a11fe3ec9b45731268a0eff32ced9f06c">inputManager</a> () const</td></tr>
-<tr class="memdesc:a11fe3ec9b45731268a0eff32ced9f06c inherit pub_methods_classhelios_1_1app_1_1Application"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the InputManager owned by this <a class="el" href="classhelios_1_1app_1_1Application.html" title="Class providing the entry point for a helios application.">Application</a>.  <br /></td></tr>
+<tr class="memdesc:a11fe3ec9b45731268a0eff32ced9f06c inherit pub_methods_classhelios_1_1app_1_1Application"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input manager owned by this application.  <br /></td></tr>
 <tr class="memitem:a13d126308f1b5b61d9b87fc4dde57530 inherit pub_methods_classhelios_1_1app_1_1Application" id="r_a13d126308f1b5b61d9b87fc4dde57530"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html">helios::rendering::RenderingDevice</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Application.html#a13d126308f1b5b61d9b87fc4dde57530">renderingDevice</a> () const</td></tr>
-<tr class="memdesc:a13d126308f1b5b61d9b87fc4dde57530 inherit pub_methods_classhelios_1_1app_1_1Application"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the RenderingDevice owned by this <a class="el" href="classhelios_1_1app_1_1Application.html" title="Class providing the entry point for a helios application.">Application</a>.  <br /></td></tr>
+<tr class="memdesc:a13d126308f1b5b61d9b87fc4dde57530 inherit pub_methods_classhelios_1_1app_1_1Application"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the rendering device owned by this application.  <br /></td></tr>
 <tr class="memitem:a6ea14c8bd591020cbd5d2baef551a804 inherit pub_methods_classhelios_1_1app_1_1Application" id="r_a6ea14c8bd591020cbd5d2baef551a804"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1event_1_1EventManager.html">helios::event::EventManager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1app_1_1Application.html#a6ea14c8bd591020cbd5d2baef551a804">eventManager</a> () const</td></tr>
-<tr class="memdesc:a6ea14c8bd591020cbd5d2baef551a804 inherit pub_methods_classhelios_1_1app_1_1Application"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the EventManager owned by this application.  <br /></td></tr>
+<tr class="memdesc:a6ea14c8bd591020cbd5d2baef551a804 inherit pub_methods_classhelios_1_1app_1_1Application"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the event manager owned by this application.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-inherited" class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_attribs_classhelios_1_1app_1_1Application"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_classhelios_1_1app_1_1Application')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Protected Attributes inherited from <a class="el" href="classhelios_1_1app_1_1Application.html">helios::app::Application</a></td></tr>
-<tr class="memitem:a91c2fa7bb451e75bfbed236e270f2207 inherit pro_attribs_classhelios_1_1app_1_1Application" id="r_a91c2fa7bb451e75bfbed236e270f2207"><td class="memItemLeft" align="right" valign="top">
-const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::util::log::Logger</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>logger_</b> = <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html#aeb3c579d6cd53e2ca50384ceadd5d3a6">helios::util::log::LogManager::getInstance</a>().registerLogger(<a class="el" href="OpenGLUniformLocationMap_8ixx.html#acbc04f24078582c7d42b2085be5d5750">HELIOS_LOG_SCOPE</a>)</td></tr>
-<tr class="memdesc:a91c2fa7bb451e75bfbed236e270f2207 inherit pro_attribs_classhelios_1_1app_1_1Application"><td class="mdescLeft">&#160;</td><td class="mdescRight">The const reference to the logger used with this Adapter. <br /></td></tr>
 <tr class="memitem:a60c02bedd6f7ad8ab0c486aa73c1983f inherit pro_attribs_classhelios_1_1app_1_1Application" id="r_a60c02bedd6f7ad8ab0c486aa73c1983f"><td class="memItemLeft" align="right" valign="top">
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>initialized_</b> = false</td></tr>
+<tr class="memdesc:a60c02bedd6f7ad8ab0c486aa73c1983f inherit pro_attribs_classhelios_1_1app_1_1Application"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag indicating whether the application has been initialized. <br /></td></tr>
 <tr class="memitem:aa04eb0a14f12afe4323122a4698c04f7 inherit pro_attribs_classhelios_1_1app_1_1Application" id="r_aa04eb0a14f12afe4323122a4698c04f7"><td class="memItemLeft" align="right" valign="top">
 std::unique_ptr&lt; <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html">helios::rendering::RenderingDevice</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>renderingDevice_</b></td></tr>
+<tr class="memdesc:aa04eb0a14f12afe4323122a4698c04f7 inherit pro_attribs_classhelios_1_1app_1_1Application"><td class="mdescLeft">&#160;</td><td class="mdescRight">The rendering device owned by this application. <br /></td></tr>
 <tr class="memitem:a1a784b65ca2b1ce428b90d1be0728b0b inherit pro_attribs_classhelios_1_1app_1_1Application" id="r_a1a784b65ca2b1ce428b90d1be0728b0b"><td class="memItemLeft" align="right" valign="top">
 std::unique_ptr&lt; <a class="el" href="classhelios_1_1input_1_1InputManager.html">input::InputManager</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>inputManager_</b></td></tr>
+<tr class="memdesc:a1a784b65ca2b1ce428b90d1be0728b0b inherit pro_attribs_classhelios_1_1app_1_1Application"><td class="mdescLeft">&#160;</td><td class="mdescRight">The input manager owned by this application. <br /></td></tr>
 <tr class="memitem:a6cbbd642405f8815ec1b5a58b7d27137 inherit pro_attribs_classhelios_1_1app_1_1Application" id="r_a6cbbd642405f8815ec1b5a58b7d27137"><td class="memItemLeft" align="right" valign="top">
 std::unique_ptr&lt; <a class="el" href="classhelios_1_1event_1_1EventManager.html">event::EventManager</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>eventManager_</b></td></tr>
+<tr class="memdesc:a6cbbd642405f8815ec1b5a58b7d27137 inherit pro_attribs_classhelios_1_1app_1_1Application"><td class="mdescLeft">&#160;</td><td class="mdescRight">The event manager owned by this application. <br /></td></tr>
 <tr class="memitem:aedbc6395e86cec1e645d5fd093764fa0 inherit pro_attribs_classhelios_1_1app_1_1Application" id="r_aedbc6395e86cec1e645d5fd093764fa0"><td class="memItemLeft" align="right" valign="top">
 std::list&lt; std::unique_ptr&lt; <a class="el" href="classhelios_1_1window_1_1Window.html">helios::window::Window</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>windowList_</b></td></tr>
-<tr class="memdesc:aedbc6395e86cec1e645d5fd093764fa0 inherit pro_attribs_classhelios_1_1app_1_1Application"><td class="mdescLeft">&#160;</td><td class="mdescRight">A list containing all Windows managed by this <a class="el" href="classhelios_1_1app_1_1Application.html" title="Class providing the entry point for a helios application.">Application</a>. <br /></td></tr>
+<tr class="memdesc:aedbc6395e86cec1e645d5fd093764fa0 inherit pro_attribs_classhelios_1_1app_1_1Application"><td class="mdescLeft">&#160;</td><td class="mdescRight">A list containing all windows managed by this application. <br /></td></tr>
 <tr class="memitem:a2dfaeb4cd7c741b225bd968c827983d3 inherit pro_attribs_classhelios_1_1app_1_1Application" id="r_a2dfaeb4cd7c741b225bd968c827983d3"><td class="memItemLeft" align="right" valign="top">
 std::vector&lt; std::unique_ptr&lt; <a class="el" href="classhelios_1_1app_1_1controller_1_1Controller.html">helios::app::controller::Controller</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>controllers_</b></td></tr>
+<tr class="memdesc:a2dfaeb4cd7c741b225bd968c827983d3 inherit pro_attribs_classhelios_1_1app_1_1Application"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collection of controllers registered with this application. <br /></td></tr>
+<tr class="inherit_header pro_static_attribs_classhelios_1_1app_1_1Application"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_static_attribs_classhelios_1_1app_1_1Application')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Static Protected Attributes inherited from <a class="el" href="classhelios_1_1app_1_1Application.html">helios::app::Application</a></td></tr>
+<tr class="memitem:a91c2fa7bb451e75bfbed236e270f2207 inherit pro_static_attribs_classhelios_1_1app_1_1Application" id="r_a91c2fa7bb451e75bfbed236e270f2207"><td class="memItemLeft" align="right" valign="top">
+static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::util::log::Logger</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>logger_</b> = <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html#a750d8fd5b3ee3678600644756b0631e7">helios::util::log::LogManager::loggerForScope</a>(<a class="el" href="OpenGLUniformLocationMap_8ixx.html#acbc04f24078582c7d42b2085be5d5750">HELIOS_LOG_SCOPE</a>)</td></tr>
+<tr class="memdesc:a91c2fa7bb451e75bfbed236e270f2207 inherit pro_static_attribs_classhelios_1_1app_1_1Application"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shared logger instance for all <a class="el" href="classhelios_1_1app_1_1Application.html" title="Class providing the entry point for a helios application.">Application</a> objects. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>An Application implementation for glfw-based environments. </p>
 <p>This application owns a `GLFWRAIIGuard`. </p>
 
-<p class="definition">Definition at line <a class="el" href="GLFWApplication_8ixx_source.html#l00031">31</a> of file <a class="el" href="GLFWApplication_8ixx_source.html">GLFWApplication.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GLFWApplication_8ixx_source.html#l00032">32</a> of file <a class="el" href="GLFWApplication_8ixx_source.html">GLFWApplication.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad50cfc2051b48c6c447df3b53b0734bd" name="ad50cfc2051b48c6c447df3b53b0734bd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad50cfc2051b48c6c447df3b53b0734bd">&#9670;&#160;</a></span>GLFWApplication()</h2>
@@ -212,14 +218,14 @@ std::vector&lt; std::unique_ptr&lt; <a class="el" href="classhelios_1_1app_1_1co
 <p>Constructs a new `GLFWApplication` instance. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">renderingDevice</td><td></td></tr>
-    <tr><td class="paramname">inputManager</td><td></td></tr>
-    <tr><td class="paramname">eventManager</td><td></td></tr>
+    <tr><td class="paramname">renderingDevice</td><td>Unique rendering device owned by the application. </td></tr>
+    <tr><td class="paramname">inputManager</td><td>Unique input manager instance. </td></tr>
+    <tr><td class="paramname">eventManager</td><td>Unique event manager instance. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="Application_8ixx_source.html#l00181">helios::app::Application::eventManager()</a>, <a class="el" href="Application_8ixx_source.html#l00163">helios::app::Application::inputManager()</a>, and <a class="el" href="Application_8ixx_source.html#l00172">helios::app::Application::renderingDevice()</a>.</p>
+<p class="reference">References <a class="el" href="Application_8ixx_source.html#l00190">helios::app::Application::eventManager()</a>, <a class="el" href="Application_8ixx_source.html#l00172">helios::app::Application::inputManager()</a>, and <a class="el" href="Application_8ixx_source.html#l00181">helios::app::Application::renderingDevice()</a>.</p>
 <div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
@@ -230,8 +236,8 @@ std::vector&lt; std::unique_ptr&lt; <a class="el" href="classhelios_1_1app_1_1co
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="ad4ee6ee4079da8dc2fbb0a57fa790d82" name="ad4ee6ee4079da8dc2fbb0a57fa790d82"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad4ee6ee4079da8dc2fbb0a57fa790d82">&#9670;&#160;</a></span>createWindow() <span class="overload">[1/2]</span></h2>
+<a id="a2c1bfca7c426415f37fcefac7fc68b4d" name="a2c1bfca7c426415f37fcefac7fc68b4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c1bfca7c426415f37fcefac7fc68b4d">&#9670;&#160;</a></span>createWindow() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -242,8 +248,12 @@ std::vector&lt; std::unique_ptr&lt; <a class="el" href="classhelios_1_1app_1_1co
         <tr>
           <td class="memname"><a class="el" href="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow.html">helios::ext::glfw::window::GLFWWindow</a> &amp; helios::ext::glfw::app::GLFWApplication::createWindow </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowConfig.html">helios::ext::glfw::window::GLFWWindowConfig</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>cfg</em></span></td><td>)</td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classhelios_1_1rendering_1_1RenderTarget.html">helios::rendering::RenderTarget</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>renderTarget</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const <a class="el" href="structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowConfig.html">helios::ext::glfw::window::GLFWWindowConfig</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>cfg</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -253,19 +263,16 @@ std::vector&lt; std::unique_ptr&lt; <a class="el" href="classhelios_1_1app_1_1co
 </table>
 </div><div class="memdoc">
 
-<p>Creates a new GLFWWindow and add it to this Application's windows collection. The Application takes ownership of the window. Delegates to Window::show() for showing the window and initializes the associated rendering device if necessary, e.g. for glfw an additional `glfwMakeContextCurrent()` is called so the rendering device can be safely initialized, then immediately passes a `nullptr` to the `glfwMakeContextCurrent()` to force calling APIs to explicitly call <a class="el" href="#aec402bfa5500772acb4d47752e80fd3e" title="Sets the current Window for this Application. Makes sure that `glfwContextCurrent` is called for sett...">setCurrent()</a> on the constructed window. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">cfg</td><td>The `GLFWWindowConfig` used for initializing the window.</td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Creates a new GLFWWindow and add it to this Application's windows collection. The Application takes ownership of the window. </p>
+<p>Delegates to Window::show() for showing the window and initializes the associated rendering device if necessary, e.g. for glfw an additional `glfwMakeContextCurrent()` is called so the rendering device can be safely initialized, then immediately passes a `nullptr` to the `glfwMakeContextCurrent()` to force calling APIs to explicitly call <a class="el" href="#aec402bfa5500772acb4d47752e80fd3e" title="Sets the current window for this application.">setCurrent()</a> on the constructed window. The render target size is synced to the current framebuffer dimensions reported by `glfwGetFramebufferSize()`.</p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the created window instance.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a href="https://www.glfw.org/docs/latest/group__window.html#ga0e2637a4161afb283f5300c7f94785c9">https://www.glfw.org/docs/latest/group__window.html#ga0e2637a4161afb283f5300c7f94785c9</a> </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>A ref to the window created. </dd></dl>
 
 </div>
 </div>
-<a id="a0d2dafccab0d344f8f9b1daf0db8ab04" name="a0d2dafccab0d344f8f9b1daf0db8ab04"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d2dafccab0d344f8f9b1daf0db8ab04">&#9670;&#160;</a></span>createWindow() <span class="overload">[2/2]</span></h2>
+<a id="a7f053a4162c99ce3219865cee668cd18" name="a7f053a4162c99ce3219865cee668cd18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f053a4162c99ce3219865cee668cd18">&#9670;&#160;</a></span>createWindow() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -276,8 +283,12 @@ std::vector&lt; std::unique_ptr&lt; <a class="el" href="classhelios_1_1app_1_1co
         <tr>
           <td class="memname"><a class="el" href="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow.html">helios::ext::glfw::window::GLFWWindow</a> &amp; helios::ext::glfw::app::GLFWApplication::createWindow </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structhelios_1_1window_1_1WindowConfig.html">helios::window::WindowConfig</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>cfg</em></span></td><td>)</td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classhelios_1_1rendering_1_1RenderTarget.html">helios::rendering::RenderTarget</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>renderTarget</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const <a class="el" href="structhelios_1_1window_1_1WindowConfig.html">helios::window::WindowConfig</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>cfg</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -290,19 +301,20 @@ std::vector&lt; std::unique_ptr&lt; <a class="el" href="classhelios_1_1app_1_1co
 <p>Creates the container for the native window and performs all necessary steps to properly initialize it.    </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">cfg</td><td></td></tr>
+    <tr><td class="paramname">renderTarget</td><td>Render target that wraps the framebuffer used by the window.</td></tr>
+    <tr><td class="paramname">cfg</td><td>Window configuration defining properties such as title, dimensions, and hints.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Window</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the created window instance.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">std::invalid_argument</td><td>if the configuration was invalid    </td></tr>
+    <tr><td class="paramname">std::invalid_argument</td><td>If the configuration was invalid.    </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="classhelios_1_1app_1_1Application.html#a91fa8a45e2a79d32dba31bc37deeb824">helios::app::Application</a>.</p>
+<p>Implements <a class="el" href="classhelios_1_1app_1_1Application.html#a8cc35c9dddb4f715d7d5c2b5197ef0d4">helios::app::Application</a>.</p>
 
 </div>
 </div>
@@ -329,8 +341,8 @@ std::vector&lt; std::unique_ptr&lt; <a class="el" href="classhelios_1_1app_1_1co
 </table>
 </div><div class="memdoc">
 
-<p>Returns the currently focused window, or nullptr if none exists / no window is being treated as <a class="el" href="#a6faec11965b694e027225da937c52364" title="Returns the currently focused window, or nullptr if none exists / no window is being treated as curre...">current()</a>.    </p>
-<dl class="section return"><dt>Returns</dt><dd>Window    </dd></dl>
+<p>Returns the currently focused window, or nullptr if none exists or no window is being treated as current.    </p>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the current window, or nullptr if none is active.    </dd></dl>
 
 <p>Implements <a class="el" href="classhelios_1_1app_1_1Application.html#a361bd11af60d329332662b5b5a940bb9">helios::app::Application</a>.</p>
 
@@ -359,12 +371,11 @@ std::vector&lt; std::unique_ptr&lt; <a class="el" href="classhelios_1_1app_1_1co
 </table>
 </div><div class="memdoc">
 
-<p>Inits the Application. Any bootstrapping necessary for this application should be done here and provide an idiomatic entry point for any API using this Application.    </p>
-<p>This method makes sure that the controllers are initialized and subscribe to this Application's EventManager's dispatcher.</p>
-<dl class="section return"><dt>Returns</dt><dd>void</dd></dl>
+<p>Initializes the application.    </p>
+<p>Performs any bootstrapping necessary for this application and provides an idiomatic entry point for APIs using this application. This method ensures that all controllers are initialized and subscribe to this application's event manager dispatcher.</p>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">std::runtime_error</td><td>if the Application was already initialized.    </td></tr>
+    <tr><td class="paramname">std::runtime_error</td><td>If the application was already initialized.    </td></tr>
   </table>
   </dd>
 </dl>
@@ -396,20 +407,20 @@ std::vector&lt; std::unique_ptr&lt; <a class="el" href="classhelios_1_1app_1_1co
 </table>
 </div><div class="memdoc">
 
-<p>Sets the current Window for this Application. Makes sure that `glfwContextCurrent` is called for setting a current context for glfw and subsequent glfw-operations. It also re-registers `glfwSetFramebufferSizeCallback` with the callback function of the Window. </p>
+<p>Sets the current window for this application. </p>
+<p>Ensures `glfwMakeContextCurrent()` is called to bind the correct context for subsequent glfw operations and re-registers the framebuffer size callback on the targeted window.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">win</td><td>A ref to the window to set as current.</td></tr>
+    <tr><td class="paramname">win</td><td>Reference to the window that becomes the current context owner.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">if</td><td>the specified Window is not a GLFWWindow or if the window is not owned by this application.</td></tr>
+    <tr><td class="paramname">std::invalid_argument</td><td>If `win` is not a `GLFWWindow` or not owned by this application. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo</a></b></dt><dd>the window should be signaled that it's now current window, for setting the frameBufferSizeCallback and calling glfwMakeContextCurrent. </dd></dl>
 
 <p>Implements <a class="el" href="classhelios_1_1app_1_1Application.html#af98c4f879155bcbccf305b8018e7d884">helios::app::Application</a>.</p>
 

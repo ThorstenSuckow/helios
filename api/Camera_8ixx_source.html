@@ -108,7 +108,7 @@ $(function() {
 <div class="contents">
 <a href="Camera_8ixx.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/**</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * @file Camera.ixx</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * @brief Camera node providing view and projection matrices.</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * @brief Defines the Camera class providing view and projection matrices.</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">module</span>;</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
@@ -123,92 +123,85 @@ $(function() {
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="namespacehelios_1_1scene.html">   14</a></span><span class="keyword">export</span> <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1scene.html">helios::scene</a> {</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"></span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">    /**</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">     * @brief Represents a camera for perspective or orthographic projection, deriving from SceneNode</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">     * to allow for spatial positioning and transformation within the scene graph.</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">     * The camera provides the view and projection matrix, whereas the view matrix</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">     * is computed as the inverse of the camera&#39;s world transform.</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">     * A Camera behaves just like a (non-renderable) SceneNode, except for the fact that</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">     * it does not accept child nodes.</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">     * An instance of `Camera` is added as a direct descendant of the scene&#39;s root node</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">     * for free transform. It can be a child of a model hierarchy to inherit the</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">     * corresponding positioning in the world.</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">     * @todo implement class. Make sure localTransforms mark this class as dirty,</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">     * for proper recalculating projection-/viewMatrix if needed.</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">     * @todo check whether nodes should further be divided into Parent- and LeafNodes.</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">     * Cameras would be LeafNodes then, not allowing to have child nodes.</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">     */</span></div>
-<div class="foldopen" id="foldopen00035" data-start="{" data-end="};">
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Camera.html">   35</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classhelios_1_1scene_1_1Camera.html#adb65c6af2c10921ccd7a5088a48adcf8">Camera</a> : <span class="keyword">public</span> <a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#a30ad1d7f49d6114a261cbac2706546ab">SceneNode</a> {</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keyword">protected</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">     * @brief Represents a camera for perspective or orthographic projection.</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">     * The camera provides the view and projection matrices, whereas the view matrix</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">     * is computed as the inverse of the camera&#39;s world transform.</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">     * @todo Implement automatic recalculation of projection and view matrices when</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">     *       local transforms change (dirty flag pattern).</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">     */</span></div>
+<div class="foldopen" id="foldopen00025" data-start="{" data-end="};">
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Camera.html">   25</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classhelios_1_1scene_1_1Camera.html#a6d1911bccc03c847625153d58cc49e99">Camera</a> {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">protected</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">         * @brief The projection matrix of this camera.</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Camera.html#a73a85eb4966fb4524dc6b87736500f62">   31</a></span>        <span class="keyword">mutable</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> <a class="code hl_variable" href="classhelios_1_1scene_1_1Camera.html#a73a85eb4966fb4524dc6b87736500f62">projectionMatrix_</a>;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"></span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">         * @brief The view matrix of this camera.</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Camera.html#a5c915d9ba00c11dcef1885f02e32945c">   36</a></span>        <span class="keyword">mutable</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> <a class="code hl_variable" href="classhelios_1_1scene_1_1Camera.html#a5c915d9ba00c11dcef1885f02e32945c">viewMatrix_</a>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"></span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">         * @brief The projection matrix of this Camera.</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Camera.html#a73a85eb4966fb4524dc6b87736500f62">   41</a></span>        <span class="keyword">mutable</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> <a class="code hl_variable" href="classhelios_1_1scene_1_1Camera.html#a73a85eb4966fb4524dc6b87736500f62">projectionMatrix_</a>;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"></span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">         * @brief The view matrix of this Camera.</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Camera.html#a5c915d9ba00c11dcef1885f02e32945c">   46</a></span>        <span class="keyword">mutable</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> <a class="code hl_variable" href="classhelios_1_1scene_1_1Camera.html#a5c915d9ba00c11dcef1885f02e32945c">viewMatrix_</a>;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keyword">public</span>:<span class="comment"></span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">         * @brief Constructor for this class.</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">         * Initializes projectionMatrix and viewMatrix with the identity matrix.</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Camera.html#adb65c6af2c10921ccd7a5088a48adcf8">   53</a></span>        <a class="code hl_function" href="classhelios_1_1scene_1_1Camera.html#adb65c6af2c10921ccd7a5088a48adcf8">Camera</a>();</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment"></span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">         * @brief This method will do nothing but return `nullptr`, indicating that a `Camera`</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">         * must not have child nodes.</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">         * @param sceneNode The attempted child node to add (ignored).</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">         * @return This implementation returns `nullptr`.</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">         * @see https://stackoverflow.com/questions/24609872/delete-virtual-function-from-a-derived-class</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Camera.html#a08c74a826af54a6de82dd64516df4017">   64</a></span>        [[nodiscard]] <a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#a30ad1d7f49d6114a261cbac2706546ab">SceneNode</a>* <a class="code hl_function" href="classhelios_1_1scene_1_1Camera.html#a08c74a826af54a6de82dd64516df4017">addChild</a>(std::unique_ptr&lt;SceneNode&gt; sceneNode) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment"></span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">         * @brief Returns a constant ref to this camera&#39;s current projection matrix.</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">         * Typically set to the perspective / orthographic projection.</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">         * @return A const ref to this `Camera`&#39;s projection matrix.</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Camera.html#a1dc42ba642ae41f7028a4cb927a6feb0">   72</a></span>        [[nodiscard]] <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a>&amp; <a class="code hl_function" href="classhelios_1_1scene_1_1Camera.html#a1dc42ba642ae41f7028a4cb927a6feb0">projectionMatrix</a>() const noexcept;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment"></span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">         * @brief Returns a constant ref to this camera&#39;s view matrix.</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">         * Automatically computed as the inverse of the camera&#39;s world</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">         * transform.</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">         * @return A const ref to this `Camera`&#39;s view matrix.</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Camera.html#a920bac1e84b874d725027e37d091cb34">   81</a></span>        [[nodiscard]] const <a class="code hl_namespace" href="namespacehelios.html">helios</a>::<a class="code hl_namespace" href="namespacehelios_1_1math.html">math</a>::mat4f&amp; <a class="code hl_function" href="classhelios_1_1scene_1_1Camera.html#a920bac1e84b874d725027e37d091cb34">viewMatrix</a>() const noexcept;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    };</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">         * @brief The aspect ratio of the camera (width/height).</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">         * Defaults to 1.0.</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Camera.html#a95f643525bd276faa7edcd1401f47850">   43</a></span>        <span class="keywordtype">float</span> <a class="code hl_variable" href="classhelios_1_1scene_1_1Camera.html#a95f643525bd276faa7edcd1401f47850">aspectRatio_</a> = 1.0f;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">         * @brief Constructs a camera with identity projection and view matrices.</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Camera.html#a6d1911bccc03c847625153d58cc49e99">   49</a></span>        <a class="code hl_function" href="classhelios_1_1scene_1_1Camera.html#a6d1911bccc03c847625153d58cc49e99">Camera</a>() noexcept;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment"></span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">         * @brief Gets the current projection matrix.</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">         * Typically set to a perspective or orthographic projection.</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">         * @return A const reference to this camera&#39;s projection matrix.</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Camera.html#a1dc42ba642ae41f7028a4cb927a6feb0">   58</a></span>        [[nodiscard]] const <a class="code hl_namespace" href="namespacehelios.html">helios</a>::<a class="code hl_namespace" href="namespacehelios_1_1math.html">math</a>::mat4f&amp; <a class="code hl_function" href="classhelios_1_1scene_1_1Camera.html#a1dc42ba642ae41f7028a4cb927a6feb0">projectionMatrix</a>() const noexcept;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment"></span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">         * @brief Gets the current view matrix.</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">         * The view matrix represents the inverse of the camera&#39;s world transform.</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">         * @return A const reference to this camera&#39;s view matrix.</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Camera.html#a920bac1e84b874d725027e37d091cb34">   67</a></span>        [[nodiscard]] const <a class="code hl_namespace" href="namespacehelios.html">helios</a>::<a class="code hl_namespace" href="namespacehelios_1_1math.html">math</a>::mat4f&amp; <a class="code hl_function" href="classhelios_1_1scene_1_1Camera.html#a920bac1e84b874d725027e37d091cb34">viewMatrix</a>() const noexcept;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment"></span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">         * @brief Sets the aspect ratio used by the camera.</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">         * @param aspectRatio The new aspect ratio (width/height).</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Camera.html#a741e4e8c08e4cb107ba3e83e8e9b64f5">   74</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1scene_1_1Camera.html#a741e4e8c08e4cb107ba3e83e8e9b64f5">setAspectRatio</a>(<span class="keywordtype">float</span> aspectRatio) noexcept;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    };</div>
 </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>}</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>}</div>
 </div>
-<div class="ttc" id="aclasshelios_1_1scene_1_1Camera_html_a08c74a826af54a6de82dd64516df4017"><div class="ttname"><a href="classhelios_1_1scene_1_1Camera.html#a08c74a826af54a6de82dd64516df4017">helios::scene::Camera::addChild</a></div><div class="ttdeci">SceneNode * addChild(std::unique_ptr&lt; SceneNode &gt; sceneNode) override</div><div class="ttdoc">This method will do nothing but return `nullptr`, indicating that a `Camera` must not have child node...</div></div>
-<div class="ttc" id="aclasshelios_1_1scene_1_1Camera_html_a1dc42ba642ae41f7028a4cb927a6feb0"><div class="ttname"><a href="classhelios_1_1scene_1_1Camera.html#a1dc42ba642ae41f7028a4cb927a6feb0">helios::scene::Camera::projectionMatrix</a></div><div class="ttdeci">const helios::math::mat4f &amp; projectionMatrix() const noexcept</div><div class="ttdoc">Returns a constant ref to this camera&#39;s current projection matrix. Typically set to the perspective /...</div></div>
-<div class="ttc" id="aclasshelios_1_1scene_1_1Camera_html_a5c915d9ba00c11dcef1885f02e32945c"><div class="ttname"><a href="classhelios_1_1scene_1_1Camera.html#a5c915d9ba00c11dcef1885f02e32945c">helios::scene::Camera::viewMatrix_</a></div><div class="ttdeci">helios::math::mat4f viewMatrix_</div><div class="ttdoc">The view matrix of this Camera.</div><div class="ttdef"><b>Definition</b> <a href="#l00046">Camera.ixx:46</a></div></div>
-<div class="ttc" id="aclasshelios_1_1scene_1_1Camera_html_a73a85eb4966fb4524dc6b87736500f62"><div class="ttname"><a href="classhelios_1_1scene_1_1Camera.html#a73a85eb4966fb4524dc6b87736500f62">helios::scene::Camera::projectionMatrix_</a></div><div class="ttdeci">helios::math::mat4f projectionMatrix_</div><div class="ttdoc">The projection matrix of this Camera.</div><div class="ttdef"><b>Definition</b> <a href="#l00041">Camera.ixx:41</a></div></div>
-<div class="ttc" id="aclasshelios_1_1scene_1_1Camera_html_a920bac1e84b874d725027e37d091cb34"><div class="ttname"><a href="classhelios_1_1scene_1_1Camera.html#a920bac1e84b874d725027e37d091cb34">helios::scene::Camera::viewMatrix</a></div><div class="ttdeci">const helios::math::mat4f &amp; viewMatrix() const noexcept</div><div class="ttdoc">Returns a constant ref to this camera&#39;s view matrix. Automatically computed as the inverse of the cam...</div></div>
-<div class="ttc" id="aclasshelios_1_1scene_1_1Camera_html_adb65c6af2c10921ccd7a5088a48adcf8"><div class="ttname"><a href="classhelios_1_1scene_1_1Camera.html#adb65c6af2c10921ccd7a5088a48adcf8">helios::scene::Camera::Camera</a></div><div class="ttdeci">Camera()</div><div class="ttdoc">Constructor for this class. Initializes projectionMatrix and viewMatrix with the identity matrix.</div></div>
-<div class="ttc" id="aclasshelios_1_1scene_1_1SceneNode_html_a30ad1d7f49d6114a261cbac2706546ab"><div class="ttname"><a href="classhelios_1_1scene_1_1SceneNode.html#a30ad1d7f49d6114a261cbac2706546ab">helios::scene::SceneNode::SceneNode</a></div><div class="ttdeci">SceneNode(const SceneNode &amp;)=delete</div><div class="ttdoc">Delete copy constructor. A SceneNode is not copyable.</div></div>
+<div class="ttc" id="aclasshelios_1_1scene_1_1Camera_html_a1dc42ba642ae41f7028a4cb927a6feb0"><div class="ttname"><a href="classhelios_1_1scene_1_1Camera.html#a1dc42ba642ae41f7028a4cb927a6feb0">helios::scene::Camera::projectionMatrix</a></div><div class="ttdeci">const helios::math::mat4f &amp; projectionMatrix() const noexcept</div><div class="ttdoc">Gets the current projection matrix.</div></div>
+<div class="ttc" id="aclasshelios_1_1scene_1_1Camera_html_a5c915d9ba00c11dcef1885f02e32945c"><div class="ttname"><a href="classhelios_1_1scene_1_1Camera.html#a5c915d9ba00c11dcef1885f02e32945c">helios::scene::Camera::viewMatrix_</a></div><div class="ttdeci">helios::math::mat4f viewMatrix_</div><div class="ttdoc">The view matrix of this camera.</div><div class="ttdef"><b>Definition</b> <a href="#l00036">Camera.ixx:36</a></div></div>
+<div class="ttc" id="aclasshelios_1_1scene_1_1Camera_html_a6d1911bccc03c847625153d58cc49e99"><div class="ttname"><a href="classhelios_1_1scene_1_1Camera.html#a6d1911bccc03c847625153d58cc49e99">helios::scene::Camera::Camera</a></div><div class="ttdeci">Camera() noexcept</div><div class="ttdoc">Constructs a camera with identity projection and view matrices.</div></div>
+<div class="ttc" id="aclasshelios_1_1scene_1_1Camera_html_a73a85eb4966fb4524dc6b87736500f62"><div class="ttname"><a href="classhelios_1_1scene_1_1Camera.html#a73a85eb4966fb4524dc6b87736500f62">helios::scene::Camera::projectionMatrix_</a></div><div class="ttdeci">helios::math::mat4f projectionMatrix_</div><div class="ttdoc">The projection matrix of this camera.</div><div class="ttdef"><b>Definition</b> <a href="#l00031">Camera.ixx:31</a></div></div>
+<div class="ttc" id="aclasshelios_1_1scene_1_1Camera_html_a741e4e8c08e4cb107ba3e83e8e9b64f5"><div class="ttname"><a href="classhelios_1_1scene_1_1Camera.html#a741e4e8c08e4cb107ba3e83e8e9b64f5">helios::scene::Camera::setAspectRatio</a></div><div class="ttdeci">void setAspectRatio(float aspectRatio) noexcept</div><div class="ttdoc">Sets the aspect ratio used by the camera.</div></div>
+<div class="ttc" id="aclasshelios_1_1scene_1_1Camera_html_a920bac1e84b874d725027e37d091cb34"><div class="ttname"><a href="classhelios_1_1scene_1_1Camera.html#a920bac1e84b874d725027e37d091cb34">helios::scene::Camera::viewMatrix</a></div><div class="ttdeci">const helios::math::mat4f &amp; viewMatrix() const noexcept</div><div class="ttdoc">Gets the current view matrix.</div></div>
+<div class="ttc" id="aclasshelios_1_1scene_1_1Camera_html_a95f643525bd276faa7edcd1401f47850"><div class="ttname"><a href="classhelios_1_1scene_1_1Camera.html#a95f643525bd276faa7edcd1401f47850">helios::scene::Camera::aspectRatio_</a></div><div class="ttdeci">float aspectRatio_</div><div class="ttdoc">The aspect ratio of the camera (width/height).</div><div class="ttdef"><b>Definition</b> <a href="#l00043">Camera.ixx:43</a></div></div>
 <div class="ttc" id="amodule__helios_8math_8types_html"><div class="ttname"><a href="module__helios_8math_8types.html">helios.math.types</a></div><div class="ttdoc">Vector and matrix type definitions.</div></div>
 <div class="ttc" id="amodule__helios_8scene_8Camera_html"><div class="ttname"><a href="module__helios_8scene_8Camera.html">helios.scene.Camera</a></div></div>
 <div class="ttc" id="amodule__helios_8scene_8SceneNode_html"><div class="ttname"><a href="module__helios_8scene_8SceneNode.html">helios.scene.SceneNode</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1math_html"><div class="ttname"><a href="namespacehelios_1_1math.html">helios::math</a></div><div class="ttdoc">Mathematical operations and types.</div><div class="ttdef"><b>Definition</b> <a href="Numeric_8ixx_source.html#l00007">Numeric.ixx:7</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1math_html_ad422120d6e1f106140808f16e348f0b3"><div class="ttname"><a href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a></div><div class="ttdeci">mat4&lt; float &gt; mat4f</div><div class="ttdef"><b>Definition</b> <a href="mat4_8ixx_source.html#l00252">mat4.ixx:252</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1scene_html"><div class="ttname"><a href="namespacehelios_1_1scene.html">helios::scene</a></div><div class="ttdoc">Scene graph and camera management.</div><div class="ttdef"><b>Definition</b> <a href="#l00014">Camera.ixx:14</a></div></div>
-<div class="ttc" id="anamespacehelios_html"><div class="ttname"><a href="namespacehelios.html">helios</a></div><div class="ttdef"><b>Definition</b> <a href="GLFWApplication_8ixx_source.html#l00024">GLFWApplication.ixx:24</a></div></div>
+<div class="ttc" id="anamespacehelios_html"><div class="ttname"><a href="namespacehelios.html">helios</a></div><div class="ttdef"><b>Definition</b> <a href="GLFWApplication_8ixx_source.html#l00025">GLFWApplication.ixx:25</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

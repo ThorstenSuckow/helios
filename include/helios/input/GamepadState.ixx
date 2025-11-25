@@ -55,9 +55,9 @@ export namespace helios::input {
 
     private:
         /**
-         * @brief The const reference to the logger used with this Adapter.
+         * @brief Shared logger instance for all GamepadState objects.
          */
-        const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().registerLogger(HELIOS_LOG_SCOPE);
+        inline static const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(HELIOS_LOG_SCOPE);
 
 
         /**

@@ -34,6 +34,7 @@ import helios.rendering.model.config.PrimitiveType;
 import helios.rendering.RenderPassFactory;
 import helios.rendering.RenderPrototype;
 import helios.rendering.Renderable;
+import helios.rendering.Viewport;
 import helios.ext.opengl.rendering.OpenGLDevice;
 
 // model data
@@ -47,7 +48,9 @@ import helios.scene.Scene;
 import helios.scene.SceneNode;
 import helios.scene.CullNoneStrategy;
 import helios.scene.Camera;
+import helios.scene.CameraSceneNode;
 
+using namespace helios::scene;
 using namespace helios::input;
 using namespace helios::input::types;
 using namespace helios::ext::glfw::app;
@@ -84,9 +87,8 @@ int main() {
     );
 
     auto win = dynamic_cast<GLFWWindow*>(app->current());
-
-
-
+    auto mainViewport = win->addViewport(std::make_shared<helios::rendering::Viewport>());
+    mainViewport->setCamera(std::make_shared<Camera>());
     // helper
     auto stringFileReader = helios::util::io::BasicStringFileReader();
 
@@ -197,7 +199,7 @@ int main() {
     auto scene = helios::scene::Scene(std::move(cullingStrategy));
 
     // camera
-    const auto camera_ptr = scene.addNode(std::make_unique<helios::scene::Camera>());
+    const auto camera_ptr = scene.addNode(std::make_unique<helios::scene::CameraSceneNode>(mainViewport->camera()));
     assert(camera_ptr != nullptr && "unexpected nullptr for circleNode");
 
     // scene nodes
@@ -347,9 +349,11 @@ int main() {
         updateDpad(*dpadLft_ptr, gamepadState.buttonDpadLeft());
 
 
-        auto snapshot = scene.createSnapshot(dynamic_cast<helios::scene::Camera&>(*camera_ptr));
-        auto renderPass = helios::rendering::RenderPassFactory::getInstance().buildRenderPass(snapshot);
-        app->renderingDevice().render(renderPass);
+        auto snapshot = scene.createSnapshot(mainViewport);
+        if (snapshot.has_value()) {
+            auto renderPass = helios::rendering::RenderPassFactory::getInstance().buildRenderPass(*snapshot);
+            app->renderingDevice().render(renderPass);
+        }
 
         win->swapBuffers();
     }

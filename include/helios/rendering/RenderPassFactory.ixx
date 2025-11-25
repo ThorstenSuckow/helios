@@ -36,12 +36,9 @@ export namespace helios::rendering {
 
     protected:
         /**
-         * @brief The logger used with this RenderPassFactory.
-         * Defaults to HELIOS_LOG_SCOPE
-         *
-         * @todo constructor injection
+         * @brief Shared logger instance for all RenderPassFactory objects.
          */
-        const helios::util::log::Logger& logger_ = helios::util::log::LogManager::getInstance().registerLogger(
+        inline static const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(
             HELIOS_LOG_SCOPE
         );
 

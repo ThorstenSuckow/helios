@@ -17,9 +17,11 @@ namespace helios::ext::glfw::window {
         destroy();
     }
 
-
-    GLFWWindow::GLFWWindow(const GLFWWindowConfig& cfg) :
-        Window(cfg),
+    GLFWWindow::GLFWWindow(
+        std::unique_ptr<helios::rendering::RenderTarget> renderTarget,
+        const GLFWWindowConfig& cfg
+    ) :
+        Window(std::move(renderTarget), cfg),
         frameBufferSizeCallback_(cfg.frameBufferSizeCallback) {
     };
 

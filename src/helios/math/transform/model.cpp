@@ -25,7 +25,7 @@ namespace helios::math::transform {
 
         return mat4f{
             cos_theta + x * x * t,
-            x * y *t + z * sin_theta,
+            x * y * t + z * sin_theta,
             x * z * t - y * sin_theta,
             0,
 
@@ -50,6 +50,7 @@ namespace helios::math {
 
 
     mat4f rotate(const mat4f& model, const float radians, const vec3f& axis) noexcept {
+
 
         return model * transform::make_rodrigues_rotation_matrix(
             std::cos(radians),

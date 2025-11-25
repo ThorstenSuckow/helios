@@ -19,12 +19,13 @@ import helios.rendering.Renderable;
 import helios.rendering.RenderQueue;
 import helios.rendering.RenderPrototype;
 import helios.rendering.RenderPassFactory;
+import helios.rendering.Viewport;
+import helios.rendering.ClearFlags;
 import helios.rendering.model.Material;
 import helios.rendering.model.config.MeshConfig;
 import helios.rendering.model.config.MaterialProperties;
 import helios.rendering.model.config.PrimitiveType;
-import helios.rendering.asset.shape.basic.Cube;
-import helios.rendering.Viewport;
+import helios.rendering.asset.shape.basic.Triangle;
 
 // File I/O
 import helios.util.io.BasicStringFileReader;
@@ -34,6 +35,7 @@ import helios.ext.opengl.rendering.shader.OpenGLShader;
 import helios.ext.opengl.rendering.model.OpenGLMesh;
 import helios.ext.opengl.rendering.shader.OpenGLUniformLocationMap;
 import helios.rendering.shader.UniformSemantics;
+import helios.ext.opengl.rendering.OpenGLDevice;
 
 // Scene Management
 import helios.scene.Scene;
@@ -41,6 +43,7 @@ import helios.scene.SceneNode;
 import helios.scene.CullNoneStrategy;
 import helios.scene.Camera;
 import helios.scene.CameraSceneNode;
+
 
 using namespace helios::ext::glfw::app;
 using namespace helios::rendering;
@@ -63,20 +66,25 @@ int main() {
     // ========================================
     // 1. Application and Window Setup
     // ========================================
+
     const auto app = GLFWFactory::makeOpenGLApp(
-        "helios - Simple Cube Renderer"
+        "helios - Spaceship Control"
     );
 
     auto win = dynamic_cast<GLFWWindow*>(app->current());
-    auto mainViewport = std::make_shared<Viewport>();
-    win->addViewport(mainViewport);
+    auto mainViewport = std::make_shared<Viewport>(0.0f, 0.0f, 1.0f, 1.0f);
 
-    mainViewport->setCamera(std::make_shared<Camera>());
+    auto mainViewportCam = std::make_shared<helios::scene::Camera>();
+    mainViewport->setCamera(mainViewportCam)
+                .setClearFlags(std::to_underlying(ClearFlags::Color))
+                .setClearColor(vec4f(0.051f, 0.051f, 0.153f, 1.0f));
+    win->renderTarget().addViewport(mainViewport);
 
     // Get the InputManager for handling keyboard input
     helios::input::InputManager& inputManager = app->inputManager();
 
     const auto basicStringFileReader = BasicStringFileReader();
+
 
     // ========================================
     // 2. Shader Creation
@@ -87,32 +95,31 @@ int main() {
         basicStringFileReader
     );
 
+
     // Map the WorldMatrix uniform to location 1 in the shader
     auto uniformLocationMap = std::make_unique<OpenGLUniformLocationMap>();
     [[maybe_unused]] bool mappingSuccess = uniformLocationMap->set(UniformSemantics::WorldMatrix, 1);
     shader_ptr->setUniformLocationMap(std::move(uniformLocationMap));
 
     // ========================================
-    // 3. Material Creation
+    // 3. Spaceship Creation
     // ========================================
-    // Material properties are not considered in this demo, since we do not use
-    // an OpenGLUniformLocationMap
-    auto cubeMaterialProps = MaterialProperties();
-    auto cubeMaterialProps_shared = std::make_shared<MaterialProperties>(cubeMaterialProps);
+    auto spaceshipMaterialProps = MaterialProperties();
+    auto spaceshipMaterialProps_shared = std::make_shared<MaterialProperties>(spaceshipMaterialProps);
     auto material_ptr = std::make_shared<Material>(
-        shader_ptr, cubeMaterialProps_shared
+        shader_ptr, spaceshipMaterialProps_shared
     );
 
     // ========================================
     // 4. Mesh (Geometry) Creation
     // ========================================
-    auto cube = Cube{};
+    auto spaceship = Triangle{};
 
     // Configure the mesh to render as a line loop (wireframe)
     auto meshConfig = std::make_shared<const MeshConfig>(
         PrimitiveType::LineLoop
     );
-    auto mesh_ptr = std::make_shared<OpenGLMesh>(cube, meshConfig);
+    auto mesh_ptr = std::make_shared<OpenGLMesh>(spaceship, meshConfig);
 
     // ========================================
     // 5. Renderable and RenderPrototype
@@ -120,7 +127,7 @@ int main() {
     const auto renderPrototype = std::make_shared<RenderPrototype>(
         material_ptr, mesh_ptr
     );
-    auto cubeRenderable = std::make_shared<Renderable>(renderPrototype);
+    auto spaceshipRenderable = std::make_shared<Renderable>(renderPrototype);
 
     // ========================================
     // 6. Scene Graph Setup
@@ -128,18 +135,17 @@ int main() {
     auto frustumCullingStrategy = std::make_unique<CullNoneStrategy>();
     auto scene = std::make_unique<helios::scene::Scene>(std::move(frustumCullingStrategy));
 
-    // Add the cube as a scene node
-    auto cubeSceneNode = std::make_unique<helios::scene::SceneNode>(std::move(cubeRenderable));
-    auto* cubeNode = scene->addNode(std::move(cubeSceneNode));
+    // Add the spaceship as a scene node
+    auto* spaceshipSceneNode = scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(spaceshipRenderable)));
 
-    // Scale the cube to half its original size
-    cubeNode->scale(vec3f(0.5f, 0.5f, 0.5f));
+    // Scale the spacehip to half its original size
+    spaceshipSceneNode->scale(vec3f(0.25f, 0.25f, 0.25f));
 
     // ========================================
-    // 7. Camera Setup
+    // 7. Register mainViewport-Camera w/ Setup
     // ========================================
-    auto cameraSceneNode = std::make_unique<helios::scene::CameraSceneNode>(mainViewport->camera());
-    std::ignore = scene->addNode(std::move(cameraSceneNode));
+    std::ignore = scene->addNode(std::make_unique<CameraSceneNode>(mainViewportCam));
+
 
     // ========================================
     // 8. Main Render Loop
@@ -147,6 +153,7 @@ int main() {
     float degrees = 0.0f;
     float rad = 0.0f;
     constexpr float rotationSpeed = 2.25f; // Degrees per frame
+
 
     while (!win->shouldClose()) {
         // Process window and input events
@@ -166,15 +173,15 @@ int main() {
         }
         rad = helios::math::radians(degrees);
 
-        // Rotate the cube around an arbitrary axis
-        cubeNode->rotate(helios::math::rotate(
+        // Rotate the spacehip around an arbitrary axis
+        spaceshipSceneNode->rotate(helios::math::rotate(
             helios::math::mat4f::identity(),
             rad,
-            helios::math::vec3f(0.4f, 0.6f, 0.2f) // Rotation axis
+            helios::math::vec3f(0.0f, 0.0f, 1.0f) // Rotation axis
         ));
 
         // Create a snapshot of the scene and render it
-        const auto snapshot = scene->createSnapshot(mainViewport);
+        const auto& snapshot = scene->createSnapshot(mainViewport);
         if (snapshot.has_value()) {
             auto renderPass = RenderPassFactory::getInstance().buildRenderPass(*snapshot);
             app->renderingDevice().render(renderPass);

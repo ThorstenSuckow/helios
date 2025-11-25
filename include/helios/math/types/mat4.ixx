@@ -173,7 +173,7 @@ export namespace helios::math {
          *
          * @param rgt The right matrix to compare for equal values
          *
-         * @return Trie if all elements are equal (==), false otherwise.
+         * @return True if all elements are equal (==), false otherwise.
          */
         constexpr bool operator==(const mat4<T>& rgt) const {
 
@@ -253,4 +253,4 @@ export namespace helios::math {
     using mat4d = mat4<double>;
     using mat4i = mat4<int>;
 
-}
+} // namespace helios::math

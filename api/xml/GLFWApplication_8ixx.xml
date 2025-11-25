@@ -4,12 +4,13 @@
     <compoundname>GLFWApplication.ixx</compoundname>
     <includes local="no">memory</includes>
     <includes local="no">vector</includes>
+    <includes refid="GLFWRAIIGuard_8ixx" local="no">helios.ext.glfw.app.GLFWRAIIGuard</includes>
     <includes refid="GLFWWindowConfig_8ixx" local="no">helios.ext.glfw.window.GLFWWindowConfig</includes>
     <includes refid="EventManager_8ixx" local="no">helios.event.EventManager</includes>
     <includes refid="RenderingDevice_8ixx" local="no">helios.rendering.RenderingDevice</includes>
     <includes refid="InputManager_8ixx" local="no">helios.input.InputManager</includes>
-    <includes refid="GLFWRAIIGuard_8ixx" local="no">helios.ext.glfw.app.GLFWRAIIGuard</includes>
     <includes refid="WindowConfig_8ixx" local="no">helios.window.WindowConfig</includes>
+    <includes refid="RenderTarget_8ixx" local="no">helios.rendering.RenderTarget</includes>
     <includes refid="Window_8ixx" local="no">helios.window.Window</includes>
     <includes refid="GLFWWindow_8ixx" local="no">helios.ext.glfw.window.GLFWWindow</includes>
     <includes refid="Application_8ixx" local="no">helios.app.Application</includes>
@@ -23,515 +24,610 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="19" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="46" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="54" relation="include">
         </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="47" relation="include">
-        </childnode>
-        <childnode refid="55" relation="include">
-        </childnode>
-        <childnode refid="57" relation="include">
-        </childnode>
-      </node>
-      <node id="54">
-        <label>helios.ext.glfw.app.GLFWRAIIGuard</label>
-        <link refid="GLFWRAIIGuard_8ixx"/>
-      </node>
-      <node id="55">
-        <label>helios.ext.glfw.window.GLFWWindow</label>
-        <link refid="GLFWWindow_8ixx"/>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
         <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="56" relation="include">
         </childnode>
-        <childnode refid="47" relation="include">
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
         </childnode>
       </node>
       <node id="4">
-        <label>helios.ext.glfw.window.GLFWWindowConfig</label>
-        <link refid="GLFWWindowConfig_8ixx"/>
-        <childnode refid="5" relation="include">
+        <label>helios.ext.glfw.app.GLFWRAIIGuard</label>
+        <link refid="GLFWRAIIGuard_8ixx"/>
+      </node>
+      <node id="63">
+        <label>helios.ext.glfw.window.GLFWWindow</label>
+        <link refid="GLFWWindow_8ixx"/>
+        <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
       </node>
-      <node id="56">
+      <node id="5">
+        <label>helios.ext.glfw.window.GLFWWindowConfig</label>
+        <link refid="GLFWWindowConfig_8ixx"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="64">
         <label>helios.ext.glfw.window.GLFWWindowUserPointer</label>
         <link refid="GLFWWindowUserPointer_8ixx"/>
-        <childnode refid="47" relation="include">
+        <childnode refid="55" relation="include">
         </childnode>
-        <childnode refid="57" relation="include">
+        <childnode refid="65" relation="include">
         </childnode>
       </node>
-      <node id="57">
+      <node id="65">
         <label>helios.app.Application</label>
         <link refid="Application_8ixx"/>
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="58" relation="include">
+        <childnode refid="66" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
-        <childnode refid="6" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="47" relation="include">
+        <childnode refid="55" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="46" relation="include">
+        <childnode refid="54" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
+        <childnode refid="56" relation="include">
         </childnode>
-        <childnode refid="19" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
-        <childnode refid="59" relation="include">
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
         </childnode>
       </node>
-      <node id="59">
+      <node id="67">
         <label>helios.app.controller.Controller</label>
         <link refid="Controller_8ixx"/>
-        <childnode refid="12" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
       </node>
-      <node id="12">
+      <node id="13">
         <label>helios.event.Dispatcher</label>
         <link refid="Dispatcher_8ixx"/>
-        <childnode refid="10" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
         <childnode refid="14" relation="include">
         </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
       </node>
-      <node id="14">
+      <node id="15">
         <label>helios.event.Event</label>
         <link refid="Event_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>helios.event.EventManager</label>
+        <link refid="EventManager_8ixx"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>helios.event.EventQueue</label>
+        <link refid="EventQueue_8ixx"/>
+        <childnode refid="11" relation="include">
+        </childnode>
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
       </node>
-      <node id="9">
-        <label>helios.event.EventManager</label>
-        <link refid="EventManager_8ixx"/>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-      </node>
-      <node id="18">
-        <label>helios.event.EventQueue</label>
-        <link refid="EventQueue_8ixx"/>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-      </node>
-      <node id="50">
+      <node id="59">
         <label>helios.input.GamepadState</label>
         <link refid="GamepadState_8ixx"/>
-        <childnode refid="51" relation="include">
+        <childnode refid="60" relation="include">
         </childnode>
-        <childnode refid="52" relation="include">
+        <childnode refid="61" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="49">
+      <node id="58">
         <label>helios.input.InputAdapter</label>
         <link refid="InputAdapter_8ixx"/>
-        <childnode refid="22" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
-        <childnode refid="47" relation="include">
+        <childnode refid="55" relation="include">
         </childnode>
-        <childnode refid="50" relation="include">
+        <childnode refid="59" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
-        <childnode refid="48" relation="include">
+        <childnode refid="57" relation="include">
         </childnode>
-        <childnode refid="53" relation="include">
+        <childnode refid="62" relation="include">
         </childnode>
       </node>
-      <node id="46">
+      <node id="54">
         <label>helios.input.InputManager</label>
         <link refid="InputManager_8ixx"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="34" relation="include">
+        <childnode refid="35" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
-        <childnode refid="47" relation="include">
+        <childnode refid="55" relation="include">
         </childnode>
-        <childnode refid="48" relation="include">
+        <childnode refid="57" relation="include">
         </childnode>
-        <childnode refid="49" relation="include">
+        <childnode refid="58" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
-        <childnode refid="50" relation="include">
+        <childnode refid="59" relation="include">
         </childnode>
-        <childnode refid="53" relation="include">
+        <childnode refid="62" relation="include">
         </childnode>
       </node>
-      <node id="53">
+      <node id="62">
         <label>helios.input.types.Gamepad</label>
         <link refid="Gamepad_8ixx"/>
       </node>
-      <node id="48">
+      <node id="57">
         <label>helios.input.types.Key</label>
         <link refid="Key_8ixx"/>
       </node>
-      <node id="8">
-        <label>helios.math.types</label>
-        <link refid="math_2types_2__module_8ixx"/>
-        <childnode refid="8" relation="include">
+      <node id="52">
+        <label>helios.math.transform</label>
+        <link refid="math_2transform_2__module_8ixx"/>
+        <childnode refid="52" relation="include">
         </childnode>
       </node>
-      <node id="26">
+      <node id="9">
+        <label>helios.math.types</label>
+        <link refid="math_2types_2__module_8ixx"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>helios.rendering.ClearFlags</label>
+        <link refid="ClearFlags_8ixx"/>
+      </node>
+      <node id="27">
         <label>helios.rendering.RenderCommand</label>
         <link refid="RenderCommand_8ixx"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="27" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
-        <childnode refid="32" relation="include">
+        <childnode refid="33" relation="include">
         </childnode>
       </node>
-      <node id="45">
+      <node id="46">
         <label>helios.rendering.RenderPass</label>
         <link refid="RenderPass_8ixx"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="25" relation="include">
-        </childnode>
-        <childnode refid="27" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-      </node>
-      <node id="32">
-        <label>helios.rendering.RenderPrototype</label>
-        <link refid="RenderPrototype_8ixx"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="33" relation="include">
-        </childnode>
-        <childnode refid="39" relation="include">
-        </childnode>
-      </node>
-      <node id="20">
-        <label>helios.rendering.RenderQueue</label>
-        <link refid="RenderQueue_8ixx"/>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
         <childnode refid="26" relation="include">
         </childnode>
-      </node>
-      <node id="43">
-        <label>helios.rendering.Renderable</label>
-        <link refid="Renderable_8ixx"/>
-        <childnode refid="2" relation="include">
+        <childnode refid="47" relation="include">
         </childnode>
-        <childnode refid="29" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
-        <childnode refid="34" relation="include">
-        </childnode>
-        <childnode refid="25" relation="include">
-        </childnode>
-        <childnode refid="27" relation="include">
-        </childnode>
-        <childnode refid="44" relation="include">
-        </childnode>
-        <childnode refid="32" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
       </node>
-      <node id="19">
-        <label>helios.rendering.RenderingDevice</label>
-        <link refid="RenderingDevice_8ixx"/>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="43" relation="include">
-        </childnode>
-        <childnode refid="41" relation="include">
-        </childnode>
-        <childnode refid="45" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-      </node>
-      <node id="37">
-        <label>helios.rendering.Vertex</label>
-        <link refid="Vertex_8ixx"/>
-        <childnode refid="8" relation="include">
-        </childnode>
-      </node>
-      <node id="35">
-        <label>helios.rendering.asset.shape.Shape</label>
-        <link refid="Shape_8ixx"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="36" relation="include">
-        </childnode>
-        <childnode refid="37" relation="include">
-        </childnode>
-      </node>
-      <node id="39">
-        <label>helios.rendering.model.Material</label>
-        <link refid="Material_8ixx"/>
+      <node id="33">
+        <label>helios.rendering.RenderPrototype</label>
+        <link refid="RenderPrototype_8ixx"/>
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
-        <childnode refid="41" relation="include">
+      </node>
+      <node id="21">
+        <label>helios.rendering.RenderQueue</label>
+        <link refid="RenderQueue_8ixx"/>
+        <childnode refid="22" relation="include">
         </childnode>
-        <childnode refid="42" relation="include">
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
         </childnode>
         <childnode refid="27" relation="include">
         </childnode>
       </node>
-      <node id="33">
+      <node id="56">
+        <label>helios.rendering.RenderTarget</label>
+        <link refid="RenderTarget_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>helios.rendering.Renderable</label>
+        <link refid="Renderable_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>helios.rendering.RenderingDevice</label>
+        <link refid="RenderingDevice_8ixx"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>helios.rendering.Vertex</label>
+        <link refid="Vertex_8ixx"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>helios.rendering.Viewport</label>
+        <link refid="Viewport_8ixx"/>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>helios.rendering.asset.shape.Shape</label>
+        <link refid="Shape_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>helios.rendering.model.Material</label>
+        <link refid="Material_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
         <label>helios.rendering.model.Mesh</label>
         <link refid="Mesh_8ixx"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="34" relation="include">
+        <childnode refid="35" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
-        <childnode refid="35" relation="include">
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
         </childnode>
         <childnode refid="38" relation="include">
         </childnode>
-        <childnode refid="37" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
       </node>
       <node id="42">
         <label>helios.rendering.model.config.MaterialProperties</label>
         <link refid="MaterialProperties_8ixx"/>
-        <childnode refid="31" relation="include">
+        <childnode refid="32" relation="include">
         </childnode>
-        <childnode refid="27" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="44">
+      <node id="45">
         <label>helios.rendering.model.config.MaterialPropertiesOverride</label>
         <link refid="MaterialPropertiesOverride_8ixx"/>
-        <childnode refid="29" relation="include">
+        <childnode refid="30" relation="include">
         </childnode>
-        <childnode refid="31" relation="include">
+        <childnode refid="32" relation="include">
         </childnode>
-        <childnode refid="27" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="38">
+      <node id="39">
         <label>helios.rendering.model.config.MeshConfig</label>
         <link refid="MeshConfig_8ixx"/>
-        <childnode refid="36" relation="include">
+        <childnode refid="37" relation="include">
         </childnode>
       </node>
-      <node id="36">
+      <node id="37">
         <label>helios.rendering.model.config.PrimitiveType</label>
         <link refid="PrimitiveType_8ixx"/>
       </node>
-      <node id="40">
+      <node id="43">
         <label>helios.rendering.shader.Shader</label>
         <link refid="Shader_8ixx"/>
-        <childnode refid="27" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
       </node>
-      <node id="31">
+      <node id="32">
         <label>helios.rendering.shader.UniformSemantics</label>
         <link refid="UniformSemantics_8ixx"/>
       </node>
-      <node id="27">
+      <node id="28">
         <label>helios.rendering.shader.UniformValueMap</label>
         <link refid="UniformValueMap_8ixx"/>
-        <childnode refid="28" relation="include">
-        </childnode>
         <childnode refid="29" relation="include">
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
         <childnode refid="31" relation="include">
         </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
       </node>
-      <node id="15">
-        <label>helios.util.Guid</label>
-        <link refid="Guid_8ixx"/>
+      <node id="49">
+        <label>helios.scene.Camera</label>
+        <link refid="Camera_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>helios.scene.SceneNode</label>
+        <link refid="SceneNode_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
         <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
         </childnode>
       </node>
-      <node id="22">
+      <node id="51">
+        <label>helios.scene.Transform</label>
+        <link refid="Transform_8ixx"/>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>helios.util.Guid</label>
+        <link refid="Guid_8ixx"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
         <label>helios.util.log.LogManager</label>
         <link refid="LogManager_8ixx"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="23" relation="include">
-        </childnode>
-        <childnode refid="2" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
         <childnode refid="25" relation="include">
         </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
       </node>
-      <node id="25">
+      <node id="26">
         <label>helios.util.log.Logger</label>
         <link refid="Logger_8ixx"/>
-        <childnode refid="21" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
-        <childnode refid="7" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
       </node>
       <node id="41">
         <label>helios.util.log</label>
         <link refid="util_2log_2__module_8ixx"/>
-        <childnode refid="22" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
       </node>
-      <node id="47">
+      <node id="55">
         <label>helios.window.Window</label>
         <link refid="Window_8ixx"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="6" relation="include">
+        <childnode refid="56" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>helios.window.WindowConfig</label>
+        <link refid="WindowConfig_8ixx"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
         </childnode>
       </node>
       <node id="6">
-        <label>helios.window.WindowConfig</label>
-        <link refid="WindowConfig_8ixx"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-      </node>
-      <node id="5">
         <label>GLFW/glfw3.h</label>
       </node>
-      <node id="51">
+      <node id="60">
         <label>algorithm</label>
       </node>
-      <node id="28">
+      <node id="29">
         <label>array</label>
       </node>
-      <node id="16">
+      <node id="17">
         <label>atomic</label>
       </node>
-      <node id="17">
+      <node id="18">
         <label>cstdint</label>
       </node>
-      <node id="10">
+      <node id="48">
+        <label>format</label>
+      </node>
+      <node id="11">
         <label>functional</label>
       </node>
-      <node id="52">
+      <node id="61">
         <label>helios/helios_config.h</label>
       </node>
-      <node id="21">
+      <node id="22">
         <label>iostream</label>
       </node>
-      <node id="58">
+      <node id="66">
         <label>list</label>
       </node>
       <node id="2">
         <label>memory</label>
       </node>
-      <node id="24">
+      <node id="25">
         <label>mutex</label>
       </node>
-      <node id="29">
+      <node id="30">
         <label>optional</label>
       </node>
-      <node id="34">
+      <node id="35">
         <label>stdexcept</label>
       </node>
-      <node id="7">
+      <node id="8">
         <label>string</label>
       </node>
-      <node id="13">
+      <node id="14">
         <label>typeindex</label>
       </node>
-      <node id="23">
+      <node id="24">
         <label>unordered_map</label>
       </node>
-      <node id="11">
+      <node id="12">
         <label>utility</label>
       </node>
-      <node id="30">
+      <node id="31">
         <label>variant</label>
       </node>
       <node id="3">
@@ -569,98 +665,105 @@
 <codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8event_8EventManager" kindref="compound">helios.event.EventManager</ref>;</highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8ext_8glfw_8window_8GLFWWindow" kindref="compound">helios.ext.glfw.window.GLFWWindow</ref>;</highlight></codeline>
 <codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8ext_8glfw_8window_8GLFWWindowConfig" kindref="compound">helios.ext.glfw.window.GLFWWindowConfig</ref>;</highlight></codeline>
-<codeline lineno="21"><highlight class="normal"></highlight></codeline>
-<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8ext_8glfw_8app_8GLFWRAIIGuard" kindref="compound">helios.ext.glfw.app.GLFWRAIIGuard</ref>;</highlight></codeline>
-<codeline lineno="23"><highlight class="normal"></highlight></codeline>
-<codeline lineno="24" refid="namespacehelios" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1ext_1_1glfw_1_1app" kindref="compound">helios::ext::glfw::app</ref><sp/>{</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>An<sp/>Application<sp/>implementation<sp/>for<sp/>glfw-based<sp/>environments.</highlight></codeline>
-<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>application<sp/>owns<sp/>a<sp/>`GLFWRAIIGuard`.</highlight></codeline>
-<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="31" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1ad50cfc2051b48c6c447df3b53b0734bd" kindref="member">GLFWApplication</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1app_1_1Application" kindref="compound">helios::app::Application</ref><sp/>{</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"></highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>A<sp/>pointer<sp/>to<sp/>the<sp/>currently<sp/>active<sp/>window<sp/>of<sp/>the<sp/>Application,<sp/>or<sp/>`nullptr`</highlight></codeline>
-<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>if<sp/>there<sp/>is<sp/>no<sp/>currently<sp/>active<sp/>window.</highlight></codeline>
-<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1window_1_1Window" kindref="compound">helios::window::Window</ref>*<sp/>current_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>RAII<sp/>Guard<sp/>for<sp/>glfw<sp/>initialization<sp/>and<sp/>termination.</highlight></codeline>
-<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard" kindref="compound">GLFWRAIIGuard</ref><sp/>glfwRaiiGuard_;</highlight></codeline>
-<codeline lineno="44"><highlight class="normal"></highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Constructs<sp/>a<sp/>new<sp/>`GLFWApplication`<sp/>instance.</highlight></codeline>
-<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>renderingDevice</highlight></codeline>
-<codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>inputManager</highlight></codeline>
-<codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>eventManager</highlight></codeline>
-<codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="53" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1ad50cfc2051b48c6c447df3b53b0734bd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1ad50cfc2051b48c6c447df3b53b0734bd" kindref="member">GLFWApplication</ref>(</highlight></codeline>
-<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unique_ptr&lt;helios::rendering::RenderingDevice&gt;<sp/><ref refid="classhelios_1_1app_1_1Application_1a13d126308f1b5b61d9b87fc4dde57530" kindref="member">renderingDevice</ref>,</highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unique_ptr&lt;helios::input::InputManager&gt;<sp/><ref refid="classhelios_1_1app_1_1Application_1a11fe3ec9b45731268a0eff32ced9f06c" kindref="member">inputManager</ref>,</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unique_ptr&lt;helios::event::EventManager&gt;<sp/><ref refid="classhelios_1_1app_1_1Application_1a6ea14c8bd591020cbd5d2baef551a804" kindref="member">eventManager</ref>);</highlight></codeline>
-<codeline lineno="57"><highlight class="normal"></highlight></codeline>
-<codeline lineno="58"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="60"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@copydoc<sp/>helios::app::Application::init()</highlight></codeline>
-<codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="62" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a30d27364d7c703e81f2f963bb2189fd6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a30d27364d7c703e81f2f963bb2189fd6" kindref="member">init</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"></highlight></codeline>
-<codeline lineno="64"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="65"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="66"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Creates<sp/>a<sp/>new<sp/>GLFWWindow<sp/>and<sp/>add<sp/>it<sp/>to<sp/>this<sp/>Application&apos;s<sp/>windows<sp/>collection.</highlight></codeline>
-<codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>Application<sp/>takes<sp/>ownership<sp/>of<sp/>the<sp/>window.</highlight></codeline>
-<codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Delegates<sp/>to<sp/>Window::show()<sp/>for<sp/>showing<sp/>the<sp/>window<sp/>and<sp/>initializes<sp/>the<sp/>associated<sp/>rendering</highlight></codeline>
-<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>device<sp/>if<sp/>necessary,<sp/>e.g.<sp/>for<sp/>glfw<sp/>an<sp/>additional<sp/>`glfwMakeContextCurrent()`<sp/>is<sp/>called</highlight></codeline>
-<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>so<sp/>the<sp/>rendering<sp/>device<sp/>can<sp/>be<sp/>safely<sp/>initialized,<sp/>then<sp/>immediately<sp/>passes<sp/>a</highlight></codeline>
-<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>`nullptr`<sp/>to<sp/>the<sp/>`glfwMakeContextCurrent()`<sp/>to<sp/>force<sp/>calling<sp/>APIs<sp/>to<sp/>explicitly</highlight></codeline>
-<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>call<sp/>setCurrent()<sp/>on<sp/>the<sp/>constructed<sp/>window.</highlight></codeline>
-<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>cfg<sp/>The<sp/>`GLFWWindowConfig`<sp/>used<sp/>for<sp/>initializing<sp/>the<sp/>window.</highlight></codeline>
-<codeline lineno="75"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="76"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>ref<sp/>to<sp/>the<sp/>window<sp/>created.</highlight></codeline>
-<codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="78" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1ad4ee6ee4079da8dc2fbb0a57fa790d82" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow" kindref="compound">helios::ext::glfw::window::GLFWWindow</ref>&amp;<sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1ad4ee6ee4079da8dc2fbb0a57fa790d82" kindref="member">createWindow</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowConfig" kindref="compound">helios::ext::glfw::window::GLFWWindowConfig</ref>&amp;<sp/>cfg);</highlight></codeline>
-<codeline lineno="79"><highlight class="normal"></highlight></codeline>
-<codeline lineno="80"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@copydoc<sp/>helios::app::Application::createWindow()</highlight></codeline>
-<codeline lineno="83"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="84" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a0d2dafccab0d344f8f9b1daf0db8ab04" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow" kindref="compound">helios::ext::glfw::window::GLFWWindow</ref>&amp;<sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a0d2dafccab0d344f8f9b1daf0db8ab04" kindref="member">createWindow</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1window_1_1WindowConfig" kindref="compound">helios::window::WindowConfig</ref>&amp;<sp/>cfg)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"></highlight></codeline>
-<codeline lineno="86"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="87"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="88"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Sets<sp/>the<sp/>current<sp/>Window<sp/>for<sp/>this<sp/>Application.</highlight></codeline>
-<codeline lineno="89"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Makes<sp/>sure<sp/>that<sp/>`glfwContextCurrent`<sp/>is<sp/>called<sp/>for<sp/>setting<sp/>a</highlight></codeline>
-<codeline lineno="90"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>current<sp/>context<sp/>for<sp/>glfw<sp/>and<sp/>subsequent<sp/>glfw-operations.</highlight></codeline>
-<codeline lineno="91"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>It<sp/>also<sp/>re-registers<sp/>`glfwSetFramebufferSizeCallback`<sp/>with<sp/>the</highlight></codeline>
-<codeline lineno="92"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>callback<sp/>function<sp/>of<sp/>the<sp/>Window.</highlight></codeline>
-<codeline lineno="93"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="94"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>win<sp/>A<sp/>ref<sp/>to<sp/>the<sp/>window<sp/>to<sp/>set<sp/>as<sp/>current.</highlight></codeline>
-<codeline lineno="95"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="96"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@throws<sp/>if<sp/>the<sp/>specified<sp/>Window<sp/>is<sp/>not<sp/>a<sp/>GLFWWindow<sp/>or<sp/>if<sp/>the<sp/>window<sp/>is</highlight></codeline>
-<codeline lineno="97"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>not<sp/>owned<sp/>by<sp/>this<sp/>application.</highlight></codeline>
-<codeline lineno="98"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="99"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@todo<sp/>the<sp/>window<sp/>should<sp/>be<sp/>signaled<sp/>that<sp/>it&apos;s<sp/>now<sp/>current<sp/>window,<sp/>for<sp/>setting</highlight></codeline>
-<codeline lineno="100"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>the<sp/>frameBufferSizeCallback<sp/>and<sp/>calling<sp/>glfwMakeContextCurrent.</highlight></codeline>
-<codeline lineno="101"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="102" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1aec402bfa5500772acb4d47752e80fd3e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1aec402bfa5500772acb4d47752e80fd3e" kindref="member">setCurrent</ref>(<ref refid="classhelios_1_1window_1_1Window" kindref="compound">helios::window::Window</ref>&amp;<sp/>win)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="104"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="105"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@copydoc<sp/>helios::app::Application::current()</highlight></codeline>
-<codeline lineno="106"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="107" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a6faec11965b694e027225da937c52364" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classhelios_1_1window_1_1Window" kindref="compound">helios::window::Window</ref>*<sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a6faec11965b694e027225da937c52364" kindref="member">current</ref>()<sp/>const<sp/>noexcept<sp/>override;</highlight></codeline>
-<codeline lineno="108"><highlight class="normal"></highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"></highlight></codeline>
-<codeline lineno="111"><highlight class="normal"></highlight></codeline>
-<codeline lineno="112"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8rendering_8RenderTarget" kindref="compound">helios.rendering.RenderTarget</ref>;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8ext_8glfw_8app_8GLFWRAIIGuard" kindref="compound">helios.ext.glfw.app.GLFWRAIIGuard</ref>;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25" refid="namespacehelios" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1ext_1_1glfw_1_1app" kindref="compound">helios::ext::glfw::app</ref><sp/>{</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>An<sp/>Application<sp/>implementation<sp/>for<sp/>glfw-based<sp/>environments.</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>application<sp/>owns<sp/>a<sp/>`GLFWRAIIGuard`.</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1ad50cfc2051b48c6c447df3b53b0734bd" kindref="member">GLFWApplication</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1app_1_1Application" kindref="compound">helios::app::Application</ref><sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>A<sp/>pointer<sp/>to<sp/>the<sp/>currently<sp/>active<sp/>window<sp/>of<sp/>the<sp/>Application,<sp/>or<sp/>`nullptr`</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>if<sp/>there<sp/>is<sp/>no<sp/>currently<sp/>active<sp/>window.</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1window_1_1Window" kindref="compound">helios::window::Window</ref>*<sp/>current_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>RAII<sp/>Guard<sp/>for<sp/>glfw<sp/>initialization<sp/>and<sp/>termination.</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard" kindref="compound">GLFWRAIIGuard</ref><sp/>glfwRaiiGuard_;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Constructs<sp/>a<sp/>new<sp/>`GLFWApplication`<sp/>instance.</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>renderingDevice<sp/>Unique<sp/>rendering<sp/>device<sp/>owned<sp/>by<sp/>the<sp/>application.</highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>inputManager<sp/>Unique<sp/>input<sp/>manager<sp/>instance.</highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>eventManager<sp/>Unique<sp/>event<sp/>manager<sp/>instance.</highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1ad50cfc2051b48c6c447df3b53b0734bd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1ad50cfc2051b48c6c447df3b53b0734bd" kindref="member">GLFWApplication</ref>(</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unique_ptr&lt;helios::rendering::RenderingDevice&gt;<sp/><ref refid="classhelios_1_1app_1_1Application_1a13d126308f1b5b61d9b87fc4dde57530" kindref="member">renderingDevice</ref>,</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unique_ptr&lt;helios::input::InputManager&gt;<sp/><ref refid="classhelios_1_1app_1_1Application_1a11fe3ec9b45731268a0eff32ced9f06c" kindref="member">inputManager</ref>,</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unique_ptr&lt;helios::event::EventManager&gt;<sp/><ref refid="classhelios_1_1app_1_1Application_1a6ea14c8bd591020cbd5d2baef551a804" kindref="member">eventManager</ref>);</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@copydoc<sp/>helios::app::Application::init()</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a30d27364d7c703e81f2f963bb2189fd6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a30d27364d7c703e81f2f963bb2189fd6" kindref="member">init</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Creates<sp/>a<sp/>new<sp/>GLFWWindow<sp/>and<sp/>add<sp/>it<sp/>to<sp/>this<sp/>Application&apos;s<sp/>windows<sp/>collection.</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>Application<sp/>takes<sp/>ownership<sp/>of<sp/>the<sp/>window.</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Delegates<sp/>to<sp/>Window::show()<sp/>for<sp/>showing<sp/>the<sp/>window<sp/>and<sp/>initializes<sp/>the<sp/>associated<sp/>rendering</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>device<sp/>if<sp/>necessary,<sp/>e.g.<sp/>for<sp/>glfw<sp/>an<sp/>additional<sp/>`glfwMakeContextCurrent()`<sp/>is<sp/>called</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>so<sp/>the<sp/>rendering<sp/>device<sp/>can<sp/>be<sp/>safely<sp/>initialized,<sp/>then<sp/>immediately<sp/>passes<sp/>a</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>`nullptr`<sp/>to<sp/>the<sp/>`glfwMakeContextCurrent()`<sp/>to<sp/>force<sp/>calling<sp/>APIs<sp/>to<sp/>explicitly</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>call<sp/>setCurrent()<sp/>on<sp/>the<sp/>constructed<sp/>window.</highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>render<sp/>target<sp/>size<sp/>is<sp/>synced<sp/>to<sp/>the<sp/>current<sp/>framebuffer<sp/>dimensions<sp/>reported<sp/>by</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>`glfwGetFramebufferSize()`.</highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>Reference<sp/>to<sp/>the<sp/>created<sp/>window<sp/>instance.</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>https://www.glfw.org/docs/latest/group__window.html#ga0e2637a4161afb283f5300c7f94785c9</highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>ref<sp/>to<sp/>the<sp/>window<sp/>created.</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a2c1bfca7c426415f37fcefac7fc68b4d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow" kindref="compound">helios::ext::glfw::window::GLFWWindow</ref>&amp;<sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a2c1bfca7c426415f37fcefac7fc68b4d" kindref="member">createWindow</ref>(</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unique_ptr&lt;helios::rendering::RenderTarget&gt;<sp/>renderTarget,</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowConfig" kindref="compound">helios::ext::glfw::window::GLFWWindowConfig</ref>&amp;<sp/>cfg</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="89"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="90"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@copydoc<sp/>helios::app::Application::createWindow()</highlight></codeline>
+<codeline lineno="91"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="92" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a7f053a4162c99ce3219865cee668cd18" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow" kindref="compound">helios::ext::glfw::window::GLFWWindow</ref>&amp;<sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a7f053a4162c99ce3219865cee668cd18" kindref="member">createWindow</ref>(</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unique_ptr&lt;helios::rendering::RenderTarget&gt;<sp/>renderTarget,</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1window_1_1WindowConfig" kindref="compound">helios::window::WindowConfig</ref>&amp;<sp/>cfg</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Sets<sp/>the<sp/>current<sp/>window<sp/>for<sp/>this<sp/>application.</highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="101"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Ensures<sp/>`glfwMakeContextCurrent()`<sp/>is<sp/>called<sp/>to<sp/>bind<sp/>the<sp/>correct<sp/>context<sp/>for</highlight></codeline>
+<codeline lineno="102"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>subsequent<sp/>glfw<sp/>operations<sp/>and<sp/>re-registers<sp/>the<sp/>framebuffer<sp/>size<sp/>callback<sp/>on</highlight></codeline>
+<codeline lineno="103"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>the<sp/>targeted<sp/>window.</highlight></codeline>
+<codeline lineno="104"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="105"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>win<sp/>Reference<sp/>to<sp/>the<sp/>window<sp/>that<sp/>becomes<sp/>the<sp/>current<sp/>context<sp/>owner.</highlight></codeline>
+<codeline lineno="106"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="107"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@throws<sp/>std::invalid_argument<sp/>If<sp/>`win`<sp/>is<sp/>not<sp/>a<sp/>`GLFWWindow`<sp/>or<sp/>not<sp/>owned<sp/>by<sp/>this<sp/>application.</highlight></codeline>
+<codeline lineno="108"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="109" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1aec402bfa5500772acb4d47752e80fd3e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1aec402bfa5500772acb4d47752e80fd3e" kindref="member">setCurrent</ref>(<ref refid="classhelios_1_1window_1_1Window" kindref="compound">helios::window::Window</ref>&amp;<sp/>win)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="111"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="112"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@copydoc<sp/>helios::app::Application::current()</highlight></codeline>
+<codeline lineno="113"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a6faec11965b694e027225da937c52364" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classhelios_1_1window_1_1Window" kindref="compound">helios::window::Window</ref>*<sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication_1a6faec11965b694e027225da937c52364" kindref="member">current</ref>()<sp/>const<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="include/ext/glfw/app/GLFWApplication.ixx"/>
   </compounddef>

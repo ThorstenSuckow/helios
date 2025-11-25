@@ -126,28 +126,29 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a062e66375a1f27b648d73f5e9c903944" id="r_a062e66375a1f27b648d73f5e9c903944"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a062e66375a1f27b648d73f5e9c903944">~RenderingDevice</a> ()=default</td></tr>
 <tr class="memitem:af3fc1c63595e065986ed44b1754ed49a" id="r_af3fc1c63595e065986ed44b1754ed49a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af3fc1c63595e065986ed44b1754ed49a">init</a> ()=0</td></tr>
-<tr class="memdesc:af3fc1c63595e065986ed44b1754ed49a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes this rendering device. Should be called when the graphics context was created and before any rendering operations are performed. Implementing APIs should load pointers to underlying GL functions or provide similar API-specific setup.  <br /></td></tr>
+<tr class="memdesc:af3fc1c63595e065986ed44b1754ed49a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes this rendering device.  <br /></td></tr>
 <tr class="memitem:a88169f8a968bce5a7d67446c61504d2f" id="r_a88169f8a968bce5a7d67446c61504d2f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a88169f8a968bce5a7d67446c61504d2f">beginRenderPass</a> (<a class="el" href="classhelios_1_1rendering_1_1RenderPass.html">helios::rendering::RenderPass</a> &amp;renderPass) const noexcept=0</td></tr>
-<tr class="memdesc:a88169f8a968bce5a7d67446c61504d2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signals this device that the application is now ready to begin a new render pass. Implementing APIs should prepare the rendering surface at this point and clear specific buffers. This method should be called at the start of each frame before any drawing occurs.  <br /></td></tr>
+<tr class="memdesc:a88169f8a968bce5a7d67446c61504d2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signals this device that the application is now ready to begin a new render pass.  <br /></td></tr>
 <tr class="memitem:a64e0eddc87562bc3e40ecc2cd9439e6b" id="r_a64e0eddc87562bc3e40ecc2cd9439e6b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a64e0eddc87562bc3e40ecc2cd9439e6b">doRender</a> (<a class="el" href="classhelios_1_1rendering_1_1RenderPass.html">helios::rendering::RenderPass</a> &amp;renderPass) const noexcept=0</td></tr>
-<tr class="memdesc:a64e0eddc87562bc3e40ecc2cd9439e6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advises this <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html" title="Abstract interface for a low-level rendering device.">RenderingDevice</a> to process the specified <a class="el" href="classhelios_1_1rendering_1_1RenderPass.html" title="Represents a single RenderPass under a set of specific uniform values.">RenderPass</a>. A `RenderPass` consists of `RenderCommand`s this RenderDevice executes, i.e. binding meshes, materials and shaders as well as drawing geometry.  <br /></td></tr>
+<tr class="memdesc:a64e0eddc87562bc3e40ecc2cd9439e6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advises this <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html" title="Abstract interface for a low-level rendering device.">RenderingDevice</a> to process the specified <a class="el" href="classhelios_1_1rendering_1_1RenderPass.html" title="Represents a single RenderPass under a set of specific uniform values.">RenderPass</a>.  <br /></td></tr>
 <tr class="memitem:a1e3cfb7c060175c9005102a121f4c36d" id="r_a1e3cfb7c060175c9005102a121f4c36d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1e3cfb7c060175c9005102a121f4c36d">endRenderPass</a> (<a class="el" href="classhelios_1_1rendering_1_1RenderPass.html">helios::rendering::RenderPass</a> &amp;renderPass) const noexcept=0</td></tr>
-<tr class="memdesc:a1e3cfb7c060175c9005102a121f4c36d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ends the specified render pass of this <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html" title="Abstract interface for a low-level rendering device.">RenderingDevice</a>. This method should be called when the renderPass was processed by the <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html" title="Abstract interface for a low-level rendering device.">RenderingDevice</a>, before the window swaps the buffers. Implementing classes should take care of unbinding frame buffers and/or flushing command buffers.  <br /></td></tr>
+<tr class="memdesc:a1e3cfb7c060175c9005102a121f4c36d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ends the specified render pass of this <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html" title="Abstract interface for a low-level rendering device.">RenderingDevice</a>.  <br /></td></tr>
 <tr class="memitem:abf7617082018d54e151c9399b57160f4" id="r_abf7617082018d54e151c9399b57160f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abf7617082018d54e151c9399b57160f4">render</a> (<a class="el" href="classhelios_1_1rendering_1_1RenderPass.html">helios::rendering::RenderPass</a> &amp;renderPass) const</td></tr>
-<tr class="memdesc:abf7617082018d54e151c9399b57160f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenient method to subsequently call `beginRenderPass`, `doRender`, `endRenderPass` (in this order) with the specified `RenderPass`.  <br /></td></tr>
-<tr class="memitem:a701d970cf1e0c0c71a24ab1b104a15ea" id="r_a701d970cf1e0c0c71a24ab1b104a15ea"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a701d970cf1e0c0c71a24ab1b104a15ea">setViewport</a> (int x, int y, int width, int height) const noexcept=0</td></tr>
-<tr class="memdesc:a701d970cf1e0c0c71a24ab1b104a15ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the viewport for this <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html" title="Abstract interface for a low-level rendering device.">RenderingDevice</a>. The viewport defines the rectangular area where the final image is drawn.  <br /></td></tr>
+<tr class="memdesc:abf7617082018d54e151c9399b57160f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience method to subsequently call `beginRenderPass`, `doRender`, and `endRenderPass` (in this order) with the specified `RenderPass`.  <br /></td></tr>
 <tr class="memitem:ab900c2b99f512ccdf6c33435db3da8b0" id="r_ab900c2b99f512ccdf6c33435db3da8b0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab900c2b99f512ccdf6c33435db3da8b0">initialized</a> () const noexcept</td></tr>
-<tr class="memdesc:ab900c2b99f512ccdf6c33435db3da8b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the initialized state of this rendering device. This method is guaranteed to return true if the device was successfully initialized, otherwise false.  <br /></td></tr>
+<tr class="memdesc:ab900c2b99f512ccdf6c33435db3da8b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the initialized state of this rendering device.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a4aa0809551525f58d3712a9aeb32dd6e" id="r_a4aa0809551525f58d3712a9aeb32dd6e"><td class="memItemLeft" align="right" valign="top"><a id="a4aa0809551525f58d3712a9aeb32dd6e" name="a4aa0809551525f58d3712a9aeb32dd6e"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>initialized_</b> = false</td></tr>
 <tr class="memdesc:a4aa0809551525f58d3712a9aeb32dd6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reflects the initialization state of this device. <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pro-static-attribs" class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
 <tr class="memitem:a30cb723bfe96390f00716c2c80693248" id="r_a30cb723bfe96390f00716c2c80693248"><td class="memItemLeft" align="right" valign="top"><a id="a30cb723bfe96390f00716c2c80693248" name="a30cb723bfe96390f00716c2c80693248"></a>
-const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::util::log::Logger</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>logger_</b></td></tr>
-<tr class="memdesc:a30cb723bfe96390f00716c2c80693248"><td class="mdescLeft">&#160;</td><td class="mdescRight">The logger used with this <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html" title="Abstract interface for a low-level rendering device.">RenderingDevice</a> instance. Defaults to HELIOS_LOG_SCOPE. <br /></td></tr>
+static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::util::log::Logger</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>logger_</b></td></tr>
+<tr class="memdesc:a30cb723bfe96390f00716c2c80693248"><td class="mdescLeft">&#160;</td><td class="mdescRight">The logger used with this <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html" title="Abstract interface for a low-level rendering device.">RenderingDevice</a> class. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract interface for a low-level rendering device. </p>
@@ -205,7 +206,9 @@ const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::uti
 </table>
 </div><div class="memdoc">
 
-<p>Signals this device that the application is now ready to begin a new render pass. Implementing APIs should prepare the rendering surface at this point and clear specific buffers. This method should be called at the start of each frame before any drawing occurs. </p>
+<p>Signals this device that the application is now ready to begin a new render pass. </p>
+<p>Implementing classes should prepare the rendering surface at this point and clear specific buffers.</p>
+<p>This method should be called at the start of each frame before any drawing occurs.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">renderPass</td><td>The <a class="el" href="classhelios_1_1rendering_1_1RenderPass.html" title="Represents a single RenderPass under a set of specific uniform values.">RenderPass</a> that is about to be processed by the rendering device. </td></tr>
@@ -215,7 +218,7 @@ const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::uti
 
 <p>Implemented in <a class="el" href="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html#a2f589946c2ca4029fc3d3f3ba7820c99">helios::ext::opengl::rendering::OpenGLDevice</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="RenderingDevice_8ixx_source.html#l00100">render()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="RenderingDevice_8ixx_source.html#l00104">render()</a>.</p>
 <div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
@@ -248,17 +251,18 @@ const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::uti
 </table>
 </div><div class="memdoc">
 
-<p>Advises this <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html" title="Abstract interface for a low-level rendering device.">RenderingDevice</a> to process the specified <a class="el" href="classhelios_1_1rendering_1_1RenderPass.html" title="Represents a single RenderPass under a set of specific uniform values.">RenderPass</a>. A `RenderPass` consists of `RenderCommand`s this RenderDevice executes, i.e. binding meshes, materials and shaders as well as drawing geometry. </p>
+<p>Advises this <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html" title="Abstract interface for a low-level rendering device.">RenderingDevice</a> to process the specified <a class="el" href="classhelios_1_1rendering_1_1RenderPass.html" title="Represents a single RenderPass under a set of specific uniform values.">RenderPass</a>. </p>
+<p>A `RenderPass` consists of `RenderCommand`s this RenderDevice executes, i.e. binding meshes, materials and shaders as well as drawing geometry.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">renderPass</td><td>A ref to the <a class="el" href="classhelios_1_1rendering_1_1RenderPass.html" title="Represents a single RenderPass under a set of specific uniform values.">RenderPass</a> that holds the `RenderCommand`s to be executed. </td></tr>
+    <tr><td class="paramname">renderPass</td><td>A reference to the <a class="el" href="classhelios_1_1rendering_1_1RenderPass.html" title="Represents a single RenderPass under a set of specific uniform values.">RenderPass</a> that holds the `RenderCommand`s to be executed. </td></tr>
   </table>
   </dd>
 </dl>
 
 <p>Implemented in <a class="el" href="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html#a205e92c86ad75f4a23903f80e092a9f0">helios::ext::opengl::rendering::OpenGLDevice</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="RenderingDevice_8ixx_source.html#l00100">render()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="RenderingDevice_8ixx_source.html#l00104">render()</a>.</p>
 <div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
@@ -291,7 +295,9 @@ const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::uti
 </table>
 </div><div class="memdoc">
 
-<p>Ends the specified render pass of this <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html" title="Abstract interface for a low-level rendering device.">RenderingDevice</a>. This method should be called when the renderPass was processed by the <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html" title="Abstract interface for a low-level rendering device.">RenderingDevice</a>, before the window swaps the buffers. Implementing classes should take care of unbinding frame buffers and/or flushing command buffers. </p>
+<p>Ends the specified render pass of this <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html" title="Abstract interface for a low-level rendering device.">RenderingDevice</a>. </p>
+<p>This method should be called when the renderPass was processed by the <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html" title="Abstract interface for a low-level rendering device.">RenderingDevice</a>, before the window swaps the buffers.</p>
+<p>Implementing classes should take care of unbinding frame buffers and/or flushing command buffers.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">renderPass</td><td>The <a class="el" href="classhelios_1_1rendering_1_1RenderPass.html" title="Represents a single RenderPass under a set of specific uniform values.">RenderPass</a> that was processed by the rendering device. </td></tr>
@@ -301,7 +307,7 @@ const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::uti
 
 <p>Implemented in <a class="el" href="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html#aa9b366cbdb4aa227567d8a32f0fdca95">helios::ext::opengl::rendering::OpenGLDevice</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="RenderingDevice_8ixx_source.html#l00100">render()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="RenderingDevice_8ixx_source.html#l00104">render()</a>.</p>
 <div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
@@ -334,7 +340,9 @@ const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::uti
 </table>
 </div><div class="memdoc">
 
-<p>Initializes this rendering device. Should be called when the graphics context was created and before any rendering operations are performed. Implementing APIs should load pointers to underlying GL functions or provide similar API-specific setup. </p>
+<p>Initializes this rendering device. </p>
+<p>Should be called when the graphics context was created and before any rendering operations are performed.</p>
+<p>Implementing classes should load pointers to underlying GL functions or provide similar API-specific setup.</p>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">std::runtime_error</td><td>if initialization of the device fails. </td></tr>
@@ -369,10 +377,11 @@ const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::uti
 </table>
 </div><div class="memdoc">
 
-<p>Returns the initialized state of this rendering device. This method is guaranteed to return true if the device was successfully initialized, otherwise false. </p>
-<dl class="section return"><dt>Returns</dt><dd>true if the device was successfully initialized, otherwise false. </dd></dl>
+<p>Returns the initialized state of this rendering device. </p>
+<p>This method is guaranteed to return `true` if the device was successfully initialized, otherwise `false`.</p>
+<dl class="section return"><dt>Returns</dt><dd>`true` if the device was successfully initialized, `false` otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RenderingDevice_8ixx_source.html#l00125">125</a> of file <a class="el" href="RenderingDevice_8ixx_source.html">RenderingDevice.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RenderingDevice_8ixx_source.html#l00120">120</a> of file <a class="el" href="RenderingDevice_8ixx_source.html">RenderingDevice.ixx</a>.</p>
 
 <p class="reference">References <a class="el" href="RenderingDevice_8ixx_source.html#l00035">initialized_</a>.</p>
 
@@ -401,7 +410,7 @@ const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::uti
 </table>
 </div><div class="memdoc">
 
-<p>Convenient method to subsequently call `beginRenderPass`, `doRender`, `endRenderPass` (in this order) with the specified `RenderPass`. </p>
+<p>Convenience method to subsequently call `beginRenderPass`, `doRender`, and `endRenderPass` (in this order) with the specified `RenderPass`. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">renderPass</td><td>The <a class="el" href="classhelios_1_1rendering_1_1RenderPass.html" title="Represents a single RenderPass under a set of specific uniform values.">RenderPass</a> to process by this <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html" title="Abstract interface for a low-level rendering device.">RenderingDevice</a>. </td></tr>
@@ -409,7 +418,7 @@ const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::uti
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="RenderingDevice_8ixx_source.html#l00100">100</a> of file <a class="el" href="RenderingDevice_8ixx_source.html">RenderingDevice.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RenderingDevice_8ixx_source.html#l00104">104</a> of file <a class="el" href="RenderingDevice_8ixx_source.html">RenderingDevice.ixx</a>.</p>
 
 <p class="reference">References <a class="el" href="#a88169f8a968bce5a7d67446c61504d2f">beginRenderPass()</a>, <a class="el" href="#a64e0eddc87562bc3e40ecc2cd9439e6b">doRender()</a>, and <a class="el" href="#a1e3cfb7c060175c9005102a121f4c36d">endRenderPass()</a>.</p>
 <div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
@@ -418,58 +427,6 @@ const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::uti
 <div id="dynsection-5-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderingDevice_abf7617082018d54e151c9399b57160f4_cgraph.svg" width="494" height="179"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-
-</div>
-</div>
-<a id="a701d970cf1e0c0c71a24ab1b104a15ea" name="a701d970cf1e0c0c71a24ab1b104a15ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a701d970cf1e0c0c71a24ab1b104a15ea">&#9670;&#160;</a></span>setViewport()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void helios::rendering::RenderingDevice::setViewport </td>
-          <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>width</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>height</em></span>&#160;) const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel pure-virtual">pure virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Sets the viewport for this <a class="el" href="classhelios_1_1rendering_1_1RenderingDevice.html" title="Abstract interface for a low-level rendering device.">RenderingDevice</a>. The viewport defines the rectangular area where the final image is drawn. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">x</td><td>x-coordinate of the lower left corner of the viewport </td></tr>
-    <tr><td class="paramname">y</td><td>y-coordinate of the lower left corner of the viewport </td></tr>
-    <tr><td class="paramname">width</td><td>width of the viewport, in pixels </td></tr>
-    <tr><td class="paramname">height</td><td>height of the viewport, in pixels </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implemented in <a class="el" href="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html#afc52da68a2755601e80268de38dc9ac3">helios::ext::opengl::rendering::OpenGLDevice</a>.</p>
 
 </div>
 </div>

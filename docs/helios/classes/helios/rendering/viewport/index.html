@@ -1,0 +1,750 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-helios/classes/helios-rendering-viewport" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">helios-rendering-viewport | helios</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://helios.garagecraft.games/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://helios.garagecraft.games/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://helios.garagecraft.games/docs/helios/classes/helios/rendering/viewport"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="helios-rendering-viewport | helios"><meta data-rh="true" name="description" content="Represents a rectangular area within a RenderTarget where a scene is rendered. More..."><meta data-rh="true" property="og:description" content="Represents a rectangular area within a RenderTarget where a scene is rendered. More..."><meta data-rh="true" name="keywords" content="doxygen,reference,class"><link data-rh="true" rel="icon" href="/img/favicon.svg"><link data-rh="true" rel="canonical" href="https://helios.garagecraft.games/docs/helios/classes/helios/rendering/viewport"><link data-rh="true" rel="alternate" href="https://helios.garagecraft.games/docs/helios/classes/helios/rendering/viewport" hreflang="en"><link data-rh="true" rel="alternate" href="https://helios.garagecraft.games/docs/helios/classes/helios/rendering/viewport" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://LK14YGETTG-dsn.algolia.net" crossorigin="anonymous"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"API Reference (Doxygen)","item":"https://helios.garagecraft.games/docs/helios/"},{"@type":"ListItem","position":2,"name":"Classes","item":"https://helios.garagecraft.games/docs/helios/classes"},{"@type":"ListItem","position":3,"name":"Viewport","item":"https://helios.garagecraft.games/docs/helios/classes/helios/rendering/viewport"}]}</script><link rel="search" type="application/opensearchdescription+xml" title="helios" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.d8266996.css">
+<script src="/assets/js/runtime~main.2c25bbc1.js" defer="defer"></script>
+<script src="/assets/js/main.cf054b45.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>document.documentElement.setAttribute("data-theme","dark"),document.documentElement.setAttribute("data-theme-choice","dark"),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}(),document.documentElement.setAttribute("data-announcement-bar-initially-dismissed",function(){try{return"true"===localStorage.getItem("docusaurus.announcement.dismiss")}catch(t){}return!1}())</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.png"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><div class="theme-announcement-bar announcementBar_mb4j" style="background-color:#2a1400;color:#ffb347" role="banner"><div class="announcementBarPlaceholder_vyr4"></div><div class="content_knG7 announcementBarContent_xLdY">⚠️ <strong>Alpha Status:</strong> helios is in early development. APIs may change. <a href="/helios/docs/status">Learn more</a></div><button type="button" aria-label="Close" class="clean-btn close closeButton_CVFx announcementBarClose_gvF7"><svg viewBox="0 0 15 15" width="14" height="14"><g stroke="currentColor" stroke-width="3.1"><path d="M.75.75l13.5 13.5M14.25.75L.75 14.25"></path></g></svg></button></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.png" alt="helios Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.png" alt="helios Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">helios</b></a><a class="navbar__item navbar__link" href="/docs/intro">Documentation</a><div class="navbar__item dropdown dropdown--hoverable"><a aria-current="page" class="navbar__link active" aria-haspopup="true" aria-expanded="false" role="button" href="/docs/helios/">Reference</a><ul class="dropdown__menu"><li><a class="dropdown__link" href="/docs/helios/namespaces/">Namespaces</a></li><li><a aria-current="page" class="dropdown__link dropdown__link--active" href="/docs/helios/classes/">Classes</a></li><li><a class="dropdown__link" href="/docs/helios/files/">Files</a></li></ul></div></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a class="navbar__link" aria-haspopup="true" aria-expanded="false" role="button" href="/docs/status">Status</a><ul class="dropdown__menu"><li><a class="dropdown__link" href="/docs/changelog">Changelog</a></li></ul></div><a href="https://github.com/thorstensuckow/helios" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link header-github-link"></a><div class="navbarSearchContainer_Bca1"><button type="button" class="DocSearch DocSearch-Button" aria-label="Search (Meta+k)" aria-keyshortcuts="Meta+k"><span class="DocSearch-Button-Container"><svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8" stroke="currentColor" fill="none" stroke-width="1.4"></circle><path d="m21 21-4.3-4.3" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="DocSearch-Button-Placeholder">Search</span></span><span class="DocSearch-Button-Keys"></span></button></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG menuWithAnnouncementBar_GW3s"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" href="/docs/helios/"><span title="API Reference (Doxygen)" class="categoryLinkLabel_W154">API Reference (Doxygen)</span></a><button aria-label="Collapse sidebar category &#x27;API Reference (Doxygen)&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/helios/namespaces"><span title="Namespaces" class="categoryLinkLabel_W154">Namespaces</span></a><button aria-label="Expand sidebar category &#x27;Namespaces&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" tabindex="0" href="/docs/helios/classes"><span title="Classes" class="categoryLinkLabel_W154">Classes</span></a><button aria-label="Collapse sidebar category &#x27;Classes&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/docs/helios/classes/helios/app/application"><span title="Hierarchy" class="categoryLinkLabel_W154">Hierarchy</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item menu__list-item--collapsed doxyEllipsis"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/helios/classes/helios/app/application"><span title="Application" class="categoryLinkLabel_W154">Application</span></a><button aria-label="Expand sidebar category &#x27;Application&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/classes/helios/scene/camera"><span title="Camera" class="linkLabel_WmDU">Camera</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item menu__list-item--collapsed doxyEllipsis"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/helios/classes/helios/app/controller/controller"><span title="Controller" class="categoryLinkLabel_W154">Controller</span></a><button aria-label="Expand sidebar category &#x27;Controller&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/classes/helios/event/dispatcher"><span title="Dispatcher" class="linkLabel_WmDU">Dispatcher</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item menu__list-item--collapsed doxyEllipsis"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/helios/classes/helios/event/event"><span title="Event" class="categoryLinkLabel_W154">Event</span></a><button aria-label="Expand sidebar category &#x27;Event&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item menu__list-item--collapsed doxyEllipsis"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/helios/classes/helios/event/eventmanager"><span title="EventManager" class="categoryLinkLabel_W154">EventManager</span></a><button aria-label="Expand sidebar category &#x27;EventManager&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item menu__list-item--collapsed doxyEllipsis"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/helios/classes/helios/event/eventqueue"><span title="EventQueue" class="categoryLinkLabel_W154">EventQueue</span></a><button aria-label="Expand sidebar category &#x27;EventQueue&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item menu__list-item--collapsed doxyEllipsis"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/helios/classes/helios/scene/frustumcullingstrategy"><span title="FrustumCullingStrategy" class="categoryLinkLabel_W154">FrustumCullingStrategy</span></a><button aria-label="Expand sidebar category &#x27;FrustumCullingStrategy&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/classes/helios/input/gamepadstate"><span title="GamepadState" class="linkLabel_WmDU">GamepadState</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/classes/helios/ext/glfw/app/glfwfactory"><span title="GLFWFactory" class="linkLabel_WmDU">GLFWFactory</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/classes/helios/ext/glfw/app/glfwraiiguard"><span title="GLFWRAIIGuard" class="linkLabel_WmDU">GLFWRAIIGuard</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/structs/helios/ext/glfw/window/glfwwindowuserpointer"><span title="GLFWWindowUserPointer" class="linkLabel_WmDU">GLFWWindowUserPointer</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/classes/helios/util/guid"><span title="Guid" class="linkLabel_WmDU">Guid</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item menu__list-item--collapsed doxyEllipsis"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/helios/classes/helios/input/inputadapter"><span title="InputAdapter" class="categoryLinkLabel_W154">InputAdapter</span></a><button aria-label="Expand sidebar category &#x27;InputAdapter&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/classes/helios/input/inputmanager"><span title="InputManager" class="linkLabel_WmDU">InputManager</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/classes/helios/util/log/logger"><span title="Logger" class="linkLabel_WmDU">Logger</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/classes/helios/util/log/logmanager"><span title="LogManager" class="linkLabel_WmDU">LogManager</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/structs/helios/math/mat4"><span title="mat4&lt;T&gt;" class="linkLabel_WmDU">mat4&lt;T&gt;</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/classes/helios/rendering/model/material"><span title="Material" class="linkLabel_WmDU">Material</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/classes/helios/rendering/model/config/materialproperties"><span title="MaterialProperties" class="linkLabel_WmDU">MaterialProperties</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/structs/helios/rendering/model/config/materialpropertiesoverride"><span title="MaterialPropertiesOverride" class="linkLabel_WmDU">MaterialPropertiesOverride</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item menu__list-item--collapsed doxyEllipsis"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/helios/classes/helios/rendering/model/mesh"><span title="Mesh" class="categoryLinkLabel_W154">Mesh</span></a><button aria-label="Expand sidebar category &#x27;Mesh&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/structs/helios/rendering/model/config/meshconfig"><span title="MeshConfig" class="linkLabel_WmDU">MeshConfig</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/classes/helios/ext/opengl/rendering/shader/opengluniformlocationmap"><span title="OpenGLUniformLocationMap" class="linkLabel_WmDU">OpenGLUniformLocationMap</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/classes/helios/rendering/renderable"><span title="Renderable" class="linkLabel_WmDU">Renderable</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/classes/helios/rendering/rendercommand"><span title="RenderCommand" class="linkLabel_WmDU">RenderCommand</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item menu__list-item--collapsed doxyEllipsis"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/helios/classes/helios/rendering/renderingdevice"><span title="RenderingDevice" class="categoryLinkLabel_W154">RenderingDevice</span></a><button aria-label="Expand sidebar category &#x27;RenderingDevice&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/classes/helios/rendering/renderpass"><span title="RenderPass" class="linkLabel_WmDU">RenderPass</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/classes/helios/rendering/renderpassfactory"><span title="RenderPassFactory" class="linkLabel_WmDU">RenderPassFactory</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/classes/helios/rendering/renderprototype"><span title="RenderPrototype" class="linkLabel_WmDU">RenderPrototype</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/classes/helios/rendering/renderqueue"><span title="RenderQueue" class="linkLabel_WmDU">RenderQueue</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/classes/helios/rendering/rendertarget"><span title="RenderTarget" class="linkLabel_WmDU">RenderTarget</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/classes/helios/scene/scene"><span title="Scene" class="linkLabel_WmDU">Scene</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/structs/helios/scene/scenegraphkey"><span title="SceneGraphKey" class="linkLabel_WmDU">SceneGraphKey</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item menu__list-item--collapsed doxyEllipsis"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/helios/classes/helios/scene/scenenode"><span title="SceneNode" class="categoryLinkLabel_W154">SceneNode</span></a><button aria-label="Expand sidebar category &#x27;SceneNode&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item menu__list-item--collapsed doxyEllipsis"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/helios/classes/helios/rendering/shader/shader"><span title="Shader" class="categoryLinkLabel_W154">Shader</span></a><button aria-label="Expand sidebar category &#x27;Shader&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item menu__list-item--collapsed doxyEllipsis"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/helios/structs/helios/rendering/asset/shape/shape"><span title="Shape" class="categoryLinkLabel_W154">Shape</span></a><button aria-label="Expand sidebar category &#x27;Shape&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/classes/helios/scene/snapshot"><span title="Snapshot" class="linkLabel_WmDU">Snapshot</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/structs/helios/scene/snapshotitem"><span title="SnapshotItem" class="linkLabel_WmDU">SnapshotItem</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item menu__list-item--collapsed doxyEllipsis"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/helios/classes/helios/util/io/stringfilereader"><span title="StringFileReader" class="categoryLinkLabel_W154">StringFileReader</span></a><button aria-label="Expand sidebar category &#x27;StringFileReader&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/classes/helios/engine/tickable"><span title="Tickable" class="linkLabel_WmDU">Tickable</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/classes/helios/scene/transform"><span title="Transform" class="linkLabel_WmDU">Transform</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/classes/helios/rendering/shader/uniformvaluemap"><span title="UniformValueMap" class="linkLabel_WmDU">UniformValueMap</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/structs/helios/math/vec2"><span title="vec2&lt;T&gt;" class="linkLabel_WmDU">vec2&lt;T&gt;</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/structs/helios/math/vec3"><span title="vec3&lt;T&gt;" class="linkLabel_WmDU">vec3&lt;T&gt;</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/structs/helios/math/vec4"><span title="vec4&lt;T&gt;" class="linkLabel_WmDU">vec4&lt;T&gt;</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/structs/helios/rendering/vertex"><span title="Vertex" class="linkLabel_WmDU">Vertex</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/helios/classes/helios/rendering/viewport"><span title="Viewport" class="linkLabel_WmDU">Viewport</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item doxyEllipsis"><a class="menu__link" tabindex="0" href="/docs/helios/structs/helios/rendering/viewportkey"><span title="ViewportKey" class="linkLabel_WmDU">ViewportKey</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item menu__list-item--collapsed doxyEllipsis"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/helios/classes/helios/window/window"><span title="Window" class="categoryLinkLabel_W154">Window</span></a><button aria-label="Expand sidebar category &#x27;Window&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item menu__list-item--collapsed doxyEllipsis"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/helios/structs/helios/window/windowconfig"><span title="WindowConfig" class="categoryLinkLabel_W154">WindowConfig</span></a><button aria-label="Expand sidebar category &#x27;WindowConfig&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/helios/indices/classes/all"><span title="All" class="linkLabel_WmDU">All</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/helios/indices/classes/classes"><span title="Classes" class="linkLabel_WmDU">Classes</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/helios/indices/classes/functions"><span title="Functions" class="linkLabel_WmDU">Functions</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/helios/indices/classes/variables"><span title="Variables" class="linkLabel_WmDU">Variables</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/docs/helios/files"><span title="Files" class="categoryLinkLabel_W154">Files</span></a><button aria-label="Expand sidebar category &#x27;Files&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/helios/pages/todo"><span title="Pages" class="categoryLinkLabel_W154">Pages</span></a></div></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/docs/helios/"><span>API Reference (Doxygen)</span></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/docs/helios/classes"><span>Classes</span></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Hierarchy</span></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">Viewport</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><div class="doxyPage">
+<header><h1><code>Viewport</code> Class</h1></header>
+<p>Represents a rectangular area within a <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">RenderTarget</a> where a scene is rendered. <a href="#details" class="">More...</a></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="declaration">Declaration<a href="#declaration" class="hash-link" aria-label="Direct link to Declaration" title="Direct link to Declaration" translate="no">​</a></h2>
+<div class="doxyDeclaration">
+class helios::rendering::Viewport { ... }
+</div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="public-constructors-index">Public Constructors Index<a href="#public-constructors-index" class="hash-link" aria-label="Direct link to Public Constructors Index" title="Direct link to Public Constructors Index" translate="no">​</a></h2>
+
+
+
+<table class="doxyMembersIndex"><tbody><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left"></td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#acab3a95a725e2ce895c8cf5a075e5a8c" class="">Viewport</a> () noexcept</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>Constructs a <a class="" href="/docs/helios/classes/helios/rendering/viewport">Viewport</a> with normalized bounds set to (0.0f, 0.0f, 1.0f, 1.0f) and z-index 0. <a href="#acab3a95a725e2ce895c8cf5a075e5a8c" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left"></td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#a219c81106b214b5e690210bd6258d2e2" class="">Viewport</a> (float x, float y, float width, float height, int zIndex=0) noexcept</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>Constructs a <a class="" href="/docs/helios/classes/helios/rendering/viewport">Viewport</a> with specified normalized dimensions. <a href="#a219c81106b214b5e690210bd6258d2e2" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="public-member-functions-index">Public Member Functions Index<a href="#public-member-functions-index" class="hash-link" aria-label="Direct link to Public Member Functions Index" title="Direct link to Public Member Functions Index" translate="no">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table class="doxyMembersIndex"><tbody><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left">const <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">helios::rendering::RenderTarget</a> *</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#afa67d77263ec5dd36db0591ffb9f889d" class="">renderTarget</a> () const noexcept</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>Gets the parent <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">RenderTarget</a>. <a href="#afa67d77263ec5dd36db0591ffb9f889d" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left"><a href="#acab3a95a725e2ce895c8cf5a075e5a8c" class="">Viewport</a> &amp;</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#a803fe87a8f476b47f48a338a71257816" class="">setCamera</a> (std::shared_ptr&lt; helios::scene::Camera &gt; camera) noexcept</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>Assigns a camera to this viewport. <a href="#a803fe87a8f476b47f48a338a71257816" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left">std::shared_ptr&lt; <a class="" href="/docs/helios/classes/helios/scene/camera">helios::scene::Camera</a> &gt;</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#a93d7f88ee769079ac287e9859f242e24" class="">camera</a> () const noexcept</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>Gets the camera associated with this viewport. <a href="#a93d7f88ee769079ac287e9859f242e24" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left"><a href="#acab3a95a725e2ce895c8cf5a075e5a8c" class="">Viewport</a> &amp;</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#a9c8ed040c0e35728770ddd462860c5bc" class="">setRenderTarget</a> (const helios::rendering::RenderTarget *renderTarget, ViewportKey key) noexcept</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>Sets the parent <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">RenderTarget</a> for this viewport and updates the Camera of this <a class="" href="/docs/helios/classes/helios/rendering/viewport">Viewport</a> with an Aspect Ratio based on the dimensions of the <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">RenderTarget</a>. <a href="#a9c8ed040c0e35728770ddd462860c5bc" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left">const <a class="" href="/docs/helios/namespaces/helios/math/#a08252f81850c5902e3c8dead272f3332">helios::math::vec4f</a> &amp;</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#a6d7fc6de0fc5c9c31d2d7ee760f1f126" class="">bounds</a> () const noexcept</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>Gets the cached dimensions of the viewport. <a href="#a6d7fc6de0fc5c9c31d2d7ee760f1f126" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left">void</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#a1935d17a330f646b6033b31799d6e22f" class="">setBounds</a> (float x, float y, float width, float height) noexcept</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>Sets the normalized bounds of the viewport. <a href="#a1935d17a330f646b6033b31799d6e22f" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left">int</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#a77b488470dd2c811db40faeec666983b" class="">clearFlags</a> () const noexcept</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>Gets the clear flags for this viewport. <a href="#a77b488470dd2c811db40faeec666983b" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left">const <a class="" href="/docs/helios/namespaces/helios/math/#a08252f81850c5902e3c8dead272f3332">helios::math::vec4f</a> &amp;</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#aeb81651e77ad4e0082fef42815198917" class="">clearColor</a> () const noexcept</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>Gets the color used for clearing the color buffer. <a href="#aeb81651e77ad4e0082fef42815198917" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left"><a href="#acab3a95a725e2ce895c8cf5a075e5a8c" class="">Viewport</a> &amp;</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#a7199b3df8a9c5817eaa21173a9c6e434" class="">setClearFlags</a> (int clearFlags) noexcept</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>Sets the clear flags for this viewport. <a href="#a7199b3df8a9c5817eaa21173a9c6e434" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left"><a href="#acab3a95a725e2ce895c8cf5a075e5a8c" class="">Viewport</a> &amp;</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#af94f8b0ec7697edea1c0cf843c03ad3d" class="">setClearColor</a> (const helios::math::vec4f &amp;color) noexcept</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>Specifies the RGBA values used when clearing color buffers. <a href="#af94f8b0ec7697edea1c0cf843c03ad3d" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left"><a href="#acab3a95a725e2ce895c8cf5a075e5a8c" class="">Viewport</a> &amp;</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#af7fa261780058e3f8b85cb2d8b504fc0" class="">setZIndex</a> (int zIndex) noexcept</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>Sets the z-index that controls rendering order relative to sibling viewports. <a href="#af7fa261780058e3f8b85cb2d8b504fc0" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left">void</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#a7739f87efe62f23fb891fe9cbfc4e1c2" class="">onRenderTargetResize</a> (const helios::rendering::RenderTarget &amp;source, unsigned int width, unsigned int height) noexcept</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>Notifies the viewport of a change in the parent <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">RenderTarget</a>&#x27;s dimensions. <a href="#a7739f87efe62f23fb891fe9cbfc4e1c2" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="private-member-functions-index">Private Member Functions Index<a href="#private-member-functions-index" class="hash-link" aria-label="Direct link to Private Member Functions Index" title="Direct link to Private Member Functions Index" translate="no">​</a></h2>
+
+
+
+<table class="doxyMembersIndex"><tbody><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left">void</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#a8dec67b768844da2e79344929480316e" class="">updateBounds</a> () const noexcept</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>Updates the cached dimensions vector if it is dirty. <a href="#a8dec67b768844da2e79344929480316e" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left">void</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#ae7cd238882295790a2ba6ce7ea9d74d5" class="">updateCamera</a> () const noexcept</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>Updates this <a class="" href="/docs/helios/classes/helios/rendering/viewport">Viewport</a>&#x27;s Camera based on the dimension of the <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">RenderTarget</a>. <a href="#ae7cd238882295790a2ba6ce7ea9d74d5" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="private-member-attributes-index">Private Member Attributes Index<a href="#private-member-attributes-index" class="hash-link" aria-label="Direct link to Private Member Attributes Index" title="Direct link to Private Member Attributes Index" translate="no">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+<table class="doxyMembersIndex"><tbody><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left">const <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">helios::rendering::RenderTarget</a> *</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#a048a665f71389e73805ebf4978f166d1" class="">renderTarget_</a> = nullptr</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>Pointer to the parent <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">RenderTarget</a>. <a href="#a048a665f71389e73805ebf4978f166d1" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left">int</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#af8d874d246736fde5c1bbe7e7415f21e" class="">clearFlags_</a> = std::to_underlying(<a class="" href="/docs/helios/namespaces/helios/rendering/#aad4b10dc2924beaf3680fb245505290cacb5feb1b7314637725a2e73bdc9f7295">ClearFlags::Color</a>)</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>Bitmask of buffers to clear. <a href="#af8d874d246736fde5c1bbe7e7415f21e" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left"><a class="" href="/docs/helios/namespaces/helios/math/#a08252f81850c5902e3c8dead272f3332">helios::math::vec4f</a></td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#ae54f2fdf13f19fc0022bc8f28ef84bd1" class="">clearColor_</a> = <a class="" href="/docs/helios/namespaces/helios/math/#a08252f81850c5902e3c8dead272f3332">helios::math::vec4f</a>(0.0f, 0.0f, 0.0f, 1.0f)</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>Color used when clearing the color buffer. Defaults to &quot;black&quot;, i.e. no color at all. <a href="#ae54f2fdf13f19fc0022bc8f28ef84bd1" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left">float</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#a217cf0c639a374c59b5eccfff380bfb1" class="">x_</a> = 0.0f</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>The x-offset of the viewport, normalized to [0, 1]. <a href="#a217cf0c639a374c59b5eccfff380bfb1" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left">float</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#aa5299f117f30f4048900f8de6e2da761" class="">y_</a> = 0.0f</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>The y-offset of the viewport, normalized to [0, 1]. <a href="#aa5299f117f30f4048900f8de6e2da761" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left">float</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#a72aa65fd5828e0e876d0b468c7768cef" class="">width_</a> = 1.0f</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>The width of the viewport, normalized to [0, 1]. <a href="#a72aa65fd5828e0e876d0b468c7768cef" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left">float</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#a62a952ba452479aff1a097a14f9a3c42" class="">height_</a> = 1.0f</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>The height of the viewport, normalized to [0, 1]. <a href="#a62a952ba452479aff1a097a14f9a3c42" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left">std::shared_ptr&lt; <a class="" href="/docs/helios/classes/helios/scene/camera">helios::scene::Camera</a> &gt;</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#aac1b0f2033ac6fb41dea3e3f0f04737a" class="">camera_</a></td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>The camera used for rendering within this viewport. <a href="#aac1b0f2033ac6fb41dea3e3f0f04737a" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left">bool</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#a4ba9db09ddd649ac1dd190ea0ff3abca" class="">needsUpdate_</a> = true</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>Flag indicating if cached dimensions are dirty. <a href="#a4ba9db09ddd649ac1dd190ea0ff3abca" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left"><a class="" href="/docs/helios/namespaces/helios/math/#a08252f81850c5902e3c8dead272f3332">helios::math::vec4f</a></td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#a7394359da5d6ad017e84af9ebaf8a895" class="">bounds_</a></td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>Cached dimensions [x, y, width, height]. <a href="#a7394359da5d6ad017e84af9ebaf8a895" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left">int</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#a543c0a8f8f64b04db9926a6ef57b1142" class="">zIndex_</a> = 0</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>The z-index for this viewport. <a href="#a543c0a8f8f64b04db9926a6ef57b1142" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="private-static-attributes-index">Private Static Attributes Index<a href="#private-static-attributes-index" class="hash-link" aria-label="Direct link to Private Static Attributes Index" title="Direct link to Private Static Attributes Index" translate="no">​</a></h2>
+
+
+<table class="doxyMembersIndex"><tbody><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left">static const <a class="" href="/docs/helios/classes/helios/util/log/logger">helios::util::log::Logger</a> &amp;</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#a99067f9a3c13bb65fdfc3dcc45fa00ba" class="">logger_</a> = <a class="" href="/docs/helios/classes/helios/util/log/logmanager/#a750d8fd5b3ee3678600644756b0631e7">helios::util::log::LogManager::loggerForScope</a>(<a class="" href="/docs/helios/files/include/include/ext/include/ext/opengl/include/ext/opengl/rendering/include/ext/opengl/rendering/shader/opengluniformlocationmap-ixx/#acbc04f24078582c7d42b2085be5d5750">HELIOS_LOG_SCOPE</a>)</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="details">Description<a href="#details" class="hash-link" aria-label="Direct link to Description" title="Direct link to Description" translate="no">​</a></h2>
+<p>Represents a rectangular area within a <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">RenderTarget</a> where a scene is rendered.</p>
+<p>A <a class="" href="/docs/helios/classes/helios/rendering/viewport">Viewport</a> defines the 2D rectangle into which a 3D scene is projected. Its dimensions are specified in normalized coordinates relative to its parent `RenderTarget`. It is associated with a `Camera`, which provides the viewing and projection matrices. The viewport automatically updates the camera&#x27;s aspect ratio when its parent `RenderTarget` is resized.</p>
+<p>Since a <a class="" href="/docs/helios/classes/helios/rendering/viewport">Viewport</a> only stores normalized values for its location and dimensions relative to the owning <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">RenderTarget</a>, rendering APIs should query the size of the <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">RenderTarget</a> when a viewport is about to be rendered, allowing them to compute the final screen coordinates and dimensions correctly.</p>
+<dl class="doxySectionUser">
+<dt>See Also</dt>
+<dd><p><a class="" href="/docs/helios/classes/helios/rendering/rendertarget">helios::rendering::RenderTarget</a></p></dd>
+</dl>
+<dl class="doxySectionUser">
+<dt>See Also</dt>
+<dd><p><a class="" href="/docs/helios/classes/helios/scene/camera">helios::scene::Camera</a></p></dd>
+</dl>
+<dl class="doxySectionUser">
+<dt>See Also</dt>
+<dd><p><a href="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glViewport.xhtml" target="_blank" rel="noopener noreferrer" class="">https://registry.khronos.org/OpenGL-Refpages/gl4/html/glViewport.xhtml</a></p></dd>
+</dl>
+<p>Definition at line 56 of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<div class="doxySectionDef">
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="public-constructors">Public Constructors<a href="#public-constructors" class="hash-link" aria-label="Direct link to Public Constructors" title="Direct link to Public Constructors" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="acab3a95a725e2ce895c8cf5a075e5a8c">Viewport()<a href="#acab3a95a725e2ce895c8cf5a075e5a8c" class="hash-link" aria-label="Direct link to Viewport()" title="Direct link to Viewport()" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">helios::rendering::Viewport::Viewport ()</td></tr></tbody></table>
+</td><td class="doxyMemberLabelsRight">
+<span class="doxyMemberLabels">
+<span class="doxyMemberLabel noexcept">noexcept</span>
+</span>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Constructs a <a class="" href="/docs/helios/classes/helios/rendering/viewport">Viewport</a> with normalized bounds set to (0.0f, 0.0f, 1.0f, 1.0f) and z-index 0.</p>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00136">136</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<p>Referenced by <a href="#a803fe87a8f476b47f48a338a71257816" class="">setCamera</a>, <a href="#af94f8b0ec7697edea1c0cf843c03ad3d" class="">setClearColor</a>, <a href="#a7199b3df8a9c5817eaa21173a9c6e434" class="">setClearFlags</a>, <a href="#a9c8ed040c0e35728770ddd462860c5bc" class="">setRenderTarget</a>, <a href="#af7fa261780058e3f8b85cb2d8b504fc0" class="">setZIndex</a> and <a href="#a219c81106b214b5e690210bd6258d2e2" class="">Viewport</a>.</p>
+</div>
+</div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="a219c81106b214b5e690210bd6258d2e2">Viewport()<a href="#a219c81106b214b5e690210bd6258d2e2" class="hash-link" aria-label="Direct link to Viewport()" title="Direct link to Viewport()" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">helios::rendering::Viewport::Viewport (float x, float y, float width, float height, int zIndex=0)</td></tr></tbody></table>
+</td><td class="doxyMemberLabelsRight">
+<span class="doxyMemberLabels">
+<span class="doxyMemberLabel explicit">explicit</span>
+<span class="doxyMemberLabel noexcept">noexcept</span>
+</span>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Constructs a <a class="" href="/docs/helios/classes/helios/rendering/viewport">Viewport</a> with specified normalized dimensions.</p>
+<dl class="doxyParamsList">
+<dt class="doxyParamsTableTitle">Parameters</dt>
+<dd>
+<table class="doxyParamsTable"><tbody><tr class="doxyParamItem"><td class="doxyParamItemName">x</td><td class="doxyParamItemDescription"><p>The normalized horizontal offset [0, 1].</p></td></tr><tr class="doxyParamItem"><td class="doxyParamItemName">y</td><td class="doxyParamItemDescription"><p>The normalized vertical offset [0, 1].</p></td></tr><tr class="doxyParamItem"><td class="doxyParamItemName">width</td><td class="doxyParamItemDescription"><p>The normalized width [0, 1].</p></td></tr><tr class="doxyParamItem"><td class="doxyParamItemName">height</td><td class="doxyParamItemDescription"><p>The normalized height [0, 1].</p></td></tr><tr class="doxyParamItem"><td class="doxyParamItemName">zIndex</td><td class="doxyParamItemDescription"><p>The z-index that determines the rendering order.</p></td></tr></tbody></table>
+</dd>
+</dl>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00147">147</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<p>Reference <a href="#acab3a95a725e2ce895c8cf5a075e5a8c" class="">Viewport</a>.</p>
+</div>
+</div>
+</div>
+<div class="doxySectionDef">
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="public-member-functions">Public Member Functions<a href="#public-member-functions" class="hash-link" aria-label="Direct link to Public Member Functions" title="Direct link to Public Member Functions" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="a6d7fc6de0fc5c9c31d2d7ee760f1f126">bounds()<a href="#a6d7fc6de0fc5c9c31d2d7ee760f1f126" class="hash-link" aria-label="Direct link to bounds()" title="Direct link to bounds()" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">const helios::math::vec4f &amp; helios::rendering::Viewport::bounds ()</td></tr></tbody></table>
+</td><td class="doxyMemberLabelsRight">
+<span class="doxyMemberLabels">
+<span class="doxyMemberLabel nodiscard">nodiscard</span>
+<span class="doxyMemberLabel noexcept">noexcept</span>
+</span>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Gets the cached dimensions of the viewport.</p>
+<dl class="doxySectionUser">
+<dt>Returns</dt>
+<dd><p>A const reference to a vec4f containing [x, y, width, height].</p></dd>
+</dl>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00199">199</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<p>Reference <a href="#a6d7fc6de0fc5c9c31d2d7ee760f1f126" class="">bounds</a>.</p>
+<p>Referenced by <a href="#a6d7fc6de0fc5c9c31d2d7ee760f1f126" class="">bounds</a>.</p>
+</div>
+</div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="a93d7f88ee769079ac287e9859f242e24">camera()<a href="#a93d7f88ee769079ac287e9859f242e24" class="hash-link" aria-label="Direct link to camera()" title="Direct link to camera()" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">std::shared_ptr&lt; helios::scene::Camera &gt; helios::rendering::Viewport::camera ()</td></tr></tbody></table>
+</td><td class="doxyMemberLabelsRight">
+<span class="doxyMemberLabels">
+<span class="doxyMemberLabel nodiscard">nodiscard</span>
+<span class="doxyMemberLabel noexcept">noexcept</span>
+</span>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Gets the camera associated with this viewport.</p>
+<dl class="doxySectionUser">
+<dt>Returns</dt>
+<dd><p>A shared pointer to the `Camera` object.</p></dd>
+</dl>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00174">174</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<p>Reference <a href="#a93d7f88ee769079ac287e9859f242e24" class="">camera</a>.</p>
+<p>Referenced by <a href="#a93d7f88ee769079ac287e9859f242e24" class="">camera</a> and <a href="#a803fe87a8f476b47f48a338a71257816" class="">setCamera</a>.</p>
+</div>
+</div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aeb81651e77ad4e0082fef42815198917">clearColor()<a href="#aeb81651e77ad4e0082fef42815198917" class="hash-link" aria-label="Direct link to clearColor()" title="Direct link to clearColor()" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">const helios::math::vec4f &amp; helios::rendering::Viewport::clearColor ()</td></tr></tbody></table>
+</td><td class="doxyMemberLabelsRight">
+<span class="doxyMemberLabels">
+<span class="doxyMemberLabel nodiscard">nodiscard</span>
+<span class="doxyMemberLabel noexcept">noexcept</span>
+</span>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Gets the color used for clearing the color buffer.</p>
+<dl class="doxySectionUser">
+<dt>Returns</dt>
+<dd><p>A const reference to the clear color.</p></dd>
+</dl>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00226">226</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<p>Reference <a href="#aeb81651e77ad4e0082fef42815198917" class="">clearColor</a>.</p>
+<p>Referenced by <a href="#aeb81651e77ad4e0082fef42815198917" class="">clearColor</a>.</p>
+</div>
+</div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="a77b488470dd2c811db40faeec666983b">clearFlags()<a href="#a77b488470dd2c811db40faeec666983b" class="hash-link" aria-label="Direct link to clearFlags()" title="Direct link to clearFlags()" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">int helios::rendering::Viewport::clearFlags ()</td></tr></tbody></table>
+</td><td class="doxyMemberLabelsRight">
+<span class="doxyMemberLabels">
+<span class="doxyMemberLabel nodiscard">nodiscard</span>
+<span class="doxyMemberLabel noexcept">noexcept</span>
+</span>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Gets the clear flags for this viewport.</p>
+<dl class="doxySectionUser">
+<dt>Returns</dt>
+<dd><p>An integer bitmask representing the `ClearFlags`.</p></dd>
+</dl>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00219">219</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<p>Reference <a href="#a77b488470dd2c811db40faeec666983b" class="">clearFlags</a>.</p>
+<p>Referenced by <a href="#a77b488470dd2c811db40faeec666983b" class="">clearFlags</a> and <a href="#a7199b3df8a9c5817eaa21173a9c6e434" class="">setClearFlags</a>.</p>
+</div>
+</div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="a7739f87efe62f23fb891fe9cbfc4e1c2">onRenderTargetResize()<a href="#a7739f87efe62f23fb891fe9cbfc4e1c2" class="hash-link" aria-label="Direct link to onRenderTargetResize()" title="Direct link to onRenderTargetResize()" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">void helios::rendering::Viewport::onRenderTargetResize (const <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">helios::rendering::RenderTarget</a> &amp; source, unsigned int width, unsigned int height)</td></tr></tbody></table>
+</td><td class="doxyMemberLabelsRight">
+<span class="doxyMemberLabels">
+<span class="doxyMemberLabel noexcept">noexcept</span>
+</span>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Notifies the viewport of a change in the parent <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">RenderTarget</a>&#x27;s dimensions.</p>
+<p>This method is called by the parent `RenderTarget` when it is resized. The viewport uses the new dimensions to calculate the correct aspect ratio for its associated camera.</p>
+<dl class="doxyParamsList">
+<dt class="doxyParamsTableTitle">Parameters</dt>
+<dd>
+<table class="doxyParamsTable"><tbody><tr class="doxyParamItem"><td class="doxyParamItemName">source</td><td class="doxyParamItemDescription"><p>A const reference to the notifying <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">RenderTarget</a>.</p></td></tr><tr class="doxyParamItem"><td class="doxyParamItemName">width</td><td class="doxyParamItemDescription"><p>The new width of the <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">RenderTarget</a> in pixels.</p></td></tr><tr class="doxyParamItem"><td class="doxyParamItemName">height</td><td class="doxyParamItemDescription"><p>The new height of the <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">RenderTarget</a> in pixels.</p></td></tr></tbody></table>
+</dd>
+</dl>
+<dl class="doxySectionUser">
+<dt>See Also</dt>
+<dd><p>updateCamera()</p></dd>
+</dl>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00270">270</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<p>Reference <a href="#a7739f87efe62f23fb891fe9cbfc4e1c2" class="">onRenderTargetResize</a>.</p>
+<p>Referenced by <a href="#a7739f87efe62f23fb891fe9cbfc4e1c2" class="">onRenderTargetResize</a>.</p>
+</div>
+</div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="afa67d77263ec5dd36db0591ffb9f889d">renderTarget()<a href="#afa67d77263ec5dd36db0591ffb9f889d" class="hash-link" aria-label="Direct link to renderTarget()" title="Direct link to renderTarget()" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">const helios::rendering::RenderTarget * helios::rendering::Viewport::renderTarget ()</td></tr></tbody></table>
+</td><td class="doxyMemberLabelsRight">
+<span class="doxyMemberLabels">
+<span class="doxyMemberLabel nodiscard">nodiscard</span>
+<span class="doxyMemberLabel noexcept">noexcept</span>
+</span>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Gets the parent <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">RenderTarget</a>.</p>
+<p>If the returned value is a nullptr, this <a class="" href="/docs/helios/classes/helios/rendering/viewport">Viewport</a> is not owned by any <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">RenderTarget</a>.</p>
+<dl class="doxySectionUser">
+<dt>Returns</dt>
+<dd><p>A const pointer to the parent <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">RenderTarget</a>, or `nullptr` if not set.</p></dd>
+</dl>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00158">158</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<p>Reference <a href="#afa67d77263ec5dd36db0591ffb9f889d" class="">renderTarget</a>.</p>
+<p>Referenced by <a href="#afa67d77263ec5dd36db0591ffb9f889d" class="">renderTarget</a> and <a href="#a9c8ed040c0e35728770ddd462860c5bc" class="">setRenderTarget</a>.</p>
+</div>
+</div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="a1935d17a330f646b6033b31799d6e22f">setBounds()<a href="#a1935d17a330f646b6033b31799d6e22f" class="hash-link" aria-label="Direct link to setBounds()" title="Direct link to setBounds()" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">void helios::rendering::Viewport::setBounds (float x, float y, float width, float height)</td></tr></tbody></table>
+</td><td class="doxyMemberLabelsRight">
+<span class="doxyMemberLabels">
+<span class="doxyMemberLabel noexcept">noexcept</span>
+</span>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Sets the normalized bounds of the viewport.</p>
+<dl class="doxyParamsList">
+<dt class="doxyParamsTableTitle">Parameters</dt>
+<dd>
+<table class="doxyParamsTable"><tbody><tr class="doxyParamItem"><td class="doxyParamItemName">x</td><td class="doxyParamItemDescription"><p>The normalized horizontal offset [0, 1].</p></td></tr><tr class="doxyParamItem"><td class="doxyParamItemName">y</td><td class="doxyParamItemDescription"><p>The normalized vertical offset [0, 1].</p></td></tr><tr class="doxyParamItem"><td class="doxyParamItemName">width</td><td class="doxyParamItemDescription"><p>The normalized width [0, 1].</p></td></tr><tr class="doxyParamItem"><td class="doxyParamItemName">height</td><td class="doxyParamItemDescription"><p>The normalized height [0, 1].</p></td></tr></tbody></table>
+</dd>
+</dl>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00210">210</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<p>Reference <a href="#a1935d17a330f646b6033b31799d6e22f" class="">setBounds</a>.</p>
+<p>Referenced by <a href="#a1935d17a330f646b6033b31799d6e22f" class="">setBounds</a>.</p>
+</div>
+</div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="a803fe87a8f476b47f48a338a71257816">setCamera()<a href="#a803fe87a8f476b47f48a338a71257816" class="hash-link" aria-label="Direct link to setCamera()" title="Direct link to setCamera()" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">Viewport &amp; helios::rendering::Viewport::setCamera (std::shared_ptr&lt; <a class="" href="/docs/helios/classes/helios/scene/camera">helios::scene::Camera</a> &gt; camera)</td></tr></tbody></table>
+</td><td class="doxyMemberLabelsRight">
+<span class="doxyMemberLabels">
+<span class="doxyMemberLabel noexcept">noexcept</span>
+</span>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Assigns a camera to this viewport.</p>
+<dl class="doxyParamsList">
+<dt class="doxyParamsTableTitle">Parameters</dt>
+<dd>
+<table class="doxyParamsTable"><tbody><tr class="doxyParamItem"><td class="doxyParamItemName">camera</td><td class="doxyParamItemDescription"><p>A shared pointer to the `Camera` object.</p></td></tr></tbody></table>
+</dd>
+</dl>
+<dl class="doxySectionUser">
+<dt>Returns</dt>
+<dd><p>A reference to this viewport to allow fluent chaining.</p></dd>
+</dl>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00167">167</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<p>References <a href="#a93d7f88ee769079ac287e9859f242e24" class="">camera</a>, <a href="#a803fe87a8f476b47f48a338a71257816" class="">setCamera</a> and <a href="#acab3a95a725e2ce895c8cf5a075e5a8c" class="">Viewport</a>.</p>
+<p>Referenced by <a href="#a803fe87a8f476b47f48a338a71257816" class="">setCamera</a>.</p>
+</div>
+</div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="af94f8b0ec7697edea1c0cf843c03ad3d">setClearColor()<a href="#af94f8b0ec7697edea1c0cf843c03ad3d" class="hash-link" aria-label="Direct link to setClearColor()" title="Direct link to setClearColor()" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">Viewport &amp; helios::rendering::Viewport::setClearColor (const <a class="" href="/docs/helios/namespaces/helios/math/#a08252f81850c5902e3c8dead272f3332">helios::math::vec4f</a> &amp; color)</td></tr></tbody></table>
+</td><td class="doxyMemberLabelsRight">
+<span class="doxyMemberLabels">
+<span class="doxyMemberLabel noexcept">noexcept</span>
+</span>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Specifies the RGBA values used when clearing color buffers.</p>
+<p>Values are automatically clamped to the range [0, 1].</p>
+<dl class="doxyParamsList">
+<dt class="doxyParamsTableTitle">Parameters</dt>
+<dd>
+<table class="doxyParamsTable"><tbody><tr class="doxyParamItem"><td class="doxyParamItemName">color</td><td class="doxyParamItemDescription"><p>The color to use for clearing.</p></td></tr></tbody></table>
+</dd>
+</dl>
+<dl class="doxySectionUser">
+<dt>Returns</dt>
+<dd><p>A reference to this viewport to allow fluent chaining.</p></dd>
+</dl>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00246">246</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<p>References <a href="#af94f8b0ec7697edea1c0cf843c03ad3d" class="">setClearColor</a> and <a href="#acab3a95a725e2ce895c8cf5a075e5a8c" class="">Viewport</a>.</p>
+<p>Referenced by <a href="#af94f8b0ec7697edea1c0cf843c03ad3d" class="">setClearColor</a>.</p>
+</div>
+</div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="a7199b3df8a9c5817eaa21173a9c6e434">setClearFlags()<a href="#a7199b3df8a9c5817eaa21173a9c6e434" class="hash-link" aria-label="Direct link to setClearFlags()" title="Direct link to setClearFlags()" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">Viewport &amp; helios::rendering::Viewport::setClearFlags (int clearFlags)</td></tr></tbody></table>
+</td><td class="doxyMemberLabelsRight">
+<span class="doxyMemberLabels">
+<span class="doxyMemberLabel noexcept">noexcept</span>
+</span>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Sets the clear flags for this viewport.</p>
+<dl class="doxyParamsList">
+<dt class="doxyParamsTableTitle">Parameters</dt>
+<dd>
+<table class="doxyParamsTable"><tbody><tr class="doxyParamItem"><td class="doxyParamItemName">clearFlags</td><td class="doxyParamItemDescription"><p>An integer bitmask created from `ClearFlags` enum values.</p></td></tr></tbody></table>
+</dd>
+</dl>
+<dl class="doxySectionUser">
+<dt>Returns</dt>
+<dd><p>A reference to this viewport to allow fluent chaining.</p></dd>
+</dl>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00235">235</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<p>References <a href="#a77b488470dd2c811db40faeec666983b" class="">clearFlags</a>, <a href="#a7199b3df8a9c5817eaa21173a9c6e434" class="">setClearFlags</a> and <a href="#acab3a95a725e2ce895c8cf5a075e5a8c" class="">Viewport</a>.</p>
+<p>Referenced by <a href="#a7199b3df8a9c5817eaa21173a9c6e434" class="">setClearFlags</a>.</p>
+</div>
+</div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="a9c8ed040c0e35728770ddd462860c5bc">setRenderTarget()<a href="#a9c8ed040c0e35728770ddd462860c5bc" class="hash-link" aria-label="Direct link to setRenderTarget()" title="Direct link to setRenderTarget()" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">Viewport &amp; helios::rendering::Viewport::setRenderTarget (const <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">helios::rendering::RenderTarget</a> * renderTarget, <a class="" href="/docs/helios/structs/helios/rendering/viewportkey">ViewportKey</a> key)</td></tr></tbody></table>
+</td><td class="doxyMemberLabelsRight">
+<span class="doxyMemberLabels">
+<span class="doxyMemberLabel noexcept">noexcept</span>
+</span>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Sets the parent <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">RenderTarget</a> for this viewport and updates the Camera of this <a class="" href="/docs/helios/classes/helios/rendering/viewport">Viewport</a> with an Aspect Ratio based on the dimensions of the <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">RenderTarget</a>.</p>
+<p>This function can only be called by classes that can construct a `ViewportKey`, effectively restricting its use to the `RenderTarget` class.</p>
+<dl class="doxyParamsList">
+<dt class="doxyParamsTableTitle">Parameters</dt>
+<dd>
+<table class="doxyParamsTable"><tbody><tr class="doxyParamItem"><td class="doxyParamItemName">renderTarget</td><td class="doxyParamItemDescription"><p>A pointer to the parent <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">RenderTarget</a>.</p></td></tr><tr class="doxyParamItem"><td class="doxyParamItemName">key</td><td class="doxyParamItemDescription"><p>A `ViewportKey` instance, required for authorization.</p></td></tr></tbody></table>
+</dd>
+</dl>
+<dl class="doxySectionUser">
+<dt>Returns</dt>
+<dd><p>A reference to this viewport to allow fluent chaining.</p></dd>
+</dl>
+<dl class="doxySectionUser">
+<dt>See Also</dt>
+<dd><p>updateCamera()</p></dd>
+</dl>
+<div class="doxyXrefSect">
+<dl class="doxyXrefSectList">
+<dt class="doxyXrefSectTitle"><a class="" href="/docs/helios/pages/todo/#_todo000014">Todo</a></dt>
+<dd class="doxyXrefSectDescription">
+<p>The <a class="" href="/docs/helios/classes/helios/rendering/viewport">Viewport</a> should observe the <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">RenderTarget</a> for state changes (e.g., resize).</p>
+</dd>
+</dl>
+</div>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00192">192</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<p>References <a href="#afa67d77263ec5dd36db0591ffb9f889d" class="">renderTarget</a>, <a href="#a9c8ed040c0e35728770ddd462860c5bc" class="">setRenderTarget</a> and <a href="#acab3a95a725e2ce895c8cf5a075e5a8c" class="">Viewport</a>.</p>
+<p>Referenced by <a href="#a9c8ed040c0e35728770ddd462860c5bc" class="">setRenderTarget</a>.</p>
+</div>
+</div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="af7fa261780058e3f8b85cb2d8b504fc0">setZIndex()<a href="#af7fa261780058e3f8b85cb2d8b504fc0" class="hash-link" aria-label="Direct link to setZIndex()" title="Direct link to setZIndex()" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">Viewport &amp; helios::rendering::Viewport::setZIndex (int zIndex)</td></tr></tbody></table>
+</td><td class="doxyMemberLabelsRight">
+<span class="doxyMemberLabels">
+<span class="doxyMemberLabel noexcept">noexcept</span>
+</span>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Sets the z-index that controls rendering order relative to sibling viewports.</p>
+<dl class="doxyParamsList">
+<dt class="doxyParamsTableTitle">Parameters</dt>
+<dd>
+<table class="doxyParamsTable"><tbody><tr class="doxyParamItem"><td class="doxyParamItemName">zIndex</td><td class="doxyParamItemDescription"><p>The new z-index value; higher values are rendered later.</p></td></tr></tbody></table>
+</dd>
+</dl>
+<dl class="doxySectionUser">
+<dt>Returns</dt>
+<dd><p>A reference to this viewport to allow fluent chaining.</p></dd>
+</dl>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00255">255</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<p>References <a href="#af7fa261780058e3f8b85cb2d8b504fc0" class="">setZIndex</a> and <a href="#acab3a95a725e2ce895c8cf5a075e5a8c" class="">Viewport</a>.</p>
+<p>Referenced by <a href="#af7fa261780058e3f8b85cb2d8b504fc0" class="">setZIndex</a>.</p>
+</div>
+</div>
+</div>
+<div class="doxySectionDef">
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="private-member-functions">Private Member Functions<a href="#private-member-functions" class="hash-link" aria-label="Direct link to Private Member Functions" title="Direct link to Private Member Functions" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="a8dec67b768844da2e79344929480316e">updateBounds()<a href="#a8dec67b768844da2e79344929480316e" class="hash-link" aria-label="Direct link to updateBounds()" title="Direct link to updateBounds()" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">void helios::rendering::Viewport::updateBounds ()</td></tr></tbody></table>
+</td><td class="doxyMemberLabelsRight">
+<span class="doxyMemberLabels">
+<span class="doxyMemberLabel noexcept">noexcept</span>
+</span>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Updates the cached dimensions vector if it is dirty.</p>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00122">122</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+</div>
+</div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ae7cd238882295790a2ba6ce7ea9d74d5">updateCamera()<a href="#ae7cd238882295790a2ba6ce7ea9d74d5" class="hash-link" aria-label="Direct link to updateCamera()" title="Direct link to updateCamera()" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">void helios::rendering::Viewport::updateCamera ()</td></tr></tbody></table>
+</td><td class="doxyMemberLabelsRight">
+<span class="doxyMemberLabels">
+<span class="doxyMemberLabel noexcept">noexcept</span>
+</span>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Updates this <a class="" href="/docs/helios/classes/helios/rendering/viewport">Viewport</a>&#x27;s Camera based on the dimension of the <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">RenderTarget</a>.</p>
+<p>This method should be called internally whenever the dimensions of the owning <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">RenderTarget</a> change.</p>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00130">130</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+</div>
+</div>
+</div>
+<div class="doxySectionDef">
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="private-member-attributes">Private Member Attributes<a href="#private-member-attributes" class="hash-link" aria-label="Direct link to Private Member Attributes" title="Direct link to Private Member Attributes" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="a7394359da5d6ad017e84af9ebaf8a895">bounds_<a href="#a7394359da5d6ad017e84af9ebaf8a895" class="hash-link" aria-label="Direct link to bounds_" title="Direct link to bounds_" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">helios::math::vec4f helios::rendering::Viewport::bounds_</td></tr></tbody></table>
+</td><td class="doxyMemberLabelsRight">
+<span class="doxyMemberLabels">
+<span class="doxyMemberLabel mutable">mutable</span>
+</span>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Cached dimensions [x, y, width, height].</p>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00108">108</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<div class="doxyProgramListing">
+<div class="doxyCodeLine"><span class="doxyLineNumber">108</span><span class="doxyLineContent"><span class="doxyHighlight">        </span><span class="doxyHighlightKeyword">mutable</span><span class="doxyHighlight"> <a class="" href="/docs/helios/namespaces/helios/math/#a08252f81850c5902e3c8dead272f3332">helios::math::vec4f</a> bounds_;</span></span></div>
+</div>
+</div>
+</div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aac1b0f2033ac6fb41dea3e3f0f04737a">camera_<a href="#aac1b0f2033ac6fb41dea3e3f0f04737a" class="hash-link" aria-label="Direct link to camera_" title="Direct link to camera_" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">std::shared_ptr&lt;helios::scene::Camera&gt; helios::rendering::Viewport::camera_</td></tr></tbody></table>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>The camera used for rendering within this viewport.</p>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00098">98</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<div class="doxyProgramListing">
+<div class="doxyCodeLine"><span class="doxyLineNumber">98</span><span class="doxyLineContent"><span class="doxyHighlight">        std::shared_ptr&lt;helios::scene::Camera&gt; camera_;</span></span></div>
+</div>
+</div>
+</div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ae54f2fdf13f19fc0022bc8f28ef84bd1">clearColor_<a href="#ae54f2fdf13f19fc0022bc8f28ef84bd1" class="hash-link" aria-label="Direct link to clearColor_" title="Direct link to clearColor_" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">helios::math::vec4f helios::rendering::Viewport::clearColor_ = <a class="" href="/docs/helios/namespaces/helios/math/#a08252f81850c5902e3c8dead272f3332">helios::math::vec4f</a>(0.0f, 0.0f, 0.0f, 1.0f)</td></tr></tbody></table>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Color used when clearing the color buffer. Defaults to &quot;black&quot;, i.e. no color at all.</p>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00075">75</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<div class="doxyProgramListing">
+<div class="doxyCodeLine"><span class="doxyLineNumber">75</span><span class="doxyLineContent"><span class="doxyHighlight">        <a class="" href="/docs/helios/namespaces/helios/math/#a08252f81850c5902e3c8dead272f3332">helios::math::vec4f</a> clearColor_ = <a class="" href="/docs/helios/namespaces/helios/math/#a08252f81850c5902e3c8dead272f3332">helios::math::vec4f</a>(0.0f, 0.0f, 0.0f, 1.0f);</span></span></div>
+</div>
+</div>
+</div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="af8d874d246736fde5c1bbe7e7415f21e">clearFlags_<a href="#af8d874d246736fde5c1bbe7e7415f21e" class="hash-link" aria-label="Direct link to clearFlags_" title="Direct link to clearFlags_" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">int helios::rendering::Viewport::clearFlags_ = std::to_underlying(<a class="" href="/docs/helios/namespaces/helios/rendering/#aad4b10dc2924beaf3680fb245505290cacb5feb1b7314637725a2e73bdc9f7295">ClearFlags::Color</a>)</td></tr></tbody></table>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Bitmask of buffers to clear.</p>
+<p>Defaults to <a class="" href="/docs/helios/namespaces/helios/rendering/#aad4b10dc2924beaf3680fb245505290cacb5feb1b7314637725a2e73bdc9f7295">ClearFlags::Color</a>.</p>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00070">70</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<div class="doxyProgramListing">
+<div class="doxyCodeLine"><span class="doxyLineNumber">70</span><span class="doxyLineContent"><span class="doxyHighlight">        </span><span class="doxyHighlightKeywordType">int</span><span class="doxyHighlight"> clearFlags_ = std::to_underlying(<a class="" href="/docs/helios/namespaces/helios/rendering/#aad4b10dc2924beaf3680fb245505290cacb5feb1b7314637725a2e73bdc9f7295">ClearFlags::Color</a>);</span></span></div>
+</div>
+</div>
+</div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="a62a952ba452479aff1a097a14f9a3c42">height_<a href="#a62a952ba452479aff1a097a14f9a3c42" class="hash-link" aria-label="Direct link to height_" title="Direct link to height_" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">float helios::rendering::Viewport::height_ = 1.0f</td></tr></tbody></table>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>The height of the viewport, normalized to [0, 1].</p>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00093">93</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<div class="doxyProgramListing">
+<div class="doxyCodeLine"><span class="doxyLineNumber">93</span><span class="doxyLineContent"><span class="doxyHighlight">        </span><span class="doxyHighlightKeywordType">float</span><span class="doxyHighlight"> height_ = 1.0f;</span></span></div>
+</div>
+</div>
+</div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="a4ba9db09ddd649ac1dd190ea0ff3abca">needsUpdate_<a href="#a4ba9db09ddd649ac1dd190ea0ff3abca" class="hash-link" aria-label="Direct link to needsUpdate_" title="Direct link to needsUpdate_" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">bool helios::rendering::Viewport::needsUpdate_ = true</td></tr></tbody></table>
+</td><td class="doxyMemberLabelsRight">
+<span class="doxyMemberLabels">
+<span class="doxyMemberLabel mutable">mutable</span>
+</span>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Flag indicating if cached dimensions are dirty.</p>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00103">103</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<div class="doxyProgramListing">
+<div class="doxyCodeLine"><span class="doxyLineNumber">103</span><span class="doxyLineContent"><span class="doxyHighlight">        </span><span class="doxyHighlightKeyword">mutable</span><span class="doxyHighlight"> </span><span class="doxyHighlightKeywordType">bool</span><span class="doxyHighlight"> needsUpdate_ = </span><span class="doxyHighlightKeyword">true</span><span class="doxyHighlight">;</span></span></div>
+</div>
+</div>
+</div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="a048a665f71389e73805ebf4978f166d1">renderTarget_<a href="#a048a665f71389e73805ebf4978f166d1" class="hash-link" aria-label="Direct link to renderTarget_" title="Direct link to renderTarget_" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">const helios::rendering::RenderTarget* helios::rendering::Viewport::renderTarget_ = nullptr</td></tr></tbody></table>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Pointer to the parent <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">RenderTarget</a>.</p>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00063">63</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<div class="doxyProgramListing">
+<div class="doxyCodeLine"><span class="doxyLineNumber">63</span><span class="doxyLineContent"><span class="doxyHighlight">        </span><span class="doxyHighlightKeyword">const</span><span class="doxyHighlight"> <a class="" href="/docs/helios/classes/helios/rendering/rendertarget">helios::rendering::RenderTarget</a>* renderTarget_ = </span><span class="doxyHighlightKeyword">nullptr</span><span class="doxyHighlight">;</span></span></div>
+</div>
+</div>
+</div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="a72aa65fd5828e0e876d0b468c7768cef">width_<a href="#a72aa65fd5828e0e876d0b468c7768cef" class="hash-link" aria-label="Direct link to width_" title="Direct link to width_" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">float helios::rendering::Viewport::width_ = 1.0f</td></tr></tbody></table>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>The width of the viewport, normalized to [0, 1].</p>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00089">89</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<div class="doxyProgramListing">
+<div class="doxyCodeLine"><span class="doxyLineNumber">89</span><span class="doxyLineContent"><span class="doxyHighlight">        </span><span class="doxyHighlightKeywordType">float</span><span class="doxyHighlight"> width_ = 1.0f;</span></span></div>
+</div>
+</div>
+</div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="a217cf0c639a374c59b5eccfff380bfb1">x_<a href="#a217cf0c639a374c59b5eccfff380bfb1" class="hash-link" aria-label="Direct link to x_" title="Direct link to x_" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">float helios::rendering::Viewport::x_ = 0.0f</td></tr></tbody></table>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>The x-offset of the viewport, normalized to [0, 1].</p>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00080">80</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<div class="doxyProgramListing">
+<div class="doxyCodeLine"><span class="doxyLineNumber">80</span><span class="doxyLineContent"><span class="doxyHighlight">        </span><span class="doxyHighlightKeywordType">float</span><span class="doxyHighlight"> x_ = 0.0f;</span></span></div>
+</div>
+</div>
+</div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aa5299f117f30f4048900f8de6e2da761">y_<a href="#aa5299f117f30f4048900f8de6e2da761" class="hash-link" aria-label="Direct link to y_" title="Direct link to y_" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">float helios::rendering::Viewport::y_ = 0.0f</td></tr></tbody></table>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>The y-offset of the viewport, normalized to [0, 1].</p>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00084">84</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<div class="doxyProgramListing">
+<div class="doxyCodeLine"><span class="doxyLineNumber">84</span><span class="doxyLineContent"><span class="doxyHighlight">        </span><span class="doxyHighlightKeywordType">float</span><span class="doxyHighlight"> y_ = 0.0f;</span></span></div>
+</div>
+</div>
+</div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="a543c0a8f8f64b04db9926a6ef57b1142">zIndex_<a href="#a543c0a8f8f64b04db9926a6ef57b1142" class="hash-link" aria-label="Direct link to zIndex_" title="Direct link to zIndex_" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">int helios::rendering::Viewport::zIndex_ = 0</td></tr></tbody></table>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>The z-index for this viewport.</p>
+<p>The z-index represents the order the <a class="" href="/docs/helios/classes/helios/rendering/viewport">Viewport</a> gets rendered. A higher z-index means that the viewport gets rendered after viewports with a lower z-index are rendered.</p>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00117">117</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<div class="doxyProgramListing">
+<div class="doxyCodeLine"><span class="doxyLineNumber">117</span><span class="doxyLineContent"><span class="doxyHighlight">        </span><span class="doxyHighlightKeywordType">int</span><span class="doxyHighlight"> zIndex_ = 0;</span></span></div>
+</div>
+</div>
+</div>
+</div>
+<div class="doxySectionDef">
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="private-static-attributes">Private Static Attributes<a href="#private-static-attributes" class="hash-link" aria-label="Direct link to Private Static Attributes" title="Direct link to Private Static Attributes" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="a99067f9a3c13bb65fdfc3dcc45fa00ba">logger_<a href="#a99067f9a3c13bb65fdfc3dcc45fa00ba" class="hash-link" aria-label="Direct link to logger_" title="Direct link to logger_" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">const helios::util::log::Logger&amp; helios::rendering::Viewport::logger_ = <a class="" href="/docs/helios/classes/helios/util/log/logmanager/#a750d8fd5b3ee3678600644756b0631e7">helios::util::log::LogManager::loggerForScope</a>(<a class="" href="/docs/helios/files/include/include/ext/include/ext/opengl/include/ext/opengl/rendering/include/ext/opengl/rendering/shader/opengluniformlocationmap-ixx/#acbc04f24078582c7d42b2085be5d5750">HELIOS_LOG_SCOPE</a>)</td></tr></tbody></table>
+</td><td class="doxyMemberLabelsRight">
+<span class="doxyMemberLabels">
+<span class="doxyMemberLabel static">static</span>
+</span>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx/#l00057">57</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a>.</p>
+<div class="doxyProgramListing">
+<div class="doxyCodeLine"><span class="doxyLineNumber">57</span><span class="doxyLineContent"><span class="doxyHighlight">        </span><span class="doxyHighlightKeyword">inline</span><span class="doxyHighlight"> </span><span class="doxyHighlightKeyword">static</span><span class="doxyHighlight"> </span><span class="doxyHighlightKeyword">const</span><span class="doxyHighlight"> <a class="" href="/docs/helios/classes/helios/util/log/logger">helios::util::log::Logger</a>&amp; logger_ = <a class="" href="/docs/helios/classes/helios/util/log/logmanager/#a750d8fd5b3ee3678600644756b0631e7">helios::util::log::LogManager::loggerForScope</a>(<a class="" href="/docs/helios/files/include/include/ext/include/ext/opengl/include/ext/opengl/rendering/include/ext/opengl/rendering/shader/opengluniformlocationmap-ixx/#acbc04f24078582c7d42b2085be5d5750">HELIOS_LOG_SCOPE</a>);</span></span></div>
+</div>
+</div>
+</div>
+</div>
+<hr>
+<p>The documentation for this class was generated from the following file:</p>
+<ul>
+<li class=""><a class="" href="/docs/helios/files/include/include/helios/include/helios/rendering/viewport-ixx">Viewport.ixx</a></li>
+</ul>
+<hr>
+<p class="doxyGeneratedBy">Generated via <a href="https://xpack.github.io/doxygen2docusaurus" target="_blank" rel="noopener noreferrer" class="">doxygen2docusaurus</a> 2.0.0 by <a href="https://www.doxygen.nl" target="_blank" rel="noopener noreferrer" class="">Doxygen</a> 1.15.0.</p>
+</div></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/helios/structs/helios/rendering/vertex"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Vertex</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/helios/structs/helios/rendering/viewportkey"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">ViewportKey</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#declaration" class="table-of-contents__link toc-highlight">Declaration</a></li><li><a href="#public-constructors-index" class="table-of-contents__link toc-highlight">Public Constructors Index</a></li><li><a href="#public-member-functions-index" class="table-of-contents__link toc-highlight">Public Member Functions Index</a></li><li><a href="#private-member-functions-index" class="table-of-contents__link toc-highlight">Private Member Functions Index</a></li><li><a href="#private-member-attributes-index" class="table-of-contents__link toc-highlight">Private Member Attributes Index</a></li><li><a href="#private-static-attributes-index" class="table-of-contents__link toc-highlight">Private Static Attributes Index</a></li><li><a href="#details" class="table-of-contents__link toc-highlight">Description</a></li><li><a href="#public-constructors" class="table-of-contents__link toc-highlight">Public Constructors</a><ul><li><a href="#acab3a95a725e2ce895c8cf5a075e5a8c" class="table-of-contents__link toc-highlight">Viewport()</a></li><li><a href="#a219c81106b214b5e690210bd6258d2e2" class="table-of-contents__link toc-highlight">Viewport()</a></li></ul></li><li><a href="#public-member-functions" class="table-of-contents__link toc-highlight">Public Member Functions</a><ul><li><a href="#a6d7fc6de0fc5c9c31d2d7ee760f1f126" class="table-of-contents__link toc-highlight">bounds()</a></li><li><a href="#a93d7f88ee769079ac287e9859f242e24" class="table-of-contents__link toc-highlight">camera()</a></li><li><a href="#aeb81651e77ad4e0082fef42815198917" class="table-of-contents__link toc-highlight">clearColor()</a></li><li><a href="#a77b488470dd2c811db40faeec666983b" class="table-of-contents__link toc-highlight">clearFlags()</a></li><li><a href="#a7739f87efe62f23fb891fe9cbfc4e1c2" class="table-of-contents__link toc-highlight">onRenderTargetResize()</a></li><li><a href="#afa67d77263ec5dd36db0591ffb9f889d" class="table-of-contents__link toc-highlight">renderTarget()</a></li><li><a href="#a1935d17a330f646b6033b31799d6e22f" class="table-of-contents__link toc-highlight">setBounds()</a></li><li><a href="#a803fe87a8f476b47f48a338a71257816" class="table-of-contents__link toc-highlight">setCamera()</a></li><li><a href="#af94f8b0ec7697edea1c0cf843c03ad3d" class="table-of-contents__link toc-highlight">setClearColor()</a></li><li><a href="#a7199b3df8a9c5817eaa21173a9c6e434" class="table-of-contents__link toc-highlight">setClearFlags()</a></li><li><a href="#a9c8ed040c0e35728770ddd462860c5bc" class="table-of-contents__link toc-highlight">setRenderTarget()</a></li><li><a href="#af7fa261780058e3f8b85cb2d8b504fc0" class="table-of-contents__link toc-highlight">setZIndex()</a></li></ul></li><li><a href="#private-member-functions" class="table-of-contents__link toc-highlight">Private Member Functions</a><ul><li><a href="#a8dec67b768844da2e79344929480316e" class="table-of-contents__link toc-highlight">updateBounds()</a></li><li><a href="#ae7cd238882295790a2ba6ce7ea9d74d5" class="table-of-contents__link toc-highlight">updateCamera()</a></li></ul></li><li><a href="#private-member-attributes" class="table-of-contents__link toc-highlight">Private Member Attributes</a><ul><li><a href="#a7394359da5d6ad017e84af9ebaf8a895" class="table-of-contents__link toc-highlight">bounds_</a></li><li><a href="#aac1b0f2033ac6fb41dea3e3f0f04737a" class="table-of-contents__link toc-highlight">camera_</a></li><li><a href="#ae54f2fdf13f19fc0022bc8f28ef84bd1" class="table-of-contents__link toc-highlight">clearColor_</a></li><li><a href="#af8d874d246736fde5c1bbe7e7415f21e" class="table-of-contents__link toc-highlight">clearFlags_</a></li><li><a href="#a62a952ba452479aff1a097a14f9a3c42" class="table-of-contents__link toc-highlight">height_</a></li><li><a href="#a4ba9db09ddd649ac1dd190ea0ff3abca" class="table-of-contents__link toc-highlight">needsUpdate_</a></li><li><a href="#a048a665f71389e73805ebf4978f166d1" class="table-of-contents__link toc-highlight">renderTarget_</a></li><li><a href="#a72aa65fd5828e0e876d0b468c7768cef" class="table-of-contents__link toc-highlight">width_</a></li><li><a href="#a217cf0c639a374c59b5eccfff380bfb1" class="table-of-contents__link toc-highlight">x_</a></li><li><a href="#aa5299f117f30f4048900f8de6e2da761" class="table-of-contents__link toc-highlight">y_</a></li><li><a href="#a543c0a8f8f64b04db9926a6ef57b1142" class="table-of-contents__link toc-highlight">zIndex_</a></li></ul></li><li><a href="#private-static-attributes" class="table-of-contents__link toc-highlight">Private Static Attributes</a><ul><li><a href="#a99067f9a3c13bb65fdfc3dcc45fa00ba" class="table-of-contents__link toc-highlight">logger_</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Documentation</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Getting Started</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/api/overview">API Reference</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/examples/simple-cube">Examples</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/thorstensuckow/helios/discussions" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub Discussions<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/thorstensuckow/helios/issues" target="_blank" rel="noopener noreferrer" class="footer__link-item">Issues<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.researchgate.net/publication/397445662_helios_Design_and_prototypical_implementation_of_a_C_game_framework" target="_blank" rel="noopener noreferrer" class="footer__link-item">Academic Paper<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/thorstensuckow/helios" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 <a href="https://thorsten.suckow-homberg.de">Thorsten Suckow-Homberg</a> / <a href="https://garagecraft.games">GarageCraft Games</a>. Licensed under MIT. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

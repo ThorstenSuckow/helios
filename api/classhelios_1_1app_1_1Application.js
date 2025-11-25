@@ -2,8 +2,8 @@ var classhelios_1_1app_1_1Application =
 [
     [ "~Application", "classhelios_1_1app_1_1Application.html#aec579824c0704542d3f7d6c4f47851a1", null ],
     [ "Application", "classhelios_1_1app_1_1Application.html#a770ed54a97c68d5ac40542f3a702121a", null ],
-    [ "addController", "classhelios_1_1app_1_1Application.html#ac74fe7518d57fe0892b44f956e73f970", null ],
-    [ "createWindow", "classhelios_1_1app_1_1Application.html#a91fa8a45e2a79d32dba31bc37deeb824", null ],
+    [ "addController", "classhelios_1_1app_1_1Application.html#a7285d8f027a7cb17a31bf603fc84cc62", null ],
+    [ "createWindow", "classhelios_1_1app_1_1Application.html#a8cc35c9dddb4f715d7d5c2b5197ef0d4", null ],
     [ "current", "classhelios_1_1app_1_1Application.html#a361bd11af60d329332662b5b5a940bb9", null ],
     [ "eventManager", "classhelios_1_1app_1_1Application.html#a6ea14c8bd591020cbd5d2baef551a804", null ],
     [ "hasWindow", "classhelios_1_1app_1_1Application.html#a3cd9e39b64d771f2bc795cbc8c255a33", null ],

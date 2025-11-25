@@ -10,13 +10,14 @@
         <name>projectionMatrix_</name>
         <qualifiedname>helios::scene::Snapshot::projectionMatrix_</qualifiedname>
         <briefdescription>
-<para>The projection matrix that should be used with this <ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">Snapshot</ref>. The projection matrix transforms camera space into clip space. </para>
+<para>The projection matrix that should be used with this <ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">Snapshot</ref>. </para>
         </briefdescription>
         <detaileddescription>
+<para>The projection matrix transforms camera space into clip space. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/Snapshot.ixx" line="39" column="35" bodyfile="include/helios/scene/Snapshot.ixx" bodystart="39" bodyend="-1"/>
+        <location file="include/helios/scene/Snapshot.ixx" line="42" column="35" bodyfile="include/helios/scene/Snapshot.ixx" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1scene_1_1Snapshot_1ac0110b8cf9d487de2dc6c13ba721cb2b" prot="protected" static="no" mutable="no">
         <type>const <ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref></type>
@@ -25,13 +26,14 @@
         <name>viewMatrix_</name>
         <qualifiedname>helios::scene::Snapshot::viewMatrix_</qualifiedname>
         <briefdescription>
-<para>The view matrix that should be used with this <ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">Snapshot</ref>. The view matrix transforms world space coordinates into camera space. </para>
+<para>The view matrix that should be used with this <ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">Snapshot</ref>. </para>
         </briefdescription>
         <detaileddescription>
+<para>The view matrix transforms world space coordinates into camera space. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/Snapshot.ixx" line="45" column="35" bodyfile="include/helios/scene/Snapshot.ixx" bodystart="45" bodyend="-1"/>
+        <location file="include/helios/scene/Snapshot.ixx" line="49" column="35" bodyfile="include/helios/scene/Snapshot.ixx" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1scene_1_1Snapshot_1aba85236c232fa0c9f2bc7986f1c417a3" prot="protected" static="no" mutable="no">
         <type>const std::vector&lt; <ref refid="structhelios_1_1scene_1_1SnapshotItem" kindref="compound">SnapshotItem</ref> &gt;</type>
@@ -40,13 +42,29 @@
         <name>snapshotItems_</name>
         <qualifiedname>helios::scene::Snapshot::snapshotItems_</qualifiedname>
         <briefdescription>
-<para>A const collection of `SnapshotItem`s representing all renderable objects along with their world transformation visible in this <ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">Snapshot</ref>. </para>
+<para>A const collection of `SnapshotItem`s representing all renderable objects visible in this <ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">Snapshot</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Each item contains the world transformation along with the renderable object. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/Snapshot.ixx" line="56" column="27" bodyfile="include/helios/scene/Snapshot.ixx" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1scene_1_1Snapshot_1a5a32ec6b676b3b95d590764dda91e4a6" prot="protected" static="no" mutable="no">
+        <type>std::shared_ptr&lt; const <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">helios::rendering::Viewport</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;const helios::rendering::Viewport&gt; helios::scene::Snapshot::viewport_</definition>
+        <argsstring></argsstring>
+        <name>viewport_</name>
+        <qualifiedname>helios::scene::Snapshot::viewport_</qualifiedname>
+        <briefdescription>
+<para>The viewport associated with this <ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">Snapshot</ref>. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/Snapshot.ixx" line="51" column="27" bodyfile="include/helios/scene/Snapshot.ixx" bodystart="51" bodyend="-1"/>
+        <location file="include/helios/scene/Snapshot.ixx" line="61" column="25" bodyfile="include/helios/scene/Snapshot.ixx" bodystart="61" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -62,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/Snapshot.ixx" line="56" column="9"/>
+        <location file="include/helios/scene/Snapshot.ixx" line="65" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1Snapshot_1a413c755346de659430aaa0e89f0f02a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -74,13 +92,14 @@
           <type>const Snapshot &amp;</type>
         </param>
         <briefdescription>
-<para>Delete copy constructor. Snapshots are not intended to be copied. </para>
+<para>Delete copy constructor. </para>
         </briefdescription>
         <detaileddescription>
+<para>Snapshots are not intended to be copied. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/Snapshot.ixx" line="62" column="9"/>
+        <location file="include/helios/scene/Snapshot.ixx" line="72" column="9"/>
         <references refid="classhelios_1_1scene_1_1Snapshot_1a413c755346de659430aaa0e89f0f02a9">Snapshot</references>
         <referencedby refid="classhelios_1_1scene_1_1Snapshot_1a868ac2150f06e22f1d4373c39001e026">operator=</referencedby>
         <referencedby refid="classhelios_1_1scene_1_1Snapshot_1a413c755346de659430aaa0e89f0f02a9">Snapshot</referencedby>
@@ -95,21 +114,26 @@
           <type>const <ref refid="classhelios_1_1scene_1_1Snapshot_1a413c755346de659430aaa0e89f0f02a9" kindref="member">Snapshot</ref> &amp;</type>
         </param>
         <briefdescription>
-<para>Delete copy assignment operator. Snapshots are not intended to be copied. </para>
+<para>Delete copy assignment operator. </para>
         </briefdescription>
         <detaileddescription>
+<para>Snapshots are not intended to be copied. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/Snapshot.ixx" line="68" column="18"/>
+        <location file="include/helios/scene/Snapshot.ixx" line="79" column="18"/>
         <references refid="classhelios_1_1scene_1_1Snapshot_1a413c755346de659430aaa0e89f0f02a9">Snapshot</references>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1scene_1_1Snapshot_1af10f664012eafdef58c8ca88177331a0" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1scene_1_1Snapshot_1ab31eb58d610bae0c68e30a539ed8ac89" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type></type>
         <definition>helios::scene::Snapshot::Snapshot</definition>
-        <argsstring>(const math::mat4f &amp;projectionMatrix, const math::mat4f &amp;viewMatrix, std::vector&lt; SnapshotItem &gt; snapshotItems) noexcept</argsstring>
+        <argsstring>(std::shared_ptr&lt; const helios::rendering::Viewport &gt; viewport, const math::mat4f &amp;projectionMatrix, const math::mat4f &amp;viewMatrix, std::vector&lt; SnapshotItem &gt; snapshotItems) noexcept</argsstring>
         <name>Snapshot</name>
         <qualifiedname>helios::scene::Snapshot::Snapshot</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; const <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">helios::rendering::Viewport</ref> &gt;</type>
+          <declname>viewport</declname>
+        </param>
         <param>
           <type>const <ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">math::mat4f</ref> &amp;</type>
           <declname>projectionMatrix</declname>
@@ -127,6 +151,14 @@
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>viewport</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The viewport associated with this snapshot. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
 <parameternamelist>
 <parametername>projectionMatrix</parametername>
 </parameternamelist>
@@ -147,7 +179,7 @@
 <parametername>snapshotItems</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A std::vector of snapshot items. The vector is moved into the <ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">Snapshot</ref>, transferring ownership to **this** instance. </para>
+<para>A vector of snapshot items. The vector is moved into the <ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">Snapshot</ref>, transferring ownership to this instance. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -155,10 +187,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/Snapshot.ixx" line="78" column="9"/>
+        <location file="include/helios/scene/Snapshot.ixx" line="90" column="9"/>
         <references refid="classhelios_1_1scene_1_1Snapshot_1aae4b2f152fd9144ce8e264064495e867">projectionMatrix</references>
         <references refid="classhelios_1_1scene_1_1Snapshot_1adb178bc5c792fe32d49f76cba70b71c2">snapshotItems</references>
         <references refid="classhelios_1_1scene_1_1Snapshot_1a10d5c7307db942f3717c0ea07597020b">viewMatrix</references>
+        <references refid="classhelios_1_1scene_1_1Snapshot_1acf922e0ea3d04ec30e0fba9cf2592ae5">viewport</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1Snapshot_1adb178bc5c792fe32d49f76cba70b71c2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>const std::vector&lt; <ref refid="structhelios_1_1scene_1_1SnapshotItem" kindref="compound">SnapshotItem</ref> &gt; &amp;</type>
@@ -167,17 +200,39 @@
         <name>snapshotItems</name>
         <qualifiedname>helios::scene::Snapshot::snapshotItems</qualifiedname>
         <briefdescription>
-<para>Returns a const ref to this `Snapshot`&apos;s SnapshotItems. The vector contains all renderable items in the scene. </para>
+<para>Returns a const reference to this <ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">Snapshot</ref>&apos;s SnapshotItems. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>A const ref to this <ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">Snapshot</ref>&apos;s collection of SnapshotItems. </para>
+<para>The vector contains all renderable items in the scene.</para>
+<para><simplesect kind="return"><para>A const reference to this <ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">Snapshot</ref>&apos;s collection of SnapshotItems. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/Snapshot.ixx" line="89" column="28"/>
-        <referencedby refid="classhelios_1_1scene_1_1Snapshot_1af10f664012eafdef58c8ca88177331a0">Snapshot</referencedby>
+        <location file="include/helios/scene/Snapshot.ixx" line="103" column="28"/>
+        <referencedby refid="classhelios_1_1scene_1_1Snapshot_1ab31eb58d610bae0c68e30a539ed8ac89">Snapshot</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1scene_1_1Snapshot_1acf922e0ea3d04ec30e0fba9cf2592ae5" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::shared_ptr&lt; const <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">helios::rendering::Viewport</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; const helios::rendering::Viewport &gt; helios::scene::Snapshot::viewport</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>viewport</name>
+        <qualifiedname>helios::scene::Snapshot::viewport</qualifiedname>
+        <briefdescription>
+<para>Returns the viewport associated with this <ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">Snapshot</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A shared pointer to the const Viewport. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/Snapshot.ixx" line="110" column="26"/>
+        <references refid="classhelios_1_1scene_1_1Snapshot_1acf922e0ea3d04ec30e0fba9cf2592ae5">viewport</references>
+        <referencedby refid="classhelios_1_1scene_1_1Snapshot_1ab31eb58d610bae0c68e30a539ed8ac89">Snapshot</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Snapshot_1acf922e0ea3d04ec30e0fba9cf2592ae5">viewport</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1Snapshot_1aae4b2f152fd9144ce8e264064495e867" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref> &amp;</type>
@@ -186,19 +241,20 @@
         <name>projectionMatrix</name>
         <qualifiedname>helios::scene::Snapshot::projectionMatrix</qualifiedname>
         <briefdescription>
-<para>Returns a const ref to the projection matrix for this <ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">Snapshot</ref>. The matrix represents the projection matrix of the camera that was used to capture this scene. </para>
+<para>Returns a const reference to the projection matrix for this <ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">Snapshot</ref>. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>A const ref to the projection matrix used for creating this <ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">Snapshot</ref>. </para>
+<para>The matrix represents the projection matrix of the camera that was used to capture this scene.</para>
+<para><simplesect kind="return"><para>A const reference to the projection matrix used for creating this <ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">Snapshot</ref>. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/Snapshot.ixx" line="97" column="36"/>
+        <location file="include/helios/scene/Snapshot.ixx" line="120" column="36"/>
         <references refid="classhelios_1_1scene_1_1Snapshot_1aae4b2f152fd9144ce8e264064495e867">projectionMatrix</references>
         <referencedby refid="classhelios_1_1scene_1_1Snapshot_1aae4b2f152fd9144ce8e264064495e867">projectionMatrix</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Snapshot_1af10f664012eafdef58c8ca88177331a0">Snapshot</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Snapshot_1ab31eb58d610bae0c68e30a539ed8ac89">Snapshot</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1Snapshot_1a10d5c7307db942f3717c0ea07597020b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref> &amp;</type>
@@ -207,18 +263,19 @@
         <name>viewMatrix</name>
         <qualifiedname>helios::scene::Snapshot::viewMatrix</qualifiedname>
         <briefdescription>
-<para>Returns a const ref to the view matrix for this <ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">Snapshot</ref>. The matrix represents the view matrix of the camera that was used to capture this scene. </para>
+<para>Returns a const reference to the view matrix for this <ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">Snapshot</ref>. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>A const ref to the view matrix used for creating this <ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">Snapshot</ref>. </para>
+<para>The matrix represents the view matrix of the camera that was used to capture this scene.</para>
+<para><simplesect kind="return"><para>A const reference to the view matrix used for creating this <ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">Snapshot</ref>. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/Snapshot.ixx" line="105" column="36"/>
+        <location file="include/helios/scene/Snapshot.ixx" line="130" column="36"/>
         <references refid="classhelios_1_1scene_1_1Snapshot_1a10d5c7307db942f3717c0ea07597020b">viewMatrix</references>
-        <referencedby refid="classhelios_1_1scene_1_1Snapshot_1af10f664012eafdef58c8ca88177331a0">Snapshot</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Snapshot_1ab31eb58d610bae0c68e30a539ed8ac89">Snapshot</referencedby>
         <referencedby refid="classhelios_1_1scene_1_1Snapshot_1a10d5c7307db942f3717c0ea07597020b">viewMatrix</referencedby>
       </memberdef>
     </sectiondef>
@@ -227,7 +284,7 @@
     </briefdescription>
     <detaileddescription>
 <para>The class encapsulates all necessary data to render a single frame. It is designed to be a lightweight DTO to pass information to the rendering engine abstraction layer, such as the `RenderPass` class.</para>
-<para>A snapshot includes a camera&apos;s projection and view matrix that should be used for rendering the scene. A collection of `SnapshotItems` holds the information about the renderable objects in the scene, preferably computed by using a `FrustumCullingStrategy` (<simplesect kind="see"><para><ref refid="classhelios_1_1scene_1_1Scene_1aa27f858e0665c608f5402872aca0dae0" kindref="member">Scene::createSnapshot</ref>).</para>
+<para>A snapshot includes a camera&apos;s projection and view matrix that should be used for rendering the scene. A collection of `SnapshotItems` holds the information about the renderable objects in the scene, preferably computed by using a `FrustumCullingStrategy` (<simplesect kind="see"><para><ref refid="classhelios_1_1scene_1_1Scene_1ab3ad742392c2a2b159cf8927ee6cf375" kindref="member">Scene::createSnapshot</ref>).</para>
 </simplesect>
 The class is not copyable to enforce its immutability and prevent unintended duplication of potentially large data sets. </para>
     </detaileddescription>
@@ -245,17 +302,19 @@ The class is not copyable to enforce its immutability and prevent unintended dup
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="include/helios/scene/Snapshot.ixx" line="32" column="5" bodyfile="include/helios/scene/Snapshot.ixx" bodystart="32" bodyend="106"/>
+    <location file="include/helios/scene/Snapshot.ixx" line="34" column="5" bodyfile="include/helios/scene/Snapshot.ixx" bodystart="34" bodyend="131"/>
     <listofallmembers>
       <member refid="classhelios_1_1scene_1_1Snapshot_1a868ac2150f06e22f1d4373c39001e026" prot="public" virt="non-virtual"><scope>helios::scene::Snapshot</scope><name>operator=</name></member>
       <member refid="classhelios_1_1scene_1_1Snapshot_1aae4b2f152fd9144ce8e264064495e867" prot="public" virt="non-virtual"><scope>helios::scene::Snapshot</scope><name>projectionMatrix</name></member>
       <member refid="classhelios_1_1scene_1_1Snapshot_1a47dffe6969f2ed64915d1fd4599cd44a" prot="protected" virt="non-virtual"><scope>helios::scene::Snapshot</scope><name>projectionMatrix_</name></member>
       <member refid="classhelios_1_1scene_1_1Snapshot_1a413c755346de659430aaa0e89f0f02a9" prot="public" virt="non-virtual"><scope>helios::scene::Snapshot</scope><name>Snapshot</name></member>
-      <member refid="classhelios_1_1scene_1_1Snapshot_1af10f664012eafdef58c8ca88177331a0" prot="public" virt="non-virtual"><scope>helios::scene::Snapshot</scope><name>Snapshot</name></member>
+      <member refid="classhelios_1_1scene_1_1Snapshot_1ab31eb58d610bae0c68e30a539ed8ac89" prot="public" virt="non-virtual"><scope>helios::scene::Snapshot</scope><name>Snapshot</name></member>
       <member refid="classhelios_1_1scene_1_1Snapshot_1adb178bc5c792fe32d49f76cba70b71c2" prot="public" virt="non-virtual"><scope>helios::scene::Snapshot</scope><name>snapshotItems</name></member>
       <member refid="classhelios_1_1scene_1_1Snapshot_1aba85236c232fa0c9f2bc7986f1c417a3" prot="protected" virt="non-virtual"><scope>helios::scene::Snapshot</scope><name>snapshotItems_</name></member>
       <member refid="classhelios_1_1scene_1_1Snapshot_1a10d5c7307db942f3717c0ea07597020b" prot="public" virt="non-virtual"><scope>helios::scene::Snapshot</scope><name>viewMatrix</name></member>
       <member refid="classhelios_1_1scene_1_1Snapshot_1ac0110b8cf9d487de2dc6c13ba721cb2b" prot="protected" virt="non-virtual"><scope>helios::scene::Snapshot</scope><name>viewMatrix_</name></member>
+      <member refid="classhelios_1_1scene_1_1Snapshot_1acf922e0ea3d04ec30e0fba9cf2592ae5" prot="public" virt="non-virtual"><scope>helios::scene::Snapshot</scope><name>viewport</name></member>
+      <member refid="classhelios_1_1scene_1_1Snapshot_1a5a32ec6b676b3b95d590764dda91e4a6" prot="protected" virt="non-virtual"><scope>helios::scene::Snapshot</scope><name>viewport_</name></member>
       <member refid="classhelios_1_1scene_1_1Snapshot_1aaad8367749cf2a8c03a9cc65b812f389" prot="public" virt="non-virtual"><scope>helios::scene::Snapshot</scope><name>~Snapshot</name></member>
     </listofallmembers>
   </compounddef>

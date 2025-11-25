@@ -127,20 +127,22 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a45f186c5f167cb06540512a287ab83a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prevent move.  <br /></td></tr>
 <tr class="memitem:a86cf6c3fe8c0df2ed6a5018744ab7464" id="r_a86cf6c3fe8c0df2ed6a5018744ab7464"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#afac382a610028b5e09af4ade728b78b3">RenderPass</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a86cf6c3fe8c0df2ed6a5018744ab7464">operator=</a> (<a class="el" href="#afac382a610028b5e09af4ade728b78b3">RenderPass</a> &amp;&amp;) noexcept=delete</td></tr>
 <tr class="memdesc:a86cf6c3fe8c0df2ed6a5018744ab7464"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prevent move assignment.  <br /></td></tr>
-<tr class="memitem:ae3f4f46b15048f4aa38852938748fe28" id="r_ae3f4f46b15048f4aa38852938748fe28"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3f4f46b15048f4aa38852938748fe28">RenderPass</a> (std::unique_ptr&lt; <a class="el" href="classhelios_1_1rendering_1_1RenderQueue.html">helios::rendering::RenderQueue</a> &gt; <a class="el" href="#aa8e67383f0e4057c47b80405c02eae19">renderQueue</a>, std::unique_ptr&lt; const <a class="el" href="classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html">helios::rendering::shader::UniformValueMap</a> &gt; <a class="el" href="#a9b3b86c9d3d2455bba80ee4b410fbb5b">frameUniformValues</a>=nullptr) noexcept</td></tr>
-<tr class="memdesc:ae3f4f46b15048f4aa38852938748fe28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new `RenderPass` with the specified `RenderQueue` and the `UniformValueMap`. Ownership of both objects is transferred to **this** `RenderPass`.  <br /></td></tr>
+<tr class="memitem:aade7bd52eb917132f463a45ed3aaac87" id="r_aade7bd52eb917132f463a45ed3aaac87"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aade7bd52eb917132f463a45ed3aaac87">RenderPass</a> (std::shared_ptr&lt; const <a class="el" href="classhelios_1_1rendering_1_1Viewport.html">helios::rendering::Viewport</a> &gt; <a class="el" href="#ab0e71c167bc7d90cd4dc1be780cbe7d5">viewport</a>, std::unique_ptr&lt; <a class="el" href="classhelios_1_1rendering_1_1RenderQueue.html">helios::rendering::RenderQueue</a> &gt; <a class="el" href="#aa8e67383f0e4057c47b80405c02eae19">renderQueue</a>, std::unique_ptr&lt; const <a class="el" href="classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html">helios::rendering::shader::UniformValueMap</a> &gt; <a class="el" href="#a9b3b86c9d3d2455bba80ee4b410fbb5b">frameUniformValues</a>=nullptr) noexcept</td></tr>
+<tr class="memdesc:aade7bd52eb917132f463a45ed3aaac87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new `RenderPass` with the specified `Viewport`, `RenderQueue` and the `UniformValueMap`. Ownership of <a class="el" href="classhelios_1_1rendering_1_1Viewport.html" title="Represents a rectangular area within a RenderTarget where a scene is rendered.">Viewport</a> is shared with this instance, the latter objects are transferred to **this** `RenderPass`.  <br /></td></tr>
 <tr class="memitem:aa8e67383f0e4057c47b80405c02eae19" id="r_aa8e67383f0e4057c47b80405c02eae19"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classhelios_1_1rendering_1_1RenderQueue.html">RenderQueue</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa8e67383f0e4057c47b80405c02eae19">renderQueue</a> () const noexcept</td></tr>
 <tr class="memdesc:aa8e67383f0e4057c47b80405c02eae19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a const ref to the `RenderQueue` this `RenderPass` holds.  <br /></td></tr>
+<tr class="memitem:ab0e71c167bc7d90cd4dc1be780cbe7d5" id="r_ab0e71c167bc7d90cd4dc1be780cbe7d5"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classhelios_1_1rendering_1_1Viewport.html">Viewport</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0e71c167bc7d90cd4dc1be780cbe7d5">viewport</a> () const noexcept</td></tr>
+<tr class="memdesc:ab0e71c167bc7d90cd4dc1be780cbe7d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a const ref to the `Viewport` this `RenderPass` holds.  <br /></td></tr>
 <tr class="memitem:a54bc377a9a1ad0c2d0f8a31342d247d7" id="r_a54bc377a9a1ad0c2d0f8a31342d247d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54bc377a9a1ad0c2d0f8a31342d247d7">setFrameUniformValues</a> (std::unique_ptr&lt; const <a class="el" href="classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html">helios::rendering::shader::UniformValueMap</a> &gt; <a class="el" href="#a9b3b86c9d3d2455bba80ee4b410fbb5b">frameUniformValues</a>) noexcept</td></tr>
 <tr class="memdesc:a54bc377a9a1ad0c2d0f8a31342d247d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets this `RenderPass`' `UniformValueMap` containing per-frame specific uniform values. Transfers ownership of the provided UniformValueMap to this `RenderPass`.  <br /></td></tr>
 <tr class="memitem:a9b3b86c9d3d2455bba80ee4b410fbb5b" id="r_a9b3b86c9d3d2455bba80ee4b410fbb5b"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html">helios::rendering::shader::UniformValueMap</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9b3b86c9d3d2455bba80ee4b410fbb5b">frameUniformValues</a> () const noexcept</td></tr>
-<tr class="memdesc:a9b3b86c9d3d2455bba80ee4b410fbb5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a const ref to this `RenderPass`' `UniformValueMap`. The map might be empty.  <br /></td></tr>
+<tr class="memdesc:a9b3b86c9d3d2455bba80ee4b410fbb5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a const reference to this `RenderPass`' `UniformValueMap`.  <br /></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-pro-static-attribs" class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
 <tr class="memitem:a3e984be7b0f5767e98d681219b290967" id="r_a3e984be7b0f5767e98d681219b290967"><td class="memItemLeft" align="right" valign="top"><a id="a3e984be7b0f5767e98d681219b290967" name="a3e984be7b0f5767e98d681219b290967"></a>
-const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::util::log::Logger</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>logger_</b></td></tr>
-<tr class="memdesc:a3e984be7b0f5767e98d681219b290967"><td class="mdescLeft">&#160;</td><td class="mdescRight">The logger used with this <a class="el" href="classhelios_1_1rendering_1_1RenderPass.html" title="Represents a single RenderPass under a set of specific uniform values.">RenderPass</a> instance. Defaults to HELIOS_LOG_SCOPE. <br /></td></tr>
+static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::util::log::Logger</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>logger_</b></td></tr>
+<tr class="memdesc:a3e984be7b0f5767e98d681219b290967"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shared logger instance for all <a class="el" href="classhelios_1_1rendering_1_1RenderPass.html" title="Represents a single RenderPass under a set of specific uniform values.">RenderPass</a> objects. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a single <a class="el" href="classhelios_1_1rendering_1_1RenderPass.html" title="Represents a single RenderPass under a set of specific uniform values.">RenderPass</a> under a set of specific uniform values. </p>
@@ -148,7 +150,7 @@ const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::uti
 <p>`RenderPass`es are typically processed sequentially by an API-specific implementation of the pure virtual `RenderingDevice` class.</p>
 <dl class="section note"><dt>Note</dt><dd>A `RenderPass` should be configurable with other properties relevant to the underlying rendering backend, e.g. depth testing, draw mode etc. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RenderPass_8ixx_source.html#l00033">33</a> of file <a class="el" href="RenderPass_8ixx_source.html">RenderPass.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RenderPass_8ixx_source.html#l00035">35</a> of file <a class="el" href="RenderPass_8ixx_source.html">RenderPass.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a86414eb8eafb963d6e34e4b8148fed8f" name="a86414eb8eafb963d6e34e4b8148fed8f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a86414eb8eafb963d6e34e4b8148fed8f">&#9670;&#160;</a></span>~RenderPass()</h2>
@@ -202,7 +204,7 @@ const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::uti
 
 <p class="reference">References <a class="el" href="#afac382a610028b5e09af4ade728b78b3">RenderPass()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#a10c7f73c83242609ccd9828ab3068c67">operator=()</a>, <a class="el" href="#a86cf6c3fe8c0df2ed6a5018744ab7464">operator=()</a>, <a class="el" href="#afac382a610028b5e09af4ade728b78b3">RenderPass()</a>, <a class="el" href="#a45f186c5f167cb06540512a287ab83a1">RenderPass()</a>, and <a class="el" href="#ae3f4f46b15048f4aa38852938748fe28">RenderPass()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="#a10c7f73c83242609ccd9828ab3068c67">operator=()</a>, <a class="el" href="#a86cf6c3fe8c0df2ed6a5018744ab7464">operator=()</a>, <a class="el" href="#afac382a610028b5e09af4ade728b78b3">RenderPass()</a>, <a class="el" href="#a45f186c5f167cb06540512a287ab83a1">RenderPass()</a>, and <a class="el" href="#aade7bd52eb917132f463a45ed3aaac87">RenderPass()</a>.</p>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
@@ -253,8 +255,8 @@ const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::uti
 
 </div>
 </div>
-<a id="ae3f4f46b15048f4aa38852938748fe28" name="ae3f4f46b15048f4aa38852938748fe28"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae3f4f46b15048f4aa38852938748fe28">&#9670;&#160;</a></span>RenderPass() <span class="overload">[3/3]</span></h2>
+<a id="aade7bd52eb917132f463a45ed3aaac87" name="aade7bd52eb917132f463a45ed3aaac87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aade7bd52eb917132f463a45ed3aaac87">&#9670;&#160;</a></span>RenderPass() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -265,6 +267,11 @@ const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::uti
         <tr>
           <td class="memname">helios::rendering::RenderPass::RenderPass </td>
           <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; const <a class="el" href="classhelios_1_1rendering_1_1Viewport.html">helios::rendering::Viewport</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>viewport</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classhelios_1_1rendering_1_1RenderQueue.html">helios::rendering::RenderQueue</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>renderQueue</em></span>, </td>
         </tr>
         <tr>
@@ -280,21 +287,22 @@ const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::uti
 </table>
 </div><div class="memdoc">
 
-<p>Create a new `RenderPass` with the specified `RenderQueue` and the `UniformValueMap`. Ownership of both objects is transferred to **this** `RenderPass`. </p>
+<p>Create a new `RenderPass` with the specified `Viewport`, `RenderQueue` and the `UniformValueMap`. Ownership of <a class="el" href="classhelios_1_1rendering_1_1Viewport.html" title="Represents a rectangular area within a RenderTarget where a scene is rendered.">Viewport</a> is shared with this instance, the latter objects are transferred to **this** `RenderPass`. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">viewport</td><td>The viewport this <a class="el" href="classhelios_1_1rendering_1_1RenderPass.html" title="Represents a single RenderPass under a set of specific uniform values.">RenderPass</a> is processing. </td></tr>
     <tr><td class="paramname">renderQueue</td><td>A unique ptr to the `RenderQueue` that should be processed with this pass. </td></tr>
     <tr><td class="paramname">frameUniformValues</td><td>A unique ptr to the `UniformValueMap` associated with this pass, i.e. frame-specific uniform values. If no values are specified, a default empty set is created. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="#a9b3b86c9d3d2455bba80ee4b410fbb5b">frameUniformValues()</a>, <a class="el" href="#afac382a610028b5e09af4ade728b78b3">RenderPass()</a>, and <a class="el" href="#aa8e67383f0e4057c47b80405c02eae19">renderQueue()</a>.</p>
+<p class="reference">References <a class="el" href="#a9b3b86c9d3d2455bba80ee4b410fbb5b">frameUniformValues()</a>, <a class="el" href="#afac382a610028b5e09af4ade728b78b3">RenderPass()</a>, <a class="el" href="#aa8e67383f0e4057c47b80405c02eae19">renderQueue()</a>, and <a class="el" href="#ab0e71c167bc7d90cd4dc1be780cbe7d5">viewport()</a>.</p>
 <div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-4-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderPass_ae3f4f46b15048f4aa38852938748fe28_cgraph.svg" width="479" height="251"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderPass_aade7bd52eb917132f463a45ed3aaac87_cgraph.svg" width="479" height="339"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -323,12 +331,13 @@ const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::uti
 </table>
 </div><div class="memdoc">
 
-<p>Returns a const ref to this `RenderPass`' `UniformValueMap`. The map might be empty. </p>
-<dl class="section return"><dt>Returns</dt><dd>A const ref to this <a class="el" href="classhelios_1_1rendering_1_1RenderPass.html" title="Represents a single RenderPass under a set of specific uniform values.">RenderPass</a>' UniformValueMap for the current frame. </dd></dl>
+<p>Returns a const reference to this `RenderPass`' `UniformValueMap`. </p>
+<p>The map might be empty.</p>
+<dl class="section return"><dt>Returns</dt><dd>A const reference to this `RenderPass`' `UniformValueMap` for the current frame. </dd></dl>
 
 <p class="reference">References <a class="el" href="#a9b3b86c9d3d2455bba80ee4b410fbb5b">frameUniformValues()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#a9b3b86c9d3d2455bba80ee4b410fbb5b">frameUniformValues()</a>, <a class="el" href="#ae3f4f46b15048f4aa38852938748fe28">RenderPass()</a>, and <a class="el" href="#a54bc377a9a1ad0c2d0f8a31342d247d7">setFrameUniformValues()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="#a9b3b86c9d3d2455bba80ee4b410fbb5b">frameUniformValues()</a>, <a class="el" href="#aade7bd52eb917132f463a45ed3aaac87">RenderPass()</a>, and <a class="el" href="#a54bc377a9a1ad0c2d0f8a31342d247d7">setFrameUniformValues()</a>.</p>
 <div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
@@ -442,7 +451,7 @@ const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::uti
 
 <p class="reference">References <a class="el" href="#aa8e67383f0e4057c47b80405c02eae19">renderQueue()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#ae3f4f46b15048f4aa38852938748fe28">RenderPass()</a>, and <a class="el" href="#aa8e67383f0e4057c47b80405c02eae19">renderQueue()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="#aade7bd52eb917132f463a45ed3aaac87">RenderPass()</a>, and <a class="el" href="#aa8e67383f0e4057c47b80405c02eae19">renderQueue()</a>.</p>
 <div id="dynsection-9" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-9-summary" class="dynsummary" style="display:block;">
 </div>
@@ -503,6 +512,50 @@ const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::uti
 </div>
 <div id="dynsection-12-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderPass_a54bc377a9a1ad0c2d0f8a31342d247d7_icgraph.svg" width="230" height="90"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ab0e71c167bc7d90cd4dc1be780cbe7d5" name="ab0e71c167bc7d90cd4dc1be780cbe7d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0e71c167bc7d90cd4dc1be780cbe7d5">&#9670;&#160;</a></span>viewport()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classhelios_1_1rendering_1_1Viewport.html">Viewport</a> &amp; helios::rendering::RenderPass::viewport </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a const ref to the `Viewport` this `RenderPass` holds. </p>
+<dl class="section return"><dt>Returns</dt><dd>A const ref to this `RenderPass`' `Viewport`. </dd></dl>
+
+<p class="reference">References <a class="el" href="#ab0e71c167bc7d90cd4dc1be780cbe7d5">viewport()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="#aade7bd52eb917132f463a45ed3aaac87">RenderPass()</a>, and <a class="el" href="#ab0e71c167bc7d90cd4dc1be780cbe7d5">viewport()</a>.</p>
+<div id="dynsection-13" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-13-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderPass_ab0e71c167bc7d90cd4dc1be780cbe7d5_cgraph.svg" width="174" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div id="dynsection-14" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-14-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-14-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderPass_ab0e71c167bc7d90cd4dc1be780cbe7d5_icgraph.svg" width="402" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>

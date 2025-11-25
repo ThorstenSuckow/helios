@@ -16,11 +16,13 @@ var searchData=
   ['transform_2eixx_13',['Transform.ixx',['../Transform_8ixx.html',1,'']]],
   ['translate_14',['translate',['../classhelios_1_1scene_1_1SceneNode.html#a63bdfe0a081a96112036b8e7d226fd09',1,'helios::scene::SceneNode::translate()'],['../classhelios_1_1scene_1_1Transform.html#a545f2340ea52c0a63acd40192a10df19',1,'helios::scene::Transform::translate()'],['../namespacehelios_1_1math.html#addafb8dbe33d09352658b55cee9a0898',1,'helios::math::translate()']]],
   ['translation_15',['translation',['../classhelios_1_1scene_1_1Transform.html#ade553e701cbae015794510224114c2fd',1,'helios::scene::Transform']]],
-  ['trianglefan_16',['TriangleFan',['../namespacehelios_1_1rendering_1_1model_1_1config.html#a13a7711e9718d01b8f09dd183c6777d5a18d58fde618e4a30e2dfdc122e693047',1,'helios::rendering::model::config']]],
-  ['triangles_17',['Triangles',['../namespacehelios_1_1rendering_1_1model_1_1config.html#a13a7711e9718d01b8f09dd183c6777d5a7ca66fdfaad3eb33fc65d7490178f856',1,'helios::rendering::model::config']]],
-  ['trianglestrip_18',['TriangleStrip',['../namespacehelios_1_1rendering_1_1model_1_1config.html#a13a7711e9718d01b8f09dd183c6777d5a1da0b9ead8b051940a89214bae22831c',1,'helios::rendering::model::config']]],
-  ['trigger_19',['trigger',['../classhelios_1_1input_1_1GamepadState.html#a7d1392d632a44eef9d61b454ed40df8c',1,'helios::input::GamepadState']]],
-  ['triggerleft_20',['triggerLeft',['../classhelios_1_1input_1_1GamepadState.html#a259753c014cb11fe211cca3137f67ae5',1,'helios::input::GamepadState']]],
-  ['triggerright_21',['triggerRight',['../classhelios_1_1input_1_1GamepadState.html#a18ff7a69f4c8ebba20a25f53ea7a9714',1,'helios::input::GamepadState']]],
-  ['two_22',['TWO',['../namespacehelios_1_1input_1_1types.html#a4dd39c1a113edbe36b92b088d8dbf2ffaea3ebfb6dc92c9b4ae1a2b94900c693f',1,'helios::input::types']]]
+  ['triangle_16',['Triangle',['../structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Triangle.html',1,'helios::rendering::asset::shape::basic::Triangle'],['../structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Triangle.html#acfd0d45878444edb071fb66cd8d0ee1d',1,'helios::rendering::asset::shape::basic::Triangle::Triangle()']]],
+  ['triangle_2eixx_17',['Triangle.ixx',['../Triangle_8ixx.html',1,'']]],
+  ['trianglefan_18',['TriangleFan',['../namespacehelios_1_1rendering_1_1model_1_1config.html#a13a7711e9718d01b8f09dd183c6777d5a18d58fde618e4a30e2dfdc122e693047',1,'helios::rendering::model::config']]],
+  ['triangles_19',['Triangles',['../namespacehelios_1_1rendering_1_1model_1_1config.html#a13a7711e9718d01b8f09dd183c6777d5a7ca66fdfaad3eb33fc65d7490178f856',1,'helios::rendering::model::config']]],
+  ['trianglestrip_20',['TriangleStrip',['../namespacehelios_1_1rendering_1_1model_1_1config.html#a13a7711e9718d01b8f09dd183c6777d5a1da0b9ead8b051940a89214bae22831c',1,'helios::rendering::model::config']]],
+  ['trigger_21',['trigger',['../classhelios_1_1input_1_1GamepadState.html#a7d1392d632a44eef9d61b454ed40df8c',1,'helios::input::GamepadState']]],
+  ['triggerleft_22',['triggerLeft',['../classhelios_1_1input_1_1GamepadState.html#a259753c014cb11fe211cca3137f67ae5',1,'helios::input::GamepadState']]],
+  ['triggerright_23',['triggerRight',['../classhelios_1_1input_1_1GamepadState.html#a18ff7a69f4c8ebba20a25f53ea7a9714',1,'helios::input::GamepadState']]],
+  ['two_24',['TWO',['../namespacehelios_1_1input_1_1types.html#a4dd39c1a113edbe36b92b088d8dbf2ffaea3ebfb6dc92c9b4ae1a2b94900c693f',1,'helios::input::types']]]
 ];

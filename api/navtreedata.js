@@ -73,16 +73,17 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "Application_8ixx.html",
-"classhelios_1_1app_1_1controller_1_1WindowRenderingController.html#ace819d72b524524ee6b8e596ae96b859",
-"classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html#a205e92c86ad75f4a23903f80e092a9f0",
-"classhelios_1_1input_1_1InputManager.html#a9cdcf0b8c5ca77db5cba2498132479f1",
-"classhelios_1_1rendering_1_1model_1_1Mesh.html",
-"classhelios_1_1scene_1_1SceneNode.html#aa362a46b4917ee9955a38d6422b72668",
-"classhelios_1_1window_1_1event_1_1WindowEvent.html#a8116ef9bcb82c44bbf6ee846abca9f00",
-"module__helios_8ext_8glfw_8window_8GLFWWindow.html#aadcd85a250a053d34b933b4870b47a3b",
-"module__helios_8rendering_8Vertex.html#ac26b0224bfd42a7576cc9f14c7ebc703",
-"modulemembers_d.html",
-"structhelios_1_1math_1_1vec3.html#a8e8e639bd8db44dd1112eedef81b9972"
+"classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController.html#ae7ab29a6c78a6459308f9a58a69c695c",
+"classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow.html#aadd3957b6e0d29e7d9ee08973bd25709",
+"classhelios_1_1input_1_1InputManager.html#a70f09d2b56d05c0ba55df05d3526f4f9",
+"classhelios_1_1rendering_1_1Viewport.html",
+"classhelios_1_1scene_1_1Scene.html#a42bc78c5ad2c016b17ea61860e51a266",
+"classhelios_1_1util_1_1log_1_1LogManager.html#aeb3c579d6cd53e2ca50384ceadd5d3a6",
+"model_8ixx.html",
+"module__helios_8math_8types.html#a33c47f9920f5e88b98caca96a889d0aa",
+"module__helios_8scene_8Camera.html#a741e4e8c08e4cb107ba3e83e8e9b64f5",
+"namespacehelios_1_1math.html#a0fd329cdb93d866fad284b88f7acb4f4",
+"structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Circle.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

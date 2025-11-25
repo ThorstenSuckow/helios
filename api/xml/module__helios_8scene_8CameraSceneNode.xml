@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8scene_8CameraSceneNode" kind="module">
+    <compoundname>helios.scene.CameraSceneNode</compoundname>
+    <innerfile refid="CameraSceneNode_8ixx">CameraSceneNode.ixx</innerfile>
+    <innerclass refid="classhelios_1_1scene_1_1CameraSceneNode" prot="public">helios::scene::CameraSceneNode</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1scene_1_1CameraSceneNode_1a960b48d2d825ade3458ea9cad2f40e19" prot="protected" static="no" mutable="no">
+        <type>std::weak_ptr&lt; <ref refid="classhelios_1_1scene_1_1Camera" kindref="compound">helios::scene::Camera</ref> &gt;</type>
+        <definition>std::weak_ptr&lt;helios::scene::Camera&gt; helios::scene::CameraSceneNode::camera_</definition>
+        <argsstring></argsstring>
+        <name>camera_</name>
+        <qualifiedname>helios::scene::CameraSceneNode::camera_</qualifiedname>
+        <briefdescription>
+<para>Weak pointer to the camera instance managed by this scene node. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/CameraSceneNode.ixx" line="36" column="23" bodyfile="include/helios/scene/CameraSceneNode.ixx" bodystart="36" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1scene_1_1CameraSceneNode_1a06b17127ad43df28781659a3124c9965" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::scene::CameraSceneNode::CameraSceneNode</definition>
+        <argsstring>(std::shared_ptr&lt; helios::scene::Camera &gt; camera)</argsstring>
+        <name>CameraSceneNode</name>
+        <qualifiedname>helios::scene::CameraSceneNode::CameraSceneNode</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classhelios_1_1scene_1_1Camera" kindref="compound">helios::scene::Camera</ref> &gt;</type>
+          <declname>camera</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classhelios_1_1scene_1_1CameraSceneNode" kindref="compound">CameraSceneNode</ref> wrapping the given camera. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The <ref refid="classhelios_1_1scene_1_1Camera" kindref="compound">Camera</ref> must be a non-null shared pointer, it gets internally stored as a weak_ptr.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>camera</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A shared pointer to the camera to be managed by this scene node.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if camera is a nullptr </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/CameraSceneNode.ixx" line="49" column="18"/>
+        <references refid="classhelios_1_1scene_1_1CameraSceneNode_1a3f3bc1db8436c6f2aef05b61f0638b0e">helios::scene::CameraSceneNode::camera</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1scene_1_1CameraSceneNode_1a21256e1f3a58d99bc0249f88a1739d0b" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="virtual">
+        <type>SceneNode *</type>
+        <definition>SceneNode * helios::scene::CameraSceneNode::addChild</definition>
+        <argsstring>(std::unique_ptr&lt; SceneNode &gt; sceneNode) override</argsstring>
+        <name>addChild</name>
+        <qualifiedname>helios::scene::CameraSceneNode::addChild</qualifiedname>
+        <reimplements refid="classhelios_1_1scene_1_1SceneNode_1a8f13644573f0a5ffd64d11424937fdce">addChild</reimplements>
+        <param>
+          <type>std::unique_ptr&lt; SceneNode &gt;</type>
+          <declname>sceneNode</declname>
+        </param>
+        <briefdescription>
+<para>Prevents adding child nodes to a camera scene node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method does nothing and returns `nullptr`, indicating that a `CameraSceneNode` must not have child nodes.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sceneNode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The attempted child node to add (ignored).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Always returns `nullptr`.</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://stackoverflow.com/questions/24609872/delete-virtual-function-from-a-derived-class">https://stackoverflow.com/questions/24609872/delete-virtual-function-from-a-derived-class</ulink> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/CameraSceneNode.ixx" line="63" column="20"/>
+        <references refid="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab">helios::scene::SceneNode::SceneNode</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1scene_1_1CameraSceneNode_1a3f3bc1db8436c6f2aef05b61f0638b0e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::weak_ptr&lt; <ref refid="classhelios_1_1scene_1_1Camera" kindref="compound">helios::scene::Camera</ref> &gt;</type>
+        <definition>std::weak_ptr&lt; helios::scene::Camera &gt; helios::scene::CameraSceneNode::camera</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>camera</name>
+        <qualifiedname>helios::scene::CameraSceneNode::camera</qualifiedname>
+        <briefdescription>
+<para>Gets the camera associated with this scene node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A weak pointer to the camera instance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/CameraSceneNode.ixx" line="70" column="24"/>
+        <referencedby refid="classhelios_1_1scene_1_1CameraSceneNode_1a06b17127ad43df28781659a3124c9965">helios::scene::CameraSceneNode::CameraSceneNode</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/scene/CameraSceneNode.ixx" line="9" column="15"/>
+  </compounddef>
+</doxygen>

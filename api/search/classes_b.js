@@ -7,5 +7,6 @@ var searchData=
   ['renderpass_4',['RenderPass',['../classhelios_1_1rendering_1_1RenderPass.html',1,'helios::rendering']]],
   ['renderpassfactory_5',['RenderPassFactory',['../classhelios_1_1rendering_1_1RenderPassFactory.html',1,'helios::rendering']]],
   ['renderprototype_6',['RenderPrototype',['../classhelios_1_1rendering_1_1RenderPrototype.html',1,'helios::rendering']]],
-  ['renderqueue_7',['RenderQueue',['../classhelios_1_1rendering_1_1RenderQueue.html',1,'helios::rendering']]]
+  ['renderqueue_7',['RenderQueue',['../classhelios_1_1rendering_1_1RenderQueue.html',1,'helios::rendering']]],
+  ['rendertarget_8',['RenderTarget',['../classhelios_1_1rendering_1_1RenderTarget.html',1,'helios::rendering']]]
 ];

@@ -4,7 +4,7 @@ var module__helios_8ext_8glfw_8window_8GLFWWindow =
     [ "helios::ext::glfw::window::GLFWWindow::GLFWWindow", "module__helios_8ext_8glfw_8window_8GLFWWindow.html#acc9a44c5828b5cf4a0c7fb4c5a844e88", null ],
     [ "helios::ext::glfw::window::GLFWWindow::operator=", "module__helios_8ext_8glfw_8window_8GLFWWindow.html#aadcd85a250a053d34b933b4870b47a3b", null ],
     [ "helios::ext::glfw::window::GLFWWindow::~GLFWWindow", "module__helios_8ext_8glfw_8window_8GLFWWindow.html#a3065f8faf4edacb81c2d513e1b01b168", null ],
-    [ "helios::ext::glfw::window::GLFWWindow::GLFWWindow", "module__helios_8ext_8glfw_8window_8GLFWWindow.html#a74b2cacf2dc049c8b2965d3258fe5f97", null ],
+    [ "helios::ext::glfw::window::GLFWWindow::GLFWWindow", "module__helios_8ext_8glfw_8window_8GLFWWindow.html#a84dddea91bf91d467587888d9c28b55d", null ],
     [ "helios::ext::glfw::window::GLFWWindow::show", "module__helios_8ext_8glfw_8window_8GLFWWindow.html#a29029e93c4fe4a789c3c8353a339261f", null ],
     [ "helios::ext::glfw::window::GLFWWindow::swapBuffers", "module__helios_8ext_8glfw_8window_8GLFWWindow.html#aadd3957b6e0d29e7d9ee08973bd25709", null ],
     [ "helios::ext::glfw::window::GLFWWindow::pollEvents", "module__helios_8ext_8glfw_8window_8GLFWWindow.html#acfd10a52a9bdfb4bb4cb8fb10d15789d", null ],

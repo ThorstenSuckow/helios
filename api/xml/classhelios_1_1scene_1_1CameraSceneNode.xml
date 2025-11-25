@@ -1,0 +1,198 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1scene_1_1CameraSceneNode" kind="class" language="C++" prot="public">
+    <compoundname>helios::scene::CameraSceneNode</compoundname>
+    <basecompoundref refid="classhelios_1_1scene_1_1SceneNode" prot="public" virt="non-virtual">helios::scene::SceneNode</basecompoundref>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classhelios_1_1scene_1_1CameraSceneNode_1a960b48d2d825ade3458ea9cad2f40e19" prot="protected" static="no" mutable="no">
+        <type>std::weak_ptr&lt; <ref refid="classhelios_1_1scene_1_1Camera" kindref="compound">helios::scene::Camera</ref> &gt;</type>
+        <definition>std::weak_ptr&lt;helios::scene::Camera&gt; helios::scene::CameraSceneNode::camera_</definition>
+        <argsstring></argsstring>
+        <name>camera_</name>
+        <qualifiedname>helios::scene::CameraSceneNode::camera_</qualifiedname>
+        <briefdescription>
+<para>Weak pointer to the camera instance managed by this scene node. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/CameraSceneNode.ixx" line="36" column="23" bodyfile="include/helios/scene/CameraSceneNode.ixx" bodystart="36" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1scene_1_1CameraSceneNode_1a06b17127ad43df28781659a3124c9965" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::scene::CameraSceneNode::CameraSceneNode</definition>
+        <argsstring>(std::shared_ptr&lt; helios::scene::Camera &gt; camera)</argsstring>
+        <name>CameraSceneNode</name>
+        <qualifiedname>helios::scene::CameraSceneNode::CameraSceneNode</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classhelios_1_1scene_1_1Camera" kindref="compound">helios::scene::Camera</ref> &gt;</type>
+          <declname>camera</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classhelios_1_1scene_1_1CameraSceneNode" kindref="compound">CameraSceneNode</ref> wrapping the given camera. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The <ref refid="classhelios_1_1scene_1_1Camera" kindref="compound">Camera</ref> must be a non-null shared pointer, it gets internally stored as a weak_ptr.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>camera</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A shared pointer to the camera to be managed by this scene node.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if camera is a nullptr </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/CameraSceneNode.ixx" line="49" column="18"/>
+        <references refid="classhelios_1_1scene_1_1CameraSceneNode_1a3f3bc1db8436c6f2aef05b61f0638b0e">camera</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1scene_1_1CameraSceneNode_1a21256e1f3a58d99bc0249f88a1739d0b" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab" kindref="member">SceneNode</ref> *</type>
+        <definition>SceneNode * helios::scene::CameraSceneNode::addChild</definition>
+        <argsstring>(std::unique_ptr&lt; SceneNode &gt; sceneNode) override</argsstring>
+        <name>addChild</name>
+        <qualifiedname>helios::scene::CameraSceneNode::addChild</qualifiedname>
+        <reimplements refid="classhelios_1_1scene_1_1SceneNode_1a8f13644573f0a5ffd64d11424937fdce">addChild</reimplements>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab" kindref="member">SceneNode</ref> &gt;</type>
+          <declname>sceneNode</declname>
+        </param>
+        <briefdescription>
+<para>Prevents adding child nodes to a camera scene node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method does nothing and returns `nullptr`, indicating that a `CameraSceneNode` must not have child nodes.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sceneNode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The attempted child node to add (ignored).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Always returns `nullptr`.</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://stackoverflow.com/questions/24609872/delete-virtual-function-from-a-derived-class">https://stackoverflow.com/questions/24609872/delete-virtual-function-from-a-derived-class</ulink> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/CameraSceneNode.ixx" line="63" column="20"/>
+        <references refid="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab">helios::scene::SceneNode::SceneNode</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1scene_1_1CameraSceneNode_1a3f3bc1db8436c6f2aef05b61f0638b0e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::weak_ptr&lt; <ref refid="classhelios_1_1scene_1_1Camera" kindref="compound">helios::scene::Camera</ref> &gt;</type>
+        <definition>std::weak_ptr&lt; helios::scene::Camera &gt; helios::scene::CameraSceneNode::camera</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>camera</name>
+        <qualifiedname>helios::scene::CameraSceneNode::camera</qualifiedname>
+        <briefdescription>
+<para>Gets the camera associated with this scene node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A weak pointer to the camera instance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/CameraSceneNode.ixx" line="70" column="24"/>
+        <referencedby refid="classhelios_1_1scene_1_1CameraSceneNode_1a06b17127ad43df28781659a3124c9965">CameraSceneNode</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Represents an adapter for cameras, allowing spatial positioning and transformation within the scene graph. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>A <ref refid="classhelios_1_1scene_1_1CameraSceneNode" kindref="compound">CameraSceneNode</ref> behaves just like a (non-renderable) <ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">SceneNode</ref>, except that it does not accept child nodes.</para>
+<para>An instance of `CameraSceneNode` can be added as a direct descendant of the scene&apos;s root node for free transform, or it can be a child of a model hierarchy to inherit the corresponding positioning in the world.</para>
+<para><xrefsect id="todo_1_todo000016"><xreftitle>Todo</xreftitle><xrefdescription><para>Check whether nodes should further be divided into ParentNode and LeafNode types. Cameras would be LeafNodes, not allowing child nodes. </para>
+</xrefdescription></xrefsect></para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>helios::scene::CameraSceneNode</label>
+        <link refid="classhelios_1_1scene_1_1CameraSceneNode"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::scene::SceneNode</label>
+        <link refid="classhelios_1_1scene_1_1SceneNode"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>helios::scene::CameraSceneNode</label>
+        <link refid="classhelios_1_1scene_1_1CameraSceneNode"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::scene::SceneNode</label>
+        <link refid="classhelios_1_1scene_1_1SceneNode"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>parent_</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>localTransform_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::scene::Transform</label>
+        <link refid="classhelios_1_1scene_1_1Transform"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/scene/CameraSceneNode.ixx" line="30" column="5" bodyfile="include/helios/scene/CameraSceneNode.ixx" bodystart="30" bodyend="76"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1scene_1_1CameraSceneNode_1a21256e1f3a58d99bc0249f88a1739d0b" prot="public" virt="virtual"><scope>helios::scene::CameraSceneNode</scope><name>addChild</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1ab908b6a16d34640eca0d92f2573e6cc3" prot="public" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>cachedWorldTransform</name></member>
+      <member refid="classhelios_1_1scene_1_1CameraSceneNode_1a3f3bc1db8436c6f2aef05b61f0638b0e" prot="public" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>camera</name></member>
+      <member refid="classhelios_1_1scene_1_1CameraSceneNode_1a960b48d2d825ade3458ea9cad2f40e19" prot="protected" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>camera_</name></member>
+      <member refid="classhelios_1_1scene_1_1CameraSceneNode_1a06b17127ad43df28781659a3124c9965" prot="public" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>CameraSceneNode</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1a345af64a75ad370d482051006658c81e" prot="public" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>children</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1aa362a46b4917ee9955a38d6422b72668" prot="protected" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>children_</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1a1488aa0cc05f989400589f36814afba1" prot="public" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>guid</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1a52ac30adf28408c010626d9236c78828" prot="public" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>localTransform</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1acf949ca732802c66d4d0d3fee757e719" prot="protected" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>localTransform_</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1a88551e7d166868342b87fd83e767442c" prot="public" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>needsUpdate</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1a7810bc9069939badd249ce54f794d1e7" prot="protected" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>needsUpdate_</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1a7cc7b1c8b3b57927c9d33abd8f652964" prot="public" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>operator=</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1a4e31b52717a76a9bae9a80a1db0b808b" prot="public" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>parent</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1a718f8d4e4ecddeb659031dd9ad9ad079" prot="protected" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>parent_</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1a2f4bba61e70c28e98747ee84af651812" prot="public" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>renderable</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1a01e293e31d8c30a3f9cbae3ad19ca6d8" prot="public" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>renderable</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1adc5b1c905e0a2eee271107ebb91652af" prot="protected" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>renderable_</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1a93c13a4891599eeaf09fd47ae25439b9" prot="public" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>rotate</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1aaadb3500317f5c3552d9f7192421e0de" prot="public" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>scale</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab" prot="public" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>SceneNode</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1a316494fedf68d4ca53cd4453885e0b07" prot="public" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>SceneNode</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1a1a7a726c994dd5b29a0719f45845ccb0" prot="public" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>SceneNode</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1ac391d6973219428d9048caffe721cfb1" prot="public" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>SceneNode</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1af2af3ad7c17ecf2a693724deed12ce02" prot="public" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>SceneNode</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1a8e150f0c631aa964846dc20cd627b538" prot="protected" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>setParent</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1a1dbd995b4aace249c6786588e3279ae3" prot="public" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>setWorldTransform</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1a63bdfe0a081a96112036b8e7d226fd09" prot="public" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>translate</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1a2cd5ee14fdf4990952266c724c916551" prot="public" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>worldTransform</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1a93375ed6bd9aa627be8a5c2342ba4b4c" prot="protected" virt="non-virtual"><scope>helios::scene::CameraSceneNode</scope><name>worldTransform_</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1a03ca20aef6224b069891356d5419eead" prot="public" virt="virtual"><scope>helios::scene::CameraSceneNode</scope><name>~SceneNode</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

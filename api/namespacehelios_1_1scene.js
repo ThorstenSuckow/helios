@@ -1,6 +1,7 @@
 var namespacehelios_1_1scene =
 [
     [ "Camera", "classhelios_1_1scene_1_1Camera.html", "classhelios_1_1scene_1_1Camera" ],
+    [ "CameraSceneNode", "classhelios_1_1scene_1_1CameraSceneNode.html", "classhelios_1_1scene_1_1CameraSceneNode" ],
     [ "CullNoneStrategy", "classhelios_1_1scene_1_1CullNoneStrategy.html", "classhelios_1_1scene_1_1CullNoneStrategy" ],
     [ "FrustumCullingStrategy", "classhelios_1_1scene_1_1FrustumCullingStrategy.html", "classhelios_1_1scene_1_1FrustumCullingStrategy" ],
     [ "Scene", "classhelios_1_1scene_1_1Scene.html", "classhelios_1_1scene_1_1Scene" ],

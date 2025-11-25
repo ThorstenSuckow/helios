@@ -11,5 +11,5 @@ var module__helios_8scene_8Scene =
     [ "helios::scene::Scene::updateNodes", "module__helios_8scene_8Scene.html#a411492ac5cc05ac601ee0aef03dced51", null ],
     [ "helios::scene::Scene::findVisibleNodes", "module__helios_8scene_8Scene.html#abf75dec7fa3988d3c22556a08a1f236b", null ],
     [ "helios::scene::Scene::root", "module__helios_8scene_8Scene.html#aff7c39985b9197a877dc4a698168e0c8", null ],
-    [ "helios::scene::Scene::createSnapshot", "module__helios_8scene_8Scene.html#aa27f858e0665c608f5402872aca0dae0", null ]
+    [ "helios::scene::Scene::createSnapshot", "module__helios_8scene_8Scene.html#ab3ad742392c2a2b159cf8927ee6cf375", null ]
 ];

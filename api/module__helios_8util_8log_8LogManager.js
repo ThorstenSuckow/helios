@@ -1,6 +1,7 @@
 var module__helios_8util_8log_8LogManager =
 [
     [ "LogManager", "classhelios_1_1util_1_1log_1_1LogManager.html", "classhelios_1_1util_1_1log_1_1LogManager" ],
+    [ "helios::util::log::LogManager::loggerForScope", "module__helios_8util_8log_8LogManager.html#a750d8fd5b3ee3678600644756b0631e7", null ],
     [ "helios::util::log::LogManager::~LogManager", "module__helios_8util_8log_8LogManager.html#a7ffda8e8a0051befb5ec47fd61c316c7", null ],
     [ "helios::util::log::LogManager::LogManager", "module__helios_8util_8log_8LogManager.html#afb10a34aeaaa1fb36b8eefd42b184049", null ],
     [ "helios::util::log::LogManager::operator=", "module__helios_8util_8log_8LogManager.html#a2e8452f2fe3524c7897c49b7d9b76e5e", null ],

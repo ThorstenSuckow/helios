@@ -12,13 +12,13 @@
         <name>projectionMatrix_</name>
         <qualifiedname>helios::scene::Camera::projectionMatrix_</qualifiedname>
         <briefdescription>
-<para>The projection matrix of this <ref refid="classhelios_1_1scene_1_1Camera" kindref="compound">Camera</ref>. </para>
+<para>The projection matrix of this camera. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/Camera.ixx" line="41" column="37" bodyfile="include/helios/scene/Camera.ixx" bodystart="41" bodyend="-1"/>
+        <location file="include/helios/scene/Camera.ixx" line="31" column="37" bodyfile="include/helios/scene/Camera.ixx" bodystart="31" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1scene_1_1Camera_1a5c915d9ba00c11dcef1885f02e32945c" prot="protected" static="no" mutable="yes">
         <type><ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref></type>
@@ -27,65 +27,47 @@
         <name>viewMatrix_</name>
         <qualifiedname>helios::scene::Camera::viewMatrix_</qualifiedname>
         <briefdescription>
-<para>The view matrix of this <ref refid="classhelios_1_1scene_1_1Camera" kindref="compound">Camera</ref>. </para>
+<para>The view matrix of this camera. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/Camera.ixx" line="46" column="37" bodyfile="include/helios/scene/Camera.ixx" bodystart="46" bodyend="-1"/>
+        <location file="include/helios/scene/Camera.ixx" line="36" column="37" bodyfile="include/helios/scene/Camera.ixx" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1scene_1_1Camera_1a95f643525bd276faa7edcd1401f47850" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::scene::Camera::aspectRatio_</definition>
+        <argsstring></argsstring>
+        <name>aspectRatio_</name>
+        <qualifiedname>helios::scene::Camera::aspectRatio_</qualifiedname>
+        <initializer>= 1.0f</initializer>
+        <briefdescription>
+<para>The aspect ratio of the camera (width/height). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Defaults to 1.0. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/Camera.ixx" line="43" column="15" bodyfile="include/helios/scene/Camera.ixx" bodystart="43" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1adb65c6af2c10921ccd7a5088a48adcf8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1a6d1911bccc03c847625153d58cc49e99" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type></type>
         <definition>helios::scene::Camera::Camera</definition>
-        <argsstring>()</argsstring>
+        <argsstring>() noexcept</argsstring>
         <name>Camera</name>
         <qualifiedname>helios::scene::Camera::Camera</qualifiedname>
         <briefdescription>
-<para>Constructor for this class. Initializes projectionMatrix and viewMatrix with the identity matrix. </para>
+<para>Constructs a camera with identity projection and view matrices. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/Camera.ixx" line="53" column="9"/>
-      </memberdef>
-      <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1a08c74a826af54a6de82dd64516df4017" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="virtual">
-        <type>SceneNode *</type>
-        <definition>SceneNode * helios::scene::Camera::addChild</definition>
-        <argsstring>(std::unique_ptr&lt; SceneNode &gt; sceneNode) override</argsstring>
-        <name>addChild</name>
-        <qualifiedname>helios::scene::Camera::addChild</qualifiedname>
-        <reimplements refid="classhelios_1_1scene_1_1SceneNode_1a8f13644573f0a5ffd64d11424937fdce">addChild</reimplements>
-        <param>
-          <type>std::unique_ptr&lt; SceneNode &gt;</type>
-          <declname>sceneNode</declname>
-        </param>
-        <briefdescription>
-<para>This method will do nothing but return `nullptr`, indicating that a `Camera` must not have child nodes. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>sceneNode</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The attempted child node to add (ignored). </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>This implementation returns `nullptr`.</para>
-</simplesect>
-<simplesect kind="see"><para><ulink url="https://stackoverflow.com/questions/24609872/delete-virtual-function-from-a-derived-class">https://stackoverflow.com/questions/24609872/delete-virtual-function-from-a-derived-class</ulink> </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="include/helios/scene/Camera.ixx" line="64" column="20"/>
-        <references refid="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab">helios::scene::SceneNode::SceneNode</references>
+        <location file="include/helios/scene/Camera.ixx" line="49" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1a1dc42ba642ae41f7028a4cb927a6feb0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref> &amp;</type>
@@ -94,16 +76,19 @@
         <name>projectionMatrix</name>
         <qualifiedname>helios::scene::Camera::projectionMatrix</qualifiedname>
         <briefdescription>
-<para>Returns a constant ref to this camera&apos;s current projection matrix. Typically set to the perspective / orthographic projection. </para>
+<para>Gets the current projection matrix. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>A const ref to this `Camera`&apos;s projection matrix. </para>
+<para>Typically set to a perspective or orthographic projection.</para>
+<para><simplesect kind="return"><para>A const reference to this camera&apos;s projection matrix. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/Camera.ixx" line="72" column="36"/>
+        <location file="include/helios/scene/Camera.ixx" line="58" column="36"/>
+        <references refid="classhelios_1_1scene_1_1Camera_1a1dc42ba642ae41f7028a4cb927a6feb0">helios::scene::Camera::projectionMatrix</references>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a1dc42ba642ae41f7028a4cb927a6feb0">helios::scene::Camera::projectionMatrix</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1a920bac1e84b874d725027e37d091cb34" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref> &amp;</type>
@@ -112,18 +97,50 @@
         <name>viewMatrix</name>
         <qualifiedname>helios::scene::Camera::viewMatrix</qualifiedname>
         <briefdescription>
-<para>Returns a constant ref to this camera&apos;s view matrix. Automatically computed as the inverse of the camera&apos;s world transform. </para>
+<para>Gets the current view matrix. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>A const ref to this `Camera`&apos;s view matrix. </para>
+<para>The view matrix represents the inverse of the camera&apos;s world transform.</para>
+<para><simplesect kind="return"><para>A const reference to this camera&apos;s view matrix. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/Camera.ixx" line="81" column="36"/>
+        <location file="include/helios/scene/Camera.ixx" line="67" column="36"/>
         <references refid="classhelios_1_1scene_1_1Camera_1a920bac1e84b874d725027e37d091cb34">helios::scene::Camera::viewMatrix</references>
         <referencedby refid="classhelios_1_1scene_1_1Camera_1a920bac1e84b874d725027e37d091cb34">helios::scene::Camera::viewMatrix</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1scene_1_1Camera_1a741e4e8c08e4cb107ba3e83e8e9b64f5" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::scene::Camera::setAspectRatio</definition>
+        <argsstring>(float aspectRatio) noexcept</argsstring>
+        <name>setAspectRatio</name>
+        <qualifiedname>helios::scene::Camera::setAspectRatio</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>aspectRatio</declname>
+        </param>
+        <briefdescription>
+<para>Sets the aspect ratio used by the camera. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>aspectRatio</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new aspect ratio (width/height). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/Camera.ixx" line="74" column="14"/>
+        <references refid="classhelios_1_1scene_1_1Camera_1a741e4e8c08e4cb107ba3e83e8e9b64f5">helios::scene::Camera::setAspectRatio</references>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a741e4e8c08e4cb107ba3e83e8e9b64f5">helios::scene::Camera::setAspectRatio</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

@@ -22,18 +22,16 @@ namespace helios::rendering::model {
 
     Material::Material(
         std::shared_ptr<const Shader> shader,
-        std::shared_ptr<const MaterialProperties> materialProperties,
-        const Logger* logger
+        std::shared_ptr<const MaterialProperties> materialProperties
     ) :
         shader_(std::move(shader)),
-        materialProperties_(std::move(materialProperties)),
-        logger_(!logger ? &LogManager::getInstance().registerLogger(HELIOS_LOG_SCOPE) : logger)
+        materialProperties_(std::move(materialProperties))
     {
         if (!shader_ || !materialProperties_) {
             const std::string msg = !shader_ ?
                                     "Material constructor received a shader nullptr." :
                                     "Material constructor received a materialProperties nullptr.";
-            logger_->error(msg);
+            logger_.error(msg);
             throw std::invalid_argument(msg);
         }
     }

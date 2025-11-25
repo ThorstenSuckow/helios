@@ -15,7 +15,7 @@ export namespace helios::window {
     /**
      * @brief Configuration structure for creating and initializing a Window.
      *
-     * The struct provides common parameters, such as width, height, title and viewport.
+     * The struct provides common parameters, such as width, height and title.
      */
     struct WindowConfig {
 
@@ -37,12 +37,6 @@ export namespace helios::window {
          * @brief Initial title displayed with the window, e.g. the title bar.
          */
         std::string title{"helios - Window"};
-
-
-        /**
-         * @brief Initial viewport configuration (x, y, width, height).
-         */
-        math::vec4i viewport{0,0, 800, 800};
 
     };
 

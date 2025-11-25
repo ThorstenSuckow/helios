@@ -5,12 +5,13 @@
 module;
 
 #include <cassert>
+#include <cmath>
 #include <memory>
 
 export module helios.math.types:vec2;
 
 import helios.math.concepts;
-
+import helios.math.traits.FloatingPointType;
 
 export namespace helios::math {
 
@@ -74,6 +75,41 @@ export namespace helios::math {
         constexpr T& operator[](const size_t i) noexcept {
             assert(i <= 1 && "vec2 - Index out of bounds.");
             return this->v[i];
+        }
+
+        /**
+         * @brief Returns the magnitude of this vec2<T>.
+         *
+         * @return The magnitude of this vector as type FloatingPointType<T>.
+         */
+        inline FloatingPointType<T> norm() const noexcept {
+            if (v[0] == 0 && v[1] == 0) {
+                return static_cast<FloatingPointType<T>>(0);
+            }
+            return static_cast<FloatingPointType<T>>(
+                std::sqrt(
+                    static_cast<double>(v[0]) * static_cast<double>(v[0]) +
+                    static_cast<double>(v[1]) * static_cast<double>(v[1])
+                )
+            );
+        }
+
+        /**
+         * @brief Normalizes this vec2<T>.
+         *
+         * @return The normalized FloatingPointType<T> vector.
+         */
+        inline vec2<FloatingPointType<T>> normalize() const noexcept {
+            if (v[0] == 0 && v[1] == 0) {
+                return vec2<FloatingPointType<T>>(
+                    static_cast<FloatingPointType<T>>(0),
+                    static_cast<FloatingPointType<T>>(0)
+                );
+            }
+            return vec2<FloatingPointType<T>>(
+                static_cast<FloatingPointType<T>>(v[0]) / norm(),
+                static_cast<FloatingPointType<T>>(v[1]) / norm()
+            );
         }
 
     };

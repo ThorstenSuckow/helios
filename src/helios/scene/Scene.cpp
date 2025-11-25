@@ -1,10 +1,11 @@
 module;
 
 #include <cassert>
+#include <iostream>
 #include <memory>
+#include <optional>
 #include <stdexcept>
 #include <vector>
-#include <iostream>
 
 module helios.scene.Scene;
 
@@ -16,6 +17,10 @@ import helios.math.types;
 import helios.scene.Camera;
 import helios.scene.FrustumCullingStrategy;
 import helios.scene.SnapshotItem;
+
+import helios.rendering.Viewport;
+
+using namespace helios::rendering;
 
 namespace helios::scene {
 
@@ -37,7 +42,6 @@ namespace helios::scene {
                 propagateWorldTransform(*child, parentWt);
             }
         }
-
     }
 
 
@@ -54,9 +58,7 @@ namespace helios::scene {
     }
 
     Scene::Scene(std::unique_ptr<FrustumCullingStrategy> frustumCullingStrategy) :
-    frustumCullingStrategy_(std::move(frustumCullingStrategy)),
-    root_(std::make_unique<SceneNode>()) {}
-
+        frustumCullingStrategy_(std::move(frustumCullingStrategy)), root_(std::make_unique<SceneNode>()) {}
 
 
     SceneNode* Scene::addNode(std::unique_ptr<SceneNode> node) const {
@@ -68,9 +70,7 @@ namespace helios::scene {
     }
 
 
-    void Scene::updateNodes() const {
-        updateNodes(*root_, mat4fid);
-    }
+    void Scene::updateNodes() const { updateNodes(*root_, mat4fid); }
 
 
     std::vector<const SceneNode*> Scene::findVisibleNodes(const Camera& camera) const {
@@ -93,25 +93,27 @@ namespace helios::scene {
         return *root_;
     }
 
-    Snapshot Scene::createSnapshot(const Camera& camera) const {
-        const auto nodes = findVisibleNodes(camera);
+    std::optional<Snapshot> Scene::createSnapshot(const std::shared_ptr<const Viewport>& viewport) const {
+
+        const auto camera = viewport->camera();
+
+        if (!camera) {
+            logger_.warn("Viewport was not configured with a camera, skipping createSnapshot()...");
+            return std::nullopt;
+        }
+
+        const auto nodes = findVisibleNodes(*camera);
 
         std::vector<SnapshotItem> renderables;
         renderables.reserve(nodes.size());
-        for (const auto& node : nodes) {
+        for (const auto& node: nodes) {
             if (node->renderable()) {
-                renderables.emplace_back(
-                    node->renderable(),
-                    node->cachedWorldTransform()
-                );
+                renderables.emplace_back(node->renderable(), node->cachedWorldTransform());
             }
         }
 
-        return {
-            camera.projectionMatrix(),
-            camera.viewMatrix(),
-            std::move(renderables)
-        };
+        return std::make_optional<Snapshot>(viewport, camera->projectionMatrix(), camera->viewMatrix(),
+                                            std::move(renderables));
     }
 
-}
+} // namespace helios::scene

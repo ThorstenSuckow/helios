@@ -1,4 +1,5 @@
 /**
+ * @file Material.ixx
  * @brief Material abstraction: shader + material properties.
  */
 module;
@@ -13,7 +14,7 @@ import helios.rendering.model.config.MaterialProperties;
 import helios.util.log;
 import helios.rendering.shader.Shader;
 
-
+#define HELIOS_LOG_SCOPE "helios::rendering::model::Material"
 export namespace helios::rendering::model {
 
     /**
@@ -39,12 +40,9 @@ export namespace helios::rendering::model {
         std::shared_ptr<const helios::rendering::shader::Shader> shader_{};
 
         /**
-         * @brief The logger used with this Material instance.
-         * Defaults to HELIOS_LOG_SCOPE
-         *
-         * @todo constructor injection
+         * @brief Shared logger instance for all Material objects.
          */
-        const helios::util::log::Logger* logger_;
+        inline static const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(HELIOS_LOG_SCOPE);
 
     public:
         virtual ~Material() = default;
@@ -54,14 +52,12 @@ export namespace helios::rendering::model {
          *
          * @param shader A shared pointer to the immutable Shader used by this instance.
          * @param materialProperties A shared pointer to the MaterialProperties for this Material.
-         * @param logger An optional Logger instance for logging. Will use a default logger if omitted.
          *
          * @throws std::invalid_argument if shader or materialProperties is a null shared pointer.
          */
         explicit Material(
             std::shared_ptr<const helios::rendering::shader::Shader> shader,
-            std::shared_ptr<const helios::rendering::model::config::MaterialProperties> materialProperties,
-            const helios::util::log::Logger* logger = nullptr
+            std::shared_ptr<const helios::rendering::model::config::MaterialProperties> materialProperties
         );
 
         /**
@@ -90,4 +86,4 @@ export namespace helios::rendering::model {
         void writeUniformValues(helios::rendering::shader::UniformValueMap& uniformValueMap) const noexcept;
     };
 
-}
+} // namespace helios::rendering::model

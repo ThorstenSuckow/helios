@@ -72,6 +72,15 @@ export namespace helios::math {
         constexpr explicit vec3(const helios::math::vec2<T> v) noexcept : v{v[0], v[1],  static_cast<T>(0)} {}
 
         /**
+         * @brief Constructs a new vec3 with x,y components initialized to those of the vec2
+         * and the z component set to the specified value.
+         *
+         * @param v The vec2 to use for the x,y components.
+         * @param f The value for the z component.
+         */
+        constexpr explicit vec3(const helios::math::vec2<T> v, T f) noexcept : v{v[0], v[1],  f} {}
+
+        /**
          * @brief Provides read only access to the vector components.
          * Bounds checking is performed via `assert` in debug builds.
          *
@@ -104,7 +113,7 @@ export namespace helios::math {
          *
          * @return The norm (magnitude) of this vector as a value of type FloatingPointType<T>.
          */
-        FloatingPointType<T> norm() const noexcept {
+        FloatingPointType<T> length() const noexcept {
             return static_cast<FloatingPointType<T>>(std::sqrt(
                 static_cast<double>(this->v[0]) * static_cast<double>(this->v[0]) +
                 static_cast<double>(this->v[1]) * static_cast<double>(this->v[1]) +
@@ -140,6 +149,41 @@ export namespace helios::math {
          * @return A new vec3<FloatingPointType<T>> instance representing the normalized vector.
          */
         [[nodiscard]] vec3<FloatingPointType<T>> normalize() const noexcept;
+
+        /**
+         * @brief Strictly compares the elements of this vector with the elements
+         * of the rgt vector.
+         *
+         * @param rgt The right vector to compare for equal values.
+         *
+         * @return True if all elements are equal (==), false otherwise.
+         */
+        constexpr bool operator==(const vec3<T>& rgt) const {
+            return v[0] == rgt[0] && v[1] == rgt[1] && v[2] == rgt[2];
+        }
+
+        /**
+         * @brief Compares this vector's elements with the rgt vector considering
+         * an epsilon value.
+         * Returns true if for all elements the equation |a-b| <= epsilon
+         * holds.
+         *
+         * @param rgt The other vector to compare with this vector for equality.
+         * @param epsilon The epsilon value to use for comparison. If omitted, the default epsilon (0.0001) is used.
+         *
+         * @return True if the elements of the vectors are considered equal,
+         * otherwise false.
+         *
+         * @see https://realtimecollisiondetection.net/blog/?p=89
+         *
+         * @todo account for abs (values close to zero) and rel
+         * (larger values), move epsilon to global constant?
+         */
+        constexpr bool same(const vec3<T>& rgt, T epsilon = 0.0001) const {
+            return std::fabs(v[0] - rgt[0]) <= epsilon &&
+                   std::fabs(v[1] - rgt[1]) <= epsilon &&
+                   std::fabs(v[2] - rgt[2]) <= epsilon;
+        }
     };
 
 
@@ -270,10 +314,18 @@ export namespace helios::math {
 
     template<helios::math::Numeric T>
     inline vec3<FloatingPointType<T>> vec3<T>::normalize() const noexcept {
+        if (this->length() == static_cast<FloatingPointType<T>>(0)) {
+            return vec3<FloatingPointType<T>>(
+                static_cast<FloatingPointType<T>>(0),
+                static_cast<FloatingPointType<T>>(0),
+                static_cast<FloatingPointType<T>>(0)
+            );
+        }
+
         return vec3<FloatingPointType<T>>(
-            static_cast<FloatingPointType<T>>(v[0]) / this->norm(),
-            static_cast<FloatingPointType<T>>(v[1]) / this->norm(),
-            static_cast<FloatingPointType<T>>(v[2]) / this->norm()
+            static_cast<FloatingPointType<T>>(v[0]) / this->length(),
+            static_cast<FloatingPointType<T>>(v[1]) / this->length(),
+            static_cast<FloatingPointType<T>>(v[2]) / this->length()
         );
     }
 

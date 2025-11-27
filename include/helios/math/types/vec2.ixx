@@ -63,7 +63,6 @@ export namespace helios::math {
             return this->v[i];
         }
 
-
         /**
          * @brief Provides read-write  access to the vector components.
          * Bounds checking is performed via `assert` in debug builds.
@@ -82,7 +81,7 @@ export namespace helios::math {
          *
          * @return The magnitude of this vector as type FloatingPointType<T>.
          */
-        inline FloatingPointType<T> norm() const noexcept {
+        inline FloatingPointType<T> length() const noexcept {
             if (v[0] == 0 && v[1] == 0) {
                 return static_cast<FloatingPointType<T>>(0);
             }
@@ -107,9 +106,44 @@ export namespace helios::math {
                 );
             }
             return vec2<FloatingPointType<T>>(
-                static_cast<FloatingPointType<T>>(v[0]) / norm(),
-                static_cast<FloatingPointType<T>>(v[1]) / norm()
+                static_cast<FloatingPointType<T>>(v[0]) / length(),
+                static_cast<FloatingPointType<T>>(v[1]) / length()
             );
+        }
+
+        /**
+        * @brief Strictly compares the elements of this vector with the elements
+        * of the rgt vector.
+        *
+        * @param rgt The right vector to compare for equal values
+        *
+        * @return True if all elements are equal (==), false otherwise.
+        */
+        constexpr bool operator==(const vec2<T>& rgt) const {
+            return v[0] == rgt[0] && v[1] == rgt[1];
+        }
+
+        /**
+         * @brief Compares this vector's elements with the rgt vector considering
+         * an epsilon value.
+         * Returns true if for all elements the equation |a-b| <= epsilon
+         * holds.
+         *
+         * EPSILON is set to 0.0001
+         *
+         * @param rgt The other vector to compare with this vector for equality.
+         * @param epsilon The epsilon value to use for comparison. If omitted, the default epsilon (0.0001) is used.
+         *
+         * @return True if the elements of the vectors are considered equal,
+         * otherwise false.
+         *
+         * @see https://realtimecollisiondetection.net/blog/?p=89
+         *
+         * @todo account for abs (values close to zero) and rel
+         * (larger values), move epsilon to global constant?
+         */
+        constexpr bool same(const vec2<T>& rgt, T epsilon = 0.0001) const {
+            return std::fabs(v[0] - rgt[0]) < epsilon && std::fabs(v[1] - rgt[1])  < epsilon;
         }
 
     };

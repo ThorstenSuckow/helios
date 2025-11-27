@@ -129,8 +129,6 @@ export namespace helios::math {
          * Returns true if for all elements the equation |a-b| <= epsilon
          * holds.
          *
-         * EPSILON is set to 0.0001
-         *
          * @param rgt The other vector to compare with this vector for equality.
          * @param epsilon The epsilon value to use for comparison. If omitted, the default epsilon (0.0001) is used.
          *
@@ -143,7 +141,8 @@ export namespace helios::math {
          * (larger values), move epsilon to global constant?
          */
         constexpr bool same(const vec2<T>& rgt, T epsilon = 0.0001) const {
-            return std::fabs(v[0] - rgt[0]) < epsilon && std::fabs(v[1] - rgt[1])  < epsilon;
+            return std::fabs(v[0] - rgt[0]) <= epsilon &&
+                   std::fabs(v[1] - rgt[1]) <= epsilon;
         }
 
     };

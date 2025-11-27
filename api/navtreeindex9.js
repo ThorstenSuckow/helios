@@ -1,5 +1,10 @@
 var NAVTREEINDEX9 =
 {
+"module__helios_8scene_8Camera.html":[2,0,74],
+"module__helios_8scene_8Camera.html#a1dc42ba642ae41f7028a4cb927a6feb0":[2,0,74,2],
+"module__helios_8scene_8Camera.html#a5c915d9ba00c11dcef1885f02e32945c":[2,0,74,6],
+"module__helios_8scene_8Camera.html#a6d1911bccc03c847625153d58cc49e99":[2,0,74,1],
+"module__helios_8scene_8Camera.html#a73a85eb4966fb4524dc6b87736500f62":[2,0,74,5],
 "module__helios_8scene_8Camera.html#a741e4e8c08e4cb107ba3e83e8e9b64f5":[2,0,74,4],
 "module__helios_8scene_8Camera.html#a920bac1e84b874d725027e37d091cb34":[2,0,74,3],
 "module__helios_8scene_8Camera.html#a95f643525bd276faa7edcd1401f47850":[2,0,74,7],
@@ -244,10 +249,5 @@ var NAVTREEINDEX9 =
 "namespacehelios_1_1input_1_1types.html#a963e220296531c047308439c3425bcc5a501d3c1d3d31f70db984de48396437f6":[3,0,0,4,0,0,4],
 "namespacehelios_1_1input_1_1types.html#a963e220296531c047308439c3425bcc5a501d3c1d3d31f70db984de48396437f6":[3,0,0,4,0,1,1],
 "namespacehelios_1_1input_1_1types.html#a963e220296531c047308439c3425bcc5aec4d00988f117bae026eab04ddfa7f33":[3,0,0,4,0,1,0],
-"namespacehelios_1_1math.html":[3,0,0,5],
-"namespacehelios_1_1math.html#a01625d8968c400bd7e812715d7f1941f":[3,0,0,5,30],
-"namespacehelios_1_1math.html#a058bd8629e8b9fdd7914ec513cf515f5":[3,0,0,5,9],
-"namespacehelios_1_1math.html#a076c3e1ea3dd5beb87bc701e87cd4f1a":[3,0,0,5,24],
-"namespacehelios_1_1math.html#a08252f81850c5902e3c8dead272f3332":[3,0,0,5,19],
-"namespacehelios_1_1math.html#a0e37b93487d103aa6588ba44bdb1a0b6":[3,0,0,5,37]
+"namespacehelios_1_1math.html":[3,0,0,5]
 };

@@ -81,9 +81,9 @@ var NAVTREEINDEX =
 "classhelios_1_1util_1_1log_1_1LogManager.html#aeb3c579d6cd53e2ca50384ceadd5d3a6",
 "model_8ixx.html",
 "module__helios_8math_8types.html#a33c47f9920f5e88b98caca96a889d0aa",
-"module__helios_8scene_8Camera.html#a741e4e8c08e4cb107ba3e83e8e9b64f5",
-"namespacehelios_1_1math.html#a0fd329cdb93d866fad284b88f7acb4f4",
-"structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Circle.html"
+"module__helios_8scene_8Camera.html",
+"namespacehelios_1_1math.html#a01625d8968c400bd7e812715d7f1941f",
+"structhelios_1_1rendering_1_1ViewportKey.html#a20f788edebada9c8164b99a310b9ac51"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

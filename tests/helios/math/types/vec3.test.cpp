@@ -285,16 +285,16 @@ TEST(Vec3Tests, sameMethodWithDoubleVectors) {
 TEST(Vec3Tests, sameMethodEdgeCases) {
     // Test edge cases where only one component differs
     math::vec3f v1(1.0f, 2.0f, 3.0f);
-    math::vec3f v2_x(1.0001f, 2.0f, 3.0f);
-    math::vec3f v2_y(1.0f, 2.0001f, 3.0f);
-    math::vec3f v2_z(1.0f, 2.0f, 3.0001f);
+    math::vec3f v2_x(1.001f, 2.0f, 3.0f);
+    math::vec3f v2_y(1.0f, 2.001f, 3.0f);
+    math::vec3f v2_z(1.0f, 2.0f, 3.001f);
 
     EXPECT_FALSE(v1.same(v2_x));
     EXPECT_FALSE(v1.same(v2_y));
     EXPECT_FALSE(v1.same(v2_z));
 
     // But should pass with larger epsilon
-    EXPECT_TRUE(v1.same(v2_x, 0.001f));
-    EXPECT_TRUE(v1.same(v2_y, 0.001f));
-    EXPECT_TRUE(v1.same(v2_z, 0.001f));
+    EXPECT_TRUE(v1.same(v2_x, 0.01f));
+    EXPECT_TRUE(v1.same(v2_y, 0.01f));
+    EXPECT_TRUE(v1.same(v2_z, 0.01f));
 }

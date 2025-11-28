@@ -23,6 +23,7 @@ target_link_libraries(
         helios
         PUBLIC
         thirdparty::opengl
+        thirdparty::imgui
 )
 
 set_property(TARGET helios PROPERTY CXX_SCAN_FOR_MODULES ON)

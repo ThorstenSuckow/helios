@@ -7,24 +7,22 @@ module helios.util.time.Stopwatch;
 
 namespace helios::util::time {
 
-
-    Stopwatch& Stopwatch::getInstance() noexcept {
-        static auto stopwatch = Stopwatch();
-
-        return stopwatch;
-    }
-
     void Stopwatch::start() noexcept {
         start_ = std::chrono::steady_clock::now();
     }
 
-    void Stopwatch::stop(double& deltaTime) const noexcept {
-        std::chrono::time_point<std::chrono::steady_clock> end = std::chrono::steady_clock::now();
-        const std::chrono::duration<double> delta = end - start_;
-
-        deltaTime = delta.count();
+    float Stopwatch::elapsedMs() const noexcept {
+        auto end = std::chrono::steady_clock::now();
+        // Wichtig: Expliziter Cast zu float Millisekunden
+        std::chrono::duration<float, std::milli> duration = end - start_;
+        return duration.count();
     }
 
+    float Stopwatch::elapsedSeconds() const noexcept {
+        auto end = std::chrono::steady_clock::now();
+        std::chrono::duration<float> duration = end - start_;
+        return duration.count();
+    }
 
 
 }

@@ -1,6 +1,6 @@
 var dir_b6e017bc8c299f04fc1162fc4677be61 =
 [
-    [ "_module.ixx", "scene_2__module_8ixx.html", null ],
+    [ "_module.ixx", "helios_2scene_2__module_8ixx.html", null ],
     [ "Camera.ixx", "Camera_8ixx.html", "Camera_8ixx" ],
     [ "CameraSceneNode.ixx", "CameraSceneNode_8ixx.html", "CameraSceneNode_8ixx" ],
     [ "CullNoneStrategy.ixx", "CullNoneStrategy_8ixx.html", "CullNoneStrategy_8ixx" ],

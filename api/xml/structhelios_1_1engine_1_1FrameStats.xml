@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structhelios_1_1engine_1_1FrameStats" kind="struct" language="C++" prot="public">
+    <compoundname>helios::engine::FrameStats</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structhelios_1_1engine_1_1FrameStats_1ab76f59f1bd1a35ee9d4316fdb46efa63" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::FrameStats::totalFrameTime</definition>
+        <argsstring></argsstring>
+        <name>totalFrameTime</name>
+        <qualifiedname>helios::engine::FrameStats::totalFrameTime</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Total frame time in seconds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The sum of workTime and waitTime. Represents the complete duration of the frame from start to synchronization. This value corresponds to the `deltaTime` used for game logic. Total frame time in seconds. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/FrameStats.ixx" line="27" column="15" bodyfile="include/helios/engine/FrameStats.ixx" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhelios_1_1engine_1_1FrameStats_1a09bdca6ddc99e99be4868157f069a385" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::FrameStats::workTime</definition>
+        <argsstring></argsstring>
+        <name>workTime</name>
+        <qualifiedname>helios::engine::FrameStats::workTime</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>CPU processing time in seconds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The actual time spent executing frame logic, rendering, and other computational tasks before synchronization. CPU processing time in seconds. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/FrameStats.ixx" line="35" column="15" bodyfile="include/helios/engine/FrameStats.ixx" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhelios_1_1engine_1_1FrameStats_1a531092b7438c7c37a7c6e5f19249efb4" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::FrameStats::waitTime</definition>
+        <argsstring></argsstring>
+        <name>waitTime</name>
+        <qualifiedname>helios::engine::FrameStats::waitTime</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Idle time in seconds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The time spent sleeping/waiting by the <ref refid="classhelios_1_1engine_1_1FramePacer" kindref="compound">FramePacer</ref> to maintain the target frame rate. This is 0.0f if no frame pacing is active or if the frame took longer than the target time. Idle time in seconds. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/FrameStats.ixx" line="44" column="15" bodyfile="include/helios/engine/FrameStats.ixx" bodystart="44" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Contains timing statistics for a single frame. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This structure holds detailed timing information about a frame&apos;s execution, including work time (actual CPU processing) and wait time (idle time from frame pacing).</para>
+<para><simplesect kind="note"><para>All time values are specified in **seconds**. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="include/helios/engine/FrameStats.ixx" line="19" column="5" bodyfile="include/helios/engine/FrameStats.ixx" bodystart="19" bodyend="46"/>
+    <listofallmembers>
+      <member refid="structhelios_1_1engine_1_1FrameStats_1ab76f59f1bd1a35ee9d4316fdb46efa63" prot="public" virt="non-virtual"><scope>helios::engine::FrameStats</scope><name>totalFrameTime</name></member>
+      <member refid="structhelios_1_1engine_1_1FrameStats_1a531092b7438c7c37a7c6e5f19249efb4" prot="public" virt="non-virtual"><scope>helios::engine::FrameStats</scope><name>waitTime</name></member>
+      <member refid="structhelios_1_1engine_1_1FrameStats_1a09bdca6ddc99e99be4868157f069a385" prot="public" virt="non-virtual"><scope>helios::engine::FrameStats</scope><name>workTime</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

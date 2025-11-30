@@ -8,6 +8,7 @@ var namespacehelios =
     [ "math", "namespacehelios_1_1math.html", "namespacehelios_1_1math" ],
     [ "rendering", "namespacehelios_1_1rendering.html", "namespacehelios_1_1rendering" ],
     [ "scene", "namespacehelios_1_1scene.html", "namespacehelios_1_1scene" ],
+    [ "tooling", "namespacehelios_1_1tooling.html", "namespacehelios_1_1tooling" ],
     [ "util", "namespacehelios_1_1util.html", "namespacehelios_1_1util" ],
     [ "window", "namespacehelios_1_1window.html", "namespacehelios_1_1window" ]
 ];

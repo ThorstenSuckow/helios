@@ -17,6 +17,16 @@ var annotated_dup =
             [ "GLFWWindowUserPointer", "structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowUserPointer.html", "structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowUserPointer" ]
           ] ]
         ] ],
+        [ "imgui", "namespacehelios_1_1ext_1_1imgui.html", [
+          [ "widgets", "namespacehelios_1_1ext_1_1imgui_1_1widgets.html", [
+            [ "FpsWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget.html", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget" ],
+            [ "GamepadWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget.html", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget" ]
+          ] ],
+          [ "ImGuiBackend", "classhelios_1_1ext_1_1imgui_1_1ImGuiBackend.html", "classhelios_1_1ext_1_1imgui_1_1ImGuiBackend" ],
+          [ "ImGuiGlfwOpenGLBackend", "classhelios_1_1ext_1_1imgui_1_1ImGuiGlfwOpenGLBackend.html", "classhelios_1_1ext_1_1imgui_1_1ImGuiGlfwOpenGLBackend" ],
+          [ "ImGuiOverlay", "classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay.html", "classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay" ],
+          [ "ImGuiWidget", "classhelios_1_1ext_1_1imgui_1_1ImGuiWidget.html", "classhelios_1_1ext_1_1imgui_1_1ImGuiWidget" ]
+        ] ],
         [ "opengl", "namespacehelios_1_1ext_1_1opengl.html", [
           [ "rendering", "namespacehelios_1_1ext_1_1opengl_1_1rendering.html", [
             [ "model", "namespacehelios_1_1ext_1_1opengl_1_1rendering_1_1model.html", [
@@ -39,6 +49,8 @@ var annotated_dup =
         [ "Application", "classhelios_1_1app_1_1Application.html", "classhelios_1_1app_1_1Application" ]
       ] ],
       [ "engine", "namespacehelios_1_1engine.html", [
+        [ "FramePacer", "classhelios_1_1engine_1_1FramePacer.html", "classhelios_1_1engine_1_1FramePacer" ],
+        [ "FrameStats", "structhelios_1_1engine_1_1FrameStats.html", "structhelios_1_1engine_1_1FrameStats" ],
         [ "Tickable", "classhelios_1_1engine_1_1Tickable.html", "classhelios_1_1engine_1_1Tickable" ]
       ] ],
       [ "event", "namespacehelios_1_1event.html", [
@@ -110,6 +122,9 @@ var annotated_dup =
         [ "SnapshotItem", "structhelios_1_1scene_1_1SnapshotItem.html", "structhelios_1_1scene_1_1SnapshotItem" ],
         [ "Transform", "classhelios_1_1scene_1_1Transform.html", "classhelios_1_1scene_1_1Transform" ]
       ] ],
+      [ "tooling", "namespacehelios_1_1tooling.html", [
+        [ "FpsMetrics", "classhelios_1_1tooling_1_1FpsMetrics.html", "classhelios_1_1tooling_1_1FpsMetrics" ]
+      ] ],
       [ "util", "namespacehelios_1_1util.html", [
         [ "io", "namespacehelios_1_1util_1_1io.html", [
           [ "BasicStringFileReader", "classhelios_1_1util_1_1io_1_1BasicStringFileReader.html", "classhelios_1_1util_1_1io_1_1BasicStringFileReader" ],
@@ -118,6 +133,9 @@ var annotated_dup =
         [ "log", "namespacehelios_1_1util_1_1log.html", [
           [ "Logger", "classhelios_1_1util_1_1log_1_1Logger.html", "classhelios_1_1util_1_1log_1_1Logger" ],
           [ "LogManager", "classhelios_1_1util_1_1log_1_1LogManager.html", "classhelios_1_1util_1_1log_1_1LogManager" ]
+        ] ],
+        [ "time", "namespacehelios_1_1util_1_1time.html", [
+          [ "Stopwatch", "classhelios_1_1util_1_1time_1_1Stopwatch.html", "classhelios_1_1util_1_1time_1_1Stopwatch" ]
         ] ],
         [ "Guid", "classhelios_1_1util_1_1Guid.html", "classhelios_1_1util_1_1Guid" ]
       ] ],

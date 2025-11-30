@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1ext_1_1imgui_1_1ImGuiWidget" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>helios::ext::imgui::ImGuiWidget</compoundname>
+    <derivedcompoundref refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget" prot="public" virt="non-virtual">helios::ext::imgui::widgets::FpsWidget</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget" prot="public" virt="non-virtual">helios::ext::imgui::widgets::GamepadWidget</derivedcompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1ext_1_1imgui_1_1ImGuiWidget_1aac2ed1b7d339b387d91158b00d26c089" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::ext::imgui::ImGuiWidget::ImGuiWidget</definition>
+        <argsstring>()=default</argsstring>
+        <name>ImGuiWidget</name>
+        <qualifiedname>helios::ext::imgui::ImGuiWidget::ImGuiWidget</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/ImGuiWidget.ixx" line="26" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1imgui_1_1ImGuiWidget_1a05b3e6ee2d701b06c67bf0c57af9a829" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::ext::imgui::ImGuiWidget::~ImGuiWidget</definition>
+        <argsstring>()=default</argsstring>
+        <name>~ImGuiWidget</name>
+        <qualifiedname>helios::ext::imgui::ImGuiWidget::~ImGuiWidget</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/ImGuiWidget.ixx" line="27" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1imgui_1_1ImGuiWidget_1a0ad065b003992409713a4e4c306b7499" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void helios::ext::imgui::ImGuiWidget::draw</definition>
+        <argsstring>()=0</argsstring>
+        <name>draw</name>
+        <qualifiedname>helios::ext::imgui::ImGuiWidget::draw</qualifiedname>
+        <reimplementedby refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a17f388a994c99823df57e0a2c014df4f">draw</reimplementedby>
+        <reimplementedby refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget_1a014d3bec3cd6af14a0870687d896fc30">draw</reimplementedby>
+        <briefdescription>
+<para>Renders the widget using ImGui immediate-mode API. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Called once per frame by the owning overlay. Implementers should call ImGui functions (e.g., `ImGui::Begin()`, `ImGui::Text()`) to build the UI. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/ImGuiWidget.ixx" line="35" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Abstract base class for ImGui widgets rendered in debug overlays. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>All widgets must implement the `draw()` method, which is called once per frame by the owning `ImGuiOverlay`. Widgets are typically used for real-time debugging, profiling, and developer tools.</para>
+<para><simplesect kind="note"><para>Widgets are not thread-safe and must be used from the main/render thread. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>helios::ext::imgui::ImGuiWidget</label>
+        <link refid="classhelios_1_1ext_1_1imgui_1_1ImGuiWidget"/>
+      </node>
+      <node id="2">
+        <label>helios::ext::imgui::widgets::FpsWidget</label>
+        <link refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::ext::imgui::widgets::GamepadWidget</label>
+        <link refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="include/ext/imgui/ImGuiWidget.ixx" line="23" column="5" bodyfile="include/ext/imgui/ImGuiWidget.ixx" bodystart="23" bodyend="37"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1ext_1_1imgui_1_1ImGuiWidget_1a0ad065b003992409713a4e4c306b7499" prot="public" virt="pure-virtual"><scope>helios::ext::imgui::ImGuiWidget</scope><name>draw</name></member>
+      <member refid="classhelios_1_1ext_1_1imgui_1_1ImGuiWidget_1aac2ed1b7d339b387d91158b00d26c089" prot="public" virt="non-virtual"><scope>helios::ext::imgui::ImGuiWidget</scope><name>ImGuiWidget</name></member>
+      <member refid="classhelios_1_1ext_1_1imgui_1_1ImGuiWidget_1a05b3e6ee2d701b06c67bf0c57af9a829" prot="public" virt="virtual"><scope>helios::ext::imgui::ImGuiWidget</scope><name>~ImGuiWidget</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -7,7 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
+### Added
+- `FramePacer` class for frame rate control (#111)
+- `FrameStats` structure for frame timing information (#111)
+- `FpsMetrics` class for frame rate analysis (#111)
+- `Stopwatch` high-resolution timer (#111)
+- `FpsWidget` for ImGui overlays
+- `GamepadWidget` for ImGui overlays (#114)
+- ImGui integration layer
+  - `ImGuiBackend` abstraction for platform backends
+  - `ImGuiGlfwOpenGLBackend` concrete implementation
+  - `ImGuiOverlay` singleton manager for widget rendering
+  - `ImGuiWidget` base interface for custom widgets
+
+### Fixed
 - **BREAKING**: Enum counter entries renamed to `size_` (#34)
   - Consistent naming across all enums
   - Improved code generation and Doxygen compatibility

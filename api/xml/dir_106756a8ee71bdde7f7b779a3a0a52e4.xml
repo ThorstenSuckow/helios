@@ -3,16 +3,17 @@
   <compounddef id="dir_106756a8ee71bdde7f7b779a3a0a52e4" kind="dir">
     <compoundname>include/ext</compoundname>
     <innerdir refid="dir_87bb11e6601443413726efc9dc479d01">include/ext/glfw</innerdir>
+    <innerdir refid="dir_54bae32d8466bfad053a02d5bd535fae">include/ext/imgui</innerdir>
     <innerdir refid="dir_e6d2024ed47421d40e989df615c8235b">include/ext/opengl</innerdir>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md16">
+<sect1 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md20">
 <title>helios::ext</title><para>This namespace contains <bold>platform-specific implementations</bold> and <bold>backend adapters</bold> for the helios framework. It bridges the abstract helios core APIs with concrete third-party libraries.</para>
 </sect1>
-<sect1 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md17">
+<sect1 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md21">
 <title>Overview</title><para>The <computeroutput>ext</computeroutput> namespace follows a <bold>plugin architecture</bold>, allowing helios to support multiple windowing systems and rendering backends without coupling the core framework to specific implementations.</para>
-<sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md18">
+<sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md22">
 <title>Available Extensions</title><para><programlisting><codeline><highlight class="normal">ext/</highlight></codeline>
 <codeline><highlight class="normal">├──<sp/>glfw/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GLFW-based<sp/>windowing<sp/>and<sp/>input</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>window/<sp/><sp/><sp/>#<sp/>GLFWWindow<sp/>implementation</highlight></codeline>
@@ -25,8 +26,8 @@
 </programlisting></para>
 </sect2>
 </sect1>
-<sect1 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md19">
-<title>Architecture</title><sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md20">
+<sect1 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md23">
+<title>Architecture</title><sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md24">
 <title>Extension Responsibilities</title><para><table rows="3" cols="2"><row>
 <entry thead="yes"><para>Extension  </para>
 </entry><entry thead="yes"><para>Responsibility  </para>
@@ -42,7 +43,7 @@
 </table>
 </para>
 </sect2>
-<sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md21">
+<sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md25">
 <title>Separation of Concerns</title><para><itemizedlist>
 <listitem><para><bold>helios core</bold> defines the <bold>interfaces</bold> (e.g., <computeroutput>Window</computeroutput>, <computeroutput>RenderingDevice</computeroutput>, <computeroutput>Shader</computeroutput>)</para>
 </listitem><listitem><para><bold><computeroutput>ext</computeroutput> modules</bold> provide the <bold>implementations</bold> (e.g., <computeroutput>GLFWWindow</computeroutput>, <computeroutput>OpenGLShader</computeroutput>)</para>
@@ -51,8 +52,8 @@
 </para>
 </sect2>
 </sect1>
-<sect1 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md22">
-<title>Using Extensions</title><sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md23">
+<sect1 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md26">
+<title>Using Extensions</title><sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md27">
 <title>Quick Start with GLFW + OpenGL</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8ext_8glfw_8app_8GLFWFactory" kindref="compound">helios.ext.glfw.app.GLFWFactory</ref>;</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>main()<sp/>{</highlight></codeline>
@@ -70,8 +71,8 @@
 </programlisting></para>
 </sect2>
 </sect1>
-<sect1 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md24">
-<title>Extension Modules</title><sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md25">
+<sect1 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md28">
+<title>Extension Modules</title><sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md29">
 <title><computeroutput>helios.ext.glfw</computeroutput></title><para>GLFW-based implementation for windowing and input.</para>
 <para><bold>Key Classes:</bold><itemizedlist>
 <listitem><para><computeroutput>GLFWWindow</computeroutput> - Window management (resize, close, swap buffers)</para>
@@ -86,7 +87,7 @@
 </para>
 <para><bold>See:</bold> <ref refid="dir_87bb11e6601443413726efc9dc479d01" kindref="compound">glfw/README.md</ref></para>
 </sect2>
-<sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md26">
+<sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md30">
 <title><computeroutput>helios.ext.opengl</computeroutput></title><para>OpenGL 4.5+ rendering backend.</para>
 <para><bold>Key Classes:</bold><itemizedlist>
 <listitem><para><computeroutput>OpenGLRenderingDevice</computeroutput> - Main rendering interface</para>
@@ -103,9 +104,9 @@
 <para><bold>See:</bold> <ref refid="dir_e6d2024ed47421d40e989df615c8235b" kindref="compound">opengl/README.md</ref></para>
 </sect2>
 </sect1>
-<sect1 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md27">
+<sect1 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md31">
 <title>Creating a New Backend</title><para>To add support for a new platform or rendering API:</para>
-<sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md28">
+<sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md32">
 <title>1. Implement Core Interfaces</title><para>Create implementations for:<itemizedlist>
 <listitem><para><computeroutput><ref refid="classhelios_1_1window_1_1Window" kindref="compound">helios::window::Window</ref></computeroutput> (if new windowing system)</para>
 </listitem><listitem><para><computeroutput><ref refid="classhelios_1_1rendering_1_1RenderingDevice" kindref="compound">helios::rendering::RenderingDevice</ref></computeroutput> (if new rendering API)</para>
@@ -115,7 +116,7 @@
 </listitem></itemizedlist>
 </para>
 </sect2>
-<sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md29">
+<sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md33">
 <title>2. Create Factory</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">helios::ext::vulkan<sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">VulkanFactory<sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
@@ -136,7 +137,7 @@
 <codeline><highlight class="normal">}</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md30">
+<sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md34">
 <title>3. Follow Module Structure</title><para><programlisting><codeline><highlight class="normal">include/ext/yourbackend/</highlight></codeline>
 <codeline><highlight class="normal">├──<sp/>_module.ixx<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Module<sp/>facade</highlight></codeline>
 <codeline><highlight class="normal">├──<sp/>rendering/</highlight></codeline>
@@ -153,16 +154,16 @@
 <codeline><highlight class="normal">└──<sp/>...</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md31">
+<sect2 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md35">
 <title>4. Update CMake</title><para>Add your backend to the build system: <programlisting filename=".cmake"><codeline><highlight class="normal">#<sp/>In<sp/>src/ext/CMakeLists.txt</highlight></codeline>
 <codeline><highlight class="normal">add_subdirectory(yourbackend)</highlight></codeline>
 </programlisting></para>
 </sect2>
 </sect1>
-<sect1 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md32">
+<sect1 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md36">
 <title>Design Principles</title><para>1. <bold>Abstract Interfaces</bold>: The core helios framework defines interfaces, not implementations. 2. <bold>Dependency Injection</bold>: Applications receive concrete implementations via factories. 3. <bold>Modularity</bold>: Each extension is an independent C++23 module. 4. <bold>Interchangeability</bold>: Backends can be swapped without changing application code (only the factory call).</para>
 </sect1>
-<sect1 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md33">
+<sect1 id="dir_106756a8ee71bdde7f7b779a3a0a52e4_1autotoc_md37">
 <title>Examples</title><para>See <ulink url="../../examples/">examples/</ulink> for complete applications using the extensions:<itemizedlist>
 <listitem><para><computeroutput>simple_cube_rendering</computeroutput> - GLFW + OpenGL</para>
 </listitem><listitem><para><computeroutput>game_controller_input</computeroutput> - GLFW input handling</para>

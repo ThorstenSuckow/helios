@@ -7,5 +7,6 @@ var searchData=
   ['shape_2eixx_4',['Shape.ixx',['../Shape_8ixx.html',1,'']]],
   ['snapshot_2eixx_5',['Snapshot.ixx',['../Snapshot_8ixx.html',1,'']]],
   ['snapshotitem_2eixx_6',['SnapshotItem.ixx',['../SnapshotItem_8ixx.html',1,'']]],
-  ['stringfilereader_2eixx_7',['StringFileReader.ixx',['../StringFileReader_8ixx.html',1,'']]]
+  ['stopwatch_2eixx_7',['Stopwatch.ixx',['../Stopwatch_8ixx.html',1,'']]],
+  ['stringfilereader_2eixx_8',['StringFileReader.ixx',['../StringFileReader_8ixx.html',1,'']]]
 ];

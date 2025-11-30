@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1ext_1_1imgui_1_1ImGuiBackend" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>helios::ext::imgui::ImGuiBackend</compoundname>
+    <derivedcompoundref refid="classhelios_1_1ext_1_1imgui_1_1ImGuiGlfwOpenGLBackend" prot="public" virt="non-virtual">helios::ext::imgui::ImGuiGlfwOpenGLBackend</derivedcompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1ext_1_1imgui_1_1ImGuiBackend_1a78ca09a0223a87f25adfbbbb1fa358e7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::ext::imgui::ImGuiBackend::ImGuiBackend</definition>
+        <argsstring>()=default</argsstring>
+        <name>ImGuiBackend</name>
+        <qualifiedname>helios::ext::imgui::ImGuiBackend::ImGuiBackend</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/ImGuiBackend.ixx" line="26" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1imgui_1_1ImGuiBackend_1a491f2448db01e1544be5491f5b1b848f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::ext::imgui::ImGuiBackend::~ImGuiBackend</definition>
+        <argsstring>()=default</argsstring>
+        <name>~ImGuiBackend</name>
+        <qualifiedname>helios::ext::imgui::ImGuiBackend::~ImGuiBackend</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/ImGuiBackend.ixx" line="28" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1imgui_1_1ImGuiBackend_1ac5ab307f136d90b6c914ccb1f75838e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void helios::ext::imgui::ImGuiBackend::newFrame</definition>
+        <argsstring>()=0</argsstring>
+        <name>newFrame</name>
+        <qualifiedname>helios::ext::imgui::ImGuiBackend::newFrame</qualifiedname>
+        <reimplementedby refid="classhelios_1_1ext_1_1imgui_1_1ImGuiGlfwOpenGLBackend_1a6c6725e9e259f3fed66a930bb5d1bbe4">newFrame</reimplementedby>
+        <briefdescription>
+<para>Prepares ImGui for a new frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Must be called at the beginning of each frame before any ImGui calls. Typically invokes platform-specific `NewFrame()` implementations. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/ImGuiBackend.ixx" line="36" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1imgui_1_1ImGuiBackend_1a003dcd18cbc5e18a516451cd1f388e18" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void helios::ext::imgui::ImGuiBackend::renderDrawData</definition>
+        <argsstring>(ImDrawData *drawData)=0</argsstring>
+        <name>renderDrawData</name>
+        <qualifiedname>helios::ext::imgui::ImGuiBackend::renderDrawData</qualifiedname>
+        <reimplementedby refid="classhelios_1_1ext_1_1imgui_1_1ImGuiGlfwOpenGLBackend_1a6fb68779b0f347876d2d2c93cda02454">renderDrawData</reimplementedby>
+        <param>
+          <type>ImDrawData *</type>
+          <declname>drawData</declname>
+        </param>
+        <briefdescription>
+<para>Renders ImGui draw data to the screen. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Called after `ImGui::Render()` to submit draw commands to the GPU.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>drawData</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to ImGui draw data (typically from `ImGui::GetDrawData()`). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/ImGuiBackend.ixx" line="45" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Platform-agnostic interface for ImGui backend implementations. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Concrete backends (e.g., GLFW+OpenGL, SDL+Vulkan) implement this interface to provide platform-specific initialization, frame setup, and rendering. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>helios::ext::imgui::ImGuiBackend</label>
+        <link refid="classhelios_1_1ext_1_1imgui_1_1ImGuiBackend"/>
+      </node>
+      <node id="2">
+        <label>helios::ext::imgui::ImGuiGlfwOpenGLBackend</label>
+        <link refid="classhelios_1_1ext_1_1imgui_1_1ImGuiGlfwOpenGLBackend"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="include/ext/imgui/ImGuiBackend.ixx" line="22" column="5" bodyfile="include/ext/imgui/ImGuiBackend.ixx" bodystart="22" bodyend="47"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1ext_1_1imgui_1_1ImGuiBackend_1a78ca09a0223a87f25adfbbbb1fa358e7" prot="public" virt="non-virtual"><scope>helios::ext::imgui::ImGuiBackend</scope><name>ImGuiBackend</name></member>
+      <member refid="classhelios_1_1ext_1_1imgui_1_1ImGuiBackend_1ac5ab307f136d90b6c914ccb1f75838e1" prot="public" virt="pure-virtual"><scope>helios::ext::imgui::ImGuiBackend</scope><name>newFrame</name></member>
+      <member refid="classhelios_1_1ext_1_1imgui_1_1ImGuiBackend_1a003dcd18cbc5e18a516451cd1f388e18" prot="public" virt="pure-virtual"><scope>helios::ext::imgui::ImGuiBackend</scope><name>renderDrawData</name></member>
+      <member refid="classhelios_1_1ext_1_1imgui_1_1ImGuiBackend_1a491f2448db01e1544be5491f5b1b848f" prot="public" virt="virtual"><scope>helios::ext::imgui::ImGuiBackend</scope><name>~ImGuiBackend</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

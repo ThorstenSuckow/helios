@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay" kind="class" language="C++" prot="public">
+    <compoundname>helios::ext::imgui::ImGuiOverlay</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay_1ade7221a4740ecdcb5f023868b095a552" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classhelios_1_1ext_1_1imgui_1_1ImGuiWidget" kindref="compound">helios::ext::imgui::ImGuiWidget</ref> * &gt;</type>
+        <definition>std::vector&lt;helios::ext::imgui::ImGuiWidget*&gt; helios::ext::imgui::ImGuiOverlay::widgets_</definition>
+        <argsstring></argsstring>
+        <name>widgets_</name>
+        <qualifiedname>helios::ext::imgui::ImGuiOverlay::widgets_</qualifiedname>
+        <briefdescription>
+<para>Container for dynamically registered ImGui widgets. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Stores pointers to widgets that are managed and rendered by the `ImGuiOverlay`. Widgets are added in the order they are registered and must remain valid for the lifetime of the overlay. The container does not take ownership of the widgets.</para>
+<para><simplesect kind="note"><para>This is a private member of `ImGuiOverlay` and is utilized for managing the rendering lifecycle of widgets. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/ImGuiOverlay.ixx" line="43" column="21" bodyfile="include/ext/imgui/ImGuiOverlay.ixx" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay_1a81398bb20dd9a0e6598acb95447cbb01" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1ext_1_1imgui_1_1ImGuiBackend" kindref="compound">ImGuiBackend</ref> *</type>
+        <definition>ImGuiBackend* helios::ext::imgui::ImGuiOverlay::backend_</definition>
+        <argsstring></argsstring>
+        <name>backend_</name>
+        <qualifiedname>helios::ext::imgui::ImGuiOverlay::backend_</qualifiedname>
+        <briefdescription>
+<para>Pointer to the backend used for rendering ImGui widgets. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Represents the platform-specific implementation of ImGui functionality (e.g., OpenGL, Vulkan, etc.). The backend facilitates frame management, new frame initialization, and rendering draw data.</para>
+<para><simplesect kind="note"><para>This pointer is initialized via the `ImGuiOverlay` constructor and must remain a valid instance for the lifetime of the `ImGuiOverlay`. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/ImGuiOverlay.ixx" line="55" column="22" bodyfile="include/ext/imgui/ImGuiOverlay.ixx" bodystart="55" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay_1a95f768f9d1a5efb9ffc05800fbb8392d" prot="private" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::ext::imgui::ImGuiOverlay::ImGuiOverlay</definition>
+        <argsstring>(ImGuiBackend *backend)</argsstring>
+        <name>ImGuiOverlay</name>
+        <qualifiedname>helios::ext::imgui::ImGuiOverlay::ImGuiOverlay</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1ext_1_1imgui_1_1ImGuiBackend" kindref="compound">ImGuiBackend</ref> *</type>
+          <declname>backend</declname>
+        </param>
+        <briefdescription>
+<para>Constructs an <ref refid="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay" kindref="compound">ImGuiOverlay</ref> instance with a specified backend. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This constructor initializes the overlay with the provided ImGui backend. It is private to enforce the singleton pattern of the overlay.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>backend</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the <ref refid="classhelios_1_1ext_1_1imgui_1_1ImGuiBackend" kindref="compound">ImGuiBackend</ref> implementation. Must remain valid for the lifetime of the overlay. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/ImGuiOverlay.ixx" line="66" column="18" bodyfile="include/ext/imgui/ImGuiOverlay.ixx" bodystart="66" bodyend="69"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay_1ab3f79cc8881b8d1ee688bdbe976955a7" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>ImGuiOverlay &amp;</type>
+        <definition>static ImGuiOverlay &amp; helios::ext::imgui::ImGuiOverlay::forBackend</definition>
+        <argsstring>(ImGuiBackend *backend)</argsstring>
+        <name>forBackend</name>
+        <qualifiedname>helios::ext::imgui::ImGuiOverlay::forBackend</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1ext_1_1imgui_1_1ImGuiBackend" kindref="compound">ImGuiBackend</ref> *</type>
+          <declname>backend</declname>
+        </param>
+        <briefdescription>
+<para>Retrieves the singleton overlay instance for a given backend. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>backend</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the ImGui backend (e.g., GLFW+OpenGL). Must remain valid. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to the singleton overlay instance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/ImGuiOverlay.ixx" line="79" column="29" bodyfile="include/ext/imgui/ImGuiOverlay.ixx" bodystart="79" bodyend="84"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay_1ad76b37d0345172282e9604e3b4d6da94" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::ext::imgui::ImGuiOverlay::addWidget</definition>
+        <argsstring>(ImGuiWidget *widget)</argsstring>
+        <name>addWidget</name>
+        <qualifiedname>helios::ext::imgui::ImGuiOverlay::addWidget</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1ext_1_1imgui_1_1ImGuiWidget" kindref="compound">ImGuiWidget</ref> *</type>
+          <declname>widget</declname>
+        </param>
+        <briefdescription>
+<para>Adds a widget to the overlay. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Widgets are rendered in the order they were added. The overlay does not take ownership; the caller must ensure the widget remains valid.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>widget</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the widget. Must remain valid for the lifetime of the overlay. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/ImGuiOverlay.ixx" line="94" column="14" bodyfile="include/ext/imgui/ImGuiOverlay.ixx" bodystart="94" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay_1ab7ed11d1c2ee989ac85c2426b7d649e2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::ext::imgui::ImGuiOverlay::render</definition>
+        <argsstring>()</argsstring>
+        <name>render</name>
+        <qualifiedname>helios::ext::imgui::ImGuiOverlay::render</qualifiedname>
+        <briefdescription>
+<para>Renders all registered widgets using the backend. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Calls `newFrame()` on the backend, invokes `draw()` on each widget, then finalizes rendering via `ImGui::Render()` and `renderDrawData()`. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/ImGuiOverlay.ixx" line="105" column="14" bodyfile="include/ext/imgui/ImGuiOverlay.ixx" bodystart="105" bodyend="114"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Central manager for ImGui widgets rendered via a specific backend. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The overlay is a singleton per backend. Widgets can be registered dynamically, and all widgets are rendered in the order they were added.</para>
+<para><simplesect kind="note"><para>This class is implemented as a singleton using `forBackend()`. Direct construction is not allowed. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="include/ext/imgui/ImGuiOverlay.ixx" line="29" column="5" bodyfile="include/ext/imgui/ImGuiOverlay.ixx" bodystart="29" bodyend="116"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay_1ad76b37d0345172282e9604e3b4d6da94" prot="public" virt="non-virtual"><scope>helios::ext::imgui::ImGuiOverlay</scope><name>addWidget</name></member>
+      <member refid="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay_1a81398bb20dd9a0e6598acb95447cbb01" prot="private" virt="non-virtual"><scope>helios::ext::imgui::ImGuiOverlay</scope><name>backend_</name></member>
+      <member refid="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay_1ab3f79cc8881b8d1ee688bdbe976955a7" prot="public" virt="non-virtual"><scope>helios::ext::imgui::ImGuiOverlay</scope><name>forBackend</name></member>
+      <member refid="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay_1a95f768f9d1a5efb9ffc05800fbb8392d" prot="private" virt="non-virtual"><scope>helios::ext::imgui::ImGuiOverlay</scope><name>ImGuiOverlay</name></member>
+      <member refid="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay_1ab7ed11d1c2ee989ac85c2426b7d649e2" prot="public" virt="non-virtual"><scope>helios::ext::imgui::ImGuiOverlay</scope><name>render</name></member>
+      <member refid="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay_1ade7221a4740ecdcb5f023868b095a552" prot="private" virt="non-virtual"><scope>helios::ext::imgui::ImGuiOverlay</scope><name>widgets_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

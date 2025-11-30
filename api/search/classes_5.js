@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['framebufferresizeevent_0',['FrameBufferResizeEvent',['../classhelios_1_1window_1_1event_1_1FrameBufferResizeEvent.html',1,'helios::window::event']]],
-  ['frustumcullingstrategy_1',['FrustumCullingStrategy',['../classhelios_1_1scene_1_1FrustumCullingStrategy.html',1,'helios::scene']]]
+  ['fpsmetrics_0',['FpsMetrics',['../classhelios_1_1tooling_1_1FpsMetrics.html',1,'helios::tooling']]],
+  ['fpswidget_1',['FpsWidget',['../classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget.html',1,'helios::ext::imgui::widgets']]],
+  ['framebufferresizeevent_2',['FrameBufferResizeEvent',['../classhelios_1_1window_1_1event_1_1FrameBufferResizeEvent.html',1,'helios::window::event']]],
+  ['framepacer_3',['FramePacer',['../classhelios_1_1engine_1_1FramePacer.html',1,'helios::engine']]],
+  ['framestats_4',['FrameStats',['../structhelios_1_1engine_1_1FrameStats.html',1,'helios::engine']]],
+  ['frustumcullingstrategy_5',['FrustumCullingStrategy',['../classhelios_1_1scene_1_1FrustumCullingStrategy.html',1,'helios::scene']]]
 ];

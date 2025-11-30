@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8ext_8imgui_8widgets_8FpsWidget" kind="module">
+    <compoundname>helios.ext.imgui.widgets.FpsWidget</compoundname>
+    <innerfile refid="FpsWidget_8ixx">FpsWidget.ixx</innerfile>
+    <innerclass refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget" prot="public">helios::ext::imgui::widgets::FpsWidget</innerclass>
+    <innerclass refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget" prot="public">helios::ext::imgui::widgets::FpsWidget</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1af7c3bb5200e4d97215af2293cfc37efd" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1tooling_1_1FpsMetrics" kindref="compound">helios::tooling::FpsMetrics</ref> *</type>
+        <definition>helios::tooling::FpsMetrics* helios::ext::imgui::widgets::FpsWidget::fpsMetrics_</definition>
+        <argsstring></argsstring>
+        <name>fpsMetrics_</name>
+        <qualifiedname>helios::ext::imgui::widgets::FpsWidget::fpsMetrics_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Pointer to an FpsMetrics instance used for tracking and displaying FPS metrics. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This member provides direct access to real-time frame rate statistics, including current FPS, average FPS, and frame timing data, which are displayed in the widget. It is expected to be externally managed and supplied during widget initialization.</para>
+<para><simplesect kind="note"><para>The pointer must remain valid throughout the lifetime of the <ref refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget" kindref="compound">FpsWidget</ref> instance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/widgets/FpsWidget.ixx" line="43" column="37" bodyfile="include/ext/imgui/widgets/FpsWidget.ixx" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1af2933944234d2a40a6a8f4b2370dd5b4" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1FramePacer" kindref="compound">helios::engine::FramePacer</ref> *</type>
+        <definition>helios::engine::FramePacer* helios::ext::imgui::widgets::FpsWidget::framePacer_</definition>
+        <argsstring></argsstring>
+        <name>framePacer_</name>
+        <qualifiedname>helios::ext::imgui::widgets::FpsWidget::framePacer_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Pointer to a `FramePacer` instance for managing frame pacing and target FPS. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Provides frame pacing control to synchronize application updates with a specified frame rate target, if set. When associated with a valid `FramePacer`, it enables runtime configuration of frame timing and update intervals.</para>
+<para><simplesect kind="note"><para>This pointer must be initialized with a valid `FramePacer` instance or set to `nullptr` if frame pacing is not required. Ensure the lifetime of the referenced `FramePacer` extends beyond the usage of this pointer. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/widgets/FpsWidget.ixx" line="56" column="36" bodyfile="include/ext/imgui/widgets/FpsWidget.ixx" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a602ce264527f5c72c180b471d47f37ff" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::ext::imgui::widgets::FpsWidget::targetFpsInput_</definition>
+        <argsstring></argsstring>
+        <name>targetFpsInput_</name>
+        <qualifiedname>helios::ext::imgui::widgets::FpsWidget::targetFpsInput_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Stores the user-configured target frames per second (FPS) for frame pacing. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Acts as the intermediate value for the target FPS, used for runtime adjustments via buttons or sliders in the UI. This variable gets updated dynamically based on user input and reflects the desired frame rate. A value of `0.0f` indicates an uncapped frame rate.</para>
+<para><simplesect kind="note"><para>This variable is synchronized with the target FPS of the associated `FramePacer` instance if provided. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/widgets/FpsWidget.ixx" line="69" column="15" bodyfile="include/ext/imgui/widgets/FpsWidget.ixx" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1ab79c767acc553c230f855de10af2627a" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::ext::imgui::widgets::FpsWidget::showInSeconds_</definition>
+        <argsstring></argsstring>
+        <name>showInSeconds_</name>
+        <qualifiedname>helios::ext::imgui::widgets::FpsWidget::showInSeconds_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>Determines whether timing information is displayed in seconds or milliseconds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If set to `true`, all timing metrics (e.g., frame time, work time, idle time) are shown in seconds. If set to `false`, they are shown in milliseconds.</para>
+<para>Used to toggle between different units of measurement for presenting frame timing metrics in the FPS widget UI. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/widgets/FpsWidget.ixx" line="80" column="14" bodyfile="include/ext/imgui/widgets/FpsWidget.ixx" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a6e6366a82bafd2cd1c948e57091adf1b" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int helios::ext::imgui::widgets::FpsWidget::historySizeInput_</definition>
+        <argsstring></argsstring>
+        <name>historySizeInput_</name>
+        <qualifiedname>helios::ext::imgui::widgets::FpsWidget::historySizeInput_</qualifiedname>
+        <initializer>= 60</initializer>
+        <briefdescription>
+<para>Input value for configuring the size of the FPS history buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Determines the number of recent frame timing samples to store and display. This value directly influences the frame history graph rendering in the FPS widget. Typically adjusted by the user through the UI input field.</para>
+<para><simplesect kind="note"><para>Must be within a valid range, with a lower limit of 1 and an upper limit of 1000 to prevent excessive memory usage or invalid states. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/widgets/FpsWidget.ixx" line="92" column="13" bodyfile="include/ext/imgui/widgets/FpsWidget.ixx" bodystart="92" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a5beb965047e8e583295ced59916687cd" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::ext::imgui::widgets::FpsWidget::FpsWidget</definition>
+        <argsstring>(helios::tooling::FpsMetrics *fpsMetrics, helios::engine::FramePacer *framePacer=nullptr)</argsstring>
+        <name>FpsWidget</name>
+        <qualifiedname>helios::ext::imgui::widgets::FpsWidget::FpsWidget</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1tooling_1_1FpsMetrics" kindref="compound">helios::tooling::FpsMetrics</ref> *</type>
+          <declname>fpsMetrics</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1FramePacer" kindref="compound">helios::engine::FramePacer</ref> *</type>
+          <declname>framePacer</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>Constructs the <ref refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget" kindref="compound">FpsWidget</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fpsMetrics</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the FpsMetrics instance (must remain valid). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>framePacer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Optional pointer to FramePacer for runtime FPS configuration. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/widgets/FpsWidget.ixx" line="102" column="18" bodyfile="include/ext/imgui/widgets/FpsWidget.ixx" bodystart="102" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a17f388a994c99823df57e0a2c014df4f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::ext::imgui::widgets::FpsWidget::draw</definition>
+        <argsstring>() override</argsstring>
+        <name>draw</name>
+        <qualifiedname>helios::ext::imgui::widgets::FpsWidget::draw</qualifiedname>
+        <reimplements refid="classhelios_1_1ext_1_1imgui_1_1ImGuiWidget_1a0ad065b003992409713a4e4c306b7499">draw</reimplements>
+        <briefdescription>
+<para>Renders the FPS metrics UI using ImGui. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/widgets/FpsWidget.ixx" line="118" column="14" bodyfile="include/ext/imgui/widgets/FpsWidget.ixx" bodystart="118" bodyend="226"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/ext/imgui/widgets/FpsWidget.ixx" line="11" column="15"/>
+  </compounddef>
+</doxygen>

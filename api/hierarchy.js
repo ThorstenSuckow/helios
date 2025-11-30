@@ -21,6 +21,9 @@ var hierarchy =
     [ "helios::event::EventQueue", "classhelios_1_1event_1_1EventQueue.html", [
       [ "helios::event::DequeEventQueue", "classhelios_1_1event_1_1DequeEventQueue.html", null ]
     ] ],
+    [ "helios::tooling::FpsMetrics", "classhelios_1_1tooling_1_1FpsMetrics.html", null ],
+    [ "helios::engine::FramePacer", "classhelios_1_1engine_1_1FramePacer.html", null ],
+    [ "helios::engine::FrameStats", "structhelios_1_1engine_1_1FrameStats.html", null ],
     [ "helios::scene::FrustumCullingStrategy", "classhelios_1_1scene_1_1FrustumCullingStrategy.html", [
       [ "helios::scene::CullNoneStrategy", "classhelios_1_1scene_1_1CullNoneStrategy.html", null ]
     ] ],
@@ -29,6 +32,14 @@ var hierarchy =
     [ "helios::ext::glfw::app::GLFWRAIIGuard", "classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard.html", null ],
     [ "helios::ext::glfw::window::GLFWWindowUserPointer", "structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowUserPointer.html", null ],
     [ "helios::util::Guid", "classhelios_1_1util_1_1Guid.html", null ],
+    [ "helios::ext::imgui::ImGuiBackend", "classhelios_1_1ext_1_1imgui_1_1ImGuiBackend.html", [
+      [ "helios::ext::imgui::ImGuiGlfwOpenGLBackend", "classhelios_1_1ext_1_1imgui_1_1ImGuiGlfwOpenGLBackend.html", null ]
+    ] ],
+    [ "helios::ext::imgui::ImGuiOverlay", "classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay.html", null ],
+    [ "helios::ext::imgui::ImGuiWidget", "classhelios_1_1ext_1_1imgui_1_1ImGuiWidget.html", [
+      [ "helios::ext::imgui::widgets::FpsWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget.html", null ],
+      [ "helios::ext::imgui::widgets::GamepadWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget.html", null ]
+    ] ],
     [ "helios::input::InputAdapter", "classhelios_1_1input_1_1InputAdapter.html", [
       [ "helios::ext::glfw::input::GLFWInputAdapter", "classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter.html", null ]
     ] ],
@@ -71,6 +82,7 @@ var hierarchy =
     ] ],
     [ "helios::scene::Snapshot", "classhelios_1_1scene_1_1Snapshot.html", null ],
     [ "helios::scene::SnapshotItem", "structhelios_1_1scene_1_1SnapshotItem.html", null ],
+    [ "helios::util::time::Stopwatch", "classhelios_1_1util_1_1time_1_1Stopwatch.html", null ],
     [ "helios::util::io::StringFileReader", "classhelios_1_1util_1_1io_1_1StringFileReader.html", [
       [ "helios::util::io::BasicStringFileReader", "classhelios_1_1util_1_1io_1_1BasicStringFileReader.html", null ]
     ] ],

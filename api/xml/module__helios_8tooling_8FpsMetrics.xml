@@ -1,0 +1,446 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8tooling_8FpsMetrics" kind="module">
+    <compoundname>helios.tooling.FpsMetrics</compoundname>
+    <innerfile refid="FpsMetrics_8ixx">FpsMetrics.ixx</innerfile>
+    <innerclass refid="classhelios_1_1tooling_1_1FpsMetrics" prot="public">helios::tooling::FpsMetrics</innerclass>
+    <innerclass refid="classhelios_1_1tooling_1_1FpsMetrics" prot="public">helios::tooling::FpsMetrics</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1tooling_1_1FpsMetrics_1a3a7d0201bc3525d76c8d13ce57669204" prot="private" static="no" mutable="no">
+        <type>std::deque&lt; <ref refid="structhelios_1_1engine_1_1FrameStats" kindref="compound">helios::engine::FrameStats</ref> &gt;</type>
+        <definition>std::deque&lt;helios::engine::FrameStats&gt; helios::tooling::FpsMetrics::history_</definition>
+        <argsstring></argsstring>
+        <name>history_</name>
+        <qualifiedname>helios::tooling::FpsMetrics::history_</qualifiedname>
+        <briefdescription>
+<para>Stores a rolling history of frame statistics. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>`history_` holds the full timing data (work time, wait time, total frame time) for a specified number of recent frames. This buffer is used to compute average frame rate and frame time metrics over a configurable window.</para>
+<para>The use of a `std::deque` allows efficient addition and removal of frame timing records while maintaining the order of events. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/tooling/FpsMetrics.ixx" line="52" column="20" bodyfile="include/helios/tooling/FpsMetrics.ixx" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1tooling_1_1FpsMetrics_1aab698ab064ec80deaa7f4f860151a4d8" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t helios::tooling::FpsMetrics::historySize_</definition>
+        <argsstring></argsstring>
+        <name>historySize_</name>
+        <qualifiedname>helios::tooling::FpsMetrics::historySize_</qualifiedname>
+        <initializer>= 60</initializer>
+        <briefdescription>
+<para>Size of the history buffer for storing frame statistics. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Determines the maximum number of frames for which the frame timing data is retained to calculate performance metrics such as average FPS and frame times. A larger history size smooths out short-term variations but may reduce responsiveness to sudden changes in performance.</para>
+<para>This variable is initialized to a default value of 60 but can be adjusted based on the application&apos;s requirements for performance analysis. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/tooling/FpsMetrics.ixx" line="65" column="16" bodyfile="include/helios/tooling/FpsMetrics.ixx" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1tooling_1_1FpsMetrics_1adc8f9273cb02c462a5f0f6a6f2174e81" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::tooling::FpsMetrics::avgFps_</definition>
+        <argsstring></argsstring>
+        <name>avgFps_</name>
+        <qualifiedname>helios::tooling::FpsMetrics::avgFps_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Stores the calculated average frames per second (FPS). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The `avgFps_` variable holds the computed average FPS value based on the accumulated frame timing data in `history_`. It is recomputed lazily when one of the query functions (e.g. `getFps()`) is called after new frames have been added. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/tooling/FpsMetrics.ixx" line="75" column="15" bodyfile="include/helios/tooling/FpsMetrics.ixx" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1tooling_1_1FpsMetrics_1a63927ce18180aea235f37d63614684d0" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::tooling::FpsMetrics::avgFrameTime_</definition>
+        <argsstring></argsstring>
+        <name>avgFrameTime_</name>
+        <qualifiedname>helios::tooling::FpsMetrics::avgFrameTime_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Stores the average frame time in milliseconds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Represents the total frame time (including work and wait) averaged over the frames currently stored in the history buffer. The value is stored in milliseconds and recomputed lazily when queried via the public getters after new frames have been added. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/tooling/FpsMetrics.ixx" line="85" column="15" bodyfile="include/helios/tooling/FpsMetrics.ixx" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1tooling_1_1FpsMetrics_1a13ba5ad46198f86717495024ec13ed1f" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::tooling::FpsMetrics::lastWorkTime_</definition>
+        <argsstring></argsstring>
+        <name>lastWorkTime_</name>
+        <qualifiedname>helios::tooling::FpsMetrics::lastWorkTime_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Tracks the most recent frame&apos;s work time in milliseconds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Represents the duration of work performed during the last processed frame. This value is derived from the most recent `FrameStats` in the history and expressed in milliseconds. It is updated when the metrics are recomputed (lazy evaluation triggered by the getters). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/tooling/FpsMetrics.ixx" line="95" column="15" bodyfile="include/helios/tooling/FpsMetrics.ixx" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1tooling_1_1FpsMetrics_1a5c6d0abe9389e6682f38089fa037fb59" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::tooling::FpsMetrics::lastWaitTime_</definition>
+        <argsstring></argsstring>
+        <name>lastWaitTime_</name>
+        <qualifiedname>helios::tooling::FpsMetrics::lastWaitTime_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Tracks the idle time in milliseconds for the most recent frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Represents the duration the system waited (idle time) during the last processed frame. This value is derived from the most recent `FrameStats` in the history and expressed in milliseconds. It is updated when the metrics are recomputed (lazy evaluation triggered by the getters). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/tooling/FpsMetrics.ixx" line="105" column="15" bodyfile="include/helios/tooling/FpsMetrics.ixx" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1tooling_1_1FpsMetrics_1a1a470282e9eae209edaa97547e49e72f" prot="private" static="no" mutable="no">
+        <type>unsigned long long</type>
+        <definition>unsigned long long helios::tooling::FpsMetrics::frameCount_</definition>
+        <argsstring></argsstring>
+        <name>frameCount_</name>
+        <qualifiedname>helios::tooling::FpsMetrics::frameCount_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Tracks the total number of frames processed since initialization. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The frameCount_ variable accumulates the count of frames that have been added via `addFrame()`. It starts at 0 and increments with each call, serving as a global counter independent of the current history size. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/tooling/FpsMetrics.ixx" line="115" column="28" bodyfile="include/helios/tooling/FpsMetrics.ixx" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1tooling_1_1FpsMetrics_1aa66ecad91b3019914ff0407253046df8" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::tooling::FpsMetrics::needsUpdate_</definition>
+        <argsstring></argsstring>
+        <name>needsUpdate_</name>
+        <qualifiedname>helios::tooling::FpsMetrics::needsUpdate_</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>Indicates whether cached metrics need to be recomputed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Set to true whenever new frame data is added or the history changes in a way that invalidates the cached values. The next call to one of the public query functions will trigger a recomputation in `update()`. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/tooling/FpsMetrics.ixx" line="124" column="14" bodyfile="include/helios/tooling/FpsMetrics.ixx" bodystart="124" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1tooling_1_1FpsMetrics_1aee0bd84c593dc2624105f420cca51650" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::tooling::FpsMetrics::update</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::tooling::FpsMetrics::update</qualifiedname>
+        <briefdescription>
+<para>Recomputes cached metrics if needed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If `needsUpdate_` is true and the history is non-empty, this function updates `lastWorkTime_`, `lastWaitTime_`, `avgFrameTime_` and `avgFps_` based on the current contents of `history_` and then clears the flag.</para>
+<para>If the history is empty or the cache is already up to date, this function returns immediately without modifying any values.</para>
+<para><simplesect kind="note"><para>This function is safe to call in hot paths and does not throw under normal conditions; it is therefore marked `noexcept`. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/tooling/FpsMetrics.ixx" line="139" column="14" bodyfile="include/helios/tooling/FpsMetrics.ixx" bodystart="139" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1tooling_1_1FpsMetrics_1ae8943cc6ac1a9c984c8fc54a4bd7a69c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::tooling::FpsMetrics::addFrame</definition>
+        <argsstring>(const helios::engine::FrameStats &amp;stats)</argsstring>
+        <name>addFrame</name>
+        <qualifiedname>helios::tooling::FpsMetrics::addFrame</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1FrameStats" kindref="compound">helios::engine::FrameStats</ref> &amp;</type>
+          <declname>stats</declname>
+        </param>
+        <briefdescription>
+<para>Adds a frame&apos;s statistics to the metrics history. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Processes the provided FrameStats, updates the rolling history, and marks cached values as dirty so they will be recomputed on the next query. Old frames are automatically removed when the history buffer exceeds the configured size. Additionally, the `frameCount_` member is increased by one for each call.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stats</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frame statistics to add to the history.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>When used together with FramePacer, a typical usage pattern is: <programlisting><codeline><highlight class="normal">helios::engine::FrameStats<sp/>stats<sp/>=<sp/>framePacer.sync();</highlight></codeline>
+<codeline><highlight class="normal">metrics.addFrame(stats);</highlight></codeline>
+</programlisting> This should usually be called once per frame at the end of the frame loop, after timing information for the current frame has been measured. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/tooling/FpsMetrics.ixx" line="182" column="14" bodyfile="include/helios/tooling/FpsMetrics.ixx" bodystart="182" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1tooling_1_1FpsMetrics_1a5e280f4d8ed79364387ff656ae2b8dfe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::tooling::FpsMetrics::setHistorySize</definition>
+        <argsstring>(size_t size)</argsstring>
+        <name>setHistorySize</name>
+        <qualifiedname>helios::tooling::FpsMetrics::setHistorySize</qualifiedname>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Sets the size of the frame history buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Determines how many frames are used for calculating averages. Larger values produce smoother metrics but respond slower to changes.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of frames to keep in history (default: 60).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>Common values: 30 for roughly half-second average at 60 FPS, 60 for roughly one-second average at 60 FPS. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/tooling/FpsMetrics.ixx" line="206" column="14" bodyfile="include/helios/tooling/FpsMetrics.ixx" bodystart="206" bodyend="212"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1tooling_1_1FpsMetrics_1ac80fe24ff63dc8bb469068ffaff1f0cf" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t helios::tooling::FpsMetrics::getHistorySize</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getHistorySize</name>
+        <qualifiedname>helios::tooling::FpsMetrics::getHistorySize</qualifiedname>
+        <briefdescription>
+<para>Gets the current history buffer size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Maximum number of frames kept in history. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/tooling/FpsMetrics.ixx" line="219" column="17" bodyfile="include/helios/tooling/FpsMetrics.ixx" bodystart="219" bodyend="221"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1tooling_1_1FpsMetrics_1a5369c8f597cb4e229d95fcd33f8e27d7" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::tooling::FpsMetrics::getFps</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>getFps</name>
+        <qualifiedname>helios::tooling::FpsMetrics::getFps</qualifiedname>
+        <briefdescription>
+<para>Gets the average frames per second. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Triggers a lazy recomputation of the underlying metrics if new frames have been added since the last query.</para>
+<para><simplesect kind="return"><para>Average FPS calculated over the frames stored in the history buffer. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/tooling/FpsMetrics.ixx" line="231" column="16" bodyfile="include/helios/tooling/FpsMetrics.ixx" bodystart="231" bodyend="234"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1tooling_1_1FpsMetrics_1ab41fefe34dc9fa7ee4d640750a38ef1b" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::tooling::FpsMetrics::getFrameTimeMs</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>getFrameTimeMs</name>
+        <qualifiedname>helios::tooling::FpsMetrics::getFrameTimeMs</qualifiedname>
+        <briefdescription>
+<para>Gets the average frame time in milliseconds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Triggers a lazy recomputation of the underlying metrics if needed.</para>
+<para><simplesect kind="return"><para>Average total frame time (work + wait) in milliseconds. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/tooling/FpsMetrics.ixx" line="243" column="16" bodyfile="include/helios/tooling/FpsMetrics.ixx" bodystart="243" bodyend="246"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1tooling_1_1FpsMetrics_1a6971ce2cf9b8a57b00af0fa7aed6a530" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::tooling::FpsMetrics::getWorkTimeMs</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>getWorkTimeMs</name>
+        <qualifiedname>helios::tooling::FpsMetrics::getWorkTimeMs</qualifiedname>
+        <briefdescription>
+<para>Gets the most recent frame&apos;s work time. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Triggers a lazy recomputation if required.</para>
+<para><simplesect kind="return"><para>Work time of the last processed frame in milliseconds. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/tooling/FpsMetrics.ixx" line="255" column="16" bodyfile="include/helios/tooling/FpsMetrics.ixx" bodystart="255" bodyend="258"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1tooling_1_1FpsMetrics_1aef8831b30ea5de405abae996f63c6b6e" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::tooling::FpsMetrics::getIdleTimeMs</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>getIdleTimeMs</name>
+        <qualifiedname>helios::tooling::FpsMetrics::getIdleTimeMs</qualifiedname>
+        <briefdescription>
+<para>Gets the most recent frame&apos;s idle time. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Triggers a lazy recomputation if required.</para>
+<para><simplesect kind="return"><para>Wait/idle time of the last processed frame in milliseconds. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/tooling/FpsMetrics.ixx" line="267" column="16" bodyfile="include/helios/tooling/FpsMetrics.ixx" bodystart="267" bodyend="270"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1tooling_1_1FpsMetrics_1a8ac9781cf4ccdc0533c907acba825647" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>unsigned long long</type>
+        <definition>unsigned long long helios::tooling::FpsMetrics::getFrameCount</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getFrameCount</name>
+        <qualifiedname>helios::tooling::FpsMetrics::getFrameCount</qualifiedname>
+        <briefdescription>
+<para>Gets the frame count. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The total number of frames that have been added via `addFrame()`. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/tooling/FpsMetrics.ixx" line="277" column="29" bodyfile="include/helios/tooling/FpsMetrics.ixx" bodystart="277" bodyend="279"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1tooling_1_1FpsMetrics_1adc69500e3e485a47f90fa6d5163bd31f" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::tooling::FpsMetrics::getFrameTimeSeconds</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>getFrameTimeSeconds</name>
+        <qualifiedname>helios::tooling::FpsMetrics::getFrameTimeSeconds</qualifiedname>
+        <briefdescription>
+<para>Gets the average frame time in seconds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Convenience wrapper returning the same value as `getFrameTimeMs()` converted from milliseconds to seconds.</para>
+<para><simplesect kind="return"><para>Average total frame time (work + wait) in seconds. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/tooling/FpsMetrics.ixx" line="289" column="16" bodyfile="include/helios/tooling/FpsMetrics.ixx" bodystart="289" bodyend="292"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1tooling_1_1FpsMetrics_1a2ef5a0dcb17b135c79b3a2cb5cb1e7f1" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::tooling::FpsMetrics::getWorkTimeSeconds</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>getWorkTimeSeconds</name>
+        <qualifiedname>helios::tooling::FpsMetrics::getWorkTimeSeconds</qualifiedname>
+        <briefdescription>
+<para>Gets the most recent frame&apos;s work time in seconds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Convenience wrapper returning the same value as `getWorkTimeMs()` converted from milliseconds to seconds.</para>
+<para><simplesect kind="return"><para>Work time of the last processed frame in seconds. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/tooling/FpsMetrics.ixx" line="302" column="16" bodyfile="include/helios/tooling/FpsMetrics.ixx" bodystart="302" bodyend="305"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1tooling_1_1FpsMetrics_1aa8a39ae309db60200b319a2facf74ce2" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::tooling::FpsMetrics::getIdleTimeSeconds</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>getIdleTimeSeconds</name>
+        <qualifiedname>helios::tooling::FpsMetrics::getIdleTimeSeconds</qualifiedname>
+        <briefdescription>
+<para>Gets the most recent frame&apos;s idle time in seconds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Convenience wrapper returning the same value as `getIdleTimeMs()` converted from milliseconds to seconds.</para>
+<para><simplesect kind="return"><para>Wait/idle time of the last processed frame in seconds. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/tooling/FpsMetrics.ixx" line="315" column="16" bodyfile="include/helios/tooling/FpsMetrics.ixx" bodystart="315" bodyend="318"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1tooling_1_1FpsMetrics_1aa8a90be70e58c7168aaead25bbdcbfd5" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::deque&lt; <ref refid="structhelios_1_1engine_1_1FrameStats" kindref="compound">helios::engine::FrameStats</ref> &gt; &amp;</type>
+        <definition>const std::deque&lt; helios::engine::FrameStats &gt; &amp; helios::tooling::FpsMetrics::getHistory</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getHistory</name>
+        <qualifiedname>helios::tooling::FpsMetrics::getHistory</qualifiedname>
+        <briefdescription>
+<para>Gets the complete frame history. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Const reference to the deque containing the full frame statistics history.</para>
+</simplesect>
+<simplesect kind="note"><para>Useful for rendering frame time graphs or diagnostic views in debug overlays. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/tooling/FpsMetrics.ixx" line="329" column="27" bodyfile="include/helios/tooling/FpsMetrics.ixx" bodystart="329" bodyend="331"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1tooling_1_1FpsMetrics_1acf271b3c606df57550500cc9b7d0966f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::tooling::FpsMetrics::reset</definition>
+        <argsstring>()</argsstring>
+        <name>reset</name>
+        <qualifiedname>helios::tooling::FpsMetrics::reset</qualifiedname>
+        <briefdescription>
+<para>Clears all collected metrics and resets to initial state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Removes all stored frame statistics and resets cached metrics and counters to their default values. After calling this function, all query functions will report zeros until new frames are added. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/tooling/FpsMetrics.ixx" line="340" column="14" bodyfile="include/helios/tooling/FpsMetrics.ixx" bodystart="340" bodyend="348"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/tooling/FpsMetrics.ixx" line="10" column="15"/>
+  </compounddef>
+</doxygen>

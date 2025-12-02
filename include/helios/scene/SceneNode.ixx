@@ -258,6 +258,13 @@ export namespace helios::scene {
             [[nodiscard]] const Transform& localTransform() const noexcept;
 
             /**
+             * @brief Returns this SceneNode's localTransform.
+             *
+             * @return A reference to this SceneNode's `Transform` object.
+             */
+            [[nodiscard]] Transform& localTransform() noexcept;
+
+            /**
              * @brief Returns a pointer to this node's parent node.
              *
              * @return The pointer to this node's parent, or nullptr if no parent exists,
@@ -305,10 +312,14 @@ export namespace helios::scene {
              * @brief Checks whether this SceneNode needs to be updated, e.g. because the
              * local transformation changed.
              *
+             * The SceneNode is considered as "dirty" id either the localTransform_ needs an
+             * update, or if needsUpdate_ property is set to true.
+             *
              * @return true if this SceneNode is considered to be dirty, otherwise
              * false.
              */
             [[nodiscard]] bool needsUpdate() const noexcept;
+
 
     };
 

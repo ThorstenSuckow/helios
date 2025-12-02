@@ -10,16 +10,16 @@ import helios.game.GameWorld;
 import helios.game.GameObject;
 import helios.util.Guid;
 
-struct TargetedCommand {
-    helios::util::Guid guid;
-    std::unique_ptr<helios::game::Command> command;
-};
-
 export namespace helios::game {
 
 
 
     class CommandBuffer {
+
+        struct TargetedCommand {
+            helios::util::Guid guid;
+            std::unique_ptr<helios::game::Command> command;
+        };
 
         std::deque<TargetedCommand> commandBuffer_;
 
@@ -55,7 +55,9 @@ export namespace helios::game {
             for (auto& targetedCommand : commandBuffer_) {
                 auto* gameObject = gameWorld.find(targetedCommand.guid);
                 if (!gameObject) {
-                    continue;
+                    // @todo: Replace with actual logging once helios.logging is available
+                    // logger.warn("CommandBuffer::flush: GameObject {} not found, skipping command",
+                    //             targetedCommand.guid.value());
                 }
                 targetedCommand.command->execute(*gameObject);
             }

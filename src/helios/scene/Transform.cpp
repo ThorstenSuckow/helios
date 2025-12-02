@@ -46,26 +46,30 @@ namespace helios::scene {
     }
 
 
-    [[nodiscard]] helios::math::mat4f Transform::rotation() const noexcept {
+    helios::math::mat4f Transform::rotation() const noexcept {
         return rotation_;
     }
 
 
-    [[nodiscard]] helios::math::vec3f Transform::translation() const noexcept {
+    helios::math::vec3f Transform::translation() const noexcept {
         return translation_;
     }
 
 
-    [[nodiscard]] helios::math::vec3f Transform::scaling() const noexcept {
+    helios::math::vec3f Transform::scaling() const noexcept {
         return scale_;
     }
 
 
-    [[nodiscard]] helios::math::mat4f Transform::transform() const noexcept {
+    helios::math::mat4f Transform::transform() const noexcept {
         if (needsUpdate_) {
             cached_ = updateCache();
         }
         return cached_;
+    }
+
+    bool Transform::needsUpdate() const noexcept {
+        return needsUpdate_;
     }
 
 

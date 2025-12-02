@@ -35,7 +35,16 @@ export namespace helios::game {
             return ptr;
         }
 
-        helios::game::GameObject* find(const helios::util::Guid& guid) {
+        [[nodiscard]] helios::game::GameObject* find(const helios::util::Guid& guid) {
+
+            if (auto it = gameObjects_.find(guid); it != gameObjects_.end()) {
+                return it->second.get();
+            }
+
+            return nullptr;
+        }
+
+        [[nodiscard]] const helios::game::GameObject* find(const helios::util::Guid& guid) const {
 
             if (auto it = gameObjects_.find(guid); it != gameObjects_.end()) {
                 return it->second.get();

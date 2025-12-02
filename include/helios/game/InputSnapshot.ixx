@@ -20,7 +20,7 @@ export namespace helios::game {
         : gamepadState_(gamepadState) {
         }
 
-        const helios::input::GamepadState& gamepadState() const {
+        const helios::input::GamepadState& gamepadState() const noexcept {
             return gamepadState_;
         }
     };

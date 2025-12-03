@@ -99,7 +99,16 @@ export namespace helios::game {
          */
         virtual ~GameObject() = default;
 
-        virtual void update(const float DELTA_TIME) = 0;
+        /**
+         * @brief Updates the GameObject state for the current frame.
+         *
+         * @param deltaTime Time elapsed since the last frame, in seconds.
+         *
+         * @note Derived classes must implement this method to define frame-by-frame behavior
+         *       such as physics updates, animation, AI logic, or other time-dependent state changes.
+         * @note Called once per frame by the GameWorld during its update cycle.
+         */
+        virtual void update(float deltaTime) = 0;
 
         /**
          * @brief Returns the unique identifier of this GameObject.

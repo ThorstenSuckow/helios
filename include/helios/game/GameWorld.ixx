@@ -67,6 +67,14 @@ export namespace helios::game {
 
     public:
 
+        void update(float DELTA_TIME) const noexcept {
+
+            for (auto& [fst, snd] : gameObjects_) {
+                snd->update(DELTA_TIME);
+            }
+
+        }
+
         /**
          * @brief Adds a GameObject to the world and transfers ownership.
          *
@@ -89,7 +97,7 @@ export namespace helios::game {
             }
             if (gameObjects_.contains(gameObject->guid())) {
                 logger_.warn(std::format("GameObject with Guid {} already exists in GameWorld",
-                                         gameObject->guid().str()));
+                                         gameObject->guid().value()));
                 return nullptr;
             }
 
@@ -161,7 +169,7 @@ export namespace helios::game {
 
             if (node.empty()) {
                 logger_.warn(std::format("Attempted to remove non-existent GameObject with Guid {} from GameWorld",
-                                         gameObject.guid().str()));
+                                         gameObject.guid().value()));
                 return nullptr;
             }
 

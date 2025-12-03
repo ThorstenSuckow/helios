@@ -72,8 +72,7 @@ export namespace helios::game {
         virtual void handleInput(
             const helios::game::InputSnapshot& inputSnapshot,
             const helios::util::Guid& guid,
-            helios::game::CommandBuffer& commandBuffer,
-            float deltaTime
+            helios::game::CommandBuffer& commandBuffer
         ) = 0;
 
 

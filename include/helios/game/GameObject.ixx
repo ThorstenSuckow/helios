@@ -99,6 +99,8 @@ export namespace helios::game {
          */
         virtual ~GameObject() = default;
 
+        virtual void update(const float DELTA_TIME) = 0;
+
         /**
          * @brief Returns the unique identifier of this GameObject.
          *
@@ -157,6 +159,7 @@ export namespace helios::game {
             transform_->translate(translation);
             return *this;
         }
+
 
 
     };

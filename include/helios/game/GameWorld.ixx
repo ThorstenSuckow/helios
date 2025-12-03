@@ -67,10 +67,19 @@ export namespace helios::game {
 
     public:
 
-        void update(float DELTA_TIME) const noexcept {
-
-            for (auto& [fst, snd] : gameObjects_) {
-                snd->update(DELTA_TIME);
+        /**
+         * @brief Updates all GameObjects in the world for the current frame.
+         *
+         * @param deltaTime Time elapsed since the last frame, in seconds.
+         *
+         * @note Iterates through all registered GameObjects and invokes their update() method.
+         *       The order of updates is not guaranteed due to the underlying unordered_map storage.
+         * @note This method is noexcept; individual GameObject::update() implementations should
+         *       handle their own exceptions to prevent propagation.
+         */
+        void update(float deltaTime) const noexcept {
+            for (auto& [guid, gameObject] : gameObjects_) {
+                gameObject->update(deltaTime);
             }
 
         }
@@ -87,8 +96,8 @@ export namespace helios::game {
          *
          * @note The GameWorld takes ownership of the GameObject. The returned pointer remains
          *       valid until the GameObject is removed from the world.
-         * @note Attempting to add a nullptr or a GameObject with a duplicate Guid will fail
-         *       and return nullptr (will be logged when logging is available).
+         * @note Attempting to add a nullptr or a GameObject with a duplicate Guid will fail,
+         *       return nullptr, and log a warning.
          */
         [[nodiscard]] helios::game::GameObject* addGameObject(std::unique_ptr<GameObject> gameObject) {
             if (!gameObject) {
@@ -162,7 +171,7 @@ export namespace helios::game {
          * @note After successful removal, all non-owning pointers to the GameObject
          *       become invalid unless the caller maintains the returned unique_ptr.
          * @note Attempting to remove a GameObject that doesn't exist returns nullptr
-         *       (will be logged when logging is available).
+         *       and logs a warning.
          */
         [[nodiscard]] std::unique_ptr<helios::game::GameObject> removeGameObject(const GameObject& gameObject) {
             auto node = gameObjects_.extract(gameObject.guid());

@@ -100,7 +100,7 @@ export namespace helios::game {
          * @return Reference to this CommandBuffer for method chaining.
          *
          * @note Commands targeting non-existent GameObjects (i.e., find() returns nullptr)
-         *       are skipped. This will be logged once the logging system is available.
+         *       are skipped and a warning is logged.
          * @note All commands are cleared after execution, regardless of success or failure.
          *
          * @warning If a Command::execute() throws an exception, the flush operation will abort

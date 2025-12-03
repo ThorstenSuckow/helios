@@ -112,7 +112,7 @@ export namespace helios::game {
                 auto* gameObject = gameWorld.find(targetedCommand.guid);
                 if (!gameObject) {
                     logger_.warn(std::format("GameObject with Guid {} not found, skipping command",
-                                             targetedCommand.guid.str()));
+                                             targetedCommand.guid.value()));
                     continue;
                 }
                 targetedCommand.command->execute(*gameObject);

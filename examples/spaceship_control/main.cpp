@@ -66,6 +66,13 @@ import helios.ext.imgui.ImGuiWidget;
 import helios.ext.imgui.widgets.FpsWidget;
 import helios.ext.imgui.widgets.GamepadWidget;
 
+// game input handling, game objects
+import helios.game.GameWorld;
+import helios.game.CommandBuffer;
+import helios.game.InputSnapshot;
+import helios.examples.spaceshipControl.Spaceship;
+import helios.examples.spaceshipControl.InputHandler;
+
 
 using namespace helios::ext::glfw::app;
 using namespace helios::rendering;
@@ -84,24 +91,21 @@ using namespace helios::scene;
 using namespace helios::math;
 
 
-
 int main() {
 
     // ========================================
     // 1. Application and Window Setup
     // ========================================
 
-    const auto app = GLFWFactory::makeOpenGLApp(
-        "helios - Spaceship Control"
-    );
+    const auto app = GLFWFactory::makeOpenGLApp("helios - Spaceship Control");
 
     auto win = dynamic_cast<GLFWWindow*>(app->current());
     auto mainViewport = std::make_shared<Viewport>(0.0f, 0.0f, 1.0f, 1.0f);
 
     auto mainViewportCam = std::make_shared<helios::scene::Camera>();
     mainViewport->setCamera(mainViewportCam)
-                .setClearFlags(std::to_underlying(ClearFlags::Color))
-                .setClearColor(vec4f(0.051f, 0.051f, 0.153f, 1.0f));
+            .setClearFlags(std::to_underlying(ClearFlags::Color))
+            .setClearColor(vec4f(0.051f, 0.051f, 0.153f, 1.0f));
     win->renderTarget().addViewport(mainViewport);
 
     // Get the InputManager for handling keyboard input
@@ -118,25 +122,22 @@ int main() {
     // GLFWwindow* nativeWindow = win->nativeHandle();
     auto imguiBackend = helios::ext::imgui::ImGuiGlfwOpenGLBackend(win->nativeHandle());
     auto imguiOverlay = helios::ext::imgui::ImGuiOverlay::forBackend(&imguiBackend);
-    auto fpsMetrics      = helios::tooling::FpsMetrics();
+    auto fpsMetrics = helios::tooling::FpsMetrics();
     auto stopwatch = std::make_unique<helios::util::time::Stopwatch>();
     auto framePacer = helios::engine::FramePacer(std::move(stopwatch));
     // set target framerate
     framePacer.setTargetFps(0.0f);
     helios::engine::FrameStats frameStats{};
-    auto fpsWidget    = new helios::ext::imgui::widgets::FpsWidget(&fpsMetrics, &framePacer);
-    auto gamepadWidget    = new helios::ext::imgui::widgets::GamepadWidget(&inputManager);
+    auto fpsWidget = new helios::ext::imgui::widgets::FpsWidget(&fpsMetrics, &framePacer);
+    auto gamepadWidget = new helios::ext::imgui::widgets::GamepadWidget(&inputManager);
     imguiOverlay.addWidget(fpsWidget);
     imguiOverlay.addWidget(gamepadWidget);
 
     // ========================================
     // 2. Shader Creation
     // ========================================
-    auto shader_ptr = std::make_shared<OpenGLShader>(
-        "./resources/cube.vert",
-        "./resources/cube.frag",
-        basicStringFileReader
-    );
+    auto shader_ptr =
+            std::make_shared<OpenGLShader>("./resources/cube.vert", "./resources/cube.frag", basicStringFileReader);
 
     // Map the WorldMatrix uniform to location 1 in the shader
     auto uniformLocationMap = std::make_unique<OpenGLUniformLocationMap>();
@@ -146,35 +147,30 @@ int main() {
     shader_ptr->setUniformLocationMap(std::move(uniformLocationMap));
 
     // ========================================
-    // 3. Game Object Creation
+    // 3. Game Object Creation (Rendering)
     // ========================================
 
     // spaceship
     auto spaceshipMaterialProps = MaterialProperties(vec4(1.0f, 1.0f, 0.0f, 1.0f));
     auto spaceshipMaterialProps_shared = std::make_shared<MaterialProperties>(spaceshipMaterialProps);
-    auto material_ptr = std::make_shared<Material>(
-        shader_ptr, spaceshipMaterialProps_shared
-    );
+    auto material_ptr = std::make_shared<Material>(shader_ptr, spaceshipMaterialProps_shared);
 
     // pseudo gizmos
     auto leftStickGizmoMaterialProps = MaterialProperties();
     auto leftStickGizmoMaterialProps_shared = std::make_shared<MaterialProperties>(leftStickGizmoMaterialProps);
-    auto leftStickGizmoMaterial_ptr = std::make_shared<Material>(
-        shader_ptr, leftStickGizmoMaterialProps_shared
-    );
+    auto leftStickGizmoMaterial_ptr = std::make_shared<Material>(shader_ptr, leftStickGizmoMaterialProps_shared);
 
     auto shipDirectionGizmoMaterialProps = leftStickGizmoMaterialProps.withBaseColor(vec4f(1.0f, 0.0f, 0.0f, 1.0f));
     auto shipDirectionGizmoMaterialProps_shared = std::make_shared<MaterialProperties>(shipDirectionGizmoMaterialProps);
-    auto shipDirectionGizmoMaterial_ptr = std::make_shared<Material>(
-        shader_ptr, shipDirectionGizmoMaterialProps_shared
-    );
+    auto shipDirectionGizmoMaterial_ptr =
+            std::make_shared<Material>(shader_ptr, shipDirectionGizmoMaterialProps_shared);
 
 
     // ========================================
     // 4. Mesh (Geometry) Creation
     // ========================================
-    auto spaceship          = Triangle{};
-    auto leftStickGizmo     = Line{};
+    auto spaceship = Triangle{};
+    auto leftStickGizmo = Line{};
     auto shipDirectionGizmo = Line{};
 
 
@@ -183,27 +179,23 @@ int main() {
     auto mesh_ptr = std::make_shared<OpenGLMesh>(spaceship, meshConfig);
 
     // configure the gizmos for controller input
-    auto meshLineConfig         = std::make_shared<const MeshConfig>(PrimitiveType::Lines);
-    auto leftStickGizmoMesh     = std::make_shared<OpenGLMesh>(leftStickGizmo, meshConfig);
+    auto meshLineConfig = std::make_shared<const MeshConfig>(PrimitiveType::Lines);
+    auto leftStickGizmoMesh = std::make_shared<OpenGLMesh>(leftStickGizmo, meshConfig);
     auto shipDirectionGizmoMesh = std::make_shared<OpenGLMesh>(shipDirectionGizmo, meshConfig);
 
 
     // ========================================
     // 5. Renderable and RenderPrototype
     // ========================================
-    const auto renderPrototype = std::make_shared<RenderPrototype>(
-        material_ptr, mesh_ptr
-    );
+    const auto renderPrototype = std::make_shared<RenderPrototype>(material_ptr, mesh_ptr);
     auto spaceshipRenderable = std::make_shared<Renderable>(renderPrototype);
 
-    const auto leftStickGizmoPrototype = std::make_shared<RenderPrototype>(
-        leftStickGizmoMaterial_ptr, leftStickGizmoMesh
-    );
-    auto leftStickGizmoRenderable     = std::make_shared<Renderable>(leftStickGizmoPrototype);
+    const auto leftStickGizmoPrototype =
+            std::make_shared<RenderPrototype>(leftStickGizmoMaterial_ptr, leftStickGizmoMesh);
+    auto leftStickGizmoRenderable = std::make_shared<Renderable>(leftStickGizmoPrototype);
 
-    const auto shipDirectionGizmoPrototype = std::make_shared<RenderPrototype>(
-       shipDirectionGizmoMaterial_ptr, shipDirectionGizmoMesh
-    );
+    const auto shipDirectionGizmoPrototype =
+            std::make_shared<RenderPrototype>(shipDirectionGizmoMaterial_ptr, shipDirectionGizmoMesh);
     auto shipDirectionGizmoRenderable = std::make_shared<Renderable>(shipDirectionGizmoPrototype);
 
     // ========================================
@@ -213,11 +205,14 @@ int main() {
     auto scene = std::make_unique<helios::scene::Scene>(std::move(frustumCullingStrategy));
 
     // Add the spaceship as a scene node
-    auto* spaceshipSceneNode = scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(spaceshipRenderable)));
+    auto* spaceshipSceneNode =
+            scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(spaceshipRenderable)));
 
     // Add the gizmos
-    auto* leftStickGizmoNode     = scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(leftStickGizmoRenderable)));
-    auto* shipDirectionGizmoNode = scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(shipDirectionGizmoRenderable)));
+    auto* leftStickGizmoNode =
+            scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(leftStickGizmoRenderable)));
+    auto* shipDirectionGizmoNode =
+            scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(shipDirectionGizmoRenderable)));
 
     // ========================================
     // 7. Register mainViewport-Camera w/ Setup
@@ -228,28 +223,23 @@ int main() {
     // ========================================
     // 8. Main Render Loop
     // ========================================
-    helios::util::log::LogManager::getInstance().enableLogging(false);
+    helios::util::log::LogManager::getInstance().enableLogging(true);
+    helios::util::log::LogManager::getInstance().setScopeFilter("helios::examples::spaceshipControl::Spaceship");
 
-    float currentAngle = 0;
-    float targetAngle  = 0;
-    bool animRotation = false;
-    bool animMovement = false;
-    float angleDelta = 0;
-    float baseRotationSpeed = 16.0f;
-    const float BASE_ROTATION_SPEED = 720.0f;
-    const float BASE_MOVEMENT_SPEED = 1.50f;
-    static int frameCounter = 0;
-    float turnBoost = 0.0f;
-    float rotationSpeed = 0.0f;
-    float deadzone = 0.4f;
+    // ========================================
+    // 9. Game-related Input-handling, GameWorld and GameObjects
+    // ========================================
+    auto spaceshipGameObject = std::make_unique<helios::examples::spaceshipControl::Spaceship>(spaceshipSceneNode);
+    auto spaceshipInputHandler = helios::examples::spaceshipControl::InputHandler{};
+    auto gameWorld = helios::game::GameWorld{};
+    auto* spaceshipPtr = gameWorld.addGameObject(std::move(spaceshipGameObject));
+    auto commandBuffer = helios::game::CommandBuffer{};
+
+
     auto currentDirection = vec3f(1.0f, 1.0f, 0);
-    auto position = vec3f(0.0f, 0.0f, 0.0f);
     constexpr auto SCALING_VECTOR = vec3f(0.125f, 0.125f, 0.0f);
-    auto defaultSpeed = 1.25f;
-    auto currentSpeed = 0.0f;
 
     float DELTA_TIME = 0.0f;
-
 
 
     while (!win->shouldClose()) {
@@ -266,86 +256,23 @@ int main() {
         }
 
         const GamepadState& gamepadState = inputManager.gamepadState(Gamepad::ONE);
+        const auto inputSnapshot = helios::game::InputSnapshot(gamepadState);
+        spaceshipInputHandler.handleInput(inputSnapshot, spaceshipPtr->guid(), commandBuffer);
+
         const auto leftDir = gamepadState.left();
         const vec2f targetDirection = leftDir.normalize();
         const float leftDirLength = leftDir.length();
 
-        baseRotationSpeed = BASE_ROTATION_SPEED * DELTA_TIME;
-        defaultSpeed      = BASE_MOVEMENT_SPEED * DELTA_TIME;
+        //leftStickGizmoNode->translate(vec3f(leftDir) * SCALING_VECTOR);
+        //leftStickGizmoNode->scale(vec3f(leftDir) * SCALING_VECTOR);
 
-        leftStickGizmoNode->translate(vec3f(leftDir) *  SCALING_VECTOR);
-        leftStickGizmoNode->scale(vec3f(leftDir) * SCALING_VECTOR);
-
-        spaceshipSceneNode->translate(position);
         spaceshipSceneNode->scale(SCALING_VECTOR);
 
+        commandBuffer.flush(gameWorld);
+        gameWorld.update(DELTA_TIME);
 
-        if (leftDirLength > deadzone) {
-
-            targetAngle = degrees(std::atan2(targetDirection[1], targetDirection[0]));
-            angleDelta = std::fmod((targetAngle - currentAngle) + 540.0f, 360.0f) - 180.0f;
-            animRotation = true;
-            animMovement = true;
-
-            turnBoost = 1.0f + 0.5f*std::clamp((abs(angleDelta))/180.f, 0.0f, 1.0f);
-            rotationSpeed = turnBoost * baseRotationSpeed * leftDirLength;
-            currentSpeed = defaultSpeed;
-
-        } else if (animRotation || animMovement) {
-            currentSpeed  *= 0.95;
-            rotationSpeed *= 0.95;
-
-            if (rotationSpeed <= 0.1f) {
-                animRotation = false;
-                currentDirection =  vec3f(0.0f, 0.0f,0.0f);
-            }
-
-            if (currentSpeed <= 0.001f) {
-                animMovement = false;
-                currentSpeed = 0.0f;
-            }
-
-        }
-
-
-         if (animRotation || animMovement) {
-
-             if (animRotation) {
-
-                 float rotationStep = std::copysign(
-                     std::min(std::abs(angleDelta), rotationSpeed),
-                     angleDelta
-                 );
-
-                 currentAngle += rotationStep;
-
-                 angleDelta = std::fmod((targetAngle - currentAngle) + 540.0f, 360.0f) - 180.0f;
-
-                 if (std::abs(angleDelta) <= 0.5f || rotationSpeed <= 0.1f) {
-                     currentAngle     = targetAngle;
-                     angleDelta       = 0.0f;
-                     animRotation     = false;
-                     currentDirection = vec3f(0.0f, 0.0f, 0.0f);
-                 }
-
-                 spaceshipSceneNode->rotate(helios::math::rotate(
-                     helios::math::mat4f::identity(),
-                     radians(currentAngle),
-                     helios::math::vec3f(0.0f, 0.0f, 1.0f)
-                 ));
-             }
-
-             if (animMovement) {
-                 currentDirection = vec3f(
-                  cos(radians(currentAngle)), sin(radians(currentAngle)), 0.0f
-                 ) * leftDirLength;
-
-                 position = position + (currentDirection.normalize() * (std::max(leftDirLength, deadzone) * currentSpeed));
-             }
-        }
-
-        shipDirectionGizmoNode->translate(currentDirection * SCALING_VECTOR);
-        shipDirectionGizmoNode->scale(currentDirection * SCALING_VECTOR);
+        //shipDirectionGizmoNode->translate(currentDirection * SCALING_VECTOR);
+        //shipDirectionGizmoNode->scale(currentDirection * SCALING_VECTOR);
 
         // Create a snapshot of the scene and render it
         const auto& snapshot = scene->createSnapshot(mainViewport);
@@ -360,10 +287,9 @@ int main() {
         imguiOverlay.render();
 
 
-       // Swap front and back buffers
+        // Swap front and back buffers
         // swap time / idle time should be read out here
         win->swapBuffers();
-        frameCounter++;
 
         frameStats = framePacer.sync();
         fpsMetrics.addFrame(frameStats);

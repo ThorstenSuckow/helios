@@ -137,6 +137,15 @@ export namespace helios::scene {
              */
             [[nodiscard]] helios::math::mat4f transform() const noexcept;
 
+            /**
+             * @brief Checks whether this Transform needs to be updated, e.g. because the
+             * various components changed.
+             *
+             * @return true if this Transform is considered to be dirty, otherwise
+             * false.
+             */
+            [[nodiscard]] bool needsUpdate() const noexcept;
+
     };
 
 };

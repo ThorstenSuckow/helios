@@ -14,11 +14,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Stopwatch` high-resolution timer (#111)
 - `FpsWidget` for ImGui overlays
 - `GamepadWidget` for ImGui overlays (#114)
+- `LogWidget` for ImGui overlays (scrollable log console with filtering)
+  - Per-scope message buffers (1000 entries each)
+  - Filter by log level and scope
+  - Text search filter
+  - Auto-scroll with pause on manual scroll
+- `MainMenuWidget` for application settings
+  - Window transparency control (slider + presets)
+  - Docking toggle
+  - Style themes (Dark, Light, Classic)
+  - Settings persistence via ImGui's imgui.ini
 - ImGui integration layer
   - `ImGuiBackend` abstraction for platform backends
   - `ImGuiGlfwOpenGLBackend` concrete implementation
-  - `ImGuiOverlay` singleton manager for widget rendering
+  - `ImGuiOverlay` singleton manager with DockSpace support
   - `ImGuiWidget` base interface for custom widgets
+  - Semi-transparent window backgrounds (configurable)
+- Logging system with configurable sinks
+  - `LogSink` abstract interface with self-registering type identifiers
+  - `ConsoleSink` for stdout output
+  - `ImGuiLogSink` for LogWidget integration
+  - `LogManager` enable/disable sinks by type identifier
+- Game system module (`helios.game`)
+  - `GameObject` base class for game entities
+  - `GameLoop` for update/render cycle management
+
+### Changed
+- Logging system refactored to use self-registering sinks
+  - Sinks define their own `TYPE_ID` string instead of central `SinkFlags` enum
+  - `LogManager::enableSink("console")` / `disableSink("imgui")` API
+  - Extensible without modifying core logging code
 
 ### Fixed
 - **BREAKING**: Enum counter entries renamed to `size_` (#34)
@@ -37,8 +62,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - MaterialData is now optional (can be nullptr)
   - Reduced tight coupling and unnecessary indirection
   - Cleaner hierarchy: `Material → shared_ptr<Shader> + shared_ptr<MaterialData>`
-
-### Fixed
 - Potential nullptr dereference in `MaterialData` (#16)
   - Added proper null checks
   - Improved safety in material handling

@@ -10,5 +10,6 @@ var module__helios_8scene_8Transform =
     [ "helios::scene::Transform::rotation", "module__helios_8scene_8Transform.html#a18f1e87932c12354b1b15498b7cec16b", null ],
     [ "helios::scene::Transform::translation", "module__helios_8scene_8Transform.html#ade553e701cbae015794510224114c2fd", null ],
     [ "helios::scene::Transform::scaling", "module__helios_8scene_8Transform.html#ac837ddcfaba7cd27e9b173bfed09d83e", null ],
-    [ "helios::scene::Transform::transform", "module__helios_8scene_8Transform.html#ac2945dc0948c0d433641ce3606c2d907", null ]
+    [ "helios::scene::Transform::transform", "module__helios_8scene_8Transform.html#ac2945dc0948c0d433641ce3606c2d907", null ],
+    [ "helios::scene::Transform::needsUpdate", "module__helios_8scene_8Transform.html#af38969c80c6fcc700ffb70e839048755", null ]
 ];

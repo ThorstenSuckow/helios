@@ -114,6 +114,8 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad76b37d0345172282e9604e3b4d6da94" id="r_ad76b37d0345172282e9604e3b4d6da94"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad76b37d0345172282e9604e3b4d6da94">addWidget</a> (<a class="el" href="classhelios_1_1ext_1_1imgui_1_1ImGuiWidget.html">ImGuiWidget</a> *widget)</td></tr>
 <tr class="memdesc:ad76b37d0345172282e9604e3b4d6da94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a widget to the overlay.  <br /></td></tr>
+<tr class="memitem:a042c8dc0c0d0a6a0cf47daaf404e8601" id="r_a042c8dc0c0d0a6a0cf47daaf404e8601"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a042c8dc0c0d0a6a0cf47daaf404e8601">setDockSpaceEnabled</a> (bool enabled) noexcept</td></tr>
+<tr class="memdesc:a042c8dc0c0d0a6a0cf47daaf404e8601"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables or disables the full-viewport DockSpace.  <br /></td></tr>
 <tr class="memitem:ab7ed11d1c2ee989ac85c2426b7d649e2" id="r_ab7ed11d1c2ee989ac85c2426b7d649e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab7ed11d1c2ee989ac85c2426b7d649e2">render</a> ()</td></tr>
 <tr class="memdesc:ab7ed11d1c2ee989ac85c2426b7d649e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders all registered widgets using the backend.  <br /></td></tr>
 </table><table class="memberdecls">
@@ -161,7 +163,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ImGuiOverlay_8ixx_source.html#l00094">94</a> of file <a class="el" href="ImGuiOverlay_8ixx_source.html">ImGuiOverlay.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ImGuiOverlay_8ixx_source.html#l00099">99</a> of file <a class="el" href="ImGuiOverlay_8ixx_source.html">ImGuiOverlay.ixx</a>.</p>
 
 </div>
 </div>
@@ -197,7 +199,7 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to the singleton overlay instance. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ImGuiOverlay_8ixx_source.html#l00079">79</a> of file <a class="el" href="ImGuiOverlay_8ixx_source.html">ImGuiOverlay.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ImGuiOverlay_8ixx_source.html#l00084">84</a> of file <a class="el" href="ImGuiOverlay_8ixx_source.html">ImGuiOverlay.ixx</a>.</p>
 
 </div>
 </div>
@@ -225,9 +227,45 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Renders all registered widgets using the backend. </p>
-<p>Calls `newFrame()` on the backend, invokes `draw()` on each widget, then finalizes rendering via `ImGui::Render()` and `renderDrawData()`. </p>
+<p>Calls `newFrame()` on the backend, optionally creates a DockSpace, invokes `draw()` on each widget, then finalizes rendering via `ImGui::Render()` and `renderDrawData()`. </p>
 
-<p class="definition">Definition at line <a class="el" href="ImGuiOverlay_8ixx_source.html#l00105">105</a> of file <a class="el" href="ImGuiOverlay_8ixx_source.html">ImGuiOverlay.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ImGuiOverlay_8ixx_source.html#l00122">122</a> of file <a class="el" href="ImGuiOverlay_8ixx_source.html">ImGuiOverlay.ixx</a>.</p>
+
+</div>
+</div>
+<a id="a042c8dc0c0d0a6a0cf47daaf404e8601" name="a042c8dc0c0d0a6a0cf47daaf404e8601"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a042c8dc0c0d0a6a0cf47daaf404e8601">&#9670;&#160;</a></span>setDockSpaceEnabled()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::ext::imgui::ImGuiOverlay::setDockSpaceEnabled </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>enabled</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enables or disables the full-viewport DockSpace. </p>
+<p>When enabled, widgets can be docked to the edges of the main viewport.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">enabled</td><td>True to enable docking, false to disable. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="ImGuiOverlay_8ixx_source.html#l00111">111</a> of file <a class="el" href="ImGuiOverlay_8ixx_source.html">ImGuiOverlay.ixx</a>.</p>
 
 </div>
 </div>

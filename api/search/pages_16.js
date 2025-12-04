@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['update_20cmake_0',['4. Update CMake',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md35',1,'']]],
-  ['using_20extensions_1',['Using Extensions',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md26',1,'']]]
+  ['reference_0',['helios - API Reference',['../index.html',1,'']]],
+  ['rendering_20backend_1',['Custom Rendering Backend',['../index.html#autotoc_md109',1,'']]],
+  ['rendering_20pipeline_2',['2. Rendering Pipeline',['../index.html#autotoc_md99',1,'']]],
+  ['responsibilities_3',['Extension Responsibilities',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md24',1,'']]]
 ];

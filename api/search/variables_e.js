@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['texcoords_0',['texCoords',['../structhelios_1_1rendering_1_1Vertex.html#a6a60a969f8b46c06dfd111cad987a017',1,'helios::rendering::Vertex']]],
-  ['title_1',['title',['../structhelios_1_1window_1_1WindowConfig.html#a3ffc9f8d5d4e517423dda6f691dfe14e',1,'helios::window::WindowConfig']]],
-  ['title_5f_2',['title_',['../classhelios_1_1window_1_1Window.html#a27dc6e221464e5675b20816130a0e948',1,'helios::window::Window']]],
-  ['totalframetime_3',['totalFrameTime',['../structhelios_1_1engine_1_1FrameStats.html#ab76f59f1bd1a35ee9d4316fdb46efa63',1,'helios::engine::FrameStats']]]
+  ['scope_0',['scope',['../structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html#ad59b894922d8b66525cca2cdee97cf5c',1,'helios::ext::imgui::widgets::LogEntry']]],
+  ['shader_5f_1',['shader_',['../classhelios_1_1rendering_1_1model_1_1Material.html#a0b16bb315fdf18861e2586378d16df43',1,'helios::rendering::model::Material']]],
+  ['snapshotitems_5f_2',['snapshotItems_',['../classhelios_1_1scene_1_1Snapshot.html#aba85236c232fa0c9f2bc7986f1c417a3',1,'helios::scene::Snapshot']]],
+  ['sourceguid_3',['sourceGuid',['../classhelios_1_1window_1_1event_1_1WindowEvent.html#a8116ef9bcb82c44bbf6ee846abca9f00',1,'helios::window::event::WindowEvent']]]
 ];

@@ -1,6 +1,12 @@
 var searchData=
 [
-  ['line_0',['Line',['../structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Line.html',1,'helios::rendering::asset::shape::basic']]],
-  ['logger_1',['Logger',['../classhelios_1_1util_1_1log_1_1Logger.html',1,'helios::util::log']]],
-  ['logmanager_2',['LogManager',['../classhelios_1_1util_1_1log_1_1LogManager.html',1,'helios::util::log']]]
+  ['imguibackend_0',['ImGuiBackend',['../classhelios_1_1ext_1_1imgui_1_1ImGuiBackend.html',1,'helios::ext::imgui']]],
+  ['imguiglfwopenglbackend_1',['ImGuiGlfwOpenGLBackend',['../classhelios_1_1ext_1_1imgui_1_1ImGuiGlfwOpenGLBackend.html',1,'helios::ext::imgui']]],
+  ['imguilogsink_2',['ImGuiLogSink',['../classhelios_1_1ext_1_1imgui_1_1ImGuiLogSink.html',1,'helios::ext::imgui']]],
+  ['imguioverlay_3',['ImGuiOverlay',['../classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay.html',1,'helios::ext::imgui']]],
+  ['imguiwidget_4',['ImGuiWidget',['../classhelios_1_1ext_1_1imgui_1_1ImGuiWidget.html',1,'helios::ext::imgui']]],
+  ['inputadapter_5',['InputAdapter',['../classhelios_1_1input_1_1InputAdapter.html',1,'helios::input']]],
+  ['inputhandler_6',['InputHandler',['../classhelios_1_1game_1_1InputHandler.html',1,'helios::game']]],
+  ['inputmanager_7',['InputManager',['../classhelios_1_1input_1_1InputManager.html',1,'helios::input']]],
+  ['inputsnapshot_8',['InputSnapshot',['../classhelios_1_1game_1_1InputSnapshot.html',1,'helios::game']]]
 ];

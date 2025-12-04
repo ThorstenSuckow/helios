@@ -1,12 +1,9 @@
 var searchData=
 [
-  ['mat4_0',['mat4',['../structhelios_1_1math_1_1mat4.html',1,'helios::math']]],
-  ['mat4_3c_20double_20_3e_1',['mat4&lt; double &gt;',['../structhelios_1_1math_1_1mat4.html',1,'helios::math']]],
-  ['mat4_3c_20float_20_3e_2',['mat4&lt; float &gt;',['../structhelios_1_1math_1_1mat4.html',1,'helios::math']]],
-  ['mat4_3c_20int_20_3e_3',['mat4&lt; int &gt;',['../structhelios_1_1math_1_1mat4.html',1,'helios::math']]],
-  ['material_4',['Material',['../classhelios_1_1rendering_1_1model_1_1Material.html',1,'helios::rendering::model']]],
-  ['materialproperties_5',['MaterialProperties',['../classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties.html',1,'helios::rendering::model::config']]],
-  ['materialpropertiesoverride_6',['MaterialPropertiesOverride',['../structhelios_1_1rendering_1_1model_1_1config_1_1MaterialPropertiesOverride.html',1,'helios::rendering::model::config']]],
-  ['mesh_7',['Mesh',['../classhelios_1_1rendering_1_1model_1_1Mesh.html',1,'helios::rendering::model']]],
-  ['meshconfig_8',['MeshConfig',['../structhelios_1_1rendering_1_1model_1_1config_1_1MeshConfig.html',1,'helios::rendering::model::config']]]
+  ['line_0',['Line',['../structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Line.html',1,'helios::rendering::asset::shape::basic']]],
+  ['logentry_1',['LogEntry',['../structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html',1,'helios::ext::imgui::widgets']]],
+  ['logger_2',['Logger',['../classhelios_1_1util_1_1log_1_1Logger.html',1,'helios::util::log']]],
+  ['logmanager_3',['LogManager',['../classhelios_1_1util_1_1log_1_1LogManager.html',1,'helios::util::log']]],
+  ['logsink_4',['LogSink',['../classhelios_1_1util_1_1log_1_1LogSink.html',1,'helios::util::log']]],
+  ['logwidget_5',['LogWidget',['../classhelios_1_1ext_1_1imgui_1_1widgets_1_1LogWidget.html',1,'helios::ext::imgui::widgets']]]
 ];

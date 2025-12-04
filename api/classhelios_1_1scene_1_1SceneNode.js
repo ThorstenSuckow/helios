@@ -11,6 +11,7 @@ var classhelios_1_1scene_1_1SceneNode =
     [ "children", "classhelios_1_1scene_1_1SceneNode.html#a345af64a75ad370d482051006658c81e", null ],
     [ "guid", "classhelios_1_1scene_1_1SceneNode.html#a1488aa0cc05f989400589f36814afba1", null ],
     [ "localTransform", "classhelios_1_1scene_1_1SceneNode.html#a52ac30adf28408c010626d9236c78828", null ],
+    [ "localTransform", "classhelios_1_1scene_1_1SceneNode.html#a3f28e5b3a6b7fe4c1af4e5770ad42227", null ],
     [ "needsUpdate", "classhelios_1_1scene_1_1SceneNode.html#a88551e7d166868342b87fd83e767442c", null ],
     [ "operator=", "classhelios_1_1scene_1_1SceneNode.html#a7cc7b1c8b3b57927c9d33abd8f652964", null ],
     [ "parent", "classhelios_1_1scene_1_1SceneNode.html#a4e31b52717a76a9bae9a80a1db0b808b", null ],

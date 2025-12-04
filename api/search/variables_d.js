@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['shader_5f_0',['shader_',['../classhelios_1_1rendering_1_1model_1_1Material.html#a0b16bb315fdf18861e2586378d16df43',1,'helios::rendering::model::Material']]],
-  ['snapshotitems_5f_1',['snapshotItems_',['../classhelios_1_1scene_1_1Snapshot.html#aba85236c232fa0c9f2bc7986f1c417a3',1,'helios::scene::Snapshot']]],
-  ['sourceguid_2',['sourceGuid',['../classhelios_1_1window_1_1event_1_1WindowEvent.html#a8116ef9bcb82c44bbf6ee846abca9f00',1,'helios::window::event::WindowEvent']]]
+  ['renderable_5f_0',['renderable_',['../classhelios_1_1scene_1_1SceneNode.html#adc5b1c905e0a2eee271107ebb91652af',1,'helios::scene::SceneNode']]],
+  ['rendercommands_5f_1',['renderCommands_',['../classhelios_1_1rendering_1_1RenderQueue.html#a495b608f1570db9532d10ad81ac8cdb2',1,'helios::rendering::RenderQueue']]],
+  ['renderingdevice_5f_2',['renderingDevice_',['../classhelios_1_1app_1_1Application.html#aa04eb0a14f12afe4323122a4698c04f7',1,'helios::app::Application']]],
+  ['renderprototype_5f_3',['renderPrototype_',['../classhelios_1_1rendering_1_1Renderable.html#a8fd3f447a861f9fe08d5a4555d12b5b1',1,'helios::rendering::Renderable']]],
+  ['rendertarget_5f_4',['renderTarget_',['../classhelios_1_1window_1_1Window.html#a3aadafde86d1cf52080eda7a8209b8ba',1,'helios::window::Window']]],
+  ['roughness_5',['roughness',['../structhelios_1_1rendering_1_1model_1_1config_1_1MaterialPropertiesOverride.html#a1804954f7d3b24661fd3cab94c80e460',1,'helios::rendering::model::config::MaterialPropertiesOverride']]]
 ];

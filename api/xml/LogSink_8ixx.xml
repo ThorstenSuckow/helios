@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="LogSink_8ixx" kind="file" language="C++">
+    <compoundname>LogSink.ixx</compoundname>
+    <includes local="no">string</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>include/helios/util/log/LogSink.ixx</label>
+        <link refid="LogSink_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>string</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classhelios_1_1util_1_1log_1_1LogSink" prot="public">helios::util::log::LogSink</innerclass>
+    <innernamespace refid="namespacehelios">helios</innernamespace>
+    <innernamespace refid="namespacehelios_1_1util">helios::util</innernamespace>
+    <innernamespace refid="namespacehelios_1_1util_1_1log">helios::util::log</innernamespace>
+    <briefdescription>
+<para>Abstract interface for log output destinations. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/**</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>@file<sp/>LogSink.ixx</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>@brief<sp/>Abstract<sp/>interface<sp/>for<sp/>log<sp/>output<sp/>destinations.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">module</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8util_8log_8LogSink" kindref="compound">helios.util.log.LogSink</ref>;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1util_1_1log" kindref="compound">helios::util::log</ref><sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Severity<sp/>level<sp/>for<sp/>log<sp/>messages.</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16" refid="namespacehelios_1_1util_1_1log_1abf3ebdbff56ed4467148bf540b1b328c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1util_1_1log_1abf3ebdbff56ed4467148bf540b1b328c" kindref="member">LogLevel</ref><sp/>{</highlight></codeline>
+<codeline lineno="17" refid="namespacehelios_1_1util_1_1log_1abf3ebdbff56ed4467148bf540b1b328caa603905470e2a5b8c13e96b579ef0dba" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1util_1_1log_1abf3ebdbff56ed4467148bf540b1b328caa603905470e2a5b8c13e96b579ef0dba" kindref="member">Debug</ref>,</highlight></codeline>
+<codeline lineno="18" refid="namespacehelios_1_1util_1_1log_1abf3ebdbff56ed4467148bf540b1b328ca4059b0251f66a18cb56f544728796875" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1util_1_1log_1abf3ebdbff56ed4467148bf540b1b328ca4059b0251f66a18cb56f544728796875" kindref="member">Info</ref>,</highlight></codeline>
+<codeline lineno="19" refid="namespacehelios_1_1util_1_1log_1abf3ebdbff56ed4467148bf540b1b328ca56525ae64d370c0b448ac0d60710ef17" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1util_1_1log_1abf3ebdbff56ed4467148bf540b1b328ca56525ae64d370c0b448ac0d60710ef17" kindref="member">Warn</ref>,</highlight></codeline>
+<codeline lineno="20" refid="namespacehelios_1_1util_1_1log_1abf3ebdbff56ed4467148bf540b1b328ca902b0d55fddef6f8d651fe1035b7d4bd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1util_1_1log_1abf3ebdbff56ed4467148bf540b1b328ca902b0d55fddef6f8d651fe1035b7d4bd" kindref="member">Error</ref></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Unique<sp/>identifier<sp/>type<sp/>for<sp/>log<sp/>sinks.</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Each<sp/>sink<sp/>implementation<sp/>defines<sp/>its<sp/>own<sp/>static<sp/>identifier<sp/>string.</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>LogManager<sp/>uses<sp/>these<sp/>identifiers<sp/>to<sp/>enable/disable<sp/>specific<sp/>sinks.</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```cpp</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>//<sp/>In<sp/>sink<sp/>implementation:</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>static<sp/>constexpr<sp/>const<sp/>char*<sp/>TYPE_ID<sp/>=<sp/>&quot;console&quot;;</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>[[nodiscard]]<sp/>const<sp/>char*<sp/>typeId()<sp/>const<sp/>noexcept<sp/>override<sp/>{<sp/>return<sp/>TYPE_ID;<sp/>}</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>//<sp/>Usage:</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>LogManager::getInstance().enableSink(&quot;console&quot;);</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>LogManager::getInstance().disableSink(&quot;imgui&quot;);</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39" refid="namespacehelios_1_1util_1_1log_1a43ac66e3137c172ec852cd889ea1e1f5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1util_1_1log_1a43ac66e3137c172ec852cd889ea1e1f5" kindref="member">SinkTypeId</ref><sp/>=<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@interface<sp/>LogSink</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Abstract<sp/>sink<sp/>interface<sp/>for<sp/>log<sp/>message<sp/>output.</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>LogSink<sp/>defines<sp/>the<sp/>contract<sp/>for<sp/>log<sp/>output<sp/>destinations.<sp/>Implementations</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>can<sp/>write<sp/>to<sp/>console,<sp/>files,<sp/>ImGui<sp/>widgets,<sp/>network<sp/>sockets,<sp/>or<sp/>any<sp/>other</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>target.<sp/>Multiple<sp/>sinks<sp/>can<sp/>be<sp/>attached<sp/>to<sp/>a<sp/>Logger<sp/>for<sp/>simultaneous<sp/>output</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>to<sp/>different<sp/>destinations.</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Each<sp/>sink<sp/>must<sp/>provide<sp/>a<sp/>unique<sp/>type<sp/>identifier<sp/>via<sp/>`typeId()`.<sp/>This<sp/>allows</highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>the<sp/>LogManager<sp/>to<sp/>selectively<sp/>enable<sp/>or<sp/>disable<sp/>sinks<sp/>at<sp/>runtime<sp/>without</highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>requiring<sp/>a<sp/>central<sp/>registry<sp/>of<sp/>all<sp/>possible<sp/>sink<sp/>types.</highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54" refid="classhelios_1_1util_1_1log_1_1LogSink" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1util_1_1log_1_1LogSink" kindref="compound">LogSink</ref><sp/>{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="57" refid="classhelios_1_1util_1_1log_1_1LogSink_1a39f4e582485afa9783a710e7a846365c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1util_1_1log_1_1LogSink_1a39f4e582485afa9783a710e7a846365c" kindref="member">~LogSink</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>the<sp/>unique<sp/>type<sp/>identifier<sp/>for<sp/>this<sp/>sink.</highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Each<sp/>sink<sp/>implementation<sp/>should<sp/>define<sp/>a<sp/>static<sp/>constexpr<sp/>identifier</highlight></codeline>
+<codeline lineno="63"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>and<sp/>return<sp/>it<sp/>here.<sp/>Used<sp/>by<sp/>LogManager<sp/>to<sp/>match<sp/>sinks<sp/>for<sp/>enable/disable.</highlight></codeline>
+<codeline lineno="64"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="65"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>string<sp/>identifier<sp/>unique<sp/>to<sp/>this<sp/>sink<sp/>type<sp/>(e.g.,<sp/>&quot;console&quot;,<sp/>&quot;file&quot;).</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67" refid="classhelios_1_1util_1_1log_1_1LogSink_1a1eac0bfe8af64547c7f6f2fb9d815b17" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1util_1_1log_1a43ac66e3137c172ec852cd889ea1e1f5" kindref="member">SinkTypeId</ref><sp/><ref refid="classhelios_1_1util_1_1log_1_1LogSink_1a1eac0bfe8af64547c7f6f2fb9d815b17" kindref="member">typeId</ref>()<sp/>const<sp/>noexcept<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Writes<sp/>a<sp/>log<sp/>message<sp/>to<sp/>this<sp/>sink.</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>level<sp/><sp/><sp/>The<sp/>severity<sp/>level<sp/>of<sp/>the<sp/>message.</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>scope<sp/><sp/><sp/>The<sp/>source<sp/>scope/module<sp/>name.</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>message<sp/>The<sp/>log<sp/>message<sp/>text.</highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76" refid="classhelios_1_1util_1_1log_1_1LogSink_1aa8a9b93a650cd8111fa5a5358d2c2376" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>virtual<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1util_1_1log_1_1LogSink_1aa8a9b93a650cd8111fa5a5358d2c2376" kindref="member">write</ref>(<ref refid="namespacehelios_1_1util_1_1log_1abf3ebdbff56ed4467148bf540b1b328c" kindref="member">LogLevel</ref><sp/>level,<sp/>const<sp/>std::</highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>scope,<sp/>const<sp/>std::</highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>message)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Flushes<sp/>any<sp/>buffered<sp/>output<sp/>(optional).</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Default<sp/>implementation<sp/>does<sp/>nothing.<sp/>Override<sp/>for<sp/>sinks<sp/>that<sp/>buffer.</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83" refid="classhelios_1_1util_1_1log_1_1LogSink_1a63612d9abf81ff9610a1b3bccccc1af5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>virtual<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1util_1_1log_1_1LogSink_1a63612d9abf81ff9610a1b3bccccc1af5" kindref="member">flush</ref>()<sp/>{}</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="include/helios/util/log/LogSink.ixx"/>
+  </compounddef>
+</doxygen>

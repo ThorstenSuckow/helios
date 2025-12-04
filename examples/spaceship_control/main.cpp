@@ -51,6 +51,8 @@ import helios.scene.CameraSceneNode;
 // util
 import helios.util.io.BasicStringFileReader;
 import helios.util.time.Stopwatch;
+import helios.util.log.LogSink;
+
 
 // engine
 import helios.engine.FramePacer;
@@ -65,7 +67,8 @@ import helios.ext.imgui.ImGuiOverlay;
 import helios.ext.imgui.ImGuiWidget;
 import helios.ext.imgui.widgets.FpsWidget;
 import helios.ext.imgui.widgets.GamepadWidget;
-
+import helios.ext.imgui.widgets.LogWidget;
+import helios.ext.imgui.ImGuiLogSink;
 // game input handling, game objects
 import helios.game.GameWorld;
 import helios.game.CommandBuffer;
@@ -130,8 +133,10 @@ int main() {
     helios::engine::FrameStats frameStats{};
     auto fpsWidget = new helios::ext::imgui::widgets::FpsWidget(&fpsMetrics, &framePacer);
     auto gamepadWidget = new helios::ext::imgui::widgets::GamepadWidget(&inputManager);
+    auto logWidget = new helios::ext::imgui::widgets::LogWidget();
     imguiOverlay.addWidget(fpsWidget);
     imguiOverlay.addWidget(gamepadWidget);
+    imguiOverlay.addWidget(logWidget);
 
     // ========================================
     // 2. Shader Creation
@@ -224,7 +229,8 @@ int main() {
     // 8. Main Render Loop
     // ========================================
     helios::util::log::LogManager::getInstance().enableLogging(true);
-    helios::util::log::LogManager::getInstance().setScopeFilter("helios::examples::spaceshipControl::Spaceship");
+    auto imguiLogSink = std::make_shared<helios::ext::imgui::ImGuiLogSink>(logWidget);
+    helios::util::log::LogManager::getInstance().enableSink(imguiLogSink);
 
     // ========================================
     // 9. Game-related Input-handling, GameWorld and GameObjects

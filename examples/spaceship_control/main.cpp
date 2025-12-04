@@ -65,10 +65,12 @@ import helios.tooling.FpsMetrics;
 import helios.ext.imgui.ImGuiGlfwOpenGLBackend;
 import helios.ext.imgui.ImGuiOverlay;
 import helios.ext.imgui.ImGuiWidget;
+import helios.ext.imgui.widgets.MainMenuWidget;
 import helios.ext.imgui.widgets.FpsWidget;
 import helios.ext.imgui.widgets.GamepadWidget;
 import helios.ext.imgui.widgets.LogWidget;
 import helios.ext.imgui.ImGuiLogSink;
+
 // game input handling, game objects
 import helios.game.GameWorld;
 import helios.game.CommandBuffer;
@@ -131,9 +133,11 @@ int main() {
     // set target framerate
     framePacer.setTargetFps(0.0f);
     helios::engine::FrameStats frameStats{};
+    auto menu = new helios::ext::imgui::widgets::MainMenuWidget();
     auto fpsWidget = new helios::ext::imgui::widgets::FpsWidget(&fpsMetrics, &framePacer);
     auto gamepadWidget = new helios::ext::imgui::widgets::GamepadWidget(&inputManager);
     auto logWidget = new helios::ext::imgui::widgets::LogWidget();
+    imguiOverlay.addWidget(menu);
     imguiOverlay.addWidget(fpsWidget);
     imguiOverlay.addWidget(gamepadWidget);
     imguiOverlay.addWidget(logWidget);

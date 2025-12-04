@@ -31,16 +31,18 @@ export namespace helios::ext::imgui {
      */
     class ImGuiLogSink : public helios::util::log::LogSink {
 
+    private:
+        /**
+         * @brief Pointer to the LogWidget to forward messages to.
+         */
+        widgets::LogWidget* widget_ = nullptr;
+
     public:
         /**
          * @brief Unique type identifier for this sink.
          */
         static constexpr helios::util::log::SinkTypeId TYPE_ID = "imgui";
 
-    private:
-        widgets::LogWidget* widget_ = nullptr;
-
-    public:
         /**
          * @brief Constructs an ImGuiLogSink attached to a LogWidget.
          *

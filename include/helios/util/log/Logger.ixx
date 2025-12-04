@@ -23,14 +23,14 @@ export namespace helios::util::log {
      * By default, it writes to stdout, but sinks can be added or replaced to redirect
      * output to ImGui widgets, files, or other destinations.
      *
-     * @code
+     * ```cpp
      * // Add ImGui sink while keeping console output
      * logger.addSink(imguiSink);
      *
      * // Replace all sinks (ImGui only)
      * logger.clearSinks();
      * logger.addSink(imguiSink);
-     * @endcode
+     * ```
      */
     class Logger {
 
@@ -117,6 +117,8 @@ export namespace helios::util::log {
 
         /**
          * @brief Returns the number of attached sinks.
+         *
+         * @return The number of sinks currently attached to this logger.
          */
         [[nodiscard]] size_t sinkCount() const noexcept {
             std::lock_guard<std::mutex> lock(sinkMutex_);

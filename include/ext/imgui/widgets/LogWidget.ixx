@@ -35,9 +35,24 @@ export namespace helios::ext::imgui::widgets {
      * @brief Represents a single log entry with level, scope, and message.
      */
     struct LogEntry {
-        LogLevel    level = LogLevel::Info;
+        /**
+         * @brief Severity level of this log entry.
+         */
+        LogLevel level = LogLevel::Info;
+
+        /**
+         * @brief Source scope/module that generated this entry.
+         */
         std::string scope;
+
+        /**
+         * @brief The log message text.
+         */
         std::string message;
+
+        /**
+         * @brief Formatted timestamp when this entry was created.
+         */
         std::string timestamp;
     };
 
@@ -156,6 +171,10 @@ export namespace helios::ext::imgui::widgets {
 
         /**
          * @brief Returns an ImVec4 color for the given log level.
+         *
+         * @param level The log level to get a color for.
+         *
+         * @return The color corresponding to the log level.
          */
         [[nodiscard]] static ImVec4 colorForLevel(LogLevel level) noexcept {
             switch (level) {
@@ -169,6 +188,10 @@ export namespace helios::ext::imgui::widgets {
 
         /**
          * @brief Returns a string label for the given log level.
+         *
+         * @param level The log level to get a label for.
+         *
+         * @return The label string (e.g., "[DEBUG]", "[INFO]").
          */
         [[nodiscard]] static const char* labelForLevel(LogLevel level) noexcept {
             switch (level) {
@@ -182,6 +205,8 @@ export namespace helios::ext::imgui::widgets {
 
         /**
          * @brief Generates a simple timestamp string (HH:MM:SS.mmm).
+         *
+         * @return The current time formatted as "HH:MM:SS.mmm".
          */
         [[nodiscard]] static std::string currentTimestamp() noexcept {
             auto now        = std::chrono::system_clock::now();

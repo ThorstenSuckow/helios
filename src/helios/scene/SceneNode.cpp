@@ -49,7 +49,7 @@ namespace helios::scene {
     {}
 
 
-    [[nodiscard]] const helios::util::Guid& SceneNode::guid() const noexcept {
+    const helios::util::Guid& SceneNode::guid() const noexcept {
         return guid_;
     };
 
@@ -61,17 +61,17 @@ namespace helios::scene {
     }
 
 
-    [[nodiscard]] const std::vector<std::unique_ptr<SceneNode>>& SceneNode::children() const noexcept {
+    const std::vector<std::unique_ptr<SceneNode>>& SceneNode::children() const noexcept {
         return children_;
     }
 
 
-    [[nodiscard]] std::shared_ptr<const helios::rendering::Renderable> SceneNode::renderable() const noexcept {
+    std::shared_ptr<const helios::rendering::Renderable> SceneNode::renderable() const noexcept {
         return renderable_;
     }
 
 
-    [[nodiscard]] std::shared_ptr<helios::rendering::Renderable> SceneNode::renderable() noexcept {
+    std::shared_ptr<helios::rendering::Renderable> SceneNode::renderable() noexcept {
         return renderable_;
     }
 
@@ -98,17 +98,20 @@ namespace helios::scene {
     }
 
 
-    [[nodiscard]] const Transform& SceneNode::localTransform() const noexcept {
+    const Transform& SceneNode::localTransform() const noexcept {
         return localTransform_;
     }
 
+    Transform& SceneNode::localTransform() noexcept {
+        return localTransform_;
+    }
 
-    [[nodiscard]] SceneNode* SceneNode::parent() const noexcept {
+    SceneNode* SceneNode::parent() const noexcept {
         return parent_;
     }
 
 
-    [[nodiscard]] bool SceneNode::setWorldTransform(
+    bool SceneNode::setWorldTransform(
         const helios::math::mat4f& wf, helios::scene::SceneGraphKey sceneGraphKey
         ) noexcept {
 
@@ -141,9 +144,10 @@ namespace helios::scene {
     }
 
 
-    [[nodiscard]] bool SceneNode::needsUpdate() const noexcept {
-        return needsUpdate_;
+    bool SceneNode::needsUpdate() const noexcept {
+        return needsUpdate_ || localTransform_.needsUpdate();
     }
+
 
 };
 

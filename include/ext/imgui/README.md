@@ -9,7 +9,6 @@ Integration layer for Dear ImGui in the helios engine. Provides backend abstract
 @details This namespace provides platform-agnostic ImGui backend abstraction (ImGuiBackend), widget interfaces (ImGuiWidget), and an overlay manager (ImGuiOverlay) that renders multiple widgets per frame. Concrete backend implementations (e.g., GLFW+OpenGL) handle platform-specific initialization and rendering.
 @brief ImGui integration for debug overlays and developer tools.
 @namespace helios::ext::imgui
-<summary>Doxygen</summary><p>
 </details>
 
 

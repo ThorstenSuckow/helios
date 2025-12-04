@@ -216,7 +216,7 @@ export namespace helios::tooling {
          *
          * @return Maximum number of frames kept in history.
          */
-        [[nodiscard]] size_t getHistorySize() const  noexcept {
+        [[nodiscard]] size_t getHistorySize() const noexcept {
             return historySize_;
         }
 

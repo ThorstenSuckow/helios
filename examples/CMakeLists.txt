@@ -19,9 +19,22 @@ foreach(EXAMPLE_FILE ${EXAMPLE_FILES})
 
     target_compile_definitions(${UNIQUE_TARGET} PRIVATE GLFW_INCLUDE_NONE)
 
+    get_filename_component(EXAMPLE_DIR ${EXAMPLE_FILE} DIRECTORY)
+    file(GLOB_RECURSE EXAMPLE_MODULES
+            "${EXAMPLE_DIR}/*.ixx"
+    )
+
+    if (EXAMPLE_MODULES)
+        target_sources(${UNIQUE_TARGET}
+                PRIVATE
+                FILE_SET cxx_modules TYPE CXX_MODULES FILES
+                ${EXAMPLE_MODULES}
+        )
+    endif()
+
     set_target_properties(${UNIQUE_TARGET} PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/examples/${SUBDIR}
-        OUTPUT_NAME ${TARGET_NAME}
+            RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/examples/${SUBDIR}
+            OUTPUT_NAME ${TARGET_NAME}
     )
 
     set(RESOURCES_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/${SUBDIR}/resources")
@@ -32,8 +45,8 @@ foreach(EXAMPLE_FILE ${EXAMPLE_FILES})
                 TARGET ${UNIQUE_TARGET}
                 POST_BUILD
                 COMMAND ${CMAKE_COMMAND} -E copy_directory
-                    "${RESOURCES_SOURCE_DIR}"
-                    "${RESOURCES_DEST_DIR}"
+                "${RESOURCES_SOURCE_DIR}"
+                "${RESOURCES_DEST_DIR}"
         )
     endif()
 

@@ -47,6 +47,25 @@ export namespace helios::util {
             return value_;
         }
 
+        /**
+         * @brief Calculates a hash fot this GUID.
+         *
+         * The hash simply defaults to the value_ of this Guid.
+         *
+         * @return The hash value for this Guid.
+         */
+        [[nodiscard]] std::size_t hash() const noexcept {
+            return std::hash<uint64_t>{}(value_);
+        }
+
     };
 
 } // namespace helios::util
+
+
+export template<>
+struct std::hash<helios::util::Guid> {
+    std::size_t operator()(const helios::util::Guid& guid) const noexcept {
+        return guid.hash();
+    }
+};

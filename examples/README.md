@@ -28,6 +28,21 @@ Demonstrates gamepad/controller input handling with helios.
 
 ---
 
+### 3. Spaceship Control
+
+**Location:** `spaceship_control/`
+
+A complete game loop example featuring:
+- Gamepad and keyboard input with command pattern
+- ImGui debug overlay with dockable widgets
+- Real-time logging with scope filtering
+- Frame pacing and performance metrics
+
+**Controls:**
+- Left Stick - Move/Rotate spaceship
+
+---
+
 ## Building the Examples
 
 All examples are automatically built when you build the helios project.

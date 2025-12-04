@@ -107,18 +107,21 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Central manager for scoped loggers.  
+<p>Central manager for scoped loggers with configurable sinks.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;string&gt;</code><br />
 <code>#include &lt;unordered_map&gt;</code><br />
+<code>#include &lt;unordered_set&gt;</code><br />
 <code>#include &lt;memory&gt;</code><br />
 <code>#include &lt;mutex&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 <code>import <a class="el" href="Logger_8ixx_source.html">helios.util.log.Logger</a>;</code><br />
+<code>import <a class="el" href="LogSink_8ixx_source.html">helios.util.log.LogSink</a>;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Include dependency graph for LogManager.ixx:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="LogManager_8ixx__incl.svg" width="528" height="198"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="LogManager_8ixx__incl.svg" width="100%" height="503"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="LogManager_8ixx_source.html">Go to the source code of this file.</a></p>
@@ -126,7 +129,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:helios_3A_3Autil_3A_3Alog_3A_3ALogManager" id="r_helios_3A_3Autil_3A_3Alog_3A_3ALogManager"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html">helios::util::log::LogManager</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing various scoped Loggers.">LogManager</a> for managing various scoped Loggers.  <a href="classhelios_1_1util_1_1log_1_1LogManager.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing scoped Loggers and global sink configuration.">LogManager</a> for managing scoped Loggers and global sink configuration.  <a href="classhelios_1_1util_1_1log_1_1LogManager.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -134,14 +137,14 @@ Namespaces</h2></td></tr>
 <tr class="memitem:helios_3A_3Autil" id="r_helios_3A_3Autil"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1util.html">helios::util</a></td></tr>
 <tr class="memdesc:namespacehelios_1_1util"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utility functions and helper classes. <br /></td></tr>
 <tr class="memitem:helios_3A_3Autil_3A_3Alog" id="r_helios_3A_3Autil_3A_3Alog"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1util_1_1log.html">helios::util::log</a></td></tr>
-<tr class="memdesc:namespacehelios_1_1util_1_1log"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logging system. <br /></td></tr>
+<tr class="memdesc:namespacehelios_1_1util_1_1log"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logging system with self-registering output sinks. <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a3ccdf5e151cf4faa7bea9d68a1af829a" id="r_a3ccdf5e151cf4faa7bea9d68a1af829a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3ccdf5e151cf4faa7bea9d68a1af829a">LOGGING_ENABLED</a>&#160;&#160;&#160;true</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Central manager for scoped loggers. </p>
+<div class="textblock"><p>Central manager for scoped loggers with configurable sinks. </p>
 
 <p class="definition">Definition in file <a class="el" href="LogManager_8ixx_source.html">LogManager.ixx</a>.</p>
 </div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
@@ -157,7 +160,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="LogManager_8ixx_source.html#l00016">16</a> of file <a class="el" href="LogManager_8ixx_source.html">LogManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="LogManager_8ixx_source.html#l00019">19</a> of file <a class="el" href="LogManager_8ixx_source.html">LogManager.ixx</a>.</p>
 
 </div>
 </div>

@@ -19,7 +19,37 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/util/log/LogManager.ixx" line="33" column="14" bodyfile="include/helios/util/log/LogManager.ixx" bodystart="33" bodyend="-1"/>
+        <location file="include/helios/util/log/LogManager.ixx" line="49" column="14" bodyfile="include/helios/util/log/LogManager.ixx" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1util_1_1log_1_1LogManager_1a064b879d4d81b5ac1727239416d8b58e" prot="private" static="no" mutable="no">
+        <type>std::unordered_set&lt; std::string &gt;</type>
+        <definition>std::unordered_set&lt;std::string&gt; helios::util::log::LogManager::enabledSinks_</definition>
+        <argsstring></argsstring>
+        <name>enabledSinks_</name>
+        <qualifiedname>helios::util::log::LogManager::enabledSinks_</qualifiedname>
+        <briefdescription>
+<para>Set of currently enabled sink type identifiers. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="54" column="28" bodyfile="include/helios/util/log/LogManager.ixx" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1util_1_1log_1_1LogManager_1a9bae325f2b5198144d5ada9dab55d4a2" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::shared_ptr&lt; LogSink &gt; &gt;</type>
+        <definition>std::vector&lt;std::shared_ptr&lt;LogSink&gt; &gt; helios::util::log::LogManager::registeredSinks_</definition>
+        <argsstring></argsstring>
+        <name>registeredSinks_</name>
+        <qualifiedname>helios::util::log::LogManager::registeredSinks_</qualifiedname>
+        <briefdescription>
+<para>Registered sinks (all available sinks, regardless of enabled state). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="59" column="21" bodyfile="include/helios/util/log/LogManager.ixx" bodystart="59" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1util_1_1log_1_1LogManager_1a2fbbbd91631c609a8104eeff9b66bddb" prot="private" static="no" mutable="no">
         <type>std::unordered_map&lt; std::string, std::unique_ptr&lt; Logger &gt; &gt;</type>
@@ -34,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/util/log/LogManager.ixx" line="39" column="28" bodyfile="include/helios/util/log/LogManager.ixx" bodystart="39" bodyend="-1"/>
+        <location file="include/helios/util/log/LogManager.ixx" line="65" column="28" bodyfile="include/helios/util/log/LogManager.ixx" bodystart="65" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1util_1_1log_1_1LogManager_1aeaf0830fffbfa40414886f4594a2bcfa" prot="private" static="no" mutable="no">
         <type>const std::unique_ptr&lt; Logger &gt;</type>
@@ -49,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/util/log/LogManager.ixx" line="46" column="31" bodyfile="include/helios/util/log/LogManager.ixx" bodystart="46" bodyend="-1"/>
+        <location file="include/helios/util/log/LogManager.ixx" line="70" column="31" bodyfile="include/helios/util/log/LogManager.ixx" bodystart="70" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1util_1_1log_1_1LogManager_1abcc8180a40241988b4ad98c5a238c761" prot="private" static="no" mutable="yes">
         <type>std::mutex</type>
@@ -64,7 +94,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/util/log/LogManager.ixx" line="52" column="28" bodyfile="include/helios/util/log/LogManager.ixx" bodystart="52" bodyend="-1"/>
+        <location file="include/helios/util/log/LogManager.ixx" line="75" column="28" bodyfile="include/helios/util/log/LogManager.ixx" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1util_1_1log_1_1LogManager_1a003bd1763a3650b685721342eaad03d4" prot="private" static="no" mutable="yes">
+        <type>std::mutex</type>
+        <definition>std::mutex helios::util::log::LogManager::sinkMutex_</definition>
+        <argsstring></argsstring>
+        <name>sinkMutex_</name>
+        <qualifiedname>helios::util::log::LogManager::sinkMutex_</qualifiedname>
+        <briefdescription>
+<para>Mutex for sink access. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="80" column="28" bodyfile="include/helios/util/log/LogManager.ixx" bodystart="80" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -81,7 +126,23 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/util/log/LogManager.ixx" line="58" column="9"/>
+        <location file="include/helios/util/log/LogManager.ixx" line="85" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1a45e6510427ad29e3ec4a3bb7b028f6f1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::util::log::LogManager::updateLoggerSinks</definition>
+        <argsstring>()</argsstring>
+        <name>updateLoggerSinks</name>
+        <qualifiedname>helios::util::log::LogManager::updateLoggerSinks</qualifiedname>
+        <briefdescription>
+<para>Reconfigures all logger sinks based on currently enabled sinks. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Called internally after sink enable/disable changes. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="92" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1a750d8fd5b3ee3678600644756b0631e7" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>const Logger &amp;</type>
@@ -113,7 +174,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/util/log/LogManager.ixx" line="72" column="29"/>
+        <location file="include/helios/util/log/LogManager.ixx" line="106" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1a7ffda8e8a0051befb5ec47fd61c316c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -127,7 +188,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/util/log/LogManager.ixx" line="74" column="9"/>
+        <location file="include/helios/util/log/LogManager.ixx" line="108" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1afb10a34aeaaa1fb36b8eefd42b184049" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -148,7 +209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/util/log/LogManager.ixx" line="81" column="9"/>
+        <location file="include/helios/util/log/LogManager.ixx" line="115" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1a2e8452f2fe3524c7897c49b7d9b76e5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>LogManager &amp;</type>
@@ -165,7 +226,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/util/log/LogManager.ixx" line="82" column="20"/>
+        <location file="include/helios/util/log/LogManager.ixx" line="116" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1aeb3c579d6cd53e2ca50384ceadd5d3a6" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>LogManager &amp;</type>
@@ -183,7 +244,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/util/log/LogManager.ixx" line="90" column="27"/>
+        <location file="include/helios/util/log/LogManager.ixx" line="123" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1a9495818e6f7568653f36886d43aa75cf" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>const Logger &amp;</type>
@@ -201,7 +262,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/util/log/LogManager.ixx" line="98" column="23"/>
+        <location file="include/helios/util/log/LogManager.ixx" line="130" column="23"/>
         <references refid="classhelios_1_1util_1_1log_1_1LogManager_1a9495818e6f7568653f36886d43aa75cf">helios::util::log::LogManager::logger</references>
         <referencedby refid="classhelios_1_1util_1_1log_1_1LogManager_1a9495818e6f7568653f36886d43aa75cf">helios::util::log::LogManager::logger</referencedby>
         <referencedby refid="classhelios_1_1util_1_1log_1_1LogManager_1a4b85719776951cd826d2fb3a4ab40e59">helios::util::log::LogManager::logger</referencedby>
@@ -236,7 +297,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/util/log/LogManager.ixx" line="112" column="23"/>
+        <location file="include/helios/util/log/LogManager.ixx" line="143" column="23"/>
         <references refid="classhelios_1_1util_1_1log_1_1LogManager_1a9495818e6f7568653f36886d43aa75cf">helios::util::log::LogManager::logger</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1ac04d603885ef13b734099c4c812e2eb9" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
@@ -269,7 +330,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/util/log/LogManager.ixx" line="125" column="17"/>
+        <location file="include/helios/util/log/LogManager.ixx" line="155" column="17"/>
         <references refid="classhelios_1_1util_1_1log_1_1LogManager_1ac04d603885ef13b734099c4c812e2eb9">helios::util::log::LogManager::registerLogger</references>
         <referencedby refid="classhelios_1_1util_1_1log_1_1LogManager_1ac04d603885ef13b734099c4c812e2eb9">helios::util::log::LogManager::registerLogger</referencedby>
       </memberdef>
@@ -300,15 +361,315 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/util/log/LogManager.ixx" line="133" column="14"/>
+        <location file="include/helios/util/log/LogManager.ixx" line="162" column="14"/>
         <references refid="classhelios_1_1util_1_1log_1_1LogManager_1adab66fefed9700defd5199358f4f9874">helios::util::log::LogManager::enableLogging</references>
         <referencedby refid="classhelios_1_1util_1_1log_1_1LogManager_1adab66fefed9700defd5199358f4f9874">helios::util::log::LogManager::enableLogging</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1a82dbe075dd5b9afdb16272f9f9d67f4f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::util::log::LogManager::setScopeFilter</definition>
+        <argsstring>(const std::string &amp;scope) noexcept</argsstring>
+        <name>setScopeFilter</name>
+        <qualifiedname>helios::util::log::LogManager::setScopeFilter</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>scope</declname>
+        </param>
+        <briefdescription>
+<para>Sets the filter scope for the logger. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Will do nothing if logging is not enabled. If the logger for the scope does not exist, it will get implicitly created.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scope</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The scope to filter. Only log messages with this scope will be logged. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="172" column="14"/>
+        <references refid="classhelios_1_1util_1_1log_1_1LogManager_1a82dbe075dd5b9afdb16272f9f9d67f4f">helios::util::log::LogManager::setScopeFilter</references>
+        <referencedby refid="classhelios_1_1util_1_1log_1_1LogManager_1a82dbe075dd5b9afdb16272f9f9d67f4f">helios::util::log::LogManager::setScopeFilter</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1a9317933e7764dbdbe6a918263fcc02d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::util::log::LogManager::registerSink</definition>
+        <argsstring>(std::shared_ptr&lt; LogSink &gt; sink)</argsstring>
+        <name>registerSink</name>
+        <qualifiedname>helios::util::log::LogManager::registerSink</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; LogSink &gt;</type>
+          <declname>sink</declname>
+        </param>
+        <briefdescription>
+<para>Registers a sink and enables it by default. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The sink is added to the pool and immediately enabled for output.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sink</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The sink to register. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="183" column="14"/>
+        <references refid="classhelios_1_1util_1_1log_1_1LogManager_1a9317933e7764dbdbe6a918263fcc02d6">helios::util::log::LogManager::registerSink</references>
+        <referencedby refid="classhelios_1_1util_1_1log_1_1LogManager_1a9317933e7764dbdbe6a918263fcc02d6">helios::util::log::LogManager::registerSink</referencedby>
+        <referencedby refid="classhelios_1_1util_1_1log_1_1LogManager_1aa512b16af91784c9c588a379b304b596">helios::util::log::LogManager::registerSink</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1aa512b16af91784c9c588a379b304b596" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::util::log::LogManager::registerSink</definition>
+        <argsstring>(std::shared_ptr&lt; LogSink &gt; sink, bool enabled)</argsstring>
+        <name>registerSink</name>
+        <qualifiedname>helios::util::log::LogManager::registerSink</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; LogSink &gt;</type>
+          <declname>sink</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+<para>Registers a sink with optional auto-enable. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sink</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The sink to register. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>enabled</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether to enable the sink immediately (default: true). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="191" column="14"/>
+        <references refid="classhelios_1_1util_1_1log_1_1LogManager_1a9317933e7764dbdbe6a918263fcc02d6">helios::util::log::LogManager::registerSink</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1a086cef17194c4df915de290181df412f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::util::log::LogManager::enableSink</definition>
+        <argsstring>(SinkTypeId typeId)</argsstring>
+        <name>enableSink</name>
+        <qualifiedname>helios::util::log::LogManager::enableSink</qualifiedname>
+        <param>
+          <type>SinkTypeId</type>
+          <declname>typeId</declname>
+        </param>
+        <briefdescription>
+<para>Enables a sink by its type identifier. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If a sink with the given typeId is registered, it will be enabled. If no sink with that typeId is registered, this call has no effect.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>typeId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unique type identifier of the sink (e.g., &quot;console&quot;, &quot;imgui&quot;). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="201" column="14"/>
+        <references refid="classhelios_1_1util_1_1log_1_1LogManager_1a086cef17194c4df915de290181df412f">helios::util::log::LogManager::enableSink</references>
+        <referencedby refid="classhelios_1_1util_1_1log_1_1LogManager_1a086cef17194c4df915de290181df412f">helios::util::log::LogManager::enableSink</referencedby>
+        <referencedby refid="classhelios_1_1util_1_1log_1_1LogManager_1a22a17438bf79400830c333c0433470e9">helios::util::log::LogManager::enableSink</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1a22a17438bf79400830c333c0433470e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::util::log::LogManager::enableSink</definition>
+        <argsstring>(std::shared_ptr&lt; LogSink &gt; sink)</argsstring>
+        <name>enableSink</name>
+        <qualifiedname>helios::util::log::LogManager::enableSink</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; LogSink &gt;</type>
+          <declname>sink</declname>
+        </param>
+        <briefdescription>
+<para>Enables a sink, registering it first if necessary. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the sink is not yet registered, it will be added to the pool. The sink is then enabled for output.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sink</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The sink instance to enable (and register if needed). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="211" column="14"/>
+        <references refid="classhelios_1_1util_1_1log_1_1LogManager_1a086cef17194c4df915de290181df412f">helios::util::log::LogManager::enableSink</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1a4b99d193afa34434624f2c9d469cf481" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::util::log::LogManager::disableSink</definition>
+        <argsstring>(SinkTypeId typeId)</argsstring>
+        <name>disableSink</name>
+        <qualifiedname>helios::util::log::LogManager::disableSink</qualifiedname>
+        <param>
+          <type>SinkTypeId</type>
+          <declname>typeId</declname>
+        </param>
+        <briefdescription>
+<para>Disables a sink by its type identifier. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>typeId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unique type identifier of the sink. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="218" column="14"/>
+        <references refid="classhelios_1_1util_1_1log_1_1LogManager_1a4b99d193afa34434624f2c9d469cf481">helios::util::log::LogManager::disableSink</references>
+        <referencedby refid="classhelios_1_1util_1_1log_1_1LogManager_1a4b99d193afa34434624f2c9d469cf481">helios::util::log::LogManager::disableSink</referencedby>
+        <referencedby refid="classhelios_1_1util_1_1log_1_1LogManager_1ae38829e7fe152b20d7d48ced16c34341">helios::util::log::LogManager::disableSink</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1ae38829e7fe152b20d7d48ced16c34341" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::util::log::LogManager::disableSink</definition>
+        <argsstring>(std::shared_ptr&lt; LogSink &gt; sink)</argsstring>
+        <name>disableSink</name>
+        <qualifiedname>helios::util::log::LogManager::disableSink</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; LogSink &gt;</type>
+          <declname>sink</declname>
+        </param>
+        <briefdescription>
+<para>Disables a sink by instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sink</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The sink instance to disable. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="225" column="14"/>
+        <references refid="classhelios_1_1util_1_1log_1_1LogManager_1a4b99d193afa34434624f2c9d469cf481">helios::util::log::LogManager::disableSink</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1a7258f734df723c69c23c6754c0617c70" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::util::log::LogManager::isSinkEnabled</definition>
+        <argsstring>(SinkTypeId typeId) const noexcept</argsstring>
+        <name>isSinkEnabled</name>
+        <qualifiedname>helios::util::log::LogManager::isSinkEnabled</qualifiedname>
+        <param>
+          <type>SinkTypeId</type>
+          <declname>typeId</declname>
+        </param>
+        <briefdescription>
+<para>Checks if a sink with the given type identifier is currently enabled. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>typeId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unique type identifier of the sink.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the sink is enabled. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="234" column="15"/>
+        <references refid="classhelios_1_1util_1_1log_1_1LogManager_1a7258f734df723c69c23c6754c0617c70">helios::util::log::LogManager::isSinkEnabled</references>
+        <referencedby refid="classhelios_1_1util_1_1log_1_1LogManager_1a7258f734df723c69c23c6754c0617c70">helios::util::log::LogManager::isSinkEnabled</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1ab28c446b9b8746425ec9e3cfa4ed8159" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::util::log::LogManager::enableAllSinks</definition>
+        <argsstring>()</argsstring>
+        <name>enableAllSinks</name>
+        <qualifiedname>helios::util::log::LogManager::enableAllSinks</qualifiedname>
+        <briefdescription>
+<para>Enables all registered sinks. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="239" column="14"/>
+        <references refid="classhelios_1_1util_1_1log_1_1LogManager_1ab28c446b9b8746425ec9e3cfa4ed8159">helios::util::log::LogManager::enableAllSinks</references>
+        <referencedby refid="classhelios_1_1util_1_1log_1_1LogManager_1ab28c446b9b8746425ec9e3cfa4ed8159">helios::util::log::LogManager::enableAllSinks</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogManager_1a7fd1afc8a2049fee3212387976a748ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::util::log::LogManager::disableAllSinks</definition>
+        <argsstring>()</argsstring>
+        <name>disableAllSinks</name>
+        <qualifiedname>helios::util::log::LogManager::disableAllSinks</qualifiedname>
+        <briefdescription>
+<para>Disables all sinks. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogManager.ixx" line="244" column="14"/>
+        <references refid="classhelios_1_1util_1_1log_1_1LogManager_1a7fd1afc8a2049fee3212387976a748ed">helios::util::log::LogManager::disableAllSinks</references>
+        <referencedby refid="classhelios_1_1util_1_1log_1_1LogManager_1a7fd1afc8a2049fee3212387976a748ed">helios::util::log::LogManager::disableAllSinks</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="include/helios/util/log/LogManager.ixx" line="12" column="15"/>
+    <location file="include/helios/util/log/LogManager.ixx" line="14" column="15"/>
   </compounddef>
 </doxygen>

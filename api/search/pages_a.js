@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['glfw_0',['&lt;span class=&quot;tt&quot;&gt;helios.ext.glfw&lt;/span&gt;',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md29',1,'']]],
-  ['glfw_20opengl_1',['Quick Start with GLFW + OpenGL',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md27',1,'']]],
-  ['graph_2',['1. Scene Graph',['../index.html#autotoc_md96',1,'']]]
+  ['debug_20overlay_0',['6. ImGui Debug Overlay',['../index.html#autotoc_md103',1,'']]],
+  ['design_20principles_1',['Design Principles',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md36',1,'']]],
+  ['details_2',['Module Details',['../index.html#autotoc_md107',1,'']]],
+  ['documentation_3',['API Documentation',['../index.html#autotoc_md111',1,'']]]
 ];

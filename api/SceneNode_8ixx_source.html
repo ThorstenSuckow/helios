@@ -369,63 +369,74 @@ $(function() {
 <div class="line"><a id="l00258" name="l00258"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1SceneNode.html#a52ac30adf28408c010626d9236c78828">  258</a></span>            [[nodiscard]] const <a class="code hl_class" href="classhelios_1_1scene_1_1Transform.html">Transform</a>&amp; <a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#a52ac30adf28408c010626d9236c78828">localTransform</a>() const noexcept;</div>
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span><span class="comment"></span> </div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span><span class="comment">            /**</span></div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span><span class="comment">             * @brief Returns a pointer to this node&#39;s parent node.</span></div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span><span class="comment">             * @brief Returns this SceneNode&#39;s localTransform.</span></div>
 <div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span><span class="comment">             *</span></div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span><span class="comment">             * @return The pointer to this node&#39;s parent, or nullptr if no parent exists,</span></div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span><span class="comment">             * e.g. for the root node.</span></div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span><span class="comment">             */</span></div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1SceneNode.html#a4e31b52717a76a9bae9a80a1db0b808b">  266</a></span>            [[nodiscard]] <a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#a30ad1d7f49d6114a261cbac2706546ab">SceneNode</a>* <a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#a4e31b52717a76a9bae9a80a1db0b808b">parent</a>() const noexcept;</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span><span class="comment"></span> </div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span><span class="comment">            /**</span></div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span><span class="comment">             * @brief Sets the world transform for this SceneNode.</span></div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span><span class="comment">             * Does nothing if the current SceneNode&#39;s world transform is considered</span></div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span><span class="comment">             * equal to the specified world transform.</span></div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span><span class="comment">             *</span></div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span><span class="comment">             * @param wf The worldTransform to use for this SceneNode.</span></div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span><span class="comment">             * @param sceneGraphKey The sceneGraphKey as constructed by the `Scene`. Serves</span></div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span><span class="comment">             * as the passkey so this method is not callable from outside</span></div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span><span class="comment">             *</span></div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span><span class="comment">             * @return true if the world transform was updated, otherwise false</span></div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span><span class="comment">             */</span></div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1SceneNode.html#a1dbd995b4aace249c6786588e3279ae3">  279</a></span>            [[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#a1dbd995b4aace249c6786588e3279ae3">setWorldTransform</a>(</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>                const <a class="code hl_namespace" href="namespacehelios.html">helios</a>::<a class="code hl_namespace" href="namespacehelios_1_1math.html">math</a>::mat4f&amp; wf, <a class="code hl_namespace" href="namespacehelios.html">helios</a>::<a class="code hl_namespace" href="namespacehelios_1_1scene.html">scene</a>::<a class="code hl_struct" href="structhelios_1_1scene_1_1SceneGraphKey.html">SceneGraphKey</a> sceneGraphKey</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>                ) noexcept;</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span><span class="comment"></span> </div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span><span class="comment">            /**</span></div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span><span class="comment">             * @brief Computes and returns the world transform for this SceneNode.</span></div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><span class="comment">             * Will request the current world transform from the</span></div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span><span class="comment">             * parent node to calculate this SceneNode&#39;s world transform.</span></div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span><span class="comment">             * For efficiency, this method should cache the result</span></div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span><span class="comment">             * and only trigger a recompute if this SceneNode is dirty (`needsUpdate_ == true`).</span></div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span><span class="comment">             *</span></div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span><span class="comment">             * @return The current world transform matrix for this scene node.</span></div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span><span class="comment">             */</span></div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1SceneNode.html#a2cd5ee14fdf4990952266c724c916551">  292</a></span>            const <a class="code hl_namespace" href="namespacehelios.html">helios</a>::<a class="code hl_namespace" href="namespacehelios_1_1math.html">math</a>::mat4f&amp; <a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#a2cd5ee14fdf4990952266c724c916551">worldTransform</a>() noexcept;</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span><span class="comment"></span> </div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span><span class="comment">            /**</span></div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span><span class="comment">             * @brief Returns the current worldTransform matrix of this SceneNode</span></div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span><span class="comment">             * **without triggering any recomputation**.</span></div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span><span class="comment">             * This method is efficient for access when the world transform is</span></div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span><span class="comment">             * known to be up-to-date.</span></div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span><span class="comment">             *</span></div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span><span class="comment">             * @return The current worldTransform matrix of this SceneNode.</span></div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span><span class="comment">             */</span></div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1SceneNode.html#ab908b6a16d34640eca0d92f2573e6cc3">  302</a></span>            [[nodiscard]] const <a class="code hl_namespace" href="namespacehelios.html">helios</a>::<a class="code hl_namespace" href="namespacehelios_1_1math.html">math</a>::mat4f&amp; <a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#ab908b6a16d34640eca0d92f2573e6cc3">cachedWorldTransform</a>() const noexcept;</div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span><span class="comment"></span> </div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span><span class="comment">            /**</span></div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span><span class="comment">             * @brief Checks whether this SceneNode needs to be updated, e.g. because the</span></div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span><span class="comment">             * local transformation changed.</span></div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span><span class="comment">             *</span></div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span><span class="comment">             * @return true if this SceneNode is considered to be dirty, otherwise</span></div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span><span class="comment">             * false.</span></div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span><span class="comment">             */</span></div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1SceneNode.html#a88551e7d166868342b87fd83e767442c">  311</a></span>            [[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#a88551e7d166868342b87fd83e767442c">needsUpdate</a>() const noexcept;</div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span> </div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    };</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span><span class="comment">             * @return A reference to this SceneNode&#39;s `Transform` object.</span></div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span><span class="comment">             */</span></div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1SceneNode.html#a3f28e5b3a6b7fe4c1af4e5770ad42227">  265</a></span>            [[nodiscard]] <a class="code hl_class" href="classhelios_1_1scene_1_1Transform.html">Transform</a>&amp; <a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#a52ac30adf28408c010626d9236c78828">localTransform</a>() noexcept;</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span><span class="comment"></span> </div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span><span class="comment">            /**</span></div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span><span class="comment">             * @brief Returns a pointer to this node&#39;s parent node.</span></div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span><span class="comment">             *</span></div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span><span class="comment">             * @return The pointer to this node&#39;s parent, or nullptr if no parent exists,</span></div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span><span class="comment">             * e.g. for the root node.</span></div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span><span class="comment">             */</span></div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1SceneNode.html#a4e31b52717a76a9bae9a80a1db0b808b">  273</a></span>            [[nodiscard]] <a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#a30ad1d7f49d6114a261cbac2706546ab">SceneNode</a>* <a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#a4e31b52717a76a9bae9a80a1db0b808b">parent</a>() const noexcept;</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span><span class="comment"></span> </div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span><span class="comment">            /**</span></div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span><span class="comment">             * @brief Sets the world transform for this SceneNode.</span></div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span><span class="comment">             * Does nothing if the current SceneNode&#39;s world transform is considered</span></div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span><span class="comment">             * equal to the specified world transform.</span></div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span><span class="comment">             *</span></div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span><span class="comment">             * @param wf The worldTransform to use for this SceneNode.</span></div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span><span class="comment">             * @param sceneGraphKey The sceneGraphKey as constructed by the `Scene`. Serves</span></div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span><span class="comment">             * as the passkey so this method is not callable from outside</span></div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span><span class="comment">             *</span></div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span><span class="comment">             * @return true if the world transform was updated, otherwise false</span></div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><span class="comment">             */</span></div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1SceneNode.html#a1dbd995b4aace249c6786588e3279ae3">  286</a></span>            [[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#a1dbd995b4aace249c6786588e3279ae3">setWorldTransform</a>(</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>                const <a class="code hl_namespace" href="namespacehelios.html">helios</a>::<a class="code hl_namespace" href="namespacehelios_1_1math.html">math</a>::mat4f&amp; wf, <a class="code hl_namespace" href="namespacehelios.html">helios</a>::<a class="code hl_namespace" href="namespacehelios_1_1scene.html">scene</a>::<a class="code hl_struct" href="structhelios_1_1scene_1_1SceneGraphKey.html">SceneGraphKey</a> sceneGraphKey</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>                ) noexcept;</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span><span class="comment"></span> </div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span><span class="comment">            /**</span></div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span><span class="comment">             * @brief Computes and returns the world transform for this SceneNode.</span></div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span><span class="comment">             * Will request the current world transform from the</span></div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span><span class="comment">             * parent node to calculate this SceneNode&#39;s world transform.</span></div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span><span class="comment">             * For efficiency, this method should cache the result</span></div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span><span class="comment">             * and only trigger a recompute if this SceneNode is dirty (`needsUpdate_ == true`).</span></div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span><span class="comment">             *</span></div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span><span class="comment">             * @return The current world transform matrix for this scene node.</span></div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span><span class="comment">             */</span></div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1SceneNode.html#a2cd5ee14fdf4990952266c724c916551">  299</a></span>            const <a class="code hl_namespace" href="namespacehelios.html">helios</a>::<a class="code hl_namespace" href="namespacehelios_1_1math.html">math</a>::mat4f&amp; <a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#a2cd5ee14fdf4990952266c724c916551">worldTransform</a>() noexcept;</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span><span class="comment"></span> </div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span><span class="comment">            /**</span></div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span><span class="comment">             * @brief Returns the current worldTransform matrix of this SceneNode</span></div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span><span class="comment">             * **without triggering any recomputation**.</span></div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span><span class="comment">             * This method is efficient for access when the world transform is</span></div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span><span class="comment">             * known to be up-to-date.</span></div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span><span class="comment">             *</span></div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span><span class="comment">             * @return The current worldTransform matrix of this SceneNode.</span></div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span><span class="comment">             */</span></div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1SceneNode.html#ab908b6a16d34640eca0d92f2573e6cc3">  309</a></span>            [[nodiscard]] const <a class="code hl_namespace" href="namespacehelios.html">helios</a>::<a class="code hl_namespace" href="namespacehelios_1_1math.html">math</a>::mat4f&amp; <a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#ab908b6a16d34640eca0d92f2573e6cc3">cachedWorldTransform</a>() const noexcept;</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span><span class="comment"></span> </div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span><span class="comment">            /**</span></div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span><span class="comment">             * @brief Checks whether this SceneNode needs to be updated, e.g. because the</span></div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span><span class="comment">             * local transformation changed.</span></div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span><span class="comment">             *</span></div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span><span class="comment">             * The SceneNode is considered as &quot;dirty&quot; id either the localTransform_ needs an</span></div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span><span class="comment">             * update, or if needsUpdate_ property is set to true.</span></div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span><span class="comment">             *</span></div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span><span class="comment">             * @return true if this SceneNode is considered to be dirty, otherwise</span></div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span><span class="comment">             * false.</span></div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span><span class="comment">             */</span></div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1SceneNode.html#a88551e7d166868342b87fd83e767442c">  321</a></span>            [[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#a88551e7d166868342b87fd83e767442c">needsUpdate</a>() const noexcept;</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span> </div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span> </div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    };</div>
 </div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span> </div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>} <span class="comment">// namespace helios::scene</span></div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span> </div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span> </div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>} <span class="comment">// namespace helios::scene</span></div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span> </div>
 <div class="ttc" id="aclasshelios_1_1scene_1_1SceneNode_html_a03ca20aef6224b069891356d5419eead"><div class="ttname"><a href="classhelios_1_1scene_1_1SceneNode.html#a03ca20aef6224b069891356d5419eead">helios::scene::SceneNode::~SceneNode</a></div><div class="ttdeci">virtual ~SceneNode()=default</div></div>
 <div class="ttc" id="aclasshelios_1_1scene_1_1SceneNode_html_a1488aa0cc05f989400589f36814afba1"><div class="ttname"><a href="classhelios_1_1scene_1_1SceneNode.html#a1488aa0cc05f989400589f36814afba1">helios::scene::SceneNode::guid</a></div><div class="ttdeci">const helios::util::Guid &amp; guid() const noexcept</div><div class="ttdoc">Returns the globally unique identifier for this SceneNode.</div></div>
 <div class="ttc" id="aclasshelios_1_1scene_1_1SceneNode_html_a1dbd995b4aace249c6786588e3279ae3"><div class="ttname"><a href="classhelios_1_1scene_1_1SceneNode.html#a1dbd995b4aace249c6786588e3279ae3">helios::scene::SceneNode::setWorldTransform</a></div><div class="ttdeci">bool setWorldTransform(const helios::math::mat4f &amp;wf, helios::scene::SceneGraphKey sceneGraphKey) noexcept</div><div class="ttdoc">Sets the world transform for this SceneNode. Does nothing if the current SceneNode&#39;s world transform ...</div></div>

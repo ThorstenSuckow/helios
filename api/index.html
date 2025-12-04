@@ -107,10 +107,10 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_docs_2heliosapi"></a></p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md90"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md92"></a>
 Introduction</h1>
 <p><span class="tt"><a class="el" href="namespacehelios.html">helios</a></span> is an ongoing, educational project and strives for providing a foundational and modular technical backbone for game development. Designed with a top-down, prototype-oriented approach, it emphasizes a clear separation of concerns and robust architectural patterns to help with creating maintainable games.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md91"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md93"></a>
 Core Purpose</h1>
 <p>The primary objective of <span class="tt"><a class="el" href="namespacehelios.html">helios</a></span> is to offer a flexible and extensible platform for interactive games. As a prototype, it provides the following systems:</p>
 <ul>
@@ -118,10 +118,10 @@ Core Purpose</h1>
 <li><b>Modular Subsystems:</b> Well-defined interfaces for core components such as Scene Management and Rendering.</li>
 <li><b>Modern C++ Practices:</b> Leveraging C++(23) Modules for improved dependency management and compile-time efficiency.</li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md92"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md94"></a>
 Architecture Overview</h1>
 <p>The framework's architecture follows a component-based philosophy, providing abstract interfaces that decouple high-level scene descriptions from underlying hardware implementations.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md93"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md95"></a>
 Core Modules</h2>
 <div class="fragment"><div class="line">helios</div>
 <div class="line">├── rendering          # Rendering pipeline and render commands</div>
@@ -131,12 +131,22 @@ Core Modules</h2>
 <div class="line">├── scene             # Scene graph, camera, and culling</div>
 <div class="line">├── input             # Keyboard, mouse, and gamepad input</div>
 <div class="line">├── window            # Window management and events</div>
+<div class="line">├── engine            # Frame pacing and timing control</div>
 <div class="line">├── math              # Vectors, matrices, transforms</div>
 <div class="line">├── util              # Logging, file I/O, utilities</div>
+<div class="line">├── tooling           # Performance metrics and profiling</div>
 <div class="line">└── app               # Application lifecycle and event management</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md94"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md96"></a>
 Extension Modules</h2>
 <div class="fragment"><div class="line">helios.ext</div>
+<div class="line">├── imgui             # ImGui integration for debug overlays</div>
+<div class="line">│   ├── widgets       # Ready-to-use debug widgets</div>
+<div class="line">│   │   ├── LogWidget         # Log console with filtering</div>
+<div class="line">│   │   ├── GamepadWidget     # Gamepad state visualizer</div>
+<div class="line">│   │   └── MainMenuWidget    # Application settings menu</div>
+<div class="line">│   ├── ImGuiOverlay          # Widget manager with docking support</div>
+<div class="line">│   ├── ImGuiLogSink          # Log sink for ImGui output</div>
+<div class="line">│   └── backends              # Platform-specific backends</div>
 <div class="line">├── glfw              # GLFW-based window and input implementation</div>
 <div class="line">│   ├── window</div>
 <div class="line">│   ├── input</div>
@@ -144,9 +154,9 @@ Extension Modules</h2>
 <div class="line">└── opengl            # OpenGL rendering backend</div>
 <div class="line">    ├── rendering</div>
 <div class="line">    └── shader</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md95"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md97"></a>
 Core Concepts</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md96"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md98"></a>
 1. Scene Graph</h2>
 <p>The scene graph organizes objects hierarchically, with automatic transform propagation from parent to child nodes.</p>
 <p><b>Key Classes:</b></p><ul>
@@ -166,7 +176,7 @@ Core Concepts</h1>
 <div class="line">node-&gt;rotate(rotationMatrix);</div>
 <div class="ttc" id="amodule__helios_8scene_8SceneNode_html"><div class="ttname"><a href="module__helios_8scene_8SceneNode.html">helios.scene.SceneNode</a></div></div>
 <div class="ttc" id="amodule__helios_8scene_8Scene_html"><div class="ttname"><a href="module__helios_8scene_8Scene.html">helios.scene.Scene</a></div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md97"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md99"></a>
 2. Rendering Pipeline</h2>
 <p>The rendering pipeline uses a deferred command pattern with render passes.</p>
 <p><b>Flow:</b> </p><div class="fragment"><div class="line">Scene → Snapshot → RenderPass → RenderQueue → RenderCommand → GPU</div>
@@ -192,7 +202,7 @@ Core Concepts</h1>
 <div class="line">};</div>
 <div class="ttc" id="amodule__helios_8rendering_8RenderPrototype_html"><div class="ttname"><a href="module__helios_8rendering_8RenderPrototype.html">helios.rendering.RenderPrototype</a></div></div>
 <div class="ttc" id="amodule__helios_8rendering_8Renderable_html"><div class="ttname"><a href="module__helios_8rendering_8Renderable.html">helios.rendering.Renderable</a></div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md98"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md100"></a>
 3. Material System</h2>
 <p>Materials define surface appearance with shaders and properties.</p>
 <p><b>Key Classes:</b></p><ul>
@@ -212,7 +222,7 @@ Core Concepts</h1>
 <div class="line">    std::make_shared&lt;MaterialProperties&gt;(materialProps));</div>
 <div class="ttc" id="amodule__helios_8rendering_8model_8Material_html"><div class="ttname"><a href="module__helios_8rendering_8model_8Material.html">helios.rendering.model.Material</a></div></div>
 <div class="ttc" id="amodule__helios_8rendering_8model_8config_8MaterialProperties_html"><div class="ttname"><a href="module__helios_8rendering_8model_8config_8MaterialProperties.html">helios.rendering.model.config.MaterialProperties</a></div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md99"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md101"></a>
 4. Input System</h2>
 <p>Unified input handling for keyboard, mouse, and gamepad.</p>
 <p><b>Key Classes:</b></p><ul>
@@ -222,6 +232,7 @@ Core Concepts</h1>
 </ul>
 <p><b>Example:</b> </p><div class="fragment"><div class="line"><span class="keyword">import</span> <a class="code" href="module__helios_8input_8InputManager.html">helios.input.InputManager</a>;</div>
 <div class="line"><span class="keyword">import</span> <a class="code" href="module__helios_8input_8types_8Key.html">helios.input.types.Key</a>;</div>
+<div class="line"><span class="keyword">import</span> <a class="code" href="module__helios_8input_8types_8Gamepad.html">helios.input.types.Gamepad</a>;</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">auto</span>&amp; inputManager = app-&gt;inputManager();</div>
 <div class="line">inputManager.poll(deltaTime);</div>
@@ -230,15 +241,150 @@ Core Concepts</h1>
 <div class="line">    <span class="comment">// Handle space key</span></div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">const</span> <span class="keyword">auto</span>&amp; gamepadState = inputManager.gamepadState(Gamepad::Gamepad1);</div>
-<div class="line"><span class="keywordflow">if</span> (gamepadState.buttons.A) {</div>
+<div class="line"><span class="keyword">const</span> <span class="keyword">auto</span>&amp; state = inputManager.gamepadState(Gamepad::ONE);</div>
+<div class="line"><span class="keywordflow">if</span> (state.buttonA()) {</div>
 <div class="line">    <span class="comment">// Handle A button</span></div>
 <div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Analog sticks</span></div>
+<div class="line"><span class="keyword">auto</span> leftStick = state.left();   <span class="comment">// vec2f</span></div>
+<div class="line"><span class="keyword">auto</span> rightStick = state.right(); <span class="comment">// vec2f</span></div>
 <div class="ttc" id="amodule__helios_8input_8InputManager_html"><div class="ttname"><a href="module__helios_8input_8InputManager.html">helios.input.InputManager</a></div></div>
+<div class="ttc" id="amodule__helios_8input_8types_8Gamepad_html"><div class="ttname"><a href="module__helios_8input_8types_8Gamepad.html">helios.input.types.Gamepad</a></div></div>
 <div class="ttc" id="amodule__helios_8input_8types_8Key_html"><div class="ttname"><a href="module__helios_8input_8types_8Key.html">helios.input.types.Key</a></div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md100"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md102"></a>
+5. Logging System</h2>
+<p>Flexible logging with configurable output destinations (sinks).</p>
+<p><b>Key Classes:</b></p><ul>
+<li><span class="tt">Logger</span> - Scoped logger for categorized output</li>
+<li><span class="tt">LogManager</span> - Central manager for loggers and sinks</li>
+<li><span class="tt">LogSink</span> - Abstract interface for output destinations</li>
+<li><span class="tt">ConsoleSink</span> - Outputs to stdout</li>
+<li><span class="tt">ImGuiLogSink</span> - Outputs to ImGui LogWidget</li>
+</ul>
+<p><b>Example:</b> </p><div class="fragment"><div class="line"><span class="keyword">import</span> <a class="code" href="module__helios_8util_8log.html">helios.util.log</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Get a scoped logger</span></div>
+<div class="line"><span class="keyword">auto</span>&amp; logger = LogManager::loggerForScope(<span class="stringliteral">&quot;MyModule&quot;</span>);</div>
+<div class="line">logger.info(<span class="stringliteral">&quot;Application started&quot;</span>);</div>
+<div class="line">logger.debug(<span class="stringliteral">&quot;Processing frame&quot;</span>);</div>
+<div class="line">logger.warn(<span class="stringliteral">&quot;Resource not found&quot;</span>);</div>
+<div class="line">logger.error(<span class="stringliteral">&quot;Critical failure&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Configure sinks</span></div>
+<div class="line"><span class="keyword">auto</span>&amp; mgr = LogManager::getInstance();</div>
+<div class="line">mgr.registerSink(std::make_shared&lt;ConsoleSink&gt;());</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Enable/disable sinks by type identifier</span></div>
+<div class="line">mgr.enableSink(<span class="stringliteral">&quot;console&quot;</span>);</div>
+<div class="line">mgr.disableSink(<span class="stringliteral">&quot;imgui&quot;</span>);</div>
+<div class="ttc" id="amodule__helios_8util_8log_html"><div class="ttname"><a href="module__helios_8util_8log.html">helios.util.log</a></div><div class="ttdoc">Logging system for debugging and diagnostics.</div></div>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md103"></a>
+6. ImGui Debug Overlay</h2>
+<p>Integrated debug UI with docking support and persistent settings.</p>
+<p><b>Key Classes:</b></p><ul>
+<li><span class="tt">ImGuiOverlay</span> - Widget manager with DockSpace support</li>
+<li><span class="tt">LogWidget</span> - Scrollable log console with scope filtering</li>
+<li><span class="tt">GamepadWidget</span> - Real-time gamepad state visualizer</li>
+<li><span class="tt">MainMenuWidget</span> - Application settings (transparency, docking, style)</li>
+</ul>
+<p><b>Example:</b> </p><div class="fragment"><div class="line"><span class="keyword">import</span> <a class="code" href="module__helios_8ext_8imgui_8ImGuiOverlay.html">helios.ext.imgui.ImGuiOverlay</a>;</div>
+<div class="line"><span class="keyword">import</span> <a class="code" href="module__helios_8ext_8imgui_8ImGuiGlfwOpenGLBackend.html">helios.ext.imgui.ImGuiGlfwOpenGLBackend</a>;</div>
+<div class="line"><span class="keyword">import</span> <a class="code" href="module__helios_8ext_8imgui_8widgets_8LogWidget.html">helios.ext.imgui.widgets.LogWidget</a>;</div>
+<div class="line"><span class="keyword">import</span> <a class="code" href="module__helios_8ext_8imgui_8widgets_8MainMenuWidget.html">helios.ext.imgui.widgets.MainMenuWidget</a>;</div>
+<div class="line"><span class="keyword">import</span> <a class="code" href="module__helios_8ext_8imgui_8ImGuiLogSink.html">helios.ext.imgui.ImGuiLogSink</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Setup backend and overlay</span></div>
+<div class="line"><span class="keyword">auto</span> backend = std::make_unique&lt;ImGuiGlfwOpenGLBackend&gt;(window);</div>
+<div class="line"><span class="keyword">auto</span>&amp; overlay = ImGuiOverlay::forBackend(backend.get());</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Add main menu with settings persistence (saves to imgui.ini)</span></div>
+<div class="line"><span class="keyword">auto</span> menu = std::make_shared&lt;MainMenuWidget&gt;();</div>
+<div class="line">menu-&gt;setDockingCallback([&amp;overlay](<span class="keywordtype">bool</span> enabled) {</div>
+<div class="line">    overlay.setDockSpaceEnabled(enabled);</div>
+<div class="line">});</div>
+<div class="line">overlay.addWidget(menu.get());</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Add log console with ImGui sink</span></div>
+<div class="line"><span class="keyword">auto</span> logWidget = std::make_shared&lt;LogWidget&gt;();</div>
+<div class="line">overlay.addWidget(logWidget.get());</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">auto</span> imguiSink = std::make_shared&lt;ImGuiLogSink&gt;(logWidget.get());</div>
+<div class="line">LogManager::getInstance().registerSink(imguiSink);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// In render loop</span></div>
+<div class="line">overlay.render();</div>
+<div class="ttc" id="amodule__helios_8ext_8imgui_8ImGuiGlfwOpenGLBackend_html"><div class="ttname"><a href="module__helios_8ext_8imgui_8ImGuiGlfwOpenGLBackend.html">helios.ext.imgui.ImGuiGlfwOpenGLBackend</a></div></div>
+<div class="ttc" id="amodule__helios_8ext_8imgui_8ImGuiLogSink_html"><div class="ttname"><a href="module__helios_8ext_8imgui_8ImGuiLogSink.html">helios.ext.imgui.ImGuiLogSink</a></div></div>
+<div class="ttc" id="amodule__helios_8ext_8imgui_8ImGuiOverlay_html"><div class="ttname"><a href="module__helios_8ext_8imgui_8ImGuiOverlay.html">helios.ext.imgui.ImGuiOverlay</a></div></div>
+<div class="ttc" id="amodule__helios_8ext_8imgui_8widgets_8LogWidget_html"><div class="ttname"><a href="module__helios_8ext_8imgui_8widgets_8LogWidget.html">helios.ext.imgui.widgets.LogWidget</a></div></div>
+<div class="ttc" id="amodule__helios_8ext_8imgui_8widgets_8MainMenuWidget_html"><div class="ttname"><a href="module__helios_8ext_8imgui_8widgets_8MainMenuWidget.html">helios.ext.imgui.widgets.MainMenuWidget</a></div></div>
+</div><!-- fragment --><p><b>LogWidget Features:</b></p><ul>
+<li>Per-scope message buffers (1000 entries each)</li>
+<li>Filter by log level (Debug, Info, Warn, Error)</li>
+<li>Filter by scope via dropdown</li>
+<li>Text search filter</li>
+<li>Auto-scroll with pause on manual scroll</li>
+<li>Dockable to window edges</li>
+</ul>
+<p><b>MainMenuWidget Features:</b></p><ul>
+<li>Window transparency control (slider + presets)</li>
+<li>Docking toggle</li>
+<li>Style themes (Dark, Light, Classic)</li>
+<li>Style Editor access</li>
+<li>Settings persistence via imgui.ini</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md104"></a>
+7. Frame Pacing and Performance Metrics</h2>
+<p>Control frame rate and monitor performance with built-in timing tools.</p>
+<p><b>Key Classes:</b></p><ul>
+<li><span class="tt">FramePacer</span> - Maintains consistent frame rate through precise timing</li>
+<li><span class="tt">FrameStats</span> - Timing statistics for a single frame</li>
+<li><span class="tt">FpsMetrics</span> - Aggregates frame data for performance analysis</li>
+</ul>
+<p><b>Example:</b> </p><div class="fragment"><div class="line"><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8FramePacer.html">helios.engine.FramePacer</a>;</div>
+<div class="line"><span class="keyword">import</span> <a class="code" href="module__helios_8tooling_8FpsMetrics.html">helios.tooling.FpsMetrics</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Setup frame pacing</span></div>
+<div class="line">FramePacer pacer;</div>
+<div class="line">pacer.setTargetFps(60.0f);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Setup metrics tracking</span></div>
+<div class="line">FpsMetrics metrics;</div>
+<div class="line">metrics.setHistorySize(120); <span class="comment">// 2 seconds at 60 FPS</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Main loop</span></div>
+<div class="line"><span class="keywordflow">while</span> (!window-&gt;shouldClose()) {</div>
+<div class="line">    pacer.beginFrame();</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// Game logic and rendering</span></div>
+<div class="line">    <span class="comment">// ...</span></div>
+<div class="line">    </div>
+<div class="line">    <span class="keyword">auto</span> stats = pacer.sync();</div>
+<div class="line">    metrics.addFrame(stats);</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// Display metrics</span></div>
+<div class="line">    <span class="keywordtype">float</span> currentFps = metrics.getFps();</div>
+<div class="line">    <span class="keywordtype">float</span> avgFrameTime = metrics.getFrameTimeMs();</div>
+<div class="line">}</div>
+<div class="ttc" id="amodule__helios_8engine_8FramePacer_html"><div class="ttname"><a href="module__helios_8engine_8FramePacer.html">helios.engine.FramePacer</a></div></div>
+<div class="ttc" id="amodule__helios_8tooling_8FpsMetrics_html"><div class="ttname"><a href="module__helios_8tooling_8FpsMetrics.html">helios.tooling.FpsMetrics</a></div></div>
+</div><!-- fragment --><p><b>Frame Statistics:</b></p><ul>
+<li><span class="tt">totalFrameTime</span> - Complete frame duration (work + wait)</li>
+<li><span class="tt">workTime</span> - Actual CPU processing time</li>
+<li><span class="tt">waitTime</span> - Time spent sleeping to maintain target FPS</li>
+</ul>
+<p><b>Performance Monitoring:</b> </p><div class="fragment"><div class="line"><span class="comment">// Get detailed metrics</span></div>
+<div class="line"><span class="keywordtype">float</span> fps = metrics.getFps();              <span class="comment">// Average FPS</span></div>
+<div class="line"><span class="keywordtype">float</span> frameTime = metrics.getFrameTimeMs(); <span class="comment">// Average frame time</span></div>
+<div class="line"><span class="keywordtype">float</span> workTime = metrics.getWorkTimeMs();   <span class="comment">// Last frame work time</span></div>
+<div class="line"><span class="keywordtype">float</span> idleTime = metrics.getIdleTimeMs();   <span class="comment">// Last frame idle time</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Access history for graphs</span></div>
+<div class="line"><span class="keyword">const</span> <span class="keyword">auto</span>&amp; history = metrics.getHistory();</div>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md105"></a>
 Quick Start</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md101"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md106"></a>
 Creating a Simple Application</h2>
 <div class="fragment"><div class="line"><span class="keyword">import</span> <a class="code" href="module__helios_8ext_8glfw_8app_8GLFWFactory.html">helios.ext.glfw.app.GLFWFactory</a>;</div>
 <div class="line"><span class="keyword">import</span> <a class="code" href="module__helios_8scene_8Scene.html">helios.scene.Scene</a>;</div>
@@ -280,38 +426,42 @@ Creating a Simple Application</h2>
 <div class="line">}</div>
 <div class="ttc" id="amodule__helios_8ext_8glfw_8app_8GLFWFactory_html"><div class="ttname"><a href="module__helios_8ext_8glfw_8app_8GLFWFactory.html">helios.ext.glfw.app.GLFWFactory</a></div></div>
 <div class="ttc" id="amodule__helios_8scene_8Camera_html"><div class="ttname"><a href="module__helios_8scene_8Camera.html">helios.scene.Camera</a></div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md102"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md107"></a>
 Module Details</h1>
 <p>For detailed information about each module, see:</p>
 <ul>
 <li><b><a class="el" href="dir_9ba586a504c756f19720715161f17166.html">Rendering</a></b> - Rendering system and pipeline</li>
 <li><b><a class="el" href="dir_b6e017bc8c299f04fc1162fc4677be61.html">Scene</a></b> - Scene graph and camera</li>
 <li><b><a class="el" href="dir_58a7612d3773fb780b0e5d4a861b7b53.html">Input</a></b> - Input handling</li>
+<li><b><a class="el" href="dir_860c9de2f65c10e8e262a0e7b5bfee5e.html">Engine</a></b> - Frame pacing and timing control</li>
+<li><b><a class="el" href="dir_136b19899be4d20901a1979f99e5abb1.html">Tooling</a></b> - Performance metrics and profiling</li>
 <li><b><a class="el" href="dir_0046d781185df00694c70533b055a138.html">Math</a></b> - Mathematical operations</li>
 <li><b><a class="el" href="dir_f420875d55816fb78e81b706f36fb7ba.html">Window</a></b> - Window management</li>
 <li><b><a class="el" href="dir_7f0768799dd37ef2f2adcdfec91ab1e9.html">Utilities</a></b> - Logging, file I/O</li>
+<li><b><a class="el" href="dir_54bae32d8466bfad053a02d5bd535fae.html">ImGui Extension</a></b> - Debug overlay and widgets</li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md103"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md108"></a>
 Advanced Topics</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md104"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md109"></a>
 Custom Rendering Backend</h2>
 <p>To implement a custom rendering backend:</p>
 <p>1. Implement <span class="tt">RenderingDevice</span> interface 2. Extend <span class="tt">Mesh</span> for your platform (e.g., <span class="tt">VulkanMesh</span>) 3. Extend <span class="tt">Shader</span> for your platform (e.g., <span class="tt">VulkanShader</span>) 4. Create a factory (e.g., <span class="tt">VulkanFactory</span>)</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md105"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md110"></a>
 Custom Input Adapter</h2>
 <p>To implement a custom input adapter:</p>
 <p>1. Implement <span class="tt">InputAdapter</span> interface 2. Map platform-specific events to helios types 3. Update <span class="tt">GamepadState</span> on polling</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md106"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md111"></a>
 API Documentation</h1>
 <p>For detailed class-by-class documentation, see the <a href="https://helios.garagecraft.games/docs/helios/">Doxygen-generated API reference</a>.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md107"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md112"></a>
 Examples</h1>
 <p>Check the <a href="../examples/">examples/</a> directory for complete working examples:</p>
 <ul>
 <li><b>Simple Cube Rendering</b> - Basic rendering tutorial</li>
-<li><b>Game Controller Input</b> - Input handling demo</li>
+<li><b>Game Controller Input</b> - Gamepad input handling</li>
+<li><b>Spaceship Control</b> - Complete game loop with input, logging, and ImGui overlay</li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md108"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md113"></a>
 License</h1>
 <p><span class="tt"><a class="el" href="namespacehelios.html">helios</a></span> is distributed under the MIT-license. </p>
 </div></div><!-- PageDoc -->

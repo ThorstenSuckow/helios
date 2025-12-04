@@ -41,6 +41,22 @@
         </inbodydescription>
         <location file="include/ext/imgui/ImGuiOverlay.ixx" line="55" column="22" bodyfile="include/ext/imgui/ImGuiOverlay.ixx" bodystart="55" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay_1ad9ca2b4d6c8a52491b3fb71bd867ca02" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::ext::imgui::ImGuiOverlay::enableDockSpace_</definition>
+        <argsstring></argsstring>
+        <name>enableDockSpace_</name>
+        <qualifiedname>helios::ext::imgui::ImGuiOverlay::enableDockSpace_</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>Whether to enable a full-viewport DockSpace for docking widgets. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/ImGuiOverlay.ixx" line="60" column="14" bodyfile="include/ext/imgui/ImGuiOverlay.ixx" bodystart="60" bodyend="-1"/>
+      </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
       <memberdef kind="function" id="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay_1a95f768f9d1a5efb9ffc05800fbb8392d" prot="private" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
@@ -71,7 +87,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/imgui/ImGuiOverlay.ixx" line="66" column="18" bodyfile="include/ext/imgui/ImGuiOverlay.ixx" bodystart="66" bodyend="69"/>
+        <location file="include/ext/imgui/ImGuiOverlay.ixx" line="71" column="18" bodyfile="include/ext/imgui/ImGuiOverlay.ixx" bodystart="71" bodyend="74"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -104,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/imgui/ImGuiOverlay.ixx" line="79" column="29" bodyfile="include/ext/imgui/ImGuiOverlay.ixx" bodystart="79" bodyend="84"/>
+        <location file="include/ext/imgui/ImGuiOverlay.ixx" line="84" column="29" bodyfile="include/ext/imgui/ImGuiOverlay.ixx" bodystart="84" bodyend="89"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -136,7 +152,37 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/imgui/ImGuiOverlay.ixx" line="94" column="14" bodyfile="include/ext/imgui/ImGuiOverlay.ixx" bodystart="94" bodyend="97"/>
+        <location file="include/ext/imgui/ImGuiOverlay.ixx" line="99" column="14" bodyfile="include/ext/imgui/ImGuiOverlay.ixx" bodystart="99" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay_1a042c8dc0c0d0a6a0cf47daaf404e8601" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::ext::imgui::ImGuiOverlay::setDockSpaceEnabled</definition>
+        <argsstring>(bool enabled) noexcept</argsstring>
+        <name>setDockSpaceEnabled</name>
+        <qualifiedname>helios::ext::imgui::ImGuiOverlay::setDockSpaceEnabled</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+<para>Enables or disables the full-viewport DockSpace. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>When enabled, widgets can be docked to the edges of the main viewport.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enabled</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>True to enable docking, false to disable. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/ImGuiOverlay.ixx" line="111" column="14" bodyfile="include/ext/imgui/ImGuiOverlay.ixx" bodystart="111" bodyend="113"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay_1ab7ed11d1c2ee989ac85c2426b7d649e2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -148,11 +194,11 @@
 <para>Renders all registered widgets using the backend. </para>
         </briefdescription>
         <detaileddescription>
-<para>Calls `newFrame()` on the backend, invokes `draw()` on each widget, then finalizes rendering via `ImGui::Render()` and `renderDrawData()`. </para>
+<para>Calls `newFrame()` on the backend, optionally creates a DockSpace, invokes `draw()` on each widget, then finalizes rendering via `ImGui::Render()` and `renderDrawData()`. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/imgui/ImGuiOverlay.ixx" line="105" column="14" bodyfile="include/ext/imgui/ImGuiOverlay.ixx" bodystart="105" bodyend="114"/>
+        <location file="include/ext/imgui/ImGuiOverlay.ixx" line="122" column="14" bodyfile="include/ext/imgui/ImGuiOverlay.ixx" bodystart="122" bodyend="137"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -164,13 +210,15 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="include/ext/imgui/ImGuiOverlay.ixx" line="29" column="5" bodyfile="include/ext/imgui/ImGuiOverlay.ixx" bodystart="29" bodyend="116"/>
+    <location file="include/ext/imgui/ImGuiOverlay.ixx" line="29" column="5" bodyfile="include/ext/imgui/ImGuiOverlay.ixx" bodystart="29" bodyend="139"/>
     <listofallmembers>
       <member refid="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay_1ad76b37d0345172282e9604e3b4d6da94" prot="public" virt="non-virtual"><scope>helios::ext::imgui::ImGuiOverlay</scope><name>addWidget</name></member>
       <member refid="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay_1a81398bb20dd9a0e6598acb95447cbb01" prot="private" virt="non-virtual"><scope>helios::ext::imgui::ImGuiOverlay</scope><name>backend_</name></member>
+      <member refid="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay_1ad9ca2b4d6c8a52491b3fb71bd867ca02" prot="private" virt="non-virtual"><scope>helios::ext::imgui::ImGuiOverlay</scope><name>enableDockSpace_</name></member>
       <member refid="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay_1ab3f79cc8881b8d1ee688bdbe976955a7" prot="public" virt="non-virtual"><scope>helios::ext::imgui::ImGuiOverlay</scope><name>forBackend</name></member>
       <member refid="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay_1a95f768f9d1a5efb9ffc05800fbb8392d" prot="private" virt="non-virtual"><scope>helios::ext::imgui::ImGuiOverlay</scope><name>ImGuiOverlay</name></member>
       <member refid="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay_1ab7ed11d1c2ee989ac85c2426b7d649e2" prot="public" virt="non-virtual"><scope>helios::ext::imgui::ImGuiOverlay</scope><name>render</name></member>
+      <member refid="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay_1a042c8dc0c0d0a6a0cf47daaf404e8601" prot="public" virt="non-virtual"><scope>helios::ext::imgui::ImGuiOverlay</scope><name>setDockSpaceEnabled</name></member>
       <member refid="classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay_1ade7221a4740ecdcb5f023868b095a552" prot="private" virt="non-virtual"><scope>helios::ext::imgui::ImGuiOverlay</scope><name>widgets_</name></member>
     </listofallmembers>
   </compounddef>

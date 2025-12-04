@@ -2,14 +2,79 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="namespacehelios_1_1util_1_1log" kind="namespace" language="C++">
     <compoundname>helios::util::log</compoundname>
+    <innerclass refid="classhelios_1_1util_1_1log_1_1ConsoleSink" prot="public">helios::util::log::ConsoleSink</innerclass>
     <innerclass refid="classhelios_1_1util_1_1log_1_1Logger" prot="public">helios::util::log::Logger</innerclass>
     <innerclass refid="classhelios_1_1util_1_1log_1_1LogManager" prot="public">helios::util::log::LogManager</innerclass>
+    <innerclass refid="classhelios_1_1util_1_1log_1_1LogSink" prot="public">helios::util::log::LogSink</innerclass>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespacehelios_1_1util_1_1log_1abf3ebdbff56ed4467148bf540b1b328c" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>LogLevel</name>
+        <qualifiedname>helios::util::log::LogLevel</qualifiedname>
+        <enumvalue id="namespacehelios_1_1util_1_1log_1abf3ebdbff56ed4467148bf540b1b328caa603905470e2a5b8c13e96b579ef0dba" prot="public">
+          <name>Debug</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1util_1_1log_1abf3ebdbff56ed4467148bf540b1b328ca4059b0251f66a18cb56f544728796875" prot="public">
+          <name>Info</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1util_1_1log_1abf3ebdbff56ed4467148bf540b1b328ca56525ae64d370c0b448ac0d60710ef17" prot="public">
+          <name>Warn</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1util_1_1log_1abf3ebdbff56ed4467148bf540b1b328ca902b0d55fddef6f8d651fe1035b7d4bd" prot="public">
+          <name>Error</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Severity level for log messages. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogSink.ixx" line="16" column="5" bodyfile="include/helios/util/log/LogSink.ixx" bodystart="16" bodyend="21"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacehelios_1_1util_1_1log_1a43ac66e3137c172ec852cd889ea1e1f5" prot="public" static="no">
+        <type>const char *</type>
+        <definition>using helios::util::log::SinkTypeId =  const char*</definition>
+        <argsstring></argsstring>
+        <name>SinkTypeId</name>
+        <qualifiedname>helios::util::log::SinkTypeId</qualifiedname>
+        <briefdescription>
+<para>Unique identifier type for log sinks. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Each sink implementation defines its own static identifier string. The <ref refid="classhelios_1_1util_1_1log_1_1LogManager" kindref="compound">LogManager</ref> uses these identifiers to enable/disable specific sinks.</para>
+<para>```cpp // In sink implementation: static constexpr const char* TYPE_ID = &quot;console&quot;; [[nodiscard]] const char* typeId() const noexcept override { return TYPE_ID; }</para>
+<para>// Usage: <ref refid="classhelios_1_1util_1_1log_1_1LogManager_1aeb3c579d6cd53e2ca50384ceadd5d3a6" kindref="member">LogManager::getInstance()</ref>.enableSink(&quot;console&quot;); <ref refid="classhelios_1_1util_1_1log_1_1LogManager_1aeb3c579d6cd53e2ca50384ceadd5d3a6" kindref="member">LogManager::getInstance()</ref>.disableSink(&quot;imgui&quot;); ``` </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogSink.ixx" line="39" column="5" bodyfile="include/helios/util/log/LogSink.ixx" bodystart="39" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <briefdescription>
-<para>Logging system. </para>
+<para>Logging system with self-registering output sinks. </para>
     </briefdescription>
     <detaileddescription>
-<para>This namespace provides logging functionality including logger instances and log management for debugging, diagnostics, and runtime information output. Provides a flexible logging system for debugging, diagnostics, and monitoring application behavior at runtime. </para>
+<para>Sinks define their own type identifiers and register with the <ref refid="classhelios_1_1util_1_1log_1_1LogManager" kindref="compound">LogManager</ref>. Enable/disable is done by string identifier, allowing extensibility without modifying core logging code. </para>
     </detaileddescription>
-    <location file="include/helios/util/log/Logger.ixx" line="12" column="1"/>
+    <location file="include/helios/util/log/ConsoleSink.ixx" line="14" column="1"/>
   </compounddef>
 </doxygen>

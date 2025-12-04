@@ -20,10 +20,14 @@ var annotated_dup =
         [ "imgui", "namespacehelios_1_1ext_1_1imgui.html", [
           [ "widgets", "namespacehelios_1_1ext_1_1imgui_1_1widgets.html", [
             [ "FpsWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget.html", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget" ],
-            [ "GamepadWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget.html", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget" ]
+            [ "GamepadWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget.html", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget" ],
+            [ "LogEntry", "structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html", "structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry" ],
+            [ "LogWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1LogWidget.html", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1LogWidget" ],
+            [ "MainMenuWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1MainMenuWidget.html", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1MainMenuWidget" ]
           ] ],
           [ "ImGuiBackend", "classhelios_1_1ext_1_1imgui_1_1ImGuiBackend.html", "classhelios_1_1ext_1_1imgui_1_1ImGuiBackend" ],
           [ "ImGuiGlfwOpenGLBackend", "classhelios_1_1ext_1_1imgui_1_1ImGuiGlfwOpenGLBackend.html", "classhelios_1_1ext_1_1imgui_1_1ImGuiGlfwOpenGLBackend" ],
+          [ "ImGuiLogSink", "classhelios_1_1ext_1_1imgui_1_1ImGuiLogSink.html", "classhelios_1_1ext_1_1imgui_1_1ImGuiLogSink" ],
           [ "ImGuiOverlay", "classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay.html", "classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay" ],
           [ "ImGuiWidget", "classhelios_1_1ext_1_1imgui_1_1ImGuiWidget.html", "classhelios_1_1ext_1_1imgui_1_1ImGuiWidget" ]
         ] ],
@@ -60,6 +64,14 @@ var annotated_dup =
         [ "Event", "classhelios_1_1event_1_1Event.html", "classhelios_1_1event_1_1Event" ],
         [ "EventManager", "classhelios_1_1event_1_1EventManager.html", "classhelios_1_1event_1_1EventManager" ],
         [ "EventQueue", "classhelios_1_1event_1_1EventQueue.html", "classhelios_1_1event_1_1EventQueue" ]
+      ] ],
+      [ "game", "namespacehelios_1_1game.html", [
+        [ "Command", "classhelios_1_1game_1_1Command.html", "classhelios_1_1game_1_1Command" ],
+        [ "CommandBuffer", "classhelios_1_1game_1_1CommandBuffer.html", "classhelios_1_1game_1_1CommandBuffer" ],
+        [ "GameObject", "classhelios_1_1game_1_1GameObject.html", "classhelios_1_1game_1_1GameObject" ],
+        [ "GameWorld", "classhelios_1_1game_1_1GameWorld.html", "classhelios_1_1game_1_1GameWorld" ],
+        [ "InputHandler", "classhelios_1_1game_1_1InputHandler.html", "classhelios_1_1game_1_1InputHandler" ],
+        [ "InputSnapshot", "classhelios_1_1game_1_1InputSnapshot.html", "classhelios_1_1game_1_1InputSnapshot" ]
       ] ],
       [ "input", "namespacehelios_1_1input.html", [
         [ "GamepadState", "classhelios_1_1input_1_1GamepadState.html", "classhelios_1_1input_1_1GamepadState" ],
@@ -131,8 +143,10 @@ var annotated_dup =
           [ "StringFileReader", "classhelios_1_1util_1_1io_1_1StringFileReader.html", "classhelios_1_1util_1_1io_1_1StringFileReader" ]
         ] ],
         [ "log", "namespacehelios_1_1util_1_1log.html", [
+          [ "ConsoleSink", "classhelios_1_1util_1_1log_1_1ConsoleSink.html", "classhelios_1_1util_1_1log_1_1ConsoleSink" ],
           [ "Logger", "classhelios_1_1util_1_1log_1_1Logger.html", "classhelios_1_1util_1_1log_1_1Logger" ],
-          [ "LogManager", "classhelios_1_1util_1_1log_1_1LogManager.html", "classhelios_1_1util_1_1log_1_1LogManager" ]
+          [ "LogManager", "classhelios_1_1util_1_1log_1_1LogManager.html", "classhelios_1_1util_1_1log_1_1LogManager" ],
+          [ "LogSink", "classhelios_1_1util_1_1log_1_1LogSink.html", "classhelios_1_1util_1_1log_1_1LogSink" ]
         ] ],
         [ "time", "namespacehelios_1_1util_1_1time.html", [
           [ "Stopwatch", "classhelios_1_1util_1_1time_1_1Stopwatch.html", "classhelios_1_1util_1_1time_1_1Stopwatch" ]
@@ -147,5 +161,8 @@ var annotated_dup =
         [ "Window", "classhelios_1_1window_1_1Window.html", "classhelios_1_1window_1_1Window" ],
         [ "WindowConfig", "structhelios_1_1window_1_1WindowConfig.html", "structhelios_1_1window_1_1WindowConfig" ]
       ] ]
+    ] ],
+    [ "std", null, [
+      [ "hash&lt; helios::util::Guid &gt;", "structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4.html", "structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4" ]
     ] ]
 ];

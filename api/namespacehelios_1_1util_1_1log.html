@@ -107,20 +107,101 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Logging system.  
+<p>Logging system with self-registering output sinks.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:ConsoleSink" id="r_ConsoleSink"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1util_1_1log_1_1ConsoleSink.html">ConsoleSink</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classhelios_1_1util_1_1log_1_1LogSink.html" title="Abstract sink interface for log message output.">LogSink</a> implementation that writes to standard output.  <a href="classhelios_1_1util_1_1log_1_1ConsoleSink.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Logger" id="r_Logger"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">Logger</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html" title="Simple Logger implementation.">Logger</a> implementation.  <a href="classhelios_1_1util_1_1log_1_1Logger.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html" title="Logger implementation with configurable output sinks.">Logger</a> implementation with configurable output sinks.  <a href="classhelios_1_1util_1_1log_1_1Logger.html#details">More...</a><br /></td></tr>
 <tr class="memitem:LogManager" id="r_LogManager"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html">LogManager</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing various scoped Loggers.">LogManager</a> for managing various scoped Loggers.  <a href="classhelios_1_1util_1_1log_1_1LogManager.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing scoped Loggers and global sink configuration.">LogManager</a> for managing scoped Loggers and global sink configuration.  <a href="classhelios_1_1util_1_1log_1_1LogManager.html#details">More...</a><br /></td></tr>
+<tr class="memitem:LogSink" id="r_LogSink"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1util_1_1log_1_1LogSink.html">LogSink</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract sink interface for log message output.  <a href="classhelios_1_1util_1_1log_1_1LogSink.html#details">More...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a43ac66e3137c172ec852cd889ea1e1f5" id="r_a43ac66e3137c172ec852cd889ea1e1f5"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a43ac66e3137c172ec852cd889ea1e1f5">helios::util::log::SinkTypeId</a> = const char*</td></tr>
+<tr class="memdesc:a43ac66e3137c172ec852cd889ea1e1f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unique identifier type for log sinks.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:abf3ebdbff56ed4467148bf540b1b328c" id="r_abf3ebdbff56ed4467148bf540b1b328c"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abf3ebdbff56ed4467148bf540b1b328c">helios::util::log::LogLevel</a> { <a class="el" href="#abf3ebdbff56ed4467148bf540b1b328caa603905470e2a5b8c13e96b579ef0dba">Debug</a>
+, <a class="el" href="#abf3ebdbff56ed4467148bf540b1b328ca4059b0251f66a18cb56f544728796875">Info</a>
+, <a class="el" href="#abf3ebdbff56ed4467148bf540b1b328ca56525ae64d370c0b448ac0d60710ef17">Warn</a>
+, <a class="el" href="#abf3ebdbff56ed4467148bf540b1b328ca902b0d55fddef6f8d651fe1035b7d4bd">Error</a>
+ }</td></tr>
+<tr class="memdesc:abf3ebdbff56ed4467148bf540b1b328c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Severity level for log messages.  <a href="#abf3ebdbff56ed4467148bf540b1b328c">More...</a><br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Logging system. </p>
-<p>This namespace provides logging functionality including logger instances and log management for debugging, diagnostics, and runtime information output. Provides a flexible logging system for debugging, diagnostics, and monitoring application behavior at runtime. </p>
-</div></div><!-- contents -->
+<div class="textblock"><p>Logging system with self-registering output sinks. </p>
+<p>Sinks define their own type identifiers and register with the <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing scoped Loggers and global sink configuration.">LogManager</a>. Enable/disable is done by string identifier, allowing extensibility without modifying core logging code. </p>
+</div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
+<a id="a43ac66e3137c172ec852cd889ea1e1f5" name="a43ac66e3137c172ec852cd889ea1e1f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43ac66e3137c172ec852cd889ea1e1f5">&#9670;&#160;</a></span>SinkTypeId</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a43ac66e3137c172ec852cd889ea1e1f5">helios::util::log::SinkTypeId</a> = const char*</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Unique identifier type for log sinks. </p>
+<p>Each sink implementation defines its own static identifier string. The <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing scoped Loggers and global sink configuration.">LogManager</a> uses these identifiers to enable/disable specific sinks.</p>
+<p>```cpp // In sink implementation: static constexpr const char* TYPE_ID = "console"; [[nodiscard]] const char* typeId() const noexcept override { return TYPE_ID; }</p>
+<p>// Usage: <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html#aeb3c579d6cd53e2ca50384ceadd5d3a6" title="Returns the LogManager singleton instance.">LogManager::getInstance()</a>.enableSink("console"); <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html#aeb3c579d6cd53e2ca50384ceadd5d3a6" title="Returns the LogManager singleton instance.">LogManager::getInstance()</a>.disableSink("imgui"); ``` </p>
+
+<p class="definition">Definition at line <a class="el" href="LogSink_8ixx_source.html#l00039">39</a> of file <a class="el" href="LogSink_8ixx_source.html">LogSink.ixx</a>.</p>
+
+</div>
+</div>
+<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
+<a id="abf3ebdbff56ed4467148bf540b1b328c" name="abf3ebdbff56ed4467148bf540b1b328c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf3ebdbff56ed4467148bf540b1b328c">&#9670;&#160;</a></span>LogLevel</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#abf3ebdbff56ed4467148bf540b1b328c">helios::util::log::LogLevel</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Severity level for log messages. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="abf3ebdbff56ed4467148bf540b1b328caa603905470e2a5b8c13e96b579ef0dba" name="abf3ebdbff56ed4467148bf540b1b328caa603905470e2a5b8c13e96b579ef0dba"></a>Debug&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="abf3ebdbff56ed4467148bf540b1b328ca4059b0251f66a18cb56f544728796875" name="abf3ebdbff56ed4467148bf540b1b328ca4059b0251f66a18cb56f544728796875"></a>Info&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="abf3ebdbff56ed4467148bf540b1b328ca56525ae64d370c0b448ac0d60710ef17" name="abf3ebdbff56ed4467148bf540b1b328ca56525ae64d370c0b448ac0d60710ef17"></a>Warn&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="abf3ebdbff56ed4467148bf540b1b328ca902b0d55fddef6f8d651fe1035b7d4bd" name="abf3ebdbff56ed4467148bf540b1b328ca902b0d55fddef6f8d651fe1035b7d4bd"></a>Error&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="LogSink_8ixx_source.html#l00016">16</a> of file <a class="el" href="LogSink_8ixx_source.html">LogSink.ixx</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>

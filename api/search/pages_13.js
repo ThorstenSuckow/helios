@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['reference_0',['helios - API Reference',['../index.html',1,'']]],
-  ['rendering_20backend_1',['Custom Rendering Backend',['../index.html#autotoc_md104',1,'']]],
-  ['rendering_20pipeline_2',['2. Rendering Pipeline',['../index.html#autotoc_md97',1,'']]],
-  ['responsibilities_3',['Extension Responsibilities',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md24',1,'']]]
+  ['of_20concerns_0',['Separation of Concerns',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md25',1,'']]],
+  ['opengl_1',['Quick Start with GLFW + OpenGL',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md27',1,'']]],
+  ['opengl_2',['&lt;span class=&quot;tt&quot;&gt;helios.ext.opengl&lt;/span&gt;',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md30',1,'']]],
+  ['overlay_3',['6. ImGui Debug Overlay',['../index.html#autotoc_md103',1,'']]],
+  ['overview_4',['Overview',['../index.html#autotoc_md94',1,'Architecture Overview'],['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md21',1,'Overview']]]
 ];

@@ -107,7 +107,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing various scoped Loggers.">LogManager</a> for managing various scoped Loggers.  
+<p><a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing scoped Loggers and global sink configuration.">LogManager</a> for managing scoped Loggers and global sink configuration.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -116,26 +116,49 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afb10a34aeaaa1fb36b8eefd42b184049" id="r_afb10a34aeaaa1fb36b8eefd42b184049"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afb10a34aeaaa1fb36b8eefd42b184049">LogManager</a> (const LogManager &amp;)=delete</td></tr>
 <tr class="memitem:a2e8452f2fe3524c7897c49b7d9b76e5e" id="r_a2e8452f2fe3524c7897c49b7d9b76e5e"><td class="memItemLeft" align="right" valign="top">LogManager &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2e8452f2fe3524c7897c49b7d9b76e5e">operator=</a> (const LogManager &amp;)=delete</td></tr>
 <tr class="memitem:a9495818e6f7568653f36886d43aa75cf" id="r_a9495818e6f7568653f36886d43aa75cf"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">Logger</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9495818e6f7568653f36886d43aa75cf">logger</a> () const noexcept</td></tr>
-<tr class="memdesc:a9495818e6f7568653f36886d43aa75cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a const reference to the default logger managed with this <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing various scoped Loggers.">LogManager</a>.  <br /></td></tr>
+<tr class="memdesc:a9495818e6f7568653f36886d43aa75cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a const reference to the default logger managed with this <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing scoped Loggers and global sink configuration.">LogManager</a>.  <br /></td></tr>
 <tr class="memitem:a4b85719776951cd826d2fb3a4ab40e59" id="r_a4b85719776951cd826d2fb3a4ab40e59"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">Logger</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4b85719776951cd826d2fb3a4ab40e59">logger</a> (const std::string &amp;scope) const noexcept</td></tr>
 <tr class="memdesc:a4b85719776951cd826d2fb3a4ab40e59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a const reference to the logger instance for the specified scope.  <br /></td></tr>
 <tr class="memitem:ac04d603885ef13b734099c4c812e2eb9" id="r_ac04d603885ef13b734099c4c812e2eb9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">Logger</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac04d603885ef13b734099c4c812e2eb9">registerLogger</a> (const std::string &amp;scope) noexcept</td></tr>
 <tr class="memdesc:ac04d603885ef13b734099c4c812e2eb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a new logger with this manager.  <br /></td></tr>
 <tr class="memitem:adab66fefed9700defd5199358f4f9874" id="r_adab66fefed9700defd5199358f4f9874"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adab66fefed9700defd5199358f4f9874">enableLogging</a> (bool enable) noexcept</td></tr>
-<tr class="memdesc:adab66fefed9700defd5199358f4f9874"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables or disables all log output of the Loggers registered with this <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing various scoped Loggers.">LogManager</a>.  <br /></td></tr>
+<tr class="memdesc:adab66fefed9700defd5199358f4f9874"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables or disables all log output of the Loggers registered with this <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing scoped Loggers and global sink configuration.">LogManager</a>.  <br /></td></tr>
+<tr class="memitem:a82dbe075dd5b9afdb16272f9f9d67f4f" id="r_a82dbe075dd5b9afdb16272f9f9d67f4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a82dbe075dd5b9afdb16272f9f9d67f4f">setScopeFilter</a> (const std::string &amp;scope) noexcept</td></tr>
+<tr class="memdesc:a82dbe075dd5b9afdb16272f9f9d67f4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the filter scope for the logger.  <br /></td></tr>
+<tr class="memitem:a9317933e7764dbdbe6a918263fcc02d6" id="r_a9317933e7764dbdbe6a918263fcc02d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9317933e7764dbdbe6a918263fcc02d6">registerSink</a> (std::shared_ptr&lt; <a class="el" href="classhelios_1_1util_1_1log_1_1LogSink.html">LogSink</a> &gt; sink)</td></tr>
+<tr class="memdesc:a9317933e7764dbdbe6a918263fcc02d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a sink and enables it by default.  <br /></td></tr>
+<tr class="memitem:aa512b16af91784c9c588a379b304b596" id="r_aa512b16af91784c9c588a379b304b596"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa512b16af91784c9c588a379b304b596">registerSink</a> (std::shared_ptr&lt; <a class="el" href="classhelios_1_1util_1_1log_1_1LogSink.html">LogSink</a> &gt; sink, bool enabled)</td></tr>
+<tr class="memdesc:aa512b16af91784c9c588a379b304b596"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a sink with optional auto-enable.  <br /></td></tr>
+<tr class="memitem:a086cef17194c4df915de290181df412f" id="r_a086cef17194c4df915de290181df412f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a086cef17194c4df915de290181df412f">enableSink</a> (<a class="el" href="namespacehelios_1_1util_1_1log.html#a43ac66e3137c172ec852cd889ea1e1f5">SinkTypeId</a> typeId)</td></tr>
+<tr class="memdesc:a086cef17194c4df915de290181df412f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables a sink by its type identifier.  <br /></td></tr>
+<tr class="memitem:a22a17438bf79400830c333c0433470e9" id="r_a22a17438bf79400830c333c0433470e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a22a17438bf79400830c333c0433470e9">enableSink</a> (std::shared_ptr&lt; <a class="el" href="classhelios_1_1util_1_1log_1_1LogSink.html">LogSink</a> &gt; sink)</td></tr>
+<tr class="memdesc:a22a17438bf79400830c333c0433470e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables a sink, registering it first if necessary.  <br /></td></tr>
+<tr class="memitem:a4b99d193afa34434624f2c9d469cf481" id="r_a4b99d193afa34434624f2c9d469cf481"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4b99d193afa34434624f2c9d469cf481">disableSink</a> (<a class="el" href="namespacehelios_1_1util_1_1log.html#a43ac66e3137c172ec852cd889ea1e1f5">SinkTypeId</a> typeId)</td></tr>
+<tr class="memdesc:a4b99d193afa34434624f2c9d469cf481"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables a sink by its type identifier.  <br /></td></tr>
+<tr class="memitem:ae38829e7fe152b20d7d48ced16c34341" id="r_ae38829e7fe152b20d7d48ced16c34341"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae38829e7fe152b20d7d48ced16c34341">disableSink</a> (std::shared_ptr&lt; <a class="el" href="classhelios_1_1util_1_1log_1_1LogSink.html">LogSink</a> &gt; sink)</td></tr>
+<tr class="memdesc:ae38829e7fe152b20d7d48ced16c34341"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables a sink by instance.  <br /></td></tr>
+<tr class="memitem:a7258f734df723c69c23c6754c0617c70" id="r_a7258f734df723c69c23c6754c0617c70"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7258f734df723c69c23c6754c0617c70">isSinkEnabled</a> (<a class="el" href="namespacehelios_1_1util_1_1log.html#a43ac66e3137c172ec852cd889ea1e1f5">SinkTypeId</a> typeId) const noexcept</td></tr>
+<tr class="memdesc:a7258f734df723c69c23c6754c0617c70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a sink with the given type identifier is currently enabled.  <br /></td></tr>
+<tr class="memitem:ab28c446b9b8746425ec9e3cfa4ed8159" id="r_ab28c446b9b8746425ec9e3cfa4ed8159"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab28c446b9b8746425ec9e3cfa4ed8159">enableAllSinks</a> ()</td></tr>
+<tr class="memdesc:ab28c446b9b8746425ec9e3cfa4ed8159"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables all registered sinks.  <br /></td></tr>
+<tr class="memitem:a7fd1afc8a2049fee3212387976a748ed" id="r_a7fd1afc8a2049fee3212387976a748ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7fd1afc8a2049fee3212387976a748ed">disableAllSinks</a> ()</td></tr>
+<tr class="memdesc:a7fd1afc8a2049fee3212387976a748ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables all sinks.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a750d8fd5b3ee3678600644756b0631e7" id="r_a750d8fd5b3ee3678600644756b0631e7"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">Logger</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a750d8fd5b3ee3678600644756b0631e7">loggerForScope</a> (const std::string &amp;scope) noexcept</td></tr>
 <tr class="memdesc:a750d8fd5b3ee3678600644756b0631e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience accessor to obtain a logger for a textual scope via the singleton.  <br /></td></tr>
 <tr class="memitem:aeb3c579d6cd53e2ca50384ceadd5d3a6" id="r_aeb3c579d6cd53e2ca50384ceadd5d3a6"><td class="memItemLeft" align="right" valign="top">static LogManager &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb3c579d6cd53e2ca50384ceadd5d3a6">getInstance</a> () noexcept</td></tr>
-<tr class="memdesc:aeb3c579d6cd53e2ca50384ceadd5d3a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing various scoped Loggers.">LogManager</a> singleton instance.  <br /></td></tr>
+<tr class="memdesc:aeb3c579d6cd53e2ca50384ceadd5d3a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing scoped Loggers and global sink configuration.">LogManager</a> singleton instance.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing various scoped Loggers.">LogManager</a> for managing various scoped Loggers. </p>
-<p>A <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing various scoped Loggers.">LogManager</a> allows for globally suppressing all log output by calling <a class="el" href="#adab66fefed9700defd5199358f4f9874" title="Enables or disables all log output of the Loggers registered with this LogManager.">enableLogging()</a>. Logging is enabled by default. </p>
+<div class="textblock"><p><a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing scoped Loggers and global sink configuration.">LogManager</a> for managing scoped Loggers and global sink configuration. </p>
+<p>The <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing scoped Loggers and global sink configuration.">LogManager</a> provides centralized control over logging output destinations. Sinks register themselves with a unique type identifier, allowing dynamic enable/disable without compile-time knowledge of all sink types.</p>
+<p>```cpp // Register sinks (sinks define their own TYPE_ID) <a class="el" href="#aeb3c579d6cd53e2ca50384ceadd5d3a6" title="Returns the LogManager singleton instance.">LogManager::getInstance()</a>.registerSink(std::make_shared&lt;ConsoleSink&gt;()); <a class="el" href="#aeb3c579d6cd53e2ca50384ceadd5d3a6" title="Returns the LogManager singleton instance.">LogManager::getInstance()</a>.registerSink(std::make_shared&lt;ImGuiLogSink&gt;(widget));</p>
+<p>// Enable/disable by type identifier <a class="el" href="#aeb3c579d6cd53e2ca50384ceadd5d3a6" title="Returns the LogManager singleton instance.">LogManager::getInstance()</a>.enableSink("console"); <a class="el" href="#aeb3c579d6cd53e2ca50384ceadd5d3a6" title="Returns the LogManager singleton instance.">LogManager::getInstance()</a>.disableSink("imgui");</p>
+<p>// Check status if (<a class="el" href="#aeb3c579d6cd53e2ca50384ceadd5d3a6" title="Returns the LogManager singleton instance.">LogManager::getInstance()</a>.isSinkEnabled("console")) { ... } ``` </p>
 
-<p class="definition">Definition at line <a class="el" href="LogManager_8ixx_source.html#l00025">25</a> of file <a class="el" href="LogManager_8ixx_source.html">LogManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="LogManager_8ixx_source.html#l00042">42</a> of file <a class="el" href="LogManager_8ixx_source.html">LogManager.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a7ffda8e8a0051befb5ec47fd61c316c7" name="a7ffda8e8a0051befb5ec47fd61c316c7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7ffda8e8a0051befb5ec47fd61c316c7">&#9670;&#160;</a></span>~LogManager()</h2>
@@ -190,6 +213,182 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a7fd1afc8a2049fee3212387976a748ed" name="a7fd1afc8a2049fee3212387976a748ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fd1afc8a2049fee3212387976a748ed">&#9670;&#160;</a></span>disableAllSinks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::util::log::LogManager::disableAllSinks </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disables all sinks. </p>
+
+<p class="reference">References <a class="el" href="#a7fd1afc8a2049fee3212387976a748ed">disableAllSinks()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="#a7fd1afc8a2049fee3212387976a748ed">disableAllSinks()</a>.</p>
+<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_a7fd1afc8a2049fee3212387976a748ed_cgraph.svg" width="220" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_a7fd1afc8a2049fee3212387976a748ed_icgraph.svg" width="220" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a4b99d193afa34434624f2c9d469cf481" name="a4b99d193afa34434624f2c9d469cf481"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b99d193afa34434624f2c9d469cf481">&#9670;&#160;</a></span>disableSink() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::util::log::LogManager::disableSink </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1util_1_1log.html#a43ac66e3137c172ec852cd889ea1e1f5">SinkTypeId</a></td>          <td class="paramname"><span class="paramname"><em>typeId</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disables a sink by its type identifier. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">typeId</td><td>The unique type identifier of the sink. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">References <a class="el" href="#a4b99d193afa34434624f2c9d469cf481">disableSink()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="#a4b99d193afa34434624f2c9d469cf481">disableSink()</a>, and <a class="el" href="#ae38829e7fe152b20d7d48ced16c34341">disableSink()</a>.</p>
+<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_a4b99d193afa34434624f2c9d469cf481_cgraph.svg" width="196" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_a4b99d193afa34434624f2c9d469cf481_icgraph.svg" width="430" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ae38829e7fe152b20d7d48ced16c34341" name="ae38829e7fe152b20d7d48ced16c34341"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae38829e7fe152b20d7d48ced16c34341">&#9670;&#160;</a></span>disableSink() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::util::log::LogManager::disableSink </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classhelios_1_1util_1_1log_1_1LogSink.html">LogSink</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>sink</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disables a sink by instance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sink</td><td>The sink instance to disable. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">References <a class="el" href="#a4b99d193afa34434624f2c9d469cf481">disableSink()</a>.</p>
+<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_ae38829e7fe152b20d7d48ced16c34341_cgraph.svg" width="430" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ab28c446b9b8746425ec9e3cfa4ed8159" name="ab28c446b9b8746425ec9e3cfa4ed8159"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab28c446b9b8746425ec9e3cfa4ed8159">&#9670;&#160;</a></span>enableAllSinks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::util::log::LogManager::enableAllSinks </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enables all registered sinks. </p>
+
+<p class="reference">References <a class="el" href="#ab28c446b9b8746425ec9e3cfa4ed8159">enableAllSinks()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="#ab28c446b9b8746425ec9e3cfa4ed8159">enableAllSinks()</a>.</p>
+<div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_ab28c446b9b8746425ec9e3cfa4ed8159_cgraph.svg" width="218" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-6-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_ab28c446b9b8746425ec9e3cfa4ed8159_icgraph.svg" width="218" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
 <a id="adab66fefed9700defd5199358f4f9874" name="adab66fefed9700defd5199358f4f9874"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adab66fefed9700defd5199358f4f9874">&#9670;&#160;</a></span>enableLogging()</h2>
 
@@ -213,7 +412,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Enables or disables all log output of the Loggers registered with this <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing various scoped Loggers.">LogManager</a>. </p>
+<p>Enables or disables all log output of the Loggers registered with this <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing scoped Loggers and global sink configuration.">LogManager</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">enable</td><td>True to enable log output with the registered loggers, otherwise false. </td></tr>
@@ -224,17 +423,109 @@ Static Public Member Functions</h2></td></tr>
 <p class="reference">References <a class="el" href="#adab66fefed9700defd5199358f4f9874">enableLogging()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="#adab66fefed9700defd5199358f4f9874">enableLogging()</a>.</p>
-<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-7" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div id="dynsection-7-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_adab66fefed9700defd5199358f4f9874_cgraph.svg" width="216" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-8" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div id="dynsection-8-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_adab66fefed9700defd5199358f4f9874_icgraph.svg" width="216" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a086cef17194c4df915de290181df412f" name="a086cef17194c4df915de290181df412f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a086cef17194c4df915de290181df412f">&#9670;&#160;</a></span>enableSink() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::util::log::LogManager::enableSink </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1util_1_1log.html#a43ac66e3137c172ec852cd889ea1e1f5">SinkTypeId</a></td>          <td class="paramname"><span class="paramname"><em>typeId</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enables a sink by its type identifier. </p>
+<p>If a sink with the given typeId is registered, it will be enabled. If no sink with that typeId is registered, this call has no effect.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">typeId</td><td>The unique type identifier of the sink (e.g., "console", "imgui"). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">References <a class="el" href="#a086cef17194c4df915de290181df412f">enableSink()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="#a086cef17194c4df915de290181df412f">enableSink()</a>, and <a class="el" href="#a22a17438bf79400830c333c0433470e9">enableSink()</a>.</p>
+<div id="dynsection-9" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-9-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_a086cef17194c4df915de290181df412f_cgraph.svg" width="194" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div id="dynsection-10" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-10-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_a086cef17194c4df915de290181df412f_icgraph.svg" width="424" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a22a17438bf79400830c333c0433470e9" name="a22a17438bf79400830c333c0433470e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22a17438bf79400830c333c0433470e9">&#9670;&#160;</a></span>enableSink() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::util::log::LogManager::enableSink </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classhelios_1_1util_1_1log_1_1LogSink.html">LogSink</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>sink</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enables a sink, registering it first if necessary. </p>
+<p>If the sink is not yet registered, it will be added to the pool. The sink is then enabled for output.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sink</td><td>The sink instance to enable (and register if needed). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">References <a class="el" href="#a086cef17194c4df915de290181df412f">enableSink()</a>.</p>
+<div id="dynsection-11" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-11-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_a22a17438bf79400830c333c0433470e9_cgraph.svg" width="424" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -262,8 +553,58 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Returns the <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing various scoped Loggers.">LogManager</a> singleton instance. </p>
-<dl class="section return"><dt>Returns</dt><dd>Reference to the global <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing various scoped Loggers.">LogManager</a> instance. </dd></dl>
+<p>Returns the <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing scoped Loggers and global sink configuration.">LogManager</a> singleton instance. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the global <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing scoped Loggers and global sink configuration.">LogManager</a> instance. </dd></dl>
+
+</div>
+</div>
+<a id="a7258f734df723c69c23c6754c0617c70" name="a7258f734df723c69c23c6754c0617c70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7258f734df723c69c23c6754c0617c70">&#9670;&#160;</a></span>isSinkEnabled()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::util::log::LogManager::isSinkEnabled </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1util_1_1log.html#a43ac66e3137c172ec852cd889ea1e1f5">SinkTypeId</a></td>          <td class="paramname"><span class="paramname"><em>typeId</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if a sink with the given type identifier is currently enabled. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">typeId</td><td>The unique type identifier of the sink.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the sink is enabled. </dd></dl>
+
+<p class="reference">References <a class="el" href="#a7258f734df723c69c23c6754c0617c70">isSinkEnabled()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="#a7258f734df723c69c23c6754c0617c70">isSinkEnabled()</a>.</p>
+<div id="dynsection-12" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-12-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_a7258f734df723c69c23c6754c0617c70_cgraph.svg" width="212" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div id="dynsection-13" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-13-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_a7258f734df723c69c23c6754c0617c70_icgraph.svg" width="212" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>
@@ -290,22 +631,22 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Returns a const reference to the default logger managed with this <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing various scoped Loggers.">LogManager</a>. </p>
-<dl class="section return"><dt>Returns</dt><dd>The default <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html" title="Simple Logger implementation.">Logger</a> instance. </dd></dl>
+<p>Returns a const reference to the default logger managed with this <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing scoped Loggers and global sink configuration.">LogManager</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>The default <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html" title="Logger implementation with configurable output sinks.">Logger</a> instance. </dd></dl>
 
 <p class="reference">References <a class="el" href="#a9495818e6f7568653f36886d43aa75cf">logger()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="#a9495818e6f7568653f36886d43aa75cf">logger()</a>, and <a class="el" href="#a4b85719776951cd826d2fb3a4ab40e59">logger()</a>.</p>
-<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-14" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-14-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div id="dynsection-14-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_a9495818e6f7568653f36886d43aa75cf_cgraph.svg" width="162" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-15" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-15-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div id="dynsection-15-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_a9495818e6f7568653f36886d43aa75cf_icgraph.svg" width="360" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -345,10 +686,10 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>The logger registered with the scope, or the default logger if none was found. </dd></dl>
 
 <p class="reference">References <a class="el" href="#a9495818e6f7568653f36886d43aa75cf">logger()</a>.</p>
-<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-16" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-16-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div id="dynsection-16-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_a4b85719776951cd826d2fb3a4ab40e59_cgraph.svg" width="360" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -445,22 +786,168 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The logger registered with the scope, or the logger already registered with the <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing various scoped Loggers.">LogManager</a> under the given scope. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The logger registered with the scope, or the logger already registered with the <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html" title="LogManager for managing scoped Loggers and global sink configuration.">LogManager</a> under the given scope. </dd></dl>
 
 <p class="reference">References <a class="el" href="#ac04d603885ef13b734099c4c812e2eb9">registerLogger()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="#ac04d603885ef13b734099c4c812e2eb9">registerLogger()</a>.</p>
-<div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-17" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-17-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div id="dynsection-17-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_ac04d603885ef13b734099c4c812e2eb9_cgraph.svg" width="215" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-<div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-18" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-18-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-6-content" class="dyncontent" style="display:none;">
+<div id="dynsection-18-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_ac04d603885ef13b734099c4c812e2eb9_icgraph.svg" width="215" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a9317933e7764dbdbe6a918263fcc02d6" name="a9317933e7764dbdbe6a918263fcc02d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9317933e7764dbdbe6a918263fcc02d6">&#9670;&#160;</a></span>registerSink() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::util::log::LogManager::registerSink </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classhelios_1_1util_1_1log_1_1LogSink.html">LogSink</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>sink</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Registers a sink and enables it by default. </p>
+<p>The sink is added to the pool and immediately enabled for output.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sink</td><td>The sink to register. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">References <a class="el" href="#a9317933e7764dbdbe6a918263fcc02d6">registerSink()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="#a9317933e7764dbdbe6a918263fcc02d6">registerSink()</a>, and <a class="el" href="#aa512b16af91784c9c588a379b304b596">registerSink()</a>.</p>
+<div id="dynsection-19" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-19-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-19-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_a9317933e7764dbdbe6a918263fcc02d6_cgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div id="dynsection-20" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-20-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-20-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_a9317933e7764dbdbe6a918263fcc02d6_icgraph.svg" width="435" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="aa512b16af91784c9c588a379b304b596" name="aa512b16af91784c9c588a379b304b596"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa512b16af91784c9c588a379b304b596">&#9670;&#160;</a></span>registerSink() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::util::log::LogManager::registerSink </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classhelios_1_1util_1_1log_1_1LogSink.html">LogSink</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>sink</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>enabled</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Registers a sink with optional auto-enable. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sink</td><td>The sink to register. </td></tr>
+    <tr><td class="paramname">enabled</td><td>Whether to enable the sink immediately (default: true). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">References <a class="el" href="#a9317933e7764dbdbe6a918263fcc02d6">registerSink()</a>.</p>
+<div id="dynsection-21" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-21-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-21-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_aa512b16af91784c9c588a379b304b596_cgraph.svg" width="435" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a82dbe075dd5b9afdb16272f9f9d67f4f" name="a82dbe075dd5b9afdb16272f9f9d67f4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82dbe075dd5b9afdb16272f9f9d67f4f">&#9670;&#160;</a></span>setScopeFilter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::util::log::LogManager::setScopeFilter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>scope</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the filter scope for the logger. </p>
+<p>Will do nothing if logging is not enabled. If the logger for the scope does not exist, it will get implicitly created.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">scope</td><td>The scope to filter. Only log messages with this scope will be logged. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">References <a class="el" href="#a82dbe075dd5b9afdb16272f9f9d67f4f">setScopeFilter()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="#a82dbe075dd5b9afdb16272f9f9d67f4f">setScopeFilter()</a>.</p>
+<div id="dynsection-22" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-22-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-22-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_a82dbe075dd5b9afdb16272f9f9d67f4f_cgraph.svg" width="214" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div id="dynsection-23" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-23-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-23-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1util_1_1log_1_1LogManager_a82dbe075dd5b9afdb16272f9f9d67f4f_icgraph.svg" width="214" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>

@@ -4,7 +4,19 @@
     <compoundname>_module.ixx</compoundname>
     <includes refid="LogManager_8ixx" local="no">helios.util.log.LogManager</includes>
     <includes refid="Logger_8ixx" local="no">helios.util.log.Logger</includes>
+    <includes refid="ConsoleSink_8ixx" local="no">helios.util.log.ConsoleSink</includes>
+    <includes refid="LogSink_8ixx" local="no">helios.util.log.LogSink</includes>
     <incdepgraph>
+      <node id="12">
+        <label>helios.util.log.ConsoleSink</label>
+        <link refid="ConsoleSink_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
       <node id="2">
         <label>helios.util.log.LogManager</label>
         <link refid="LogManager_8ixx"/>
@@ -18,13 +30,33 @@
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
-      </node>
-      <node id="7">
-        <label>helios.util.log.Logger</label>
-        <link refid="Logger_8ixx"/>
         <childnode refid="8" relation="include">
         </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>helios.util.log.LogSink</label>
+        <link refid="LogSink_8ixx"/>
         <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>helios.util.log.Logger</label>
+        <link refid="Logger_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -32,16 +64,20 @@
         <link refid="helios_2util_2log_2__module_8ixx"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="7" relation="include">
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
         </childnode>
       </node>
-      <node id="8">
+      <node id="10">
         <label>iostream</label>
       </node>
-      <node id="5">
+      <node id="6">
         <label>memory</label>
       </node>
-      <node id="6">
+      <node id="7">
         <label>mutex</label>
       </node>
       <node id="3">
@@ -49,6 +85,12 @@
       </node>
       <node id="4">
         <label>unordered_map</label>
+      </node>
+      <node id="5">
+        <label>unordered_set</label>
+      </node>
+      <node id="8">
+        <label>vector</label>
       </node>
     </incdepgraph>
     <briefdescription>
@@ -65,13 +107,15 @@
 <codeline lineno="6"><highlight class="comment">/**</highlight></codeline>
 <codeline lineno="7"><highlight class="comment"><sp/>*<sp/>@brief<sp/>Logging<sp/>system<sp/>for<sp/>debugging<sp/>and<sp/>diagnostics.</highlight></codeline>
 <codeline lineno="8"><highlight class="comment"><sp/>*</highlight></codeline>
-<codeline lineno="9"><highlight class="comment"><sp/>*<sp/>@details<sp/>This<sp/>module<sp/>provides<sp/>logging<sp/>functionality<sp/>including<sp/>logger<sp/>instances</highlight></codeline>
-<codeline lineno="10"><highlight class="comment"><sp/>*<sp/>and<sp/>log<sp/>management<sp/>for<sp/>debugging,<sp/>diagnostics,<sp/>and<sp/>runtime<sp/>information<sp/>output.</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/>@details<sp/>This<sp/>module<sp/>provides<sp/>logging<sp/>functionality<sp/>including<sp/>logger<sp/>instances,</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/>log<sp/>management,<sp/>and<sp/>configurable<sp/>output<sp/>sinks<sp/>for<sp/>flexible<sp/>log<sp/>destinations.</highlight></codeline>
 <codeline lineno="11"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8util_8log" kindref="compound">helios.util.log</ref>;</highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8util_8log_8Logger" kindref="compound">helios.util.log.Logger</ref>;</highlight></codeline>
-<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8util_8log_8LogManager" kindref="compound">helios.util.log.LogManager</ref>;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8util_8log_8LogSink" kindref="compound">helios.util.log.LogSink</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8util_8log_8ConsoleSink" kindref="compound">helios.util.log.ConsoleSink</ref>;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8util_8log_8Logger" kindref="compound">helios.util.log.Logger</ref>;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8util_8log_8LogManager" kindref="compound">helios.util.log.LogManager</ref>;</highlight></codeline>
     </programlisting>
     <location file="include/helios/util/log/_module.ixx"/>
   </compounddef>

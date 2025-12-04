@@ -19,6 +19,7 @@ var module__helios_8scene_8SceneNode =
     [ "helios::scene::SceneNode::rotate", "module__helios_8scene_8SceneNode.html#a93c13a4891599eeaf09fd47ae25439b9", null ],
     [ "helios::scene::SceneNode::translate", "module__helios_8scene_8SceneNode.html#a63bdfe0a081a96112036b8e7d226fd09", null ],
     [ "helios::scene::SceneNode::localTransform", "module__helios_8scene_8SceneNode.html#a52ac30adf28408c010626d9236c78828", null ],
+    [ "helios::scene::SceneNode::localTransform", "module__helios_8scene_8SceneNode.html#a3f28e5b3a6b7fe4c1af4e5770ad42227", null ],
     [ "helios::scene::SceneNode::parent", "module__helios_8scene_8SceneNode.html#a4e31b52717a76a9bae9a80a1db0b808b", null ],
     [ "helios::scene::SceneNode::setWorldTransform", "module__helios_8scene_8SceneNode.html#a1dbd995b4aace249c6786588e3279ae3", null ],
     [ "helios::scene::SceneNode::worldTransform", "module__helios_8scene_8SceneNode.html#a2cd5ee14fdf4990952266c724c916551", null ],

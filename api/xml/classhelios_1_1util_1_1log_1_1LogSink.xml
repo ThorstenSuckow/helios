@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1util_1_1log_1_1LogSink" kind="interface" language="C++" prot="public" abstract="yes">
+    <compoundname>helios::util::log::LogSink</compoundname>
+    <derivedcompoundref refid="classhelios_1_1ext_1_1imgui_1_1ImGuiLogSink" prot="public" virt="non-virtual">helios::ext::imgui::ImGuiLogSink</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1util_1_1log_1_1ConsoleSink" prot="public" virt="non-virtual">helios::util::log::ConsoleSink</derivedcompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogSink_1a39f4e582485afa9783a710e7a846365c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::util::log::LogSink::~LogSink</definition>
+        <argsstring>()=default</argsstring>
+        <name>~LogSink</name>
+        <qualifiedname>helios::util::log::LogSink::~LogSink</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogSink.ixx" line="57" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogSink_1a1eac0bfe8af64547c7f6f2fb9d815b17" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type><ref refid="namespacehelios_1_1util_1_1log_1a43ac66e3137c172ec852cd889ea1e1f5" kindref="member">SinkTypeId</ref></type>
+        <definition>virtual SinkTypeId helios::util::log::LogSink::typeId</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>typeId</name>
+        <qualifiedname>helios::util::log::LogSink::typeId</qualifiedname>
+        <reimplementedby refid="classhelios_1_1ext_1_1imgui_1_1ImGuiLogSink_1ab80c1cfe5b99ab3a1d0b4a811995e912">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1util_1_1log_1_1ConsoleSink_1a8ff58267b554bfb4edc32d0e22804485">typeId</reimplementedby>
+        <briefdescription>
+<para>Returns the unique type identifier for this sink. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Each sink implementation should define a static constexpr identifier and return it here. Used by <ref refid="classhelios_1_1util_1_1log_1_1LogManager" kindref="compound">LogManager</ref> to match sinks for enable/disable.</para>
+<para><simplesect kind="return"><para>A string identifier unique to this sink type (e.g., &quot;console&quot;, &quot;file&quot;). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogSink.ixx" line="67" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogSink_1aa8a9b93a650cd8111fa5a5358d2c2376" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void helios::util::log::LogSink::write</definition>
+        <argsstring>(LogLevel level, const std::string &amp;scope, const std::string &amp;message)=0</argsstring>
+        <name>write</name>
+        <qualifiedname>helios::util::log::LogSink::write</qualifiedname>
+        <reimplementedby refid="classhelios_1_1ext_1_1imgui_1_1ImGuiLogSink_1a0663fb73924649cfef1c7b65b95e7cae">write</reimplementedby>
+        <reimplementedby refid="classhelios_1_1util_1_1log_1_1ConsoleSink_1a2d8eea47e4fdc9fd758e988ed4f3dbb7">write</reimplementedby>
+        <param>
+          <type><ref refid="namespacehelios_1_1util_1_1log_1abf3ebdbff56ed4467148bf540b1b328c" kindref="member">LogLevel</ref></type>
+          <declname>level</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>scope</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>message</declname>
+        </param>
+        <briefdescription>
+<para>Writes a log message to this sink. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The severity level of the message. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>scope</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The source scope/module name. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>message</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The log message text. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogSink.ixx" line="76" column="22"/>
+        <references refid="classhelios_1_1util_1_1log_1_1LogSink_1aa8a9b93a650cd8111fa5a5358d2c2376">write</references>
+        <referencedby refid="classhelios_1_1util_1_1log_1_1LogSink_1aa8a9b93a650cd8111fa5a5358d2c2376">write</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1util_1_1log_1_1LogSink_1a63612d9abf81ff9610a1b3bccccc1af5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void helios::util::log::LogSink::flush</definition>
+        <argsstring>()</argsstring>
+        <name>flush</name>
+        <qualifiedname>helios::util::log::LogSink::flush</qualifiedname>
+        <reimplementedby refid="classhelios_1_1util_1_1log_1_1ConsoleSink_1aef7ce8eb3e08ae3302986a506610b4d5">flush</reimplementedby>
+        <briefdescription>
+<para>Flushes any buffered output (optional). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Default implementation does nothing. Override for sinks that buffer. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/log/LogSink.ixx" line="83" column="22" bodyfile="include/helios/util/log/LogSink.ixx" bodystart="83" bodyend="83"/>
+        <references refid="classhelios_1_1util_1_1log_1_1LogSink_1a63612d9abf81ff9610a1b3bccccc1af5" compoundref="LogSink_8ixx" startline="83" endline="83">flush</references>
+        <referencedby refid="classhelios_1_1util_1_1log_1_1LogSink_1a63612d9abf81ff9610a1b3bccccc1af5" compoundref="LogSink_8ixx" startline="83" endline="83">flush</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Abstract sink interface for log message output. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classhelios_1_1util_1_1log_1_1LogSink" kindref="compound">LogSink</ref> defines the contract for log output destinations. Implementations can write to console, files, ImGui widgets, network sockets, or any other target. Multiple sinks can be attached to a <ref refid="classhelios_1_1util_1_1log_1_1Logger" kindref="compound">Logger</ref> for simultaneous output to different destinations.</para>
+<para>Each sink must provide a unique type identifier via `typeId()`. This allows the <ref refid="classhelios_1_1util_1_1log_1_1LogManager" kindref="compound">LogManager</ref> to selectively enable or disable sinks at runtime without requiring a central registry of all possible sink types. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::ext::imgui::ImGuiLogSink</label>
+        <link refid="classhelios_1_1ext_1_1imgui_1_1ImGuiLogSink"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::util::log::ConsoleSink</label>
+        <link refid="classhelios_1_1util_1_1log_1_1ConsoleSink"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>helios::util::log::LogSink</label>
+        <link refid="classhelios_1_1util_1_1log_1_1LogSink"/>
+      </node>
+    </inheritancegraph>
+    <location file="include/helios/util/log/LogSink.ixx" line="54" column="5" bodyfile="include/helios/util/log/LogSink.ixx" bodystart="54" bodyend="84"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1util_1_1log_1_1LogSink_1a63612d9abf81ff9610a1b3bccccc1af5" prot="public" virt="virtual"><scope>helios::util::log::LogSink</scope><name>flush</name></member>
+      <member refid="classhelios_1_1util_1_1log_1_1LogSink_1a1eac0bfe8af64547c7f6f2fb9d815b17" prot="public" virt="pure-virtual"><scope>helios::util::log::LogSink</scope><name>typeId</name></member>
+      <member refid="classhelios_1_1util_1_1log_1_1LogSink_1aa8a9b93a650cd8111fa5a5358d2c2376" prot="public" virt="pure-virtual"><scope>helios::util::log::LogSink</scope><name>write</name></member>
+      <member refid="classhelios_1_1util_1_1log_1_1LogSink_1a39f4e582485afa9783a710e7a846365c" prot="public" virt="virtual"><scope>helios::util::log::LogSink</scope><name>~LogSink</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

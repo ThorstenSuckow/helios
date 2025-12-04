@@ -131,11 +131,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ac837ddcfaba7cd27e9b173bfed09d83e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current scale component of this <a class="el" href="classhelios_1_1scene_1_1Transform.html" title="Represents a 3D transformation consisting of translation, rotation and scale.">Transform</a> object.  <br /></td></tr>
 <tr class="memitem:ac2945dc0948c0d433641ce3606c2d907" id="r_ac2945dc0948c0d433641ce3606c2d907"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac2945dc0948c0d433641ce3606c2d907">transform</a> () const noexcept</td></tr>
 <tr class="memdesc:ac2945dc0948c0d433641ce3606c2d907"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the 4x4 transformation matrix combined from scale, rotation, and translation.  <br /></td></tr>
+<tr class="memitem:af38969c80c6fcc700ffb70e839048755" id="r_af38969c80c6fcc700ffb70e839048755"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af38969c80c6fcc700ffb70e839048755">needsUpdate</a> () const noexcept</td></tr>
+<tr class="memdesc:af38969c80c6fcc700ffb70e839048755"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether this <a class="el" href="classhelios_1_1scene_1_1Transform.html" title="Represents a 3D transformation consisting of translation, rotation and scale.">Transform</a> needs to be updated, e.g. because the various components changed.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a 3D transformation consisting of translation, rotation and scale. </p>
 <p>This class encapsulates the components of a local transform for SceneNodes. It uses lazy evaluation to compute the final transform. The current scale, translation and rotation is queryable. Changing the transformation is always considered against an "origin" of an object, that is, a 4x4 identity matrix</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000026">Todo</a></b></dt><dd>use quaternions for rotation </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000029">Todo</a></b></dt><dd>use quaternions for rotation </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="Transform_8ixx_source.html#l00029">29</a> of file <a class="el" href="Transform_8ixx_source.html">Transform.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -244,6 +246,50 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="af38969c80c6fcc700ffb70e839048755" name="af38969c80c6fcc700ffb70e839048755"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af38969c80c6fcc700ffb70e839048755">&#9670;&#160;</a></span>needsUpdate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool helios::scene::Transform::needsUpdate </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks whether this <a class="el" href="classhelios_1_1scene_1_1Transform.html" title="Represents a 3D transformation consisting of translation, rotation and scale.">Transform</a> needs to be updated, e.g. because the various components changed. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if this <a class="el" href="classhelios_1_1scene_1_1Transform.html" title="Represents a 3D transformation consisting of translation, rotation and scale.">Transform</a> is considered to be dirty, otherwise false. </dd></dl>
+
+<p class="reference">References <a class="el" href="#af38969c80c6fcc700ffb70e839048755">needsUpdate()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="#af38969c80c6fcc700ffb70e839048755">needsUpdate()</a>.</p>
+<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Transform_af38969c80c6fcc700ffb70e839048755_cgraph.svg" width="191" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Transform_af38969c80c6fcc700ffb70e839048755_icgraph.svg" width="191" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
 <a id="a6dd52a20b3d976923e04bf0f7123e470" name="a6dd52a20b3d976923e04bf0f7123e470"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6dd52a20b3d976923e04bf0f7123e470">&#9670;&#160;</a></span>rotate()</h2>
 
@@ -276,10 +322,10 @@ Public Member Functions</h2></td></tr>
 </dl>
 
 <p class="reference">References <a class="el" href="#a18f1e87932c12354b1b15498b7cec16b">rotation()</a>.</p>
-<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Transform_a6dd52a20b3d976923e04bf0f7123e470_cgraph.svg" width="419" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -312,10 +358,10 @@ Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>The current 4x4 rotation matrix. </dd></dl>
 
 <p class="reference">Referenced by <a class="el" href="#a6dd52a20b3d976923e04bf0f7123e470">rotate()</a>, and <a class="el" href="#af14dea88b4f4ecc0a2f524e782dc0aaf">Transform()</a>.</p>
-<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Transform_a18f1e87932c12354b1b15498b7cec16b_icgraph.svg" width="419" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -355,16 +401,16 @@ Public Member Functions</h2></td></tr>
 <p class="reference">References <a class="el" href="#ae559395636b998f7063e7110c3f38c6a">scale()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="#ae559395636b998f7063e7110c3f38c6a">scale()</a>, and <a class="el" href="#af14dea88b4f4ecc0a2f524e782dc0aaf">Transform()</a>.</p>
-<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Transform_ae559395636b998f7063e7110c3f38c6a_cgraph.svg" width="191" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div id="dynsection-6-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Transform_ae559395636b998f7063e7110c3f38c6a_icgraph.svg" width="419" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -399,16 +445,16 @@ Public Member Functions</h2></td></tr>
 <p class="reference">References <a class="el" href="#ac837ddcfaba7cd27e9b173bfed09d83e">scaling()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="#ac837ddcfaba7cd27e9b173bfed09d83e">scaling()</a>.</p>
-<div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-7" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div id="dynsection-7-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Transform_ac837ddcfaba7cd27e9b173bfed09d83e_cgraph.svg" width="191" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-<div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-8" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-6-content" class="dyncontent" style="display:none;">
+<div id="dynsection-8-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Transform_ac837ddcfaba7cd27e9b173bfed09d83e_icgraph.svg" width="191" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -443,16 +489,16 @@ Public Member Functions</h2></td></tr>
 <p class="reference">References <a class="el" href="#ac2945dc0948c0d433641ce3606c2d907">transform()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="#ac2945dc0948c0d433641ce3606c2d907">transform()</a>.</p>
-<div id="dynsection-7" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-9" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-7-content" class="dyncontent" style="display:none;">
+<div id="dynsection-9-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Transform_ac2945dc0948c0d433641ce3606c2d907_cgraph.svg" width="191" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-<div id="dynsection-8" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-10" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-8-content" class="dyncontent" style="display:none;">
+<div id="dynsection-10-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Transform_ac2945dc0948c0d433641ce3606c2d907_icgraph.svg" width="191" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -490,10 +536,10 @@ Public Member Functions</h2></td></tr>
 </dl>
 
 <p class="reference">References <a class="el" href="#ade553e701cbae015794510224114c2fd">translation()</a>.</p>
-<div id="dynsection-9" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-11" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-9-content" class="dyncontent" style="display:none;">
+<div id="dynsection-11-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Transform_a545f2340ea52c0a63acd40192a10df19_cgraph.svg" width="419" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -528,16 +574,16 @@ Public Member Functions</h2></td></tr>
 <p class="reference">References <a class="el" href="#ade553e701cbae015794510224114c2fd">translation()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="#af14dea88b4f4ecc0a2f524e782dc0aaf">Transform()</a>, <a class="el" href="#a545f2340ea52c0a63acd40192a10df19">translate()</a>, and <a class="el" href="#ade553e701cbae015794510224114c2fd">translation()</a>.</p>
-<div id="dynsection-10" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-12" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-10-content" class="dyncontent" style="display:none;">
+<div id="dynsection-12-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Transform_ade553e701cbae015794510224114c2fd_cgraph.svg" width="191" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-<div id="dynsection-11" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-13" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-11-content" class="dyncontent" style="display:none;">
+<div id="dynsection-13-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1Transform_ade553e701cbae015794510224114c2fd_icgraph.svg" width="419" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 

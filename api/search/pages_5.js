@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['backend_0',['Backend',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md31',1,'Creating a New Backend'],['../index.html#autotoc_md104',1,'Custom Rendering Backend']]]
+  ['6_20imgui_20debug_20overlay_0',['6. ImGui Debug Overlay',['../index.html#autotoc_md103',1,'']]]
 ];

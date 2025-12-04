@@ -186,6 +186,11 @@ async function main() {
       dest: path.join(websiteRoot, 'docs', 'examples', 'gamepad-input.md'),
       meta: { title: 'Game Controller Input', description: 'Tutorial: Handling gamepad/controller input in helios - buttons, analog sticks, and triggers.', slug: '/examples/gamepad-input', tags: ['examples', 'input', 'tutorial'], keywords: ['helios', 'gamepad', 'controller', 'input', 'tutorial'], sidebar_label: 'Gamepad Input' }
     },
+    {
+      src: path.join(repoRoot, 'examples', 'spaceship_control', 'README.md'),
+      dest: path.join(websiteRoot, 'docs', 'examples', 'spaceship-control.md'),
+      meta: { title: 'Spaceship Control', description: 'Example: Complete game loop with input handling, logging, and ImGui debug overlay.', slug: '/examples/spaceship-control', tags: ['examples', 'input', 'imgui', 'logging', 'game-loop'], keywords: ['helios', 'gamepad', 'keyboard', 'ImGui', 'logging', 'debug overlay'], sidebar_label: 'Spaceship Control' }
+    },
   ];
 
   console.log('[sync-docs] Synchronizing repository documentation...');

@@ -45,6 +45,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'examples/simple-cube',
         'examples/gamepad-input',
+        'examples/spaceship-control',
       ],
     },
     'testing',

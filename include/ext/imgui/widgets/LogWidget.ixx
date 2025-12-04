@@ -410,7 +410,8 @@ export namespace helios::ext::imgui::widgets {
         void draw() override {
             ImGui::SetNextWindowSize(ImVec2(600, 400), ImGuiCond_FirstUseEver);
 
-            if (ImGui::Begin("Log Console", nullptr, ImGuiWindowFlags_NoCollapse)) {
+            // Window is dockable by default when ImGuiConfigFlags_DockingEnable is set
+            if (ImGui::Begin("Log Console", nullptr)) {
 
                 // Toolbar row
                 if (ImGui::Button("Clear")) {

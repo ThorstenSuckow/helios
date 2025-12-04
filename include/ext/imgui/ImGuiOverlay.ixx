@@ -55,6 +55,11 @@ export namespace helios::ext::imgui {
         ImGuiBackend* backend_;
 
         /**
+         * @brief Whether to enable a full-viewport DockSpace for docking widgets.
+         */
+        bool enableDockSpace_ = true;
+
+        /**
          * @brief Constructs an ImGuiOverlay instance with a specified backend.
          *
          * This constructor initializes the overlay with the provided ImGui backend.
@@ -97,13 +102,31 @@ export namespace helios::ext::imgui {
         }
 
         /**
+         * @brief Enables or disables the full-viewport DockSpace.
+         *
+         * When enabled, widgets can be docked to the edges of the main viewport.
+         *
+         * @param enabled True to enable docking, false to disable.
+         */
+        void setDockSpaceEnabled(bool enabled) noexcept {
+            enableDockSpace_ = enabled;
+        }
+
+        /**
          * @brief Renders all registered widgets using the backend.
          *
-         * Calls `newFrame()` on the backend, invokes `draw()` on each widget,
-         * then finalizes rendering via `ImGui::Render()` and `renderDrawData()`.
+         * Calls `newFrame()` on the backend, optionally creates a DockSpace,
+         * invokes `draw()` on each widget, then finalizes rendering via
+         * `ImGui::Render()` and `renderDrawData()`.
          */
         void render() {
             backend_->newFrame();
+
+            // Create a full-viewport DockSpace so widgets can be docked to window edges
+            if (enableDockSpace_) {
+                ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport(),
+                                              ImGuiDockNodeFlags_PassthruCentralNode);
+            }
 
             for (const auto it : widgets_) {
                 it->draw();

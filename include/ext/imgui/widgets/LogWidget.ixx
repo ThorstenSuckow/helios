@@ -6,6 +6,7 @@ module;
 
 #include <string>
 #include <vector>
+#include <unordered_map>
 #include <mutex>
 #include <cstdint>
 #include <chrono>
@@ -60,12 +61,12 @@ export namespace helios::ext::imgui::widgets {
      * @class LogWidget
      * @brief Debug widget for displaying log output in a scrollable ImGui panel.
      *
-     * This widget maintains an internal buffer of log messages and renders them
+     * This widget maintains separate buffers for each log scope and renders them
      * in a scrollable text area. It supports filtering by log level, clearing
      * the buffer, and auto-scrolling to the latest messages.
      *
-     * Log messages can be added programmatically via `addLog()` or by using the
-     * convenience methods `debug()`, `info()`, `warn()`, and `error()`.
+     * Each scope has its own buffer with a maximum of 1000 entries, allowing
+     * efficient scope-based filtering without losing messages from other scopes.
      *
      * @note This widget uses internal locking for adding log entries from multiple threads.
      */
@@ -73,17 +74,24 @@ export namespace helios::ext::imgui::widgets {
 
     private:
         /**
-         * @brief Internal buffer storing log entries.
+         * @brief Key for the "all scopes" combined view.
          */
-        std::vector<LogEntry> logBuffer_;
+        static constexpr const char* ALL_SCOPES_KEY = "__all__";
 
         /**
-         * @brief Maximum number of entries to retain in the buffer.
+         * @brief Per-scope log buffers. Key is scope name, value is entry vector.
+         *
+         * Special key "__all__" contains all entries (for "All Scopes" view).
+         */
+        std::unordered_map<std::string, std::vector<LogEntry>> scopeBuffers_;
+
+        /**
+         * @brief Maximum number of entries to retain per scope buffer.
          */
         std::size_t maxEntries_ = 1000;
 
         /**
-         * @brief Mutex for thread-safe access to the log buffer.
+         * @brief Mutex for thread-safe access to the log buffers.
          */
         mutable std::mutex bufferMutex_;
 
@@ -104,18 +112,11 @@ export namespace helios::ext::imgui::widgets {
 
         /**
          * @brief Whether new entries are currently accepted into the buffer.
-         *
-         * When AutoScroll is disabled and the user is not at the bottom,
-         * this value is set to false. New log entries are then discarded
-         * until the user scrolls back to the bottom or AutoScroll is
-         * enabled again.
          */
         std::atomic<bool> acceptNewEntries_{true};
 
         /**
          * @brief Counts how many log entries were skipped while logging was paused.
-         *
-         * Informational only – displayed in the footer while logging is paused.
          */
         std::atomic<std::size_t> skippedEntries_{0};
 
@@ -167,6 +168,37 @@ export namespace helios::ext::imgui::widgets {
                 if (existing == scope) return;
             }
             collectedScopes_.push_back(scope);
+        }
+
+        /**
+         * @brief Adds an entry to a specific buffer, trimming if necessary.
+         */
+        void addToBuffer(std::vector<LogEntry>& buffer, LogEntry entry) {
+            buffer.push_back(std::move(entry));
+            if (maxEntries_ > 0 && buffer.size() > maxEntries_) {
+                const std::size_t overflow = buffer.size() - maxEntries_;
+                buffer.erase(buffer.begin(),
+                             buffer.begin() + static_cast<std::ptrdiff_t>(overflow));
+            }
+        }
+
+        /**
+         * @brief Returns the currently active buffer based on scope selection.
+         */
+        [[nodiscard]] const std::vector<LogEntry>& activeBuffer() const {
+            if (activeScopeFilter_.empty()) {
+                auto it = scopeBuffers_.find(ALL_SCOPES_KEY);
+                if (it != scopeBuffers_.end()) {
+                    return it->second;
+                }
+            } else {
+                auto it = scopeBuffers_.find(activeScopeFilter_);
+                if (it != scopeBuffers_.end()) {
+                    return it->second;
+                }
+            }
+            static const std::vector<LogEntry> empty;
+            return empty;
         }
 
         /**
@@ -231,19 +263,9 @@ export namespace helios::ext::imgui::widgets {
         ~LogWidget() override = default;
 
         /**
-         * @brief Adds a log entry to the buffer.
+         * @brief Adds a log entry to the appropriate scope buffer(s).
          *
-         * Thread-safe.
-         *
-         * Behavior:
-         * - If `acceptNewEntries_ == false`, the entry is discarded and
-         *   `skippedEntries_` is incremented.
-         * - If `acceptNewEntries_ == true`, the entry is appended and, if
-         *   `maxEntries_` is exceeded, old entries at the beginning are trimmed.
-         *
-         * @param level   The severity level of the log message.
-         * @param scope   The source scope or module name.
-         * @param message The log message text.
+         * Thread-safe. Adds to both the scope-specific buffer and the "all" buffer.
          */
         void addLog(LogLevel level, const std::string& scope, const std::string& message) {
             // If user scrolls up and AutoScroll is off, we do not accept new entries
@@ -264,14 +286,11 @@ export namespace helios::ext::imgui::widgets {
             entry.message   = message;
             entry.timestamp = currentTimestamp();
 
-            logBuffer_.push_back(std::move(entry));
+            // Add to scope-specific buffer
+            addToBuffer(scopeBuffers_[scope], entry);
 
-            // Trim buffer if exceeding max size
-            if (maxEntries_ > 0 && logBuffer_.size() > maxEntries_) {
-                const std::size_t overflow = logBuffer_.size() - maxEntries_;
-                logBuffer_.erase(logBuffer_.begin(),
-                                 logBuffer_.begin() + static_cast<std::ptrdiff_t>(overflow));
-            }
+            // Add to "all scopes" buffer
+            addToBuffer(scopeBuffers_[ALL_SCOPES_KEY], entry);
 
             // Always signal new content - scroll decision happens in draw()
             scrollToBottom_ = true;
@@ -318,26 +337,29 @@ export namespace helios::ext::imgui::widgets {
         }
 
         /**
-         * @brief Clears all log entries from the buffer.
+         * @brief Clears all log entries from all buffers.
          */
         void clear() noexcept {
             std::lock_guard<std::mutex> lock(bufferMutex_);
-            logBuffer_.clear();
+            scopeBuffers_.clear();
             skippedEntries_.store(0, std::memory_order_relaxed);
         }
 
         /**
-         * @brief Sets the maximum number of entries to retain.
+         * @brief Sets the maximum number of entries to retain per scope.
          *
          * @param max The maximum buffer size.
          */
         void setMaxEntries(std::size_t max) noexcept {
             std::lock_guard<std::mutex> lock(bufferMutex_);
             maxEntries_ = max;
-            if (maxEntries_ > 0 && logBuffer_.size() > maxEntries_) {
-                const std::size_t overflow = logBuffer_.size() - maxEntries_;
-                logBuffer_.erase(logBuffer_.begin(),
-                                 logBuffer_.begin() + static_cast<std::ptrdiff_t>(overflow));
+            // Trim all existing buffers
+            for (auto& [scope, buffer] : scopeBuffers_) {
+                if (maxEntries_ > 0 && buffer.size() > maxEntries_) {
+                    const std::size_t overflow = buffer.size() - maxEntries_;
+                    buffer.erase(buffer.begin(),
+                                 buffer.begin() + static_cast<std::ptrdiff_t>(overflow));
+                }
             }
         }
 
@@ -373,13 +395,13 @@ export namespace helios::ext::imgui::widgets {
         }
 
         /**
-         * @brief Returns the current number of log entries in the buffer.
+         * @brief Returns the current number of log entries in the active buffer.
          *
          * @return The number of entries currently stored.
          */
         [[nodiscard]] std::size_t entryCount() const noexcept {
             std::lock_guard<std::mutex> lock(bufferMutex_);
-            return logBuffer_.size();
+            return activeBuffer().size();
         }
 
         /**
@@ -390,7 +412,7 @@ export namespace helios::ext::imgui::widgets {
 
             if (ImGui::Begin("Log Console", nullptr, ImGuiWindowFlags_NoCollapse)) {
 
-                // Toolbar row 1
+                // Toolbar row
                 if (ImGui::Button("Clear")) {
                     clear();
                 }
@@ -411,7 +433,6 @@ export namespace helios::ext::imgui::widgets {
                 {
                     std::lock_guard<std::mutex> lock(bufferMutex_);
 
-                    // Build scope items list: "All" + collected scopes
                     std::string scopePreview = (selectedScopeIndex_ == 0)
                         ? "All Scopes"
                         : (selectedScopeIndex_ <= static_cast<int>(collectedScopes_.size())
@@ -420,7 +441,6 @@ export namespace helios::ext::imgui::widgets {
 
                     ImGui::SetNextItemWidth(150);
                     if (ImGui::BeginCombo("Scope", scopePreview.c_str())) {
-                        // "All" option
                         bool isSelected = (selectedScopeIndex_ == 0);
                         if (ImGui::Selectable("All Scopes", isSelected)) {
                             selectedScopeIndex_ = 0;
@@ -433,7 +453,6 @@ export namespace helios::ext::imgui::widgets {
                             ImGui::SetItemDefaultFocus();
                         }
 
-                        // Individual scopes
                         for (std::size_t i = 0; i < collectedScopes_.size(); ++i) {
                             isSelected = (selectedScopeIndex_ == static_cast<int>(i + 1));
                             if (ImGui::Selectable(collectedScopes_[i].c_str(), isSelected)) {
@@ -452,52 +471,25 @@ export namespace helios::ext::imgui::widgets {
                 }
                 ImGui::SameLine();
 
-                // Text filter
                 textFilter_.Draw("Filter", 150);
 
                 ImGui::Separator();
 
-                // Log area with scrollable child region
+                // Log area
                 const float footerHeight =
                     ImGui::GetStyle().ItemSpacing.y + ImGui::GetFrameHeightWithSpacing();
                 if (ImGui::BeginChild("LogScrollRegion", ImVec2(0, -footerHeight),
                                        ImGuiChildFlags_Borders,
                                        ImGuiWindowFlags_HorizontalScrollbar)) {
 
-                    // Read scroll position
-                    float scrollY    = ImGui::GetScrollY();
-                    float scrollMaxY = ImGui::GetScrollMaxY();
-                    bool  atBottomNow =
-                        (scrollMaxY <= 0.0f) || (scrollY >= scrollMaxY - 5.0f);
-
-                    // Pause logging if:
-                    // - AutoScroll is off AND user has not scrolled to lower bottom
-                    bool pauseLogging = (!autoScroll_ && !atBottomNow);
-                    acceptNewEntries_.store(!pauseLogging, std::memory_order_relaxed);
-
-                    // Remember state for next frame
-                    wasAtBottom_ = atBottomNow;
-
-                    // Copy buffer and check scroll state under lock
+                    // Copy active buffer
                     std::vector<LogEntry> bufferCopy;
                     bool hasNewContent = false;
                     {
                         std::lock_guard<std::mutex> lock(bufferMutex_);
-                        bufferCopy     = logBuffer_;
-                        hasNewContent  = scrollToBottom_;
+                        bufferCopy = activeBuffer();
+                        hasNewContent = scrollToBottom_;
                         scrollToBottom_ = false;
-                    }
-
-                    // Determine if we should auto-scroll:
-                    // - Always scroll if autoScroll_ is enabled
-                    // - If autoScroll_ is disabled, only scroll if user was at bottom in previous frame
-                    bool shouldScroll = false;
-                    if (hasNewContent) {
-                        if (autoScroll_) {
-                            shouldScroll = true;
-                        } else {
-                            shouldScroll = wasAtBottom_;
-                        }
                     }
 
                     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 1));
@@ -505,11 +497,6 @@ export namespace helios::ext::imgui::widgets {
                     for (const auto& entry : bufferCopy) {
                         // Filter by level
                         if (static_cast<int>(entry.level) < static_cast<int>(filterLevel_)) {
-                            continue;
-                        }
-
-                        // Filter by scope (if a specific scope is selected)
-                        if (!activeScopeFilter_.empty() && entry.scope != activeScopeFilter_) {
                             continue;
                         }
 
@@ -533,41 +520,46 @@ export namespace helios::ext::imgui::widgets {
 
                     ImGui::PopStyleVar();
 
-                    // Auto-scroll: use SetScrollHereY at the end of content
-                    if (shouldScroll) {
+                    // Scroll state
+                    float scrollY = ImGui::GetScrollY();
+                    float scrollMaxY = ImGui::GetScrollMaxY();
+                    bool atBottomNow = (scrollMaxY <= 0.0f) || (scrollY >= scrollMaxY - 5.0f);
+
+                    // Auto-scroll decision
+                    if (hasNewContent && (autoScroll_ || wasAtBottom_)) {
                         ImGui::SetScrollHereY(1.0f);
                     }
+
+                    // Pause logging if:
+                    // - AutoScroll is off AND user has not scrolled to lower bottom
+                    bool pauseLogging = (!autoScroll_ && !atBottomNow);
+                    acceptNewEntries_.store(!pauseLogging, std::memory_order_relaxed);
+                    wasAtBottom_ = atBottomNow;
                 }
                 ImGui::EndChild();
 
-                // Footer with entry count and status
+                // Footer
                 {
                     std::lock_guard<std::mutex> lock(bufferMutex_);
-                    ImGui::Text("Entries: %zu / %zu", logBuffer_.size(), maxEntries_);
+                    ImGui::Text("Entries: %zu / %zu", activeBuffer().size(), maxEntries_);
+                }
 
-                    bool loggingPaused = !acceptNewEntries_.load(std::memory_order_relaxed);
-                    auto skipped       = skippedEntries_.load(std::memory_order_relaxed);
+                bool loggingPaused = !acceptNewEntries_.load(std::memory_order_relaxed);
+                auto skipped = skippedEntries_.load(std::memory_order_relaxed);
 
-                    if (loggingPaused) {
-                        if (skipped > 0) {
-                            ImGui::SameLine();
-                            ImGui::TextColored(ImVec4(1.0f, 0.8f, 0.2f, 1.0f),
-                                               "Logging paused (%zu entries skipped)",
-                                               skipped);
-                        } else {
-                            ImGui::SameLine();
-                            ImGui::TextColored(ImVec4(1.0f, 0.8f, 0.2f, 1.0f),
-                                               "Logging paused");
-                        }
-                    } else if (skipped > 0) {
-                        // Optional: Hinweis, dass beim letzten Hochscrollen Einträge übersprungen wurden
-                        ImGui::SameLine();
-                        ImGui::TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f),
-                                           "%zu entries were skipped while scrolled up",
-                                           skipped);
-                        // Zähler zurücksetzen, sobald wir wieder am Ende sind
-                        skippedEntries_.store(0, std::memory_order_relaxed);
+                if (loggingPaused) {
+                    ImGui::SameLine();
+                    if (skipped > 0) {
+                        ImGui::TextColored(ImVec4(1.0f, 0.8f, 0.2f, 1.0f),
+                                           "Logging paused (%zu entries skipped)", skipped);
+                    } else {
+                        ImGui::TextColored(ImVec4(1.0f, 0.8f, 0.2f, 1.0f), "Logging paused");
                     }
+                } else if (skipped > 0) {
+                    ImGui::SameLine();
+                    ImGui::TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f),
+                                       "%zu entries were skipped", skipped);
+                    skippedEntries_.store(0, std::memory_order_relaxed);
                 }
             }
             ImGui::End();

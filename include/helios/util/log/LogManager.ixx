@@ -1,29 +1,45 @@
 /**
  * @file LogManager.ixx
- * @brief Central manager for scoped loggers.
+ * @brief Central manager for scoped loggers with configurable sinks.
  */
 module;
 
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 #include <memory>
 #include <mutex>
+#include <vector>
 
 export module helios.util.log.LogManager;
 
+import helios.util.log.LogSink;
 import helios.util.log.Logger;
 
 #define LOGGING_ENABLED true
 export namespace helios::util::log {
 
     /**
-     * @brief LogManager for managing various scoped Loggers.
+     * @brief LogManager for managing scoped Loggers and global sink configuration.
      *
-     * A LogManager allows for globally suppressing all log output by calling enableLogging().
-     * Logging is enabled by default.
+     * The LogManager provides centralized control over logging output destinations.
+     * Sinks register themselves with a unique type identifier, allowing dynamic
+     * enable/disable without compile-time knowledge of all sink types.
+     *
+     * ```cpp
+     * // Register sinks (sinks define their own TYPE_ID)
+     * LogManager::getInstance().registerSink(std::make_shared<ConsoleSink>());
+     * LogManager::getInstance().registerSink(std::make_shared<ImGuiLogSink>(widget));
+     *
+     * // Enable/disable by type identifier
+     * LogManager::getInstance().enableSink("console");
+     * LogManager::getInstance().disableSink("imgui");
+     *
+     * // Check status
+     * if (LogManager::getInstance().isSinkEnabled("console")) { ... }
+     * ```
      */
     class LogManager {
-
 
     private:
 
@@ -33,29 +49,47 @@ export namespace helios::util::log {
         bool loggingEnabled_ = LOGGING_ENABLED;
 
         /**
+         * @brief Set of currently enabled sink type identifiers.
+         */
+        std::unordered_set<std::string> enabledSinks_;
+
+        /**
+         * @brief Registered sinks (all available sinks, regardless of enabled state).
+         */
+        std::vector<std::shared_ptr<LogSink>> registeredSinks_;
+
+        /**
          * @brief Unordered map holding unique pointers to the loggers managed
          * by this class, guaranteed to be not null.
          */
         std::unordered_map<std::string, std::unique_ptr<Logger>> loggers_;
 
-
         /**
-         * @brief Default logger if a logger for a specific scope was not
-         * found.
+         * @brief Default logger if a logger for a specific scope was not found.
          */
         const std::unique_ptr<Logger> defaultLogger_;
-
 
         /**
          * @brief Mutex providing mutually exclusive access to the loggers map.
          */
         mutable std::mutex mapMutex_;
 
+        /**
+         * @brief Mutex for sink access.
+         */
+        mutable std::mutex sinkMutex_;
 
         /**
          * @brief Creates the LogManager and registers an unscoped default logger.
          */
         LogManager();
+
+        /**
+         * @brief Reconfigures all logger sinks based on currently enabled sinks.
+         *
+         * Called internally after sink enable/disable changes.
+         */
+        void updateLoggerSinks();
 
     public:
 
@@ -81,7 +115,6 @@ export namespace helios::util::log {
         LogManager(const LogManager&) = delete;
         LogManager& operator=(const LogManager&) = delete;
 
-
         /**
          * @brief Returns the LogManager singleton instance.
          *
@@ -89,14 +122,12 @@ export namespace helios::util::log {
          */
         static LogManager& getInstance() noexcept;
 
-
         /**
          * @brief Returns a const reference to the default logger managed with this LogManager.
          *
          * @return The default Logger instance.
          */
         [[nodiscard]] const Logger& logger() const noexcept;
-
 
         /**
          * @brief Returns a const reference to the logger instance for the specified scope.
@@ -111,7 +142,6 @@ export namespace helios::util::log {
          */
         [[nodiscard]] const Logger& logger(const std::string& scope) const noexcept;
 
-
         /**
          * @brief Registers a new logger with this manager.
          *
@@ -124,7 +154,6 @@ export namespace helios::util::log {
          */
         [[nodiscard]] Logger& registerLogger(const std::string& scope) noexcept;
 
-
         /**
          * @brief Enables or disables all log output of the Loggers registered with this LogManager.
          *
@@ -135,14 +164,84 @@ export namespace helios::util::log {
         /**
          * @brief Sets the filter scope for the logger.
          *
-         * Will do nothing if logging is not enabled. If the logegr for the scope does not
+         * Will do nothing if logging is not enabled. If the logger for the scope does not
          * exist, it will get implicitly created.
          *
-         * @param scope The scope to filter. Only log message with this scope will be logegd.
+         * @param scope The scope to filter. Only log messages with this scope will be logged.
          */
         void setScopeFilter(const std::string& scope) noexcept;
+
+        // ===== Sink Management =====
+
+        /**
+         * @brief Registers a sink and enables it by default.
+         *
+         * The sink is added to the pool and immediately enabled for output.
+         *
+         * @param sink The sink to register.
+         */
+        void registerSink(std::shared_ptr<LogSink> sink);
+
+        /**
+         * @brief Registers a sink with optional auto-enable.
+         *
+         * @param sink The sink to register.
+         * @param enabled Whether to enable the sink immediately (default: true).
+         */
+        void registerSink(std::shared_ptr<LogSink> sink, bool enabled);
+
+        /**
+         * @brief Enables a sink by its type identifier.
+         *
+         * If a sink with the given typeId is registered, it will be enabled.
+         * If no sink with that typeId is registered, this call has no effect.
+         *
+         * @param typeId The unique type identifier of the sink (e.g., "console", "imgui").
+         */
+        void enableSink(SinkTypeId typeId);
+
+        /**
+         * @brief Enables a sink, registering it first if necessary.
+         *
+         * If the sink is not yet registered, it will be added to the pool.
+         * The sink is then enabled for output.
+         *
+         * @param sink The sink instance to enable (and register if needed).
+         */
+        void enableSink(std::shared_ptr<LogSink> sink);
+
+        /**
+         * @brief Disables a sink by its type identifier.
+         *
+         * @param typeId The unique type identifier of the sink.
+         */
+        void disableSink(SinkTypeId typeId);
+
+        /**
+         * @brief Disables a sink by instance.
+         *
+         * @param sink The sink instance to disable.
+         */
+        void disableSink(std::shared_ptr<LogSink> sink);
+
+        /**
+         * @brief Checks if a sink with the given type identifier is currently enabled.
+         *
+         * @param typeId The unique type identifier of the sink.
+         *
+         * @return True if the sink is enabled.
+         */
+        [[nodiscard]] bool isSinkEnabled(SinkTypeId typeId) const noexcept;
+
+        /**
+         * @brief Enables all registered sinks.
+         */
+        void enableAllSinks();
+
+        /**
+         * @brief Disables all sinks.
+         */
+        void disableAllSinks();
     };
-
-
 
 }

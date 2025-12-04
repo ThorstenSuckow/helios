@@ -131,6 +131,16 @@ export namespace helios::util::log {
          * @param enable True to enable log output with the registered loggers, otherwise false.
          */
         void enableLogging(bool enable) noexcept;
+
+        /**
+         * @brief Sets the filter scope for the logger.
+         *
+         * Will do nothing if logging is not enabled. If the logegr for the scope does not
+         * exist, it will get implicitly created.
+         *
+         * @param scope The scope to filter. Only log message with this scope will be logegd.
+         */
+        void setScopeFilter(const std::string& scope) noexcept;
     };
 
 

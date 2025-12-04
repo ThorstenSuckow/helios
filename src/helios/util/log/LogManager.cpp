@@ -16,7 +16,7 @@ namespace helios::util::log {
     LogManager::LogManager() : defaultLogger_(std::make_unique<Logger>("default")) {}
 
     const Logger& LogManager::loggerForScope(const std::string& scope) noexcept {
-        return LogManager::getInstance().logger(scope);
+        return LogManager::getInstance().registerLogger(scope);
     }
 
 
@@ -31,6 +31,24 @@ namespace helios::util::log {
         return *defaultLogger_;
     }
 
+    void LogManager::setScopeFilter(const std::string& scope) noexcept {
+
+        if (!loggingEnabled_) {
+            return;
+        }
+
+        // makes sure the logger exists in the first place
+        std::ignore = LogManager::getInstance().registerLogger(scope);
+
+        for (auto& [fst, snd] : loggers_) {
+            if (fst == scope) {
+                snd->enable(true);
+            } else {
+                snd->enable(false);
+            }
+        }
+
+    }
 
     void LogManager::enableLogging(const bool enable) noexcept {
         std::lock_guard<std::mutex> lock(mapMutex_);

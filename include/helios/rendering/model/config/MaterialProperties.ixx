@@ -66,11 +66,11 @@ export namespace helios::rendering::model::config {
              * @brief Constructs a MaterialProperties instance with the specified values.
              *
              * @param baseColor The initial base color for this MaterialProperties instance.
-             * @param roughness The initial roughness factor for the material.
+             * @param roughness The initial roughness factor for the material, which defaults to 0.0f.
              */
             explicit MaterialProperties(
-                const helios::math::vec4f baseColor,
-                const float roughness
+                helios::math::vec4f baseColor,
+                float roughness = 0.0f
             ) noexcept;
 
 

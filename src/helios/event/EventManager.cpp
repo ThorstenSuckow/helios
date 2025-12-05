@@ -3,6 +3,7 @@ module;
 #include <functional>
 #include <memory>
 #include <utility>
+#include <iostream>
 
 module helios.event.EventManager;
 
@@ -26,6 +27,7 @@ namespace helios::event {
 
 
     EventManager& EventManager::post(std::unique_ptr<const Event> event, PostPolicy policy) {
+        logger_.debug(std::format("Posting Event {0}", event->toString()));
         return post(std::move(event), policy, nullptr);
     };
 

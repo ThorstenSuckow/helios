@@ -4,12 +4,13 @@
  */
 module;
 
+#include <string>
+
 export module helios.app.controller.Controller;
 
 import helios.event.Dispatcher;
 
 export namespace helios::app::controller {
-
     /**
      * @brief Abstract base class for application controllers.
      *
@@ -17,7 +18,6 @@ export namespace helios::app::controller {
      * and optional initialization.
      */
     class Controller {
-
     public:
         virtual ~Controller() = default;
 
@@ -40,6 +40,8 @@ export namespace helios::app::controller {
          * in a valid state, otherwise false, signaling this controller should not be used further.
          */
         virtual bool init() = 0;
+
+        [[nodiscard]] virtual std::string toString() const noexcept = 0;
     };
 
 

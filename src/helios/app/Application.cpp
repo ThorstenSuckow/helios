@@ -2,7 +2,7 @@ module;
 
 #include <memory>
 #include <stdexcept>
-#include <iostream>
+#include <format>
 
 module helios.app.Application;
 

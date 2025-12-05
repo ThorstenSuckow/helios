@@ -2,7 +2,7 @@ module;
 
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
-#include <iostream>
+#include <format>
 
 module helios.ext.opengl.rendering.OpenGLDevice;
 

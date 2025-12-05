@@ -1,7 +1,7 @@
 module;
 
 #include <GLFW/glfw3.h>
-#include <iostream>
+#include <format>
 #include <memory>
 #include <string>
 

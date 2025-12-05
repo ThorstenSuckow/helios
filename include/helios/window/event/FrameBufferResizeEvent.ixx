@@ -5,6 +5,7 @@
 module;
 
 #include <cstdint>
+#include <string>
 
 export module helios.window.event.FrameBufferResizeEvent;
 
@@ -63,6 +64,9 @@ export namespace helios::window::event {
             util::Guid sourceGuid,
             int width, int height, uint64_t tag
         ) noexcept;
+
+
+         std::string toString() const noexcept override;
 
     };
 

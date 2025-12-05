@@ -14,6 +14,10 @@ import helios.event.Event;
 import helios.event.EventQueue;
 import helios.event.Dispatcher;
 
+import helios.util.log.LogManager;
+import helios.util.log.Logger;
+
+#define HELIOS_LOG_SCOPE "helios::event::EventManager"
 export namespace helios::event {
 
     /**
@@ -51,6 +55,9 @@ export namespace helios::event {
     class EventManager {
 
     protected:
+
+        static inline const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(HELIOS_LOG_SCOPE);
+
         /**
          * @brief A unique_ptr to the EventQueue this EventManager owns.
          */

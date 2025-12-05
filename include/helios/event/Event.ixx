@@ -5,6 +5,7 @@
 module;
 
 #include <memory>
+#include <string>
 
 export module helios.event.Event;
 
@@ -71,6 +72,7 @@ export namespace helios::event {
          */
         [[nodiscard]] uint64_t tag() const;
 
+        [[nodiscard]] virtual std::string toString() const noexcept = 0;
 
         /**
          * @brief Compares two event instances based on their unique Guids.

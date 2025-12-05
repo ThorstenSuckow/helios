@@ -3,7 +3,7 @@ module;
 #include <functional>
 #include <memory>
 #include <utility>
-#include <iostream>
+#include <format>
 
 module helios.event.EventManager;
 

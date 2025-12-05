@@ -10,6 +10,11 @@ import helios.app.controller.Controller;
 import helios.rendering.RenderingDevice;
 import helios.window.event.FrameBufferResizeEvent;
 
+import helios.util.log.LogManager;
+import helios.util.log.Logger;
+
+
+#define HELIOS_LOG_SCOPE "helios::app::controller::WindowRenderingController"
 export namespace helios::app::controller {
 
     /**
@@ -19,6 +24,9 @@ export namespace helios::app::controller {
      * dimension changes.
      */
     class WindowRenderingController : public Controller {
+
+    protected:
+        static inline const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(HELIOS_LOG_SCOPE);
 
     public:
         /**

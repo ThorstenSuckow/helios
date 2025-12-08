@@ -104,7 +104,18 @@ export namespace helios::math {
 
         /**
          * @brief Provides read-only access to a matrix component.
-         * Elements are accessed in column major order: `m[row + col * 4]`.
+         *
+         * Elements are _accessed_ in column major order: `m[row + col * 4]`,
+         * while the specified indices represent an usual mxn-matrix access,
+         * i.e. for a given 2x4-matrix
+         *      [0, 1, 2, 3,
+         *       4, 5, 6, 7,
+         *       8, 9, 10, 11,
+         *       12, 13, 14, 15]
+         *
+         * a call to row(0, 2) returns "2", while the matrix is internally stored
+         * as (1, 4, 8, 12, 1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15).
+         *
          * Bounds checking is performed via `assert` in debug builds.
          *
          * @param row The zero based row index.
@@ -120,7 +131,18 @@ export namespace helios::math {
 
         /**
          * @brief Provides read-write access to a matrix component.
-         * Elements are accessed in column major order: `m[row + col * 4]`.
+         *
+         * Elements are _accessed_ in column major order: `m[row + col * 4]`,
+         * while the specified indices represent an usual mxn-matrix access,
+         * i.e. for a given 2x4-matrix
+         *      [0, 1, 2, 3,
+         *       4, 5, 6, 7,
+         *       8, 9, 10, 11,
+         *       12, 13, 14, 15]
+         *
+         * a call to row(0, 2) returns "2", while the matrix is internally stored
+         * as (1, 4, 8, 12, 1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15).
+         *
          * Bounds checking is performed via `assert` in debug builds.
          *
          * @param row The zero based row index.

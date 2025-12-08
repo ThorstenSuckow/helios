@@ -1,5 +1,6 @@
 module;
 
+#include <cassert>
 #include <memory>
 #include <vector>
 
@@ -140,6 +141,7 @@ namespace helios::scene {
 
 
     const helios::math::mat4f& SceneNode::cachedWorldTransform() const noexcept {
+        assert(!needsUpdate() && "cachedWorldTransform requested, but transform needs update.");
         return worldTransform_;
     }
 

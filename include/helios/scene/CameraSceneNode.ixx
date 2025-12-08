@@ -39,14 +39,14 @@ export namespace helios::scene {
 
     public:
         /**
-         * @brief Constructs a CameraSceneNode wrapping the given camera.
+         * @brief Constructs a CameraSceneNode that takes ownership of the given camera.
          *
-         * The Camera must be a non-null shared pointer, it gets internally stored as a
-         * weak_ptr.
+         * The CameraSceneNode becomes the sole owner of the Camera instance. The camera's
+         * view matrix is automatically updated when `worldTransform()` is called.
          *
-         * @param camera A shared pointer to the camera to be managed by this scene node.
+         * @param camera A unique pointer to the camera to be owned by this scene node.
          *
-         * @throws std::invalid_argument if camera is a nullptr
+         * @throws std::invalid_argument if camera is a nullptr.
          */
         explicit CameraSceneNode(std::unique_ptr<helios::scene::Camera> camera);
 

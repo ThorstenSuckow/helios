@@ -22,7 +22,7 @@ var module__helios_8scene_8SceneNode =
     [ "helios::scene::SceneNode::localTransform", "module__helios_8scene_8SceneNode.html#a3f28e5b3a6b7fe4c1af4e5770ad42227", null ],
     [ "helios::scene::SceneNode::parent", "module__helios_8scene_8SceneNode.html#a4e31b52717a76a9bae9a80a1db0b808b", null ],
     [ "helios::scene::SceneNode::setWorldTransform", "module__helios_8scene_8SceneNode.html#a1dbd995b4aace249c6786588e3279ae3", null ],
-    [ "helios::scene::SceneNode::worldTransform", "module__helios_8scene_8SceneNode.html#a2cd5ee14fdf4990952266c724c916551", null ],
+    [ "helios::scene::SceneNode::worldTransform", "module__helios_8scene_8SceneNode.html#a752f544acc02b5a49623ce5aad5b1a8e", null ],
     [ "helios::scene::SceneNode::cachedWorldTransform", "module__helios_8scene_8SceneNode.html#ab908b6a16d34640eca0d92f2573e6cc3", null ],
     [ "helios::scene::SceneNode::needsUpdate", "module__helios_8scene_8SceneNode.html#a88551e7d166868342b87fd83e767442c", null ],
     [ "helios::scene::SceneNode::needsUpdate_", "module__helios_8scene_8SceneNode.html#a7810bc9069939badd249ce54f794d1e7", null ],

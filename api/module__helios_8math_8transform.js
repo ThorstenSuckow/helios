@@ -1,5 +1,6 @@
 var module__helios_8math_8transform =
 [
+    [ "helios::math::perspective", "module__helios_8math_8transform.html#a3009ee1714550dc2af4d7e5e952e8a90", null ],
     [ "helios::math::lookAt", "module__helios_8math_8transform.html#aef6bef7ca3d31a4908a66e16c9771420", null ],
     [ "helios::math::rotate", "module__helios_8math_8transform.html#a643691235959c2f53d144a4ee9a0e251", null ],
     [ "helios::math::translate", "module__helios_8math_8transform.html#addafb8dbe33d09352658b55cee9a0898", null ],

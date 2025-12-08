@@ -32,6 +32,7 @@ var namespacehelios_1_1math =
     [ "operator*", "namespacehelios_1_1math.html#a6bca908e940499722f0a3af6447ad719", null ],
     [ "operator+", "namespacehelios_1_1math.html#a01625d8968c400bd7e812715d7f1941f", null ],
     [ "operator-", "namespacehelios_1_1math.html#a7a21ef269927b19863a1eae2d87666ee", null ],
+    [ "perspective", "namespacehelios_1_1math.html#a3009ee1714550dc2af4d7e5e952e8a90", null ],
     [ "radians", "namespacehelios_1_1math.html#a4949642a7cca09c7950bb6a1b75260c9", null ],
     [ "rotate", "namespacehelios_1_1math.html#a643691235959c2f53d144a4ee9a0e251", null ],
     [ "scale", "namespacehelios_1_1math.html#a8cc238c96b9b131d26357870e87ed668", null ],

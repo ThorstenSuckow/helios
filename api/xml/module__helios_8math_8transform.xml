@@ -6,6 +6,77 @@
     <innerfile refid="camera_8ixx">camera.ixx</innerfile>
     <innerfile refid="model_8ixx">model.ixx</innerfile>
     <sectiondef kind="func">
+      <memberdef kind="function" id="namespacehelios_1_1math_1a3009ee1714550dc2af4d7e5e952e8a90" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>mat4f</type>
+        <definition>mat4f helios::math::perspective</definition>
+        <argsstring>(float fovY, float aspect, float zNear, float zFar) noexcept</argsstring>
+        <name>perspective</name>
+        <qualifiedname>helios::math::perspective</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>fovY</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>aspect</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>zNear</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>zFar</declname>
+        </param>
+        <briefdescription>
+<para>Computes the 4x4 perspective projection matrix based on the specified field of view, aspect ratio, and near and far clipping planes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method returns a matrix suitable for projecting 3D points onto a 2D screen from the perspective of a camera. The perspective transformation maps 3D points inside the specified viewing frustum to normalized device coordinates, which are then clipped and transformed to screen space.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fovY</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Field of view in the Y direction, specified in radians. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>aspect</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The aspect ratio of the view, defined as width divided by height. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>zNear</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The distance to the near clipping plane. Must be greater than zero. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>zFar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The distance to the far clipping plane. Must be greater than zNear.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A 4x4 matrix representing the perspective projection transformation.</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://thorsten.suckow-homberg.de/docs/articles/computer-graphics/from-camera-to-clip-space-derivation-of-the-projection-matrices">https://thorsten.suckow-homberg.de/docs/articles/computer-graphics/from-camera-to-clip-space-derivation-of-the-projection-matrices</ulink> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/transform/camera.ixx" line="33" column="11" declfile="include/helios/math/transform/camera.ixx" declline="33" declcolumn="11"/>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a949fcc8b4e43f2a9afdad8eaafaeb07b" compoundref="Camera_8ixx" startline="76" endline="85">helios::scene::Camera::update</referencedby>
+      </memberdef>
       <memberdef kind="function" id="namespacehelios_1_1math_1aef6bef7ca3d31a4908a66e16c9771420" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>mat4f</type>
         <definition>mat4f helios::math::lookAt</definition>
@@ -62,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/math/transform/camera.ixx" line="37" column="11" declfile="include/helios/math/transform/camera.ixx" declline="37" declcolumn="11"/>
+        <location file="include/helios/math/transform/camera.ixx" line="58" column="11" declfile="include/helios/math/transform/camera.ixx" declline="58" declcolumn="11"/>
       </memberdef>
       <memberdef kind="function" id="namespacehelios_1_1math_1a643691235959c2f53d144a4ee9a0e251" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>mat4f</type>

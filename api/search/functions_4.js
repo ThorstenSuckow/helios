@@ -4,7 +4,7 @@ var searchData=
   ['elapsedms_1',['elapsedMs',['../classhelios_1_1util_1_1time_1_1Stopwatch.html#aaa33b220a4f5e2682f8408b81a1367d0',1,'helios::util::time::Stopwatch']]],
   ['elapsedseconds_2',['elapsedSeconds',['../classhelios_1_1util_1_1time_1_1Stopwatch.html#ac25c9dc3b13ddef5e3d168036aec68a0',1,'helios::util::time::Stopwatch']]],
   ['empty_3',['empty',['../classhelios_1_1event_1_1DequeEventQueue.html#a594ade70466608e86045c4b1679772fc',1,'helios::event::DequeEventQueue::empty()'],['../classhelios_1_1event_1_1EventQueue.html#af36e46db487566d8d3c51a690c46ab86',1,'helios::event::EventQueue::empty()']]],
-  ['enable_4',['enable',['../classhelios_1_1util_1_1log_1_1Logger.html#a0a5f3e98be73ab2706d281ad3d1b3201',1,'helios::util::log::Logger']]],
+  ['enable_4',['enable',['../classhelios_1_1util_1_1log_1_1Logger.html#a60ef33d5014392cbb88633fb8d0521e4',1,'helios::util::log::Logger']]],
   ['enableallsinks_5',['enableAllSinks',['../classhelios_1_1util_1_1log_1_1LogManager.html#ab28c446b9b8746425ec9e3cfa4ed8159',1,'helios::util::log::LogManager']]],
   ['enablelogging_6',['enableLogging',['../classhelios_1_1util_1_1log_1_1LogManager.html#adab66fefed9700defd5199358f4f9874',1,'helios::util::log::LogManager']]],
   ['enablesink_7',['enableSink',['../classhelios_1_1util_1_1log_1_1LogManager.html#a086cef17194c4df915de290181df412f',1,'helios::util::log::LogManager::enableSink(SinkTypeId typeId)'],['../classhelios_1_1util_1_1log_1_1LogManager.html#a22a17438bf79400830c333c0433470e9',1,'helios::util::log::LogManager::enableSink(std::shared_ptr&lt; LogSink &gt; sink)']]],

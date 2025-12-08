@@ -2,7 +2,7 @@ var searchData=
 [
   ['nativehandle_0',['nativeHandle',['../classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow.html#a84d2fb73f8eb3c1610f4159cff592be2',1,'helios::ext::glfw::window::GLFWWindow']]],
   ['needsupdate_1',['needsUpdate',['../classhelios_1_1scene_1_1SceneNode.html#a88551e7d166868342b87fd83e767442c',1,'helios::scene::SceneNode::needsUpdate()'],['../classhelios_1_1scene_1_1Transform.html#af38969c80c6fcc700ffb70e839048755',1,'helios::scene::Transform::needsUpdate()']]],
-  ['needsupdate_5f_2',['needsUpdate_',['../classhelios_1_1scene_1_1SceneNode.html#a7810bc9069939badd249ce54f794d1e7',1,'helios::scene::SceneNode']]],
+  ['needsupdate_5f_2',['needsUpdate_',['../classhelios_1_1scene_1_1Camera.html#af1b0b6d8716871661a66609b5bed1255',1,'helios::scene::Camera::needsUpdate_'],['../classhelios_1_1scene_1_1SceneNode.html#a7810bc9069939badd249ce54f794d1e7',1,'helios::scene::SceneNode::needsUpdate_']]],
   ['new_20backend_3',['Creating a New Backend',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md31',1,'']]],
   ['newframe_4',['newFrame',['../classhelios_1_1ext_1_1imgui_1_1ImGuiBackend.html#ac5ab307f136d90b6c914ccb1f75838e1',1,'helios::ext::imgui::ImGuiBackend::newFrame()'],['../classhelios_1_1ext_1_1imgui_1_1ImGuiGlfwOpenGLBackend.html#a6c6725e9e259f3fed66a930bb5d1bbe4',1,'helios::ext::imgui::ImGuiGlfwOpenGLBackend::newFrame()']]],
   ['next_5',['next',['../classhelios_1_1event_1_1DequeEventQueue.html#a400f3c1111c28d503e64464922147505',1,'helios::event::DequeEventQueue::next()'],['../classhelios_1_1event_1_1EventQueue.html#a5a2fd34261a19ae471f4ede5bf474963',1,'helios::event::EventQueue::next()']]],

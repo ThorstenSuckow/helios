@@ -26,6 +26,7 @@ var module__helios_8math_8types =
     [ "helios::math::mat4::same", "module__helios_8math_8types.html#a11484773381edf083309360d6c940d3f", null ],
     [ "helios::math::mat4::operator==", "module__helios_8math_8types.html#a33c47f9920f5e88b98caca96a889d0aa", null ],
     [ "helios::math::mat4::operator*", "module__helios_8math_8types.html#a1a4063671f96b4e127f18ae6453afda9", null ],
+    [ "helios::math::mat4::operator*", "module__helios_8math_8types.html#a23a55beb9005b24b1e50ae2bf8a71ad8", null ],
     [ "helios::math::value_ptr", "module__helios_8math_8types.html#a0e37b93487d103aa6588ba44bdb1a0b6", null ],
     [ "helios::math::value_ptr", "module__helios_8math_8types.html#a581fd38f8554d49c33a42b46255cc983", null ],
     [ "helios::math::vec2::vec2", "module__helios_8math_8types.html#ae14c89b58084eae49a7d3b9e0f9c345d", null ],

@@ -7,7 +7,7 @@ var searchData=
   ['uniformvalue_4',['UniformValue',['../namespacehelios_1_1rendering_1_1shader.html#ab80163b13aee26b5d5a100c01e4804c9',1,'helios::rendering::shader']]],
   ['uniformvaluemap_5',['UniformValueMap',['../classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html',1,'helios::rendering::shader::UniformValueMap'],['../classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html#a8e91edc1d58edc6b289b39e7c8662edb',1,'helios::rendering::shader::UniformValueMap::UniformValueMap()']]],
   ['uniformvaluemap_2eixx_6',['UniformValueMap.ixx',['../UniformValueMap_8ixx.html',1,'']]],
-  ['update_7',['update',['../classhelios_1_1game_1_1GameObject.html#a38accb2cee1218b5da2ab7a29ed07e6b',1,'helios::game::GameObject::update()'],['../classhelios_1_1game_1_1GameWorld.html#a5e23e962ecece9de1d45ca767540247f',1,'helios::game::GameWorld::update()']]],
+  ['update_7',['update',['../classhelios_1_1game_1_1GameObject.html#a38accb2cee1218b5da2ab7a29ed07e6b',1,'helios::game::GameObject::update()'],['../classhelios_1_1game_1_1GameWorld.html#a5e23e962ecece9de1d45ca767540247f',1,'helios::game::GameWorld::update()'],['../classhelios_1_1scene_1_1Camera.html#a949fcc8b4e43f2a9afdad8eaafaeb07b',1,'helios::scene::Camera::update()']]],
   ['update_20cmake_8',['4. Update CMake',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md35',1,'']]],
   ['updateaxes_9',['updateAxes',['../classhelios_1_1input_1_1GamepadState.html#a22a26dfe8eeef1007c641452b768f0f9',1,'helios::input::GamepadState']]],
   ['updategamepadstate_10',['updateGamepadState',['../classhelios_1_1input_1_1InputAdapter.html#a5b3852c685d7321d2faeb2de79aad538',1,'helios::input::InputAdapter']]],

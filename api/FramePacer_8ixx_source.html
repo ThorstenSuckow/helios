@@ -113,169 +113,125 @@ $(function() {
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">module</span>;</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;thread&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;chrono&gt;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;cassert&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">export</span> <span class="keyword">module</span> <a class="code" href="module__helios_8engine_8FramePacer.html">helios.engine.FramePacer</a>;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">export</span> <span class="keyword">module</span> <a class="code" href="module__helios_8engine_8FramePacer.html">helios.engine.FramePacer</a>;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">import</span> <a class="code" href="module__helios_8util_8time_8Stopwatch.html">helios.util.time.Stopwatch</a>;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8FrameStats.html">helios.engine.FrameStats</a>;</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">import</span> <a class="code" href="module__helios_8util_8time_8Stopwatch.html">helios.util.time.Stopwatch</a>;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8FrameStats.html">helios.engine.FrameStats</a>;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="foldopen" id="foldopen00017" data-start="{" data-end="}">
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="namespacehelios_1_1engine.html">   17</a></span><span class="keyword">export</span> <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine.html">helios::engine</a> {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"></span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">    /**</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">     * @class FramePacer</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">     * @brief Controls and maintains a target frame rate through precise timing and pacing.</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">     * The FramePacer class utilizes a `Stopwatch` to measure frame execution time and</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">     * introduces necessary sleep delays to maintain a consistent target frame rate.</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">     * It returns detailed timing statistics via the `FrameStats` structure upon synchronization.</span></div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="}">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="namespacehelios_1_1engine.html">   14</a></span><span class="keyword">export</span> <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine.html">helios::engine</a> {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"></span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">    /**</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">     * @class FramePacer</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">     * @brief Controls and maintains a target frame rate through precise timing and pacing.</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">     * The FramePacer class utilizes a `Stopwatch` to measure frame execution time and</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">     * introduces necessary sleep delays to maintain a consistent target frame rate.</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">     * It returns detailed timing statistics via the `FrameStats` structure upon synchronization.</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">     * @details The pacing mechanism helps in achieving smoother frame delivery by minimizing</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">     * jitter, although strict adherence depends on the OS scheduler&#39;s precision.</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">     * @details The pacing mechanism helps in achieving smoother frame delivery by minimizing</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">     * jitter, although strict adherence depends on the OS scheduler&#39;s precision.</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">     * @note If `targetFps` is set to 0.0f, no frame pacing is performed, and frames</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">     * run as fast as the hardware and OS allow (unlocked framerate).</span></div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">     * @note If `targetFps` is set to 0.0f, no frame pacing is performed, and frames</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">     * run as fast as the hardware and OS allow (unlocked framerate).</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">     * @par Usage Example:</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">     * ```cpp</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">     * auto stopwatch = std::make_unique&lt;helios::util::time::Stopwatch&gt;();</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">     * FramePacer pacer(std::move(stopwatch));</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">     * pacer.setTargetFps(60.0f);</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">     * while (running) {</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">     * pacer.beginFrame();</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">     * // ... game logic and rendering ...</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">     * FrameStats stats = pacer.sync();</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">     * }</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">     * ```</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">     */</span></div>
-<div class="foldopen" id="foldopen00046" data-start="{" data-end="};">
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1FramePacer.html">   46</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classhelios_1_1engine_1_1FramePacer.html#a6cfb7ba87a5da0cb5ab0a7c0ff5938fd">FramePacer</a> {<span class="comment"></span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">         * @brief The stopwatch used for high-resolution time measurement.</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        std::unique_ptr&lt;helios::util::time::Stopwatch&gt; stopwatch_;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment"></span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">         * @brief The target frame rate in Frames Per Second (FPS).</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordtype">float</span> targetFps_ = 0.0f;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keyword">public</span>:<span class="comment"></span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">         * @brief Constructs a FramePacer with the given stopwatch.</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">         * Initializes a new FramePacer instance in unlimited FPS mode (targetFps = 0.0f).</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">         * @param stopwatch Unique pointer to a valid `Stopwatch` instance. Ownership</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">         * is transferred to the FramePacer.</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00066" data-start="{" data-end="}">
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1FramePacer.html#a6cfb7ba87a5da0cb5ab0a7c0ff5938fd">   66</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classhelios_1_1engine_1_1FramePacer.html#a6cfb7ba87a5da0cb5ab0a7c0ff5938fd">FramePacer</a>(std::unique_ptr&lt;helios::util::time::Stopwatch&gt; stopwatch) :</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        stopwatch_(std::move(stopwatch)) {</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            <span class="comment">// Enforce the precondition: a valid stopwatch must be provided.</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            assert(stopwatch_ &amp;&amp; <span class="stringliteral">&quot;FramePacer requires a valid Stopwatch (non-null)&quot;</span>);</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        }</div>
-</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment"></span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">         * @brief Sets the desired target frame rate.</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">         * @param fps The target frame rate in Frames Per Second (FPS).</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">         * Set to 0.0f to disable pacing (unlocked framerate).</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00078" data-start="{" data-end="}">
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1FramePacer.html#ab6c8eedb96c5252dd75335e67cc082d1">   78</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1FramePacer.html#ab6c8eedb96c5252dd75335e67cc082d1">setTargetFps</a>(<span class="keywordtype">float</span> fps) {</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            targetFps_ = fps;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        }</div>
-</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment"></span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">         * @brief Retrieves the current target frame rate.</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">         * Returns the frame rate target that has been set for pacing, expressed in</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">         * Frames Per Second (FPS). If the target frame rate is set to 0.0f, frame pacing</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">         * is disabled, and the frame rate is unlocked.</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">     * @par Usage Example:</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">     * ```cpp</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">     * auto stopwatch = std::make_unique&lt;helios::util::time::Stopwatch&gt;();</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">     * FramePacer pacer(std::move(stopwatch));</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">     * pacer.setTargetFps(60.0f);</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">     * while (running) {</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">     * pacer.beginFrame();</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">     * // ... game logic and rendering ...</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">     * FrameStats stats = pacer.sync();</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">     * }</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">     * ```</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">     */</span></div>
+<div class="foldopen" id="foldopen00043" data-start="{" data-end="};">
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1FramePacer.html">   43</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classhelios_1_1engine_1_1FramePacer.html#a6cfb7ba87a5da0cb5ab0a7c0ff5938fd">FramePacer</a> {<span class="comment"></span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">         * @brief The stopwatch used for high-resolution time measurement.</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        std::unique_ptr&lt;helios::util::time::Stopwatch&gt; stopwatch_;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment"></span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">         * @brief The target frame rate in Frames Per Second (FPS).</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keywordtype">float</span> targetFps_ = 0.0f;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">         * @brief Constructs a FramePacer with the given stopwatch.</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">         * Initializes a new FramePacer instance in unlimited FPS mode (targetFps = 0.0f).</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">         * @param stopwatch Unique pointer to a valid `Stopwatch` instance. Ownership</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">         * is transferred to the FramePacer.</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1FramePacer.html#a6cfb7ba87a5da0cb5ab0a7c0ff5938fd">   63</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classhelios_1_1engine_1_1FramePacer.html#a6cfb7ba87a5da0cb5ab0a7c0ff5938fd">FramePacer</a>(std::unique_ptr&lt;helios::util::time::Stopwatch&gt; stopwatch);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment"></span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">         * @brief Sets the desired target frame rate.</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">         * @param fps The target frame rate in Frames Per Second (FPS).</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">         * Set to 0.0f to disable pacing (unlocked framerate).</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1FramePacer.html#ab6c8eedb96c5252dd75335e67cc082d1">   71</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1FramePacer.html#ab6c8eedb96c5252dd75335e67cc082d1">setTargetFps</a>(<span class="keywordtype">float</span> fps);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment"></span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">         * @brief Retrieves the current target frame rate.</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">         * Returns the frame rate target that has been set for pacing, expressed in</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">         * Frames Per Second (FPS). If the target frame rate is set to 0.0f, frame pacing</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">         * is disabled, and the frame rate is unlocked.</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">         * @return The target frame rate in FPS.</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">         * @note A return value of 0.0f indicates that the frame pacing mechanism is not active.</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1FramePacer.html#af108f079857c8a5cbbb674bfdd87fb47">   84</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1engine_1_1FramePacer.html#af108f079857c8a5cbbb674bfdd87fb47">getTargetFps</a>() const noexcept;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment"></span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">         * @brief Marks the beginning of a new frame.</span></div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">         * @return The target frame rate in FPS.</span></div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">         * @note A return value of 0.0f indicates that the frame pacing mechanism is not active.</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">         * Starts the internal stopwatch to begin measuring the frame&#39;s work time.</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">         * This method must be called at the very beginning of each frame cycle,</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">         * before any game logic, physics, or rendering operations.</span></div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00093" data-start="{" data-end="}">
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1FramePacer.html#af108f079857c8a5cbbb674bfdd87fb47">   93</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1engine_1_1FramePacer.html#af108f079857c8a5cbbb674bfdd87fb47">getTargetFps</a>() const noexcept{</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            <span class="keywordflow">return</span> targetFps_;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        }</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1FramePacer.html#a6bd8aee9b1656f7e9731d74909823f14">   93</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1FramePacer.html#a6bd8aee9b1656f7e9731d74909823f14">beginFrame</a>();</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment"></span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">         * @brief Synchronizes frame timing and returns frame statistics.</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">         * Measures the elapsed work time since `beginFrame()`. If a target FPS is set</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">         * and the work time is less than the target frame duration, this method</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">         * sleeps the current thread to meet the target timing.</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment">         * @return A `FrameStats` structure containing the total frame time (including wait),</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">         * the actual work time (CPU processing), and the wait time (idle).</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">         * @note If `targetFps` is 0.0f or the frame took longer than the target duration,</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">         * no sleeping occurs, and `waitTime` in the returned stats will be 0.0f.</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">         * @todo Implement hybrid spinning for the last millisecond of the wait time</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment">         * to improve timing precision and mitigate OS scheduler wake-up latency.</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1FramePacer.html#a32ee1e380de39424a708a979a982d19d">  111</a></span>        [[nodiscard]] <a class="code hl_struct" href="structhelios_1_1engine_1_1FrameStats.html">FrameStats</a> <a class="code hl_function" href="classhelios_1_1engine_1_1FramePacer.html#a32ee1e380de39424a708a979a982d19d">sync</a>();</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    };</div>
 </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment"></span> </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">         * @brief Marks the beginning of a new frame.</span></div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">         * Starts the internal stopwatch to begin measuring the frame&#39;s work time.</span></div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">         * This method must be called at the very beginning of each frame cycle,</span></div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment">         * before any game logic, physics, or rendering operations.</span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00104" data-start="{" data-end="}">
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1FramePacer.html#a6bd8aee9b1656f7e9731d74909823f14">  104</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1FramePacer.html#a6bd8aee9b1656f7e9731d74909823f14">beginFrame</a>() {</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            stopwatch_-&gt;start();</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        }</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>}</div>
 </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment"></span> </div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment">         * @brief Synchronizes frame timing and returns frame statistics.</span></div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment">         * Measures the elapsed work time since `beginFrame()`. If a target FPS is set</span></div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment">         * and the work time is less than the target frame duration, this method</span></div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment">         * sleeps the current thread to meet the target timing.</span></div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment">         * @return A `FrameStats` structure containing the total frame time (including wait),</span></div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment">         * the actual work time (CPU processing), and the wait time (idle).</span></div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment">         * @note If `targetFps` is 0.0f or the frame took longer than the target duration,</span></div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment">         * no sleeping occurs, and `waitTime` in the returned stats will be 0.0f.</span></div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment">         * @todo Implement hybrid spinning for the last millisecond of the wait time</span></div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="comment">         * to improve timing precision and mitigate OS scheduler wake-up latency.</span></div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00124" data-start="{" data-end="}">
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1FramePacer.html#a32ee1e380de39424a708a979a982d19d">  124</a></span>        [[nodiscard]] <a class="code hl_struct" href="structhelios_1_1engine_1_1FrameStats.html">FrameStats</a> <a class="code hl_function" href="classhelios_1_1engine_1_1FramePacer.html#a32ee1e380de39424a708a979a982d19d">sync</a>() {</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            <span class="keywordtype">float</span> workTime = stopwatch_-&gt;elapsedSeconds();</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            <span class="keywordtype">float</span> waitTime = 0.0f;</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            <span class="keywordtype">float</span> totalTime = workTime;</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            <span class="keywordflow">if</span> (targetFps_ &gt; 0.0f) {</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>                <span class="keywordtype">float</span> targetTime = 1.0f / targetFps_;</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                <span class="keywordflow">if</span> (targetTime &gt; workTime) {</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>                    <span class="keyword">auto</span> requestedWaitTime = targetTime - workTime;</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>                    <span class="keyword">auto</span> sleepDuration = std::chrono::duration&lt;float&gt;(requestedWaitTime);</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>                    std::this_thread::sleep_for(sleepDuration);</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>                    <span class="comment">// In a simple sleep model, we assume we slept for approximately the needed time.</span></div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>                    <span class="comment">// Real-world drift correction would re-measure the stopwatch here.</span></div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>                    totalTime = stopwatch_-&gt;elapsedSeconds();</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>                    <span class="comment">// This accounts for the overhead introduced by OS thread scheduling.</span></div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>                    waitTime = totalTime-workTime;</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>                }</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>            }</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>            <span class="keywordflow">return</span> <a class="code hl_struct" href="structhelios_1_1engine_1_1FrameStats.html">FrameStats</a>{ totalTime, workTime, waitTime };</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        }</div>
-</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    };</div>
-</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>}</div>
-</div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1FramePacer_html_a32ee1e380de39424a708a979a982d19d"><div class="ttname"><a href="classhelios_1_1engine_1_1FramePacer.html#a32ee1e380de39424a708a979a982d19d">helios::engine::FramePacer::sync</a></div><div class="ttdeci">FrameStats sync()</div><div class="ttdoc">Synchronizes frame timing and returns frame statistics.</div><div class="ttdef"><b>Definition</b> <a href="#l00124">FramePacer.ixx:124</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1FramePacer_html_a6bd8aee9b1656f7e9731d74909823f14"><div class="ttname"><a href="classhelios_1_1engine_1_1FramePacer.html#a6bd8aee9b1656f7e9731d74909823f14">helios::engine::FramePacer::beginFrame</a></div><div class="ttdeci">void beginFrame()</div><div class="ttdoc">Marks the beginning of a new frame.</div><div class="ttdef"><b>Definition</b> <a href="#l00104">FramePacer.ixx:104</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1FramePacer_html_a6cfb7ba87a5da0cb5ab0a7c0ff5938fd"><div class="ttname"><a href="classhelios_1_1engine_1_1FramePacer.html#a6cfb7ba87a5da0cb5ab0a7c0ff5938fd">helios::engine::FramePacer::FramePacer</a></div><div class="ttdeci">FramePacer(std::unique_ptr&lt; helios::util::time::Stopwatch &gt; stopwatch)</div><div class="ttdoc">Constructs a FramePacer with the given stopwatch.</div><div class="ttdef"><b>Definition</b> <a href="#l00066">FramePacer.ixx:66</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1FramePacer_html_ab6c8eedb96c5252dd75335e67cc082d1"><div class="ttname"><a href="classhelios_1_1engine_1_1FramePacer.html#ab6c8eedb96c5252dd75335e67cc082d1">helios::engine::FramePacer::setTargetFps</a></div><div class="ttdeci">void setTargetFps(float fps)</div><div class="ttdoc">Sets the desired target frame rate.</div><div class="ttdef"><b>Definition</b> <a href="#l00078">FramePacer.ixx:78</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1FramePacer_html_af108f079857c8a5cbbb674bfdd87fb47"><div class="ttname"><a href="classhelios_1_1engine_1_1FramePacer.html#af108f079857c8a5cbbb674bfdd87fb47">helios::engine::FramePacer::getTargetFps</a></div><div class="ttdeci">float getTargetFps() const noexcept</div><div class="ttdoc">Retrieves the current target frame rate.</div><div class="ttdef"><b>Definition</b> <a href="#l00093">FramePacer.ixx:93</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1FramePacer_html_a32ee1e380de39424a708a979a982d19d"><div class="ttname"><a href="classhelios_1_1engine_1_1FramePacer.html#a32ee1e380de39424a708a979a982d19d">helios::engine::FramePacer::sync</a></div><div class="ttdeci">FrameStats sync()</div><div class="ttdoc">Synchronizes frame timing and returns frame statistics.</div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1FramePacer_html_a6bd8aee9b1656f7e9731d74909823f14"><div class="ttname"><a href="classhelios_1_1engine_1_1FramePacer.html#a6bd8aee9b1656f7e9731d74909823f14">helios::engine::FramePacer::beginFrame</a></div><div class="ttdeci">void beginFrame()</div><div class="ttdoc">Marks the beginning of a new frame.</div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1FramePacer_html_a6cfb7ba87a5da0cb5ab0a7c0ff5938fd"><div class="ttname"><a href="classhelios_1_1engine_1_1FramePacer.html#a6cfb7ba87a5da0cb5ab0a7c0ff5938fd">helios::engine::FramePacer::FramePacer</a></div><div class="ttdeci">FramePacer(std::unique_ptr&lt; helios::util::time::Stopwatch &gt; stopwatch)</div><div class="ttdoc">Constructs a FramePacer with the given stopwatch.</div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1FramePacer_html_ab6c8eedb96c5252dd75335e67cc082d1"><div class="ttname"><a href="classhelios_1_1engine_1_1FramePacer.html#ab6c8eedb96c5252dd75335e67cc082d1">helios::engine::FramePacer::setTargetFps</a></div><div class="ttdeci">void setTargetFps(float fps)</div><div class="ttdoc">Sets the desired target frame rate.</div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1FramePacer_html_af108f079857c8a5cbbb674bfdd87fb47"><div class="ttname"><a href="classhelios_1_1engine_1_1FramePacer.html#af108f079857c8a5cbbb674bfdd87fb47">helios::engine::FramePacer::getTargetFps</a></div><div class="ttdeci">float getTargetFps() const noexcept</div><div class="ttdoc">Retrieves the current target frame rate.</div></div>
 <div class="ttc" id="amodule__helios_8engine_8FramePacer_html"><div class="ttname"><a href="module__helios_8engine_8FramePacer.html">helios.engine.FramePacer</a></div></div>
 <div class="ttc" id="amodule__helios_8engine_8FrameStats_html"><div class="ttname"><a href="module__helios_8engine_8FrameStats.html">helios.engine.FrameStats</a></div></div>
 <div class="ttc" id="amodule__helios_8util_8time_8Stopwatch_html"><div class="ttname"><a href="module__helios_8util_8time_8Stopwatch.html">helios.util.time.Stopwatch</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1engine_html"><div class="ttname"><a href="namespacehelios_1_1engine.html">helios::engine</a></div><div class="ttdoc">Engine utilities for frame pacing and tick/update lifecycle management.</div><div class="ttdef"><b>Definition</b> <a href="#l00017">FramePacer.ixx:17</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1engine_html"><div class="ttname"><a href="namespacehelios_1_1engine.html">helios::engine</a></div><div class="ttdoc">Engine utilities for frame pacing and tick/update lifecycle management.</div><div class="ttdef"><b>Definition</b> <a href="#l00014">FramePacer.ixx:14</a></div></div>
 <div class="ttc" id="astructhelios_1_1engine_1_1FrameStats_html"><div class="ttname"><a href="structhelios_1_1engine_1_1FrameStats.html">helios::engine::FrameStats</a></div><div class="ttdoc">Contains timing statistics for a single frame.</div><div class="ttdef"><b>Definition</b> <a href="FrameStats_8ixx_source.html#l00019">FrameStats.ixx:19</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

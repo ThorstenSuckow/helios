@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/math/types/mat4.ixx" line="252" column="5" bodyfile="include/helios/math/types/mat4.ixx" bodystart="252" bodyend="-1"/>
+        <location file="include/helios/math/types/mat4.ixx" line="296" column="5" bodyfile="include/helios/math/types/mat4.ixx" bodystart="296" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespacehelios_1_1math_1a058bd8629e8b9fdd7914ec513cf515f5" prot="public" static="no">
         <type><ref refid="structhelios_1_1math_1_1mat4" kindref="compound">mat4</ref>&lt; double &gt;</type>
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/math/types/mat4.ixx" line="253" column="5" bodyfile="include/helios/math/types/mat4.ixx" bodystart="253" bodyend="-1"/>
+        <location file="include/helios/math/types/mat4.ixx" line="297" column="5" bodyfile="include/helios/math/types/mat4.ixx" bodystart="297" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespacehelios_1_1math_1abfde83491c8def2cca7e8816bb9a0075" prot="public" static="no">
         <type><ref refid="structhelios_1_1math_1_1mat4" kindref="compound">mat4</ref>&lt; int &gt;</type>
@@ -85,7 +85,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/math/types/mat4.ixx" line="254" column="5" bodyfile="include/helios/math/types/mat4.ixx" bodystart="254" bodyend="-1"/>
+        <location file="include/helios/math/types/mat4.ixx" line="298" column="5" bodyfile="include/helios/math/types/mat4.ixx" bodystart="298" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespacehelios_1_1math_1aeab5c7e555a142f8f763a3317460d5c0" prot="public" static="no">
         <type><ref refid="structhelios_1_1math_1_1vec2" kindref="compound">vec2</ref>&lt; float &gt;</type>
@@ -215,6 +215,77 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
+      <memberdef kind="function" id="namespacehelios_1_1math_1a3009ee1714550dc2af4d7e5e952e8a90" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">mat4f</ref></type>
+        <definition>mat4f helios::math::perspective</definition>
+        <argsstring>(float fovY, float aspect, float zNear, float zFar) noexcept</argsstring>
+        <name>perspective</name>
+        <qualifiedname>helios::math::perspective</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>fovY</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>aspect</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>zNear</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>zFar</declname>
+        </param>
+        <briefdescription>
+<para>Computes the 4x4 perspective projection matrix based on the specified field of view, aspect ratio, and near and far clipping planes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method returns a matrix suitable for projecting 3D points onto a 2D screen from the perspective of a camera. The perspective transformation maps 3D points inside the specified viewing frustum to normalized device coordinates, which are then clipped and transformed to screen space.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fovY</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Field of view in the Y direction, specified in radians. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>aspect</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The aspect ratio of the view, defined as width divided by height. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>zNear</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The distance to the near clipping plane. Must be greater than zero. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>zFar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The distance to the far clipping plane. Must be greater than zNear.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A 4x4 matrix representing the perspective projection transformation.</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://thorsten.suckow-homberg.de/docs/articles/computer-graphics/from-camera-to-clip-space-derivation-of-the-projection-matrices">https://thorsten.suckow-homberg.de/docs/articles/computer-graphics/from-camera-to-clip-space-derivation-of-the-projection-matrices</ulink> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/transform/camera.ixx" line="33" column="11" declfile="include/helios/math/transform/camera.ixx" declline="33" declcolumn="11"/>
+        <referencedby refid="classhelios_1_1scene_1_1Camera_1a949fcc8b4e43f2a9afdad8eaafaeb07b" compoundref="Camera_8ixx" startline="76" endline="85">helios::scene::Camera::update</referencedby>
+      </memberdef>
       <memberdef kind="function" id="namespacehelios_1_1math_1aef6bef7ca3d31a4908a66e16c9771420" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type><ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">mat4f</ref></type>
         <definition>mat4f helios::math::lookAt</definition>
@@ -271,7 +342,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/math/transform/camera.ixx" line="37" column="11" declfile="include/helios/math/transform/camera.ixx" declline="37" declcolumn="11"/>
+        <location file="include/helios/math/transform/camera.ixx" line="58" column="11" declfile="include/helios/math/transform/camera.ixx" declline="58" declcolumn="11"/>
       </memberdef>
       <memberdef kind="function" id="namespacehelios_1_1math_1a643691235959c2f53d144a4ee9a0e251" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type><ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">mat4f</ref></type>
@@ -504,9 +575,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/math/types/mat4.ixx" line="231" column="13" bodyfile="include/helios/math/types/mat4.ixx" bodystart="231" bodyend="233"/>
-        <referencedby refid="structhelios_1_1math_1_1mat4_1a33c47f9920f5e88b98caca96a889d0aa" compoundref="mat4_8ixx" startline="178" endline="190">helios::math::mat4&lt; float &gt;::operator==</referencedby>
-        <referencedby refid="structhelios_1_1math_1_1mat4_1a11484773381edf083309360d6c940d3f" compoundref="mat4_8ixx" startline="153" endline="167">helios::math::mat4&lt; float &gt;::same</referencedby>
+        <location file="include/helios/math/types/mat4.ixx" line="275" column="13" bodyfile="include/helios/math/types/mat4.ixx" bodystart="275" bodyend="277"/>
+        <referencedby refid="structhelios_1_1math_1_1mat4_1a33c47f9920f5e88b98caca96a889d0aa" compoundref="mat4_8ixx" startline="202" endline="214">helios::math::mat4&lt; float &gt;::operator==</referencedby>
+        <referencedby refid="structhelios_1_1math_1_1mat4_1a11484773381edf083309360d6c940d3f" compoundref="mat4_8ixx" startline="177" endline="191">helios::math::mat4&lt; float &gt;::same</referencedby>
       </memberdef>
       <memberdef kind="function" id="namespacehelios_1_1math_1a581fd38f8554d49c33a42b46255cc983" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -554,7 +625,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/math/types/mat4.ixx" line="248" column="7" bodyfile="include/helios/math/types/mat4.ixx" bodystart="248" bodyend="250"/>
+        <location file="include/helios/math/types/mat4.ixx" line="292" column="7" bodyfile="include/helios/math/types/mat4.ixx" bodystart="292" bodyend="294"/>
       </memberdef>
       <memberdef kind="function" id="namespacehelios_1_1math_1a3aa0fd063dbb05fb49b6e82621fedfed" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -1166,6 +1237,7 @@
         </inbodydescription>
         <location file="include/helios/math/utils.ixx" line="19" column="21" bodyfile="include/helios/math/utils.ixx" bodystart="19" bodyend="21"/>
         <referencedby refid="namespacehelios_1_1math_1a73c58ac1ac41973b9927ab6893662104" compoundref="utils_8ixx" startline="29" endline="31">degrees</referencedby>
+        <referencedby refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1CameraWidget_1a07fc0fbbf52e97d447e2f3177980dd00" compoundref="CameraWidget_8ixx" startline="223" endline="409">helios::ext::imgui::widgets::CameraWidget::draw</referencedby>
         <referencedby refid="namespacehelios_1_1math_1a643691235959c2f53d144a4ee9a0e251">rotate</referencedby>
       </memberdef>
       <memberdef kind="function" id="namespacehelios_1_1math_1a73c58ac1ac41973b9927ab6893662104" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">

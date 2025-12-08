@@ -36,34 +36,55 @@
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8math_8types" kindref="compound">helios.math.types</ref>;</highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1math" kindref="compound">helios::math</ref><sp/>{</highlight></codeline>
-<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="14"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="15"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>the<sp/>4x4<sp/>lookAt-matrix<sp/>for<sp/>transforming<sp/>world<sp/>coordinates</highlight></codeline>
-<codeline lineno="16"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>to<sp/>camera<sp/>space.</highlight></codeline>
-<codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>method<sp/>creates<sp/>the<sp/>camera<sp/>coordinate<sp/>system<sp/>based<sp/>on<sp/>the</highlight></codeline>
-<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>parameters<sp/>eye,<sp/>i.e.<sp/>the<sp/>vantage<sp/>point<sp/>in<sp/>world<sp/>space,<sp/>the<sp/>camera&apos;s</highlight></codeline>
-<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>up<sp/>direction<sp/>and<sp/>center,<sp/>representing<sp/>the<sp/>point<sp/>of<sp/>interest.</highlight></codeline>
-<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Note<sp/>that<sp/>the<sp/>returned<sp/>matrix<sp/>is<sp/>essentially<sp/>a<sp/>composition<sp/>of</highlight></codeline>
-<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>a<sp/>change<sp/>of<sp/>coordinates<sp/>matrix<sp/>P(C<sp/>&lt;-<sp/>W)<sp/>and<sp/>a<sp/>translation</highlight></codeline>
-<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>to<sp/>the<sp/>origin,<sp/>i.e.<sp/>the<sp/>camera<sp/>is<sp/>sitting<sp/>at<sp/>the<sp/>origin<sp/>(0,<sp/>0,<sp/>0)</highlight></codeline>
-<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>looking<sp/>down<sp/>the<sp/>negative<sp/>z-axis,<sp/>i.e.<sp/>conceptually</highlight></codeline>
-<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>P(W&lt;-C)<sp/>*<sp/>T(-eye)</highlight></codeline>
-<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>4x4<sp/>matrix<sp/>can<sp/>then<sp/>be<sp/>used<sp/>for<sp/>computing<sp/>the<sp/>perspective<sp/>projection</highlight></codeline>
-<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>for<sp/>creating<sp/>the<sp/>clip<sp/>space</highlight></codeline>
-<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>clip<sp/>=<sp/>P<sp/>*<sp/>V<sp/>*<sp/>W<sp/>*<sp/>M</highlight></codeline>
-<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>eye</highlight></codeline>
-<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>center</highlight></codeline>
-<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>up</highlight></codeline>
-<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@return</highlight></codeline>
-<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="37" refid="namespacehelios_1_1math_1aef6bef7ca3d31a4908a66e16c9771420" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">mat4f</ref><sp/><ref refid="namespacehelios_1_1math_1aef6bef7ca3d31a4908a66e16c9771420" kindref="member">lookAt</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">vec3f</ref>&amp;<sp/>eye,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">vec3f</ref>&amp;<sp/>center,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">vec3f</ref>&amp;<sp/>up)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"></highlight></codeline>
-<codeline lineno="39"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1math" kindref="compound">helios::math</ref><sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Computes<sp/>the<sp/>4x4<sp/>perspective<sp/>projection<sp/>matrix<sp/>based<sp/>on<sp/>the<sp/>specified</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>field<sp/>of<sp/>view,<sp/>aspect<sp/>ratio,<sp/>and<sp/>near<sp/>and<sp/>far<sp/>clipping<sp/>planes.</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>method<sp/>returns<sp/>a<sp/>matrix<sp/>suitable<sp/>for<sp/>projecting<sp/>3D<sp/>points<sp/>onto<sp/>a</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>2D<sp/>screen<sp/>from<sp/>the<sp/>perspective<sp/>of<sp/>a<sp/>camera.<sp/>The<sp/>perspective<sp/>transformation</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>maps<sp/>3D<sp/>points<sp/>inside<sp/>the<sp/>specified<sp/>viewing<sp/>frustum<sp/>to<sp/>normalized<sp/>device</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>coordinates,<sp/>which<sp/>are<sp/>then<sp/>clipped<sp/>and<sp/>transformed<sp/>to<sp/>screen<sp/>space.</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>fovY<sp/>Field<sp/>of<sp/>view<sp/>in<sp/>the<sp/>Y<sp/>direction,<sp/>specified<sp/>in<sp/>radians.</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>aspect<sp/>The<sp/>aspect<sp/>ratio<sp/>of<sp/>the<sp/>view,<sp/>defined<sp/>as<sp/>width<sp/>divided<sp/>by<sp/>height.</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>zNear<sp/>The<sp/>distance<sp/>to<sp/>the<sp/>near<sp/>clipping<sp/>plane.<sp/>Must<sp/>be<sp/>greater<sp/>than<sp/>zero.</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>zFar<sp/>The<sp/>distance<sp/>to<sp/>the<sp/>far<sp/>clipping<sp/>plane.<sp/>Must<sp/>be<sp/>greater<sp/>than<sp/>zNear.</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>4x4<sp/>matrix<sp/>representing<sp/>the<sp/>perspective<sp/>projection<sp/>transformation.</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>https://thorsten.suckow-homberg.de/docs/articles/computer-graphics/from-camera-to-clip-space-derivation-of-the-projection-matrices</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33" refid="namespacehelios_1_1math_1a3009ee1714550dc2af4d7e5e952e8a90" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">mat4f</ref><sp/><ref refid="namespacehelios_1_1math_1a3009ee1714550dc2af4d7e5e952e8a90" kindref="member">perspective</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>fovY,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>aspect,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>zNear,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>zFar)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>the<sp/>4x4<sp/>lookAt-matrix<sp/>for<sp/>transforming<sp/>world<sp/>coordinates</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>to<sp/>camera<sp/>space.</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>method<sp/>creates<sp/>the<sp/>camera<sp/>coordinate<sp/>system<sp/>based<sp/>on<sp/>the</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>parameters<sp/>eye,<sp/>i.e.<sp/>the<sp/>vantage<sp/>point<sp/>in<sp/>world<sp/>space,<sp/>the<sp/>camera&apos;s</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>up<sp/>direction<sp/>and<sp/>center,<sp/>representing<sp/>the<sp/>point<sp/>of<sp/>interest.</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Note<sp/>that<sp/>the<sp/>returned<sp/>matrix<sp/>is<sp/>essentially<sp/>a<sp/>composition<sp/>of</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>a<sp/>change<sp/>of<sp/>coordinates<sp/>matrix<sp/>P(C<sp/>&lt;-<sp/>W)<sp/>and<sp/>a<sp/>translation</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>to<sp/>the<sp/>origin,<sp/>i.e.<sp/>the<sp/>camera<sp/>is<sp/>sitting<sp/>at<sp/>the<sp/>origin<sp/>(0,<sp/>0,<sp/>0)</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>looking<sp/>down<sp/>the<sp/>negative<sp/>z-axis,<sp/>i.e.<sp/>conceptually</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>P(W&lt;-C)<sp/>*<sp/>T(-eye)</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>4x4<sp/>matrix<sp/>can<sp/>then<sp/>be<sp/>used<sp/>for<sp/>computing<sp/>the<sp/>perspective<sp/>projection</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>for<sp/>creating<sp/>the<sp/>clip<sp/>space</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>clip<sp/>=<sp/>P<sp/>*<sp/>V<sp/>*<sp/>W<sp/>*<sp/>M</highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>eye</highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>center</highlight></codeline>
+<codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>up</highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@return</highlight></codeline>
+<codeline lineno="57"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58" refid="namespacehelios_1_1math_1aef6bef7ca3d31a4908a66e16c9771420" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">mat4f</ref><sp/><ref refid="namespacehelios_1_1math_1aef6bef7ca3d31a4908a66e16c9771420" kindref="member">lookAt</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">vec3f</ref>&amp;<sp/>eye,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">vec3f</ref>&amp;<sp/>center,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">vec3f</ref>&amp;<sp/>up)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="include/helios/math/transform/camera.ixx"/>
   </compounddef>

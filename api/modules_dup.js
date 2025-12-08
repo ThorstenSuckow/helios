@@ -16,6 +16,7 @@ var modules_dup =
     [ "helios.ext.imgui.ImGuiOverlay", "module__helios_8ext_8imgui_8ImGuiOverlay.html", "module__helios_8ext_8imgui_8ImGuiOverlay" ],
     [ "helios.ext.imgui.ImGuiWidget", "module__helios_8ext_8imgui_8ImGuiWidget.html", "module__helios_8ext_8imgui_8ImGuiWidget" ],
     [ "helios.ext.imgui.widgets", "module__helios_8ext_8imgui_8widgets.html", null ],
+    [ "helios.ext.imgui.widgets.CameraWidget", "module__helios_8ext_8imgui_8widgets_8CameraWidget.html", "module__helios_8ext_8imgui_8widgets_8CameraWidget" ],
     [ "helios.ext.imgui.widgets.FpsWidget", "module__helios_8ext_8imgui_8widgets_8FpsWidget.html", "module__helios_8ext_8imgui_8widgets_8FpsWidget" ],
     [ "helios.ext.imgui.widgets.GamepadWidget", "module__helios_8ext_8imgui_8widgets_8GamepadWidget.html", "module__helios_8ext_8imgui_8widgets_8GamepadWidget" ],
     [ "helios.ext.imgui.widgets.LogWidget", "module__helios_8ext_8imgui_8widgets_8LogWidget.html", "module__helios_8ext_8imgui_8widgets_8LogWidget" ],

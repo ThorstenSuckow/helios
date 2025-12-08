@@ -33,16 +33,16 @@
         </inbodydescription>
         <location file="include/helios/scene/FrustumCullingStrategy.ixx" line="39" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1scene_1_1FrustumCullingStrategy_1abd63e1dcf92b2a8fb7b019d3b4edf448" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="pure-virtual">
+      <memberdef kind="function" id="classhelios_1_1scene_1_1FrustumCullingStrategy_1a12f23b3d9ecc16858fedf7483d9890ae" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>std::vector&lt; const <ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">helios::scene::SceneNode</ref> * &gt;</type>
         <definition>virtual std::vector&lt; const helios::scene::SceneNode * &gt; helios::scene::FrustumCullingStrategy::cull</definition>
-        <argsstring>(const helios::scene::Camera &amp;camera, const helios::scene::SceneNode &amp;root)=0</argsstring>
+        <argsstring>(const helios::scene::CameraSceneNode *cameraSceneNode, const helios::scene::SceneNode &amp;root)=0</argsstring>
         <name>cull</name>
         <qualifiedname>helios::scene::FrustumCullingStrategy::cull</qualifiedname>
-        <reimplementedby refid="classhelios_1_1scene_1_1CullNoneStrategy_1a2f2c1bebab877da27e46516363ac7996">cull</reimplementedby>
+        <reimplementedby refid="classhelios_1_1scene_1_1CullNoneStrategy_1a22667c9b69f3eb78088e8502e90c8382">cull</reimplementedby>
         <param>
-          <type>const <ref refid="classhelios_1_1scene_1_1Camera" kindref="compound">helios::scene::Camera</ref> &amp;</type>
-          <declname>camera</declname>
+          <type>const <ref refid="classhelios_1_1scene_1_1CameraSceneNode" kindref="compound">helios::scene::CameraSceneNode</ref> *</type>
+          <declname>cameraSceneNode</declname>
         </param>
         <param>
           <type>const <ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">helios::scene::SceneNode</ref> &amp;</type>
@@ -54,10 +54,10 @@
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>camera</parametername>
+<parametername>cameraSceneNode</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The camera defining the view frustum. </para>
+<para>The <ref refid="classhelios_1_1scene_1_1CameraSceneNode" kindref="compound">CameraSceneNode</ref> providing information about the view frustum. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>

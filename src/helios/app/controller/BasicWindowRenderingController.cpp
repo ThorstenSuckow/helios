@@ -36,7 +36,7 @@ namespace helios::app::controller {
     }
 
     std::string BasicWindowRenderingController::toString() const noexcept {
-        return "BasiCWindowController";
+        return "BasicWindowController";
     }
 
 };

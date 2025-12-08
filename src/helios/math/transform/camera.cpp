@@ -16,7 +16,7 @@ namespace helios::math {
         const auto x = cross(up, z).normalize();
         const auto y = cross(z, x).normalize();
 
-        return mat4{
+        return mat4f{
             x[0], y[0], z[0], 0.0f,
             x[1], y[1], z[1], 0.0f,
             x[2], y[2], z[2], 0.0f,
@@ -28,7 +28,7 @@ namespace helios::math {
 
         float f = 1 / std::tan(fovY/2);
 
-        return mat4{
+        return mat4f{
             f/aspect, 0.0f, 0.0f, 0.0f,
             0.0f, f, 0.0f, 0.0f,
             0.0f, 0.0f , -(zFar + zNear)/(zFar - zNear), -1.0f,

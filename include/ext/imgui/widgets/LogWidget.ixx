@@ -502,10 +502,18 @@ export namespace helios::ext::imgui::widgets {
                         }
 
                         // Build display string for text filter
-                        std::string displayLine =
-                            entry.timestamp + " " +
-                            labelForLevel(entry.level) + " [" +
-                            entry.scope + "] " + entry.message;
+                        // If a specific scope is selected, omit scope from display (already visible in combo)
+                        std::string displayLine;
+                        if (activeScopeFilter_.empty()) {
+                            // "All Scopes" selected - show scope in each line
+                            displayLine = entry.timestamp + " " +
+                                labelForLevel(entry.level) + " [" +
+                                entry.scope + "] " + entry.message;
+                        } else {
+                            // Specific scope filtered - omit scope from display
+                            displayLine = entry.timestamp + " " +
+                                labelForLevel(entry.level) + " " + entry.message;
+                        }
 
                         // Apply text filter
                         if (!textFilter_.PassFilter(displayLine.c_str())) {

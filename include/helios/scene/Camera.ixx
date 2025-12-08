@@ -120,7 +120,7 @@ export namespace helios::scene {
          *
          * @see helios::scene::CameraSceneNode::worldTransform()
          */
-        [[nodiscard]] const Camera& setViewMatrix(const helios::math::mat4f& viewMatrix) const noexcept {
+        const Camera& setViewMatrix(const helios::math::mat4f& viewMatrix) const noexcept {
             viewMatrix_ = viewMatrix;
             return *this;
         }

@@ -218,8 +218,8 @@ export namespace helios::math {
 
 
         /**
-        *  @brief Performs matrix-vector-multiplication with a `vec4<T> v`.
-        *
+         * @brief Performs matrix-vector-multiplication with a `vec4<T> v`.
+         *
          * This matrix is the left operand, while `v` is the right operand.
          *
          * @param v The right-hand side `vec4<T>` for multiplication.

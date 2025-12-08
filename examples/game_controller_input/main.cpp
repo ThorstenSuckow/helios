@@ -87,7 +87,6 @@ int main() {
 
     auto win = dynamic_cast<GLFWWindow*>(app->current());
     auto mainViewport = win->addViewport(std::make_shared<helios::rendering::Viewport>());
-    mainViewport->setCamera(std::make_shared<Camera>());
     // helper
     auto stringFileReader = helios::util::io::BasicStringFileReader();
 
@@ -198,8 +197,11 @@ int main() {
     auto scene = helios::scene::Scene(std::move(cullingStrategy));
 
     // camera
-    const auto camera_ptr = scene.addNode(std::make_unique<helios::scene::CameraSceneNode>(mainViewport->camera()));
-    assert(camera_ptr != nullptr && "unexpected nullptr for circleNode");
+    auto mainCamera = std::make_unique<helios::scene::Camera>();
+    auto cameraSceneNode = std::make_unique<helios::scene::CameraSceneNode>(std::move(mainCamera));
+    mainViewport->setCameraSceneNode(&*cameraSceneNode);
+    auto camera_ptr = scene.addNode(std::move(cameraSceneNode));
+    assert(camera_ptr != nullptr && "unexpected nullptr for camera node");
 
     // scene nodes
     const auto stickLeftNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>(circleRenderable));

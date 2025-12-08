@@ -158,18 +158,23 @@ export namespace helios::rendering {
         [[nodiscard]] const helios::rendering::RenderTarget* renderTarget() const noexcept;
 
         /**
-         * @brief Assigns a camera to this viewport.
+         * @brief Assigns a camera scene node to this viewport.
          *
-         * @param cameraSceneNode A  raw pointer to the `Camera` object.
+         * The viewport uses the associated camera's projection matrix and the node's
+         * computed view matrix for rendering. The camera's aspect ratio is automatically
+         * updated when the parent RenderTarget is resized.
          *
-         * @return A const ref to this viewport to allow fluent chaining.
+         * @param cameraSceneNode A non-owning raw pointer to the `CameraSceneNode`.
+         *        Must remain valid for the lifetime of this viewport.
+         *
+         * @return A reference to this viewport to allow fluent chaining.
          */
         Viewport& setCameraSceneNode(const helios::scene::CameraSceneNode* cameraSceneNode) noexcept;
 
         /**
-         * @brief Gets the camera associated with this viewport.
+         * @brief Gets the camera scene node associated with this viewport.
          *
-         * @return A shared pointer to the `Camera` object.
+         * @return A const pointer to the associated `CameraSceneNode`, or `nullptr` if none is set.
          */
         [[nodiscard]] const helios::scene::CameraSceneNode* cameraSceneNode() const noexcept;
 

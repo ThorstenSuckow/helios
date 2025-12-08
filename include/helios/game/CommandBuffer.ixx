@@ -84,13 +84,7 @@ export namespace helios::game {
          * @note This overload is useful when the GameObject instance is not directly available,
          *       such as in networked scenarios or when processing serialized commands.
          */
-        void add(const helios::util::Guid& guid, std::unique_ptr<helios::game::Command> command) {
-            if (!command) {
-                logger_.warn("Attempted to add a null command to the command buffer");
-                return;
-            }
-            commandBuffer_.emplace_back(TargetedCommand{guid, std::move(command)});
-        }
+        void add(const helios::util::Guid& guid, std::unique_ptr<helios::game::Command> command);
 
         /**
          * @brief Executes all buffered commands against the GameWorld and clears the buffer.
@@ -107,19 +101,7 @@ export namespace helios::game {
          *          and remaining commands will not be executed. Consider making execute() noexcept
          *          or handling exceptions within command implementations.
          */
-        CommandBuffer& flush(helios::game::GameWorld& gameWorld) {
-            for (auto& targetedCommand : commandBuffer_) {
-                auto* gameObject = gameWorld.find(targetedCommand.guid);
-                if (!gameObject) {
-                    logger_.warn(std::format("GameObject with Guid {} not found, skipping command",
-                                             targetedCommand.guid.value()));
-                    continue;
-                }
-                targetedCommand.command->execute(*gameObject);
-            }
-            clear();
-            return *this;
-        }
+        CommandBuffer& flush(helios::game::GameWorld& gameWorld);
 
         /**
          * @brief Clears all buffered commands without executing them.
@@ -129,12 +111,7 @@ export namespace helios::game {
          * @note This destroys all buffered commands. Use this to discard commands
          *       without executing them (e.g., when reverting to a previous game state).
          */
-        CommandBuffer& clear() {
-            commandBuffer_.clear();
-            return *this;
-        }
-
-
+        CommandBuffer& clear();
     };
 
 

@@ -5,7 +5,7 @@ module;
 module helios.scene.CullNoneStrategy;
 
 import helios.scene.FrustumCullingStrategy;
-import helios.scene.Camera;
+import helios.scene.CameraSceneNode;
 import helios.scene.Scene;
 import helios.scene.SceneNode;
 
@@ -21,7 +21,7 @@ namespace helios::scene {
     }
 
     [[nodiscard]] std::vector<const helios::scene::SceneNode*> CullNoneStrategy::cull(
-        const helios::scene::Camera& camera, const helios::scene::SceneNode& root
+        const helios::scene::CameraSceneNode* cameraSceneNode, const helios::scene::SceneNode& root
     )  {
 
         auto nodes = std::vector<const helios::scene::SceneNode*>();

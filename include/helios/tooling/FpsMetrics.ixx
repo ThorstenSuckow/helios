@@ -5,7 +5,6 @@
 module;
 
 #include <deque>
-#include <numeric>
 
 export module helios.tooling.FpsMetrics;
 
@@ -25,7 +24,7 @@ export namespace helios::tooling {
      * performance metrics in development tools or debug overlays.
      *
      * @par Usage Example:
-     * @code
+     * ```cpp
      * helios::tooling::FpsMetrics metrics;
      * metrics.setHistorySize(120);
      *
@@ -35,7 +34,7 @@ export namespace helios::tooling {
      *
      * float fps          = metrics.getFps();
      * float avgFrameTime = metrics.getFrameTimeMs();
-     * @endcode
+     * ```
      */
     class FpsMetrics {
 
@@ -105,7 +104,6 @@ export namespace helios::tooling {
         float lastWaitTime_ = 0.0f;
 
         /**
-         * @var frameCount_
          * @brief Tracks the total number of frames processed since initialization.
          *
          * The frameCount_ variable accumulates the count of frames that have been
@@ -136,26 +134,7 @@ export namespace helios::tooling {
          * @note This function is safe to call in hot paths and does not throw under
          * normal conditions; it is therefore marked `noexcept`.
          */
-        void update() noexcept {
-            if (!needsUpdate_ || history_.empty()) {
-                return;
-            }
-
-            const auto& stats = history_.back();
-
-            lastWorkTime_ = stats.workTime * 1000.0f;
-            lastWaitTime_ = stats.waitTime * 1000.0f;
-
-            float sumMs = 0.0f;
-            for (const auto& s : history_) {
-                sumMs += s.totalFrameTime * 1000.0f;
-            }
-
-            avgFrameTime_ = sumMs / static_cast<float>(history_.size());
-            avgFps_       = (avgFrameTime_ > 0.0001f) ? (1000.0f / avgFrameTime_) : 0.0f;
-
-            needsUpdate_ = false;
-        }
+        void update() noexcept;
 
     public:
 
@@ -179,18 +158,7 @@ export namespace helios::tooling {
          * frame loop, after timing information for the current frame has
          * been measured.
          */
-        void addFrame(const helios::engine::FrameStats& stats) {
-
-            needsUpdate_ = true;
-
-            // Maintain history for averaging
-            history_.push_back(stats);
-            if (history_.size() > historySize_) {
-                history_.pop_front();
-            }
-
-            frameCount_++;
-        }
+        void addFrame(const helios::engine::FrameStats& stats);
 
         /**
          * @brief Sets the size of the frame history buffer.
@@ -203,22 +171,14 @@ export namespace helios::tooling {
          * @note Common values: 30 for roughly half-second average at 60 FPS,
          *       60 for roughly one-second average at 60 FPS.
          */
-        void setHistorySize(size_t size) {
-            historySize_ = size;
-            while (history_.size() > historySize_) {
-                history_.pop_front();
-            }
-            needsUpdate_ = true;
-        }
+        void setHistorySize(size_t size);
 
         /**
          * @brief Gets the current history buffer size.
          *
          * @return Maximum number of frames kept in history.
          */
-        [[nodiscard]] size_t getHistorySize() const noexcept {
-            return historySize_;
-        }
+        [[nodiscard]] size_t getHistorySize() const noexcept;
 
         /**
          * @brief Gets the average frames per second.
@@ -228,10 +188,7 @@ export namespace helios::tooling {
          *
          * @return Average FPS calculated over the frames stored in the history buffer.
          */
-        [[nodiscard]] float getFps() noexcept {
-            update();
-            return avgFps_;
-        }
+        [[nodiscard]] float getFps() noexcept;
 
         /**
          * @brief Gets the average frame time in milliseconds.
@@ -240,10 +197,7 @@ export namespace helios::tooling {
          *
          * @return Average total frame time (work + wait) in milliseconds.
          */
-        [[nodiscard]] float getFrameTimeMs() noexcept {
-            update();
-            return avgFrameTime_;
-        }
+        [[nodiscard]] float getFrameTimeMs() noexcept;
 
         /**
          * @brief Gets the most recent frame's work time.
@@ -252,10 +206,7 @@ export namespace helios::tooling {
          *
          * @return Work time of the last processed frame in milliseconds.
          */
-        [[nodiscard]] float getWorkTimeMs() noexcept {
-            update();
-            return lastWorkTime_;
-        }
+        [[nodiscard]] float getWorkTimeMs() noexcept;
 
         /**
          * @brief Gets the most recent frame's idle time.
@@ -264,19 +215,14 @@ export namespace helios::tooling {
          *
          * @return Wait/idle time of the last processed frame in milliseconds.
          */
-        [[nodiscard]] float getIdleTimeMs() noexcept {
-            update();
-            return lastWaitTime_;
-        }
+        [[nodiscard]] float getIdleTimeMs() noexcept;
 
         /**
          * @brief Gets the frame count.
          *
          * @return The total number of frames that have been added via `addFrame()`.
          */
-        [[nodiscard]] unsigned long long getFrameCount() const noexcept {
-            return frameCount_;
-        }
+        [[nodiscard]] unsigned long long getFrameCount() const noexcept;
 
         /**
          * @brief Gets the average frame time in seconds.
@@ -286,10 +232,7 @@ export namespace helios::tooling {
          *
          * @return Average total frame time (work + wait) in seconds.
          */
-        [[nodiscard]] float getFrameTimeSeconds() noexcept {
-            update();
-            return avgFrameTime_ * 0.001f;
-        }
+        [[nodiscard]] float getFrameTimeSeconds() noexcept;
 
         /**
          * @brief Gets the most recent frame's work time in seconds.
@@ -299,10 +242,7 @@ export namespace helios::tooling {
          *
          * @return Work time of the last processed frame in seconds.
          */
-        [[nodiscard]] float getWorkTimeSeconds() noexcept {
-            update();
-            return lastWorkTime_ * 0.001f;
-        }
+        [[nodiscard]] float getWorkTimeSeconds() noexcept;
 
         /**
          * @brief Gets the most recent frame's idle time in seconds.
@@ -312,10 +252,7 @@ export namespace helios::tooling {
          *
          * @return Wait/idle time of the last processed frame in seconds.
          */
-        [[nodiscard]] float getIdleTimeSeconds() noexcept {
-            update();
-            return lastWaitTime_ * 0.001f;
-        }
+        [[nodiscard]] float getIdleTimeSeconds() noexcept;
 
         /**
          * @brief Gets the complete frame history.
@@ -326,9 +263,7 @@ export namespace helios::tooling {
          * @note Useful for rendering frame time graphs or diagnostic views
          *       in debug overlays.
          */
-        [[nodiscard]] const std::deque<helios::engine::FrameStats>& getHistory() const noexcept {
-            return history_;
-        }
+        [[nodiscard]] const std::deque<helios::engine::FrameStats>& getHistory() const noexcept;
 
         /**
          * @brief Clears all collected metrics and resets to initial state.
@@ -337,14 +272,6 @@ export namespace helios::tooling {
          * counters to their default values. After calling this function,
          * all query functions will report zeros until new frames are added.
          */
-        void reset() {
-            history_.clear();
-            avgFps_       = 0.0f;
-            avgFrameTime_ = 0.0f;
-            lastWorkTime_ = 0.0f;
-            lastWaitTime_ = 0.0f;
-            frameCount_   = 0;
-            needsUpdate_  = false;
-        }
+        void reset();
     };
 }

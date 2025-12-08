@@ -10,6 +10,8 @@ module;
 export module helios.math.types:mat4;
 
 import :vec3;
+import :vec4;
+
 import helios.math.concepts;
 
 
@@ -102,7 +104,18 @@ export namespace helios::math {
 
         /**
          * @brief Provides read-only access to a matrix component.
-         * Elements are accessed in column major order: `m[row + col * 4]`.
+         *
+         * Elements are _accessed_ in column major order: `m[row + col * 4]`,
+         * while the specified indices represent an usual mxn-matrix access,
+         * i.e. for a given 2x4-matrix
+         *      [0, 1, 2, 3,
+         *       4, 5, 6, 7,
+         *       8, 9, 10, 11,
+         *       12, 13, 14, 15]
+         *
+         * a call to row(0, 2) returns "2", while the matrix is internally stored
+         * as (1, 4, 8, 12, 1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15).
+         *
          * Bounds checking is performed via `assert` in debug builds.
          *
          * @param row The zero based row index.
@@ -118,7 +131,18 @@ export namespace helios::math {
 
         /**
          * @brief Provides read-write access to a matrix component.
-         * Elements are accessed in column major order: `m[row + col * 4]`.
+         *
+         * Elements are _accessed_ in column major order: `m[row + col * 4]`,
+         * while the specified indices represent an usual mxn-matrix access,
+         * i.e. for a given 2x4-matrix
+         *      [0, 1, 2, 3,
+         *       4, 5, 6, 7,
+         *       8, 9, 10, 11,
+         *       12, 13, 14, 15]
+         *
+         * a call to row(0, 2) returns "2", while the matrix is internally stored
+         * as (0, 4, 8, 12, 1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15).
+         *
          * Bounds checking is performed via `assert` in debug builds.
          *
          * @param row The zero based row index.
@@ -212,6 +236,26 @@ export namespace helios::math {
             }
 
             return A;
+        }
+
+
+        /**
+         * @brief Performs matrix-vector-multiplication with a `vec4<T> v`.
+         *
+         * This matrix is the left operand, while `v` is the right operand.
+         *
+         * @param v The right-hand side `vec4<T>` for multiplication.
+         *
+         * @return A new `vec4<T>`, representing the result of the matrix-vector-multiplication.
+         */
+        constexpr vec4<T> operator*(const vec4<T>&  v) const {
+            const auto m = *this;
+            return vec4<T>{
+                m(0, 0) * v[0] + m(0, 1) * v[1] + m(0, 2) * v[2] + m(0, 3)  * v[3],
+                m(1, 0) * v[0] + m(1, 1) * v[1] + m(1, 2) * v[2] + m(1, 3)  * v[3],
+                m(2, 0) * v[0] + m(2, 1) * v[1] + m(2, 2) * v[2] + m(2, 3)  * v[3],
+                m(3, 0) * v[0] + m(3, 1) * v[1] + m(3, 2) * v[2] + m(3, 3)  * v[3]
+            };
         }
     };
 

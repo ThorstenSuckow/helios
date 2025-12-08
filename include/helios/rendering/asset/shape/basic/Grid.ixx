@@ -5,6 +5,7 @@
 module;
 
 
+#include <stdexcept>
 #include <vector>
 
 export module helios.rendering.asset.shape.basic.Grid;

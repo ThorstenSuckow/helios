@@ -50,6 +50,16 @@ export namespace helios::rendering::shader {
         MaterialRoughness,
 
         /**
+         * @brief Represents the time elapsed since the last frame.
+         */
+        deltaTime,
+
+        /**
+         * @brief Represents the total time elapsed since measuring frame times.
+         */
+        totalTime,
+
+        /**
          * @brief Number of entries in this enum.
          */
         size_

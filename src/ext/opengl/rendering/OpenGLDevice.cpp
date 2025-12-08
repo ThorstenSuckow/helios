@@ -112,6 +112,7 @@ namespace helios::ext::opengl::rendering {
                 }
                 logger_.info("activating shader...");
                 shader->use();
+                shader->applyUniformValues(renderPass.frameUniformValues());
                 shader->applyUniformValues(rc->objectUniformValues());
                 shader->applyUniformValues(rc->materialUniformValues());
 
@@ -138,3 +139,6 @@ namespace helios::ext::opengl::rendering {
 
 
 }; // namespace helios::ext::opengl::rendering
+
+
+

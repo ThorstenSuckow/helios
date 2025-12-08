@@ -10,6 +10,9 @@ class TestEvent : public Event {
 public:
     TestEvent() :Event() {}
     TestEvent(uint64_t tag): Event(tag) {}
+    std::string toString() const noexcept override {
+        return "";
+    }
 };
 
 TEST(BasicEventManagerTest, dispatchAll) {

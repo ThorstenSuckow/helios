@@ -1,6 +1,7 @@
 module;
 
 #include <cstdint>
+#include <format>
 
 module helios.window.event.FrameBufferResizeEvent;
 
@@ -28,6 +29,17 @@ namespace helios::window::event {
     width(width),
     height(height)
     {}
+
+    std::string FrameBufferResizeEvent::toString() const noexcept {
+        return std::format(
+            "FrameBufferResizeEvent[{0}, {1}, {2}, {3}]",
+            sourceGuid.value(),
+            tag(),
+            width,
+            height
+        );
+
+    }
 
 };
 

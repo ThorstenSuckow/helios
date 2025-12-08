@@ -4,7 +4,7 @@ module;
 #include <glfw/glfw3.h>
 #include <memory>
 #include <stdexcept>
-#include <iostream>
+#include <format>
 
 module helios.ext.glfw.app.GLFWApplication;
 

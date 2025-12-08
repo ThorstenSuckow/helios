@@ -1,7 +1,7 @@
 module;
 
 #include <cassert>
-#include <iostream>
+#include <format>
 #include <memory>
 #include <optional>
 #include <stdexcept>

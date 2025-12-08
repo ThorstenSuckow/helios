@@ -2,6 +2,7 @@ module;
 
 #include <memory>
 #include <stdexcept>
+#include <format>
 
 module helios.app.Application;
 
@@ -54,7 +55,12 @@ namespace helios::app {
 
     void Application::addController(std::unique_ptr<helios::app::controller::Controller> controller) noexcept {
         if (initialized_) {
-            logger_.info("Adding an Controller to an already initialized Application.");
+            logger_.info(
+                std::format("Controller {0} added to an already initialized Application, explicitly initializing.", controller->toString())
+                );
+            if (controller->init()) {
+                controller->subscribeTo(eventManager_->dispatcher());
+            }
         }
         controllers_.push_back(std::move(controller));
     }

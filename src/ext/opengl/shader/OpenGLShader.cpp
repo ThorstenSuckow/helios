@@ -1,7 +1,7 @@
 module;
 
 #include <glad/gl.h>
-#include <iostream>
+#include <format>
 #include <helios/helios_config.h>
 
 module helios.ext.opengl.rendering.shader.OpenGLShader;

@@ -1,6 +1,6 @@
 module;
 
-#include <iostream>
+#include <format>
 #include <GLFW/glfw3.h>
 
 module helios.ext.glfw.window.GLFWWindow;

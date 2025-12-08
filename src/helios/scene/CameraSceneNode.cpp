@@ -12,11 +12,11 @@ import helios.scene.Camera;
 
 namespace helios::scene {
 
-    CameraSceneNode::CameraSceneNode(std::shared_ptr<Camera> camera) :
-        camera_(camera) {
+    CameraSceneNode::CameraSceneNode(std::unique_ptr<Camera> camera) :
+        camera_(std::move(camera)) {
         // intentionally test the shared_ptr,
         // we can check later if camera_ is expired
-        if (!camera) {
+        if (!camera_) {
             throw std::invalid_argument("CameraSceneNode received a Camera nullptr.");
         }
     }
@@ -26,8 +26,12 @@ namespace helios::scene {
         return nullptr;
     }
 
-    std::weak_ptr<Camera> CameraSceneNode::camera() const noexcept {
-        return camera_;
+    const Camera& CameraSceneNode::camera() const noexcept {
+        return *camera_;
+    }
+
+    Camera& CameraSceneNode::camera() noexcept {
+        return *camera_;
     }
 
 } // namespace helios::scene

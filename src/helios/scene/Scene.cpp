@@ -70,10 +70,12 @@ namespace helios::scene {
     }
 
 
-    void Scene::updateNodes() const { updateNodes(*root_, mat4fid); }
+    void Scene::updateNodes() const {
+        updateNodes(*root_, mat4fid);
+    }
 
 
-    std::vector<const SceneNode*> Scene::findVisibleNodes(const Camera& camera) const {
+    std::vector<const SceneNode*> Scene::findVisibleNodes(const CameraSceneNode* cameraSceneNode) const {
         assert(root_ && "Unexpected null-root");
         if (!root_) {
             logger_.error("Unexpected nullptr for this Scene's root.");
@@ -81,7 +83,7 @@ namespace helios::scene {
 
         updateNodes();
 
-        return frustumCullingStrategy_->cull(camera, *root_);
+        return frustumCullingStrategy_->cull(cameraSceneNode, *root_);
     }
 
 
@@ -95,14 +97,14 @@ namespace helios::scene {
 
     std::optional<Snapshot> Scene::createSnapshot(const std::shared_ptr<const Viewport>& viewport) const {
 
-        const auto camera = viewport->camera();
+        const auto* cameraSceneNode = viewport->cameraSceneNode();
 
-        if (!camera) {
+        if (!cameraSceneNode) {
             logger_.warn("Viewport was not configured with a camera, skipping createSnapshot()...");
             return std::nullopt;
         }
 
-        const auto nodes = findVisibleNodes(*camera);
+        const auto nodes = findVisibleNodes(cameraSceneNode);
 
         std::vector<SnapshotItem> renderables;
         renderables.reserve(nodes.size());
@@ -112,8 +114,12 @@ namespace helios::scene {
             }
         }
 
-        return std::make_optional<Snapshot>(viewport, camera->projectionMatrix(), camera->viewMatrix(),
-                                            std::move(renderables));
+        return std::make_optional<Snapshot>(
+            viewport,
+            cameraSceneNode->camera().projectionMatrix(),
+            cameraSceneNode->camera().viewMatrix(),
+            std::move(renderables)
+        );
     }
 
 } // namespace helios::scene

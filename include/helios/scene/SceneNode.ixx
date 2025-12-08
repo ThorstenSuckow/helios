@@ -296,7 +296,7 @@ export namespace helios::scene {
              *
              * @return The current world transform matrix for this scene node.
              */
-            const helios::math::mat4f& worldTransform() noexcept;
+            virtual const helios::math::mat4f& worldTransform() noexcept;
 
             /**
              * @brief Returns the current worldTransform matrix of this SceneNode

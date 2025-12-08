@@ -1,6 +1,8 @@
-module helios.math.transform;
+module;
 
 #include <cmath>
+
+module helios.math.transform;
 
 import :camera;
 

@@ -1,8 +1,11 @@
 module helios.math.transform;
 
+#include <cmath>
+
 import :camera;
 
 import helios.math.types;
+import helios.math.utils;
 
 namespace helios::math {
 
@@ -17,6 +20,19 @@ namespace helios::math {
             x[2], y[2], z[2], 0.0f,
             -dot(x, eye), -dot(y, eye), -dot(z, eye), 1.0f,
         };
+    }
+
+    mat4f perspective(const float fovY, const float aspect, const float zNear, const float zFar) noexcept {
+
+        float f = 1 / std::tan(fovY/2);
+
+        return mat4{
+            f/aspect, 0.0f, 0.0f, 0.0f,
+            0.0f, f, 0.0f, 0.0f,
+            0.0f, 0.0f , -(zFar + zNear)/(zFar - zNear), -1.0f,
+            0.0f, 0.0f, -2 * (zFar * zNear) / (zFar - zNear), 0.0f
+        };
+
     }
 
 }

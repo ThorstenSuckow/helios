@@ -147,7 +147,7 @@ int main() {
 
     // ========================================
     // Configure Logger
-    // =====================================es wird===
+    // ========================================
     helios::util::log::LogManager::getInstance().enableLogging(true);
     auto imguiLogSink = std::make_shared<helios::ext::imgui::ImGuiLogSink>(logWidget);
     helios::util::log::LogManager::getInstance().enableSink(imguiLogSink);

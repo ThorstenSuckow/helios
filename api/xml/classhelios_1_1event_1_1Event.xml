@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
-  <compounddef id="classhelios_1_1event_1_1Event" kind="class" language="C++" prot="public">
+  <compounddef id="classhelios_1_1event_1_1Event" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>helios::event::Event</compoundname>
     <derivedcompoundref refid="classhelios_1_1window_1_1event_1_1WindowEvent" prot="public" virt="non-virtual">helios::window::event::WindowEvent</derivedcompoundref>
     <sectiondef kind="private-attrib">
@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/event/Event.ixx" line="33" column="34" bodyfile="include/helios/event/Event.ixx" bodystart="33" bodyend="-1"/>
+        <location file="include/helios/event/Event.ixx" line="34" column="34" bodyfile="include/helios/event/Event.ixx" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1event_1_1Event_1aeb59ce30076dde6602fe0e959fee659f" prot="private" static="no" mutable="no">
         <type>const uint64_t</type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/event/Event.ixx" line="38" column="24" bodyfile="include/helios/event/Event.ixx" bodystart="38" bodyend="-1"/>
+        <location file="include/helios/event/Event.ixx" line="39" column="24" bodyfile="include/helios/event/Event.ixx" bodystart="39" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/event/Event.ixx" line="41" column="17"/>
+        <location file="include/helios/event/Event.ixx" line="42" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1event_1_1Event_1a6a32122b419e5513a9a76cdb4312bc71" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/event/Event.ixx" line="47" column="9"/>
+        <location file="include/helios/event/Event.ixx" line="48" column="9"/>
         <referencedby refid="classhelios_1_1event_1_1Event_1a4121aa2496d80da96e2b521f72e45f75">operator==</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1event_1_1Event_1a741350d083ce20aefbb749fd0a83e5f2" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/event/Event.ixx" line="55" column="18"/>
+        <location file="include/helios/event/Event.ixx" line="56" column="18"/>
         <references refid="classhelios_1_1event_1_1Event_1a6b7048ac1591c2decbbabbb2100e7db7">tag</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1event_1_1Event_1ac85d4e33df6df0ec7dcd15de2a2cdf2e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
@@ -112,7 +112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/event/Event.ixx" line="63" column="35"/>
+        <location file="include/helios/event/Event.ixx" line="64" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1event_1_1Event_1a6b7048ac1591c2decbbabbb2100e7db7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>uint64_t</type>
@@ -130,10 +130,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/event/Event.ixx" line="72" column="19"/>
+        <location file="include/helios/event/Event.ixx" line="73" column="19"/>
         <referencedby refid="classhelios_1_1event_1_1Event_1a741350d083ce20aefbb749fd0a83e5f2">Event</referencedby>
         <referencedby refid="classhelios_1_1window_1_1event_1_1FrameBufferResizeEvent_1a48c03ab86ea3ba9358c6c9b95a810a8c">helios::window::event::FrameBufferResizeEvent::FrameBufferResizeEvent</referencedby>
         <referencedby refid="classhelios_1_1window_1_1event_1_1WindowEvent_1ab5286107303e5071ac3d87ac9ba69202">helios::window::event::WindowEvent::WindowEvent</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1event_1_1Event_1a263ea103b6256d8b48c065e0b70b0212" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>std::string</type>
+        <definition>virtual std::string helios::event::Event::toString</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>toString</name>
+        <qualifiedname>helios::event::Event::toString</qualifiedname>
+        <reimplementedby refid="classhelios_1_1window_1_1event_1_1FrameBufferResizeEvent_1a007ff0e741584eb88b5a7a9653af3d06">toString</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/event/Event.ixx" line="75" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1event_1_1Event_1a4121aa2496d80da96e2b521f72e45f75" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -164,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/event/Event.ixx" line="80" column="14"/>
+        <location file="include/helios/event/Event.ixx" line="82" column="14"/>
         <references refid="classhelios_1_1event_1_1Event_1a6a32122b419e5513a9a76cdb4312bc71">Event</references>
       </memberdef>
     </sectiondef>
@@ -195,7 +210,7 @@
         </childnode>
       </node>
     </inheritancegraph>
-    <location file="include/helios/event/Event.ixx" line="28" column="5" bodyfile="include/helios/event/Event.ixx" bodystart="28" bodyend="82"/>
+    <location file="include/helios/event/Event.ixx" line="29" column="5" bodyfile="include/helios/event/Event.ixx" bodystart="29" bodyend="84"/>
     <listofallmembers>
       <member refid="classhelios_1_1event_1_1Event_1a6a32122b419e5513a9a76cdb4312bc71" prot="public" virt="non-virtual"><scope>helios::event::Event</scope><name>Event</name></member>
       <member refid="classhelios_1_1event_1_1Event_1a741350d083ce20aefbb749fd0a83e5f2" prot="public" virt="non-virtual"><scope>helios::event::Event</scope><name>Event</name></member>
@@ -204,6 +219,7 @@
       <member refid="classhelios_1_1event_1_1Event_1a4121aa2496d80da96e2b521f72e45f75" prot="public" virt="non-virtual"><scope>helios::event::Event</scope><name>operator==</name></member>
       <member refid="classhelios_1_1event_1_1Event_1a6b7048ac1591c2decbbabbb2100e7db7" prot="public" virt="non-virtual"><scope>helios::event::Event</scope><name>tag</name></member>
       <member refid="classhelios_1_1event_1_1Event_1aeb59ce30076dde6602fe0e959fee659f" prot="private" virt="non-virtual"><scope>helios::event::Event</scope><name>tag_</name></member>
+      <member refid="classhelios_1_1event_1_1Event_1a263ea103b6256d8b48c065e0b70b0212" prot="public" virt="pure-virtual"><scope>helios::event::Event</scope><name>toString</name></member>
       <member refid="classhelios_1_1event_1_1Event_1a4a70f4250c4f320381d31c42fc0e912f" prot="public" virt="virtual"><scope>helios::event::Event</scope><name>~Event</name></member>
     </listofallmembers>
   </compounddef>

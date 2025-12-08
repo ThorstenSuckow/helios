@@ -10,5 +10,6 @@ var classhelios_1_1event_1_1EventManager =
     [ "post", "classhelios_1_1event_1_1EventManager.html#a50af37271c6a4d4d6364a61e3d6d3d31", null ],
     [ "subscribe", "classhelios_1_1event_1_1EventManager.html#ac25503abf074331900fa19d5a44a5ad0", null ],
     [ "dispatcher_", "classhelios_1_1event_1_1EventManager.html#a1deac9e3799c2f473fdb16bddb4dada8", null ],
-    [ "eventQueue_", "classhelios_1_1event_1_1EventManager.html#a06528b307d0e99a55a4aea8b608f6f8b", null ]
+    [ "eventQueue_", "classhelios_1_1event_1_1EventManager.html#a06528b307d0e99a55a4aea8b608f6f8b", null ],
+    [ "logger_", "classhelios_1_1event_1_1EventManager.html#a7b910bacb39548c70482615de3d06212", null ]
 ];

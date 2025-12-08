@@ -2,13 +2,17 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="WindowRenderingController_8ixx" kind="file" language="C++">
     <compoundname>WindowRenderingController.ixx</compoundname>
+    <includes refid="Logger_8ixx" local="no">helios.util.log.Logger</includes>
     <includes refid="FrameBufferResizeEvent_8ixx" local="no">helios.window.event.FrameBufferResizeEvent</includes>
+    <includes refid="LogManager_8ixx" local="no">helios.util.log.LogManager</includes>
     <includes refid="RenderingDevice_8ixx" local="no">helios.rendering.RenderingDevice</includes>
     <includes refid="Controller_8ixx" local="no">helios.app.controller.Controller</includes>
     <incdepgraph>
       <node id="49">
         <label>helios.app.controller.Controller</label>
         <link refid="Controller_8ixx"/>
+        <childnode refid="4" relation="include">
+        </childnode>
         <childnode refid="50" relation="include">
         </childnode>
       </node>
@@ -19,6 +23,10 @@
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
         <childnode refid="49" relation="include">
         </childnode>
       </node>
@@ -27,19 +35,21 @@
         <link refid="Dispatcher_8ixx"/>
         <childnode refid="51" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="52" relation="include">
         </childnode>
-        <childnode refid="7" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
       </node>
-      <node id="7">
+      <node id="14">
         <label>helios.event.Event</label>
         <link refid="Event_8ixx"/>
-        <childnode refid="8" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
         </childnode>
       </node>
       <node id="47">
@@ -48,229 +58,227 @@
         <childnode refid="47" relation="include">
         </childnode>
       </node>
-      <node id="25">
+      <node id="26">
         <label>helios.math.types</label>
         <link refid="helios_2math_2types_2__module_8ixx"/>
-        <childnode refid="25" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
       </node>
       <node id="48">
         <label>helios.rendering.ClearFlags</label>
         <link refid="ClearFlags_8ixx"/>
       </node>
-      <node id="20">
+      <node id="21">
         <label>helios.rendering.RenderCommand</label>
         <link refid="RenderCommand_8ixx"/>
-        <childnode refid="8" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="27" relation="include">
-        </childnode>
-      </node>
-      <node id="41">
-        <label>helios.rendering.RenderPass</label>
-        <link refid="RenderPass_8ixx"/>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="42" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-      </node>
-      <node id="27">
-        <label>helios.rendering.RenderPrototype</label>
-        <link refid="RenderPrototype_8ixx"/>
-        <childnode refid="8" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="28" relation="include">
         </childnode>
-        <childnode refid="34" relation="include">
+      </node>
+      <node id="42">
+        <label>helios.rendering.RenderPass</label>
+        <link refid="RenderPass_8ixx"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
         </childnode>
       </node>
-      <node id="10">
-        <label>helios.rendering.RenderQueue</label>
-        <link refid="RenderQueue_8ixx"/>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-      </node>
-      <node id="39">
-        <label>helios.rendering.Renderable</label>
-        <link refid="Renderable_8ixx"/>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="23" relation="include">
+      <node id="28">
+        <label>helios.rendering.RenderPrototype</label>
+        <link refid="RenderPrototype_8ixx"/>
+        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
+        <childnode refid="35" relation="include">
         </childnode>
-        <childnode refid="18" relation="include">
+      </node>
+      <node id="19">
+        <label>helios.rendering.RenderQueue</label>
+        <link refid="RenderQueue_8ixx"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="21" relation="include">
         </childnode>
-        <childnode refid="40" relation="include">
-        </childnode>
-        <childnode refid="27" relation="include">
-        </childnode>
       </node>
-      <node id="9">
-        <label>helios.rendering.RenderingDevice</label>
-        <link refid="RenderingDevice_8ixx"/>
-        <childnode refid="10" relation="include">
+      <node id="40">
+        <label>helios.rendering.Renderable</label>
+        <link refid="Renderable_8ixx"/>
+        <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="39" relation="include">
+        <childnode refid="24" relation="include">
         </childnode>
-        <childnode refid="35" relation="include">
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="41" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
       </node>
-      <node id="32">
-        <label>helios.rendering.Vertex</label>
-        <link refid="Vertex_8ixx"/>
-        <childnode refid="25" relation="include">
+      <node id="18">
+        <label>helios.rendering.RenderingDevice</label>
+        <link refid="RenderingDevice_8ixx"/>
+        <childnode refid="19" relation="include">
         </childnode>
-      </node>
-      <node id="42">
-        <label>helios.rendering.Viewport</label>
-        <link refid="Viewport_8ixx"/>
-        <childnode refid="43" relation="include">
+        <childnode refid="40" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
+        <childnode refid="36" relation="include">
         </childnode>
         <childnode refid="42" relation="include">
         </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>helios.rendering.Vertex</label>
+        <link refid="Vertex_8ixx"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>helios.rendering.Viewport</label>
+        <link refid="Viewport_8ixx"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
         <childnode refid="44" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
         <childnode refid="48" relation="include">
         </childnode>
       </node>
-      <node id="30">
+      <node id="31">
         <label>helios.rendering.asset.shape.Shape</label>
         <link refid="Shape_8ixx"/>
-        <childnode refid="8" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="31" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="32" relation="include">
-        </childnode>
-      </node>
-      <node id="34">
-        <label>helios.rendering.model.Material</label>
-        <link refid="Material_8ixx"/>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="29" relation="include">
-        </childnode>
-        <childnode refid="35" relation="include">
-        </childnode>
-        <childnode refid="37" relation="include">
-        </childnode>
-        <childnode refid="38" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-      </node>
-      <node id="28">
-        <label>helios.rendering.model.Mesh</label>
-        <link refid="Mesh_8ixx"/>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="29" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="30" relation="include">
         </childnode>
         <childnode refid="33" relation="include">
         </childnode>
-        <childnode refid="32" relation="include">
+      </node>
+      <node id="35">
+        <label>helios.rendering.model.Material</label>
+        <link refid="Material_8ixx"/>
+        <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
         </childnode>
       </node>
-      <node id="37">
-        <label>helios.rendering.model.config.MaterialProperties</label>
-        <link refid="MaterialProperties_8ixx"/>
-        <childnode refid="26" relation="include">
+      <node id="29">
+        <label>helios.rendering.model.Mesh</label>
+        <link refid="Mesh_8ixx"/>
+        <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="30" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
-      </node>
-      <node id="40">
-        <label>helios.rendering.model.config.MaterialPropertiesOverride</label>
-        <link refid="MaterialPropertiesOverride_8ixx"/>
-        <childnode refid="23" relation="include">
+        <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="26" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="25" relation="include">
-        </childnode>
-      </node>
-      <node id="33">
-        <label>helios.rendering.model.config.MeshConfig</label>
-        <link refid="MeshConfig_8ixx"/>
         <childnode refid="31" relation="include">
         </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
       </node>
-      <node id="31">
+      <node id="38">
+        <label>helios.rendering.model.config.MaterialProperties</label>
+        <link refid="MaterialProperties_8ixx"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>helios.rendering.model.config.MaterialPropertiesOverride</label>
+        <link refid="MaterialPropertiesOverride_8ixx"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>helios.rendering.model.config.MeshConfig</label>
+        <link refid="MeshConfig_8ixx"/>
+        <childnode refid="32" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
         <label>helios.rendering.model.config.PrimitiveType</label>
         <link refid="PrimitiveType_8ixx"/>
       </node>
-      <node id="38">
+      <node id="39">
         <label>helios.rendering.shader.Shader</label>
         <link refid="Shader_8ixx"/>
-        <childnode refid="21" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
-        <childnode refid="18" relation="include">
+        <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
-      <node id="26">
+      <node id="27">
         <label>helios.rendering.shader.UniformSemantics</label>
         <link refid="UniformSemantics_8ixx"/>
       </node>
-      <node id="21">
+      <node id="22">
         <label>helios.rendering.shader.UniformValueMap</label>
         <link refid="UniformValueMap_8ixx"/>
-        <childnode refid="22" relation="include">
-        </childnode>
         <childnode refid="23" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
@@ -279,31 +287,33 @@
         </childnode>
         <childnode refid="26" relation="include">
         </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
       </node>
       <node id="44">
         <label>helios.scene.Camera</label>
         <link refid="Camera_8ixx"/>
-        <childnode refid="8" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="45" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
       </node>
       <node id="45">
         <label>helios.scene.SceneNode</label>
         <link refid="SceneNode_8ixx"/>
-        <childnode refid="8" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
         <childnode refid="46" relation="include">
         </childnode>
-        <childnode refid="4" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="39" relation="include">
+        <childnode refid="40" relation="include">
         </childnode>
         <childnode refid="45" relation="include">
         </childnode>
@@ -313,147 +323,149 @@
         <link refid="Transform_8ixx"/>
         <childnode refid="47" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
       </node>
-      <node id="4">
+      <node id="11">
         <label>helios.util.Guid</label>
         <link refid="Guid_8ixx"/>
-        <childnode refid="5" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="3" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="36">
+      <node id="37">
         <label>helios.util.log.ConsoleSink</label>
         <link refid="ConsoleSink_8ixx"/>
-        <childnode refid="11" relation="include">
+        <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="19" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="13">
+      <node id="15">
         <label>helios.util.log.LogManager</label>
         <link refid="LogManager_8ixx"/>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
         <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-      </node>
-      <node id="19">
-        <label>helios.util.log.LogSink</label>
-        <link refid="LogSink_8ixx"/>
-        <childnode refid="14" relation="include">
-        </childnode>
-      </node>
-      <node id="18">
-        <label>helios.util.log.Logger</label>
-        <link refid="Logger_8ixx"/>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-      </node>
-      <node id="35">
-        <label>helios.util.log</label>
-        <link refid="helios_2util_2log_2__module_8ixx"/>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="36" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-      </node>
-      <node id="2">
-        <label>helios.window.event.FrameBufferResizeEvent</label>
-        <link refid="FrameBufferResizeEvent_8ixx"/>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-      </node>
-      <node id="6">
-        <label>helios.window.event.WindowEvent</label>
-        <link refid="WindowEvent_8ixx"/>
-        <childnode refid="3" relation="include">
-        </childnode>
         <childnode refid="7" relation="include">
         </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>helios.util.log.LogSink</label>
+        <link refid="LogSink_8ixx"/>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="22">
+      <node id="2">
+        <label>helios.util.log.Logger</label>
+        <link refid="Logger_8ixx"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>helios.util.log</label>
+        <link refid="helios_2util_2log_2__module_8ixx"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>helios.window.event.FrameBufferResizeEvent</label>
+        <link refid="FrameBufferResizeEvent_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>helios.window.event.WindowEvent</label>
+        <link refid="WindowEvent_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
         <label>array</label>
       </node>
-      <node id="5">
+      <node id="12">
         <label>atomic</label>
       </node>
-      <node id="3">
+      <node id="10">
         <label>cstdint</label>
       </node>
-      <node id="43">
+      <node id="20">
         <label>format</label>
       </node>
       <node id="51">
         <label>functional</label>
       </node>
-      <node id="11">
+      <node id="3">
         <label>iostream</label>
       </node>
-      <node id="8">
+      <node id="6">
         <label>memory</label>
       </node>
-      <node id="17">
+      <node id="7">
         <label>mutex</label>
       </node>
-      <node id="23">
+      <node id="24">
         <label>optional</label>
       </node>
-      <node id="29">
+      <node id="30">
         <label>stdexcept</label>
       </node>
-      <node id="14">
+      <node id="4">
         <label>string</label>
       </node>
       <node id="52">
         <label>typeindex</label>
       </node>
-      <node id="15">
+      <node id="16">
         <label>unordered_map</label>
       </node>
-      <node id="16">
+      <node id="17">
         <label>unordered_set</label>
       </node>
-      <node id="24">
+      <node id="25">
         <label>variant</label>
       </node>
-      <node id="12">
+      <node id="5">
         <label>vector</label>
       </node>
     </incdepgraph>
@@ -461,6 +473,19 @@
     <innernamespace refid="namespacehelios">helios</innernamespace>
     <innernamespace refid="namespacehelios_1_1app">helios::app</innernamespace>
     <innernamespace refid="namespacehelios_1_1app_1_1controller">helios::app::controller</innernamespace>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="WindowRenderingController_8ixx_1acbc04f24078582c7d42b2085be5d5750" prot="public" static="no">
+        <name>HELIOS_LOG_SCOPE</name>
+        <initializer>&quot;helios::app::controller::WindowRenderingController&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/app/controller/WindowRenderingController.ixx" line="17" column="9" bodyfile="include/helios/app/controller/WindowRenderingController.ixx" bodystart="17" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <briefdescription>
 <para>Controller coordinating rendering for a window. </para>
     </briefdescription>
@@ -479,27 +504,35 @@
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8rendering_8RenderingDevice" kindref="compound">helios.rendering.RenderingDevice</ref>;</highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8window_8event_8FrameBufferResizeEvent" kindref="compound">helios.window.event.FrameBufferResizeEvent</ref>;</highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight></codeline>
-<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1app_1_1controller" kindref="compound">helios::app::controller</ref><sp/>{</highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="15"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="16"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Abstract<sp/>base<sp/>controller<sp/>for<sp/>handling<sp/>window<sp/>related<sp/>events.</highlight></codeline>
-<codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Concrete<sp/>implementations<sp/>will<sp/>typically<sp/>update<sp/>the<sp/>rendering<sp/>device&apos;s<sp/>viewport<sp/>when<sp/>the<sp/>framebuffer</highlight></codeline>
-<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>dimension<sp/>changes.</highlight></codeline>
-<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="21" refid="classhelios_1_1app_1_1controller_1_1WindowRenderingController" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1app_1_1controller_1_1WindowRenderingController" kindref="compound">WindowRenderingController</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1app_1_1controller_1_1Controller" kindref="compound">Controller</ref><sp/>{</highlight></codeline>
-<codeline lineno="22"><highlight class="normal"></highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Handles<sp/>FrameBuffer<sp/>resize<sp/>events.</highlight></codeline>
-<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>e<sp/>A<sp/>const<sp/>reference<sp/>to<sp/>the<sp/>FrameBufferResizeEvent<sp/>describing<sp/>the<sp/>event.</highlight></codeline>
-<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="29" refid="classhelios_1_1app_1_1controller_1_1WindowRenderingController_1ace819d72b524524ee6b8e596ae96b859" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1app_1_1controller_1_1WindowRenderingController_1ace819d72b524524ee6b8e596ae96b859" kindref="member">onFrameBufferResize</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1window_1_1event_1_1FrameBufferResizeEvent" kindref="compound">helios::window::event::FrameBufferResizeEvent</ref>&amp;<sp/>e)<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"></highlight></codeline>
-<codeline lineno="32"><highlight class="normal"></highlight></codeline>
-<codeline lineno="33"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8util_8log_8LogManager" kindref="compound">helios.util.log.LogManager</ref>;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8util_8log_8Logger" kindref="compound">helios.util.log.Logger</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="WindowRenderingController_8ixx_1acbc04f24078582c7d42b2085be5d5750" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>HELIOS_LOG_SCOPE<sp/>&quot;helios::app::controller::WindowRenderingController&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1app_1_1controller" kindref="compound">helios::app::controller</ref><sp/>{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Abstract<sp/>base<sp/>controller<sp/>for<sp/>handling<sp/>window<sp/>related<sp/>events.</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Concrete<sp/>implementations<sp/>will<sp/>typically<sp/>update<sp/>the<sp/>rendering<sp/>device&apos;s<sp/>viewport<sp/>when<sp/>the<sp/>framebuffer</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>dimension<sp/>changes.</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26" refid="classhelios_1_1app_1_1controller_1_1WindowRenderingController" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1app_1_1controller_1_1WindowRenderingController" kindref="compound">WindowRenderingController</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1app_1_1controller_1_1Controller" kindref="compound">Controller</ref><sp/>{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="29" refid="classhelios_1_1app_1_1controller_1_1WindowRenderingController_1a5ad51073d5249874f036abc437da1317" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1util_1_1log_1_1Logger" kindref="compound">helios::util::log::Logger</ref>&amp;<sp/><ref refid="classhelios_1_1app_1_1controller_1_1WindowRenderingController_1a5ad51073d5249874f036abc437da1317" kindref="member">logger_</ref><sp/>=<sp/><ref refid="classhelios_1_1util_1_1log_1_1LogManager_1a750d8fd5b3ee3678600644756b0631e7" kindref="member">helios::util::log::LogManager::loggerForScope</ref>(<ref refid="OpenGLUniformLocationMap_8ixx_1acbc04f24078582c7d42b2085be5d5750" kindref="member">HELIOS_LOG_SCOPE</ref>);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Handles<sp/>FrameBuffer<sp/>resize<sp/>events.</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>e<sp/>A<sp/>const<sp/>reference<sp/>to<sp/>the<sp/>FrameBufferResizeEvent<sp/>describing<sp/>the<sp/>event.</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="classhelios_1_1app_1_1controller_1_1WindowRenderingController_1ace819d72b524524ee6b8e596ae96b859" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1app_1_1controller_1_1WindowRenderingController_1ace819d72b524524ee6b8e596ae96b859" kindref="member">onFrameBufferResize</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1window_1_1event_1_1FrameBufferResizeEvent" kindref="compound">helios::window::event::FrameBufferResizeEvent</ref>&amp;<sp/>e)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="include/helios/app/controller/WindowRenderingController.ixx"/>
   </compounddef>

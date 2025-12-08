@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8rendering_8asset_8shape_8basic_8Grid" kind="module">
+    <compoundname>helios.rendering.asset.shape.basic.Grid</compoundname>
+    <innerfile refid="Grid_8ixx">Grid.ixx</innerfile>
+    <innerclass refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Grid" prot="public">helios::rendering::asset::shape::basic::Grid</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Grid_1adba7ac4f72c4ce58dd41e5f0822cc1eb" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::pair&lt; std::vector&lt; <ref refid="structhelios_1_1rendering_1_1Vertex" kindref="compound">Vertex</ref> &gt;, std::vector&lt; unsigned int &gt; &gt;</type>
+        <definition>static std::pair&lt; std::vector&lt; Vertex &gt;, std::vector&lt; unsigned int &gt; &gt; helios::rendering::asset::shape::basic::Grid::generate</definition>
+        <argsstring>(unsigned int segmentsX, unsigned int segmentsY)</argsstring>
+        <name>generate</name>
+        <qualifiedname>helios::rendering::asset::shape::basic::Grid::generate</qualifiedname>
+        <param>
+          <type>unsigned int</type>
+          <declname>segmentsX</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>segmentsY</declname>
+        </param>
+        <briefdescription>
+<para>Generates vertex and index data for the grid geometry. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Creates a grid of vertices in the XY-plane spanning from (-1, -1) to (1, 1). Vertices are generated row by row, and indices are created to form horizontal and vertical line segments connecting adjacent vertices.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>segmentsX</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of subdivisions along the X-axis. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>segmentsY</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of subdivisions along the Y-axis.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A pair containing the vertex list and the index list for line rendering.</para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If either segmentsX or segmentsY is less than 2. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/asset/shape/basic/Grid.ixx" line="67" column="2" bodyfile="include/helios/rendering/asset/shape/basic/Grid.ixx" bodystart="67" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Grid_1a144926519bb2df3aaeb78efdd48a1f49" prot="private" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::rendering::asset::shape::basic::Grid::Grid</definition>
+        <argsstring>(std::pair&lt; std::vector&lt; Vertex &gt;, std::vector&lt; unsigned int &gt; &gt; data)</argsstring>
+        <name>Grid</name>
+        <qualifiedname>helios::rendering::asset::shape::basic::Grid::Grid</qualifiedname>
+        <param>
+          <type>std::pair&lt; std::vector&lt; <ref refid="structhelios_1_1rendering_1_1Vertex" kindref="compound">Vertex</ref> &gt;, std::vector&lt; unsigned int &gt; &gt;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Private constructor that takes pre-generated geometry data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Used internally by the public constructors to initialize the base <ref refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape" kindref="compound">Shape</ref> class with vertex and index data.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pair containing vertex data and index data for the grid. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/asset/shape/basic/Grid.ixx" line="123" column="18" bodyfile="include/helios/rendering/asset/shape/basic/Grid.ixx" bodystart="123" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Grid_1a37d90bb97245634ed249c8d266da6b93" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::rendering::asset::shape::basic::Grid::Grid</definition>
+        <argsstring>()</argsstring>
+        <name>Grid</name>
+        <qualifiedname>helios::rendering::asset::shape::basic::Grid::Grid</qualifiedname>
+        <briefdescription>
+<para>Creates a default grid with 2 segments per coordinate axis. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Constructs a simple 2x2 grid, resulting in a cross-like pattern with one horizontal and one vertical subdivision. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/asset/shape/basic/Grid.ixx" line="136" column="9" bodyfile="include/helios/rendering/asset/shape/basic/Grid.ixx" bodystart="136" bodyend="136"/>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Grid_1a0cfe72303608a25721b9621d71c21376" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::rendering::asset::shape::basic::Grid::Grid</definition>
+        <argsstring>(unsigned int segmentsX, unsigned int segmentsY)</argsstring>
+        <name>Grid</name>
+        <qualifiedname>helios::rendering::asset::shape::basic::Grid::Grid</qualifiedname>
+        <param>
+          <type>unsigned int</type>
+          <declname>segmentsX</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>segmentsY</declname>
+        </param>
+        <briefdescription>
+<para>Creates a grid with a specified number of subdivisions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Constructs a grid with the given number of segments along each axis. Higher segment counts produce finer grids with more lines.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>segmentsX</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of subdivisions along the X-axis. Must be at least 2. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>segmentsY</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of subdivisions along the Y-axis. Must be at least 2.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If either segmentsX or segmentsY is less than 2. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/asset/shape/basic/Grid.ixx" line="149" column="18" bodyfile="include/helios/rendering/asset/shape/basic/Grid.ixx" bodystart="149" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Grid_1ab98957f39cd0aca57ad18525ea9c85e8" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type><ref refid="namespacehelios_1_1rendering_1_1model_1_1config_1a13a7711e9718d01b8f09dd183c6777d5" kindref="member">helios::rendering::model::config::PrimitiveType</ref></type>
+        <definition>helios::rendering::model::config::PrimitiveType helios::rendering::asset::shape::basic::Grid::primitiveType</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>primitiveType</name>
+        <qualifiedname>helios::rendering::asset::shape::basic::Grid::primitiveType</qualifiedname>
+        <reimplements refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape_1a36e1f4334ec857edb0f0d5b2fb1758dc">primitiveType</reimplements>
+        <briefdescription>
+<para>Returns the primitive type used for rendering this shape. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>`PrimitiveType::Lines` since the grid is rendered as line segments. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/asset/shape/basic/Grid.ixx" line="158" column="58" bodyfile="include/helios/rendering/asset/shape/basic/Grid.ixx" bodystart="158" bodyend="160"/>
+        <references refid="namespacehelios_1_1rendering_1_1model_1_1config_1a13a7711e9718d01b8f09dd183c6777d5aa0b0293a2db49f5f93c15a62e095c819" compoundref="PrimitiveType_8ixx" startline="45">helios::rendering::model::config::Lines</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/rendering/asset/shape/basic/Grid.ixx" line="10" column="15"/>
+  </compounddef>
+</doxygen>

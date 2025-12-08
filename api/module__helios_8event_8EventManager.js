@@ -15,6 +15,7 @@ var module__helios_8event_8EventManager =
     [ "helios::event::EventManager::dispatchAll", "module__helios_8event_8EventManager.html#a296603f6b1d157e9c3b2ccceb39d5787", null ],
     [ "helios::event::EventManager::subscribe", "module__helios_8event_8EventManager.html#ac25503abf074331900fa19d5a44a5ad0", null ],
     [ "helios::event::EventManager::dispatcher", "module__helios_8event_8EventManager.html#a575c31f89f8002b9c507e3a00da32cb1", null ],
+    [ "helios::event::EventManager::logger_", "module__helios_8event_8EventManager.html#a7b910bacb39548c70482615de3d06212", null ],
     [ "helios::event::EventManager::eventQueue_", "module__helios_8event_8EventManager.html#a06528b307d0e99a55a4aea8b608f6f8b", null ],
     [ "helios::event::EventManager::dispatcher_", "module__helios_8event_8EventManager.html#a1deac9e3799c2f473fdb16bddb4dada8", null ]
 ];

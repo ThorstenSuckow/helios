@@ -4,5 +4,6 @@ var module__helios_8app_8controller_8BasicWindowRenderingController =
     [ "helios::app::controller::BasicWindowRenderingController::BasicWindowRenderingController", "module__helios_8app_8controller_8BasicWindowRenderingController.html#aaab3050af897d35dfcd1dd405512e9f1", null ],
     [ "helios::app::controller::BasicWindowRenderingController::onFrameBufferResize", "module__helios_8app_8controller_8BasicWindowRenderingController.html#ae7ab29a6c78a6459308f9a58a69c695c", null ],
     [ "helios::app::controller::BasicWindowRenderingController::subscribeTo", "module__helios_8app_8controller_8BasicWindowRenderingController.html#ab3f4a1cc93fefe913ad49a25c7f28e25", null ],
-    [ "helios::app::controller::BasicWindowRenderingController::init", "module__helios_8app_8controller_8BasicWindowRenderingController.html#ae3243ccfbe78b6ec5365acd2d5aafbb4", null ]
+    [ "helios::app::controller::BasicWindowRenderingController::init", "module__helios_8app_8controller_8BasicWindowRenderingController.html#ae3243ccfbe78b6ec5365acd2d5aafbb4", null ],
+    [ "helios::app::controller::BasicWindowRenderingController::toString", "module__helios_8app_8controller_8BasicWindowRenderingController.html#a33fc173401d6a80ef994034800e64a0e", null ]
 ];

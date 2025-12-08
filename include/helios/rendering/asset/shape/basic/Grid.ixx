@@ -5,7 +5,6 @@
 module;
 
 
-#include <iostream>
 #include <vector>
 
 export module helios.rendering.asset.shape.basic.Grid;
@@ -91,7 +90,7 @@ export namespace helios::rendering::asset::shape::basic {
                         {0.5f, 0.5f}
                     });
 
-                    if (i >= segmentsX  || j >= segmentsY) {
+                    if (i >= segmentsX || j >= segmentsY) {
                         continue;
                     }
 
@@ -104,7 +103,7 @@ export namespace helios::rendering::asset::shape::basic {
                     if (j > 0) {
                         unsigned int idx = i * (segmentsY + 1) + j;
                         indices.push_back(idx);
-                        indices.push_back(idx + 1  + segmentsY);
+                        indices.push_back(idx + 1 + segmentsY);
                     }
                 }
 

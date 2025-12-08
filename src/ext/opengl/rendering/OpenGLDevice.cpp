@@ -99,6 +99,7 @@ namespace helios::ext::opengl::rendering {
 
         logger_.info(std::format("Rendering {0} item(s)...", renderQueue.count()));
 
+
         for (auto& rc: renderQueue.renderCommands()) {
 
             if (const auto renderPrototype_ptr = rc->renderPrototype().lock()) {
@@ -112,6 +113,7 @@ namespace helios::ext::opengl::rendering {
                 }
                 logger_.info("activating shader...");
                 shader->use();
+                shader->applyUniformValues(renderPass.frameUniformValues());
                 shader->applyUniformValues(rc->objectUniformValues());
                 shader->applyUniformValues(rc->materialUniformValues());
 

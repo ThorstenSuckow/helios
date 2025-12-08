@@ -10,6 +10,8 @@ module;
 export module helios.math.types:mat4;
 
 import :vec3;
+import :vec4;
+
 import helios.math.concepts;
 
 
@@ -212,6 +214,26 @@ export namespace helios::math {
             }
 
             return A;
+        }
+
+
+        /**
+        *  @brief Performs matrix-vector-multiplication with a `vec4<T> v`.
+        *
+         * This matrix is the left operand, while `v` is the right operand.
+         *
+         * @param v The right-hand side `vec4<T>` for multiplication.
+         *
+         * @return A new `vec4<T>`, representing the result of the matrix-vector-multiplication.
+         */
+        constexpr vec4<T> operator*(const vec4<T>&  v) const {
+            const auto m = *this;
+            return vec4<T>{
+                m(0, 0) * v[0] + m(1, 0) * v[1] + m(2, 0) * v[2] + m(3, 0)  * v[3],
+                m(0, 1) * v[0] + m(1, 1) * v[1] + m(2, 1) * v[2] + m(3, 1)  * v[3],
+                m(0, 2) * v[0] + m(1, 2) * v[1] + m(2, 2) * v[2] + m(3, 2)  * v[3],
+                m(0, 3) * v[0] + m(1, 3) * v[1] + m(2, 3) * v[2] + m(3, 3)  * v[3]
+            };
         }
     };
 

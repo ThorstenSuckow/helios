@@ -2,7 +2,6 @@ module;
 
 #include <GLFW/glfw3.h>
 #include <format>
-#include <iostream>
 #include <stdexcept>
 #include <utility>
 

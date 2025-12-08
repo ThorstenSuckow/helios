@@ -4,6 +4,8 @@
  */
 module;
 
+#include <string>
+
 export module helios.app.controller.BasicWindowRenderingController;
 
 import helios.app.controller.WindowRenderingController;
@@ -59,6 +61,8 @@ export namespace helios::app::controller {
          * @return True if initialization succeeded, otherwise false.
          */
         bool init() override;
+
+        [[nodiscard]] std::string toString() const noexcept override;
     };
 
 

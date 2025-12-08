@@ -15,3 +15,4 @@ export import helios.rendering.asset.shape.basic.Rectangle;
 export import helios.rendering.asset.shape.basic.Line;
 export import helios.rendering.asset.shape.basic.Cube;
 export import helios.rendering.asset.shape.basic.Circle;
+export import helios.rendering.asset.shape.basic.Grid;

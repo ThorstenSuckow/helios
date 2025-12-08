@@ -4,7 +4,7 @@
  */
 module;
 
-#include <iostream>
+#include <format>
 
 export module helios.ext.opengl.rendering.shader.OpenGLShader;
 

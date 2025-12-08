@@ -5,6 +5,9 @@
 import helios.event;
 
 class TestEvent : public helios::event::Event {
+    std::string toString() const noexcept override {
+        return "";
+    }
 };
 
 TEST(DispatcherTest, dispatch) {

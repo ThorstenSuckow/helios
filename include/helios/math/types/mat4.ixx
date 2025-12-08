@@ -141,7 +141,7 @@ export namespace helios::math {
          *       12, 13, 14, 15]
          *
          * a call to row(0, 2) returns "2", while the matrix is internally stored
-         * as (1, 4, 8, 12, 1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15).
+         * as (0, 4, 8, 12, 1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15).
          *
          * Bounds checking is performed via `assert` in debug builds.
          *

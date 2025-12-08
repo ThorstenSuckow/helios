@@ -5,8 +5,8 @@
 module;
 
 #include <memory>
-#include <vector>
 #include <string>
+#include <vector>
 #include "imgui.h"
 
 export module helios.ext.imgui.widgets.CameraWidget;
@@ -99,7 +99,8 @@ export namespace helios::ext::imgui::widgets {
          * @brief Applies the current transform and lookAt to the camera node.
          */
         void applyTransformToNode(helios::scene::CameraSceneNode* node) {
-            if (!node) return;
+            if (!node)
+                return;
 
             // First set translation
             node->translate(tempTranslation_);
@@ -178,12 +179,8 @@ export namespace helios::ext::imgui::widgets {
 
             // Reset projection via camera (use reference to modify actual camera)
             auto& camera = node->camera();
-            camera.setPerspective(
-                helios::math::radians(entry.initialFovDegrees),
-                entry.initialAspectRatio,
-                entry.initialZNear,
-                entry.initialZFar
-            );
+            camera.setPerspective(helios::math::radians(entry.initialFovDegrees), entry.initialAspectRatio,
+                                  entry.initialZNear, entry.initialZFar);
 
             syncTempValuesFromCamera();
         }
@@ -257,11 +254,14 @@ export namespace helios::ext::imgui::widgets {
                 }
 
                 auto* node = getCurrentCameraNode();
-                auto camera = getActiveCamera();
-                if (!node || !camera) {
+                auto* cameraPtr = getActiveCamera();
+                if (!node || !cameraPtr) {
                     ImGui::End();
                     return;
                 }
+
+                // Use reference after null check for safety
+                auto& camera = *cameraPtr;
 
                 ImGui::Separator();
                 ImGui::Spacing();
@@ -316,11 +316,14 @@ export namespace helios::ext::imgui::widgets {
 
                 bool projectionChanged = false;
                 projectionChanged |= ImGui::SliderFloat("FOV", &tempFovDegrees_, 30.0f, 120.0f, "%.1f deg");
-                projectionChanged |= ImGui::DragFloat("Near Plane", &tempZNear_, 0.01f, 0.001f, tempZFar_ - 0.01f, "%.3f");
-                projectionChanged |= ImGui::DragFloat("Far Plane", &tempZFar_, 1.0f, tempZNear_ + 0.01f, 100000.0f, "%.1f");
+                projectionChanged |=
+                        ImGui::DragFloat("Near Plane", &tempZNear_, 0.01f, 0.001f, tempZFar_ - 0.01f, "%.3f");
+                projectionChanged |=
+                        ImGui::DragFloat("Far Plane", &tempZFar_, 1.0f, tempZNear_ + 0.01f, 100000.0f, "%.1f");
 
                 if (projectionChanged) {
-                    camera->setPerspective(helios::math::radians(tempFovDegrees_), tempAspectRatio_, tempZNear_, tempZFar_);
+                    camera.setPerspective(helios::math::radians(tempFovDegrees_), tempAspectRatio_, tempZNear_,
+                                          tempZFar_);
                 }
 
                 ImGui::Spacing();
@@ -328,32 +331,32 @@ export namespace helios::ext::imgui::widgets {
                 // Aspect Ratio
                 ImGui::Text("Aspect Ratio");
                 if (ImGui::DragFloat("##Aspect", &tempAspectRatio_, 0.01f, 0.5f, 4.0f, "%.3f")) {
-                    camera->setAspectRatio(tempAspectRatio_);
+                    camera.setAspectRatio(tempAspectRatio_);
                 }
 
                 if (ImGui::Button("16:9")) {
                     tempAspectRatio_ = 16.0f / 9.0f;
-                    camera->setAspectRatio(tempAspectRatio_);
+                    camera.setAspectRatio(tempAspectRatio_);
                 }
                 ImGui::SameLine();
                 if (ImGui::Button("21:9")) {
                     tempAspectRatio_ = 21.0f / 9.0f;
-                    camera->setAspectRatio(tempAspectRatio_);
+                    camera.setAspectRatio(tempAspectRatio_);
                 }
                 ImGui::SameLine();
                 if (ImGui::Button("32:9")) {
                     tempAspectRatio_ = 32.0f / 9.0f;
-                    camera->setAspectRatio(tempAspectRatio_);
+                    camera.setAspectRatio(tempAspectRatio_);
                 }
                 ImGui::SameLine();
                 if (ImGui::Button("4:3")) {
                     tempAspectRatio_ = 4.0f / 3.0f;
-                    camera->setAspectRatio(tempAspectRatio_);
+                    camera.setAspectRatio(tempAspectRatio_);
                 }
                 ImGui::SameLine();
                 if (ImGui::Button("1:1")) {
                     tempAspectRatio_ = 1.0f;
-                    camera->setAspectRatio(tempAspectRatio_);
+                    camera.setAspectRatio(tempAspectRatio_);
                 }
 
                 ImGui::Separator();
@@ -395,16 +398,15 @@ export namespace helios::ext::imgui::widgets {
                 helios::math::vec3f diff = tempTranslation_ - tempLookAtTarget_;
                 float distance = diff.length();
 
-                ImGui::TextDisabled("Pos: (%.1f, %.1f, %.1f) | Target: (%.1f, %.1f, %.1f)",
-                    tempTranslation_[0], tempTranslation_[1], tempTranslation_[2],
-                    tempLookAtTarget_[0], tempLookAtTarget_[1], tempLookAtTarget_[2]);
-                ImGui::TextDisabled("Distance: %.2f | FOV: %.0f° | Z: [%.2f, %.0f]",
-                    distance, tempFovDegrees_, tempZNear_, tempZFar_);
+                ImGui::TextDisabled("Pos: (%.1f, %.1f, %.1f) | Target: (%.1f, %.1f, %.1f)", tempTranslation_[0],
+                                    tempTranslation_[1], tempTranslation_[2], tempLookAtTarget_[0],
+                                    tempLookAtTarget_[1], tempLookAtTarget_[2]);
+                ImGui::TextDisabled("Distance: %.2f | FOV: %.0f° | Z: [%.2f, %.0f]", distance, tempFovDegrees_,
+                                    tempZNear_, tempZFar_);
             }
 
             ImGui::End();
         }
     };
 
-}
-
+} // namespace helios::ext::imgui::widgets

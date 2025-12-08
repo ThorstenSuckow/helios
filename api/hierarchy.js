@@ -90,6 +90,7 @@ var hierarchy =
     [ "helios::rendering::asset::shape::Shape", "structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape.html", [
       [ "helios::rendering::asset::shape::basic::Circle", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Circle.html", null ],
       [ "helios::rendering::asset::shape::basic::Cube", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Cube.html", null ],
+      [ "helios::rendering::asset::shape::basic::Grid", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Grid.html", null ],
       [ "helios::rendering::asset::shape::basic::Line", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Line.html", null ],
       [ "helios::rendering::asset::shape::basic::Rectangle", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Rectangle.html", null ],
       [ "helios::rendering::asset::shape::basic::Triangle", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Triangle.html", null ]

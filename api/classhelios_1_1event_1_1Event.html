@@ -103,7 +103,7 @@ $(function() {
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">helios::event::Event Class Reference<span class="mlabels"><span class="mlabel export">export</span></span><div class="ingroups">module <a class="el" href="module__helios_8event_8Event.html">helios.event.Event</a></div></div></div>
+  <div class="headertitle"><div class="title">helios::event::Event Class Reference<span class="mlabels"><span class="mlabel abstract">abstract</span><span class="mlabel export">export</span></span><div class="ingroups">module <a class="el" href="module__helios_8event_8Event.html">helios.event.Event</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -127,6 +127,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ac85d4e33df6df0ec7dcd15de2a2cdf2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a const reference to this event's unique Guid.  <br /></td></tr>
 <tr class="memitem:a6b7048ac1591c2decbbabbb2100e7db7" id="r_a6b7048ac1591c2decbbabbb2100e7db7"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6b7048ac1591c2decbbabbb2100e7db7">tag</a> () const</td></tr>
 <tr class="memdesc:a6b7048ac1591c2decbbabbb2100e7db7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the tag for this event. Will be 0 if none was specified.  <br /></td></tr>
+<tr class="memitem:a263ea103b6256d8b48c065e0b70b0212" id="r_a263ea103b6256d8b48c065e0b70b0212"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a263ea103b6256d8b48c065e0b70b0212">toString</a> () const noexcept=0</td></tr>
 <tr class="memitem:a4121aa2496d80da96e2b521f72e45f75" id="r_a4121aa2496d80da96e2b521f72e45f75"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4121aa2496d80da96e2b521f72e45f75">operator==</a> (const <a class="el" href="#a6a32122b419e5513a9a76cdb4312bc71">Event</a> &amp;e) const</td></tr>
 <tr class="memdesc:a4121aa2496d80da96e2b521f72e45f75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares two event instances based on their unique Guids.  <br /></td></tr>
 </table>
@@ -136,7 +137,7 @@ Public Member Functions</h2></td></tr>
 <p>Events should be treated as immutable after construction.</p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo</a></b></dt><dd>can we reset the value for Guids in between frames, if events are guaranteed to be dispatched and processed in between frames? </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Event_8ixx_source.html#l00028">28</a> of file <a class="el" href="Event_8ixx_source.html">Event.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Event_8ixx_source.html#l00029">29</a> of file <a class="el" href="Event_8ixx_source.html">Event.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4a70f4250c4f320381d31c42fc0e912f" name="a4a70f4250c4f320381d31c42fc0e912f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4a70f4250c4f320381d31c42fc0e912f">&#9670;&#160;</a></span>~Event()</h2>
@@ -343,6 +344,33 @@ Public Member Functions</h2></td></tr>
 <div id="dynsection-4-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1event_1_1Event_a6b7048ac1591c2decbbabbb2100e7db7_icgraph.svg" width="455" height="195"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
+
+</div>
+</div>
+<a id="a263ea103b6256d8b48c065e0b70b0212" name="a263ea103b6256d8b48c065e0b70b0212"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a263ea103b6256d8b48c065e0b70b0212">&#9670;&#160;</a></span>toString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::string helios::event::Event::toString </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel pure-virtual">pure virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classhelios_1_1window_1_1event_1_1FrameBufferResizeEvent.html#a007ff0e741584eb88b5a7a9653af3d06">helios::window::event::FrameBufferResizeEvent</a>.</p>
 
 </div>
 </div>

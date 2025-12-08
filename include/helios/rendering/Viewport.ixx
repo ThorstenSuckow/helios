@@ -13,7 +13,7 @@ export module helios.rendering.Viewport;
 
 import helios.rendering.ClearFlags;
 import helios.math.types;
-import helios.scene.Camera;
+import helios.scene.CameraSceneNode;
 import :RenderTargetFwd;
 import helios.util.log.LogManager;
 import helios.util.log.Logger;
@@ -41,16 +41,16 @@ export namespace helios::rendering {
      * @brief Represents a rectangular area within a RenderTarget where a scene is rendered.
      *
      * A Viewport defines the 2D rectangle into which a 3D scene is projected. Its dimensions are specified
-     * in normalized coordinates relative to its parent `RenderTarget`. It is associated with a `Camera`,
-     * which provides the viewing and projection matrices. The viewport automatically updates the camera's
-     * aspect ratio when its parent `RenderTarget` is resized.
+     * in normalized coordinates relative to its parent `RenderTarget`. It is associated with a `CameraSceneNode`,
+     * which provides the view and projection matrices. The viewport automatically updates the CameraSceneNode
+     * associated camera's aspect ratio when its parent `RenderTarget` is resized.
      *
      * Since a Viewport only stores normalized values for its location and dimensions relative to the owning RenderTarget,
      * rendering APIs should query the size of the RenderTarget when a viewport is about to be
      * rendered, allowing them to compute the final screen coordinates and dimensions correctly.
      *
      * @see helios::rendering::RenderTarget
-     * @see helios::scene::Camera
+     * @see helios::scene::CameraSceneNode
      * @see https://registry.khronos.org/OpenGL-Refpages/gl4/html/glViewport.xhtml
      */
     class Viewport {
@@ -93,9 +93,9 @@ export namespace helios::rendering {
         float height_ = 1.0f;
 
         /**
-         * @brief The camera used for rendering within this viewport.
+         * @brief The cameraSceneNode associated as the main camera with this viewport.
          */
-        std::shared_ptr<helios::scene::Camera> camera_;
+        const helios::scene::CameraSceneNode* cameraSceneNode_ = nullptr;
 
         /**
          * @brief Flag indicating if cached dimensions are dirty.
@@ -122,7 +122,7 @@ export namespace helios::rendering {
         void updateBounds() const noexcept;
 
         /**
-         * @brief Updates this Viewport's Camera based on the dimension of the RenderTarget.
+         * @brief Updates this Viewport's CameraSceneNode and its associated Camera based on the dimension of the RenderTarget.
          *
          * This method should be called internally whenever the dimensions of the owning
          * RenderTarget change.
@@ -160,22 +160,22 @@ export namespace helios::rendering {
         /**
          * @brief Assigns a camera to this viewport.
          *
-         * @param camera A shared pointer to the `Camera` object.
+         * @param cameraSceneNode A  raw pointer to the `Camera` object.
          *
-         * @return A reference to this viewport to allow fluent chaining.
+         * @return A const ref to this viewport to allow fluent chaining.
          */
-        Viewport& setCamera(std::shared_ptr<helios::scene::Camera> camera) noexcept;
+        Viewport& setCameraSceneNode(const helios::scene::CameraSceneNode* cameraSceneNode) noexcept;
 
         /**
          * @brief Gets the camera associated with this viewport.
          *
          * @return A shared pointer to the `Camera` object.
          */
-        [[nodiscard]] std::shared_ptr<helios::scene::Camera> camera() const noexcept;
+        [[nodiscard]] const helios::scene::CameraSceneNode* cameraSceneNode() const noexcept;
 
         /**
-         * @brief Sets the parent RenderTarget for this viewport and updates the Camera of this
-         * Viewport with an Aspect Ratio based on the dimensions of the RenderTarget.
+         * @brief Sets the parent RenderTarget for this viewport and updates the CameraSceneNode and its
+         * associated Camera of this Viewport with an Aspect Ratio based on the dimensions of the RenderTarget.
          *
          * This function can only be called by classes that can construct a `ViewportKey`,
          * effectively restricting its use to the `RenderTarget` class.

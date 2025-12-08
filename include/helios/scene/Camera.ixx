@@ -108,7 +108,18 @@ export namespace helios::scene {
          */
         [[nodiscard]] const helios::math::mat4f& viewMatrix() const noexcept;
 
-
+        /**
+         * @brief Sets the view matrix for this camera.
+         *
+         * This method is typically called by `CameraSceneNode::worldTransform()` to update
+         * the view matrix based on the camera node's position and orientation in the scene graph.
+         *
+         * @param viewMatrix The new view matrix to assign.
+         *
+         * @return A const reference to this camera instance.
+         *
+         * @see helios::scene::CameraSceneNode::worldTransform()
+         */
         [[nodiscard]] const Camera& setViewMatrix(const helios::math::mat4f& viewMatrix) const noexcept {
             viewMatrix_ = viewMatrix;
             return *this;

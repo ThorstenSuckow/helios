@@ -4,7 +4,6 @@
  */
 module;
 
-#include <iostream>
 #include <string>
 #include <vector>
 #include <memory>
@@ -54,29 +53,11 @@ export namespace helios::util::log {
 
         /**
          * @brief Dispatches a message to all registered sinks.
+         *
+         * @param level The log level of the message.
+         * @param msg The message to dispatch.
          */
-        void dispatch(LogLevel level, const std::string& msg) const noexcept {
-            if (!enabled_) return;
-
-            std::lock_guard<std::mutex> lock(sinkMutex_);
-            if (sinks_.empty()) {
-                // Fallback to stdout if no sinks configured
-                const char* levelStr = "";
-                switch (level) {
-                    case LogLevel::Debug: levelStr = "[DEBUG]"; break;
-                    case LogLevel::Info:  levelStr = "[INFO]";  break;
-                    case LogLevel::Warn:  levelStr = "[WARN]";  break;
-                    case LogLevel::Error: levelStr = "[ERROR]"; break;
-                }
-                std::cout << levelStr << "[" << scope_ << "] " << msg << std::endl;
-            } else {
-                for (const auto& sink : sinks_) {
-                    if (sink) {
-                        sink->write(level, scope_, msg);
-                    }
-                }
-            }
-        }
+        void dispatch(LogLevel level, const std::string& msg) const noexcept;
 
     public:
         /**
@@ -84,86 +65,61 @@ export namespace helios::util::log {
          *
          * @param scope The textual scope used as a prefix in log output (e.g. "helios::rendering").
          */
-        explicit Logger(std::string scope) :
-            scope_(std::move(scope)) {}
-
+        explicit Logger(std::string scope);
 
         /**
          * @brief Enables or disables log output for this Logger instance.
          *
          * @param enable true to enable output, false to disable it.
          */
-        void enable(const bool enable) noexcept {
-            enabled_ = enable;
-        }
+        void enable(bool enable) noexcept;
 
         /**
          * @brief Adds an output sink to this logger.
          *
          * @param sink Shared pointer to the sink to add.
          */
-        void addSink(std::shared_ptr<LogSink> sink) {
-            std::lock_guard<std::mutex> lock(sinkMutex_);
-            sinks_.push_back(std::move(sink));
-        }
+        void addSink(std::shared_ptr<LogSink> sink);
 
         /**
          * @brief Removes all sinks from this logger.
          */
-        void clearSinks() noexcept {
-            std::lock_guard<std::mutex> lock(sinkMutex_);
-            sinks_.clear();
-        }
+        void clearSinks() noexcept;
 
         /**
          * @brief Returns the number of attached sinks.
          *
          * @return The number of sinks currently attached to this logger.
          */
-        [[nodiscard]] size_t sinkCount() const noexcept {
-            std::lock_guard<std::mutex> lock(sinkMutex_);
-            return sinks_.size();
-        }
+        [[nodiscard]] size_t sinkCount() const noexcept;
 
         /**
          * @brief Writes a warning message if logging is enabled.
          *
          * @param msg The message to write.
          */
-        void warn(const std::string& msg) const noexcept {
-            dispatch(LogLevel::Warn, msg);
-        }
-
+        void warn(const std::string& msg) const noexcept;
 
         /**
          * @brief Writes a debug message if logging is enabled.
          *
          * @param msg The message to write.
          */
-        void debug(const std::string& msg) const noexcept {
-            dispatch(LogLevel::Debug, msg);
-        }
-
+        void debug(const std::string& msg) const noexcept;
 
         /**
          * @brief Writes an info message if logging is enabled.
          *
          * @param msg The message to write.
          */
-        void info(const std::string& msg) const noexcept {
-            dispatch(LogLevel::Info, msg);
-        }
-
+        void info(const std::string& msg) const noexcept;
 
         /**
          * @brief Writes an error message if logging is enabled.
          *
          * @param msg The message to write.
          */
-        void error(const std::string& msg) const noexcept {
-            dispatch(LogLevel::Error, msg);
-        }
-
+        void error(const std::string& msg) const noexcept;
     };
 
 

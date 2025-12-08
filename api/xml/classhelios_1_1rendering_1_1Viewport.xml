@@ -133,20 +133,21 @@
         </inbodydescription>
         <location file="include/helios/rendering/Viewport.ixx" line="93" column="15" bodyfile="include/helios/rendering/Viewport.ixx" bodystart="93" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classhelios_1_1rendering_1_1Viewport_1aac1b0f2033ac6fb41dea3e3f0f04737a" prot="private" static="no" mutable="no">
-        <type>std::shared_ptr&lt; <ref refid="classhelios_1_1scene_1_1Camera" kindref="compound">helios::scene::Camera</ref> &gt;</type>
-        <definition>std::shared_ptr&lt;helios::scene::Camera&gt; helios::rendering::Viewport::camera_</definition>
+      <memberdef kind="variable" id="classhelios_1_1rendering_1_1Viewport_1a237042365bf4633b6fb8844d900b7595" prot="private" static="no" mutable="no">
+        <type>const <ref refid="classhelios_1_1scene_1_1CameraSceneNode" kindref="compound">helios::scene::CameraSceneNode</ref> *</type>
+        <definition>const helios::scene::CameraSceneNode* helios::rendering::Viewport::cameraSceneNode_</definition>
         <argsstring></argsstring>
-        <name>camera_</name>
-        <qualifiedname>helios::rendering::Viewport::camera_</qualifiedname>
+        <name>cameraSceneNode_</name>
+        <qualifiedname>helios::rendering::Viewport::cameraSceneNode_</qualifiedname>
+        <initializer>= nullptr</initializer>
         <briefdescription>
-<para>The camera used for rendering within this viewport. </para>
+<para>The cameraSceneNode associated as the main camera with this viewport. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/rendering/Viewport.ixx" line="98" column="25" bodyfile="include/helios/rendering/Viewport.ixx" bodystart="98" bodyend="-1"/>
+        <location file="include/helios/rendering/Viewport.ixx" line="98" column="46" bodyfile="include/helios/rendering/Viewport.ixx" bodystart="98" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1rendering_1_1Viewport_1a4ba9db09ddd649ac1dd190ea0ff3abca" prot="private" static="no" mutable="yes">
         <type>bool</type>
@@ -220,7 +221,7 @@
         <name>updateCamera</name>
         <qualifiedname>helios::rendering::Viewport::updateCamera</qualifiedname>
         <briefdescription>
-<para>Updates this <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">Viewport</ref>&apos;s Camera based on the dimension of the <ref refid="classhelios_1_1rendering_1_1RenderTarget" kindref="compound">RenderTarget</ref>. </para>
+<para>Updates this <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">Viewport</ref>&apos;s CameraSceneNode and its associated Camera based on the dimension of the <ref refid="classhelios_1_1rendering_1_1RenderTarget" kindref="compound">RenderTarget</ref>. </para>
         </briefdescription>
         <detaileddescription>
 <para>This method should be called internally whenever the dimensions of the owning <ref refid="classhelios_1_1rendering_1_1RenderTarget" kindref="compound">RenderTarget</ref> change. </para>
@@ -245,7 +246,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="include/helios/rendering/Viewport.ixx" line="136" column="9"/>
-        <referencedby refid="classhelios_1_1rendering_1_1Viewport_1a803fe87a8f476b47f48a338a71257816">setCamera</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1Viewport_1a309a84b609eb286f17fcaa9a8fe75652">setCameraSceneNode</referencedby>
         <referencedby refid="classhelios_1_1rendering_1_1Viewport_1af94f8b0ec7697edea1c0cf843c03ad3d">setClearColor</referencedby>
         <referencedby refid="classhelios_1_1rendering_1_1Viewport_1a7199b3df8a9c5817eaa21173a9c6e434">setClearFlags</referencedby>
         <referencedby refid="classhelios_1_1rendering_1_1Viewport_1a9c8ed040c0e35728770ddd462860c5bc">setRenderTarget</referencedby>
@@ -353,26 +354,27 @@
         <referencedby refid="classhelios_1_1rendering_1_1Viewport_1afa67d77263ec5dd36db0591ffb9f889d">renderTarget</referencedby>
         <referencedby refid="classhelios_1_1rendering_1_1Viewport_1a9c8ed040c0e35728770ddd462860c5bc">setRenderTarget</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1rendering_1_1Viewport_1a803fe87a8f476b47f48a338a71257816" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1Viewport_1a309a84b609eb286f17fcaa9a8fe75652" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type><ref refid="classhelios_1_1rendering_1_1Viewport_1acab3a95a725e2ce895c8cf5a075e5a8c" kindref="member">Viewport</ref> &amp;</type>
-        <definition>Viewport &amp; helios::rendering::Viewport::setCamera</definition>
-        <argsstring>(std::shared_ptr&lt; helios::scene::Camera &gt; camera) noexcept</argsstring>
-        <name>setCamera</name>
-        <qualifiedname>helios::rendering::Viewport::setCamera</qualifiedname>
+        <definition>Viewport &amp; helios::rendering::Viewport::setCameraSceneNode</definition>
+        <argsstring>(const helios::scene::CameraSceneNode *cameraSceneNode) noexcept</argsstring>
+        <name>setCameraSceneNode</name>
+        <qualifiedname>helios::rendering::Viewport::setCameraSceneNode</qualifiedname>
         <param>
-          <type>std::shared_ptr&lt; <ref refid="classhelios_1_1scene_1_1Camera" kindref="compound">helios::scene::Camera</ref> &gt;</type>
-          <declname>camera</declname>
+          <type>const <ref refid="classhelios_1_1scene_1_1CameraSceneNode" kindref="compound">helios::scene::CameraSceneNode</ref> *</type>
+          <declname>cameraSceneNode</declname>
         </param>
         <briefdescription>
-<para>Assigns a camera to this viewport. </para>
+<para>Assigns a camera scene node to this viewport. </para>
         </briefdescription>
         <detaileddescription>
+<para>The viewport uses the associated camera&apos;s projection matrix and the node&apos;s computed view matrix for rendering. The camera&apos;s aspect ratio is automatically updated when the parent <ref refid="classhelios_1_1rendering_1_1RenderTarget" kindref="compound">RenderTarget</ref> is resized.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>camera</parametername>
+<parametername>cameraSceneNode</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A shared pointer to the `Camera` object.</para>
+<para>A non-owning raw pointer to the `CameraSceneNode`. Must remain valid for the lifetime of this viewport.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -382,32 +384,32 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/rendering/Viewport.ixx" line="167" column="18"/>
-        <references refid="classhelios_1_1rendering_1_1Viewport_1a93d7f88ee769079ac287e9859f242e24">camera</references>
-        <references refid="classhelios_1_1rendering_1_1Viewport_1a803fe87a8f476b47f48a338a71257816">setCamera</references>
+        <location file="include/helios/rendering/Viewport.ixx" line="172" column="18"/>
+        <references refid="classhelios_1_1rendering_1_1Viewport_1ac0a2a8555099d41b4000196e0c35edbd">cameraSceneNode</references>
+        <references refid="classhelios_1_1rendering_1_1Viewport_1a309a84b609eb286f17fcaa9a8fe75652">setCameraSceneNode</references>
         <references refid="classhelios_1_1rendering_1_1Viewport_1acab3a95a725e2ce895c8cf5a075e5a8c">Viewport</references>
-        <referencedby refid="classhelios_1_1rendering_1_1Viewport_1a803fe87a8f476b47f48a338a71257816">setCamera</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1Viewport_1a309a84b609eb286f17fcaa9a8fe75652">setCameraSceneNode</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1rendering_1_1Viewport_1a93d7f88ee769079ac287e9859f242e24" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>std::shared_ptr&lt; <ref refid="classhelios_1_1scene_1_1Camera" kindref="compound">helios::scene::Camera</ref> &gt;</type>
-        <definition>std::shared_ptr&lt; helios::scene::Camera &gt; helios::rendering::Viewport::camera</definition>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1Viewport_1ac0a2a8555099d41b4000196e0c35edbd" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classhelios_1_1scene_1_1CameraSceneNode" kindref="compound">helios::scene::CameraSceneNode</ref> *</type>
+        <definition>const helios::scene::CameraSceneNode * helios::rendering::Viewport::cameraSceneNode</definition>
         <argsstring>() const noexcept</argsstring>
-        <name>camera</name>
-        <qualifiedname>helios::rendering::Viewport::camera</qualifiedname>
+        <name>cameraSceneNode</name>
+        <qualifiedname>helios::rendering::Viewport::cameraSceneNode</qualifiedname>
         <briefdescription>
-<para>Gets the camera associated with this viewport. </para>
+<para>Gets the camera scene node associated with this viewport. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>A shared pointer to the `Camera` object. </para>
+<para><simplesect kind="return"><para>A const pointer to the associated `CameraSceneNode`, or `nullptr` if none is set. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/rendering/Viewport.ixx" line="174" column="26"/>
-        <references refid="classhelios_1_1rendering_1_1Viewport_1a93d7f88ee769079ac287e9859f242e24">camera</references>
-        <referencedby refid="classhelios_1_1rendering_1_1Viewport_1a93d7f88ee769079ac287e9859f242e24">camera</referencedby>
-        <referencedby refid="classhelios_1_1rendering_1_1Viewport_1a803fe87a8f476b47f48a338a71257816">setCamera</referencedby>
+        <location file="include/helios/rendering/Viewport.ixx" line="179" column="47"/>
+        <references refid="classhelios_1_1rendering_1_1Viewport_1ac0a2a8555099d41b4000196e0c35edbd">cameraSceneNode</references>
+        <referencedby refid="classhelios_1_1rendering_1_1Viewport_1ac0a2a8555099d41b4000196e0c35edbd">cameraSceneNode</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1Viewport_1a309a84b609eb286f17fcaa9a8fe75652">setCameraSceneNode</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1rendering_1_1Viewport_1a9c8ed040c0e35728770ddd462860c5bc" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type><ref refid="classhelios_1_1rendering_1_1Viewport_1acab3a95a725e2ce895c8cf5a075e5a8c" kindref="member">Viewport</ref> &amp;</type>
@@ -424,7 +426,7 @@
           <declname>key</declname>
         </param>
         <briefdescription>
-<para>Sets the parent <ref refid="classhelios_1_1rendering_1_1RenderTarget" kindref="compound">RenderTarget</ref> for this viewport and updates the Camera of this <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">Viewport</ref> with an Aspect Ratio based on the dimensions of the <ref refid="classhelios_1_1rendering_1_1RenderTarget" kindref="compound">RenderTarget</ref>. </para>
+<para>Sets the parent <ref refid="classhelios_1_1rendering_1_1RenderTarget" kindref="compound">RenderTarget</ref> for this viewport and updates the CameraSceneNode and its associated Camera of this <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">Viewport</ref> with an Aspect Ratio based on the dimensions of the <ref refid="classhelios_1_1rendering_1_1RenderTarget" kindref="compound">RenderTarget</ref>. </para>
         </briefdescription>
         <detaileddescription>
 <para>This function can only be called by classes that can construct a `ViewportKey`, effectively restricting its use to the `RenderTarget` class.</para>
@@ -454,7 +456,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/rendering/Viewport.ixx" line="192" column="18"/>
+        <location file="include/helios/rendering/Viewport.ixx" line="197" column="18"/>
         <references refid="classhelios_1_1rendering_1_1Viewport_1afa67d77263ec5dd36db0591ffb9f889d">renderTarget</references>
         <references refid="classhelios_1_1rendering_1_1Viewport_1a9c8ed040c0e35728770ddd462860c5bc">setRenderTarget</references>
         <references refid="classhelios_1_1rendering_1_1Viewport_1acab3a95a725e2ce895c8cf5a075e5a8c">Viewport</references>
@@ -476,7 +478,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/rendering/Viewport.ixx" line="199" column="36"/>
+        <location file="include/helios/rendering/Viewport.ixx" line="204" column="36"/>
         <references refid="classhelios_1_1rendering_1_1Viewport_1a6d7fc6de0fc5c9c31d2d7ee760f1f126">bounds</references>
         <referencedby refid="classhelios_1_1rendering_1_1Viewport_1a6d7fc6de0fc5c9c31d2d7ee760f1f126">bounds</referencedby>
       </memberdef>
@@ -543,7 +545,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/rendering/Viewport.ixx" line="210" column="14"/>
+        <location file="include/helios/rendering/Viewport.ixx" line="215" column="14"/>
         <references refid="classhelios_1_1rendering_1_1Viewport_1a1935d17a330f646b6033b31799d6e22f">setBounds</references>
         <referencedby refid="classhelios_1_1rendering_1_1Viewport_1a1935d17a330f646b6033b31799d6e22f">setBounds</referencedby>
       </memberdef>
@@ -563,7 +565,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/rendering/Viewport.ixx" line="219" column="14"/>
+        <location file="include/helios/rendering/Viewport.ixx" line="224" column="14"/>
         <references refid="classhelios_1_1rendering_1_1Viewport_1a77b488470dd2c811db40faeec666983b">clearFlags</references>
         <referencedby refid="classhelios_1_1rendering_1_1Viewport_1a77b488470dd2c811db40faeec666983b">clearFlags</referencedby>
         <referencedby refid="classhelios_1_1rendering_1_1Viewport_1a7199b3df8a9c5817eaa21173a9c6e434">setClearFlags</referencedby>
@@ -584,7 +586,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/rendering/Viewport.ixx" line="226" column="36"/>
+        <location file="include/helios/rendering/Viewport.ixx" line="231" column="36"/>
         <references refid="classhelios_1_1rendering_1_1Viewport_1aeb81651e77ad4e0082fef42815198917">clearColor</references>
         <referencedby refid="classhelios_1_1rendering_1_1Viewport_1aeb81651e77ad4e0082fef42815198917">clearColor</referencedby>
       </memberdef>
@@ -617,7 +619,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/rendering/Viewport.ixx" line="235" column="18"/>
+        <location file="include/helios/rendering/Viewport.ixx" line="240" column="18"/>
         <references refid="classhelios_1_1rendering_1_1Viewport_1a77b488470dd2c811db40faeec666983b">clearFlags</references>
         <references refid="classhelios_1_1rendering_1_1Viewport_1a7199b3df8a9c5817eaa21173a9c6e434">setClearFlags</references>
         <references refid="classhelios_1_1rendering_1_1Viewport_1acab3a95a725e2ce895c8cf5a075e5a8c">Viewport</references>
@@ -653,7 +655,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/rendering/Viewport.ixx" line="246" column="18"/>
+        <location file="include/helios/rendering/Viewport.ixx" line="251" column="18"/>
         <references refid="classhelios_1_1rendering_1_1Viewport_1af94f8b0ec7697edea1c0cf843c03ad3d">setClearColor</references>
         <references refid="classhelios_1_1rendering_1_1Viewport_1acab3a95a725e2ce895c8cf5a075e5a8c">Viewport</references>
         <referencedby refid="classhelios_1_1rendering_1_1Viewport_1af94f8b0ec7697edea1c0cf843c03ad3d">setClearColor</referencedby>
@@ -687,7 +689,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/rendering/Viewport.ixx" line="255" column="18"/>
+        <location file="include/helios/rendering/Viewport.ixx" line="260" column="18"/>
         <references refid="classhelios_1_1rendering_1_1Viewport_1af7fa261780058e3f8b85cb2d8b504fc0">setZIndex</references>
         <references refid="classhelios_1_1rendering_1_1Viewport_1acab3a95a725e2ce895c8cf5a075e5a8c">Viewport</references>
         <referencedby refid="classhelios_1_1rendering_1_1Viewport_1af7fa261780058e3f8b85cb2d8b504fc0">setZIndex</referencedby>
@@ -746,7 +748,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/rendering/Viewport.ixx" line="270" column="15"/>
+        <location file="include/helios/rendering/Viewport.ixx" line="275" column="15"/>
         <references refid="classhelios_1_1rendering_1_1Viewport_1a7739f87efe62f23fb891fe9cbfc4e1c2">onRenderTargetResize</references>
         <referencedby refid="classhelios_1_1rendering_1_1Viewport_1a7739f87efe62f23fb891fe9cbfc4e1c2">onRenderTargetResize</referencedby>
       </memberdef>
@@ -755,22 +757,22 @@
 <para>Represents a rectangular area within a <ref refid="classhelios_1_1rendering_1_1RenderTarget" kindref="compound">RenderTarget</ref> where a scene is rendered. </para>
     </briefdescription>
     <detaileddescription>
-<para>A <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">Viewport</ref> defines the 2D rectangle into which a 3D scene is projected. Its dimensions are specified in normalized coordinates relative to its parent `RenderTarget`. It is associated with a `Camera`, which provides the viewing and projection matrices. The viewport automatically updates the camera&apos;s aspect ratio when its parent `RenderTarget` is resized.</para>
+<para>A <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">Viewport</ref> defines the 2D rectangle into which a 3D scene is projected. Its dimensions are specified in normalized coordinates relative to its parent `RenderTarget`. It is associated with a `CameraSceneNode`, which provides the view and projection matrices. The viewport automatically updates the CameraSceneNode associated camera&apos;s aspect ratio when its parent `RenderTarget` is resized.</para>
 <para>Since a <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">Viewport</ref> only stores normalized values for its location and dimensions relative to the owning <ref refid="classhelios_1_1rendering_1_1RenderTarget" kindref="compound">RenderTarget</ref>, rendering APIs should query the size of the <ref refid="classhelios_1_1rendering_1_1RenderTarget" kindref="compound">RenderTarget</ref> when a viewport is about to be rendered, allowing them to compute the final screen coordinates and dimensions correctly.</para>
 <para><simplesect kind="see"><para><ref refid="classhelios_1_1rendering_1_1RenderTarget" kindref="compound">helios::rendering::RenderTarget</ref> </para>
 </simplesect>
-<simplesect kind="see"><para><ref refid="classhelios_1_1scene_1_1Camera" kindref="compound">helios::scene::Camera</ref> </para>
+<simplesect kind="see"><para><ref refid="classhelios_1_1scene_1_1CameraSceneNode" kindref="compound">helios::scene::CameraSceneNode</ref> </para>
 </simplesect>
 <simplesect kind="see"><para><ulink url="https://registry.khronos.org/OpenGL-Refpages/gl4/html/glViewport.xhtml">https://registry.khronos.org/OpenGL-Refpages/gl4/html/glViewport.xhtml</ulink> </para>
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="include/helios/rendering/Viewport.ixx" line="56" column="5" bodyfile="include/helios/rendering/Viewport.ixx" bodystart="56" bodyend="273"/>
+    <location file="include/helios/rendering/Viewport.ixx" line="56" column="5" bodyfile="include/helios/rendering/Viewport.ixx" bodystart="56" bodyend="278"/>
     <listofallmembers>
       <member refid="classhelios_1_1rendering_1_1Viewport_1a6d7fc6de0fc5c9c31d2d7ee760f1f126" prot="public" virt="non-virtual"><scope>helios::rendering::Viewport</scope><name>bounds</name></member>
       <member refid="classhelios_1_1rendering_1_1Viewport_1a7394359da5d6ad017e84af9ebaf8a895" prot="private" virt="non-virtual"><scope>helios::rendering::Viewport</scope><name>bounds_</name></member>
-      <member refid="classhelios_1_1rendering_1_1Viewport_1a93d7f88ee769079ac287e9859f242e24" prot="public" virt="non-virtual"><scope>helios::rendering::Viewport</scope><name>camera</name></member>
-      <member refid="classhelios_1_1rendering_1_1Viewport_1aac1b0f2033ac6fb41dea3e3f0f04737a" prot="private" virt="non-virtual"><scope>helios::rendering::Viewport</scope><name>camera_</name></member>
+      <member refid="classhelios_1_1rendering_1_1Viewport_1ac0a2a8555099d41b4000196e0c35edbd" prot="public" virt="non-virtual"><scope>helios::rendering::Viewport</scope><name>cameraSceneNode</name></member>
+      <member refid="classhelios_1_1rendering_1_1Viewport_1a237042365bf4633b6fb8844d900b7595" prot="private" virt="non-virtual"><scope>helios::rendering::Viewport</scope><name>cameraSceneNode_</name></member>
       <member refid="classhelios_1_1rendering_1_1Viewport_1aeb81651e77ad4e0082fef42815198917" prot="public" virt="non-virtual"><scope>helios::rendering::Viewport</scope><name>clearColor</name></member>
       <member refid="classhelios_1_1rendering_1_1Viewport_1ae54f2fdf13f19fc0022bc8f28ef84bd1" prot="private" virt="non-virtual"><scope>helios::rendering::Viewport</scope><name>clearColor_</name></member>
       <member refid="classhelios_1_1rendering_1_1Viewport_1a77b488470dd2c811db40faeec666983b" prot="public" virt="non-virtual"><scope>helios::rendering::Viewport</scope><name>clearFlags</name></member>
@@ -782,7 +784,7 @@
       <member refid="classhelios_1_1rendering_1_1Viewport_1afa67d77263ec5dd36db0591ffb9f889d" prot="public" virt="non-virtual"><scope>helios::rendering::Viewport</scope><name>renderTarget</name></member>
       <member refid="classhelios_1_1rendering_1_1Viewport_1a048a665f71389e73805ebf4978f166d1" prot="private" virt="non-virtual"><scope>helios::rendering::Viewport</scope><name>renderTarget_</name></member>
       <member refid="classhelios_1_1rendering_1_1Viewport_1a1935d17a330f646b6033b31799d6e22f" prot="public" virt="non-virtual"><scope>helios::rendering::Viewport</scope><name>setBounds</name></member>
-      <member refid="classhelios_1_1rendering_1_1Viewport_1a803fe87a8f476b47f48a338a71257816" prot="public" virt="non-virtual"><scope>helios::rendering::Viewport</scope><name>setCamera</name></member>
+      <member refid="classhelios_1_1rendering_1_1Viewport_1a309a84b609eb286f17fcaa9a8fe75652" prot="public" virt="non-virtual"><scope>helios::rendering::Viewport</scope><name>setCameraSceneNode</name></member>
       <member refid="classhelios_1_1rendering_1_1Viewport_1af94f8b0ec7697edea1c0cf843c03ad3d" prot="public" virt="non-virtual"><scope>helios::rendering::Viewport</scope><name>setClearColor</name></member>
       <member refid="classhelios_1_1rendering_1_1Viewport_1a7199b3df8a9c5817eaa21173a9c6e434" prot="public" virt="non-virtual"><scope>helios::rendering::Viewport</scope><name>setClearFlags</name></member>
       <member refid="classhelios_1_1rendering_1_1Viewport_1a9c8ed040c0e35728770ddd462860c5bc" prot="public" virt="non-virtual"><scope>helios::rendering::Viewport</scope><name>setRenderTarget</name></member>

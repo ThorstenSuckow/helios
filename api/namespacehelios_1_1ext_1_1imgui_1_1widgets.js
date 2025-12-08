@@ -1,5 +1,6 @@
 var namespacehelios_1_1ext_1_1imgui_1_1widgets =
 [
+    [ "CameraWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1CameraWidget.html", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1CameraWidget" ],
     [ "FpsWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget.html", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget" ],
     [ "GamepadWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget.html", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget" ],
     [ "LogEntry", "structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html", "structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry" ],

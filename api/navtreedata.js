@@ -74,19 +74,20 @@ var NAVTREEINDEX =
 [
 "Application_8ixx.html",
 "classhelios_1_1app_1_1Application.html#a6cbbd642405f8815ec1b5a58b7d27137",
-"classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication.html#aec402bfa5500772acb4d47752e80fd3e",
-"classhelios_1_1ext_1_1imgui_1_1widgets_1_1LogWidget.html#a7478ead2945c414d487a35f385172cbf",
-"classhelios_1_1game_1_1GameWorld.html#a8d335dac816beaea261a008f784dc32f",
-"classhelios_1_1rendering_1_1RenderPrototype.html#a210f31929a563db1bf8e9cb73fa6043e",
-"classhelios_1_1rendering_1_1model_1_1Mesh.html#aaa407490b0aad89fbe9fd0ec0de533df",
-"classhelios_1_1scene_1_1SceneNode.html#ab908b6a16d34640eca0d92f2573e6cc3",
-"classhelios_1_1util_1_1log_1_1LogManager.html#aa512b16af91784c9c588a379b304b596",
-"functions_func_l.html",
-"module__helios_8ext_8glfw_8window_8GLFWWindowUserPointer.html",
-"module__helios_8math_8types.html#aaa35ca824a53010bc2191cfa6a0ada9f",
-"module__helios_8scene_8Scene.html#a9b596ef125f2e58772117279f8b1351c",
-"namespacehelios_1_1event.html#a68d7042f97d91ed8414724453213e7f0",
-"structhelios_1_1math_1_1vec3.html#a6db16504ac2287d0bfb8909075248b49"
+"classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication.html#ad50cfc2051b48c6c447df3b53b0734bd",
+"classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget.html#a01362127380439b6a4dca4bd1222ea89",
+"classhelios_1_1game_1_1GameObject.html#ae0b8447b4270f0db326bdb523239a536",
+"classhelios_1_1rendering_1_1RenderPass.html#afac382a610028b5e09af4ade728b78b3",
+"classhelios_1_1rendering_1_1model_1_1Mesh.html#a0209d3961a858b2ef36d2a5368138d3b",
+"classhelios_1_1scene_1_1SceneNode.html#a01e293e31d8c30a3f9cbae3ad19ca6d8",
+"classhelios_1_1util_1_1io_1_1StringFileReader.html#a17cfdb3190ce2bdf683606ca14be20c3",
+"classhelios_1_1window_1_1event_1_1WindowEvent.html#aaa39eed04b768d8daa5dc65b5e14bed8",
+"module__helios_8event_8Event.html#a4a70f4250c4f320381d31c42fc0e912f",
+"module__helios_8input_8InputAdapter.html#a7e70390747059f6c7dc6665c59819a86",
+"module__helios_8rendering_8model_8Mesh.html#a77d112e319ebb8ddea82678f82fee694",
+"module__helios_8util_8time.html",
+"structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowConfig.html#a6bb4a7e59d2cd05ed5c5e15ba0055461",
+"structhelios_1_1rendering_1_1model_1_1config_1_1MaterialPropertiesOverride.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

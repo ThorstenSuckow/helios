@@ -8,6 +8,7 @@ var structhelios_1_1math_1_1mat4 =
     [ "operator()", "structhelios_1_1math_1_1mat4.html#aecc9104aa657ee1df754a8d5cefd60a0", null ],
     [ "operator()", "structhelios_1_1math_1_1mat4.html#a025319de588d6c29c57c92413a4a51b3", null ],
     [ "operator*", "structhelios_1_1math_1_1mat4.html#a1a4063671f96b4e127f18ae6453afda9", null ],
+    [ "operator*", "structhelios_1_1math_1_1mat4.html#a23a55beb9005b24b1e50ae2bf8a71ad8", null ],
     [ "operator==", "structhelios_1_1math_1_1mat4.html#a33c47f9920f5e88b98caca96a889d0aa", null ],
     [ "same", "structhelios_1_1math_1_1mat4.html#a11484773381edf083309360d6c940d3f", null ]
 ];

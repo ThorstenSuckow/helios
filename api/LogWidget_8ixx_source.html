@@ -638,74 +638,82 @@ $(function() {
 <div class="line"><a id="l00502" name="l00502"></a><span class="lineno">  502</span>                        }</div>
 <div class="line"><a id="l00503" name="l00503"></a><span class="lineno">  503</span> </div>
 <div class="line"><a id="l00504" name="l00504"></a><span class="lineno">  504</span>                        <span class="comment">// Build display string for text filter</span></div>
-<div class="line"><a id="l00505" name="l00505"></a><span class="lineno">  505</span>                        std::string displayLine =</div>
-<div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span>                            entry.<a class="code hl_variable" href="structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html#ad362d393aa91890ffd592c025cd4f226">timestamp</a> + <span class="stringliteral">&quot; &quot;</span> +</div>
-<div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span>                            labelForLevel(entry.<a class="code hl_variable" href="structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html#a1604578016d00a484fa9a2d97629d384">level</a>) + <span class="stringliteral">&quot; [&quot;</span> +</div>
-<div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span>                            entry.<a class="code hl_variable" href="structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html#ad59b894922d8b66525cca2cdee97cf5c">scope</a> + <span class="stringliteral">&quot;] &quot;</span> + entry.<a class="code hl_variable" href="structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html#aab6df389238bddf7c0fcd896379d7903">message</a>;</div>
-<div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span> </div>
-<div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span>                        <span class="comment">// Apply text filter</span></div>
-<div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span>                        <span class="keywordflow">if</span> (!textFilter_.PassFilter(displayLine.c_str())) {</div>
-<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span>                            <span class="keywordflow">continue</span>;</div>
-<div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span>                        }</div>
-<div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span> </div>
-<div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span>                        <span class="comment">// Render with color</span></div>
-<div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span>                        ImVec4 color = colorForLevel(entry.<a class="code hl_variable" href="structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html#a1604578016d00a484fa9a2d97629d384">level</a>);</div>
-<div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span>                        ImGui::PushStyleColor(ImGuiCol_Text, color);</div>
-<div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span>                        ImGui::TextUnformatted(displayLine.c_str());</div>
-<div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span>                        ImGui::PopStyleColor();</div>
-<div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span>                    }</div>
-<div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span> </div>
-<div class="line"><a id="l00522" name="l00522"></a><span class="lineno">  522</span>                    ImGui::PopStyleVar();</div>
-<div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span> </div>
-<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span>                    <span class="comment">// Scroll state</span></div>
-<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span>                    <span class="keywordtype">float</span> scrollY = ImGui::GetScrollY();</div>
-<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>                    <span class="keywordtype">float</span> scrollMaxY = ImGui::GetScrollMaxY();</div>
-<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>                    <span class="keywordtype">bool</span> atBottomNow = (scrollMaxY &lt;= 0.0f) || (scrollY &gt;= scrollMaxY - 5.0f);</div>
-<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span> </div>
-<div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span>                    <span class="comment">// Auto-scroll decision</span></div>
-<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>                    <span class="keywordflow">if</span> (hasNewContent &amp;&amp; (autoScroll_ || wasAtBottom_)) {</div>
-<div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span>                        ImGui::SetScrollHereY(1.0f);</div>
-<div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>                    }</div>
-<div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span> </div>
-<div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>                    <span class="comment">// Pause logging if:</span></div>
-<div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span>                    <span class="comment">// - AutoScroll is off AND user has not scrolled to lower bottom</span></div>
-<div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span>                    <span class="keywordtype">bool</span> pauseLogging = (!autoScroll_ &amp;&amp; !atBottomNow);</div>
-<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>                    acceptNewEntries_.store(!pauseLogging, std::memory_order_relaxed);</div>
-<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>                    wasAtBottom_ = atBottomNow;</div>
-<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>                }</div>
-<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>                ImGui::EndChild();</div>
+<div class="line"><a id="l00505" name="l00505"></a><span class="lineno">  505</span>                        <span class="comment">// If a specific scope is selected, omit scope from display (already visible in combo)</span></div>
+<div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span>                        std::string displayLine;</div>
+<div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span>                        <span class="keywordflow">if</span> (activeScopeFilter_.empty()) {</div>
+<div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span>                            <span class="comment">// &quot;All Scopes&quot; selected - show scope in each line</span></div>
+<div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span>                            displayLine = entry.<a class="code hl_variable" href="structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html#ad362d393aa91890ffd592c025cd4f226">timestamp</a> + <span class="stringliteral">&quot; &quot;</span> +</div>
+<div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span>                                labelForLevel(entry.<a class="code hl_variable" href="structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html#a1604578016d00a484fa9a2d97629d384">level</a>) + <span class="stringliteral">&quot; [&quot;</span> +</div>
+<div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span>                                entry.<a class="code hl_variable" href="structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html#ad59b894922d8b66525cca2cdee97cf5c">scope</a> + <span class="stringliteral">&quot;] &quot;</span> + entry.<a class="code hl_variable" href="structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html#aab6df389238bddf7c0fcd896379d7903">message</a>;</div>
+<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span>                        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span>                            <span class="comment">// Specific scope filtered - omit scope from display</span></div>
+<div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span>                            displayLine = entry.<a class="code hl_variable" href="structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html#ad362d393aa91890ffd592c025cd4f226">timestamp</a> + <span class="stringliteral">&quot; &quot;</span> +</div>
+<div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span>                                labelForLevel(entry.<a class="code hl_variable" href="structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html#a1604578016d00a484fa9a2d97629d384">level</a>) + <span class="stringliteral">&quot; &quot;</span> + entry.<a class="code hl_variable" href="structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html#aab6df389238bddf7c0fcd896379d7903">message</a>;</div>
+<div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span>                        }</div>
+<div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span> </div>
+<div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span>                        <span class="comment">// Apply text filter</span></div>
+<div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span>                        <span class="keywordflow">if</span> (!textFilter_.PassFilter(displayLine.c_str())) {</div>
+<div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span>                            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span>                        }</div>
+<div class="line"><a id="l00522" name="l00522"></a><span class="lineno">  522</span> </div>
+<div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span>                        <span class="comment">// Render with color</span></div>
+<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span>                        ImVec4 color = colorForLevel(entry.<a class="code hl_variable" href="structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html#a1604578016d00a484fa9a2d97629d384">level</a>);</div>
+<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span>                        ImGui::PushStyleColor(ImGuiCol_Text, color);</div>
+<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>                        ImGui::TextUnformatted(displayLine.c_str());</div>
+<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>                        ImGui::PopStyleColor();</div>
+<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span>                    }</div>
+<div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span> </div>
+<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>                    ImGui::PopStyleVar();</div>
+<div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span> </div>
+<div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>                    <span class="comment">// Scroll state</span></div>
+<div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span>                    <span class="keywordtype">float</span> scrollY = ImGui::GetScrollY();</div>
+<div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>                    <span class="keywordtype">float</span> scrollMaxY = ImGui::GetScrollMaxY();</div>
+<div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span>                    <span class="keywordtype">bool</span> atBottomNow = (scrollMaxY &lt;= 0.0f) || (scrollY &gt;= scrollMaxY - 5.0f);</div>
+<div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span> </div>
+<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>                    <span class="comment">// Auto-scroll decision</span></div>
+<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>                    <span class="keywordflow">if</span> (hasNewContent &amp;&amp; (autoScroll_ || wasAtBottom_)) {</div>
+<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>                        ImGui::SetScrollHereY(1.0f);</div>
+<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>                    }</div>
 <div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span> </div>
-<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>                <span class="comment">// Footer</span></div>
-<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>                {</div>
-<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>                    std::lock_guard&lt;std::mutex&gt; lock(bufferMutex_);</div>
-<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>                    ImGui::Text(<span class="stringliteral">&quot;Entries: %zu / %zu&quot;</span>, activeBuffer().size(), maxEntries_);</div>
-<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>                }</div>
-<div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span> </div>
-<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>                <span class="keywordtype">bool</span> loggingPaused = !acceptNewEntries_.load(std::memory_order_relaxed);</div>
-<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span>                <span class="keyword">auto</span> skipped = skippedEntries_.load(std::memory_order_relaxed);</div>
-<div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span> </div>
-<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>                <span class="keywordflow">if</span> (loggingPaused) {</div>
-<div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span>                    ImGui::SameLine();</div>
-<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>                    <span class="keywordflow">if</span> (skipped &gt; 0) {</div>
-<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>                        ImGui::TextColored(ImVec4(1.0f, 0.8f, 0.2f, 1.0f),</div>
-<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>                                           <span class="stringliteral">&quot;Logging paused (%zu entries skipped)&quot;</span>, skipped);</div>
-<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span>                    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span>                        ImGui::TextColored(ImVec4(1.0f, 0.8f, 0.2f, 1.0f), <span class="stringliteral">&quot;Logging paused&quot;</span>);</div>
-<div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span>                    }</div>
-<div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span>                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (skipped &gt; 0) {</div>
+<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>                    <span class="comment">// Pause logging if:</span></div>
+<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>                    <span class="comment">// - AutoScroll is off AND user has not scrolled to lower bottom</span></div>
+<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>                    <span class="keywordtype">bool</span> pauseLogging = (!autoScroll_ &amp;&amp; !atBottomNow);</div>
+<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>                    acceptNewEntries_.store(!pauseLogging, std::memory_order_relaxed);</div>
+<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>                    wasAtBottom_ = atBottomNow;</div>
+<div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span>                }</div>
+<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>                ImGui::EndChild();</div>
+<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span> </div>
+<div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>                <span class="comment">// Footer</span></div>
+<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>                {</div>
+<div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span>                    std::lock_guard&lt;std::mutex&gt; lock(bufferMutex_);</div>
+<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>                    ImGui::Text(<span class="stringliteral">&quot;Entries: %zu / %zu&quot;</span>, activeBuffer().size(), maxEntries_);</div>
+<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>                }</div>
+<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span> </div>
+<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span>                <span class="keywordtype">bool</span> loggingPaused = !acceptNewEntries_.load(std::memory_order_relaxed);</div>
+<div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span>                <span class="keyword">auto</span> skipped = skippedEntries_.load(std::memory_order_relaxed);</div>
+<div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span> </div>
+<div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span>                <span class="keywordflow">if</span> (loggingPaused) {</div>
 <div class="line"><a id="l00560" name="l00560"></a><span class="lineno">  560</span>                    ImGui::SameLine();</div>
-<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span>                    ImGui::TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f),</div>
-<div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span>                                       <span class="stringliteral">&quot;%zu entries were skipped&quot;</span>, skipped);</div>
-<div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span>                    skippedEntries_.store(0, std::memory_order_relaxed);</div>
-<div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span>                }</div>
-<div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span>            }</div>
-<div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>            ImGui::End();</div>
-<div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span>        }</div>
+<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span>                    <span class="keywordflow">if</span> (skipped &gt; 0) {</div>
+<div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span>                        ImGui::TextColored(ImVec4(1.0f, 0.8f, 0.2f, 1.0f),</div>
+<div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span>                                           <span class="stringliteral">&quot;Logging paused (%zu entries skipped)&quot;</span>, skipped);</div>
+<div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span>                    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span>                        ImGui::TextColored(ImVec4(1.0f, 0.8f, 0.2f, 1.0f), <span class="stringliteral">&quot;Logging paused&quot;</span>);</div>
+<div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>                    }</div>
+<div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span>                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (skipped &gt; 0) {</div>
+<div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span>                    ImGui::SameLine();</div>
+<div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span>                    ImGui::TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f),</div>
+<div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span>                                       <span class="stringliteral">&quot;%zu entries were skipped&quot;</span>, skipped);</div>
+<div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span>                    skippedEntries_.store(0, std::memory_order_relaxed);</div>
+<div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span>                }</div>
+<div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span>            }</div>
+<div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span>            ImGui::End();</div>
+<div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span>        }</div>
 </div>
-<div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span>    };</div>
+<div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span>    };</div>
 </div>
-<div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span> </div>
-<div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span>}</div>
+<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span> </div>
+<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>}</div>
 <div class="ttc" id="aclasshelios_1_1ext_1_1imgui_1_1ImGuiWidget_html_aac2ed1b7d339b387d91158b00d26c089"><div class="ttname"><a href="classhelios_1_1ext_1_1imgui_1_1ImGuiWidget.html#aac2ed1b7d339b387d91158b00d26c089">helios::ext::imgui::ImGuiWidget::ImGuiWidget</a></div><div class="ttdeci">ImGuiWidget()=default</div></div>
 <div class="ttc" id="aclasshelios_1_1ext_1_1imgui_1_1widgets_1_1LogWidget_html_a3c57ff05214d576da1b38cca17cbca20"><div class="ttname"><a href="classhelios_1_1ext_1_1imgui_1_1widgets_1_1LogWidget.html#a3c57ff05214d576da1b38cca17cbca20">helios::ext::imgui::widgets::LogWidget::debug</a></div><div class="ttdeci">void debug(const std::string &amp;scope, const std::string &amp;message)</div><div class="ttdoc">Convenience method to add a debug-level log entry.</div><div class="ttdef"><b>Definition</b> <a href="#l00305">LogWidget.ixx:305</a></div></div>
 <div class="ttc" id="aclasshelios_1_1ext_1_1imgui_1_1widgets_1_1LogWidget_html_a403e656382b33642b5799c5d658f6bdf"><div class="ttname"><a href="classhelios_1_1ext_1_1imgui_1_1widgets_1_1LogWidget.html#a403e656382b33642b5799c5d658f6bdf">helios::ext::imgui::widgets::LogWidget::draw</a></div><div class="ttdeci">void draw() override</div><div class="ttdoc">Renders the log widget using ImGui.</div><div class="ttdef"><b>Definition</b> <a href="#l00410">LogWidget.ixx:410</a></div></div>
@@ -723,7 +731,7 @@ $(function() {
 <div class="ttc" id="aclasshelios_1_1ext_1_1imgui_1_1widgets_1_1LogWidget_html_afc994789e5e455057029c6c26f0fbb1b"><div class="ttname"><a href="classhelios_1_1ext_1_1imgui_1_1widgets_1_1LogWidget.html#afc994789e5e455057029c6c26f0fbb1b">helios::ext::imgui::widgets::LogWidget::setFilterLevel</a></div><div class="ttdeci">void setFilterLevel(LogLevel level) noexcept</div><div class="ttdoc">Sets the minimum log level to display.</div><div class="ttdef"><b>Definition</b> <a href="#l00380">LogWidget.ixx:380</a></div></div>
 <div class="ttc" id="amodule__helios_8ext_8imgui_8ImGuiWidget_html"><div class="ttname"><a href="module__helios_8ext_8imgui_8ImGuiWidget.html">helios.ext.imgui.ImGuiWidget</a></div></div>
 <div class="ttc" id="amodule__helios_8ext_8imgui_8widgets_8LogWidget_html"><div class="ttname"><a href="module__helios_8ext_8imgui_8widgets_8LogWidget.html">helios.ext.imgui.widgets.LogWidget</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1ext_1_1imgui_1_1widgets_html"><div class="ttname"><a href="namespacehelios_1_1ext_1_1imgui_1_1widgets.html">helios::ext::imgui::widgets</a></div><div class="ttdoc">Debug and developer widgets for ImGui overlays.</div><div class="ttdef"><b>Definition</b> <a href="FpsWidget_8ixx_source.html#l00018">FpsWidget.ixx:18</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1ext_1_1imgui_1_1widgets_html"><div class="ttname"><a href="namespacehelios_1_1ext_1_1imgui_1_1widgets.html">helios::ext::imgui::widgets</a></div><div class="ttdoc">Debug and developer widgets for ImGui overlays.</div><div class="ttdef"><b>Definition</b> <a href="CameraWidget_8ixx_source.html#l00021">CameraWidget.ixx:21</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1ext_1_1imgui_1_1widgets_html_a84429c93f4813efb2129e152bac63d64"><div class="ttname"><a href="namespacehelios_1_1ext_1_1imgui_1_1widgets.html#a84429c93f4813efb2129e152bac63d64">helios::ext::imgui::widgets::LogLevel</a></div><div class="ttdeci">LogLevel</div><div class="ttdoc">Log severity level for categorizing and filtering messages.</div><div class="ttdef"><b>Definition</b> <a href="#l00028">LogWidget.ixx:28</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1ext_1_1imgui_1_1widgets_html_a84429c93f4813efb2129e152bac63d64a4059b0251f66a18cb56f544728796875"><div class="ttname"><a href="namespacehelios_1_1ext_1_1imgui_1_1widgets.html#a84429c93f4813efb2129e152bac63d64a4059b0251f66a18cb56f544728796875">helios::ext::imgui::widgets::LogLevel::Info</a></div><div class="ttdeci">@ Info</div><div class="ttdef"><b>Definition</b> <a href="#l00030">LogWidget.ixx:30</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1ext_1_1imgui_1_1widgets_html_a84429c93f4813efb2129e152bac63d64a56525ae64d370c0b448ac0d60710ef17"><div class="ttname"><a href="namespacehelios_1_1ext_1_1imgui_1_1widgets.html#a84429c93f4813efb2129e152bac63d64a56525ae64d370c0b448ac0d60710ef17">helios::ext::imgui::widgets::LogLevel::Warn</a></div><div class="ttdeci">@ Warn</div><div class="ttdef"><b>Definition</b> <a href="#l00031">LogWidget.ixx:31</a></div></div>

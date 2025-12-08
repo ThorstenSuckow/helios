@@ -42,6 +42,7 @@ var hierarchy =
     ] ],
     [ "helios::ext::imgui::ImGuiOverlay", "classhelios_1_1ext_1_1imgui_1_1ImGuiOverlay.html", null ],
     [ "helios::ext::imgui::ImGuiWidget", "classhelios_1_1ext_1_1imgui_1_1ImGuiWidget.html", [
+      [ "helios::ext::imgui::widgets::CameraWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1CameraWidget.html", null ],
       [ "helios::ext::imgui::widgets::FpsWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget.html", null ],
       [ "helios::ext::imgui::widgets::GamepadWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget.html", null ],
       [ "helios::ext::imgui::widgets::LogWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1LogWidget.html", null ],

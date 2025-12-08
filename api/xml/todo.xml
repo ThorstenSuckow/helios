@@ -64,26 +64,23 @@
 <varlistentry><term>Member <ref refid="classhelios_1_1rendering_1_1Viewport_1a9c8ed040c0e35728770ddd462860c5bc" kindref="member">helios::rendering::Viewport::setRenderTarget</ref>  (const <ref refid="classhelios_1_1rendering_1_1RenderTarget" kindref="compound">helios::rendering::RenderTarget</ref> *renderTarget, <ref refid="structhelios_1_1rendering_1_1ViewportKey" kindref="compound">ViewportKey</ref> key) noexcept</term></varlistentry>
 <listitem><para><anchor id="todo_1_todo000020"/>The <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">Viewport</ref> should observe the <ref refid="classhelios_1_1rendering_1_1RenderTarget" kindref="compound">RenderTarget</ref> for state changes (e.g., resize).  </para>
 </listitem>
-<varlistentry><term>Class <ref refid="classhelios_1_1scene_1_1Camera" kindref="compound">helios::scene::Camera</ref>  </term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000021"/>Implement automatic recalculation of projection and view matrices when local transforms change (dirty flag pattern).  </para>
-</listitem>
-<varlistentry><term>Class <ref refid="classhelios_1_1scene_1_1CameraSceneNode" kindref="compound">helios::scene::CameraSceneNode</ref>  </term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000022"/>Check whether nodes should further be divided into ParentNode and LeafNode types. Cameras would be LeafNodes, not allowing child nodes.  </para>
+<varlistentry><term>Member <ref refid="classhelios_1_1scene_1_1CameraSceneNode_1ad57acd6f8c8b2e6b02707ba1424377cb" kindref="member">helios::scene::CameraSceneNode::lookAt</ref>  (<ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref> target, <ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref> up)</term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000021"/>Implement `lookAtLocal()` for observing nodes in local space. </para>
 </listitem>
 <varlistentry><term>Class <ref refid="classhelios_1_1scene_1_1FrustumCullingStrategy" kindref="compound">helios::scene::FrustumCullingStrategy</ref>  </term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000024"/>The returned list should be considered &quot;as is&quot; for now: Each entry in the list is a single renderable entity to consider. Its child nodes (i.e. the sub tree for which this node is the root) should _not_ be automatically considered for rendering. Later iterations should probably use an individual struct that provides a hint whether for a given node a whole subtree should be considered, saving time for culling and memory when constructing the list.  </para>
+<listitem><para><anchor id="todo_1_todo000022"/>The returned list should be considered &quot;as is&quot; for now: Each entry in the list is a single renderable entity to consider. Its child nodes (i.e. the sub tree for which this node is the root) should _not_ be automatically considered for rendering. Later iterations should probably use an individual struct that provides a hint whether for a given node a whole subtree should be considered, saving time for culling and memory when constructing the list.  </para>
 </listitem>
 <varlistentry><term>Member <ref refid="classhelios_1_1scene_1_1Scene_1ab3ad742392c2a2b159cf8927ee6cf375" kindref="member">helios::scene::Scene::createSnapshot</ref>  (const std::shared_ptr&lt; const rendering::Viewport &gt; &amp;viewport) const</term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000026"/>This should be refactored into a factory to prevent domain leakage between <ref refid="classhelios_1_1scene_1_1Scene" kindref="compound">Scene</ref> and Rendering.  </para>
+<listitem><para><anchor id="todo_1_todo000024"/>This should be refactored into a factory to prevent domain leakage between <ref refid="classhelios_1_1scene_1_1Scene" kindref="compound">Scene</ref> and Rendering.  </para>
 </listitem>
 <varlistentry><term>Member <ref refid="classhelios_1_1scene_1_1SceneNode_1a316494fedf68d4ca53cd4453885e0b07" kindref="member">helios::scene::SceneNode::SceneNode</ref>  () noexcept</term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000027"/>explicitly implement move (assignment) constructor if required, since we have deleted the copy constructors  </para>
+<listitem><para><anchor id="todo_1_todo000025"/>explicitly implement move (assignment) constructor if required, since we have deleted the copy constructors  </para>
 </listitem>
 <varlistentry><term>Struct <ref refid="structhelios_1_1scene_1_1SnapshotItem" kindref="compound">helios::scene::SnapshotItem</ref>  </term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000028"/>we&apos;re intentionally preferring stability over performance by using weak_ptr instead of raw pointers. This leaves room for (performance) improvements in later iterations. The Renderable as a weak pointer can later on be further implemented into a pure DTO, storing only scalar values that get send directly to the underlying rendering backend (e.g. vaos, vbos etc.).  </para>
+<listitem><para><anchor id="todo_1_todo000026"/>we&apos;re intentionally preferring stability over performance by using weak_ptr instead of raw pointers. This leaves room for (performance) improvements in later iterations. The Renderable as a weak pointer can later on be further implemented into a pure DTO, storing only scalar values that get send directly to the underlying rendering backend (e.g. vaos, vbos etc.).  </para>
 </listitem>
 <varlistentry><term>Class <ref refid="classhelios_1_1scene_1_1Transform" kindref="compound">helios::scene::Transform</ref>  </term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000029"/>use quaternions for rotation </para>
+<listitem><para><anchor id="todo_1_todo000027"/>use quaternions for rotation </para>
 </listitem>
 </variablelist>
 </para>

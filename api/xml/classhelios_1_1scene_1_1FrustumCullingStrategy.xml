@@ -32,16 +32,16 @@
         </inbodydescription>
         <location file="include/helios/scene/FrustumCullingStrategy.ixx" line="39" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1scene_1_1FrustumCullingStrategy_1abd63e1dcf92b2a8fb7b019d3b4edf448" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="pure-virtual">
+      <memberdef kind="function" id="classhelios_1_1scene_1_1FrustumCullingStrategy_1a12f23b3d9ecc16858fedf7483d9890ae" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>std::vector&lt; const <ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">helios::scene::SceneNode</ref> * &gt;</type>
         <definition>virtual std::vector&lt; const helios::scene::SceneNode * &gt; helios::scene::FrustumCullingStrategy::cull</definition>
-        <argsstring>(const helios::scene::Camera &amp;camera, const helios::scene::SceneNode &amp;root)=0</argsstring>
+        <argsstring>(const helios::scene::CameraSceneNode *cameraSceneNode, const helios::scene::SceneNode &amp;root)=0</argsstring>
         <name>cull</name>
         <qualifiedname>helios::scene::FrustumCullingStrategy::cull</qualifiedname>
-        <reimplementedby refid="classhelios_1_1scene_1_1CullNoneStrategy_1a2f2c1bebab877da27e46516363ac7996">cull</reimplementedby>
+        <reimplementedby refid="classhelios_1_1scene_1_1CullNoneStrategy_1a22667c9b69f3eb78088e8502e90c8382">cull</reimplementedby>
         <param>
-          <type>const <ref refid="classhelios_1_1scene_1_1Camera" kindref="compound">helios::scene::Camera</ref> &amp;</type>
-          <declname>camera</declname>
+          <type>const <ref refid="classhelios_1_1scene_1_1CameraSceneNode" kindref="compound">helios::scene::CameraSceneNode</ref> *</type>
+          <declname>cameraSceneNode</declname>
         </param>
         <param>
           <type>const <ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">helios::scene::SceneNode</ref> &amp;</type>
@@ -53,10 +53,10 @@
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>camera</parametername>
+<parametername>cameraSceneNode</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The camera defining the view frustum. </para>
+<para>The <ref refid="classhelios_1_1scene_1_1CameraSceneNode" kindref="compound">CameraSceneNode</ref> providing information about the view frustum. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -86,7 +86,7 @@
 <para>A <ref refid="classhelios_1_1scene_1_1FrustumCullingStrategy" kindref="compound">FrustumCullingStrategy</ref> determines which SceneNodes are visible, relative to the view frustum of a given camera.</para>
 <para><simplesect kind="see"><para>[She07, pp. 443]</para>
 </simplesect>
-<xrefsect id="todo_1_todo000024"><xreftitle>Todo</xreftitle><xrefdescription><para>The returned list should be considered &quot;as is&quot; for now: Each entry in the list is a single renderable entity to consider. Its child nodes (i.e. the sub tree for which this node is the root) should _not_ be automatically considered for rendering. Later iterations should probably use an individual struct that provides a hint whether for a given node a whole subtree should be considered, saving time for culling and memory when constructing the list. </para>
+<xrefsect id="todo_1_todo000022"><xreftitle>Todo</xreftitle><xrefdescription><para>The returned list should be considered &quot;as is&quot; for now: Each entry in the list is a single renderable entity to consider. Its child nodes (i.e. the sub tree for which this node is the root) should _not_ be automatically considered for rendering. Later iterations should probably use an individual struct that provides a hint whether for a given node a whole subtree should be considered, saving time for culling and memory when constructing the list. </para>
 </xrefdescription></xrefsect></para>
     </detaileddescription>
     <inheritancegraph>
@@ -103,7 +103,7 @@
     </inheritancegraph>
     <location file="include/helios/scene/FrustumCullingStrategy.ixx" line="32" column="5" bodyfile="include/helios/scene/FrustumCullingStrategy.ixx" bodystart="32" bodyend="58"/>
     <listofallmembers>
-      <member refid="classhelios_1_1scene_1_1FrustumCullingStrategy_1abd63e1dcf92b2a8fb7b019d3b4edf448" prot="public" virt="pure-virtual"><scope>helios::scene::FrustumCullingStrategy</scope><name>cull</name></member>
+      <member refid="classhelios_1_1scene_1_1FrustumCullingStrategy_1a12f23b3d9ecc16858fedf7483d9890ae" prot="public" virt="pure-virtual"><scope>helios::scene::FrustumCullingStrategy</scope><name>cull</name></member>
       <member refid="classhelios_1_1scene_1_1FrustumCullingStrategy_1a6132bcbaab01c563b08a97036f985e5a" prot="public" virt="non-virtual"><scope>helios::scene::FrustumCullingStrategy</scope><name>FrustumCullingStrategy</name></member>
       <member refid="classhelios_1_1scene_1_1FrustumCullingStrategy_1ad9f145bb29b43f0142eb417f14e83498" prot="public" virt="virtual"><scope>helios::scene::FrustumCullingStrategy</scope><name>~FrustumCullingStrategy</name></member>
     </listofallmembers>

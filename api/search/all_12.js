@@ -30,5 +30,5 @@ var searchData=
   ['logsink_2eixx_27',['LogSink.ixx',['../LogSink_8ixx.html',1,'']]],
   ['logwidget_28',['LogWidget',['../classhelios_1_1ext_1_1imgui_1_1widgets_1_1LogWidget.html',1,'helios::ext::imgui::widgets::LogWidget'],['../classhelios_1_1ext_1_1imgui_1_1widgets_1_1LogWidget.html#ad8aa78ed7a7bd44649200624cf08ed64',1,'helios::ext::imgui::widgets::LogWidget::LogWidget()']]],
   ['logwidget_2eixx_29',['LogWidget.ixx',['../LogWidget_8ixx.html',1,'']]],
-  ['lookat_30',['lookAt',['../namespacehelios_1_1math.html#aef6bef7ca3d31a4908a66e16c9771420',1,'helios::math']]]
+  ['lookat_30',['lookAt',['../classhelios_1_1scene_1_1CameraSceneNode.html#ad57acd6f8c8b2e6b02707ba1424377cb',1,'helios::scene::CameraSceneNode::lookAt()'],['../namespacehelios_1_1math.html#aef6bef7ca3d31a4908a66e16c9771420',1,'helios::math::lookAt()']]]
 ];

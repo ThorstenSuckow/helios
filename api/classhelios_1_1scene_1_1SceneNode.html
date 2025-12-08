@@ -161,8 +161,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a4e31b52717a76a9bae9a80a1db0b808b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to this node's parent node.  <br /></td></tr>
 <tr class="memitem:a1dbd995b4aace249c6786588e3279ae3" id="r_a1dbd995b4aace249c6786588e3279ae3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1dbd995b4aace249c6786588e3279ae3">setWorldTransform</a> (const <a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> &amp;wf, <a class="el" href="structhelios_1_1scene_1_1SceneGraphKey.html">helios::scene::SceneGraphKey</a> sceneGraphKey) noexcept</td></tr>
 <tr class="memdesc:a1dbd995b4aace249c6786588e3279ae3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the world transform for this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. Does nothing if the current <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>'s world transform is considered equal to the specified world transform.  <br /></td></tr>
-<tr class="memitem:a2cd5ee14fdf4990952266c724c916551" id="r_a2cd5ee14fdf4990952266c724c916551"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2cd5ee14fdf4990952266c724c916551">worldTransform</a> () noexcept</td></tr>
-<tr class="memdesc:a2cd5ee14fdf4990952266c724c916551"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes and returns the world transform for this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. Will request the current world transform from the parent node to calculate this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>'s world transform. For efficiency, this method should cache the result and only trigger a recompute if this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> is dirty (`needsUpdate_ == true`).  <br /></td></tr>
+<tr class="memitem:a752f544acc02b5a49623ce5aad5b1a8e" id="r_a752f544acc02b5a49623ce5aad5b1a8e"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a752f544acc02b5a49623ce5aad5b1a8e">worldTransform</a> () noexcept</td></tr>
+<tr class="memdesc:a752f544acc02b5a49623ce5aad5b1a8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes and returns the world transform for this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. Will request the current world transform from the parent node to calculate this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>'s world transform. For efficiency, this method should cache the result and only trigger a recompute if this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> is dirty (`needsUpdate_ == true`).  <br /></td></tr>
 <tr class="memitem:ab908b6a16d34640eca0d92f2573e6cc3" id="r_ab908b6a16d34640eca0d92f2573e6cc3"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab908b6a16d34640eca0d92f2573e6cc3">cachedWorldTransform</a> () const noexcept</td></tr>
 <tr class="memdesc:ab908b6a16d34640eca0d92f2573e6cc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current worldTransform matrix of this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> **without triggering any recomputation**. This method is efficient for access when the world transform is known to be up-to-date.  <br /></td></tr>
 <tr class="memitem:a88551e7d166868342b87fd83e767442c" id="r_a88551e7d166868342b87fd83e767442c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a88551e7d166868342b87fd83e767442c">needsUpdate</a> () const noexcept</td></tr>
@@ -294,7 +294,7 @@ std::vector&lt; std::unique_ptr&lt; <a class="el" href="#a30ad1d7f49d6114a261cba
 </div><div class="memdoc">
 
 <p>Constructs a new <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> that represents no renderable object. Nodes constructed in this way should be treated as transformation nodes. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000027">Todo</a></b></dt><dd>explicitly implement move (assignment) constructor if required, since we have deleted the copy constructors </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000025">Todo</a></b></dt><dd>explicitly implement move (assignment) constructor if required, since we have deleted the copy constructors </dd></dl>
 
 </div>
 </div>
@@ -1142,8 +1142,8 @@ std::vector&lt; std::unique_ptr&lt; <a class="el" href="#a30ad1d7f49d6114a261cba
 
 </div>
 </div>
-<a id="a2cd5ee14fdf4990952266c724c916551" name="a2cd5ee14fdf4990952266c724c916551"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2cd5ee14fdf4990952266c724c916551">&#9670;&#160;</a></span>worldTransform()</h2>
+<a id="a752f544acc02b5a49623ce5aad5b1a8e" name="a752f544acc02b5a49623ce5aad5b1a8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a752f544acc02b5a49623ce5aad5b1a8e">&#9670;&#160;</a></span>worldTransform()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1152,7 +1152,7 @@ std::vector&lt; std::unique_ptr&lt; <a class="el" href="#a30ad1d7f49d6114a261cba
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> &amp; helios::scene::SceneNode::worldTransform </td>
+          <td class="memname">virtual const <a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> &amp; helios::scene::SceneNode::worldTransform </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -1160,7 +1160,7 @@ std::vector&lt; std::unique_ptr&lt; <a class="el" href="#a30ad1d7f49d6114a261cba
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel virtual">virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1168,20 +1168,22 @@ std::vector&lt; std::unique_ptr&lt; <a class="el" href="#a30ad1d7f49d6114a261cba
 <p>Computes and returns the world transform for this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. Will request the current world transform from the parent node to calculate this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>'s world transform. For efficiency, this method should cache the result and only trigger a recompute if this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> is dirty (`needsUpdate_ == true`). </p>
 <dl class="section return"><dt>Returns</dt><dd>The current world transform matrix for this scene node. </dd></dl>
 
-<p class="reference">References <a class="el" href="#a2cd5ee14fdf4990952266c724c916551">worldTransform()</a>.</p>
+<p>Reimplemented in <a class="el" href="classhelios_1_1scene_1_1CameraSceneNode.html#aa800f003ab88b6b1061ddffe8c109c4c">helios::scene::CameraSceneNode</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#a2cd5ee14fdf4990952266c724c916551">worldTransform()</a>.</p>
+<p class="reference">References <a class="el" href="#a752f544acc02b5a49623ce5aad5b1a8e">worldTransform()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="#a752f544acc02b5a49623ce5aad5b1a8e">worldTransform()</a>.</p>
 <div id="dynsection-35" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-35-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-35-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a2cd5ee14fdf4990952266c724c916551_cgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a752f544acc02b5a49623ce5aad5b1a8e_cgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div id="dynsection-36" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-36-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-36-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a2cd5ee14fdf4990952266c724c916551_icgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a752f544acc02b5a49623ce5aad5b1a8e_icgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>

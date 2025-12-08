@@ -22,7 +22,7 @@ var classhelios_1_1scene_1_1SceneNode =
     [ "setParent", "classhelios_1_1scene_1_1SceneNode.html#a8e150f0c631aa964846dc20cd627b538", null ],
     [ "setWorldTransform", "classhelios_1_1scene_1_1SceneNode.html#a1dbd995b4aace249c6786588e3279ae3", null ],
     [ "translate", "classhelios_1_1scene_1_1SceneNode.html#a63bdfe0a081a96112036b8e7d226fd09", null ],
-    [ "worldTransform", "classhelios_1_1scene_1_1SceneNode.html#a2cd5ee14fdf4990952266c724c916551", null ],
+    [ "worldTransform", "classhelios_1_1scene_1_1SceneNode.html#a752f544acc02b5a49623ce5aad5b1a8e", null ],
     [ "children_", "classhelios_1_1scene_1_1SceneNode.html#aa362a46b4917ee9955a38d6422b72668", null ],
     [ "localTransform_", "classhelios_1_1scene_1_1SceneNode.html#acf949ca732802c66d4d0d3fee757e719", null ],
     [ "needsUpdate_", "classhelios_1_1scene_1_1SceneNode.html#a7810bc9069939badd249ce54f794d1e7", null ],

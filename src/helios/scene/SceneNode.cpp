@@ -1,5 +1,6 @@
 module;
 
+#include <cassert>
 #include <memory>
 #include <vector>
 

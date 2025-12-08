@@ -25,8 +25,8 @@ namespace helios::rendering {
     void Viewport::updateCamera() const noexcept {
         assert(renderTarget_ && "No RenderTarget available for updateCamera()");
 
-        if (!camera_) {
-            logger_.warn("updateCamera: Viewport was not configured with a camera, nothing to do here.");
+        if (!cameraSceneNode_) {
+            logger_.warn("updateCamera: Viewport was not configured with a CameraSceneNode, nothing to do here.");
             return;
         }
 
@@ -35,7 +35,7 @@ namespace helios::rendering {
 
         if (h > 0.0f) {
             logger_.info(std::format("Setting aspect ratio {0}/{1}", w, h));
-            camera_->setAspectRatio(w / h);
+            cameraSceneNode_->camera().setAspectRatio(w / h);
         } else {
             logger_.warn("updateCamera: cannot set aspect ratio, height is 0");
         }
@@ -54,13 +54,13 @@ namespace helios::rendering {
         return renderTarget_;
     }
 
-    Viewport& Viewport::setCamera(std::shared_ptr<helios::scene::Camera> camera) noexcept {
-        camera_ = std::move(camera);
+    Viewport& Viewport::setCameraSceneNode(const helios::scene::CameraSceneNode* cameraSceneNode) noexcept {
+        cameraSceneNode_ = cameraSceneNode;
         return *this;
     }
 
-    [[nodiscard]] std::shared_ptr<helios::scene::Camera> Viewport::camera() const noexcept {
-        return camera_;
+    [[nodiscard]] const helios::scene::CameraSceneNode* Viewport::cameraSceneNode() const noexcept {
+        return cameraSceneNode_;
     }
 
     Viewport& Viewport::setRenderTarget(const helios::rendering::RenderTarget* renderTarget, ViewportKey key) noexcept {

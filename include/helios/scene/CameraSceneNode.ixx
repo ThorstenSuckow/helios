@@ -23,30 +23,29 @@ export namespace helios::scene {
      * An instance of `CameraSceneNode` can be added as a direct descendant of the scene's root node
      * for free transform, or it can be a child of a model hierarchy to inherit the
      * corresponding positioning in the world.
-     *
-     * @todo Check whether nodes should further be divided into ParentNode and LeafNode types.
-     *       Cameras would be LeafNodes, not allowing child nodes.
      */
     class CameraSceneNode : public SceneNode {
 
+
+
     protected:
         /**
-         * @brief Weak pointer to the camera instance managed by this scene node.
+         * @brief Unique pointer to the camera instance owned by this scene node.
          */
-        std::weak_ptr<helios::scene::Camera> camera_;
+        std::unique_ptr<helios::scene::Camera> camera_;
 
     public:
         /**
-         * @brief Constructs a CameraSceneNode wrapping the given camera.
+         * @brief Constructs a CameraSceneNode that takes ownership of the given camera.
          *
-         * The Camera must be a non-null shared pointer, it gets internally stored as a
-         * weak_ptr.
+         * The CameraSceneNode becomes the sole owner of the Camera instance. The camera's
+         * view matrix is automatically updated when `worldTransform()` is called.
          *
-         * @param camera A shared pointer to the camera to be managed by this scene node.
+         * @param camera A unique pointer to the camera to be owned by this scene node.
          *
-         * @throws std::invalid_argument if camera is a nullptr
+         * @throws std::invalid_argument if camera is a nullptr.
          */
-        explicit CameraSceneNode(std::shared_ptr<helios::scene::Camera> camera);
+        explicit CameraSceneNode(std::unique_ptr<helios::scene::Camera> camera);
 
         /**
          * @brief Prevents adding child nodes to a camera scene node.
@@ -65,14 +64,55 @@ export namespace helios::scene {
         /**
          * @brief Gets the camera associated with this scene node.
          *
-         * @return A weak pointer to the camera instance.
+         * @return A const ref to the associated camera instance.
          */
-        [[nodiscard]] std::weak_ptr<helios::scene::Camera> camera() const noexcept;
+        [[nodiscard]] const helios::scene::Camera& camera() const noexcept;
 
         /**
-         * @todo once Cameras should be used with parent nodes, this method needs to be implemented.
+         * @brief Gets the camera associated with this scene node.
+         *
+         * @return A ref to the associated camera instance.
          */
+        [[nodiscard]] helios::scene::Camera& camera() noexcept;
 
+
+        /**
+         * @brief Orients this camera node to look at a target position in world space.
+         *
+         * Computes the rotation matrix required to align this scene node's forward direction
+         * with the specified target position. The rotation is computed in world space and then
+         * converted to local space by factoring out the parent's rotation.
+         *
+         * @param target The world-space coordinates of the target to look at.
+         * @param up The up vector defining the camera's vertical orientation in world space.
+         *
+         * @pre The camera node must have a valid parent (i.e., must be added to a scene graph).
+         *
+         * @note The up vector should typically be `(0, 1, 0)` for standard upright orientation.
+         *
+         * @todo Implement `lookAtLocal()` for observing nodes in local space.
+         *
+         * @see helios::scene::SceneNode::rotate()
+         */
+        void lookAt(helios::math::vec3f target, helios::math::vec3f up);
+
+
+        /**
+         * @brief Computes the world transform and updates the associated camera's view matrix.
+         *
+         * This override extends `SceneNode::worldTransform()` by additionally computing the
+         * view matrix from the camera's world transform. The view matrix is the inverse of the
+         * world transform, with the Z-axis negated to convert from helios' Left-Handed System
+         * to OpenGL's Right-Handed clip space.
+         *
+         * The computed view matrix is automatically assigned to the underlying `Camera` instance.
+         *
+         * @return A const reference to this node's world transform matrix.
+         *
+         * @see helios::scene::Camera::setViewMatrix()
+         * @see helios::scene::SceneNode::worldTransform()
+         */
+        const helios::math::mat4f& worldTransform() noexcept override;
     };
 
 }

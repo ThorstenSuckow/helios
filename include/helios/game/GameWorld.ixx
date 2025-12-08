@@ -77,12 +77,7 @@ export namespace helios::game {
          * @note This method is noexcept; individual GameObject::update() implementations should
          *       handle their own exceptions to prevent propagation.
          */
-        void update(float deltaTime) const noexcept {
-            for (auto& [guid, gameObject] : gameObjects_) {
-                gameObject->update(deltaTime);
-            }
-
-        }
+        void update(float deltaTime) const noexcept;
 
         /**
          * @brief Adds a GameObject to the world and transfers ownership.
@@ -99,22 +94,7 @@ export namespace helios::game {
          * @note Attempting to add a nullptr or a GameObject with a duplicate Guid will fail,
          *       return nullptr, and log a warning.
          */
-        [[nodiscard]] helios::game::GameObject* addGameObject(std::unique_ptr<GameObject> gameObject) {
-            if (!gameObject) {
-                logger_.warn("Attempted to add null GameObject to GameWorld");
-                return nullptr;
-            }
-            if (gameObjects_.contains(gameObject->guid())) {
-                logger_.warn(std::format("GameObject with Guid {} already exists in GameWorld",
-                                         gameObject->guid().value()));
-                return nullptr;
-            }
-
-            auto* ptr = gameObject.get();
-            gameObjects_.emplace(gameObject->guid(), std::move(gameObject));
-
-            return ptr;
-        }
+        [[nodiscard]] helios::game::GameObject* addGameObject(std::unique_ptr<GameObject> gameObject);
 
         /**
          * @brief Finds a GameObject by its unique identifier.
@@ -128,14 +108,7 @@ export namespace helios::game {
          *
          * @note This is the non-const overload. Use the const overload for read-only access.
          */
-        [[nodiscard]] helios::game::GameObject* find(const helios::util::Guid& guid) {
-
-            if (auto it = gameObjects_.find(guid); it != gameObjects_.end()) {
-                return it->second.get();
-            }
-
-            return nullptr;
-        }
+        [[nodiscard]] helios::game::GameObject* find(const helios::util::Guid& guid);
 
         /**
          * @brief Finds a GameObject by its unique identifier (const overload).
@@ -149,14 +122,7 @@ export namespace helios::game {
          *
          * @note This overload is used when the GameWorld is accessed via const reference.
          */
-        [[nodiscard]] const helios::game::GameObject* find(const helios::util::Guid& guid) const {
-
-            if (auto it = gameObjects_.find(guid); it != gameObjects_.end()) {
-                return it->second.get();
-            }
-
-            return nullptr;
-        }
+        [[nodiscard]] const helios::game::GameObject* find(const helios::util::Guid& guid) const;
 
         /**
          * @brief Removes a GameObject from the world and transfers ownership to the caller.
@@ -173,17 +139,7 @@ export namespace helios::game {
          * @note Attempting to remove a GameObject that doesn't exist returns nullptr
          *       and logs a warning.
          */
-        [[nodiscard]] std::unique_ptr<helios::game::GameObject> removeGameObject(const GameObject& gameObject) {
-            auto node = gameObjects_.extract(gameObject.guid());
-
-            if (node.empty()) {
-                logger_.warn(std::format("Attempted to remove non-existent GameObject with Guid {} from GameWorld",
-                                         gameObject.guid().value()));
-                return nullptr;
-            }
-
-            return std::move(node.mapped());
-        }
+        [[nodiscard]] std::unique_ptr<helios::game::GameObject> removeGameObject(const GameObject& gameObject);
     };
 
 }

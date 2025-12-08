@@ -4,23 +4,20 @@
  */
 module;
 
-#include <memory>
-
 export module helios.scene.Camera;
 
+import helios.math.utils;
+import helios.math.transform;
 import helios.math.types;
 import helios.scene.SceneNode;
 
 export namespace helios::scene {
 
     /**
-     * @brief Represents a camera for perspective or orthographic projection.
+     * @brief Represents a camera for perspective projection.
      *
      * The camera provides the view and projection matrices, whereas the view matrix
      * is computed as the inverse of the camera's world transform.
-     *
-     * @todo Implement automatic recalculation of projection and view matrices when
-     *       local transforms change (dirty flag pattern).
      */
     class Camera {
 
@@ -40,7 +37,52 @@ export namespace helios::scene {
          *
          * Defaults to 1.0.
          */
-        float aspectRatio_ = 1.0f;
+        mutable float aspectRatio_ = 1.0f;
+
+        /**
+         * @brief The near clipping plane distance.
+         *
+         * Defaults to 0.1.
+         */
+        mutable float zNear_ = 0.1f;
+
+        /**
+         * @brief The far clipping plane distance.
+         *
+         * Defaults to 1000.0.
+         */
+        mutable float zFar_ = 1000.0f;
+
+        /**
+         * @brief The vertical field of view in radians.
+         *
+         * Defaults to 90 degrees (converted to radians).
+         */
+        mutable float fovY_ = helios::math::radians(90);
+
+        /**
+         * @brief Flag indicating whether the matrices need to be updated.
+         */
+        mutable bool needsUpdate_ = true;
+
+
+
+        /**
+         * @brief Updates the view and projection matrices if needed.
+         *
+         * This function recalculates the view and projection matrices
+         * based on the current camera parameters.
+         */
+        void update() const {
+
+            if (!needsUpdate_) {
+                return;
+            }
+
+            projectionMatrix_ = helios::math::perspective(fovY_, aspectRatio_, zNear_, zFar_);
+
+            needsUpdate_ = false;
+        }
 
     public:
         /**
@@ -67,11 +109,94 @@ export namespace helios::scene {
         [[nodiscard]] const helios::math::mat4f& viewMatrix() const noexcept;
 
         /**
+         * @brief Sets the view matrix for this camera.
+         *
+         * This method is typically called by `CameraSceneNode::worldTransform()` to update
+         * the view matrix based on the camera node's position and orientation in the scene graph.
+         *
+         * @param viewMatrix The new view matrix to assign.
+         *
+         * @return A const reference to this camera instance.
+         *
+         * @see helios::scene::CameraSceneNode::worldTransform()
+         */
+        const Camera& setViewMatrix(const helios::math::mat4f& viewMatrix) const noexcept;
+
+        /**
          * @brief Sets the aspect ratio used by the camera.
          *
          * @param aspectRatio The new aspect ratio (width/height).
+         *
+         * @return A reference to this camera instance.
          */
-        void setAspectRatio(float aspectRatio) noexcept;
+        const Camera& setAspectRatio(float aspectRatio) const noexcept;
+
+        /**
+         * @brief Sets the perspective projection parameters.
+         *
+         * @param fovY The vertical field of view in radians.
+         * @param aspectRatio The aspect ratio (width/height).
+         * @param zNear The near clipping plane distance.
+         * @param zFar The far clipping plane distance.
+         *
+         * @return A reference to this camera instance.
+         */
+        const Camera& setPerspective(float fovY, float aspectRatio, float zNear, float zFar) const noexcept;
+
+        /**
+         * @brief Sets the near clipping plane distance.
+         *
+         * @param zNear The new near clipping plane distance.
+         *
+         * @return A reference to this camera instance.
+         */
+        const Camera& setZNear(float zNear) const noexcept;
+
+        /**
+         * @brief Sets the far clipping plane distance.
+         *
+         * @param zFar The new far clipping plane distance.
+         *
+         * @return A reference to this camera instance.
+         */
+        const Camera& setZFar(float zFar) const noexcept;
+
+        /**
+         * @brief Sets the vertical field of view.
+         *
+         * @param fovY The new vertical field of view in radians.
+         *
+         * @return A reference to this camera instance.
+         */
+        const Camera& setFovY(float fovY) const noexcept;
+
+        /**
+         * @brief Gets the current vertical field of view.
+         *
+         * @return The vertical field of view in radians.
+         */
+        [[nodiscard]] float fovY() const noexcept;
+
+        /**
+         * @brief Gets the current aspect ratio.
+         *
+         * @return The aspect ratio (width/height).
+         */
+        [[nodiscard]] float aspectRatio() const noexcept;
+
+        /**
+         * @brief Gets the current near clipping plane distance.
+         *
+         * @return The near clipping plane distance.
+         */
+        [[nodiscard]] float zNear() const noexcept;
+
+        /**
+         * @brief Gets the current far clipping plane distance.
+         *
+         * @return The far clipping plane distance.
+         */
+        [[nodiscard]] float zFar() const noexcept;
 
     };
 

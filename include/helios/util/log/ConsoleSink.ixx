@@ -4,7 +4,6 @@
  */
 module;
 
-#include <iostream>
 #include <string>
 
 export module helios.util.log.ConsoleSink;
@@ -33,9 +32,7 @@ export namespace helios::util::log {
          *
          * @return "console".
          */
-        [[nodiscard]] SinkTypeId typeId() const noexcept override {
-            return TYPE_ID;
-        }
+        [[nodiscard]] SinkTypeId typeId() const noexcept override;
 
         /**
          * @brief Writes a formatted log message to stdout.
@@ -44,23 +41,12 @@ export namespace helios::util::log {
          * @param scope   The source scope/module name.
          * @param message The log message text.
          */
-        void write(LogLevel level, const std::string& scope, const std::string& message) override {
-            const char* levelStr = "";
-            switch (level) {
-                case LogLevel::Debug: levelStr = "[DEBUG]"; break;
-                case LogLevel::Info:  levelStr = "[INFO]";  break;
-                case LogLevel::Warn:  levelStr = "[WARN]";  break;
-                case LogLevel::Error: levelStr = "[ERROR]"; break;
-            }
-            std::cout << levelStr << "[" << scope << "] " << message << std::endl;
-        }
+        void write(LogLevel level, const std::string& scope, const std::string& message) override;
 
         /**
          * @brief Flushes the stdout buffer.
          */
-        void flush() override {
-            std::cout.flush();
-        }
+        void flush() override;
     };
 
 }

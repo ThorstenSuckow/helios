@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <cstdlib>
+#include <glad/gl.h>
 #include <iostream>
 #include <numbers>
 
@@ -33,6 +34,7 @@ import helios.rendering.model.config.PrimitiveType;
 
 import helios.rendering.asset.shape.basic.Triangle;
 import helios.rendering.asset.shape.basic.Line;
+import helios.rendering.asset.shape.basic.Grid;
 
 // OpenGL Backend
 import helios.ext.opengl.rendering.shader.OpenGLShader;
@@ -69,6 +71,7 @@ import helios.ext.imgui.widgets.MainMenuWidget;
 import helios.ext.imgui.widgets.FpsWidget;
 import helios.ext.imgui.widgets.GamepadWidget;
 import helios.ext.imgui.widgets.LogWidget;
+import helios.ext.imgui.widgets.CameraWidget;
 import helios.ext.imgui.ImGuiLogSink;
 
 // game input handling, game objects
@@ -107,11 +110,9 @@ int main() {
     auto win = dynamic_cast<GLFWWindow*>(app->current());
     auto mainViewport = std::make_shared<Viewport>(0.0f, 0.0f, 1.0f, 1.0f);
 
-    auto mainViewportCam = std::make_shared<helios::scene::Camera>();
-    mainViewport->setCamera(mainViewportCam)
-            .setClearFlags(std::to_underlying(ClearFlags::Color))
-            .setClearColor(vec4f(0.051f, 0.051f, 0.153f, 1.0f));
-    win->renderTarget().addViewport(mainViewport);
+    mainViewport->setClearFlags(std::to_underlying(ClearFlags::Color))
+                  .setClearColor(vec4f(0.051f, 0.051f, 0.153f, 1.0f));
+    win->addViewport(mainViewport);
 
     // Get the InputManager for handling keyboard input
     helios::input::InputManager& inputManager = app->inputManager();
@@ -137,10 +138,19 @@ int main() {
     auto fpsWidget = new helios::ext::imgui::widgets::FpsWidget(&fpsMetrics, &framePacer);
     auto gamepadWidget = new helios::ext::imgui::widgets::GamepadWidget(&inputManager);
     auto logWidget = new helios::ext::imgui::widgets::LogWidget();
+    auto cameraWidget = new helios::ext::imgui::widgets::CameraWidget();
     imguiOverlay.addWidget(menu);
     imguiOverlay.addWidget(fpsWidget);
     imguiOverlay.addWidget(gamepadWidget);
     imguiOverlay.addWidget(logWidget);
+    imguiOverlay.addWidget(cameraWidget);
+
+    // ========================================
+    // Configure Logger
+    // ========================================
+    helios::util::log::LogManager::getInstance().enableLogging(true);
+    auto imguiLogSink = std::make_shared<helios::ext::imgui::ImGuiLogSink>(logWidget);
+    helios::util::log::LogManager::getInstance().enableSink(imguiLogSink);
 
     // ========================================
     // 2. Shader Creation
@@ -150,8 +160,10 @@ int main() {
 
     // Map the WorldMatrix uniform to location 1 in the shader
     auto uniformLocationMap = std::make_unique<OpenGLUniformLocationMap>();
-    bool mappingSuccess = uniformLocationMap->set(UniformSemantics::WorldMatrix, 1);
-    mappingSuccess = uniformLocationMap->set(UniformSemantics::MaterialBaseColor, 2);
+    bool mapping = uniformLocationMap->set(UniformSemantics::WorldMatrix, 1);
+    mapping = uniformLocationMap->set(UniformSemantics::ViewMatrix, 2);
+    mapping = uniformLocationMap->set(UniformSemantics::ProjectionMatrix, 3);
+    mapping = uniformLocationMap->set(UniformSemantics::MaterialBaseColor, 4);
 
     shader_ptr->setUniformLocationMap(std::move(uniformLocationMap));
 
@@ -163,6 +175,11 @@ int main() {
     auto spaceshipMaterialProps = MaterialProperties(vec4(1.0f, 1.0f, 0.0f, 1.0f));
     auto spaceshipMaterialProps_shared = std::make_shared<MaterialProperties>(spaceshipMaterialProps);
     auto material_ptr = std::make_shared<Material>(shader_ptr, spaceshipMaterialProps_shared);
+
+    // grid
+    auto gridMaterialProps = MaterialProperties(vec4(0.0f, 1.0f, 1.0f, 0.2f));
+    auto gridMaterialProps_shared = std::make_shared<MaterialProperties>(gridMaterialProps);
+    auto gridMaterial_ptr = std::make_shared<Material>(shader_ptr, gridMaterialProps_shared);
 
     // pseudo gizmos
     auto leftStickGizmoMaterialProps = MaterialProperties();
@@ -181,17 +198,17 @@ int main() {
     auto spaceship = Triangle{};
     auto leftStickGizmo = Line{};
     auto shipDirectionGizmo = Line{};
-
+    auto grid = Grid{8, 8};
 
     // Configure the mesh for the spaceship to render as a line loop (wireframe)
     auto meshConfig = std::make_shared<const MeshConfig>(PrimitiveType::LineLoop);
     auto mesh_ptr = std::make_shared<OpenGLMesh>(spaceship, meshConfig);
 
-    // configure the gizmos for controller input
+    // configure the gizmos for controller input, as well as the grid rendering
     auto meshLineConfig = std::make_shared<const MeshConfig>(PrimitiveType::Lines);
-    auto leftStickGizmoMesh = std::make_shared<OpenGLMesh>(leftStickGizmo, meshConfig);
-    auto shipDirectionGizmoMesh = std::make_shared<OpenGLMesh>(shipDirectionGizmo, meshConfig);
-
+    auto leftStickGizmoMesh = std::make_shared<OpenGLMesh>(leftStickGizmo, meshLineConfig);
+    auto shipDirectionGizmoMesh = std::make_shared<OpenGLMesh>(shipDirectionGizmo, meshLineConfig);
+    auto gridMesh_ptr = std::make_shared<OpenGLMesh>(grid, meshLineConfig);
 
     // ========================================
     // 5. Renderable and RenderPrototype
@@ -207,11 +224,18 @@ int main() {
             std::make_shared<RenderPrototype>(shipDirectionGizmoMaterial_ptr, shipDirectionGizmoMesh);
     auto shipDirectionGizmoRenderable = std::make_shared<Renderable>(shipDirectionGizmoPrototype);
 
+    const auto gridPrototype = std::make_shared<RenderPrototype>(gridMaterial_ptr, gridMesh_ptr);
+    auto gridRenderable = std::make_shared<Renderable>(gridPrototype);
+
     // ========================================
     // 6. Scene Graph Setup
     // ========================================
     auto frustumCullingStrategy = std::make_unique<CullNoneStrategy>();
     auto scene = std::make_unique<helios::scene::Scene>(std::move(frustumCullingStrategy));
+
+    // Add the grid
+    auto* gridSceneNode = scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(gridRenderable)));
+    //gridSceneNode->scale(helios::math::vec3f(80,60, 0));
 
     // Add the spaceship as a scene node
     auto* spaceshipSceneNode =
@@ -226,15 +250,29 @@ int main() {
     // ========================================
     // 7. Register mainViewport-Camera w/ Setup
     // ========================================
-    std::ignore = scene->addNode(std::make_unique<CameraSceneNode>(mainViewportCam));
+    auto mainViewportCam = std::make_unique<helios::scene::Camera>();
+    auto cameraSceneNode = std::make_unique<helios::scene::CameraSceneNode>(std::move(mainViewportCam));
+    auto cameraSceneNode_ptr = cameraSceneNode.get();
+    std::ignore = scene->addNode(std::move(cameraSceneNode));
+    mainViewport->setCameraSceneNode(cameraSceneNode_ptr);
+    // Initialize camera with proper perspective projection
+    cameraSceneNode_ptr->camera().setPerspective(
+        helios::math::radians(90.0f),  // FOV in radians
+        16.0f / 9.0f,                   // Aspect ratio (adjust to your window)
+        0.1f,                            // Near plane
+        1000.0f                          // Far plane
+    );
+    cameraSceneNode_ptr->translate(helios::math::vec3f(0.0f, 0.0f, -5.0f));
+    // Position camera to look at the scene
+    cameraSceneNode_ptr->lookAt(
+        vec3f(0.0f, 0.0f, 0.0f),        // Look at point (origin)
+        vec3f(0.0f, 1.0f, 0.0f)         // Up vector
+    );
+    cameraWidget->addCameraSceneNode("Main Camera", cameraSceneNode_ptr);
 
 
-    // ========================================
-    // 8. Main Render Loop
-    // ========================================
-    helios::util::log::LogManager::getInstance().enableLogging(true);
-    auto imguiLogSink = std::make_shared<helios::ext::imgui::ImGuiLogSink>(logWidget);
-    helios::util::log::LogManager::getInstance().enableSink(imguiLogSink);
+
+
 
     // ========================================
     // 9. Game-related Input-handling, GameWorld and GameObjects

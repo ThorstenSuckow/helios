@@ -8,7 +8,7 @@ module;
 
 export module helios.scene.FrustumCullingStrategy;
 
-import helios.scene.Camera;
+import helios.scene.CameraSceneNode;
 import helios.scene.SceneNode;
 
 
@@ -42,7 +42,7 @@ export namespace helios::scene {
         /**
          * @brief Culls the scene graph to identify the visible SceneNodes.
          *
-         * @param camera The camera defining the view frustum.
+         * @param cameraSceneNode The CameraSceneNode providing information about the view frustum.
          * @param root The parent of the hierarchy to cull.
          *
          * @return A vector with const pointers to the SceneNodes visible.
@@ -52,7 +52,7 @@ export namespace helios::scene {
          * the vector are not destroyed in between.
          */
         [[nodiscard]] virtual std::vector<const helios::scene::SceneNode*> cull(
-            const helios::scene::Camera& camera, const helios::scene::SceneNode& root
+            const helios::scene::CameraSceneNode* cameraSceneNode, const helios::scene::SceneNode& root
         ) = 0;
 
     };

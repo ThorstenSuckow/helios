@@ -89,10 +89,7 @@ export namespace helios::game {
          * @warning Passing a null sceneNode will result in undefined behavior when accessing
          *          transform methods. In debug builds, this should trigger an assertion.
          */
-        explicit GameObject(helios::scene::SceneNode* sceneNode) :
-        transform_(&(sceneNode->localTransform())),
-        guid_(helios::util::Guid::generate())
-        {}
+        explicit GameObject(helios::scene::SceneNode* sceneNode);
 
         /**
          * @brief Virtual destructor to ensure proper cleanup of derived classes.
@@ -117,9 +114,7 @@ export namespace helios::game {
          *
          * @note The Guid is generated during construction and never changes.
          */
-        [[nodiscard]] const helios::util::Guid& guid() const noexcept {
-            return guid_;
-        }
+        [[nodiscard]] const helios::util::Guid& guid() const noexcept;
 
         /**
          * @brief Applies a scaling transformation to the GameObject.
@@ -132,10 +127,7 @@ export namespace helios::game {
          *
          * @warning If the SceneNode has been destroyed, this will cause undefined behavior.
          */
-        GameObject& scale(const helios::math::vec3f& scale) noexcept {
-            transform_->scale(scale);
-            return *this;
-        }
+        GameObject& scale(const helios::math::vec3f& scale) noexcept;
 
         /**
          * @brief Applies a rotation transformation to the GameObject.
@@ -148,10 +140,7 @@ export namespace helios::game {
          *
          * @warning If the SceneNode has been destroyed, this will cause undefined behavior.
          */
-        GameObject& rotate(const helios::math::mat4f& rotation) noexcept {
-            transform_->rotate(rotation);
-            return *this;
-        }
+        GameObject& rotate(const helios::math::mat4f& rotation) noexcept;
 
         /**
          * @brief Applies a translation transformation to the GameObject.
@@ -164,13 +153,7 @@ export namespace helios::game {
          *
          * @warning If the SceneNode has been destroyed, this will cause undefined behavior.
          */
-        GameObject& translate(const helios::math::vec3f& translation) noexcept {
-            transform_->translate(translation);
-            return *this;
-        }
-
-
-
+        GameObject& translate(const helios::math::vec3f& translation) noexcept;
     };
 
 

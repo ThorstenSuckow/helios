@@ -14,7 +14,7 @@ export module helios.scene.Scene;
 
 import helios.scene.Snapshot;
 import helios.scene.SceneNode;
-import helios.scene.Camera;
+import helios.scene.CameraSceneNode;
 import helios.math.types;
 
 import helios.rendering.Viewport;
@@ -37,7 +37,7 @@ export namespace helios::scene {
      *
      * A Scene is responsible for managing the SceneGraph, consisting of SceneNodes;
      * it provides methods to frustum cull SceneNodes based on a specific `FrustumCullingStrategy`
-     * and a particular `Camera` and also allows for propagating world transformations
+     * and a particular `CameraSceneNode` and also allows for propagating world transformations
      * through the contained subtrees.
      *
      * @see [RTR, pp. 828]
@@ -92,6 +92,10 @@ export namespace helios::scene {
          *
          * @param node The current SceneNode processed.
          * @param wt The world transform to apply.
+         *
+         * @note It is important that this method is called before the next render pass, or before
+         * the scene graph is culled. This method must also consider CameraSceneNodes, making sure the
+         * associated `Camera` is updated with the view matrix.
          */
         void updateNodes(SceneNode& node, const math::mat4f& wt) const;
 
@@ -168,16 +172,19 @@ export namespace helios::scene {
         void updateNodes() const;
 
         /**
-         * @brief Applies this Scene's frustumCullingStrategy and returns all nodes visible for the specified Camera.
+         * @brief Applies this Scene's frustumCullingStrategy and returns all nodes visible for the specified
+         * CameraSceneNode and its associated `Camera`.
          *
          * This method ensures that all nodes' world geometry is properly updated
          * before culling is applied.
          *
-         * @param camera The camera used to determine the view frustum for culling.
+         * @param cameraSceneNode The cameraSceneNode used to determine the view frustum for culling.
          *
          * @return A list of currently visible nodes (const pointers into the scene graph).
          */
-        [[nodiscard]] std::vector<const helios::scene::SceneNode*> findVisibleNodes(const helios::scene::Camera& camera) const;
+        [[nodiscard]] std::vector<const helios::scene::SceneNode*> findVisibleNodes(
+            const helios::scene::CameraSceneNode* cameraSceneNode
+        ) const;
 
         /**
          * @brief Returns the root node of this Scene.

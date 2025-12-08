@@ -71,8 +71,6 @@ int main() {
     auto mainViewport = std::make_shared<Viewport>();
     win->addViewport(mainViewport);
 
-    mainViewport->setCamera(std::make_shared<Camera>());
-
     // Get the InputManager for handling keyboard input
     helios::input::InputManager& inputManager = app->inputManager();
 
@@ -138,7 +136,9 @@ int main() {
     // ========================================
     // 7. Camera Setup
     // ========================================
-    auto cameraSceneNode = std::make_unique<helios::scene::CameraSceneNode>(mainViewport->camera());
+    auto mainCamera = std::make_unique<helios::scene::Camera>();
+    auto cameraSceneNode = std::make_unique<helios::scene::CameraSceneNode>(std::move(mainCamera));
+    mainViewport->setCameraSceneNode(&*cameraSceneNode);
     std::ignore = scene->addNode(std::move(cameraSceneNode));
 
     // ========================================

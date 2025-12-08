@@ -9,7 +9,7 @@ import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-di
 const config: Config = {
   title: 'helios',
   tagline: 'A C++23 Game Framework built from first principles',
-  favicon: 'img/favicon.svg',
+  favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {

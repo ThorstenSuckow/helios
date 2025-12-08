@@ -167,6 +167,11 @@ async function main() {
       meta: { title: 'Testing', description: 'Running tests in helios: CTest usage, test patterns, debugging failures.', slug: '/testing', tags: ['testing', 'quality'], keywords: ['helios', 'testing', 'ctest', 'unit tests'], sidebar_label: 'Testing', sidebar_position: 3 }
     },
     {
+      src: path.join(repoRoot, 'docs', 'CONVENTIONS.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'conventions.md'),
+      meta: { title: 'Technical Conventions', description: 'Coordinate systems (LHS), matrix storage (column-major), and mathematical foundations used in helios.', slug: '/core-concepts/conventions', tags: ['math', 'architecture'], keywords: ['helios', 'coordinate system', 'left-handed', 'matrix', 'column-major', 'conventions'], sidebar_label: 'Conventions', sidebar_position: 2 }
+    },
+    {
       src: path.join(repoRoot, 'docs', 'PREREQUISITES.md'),
       dest: path.join(websiteRoot, 'docs', 'prerequisites.md'),
       meta: { title: 'Prerequisites', description: 'Required tools and environment for building helios: CMake 4.0+, C++23 compilers, OpenGL, platform setup.', slug: '/prerequisites', tags: ['setup', 'requirements'], keywords: ['helios', 'prerequisites', 'C++23', 'CMake', 'OpenGL'], sidebar_label: 'Prerequisites', sidebar_position: 1 }

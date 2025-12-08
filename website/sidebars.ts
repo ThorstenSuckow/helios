@@ -32,6 +32,7 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Core Concepts',
       items: [
+        'core-concepts/conventions',
         'core-concepts/scene-graph',
       ],
     },

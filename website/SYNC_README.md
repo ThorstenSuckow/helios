@@ -10,13 +10,14 @@ The website automatically synchronizes documentation from the repository root an
 
 The following files are **automatically copied** from the repository during the build process:
 
-| Source (Repository) | Destination (Website) | Purpose |
-|---------------------|----------------------|---------|
-| `CHANGELOG.md` | `docs/changelog.md` | Project changelog |
-| `docs/styleguide.md` | `docs/contributing/styleguide.md` | C++ coding standards |
-| `docs/doxygen-style.md` | `docs/contributing/doxygen-style.md` | Documentation style guide |
-| `docs/CONTRIBUTING.md` | `docs/contributing/commits.md` | Commit message conventions |
+| Source (Repository) | Destination (Website)                 | Purpose |
+|---------------------|---------------------------------------|---------|
+| `CHANGELOG.md` | `docs/changelog.md`                   | Project changelog |
+| `docs/styleguide.md` | `docs/contributing/styleguide.md`     | C++ coding standards |
+| `docs/doxygen-style.md` | `docs/contributing/doxygen-style.md`  | Documentation style guide |
+| `docs/CONTRIBUTING.md` | `docs/contributing/commits.md`        | Commit message conventions |
 | `docs/CHANGELOG_GUIDE.md` | `docs/contributing/changelog-guide.md` | Changelog maintenance guide |
+| `docs/CONVENTIONS.md` | `docs/core-concepts/conventions.md`   | Technical conventions (LHS, matrices) |
 
 ### How It Works
 

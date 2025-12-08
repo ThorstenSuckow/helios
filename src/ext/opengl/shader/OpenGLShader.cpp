@@ -156,6 +156,18 @@ namespace helios::ext::opengl::rendering::shader {
         }
         #endif
 
+        if (const auto viewMatrixUniform = uniformLocation(UniformSemantics::ViewMatrix); viewMatrixUniform != -1) {
+            if (const auto* mat4f_ptr = uniformValueMap.mat4f_ptr(UniformSemantics::ViewMatrix)) {
+                glUniformMatrix4fv(viewMatrixUniform, 1, false, mat4f_ptr);
+            }
+        }
+
+        if (const auto projectionMatrixUniform = uniformLocation(UniformSemantics::ProjectionMatrix); projectionMatrixUniform != -1) {
+            if (const auto* mat4f_ptr = uniformValueMap.mat4f_ptr(UniformSemantics::ProjectionMatrix)) {
+                glUniformMatrix4fv(projectionMatrixUniform, 1, false, mat4f_ptr);
+            }
+        }
+
         if (const auto worldMatrixUniform = uniformLocation(UniformSemantics::WorldMatrix); worldMatrixUniform != -1) {
             if (const auto* mat4f_ptr = uniformValueMap.mat4f_ptr(UniformSemantics::WorldMatrix)) {
                 glUniformMatrix4fv(worldMatrixUniform, 1, false, mat4f_ptr);

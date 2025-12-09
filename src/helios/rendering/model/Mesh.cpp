@@ -2,6 +2,7 @@ module;
 
 #include <memory>
 #include <stdexcept>
+#include <limits>
 
 module helios.rendering.model.Mesh;
 
@@ -60,4 +61,42 @@ namespace helios::rendering::model {
         return *meshConfig_;
     };
 
+    const helios::math::aabbf& Mesh::aabb() const noexcept  {
+        if (needsUpdate_) {
+            float minX = INFINITY;
+            float minY = INFINITY;
+            float minZ = INFINITY;
+            float maxX = -INFINITY;
+            float maxY = -INFINITY;
+            float maxZ = -INFINITY;
+
+            for (helios::rendering::Vertex v: *vertices_) {
+                if (minX > v.position[0]) {
+                    minX = v.position[0];
+                }
+                if (minY > v.position[1]) {
+                    minY = v.position[1];
+                }
+                if (minZ > v.position[2]) {
+                    minZ = v.position[2];
+                }
+
+                if (maxX < v.position[0]) {
+                    maxX = v.position[0];
+                }
+                if (maxY < v.position[1]) {
+                    maxY = v.position[1];
+                }
+                if (maxZ < v.position[2]) {
+                    maxZ = v.position[2];
+                }
+            }
+
+            aabb_ = helios::math::aabbf(minX, minY, minZ, maxX, maxY, maxZ);
+
+            needsUpdate_ = false;
+        }
+
+        return aabb_;
+    };
 }

@@ -16,6 +16,9 @@ import helios.math.traits.FloatingPointType;
 
 export namespace helios::math {
 
+    template<helios::math::Numeric T>
+    struct vec4;
+
     /**
      * @brief Represents a 3-dimensional vector of the generic type <T>.
      *
@@ -124,7 +127,6 @@ export namespace helios::math {
         /**
          * @brief Computes the cross product of this vector and v2.
          *
-         * @tparam T The numeric type of the vector components.
          * @param v2 The second vec3<T> vector.
          *
          * @return The cross product as a value of type vec3<T>.
@@ -134,7 +136,6 @@ export namespace helios::math {
         /**
          * @brief Computes the dot product of this vector and v2.
          *
-         * @tparam T The numeric type of the vector components.
          * @param v2 The second vec3<T> vector.
          *
          * @return The dot product as a value of type T.
@@ -142,9 +143,18 @@ export namespace helios::math {
         [[nodiscard]] T dot(const helios::math::vec3<T>& v2) const noexcept;
 
         /**
-         * @brief Returns a normalized version of this vector.
+         * @brief Converts this 3D vector to a 4D homogeneous vector.
          *
-         * @tparam T The numeric type of the vector components.
+         * @details
+         * Creates a vec4 with the x, y, z components from this vector and sets
+         * the w component to 1.0, representing a position in homogeneous coordinates.
+         *
+         * @return A new vec4<T> instance with components (x, y, z, 1.0).
+         */
+        [[nodiscard]] vec4<T> toVec4() const noexcept;
+
+        /**
+         * @brief Returns a normalized version of this vector.
          *
          * @return A new vec3<FloatingPointType<T>> instance representing the normalized vector.
          */
@@ -305,6 +315,10 @@ export namespace helios::math {
         };
     }
 
+    template<helios::math::Numeric T>
+    inline vec4<T> vec3<T>::toVec4() const noexcept {
+        return vec4<T>{v[0], v[1], v[2], 1.0f};
+    }
 
     template<helios::math::Numeric T>
     inline T vec3<T>::dot(const vec3<T>& v2) const noexcept {
@@ -329,8 +343,19 @@ export namespace helios::math {
         );
     }
 
-
+    /**
+     * @brief Single-precision floating-point 3D vector.
+     */
     using vec3f = vec3<float>;
+
+    /**
+     * @brief Integer 3D vector.
+     */
     using vec3i = vec3<int>;
+
+    /**
+     * @brief Double-precision floating-point 3D vector.
+     */
     using vec3d = vec3<double>;
+
 } // namespace helios::math

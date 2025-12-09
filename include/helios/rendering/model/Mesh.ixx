@@ -17,6 +17,7 @@ import helios.rendering.Vertex;
 import helios.rendering.asset.shape.Shape;
 import helios.util.log.LogManager;
 import helios.util.log.Logger;
+import helios.math.types;
 
 
 #define HELIOS_LOG_SCOPE "helios::rendering::model::Mesh"
@@ -36,6 +37,30 @@ export namespace helios::rendering::model {
     protected:
 
         Mesh() = default;
+
+
+        /**
+         * @brief Flag indicating whether the mesh requires updates to its computed data.
+         *
+         * This variable is used to track whether the mesh's derived properties, such
+         * as its axis-aligned bounding box (AABB), are outdated and need to be recalculated.
+         * It is marked as mutable to allow modification within const member functions.
+         */
+        mutable bool needsUpdate_ = true;
+
+
+        /**
+         * @brief Represents the axis-aligned bounding box (AABB) for the mesh.
+         *
+         * This member variable stores the computed or cached AABB for the mesh in
+         * 3D space. The AABB is a minimal bounding box aligned with the coordinate
+         * axes that encloses all the vertices of the mesh. It is marked mutable to
+         * allow updates during read-only operations, such as recalculating bounds
+         * as vertex positions are modified or updated dynamically.
+         *
+         * @see helios::math::aabb
+         */
+        mutable helios::math::aabbf aabb_{};
 
         /**
          * @brief Shared pointer to the raw, immutable vertices.
@@ -138,6 +163,19 @@ export namespace helios::rendering::model {
          */
         [[nodiscard]] const helios::rendering::model::config::MeshConfig& meshConfig() const noexcept;
 
+
+        /**
+         * @brief Retrieves the axis-aligned bounding box (AABB) of the mesh.
+         *
+         * The method calculates and returns the AABB of the mesh, which encloses
+         * the mesh's vertices. If the mesh requires an update to its bounding box,
+         * this method recomputes the bounds based on the vertex positions and caches
+         * the result for future calls. The returned AABB represents the minimal
+         * rectangle in 3D space that contains all the vertices of the mesh.
+         *
+         * @return Reference to the computed axis-aligned bounding box.
+         */
+        [[nodiscard]] const helios::math::aabbf& aabb() const noexcept;
     };
 
 }

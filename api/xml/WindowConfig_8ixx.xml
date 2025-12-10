@@ -49,7 +49,7 @@
 <codeline lineno="15"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="16"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Configuration<sp/>structure<sp/>for<sp/>creating<sp/>and<sp/>initializing<sp/>a<sp/>Window.</highlight></codeline>
 <codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>struct<sp/>provides<sp/>common<sp/>parameters,<sp/>such<sp/>as<sp/>width,<sp/>height<sp/>and<sp/>title.</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Provides<sp/>common<sp/>parameters<sp/>such<sp/>as<sp/>dimensions,<sp/>aspect<sp/>ratio,<sp/>and<sp/>title.</highlight></codeline>
 <codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="20" refid="structhelios_1_1window_1_1WindowConfig" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structhelios_1_1window_1_1WindowConfig" kindref="compound">WindowConfig</ref><sp/>{</highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight></codeline>
@@ -65,16 +65,36 @@
 <codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Initial<sp/>height<sp/>of<sp/>the<sp/>Window.</highlight></codeline>
 <codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="33" refid="structhelios_1_1window_1_1WindowConfig_1a5f0a9e4ccdf1e17187ebde121d6cf525" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1window_1_1WindowConfig_1a5f0a9e4ccdf1e17187ebde121d6cf525" kindref="member">height</ref>{800};</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"></highlight></codeline>
-<codeline lineno="35"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Initial<sp/>title<sp/>displayed<sp/>with<sp/>the<sp/>window,<sp/>e.g.<sp/>the<sp/>title<sp/>bar.</highlight></codeline>
-<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="39" refid="structhelios_1_1window_1_1WindowConfig_1a3ffc9f8d5d4e517423dda6f691dfe14e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/><ref refid="structhelios_1_1window_1_1WindowConfig_1a3ffc9f8d5d4e517423dda6f691dfe14e" kindref="member">title</ref>{</highlight><highlight class="stringliteral">&quot;helios<sp/>-<sp/>Window&quot;</highlight><highlight class="normal">};</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"></highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="42"><highlight class="normal"></highlight></codeline>
-<codeline lineno="43"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Numerator<sp/>of<sp/>the<sp/>aspect<sp/>ratio.</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>value<sp/>represents<sp/>the<sp/>numerator<sp/>part<sp/>of<sp/>the<sp/>aspect<sp/>ratio</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>used<sp/>for<sp/>the<sp/>window.<sp/>It<sp/>is<sp/>paired<sp/>with<sp/>`aspectRatioDenom`<sp/>to</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>define<sp/>the<sp/>aspect<sp/>ratio<sp/>as<sp/>a<sp/>fraction<sp/>(numerator/denominator).</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>A<sp/>value<sp/>of<sp/>0<sp/>indicates<sp/>that<sp/>no<sp/>specific<sp/>aspect<sp/>ratio<sp/>is<sp/>set.</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43" refid="structhelios_1_1window_1_1WindowConfig_1ab260764badd2ed71a573ac75bce658e3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1window_1_1WindowConfig_1ab260764badd2ed71a573ac75bce658e3" kindref="member">aspectRatioNumer</ref>{0};</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Denominator<sp/>of<sp/>the<sp/>aspect<sp/>ratio.</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>value<sp/>represents<sp/>the<sp/>denominator<sp/>part<sp/>of<sp/>the<sp/>aspect<sp/>ratio</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>used<sp/>for<sp/>the<sp/>window.<sp/>It<sp/>is<sp/>paired<sp/>with<sp/>`aspectRatioNumer`<sp/>to</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>define<sp/>the<sp/>aspect<sp/>ratio<sp/>as<sp/>a<sp/>fraction<sp/>(numerator/denominator).</highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>A<sp/>value<sp/>of<sp/>0<sp/>indicates<sp/>that<sp/>no<sp/>specific<sp/>aspect<sp/>ratio<sp/>is<sp/>set.</highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53" refid="structhelios_1_1window_1_1WindowConfig_1abf59b6fbc306130ec84737dbe3498ffd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1window_1_1WindowConfig_1abf59b6fbc306130ec84737dbe3498ffd" kindref="member">aspectRatioDenom</ref>{0};</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="57"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Initial<sp/>title<sp/>displayed<sp/>with<sp/>the<sp/>window,<sp/>e.g.<sp/>the<sp/>title<sp/>bar.</highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59" refid="structhelios_1_1window_1_1WindowConfig_1a3ffc9f8d5d4e517423dda6f691dfe14e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/><ref refid="structhelios_1_1window_1_1WindowConfig_1a3ffc9f8d5d4e517423dda6f691dfe14e" kindref="member">title</ref>{</highlight><highlight class="stringliteral">&quot;helios<sp/>-<sp/>Window&quot;</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="include/helios/window/WindowConfig.ixx"/>
   </compounddef>

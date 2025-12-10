@@ -37,5 +37,9 @@ var searchData=
   ['architecture_20overview_34',['Architecture Overview',['../index.html#autotoc_md94',1,'']]],
   ['aspectratio_35',['aspectRatio',['../classhelios_1_1scene_1_1Camera.html#a949e8c04f22ca2a1ace596e6e859bee3',1,'helios::scene::Camera']]],
   ['aspectratio_5f_36',['aspectRatio_',['../classhelios_1_1scene_1_1Camera.html#a95f643525bd276faa7edcd1401f47850',1,'helios::scene::Camera']]],
-  ['available_20extensions_37',['Available Extensions',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md22',1,'']]]
+  ['aspectratiodenom_37',['aspectRatioDenom',['../structhelios_1_1window_1_1WindowConfig.html#abf59b6fbc306130ec84737dbe3498ffd',1,'helios::window::WindowConfig']]],
+  ['aspectratiodenom_5f_38',['aspectRatioDenom_',['../classhelios_1_1window_1_1Window.html#a3a4a6fcd73d8632f3368e98acc338c85',1,'helios::window::Window']]],
+  ['aspectrationumer_39',['aspectRatioNumer',['../structhelios_1_1window_1_1WindowConfig.html#ab260764badd2ed71a573ac75bce658e3',1,'helios::window::WindowConfig']]],
+  ['aspectrationumer_5f_40',['aspectRatioNumer_',['../classhelios_1_1window_1_1Window.html#a2ba87c8f3140da0087ac0a4cf849b10b',1,'helios::window::Window']]],
+  ['available_20extensions_41',['Available Extensions',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md22',1,'']]]
 ];

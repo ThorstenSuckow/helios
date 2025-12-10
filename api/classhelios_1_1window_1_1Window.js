@@ -17,6 +17,8 @@ var classhelios_1_1window_1_1Window =
     [ "show", "classhelios_1_1window_1_1Window.html#adf3f589fca082cb28d6bad3df4ae9253", null ],
     [ "swapBuffers", "classhelios_1_1window_1_1Window.html#a18ba5cfd5634ce27b162f17c9564ea97", null ],
     [ "width", "classhelios_1_1window_1_1Window.html#ade8ac18a3735ff647842042a061be1af", null ],
+    [ "aspectRatioDenom_", "classhelios_1_1window_1_1Window.html#a3a4a6fcd73d8632f3368e98acc338c85", null ],
+    [ "aspectRatioNumer_", "classhelios_1_1window_1_1Window.html#a2ba87c8f3140da0087ac0a4cf849b10b", null ],
     [ "height_", "classhelios_1_1window_1_1Window.html#ae04994b1582ad5d5a1e9a5b9f4b12304", null ],
     [ "logger_", "classhelios_1_1window_1_1Window.html#a6b70ab4bbf999583b306297859e074cc", null ],
     [ "renderTarget_", "classhelios_1_1window_1_1Window.html#a3aadafde86d1cf52080eda7a8209b8ba", null ],

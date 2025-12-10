@@ -42,7 +42,7 @@ namespace helios::ext::glfw::window {
         }
 
         if (nativeHandle_ == nullptr) {
-            logger_.error("Failed to creat GLFW window");
+            logger_.error("Failed to create GLFW window");
             return false;
         }
 

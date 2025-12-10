@@ -80,10 +80,11 @@ var annotated_dup =
         [ "InputManager", "classhelios_1_1input_1_1InputManager.html", "classhelios_1_1input_1_1InputManager" ]
       ] ],
       [ "math", "namespacehelios_1_1math.html", [
+        [ "aabb", "structhelios_1_1math_1_1aabb.html", "structhelios_1_1math_1_1aabb" ],
         [ "mat4", "structhelios_1_1math_1_1mat4.html", "structhelios_1_1math_1_1mat4" ],
         [ "vec2", "structhelios_1_1math_1_1vec2.html", "structhelios_1_1math_1_1vec2" ],
-        [ "vec3", "structhelios_1_1math_1_1vec3.html", "structhelios_1_1math_1_1vec3" ],
-        [ "vec4", "structhelios_1_1math_1_1vec4.html", "structhelios_1_1math_1_1vec4" ]
+        [ "vec4", "structhelios_1_1math_1_1vec4.html", "structhelios_1_1math_1_1vec4" ],
+        [ "vec3", "structhelios_1_1math_1_1vec3.html", "structhelios_1_1math_1_1vec3" ]
       ] ],
       [ "rendering", "namespacehelios_1_1rendering.html", [
         [ "asset", "namespacehelios_1_1rendering_1_1asset.html", [

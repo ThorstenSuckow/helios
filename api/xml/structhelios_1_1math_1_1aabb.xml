@@ -1,0 +1,372 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structhelios_1_1math_1_1aabb" kind="struct" language="C++" prot="public">
+    <compoundname>helios::math::aabb</compoundname>
+    <templateparamlist>
+      <param>
+        <type><ref refid="concepthelios_1_1math_1_1Numeric" kindref="compound">helios::math::Numeric</ref></type>
+        <declname>T</declname>
+        <defname>T</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structhelios_1_1math_1_1aabb_1a3649ba1b1b848f3cce6eba5647ef557f" prot="private" static="no" mutable="no">
+        <type><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3</ref>&lt; T &gt;</type>
+        <definition>helios::math::vec3&lt;T&gt; helios::math::aabb&lt; T &gt;::min_</definition>
+        <argsstring></argsstring>
+        <name>min_</name>
+        <qualifiedname>helios::math::aabb::min_</qualifiedname>
+        <briefdescription>
+<para>Minimum corner point of the bounding box. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Contains the smallest x, y, and z coordinates across all points within the AABB. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/types/aabb.ixx" line="42" column="28" bodyfile="include/helios/math/types/aabb.ixx" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhelios_1_1math_1_1aabb_1a5ed36f911a5ff17e2bfc629bcb6eee27" prot="private" static="no" mutable="no">
+        <type><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3</ref>&lt; T &gt;</type>
+        <definition>helios::math::vec3&lt;T&gt; helios::math::aabb&lt; T &gt;::max_</definition>
+        <argsstring></argsstring>
+        <name>max_</name>
+        <qualifiedname>helios::math::aabb::max_</qualifiedname>
+        <briefdescription>
+<para>Maximum corner point of the bounding box. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Contains the largest x, y, and z coordinates across all points within the AABB. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/types/aabb.ixx" line="50" column="28" bodyfile="include/helios/math/types/aabb.ixx" bodystart="50" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structhelios_1_1math_1_1aabb_1aa503a6e73ae299cc5e2cef2fe2513857" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>helios::math::aabb&lt; T &gt;::aabb</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>aabb</name>
+        <qualifiedname>helios::math::aabb::aabb</qualifiedname>
+        <briefdescription>
+<para>Constructs an empty AABB with inverted min/max values. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The AABB is initialized with min set to the maximum representable value and max set to the minimum representable value. This allows the first `add()` call to properly establish the initial bounds. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/types/aabb.ixx" line="62" column="19" bodyfile="include/helios/math/types/aabb.ixx" bodystart="62" bodyend="65"/>
+        <referencedby refid="structhelios_1_1math_1_1aabb_1a22eaa32ee9d9c415e4d3ce5b9ddcec74" compoundref="aabb_8ixx" startline="166" endline="194">helios::math::aabb&lt; float &gt;::transform</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1math_1_1aabb_1acc52c66b5209d36c8cf2e9d034f4595f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>helios::math::aabb&lt; T &gt;::aabb</definition>
+        <argsstring>(const T minX, const T minY, const T minZ, const T maxX, const T maxY, const T maxZ) noexcept</argsstring>
+        <name>aabb</name>
+        <qualifiedname>helios::math::aabb::aabb</qualifiedname>
+        <param>
+          <type>const T</type>
+          <declname>minX</declname>
+        </param>
+        <param>
+          <type>const T</type>
+          <declname>minY</declname>
+        </param>
+        <param>
+          <type>const T</type>
+          <declname>minZ</declname>
+        </param>
+        <param>
+          <type>const T</type>
+          <declname>maxX</declname>
+        </param>
+        <param>
+          <type>const T</type>
+          <declname>maxY</declname>
+        </param>
+        <param>
+          <type>const T</type>
+          <declname>maxZ</declname>
+        </param>
+        <briefdescription>
+<para>Constructs an AABB from individual component values. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>minX</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Minimum X coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>minY</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Minimum Y coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>minZ</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Minimum Z coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>maxX</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum X coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>maxY</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum Y coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>maxZ</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum Z coordinate. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/types/aabb.ixx" line="77" column="19" bodyfile="include/helios/math/types/aabb.ixx" bodystart="77" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1math_1_1aabb_1a85ec864e5d6f50b7126ba22eb1a6c15a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>helios::math::aabb&lt; T &gt;::aabb</definition>
+        <argsstring>(const helios::math::vec3&lt; T &gt; min, const helios::math::vec3&lt; T &gt; max) noexcept</argsstring>
+        <name>aabb</name>
+        <qualifiedname>helios::math::aabb::aabb</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3</ref>&lt; T &gt;</type>
+          <declname>min</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3</ref>&lt; T &gt;</type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+<para>Constructs an AABB from two corner points. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>min</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The minimum corner point (smallest x, y, z). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum corner point (largest x, y, z). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/types/aabb.ixx" line="88" column="19" bodyfile="include/helios/math/types/aabb.ixx" bodystart="88" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1math_1_1aabb_1ab53ba0c88b465fb3f9e6ae410c3f0b70" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3</ref>&lt; T &gt; &amp;</type>
+        <definition>const helios::math::vec3&lt; T &gt; &amp; helios::math::aabb&lt; T &gt;::min</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>min</name>
+        <qualifiedname>helios::math::aabb::min</qualifiedname>
+        <briefdescription>
+<para>Returns the minimum corner point of the AABB. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Const reference to the minimum corner point. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/types/aabb.ixx" line="98" column="45" bodyfile="include/helios/math/types/aabb.ixx" bodystart="98" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1math_1_1aabb_1aa5836a6c13c4a5ddd421adb3a168970e" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3</ref>&lt; T &gt; &amp;</type>
+        <definition>const helios::math::vec3&lt; T &gt; &amp; helios::math::aabb&lt; T &gt;::max</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>max</name>
+        <qualifiedname>helios::math::aabb::max</qualifiedname>
+        <briefdescription>
+<para>Returns the maximum corner point of the AABB. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Const reference to the maximum corner point. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/types/aabb.ixx" line="107" column="45" bodyfile="include/helios/math/types/aabb.ixx" bodystart="107" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1math_1_1aabb_1a885dcd6e532de6aacddc24256247e588" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3</ref>&lt; T &gt;</type>
+        <definition>helios::math::vec3&lt; T &gt; helios::math::aabb&lt; T &gt;::getCenter</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getCenter</name>
+        <qualifiedname>helios::math::aabb::getCenter</qualifiedname>
+        <briefdescription>
+<para>Computes the center point of the AABB. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The center point, calculated as `(min + max) / 2`. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/types/aabb.ixx" line="116" column="39" bodyfile="include/helios/math/types/aabb.ixx" bodystart="116" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1math_1_1aabb_1ad9d08175f5cacc839bd28476cf1bc4e0" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3</ref>&lt; T &gt;</type>
+        <definition>helios::math::vec3&lt; T &gt; helios::math::aabb&lt; T &gt;::getSize</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getSize</name>
+        <qualifiedname>helios::math::aabb::getSize</qualifiedname>
+        <briefdescription>
+<para>Computes the size of the AABB over all axes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A vector representing the width, height, and depth of the AABB. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/types/aabb.ixx" line="125" column="39" bodyfile="include/helios/math/types/aabb.ixx" bodystart="125" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1math_1_1aabb_1a92106c4efc1b1aae8466956903020665" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::math::aabb&lt; T &gt;::add</definition>
+        <argsstring>(const helios::math::vec3&lt; T &gt; &amp;point) noexcept</argsstring>
+        <name>add</name>
+        <qualifiedname>helios::math::aabb::add</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3</ref>&lt; T &gt; &amp;</type>
+          <declname>point</declname>
+        </param>
+        <briefdescription>
+<para>Expands the AABB to include a given point. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Updates the minimum and maximum bounds to ensure the specified point lies within the AABB. Each component is compared independently:<itemizedlist>
+<listitem><para>If a component of the point is smaller than the current minimum, the minimum is updated.</para>
+</listitem><listitem><para>If a component of the point is larger than the current maximum, the maximum is updated.</para>
+</listitem></itemizedlist>
+</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>point</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The 3D point to include in the bounding box. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/types/aabb.ixx" line="139" column="14" bodyfile="include/helios/math/types/aabb.ixx" bodystart="139" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1math_1_1aabb_1a22eaa32ee9d9c415e4d3ce5b9ddcec74" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structhelios_1_1math_1_1aabb_1aa503a6e73ae299cc5e2cef2fe2513857" kindref="member">aabb</ref>&lt; T &gt;</type>
+        <definition>aabb&lt; T &gt; helios::math::aabb&lt; T &gt;::transform</definition>
+        <argsstring>(const mat4&lt; T &gt; &amp;mat) const noexcept</argsstring>
+        <name>transform</name>
+        <qualifiedname>helios::math::aabb::transform</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1math_1_1mat4" kindref="compound">mat4</ref>&lt; T &gt; &amp;</type>
+          <declname>mat</declname>
+        </param>
+        <briefdescription>
+<para>Transforms the AABB by a 4x4 transformation matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Applies a transformation matrix to the AABB and returns a new axis-aligned bounding box that fully contains the transformed original. This method preserves the axis-aligned property by computing new min/max bounds from the transformed corners.</para>
+<para>The algorithm efficiently transforms only the min/max corners instead of all 8 vertices, using Arvo&apos;s optimization technique from Graphics Gems.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The 4x4 transformation matrix to apply.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new AABB that fully contains the transformed bounding box.</para>
+</simplesect>
+<simplesect kind="see"><para>[Gla95, pp. 548-550] &quot;Transforming Axis-Aligned Bounding Boxes&quot; by James Arvo </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/types/aabb.ixx" line="166" column="15" bodyfile="include/helios/math/types/aabb.ixx" bodystart="166" bodyend="194"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Axis-Aligned Bounding Box for spatial culling and collision detection. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>An AABB is defined by two corner points: a minimum and maximum point in 3D space. Depending on the use case, the box is aligned to the world or local coordinate axes.</para>
+<para>Common use cases include frustum culling, broad-phase collision detection, and spatial partitioning in scene graphs.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The numeric type of the vector components (typically `float` or `double`).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para>[Gla95, pp. 548-550] Glassner, A. (1995). Graphics Gems </para>
+</simplesect>
+<simplesect kind="see"><para>[DP11, pp. 304-311] Dunn, F., &amp; Parberry, I. (2011). 3D Math Primer for Graphics and Game Development </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="include/helios/math/types/aabb.ixx" line="33" column="5" bodyfile="include/helios/math/types/aabb.ixx" bodystart="33" bodyend="197"/>
+    <listofallmembers>
+      <member refid="structhelios_1_1math_1_1aabb_1aa503a6e73ae299cc5e2cef2fe2513857" prot="public" virt="non-virtual"><scope>helios::math::aabb</scope><name>aabb</name></member>
+      <member refid="structhelios_1_1math_1_1aabb_1acc52c66b5209d36c8cf2e9d034f4595f" prot="public" virt="non-virtual"><scope>helios::math::aabb</scope><name>aabb</name></member>
+      <member refid="structhelios_1_1math_1_1aabb_1a85ec864e5d6f50b7126ba22eb1a6c15a" prot="public" virt="non-virtual"><scope>helios::math::aabb</scope><name>aabb</name></member>
+      <member refid="structhelios_1_1math_1_1aabb_1a92106c4efc1b1aae8466956903020665" prot="public" virt="non-virtual"><scope>helios::math::aabb</scope><name>add</name></member>
+      <member refid="structhelios_1_1math_1_1aabb_1a885dcd6e532de6aacddc24256247e588" prot="public" virt="non-virtual"><scope>helios::math::aabb</scope><name>getCenter</name></member>
+      <member refid="structhelios_1_1math_1_1aabb_1ad9d08175f5cacc839bd28476cf1bc4e0" prot="public" virt="non-virtual"><scope>helios::math::aabb</scope><name>getSize</name></member>
+      <member refid="structhelios_1_1math_1_1aabb_1aa5836a6c13c4a5ddd421adb3a168970e" prot="public" virt="non-virtual"><scope>helios::math::aabb</scope><name>max</name></member>
+      <member refid="structhelios_1_1math_1_1aabb_1a5ed36f911a5ff17e2bfc629bcb6eee27" prot="private" virt="non-virtual"><scope>helios::math::aabb</scope><name>max_</name></member>
+      <member refid="structhelios_1_1math_1_1aabb_1ab53ba0c88b465fb3f9e6ae410c3f0b70" prot="public" virt="non-virtual"><scope>helios::math::aabb</scope><name>min</name></member>
+      <member refid="structhelios_1_1math_1_1aabb_1a3649ba1b1b848f3cce6eba5647ef557f" prot="private" virt="non-virtual"><scope>helios::math::aabb</scope><name>min_</name></member>
+      <member refid="structhelios_1_1math_1_1aabb_1a22eaa32ee9d9c415e4d3ce5b9ddcec74" prot="public" virt="non-virtual"><scope>helios::math::aabb</scope><name>transform</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

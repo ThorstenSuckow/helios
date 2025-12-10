@@ -1,5 +1,7 @@
 var NAVTREEINDEX3 =
 {
+"classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget.html#a01362127380439b6a4dca4bd1222ea89":[2,0,18,0,0],
+"classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget.html#a01362127380439b6a4dca4bd1222ea89":[3,0,0,0,1,0,2,0],
 "classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget.html#a01362127380439b6a4dca4bd1222ea89":[5,0,0,0,1,0,2,0],
 "classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget.html#a014d3bec3cd6af14a0870687d896fc30":[2,0,18,0,1],
 "classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget.html#a014d3bec3cd6af14a0870687d896fc30":[3,0,0,0,1,0,2,1],
@@ -247,7 +249,5 @@ var NAVTREEINDEX3 =
 "classhelios_1_1game_1_1GameObject.html#a3a7562a07fca0a34dbbca4394af13b6f":[3,0,0,4,2,4],
 "classhelios_1_1game_1_1GameObject.html#a3a7562a07fca0a34dbbca4394af13b6f":[5,0,0,4,2,4],
 "classhelios_1_1game_1_1GameObject.html#ad2a1fd2fdb44beb49940a747af1313b7":[2,0,44,0,0],
-"classhelios_1_1game_1_1GameObject.html#ad2a1fd2fdb44beb49940a747af1313b7":[3,0,0,4,2,0],
-"classhelios_1_1game_1_1GameObject.html#ad2a1fd2fdb44beb49940a747af1313b7":[5,0,0,4,2,0],
-"classhelios_1_1game_1_1GameObject.html#ae0b8447b4270f0db326bdb523239a536":[2,0,44,0,1]
+"classhelios_1_1game_1_1GameObject.html#ad2a1fd2fdb44beb49940a747af1313b7":[3,0,0,4,2,0]
 };

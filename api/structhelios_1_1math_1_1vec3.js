@@ -12,5 +12,6 @@ var structhelios_1_1math_1_1vec3 =
     [ "operator==", "structhelios_1_1math_1_1vec3.html#aa551f170f2cba46c0b50cf48fdfb326b", null ],
     [ "operator[]", "structhelios_1_1math_1_1vec3.html#a8e8e639bd8db44dd1112eedef81b9972", null ],
     [ "operator[]", "structhelios_1_1math_1_1vec3.html#af422a99f5c24f8b57edd8f6e0a007152", null ],
-    [ "same", "structhelios_1_1math_1_1vec3.html#a38d076eec3ebd34f4353d99e3f58ad1e", null ]
+    [ "same", "structhelios_1_1math_1_1vec3.html#a38d076eec3ebd34f4353d99e3f58ad1e", null ],
+    [ "toVec4", "structhelios_1_1math_1_1vec3.html#a98db2375fe3de090655548f4d29c8192", null ]
 ];

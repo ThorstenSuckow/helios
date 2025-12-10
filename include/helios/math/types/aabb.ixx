@@ -144,7 +144,6 @@ export namespace helios::math {
             max_[0] = std::max(max_[0], point[0]);
             max_[1] = std::max(max_[1], point[1]);
             max_[2] = std::max(max_[2], point[2]);
-
         }
 
         /**

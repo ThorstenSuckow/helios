@@ -2,7 +2,7 @@ module;
 
 #include <memory>
 #include <stdexcept>
-#include <limits>
+#include <cmath>
 
 module helios.rendering.model.Mesh;
 
@@ -44,7 +44,7 @@ namespace helios::rendering::model {
         }
     }
 
-    const unsigned int Mesh::indexCount() const noexcept {
+    unsigned int Mesh::indexCount() const noexcept {
         return indices_->size();
     }
 
@@ -62,37 +62,43 @@ namespace helios::rendering::model {
     };
 
     const helios::math::aabbf& Mesh::aabb() const noexcept  {
-        if (needsUpdate_ && !vertices_->empty()) {
-            float minX = INFINITY;
-            float minY = INFINITY;
-            float minZ = INFINITY;
-            float maxX = -INFINITY;
-            float maxY = -INFINITY;
-            float maxZ = -INFINITY;
+        if (needsUpdate_) {
+            if (!vertices_->empty()) {
+                float minX = std::numeric_limits<float>::max();
+                float minY = std::numeric_limits<float>::max();
+                float minZ = std::numeric_limits<float>::max();
+                float maxX = std::numeric_limits<float>::lowest();
+                float maxY = std::numeric_limits<float>::lowest();
+                float maxZ = std::numeric_limits<float>::lowest();
 
-            for (const auto& v: *vertices_) {
-                if (minX > v.position[0]) {
-                    minX = v.position[0];
-                }
-                if (minY > v.position[1]) {
-                    minY = v.position[1];
-                }
-                if (minZ > v.position[2]) {
-                    minZ = v.position[2];
+                for (const auto& v: *vertices_) {
+                    // min
+                    if (minX > v.position[0]) {
+                        minX = v.position[0];
+                    }
+                    if (minY > v.position[1]) {
+                        minY = v.position[1];
+                    }
+                    if (minZ > v.position[2]) {
+                        minZ = v.position[2];
+                    }
+
+                    // max
+                    if (maxX < v.position[0]) {
+                        maxX = v.position[0];
+                    }
+                    if (maxY < v.position[1]) {
+                        maxY = v.position[1];
+                    }
+                    if (maxZ < v.position[2]) {
+                        maxZ = v.position[2];
+                    }
                 }
 
-                if (maxX < v.position[0]) {
-                    maxX = v.position[0];
-                }
-                if (maxY < v.position[1]) {
-                    maxY = v.position[1];
-                }
-                if (maxZ < v.position[2]) {
-                    maxZ = v.position[2];
-                }
+                aabb_ = helios::math::aabbf(minX, minY, minZ, maxX, maxY, maxZ);
+            } else {
+                aabb_ = helios::math::aabbf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
             }
-
-            aabb_ = helios::math::aabbf(minX, minY, minZ, maxX, maxY, maxZ);
 
             needsUpdate_ = false;
         }

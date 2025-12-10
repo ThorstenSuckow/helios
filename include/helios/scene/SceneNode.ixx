@@ -52,7 +52,7 @@ export namespace helios::scene {
      * The `worldTransform_` is derived from a SceneNode's `localTransform_` and the SceneNode's
      * parent's `worldTransform`s. A call to `worldTransform()` will update the particular subtree
      * of the SceneNode bottom-up to make sure the actual values are available with the SceneNode's
-     * `worldTransform`. A Scene might also propagate changes top-bottom - see `Scene:.udpateNodes()`.
+     * `worldTransform`. A Scene might also propagate changes top-bottom - see `Scene::updateNodes()`.
      *
      */
     class SceneNode {
@@ -110,6 +110,11 @@ export namespace helios::scene {
         Transform localTransform_;
 
         /**
+         * @brief The axis-aligned-bounding-box for this SceneNode in world-coordinates.
+         */
+        helios::math::aabbf aabb_{};
+
+        /**
          * @brief Sets the parent of this SceneNode.
          * Internally used once a child was added to this SceneNode.
          *
@@ -129,8 +134,9 @@ export namespace helios::scene {
             SceneNode(const SceneNode &) = delete;
 
             /**
-             * @brief Delete copy assignment constructor.
-             * A SceneNode ist not indtended to be copied.
+             * @brief Delete copy assignment operator.
+             *
+             * A SceneNode is not intended to be copied.
              */
             SceneNode& operator=(const SceneNode&) = delete;
 
@@ -274,14 +280,16 @@ export namespace helios::scene {
 
             /**
              * @brief Sets the world transform for this SceneNode.
+             *
+             * @details
              * Does nothing if the current SceneNode's world transform is considered
              * equal to the specified world transform.
              *
              * @param wf The worldTransform to use for this SceneNode.
              * @param sceneGraphKey The sceneGraphKey as constructed by the `Scene`. Serves
-             * as the passkey so this method is not callable from outside
+             * as the passkey so this method is not callable from outside.
              *
-             * @return true if the world transform was updated, otherwise false
+             * @return true if the world transform was updated, otherwise false.
              */
             [[nodiscard]] bool setWorldTransform(
                 const helios::math::mat4f& wf, helios::scene::SceneGraphKey sceneGraphKey
@@ -309,17 +317,31 @@ export namespace helios::scene {
             [[nodiscard]] const helios::math::mat4f& cachedWorldTransform() const noexcept;
 
             /**
-             * @brief Checks whether this SceneNode needs to be updated, e.g. because the
-             * local transformation changed.
+             * @brief Checks whether this SceneNode needs to be updated.
              *
-             * The SceneNode is considered as "dirty" id either the localTransform_ needs an
-             * update, or if needsUpdate_ property is set to true.
+             * The SceneNode is considered "dirty" if either the `localTransform_` needs an
+             * update, or if the `needsUpdate_` property is set to true.
              *
-             * @return true if this SceneNode is considered to be dirty, otherwise
-             * false.
+             * @return true if this SceneNode is considered to be dirty, otherwise false.
              */
             [[nodiscard]] bool needsUpdate() const noexcept;
 
+
+            /**
+             * @brief Returns the axis-aligned bounding box for this SceneNode in world coordinates.
+             *
+             * @return The AABB transformed to world space.
+             */
+            [[nodiscard]] helios::math::aabbf aabb() noexcept;
+
+            /**
+             * @brief Updates the world transform and axis-aligned bounding box of this SceneNode.
+             *
+             * Recomputes the `worldTransform_` based on the parent's world transform and
+             * this node's `localTransform_`. Also updates the `aabb_` to reflect the
+             * current world-space bounds.
+             */
+            void update() noexcept;
 
     };
 

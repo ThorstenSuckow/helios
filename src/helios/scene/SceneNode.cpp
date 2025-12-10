@@ -127,13 +127,7 @@ namespace helios::scene {
 
     const helios::math::mat4f& SceneNode::worldTransform() noexcept {
         if (needsUpdate_) {
-            needsUpdate_ = false;
-
-            if (parent_ == nullptr) {
-                worldTransform_ = localTransform_.transform();
-            } else {
-                worldTransform_= parent_->worldTransform() * localTransform_.transform();
-            }
+            update();
         }
 
         return worldTransform_;
@@ -149,6 +143,32 @@ namespace helios::scene {
         return needsUpdate_ || localTransform_.needsUpdate();
     }
 
+    helios::math::aabbf SceneNode::aabb() noexcept {
+        if (needsUpdate_) {
+            update();
+        }
+
+        return aabb_;
+
+    }
+
+    void SceneNode::update() noexcept {
+        needsUpdate_ = false;
+
+        if (parent_ == nullptr) {
+            worldTransform_ = localTransform_.transform();
+        } else {
+            worldTransform_ = parent_->worldTransform() * localTransform_.transform();
+        }
+
+        if (renderable_) {
+            if (const auto prototype = renderable_->renderPrototype()) {
+                const auto& localAABB = prototype->mesh().aabb();
+                aabb_ = localAABB.transform(worldTransform_);
+            }
+        }
+
+    }
 
 };
 

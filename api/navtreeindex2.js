@@ -1,5 +1,7 @@
 var NAVTREEINDEX2 =
 {
+"classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication.html#a7f053a4162c99ce3219865cee668cd18":[5,0,0,0,0,0,0,2],
+"classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication.html#ad50cfc2051b48c6c447df3b53b0734bd":[2,0,0,0,0],
 "classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication.html#ad50cfc2051b48c6c447df3b53b0734bd":[3,0,0,0,0,0,0,0],
 "classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication.html#ad50cfc2051b48c6c447df3b53b0734bd":[5,0,0,0,0,0,0,0],
 "classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication.html#aec402bfa5500772acb4d47752e80fd3e":[2,0,0,0,5],
@@ -247,7 +249,5 @@ var NAVTREEINDEX2 =
 "classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget.html#a5beb965047e8e583295ced59916687cd":[5,0,0,0,1,0,1,0],
 "classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget.html":[2,0,18,0],
 "classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget.html":[3,0,0,0,1,0,2],
-"classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget.html":[5,0,0,0,1,0,2],
-"classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget.html#a01362127380439b6a4dca4bd1222ea89":[2,0,18,0,0],
-"classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget.html#a01362127380439b6a4dca4bd1222ea89":[3,0,0,0,1,0,2,0]
+"classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget.html":[5,0,0,0,1,0,2]
 };

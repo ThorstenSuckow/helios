@@ -1,5 +1,7 @@
 var NAVTREEINDEX4 =
 {
+"classhelios_1_1game_1_1GameObject.html#ad2a1fd2fdb44beb49940a747af1313b7":[5,0,0,4,2,0],
+"classhelios_1_1game_1_1GameObject.html#ae0b8447b4270f0db326bdb523239a536":[2,0,44,0,1],
 "classhelios_1_1game_1_1GameObject.html#ae0b8447b4270f0db326bdb523239a536":[3,0,0,4,2,1],
 "classhelios_1_1game_1_1GameObject.html#ae0b8447b4270f0db326bdb523239a536":[5,0,0,4,2,1],
 "classhelios_1_1game_1_1GameObject.html#ae5fbc5b89d26559a4a9be8af64e126ba":[2,0,44,0,8],
@@ -247,7 +249,5 @@ var NAVTREEINDEX4 =
 "classhelios_1_1rendering_1_1RenderPass.html#aade7bd52eb917132f463a45ed3aaac87":[5,0,0,7,6,3],
 "classhelios_1_1rendering_1_1RenderPass.html#ab0e71c167bc7d90cd4dc1be780cbe7d5":[2,0,84,0,9],
 "classhelios_1_1rendering_1_1RenderPass.html#ab0e71c167bc7d90cd4dc1be780cbe7d5":[3,0,0,7,6,9],
-"classhelios_1_1rendering_1_1RenderPass.html#ab0e71c167bc7d90cd4dc1be780cbe7d5":[5,0,0,7,6,9],
-"classhelios_1_1rendering_1_1RenderPass.html#afac382a610028b5e09af4ade728b78b3":[2,0,84,0,1],
-"classhelios_1_1rendering_1_1RenderPass.html#afac382a610028b5e09af4ade728b78b3":[3,0,0,7,6,1]
+"classhelios_1_1rendering_1_1RenderPass.html#ab0e71c167bc7d90cd4dc1be780cbe7d5":[5,0,0,7,6,9]
 };

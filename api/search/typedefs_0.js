@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['floatingpointtype_0',['FloatingPointType',['../namespacehelios_1_1math.html#a4c90766d59f3c1ce32821bbbd3cdd62b',1,'helios::math']]]
+  ['aabbd_0',['aabbd',['../namespacehelios_1_1math.html#a8cdcd5dfceca20081416ef7ac3374e01',1,'helios::math']]],
+  ['aabbf_1',['aabbf',['../namespacehelios_1_1math.html#a124c0492430aeecedc1c1a5ece4ba488',1,'helios::math']]],
+  ['aabbi_2',['aabbi',['../namespacehelios_1_1math.html#a3c63775a7d6ff09058288223291660b7',1,'helios::math']]]
 ];

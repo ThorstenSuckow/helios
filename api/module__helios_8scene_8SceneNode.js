@@ -25,10 +25,13 @@ var module__helios_8scene_8SceneNode =
     [ "helios::scene::SceneNode::worldTransform", "module__helios_8scene_8SceneNode.html#a752f544acc02b5a49623ce5aad5b1a8e", null ],
     [ "helios::scene::SceneNode::cachedWorldTransform", "module__helios_8scene_8SceneNode.html#ab908b6a16d34640eca0d92f2573e6cc3", null ],
     [ "helios::scene::SceneNode::needsUpdate", "module__helios_8scene_8SceneNode.html#a88551e7d166868342b87fd83e767442c", null ],
+    [ "helios::scene::SceneNode::aabb", "module__helios_8scene_8SceneNode.html#a1020ca70c5268619a3bdfb3acb843e34", null ],
+    [ "helios::scene::SceneNode::update", "module__helios_8scene_8SceneNode.html#aeb8fe0f5531a26fa2fc3a353572a1115", null ],
     [ "helios::scene::SceneNode::needsUpdate_", "module__helios_8scene_8SceneNode.html#a7810bc9069939badd249ce54f794d1e7", null ],
     [ "helios::scene::SceneNode::renderable_", "module__helios_8scene_8SceneNode.html#adc5b1c905e0a2eee271107ebb91652af", null ],
     [ "helios::scene::SceneNode::parent_", "module__helios_8scene_8SceneNode.html#a718f8d4e4ecddeb659031dd9ad9ad079", null ],
     [ "helios::scene::SceneNode::children_", "module__helios_8scene_8SceneNode.html#aa362a46b4917ee9955a38d6422b72668", null ],
     [ "helios::scene::SceneNode::worldTransform_", "module__helios_8scene_8SceneNode.html#a93375ed6bd9aa627be8a5c2342ba4b4c", null ],
-    [ "helios::scene::SceneNode::localTransform_", "module__helios_8scene_8SceneNode.html#acf949ca732802c66d4d0d3fee757e719", null ]
+    [ "helios::scene::SceneNode::localTransform_", "module__helios_8scene_8SceneNode.html#acf949ca732802c66d4d0d3fee757e719", null ],
+    [ "helios::scene::SceneNode::aabb_", "module__helios_8scene_8SceneNode.html#a2b09e19ce61e810a5d21a77d196fbcf1", null ]
 ];

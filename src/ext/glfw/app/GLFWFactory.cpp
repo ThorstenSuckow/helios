@@ -45,7 +45,9 @@ using namespace helios::rendering;
 
 namespace helios::ext::glfw::app {
 
-    std::unique_ptr<GLFWApplication> GLFWFactory::makeOpenGLApp(std::string title) {
+    std::unique_ptr<GLFWApplication> GLFWFactory::makeOpenGLApp(
+        std::string title, const int width, const int height,  const int aspectRatioNumer, const int aspectRatioDenom
+    ) {
 
         auto openGLDevice = std::make_unique<OpenGLDevice>();
         auto inputManager = std::make_unique<InputManager>(
@@ -63,7 +65,13 @@ namespace helios::ext::glfw::app {
         );
 
         app->init();
-        auto cfg = makeWindowCfg(std::move(title));
+        auto cfg = makeWindowCfg(
+            std::move(title),
+            width,
+            height,
+            aspectRatioNumer,
+            aspectRatioDenom
+        );
         auto renderTarget = std::make_unique<RenderTarget>();
 
         GLFWWindow& win = app->createWindow(std::move(renderTarget), cfg);
@@ -82,9 +90,15 @@ namespace helios::ext::glfw::app {
     }
 
 
-    GLFWWindowConfig GLFWFactory::makeWindowCfg(std::string title) {
-        auto cfg = GLFWWindowConfig{};
-        cfg.title = std::move(title);
+    GLFWWindowConfig GLFWFactory::makeWindowCfg(
+        std::string title, const int width, const int height,  const int aspectRatioNumer, const int aspectRatioDenom
+    ) {
+        auto cfg             = GLFWWindowConfig{};
+        cfg.title            = std::move(title);
+        cfg.width            = width;
+        cfg.height           = height;
+        cfg.aspectRatioNumer = aspectRatioNumer;
+        cfg.aspectRatioDenom = aspectRatioDenom;
 
         cfg.frameBufferSizeCallback = [] (GLFWwindow* nativeWin, const int width, const int height) {
             static const auto evtGuid = Guid::generate();

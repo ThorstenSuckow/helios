@@ -16,10 +16,9 @@ export namespace helios::ext::glfw::app {
 
 
     /**
-     * @brief A factory class for creating pre-configured glfw-specific application components.
+     * @brief Factory class for creating pre-configured GLFW-specific application components.
      *
-     * This factory eases setup of examples and default application and reduces required
-     * boilerplate code.
+     * Eases setup of examples and default applications by reducing required boilerplate code.
      */
     class GLFWFactory {
 
@@ -29,10 +28,18 @@ export namespace helios::ext::glfw::app {
          * @brief Creates a pre-configured GLFWApplication instance for OpenGL rendering.
          *
          * @param title The default title used with the application's main window.
+         * @param width The width for the main window.
+         * @param height The height for the main window.
+         * @param aspectRatioNumer Aspect ratio numerator.
+         * @param aspectRatioDenom Aspect ratio denominator.
          *
          * @return A unique_ptr to the newly created GFWLApplication.
          */
-        static std::unique_ptr<GLFWApplication> makeOpenGLApp(std::string title);
+        static std::unique_ptr<GLFWApplication> makeOpenGLApp(
+            std::string title,
+            int width = 800, int height = 600,
+            int aspectRatioNumer = 0, int aspectRatioDenom = 0
+            );
 
 
         /**
@@ -42,9 +49,15 @@ export namespace helios::ext::glfw::app {
          * assuming this config is used with a Window created by an application.
          *
          * @param title The title for the window configuration.
+         * @param width The width for the main window.
+         * @param height The height for the main window.
+         * @param aspectRatioNumer Aspect ratio numerator.
+         * @param aspectRatioDenom Aspect ratio denominator.
          *
          * @return A `GLFWWindowConfig` object with default properties like height and width.
          */
-        static helios::ext::glfw::window::GLFWWindowConfig makeWindowCfg(std::string title);
+        static helios::ext::glfw::window::GLFWWindowConfig makeWindowCfg(
+        std::string title, int width = 800, int height = 600,
+        int aspectRatioNumer = 0, int aspectRatioDenom = 0);
     };
 }

@@ -55,6 +55,19 @@ export namespace helios::window {
          */
         std::string title_;
 
+        /**
+         * @brief Aspect ratio numerator.
+         *
+         * Aspect ratio is enforced only when BOTH aspectRatioNumer and aspectRatioDenom are non-zero.
+         */
+        int aspectRatioNumer_ = 0;
+
+        /**
+         * @brief Aspect ratio denominator.
+         *
+         * Aspect ratio is enforced only when BOTH aspectRatioNumer and aspectRatioDenom are non-zero.
+         */
+        int aspectRatioDenom_ = 0;
 
         /**
          * @brief The default render target for this Window.

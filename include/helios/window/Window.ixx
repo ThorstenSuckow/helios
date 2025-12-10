@@ -58,14 +58,14 @@ export namespace helios::window {
         /**
          * @brief Aspect ratio numerator.
          *
-         * Set to anything other than 0 together with aspectRatioDenom to enforce aspect ratio.
+         * Aspect ratio is enforced only when BOTH aspectRatioNumer and aspectRatioDenom are non-zero.
          */
         int aspectRatioNumer_ = 0;
 
         /**
          * @brief Aspect ratio denominator.
          *
-         * Set to anything other than 0 together with aspectRatioNumer to enforce aspect ratio.
+         * Aspect ratio is enforced only when BOTH aspectRatioNumer and aspectRatioDenom are non-zero.
          */
         int aspectRatioDenom_ = 0;
 

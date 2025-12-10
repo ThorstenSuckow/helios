@@ -22,7 +22,11 @@ namespace helios::window {
         const WindowConfig& cfg
     ) :
     renderTarget_(std::move(renderTarget)),
-    width_(cfg.width), height_(cfg.height), title_(cfg.title),
+    width_(cfg.width),
+    height_(cfg.height),
+    title_(cfg.title),
+    aspectRatioNumer_(cfg.aspectRatioNumer),
+    aspectRatioDenom_(cfg.aspectRatioDenom),
     guid_(util::Guid::generate()) {
 
         if (!renderTarget_) {

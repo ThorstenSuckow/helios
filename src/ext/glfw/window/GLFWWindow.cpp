@@ -37,8 +37,12 @@ namespace helios::ext::glfw::window {
         nativeHandle_ = glfwCreateWindow(
             width_, height_, title_.c_str(), nullptr, nullptr);
 
+        if (aspectRatioDenom_ > 0 && aspectRatioNumer_ > 0) {
+            glfwSetWindowAspectRatio(nativeHandle_, aspectRatioNumer_, aspectRatioDenom_);
+        }
+
         if (nativeHandle_ == nullptr) {
-            logger_.error("Failed to creat GLFW window");
+            logger_.error("Failed to create GLFW window");
             return false;
         }
 

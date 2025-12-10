@@ -17,6 +17,9 @@ import :vec3;
 
 export namespace helios::math {
 
+    template<helios::math::Numeric T>
+    struct vec4;
+
     /**
      * @brief Represents a 4-dimensional vector of the generic type <T>.
      *
@@ -98,24 +101,48 @@ export namespace helios::math {
             return this->v[i];
         }
 
+        /**
+         * @brief Converts this 4D vector to a 3D vector.
+         *
+         * Extracts the x, y, z components from this vec4, discarding the w component.
+         * This is useful when converting from homogeneous coordinates back to 3D space.
+         *
+         * @return A new vec3<T> instance with components (x, y, z).
+         */
+        [[nodiscard]] vec3<T> toVec3() const noexcept;
+
     };
+
+    template<helios::math::Numeric T>
+    inline vec3<T> vec4<T>::toVec3() const noexcept {
+        return vec3<T>{v[0], v[1], v[2]};
+    }
 
     /**
      * @brief Returns a const pointer to the first element of the vector's components.
      *
-     * Useful for APIs that expect a pointer to vector data, like OpenGL.
-     *
-     * @tparam T The numeric type of the vector components.
+     * Useful for APIs that expect a pointer to vector data, like OpenGL
      * @param m A reference to the `vec4<T>` vector.
-     * @return A const pointer to the element at index 0.
+     * @tparam T The numeric type of the vector components.
      */
     template<helios::math::Numeric T>
     const T* value_ptr(const vec4<T>& m) noexcept {
         return &m[0];
     }
 
+    /**
+     * @brief Single-precision floating-point 4D vector.
+     */
     using vec4f = vec4<float>;
+
+    /**
+     * @brief Double-precision floating-point 4D vector.
+     */
     using vec4d = vec4<double>;
+
+    /**
+     * @brief Integer 4D vector.
+     */
     using vec4i = vec4<int>;
 
 }

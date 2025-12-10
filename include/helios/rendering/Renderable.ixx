@@ -39,6 +39,9 @@ export namespace helios::rendering {
 
     protected:
 
+        /**
+         * @brief Shared pointer to the immutable RenderPrototype definition.
+         */
         std::shared_ptr<const helios::rendering::RenderPrototype> renderPrototype_ = nullptr;
 
         /**
@@ -54,22 +57,28 @@ export namespace helios::rendering {
 
     public:
         /**
-         * @brief Remove default constructor.
+         * @brief Deleted default constructor.
          */
         Renderable() = delete;
 
         /**
-         * @brief Delete copy constructor.
+         * @brief Deleted copy constructor.
          */
         Renderable(const Renderable&) = delete;
 
         /**
-         * @brief Delete copy assignment operator.
+         * @brief Deleted copy assignment operator.
          */
         Renderable& operator=(const Renderable&)= delete;
 
-        // allow move
+        /**
+         * @brief Defaulted move constructor.
+         */
         Renderable(Renderable&&) noexcept = default;
+
+        /**
+         * @brief Defaulted move assignment operator.
+         */
         Renderable& operator=(Renderable&&) noexcept = default;
 
         /**
@@ -77,7 +86,7 @@ export namespace helios::rendering {
          *
          * @param renderPrototype A shared pointer to the immutable RenderPrototype definition. Must not be nullptr.
          * @param materialOverride An optional set of instance-specific material property overrides.
-         * If nullptr, the Renderable uses only the default properties from the RenderPrototype's Material.
+         * If std::nullopt, the Renderable uses only the default properties from the RenderPrototype's Material.
          *
          * @throws std::invalid_argument if `renderPrototype` is a nullptr.
          */
@@ -89,9 +98,9 @@ export namespace helios::rendering {
 
 
         /**
-         * @brief Returns a const reference to the immutable RenderPrototype used by this Renderable.
+         * @brief Returns a shared pointer to the RenderPrototype used by this Renderable.
          *
-         * @return A const reference to the RenderPrototype.
+         * @return A shared pointer to the RenderPrototype.
          */
         [[nodiscard]] std::shared_ptr<const helios::rendering::RenderPrototype> renderPrototype() const noexcept;
 
@@ -103,6 +112,7 @@ export namespace helios::rendering {
          *
          * @return A const reference to the std::optional<MaterialPropertiesOverride>.
          */
+
         [[nodiscard]] const std::optional<helios::rendering::model::config::MaterialPropertiesOverride>& materialOverride() const noexcept;
 
         /**

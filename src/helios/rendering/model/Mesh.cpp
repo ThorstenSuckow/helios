@@ -2,6 +2,7 @@ module;
 
 #include <memory>
 #include <stdexcept>
+#include <cmath>
 
 module helios.rendering.model.Mesh;
 
@@ -43,7 +44,7 @@ namespace helios::rendering::model {
         }
     }
 
-    const unsigned int Mesh::indexCount() const noexcept {
+    unsigned int Mesh::indexCount() const noexcept {
         return indices_->size();
     }
 
@@ -60,4 +61,36 @@ namespace helios::rendering::model {
         return *meshConfig_;
     };
 
+    const helios::math::aabbf& Mesh::aabb() const noexcept  {
+        if (needsUpdate_) {
+            if (!vertices_->empty()) {
+                float minX = std::numeric_limits<float>::max();
+                float minY = std::numeric_limits<float>::max();
+                float minZ = std::numeric_limits<float>::max();
+                float maxX = std::numeric_limits<float>::lowest();
+                float maxY = std::numeric_limits<float>::lowest();
+                float maxZ = std::numeric_limits<float>::lowest();
+
+                for (const auto& v: *vertices_) {
+                    // min
+                    minX = std::min(minX, v.position[0]);
+                    minY = std::min(minY, v.position[1]);
+                    minZ = std::min(minZ, v.position[2]);
+
+                    // max
+                    maxX = std::max(maxX, v.position[0]);
+                    maxY = std::max(maxY, v.position[1]);
+                    maxZ = std::max(maxZ, v.position[2]);
+                }
+
+                aabb_ = helios::math::aabbf(minX, minY, minZ, maxX, maxY, maxZ);
+            } else {
+                aabb_ = helios::math::aabbf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+            }
+
+            needsUpdate_ = false;
+        }
+
+        return aabb_;
+    };
 }

@@ -91,7 +91,7 @@ namespace helios::ext::glfw::app {
 
 
     GLFWWindowConfig GLFWFactory::makeWindowCfg(
-        std::string title, const int width, const int height,  const int aspectRatioNumer, const int aspectRatioDenom
+        std::string title, const int width, const int height, const int aspectRatioNumer, const int aspectRatioDenom
     ) {
         auto cfg             = GLFWWindowConfig{};
         cfg.title            = std::move(title);

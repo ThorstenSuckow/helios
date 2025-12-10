@@ -137,7 +137,7 @@ export namespace helios::rendering::model {
          *
          * @return The number of indices handled by this Mesh.
          */
-        [[nodiscard]] const unsigned int indexCount() const noexcept;
+        [[nodiscard]] unsigned int indexCount() const noexcept;
 
         /**
          * @brief Returns a const reference to the underlying vertices.

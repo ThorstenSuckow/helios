@@ -62,7 +62,7 @@ namespace helios::rendering::model {
     };
 
     const helios::math::aabbf& Mesh::aabb() const noexcept  {
-        if (needsUpdate_) {
+        if (needsUpdate_ && !vertices_->empty()) {
             float minX = INFINITY;
             float minY = INFINITY;
             float minZ = INFINITY;
@@ -70,7 +70,7 @@ namespace helios::rendering::model {
             float maxY = -INFINITY;
             float maxZ = -INFINITY;
 
-            for (helios::rendering::Vertex v: *vertices_) {
+            for (const auto& v: *vertices_) {
                 if (minX > v.position[0]) {
                     minX = v.position[0];
                 }

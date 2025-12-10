@@ -73,26 +73,14 @@ namespace helios::rendering::model {
 
                 for (const auto& v: *vertices_) {
                     // min
-                    if (minX > v.position[0]) {
-                        minX = v.position[0];
-                    }
-                    if (minY > v.position[1]) {
-                        minY = v.position[1];
-                    }
-                    if (minZ > v.position[2]) {
-                        minZ = v.position[2];
-                    }
+                    minX = std::min(minX, v.position[0]);
+                    minY = std::min(minY, v.position[1]);
+                    minZ = std::min(minZ, v.position[2]);
 
                     // max
-                    if (maxX < v.position[0]) {
-                        maxX = v.position[0];
-                    }
-                    if (maxY < v.position[1]) {
-                        maxY = v.position[1];
-                    }
-                    if (maxZ < v.position[2]) {
-                        maxZ = v.position[2];
-                    }
+                    maxX = std::max(maxX, v.position[0]);
+                    maxY = std::max(maxY, v.position[1]);
+                    maxZ = std::max(maxZ, v.position[2]);
                 }
 
                 aabb_ = helios::math::aabbf(minX, minY, minZ, maxX, maxY, maxZ);

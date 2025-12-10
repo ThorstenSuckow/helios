@@ -158,14 +158,15 @@ namespace helios::scene {
         if (parent_ == nullptr) {
             worldTransform_ = localTransform_.transform();
         } else {
-            worldTransform_= parent_->worldTransform() * localTransform_.transform();
+            worldTransform_ = parent_->worldTransform() * localTransform_.transform();
         }
 
         if (renderable_) {
-            const auto& localAABB = renderable_->renderPrototype()->mesh().aabb();
-            aabb_ = localAABB.transform(worldTransform_);
+            if (const auto prototype = renderable_->renderPrototype()) {
+                const auto& localAABB = prototype->mesh().aabb();
+                aabb_ = localAABB.transform(worldTransform_);
+            }
         }
-
 
     }
 

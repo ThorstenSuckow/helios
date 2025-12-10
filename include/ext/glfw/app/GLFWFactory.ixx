@@ -33,7 +33,7 @@ export namespace helios::ext::glfw::app {
          * @param aspectRatioNumer Aspect ratio numerator.
          * @param aspectRatioDenom Aspect ratio denominator.
          *
-         * @return A unique_ptr to the newly created GFWLApplication.
+         * @return A unique_ptr to the newly created GLFWApplication.
          */
         static std::unique_ptr<GLFWApplication> makeOpenGLApp(
             std::string title,

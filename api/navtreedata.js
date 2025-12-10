@@ -81,13 +81,13 @@ var NAVTREEINDEX =
 "classhelios_1_1rendering_1_1model_1_1Mesh.html#a0100ea58ef8bb486ccd66076fc680eee",
 "classhelios_1_1scene_1_1Scene.html#aed8d3cf0ab98ebd89de94edfdb7f477a",
 "classhelios_1_1util_1_1Guid.html#a56c29dc3db8911269e868b4581e621ec",
-"classhelios_1_1window_1_1event_1_1FrameBufferResizeEvent.html#a007ff0e741584eb88b5a7a9653af3d06",
-"module__helios_8engine_8FrameStats.html#ab76f59f1bd1a35ee9d4316fdb46efa63",
-"module__helios_8input_8GamepadState.html#a4571c54073e4f9d9db2630d1f7c88628",
-"module__helios_8rendering_8asset_8shape_8basic.html",
-"module__helios_8util_8log_8LogManager.html#a086cef17194c4df915de290181df412f",
-"namespacehelios_1_1rendering_1_1shader.html#ab80163b13aee26b5d5a100c01e4804c9",
-"structhelios_1_1rendering_1_1ViewportKey.html#a20f788edebada9c8164b99a310b9ac51"
+"classhelios_1_1window_1_1Window.html#af053410db30c38792d85b6ce5d7e8b78",
+"module__helios_8engine_8FramePacer.html#a6cfb7ba87a5da0cb5ab0a7c0ff5938fd",
+"module__helios_8input_8GamepadState.html#a22a26dfe8eeef1007c641452b768f0f9",
+"module__helios_8rendering_8asset_8shape_8Shape.html",
+"module__helios_8util_8log_8ConsoleSink.html",
+"namespacehelios_1_1rendering_1_1shader.html",
+"structhelios_1_1rendering_1_1Vertex.html#aad5f040c6ccd955709d5f38e236aa3c8"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

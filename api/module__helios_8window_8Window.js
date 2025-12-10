@@ -22,5 +22,7 @@ var module__helios_8window_8Window =
     [ "helios::window::Window::width_", "module__helios_8window_8Window.html#a82e3d26ab8aeb610b1c92a6130802f11", null ],
     [ "helios::window::Window::height_", "module__helios_8window_8Window.html#ae04994b1582ad5d5a1e9a5b9f4b12304", null ],
     [ "helios::window::Window::title_", "module__helios_8window_8Window.html#a27dc6e221464e5675b20816130a0e948", null ],
+    [ "helios::window::Window::aspectRatioNumer_", "module__helios_8window_8Window.html#a2ba87c8f3140da0087ac0a4cf849b10b", null ],
+    [ "helios::window::Window::aspectRatioDenom_", "module__helios_8window_8Window.html#a3a4a6fcd73d8632f3368e98acc338c85", null ],
     [ "helios::window::Window::renderTarget_", "module__helios_8window_8Window.html#a3aadafde86d1cf52080eda7a8209b8ba", null ]
 ];

@@ -1,5 +1,11 @@
 var NAVTREEINDEX10 =
 {
+"module__helios_8engine_8FramePacer.html#a6cfb7ba87a5da0cb5ab0a7c0ff5938fd":[2,0,32,2],
+"module__helios_8engine_8FramePacer.html#ab6c8eedb96c5252dd75335e67cc082d1":[2,0,32,3],
+"module__helios_8engine_8FramePacer.html#af108f079857c8a5cbbb674bfdd87fb47":[2,0,32,4],
+"module__helios_8engine_8FrameStats.html":[2,0,33],
+"module__helios_8engine_8FrameStats.html#a09bdca6ddc99e99be4868157f069a385":[2,0,33,3],
+"module__helios_8engine_8FrameStats.html#a531092b7438c7c37a7c6e5f19249efb4":[2,0,33,4],
 "module__helios_8engine_8FrameStats.html#ab76f59f1bd1a35ee9d4316fdb46efa63":[2,0,33,2],
 "module__helios_8engine_8Tickable.html":[2,0,34],
 "module__helios_8engine_8Tickable.html#a15d8e0ab4eb4ed8e2dfd758051ffddcb":[2,0,34,3],
@@ -56,8 +62,8 @@ var NAVTREEINDEX10 =
 "module__helios_8ext_8glfw_8app_8GLFWApplication.html#ad50cfc2051b48c6c447df3b53b0734bd":[2,0,0,1],
 "module__helios_8ext_8glfw_8app_8GLFWApplication.html#aec402bfa5500772acb4d47752e80fd3e":[2,0,0,5],
 "module__helios_8ext_8glfw_8app_8GLFWFactory.html":[2,0,1],
-"module__helios_8ext_8glfw_8app_8GLFWFactory.html#a245e2c4f2d0acfe1655b8831292e0aa9":[2,0,1,2],
-"module__helios_8ext_8glfw_8app_8GLFWFactory.html#ae12ea809933c8388c56bdbeda5537ce0":[2,0,1,1],
+"module__helios_8ext_8glfw_8app_8GLFWFactory.html#a54d0cb4c98bc9f34fc59a969f71c7e5d":[2,0,1,1],
+"module__helios_8ext_8glfw_8app_8GLFWFactory.html#a72f9711b61439bcc15a60834bddfd7c3":[2,0,1,2],
 "module__helios_8ext_8glfw_8app_8GLFWRAIIGuard.html":[2,0,2],
 "module__helios_8ext_8glfw_8app_8GLFWRAIIGuard.html#a41fef77759e58e66eb27ea3373d3bee9":[2,0,2,4],
 "module__helios_8ext_8glfw_8app_8GLFWRAIIGuard.html#a676c87e0841663581037a25f2f91b342":[2,0,2,6],
@@ -243,11 +249,5 @@ var NAVTREEINDEX10 =
 "module__helios_8input_8GamepadState.html#a0e93a3d71312aebe3d318e7b91fc5d0e":[2,0,49,11],
 "module__helios_8input_8GamepadState.html#a13d75e66ef5ae123d3327ccbef0c5633":[2,0,49,15],
 "module__helios_8input_8GamepadState.html#a18ff7a69f4c8ebba20a25f53ea7a9714":[2,0,49,10],
-"module__helios_8input_8GamepadState.html#a2287f433f45a9ad3aad31f39df731a93":[2,0,49,22],
-"module__helios_8input_8GamepadState.html#a22a26dfe8eeef1007c641452b768f0f9":[2,0,49,4],
-"module__helios_8input_8GamepadState.html#a259753c014cb11fe211cca3137f67ae5":[2,0,49,9],
-"module__helios_8input_8GamepadState.html#a2e00f4822888f35be3ae6ccb3a1313c7":[2,0,49,5],
-"module__helios_8input_8GamepadState.html#a34175d9b0f9f695b14349b2122ecc690":[2,0,49,8],
-"module__helios_8input_8GamepadState.html#a35444e63738a9208a008d6a823ae9b9a":[2,0,49,12],
-"module__helios_8input_8GamepadState.html#a431dc64f41310e1a27927e856194c1a5":[2,0,49,20]
+"module__helios_8input_8GamepadState.html#a2287f433f45a9ad3aad31f39df731a93":[2,0,49,22]
 };

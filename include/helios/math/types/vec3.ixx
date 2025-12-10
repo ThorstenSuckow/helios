@@ -317,7 +317,7 @@ export namespace helios::math {
 
     template<helios::math::Numeric T>
     inline vec4<T> vec3<T>::toVec4() const noexcept {
-        return vec4<T>{v[0], v[1], v[2], 1.0f};
+        return vec4<T>{v[0], v[1], v[2], static_cast<T>(1)};
     }
 
     template<helios::math::Numeric T>

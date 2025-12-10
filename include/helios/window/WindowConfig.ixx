@@ -15,7 +15,7 @@ export namespace helios::window {
     /**
      * @brief Configuration structure for creating and initializing a Window.
      *
-     * The struct provides common parameters, such as width, height and title.
+     * Provides common parameters such as dimensions, aspect ratio, and title.
      */
     struct WindowConfig {
 
@@ -31,6 +31,26 @@ export namespace helios::window {
          * @brief Initial height of the Window.
          */
         int height{800};
+
+        /**
+         * @brief Numerator of the aspect ratio.
+         *
+         * This value represents the numerator part of the aspect ratio
+         * used for the window. It is paired with `aspectRatioDenom` to
+         * define the aspect ratio as a fraction (numerator/denominator).
+         * A value of 0 indicates that no specific aspect ratio is set.
+         */
+        int aspectRatioNumer{0};
+
+        /**
+         * @brief Denominator of the aspect ratio.
+         *
+         * This value represents the denominator part of the aspect ratio
+         * used for the window. It is paired with `aspectRatioNumer` to
+         * define the aspect ratio as a fraction (numerator/denominator).
+         * A value of 0 indicates that no specific aspect ratio is set.
+         */
+        int aspectRatioDenom{0};
 
 
         /**

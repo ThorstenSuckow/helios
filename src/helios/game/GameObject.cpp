@@ -6,16 +6,38 @@ import helios.scene.SceneNode;
 import helios.util.Guid;
 import helios.scene.Transform;
 import helios.math.types;
+import helios.core.units;
 
 namespace helios::game {
 
     GameObject::GameObject(helios::scene::SceneNode* sceneNode) :
+        canonicalSize_(
+            sceneNode->renderable() && sceneNode->renderable()->renderPrototype()
+            ? sceneNode->renderable()->renderPrototype()->mesh().aabb().getSize()
+            : helios::math::vec3f{1.0f, 1.0f, 1.0f}),
         transform_(&(sceneNode->localTransform())),
         guid_(helios::util::Guid::generate())
     {}
 
     const helios::util::Guid& GameObject::guid() const noexcept {
         return guid_;
+    }
+
+    GameObject& GameObject::setSize(
+        const float width, const float height, const float depth, const helios::core::units::Unit unit
+    ) noexcept {
+
+        const auto& csize = canonicalSize_;
+
+        transform_->scale(
+            helios::math::vec3f{
+                helios::core::units::to(width != 0 && csize[0] != 0 ? width/csize[0] : 0, unit),
+                helios::core::units::to(height != 0 && csize[1] != 0 ? height/csize[1] : 0, unit),
+                helios::core::units::to(depth != 0 && csize[2] != 0 ? depth/csize[2] : 0, unit),
+            }
+        );
+
+        return *this;
     }
 
     GameObject& GameObject::scale(const helios::math::vec3f& scale) noexcept {

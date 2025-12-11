@@ -62,7 +62,7 @@ export namespace helios::examples::spaceshipControl {
         /**
          * @brief Base movement speed in units per second.
          */
-        static constexpr float BASE_MOVEMENT_SPEED = 1.50f;
+        static constexpr float BASE_MOVEMENT_SPEED = 30.0f;
 
         /**
          * @brief Exponential decay factor for rotation when input stops.

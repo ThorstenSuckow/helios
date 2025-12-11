@@ -75,10 +75,12 @@ import helios.ext.imgui.widgets.CameraWidget;
 import helios.ext.imgui.ImGuiLogSink;
 
 // game input handling, game objects
+import helios.core.units;
 import helios.game.GameWorld;
 import helios.game.CommandBuffer;
 import helios.game.InputSnapshot;
 import helios.examples.spaceshipControl.Spaceship;
+import helios.examples.spaceshipControl.TheGrid;
 import helios.examples.spaceshipControl.InputHandler;
 
 
@@ -101,11 +103,23 @@ using namespace helios::math;
 
 int main() {
 
+    constexpr float CELL_SIZE          = 5.0f;
+    constexpr float SPACESHIP_SIZE     = 5.0f;
+    constexpr float GRID_X             = 29.0f;
+    constexpr float GRID_Y             = 19.0f;
+    constexpr float FOVY               = helios::math::radians(90.0f);
+    constexpr float ASPECT_RATIO_NUMER = 16.0f;
+    constexpr float ASPECT_RATIO_DENOM = 9.0f;
+
+
+
     // ========================================
     // 1. Application and Window Setup
     // ========================================
 
-    const auto app = GLFWFactory::makeOpenGLApp("helios - Spaceship Control");
+    const auto app = GLFWFactory::makeOpenGLApp(
+        "helios - Spaceship Control", 800, 600, ASPECT_RATIO_NUMER, ASPECT_RATIO_DENOM
+    );
 
     auto win = dynamic_cast<GLFWWindow*>(app->current());
     auto mainViewport = std::make_shared<Viewport>(0.0f, 0.0f, 1.0f, 1.0f);
@@ -198,7 +212,7 @@ int main() {
     auto spaceship = Triangle{};
     auto leftStickGizmo = Line{};
     auto shipDirectionGizmo = Line{};
-    auto grid = Grid{8, 8};
+    auto grid = Grid{29, 19};
 
     // Configure the mesh for the spaceship to render as a line loop (wireframe)
     auto meshConfig = std::make_shared<const MeshConfig>(PrimitiveType::LineLoop);
@@ -235,7 +249,7 @@ int main() {
 
     // Add the grid
     auto* gridSceneNode = scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(gridRenderable)));
-    //gridSceneNode->scale(helios::math::vec3f(80,60, 0));
+
 
     // Add the spaceship as a scene node
     auto* spaceshipSceneNode =
@@ -255,18 +269,18 @@ int main() {
     auto cameraSceneNode_ptr = cameraSceneNode.get();
     std::ignore = scene->addNode(std::move(cameraSceneNode));
     mainViewport->setCameraSceneNode(cameraSceneNode_ptr);
-    // Initialize camera with proper perspective projection
-    cameraSceneNode_ptr->camera().setPerspective(
-        helios::math::radians(90.0f),  // FOV in radians
-        16.0f / 9.0f,                   // Aspect ratio (adjust to your window)
-        0.1f,                            // Near plane
-        1000.0f                          // Far plane
+    cameraSceneNode_ptr->translate(
+        helios::math::vec3f(0.0f, 0.0f, -(GRID_Y*CELL_SIZE / 2.0f)/tan(FOVY/2))
     );
-    cameraSceneNode_ptr->translate(helios::math::vec3f(0.0f, 0.0f, -5.0f));
-    // Position camera to look at the scene
+    cameraSceneNode_ptr->camera().setPerspective(
+        FOVY,
+        ASPECT_RATIO_NUMER / ASPECT_RATIO_DENOM,
+        0.1f,
+        1000.0f
+    );
     cameraSceneNode_ptr->lookAt(
-        vec3f(0.0f, 0.0f, 0.0f),        // Look at point (origin)
-        vec3f(0.0f, 1.0f, 0.0f)         // Up vector
+        vec3f(0.0f, 0.0f, 0.0f),
+        vec3f(0.0f, 1.0f, 0.0f)
     );
     cameraWidget->addCameraSceneNode("Main Camera", cameraSceneNode_ptr);
 
@@ -277,15 +291,17 @@ int main() {
     // ========================================
     // 9. Game-related Input-handling, GameWorld and GameObjects
     // ========================================
-    auto spaceshipGameObject = std::make_unique<helios::examples::spaceshipControl::Spaceship>(spaceshipSceneNode);
     auto spaceshipInputHandler = helios::examples::spaceshipControl::InputHandler{};
     auto gameWorld = helios::game::GameWorld{};
-    auto* spaceshipPtr = gameWorld.addGameObject(std::move(spaceshipGameObject));
     auto commandBuffer = helios::game::CommandBuffer{};
 
+    auto* spaceshipPtr = gameWorld.addGameObject(
+        std::make_unique<helios::examples::spaceshipControl::Spaceship>(spaceshipSceneNode));
+    auto* theGridPtr = gameWorld.addGameObject(
+        std::make_unique<helios::examples::spaceshipControl::TheGrid>(gridSceneNode));
 
-    auto currentDirection = vec3f(1.0f, 1.0f, 0);
-    constexpr auto SCALING_VECTOR = vec3f(0.125f, 0.125f, 0.0f);
+    spaceshipPtr->setSize(SPACESHIP_SIZE, SPACESHIP_SIZE, 0.0f, helios::core::units::Unit::Meter);
+    theGridPtr->setSize(GRID_X * CELL_SIZE, GRID_Y * CELL_SIZE, 0.0f, helios::core::units::Unit::Meter);
 
     float DELTA_TIME = 0.0f;
 
@@ -313,8 +329,6 @@ int main() {
 
         //leftStickGizmoNode->translate(vec3f(leftDir) * SCALING_VECTOR);
         //leftStickGizmoNode->scale(vec3f(leftDir) * SCALING_VECTOR);
-
-        spaceshipSceneNode->scale(SCALING_VECTOR);
 
         commandBuffer.flush(gameWorld);
         gameWorld.update(DELTA_TIME);

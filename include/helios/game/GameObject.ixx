@@ -10,6 +10,7 @@ import helios.scene.SceneNode;
 import helios.util.Guid;
 import helios.scene.Transform;
 import helios.math.types;
+import helios.core.units;
 
 export namespace helios::game {
 
@@ -48,6 +49,16 @@ export namespace helios::game {
     class GameObject {
 
     protected:
+
+        /**
+        * @brief Canonical size of the GameObject.
+        *
+        * @details Represents the default or intrinsic size of the GameObject
+        * in object space. This value is used as a reference for applying
+        * a scaling factor with setSize(), ensuring the method operates on
+        * appropriate values as the GameObject represents its size in model space.
+        */
+        const helios::math::vec3f canonicalSize_{};
 
         /**
          * @brief Unique identifier for this GameObject.
@@ -95,6 +106,25 @@ export namespace helios::game {
          * @brief Virtual destructor to ensure proper cleanup of derived classes.
          */
         virtual ~GameObject() = default;
+
+
+        /**
+         * @brief Sets the size of the GameObject in the game world.
+         *
+         * @param width The width of the GameObject, specified in the given unit.
+         * @param height The height of the GameObject, specified in the given unit.
+         * @param depth The depth of the GameObject, specified in the given unit.
+         * @param unit The unit of measurement for the size (default is meters).
+         *
+         * @return Reference to this GameObject for method chaining.
+         *
+         * @note The size is applied to the underlying SceneNode's transform.
+         *
+         * @warning If the associated SceneNode is destroyed, calling this method
+         *          will result in undefined behavior.
+         */
+        GameObject& setSize(float width, float height, float depth, helios::core::units::Unit unit=helios::core::units::Unit::Meter) noexcept;
+
 
         /**
          * @brief Updates the GameObject state for the current frame.

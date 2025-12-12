@@ -129,11 +129,59 @@ Perspective projection uses standard parameters:
 
 Both `zNear` and `zFar` are specified as positive values representing distances from the camera, regardless of the coordinate system handedness.
 
+## Units System
+
+### Standard Units
+
+helios uses a standardized unit system for consistent measurements across the engine:
+
+| Measurement | Standard Unit | Description |
+|-------------|---------------|-------------|
+| Distance    | **Meter**     | 1 helios unit (hu) = 1 meter |
+| Time        | **Seconds**   | Used for delta time, animations |
+
+### Helios Units (hu)
+
+The **helios unit** (hu) is the engine's standard unit of measurement:
+
+- **1 hu = 1 Meter**
+- All distances, positions, and sizes are expressed in meters by default
+
+This provides intuitive world-scale dimensions that match real-world measurements.
+
+### Usage Example
+
+```cpp
+import helios.core.units;
+
+using namespace helios::core::units;
+
+// Available unit types
+enum class Unit { Meter, Centimeter, HeliosUnit };
+
+// Set object size in world units (meters)
+gameObject->setSize(2.0f, 1.0f, 0.5f, Unit::Meter);
+
+// A 5-meter tall object
+constexpr float HEIGHT = 5.0f; // 5 hu = 5 meters
+```
+
+### Constants
+
+Unit definitions are available as `constexpr` in `helios::core::units`:
+
+```cpp
+// 1 helios unit = 1 meter
+constexpr float HELIOS_UNITS_PER_METER = 1.0f;
+```
+
 ## Related Modules
 
+- `helios.core.units` — Unit conversion and constants
 - `helios.math.types` — Core vector and matrix types (`vec3f`, `mat4f`)
 - `helios.math.utils` — Mathematical utility functions (`perspective`, `radians`, `degrees`)
 - `helios.scene.Transform` — Encapsulates translation, rotation, and scale
 - `helios.scene.Camera` — Projection matrix management
 - `helios.scene.CameraSceneNode` — View matrix computation and scene graph integration
+- `helios.scene.InheritTransform` — Selective transform inheritance flags
 

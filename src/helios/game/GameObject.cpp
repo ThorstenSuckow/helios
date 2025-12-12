@@ -23,6 +23,26 @@ namespace helios::game {
         return guid_;
     }
 
+    helios::math::vec3f GameObject::position() const noexcept {
+        return transform_->translation();
+    }
+
+    helios::math::vec2f GameObject::steeringInput() const noexcept {
+        return steeringInput_;
+    }
+
+    float GameObject::throttle() const noexcept {
+        return throttle_;
+    }
+
+    helios::math::vec3f GameObject::velocity() const noexcept {
+        return velocity_;
+    }
+
+    float GameObject::speedRatio() const noexcept {
+        return 0.0f;
+    }
+
     GameObject& GameObject::setSize(
         const float width, const float height, const float depth, const helios::core::units::Unit unit
     ) noexcept {

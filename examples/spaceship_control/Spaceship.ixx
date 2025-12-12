@@ -47,7 +47,7 @@ export namespace helios::examples::spaceshipControl {
         /**
          * @brief Maximum rotation speed in degrees per second.
          */
-        static constexpr float BASE_ROTATION_SPEED = 720.0f;
+        static constexpr float BASE_ROTATION_SPEED = 560.0f;
 
         /**
          * @brief Minimum movement speed before the ship stops completely.
@@ -58,6 +58,11 @@ export namespace helios::examples::spaceshipControl {
          * @brief Minimum rotation speed before rotation stops completely.
          */
         static constexpr float ROTATIONS_SPEED_THRESHOLD = 0.1f;
+
+        /**
+         * @brief MOVEMENT_ACCELERATION
+         */
+        static constexpr float MOVEMENT_ACCELERATION = 30.0f;
 
         /**
          * @brief Base movement speed in units per second.
@@ -109,10 +114,6 @@ export namespace helios::examples::spaceshipControl {
          */
         float deadzone = 0.4f;
 
-        /**
-         * @brief Current facing direction as a unit vector.
-         */
-        helios::math::vec3f actualDirection_ = helios::math::vec3f(1.0f, 1.0f, 0);
 
         /**
          * @brief Current world position of the spaceship.
@@ -152,9 +153,14 @@ export namespace helios::examples::spaceshipControl {
              * @todo normalization needs to happen with the input manager
              */
             if (speedFactor <= deadzone) {
+                steeringInput_ = helios::math::vec2f{0.0f, 0.0f};
+                throttle_ = 0.0f;
                 isInputActive_ = false;
                 return;
             }
+
+            steeringInput_ = direction;
+            throttle_ = speedFactor;
 
             assert(std::abs(direction.length() - 1.0f) <= 0.001f && "Unexpected direction vector - not normalized");
 
@@ -232,33 +238,42 @@ export namespace helios::examples::spaceshipControl {
             }
 
             // MOVEMENT
+            // Compute the current facing direction from the actual rotation angle.
+            // This converts the angle to a unit vector in the XY plane.
+            const auto actualDirection_ = helios::math::vec3f(
+                cos(helios::math::radians(actualRotationAngle_)), sin(helios::math::radians(actualRotationAngle_)), 0.0f
+            );
+
             if (!isInputActive_) {
-                actualMovementSpeed_ *= std::pow(MOVEMENT_DAMPENING, deltaTime);
-
-                if (actualMovementSpeed_ < MOVEMENT_SPEED_THRESHOLD) {
-                    actualMovementSpeed_ = 0.0f;
-                }
+                // Apply exponential drag when no input is active.
+                // This creates a smooth deceleration effect (velocity approaches zero over time).
+                const float drag  = std::pow(0.1f, deltaTime);
+                velocity_ = velocity_ * drag;
+            } else {
+                // Accelerate in the current facing direction.
+                // Uses throttle (input intensity) to scale acceleration.
+                velocity_ = velocity_ +  actualDirection_ *  (MOVEMENT_ACCELERATION * throttle_ * deltaTime);
             }
 
-            if (actualMovementSpeed_ > 0.0f) {
-                actualDirection_ = helios::math::vec3f(
-                    cos(helios::math::radians(actualRotationAngle_)), sin(helios::math::radians(actualRotationAngle_)), 0.0f
-                );
-
-                actualPosition_ = actualPosition_ + (actualDirection_ * actualMovementSpeed_ * deltaTime);
-                logger_.debug(std::format("Updating ship with position ({0},{1},{2}), speed {3}", actualPosition_[0], actualPosition_[1], actualPosition_[2], actualMovementSpeed_));
-                translate(actualPosition_);
-
+            // Clamp velocity to maximum speed to prevent unlimited acceleration.
+            if (velocity_.length() > BASE_MOVEMENT_SPEED) {
+                velocity_ = velocity_.normalize() * BASE_MOVEMENT_SPEED;
             }
 
+            // Integrate velocity to update position.
+            actualPosition_ = actualPosition_ + velocity_ * deltaTime;
+            translate(actualPosition_);
 
         }
 
-
-
-            
-
-        
+        /**
+         * @brief Returns the current speed as a ratio of maximum speed.
+         *
+         * @return A value between 0.0 (stationary) and 1.0 (maximum speed).
+         */
+        [[nodiscard]] float speedRatio() const noexcept override {
+            return velocity_.length() / BASE_MOVEMENT_SPEED;
+        }
 
     };
 

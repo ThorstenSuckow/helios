@@ -132,7 +132,7 @@ namespace helios::scene {
 
     helios::math::mat4f SceneNode::inheritWorldTransform(const helios::math::mat4f& parentWorldTransform) noexcept {
 
-        if (helios::scene::InheritTransform::has(inheritance_, helios::scene::InheritTransform::Inherit::Translation)) {
+        if (inheritance_ == helios::scene::InheritTransform::Inherit::Translation) {
             helios::math::mat4f id = helios::math::mat4f::identity();
             id(0, 3) = parentWorldTransform(0, 3);
             id(1, 3) = parentWorldTransform(1, 3);

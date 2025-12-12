@@ -10,10 +10,14 @@ module;
 
 export module helios.math.types:vec2;
 
+
 import helios.math.concepts;
 import helios.math.traits.FloatingPointType;
 
 export namespace helios::math {
+
+    template<helios::math::Numeric T>
+    struct vec3;
 
     /**
      * @brief Represents a 2-dimensional vector of the generic type <T>.
@@ -49,6 +53,14 @@ export namespace helios::math {
          */
         constexpr vec2(const T x, const T y) noexcept : v{x, y} {}
 
+        /**
+         * @brief Converts the current vec2<T> into a 3D vector representation.
+         *
+         * @return A 3D vector corresponding to the converted representation of the object or input.
+         */
+        constexpr helios::math::vec3<T> toVec3() {
+            return helios::math::vec3<T>{v[0], v[1], static_cast<T>(0)};
+        }
 
         /**
          * @brief Provides read only access to the vector components.

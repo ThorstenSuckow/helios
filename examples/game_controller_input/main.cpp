@@ -205,11 +205,11 @@ int main() {
 
     // scene nodes
     const auto stickLeftNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>(circleRenderable));
-    auto stickAxisLeft_ptr = stickLeftNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(lineRenderable));
+    auto stickAxisLeft_ptr = stickLeftNode_ptr->addNode(std::make_unique<helios::scene::SceneNode>(lineRenderable));
 
     // right stick
     const auto stickRightNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>(circleRenderable));
-    auto stickAxisRight_ptr = stickRightNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(lineRenderable));
+    auto stickAxisRight_ptr = stickRightNode_ptr->addNode(std::make_unique<helios::scene::SceneNode>(lineRenderable));
 
     // left/right trigger
     const auto triggerLeftNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>(recRenderable));
@@ -217,18 +217,18 @@ int main() {
 
     // buttons
     const auto buttonGroupNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>());
-    const auto buttonA_ptr = buttonGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(buttonRenderableA));
-    const auto buttonB_ptr = buttonGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(buttonRenderableB));
-    const auto buttonX_ptr = buttonGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(buttonRenderableX));
-    const auto buttonY_ptr = buttonGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(buttonRenderableY));
+    const auto buttonA_ptr = buttonGroupNode_ptr->addNode(std::make_unique<helios::scene::SceneNode>(buttonRenderableA));
+    const auto buttonB_ptr = buttonGroupNode_ptr->addNode(std::make_unique<helios::scene::SceneNode>(buttonRenderableB));
+    const auto buttonX_ptr = buttonGroupNode_ptr->addNode(std::make_unique<helios::scene::SceneNode>(buttonRenderableX));
+    const auto buttonY_ptr = buttonGroupNode_ptr->addNode(std::make_unique<helios::scene::SceneNode>(buttonRenderableY));
 
     // dpad
 
     const auto dpadGroupNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>());
-    const auto dpadLft_ptr = dpadGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(dpadRenderableLft));
-    const auto dpadRgt_ptr = dpadGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(dpadRenderableRgt));
-    const auto dpadUp_ptr = dpadGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(dpadRenderableUp));
-    const auto dpadDown_ptr = dpadGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(dpadRenderableDown));
+    const auto dpadLft_ptr = dpadGroupNode_ptr->addNode(std::make_unique<helios::scene::SceneNode>(dpadRenderableLft));
+    const auto dpadRgt_ptr = dpadGroupNode_ptr->addNode(std::make_unique<helios::scene::SceneNode>(dpadRenderableRgt));
+    const auto dpadUp_ptr = dpadGroupNode_ptr->addNode(std::make_unique<helios::scene::SceneNode>(dpadRenderableUp));
+    const auto dpadDown_ptr = dpadGroupNode_ptr->addNode(std::make_unique<helios::scene::SceneNode>(dpadRenderableDown));
 
 
 

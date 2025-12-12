@@ -74,7 +74,7 @@ auto buttonRenderableA = std::make_shared<Renderable>(
 
 // Add the renderable to a scene node
 const auto buttonGroupNode_ptr = scene.addNode(std::make_unique<SceneNode>());
-const auto buttonA_ptr = buttonGroupNode_ptr->addChild(
+const auto buttonA_ptr = buttonGroupNode_ptr->addNode(
     std::make_unique<SceneNode>(buttonRenderableA)
 );
 ```

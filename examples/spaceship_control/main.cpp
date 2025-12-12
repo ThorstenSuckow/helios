@@ -49,6 +49,7 @@ import helios.scene.SceneNode;
 import helios.scene.CullNoneStrategy;
 import helios.scene.Camera;
 import helios.scene.CameraSceneNode;
+import helios.scene.InheritTransform;
 
 // util
 import helios.util.io.BasicStringFileReader;
@@ -118,7 +119,7 @@ int main() {
     // ========================================
 
     const auto app = GLFWFactory::makeOpenGLApp(
-        "helios - Spaceship Control", 800, 600, ASPECT_RATIO_NUMER, ASPECT_RATIO_DENOM
+        "helios - Spaceship Control", 1980, 1024, ASPECT_RATIO_NUMER, ASPECT_RATIO_DENOM
     );
 
     auto win = dynamic_cast<GLFWWindow*>(app->current());
@@ -254,12 +255,16 @@ int main() {
     // Add the spaceship as a scene node
     auto* spaceshipSceneNode =
             scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(spaceshipRenderable)));
+    spaceshipSceneNode->translate(helios::math::vec3f{0.0f, 0.0f, 1.0f});
 
     // Add the gizmos
     auto* leftStickGizmoNode =
-            scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(leftStickGizmoRenderable)));
+            spaceshipSceneNode->addNode(std::make_unique<helios::scene::SceneNode>(std::move(leftStickGizmoRenderable)));
     auto* shipDirectionGizmoNode =
-            scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(shipDirectionGizmoRenderable)));
+            spaceshipSceneNode->addNode(std::make_unique<helios::scene::SceneNode>(std::move(shipDirectionGizmoRenderable)));
+    leftStickGizmoNode->setInheritance(helios::scene::InheritTransform::Inherit::Translation);
+    shipDirectionGizmoNode->setInheritance(helios::scene::InheritTransform::Inherit::Translation);
+
 
     // ========================================
     // 7. Register mainViewport-Camera w/ Setup
@@ -267,7 +272,8 @@ int main() {
     auto mainViewportCam = std::make_unique<helios::scene::Camera>();
     auto cameraSceneNode = std::make_unique<helios::scene::CameraSceneNode>(std::move(mainViewportCam));
     auto cameraSceneNode_ptr = cameraSceneNode.get();
-    std::ignore = scene->addNode(std::move(cameraSceneNode));
+    std::ignore = spaceshipSceneNode->addNode(std::move(cameraSceneNode));
+    cameraSceneNode_ptr->setInheritance(helios::scene::InheritTransform::Inherit::Translation);
     mainViewport->setCameraSceneNode(cameraSceneNode_ptr);
     cameraSceneNode_ptr->translate(
         helios::math::vec3f(0.0f, 0.0f, -(GRID_Y*CELL_SIZE / 2.0f)/tan(FOVY/2))
@@ -283,7 +289,6 @@ int main() {
         vec3f(0.0f, 1.0f, 0.0f)
     );
     cameraWidget->addCameraSceneNode("Main Camera", cameraSceneNode_ptr);
-
 
 
 
@@ -323,18 +328,13 @@ int main() {
         const auto inputSnapshot = helios::game::InputSnapshot(gamepadState);
         spaceshipInputHandler.handleInput(inputSnapshot, spaceshipPtr->guid(), commandBuffer);
 
-        const auto leftDir = gamepadState.left();
-        const vec2f targetDirection = leftDir.normalize();
-        const float leftDirLength = leftDir.length();
-
-        //leftStickGizmoNode->translate(vec3f(leftDir) * SCALING_VECTOR);
-        //leftStickGizmoNode->scale(vec3f(leftDir) * SCALING_VECTOR);
-
         commandBuffer.flush(gameWorld);
         gameWorld.update(DELTA_TIME);
 
-        //shipDirectionGizmoNode->translate(currentDirection * SCALING_VECTOR);
-        //shipDirectionGizmoNode->scale(currentDirection * SCALING_VECTOR);
+        // update gizmo nodes
+        leftStickGizmoNode->scale((spaceshipPtr->steeringInput() * spaceshipPtr->throttle()  * 4.0f).toVec3());
+        shipDirectionGizmoNode->scale(spaceshipPtr->velocity().normalize() * spaceshipPtr->speedRatio() * 4.0f);
+
 
         // Create a snapshot of the scene and render it
         const auto& snapshot = scene->createSnapshot(mainViewport);

@@ -81,6 +81,7 @@ import helios.ext.imgui.widgets.GamepadWidget;
 import helios.ext.imgui.widgets.LogWidget;
 import helios.ext.imgui.widgets.CameraWidget;
 import helios.ext.imgui.ImGuiLogSink;
+import helios.examples.spaceshipControl.SpaceshipWidget;
 
 // game input handling, game objects
 import helios.core.units;
@@ -172,11 +173,13 @@ int main() {
     auto gamepadWidget = new helios::ext::imgui::widgets::GamepadWidget(&inputManager);
     auto logWidget = new helios::ext::imgui::widgets::LogWidget();
     auto cameraWidget = new helios::ext::imgui::widgets::CameraWidget();
+    auto spaceshipWidget = new helios::examples::spaceshipControl::SpaceshipWidget();
     imguiOverlay.addWidget(menu);
     imguiOverlay.addWidget(fpsWidget);
     imguiOverlay.addWidget(gamepadWidget);
     imguiOverlay.addWidget(logWidget);
     imguiOverlay.addWidget(cameraWidget);
+    imguiOverlay.addWidget(spaceshipWidget);
 
     // ========================================
     // 1.3 Logger Configuration
@@ -316,8 +319,12 @@ int main() {
     auto gameWorld = helios::game::GameWorld{};
     auto commandBuffer = helios::game::CommandBuffer{};
 
-    auto* spaceshipPtr = gameWorld.addGameObject(
-        std::make_unique<helios::examples::spaceshipControl::Spaceship>(spaceshipSceneNode));
+    auto spaceship_uptr = std::make_unique<helios::examples::spaceshipControl::Spaceship>(spaceshipSceneNode);
+    auto spaceship_wptr = spaceship_uptr.get();
+    auto* spaceshipPtr = gameWorld.addGameObject(std::move(spaceship_uptr));
+
+    spaceshipWidget->addSpaceship("Player 1", spaceship_wptr);
+
     auto* theGridPtr = gameWorld.addGameObject(
         std::make_unique<helios::examples::spaceshipControl::TheGrid>(gridSceneNode));
 

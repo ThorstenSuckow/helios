@@ -164,15 +164,40 @@ cubeNode->scale(vec3f(0.5f, 0.5f, 0.5f));
 - **SceneNode**: An object in the scene with a transform (position, rotation, scale)
 - **Culling Strategy**: Determines which objects are visible (here: render everything)
 
-### 7. Camera Setup
+### 7. Camera and Viewport Setup
 
-The camera defines the viewpoint from which we observe the scene:
+The camera defines the viewpoint from which we observe the scene. In helios, cameras are integrated into the scene graph via `CameraSceneNode`:
 
 ```cpp
-auto cam = std::make_unique<Camera>();
-auto* cameraNode = scene->addNode(std::move(cam));
-const auto* camera = static_cast<const Camera*>(cameraNode);
+// Create viewport
+auto mainViewport = std::make_shared<Viewport>(0.0f, 0.0f, 1.0f, 1.0f);
+win->addViewport(mainViewport);
+
+// Create camera with projection settings
+auto camera = std::make_unique<Camera>();
+camera->setPerspective(
+    helios::math::radians(90.0f),  // FOV in radians
+    16.0f / 9.0f,                   // Aspect ratio
+    0.1f,                           // Near plane
+    1000.0f                         // Far plane
+);
+
+// Add camera to scene graph
+auto cameraNode = std::make_unique<CameraSceneNode>(std::move(camera));
+auto* camPtr = scene->addNode(std::move(cameraNode));
+
+// Position the camera
+camPtr->translate(vec3f(0.0f, 0.0f, 3.0f));
+camPtr->lookAt(vec3f(0.0f, 0.0f, 0.0f), vec3f(0.0f, 1.0f, 0.0f));
+
+// Connect viewport to camera
+mainViewport->setCameraSceneNode(camPtr);
 ```
+
+**Camera Concepts:**
+- **Camera**: Defines projection parameters (FOV, aspect ratio, near/far planes)
+- **CameraSceneNode**: Scene graph node that owns the camera and computes the view matrix
+- **Viewport**: Defines the render target area and references the active camera
 
 ### 8. Main Render Loop
 
@@ -207,9 +232,11 @@ while (!win->shouldClose()) {
     ));
 
     // 5. Render the scene
-    const auto& snapshot = scene->createSnapshot(*camera);
-    auto renderPass = RenderPassFactory::getInstance().buildRenderPass(snapshot);
-    app->renderingDevice().render(renderPass);
+    const auto& snapshot = scene->createSnapshot(mainViewport);
+    if (snapshot.has_value()) {
+        auto renderPass = RenderPassFactory::getInstance().buildRenderPass(*snapshot);
+        app->renderingDevice().render(renderPass);
+    }
 
     // 6. Swap buffers (display the result)
     win->swapBuffers();
@@ -220,7 +247,7 @@ while (!win->shouldClose()) {
 1. **Event Processing**: Handle window events (resize, close, etc.)
 2. **Input Handling**: Check for keyboard/mouse input
 3. **Update Logic**: Modify object transformations (rotation, position, etc.)
-4. **Rendering**: Capture scene state and render it
+4. **Rendering**: Create snapshot from viewport's camera and render it
 5. **Buffer Swap**: Display the rendered frame
 
 ## Building and Running

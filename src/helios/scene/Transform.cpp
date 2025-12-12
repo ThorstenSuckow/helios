@@ -10,6 +10,7 @@ namespace helios::scene {
 
 
     helios::math::mat4f Transform::updateCache() const {
+        needsUpdate_ = false;
         return math::translate(
             helios::math::mat4f::identity(),
             translation_)  *

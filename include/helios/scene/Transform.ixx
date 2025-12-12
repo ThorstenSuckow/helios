@@ -33,11 +33,11 @@ export namespace helios::scene {
          * @brief Flag indicating whether this Transform needs to recompute
          * its transformation matrix.
          */
-        bool needsUpdate_ = true;
+        mutable bool needsUpdate_ = true;
 
-            /**
-             * @brief The rotation component of the transformation, stored as a 4x4 matrix.
-             */
+        /**
+         * @brief The rotation component of the transformation, stored as a 4x4 matrix.
+         */
         helios::math::mat4f rotation_ = helios::math::mat4f::identity();
 
         /**

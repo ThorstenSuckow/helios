@@ -147,9 +147,10 @@ export namespace helios::math {
          *
          * @details
          * Creates a vec4 with the x, y, z components from this vector and sets
-         * the w component to 1.0, representing a position in homogeneous coordinates.
+         * the w component to 0, representing a direction in homogeneous coordinates.
+         * For position vectors (w = 1), construct the vec4 directly.
          *
-         * @return A new vec4<T> instance with components (x, y, z, 1.0).
+         * @return A new vec4<T> instance with components (x, y, z, 0).
          */
         [[nodiscard]] vec4<T> toVec4() const noexcept;
 
@@ -171,6 +172,7 @@ export namespace helios::math {
         constexpr bool operator==(const vec3<T>& rgt) const {
             return v[0] == rgt[0] && v[1] == rgt[1] && v[2] == rgt[2];
         }
+
 
         /**
          * @brief Compares this vector's elements with the rgt vector considering
@@ -202,7 +204,7 @@ export namespace helios::math {
      *
      * @tparam T The numeric type of the vector components.
      * @param v The vec3<T> vector to be multiplied.
-     * @param n The scalar vector to multiplay the vector by.
+     * @param n The scalar value to multiply the vector by.
      *
      * @return a new vec3<T> instance representing the result of the scalar
      * multiplication.
@@ -212,6 +214,23 @@ export namespace helios::math {
         return vec3<T>{v[0] * n, v[1] * n, v[2] * n};
     }
 
+    /**
+     * @brief Divides a 3D vector by a scalar value.
+     *
+     * @tparam T The numeric type of the vector components.
+     * @param v The vec3<T> vector to be divided.
+     * @param s The scalar divisor. Must not be zero.
+     *
+     * @return A new vec3<T> instance representing the result of the scalar division.
+     *
+     * @pre s != 0 (asserted in debug builds).
+     */
+    template<helios::math::Numeric T>
+    constexpr vec3<T> operator/(const vec3<T>& v, T s) noexcept {
+        assert(static_cast<T>(0) != s && "s must not be 0");
+        const T inv = static_cast<T>(1) / s;
+        return vec3<T>{ v[0] * inv, v[1] * inv, v[2] * inv };
+    }
 
     /**
      * @brief Multiplies a scalar value by a 3D vector.
@@ -242,6 +261,7 @@ export namespace helios::math {
     constexpr vec3<T> operator*(const vec3<T>& v1, const vec3<T>& v2) noexcept {
         return vec3<T>{v1[0] * v2[0], v1[1] * v2[1], v1[2] * v2[2]};
     }
+
 
     /**
      * @brief Calculates the componentwise sum of the two vectors.

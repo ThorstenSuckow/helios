@@ -55,7 +55,7 @@ namespace helios::scene {
     };
 
 
-    SceneNode* SceneNode::addChild(std::unique_ptr<SceneNode> sceneNode) {
+    SceneNode* SceneNode::addNode(std::unique_ptr<SceneNode> sceneNode) {
         auto& ref = *children_.emplace_back(std::move(sceneNode));
         ref.setParent(this);
         return &ref;
@@ -112,16 +112,37 @@ namespace helios::scene {
     }
 
 
-    bool SceneNode::setWorldTransform(
-        const helios::math::mat4f& wf, helios::scene::SceneGraphKey sceneGraphKey
+    bool SceneNode::applyWorldTransform(
+        const helios::math::mat4f& parentWorldTransform, helios::scene::SceneGraphKey sceneGraphKey
         ) noexcept {
 
-        if (worldTransform_.same(wf)) {
+        const auto newWt = inheritWorldTransform(parentWorldTransform);
+
+        if (!needsUpdate() && worldTransform_.same(newWt)) {
             return false;
         }
-        worldTransform_ = wf;
+
+        worldTransform_ = newWt;
         needsUpdate_ = false;
+
+
+        onWorldTransformUpdate();
         return true;
+    }
+
+    helios::math::mat4f SceneNode::inheritWorldTransform(const helios::math::mat4f& parentWorldTransform) noexcept {
+
+        if (helios::scene::InheritTransform::has(inheritance_, helios::scene::InheritTransform::Inherit::Translation)) {
+            helios::math::mat4f id = helios::math::mat4f::identity();
+            id(0, 3) = parentWorldTransform(0, 3);
+            id(1, 3) = parentWorldTransform(1, 3);
+            id(2, 3) = parentWorldTransform(2, 3);
+
+            return id * localTransform_.transform();
+        } else {
+            return parentWorldTransform * localTransform_.transform();
+        }
+
     }
 
 
@@ -152,22 +173,36 @@ namespace helios::scene {
 
     }
 
+
     void SceneNode::update() noexcept {
         needsUpdate_ = false;
 
         if (parent_ == nullptr) {
             worldTransform_ = localTransform_.transform();
         } else {
-            worldTransform_ = parent_->worldTransform() * localTransform_.transform();
+            worldTransform_ = inheritWorldTransform(parent_->worldTransform());
         }
 
+        onWorldTransformUpdate();
+
+    }
+
+    void SceneNode::onWorldTransformUpdate() noexcept {
         if (renderable_) {
             if (const auto prototype = renderable_->renderPrototype()) {
                 const auto& localAABB = prototype->mesh().aabb();
                 aabb_ = localAABB.transform(worldTransform_);
             }
         }
+    }
 
+    helios::scene::InheritTransform::Inherit SceneNode::inheritance() const noexcept {
+        return inheritance_;
+    }
+
+    void SceneNode::setInheritance(const helios::scene::InheritTransform::Inherit inherit) noexcept {
+        inheritance_ = inherit;
+        needsUpdate_ = true;
     }
 
 };

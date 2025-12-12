@@ -16,6 +16,8 @@ import helios.rendering.Renderable;
 import helios.util.Guid;
 import helios.scene.Transform;
 import helios.math.types;
+import helios.scene.InheritTransform;
+
 
 export namespace helios::scene {
 
@@ -114,13 +116,15 @@ export namespace helios::scene {
          */
         helios::math::aabbf aabb_{};
 
+        helios::scene::InheritTransform::Inherit inheritance_ = helios::scene::InheritTransform::Inherit::All;
+
         /**
          * @brief Sets the parent of this SceneNode.
          * Internally used once a child was added to this SceneNode.
          *
          * @param parentNode The parent of this SceneNode
          *
-         * @see addChild()
+         * @see addNode()
          */
         void setParent(SceneNode* parentNode);
 
@@ -199,7 +203,7 @@ export namespace helios::scene {
              * @return The raw pointer to the newly added node, or nullptr if
              * adding failed
              */
-            [[nodiscard]] virtual SceneNode* addChild(std::unique_ptr<SceneNode> sceneNode);
+            [[nodiscard]] virtual SceneNode* addNode(std::unique_ptr<SceneNode> sceneNode);
 
             /**
              * @brief Returns a const ref to the list of this node's children.
@@ -291,7 +295,7 @@ export namespace helios::scene {
              *
              * @return true if the world transform was updated, otherwise false.
              */
-            [[nodiscard]] bool setWorldTransform(
+            [[nodiscard]] bool applyWorldTransform(
                 const helios::math::mat4f& wf, helios::scene::SceneGraphKey sceneGraphKey
                 ) noexcept;
 
@@ -304,7 +308,7 @@ export namespace helios::scene {
              *
              * @return The current world transform matrix for this scene node.
              */
-            virtual const helios::math::mat4f& worldTransform() noexcept;
+            const helios::math::mat4f& worldTransform() noexcept;
 
             /**
              * @brief Returns the current worldTransform matrix of this SceneNode
@@ -343,6 +347,53 @@ export namespace helios::scene {
              */
             void update() noexcept;
 
+            /**
+             * @brief Virtual callback invoked after the world transform has been updated.
+             *
+             * Derived classes can override this method to perform additional processing
+             * when the node's world transform changes, such as updating dependent
+             * resources or triggering view matrix recalculations in camera nodes.
+             */
+            virtual void onWorldTransformUpdate() noexcept;
+
+            /**
+             * @brief Filters a parent world transform based on the node's inheritance flags.
+             *
+             * This method extracts only the transform components (Translation, Rotation, Scale)
+             * that this node is configured to inherit from its parent. Components not included
+             * in `inheritance_` are replaced with identity values.
+             *
+             * @param parentWorldTransform The parent's world transform matrix.
+             *
+             * @return A filtered transform matrix containing only the inherited components.
+             *
+             * @see setInheritance()
+             * @see InheritTransform::Inherit
+             */
+            helios::math::mat4f inheritWorldTransform(const helios::math::mat4f& parentWorldTransform) noexcept;
+
+            /**
+             * @brief Sets which transform components this node inherits from its parent.
+             *
+             * By default, nodes inherit all transform components (`Inherit::All`).
+             * Use this method to selectively inherit only Translation, Rotation, or Scale,
+             * enabling behaviors like cameras that follow an object's position but maintain
+             * independent orientation.
+             *
+             * @param inherit The inheritance flags to apply.
+             *
+             * @see InheritTransform::Inherit
+             */
+            void setInheritance(const helios::scene::InheritTransform::Inherit inherit) noexcept;
+
+            /**
+             * @brief Returns the current transform inheritance flags for this node.
+             *
+             * @return The active inheritance mask.
+             *
+             * @see setInheritance()
+             */
+            [[nodiscard]] helios::scene::InheritTransform::Inherit inheritance() const noexcept;
     };
 
 } // namespace helios::scene

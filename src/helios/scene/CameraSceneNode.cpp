@@ -1,12 +1,14 @@
 module;
 
 #include <cassert>
+#include <iostream>
 #include <memory>
 #include <stdexcept>
 
 module helios.scene.CameraSceneNode;
 
 import helios.math.types;
+import helios.math.transform;
 import helios.scene.SceneNode;
 import helios.scene.Camera;
 
@@ -19,7 +21,7 @@ namespace helios::scene {
         }
     }
 
-    SceneNode* CameraSceneNode::addChild(std::unique_ptr<SceneNode> sceneNode) {
+    SceneNode* CameraSceneNode::addNode(std::unique_ptr<SceneNode> sceneNode) {
         assert(false && "CameraSceneNode does not accept child nodes.");
         return nullptr;
     }
@@ -67,9 +69,12 @@ namespace helios::scene {
         rotate(parentRotationT * worldRotation);
     }
 
-    const helios::math::mat4f& CameraSceneNode::worldTransform() noexcept {
+    void CameraSceneNode::onWorldTransformUpdate() noexcept {
+
+        helios::scene::SceneNode::SceneNode::onWorldTransformUpdate();
+
         // Updates this SceneNode's worldTransform_
-        const auto wt = helios::scene::SceneNode::worldTransform();
+        const auto wt = helios::scene::SceneNode::cachedWorldTransform();
 
         const auto x = helios::math::vec3f{wt(0, 0), wt(1, 0), wt(2, 0)};
         const auto y = helios::math::vec3f{wt(0, 1), wt(1, 1), wt(2, 1)};
@@ -85,8 +90,6 @@ namespace helios::scene {
             -dot(x, eye), -dot(y, eye), dot(z, eye), 1.0f
         };
         std::ignore = camera_->setViewMatrix(inv);
-
-        return worldTransform_;
     }
 
 } // namespace helios::scene

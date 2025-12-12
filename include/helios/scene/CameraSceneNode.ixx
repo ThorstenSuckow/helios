@@ -59,7 +59,7 @@ export namespace helios::scene {
          *
          * @see https://stackoverflow.com/questions/24609872/delete-virtual-function-from-a-derived-class
          */
-        [[nodiscard]] SceneNode* addChild(std::unique_ptr<SceneNode> sceneNode) override;
+        [[nodiscard]] SceneNode* addNode(std::unique_ptr<SceneNode> sceneNode) override;
 
         /**
          * @brief Gets the camera associated with this scene node.
@@ -96,23 +96,16 @@ export namespace helios::scene {
          */
         void lookAt(helios::math::vec3f target, helios::math::vec3f up);
 
-
         /**
-         * @brief Computes the world transform and updates the associated camera's view matrix.
+         * @brief Callback invoked when the world transform of this node changes.
          *
-         * This override extends `SceneNode::worldTransform()` by additionally computing the
-         * view matrix from the camera's world transform. The view matrix is the inverse of the
-         * world transform, with the Z-axis negated to convert from helios' Left-Handed System
-         * to OpenGL's Right-Handed clip space.
+         * Overrides the base class implementation to update the camera's view matrix
+         * whenever the node's position or orientation in the scene graph changes.
+         * This ensures the camera always reflects the current world-space transform.
          *
-         * The computed view matrix is automatically assigned to the underlying `Camera` instance.
-         *
-         * @return A const reference to this node's world transform matrix.
-         *
-         * @see helios::scene::Camera::setViewMatrix()
-         * @see helios::scene::SceneNode::worldTransform()
+         * @see SceneNode::onWorldTransformUpdate()
          */
-        const helios::math::mat4f& worldTransform() noexcept override;
+        void onWorldTransformUpdate() noexcept override;
     };
 
 }

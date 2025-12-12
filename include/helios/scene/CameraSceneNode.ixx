@@ -90,11 +90,24 @@ export namespace helios::scene {
          *
          * @note The up vector should typically be `(0, 1, 0)` for standard upright orientation.
          *
-         * @todo Implement `lookAtLocal()` for observing nodes in local space.
-         *
+         * @see lookAtLocal()
          * @see helios::scene::SceneNode::rotate()
          */
         void lookAt(helios::math::vec3f target, helios::math::vec3f up);
+
+        /**
+         * @brief Orients this camera node to look at a target position in local space.
+         *
+         * Similar to `lookAt()`, but the target and up vector are interpreted relative
+         * to this node's local coordinate system rather than world space. Useful when
+         * the camera should track objects within the same local hierarchy.
+         *
+         * @param targetLocal The local-space coordinates of the target to look at.
+         * @param upLocal The up vector defining the camera's vertical orientation in local space.
+         *
+         * @see lookAt()
+         */
+        void lookAtLocal(helios::math::vec3f targetLocal, helios::math::vec3f upLocal);
 
         /**
          * @brief Callback invoked when the world transform of this node changes.

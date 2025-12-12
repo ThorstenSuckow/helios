@@ -273,7 +273,9 @@ int main() {
     auto cameraSceneNode = std::make_unique<helios::scene::CameraSceneNode>(std::move(mainViewportCam));
     auto cameraSceneNode_ptr = cameraSceneNode.get();
     std::ignore = spaceshipSceneNode->addNode(std::move(cameraSceneNode));
-    cameraSceneNode_ptr->setInheritance(helios::scene::InheritTransform::Inherit::Translation);
+    cameraSceneNode_ptr->setInheritance(
+        helios::scene::InheritTransform::Inherit::Translation
+    );
     mainViewport->setCameraSceneNode(cameraSceneNode_ptr);
     cameraSceneNode_ptr->translate(
         helios::math::vec3f(0.0f, 0.0f, -(GRID_Y*CELL_SIZE / 2.0f)/tan(FOVY/2))
@@ -284,7 +286,7 @@ int main() {
         0.1f,
         1000.0f
     );
-    cameraSceneNode_ptr->lookAt(
+    cameraSceneNode_ptr->lookAtLocal(
         vec3f(0.0f, 0.0f, 0.0f),
         vec3f(0.0f, 1.0f, 0.0f)
     );

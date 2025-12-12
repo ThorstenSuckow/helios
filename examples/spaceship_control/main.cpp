@@ -1,8 +1,15 @@
+// ============================================================================
+// Includes
+// ============================================================================
 #include <algorithm>
 #include <cstdlib>
 #include <glad/gl.h>
 #include <iostream>
 #include <numbers>
+
+// ============================================================================
+// Module Imports
+// ============================================================================
 
 // Helios Core Modules
 import helios.math.types;
@@ -85,6 +92,10 @@ import helios.examples.spaceshipControl.TheGrid;
 import helios.examples.spaceshipControl.InputHandler;
 
 
+// ============================================================================
+// Using Declarations
+// ============================================================================
+
 using namespace helios::ext::glfw::app;
 using namespace helios::rendering;
 using namespace helios::rendering::model;
@@ -102,8 +113,15 @@ using namespace helios::scene;
 using namespace helios::math;
 
 
+// ============================================================================
+// Entry Point
+// ============================================================================
+
 int main() {
 
+    // ========================================
+    // Constants
+    // ========================================
     constexpr float CELL_SIZE          = 5.0f;
     constexpr float SPACESHIP_SIZE     = 5.0f;
     constexpr float GRID_X             = 29.0f;
@@ -161,7 +179,7 @@ int main() {
     imguiOverlay.addWidget(cameraWidget);
 
     // ========================================
-    // Configure Logger
+    // 1.3 Logger Configuration
     // ========================================
     helios::util::log::LogManager::getInstance().enableLogging(true);
     auto imguiLogSink = std::make_shared<helios::ext::imgui::ImGuiLogSink>(logWidget);
@@ -251,7 +269,6 @@ int main() {
     // Add the grid
     auto* gridSceneNode = scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(gridRenderable)));
 
-
     // Add the spaceship as a scene node
     auto* spaceshipSceneNode =
             scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(spaceshipRenderable)));
@@ -292,9 +309,6 @@ int main() {
     );
     cameraWidget->addCameraSceneNode("Main Camera", cameraSceneNode_ptr);
 
-
-
-
     // ========================================
     // 9. Game-related Input-handling, GameWorld and GameObjects
     // ========================================
@@ -312,11 +326,15 @@ int main() {
 
     float DELTA_TIME = 0.0f;
 
-
+    // ========================================
+    // 10. Main Game Loop
+    // ========================================
     while (!win->shouldClose()) {
         framePacer.beginFrame();
 
-        // Process window and input events
+        // ----------------------------------------
+        // 10.1 Event and Input Processing
+        // ----------------------------------------
         app->eventManager().dispatchAll();
         inputManager.poll(0.0f);
 
@@ -326,6 +344,9 @@ int main() {
             win->setShouldClose(true);
         }
 
+        // ----------------------------------------
+        // 10.2 Game Logic Update
+        // ----------------------------------------
         const GamepadState& gamepadState = inputManager.gamepadState(Gamepad::ONE);
         const auto inputSnapshot = helios::game::InputSnapshot(gamepadState);
         spaceshipInputHandler.handleInput(inputSnapshot, spaceshipPtr->guid(), commandBuffer);
@@ -333,12 +354,15 @@ int main() {
         commandBuffer.flush(gameWorld);
         gameWorld.update(DELTA_TIME);
 
-        // update gizmo nodes
+        // ----------------------------------------
+        // 10.3 Gizmo / Debug Visualization Update
+        // ----------------------------------------
         leftStickGizmoNode->scale((spaceshipPtr->steeringInput() * spaceshipPtr->throttle()  * 4.0f).toVec3());
         shipDirectionGizmoNode->scale(spaceshipPtr->velocity().normalize() * spaceshipPtr->speedRatio() * 4.0f);
 
-
-        // Create a snapshot of the scene and render it
+        // ----------------------------------------
+        // 10.4 Rendering
+        // ----------------------------------------
         const auto& snapshot = scene->createSnapshot(mainViewport);
         if (snapshot.has_value()) {
             auto renderPass = RenderPassFactory::getInstance().buildRenderPass(*snapshot);
@@ -350,8 +374,9 @@ int main() {
         // ========================================
         imguiOverlay.render();
 
-
-        // Swap front and back buffers
+        // ----------------------------------------
+        // 10.5 Frame Synchronization
+        // ----------------------------------------
         // swap time / idle time should be read out here
         win->swapBuffers();
 

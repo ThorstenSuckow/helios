@@ -84,6 +84,21 @@ export namespace helios::game {
          */
         helios::scene::Transform* transform_;
 
+        /**
+         * @brief The current velocity-vector, if any.
+         */
+        helios::math::vec3f velocity_{};
+
+        /**
+         * @brief The current steeringInput-vector, if any.
+         */
+        helios::math::vec2f steeringInput_{};
+
+        /**
+         * @brief Normalized value for the throttle, if any.
+         */
+        float throttle_ = 0.0f;
+
     public:
 
         /**
@@ -125,6 +140,54 @@ export namespace helios::game {
          */
         GameObject& setSize(float width, float height, float depth, helios::core::units::Unit unit=helios::core::units::Unit::Meter) noexcept;
 
+        /**
+         * @brief Returns the current position of the GameObject in local coordinates.
+         *
+         * @return The position vector in world space.
+         */
+        [[nodiscard]] helios::math::vec3f position() const noexcept;
+
+        /**
+         * @brief Returns the current steering input vector.
+         *
+         * @return The normalized direction vector representing input from controls.
+         *
+         * @details This vector indicates the desired movement direction as provided
+         *          by the player or AI controller. A zero vector indicates no input.
+         */
+        [[nodiscard]] helios::math::vec2f steeringInput() const noexcept;
+
+        /**
+         * @brief Returns the current throttle value.
+         *
+         * @return A normalized value between 0.0 (idle) and 1.0 (full throttle).
+         *
+         * @details Represents the intensity of the movement input, typically derived
+         *          from analog stick magnitude or key press duration.
+         */
+        [[nodiscard]] float throttle() const noexcept;
+
+        /**
+         * @brief Returns the current velocity vector.
+         *
+         * @return The velocity vector in units per second.
+         *
+         * @details Represents the current movement direction and speed of the
+         *          GameObject in world space.
+         */
+        [[nodiscard]] helios::math::vec3f velocity() const noexcept;
+
+        /**
+         * @brief Returns the current speed as a ratio of maximum speed.
+         *
+         * @return A value between 0.0 (stationary) and 1.0 (maximum speed).
+         *
+         * @details This ratio can be used for UI elements (e.g., speedometer),
+         *          audio effects (e.g., engine pitch), or visual effects that
+         *          scale with velocity. Derived classes should override this
+         *          method to provide entity-specific speed calculations.
+         */
+        [[nodiscard]] virtual float speedRatio() const noexcept;
 
         /**
          * @brief Updates the GameObject state for the current frame.

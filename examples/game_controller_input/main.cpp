@@ -325,11 +325,9 @@ int main() {
 
         // scaling
         // sticks:
-        stickAxisLeft_ptr->scale(helios::math::vec3f(gamepadState.left()*0.5f));
-        stickAxisLeft_ptr->translate(helios::math::vec3f(gamepadState.left()*0.5f));
+        stickAxisLeft_ptr->scale(helios::math::vec3f(gamepadState.left()));
 
-        stickAxisRight_ptr->scale(helios::math::vec3f(gamepadState.right()*0.5f));
-        stickAxisRight_ptr->translate(helios::math::vec3f(gamepadState.right()*0.5f));
+        stickAxisRight_ptr->scale(helios::math::vec3f(gamepadState.right()));
 
         triggerLeftNode_ptr->scale(helios::math::vec3f(triggerBaseScale[0]*leftTrigger, triggerBaseScale[1],  0.0f));
         triggerLeftNode_ptr->translate(triggerLftBasePosition + (helios::math::vec3f(-(triggerAabbWidth/2.0f)*leftTrigger, 0.0f, 0.0f)));

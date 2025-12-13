@@ -11,7 +11,7 @@ module;
 
 export module helios.examples.spaceshipControl.Spaceship;
 
-import helios.game.GameObject;
+import helios.engine.game.GameObject;
 import helios.math.types;
 import helios.math.utils;
 import helios.math.transform;
@@ -35,10 +35,10 @@ export namespace helios::examples::spaceshipControl {
      *
      * Physics parameters can be tuned at runtime via setter methods.
      *
-     * @see helios::game::GameObject
+     * @see helios::engine::game::GameObject
      * @see PlayerMoveCommand
      */
-    class Spaceship : public helios::game::GameObject {
+    class Spaceship : public helios::engine::game::GameObject {
 
         /**
          * @brief Logger instance for debug and diagnostic output.

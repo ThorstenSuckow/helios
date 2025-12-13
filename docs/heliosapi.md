@@ -26,10 +26,10 @@ helios
 │   ├── shader        # Shader programs and uniform management
 │   └── asset         # Geometric shapes and assets
 ├── scene             # Scene graph, camera, and culling
-├── game              # Game objects and command pattern
 ├── input             # Keyboard, mouse, and gamepad input
 ├── window            # Window management and events
 ├── engine            # Frame pacing and timing control
+│   └── game          # Game objects and command pattern
 ├── math              # Vectors, matrices, transforms
 ├── util              # Logging, file I/O, utilities
 ├── tooling           # Performance metrics and profiling
@@ -283,10 +283,10 @@ A lightweight framework for game object management and input handling.
 
 **Example:**
 ```cpp
-import helios.game.GameWorld;
-import helios.game.GameObject;
-import helios.game.CommandBuffer;
-import helios.game.InputSnapshot;
+import helios.engine.game.GameWorld;
+import helios.engine.game.GameObject;
+import helios.engine.game.CommandBuffer;
+import helios.engine.game.InputSnapshot;
 
 // Create game world
 auto gameWorld = GameWorld{};
@@ -458,7 +458,7 @@ For detailed information about each module, see:
 - **[Core](../include/helios/core/README.md)** - Units and fundamental constants
 - **[Rendering](../include/helios/rendering/README.md)** - Rendering system and pipeline
 - **[Scene](../include/helios/scene/README.md)** - Scene graph and camera
-- **[Game](../include/helios/game/README.md)** - Game objects and command pattern
+- **[Game](../include/helios/engine/game/README.md)** - Game objects and command pattern
 - **[Input](../include/helios/input/README.md)** - Input handling
 - **[Engine](../include/helios/engine/README.md)** - Frame pacing and timing control
 - **[Tooling](../include/helios/tooling/README.md)** - Performance metrics and profiling

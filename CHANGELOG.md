@@ -26,7 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `onWorldTransformUpdate()` virtual callback for transform change notifications
 - Camera-follows-object pattern via scene graph parenting
 
-#### Game System (`helios.game`)
+#### Game System (`helios.engine.game`)
 - `GameObject` base class for game entities with GUID identification
 - `GameWorld` container for game object management and updates
 - `CommandBuffer` for deferred command execution pattern

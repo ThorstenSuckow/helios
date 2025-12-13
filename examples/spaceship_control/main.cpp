@@ -85,9 +85,9 @@ import helios.examples.spaceshipControl.SpaceshipWidget;
 
 // game input handling, game objects
 import helios.core.units;
-import helios.game.GameWorld;
-import helios.game.CommandBuffer;
-import helios.game.InputSnapshot;
+import helios.engine.game.GameWorld;
+import helios.engine.game.CommandBuffer;
+import helios.engine.game.InputSnapshot;
 import helios.examples.spaceshipControl.Spaceship;
 import helios.examples.spaceshipControl.TheGrid;
 import helios.examples.spaceshipControl.InputHandler;
@@ -316,8 +316,8 @@ int main() {
     // 9. Game-related Input-handling, GameWorld and GameObjects
     // ========================================
     auto spaceshipInputHandler = helios::examples::spaceshipControl::InputHandler{};
-    auto gameWorld = helios::game::GameWorld{};
-    auto commandBuffer = helios::game::CommandBuffer{};
+    auto gameWorld = helios::engine::game::GameWorld{};
+    auto commandBuffer = helios::engine::game::CommandBuffer{};
 
     auto spaceship_uptr = std::make_unique<helios::examples::spaceshipControl::Spaceship>(spaceshipSceneNode);
     auto spaceship_wptr = spaceship_uptr.get();
@@ -355,7 +355,7 @@ int main() {
         // 10.2 Game Logic Update
         // ----------------------------------------
         const GamepadState& gamepadState = inputManager.gamepadState(Gamepad::ONE);
-        const auto inputSnapshot = helios::game::InputSnapshot(gamepadState);
+        const auto inputSnapshot = helios::engine::game::InputSnapshot(gamepadState);
         spaceshipInputHandler.handleInput(inputSnapshot, spaceshipPtr->guid(), commandBuffer);
 
         commandBuffer.flush(gameWorld);

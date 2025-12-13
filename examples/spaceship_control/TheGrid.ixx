@@ -9,7 +9,7 @@ module;
 
 export module helios.examples.spaceshipControl.TheGrid;
 
-import helios.game.GameObject;
+import helios.engine.game.GameObject;
 import helios.math.types;
 import helios.math.utils;
 import helios.math.transform;
@@ -20,7 +20,7 @@ import helios.util.log;
 export namespace helios::examples::spaceshipControl {
 
 
-    class TheGrid : public helios::game::GameObject {
+    class TheGrid : public helios::engine::game::GameObject {
 
         /**
          * @brief Logger instance for debug and diagnostic output.

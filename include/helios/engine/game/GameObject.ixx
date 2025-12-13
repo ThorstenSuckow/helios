@@ -4,7 +4,7 @@
  */
 module;
 
-export module helios.game.GameObject;
+export module helios.engine.game.GameObject;
 
 import helios.scene.SceneNode;
 import helios.util.Guid;
@@ -12,7 +12,7 @@ import helios.scene.Transform;
 import helios.math.types;
 import helios.core.units;
 
-export namespace helios::game {
+export namespace helios::engine::game {
 
     /**
      * @brief Base class representing an interactive game entity in the game world.
@@ -25,7 +25,7 @@ export namespace helios::game {
      *
      * Example usage:
      * ```cpp
-     * class Player : public helios::game::GameObject {
+     * class Player : public helios::engine::game::GameObject {
      * public:
      *     using GameObject::GameObject;
      *

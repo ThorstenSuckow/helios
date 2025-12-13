@@ -4,11 +4,11 @@ import helios.rendering.shader.UniformSemantics;
 
 using namespace helios::rendering::shader;
 
-TEST(UniformSemanticsTests, WorldMatrixHasCorrectValue) {
-    EXPECT_EQ(static_cast<int>(UniformSemantics::WorldMatrix), 0);
+TEST(UniformSemanticsTests, ModelMatrixHasCorrectValue) {
+    EXPECT_EQ(static_cast<int>(UniformSemantics::ModelMatrix), 0);
 }
 
-TEST(UniformSemanticsTests, ProjectionMatrixFollowsWorldMatrix) {
+TEST(UniformSemanticsTests, ProjectionMatrixFollowsModelMatrix) {
     EXPECT_EQ(static_cast<int>(UniformSemantics::ProjectionMatrix), 1);
 }
 

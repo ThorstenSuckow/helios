@@ -25,9 +25,9 @@ export namespace helios::rendering::shader {
     enum class UniformSemantics {
 
         /**
-         * @brief Represents the world transformation matrix of an object.
+         * @brief Represents the object-to-world transformation matrix of an object.
          */
-        WorldMatrix = 0,
+        ModelMatrix = 0,
 
         /**
          * @brief Represents the projection matrix.

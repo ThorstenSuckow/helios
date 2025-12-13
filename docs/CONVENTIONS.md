@@ -157,7 +157,7 @@ import helios.core.units;
 using namespace helios::core::units;
 
 // Available unit types
-enum class Unit { Meter, Centimeter, HeliosUnit };
+enum class Unit { Meter, Centimeter, Seconds, MilliSeconds };
 
 // Set object size in world units (meters)
 gameObject->setSize(2.0f, 1.0f, 0.5f, Unit::Meter);
@@ -171,8 +171,9 @@ constexpr float HEIGHT = 5.0f; // 5 hu = 5 meters
 Unit definitions are available as `constexpr` in `helios::core::units`:
 
 ```cpp
-// 1 helios unit = 1 meter
-constexpr float HELIOS_UNITS_PER_METER = 1.0f;
+// Unit definitions
+constexpr float METERS = 1.0f;
+constexpr float CENTIMETERS = 0.01f;
 ```
 
 ## Related Modules

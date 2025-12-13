@@ -24,48 +24,56 @@ Not guaranteed yet:
 
 | Module        | Phase  | Relative Stability | Notes |
 |---------------|--------|--------------------|-------|
-| Rendering     | Alpha  | Low                | RenderPass & material pipeline evolving |
-| Scene Graph   | Alpha  | Medium             | Transforms & hierarchy stable, culling pending |
-| Input         | Alpha  | Medium             | Keyboard/mouse OK, gamepad refinements pending |
+| Rendering     | Alpha  | Medium             | Camera system refactored, RenderPass evolving |
+| Scene Graph   | Alpha  | Medium             | CameraSceneNode integration, transforms stable |
+| Input         | Alpha  | Medium             | Gamepad supported; Keyboard minimal (ESC only); Mouse pending |
 | Math          | Alpha  | Low                | Missing quaternions & SIMD acceleration |
-| Windowing     | Alpha  | Medium             | GLFW integration functional |
-| Logging       | Alpha  | Medium             | Scoped logger integrated |
-| Utilities     | Alpha  | Medium             | GUID + file I/O stable |
+| Windowing     | Alpha  | High               | GLFW integration stable |
+| Logging       | Alpha  | High               | Scoped logger & ImGui sinks stable |
+| ImGui         | Alpha  | Medium             | Backend & Widgets (Log, Camera, Gamepad) added |
+| Utilities     | Alpha  | High               | FramePacer, Stopwatch, Units system added |
 
 ## Milestones & Progress
 
 | Milestone | State | Due | Progress | Description |
 |-----------|-------|-----|----------|-------------|
-| milestone_1 | Closed | 2025-10-20 | 3 / 3 (100%) | Application layer: event system, input, low level API interfaces |
-| milestone_2 | In Progress | 2025-11-17 | 3 / 6 (50%) | Functional rendering engine; draft main screen (player view) |
-| milestone_3 | Planned | 2025-12-22 | 0 / 1 (0%) | Main physics & player controls; shooting mechanisms |
-| milestone_5 | Planned | 2026-02-02 | 0 / 1 (0%) | Playable prototype; tuned mechanics, controls & graphics |
-| milestone_6 | Planned | 2026-03-16 | 0 / 5 (0%) | Project presentation & ~20 page paper |
+| milestone_1 | Closed | 2025-10-20 | 100% | Application layer: event system, input, low level API interfaces |
+| milestone_2 | Closed | 2025-12-12 | 100% | Functional rendering engine; Camera system refactor; ImGui tooling |
+| milestone_3 | In Progress | 2025-12-22 | 10% | Main physics & player controls; shooting mechanisms |
+| milestone_5 | Planned | 2026-02-02 | 0% | Playable prototype; tuned mechanics, controls & graphics |
+| milestone_6 | Planned | 2026-03-16 | 0% | Project presentation & ~20 page paper |
 
 ### Interpretation
 - Progress column lists closed issues vs total (open + closed) at time of snapshot.
 - Milestones beyond the current date are marked Planned; active milestone shows "In Progress".
 - Closed milestone_1 forms the historical baseline for the Alpha phase.
 
-### Current Focus (milestone_2)
-Remaining goals before completion:
-1. Rendering pipeline consolidation
-2. Material / shader lifecycle cleanup
-3. Initial performance profiling
-4. (Issues still open) Refactor Renderable to use RenderPrototype
-5. AABB support for Mesh / SceneNode
-6. Shader-side matrix computation (model/view/world)
+### Current Focus (milestone_3)
+Goals for the next phase:
+1. **Physics Integration:** Basic collision detection and response.
+2. **Player Controls:** Refine spaceship movement (momentum, rotation).
+3. **Game Mechanics:** Shooting, health, and scoring systems.
+4. **Math Extensions:** Quaternions for robust rotation handling.
+5. **Asset Pipeline:** Basic model loading improvements.
 
 ### Upcoming Sequence
-1. milestone_3: Math extensions (quaternions, SIMD), camera polish & frustum culling, basic asset pipeline
-2. milestone_5: Integrate game mechanics into a playable prototype
-3. milestone_6: Formal documentation & presentation (paper, website refinement)
+1. milestone_5: Integrate game mechanics into a playable prototype
+2. milestone_6: Formal documentation & presentation (paper, website refinement)
 
 ## Beta Criteria (Exit Alpha)
 - Public API stability policy documented
 - Core modules (rendering, input, scene) have stable interfaces
 - Math feature completeness (quaternions, transforms, basic collision primitives)
 - Continuous integration green across platforms
+
+## Repository Stats
+
+| Metric | Value |
+|--------|-------|
+| **Stars** | 2 |
+| **Forks** | 1 |
+| **Open Issues** | 26 |
+| **Last Commit** | 2025-12-10 |
 
 ## Detailed Change History
 
@@ -103,4 +111,4 @@ If you depend on helios during alpha:
 
 ---
 
-_Last updated: 2025-11-14 • Source phase: alpha • Track changes in [CHANGELOG](/docs/changelog)_
+_Last updated: 2025-12-13 • Source phase: alpha • Track changes in [CHANGELOG](/docs/changelog)_

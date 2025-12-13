@@ -194,7 +194,7 @@ async function main() {
     {
       src: path.join(repoRoot, 'examples', 'spaceship_control', 'README.md'),
       dest: path.join(websiteRoot, 'docs', 'examples', 'spaceship-control.md'),
-      meta: { title: 'Spaceship Control', description: 'Example: Complete game loop with command pattern, scene graph cameras, transform inheritance, and ImGui debug overlay.', slug: '/examples/spaceship-control', tags: ['examples', 'input', 'imgui', 'logging', 'game-loop', 'camera', 'scene-graph'], keywords: ['helios', 'gamepad', 'keyboard', 'ImGui', 'logging', 'debug overlay', 'camera', 'transform inheritance', 'game system'], sidebar_label: 'Spaceship Control' }
+      meta: { title: 'Spaceship Control', description: 'Example: Complete game loop with command pattern, scene graph cameras, transform inheritance, and ImGui debug overlay.', slug: '/examples/spaceship-control', tags: ['examples', 'input', 'imgui', 'logging', 'game-loop', 'camera', 'scene-graph'], keywords: ['helios', 'gamepad', 'ImGui', 'logging', 'debug overlay', 'camera', 'transform inheritance', 'game system'], sidebar_label: 'Spaceship Control' }
     },
   ];
 

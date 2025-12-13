@@ -4,7 +4,7 @@ This example demonstrates a complete game loop with input handling, logging, and
 
 ## Features
 
-- **Gamepad and Keyboard Input** - Control a spaceship using either input method
+- **Gamepad Input** - Control a spaceship using analog sticks
 - **Command Pattern** - Input mapped to reusable command objects
 - **ImGui Debug Overlay** - Real-time logging, camera control, and settings via dockable widgets
 - **Frame Pacing** - Configurable target FPS with performance metrics

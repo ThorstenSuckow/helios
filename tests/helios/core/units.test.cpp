@@ -11,6 +11,11 @@ TEST(UnitsTest, Constants) {
     EXPECT_FLOAT_EQ(SECONDS, 1.0f);
 }
 
+TEST(UnitsTest, Defaults) {
+    EXPECT_EQ(HELIOS_SPATIAL_UNIT, Unit::Meter);
+    EXPECT_EQ(HELIOS_TEMPORAL_UNIT, Unit::Seconds);
+}
+
 TEST(UnitsTest, SpatialConversion) {
     // 100 cm = 1 m
     EXPECT_FLOAT_EQ(fromCm(100.0f), 1.0f);
@@ -52,4 +57,3 @@ TEST(UnitsTest, NegativeValues) {
     EXPECT_FLOAT_EQ(fromCm(-100.0f), -1.0f);
     EXPECT_FLOAT_EQ(fromMs(-1000.0f), -1.0f);
 }
-

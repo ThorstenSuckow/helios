@@ -78,22 +78,22 @@ namespace helios::scene {
 
 
 
-    SceneNode& SceneNode::scale(const helios::math::vec3f& scale) noexcept {
-        localTransform_.scale(scale);
+    SceneNode& SceneNode::setScale(const helios::math::vec3f& scale) noexcept {
+        localTransform_.setScale(scale);
         needsUpdate_ = true;
         return *this;
     }
 
 
-    SceneNode& SceneNode::rotate(const helios::math::mat4f& rotation) noexcept {
-        localTransform_.rotate(rotation);
+    SceneNode& SceneNode::setRotation(const helios::math::mat4f& rotation) noexcept {
+        localTransform_.setRotation(rotation);
         needsUpdate_ = true;
         return *this;
     }
 
 
-    SceneNode& SceneNode::translate(const helios::math::vec3f& translation) noexcept {
-        localTransform_.translate(translation);
+    SceneNode& SceneNode::setTranslation(const helios::math::vec3f& translation) noexcept {
+        localTransform_.setTranslation(translation);
         needsUpdate_ = true;
         return *this;
     }

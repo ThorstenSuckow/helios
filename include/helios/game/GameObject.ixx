@@ -30,13 +30,13 @@ export namespace helios::game {
      *     using GameObject::GameObject;
      *
      *     void jump() {
-     *         translate({0.0f, 5.0f, 0.0f});
+     *         setTranslation({0.0f, 5.0f, 0.0f});
      *     }
      * };
      *
      * auto sceneNode = std::make_shared<helios::scene::SceneNode>();
      * auto player = std::make_unique<Player>(sceneNode.get());
-     * player->translate({1.0f, 0.0f, 0.0f});
+     * player->setTranslation({1.0f, 0.0f, 0.0f});
      * ```
      *
      * @warning The GameObject does NOT own the SceneNode. The caller must ensure the SceneNode
@@ -220,7 +220,7 @@ export namespace helios::game {
          *
          * @warning If the SceneNode has been destroyed, this will cause undefined behavior.
          */
-        GameObject& scale(const helios::math::vec3f& scale) noexcept;
+        GameObject& setScale(const helios::math::vec3f& scale) noexcept;
 
         /**
          * @brief Applies a rotation transformation to the GameObject.
@@ -233,7 +233,7 @@ export namespace helios::game {
          *
          * @warning If the SceneNode has been destroyed, this will cause undefined behavior.
          */
-        GameObject& rotate(const helios::math::mat4f& rotation) noexcept;
+        GameObject& setRotation(const helios::math::mat4f& rotation) noexcept;
 
         /**
          * @brief Applies a translation transformation to the GameObject.
@@ -246,7 +246,7 @@ export namespace helios::game {
          *
          * @warning If the SceneNode has been destroyed, this will cause undefined behavior.
          */
-        GameObject& translate(const helios::math::vec3f& translation) noexcept;
+        GameObject& setTranslation(const helios::math::vec3f& translation) noexcept;
     };
 
 

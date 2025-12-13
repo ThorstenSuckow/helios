@@ -275,7 +275,7 @@ int main() {
     // Add the spaceship as a scene node
     auto* spaceshipSceneNode =
             scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(spaceshipRenderable)));
-    spaceshipSceneNode->translate(helios::math::vec3f{0.0f, 0.0f, 1.0f});
+    spaceshipSceneNode->setTranslation(helios::math::vec3f{0.0f, 0.0f, 1.0f});
 
     // Add the gizmos
     auto* leftStickGizmoNode =
@@ -297,7 +297,7 @@ int main() {
         helios::scene::InheritTransform::Inherit::Translation
     );
     mainViewport->setCameraSceneNode(cameraSceneNode_ptr);
-    cameraSceneNode_ptr->translate(
+    cameraSceneNode_ptr->setTranslation(
         helios::math::vec3f(0.0f, 0.0f, -(GRID_Y*CELL_SIZE / 2.0f)/tan(FOVY/2))
     );
     cameraSceneNode_ptr->camera().setPerspective(
@@ -364,8 +364,8 @@ int main() {
         // ----------------------------------------
         // 10.3 Gizmo / Debug Visualization Update
         // ----------------------------------------
-        leftStickGizmoNode->scale((spaceshipPtr->steeringInput() * spaceshipPtr->throttle()  * 4.0f).toVec3());
-        shipDirectionGizmoNode->scale(spaceshipPtr->velocity().normalize() * spaceshipPtr->speedRatio() * 4.0f);
+        leftStickGizmoNode->setScale((spaceshipPtr->steeringInput() * spaceshipPtr->throttle()  * 4.0f).toVec3());
+        shipDirectionGizmoNode->setScale(spaceshipPtr->velocity().normalize() * spaceshipPtr->speedRatio() * 4.0f);
 
         // ----------------------------------------
         // 10.4 Rendering

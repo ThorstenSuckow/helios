@@ -156,7 +156,7 @@ auto cubeSceneNode = std::make_unique<SceneNode>(std::move(cubeRenderable));
 auto* cubeNode = scene->addNode(std::move(cubeSceneNode));
 
 // Scale the cube to half its original size
-cubeNode->scale(vec3f(0.5f, 0.5f, 0.5f));
+cubeNode->setScale(vec3f(0.5f, 0.5f, 0.5f));
 ```
 
 **Scene Graph Concepts:**
@@ -187,7 +187,7 @@ auto cameraNode = std::make_unique<CameraSceneNode>(std::move(camera));
 auto* camPtr = scene->addNode(std::move(cameraNode));
 
 // Position the camera
-camPtr->translate(vec3f(0.0f, 0.0f, 3.0f));
+camPtr->setTranslation(vec3f(0.0f, 0.0f, 3.0f));
 camPtr->lookAt(vec3f(0.0f, 0.0f, 0.0f), vec3f(0.0f, 1.0f, 0.0f));
 
 // Connect viewport to camera
@@ -225,7 +225,7 @@ while (!win->shouldClose()) {
 
     // 4. Apply transformation
     float rad = helios::math::radians(degrees);
-    cubeNode->rotate(helios::math::rotate(
+    cubeNode->setRotation(helios::math::rotate(
         helios::math::mat4f::identity(),
         rad,
         helios::math::vec3f(0.4f, 0.6f, 0.2f) // Rotation axis

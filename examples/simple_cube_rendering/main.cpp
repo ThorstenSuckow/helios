@@ -131,7 +131,7 @@ int main() {
     auto* cubeNode = scene->addNode(std::move(cubeSceneNode));
 
     // Scale the cube to half its original size
-    cubeNode->scale(vec3f(0.5f, 0.5f, 0.5f));
+    cubeNode->setScale(vec3f(0.5f, 0.5f, 0.5f));
 
     // ========================================
     // 7. Camera Setup
@@ -167,7 +167,7 @@ int main() {
         rad = helios::math::radians(degrees);
 
         // Rotate the cube around an arbitrary axis
-        cubeNode->rotate(helios::math::rotate(
+        cubeNode->setRotation(helios::math::rotate(
             helios::math::mat4f::identity(),
             rad,
             helios::math::vec3f(0.4f, 0.6f, 0.2f) // Rotation axis

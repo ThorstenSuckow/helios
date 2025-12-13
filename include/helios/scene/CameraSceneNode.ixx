@@ -91,7 +91,7 @@ export namespace helios::scene {
          * @note The up vector should typically be `(0, 1, 0)` for standard upright orientation.
          *
          * @see lookAtLocal()
-         * @see helios::scene::SceneNode::rotate()
+         * @see helios::scene::SceneNode::setRotation()
          */
         void lookAt(helios::math::vec3f target, helios::math::vec3f up);
 

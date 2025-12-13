@@ -37,7 +37,7 @@ export namespace helios::game {
      *
      * // Lookup by Guid
      * if (auto* obj = world.find(playerPtr->guid())) {
-     *     obj->translate({1.0f, 0.0f, 0.0f});
+     *     obj->setTranslation({1.0f, 0.0f, 0.0f});
      * }
      *
      * // Remove entity (returns ownership)

@@ -287,7 +287,7 @@ export namespace helios::examples::spaceshipControl {
                     actualRotationSpeed_ = 0.0f;
                 }
 
-                rotate(helios::math::rotate(
+                setRotation(helios::math::rotate(
                 helios::math::mat4f::identity(),
                 helios::math::radians(actualRotationAngle_),
                 helios::math::vec3f(0.0f, 0.0f, 1.0f)
@@ -321,7 +321,7 @@ export namespace helios::examples::spaceshipControl {
 
             // Integrate velocity to update position.
             actualPosition_ = actualPosition_ + velocity_ * deltaTime;
-            translate(actualPosition_);
+            setTranslation(actualPosition_);
 
         }
 

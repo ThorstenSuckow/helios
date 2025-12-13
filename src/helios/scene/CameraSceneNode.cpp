@@ -54,7 +54,7 @@ namespace helios::scene {
             0.0f, 0.0f, 0.0f, 1.0f
         };
 
-        rotate(localRotation);
+        setRotation(localRotation);
     }
 
     void CameraSceneNode::lookAt(helios::math::vec3f target, helios::math::vec3f up) {
@@ -81,7 +81,7 @@ namespace helios::scene {
             /**
              * @todo add support for different rotations
              */
-            rotate(worldRotation);
+            setRotation(worldRotation);
             return;
         }
 
@@ -123,7 +123,7 @@ namespace helios::scene {
         };
 
         // Apply rotation in local space by undoing the parent rotation
-        rotate(parentRotInv * worldRotation);
+        setRotation(parentRotInv * worldRotation);
     }
 
     void CameraSceneNode::onWorldTransformUpdate() noexcept {

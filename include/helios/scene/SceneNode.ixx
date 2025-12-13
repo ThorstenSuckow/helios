@@ -235,7 +235,7 @@ export namespace helios::scene {
              *
              * @return A reference to this SceneNode.
              */
-            SceneNode& scale(const helios::math::vec3f& scale) noexcept;
+            SceneNode& setScale(const helios::math::vec3f& scale) noexcept;
 
             /**
              * @brief Applies rotation to this node's **local** transform.
@@ -246,7 +246,7 @@ export namespace helios::scene {
              *
              * @return A reference to this SceneNode.
              */
-            SceneNode& rotate(const helios::math::mat4f& rotation) noexcept;
+            SceneNode& setRotation(const helios::math::mat4f& rotation) noexcept;
 
             /**
              * @brief Applies translation to this node's **local** transform.
@@ -258,7 +258,7 @@ export namespace helios::scene {
              *
              * @return A reference to this SceneNode.
              */
-            SceneNode& translate(const helios::math::vec3f& translation) noexcept;
+            SceneNode& setTranslation(const helios::math::vec3f& translation) noexcept;
 
             /**
              * @brief Returns this SceneNode's localTransform.

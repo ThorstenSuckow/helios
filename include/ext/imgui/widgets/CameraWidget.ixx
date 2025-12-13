@@ -104,7 +104,7 @@ export namespace helios::ext::imgui::widgets {
             }
 
             if (applyTranslation) {
-                node->translate(tempTranslation_);
+                node->setTranslation(tempTranslation_);
             }
 
             if (!applyLookAt) {
@@ -166,9 +166,9 @@ export namespace helios::ext::imgui::widgets {
             tempLookAtTarget_ = entry.initialLookAtTarget;
             tempUp_ = entry.initialUp;
 
-            node->translate(entry.initialTranslation);
-            node->rotate(entry.initialRotation);
-            node->scale(entry.initialScale);
+            node->setTranslation(entry.initialTranslation);
+            node->setRotation(entry.initialRotation);
+            node->setScale(entry.initialScale);
 
             auto& cam = node->camera();
             cam.setPerspective(helios::math::radians(entry.initialFovDegrees),

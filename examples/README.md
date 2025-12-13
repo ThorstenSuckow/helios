@@ -33,7 +33,7 @@ Demonstrates gamepad/controller input handling with helios.
 **Location:** `spaceship_control/`
 
 A complete game loop example featuring:
-- Gamepad and keyboard input with command pattern
+- Gamepad input with command pattern
 - ImGui debug overlay with dockable widgets
 - Real-time logging with scope filtering
 - Frame pacing and performance metrics

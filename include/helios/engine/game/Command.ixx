@@ -4,12 +4,12 @@
  */
 module;
 
-export module helios.game.Command;
+export module helios.engine.game.Command;
 
-import helios.game.GameObject;
+import helios.engine.game.GameObject;
 
 
-export namespace helios::game {
+export namespace helios::engine::game {
 
     /**
      * @brief Abstract base class for encapsulating game actions as executable commands.
@@ -23,14 +23,14 @@ export namespace helios::game {
      *
      * Example implementation:
      * ```cpp
-     * class MoveCommand : public helios::game::Command {
+     * class MoveCommand : public helios::engine::game::Command {
      *     helios::math::vec3f direction_;
      *     float speed_;
      * public:
      *     MoveCommand(helios::math::vec3f dir, float speed)
      *         : direction_(dir), speed_(speed) {}
      *
-     *     void execute(helios::game::GameObject& obj) override {
+     *     void execute(helios::engine::game::GameObject& obj) override {
      *         obj.translate(direction_ * speed_);
      *     }
      * };
@@ -59,7 +59,7 @@ export namespace helios::game {
          * @note This method should be exception-safe. If it throws, CommandBuffer::flush()
          *       will abort processing of remaining commands.
          */
-        virtual void execute(helios::game::GameObject& gameObject) = 0;
+        virtual void execute(helios::engine::game::GameObject& gameObject) = 0;
     };
 
 

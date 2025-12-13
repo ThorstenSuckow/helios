@@ -101,6 +101,16 @@ export namespace helios::ext::imgui::widgets {
         bool autoScroll_ = true;
 
         /**
+         * @brief Previous autoScroll state to detect toggle events.
+         */
+        bool prevAutoScroll_ = true;
+
+        /**
+         * @brief Flag to nudge scroll up one entry when auto-scroll is disabled.
+         */
+        bool scrollUpOneEntry_ = false;
+
+        /**
          * @brief Flag to indicate that new content was added and scroll is needed.
          */
         bool scrollToBottom_ = false;
@@ -419,7 +429,13 @@ export namespace helios::ext::imgui::widgets {
                 }
                 ImGui::SameLine();
 
-                ImGui::Checkbox("Auto-Scroll", &autoScroll_);
+                if (ImGui::Checkbox("Auto-Scroll", &autoScroll_)) {
+                    // Detect transition from enabled to disabled
+                    if (prevAutoScroll_ && !autoScroll_) {
+                        scrollUpOneEntry_ = true;
+                    }
+                }
+                prevAutoScroll_ = autoScroll_;
                 ImGui::SameLine();
 
                 // Level filter combo
@@ -534,8 +550,24 @@ export namespace helios::ext::imgui::widgets {
                     float scrollMaxY = ImGui::GetScrollMaxY();
                     bool atBottomNow = (scrollMaxY <= 0.0f) || (scrollY >= scrollMaxY - 5.0f);
 
+                    // Nudge scroll up when auto-scroll was just disabled
+                    // This prevents showing that new entries are being added
+                    if (scrollUpOneEntry_) {
+                        // Calculate offset for 2 log entries
+                        float lineHeight = ImGui::GetTextLineHeightWithSpacing();
+                        float nudgeAmount = lineHeight * 2.0f;
+
+                        // Set scroll position relative to maximum (scroll up from bottom)
+                        float targetScrollY = scrollMaxY - nudgeAmount;
+                        if (targetScrollY < 0.0f) targetScrollY = 0.0f;
+                        ImGui::SetScrollY(targetScrollY);
+                        scrollUpOneEntry_ = false;
+
+                        // Update atBottomNow since we just scrolled
+                        atBottomNow = false;
+                    }
                     // Auto-scroll decision
-                    if (hasNewContent && (autoScroll_ || wasAtBottom_)) {
+                    else if (hasNewContent && (autoScroll_ || wasAtBottom_)) {
                         ImGui::SetScrollHereY(1.0f);
                     }
 

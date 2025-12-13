@@ -78,7 +78,7 @@ namespace helios::rendering {
         auto objectUniformValues = std::make_unique<helios::rendering::shader::UniformValueMap>();
         auto materialUniformValues = std::make_unique<helios::rendering::shader::UniformValueMap>();
         objectUniformValues->set(
-            helios::rendering::shader::UniformSemantics::WorldMatrix,
+            helios::rendering::shader::UniformSemantics::ModelMatrix,
             snapshotItem.worldMatrix()
         );
 

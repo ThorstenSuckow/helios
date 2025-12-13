@@ -21,14 +21,14 @@ export namespace helios::rendering::asset::shape::basic {
      * @brief Basic Line Shape.
      *
      * Creates vertex and index data for a single diagonal line segment. By default, this shape
-     * defines a line spanning from (-1, -1, 0) to the point (1, 1, 0).
+     * defines a line spanning from (0, 0, 0) to the point (1, 1, 0).
      */
     struct Line : public Shape {
 
         Line(): Shape(
             std::vector<Vertex>{
 
-                {{ -1.0f,  -1.0f,  0.0f}, { 0.0f,  0.0f,  0.0f}, {0.0f, 0.0f}},
+                {{ 0.0f,  0.0f,  0.0f}, { 0.0f,  0.0f,  0.0f}, {0.0f, 0.0f}},
                 {{ 1.0f,  1.0f,  0.0f}, { 0.0f,  0.0f,  0.0f}, {0.0f, 0.0f}},
             },
             std::vector<unsigned int>{

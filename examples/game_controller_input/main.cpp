@@ -62,7 +62,7 @@ void updateButton(
     const bool pressed,
     helios::rendering::model::config::MaterialPropertiesOverride& originalOverride) {
 
-    button.scale(helios::math::vec3f(SCALING_FACTOR * (pressed ? 1.2f : 1.0f)));
+    button.setScale(helios::math::vec3f(SCALING_FACTOR * (pressed ? 1.2f : 1.0f)));
     if (button.renderable()->hasMaterialOverride()) {
         const auto baseColor = *originalOverride.baseColor;
         button.renderable()->materialOverride()->baseColor = helios::math::vec4f(baseColor[0], baseColor[1], baseColor[2], pressed ? 1.0f : baseColor[3]);
@@ -72,7 +72,7 @@ void updateButton(
 
 void updateDpad(helios::scene::SceneNode& dpadButton, const bool pressed) {
 
-    dpadButton.scale(helios::math::vec3f(SCALING_FACTOR * (pressed ? 1.2f : 1.0f)));
+    dpadButton.setScale(helios::math::vec3f(SCALING_FACTOR * (pressed ? 1.2f : 1.0f)));
     if (dpadButton.renderable()->hasMaterialOverride()) {
         const auto baseColor = *dpadButton.renderable()->materialOverride()->baseColor;
         dpadButton.renderable()->materialOverride()->baseColor = helios::math::vec4f(baseColor[0], baseColor[1], baseColor[2], pressed ? 1.0f : 0.5f);
@@ -103,7 +103,7 @@ int main() {
         stringFileReader
     );
     auto uniformLocationMap = std::make_unique<helios::ext::opengl::rendering::shader::OpenGLUniformLocationMap>();
-    bool uniformAssigned    = uniformLocationMap->set(helios::rendering::shader::UniformSemantics::WorldMatrix, 1);
+    bool uniformAssigned    = uniformLocationMap->set(helios::rendering::shader::UniformSemantics::ModelMatrix, 1);
     assert(uniformAssigned && "could not assign the world matrix uniform");
     uniformAssigned    = uniformLocationMap->set(helios::rendering::shader::UniformSemantics::MaterialBaseColor, 2);
     assert(uniformAssigned && "could not assign the world matrix uniform");
@@ -205,11 +205,11 @@ int main() {
 
     // scene nodes
     const auto stickLeftNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>(circleRenderable));
-    auto stickAxisLeft_ptr = stickLeftNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(lineRenderable));
+    auto stickAxisLeft_ptr = stickLeftNode_ptr->addNode(std::make_unique<helios::scene::SceneNode>(lineRenderable));
 
     // right stick
     const auto stickRightNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>(circleRenderable));
-    auto stickAxisRight_ptr = stickRightNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(lineRenderable));
+    auto stickAxisRight_ptr = stickRightNode_ptr->addNode(std::make_unique<helios::scene::SceneNode>(lineRenderable));
 
     // left/right trigger
     const auto triggerLeftNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>(recRenderable));
@@ -217,18 +217,18 @@ int main() {
 
     // buttons
     const auto buttonGroupNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>());
-    const auto buttonA_ptr = buttonGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(buttonRenderableA));
-    const auto buttonB_ptr = buttonGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(buttonRenderableB));
-    const auto buttonX_ptr = buttonGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(buttonRenderableX));
-    const auto buttonY_ptr = buttonGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(buttonRenderableY));
+    const auto buttonA_ptr = buttonGroupNode_ptr->addNode(std::make_unique<helios::scene::SceneNode>(buttonRenderableA));
+    const auto buttonB_ptr = buttonGroupNode_ptr->addNode(std::make_unique<helios::scene::SceneNode>(buttonRenderableB));
+    const auto buttonX_ptr = buttonGroupNode_ptr->addNode(std::make_unique<helios::scene::SceneNode>(buttonRenderableX));
+    const auto buttonY_ptr = buttonGroupNode_ptr->addNode(std::make_unique<helios::scene::SceneNode>(buttonRenderableY));
 
     // dpad
 
     const auto dpadGroupNode_ptr = scene.addNode(std::make_unique<helios::scene::SceneNode>());
-    const auto dpadLft_ptr = dpadGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(dpadRenderableLft));
-    const auto dpadRgt_ptr = dpadGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(dpadRenderableRgt));
-    const auto dpadUp_ptr = dpadGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(dpadRenderableUp));
-    const auto dpadDown_ptr = dpadGroupNode_ptr->addChild(std::make_unique<helios::scene::SceneNode>(dpadRenderableDown));
+    const auto dpadLft_ptr = dpadGroupNode_ptr->addNode(std::make_unique<helios::scene::SceneNode>(dpadRenderableLft));
+    const auto dpadRgt_ptr = dpadGroupNode_ptr->addNode(std::make_unique<helios::scene::SceneNode>(dpadRenderableRgt));
+    const auto dpadUp_ptr = dpadGroupNode_ptr->addNode(std::make_unique<helios::scene::SceneNode>(dpadRenderableUp));
+    const auto dpadDown_ptr = dpadGroupNode_ptr->addNode(std::make_unique<helios::scene::SceneNode>(dpadRenderableDown));
 
 
 
@@ -252,34 +252,34 @@ int main() {
     float basePosX          = 0.40f;
     float basePosY          = 0.40f;
 
-    stickLeftNode_ptr->scale(helios::math::vec3f(SCALING_FACTOR, SCALING_FACTOR, 0.0f));
-    stickLeftNode_ptr->translate(helios::math::vec3f(-basePosX, 0.0f, 0.0f));
-    stickRightNode_ptr->scale(helios::math::vec3f(SCALING_FACTOR, SCALING_FACTOR, 0.0f));
-    stickRightNode_ptr->translate(helios::math::vec3f(basePosX, 0.0f, 0.0f));
+    stickLeftNode_ptr->setScale(helios::math::vec3f(SCALING_FACTOR, SCALING_FACTOR, 0.0f));
+    stickLeftNode_ptr->setTranslation(helios::math::vec3f(-basePosX, 0.0f, 0.0f));
+    stickRightNode_ptr->setScale(helios::math::vec3f(SCALING_FACTOR, SCALING_FACTOR, 0.0f));
+    stickRightNode_ptr->setTranslation(helios::math::vec3f(basePosX, 0.0f, 0.0f));
 
     const auto triggerBaseScale       = helios::math::vec3f(0.20, 0.25f * SCALING_FACTOR, 0.0f);
     auto triggerAabbWidth        = 2*triggerBaseScale[0];
     const auto triggerLftBasePosition = helios::math::vec3f((-basePosX + SCALING_FACTOR), basePosY, 0.0f);
     const auto triggerRgtBasePosition = helios::math::vec3f((basePosX - SCALING_FACTOR), basePosY, 0.0f);
 
-    buttonGroupNode_ptr->scale(helios::math::vec3f(SCALING_FACTOR));
-    buttonGroupNode_ptr->translate(helios::math::vec3f(basePosX, -basePosY, 0.0f));
-    buttonA_ptr->translate(helios::math::vec3f(0.0f, -0.5f, 0.0f));
-    buttonB_ptr->translate(helios::math::vec3f(0.5f, 0.0f, 0.0f));
-    buttonX_ptr->translate(helios::math::vec3f(-0.5f, 0.0f, 0.0f));
-    buttonY_ptr->translate(helios::math::vec3f(0.0f, 0.5f, 0.0f));
+    buttonGroupNode_ptr->setScale(helios::math::vec3f(SCALING_FACTOR));
+    buttonGroupNode_ptr->setTranslation(helios::math::vec3f(basePosX, -basePosY, 0.0f));
+    buttonA_ptr->setTranslation(helios::math::vec3f(0.0f, -0.5f, 0.0f));
+    buttonB_ptr->setTranslation(helios::math::vec3f(0.5f, 0.0f, 0.0f));
+    buttonX_ptr->setTranslation(helios::math::vec3f(-0.5f, 0.0f, 0.0f));
+    buttonY_ptr->setTranslation(helios::math::vec3f(0.0f, 0.5f, 0.0f));
 
-    dpadGroupNode_ptr->scale(helios::math::vec3f(SCALING_FACTOR));
-    dpadUp_ptr->scale(helios::math::vec3f(SCALING_FACTOR));
-    dpadLft_ptr->scale(helios::math::vec3f(SCALING_FACTOR));
-    dpadDown_ptr->scale(helios::math::vec3f(SCALING_FACTOR));
-    dpadRgt_ptr->scale(helios::math::vec3f(SCALING_FACTOR));
+    dpadGroupNode_ptr->setScale(helios::math::vec3f(SCALING_FACTOR));
+    dpadUp_ptr->setScale(helios::math::vec3f(SCALING_FACTOR));
+    dpadLft_ptr->setScale(helios::math::vec3f(SCALING_FACTOR));
+    dpadDown_ptr->setScale(helios::math::vec3f(SCALING_FACTOR));
+    dpadRgt_ptr->setScale(helios::math::vec3f(SCALING_FACTOR));
 
-    dpadGroupNode_ptr->translate(helios::math::vec3f(-basePosX, -basePosY, 0.0f));
-    dpadUp_ptr->translate(helios::math::vec3f(0.0f, 0.5f, 0.0f));
-    dpadLft_ptr->translate(helios::math::vec3f(-0.5f, 0.0f, 0.0f));
-    dpadDown_ptr->translate(helios::math::vec3f(0.0f, -0.5f, 0.0f));
-    dpadRgt_ptr->translate(helios::math::vec3f(0.5f, 0.0f, 0.0f));
+    dpadGroupNode_ptr->setTranslation(helios::math::vec3f(-basePosX, -basePosY, 0.0f));
+    dpadUp_ptr->setTranslation(helios::math::vec3f(0.0f, 0.5f, 0.0f));
+    dpadLft_ptr->setTranslation(helios::math::vec3f(-0.5f, 0.0f, 0.0f));
+    dpadDown_ptr->setTranslation(helios::math::vec3f(0.0f, -0.5f, 0.0f));
+    dpadRgt_ptr->setTranslation(helios::math::vec3f(0.5f, 0.0f, 0.0f));
 
 
     // game loop
@@ -325,17 +325,15 @@ int main() {
 
         // scaling
         // sticks:
-        stickAxisLeft_ptr->scale(helios::math::vec3f(gamepadState.left()*0.5f));
-        stickAxisLeft_ptr->translate(helios::math::vec3f(gamepadState.left()*0.5f));
+        stickAxisLeft_ptr->setScale(helios::math::vec3f(gamepadState.left()));
 
-        stickAxisRight_ptr->scale(helios::math::vec3f(gamepadState.right()*0.5f));
-        stickAxisRight_ptr->translate(helios::math::vec3f(gamepadState.right()*0.5f));
+        stickAxisRight_ptr->setScale(helios::math::vec3f(gamepadState.right()));
 
-        triggerLeftNode_ptr->scale(helios::math::vec3f(triggerBaseScale[0]*leftTrigger, triggerBaseScale[1],  0.0f));
-        triggerLeftNode_ptr->translate(triggerLftBasePosition + (helios::math::vec3f(-(triggerAabbWidth/2.0f)*leftTrigger, 0.0f, 0.0f)));
+        triggerLeftNode_ptr->setScale(helios::math::vec3f(triggerBaseScale[0]*leftTrigger, triggerBaseScale[1],  0.0f));
+        triggerLeftNode_ptr->setTranslation(triggerLftBasePosition + (helios::math::vec3f(-(triggerAabbWidth/2.0f)*leftTrigger, 0.0f, 0.0f)));
 
-        triggerRightNode_ptr->scale(helios::math::vec3f(triggerBaseScale[0]*rightTrigger, triggerBaseScale[1],  0.0f));
-        triggerRightNode_ptr->translate(triggerRgtBasePosition + (helios::math::vec3f((triggerAabbWidth/2.0f)*rightTrigger, 0.0f, 0.0f)));
+        triggerRightNode_ptr->setScale(helios::math::vec3f(triggerBaseScale[0]*rightTrigger, triggerBaseScale[1],  0.0f));
+        triggerRightNode_ptr->setTranslation(triggerRgtBasePosition + (helios::math::vec3f((triggerAabbWidth/2.0f)*rightTrigger, 0.0f, 0.0f)));
 
         // buttons activation
         updateButton(*buttonA_ptr, gamepadState.buttonA(), buttonMaterialPropsOverride);

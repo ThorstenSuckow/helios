@@ -2,8 +2,8 @@
 
 layout (location=0) in vec3 aPos;
 
-layout (location=1) uniform mat4 worldMatrix;
+layout (location=1) uniform mat4 modelMatrix;
 
 void main() {
-    gl_Position = worldMatrix * vec4(aPos, 1.0f);
+    gl_Position = modelMatrix * vec4(aPos, 1.0f);
 }

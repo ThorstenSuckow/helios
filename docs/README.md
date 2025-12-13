@@ -10,10 +10,11 @@ Here's an overview of the available documents:
 |--------------------------------------------------------------------------------------------|---|
 | ▸  **[API Reference (`heliosapi.md`)](./heliosapi.md)**                                    | A high-level overview of the framework's architecture and core concepts. |
 | ▸ **[Coding Styleguide (`styleguide.md`)](./styleguide.md)**                               | Defines the C++ coding conventions, module structure, and formatting rules for the project. |
-| ▸ **[Technical Conventions (`CONVENTIONS.md`)](CONVENTIONS.md)**                           | Documents coordinate systems (LHS), matrix storage (column-major), and mathematical foundations. |
+| ▸ **[Technical Conventions (`CONVENTIONS.md`)](CONVENTIONS.md)**                           | Documents coordinate systems (LHS), matrix storage (column-major), units system, and mathematical foundations. |
 | ▸  **[Doxygen Styleguide (`doxygen-style.md`)](./doxygen-style.md)**                       | Guidelines for writing consistent and effective Doxygen comments for the public API. |
 | ▸  **[Contributing Guide (`CONTRIBUTING.md`)](./CONTRIBUTING.md)**                         | A comprehensive guide on how to contribute, including commit conventions and the PR process. |
 | ▸  **[Issue Submission Guide (`issue_submission_guide.md`)](./issue_submission_guide.md)** | Guidelines for submitting well-structured bug reports, feature requests, and refactoring proposals. |
+| ▸  **[Changelog Guide (`CHANGELOG_GUIDE.md`)](./CHANGELOG_GUIDE.md)**                      | How to write and maintain changelog entries. |
 
 
 ## API Docs (Doxygen)

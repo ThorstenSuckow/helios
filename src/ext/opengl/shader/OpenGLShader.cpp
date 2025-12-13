@@ -168,9 +168,9 @@ namespace helios::ext::opengl::rendering::shader {
             }
         }
 
-        if (const auto worldMatrixUniform = uniformLocation(UniformSemantics::WorldMatrix); worldMatrixUniform != -1) {
-            if (const auto* mat4f_ptr = uniformValueMap.mat4f_ptr(UniformSemantics::WorldMatrix)) {
-                glUniformMatrix4fv(worldMatrixUniform, 1, false, mat4f_ptr);
+        if (const auto modelMatrixUniform = uniformLocation(UniformSemantics::ModelMatrix); modelMatrixUniform != -1) {
+            if (const auto* mat4f_ptr = uniformValueMap.mat4f_ptr(UniformSemantics::ModelMatrix)) {
+                glUniformMatrix4fv(modelMatrixUniform, 1, false, mat4f_ptr);
             }
         }
         if (const auto materialBaseColorUniform = uniformLocation(UniformSemantics::MaterialBaseColor); materialBaseColorUniform != -1) {

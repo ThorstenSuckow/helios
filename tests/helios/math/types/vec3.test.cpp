@@ -298,3 +298,53 @@ TEST(Vec3Tests, sameMethodEdgeCases) {
     EXPECT_TRUE(v1.same(v2_y, 0.01f));
     EXPECT_TRUE(v1.same(v2_z, 0.01f));
 }
+
+TEST(Vec3Tests, zeroVectorNormalization) {
+    math::vec3f zeroVec = math::vec3f(0.0f, 0.0f, 0.0f);
+    math::vec3f normalized = zeroVec.normalize();
+
+    EXPECT_FLOAT_EQ(normalized[0], 0.0f);
+    EXPECT_FLOAT_EQ(normalized[1], 0.0f);
+    EXPECT_FLOAT_EQ(normalized[2], 0.0f);
+}
+
+TEST(Vec3Tests, addition) {
+    math::vec3f vec1 = math::vec3f(1.0f, 2.0f, 3.0f);
+    math::vec3f vec2 = math::vec3f(4.0f, 5.0f, 6.0f);
+
+    auto result = vec1 + vec2;
+
+    EXPECT_FLOAT_EQ(result[0], 5.0f);
+    EXPECT_FLOAT_EQ(result[1], 7.0f);
+    EXPECT_FLOAT_EQ(result[2], 9.0f);
+}
+
+TEST(Vec3Tests, scalarMultiplication) {
+    math::vec3f vec = math::vec3f(1.0f, -2.0f, 3.0f);
+    float scalar = 2.0f;
+
+    auto result = vec * scalar;
+
+    EXPECT_FLOAT_EQ(result[0], 2.0f);
+    EXPECT_FLOAT_EQ(result[1], -4.0f);
+    EXPECT_FLOAT_EQ(result[2], 6.0f);
+}
+
+TEST(Vec3Tests, scalarDivision) {
+    math::vec3f vec = math::vec3f(2.0f, -4.0f, 6.0f);
+    float scalar = 2.0f;
+
+    auto result = vec / scalar;
+
+    EXPECT_FLOAT_EQ(result[0], 1.0f);
+    EXPECT_FLOAT_EQ(result[1], -2.0f);
+    EXPECT_FLOAT_EQ(result[2], 3.0f);
+}
+
+TEST(Vec3Tests, scalarDivisionByZero) {
+    math::vec3f vec = math::vec3f(2.0f, -4.0f, 6.0f);
+
+#if !defined(NDEBUG)
+    EXPECT_DEATH(vec / 0.0f, "s must not be 0");
+#endif
+}

@@ -8,18 +8,18 @@ module;
 #include <deque>
 #include <memory>
 
-export module helios.game.CommandBuffer;
+export module helios.engine.game.CommandBuffer;
 
-import helios.game.Command;
-import helios.game.GameWorld;
-import helios.game.GameObject;
+import helios.engine.game.Command;
+import helios.engine.game.GameWorld;
+import helios.engine.game.GameObject;
 import helios.util.Guid;
 
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
 
-#define HELIOS_LOG_SCOPE "helios::game::CommandBuffer"
-export namespace helios::game {
+#define HELIOS_LOG_SCOPE "helios::engine::game::CommandBuffer"
+export namespace helios::engine::game {
 
     /**
      * @brief Queue for deferred execution of game commands.
@@ -31,8 +31,8 @@ export namespace helios::game {
      *
      * Typical usage pattern:
      * ```cpp
-     * helios::game::CommandBuffer cmdBuffer;
-     * helios::game::GameWorld world;
+     * helios::engine::game::CommandBuffer cmdBuffer;
+     * helios::engine::game::GameWorld world;
      *
      * // Queue commands during input processing
      * cmdBuffer.add(player.guid(), std::make_unique<MoveCommand>(direction, speed));
@@ -52,7 +52,7 @@ export namespace helios::game {
          */
         struct TargetedCommand {
             helios::util::Guid guid;
-            std::unique_ptr<helios::game::Command> command;
+            std::unique_ptr<helios::engine::game::Command> command;
         };
 
         /**
@@ -84,7 +84,7 @@ export namespace helios::game {
          * @note This overload is useful when the GameObject instance is not directly available,
          *       such as in networked scenarios or when processing serialized commands.
          */
-        void add(const helios::util::Guid& guid, std::unique_ptr<helios::game::Command> command);
+        void add(const helios::util::Guid& guid, std::unique_ptr<helios::engine::game::Command> command);
 
         /**
          * @brief Executes all buffered commands against the GameWorld and clears the buffer.
@@ -101,7 +101,7 @@ export namespace helios::game {
          *          and remaining commands will not be executed. Consider making execute() noexcept
          *          or handling exceptions within command implementations.
          */
-        CommandBuffer& flush(helios::game::GameWorld& gameWorld);
+        CommandBuffer& flush(helios::engine::game::GameWorld& gameWorld);
 
         /**
          * @brief Clears all buffered commands without executing them.

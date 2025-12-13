@@ -4,18 +4,18 @@ module;
 #include <deque>
 #include <memory>
 
-module helios.game.CommandBuffer;
+module helios.engine.game.CommandBuffer;
 
-import helios.game.Command;
-import helios.game.GameWorld;
-import helios.game.GameObject;
+import helios.engine.game.Command;
+import helios.engine.game.GameWorld;
+import helios.engine.game.GameObject;
 import helios.util.Guid;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
 
-namespace helios::game {
+namespace helios::engine::game {
 
-    void CommandBuffer::add(const helios::util::Guid& guid, std::unique_ptr<helios::game::Command> command) {
+    void CommandBuffer::add(const helios::util::Guid& guid, std::unique_ptr<helios::engine::game::Command> command) {
         if (!command) {
             logger_.warn("Attempted to add a null command to the command buffer");
             return;
@@ -23,7 +23,7 @@ namespace helios::game {
         commandBuffer_.emplace_back(TargetedCommand{guid, std::move(command)});
     }
 
-    CommandBuffer& CommandBuffer::flush(helios::game::GameWorld& gameWorld) {
+    CommandBuffer& CommandBuffer::flush(helios::engine::game::GameWorld& gameWorld) {
         for (auto& targetedCommand : commandBuffer_) {
             auto* gameObject = gameWorld.find(targetedCommand.guid);
             if (!gameObject) {
@@ -42,5 +42,5 @@ namespace helios::game {
         return *this;
     }
 
-} // namespace helios::game
+} // namespace helios::engine::game
 

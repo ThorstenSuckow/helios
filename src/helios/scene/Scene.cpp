@@ -27,19 +27,17 @@ namespace helios::scene {
     using namespace helios::math;
 
 
-    void Scene::propagateWorldTransform(SceneNode& node, const mat4f& wt) const {
-
-        const auto& parentWt = wt * node.localTransform().transform();
+    void Scene::propagateWorldTransform(SceneNode& node, const mat4f& parentWorldTransform) const {
 
         // if the worldTransform was not updated,
         // branch back into selective updates
-        if (!node.setWorldTransform(parentWt, sceneGraphKey_)) {
+        if (!node.applyWorldTransform(parentWorldTransform, sceneGraphKey_)) {
             for (auto& child: node.children()) {
-                updateNodes(*child, parentWt);
+                updateNodes(*child, node.cachedWorldTransform());
             }
         } else {
             for (auto& child: node.children()) {
-                propagateWorldTransform(*child, parentWt);
+                propagateWorldTransform(*child, node.cachedWorldTransform());
             }
         }
     }
@@ -66,7 +64,7 @@ namespace helios::scene {
         if (!root_) {
             logger_.error("Unexpected nullptr for this Scene's root.");
         }
-        return root_->addChild(std::move(node));
+        return root_->addNode(std::move(node));
     }
 
 

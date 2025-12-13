@@ -93,61 +93,62 @@ mat4f combined = B * A;  // A is applied first, then B
 
 ## View Matrix Construction
 
-The View Matrix is computed as the inverse of the camera's World Transform. For a camera node:
+The View Matrix is computed as the inverse of the camera's World Transform. Since `helios` uses an orthonormal basis for transforms (Rotation + Translation), the inversion is optimized by transposing the rotation matrix and computing the inverse translation.
+
+Additionally, the Z-axis is negated to convert from the engine's Left-Handed System (LHS) to OpenGL's Right-Handed System (RHS).
 
 ```cpp
-// In CameraSceneNode::worldTransform()
-const auto wt = SceneNode::worldTransform();
+// In CameraSceneNode::onWorldTransformUpdate()
+const auto wt = SceneNode::cachedWorldTransform();
 
-// Extract basis vectors and eye position
-const auto x = vec3f{wt(0, 0), wt(1, 0), wt(2, 0)};
-const auto y = vec3f{wt(0, 1), wt(1, 1), wt(2, 1)};
-const auto z = vec3f{wt(0, 2), wt(1, 2), wt(2, 2)};
-const auto eye = vec3f{wt(0, 3), wt(1, 3), wt(2, 3)};
+// Extract basis vectors and position
+const auto x = helios::math::vec3f{wt(0, 0), wt(1, 0), wt(2, 0)};
+const auto y = helios::math::vec3f{wt(0, 1), wt(1, 1), wt(2, 1)};
+const auto z = helios::math::vec3f{wt(0, 2), wt(1, 2), wt(2, 2)};
+const auto eye = helios::math::vec3f{wt(0, 3), wt(1, 3), wt(2, 3)};
 
-// Construct inverse (View Matrix) with Z-negation for OpenGL
-mat4f viewMatrix = mat4f{
-    x[0],  y[0], -z[0], 0.0f,
-    x[1],  y[1], -z[1], 0.0f,
-    x[2],  y[2], -z[2], 0.0f,
-    -dot(x, eye), -dot(y, eye), dot(z, eye), 1.0f
+// Compute view matrix: inverse of world transform with Z-negation for OpenGL RHS
+// Rotation is transposed (inverse of orthonormal matrix)
+// Translation is: -dot(axis, eye)
+auto viewMatrix = helios::math::mat4f{
+    x[0],          y[0],          -z[0],        0.0f,
+    x[1],          y[1],          -z[1],        0.0f,
+    x[2],          y[2],          -z[2],        0.0f,
+    -dot(x, eye), -dot(y, eye),    dot(z, eye), 1.0f
 };
 ```
 
-The negation of the Z-axis converts from helios LHS to OpenGL's RHS expectation.
+## Units of Measurement
 
-## Projection Matrix
+helios enforces a strict unit convention to ensure consistency across physics, rendering, and game logic.
 
-Perspective projection uses standard parameters:
+### Spatial Units
 
-| Parameter | Description |
-|-----------|-------------|
-| `fovY` | Vertical field of view in **radians** |
-| `aspectRatio` | Width / Height ratio |
-| `zNear` | Near clipping plane distance (positive) |
-| `zFar` | Far clipping plane distance (positive) |
+The standard unit of length in helios is the **Meter**.
 
-Both `zNear` and `zFar` are specified as positive values representing distances from the camera, regardless of the coordinate system handedness.
+- **1.0 Helios Unit = 1.0 Meter**
 
-## Units System
+All spatial coordinates, distances, and sizes in the engine (e.g., `transform.position`, `mesh.vertices`) are expressed in meters.
 
-### Standard Units
+#### Helper Constants
 
-helios uses a standardized unit system for consistent measurements across the engine:
+The `helios::core::units` module provides constants and conversion helpers:
 
-| Measurement | Standard Unit | Description |
-|-------------|---------------|-------------|
-| Distance    | **Meter**     | 1 helios unit (hu) = 1 meter |
-| Time        | **Seconds**   | Used for delta time, animations |
+- `helios::core::units::METERS` (1.0)
+- `helios::core::units::CENTIMETERS` (0.01)
 
-### Helios Units (hu)
+### Temporal Units
 
-The **helios unit** (hu) is the engine's standard unit of measurement:
+The standard unit of time in helios is the **Second**.
 
-- **1 hu = 1 Meter**
-- All distances, positions, and sizes are expressed in meters by default
+- **1.0 Helios Time Unit = 1.0 Second**
 
-This provides intuitive world-scale dimensions that match real-world measurements.
+All durations, timestamps, and delta times (e.g., `deltaTime`, `animation.duration`) are expressed in seconds.
+
+#### Helper Constants
+
+- `helios::core::units::SECONDS` (1.0)
+- `helios::core::units::MILLISECONDS` (0.001)
 
 ### Usage Example
 
@@ -156,24 +157,11 @@ import helios.core.units;
 
 using namespace helios::core::units;
 
-// Available unit types
-enum class Unit { Meter, Centimeter, Seconds, MilliSeconds };
+// Define a distance of 50 centimeters
+float distance = fromCm(50.0f); // Returns 0.5f (meters)
 
-// Set object size in world units (meters)
-gameObject->setSize(2.0f, 1.0f, 0.5f, Unit::Meter);
-
-// A 5-meter tall object
-constexpr float HEIGHT = 5.0f; // 5 hu = 5 meters
-```
-
-### Constants
-
-Unit definitions are available as `constexpr` in `helios::core::units`:
-
-```cpp
-// Unit definitions
-constexpr float METERS = 1.0f;
-constexpr float CENTIMETERS = 0.01f;
+// Define a duration of 100 milliseconds
+float duration = fromMs(100.0f); // Returns 0.1f (seconds)
 ```
 
 ## Related Modules

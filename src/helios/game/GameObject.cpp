@@ -51,9 +51,9 @@ namespace helios::game {
 
         transform_->scale(
             helios::math::vec3f{
-                helios::core::units::to(width != 0 && csize[0] != 0 ? width/csize[0] : 0, unit),
-                helios::core::units::to(height != 0 && csize[1] != 0 ? height/csize[1] : 0, unit),
-                helios::core::units::to(depth != 0 && csize[2] != 0 ? depth/csize[2] : 0, unit),
+                width != 0 && csize[0] != 0 ? helios::core::units::to(width, unit)/csize[0] : 0,
+                height != 0 && csize[0] != 0 ? helios::core::units::to(height, unit)/csize[1] : 0,
+                depth != 0 && csize[0] != 0 ? helios::core::units::to(depth, unit)/csize[2] : 0,
             }
         );
 

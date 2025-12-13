@@ -42,12 +42,12 @@ export namespace helios::core::units {
     /**
      * @brief Default length unit used throughout helios (1 meter per helios unit).
      */
-    constexpr auto HELIOS_UNIT = Unit::Meter;
+    constexpr auto HELIOS_SPATIAL_UNIT = Unit::Meter;
 
     /**
      * @brief Default time unit used for all timing APIs (seconds).
      */
-    constexpr auto HELIOS_TIME_UNIT = Unit::Seconds;
+    constexpr auto HELIOS_TEMPORAL_UNIT = Unit::Seconds;
 
     /**
      * @brief Ratio of centimeters to meters.
@@ -60,14 +60,24 @@ export namespace helios::core::units {
     constexpr float METERS = 1.0f;
 
     /**
+     * @brief Ratio of milliseconds to seconds.
+     */
+    constexpr float MILLISECONDS = 0.001f;
+
+    /**
+     * @brief Ratio of seconds to seconds (identity).
+     */
+    constexpr float SECONDS = 1.0f;
+
+    /**
      * @brief Converts centimeters to meters.
      *
      * @param cm Value expressed in centimeters.
      *
      * @return Converted value expressed in meters.
      */
-    constexpr float cm(const float cm) noexcept {
-        return  cm * 0.01f;
+    constexpr float fromCm(const float cm) noexcept {
+        return  cm * CENTIMETERS;
     };
 
     /**
@@ -77,45 +87,48 @@ export namespace helios::core::units {
      *
      * @return Same value expressed in meters.
      */
-    constexpr float m(const float m) noexcept {
-        return  m * 1.0f;
+    constexpr float fromM(const float m) noexcept {
+        return  m * METERS;
     };
 
     /**
      * @brief Converts seconds to seconds (identity helper).
      */
-    constexpr float s(const float s) noexcept {
-        return s * 1.0f;
+    constexpr float fromS(const float s) noexcept {
+        return s * SECONDS;
     }
 
     /**
      * @brief Converts milliseconds to seconds.
      */
-    constexpr float ms(const float ms) noexcept {
-        return ms * 0.001f;
+    constexpr float fromMs(const float ms) noexcept {
+        return ms * MILLISECONDS;
     }
 
     /**
-     * @brief Converts a value into the requested unit.
+     * @brief Converts a value from a given unit to helios units.
      *
-     * @param v Value to convert, expressed in helios units.
-     * @param unit Target unit.
+     * This method takes a value in the specified unit and converts it to helios units,
+     * e.g. spatial units to METER, temporal values to SECONDS.
      *
-     * @return Value expressed in the target unit.
+     * @param v Value to convert.
+     * @param unit Unit of the value to convert.
+     *
+     * @return Value expressed in temporal or spatial helios units.
      */
-    constexpr float to(const float v, const Unit unit) noexcept {
+    [[nodiscard]] constexpr float from(const float v, const Unit unit) noexcept {
         switch (unit) {
             case Unit::Meter:
-                return m(v);
+                return fromM(v);
             case Unit::Centimeter:
-                return cm(v);
+                return fromCm(v);
             case Unit::Seconds:
-                return s(v);
+                return fromS(v);
             case Unit::MilliSeconds:
-                return ms(v);
+                return fromMs(v);
         }
 
-        return v;
+        std::unreachable();
     };
 
 }

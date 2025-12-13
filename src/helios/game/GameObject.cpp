@@ -49,7 +49,7 @@ namespace helios::game {
 
         const auto& csize = canonicalSize_;
 
-        transform_->scale(
+        transform_->setScale(
             helios::math::vec3f{
                 width != 0 && csize[0] != 0 ? helios::core::units::from(width, unit)/csize[0] : 0,
                 height != 0 && csize[0] != 0 ? helios::core::units::from(height, unit)/csize[1] : 0,
@@ -60,18 +60,18 @@ namespace helios::game {
         return *this;
     }
 
-    GameObject& GameObject::scale(const helios::math::vec3f& scale) noexcept {
-        transform_->scale(scale);
+    GameObject& GameObject::setScale(const helios::math::vec3f& scale) noexcept {
+        transform_->setScale(scale);
         return *this;
     }
 
-    GameObject& GameObject::rotate(const helios::math::mat4f& rotation) noexcept {
-        transform_->rotate(rotation);
+    GameObject& GameObject::setRotation(const helios::math::mat4f& rotation) noexcept {
+        transform_->setRotation(rotation);
         return *this;
     }
 
-    GameObject& GameObject::translate(const helios::math::vec3f& translation) noexcept {
-        transform_->translate(translation);
+    GameObject& GameObject::setTranslation(const helios::math::vec3f& translation) noexcept {
+        transform_->setTranslation(translation);
         return *this;
     }
 

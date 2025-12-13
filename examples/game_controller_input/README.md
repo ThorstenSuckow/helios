@@ -139,7 +139,7 @@ void updateButton(
     helios::rendering::model::config::MaterialPropertiesOverride& originalOverride
 ) {
     // Scale up when pressed
-    button.scale(helios::math::vec3f(SCALING_FACTOR * (pressed ? 1.2f : 1.0f)));
+    button.setScale(helios::math::vec3f(SCALING_FACTOR * (pressed ? 1.2f : 1.0f)));
     
     // Make it opaque when pressed, semi-transparent otherwise
     if (button.renderable()->hasMaterialOverride()) {
@@ -159,8 +159,8 @@ const float leftTrigger = gamepadState.triggerLeft();
 const float axisLeftX  = gamepadState.leftX();
 
 // Use values to transform scene nodes
-stickAxisLeft_ptr->scale(helios::math::vec3f(gamepadState.left() * 0.5f));
-triggerLeftNode_ptr->scale(helios::math::vec3f(triggerBaseScale[0] * leftTrigger, ...));
+stickAxisLeft_ptr->setScale(helios::math::vec3f(gamepadState.left() * 0.5f));
+triggerLeftNode_ptr->setScale(helios::math::vec3f(triggerBaseScale[0] * leftTrigger, ...));
 ```
 
 ## Building and Running

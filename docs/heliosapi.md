@@ -84,7 +84,7 @@ auto scene = std::make_unique<Scene>(std::move(cullingStrategy));
 // Add a game object
 auto cubeNode = std::make_unique<SceneNode>(std::move(cubeRenderable));
 auto* node = scene->addNode(std::move(cubeNode));
-node->translate(vec3f(0.0f, 2.0f, 0.0f));
+node->setTranslation(vec3f(0.0f, 2.0f, 0.0f));
 
 // Add a camera as child of the cube (follows cube position)
 auto camera = std::make_unique<Camera>();
@@ -421,7 +421,7 @@ int main() {
     
     auto cameraNode = std::make_unique<CameraSceneNode>(std::move(camera));
     auto* camPtr = scene->addNode(std::move(cameraNode));
-    camPtr->translate(vec3f(0.0f, 0.0f, 5.0f));
+    camPtr->setTranslation(vec3f(0.0f, 0.0f, 5.0f));
     camPtr->lookAt(vec3f(0.0f, 0.0f, 0.0f), vec3f(0.0f, 1.0f, 0.0f));
     
     // Connect viewport to camera

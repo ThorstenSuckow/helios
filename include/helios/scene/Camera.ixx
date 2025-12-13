@@ -30,35 +30,35 @@ export namespace helios::scene {
         /**
          * @brief The view matrix of this camera.
          */
-        mutable helios::math::mat4f viewMatrix_;
+        helios::math::mat4f viewMatrix_;
 
         /**
          * @brief The aspect ratio of the camera (width/height).
          *
          * Defaults to 1.0.
          */
-        mutable float aspectRatio_ = 1.0f;
+        float aspectRatio_ = 1.0f;
 
         /**
          * @brief The near clipping plane distance.
          *
          * Defaults to 0.1.
          */
-        mutable float zNear_ = 0.1f;
+        float zNear_ = 0.1f;
 
         /**
          * @brief The far clipping plane distance.
          *
          * Defaults to 1000.0.
          */
-        mutable float zFar_ = 1000.0f;
+        float zFar_ = 1000.0f;
 
         /**
          * @brief The vertical field of view in radians.
          *
          * Defaults to 90 degrees (converted to radians).
          */
-        mutable float fovY_ = helios::math::radians(90);
+        float fovY_ = helios::math::radians(90);
 
         /**
          * @brief Flag indicating whether the matrices need to be updated.
@@ -120,7 +120,7 @@ export namespace helios::scene {
          *
          * @see helios::scene::CameraSceneNode::worldTransform()
          */
-        const Camera& setViewMatrix(const helios::math::mat4f& viewMatrix) const noexcept;
+        Camera& setViewMatrix(const helios::math::mat4f& viewMatrix) noexcept;
 
         /**
          * @brief Sets the aspect ratio used by the camera.
@@ -129,7 +129,7 @@ export namespace helios::scene {
          *
          * @return A reference to this camera instance.
          */
-        const Camera& setAspectRatio(float aspectRatio) const noexcept;
+        Camera& setAspectRatio(float aspectRatio) noexcept;
 
         /**
          * @brief Sets the perspective projection parameters.
@@ -141,7 +141,7 @@ export namespace helios::scene {
          *
          * @return A reference to this camera instance.
          */
-        const Camera& setPerspective(float fovY, float aspectRatio, float zNear, float zFar) const noexcept;
+        Camera& setPerspective(float fovY, float aspectRatio, float zNear, float zFar) noexcept;
 
         /**
          * @brief Sets the near clipping plane distance.
@@ -150,7 +150,7 @@ export namespace helios::scene {
          *
          * @return A reference to this camera instance.
          */
-        const Camera& setZNear(float zNear) const noexcept;
+        Camera& setZNear(float zNear) noexcept;
 
         /**
          * @brief Sets the far clipping plane distance.
@@ -159,7 +159,7 @@ export namespace helios::scene {
          *
          * @return A reference to this camera instance.
          */
-        const Camera& setZFar(float zFar) const noexcept;
+        Camera& setZFar(float zFar) noexcept;
 
         /**
          * @brief Sets the vertical field of view.
@@ -168,7 +168,7 @@ export namespace helios::scene {
          *
          * @return A reference to this camera instance.
          */
-        const Camera& setFovY(float fovY) const noexcept;
+        Camera& setFovY(float fovY) noexcept;
 
         /**
          * @brief Gets the current vertical field of view.

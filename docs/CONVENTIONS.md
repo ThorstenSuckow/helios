@@ -162,6 +162,9 @@ float distance = fromCm(50.0f); // Returns 0.5f (meters)
 
 // Define a duration of 100 milliseconds
 float duration = fromMs(100.0f); // Returns 0.1f (seconds)
+
+// Generic conversion
+float val = from(100.0f, Unit::Centimeter); // Returns 1.0f
 ```
 
 ## Related Modules
@@ -173,4 +176,5 @@ float duration = fromMs(100.0f); // Returns 0.1f (seconds)
 - `helios.scene.Camera` — Projection matrix management
 - `helios.scene.CameraSceneNode` — View matrix computation and scene graph integration
 - `helios.scene.InheritTransform` — Selective transform inheritance flags
+
 

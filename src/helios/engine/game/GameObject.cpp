@@ -1,6 +1,6 @@
 module;
 
-module helios.game.GameObject;
+module helios.engine.game.GameObject;
 
 import helios.scene.SceneNode;
 import helios.util.Guid;
@@ -8,7 +8,7 @@ import helios.scene.Transform;
 import helios.math.types;
 import helios.core.units;
 
-namespace helios::game {
+namespace helios::engine::game {
 
     GameObject::GameObject(helios::scene::SceneNode* sceneNode) :
         canonicalSize_(
@@ -75,5 +75,5 @@ namespace helios::game {
         return *this;
     }
 
-} // namespace helios::game
+} // namespace helios::engine::game
 

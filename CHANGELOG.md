@@ -35,9 +35,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `setSize()` method for unit-based object sizing
 
 #### Units System (`helios.core.units`)
-- `Unit` enum (Meter, Centimeter, HeliosUnit)
+- `Unit` enum (Meter, Centimeter, Seconds, MilliSeconds)
 - Conversion utilities between unit types
-- Standard unit: 1 Meter = 100 Helios Units (hu)
+- Standard unit: 1 Meter = 100 Centimeters (cm)
 - Time measurement standard: Seconds
 
 #### ImGui Integration Layer

@@ -128,7 +128,7 @@ namespace helios::scene {
 
     void CameraSceneNode::onWorldTransformUpdate() noexcept {
 
-        helios::scene::SceneNode::SceneNode::onWorldTransformUpdate();
+        helios::scene::SceneNode::onWorldTransformUpdate();
 
         // Updates this SceneNode's worldTransform_
         const auto wt = helios::scene::SceneNode::cachedWorldTransform();

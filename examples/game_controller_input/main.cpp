@@ -103,7 +103,7 @@ int main() {
         stringFileReader
     );
     auto uniformLocationMap = std::make_unique<helios::ext::opengl::rendering::shader::OpenGLUniformLocationMap>();
-    bool uniformAssigned    = uniformLocationMap->set(helios::rendering::shader::UniformSemantics::WorldMatrix, 1);
+    bool uniformAssigned    = uniformLocationMap->set(helios::rendering::shader::UniformSemantics::ModelMatrix, 1);
     assert(uniformAssigned && "could not assign the world matrix uniform");
     uniformAssigned    = uniformLocationMap->set(helios::rendering::shader::UniformSemantics::MaterialBaseColor, 2);
     assert(uniformAssigned && "could not assign the world matrix uniform");

@@ -66,10 +66,10 @@ auto shader_ptr = std::make_shared<OpenGLShader>(
 #version 450 core
 
 layout (location=0) in vec3 aPos;
-layout (location=1) uniform mat4 worldMatrix;
+layout (location=1) uniform mat4 modelMatrix;
 
 void main() {
-    gl_Position = worldMatrix * vec4(aPos, 1.0f);
+    gl_Position = modelMatrix * vec4(aPos, 1.0f);
 }
 ```
 
@@ -90,7 +90,7 @@ We tell the shader where to find the world transformation matrix:
 
 ```cpp
 auto uniformLocationMap = std::make_unique<OpenGLUniformLocationMap>();
-uniformLocationMap->set(UniformSemantics::WorldMatrix, 1);
+uniformLocationMap->set(UniformSemantics::ModelMatrix, 1);
 shader_ptr->setUniformLocationMap(std::move(uniformLocationMap));
 ```
 

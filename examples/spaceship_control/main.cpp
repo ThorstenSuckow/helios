@@ -194,9 +194,9 @@ int main() {
     auto shader_ptr =
             std::make_shared<OpenGLShader>("./resources/cube.vert", "./resources/cube.frag", basicStringFileReader);
 
-    // Map the WorldMatrix uniform to location 1 in the shader
+    // Map the ModelMatrix uniform to location 1 in the shader
     auto uniformLocationMap = std::make_unique<OpenGLUniformLocationMap>();
-    bool mapping = uniformLocationMap->set(UniformSemantics::WorldMatrix, 1);
+    bool mapping = uniformLocationMap->set(UniformSemantics::ModelMatrix, 1);
     mapping = uniformLocationMap->set(UniformSemantics::ViewMatrix, 2);
     mapping = uniformLocationMap->set(UniformSemantics::ProjectionMatrix, 3);
     mapping = uniformLocationMap->set(UniformSemantics::MaterialBaseColor, 4);

@@ -85,9 +85,9 @@ int main() {
         basicStringFileReader
     );
 
-    // Map the WorldMatrix uniform to location 1 in the shader
+    // Map the ModelMatrix uniform to location 1 in the shader
     auto uniformLocationMap = std::make_unique<OpenGLUniformLocationMap>();
-    [[maybe_unused]] bool mappingSuccess = uniformLocationMap->set(UniformSemantics::WorldMatrix, 1);
+    [[maybe_unused]] bool mappingSuccess = uniformLocationMap->set(UniformSemantics::ModelMatrix, 1);
     shader_ptr->setUniformLocationMap(std::move(uniformLocationMap));
 
     // ========================================

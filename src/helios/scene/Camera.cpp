@@ -24,18 +24,18 @@ namespace helios::scene {
         return viewMatrix_;
     }
 
-    const Camera& Camera::setViewMatrix(const helios::math::mat4f& viewMatrix) const noexcept {
+    Camera& Camera::setViewMatrix(const helios::math::mat4f& viewMatrix) noexcept {
         viewMatrix_ = viewMatrix;
         return *this;
     }
 
-    const Camera& Camera::setAspectRatio(const float aspectRatio) const noexcept {
+    Camera& Camera::setAspectRatio(const float aspectRatio) noexcept {
         needsUpdate_ = true;
         aspectRatio_ = aspectRatio;
         return *this;
     }
 
-    const Camera& Camera::setPerspective(const float fovY, const float aspectRatio, const float zNear, const float zFar) const noexcept {
+    Camera& Camera::setPerspective(const float fovY, const float aspectRatio, const float zNear, const float zFar) noexcept {
         assert(zNear > 0 && "zNear must be positive");
         assert(zFar > 0 && zFar > zNear && "zFar must be positive and greater than zNear");
         fovY_ = fovY;
@@ -46,19 +46,19 @@ namespace helios::scene {
         return *this;
     }
 
-    const Camera& Camera::setZNear(const float zNear) const noexcept {
+    Camera& Camera::setZNear(const float zNear) noexcept {
         zNear_ = zNear;
         needsUpdate_ = true;
         return *this;
     }
 
-    const Camera& Camera::setZFar(const float zFar) const noexcept {
+    Camera& Camera::setZFar(const float zFar) noexcept {
         zFar_ = zFar;
         needsUpdate_ = true;
         return *this;
     }
 
-    const Camera& Camera::setFovY(const float fovY) const noexcept {
+    Camera& Camera::setFovY(const float fovY) noexcept {
         fovY_ = fovY;
         needsUpdate_ = true;
         return *this;

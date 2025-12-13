@@ -95,7 +95,7 @@ export namespace helios::rendering {
         /**
          * @brief The cameraSceneNode associated as the main camera with this viewport.
          */
-        const helios::scene::CameraSceneNode* cameraSceneNode_ = nullptr;
+        helios::scene::CameraSceneNode* cameraSceneNode_ = nullptr;
 
         /**
          * @brief Flag indicating if cached dimensions are dirty.
@@ -127,7 +127,7 @@ export namespace helios::rendering {
          * This method should be called internally whenever the dimensions of the owning
          * RenderTarget change.
          */
-        void updateCamera() const noexcept;
+        void updateCamera() noexcept;
 
     public:
         /**
@@ -169,7 +169,7 @@ export namespace helios::rendering {
          *
          * @return A reference to this viewport to allow fluent chaining.
          */
-        Viewport& setCameraSceneNode(const helios::scene::CameraSceneNode* cameraSceneNode) noexcept;
+        Viewport& setCameraSceneNode(helios::scene::CameraSceneNode* cameraSceneNode) noexcept;
 
         /**
          * @brief Gets the camera scene node associated with this viewport.

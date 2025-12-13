@@ -58,7 +58,7 @@ export namespace helios::math {
          *
          * @return A 3D vector corresponding to the converted representation of the object or input.
          */
-        constexpr helios::math::vec3<T> toVec3() {
+        constexpr helios::math::vec3<T> toVec3() const {
             return helios::math::vec3<T>{v[0], v[1], static_cast<T>(0)};
         }
 

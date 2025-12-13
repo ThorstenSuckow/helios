@@ -295,7 +295,7 @@ auto gameWorld = GameWorld{};
 auto spaceship = std::make_unique<Spaceship>(sceneNode);
 auto* spaceshipPtr = gameWorld.addGameObject(std::move(spaceship));
 
-// Set size using engine units (1 meter = 100 helios units)
+// Set size using engine units (1 hu = 1 meter)
 spaceshipPtr->setSize(5.0f, 5.0f, 0.0f, helios::core::units::Unit::Meter);
 
 // Game loop

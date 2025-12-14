@@ -10,7 +10,7 @@ import helios.rendering.Renderable;
 import helios.util.Guid;
 import helios.scene.Transform;
 import helios.math.types;
-
+import helios.math.TransformType;
 
 namespace helios::scene {
 
@@ -133,39 +133,13 @@ namespace helios::scene {
     helios::math::mat4f SceneNode::inheritWorldTransform(const helios::math::mat4f& parentWorldTransform) noexcept {
         using namespace helios::math;
 
-        if (inheritance_ == helios::scene::InheritTransform::Inherit::All) {
+        if (inheritance_ == helios::math::TransformType::All) {
             return parentWorldTransform * localTransform_.transform();
         }
 
-        auto id = mat4f::identity();
-        if (helios::scene::InheritTransform::has(inheritance_, helios::scene::InheritTransform::Inherit::Translation)) {
-            id(0, 3) = parentWorldTransform(0, 3);
-            id(1, 3) = parentWorldTransform(1, 3);
-            id(2, 3) = parentWorldTransform(2, 3);
-        }
-
-        if (helios::scene::InheritTransform::has(inheritance_, helios::scene::InheritTransform::Inherit::Rotation)) {
-            auto& pt = parentWorldTransform;
-            auto bx = vec3f(pt(0, 0), pt(1, 0),  pt(2, 0));
-            auto by = vec3f(pt(0, 1), pt(1, 1),  pt(2, 1));
-            auto bz = vec3f(pt(0, 2), pt(1, 2),  pt(2, 2));
-
-            auto sx = bx.length();
-            auto sy = by.length();
-            auto sz = bz.length();
-
-            vec3f rx = sx != 0 ? bx/sx : vec3f{1, 0, 0};
-            vec3f ry = sy != 0 ? by/sy : vec3f{0, 1, 0};
-            vec3f rz = sz != 0 ? bz/sz : vec3f{0, 0, 1};
-
-            id(0,0) = rx[0]; id(0,1) = ry[0]; id(0,2) = rz[0];
-            id(1,0) = rx[1]; id(1,1) = ry[1]; id(1,2) = rz[1];
-            id(2,0) = rx[2]; id(2,1) = ry[2]; id(2,2) = rz[2];
-        }
+        auto id = parentWorldTransform.decompose(inheritance_);
 
         return id * localTransform_.transform();
-
-
     }
 
 
@@ -219,11 +193,11 @@ namespace helios::scene {
         }
     }
 
-    helios::scene::InheritTransform::Inherit SceneNode::inheritance() const noexcept {
+    helios::math::TransformType SceneNode::inheritance() const noexcept {
         return inheritance_;
     }
 
-    void SceneNode::setInheritance(const helios::scene::InheritTransform::Inherit inherit) noexcept {
+    void SceneNode::setInheritance(const helios::math::TransformType inherit) noexcept {
         inheritance_ = inherit;
         needsUpdate_ = true;
     }

@@ -21,7 +21,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### Scene Graph & Camera System
 - `CameraSceneNode` for camera integration into scene hierarchy
-- `InheritTransform` enum for selective transform inheritance (Translation, Rotation, Scale)
+- `TransformType` enum for selective transform inheritance (Translation, Rotation, Scale) in `helios.math.transform`
+- `mat4::decompose()` member function for extracting transform components
+- `mat4::transpose()` member function for matrix transposition
+- `transformTypeMatch()` helper for bitmask flag testing
 - `lookAt()` and `lookAtLocal()` methods for camera orientation
 - `onWorldTransformUpdate()` virtual callback for transform change notifications
 - Camera-follows-object pattern via scene graph parenting
@@ -158,14 +161,19 @@ nodePtr->lookAt({0, 0, 0}, {0, 1, 0});
 **Migration:** Replace `Camera` usage with `CameraSceneNode`. Use scene graph methods (`translate`, `rotate`) instead of direct camera manipulation.
 
 #### Transform Inheritance
-Child nodes can now selectively inherit transform components:
+Child nodes can now selectively inherit transform components using `helios::math::TransformType`:
 
 ```cpp
+import helios.math.transform;
+
 // Camera follows parent position only, maintains own orientation
-cameraNode->setInheritance(InheritTransform::Inherit::Translation);
+cameraNode->setInheritance(helios::math::TransformType::Translation);
 
 // Full inheritance (default)
-childNode->setInheritance(InheritTransform::Inherit::All);
+childNode->setInheritance(helios::math::TransformType::All);
+
+// Combine flags
+node->setInheritance(helios::math::TransformType::Translation | helios::math::TransformType::Rotation);
 ```
 
 #### Enum Sentinel Naming (#34)

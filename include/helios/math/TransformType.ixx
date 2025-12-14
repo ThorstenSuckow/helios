@@ -1,15 +1,15 @@
 /**
- * @file InheritTransform.ixx
+ * @file TransformType.ixx
  * @brief Defines transform inheritance flags for scene graph hierarchies.
  */
 module;
 
 #include <cstdint>
 
-export module helios.scene.InheritTransform;
+export module helios.math.TransformType;
 
 
-export namespace helios::scene::InheritTransform {
+export namespace helios::math {
 
     /**
      * @brief Bitmask enum controlling which transform components a child node inherits from its parent.
@@ -20,25 +20,25 @@ export namespace helios::scene::InheritTransform {
      * are applied to the child.
      *
      * This enables flexible scene graph behaviors such as:
-     * - A camera that follows an object's position but maintains its own orientation (`Inherit::Translation`)
-     * - UI elements that inherit full transforms (`Inherit::All`)
-     * - Objects that only inherit rotation for billboard effects (`Inherit::Rotation`)
+     * - A camera that follows an object's position but maintains its own orientation (`TransformType::Translation`)
+     * - UI elements that inherit full transforms (`TransformType::All`)
+     * - Objects that only inherit rotation for billboard effects (`TransformType::Rotation`)
      *
      * Example usage:
      * ```cpp
-     * using namespace helios::scene::InheritTransform;
+     * using namespace helios::math;
      *
      * // Camera follows spaceship position only
-     * cameraNode->setInheritance(Inherit::Translation);
+     * cameraNode->setInheritance(TransformType::Translation);
      *
      * // Full transform inheritance (default)
-     * childNode->setInheritance(Inherit::All);
+     * childNode->setInheritance(TransformType::All);
      *
      * // Combine specific flags
-     * node->setInheritance(Inherit::Translation | Inherit::Rotation);
+     * node->setInheritance(TransformType::Translation | TransformType::Rotation);
      * ```
      */
-    enum class Inherit : uint8_t {
+    enum class TransformType : uint8_t {
         /**
          * @brief Inherit only the translation component from the parent.
          *
@@ -80,8 +80,8 @@ export namespace helios::scene::InheritTransform {
      *
      * @return The combined inheritance mask.
      */
-    inline Inherit operator|(Inherit a, Inherit b) {
-        return static_cast<Inherit>(static_cast<uint8_t>(a) | static_cast<uint8_t>(b));
+    inline TransformType operator|(TransformType a, TransformType b) {
+        return static_cast<TransformType>(static_cast<uint8_t>(a) | static_cast<uint8_t>(b));
     }
 
 
@@ -95,16 +95,16 @@ export namespace helios::scene::InheritTransform {
      *
      * Example usage:
      * ```cpp
-     * using namespace helios::scene::InheritTransform;
+     * using namespace helios::math;
      *
-     * Inherit mode = Inherit::Translation | Inherit::Rotation;
+     * TransformType mode = TransformType::Translation | TransformType::Rotation;
      *
-     * if (has(mode, Inherit::Translation)) {
+     * if (transformTypeMatch(mode, TransformType::Translation)) {
      *     // Apply parent translation...
      * }
      * ```
      */
-    inline bool has(Inherit mask, Inherit flag) {
+    inline bool transformTypeMatch(TransformType mask, TransformType flag) {
         return (static_cast<uint8_t>(mask) & static_cast<uint8_t>(flag)) != 0;
     }
 }

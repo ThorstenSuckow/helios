@@ -9,7 +9,7 @@ var classhelios_1_1rendering_1_1Viewport =
     [ "onRenderTargetResize", "classhelios_1_1rendering_1_1Viewport.html#a7739f87efe62f23fb891fe9cbfc4e1c2", null ],
     [ "renderTarget", "classhelios_1_1rendering_1_1Viewport.html#afa67d77263ec5dd36db0591ffb9f889d", null ],
     [ "setBounds", "classhelios_1_1rendering_1_1Viewport.html#a1935d17a330f646b6033b31799d6e22f", null ],
-    [ "setCameraSceneNode", "classhelios_1_1rendering_1_1Viewport.html#a309a84b609eb286f17fcaa9a8fe75652", null ],
+    [ "setCameraSceneNode", "classhelios_1_1rendering_1_1Viewport.html#a692205c554a7491297b8005412ddcb7f", null ],
     [ "setClearColor", "classhelios_1_1rendering_1_1Viewport.html#af94f8b0ec7697edea1c0cf843c03ad3d", null ],
     [ "setClearFlags", "classhelios_1_1rendering_1_1Viewport.html#a7199b3df8a9c5817eaa21173a9c6e434", null ],
     [ "setRenderTarget", "classhelios_1_1rendering_1_1Viewport.html#a9c8ed040c0e35728770ddd462860c5bc", null ],

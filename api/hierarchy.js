@@ -5,8 +5,8 @@ var hierarchy =
       [ "helios::ext::glfw::app::GLFWApplication", "classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication.html", null ]
     ] ],
     [ "helios::scene::Camera", "classhelios_1_1scene_1_1Camera.html", null ],
-    [ "helios::game::Command", "classhelios_1_1game_1_1Command.html", null ],
-    [ "helios::game::CommandBuffer", "classhelios_1_1game_1_1CommandBuffer.html", null ],
+    [ "helios::engine::game::Command", "classhelios_1_1engine_1_1game_1_1Command.html", null ],
+    [ "helios::engine::game::CommandBuffer", "classhelios_1_1engine_1_1game_1_1CommandBuffer.html", null ],
     [ "helios::app::controller::Controller", "classhelios_1_1app_1_1controller_1_1Controller.html", [
       [ "helios::app::controller::WindowRenderingController", "classhelios_1_1app_1_1controller_1_1WindowRenderingController.html", [
         [ "helios::app::controller::BasicWindowRenderingController", "classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController.html", null ]
@@ -30,9 +30,9 @@ var hierarchy =
     [ "helios::scene::FrustumCullingStrategy", "classhelios_1_1scene_1_1FrustumCullingStrategy.html", [
       [ "helios::scene::CullNoneStrategy", "classhelios_1_1scene_1_1CullNoneStrategy.html", null ]
     ] ],
-    [ "helios::game::GameObject", "classhelios_1_1game_1_1GameObject.html", null ],
+    [ "helios::engine::game::GameObject", "classhelios_1_1engine_1_1game_1_1GameObject.html", null ],
     [ "helios::input::GamepadState", "classhelios_1_1input_1_1GamepadState.html", null ],
-    [ "helios::game::GameWorld", "classhelios_1_1game_1_1GameWorld.html", null ],
+    [ "helios::engine::game::GameWorld", "classhelios_1_1engine_1_1game_1_1GameWorld.html", null ],
     [ "helios::ext::glfw::app::GLFWFactory", "classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWFactory.html", null ],
     [ "helios::ext::glfw::app::GLFWRAIIGuard", "classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard.html", null ],
     [ "helios::ext::glfw::window::GLFWWindowUserPointer", "structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowUserPointer.html", null ],
@@ -52,9 +52,9 @@ var hierarchy =
     [ "helios::input::InputAdapter", "classhelios_1_1input_1_1InputAdapter.html", [
       [ "helios::ext::glfw::input::GLFWInputAdapter", "classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter.html", null ]
     ] ],
-    [ "helios::game::InputHandler", "classhelios_1_1game_1_1InputHandler.html", null ],
+    [ "helios::engine::game::InputHandler", "classhelios_1_1engine_1_1game_1_1InputHandler.html", null ],
     [ "helios::input::InputManager", "classhelios_1_1input_1_1InputManager.html", null ],
-    [ "helios::game::InputSnapshot", "classhelios_1_1game_1_1InputSnapshot.html", null ],
+    [ "helios::engine::game::InputSnapshot", "classhelios_1_1engine_1_1game_1_1InputSnapshot.html", null ],
     [ "helios::ext::imgui::widgets::LogEntry", "structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html", null ],
     [ "helios::util::log::Logger", "classhelios_1_1util_1_1log_1_1Logger.html", null ],
     [ "helios::util::log::LogManager", "classhelios_1_1util_1_1log_1_1LogManager.html", null ],

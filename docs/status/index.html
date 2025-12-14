@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Project Status: Alpha | helios</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://helios.garagecraft.games/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://helios.garagecraft.games/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://helios.garagecraft.games/docs/status"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Project Status: Alpha | helios"><meta data-rh="true" name="description" content="Current Phase: Alpha – The core architecture is under active development. APIs may change without deprecation warnings."><meta data-rh="true" property="og:description" content="Current Phase: Alpha – The core architecture is under active development. APIs may change without deprecation warnings."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://helios.garagecraft.games/docs/status"><link data-rh="true" rel="alternate" href="https://helios.garagecraft.games/docs/status" hreflang="en"><link data-rh="true" rel="alternate" href="https://helios.garagecraft.games/docs/status" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://LK14YGETTG-dsn.algolia.net" crossorigin="anonymous"><link rel="search" type="application/opensearchdescription+xml" title="helios" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.d8266996.css">
-<script src="/assets/js/runtime~main.91ee30fe.js" defer="defer"></script>
-<script src="/assets/js/main.4f7a140a.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.867e2c7d.js" defer="defer"></script>
+<script src="/assets/js/main.035cb52d.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -84,7 +84,13 @@
 
 
 
-<table><thead><tr><th>Module</th><th>Phase</th><th>Relative Stability</th><th>Notes</th></tr></thead><tbody><tr><td>Rendering</td><td>Alpha</td><td>Low</td><td>RenderPass &amp; material pipeline evolving</td></tr><tr><td>Scene Graph</td><td>Alpha</td><td>Medium</td><td>Transforms &amp; hierarchy stable, culling pending</td></tr><tr><td>Input</td><td>Alpha</td><td>Medium</td><td>Keyboard/mouse OK, gamepad refinements pending</td></tr><tr><td>Math</td><td>Alpha</td><td>Low</td><td>Missing quaternions &amp; SIMD acceleration</td></tr><tr><td>Windowing</td><td>Alpha</td><td>Medium</td><td>GLFW integration functional</td></tr><tr><td>Logging</td><td>Alpha</td><td>Medium</td><td>Scoped logger integrated</td></tr><tr><td>Utilities</td><td>Alpha</td><td>Medium</td><td>GUID + file I/O stable</td></tr></tbody></table>
+
+
+
+
+
+
+<table><thead><tr><th>Module</th><th>Phase</th><th>Relative Stability</th><th>Notes</th></tr></thead><tbody><tr><td>Rendering</td><td>Alpha</td><td>Medium</td><td>Camera system refactored, RenderPass evolving</td></tr><tr><td>Scene Graph</td><td>Alpha</td><td>Medium</td><td>CameraSceneNode integration, transforms stable</td></tr><tr><td>Input</td><td>Alpha</td><td>Medium</td><td>Gamepad supported; Keyboard minimal (ESC only); Mouse pending</td></tr><tr><td>Math</td><td>Alpha</td><td>Low</td><td>Missing quaternions &amp; SIMD acceleration</td></tr><tr><td>Windowing</td><td>Alpha</td><td>High</td><td>GLFW integration stable</td></tr><tr><td>Logging</td><td>Alpha</td><td>High</td><td>Scoped logger &amp; ImGui sinks stable</td></tr><tr><td>ImGui</td><td>Alpha</td><td>Medium</td><td>Backend &amp; Widgets (Log, Camera, Gamepad) added</td></tr><tr><td>Utilities</td><td>Alpha</td><td>High</td><td>FramePacer, Stopwatch, Units system added</td></tr></tbody></table>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="milestones--progress">Milestones &amp; Progress<a href="#milestones--progress" class="hash-link" aria-label="Direct link to Milestones &amp; Progress" title="Direct link to Milestones &amp; Progress" translate="no">​</a></h2>
 
 
@@ -133,26 +139,24 @@
 
 
 
-<table><thead><tr><th>Milestone</th><th>State</th><th>Due</th><th>Progress</th><th>Description</th></tr></thead><tbody><tr><td>milestone_1</td><td>Closed</td><td>2025-10-20</td><td>3 / 3 (100%)</td><td>Application layer: event system, input, low level API interfaces</td></tr><tr><td>milestone_2</td><td>In Progress</td><td>2025-11-17</td><td>3 / 6 (50%)</td><td>Functional rendering engine; draft main screen (player view)</td></tr><tr><td>milestone_3</td><td>Planned</td><td>2025-12-22</td><td>0 / 1 (0%)</td><td>Main physics &amp; player controls; shooting mechanisms</td></tr><tr><td>milestone_5</td><td>Planned</td><td>2026-02-02</td><td>0 / 1 (0%)</td><td>Playable prototype; tuned mechanics, controls &amp; graphics</td></tr><tr><td>milestone_6</td><td>Planned</td><td>2026-03-16</td><td>0 / 5 (0%)</td><td>Project presentation &amp; ~20 page paper</td></tr></tbody></table>
+<table><thead><tr><th>Milestone</th><th>State</th><th>Due</th><th>Progress</th><th>Description</th></tr></thead><tbody><tr><td>milestone_1</td><td>Closed</td><td>2025-10-20</td><td>100%</td><td>Application layer: event system, input, low level API interfaces</td></tr><tr><td>milestone_2</td><td>Closed</td><td>2025-12-12</td><td>100%</td><td>Functional rendering engine; Camera system refactor; ImGui tooling</td></tr><tr><td>milestone_3</td><td>In Progress</td><td>2025-12-22</td><td>10%</td><td>Main physics &amp; player controls; shooting mechanisms</td></tr><tr><td>milestone_5</td><td>Planned</td><td>2026-02-02</td><td>0%</td><td>Playable prototype; tuned mechanics, controls &amp; graphics</td></tr><tr><td>milestone_6</td><td>Planned</td><td>2026-03-16</td><td>0%</td><td>Project presentation &amp; ~20 page paper</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="interpretation">Interpretation<a href="#interpretation" class="hash-link" aria-label="Direct link to Interpretation" title="Direct link to Interpretation" translate="no">​</a></h3>
 <ul>
 <li class="">Progress column lists closed issues vs total (open + closed) at time of snapshot.</li>
 <li class="">Milestones beyond the current date are marked Planned; active milestone shows &quot;In Progress&quot;.</li>
 <li class="">Closed milestone_1 forms the historical baseline for the Alpha phase.</li>
 </ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="current-focus-milestone_2">Current Focus (milestone_2)<a href="#current-focus-milestone_2" class="hash-link" aria-label="Direct link to Current Focus (milestone_2)" title="Direct link to Current Focus (milestone_2)" translate="no">​</a></h3>
-<p>Remaining goals before completion:</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="current-focus-milestone_3">Current Focus (milestone_3)<a href="#current-focus-milestone_3" class="hash-link" aria-label="Direct link to Current Focus (milestone_3)" title="Direct link to Current Focus (milestone_3)" translate="no">​</a></h3>
+<p>Goals for the next phase:</p>
 <ol>
-<li class="">Rendering pipeline consolidation</li>
-<li class="">Material / shader lifecycle cleanup</li>
-<li class="">Initial performance profiling</li>
-<li class="">(Issues still open) Refactor Renderable to use RenderPrototype</li>
-<li class="">AABB support for Mesh / SceneNode</li>
-<li class="">Shader-side matrix computation (model/view/world)</li>
+<li class=""><strong>Physics Integration:</strong> Basic collision detection and response.</li>
+<li class=""><strong>Player Controls:</strong> Refine spaceship movement (momentum, rotation).</li>
+<li class=""><strong>Game Mechanics:</strong> Shooting, health, and scoring systems.</li>
+<li class=""><strong>Math Extensions:</strong> Quaternions for robust rotation handling.</li>
+<li class=""><strong>Asset Pipeline:</strong> Basic model loading improvements.</li>
 </ol>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="upcoming-sequence">Upcoming Sequence<a href="#upcoming-sequence" class="hash-link" aria-label="Direct link to Upcoming Sequence" title="Direct link to Upcoming Sequence" translate="no">​</a></h3>
 <ol>
-<li class="">milestone_3: Math extensions (quaternions, SIMD), camera polish &amp; frustum culling, basic asset pipeline</li>
 <li class="">milestone_5: Integrate game mechanics into a playable prototype</li>
 <li class="">milestone_6: Formal documentation &amp; presentation (paper, website refinement)</li>
 </ol>
@@ -163,6 +167,33 @@
 <li class="">Math feature completeness (quaternions, transforms, basic collision primitives)</li>
 <li class="">Continuous integration green across platforms</li>
 </ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="repository-stats">Repository Stats<a href="#repository-stats" class="hash-link" aria-label="Direct link to Repository Stats" title="Direct link to Repository Stats" translate="no">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody><tr><td><strong>Stars</strong></td><td>2</td></tr><tr><td><strong>Forks</strong></td><td>1</td></tr><tr><td><strong>Open Issues</strong></td><td>26</td></tr><tr><td><strong>Last Commit</strong></td><td>2025-12-10</td></tr></tbody></table>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="detailed-change-history">Detailed Change History<a href="#detailed-change-history" class="hash-link" aria-label="Direct link to Detailed Change History" title="Direct link to Detailed Change History" translate="no">​</a></h2>
 <p>For a complete list of all changes, breaking changes, and migration guides, see:</p>
 <p>👉 <strong><a class="" href="/docs/changelog">View Full CHANGELOG</a></strong></p>
@@ -194,6 +225,6 @@
 <li class="">Expand math module (quaternions first)</li>
 </ul>
 <hr>
-<p><em>Last updated: 2025-11-14 • Source phase: alpha • Track changes in <a class="" href="/docs/changelog">CHANGELOG</a></em></p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/thorstensuckow/helios/tree/main/website/docs/status.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#what-alpha-means" class="table-of-contents__link toc-highlight">What Alpha Means</a></li><li><a href="#stability-overview" class="table-of-contents__link toc-highlight">Stability Overview</a></li><li><a href="#milestones--progress" class="table-of-contents__link toc-highlight">Milestones &amp; Progress</a><ul><li><a href="#interpretation" class="table-of-contents__link toc-highlight">Interpretation</a></li><li><a href="#current-focus-milestone_2" class="table-of-contents__link toc-highlight">Current Focus (milestone_2)</a></li><li><a href="#upcoming-sequence" class="table-of-contents__link toc-highlight">Upcoming Sequence</a></li></ul></li><li><a href="#beta-criteria-exit-alpha" class="table-of-contents__link toc-highlight">Beta Criteria (Exit Alpha)</a></li><li><a href="#detailed-change-history" class="table-of-contents__link toc-highlight">Detailed Change History</a></li><li><a href="#guidance-for-users" class="table-of-contents__link toc-highlight">Guidance for Users</a></li><li><a href="#contributing-in-alpha" class="table-of-contents__link toc-highlight">Contributing in Alpha</a></li><li><a href="#feedback--discussion" class="table-of-contents__link toc-highlight">Feedback &amp; Discussion</a></li><li><a href="#next-steps" class="table-of-contents__link toc-highlight">Next Steps</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Documentation</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Getting Started</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/api/overview">API Reference</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/examples/simple-cube">Examples</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/thorstensuckow/helios/discussions" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub Discussions<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/thorstensuckow/helios/issues" target="_blank" rel="noopener noreferrer" class="footer__link-item">Issues<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.researchgate.net/publication/397445662_helios_Design_and_prototypical_implementation_of_a_C_game_framework" target="_blank" rel="noopener noreferrer" class="footer__link-item">Academic Paper<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/thorstensuckow/helios" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 <a href="https://thorsten.suckow-homberg.de">Thorsten Suckow-Homberg</a> / <a href="https://garagecraft.games">GarageCraft Games</a>. Licensed under MIT. Built with Docusaurus.</div></div></div></footer></div>
+<p><em>Last updated: 2025-12-13 • Source phase: alpha • Track changes in <a class="" href="/docs/changelog">CHANGELOG</a></em></p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/thorstensuckow/helios/tree/main/website/docs/status.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#what-alpha-means" class="table-of-contents__link toc-highlight">What Alpha Means</a></li><li><a href="#stability-overview" class="table-of-contents__link toc-highlight">Stability Overview</a></li><li><a href="#milestones--progress" class="table-of-contents__link toc-highlight">Milestones &amp; Progress</a><ul><li><a href="#interpretation" class="table-of-contents__link toc-highlight">Interpretation</a></li><li><a href="#current-focus-milestone_3" class="table-of-contents__link toc-highlight">Current Focus (milestone_3)</a></li><li><a href="#upcoming-sequence" class="table-of-contents__link toc-highlight">Upcoming Sequence</a></li></ul></li><li><a href="#beta-criteria-exit-alpha" class="table-of-contents__link toc-highlight">Beta Criteria (Exit Alpha)</a></li><li><a href="#repository-stats" class="table-of-contents__link toc-highlight">Repository Stats</a></li><li><a href="#detailed-change-history" class="table-of-contents__link toc-highlight">Detailed Change History</a></li><li><a href="#guidance-for-users" class="table-of-contents__link toc-highlight">Guidance for Users</a></li><li><a href="#contributing-in-alpha" class="table-of-contents__link toc-highlight">Contributing in Alpha</a></li><li><a href="#feedback--discussion" class="table-of-contents__link toc-highlight">Feedback &amp; Discussion</a></li><li><a href="#next-steps" class="table-of-contents__link toc-highlight">Next Steps</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Documentation</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Getting Started</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/api/overview">API Reference</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/examples/simple-cube">Examples</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/thorstensuckow/helios/discussions" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub Discussions<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/thorstensuckow/helios/issues" target="_blank" rel="noopener noreferrer" class="footer__link-item">Issues<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.researchgate.net/publication/397445662_helios_Design_and_prototypical_implementation_of_a_C_game_framework" target="_blank" rel="noopener noreferrer" class="footer__link-item">Academic Paper<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/thorstensuckow/helios" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 <a href="https://thorsten.suckow-homberg.de">Thorsten Suckow-Homberg</a> / <a href="https://garagecraft.games">GarageCraft Games</a>. Licensed under MIT. Built with Docusaurus.</div></div></div></footer></div>
 </body>
 </html>

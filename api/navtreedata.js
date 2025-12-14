@@ -43,6 +43,7 @@ var NAVTREE =
       [ "Namespace Members", "namespacemembers.html", [
         [ "All", "namespacemembers.html", null ],
         [ "Functions", "namespacemembers_func.html", null ],
+        [ "Variables", "namespacemembers_vars.html", null ],
         [ "Typedefs", "namespacemembers_type.html", null ],
         [ "Enumerations", "namespacemembers_enum.html", null ],
         [ "Enumerator", "namespacemembers_eval.html", null ]
@@ -73,21 +74,22 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "Application_8ixx.html",
-"classhelios_1_1app_1_1Application.html#a60c02bedd6f7ad8ab0c486aa73c1983f",
-"classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication.html#a7f053a4162c99ce3219865cee668cd18",
-"classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget.html#a01362127380439b6a4dca4bd1222ea89",
-"classhelios_1_1game_1_1GameObject.html#ad2a1fd2fdb44beb49940a747af1313b7",
-"classhelios_1_1rendering_1_1RenderPass.html#afac382a610028b5e09af4ade728b78b3",
-"classhelios_1_1rendering_1_1model_1_1Mesh.html#a0100ea58ef8bb486ccd66076fc680eee",
-"classhelios_1_1scene_1_1Scene.html#aed8d3cf0ab98ebd89de94edfdb7f477a",
-"classhelios_1_1util_1_1Guid.html#a56c29dc3db8911269e868b4581e621ec",
-"classhelios_1_1window_1_1Window.html#af053410db30c38792d85b6ce5d7e8b78",
-"module__helios_8engine_8FramePacer.html#a6cfb7ba87a5da0cb5ab0a7c0ff5938fd",
-"module__helios_8input_8GamepadState.html#a22a26dfe8eeef1007c641452b768f0f9",
-"module__helios_8rendering_8asset_8shape_8Shape.html",
-"module__helios_8util_8log_8ConsoleSink.html",
-"namespacehelios_1_1rendering_1_1shader.html",
-"structhelios_1_1rendering_1_1Vertex.html#aad5f040c6ccd955709d5f38e236aa3c8"
+"classhelios_1_1app_1_1Application.html#a3cd9e39b64d771f2bc795cbc8c255a33",
+"classhelios_1_1event_1_1BasicEventManager.html#ac477416fc138acbb03df5e946dc99240",
+"classhelios_1_1ext_1_1imgui_1_1ImGuiGlfwOpenGLBackend.html#a59e47ffd886a7426d76d28bd8a9764aa",
+"classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh.html#a2d4c0ccf2f175ce3ac7dddc9bd7c808f",
+"classhelios_1_1rendering_1_1RenderCommand.html#ad4a8aa4a94a4abbd21e984ac47c60c04",
+"classhelios_1_1rendering_1_1Viewport.html#afa67d77263ec5dd36db0591ffb9f889d",
+"classhelios_1_1scene_1_1FrustumCullingStrategy.html#a12f23b3d9ecc16858fedf7483d9890ae",
+"classhelios_1_1tooling_1_1FpsMetrics.html#a6971ce2cf9b8a57b00af0fa7aed6a530",
+"classhelios_1_1window_1_1Window.html#a3a4a6fcd73d8632f3368e98acc338c85",
+"index.html#autotoc_md107",
+"module__helios_8ext_8imgui_8ImGuiWidget.html#a0ad065b003992409713a4e4c306b7499",
+"module__helios_8rendering_8ClearFlags.html#aad4b10dc2924beaf3680fb245505290ca6adf97f83acf6453d4a6a4b1070f3754",
+"module__helios_8scene_8Scene.html#ac25813beeeb6cbccf15cb04a14df9113",
+"modulemembers_v.html",
+"structhelios_1_1math_1_1mat4.html#a025319de588d6c29c57c92413a4a51b3",
+"structhelios_1_1rendering_1_1model_1_1config_1_1MeshConfig.html#a7cb1229de566ac92aa1e26068f661fd4"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

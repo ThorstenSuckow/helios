@@ -54,6 +54,14 @@ var annotated_dup =
         [ "Application", "classhelios_1_1app_1_1Application.html", "classhelios_1_1app_1_1Application" ]
       ] ],
       [ "engine", "namespacehelios_1_1engine.html", [
+        [ "game", "namespacehelios_1_1engine_1_1game.html", [
+          [ "Command", "classhelios_1_1engine_1_1game_1_1Command.html", "classhelios_1_1engine_1_1game_1_1Command" ],
+          [ "CommandBuffer", "classhelios_1_1engine_1_1game_1_1CommandBuffer.html", "classhelios_1_1engine_1_1game_1_1CommandBuffer" ],
+          [ "GameObject", "classhelios_1_1engine_1_1game_1_1GameObject.html", "classhelios_1_1engine_1_1game_1_1GameObject" ],
+          [ "GameWorld", "classhelios_1_1engine_1_1game_1_1GameWorld.html", "classhelios_1_1engine_1_1game_1_1GameWorld" ],
+          [ "InputHandler", "classhelios_1_1engine_1_1game_1_1InputHandler.html", "classhelios_1_1engine_1_1game_1_1InputHandler" ],
+          [ "InputSnapshot", "classhelios_1_1engine_1_1game_1_1InputSnapshot.html", "classhelios_1_1engine_1_1game_1_1InputSnapshot" ]
+        ] ],
         [ "FramePacer", "classhelios_1_1engine_1_1FramePacer.html", "classhelios_1_1engine_1_1FramePacer" ],
         [ "FrameStats", "structhelios_1_1engine_1_1FrameStats.html", "structhelios_1_1engine_1_1FrameStats" ],
         [ "Tickable", "classhelios_1_1engine_1_1Tickable.html", "classhelios_1_1engine_1_1Tickable" ]
@@ -66,14 +74,6 @@ var annotated_dup =
         [ "EventManager", "classhelios_1_1event_1_1EventManager.html", "classhelios_1_1event_1_1EventManager" ],
         [ "EventQueue", "classhelios_1_1event_1_1EventQueue.html", "classhelios_1_1event_1_1EventQueue" ]
       ] ],
-      [ "game", "namespacehelios_1_1game.html", [
-        [ "Command", "classhelios_1_1game_1_1Command.html", "classhelios_1_1game_1_1Command" ],
-        [ "CommandBuffer", "classhelios_1_1game_1_1CommandBuffer.html", "classhelios_1_1game_1_1CommandBuffer" ],
-        [ "GameObject", "classhelios_1_1game_1_1GameObject.html", "classhelios_1_1game_1_1GameObject" ],
-        [ "GameWorld", "classhelios_1_1game_1_1GameWorld.html", "classhelios_1_1game_1_1GameWorld" ],
-        [ "InputHandler", "classhelios_1_1game_1_1InputHandler.html", "classhelios_1_1game_1_1InputHandler" ],
-        [ "InputSnapshot", "classhelios_1_1game_1_1InputSnapshot.html", "classhelios_1_1game_1_1InputSnapshot" ]
-      ] ],
       [ "input", "namespacehelios_1_1input.html", [
         [ "GamepadState", "classhelios_1_1input_1_1GamepadState.html", "classhelios_1_1input_1_1GamepadState" ],
         [ "InputAdapter", "classhelios_1_1input_1_1InputAdapter.html", "classhelios_1_1input_1_1InputAdapter" ],
@@ -82,9 +82,9 @@ var annotated_dup =
       [ "math", "namespacehelios_1_1math.html", [
         [ "aabb", "structhelios_1_1math_1_1aabb.html", "structhelios_1_1math_1_1aabb" ],
         [ "mat4", "structhelios_1_1math_1_1mat4.html", "structhelios_1_1math_1_1mat4" ],
+        [ "vec3", "structhelios_1_1math_1_1vec3.html", "structhelios_1_1math_1_1vec3" ],
         [ "vec2", "structhelios_1_1math_1_1vec2.html", "structhelios_1_1math_1_1vec2" ],
-        [ "vec4", "structhelios_1_1math_1_1vec4.html", "structhelios_1_1math_1_1vec4" ],
-        [ "vec3", "structhelios_1_1math_1_1vec3.html", "structhelios_1_1math_1_1vec3" ]
+        [ "vec4", "structhelios_1_1math_1_1vec4.html", "structhelios_1_1math_1_1vec4" ]
       ] ],
       [ "rendering", "namespacehelios_1_1rendering.html", [
         [ "asset", "namespacehelios_1_1rendering_1_1asset.html", [

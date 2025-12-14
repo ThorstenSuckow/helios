@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8math_8TransformType" kind="module">
+    <compoundname>helios.math.TransformType</compoundname>
+    <innerfile refid="TransformType_8ixx">TransformType.ixx</innerfile>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531d" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>TransformType</name>
+        <qualifiedname>helios::math::TransformType</qualifiedname>
+        <enumvalue id="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531da6dd08874f83507e9c7b23f1a46b7fa7c" prot="public">
+          <name>Translation</name>
+          <initializer>= 1 &lt;&lt; 0</initializer>
+          <briefdescription>
+<para>Inherit only the translation component from the parent. </para>
+          </briefdescription>
+          <detaileddescription>
+<para>The child&apos;s world position is offset by the parent&apos;s world position, but rotation and scale remain unaffected by the parent. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531daf1a42bd417390fc63b030a519624607a" prot="public">
+          <name>Rotation</name>
+          <initializer>= 1 &lt;&lt; 1</initializer>
+          <briefdescription>
+<para>Inherit only the rotation component from the parent. </para>
+          </briefdescription>
+          <detaileddescription>
+<para>The child&apos;s orientation is combined with the parent&apos;s orientation, but position and scale remain unaffected. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531da85a7cd587d6142dbfc1a4de05af7b75d" prot="public">
+          <name>Scale</name>
+          <initializer>= 1 &lt;&lt; 2</initializer>
+          <briefdescription>
+<para>Inherit only the scale component from the parent. </para>
+          </briefdescription>
+          <detaileddescription>
+<para>The child&apos;s scale is multiplied by the parent&apos;s scale, but position and rotation remain unaffected. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531dab1c94ca2fbc3e78fc30069c8d0f01680" prot="public">
+          <name>All</name>
+          <initializer>= Translation | Rotation | Scale</initializer>
+          <briefdescription>
+<para>Inherit all transform components (Translation, Rotation, Scale). </para>
+          </briefdescription>
+          <detaileddescription>
+<para>This is the default behavior where the child&apos;s world transform is the full composition of parent and local transforms. </para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Bitmask enum controlling which transform components a child node inherits from its parent. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>When a SceneNode is attached to a parent, its final world transform is computed by combining the parent&apos;s world transform with the child&apos;s local transform. The `Inherit` flags determine which components (Translation, Rotation, Scale) of the parent transform are applied to the child.</para>
+<para>This enables flexible scene graph behaviors such as:<itemizedlist>
+<listitem><para>A camera that follows an object&apos;s position but maintains its own orientation (`TransformType::Translation`)</para>
+</listitem><listitem><para>UI elements that inherit full transforms (`TransformType::All`)</para>
+</listitem><listitem><para>Objects that only inherit rotation for billboard effects (`TransformType::Rotation`)</para>
+</listitem></itemizedlist>
+</para>
+<para>Example usage: ```cpp using namespace <ref refid="namespacehelios_1_1math" kindref="compound">helios::math</ref>;</para>
+<para>// Camera follows spaceship position only cameraNode-&gt;setInheritance(TransformType::Translation);</para>
+<para>// Full transform inheritance (default) childNode-&gt;setInheritance(TransformType::All);</para>
+<para>// Combine specific flags node-&gt;setInheritance(<ref refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531da6dd08874f83507e9c7b23f1a46b7fa7c" kindref="member">TransformType::Translation</ref> | <ref refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531daf1a42bd417390fc63b030a519624607a" kindref="member">TransformType::Rotation</ref>); ``` </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/TransformType.ixx" line="41" column="5" bodyfile="include/helios/math/TransformType.ixx" bodystart="41" bodyend="73"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespacehelios_1_1math_1aca9266bbc6a927b4e082fb75d0d31434" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>TransformType</type>
+        <definition>TransformType helios::math::operator|</definition>
+        <argsstring>(TransformType a, TransformType b)</argsstring>
+        <name>operator|</name>
+        <qualifiedname>helios::math::operator|</qualifiedname>
+        <param>
+          <type>TransformType</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>TransformType</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Combines two Inherit flags using bitwise OR. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first inheritance flag. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second inheritance flag.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The combined inheritance mask. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/TransformType.ixx" line="83" column="26" bodyfile="include/helios/math/TransformType.ixx" bodystart="83" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacehelios_1_1math_1a21fb88902bc365300cd88dad37e1d123" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::math::transformTypeMatch</definition>
+        <argsstring>(TransformType mask, TransformType flag)</argsstring>
+        <name>transformTypeMatch</name>
+        <qualifiedname>helios::math::transformTypeMatch</qualifiedname>
+        <param>
+          <type>TransformType</type>
+          <declname>mask</declname>
+        </param>
+        <param>
+          <type>TransformType</type>
+          <declname>flag</declname>
+        </param>
+        <briefdescription>
+<para>Checks if a specific inheritance flag is set in a mask. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mask</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The inheritance mask to check against. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>flag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The specific flag to test for.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>`true` if the flag is present in the mask, `false` otherwise.</para>
+</simplesect>
+Example usage: ```cpp using namespace <ref refid="namespacehelios_1_1math" kindref="compound">helios::math</ref>;</para>
+<para><ref refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531d" kindref="member">TransformType</ref> mode = <ref refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531da6dd08874f83507e9c7b23f1a46b7fa7c" kindref="member">TransformType::Translation</ref> | <ref refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531daf1a42bd417390fc63b030a519624607a" kindref="member">TransformType::Rotation</ref>;</para>
+<para>if (transformTypeMatch(mode, TransformType::Translation)) { // Apply parent translation... } ``` </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/TransformType.ixx" line="107" column="17" bodyfile="include/helios/math/TransformType.ixx" bodystart="107" bodyend="109"/>
+        <referencedby refid="structhelios_1_1math_1_1mat4_1a9c19cb795b7d8a032dd4cb415803f163" compoundref="mat4_8ixx" startline="313" endline="357">helios::math::mat4&lt; float &gt;::decompose</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/math/TransformType.ixx" line="9" column="15"/>
+  </compounddef>
+</doxygen>

@@ -206,6 +206,8 @@
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
         <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
@@ -399,7 +401,7 @@
 <codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="60"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>https://stackoverflow.com/questions/24609872/delete-virtual-function-from-a-derived-class</highlight></codeline>
 <codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="62" refid="classhelios_1_1scene_1_1CameraSceneNode_1a21256e1f3a58d99bc0249f88a1739d0b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab" kindref="member">SceneNode</ref>*<sp/><ref refid="classhelios_1_1scene_1_1CameraSceneNode_1a21256e1f3a58d99bc0249f88a1739d0b" kindref="member">addChild</ref>(std::unique_ptr&lt;SceneNode&gt;<sp/>sceneNode)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="62" refid="classhelios_1_1scene_1_1CameraSceneNode_1a58b5b9c583ddf40dcc81793c19fc0c79" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab" kindref="member">SceneNode</ref>*<sp/><ref refid="classhelios_1_1scene_1_1CameraSceneNode_1a58b5b9c583ddf40dcc81793c19fc0c79" kindref="member">addNode</ref>(std::unique_ptr&lt;SceneNode&gt;<sp/>sceneNode)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="64"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="65"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Gets<sp/>the<sp/>camera<sp/>associated<sp/>with<sp/>this<sp/>scene<sp/>node.</highlight></codeline>
@@ -430,32 +432,38 @@
 <codeline lineno="90"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="91"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>The<sp/>up<sp/>vector<sp/>should<sp/>typically<sp/>be<sp/>`(0,<sp/>1,<sp/>0)`<sp/>for<sp/>standard<sp/>upright<sp/>orientation.</highlight></codeline>
 <codeline lineno="92"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="93"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@todo<sp/>Implement<sp/>`lookAtLocal()`<sp/>for<sp/>observing<sp/>nodes<sp/>in<sp/>local<sp/>space.</highlight></codeline>
-<codeline lineno="94"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="95"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>helios::scene::SceneNode::rotate()</highlight></codeline>
-<codeline lineno="96"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="97" refid="classhelios_1_1scene_1_1CameraSceneNode_1ad57acd6f8c8b2e6b02707ba1424377cb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1scene_1_1CameraSceneNode_1ad57acd6f8c8b2e6b02707ba1424377cb" kindref="member">lookAt</ref>(<ref refid="namespacehelios" kindref="compound">helios</ref>::<ref refid="namespacehelios_1_1math" kindref="compound">math</ref>::vec3f<sp/>target,<sp/><ref refid="namespacehelios" kindref="compound">helios</ref>::<ref refid="namespacehelios_1_1math" kindref="compound">math</ref>::vec3f<sp/>up);</highlight></codeline>
-<codeline lineno="98"><highlight class="normal"></highlight></codeline>
-<codeline lineno="99"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="100"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="101"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Computes<sp/>the<sp/>world<sp/>transform<sp/>and<sp/>updates<sp/>the<sp/>associated<sp/>camera&apos;s<sp/>view<sp/>matrix.</highlight></codeline>
-<codeline lineno="102"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="103"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>override<sp/>extends<sp/>`SceneNode::worldTransform()`<sp/>by<sp/>additionally<sp/>computing<sp/>the</highlight></codeline>
-<codeline lineno="104"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>view<sp/>matrix<sp/>from<sp/>the<sp/>camera&apos;s<sp/>world<sp/>transform.<sp/>The<sp/>view<sp/>matrix<sp/>is<sp/>the<sp/>inverse<sp/>of<sp/>the</highlight></codeline>
-<codeline lineno="105"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>world<sp/>transform,<sp/>with<sp/>the<sp/>Z-axis<sp/>negated<sp/>to<sp/>convert<sp/>from<sp/>helios&apos;<sp/>Left-Handed<sp/>System</highlight></codeline>
-<codeline lineno="106"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>to<sp/>OpenGL&apos;s<sp/>Right-Handed<sp/>clip<sp/>space.</highlight></codeline>
+<codeline lineno="93"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>lookAtLocal()</highlight></codeline>
+<codeline lineno="94"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>helios::scene::SceneNode::setRotation()</highlight></codeline>
+<codeline lineno="95"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="96" refid="classhelios_1_1scene_1_1CameraSceneNode_1ad57acd6f8c8b2e6b02707ba1424377cb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1scene_1_1CameraSceneNode_1ad57acd6f8c8b2e6b02707ba1424377cb" kindref="member">lookAt</ref>(<ref refid="namespacehelios" kindref="compound">helios</ref>::<ref refid="namespacehelios_1_1math" kindref="compound">math</ref>::vec3f<sp/>target,<sp/><ref refid="namespacehelios" kindref="compound">helios</ref>::<ref refid="namespacehelios_1_1math" kindref="compound">math</ref>::vec3f<sp/>up);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Orients<sp/>this<sp/>camera<sp/>node<sp/>to<sp/>look<sp/>at<sp/>a<sp/>target<sp/>position<sp/>in<sp/>local<sp/>space.</highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="101"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Similar<sp/>to<sp/>`lookAt()`,<sp/>but<sp/>the<sp/>target<sp/>and<sp/>up<sp/>vector<sp/>are<sp/>interpreted<sp/>relative</highlight></codeline>
+<codeline lineno="102"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>to<sp/>this<sp/>node&apos;s<sp/>local<sp/>coordinate<sp/>system<sp/>rather<sp/>than<sp/>world<sp/>space.<sp/>Useful<sp/>when</highlight></codeline>
+<codeline lineno="103"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>the<sp/>camera<sp/>should<sp/>track<sp/>objects<sp/>within<sp/>the<sp/>same<sp/>local<sp/>hierarchy.</highlight></codeline>
+<codeline lineno="104"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="105"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>targetLocal<sp/>The<sp/>local-space<sp/>coordinates<sp/>of<sp/>the<sp/>target<sp/>to<sp/>look<sp/>at.</highlight></codeline>
+<codeline lineno="106"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>upLocal<sp/>The<sp/>up<sp/>vector<sp/>defining<sp/>the<sp/>camera&apos;s<sp/>vertical<sp/>orientation<sp/>in<sp/>local<sp/>space.</highlight></codeline>
 <codeline lineno="107"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="108"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>computed<sp/>view<sp/>matrix<sp/>is<sp/>automatically<sp/>assigned<sp/>to<sp/>the<sp/>underlying<sp/>`Camera`<sp/>instance.</highlight></codeline>
-<codeline lineno="109"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="110"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>const<sp/>reference<sp/>to<sp/>this<sp/>node&apos;s<sp/>world<sp/>transform<sp/>matrix.</highlight></codeline>
-<codeline lineno="111"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="112"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>helios::scene::Camera::setViewMatrix()</highlight></codeline>
-<codeline lineno="113"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>helios::scene::SceneNode::worldTransform()</highlight></codeline>
-<codeline lineno="114"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="115" refid="classhelios_1_1scene_1_1CameraSceneNode_1aa800f003ab88b6b1061ddffe8c109c4c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const<sp/><ref refid="namespacehelios" kindref="compound">helios</ref>::<ref refid="namespacehelios_1_1math" kindref="compound">math</ref>::mat4f&amp;<sp/><ref refid="classhelios_1_1scene_1_1CameraSceneNode_1aa800f003ab88b6b1061ddffe8c109c4c" kindref="member">worldTransform</ref>()<sp/>noexcept<sp/>override;</highlight></codeline>
-<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="117"><highlight class="normal"></highlight></codeline>
-<codeline lineno="118"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="108"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>lookAt()</highlight></codeline>
+<codeline lineno="109"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="110" refid="classhelios_1_1scene_1_1CameraSceneNode_1a92ffad9e05c9d43611cae562d43446d7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1scene_1_1CameraSceneNode_1a92ffad9e05c9d43611cae562d43446d7" kindref="member">lookAtLocal</ref>(<ref refid="namespacehelios" kindref="compound">helios</ref>::<ref refid="namespacehelios_1_1math" kindref="compound">math</ref>::vec3f<sp/>targetLocal,<sp/><ref refid="namespacehelios" kindref="compound">helios</ref>::<ref refid="namespacehelios_1_1math" kindref="compound">math</ref>::vec3f<sp/>upLocal);</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="112"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="113"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Callback<sp/>invoked<sp/>when<sp/>the<sp/>world<sp/>transform<sp/>of<sp/>this<sp/>node<sp/>changes.</highlight></codeline>
+<codeline lineno="114"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="115"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Overrides<sp/>the<sp/>base<sp/>class<sp/>implementation<sp/>to<sp/>update<sp/>the<sp/>camera&apos;s<sp/>view<sp/>matrix</highlight></codeline>
+<codeline lineno="116"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>whenever<sp/>the<sp/>node&apos;s<sp/>position<sp/>or<sp/>orientation<sp/>in<sp/>the<sp/>scene<sp/>graph<sp/>changes.</highlight></codeline>
+<codeline lineno="117"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>ensures<sp/>the<sp/>camera<sp/>always<sp/>reflects<sp/>the<sp/>current<sp/>world-space<sp/>transform.</highlight></codeline>
+<codeline lineno="118"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="119"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>SceneNode::onWorldTransformUpdate()</highlight></codeline>
+<codeline lineno="120"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="121" refid="classhelios_1_1scene_1_1CameraSceneNode_1ae9863cf5d6dde842d58d1c86ccec02e0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1scene_1_1CameraSceneNode_1ae9863cf5d6dde842d58d1c86ccec02e0" kindref="member">onWorldTransformUpdate</ref>()<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="include/helios/scene/CameraSceneNode.ixx"/>
   </compounddef>

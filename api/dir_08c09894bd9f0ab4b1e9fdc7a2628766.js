@@ -1,9 +1,9 @@
 var dir_08c09894bd9f0ab4b1e9fdc7a2628766 =
 [
     [ "app", "dir_5426d89496cb30043662afccf5b53207.html", "dir_5426d89496cb30043662afccf5b53207" ],
+    [ "core", "dir_6a0662f282a699b80270a7344921b324.html", "dir_6a0662f282a699b80270a7344921b324" ],
     [ "engine", "dir_860c9de2f65c10e8e262a0e7b5bfee5e.html", "dir_860c9de2f65c10e8e262a0e7b5bfee5e" ],
     [ "event", "dir_9b52b993eaa3e3f802dc9c71987b2802.html", "dir_9b52b993eaa3e3f802dc9c71987b2802" ],
-    [ "game", "dir_12b49f23471fec81a28483d5cdfdd609.html", "dir_12b49f23471fec81a28483d5cdfdd609" ],
     [ "input", "dir_58a7612d3773fb780b0e5d4a861b7b53.html", "dir_58a7612d3773fb780b0e5d4a861b7b53" ],
     [ "math", "dir_0046d781185df00694c70533b055a138.html", "dir_0046d781185df00694c70533b055a138" ],
     [ "rendering", "dir_9ba586a504c756f19720715161f17166.html", "dir_9ba586a504c756f19720715161f17166" ],

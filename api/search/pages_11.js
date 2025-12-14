@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['material_20system_0',['3. Material System',['../index.html#autotoc_md100',1,'']]],
-  ['metrics_1',['7. Frame Pacing and Performance Metrics',['../index.html#autotoc_md104',1,'']]],
-  ['module_20details_2',['Module Details',['../index.html#autotoc_md107',1,'']]],
-  ['module_20structure_3',['3. Follow Module Structure',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md34',1,'']]],
-  ['modules_4',['Modules',['../index.html#autotoc_md95',1,'Core Modules'],['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md28',1,'Extension Modules'],['../index.html#autotoc_md96',1,'Extension Modules']]]
+  ['imgui_20debug_20overlay_0',['6. ImGui Debug Overlay',['../index.html#autotoc_md105',1,'']]],
+  ['implement_20core_20interfaces_1',['1. Implement Core Interfaces',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md32',1,'']]],
+  ['input_20adapter_2',['Custom Input Adapter',['../index.html#autotoc_md114',1,'']]],
+  ['input_20system_3',['4. Input System',['../index.html#autotoc_md103',1,'']]],
+  ['interfaces_4',['1. Implement Core Interfaces',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md32',1,'']]],
+  ['introduction_5',['Introduction',['../index.html#autotoc_md94',1,'']]]
 ];

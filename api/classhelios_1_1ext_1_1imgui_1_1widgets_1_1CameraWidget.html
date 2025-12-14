@@ -126,22 +126,17 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a50dee3fa50e4ac784d28e9b698e61daf" id="r_a50dee3fa50e4ac784d28e9b698e61daf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a50dee3fa50e4ac784d28e9b698e61daf">CameraWidget</a> ()=default</td></tr>
 <tr class="memitem:a4d2a098ee6d7a6596550c348b8480e7c" id="r_a4d2a098ee6d7a6596550c348b8480e7c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4d2a098ee6d7a6596550c348b8480e7c">addCameraSceneNode</a> (const std::string &amp;name, <a class="el" href="classhelios_1_1scene_1_1CameraSceneNode.html">helios::scene::CameraSceneNode</a> *node)</td></tr>
-<tr class="memdesc:a4d2a098ee6d7a6596550c348b8480e7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a camera scene node with the widget and captures initial values for reset.  <br /></td></tr>
 <tr class="memitem:ab7ebb5d1daec9e7ebf9ec51ec3e17485" id="r_ab7ebb5d1daec9e7ebf9ec51ec3e17485"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab7ebb5d1daec9e7ebf9ec51ec3e17485">clearCameras</a> () noexcept</td></tr>
-<tr class="memdesc:ab7ebb5d1daec9e7ebf9ec51ec3e17485"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes all registered cameras from the widget.  <br /></td></tr>
 <tr class="memitem:a07fc0fbbf52e97d447e2f3177980dd00" id="r_a07fc0fbbf52e97d447e2f3177980dd00"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a07fc0fbbf52e97d447e2f3177980dd00">draw</a> () override</td></tr>
-<tr class="memdesc:a07fc0fbbf52e97d447e2f3177980dd00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders the camera control interface using ImGui.  <br /></td></tr>
+<tr class="memdesc:a07fc0fbbf52e97d447e2f3177980dd00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders the widget using ImGui immediate-mode API.  <br /></td></tr>
 <tr class="inherit_header pub_methods_classhelios_1_1ext_1_1imgui_1_1ImGuiWidget"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classhelios_1_1ext_1_1imgui_1_1ImGuiWidget')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="classhelios_1_1ext_1_1imgui_1_1ImGuiWidget.html">helios::ext::imgui::ImGuiWidget</a></td></tr>
 <tr class="memitem:aac2ed1b7d339b387d91158b00d26c089 inherit pub_methods_classhelios_1_1ext_1_1imgui_1_1ImGuiWidget" id="r_aac2ed1b7d339b387d91158b00d26c089"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ext_1_1imgui_1_1ImGuiWidget.html#aac2ed1b7d339b387d91158b00d26c089">ImGuiWidget</a> ()=default</td></tr>
 <tr class="memitem:a05b3e6ee2d701b06c67bf0c57af9a829 inherit pub_methods_classhelios_1_1ext_1_1imgui_1_1ImGuiWidget" id="r_a05b3e6ee2d701b06c67bf0c57af9a829"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1ext_1_1imgui_1_1ImGuiWidget.html#a05b3e6ee2d701b06c67bf0c57af9a829">~ImGuiWidget</a> ()=default</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Debug widget for real-time camera parameter control and visualization. </p>
-<p>Provides runtime configuration of camera position, orientation, projection parameters, and view settings through a flat, user-friendly interface. Multiple cameras can be registered and selected via a combo box.</p>
-<p>Camera transforms (position, rotation) are controlled via CameraSceneNode, while projection settings (FOV, aspect, near/far) are set directly on the Camera.</p>
-<dl class="section note"><dt>Note</dt><dd>Not thread-safe. Use from the main/render thread only. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CameraWidget_8ixx_source.html#l00036">36</a> of file <a class="el" href="CameraWidget_8ixx_source.html">CameraWidget.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CameraWidget_8ixx_source.html#l00027">27</a> of file <a class="el" href="CameraWidget_8ixx_source.html">CameraWidget.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a50dee3fa50e4ac784d28e9b698e61daf" name="a50dee3fa50e4ac784d28e9b698e61daf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a50dee3fa50e4ac784d28e9b698e61daf">&#9670;&#160;</a></span>CameraWidget()</h2>
@@ -196,16 +191,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Registers a camera scene node with the widget and captures initial values for reset. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">name</td><td>Display name for the camera (shown in combo box). </td></tr>
-    <tr><td class="paramname">node</td><td>Non-owning pointer to the CameraSceneNode instance. Must remain valid. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="CameraWidget_8ixx_source.html#l00197">197</a> of file <a class="el" href="CameraWidget_8ixx_source.html">CameraWidget.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CameraWidget_8ixx_source.html#l00193">193</a> of file <a class="el" href="CameraWidget_8ixx_source.html">CameraWidget.ixx</a>.</p>
 
 </div>
 </div>
@@ -232,9 +218,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Removes all registered cameras from the widget. </p>
-
-<p class="definition">Definition at line <a class="el" href="CameraWidget_8ixx_source.html#l00215">215</a> of file <a class="el" href="CameraWidget_8ixx_source.html">CameraWidget.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CameraWidget_8ixx_source.html#l00208">208</a> of file <a class="el" href="CameraWidget_8ixx_source.html">CameraWidget.ixx</a>.</p>
 
 </div>
 </div>
@@ -261,11 +245,12 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Renders the camera control interface using ImGui. </p>
+<p>Renders the widget using ImGui immediate-mode API. </p>
+<p>Called once per frame by the owning overlay. Implementers should call ImGui functions (e.g., `ImGui::Begin()`, `ImGui::Text()`) to build the UI. </p>
 
 <p>Implements <a class="el" href="classhelios_1_1ext_1_1imgui_1_1ImGuiWidget.html#a0ad065b003992409713a4e4c306b7499">helios::ext::imgui::ImGuiWidget</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="CameraWidget_8ixx_source.html#l00223">223</a> of file <a class="el" href="CameraWidget_8ixx_source.html">CameraWidget.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CameraWidget_8ixx_source.html#l00213">213</a> of file <a class="el" href="CameraWidget_8ixx_source.html">CameraWidget.ixx</a>.</p>
 
 <p class="reference">References <a class="el" href="vec3_8ixx_source.html#l00119">helios::math::vec3&lt; T &gt;::length()</a>, and <a class="el" href="utils_8ixx_source.html#l00019">helios::math::radians()</a>.</p>
 <div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>

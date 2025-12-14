@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['todo_20list_0',['Todo List',['../todo.html',1,'']]],
-  ['topics_1',['Advanced Topics',['../index.html#autotoc_md108',1,'']]]
+  ['reference_0',['helios - API Reference',['../index.html',1,'']]],
+  ['rendering_20backend_1',['Custom Rendering Backend',['../index.html#autotoc_md113',1,'']]],
+  ['rendering_20pipeline_2',['2. Rendering Pipeline',['../index.html#autotoc_md101',1,'']]],
+  ['responsibilities_3',['Extension Responsibilities',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md24',1,'']]]
 ];

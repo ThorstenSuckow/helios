@@ -52,7 +52,7 @@ auto cameraNode = std::make_unique<CameraSceneNode>(std::move(camera));
 auto* camPtr = spaceshipNode->addNode(std::move(cameraNode));
 
 // Inherit only position, not rotation
-camPtr->setInheritance(InheritTransform::Inherit::Translation);
+camPtr->setInheritance(helios::math::TransformType::Translation);
 camPtr->lookAtLocal(vec3f(0.0f, 0.0f, 0.0f), vec3f(0.0f, 1.0f, 0.0f));
 ```
 

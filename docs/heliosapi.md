@@ -70,14 +70,14 @@ The scene graph organizes objects hierarchically, with automatic transform propa
 - `SceneNode` - Node in the hierarchy with transform and optional renderable
 - `CameraSceneNode` - Specialized node for cameras with view matrix computation
 - `Camera` - Defines projection parameters (FOV, aspect ratio, near/far planes)
-- `InheritTransform::Inherit` - Bitmask for selective transform inheritance
+- `TransformType` - Bitmask for selective transform inheritance (Translation, Rotation, Scale)
 
 **Example:**
 ```cpp
 import helios.scene.Scene;
 import helios.scene.SceneNode;
 import helios.scene.CameraSceneNode;
-import helios.scene.InheritTransform;
+import helios.math.transform;
 
 auto scene = std::make_unique<Scene>(std::move(cullingStrategy));
 
@@ -92,7 +92,7 @@ auto cameraNode = std::make_unique<CameraSceneNode>(std::move(camera));
 auto* camPtr = node->addNode(std::move(cameraNode));
 
 // Camera inherits only translation (not rotation/scale)
-camPtr->setInheritance(InheritTransform::Inherit::Translation);
+camPtr->setInheritance(helios::math::TransformType::Translation);
 camPtr->lookAt(vec3f(0.0f, 0.0f, 0.0f), vec3f(0.0f, 1.0f, 0.0f));
 ```
 

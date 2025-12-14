@@ -12,7 +12,6 @@
 // ============================================================================
 
 // Helios Core Modules
-import helios.math.types;
 import helios.math;
 
 // Application Framework
@@ -56,7 +55,7 @@ import helios.scene.SceneNode;
 import helios.scene.CullNoneStrategy;
 import helios.scene.Camera;
 import helios.scene.CameraSceneNode;
-import helios.scene.InheritTransform;
+
 
 // util
 import helios.util.io.BasicStringFileReader;
@@ -282,8 +281,8 @@ int main() {
             spaceshipSceneNode->addNode(std::make_unique<helios::scene::SceneNode>(std::move(leftStickGizmoRenderable)));
     auto* shipDirectionGizmoNode =
             spaceshipSceneNode->addNode(std::make_unique<helios::scene::SceneNode>(std::move(shipDirectionGizmoRenderable)));
-    leftStickGizmoNode->setInheritance(helios::scene::InheritTransform::Inherit::Translation);
-    shipDirectionGizmoNode->setInheritance(helios::scene::InheritTransform::Inherit::Translation);
+    leftStickGizmoNode->setInheritance(helios::math::TransformType::Translation);
+    shipDirectionGizmoNode->setInheritance(helios::math::TransformType::Translation);
 
 
     // ========================================
@@ -294,7 +293,7 @@ int main() {
     auto cameraSceneNode_ptr = cameraSceneNode.get();
     std::ignore = spaceshipSceneNode->addNode(std::move(cameraSceneNode));
     cameraSceneNode_ptr->setInheritance(
-        helios::scene::InheritTransform::Inherit::Translation
+        helios::math::TransformType::Translation
     );
     mainViewport->setCameraSceneNode(cameraSceneNode_ptr);
     cameraSceneNode_ptr->setTranslation(

@@ -8,9 +8,8 @@ module;
 module helios.scene.CameraSceneNode;
 
 import helios.math.types;
-import helios.math.transform;
+import helios.math.TransformType;
 import helios.scene.SceneNode;
-import helios.scene.InheritTransform;
 import helios.scene.Camera;
 
 namespace helios::scene {
@@ -76,8 +75,8 @@ namespace helios::scene {
             0.0f, 0.0f, 0.0f, 1.0f
         };
 
-        if (!helios::scene::InheritTransform::has(
-            inheritance_, helios::scene::InheritTransform::Inherit::Rotation)) {
+        if (!helios::math::transformTypeMatch(
+            inheritance_, helios::math::TransformType::Rotation)) {
             /**
              * @todo add support for different rotations
              */
@@ -89,38 +88,7 @@ namespace helios::scene {
         assert(parent() && "parent() of CameraSceneNode returned null, are you sure the node was added properly to the scenegraph?");
         const helios::math::mat4f pT = parent()->cachedWorldTransform();
 
-
-        // Basis-Spalten (column-major!)
-        const helios::math::vec3f bx{ pT(0,0), pT(1,0), pT(2,0) }; // X-axis column
-        const helios::math::vec3f by{ pT(0,1), pT(1,1), pT(2,1) }; // Y-axis column
-        const helios::math::vec3f bz{ pT(0,2), pT(1,2), pT(2,2) }; // Z-axis column
-
-        // Skalierung = Länge der Basisvektoren
-        float sx = bx.length();
-        float sy = by.length();
-        float sz = bz.length();
-        helios::math::vec3f parentScale{ sx, sy, sz };
-
-        // Rotation ohne Scale (Basis normalisieren)
-        helios::math::vec3f rx = (sx != 0.0f) ? helios::math::vec3f{ bx[0]/sx, bx[1]/sx, bx[2]/sx } : helios::math::vec3f{1,0,0};
-        helios::math::vec3f ry = (sy != 0.0f) ? helios::math::vec3f{ by[0]/sy, by[1]/sy, by[2]/sy } : helios::math::vec3f{0,1,0};
-        helios::math::vec3f rz = (sz != 0.0f) ? helios::math::vec3f{ bz[0]/sz, bz[1]/sz, bz[2]/sz } : helios::math::vec3f{0,0,1};
-
-        // parentRot als mat4 (Spaltenweise!)
-        const helios::math::mat4f parentRot{
-            rx[0], rx[1], rx[2], 0.0f,
-            ry[0], ry[1], ry[2], 0.0f,
-            rz[0], rz[1], rz[2], 0.0f,
-            0.0f,  0.0f,  0.0f,  1.0f
-        };
-
-        // Inverse der Rotation (weil orthonormal) = Transpose
-        const helios::math::mat4f parentRotInv{
-            parentRot(0,0), parentRot(1,0), parentRot(2,0), 0.0f,
-            parentRot(0,1), parentRot(1,1), parentRot(2,1), 0.0f,
-            parentRot(0,2), parentRot(1,2), parentRot(2,2), 0.0f,
-            0.0f,          0.0f,          0.0f,          1.0f
-        };
+        const helios::math::mat4f parentRotInv = pT.decompose(helios::math::TransformType::Rotation).transpose();
 
         // Apply rotation in local space by undoing the parent rotation
         setRotation(parentRotInv * worldRotation);
@@ -146,7 +114,8 @@ namespace helios::scene {
             x[2], y[2], -z[2], 0.0f,
             -dot(x, eye), -dot(y, eye), dot(z, eye), 1.0f
         };
-        std::ignore = camera_->setViewMatrix(inv);
+
+        camera_->setViewMatrix(inv);
     }
 
 } // namespace helios::scene

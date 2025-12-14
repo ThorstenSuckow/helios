@@ -167,14 +167,66 @@ float duration = fromMs(100.0f); // Returns 0.1f (seconds)
 float val = from(100.0f, Unit::Centimeter); // Returns 1.0f
 ```
 
+## Transform Inheritance
+
+Scene graph nodes can selectively inherit transform components from their parent using `helios::math::TransformType`. This enables flexible hierarchical behaviors without full transform coupling.
+
+### TransformType Flags
+
+The `TransformType` enum provides bitmask flags for selective inheritance:
+
+| Flag | Description |
+|------|-------------|
+| `Translation` | Inherit only the parent's position offset |
+| `Rotation` | Inherit only the parent's orientation |
+| `Scale` | Inherit only the parent's scale factors |
+| `All` | Inherit all components (default behavior) |
+
+### Usage Example
+
+```cpp
+import helios.math.transform;
+
+using namespace helios::math;
+
+// Camera follows spaceship position but maintains independent orientation
+cameraNode->setInheritance(TransformType::Translation);
+
+// Combine multiple flags
+node->setInheritance(TransformType::Translation | TransformType::Rotation);
+
+// Full inheritance (default)
+childNode->setInheritance(TransformType::All);
+```
+
+### Matrix Decomposition
+
+The `mat4::decompose()` member function extracts specific transform components from a matrix:
+
+```cpp
+import helios.math.types;
+import helios.math.transform;
+
+mat4f fullTransform = /* scaled, rotated, translated */;
+
+// Extract only translation
+mat4f translationOnly = fullTransform.decompose(TransformType::Translation);
+
+// Extract rotation without scale
+mat4f rotationOnly = fullTransform.decompose(TransformType::Rotation);
+
+// Transpose a matrix (useful for inverting orthonormal rotation matrices)
+mat4f transposed = rotationMatrix.transpose();
+```
+
 ## Related Modules
 
 - `helios.core.units` — Unit conversion and constants
-- `helios.math.types` — Core vector and matrix types (`vec3f`, `mat4f`)
+- `helios.math.types` — Core vector and matrix types (`vec3f`, `mat4f`) with `decompose()` and `transpose()`
 - `helios.math.utils` — Mathematical utility functions (`perspective`, `radians`, `degrees`)
+- `helios.math.transform` — Transform utilities including `TransformType`
 - `helios.scene.Transform` — Encapsulates translation, rotation, and scale
 - `helios.scene.Camera` — Projection matrix management
 - `helios.scene.CameraSceneNode` — View matrix computation and scene graph integration
-- `helios.scene.InheritTransform` — Selective transform inheritance flags
 
 

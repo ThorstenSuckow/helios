@@ -16,7 +16,7 @@ import helios.rendering.Renderable;
 import helios.util.Guid;
 import helios.scene.Transform;
 import helios.math.types;
-import helios.scene.InheritTransform;
+import helios.math.transform;
 
 
 export namespace helios::scene {
@@ -116,7 +116,7 @@ export namespace helios::scene {
          */
         helios::math::aabbf aabb_{};
 
-        helios::scene::InheritTransform::Inherit inheritance_ = helios::scene::InheritTransform::Inherit::All;
+        helios::math::TransformType inheritance_ = helios::math::TransformType::All;
 
         /**
          * @brief Sets the parent of this SceneNode.
@@ -368,23 +368,23 @@ export namespace helios::scene {
              * @return A filtered transform matrix containing only the inherited components.
              *
              * @see setInheritance()
-             * @see InheritTransform::Inherit
+             * @see helios::math::TransformType
              */
             helios::math::mat4f inheritWorldTransform(const helios::math::mat4f& parentWorldTransform) noexcept;
 
             /**
              * @brief Sets which transform components this node inherits from its parent.
              *
-             * By default, nodes inherit all transform components (`Inherit::All`).
+             * By default, nodes inherit all transform components (`TransformType::All`).
              * Use this method to selectively inherit only Translation, Rotation, or Scale,
              * enabling behaviors like cameras that follow an object's position but maintain
              * independent orientation.
              *
              * @param inherit The inheritance flags to apply.
              *
-             * @see InheritTransform::Inherit
+             * @see helios::math::TransformType
              */
-            void setInheritance(const helios::scene::InheritTransform::Inherit inherit) noexcept;
+            void setInheritance(const helios::math::TransformType inherit) noexcept;
 
             /**
              * @brief Returns the current transform inheritance flags for this node.
@@ -393,7 +393,7 @@ export namespace helios::scene {
              *
              * @see setInheritance()
              */
-            [[nodiscard]] helios::scene::InheritTransform::Inherit inheritance() const noexcept;
+            [[nodiscard]] helios::math::TransformType inheritance() const noexcept;
     };
 
 } // namespace helios::scene

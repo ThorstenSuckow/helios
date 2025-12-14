@@ -327,7 +327,7 @@ export namespace helios::math {
                 && helios::math::transformTypeMatch(type, helios::math::TransformType::Scale)) {
                 id(0, 0) = m(0, 0); id(0, 1) = m(0, 1); id(0, 2) = m(0, 2);
                 id(1, 0) = m(1, 0); id(1, 1) = m(1, 1); id(1, 2) = m(1, 2);
-                id(2, 0) = m(1, 0); id(2, 1) = m(2, 1); id(2, 2) = m(0, 2);
+                id(2, 0) = m(2, 0); id(2, 1) = m(2, 1); id(2, 2) = m(2, 2);
                 } else {
 
                     const auto bx = vec3f(m(0, 0), m(1, 0),  m(2, 0));

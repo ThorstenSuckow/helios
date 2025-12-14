@@ -52,8 +52,8 @@ namespace helios::engine::game {
         transform_->setScale(
             helios::math::vec3f{
                 width != 0 && csize[0] != 0 ? helios::core::units::from(width, unit)/csize[0] : 0,
-                height != 0 && csize[0] != 0 ? helios::core::units::from(height, unit)/csize[1] : 0,
-                depth != 0 && csize[0] != 0 ? helios::core::units::from(depth, unit)/csize[2] : 0,
+                height != 0 && csize[1] != 0 ? helios::core::units::from(height, unit)/csize[1] : 0,
+                depth != 0 && csize[2] != 0 ? helios::core::units::from(depth, unit)/csize[2] : 0,
             }
         );
 

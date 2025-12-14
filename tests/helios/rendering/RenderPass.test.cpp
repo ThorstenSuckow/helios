@@ -53,7 +53,7 @@ TEST(RenderPassTest, HandlesNullUniformValueMapGracefully) {
 
     auto pass = RenderPass(viewport, std::move(renderQueue), nullptr);
 
-    EXPECT_EQ(pass.frameUniformValues().mat4f_ptr(UniformSemantics::WorldMatrix), nullptr);
+    EXPECT_EQ(pass.frameUniformValues().mat4f_ptr(UniformSemantics::ModelMatrix), nullptr);
 }
 
 TEST(RenderPassTest, HandlesBothNullArgsGracefully) {
@@ -62,7 +62,7 @@ TEST(RenderPassTest, HandlesBothNullArgsGracefully) {
     auto pass = RenderPass(viewport, nullptr, nullptr);
 
     EXPECT_EQ(pass.renderQueue().count(), 0);
-    EXPECT_EQ(pass.frameUniformValues().mat4f_ptr(UniformSemantics::WorldMatrix), nullptr);
+    EXPECT_EQ(pass.frameUniformValues().mat4f_ptr(UniformSemantics::ModelMatrix), nullptr);
 }
 // --------------------
 // --------------------

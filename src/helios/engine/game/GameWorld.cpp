@@ -4,14 +4,14 @@ module;
 #include <memory>
 #include <unordered_map>
 
-module helios.game.GameWorld;
+module helios.engine.game.GameWorld;
 
-import helios.game.GameObject;
+import helios.engine.game.GameObject;
 import helios.util.Guid;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
 
-namespace helios::game {
+namespace helios::engine::game {
 
     void GameWorld::update(float deltaTime) const noexcept {
         for (auto& [guid, gameObject] : gameObjects_) {
@@ -19,7 +19,7 @@ namespace helios::game {
         }
     }
 
-    helios::game::GameObject* GameWorld::addGameObject(std::unique_ptr<GameObject> gameObject) {
+    helios::engine::game::GameObject* GameWorld::addGameObject(std::unique_ptr<GameObject> gameObject) {
         if (!gameObject) {
             logger_.warn("Attempted to add null GameObject to GameWorld");
             return nullptr;
@@ -36,21 +36,21 @@ namespace helios::game {
         return ptr;
     }
 
-    helios::game::GameObject* GameWorld::find(const helios::util::Guid& guid) {
+    helios::engine::game::GameObject* GameWorld::find(const helios::util::Guid& guid) {
         if (auto it = gameObjects_.find(guid); it != gameObjects_.end()) {
             return it->second.get();
         }
         return nullptr;
     }
 
-    const helios::game::GameObject* GameWorld::find(const helios::util::Guid& guid) const {
+    const helios::engine::game::GameObject* GameWorld::find(const helios::util::Guid& guid) const {
         if (auto it = gameObjects_.find(guid); it != gameObjects_.end()) {
             return it->second.get();
         }
         return nullptr;
     }
 
-    std::unique_ptr<helios::game::GameObject> GameWorld::removeGameObject(const GameObject& gameObject) {
+    std::unique_ptr<helios::engine::game::GameObject> GameWorld::removeGameObject(const GameObject& gameObject) {
         auto node = gameObjects_.extract(gameObject.guid());
 
         if (node.empty()) {
@@ -62,5 +62,5 @@ namespace helios::game {
         return std::move(node.mapped());
     }
 
-} // namespace helios::game
+} // namespace helios::engine::game
 

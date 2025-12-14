@@ -33,11 +33,11 @@ export namespace helios::scene {
          * @brief Flag indicating whether this Transform needs to recompute
          * its transformation matrix.
          */
-        bool needsUpdate_ = true;
+        mutable bool needsUpdate_ = true;
 
-            /**
-             * @brief The rotation component of the transformation, stored as a 4x4 matrix.
-             */
+        /**
+         * @brief The rotation component of the transformation, stored as a 4x4 matrix.
+         */
         helios::math::mat4f rotation_ = helios::math::mat4f::identity();
 
         /**
@@ -91,7 +91,7 @@ export namespace helios::scene {
              *
              * @param rotation A const ref to the new rotation matrix.
              */
-            void rotate(const math::mat4f& rotation) noexcept;
+            void setRotation(const math::mat4f& rotation) noexcept;
 
             /**
              * @brief Sets the translation component of this Transform.
@@ -99,7 +99,7 @@ export namespace helios::scene {
              *
              * @param translation A const ref to the new translation vector.
              */
-            void translate(const math::vec3f& translation) noexcept;
+            void setTranslation(const math::vec3f& translation) noexcept;
 
             /**
              * @brief Sets the scale component of this Transform.
@@ -107,7 +107,7 @@ export namespace helios::scene {
              *
              * @param scale A const ref to the new scale vector.
              */
-            void scale(const math::vec3f& scale) noexcept;
+            void setScale(const math::vec3f& scale) noexcept;
 
             /**
              * @brief Returns the current rotation component of this Transform object.

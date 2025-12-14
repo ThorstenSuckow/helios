@@ -22,7 +22,7 @@ namespace helios::rendering {
         needsUpdate_ = false;
     }
 
-    void Viewport::updateCamera() const noexcept {
+    void Viewport::updateCamera() noexcept {
         assert(renderTarget_ && "No RenderTarget available for updateCamera()");
 
         if (!cameraSceneNode_) {
@@ -54,7 +54,7 @@ namespace helios::rendering {
         return renderTarget_;
     }
 
-    Viewport& Viewport::setCameraSceneNode(const helios::scene::CameraSceneNode* cameraSceneNode) noexcept {
+    Viewport& Viewport::setCameraSceneNode(helios::scene::CameraSceneNode* cameraSceneNode) noexcept {
         cameraSceneNode_ = cameraSceneNode;
         return *this;
     }

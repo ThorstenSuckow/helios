@@ -93,47 +93,140 @@ mat4f combined = B * A;  // A is applied first, then B
 
 ## View Matrix Construction
 
-The View Matrix is computed as the inverse of the camera's World Transform. For a camera node:
+The View Matrix is computed as the inverse of the camera's World Transform. Since `helios` uses an orthonormal basis for transforms (Rotation + Translation), the inversion is optimized by transposing the rotation matrix and computing the inverse translation.
+
+Additionally, the Z-axis is negated to convert from the engine's Left-Handed System (LHS) to OpenGL's Right-Handed System (RHS).
 
 ```cpp
-// In CameraSceneNode::worldTransform()
-const auto wt = SceneNode::worldTransform();
+// In CameraSceneNode::onWorldTransformUpdate()
+const auto wt = SceneNode::cachedWorldTransform();
 
-// Extract basis vectors and eye position
-const auto x = vec3f{wt(0, 0), wt(1, 0), wt(2, 0)};
-const auto y = vec3f{wt(0, 1), wt(1, 1), wt(2, 1)};
-const auto z = vec3f{wt(0, 2), wt(1, 2), wt(2, 2)};
-const auto eye = vec3f{wt(0, 3), wt(1, 3), wt(2, 3)};
+// Extract basis vectors and position
+const auto x = helios::math::vec3f{wt(0, 0), wt(1, 0), wt(2, 0)};
+const auto y = helios::math::vec3f{wt(0, 1), wt(1, 1), wt(2, 1)};
+const auto z = helios::math::vec3f{wt(0, 2), wt(1, 2), wt(2, 2)};
+const auto eye = helios::math::vec3f{wt(0, 3), wt(1, 3), wt(2, 3)};
 
-// Construct inverse (View Matrix) with Z-negation for OpenGL
-mat4f viewMatrix = mat4f{
-    x[0],  y[0], -z[0], 0.0f,
-    x[1],  y[1], -z[1], 0.0f,
-    x[2],  y[2], -z[2], 0.0f,
-    -dot(x, eye), -dot(y, eye), dot(z, eye), 1.0f
+// Compute view matrix: inverse of world transform with Z-negation for OpenGL RHS
+// Rotation is transposed (inverse of orthonormal matrix)
+// Translation is: -dot(axis, eye)
+auto viewMatrix = helios::math::mat4f{
+    x[0],          y[0],          -z[0],        0.0f,
+    x[1],          y[1],          -z[1],        0.0f,
+    x[2],          y[2],          -z[2],        0.0f,
+    -dot(x, eye), -dot(y, eye),    dot(z, eye), 1.0f
 };
 ```
 
-The negation of the Z-axis converts from helios LHS to OpenGL's RHS expectation.
+## Units of Measurement
 
-## Projection Matrix
+helios enforces a strict unit convention to ensure consistency across physics, rendering, and game logic.
 
-Perspective projection uses standard parameters:
+### Spatial Units
 
-| Parameter | Description |
-|-----------|-------------|
-| `fovY` | Vertical field of view in **radians** |
-| `aspectRatio` | Width / Height ratio |
-| `zNear` | Near clipping plane distance (positive) |
-| `zFar` | Far clipping plane distance (positive) |
+The standard unit of length in helios is the **Meter**.
 
-Both `zNear` and `zFar` are specified as positive values representing distances from the camera, regardless of the coordinate system handedness.
+- **1.0 Helios Unit = 1.0 Meter**
+
+All spatial coordinates, distances, and sizes in the engine (e.g., `transform.position`, `mesh.vertices`) are expressed in meters.
+
+#### Helper Constants
+
+The `helios::core::units` module provides constants and conversion helpers:
+
+- `helios::core::units::METERS` (1.0)
+- `helios::core::units::CENTIMETERS` (0.01)
+
+### Temporal Units
+
+The standard unit of time in helios is the **Second**.
+
+- **1.0 Helios Time Unit = 1.0 Second**
+
+All durations, timestamps, and delta times (e.g., `deltaTime`, `animation.duration`) are expressed in seconds.
+
+#### Helper Constants
+
+- `helios::core::units::SECONDS` (1.0)
+- `helios::core::units::MILLISECONDS` (0.001)
+
+### Usage Example
+
+```cpp
+import helios.core.units;
+
+using namespace helios::core::units;
+
+// Define a distance of 50 centimeters
+float distance = fromCm(50.0f); // Returns 0.5f (meters)
+
+// Define a duration of 100 milliseconds
+float duration = fromMs(100.0f); // Returns 0.1f (seconds)
+
+// Generic conversion
+float val = from(100.0f, Unit::Centimeter); // Returns 1.0f
+```
+
+## Transform Inheritance
+
+Scene graph nodes can selectively inherit transform components from their parent using `helios::math::TransformType`. This enables flexible hierarchical behaviors without full transform coupling.
+
+### TransformType Flags
+
+The `TransformType` enum provides bitmask flags for selective inheritance:
+
+| Flag | Description |
+|------|-------------|
+| `Translation` | Inherit only the parent's position offset |
+| `Rotation` | Inherit only the parent's orientation |
+| `Scale` | Inherit only the parent's scale factors |
+| `All` | Inherit all components (default behavior) |
+
+### Usage Example
+
+```cpp
+import helios.math.transform;
+
+using namespace helios::math;
+
+// Camera follows spaceship position but maintains independent orientation
+cameraNode->setInheritance(TransformType::Translation);
+
+// Combine multiple flags
+node->setInheritance(TransformType::Translation | TransformType::Rotation);
+
+// Full inheritance (default)
+childNode->setInheritance(TransformType::All);
+```
+
+### Matrix Decomposition
+
+The `mat4::decompose()` member function extracts specific transform components from a matrix:
+
+```cpp
+import helios.math.types;
+import helios.math.transform;
+
+mat4f fullTransform = /* scaled, rotated, translated */;
+
+// Extract only translation
+mat4f translationOnly = fullTransform.decompose(TransformType::Translation);
+
+// Extract rotation without scale
+mat4f rotationOnly = fullTransform.decompose(TransformType::Rotation);
+
+// Transpose a matrix (useful for inverting orthonormal rotation matrices)
+mat4f transposed = rotationMatrix.transpose();
+```
 
 ## Related Modules
 
-- `helios.math.types` — Core vector and matrix types (`vec3f`, `mat4f`)
+- `helios.core.units` — Unit conversion and constants
+- `helios.math.types` — Core vector and matrix types (`vec3f`, `mat4f`) with `decompose()` and `transpose()`
 - `helios.math.utils` — Mathematical utility functions (`perspective`, `radians`, `degrees`)
+- `helios.math.transform` — Transform utilities including `TransformType`
 - `helios.scene.Transform` — Encapsulates translation, rotation, and scale
 - `helios.scene.Camera` — Projection matrix management
 - `helios.scene.CameraSceneNode` — View matrix computation and scene graph integration
+
 

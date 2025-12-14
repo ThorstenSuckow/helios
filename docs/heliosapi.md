@@ -20,7 +20,8 @@ The framework's architecture follows a component-based philosophy, providing abs
 
 ```
 helios
-├── rendering          # Rendering pipeline and render commands
+├── core              # Units and fundamental constants
+├── rendering         # Rendering pipeline and render commands
 │   ├── model         # Mesh, Material, and configuration
 │   ├── shader        # Shader programs and uniform management
 │   └── asset         # Geometric shapes and assets
@@ -28,6 +29,7 @@ helios
 ├── input             # Keyboard, mouse, and gamepad input
 ├── window            # Window management and events
 ├── engine            # Frame pacing and timing control
+│   └── game          # Game objects and command pattern
 ├── math              # Vectors, matrices, transforms
 ├── util              # Logging, file I/O, utilities
 ├── tooling           # Performance metrics and profiling
@@ -42,6 +44,8 @@ helios.ext
 │   ├── widgets       # Ready-to-use debug widgets
 │   │   ├── LogWidget         # Log console with filtering
 │   │   ├── GamepadWidget     # Gamepad state visualizer
+│   │   ├── CameraWidget      # Camera parameter control
+│   │   ├── FpsWidget         # Frame rate display
 │   │   └── MainMenuWidget    # Application settings menu
 │   ├── ImGuiOverlay          # Widget manager with docking support
 │   ├── ImGuiLogSink          # Log sink for ImGui output
@@ -59,25 +63,37 @@ helios.ext
 
 ### 1. Scene Graph
 
-The scene graph organizes objects hierarchically, with automatic transform propagation from parent to child nodes.
+The scene graph organizes objects hierarchically, with automatic transform propagation from parent to child nodes. Transform inheritance can be selectively controlled per node.
 
 **Key Classes:**
 - `Scene` - Root container for all scene objects
 - `SceneNode` - Node in the hierarchy with transform and optional renderable
-- `Camera` - Defines the viewpoint and projection
+- `CameraSceneNode` - Specialized node for cameras with view matrix computation
+- `Camera` - Defines projection parameters (FOV, aspect ratio, near/far planes)
+- `TransformType` - Bitmask for selective transform inheritance (Translation, Rotation, Scale)
 
 **Example:**
 ```cpp
 import helios.scene.Scene;
 import helios.scene.SceneNode;
+import helios.scene.CameraSceneNode;
+import helios.math.transform;
 
 auto scene = std::make_unique<Scene>(std::move(cullingStrategy));
 
+// Add a game object
 auto cubeNode = std::make_unique<SceneNode>(std::move(cubeRenderable));
 auto* node = scene->addNode(std::move(cubeNode));
+node->setTranslation(vec3f(0.0f, 2.0f, 0.0f));
 
-node->translate(vec3f(0.0f, 2.0f, 0.0f));
-node->rotate(rotationMatrix);
+// Add a camera as child of the cube (follows cube position)
+auto camera = std::make_unique<Camera>();
+auto cameraNode = std::make_unique<CameraSceneNode>(std::move(camera));
+auto* camPtr = node->addNode(std::move(cameraNode));
+
+// Camera inherits only translation (not rotation/scale)
+camPtr->setInheritance(helios::math::TransformType::Translation);
+camPtr->lookAt(vec3f(0.0f, 0.0f, 0.0f), vec3f(0.0f, 1.0f, 0.0f));
 ```
 
 ### 2. Rendering Pipeline
@@ -254,6 +270,72 @@ overlay.render();
 - Style Editor access
 - Settings persistence via imgui.ini
 
+### 8. Game System
+
+A lightweight framework for game object management and input handling.
+
+**Key Classes:**
+- `GameObject` - Base class for game entities with GUID identification
+- `GameWorld` - Container for game objects with update loop
+- `CommandBuffer` - Deferred command execution pattern
+- `InputSnapshot` - Captures input state for a single frame
+- `InputHandler` - Interface for translating input to commands
+
+**Example:**
+```cpp
+import helios.engine.game.GameWorld;
+import helios.engine.game.GameObject;
+import helios.engine.game.CommandBuffer;
+import helios.engine.game.InputSnapshot;
+
+// Create game world
+auto gameWorld = GameWorld{};
+
+// Add game objects
+auto spaceship = std::make_unique<Spaceship>(sceneNode);
+auto* spaceshipPtr = gameWorld.addGameObject(std::move(spaceship));
+
+// Set size using engine units (1 hu = 1 meter)
+spaceshipPtr->setSize(5.0f, 5.0f, 0.0f, helios::core::units::Unit::Meter);
+
+// Game loop
+auto commandBuffer = CommandBuffer{};
+while (running) {
+    // Capture input
+    auto snapshot = InputSnapshot(gamepadState);
+    
+    // Translate input to commands
+    inputHandler.handleInput(snapshot, spaceshipPtr->guid(), commandBuffer);
+    
+    // Execute commands
+    commandBuffer.flush(gameWorld);
+    
+    // Update all game objects
+    gameWorld.update(deltaTime);
+}
+```
+
+### 9. Units System
+
+Standardized measurement units for consistent object sizing across the engine.
+
+**Key Constants:**
+- Standard unit: **Meter** (1 hu = 1 m)
+- Time standard: **Seconds**
+
+**Example:**
+```cpp
+import helios.core.units;
+
+using namespace helios::core::units;
+
+// Set object size in meters (1 hu = 1 meter)
+gameObject->setSize(2.0f, 1.0f, 0.5f, Unit::Meter);
+
+// A spaceship 5 meters wide
+constexpr float SHIP_WIDTH = 5.0f;  // 5 hu = 5 meters
+```
+
 ### 7. Frame Pacing and Performance Metrics
 
 Control frame rate and monitor performance with built-in timing tools.
@@ -316,37 +398,52 @@ const auto& history = metrics.getHistory();
 ```cpp
 import helios.ext.glfw.app.GLFWFactory;
 import helios.scene.Scene;
-import helios.scene.Camera;
+import helios.scene.CameraSceneNode;
+import helios.rendering.Viewport;
 
 int main() {
     // 1. Create application
-    auto app = GLFWFactory::makeOpenGLApp("My helios App");
+    auto app = GLFWFactory::makeOpenGLApp("My helios App", 1920, 1080);
     auto* window = app->current();
     
-    // 2. Create scene
+    // 2. Setup viewport
+    auto viewport = std::make_shared<Viewport>(0.0f, 0.0f, 1.0f, 1.0f);
+    window->addViewport(viewport);
+    
+    // 3. Create scene
     auto scene = std::make_unique<Scene>(
         std::make_unique<CullNoneStrategy>()
     );
     
-    // 3. Add camera
+    // 4. Add camera to scene graph
     auto camera = std::make_unique<Camera>();
-    scene->addNode(std::move(camera));
+    camera->setPerspective(radians(90.0f), 16.0f/9.0f, 0.1f, 1000.0f);
     
-    // 4. Create and add renderable
+    auto cameraNode = std::make_unique<CameraSceneNode>(std::move(camera));
+    auto* camPtr = scene->addNode(std::move(cameraNode));
+    camPtr->setTranslation(vec3f(0.0f, 0.0f, 5.0f));
+    camPtr->lookAt(vec3f(0.0f, 0.0f, 0.0f), vec3f(0.0f, 1.0f, 0.0f));
+    
+    // Connect viewport to camera
+    viewport->setCameraSceneNode(camPtr);
+    
+    // 5. Create and add renderable
     auto prototype = std::make_shared<RenderPrototype>(material, mesh);
     auto renderable = std::make_shared<Renderable>(prototype);
     auto node = std::make_unique<SceneNode>(std::move(renderable));
     scene->addNode(std::move(node));
     
-    // 5. Main loop
+    // 6. Main loop
     while (!window->shouldClose()) {
         app->eventManager().dispatchAll();
         
-        auto snapshot = scene->createSnapshot(*camera);
-        auto renderPass = RenderPassFactory::getInstance()
-            .buildRenderPass(snapshot);
+        auto snapshot = scene->createSnapshot(viewport);
+        if (snapshot.has_value()) {
+            auto renderPass = RenderPassFactory::getInstance()
+                .buildRenderPass(*snapshot);
+            app->renderingDevice().render(renderPass);
+        }
         
-        app->renderingDevice().render(renderPass);
         window->swapBuffers();
     }
     
@@ -358,8 +455,10 @@ int main() {
 
 For detailed information about each module, see:
 
+- **[Core](../include/helios/core/README.md)** - Units and fundamental constants
 - **[Rendering](../include/helios/rendering/README.md)** - Rendering system and pipeline
 - **[Scene](../include/helios/scene/README.md)** - Scene graph and camera
+- **[Game](../include/helios/engine/game/README.md)** - Game objects and command pattern
 - **[Input](../include/helios/input/README.md)** - Input handling
 - **[Engine](../include/helios/engine/README.md)** - Frame pacing and timing control
 - **[Tooling](../include/helios/tooling/README.md)** - Performance metrics and profiling

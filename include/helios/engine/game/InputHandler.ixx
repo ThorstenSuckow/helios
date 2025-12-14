@@ -4,15 +4,15 @@
  */
 module;
 
-export module helios.game.InputHandler;
+export module helios.engine.game.InputHandler;
 
-import helios.game.Command;
-import helios.game.CommandBuffer;
-import helios.game.InputSnapshot;
-import helios.game.GameObject;
+import helios.engine.game.Command;
+import helios.engine.game.CommandBuffer;
+import helios.engine.game.InputSnapshot;
+import helios.engine.game.GameObject;
 import helios.util.Guid;
 
-export namespace helios::game {
+export namespace helios::engine::game {
 
     /**
      * @brief Abstract interface for processing input and generating game commands.
@@ -23,7 +23,7 @@ export namespace helios::game {
      *
      * Example implementation:
      * ```cpp
-     * class PlayerInputHandler : public helios::game::InputHandler {
+     * class PlayerInputHandler : public helios::engine::game::InputHandler {
      * public:
      *     void handleInput(
      *         const InputSnapshot& snapshot,
@@ -70,9 +70,9 @@ export namespace helios::game {
          *       Command execution will be skipped if the Guid is not found during flush().
          */
         virtual void handleInput(
-            const helios::game::InputSnapshot& inputSnapshot,
+            const helios::engine::game::InputSnapshot& inputSnapshot,
             const helios::util::Guid& guid,
-            helios::game::CommandBuffer& commandBuffer
+            helios::engine::game::CommandBuffer& commandBuffer
         ) = 0;
 
 

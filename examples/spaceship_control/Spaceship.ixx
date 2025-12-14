@@ -11,7 +11,7 @@ module;
 
 export module helios.examples.spaceshipControl.Spaceship;
 
-import helios.game.GameObject;
+import helios.engine.game.GameObject;
 import helios.math.types;
 import helios.math.utils;
 import helios.math.transform;
@@ -33,10 +33,12 @@ export namespace helios::examples::spaceshipControl {
      * Movement and rotation are interpolated over time using delta-time for frame-rate
      * independent behavior.
      *
-     * @see helios::game::GameObject
+     * Physics parameters can be tuned at runtime via setter methods.
+     *
+     * @see helios::engine::game::GameObject
      * @see PlayerMoveCommand
      */
-    class Spaceship : public helios::game::GameObject {
+    class Spaceship : public helios::engine::game::GameObject {
 
         /**
          * @brief Logger instance for debug and diagnostic output.
@@ -44,35 +46,107 @@ export namespace helios::examples::spaceshipControl {
         static inline const helios::util::log::Logger& logger_ =
                 helios::util::log::LogManager::loggerForScope(HELIOS_LOG_SCOPE);
 
+        // ========================================
+        // Default Physics Constants
+        // ========================================
+
+        /**
+         * @brief Default maximum rotation speed in degrees per second.
+         */
+        static constexpr float DEFAULT_ROTATION_SPEED = 560.0f;
+
+        /**
+         * @brief Default minimum movement speed before the ship stops completely.
+         */
+        static constexpr float DEFAULT_MOVEMENT_SPEED_THRESHOLD = 0.1f;
+
+        /**
+         * @brief Default minimum rotation speed before rotation stops completely.
+         */
+        static constexpr float DEFAULT_ROTATION_SPEED_THRESHOLD = 0.1f;
+
+        /**
+         * @brief Default movement acceleration in units per second squared.
+         */
+        static constexpr float DEFAULT_MOVEMENT_ACCELERATION = 30.0f;
+
+        /**
+         * @brief Default base movement speed in units per second.
+         */
+        static constexpr float DEFAULT_MOVEMENT_SPEED = 30.0f;
+
+        /**
+         * @brief Default exponential decay factor for rotation when input stops.
+         */
+        static constexpr float DEFAULT_ROTATION_DAMPENING = 0.0001f;
+
+        /**
+         * @brief Default exponential decay factor for movement when input stops.
+         */
+        static constexpr float DEFAULT_MOVEMENT_DAMPENING = 0.1f;
+
+        /**
+         * @brief Default analog stick deadzone threshold (0.0 to 1.0).
+         */
+        static constexpr float DEFAULT_DEADZONE = 0.4f;
+
+        /**
+         * @brief Default base rotation speed multiplier.
+         */
+        static constexpr float DEFAULT_BASE_ROTATION_SPEED_MULTIPLIER = 16.0f;
+
+        // ========================================
+        // Configurable Physics Parameters
+        // ========================================
+
         /**
          * @brief Maximum rotation speed in degrees per second.
          */
-        static constexpr float BASE_ROTATION_SPEED = 720.0f;
+        float rotationSpeed_ = DEFAULT_ROTATION_SPEED;
 
         /**
          * @brief Minimum movement speed before the ship stops completely.
          */
-        static constexpr float MOVEMENT_SPEED_THRESHOLD = 0.1f;
+        float movementSpeedThreshold_ = DEFAULT_MOVEMENT_SPEED_THRESHOLD;
 
         /**
          * @brief Minimum rotation speed before rotation stops completely.
          */
-        static constexpr float ROTATIONS_SPEED_THRESHOLD = 0.1f;
+        float rotationSpeedThreshold_ = DEFAULT_ROTATION_SPEED_THRESHOLD;
+
+        /**
+         * @brief Movement acceleration in units per second squared.
+         */
+        float movementAcceleration_ = DEFAULT_MOVEMENT_ACCELERATION;
 
         /**
          * @brief Base movement speed in units per second.
          */
-        static constexpr float BASE_MOVEMENT_SPEED = 1.50f;
+        float movementSpeed_ = DEFAULT_MOVEMENT_SPEED;
 
         /**
          * @brief Exponential decay factor for rotation when input stops.
          */
-        static constexpr float ROTATION_DAMPENING = 0.0001f;
+        float rotationDampening_ = DEFAULT_ROTATION_DAMPENING;
 
         /**
          * @brief Exponential decay factor for movement when input stops.
          */
-        static constexpr float MOVEMENT_DAMPENING = 0.1f;
+        float movementDampening_ = DEFAULT_MOVEMENT_DAMPENING;
+
+        /**
+         * @brief Analog stick deadzone threshold (0.0 to 1.0).
+         */
+        float deadzone_ = DEFAULT_DEADZONE;
+
+        /**
+         * @brief Base rotation speed multiplier.
+         */
+        float baseRotationSpeedMultiplier_ = DEFAULT_BASE_ROTATION_SPEED_MULTIPLIER;
+
+        // ========================================
+        // Runtime State Variables
+        // ========================================
 
         /**
          * @brief Current movement speed after applying input and dampening.
@@ -95,29 +169,9 @@ export namespace helios::examples::spaceshipControl {
         float rotationAngleDelta_ = 0;
 
         /**
-         * @brief Base rotation speed multiplier.
-         */
-        float baseRotationSpeed = 16.0f;
-
-        /**
          * @brief Current rotation speed after applying input and dampening.
          */
         float actualRotationSpeed_ = 0.0f;
-
-        /**
-         * @brief Analog stick deadzone threshold (0.0 to 1.0).
-         */
-        float deadzone = 0.4f;
-
-        /**
-         * @brief Current facing direction as a unit vector.
-         */
-        helios::math::vec3f actualDirection_ = helios::math::vec3f(1.0f, 1.0f, 0);
-
-        /**
-         * @brief Current world position of the spaceship.
-         */
-        helios::math::vec3f actualPosition_ = helios::math::vec3f(0.0f, 0.0f, 0.0f);
 
         /**
          * @brief Indicates whether input is currently being received.
@@ -151,10 +205,15 @@ export namespace helios::examples::spaceshipControl {
             /**
              * @todo normalization needs to happen with the input manager
              */
-            if (speedFactor <= deadzone) {
+            if (speedFactor <= deadzone_) {
+                steeringInput_ = helios::math::vec2f{0.0f, 0.0f};
+                throttle_ = 0.0f;
                 isInputActive_ = false;
                 return;
             }
+
+            steeringInput_ = direction;
+            throttle_ = speedFactor;
 
             assert(std::abs(direction.length() - 1.0f) <= 0.001f && "Unexpected direction vector - not normalized");
 
@@ -167,8 +226,8 @@ export namespace helios::examples::spaceshipControl {
             isInputActive_ = true;
 
             float turnBoost = 1.0f + 0.5f*std::clamp((abs(rotationAngleDelta_))/180.f, 0.0f, 1.0f);
-            actualRotationSpeed_ = turnBoost * BASE_ROTATION_SPEED * speedFactor;
-            actualMovementSpeed_ = BASE_MOVEMENT_SPEED * speedFactor;
+            actualRotationSpeed_ = turnBoost * rotationSpeed_ * speedFactor;
+            actualMovementSpeed_ = movementSpeed_ * speedFactor;
 
         }
 
@@ -201,8 +260,8 @@ export namespace helios::examples::spaceshipControl {
 
             // ROTATION
             if (!isInputActive_) {
-                actualRotationSpeed_ *= std::pow(ROTATION_DAMPENING, deltaTime);;
-                if (actualRotationSpeed_ < ROTATIONS_SPEED_THRESHOLD) {
+                actualRotationSpeed_ *= std::pow(rotationDampening_, deltaTime);;
+                if (actualRotationSpeed_ < rotationSpeedThreshold_) {
                     actualRotationSpeed_ = 0.0f;
                 }
             }
@@ -222,7 +281,7 @@ export namespace helios::examples::spaceshipControl {
                     actualRotationSpeed_ = 0.0f;
                 }
 
-                rotate(helios::math::rotate(
+                setRotation(helios::math::rotate(
                 helios::math::mat4f::identity(),
                 helios::math::radians(actualRotationAngle_),
                 helios::math::vec3f(0.0f, 0.0f, 1.0f)
@@ -232,33 +291,170 @@ export namespace helios::examples::spaceshipControl {
             }
 
             // MOVEMENT
+            // Compute the current facing direction from the actual rotation angle.
+            // This converts the angle to a unit vector in the XY plane.
+            const auto actualDirection_ = helios::math::vec3f(
+                cos(helios::math::radians(actualRotationAngle_)), sin(helios::math::radians(actualRotationAngle_)), 0.0f
+            );
+
             if (!isInputActive_) {
-                actualMovementSpeed_ *= std::pow(MOVEMENT_DAMPENING, deltaTime);
-
-                if (actualMovementSpeed_ < MOVEMENT_SPEED_THRESHOLD) {
-                    actualMovementSpeed_ = 0.0f;
-                }
+                // Apply exponential drag when no input is active.
+                // This creates a smooth deceleration effect (velocity approaches zero over time).
+                const float drag  = std::pow(movementDampening_, deltaTime);
+                velocity_ = velocity_ * drag;
+            } else {
+                // Accelerate in the current facing direction.
+                // Uses throttle (input intensity) to scale acceleration.
+                velocity_ = velocity_ +  actualDirection_ *  (movementAcceleration_ * throttle_ * deltaTime);
             }
 
-            if (actualMovementSpeed_ > 0.0f) {
-                actualDirection_ = helios::math::vec3f(
-                    cos(helios::math::radians(actualRotationAngle_)), sin(helios::math::radians(actualRotationAngle_)), 0.0f
-                );
-
-                actualPosition_ = actualPosition_ + (actualDirection_ * actualMovementSpeed_ * deltaTime);
-                logger_.debug(std::format("Updating ship with position ({0},{1},{2}), speed {3}", actualPosition_[0], actualPosition_[1], actualPosition_[2], actualMovementSpeed_));
-                translate(actualPosition_);
-
+            // Clamp velocity to maximum speed to prevent unlimited acceleration.
+            if (velocity_.length() > movementSpeed_) {
+                velocity_ = velocity_.normalize() * movementSpeed_;
             }
 
+            // Integrate velocity to update position.
+            position_ = position_ + velocity_ * deltaTime;
+            setTranslation(position_);
 
         }
 
+        /**
+         * @brief Returns the current speed as a ratio of maximum speed.
+         *
+         * @return A value between 0.0 (stationary) and 1.0 (maximum speed).
+         */
+        [[nodiscard]] float speedRatio() const noexcept override {
+            // Prevent division by zero if movementSpeed_ is zero or very close to zero
+            if (std::abs(movementSpeed_) < 1e-6f) {
+                return 0.0f;
+            }
+            return velocity_.length() / movementSpeed_;
+        }
+
+        // ========================================
+        // Physics Parameter Getters
+        // ========================================
+
+        /**
+         * @brief Returns the maximum rotation speed in degrees per second.
+         */
+        [[nodiscard]] float rotationSpeed() const noexcept { return rotationSpeed_; }
+
+        /**
+         * @brief Returns the minimum movement speed threshold.
+         */
+        [[nodiscard]] float movementSpeedThreshold() const noexcept { return movementSpeedThreshold_; }
+
+        /**
+         * @brief Returns the minimum rotation speed threshold.
+         */
+        [[nodiscard]] float rotationSpeedThreshold() const noexcept { return rotationSpeedThreshold_; }
+
+        /**
+         * @brief Returns the movement acceleration in units per second squared.
+         */
+        [[nodiscard]] float movementAcceleration() const noexcept { return movementAcceleration_; }
+
+        /**
+         * @brief Returns the base movement speed in units per second.
+         */
+        [[nodiscard]] float movementSpeed() const noexcept { return movementSpeed_; }
+
+        /**
+         * @brief Returns the rotation dampening factor.
+         */
+        [[nodiscard]] float rotationDampening() const noexcept { return rotationDampening_; }
+
+        /**
+         * @brief Returns the movement dampening factor.
+         */
+        [[nodiscard]] float movementDampening() const noexcept { return movementDampening_; }
+
+        /**
+         * @brief Returns the analog stick deadzone threshold.
+         */
+        [[nodiscard]] float deadzone() const noexcept { return deadzone_; }
+
+        /**
+         * @brief Returns the current rotation angle in degrees.
+         */
+        [[nodiscard]] float rotationAngle() const noexcept { return actualRotationAngle_; }
 
 
-            
+        // ========================================
+        // Physics Parameter Setters
+        // ========================================
 
-        
+        /**
+         * @brief Sets the maximum rotation speed in degrees per second.
+         *
+         * @param value The new rotation speed (must be positive).
+         */
+        void setRotationSpeed(float value) noexcept { rotationSpeed_ = value; }
+
+        /**
+         * @brief Sets the minimum movement speed threshold.
+         *
+         * @param value The new threshold (0.0 to 1.0).
+         */
+        void setMovementSpeedThreshold(float value) noexcept { movementSpeedThreshold_ = value; }
+
+        /**
+         * @brief Sets the minimum rotation speed threshold.
+         *
+         * @param value The new threshold (0.0 to 1.0).
+         */
+        void setRotationSpeedThreshold(float value) noexcept { rotationSpeedThreshold_ = value; }
+
+        /**
+         * @brief Sets the movement acceleration in units per second squared.
+         *
+         * @param value The new acceleration (must be positive).
+         */
+        void setMovementAcceleration(float value) noexcept { movementAcceleration_ = value; }
+
+        /**
+         * @brief Sets the base movement speed in units per second.
+         *
+         * @param value The new movement speed (must be positive).
+         */
+        void setMovementSpeed(float value) noexcept { movementSpeed_ = value; }
+
+        /**
+         * @brief Sets the rotation dampening factor.
+         *
+         * @param value The new dampening factor (0.0 to 1.0).
+         */
+        void setRotationDampening(float value) noexcept { rotationDampening_ = value; }
+
+        /**
+         * @brief Sets the movement dampening factor.
+         *
+         * @param value The new dampening factor (0.0 to 1.0).
+         */
+        void setMovementDampening(float value) noexcept { movementDampening_ = value; }
+
+        /**
+         * @brief Sets the analog stick deadzone threshold.
+         *
+         * @param value The new deadzone threshold (0.0 to 1.0).
+         */
+        void setDeadzone(float value) noexcept { deadzone_ = value; }
+
+        /**
+         * @brief Resets all physics parameters to their default values.
+         */
+        void resetPhysicsToDefaults() noexcept {
+            rotationSpeed_ = DEFAULT_ROTATION_SPEED;
+            movementSpeedThreshold_ = DEFAULT_MOVEMENT_SPEED_THRESHOLD;
+            rotationSpeedThreshold_ = DEFAULT_ROTATION_SPEED_THRESHOLD;
+            movementAcceleration_ = DEFAULT_MOVEMENT_ACCELERATION;
+            movementSpeed_ = DEFAULT_MOVEMENT_SPEED;
+            rotationDampening_ = DEFAULT_ROTATION_DAMPENING;
+            movementDampening_ = DEFAULT_MOVEMENT_DAMPENING;
+            deadzone_ = DEFAULT_DEADZONE;
+        }
 
     };
 

@@ -10,7 +10,7 @@ import helios.rendering.Renderable;
 import helios.util.Guid;
 import helios.scene.Transform;
 import helios.math.types;
-
+import helios.math.TransformType;
 
 namespace helios::scene {
 
@@ -55,7 +55,7 @@ namespace helios::scene {
     };
 
 
-    SceneNode* SceneNode::addChild(std::unique_ptr<SceneNode> sceneNode) {
+    SceneNode* SceneNode::addNode(std::unique_ptr<SceneNode> sceneNode) {
         auto& ref = *children_.emplace_back(std::move(sceneNode));
         ref.setParent(this);
         return &ref;
@@ -78,22 +78,22 @@ namespace helios::scene {
 
 
 
-    SceneNode& SceneNode::scale(const helios::math::vec3f& scale) noexcept {
-        localTransform_.scale(scale);
+    SceneNode& SceneNode::setScale(const helios::math::vec3f& scale) noexcept {
+        localTransform_.setScale(scale);
         needsUpdate_ = true;
         return *this;
     }
 
 
-    SceneNode& SceneNode::rotate(const helios::math::mat4f& rotation) noexcept {
-        localTransform_.rotate(rotation);
+    SceneNode& SceneNode::setRotation(const helios::math::mat4f& rotation) noexcept {
+        localTransform_.setRotation(rotation);
         needsUpdate_ = true;
         return *this;
     }
 
 
-    SceneNode& SceneNode::translate(const helios::math::vec3f& translation) noexcept {
-        localTransform_.translate(translation);
+    SceneNode& SceneNode::setTranslation(const helios::math::vec3f& translation) noexcept {
+        localTransform_.setTranslation(translation);
         needsUpdate_ = true;
         return *this;
     }
@@ -112,16 +112,34 @@ namespace helios::scene {
     }
 
 
-    bool SceneNode::setWorldTransform(
-        const helios::math::mat4f& wf, helios::scene::SceneGraphKey sceneGraphKey
+    bool SceneNode::applyWorldTransform(
+        const helios::math::mat4f& parentWorldTransform, helios::scene::SceneGraphKey sceneGraphKey
         ) noexcept {
 
-        if (worldTransform_.same(wf)) {
+        const auto newWt = inheritWorldTransform(parentWorldTransform);
+
+        if (!needsUpdate() && worldTransform_.same(newWt)) {
             return false;
         }
-        worldTransform_ = wf;
+
+        worldTransform_ = newWt;
         needsUpdate_ = false;
+
+
+        onWorldTransformUpdate();
         return true;
+    }
+
+    helios::math::mat4f SceneNode::inheritWorldTransform(const helios::math::mat4f& parentWorldTransform) noexcept {
+        using namespace helios::math;
+
+        if (inheritance_ == helios::math::TransformType::All) {
+            return parentWorldTransform * localTransform_.transform();
+        }
+
+        auto id = parentWorldTransform.decompose(inheritance_);
+
+        return id * localTransform_.transform();
     }
 
 
@@ -152,22 +170,36 @@ namespace helios::scene {
 
     }
 
+
     void SceneNode::update() noexcept {
         needsUpdate_ = false;
 
         if (parent_ == nullptr) {
             worldTransform_ = localTransform_.transform();
         } else {
-            worldTransform_ = parent_->worldTransform() * localTransform_.transform();
+            worldTransform_ = inheritWorldTransform(parent_->worldTransform());
         }
 
+        onWorldTransformUpdate();
+
+    }
+
+    void SceneNode::onWorldTransformUpdate() noexcept {
         if (renderable_) {
             if (const auto prototype = renderable_->renderPrototype()) {
                 const auto& localAABB = prototype->mesh().aabb();
                 aabb_ = localAABB.transform(worldTransform_);
             }
         }
+    }
 
+    helios::math::TransformType SceneNode::inheritance() const noexcept {
+        return inheritance_;
+    }
+
+    void SceneNode::setInheritance(const helios::math::TransformType inherit) noexcept {
+        inheritance_ = inherit;
+        needsUpdate_ = true;
     }
 
 };

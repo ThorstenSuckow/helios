@@ -8,12 +8,12 @@ module;
 
 export module helios.examples.spaceshipControl.InputHandler;
 
-import helios.game.InputHandler;
+import helios.engine.game.InputHandler;
 import helios.input.GamepadState;
-import helios.game.Command;
-import helios.game.InputSnapshot;
-import helios.game.CommandBuffer;
-import helios.game.GameObject;
+import helios.engine.game.Command;
+import helios.engine.game.InputSnapshot;
+import helios.engine.game.CommandBuffer;
+import helios.engine.game.GameObject;
 import helios.examples.spaceshipControl.commands.PlayerMoveCommand;
 import helios.util.Guid;
 
@@ -27,10 +27,10 @@ export namespace helios::examples::spaceshipControl {
      * is normalized and passed along with the magnitude (speed factor) to enable
      * analog-sensitive movement control.
      *
-     * @see helios::game::InputHandler
+     * @see helios::engine::game::InputHandler
      * @see PlayerMoveCommand
      */
-    class InputHandler : public helios::game::InputHandler {
+    class InputHandler : public helios::engine::game::InputHandler {
 
     public:
 
@@ -45,9 +45,9 @@ export namespace helios::examples::spaceshipControl {
          *       The command itself handles deadzone filtering.
          */
         void handleInput(
-            const helios::game::InputSnapshot& inputSnapshot,
+            const helios::engine::game::InputSnapshot& inputSnapshot,
             const helios::util::Guid& guid,
-            helios::game::CommandBuffer& commandBuffer
+            helios::engine::game::CommandBuffer& commandBuffer
         ) override {
 
             commandBuffer.add(

@@ -73,15 +73,15 @@ export namespace helios::scene {
         /**
          * @brief Internal helper function to force-propagate the worldTransformation of SceneNodes to their child nodes.
          *
-         * Propagation is cancelled for this node if the world transform submitted
+         * Propagation is cancelled for this node if the resulting world transform
          * is considered equal to the current world transform of the SceneNode.
          *
          * @param node The current SceneNode for which to propagate the world transformation.
-         * @param wt The world transformation from the parent node.
+         * @param parentWorldTransform The world transformation from the parent node.
          *
          * @see updateNodes()
          */
-        void propagateWorldTransform(SceneNode& node, const math::mat4f& wt) const;
+        void propagateWorldTransform(SceneNode& node, const math::mat4f& parentWorldTransform) const;
 
         /**
          * @brief Selectively updates the world transformation of SceneNodes in the scene graph.

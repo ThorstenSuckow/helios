@@ -6,8 +6,8 @@ module;
 
 export module helios.examples.spaceshipControl.commands.PlayerMoveCommand;
 
-import helios.game.Command;
-import helios.game.GameObject;
+import helios.engine.game.Command;
+import helios.engine.game.GameObject;
 import helios.examples.spaceshipControl.Spaceship;
 import helios.math.types;
 import helios.util.log;
@@ -27,10 +27,10 @@ export namespace helios::examples::spaceshipControl::commands {
      * The command uses dynamic_cast to safely convert the generic GameObject reference
      * to a Spaceship. If the cast fails, an error is logged and execution is skipped.
      *
-     * @see helios::game::Command
+     * @see helios::engine::game::Command
      * @see Spaceship::move
      */
-    class PlayerMoveCommand : public helios::game::Command {
+    class PlayerMoveCommand : public helios::engine::game::Command {
 
         /**
          * @brief Logger for this command type.
@@ -71,7 +71,7 @@ export namespace helios::examples::spaceshipControl::commands {
          * @note Uses dynamic_cast to convert to Spaceship. If the cast fails,
          *       an error is logged and the command has no effect.
          */
-        void execute(helios::game::GameObject& gameObject) override {
+        void execute(helios::engine::game::GameObject& gameObject) override {
 
             if (auto* ship = dynamic_cast<helios::examples::spaceshipControl::Spaceship*>(&gameObject)) {
                 execute(*ship);

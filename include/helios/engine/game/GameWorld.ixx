@@ -8,16 +8,16 @@ module;
 #include <memory>
 #include <unordered_map>
 
-export module helios.game.GameWorld;
+export module helios.engine.game.GameWorld;
 
-import helios.game.GameObject;
+import helios.engine.game.GameObject;
 import helios.util.Guid;
 
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
 
-#define HELIOS_LOG_SCOPE "helios::game::GameWorld"
-export namespace helios::game {
+#define HELIOS_LOG_SCOPE "helios::engine::game::GameWorld"
+export namespace helios::engine::game {
 
     /**
      * @brief Central registry and owner of all active GameObjects in the game world.
@@ -29,7 +29,7 @@ export namespace helios::game {
      *
      * Typical usage:
      * ```cpp
-     * helios::game::GameWorld world;
+     * helios::engine::game::GameWorld world;
      *
      * // Add a new entity
      * auto player = std::make_unique<Player>(sceneNode);
@@ -37,7 +37,7 @@ export namespace helios::game {
      *
      * // Lookup by Guid
      * if (auto* obj = world.find(playerPtr->guid())) {
-     *     obj->translate({1.0f, 0.0f, 0.0f});
+     *     obj->setTranslation({1.0f, 0.0f, 0.0f});
      * }
      *
      * // Remove entity (returns ownership)
@@ -94,7 +94,7 @@ export namespace helios::game {
          * @note Attempting to add a nullptr or a GameObject with a duplicate Guid will fail,
          *       return nullptr, and log a warning.
          */
-        [[nodiscard]] helios::game::GameObject* addGameObject(std::unique_ptr<GameObject> gameObject);
+        [[nodiscard]] helios::engine::game::GameObject* addGameObject(std::unique_ptr<GameObject> gameObject);
 
         /**
          * @brief Finds a GameObject by its unique identifier.
@@ -108,7 +108,7 @@ export namespace helios::game {
          *
          * @note This is the non-const overload. Use the const overload for read-only access.
          */
-        [[nodiscard]] helios::game::GameObject* find(const helios::util::Guid& guid);
+        [[nodiscard]] helios::engine::game::GameObject* find(const helios::util::Guid& guid);
 
         /**
          * @brief Finds a GameObject by its unique identifier (const overload).
@@ -122,7 +122,7 @@ export namespace helios::game {
          *
          * @note This overload is used when the GameWorld is accessed via const reference.
          */
-        [[nodiscard]] const helios::game::GameObject* find(const helios::util::Guid& guid) const;
+        [[nodiscard]] const helios::engine::game::GameObject* find(const helios::util::Guid& guid) const;
 
         /**
          * @brief Removes a GameObject from the world and transfers ownership to the caller.
@@ -139,7 +139,7 @@ export namespace helios::game {
          * @note Attempting to remove a GameObject that doesn't exist returns nullptr
          *       and logs a warning.
          */
-        [[nodiscard]] std::unique_ptr<helios::game::GameObject> removeGameObject(const GameObject& gameObject);
+        [[nodiscard]] std::unique_ptr<helios::engine::game::GameObject> removeGameObject(const GameObject& gameObject);
     };
 
 }

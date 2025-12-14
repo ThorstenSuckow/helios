@@ -9,13 +9,17 @@ module;
 
 export module helios.math.types:mat4;
 
+import helios.math.TransformType;
 import :vec3;
 import :vec4;
+
 
 import helios.math.concepts;
 
 
 export namespace helios::math {
+
+
 
     /**
      * @brief Represents a 4x4 matrix, stored in column-major order.
@@ -257,6 +261,101 @@ export namespace helios::math {
                 m(3, 0) * v[0] + m(3, 1) * v[1] + m(3, 2) * v[2] + m(3, 3)  * v[3]
             };
         }
+
+        /**
+         * @brief Computes the transpose of a 4x4 matrix.
+         *
+         * This function swaps rows and columns: M^T_{ij} = M_{ji}
+         *
+         * @note This is **not** a general-purpose inverse function. For matrices containing
+         * non-uniform scale or shear, use a full inverse calculation instead.
+         *
+         * @tparam T The numeric type of the matrix elements.
+         *
+         * @return The transposed matrix.
+         */
+        helios::math::mat4<T> transpose() const noexcept {
+            const auto m = *this;
+            return helios::math::mat4<T>{
+                m(0, 0), m(1, 0), m(2, 0), m(3, 0),
+                m(0, 1), m(1, 1), m(2, 1), m(3, 1),
+                m(0, 2), m(1, 2), m(2, 2), m(3, 2),
+                m(0, 3), m(1, 3), m(2, 3), m(3, 3)
+            };
+        }
+
+        /**
+         * @brief Decomposes this matrix, extracting only specified components.
+         *
+         * @details This function extracts Translation, Rotation, and/or Scale components
+         * from this 4x4 matrix based on the provided `TransformType` mask.
+         * Components not included in the mask are replaced with identity values.
+         *
+         * The decomposition supports the following cases:
+         * - **TransformType::All**: Returns the original matrix unchanged.
+         * - **TransformType::Translation**: Extracts only the translation (column 3).
+         * - **TransformType::Rotation**: Extracts the normalized rotation from the upper-left 3x3.
+         * - **TransformType::Scale**: Extracts the scale factors (column vector lengths).
+         * - **Combined flags**: Extracts multiple components as specified.
+         *
+         * @note For combined Rotation + Scale without Translation, the upper-left 3x3
+         * is copied directly. For Rotation-only, scale is removed by normalizing columns.
+         *
+         * @tparam T The numeric type of the matrix elements.
+         *
+         * @param type Bitmask specifying which components to extract.
+         *
+         * @return A new matrix containing only the requested transform components.
+         *
+         * @see helios::math::TransformType
+         * @see helios::math::transformTypeMatch()
+         */
+        helios::math::mat4<T> decompose(const helios::math::TransformType type) const noexcept {
+            const auto m = *this;
+            if (type == helios::math::TransformType::All) {
+                return m;
+            }
+
+            auto id = identity();
+            if (helios::math::transformTypeMatch(type, helios::math::TransformType::Translation)) {
+                id(0, 3) = m(0, 3);
+                id(1, 3) = m(1, 3);
+                id(2, 3) = m(2, 3);
+            }
+
+            if (helios::math::transformTypeMatch(type, helios::math::TransformType::Rotation)
+                && helios::math::transformTypeMatch(type, helios::math::TransformType::Scale)) {
+                id(0, 0) = m(0, 0); id(0, 1) = m(0, 1); id(0, 2) = m(0, 2);
+                id(1, 0) = m(1, 0); id(1, 1) = m(1, 1); id(1, 2) = m(1, 2);
+                id(2, 0) = m(2, 0); id(2, 1) = m(2, 1); id(2, 2) = m(2, 2);
+                } else {
+
+                    const auto bx = vec3f(m(0, 0), m(1, 0),  m(2, 0));
+                    const auto by = vec3f(m(0, 1), m(1, 1),  m(2, 1));
+                    const auto bz = vec3f(m(0, 2), m(1, 2),  m(2, 2));
+
+                    const auto sx = bx.length();
+                    const auto sy = by.length();
+                    const auto sz = bz.length();
+
+                    if (helios::math::transformTypeMatch(type, helios::math::TransformType::Rotation)) {
+                        vec3f rx = sx != 0 ? bx/sx : vec3f{1, 0, 0};
+                        vec3f ry = sy != 0 ? by/sy : vec3f{0, 1, 0};
+                        vec3f rz = sz != 0 ? bz/sz : vec3f{0, 0, 1};
+
+                        id(0, 0) = rx[0]; id(0, 1) = ry[0]; id(0, 2) = rz[0];
+                        id(1, 0) = rx[1]; id(1, 1) = ry[1]; id(1, 2) = rz[1];
+                        id(2, 0) = rx[2]; id(2, 1) = ry[2]; id(2, 2) = rz[2];
+                    } else  if (helios::math::transformTypeMatch(type, helios::math::TransformType::Scale)) {
+                        id(0, 0) = sx;
+                        id(1, 1) = sy;
+                        id(2, 2) = sz;
+                    }
+                }
+
+            return id;
+        }
+
     };
 
 

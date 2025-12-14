@@ -10,6 +10,7 @@ namespace helios::scene {
 
 
     helios::math::mat4f Transform::updateCache() const {
+        needsUpdate_ = false;
         return math::translate(
             helios::math::mat4f::identity(),
             translation_)  *
@@ -28,19 +29,19 @@ namespace helios::scene {
     {}
 
 
-    void Transform::rotate(const math::mat4f& rotation) noexcept {
+    void Transform::setRotation(const math::mat4f& rotation) noexcept {
         rotation_ = rotation;
         needsUpdate_ = true;
     }
 
 
-    void Transform::translate(const math::vec3f& translation) noexcept {
+    void Transform::setTranslation(const math::vec3f& translation) noexcept {
         translation_ = translation;
         needsUpdate_ = true;
     }
 
 
-    void Transform::scale(const math::vec3f& scale) noexcept {
+    void Transform::setScale(const math::vec3f& scale) noexcept {
         scale_ = scale;
         needsUpdate_ = true;
     }

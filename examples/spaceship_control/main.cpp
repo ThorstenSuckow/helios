@@ -1,11 +1,17 @@
+// ============================================================================
+// Includes
+// ============================================================================
 #include <algorithm>
 #include <cstdlib>
 #include <glad/gl.h>
 #include <iostream>
 #include <numbers>
 
+// ============================================================================
+// Module Imports
+// ============================================================================
+
 // Helios Core Modules
-import helios.math.types;
 import helios.math;
 
 // Application Framework
@@ -50,6 +56,7 @@ import helios.scene.CullNoneStrategy;
 import helios.scene.Camera;
 import helios.scene.CameraSceneNode;
 
+
 // util
 import helios.util.io.BasicStringFileReader;
 import helios.util.time.Stopwatch;
@@ -73,14 +80,21 @@ import helios.ext.imgui.widgets.GamepadWidget;
 import helios.ext.imgui.widgets.LogWidget;
 import helios.ext.imgui.widgets.CameraWidget;
 import helios.ext.imgui.ImGuiLogSink;
+import helios.examples.spaceshipControl.SpaceshipWidget;
 
 // game input handling, game objects
-import helios.game.GameWorld;
-import helios.game.CommandBuffer;
-import helios.game.InputSnapshot;
+import helios.core.units;
+import helios.engine.game.GameWorld;
+import helios.engine.game.CommandBuffer;
+import helios.engine.game.InputSnapshot;
 import helios.examples.spaceshipControl.Spaceship;
+import helios.examples.spaceshipControl.TheGrid;
 import helios.examples.spaceshipControl.InputHandler;
 
+
+// ============================================================================
+// Using Declarations
+// ============================================================================
 
 using namespace helios::ext::glfw::app;
 using namespace helios::rendering;
@@ -99,13 +113,32 @@ using namespace helios::scene;
 using namespace helios::math;
 
 
+// ============================================================================
+// Entry Point
+// ============================================================================
+
 int main() {
+
+    // ========================================
+    // Constants
+    // ========================================
+    constexpr float CELL_SIZE          = 5.0f;
+    constexpr float SPACESHIP_SIZE     = 5.0f;
+    constexpr float GRID_X             = 29.0f;
+    constexpr float GRID_Y             = 19.0f;
+    constexpr float FOVY               = helios::math::radians(90.0f);
+    constexpr float ASPECT_RATIO_NUMER = 16.0f;
+    constexpr float ASPECT_RATIO_DENOM = 9.0f;
+
+
 
     // ========================================
     // 1. Application and Window Setup
     // ========================================
 
-    const auto app = GLFWFactory::makeOpenGLApp("helios - Spaceship Control");
+    const auto app = GLFWFactory::makeOpenGLApp(
+        "helios - Spaceship Control", 1980, 1024, ASPECT_RATIO_NUMER, ASPECT_RATIO_DENOM
+    );
 
     auto win = dynamic_cast<GLFWWindow*>(app->current());
     auto mainViewport = std::make_shared<Viewport>(0.0f, 0.0f, 1.0f, 1.0f);
@@ -139,14 +172,16 @@ int main() {
     auto gamepadWidget = new helios::ext::imgui::widgets::GamepadWidget(&inputManager);
     auto logWidget = new helios::ext::imgui::widgets::LogWidget();
     auto cameraWidget = new helios::ext::imgui::widgets::CameraWidget();
+    auto spaceshipWidget = new helios::examples::spaceshipControl::SpaceshipWidget();
     imguiOverlay.addWidget(menu);
     imguiOverlay.addWidget(fpsWidget);
     imguiOverlay.addWidget(gamepadWidget);
     imguiOverlay.addWidget(logWidget);
     imguiOverlay.addWidget(cameraWidget);
+    imguiOverlay.addWidget(spaceshipWidget);
 
     // ========================================
-    // Configure Logger
+    // 1.3 Logger Configuration
     // ========================================
     helios::util::log::LogManager::getInstance().enableLogging(true);
     auto imguiLogSink = std::make_shared<helios::ext::imgui::ImGuiLogSink>(logWidget);
@@ -158,9 +193,9 @@ int main() {
     auto shader_ptr =
             std::make_shared<OpenGLShader>("./resources/cube.vert", "./resources/cube.frag", basicStringFileReader);
 
-    // Map the WorldMatrix uniform to location 1 in the shader
+    // Map the ModelMatrix uniform to location 1 in the shader
     auto uniformLocationMap = std::make_unique<OpenGLUniformLocationMap>();
-    bool mapping = uniformLocationMap->set(UniformSemantics::WorldMatrix, 1);
+    bool mapping = uniformLocationMap->set(UniformSemantics::ModelMatrix, 1);
     mapping = uniformLocationMap->set(UniformSemantics::ViewMatrix, 2);
     mapping = uniformLocationMap->set(UniformSemantics::ProjectionMatrix, 3);
     mapping = uniformLocationMap->set(UniformSemantics::MaterialBaseColor, 4);
@@ -198,7 +233,7 @@ int main() {
     auto spaceship = Triangle{};
     auto leftStickGizmo = Line{};
     auto shipDirectionGizmo = Line{};
-    auto grid = Grid{8, 8};
+    auto grid = Grid{29, 19};
 
     // Configure the mesh for the spaceship to render as a line loop (wireframe)
     auto meshConfig = std::make_shared<const MeshConfig>(PrimitiveType::LineLoop);
@@ -235,17 +270,20 @@ int main() {
 
     // Add the grid
     auto* gridSceneNode = scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(gridRenderable)));
-    //gridSceneNode->scale(helios::math::vec3f(80,60, 0));
 
     // Add the spaceship as a scene node
     auto* spaceshipSceneNode =
             scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(spaceshipRenderable)));
+    spaceshipSceneNode->setTranslation(helios::math::vec3f{0.0f, 0.0f, 1.0f});
 
     // Add the gizmos
     auto* leftStickGizmoNode =
-            scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(leftStickGizmoRenderable)));
+            spaceshipSceneNode->addNode(std::make_unique<helios::scene::SceneNode>(std::move(leftStickGizmoRenderable)));
     auto* shipDirectionGizmoNode =
-            scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(shipDirectionGizmoRenderable)));
+            spaceshipSceneNode->addNode(std::make_unique<helios::scene::SceneNode>(std::move(shipDirectionGizmoRenderable)));
+    leftStickGizmoNode->setInheritance(helios::math::TransformType::Translation);
+    shipDirectionGizmoNode->setInheritance(helios::math::TransformType::Translation);
+
 
     // ========================================
     // 7. Register mainViewport-Camera w/ Setup
@@ -253,47 +291,56 @@ int main() {
     auto mainViewportCam = std::make_unique<helios::scene::Camera>();
     auto cameraSceneNode = std::make_unique<helios::scene::CameraSceneNode>(std::move(mainViewportCam));
     auto cameraSceneNode_ptr = cameraSceneNode.get();
-    std::ignore = scene->addNode(std::move(cameraSceneNode));
-    mainViewport->setCameraSceneNode(cameraSceneNode_ptr);
-    // Initialize camera with proper perspective projection
-    cameraSceneNode_ptr->camera().setPerspective(
-        helios::math::radians(90.0f),  // FOV in radians
-        16.0f / 9.0f,                   // Aspect ratio (adjust to your window)
-        0.1f,                            // Near plane
-        1000.0f                          // Far plane
+    std::ignore = spaceshipSceneNode->addNode(std::move(cameraSceneNode));
+    cameraSceneNode_ptr->setInheritance(
+        helios::math::TransformType::Translation
     );
-    cameraSceneNode_ptr->translate(helios::math::vec3f(0.0f, 0.0f, -5.0f));
-    // Position camera to look at the scene
-    cameraSceneNode_ptr->lookAt(
-        vec3f(0.0f, 0.0f, 0.0f),        // Look at point (origin)
-        vec3f(0.0f, 1.0f, 0.0f)         // Up vector
+    mainViewport->setCameraSceneNode(cameraSceneNode_ptr);
+    cameraSceneNode_ptr->setTranslation(
+        helios::math::vec3f(0.0f, 0.0f, -(GRID_Y*CELL_SIZE / 2.0f)/tan(FOVY/2))
+    );
+    cameraSceneNode_ptr->camera().setPerspective(
+        FOVY,
+        ASPECT_RATIO_NUMER / ASPECT_RATIO_DENOM,
+        0.1f,
+        1000.0f
+    );
+    cameraSceneNode_ptr->lookAtLocal(
+        vec3f(0.0f, 0.0f, 0.0f),
+        vec3f(0.0f, 1.0f, 0.0f)
     );
     cameraWidget->addCameraSceneNode("Main Camera", cameraSceneNode_ptr);
-
-
-
-
 
     // ========================================
     // 9. Game-related Input-handling, GameWorld and GameObjects
     // ========================================
-    auto spaceshipGameObject = std::make_unique<helios::examples::spaceshipControl::Spaceship>(spaceshipSceneNode);
     auto spaceshipInputHandler = helios::examples::spaceshipControl::InputHandler{};
-    auto gameWorld = helios::game::GameWorld{};
-    auto* spaceshipPtr = gameWorld.addGameObject(std::move(spaceshipGameObject));
-    auto commandBuffer = helios::game::CommandBuffer{};
+    auto gameWorld = helios::engine::game::GameWorld{};
+    auto commandBuffer = helios::engine::game::CommandBuffer{};
 
+    auto spaceship_uptr = std::make_unique<helios::examples::spaceshipControl::Spaceship>(spaceshipSceneNode);
+    auto spaceship_wptr = spaceship_uptr.get();
+    auto* spaceshipPtr = gameWorld.addGameObject(std::move(spaceship_uptr));
 
-    auto currentDirection = vec3f(1.0f, 1.0f, 0);
-    constexpr auto SCALING_VECTOR = vec3f(0.125f, 0.125f, 0.0f);
+    spaceshipWidget->addSpaceship("Player 1", spaceship_wptr);
+
+    auto* theGridPtr = gameWorld.addGameObject(
+        std::make_unique<helios::examples::spaceshipControl::TheGrid>(gridSceneNode));
+
+    spaceshipPtr->setSize(SPACESHIP_SIZE, SPACESHIP_SIZE, 0.0f, helios::core::units::Unit::Meter);
+    theGridPtr->setSize(GRID_X * CELL_SIZE, GRID_Y * CELL_SIZE, 0.0f, helios::core::units::Unit::Meter);
 
     float DELTA_TIME = 0.0f;
 
-
+    // ========================================
+    // 10. Main Game Loop
+    // ========================================
     while (!win->shouldClose()) {
         framePacer.beginFrame();
 
-        // Process window and input events
+        // ----------------------------------------
+        // 10.1 Event and Input Processing
+        // ----------------------------------------
         app->eventManager().dispatchAll();
         inputManager.poll(0.0f);
 
@@ -303,26 +350,25 @@ int main() {
             win->setShouldClose(true);
         }
 
+        // ----------------------------------------
+        // 10.2 Game Logic Update
+        // ----------------------------------------
         const GamepadState& gamepadState = inputManager.gamepadState(Gamepad::ONE);
-        const auto inputSnapshot = helios::game::InputSnapshot(gamepadState);
+        const auto inputSnapshot = helios::engine::game::InputSnapshot(gamepadState);
         spaceshipInputHandler.handleInput(inputSnapshot, spaceshipPtr->guid(), commandBuffer);
-
-        const auto leftDir = gamepadState.left();
-        const vec2f targetDirection = leftDir.normalize();
-        const float leftDirLength = leftDir.length();
-
-        //leftStickGizmoNode->translate(vec3f(leftDir) * SCALING_VECTOR);
-        //leftStickGizmoNode->scale(vec3f(leftDir) * SCALING_VECTOR);
-
-        spaceshipSceneNode->scale(SCALING_VECTOR);
 
         commandBuffer.flush(gameWorld);
         gameWorld.update(DELTA_TIME);
 
-        //shipDirectionGizmoNode->translate(currentDirection * SCALING_VECTOR);
-        //shipDirectionGizmoNode->scale(currentDirection * SCALING_VECTOR);
+        // ----------------------------------------
+        // 10.3 Gizmo / Debug Visualization Update
+        // ----------------------------------------
+        leftStickGizmoNode->setScale((spaceshipPtr->steeringInput() * spaceshipPtr->throttle()  * 4.0f).toVec3());
+        shipDirectionGizmoNode->setScale(spaceshipPtr->velocity().normalize() * spaceshipPtr->speedRatio() * 4.0f);
 
-        // Create a snapshot of the scene and render it
+        // ----------------------------------------
+        // 10.4 Rendering
+        // ----------------------------------------
         const auto& snapshot = scene->createSnapshot(mainViewport);
         if (snapshot.has_value()) {
             auto renderPass = RenderPassFactory::getInstance().buildRenderPass(*snapshot);
@@ -334,8 +380,9 @@ int main() {
         // ========================================
         imguiOverlay.render();
 
-
-        // Swap front and back buffers
+        // ----------------------------------------
+        // 10.5 Frame Synchronization
+        // ----------------------------------------
         // swap time / idle time should be read out here
         win->swapBuffers();
 

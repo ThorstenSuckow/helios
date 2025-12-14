@@ -59,7 +59,7 @@ export namespace helios::scene {
          *
          * @see https://stackoverflow.com/questions/24609872/delete-virtual-function-from-a-derived-class
          */
-        [[nodiscard]] SceneNode* addChild(std::unique_ptr<SceneNode> sceneNode) override;
+        [[nodiscard]] SceneNode* addNode(std::unique_ptr<SceneNode> sceneNode) override;
 
         /**
          * @brief Gets the camera associated with this scene node.
@@ -90,29 +90,35 @@ export namespace helios::scene {
          *
          * @note The up vector should typically be `(0, 1, 0)` for standard upright orientation.
          *
-         * @todo Implement `lookAtLocal()` for observing nodes in local space.
-         *
-         * @see helios::scene::SceneNode::rotate()
+         * @see lookAtLocal()
+         * @see helios::scene::SceneNode::setRotation()
          */
         void lookAt(helios::math::vec3f target, helios::math::vec3f up);
 
+        /**
+         * @brief Orients this camera node to look at a target position in local space.
+         *
+         * Similar to `lookAt()`, but the target and up vector are interpreted relative
+         * to this node's local coordinate system rather than world space. Useful when
+         * the camera should track objects within the same local hierarchy.
+         *
+         * @param targetLocal The local-space coordinates of the target to look at.
+         * @param upLocal The up vector defining the camera's vertical orientation in local space.
+         *
+         * @see lookAt()
+         */
+        void lookAtLocal(helios::math::vec3f targetLocal, helios::math::vec3f upLocal);
 
         /**
-         * @brief Computes the world transform and updates the associated camera's view matrix.
+         * @brief Callback invoked when the world transform of this node changes.
          *
-         * This override extends `SceneNode::worldTransform()` by additionally computing the
-         * view matrix from the camera's world transform. The view matrix is the inverse of the
-         * world transform, with the Z-axis negated to convert from helios' Left-Handed System
-         * to OpenGL's Right-Handed clip space.
+         * Overrides the base class implementation to update the camera's view matrix
+         * whenever the node's position or orientation in the scene graph changes.
+         * This ensures the camera always reflects the current world-space transform.
          *
-         * The computed view matrix is automatically assigned to the underlying `Camera` instance.
-         *
-         * @return A const reference to this node's world transform matrix.
-         *
-         * @see helios::scene::Camera::setViewMatrix()
-         * @see helios::scene::SceneNode::worldTransform()
+         * @see SceneNode::onWorldTransformUpdate()
          */
-        const helios::math::mat4f& worldTransform() noexcept override;
+        void onWorldTransformUpdate() noexcept override;
     };
 
 }

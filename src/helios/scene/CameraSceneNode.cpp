@@ -1,12 +1,14 @@
 module;
 
 #include <cassert>
+#include <iostream>
 #include <memory>
 #include <stdexcept>
 
 module helios.scene.CameraSceneNode;
 
 import helios.math.types;
+import helios.math.TransformType;
 import helios.scene.SceneNode;
 import helios.scene.Camera;
 
@@ -19,7 +21,7 @@ namespace helios::scene {
         }
     }
 
-    SceneNode* CameraSceneNode::addChild(std::unique_ptr<SceneNode> sceneNode) {
+    SceneNode* CameraSceneNode::addNode(std::unique_ptr<SceneNode> sceneNode) {
         assert(false && "CameraSceneNode does not accept child nodes.");
         return nullptr;
     }
@@ -30,6 +32,28 @@ namespace helios::scene {
 
     Camera& CameraSceneNode::camera() noexcept {
         return *camera_;
+    }
+
+    void CameraSceneNode::lookAtLocal(helios::math::vec3f targetLocal, helios::math::vec3f upLocal) {
+        // We treat up as a vector in world-space for now.
+        const auto lt = localTransform().transform();
+        const auto localPos = helios::math::vec3f(
+            lt(0, 3), lt(1, 3), lt(2, 3)
+        );
+
+        auto z = (targetLocal - localPos).normalize();
+        auto y = upLocal.normalize();
+        auto x = helios::math::cross(y, z).normalize();
+        y = helios::math::cross(z, x).normalize();
+
+        const helios::math::mat4f localRotation = helios::math::mat4f{
+            x[0], x[1], x[2], 0.0f,
+            y[0], y[1], y[2], 0.0f,
+            z[0], z[1], z[2], 0.0f,
+            0.0f, 0.0f, 0.0f, 1.0f
+        };
+
+        setRotation(localRotation);
     }
 
     void CameraSceneNode::lookAt(helios::math::vec3f target, helios::math::vec3f up) {
@@ -51,25 +75,31 @@ namespace helios::scene {
             0.0f, 0.0f, 0.0f, 1.0f
         };
 
+        if (!helios::math::transformTypeMatch(
+            inheritance_, helios::math::TransformType::Rotation)) {
+            /**
+             * @todo add support for different rotations
+             */
+            setRotation(worldRotation);
+            return;
+        }
+
         // ParentTransform
         assert(parent() && "parent() of CameraSceneNode returned null, are you sure the node was added properly to the scenegraph?");
-        const helios::math::mat4f pT = parent()->worldTransform();
+        const helios::math::mat4f pT = parent()->cachedWorldTransform();
 
-        // Transpose of parent rotation - needed to undo the rotation for **this** node
-        const helios::math::mat4f parentRotationT = helios::math::mat4f{
-            pT(0, 0), pT(1, 0), pT(2, 0), 0.0f,
-            pT(0, 1), pT(1, 1), pT(2, 1), 0.0f,
-            pT(0, 2), pT(1, 2), pT(2, 2), 0.0f,
-            0.0f, 0.0f, 0.0f, 1.0f
-        };
+        const helios::math::mat4f parentRotInv = pT.decompose(helios::math::TransformType::Rotation).transpose();
 
         // Apply rotation in local space by undoing the parent rotation
-        rotate(parentRotationT * worldRotation);
+        setRotation(parentRotInv * worldRotation);
     }
 
-    const helios::math::mat4f& CameraSceneNode::worldTransform() noexcept {
+    void CameraSceneNode::onWorldTransformUpdate() noexcept {
+
+        helios::scene::SceneNode::onWorldTransformUpdate();
+
         // Updates this SceneNode's worldTransform_
-        const auto wt = helios::scene::SceneNode::worldTransform();
+        const auto wt = helios::scene::SceneNode::cachedWorldTransform();
 
         const auto x = helios::math::vec3f{wt(0, 0), wt(1, 0), wt(2, 0)};
         const auto y = helios::math::vec3f{wt(0, 1), wt(1, 1), wt(2, 1)};
@@ -84,9 +114,8 @@ namespace helios::scene {
             x[2], y[2], -z[2], 0.0f,
             -dot(x, eye), -dot(y, eye), dot(z, eye), 1.0f
         };
-        std::ignore = camera_->setViewMatrix(inv);
 
-        return worldTransform_;
+        camera_->setViewMatrix(inv);
     }
 
 } // namespace helios::scene

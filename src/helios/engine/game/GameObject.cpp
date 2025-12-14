@@ -23,11 +23,11 @@ namespace helios::engine::game {
         return guid_;
     }
 
-    helios::math::vec3f GameObject::position() const noexcept {
-        return transform_->translation();
+    const helios::math::vec3f& GameObject::position() const noexcept {
+        return position_;
     }
 
-    helios::math::vec2f GameObject::steeringInput() const noexcept {
+    const helios::math::vec2f& GameObject::steeringInput() const noexcept {
         return steeringInput_;
     }
 
@@ -35,7 +35,7 @@ namespace helios::engine::game {
         return throttle_;
     }
 
-    helios::math::vec3f GameObject::velocity() const noexcept {
+    const helios::math::vec3f& GameObject::velocity() const noexcept {
         return velocity_;
     }
 

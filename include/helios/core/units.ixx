@@ -126,9 +126,9 @@ export namespace helios::core::units {
                 return fromS(v);
             case Unit::MilliSeconds:
                 return fromMs(v);
+            default:
+                std::unreachable();
         }
-
-        std::unreachable();
     };
 
 }

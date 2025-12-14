@@ -173,12 +173,6 @@ export namespace helios::examples::spaceshipControl {
          */
         float actualRotationSpeed_ = 0.0f;
 
-
-        /**
-         * @brief Current world position of the spaceship.
-         */
-        helios::math::vec3f actualPosition_ = helios::math::vec3f(0.0f, 0.0f, 0.0f);
-
         /**
          * @brief Indicates whether input is currently being received.
          */
@@ -320,8 +314,8 @@ export namespace helios::examples::spaceshipControl {
             }
 
             // Integrate velocity to update position.
-            actualPosition_ = actualPosition_ + velocity_ * deltaTime;
-            setTranslation(actualPosition_);
+            position_ = position_ + velocity_ * deltaTime;
+            setTranslation(position_);
 
         }
 
@@ -331,6 +325,10 @@ export namespace helios::examples::spaceshipControl {
          * @return A value between 0.0 (stationary) and 1.0 (maximum speed).
          */
         [[nodiscard]] float speedRatio() const noexcept override {
+            // Prevent division by zero if movementSpeed_ is zero or very close to zero
+            if (std::abs(movementSpeed_) < 1e-6f) {
+                return 0.0f;
+            }
             return velocity_.length() / movementSpeed_;
         }
 
@@ -383,10 +381,6 @@ export namespace helios::examples::spaceshipControl {
          */
         [[nodiscard]] float rotationAngle() const noexcept { return actualRotationAngle_; }
 
-        /**
-         * @brief Returns the current position.
-         */
-        [[nodiscard]] const helios::math::vec3f& position() const noexcept { return actualPosition_; }
 
         // ========================================
         // Physics Parameter Setters

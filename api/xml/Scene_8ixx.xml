@@ -279,6 +279,8 @@
         </childnode>
         <childnode refid="38" relation="include">
         </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
         <childnode refid="39" relation="include">
         </childnode>
         <childnode refid="15" relation="include">
@@ -526,15 +528,15 @@
 <codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Internal<sp/>helper<sp/>function<sp/>to<sp/>force-propagate<sp/>the<sp/>worldTransformation<sp/>of<sp/>SceneNodes<sp/>to<sp/>their<sp/>child<sp/>nodes.</highlight></codeline>
 <codeline lineno="75"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="76"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Propagation<sp/>is<sp/>cancelled<sp/>for<sp/>this<sp/>node<sp/>if<sp/>the<sp/>world<sp/>transform<sp/>submitted</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Propagation<sp/>is<sp/>cancelled<sp/>for<sp/>this<sp/>node<sp/>if<sp/>the<sp/>resulting<sp/>world<sp/>transform</highlight></codeline>
 <codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>is<sp/>considered<sp/>equal<sp/>to<sp/>the<sp/>current<sp/>world<sp/>transform<sp/>of<sp/>the<sp/>SceneNode.</highlight></codeline>
 <codeline lineno="78"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="79"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>node<sp/>The<sp/>current<sp/>SceneNode<sp/>for<sp/>which<sp/>to<sp/>propagate<sp/>the<sp/>world<sp/>transformation.</highlight></codeline>
-<codeline lineno="80"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>wt<sp/>The<sp/>world<sp/>transformation<sp/>from<sp/>the<sp/>parent<sp/>node.</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>parentWorldTransform<sp/>The<sp/>world<sp/>transformation<sp/>from<sp/>the<sp/>parent<sp/>node.</highlight></codeline>
 <codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>updateNodes()</highlight></codeline>
 <codeline lineno="83"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>propagateWorldTransform(<ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">SceneNode</ref>&amp;<sp/>node,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">math::mat4f</ref>&amp;<sp/>wt)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>propagateWorldTransform(<ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">SceneNode</ref>&amp;<sp/>node,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">math::mat4f</ref>&amp;<sp/>parentWorldTransform)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="85"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="86"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="87"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Selectively<sp/>updates<sp/>the<sp/>world<sp/>transformation<sp/>of<sp/>SceneNodes<sp/>in<sp/>the<sp/>scene<sp/>graph.</highlight></codeline>

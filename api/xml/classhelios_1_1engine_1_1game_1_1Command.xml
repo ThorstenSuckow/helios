@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1game_1_1Command" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>helios::engine::game::Command</compoundname>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1Command_1aa7a627acdae0a48a11770bd116db9f1e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::engine::game::Command::~Command</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Command</name>
+        <qualifiedname>helios::engine::game::Command::~Command</qualifiedname>
+        <briefdescription>
+<para>Virtual destructor to ensure proper cleanup of derived classes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/Command.ixx" line="50" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1Command_1a9e7515d68b42e8bff683df15d4f95ab7" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void helios::engine::game::Command::execute</definition>
+        <argsstring>(helios::engine::game::GameObject &amp;gameObject)=0</argsstring>
+        <name>execute</name>
+        <qualifiedname>helios::engine::game::Command::execute</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">helios::engine::game::GameObject</ref> &amp;</type>
+          <declname>gameObject</declname>
+        </param>
+        <briefdescription>
+<para>Executes the command on the specified <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameObject</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> to apply the command to.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>Derived classes must implement this method to define the specific action performed by the command. </para>
+</simplesect>
+<simplesect kind="note"><para>This method should be exception-safe. If it throws, <ref refid="classhelios_1_1engine_1_1game_1_1CommandBuffer_1a8d93f492996c3f34816a5b4d61b58d67" kindref="member">CommandBuffer::flush()</ref> will abort processing of remaining commands. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/Command.ixx" line="62" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Abstract base class for encapsulating game actions as executable commands. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>A `Command` encapsulates a single game action (e.g., movement, attack) to be performed on a `GameObject`.</para>
+<para>Concrete commands are typically created by an `InputHandler` and queued in a `CommandBuffer`. The buffer then executes them against the target `GameObject` during a later processing step.</para>
+<para>Example implementation: ```cpp class MoveCommand : public <ref refid="classhelios_1_1engine_1_1game_1_1Command" kindref="compound">helios::engine::game::Command</ref> { <ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref> direction_; float speed_; public: MoveCommand(helios::math::vec3f dir, float speed) : direction_(dir), speed_(speed) {}</para>
+<para>void <ref refid="classhelios_1_1engine_1_1game_1_1Command_1a9e7515d68b42e8bff683df15d4f95ab7" kindref="member">execute(helios::engine::game::GameObject&amp; obj)</ref> override { obj.translate(direction_ * speed_); } }; ```</para>
+<para><simplesect kind="note"><para>Implementations should ensure <ref refid="classhelios_1_1engine_1_1game_1_1Command_1a9e7515d68b42e8bff683df15d4f95ab7" kindref="member">execute()</ref> is exception-safe or noexcept, as throwing exceptions during <ref refid="classhelios_1_1engine_1_1game_1_1CommandBuffer_1a8d93f492996c3f34816a5b4d61b58d67" kindref="member">CommandBuffer::flush()</ref> will abort execution of remaining commands. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="include/helios/engine/game/Command.ixx" line="43" column="5" bodyfile="include/helios/engine/game/Command.ixx" bodystart="43" bodyend="63"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1game_1_1Command_1a9e7515d68b42e8bff683df15d4f95ab7" prot="public" virt="pure-virtual"><scope>helios::engine::game::Command</scope><name>execute</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Command_1aa7a627acdae0a48a11770bd116db9f1e" prot="public" virt="virtual"><scope>helios::engine::game::Command</scope><name>~Command</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

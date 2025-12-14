@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['of_20concerns_0',['Separation of Concerns',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md25',1,'']]],
-  ['opengl_1',['Quick Start with GLFW + OpenGL',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md27',1,'']]],
-  ['opengl_2',['&lt;span class=&quot;tt&quot;&gt;helios.ext.opengl&lt;/span&gt;',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md30',1,'']]],
-  ['overlay_3',['6. ImGui Debug Overlay',['../index.html#autotoc_md103',1,'']]],
-  ['overview_4',['Overview',['../index.html#autotoc_md94',1,'Architecture Overview'],['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md21',1,'Overview']]]
+  ['material_20system_0',['3. Material System',['../index.html#autotoc_md102',1,'']]],
+  ['metrics_1',['7. Frame Pacing and Performance Metrics',['../index.html#autotoc_md108',1,'']]],
+  ['module_20details_2',['Module Details',['../index.html#autotoc_md111',1,'']]],
+  ['module_20structure_3',['3. Follow Module Structure',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md34',1,'']]],
+  ['modules_4',['Modules',['../index.html#autotoc_md97',1,'Core Modules'],['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md28',1,'Extension Modules'],['../index.html#autotoc_md98',1,'Extension Modules']]]
 ];

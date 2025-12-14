@@ -5,7 +5,7 @@
     <innerfile refid="Transform_8ixx">Transform.ixx</innerfile>
     <innerclass refid="classhelios_1_1scene_1_1Transform" prot="public">helios::scene::Transform</innerclass>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="classhelios_1_1scene_1_1Transform_1a28114b5043265411431c0d2a6a438381" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classhelios_1_1scene_1_1Transform_1a28114b5043265411431c0d2a6a438381" prot="private" static="no" mutable="yes">
         <type>bool</type>
         <definition>bool helios::scene::Transform::needsUpdate_</definition>
         <argsstring></argsstring>
@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/Transform.ixx" line="36" column="14" bodyfile="include/helios/scene/Transform.ixx" bodystart="36" bodyend="-1"/>
+        <location file="include/helios/scene/Transform.ixx" line="36" column="22" bodyfile="include/helios/scene/Transform.ixx" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1scene_1_1Transform_1a7574391666a214a1236e0841f9f4c1ab" prot="private" static="no" mutable="no">
         <type><ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref></type>
@@ -187,15 +187,14 @@
         </inbodydescription>
         <location file="include/helios/scene/Transform.ixx" line="83" column="13"/>
         <references refid="classhelios_1_1scene_1_1Transform_1a18f1e87932c12354b1b15498b7cec16b">helios::scene::Transform::rotation</references>
-        <references refid="classhelios_1_1scene_1_1Transform_1ae559395636b998f7063e7110c3f38c6a">helios::scene::Transform::scale</references>
         <references refid="classhelios_1_1scene_1_1Transform_1ade553e701cbae015794510224114c2fd">helios::scene::Transform::translation</references>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1scene_1_1Transform_1a6dd52a20b3d976923e04bf0f7123e470" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1scene_1_1Transform_1a2f2434b109d047fb202f6cd8340f2ddc" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void helios::scene::Transform::rotate</definition>
+        <definition>void helios::scene::Transform::setRotation</definition>
         <argsstring>(const math::mat4f &amp;rotation) noexcept</argsstring>
-        <name>rotate</name>
-        <qualifiedname>helios::scene::Transform::rotate</qualifiedname>
+        <name>setRotation</name>
+        <qualifiedname>helios::scene::Transform::setRotation</qualifiedname>
         <param>
           <type>const math::mat4f &amp;</type>
           <declname>rotation</declname>
@@ -220,12 +219,12 @@
         <location file="include/helios/scene/Transform.ixx" line="94" column="18"/>
         <references refid="classhelios_1_1scene_1_1Transform_1a18f1e87932c12354b1b15498b7cec16b">helios::scene::Transform::rotation</references>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1scene_1_1Transform_1a545f2340ea52c0a63acd40192a10df19" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1scene_1_1Transform_1a853f2be33df2eb96a0565d669aa451a2" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void helios::scene::Transform::translate</definition>
+        <definition>void helios::scene::Transform::setTranslation</definition>
         <argsstring>(const math::vec3f &amp;translation) noexcept</argsstring>
-        <name>translate</name>
-        <qualifiedname>helios::scene::Transform::translate</qualifiedname>
+        <name>setTranslation</name>
+        <qualifiedname>helios::scene::Transform::setTranslation</qualifiedname>
         <param>
           <type>const math::vec3f &amp;</type>
           <declname>translation</declname>
@@ -250,12 +249,12 @@
         <location file="include/helios/scene/Transform.ixx" line="102" column="18"/>
         <references refid="classhelios_1_1scene_1_1Transform_1ade553e701cbae015794510224114c2fd">helios::scene::Transform::translation</references>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1scene_1_1Transform_1ae559395636b998f7063e7110c3f38c6a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1scene_1_1Transform_1a14b64265828c6c7a627571add9de0779" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void helios::scene::Transform::scale</definition>
+        <definition>void helios::scene::Transform::setScale</definition>
         <argsstring>(const math::vec3f &amp;scale) noexcept</argsstring>
-        <name>scale</name>
-        <qualifiedname>helios::scene::Transform::scale</qualifiedname>
+        <name>setScale</name>
+        <qualifiedname>helios::scene::Transform::setScale</qualifiedname>
         <param>
           <type>const math::vec3f &amp;</type>
           <declname>scale</declname>
@@ -278,9 +277,6 @@
         <inbodydescription>
         </inbodydescription>
         <location file="include/helios/scene/Transform.ixx" line="110" column="18"/>
-        <references refid="classhelios_1_1scene_1_1Transform_1ae559395636b998f7063e7110c3f38c6a">helios::scene::Transform::scale</references>
-        <referencedby refid="classhelios_1_1scene_1_1Transform_1ae559395636b998f7063e7110c3f38c6a">helios::scene::Transform::scale</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Transform_1af14dea88b4f4ecc0a2f524e782dc0aaf">helios::scene::Transform::Transform</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1Transform_1a18f1e87932c12354b1b15498b7cec16b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type><ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref></type>
@@ -299,7 +295,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="include/helios/scene/Transform.ixx" line="117" column="34"/>
-        <referencedby refid="classhelios_1_1scene_1_1Transform_1a6dd52a20b3d976923e04bf0f7123e470">helios::scene::Transform::rotate</referencedby>
+        <referencedby refid="classhelios_1_1scene_1_1Transform_1a2f2434b109d047fb202f6cd8340f2ddc">helios::scene::Transform::setRotation</referencedby>
         <referencedby refid="classhelios_1_1scene_1_1Transform_1af14dea88b4f4ecc0a2f524e782dc0aaf">helios::scene::Transform::Transform</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1Transform_1ade553e701cbae015794510224114c2fd" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
@@ -320,8 +316,8 @@
         </inbodydescription>
         <location file="include/helios/scene/Transform.ixx" line="124" column="34"/>
         <references refid="classhelios_1_1scene_1_1Transform_1ade553e701cbae015794510224114c2fd">helios::scene::Transform::translation</references>
+        <referencedby refid="classhelios_1_1scene_1_1Transform_1a853f2be33df2eb96a0565d669aa451a2">helios::scene::Transform::setTranslation</referencedby>
         <referencedby refid="classhelios_1_1scene_1_1Transform_1af14dea88b4f4ecc0a2f524e782dc0aaf">helios::scene::Transform::Transform</referencedby>
-        <referencedby refid="classhelios_1_1scene_1_1Transform_1a545f2340ea52c0a63acd40192a10df19">helios::scene::Transform::translate</referencedby>
         <referencedby refid="classhelios_1_1scene_1_1Transform_1ade553e701cbae015794510224114c2fd">helios::scene::Transform::translation</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1Transform_1ac837ddcfaba7cd27e9b173bfed09d83e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">

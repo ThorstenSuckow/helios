@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>helios: include/helios/game/CommandBuffer.ixx File Reference</title>
+<title>helios: include/helios/engine/game/CommandBuffer.ixx File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
@@ -103,7 +103,7 @@ $(function() {
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">CommandBuffer.ixx File Reference<div class="ingroups">module <a class="el" href="module__helios_8game_8CommandBuffer.html">helios.game.CommandBuffer</a></div></div></div>
+  <div class="headertitle"><div class="title">CommandBuffer.ixx File Reference<div class="ingroups">module <a class="el" href="module__helios_8engine_8game_8CommandBuffer.html">helios.engine.game.CommandBuffer</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -112,12 +112,12 @@ $(function() {
 <div class="textblock"><code>#include &lt;format&gt;</code><br />
 <code>#include &lt;deque&gt;</code><br />
 <code>#include &lt;memory&gt;</code><br />
+<code>import <a class="el" href="LogManager_8ixx_source.html">helios.util.log.LogManager</a>;</code><br />
 <code>import <a class="el" href="Logger_8ixx_source.html">helios.util.log.Logger</a>;</code><br />
 <code>import <a class="el" href="Guid_8ixx_source.html">helios.util.Guid</a>;</code><br />
-<code>import <a class="el" href="GameObject_8ixx_source.html">helios.game.GameObject</a>;</code><br />
-<code>import <a class="el" href="GameWorld_8ixx_source.html">helios.game.GameWorld</a>;</code><br />
-<code>import <a class="el" href="LogManager_8ixx_source.html">helios.util.log.LogManager</a>;</code><br />
-<code>import <a class="el" href="Command_8ixx_source.html">helios.game.Command</a>;</code><br />
+<code>import <a class="el" href="GameObject_8ixx_source.html">helios.engine.game.GameObject</a>;</code><br />
+<code>import <a class="el" href="GameWorld_8ixx_source.html">helios.engine.game.GameWorld</a>;</code><br />
+<code>import <a class="el" href="Command_8ixx_source.html">helios.engine.game.Command</a>;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Include dependency graph for CommandBuffer.ixx:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
@@ -129,18 +129,20 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:helios_3A_3Agame_3A_3ACommandBuffer" id="r_helios_3A_3Agame_3A_3ACommandBuffer"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1game_1_1CommandBuffer.html">helios::game::CommandBuffer</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queue for deferred execution of game commands.  <a href="classhelios_1_1game_1_1CommandBuffer.html#details">More...</a><br /></td></tr>
+<tr class="memitem:helios_3A_3Aengine_3A_3Agame_3A_3ACommandBuffer" id="r_helios_3A_3Aengine_3A_3Agame_3A_3ACommandBuffer"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1game_1_1CommandBuffer.html">helios::engine::game::CommandBuffer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queue for deferred execution of game commands.  <a href="classhelios_1_1engine_1_1game_1_1CommandBuffer.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:helios" id="r_helios"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html">helios</a></td></tr>
-<tr class="memitem:helios_3A_3Agame" id="r_helios_3A_3Agame"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1game.html">helios::game</a></td></tr>
-<tr class="memdesc:namespacehelios_1_1game"><td class="mdescLeft">&#160;</td><td class="mdescRight">Game logic infrastructure using <a class="el" href="classhelios_1_1game_1_1Command.html" title="Abstract base class for encapsulating game actions as executable commands.">Command</a> pattern for decoupled, deterministic game systems. <br /></td></tr>
+<tr class="memitem:helios_3A_3Aengine" id="r_helios_3A_3Aengine"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine.html">helios::engine</a></td></tr>
+<tr class="memdesc:namespacehelios_1_1engine"><td class="mdescLeft">&#160;</td><td class="mdescRight">Engine utilities for frame pacing and tick/update lifecycle management. <br /></td></tr>
+<tr class="memitem:helios_3A_3Aengine_3A_3Agame" id="r_helios_3A_3Aengine_3A_3Agame"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine_1_1game.html">helios::engine::game</a></td></tr>
+<tr class="memdesc:namespacehelios_1_1engine_1_1game"><td class="mdescLeft">&#160;</td><td class="mdescRight">Game logic infrastructure using <a class="el" href="classhelios_1_1engine_1_1game_1_1Command.html" title="Abstract base class for encapsulating game actions as executable commands.">Command</a> pattern for decoupled, deterministic game systems. <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:acbc04f24078582c7d42b2085be5d5750" id="r_acbc04f24078582c7d42b2085be5d5750"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acbc04f24078582c7d42b2085be5d5750">HELIOS_LOG_SCOPE</a>&#160;&#160;&#160;&quot;helios::game::CommandBuffer&quot;</td></tr>
+<tr class="memitem:acbc04f24078582c7d42b2085be5d5750" id="r_acbc04f24078582c7d42b2085be5d5750"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acbc04f24078582c7d42b2085be5d5750">HELIOS_LOG_SCOPE</a>&#160;&#160;&#160;&quot;helios::engine::game::CommandBuffer&quot;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Queue for deferred execution of game commands. </p>
@@ -154,7 +156,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define HELIOS_LOG_SCOPE&#160;&#160;&#160;&quot;helios::game::CommandBuffer&quot;</td>
+          <td class="memname">#define HELIOS_LOG_SCOPE&#160;&#160;&#160;&quot;helios::engine::game::CommandBuffer&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -176,7 +178,7 @@ Macros</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_08c09894bd9f0ab4b1e9fdc7a2628766.html">helios</a></li><li class="navelem"><a href="dir_12b49f23471fec81a28483d5cdfdd609.html">game</a></li><li class="navelem"><a href="CommandBuffer_8ixx.html">CommandBuffer.ixx</a></li>
+    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_08c09894bd9f0ab4b1e9fdc7a2628766.html">helios</a></li><li class="navelem"><a href="dir_860c9de2f65c10e8e262a0e7b5bfee5e.html">engine</a></li><li class="navelem"><a href="dir_46c7b0b04924cca8aa10726746d57f30.html">game</a></li><li class="navelem"><a href="CommandBuffer_8ixx.html">CommandBuffer.ixx</a></li>
     <li class="footer">Generated on <span class="timestamp"></span> for helios by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

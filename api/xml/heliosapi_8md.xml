@@ -29,7 +29,8 @@
 <codeline></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline><highlight class="normal">helios</highlight></codeline>
-<codeline><highlight class="normal">├──<sp/>rendering<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Rendering<sp/>pipeline<sp/>and<sp/>render<sp/>commands</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>core<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Units<sp/>and<sp/>fundamental<sp/>constants</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>rendering<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Rendering<sp/>pipeline<sp/>and<sp/>render<sp/>commands</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>model<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Mesh,<sp/>Material,<sp/>and<sp/>configuration</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>shader<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Shader<sp/>programs<sp/>and<sp/>uniform<sp/>management</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>asset<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Geometric<sp/>shapes<sp/>and<sp/>assets</highlight></codeline>
@@ -37,6 +38,7 @@
 <codeline><highlight class="normal">├──<sp/>input<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Keyboard,<sp/>mouse,<sp/>and<sp/>gamepad<sp/>input</highlight></codeline>
 <codeline><highlight class="normal">├──<sp/>window<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Window<sp/>management<sp/>and<sp/>events</highlight></codeline>
 <codeline><highlight class="normal">├──<sp/>engine<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Frame<sp/>pacing<sp/>and<sp/>timing<sp/>control</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>game<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Game<sp/>objects<sp/>and<sp/>command<sp/>pattern</highlight></codeline>
 <codeline><highlight class="normal">├──<sp/>math<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Vectors,<sp/>matrices,<sp/>transforms</highlight></codeline>
 <codeline><highlight class="normal">├──<sp/>util<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Logging,<sp/>file<sp/>I/O,<sp/>utilities</highlight></codeline>
 <codeline><highlight class="normal">├──<sp/>tooling<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Performance<sp/>metrics<sp/>and<sp/>profiling</highlight></codeline>
@@ -51,6 +53,8 @@
 <codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>widgets<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Ready-to-use<sp/>debug<sp/>widgets</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>├──<sp/>LogWidget<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Log<sp/>console<sp/>with<sp/>filtering</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>├──<sp/>GamepadWidget<sp/><sp/><sp/><sp/><sp/>#<sp/>Gamepad<sp/>state<sp/>visualizer</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>├──<sp/>CameraWidget<sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Camera<sp/>parameter<sp/>control</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>├──<sp/>FpsWidget<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Frame<sp/>rate<sp/>display</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>└──<sp/>MainMenuWidget<sp/><sp/><sp/><sp/>#<sp/>Application<sp/>settings<sp/>menu</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>ImGuiOverlay<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Widget<sp/>manager<sp/>with<sp/>docking<sp/>support</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>ImGuiLogSink<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Log<sp/>sink<sp/>for<sp/>ImGui<sp/>output</highlight></codeline>
@@ -68,25 +72,37 @@
 <codeline></codeline>
 <codeline><highlight class="normal">###<sp/>1.<sp/>Scene<sp/>Graph</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">The<sp/>scene<sp/>graph<sp/>organizes<sp/>objects<sp/>hierarchically,<sp/>with<sp/>automatic<sp/>transform<sp/>propagation<sp/>from<sp/>parent<sp/>to<sp/>child<sp/>nodes.</highlight></codeline>
+<codeline><highlight class="normal">The<sp/>scene<sp/>graph<sp/>organizes<sp/>objects<sp/>hierarchically,<sp/>with<sp/>automatic<sp/>transform<sp/>propagation<sp/>from<sp/>parent<sp/>to<sp/>child<sp/>nodes.<sp/>Transform<sp/>inheritance<sp/>can<sp/>be<sp/>selectively<sp/>controlled<sp/>per<sp/>node.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">**Key<sp/>Classes:**</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>`Scene`<sp/>-<sp/>Root<sp/>container<sp/>for<sp/>all<sp/>scene<sp/>objects</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>`SceneNode`<sp/>-<sp/>Node<sp/>in<sp/>the<sp/>hierarchy<sp/>with<sp/>transform<sp/>and<sp/>optional<sp/>renderable</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>`Camera`<sp/>-<sp/>Defines<sp/>the<sp/>viewpoint<sp/>and<sp/>projection</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`CameraSceneNode`<sp/>-<sp/>Specialized<sp/>node<sp/>for<sp/>cameras<sp/>with<sp/>view<sp/>matrix<sp/>computation</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`Camera`<sp/>-<sp/>Defines<sp/>projection<sp/>parameters<sp/>(FOV,<sp/>aspect<sp/>ratio,<sp/>near/far<sp/>planes)</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`TransformType`<sp/>-<sp/>Bitmask<sp/>for<sp/>selective<sp/>transform<sp/>inheritance<sp/>(Translation,<sp/>Rotation,<sp/>Scale)</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">**Example:**</highlight></codeline>
 <codeline><highlight class="normal">```cpp</highlight></codeline>
 <codeline><highlight class="normal">import<sp/>helios.scene.Scene;</highlight></codeline>
 <codeline><highlight class="normal">import<sp/>helios.scene.SceneNode;</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.scene.CameraSceneNode;</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.math.transform;</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">auto<sp/>scene<sp/>=<sp/>std::make_unique&lt;Scene&gt;(std::move(cullingStrategy));</highlight></codeline>
 <codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Add<sp/>a<sp/>game<sp/>object</highlight></codeline>
 <codeline><highlight class="normal">auto<sp/>cubeNode<sp/>=<sp/>std::make_unique&lt;SceneNode&gt;(std::move(cubeRenderable));</highlight></codeline>
 <codeline><highlight class="normal">auto*<sp/>node<sp/>=<sp/>scene-&gt;addNode(std::move(cubeNode));</highlight></codeline>
+<codeline><highlight class="normal">node-&gt;setTranslation(vec3f(0.0f,<sp/>2.0f,<sp/>0.0f));</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">node-&gt;translate(vec3f(0.0f,<sp/>2.0f,<sp/>0.0f));</highlight></codeline>
-<codeline><highlight class="normal">node-&gt;rotate(rotationMatrix);</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Add<sp/>a<sp/>camera<sp/>as<sp/>child<sp/>of<sp/>the<sp/>cube<sp/>(follows<sp/>cube<sp/>position)</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>camera<sp/>=<sp/>std::make_unique&lt;Camera&gt;();</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>cameraNode<sp/>=<sp/>std::make_unique&lt;CameraSceneNode&gt;(std::move(camera));</highlight></codeline>
+<codeline><highlight class="normal">auto*<sp/>camPtr<sp/>=<sp/>node-&gt;addNode(std::move(cameraNode));</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Camera<sp/>inherits<sp/>only<sp/>translation<sp/>(not<sp/>rotation/scale)</highlight></codeline>
+<codeline><highlight class="normal">camPtr-&gt;setInheritance(helios::math::TransformType::Translation);</highlight></codeline>
+<codeline><highlight class="normal">camPtr-&gt;lookAt(vec3f(0.0f,<sp/>0.0f,<sp/>0.0f),<sp/>vec3f(0.0f,<sp/>1.0f,<sp/>0.0f));</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">###<sp/>2.<sp/>Rendering<sp/>Pipeline</highlight></codeline>
@@ -263,6 +279,72 @@
 <codeline><highlight class="normal">-<sp/>Style<sp/>Editor<sp/>access</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>Settings<sp/>persistence<sp/>via<sp/>imgui.ini</highlight></codeline>
 <codeline></codeline>
+<codeline><highlight class="normal">###<sp/>8.<sp/>Game<sp/>System</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">A<sp/>lightweight<sp/>framework<sp/>for<sp/>game<sp/>object<sp/>management<sp/>and<sp/>input<sp/>handling.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Key<sp/>Classes:**</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`GameObject`<sp/>-<sp/>Base<sp/>class<sp/>for<sp/>game<sp/>entities<sp/>with<sp/>GUID<sp/>identification</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`GameWorld`<sp/>-<sp/>Container<sp/>for<sp/>game<sp/>objects<sp/>with<sp/>update<sp/>loop</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`CommandBuffer`<sp/>-<sp/>Deferred<sp/>command<sp/>execution<sp/>pattern</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`InputSnapshot`<sp/>-<sp/>Captures<sp/>input<sp/>state<sp/>for<sp/>a<sp/>single<sp/>frame</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`InputHandler`<sp/>-<sp/>Interface<sp/>for<sp/>translating<sp/>input<sp/>to<sp/>commands</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Example:**</highlight></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.engine.game.GameWorld;</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.engine.game.GameObject;</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.engine.game.CommandBuffer;</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.engine.game.InputSnapshot;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Create<sp/>game<sp/>world</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>gameWorld<sp/>=<sp/>GameWorld{};</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Add<sp/>game<sp/>objects</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>spaceship<sp/>=<sp/>std::make_unique&lt;Spaceship&gt;(sceneNode);</highlight></codeline>
+<codeline><highlight class="normal">auto*<sp/>spaceshipPtr<sp/>=<sp/>gameWorld.addGameObject(std::move(spaceship));</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Set<sp/>size<sp/>using<sp/>engine<sp/>units<sp/>(1<sp/>hu<sp/>=<sp/>1<sp/>meter)</highlight></codeline>
+<codeline><highlight class="normal">spaceshipPtr-&gt;setSize(5.0f,<sp/>5.0f,<sp/>0.0f,<sp/>helios::core::units::Unit::Meter);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Game<sp/>loop</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>commandBuffer<sp/>=<sp/>CommandBuffer{};</highlight></codeline>
+<codeline><highlight class="normal">while<sp/>(running)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Capture<sp/>input</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto<sp/>snapshot<sp/>=<sp/>InputSnapshot(gamepadState);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Translate<sp/>input<sp/>to<sp/>commands</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>inputHandler.handleInput(snapshot,<sp/>spaceshipPtr-&gt;guid(),<sp/>commandBuffer);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Execute<sp/>commands</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>commandBuffer.flush(gameWorld);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Update<sp/>all<sp/>game<sp/>objects</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>gameWorld.update(deltaTime);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>9.<sp/>Units<sp/>System</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Standardized<sp/>measurement<sp/>units<sp/>for<sp/>consistent<sp/>object<sp/>sizing<sp/>across<sp/>the<sp/>engine.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Key<sp/>Constants:**</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Standard<sp/>unit:<sp/>**Meter**<sp/>(1<sp/>hu<sp/>=<sp/>1<sp/>m)</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Time<sp/>standard:<sp/>**Seconds**</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Example:**</highlight></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.core.units;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">using<sp/>namespace<sp/>helios::core::units;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Set<sp/>object<sp/>size<sp/>in<sp/>meters<sp/>(1<sp/>hu<sp/>=<sp/>1<sp/>meter)</highlight></codeline>
+<codeline><highlight class="normal">gameObject-&gt;setSize(2.0f,<sp/>1.0f,<sp/>0.5f,<sp/>Unit::Meter);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>A<sp/>spaceship<sp/>5<sp/>meters<sp/>wide</highlight></codeline>
+<codeline><highlight class="normal">constexpr<sp/>float<sp/>SHIP_WIDTH<sp/>=<sp/>5.0f;<sp/><sp/>//<sp/>5<sp/>hu<sp/>=<sp/>5<sp/>meters</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
 <codeline><highlight class="normal">###<sp/>7.<sp/>Frame<sp/>Pacing<sp/>and<sp/>Performance<sp/>Metrics</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">Control<sp/>frame<sp/>rate<sp/>and<sp/>monitor<sp/>performance<sp/>with<sp/>built-in<sp/>timing<sp/>tools.</highlight></codeline>
@@ -325,37 +407,52 @@
 <codeline><highlight class="normal">```cpp</highlight></codeline>
 <codeline><highlight class="normal">import<sp/>helios.ext.glfw.app.GLFWFactory;</highlight></codeline>
 <codeline><highlight class="normal">import<sp/>helios.scene.Scene;</highlight></codeline>
-<codeline><highlight class="normal">import<sp/>helios.scene.Camera;</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.scene.CameraSceneNode;</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.rendering.Viewport;</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">int<sp/>main()<sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>1.<sp/>Create<sp/>application</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto<sp/>app<sp/>=<sp/>GLFWFactory::makeOpenGLApp(&quot;My<sp/>helios<sp/>App&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto<sp/>app<sp/>=<sp/>GLFWFactory::makeOpenGLApp(&quot;My<sp/>helios<sp/>App&quot;,<sp/>1920,<sp/>1080);</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto*<sp/>window<sp/>=<sp/>app-&gt;current();</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>2.<sp/>Create<sp/>scene</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>2.<sp/>Setup<sp/>viewport</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto<sp/>viewport<sp/>=<sp/>std::make_shared&lt;Viewport&gt;(0.0f,<sp/>0.0f,<sp/>1.0f,<sp/>1.0f);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>window-&gt;addViewport(viewport);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>3.<sp/>Create<sp/>scene</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto<sp/>scene<sp/>=<sp/>std::make_unique&lt;Scene&gt;(</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::make_unique&lt;CullNoneStrategy&gt;()</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>);</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>3.<sp/>Add<sp/>camera</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>4.<sp/>Add<sp/>camera<sp/>to<sp/>scene<sp/>graph</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto<sp/>camera<sp/>=<sp/>std::make_unique&lt;Camera&gt;();</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>scene-&gt;addNode(std::move(camera));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>camera-&gt;setPerspective(radians(90.0f),<sp/>16.0f/9.0f,<sp/>0.1f,<sp/>1000.0f);</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>4.<sp/>Create<sp/>and<sp/>add<sp/>renderable</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto<sp/>cameraNode<sp/>=<sp/>std::make_unique&lt;CameraSceneNode&gt;(std::move(camera));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto*<sp/>camPtr<sp/>=<sp/>scene-&gt;addNode(std::move(cameraNode));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>camPtr-&gt;setTranslation(vec3f(0.0f,<sp/>0.0f,<sp/>5.0f));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>camPtr-&gt;lookAt(vec3f(0.0f,<sp/>0.0f,<sp/>0.0f),<sp/>vec3f(0.0f,<sp/>1.0f,<sp/>0.0f));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Connect<sp/>viewport<sp/>to<sp/>camera</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>viewport-&gt;setCameraSceneNode(camPtr);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>5.<sp/>Create<sp/>and<sp/>add<sp/>renderable</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto<sp/>prototype<sp/>=<sp/>std::make_shared&lt;RenderPrototype&gt;(material,<sp/>mesh);</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto<sp/>renderable<sp/>=<sp/>std::make_shared&lt;Renderable&gt;(prototype);</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto<sp/>node<sp/>=<sp/>std::make_unique&lt;SceneNode&gt;(std::move(renderable));</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>scene-&gt;addNode(std::move(node));</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>5.<sp/>Main<sp/>loop</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>6.<sp/>Main<sp/>loop</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>while<sp/>(!window-&gt;shouldClose())<sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>app-&gt;eventManager().dispatchAll();</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>auto<sp/>snapshot<sp/>=<sp/>scene-&gt;createSnapshot(*camera);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>auto<sp/>renderPass<sp/>=<sp/>RenderPassFactory::getInstance()</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.buildRenderPass(snapshot);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>auto<sp/>snapshot<sp/>=<sp/>scene-&gt;createSnapshot(viewport);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(snapshot.has_value())<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>auto<sp/>renderPass<sp/>=<sp/>RenderPassFactory::getInstance()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.buildRenderPass(*snapshot);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>app-&gt;renderingDevice().render(renderPass);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>app-&gt;renderingDevice().render(renderPass);</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>window-&gt;swapBuffers();</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
@@ -367,8 +464,10 @@
 <codeline></codeline>
 <codeline><highlight class="normal">For<sp/>detailed<sp/>information<sp/>about<sp/>each<sp/>module,<sp/>see:</highlight></codeline>
 <codeline></codeline>
+<codeline><highlight class="normal">-<sp/>**[Core](../include/helios/core/README.md)**<sp/>-<sp/>Units<sp/>and<sp/>fundamental<sp/>constants</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**[Rendering](../include/helios/rendering/README.md)**<sp/>-<sp/>Rendering<sp/>system<sp/>and<sp/>pipeline</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**[Scene](../include/helios/scene/README.md)**<sp/>-<sp/>Scene<sp/>graph<sp/>and<sp/>camera</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**[Game](../include/helios/engine/game/README.md)**<sp/>-<sp/>Game<sp/>objects<sp/>and<sp/>command<sp/>pattern</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**[Input](../include/helios/input/README.md)**<sp/>-<sp/>Input<sp/>handling</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**[Engine](../include/helios/engine/README.md)**<sp/>-<sp/>Frame<sp/>pacing<sp/>and<sp/>timing<sp/>control</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**[Tooling](../include/helios/tooling/README.md)**<sp/>-<sp/>Performance<sp/>metrics<sp/>and<sp/>profiling</highlight></codeline>

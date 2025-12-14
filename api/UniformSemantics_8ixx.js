@@ -1,7 +1,7 @@
 var UniformSemantics_8ixx =
 [
     [ "helios::rendering::shader::UniformSemantics", "namespacehelios_1_1rendering_1_1shader.html#a0a320e03bcf6f60bc90428c450dfb329", [
-      [ "helios::rendering::shader::UniformSemantics::WorldMatrix", "namespacehelios_1_1rendering_1_1shader.html#a0a320e03bcf6f60bc90428c450dfb329ae10b6dfca8d323f6ec5779344835885e", null ],
+      [ "helios::rendering::shader::UniformSemantics::ModelMatrix", "namespacehelios_1_1rendering_1_1shader.html#a0a320e03bcf6f60bc90428c450dfb329a3e04ff8d5f81e0e803be16ae79aaf3c6", null ],
       [ "helios::rendering::shader::UniformSemantics::ProjectionMatrix", "namespacehelios_1_1rendering_1_1shader.html#a0a320e03bcf6f60bc90428c450dfb329a5c79d4241e5a2978c699473b01f82fe9", null ],
       [ "helios::rendering::shader::UniformSemantics::ViewMatrix", "namespacehelios_1_1rendering_1_1shader.html#a0a320e03bcf6f60bc90428c450dfb329ab3184e06babbab03e639eed0554b29eb", null ],
       [ "helios::rendering::shader::UniformSemantics::MaterialBaseColor", "namespacehelios_1_1rendering_1_1shader.html#a0a320e03bcf6f60bc90428c450dfb329aaaf9abb4ecf0d3618eac3e02b50ab5a7", null ],

@@ -1,0 +1,306 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1game_1_1GameWorld" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::game::GameWorld</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1GameWorld_1ade9c156ea18ef1363364f5c2817665aa" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref>, std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> &gt; &gt;</type>
+        <definition>std::unordered_map&lt;helios::util::Guid, std::unique_ptr&lt;GameObject&gt; &gt; helios::engine::game::GameWorld::gameObjects_</definition>
+        <argsstring></argsstring>
+        <name>gameObjects_</name>
+        <qualifiedname>helios::engine::game::GameWorld::gameObjects_</qualifiedname>
+        <briefdescription>
+<para>Hash map storing all active GameObjects, indexed by their Guid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Uses std::unordered_map for O(1) average-case lookup performance. The map owns all GameObjects via std::unique_ptr. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="58" column="28" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="58" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a0586ac1c766822252c3422bafda3b917" prot="private" static="yes" mutable="no">
+        <type>const <ref refid="classhelios_1_1util_1_1log_1_1Logger" kindref="compound">helios::util::log::Logger</ref> &amp;</type>
+        <definition>const helios::util::log::Logger&amp; helios::engine::game::GameWorld::logger_</definition>
+        <argsstring></argsstring>
+        <name>logger_</name>
+        <qualifiedname>helios::engine::game::GameWorld::logger_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1util_1_1log_1_1LogManager_1a750d8fd5b3ee3678600644756b0631e7" kindref="member">helios::util::log::LogManager::loggerForScope</ref>(
+            <ref refid="OpenGLUniformLocationMap_8ixx_1acbc04f24078582c7d42b2085be5d5750" kindref="member">HELIOS_LOG_SCOPE</ref>)</initializer>
+        <briefdescription>
+<para>The logger used with this <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref> instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Defaults to HELIOS_LOG_SCOPE. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="65" column="55" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="65" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a1dd2f6a1c0d46625292a0c4fd167c46b" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::GameWorld::update</definition>
+        <argsstring>(float deltaTime) const noexcept</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::game::GameWorld::update</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>deltaTime</declname>
+        </param>
+        <briefdescription>
+<para>Updates all GameObjects in the world for the current frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>deltaTime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time elapsed since the last frame, in seconds.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>Iterates through all registered GameObjects and invokes their <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a1dd2f6a1c0d46625292a0c4fd167c46b" kindref="member">update()</ref> method. The order of updates is not guaranteed due to the underlying unordered_map storage. </para>
+</simplesect>
+<simplesect kind="note"><para>This method is noexcept; individual <ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a5d0298e63e5328fe22c73eb2b6e604e8" kindref="member">GameObject::update()</ref> implementations should handle their own exceptions to prevent propagation. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="80" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a4e85936a3662c8dfc85cf83e2e901541" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">helios::engine::game::GameObject</ref> *</type>
+        <definition>helios::engine::game::GameObject * helios::engine::game::GameWorld::addGameObject</definition>
+        <argsstring>(std::unique_ptr&lt; GameObject &gt; gameObject)</argsstring>
+        <name>addGameObject</name>
+        <qualifiedname>helios::engine::game::GameWorld::addGameObject</qualifiedname>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> &gt;</type>
+          <declname>gameObject</declname>
+        </param>
+        <briefdescription>
+<para>Adds a <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> to the world and transfers ownership. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameObject</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> to add. Ownership is transferred to the <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the added <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>, or nullptr if addition failed.</para>
+</simplesect>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>GameObject*</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Non-owning pointer to the added object (valid until removed) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nullptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If gameObject was null or a <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> with the same Guid already exists</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>The <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref> takes ownership of the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>. The returned pointer remains valid until the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> is removed from the world. </para>
+</simplesect>
+<simplesect kind="note"><para>Attempting to add a nullptr or a <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> with a duplicate Guid will fail, return nullptr, and log a warning. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="97" column="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a10feb30a293f8266c398fc5b42872a4a" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">helios::engine::game::GameObject</ref> *</type>
+        <definition>helios::engine::game::GameObject * helios::engine::game::GameWorld::find</definition>
+        <argsstring>(const helios::util::Guid &amp;guid)</argsstring>
+        <name>find</name>
+        <qualifiedname>helios::engine::game::GameWorld::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref> &amp;</type>
+          <declname>guid</declname>
+        </param>
+        <briefdescription>
+<para>Finds a <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> by its unique identifier. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>guid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unique identifier of the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> to find.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> if found, nullptr otherwise.</para>
+</simplesect>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>GameObject*</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Non-owning pointer to the found object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nullptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If no <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> with the specified Guid exists</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>This is the non-const overload. Use the const overload for read-only access. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="111" column="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1aada0325e1ee9928451c6149a6f5643b3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">helios::engine::game::GameObject</ref> *</type>
+        <definition>const helios::engine::game::GameObject * helios::engine::game::GameWorld::find</definition>
+        <argsstring>(const helios::util::Guid &amp;guid) const</argsstring>
+        <name>find</name>
+        <qualifiedname>helios::engine::game::GameWorld::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref> &amp;</type>
+          <declname>guid</declname>
+        </param>
+        <briefdescription>
+<para>Finds a <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> by its unique identifier (const overload). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>guid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unique identifier of the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> to find.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Const pointer to the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> if found, nullptr otherwise.</para>
+</simplesect>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>const</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>GameObject* Non-owning const pointer to the found object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nullptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If no <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> with the specified Guid exists</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>This overload is used when the <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref> is accessed via const reference. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="125" column="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a0e8351e088564887aaabd806752e30f2" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">helios::engine::game::GameObject</ref> &gt;</type>
+        <definition>std::unique_ptr&lt; helios::engine::game::GameObject &gt; helios::engine::game::GameWorld::removeGameObject</definition>
+        <argsstring>(const GameObject &amp;gameObject)</argsstring>
+        <name>removeGameObject</name>
+        <qualifiedname>helios::engine::game::GameWorld::removeGameObject</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> &amp;</type>
+          <declname>gameObject</declname>
+        </param>
+        <briefdescription>
+<para>Removes a <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> from the world and transfers ownership to the caller. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameObject</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> to remove.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Unique pointer to the removed <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>, or nullptr if not found.</para>
+</simplesect>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>std::unique_ptr&lt;GameObject&gt;</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ownership of the removed object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nullptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> was not found in the world</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>After successful removal, all non-owning pointers to the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> become invalid unless the caller maintains the returned unique_ptr. </para>
+</simplesect>
+<simplesect kind="note"><para>Attempting to remove a <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> that doesn&apos;t exist returns nullptr and logs a warning. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="142" column="26"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Central registry and owner of all active GameObjects in the game world. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The `GameWorld` manages the lifetime and lookup of all `GameObject` instances. It provides fast, `Guid`-based lookup and handles the lifecycle of game entities through a clear ownership model. The world serves as the central registry for all objects and is used by the `CommandBuffer` to execute commands against them.</para>
+<para>Typical usage: ```cpp <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">helios::engine::game::GameWorld</ref> world;</para>
+<para>// Add a new entity auto player = std::make_unique&lt;Player&gt;(sceneNode); auto* playerPtr = world.addGameObject(std::move(player));</para>
+<para>// Lookup by Guid if (auto* obj = world.find(playerPtr-&gt;guid())) { obj-&gt;setTranslation({1.0f, 0.0f, 0.0f}); }</para>
+<para>// Remove entity (returns ownership) auto removed = world.removeGameObject(*playerPtr); ```</para>
+<para><simplesect kind="note"><para><ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref> owns all GameObjects added to it. When a <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> is removed, ownership is transferred back to the caller via std::unique_ptr. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="include/helios/engine/game/GameWorld.ixx" line="50" column="5" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="50" bodyend="143"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a4e85936a3662c8dfc85cf83e2e901541" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>addGameObject</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a10feb30a293f8266c398fc5b42872a4a" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>find</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1aada0325e1ee9928451c6149a6f5643b3" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>find</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ade9c156ea18ef1363364f5c2817665aa" prot="private" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>gameObjects_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0586ac1c766822252c3422bafda3b917" prot="private" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>logger_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0e8351e088564887aaabd806752e30f2" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>removeGameObject</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a1dd2f6a1c0d46625292a0c4fd167c46b" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>update</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

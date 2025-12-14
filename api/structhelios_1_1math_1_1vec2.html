@@ -116,6 +116,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ae14c89b58084eae49a7d3b9e0f9c345d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="structhelios_1_1math_1_1vec2.html" title="Represents a 2-dimensional vector of the generic type &lt;T&gt;.">vec2</a> with its values initialized to (0, 0).  <br /></td></tr>
 <tr class="memitem:a88f13d33d43006d524cc6ae628d41c05" id="r_a88f13d33d43006d524cc6ae628d41c05"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a88f13d33d43006d524cc6ae628d41c05">vec2</a> (const T x, const T y) noexcept</td></tr>
 <tr class="memdesc:a88f13d33d43006d524cc6ae628d41c05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="structhelios_1_1math_1_1vec2.html" title="Represents a 2-dimensional vector of the generic type &lt;T&gt;.">vec2</a> with the specified x, y components.  <br /></td></tr>
+<tr class="memitem:ac19445fb20c189286c9e94634aa6b099" id="r_ac19445fb20c189286c9e94634aa6b099"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="structhelios_1_1math_1_1vec3.html">helios::math::vec3</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac19445fb20c189286c9e94634aa6b099">toVec3</a> () const</td></tr>
+<tr class="memdesc:ac19445fb20c189286c9e94634aa6b099"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the current vec2&lt;T&gt; into a 3D vector representation.  <br /></td></tr>
 <tr class="memitem:ac437228c5e3d92b646a4699cd1b5f5e3" id="r_ac437228c5e3d92b646a4699cd1b5f5e3"><td class="memItemLeft" align="right" valign="top">constexpr const T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac437228c5e3d92b646a4699cd1b5f5e3">operator[]</a> (const size_t i) const noexcept</td></tr>
 <tr class="memdesc:ac437228c5e3d92b646a4699cd1b5f5e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides read only access to the vector components. Bounds checking is performed via `assert` in debug builds.  <br /></td></tr>
 <tr class="memitem:a0ecdb26abcac9606abcccb14ee69e28f" id="r_a0ecdb26abcac9606abcccb14ee69e28f"><td class="memItemLeft" align="right" valign="top">constexpr T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ecdb26abcac9606abcccb14ee69e28f">operator[]</a> (const size_t i) noexcept</td></tr>
@@ -140,7 +142,7 @@ struct helios::math::vec2&lt; T &gt;</div><p>Represents a 2-dimensional vector o
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="vec2_8ixx_source.html#l00028">28</a> of file <a class="el" href="vec2_8ixx_source.html">vec2.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vec2_8ixx_source.html#l00032">32</a> of file <a class="el" href="vec2_8ixx_source.html">vec2.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae14c89b58084eae49a7d3b9e0f9c345d" name="ae14c89b58084eae49a7d3b9e0f9c345d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae14c89b58084eae49a7d3b9e0f9c345d">&#9670;&#160;</a></span>vec2() <span class="overload">[1/2]</span></h2>
@@ -169,7 +171,7 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
 
 <p>Creates a new <a class="el" href="structhelios_1_1math_1_1vec2.html" title="Represents a 2-dimensional vector of the generic type &lt;T&gt;.">vec2</a> with its values initialized to (0, 0). </p>
 
-<p class="definition">Definition at line <a class="el" href="vec2_8ixx_source.html#l00041">41</a> of file <a class="el" href="vec2_8ixx_source.html">vec2.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vec2_8ixx_source.html#l00045">45</a> of file <a class="el" href="vec2_8ixx_source.html">vec2.ixx</a>.</p>
 
 </div>
 </div>
@@ -211,7 +213,7 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="vec2_8ixx_source.html#l00050">50</a> of file <a class="el" href="vec2_8ixx_source.html">vec2.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vec2_8ixx_source.html#l00054">54</a> of file <a class="el" href="vec2_8ixx_source.html">vec2.ixx</a>.</p>
 
 </div>
 </div>
@@ -244,9 +246,9 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
 <p>Returns the magnitude of this vec2&lt;T&gt;. </p>
 <dl class="section return"><dt>Returns</dt><dd>The magnitude of this vector as type <a class="el" href="namespacehelios_1_1math.html#a4c90766d59f3c1ce32821bbbd3cdd62b" title="Type trait that promotes integral types to double, while preserving floating-point types.">FloatingPointType&lt;T&gt;</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="vec2_8ixx_source.html#l00084">84</a> of file <a class="el" href="vec2_8ixx_source.html">vec2.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vec2_8ixx_source.html#l00096">96</a> of file <a class="el" href="vec2_8ixx_source.html">vec2.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="vec2_8ixx_source.html#l00101">helios::math::vec2&lt; float &gt;::normalize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="vec2_8ixx_source.html#l00113">helios::math::vec2&lt; float &gt;::normalize()</a>.</p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
@@ -284,7 +286,7 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
 <p>Normalizes this vec2&lt;T&gt;. </p>
 <dl class="section return"><dt>Returns</dt><dd>The normalized <a class="el" href="namespacehelios_1_1math.html#a4c90766d59f3c1ce32821bbbd3cdd62b" title="Type trait that promotes integral types to double, while preserving floating-point types.">FloatingPointType&lt;T&gt;</a> vector. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="vec2_8ixx_source.html#l00101">101</a> of file <a class="el" href="vec2_8ixx_source.html">vec2.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vec2_8ixx_source.html#l00113">113</a> of file <a class="el" href="vec2_8ixx_source.html">vec2.ixx</a>.</p>
 
 </div>
 </div>
@@ -322,7 +324,7 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if all elements are equal (==), false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="vec2_8ixx_source.html#l00122">122</a> of file <a class="el" href="vec2_8ixx_source.html">vec2.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vec2_8ixx_source.html#l00134">134</a> of file <a class="el" href="vec2_8ixx_source.html">vec2.ixx</a>.</p>
 
 </div>
 </div>
@@ -360,7 +362,7 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A const ref to the requested component. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="vec2_8ixx_source.html#l00061">61</a> of file <a class="el" href="vec2_8ixx_source.html">vec2.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vec2_8ixx_source.html#l00073">73</a> of file <a class="el" href="vec2_8ixx_source.html">vec2.ixx</a>.</p>
 
 </div>
 </div>
@@ -398,7 +400,7 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A ref to the requested component. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="vec2_8ixx_source.html#l00074">74</a> of file <a class="el" href="vec2_8ixx_source.html">vec2.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vec2_8ixx_source.html#l00086">86</a> of file <a class="el" href="vec2_8ixx_source.html">vec2.ixx</a>.</p>
 
 </div>
 </div>
@@ -443,7 +445,39 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
 <dl class="section see"><dt>See also</dt><dd><a href="https://realtimecollisiondetection.net/blog/?p=89">https://realtimecollisiondetection.net/blog/?p=89</a></dd></dl>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000010">Todo</a></b></dt><dd>account for abs (values close to zero) and rel (larger values), move epsilon to global constant? </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="vec2_8ixx_source.html#l00143">143</a> of file <a class="el" href="vec2_8ixx_source.html">vec2.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="vec2_8ixx_source.html#l00155">155</a> of file <a class="el" href="vec2_8ixx_source.html">vec2.ixx</a>.</p>
+
+</div>
+</div>
+<a id="ac19445fb20c189286c9e94634aa6b099" name="ac19445fb20c189286c9e94634aa6b099"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac19445fb20c189286c9e94634aa6b099">&#9670;&#160;</a></span>toVec3()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::math::Numeric</a> T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structhelios_1_1math_1_1vec3.html">helios::math::vec3</a>&lt; T &gt; <a class="el" href="structhelios_1_1math_1_1vec2.html">helios::math::vec2</a>&lt; T &gt;::toVec3 </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Converts the current vec2&lt;T&gt; into a 3D vector representation. </p>
+<dl class="section return"><dt>Returns</dt><dd>A 3D vector corresponding to the converted representation of the object or input. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="vec2_8ixx_source.html#l00061">61</a> of file <a class="el" href="vec2_8ixx_source.html">vec2.ixx</a>.</p>
 
 </div>
 </div>

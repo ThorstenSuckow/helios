@@ -11,5 +11,6 @@ var searchData=
   ['loggerforscope_8',['loggerForScope',['../classhelios_1_1util_1_1log_1_1LogManager.html#a750d8fd5b3ee3678600644756b0631e7',1,'helios::util::log::LogManager']]],
   ['logmanager_9',['LogManager',['../classhelios_1_1util_1_1log_1_1LogManager.html#afb10a34aeaaa1fb36b8eefd42b184049',1,'helios::util::log::LogManager']]],
   ['logwidget_10',['LogWidget',['../classhelios_1_1ext_1_1imgui_1_1widgets_1_1LogWidget.html#ad8aa78ed7a7bd44649200624cf08ed64',1,'helios::ext::imgui::widgets::LogWidget']]],
-  ['lookat_11',['lookAt',['../classhelios_1_1scene_1_1CameraSceneNode.html#ad57acd6f8c8b2e6b02707ba1424377cb',1,'helios::scene::CameraSceneNode::lookAt()'],['../namespacehelios_1_1math.html#aef6bef7ca3d31a4908a66e16c9771420',1,'helios::math::lookAt()']]]
+  ['lookat_11',['lookAt',['../classhelios_1_1scene_1_1CameraSceneNode.html#ad57acd6f8c8b2e6b02707ba1424377cb',1,'helios::scene::CameraSceneNode::lookAt()'],['../namespacehelios_1_1math.html#aef6bef7ca3d31a4908a66e16c9771420',1,'helios::math::lookAt()']]],
+  ['lookatlocal_12',['lookAtLocal',['../classhelios_1_1scene_1_1CameraSceneNode.html#a92ffad9e05c9d43611cae562d43446d7',1,'helios::scene::CameraSceneNode']]]
 ];

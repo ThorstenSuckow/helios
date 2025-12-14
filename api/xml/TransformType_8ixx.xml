@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="TransformType_8ixx" kind="file" language="C++">
+    <compoundname>TransformType.ixx</compoundname>
+    <includes local="no">cstdint</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>include/helios/math/TransformType.ixx</label>
+        <link refid="TransformType_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>cstdint</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacehelios">helios</innernamespace>
+    <innernamespace refid="namespacehelios_1_1math">helios::math</innernamespace>
+    <briefdescription>
+<para>Defines transform inheritance flags for scene graph hierarchies. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/**</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>@file<sp/>TransformType.ixx</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>@brief<sp/>Defines<sp/>transform<sp/>inheritance<sp/>flags<sp/>for<sp/>scene<sp/>graph<sp/>hierarchies.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">module</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdint&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8math_8TransformType" kindref="compound">helios.math.TransformType</ref>;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1math" kindref="compound">helios::math</ref><sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Bitmask<sp/>enum<sp/>controlling<sp/>which<sp/>transform<sp/>components<sp/>a<sp/>child<sp/>node<sp/>inherits<sp/>from<sp/>its<sp/>parent.</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>When<sp/>a<sp/>SceneNode<sp/>is<sp/>attached<sp/>to<sp/>a<sp/>parent,<sp/>its<sp/>final<sp/>world<sp/>transform<sp/>is<sp/>computed<sp/>by</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>combining<sp/>the<sp/>parent&apos;s<sp/>world<sp/>transform<sp/>with<sp/>the<sp/>child&apos;s<sp/>local<sp/>transform.<sp/>The<sp/>`Inherit`</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>flags<sp/>determine<sp/>which<sp/>components<sp/>(Translation,<sp/>Rotation,<sp/>Scale)<sp/>of<sp/>the<sp/>parent<sp/>transform</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>are<sp/>applied<sp/>to<sp/>the<sp/>child.</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>enables<sp/>flexible<sp/>scene<sp/>graph<sp/>behaviors<sp/>such<sp/>as:</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>A<sp/>camera<sp/>that<sp/>follows<sp/>an<sp/>object&apos;s<sp/>position<sp/>but<sp/>maintains<sp/>its<sp/>own<sp/>orientation<sp/>(`TransformType::Translation`)</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>UI<sp/>elements<sp/>that<sp/>inherit<sp/>full<sp/>transforms<sp/>(`TransformType::All`)</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>Objects<sp/>that<sp/>only<sp/>inherit<sp/>rotation<sp/>for<sp/>billboard<sp/>effects<sp/>(`TransformType::Rotation`)</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Example<sp/>usage:</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```cpp</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>using<sp/>namespace<sp/>helios::math;</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>//<sp/>Camera<sp/>follows<sp/>spaceship<sp/>position<sp/>only</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>cameraNode-&gt;setInheritance(TransformType::Translation);</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>//<sp/>Full<sp/>transform<sp/>inheritance<sp/>(default)</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>childNode-&gt;setInheritance(TransformType::All);</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>//<sp/>Combine<sp/>specific<sp/>flags</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>node-&gt;setInheritance(TransformType::Translation<sp/>|<sp/>TransformType::Rotation);</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41" refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531d" kindref="member">TransformType</ref><sp/>:<sp/>uint8_t<sp/>{</highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Inherit<sp/>only<sp/>the<sp/>translation<sp/>component<sp/>from<sp/>the<sp/>parent.</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>child&apos;s<sp/>world<sp/>position<sp/>is<sp/>offset<sp/>by<sp/>the<sp/>parent&apos;s<sp/>world<sp/>position,</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>but<sp/>rotation<sp/>and<sp/>scale<sp/>remain<sp/>unaffected<sp/>by<sp/>the<sp/>parent.</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531da6dd08874f83507e9c7b23f1a46b7fa7c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531da6dd08874f83507e9c7b23f1a46b7fa7c" kindref="member">Translation</ref><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>0,</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Inherit<sp/>only<sp/>the<sp/>rotation<sp/>component<sp/>from<sp/>the<sp/>parent.</highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>child&apos;s<sp/>orientation<sp/>is<sp/>combined<sp/>with<sp/>the<sp/>parent&apos;s<sp/>orientation,</highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>but<sp/>position<sp/>and<sp/>scale<sp/>remain<sp/>unaffected.</highlight></codeline>
+<codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56" refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531daf1a42bd417390fc63b030a519624607a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531daf1a42bd417390fc63b030a519624607a" kindref="member">Rotation</ref><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>1,</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Inherit<sp/>only<sp/>the<sp/>scale<sp/>component<sp/>from<sp/>the<sp/>parent.</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>child&apos;s<sp/>scale<sp/>is<sp/>multiplied<sp/>by<sp/>the<sp/>parent&apos;s<sp/>scale,</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>but<sp/>position<sp/>and<sp/>rotation<sp/>remain<sp/>unaffected.</highlight></codeline>
+<codeline lineno="63"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64" refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531da85a7cd587d6142dbfc1a4de05af7b75d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531da85a7cd587d6142dbfc1a4de05af7b75d" kindref="member">Scale</ref><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>2,</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Inherit<sp/>all<sp/>transform<sp/>components<sp/>(Translation,<sp/>Rotation,<sp/>Scale).</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>is<sp/>the<sp/>default<sp/>behavior<sp/>where<sp/>the<sp/>child&apos;s<sp/>world<sp/>transform<sp/>is</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>the<sp/>full<sp/>composition<sp/>of<sp/>parent<sp/>and<sp/>local<sp/>transforms.</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72" refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531dab1c94ca2fbc3e78fc30069c8d0f01680" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531dab1c94ca2fbc3e78fc30069c8d0f01680" kindref="member">All</ref><sp/>=<sp/><ref refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531da6dd08874f83507e9c7b23f1a46b7fa7c" kindref="member">Translation</ref><sp/>|<sp/><ref refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531daf1a42bd417390fc63b030a519624607a" kindref="member">Rotation</ref><sp/>|<sp/><ref refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531da85a7cd587d6142dbfc1a4de05af7b75d" kindref="member">Scale</ref></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Combines<sp/>two<sp/>Inherit<sp/>flags<sp/>using<sp/>bitwise<sp/>OR.</highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>a<sp/>The<sp/>first<sp/>inheritance<sp/>flag.</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>b<sp/>The<sp/>second<sp/>inheritance<sp/>flag.</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>combined<sp/>inheritance<sp/>mask.</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83" refid="namespacehelios_1_1math_1aca9266bbc6a927b4e082fb75d0d31434" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531d" kindref="member">TransformType</ref><sp/><ref refid="namespacehelios_1_1math_1aca9266bbc6a927b4e082fb75d0d31434" kindref="member">operator|</ref>(<ref refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531d" kindref="member">TransformType</ref><sp/>a,<sp/><ref refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531d" kindref="member">TransformType</ref><sp/>b)<sp/>{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531d" kindref="member">TransformType</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">uint8_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(a)<sp/>|<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">uint8_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(b));</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="88"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="89"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Checks<sp/>if<sp/>a<sp/>specific<sp/>inheritance<sp/>flag<sp/>is<sp/>set<sp/>in<sp/>a<sp/>mask.</highlight></codeline>
+<codeline lineno="90"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="91"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>mask<sp/>The<sp/>inheritance<sp/>mask<sp/>to<sp/>check<sp/>against.</highlight></codeline>
+<codeline lineno="92"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>flag<sp/>The<sp/>specific<sp/>flag<sp/>to<sp/>test<sp/>for.</highlight></codeline>
+<codeline lineno="93"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="94"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>`true`<sp/>if<sp/>the<sp/>flag<sp/>is<sp/>present<sp/>in<sp/>the<sp/>mask,<sp/>`false`<sp/>otherwise.</highlight></codeline>
+<codeline lineno="95"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="96"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Example<sp/>usage:</highlight></codeline>
+<codeline lineno="97"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```cpp</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>using<sp/>namespace<sp/>helios::math;</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>TransformType<sp/>mode<sp/>=<sp/>TransformType::Translation<sp/>|<sp/>TransformType::Rotation;</highlight></codeline>
+<codeline lineno="101"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="102"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>if<sp/>(transformTypeMatch(mode,<sp/>TransformType::Translation))<sp/>{</highlight></codeline>
+<codeline lineno="103"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/>//<sp/>Apply<sp/>parent<sp/>translation...</highlight></codeline>
+<codeline lineno="104"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>}</highlight></codeline>
+<codeline lineno="105"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```</highlight></codeline>
+<codeline lineno="106"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="107" refid="namespacehelios_1_1math_1a21fb88902bc365300cd88dad37e1d123" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1math_1a21fb88902bc365300cd88dad37e1d123" kindref="member">transformTypeMatch</ref>(<ref refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531d" kindref="member">TransformType</ref><sp/>mask,<sp/><ref refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531d" kindref="member">TransformType</ref><sp/>flag)<sp/>{</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">uint8_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(mask)<sp/>&amp;<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">uint8_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(flag))<sp/>!=<sp/>0;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="110"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="include/helios/math/TransformType.ixx"/>
+  </compounddef>
+</doxygen>

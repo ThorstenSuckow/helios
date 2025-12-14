@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['gameobject_0',['GameObject',['../classhelios_1_1game_1_1GameObject.html',1,'helios::game']]],
+  ['gameobject_0',['GameObject',['../classhelios_1_1engine_1_1game_1_1GameObject.html',1,'helios::engine::game']]],
   ['gamepadstate_1',['GamepadState',['../classhelios_1_1input_1_1GamepadState.html',1,'helios::input']]],
   ['gamepadwidget_2',['GamepadWidget',['../classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget.html',1,'helios::ext::imgui::widgets']]],
-  ['gameworld_3',['GameWorld',['../classhelios_1_1game_1_1GameWorld.html',1,'helios::game']]],
+  ['gameworld_3',['GameWorld',['../classhelios_1_1engine_1_1game_1_1GameWorld.html',1,'helios::engine::game']]],
   ['glfwapplication_4',['GLFWApplication',['../classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication.html',1,'helios::ext::glfw::app']]],
   ['glfwfactory_5',['GLFWFactory',['../classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWFactory.html',1,'helios::ext::glfw::app']]],
   ['glfwinputadapter_6',['GLFWInputAdapter',['../classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter.html',1,'helios::ext::glfw::input']]],

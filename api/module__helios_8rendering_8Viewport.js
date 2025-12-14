@@ -5,7 +5,7 @@ var module__helios_8rendering_8Viewport =
     [ "helios::rendering::Viewport::Viewport", "module__helios_8rendering_8Viewport.html#acab3a95a725e2ce895c8cf5a075e5a8c", null ],
     [ "helios::rendering::Viewport::Viewport", "module__helios_8rendering_8Viewport.html#a219c81106b214b5e690210bd6258d2e2", null ],
     [ "helios::rendering::Viewport::renderTarget", "module__helios_8rendering_8Viewport.html#afa67d77263ec5dd36db0591ffb9f889d", null ],
-    [ "helios::rendering::Viewport::setCameraSceneNode", "module__helios_8rendering_8Viewport.html#a309a84b609eb286f17fcaa9a8fe75652", null ],
+    [ "helios::rendering::Viewport::setCameraSceneNode", "module__helios_8rendering_8Viewport.html#a692205c554a7491297b8005412ddcb7f", null ],
     [ "helios::rendering::Viewport::cameraSceneNode", "module__helios_8rendering_8Viewport.html#ac0a2a8555099d41b4000196e0c35edbd", null ],
     [ "helios::rendering::Viewport::setRenderTarget", "module__helios_8rendering_8Viewport.html#a9c8ed040c0e35728770ddd462860c5bc", null ],
     [ "helios::rendering::Viewport::bounds", "module__helios_8rendering_8Viewport.html#a6d7fc6de0fc5c9c31d2d7ee760f1f126", null ],

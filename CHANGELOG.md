@@ -154,7 +154,7 @@ auto camera = std::make_unique<Camera>();
 auto cameraNode = std::make_unique<CameraSceneNode>(std::move(camera));
 auto* nodePtr = scene->addNode(std::move(cameraNode));
 viewport->setCameraSceneNode(nodePtr);
-nodePtr->translate({0, 0, 5});
+nodePtr->setTranslation({0, 0, 5});
 nodePtr->lookAt({0, 0, 0}, {0, 1, 0});
 ```
 

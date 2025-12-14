@@ -90,6 +90,14 @@ export namespace helios::engine::game {
         helios::math::vec3f velocity_{};
 
         /**
+         * @brief The current position-vector in local coordinates (model space).
+         *
+         * @details Represents the GameObject's position relative to its local/model space,
+         * consistent with the position() accessor.
+         */
+        helios::math::vec3f position_{};
+
+        /**
          * @brief The current steeringInput-vector, if any.
          */
         helios::math::vec2f steeringInput_{};
@@ -141,21 +149,21 @@ export namespace helios::engine::game {
         GameObject& setSize(float width, float height, float depth, helios::core::units::Unit unit=helios::core::units::Unit::Meter) noexcept;
 
         /**
-         * @brief Returns the current position of the GameObject in local coordinates.
+         * @brief Returns a ref to the current position of the GameObject in local coordinates.
          *
-         * @return The position vector in world space.
+         * @return The position vector in model space (local).
          */
-        [[nodiscard]] helios::math::vec3f position() const noexcept;
+        [[nodiscard]] const helios::math::vec3f& position() const noexcept;
 
         /**
-         * @brief Returns the current steering input vector.
+         * @brief Returns a const ref to the current steering input vector.
          *
          * @return The normalized direction vector representing input from controls.
          *
          * @details This vector indicates the desired movement direction as provided
          *          by the player or AI controller. A zero vector indicates no input.
          */
-        [[nodiscard]] helios::math::vec2f steeringInput() const noexcept;
+        [[nodiscard]] const helios::math::vec2f& steeringInput() const noexcept;
 
         /**
          * @brief Returns the current throttle value.
@@ -168,14 +176,14 @@ export namespace helios::engine::game {
         [[nodiscard]] float throttle() const noexcept;
 
         /**
-         * @brief Returns the current velocity vector.
+         * @brief Returns a const ref to the current velocity vector.
          *
          * @return The velocity vector in units per second.
          *
          * @details Represents the current movement direction and speed of the
          *          GameObject in world space.
          */
-        [[nodiscard]] helios::math::vec3f velocity() const noexcept;
+        [[nodiscard]] const helios::math::vec3f& velocity() const noexcept;
 
         /**
          * @brief Returns the current speed as a ratio of maximum speed.

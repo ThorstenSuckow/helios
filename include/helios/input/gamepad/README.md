@@ -10,4 +10,3 @@ This namespace provides gamepad input handling, state management, and input norm
 @brief Gamepad input handling and configuration.
 @details This namespace provides gamepad state management, input normalization with deadzone strategies, and per-controller configuration options.
 </p></details>
-

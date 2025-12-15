@@ -75,7 +75,7 @@ export namespace helios::input {
          * @param deadzoneStrategy The strategy used for analog stick normalization.
          *                         Ownership is transferred to this adapter.
          */
-        InputAdapter(std::unique_ptr<helios::input::gamepad::DeadzoneStrategy> deadzoneStrategy) :
+        explicit InputAdapter(std::unique_ptr<helios::input::gamepad::DeadzoneStrategy> deadzoneStrategy) :
         deadzoneStrategy_(std::move(deadzoneStrategy))
         {}
 

@@ -18,6 +18,7 @@ export module helios.ext.imgui.widgets.GamepadWidget;
 import helios.ext.imgui.ImGuiWidget;
 import helios.input.InputManager;
 import helios.input.gamepad.GamepadState;
+import helios.input.gamepad.GamepadSettings;
 import helios.input.types.Gamepad;
 import helios.math.types;
 
@@ -26,14 +27,16 @@ export namespace helios::ext::imgui::widgets {
     /**
      * @brief A debug widget to visualize the state of a specific gamepad.
      *
-     * @details This widget provides a comprehensive visual overview of a connected gamepad's state.
+     * This widget provides a comprehensive visual overview of a connected gamepad's state.
      * It includes:
      * - **Connection Status:** Live indicator if the gamepad is connected.
      * - **Stick Visualization:** 2D plot showing the position of left/right analog sticks within a circular boundary.
      * - **Triggers:** Progress bars visualizing the pressure level of left/right triggers.
      * - **Buttons:** Read-only checkboxes showing the current pressed state of all standard gamepad buttons.
+     * - **Settings Panel:** Integrated configuration for deadzone and axis inversion (toggle via button).
      *
      * The widget allows switching between different Gamepad IDs (1-4) at runtime via a dropdown menu.
+     * Settings configuration is automatically available through the InputManager's InputAdapter.
      *
      * @note This widget is not thread-safe. Use from the main/render thread only.
      */
@@ -41,7 +44,7 @@ export namespace helios::ext::imgui::widgets {
 
     private:
         /**
-         * @brief Pointer to the InputManager used to query gamepad states.
+         * @brief Pointer to the InputManager used to query gamepad states and access settings.
          * Non-owning pointer; must be valid for the lifetime of this widget.
          */
         helios::input::InputManager* inputManager_ = nullptr;
@@ -51,6 +54,11 @@ export namespace helios::ext::imgui::widgets {
          * Maps to Gamepad::ONE through Gamepad::FOUR.
          */
         int selectedGamepadIndex_ = 0;
+
+        /**
+         * @brief Flag to control visibility of the settings panel.
+         */
+        bool showSettings_ = false;
 
         /**
          * @brief Helper to map an integer index (0-3) to a Gamepad enum ID.
@@ -105,13 +113,69 @@ export namespace helios::ext::imgui::widgets {
             ImGui::Text("%s: (%.2f, %.2f)", label, value[0], value[1]);
         }
 
+        /**
+         * @brief Draws the settings panel for the currently selected gamepad.
+         *
+         * @param gamepadId The gamepad to configure.
+         */
+        void drawSettingsPanel(helios::input::types::Gamepad gamepadId) {
+            auto& settings = inputManager_->inputAdapter().gamepadSettings(gamepadId);
+
+            ImGui::Spacing();
+
+            // --- Deadzone Configuration ---
+            ImGui::Text("Deadzone");
+
+            float leftDeadzone = settings.leftStickDeadzone();
+            ImGui::Text("Left Stick");
+            if (ImGui::SliderFloat("##LeftDZ", &leftDeadzone, 0.0f, 0.9f, "%.2f")) {
+                settings.setLeftStickDeadzone(leftDeadzone);
+            }
+
+            float rightDeadzone = settings.rightStickDeadzone();
+            ImGui::Text("Right Stick");
+            if (ImGui::SliderFloat("##RightDZ", &rightDeadzone, 0.0f, 0.9f, "%.2f")) {
+                settings.setRightStickDeadzone(rightDeadzone);
+            }
+
+            ImGui::Spacing();
+
+            // --- Axis Inversion ---
+            ImGui::Text("Invert Axes");
+
+            bool invertLX = settings.invertLeftX();
+            bool invertLY = settings.invertLeftY();
+            bool invertRX = settings.invertRightX();
+            bool invertRY = settings.invertRightY();
+
+            if (ImGui::Checkbox("L-X", &invertLX)) settings.setInvertLeftX(invertLX);
+            ImGui::SameLine();
+            if (ImGui::Checkbox("L-Y", &invertLY)) settings.setInvertLeftY(invertLY);
+            ImGui::SameLine();
+            if (ImGui::Checkbox("R-X", &invertRX)) settings.setInvertRightX(invertRX);
+            ImGui::SameLine();
+            if (ImGui::Checkbox("R-Y", &invertRY)) settings.setInvertRightY(invertRY);
+
+            ImGui::Spacing();
+
+            // --- Reset ---
+            if (ImGui::Button("Reset Settings")) {
+                settings.setLeftStickDeadzone(0.0f);
+                settings.setRightStickDeadzone(0.0f);
+                settings.setInvertLeftX(false);
+                settings.setInvertLeftY(false);
+                settings.setInvertRightX(false);
+                settings.setInvertRightY(false);
+            }
+        }
+
     public:
 
         /**
          * @brief Constructs the GamepadWidget.
          *
-         * @param inputManager Pointer to the InputManager to query states from.
-         * Pass nullptr to render an empty/disabled widget.
+         * @param inputManager Pointer to the InputManager to query states and settings from.
+         *                     Pass nullptr to render an empty/disabled widget.
          */
         explicit GamepadWidget(helios::input::InputManager* inputManager)
             : inputManager_(inputManager) {}
@@ -150,7 +214,20 @@ export namespace helios::ext::imgui::widgets {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Disconnected");
                 }
 
+                // Settings toggle button (below combobox)
+                if (ImGui::Button(showSettings_ ? "Hide Settings" : "Show Settings")) {
+                    showSettings_ = !showSettings_;
+                }
+
                 ImGui::Separator();
+
+                // --- Settings Panel (collapsible) ---
+                if (showSettings_) {
+                    if (ImGui::CollapsingHeader("Controller Settings", ImGuiTreeNodeFlags_DefaultOpen)) {
+                        drawSettingsPanel(gamepadId);
+                    }
+                    ImGui::Separator();
+                }
 
                 if (connected) {
                     // Retrieve const reference to state.

@@ -158,6 +158,24 @@ export namespace helios::input {
          */
         [[nodiscard]] bool isConnected(helios::input::types::Gamepad gamepadId) const noexcept;
 
+
+        /**
+         * @brief Retrieves the InputAdapter associated with this InputManager.
+         *
+         * @return A reference to the InputAdapter associated with this InputManager.
+         */
+        [[nodiscard]] const helios::input::InputAdapter& inputAdapter() const noexcept;
+
+        /**
+         * @brief Retrieves the InputAdapter associated with this InputManager.
+         *
+         * This non-const overload allows modification of InputAdapter settings,
+         * such as gamepad deadzone and axis inversion configuration.
+         *
+         * @return A reference to the InputAdapter associated with this InputManager.
+         */
+        [[nodiscard]] helios::input::InputAdapter& inputAdapter() noexcept;
+
     };
 
 

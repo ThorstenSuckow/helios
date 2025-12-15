@@ -64,7 +64,7 @@ export namespace helios::ext::glfw::input {
 
         /**
          * @brief Checks if a specific key is currently pressed for the given window.
-         * If the specified window is not of tyoe GLFWWindow, this method always returns false.
+         * If the specified window is not of type GLFWWindow, this method always returns false.
          *
          * @copydoc helios::input::InputAdapter::isKeyPressed()
          */

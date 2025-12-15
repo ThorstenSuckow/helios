@@ -16,7 +16,7 @@ namespace helios::input::gamepad {
 
         auto len = std::hypot(x, y);
 
-        if (len <= deadzone || len < helios::math::EPSILON_LENGTH) {
+        if (len < helios::math::EPSILON_LENGTH || len <= deadzone) {
             x = 0;
             y = 0;
             return;

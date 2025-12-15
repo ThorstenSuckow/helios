@@ -7,11 +7,12 @@ module;
 
 module helios.ext.glfw.input.GLFWInputAdapter;
 
-import helios.input.GamepadState;
+import helios.input.gamepad.GamepadState;
 import helios.input.InputAdapter;
 import helios.input.types.Gamepad;
 import helios.window.Window;
 import helios.input.types.Key;
+import helios.input.gamepad.GamepadSettings;
 
 import helios.ext.glfw.input.GLFWKeyLookup;
 import helios.ext.glfw.window.GLFWWindow;
@@ -54,6 +55,9 @@ namespace helios::ext::glfw::input {
 
                 int glfwGamepadId = helios::ext::glfw::input::GLFWGamepadLookup::from(gamepadId);
 
+                auto& gamepadSettings = InputAdapter::gamepadSettings(gamepadId);
+
+
                 if (glfwJoystickIsGamepad(glfwGamepadId)) {
                     GLFWgamepadstate state;
                     glfwGetGamepadState(glfwGamepadId, &state);
@@ -61,13 +65,23 @@ namespace helios::ext::glfw::input {
                     const float* axes = state.axes;
                     const unsigned char* buttons = state.buttons;
 
-                    gamepadStates_[index].updateAxes(
-                        axes[GLFW_GAMEPAD_AXIS_LEFT_X],
-                        // invert left Y, glfw uses down:1, up:-1, we need down:-1, up:1
-                        -axes[GLFW_GAMEPAD_AXIS_LEFT_Y],
-                        axes[GLFW_GAMEPAD_AXIS_RIGHT_X],
+                    // left stick
+                    float leftX = (gamepadSettings.invertLeftX() ? -1.0f : 1.0f) * axes[GLFW_GAMEPAD_AXIS_LEFT_X];
+                    // invert left Y, glfw uses down:1, up:-1, we need down:-1, up:1
+                    float leftY = (gamepadSettings.invertLeftY() ? -1.0f : 1.0f) * -axes[GLFW_GAMEPAD_AXIS_LEFT_Y];
+                    deadzoneStrategy_->normalize(gamepadSettings.leftStickDeadzone(), leftX, leftY);
+
+                    // right stick
+                    float rightX = (gamepadSettings.invertRightX() ? -1.0f : 1.0f) * axes[GLFW_GAMEPAD_AXIS_RIGHT_X];
                         // invert right Y, same logic as left Y
-                        -axes[GLFW_GAMEPAD_AXIS_RIGHT_Y],
+                    float rightY = (gamepadSettings.invertRightY() ? -1.0f : 1.0f) * -axes[GLFW_GAMEPAD_AXIS_RIGHT_Y];
+                    deadzoneStrategy_->normalize(gamepadSettings.rightStickDeadzone(), rightX, rightY);
+
+                    gamepadStates_[index].updateAxes(
+                        leftX,
+                        leftY,
+                        rightX,
+                        rightY,
                         // normalize trigger values, since glfw returns them in the range
                         // [-1, 1]
                         axes[GLFW_GAMEPAD_AXIS_LEFT_TRIGGER]/2 + 0.5f ,
@@ -120,7 +134,7 @@ namespace helios::ext::glfw::input {
     }
 
 
-    const helios::input::GamepadState& GLFWInputAdapter::gamepadState(
+    const helios::input::gamepad::GamepadState& GLFWInputAdapter::gamepadState(
         const helios::input::types::Gamepad gamepadId) const noexcept {
 
         return gamepadStates_[

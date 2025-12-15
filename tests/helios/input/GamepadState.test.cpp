@@ -1,9 +1,10 @@
 #include <gtest/gtest.h>
 
-import helios.input.GamepadState;
+import helios.input.gamepad.GamepadState;
 import helios.math.types;
 
 using namespace helios::input;
+using namespace helios::input::gamepad;
 using namespace helios::math;
 
 TEST(GamepadStateTest, DefaultConstructionInitializesToZeroAndButtonsFalse) {

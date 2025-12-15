@@ -17,7 +17,7 @@ export module helios.ext.imgui.widgets.GamepadWidget;
 
 import helios.ext.imgui.ImGuiWidget;
 import helios.input.InputManager;
-import helios.input.GamepadState;
+import helios.input.gamepad.GamepadState;
 import helios.input.types.Gamepad;
 import helios.math.types;
 

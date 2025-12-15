@@ -47,7 +47,7 @@ namespace helios::input {
         return input_->isKeyPressed(key, *observedWin_);
     }
 
-    const GamepadState& InputManager::gamepadState(const helios::input::types::Gamepad gamepadId) const noexcept {
+    const helios::input::gamepad::GamepadState& InputManager::gamepadState(const helios::input::types::Gamepad gamepadId) const noexcept {
         return input_->gamepadState(gamepadId);
     }
 

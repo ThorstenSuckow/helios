@@ -152,7 +152,8 @@ build/examples/<example_name>/Release/
 
 Available examples:
 - **simple_cube_rendering** - Rotating wireframe cube ([Tutorial](examples/simple_cube_rendering/README.md))
-- **game_controller_input** - Gamepad input demonstration
+- **game_controller_input** - Gamepad input demonstration ([Tutorial](examples/game_controller_input/README.md))
+- **spaceship_control** - Gamepad-controlled spaceship with camera follow ([Tutorial](examples/spaceship_control/README.md))
 
 ## Documentation
 

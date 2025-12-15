@@ -10,7 +10,7 @@ module;
 export module helios.input.InputManager;
 
 import helios.input.types.Gamepad;
-import helios.input.GamepadState;
+import helios.input.gamepad.GamepadState;
 import helios.input.InputAdapter;
 import helios.input.types.Key;
 import helios.window.Window;
@@ -147,7 +147,7 @@ export namespace helios::input {
          * @see isConnected()
          * @see poll()
          */
-        [[nodiscard]] const GamepadState& gamepadState(helios::input::types::Gamepad gamepadId) const noexcept;
+        [[nodiscard]] const helios::input::gamepad::GamepadState& gamepadState(helios::input::types::Gamepad gamepadId) const noexcept;
 
         /**
          * @brief Returns true if the specified gamepad is connected, otherwise false.

@@ -22,8 +22,7 @@ export namespace helios::examples::spaceshipControl {
      *
      * @details This widget provides sliders and controls for adjusting all
      * configurable physics parameters of a Spaceship entity, including
-     * rotation speed, movement speed, acceleration, dampening factors,
-     * and deadzone settings.
+     * rotation speed, movement speed, acceleration and dampening factors.
      *
      * Multiple spaceships can be registered and selected via a dropdown.
      */
@@ -171,21 +170,6 @@ export namespace helios::examples::spaceshipControl {
             ImGui::Separator();
             ImGui::Spacing();
 
-            // ========================================
-            // Input Parameters
-            // ========================================
-            ImGui::Text("Input");
-
-            float deadzone = ship->deadzone();
-            if (ImGui::SliderFloat("Deadzone", &deadzone, 0.0f, 0.9f, "%.2f")) {
-                ship->setDeadzone(deadzone);
-            }
-            if (ImGui::IsItemHovered()) {
-                ImGui::SetTooltip("Analog stick deadzone.\nInput below this threshold is ignored.");
-            }
-
-            ImGui::Separator();
-            ImGui::Spacing();
 
             // ========================================
             // Status Display

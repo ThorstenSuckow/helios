@@ -10,7 +10,7 @@ import helios.ext.glfw.app.GLFWApplication;
 import helios.ext.glfw.window.GLFWWindow;
 
 import helios.input.InputManager;
-import helios.input.GamepadState;
+import helios.input.gamepad.GamepadState;
 import helios.input.types.Key;
 import helios.input.types.Gamepad;
 
@@ -51,6 +51,7 @@ import helios.scene.CameraSceneNode;
 
 using namespace helios::scene;
 using namespace helios::input;
+using namespace helios::input::gamepad;
 using namespace helios::input::types;
 using namespace helios::ext::glfw::app;
 using namespace helios::ext::glfw::window;

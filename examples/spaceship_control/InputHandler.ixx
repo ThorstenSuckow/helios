@@ -9,7 +9,7 @@ module;
 export module helios.examples.spaceshipControl.InputHandler;
 
 import helios.engine.game.InputHandler;
-import helios.input.GamepadState;
+import helios.input.gamepad.GamepadState;
 import helios.engine.game.Command;
 import helios.engine.game.InputSnapshot;
 import helios.engine.game.CommandBuffer;

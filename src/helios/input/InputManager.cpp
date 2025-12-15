@@ -55,6 +55,14 @@ namespace helios::input {
         return input_->isConnected(gamepadId);
     }
 
+    const helios::input::InputAdapter& InputManager::inputAdapter() const noexcept {
+        return *input_;
+    }
+
+    helios::input::InputAdapter& InputManager::inputAdapter() noexcept {
+        return *input_;
+    }
+
     unsigned int InputManager::registerGamepads(unsigned int mask) noexcept {
         const unsigned int maxMask = static_cast<int>(pow(helios::input::types::Gamepad::size_, 2) - 1);
         assert(mask <= maxMask && "mask out of bounds");

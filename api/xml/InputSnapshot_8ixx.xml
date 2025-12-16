@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="InputSnapshot_8ixx" kind="file" language="C++">
     <compoundname>InputSnapshot.ixx</compoundname>
-    <includes refid="GamepadState_8ixx" local="no">helios.input.GamepadState</includes>
+    <includes refid="GamepadState_8ixx" local="no">helios.input.gamepad.GamepadState</includes>
     <incdepgraph>
       <node id="1">
         <label>include/helios/engine/game/InputSnapshot.ixx</label>
@@ -11,28 +11,28 @@
         </childnode>
       </node>
       <node id="2">
-        <label>helios.input.GamepadState</label>
+        <label>helios.input.gamepad.GamepadState</label>
         <link refid="GamepadState_8ixx"/>
         <childnode refid="3" relation="include">
         </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>helios.math.types</label>
+        <link refid="helios_2math_2types_2__module_8ixx"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios.util.log.LogManager</label>
+        <link refid="LogManager_8ixx"/>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-      </node>
-      <node id="14">
-        <label>helios.math.types</label>
-        <link refid="helios_2math_2types_2__module_8ixx"/>
-        <childnode refid="14" relation="include">
-        </childnode>
-      </node>
-      <node id="5">
-        <label>helios.util.log.LogManager</label>
-        <link refid="LogManager_8ixx"/>
         <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
@@ -45,53 +45,43 @@
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
       </node>
-      <node id="13">
+      <node id="11">
         <label>helios.util.log.LogSink</label>
         <link refid="LogSink_8ixx"/>
-        <childnode refid="6" relation="include">
+        <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="12">
+      <node id="10">
         <label>helios.util.log.Logger</label>
         <link refid="Logger_8ixx"/>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
-      </node>
-      <node id="3">
-        <label>algorithm</label>
-      </node>
-      <node id="4">
-        <label>helios/helios_config.h</label>
-      </node>
-      <node id="9">
-        <label>memory</label>
-      </node>
-      <node id="10">
-        <label>mutex</label>
-      </node>
-      <node id="6">
-        <label>string</label>
+        <childnode refid="11" relation="include">
+        </childnode>
       </node>
       <node id="7">
-        <label>unordered_map</label>
+        <label>memory</label>
       </node>
       <node id="8">
+        <label>mutex</label>
+      </node>
+      <node id="4">
+        <label>string</label>
+      </node>
+      <node id="5">
+        <label>unordered_map</label>
+      </node>
+      <node id="6">
         <label>unordered_set</label>
       </node>
-      <node id="11">
+      <node id="9">
         <label>vector</label>
       </node>
     </incdepgraph>
@@ -114,7 +104,7 @@
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8game_8InputSnapshot" kindref="compound">helios.engine.game.InputSnapshot</ref>;</highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8input_8GamepadState" kindref="compound">helios.input.GamepadState</ref>;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8input_8gamepad_8GamepadState" kindref="compound">helios.input.gamepad.GamepadState</ref>;</highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1game" kindref="compound">helios::engine::game</ref><sp/>{</highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
@@ -149,14 +139,14 @@
 <codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@todo<sp/>Extend<sp/>to<sp/>support<sp/>multiple<sp/>gamepads,<sp/>keyboard,<sp/>and<sp/>mouse<sp/>input.</highlight></codeline>
 <codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@todo<sp/>Add<sp/>timestamp<sp/>to<sp/>enable<sp/>precise<sp/>replay<sp/>and<sp/>network<sp/>synchronization.</highlight></codeline>
 <codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="45" refid="classhelios_1_1engine_1_1game_1_1InputSnapshot" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1a95914eaa330c5b705907a2f05cc3824c" kindref="member">InputSnapshot</ref><sp/>{</highlight></codeline>
+<codeline lineno="45" refid="classhelios_1_1engine_1_1game_1_1InputSnapshot" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1af5f6e43831a9b8ae1c41c687f6a5c38e" kindref="member">InputSnapshot</ref><sp/>{</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Captured<sp/>gamepad<sp/>state.</highlight></codeline>
 <codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Stored<sp/>as<sp/>a<sp/>const<sp/>member<sp/>to<sp/>enforce<sp/>immutability<sp/>of<sp/>the<sp/>snapshot.</highlight></codeline>
 <codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">helios::input::GamepadState</ref><sp/>gamepadState_;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1GamepadState" kindref="compound">helios::input::gamepad::GamepadState</ref><sp/>gamepadState_;</highlight></codeline>
 <codeline lineno="53"><highlight class="normal"></highlight></codeline>
 <codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="55"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
@@ -168,8 +158,8 @@
 <codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>This<sp/>operation<sp/>is<sp/>noexcept<sp/>and<sp/>cheap<sp/>as<sp/>GamepadState<sp/>is<sp/>a<sp/>small<sp/>struct.</highlight></codeline>
 <codeline lineno="62"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>The<sp/>snapshot<sp/>remains<sp/>valid<sp/>even<sp/>if<sp/>the<sp/>source<sp/>state<sp/>is<sp/>modified<sp/>or<sp/>destroyed.</highlight></codeline>
 <codeline lineno="63"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="64" refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1a95914eaa330c5b705907a2f05cc3824c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1a95914eaa330c5b705907a2f05cc3824c" kindref="member">InputSnapshot</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">helios::input::GamepadState</ref>&amp;<sp/><ref refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1abdd9b7beeb39d85bf8f3fc2937d2fd2b" kindref="member">gamepadState</ref>)<sp/>noexcept</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>gamepadState_(<ref refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1abdd9b7beeb39d85bf8f3fc2937d2fd2b" kindref="member">gamepadState</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="64" refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1af5f6e43831a9b8ae1c41c687f6a5c38e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1af5f6e43831a9b8ae1c41c687f6a5c38e" kindref="member">InputSnapshot</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1GamepadState" kindref="compound">helios::input::gamepad::GamepadState</ref>&amp;<sp/><ref refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1a6d9e2aca7dd270d34ba434f2a768d488" kindref="member">gamepadState</ref>)<sp/>noexcept</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>gamepadState_(<ref refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1a6d9e2aca7dd270d34ba434f2a768d488" kindref="member">gamepadState</ref>)<sp/>{</highlight></codeline>
 <codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="67"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
@@ -179,7 +169,7 @@
 <codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>of<sp/>this<sp/>InputSnapshot.<sp/>The<sp/>state<sp/>is<sp/>immutable<sp/>and<sp/>reflects<sp/>input<sp/>at</highlight></codeline>
 <codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>the<sp/>time<sp/>of<sp/>snapshot<sp/>creation.</highlight></codeline>
 <codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="75" refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1abdd9b7beeb39d85bf8f3fc2937d2fd2b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">helios::input::GamepadState</ref>&amp;<sp/><ref refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1abdd9b7beeb39d85bf8f3fc2937d2fd2b" kindref="member">gamepadState</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="75" refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1a6d9e2aca7dd270d34ba434f2a768d488" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1GamepadState" kindref="compound">helios::input::gamepad::GamepadState</ref>&amp;<sp/><ref refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1a6d9e2aca7dd270d34ba434f2a768d488" kindref="member">gamepadState</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
 <codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>gamepadState_;</highlight></codeline>
 <codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>

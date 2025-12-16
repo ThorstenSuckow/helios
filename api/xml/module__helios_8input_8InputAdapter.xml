@@ -19,24 +19,45 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/input/InputAdapter.ixx" line="29" column="55" bodyfile="include/helios/input/InputAdapter.ixx" bodystart="29" bodyend="-1"/>
+        <location file="include/helios/input/InputAdapter.ixx" line="46" column="55" bodyfile="include/helios/input/InputAdapter.ixx" bodystart="46" bodyend="-1"/>
       </memberdef>
-    </sectiondef>
-    <sectiondef kind="func">
-      <memberdef kind="function" id="classhelios_1_1input_1_1InputAdapter_1a9d0ad5cfffd1efd405cc0b4aa4ce9c79" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type></type>
-        <definition>helios::input::InputAdapter::InputAdapter</definition>
-        <argsstring>()=default</argsstring>
-        <name>InputAdapter</name>
-        <qualifiedname>helios::input::InputAdapter::InputAdapter</qualifiedname>
+      <memberdef kind="variable" id="classhelios_1_1input_1_1InputAdapter_1a7864654aa3988de5f27f625c7f743e3c" prot="protected" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy" kindref="compound">helios::input::gamepad::DeadzoneStrategy</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;helios::input::gamepad::DeadzoneStrategy&gt; helios::input::InputAdapter::deadzoneStrategy_</definition>
+        <argsstring></argsstring>
+        <name>deadzoneStrategy_</name>
+        <qualifiedname>helios::input::InputAdapter::deadzoneStrategy_</qualifiedname>
         <briefdescription>
+<para>Strategy used to normalize analog stick input within deadzones. </para>
         </briefdescription>
         <detaileddescription>
+<para>Ownership is held by the adapter. Applied during gamepad state updates to filter out hardware drift and rescale input values. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/input/InputAdapter.ixx" line="33" column="9"/>
+        <location file="include/helios/input/InputAdapter.ixx" line="54" column="25" bodyfile="include/helios/input/InputAdapter.ixx" bodystart="54" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1input_1_1InputAdapter_1af98fdb57e1005ed248c09a11f4020040" compoundref="InputAdapter_8ixx" startline="78" endline="80">helios::input::InputAdapter::InputAdapter</referencedby>
       </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1input_1_1InputAdapter_1ad33c6c602987f39854bebac0826387ee" prot="protected" static="no" mutable="no">
+        <type>std::array&lt; <ref refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings" kindref="compound">helios::input::gamepad::GamepadSettings</ref>, std::to_underlying(<ref refid="namespacehelios_1_1input_1_1types_1a963e220296531c047308439c3425bcc5a501d3c1d3d31f70db984de48396437f6" kindref="member">helios::input::types::Gamepad::size_</ref>)&gt;</type>
+        <definition>std::array&lt;helios::input::gamepad::GamepadSettings, std::to_underlying(helios::input::types::Gamepad::size_)&gt; helios::input::InputAdapter::gamepadSettings_</definition>
+        <argsstring></argsstring>
+        <name>gamepadSettings_</name>
+        <qualifiedname>helios::input::InputAdapter::gamepadSettings_</qualifiedname>
+        <initializer>= {}</initializer>
+        <briefdescription>
+<para>Per-gamepad configuration settings. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Array indexed by gamepad ID, storing deadzone thresholds and axis inversion flags for each connected controller. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/input/InputAdapter.ixx" line="62" column="20" bodyfile="include/helios/input/InputAdapter.ixx" bodystart="62" bodyend="62"/>
+        <referencedby refid="classhelios_1_1input_1_1InputAdapter_1a79d74e9e0dbe1bc6da8eb6eecfee232f" compoundref="InputAdapter_8ixx" startline="158" endline="163">helios::input::InputAdapter::gamepadSettings</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
       <memberdef kind="function" id="classhelios_1_1input_1_1InputAdapter_1ac0e01bc42c45d7bce722836e162259bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
         <definition>virtual helios::input::InputAdapter::~InputAdapter</definition>
@@ -44,12 +65,44 @@
         <name>~InputAdapter</name>
         <qualifiedname>helios::input::InputAdapter::~InputAdapter</qualifiedname>
         <briefdescription>
+<para>Virtual destructor for proper polymorphic cleanup. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/input/InputAdapter.ixx" line="35" column="17"/>
+        <location file="include/helios/input/InputAdapter.ixx" line="70" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1input_1_1InputAdapter_1af98fdb57e1005ed248c09a11f4020040" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::input::InputAdapter::InputAdapter</definition>
+        <argsstring>(std::unique_ptr&lt; helios::input::gamepad::DeadzoneStrategy &gt; deadzoneStrategy)</argsstring>
+        <name>InputAdapter</name>
+        <qualifiedname>helios::input::InputAdapter::InputAdapter</qualifiedname>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy" kindref="compound">helios::input::gamepad::DeadzoneStrategy</ref> &gt;</type>
+          <declname>deadzoneStrategy</declname>
+        </param>
+        <briefdescription>
+<para>Constructs an <ref refid="classhelios_1_1input_1_1InputAdapter" kindref="compound">InputAdapter</ref> with the specified deadzone strategy. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>deadzoneStrategy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The strategy used for analog stick normalization. Ownership is transferred to this adapter. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/input/InputAdapter.ixx" line="78" column="18" bodyfile="include/helios/input/InputAdapter.ixx" bodystart="78" bodyend="80"/>
+        <references refid="classhelios_1_1input_1_1InputAdapter_1a7864654aa3988de5f27f625c7f743e3c" compoundref="InputAdapter_8ixx" startline="54">helios::input::InputAdapter::deadzoneStrategy_</references>
+        <referencedby refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1aafecdea13a5329c45a8e35686371a108" compoundref="GLFWInputAdapter_8ixx" startline="61" endline="63">helios::ext::glfw::input::GLFWInputAdapter::GLFWInputAdapter</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1InputAdapter_1a8896a83d1b86578aa3c1f13be1c5e63f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
         <type>bool</type>
@@ -93,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/input/InputAdapter.ixx" line="45" column="23"/>
+        <location file="include/helios/input/InputAdapter.ixx" line="90" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1InputAdapter_1a3a5e1e0e577c8af5877f10d9578d4875" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
         <type>bool</type>
@@ -101,6 +154,7 @@
         <argsstring>(helios::input::types::Gamepad gamepadId) const noexcept=0</argsstring>
         <name>isConnected</name>
         <qualifiedname>helios::input::InputAdapter::isConnected</qualifiedname>
+        <reimplementedby refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a703e9e04a1554cebea6f1d1924c034dc">isConnected</reimplementedby>
         <param>
           <type><ref refid="namespacehelios_1_1input_1_1types_1a4dd39c1a113edbe36b92b088d8dbf2ff" kindref="member">helios::input::types::Gamepad</ref></type>
           <declname>gamepadId</declname>
@@ -124,7 +178,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/input/InputAdapter.ixx" line="58" column="23"/>
+        <location file="include/helios/input/InputAdapter.ixx" line="103" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1input_1_1InputAdapter_1a5b3852c685d7321d2faeb2de79aad538" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
         <type>void</type>
@@ -132,21 +186,22 @@
         <argsstring>(unsigned int gamepadMask) noexcept=0</argsstring>
         <name>updateGamepadState</name>
         <qualifiedname>helios::input::InputAdapter::updateGamepadState</qualifiedname>
+        <reimplementedby refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1af65a6a8e99aac0f6867b6456d0849f9a">updateGamepadState</reimplementedby>
         <param>
           <type>unsigned int</type>
           <declname>gamepadMask</declname>
         </param>
         <briefdescription>
-<para>Updates the <ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">GamepadState</ref> objects with the values queried from the underlying Gamepad identified by the specified mask. </para>
+<para>Updates the GamepadState objects with the values queried from the underlying Gamepad identified by the specified mask. </para>
         </briefdescription>
         <detaileddescription>
-<para>Updates the <ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">GamepadState</ref> objects with the current values of the underlying hardware. If querying the underlying hardware fails, this method will update the <ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">GamepadState</ref> values to a valid initial state (no movement or interaction). Implementations should use `isConnected()` to check whether the current values of a `GamepadState` object can be trusted.</para>
+<para>Updates the GamepadState objects with the current values of the underlying hardware. If querying the underlying hardware fails, this method will update the GamepadState values to a valid initial state (no movement or interaction). Implementations should use `isConnected()` to check whether the current values of a `GamepadState` object can be trusted.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>gamepadMask</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A bitmask representing all <ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">GamepadState</ref> objects to update, e.g. Gamepad::ONE | Gamepad::TWO... </para>
+<para>A bitmask representing all GamepadState objects to update, e.g. Gamepad::ONE | Gamepad::TWO... </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -154,14 +209,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/input/InputAdapter.ixx" line="74" column="22"/>
+        <location file="include/helios/input/InputAdapter.ixx" line="119" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1input_1_1InputAdapter_1ae64e5b1f78b57e9cce3c092c379605d6" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
-        <type>const GamepadState &amp;</type>
-        <definition>virtual const GamepadState &amp; helios::input::InputAdapter::gamepadState</definition>
+      <memberdef kind="function" id="classhelios_1_1input_1_1InputAdapter_1aa636d6f6f740d416d8176234457272d2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>const <ref refid="classhelios_1_1input_1_1gamepad_1_1GamepadState" kindref="compound">helios::input::gamepad::GamepadState</ref> &amp;</type>
+        <definition>virtual const helios::input::gamepad::GamepadState &amp; helios::input::InputAdapter::gamepadState</definition>
         <argsstring>(helios::input::types::Gamepad gamepadId) const noexcept=0</argsstring>
         <name>gamepadState</name>
         <qualifiedname>helios::input::InputAdapter::gamepadState</qualifiedname>
+        <reimplementedby refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a281b70c6d8c50731c843c86e5e5e2942">gamepadState</reimplementedby>
         <param>
           <type><ref refid="namespacehelios_1_1input_1_1types_1a4dd39c1a113edbe36b92b088d8dbf2ff" kindref="member">helios::input::types::Gamepad</ref></type>
           <declname>gamepadId</declname>
@@ -170,7 +226,7 @@
 <para>Returns a const ref to the GamepadState-object for the specified gamepadId. </para>
         </briefdescription>
         <detaileddescription>
-<para>Implementing APIs can call this method in each frame to retrieve the current state for the gamepad, as computed by <ref refid="classhelios_1_1input_1_1InputAdapter_1a5b3852c685d7321d2faeb2de79aad538" kindref="member">updateGamepadState()</ref>. This method guarantees that for a given gamepadId, a single <ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">GamepadState</ref> object is reused across calls, avoiding re-instantiation overhead.</para>
+<para>Implementing APIs can call this method in each frame to retrieve the current state for the gamepad, as computed by <ref refid="classhelios_1_1input_1_1InputAdapter_1a5b3852c685d7321d2faeb2de79aad538" kindref="member">updateGamepadState()</ref>. This method guarantees that for a given gamepadId, a single GamepadState object is reused across calls, avoiding re-instantiation overhead.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>gamepadId</parametername>
@@ -180,7 +236,7 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>Returns a const ref to the <ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">GamepadState</ref>. If the <ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">GamepadState</ref> was never queried before, or if a recent call to updateGamepadState did not succeed, the values of the <ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">GamepadState</ref> will not hold representative values. Implementing APIs should verify the availability of the Gamepad by calling <ref refid="classhelios_1_1input_1_1InputAdapter_1a3a5e1e0e577c8af5877f10d9578d4875" kindref="member">isConnected()</ref></para>
+<simplesect kind="return"><para>Returns a const ref to the GamepadState. If the GamepadState was never queried before, or if a recent call to updateGamepadState did not succeed, the values of the GamepadState will not hold representative values. Implementing APIs should verify the availability of the Gamepad by calling <ref refid="classhelios_1_1input_1_1InputAdapter_1a3a5e1e0e577c8af5877f10d9578d4875" kindref="member">isConnected()</ref></para>
 </simplesect>
 <simplesect kind="see"><para><ref refid="classhelios_1_1input_1_1InputAdapter_1a5b3852c685d7321d2faeb2de79aad538" kindref="member">updateGamepadState</ref> </para>
 </simplesect>
@@ -190,13 +246,48 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/input/InputAdapter.ixx" line="95" column="37"/>
+        <location file="include/helios/input/InputAdapter.ixx" line="140" column="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1input_1_1InputAdapter_1a79d74e9e0dbe1bc6da8eb6eecfee232f" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings" kindref="compound">helios::input::gamepad::GamepadSettings</ref> &amp;</type>
+        <definition>helios::input::gamepad::GamepadSettings &amp; helios::input::InputAdapter::gamepadSettings</definition>
+        <argsstring>(helios::input::types::Gamepad gamepadId) noexcept</argsstring>
+        <name>gamepadSettings</name>
+        <qualifiedname>helios::input::InputAdapter::gamepadSettings</qualifiedname>
+        <param>
+          <type><ref refid="namespacehelios_1_1input_1_1types_1a4dd39c1a113edbe36b92b088d8dbf2ff" kindref="member">helios::input::types::Gamepad</ref></type>
+          <declname>gamepadId</declname>
+        </param>
+        <briefdescription>
+<para>Returns the configuration settings for the specified gamepad. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Provides access to the mutable settings object for the given gamepad, allowing runtime configuration of deadzone thresholds and axis inversion. Changes to the returned settings are applied during subsequent calls to `updateGamepadState()`.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gamepadId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The gamepad to retrieve settings for.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to the mutable GamepadSettings for the specified gamepad.</para>
+</simplesect>
+<simplesect kind="see"><para>GamepadSettings for available configuration options. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/input/InputAdapter.ixx" line="158" column="50" bodyfile="include/helios/input/InputAdapter.ixx" bodystart="158" bodyend="163"/>
+        <references refid="classhelios_1_1input_1_1InputAdapter_1ad33c6c602987f39854bebac0826387ee" compoundref="InputAdapter_8ixx" startline="62" endline="62">helios::input::InputAdapter::gamepadSettings_</references>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="include/helios/input/InputAdapter.ixx" line="7" column="15"/>
+    <location file="include/helios/input/InputAdapter.ixx" line="12" column="15"/>
   </compounddef>
 </doxygen>

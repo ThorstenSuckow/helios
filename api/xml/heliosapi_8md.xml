@@ -52,7 +52,7 @@
 <codeline><highlight class="normal">├──<sp/>imgui<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>ImGui<sp/>integration<sp/>for<sp/>debug<sp/>overlays</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>widgets<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Ready-to-use<sp/>debug<sp/>widgets</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>├──<sp/>LogWidget<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Log<sp/>console<sp/>with<sp/>filtering</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>├──<sp/>GamepadWidget<sp/><sp/><sp/><sp/><sp/>#<sp/>Gamepad<sp/>state<sp/>visualizer</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>├──<sp/>GamepadWidget<sp/><sp/><sp/><sp/><sp/>#<sp/>Gamepad<sp/>state<sp/>visualizer<sp/>with<sp/>settings</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>├──<sp/>CameraWidget<sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Camera<sp/>parameter<sp/>control</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>├──<sp/>FpsWidget<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Frame<sp/>rate<sp/>display</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>└──<sp/>MainMenuWidget<sp/><sp/><sp/><sp/>#<sp/>Application<sp/>settings<sp/>menu</highlight></codeline>
@@ -169,6 +169,9 @@
 <codeline><highlight class="normal">-<sp/>`InputManager`<sp/>-<sp/>Central<sp/>input<sp/>coordinator</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>`InputAdapter`<sp/>-<sp/>Platform-specific<sp/>input<sp/>implementation</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>`GamepadState`<sp/>-<sp/>Current<sp/>state<sp/>of<sp/>a<sp/>gamepad</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`GamepadSettings`<sp/>-<sp/>Per-controller<sp/>configuration<sp/>(deadzone,<sp/>axis<sp/>inversion)</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`DeadzoneStrategy`<sp/>-<sp/>Abstract<sp/>interface<sp/>for<sp/>input<sp/>normalization</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`RadialDeadzoneStrategy`<sp/>-<sp/>Circular<sp/>deadzone<sp/>implementation</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">**Example:**</highlight></codeline>
 <codeline><highlight class="normal">```cpp</highlight></codeline>
@@ -191,6 +194,22 @@
 <codeline><highlight class="normal">//<sp/>Analog<sp/>sticks</highlight></codeline>
 <codeline><highlight class="normal">auto<sp/>leftStick<sp/>=<sp/>state.left();<sp/><sp/><sp/>//<sp/>vec2f</highlight></codeline>
 <codeline><highlight class="normal">auto<sp/>rightStick<sp/>=<sp/>state.right();<sp/>//<sp/>vec2f</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Gamepad<sp/>Configuration:**</highlight></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.input.gamepad;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Access<sp/>settings<sp/>through<sp/>InputManager</highlight></codeline>
+<codeline><highlight class="normal">auto&amp;<sp/>settings<sp/>=<sp/>inputManager.inputAdapter().gamepadSettings(Gamepad::ONE);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Configure<sp/>deadzone<sp/>(0.0<sp/>to<sp/>0.9)</highlight></codeline>
+<codeline><highlight class="normal">settings.setLeftStickDeadzone(0.15f)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.setRightStickDeadzone(0.10f);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Invert<sp/>axes<sp/>(useful<sp/>for<sp/>flight<sp/>controls)</highlight></codeline>
+<codeline><highlight class="normal">settings.setInvertLeftY(true);</highlight></codeline>
+<codeline><highlight class="normal">settings.setInvertRightY(true);</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">###<sp/>5.<sp/>Logging<sp/>System</highlight></codeline>
@@ -231,7 +250,7 @@
 <codeline><highlight class="normal">**Key<sp/>Classes:**</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>`ImGuiOverlay`<sp/>-<sp/>Widget<sp/>manager<sp/>with<sp/>DockSpace<sp/>support</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>`LogWidget`<sp/>-<sp/>Scrollable<sp/>log<sp/>console<sp/>with<sp/>scope<sp/>filtering</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>`GamepadWidget`<sp/>-<sp/>Real-time<sp/>gamepad<sp/>state<sp/>visualizer</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`GamepadWidget`<sp/>-<sp/>Real-time<sp/>gamepad<sp/>state<sp/>visualizer<sp/>with<sp/>integrated<sp/>settings<sp/>panel</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>`MainMenuWidget`<sp/>-<sp/>Application<sp/>settings<sp/>(transparency,<sp/>docking,<sp/>style)</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">**Example:**</highlight></codeline>

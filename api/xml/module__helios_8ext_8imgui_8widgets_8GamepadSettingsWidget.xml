@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8ext_8imgui_8widgets_8GamepadSettingsWidget" kind="module">
+    <compoundname>helios.ext.imgui.widgets.GamepadSettingsWidget</compoundname>
+    <innerfile refid="GamepadSettingsWidget_8ixx">GamepadSettingsWidget.ixx</innerfile>
+    <innerclass refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget" prot="public">helios::ext::imgui::widgets::GamepadSettingsWidget</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget_1a1912bf43c05e991e20b8016f6fd3b27e" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1input_1_1InputAdapter" kindref="compound">helios::input::InputAdapter</ref> *</type>
+        <definition>helios::input::InputAdapter* helios::ext::imgui::widgets::GamepadSettingsWidget::inputAdapter_</definition>
+        <argsstring></argsstring>
+        <name>inputAdapter_</name>
+        <qualifiedname>helios::ext::imgui::widgets::GamepadSettingsWidget::inputAdapter_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Pointer to the InputAdapter used to access gamepad settings. Non-owning pointer; must be valid for the lifetime of this widget. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/widgets/GamepadSettingsWidget.ixx" line="46" column="37" bodyfile="include/ext/imgui/widgets/GamepadSettingsWidget.ixx" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget_1a49dff64b55a2154dd25b079aeb414a18" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int helios::ext::imgui::widgets::GamepadSettingsWidget::selectedGamepadIndex_</definition>
+        <argsstring></argsstring>
+        <name>selectedGamepadIndex_</name>
+        <qualifiedname>helios::ext::imgui::widgets::GamepadSettingsWidget::selectedGamepadIndex_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>The currently selected gamepad index in the UI combo box (0-3). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/widgets/GamepadSettingsWidget.ixx" line="51" column="13" bodyfile="include/ext/imgui/widgets/GamepadSettingsWidget.ixx" bodystart="51" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget_1a9faf638e10986886c0bf058f3d352d83" prot="private" static="yes" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespacehelios_1_1input_1_1types_1a4dd39c1a113edbe36b92b088d8dbf2ff" kindref="member">helios::input::types::Gamepad</ref></type>
+        <definition>static helios::input::types::Gamepad helios::ext::imgui::widgets::GamepadSettingsWidget::indexToId</definition>
+        <argsstring>(int index) noexcept</argsstring>
+        <name>indexToId</name>
+        <qualifiedname>helios::ext::imgui::widgets::GamepadSettingsWidget::indexToId</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Helper to map an integer index (0-3) to a Gamepad enum ID. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index selected in the UI.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The corresponding Gamepad enum value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/widgets/GamepadSettingsWidget.ixx" line="60" column="47" bodyfile="include/ext/imgui/widgets/GamepadSettingsWidget.ixx" bodystart="60" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget_1a6279a8fc3504a82c4c408b363f5d81c1" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::ext::imgui::widgets::GamepadSettingsWidget::GamepadSettingsWidget</definition>
+        <argsstring>(helios::input::InputAdapter *inputAdapter)</argsstring>
+        <name>GamepadSettingsWidget</name>
+        <qualifiedname>helios::ext::imgui::widgets::GamepadSettingsWidget::GamepadSettingsWidget</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1input_1_1InputAdapter" kindref="compound">helios::input::InputAdapter</ref> *</type>
+          <declname>inputAdapter</declname>
+        </param>
+        <briefdescription>
+<para>Constructs the <ref refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget" kindref="compound">GamepadSettingsWidget</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>inputAdapter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the InputAdapter to configure. Pass nullptr to render a disabled widget. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/widgets/GamepadSettingsWidget.ixx" line="78" column="18" bodyfile="include/ext/imgui/widgets/GamepadSettingsWidget.ixx" bodystart="78" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget_1a4bf6248a0eac6b458e6a3962eba5a134" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::ext::imgui::widgets::GamepadSettingsWidget::draw</definition>
+        <argsstring>() override</argsstring>
+        <name>draw</name>
+        <qualifiedname>helios::ext::imgui::widgets::GamepadSettingsWidget::draw</qualifiedname>
+        <reimplements refid="classhelios_1_1ext_1_1imgui_1_1ImGuiWidget_1a0ad065b003992409713a4e4c306b7499">draw</reimplements>
+        <briefdescription>
+<para>Renders the gamepad settings configuration interface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/imgui/widgets/GamepadSettingsWidget.ixx" line="84" column="14" bodyfile="include/ext/imgui/widgets/GamepadSettingsWidget.ixx" bodystart="84" bodyend="182"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/ext/imgui/widgets/GamepadSettingsWidget.ixx" line="11" column="15"/>
+  </compounddef>
+</doxygen>

@@ -5,24 +5,55 @@
     <innerfile refid="GLFWInputAdapter_8ixx">GLFWInputAdapter.ixx</innerfile>
     <innerclass refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter" prot="public">helios::ext::glfw::input::GLFWInputAdapter</innerclass>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a2adea2135cad571616b29af5ffb645cb" prot="private" static="no" mutable="no">
-        <type>std::array&lt; <ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">helios::input::GamepadState</ref>, std::to_underlying(<ref refid="namespacehelios_1_1input_1_1types_1a963e220296531c047308439c3425bcc5a501d3c1d3d31f70db984de48396437f6" kindref="member">helios::input::types::Gamepad::size_</ref>)&gt;</type>
-        <definition>std::array&lt;helios::input::GamepadState, std::to_underlying(helios::input::types::Gamepad::size_)&gt; helios::ext::glfw::input::GLFWInputAdapter::gamepadStates_</definition>
+      <memberdef kind="variable" id="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a01262068ef9519701f43cab7cfd18fdc" prot="private" static="no" mutable="no">
+        <type>std::array&lt; <ref refid="classhelios_1_1input_1_1gamepad_1_1GamepadState" kindref="compound">helios::input::gamepad::GamepadState</ref>, std::to_underlying(<ref refid="namespacehelios_1_1input_1_1types_1a963e220296531c047308439c3425bcc5a501d3c1d3d31f70db984de48396437f6" kindref="member">helios::input::types::Gamepad::size_</ref>)&gt;</type>
+        <definition>std::array&lt;helios::input::gamepad::GamepadState, std::to_underlying(helios::input::types::Gamepad::size_)&gt; helios::ext::glfw::input::GLFWInputAdapter::gamepadStates_</definition>
         <argsstring></argsstring>
         <name>gamepadStates_</name>
         <qualifiedname>helios::ext::glfw::input::GLFWInputAdapter::gamepadStates_</qualifiedname>
         <initializer>= {}</initializer>
         <briefdescription>
-<para>The const array to reference GamepadState objects. </para>
+<para>Array storing the current state of each connected gamepad. </para>
         </briefdescription>
         <detaileddescription>
+<para>Indexed by gamepad ID, each entry holds the most recently polled button and axis states for that controller. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/input/GLFWInputAdapter.ixx" line="38" column="20" bodyfile="include/ext/glfw/input/GLFWInputAdapter.ixx" bodystart="38" bodyend="38"/>
+        <location file="include/ext/glfw/input/GLFWInputAdapter.ixx" line="51" column="20" bodyfile="include/ext/glfw/input/GLFWInputAdapter.ixx" bodystart="51" bodyend="51"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1aafecdea13a5329c45a8e35686371a108" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::ext::glfw::input::GLFWInputAdapter::GLFWInputAdapter</definition>
+        <argsstring>(std::unique_ptr&lt; helios::input::gamepad::DeadzoneStrategy &gt; deadzoneStrategy)</argsstring>
+        <name>GLFWInputAdapter</name>
+        <qualifiedname>helios::ext::glfw::input::GLFWInputAdapter::GLFWInputAdapter</qualifiedname>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy" kindref="compound">helios::input::gamepad::DeadzoneStrategy</ref> &gt;</type>
+          <declname>deadzoneStrategy</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter" kindref="compound">GLFWInputAdapter</ref> with the specified deadzone strategy. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>deadzoneStrategy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The strategy used for analog stick normalization. Ownership is transferred to the base InputAdapter. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/ext/glfw/input/GLFWInputAdapter.ixx" line="61" column="9" bodyfile="include/ext/glfw/input/GLFWInputAdapter.ixx" bodystart="61" bodyend="63"/>
+        <references refid="classhelios_1_1input_1_1InputAdapter_1af98fdb57e1005ed248c09a11f4020040" compoundref="InputAdapter_8ixx" startline="78" endline="80">helios::input::InputAdapter::InputAdapter</references>
+      </memberdef>
       <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a7f04d04c60d95fc596929ed1b2bc345c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>bool</type>
         <definition>bool helios::ext::glfw::input::GLFWInputAdapter::isKeyPressed</definition>
@@ -39,7 +70,7 @@
           <declname>win</declname>
         </param>
         <briefdescription>
-<para>Checks if a specific key is currently pressed for the given window. If the specified window is not of tyoe GLFWWindow, this method always returns false. </para>
+<para>Checks if a specific key is currently pressed for the given window. If the specified window is not of type GLFWWindow, this method always returns false. </para>
         </briefdescription>
         <detaileddescription>
 <para>Returns true if the key is pressed, otherwise false.   </para>
@@ -66,7 +97,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/input/GLFWInputAdapter.ixx" line="47" column="15"/>
+        <location file="include/ext/glfw/input/GLFWInputAdapter.ixx" line="71" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a611ca19866aa15359d01b8a8ef791c84" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -109,14 +140,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/input/GLFWInputAdapter.ixx" line="58" column="15"/>
+        <location file="include/ext/glfw/input/GLFWInputAdapter.ixx" line="82" column="15"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a9c0e5c21620b816d973db51d72950cd2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>const <ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">helios::input::GamepadState</ref> &amp;</type>
-        <definition>const helios::input::GamepadState &amp; helios::ext::glfw::input::GLFWInputAdapter::GLFWInputAdapter::gamepadState</definition>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a281b70c6d8c50731c843c86e5e5e2942" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>const <ref refid="classhelios_1_1input_1_1gamepad_1_1GamepadState" kindref="compound">helios::input::gamepad::GamepadState</ref> &amp;</type>
+        <definition>const helios::input::gamepad::GamepadState &amp; helios::ext::glfw::input::GLFWInputAdapter::gamepadState</definition>
         <argsstring>(helios::input::types::Gamepad gamepadId) const noexcept override</argsstring>
-        <name>GLFWInputAdapter::gamepadState</name>
+        <name>gamepadState</name>
         <qualifiedname>helios::ext::glfw::input::GLFWInputAdapter::gamepadState</qualifiedname>
+        <reimplements refid="classhelios_1_1input_1_1InputAdapter_1aa636d6f6f740d416d8176234457272d2">gamepadState</reimplements>
         <param>
           <type><ref refid="namespacehelios_1_1input_1_1types_1a4dd39c1a113edbe36b92b088d8dbf2ff" kindref="member">helios::input::types::Gamepad</ref></type>
           <declname>gamepadId</declname>
@@ -125,7 +157,7 @@
 <para>Returns a const ref to the GamepadState-object for the specified gamepadId.    </para>
         </briefdescription>
         <detaileddescription>
-<para>Implementing APIs can call this method in each frame to retrieve the current state for the gamepad, as computed by <ref refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a1334fd6083a02d0e07b889bba4578211" kindref="member">updateGamepadState()</ref>. This method guarantees that for a given gamepadId, a single GamepadState object is reused across calls, avoiding re-instantiation overhead.</para>
+<para>Implementing APIs can call this method in each frame to retrieve the current state for the gamepad, as computed by <ref refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1af65a6a8e99aac0f6867b6456d0849f9a" kindref="member">updateGamepadState()</ref>. This method guarantees that for a given gamepadId, a single GamepadState object is reused across calls, avoiding re-instantiation overhead.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>gamepadId</parametername>
@@ -135,24 +167,25 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>Returns a const ref to the GamepadState. If the GamepadState was never queried before, or if a recent call to updateGamepadState did not succeed, the values of the GamepadState will not hold representative values. Implementing APIs should verify the availability of the Gamepad by calling <ref refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1acc76f54185f1a1c1de91a0cad400a806" kindref="member">isConnected()</ref></para>
+<simplesect kind="return"><para>Returns a const ref to the GamepadState. If the GamepadState was never queried before, or if a recent call to updateGamepadState did not succeed, the values of the GamepadState will not hold representative values. Implementing APIs should verify the availability of the Gamepad by calling <ref refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a703e9e04a1554cebea6f1d1924c034dc" kindref="member">isConnected()</ref></para>
 </simplesect>
-<simplesect kind="see"><para><ref refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a1334fd6083a02d0e07b889bba4578211" kindref="member">updateGamepadState</ref> </para>
+<simplesect kind="see"><para><ref refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1af65a6a8e99aac0f6867b6456d0849f9a" kindref="member">updateGamepadState</ref> </para>
 </simplesect>
-<simplesect kind="see"><para><ref refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1acc76f54185f1a1c1de91a0cad400a806" kindref="member">isConnected</ref>    </para>
+<simplesect kind="see"><para><ref refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a703e9e04a1554cebea6f1d1924c034dc" kindref="member">isConnected</ref>    </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/input/GLFWInputAdapter.ixx" line="64" column="44"/>
+        <location file="include/ext/glfw/input/GLFWInputAdapter.ixx" line="88" column="53"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a1334fd6083a02d0e07b889bba4578211" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1af65a6a8e99aac0f6867b6456d0849f9a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>void</type>
-        <definition>void helios::ext::glfw::input::GLFWInputAdapter::GLFWInputAdapter::updateGamepadState</definition>
+        <definition>void helios::ext::glfw::input::GLFWInputAdapter::updateGamepadState</definition>
         <argsstring>(unsigned int mask) noexcept override</argsstring>
-        <name>GLFWInputAdapter::updateGamepadState</name>
+        <name>updateGamepadState</name>
         <qualifiedname>helios::ext::glfw::input::GLFWInputAdapter::updateGamepadState</qualifiedname>
+        <reimplements refid="classhelios_1_1input_1_1InputAdapter_1a5b3852c685d7321d2faeb2de79aad538">updateGamepadState</reimplements>
         <param>
           <type>unsigned int</type>
           <declname>mask</declname>
@@ -175,14 +208,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/input/GLFWInputAdapter.ixx" line="70" column="14"/>
+        <location file="include/ext/glfw/input/GLFWInputAdapter.ixx" line="94" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1acc76f54185f1a1c1de91a0cad400a806" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a703e9e04a1554cebea6f1d1924c034dc" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>bool</type>
-        <definition>bool helios::ext::glfw::input::GLFWInputAdapter::GLFWInputAdapter::isConnected</definition>
+        <definition>bool helios::ext::glfw::input::GLFWInputAdapter::isConnected</definition>
         <argsstring>(helios::input::types::Gamepad gamepadId) const noexcept override</argsstring>
-        <name>GLFWInputAdapter::isConnected</name>
+        <name>isConnected</name>
         <qualifiedname>helios::ext::glfw::input::GLFWInputAdapter::isConnected</qualifiedname>
+        <reimplements refid="classhelios_1_1input_1_1InputAdapter_1a3a5e1e0e577c8af5877f10d9578d4875">isConnected</reimplements>
         <param>
           <type><ref refid="namespacehelios_1_1input_1_1types_1a4dd39c1a113edbe36b92b088d8dbf2ff" kindref="member">helios::input::types::Gamepad</ref></type>
           <declname>gamepadId</declname>
@@ -206,13 +240,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/ext/glfw/input/GLFWInputAdapter.ixx" line="76" column="15"/>
+        <location file="include/ext/glfw/input/GLFWInputAdapter.ixx" line="99" column="15"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="include/ext/glfw/input/GLFWInputAdapter.ixx" line="9" column="15"/>
+    <location file="include/ext/glfw/input/GLFWInputAdapter.ixx" line="10" column="15"/>
   </compounddef>
 </doxygen>

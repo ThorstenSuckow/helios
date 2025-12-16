@@ -16,7 +16,7 @@ var searchData=
   ['mat4i_13',['mat4i',['../namespacehelios_1_1math.html#abfde83491c8def2cca7e8816bb9a0075',1,'helios::math']]],
   ['material_14',['Material',['../classhelios_1_1rendering_1_1model_1_1Material.html',1,'helios::rendering::model::Material'],['../classhelios_1_1rendering_1_1model_1_1Material.html#a7db1883309702d67ed3834c071173bdb',1,'helios::rendering::model::Material::Material()=default'],['../classhelios_1_1rendering_1_1model_1_1Material.html#a23481bde5a56c1d2d4a9c8bca57bc7a1',1,'helios::rendering::model::Material::Material(std::shared_ptr&lt; const helios::rendering::shader::Shader &gt; shader, std::shared_ptr&lt; const helios::rendering::model::config::MaterialProperties &gt; materialProperties)']]],
   ['material_15',['material',['../classhelios_1_1rendering_1_1RenderPrototype.html#ac880fb4b9658ff4e2134c04b2136f668',1,'helios::rendering::RenderPrototype']]],
-  ['material_20system_16',['3. Material System',['../index.html#autotoc_md102',1,'']]],
+  ['material_20system_16',['3. Material System',['../index.html#autotoc_md104',1,'']]],
   ['material_2eixx_17',['Material.ixx',['../Material_8ixx.html',1,'']]],
   ['materialbasecolor_18',['MaterialBaseColor',['../namespacehelios_1_1rendering_1_1shader.html#a0a320e03bcf6f60bc90428c450dfb329aaaf9abb4ecf0d3618eac3e02b50ab5a7',1,'helios::rendering::shader']]],
   ['materialoverride_19',['materialOverride',['../classhelios_1_1rendering_1_1Renderable.html#a9ff2cf3f0474d419477027dc81c86165',1,'helios::rendering::Renderable::materialOverride() const noexcept'],['../classhelios_1_1rendering_1_1Renderable.html#a11455b5220d78030b1ddf5dd9abbbd7c',1,'helios::rendering::Renderable::materialOverride() noexcept']]],
@@ -40,13 +40,13 @@ var searchData=
   ['message_37',['message',['../structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html#aab6df389238bddf7c0fcd896379d7903',1,'helios::ext::imgui::widgets::LogEntry']]],
   ['meter_38',['Meter',['../namespacehelios_1_1core_1_1units.html#a13b5c00c42b03ebe1d85cd575f346e55a17c9c40b9db5a0983d1075a012c1f90a',1,'helios::core::units']]],
   ['meters_39',['METERS',['../namespacehelios_1_1core_1_1units.html#ace729ad7e380ecea1dc68139c748e4e8',1,'helios::core::units']]],
-  ['metrics_40',['7. Frame Pacing and Performance Metrics',['../index.html#autotoc_md108',1,'']]],
+  ['metrics_40',['7. Frame Pacing and Performance Metrics',['../index.html#autotoc_md110',1,'']]],
   ['milliseconds_41',['MILLISECONDS',['../namespacehelios_1_1core_1_1units.html#a205fe3ccea7988ba4b616c046b5d8246',1,'helios::core::units']]],
   ['milliseconds_42',['MilliSeconds',['../namespacehelios_1_1core_1_1units.html#a13b5c00c42b03ebe1d85cd575f346e55a127d04b8e81bf4b13fbdd35647a0e8b8',1,'helios::core::units']]],
   ['min_43',['min',['../structhelios_1_1math_1_1aabb.html#ab53ba0c88b465fb3f9e6ae410c3f0b70',1,'helios::math::aabb']]],
   ['model_2eixx_44',['model.ixx',['../model_8ixx.html',1,'']]],
   ['modelmatrix_45',['ModelMatrix',['../namespacehelios_1_1rendering_1_1shader.html#a0a320e03bcf6f60bc90428c450dfb329a3e04ff8d5f81e0e803be16ae79aaf3c6',1,'helios::rendering::shader']]],
-  ['module_20details_46',['Module Details',['../index.html#autotoc_md111',1,'']]],
+  ['module_20details_46',['Module Details',['../index.html#autotoc_md113',1,'']]],
   ['module_20structure_47',['3. Follow Module Structure',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md34',1,'']]],
-  ['modules_48',['Modules',['../index.html#autotoc_md97',1,'Core Modules'],['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md28',1,'Extension Modules'],['../index.html#autotoc_md98',1,'Extension Modules']]]
+  ['modules_48',['Modules',['../index.html#autotoc_md99',1,'Core Modules'],['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md28',1,'Extension Modules'],['../index.html#autotoc_md100',1,'Extension Modules']]]
 ];

@@ -21,6 +21,7 @@ var annotated_dup =
           [ "widgets", "namespacehelios_1_1ext_1_1imgui_1_1widgets.html", [
             [ "CameraWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1CameraWidget.html", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1CameraWidget" ],
             [ "FpsWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget.html", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget" ],
+            [ "GamepadSettingsWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget.html", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget" ],
             [ "GamepadWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget.html", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget" ],
             [ "LogEntry", "structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html", "structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry" ],
             [ "LogWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1LogWidget.html", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1LogWidget" ],
@@ -75,7 +76,12 @@ var annotated_dup =
         [ "EventQueue", "classhelios_1_1event_1_1EventQueue.html", "classhelios_1_1event_1_1EventQueue" ]
       ] ],
       [ "input", "namespacehelios_1_1input.html", [
-        [ "GamepadState", "classhelios_1_1input_1_1GamepadState.html", "classhelios_1_1input_1_1GamepadState" ],
+        [ "gamepad", "namespacehelios_1_1input_1_1gamepad.html", [
+          [ "DeadzoneStrategy", "classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy.html", "classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy" ],
+          [ "GamepadSettings", "classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html", "classhelios_1_1input_1_1gamepad_1_1GamepadSettings" ],
+          [ "GamepadState", "classhelios_1_1input_1_1gamepad_1_1GamepadState.html", "classhelios_1_1input_1_1gamepad_1_1GamepadState" ],
+          [ "RadialDeadzoneStrategy", "classhelios_1_1input_1_1gamepad_1_1RadialDeadzoneStrategy.html", "classhelios_1_1input_1_1gamepad_1_1RadialDeadzoneStrategy" ]
+        ] ],
         [ "InputAdapter", "classhelios_1_1input_1_1InputAdapter.html", "classhelios_1_1input_1_1InputAdapter" ],
         [ "InputManager", "classhelios_1_1input_1_1InputManager.html", "classhelios_1_1input_1_1InputManager" ]
       ] ],

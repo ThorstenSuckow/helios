@@ -124,16 +124,29 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9d0ad5cfffd1efd405cc0b4aa4ce9c79" id="r_a9d0ad5cfffd1efd405cc0b4aa4ce9c79"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9d0ad5cfffd1efd405cc0b4aa4ce9c79">InputAdapter</a> ()=default</td></tr>
 <tr class="memitem:ac0e01bc42c45d7bce722836e162259bc" id="r_ac0e01bc42c45d7bce722836e162259bc"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac0e01bc42c45d7bce722836e162259bc">~InputAdapter</a> ()=default</td></tr>
+<tr class="memdesc:ac0e01bc42c45d7bce722836e162259bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor for proper polymorphic cleanup.  <br /></td></tr>
+<tr class="memitem:af98fdb57e1005ed248c09a11f4020040" id="r_af98fdb57e1005ed248c09a11f4020040"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af98fdb57e1005ed248c09a11f4020040">InputAdapter</a> (std::unique_ptr&lt; <a class="el" href="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy.html">helios::input::gamepad::DeadzoneStrategy</a> &gt; deadzoneStrategy)</td></tr>
+<tr class="memdesc:af98fdb57e1005ed248c09a11f4020040"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an <a class="el" href="classhelios_1_1input_1_1InputAdapter.html" title="Abstract interface for platform-specific input adapters.">InputAdapter</a> with the specified deadzone strategy.  <br /></td></tr>
 <tr class="memitem:a8896a83d1b86578aa3c1f13be1c5e63f" id="r_a8896a83d1b86578aa3c1f13be1c5e63f"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8896a83d1b86578aa3c1f13be1c5e63f">isKeyPressed</a> (<a class="el" href="namespacehelios_1_1input_1_1types.html#a963e220296531c047308439c3425bcc5">helios::input::types::Key</a> key, const <a class="el" href="classhelios_1_1window_1_1Window.html">helios::window::Window</a> &amp;win) const noexcept=0</td></tr>
 <tr class="memdesc:a8896a83d1b86578aa3c1f13be1c5e63f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the key is pressed, otherwise false.  <br /></td></tr>
 <tr class="memitem:a3a5e1e0e577c8af5877f10d9578d4875" id="r_a3a5e1e0e577c8af5877f10d9578d4875"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3a5e1e0e577c8af5877f10d9578d4875">isConnected</a> (<a class="el" href="namespacehelios_1_1input_1_1types.html#a4dd39c1a113edbe36b92b088d8dbf2ff">helios::input::types::Gamepad</a> gamepadId) const noexcept=0</td></tr>
 <tr class="memdesc:a3a5e1e0e577c8af5877f10d9578d4875"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a boolean value indicating the availability (i.e., connect state) of the gamepad identified by the specified gamepadId.  <br /></td></tr>
 <tr class="memitem:a5b3852c685d7321d2faeb2de79aad538" id="r_a5b3852c685d7321d2faeb2de79aad538"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5b3852c685d7321d2faeb2de79aad538">updateGamepadState</a> (unsigned int gamepadMask) noexcept=0</td></tr>
-<tr class="memdesc:a5b3852c685d7321d2faeb2de79aad538"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the <a class="el" href="classhelios_1_1input_1_1GamepadState.html" title="A lightweight class for transferring the state of a Gamepad.">GamepadState</a> objects with the values queried from the underlying Gamepad identified by the specified mask.  <br /></td></tr>
-<tr class="memitem:ae64e5b1f78b57e9cce3c092c379605d6" id="r_ae64e5b1f78b57e9cce3c092c379605d6"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="classhelios_1_1input_1_1GamepadState.html">GamepadState</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae64e5b1f78b57e9cce3c092c379605d6">gamepadState</a> (<a class="el" href="namespacehelios_1_1input_1_1types.html#a4dd39c1a113edbe36b92b088d8dbf2ff">helios::input::types::Gamepad</a> gamepadId) const noexcept=0</td></tr>
-<tr class="memdesc:ae64e5b1f78b57e9cce3c092c379605d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a const ref to the GamepadState-object for the specified gamepadId.  <br /></td></tr>
+<tr class="memdesc:a5b3852c685d7321d2faeb2de79aad538"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the GamepadState objects with the values queried from the underlying Gamepad identified by the specified mask.  <br /></td></tr>
+<tr class="memitem:aa636d6f6f740d416d8176234457272d2" id="r_aa636d6f6f740d416d8176234457272d2"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="classhelios_1_1input_1_1gamepad_1_1GamepadState.html">helios::input::gamepad::GamepadState</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa636d6f6f740d416d8176234457272d2">gamepadState</a> (<a class="el" href="namespacehelios_1_1input_1_1types.html#a4dd39c1a113edbe36b92b088d8dbf2ff">helios::input::types::Gamepad</a> gamepadId) const noexcept=0</td></tr>
+<tr class="memdesc:aa636d6f6f740d416d8176234457272d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a const ref to the GamepadState-object for the specified gamepadId.  <br /></td></tr>
+<tr class="memitem:a79d74e9e0dbe1bc6da8eb6eecfee232f" id="r_a79d74e9e0dbe1bc6da8eb6eecfee232f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html">helios::input::gamepad::GamepadSettings</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79d74e9e0dbe1bc6da8eb6eecfee232f">gamepadSettings</a> (<a class="el" href="namespacehelios_1_1input_1_1types.html#a4dd39c1a113edbe36b92b088d8dbf2ff">helios::input::types::Gamepad</a> gamepadId) noexcept</td></tr>
+<tr class="memdesc:a79d74e9e0dbe1bc6da8eb6eecfee232f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the configuration settings for the specified gamepad.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a7864654aa3988de5f27f625c7f743e3c" id="r_a7864654aa3988de5f27f625c7f743e3c"><td class="memItemLeft" align="right" valign="top"><a id="a7864654aa3988de5f27f625c7f743e3c" name="a7864654aa3988de5f27f625c7f743e3c"></a>
+std::unique_ptr&lt; <a class="el" href="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy.html">helios::input::gamepad::DeadzoneStrategy</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>deadzoneStrategy_</b></td></tr>
+<tr class="memdesc:a7864654aa3988de5f27f625c7f743e3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strategy used to normalize analog stick input within deadzones. <br /></td></tr>
+<tr class="memitem:ad33c6c602987f39854bebac0826387ee" id="r_ad33c6c602987f39854bebac0826387ee"><td class="memItemLeft" align="right" valign="top"><a id="ad33c6c602987f39854bebac0826387ee" name="ad33c6c602987f39854bebac0826387ee"></a>
+std::array&lt; <a class="el" href="classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html">helios::input::gamepad::GamepadSettings</a>, std::to_underlying(helios::input::types::Gamepad::size_)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>gamepadSettings_</b> = {}</td></tr>
+<tr class="memdesc:ad33c6c602987f39854bebac0826387ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Per-gamepad configuration settings. <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-static-attribs" class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
@@ -143,34 +156,16 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract interface for platform-specific input adapters. </p>
+<p>Provides a unified interface for querying input device states across different platforms. Concrete implementations translate generic input queries into platform-specific API calls.</p>
+<p>The adapter manages per-gamepad configuration through `GamepadSettings` and applies input normalization via a configurable `DeadzoneStrategy`.</p>
+<dl class="section see"><dt>See also</dt><dd>GLFWInputAdapter for a GLFW-based implementation. </dd>
+<dd>
+GamepadSettings for per-controller configuration options. </dd>
+<dd>
+DeadzoneStrategy for <a class="el" href="namespacehelios_1_1input.html" title="Input handling and management.">input</a> normalization strategies. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="InputAdapter_8ixx_source.html#l00023">23</a> of file <a class="el" href="InputAdapter_8ixx_source.html">InputAdapter.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="InputAdapter_8ixx_source.html#l00040">40</a> of file <a class="el" href="InputAdapter_8ixx_source.html">InputAdapter.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a9d0ad5cfffd1efd405cc0b4aa4ce9c79" name="a9d0ad5cfffd1efd405cc0b4aa4ce9c79"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d0ad5cfffd1efd405cc0b4aa4ce9c79">&#9670;&#160;</a></span>InputAdapter()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">helios::input::InputAdapter::InputAdapter </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel default">default</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="ac0e01bc42c45d7bce722836e162259bc" name="ac0e01bc42c45d7bce722836e162259bc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac0e01bc42c45d7bce722836e162259bc">&#9670;&#160;</a></span>~InputAdapter()</h2>
 
@@ -194,11 +189,12 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 </table>
 </div><div class="memdoc">
 
+<p>Virtual destructor for proper polymorphic cleanup. </p>
+
 </div>
 </div>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="ae64e5b1f78b57e9cce3c092c379605d6" name="ae64e5b1f78b57e9cce3c092c379605d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae64e5b1f78b57e9cce3c092c379605d6">&#9670;&#160;</a></span>gamepadState()</h2>
+<a id="af98fdb57e1005ed248c09a11f4020040" name="af98fdb57e1005ed248c09a11f4020040"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af98fdb57e1005ed248c09a11f4020040">&#9670;&#160;</a></span>InputAdapter()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -207,7 +203,93 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual const <a class="el" href="classhelios_1_1input_1_1GamepadState.html">GamepadState</a> &amp; helios::input::InputAdapter::gamepadState </td>
+          <td class="memname">helios::input::InputAdapter::InputAdapter </td>
+          <td>(</td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy.html">helios::input::gamepad::DeadzoneStrategy</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>deadzoneStrategy</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs an <a class="el" href="classhelios_1_1input_1_1InputAdapter.html" title="Abstract interface for platform-specific input adapters.">InputAdapter</a> with the specified deadzone strategy. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">deadzoneStrategy</td><td>The strategy used for analog stick normalization. Ownership is transferred to this adapter. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="InputAdapter_8ixx_source.html#l00078">78</a> of file <a class="el" href="InputAdapter_8ixx_source.html">InputAdapter.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="InputAdapter_8ixx_source.html#l00054">deadzoneStrategy_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="GLFWInputAdapter_8ixx_source.html#l00061">helios::ext::glfw::input::GLFWInputAdapter::GLFWInputAdapter()</a>.</p>
+<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1input_1_1InputAdapter_af98fdb57e1005ed248c09a11f4020040_icgraph.svg" width="439" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a79d74e9e0dbe1bc6da8eb6eecfee232f" name="a79d74e9e0dbe1bc6da8eb6eecfee232f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79d74e9e0dbe1bc6da8eb6eecfee232f">&#9670;&#160;</a></span>gamepadSettings()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html">helios::input::gamepad::GamepadSettings</a> &amp; helios::input::InputAdapter::gamepadSettings </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1input_1_1types.html#a4dd39c1a113edbe36b92b088d8dbf2ff">helios::input::types::Gamepad</a></td>          <td class="paramname"><span class="paramname"><em>gamepadId</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the configuration settings for the specified gamepad. </p>
+<p>Provides access to the mutable settings object for the given gamepad, allowing runtime configuration of deadzone thresholds and axis inversion. Changes to the returned settings are applied during subsequent calls to `updateGamepadState()`.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gamepadId</td><td>The gamepad to retrieve settings for.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the mutable GamepadSettings for the specified gamepad.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd>GamepadSettings for available configuration options. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="InputAdapter_8ixx_source.html#l00158">158</a> of file <a class="el" href="InputAdapter_8ixx_source.html">InputAdapter.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="InputAdapter_8ixx_source.html#l00062">gamepadSettings_</a>.</p>
+
+</div>
+</div>
+<a id="aa636d6f6f740d416d8176234457272d2" name="aa636d6f6f740d416d8176234457272d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa636d6f6f740d416d8176234457272d2">&#9670;&#160;</a></span>gamepadState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const <a class="el" href="classhelios_1_1input_1_1gamepad_1_1GamepadState.html">helios::input::gamepad::GamepadState</a> &amp; helios::input::InputAdapter::gamepadState </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacehelios_1_1input_1_1types.html#a4dd39c1a113edbe36b92b088d8dbf2ff">helios::input::types::Gamepad</a></td>          <td class="paramname"><span class="paramname"><em>gamepadId</em></span></td><td>)</td>
           <td> const</td>
@@ -221,17 +303,19 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 </div><div class="memdoc">
 
 <p>Returns a const ref to the GamepadState-object for the specified gamepadId. </p>
-<p>Implementing APIs can call this method in each frame to retrieve the current state for the gamepad, as computed by <a class="el" href="#a5b3852c685d7321d2faeb2de79aad538" title="Updates the GamepadState objects with the values queried from the underlying Gamepad identified by th...">updateGamepadState()</a>. This method guarantees that for a given gamepadId, a single <a class="el" href="classhelios_1_1input_1_1GamepadState.html" title="A lightweight class for transferring the state of a Gamepad.">GamepadState</a> object is reused across calls, avoiding re-instantiation overhead.</p>
+<p>Implementing APIs can call this method in each frame to retrieve the current state for the gamepad, as computed by <a class="el" href="#a5b3852c685d7321d2faeb2de79aad538" title="Updates the GamepadState objects with the values queried from the underlying Gamepad identified by th...">updateGamepadState()</a>. This method guarantees that for a given gamepadId, a single GamepadState object is reused across calls, avoiding re-instantiation overhead.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">gamepadId</td><td>The id of the gamepad to query</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns a const ref to the <a class="el" href="classhelios_1_1input_1_1GamepadState.html" title="A lightweight class for transferring the state of a Gamepad.">GamepadState</a>. If the <a class="el" href="classhelios_1_1input_1_1GamepadState.html" title="A lightweight class for transferring the state of a Gamepad.">GamepadState</a> was never queried before, or if a recent call to updateGamepadState did not succeed, the values of the <a class="el" href="classhelios_1_1input_1_1GamepadState.html" title="A lightweight class for transferring the state of a Gamepad.">GamepadState</a> will not hold representative values. Implementing APIs should verify the availability of the Gamepad by calling <a class="el" href="#a3a5e1e0e577c8af5877f10d9578d4875" title="Returns a boolean value indicating the availability (i.e., connect state) of the gamepad identified b...">isConnected()</a></dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a const ref to the GamepadState. If the GamepadState was never queried before, or if a recent call to updateGamepadState did not succeed, the values of the GamepadState will not hold representative values. Implementing APIs should verify the availability of the Gamepad by calling <a class="el" href="#a3a5e1e0e577c8af5877f10d9578d4875" title="Returns a boolean value indicating the availability (i.e., connect state) of the gamepad identified b...">isConnected()</a></dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#a5b3852c685d7321d2faeb2de79aad538" title="Updates the GamepadState objects with the values queried from the underlying Gamepad identified by th...">updateGamepadState</a> </dd>
 <dd>
 <a class="el" href="#a3a5e1e0e577c8af5877f10d9578d4875" title="Returns a boolean value indicating the availability (i.e., connect state) of the gamepad identified b...">isConnected</a> </dd></dl>
+
+<p>Implemented in <a class="el" href="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter.html#a281b70c6d8c50731c843c86e5e5e2942">helios::ext::glfw::input::GLFWInputAdapter</a>.</p>
 
 </div>
 </div>
@@ -266,6 +350,8 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if the Gamepad identified by gamepadId is connected, otherwise false. </dd></dl>
+
+<p>Implemented in <a class="el" href="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter.html#a703e9e04a1554cebea6f1d1924c034dc">helios::ext::glfw::input::GLFWInputAdapter</a>.</p>
 
 </div>
 </div>
@@ -333,14 +419,16 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 </table>
 </div><div class="memdoc">
 
-<p>Updates the <a class="el" href="classhelios_1_1input_1_1GamepadState.html" title="A lightweight class for transferring the state of a Gamepad.">GamepadState</a> objects with the values queried from the underlying Gamepad identified by the specified mask. </p>
-<p>Updates the <a class="el" href="classhelios_1_1input_1_1GamepadState.html" title="A lightweight class for transferring the state of a Gamepad.">GamepadState</a> objects with the current values of the underlying hardware. If querying the underlying hardware fails, this method will update the <a class="el" href="classhelios_1_1input_1_1GamepadState.html" title="A lightweight class for transferring the state of a Gamepad.">GamepadState</a> values to a valid initial state (no movement or interaction). Implementations should use `isConnected()` to check whether the current values of a `GamepadState` object can be trusted.</p>
+<p>Updates the GamepadState objects with the values queried from the underlying Gamepad identified by the specified mask. </p>
+<p>Updates the GamepadState objects with the current values of the underlying hardware. If querying the underlying hardware fails, this method will update the GamepadState values to a valid initial state (no movement or interaction). Implementations should use `isConnected()` to check whether the current values of a `GamepadState` object can be trusted.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">gamepadMask</td><td>A bitmask representing all <a class="el" href="classhelios_1_1input_1_1GamepadState.html" title="A lightweight class for transferring the state of a Gamepad.">GamepadState</a> objects to update, e.g. Gamepad::ONE | Gamepad::TWO... </td></tr>
+    <tr><td class="paramname">gamepadMask</td><td>A bitmask representing all GamepadState objects to update, e.g. Gamepad::ONE | Gamepad::TWO... </td></tr>
   </table>
   </dd>
 </dl>
+
+<p>Implemented in <a class="el" href="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter.html#af65a6a8e99aac0f6867b6456d0849f9a">helios::ext::glfw::input::GLFWInputAdapter</a>.</p>
 
 </div>
 </div>

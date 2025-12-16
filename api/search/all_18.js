@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['pacing_20and_20performance_20metrics_0',['7. Frame Pacing and Performance Metrics',['../index.html#autotoc_md108',1,'']]],
+  ['pacing_20and_20performance_20metrics_0',['7. Frame Pacing and Performance Metrics',['../index.html#autotoc_md110',1,'']]],
   ['parent_1',['parent',['../classhelios_1_1scene_1_1SceneNode.html#a4e31b52717a76a9bae9a80a1db0b808b',1,'helios::scene::SceneNode']]],
   ['parent_5f_2',['parent_',['../classhelios_1_1scene_1_1SceneNode.html#a718f8d4e4ecddeb659031dd9ad9ad079',1,'helios::scene::SceneNode']]],
-  ['performance_20metrics_3',['7. Frame Pacing and Performance Metrics',['../index.html#autotoc_md108',1,'']]],
+  ['performance_20metrics_3',['7. Frame Pacing and Performance Metrics',['../index.html#autotoc_md110',1,'']]],
   ['perspective_4',['perspective',['../namespacehelios_1_1math.html#a3009ee1714550dc2af4d7e5e952e8a90',1,'helios::math']]],
-  ['pipeline_5',['2. Rendering Pipeline',['../index.html#autotoc_md101',1,'']]],
+  ['pipeline_5',['2. Rendering Pipeline',['../index.html#autotoc_md103',1,'']]],
   ['points_6',['Points',['../namespacehelios_1_1rendering_1_1model_1_1config.html#a13a7711e9718d01b8f09dd183c6777d5a75dd5f1160a3f02b6fae89c54361a1b3',1,'helios::rendering::model::config']]],
   ['poll_7',['poll',['../classhelios_1_1input_1_1InputManager.html#ab46c4ce60870839d557ba3d141964f01',1,'helios::input::InputManager']]],
   ['pollevents_8',['pollEvents',['../classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow.html#acfd10a52a9bdfb4bb4cb8fb10d15789d',1,'helios::ext::glfw::window::GLFWWindow::pollEvents()'],['../classhelios_1_1window_1_1Window.html#a73a3d8254862bfa531304a45afe31189',1,'helios::window::Window::pollEvents()']]],
@@ -22,5 +22,5 @@ var searchData=
   ['projectionmatrix_19',['ProjectionMatrix',['../namespacehelios_1_1rendering_1_1shader.html#a0a320e03bcf6f60bc90428c450dfb329a5c79d4241e5a2978c699473b01f82fe9',1,'helios::rendering::shader']]],
   ['projectionmatrix_20',['projectionMatrix',['../classhelios_1_1scene_1_1Camera.html#a1dc42ba642ae41f7028a4cb927a6feb0',1,'helios::scene::Camera::projectionMatrix()'],['../classhelios_1_1scene_1_1Snapshot.html#aae4b2f152fd9144ce8e264064495e867',1,'helios::scene::Snapshot::projectionMatrix()']]],
   ['projectionmatrix_5f_21',['projectionMatrix_',['../classhelios_1_1scene_1_1Camera.html#a73a85eb4966fb4524dc6b87736500f62',1,'helios::scene::Camera::projectionMatrix_'],['../classhelios_1_1scene_1_1Snapshot.html#a47dffe6969f2ed64915d1fd4599cd44a',1,'helios::scene::Snapshot::projectionMatrix_']]],
-  ['purpose_22',['Core Purpose',['../index.html#autotoc_md95',1,'']]]
+  ['purpose_22',['Core Purpose',['../index.html#autotoc_md97',1,'']]]
 ];

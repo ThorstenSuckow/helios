@@ -8,7 +8,7 @@ var searchData=
   ['next_5',['next',['../classhelios_1_1event_1_1DequeEventQueue.html#a400f3c1111c28d503e64464922147505',1,'helios::event::DequeEventQueue::next()'],['../classhelios_1_1event_1_1EventQueue.html#a5a2fd34261a19ae471f4ede5bf474963',1,'helios::event::EventQueue::next()']]],
   ['none_6',['None',['../namespacehelios_1_1rendering.html#aad4b10dc2924beaf3680fb245505290ca6adf97f83acf6453d4a6a4b1070f3754',1,'helios::rendering']]],
   ['normal_7',['normal',['../structhelios_1_1rendering_1_1Vertex.html#ac26b0224bfd42a7576cc9f14c7ebc703',1,'helios::rendering::Vertex']]],
-  ['normalize_8',['normalize',['../structhelios_1_1math_1_1vec2.html#a4f47bd1a12c6a4461761f26ffabfb439',1,'helios::math::vec2::normalize()'],['../structhelios_1_1math_1_1vec3.html#a3bbdd06a78770b9dadc233e0acca4295',1,'helios::math::vec3::normalize()']]],
+  ['normalize_8',['normalize',['../classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy.html#ad4a87c7ee4ec5b7f08210aae95cac8a1',1,'helios::input::gamepad::DeadzoneStrategy::normalize()'],['../classhelios_1_1input_1_1gamepad_1_1RadialDeadzoneStrategy.html#ab2978ad6d7b34ede7dcf4a91c24cab8e',1,'helios::input::gamepad::RadialDeadzoneStrategy::normalize()'],['../structhelios_1_1math_1_1vec2.html#a4f47bd1a12c6a4461761f26ffabfb439',1,'helios::math::vec2::normalize()'],['../structhelios_1_1math_1_1vec3.html#a3bbdd06a78770b9dadc233e0acca4295',1,'helios::math::vec3::normalize()']]],
   ['numeric_9',['Numeric',['../concepthelios_1_1math_1_1Numeric.html',1,'helios::math']]],
   ['numeric_2eixx_10',['Numeric.ixx',['../Numeric_8ixx.html',1,'']]]
 ];

@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1input_1_1gamepad_1_1RadialDeadzoneStrategy" kind="class" language="C++" prot="public">
+    <compoundname>helios::input::gamepad::RadialDeadzoneStrategy</compoundname>
+    <basecompoundref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy" prot="public" virt="non-virtual">helios::input::gamepad::DeadzoneStrategy</basecompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1RadialDeadzoneStrategy_1a3ace9ef57862c681eaa2f767288c88ec" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::input::gamepad::RadialDeadzoneStrategy::RadialDeadzoneStrategy</definition>
+        <argsstring>()</argsstring>
+        <name>RadialDeadzoneStrategy</name>
+        <qualifiedname>helios::input::gamepad::RadialDeadzoneStrategy::RadialDeadzoneStrategy</qualifiedname>
+        <briefdescription>
+<para>Default constructor.    </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/input/gamepad/RadialDeadzoneStrategy.ixx" line="41" column="9" bodyfile="include/helios/input/gamepad/RadialDeadzoneStrategy.ixx" bodystart="41" bodyend="41"/>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a7066807dc8642ae12d29a5ad7a327473">helios::input::gamepad::DeadzoneStrategy::DeadzoneStrategy</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1RadialDeadzoneStrategy_1aa1c7ac7f01e8a2936027aa68c96a3acd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::input::gamepad::RadialDeadzoneStrategy::RadialDeadzoneStrategy</definition>
+        <argsstring>(float stickNoiseThreshold)</argsstring>
+        <name>RadialDeadzoneStrategy</name>
+        <qualifiedname>helios::input::gamepad::RadialDeadzoneStrategy::RadialDeadzoneStrategy</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>stickNoiseThreshold</declname>
+        </param>
+        <briefdescription>
+<para>Interface for applying deadzone handling to gamepad stick input.    </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Defines a method for processing and normalizing analog stick input while accounting for a deadzone. A deadzone eliminates unintended small input values caused by hardware imperfections. Implementations of this interface provide specific strategies for handling the deadzone and input normalization.</para>
+<para><simplesect kind="see"><para>AxisDeadzoneStrategy for an axis-aligned deadzone implementation.    </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/input/gamepad/RadialDeadzoneStrategy.ixx" line="46" column="9" bodyfile="include/helios/input/gamepad/RadialDeadzoneStrategy.ixx" bodystart="46" bodyend="46"/>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a7066807dc8642ae12d29a5ad7a327473">helios::input::gamepad::DeadzoneStrategy::DeadzoneStrategy</references>
+        <references refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a6c01ef746af11b99c2122617c6f36820">helios::input::gamepad::DeadzoneStrategy::stickNoiseThreshold</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1input_1_1gamepad_1_1RadialDeadzoneStrategy_1ab2978ad6d7b34ede7dcf4a91c24cab8e" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::input::gamepad::RadialDeadzoneStrategy::normalize</definition>
+        <argsstring>(float deadzone, float &amp;x, float &amp;y) const noexcept override</argsstring>
+        <name>normalize</name>
+        <qualifiedname>helios::input::gamepad::RadialDeadzoneStrategy::normalize</qualifiedname>
+        <reimplements refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1ad4a87c7ee4ec5b7f08210aae95cac8a1">normalize</reimplements>
+        <param>
+          <type>float</type>
+          <declname>deadzone</declname>
+        </param>
+        <param>
+          <type>float &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>float &amp;</type>
+          <declname>y</declname>
+        </param>
+        <briefdescription>
+<para>Applies radial deadzone normalization to stick input. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Modifies the input coordinates in-place. Values within the circular deadzone are zeroed, while values outside are rescaled for a smooth response curve.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>deadzone</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The deadzone radius threshold in the range [0.0, 1.0]. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the x-axis value, modified in-place. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the y-axis value, modified in-place. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/input/gamepad/RadialDeadzoneStrategy.ixx" line="58" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Implements a radial (circular) deadzone strategy for analog stick normalization. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This strategy treats the deadzone as a circle centered at the origin. Input vectors with a magnitude less than or equal to the deadzone threshold are zeroed out completely. Input vectors exceeding the deadzone are rescaled so that the effective input range starts at the edge of the deadzone circle, providing a smooth and consistent response.</para>
+<para>The radial approach is generally preferred over axial deadzones because it eliminates diagonal movement artifacts and provides uniform sensitivity in all directions.</para>
+<para>**Algorithm:** 1. Calculate the magnitude (length) of the input vector. 2. If magnitude &lt;= deadzone, set both axes to zero. 3. If magnitude &gt; 1.0, normalize the vector to unit length. 4. Rescale the magnitude from [deadzone, 1.0] to [0.0, 1.0]. 5. Apply the rescaled magnitude to the normalized direction vector.</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy" kindref="compound">DeadzoneStrategy</ref> for the abstract interface. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::input::gamepad::DeadzoneStrategy</label>
+        <link refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy"/>
+      </node>
+      <node id="1">
+        <label>helios::input::gamepad::RadialDeadzoneStrategy</label>
+        <link refid="classhelios_1_1input_1_1gamepad_1_1RadialDeadzoneStrategy"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>helios::input::gamepad::DeadzoneStrategy</label>
+        <link refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy"/>
+      </node>
+      <node id="1">
+        <label>helios::input::gamepad::RadialDeadzoneStrategy</label>
+        <link refid="classhelios_1_1input_1_1gamepad_1_1RadialDeadzoneStrategy"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/input/gamepad/RadialDeadzoneStrategy.ixx" line="34" column="5" bodyfile="include/helios/input/gamepad/RadialDeadzoneStrategy.ixx" bodystart="34" bodyend="61"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a7066807dc8642ae12d29a5ad7a327473" prot="public" virt="non-virtual"><scope>helios::input::gamepad::RadialDeadzoneStrategy</scope><name>DeadzoneStrategy</name></member>
+      <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a52139bff041f7128d0b562684587e32a" prot="public" virt="non-virtual"><scope>helios::input::gamepad::RadialDeadzoneStrategy</scope><name>DeadzoneStrategy</name></member>
+      <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1ab2d601fa84b631f66270f28f2fed9e06" prot="public" virt="non-virtual"><scope>helios::input::gamepad::RadialDeadzoneStrategy</scope><name>DEFAULT_STICK_NOISE_THRESHOLD</name></member>
+      <member refid="classhelios_1_1input_1_1gamepad_1_1RadialDeadzoneStrategy_1ab2978ad6d7b34ede7dcf4a91c24cab8e" prot="public" virt="virtual"><scope>helios::input::gamepad::RadialDeadzoneStrategy</scope><name>normalize</name></member>
+      <member refid="classhelios_1_1input_1_1gamepad_1_1RadialDeadzoneStrategy_1a3ace9ef57862c681eaa2f767288c88ec" prot="public" virt="non-virtual"><scope>helios::input::gamepad::RadialDeadzoneStrategy</scope><name>RadialDeadzoneStrategy</name></member>
+      <member refid="classhelios_1_1input_1_1gamepad_1_1RadialDeadzoneStrategy_1aa1c7ac7f01e8a2936027aa68c96a3acd" prot="public" virt="non-virtual"><scope>helios::input::gamepad::RadialDeadzoneStrategy</scope><name>RadialDeadzoneStrategy</name></member>
+      <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a9df5a94dd6bf37d477dd6fd7a73c709c" prot="public" virt="non-virtual"><scope>helios::input::gamepad::RadialDeadzoneStrategy</scope><name>setStickNoiseThreshold</name></member>
+      <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a6c01ef746af11b99c2122617c6f36820" prot="public" virt="non-virtual"><scope>helios::input::gamepad::RadialDeadzoneStrategy</scope><name>stickNoiseThreshold</name></member>
+      <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a3762bc530d61b887b87757ccc156db99" prot="protected" virt="non-virtual"><scope>helios::input::gamepad::RadialDeadzoneStrategy</scope><name>stickNoiseThreshold_</name></member>
+      <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a63d32d60498619f6a0e5f96f5cc30226" prot="public" virt="virtual"><scope>helios::input::gamepad::RadialDeadzoneStrategy</scope><name>~DeadzoneStrategy</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

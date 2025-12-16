@@ -9,37 +9,35 @@
     <includes refid="Key_8ixx" local="no">helios.input.types.Key</includes>
     <includes refid="InputAdapter_8ixx" local="no">helios.input.InputAdapter</includes>
     <includes refid="LogManager_8ixx" local="no">helios.util.log.LogManager</includes>
-    <includes refid="GamepadState_8ixx" local="no">helios.input.GamepadState</includes>
+    <includes refid="GamepadState_8ixx" local="no">helios.input.gamepad.GamepadState</includes>
     <includes refid="Gamepad_8ixx" local="no">helios.input.types.Gamepad</includes>
     <incdepgraph>
-      <node id="49">
-        <label>helios.input.GamepadState</label>
-        <link refid="GamepadState_8ixx"/>
-        <childnode refid="50" relation="include">
-        </childnode>
-        <childnode refid="51" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-      </node>
       <node id="48">
         <label>helios.input.InputAdapter</label>
         <link refid="InputAdapter_8ixx"/>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
         <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="47" relation="include">
         </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
         <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -59,12 +57,32 @@
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="49" relation="include">
+        <childnode refid="54" relation="include">
         </childnode>
-        <childnode refid="52" relation="include">
+        <childnode refid="55" relation="include">
         </childnode>
       </node>
+      <node id="51">
+        <label>helios.input.gamepad.DeadzoneStrategy</label>
+        <link refid="DeadzoneStrategy_8ixx"/>
+      </node>
       <node id="52">
+        <label>helios.input.gamepad.GamepadSettings</label>
+        <link refid="GamepadSettings_8ixx"/>
+        <childnode refid="53" relation="include">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>helios.input.gamepad.GamepadState</label>
+        <link refid="GamepadState_8ixx"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="55">
         <label>helios.input.types.Gamepad</label>
         <link refid="Gamepad_8ixx"/>
       </node>
@@ -420,7 +438,7 @@
         <childnode refid="18" relation="include">
         </childnode>
       </node>
-      <node id="50">
+      <node id="53">
         <label>algorithm</label>
       </node>
       <node id="28">
@@ -429,14 +447,14 @@
       <node id="23">
         <label>atomic</label>
       </node>
+      <node id="49">
+        <label>bit</label>
+      </node>
       <node id="24">
         <label>cstdint</label>
       </node>
       <node id="12">
         <label>format</label>
-      </node>
-      <node id="51">
-        <label>helios/helios_config.h</label>
       </node>
       <node id="2">
         <label>memory</label>
@@ -461,6 +479,9 @@
       </node>
       <node id="15">
         <label>unordered_set</label>
+      </node>
+      <node id="50">
+        <label>utility</label>
       </node>
       <node id="29">
         <label>variant</label>
@@ -503,7 +524,7 @@
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8input_8InputManager" kindref="compound">helios.input.InputManager</ref>;</highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8input_8types_8Gamepad" kindref="compound">helios.input.types.Gamepad</ref>;</highlight></codeline>
-<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8input_8GamepadState" kindref="compound">helios.input.GamepadState</ref>;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8input_8gamepad_8GamepadState" kindref="compound">helios.input.gamepad.GamepadState</ref>;</highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8input_8InputAdapter" kindref="compound">helios.input.InputAdapter</ref>;</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8input_8types_8Key" kindref="compound">helios.input.types.Key</ref>;</highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8window_8Window" kindref="compound">helios.window.Window</ref>;</highlight></codeline>
@@ -640,7 +661,7 @@
 <codeline lineno="147"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>isConnected()</highlight></codeline>
 <codeline lineno="148"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>poll()</highlight></codeline>
 <codeline lineno="149"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="150" refid="classhelios_1_1input_1_1InputManager_1a70f09d2b56d05c0ba55df05d3526f4f9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1GamepadState" kindref="compound">GamepadState</ref>&amp;<sp/><ref refid="classhelios_1_1input_1_1InputManager_1a70f09d2b56d05c0ba55df05d3526f4f9" kindref="member">gamepadState</ref>(<ref refid="namespacehelios_1_1input_1_1types_1a4dd39c1a113edbe36b92b088d8dbf2ff" kindref="member">helios::input::types::Gamepad</ref><sp/>gamepadId)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="150" refid="classhelios_1_1input_1_1InputManager_1a3ae14ffca9c0950090bffa87d8ef7b7f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1GamepadState" kindref="compound">helios::input::gamepad::GamepadState</ref>&amp;<sp/><ref refid="classhelios_1_1input_1_1InputManager_1a3ae14ffca9c0950090bffa87d8ef7b7f" kindref="member">gamepadState</ref>(<ref refid="namespacehelios_1_1input_1_1types_1a4dd39c1a113edbe36b92b088d8dbf2ff" kindref="member">helios::input::types::Gamepad</ref><sp/>gamepadId)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="151"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="152"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="153"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>true<sp/>if<sp/>the<sp/>specified<sp/>gamepad<sp/>is<sp/>connected,<sp/>otherwise<sp/>false.</highlight></codeline>
@@ -651,11 +672,29 @@
 <codeline lineno="158"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="159" refid="classhelios_1_1input_1_1InputManager_1aabc1c034f222ef983272ac4145575458" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1InputManager_1aabc1c034f222ef983272ac4145575458" kindref="member">isConnected</ref>(<ref refid="namespacehelios_1_1input_1_1types_1a4dd39c1a113edbe36b92b088d8dbf2ff" kindref="member">helios::input::types::Gamepad</ref><sp/>gamepadId)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="160"><highlight class="normal"></highlight></codeline>
-<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="162"><highlight class="normal"></highlight></codeline>
-<codeline lineno="163"><highlight class="normal"></highlight></codeline>
-<codeline lineno="164"><highlight class="normal"></highlight></codeline>
-<codeline lineno="165"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>helios::input</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="162"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="163"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Retrieves<sp/>the<sp/>InputAdapter<sp/>associated<sp/>with<sp/>this<sp/>InputManager.</highlight></codeline>
+<codeline lineno="164"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="165"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>reference<sp/>to<sp/>the<sp/>InputAdapter<sp/>associated<sp/>with<sp/>this<sp/>InputManager.</highlight></codeline>
+<codeline lineno="166"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="167" refid="classhelios_1_1input_1_1InputManager_1a3702474b44961f776a97501f13d1620b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1InputAdapter" kindref="compound">helios::input::InputAdapter</ref>&amp;<sp/><ref refid="classhelios_1_1input_1_1InputManager_1a3702474b44961f776a97501f13d1620b" kindref="member">inputAdapter</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="169"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="170"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Retrieves<sp/>the<sp/>InputAdapter<sp/>associated<sp/>with<sp/>this<sp/>InputManager.</highlight></codeline>
+<codeline lineno="171"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="172"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>non-const<sp/>overload<sp/>allows<sp/>modification<sp/>of<sp/>InputAdapter<sp/>settings,</highlight></codeline>
+<codeline lineno="173"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>such<sp/>as<sp/>gamepad<sp/>deadzone<sp/>and<sp/>axis<sp/>inversion<sp/>configuration.</highlight></codeline>
+<codeline lineno="174"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="175"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>reference<sp/>to<sp/>the<sp/>InputAdapter<sp/>associated<sp/>with<sp/>this<sp/>InputManager.</highlight></codeline>
+<codeline lineno="176"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="177" refid="classhelios_1_1input_1_1InputManager_1a572c0a1172916da778df50383c475e97" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="namespacehelios" kindref="compound">helios</ref>::<ref refid="namespacehelios_1_1input" kindref="compound">input</ref>::<ref refid="classhelios_1_1input_1_1InputAdapter" kindref="compound">InputAdapter</ref>&amp;<sp/><ref refid="classhelios_1_1input_1_1InputManager_1a3702474b44961f776a97501f13d1620b" kindref="member">inputAdapter</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"></highlight></codeline>
+<codeline lineno="183"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>helios::input</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="include/helios/input/InputManager.ixx"/>
   </compounddef>

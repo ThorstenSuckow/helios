@@ -12,6 +12,9 @@ var hierarchy =
         [ "helios::app::controller::BasicWindowRenderingController", "classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController.html", null ]
       ] ]
     ] ],
+    [ "helios::input::gamepad::DeadzoneStrategy", "classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy.html", [
+      [ "helios::input::gamepad::RadialDeadzoneStrategy", "classhelios_1_1input_1_1gamepad_1_1RadialDeadzoneStrategy.html", null ]
+    ] ],
     [ "helios::event::Dispatcher", "classhelios_1_1event_1_1Dispatcher.html", null ],
     [ "helios::event::Event", "classhelios_1_1event_1_1Event.html", [
       [ "helios::window::event::WindowEvent", "classhelios_1_1window_1_1event_1_1WindowEvent.html", [
@@ -31,7 +34,8 @@ var hierarchy =
       [ "helios::scene::CullNoneStrategy", "classhelios_1_1scene_1_1CullNoneStrategy.html", null ]
     ] ],
     [ "helios::engine::game::GameObject", "classhelios_1_1engine_1_1game_1_1GameObject.html", null ],
-    [ "helios::input::GamepadState", "classhelios_1_1input_1_1GamepadState.html", null ],
+    [ "helios::input::gamepad::GamepadSettings", "classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html", null ],
+    [ "helios::input::gamepad::GamepadState", "classhelios_1_1input_1_1gamepad_1_1GamepadState.html", null ],
     [ "helios::engine::game::GameWorld", "classhelios_1_1engine_1_1game_1_1GameWorld.html", null ],
     [ "helios::ext::glfw::app::GLFWFactory", "classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWFactory.html", null ],
     [ "helios::ext::glfw::app::GLFWRAIIGuard", "classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard.html", null ],
@@ -45,6 +49,7 @@ var hierarchy =
     [ "helios::ext::imgui::ImGuiWidget", "classhelios_1_1ext_1_1imgui_1_1ImGuiWidget.html", [
       [ "helios::ext::imgui::widgets::CameraWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1CameraWidget.html", null ],
       [ "helios::ext::imgui::widgets::FpsWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget.html", null ],
+      [ "helios::ext::imgui::widgets::GamepadSettingsWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget.html", null ],
       [ "helios::ext::imgui::widgets::GamepadWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget.html", null ],
       [ "helios::ext::imgui::widgets::LogWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1LogWidget.html", null ],
       [ "helios::ext::imgui::widgets::MainMenuWidget", "classhelios_1_1ext_1_1imgui_1_1widgets_1_1MainMenuWidget.html", null ]

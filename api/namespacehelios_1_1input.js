@@ -1,5 +1,6 @@
 var namespacehelios_1_1input =
 [
+    [ "gamepad", "namespacehelios_1_1input_1_1gamepad.html", "namespacehelios_1_1input_1_1gamepad" ],
     [ "types", "namespacehelios_1_1input_1_1types.html", [
       [ "Gamepad", "namespacehelios_1_1input_1_1types.html#a4dd39c1a113edbe36b92b088d8dbf2ff", [
         [ "ONE", "namespacehelios_1_1input_1_1types.html#a4dd39c1a113edbe36b92b088d8dbf2ffaae8a44e1931122fe9aa20977535aaffb", null ],
@@ -13,7 +14,6 @@ var namespacehelios_1_1input =
         [ "size_", "namespacehelios_1_1input_1_1types.html#a963e220296531c047308439c3425bcc5a501d3c1d3d31f70db984de48396437f6", null ]
       ] ]
     ] ],
-    [ "GamepadState", "classhelios_1_1input_1_1GamepadState.html", "classhelios_1_1input_1_1GamepadState" ],
     [ "InputAdapter", "classhelios_1_1input_1_1InputAdapter.html", "classhelios_1_1input_1_1InputAdapter" ],
     [ "InputManager", "classhelios_1_1input_1_1InputManager.html", "classhelios_1_1input_1_1InputManager" ]
 ];

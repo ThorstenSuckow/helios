@@ -14,8 +14,8 @@ var searchData=
   ['translation_11',['translation',['../classhelios_1_1scene_1_1Transform.html#ade553e701cbae015794510224114c2fd',1,'helios::scene::Transform']]],
   ['transpose_12',['transpose',['../structhelios_1_1math_1_1mat4.html#aa5940ba880eb6ac1c64ca4f7117d7cc2',1,'helios::math::mat4']]],
   ['triangle_13',['Triangle',['../structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Triangle.html#acfd0d45878444edb071fb66cd8d0ee1d',1,'helios::rendering::asset::shape::basic::Triangle']]],
-  ['trigger_14',['trigger',['../classhelios_1_1input_1_1GamepadState.html#a7d1392d632a44eef9d61b454ed40df8c',1,'helios::input::GamepadState']]],
-  ['triggerleft_15',['triggerLeft',['../classhelios_1_1input_1_1GamepadState.html#a259753c014cb11fe211cca3137f67ae5',1,'helios::input::GamepadState']]],
-  ['triggerright_16',['triggerRight',['../classhelios_1_1input_1_1GamepadState.html#a18ff7a69f4c8ebba20a25f53ea7a9714',1,'helios::input::GamepadState']]],
+  ['trigger_14',['trigger',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#add4cb5588dfbc246ba5ba729afee2743',1,'helios::input::gamepad::GamepadState']]],
+  ['triggerleft_15',['triggerLeft',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#a24dee448f65b242cfa6fb36a2615559a',1,'helios::input::gamepad::GamepadState']]],
+  ['triggerright_16',['triggerRight',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#a71cd296694d25b524c2d48943faa1590',1,'helios::input::gamepad::GamepadState']]],
   ['typeid_17',['typeId',['../classhelios_1_1ext_1_1imgui_1_1ImGuiLogSink.html#ab80c1cfe5b99ab3a1d0b4a811995e912',1,'helios::ext::imgui::ImGuiLogSink::typeId()'],['../classhelios_1_1util_1_1log_1_1ConsoleSink.html#a8ff58267b554bfb4edc32d0e22804485',1,'helios::util::log::ConsoleSink::typeId()'],['../classhelios_1_1util_1_1log_1_1LogSink.html#a1eac0bfe8af64547c7f6f2fb9d815b17',1,'helios::util::log::LogSink::typeId()']]]
 ];

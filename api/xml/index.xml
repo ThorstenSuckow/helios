@@ -164,6 +164,16 @@
     <member refid="classhelios_1_1scene_1_1CullNoneStrategy_1ae80f1dc83394827d2515e22d0f7ed7b5" kind="function"><name>cull</name></member>
     <member refid="classhelios_1_1scene_1_1CullNoneStrategy_1a22667c9b69f3eb78088e8502e90c8382" kind="function"><name>cull</name></member>
   </compound>
+  <compound refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy" kind="class"><name>helios::input::gamepad::DeadzoneStrategy</name>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a3762bc530d61b887b87757ccc156db99" kind="variable"><name>stickNoiseThreshold_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1ab2d601fa84b631f66270f28f2fed9e06" kind="variable"><name>DEFAULT_STICK_NOISE_THRESHOLD</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a63d32d60498619f6a0e5f96f5cc30226" kind="function"><name>~DeadzoneStrategy</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a7066807dc8642ae12d29a5ad7a327473" kind="function"><name>DeadzoneStrategy</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a52139bff041f7128d0b562684587e32a" kind="function"><name>DeadzoneStrategy</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1ad4a87c7ee4ec5b7f08210aae95cac8a1" kind="function"><name>normalize</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a6c01ef746af11b99c2122617c6f36820" kind="function"><name>stickNoiseThreshold</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a9df5a94dd6bf37d477dd6fd7a73c709c" kind="function"><name>setStickNoiseThreshold</name></member>
+  </compound>
   <compound refid="classhelios_1_1event_1_1DequeEventQueue" kind="class"><name>helios::event::DequeEventQueue</name>
     <member refid="classhelios_1_1event_1_1DequeEventQueue_1a7a7c941f59eece3f4e6ba9b2b3e6143f" kind="variable"><name>events</name></member>
     <member refid="classhelios_1_1event_1_1DequeEventQueue_1ab1224ebbf6fd85dbc31df77d05df1945" kind="function"><name>add</name></member>
@@ -289,68 +299,99 @@
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a44d975fd81970a7f23dd2f58604d03d9" kind="function"><name>setRotation</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a0f8f05fab17730b8ca40520fbde14c2c" kind="function"><name>setTranslation</name></member>
   </compound>
-  <compound refid="classhelios_1_1input_1_1GamepadState" kind="class"><name>helios::input::GamepadState</name>
-    <member refid="classhelios_1_1input_1_1GamepadState_1ad8c085431f298af3cc3afa79ad820dc7" kind="variable"><name>logger_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a21cdaf56ba30ed42b31f9e062bb46f14" kind="variable"><name>buttonA_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a1e9529292400896c753c259746eecd2b" kind="variable"><name>buttonB_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1ad24a0975b51c61902ae085b096236c91" kind="variable"><name>buttonX_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1ab06f4f271afa11359e6a0f23338bc653" kind="variable"><name>buttonY_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a451e505519658dc5472f83526cf2a53c" kind="variable"><name>buttonStart_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1aead1c0738c2cdc24454a3a676a03dd5e" kind="variable"><name>buttonBack_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a8d2fba5a754e4c19fd98fe7658402477" kind="variable"><name>buttonGuide_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1aa7e67fd31511c5ba3a83902a270b44c3" kind="variable"><name>buttonLeftBumper_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a0ecd106fe9ff37b3132140517a30a083" kind="variable"><name>buttonRightBumper_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1aa3f7ae07249fc76b59b96c7dac05dd69" kind="variable"><name>buttonLeftThumb_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a107fab01d7b931d866cd85e768285761" kind="variable"><name>buttonRightThumb_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1ab361f0c4f07376450b2b4809f91ebf33" kind="variable"><name>buttonDpadUp_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a9df88e7245034b4f3151e8cada79314c" kind="variable"><name>buttonDpadRight_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1af9cc0161866d1d5230d9ffe2302a7a45" kind="variable"><name>buttonDpadDown_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a7f957a5c2b13e9c20deab2c2dc8f541a" kind="variable"><name>buttonDpadLeft_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1ad0189577e2486c557ce705638efe1d9d" kind="variable"><name>needsUpdate_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1ab31350084cabf4fa6188b121d77686e2" kind="variable"><name>axisLeftX_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1aab62c22c719a8d718d470999e695e2c5" kind="variable"><name>axisLeftY_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a4a4a1c312eb56a79f8e0e700fa30d333" kind="variable"><name>axisRightX_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1ad4553d2ce06d5e4a8a3e47d590d99d0a" kind="variable"><name>axisRightY_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a38d3a3b4fe9bc121ca1901da09a96efd" kind="variable"><name>triggerLeft_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a3e521f636d3cc136b677e90b7e1b8574" kind="variable"><name>triggerRight_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a8076f7e190bbca3ffff79640744af15f" kind="variable"><name>left_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a0778da4e1ef41244e83fe6ac15b57cf9" kind="variable"><name>right_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1abf80c0988d8b5580704abad0ef702436" kind="variable"><name>trigger_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1af3a61bcf68c0c3f938335520075bd06d" kind="function"><name>update</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1ae676f169b400e5077fbdc5af9a71885e" kind="function"><name>~GamepadState</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a85d8b1b0dfc66705a4269fa05a825bd7" kind="function"><name>GamepadState</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a4571c54073e4f9d9db2630d1f7c88628" kind="function"><name>GamepadState</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a22a26dfe8eeef1007c641452b768f0f9" kind="function"><name>updateAxes</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a2e00f4822888f35be3ae6ccb3a1313c7" kind="function"><name>leftX</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a958a26add1426a6fa92f1434948f2bff" kind="function"><name>leftY</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a8f1f61524d74182d1ade0543c44586d1" kind="function"><name>rightX</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a34175d9b0f9f695b14349b2122ecc690" kind="function"><name>rightY</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a259753c014cb11fe211cca3137f67ae5" kind="function"><name>triggerLeft</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a18ff7a69f4c8ebba20a25f53ea7a9714" kind="function"><name>triggerRight</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a0e93a3d71312aebe3d318e7b91fc5d0e" kind="function"><name>left</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a35444e63738a9208a008d6a823ae9b9a" kind="function"><name>right</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a7d1392d632a44eef9d61b454ed40df8c" kind="function"><name>trigger</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1aad622f428f48b34e16ad5ec334bd127b" kind="function"><name>buttonA</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a13d75e66ef5ae123d3327ccbef0c5633" kind="function"><name>buttonB</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a53bb4989b63951ebf222bf5c6bd277a4" kind="function"><name>buttonX</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a856df613c1508ad369875f94b042c4f2" kind="function"><name>buttonY</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a8544813c5c7257f91d8c4e744339cdfb" kind="function"><name>buttonStart</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a8477f57add844940545f15114a442f58" kind="function"><name>buttonBack</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a431dc64f41310e1a27927e856194c1a5" kind="function"><name>buttonGuide</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a47f2f780c1b29fafdf9f9eeff5197915" kind="function"><name>buttonLeftBumper</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a2287f433f45a9ad3aad31f39df731a93" kind="function"><name>buttonRightBumper</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a7323e081da339576b34477ee0fc3daae" kind="function"><name>buttonLeftThumb</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1ae0439676110dabd9f4be364973e6351b" kind="function"><name>buttonRightThumb</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1adcf29eec4d0c29f716c1013b1254c23c" kind="function"><name>buttonDpadUp</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a0c868ae7d3209efe9b807992f2eb6899" kind="function"><name>buttonDpadRight</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a844503e4099979e7c34f0350c78271cf" kind="function"><name>buttonDpadDown</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a75bca4b779fe81f43d8f8425180b7ece" kind="function"><name>buttonDpadLeft</name></member>
+  <compound refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings" kind="class"><name>helios::input::gamepad::GamepadSettings</name>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1a0afd4f380d88d940ba4edb8906a8936d" kind="variable"><name>leftStickDeadzone_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1ada40dbf32ae8be8a027d062246075c32" kind="variable"><name>rightStickDeadzone_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1aafbeae2b454166e10ce17c1e84940d1c" kind="variable"><name>invertLeftX_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1add06d1d6c00e1d82bd15d0b48d3f661f" kind="variable"><name>invertLeftY_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1aeacb0a791b11ee4d6934757cbfe4cffa" kind="variable"><name>invertRightX_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1a4b41c151bd9f6216f0bfb54d0c052c7a" kind="variable"><name>invertRightY_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1a88c393bacbe83e4722e21a326ff87f44" kind="function"><name>~GamepadSettings</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1a62440565754425f1b3337aebeffcb224" kind="function"><name>GamepadSettings</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1a293b6bf5db21ef05a729d6ae8b7d9cf6" kind="function"><name>setLeftStickDeadzone</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1a28cfbd69d43a587eaebf11b504800e10" kind="function"><name>setRightStickDeadzone</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1af5ac72dc6b04400f79bc7fab851c0d02" kind="function"><name>setInvertLeftX</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1aeeb056d8dcc5c7007e3a1dd542c4ddea" kind="function"><name>setInvertLeftY</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1af93e6e1d89959cc5e75a690106067bbb" kind="function"><name>setInvertRightX</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1a43ef8d4468525f7668cfeb3507b94cc0" kind="function"><name>setInvertRightY</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1a00df8aa3a38cb9b816c2eb0c10821265" kind="function"><name>leftStickDeadzone</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1adf78328ccc756a4d8a514fdc6b7cf653" kind="function"><name>rightStickDeadzone</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1a1e2b916bac7f23fab5a61554595fe603" kind="function"><name>invertLeftX</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1a75135af916c4bdc16b8637112c102b16" kind="function"><name>invertLeftY</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1ac95d69c9b3265c0b598e0020bbb80309" kind="function"><name>invertRightX</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1a1a9fef80c9b2265e9cf1737aca020702" kind="function"><name>invertRightY</name></member>
+  </compound>
+  <compound refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget" kind="class"><name>helios::ext::imgui::widgets::GamepadSettingsWidget</name>
+    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget_1a1912bf43c05e991e20b8016f6fd3b27e" kind="variable"><name>inputAdapter_</name></member>
+    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget_1a49dff64b55a2154dd25b079aeb414a18" kind="variable"><name>selectedGamepadIndex_</name></member>
+    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget_1a9faf638e10986886c0bf058f3d352d83" kind="function"><name>indexToId</name></member>
+    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget_1a6279a8fc3504a82c4c408b363f5d81c1" kind="function"><name>GamepadSettingsWidget</name></member>
+    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget_1a4bf6248a0eac6b458e6a3962eba5a134" kind="function"><name>draw</name></member>
+  </compound>
+  <compound refid="classhelios_1_1input_1_1gamepad_1_1GamepadState" kind="class"><name>helios::input::gamepad::GamepadState</name>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a325cea504c73fc8434bb9d49d95e1c2c" kind="variable"><name>logger_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a37dcba74ef2c26410c4cca731669d1eb" kind="variable"><name>buttonA_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ae5cb1b517a8c4f926d1f96dd4595994f" kind="variable"><name>buttonB_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1af3478bd934ad44820f83737fce5900b4" kind="variable"><name>buttonX_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a3c6285085def7476581e628f1368c389" kind="variable"><name>buttonY_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1aa3867ef03a5b5f5cfcb419f4f74cf974" kind="variable"><name>buttonStart_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ada5f6e008c624319d446574709438a87" kind="variable"><name>buttonBack_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ab1e303c22fe2b7407ff61561149cd24f" kind="variable"><name>buttonGuide_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a625487eb9eb45856d940e24835279d8b" kind="variable"><name>buttonLeftBumper_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a906b02f423ef230d3523201d46e9c28b" kind="variable"><name>buttonRightBumper_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a736fb9190d6bc42c2a93861544caba12" kind="variable"><name>buttonLeftThumb_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7a6c592f5925e83cf26f3348237c9c48" kind="variable"><name>buttonRightThumb_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a52205ef339bf07b5c76921ee001cc4f4" kind="variable"><name>buttonDpadUp_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a9855843f8c9083fcff5b1692193ae7b8" kind="variable"><name>buttonDpadRight_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a070b84f29c9db635c34f08ddf2e58189" kind="variable"><name>buttonDpadDown_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a720c42a55f7c970bb3b8308e33727232" kind="variable"><name>buttonDpadLeft_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1abcdad9fd3caf6b083a2cff6fde8d6b9a" kind="variable"><name>needsUpdate_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a4cf399b3a341b4698bbaa06d1cc93e11" kind="variable"><name>axisLeftX_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a35c166617e5ee812004752d56d63680f" kind="variable"><name>axisLeftY_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ad65321ad66f955100089607bc1eaf4be" kind="variable"><name>axisRightX_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a6551fc2bec3b38a3a3fedec1e37d242c" kind="variable"><name>axisRightY_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ad2e2787d84a497b91639810b8f7bc084" kind="variable"><name>triggerLeft_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a99d2b5fb49b2212dffe9294f31fc5777" kind="variable"><name>triggerRight_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ac2ef934b898514fa3ada5223f9b37bfd" kind="variable"><name>left_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a9d5a4d43bcd7dc77fe37907b7bae1ff2" kind="variable"><name>right_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a3ad5ba7e6bb8316530db9b57b3c32fe1" kind="variable"><name>trigger_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ad0559ef6b4afc34bc41feaab6aee266d" kind="function"><name>update</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1aa7cd980153e294fff02ded9199034daf" kind="function"><name>~GamepadState</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a34778e517d4c1c4472914439b995f3dd" kind="function"><name>GamepadState</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" kind="function"><name>GamepadState</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" kind="function"><name>updateAxes</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a15503e1057188f37e734b4e430283cba" kind="function"><name>leftX</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ac5875cb2c966c9ea593e1f729a4ad965" kind="function"><name>leftY</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1adc8c001a3468e86ab3bdc11a2a1b18c4" kind="function"><name>rightX</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a8c88c277946b970cddfe8d532e283522" kind="function"><name>rightY</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a24dee448f65b242cfa6fb36a2615559a" kind="function"><name>triggerLeft</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a71cd296694d25b524c2d48943faa1590" kind="function"><name>triggerRight</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a37a76a1aaeae04c4f19c7396f57158e1" kind="function"><name>left</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1aab66dc09e2d3d2f673b176028b409073" kind="function"><name>right</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1add4cb5588dfbc246ba5ba729afee2743" kind="function"><name>trigger</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ad50c09d2f84f2e1095f937c787eac86e" kind="function"><name>buttonA</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a068967ab65a6874ce5b5de039af79e8c" kind="function"><name>buttonB</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a2416fe357772c57d9dcf0fa46f3e255c" kind="function"><name>buttonX</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a6bbce85c5ea851e8a6fa47e3c8e1d330" kind="function"><name>buttonY</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a2023f54665e7aa39ba455a901adc6e1d" kind="function"><name>buttonStart</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a8b2355cd51de412b86fc565fa4f2d4e4" kind="function"><name>buttonBack</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ac37675a6b2a9f26eacb75481a8654e60" kind="function"><name>buttonGuide</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a0e29924d8d026778ace2e91c778ba4a5" kind="function"><name>buttonLeftBumper</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a0153832e95905c8c7ad3ad9092d8eac0" kind="function"><name>buttonRightBumper</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1afa01f268c73449a45d5cba341f68648a" kind="function"><name>buttonLeftThumb</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1af6450490a050564bf1366148b04d67de" kind="function"><name>buttonRightThumb</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ab92525c10fcd68ba5b3c780f52e38174" kind="function"><name>buttonDpadUp</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1afbd0ee0861ba38451c1aecbb6fb0e283" kind="function"><name>buttonDpadRight</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7a4a6a420b36e858ab68f6fd181ca0f0" kind="function"><name>buttonDpadDown</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a1de9efc2cfe80fa50b14d3f0a7bee4ac" kind="function"><name>buttonDpadLeft</name></member>
   </compound>
   <compound refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget" kind="class"><name>helios::ext::imgui::widgets::GamepadWidget</name>
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget_1a70b651d26224074e17cbdf24e22cc449" kind="variable"><name>inputManager_</name></member>
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget_1a7713c1af36abb827f7445842f7453ca6" kind="variable"><name>selectedGamepadIndex_</name></member>
+    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget_1a0f9204a8e7197c55966a414a95407c9a" kind="variable"><name>showSettings_</name></member>
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget_1a5eacd72558d317dff499463fdd08b56b" kind="function"><name>indexToId</name></member>
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget_1af6b4f848b82fa4b282c7f71b87727dd9" kind="function"><name>drawStickVisualizer</name></member>
+    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget_1a99fc668df9835f58159b09a4e54c6757" kind="function"><name>drawSettingsPanel</name></member>
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget_1a01362127380439b6a4dca4bd1222ea89" kind="function"><name>GamepadWidget</name></member>
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget_1a014d3bec3cd6af14a0870687d896fc30" kind="function"><name>draw</name></member>
   </compound>
@@ -378,12 +419,13 @@
     <member refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWFactory_1a72f9711b61439bcc15a60834bddfd7c3" kind="function"><name>makeWindowCfg</name></member>
   </compound>
   <compound refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter" kind="class"><name>helios::ext::glfw::input::GLFWInputAdapter</name>
-    <member refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a2adea2135cad571616b29af5ffb645cb" kind="variable"><name>gamepadStates_</name></member>
+    <member refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a01262068ef9519701f43cab7cfd18fdc" kind="variable"><name>gamepadStates_</name></member>
+    <member refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1aafecdea13a5329c45a8e35686371a108" kind="function"><name>GLFWInputAdapter</name></member>
     <member refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a7f04d04c60d95fc596929ed1b2bc345c" kind="function"><name>isKeyPressed</name></member>
     <member refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a611ca19866aa15359d01b8a8ef791c84" kind="function"><name>isKeyPressed</name></member>
-    <member refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a9c0e5c21620b816d973db51d72950cd2" kind="function"><name>GLFWInputAdapter::gamepadState</name></member>
-    <member refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a1334fd6083a02d0e07b889bba4578211" kind="function"><name>GLFWInputAdapter::updateGamepadState</name></member>
-    <member refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1acc76f54185f1a1c1de91a0cad400a806" kind="function"><name>GLFWInputAdapter::isConnected</name></member>
+    <member refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a281b70c6d8c50731c843c86e5e5e2942" kind="function"><name>gamepadState</name></member>
+    <member refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1af65a6a8e99aac0f6867b6456d0849f9a" kind="function"><name>updateGamepadState</name></member>
+    <member refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a703e9e04a1554cebea6f1d1924c034dc" kind="function"><name>isConnected</name></member>
   </compound>
   <compound refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard" kind="class"><name>helios::ext::glfw::app::GLFWRAIIGuard</name>
     <member refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a74d8ce68f5364a1cff9d46d15698a18d" kind="function"><name>GLFWRAIIGuard</name></member>
@@ -482,12 +524,15 @@
   </compound>
   <compound refid="classhelios_1_1input_1_1InputAdapter" kind="class"><name>helios::input::InputAdapter</name>
     <member refid="classhelios_1_1input_1_1InputAdapter_1a7e70390747059f6c7dc6665c59819a86" kind="variable"><name>logger_</name></member>
-    <member refid="classhelios_1_1input_1_1InputAdapter_1a9d0ad5cfffd1efd405cc0b4aa4ce9c79" kind="function"><name>InputAdapter</name></member>
+    <member refid="classhelios_1_1input_1_1InputAdapter_1a7864654aa3988de5f27f625c7f743e3c" kind="variable"><name>deadzoneStrategy_</name></member>
+    <member refid="classhelios_1_1input_1_1InputAdapter_1ad33c6c602987f39854bebac0826387ee" kind="variable"><name>gamepadSettings_</name></member>
     <member refid="classhelios_1_1input_1_1InputAdapter_1ac0e01bc42c45d7bce722836e162259bc" kind="function"><name>~InputAdapter</name></member>
+    <member refid="classhelios_1_1input_1_1InputAdapter_1af98fdb57e1005ed248c09a11f4020040" kind="function"><name>InputAdapter</name></member>
     <member refid="classhelios_1_1input_1_1InputAdapter_1a8896a83d1b86578aa3c1f13be1c5e63f" kind="function"><name>isKeyPressed</name></member>
     <member refid="classhelios_1_1input_1_1InputAdapter_1a3a5e1e0e577c8af5877f10d9578d4875" kind="function"><name>isConnected</name></member>
     <member refid="classhelios_1_1input_1_1InputAdapter_1a5b3852c685d7321d2faeb2de79aad538" kind="function"><name>updateGamepadState</name></member>
-    <member refid="classhelios_1_1input_1_1InputAdapter_1ae64e5b1f78b57e9cce3c092c379605d6" kind="function"><name>gamepadState</name></member>
+    <member refid="classhelios_1_1input_1_1InputAdapter_1aa636d6f6f740d416d8176234457272d2" kind="function"><name>gamepadState</name></member>
+    <member refid="classhelios_1_1input_1_1InputAdapter_1a79d74e9e0dbe1bc6da8eb6eecfee232f" kind="function"><name>gamepadSettings</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1game_1_1InputHandler" kind="class"><name>helios::engine::game::InputHandler</name>
     <member refid="classhelios_1_1engine_1_1game_1_1InputHandler_1a7da0fe18ebf06348c105d7948d77edbc" kind="function"><name>~InputHandler</name></member>
@@ -504,13 +549,15 @@
     <member refid="classhelios_1_1input_1_1InputManager_1ab46c4ce60870839d557ba3d141964f01" kind="function"><name>poll</name></member>
     <member refid="classhelios_1_1input_1_1InputManager_1a9cdcf0b8c5ca77db5cba2498132479f1" kind="function"><name>isKeyPressed</name></member>
     <member refid="classhelios_1_1input_1_1InputManager_1a138047fd0784a90715758d5e44afea3d" kind="function"><name>registerGamepads</name></member>
-    <member refid="classhelios_1_1input_1_1InputManager_1a70f09d2b56d05c0ba55df05d3526f4f9" kind="function"><name>gamepadState</name></member>
+    <member refid="classhelios_1_1input_1_1InputManager_1a3ae14ffca9c0950090bffa87d8ef7b7f" kind="function"><name>gamepadState</name></member>
     <member refid="classhelios_1_1input_1_1InputManager_1aabc1c034f222ef983272ac4145575458" kind="function"><name>isConnected</name></member>
+    <member refid="classhelios_1_1input_1_1InputManager_1a3702474b44961f776a97501f13d1620b" kind="function"><name>inputAdapter</name></member>
+    <member refid="classhelios_1_1input_1_1InputManager_1a572c0a1172916da778df50383c475e97" kind="function"><name>inputAdapter</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1game_1_1InputSnapshot" kind="class"><name>helios::engine::game::InputSnapshot</name>
-    <member refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1a4b983340e381b90606edd210da950170" kind="variable"><name>gamepadState_</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1a95914eaa330c5b705907a2f05cc3824c" kind="function"><name>InputSnapshot</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1abdd9b7beeb39d85bf8f3fc2937d2fd2b" kind="function"><name>gamepadState</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1ab11e7f66dff4f2781262bd2b5ed8ea78" kind="variable"><name>gamepadState_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1af5f6e43831a9b8ae1c41c687f6a5c38e" kind="function"><name>InputSnapshot</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1a6d9e2aca7dd270d34ba434f2a768d488" kind="function"><name>gamepadState</name></member>
   </compound>
   <compound refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Line" kind="struct"><name>helios::rendering::asset::shape::basic::Line</name>
     <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Line_1a427210e20dc07acf0a3d765892d66074" kind="function"><name>Line</name></member>
@@ -745,6 +792,11 @@
     <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLUniformLocationMap_1aa688ce7e3b78fd4adbda8c95394081a3" kind="function"><name>OpenGLUniformLocationMap</name></member>
     <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLUniformLocationMap_1aae51f19d0254f29ec4bc5fb8db13d083" kind="function"><name>set</name></member>
     <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLUniformLocationMap_1a3dd885694844984754ae9b567087bbf8" kind="function"><name>get</name></member>
+  </compound>
+  <compound refid="classhelios_1_1input_1_1gamepad_1_1RadialDeadzoneStrategy" kind="class"><name>helios::input::gamepad::RadialDeadzoneStrategy</name>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1RadialDeadzoneStrategy_1a3ace9ef57862c681eaa2f767288c88ec" kind="function"><name>RadialDeadzoneStrategy</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1RadialDeadzoneStrategy_1aa1c7ac7f01e8a2936027aa68c96a3acd" kind="function"><name>RadialDeadzoneStrategy</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1RadialDeadzoneStrategy_1ab2978ad6d7b34ede7dcf4a91c24cab8e" kind="function"><name>normalize</name></member>
   </compound>
   <compound refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Rectangle" kind="struct"><name>helios::rendering::asset::shape::basic::Rectangle</name>
     <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Rectangle_1a107d9bec5afd9fdf6e99ca68deee8f7f" kind="function"><name>Rectangle</name></member>
@@ -1201,6 +1253,8 @@
   </compound>
   <compound refid="namespacehelios_1_1input" kind="namespace"><name>helios::input</name>
   </compound>
+  <compound refid="namespacehelios_1_1input_1_1gamepad" kind="namespace"><name>helios::input::gamepad</name>
+  </compound>
   <compound refid="namespacehelios_1_1input_1_1types" kind="namespace"><name>helios::input::types</name>
     <member refid="namespacehelios_1_1input_1_1types_1a4dd39c1a113edbe36b92b088d8dbf2ff" kind="enum"><name>Gamepad</name></member>
     <member refid="namespacehelios_1_1input_1_1types_1a4dd39c1a113edbe36b92b088d8dbf2ffaae8a44e1931122fe9aa20977535aaffb" kind="enumvalue"><name>ONE</name></member>
@@ -1234,6 +1288,7 @@
     <member refid="namespacehelios_1_1math_1a08252f81850c5902e3c8dead272f3332" kind="typedef"><name>vec4f</name></member>
     <member refid="namespacehelios_1_1math_1a78a0f495523b71681b549f098f994126" kind="typedef"><name>vec4d</name></member>
     <member refid="namespacehelios_1_1math_1a9ce6ecf5869b53d92a26354e2c48d0b4" kind="typedef"><name>vec4i</name></member>
+    <member refid="namespacehelios_1_1math_1af25d93f23f91acae02abfd7706b2e36d" kind="variable"><name>EPSILON_LENGTH</name></member>
     <member refid="namespacehelios_1_1math_1a3009ee1714550dc2af4d7e5e952e8a90" kind="function"><name>perspective</name></member>
     <member refid="namespacehelios_1_1math_1aef6bef7ca3d31a4908a66e16c9771420" kind="function"><name>lookAt</name></member>
     <member refid="namespacehelios_1_1math_1a643691235959c2f53d144a4ee9a0e251" kind="function"><name>rotate</name></member>
@@ -1364,6 +1419,8 @@
   </compound>
   <compound refid="helios_2input_2__module_8ixx" kind="file"><name>_module.ixx</name>
   </compound>
+  <compound refid="helios_2input_2gamepad_2__module_8ixx" kind="file"><name>_module.ixx</name>
+  </compound>
   <compound refid="helios_2input_2types_2__module_8ixx" kind="file"><name>_module.ixx</name>
   </compound>
   <compound refid="helios_2math_2__module_8ixx" kind="file"><name>_module.ixx</name>
@@ -1448,6 +1505,8 @@
   </compound>
   <compound refid="helios_2event_2README_8md" kind="file"><name>README.md</name>
   </compound>
+  <compound refid="helios_2input_2gamepad_2README_8md" kind="file"><name>README.md</name>
+  </compound>
   <compound refid="helios_2input_2README_8md" kind="file"><name>README.md</name>
   </compound>
   <compound refid="helios_2input_2types_2README_8md" kind="file"><name>README.md</name>
@@ -1493,6 +1552,8 @@
   <compound refid="CameraWidget_8ixx" kind="file"><name>CameraWidget.ixx</name>
   </compound>
   <compound refid="FpsWidget_8ixx" kind="file"><name>FpsWidget.ixx</name>
+  </compound>
+  <compound refid="GamepadSettingsWidget_8ixx" kind="file"><name>GamepadSettingsWidget.ixx</name>
   </compound>
   <compound refid="GamepadWidget_8ixx" kind="file"><name>GamepadWidget.ixx</name>
   </compound>
@@ -1554,8 +1615,14 @@
   </compound>
   <compound refid="EventQueue_8ixx" kind="file"><name>EventQueue.ixx</name>
   </compound>
+  <compound refid="DeadzoneStrategy_8ixx" kind="file"><name>DeadzoneStrategy.ixx</name>
+  </compound>
+  <compound refid="GamepadSettings_8ixx" kind="file"><name>GamepadSettings.ixx</name>
+  </compound>
   <compound refid="GamepadState_8ixx" kind="file"><name>GamepadState.ixx</name>
     <member refid="GamepadState_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
+  </compound>
+  <compound refid="RadialDeadzoneStrategy_8ixx" kind="file"><name>RadialDeadzoneStrategy.ixx</name>
   </compound>
   <compound refid="InputAdapter_8ixx" kind="file"><name>InputAdapter.ixx</name>
     <member refid="InputAdapter_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
@@ -1734,6 +1801,8 @@
   </compound>
   <compound refid="dir_46c7b0b04924cca8aa10726746d57f30" kind="dir"><name>include/helios/engine/game</name>
   </compound>
+  <compound refid="dir_83df0265b5cf9b36b4f1d4486d9fc466" kind="dir"><name>include/helios/input/gamepad</name>
+  </compound>
   <compound refid="dir_87bb11e6601443413726efc9dc479d01" kind="dir"><name>include/ext/glfw</name>
   </compound>
   <compound refid="dir_08c09894bd9f0ab4b1e9fdc7a2628766" kind="dir"><name>include/helios</name>
@@ -1817,12 +1886,13 @@
     <member refid="namespacehelios_1_1ext_1_1glfw_1_1input_1_1GLFWGamepadLookup_1a62b69cffc672cd5aaf3b0d9145d92cbf" kind="function"><name>from</name></member>
   </compound>
   <compound refid="module__helios_8ext_8glfw_8input_8GLFWInputAdapter" kind="module"><name>helios.ext.glfw.input.GLFWInputAdapter</name>
-    <member refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a2adea2135cad571616b29af5ffb645cb" kind="variable"><name>gamepadStates_</name></member>
+    <member refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a01262068ef9519701f43cab7cfd18fdc" kind="variable"><name>gamepadStates_</name></member>
+    <member refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1aafecdea13a5329c45a8e35686371a108" kind="function"><name>GLFWInputAdapter</name></member>
     <member refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a7f04d04c60d95fc596929ed1b2bc345c" kind="function"><name>isKeyPressed</name></member>
     <member refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a611ca19866aa15359d01b8a8ef791c84" kind="function"><name>isKeyPressed</name></member>
-    <member refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a9c0e5c21620b816d973db51d72950cd2" kind="function"><name>GLFWInputAdapter::gamepadState</name></member>
-    <member refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a1334fd6083a02d0e07b889bba4578211" kind="function"><name>GLFWInputAdapter::updateGamepadState</name></member>
-    <member refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1acc76f54185f1a1c1de91a0cad400a806" kind="function"><name>GLFWInputAdapter::isConnected</name></member>
+    <member refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a281b70c6d8c50731c843c86e5e5e2942" kind="function"><name>gamepadState</name></member>
+    <member refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1af65a6a8e99aac0f6867b6456d0849f9a" kind="function"><name>updateGamepadState</name></member>
+    <member refid="classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter_1a703e9e04a1554cebea6f1d1924c034dc" kind="function"><name>isConnected</name></member>
   </compound>
   <compound refid="module__helios_8ext_8glfw_8input_8GLFWKeyLookup" kind="module"><name>helios.ext.glfw.input.GLFWKeyLookup</name>
     <member refid="namespacehelios_1_1ext_1_1glfw_1_1input_1_1GLFWKeyLookup_1a0ffb2d402b8554928e160ca34fe723b1" kind="function"><name>from</name></member>
@@ -1947,11 +2017,20 @@
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a5beb965047e8e583295ced59916687cd" kind="function"><name>FpsWidget</name></member>
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a17f388a994c99823df57e0a2c014df4f" kind="function"><name>draw</name></member>
   </compound>
+  <compound refid="module__helios_8ext_8imgui_8widgets_8GamepadSettingsWidget" kind="module"><name>helios.ext.imgui.widgets.GamepadSettingsWidget</name>
+    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget_1a1912bf43c05e991e20b8016f6fd3b27e" kind="variable"><name>inputAdapter_</name></member>
+    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget_1a49dff64b55a2154dd25b079aeb414a18" kind="variable"><name>selectedGamepadIndex_</name></member>
+    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget_1a9faf638e10986886c0bf058f3d352d83" kind="function"><name>indexToId</name></member>
+    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget_1a6279a8fc3504a82c4c408b363f5d81c1" kind="function"><name>GamepadSettingsWidget</name></member>
+    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadSettingsWidget_1a4bf6248a0eac6b458e6a3962eba5a134" kind="function"><name>draw</name></member>
+  </compound>
   <compound refid="module__helios_8ext_8imgui_8widgets_8GamepadWidget" kind="module"><name>helios.ext.imgui.widgets.GamepadWidget</name>
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget_1a70b651d26224074e17cbdf24e22cc449" kind="variable"><name>inputManager_</name></member>
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget_1a7713c1af36abb827f7445842f7453ca6" kind="variable"><name>selectedGamepadIndex_</name></member>
+    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget_1a0f9204a8e7197c55966a414a95407c9a" kind="variable"><name>showSettings_</name></member>
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget_1a5eacd72558d317dff499463fdd08b56b" kind="function"><name>indexToId</name></member>
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget_1af6b4f848b82fa4b282c7f71b87727dd9" kind="function"><name>drawStickVisualizer</name></member>
+    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget_1a99fc668df9835f58159b09a4e54c6757" kind="function"><name>drawSettingsPanel</name></member>
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget_1a01362127380439b6a4dca4bd1222ea89" kind="function"><name>GamepadWidget</name></member>
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget_1a014d3bec3cd6af14a0870687d896fc30" kind="function"><name>draw</name></member>
   </compound>
@@ -2202,9 +2281,9 @@
     <member refid="classhelios_1_1engine_1_1game_1_1InputHandler_1ab37b0cba250f48c9e8a39acd836fadf2" kind="function"><name>handleInput</name></member>
   </compound>
   <compound refid="module__helios_8engine_8game_8InputSnapshot" kind="module"><name>helios.engine.game.InputSnapshot</name>
-    <member refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1a4b983340e381b90606edd210da950170" kind="variable"><name>gamepadState_</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1a95914eaa330c5b705907a2f05cc3824c" kind="function"><name>InputSnapshot</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1abdd9b7beeb39d85bf8f3fc2937d2fd2b" kind="function"><name>gamepadState</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1ab11e7f66dff4f2781262bd2b5ed8ea78" kind="variable"><name>gamepadState_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1af5f6e43831a9b8ae1c41c687f6a5c38e" kind="function"><name>InputSnapshot</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1InputSnapshot_1a6d9e2aca7dd270d34ba434f2a768d488" kind="function"><name>gamepadState</name></member>
   </compound>
   <compound refid="module__helios_8engine_8Tickable" kind="module"><name>helios.engine.Tickable</name>
     <member refid="classhelios_1_1engine_1_1Tickable_1a8a4365356999da75687abef50d91b8da" kind="function"><name>~Tickable</name></member>
@@ -2267,71 +2346,113 @@
   </compound>
   <compound refid="module__helios_8input" kind="module"><name>helios.input</name>
   </compound>
-  <compound refid="module__helios_8input_8GamepadState" kind="module"><name>helios.input.GamepadState</name>
-    <member refid="classhelios_1_1input_1_1GamepadState_1ad8c085431f298af3cc3afa79ad820dc7" kind="variable"><name>logger_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a21cdaf56ba30ed42b31f9e062bb46f14" kind="variable"><name>buttonA_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a1e9529292400896c753c259746eecd2b" kind="variable"><name>buttonB_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1ad24a0975b51c61902ae085b096236c91" kind="variable"><name>buttonX_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1ab06f4f271afa11359e6a0f23338bc653" kind="variable"><name>buttonY_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a451e505519658dc5472f83526cf2a53c" kind="variable"><name>buttonStart_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1aead1c0738c2cdc24454a3a676a03dd5e" kind="variable"><name>buttonBack_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a8d2fba5a754e4c19fd98fe7658402477" kind="variable"><name>buttonGuide_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1aa7e67fd31511c5ba3a83902a270b44c3" kind="variable"><name>buttonLeftBumper_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a0ecd106fe9ff37b3132140517a30a083" kind="variable"><name>buttonRightBumper_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1aa3f7ae07249fc76b59b96c7dac05dd69" kind="variable"><name>buttonLeftThumb_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a107fab01d7b931d866cd85e768285761" kind="variable"><name>buttonRightThumb_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1ab361f0c4f07376450b2b4809f91ebf33" kind="variable"><name>buttonDpadUp_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a9df88e7245034b4f3151e8cada79314c" kind="variable"><name>buttonDpadRight_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1af9cc0161866d1d5230d9ffe2302a7a45" kind="variable"><name>buttonDpadDown_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a7f957a5c2b13e9c20deab2c2dc8f541a" kind="variable"><name>buttonDpadLeft_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1ad0189577e2486c557ce705638efe1d9d" kind="variable"><name>needsUpdate_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1ab31350084cabf4fa6188b121d77686e2" kind="variable"><name>axisLeftX_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1aab62c22c719a8d718d470999e695e2c5" kind="variable"><name>axisLeftY_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a4a4a1c312eb56a79f8e0e700fa30d333" kind="variable"><name>axisRightX_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1ad4553d2ce06d5e4a8a3e47d590d99d0a" kind="variable"><name>axisRightY_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a38d3a3b4fe9bc121ca1901da09a96efd" kind="variable"><name>triggerLeft_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a3e521f636d3cc136b677e90b7e1b8574" kind="variable"><name>triggerRight_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a8076f7e190bbca3ffff79640744af15f" kind="variable"><name>left_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a0778da4e1ef41244e83fe6ac15b57cf9" kind="variable"><name>right_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1abf80c0988d8b5580704abad0ef702436" kind="variable"><name>trigger_</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1af3a61bcf68c0c3f938335520075bd06d" kind="function"><name>update</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1ae676f169b400e5077fbdc5af9a71885e" kind="function"><name>~GamepadState</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a85d8b1b0dfc66705a4269fa05a825bd7" kind="function"><name>GamepadState</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a4571c54073e4f9d9db2630d1f7c88628" kind="function"><name>GamepadState</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a22a26dfe8eeef1007c641452b768f0f9" kind="function"><name>updateAxes</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a2e00f4822888f35be3ae6ccb3a1313c7" kind="function"><name>leftX</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a958a26add1426a6fa92f1434948f2bff" kind="function"><name>leftY</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a8f1f61524d74182d1ade0543c44586d1" kind="function"><name>rightX</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a34175d9b0f9f695b14349b2122ecc690" kind="function"><name>rightY</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a259753c014cb11fe211cca3137f67ae5" kind="function"><name>triggerLeft</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a18ff7a69f4c8ebba20a25f53ea7a9714" kind="function"><name>triggerRight</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a0e93a3d71312aebe3d318e7b91fc5d0e" kind="function"><name>left</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a35444e63738a9208a008d6a823ae9b9a" kind="function"><name>right</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a7d1392d632a44eef9d61b454ed40df8c" kind="function"><name>trigger</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1aad622f428f48b34e16ad5ec334bd127b" kind="function"><name>buttonA</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a13d75e66ef5ae123d3327ccbef0c5633" kind="function"><name>buttonB</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a53bb4989b63951ebf222bf5c6bd277a4" kind="function"><name>buttonX</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a856df613c1508ad369875f94b042c4f2" kind="function"><name>buttonY</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a8544813c5c7257f91d8c4e744339cdfb" kind="function"><name>buttonStart</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a8477f57add844940545f15114a442f58" kind="function"><name>buttonBack</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a431dc64f41310e1a27927e856194c1a5" kind="function"><name>buttonGuide</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a47f2f780c1b29fafdf9f9eeff5197915" kind="function"><name>buttonLeftBumper</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a2287f433f45a9ad3aad31f39df731a93" kind="function"><name>buttonRightBumper</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a7323e081da339576b34477ee0fc3daae" kind="function"><name>buttonLeftThumb</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1ae0439676110dabd9f4be364973e6351b" kind="function"><name>buttonRightThumb</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1adcf29eec4d0c29f716c1013b1254c23c" kind="function"><name>buttonDpadUp</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a0c868ae7d3209efe9b807992f2eb6899" kind="function"><name>buttonDpadRight</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a844503e4099979e7c34f0350c78271cf" kind="function"><name>buttonDpadDown</name></member>
-    <member refid="classhelios_1_1input_1_1GamepadState_1a75bca4b779fe81f43d8f8425180b7ece" kind="function"><name>buttonDpadLeft</name></member>
+  <compound refid="module__helios_8input_8gamepad" kind="module"><name>helios.input.gamepad</name>
+  </compound>
+  <compound refid="module__helios_8input_8gamepad_8DeadzoneStrategy" kind="module"><name>helios.input.gamepad.DeadzoneStrategy</name>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a3762bc530d61b887b87757ccc156db99" kind="variable"><name>stickNoiseThreshold_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1ab2d601fa84b631f66270f28f2fed9e06" kind="variable"><name>DEFAULT_STICK_NOISE_THRESHOLD</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a63d32d60498619f6a0e5f96f5cc30226" kind="function"><name>~DeadzoneStrategy</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a7066807dc8642ae12d29a5ad7a327473" kind="function"><name>DeadzoneStrategy</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a52139bff041f7128d0b562684587e32a" kind="function"><name>DeadzoneStrategy</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1ad4a87c7ee4ec5b7f08210aae95cac8a1" kind="function"><name>normalize</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a6c01ef746af11b99c2122617c6f36820" kind="function"><name>stickNoiseThreshold</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a9df5a94dd6bf37d477dd6fd7a73c709c" kind="function"><name>setStickNoiseThreshold</name></member>
+  </compound>
+  <compound refid="module__helios_8input_8gamepad_8GamepadSettings" kind="module"><name>helios.input.gamepad.GamepadSettings</name>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1a0afd4f380d88d940ba4edb8906a8936d" kind="variable"><name>leftStickDeadzone_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1ada40dbf32ae8be8a027d062246075c32" kind="variable"><name>rightStickDeadzone_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1aafbeae2b454166e10ce17c1e84940d1c" kind="variable"><name>invertLeftX_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1add06d1d6c00e1d82bd15d0b48d3f661f" kind="variable"><name>invertLeftY_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1aeacb0a791b11ee4d6934757cbfe4cffa" kind="variable"><name>invertRightX_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1a4b41c151bd9f6216f0bfb54d0c052c7a" kind="variable"><name>invertRightY_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1a88c393bacbe83e4722e21a326ff87f44" kind="function"><name>~GamepadSettings</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1a62440565754425f1b3337aebeffcb224" kind="function"><name>GamepadSettings</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1a293b6bf5db21ef05a729d6ae8b7d9cf6" kind="function"><name>setLeftStickDeadzone</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1a28cfbd69d43a587eaebf11b504800e10" kind="function"><name>setRightStickDeadzone</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1af5ac72dc6b04400f79bc7fab851c0d02" kind="function"><name>setInvertLeftX</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1aeeb056d8dcc5c7007e3a1dd542c4ddea" kind="function"><name>setInvertLeftY</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1af93e6e1d89959cc5e75a690106067bbb" kind="function"><name>setInvertRightX</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1a43ef8d4468525f7668cfeb3507b94cc0" kind="function"><name>setInvertRightY</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1a00df8aa3a38cb9b816c2eb0c10821265" kind="function"><name>leftStickDeadzone</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1adf78328ccc756a4d8a514fdc6b7cf653" kind="function"><name>rightStickDeadzone</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1a1e2b916bac7f23fab5a61554595fe603" kind="function"><name>invertLeftX</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1a75135af916c4bdc16b8637112c102b16" kind="function"><name>invertLeftY</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1ac95d69c9b3265c0b598e0020bbb80309" kind="function"><name>invertRightX</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1a1a9fef80c9b2265e9cf1737aca020702" kind="function"><name>invertRightY</name></member>
+  </compound>
+  <compound refid="module__helios_8input_8gamepad_8GamepadState" kind="module"><name>helios.input.gamepad.GamepadState</name>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a325cea504c73fc8434bb9d49d95e1c2c" kind="variable"><name>logger_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a37dcba74ef2c26410c4cca731669d1eb" kind="variable"><name>buttonA_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ae5cb1b517a8c4f926d1f96dd4595994f" kind="variable"><name>buttonB_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1af3478bd934ad44820f83737fce5900b4" kind="variable"><name>buttonX_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a3c6285085def7476581e628f1368c389" kind="variable"><name>buttonY_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1aa3867ef03a5b5f5cfcb419f4f74cf974" kind="variable"><name>buttonStart_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ada5f6e008c624319d446574709438a87" kind="variable"><name>buttonBack_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ab1e303c22fe2b7407ff61561149cd24f" kind="variable"><name>buttonGuide_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a625487eb9eb45856d940e24835279d8b" kind="variable"><name>buttonLeftBumper_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a906b02f423ef230d3523201d46e9c28b" kind="variable"><name>buttonRightBumper_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a736fb9190d6bc42c2a93861544caba12" kind="variable"><name>buttonLeftThumb_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7a6c592f5925e83cf26f3348237c9c48" kind="variable"><name>buttonRightThumb_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a52205ef339bf07b5c76921ee001cc4f4" kind="variable"><name>buttonDpadUp_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a9855843f8c9083fcff5b1692193ae7b8" kind="variable"><name>buttonDpadRight_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a070b84f29c9db635c34f08ddf2e58189" kind="variable"><name>buttonDpadDown_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a720c42a55f7c970bb3b8308e33727232" kind="variable"><name>buttonDpadLeft_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1abcdad9fd3caf6b083a2cff6fde8d6b9a" kind="variable"><name>needsUpdate_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a4cf399b3a341b4698bbaa06d1cc93e11" kind="variable"><name>axisLeftX_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a35c166617e5ee812004752d56d63680f" kind="variable"><name>axisLeftY_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ad65321ad66f955100089607bc1eaf4be" kind="variable"><name>axisRightX_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a6551fc2bec3b38a3a3fedec1e37d242c" kind="variable"><name>axisRightY_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ad2e2787d84a497b91639810b8f7bc084" kind="variable"><name>triggerLeft_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a99d2b5fb49b2212dffe9294f31fc5777" kind="variable"><name>triggerRight_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ac2ef934b898514fa3ada5223f9b37bfd" kind="variable"><name>left_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a9d5a4d43bcd7dc77fe37907b7bae1ff2" kind="variable"><name>right_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a3ad5ba7e6bb8316530db9b57b3c32fe1" kind="variable"><name>trigger_</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ad0559ef6b4afc34bc41feaab6aee266d" kind="function"><name>update</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1aa7cd980153e294fff02ded9199034daf" kind="function"><name>~GamepadState</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a34778e517d4c1c4472914439b995f3dd" kind="function"><name>GamepadState</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a5d43064d7d1137357e7d546cf21bc222" kind="function"><name>GamepadState</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7d7e7b45d8f7a735ab51f5481b438825" kind="function"><name>updateAxes</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a15503e1057188f37e734b4e430283cba" kind="function"><name>leftX</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ac5875cb2c966c9ea593e1f729a4ad965" kind="function"><name>leftY</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1adc8c001a3468e86ab3bdc11a2a1b18c4" kind="function"><name>rightX</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a8c88c277946b970cddfe8d532e283522" kind="function"><name>rightY</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a24dee448f65b242cfa6fb36a2615559a" kind="function"><name>triggerLeft</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a71cd296694d25b524c2d48943faa1590" kind="function"><name>triggerRight</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a37a76a1aaeae04c4f19c7396f57158e1" kind="function"><name>left</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1aab66dc09e2d3d2f673b176028b409073" kind="function"><name>right</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1add4cb5588dfbc246ba5ba729afee2743" kind="function"><name>trigger</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ad50c09d2f84f2e1095f937c787eac86e" kind="function"><name>buttonA</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a068967ab65a6874ce5b5de039af79e8c" kind="function"><name>buttonB</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a2416fe357772c57d9dcf0fa46f3e255c" kind="function"><name>buttonX</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a6bbce85c5ea851e8a6fa47e3c8e1d330" kind="function"><name>buttonY</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a2023f54665e7aa39ba455a901adc6e1d" kind="function"><name>buttonStart</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a8b2355cd51de412b86fc565fa4f2d4e4" kind="function"><name>buttonBack</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ac37675a6b2a9f26eacb75481a8654e60" kind="function"><name>buttonGuide</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a0e29924d8d026778ace2e91c778ba4a5" kind="function"><name>buttonLeftBumper</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a0153832e95905c8c7ad3ad9092d8eac0" kind="function"><name>buttonRightBumper</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1afa01f268c73449a45d5cba341f68648a" kind="function"><name>buttonLeftThumb</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1af6450490a050564bf1366148b04d67de" kind="function"><name>buttonRightThumb</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1ab92525c10fcd68ba5b3c780f52e38174" kind="function"><name>buttonDpadUp</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1afbd0ee0861ba38451c1aecbb6fb0e283" kind="function"><name>buttonDpadRight</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a7a4a6a420b36e858ab68f6fd181ca0f0" kind="function"><name>buttonDpadDown</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadState_1a1de9efc2cfe80fa50b14d3f0a7bee4ac" kind="function"><name>buttonDpadLeft</name></member>
+  </compound>
+  <compound refid="module__helios_8input_8gamepad_8RadialDeadzoneStrategy" kind="module"><name>helios.input.gamepad.RadialDeadzoneStrategy</name>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1RadialDeadzoneStrategy_1a3ace9ef57862c681eaa2f767288c88ec" kind="function"><name>RadialDeadzoneStrategy</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1RadialDeadzoneStrategy_1aa1c7ac7f01e8a2936027aa68c96a3acd" kind="function"><name>RadialDeadzoneStrategy</name></member>
+    <member refid="classhelios_1_1input_1_1gamepad_1_1RadialDeadzoneStrategy_1ab2978ad6d7b34ede7dcf4a91c24cab8e" kind="function"><name>normalize</name></member>
   </compound>
   <compound refid="module__helios_8input_8InputAdapter" kind="module"><name>helios.input.InputAdapter</name>
     <member refid="classhelios_1_1input_1_1InputAdapter_1a7e70390747059f6c7dc6665c59819a86" kind="variable"><name>logger_</name></member>
-    <member refid="classhelios_1_1input_1_1InputAdapter_1a9d0ad5cfffd1efd405cc0b4aa4ce9c79" kind="function"><name>InputAdapter</name></member>
+    <member refid="classhelios_1_1input_1_1InputAdapter_1a7864654aa3988de5f27f625c7f743e3c" kind="variable"><name>deadzoneStrategy_</name></member>
+    <member refid="classhelios_1_1input_1_1InputAdapter_1ad33c6c602987f39854bebac0826387ee" kind="variable"><name>gamepadSettings_</name></member>
     <member refid="classhelios_1_1input_1_1InputAdapter_1ac0e01bc42c45d7bce722836e162259bc" kind="function"><name>~InputAdapter</name></member>
+    <member refid="classhelios_1_1input_1_1InputAdapter_1af98fdb57e1005ed248c09a11f4020040" kind="function"><name>InputAdapter</name></member>
     <member refid="classhelios_1_1input_1_1InputAdapter_1a8896a83d1b86578aa3c1f13be1c5e63f" kind="function"><name>isKeyPressed</name></member>
     <member refid="classhelios_1_1input_1_1InputAdapter_1a3a5e1e0e577c8af5877f10d9578d4875" kind="function"><name>isConnected</name></member>
     <member refid="classhelios_1_1input_1_1InputAdapter_1a5b3852c685d7321d2faeb2de79aad538" kind="function"><name>updateGamepadState</name></member>
-    <member refid="classhelios_1_1input_1_1InputAdapter_1ae64e5b1f78b57e9cce3c092c379605d6" kind="function"><name>gamepadState</name></member>
+    <member refid="classhelios_1_1input_1_1InputAdapter_1aa636d6f6f740d416d8176234457272d2" kind="function"><name>gamepadState</name></member>
+    <member refid="classhelios_1_1input_1_1InputAdapter_1a79d74e9e0dbe1bc6da8eb6eecfee232f" kind="function"><name>gamepadSettings</name></member>
   </compound>
   <compound refid="module__helios_8input_8InputManager" kind="module"><name>helios.input.InputManager</name>
     <member refid="classhelios_1_1input_1_1InputManager_1a847374d449b11af44fb2aea383930e6f" kind="variable"><name>observedWin_</name></member>
@@ -2344,8 +2465,10 @@
     <member refid="classhelios_1_1input_1_1InputManager_1ab46c4ce60870839d557ba3d141964f01" kind="function"><name>poll</name></member>
     <member refid="classhelios_1_1input_1_1InputManager_1a9cdcf0b8c5ca77db5cba2498132479f1" kind="function"><name>isKeyPressed</name></member>
     <member refid="classhelios_1_1input_1_1InputManager_1a138047fd0784a90715758d5e44afea3d" kind="function"><name>registerGamepads</name></member>
-    <member refid="classhelios_1_1input_1_1InputManager_1a70f09d2b56d05c0ba55df05d3526f4f9" kind="function"><name>gamepadState</name></member>
+    <member refid="classhelios_1_1input_1_1InputManager_1a3ae14ffca9c0950090bffa87d8ef7b7f" kind="function"><name>gamepadState</name></member>
     <member refid="classhelios_1_1input_1_1InputManager_1aabc1c034f222ef983272ac4145575458" kind="function"><name>isConnected</name></member>
+    <member refid="classhelios_1_1input_1_1InputManager_1a3702474b44961f776a97501f13d1620b" kind="function"><name>inputAdapter</name></member>
+    <member refid="classhelios_1_1input_1_1InputManager_1a572c0a1172916da778df50383c475e97" kind="function"><name>inputAdapter</name></member>
   </compound>
   <compound refid="module__helios_8input_8types" kind="module"><name>helios.input.types</name>
   </compound>
@@ -2475,6 +2598,7 @@
     <member refid="namespacehelios_1_1math_1a8cdcd5dfceca20081416ef7ac3374e01" kind="typedef"><name>aabbd</name></member>
   </compound>
   <compound refid="module__helios_8math_8utils" kind="module"><name>helios.math.utils</name>
+    <member refid="namespacehelios_1_1math_1af25d93f23f91acae02abfd7706b2e36d" kind="variable"><name>EPSILON_LENGTH</name></member>
     <member refid="namespacehelios_1_1math_1a4949642a7cca09c7950bb6a1b75260c9" kind="function"><name>radians</name></member>
     <member refid="namespacehelios_1_1math_1a73c58ac1ac41973b9927ab6893662104" kind="function"><name>degrees</name></member>
   </compound>

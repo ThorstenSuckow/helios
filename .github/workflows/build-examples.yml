@@ -75,14 +75,9 @@ jobs:
               $exeFiles = Get-ChildItem -Path $pattern -ErrorAction SilentlyContinue
               if ($exeFiles) {
                 foreach ($exe in $exeFiles) {
-                  # Rename executable: remove 'main' suffix (e.g., spaceship_controlmain.exe -> spaceship_control.exe)
-                  $baseName = $exe.BaseName
-                  if ($baseName.EndsWith("main")) {
-                    $newBaseName = $baseName.Substring(0, $baseName.Length - 4)
-                    $newName = "$newBaseName.exe"
-                  } else {
-                    $newName = $exe.Name
-                  }
+                  # Use the directory name as the executable name
+                  # e.g., spaceship_control/main.exe -> spaceship_control.exe
+                  $newName = "$dir.exe"
                   Copy-Item $exe.FullName -Destination "artifacts/examples/$dir/$newName"
                   Write-Host "Copied executable: $($exe.FullName) -> artifacts/examples/$dir/$newName"
                 }

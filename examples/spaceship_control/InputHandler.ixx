@@ -50,14 +50,17 @@ export namespace helios::examples::spaceshipControl {
             helios::engine::game::CommandBuffer& commandBuffer
         ) override {
 
+            auto stick = inputSnapshot.gamepadState().left();
+            float speed      = stick.length();
+            speed = speed == 0.0f ? 0.0f : speed;
+
+            helios::math::vec2f dir = speed > 0.0f ? stick * (1.0f/speed) : helios::math::vec2f{0.0f, 0.0f};
+
             commandBuffer.add(
                 guid,
                 std::make_unique<
                 helios::examples::spaceshipControl::commands::PlayerMoveCommand
-                >(
-                    inputSnapshot.gamepadState().left().normalize(),
-                    inputSnapshot.gamepadState().left().length()
-                )
+                >(dir, speed)
             );
 
 

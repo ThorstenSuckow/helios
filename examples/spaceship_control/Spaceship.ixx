@@ -184,14 +184,10 @@ export namespace helios::examples::spaceshipControl {
          * @param speedFactor Input intensity from 0.0 (idle) to 1.0 (full speed).
          *
          * @pre direction must be normalized (length approximately 1.0).
-         *
-         * @todo Deadzone handling should be moved to the InputManager.
          */
         void move(const helios::math::vec2f direction, const float speedFactor) {
 
-            /**
-             * @todo normalization needs to happen with the input manager
-             */
+            
             if (speedFactor <= helios::math::EPSILON_LENGTH) {
                 steeringInput_ = helios::math::vec2f{0.0f, 0.0f};
                 throttle_ = 0.0f;

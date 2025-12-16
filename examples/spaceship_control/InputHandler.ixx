@@ -16,6 +16,7 @@ import helios.engine.game.CommandBuffer;
 import helios.engine.game.GameObject;
 import helios.examples.spaceshipControl.commands.PlayerMoveCommand;
 import helios.util.Guid;
+import helios.math.utils;
 
 export namespace helios::examples::spaceshipControl {
 
@@ -52,7 +53,7 @@ export namespace helios::examples::spaceshipControl {
 
             auto stick = inputSnapshot.gamepadState().left();
             float speed      = stick.length();
-            speed = speed == 0.0f ? 0.0f : speed;
+            speed = speed <= helios::math::EPSILON_LENGTH ? 0.0f : speed;
 
             helios::math::vec2f dir = speed > 0.0f ? stick * (1.0f/speed) : helios::math::vec2f{0.0f, 0.0f};
 

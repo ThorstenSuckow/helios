@@ -33,6 +33,18 @@ export namespace helios::input::gamepad {
      */
     class RadialDeadzoneStrategy : public DeadzoneStrategy {
 
+    public:
+
+        /**
+         * @copydoc helios::input::gamepad::DeadzoneStrategy::DeadzoneStrategy()
+         */
+        RadialDeadzoneStrategy() : DeadzoneStrategy() {}
+
+        /**
+         * @copydoc helios::input::gamepad::DeadzoneStrategy::DeadzoneStrategy(float stickNoiseThreshold)
+         */
+        RadialDeadzoneStrategy(float stickNoiseThreshold) : DeadzoneStrategy(stickNoiseThreshold) {}
+
         /**
          * @brief Applies radial deadzone normalization to stick input.
          *

@@ -29,7 +29,7 @@ TEST(Mat4Tests, accessor) {
     EXPECT_FLOAT_EQ(14.0f, M(2, 3));
 
 
-#if !defined(NDEBUG)
+#ifdef HELIOS_DEBUG
     EXPECT_DEATH(M(-3, 1), "mat4 - Index out of bounds.");
     EXPECT_DEATH(M(1, 4), "mat4 - Index out of bounds.");
 #endif

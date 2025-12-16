@@ -4,21 +4,38 @@
  */
 module;
 
+#include <bit>
+#include <memory>
+#include <array>
+#include <utility>
+
 export module helios.input.InputAdapter;
 
 import helios.input.types.Gamepad;
-import helios.input.GamepadState;
+import helios.input.gamepad.GamepadState;
 import helios.input.types.Key;
 import helios.window.Window;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
-
+import helios.input.gamepad.GamepadSettings;
+import helios.input.gamepad.DeadzoneStrategy;
 
 #define HELIOS_LOG_SCOPE "helios::input::InputAdapter"
 export namespace helios::input {
 
     /**
      * @brief Abstract interface for platform-specific input adapters.
+     *
+     * Provides a unified interface for querying input device states across different
+     * platforms. Concrete implementations translate generic input queries into
+     * platform-specific API calls.
+     *
+     * The adapter manages per-gamepad configuration through `GamepadSettings` and applies
+     * input normalization via a configurable `DeadzoneStrategy`.
+     *
+     * @see GLFWInputAdapter for a GLFW-based implementation.
+     * @see GamepadSettings for per-controller configuration options.
+     * @see DeadzoneStrategy for input normalization strategies.
      */
     class InputAdapter {
 
@@ -28,11 +45,39 @@ export namespace helios::input {
          */
         inline static const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(HELIOS_LOG_SCOPE);
 
+        /**
+         * @brief Strategy used to normalize analog stick input within deadzones.
+         *
+         * Ownership is held by the adapter. Applied during gamepad state updates
+         * to filter out hardware drift and rescale input values.
+         */
+        std::unique_ptr<helios::input::gamepad::DeadzoneStrategy> deadzoneStrategy_;
+
+        /**
+         * @brief Per-gamepad configuration settings.
+         *
+         * Array indexed by gamepad ID, storing deadzone thresholds and axis
+         * inversion flags for each connected controller.
+         */
+        std::array<helios::input::gamepad::GamepadSettings, std::to_underlying(helios::input::types::Gamepad::size_)> gamepadSettings_ = {};
+
 
         public:
-        InputAdapter() = default;
 
+        /**
+         * @brief Virtual destructor for proper polymorphic cleanup.
+         */
         virtual ~InputAdapter() = default;
+
+        /**
+         * @brief Constructs an InputAdapter with the specified deadzone strategy.
+         *
+         * @param deadzoneStrategy The strategy used for analog stick normalization.
+         *                         Ownership is transferred to this adapter.
+         */
+        explicit InputAdapter(std::unique_ptr<helios::input::gamepad::DeadzoneStrategy> deadzoneStrategy) :
+        deadzoneStrategy_(std::move(deadzoneStrategy))
+        {}
 
         /**
          * @brief Returns true if the key is pressed, otherwise false.
@@ -92,9 +137,30 @@ export namespace helios::input {
          * @see updateGamepadState
          * @see isConnected
          */
-        [[nodiscard]] virtual const GamepadState& gamepadState(
+        [[nodiscard]] virtual const helios::input::gamepad::GamepadState& gamepadState(
             helios::input::types::Gamepad gamepadId) const noexcept = 0;
 
+
+        /**
+         * @brief Returns the configuration settings for the specified gamepad.
+         *
+         * Provides access to the mutable settings object for the given gamepad,
+         * allowing runtime configuration of deadzone thresholds and axis inversion.
+         * Changes to the returned settings are applied during subsequent calls
+         * to `updateGamepadState()`.
+         *
+         * @param gamepadId The gamepad to retrieve settings for.
+         *
+         * @return Reference to the mutable GamepadSettings for the specified gamepad.
+         *
+         * @see GamepadSettings for available configuration options.
+         */
+        [[nodiscard]] helios::input::gamepad::GamepadSettings& gamepadSettings(helios::input::types::Gamepad gamepadId) noexcept {
+            const auto id = static_cast<unsigned int>(gamepadId);
+            const auto idx = std::countr_zero(id);
+
+            return gamepadSettings_[idx];
+        }
     };
 
 }

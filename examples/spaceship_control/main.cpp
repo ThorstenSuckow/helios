@@ -23,7 +23,7 @@ import helios.ext.glfw.window.GLFWWindow;
 import helios.input.InputManager;
 import helios.input.types.Key;
 import helios.input.types.Gamepad;
-import helios.input.GamepadState;
+import helios.input.gamepad.GamepadState;
 
 
 // Rendering System
@@ -106,6 +106,7 @@ using namespace helios::ext::opengl::rendering::shader;
 using namespace helios::ext::opengl::rendering::model;
 using namespace helios::rendering::asset::shape::basic;
 using namespace helios::input;
+using namespace helios::input::gamepad;
 using namespace helios::input::types;
 using namespace helios::ext::glfw::window;
 using namespace helios::util::io;

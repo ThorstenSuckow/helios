@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+## [Milestone 2] - 2025-12-16
+
 ### Added
 
 #### Engine & Tooling
@@ -40,6 +42,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Standard unit: 1 Meter = 100 Centimeters (cm)
 - Time measurement standard: Seconds
 
+#### Gamepad Input System
+- `GamepadSettings` class for per-controller configuration
+- `DeadzoneStrategy` abstract interface for input normalization
+- `RadialDeadzoneStrategy` implementation for circular deadzone handling
+- Per-stick deadzone thresholds (0.0 to 0.9)
+- Individual axis inversion (X/Y for left and right sticks)
+- `InputAdapter::gamepadSettings()` for runtime configuration access
+- `InputManager::inputAdapter()` non-const overload for settings modification
+
 #### ImGui Integration Layer
 - `ImGuiBackend` abstraction for platform backends
 - `ImGuiGlfwOpenGLBackend` concrete implementation for GLFW/OpenGL
@@ -50,6 +61,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 #### ImGui Widgets
 - `FpsWidget` for frame rate display and target FPS control
 - `GamepadWidget` for real-time gamepad state visualization (#114)
+  - Integrated settings panel for deadzone and axis inversion
+  - Real-time stick position and button state display
+  - Connection status indicator
+  - Multi-controller support (1-4)
 - `LogWidget` for scrollable log console with advanced filtering
   - Per-scope message buffers (1000 entries each)
   - Filter by log level and scope via ComboBox
@@ -218,5 +233,5 @@ auto material = std::make_shared<Material>(shader, properties);
 - [Documentation](https://thorstensuckow.github.io/helios/)
 - [GitHub Repository](https://github.com/thorstensuckow/helios)
 - [Issue Tracker](https://github.com/thorstensuckow/helios/issues)
-- [Contributing Guide](docs/contributing/guide.md)
+- [Contributing Guide](docs/CONTRIBUTING.md)
 

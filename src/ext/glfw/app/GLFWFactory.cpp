@@ -10,6 +10,7 @@ module helios.ext.glfw.app.GLFWFactory;
 import helios.window.Window;
 import helios.window.event.FrameBufferResizeEvent;
 import helios.input.InputManager;
+import helios.input.gamepad.RadialDeadzoneStrategy;
 import helios.event.BasicEventManager;
 import helios.event.DequeEventQueue;
 import helios.event.Dispatcher;
@@ -50,8 +51,9 @@ namespace helios::ext::glfw::app {
     ) {
 
         auto openGLDevice = std::make_unique<OpenGLDevice>();
+        auto deadzoneStrategy = std::make_unique<helios::input::gamepad::RadialDeadzoneStrategy>();
         auto inputManager = std::make_unique<InputManager>(
-            std::make_unique<GLFWInputAdapter>()
+            std::make_unique<GLFWInputAdapter>(std::move(deadzoneStrategy))
             );
         auto eventManager = std::make_unique<BasicEventManager>(
         std::make_unique<DequeEventQueue>(),

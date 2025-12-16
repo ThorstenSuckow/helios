@@ -11,6 +11,17 @@ export module helios.math.utils;
 export namespace helios::math {
 
     /**
+     * @brief A small epsilon value used for length-based comparisons.
+     *
+     * @details This constant represents the minimum threshold value for length
+     * comparisons to account for numerical precision errors in floating-point
+     * calculations. It is often used to avoid treating very small values as
+     * significant, effectively filtering out noise in computations that involve
+     * vector-lengths.
+     */
+    constexpr float EPSILON_LENGTH = 1e-6f;
+
+    /**
      * @brief Converts an angle from degrees to radians.
      *
      * @param angle The angle value in degrees.

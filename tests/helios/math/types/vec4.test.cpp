@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-
+#include <helios/helios_config.h>
 
 import helios.math;
 
@@ -63,7 +63,10 @@ TEST(Vec4Tests, ReadWriteAccessWithinBounds) {
 
 TEST(Vec4Tests, AccessOutOfBoundsThrowsAssertion) {
     vec4d v(1.0, 2.0, 3.0, 4.0);
+
+    #ifdef HELIOS_DEBUG
     EXPECT_DEATH(v[4], "vec4 - Index out of bounds.");
+    #endif
 }
 
 TEST(Vec4Tests, ValuePtrReturnsCorrectPointer) {

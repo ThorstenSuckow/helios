@@ -10,7 +10,7 @@ module;
 export module helios.input.InputManager;
 
 import helios.input.types.Gamepad;
-import helios.input.GamepadState;
+import helios.input.gamepad.GamepadState;
 import helios.input.InputAdapter;
 import helios.input.types.Key;
 import helios.window.Window;
@@ -147,7 +147,7 @@ export namespace helios::input {
          * @see isConnected()
          * @see poll()
          */
-        [[nodiscard]] const GamepadState& gamepadState(helios::input::types::Gamepad gamepadId) const noexcept;
+        [[nodiscard]] const helios::input::gamepad::GamepadState& gamepadState(helios::input::types::Gamepad gamepadId) const noexcept;
 
         /**
          * @brief Returns true if the specified gamepad is connected, otherwise false.
@@ -157,6 +157,24 @@ export namespace helios::input {
          * @return True if a gamepad was found for the specified `gamepadId`, otherwise false.
          */
         [[nodiscard]] bool isConnected(helios::input::types::Gamepad gamepadId) const noexcept;
+
+
+        /**
+         * @brief Retrieves the InputAdapter associated with this InputManager.
+         *
+         * @return A reference to the InputAdapter associated with this InputManager.
+         */
+        [[nodiscard]] const helios::input::InputAdapter& inputAdapter() const noexcept;
+
+        /**
+         * @brief Retrieves the InputAdapter associated with this InputManager.
+         *
+         * This non-const overload allows modification of InputAdapter settings,
+         * such as gamepad deadzone and axis inversion configuration.
+         *
+         * @return A reference to the InputAdapter associated with this InputManager.
+         */
+        [[nodiscard]] helios::input::InputAdapter& inputAdapter() noexcept;
 
     };
 

@@ -25,5 +25,5 @@ TEST(UniformSemanticsTests, MaterialRoughnessFollowsMaterialBaseColor) {
 }
 
 TEST(UniformSemanticsTests, SizeEnumRepresentsNumberOfEntries) {
-    EXPECT_EQ(static_cast<int>(UniformSemantics::size_), 5);
+    EXPECT_EQ(static_cast<int>(UniformSemantics::size_), 7);
 }

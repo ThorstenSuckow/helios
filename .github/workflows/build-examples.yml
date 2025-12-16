@@ -1,0 +1,155 @@
+name: Build Examples
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      create_release:
+        description: 'Create a release with the built examples'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  build-examples:
+    name: Build Examples (Windows MSVC)
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies for GLAD
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install jinja2
+        shell: pwsh
+
+      - name: Setup CMake
+        uses: lukka/get-cmake@latest
+
+      - name: Configure CMake (Release)
+        run: |
+          $env:PYTHON = (Get-Command python).Path
+          cmake -S . -B build `
+            -DCMAKE_BUILD_TYPE=Release `
+            -DCMAKE_CXX_STANDARD=23 `
+            -DPython3_EXECUTABLE="$env:PYTHON" `
+            -DPython_EXECUTABLE="$env:PYTHON"
+        shell: pwsh
+
+      - name: Build Examples
+        run: |
+          cmake --build build --config Release -j
+        shell: pwsh
+
+      - name: Collect Example Binaries and Resources
+        run: |
+          New-Item -ItemType Directory -Force -Path artifacts/examples
+          
+          # Example directories with their executable names
+          $exampleDirs = @("game_controller_input", "simple_cube_rendering", "spaceship_control")
+          
+          foreach ($dir in $exampleDirs) {
+            # Create directory for this example
+            New-Item -ItemType Directory -Force -Path "artifacts/examples/$dir"
+            
+            # Find and copy the executable for this example
+            # Check multiple possible locations
+            $possiblePaths = @(
+              "build/bin/Release/${dir}main.exe",
+              "build/bin/Release/${dir}.exe",
+              "build/examples/${dir}/Release/*.exe",
+              "build/examples/${dir}/*.exe",
+              "build/examples/Release/${dir}main.exe"
+            )
+            
+            foreach ($pattern in $possiblePaths) {
+              $exeFiles = Get-ChildItem -Path $pattern -ErrorAction SilentlyContinue
+              if ($exeFiles) {
+                foreach ($exe in $exeFiles) {
+                  # Rename executable: remove 'main' suffix (e.g., spaceship_controlmain.exe -> spaceship_control.exe)
+                  $newName = $exe.Name -replace 'main\.exe$', '.exe'
+                  Copy-Item $exe.FullName -Destination "artifacts/examples/$dir/$newName"
+                  Write-Host "Copied executable: $($exe.FullName) -> artifacts/examples/$dir/$newName"
+                }
+                break
+              }
+            }
+            
+            # Copy resources folder (shaders, textures, etc.)
+            $resourcePath = "examples/$dir/resources"
+            if (Test-Path $resourcePath) {
+              Copy-Item -Path $resourcePath -Destination "artifacts/examples/$dir/" -Recurse
+              Write-Host "Copied resources: $resourcePath -> artifacts/examples/$dir/resources/"
+            }
+          }
+          
+          # Also collect any loose executables from bin directory
+          $looseExes = Get-ChildItem -Path "build/bin/Release" -Filter "*.exe" -ErrorAction SilentlyContinue
+          if ($looseExes) {
+            foreach ($exe in $looseExes) {
+              # Check if already copied to a subdirectory
+              $alreadyCopied = $false
+              foreach ($dir in $exampleDirs) {
+                if (Test-Path "artifacts/examples/$dir/$($exe.Name)") {
+                  $alreadyCopied = $true
+                  break
+                }
+              }
+              if (-not $alreadyCopied) {
+                Copy-Item $exe.FullName -Destination "artifacts/examples/"
+                Write-Host "Copied loose executable: $($exe.FullName)"
+              }
+            }
+          }
+          
+          # Copy required DLLs to each example directory
+          $dllFiles = Get-ChildItem -Path build -Filter "*.dll" -Recurse -ErrorAction SilentlyContinue
+          if ($dllFiles) {
+            foreach ($dir in $exampleDirs) {
+              if (Test-Path "artifacts/examples/$dir") {
+                foreach ($dll in $dllFiles) {
+                  Copy-Item $dll.FullName -Destination "artifacts/examples/$dir/" -ErrorAction SilentlyContinue
+                }
+              }
+            }
+          }
+          
+          # List collected files
+          Write-Host "`nCollected artifacts:"
+          Get-ChildItem -Path artifacts -Recurse | Format-Table Name, Length, Directory
+        shell: pwsh
+
+      - name: Create ZIP Archive
+        run: |
+          $version = "${{ github.ref_name }}"
+          if ($version -eq "") { $version = "dev" }
+          Compress-Archive -Path artifacts/examples/* -DestinationPath "helios-examples-$version-win64.zip"
+        shell: pwsh
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: helios-examples-win64
+          path: helios-examples-*.zip
+          retention-days: 30
+
+      - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/v') || github.event.inputs.create_release == 'true'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: helios-examples-*.zip
+          draft: false
+          prerelease: ${{ contains(github.ref, 'alpha') || contains(github.ref, 'beta') || contains(github.ref, 'rc') }}
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

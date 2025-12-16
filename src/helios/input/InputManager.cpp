@@ -47,12 +47,20 @@ namespace helios::input {
         return input_->isKeyPressed(key, *observedWin_);
     }
 
-    const GamepadState& InputManager::gamepadState(const helios::input::types::Gamepad gamepadId) const noexcept {
+    const helios::input::gamepad::GamepadState& InputManager::gamepadState(const helios::input::types::Gamepad gamepadId) const noexcept {
         return input_->gamepadState(gamepadId);
     }
 
     bool InputManager::isConnected(helios::input::types::Gamepad gamepadId) const noexcept {
         return input_->isConnected(gamepadId);
+    }
+
+    const helios::input::InputAdapter& InputManager::inputAdapter() const noexcept {
+        return *input_;
+    }
+
+    helios::input::InputAdapter& InputManager::inputAdapter() noexcept {
+        return *input_;
     }
 
     unsigned int InputManager::registerGamepads(unsigned int mask) noexcept {

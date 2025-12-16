@@ -43,7 +43,7 @@ helios.ext
 ├── imgui             # ImGui integration for debug overlays
 │   ├── widgets       # Ready-to-use debug widgets
 │   │   ├── LogWidget         # Log console with filtering
-│   │   ├── GamepadWidget     # Gamepad state visualizer
+│   │   ├── GamepadWidget     # Gamepad state visualizer with settings
 │   │   ├── CameraWidget      # Camera parameter control
 │   │   ├── FpsWidget         # Frame rate display
 │   │   └── MainMenuWidget    # Application settings menu
@@ -160,6 +160,9 @@ Unified input handling for keyboard, mouse, and gamepad.
 - `InputManager` - Central input coordinator
 - `InputAdapter` - Platform-specific input implementation
 - `GamepadState` - Current state of a gamepad
+- `GamepadSettings` - Per-controller configuration (deadzone, axis inversion)
+- `DeadzoneStrategy` - Abstract interface for input normalization
+- `RadialDeadzoneStrategy` - Circular deadzone implementation
 
 **Example:**
 ```cpp
@@ -182,6 +185,22 @@ if (state.buttonA()) {
 // Analog sticks
 auto leftStick = state.left();   // vec2f
 auto rightStick = state.right(); // vec2f
+```
+
+**Gamepad Configuration:**
+```cpp
+import helios.input.gamepad;
+
+// Access settings through InputManager
+auto& settings = inputManager.inputAdapter().gamepadSettings(Gamepad::ONE);
+
+// Configure deadzone (0.0 to 0.9)
+settings.setLeftStickDeadzone(0.15f)
+        .setRightStickDeadzone(0.10f);
+
+// Invert axes (useful for flight controls)
+settings.setInvertLeftY(true);
+settings.setInvertRightY(true);
 ```
 
 ### 5. Logging System
@@ -222,7 +241,7 @@ Integrated debug UI with docking support and persistent settings.
 **Key Classes:**
 - `ImGuiOverlay` - Widget manager with DockSpace support
 - `LogWidget` - Scrollable log console with scope filtering
-- `GamepadWidget` - Real-time gamepad state visualizer
+- `GamepadWidget` - Real-time gamepad state visualizer with integrated settings panel
 - `MainMenuWidget` - Application settings (transparency, docking, style)
 
 **Example:**

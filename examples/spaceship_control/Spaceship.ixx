@@ -26,8 +26,8 @@ export namespace helios::examples::spaceshipControl {
      *
      * @details The Spaceship class extends GameObject to provide arcade-style space flight
      * controls. It features smooth rotation towards an input direction with adjustable turn
-     * speed, velocity-based movement with momentum and dampening, deadzone filtering for
-     * analog stick input, and automatic deceleration when input stops.
+     * speed, velocity-based movement with momentum and dampening and automatic deceleration
+     * when input stops.
      *
      * The spaceship uses a 2D movement model in the XY plane with Z-axis rotation.
      * Movement and rotation are interpolated over time using delta-time for frame-rate
@@ -86,11 +86,6 @@ export namespace helios::examples::spaceshipControl {
         static constexpr float DEFAULT_MOVEMENT_DAMPENING = 0.1f;
 
         /**
-         * @brief Default analog stick deadzone threshold (0.0 to 1.0).
-         */
-        static constexpr float DEFAULT_DEADZONE = 0.4f;
-
-        /**
          * @brief Default base rotation speed multiplier.
          */
         static constexpr float DEFAULT_BASE_ROTATION_SPEED_MULTIPLIER = 16.0f;
@@ -133,11 +128,6 @@ export namespace helios::examples::spaceshipControl {
          * @brief Exponential decay factor for movement when input stops.
          */
         float movementDampening_ = DEFAULT_MOVEMENT_DAMPENING;
-
-        /**
-         * @brief Analog stick deadzone threshold (0.0 to 1.0).
-         */
-        float deadzone_ = DEFAULT_DEADZONE;
 
         /**
          * @brief Base rotation speed multiplier.
@@ -194,18 +184,11 @@ export namespace helios::examples::spaceshipControl {
          * @param speedFactor Input intensity from 0.0 (idle) to 1.0 (full speed).
          *
          * @pre direction must be normalized (length approximately 1.0).
-         *
-         * @note Input below the deadzone threshold is ignored, causing the ship
-         *       to coast with gradual deceleration.
-         *
-         * @todo Deadzone handling should be moved to the InputManager.
          */
         void move(const helios::math::vec2f direction, const float speedFactor) {
 
-            /**
-             * @todo normalization needs to happen with the input manager
-             */
-            if (speedFactor <= deadzone_) {
+            
+            if (speedFactor <= helios::math::EPSILON_LENGTH) {
                 steeringInput_ = helios::math::vec2f{0.0f, 0.0f};
                 throttle_ = 0.0f;
                 isInputActive_ = false;
@@ -326,7 +309,7 @@ export namespace helios::examples::spaceshipControl {
          */
         [[nodiscard]] float speedRatio() const noexcept override {
             // Prevent division by zero if movementSpeed_ is zero or very close to zero
-            if (std::abs(movementSpeed_) < 1e-6f) {
+            if (std::abs(movementSpeed_) < helios::math::EPSILON_LENGTH) {
                 return 0.0f;
             }
             return velocity_.length() / movementSpeed_;
@@ -370,11 +353,6 @@ export namespace helios::examples::spaceshipControl {
          * @brief Returns the movement dampening factor.
          */
         [[nodiscard]] float movementDampening() const noexcept { return movementDampening_; }
-
-        /**
-         * @brief Returns the analog stick deadzone threshold.
-         */
-        [[nodiscard]] float deadzone() const noexcept { return deadzone_; }
 
         /**
          * @brief Returns the current rotation angle in degrees.
@@ -435,12 +413,6 @@ export namespace helios::examples::spaceshipControl {
          */
         void setMovementDampening(float value) noexcept { movementDampening_ = value; }
 
-        /**
-         * @brief Sets the analog stick deadzone threshold.
-         *
-         * @param value The new deadzone threshold (0.0 to 1.0).
-         */
-        void setDeadzone(float value) noexcept { deadzone_ = value; }
 
         /**
          * @brief Resets all physics parameters to their default values.
@@ -453,7 +425,6 @@ export namespace helios::examples::spaceshipControl {
             movementSpeed_ = DEFAULT_MOVEMENT_SPEED;
             rotationDampening_ = DEFAULT_ROTATION_DAMPENING;
             movementDampening_ = DEFAULT_MOVEMENT_DAMPENING;
-            deadzone_ = DEFAULT_DEADZONE;
         }
 
     };

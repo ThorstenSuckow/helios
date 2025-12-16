@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <ctime>
+#include <helios/helios_config.h>
 
 import helios.math;
 
@@ -47,7 +48,7 @@ TEST(Vec3Tests, accessor) {
     v4 = 5;
     EXPECT_FLOAT_EQ(v[0], 5.0f);
 
-#if !defined(NDEBUG)
+#ifdef HELIOS_DEBUG
     EXPECT_DEATH(v[-3], "vec3 - Index out of bounds.");
     EXPECT_DEATH(v[4], "vec3 - Index out of bounds.");
 #endif
@@ -344,7 +345,7 @@ TEST(Vec3Tests, scalarDivision) {
 TEST(Vec3Tests, scalarDivisionByZero) {
     math::vec3f vec = math::vec3f(2.0f, -4.0f, 6.0f);
 
-#if !defined(NDEBUG)
+#ifdef HELIOS_DEBUG
     EXPECT_DEATH(vec / 0.0f, "s must not be 0");
 #endif
 }

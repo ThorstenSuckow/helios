@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <ctime>
+#include <helios/helios_config.h>
 
 import helios.math;
 
@@ -47,7 +48,7 @@ TEST(Vec2Tests, accessor) {
     v4 = 5;
     EXPECT_FLOAT_EQ(v[0], 5.0f);
 
-#if !defined(NDEBUG)
+#ifdef HELIOS_DEBUG
     EXPECT_DEATH(v[-3], "vec2 - Index out of bounds.");
     EXPECT_DEATH(v[4], "vec2 - Index out of bounds.");
 #endif
@@ -95,7 +96,10 @@ TEST(Vec2Tests, DotProductComputesCorrectly) {
 
 TEST(Vec2Tests, AccessOutOfBoundsThrowsAssertion) {
     vec2f v(1.0f, 2.0f);
+
+    #ifdef HELIOS_DEBUG
     EXPECT_DEATH(v[2], "vec2 - Index out of bounds.");
+    #endif
 }
 
 TEST(Vec2Tests, normalizeZeroVector) {

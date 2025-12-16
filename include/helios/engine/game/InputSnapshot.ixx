@@ -7,7 +7,7 @@ module;
 
 export module helios.engine.game.InputSnapshot;
 
-import helios.input.GamepadState;
+import helios.input.gamepad.GamepadState;
 
 export namespace helios::engine::game {
 
@@ -49,7 +49,7 @@ export namespace helios::engine::game {
          *
          * @details Stored as a const member to enforce immutability of the snapshot.
          */
-        const helios::input::GamepadState gamepadState_;
+        const helios::input::gamepad::GamepadState gamepadState_;
 
     public:
 
@@ -61,7 +61,7 @@ export namespace helios::engine::game {
          * @note This operation is noexcept and cheap as GamepadState is a small struct.
          *       The snapshot remains valid even if the source state is modified or destroyed.
          */
-        explicit InputSnapshot(const helios::input::GamepadState& gamepadState) noexcept
+        explicit InputSnapshot(const helios::input::gamepad::GamepadState& gamepadState) noexcept
         : gamepadState_(gamepadState) {
         }
 
@@ -72,7 +72,7 @@ export namespace helios::engine::game {
          *         of this InputSnapshot. The state is immutable and reflects input at
          *         the time of snapshot creation.
          */
-        [[nodiscard]] const helios::input::GamepadState& gamepadState() const noexcept {
+        [[nodiscard]] const helios::input::gamepad::GamepadState& gamepadState() const noexcept {
             return gamepadState_;
         }
     };

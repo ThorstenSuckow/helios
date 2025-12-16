@@ -9,13 +9,14 @@ module;
 export module helios.examples.spaceshipControl.InputHandler;
 
 import helios.engine.game.InputHandler;
-import helios.input.GamepadState;
+import helios.input.gamepad.GamepadState;
 import helios.engine.game.Command;
 import helios.engine.game.InputSnapshot;
 import helios.engine.game.CommandBuffer;
 import helios.engine.game.GameObject;
 import helios.examples.spaceshipControl.commands.PlayerMoveCommand;
 import helios.util.Guid;
+import helios.math.utils;
 
 export namespace helios::examples::spaceshipControl {
 
@@ -50,14 +51,17 @@ export namespace helios::examples::spaceshipControl {
             helios::engine::game::CommandBuffer& commandBuffer
         ) override {
 
+            auto stick = inputSnapshot.gamepadState().left();
+            float speed      = stick.length();
+            speed = speed <= helios::math::EPSILON_LENGTH ? 0.0f : speed;
+
+            helios::math::vec2f dir = speed > 0.0f ? stick * (1.0f/speed) : helios::math::vec2f{0.0f, 0.0f};
+
             commandBuffer.add(
                 guid,
                 std::make_unique<
                 helios::examples::spaceshipControl::commands::PlayerMoveCommand
-                >(
-                    inputSnapshot.gamepadState().left().normalize(),
-                    inputSnapshot.gamepadState().left().length()
-                )
+                >(dir, speed)
             );
 
 

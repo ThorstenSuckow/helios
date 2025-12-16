@@ -1,3 +1,7 @@
+/**
+ * @file _module.ixx
+ * @brief Aggregate module for ImGui widgets.
+ */
 export module helios.ext.imgui.widgets;
 
 

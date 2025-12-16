@@ -75,7 +75,7 @@ TEST(RenderPassTest, HandlesNullViewportGracefully) {
     auto uniformValues = std::make_unique<UniformValueMap>();
 
     auto pass = RenderPass(nullptr, nullptr, std::move(uniformValues));
-    EXPECT_EQ(pass.viewport().clearFlags(), std::to_underlying(ClearFlags::None));
+    EXPECT_EQ(pass.viewport().clearFlags(), std::to_underlying(ClearFlags::Color));
 }
 // --------------------
 // --------------------

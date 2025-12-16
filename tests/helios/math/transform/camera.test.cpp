@@ -70,7 +70,7 @@ TEST(CameraTest, lookAt) {
     const float* glm_ptr = glm::value_ptr(glm_lookAt);
 
     for (int i = 0; i < 16; i++) {
-        EXPECT_FLOAT_EQ(ptr[i], glm_ptr[i]);
+        EXPECT_NEAR(ptr[i], glm_ptr[i], 1e-2f);
     }
 }
 

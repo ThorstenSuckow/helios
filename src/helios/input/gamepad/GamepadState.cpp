@@ -45,7 +45,7 @@ namespace helios::input::gamepad {
         const bool buttonDpadDown, const bool buttonDpadLeft
     ) noexcept {
 
-        #if HELIOS_DEBUG
+        #ifdef HELIOS_DEBUG
         if(axisLeftX < -1.0f || axisLeftX > 1.0f) {
             logger_.warn("axisLeftX is out of bounds.");
         }

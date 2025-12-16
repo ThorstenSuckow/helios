@@ -145,7 +145,7 @@ namespace helios::ext::opengl::rendering::shader {
 
         logger_.info("Applying uniform values");
 
-        #if HELIOS_DEBUG
+        #ifdef HELIOS_DEBUG
         if (static_cast<size_t>(UniformSemantics::size_) > 1) {
             logger_.warn(
                 std::format(

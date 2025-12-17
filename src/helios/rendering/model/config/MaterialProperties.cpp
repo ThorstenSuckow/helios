@@ -1,7 +1,7 @@
 
 module helios.rendering.model.config.MaterialProperties;
 
-
+import helios.rendering.model.config.MaterialPropertiesOverride;
 import helios.math.types;
 import helios.rendering.shader.UniformValueMap;
 import helios.rendering.shader.UniformSemantics;
@@ -18,6 +18,13 @@ namespace helios::rendering::model::config {
 
     MaterialProperties MaterialProperties::withBaseColor(const helios::math::vec4f baseColor) const noexcept {
         return MaterialProperties(
+            baseColor,
+            roughness_
+        );
+    }
+
+    MaterialPropertiesOverride MaterialProperties::overrideBaseColor(const helios::math::vec4f baseColor) const noexcept {
+        return MaterialPropertiesOverride(
             baseColor,
             roughness_
         );

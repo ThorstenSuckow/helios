@@ -1,5 +1,9 @@
 var NAVTREEINDEX15 =
 {
+"namespacehelios_1_1math.html#a4c90766d59f3c1ce32821bbbd3cdd62b":[3,0,0,6,12],
+"namespacehelios_1_1math.html#a57c950d4cb887c103dc2423f3ea81ce4":[3,0,0,6,19],
+"namespacehelios_1_1math.html#a581fd38f8554d49c33a42b46255cc983":[3,0,0,6,48],
+"namespacehelios_1_1math.html#a643691235959c2f53d144a4ee9a0e251":[3,0,0,6,41],
 "namespacehelios_1_1math.html#a6bca908e940499722f0a3af6447ad719":[3,0,0,6,34],
 "namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5":[3,0,0,6,20],
 "namespacehelios_1_1math.html#a73c58ac1ac41973b9927ab6893662104":[3,0,0,6,27],
@@ -245,9 +249,5 @@ var NAVTREEINDEX15 =
 "structhelios_1_1math_1_1vec3.html#a3bbdd06a78770b9dadc233e0acca4295":[5,0,0,5,2,8],
 "structhelios_1_1math_1_1vec3.html#a6146713ae785c06b31121c953357dda4":[2,0,68,1,7],
 "structhelios_1_1math_1_1vec3.html#a6146713ae785c06b31121c953357dda4":[3,0,0,6,5,7],
-"structhelios_1_1math_1_1vec3.html#a6146713ae785c06b31121c953357dda4":[5,0,0,5,2,7],
-"structhelios_1_1math_1_1vec3.html#a6a604e51ca84090aa8e8d7f46bd02009":[2,0,68,1,0],
-"structhelios_1_1math_1_1vec3.html#a6a604e51ca84090aa8e8d7f46bd02009":[3,0,0,6,5,0],
-"structhelios_1_1math_1_1vec3.html#a6a604e51ca84090aa8e8d7f46bd02009":[5,0,0,5,2,0],
-"structhelios_1_1math_1_1vec3.html#a6db16504ac2287d0bfb8909075248b49":[2,0,68,1,1]
+"structhelios_1_1math_1_1vec3.html#a6146713ae785c06b31121c953357dda4":[5,0,0,5,2,7]
 };

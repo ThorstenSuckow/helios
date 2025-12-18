@@ -119,6 +119,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7e80912edf28edf59686f5e344c26569" id="r_a7e80912edf28edf59686f5e344c26569"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7e80912edf28edf59686f5e344c26569">MaterialProperties</a> (<a class="el" href="namespacehelios_1_1math.html#a08252f81850c5902e3c8dead272f3332">helios::math::vec4f</a> baseColor, float roughness=0.0f) noexcept</td></tr>
 <tr class="memdesc:a7e80912edf28edf59686f5e344c26569"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties.html" title="Represents a Value Object for an immutable set of material properties.">MaterialProperties</a> instance with the specified values.  <br /></td></tr>
 <tr class="memitem:af37039d81ae928ad4f314bc99fa1e283" id="r_af37039d81ae928ad4f314bc99fa1e283"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af471bada8012ac6da20c56ffd1388426">MaterialProperties</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af37039d81ae928ad4f314bc99fa1e283">withBaseColor</a> (<a class="el" href="namespacehelios_1_1math.html#a08252f81850c5902e3c8dead272f3332">helios::math::vec4f</a> baseColor) const noexcept</td></tr>
+<tr class="memitem:a5b40f12048960aa8dd03309c72ccfbf2" id="r_a5b40f12048960aa8dd03309c72ccfbf2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structhelios_1_1rendering_1_1model_1_1config_1_1MaterialPropertiesOverride.html">MaterialPropertiesOverride</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5b40f12048960aa8dd03309c72ccfbf2">overrideBaseColor</a> (<a class="el" href="namespacehelios_1_1math.html#a08252f81850c5902e3c8dead272f3332">helios::math::vec4f</a> baseColor) const noexcept</td></tr>
 <tr class="memitem:a92c5f004d75558b0211523bc10416667" id="r_a92c5f004d75558b0211523bc10416667"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af471bada8012ac6da20c56ffd1388426">MaterialProperties</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a92c5f004d75558b0211523bc10416667">withRoughness</a> (float roughness) const noexcept</td></tr>
 <tr class="memitem:a0179bfd58c6c4a0be0a4fd74775dcc34" id="r_a0179bfd58c6c4a0be0a4fd74775dcc34"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0179bfd58c6c4a0be0a4fd74775dcc34">writeUniformValues</a> (<a class="el" href="classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html">shader::UniformValueMap</a> &amp;uniformValueMap) const noexcept</td></tr>
 <tr class="memdesc:a0179bfd58c6c4a0be0a4fd74775dcc34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the current properties into the given UniformValueMap.  <br /></td></tr>
@@ -127,7 +128,7 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><p>Represents a Value Object for an immutable set of material properties. </p>
 <p>This class acts as a Value Object, encapsulating fundamental material characteristics like base color and roughness. Once an instance is created, its properties cannot be changed. Methods prefixed with `with*` facilitate functional updates by returning a **new** <a class="el" href="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties.html" title="Represents a Value Object for an immutable set of material properties.">MaterialProperties</a> instance with the specified property modified, leaving the original object - which may still be in use by existing Renderables - untouched. </p>
 
-<p class="definition">Definition at line <a class="el" href="MaterialProperties_8ixx_source.html#l00026">26</a> of file <a class="el" href="MaterialProperties_8ixx_source.html">MaterialProperties.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MaterialProperties_8ixx_source.html#l00027">27</a> of file <a class="el" href="MaterialProperties_8ixx_source.html">MaterialProperties.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a2f6bfb8f7912f85afd71b0a0d7746a49" name="a2f6bfb8f7912f85afd71b0a0d7746a49"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2f6bfb8f7912f85afd71b0a0d7746a49">&#9670;&#160;</a></span>~MaterialProperties()</h2>
@@ -231,6 +232,56 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a5b40f12048960aa8dd03309c72ccfbf2" name="a5b40f12048960aa8dd03309c72ccfbf2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b40f12048960aa8dd03309c72ccfbf2">&#9670;&#160;</a></span>overrideBaseColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structhelios_1_1rendering_1_1model_1_1config_1_1MaterialPropertiesOverride.html">MaterialPropertiesOverride</a> helios::rendering::model::config::MaterialProperties::overrideBaseColor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1math.html#a08252f81850c5902e3c8dead272f3332">helios::math::vec4f</a></td>          <td class="paramname"><span class="paramname"><em>baseColor</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Creates a new <a class="el" href="structhelios_1_1rendering_1_1model_1_1config_1_1MaterialPropertiesOverride.html" title="Configuration container for overriding specific material properties.">MaterialPropertiesOverride</a> instance with an updated base color.</p>
+<p>This method returns a new <a class="el" href="structhelios_1_1rendering_1_1model_1_1config_1_1MaterialPropertiesOverride.html" title="Configuration container for overriding specific material properties.">MaterialPropertiesOverride</a> instance where only the base color has been changed to the provided value.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">baseColor</td><td>The new base color for the material.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A new instance of MaterialPropertiesOvrride with the updated base color. </dd></dl>
+
+<p class="reference">References <a class="el" href="#a5b40f12048960aa8dd03309c72ccfbf2">overrideBaseColor()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="#a5b40f12048960aa8dd03309c72ccfbf2">overrideBaseColor()</a>.</p>
+<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_a5b40f12048960aa8dd03309c72ccfbf2_cgraph.svg" width="250" height="90"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_a5b40f12048960aa8dd03309c72ccfbf2_icgraph.svg" width="250" height="90"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
 <a id="af37039d81ae928ad4f314bc99fa1e283" name="af37039d81ae928ad4f314bc99fa1e283"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af37039d81ae928ad4f314bc99fa1e283">&#9670;&#160;</a></span>withBaseColor()</h2>
 
@@ -266,16 +317,16 @@ Public Member Functions</h2></td></tr>
 <p class="reference">References <a class="el" href="#af471bada8012ac6da20c56ffd1388426">MaterialProperties()</a>, and <a class="el" href="#af37039d81ae928ad4f314bc99fa1e283">withBaseColor()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="#af37039d81ae928ad4f314bc99fa1e283">withBaseColor()</a>.</p>
-<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_af37039d81ae928ad4f314bc99fa1e283_cgraph.svg" width="536" height="90"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_af37039d81ae928ad4f314bc99fa1e283_icgraph.svg" width="250" height="90"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -316,16 +367,16 @@ Public Member Functions</h2></td></tr>
 <p class="reference">References <a class="el" href="#af471bada8012ac6da20c56ffd1388426">MaterialProperties()</a>, and <a class="el" href="#a92c5f004d75558b0211523bc10416667">withRoughness()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="#a92c5f004d75558b0211523bc10416667">withRoughness()</a>.</p>
-<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_a92c5f004d75558b0211523bc10416667_cgraph.svg" width="536" height="90"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div id="dynsection-6-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_a92c5f004d75558b0211523bc10416667_icgraph.svg" width="250" height="90"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -365,16 +416,16 @@ Public Member Functions</h2></td></tr>
 <p class="reference">References <a class="el" href="#a0179bfd58c6c4a0be0a4fd74775dcc34">writeUniformValues()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="#a0179bfd58c6c4a0be0a4fd74775dcc34">writeUniformValues()</a>.</p>
-<div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-7" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div id="dynsection-7-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_a0179bfd58c6c4a0be0a4fd74775dcc34_cgraph.svg" width="250" height="90"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-<div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-8" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-6-content" class="dyncontent" style="display:none;">
+<div id="dynsection-8-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_a0179bfd58c6c4a0be0a4fd74775dcc34_icgraph.svg" width="250" height="90"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 

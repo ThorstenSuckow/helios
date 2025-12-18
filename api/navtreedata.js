@@ -80,16 +80,16 @@ var NAVTREEINDEX =
 "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html#a8f15cee19cf071f05f1f320ca30243a8",
 "classhelios_1_1input_1_1gamepad_1_1GamepadState.html#a068967ab65a6874ce5b5de039af79e8c",
 "classhelios_1_1rendering_1_1Renderable.html",
-"classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html#aa1bb7e38a8043a669bcd8a1df783615e",
-"classhelios_1_1scene_1_1SceneNode.html#ab908b6a16d34640eca0d92f2573e6cc3",
-"classhelios_1_1util_1_1log_1_1LogManager.html#a7fd1afc8a2049fee3212387976a748ed",
-"dir_faba1e8ac90047e249cc0ce4819a22fa.html",
-"module__helios_8engine_8game_8InputSnapshot.html#af5f6e43831a9b8ae1c41c687f6a5c38e",
-"module__helios_8input_8gamepad_8GamepadSettings.html#a62440565754425f1b3337aebeffcb224",
-"module__helios_8rendering_8Viewport.html#a6d7fc6de0fc5c9c31d2d7ee760f1f126",
-"module__helios_8util.html",
-"namespacehelios_1_1math.html#a6bca908e940499722f0a3af6447ad719",
-"structhelios_1_1math_1_1vec3.html#a6db16504ac2287d0bfb8909075248b49"
+"classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html#a8e91edc1d58edc6b289b39e7c8662edb",
+"classhelios_1_1scene_1_1SceneNode.html#aa61104006dc48bc2a57dbe6fc6cbcb5b",
+"classhelios_1_1util_1_1log_1_1LogManager.html#a750d8fd5b3ee3678600644756b0631e7",
+"dir_f09a4bd8207caf4d8cfeafd6996a2934.html",
+"module__helios_8engine_8game_8InputHandler.html#ab37b0cba250f48c9e8a39acd836fadf2",
+"module__helios_8input_8gamepad_8GamepadSettings.html#a28cfbd69d43a587eaebf11b504800e10",
+"module__helios_8rendering_8Viewport.html#a1935d17a330f646b6033b31799d6e22f",
+"module__helios_8tooling_8FpsMetrics.html#acf271b3c606df57550500cc9b7d0966f",
+"namespacehelios_1_1math.html#a4c90766d59f3c1ce32821bbbd3cdd62b",
+"structhelios_1_1math_1_1vec3.html#a6a604e51ca84090aa8e8d7f46bd02009"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

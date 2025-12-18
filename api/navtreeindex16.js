@@ -1,5 +1,9 @@
 var NAVTREEINDEX16 =
 {
+"structhelios_1_1math_1_1vec3.html#a6a604e51ca84090aa8e8d7f46bd02009":[2,0,68,1,0],
+"structhelios_1_1math_1_1vec3.html#a6a604e51ca84090aa8e8d7f46bd02009":[3,0,0,6,5,0],
+"structhelios_1_1math_1_1vec3.html#a6a604e51ca84090aa8e8d7f46bd02009":[5,0,0,5,2,0],
+"structhelios_1_1math_1_1vec3.html#a6db16504ac2287d0bfb8909075248b49":[2,0,68,1,1],
 "structhelios_1_1math_1_1vec3.html#a6db16504ac2287d0bfb8909075248b49":[3,0,0,6,5,1],
 "structhelios_1_1math_1_1vec3.html#a6db16504ac2287d0bfb8909075248b49":[5,0,0,5,2,1],
 "structhelios_1_1math_1_1vec3.html#a8e8e639bd8db44dd1112eedef81b9972":[2,0,68,1,10],

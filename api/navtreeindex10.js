@@ -1,5 +1,8 @@
 var NAVTREEINDEX10 =
 {
+"dir_f09a4bd8207caf4d8cfeafd6996a2934.html":[6,0,1,0,1,0],
+"dir_f420875d55816fb78e81b706f36fb7ba.html":[6,0,1,1,10],
+"dir_f5bf7461226e2ff6cddccbfb1a3604e3.html":[6,0,1,1,9,2],
 "dir_faba1e8ac90047e249cc0ce4819a22fa.html":[6,0,1,1,0,0],
 "ext_2imgui_2__module_8ixx.html":[6,0,1,0,1,1],
 "ext_2imgui_2__module_8ixx_source.html":[6,0,1,0,1,1],
@@ -246,8 +249,5 @@ var NAVTREEINDEX10 =
 "module__helios_8engine_8game_8GameWorld.html#a4e85936a3662c8dfc85cf83e2e901541":[2,0,41,2],
 "module__helios_8engine_8game_8GameWorld.html#aada0325e1ee9928451c6149a6f5643b3":[2,0,41,4],
 "module__helios_8engine_8game_8InputHandler.html":[2,0,42],
-"module__helios_8engine_8game_8InputHandler.html#a7da0fe18ebf06348c105d7948d77edbc":[2,0,42,1],
-"module__helios_8engine_8game_8InputHandler.html#ab37b0cba250f48c9e8a39acd836fadf2":[2,0,42,2],
-"module__helios_8engine_8game_8InputSnapshot.html":[2,0,43],
-"module__helios_8engine_8game_8InputSnapshot.html#a6d9e2aca7dd270d34ba434f2a768d488":[2,0,43,2]
+"module__helios_8engine_8game_8InputHandler.html#a7da0fe18ebf06348c105d7948d77edbc":[2,0,42,1]
 };

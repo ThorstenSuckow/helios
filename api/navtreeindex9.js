@@ -1,5 +1,8 @@
 var NAVTREEINDEX9 =
 {
+"classhelios_1_1util_1_1log_1_1LogManager.html#a750d8fd5b3ee3678600644756b0631e7":[5,0,0,9,1,2,13],
+"classhelios_1_1util_1_1log_1_1LogManager.html#a7fd1afc8a2049fee3212387976a748ed":[2,0,124,0,2],
+"classhelios_1_1util_1_1log_1_1LogManager.html#a7fd1afc8a2049fee3212387976a748ed":[3,0,0,10,1,2,2],
 "classhelios_1_1util_1_1log_1_1LogManager.html#a7fd1afc8a2049fee3212387976a748ed":[5,0,0,9,1,2,2],
 "classhelios_1_1util_1_1log_1_1LogManager.html#a7ffda8e8a0051befb5ec47fd61c316c7":[2,0,124,0,0],
 "classhelios_1_1util_1_1log_1_1LogManager.html#a7ffda8e8a0051befb5ec47fd61c316c7":[3,0,0,10,1,2,0],
@@ -246,8 +249,5 @@ var NAVTREEINDEX9 =
 "dir_e6d2024ed47421d40e989df615c8235b.html":[6,0,1,0,2],
 "dir_eb27c6586e3179d4051f6b025521d9e9.html":[6,0,1,1,5,0],
 "dir_ec1f341d187cb06b8fc5c1e70ce7a6b5.html":[6,0,1,1,5,3],
-"dir_ee15f2335c5359d3d8a57db99fa3af3b.html":[6,0,1,0,0,0],
-"dir_f09a4bd8207caf4d8cfeafd6996a2934.html":[6,0,1,0,1,0],
-"dir_f420875d55816fb78e81b706f36fb7ba.html":[6,0,1,1,10],
-"dir_f5bf7461226e2ff6cddccbfb1a3604e3.html":[6,0,1,1,9,2]
+"dir_ee15f2335c5359d3d8a57db99fa3af3b.html":[6,0,1,0,0,0]
 };

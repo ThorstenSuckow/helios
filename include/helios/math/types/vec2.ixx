@@ -97,12 +97,7 @@ export namespace helios::math {
             if (v[0] == 0 && v[1] == 0) {
                 return static_cast<FloatingPointType<T>>(0);
             }
-            return static_cast<FloatingPointType<T>>(
-                std::sqrt(
-                    static_cast<double>(v[0]) * static_cast<double>(v[0]) +
-                    static_cast<double>(v[1]) * static_cast<double>(v[1])
-                )
-            );
+            return std::hypot(v[0], v[1]);
         }
 
         /**

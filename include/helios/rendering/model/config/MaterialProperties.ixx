@@ -6,6 +6,7 @@ module;
 
 export module helios.rendering.model.config.MaterialProperties;
 
+import helios.rendering.model.config.MaterialPropertiesOverride;
 
 import helios.math.types;
 import helios.rendering.shader.UniformValueMap;
@@ -85,6 +86,18 @@ export namespace helios::rendering::model::config {
              * @return A new immutable instance of MaterialProperties with the updated base color.
              */
             [[nodiscard]] MaterialProperties withBaseColor(helios::math::vec4f baseColor) const noexcept;
+
+            /**
+             * Creates a new MaterialPropertiesOverride instance with an updated base color.
+             *
+             * This method returns a new MaterialPropertiesOverride instance where only the base
+             * color has been changed to the provided value.
+             *
+             * @param baseColor The new base color for the material.
+             *
+             * @return A new instance of MaterialPropertiesOvrride with the updated base color.
+             */
+            [[nodiscard]] MaterialPropertiesOverride overrideBaseColor(helios::math::vec4f baseColor) const noexcept;
 
             /**
              * Creates a new MaterialProperties instance with an updated roughness factor.

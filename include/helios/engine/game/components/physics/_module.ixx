@@ -5,5 +5,4 @@
 export module helios.engine.game.components.physics;
 
 export import helios.engine.game.components.physics.Move2DComponent;
-export import helios.engine.game.components.physics.Aim2DComponent;
 

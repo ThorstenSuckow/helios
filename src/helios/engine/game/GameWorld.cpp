@@ -10,12 +10,13 @@ import helios.engine.game.GameObject;
 import helios.util.Guid;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
+import helios.engine.game.UpdateContext;
 
 namespace helios::engine::game {
 
-    void GameWorld::update(float deltaTime) const noexcept {
+    void GameWorld::update(helios::engine::game::UpdateContext& updateContext) const noexcept {
         for (auto& [guid, gameObject] : gameObjects_) {
-            gameObject->update(deltaTime);
+            gameObject->update(updateContext);
         }
     }
 

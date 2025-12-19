@@ -12,7 +12,7 @@ export module helios.engine.game.GameWorld;
 
 import helios.engine.game.GameObject;
 import helios.util.Guid;
-
+import helios.engine.game.UpdateContext;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
 
@@ -70,14 +70,14 @@ export namespace helios::engine::game {
         /**
          * @brief Updates all GameObjects in the world for the current frame.
          *
-         * @param deltaTime Time elapsed since the last frame, in seconds.
+         * @param updateContext Context containing deltaTime, input snapshot, game world and command buffer.
          *
          * @note Iterates through all registered GameObjects and invokes their update() method.
          *       The order of updates is not guaranteed due to the underlying unordered_map storage.
          * @note This method is noexcept; individual GameObject::update() implementations should
          *       handle their own exceptions to prevent propagation.
          */
-        void update(float deltaTime) const noexcept;
+        void update(helios::engine::game::UpdateContext& updateContext) const noexcept;
 
         /**
          * @brief Adds a GameObject to the world and transfers ownership.

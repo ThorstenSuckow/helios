@@ -4,10 +4,11 @@
  */
 module;
 
+#include <stdexcept>
+
 export module helios.engine.game.UpdateContext;
 
 import helios.engine.game.InputSnapshot;
-#include <stdexcept>
 
 
 export namespace helios::engine::game {

@@ -1,50 +1,35 @@
 /**
- * @file Spaceship.ixx
- * @brief Spaceship entity with physics-based movement and rotation.
+ * @file Move2DComponent.ixx
+ * @brief Component for 2D physics-based movement with rotation.
  */
 module;
 
 #include <algorithm>
 #include <cassert>
 #include <cmath>
-#include <format>
+#include <memory>
 
-export module helios.examples.spaceshipControl.Spaceship;
+export module helios.engine.game.components.physics.Move2DComponent;
 
-import helios.engine.game.GameObject;
-import helios.math.types;
-import helios.math.utils;
-import helios.math.transform;
 import helios.scene.SceneNode;
-import helios.util.log;
+import helios.util.Guid;
+import helios.scene.Transform;
+import helios.math;
+import helios.core.units;
+import helios.engine.game.GameObject;
+import helios.engine.game.UpdateContext;
+import helios.engine.game.Updatable;
+import helios.engine.game.Component;
+import helios.engine.game.components.scene.SceneNodeComponent;
 
-#define HELIOS_LOG_SCOPE "helios::examples::spaceshipControl::Spaceship"
-export namespace helios::examples::spaceshipControl {
 
-    /**
-     * @brief A controllable spaceship entity with smooth rotation and movement physics.
-     *
-     * @details The Spaceship class extends GameObject to provide arcade-style space flight
-     * controls. It features smooth rotation towards an input direction with adjustable turn
-     * speed, velocity-based movement with momentum and dampening and automatic deceleration
-     * when input stops.
-     *
-     * The spaceship uses a 2D movement model in the XY plane with Z-axis rotation.
-     * Movement and rotation are interpolated over time using delta-time for frame-rate
-     * independent behavior.
-     *
-     * Physics parameters can be tuned at runtime via setter methods.
-     *
-     * @see helios::engine::game::GameObject
-     * @see PlayerMoveCommand
-     */
-    class Spaceship : public helios::engine::game::GameObject {
+export namespace helios::engine::game::components::physics {
 
-        /**
-         * @brief Logger instance for debug and diagnostic output.
-         */
-        static inline const helios::util::log::Logger& logger_ =
-                helios::util::log::LogManager::loggerForScope(HELIOS_LOG_SCOPE);
+
+    class Move2DComponent : public helios::engine::game::Updatable, public helios::engine::game::Component {
+
+    protected:
+
 
         // ========================================
         // Default Physics Constants
@@ -168,27 +153,25 @@ export namespace helios::examples::spaceshipControl {
          */
         bool isInputActive_ = true;
 
+        float throttle_ = 0.0f;
+
+        helios::math::vec2f steeringInput_;
+
+        helios::math::vec3f velocity_;
+
+
+        helios::engine::game::components::scene::SceneNodeComponent* sceneNodeComponent_;
+
     public:
 
-        /**
-         * @brief Constructs a Spaceship attached to the given SceneNode.
-         *
-         * @param sceneNode The scene node representing this entity in the scene graph.
-         */
-        explicit Spaceship(helios::scene::SceneNode* sceneNode) : GameObject(sceneNode) {}
+        void onAttach(helios::engine::game::GameObject* gameObject) noexcept override {
+            gameObject_ = gameObject;
+            sceneNodeComponent_ = gameObject_->get<helios::engine::game::components::scene::SceneNodeComponent>();
+            assert(sceneNodeComponent_ != nullptr && "Unexpected nullptr for sceneNodeComponent_");
+        };
 
-        /**
-         * @brief Sets the movement target based on input direction and intensity.
-         *
-         * @param direction Normalized 2D direction vector indicating desired heading.
-         * @param speedFactor Input intensity from 0.0 (idle) to 1.0 (full speed).
-         *
-         * @pre direction must be normalized (length approximately 1.0).
-         */
-        void move(const helios::math::vec2f direction, const float speedFactor) {
-
-            
-            if (speedFactor <= helios::math::EPSILON_LENGTH) {
+        void move(helios::math::vec2f direction, float throttle) {
+            if (throttle <= helios::math::EPSILON_LENGTH) {
                 steeringInput_ = helios::math::vec2f{0.0f, 0.0f};
                 throttle_ = 0.0f;
                 isInputActive_ = false;
@@ -196,11 +179,10 @@ export namespace helios::examples::spaceshipControl {
             }
 
             steeringInput_ = direction;
-            throttle_ = speedFactor;
+            throttle_ = throttle;
 
             assert(std::abs(direction.length() - 1.0f) <= 0.001f && "Unexpected direction vector - not normalized");
 
-            logger_.debug(std::format("Moving Spaceship w/ speedFactor {0}", speedFactor));
 
             targetRotationAngle_ = helios::math::degrees(std::atan2(direction[1], direction[0]));
             rotationAngleDelta_ = std::fmod((targetRotationAngle_ - actualRotationAngle_) + 540.0f, 360.0f) - 180.0f;
@@ -209,35 +191,20 @@ export namespace helios::examples::spaceshipControl {
             isInputActive_ = true;
 
             float turnBoost = 1.0f + 0.5f*std::clamp((abs(rotationAngleDelta_))/180.f, 0.0f, 1.0f);
-            actualRotationSpeed_ = turnBoost * rotationSpeed_ * speedFactor;
-            actualMovementSpeed_ = movementSpeed_ * speedFactor;
+            actualRotationSpeed_ = turnBoost * rotationSpeed_ * throttle_;
+            actualMovementSpeed_ = movementSpeed_ * throttle_;
 
         }
 
+        void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
-        /**
-         * @brief Updates spaceship physics for the current frame.
-         *
-         * @param deltaTime Time elapsed since the last frame, in seconds.
-         *
-         * @pre deltaTime must be non-negative.
-         *
-         * @details Performs the following each frame:
-         *   1. Applies rotation dampening when no input is active
-         *   2. Interpolates rotation towards target angle
-         *   3. Applies movement dampening when no input is active
-         *   4. Updates position based on current direction and speed
-         *
-         * @note Skips processing if deltaTime is zero to avoid division issues.
-         */
-        void update(const float deltaTime) override {
-
-            logger_.debug(std::format("Updating at {0}", deltaTime));
+            float deltaTime = updateContext.deltaTime();
 
             assert(deltaTime >= 0 && "Unexpected negative value for deltaTime");
 
+
+
             if (deltaTime == 0) {
-                logger_.debug("deltaTime was 0, skipping update()");
                 return;
             }
 
@@ -264,11 +231,13 @@ export namespace helios::examples::spaceshipControl {
                     actualRotationSpeed_ = 0.0f;
                 }
 
-                setRotation(helios::math::rotate(
-                helios::math::mat4f::identity(),
-                helios::math::radians(actualRotationAngle_),
-                helios::math::vec3f(0.0f, 0.0f, 1.0f)
-                ));
+                if (sceneNodeComponent_) {
+                    sceneNodeComponent_->setRotation(helios::math::rotate(
+                    helios::math::mat4f::identity(),
+                    helios::math::radians(actualRotationAngle_),
+                    helios::math::vec3f(0.0f, 0.0f, 1.0f)
+                    ));
+                }
 
 
             }
@@ -285,6 +254,11 @@ export namespace helios::examples::spaceshipControl {
                 // This creates a smooth deceleration effect (velocity approaches zero over time).
                 const float drag  = std::pow(movementDampening_, deltaTime);
                 velocity_ = velocity_ * drag;
+
+                if (drag <= helios::math::EPSILON_LENGTH) {
+                    velocity_ = helios::math::vec3f{0.0f, 0.0f, 0.0f};
+                }
+
             } else {
                 // Accelerate in the current facing direction.
                 // Uses throttle (input intensity) to scale acceleration.
@@ -296,10 +270,36 @@ export namespace helios::examples::spaceshipControl {
                 velocity_ = velocity_.normalize() * movementSpeed_;
             }
 
-            // Integrate velocity to update position.
-            position_ = position_ + velocity_ * deltaTime;
-            setTranslation(position_);
 
+            if (sceneNodeComponent_) {
+                // Integrate velocity to update position.
+                sceneNodeComponent_->setTranslation(sceneNodeComponent_->translation() + velocity_ * deltaTime);
+            }
+
+
+
+
+        };
+
+        /**
+         * @brief Returns the current steering input direction.
+         */
+        [[nodiscard]] const helios::math::vec2f& steeringInput() const noexcept {
+            return steeringInput_;
+        }
+
+        /**
+         * @brief Returns the current throttle value (0.0 to 1.0).
+         */
+        [[nodiscard]] float throttle() const noexcept {
+            return throttle_;
+        }
+
+        /**
+         * @brief Returns the current velocity vector.
+         */
+        [[nodiscard]] const helios::math::vec3f& velocity() const noexcept {
+            return velocity_;
         }
 
         /**
@@ -307,7 +307,7 @@ export namespace helios::examples::spaceshipControl {
          *
          * @return A value between 0.0 (stationary) and 1.0 (maximum speed).
          */
-        [[nodiscard]] float speedRatio() const noexcept override {
+        [[nodiscard]] float speedRatio() const noexcept {
             // Prevent division by zero if movementSpeed_ is zero or very close to zero
             if (std::abs(movementSpeed_) < helios::math::EPSILON_LENGTH) {
                 return 0.0f;
@@ -340,7 +340,7 @@ export namespace helios::examples::spaceshipControl {
         [[nodiscard]] float movementAcceleration() const noexcept { return movementAcceleration_; }
 
         /**
-         * @brief Returns the base movement speed in units per second.
+         * @brief Returns the maximum movement speed in units per second.
          */
         [[nodiscard]] float movementSpeed() const noexcept { return movementSpeed_; }
 
@@ -359,6 +359,12 @@ export namespace helios::examples::spaceshipControl {
          */
         [[nodiscard]] float rotationAngle() const noexcept { return actualRotationAngle_; }
 
+        /**
+         * @brief Returns the current position from the SceneNodeComponent.
+         */
+        [[nodiscard]] helios::math::vec3f position() const noexcept {
+            return sceneNodeComponent_ ? sceneNodeComponent_->translation() : helios::math::vec3f{0.0f, 0.0f, 0.0f};
+        }
 
         // ========================================
         // Physics Parameter Setters
@@ -366,58 +372,47 @@ export namespace helios::examples::spaceshipControl {
 
         /**
          * @brief Sets the maximum rotation speed in degrees per second.
-         *
-         * @param value The new rotation speed (must be positive).
          */
         void setRotationSpeed(float value) noexcept { rotationSpeed_ = value; }
 
         /**
          * @brief Sets the minimum movement speed threshold.
-         *
-         * @param value The new threshold (0.0 to 1.0).
          */
         void setMovementSpeedThreshold(float value) noexcept { movementSpeedThreshold_ = value; }
 
         /**
          * @brief Sets the minimum rotation speed threshold.
-         *
-         * @param value The new threshold (0.0 to 1.0).
          */
         void setRotationSpeedThreshold(float value) noexcept { rotationSpeedThreshold_ = value; }
 
         /**
          * @brief Sets the movement acceleration in units per second squared.
-         *
-         * @param value The new acceleration (must be positive).
          */
         void setMovementAcceleration(float value) noexcept { movementAcceleration_ = value; }
 
         /**
-         * @brief Sets the base movement speed in units per second.
-         *
-         * @param value The new movement speed (must be positive).
+         * @brief Sets the maximum movement speed in units per second.
          */
         void setMovementSpeed(float value) noexcept { movementSpeed_ = value; }
 
         /**
          * @brief Sets the rotation dampening factor.
-         *
-         * @param value The new dampening factor (0.0 to 1.0).
          */
         void setRotationDampening(float value) noexcept { rotationDampening_ = value; }
 
         /**
          * @brief Sets the movement dampening factor.
-         *
-         * @param value The new dampening factor (0.0 to 1.0).
          */
         void setMovementDampening(float value) noexcept { movementDampening_ = value; }
 
+        // ========================================
+        // Reset to Defaults
+        // ========================================
 
         /**
          * @brief Resets all physics parameters to their default values.
          */
-        void resetPhysicsToDefaults() noexcept {
+        void resetToDefaults() noexcept {
             rotationSpeed_ = DEFAULT_ROTATION_SPEED;
             movementSpeedThreshold_ = DEFAULT_MOVEMENT_SPEED_THRESHOLD;
             rotationSpeedThreshold_ = DEFAULT_ROTATION_SPEED_THRESHOLD;
@@ -426,7 +421,7 @@ export namespace helios::examples::spaceshipControl {
             rotationDampening_ = DEFAULT_ROTATION_DAMPENING;
             movementDampening_ = DEFAULT_MOVEMENT_DAMPENING;
         }
-
     };
+
 
 }

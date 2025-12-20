@@ -79,7 +79,7 @@ export namespace helios::engine::game {
          *
          * @param dt Delta time in seconds. Must be non-negative.
          *
-         * @return A ref to this UpdateContext instance.
+         * @return A reference to this UpdateContext instance.
          */
         UpdateContext& setDeltaTime(float dt) noexcept {
             deltaTime_ = dt;
@@ -101,7 +101,7 @@ export namespace helios::engine::game {
          *
          * @param snapshot Non-owning pointer to the input snapshot.
          *
-         * @return A ref to this UpdateContext instance.
+         * @return A reference to this UpdateContext instance.
          */
         UpdateContext& setInputSnapshot(const helios::engine::game::InputSnapshot* snapshot) noexcept {
             inputSnapshot_ = snapshot;

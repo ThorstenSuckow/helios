@@ -63,6 +63,9 @@ export namespace helios::engine::game::components::scene {
         /**
          * @brief Sets the world-space size of the object.
          *
+         * This operation sets the scale of the underlying SceneNode according to the canonical size
+         * of the Renderable represented by the SceneNode.
+         *
          * @param width  Desired width in the specified unit.
          * @param height Desired height in the specified unit.
          * @param depth  Desired depth in the specified unit.

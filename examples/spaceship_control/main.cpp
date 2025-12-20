@@ -325,9 +325,8 @@ int main() {
     auto commandBuffer = helios::engine::game::CommandBuffer{};
 
     auto shipGameObject = std::make_unique<helios::engine::game::GameObject>();
-    auto* shipGameObject_ptr = shipGameObject.get();
     shipGameObject->add<helios::engine::game::components::scene::SceneNodeComponent>(spaceshipSceneNode);
-    shipGameObject_ptr->get<helios::engine::game::components::scene::SceneNodeComponent>()
+    shipGameObject->get<helios::engine::game::components::scene::SceneNodeComponent>()
                       ->setSize(SPACESHIP_SIZE, SPACESHIP_SIZE, 0.0f, helios::core::units::Unit::Meter);
     shipGameObject->add<helios::engine::game::components::input::TwinStickInputComponent>();
     shipGameObject->add<helios::engine::game::components::physics::Move2DComponent>();
@@ -337,12 +336,12 @@ int main() {
     spaceshipWidget->addGameObject("Player 1", theShipPtr);
 
     auto gridGameObject = std::make_unique<helios::engine::game::GameObject>();
-    auto* gridGameObject_ptr = gridGameObject.get();
+    auto* gridGameObjectPtr = gridGameObject.get();
     gridGameObject->add<helios::engine::game::components::scene::SceneNodeComponent>(gridSceneNode);
-    gridGameObject_ptr->get<helios::engine::game::components::scene::SceneNodeComponent>()
+    gridGameObjectPtr->get<helios::engine::game::components::scene::SceneNodeComponent>()
                       ->setSize(GRID_X * CELL_SIZE, GRID_Y * CELL_SIZE, 0.0f, helios::core::units::Unit::Meter);
 
-    auto* theGridPtr = gameWorld.addGameObject(std::move(gridGameObject));
+    std::ignore = gameWorld.addGameObject(std::move(gridGameObject));
 
 
 
@@ -385,7 +384,7 @@ int main() {
         // ----------------------------------------
         // 10.3 Gizmo / Debug Visualization Update
         // ----------------------------------------
-        const auto* mc = shipGameObject_ptr->get<helios::engine::game::components::physics::Move2DComponent>();
+        const auto* mc = theShipPtr->get<helios::engine::game::components::physics::Move2DComponent>();
         if (mc) {
             leftStickGizmoNode->setScale((mc->steeringInput() * mc->throttle()  * 4.0f).toVec3());
             shipDirectionGizmoNode->setScale(mc->velocity().normalize() * mc->speedRatio() * 4.0f);

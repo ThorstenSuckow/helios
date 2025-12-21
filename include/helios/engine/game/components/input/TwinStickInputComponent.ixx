@@ -17,6 +17,7 @@ import helios.engine.game.Component;
 import helios.engine.game.CommandBuffer;
 import helios.engine.game.commands.Move2DCommand;
 import helios.engine.game.commands.Aim2DCommand;
+import helios.engine.game.commands.ShootCommand;
 
 export namespace helios::engine::game::components::input {
 
@@ -35,6 +36,14 @@ export namespace helios::engine::game::components::input {
      *       attached for the generated commands to have any effect.
      */
     class TwinStickInputComponent : public helios::engine::game::Updatable, public helios::engine::game::Component {
+
+        /**
+         * @brief Flag to indicate whether shoot commands should be derived
+         * from the aim component.
+         *
+         * If true, ShootCommands will be created from dedicated input.
+         */
+        bool useDedicatedShootInput_ = true;
 
     public:
 
@@ -79,6 +88,23 @@ export namespace helios::engine::game::components::input {
                 gameObject()->guid(),
                 std::make_unique<helios::engine::game::commands::Aim2DCommand>(rdir, finalFreq)
             );
+
+            if (useDedicatedShootInput_) {
+                // right trigger: shooting
+                const auto rightTrigger = inputSnapshot->gamepadState().triggerRight();
+
+                commandBuffer->add(
+                   gameObject()->guid(),
+                   std::make_unique<helios::engine::game::commands::ShootCommand>(rightTrigger)
+               );
+            } else {
+                commandBuffer->add(
+                   gameObject()->guid(),
+                   std::make_unique<helios::engine::game::commands::ShootCommand>(finalFreq)
+               );
+            }
+
+
 
         };
 

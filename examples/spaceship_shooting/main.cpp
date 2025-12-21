@@ -39,6 +39,7 @@ import helios.rendering.model.config.MaterialProperties;
 import helios.rendering.model.config.PrimitiveType;
 
 import helios.rendering.asset.shape.basic.Triangle;
+import helios.rendering.asset.shape.basic.Rectangle;
 import helios.rendering.asset.shape.basic.Line;
 import helios.rendering.asset.shape.basic.Grid;
 
@@ -80,17 +81,26 @@ import helios.ext.imgui.widgets.GamepadWidget;
 import helios.ext.imgui.widgets.LogWidget;
 import helios.ext.imgui.widgets.CameraWidget;
 import helios.ext.imgui.ImGuiLogSink;
+
+// Spaceship Widget
 import helios.examples.spaceshipShooting.SpaceshipWidget;
 
 // game input handling, game objects
 import helios.core.units;
 import helios.engine.game.GameWorld;
 import helios.engine.game.CommandBuffer;
+import helios.engine.game.GameObject;
 import helios.engine.game.InputSnapshot;
-import helios.examples.spaceshipShooting.Spaceship;
-import helios.examples.spaceshipShooting.TheGrid;
-import helios.examples.spaceshipShooting.InputHandler;
+import helios.engine.game.UpdateContext;
 
+// components, commands
+import helios.engine.game.components.scene.SceneNodeComponent;
+import helios.engine.game.components.input.TwinStickInputComponent;
+import helios.engine.game.components.physics.Move2DComponent;
+import helios.engine.game.components.gameplay.Aim2DComponent;
+import helios.engine.game.components.physics.ShootComponent;
+
+import helios.engine.game.systems.BulletPool;
 
 // ============================================================================
 // Using Declarations
@@ -138,7 +148,7 @@ int main() {
     // ========================================
 
     const auto app = GLFWFactory::makeOpenGLApp(
-        "helios - Spaceship Control", 1980, 1024, ASPECT_RATIO_NUMER, ASPECT_RATIO_DENOM
+        "helios - Spaceship Shooting Demo", 1980, 1024, ASPECT_RATIO_NUMER, ASPECT_RATIO_DENOM
     );
 
     auto win = dynamic_cast<GLFWWindow*>(app->current());
@@ -218,32 +228,28 @@ int main() {
     auto gridMaterial_ptr = std::make_shared<Material>(shader_ptr, gridMaterialProps_shared);
 
     // pseudo gizmos
-    auto stickGizmoMaterialProps = MaterialProperties();
-    auto stickGizmoMaterialProps_shared = std::make_shared<MaterialProperties>(stickGizmoMaterialProps);
-    auto stickGizmoMaterial_ptr = std::make_shared<Material>(shader_ptr, stickGizmoMaterialProps_shared);
-
-    auto shipDirectionGizmoMaterialProps = stickGizmoMaterialProps.withBaseColor(vec4f(1.0f, 0.0f, 0.0f, 1.0f));
-    auto shipDirectionGizmoMaterialProps_shared = std::make_shared<MaterialProperties>(shipDirectionGizmoMaterialProps);
-    auto shipDirectionGizmoMaterial_ptr =
-            std::make_shared<Material>(shader_ptr, shipDirectionGizmoMaterialProps_shared);
-
+    auto leftStickGizmoMaterialProps = MaterialProperties();
+    auto leftStickGizmoMaterialProps_shared = std::make_shared<MaterialProperties>(leftStickGizmoMaterialProps);
+    auto leftStickGizmoMaterial_ptr = std::make_shared<Material>(shader_ptr, leftStickGizmoMaterialProps_shared);
 
     // ========================================
     // 4. Mesh (Geometry) Creation
     // ========================================
     auto spaceship = Triangle{};
-    auto stickGizmo = Line{};
-    auto shipDirectionGizmo = Line{};
+    auto leftStickGizmo = Line{};
+    auto bullet = Rectangle{};
     auto grid = Grid{29, 19};
 
     // Configure the mesh for the spaceship to render as a line loop (wireframe)
     auto meshConfig = std::make_shared<const MeshConfig>(PrimitiveType::LineLoop);
     auto mesh_ptr = std::make_shared<OpenGLMesh>(spaceship, meshConfig);
 
+    // configure the bullet
+    auto bulletMeshPtr = std::make_shared<OpenGLMesh>(bullet, meshConfig);
+
     // configure the gizmos for controller input, as well as the grid rendering
     auto meshLineConfig = std::make_shared<const MeshConfig>(PrimitiveType::Lines);
-    auto stickGizmoMesh = std::make_shared<OpenGLMesh>(stickGizmo, meshLineConfig);
-    auto shipDirectionGizmoMesh = std::make_shared<OpenGLMesh>(shipDirectionGizmo, meshLineConfig);
+    auto leftStickGizmoMesh = std::make_shared<OpenGLMesh>(leftStickGizmo, meshLineConfig);
     auto gridMesh_ptr = std::make_shared<OpenGLMesh>(grid, meshLineConfig);
 
     // ========================================
@@ -252,16 +258,22 @@ int main() {
     const auto renderPrototype = std::make_shared<RenderPrototype>(material_ptr, mesh_ptr);
     auto spaceshipRenderable = std::make_shared<Renderable>(renderPrototype);
 
-    const auto stickGizmoPrototype =
-            std::make_shared<RenderPrototype>(stickGizmoMaterial_ptr, stickGizmoMesh);
-    auto leftStickGizmoRenderable = std::make_shared<Renderable>(stickGizmoPrototype);
+    auto bulletPrototype = std::make_shared<helios::rendering::RenderPrototype>(material_ptr, bulletMeshPtr);
+    auto bulletRenderable = std::make_shared<helios::rendering::Renderable>(std::move(bulletPrototype));
+
+    const auto leftStickGizmoPrototype =
+            std::make_shared<RenderPrototype>(leftStickGizmoMaterial_ptr, leftStickGizmoMesh);
+    auto leftStickGizmoRenderable = std::make_shared<Renderable>(leftStickGizmoPrototype);
+
     auto rightStickGizmoRenderable = std::make_shared<Renderable>(
-        stickGizmoPrototype, stickGizmoMaterialProps.overrideBaseColor(helios::math::vec4f{1.0f, 0.0f, 1.0f, 1.0f})
+        leftStickGizmoPrototype,
+        leftStickGizmoMaterialProps.overrideBaseColor(helios::math::vec4f{0.0f, 1.0f, 1.0f, 1.0f})
     );
 
-    const auto shipDirectionGizmoPrototype =
-            std::make_shared<RenderPrototype>(shipDirectionGizmoMaterial_ptr, shipDirectionGizmoMesh);
-    auto shipDirectionGizmoRenderable = std::make_shared<Renderable>(shipDirectionGizmoPrototype);
+    auto shipDirectionGizmoRenderable = std::make_shared<Renderable>(
+        leftStickGizmoPrototype,
+        leftStickGizmoMaterialProps.overrideBaseColor(helios::math::vec4f{1.0f, 0.0f, 0.0f, 1.0f})
+    );
 
     const auto gridPrototype = std::make_shared<RenderPrototype>(gridMaterial_ptr, gridMesh_ptr);
     auto gridRenderable = std::make_shared<Renderable>(gridPrototype);
@@ -287,8 +299,8 @@ int main() {
             spaceshipSceneNode->addNode(std::make_unique<helios::scene::SceneNode>(std::move(rightStickGizmoRenderable)));
     auto* shipDirectionGizmoNode =
             spaceshipSceneNode->addNode(std::make_unique<helios::scene::SceneNode>(std::move(shipDirectionGizmoRenderable)));
-    leftStickGizmoNode->setInheritance(helios::math::TransformType::Translation);
     rightStickGizmoNode->setInheritance(helios::math::TransformType::Translation);
+    leftStickGizmoNode->setInheritance(helios::math::TransformType::Translation);
     shipDirectionGizmoNode->setInheritance(helios::math::TransformType::Translation);
 
 
@@ -321,27 +333,41 @@ int main() {
     // ========================================
     // 9. Game-related Input-handling, GameWorld and GameObjects
     // ========================================
-    auto spaceshipInputHandler = helios::examples::spaceshipShooting::InputHandler{};
-    auto gameWorld = helios::engine::game::GameWorld{};
+
+    auto gameWorld = helios::engine::game::GameWorld{scene.get()};
     auto commandBuffer = helios::engine::game::CommandBuffer{};
 
-    auto spaceship_uptr = std::make_unique<helios::examples::spaceshipShooting::Spaceship>(spaceshipSceneNode);
-    auto spaceship_wptr = spaceship_uptr.get();
-    auto* spaceshipPtr = dynamic_cast<helios::examples::spaceshipShooting::Spaceship*>(gameWorld.addGameObject(std::move(spaceship_uptr)));
+    auto shipGameObject = std::make_unique<helios::engine::game::GameObject>();
+    shipGameObject->add<helios::engine::game::components::scene::SceneNodeComponent>(spaceshipSceneNode);
+    shipGameObject->get<helios::engine::game::components::scene::SceneNodeComponent>()
+                      ->setSize(SPACESHIP_SIZE, SPACESHIP_SIZE, 0.0f, helios::core::units::Unit::Meter);
+    shipGameObject->add<helios::engine::game::components::input::TwinStickInputComponent>();
+    shipGameObject->add<helios::engine::game::components::physics::Move2DComponent>();
+    shipGameObject->add<helios::engine::game::components::gameplay::Aim2DComponent>();
+    shipGameObject->add<helios::engine::game::components::physics::ShootComponent>();
+    auto* theShipPtr = gameWorld.addGameObject(std::move(shipGameObject));
 
-    spaceshipWidget->addSpaceship("Player 1", spaceship_wptr);
+    // Register the spaceship with the tuning widget
+    spaceshipWidget->addGameObject("Player 1", theShipPtr);
 
-    auto* theGridPtr = gameWorld.addGameObject(
-        std::make_unique<helios::examples::spaceshipShooting::TheGrid>(gridSceneNode));
+    auto gridGameObject = std::make_unique<helios::engine::game::GameObject>();
+    auto* gridGameObjectPtr = gridGameObject.get();
+    gridGameObject->add<helios::engine::game::components::scene::SceneNodeComponent>(gridSceneNode);
+    gridGameObjectPtr->get<helios::engine::game::components::scene::SceneNodeComponent>()
+                      ->setSize(GRID_X * CELL_SIZE, GRID_Y * CELL_SIZE, 0.0f, helios::core::units::Unit::Meter);
 
-    spaceshipPtr->setSize(SPACESHIP_SIZE, SPACESHIP_SIZE, 0.0f, helios::core::units::Unit::Meter);
-    theGridPtr->setSize(GRID_X * CELL_SIZE, GRID_Y * CELL_SIZE, 0.0f, helios::core::units::Unit::Meter);
+    std::ignore = gameWorld.addGameObject(std::move(gridGameObject));
+
+    gameWorld.add<helios::engine::game::systems::BulletPool>(std::move(bulletRenderable), 10);
+
 
     float DELTA_TIME = 0.0f;
+    auto updateContext = helios::engine::game::UpdateContext{&commandBuffer, &gameWorld};
 
     // ========================================
     // 10. Main Game Loop
     // ========================================
+
     while (!win->shouldClose()) {
         framePacer.beginFrame();
 
@@ -362,18 +388,27 @@ int main() {
         // ----------------------------------------
         const GamepadState& gamepadState = inputManager.gamepadState(Gamepad::ONE);
         const auto inputSnapshot = helios::engine::game::InputSnapshot(gamepadState);
-        spaceshipInputHandler.handleInput(inputSnapshot, spaceshipPtr->guid(), commandBuffer);
 
+        updateContext.setDeltaTime(DELTA_TIME);
+        updateContext.setInputSnapshot(&inputSnapshot);
+
+        gameWorld.update(updateContext);
         commandBuffer.flush(gameWorld);
-        gameWorld.update(DELTA_TIME);
+
+
 
         // ----------------------------------------
         // 10.3 Gizmo / Debug Visualization Update
         // ----------------------------------------
-        leftStickGizmoNode->setScale((spaceshipPtr->steeringInput() * spaceshipPtr->throttle()  * 4.0f).toVec3());
-        rightStickGizmoNode->setScale((spaceshipPtr->cannonAlignment() * spaceshipPtr->shootingFrequency()  * 4.0f).toVec3());
-
-        shipDirectionGizmoNode->setScale(spaceshipPtr->velocity().normalize() * spaceshipPtr->speedRatio() * 4.0f);
+        const auto* mcLft = theShipPtr->get<helios::engine::game::components::physics::Move2DComponent>();
+        if (mcLft) {
+            leftStickGizmoNode->setScale((mcLft->steeringInput() * mcLft->throttle()  * 4.0f).toVec3());
+            shipDirectionGizmoNode->setScale(mcLft->velocity().normalize() * mcLft->speedRatio() * 4.0f);
+        }
+        const auto* mcRgt = theShipPtr->get<helios::engine::game::components::gameplay::Aim2DComponent>();
+        if (mcRgt) {
+            rightStickGizmoNode->setScale((mcRgt->direction() * mcRgt->frequency()  * 4.0f).toVec3());
+        }
 
         // ----------------------------------------
         // 10.4 Rendering

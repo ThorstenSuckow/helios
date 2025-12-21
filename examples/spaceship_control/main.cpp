@@ -321,7 +321,7 @@ int main() {
     // 9. Game-related Input-handling, GameWorld and GameObjects
     // ========================================
 
-    auto gameWorld = helios::engine::game::GameWorld{};
+    auto gameWorld = helios::engine::game::GameWorld{scene.get()};
     auto commandBuffer = helios::engine::game::CommandBuffer{};
 
     auto shipGameObject = std::make_unique<helios::engine::game::GameObject>();

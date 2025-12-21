@@ -11,12 +11,20 @@ import helios.util.Guid;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
 import helios.engine.game.UpdateContext;
+import helios.scene.Scene;
 
 namespace helios::engine::game {
+
+    const helios::scene::Scene* GameWorld::scene() const noexcept {
+        return scene_;
+    }
 
     void GameWorld::update(helios::engine::game::UpdateContext& updateContext) const noexcept {
         for (auto& [guid, gameObject] : gameObjects_) {
             gameObject->update(updateContext);
+        }
+        for (auto& system : systems_) {
+            system->update(updateContext);
         }
     }
 

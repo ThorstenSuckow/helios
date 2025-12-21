@@ -18,6 +18,10 @@ export import helios.engine.game.GameWorld;
 export import helios.engine.game.Command;
 export import helios.engine.game.CommandBuffer;
 
+// System base class
+export import helios.engine.game.System;
+
 // Aggregate sub-modules
 export import helios.engine.game.commands;
 export import helios.engine.game.components;
+export import helios.engine.game.systems;

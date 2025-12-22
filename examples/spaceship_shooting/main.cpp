@@ -39,7 +39,7 @@ import helios.rendering.model.config.MaterialProperties;
 import helios.rendering.model.config.PrimitiveType;
 
 import helios.rendering.asset.shape.basic.Triangle;
-import helios.rendering.asset.shape.basic.Rectangle;
+import helios.rendering.asset.shape.basic.Ellipse;
 import helios.rendering.asset.shape.basic.Line;
 import helios.rendering.asset.shape.basic.Grid;
 
@@ -237,7 +237,7 @@ int main() {
     // ========================================
     auto spaceship = Triangle{};
     auto leftStickGizmo = Line{};
-    auto bullet = Rectangle{};
+    auto bullet = Ellipse{1.0f, 0.4f, 8};
     auto grid = Grid{29, 19};
 
     // Configure the mesh for the spaceship to render as a line loop (wireframe)
@@ -290,7 +290,11 @@ int main() {
     // Add the spaceship as a scene node
     auto* spaceshipSceneNode =
             scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(spaceshipRenderable)));
-    spaceshipSceneNode->setTranslation(helios::math::vec3f{0.0f, 0.0f, 1.0f});
+    /**
+     * @todo we are using the aabb of the grid as the arenaBox for the bullet pool.
+     * The grid has its zindex at 0 (min/max), this should be improved later
+     */
+    spaceshipSceneNode->setTranslation(helios::math::vec3f{0.0f, 0.0f, 0.0f});
 
     // Add the gizmos
     auto* leftStickGizmoNode =
@@ -358,7 +362,9 @@ int main() {
 
     std::ignore = gameWorld.addGameObject(std::move(gridGameObject));
 
-    gameWorld.add<helios::engine::game::systems::BulletPool>(std::move(bulletRenderable), 10);
+    gameWorld.add<helios::engine::game::systems::BulletPool>(
+        std::move(bulletRenderable), 50, gridSceneNode->aabb()
+    );
 
 
     float DELTA_TIME = 0.0f;

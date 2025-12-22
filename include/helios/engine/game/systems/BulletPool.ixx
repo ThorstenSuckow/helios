@@ -203,8 +203,13 @@ export namespace helios::engine::game::systems {
          *
          * @param position World-space spawn position.
          * @param velocity Initial velocity vector for the bullet.
+         * @param aimDir The normalized aim direction vector.
          */
-        void spawn(helios::math::vec3f position, helios::math::vec3f velocity) noexcept {
+        void spawn(
+            helios::math::vec3f position,
+            helios::math::vec3f velocity,
+            helios::math::vec3f aimDir
+        ) noexcept {
 
             if (pool_.empty()) {
                 return;
@@ -212,7 +217,31 @@ export namespace helios::engine::game::systems {
 
             auto bullet = std::move(pool_.back());
             pool_.pop_back();
+
             bullet->velocity = velocity;
+
+            /**
+             * @todo the bulletpool assumes to shoot in 2d, projected on the
+             * xy plane. This has to be configured later on.
+             */
+            /**
+             * we simply create a rotation matrix that rotates about the
+             * z-axis:
+             * cos A -sin A 0 0
+             * sin A  cos A 0 0
+             *     0      0 1 0
+             *     0      0 0 1
+             *
+             * Since aimDir is normalized, we benefit from cos A = aimDir[0],
+             * sin A = aimDir[1].
+             */
+            bullet->bulletNodePtr->setRotation(helios::math::mat4f{
+                aimDir[0], aimDir[1], 0.0f, 0.0f,
+                -aimDir[1], aimDir[0], 0.0f, 0.0f,
+                0.0f, 0.0f, 1.0f, 0.0f,
+                0.0f, 0.0f, 1.0f, 1.0f
+            });
+
             bullet->bulletNodePtr->setTranslation(position);
             bullet->bulletNodePtr->setActive(true);
 

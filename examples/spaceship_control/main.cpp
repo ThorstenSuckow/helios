@@ -80,17 +80,22 @@ import helios.ext.imgui.widgets.GamepadWidget;
 import helios.ext.imgui.widgets.LogWidget;
 import helios.ext.imgui.widgets.CameraWidget;
 import helios.ext.imgui.ImGuiLogSink;
+
+// Spaceship Widget
 import helios.examples.spaceshipControl.SpaceshipWidget;
 
 // game input handling, game objects
 import helios.core.units;
 import helios.engine.game.GameWorld;
 import helios.engine.game.CommandBuffer;
+import helios.engine.game.GameObject;
 import helios.engine.game.InputSnapshot;
-import helios.examples.spaceshipControl.Spaceship;
-import helios.examples.spaceshipControl.TheGrid;
-import helios.examples.spaceshipControl.InputHandler;
+import helios.engine.game.UpdateContext;
 
+// components, commands
+import helios.engine.game.components.scene.SceneNodeComponent;
+import helios.engine.game.components.input.TwinStickInputComponent;
+import helios.engine.game.components.physics.Move2DComponent;
 
 // ============================================================================
 // Using Declarations
@@ -315,27 +320,38 @@ int main() {
     // ========================================
     // 9. Game-related Input-handling, GameWorld and GameObjects
     // ========================================
-    auto spaceshipInputHandler = helios::examples::spaceshipControl::InputHandler{};
-    auto gameWorld = helios::engine::game::GameWorld{};
+
+    auto gameWorld = helios::engine::game::GameWorld{scene.get()};
     auto commandBuffer = helios::engine::game::CommandBuffer{};
 
-    auto spaceship_uptr = std::make_unique<helios::examples::spaceshipControl::Spaceship>(spaceshipSceneNode);
-    auto spaceship_wptr = spaceship_uptr.get();
-    auto* spaceshipPtr = gameWorld.addGameObject(std::move(spaceship_uptr));
+    auto shipGameObject = std::make_unique<helios::engine::game::GameObject>();
+    shipGameObject->add<helios::engine::game::components::scene::SceneNodeComponent>(spaceshipSceneNode);
+    shipGameObject->get<helios::engine::game::components::scene::SceneNodeComponent>()
+                      ->setSize(SPACESHIP_SIZE, SPACESHIP_SIZE, 0.0f, helios::core::units::Unit::Meter);
+    shipGameObject->add<helios::engine::game::components::input::TwinStickInputComponent>();
+    shipGameObject->add<helios::engine::game::components::physics::Move2DComponent>();
+    auto* theShipPtr = gameWorld.addGameObject(std::move(shipGameObject));
 
-    spaceshipWidget->addSpaceship("Player 1", spaceship_wptr);
+    // Register the spaceship with the tuning widget
+    spaceshipWidget->addGameObject("Player 1", theShipPtr);
 
-    auto* theGridPtr = gameWorld.addGameObject(
-        std::make_unique<helios::examples::spaceshipControl::TheGrid>(gridSceneNode));
+    auto gridGameObject = std::make_unique<helios::engine::game::GameObject>();
+    auto* gridGameObjectPtr = gridGameObject.get();
+    gridGameObject->add<helios::engine::game::components::scene::SceneNodeComponent>(gridSceneNode);
+    gridGameObjectPtr->get<helios::engine::game::components::scene::SceneNodeComponent>()
+                      ->setSize(GRID_X * CELL_SIZE, GRID_Y * CELL_SIZE, 0.0f, helios::core::units::Unit::Meter);
 
-    spaceshipPtr->setSize(SPACESHIP_SIZE, SPACESHIP_SIZE, 0.0f, helios::core::units::Unit::Meter);
-    theGridPtr->setSize(GRID_X * CELL_SIZE, GRID_Y * CELL_SIZE, 0.0f, helios::core::units::Unit::Meter);
+    std::ignore = gameWorld.addGameObject(std::move(gridGameObject));
+
+
 
     float DELTA_TIME = 0.0f;
+    auto updateContext = helios::engine::game::UpdateContext{&commandBuffer, &gameWorld};
 
     // ========================================
     // 10. Main Game Loop
     // ========================================
+
     while (!win->shouldClose()) {
         framePacer.beginFrame();
 
@@ -356,16 +372,23 @@ int main() {
         // ----------------------------------------
         const GamepadState& gamepadState = inputManager.gamepadState(Gamepad::ONE);
         const auto inputSnapshot = helios::engine::game::InputSnapshot(gamepadState);
-        spaceshipInputHandler.handleInput(inputSnapshot, spaceshipPtr->guid(), commandBuffer);
 
+        updateContext.setDeltaTime(DELTA_TIME);
+        updateContext.setInputSnapshot(&inputSnapshot);
+
+        gameWorld.update(updateContext);
         commandBuffer.flush(gameWorld);
-        gameWorld.update(DELTA_TIME);
+
+
 
         // ----------------------------------------
         // 10.3 Gizmo / Debug Visualization Update
         // ----------------------------------------
-        leftStickGizmoNode->setScale((spaceshipPtr->steeringInput() * spaceshipPtr->throttle()  * 4.0f).toVec3());
-        shipDirectionGizmoNode->setScale(spaceshipPtr->velocity().normalize() * spaceshipPtr->speedRatio() * 4.0f);
+        const auto* mc = theShipPtr->get<helios::engine::game::components::physics::Move2DComponent>();
+        if (mc) {
+            leftStickGizmoNode->setScale((mc->steeringInput() * mc->throttle()  * 4.0f).toVec3());
+            shipDirectionGizmoNode->setScale(mc->velocity().normalize() * mc->speedRatio() * 4.0f);
+        }
 
         // ----------------------------------------
         // 10.4 Rendering

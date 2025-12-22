@@ -1,6 +1,6 @@
 /**
  * @file SpaceshipWidget.ixx
- * @brief ImGui widget for tuning spaceship physics parameters at runtime.
+ * @brief ImGui widget for tuning Move2DComponent physics parameters at runtime.
  */
 module;
 
@@ -11,65 +11,67 @@ module;
 export module helios.examples.spaceshipShooting.SpaceshipWidget;
 
 import helios.ext.imgui.ImGuiWidget;
-import helios.examples.spaceshipShooting.Spaceship;
+import helios.engine.game.GameObject;
+import helios.engine.game.components.physics.Move2DComponent;
 
 using namespace helios::ext::imgui;
 
 export namespace helios::examples::spaceshipShooting {
 
     /**
-     * @brief Debug widget for real-time spaceship physics parameter tuning.
+     * @brief Debug widget for real-time physics parameter tuning of Move2DComponent.
      *
      * @details This widget provides sliders and controls for adjusting all
-     * configurable physics parameters of a Spaceship entity, including
+     * configurable physics parameters of a GameObject's Move2DComponent, including
      * rotation speed, movement speed, acceleration and dampening factors.
      *
-     * Multiple spaceships can be registered and selected via a dropdown.
+     * Multiple GameObjects can be registered and selected via a dropdown.
      */
     class SpaceshipWidget : public ImGuiWidget {
 
     private:
-        struct SpaceshipEntry {
+        struct GameObjectEntry {
             std::string name;
-            helios::examples::spaceshipShooting::Spaceship* spaceship = nullptr;
+            helios::engine::game::GameObject* gameObject = nullptr;
         };
 
-        std::vector<SpaceshipEntry> spaceships_;
+        std::vector<GameObjectEntry> gameObjects_;
         int selectedIndex_ = 0;
 
-        [[nodiscard]] helios::examples::spaceshipShooting::Spaceship* getSelectedSpaceship() noexcept {
-            if (spaceships_.empty()) {
+        [[nodiscard]] helios::engine::game::components::physics::Move2DComponent* getSelectedMove2D() noexcept {
+            if (gameObjects_.empty()) {
                 return nullptr;
             }
-            if (selectedIndex_ < 0 || selectedIndex_ >= static_cast<int>(spaceships_.size())) {
+            if (selectedIndex_ < 0 || selectedIndex_ >= static_cast<int>(gameObjects_.size())) {
                 selectedIndex_ = 0;
             }
-            return spaceships_[selectedIndex_].spaceship;
+            auto* go = gameObjects_[selectedIndex_].gameObject;
+            return go ? go->get<helios::engine::game::components::physics::Move2DComponent>() : nullptr;
         }
 
     public:
         SpaceshipWidget() = default;
 
         /**
-         * @brief Registers a spaceship for tuning in this widget.
+         * @brief Registers a GameObject for tuning in this widget.
          *
-         * @param name Display name for the spaceship in the dropdown.
-         * @param spaceship Pointer to the Spaceship instance to control.
+         * @param name Display name for the object in the dropdown.
+         * @param gameObject Pointer to the GameObject instance (must have Move2DComponent).
          */
-        void addSpaceship(const std::string& name, helios::examples::spaceshipShooting::Spaceship* spaceship) {
-            spaceships_.push_back({name, spaceship});
+        void addGameObject(const std::string& name, helios::engine::game::GameObject* gameObject) {
+            gameObjects_.push_back({name, gameObject});
         }
 
         /**
-         * @brief Removes all registered spaceships.
+         * @brief Removes all registered GameObjects.
          */
-        void clearSpaceships() noexcept {
-            spaceships_.clear();
+        void clearGameObjects() noexcept {
+            gameObjects_.clear();
             selectedIndex_ = 0;
         }
 
         /**
-         * @brief Renders the spaceship physics tuning interface.
+         * @brief Renders the physics tuning interface.
          */
         void draw() override {
             ImGui::SetNextWindowSize(ImVec2(350, 480), ImGuiCond_FirstUseEver);
@@ -79,17 +81,17 @@ export namespace helios::examples::spaceshipShooting {
                 return;
             }
 
-            if (spaceships_.empty()) {
-                ImGui::TextDisabled("No spaceships registered.");
+            if (gameObjects_.empty()) {
+                ImGui::TextDisabled("No GameObjects registered.");
                 ImGui::End();
                 return;
             }
 
-            // Spaceship selection
-            if (ImGui::BeginCombo("##Spaceship", spaceships_[selectedIndex_].name.c_str())) {
-                for (int i = 0; i < static_cast<int>(spaceships_.size()); ++i) {
+            // GameObject selection
+            if (ImGui::BeginCombo("##GameObject", gameObjects_[selectedIndex_].name.c_str())) {
+                for (int i = 0; i < static_cast<int>(gameObjects_.size()); ++i) {
                     const bool isSelected = (selectedIndex_ == i);
-                    if (ImGui::Selectable(spaceships_[i].name.c_str(), isSelected)) {
+                    if (ImGui::Selectable(gameObjects_[i].name.c_str(), isSelected)) {
                         selectedIndex_ = i;
                     }
                     if (isSelected) {
@@ -99,13 +101,15 @@ export namespace helios::examples::spaceshipShooting {
                 ImGui::EndCombo();
             }
 
+            auto* move2D = getSelectedMove2D();
+
             ImGui::SameLine();
-            auto* ship = getSelectedSpaceship();
-            if (ImGui::Button("Reset") && ship) {
-                ship->resetPhysicsToDefaults();
+            if (ImGui::Button("Reset") && move2D) {
+                move2D->resetToDefaults();
             }
 
-            if (!ship) {
+            if (!move2D) {
+                ImGui::TextDisabled("Selected object has no Move2DComponent.");
                 ImGui::End();
                 return;
             }
@@ -118,27 +122,27 @@ export namespace helios::examples::spaceshipShooting {
             // ========================================
             ImGui::Text("Movement");
 
-            float movementSpeed = ship->movementSpeed();
+            float movementSpeed = move2D->movementSpeed();
             if (ImGui::SliderFloat("Max Speed", &movementSpeed, 1.0f, 100.0f, "%.1f m/s")) {
-                ship->setMovementSpeed(movementSpeed);
+                move2D->setMovementSpeed(movementSpeed);
             }
 
-            float acceleration = ship->movementAcceleration();
-            if (ImGui::SliderFloat("Acceleration", &acceleration, 1.0f, 100.0f, "%.1f m/s²")) {
-                ship->setMovementAcceleration(acceleration);
+            float acceleration = move2D->movementAcceleration();
+            if (ImGui::SliderFloat("Acceleration", &acceleration, 1.0f, 100.0f, "%.1f m/s^2")) {
+                move2D->setMovementAcceleration(acceleration);
             }
 
-            float movementDampening = ship->movementDampening();
+            float movementDampening = move2D->movementDampening();
             if (ImGui::SliderFloat("Dampening##Mov", &movementDampening, 0.001f, 1.0f, "%.4f")) {
-                ship->setMovementDampening(movementDampening);
+                move2D->setMovementDampening(movementDampening);
             }
             if (ImGui::IsItemHovered()) {
                 ImGui::SetTooltip("Exponential decay when input stops.\nLower = faster stop.");
             }
 
-            float movementThreshold = ship->movementSpeedThreshold();
+            float movementThreshold = move2D->movementSpeedThreshold();
             if (ImGui::SliderFloat("Stop Threshold##Mov", &movementThreshold, 0.01f, 1.0f, "%.3f")) {
-                ship->setMovementSpeedThreshold(movementThreshold);
+                move2D->setMovementSpeedThreshold(movementThreshold);
             }
 
             ImGui::Separator();
@@ -149,41 +153,40 @@ export namespace helios::examples::spaceshipShooting {
             // ========================================
             ImGui::Text("Rotation");
 
-            float rotationSpeed = ship->rotationSpeed();
-            if (ImGui::SliderFloat("Max Speed##Rot", &rotationSpeed, 60.0f, 1000.0f, "%.0f °/s")) {
-                ship->setRotationSpeed(rotationSpeed);
+            float rotationSpeed = move2D->rotationSpeed();
+            if (ImGui::SliderFloat("Max Speed##Rot", &rotationSpeed, 60.0f, 1000.0f, "%.0f deg/s")) {
+                move2D->setRotationSpeed(rotationSpeed);
             }
 
-            float rotationDampening = ship->rotationDampening();
+            float rotationDampening = move2D->rotationDampening();
             if (ImGui::SliderFloat("Dampening##Rot", &rotationDampening, 0.00001f, 0.01f, "%.5f")) {
-                ship->setRotationDampening(rotationDampening);
+                move2D->setRotationDampening(rotationDampening);
             }
             if (ImGui::IsItemHovered()) {
                 ImGui::SetTooltip("Exponential decay when input stops.\nLower = faster stop.");
             }
 
-            float rotationThreshold = ship->rotationSpeedThreshold();
+            float rotationThreshold = move2D->rotationSpeedThreshold();
             if (ImGui::SliderFloat("Stop Threshold##Rot", &rotationThreshold, 0.01f, 1.0f, "%.3f")) {
-                ship->setRotationSpeedThreshold(rotationThreshold);
+                move2D->setRotationSpeedThreshold(rotationThreshold);
             }
 
             ImGui::Separator();
             ImGui::Spacing();
-
 
             // ========================================
             // Status Display
             // ========================================
             ImGui::Text("Status");
 
-            const auto& pos = ship->position();
-            const auto& vel = ship->velocity();
-            float speedRatio = ship->speedRatio();
-            float angle = ship->rotationAngle();
+            const auto& pos = move2D->position();
+            const auto& vel = move2D->velocity();
+            float speedRatio = move2D->speedRatio();
+            float angle = move2D->rotationAngle();
 
             ImGui::TextDisabled("Position: (%.1f, %.1f, %.1f)", pos[0], pos[1], pos[2]);
             ImGui::TextDisabled("Velocity: (%.2f, %.2f, %.2f)", vel[0], vel[1], vel[2]);
-            ImGui::TextDisabled("Speed: %.1f%% | Angle: %.1f°", speedRatio * 100.0f, angle);
+            ImGui::TextDisabled("Speed: %.1f%% | Angle: %.1f deg", speedRatio * 100.0f, angle);
 
             // Speed bar
             ImGui::ProgressBar(speedRatio, ImVec2(-1, 0), "");
@@ -192,5 +195,4 @@ export namespace helios::examples::spaceshipShooting {
         }
     };
 
-} // namespace helios::ext::imgui::widgets
-
+} // namespace helios::examples::spaceshipShooting

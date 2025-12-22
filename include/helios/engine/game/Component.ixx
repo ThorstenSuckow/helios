@@ -1,0 +1,76 @@
+/**
+ * @file Component.ixx
+ * @brief Base class for components attached to GameObjects.
+ */
+module;
+
+
+export module helios.engine.game.Component;
+
+export namespace helios::engine::game {
+
+    class GameObject;
+
+    /**
+     * @brief Abstract base class for components attached to GameObjects.
+     *
+     * @details Components encapsulate specific behaviors or data that can be attached
+     * to a GameObject. Each component maintains a back-reference to its owning
+     * GameObject, established via onAttach().
+     *
+     * Derived classes implement specific functionality such as physics, rendering,
+     * or input handling. Components can optionally implement the Updatable interface
+     * if they require per-frame updates.
+     *
+     * Example usage:
+     * ```cpp
+     * class HealthComponent : public helios::engine::game::Component {
+     *     int health_ = 100;
+     * public:
+     *     void takeDamage(int amount) { health_ -= amount; }
+     *     int health() const { return health_; }
+     * };
+     *
+     * // Attach to a GameObject
+     * auto& health = gameObject.add<HealthComponent>();
+     * ```
+     */
+    class Component {
+
+    protected:
+        /**
+         * @brief Non-owning pointer to the owning GameObject.
+         *
+         * @details Set by onAttach() when the component is added to a GameObject.
+         * nullptr until attached.
+         */
+        GameObject* gameObject_ = nullptr;
+
+
+    public:
+        virtual ~Component() = default;
+        Component() = default;
+
+        /**
+         * @brief Called when the component is attached to a GameObject.
+         *
+         * @param gameObject Pointer to the owning GameObject.
+         *
+         * @note Derived classes that override this method should call the base
+         *       implementation to ensure gameObject_ is set correctly.
+         */
+        virtual void onAttach(GameObject* gameObject) noexcept {
+            gameObject_ = gameObject;
+        };
+
+        /**
+         * @brief Returns the owning GameObject.
+         *
+         * @return Non-owning pointer to the GameObject, or nullptr if not attached.
+         */
+        [[nodiscard]] GameObject* gameObject() const noexcept {
+            return gameObject_;
+        }
+    };
+
+}

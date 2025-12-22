@@ -112,10 +112,26 @@ export namespace helios::scene {
         Transform localTransform_;
 
         /**
+         * @brief Boolean flag indicating whether this SceneNode should be considered for
+         * rendering.
+         */
+        bool isActive_ = true;
+
+        /**
          * @brief The axis-aligned-bounding-box for this SceneNode in world-coordinates.
          */
         helios::math::aabbf aabb_{};
 
+        /**
+         * @brief Flags controlling which transform components are inherited from the parent node.
+         *
+         * @details By default set to `TransformType::All`, meaning translation, rotation,
+         * and scale are all inherited from the parent's world transform. Use `setInheritance()`
+         * to selectively disable inheritance of specific components.
+         *
+         * @see setInheritance()
+         * @see inheritWorldTransform()
+         */
         helios::math::TransformType inheritance_ = helios::math::TransformType::All;
 
         /**
@@ -218,6 +234,13 @@ export namespace helios::scene {
              * @return A shared_ptr to the Renderable, may be nullptr if none is set.
              */
             [[nodiscard]] std::shared_ptr<const helios::rendering::Renderable> renderable() const noexcept;
+
+            /**
+             * @brief Returns true if this SceneNode was configured with a Renderable.
+             *
+             * @return true if the SceneNode was configured with a Renderable, otherwise false.
+             */
+            [[nodiscard]] bool hasRenderable() const noexcept;
 
             /**
              * @brief Returns a shared pointer to the non-const Renderable of this SceneNode.
@@ -394,7 +417,23 @@ export namespace helios::scene {
              * @see setInheritance()
              */
             [[nodiscard]] helios::math::TransformType inheritance() const noexcept;
-    };
+
+            /**
+             * @brief Returns whether this SceneNode and its child nodes should be considered for rendering.
+             *
+             * @return true if the SceneNode should be considered for rendering, otherwise false.
+             */
+            [[nodiscard]] bool isActive() const noexcept;
+
+            /**
+             * @brief Sets the active state of this SceneNode.
+             *
+             * The active state determines whether the SceneNode should be considered for rendering.
+             *
+             * @param active true to consider this SceneNodefor rendering, otherwise false.
+             */
+            void setActive(bool active) noexcept;
+     };
 
 } // namespace helios::scene
 

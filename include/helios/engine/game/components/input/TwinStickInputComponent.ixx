@@ -43,7 +43,7 @@ export namespace helios::engine::game::components::input {
          *
          * If true, ShootCommands will be created from dedicated input.
          */
-        bool useDedicatedShootInput_ = true;
+        bool useDedicatedShootInput_ = false;
 
     public:
 
@@ -106,8 +106,26 @@ export namespace helios::engine::game::components::input {
 
 
 
-        };
+        }
 
+        /**
+         * @brief Enables or disables dedicated shoot input mode.
+         *
+         * @param useDedicatedInput If true, ShootCommands use the right trigger.
+         *                          If false, the aim stick magnitude is used.
+         */
+        void setUseDedicatedShootInput(bool useDedicatedInput) noexcept {
+            useDedicatedShootInput_ = useDedicatedInput;
+        }
+
+        /**
+         * @brief Returns whether dedicated shoot input mode is enabled.
+         *
+         * @return True if ShootCommands use the right trigger, false if aim magnitude is used.
+         */
+        [[nodiscard]] bool useDedicatedShootInput() const noexcept {
+            return useDedicatedShootInput_;
+        }
 
     };
 

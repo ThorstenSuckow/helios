@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8game_8Component" kind="module">
+    <compoundname>helios.engine.game.Component</compoundname>
+    <innerfile refid="Component_8ixx">Component.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1game_1_1Component" prot="public">helios::engine::game::Component</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1Component_1a70665759561369340448e6015f0a2552" prot="protected" static="no" mutable="no">
+        <type>GameObject *</type>
+        <definition>GameObject* helios::engine::game::Component::gameObject_</definition>
+        <argsstring></argsstring>
+        <name>gameObject_</name>
+        <qualifiedname>helios::engine::game::Component::gameObject_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Non-owning pointer to the owning <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Set by <ref refid="classhelios_1_1engine_1_1game_1_1Component_1a3a4f0b840b179c07299fc291a57fb51f" kindref="member">onAttach()</ref> when the component is added to a <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>. nullptr until attached. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/Component.ixx" line="47" column="20" bodyfile="include/helios/engine/game/Component.ixx" bodystart="47" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1Component_1a0894e93b95d6d0b71602b8803d2cc213" compoundref="Component_8ixx" startline="71" endline="73">helios::engine::game::Component::gameObject</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1Component_1a3a4f0b840b179c07299fc291a57fb51f" compoundref="Component_8ixx" startline="62" endline="64">helios::engine::game::Component::onAttach</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a6a7e692984f295ef03e78b6852089dbe" compoundref="Move2DComponent_8ixx" startline="200" endline="204">helios::engine::game::components::physics::Move2DComponent::onAttach</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1Component_1abeb3af407878cf9f2d1019fdc9e2712a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::engine::game::Component::~Component</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Component</name>
+        <qualifiedname>helios::engine::game::Component::~Component</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/Component.ixx" line="51" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1Component_1a4a167553b4aed32f0ad96e8836a01b88" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::game::Component::Component</definition>
+        <argsstring>()=default</argsstring>
+        <name>Component</name>
+        <qualifiedname>helios::engine::game::Component::Component</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/Component.ixx" line="52" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1Component_1a3a4f0b840b179c07299fc291a57fb51f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void helios::engine::game::Component::onAttach</definition>
+        <argsstring>(GameObject *gameObject) noexcept</argsstring>
+        <name>onAttach</name>
+        <qualifiedname>helios::engine::game::Component::onAttach</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a6a7e692984f295ef03e78b6852089dbe">onAttach</reimplementedby>
+        <param>
+          <type>GameObject *</type>
+          <declname>gameObject</declname>
+        </param>
+        <briefdescription>
+<para>Called when the component is attached to a <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameObject</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the owning <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>Derived classes that override this method should call the base implementation to ensure gameObject_ is set correctly. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/Component.ixx" line="62" column="22" bodyfile="include/helios/engine/game/Component.ixx" bodystart="62" bodyend="64"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1Component_1a0894e93b95d6d0b71602b8803d2cc213" compoundref="Component_8ixx" startline="71" endline="73">helios::engine::game::Component::gameObject</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1Component_1a70665759561369340448e6015f0a2552" compoundref="Component_8ixx" startline="47">helios::engine::game::Component::gameObject_</references>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a982f9dee44c71d5b368daeeece71e2af" compoundref="ShootComponent_8ixx" startline="113" endline="120">helios::engine::game::components::gameplay::ShootComponent::onAttach</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1Component_1a0894e93b95d6d0b71602b8803d2cc213" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>GameObject *</type>
+        <definition>GameObject * helios::engine::game::Component::gameObject</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>gameObject</name>
+        <qualifiedname>helios::engine::game::Component::gameObject</qualifiedname>
+        <briefdescription>
+<para>Returns the owning <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Non-owning pointer to the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>, or nullptr if not attached. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/Component.ixx" line="71" column="21" bodyfile="include/helios/engine/game/Component.ixx" bodystart="71" bodyend="73"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1Component_1a70665759561369340448e6015f0a2552" compoundref="Component_8ixx" startline="47">helios::engine::game::Component::gameObject_</references>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1Component_1a3a4f0b840b179c07299fc291a57fb51f" compoundref="Component_8ixx" startline="62" endline="64">helios::engine::game::Component::onAttach</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a982f9dee44c71d5b368daeeece71e2af" compoundref="ShootComponent_8ixx" startline="113" endline="120">helios::engine::game::components::gameplay::ShootComponent::onAttach</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a6a7e692984f295ef03e78b6852089dbe" compoundref="Move2DComponent_8ixx" startline="200" endline="204">helios::engine::game::components::physics::Move2DComponent::onAttach</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1input_1_1TwinStickInputComponent_1aaeab3d39edea2bbbb2da0cf521fd6059" compoundref="TwinStickInputComponent_8ixx" startline="55" endline="109">helios::engine::game::components::input::TwinStickInputComponent::update</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/engine/game/Component.ixx" line="8" column="15"/>
+  </compounddef>
+</doxygen>

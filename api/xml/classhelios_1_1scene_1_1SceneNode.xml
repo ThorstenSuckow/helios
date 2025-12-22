@@ -114,6 +114,22 @@
         </inbodydescription>
         <location file="include/helios/scene/SceneNode.ixx" line="112" column="19" bodyfile="include/helios/scene/SceneNode.ixx" bodystart="112" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1scene_1_1SceneNode_1a34d361ed73787a31ca60aac86bb7d9a2" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::scene::SceneNode::isActive_</definition>
+        <argsstring></argsstring>
+        <name>isActive_</name>
+        <qualifiedname>helios::scene::SceneNode::isActive_</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>Boolean flag indicating whether this <ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">SceneNode</ref> should be considered for rendering. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/SceneNode.ixx" line="118" column="14" bodyfile="include/helios/scene/SceneNode.ixx" bodystart="118" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="classhelios_1_1scene_1_1SceneNode_1a2b09e19ce61e810a5d21a77d196fbcf1" prot="protected" static="no" mutable="no">
         <type><ref refid="namespacehelios_1_1math_1a124c0492430aeecedc1c1a5ece4ba488" kindref="member">helios::math::aabbf</ref></type>
         <definition>helios::math::aabbf helios::scene::SceneNode::aabb_</definition>
@@ -128,7 +144,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="117" column="29" bodyfile="include/helios/scene/SceneNode.ixx" bodystart="117" bodyend="117"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="123" column="29" bodyfile="include/helios/scene/SceneNode.ixx" bodystart="123" bodyend="123"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1scene_1_1SceneNode_1ada344398e1a3784ef655bd88a5e352e9" prot="protected" static="no" mutable="no">
         <type><ref refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531d" kindref="member">helios::math::TransformType</ref></type>
@@ -138,12 +154,19 @@
         <qualifiedname>helios::scene::SceneNode::inheritance_</qualifiedname>
         <initializer>= <ref refid="namespacehelios_1_1math_1a27682cda52181a23edab8c0249fa531dab1c94ca2fbc3e78fc30069c8d0f01680" kindref="member">helios::math::TransformType::All</ref></initializer>
         <briefdescription>
+<para>Flags controlling which transform components are inherited from the parent node. </para>
         </briefdescription>
         <detaileddescription>
+<para>By default set to `TransformType::All`, meaning translation, rotation, and scale are all inherited from the parent&apos;s world transform. Use `setInheritance()` to selectively disable inheritance of specific components.</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1scene_1_1SceneNode_1a75103edee2bbacbebe2296dd88d1a1e9" kindref="member">setInheritance()</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1scene_1_1SceneNode_1a40a0bcf3df470258d5cc779beb884698" kindref="member">inheritWorldTransform()</ref> </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="119" column="37" bodyfile="include/helios/scene/SceneNode.ixx" bodystart="119" bodyend="-1"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="135" column="37" bodyfile="include/helios/scene/SceneNode.ixx" bodystart="135" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -176,7 +199,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="129" column="14"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="145" column="14"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab">SceneNode</references>
       </memberdef>
     </sectiondef>
@@ -193,7 +216,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="132" column="21"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="148" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -211,7 +234,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="138" column="13"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="154" column="13"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab">SceneNode</references>
         <referencedby refid="classhelios_1_1scene_1_1CameraSceneNode_1a58b5b9c583ddf40dcc81793c19fc0c79">helios::scene::CameraSceneNode::addNode</referencedby>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1a639af371377e5279a7e644da2af05e5a">addNode</referencedby>
@@ -244,7 +267,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="145" column="23"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="161" column="23"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab">SceneNode</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1SceneNode_1a316494fedf68d4ca53cd4453885e0b07" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
@@ -262,7 +285,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="157" column="13"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="173" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1SceneNode_1a1a7a726c994dd5b29a0719f45845ccb0" prot="public" static="no" const="no" explicit="yes" inline="no" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -291,7 +314,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="166" column="22"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="182" column="22"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab">SceneNode</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1SceneNode_1ac391d6973219428d9048caffe721cfb1" prot="public" static="no" const="no" explicit="yes" inline="no" noexcept="yes" virt="non-virtual">
@@ -333,7 +356,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="175" column="22"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="191" column="22"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a2f4bba61e70c28e98747ee84af651812">renderable</references>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab">SceneNode</references>
       </memberdef>
@@ -364,7 +387,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="186" column="22"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="202" column="22"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a2f4bba61e70c28e98747ee84af651812">renderable</references>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab">SceneNode</references>
       </memberdef>
@@ -384,7 +407,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="195" column="39"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="211" column="39"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a1488aa0cc05f989400589f36814afba1">guid</references>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1a1488aa0cc05f989400589f36814afba1">guid</referencedby>
       </memberdef>
@@ -418,7 +441,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="206" column="32"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="222" column="32"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a639af371377e5279a7e644da2af05e5a">addNode</references>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab">SceneNode</references>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1a639af371377e5279a7e644da2af05e5a">addNode</referencedby>
@@ -439,7 +462,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="213" column="32"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="229" column="32"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a345af64a75ad370d482051006658c81e">children</references>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab">SceneNode</references>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1a345af64a75ad370d482051006658c81e">children</referencedby>
@@ -460,12 +483,32 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="220" column="30"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="236" column="30"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a2f4bba61e70c28e98747ee84af651812">renderable</references>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1a2f4bba61e70c28e98747ee84af651812">renderable</referencedby>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1a01e293e31d8c30a3f9cbae3ad19ca6d8">renderable</referencedby>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1af2af3ad7c17ecf2a693724deed12ce02">SceneNode</referencedby>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1ac391d6973219428d9048caffe721cfb1">SceneNode</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1scene_1_1SceneNode_1a3a41a256979415a6678bb391660b0ced" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::scene::SceneNode::hasRenderable</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>hasRenderable</name>
+        <qualifiedname>helios::scene::SceneNode::hasRenderable</qualifiedname>
+        <briefdescription>
+<para>Returns true if this <ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">SceneNode</ref> was configured with a Renderable. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if the <ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">SceneNode</ref> was configured with a Renderable, otherwise false. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/SceneNode.ixx" line="243" column="19"/>
+        <references refid="classhelios_1_1scene_1_1SceneNode_1a3a41a256979415a6678bb391660b0ced">hasRenderable</references>
+        <referencedby refid="classhelios_1_1scene_1_1SceneNode_1a3a41a256979415a6678bb391660b0ced">hasRenderable</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1SceneNode_1a01e293e31d8c30a3f9cbae3ad19ca6d8" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>std::shared_ptr&lt; <ref refid="classhelios_1_1rendering_1_1Renderable" kindref="compound">helios::rendering::Renderable</ref> &gt;</type>
@@ -483,7 +526,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="227" column="30"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="250" column="30"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a2f4bba61e70c28e98747ee84af651812">renderable</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1SceneNode_1aa61104006dc48bc2a57dbe6fc6cbcb5b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
@@ -515,7 +558,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="238" column="23"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="261" column="23"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab">SceneNode</references>
         <references refid="classhelios_1_1scene_1_1SceneNode_1aa61104006dc48bc2a57dbe6fc6cbcb5b">setScale</references>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1aa61104006dc48bc2a57dbe6fc6cbcb5b">setScale</referencedby>
@@ -549,7 +592,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="249" column="23"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="272" column="23"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab">SceneNode</references>
         <references refid="classhelios_1_1scene_1_1SceneNode_1acac79a13bb5bb933c3f9c230a98d3daf">setRotation</references>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1acac79a13bb5bb933c3f9c230a98d3daf">setRotation</referencedby>
@@ -583,7 +626,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="261" column="23"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="284" column="23"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab">SceneNode</references>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a1f08f342381c9ad0f2d5d8b88c450229">setTranslation</references>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1a1f08f342381c9ad0f2d5d8b88c450229">setTranslation</referencedby>
@@ -604,7 +647,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="268" column="30"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="291" column="30"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a52ac30adf28408c010626d9236c78828">localTransform</references>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1a52ac30adf28408c010626d9236c78828">localTransform</referencedby>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1a3f28e5b3a6b7fe4c1af4e5770ad42227">localTransform</referencedby>
@@ -625,7 +668,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="275" column="24"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="298" column="24"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a52ac30adf28408c010626d9236c78828">localTransform</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1SceneNode_1a4e31b52717a76a9bae9a80a1db0b808b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
@@ -644,7 +687,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="283" column="24"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="306" column="24"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a4e31b52717a76a9bae9a80a1db0b808b">parent</references>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab">SceneNode</references>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1a4e31b52717a76a9bae9a80a1db0b808b">parent</referencedby>
@@ -691,7 +734,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="298" column="19"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="321" column="19"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1ae95fa852a86bcfbcc981dbb6d70113d8">applyWorldTransform</references>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1ae95fa852a86bcfbcc981dbb6d70113d8">applyWorldTransform</referencedby>
       </memberdef>
@@ -711,7 +754,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="311" column="39"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="334" column="39"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a2cd5ee14fdf4990952266c724c916551">worldTransform</references>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1a2cd5ee14fdf4990952266c724c916551">worldTransform</referencedby>
       </memberdef>
@@ -731,7 +774,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="321" column="40"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="344" column="40"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1ab908b6a16d34640eca0d92f2573e6cc3">cachedWorldTransform</references>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1ab908b6a16d34640eca0d92f2573e6cc3">cachedWorldTransform</referencedby>
       </memberdef>
@@ -752,7 +795,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="331" column="19"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="354" column="19"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a88551e7d166868342b87fd83e767442c">needsUpdate</references>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1a88551e7d166868342b87fd83e767442c">needsUpdate</referencedby>
       </memberdef>
@@ -772,9 +815,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="339" column="34"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="362" column="34"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a1020ca70c5268619a3bdfb3acb843e34">aabb</references>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1a1020ca70c5268619a3bdfb3acb843e34">aabb</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1BulletPool_1afedcf03d1c91774fde2dd9bf9ef8ff07" compoundref="BulletPool_8ixx" startline="180" endline="196">helios::engine::game::systems::BulletPool::onAdd</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1SceneNode_1aeb8fe0f5531a26fa2fc3a353572a1115" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -790,7 +834,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="348" column="18"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="371" column="18"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1aeb8fe0f5531a26fa2fc3a353572a1115">update</references>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1aeb8fe0f5531a26fa2fc3a353572a1115">update</referencedby>
       </memberdef>
@@ -809,7 +853,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="357" column="26"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="380" column="26"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a3ea0d74f134d284d702a06d456e633a0">onWorldTransformUpdate</references>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1a3ea0d74f134d284d702a06d456e633a0">onWorldTransformUpdate</referencedby>
       </memberdef>
@@ -847,7 +891,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="373" column="33"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="396" column="33"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a40a0bcf3df470258d5cc779beb884698">inheritWorldTransform</references>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1a40a0bcf3df470258d5cc779beb884698">inheritWorldTransform</referencedby>
       </memberdef>
@@ -881,7 +925,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="387" column="18"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="410" column="18"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a75103edee2bbacbebe2296dd88d1a1e9">setInheritance</references>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1a75103edee2bbacbebe2296dd88d1a1e9">setInheritance</referencedby>
       </memberdef>
@@ -903,9 +947,61 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/scene/SceneNode.ixx" line="396" column="42"/>
+        <location file="include/helios/scene/SceneNode.ixx" line="419" column="42"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1abfaab87eb2e94a094fda0d96ce28a373">inheritance</references>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1abfaab87eb2e94a094fda0d96ce28a373">inheritance</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1scene_1_1SceneNode_1af9530fc7b8962c228dd883bf0f509a4a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::scene::SceneNode::isActive</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isActive</name>
+        <qualifiedname>helios::scene::SceneNode::isActive</qualifiedname>
+        <briefdescription>
+<para>Returns whether this <ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">SceneNode</ref> and its child nodes should be considered for rendering. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if the <ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">SceneNode</ref> should be considered for rendering, otherwise false. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/SceneNode.ixx" line="426" column="19"/>
+        <references refid="classhelios_1_1scene_1_1SceneNode_1af9530fc7b8962c228dd883bf0f509a4a">isActive</references>
+        <referencedby refid="classhelios_1_1scene_1_1SceneNode_1af9530fc7b8962c228dd883bf0f509a4a">isActive</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1scene_1_1SceneNode_1a6fc8bb37765c30988515c45845208f4d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::scene::SceneNode::setActive</definition>
+        <argsstring>(bool active) noexcept</argsstring>
+        <name>setActive</name>
+        <qualifiedname>helios::scene::SceneNode::setActive</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>active</declname>
+        </param>
+        <briefdescription>
+<para>Sets the active state of this <ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">SceneNode</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The active state determines whether the <ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">SceneNode</ref> should be considered for rendering.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>active</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>true to consider this SceneNodefor rendering, otherwise false. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/scene/SceneNode.ixx" line="435" column="18"/>
+        <references refid="classhelios_1_1scene_1_1SceneNode_1a6fc8bb37765c30988515c45845208f4d">setActive</references>
+        <referencedby refid="classhelios_1_1scene_1_1SceneNode_1a6fc8bb37765c30988515c45845208f4d">setActive</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -944,7 +1040,7 @@
         <link refid="classhelios_1_1scene_1_1Transform"/>
       </node>
     </collaborationgraph>
-    <location file="include/helios/scene/SceneNode.ixx" line="60" column="5" bodyfile="include/helios/scene/SceneNode.ixx" bodystart="60" bodyend="397"/>
+    <location file="include/helios/scene/SceneNode.ixx" line="60" column="5" bodyfile="include/helios/scene/SceneNode.ixx" bodystart="60" bodyend="436"/>
     <listofallmembers>
       <member refid="classhelios_1_1scene_1_1SceneNode_1a1020ca70c5268619a3bdfb3acb843e34" prot="public" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>aabb</name></member>
       <member refid="classhelios_1_1scene_1_1SceneNode_1a2b09e19ce61e810a5d21a77d196fbcf1" prot="protected" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>aabb_</name></member>
@@ -955,9 +1051,12 @@
       <member refid="classhelios_1_1scene_1_1SceneNode_1aa362a46b4917ee9955a38d6422b72668" prot="protected" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>children_</name></member>
       <member refid="classhelios_1_1scene_1_1SceneNode_1a1488aa0cc05f989400589f36814afba1" prot="public" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>guid</name></member>
       <member refid="classhelios_1_1scene_1_1SceneNode_1ac5c15adde0a435bafd41eee7fb1bea7f" prot="private" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>guid_</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1a3a41a256979415a6678bb391660b0ced" prot="public" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>hasRenderable</name></member>
       <member refid="classhelios_1_1scene_1_1SceneNode_1abfaab87eb2e94a094fda0d96ce28a373" prot="public" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>inheritance</name></member>
       <member refid="classhelios_1_1scene_1_1SceneNode_1ada344398e1a3784ef655bd88a5e352e9" prot="protected" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>inheritance_</name></member>
       <member refid="classhelios_1_1scene_1_1SceneNode_1a40a0bcf3df470258d5cc779beb884698" prot="public" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>inheritWorldTransform</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1af9530fc7b8962c228dd883bf0f509a4a" prot="public" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>isActive</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1a34d361ed73787a31ca60aac86bb7d9a2" prot="protected" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>isActive_</name></member>
       <member refid="classhelios_1_1scene_1_1SceneNode_1a52ac30adf28408c010626d9236c78828" prot="public" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>localTransform</name></member>
       <member refid="classhelios_1_1scene_1_1SceneNode_1a3f28e5b3a6b7fe4c1af4e5770ad42227" prot="public" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>localTransform</name></member>
       <member refid="classhelios_1_1scene_1_1SceneNode_1acf949ca732802c66d4d0d3fee757e719" prot="protected" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>localTransform_</name></member>
@@ -975,6 +1074,7 @@
       <member refid="classhelios_1_1scene_1_1SceneNode_1a1a7a726c994dd5b29a0719f45845ccb0" prot="public" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>SceneNode</name></member>
       <member refid="classhelios_1_1scene_1_1SceneNode_1ac391d6973219428d9048caffe721cfb1" prot="public" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>SceneNode</name></member>
       <member refid="classhelios_1_1scene_1_1SceneNode_1af2af3ad7c17ecf2a693724deed12ce02" prot="public" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>SceneNode</name></member>
+      <member refid="classhelios_1_1scene_1_1SceneNode_1a6fc8bb37765c30988515c45845208f4d" prot="public" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>setActive</name></member>
       <member refid="classhelios_1_1scene_1_1SceneNode_1a75103edee2bbacbebe2296dd88d1a1e9" prot="public" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>setInheritance</name></member>
       <member refid="classhelios_1_1scene_1_1SceneNode_1a8e150f0c631aa964846dc20cd627b538" prot="protected" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>setParent</name></member>
       <member refid="classhelios_1_1scene_1_1SceneNode_1acac79a13bb5bb933c3f9c230a98d3daf" prot="public" virt="non-virtual"><scope>helios::scene::SceneNode</scope><name>setRotation</name></member>

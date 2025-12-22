@@ -4,9 +4,22 @@ var hierarchy =
     [ "helios::app::Application", "classhelios_1_1app_1_1Application.html", [
       [ "helios::ext::glfw::app::GLFWApplication", "classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWApplication.html", null ]
     ] ],
+    [ "helios::engine::game::systems::BulletPool::BulletObject", "structhelios_1_1engine_1_1game_1_1systems_1_1BulletPool_1_1BulletObject.html", null ],
     [ "helios::scene::Camera", "classhelios_1_1scene_1_1Camera.html", null ],
-    [ "helios::engine::game::Command", "classhelios_1_1engine_1_1game_1_1Command.html", null ],
+    [ "helios::util::Colors", "structhelios_1_1util_1_1Colors.html", null ],
+    [ "helios::engine::game::Command", "classhelios_1_1engine_1_1game_1_1Command.html", [
+      [ "helios::engine::game::commands::Aim2DCommand", "classhelios_1_1engine_1_1game_1_1commands_1_1Aim2DCommand.html", null ],
+      [ "helios::engine::game::commands::Move2DCommand", "classhelios_1_1engine_1_1game_1_1commands_1_1Move2DCommand.html", null ],
+      [ "helios::engine::game::commands::ShootCommand", "classhelios_1_1engine_1_1game_1_1commands_1_1ShootCommand.html", null ]
+    ] ],
     [ "helios::engine::game::CommandBuffer", "classhelios_1_1engine_1_1game_1_1CommandBuffer.html", null ],
+    [ "helios::engine::game::Component", "classhelios_1_1engine_1_1game_1_1Component.html", [
+      [ "helios::engine::game::components::gameplay::Aim2DComponent", "classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent.html", null ],
+      [ "helios::engine::game::components::gameplay::ShootComponent", "classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent.html", null ],
+      [ "helios::engine::game::components::input::TwinStickInputComponent", "classhelios_1_1engine_1_1game_1_1components_1_1input_1_1TwinStickInputComponent.html", null ],
+      [ "helios::engine::game::components::physics::Move2DComponent", "classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html", null ],
+      [ "helios::engine::game::components::scene::SceneNodeComponent", "classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent.html", null ]
+    ] ],
     [ "helios::app::controller::Controller", "classhelios_1_1app_1_1controller_1_1Controller.html", [
       [ "helios::app::controller::WindowRenderingController", "classhelios_1_1app_1_1controller_1_1WindowRenderingController.html", [
         [ "helios::app::controller::BasicWindowRenderingController", "classhelios_1_1app_1_1controller_1_1BasicWindowRenderingController.html", null ]
@@ -57,7 +70,6 @@ var hierarchy =
     [ "helios::input::InputAdapter", "classhelios_1_1input_1_1InputAdapter.html", [
       [ "helios::ext::glfw::input::GLFWInputAdapter", "classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter.html", null ]
     ] ],
-    [ "helios::engine::game::InputHandler", "classhelios_1_1engine_1_1game_1_1InputHandler.html", null ],
     [ "helios::input::InputManager", "classhelios_1_1input_1_1InputManager.html", null ],
     [ "helios::engine::game::InputSnapshot", "classhelios_1_1engine_1_1game_1_1InputSnapshot.html", null ],
     [ "helios::ext::imgui::widgets::LogEntry", "structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html", null ],
@@ -97,6 +109,7 @@ var hierarchy =
     [ "helios::rendering::asset::shape::Shape", "structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape.html", [
       [ "helios::rendering::asset::shape::basic::Circle", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Circle.html", null ],
       [ "helios::rendering::asset::shape::basic::Cube", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Cube.html", null ],
+      [ "helios::rendering::asset::shape::basic::Ellipse", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse.html", null ],
       [ "helios::rendering::asset::shape::basic::Grid", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Grid.html", null ],
       [ "helios::rendering::asset::shape::basic::Line", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Line.html", null ],
       [ "helios::rendering::asset::shape::basic::Rectangle", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Rectangle.html", null ],
@@ -108,9 +121,17 @@ var hierarchy =
     [ "helios::util::io::StringFileReader", "classhelios_1_1util_1_1io_1_1StringFileReader.html", [
       [ "helios::util::io::BasicStringFileReader", "classhelios_1_1util_1_1io_1_1BasicStringFileReader.html", null ]
     ] ],
-    [ "helios::engine::Tickable", "classhelios_1_1engine_1_1Tickable.html", null ],
     [ "helios::scene::Transform", "classhelios_1_1scene_1_1Transform.html", null ],
     [ "helios::rendering::shader::UniformValueMap", "classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html", null ],
+    [ "helios::engine::game::Updatable", "classhelios_1_1engine_1_1game_1_1Updatable.html", [
+      [ "helios::engine::game::System", "classhelios_1_1engine_1_1game_1_1System.html", [
+        [ "helios::engine::game::systems::BulletPool", "classhelios_1_1engine_1_1game_1_1systems_1_1BulletPool.html", null ]
+      ] ],
+      [ "helios::engine::game::components::gameplay::ShootComponent", "classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent.html", null ],
+      [ "helios::engine::game::components::input::TwinStickInputComponent", "classhelios_1_1engine_1_1game_1_1components_1_1input_1_1TwinStickInputComponent.html", null ],
+      [ "helios::engine::game::components::physics::Move2DComponent", "classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html", null ]
+    ] ],
+    [ "helios::engine::game::UpdateContext", "structhelios_1_1engine_1_1game_1_1UpdateContext.html", null ],
     [ "helios::math::vec2&lt; T &gt;", "structhelios_1_1math_1_1vec2.html", null ],
     [ "helios::math::vec3&lt; T &gt;", "structhelios_1_1math_1_1vec3.html", null ],
     [ "helios::math::vec4&lt; T &gt;", "structhelios_1_1math_1_1vec4.html", null ],

@@ -23,11 +23,16 @@ var searchData=
   ['rendertarget_20',['RenderTarget',['../classhelios_1_1rendering_1_1RenderTarget.html#af6d7b07eb919b51e7b56db8f89fadbbd',1,'helios::rendering::RenderTarget::RenderTarget()=default'],['../classhelios_1_1rendering_1_1RenderTarget.html#a33affb07801058a9950c0daba6e0aeaf',1,'helios::rendering::RenderTarget::RenderTarget(std::shared_ptr&lt; helios::rendering::Viewport &gt; viewport, unsigned int width=0, unsigned int height=0)']]],
   ['rendertarget_21',['renderTarget',['../classhelios_1_1rendering_1_1Viewport.html#afa67d77263ec5dd36db0591ffb9f889d',1,'helios::rendering::Viewport::renderTarget()'],['../classhelios_1_1window_1_1Window.html#a6bf6b252e26575dfced4453a3184994d',1,'helios::window::Window::renderTarget()']]],
   ['reset_22',['reset',['../classhelios_1_1tooling_1_1FpsMetrics.html#acf271b3c606df57550500cc9b7d0966f',1,'helios::tooling::FpsMetrics']]],
-  ['right_23',['right',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#aab66dc09e2d3d2f673b176028b409073',1,'helios::input::gamepad::GamepadState']]],
-  ['rightstickdeadzone_24',['rightStickDeadzone',['../classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#adf78328ccc756a4d8a514fdc6b7cf653',1,'helios::input::gamepad::GamepadSettings']]],
-  ['rightx_25',['rightX',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#adc8c001a3468e86ab3bdc11a2a1b18c4',1,'helios::input::gamepad::GamepadState']]],
-  ['righty_26',['rightY',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#a8c88c277946b970cddfe8d532e283522',1,'helios::input::gamepad::GamepadState']]],
-  ['root_27',['root',['../classhelios_1_1scene_1_1Scene.html#aff7c39985b9197a877dc4a698168e0c8',1,'helios::scene::Scene']]],
-  ['rotate_28',['rotate',['../namespacehelios_1_1math.html#a643691235959c2f53d144a4ee9a0e251',1,'helios::math']]],
-  ['rotation_29',['rotation',['../classhelios_1_1scene_1_1Transform.html#a18f1e87932c12354b1b15498b7cec16b',1,'helios::scene::Transform']]]
+  ['resettodefaults_23',['resetToDefaults',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#a9f9f7cd8cbdc2525e130b9ce7d6fb054',1,'helios::engine::game::components::physics::Move2DComponent']]],
+  ['right_24',['right',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#aab66dc09e2d3d2f673b176028b409073',1,'helios::input::gamepad::GamepadState']]],
+  ['rightstickdeadzone_25',['rightStickDeadzone',['../classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#adf78328ccc756a4d8a514fdc6b7cf653',1,'helios::input::gamepad::GamepadSettings']]],
+  ['rightx_26',['rightX',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#adc8c001a3468e86ab3bdc11a2a1b18c4',1,'helios::input::gamepad::GamepadState']]],
+  ['righty_27',['rightY',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#a8c88c277946b970cddfe8d532e283522',1,'helios::input::gamepad::GamepadState']]],
+  ['root_28',['root',['../classhelios_1_1scene_1_1Scene.html#aff7c39985b9197a877dc4a698168e0c8',1,'helios::scene::Scene']]],
+  ['rotate_29',['rotate',['../namespacehelios_1_1math.html#a643691235959c2f53d144a4ee9a0e251',1,'helios::math']]],
+  ['rotation_30',['rotation',['../classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent.html#a80c946428cb5c12725c99d86c456f2e4',1,'helios::engine::game::components::scene::SceneNodeComponent::rotation()'],['../classhelios_1_1scene_1_1Transform.html#a18f1e87932c12354b1b15498b7cec16b',1,'helios::scene::Transform::rotation()']]],
+  ['rotationangle_31',['rotationAngle',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#ac9a502c7fd7633c95454680b10afde5c',1,'helios::engine::game::components::physics::Move2DComponent']]],
+  ['rotationdampening_32',['rotationDampening',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#ab653fbe372142139b6a29131b536cdfa',1,'helios::engine::game::components::physics::Move2DComponent']]],
+  ['rotationspeed_33',['rotationSpeed',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#ae4a0d20de42b8fe03c72fb622f9ba97e',1,'helios::engine::game::components::physics::Move2DComponent']]],
+  ['rotationspeedthreshold_34',['rotationSpeedThreshold',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#a1d416ece697cd4664edc2aa86dd061ff',1,'helios::engine::game::components::physics::Move2DComponent']]]
 ];

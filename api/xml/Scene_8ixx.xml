@@ -657,20 +657,22 @@
 <codeline lineno="200"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="201"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Taking<sp/>a<sp/>snapshot<sp/>will<sp/>frustum<sp/>cull<sp/>the<sp/>SceneNodes<sp/>and<sp/>place<sp/>their<sp/>Renderables</highlight></codeline>
 <codeline lineno="202"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>along<sp/>with<sp/>the<sp/>current<sp/>matrices<sp/>of<sp/>this<sp/>scene<sp/>into<sp/>the<sp/>Snapshot<sp/>object.</highlight></codeline>
-<codeline lineno="203"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="204"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>viewport<sp/>The<sp/>viewport<sp/>for<sp/>which<sp/>the<sp/>Snapshot<sp/>is<sp/>created.</highlight></codeline>
+<codeline lineno="203"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Only<sp/>those<sp/>SceneNodes<sp/>are<sp/>considered<sp/>that<sp/>were<sp/>configured<sp/>with<sp/>a<sp/>Renderable<sp/>and</highlight></codeline>
+<codeline lineno="204"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>have<sp/>their<sp/>`isActive`-flag<sp/>set<sp/>to<sp/>true.</highlight></codeline>
 <codeline lineno="205"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="206"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>An<sp/>optional<sp/>Snapshot<sp/>created<sp/>for<sp/>this<sp/>Scene,<sp/>or<sp/>`std::nullopt`<sp/>if<sp/>creation<sp/>failed.</highlight></codeline>
+<codeline lineno="206"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>viewport<sp/>The<sp/>viewport<sp/>for<sp/>which<sp/>the<sp/>Snapshot<sp/>is<sp/>created.</highlight></codeline>
 <codeline lineno="207"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="208"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@todo<sp/>This<sp/>should<sp/>be<sp/>refactored<sp/>into<sp/>a<sp/>factory<sp/>to<sp/>prevent<sp/>domain<sp/>leakage<sp/>between<sp/>Scene<sp/>and<sp/>Rendering.</highlight></codeline>
-<codeline lineno="209"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>std::optional&lt;<ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">Snapshot</ref>&gt;</highlight></codeline>
-<codeline lineno="211" refid="classhelios_1_1scene_1_1Scene_1ab3ad742392c2a2b159cf8927ee6cf375" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1scene_1_1Scene_1ab3ad742392c2a2b159cf8927ee6cf375" kindref="member">createSnapshot</ref>(const<sp/>std::shared_ptr&lt;const<sp/><ref refid="namespacehelios_1_1rendering" kindref="compound">rendering</ref>::Viewport&gt;&amp;<sp/>viewport)<sp/>const;</highlight></codeline>
-<codeline lineno="212"><highlight class="normal"></highlight></codeline>
-<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="208"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>An<sp/>optional<sp/>Snapshot<sp/>created<sp/>for<sp/>this<sp/>Scene,<sp/>or<sp/>`std::nullopt`<sp/>if<sp/>creation<sp/>failed.</highlight></codeline>
+<codeline lineno="209"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="210"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@todo<sp/>This<sp/>should<sp/>be<sp/>refactored<sp/>into<sp/>a<sp/>factory<sp/>to<sp/>prevent<sp/>domain<sp/>leakage<sp/>between<sp/>Scene<sp/>and<sp/>Rendering.</highlight></codeline>
+<codeline lineno="211"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>std::optional&lt;<ref refid="classhelios_1_1scene_1_1Snapshot" kindref="compound">Snapshot</ref>&gt;</highlight></codeline>
+<codeline lineno="213" refid="classhelios_1_1scene_1_1Scene_1ab3ad742392c2a2b159cf8927ee6cf375" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1scene_1_1Scene_1ab3ad742392c2a2b159cf8927ee6cf375" kindref="member">createSnapshot</ref>(const<sp/>std::shared_ptr&lt;const<sp/><ref refid="namespacehelios_1_1rendering" kindref="compound">rendering</ref>::Viewport&gt;&amp;<sp/>viewport)<sp/>const;</highlight></codeline>
 <codeline lineno="214"><highlight class="normal"></highlight></codeline>
-<codeline lineno="215"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>helios::scene</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="216"><highlight class="normal"></highlight></codeline>
+<codeline lineno="217"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>helios::scene</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="218"><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="include/helios/scene/Scene.ixx"/>
   </compounddef>

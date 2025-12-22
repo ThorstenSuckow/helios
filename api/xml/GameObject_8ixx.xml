@@ -2,326 +2,140 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="GameObject_8ixx" kind="file" language="C++">
     <compoundname>GameObject.ixx</compoundname>
-    <includes refid="units_8ixx" local="no">helios.core.units</includes>
-    <includes refid="helios_2math_2types_2__module_8ixx" local="no">helios.math.types</includes>
-    <includes refid="Transform_8ixx" local="no">helios.scene.Transform</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">vector</includes>
+    <includes refid="Updatable_8ixx" local="no">helios.engine.game.Updatable</includes>
+    <includes refid="UpdateContext_8ixx" local="no">helios.engine.game.UpdateContext</includes>
+    <includes refid="Component_8ixx" local="no">helios.engine.game.Component</includes>
     <includes refid="Guid_8ixx" local="no">helios.util.Guid</includes>
-    <includes refid="SceneNode_8ixx" local="no">helios.scene.SceneNode</includes>
     <incdepgraph>
-      <node id="2">
-        <label>helios.core.units</label>
-        <link refid="units_8ixx"/>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
+      <node id="17">
+        <label>helios.engine.game.Component</label>
+        <link refid="Component_8ixx"/>
       </node>
       <node id="1">
         <label>include/helios/engine/game/GameObject.ixx</label>
         <link refid="GameObject_8ixx"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-      </node>
-      <node id="14">
-        <label>helios.math.transform</label>
-        <link refid="helios_2math_2transform_2__module_8ixx"/>
-        <childnode refid="14" relation="include">
-        </childnode>
-      </node>
-      <node id="12">
-        <label>helios.math.types</label>
-        <link refid="helios_2math_2types_2__module_8ixx"/>
-        <childnode refid="12" relation="include">
-        </childnode>
-      </node>
-      <node id="27">
-        <label>helios.rendering.RenderPrototype</label>
-        <link refid="RenderPrototype_8ixx"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="28" relation="include">
-        </childnode>
-        <childnode refid="33" relation="include">
-        </childnode>
-      </node>
-      <node id="19">
-        <label>helios.rendering.Renderable</label>
-        <link refid="Renderable_8ixx"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="26" relation="include">
-        </childnode>
-        <childnode refid="27" relation="include">
-        </childnode>
-      </node>
-      <node id="31">
-        <label>helios.rendering.Vertex</label>
-        <link refid="Vertex_8ixx"/>
-        <childnode refid="12" relation="include">
-        </childnode>
-      </node>
-      <node id="29">
-        <label>helios.rendering.asset.shape.Shape</label>
-        <link refid="Shape_8ixx"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="30" relation="include">
-        </childnode>
-        <childnode refid="31" relation="include">
-        </childnode>
-      </node>
-      <node id="33">
-        <label>helios.rendering.model.Material</label>
-        <link refid="Material_8ixx"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="34" relation="include">
-        </childnode>
-        <childnode refid="36" relation="include">
-        </childnode>
-        <childnode refid="37" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-      </node>
-      <node id="28">
-        <label>helios.rendering.model.Mesh</label>
-        <link refid="Mesh_8ixx"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="29" relation="include">
-        </childnode>
-        <childnode refid="32" relation="include">
-        </childnode>
-        <childnode refid="31" relation="include">
-        </childnode>
-      </node>
-      <node id="36">
-        <label>helios.rendering.model.config.MaterialProperties</label>
-        <link refid="MaterialProperties_8ixx"/>
-        <childnode refid="25" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="26" relation="include">
-        </childnode>
-      </node>
-      <node id="26">
-        <label>helios.rendering.model.config.MaterialPropertiesOverride</label>
-        <link refid="MaterialPropertiesOverride_8ixx"/>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="25" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-      </node>
-      <node id="32">
-        <label>helios.rendering.model.config.MeshConfig</label>
-        <link refid="MeshConfig_8ixx"/>
-        <childnode refid="30" relation="include">
-        </childnode>
-      </node>
-      <node id="30">
-        <label>helios.rendering.model.config.PrimitiveType</label>
-        <link refid="PrimitiveType_8ixx"/>
-      </node>
-      <node id="37">
-        <label>helios.rendering.shader.Shader</label>
-        <link refid="Shader_8ixx"/>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-      </node>
-      <node id="25">
-        <label>helios.rendering.shader.UniformSemantics</label>
-        <link refid="UniformSemantics_8ixx"/>
-      </node>
-      <node id="22">
-        <label>helios.rendering.shader.UniformValueMap</label>
-        <link refid="UniformValueMap_8ixx"/>
-        <childnode refid="23" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="24" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="25" relation="include">
-        </childnode>
-      </node>
-      <node id="18">
-        <label>helios.scene.SceneNode</label>
-        <link refid="SceneNode_8ixx"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-      </node>
-      <node id="13">
-        <label>helios.scene.Transform</label>
-        <link refid="Transform_8ixx"/>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-      </node>
-      <node id="15">
-        <label>helios.util.Guid</label>
-        <link refid="Guid_8ixx"/>
-        <childnode refid="16" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-      </node>
-      <node id="35">
-        <label>helios.util.log.ConsoleSink</label>
-        <link refid="ConsoleSink_8ixx"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-      </node>
-      <node id="4">
-        <label>helios.util.log.LogManager</label>
-        <link refid="LogManager_8ixx"/>
-        <childnode refid="3" relation="include">
+        <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>helios.engine.game.InputSnapshot</label>
+        <link refid="InputSnapshot_8ixx"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>helios.engine.game.Updatable</label>
+        <link refid="Updatable_8ixx"/>
+      </node>
+      <node id="5">
+        <label>helios.engine.game.UpdateContext</label>
+        <link refid="UpdateContext_8ixx"/>
         <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-      </node>
-      <node id="11">
-        <label>helios.util.log.LogSink</label>
-        <link refid="LogSink_8ixx"/>
-        <childnode refid="3" relation="include">
-        </childnode>
-      </node>
-      <node id="10">
-        <label>helios.util.log.Logger</label>
-        <link refid="Logger_8ixx"/>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-      </node>
-      <node id="34">
-        <label>helios.util.log</label>
-        <link refid="helios_2util_2log_2__module_8ixx"/>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="35" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-      </node>
-      <node id="23">
-        <label>array</label>
-      </node>
-      <node id="16">
-        <label>atomic</label>
-      </node>
-      <node id="17">
-        <label>cstdint</label>
-      </node>
-      <node id="7">
-        <label>memory</label>
       </node>
       <node id="8">
-        <label>mutex</label>
+        <label>helios.input.gamepad.GamepadState</label>
+        <link refid="GamepadState_8ixx"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
       </node>
-      <node id="20">
-        <label>optional</label>
+      <node id="16">
+        <label>helios.math.types</label>
+        <link refid="helios_2math_2types_2__module_8ixx"/>
+        <childnode refid="16" relation="include">
+        </childnode>
       </node>
-      <node id="21">
-        <label>stdexcept</label>
-      </node>
-      <node id="3">
-        <label>string</label>
-      </node>
-      <node id="5">
-        <label>unordered_map</label>
-      </node>
-      <node id="6">
-        <label>unordered_set</label>
-      </node>
-      <node id="24">
-        <label>variant</label>
+      <node id="18">
+        <label>helios.util.Guid</label>
+        <link refid="Guid_8ixx"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
       </node>
       <node id="9">
+        <label>helios.util.log.LogManager</label>
+        <link refid="LogManager_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>helios.util.log.LogSink</label>
+        <link refid="LogSink_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>helios.util.log.Logger</label>
+        <link refid="Logger_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>atomic</label>
+      </node>
+      <node id="20">
+        <label>cstdint</label>
+      </node>
+      <node id="2">
+        <label>memory</label>
+      </node>
+      <node id="13">
+        <label>mutex</label>
+      </node>
+      <node id="6">
+        <label>stdexcept</label>
+      </node>
+      <node id="10">
+        <label>string</label>
+      </node>
+      <node id="11">
+        <label>unordered_map</label>
+      </node>
+      <node id="12">
+        <label>unordered_set</label>
+      </node>
+      <node id="3">
         <label>vector</label>
       </node>
     </incdepgraph>
@@ -341,261 +155,151 @@
 <codeline lineno="4"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">module</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight></codeline>
-<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8game_8GameObject" kindref="compound">helios.engine.game.GameObject</ref>;</highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight></codeline>
-<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8scene_8SceneNode" kindref="compound">helios.scene.SceneNode</ref>;</highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8util_8Guid" kindref="compound">helios.util.Guid</ref>;</highlight></codeline>
-<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8scene_8Transform" kindref="compound">helios.scene.Transform</ref>;</highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8math_8types" kindref="compound">helios.math.types</ref>;</highlight></codeline>
-<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8units" kindref="compound">helios.core.units</ref>;</highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight></codeline>
-<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1game" kindref="compound">helios::engine::game</ref><sp/>{</highlight></codeline>
-<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Base<sp/>class<sp/>representing<sp/>an<sp/>interactive<sp/>game<sp/>entity<sp/>in<sp/>the<sp/>game<sp/>world.</highlight></codeline>
-<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>The<sp/>`GameObject`<sp/>provides<sp/>a<sp/>game-logic-level<sp/>abstraction<sp/>over<sp/>a<sp/>`SceneNode`.</highlight></codeline>
-<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>It<sp/>serves<sp/>as<sp/>the<sp/>primary<sp/>building<sp/>block<sp/>for<sp/>game-specific<sp/>entities<sp/>like<sp/>players<sp/>or<sp/>enemies,</highlight></codeline>
-<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>designed<sp/>to<sp/>be<sp/>subclassed<sp/>to<sp/>add<sp/>further<sp/>behavior.<sp/>Each<sp/>`GameObject`<sp/>has<sp/>a<sp/>unique</highlight></codeline>
-<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>`Guid`<sp/>for<sp/>easy<sp/>identification<sp/>and<sp/>provides<sp/>convenient<sp/>methods<sp/>for<sp/>manipulating<sp/>the</highlight></codeline>
-<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>transform<sp/>of<sp/>its<sp/>underlying<sp/>`SceneNode`.<sp/>It<sp/>also<sp/>acts<sp/>as<sp/>the<sp/>target<sp/>for<sp/>`Command`<sp/>execution.</highlight></codeline>
-<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Example<sp/>usage:</highlight></codeline>
-<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```cpp</highlight></codeline>
-<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>class<sp/>Player<sp/>:<sp/>public<sp/>helios::engine::game::GameObject<sp/>{</highlight></codeline>
-<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>public:</highlight></codeline>
-<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/>using<sp/>GameObject::GameObject;</highlight></codeline>
-<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/>void<sp/>jump()<sp/>{</highlight></codeline>
-<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>setTranslation({0.0f,<sp/>5.0f,<sp/>0.0f});</highlight></codeline>
-<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>};</highlight></codeline>
-<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>auto<sp/>sceneNode<sp/>=<sp/>std::make_shared&lt;helios::scene::SceneNode&gt;();</highlight></codeline>
-<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>auto<sp/>player<sp/>=<sp/>std::make_unique&lt;Player&gt;(sceneNode.get());</highlight></codeline>
-<codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>player-&gt;setTranslation({1.0f,<sp/>0.0f,<sp/>0.0f});</highlight></codeline>
-<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```</highlight></codeline>
-<codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@warning<sp/>The<sp/>GameObject<sp/>does<sp/>NOT<sp/>own<sp/>the<sp/>SceneNode.<sp/>The<sp/>caller<sp/>must<sp/>ensure<sp/>the<sp/>SceneNode</highlight></codeline>
-<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>outlives<sp/>the<sp/>GameObject.<sp/>If<sp/>the<sp/>SceneNode<sp/>is<sp/>destroyed<sp/>while<sp/>the<sp/>GameObject<sp/>is</highlight></codeline>
-<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>still<sp/>alive,<sp/>all<sp/>transform<sp/>operations<sp/>will<sp/>result<sp/>in<sp/>undefined<sp/>behavior.</highlight></codeline>
-<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@todo<sp/>Implement<sp/>observer<sp/>pattern<sp/>or<sp/>weak_ptr<sp/>to<sp/>detect<sp/>SceneNode<sp/>destruction<sp/>and</highlight></codeline>
-<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>invalidate<sp/>the<sp/>transform<sp/>pointer<sp/>to<sp/>prevent<sp/>dangling<sp/>pointer<sp/>issues.</highlight></codeline>
-<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="49" refid="classhelios_1_1engine_1_1game_1_1GameObject" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1ad2ffd483600955f8c93b905387d4e9dc" kindref="member">GameObject</ref><sp/>{</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"></highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Canonical<sp/>size<sp/>of<sp/>the<sp/>GameObject.</highlight></codeline>
-<codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="56"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Represents<sp/>the<sp/>default<sp/>or<sp/>intrinsic<sp/>size<sp/>of<sp/>the<sp/>GameObject</highlight></codeline>
-<codeline lineno="57"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>in<sp/>object<sp/>space.<sp/>This<sp/>value<sp/>is<sp/>used<sp/>as<sp/>a<sp/>reference<sp/>for<sp/>applying</highlight></codeline>
-<codeline lineno="58"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>a<sp/>scaling<sp/>factor<sp/>with<sp/>setSize(),<sp/>ensuring<sp/>the<sp/>method<sp/>operates<sp/>on</highlight></codeline>
-<codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>appropriate<sp/>values<sp/>as<sp/>the<sp/>GameObject<sp/>represents<sp/>its<sp/>size<sp/>in<sp/>model<sp/>space.</highlight></codeline>
-<codeline lineno="60"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="61" refid="classhelios_1_1engine_1_1game_1_1GameObject_1a0febb522d621d79ea03164f72bb1357a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref><sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a0febb522d621d79ea03164f72bb1357a" kindref="member">canonicalSize_</ref>{};</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="63"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="64"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Unique<sp/>identifier<sp/>for<sp/>this<sp/>GameObject.</highlight></codeline>
-<codeline lineno="65"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="66"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Generated<sp/>during<sp/>construction<sp/>and<sp/>remains<sp/>constant<sp/>for<sp/>the<sp/>lifetime</highlight></codeline>
-<codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>of<sp/>the<sp/>object.<sp/>Used<sp/>for<sp/>lookups<sp/>in<sp/>GameWorld<sp/>and<sp/>command<sp/>targeting.</highlight></codeline>
-<codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="69" refid="classhelios_1_1engine_1_1game_1_1GameObject_1a8ccca9fdee32b72202b6b1cca51288c3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref><sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a8ccca9fdee32b72202b6b1cca51288c3" kindref="member">guid_</ref>;</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Pointer<sp/>to<sp/>the<sp/>SceneNode&apos;s<sp/>transform<sp/>component.</highlight></codeline>
-<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>This<sp/>is<sp/>a<sp/>non-owning<sp/>pointer.<sp/>The<sp/>GameObject<sp/>does<sp/>not<sp/>manage<sp/>the<sp/>lifetime</highlight></codeline>
-<codeline lineno="75"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>of<sp/>the<sp/>SceneNode<sp/>or<sp/>its<sp/>Transform.<sp/>The<sp/>pointer<sp/>remains<sp/>valid<sp/>only<sp/>as<sp/>long<sp/>as<sp/>the</highlight></codeline>
-<codeline lineno="76"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>associated<sp/>SceneNode<sp/>exists.</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8game_8GameObject" kindref="compound">helios.engine.game.GameObject</ref>;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8util_8Guid" kindref="compound">helios.util.Guid</ref>;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8game_8Component" kindref="compound">helios.engine.game.Component</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8game_8UpdateContext" kindref="compound">helios.engine.game.UpdateContext</ref>;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8game_8Updatable" kindref="compound">helios.engine.game.Updatable</ref>;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1game" kindref="compound">helios::engine::game</ref><sp/>{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Base<sp/>class<sp/>for<sp/>interactive<sp/>game<sp/>entities<sp/>using<sp/>a<sp/>component-based<sp/>architecture.</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>A<sp/>GameObject<sp/>is<sp/>a<sp/>container<sp/>for<sp/>Component<sp/>instances<sp/>that<sp/>define<sp/>its<sp/>behavior.</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Each<sp/>GameObject<sp/>has<sp/>a<sp/>unique<sp/>Guid<sp/>for<sp/>identification<sp/>in<sp/>the<sp/>GameWorld<sp/>and<sp/>supports</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>per-frame<sp/>updates<sp/>for<sp/>components<sp/>implementing<sp/>the<sp/>Updatable<sp/>interface.</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>GameObjects<sp/>are<sp/>typically<sp/>owned<sp/>by<sp/>a<sp/>GameWorld<sp/>and<sp/>should<sp/>be<sp/>created<sp/>using</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>std::make_unique<sp/>before<sp/>being<sp/>added<sp/>to<sp/>the<sp/>world.</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Example<sp/>usage:</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```cpp</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>auto<sp/>entity<sp/>=<sp/>std::make_unique&lt;helios::engine::game::GameObject&gt;();</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>entity-&gt;add&lt;SceneNodeComponent&gt;(sceneNode);</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>entity-&gt;add&lt;Move2DComponent&gt;();</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>auto*<sp/>ptr<sp/>=<sp/>world.addGameObject(std::move(entity));</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39" refid="classhelios_1_1engine_1_1game_1_1GameObject" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a56372781ae87e48521a7678634a43578" kindref="member">GameObject</ref><sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Unique<sp/>identifier<sp/>for<sp/>this<sp/>GameObject.</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Generated<sp/>during<sp/>construction<sp/>and<sp/>remains<sp/>constant<sp/>for<sp/>the<sp/>lifetime</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>of<sp/>the<sp/>object.<sp/>Used<sp/>for<sp/>lookups<sp/>in<sp/>GameWorld<sp/>and<sp/>command<sp/>targeting.</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="classhelios_1_1engine_1_1game_1_1GameObject_1a8ccca9fdee32b72202b6b1cca51288c3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref><sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a8ccca9fdee32b72202b6b1cca51288c3" kindref="member">guid_</ref>;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>List<sp/>of<sp/>components<sp/>attached<sp/>to<sp/>this<sp/>GameObject.</highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Components<sp/>are<sp/>owned<sp/>by<sp/>the<sp/>GameObject<sp/>via<sp/>std::unique_ptr.</highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55" refid="classhelios_1_1engine_1_1game_1_1GameObject_1a04c48c868e86b9f5c38ef0cf3176c828" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;std::unique_ptr&lt;Component&gt;&gt;<sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a04c48c868e86b9f5c38ef0cf3176c828" kindref="member">components_</ref>;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="57"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Cached<sp/>list<sp/>of<sp/>components<sp/>that<sp/>implement<sp/>the<sp/>Updatable<sp/>interface.</highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>This<sp/>list<sp/>is<sp/>maintained<sp/>for<sp/>efficient<sp/>iteration<sp/>during<sp/>the<sp/>update<sp/>phase.</highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>pointers<sp/>are<sp/>non-owning<sp/>references<sp/>to<sp/>elements<sp/>within<sp/>components_.</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63" refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6a942f57a7de5c5e06d145c565e0cabd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;Updatable*&gt;<sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6a942f57a7de5c5e06d145c565e0cabd" kindref="member">updatables_</ref>;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="66" refid="classhelios_1_1engine_1_1game_1_1GameObject_1a56372781ae87e48521a7678634a43578" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a56372781ae87e48521a7678634a43578" kindref="member">GameObject</ref>()<sp/>:<sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a8ccca9fdee32b72202b6b1cca51288c3" kindref="member">guid_</ref>(<ref refid="namespacehelios" kindref="compound">helios</ref>::<ref refid="namespacehelios_1_1util" kindref="compound">util</ref>::Guid::generate())<sp/>{};</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68" refid="classhelios_1_1engine_1_1game_1_1GameObject_1ab15ff967c8bf14b0d4fbece6cb7d38e4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1ab15ff967c8bf14b0d4fbece6cb7d38e4" kindref="member">~GameObject</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Adds<sp/>a<sp/>new<sp/>component<sp/>of<sp/>type<sp/>T<sp/>to<sp/>the<sp/>GameObject.</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@tparam<sp/>T<sp/>The<sp/>type<sp/>of<sp/>component<sp/>to<sp/>add.<sp/>Must<sp/>derive<sp/>from<sp/>Component.</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@tparam<sp/>Args<sp/>Argument<sp/>types<sp/>for<sp/>the<sp/>component&apos;s<sp/>constructor.</highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>args<sp/>Arguments<sp/>forwarded<sp/>to<sp/>the<sp/>component&apos;s<sp/>constructor.</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>Reference<sp/>to<sp/>the<sp/>newly<sp/>created<sp/>component.</highlight></codeline>
 <codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="78"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@warning<sp/>This<sp/>pointer<sp/>can<sp/>become<sp/>dangling<sp/>if<sp/>the<sp/>SceneNode<sp/>is<sp/>destroyed<sp/>before</highlight></codeline>
-<codeline lineno="79"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this<sp/>GameObject.<sp/>Accessing<sp/>a<sp/>dangling<sp/>pointer<sp/>results<sp/>in<sp/>undefined<sp/>behavior.</highlight></codeline>
-<codeline lineno="80"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@todo<sp/>Implement<sp/>notification<sp/>mechanism<sp/>to<sp/>invalidate<sp/>this<sp/>pointer<sp/>when<sp/>the</highlight></codeline>
-<codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>SceneNode<sp/>is<sp/>destroyed.<sp/>Consider<sp/>using<sp/>observer<sp/>pattern<sp/>or<sp/>std::weak_ptr</highlight></codeline>
-<codeline lineno="83"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>to<sp/>safely<sp/>detect<sp/>SceneNode<sp/>destruction.</highlight></codeline>
-<codeline lineno="84"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="85" refid="classhelios_1_1engine_1_1game_1_1GameObject_1a2453e79f258cf580d9ef54b7f87e60cc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1scene_1_1Transform" kindref="compound">helios::scene::Transform</ref>*<sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a2453e79f258cf580d9ef54b7f87e60cc" kindref="member">transform_</ref>;</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="87"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="88"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>The<sp/>current<sp/>velocity-vector,<sp/>if<sp/>any.</highlight></codeline>
-<codeline lineno="89"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="90" refid="classhelios_1_1engine_1_1game_1_1GameObject_1a649401ba653f983f1a7c8ae946ffeea1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref><sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a649401ba653f983f1a7c8ae946ffeea1" kindref="member">velocity_</ref>{};</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="92"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="93"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>The<sp/>current<sp/>position-vector<sp/>in<sp/>local<sp/>coordinates<sp/>(model<sp/>space).</highlight></codeline>
-<codeline lineno="94"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="95"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Represents<sp/>the<sp/>GameObject&apos;s<sp/>position<sp/>relative<sp/>to<sp/>its<sp/>local/model<sp/>space,</highlight></codeline>
-<codeline lineno="96"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>consistent<sp/>with<sp/>the<sp/>position()<sp/>accessor.</highlight></codeline>
-<codeline lineno="97"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="98" refid="classhelios_1_1engine_1_1game_1_1GameObject_1af8fa574e14bfd2c34d2729a2fdcd1cdf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref><sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1af8fa574e14bfd2c34d2729a2fdcd1cdf" kindref="member">position_</ref>{};</highlight></codeline>
-<codeline lineno="99"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="100"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="101"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>The<sp/>current<sp/>steeringInput-vector,<sp/>if<sp/>any.</highlight></codeline>
-<codeline lineno="102"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="103" refid="classhelios_1_1engine_1_1game_1_1GameObject_1a15f634e8a4449b79fa7f423b6e9e0b15" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1math_1aeab5c7e555a142f8f763a3317460d5c0" kindref="member">helios::math::vec2f</ref><sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a15f634e8a4449b79fa7f423b6e9e0b15" kindref="member">steeringInput_</ref>{};</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="105"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="106"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Normalized<sp/>value<sp/>for<sp/>the<sp/>throttle,<sp/>if<sp/>any.</highlight></codeline>
-<codeline lineno="107"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="108" refid="classhelios_1_1engine_1_1game_1_1GameObject_1ab54ea2a72c7e6b107d71d3e07a0b1f2a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1ab54ea2a72c7e6b107d71d3e07a0b1f2a" kindref="member">throttle_</ref><sp/>=<sp/>0.0f;</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"></highlight></codeline>
-<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="112"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="113"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Constructs<sp/>a<sp/>GameObject<sp/>associated<sp/>with<sp/>a<sp/>SceneNode.</highlight></codeline>
-<codeline lineno="114"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="115"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>sceneNode<sp/>Pointer<sp/>to<sp/>the<sp/>SceneNode<sp/>this<sp/>GameObject<sp/>wraps.<sp/>Must<sp/>not<sp/>be<sp/>null.</highlight></codeline>
-<codeline lineno="116"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="117"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@pre<sp/>sceneNode<sp/>!=<sp/>nullptr</highlight></codeline>
-<codeline lineno="118"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="119"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>The<sp/>GameObject<sp/>does<sp/>NOT<sp/>take<sp/>ownership<sp/>of<sp/>the<sp/>SceneNode.<sp/>The<sp/>caller<sp/>is<sp/>responsible</highlight></codeline>
-<codeline lineno="120"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>for<sp/>ensuring<sp/>the<sp/>SceneNode<sp/>outlives<sp/>this<sp/>GameObject.</highlight></codeline>
-<codeline lineno="121"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>A<sp/>unique<sp/>Guid<sp/>is<sp/>automatically<sp/>generated<sp/>during<sp/>construction.</highlight></codeline>
-<codeline lineno="122"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="123"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@warning<sp/>Passing<sp/>a<sp/>null<sp/>sceneNode<sp/>will<sp/>result<sp/>in<sp/>undefined<sp/>behavior<sp/>when<sp/>accessing</highlight></codeline>
-<codeline lineno="124"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>transform<sp/>methods.<sp/>In<sp/>debug<sp/>builds,<sp/>this<sp/>should<sp/>trigger<sp/>an<sp/>assertion.</highlight></codeline>
-<codeline lineno="125"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="126" refid="classhelios_1_1engine_1_1game_1_1GameObject_1ad2ffd483600955f8c93b905387d4e9dc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1ad2ffd483600955f8c93b905387d4e9dc" kindref="member">GameObject</ref>(<ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">helios::scene::SceneNode</ref>*<sp/>sceneNode);</highlight></codeline>
-<codeline lineno="127"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="128"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="129"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Virtual<sp/>destructor<sp/>to<sp/>ensure<sp/>proper<sp/>cleanup<sp/>of<sp/>derived<sp/>classes.</highlight></codeline>
-<codeline lineno="130"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="131" refid="classhelios_1_1engine_1_1game_1_1GameObject_1ab15ff967c8bf14b0d4fbece6cb7d38e4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1ab15ff967c8bf14b0d4fbece6cb7d38e4" kindref="member">~GameObject</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="132"><highlight class="normal"></highlight></codeline>
-<codeline lineno="133"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="134"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="135"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Sets<sp/>the<sp/>size<sp/>of<sp/>the<sp/>GameObject<sp/>in<sp/>the<sp/>game<sp/>world.</highlight></codeline>
-<codeline lineno="136"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="137"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>width<sp/>The<sp/>width<sp/>of<sp/>the<sp/>GameObject,<sp/>specified<sp/>in<sp/>the<sp/>given<sp/>unit.</highlight></codeline>
-<codeline lineno="138"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>height<sp/>The<sp/>height<sp/>of<sp/>the<sp/>GameObject,<sp/>specified<sp/>in<sp/>the<sp/>given<sp/>unit.</highlight></codeline>
-<codeline lineno="139"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>depth<sp/>The<sp/>depth<sp/>of<sp/>the<sp/>GameObject,<sp/>specified<sp/>in<sp/>the<sp/>given<sp/>unit.</highlight></codeline>
-<codeline lineno="140"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>unit<sp/>The<sp/>unit<sp/>of<sp/>measurement<sp/>for<sp/>the<sp/>size<sp/>(default<sp/>is<sp/>meters).</highlight></codeline>
-<codeline lineno="141"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="142"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>Reference<sp/>to<sp/>this<sp/>GameObject<sp/>for<sp/>method<sp/>chaining.</highlight></codeline>
-<codeline lineno="143"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="144"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>The<sp/>size<sp/>is<sp/>applied<sp/>to<sp/>the<sp/>underlying<sp/>SceneNode&apos;s<sp/>transform.</highlight></codeline>
-<codeline lineno="145"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="146"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@warning<sp/>If<sp/>the<sp/>associated<sp/>SceneNode<sp/>is<sp/>destroyed,<sp/>calling<sp/>this<sp/>method</highlight></codeline>
-<codeline lineno="147"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>will<sp/>result<sp/>in<sp/>undefined<sp/>behavior.</highlight></codeline>
-<codeline lineno="148"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="149" refid="classhelios_1_1engine_1_1game_1_1GameObject_1a51493ff0aabbc452e19d223927aae3f9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1ad2ffd483600955f8c93b905387d4e9dc" kindref="member">GameObject</ref>&amp;<sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a51493ff0aabbc452e19d223927aae3f9" kindref="member">setSize</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>width,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>height,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>depth,<sp/><ref refid="namespacehelios_1_1core_1_1units_1a13b5c00c42b03ebe1d85cd575f346e55" kindref="member">helios::core::units::Unit</ref><sp/>unit=<ref refid="namespacehelios_1_1core_1_1units_1a13b5c00c42b03ebe1d85cd575f346e55a17c9c40b9db5a0983d1075a012c1f90a" kindref="member">helios::core::units::Unit::Meter</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="150"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="151"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="152"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>a<sp/>ref<sp/>to<sp/>the<sp/>current<sp/>position<sp/>of<sp/>the<sp/>GameObject<sp/>in<sp/>local<sp/>coordinates.</highlight></codeline>
-<codeline lineno="153"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="154"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>position<sp/>vector<sp/>in<sp/>model<sp/>space<sp/>(local).</highlight></codeline>
-<codeline lineno="155"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="156" refid="classhelios_1_1engine_1_1game_1_1GameObject_1aeeb545eed2cd77b7832cae8ee127736b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref>&amp;<sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1aeeb545eed2cd77b7832cae8ee127736b" kindref="member">position</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
-<codeline lineno="157"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="158"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="159"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>a<sp/>const<sp/>ref<sp/>to<sp/>the<sp/>current<sp/>steering<sp/>input<sp/>vector.</highlight></codeline>
-<codeline lineno="160"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="161"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>normalized<sp/>direction<sp/>vector<sp/>representing<sp/>input<sp/>from<sp/>controls.</highlight></codeline>
-<codeline lineno="162"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="163"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>This<sp/>vector<sp/>indicates<sp/>the<sp/>desired<sp/>movement<sp/>direction<sp/>as<sp/>provided</highlight></codeline>
-<codeline lineno="164"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>by<sp/>the<sp/>player<sp/>or<sp/>AI<sp/>controller.<sp/>A<sp/>zero<sp/>vector<sp/>indicates<sp/>no<sp/>input.</highlight></codeline>
-<codeline lineno="165"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="166" refid="classhelios_1_1engine_1_1game_1_1GameObject_1ae44dfc28c7e1470f131efa93cc80df9a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>const<sp/><ref refid="namespacehelios" kindref="compound">helios</ref>::<ref refid="namespacehelios_1_1math" kindref="compound">math</ref>::vec2f&amp;<sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1ae44dfc28c7e1470f131efa93cc80df9a" kindref="member">steeringInput</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
-<codeline lineno="167"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="168"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="169"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>the<sp/>current<sp/>throttle<sp/>value.</highlight></codeline>
-<codeline lineno="170"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="171"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>normalized<sp/>value<sp/>between<sp/>0.0<sp/>(idle)<sp/>and<sp/>1.0<sp/>(full<sp/>throttle).</highlight></codeline>
-<codeline lineno="172"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="173"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Represents<sp/>the<sp/>intensity<sp/>of<sp/>the<sp/>movement<sp/>input,<sp/>typically<sp/>derived</highlight></codeline>
-<codeline lineno="174"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>from<sp/>analog<sp/>stick<sp/>magnitude<sp/>or<sp/>key<sp/>press<sp/>duration.</highlight></codeline>
-<codeline lineno="175"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="176" refid="classhelios_1_1engine_1_1game_1_1GameObject_1a9cb553788b9d9bcb1bc6eed716017d70" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a9cb553788b9d9bcb1bc6eed716017d70" kindref="member">throttle</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
-<codeline lineno="177"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="178"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="179"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>a<sp/>const<sp/>ref<sp/>to<sp/>the<sp/>current<sp/>velocity<sp/>vector.</highlight></codeline>
-<codeline lineno="180"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="181"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>velocity<sp/>vector<sp/>in<sp/>units<sp/>per<sp/>second.</highlight></codeline>
-<codeline lineno="182"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="183"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Represents<sp/>the<sp/>current<sp/>movement<sp/>direction<sp/>and<sp/>speed<sp/>of<sp/>the</highlight></codeline>
-<codeline lineno="184"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GameObject<sp/>in<sp/>world<sp/>space.</highlight></codeline>
-<codeline lineno="185"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="186" refid="classhelios_1_1engine_1_1game_1_1GameObject_1af3778719abf1b7ecaf231245e4e67613" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>const<sp/><ref refid="namespacehelios" kindref="compound">helios</ref>::<ref refid="namespacehelios_1_1math" kindref="compound">math</ref>::vec3f&amp;<sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1af3778719abf1b7ecaf231245e4e67613" kindref="member">velocity</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
-<codeline lineno="187"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="188"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="189"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>the<sp/>current<sp/>speed<sp/>as<sp/>a<sp/>ratio<sp/>of<sp/>maximum<sp/>speed.</highlight></codeline>
-<codeline lineno="190"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="191"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>value<sp/>between<sp/>0.0<sp/>(stationary)<sp/>and<sp/>1.0<sp/>(maximum<sp/>speed).</highlight></codeline>
-<codeline lineno="192"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="193"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>This<sp/>ratio<sp/>can<sp/>be<sp/>used<sp/>for<sp/>UI<sp/>elements<sp/>(e.g.,<sp/>speedometer),</highlight></codeline>
-<codeline lineno="194"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>audio<sp/>effects<sp/>(e.g.,<sp/>engine<sp/>pitch),<sp/>or<sp/>visual<sp/>effects<sp/>that</highlight></codeline>
-<codeline lineno="195"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>scale<sp/>with<sp/>velocity.<sp/>Derived<sp/>classes<sp/>should<sp/>override<sp/>this</highlight></codeline>
-<codeline lineno="196"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>method<sp/>to<sp/>provide<sp/>entity-specific<sp/>speed<sp/>calculations.</highlight></codeline>
-<codeline lineno="197"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="198" refid="classhelios_1_1engine_1_1game_1_1GameObject_1aa1596799a659107e15c10b9310868dcd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>virtual<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1aa1596799a659107e15c10b9310868dcd" kindref="member">speedRatio</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
-<codeline lineno="199"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="200"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="201"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Updates<sp/>the<sp/>GameObject<sp/>state<sp/>for<sp/>the<sp/>current<sp/>frame.</highlight></codeline>
-<codeline lineno="202"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="203"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>deltaTime<sp/>Time<sp/>elapsed<sp/>since<sp/>the<sp/>last<sp/>frame,<sp/>in<sp/>seconds.</highlight></codeline>
-<codeline lineno="204"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="205"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>Derived<sp/>classes<sp/>must<sp/>implement<sp/>this<sp/>method<sp/>to<sp/>define<sp/>frame-by-frame<sp/>behavior</highlight></codeline>
-<codeline lineno="206"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>such<sp/>as<sp/>physics<sp/>updates,<sp/>animation,<sp/>AI<sp/>logic,<sp/>or<sp/>other<sp/>time-dependent<sp/>state<sp/>changes.</highlight></codeline>
-<codeline lineno="207"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>Called<sp/>once<sp/>per<sp/>frame<sp/>by<sp/>the<sp/>GameWorld<sp/>during<sp/>its<sp/>update<sp/>cycle.</highlight></codeline>
-<codeline lineno="208"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="209" refid="classhelios_1_1engine_1_1game_1_1GameObject_1a5d0298e63e5328fe22c73eb2b6e604e8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>virtual<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a5d0298e63e5328fe22c73eb2b6e604e8" kindref="member">update</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>deltaTime)<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="210"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="211"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="212"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>the<sp/>unique<sp/>identifier<sp/>of<sp/>this<sp/>GameObject.</highlight></codeline>
-<codeline lineno="213"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="214"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>Const<sp/>reference<sp/>to<sp/>the<sp/>GameObject&apos;s<sp/>Guid.</highlight></codeline>
-<codeline lineno="215"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="216"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>The<sp/>Guid<sp/>is<sp/>generated<sp/>during<sp/>construction<sp/>and<sp/>never<sp/>changes.</highlight></codeline>
-<codeline lineno="217"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="218" refid="classhelios_1_1engine_1_1game_1_1GameObject_1abf3cf53d3aa0c9b62da27d7934928168" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>const<sp/><ref refid="namespacehelios" kindref="compound">helios</ref>::<ref refid="namespacehelios_1_1util" kindref="compound">util</ref>::Guid&amp;<sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1abf3cf53d3aa0c9b62da27d7934928168" kindref="member">guid</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
-<codeline lineno="219"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="220"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="221"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Applies<sp/>a<sp/>scaling<sp/>transformation<sp/>to<sp/>the<sp/>GameObject.</highlight></codeline>
-<codeline lineno="222"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="223"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>scale<sp/>The<sp/>scale<sp/>vector<sp/>to<sp/>apply<sp/>(x,<sp/>y,<sp/>z<sp/>components).</highlight></codeline>
-<codeline lineno="224"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="225"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>Reference<sp/>to<sp/>this<sp/>GameObject<sp/>for<sp/>method<sp/>chaining.</highlight></codeline>
-<codeline lineno="226"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="227"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>This<sp/>modifies<sp/>the<sp/>underlying<sp/>SceneNode&apos;s<sp/>local<sp/>transform.</highlight></codeline>
-<codeline lineno="228"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="229"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@warning<sp/>If<sp/>the<sp/>SceneNode<sp/>has<sp/>been<sp/>destroyed,<sp/>this<sp/>will<sp/>cause<sp/>undefined<sp/>behavior.</highlight></codeline>
-<codeline lineno="230"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="231" refid="classhelios_1_1engine_1_1game_1_1GameObject_1a5021f749136ead897d28c06e0769085a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1ad2ffd483600955f8c93b905387d4e9dc" kindref="member">GameObject</ref>&amp;<sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a5021f749136ead897d28c06e0769085a" kindref="member">setScale</ref>(const<sp/><ref refid="namespacehelios" kindref="compound">helios</ref>::<ref refid="namespacehelios_1_1math" kindref="compound">math</ref>::vec3f&amp;<sp/>scale)<sp/>noexcept;</highlight></codeline>
-<codeline lineno="232"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="233"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="234"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Applies<sp/>a<sp/>rotation<sp/>transformation<sp/>to<sp/>the<sp/>GameObject.</highlight></codeline>
-<codeline lineno="235"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="236"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>rotation<sp/>The<sp/>rotation<sp/>matrix<sp/>to<sp/>apply.</highlight></codeline>
-<codeline lineno="237"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="238"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>Reference<sp/>to<sp/>this<sp/>GameObject<sp/>for<sp/>method<sp/>chaining.</highlight></codeline>
-<codeline lineno="239"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="240"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>This<sp/>modifies<sp/>the<sp/>underlying<sp/>SceneNode&apos;s<sp/>local<sp/>transform.</highlight></codeline>
-<codeline lineno="241"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="242"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@warning<sp/>If<sp/>the<sp/>SceneNode<sp/>has<sp/>been<sp/>destroyed,<sp/>this<sp/>will<sp/>cause<sp/>undefined<sp/>behavior.</highlight></codeline>
-<codeline lineno="243"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="244" refid="classhelios_1_1engine_1_1game_1_1GameObject_1a44d975fd81970a7f23dd2f58604d03d9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1ad2ffd483600955f8c93b905387d4e9dc" kindref="member">GameObject</ref>&amp;<sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a44d975fd81970a7f23dd2f58604d03d9" kindref="member">setRotation</ref>(const<sp/><ref refid="namespacehelios" kindref="compound">helios</ref>::<ref refid="namespacehelios_1_1math" kindref="compound">math</ref>::mat4f&amp;<sp/>rotation)<sp/>noexcept;</highlight></codeline>
-<codeline lineno="245"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="246"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="247"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Applies<sp/>a<sp/>translation<sp/>transformation<sp/>to<sp/>the<sp/>GameObject.</highlight></codeline>
-<codeline lineno="248"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="249"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>translation<sp/>The<sp/>translation<sp/>vector<sp/>to<sp/>apply<sp/>(x,<sp/>y,<sp/>z<sp/>components).</highlight></codeline>
-<codeline lineno="250"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="251"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>Reference<sp/>to<sp/>this<sp/>GameObject<sp/>for<sp/>method<sp/>chaining.</highlight></codeline>
-<codeline lineno="252"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="253"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>This<sp/>modifies<sp/>the<sp/>underlying<sp/>SceneNode&apos;s<sp/>local<sp/>transform.</highlight></codeline>
-<codeline lineno="254"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="255"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@warning<sp/>If<sp/>the<sp/>SceneNode<sp/>has<sp/>been<sp/>destroyed,<sp/>this<sp/>will<sp/>cause<sp/>undefined<sp/>behavior.</highlight></codeline>
-<codeline lineno="256"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="257" refid="classhelios_1_1engine_1_1game_1_1GameObject_1a0f8f05fab17730b8ca40520fbde14c2c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1ad2ffd483600955f8c93b905387d4e9dc" kindref="member">GameObject</ref>&amp;<sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a0f8f05fab17730b8ca40520fbde14c2c" kindref="member">setTranslation</ref>(const<sp/><ref refid="namespacehelios" kindref="compound">helios</ref>::<ref refid="namespacehelios_1_1math" kindref="compound">math</ref>::vec3f&amp;<sp/>translation)<sp/>noexcept;</highlight></codeline>
-<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="259"><highlight class="normal"></highlight></codeline>
-<codeline lineno="260"><highlight class="normal"></highlight></codeline>
-<codeline lineno="261"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>The<sp/>component<sp/>is<sp/>created,<sp/>attached<sp/>to<sp/>this<sp/>GameObject<sp/>(onAttach<sp/>is<sp/>called),</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>and<sp/>if<sp/>it<sp/>implements<sp/>Updatable,<sp/>it<sp/>is<sp/>added<sp/>to<sp/>the<sp/>update<sp/>list.</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args&gt;</highlight></codeline>
+<codeline lineno="82" refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6efd5ef390fc9b7b8468682659f5a1fb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>T&amp;<sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6efd5ef390fc9b7b8468682659f5a1fb" kindref="member">add</ref>(Args&amp;&amp;...<sp/>args)<sp/>{</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>component_ptr<sp/>=<sp/>std::make_unique&lt;T&gt;(std::forward&lt;Args&gt;(args)...);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>T*<sp/>raw_component_ptr<sp/>=<sp/>component_ptr.get();</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>component_ptr-&gt;onAttach(</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(std::derived_from&lt;T,<sp/>helios::engine::game::Updatable&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6a942f57a7de5c5e06d145c565e0cabd" kindref="member">updatables_</ref>.push_back(raw_component_ptr);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a04c48c868e86b9f5c38ef0cf3176c828" kindref="member">components_</ref>.push_back(std::move(component_ptr));</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*raw_component_ptr;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Retrieves<sp/>a<sp/>component<sp/>of<sp/>type<sp/>T.</highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="101"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@tparam<sp/>T<sp/>The<sp/>type<sp/>of<sp/>component<sp/>to<sp/>retrieve.</highlight></codeline>
+<codeline lineno="102"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>Pointer<sp/>to<sp/>the<sp/>component<sp/>if<sp/>found,<sp/>nullptr<sp/>otherwise.</highlight></codeline>
+<codeline lineno="103"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="104"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Performs<sp/>a<sp/>linear<sp/>search<sp/>through<sp/>the<sp/>components.</highlight></codeline>
+<codeline lineno="105"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="107" refid="classhelios_1_1engine_1_1game_1_1GameObject_1a2306d52f0450467d64ef1ddcdf5448d2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>T*<sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a2306d52f0450467d64ef1ddcdf5448d2" kindref="member">get</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>component<sp/>:<sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a04c48c868e86b9f5c38ef0cf3176c828" kindref="member">components_</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>comp<sp/>=<sp/></highlight><highlight class="keyword">dynamic_cast&lt;</highlight><highlight class="normal">T*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(component.get()))<sp/>{</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>comp;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="118"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="119"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Checks<sp/>if<sp/>the<sp/>GameObject<sp/>has<sp/>a<sp/>component<sp/>of<sp/>type<sp/>T.</highlight></codeline>
+<codeline lineno="120"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="121"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@tparam<sp/>T<sp/>The<sp/>type<sp/>of<sp/>component<sp/>to<sp/>check<sp/>for.</highlight></codeline>
+<codeline lineno="122"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>true<sp/>if<sp/>the<sp/>component<sp/>exists,<sp/>false<sp/>otherwise.</highlight></codeline>
+<codeline lineno="123"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="125" refid="classhelios_1_1engine_1_1game_1_1GameObject_1a75ba7876058a260289f28b39c6fce25a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a75ba7876058a260289f28b39c6fce25a" kindref="member">has</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a2306d52f0450467d64ef1ddcdf5448d2" kindref="member">get&lt;T&gt;</ref>()<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="129"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="130"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Updates<sp/>all<sp/>updatable<sp/>components<sp/>attached<sp/>to<sp/>this<sp/>GameObject.</highlight></codeline>
+<codeline lineno="131"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="132"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>updateContext<sp/>Context<sp/>containing<sp/>frame<sp/>delta<sp/>time<sp/>and<sp/>other<sp/>update<sp/>data.</highlight></codeline>
+<codeline lineno="133"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="134" refid="classhelios_1_1engine_1_1game_1_1GameObject_1a64afc8b3ae7ed69e9763d51169328af2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a64afc8b3ae7ed69e9763d51169328af2" kindref="member">update</ref>(<ref refid="structhelios_1_1engine_1_1game_1_1UpdateContext" kindref="compound">helios::engine::game::UpdateContext</ref>&amp;<sp/>updateContext)<sp/>{</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>updatable:<sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6a942f57a7de5c5e06d145c565e0cabd" kindref="member">updatables_</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>updatable-&gt;update(updateContext);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="140"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="141"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>the<sp/>unique<sp/>identifier<sp/>for<sp/>this<sp/>GameObject.</highlight></codeline>
+<codeline lineno="142"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="143"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>Const<sp/>reference<sp/>to<sp/>the<sp/>Guid,<sp/>valid<sp/>for<sp/>the<sp/>lifetime<sp/>of<sp/>this<sp/>object.</highlight></codeline>
+<codeline lineno="144"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="145" refid="classhelios_1_1engine_1_1game_1_1GameObject_1abf3cf53d3aa0c9b62da27d7934928168" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref>&amp;<sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1abf3cf53d3aa0c9b62da27d7934928168" kindref="member">guid</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a8ccca9fdee32b72202b6b1cca51288c3" kindref="member">guid_</ref>;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>helios::engine::game</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="include/helios/engine/game/GameObject.ixx"/>
   </compounddef>

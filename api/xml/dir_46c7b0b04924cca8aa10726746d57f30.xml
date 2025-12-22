@@ -2,18 +2,31 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="dir_46c7b0b04924cca8aa10726746d57f30" kind="dir">
     <compoundname>include/helios/engine/game</compoundname>
+    <innerdir refid="dir_e0c1a906bd0da41122364a897b83de07">include/helios/engine/game/commands</innerdir>
+    <innerdir refid="dir_f71deafbc833970927ad1dfabdb805be">include/helios/engine/game/components</innerdir>
+    <innerdir refid="dir_36ea2b7be3cb8c26515d956982029a89">include/helios/engine/game/systems</innerdir>
     <innerfile refid="helios_2engine_2game_2__module_8ixx">_module.ixx</innerfile>
     <innerfile refid="Command_8ixx">Command.ixx</innerfile>
     <innerfile refid="CommandBuffer_8ixx">CommandBuffer.ixx</innerfile>
+    <innerfile refid="Component_8ixx">Component.ixx</innerfile>
     <innerfile refid="GameObject_8ixx">GameObject.ixx</innerfile>
     <innerfile refid="GameWorld_8ixx">GameWorld.ixx</innerfile>
-    <innerfile refid="InputHandler_8ixx">InputHandler.ixx</innerfile>
     <innerfile refid="InputSnapshot_8ixx">InputSnapshot.ixx</innerfile>
+    <innerfile refid="System_8ixx">System.ixx</innerfile>
+    <innerfile refid="Updatable_8ixx">Updatable.ixx</innerfile>
+    <innerfile refid="UpdateContext_8ixx">UpdateContext.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_46c7b0b04924cca8aa10726746d57f30_1autotoc_md45">
-<title>helios::engine::game</title><para>This namespace provides game logic infrastructure using the Command pattern for decoupled, testable, and deterministic game systems. It includes entity management, input processing, and command execution facilities that enable advanced features like replay systems and undo/redo.</para>
+<sect1 id="dir_46c7b0b04924cca8aa10726746d57f30_1autotoc_md57">
+<title>helios::engine::game</title><para>Game logic infrastructure using the Command pattern for decoupled, testable, and deterministic game systems.</para>
+<para>This module provides the foundational architecture for game logic in helios. It follows a composition-based component model where <computeroutput>GameObject</computeroutput> instances own <computeroutput>Component</computeroutput> instances that define behavior. Game actions are encapsulated as <computeroutput>Command</computeroutput> objects, enabling features like replay systems, undo/redo, and network synchronization.</para>
+<para>The <computeroutput>GameWorld</computeroutput> serves as the central registry for all entities and systems. It manages:<itemizedlist>
+<listitem><para><bold>GameObjects</bold>: Individual game entities identified by unique <computeroutput>Guid</computeroutput>.</para>
+</listitem><listitem><para><bold>Systems</bold>: Global logic processors for cross-cutting concerns (physics, collision, pooling).</para>
+</listitem></itemizedlist>
+</para>
+<para>Systems are updated each frame after all GameObjects, providing a clear execution order.</para>
 <para><hruler/>
 </para>
 <para><details><summary>Doxygen</summary><para></para>

@@ -14,6 +14,7 @@ var module__helios_8scene_8SceneNode =
     [ "helios::scene::SceneNode::addNode", "module__helios_8scene_8SceneNode.html#a639af371377e5279a7e644da2af05e5a", null ],
     [ "helios::scene::SceneNode::children", "module__helios_8scene_8SceneNode.html#a345af64a75ad370d482051006658c81e", null ],
     [ "helios::scene::SceneNode::renderable", "module__helios_8scene_8SceneNode.html#a2f4bba61e70c28e98747ee84af651812", null ],
+    [ "helios::scene::SceneNode::hasRenderable", "module__helios_8scene_8SceneNode.html#a3a41a256979415a6678bb391660b0ced", null ],
     [ "helios::scene::SceneNode::renderable", "module__helios_8scene_8SceneNode.html#a01e293e31d8c30a3f9cbae3ad19ca6d8", null ],
     [ "helios::scene::SceneNode::setScale", "module__helios_8scene_8SceneNode.html#aa61104006dc48bc2a57dbe6fc6cbcb5b", null ],
     [ "helios::scene::SceneNode::setRotation", "module__helios_8scene_8SceneNode.html#acac79a13bb5bb933c3f9c230a98d3daf", null ],
@@ -31,12 +32,15 @@ var module__helios_8scene_8SceneNode =
     [ "helios::scene::SceneNode::inheritWorldTransform", "module__helios_8scene_8SceneNode.html#a40a0bcf3df470258d5cc779beb884698", null ],
     [ "helios::scene::SceneNode::setInheritance", "module__helios_8scene_8SceneNode.html#a75103edee2bbacbebe2296dd88d1a1e9", null ],
     [ "helios::scene::SceneNode::inheritance", "module__helios_8scene_8SceneNode.html#abfaab87eb2e94a094fda0d96ce28a373", null ],
+    [ "helios::scene::SceneNode::isActive", "module__helios_8scene_8SceneNode.html#af9530fc7b8962c228dd883bf0f509a4a", null ],
+    [ "helios::scene::SceneNode::setActive", "module__helios_8scene_8SceneNode.html#a6fc8bb37765c30988515c45845208f4d", null ],
     [ "helios::scene::SceneNode::needsUpdate_", "module__helios_8scene_8SceneNode.html#a7810bc9069939badd249ce54f794d1e7", null ],
     [ "helios::scene::SceneNode::renderable_", "module__helios_8scene_8SceneNode.html#adc5b1c905e0a2eee271107ebb91652af", null ],
     [ "helios::scene::SceneNode::parent_", "module__helios_8scene_8SceneNode.html#a718f8d4e4ecddeb659031dd9ad9ad079", null ],
     [ "helios::scene::SceneNode::children_", "module__helios_8scene_8SceneNode.html#aa362a46b4917ee9955a38d6422b72668", null ],
     [ "helios::scene::SceneNode::worldTransform_", "module__helios_8scene_8SceneNode.html#a93375ed6bd9aa627be8a5c2342ba4b4c", null ],
     [ "helios::scene::SceneNode::localTransform_", "module__helios_8scene_8SceneNode.html#acf949ca732802c66d4d0d3fee757e719", null ],
+    [ "helios::scene::SceneNode::isActive_", "module__helios_8scene_8SceneNode.html#a34d361ed73787a31ca60aac86bb7d9a2", null ],
     [ "helios::scene::SceneNode::aabb_", "module__helios_8scene_8SceneNode.html#a2b09e19ce61e810a5d21a77d196fbcf1", null ],
     [ "helios::scene::SceneNode::inheritance_", "module__helios_8scene_8SceneNode.html#ada344398e1a3784ef655bd88a5e352e9", null ]
 ];

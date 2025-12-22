@@ -40,6 +40,7 @@ var namespacehelios_1_1math =
     [ "operator*", "namespacehelios_1_1math.html#a3aa0fd063dbb05fb49b6e82621fedfed", null ],
     [ "operator*", "namespacehelios_1_1math.html#ae21f80815ae495b8d521d6ad829ee7b6", null ],
     [ "operator*", "namespacehelios_1_1math.html#a6bca908e940499722f0a3af6447ad719", null ],
+    [ "operator+", "namespacehelios_1_1math.html#aee9df9ba24371aefd6a84af803813f1e", null ],
     [ "operator+", "namespacehelios_1_1math.html#a01625d8968c400bd7e812715d7f1941f", null ],
     [ "operator-", "namespacehelios_1_1math.html#a7a21ef269927b19863a1eae2d87666ee", null ],
     [ "operator/", "namespacehelios_1_1math.html#accf7fb22d70fc125b56f230c6c6cc8d5", null ],

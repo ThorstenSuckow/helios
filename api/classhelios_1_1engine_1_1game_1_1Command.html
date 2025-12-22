@@ -109,13 +109,19 @@ $(function() {
 
 <p>Abstract base class for encapsulating game actions as executable commands.  
  <a href="#details">More...</a></p>
+<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Inheritance diagram for helios::engine::game::Command:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1game_1_1Command__inherit__graph.svg" width="448" height="179"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa7a627acdae0a48a11770bd116db9f1e" id="r_aa7a627acdae0a48a11770bd116db9f1e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa7a627acdae0a48a11770bd116db9f1e">~Command</a> ()=default</td></tr>
 <tr class="memdesc:aa7a627acdae0a48a11770bd116db9f1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor to ensure proper cleanup of derived classes.  <br /></td></tr>
 <tr class="memitem:a9e7515d68b42e8bff683df15d4f95ab7" id="r_a9e7515d68b42e8bff683df15d4f95ab7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e7515d68b42e8bff683df15d4f95ab7">execute</a> (<a class="el" href="classhelios_1_1engine_1_1game_1_1GameObject.html">helios::engine::game::GameObject</a> &amp;gameObject)=0</td></tr>
-<tr class="memdesc:a9e7515d68b42e8bff683df15d4f95ab7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes the command on the specified <a class="el" href="classhelios_1_1engine_1_1game_1_1GameObject.html" title="Base class representing an interactive game entity in the game world.">GameObject</a>.  <br /></td></tr>
+<tr class="memdesc:a9e7515d68b42e8bff683df15d4f95ab7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes the command on the specified <a class="el" href="classhelios_1_1engine_1_1game_1_1GameObject.html" title="Base class for interactive game entities using a component-based architecture.">GameObject</a>.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract base class for encapsulating game actions as executable commands. </p>
@@ -178,16 +184,18 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Executes the command on the specified <a class="el" href="classhelios_1_1engine_1_1game_1_1GameObject.html" title="Base class representing an interactive game entity in the game world.">GameObject</a>. </p>
+<p>Executes the command on the specified <a class="el" href="classhelios_1_1engine_1_1game_1_1GameObject.html" title="Base class for interactive game entities using a component-based architecture.">GameObject</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">gameObject</td><td>The target <a class="el" href="classhelios_1_1engine_1_1game_1_1GameObject.html" title="Base class representing an interactive game entity in the game world.">GameObject</a> to apply the command to.</td></tr>
+    <tr><td class="paramname">gameObject</td><td>The target <a class="el" href="classhelios_1_1engine_1_1game_1_1GameObject.html" title="Base class for interactive game entities using a component-based architecture.">GameObject</a> to apply the command to.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>Derived classes must implement this method to define the specific action performed by the command. </dd>
 <dd>
 This method should be exception-safe. If it throws, <a class="el" href="classhelios_1_1engine_1_1game_1_1CommandBuffer.html#a8d93f492996c3f34816a5b4d61b58d67" title="Executes all buffered commands against the GameWorld and clears the buffer.">CommandBuffer::flush()</a> will abort processing of remaining commands. </dd></dl>
+
+<p>Implemented in <a class="el" href="classhelios_1_1engine_1_1game_1_1commands_1_1Aim2DCommand.html#adcf8bbd3975dd917ebc77fa3ea20128a">helios::engine::game::commands::Aim2DCommand</a>, <a class="el" href="classhelios_1_1engine_1_1game_1_1commands_1_1Move2DCommand.html#aa350d238ae20ca8089a7869b8860f903">helios::engine::game::commands::Move2DCommand</a>, and <a class="el" href="classhelios_1_1engine_1_1game_1_1commands_1_1ShootCommand.html#a9e012933d5cf99796c46f677dcb7a151">helios::engine::game::commands::ShootCommand</a>.</p>
 
 </div>
 </div>

@@ -1,0 +1,1266 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::game::components::physics::Move2DComponent</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1game_1_1Updatable" prot="public" virt="non-virtual">helios::engine::game::Updatable</basecompoundref>
+    <basecompoundref refid="classhelios_1_1engine_1_1game_1_1Component" prot="public" virt="non-virtual">helios::engine::game::Component</basecompoundref>
+    <sectiondef kind="protected-static-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aeaa627024b68fa1bc5e4e48f6a1b389f" prot="protected" static="yes" constexpr="yes" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::DEFAULT_ROTATION_SPEED</definition>
+        <argsstring></argsstring>
+        <name>DEFAULT_ROTATION_SPEED</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::DEFAULT_ROTATION_SPEED</qualifiedname>
+        <initializer>= 560.0f</initializer>
+        <briefdescription>
+<para>Default maximum rotation speed in degrees per second. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="54" column="32" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="54" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9f9f7cd8cbdc2525e130b9ce7d6fb054" compoundref="Move2DComponent_8ixx" startline="504" endline="512">resetToDefaults</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a55c066b45893c97db0c245235fe22b1c" prot="protected" static="yes" constexpr="yes" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::DEFAULT_MOVEMENT_SPEED_THRESHOLD</definition>
+        <argsstring></argsstring>
+        <name>DEFAULT_MOVEMENT_SPEED_THRESHOLD</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::DEFAULT_MOVEMENT_SPEED_THRESHOLD</qualifiedname>
+        <initializer>= 0.1f</initializer>
+        <briefdescription>
+<para>Default minimum movement speed before the ship stops completely. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="59" column="32" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="59" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9f9f7cd8cbdc2525e130b9ce7d6fb054" compoundref="Move2DComponent_8ixx" startline="504" endline="512">resetToDefaults</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aed2d9dc0fa76b1163359a3f2d613ceed" prot="protected" static="yes" constexpr="yes" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::DEFAULT_ROTATION_SPEED_THRESHOLD</definition>
+        <argsstring></argsstring>
+        <name>DEFAULT_ROTATION_SPEED_THRESHOLD</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::DEFAULT_ROTATION_SPEED_THRESHOLD</qualifiedname>
+        <initializer>= 0.1f</initializer>
+        <briefdescription>
+<para>Default minimum rotation speed before rotation stops completely. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="64" column="32" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="64" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9f9f7cd8cbdc2525e130b9ce7d6fb054" compoundref="Move2DComponent_8ixx" startline="504" endline="512">resetToDefaults</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a58d811906dfa014dd1220c474b02aff7" prot="protected" static="yes" constexpr="yes" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::DEFAULT_MOVEMENT_ACCELERATION</definition>
+        <argsstring></argsstring>
+        <name>DEFAULT_MOVEMENT_ACCELERATION</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::DEFAULT_MOVEMENT_ACCELERATION</qualifiedname>
+        <initializer>= 30.0f</initializer>
+        <briefdescription>
+<para>Default movement acceleration in units per second squared. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="69" column="32" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="69" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9f9f7cd8cbdc2525e130b9ce7d6fb054" compoundref="Move2DComponent_8ixx" startline="504" endline="512">resetToDefaults</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9d1e52de0c68d9dce805bbd766b51f2f" prot="protected" static="yes" constexpr="yes" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::DEFAULT_MOVEMENT_SPEED</definition>
+        <argsstring></argsstring>
+        <name>DEFAULT_MOVEMENT_SPEED</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::DEFAULT_MOVEMENT_SPEED</qualifiedname>
+        <initializer>= 30.0f</initializer>
+        <briefdescription>
+<para>Default base movement speed in units per second. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="74" column="32" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="74" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9f9f7cd8cbdc2525e130b9ce7d6fb054" compoundref="Move2DComponent_8ixx" startline="504" endline="512">resetToDefaults</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ad86a71d09afc29ca152901ecfd262c92" prot="protected" static="yes" constexpr="yes" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::DEFAULT_ROTATION_DAMPENING</definition>
+        <argsstring></argsstring>
+        <name>DEFAULT_ROTATION_DAMPENING</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::DEFAULT_ROTATION_DAMPENING</qualifiedname>
+        <initializer>= 0.0001f</initializer>
+        <briefdescription>
+<para>Default exponential decay factor for rotation when input stops. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="79" column="32" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="79" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9f9f7cd8cbdc2525e130b9ce7d6fb054" compoundref="Move2DComponent_8ixx" startline="504" endline="512">resetToDefaults</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab685360bbbc0a46ec64ca4e43e38cdbf" prot="protected" static="yes" constexpr="yes" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::DEFAULT_MOVEMENT_DAMPENING</definition>
+        <argsstring></argsstring>
+        <name>DEFAULT_MOVEMENT_DAMPENING</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::DEFAULT_MOVEMENT_DAMPENING</qualifiedname>
+        <initializer>= 0.1f</initializer>
+        <briefdescription>
+<para>Default exponential decay factor for movement when input stops. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="84" column="32" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="84" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9f9f7cd8cbdc2525e130b9ce7d6fb054" compoundref="Move2DComponent_8ixx" startline="504" endline="512">resetToDefaults</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a58a94791417accc02c9c3e6f4451f5d9" prot="protected" static="yes" constexpr="yes" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::DEFAULT_BASE_ROTATION_SPEED_MULTIPLIER</definition>
+        <argsstring></argsstring>
+        <name>DEFAULT_BASE_ROTATION_SPEED_MULTIPLIER</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::DEFAULT_BASE_ROTATION_SPEED_MULTIPLIER</qualifiedname>
+        <initializer>= 16.0f</initializer>
+        <briefdescription>
+<para>Default base rotation speed multiplier. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="89" column="32" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="89" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a483daaad08f6019cdd8fcd2b21503d76" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::rotationSpeed_</definition>
+        <argsstring></argsstring>
+        <name>rotationSpeed_</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::rotationSpeed_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aeaa627024b68fa1bc5e4e48f6a1b389f" kindref="member">DEFAULT_ROTATION_SPEED</ref></initializer>
+        <briefdescription>
+<para>Maximum rotation speed in degrees per second. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="98" column="15" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="98" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aca8a4ccdd4bdedc05bb52c2b931cfc7a" compoundref="Move2DComponent_8ixx" startline="215" endline="239">move</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9f9f7cd8cbdc2525e130b9ce7d6fb054" compoundref="Move2DComponent_8ixx" startline="504" endline="512">resetToDefaults</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ae4a0d20de42b8fe03c72fb622f9ba97e" compoundref="Move2DComponent_8ixx" startline="384" endline="384">rotationSpeed</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a58d08e85ae29f30af33e04f9b8919812" compoundref="Move2DComponent_8ixx" startline="453" endline="453">setRotationSpeed</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a91c11ed8bc317ffcb010fc9d348bc0c8" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::movementSpeedThreshold_</definition>
+        <argsstring></argsstring>
+        <name>movementSpeedThreshold_</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::movementSpeedThreshold_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a55c066b45893c97db0c245235fe22b1c" kindref="member">DEFAULT_MOVEMENT_SPEED_THRESHOLD</ref></initializer>
+        <briefdescription>
+<para>Minimum movement speed before the ship stops completely. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="103" column="15" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="103" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a4a216d05752dc12f436acf247d1e16d3" compoundref="Move2DComponent_8ixx" startline="391" endline="391">movementSpeedThreshold</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9f9f7cd8cbdc2525e130b9ce7d6fb054" compoundref="Move2DComponent_8ixx" startline="504" endline="512">resetToDefaults</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab898079764e16435f66e93d231ddace7" compoundref="Move2DComponent_8ixx" startline="460" endline="460">setMovementSpeedThreshold</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1abccead76ea179c5442fd7f0270116bbc" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::rotationSpeedThreshold_</definition>
+        <argsstring></argsstring>
+        <name>rotationSpeedThreshold_</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::rotationSpeedThreshold_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aed2d9dc0fa76b1163359a3f2d613ceed" kindref="member">DEFAULT_ROTATION_SPEED_THRESHOLD</ref></initializer>
+        <briefdescription>
+<para>Minimum rotation speed before rotation stops completely. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="108" column="15" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="108" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9f9f7cd8cbdc2525e130b9ce7d6fb054" compoundref="Move2DComponent_8ixx" startline="504" endline="512">resetToDefaults</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a1d416ece697cd4664edc2aa86dd061ff" compoundref="Move2DComponent_8ixx" startline="398" endline="398">rotationSpeedThreshold</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a4b75d35c7e776785f0b72a32aa1f69bc" compoundref="Move2DComponent_8ixx" startline="467" endline="467">setRotationSpeedThreshold</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa6d7df8ad6a213ec0921791a6caf45a4" compoundref="Move2DComponent_8ixx" startline="250" endline="333">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a1cc79a7594f9b7e350b57e4b05379646" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::movementAcceleration_</definition>
+        <argsstring></argsstring>
+        <name>movementAcceleration_</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::movementAcceleration_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a58d811906dfa014dd1220c474b02aff7" kindref="member">DEFAULT_MOVEMENT_ACCELERATION</ref></initializer>
+        <briefdescription>
+<para>Movement acceleration in units per second squared. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="113" column="15" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="113" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab198a5185c5d33e98d1acfe36fc2e9ba" compoundref="Move2DComponent_8ixx" startline="405" endline="405">movementAcceleration</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9f9f7cd8cbdc2525e130b9ce7d6fb054" compoundref="Move2DComponent_8ixx" startline="504" endline="512">resetToDefaults</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a14fbdbb443327447d12218c5620c479a" compoundref="Move2DComponent_8ixx" startline="474" endline="474">setMovementAcceleration</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa6d7df8ad6a213ec0921791a6caf45a4" compoundref="Move2DComponent_8ixx" startline="250" endline="333">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1af0b8633ba1d7886aeeed2313312c7998" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::movementSpeed_</definition>
+        <argsstring></argsstring>
+        <name>movementSpeed_</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::movementSpeed_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9d1e52de0c68d9dce805bbd766b51f2f" kindref="member">DEFAULT_MOVEMENT_SPEED</ref></initializer>
+        <briefdescription>
+<para>Base movement speed in units per second. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="118" column="15" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="118" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aca8a4ccdd4bdedc05bb52c2b931cfc7a" compoundref="Move2DComponent_8ixx" startline="215" endline="239">move</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a04fb3570cf8f5622ab45409772023e6b" compoundref="Move2DComponent_8ixx" startline="412" endline="412">movementSpeed</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9f9f7cd8cbdc2525e130b9ce7d6fb054" compoundref="Move2DComponent_8ixx" startline="504" endline="512">resetToDefaults</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a919f3843314dced81437d2e46cc85dbd" compoundref="Move2DComponent_8ixx" startline="481" endline="481">setMovementSpeed</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a265f6c6df527ea612de40ad4533024b8" compoundref="Move2DComponent_8ixx" startline="367" endline="373">speedRatio</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa6d7df8ad6a213ec0921791a6caf45a4" compoundref="Move2DComponent_8ixx" startline="250" endline="333">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac2c90c6fd38a2822a96b06a63958f667" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::rotationDampening_</definition>
+        <argsstring></argsstring>
+        <name>rotationDampening_</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::rotationDampening_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ad86a71d09afc29ca152901ecfd262c92" kindref="member">DEFAULT_ROTATION_DAMPENING</ref></initializer>
+        <briefdescription>
+<para>Exponential decay factor for rotation when input stops. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="123" column="15" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="123" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9f9f7cd8cbdc2525e130b9ce7d6fb054" compoundref="Move2DComponent_8ixx" startline="504" endline="512">resetToDefaults</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab653fbe372142139b6a29131b536cdfa" compoundref="Move2DComponent_8ixx" startline="419" endline="419">rotationDampening</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac4bdb189364cc00e55b93b9aec804893" compoundref="Move2DComponent_8ixx" startline="488" endline="488">setRotationDampening</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa6d7df8ad6a213ec0921791a6caf45a4" compoundref="Move2DComponent_8ixx" startline="250" endline="333">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a06613bdc3ef2bb7725129ddec553dbba" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::movementDampening_</definition>
+        <argsstring></argsstring>
+        <name>movementDampening_</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::movementDampening_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab685360bbbc0a46ec64ca4e43e38cdbf" kindref="member">DEFAULT_MOVEMENT_DAMPENING</ref></initializer>
+        <briefdescription>
+<para>Exponential decay factor for movement when input stops. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="128" column="15" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="128" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ad4589251426864a83cdc4c2323439861" compoundref="Move2DComponent_8ixx" startline="426" endline="426">movementDampening</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9f9f7cd8cbdc2525e130b9ce7d6fb054" compoundref="Move2DComponent_8ixx" startline="504" endline="512">resetToDefaults</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a1fe1c582b0bc5d00ae76c934a6ba5b37" compoundref="Move2DComponent_8ixx" startline="495" endline="495">setMovementDampening</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa6d7df8ad6a213ec0921791a6caf45a4" compoundref="Move2DComponent_8ixx" startline="250" endline="333">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa59fc1943eb000f3f88b359a01cc292d" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::baseRotationSpeedMultiplier_</definition>
+        <argsstring></argsstring>
+        <name>baseRotationSpeedMultiplier_</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::baseRotationSpeedMultiplier_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a58a94791417accc02c9c3e6f4451f5d9" kindref="member">DEFAULT_BASE_ROTATION_SPEED_MULTIPLIER</ref></initializer>
+        <briefdescription>
+<para>Base rotation speed multiplier. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="133" column="15" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9306f614c3cca2774061a7e3bd209d95" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::actualMovementSpeed_</definition>
+        <argsstring></argsstring>
+        <name>actualMovementSpeed_</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::actualMovementSpeed_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Current movement speed after applying input and dampening. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="142" column="15" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="142" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aca8a4ccdd4bdedc05bb52c2b931cfc7a" compoundref="Move2DComponent_8ixx" startline="215" endline="239">move</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a1e4a84d149bd90ea177bbcc83fa171c9" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::actualRotationAngle_</definition>
+        <argsstring></argsstring>
+        <name>actualRotationAngle_</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::actualRotationAngle_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Current rotation angle in degrees. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="147" column="15" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="147" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aca8a4ccdd4bdedc05bb52c2b931cfc7a" compoundref="Move2DComponent_8ixx" startline="215" endline="239">move</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac9a502c7fd7633c95454680b10afde5c" compoundref="Move2DComponent_8ixx" startline="433" endline="433">rotationAngle</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa6d7df8ad6a213ec0921791a6caf45a4" compoundref="Move2DComponent_8ixx" startline="250" endline="333">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aee9dd997ec318afc598d801c19c474ad" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::targetRotationAngle_</definition>
+        <argsstring></argsstring>
+        <name>targetRotationAngle_</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::targetRotationAngle_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Target rotation angle derived from input direction. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="152" column="15" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="152" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aca8a4ccdd4bdedc05bb52c2b931cfc7a" compoundref="Move2DComponent_8ixx" startline="215" endline="239">move</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa6d7df8ad6a213ec0921791a6caf45a4" compoundref="Move2DComponent_8ixx" startline="250" endline="333">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ae61dae73e5fbd6c49ce2ac3311e94273" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::rotationAngleDelta_</definition>
+        <argsstring></argsstring>
+        <name>rotationAngleDelta_</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::rotationAngleDelta_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Shortest angular distance to target rotation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="157" column="15" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="157" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aca8a4ccdd4bdedc05bb52c2b931cfc7a" compoundref="Move2DComponent_8ixx" startline="215" endline="239">move</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa6d7df8ad6a213ec0921791a6caf45a4" compoundref="Move2DComponent_8ixx" startline="250" endline="333">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1af7d9f42bec42d4180d2c48c9522577c2" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::actualRotationSpeed_</definition>
+        <argsstring></argsstring>
+        <name>actualRotationSpeed_</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::actualRotationSpeed_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Current rotation speed after applying input and dampening. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="162" column="15" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="162" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aca8a4ccdd4bdedc05bb52c2b931cfc7a" compoundref="Move2DComponent_8ixx" startline="215" endline="239">move</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa6d7df8ad6a213ec0921791a6caf45a4" compoundref="Move2DComponent_8ixx" startline="250" endline="333">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a7701b2398957d8225ca888acaa51acdc" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::engine::game::components::physics::Move2DComponent::isInputActive_</definition>
+        <argsstring></argsstring>
+        <name>isInputActive_</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::isInputActive_</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>Indicates whether input is currently being received. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="167" column="14" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="167" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aca8a4ccdd4bdedc05bb52c2b931cfc7a" compoundref="Move2DComponent_8ixx" startline="215" endline="239">move</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa6d7df8ad6a213ec0921791a6caf45a4" compoundref="Move2DComponent_8ixx" startline="250" endline="333">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a093c4cca5faf629e828abd8237d4cbd6" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::throttle_</definition>
+        <argsstring></argsstring>
+        <name>throttle_</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::throttle_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Current throttle value from input (0.0 to 1.0). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="172" column="15" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="172" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aca8a4ccdd4bdedc05bb52c2b931cfc7a" compoundref="Move2DComponent_8ixx" startline="215" endline="239">move</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab097d0a5c803ab9dd295368b155decbb" compoundref="Move2DComponent_8ixx" startline="349" endline="351">throttle</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa6d7df8ad6a213ec0921791a6caf45a4" compoundref="Move2DComponent_8ixx" startline="250" endline="333">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac90e40d347ccc487bbe03b00cf29b415" prot="protected" static="no" mutable="no">
+        <type><ref refid="namespacehelios_1_1math_1aeab5c7e555a142f8f763a3317460d5c0" kindref="member">helios::math::vec2f</ref></type>
+        <definition>helios::math::vec2f helios::engine::game::components::physics::Move2DComponent::steeringInput_</definition>
+        <argsstring></argsstring>
+        <name>steeringInput_</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::steeringInput_</qualifiedname>
+        <briefdescription>
+<para>Current steering input as 2D direction vector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="177" column="29" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="177" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aca8a4ccdd4bdedc05bb52c2b931cfc7a" compoundref="Move2DComponent_8ixx" startline="215" endline="239">move</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1af44bf76b94da4db4a9197ab0b56c96ff" compoundref="Move2DComponent_8ixx" startline="340" endline="342">steeringInput</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a501d638f93dddc695767e97cd85cd55c" prot="protected" static="no" mutable="no">
+        <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+        <definition>helios::math::vec3f helios::engine::game::components::physics::Move2DComponent::velocity_</definition>
+        <argsstring></argsstring>
+        <name>velocity_</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::velocity_</qualifiedname>
+        <briefdescription>
+<para>Current velocity vector in world space. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="182" column="29" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="182" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a265f6c6df527ea612de40ad4533024b8" compoundref="Move2DComponent_8ixx" startline="367" endline="373">speedRatio</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa6d7df8ad6a213ec0921791a6caf45a4" compoundref="Move2DComponent_8ixx" startline="250" endline="333">update</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a5830a38dda58627afc80c6584acc4707" compoundref="Move2DComponent_8ixx" startline="358" endline="360">velocity</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa4a76b98cea15fa0233ea69bd7edfbb4" prot="protected" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent" kindref="compound">helios::engine::game::components::scene::SceneNodeComponent</ref> *</type>
+        <definition>helios::engine::game::components::scene::SceneNodeComponent* helios::engine::game::components::physics::Move2DComponent::sceneNodeComponent_</definition>
+        <argsstring></argsstring>
+        <name>sceneNodeComponent_</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::sceneNodeComponent_</qualifiedname>
+        <briefdescription>
+<para>Pointer to the scene node component for transform operations. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Set during <ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a6a7e692984f295ef03e78b6852089dbe" kindref="member">onAttach()</ref>. Must not be null for movement to apply. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="189" column="69" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="189" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a6a7e692984f295ef03e78b6852089dbe" compoundref="Move2DComponent_8ixx" startline="200" endline="204">onAttach</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aaab2ea05b253f7ebc410ee4515c46fc1" compoundref="Move2DComponent_8ixx" startline="440" endline="442">position</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa6d7df8ad6a213ec0921791a6caf45a4" compoundref="Move2DComponent_8ixx" startline="250" endline="333">update</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a6a7e692984f295ef03e78b6852089dbe" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::physics::Move2DComponent::onAttach</definition>
+        <argsstring>(helios::engine::game::GameObject *gameObject) noexcept override</argsstring>
+        <name>onAttach</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::onAttach</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1game_1_1Component_1a3a4f0b840b179c07299fc291a57fb51f">onAttach</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">helios::engine::game::GameObject</ref> *</type>
+          <declname>gameObject</declname>
+        </param>
+        <briefdescription>
+<para>Called when the component is attached to a <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Retrieves reference to the SceneNodeComponent for transform operations.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameObject</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> this component is being attached to. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="200" column="14" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="200" bodyend="204"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1Component_1a0894e93b95d6d0b71602b8803d2cc213" compoundref="Component_8ixx" startline="71" endline="73">helios::engine::game::Component::gameObject</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1Component_1a70665759561369340448e6015f0a2552" compoundref="Component_8ixx" startline="47">helios::engine::game::Component::gameObject_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa4a76b98cea15fa0233ea69bd7edfbb4" compoundref="Move2DComponent_8ixx" startline="189">sceneNodeComponent_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aca8a4ccdd4bdedc05bb52c2b931cfc7a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::physics::Move2DComponent::move</definition>
+        <argsstring>(helios::math::vec2f direction, float throttle)</argsstring>
+        <name>move</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::move</qualifiedname>
+        <param>
+          <type><ref refid="namespacehelios_1_1math_1aeab5c7e555a142f8f763a3317460d5c0" kindref="member">helios::math::vec2f</ref></type>
+          <declname>direction</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>throttle</declname>
+        </param>
+        <briefdescription>
+<para>Sets the movement direction and throttle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Updates the target rotation angle based on the input direction and calculates the shortest angular distance to the target.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>direction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Normalized 2D direction vector from analog stick. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>throttle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Magnitude of the stick input (0.0 to 1.0). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="215" column="14" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="215" bodyend="239"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9306f614c3cca2774061a7e3bd209d95" compoundref="Move2DComponent_8ixx" startline="142">actualMovementSpeed_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a1e4a84d149bd90ea177bbcc83fa171c9" compoundref="Move2DComponent_8ixx" startline="147">actualRotationAngle_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1af7d9f42bec42d4180d2c48c9522577c2" compoundref="Move2DComponent_8ixx" startline="162">actualRotationSpeed_</references>
+        <references refid="namespacehelios_1_1math_1a73c58ac1ac41973b9927ab6893662104" compoundref="utils_8ixx" startline="40" endline="42">helios::math::degrees</references>
+        <references refid="namespacehelios_1_1math_1af25d93f23f91acae02abfd7706b2e36d" compoundref="utils_8ixx" startline="22">helios::math::EPSILON_LENGTH</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a7701b2398957d8225ca888acaa51acdc" compoundref="Move2DComponent_8ixx" startline="167">isInputActive_</references>
+        <references refid="structhelios_1_1math_1_1vec2_1a865490c9a5afdf0f5121c45b2157f1ff" compoundref="vec2_8ixx" startline="96" endline="101">helios::math::vec2&lt; T &gt;::length</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1af0b8633ba1d7886aeeed2313312c7998" compoundref="Move2DComponent_8ixx" startline="118">movementSpeed_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ae61dae73e5fbd6c49ce2ac3311e94273" compoundref="Move2DComponent_8ixx" startline="157">rotationAngleDelta_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a483daaad08f6019cdd8fcd2b21503d76" compoundref="Move2DComponent_8ixx" startline="98">rotationSpeed_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac90e40d347ccc487bbe03b00cf29b415" compoundref="Move2DComponent_8ixx" startline="177">steeringInput_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aee9dd997ec318afc598d801c19c474ad" compoundref="Move2DComponent_8ixx" startline="152">targetRotationAngle_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab097d0a5c803ab9dd295368b155decbb" compoundref="Move2DComponent_8ixx" startline="349" endline="351">throttle</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a093c4cca5faf629e828abd8237d4cbd6" compoundref="Move2DComponent_8ixx" startline="172">throttle_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa6d7df8ad6a213ec0921791a6caf45a4" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::physics::Move2DComponent::update</definition>
+        <argsstring>(helios::engine::game::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::update</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1game_1_1Updatable_1a015e7f65d24ee77ba1f0ef21f17788bc">update</reimplements>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1game_1_1UpdateContext" kindref="compound">helios::engine::game::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Updates movement and rotation each frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Applies rotation towards the target angle with dampening, then integrates velocity to update position. Handles both active input and coasting (when input stops) with exponential decay.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Context containing frame delta time. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="250" column="14" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="250" bodyend="333"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a1e4a84d149bd90ea177bbcc83fa171c9" compoundref="Move2DComponent_8ixx" startline="147">actualRotationAngle_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1af7d9f42bec42d4180d2c48c9522577c2" compoundref="Move2DComponent_8ixx" startline="162">actualRotationSpeed_</references>
+        <references refid="namespacehelios_1_1math_1af25d93f23f91acae02abfd7706b2e36d" compoundref="utils_8ixx" startline="22">helios::math::EPSILON_LENGTH</references>
+        <references refid="structhelios_1_1math_1_1mat4_1ad856b4652346ff475b653e257d64428d" compoundref="mat4_8ixx" startline="104" endline="106">helios::math::mat4&lt; float &gt;::identity</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a7701b2398957d8225ca888acaa51acdc" compoundref="Move2DComponent_8ixx" startline="167">isInputActive_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a1cc79a7594f9b7e350b57e4b05379646" compoundref="Move2DComponent_8ixx" startline="113">movementAcceleration_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a06613bdc3ef2bb7725129ddec553dbba" compoundref="Move2DComponent_8ixx" startline="128">movementDampening_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1af0b8633ba1d7886aeeed2313312c7998" compoundref="Move2DComponent_8ixx" startline="118">movementSpeed_</references>
+        <references refid="namespacehelios_1_1math_1a4949642a7cca09c7950bb6a1b75260c9" compoundref="utils_8ixx" startline="30" endline="32">helios::math::radians</references>
+        <references refid="namespacehelios_1_1math_1a643691235959c2f53d144a4ee9a0e251">helios::math::rotate</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ae61dae73e5fbd6c49ce2ac3311e94273" compoundref="Move2DComponent_8ixx" startline="157">rotationAngleDelta_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac2c90c6fd38a2822a96b06a63958f667" compoundref="Move2DComponent_8ixx" startline="123">rotationDampening_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1abccead76ea179c5442fd7f0270116bbc" compoundref="Move2DComponent_8ixx" startline="108">rotationSpeedThreshold_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa4a76b98cea15fa0233ea69bd7edfbb4" compoundref="Move2DComponent_8ixx" startline="189">sceneNodeComponent_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aee9dd997ec318afc598d801c19c474ad" compoundref="Move2DComponent_8ixx" startline="152">targetRotationAngle_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a093c4cca5faf629e828abd8237d4cbd6" compoundref="Move2DComponent_8ixx" startline="172">throttle_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a501d638f93dddc695767e97cd85cd55c" compoundref="Move2DComponent_8ixx" startline="182">velocity_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1af44bf76b94da4db4a9197ab0b56c96ff" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="namespacehelios_1_1math_1aeab5c7e555a142f8f763a3317460d5c0" kindref="member">helios::math::vec2f</ref> &amp;</type>
+        <definition>const helios::math::vec2f &amp; helios::engine::game::components::physics::Move2DComponent::steeringInput</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>steeringInput</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::steeringInput</qualifiedname>
+        <briefdescription>
+<para>Returns the current steering input direction. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Const reference to the 2D steering input vector. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="340" column="36" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="340" bodyend="342"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac90e40d347ccc487bbe03b00cf29b415" compoundref="Move2DComponent_8ixx" startline="177">steeringInput_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab097d0a5c803ab9dd295368b155decbb" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::throttle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>throttle</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::throttle</qualifiedname>
+        <briefdescription>
+<para>Returns the current throttle value (0.0 to 1.0). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Current throttle magnitude from input. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="349" column="16" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="349" bodyend="351"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a093c4cca5faf629e828abd8237d4cbd6" compoundref="Move2DComponent_8ixx" startline="172">throttle_</references>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aca8a4ccdd4bdedc05bb52c2b931cfc7a" compoundref="Move2DComponent_8ixx" startline="215" endline="239">move</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a5830a38dda58627afc80c6584acc4707" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref> &amp;</type>
+        <definition>const helios::math::vec3f &amp; helios::engine::game::components::physics::Move2DComponent::velocity</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>velocity</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::velocity</qualifiedname>
+        <briefdescription>
+<para>Returns the current velocity vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Const reference to the 3D velocity vector in world space. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="358" column="36" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="358" bodyend="360"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a501d638f93dddc695767e97cd85cd55c" compoundref="Move2DComponent_8ixx" startline="182">velocity_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a265f6c6df527ea612de40ad4533024b8" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::speedRatio</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>speedRatio</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::speedRatio</qualifiedname>
+        <briefdescription>
+<para>Returns the current speed as a ratio of maximum speed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A value between 0.0 (stationary) and 1.0 (maximum speed). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="367" column="16" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="367" bodyend="373"/>
+        <references refid="namespacehelios_1_1math_1af25d93f23f91acae02abfd7706b2e36d" compoundref="utils_8ixx" startline="22">helios::math::EPSILON_LENGTH</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1af0b8633ba1d7886aeeed2313312c7998" compoundref="Move2DComponent_8ixx" startline="118">movementSpeed_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a501d638f93dddc695767e97cd85cd55c" compoundref="Move2DComponent_8ixx" startline="182">velocity_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ae4a0d20de42b8fe03c72fb622f9ba97e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::rotationSpeed</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rotationSpeed</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::rotationSpeed</qualifiedname>
+        <briefdescription>
+<para>Returns the maximum rotation speed in degrees per second. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Maximum rotation speed value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="384" column="16" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="384" bodyend="384"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a483daaad08f6019cdd8fcd2b21503d76" compoundref="Move2DComponent_8ixx" startline="98">rotationSpeed_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a4a216d05752dc12f436acf247d1e16d3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::movementSpeedThreshold</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>movementSpeedThreshold</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::movementSpeedThreshold</qualifiedname>
+        <briefdescription>
+<para>Returns the minimum movement speed threshold. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Movement speed threshold below which movement stops. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="391" column="16" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="391" bodyend="391"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a91c11ed8bc317ffcb010fc9d348bc0c8" compoundref="Move2DComponent_8ixx" startline="103">movementSpeedThreshold_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a1d416ece697cd4664edc2aa86dd061ff" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::rotationSpeedThreshold</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rotationSpeedThreshold</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::rotationSpeedThreshold</qualifiedname>
+        <briefdescription>
+<para>Returns the minimum rotation speed threshold. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Rotation speed threshold below which rotation stops. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="398" column="16" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="398" bodyend="398"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1abccead76ea179c5442fd7f0270116bbc" compoundref="Move2DComponent_8ixx" startline="108">rotationSpeedThreshold_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab198a5185c5d33e98d1acfe36fc2e9ba" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::movementAcceleration</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>movementAcceleration</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::movementAcceleration</qualifiedname>
+        <briefdescription>
+<para>Returns the movement acceleration in units per second squared. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Movement acceleration value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="405" column="16" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="405" bodyend="405"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a1cc79a7594f9b7e350b57e4b05379646" compoundref="Move2DComponent_8ixx" startline="113">movementAcceleration_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a04fb3570cf8f5622ab45409772023e6b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::movementSpeed</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>movementSpeed</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::movementSpeed</qualifiedname>
+        <briefdescription>
+<para>Returns the maximum movement speed in units per second. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Maximum movement speed value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="412" column="16" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="412" bodyend="412"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1af0b8633ba1d7886aeeed2313312c7998" compoundref="Move2DComponent_8ixx" startline="118">movementSpeed_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab653fbe372142139b6a29131b536cdfa" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::rotationDampening</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rotationDampening</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::rotationDampening</qualifiedname>
+        <briefdescription>
+<para>Returns the rotation dampening factor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Exponential decay factor for rotation. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="419" column="16" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="419" bodyend="419"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac2c90c6fd38a2822a96b06a63958f667" compoundref="Move2DComponent_8ixx" startline="123">rotationDampening_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ad4589251426864a83cdc4c2323439861" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::movementDampening</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>movementDampening</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::movementDampening</qualifiedname>
+        <briefdescription>
+<para>Returns the movement dampening factor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Exponential decay factor for movement. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="426" column="16" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="426" bodyend="426"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a06613bdc3ef2bb7725129ddec553dbba" compoundref="Move2DComponent_8ixx" startline="128">movementDampening_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac9a502c7fd7633c95454680b10afde5c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::Move2DComponent::rotationAngle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rotationAngle</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::rotationAngle</qualifiedname>
+        <briefdescription>
+<para>Returns the current rotation angle in degrees. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Current facing angle in degrees. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="433" column="16" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="433" bodyend="433"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a1e4a84d149bd90ea177bbcc83fa171c9" compoundref="Move2DComponent_8ixx" startline="147">actualRotationAngle_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aaab2ea05b253f7ebc410ee4515c46fc1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+        <definition>helios::math::vec3f helios::engine::game::components::physics::Move2DComponent::position</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>position</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::position</qualifiedname>
+        <briefdescription>
+<para>Returns the current position from the SceneNodeComponent. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Current world-space position, or zero vector if no SceneNodeComponent. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="440" column="30" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="440" bodyend="442"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa4a76b98cea15fa0233ea69bd7edfbb4" compoundref="Move2DComponent_8ixx" startline="189">sceneNodeComponent_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a58d08e85ae29f30af33e04f9b8919812" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::physics::Move2DComponent::setRotationSpeed</definition>
+        <argsstring>(float value) noexcept</argsstring>
+        <name>setRotationSpeed</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::setRotationSpeed</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Sets the maximum rotation speed in degrees per second. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New rotation speed value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="453" column="14" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="453" bodyend="453"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a483daaad08f6019cdd8fcd2b21503d76" compoundref="Move2DComponent_8ixx" startline="98">rotationSpeed_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab898079764e16435f66e93d231ddace7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::physics::Move2DComponent::setMovementSpeedThreshold</definition>
+        <argsstring>(float value) noexcept</argsstring>
+        <name>setMovementSpeedThreshold</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::setMovementSpeedThreshold</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Sets the minimum movement speed threshold. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New threshold value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="460" column="14" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="460" bodyend="460"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a91c11ed8bc317ffcb010fc9d348bc0c8" compoundref="Move2DComponent_8ixx" startline="103">movementSpeedThreshold_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a4b75d35c7e776785f0b72a32aa1f69bc" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::physics::Move2DComponent::setRotationSpeedThreshold</definition>
+        <argsstring>(float value) noexcept</argsstring>
+        <name>setRotationSpeedThreshold</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::setRotationSpeedThreshold</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Sets the minimum rotation speed threshold. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New threshold value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="467" column="14" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="467" bodyend="467"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1abccead76ea179c5442fd7f0270116bbc" compoundref="Move2DComponent_8ixx" startline="108">rotationSpeedThreshold_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a14fbdbb443327447d12218c5620c479a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::physics::Move2DComponent::setMovementAcceleration</definition>
+        <argsstring>(float value) noexcept</argsstring>
+        <name>setMovementAcceleration</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::setMovementAcceleration</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Sets the movement acceleration in units per second squared. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New acceleration value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="474" column="14" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="474" bodyend="474"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a1cc79a7594f9b7e350b57e4b05379646" compoundref="Move2DComponent_8ixx" startline="113">movementAcceleration_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a919f3843314dced81437d2e46cc85dbd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::physics::Move2DComponent::setMovementSpeed</definition>
+        <argsstring>(float value) noexcept</argsstring>
+        <name>setMovementSpeed</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::setMovementSpeed</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Sets the maximum movement speed in units per second. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New maximum speed value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="481" column="14" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="481" bodyend="481"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1af0b8633ba1d7886aeeed2313312c7998" compoundref="Move2DComponent_8ixx" startline="118">movementSpeed_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac4bdb189364cc00e55b93b9aec804893" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::physics::Move2DComponent::setRotationDampening</definition>
+        <argsstring>(float value) noexcept</argsstring>
+        <name>setRotationDampening</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::setRotationDampening</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Sets the rotation dampening factor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New dampening factor (exponential decay). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="488" column="14" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="488" bodyend="488"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac2c90c6fd38a2822a96b06a63958f667" compoundref="Move2DComponent_8ixx" startline="123">rotationDampening_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a1fe1c582b0bc5d00ae76c934a6ba5b37" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::physics::Move2DComponent::setMovementDampening</definition>
+        <argsstring>(float value) noexcept</argsstring>
+        <name>setMovementDampening</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::setMovementDampening</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Sets the movement dampening factor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New dampening factor (exponential decay). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="495" column="14" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="495" bodyend="495"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a06613bdc3ef2bb7725129ddec553dbba" compoundref="Move2DComponent_8ixx" startline="128">movementDampening_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9f9f7cd8cbdc2525e130b9ce7d6fb054" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::physics::Move2DComponent::resetToDefaults</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>resetToDefaults</name>
+        <qualifiedname>helios::engine::game::components::physics::Move2DComponent::resetToDefaults</qualifiedname>
+        <briefdescription>
+<para>Resets all physics parameters to their default values. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="504" column="14" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="504" bodyend="512"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a58d811906dfa014dd1220c474b02aff7" compoundref="Move2DComponent_8ixx" startline="69">DEFAULT_MOVEMENT_ACCELERATION</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab685360bbbc0a46ec64ca4e43e38cdbf" compoundref="Move2DComponent_8ixx" startline="84">DEFAULT_MOVEMENT_DAMPENING</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9d1e52de0c68d9dce805bbd766b51f2f" compoundref="Move2DComponent_8ixx" startline="74">DEFAULT_MOVEMENT_SPEED</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a55c066b45893c97db0c245235fe22b1c" compoundref="Move2DComponent_8ixx" startline="59">DEFAULT_MOVEMENT_SPEED_THRESHOLD</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ad86a71d09afc29ca152901ecfd262c92" compoundref="Move2DComponent_8ixx" startline="79">DEFAULT_ROTATION_DAMPENING</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aeaa627024b68fa1bc5e4e48f6a1b389f" compoundref="Move2DComponent_8ixx" startline="54">DEFAULT_ROTATION_SPEED</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aed2d9dc0fa76b1163359a3f2d613ceed" compoundref="Move2DComponent_8ixx" startline="64">DEFAULT_ROTATION_SPEED_THRESHOLD</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a1cc79a7594f9b7e350b57e4b05379646" compoundref="Move2DComponent_8ixx" startline="113">movementAcceleration_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a06613bdc3ef2bb7725129ddec553dbba" compoundref="Move2DComponent_8ixx" startline="128">movementDampening_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1af0b8633ba1d7886aeeed2313312c7998" compoundref="Move2DComponent_8ixx" startline="118">movementSpeed_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a91c11ed8bc317ffcb010fc9d348bc0c8" compoundref="Move2DComponent_8ixx" startline="103">movementSpeedThreshold_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac2c90c6fd38a2822a96b06a63958f667" compoundref="Move2DComponent_8ixx" startline="123">rotationDampening_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a483daaad08f6019cdd8fcd2b21503d76" compoundref="Move2DComponent_8ixx" startline="98">rotationSpeed_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1abccead76ea179c5442fd7f0270116bbc" compoundref="Move2DComponent_8ixx" startline="108">rotationSpeedThreshold_</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para><ref refid="classhelios_1_1engine_1_1game_1_1Component" kindref="compound">Component</ref> for 2D physics-based movement with rotation. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Handles directional movement and rotation for GameObjects in a 2D plane. Implements smooth acceleration, deceleration with exponential dampening, and rotation towards the input direction. Movement is applied to the associated SceneNode through a SceneNodeComponent.</para>
+<para>The component receives input via <ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aca8a4ccdd4bdedc05bb52c2b931cfc7a" kindref="member">move()</ref> which sets target direction and throttle. Each frame, <ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa6d7df8ad6a213ec0921791a6caf45a4" kindref="member">update()</ref> applies physics calculations to smoothly rotate towards the target direction and move in the current facing direction.</para>
+<para><simplesect kind="note"><para>Requires a SceneNodeComponent to be attached to the same <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>helios::engine::game::Component</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1Component"/>
+      </node>
+      <node id="2">
+        <label>helios::engine::game::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::game::components::physics::Move2DComponent</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>helios::engine::game::Component</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1Component"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>gameObject_</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>helios::engine::game::GameObject</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1GameObject"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>guid_</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::engine::game::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::game::components::physics::Move2DComponent</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>sceneNodeComponent_</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>helios::engine::game::components::scene::SceneNodeComponent</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>canonicalSize_</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>sceneNode_</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>helios::math::vec3&lt; float &gt;</label>
+        <link refid="structhelios_1_1math_1_1vec3"/>
+      </node>
+      <node id="8">
+        <label>helios::scene::SceneNode</label>
+        <link refid="classhelios_1_1scene_1_1SceneNode"/>
+        <childnode refid="8" relation="usage">
+          <edgelabel>parent_</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>localTransform_</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>helios::scene::Transform</label>
+        <link refid="classhelios_1_1scene_1_1Transform"/>
+      </node>
+      <node id="5">
+        <label>helios::util::Guid</label>
+        <link refid="classhelios_1_1util_1_1Guid"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/game/components/physics/Move2DComponent.ixx" line="42" column="5" bodyfile="include/helios/engine/game/components/physics/Move2DComponent.ixx" bodystart="42" bodyend="513"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9306f614c3cca2774061a7e3bd209d95" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>actualMovementSpeed_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a1e4a84d149bd90ea177bbcc83fa171c9" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>actualRotationAngle_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1af7d9f42bec42d4180d2c48c9522577c2" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>actualRotationSpeed_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa59fc1943eb000f3f88b359a01cc292d" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>baseRotationSpeedMultiplier_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1a4a167553b4aed32f0ad96e8836a01b88" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>Component</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a58a94791417accc02c9c3e6f4451f5d9" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>DEFAULT_BASE_ROTATION_SPEED_MULTIPLIER</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a58d811906dfa014dd1220c474b02aff7" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>DEFAULT_MOVEMENT_ACCELERATION</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab685360bbbc0a46ec64ca4e43e38cdbf" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>DEFAULT_MOVEMENT_DAMPENING</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9d1e52de0c68d9dce805bbd766b51f2f" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>DEFAULT_MOVEMENT_SPEED</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a55c066b45893c97db0c245235fe22b1c" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>DEFAULT_MOVEMENT_SPEED_THRESHOLD</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ad86a71d09afc29ca152901ecfd262c92" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>DEFAULT_ROTATION_DAMPENING</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aeaa627024b68fa1bc5e4e48f6a1b389f" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>DEFAULT_ROTATION_SPEED</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aed2d9dc0fa76b1163359a3f2d613ceed" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>DEFAULT_ROTATION_SPEED_THRESHOLD</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1a0894e93b95d6d0b71602b8803d2cc213" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>gameObject</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1a70665759561369340448e6015f0a2552" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>gameObject_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a7701b2398957d8225ca888acaa51acdc" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>isInputActive_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aca8a4ccdd4bdedc05bb52c2b931cfc7a" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>move</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab198a5185c5d33e98d1acfe36fc2e9ba" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>movementAcceleration</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a1cc79a7594f9b7e350b57e4b05379646" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>movementAcceleration_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ad4589251426864a83cdc4c2323439861" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>movementDampening</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a06613bdc3ef2bb7725129ddec553dbba" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>movementDampening_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a04fb3570cf8f5622ab45409772023e6b" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>movementSpeed</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1af0b8633ba1d7886aeeed2313312c7998" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>movementSpeed_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a4a216d05752dc12f436acf247d1e16d3" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>movementSpeedThreshold</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a91c11ed8bc317ffcb010fc9d348bc0c8" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>movementSpeedThreshold_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a6a7e692984f295ef03e78b6852089dbe" prot="public" virt="virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>onAttach</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aaab2ea05b253f7ebc410ee4515c46fc1" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>position</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9f9f7cd8cbdc2525e130b9ce7d6fb054" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>resetToDefaults</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac9a502c7fd7633c95454680b10afde5c" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>rotationAngle</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ae61dae73e5fbd6c49ce2ac3311e94273" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>rotationAngleDelta_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab653fbe372142139b6a29131b536cdfa" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>rotationDampening</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac2c90c6fd38a2822a96b06a63958f667" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>rotationDampening_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ae4a0d20de42b8fe03c72fb622f9ba97e" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>rotationSpeed</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a483daaad08f6019cdd8fcd2b21503d76" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>rotationSpeed_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a1d416ece697cd4664edc2aa86dd061ff" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>rotationSpeedThreshold</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1abccead76ea179c5442fd7f0270116bbc" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>rotationSpeedThreshold_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa4a76b98cea15fa0233ea69bd7edfbb4" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>sceneNodeComponent_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a14fbdbb443327447d12218c5620c479a" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>setMovementAcceleration</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a1fe1c582b0bc5d00ae76c934a6ba5b37" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>setMovementDampening</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a919f3843314dced81437d2e46cc85dbd" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>setMovementSpeed</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab898079764e16435f66e93d231ddace7" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>setMovementSpeedThreshold</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac4bdb189364cc00e55b93b9aec804893" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>setRotationDampening</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a58d08e85ae29f30af33e04f9b8919812" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>setRotationSpeed</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a4b75d35c7e776785f0b72a32aa1f69bc" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>setRotationSpeedThreshold</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a265f6c6df527ea612de40ad4533024b8" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>speedRatio</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1af44bf76b94da4db4a9197ab0b56c96ff" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>steeringInput</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac90e40d347ccc487bbe03b00cf29b415" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>steeringInput_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aee9dd997ec318afc598d801c19c474ad" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>targetRotationAngle_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab097d0a5c803ab9dd295368b155decbb" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>throttle</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a093c4cca5faf629e828abd8237d4cbd6" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>throttle_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Updatable_1a80ad1928d4b394f69860b47969541e34" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>Updatable</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa6d7df8ad6a213ec0921791a6caf45a4" prot="public" virt="virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>update</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a5830a38dda58627afc80c6584acc4707" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>velocity</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a501d638f93dddc695767e97cd85cd55c" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>velocity_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1abeb3af407878cf9f2d1019fdc9e2712a" prot="public" virt="virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>~Component</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Updatable_1aac5760f908621631c4e7ac40f25e9361" prot="public" virt="virtual"><scope>helios::engine::game::components::physics::Move2DComponent</scope><name>~Updatable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

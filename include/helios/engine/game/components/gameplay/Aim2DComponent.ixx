@@ -54,6 +54,8 @@ export namespace helios::engine::game::components::gameplay {
 
         /**
          * @brief Returns the current aim direction.
+         *
+         * @return Const reference to the normalized 2D direction vector.
          */
         [[nodiscard]] const helios::math::vec2f& direction() const noexcept {
             return direction_;
@@ -61,6 +63,8 @@ export namespace helios::engine::game::components::gameplay {
 
         /**
          * @brief Returns the current frequency factor.
+         *
+         * @return Fire frequency factor in range [0.0, 1.0].
          */
         [[nodiscard]] float frequency() const noexcept {
             return frequency_;

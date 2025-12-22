@@ -107,7 +107,7 @@ namespace helios::scene {
         std::vector<SnapshotItem> renderables;
         renderables.reserve(nodes.size());
         for (const auto& node: nodes) {
-            if (node->renderable()) {
+            if (node->isActive() && node->hasRenderable()) {
                 renderables.emplace_back(node->renderable(), node->cachedWorldTransform());
             }
         }

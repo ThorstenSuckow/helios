@@ -25,7 +25,20 @@ import helios.engine.game.components.scene.SceneNodeComponent;
 
 export namespace helios::engine::game::components::physics {
 
-
+    /**
+     * @brief Component for 2D physics-based movement with rotation.
+     *
+     * @details Handles directional movement and rotation for GameObjects in a 2D plane.
+     * Implements smooth acceleration, deceleration with exponential dampening, and
+     * rotation towards the input direction. Movement is applied to the associated
+     * SceneNode through a SceneNodeComponent.
+     *
+     * The component receives input via move() which sets target direction and throttle.
+     * Each frame, update() applies physics calculations to smoothly rotate towards
+     * the target direction and move in the current facing direction.
+     *
+     * @note Requires a SceneNodeComponent to be attached to the same GameObject.
+     */
     class Move2DComponent : public helios::engine::game::Updatable, public helios::engine::game::Component {
 
     protected:
@@ -153,23 +166,52 @@ export namespace helios::engine::game::components::physics {
          */
         bool isInputActive_ = true;
 
+        /**
+         * @brief Current throttle value from input (0.0 to 1.0).
+         */
         float throttle_ = 0.0f;
 
+        /**
+         * @brief Current steering input as 2D direction vector.
+         */
         helios::math::vec2f steeringInput_;
 
+        /**
+         * @brief Current velocity vector in world space.
+         */
         helios::math::vec3f velocity_;
 
-
+        /**
+         * @brief Pointer to the scene node component for transform operations.
+         *
+         * @details Set during onAttach(). Must not be null for movement to apply.
+         */
         helios::engine::game::components::scene::SceneNodeComponent* sceneNodeComponent_;
 
     public:
 
+        /**
+         * @brief Called when the component is attached to a GameObject.
+         *
+         * @details Retrieves reference to the SceneNodeComponent for transform operations.
+         *
+         * @param gameObject The GameObject this component is being attached to.
+         */
         void onAttach(helios::engine::game::GameObject* gameObject) noexcept override {
             gameObject_ = gameObject;
             sceneNodeComponent_ = gameObject_->get<helios::engine::game::components::scene::SceneNodeComponent>();
             assert(sceneNodeComponent_ != nullptr && "Unexpected nullptr for sceneNodeComponent_");
         };
 
+        /**
+         * @brief Sets the movement direction and throttle.
+         *
+         * @details Updates the target rotation angle based on the input direction
+         * and calculates the shortest angular distance to the target.
+         *
+         * @param direction Normalized 2D direction vector from analog stick.
+         * @param throttle Magnitude of the stick input (0.0 to 1.0).
+         */
         void move(helios::math::vec2f direction, float throttle) {
             if (throttle <= helios::math::EPSILON_LENGTH) {
                 steeringInput_ = helios::math::vec2f{0.0f, 0.0f};
@@ -196,6 +238,15 @@ export namespace helios::engine::game::components::physics {
 
         }
 
+        /**
+         * @brief Updates movement and rotation each frame.
+         *
+         * @details Applies rotation towards the target angle with dampening, then
+         * integrates velocity to update position. Handles both active input and
+         * coasting (when input stops) with exponential decay.
+         *
+         * @param updateContext Context containing frame delta time.
+         */
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
             float deltaTime = updateContext.deltaTime();
@@ -283,6 +334,8 @@ export namespace helios::engine::game::components::physics {
 
         /**
          * @brief Returns the current steering input direction.
+         *
+         * @return Const reference to the 2D steering input vector.
          */
         [[nodiscard]] const helios::math::vec2f& steeringInput() const noexcept {
             return steeringInput_;
@@ -290,6 +343,8 @@ export namespace helios::engine::game::components::physics {
 
         /**
          * @brief Returns the current throttle value (0.0 to 1.0).
+         *
+         * @return Current throttle magnitude from input.
          */
         [[nodiscard]] float throttle() const noexcept {
             return throttle_;
@@ -297,6 +352,8 @@ export namespace helios::engine::game::components::physics {
 
         /**
          * @brief Returns the current velocity vector.
+         *
+         * @return Const reference to the 3D velocity vector in world space.
          */
         [[nodiscard]] const helios::math::vec3f& velocity() const noexcept {
             return velocity_;
@@ -321,46 +378,64 @@ export namespace helios::engine::game::components::physics {
 
         /**
          * @brief Returns the maximum rotation speed in degrees per second.
+         *
+         * @return Maximum rotation speed value.
          */
         [[nodiscard]] float rotationSpeed() const noexcept { return rotationSpeed_; }
 
         /**
          * @brief Returns the minimum movement speed threshold.
+         *
+         * @return Movement speed threshold below which movement stops.
          */
         [[nodiscard]] float movementSpeedThreshold() const noexcept { return movementSpeedThreshold_; }
 
         /**
          * @brief Returns the minimum rotation speed threshold.
+         *
+         * @return Rotation speed threshold below which rotation stops.
          */
         [[nodiscard]] float rotationSpeedThreshold() const noexcept { return rotationSpeedThreshold_; }
 
         /**
          * @brief Returns the movement acceleration in units per second squared.
+         *
+         * @return Movement acceleration value.
          */
         [[nodiscard]] float movementAcceleration() const noexcept { return movementAcceleration_; }
 
         /**
          * @brief Returns the maximum movement speed in units per second.
+         *
+         * @return Maximum movement speed value.
          */
         [[nodiscard]] float movementSpeed() const noexcept { return movementSpeed_; }
 
         /**
          * @brief Returns the rotation dampening factor.
+         *
+         * @return Exponential decay factor for rotation.
          */
         [[nodiscard]] float rotationDampening() const noexcept { return rotationDampening_; }
 
         /**
          * @brief Returns the movement dampening factor.
+         *
+         * @return Exponential decay factor for movement.
          */
         [[nodiscard]] float movementDampening() const noexcept { return movementDampening_; }
 
         /**
          * @brief Returns the current rotation angle in degrees.
+         *
+         * @return Current facing angle in degrees.
          */
         [[nodiscard]] float rotationAngle() const noexcept { return actualRotationAngle_; }
 
         /**
          * @brief Returns the current position from the SceneNodeComponent.
+         *
+         * @return Current world-space position, or zero vector if no SceneNodeComponent.
          */
         [[nodiscard]] helios::math::vec3f position() const noexcept {
             return sceneNodeComponent_ ? sceneNodeComponent_->translation() : helios::math::vec3f{0.0f, 0.0f, 0.0f};
@@ -372,36 +447,50 @@ export namespace helios::engine::game::components::physics {
 
         /**
          * @brief Sets the maximum rotation speed in degrees per second.
+         *
+         * @param value New rotation speed value.
          */
         void setRotationSpeed(float value) noexcept { rotationSpeed_ = value; }
 
         /**
          * @brief Sets the minimum movement speed threshold.
+         *
+         * @param value New threshold value.
          */
         void setMovementSpeedThreshold(float value) noexcept { movementSpeedThreshold_ = value; }
 
         /**
          * @brief Sets the minimum rotation speed threshold.
+         *
+         * @param value New threshold value.
          */
         void setRotationSpeedThreshold(float value) noexcept { rotationSpeedThreshold_ = value; }
 
         /**
          * @brief Sets the movement acceleration in units per second squared.
+         *
+         * @param value New acceleration value.
          */
         void setMovementAcceleration(float value) noexcept { movementAcceleration_ = value; }
 
         /**
          * @brief Sets the maximum movement speed in units per second.
+         *
+         * @param value New maximum speed value.
          */
         void setMovementSpeed(float value) noexcept { movementSpeed_ = value; }
 
         /**
          * @brief Sets the rotation dampening factor.
+         *
+         * @param value New dampening factor (exponential decay).
          */
         void setRotationDampening(float value) noexcept { rotationDampening_ = value; }
 
         /**
          * @brief Sets the movement dampening factor.
+         *
+         * @param value New dampening factor (exponential decay).
          */
         void setMovementDampening(float value) noexcept { movementDampening_ = value; }
 

@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1game_1_1System" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>helios::engine::game::System</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1game_1_1Updatable" prot="public" virt="non-virtual">helios::engine::game::Updatable</basecompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1game_1_1systems_1_1BulletPool" prot="public" virt="non-virtual">helios::engine::game::systems::BulletPool</derivedcompoundref>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1System_1ab575d815b362bc7bc2fdfe021632c83b" prot="protected" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">helios::engine::game::GameWorld</ref> *</type>
+        <definition>helios::engine::game::GameWorld* helios::engine::game::System::gameWorld_</definition>
+        <argsstring></argsstring>
+        <name>gameWorld_</name>
+        <qualifiedname>helios::engine::game::System::gameWorld_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Pointer to the <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref> this system belongs to. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Set by `onAdd()` when the system is registered with a <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref>. Non-owning pointer; valid for the lifetime of the system. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/System.ixx" line="48" column="41" bodyfile="include/helios/engine/game/System.ixx" bodystart="48" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1System_1a3abad1bebaa98c46f28105702c58b473" compoundref="System_8ixx" startline="66" endline="69">onAdd</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1BulletPool_1afedcf03d1c91774fde2dd9bf9ef8ff07" compoundref="BulletPool_8ixx" startline="180" endline="196">helios::engine::game::systems::BulletPool::onAdd</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1System_1aa4ed4f421d0b37eb63dbd23c25b889f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::engine::game::System::~System</definition>
+        <argsstring>()=default</argsstring>
+        <name>~System</name>
+        <qualifiedname>helios::engine::game::System::~System</qualifiedname>
+        <briefdescription>
+<para>Virtual destructor for proper cleanup of derived systems. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/System.ixx" line="55" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1System_1a3abad1bebaa98c46f28105702c58b473" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void helios::engine::game::System::onAdd</definition>
+        <argsstring>(helios::engine::game::GameWorld *gameWorld) noexcept</argsstring>
+        <name>onAdd</name>
+        <qualifiedname>helios::engine::game::System::onAdd</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1BulletPool_1afedcf03d1c91774fde2dd9bf9ef8ff07">onAdd</reimplementedby>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">helios::engine::game::GameWorld</ref> *</type>
+          <declname>gameWorld</declname>
+        </param>
+        <briefdescription>
+<para>Called when the system is added to a <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Override this method to perform initialization that requires access to the <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref> (e.g., querying the scene graph, registering event handlers).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref> this system is being added to. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/System.ixx" line="66" column="22" bodyfile="include/helios/engine/game/System.ixx" bodystart="66" bodyend="69"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1System_1ab575d815b362bc7bc2fdfe021632c83b" compoundref="System_8ixx" startline="48">gameWorld_</references>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1BulletPool_1afedcf03d1c91774fde2dd9bf9ef8ff07" compoundref="BulletPool_8ixx" startline="180" endline="196">helios::engine::game::systems::BulletPool::onAdd</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1System_1ac268567131ffdbd96e0ee29dc8717609" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::System::update</definition>
+        <argsstring>(helios::engine::game::UpdateContext &amp;updateContext) noexcept override=0</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::game::System::update</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1game_1_1Updatable_1a015e7f65d24ee77ba1f0ef21f17788bc">update</reimplements>
+        <reimplementedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1BulletPool_1a53232f67b91180cd0e711a2f012069f0">update</reimplementedby>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1game_1_1UpdateContext" kindref="compound">helios::engine::game::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Updates the system each frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The update context containing frame timing information. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/System.ixx" line="76" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Abstract base class for game systems. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Systems are global game logic processors that operate on the <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref> rather than individual GameObjects, ideal for cross-cutting concerns like physics simulation, collision detection, or object pooling.</para>
+<para>Systems are added to a <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref> and receive update calls each frame. The `onAdd()` callback provides access to the <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref> for initialization.</para>
+<para>Example usage: ```cpp class PhysicsSystem : public <ref refid="classhelios_1_1engine_1_1game_1_1System" kindref="compound">System</ref> { public: void <ref refid="classhelios_1_1engine_1_1game_1_1System_1ac268567131ffdbd96e0ee29dc8717609" kindref="member">update(UpdateContext&amp; ctx)</ref> noexcept override { // Apply physics to all rigid bodies } };</para>
+<para>gameWorld.addSystem(std::make_unique&lt;PhysicsSystem&gt;()); ``` </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>helios::engine::game::System</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1System"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::engine::game::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1Updatable"/>
+      </node>
+      <node id="3">
+        <label>helios::engine::game::systems::BulletPool</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1systems_1_1BulletPool"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>helios::engine::game::GameWorld</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1GameWorld"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>logger_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>scene_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>helios::engine::game::System</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1System"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>gameWorld_</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::engine::game::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1Updatable"/>
+      </node>
+      <node id="5">
+        <label>helios::scene::Scene</label>
+        <link refid="classhelios_1_1scene_1_1Scene"/>
+      </node>
+      <node id="4">
+        <label>helios::util::log::Logger</label>
+        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/game/System.ixx" line="38" column="5" bodyfile="include/helios/engine/game/System.ixx" bodystart="38" bodyend="78"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1game_1_1System_1ab575d815b362bc7bc2fdfe021632c83b" prot="protected" virt="non-virtual"><scope>helios::engine::game::System</scope><name>gameWorld_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1System_1a3abad1bebaa98c46f28105702c58b473" prot="public" virt="virtual"><scope>helios::engine::game::System</scope><name>onAdd</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Updatable_1a80ad1928d4b394f69860b47969541e34" prot="public" virt="non-virtual"><scope>helios::engine::game::System</scope><name>Updatable</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1System_1ac268567131ffdbd96e0ee29dc8717609" prot="public" virt="pure-virtual"><scope>helios::engine::game::System</scope><name>update</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1System_1aa4ed4f421d0b37eb63dbd23c25b889f8" prot="public" virt="virtual"><scope>helios::engine::game::System</scope><name>~System</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Updatable_1aac5760f908621631c4e7ac40f25e9361" prot="public" virt="virtual"><scope>helios::engine::game::System</scope><name>~Updatable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

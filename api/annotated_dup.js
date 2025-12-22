@@ -56,16 +56,41 @@ var annotated_dup =
       ] ],
       [ "engine", "namespacehelios_1_1engine.html", [
         [ "game", "namespacehelios_1_1engine_1_1game.html", [
+          [ "commands", "namespacehelios_1_1engine_1_1game_1_1commands.html", [
+            [ "Aim2DCommand", "classhelios_1_1engine_1_1game_1_1commands_1_1Aim2DCommand.html", "classhelios_1_1engine_1_1game_1_1commands_1_1Aim2DCommand" ],
+            [ "Move2DCommand", "classhelios_1_1engine_1_1game_1_1commands_1_1Move2DCommand.html", "classhelios_1_1engine_1_1game_1_1commands_1_1Move2DCommand" ],
+            [ "ShootCommand", "classhelios_1_1engine_1_1game_1_1commands_1_1ShootCommand.html", "classhelios_1_1engine_1_1game_1_1commands_1_1ShootCommand" ]
+          ] ],
+          [ "components", "namespacehelios_1_1engine_1_1game_1_1components.html", [
+            [ "gameplay", "namespacehelios_1_1engine_1_1game_1_1components_1_1gameplay.html", [
+              [ "Aim2DComponent", "classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent.html", "classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent" ],
+              [ "ShootComponent", "classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent.html", "classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent" ]
+            ] ],
+            [ "input", "namespacehelios_1_1engine_1_1game_1_1components_1_1input.html", [
+              [ "TwinStickInputComponent", "classhelios_1_1engine_1_1game_1_1components_1_1input_1_1TwinStickInputComponent.html", "classhelios_1_1engine_1_1game_1_1components_1_1input_1_1TwinStickInputComponent" ]
+            ] ],
+            [ "physics", "namespacehelios_1_1engine_1_1game_1_1components_1_1physics.html", [
+              [ "Move2DComponent", "classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html", "classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent" ]
+            ] ],
+            [ "scene", "namespacehelios_1_1engine_1_1game_1_1components_1_1scene.html", [
+              [ "SceneNodeComponent", "classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent.html", "classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent" ]
+            ] ]
+          ] ],
+          [ "systems", "namespacehelios_1_1engine_1_1game_1_1systems.html", [
+            [ "BulletPool", "classhelios_1_1engine_1_1game_1_1systems_1_1BulletPool.html", "classhelios_1_1engine_1_1game_1_1systems_1_1BulletPool" ]
+          ] ],
           [ "Command", "classhelios_1_1engine_1_1game_1_1Command.html", "classhelios_1_1engine_1_1game_1_1Command" ],
           [ "CommandBuffer", "classhelios_1_1engine_1_1game_1_1CommandBuffer.html", "classhelios_1_1engine_1_1game_1_1CommandBuffer" ],
+          [ "Component", "classhelios_1_1engine_1_1game_1_1Component.html", "classhelios_1_1engine_1_1game_1_1Component" ],
           [ "GameObject", "classhelios_1_1engine_1_1game_1_1GameObject.html", "classhelios_1_1engine_1_1game_1_1GameObject" ],
           [ "GameWorld", "classhelios_1_1engine_1_1game_1_1GameWorld.html", "classhelios_1_1engine_1_1game_1_1GameWorld" ],
-          [ "InputHandler", "classhelios_1_1engine_1_1game_1_1InputHandler.html", "classhelios_1_1engine_1_1game_1_1InputHandler" ],
-          [ "InputSnapshot", "classhelios_1_1engine_1_1game_1_1InputSnapshot.html", "classhelios_1_1engine_1_1game_1_1InputSnapshot" ]
+          [ "InputSnapshot", "classhelios_1_1engine_1_1game_1_1InputSnapshot.html", "classhelios_1_1engine_1_1game_1_1InputSnapshot" ],
+          [ "System", "classhelios_1_1engine_1_1game_1_1System.html", "classhelios_1_1engine_1_1game_1_1System" ],
+          [ "Updatable", "classhelios_1_1engine_1_1game_1_1Updatable.html", "classhelios_1_1engine_1_1game_1_1Updatable" ],
+          [ "UpdateContext", "structhelios_1_1engine_1_1game_1_1UpdateContext.html", "structhelios_1_1engine_1_1game_1_1UpdateContext" ]
         ] ],
         [ "FramePacer", "classhelios_1_1engine_1_1FramePacer.html", "classhelios_1_1engine_1_1FramePacer" ],
-        [ "FrameStats", "structhelios_1_1engine_1_1FrameStats.html", "structhelios_1_1engine_1_1FrameStats" ],
-        [ "Tickable", "classhelios_1_1engine_1_1Tickable.html", "classhelios_1_1engine_1_1Tickable" ]
+        [ "FrameStats", "structhelios_1_1engine_1_1FrameStats.html", "structhelios_1_1engine_1_1FrameStats" ]
       ] ],
       [ "event", "namespacehelios_1_1event.html", [
         [ "BasicEventManager", "classhelios_1_1event_1_1BasicEventManager.html", "classhelios_1_1event_1_1BasicEventManager" ],
@@ -98,6 +123,7 @@ var annotated_dup =
             [ "basic", "namespacehelios_1_1rendering_1_1asset_1_1shape_1_1basic.html", [
               [ "Circle", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Circle.html", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Circle" ],
               [ "Cube", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Cube.html", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Cube" ],
+              [ "Ellipse", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse.html", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse" ],
               [ "Grid", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Grid.html", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Grid" ],
               [ "Line", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Line.html", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Line" ],
               [ "Rectangle", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Rectangle.html", "structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Rectangle" ],
@@ -160,6 +186,7 @@ var annotated_dup =
         [ "time", "namespacehelios_1_1util_1_1time.html", [
           [ "Stopwatch", "classhelios_1_1util_1_1time_1_1Stopwatch.html", "classhelios_1_1util_1_1time_1_1Stopwatch" ]
         ] ],
+        [ "Colors", "structhelios_1_1util_1_1Colors.html", "structhelios_1_1util_1_1Colors" ],
         [ "Guid", "classhelios_1_1util_1_1Guid.html", "classhelios_1_1util_1_1Guid" ]
       ] ],
       [ "window", "namespacehelios_1_1window.html", [

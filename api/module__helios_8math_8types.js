@@ -50,6 +50,7 @@ var module__helios_8math_8types =
     [ "helios::math::vec4::vec4", "module__helios_8math_8types.html#a5b05dad91f30e5af5a58f4d9a8a69775", null ],
     [ "helios::math::vec4::vec4", "module__helios_8math_8types.html#a80329ce41bcee4317cae5b2d205c8c98", null ],
     [ "helios::math::vec4::vec4", "module__helios_8math_8types.html#a7ae260acbad904d6cafb2375976783b9", null ],
+    [ "helios::math::vec4::withW", "module__helios_8math_8types.html#a250e57af6777d4d36eade2e016bd6564", null ],
     [ "helios::math::vec4::operator[]", "module__helios_8math_8types.html#a6737f82dfb6d4b5afc3eee979715a500", null ],
     [ "helios::math::vec4::operator[]", "module__helios_8math_8types.html#aaa35ca824a53010bc2191cfa6a0ada9f", null ],
     [ "helios::math::vec4::toVec3", "module__helios_8math_8types.html#a056635c2dbac4b1c1d006727f08af80c", null ],
@@ -83,6 +84,9 @@ var module__helios_8math_8types =
     [ "helios::math::aabb::max", "module__helios_8math_8types.html#aa5836a6c13c4a5ddd421adb3a168970e", null ],
     [ "helios::math::aabb::getCenter", "module__helios_8math_8types.html#a885dcd6e532de6aacddc24256247e588", null ],
     [ "helios::math::aabb::getSize", "module__helios_8math_8types.html#ad9d08175f5cacc839bd28476cf1bc4e0", null ],
+    [ "helios::math::aabb::contains", "module__helios_8math_8types.html#ab2281d98a7cb28b46ce163d96a2f4469", null ],
+    [ "helios::math::aabb::translate", "module__helios_8math_8types.html#ab6aadb560a2c8ee5dd381592b653578b", null ],
     [ "helios::math::aabb::add", "module__helios_8math_8types.html#a92106c4efc1b1aae8466956903020665", null ],
-    [ "helios::math::aabb::transform", "module__helios_8math_8types.html#a22eaa32ee9d9c415e4d3ce5b9ddcec74", null ]
+    [ "helios::math::aabb::transform", "module__helios_8math_8types.html#a22eaa32ee9d9c415e4d3ce5b9ddcec74", null ],
+    [ "helios::math::operator+", "module__helios_8math_8types.html#aee9df9ba24371aefd6a84af803813f1e", null ]
 ];

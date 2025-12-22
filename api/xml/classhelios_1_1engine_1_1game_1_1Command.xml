@@ -2,6 +2,9 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classhelios_1_1engine_1_1game_1_1Command" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>helios::engine::game::Command</compoundname>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1game_1_1commands_1_1Aim2DCommand" prot="public" virt="non-virtual">helios::engine::game::commands::Aim2DCommand</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1game_1_1commands_1_1Move2DCommand" prot="public" virt="non-virtual">helios::engine::game::commands::Move2DCommand</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1game_1_1commands_1_1ShootCommand" prot="public" virt="non-virtual">helios::engine::game::commands::ShootCommand</derivedcompoundref>
     <sectiondef kind="public-func">
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1Command_1aa7a627acdae0a48a11770bd116db9f1e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -24,6 +27,9 @@
         <argsstring>(helios::engine::game::GameObject &amp;gameObject)=0</argsstring>
         <name>execute</name>
         <qualifiedname>helios::engine::game::Command::execute</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1game_1_1commands_1_1Aim2DCommand_1adcf8bbd3975dd917ebc77fa3ea20128a">execute</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1game_1_1commands_1_1Move2DCommand_1aa350d238ae20ca8089a7869b8860f903">execute</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1game_1_1commands_1_1ShootCommand_1a9e012933d5cf99796c46f677dcb7a151">execute</reimplementedby>
         <param>
           <type><ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">helios::engine::game::GameObject</ref> &amp;</type>
           <declname>gameObject</declname>
@@ -64,6 +70,30 @@
 </simplesect>
 </para>
     </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>helios::engine::game::Command</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1Command"/>
+      </node>
+      <node id="2">
+        <label>helios::engine::game::commands::Aim2DCommand</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1commands_1_1Aim2DCommand"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::game::commands::Move2DCommand</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1commands_1_1Move2DCommand"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>helios::engine::game::commands::ShootCommand</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1commands_1_1ShootCommand"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
     <location file="include/helios/engine/game/Command.ixx" line="43" column="5" bodyfile="include/helios/engine/game/Command.ixx" bodystart="43" bodyend="63"/>
     <listofallmembers>
       <member refid="classhelios_1_1engine_1_1game_1_1Command_1a9e7515d68b42e8bff683df15d4f95ab7" prot="public" virt="pure-virtual"><scope>helios::engine::game::Command</scope><name>execute</name></member>

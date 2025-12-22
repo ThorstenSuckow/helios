@@ -1,0 +1,233 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse" kind="struct" language="C++" prot="public">
+    <compoundname>helios::rendering::asset::shape::basic::Ellipse</compoundname>
+    <basecompoundref refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape" prot="public" virt="non-virtual">helios::rendering::asset::shape::Shape</basecompoundref>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse_1a21ef8a9a827f8f506c64a2a98b049eeb" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="structhelios_1_1rendering_1_1Vertex" kindref="compound">Vertex</ref> &gt;</type>
+        <definition>static std::vector&lt; Vertex &gt; helios::rendering::asset::shape::basic::Ellipse::generateVertices</definition>
+        <argsstring>(float radiusX, float radiusY, unsigned int segments)</argsstring>
+        <name>generateVertices</name>
+        <qualifiedname>helios::rendering::asset::shape::basic::Ellipse::generateVertices</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>radiusX</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>radiusY</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>segments</declname>
+        </param>
+        <briefdescription>
+<para>Dynamically creates the vertex list for an ellipse. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Generates one center vertex (Index 0) and &apos;segments&apos; vertices on the circumference.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>radiusX</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The semi-axis length along the X-axis. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>radiusY</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The semi-axis length along the Y-axis. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>segments</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of segments used to approximate the ellipse curve. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A vector of vertices defining the ellipse mesh. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/asset/shape/basic/Ellipse.ixx" line="45" column="28" bodyfile="include/helios/rendering/asset/shape/basic/Ellipse.ixx" bodystart="45" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse_1ac80f52b80b763cde4b392b46d572322b" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; unsigned int &gt;</type>
+        <definition>static std::vector&lt; unsigned int &gt; helios::rendering::asset::shape::basic::Ellipse::generateIndices</definition>
+        <argsstring>(unsigned int segments)</argsstring>
+        <name>generateIndices</name>
+        <qualifiedname>helios::rendering::asset::shape::basic::Ellipse::generateIndices</qualifiedname>
+        <param>
+          <type>unsigned int</type>
+          <declname>segments</declname>
+        </param>
+        <briefdescription>
+<para>Creates the index list for a <ref refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Triangle" kindref="compound">Triangle</ref> Fan (for GL_TRIANGLES). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Each triangle consists of (center, point_i, point_i+1).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>segments</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of segments used to build the ellipse. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A vector of indices defining the triangle fan. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/asset/shape/basic/Ellipse.ixx" line="88" column="28" bodyfile="include/helios/rendering/asset/shape/basic/Ellipse.ixx" bodystart="88" bodyend="102"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse_1acaf9134b8929a9153dfcc95dd65280fc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::rendering::asset::shape::basic::Ellipse::Ellipse</definition>
+        <argsstring>()</argsstring>
+        <name>Ellipse</name>
+        <qualifiedname>helios::rendering::asset::shape::basic::Ellipse::Ellipse</qualifiedname>
+        <briefdescription>
+<para>Creates a default ellipse (radiusX = 1.0, radiusY = 0.5, 64 segments). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/asset/shape/basic/Ellipse.ixx" line="108" column="9" bodyfile="include/helios/rendering/asset/shape/basic/Ellipse.ixx" bodystart="108" bodyend="108"/>
+        <references refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse_1acaf9134b8929a9153dfcc95dd65280fc" compoundref="Ellipse_8ixx" startline="108" endline="108">Ellipse</references>
+        <referencedby refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse_1acaf9134b8929a9153dfcc95dd65280fc" compoundref="Ellipse_8ixx" startline="108" endline="108">Ellipse</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse_1a0a00d877402b4a268fff6d4321c40c02" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::rendering::asset::shape::basic::Ellipse::Ellipse</definition>
+        <argsstring>(float radiusX, float radiusY, unsigned int segments)</argsstring>
+        <name>Ellipse</name>
+        <qualifiedname>helios::rendering::asset::shape::basic::Ellipse::Ellipse</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>radiusX</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>radiusY</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>segments</declname>
+        </param>
+        <briefdescription>
+<para>Creates an ellipse with specific radii and segment count. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>radiusX</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The semi-axis length along the X-axis. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>radiusY</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The semi-axis length along the Y-axis. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>segments</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of triangle segments that make up the ellipse. More segments result in a smoother curve. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/asset/shape/basic/Ellipse.ixx" line="118" column="18" bodyfile="include/helios/rendering/asset/shape/basic/Ellipse.ixx" bodystart="118" bodyend="122"/>
+        <references refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape_1a45b8025937ff78d5ca63ef3ea4b56d54" compoundref="Shape_8ixx" startline="45" endline="48">helios::rendering::asset::shape::Shape::Shape</references>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse_1a3ab7f5b2bfb1ec5c011efb555ad2582d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type><ref refid="namespacehelios_1_1rendering_1_1model_1_1config_1a13a7711e9718d01b8f09dd183c6777d5" kindref="member">helios::rendering::model::config::PrimitiveType</ref></type>
+        <definition>helios::rendering::model::config::PrimitiveType helios::rendering::asset::shape::basic::Ellipse::primitiveType</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>primitiveType</name>
+        <qualifiedname>helios::rendering::asset::shape::basic::Ellipse::primitiveType</qualifiedname>
+        <reimplements refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape_1a36e1f4334ec857edb0f0d5b2fb1758dc">primitiveType</reimplements>
+        <briefdescription>
+<para>Returns the primitive type used for rendering. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>PrimitiveType::Triangles for triangle-based rendering. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/rendering/asset/shape/basic/Ellipse.ixx" line="128" column="58" bodyfile="include/helios/rendering/asset/shape/basic/Ellipse.ixx" bodystart="128" bodyend="130"/>
+        <references refid="namespacehelios_1_1rendering_1_1model_1_1config_1a13a7711e9718d01b8f09dd183c6777d5a7ca66fdfaad3eb33fc65d7490178f856" compoundref="PrimitiveType_8ixx" startline="60">helios::rendering::model::config::Triangles</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Basic <ref refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse" kindref="compound">Ellipse</ref> <ref refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape" kindref="compound">Shape</ref> (2D, in XY plane). </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Generates a 2D ellipse mesh, centered at the origin on the XY plane (Z=0). An ellipse is defined by two radii: one along the X-axis (semi-major or semi-minor) and one along the Y-axis. When both radii are equal, the ellipse degenerates to a circle.</para>
+<para>The normals point in the positive Z direction. The indices are arranged as a <ref refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Triangle" kindref="compound">Triangle</ref> Fan (for GL_TRIANGLES). </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::rendering::asset::shape::Shape</label>
+        <link refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape"/>
+      </node>
+      <node id="1">
+        <label>helios::rendering::asset::shape::basic::Ellipse</label>
+        <link refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>helios::rendering::asset::shape::Shape</label>
+        <link refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape"/>
+      </node>
+      <node id="1">
+        <label>helios::rendering::asset::shape::basic::Ellipse</label>
+        <link refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/rendering/asset/shape/basic/Ellipse.ixx" line="32" column="5" bodyfile="include/helios/rendering/asset/shape/basic/Ellipse.ixx" bodystart="32" bodyend="131"/>
+    <listofallmembers>
+      <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse_1acaf9134b8929a9153dfcc95dd65280fc" prot="public" virt="non-virtual"><scope>helios::rendering::asset::shape::basic::Ellipse</scope><name>Ellipse</name></member>
+      <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse_1a0a00d877402b4a268fff6d4321c40c02" prot="public" virt="non-virtual"><scope>helios::rendering::asset::shape::basic::Ellipse</scope><name>Ellipse</name></member>
+      <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse_1ac80f52b80b763cde4b392b46d572322b" prot="private" virt="non-virtual"><scope>helios::rendering::asset::shape::basic::Ellipse</scope><name>generateIndices</name></member>
+      <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse_1a21ef8a9a827f8f506c64a2a98b049eeb" prot="private" virt="non-virtual"><scope>helios::rendering::asset::shape::basic::Ellipse</scope><name>generateVertices</name></member>
+      <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape_1af74c1c5bf7d0ae3eba004b8822fc2a9e" prot="public" virt="non-virtual"><scope>helios::rendering::asset::shape::basic::Ellipse</scope><name>indices</name></member>
+      <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse_1a3ab7f5b2bfb1ec5c011efb555ad2582d" prot="public" virt="virtual"><scope>helios::rendering::asset::shape::basic::Ellipse</scope><name>primitiveType</name></member>
+      <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape_1a45b8025937ff78d5ca63ef3ea4b56d54" prot="public" virt="non-virtual"><scope>helios::rendering::asset::shape::basic::Ellipse</scope><name>Shape</name></member>
+      <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape_1ac8d63a4a5a57fd9cac0d99881dcb29e8" prot="public" virt="non-virtual"><scope>helios::rendering::asset::shape::basic::Ellipse</scope><name>vertices</name></member>
+      <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1Shape_1aad16a718a0af0d74e3d6bfa97377b9bb" prot="public" virt="virtual"><scope>helios::rendering::asset::shape::basic::Ellipse</scope><name>~Shape</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

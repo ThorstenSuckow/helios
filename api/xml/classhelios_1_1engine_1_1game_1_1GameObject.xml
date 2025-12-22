@@ -1,25 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
-  <compounddef id="classhelios_1_1engine_1_1game_1_1GameObject" kind="class" language="C++" prot="public" abstract="yes">
+  <compounddef id="classhelios_1_1engine_1_1game_1_1GameObject" kind="class" language="C++" prot="public">
     <compoundname>helios::engine::game::GameObject</compoundname>
     <sectiondef kind="protected-attrib">
-      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1GameObject_1a0febb522d621d79ea03164f72bb1357a" prot="protected" static="no" mutable="no">
-        <type>const <ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
-        <definition>const helios::math::vec3f helios::engine::game::GameObject::canonicalSize_</definition>
-        <argsstring></argsstring>
-        <name>canonicalSize_</name>
-        <qualifiedname>helios::engine::game::GameObject::canonicalSize_</qualifiedname>
-        <initializer>{}</initializer>
-        <briefdescription>
-<para>Canonical size of the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Represents the default or intrinsic size of the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> in object space. This value is used as a reference for applying a scaling factor with <ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a51493ff0aabbc452e19d223927aae3f9" kindref="member">setSize()</ref>, ensuring the method operates on appropriate values as the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> represents its size in model space. </para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="61" column="35" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="61" bodyend="61"/>
-      </memberdef>
       <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1GameObject_1a8ccca9fdee32b72202b6b1cca51288c3" prot="protected" static="no" mutable="no">
         <type><ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref></type>
         <definition>helios::util::Guid helios::engine::game::GameObject::guid_</definition>
@@ -34,135 +17,62 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="69" column="28" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="69" bodyend="-1"/>
+        <location file="include/helios/engine/game/GameObject.ixx" line="48" column="28" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="48" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a56372781ae87e48521a7678634a43578" compoundref="GameObject_8ixx" startline="66" endline="66">GameObject</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1abf3cf53d3aa0c9b62da27d7934928168" compoundref="GameObject_8ixx" startline="145" endline="147">guid</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1GameObject_1a2453e79f258cf580d9ef54b7f87e60cc" prot="protected" static="no" mutable="no">
-        <type><ref refid="classhelios_1_1scene_1_1Transform" kindref="compound">helios::scene::Transform</ref> *</type>
-        <definition>helios::scene::Transform* helios::engine::game::GameObject::transform_</definition>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1GameObject_1a04c48c868e86b9f5c38ef0cf3176c828" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1game_1_1Component" kindref="compound">Component</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::unique_ptr&lt;Component&gt; &gt; helios::engine::game::GameObject::components_</definition>
         <argsstring></argsstring>
-        <name>transform_</name>
-        <qualifiedname>helios::engine::game::GameObject::transform_</qualifiedname>
+        <name>components_</name>
+        <qualifiedname>helios::engine::game::GameObject::components_</qualifiedname>
         <briefdescription>
-<para>Pointer to the SceneNode&apos;s transform component. </para>
+<para>List of components attached to this <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>. </para>
         </briefdescription>
         <detaileddescription>
-<para>This is a non-owning pointer. The <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> does not manage the lifetime of the SceneNode or its Transform. The pointer remains valid only as long as the associated SceneNode exists.</para>
-<para><simplesect kind="warning"><para>This pointer can become dangling if the SceneNode is destroyed before this <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>. Accessing a dangling pointer results in undefined behavior.</para>
-</simplesect>
-<xrefsect id="todo_1_todo000006"><xreftitle>Todo</xreftitle><xrefdescription><para>Implement notification mechanism to invalidate this pointer when the SceneNode is destroyed. Consider using observer pattern or std::weak_ptr to safely detect SceneNode destruction. </para>
-</xrefdescription></xrefsect></para>
+<para>Components are owned by the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> via std::unique_ptr. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="85" column="34" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="85" bodyend="-1"/>
+        <location file="include/helios/engine/game/GameObject.ixx" line="55" column="21" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="55" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6efd5ef390fc9b7b8468682659f5a1fb" compoundref="GameObject_8ixx" startline="82" endline="96">add</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a2306d52f0450467d64ef1ddcdf5448d2" compoundref="GameObject_8ixx" startline="107" endline="115">get</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1GameObject_1a649401ba653f983f1a7c8ae946ffeea1" prot="protected" static="no" mutable="no">
-        <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
-        <definition>helios::math::vec3f helios::engine::game::GameObject::velocity_</definition>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1GameObject_1a6a942f57a7de5c5e06d145c565e0cabd" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classhelios_1_1engine_1_1game_1_1Updatable" kindref="compound">Updatable</ref> * &gt;</type>
+        <definition>std::vector&lt;Updatable*&gt; helios::engine::game::GameObject::updatables_</definition>
         <argsstring></argsstring>
-        <name>velocity_</name>
-        <qualifiedname>helios::engine::game::GameObject::velocity_</qualifiedname>
-        <initializer>{}</initializer>
+        <name>updatables_</name>
+        <qualifiedname>helios::engine::game::GameObject::updatables_</qualifiedname>
         <briefdescription>
-<para>The current velocity-vector, if any. </para>
+<para>Cached list of components that implement the <ref refid="classhelios_1_1engine_1_1game_1_1Updatable" kindref="compound">Updatable</ref> interface. </para>
         </briefdescription>
         <detaileddescription>
+<para>This list is maintained for efficient iteration during the update phase. The pointers are non-owning references to elements within components_. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="90" column="29" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="90" bodyend="90"/>
-      </memberdef>
-      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1GameObject_1af8fa574e14bfd2c34d2729a2fdcd1cdf" prot="protected" static="no" mutable="no">
-        <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
-        <definition>helios::math::vec3f helios::engine::game::GameObject::position_</definition>
-        <argsstring></argsstring>
-        <name>position_</name>
-        <qualifiedname>helios::engine::game::GameObject::position_</qualifiedname>
-        <initializer>{}</initializer>
-        <briefdescription>
-<para>The current position-vector in local coordinates (model space). </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Represents the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>&apos;s position relative to its local/model space, consistent with the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1aeeb545eed2cd77b7832cae8ee127736b" kindref="member">position()</ref> accessor. </para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="98" column="29" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="98" bodyend="98"/>
-      </memberdef>
-      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1GameObject_1a15f634e8a4449b79fa7f423b6e9e0b15" prot="protected" static="no" mutable="no">
-        <type><ref refid="namespacehelios_1_1math_1aeab5c7e555a142f8f763a3317460d5c0" kindref="member">helios::math::vec2f</ref></type>
-        <definition>helios::math::vec2f helios::engine::game::GameObject::steeringInput_</definition>
-        <argsstring></argsstring>
-        <name>steeringInput_</name>
-        <qualifiedname>helios::engine::game::GameObject::steeringInput_</qualifiedname>
-        <initializer>{}</initializer>
-        <briefdescription>
-<para>The current steeringInput-vector, if any. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="103" column="29" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="103" bodyend="103"/>
-      </memberdef>
-      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1GameObject_1ab54ea2a72c7e6b107d71d3e07a0b1f2a" prot="protected" static="no" mutable="no">
-        <type>float</type>
-        <definition>float helios::engine::game::GameObject::throttle_</definition>
-        <argsstring></argsstring>
-        <name>throttle_</name>
-        <qualifiedname>helios::engine::game::GameObject::throttle_</qualifiedname>
-        <initializer>= 0.0f</initializer>
-        <briefdescription>
-<para>Normalized value for the throttle, if any. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="108" column="15" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="108" bodyend="-1"/>
+        <location file="include/helios/engine/game/GameObject.ixx" line="63" column="21" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="63" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6efd5ef390fc9b7b8468682659f5a1fb" compoundref="GameObject_8ixx" startline="82" endline="96">add</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a64afc8b3ae7ed69e9763d51169328af2" compoundref="GameObject_8ixx" startline="134" endline="138">update</referencedby>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObject_1ad2ffd483600955f8c93b905387d4e9dc" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObject_1a56372781ae87e48521a7678634a43578" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
         <definition>helios::engine::game::GameObject::GameObject</definition>
-        <argsstring>(helios::scene::SceneNode *sceneNode)</argsstring>
+        <argsstring>()</argsstring>
         <name>GameObject</name>
         <qualifiedname>helios::engine::game::GameObject::GameObject</qualifiedname>
-        <param>
-          <type><ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">helios::scene::SceneNode</ref> *</type>
-          <declname>sceneNode</declname>
-        </param>
         <briefdescription>
-<para>Constructs a <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> associated with a SceneNode. </para>
         </briefdescription>
         <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>sceneNode</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Pointer to the SceneNode this <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> wraps. Must not be null.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="pre"><para>sceneNode != nullptr</para>
-</simplesect>
-<simplesect kind="note"><para>The <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> does NOT take ownership of the SceneNode. The caller is responsible for ensuring the SceneNode outlives this <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>. </para>
-</simplesect>
-<simplesect kind="note"><para>A unique Guid is automatically generated during construction.</para>
-</simplesect>
-<simplesect kind="warning"><para>Passing a null sceneNode will result in undefined behavior when accessing transform methods. In debug builds, this should trigger an assertion. </para>
-</simplesect>
-</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="126" column="18"/>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a44d975fd81970a7f23dd2f58604d03d9">setRotation</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a5021f749136ead897d28c06e0769085a">setScale</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a51493ff0aabbc452e19d223927aae3f9">setSize</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a0f8f05fab17730b8ca40520fbde14c2c">setTranslation</referencedby>
+        <location file="include/helios/engine/game/GameObject.ixx" line="66" column="9" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="66" bodyend="66"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1a8ccca9fdee32b72202b6b1cca51288c3" compoundref="GameObject_8ixx" startline="48">guid_</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObject_1ab15ff967c8bf14b0d4fbece6cb7d38e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -171,419 +81,226 @@
         <name>~GameObject</name>
         <qualifiedname>helios::engine::game::GameObject::~GameObject</qualifiedname>
         <briefdescription>
-<para>Virtual destructor to ensure proper cleanup of derived classes. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="131" column="17"/>
+        <location file="include/helios/engine/game/GameObject.ixx" line="68" column="17"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObject_1a51493ff0aabbc452e19d223927aae3f9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1ad2ffd483600955f8c93b905387d4e9dc" kindref="member">GameObject</ref> &amp;</type>
-        <definition>GameObject &amp; helios::engine::game::GameObject::setSize</definition>
-        <argsstring>(float width, float height, float depth, helios::core::units::Unit unit=helios::core::units::Unit::Meter) noexcept</argsstring>
-        <name>setSize</name>
-        <qualifiedname>helios::engine::game::GameObject::setSize</qualifiedname>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObject_1a6efd5ef390fc9b7b8468682659f5a1fb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>T &amp;</type>
+        <definition>T &amp; helios::engine::game::GameObject::add</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>add</name>
+        <qualifiedname>helios::engine::game::GameObject::add</qualifiedname>
         <param>
-          <type>float</type>
-          <declname>width</declname>
-        </param>
-        <param>
-          <type>float</type>
-          <declname>height</declname>
-        </param>
-        <param>
-          <type>float</type>
-          <declname>depth</declname>
-        </param>
-        <param>
-          <type><ref refid="namespacehelios_1_1core_1_1units_1a13b5c00c42b03ebe1d85cd575f346e55" kindref="member">helios::core::units::Unit</ref></type>
-          <declname>unit</declname>
-          <defval><ref refid="namespacehelios_1_1core_1_1units_1a13b5c00c42b03ebe1d85cd575f346e55a17c9c40b9db5a0983d1075a012c1f90a" kindref="member">helios::core::units::Unit::Meter</ref></defval>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
         </param>
         <briefdescription>
-<para>Sets the size of the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> in the game world. </para>
+<para>Adds a new component of type T to the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>. </para>
         </briefdescription>
         <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
+<para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
-<parametername>width</parametername>
+<parametername>T</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The width of the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>, specified in the given unit. </para>
+<para>The type of component to add. Must derive from <ref refid="classhelios_1_1engine_1_1game_1_1Component" kindref="compound">Component</ref>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>height</parametername>
+<parametername>Args</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The height of the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>, specified in the given unit. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>depth</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The depth of the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>, specified in the given unit. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>unit</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The unit of measurement for the size (default is meters).</para>
+<para>Argument types for the component&apos;s constructor. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>Reference to this <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> for method chaining.</para>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Arguments forwarded to the component&apos;s constructor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to the newly created component.</para>
 </simplesect>
-<simplesect kind="note"><para>The size is applied to the underlying SceneNode&apos;s transform.</para>
+The component is created, attached to this <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> (onAttach is called), and if it implements <ref refid="classhelios_1_1engine_1_1game_1_1Updatable" kindref="compound">Updatable</ref>, it is added to the update list. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/GameObject.ixx" line="82" column="11" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="82" bodyend="96"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1a04c48c868e86b9f5c38ef0cf3176c828" compoundref="GameObject_8ixx" startline="55">components_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6a942f57a7de5c5e06d145c565e0cabd" compoundref="GameObject_8ixx" startline="63">updatables_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObject_1a2306d52f0450467d64ef1ddcdf5448d2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * helios::engine::game::GameObject::get</definition>
+        <argsstring>() const</argsstring>
+        <name>get</name>
+        <qualifiedname>helios::engine::game::GameObject::get</qualifiedname>
+        <briefdescription>
+<para>Retrieves a component of type T. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of component to retrieve. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the component if found, nullptr otherwise.</para>
 </simplesect>
-<simplesect kind="warning"><para>If the associated SceneNode is destroyed, calling this method will result in undefined behavior. </para>
+Performs a linear search through the components. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/GameObject.ixx" line="107" column="11" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="107" bodyend="115"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1a04c48c868e86b9f5c38ef0cf3176c828" compoundref="GameObject_8ixx" startline="55">components_</references>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1commands_1_1Aim2DCommand_1adcf8bbd3975dd917ebc77fa3ea20128a" compoundref="Aim2DCommand_8ixx" startline="64" endline="72">helios::engine::game::commands::Aim2DCommand::execute</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1commands_1_1Move2DCommand_1aa350d238ae20ca8089a7869b8860f903" compoundref="Move2DCommand_8ixx" startline="63" endline="71">helios::engine::game::commands::Move2DCommand::execute</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1commands_1_1ShootCommand_1a9e012933d5cf99796c46f677dcb7a151" compoundref="ShootCommand_8ixx" startline="55" endline="63">helios::engine::game::commands::ShootCommand::execute</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a75ba7876058a260289f28b39c6fce25a" compoundref="GameObject_8ixx" startline="125" endline="127">has</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObject_1a75ba7876058a260289f28b39c6fce25a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool helios::engine::game::GameObject::has</definition>
+        <argsstring>() const</argsstring>
+        <name>has</name>
+        <qualifiedname>helios::engine::game::GameObject::has</qualifiedname>
+        <briefdescription>
+<para>Checks if the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> has a component of type T. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of component to check for. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the component exists, false otherwise. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="149" column="20"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1ad2ffd483600955f8c93b905387d4e9dc">GameObject</references>
-        <references refid="namespacehelios_1_1core_1_1units_1a13b5c00c42b03ebe1d85cd575f346e55a17c9c40b9db5a0983d1075a012c1f90a" compoundref="units_8ixx" startline="23">helios::core::units::Meter</references>
+        <location file="include/helios/engine/game/GameObject.ixx" line="125" column="15" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="125" bodyend="127"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1a2306d52f0450467d64ef1ddcdf5448d2" compoundref="GameObject_8ixx" startline="107" endline="115">get</references>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObject_1aeeb545eed2cd77b7832cae8ee127736b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>const <ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref> &amp;</type>
-        <definition>const helios::math::vec3f &amp; helios::engine::game::GameObject::position</definition>
-        <argsstring>() const noexcept</argsstring>
-        <name>position</name>
-        <qualifiedname>helios::engine::game::GameObject::position</qualifiedname>
-        <briefdescription>
-<para>Returns a ref to the current position of the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> in local coordinates. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="return"><para>The position vector in model space (local). </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="156" column="36"/>
-      </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObject_1ae44dfc28c7e1470f131efa93cc80df9a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>const <ref refid="namespacehelios_1_1math_1aeab5c7e555a142f8f763a3317460d5c0" kindref="member">helios::math::vec2f</ref> &amp;</type>
-        <definition>const helios::math::vec2f &amp; helios::engine::game::GameObject::steeringInput</definition>
-        <argsstring>() const noexcept</argsstring>
-        <name>steeringInput</name>
-        <qualifiedname>helios::engine::game::GameObject::steeringInput</qualifiedname>
-        <briefdescription>
-<para>Returns a const ref to the current steering input vector. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="return"><para>The normalized direction vector representing input from controls.</para>
-</simplesect>
-This vector indicates the desired movement direction as provided by the player or AI controller. A zero vector indicates no input. </para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="166" column="36"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1ae44dfc28c7e1470f131efa93cc80df9a">steeringInput</references>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1ae44dfc28c7e1470f131efa93cc80df9a">steeringInput</referencedby>
-      </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObject_1a9cb553788b9d9bcb1bc6eed716017d70" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>float</type>
-        <definition>float helios::engine::game::GameObject::throttle</definition>
-        <argsstring>() const noexcept</argsstring>
-        <name>throttle</name>
-        <qualifiedname>helios::engine::game::GameObject::throttle</qualifiedname>
-        <briefdescription>
-<para>Returns the current throttle value. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="return"><para>A normalized value between 0.0 (idle) and 1.0 (full throttle).</para>
-</simplesect>
-Represents the intensity of the movement input, typically derived from analog stick magnitude or key press duration. </para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="176" column="16"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1a9cb553788b9d9bcb1bc6eed716017d70">throttle</references>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a9cb553788b9d9bcb1bc6eed716017d70">throttle</referencedby>
-      </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObject_1af3778719abf1b7ecaf231245e4e67613" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>const <ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref> &amp;</type>
-        <definition>const helios::math::vec3f &amp; helios::engine::game::GameObject::velocity</definition>
-        <argsstring>() const noexcept</argsstring>
-        <name>velocity</name>
-        <qualifiedname>helios::engine::game::GameObject::velocity</qualifiedname>
-        <briefdescription>
-<para>Returns a const ref to the current velocity vector. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="return"><para>The velocity vector in units per second.</para>
-</simplesect>
-Represents the current movement direction and speed of the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> in world space. </para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="186" column="36"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1af3778719abf1b7ecaf231245e4e67613">velocity</references>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1af3778719abf1b7ecaf231245e4e67613">velocity</referencedby>
-      </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObject_1aa1596799a659107e15c10b9310868dcd" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
-        <type>float</type>
-        <definition>virtual float helios::engine::game::GameObject::speedRatio</definition>
-        <argsstring>() const noexcept</argsstring>
-        <name>speedRatio</name>
-        <qualifiedname>helios::engine::game::GameObject::speedRatio</qualifiedname>
-        <briefdescription>
-<para>Returns the current speed as a ratio of maximum speed. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="return"><para>A value between 0.0 (stationary) and 1.0 (maximum speed).</para>
-</simplesect>
-This ratio can be used for UI elements (e.g., speedometer), audio effects (e.g., engine pitch), or visual effects that scale with velocity. Derived classes should override this method to provide entity-specific speed calculations. </para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="198" column="24"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1aa1596799a659107e15c10b9310868dcd">speedRatio</references>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1aa1596799a659107e15c10b9310868dcd">speedRatio</referencedby>
-      </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObject_1a5d0298e63e5328fe22c73eb2b6e604e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObject_1a64afc8b3ae7ed69e9763d51169328af2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
-        <definition>virtual void helios::engine::game::GameObject::update</definition>
-        <argsstring>(float deltaTime)=0</argsstring>
+        <definition>void helios::engine::game::GameObject::update</definition>
+        <argsstring>(helios::engine::game::UpdateContext &amp;updateContext)</argsstring>
         <name>update</name>
         <qualifiedname>helios::engine::game::GameObject::update</qualifiedname>
         <param>
-          <type>float</type>
-          <declname>deltaTime</declname>
+          <type><ref refid="structhelios_1_1engine_1_1game_1_1UpdateContext" kindref="compound">helios::engine::game::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
         </param>
         <briefdescription>
-<para>Updates the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> state for the current frame. </para>
+<para>Updates all updatable components attached to this <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>deltaTime</parametername>
+<parametername>updateContext</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Time elapsed since the last frame, in seconds.</para>
+<para>Context containing frame delta time and other update data. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="note"><para>Derived classes must implement this method to define frame-by-frame behavior such as physics updates, animation, AI logic, or other time-dependent state changes. </para>
-</simplesect>
-<simplesect kind="note"><para>Called once per frame by the <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref> during its update cycle. </para>
-</simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="209" column="22"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1a5d0298e63e5328fe22c73eb2b6e604e8">update</references>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a5d0298e63e5328fe22c73eb2b6e604e8">update</referencedby>
+        <location file="include/helios/engine/game/GameObject.ixx" line="134" column="14" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="134" bodyend="138"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6a942f57a7de5c5e06d145c565e0cabd" compoundref="GameObject_8ixx" startline="63">updatables_</references>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObject_1abf3cf53d3aa0c9b62da27d7934928168" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObject_1abf3cf53d3aa0c9b62da27d7934928168" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref> &amp;</type>
         <definition>const helios::util::Guid &amp; helios::engine::game::GameObject::guid</definition>
         <argsstring>() const noexcept</argsstring>
         <name>guid</name>
         <qualifiedname>helios::engine::game::GameObject::guid</qualifiedname>
         <briefdescription>
-<para>Returns the unique identifier of this <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>. </para>
+<para>Returns the unique identifier for this <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>Const reference to the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>&apos;s Guid.</para>
-</simplesect>
-<simplesect kind="note"><para>The Guid is generated during construction and never changes. </para>
+<para><simplesect kind="return"><para>Const reference to the Guid, valid for the lifetime of this object. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="218" column="35"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1abf3cf53d3aa0c9b62da27d7934928168">guid</references>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1abf3cf53d3aa0c9b62da27d7934928168">guid</referencedby>
-      </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObject_1a5021f749136ead897d28c06e0769085a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1ad2ffd483600955f8c93b905387d4e9dc" kindref="member">GameObject</ref> &amp;</type>
-        <definition>GameObject &amp; helios::engine::game::GameObject::setScale</definition>
-        <argsstring>(const helios::math::vec3f &amp;scale) noexcept</argsstring>
-        <name>setScale</name>
-        <qualifiedname>helios::engine::game::GameObject::setScale</qualifiedname>
-        <param>
-          <type>const <ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref> &amp;</type>
-          <declname>scale</declname>
-        </param>
-        <briefdescription>
-<para>Applies a scaling transformation to the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>scale</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The scale vector to apply (x, y, z components).</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>Reference to this <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> for method chaining.</para>
-</simplesect>
-<simplesect kind="note"><para>This modifies the underlying SceneNode&apos;s local transform.</para>
-</simplesect>
-<simplesect kind="warning"><para>If the SceneNode has been destroyed, this will cause undefined behavior. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="231" column="20"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1ad2ffd483600955f8c93b905387d4e9dc">GameObject</references>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1a5021f749136ead897d28c06e0769085a">setScale</references>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a5021f749136ead897d28c06e0769085a">setScale</referencedby>
-      </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObject_1a44d975fd81970a7f23dd2f58604d03d9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1ad2ffd483600955f8c93b905387d4e9dc" kindref="member">GameObject</ref> &amp;</type>
-        <definition>GameObject &amp; helios::engine::game::GameObject::setRotation</definition>
-        <argsstring>(const helios::math::mat4f &amp;rotation) noexcept</argsstring>
-        <name>setRotation</name>
-        <qualifiedname>helios::engine::game::GameObject::setRotation</qualifiedname>
-        <param>
-          <type>const <ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref> &amp;</type>
-          <declname>rotation</declname>
-        </param>
-        <briefdescription>
-<para>Applies a rotation transformation to the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>rotation</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The rotation matrix to apply.</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>Reference to this <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> for method chaining.</para>
-</simplesect>
-<simplesect kind="note"><para>This modifies the underlying SceneNode&apos;s local transform.</para>
-</simplesect>
-<simplesect kind="warning"><para>If the SceneNode has been destroyed, this will cause undefined behavior. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="244" column="20"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1ad2ffd483600955f8c93b905387d4e9dc">GameObject</references>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1a44d975fd81970a7f23dd2f58604d03d9">setRotation</references>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a44d975fd81970a7f23dd2f58604d03d9">setRotation</referencedby>
-      </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObject_1a0f8f05fab17730b8ca40520fbde14c2c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1ad2ffd483600955f8c93b905387d4e9dc" kindref="member">GameObject</ref> &amp;</type>
-        <definition>GameObject &amp; helios::engine::game::GameObject::setTranslation</definition>
-        <argsstring>(const helios::math::vec3f &amp;translation) noexcept</argsstring>
-        <name>setTranslation</name>
-        <qualifiedname>helios::engine::game::GameObject::setTranslation</qualifiedname>
-        <param>
-          <type>const <ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref> &amp;</type>
-          <declname>translation</declname>
-        </param>
-        <briefdescription>
-<para>Applies a translation transformation to the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>translation</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The translation vector to apply (x, y, z components).</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>Reference to this <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> for method chaining.</para>
-</simplesect>
-<simplesect kind="note"><para>This modifies the underlying SceneNode&apos;s local transform.</para>
-</simplesect>
-<simplesect kind="warning"><para>If the SceneNode has been destroyed, this will cause undefined behavior. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="257" column="20"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1ad2ffd483600955f8c93b905387d4e9dc">GameObject</references>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1a0f8f05fab17730b8ca40520fbde14c2c">setTranslation</references>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a0f8f05fab17730b8ca40520fbde14c2c">setTranslation</referencedby>
+        <location file="include/helios/engine/game/GameObject.ixx" line="145" column="35" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="145" bodyend="147"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1a8ccca9fdee32b72202b6b1cca51288c3" compoundref="GameObject_8ixx" startline="48">guid_</references>
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>Base class representing an interactive game entity in the game world. </para>
+<para>Base class for interactive game entities using a component-based architecture. </para>
     </briefdescription>
     <detaileddescription>
-<para>The `GameObject` provides a game-logic-level abstraction over a `SceneNode`. It serves as the primary building block for game-specific entities like players or enemies, designed to be subclassed to add further behavior. Each `GameObject` has a unique `Guid` for easy identification and provides convenient methods for manipulating the transform of its underlying `SceneNode`. It also acts as the target for `Command` execution.</para>
-<para>Example usage: ```cpp class Player : public <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">helios::engine::game::GameObject</ref> { public: using <ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1ad2ffd483600955f8c93b905387d4e9dc" kindref="member">GameObject::GameObject</ref>;</para>
-<para>void jump() { setTranslation({0.0f, 5.0f, 0.0f}); } };</para>
-<para>auto sceneNode = std::make_shared&lt;helios::scene::SceneNode&gt;(); auto player = std::make_unique&lt;Player&gt;(sceneNode.get()); player-&gt;setTranslation({1.0f, 0.0f, 0.0f}); ```</para>
-<para><simplesect kind="warning"><para>The <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> does NOT own the SceneNode. The caller must ensure the SceneNode outlives the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>. If the SceneNode is destroyed while the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> is still alive, all transform operations will result in undefined behavior.</para>
-</simplesect>
-<xrefsect id="todo_1_todo000005"><xreftitle>Todo</xreftitle><xrefdescription><para>Implement observer pattern or weak_ptr to detect SceneNode destruction and invalidate the transform pointer to prevent dangling pointer issues. </para>
-</xrefdescription></xrefsect></para>
+<para>A <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> is a container for <ref refid="classhelios_1_1engine_1_1game_1_1Component" kindref="compound">Component</ref> instances that define its behavior. Each <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> has a unique Guid for identification in the <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref> and supports per-frame updates for components implementing the <ref refid="classhelios_1_1engine_1_1game_1_1Updatable" kindref="compound">Updatable</ref> interface.</para>
+<para>GameObjects are typically owned by a <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref> and should be created using std::make_unique before being added to the world.</para>
+<para>Example usage: ```cpp auto entity = std::make_unique&lt;helios::engine::game::GameObject&gt;(); entity-&gt;add&lt;SceneNodeComponent&gt;(sceneNode); entity-&gt;<ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6efd5ef390fc9b7b8468682659f5a1fb" kindref="member">add&lt;Move2DComponent&gt;()</ref>;</para>
+<para>auto* ptr = world.addGameObject(std::move(entity)); ``` </para>
     </detaileddescription>
     <collaborationgraph>
       <node id="1">
         <label>helios::engine::game::GameObject</label>
         <link refid="classhelios_1_1engine_1_1game_1_1GameObject"/>
         <childnode refid="2" relation="usage">
-          <edgelabel>canonicalSize_</edgelabel>
-        </childnode>
-        <childnode refid="3" relation="usage">
           <edgelabel>guid_</edgelabel>
-        </childnode>
-        <childnode refid="4" relation="usage">
-          <edgelabel>transform_</edgelabel>
         </childnode>
       </node>
       <node id="2">
-        <label>helios::math::vec3&lt; float &gt;</label>
-        <link refid="structhelios_1_1math_1_1vec3"/>
-      </node>
-      <node id="4">
-        <label>helios::scene::Transform</label>
-        <link refid="classhelios_1_1scene_1_1Transform"/>
-      </node>
-      <node id="3">
         <label>helios::util::Guid</label>
         <link refid="classhelios_1_1util_1_1Guid"/>
       </node>
     </collaborationgraph>
-    <location file="include/helios/engine/game/GameObject.ixx" line="49" column="5" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="49" bodyend="258"/>
+    <location file="include/helios/engine/game/GameObject.ixx" line="39" column="5" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="39" bodyend="148"/>
     <listofallmembers>
-      <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a0febb522d621d79ea03164f72bb1357a" prot="protected" virt="non-virtual"><scope>helios::engine::game::GameObject</scope><name>canonicalSize_</name></member>
-      <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1ad2ffd483600955f8c93b905387d4e9dc" prot="public" virt="non-virtual"><scope>helios::engine::game::GameObject</scope><name>GameObject</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6efd5ef390fc9b7b8468682659f5a1fb" prot="public" virt="non-virtual"><scope>helios::engine::game::GameObject</scope><name>add</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a04c48c868e86b9f5c38ef0cf3176c828" prot="protected" virt="non-virtual"><scope>helios::engine::game::GameObject</scope><name>components_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a56372781ae87e48521a7678634a43578" prot="public" virt="non-virtual"><scope>helios::engine::game::GameObject</scope><name>GameObject</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a2306d52f0450467d64ef1ddcdf5448d2" prot="public" virt="non-virtual"><scope>helios::engine::game::GameObject</scope><name>get</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1abf3cf53d3aa0c9b62da27d7934928168" prot="public" virt="non-virtual"><scope>helios::engine::game::GameObject</scope><name>guid</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a8ccca9fdee32b72202b6b1cca51288c3" prot="protected" virt="non-virtual"><scope>helios::engine::game::GameObject</scope><name>guid_</name></member>
-      <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1aeeb545eed2cd77b7832cae8ee127736b" prot="public" virt="non-virtual"><scope>helios::engine::game::GameObject</scope><name>position</name></member>
-      <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1af8fa574e14bfd2c34d2729a2fdcd1cdf" prot="protected" virt="non-virtual"><scope>helios::engine::game::GameObject</scope><name>position_</name></member>
-      <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a44d975fd81970a7f23dd2f58604d03d9" prot="public" virt="non-virtual"><scope>helios::engine::game::GameObject</scope><name>setRotation</name></member>
-      <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a5021f749136ead897d28c06e0769085a" prot="public" virt="non-virtual"><scope>helios::engine::game::GameObject</scope><name>setScale</name></member>
-      <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a51493ff0aabbc452e19d223927aae3f9" prot="public" virt="non-virtual"><scope>helios::engine::game::GameObject</scope><name>setSize</name></member>
-      <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a0f8f05fab17730b8ca40520fbde14c2c" prot="public" virt="non-virtual"><scope>helios::engine::game::GameObject</scope><name>setTranslation</name></member>
-      <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1aa1596799a659107e15c10b9310868dcd" prot="public" virt="virtual"><scope>helios::engine::game::GameObject</scope><name>speedRatio</name></member>
-      <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1ae44dfc28c7e1470f131efa93cc80df9a" prot="public" virt="non-virtual"><scope>helios::engine::game::GameObject</scope><name>steeringInput</name></member>
-      <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a15f634e8a4449b79fa7f423b6e9e0b15" prot="protected" virt="non-virtual"><scope>helios::engine::game::GameObject</scope><name>steeringInput_</name></member>
-      <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a9cb553788b9d9bcb1bc6eed716017d70" prot="public" virt="non-virtual"><scope>helios::engine::game::GameObject</scope><name>throttle</name></member>
-      <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1ab54ea2a72c7e6b107d71d3e07a0b1f2a" prot="protected" virt="non-virtual"><scope>helios::engine::game::GameObject</scope><name>throttle_</name></member>
-      <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a2453e79f258cf580d9ef54b7f87e60cc" prot="protected" virt="non-virtual"><scope>helios::engine::game::GameObject</scope><name>transform_</name></member>
-      <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a5d0298e63e5328fe22c73eb2b6e604e8" prot="public" virt="pure-virtual"><scope>helios::engine::game::GameObject</scope><name>update</name></member>
-      <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1af3778719abf1b7ecaf231245e4e67613" prot="public" virt="non-virtual"><scope>helios::engine::game::GameObject</scope><name>velocity</name></member>
-      <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a649401ba653f983f1a7c8ae946ffeea1" prot="protected" virt="non-virtual"><scope>helios::engine::game::GameObject</scope><name>velocity_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a75ba7876058a260289f28b39c6fce25a" prot="public" virt="non-virtual"><scope>helios::engine::game::GameObject</scope><name>has</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6a942f57a7de5c5e06d145c565e0cabd" prot="protected" virt="non-virtual"><scope>helios::engine::game::GameObject</scope><name>updatables_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a64afc8b3ae7ed69e9763d51169328af2" prot="public" virt="non-virtual"><scope>helios::engine::game::GameObject</scope><name>update</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1ab15ff967c8bf14b0d4fbece6cb7d38e4" prot="public" virt="virtual"><scope>helios::engine::game::GameObject</scope><name>~GameObject</name></member>
     </listofallmembers>
   </compounddef>

@@ -1,0 +1,477 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::game::components::gameplay::ShootComponent</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1game_1_1Component" prot="public" virt="non-virtual">helios::engine::game::Component</basecompoundref>
+    <basecompoundref refid="classhelios_1_1engine_1_1game_1_1Updatable" prot="public" virt="non-virtual">helios::engine::game::Updatable</basecompoundref>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a8d2b2bb9128045b171e48fffcca0c4b7" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::gameplay::ShootComponent::intensity_</definition>
+        <argsstring></argsstring>
+        <name>intensity_</name>
+        <qualifiedname>helios::engine::game::components::gameplay::ShootComponent::intensity_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Current fire intensity (0.0 to 1.0). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Set by <ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a4a535fee3dd77c44c3043c4b010d1b69" kindref="member">shoot()</ref> and cleared when intensity is zero. Controls whether projectiles are spawned during <ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1afba2f37150b83cc00ddd065697884711" kindref="member">update()</ref>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/gameplay/ShootComponent.ixx" line="65" column="15" bodyfile="include/helios/engine/game/components/gameplay/ShootComponent.ixx" bodystart="65" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1ad0720ba0447d3b293c5aed0e378bef29" compoundref="ShootComponent_8ixx" startline="178" endline="180">intensity</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a4a535fee3dd77c44c3043c4b010d1b69" compoundref="ShootComponent_8ixx" startline="130" endline="137">shoot</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1afba2f37150b83cc00ddd065697884711" compoundref="ShootComponent_8ixx" startline="148" endline="170">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1af48a875fc4cfba8f6eaec96d714bdbda" prot="protected" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent" kindref="compound">helios::engine::game::components::gameplay::Aim2DComponent</ref> *</type>
+        <definition>helios::engine::game::components::gameplay::Aim2DComponent* helios::engine::game::components::gameplay::ShootComponent::aimComponent_</definition>
+        <argsstring></argsstring>
+        <name>aimComponent_</name>
+        <qualifiedname>helios::engine::game::components::gameplay::ShootComponent::aimComponent_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Pointer to the aim component for direction. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Set during <ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a982f9dee44c71d5b368daeeece71e2af" kindref="member">onAttach()</ref>. Must not be null when shooting. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/gameplay/ShootComponent.ixx" line="72" column="68" bodyfile="include/helios/engine/game/components/gameplay/ShootComponent.ixx" bodystart="72" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a982f9dee44c71d5b368daeeece71e2af" compoundref="ShootComponent_8ixx" startline="113" endline="120">onAttach</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a4a535fee3dd77c44c3043c4b010d1b69" compoundref="ShootComponent_8ixx" startline="130" endline="137">shoot</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1afba2f37150b83cc00ddd065697884711" compoundref="ShootComponent_8ixx" startline="148" endline="170">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a03477c621a0057c2d5a1fce21f977702" prot="protected" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent" kindref="compound">helios::engine::game::components::scene::SceneNodeComponent</ref> *</type>
+        <definition>helios::engine::game::components::scene::SceneNodeComponent* helios::engine::game::components::gameplay::ShootComponent::sceneNodeComponent_</definition>
+        <argsstring></argsstring>
+        <name>sceneNodeComponent_</name>
+        <qualifiedname>helios::engine::game::components::gameplay::ShootComponent::sceneNodeComponent_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Pointer to the scene node component for spawn position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Set during <ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a982f9dee44c71d5b368daeeece71e2af" kindref="member">onAttach()</ref>. Must not be null when shooting. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/gameplay/ShootComponent.ixx" line="79" column="69" bodyfile="include/helios/engine/game/components/gameplay/ShootComponent.ixx" bodystart="79" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a982f9dee44c71d5b368daeeece71e2af" compoundref="ShootComponent_8ixx" startline="113" endline="120">onAttach</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1afba2f37150b83cc00ddd065697884711" compoundref="ShootComponent_8ixx" startline="148" endline="170">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1af2d88d77ead3ad9f358419f9d41df6da" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::gameplay::ShootComponent::cooldownDelta_</definition>
+        <argsstring></argsstring>
+        <name>cooldownDelta_</name>
+        <qualifiedname>helios::engine::game::components::gameplay::ShootComponent::cooldownDelta_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Cooldown timer for fire rate limiting, in seconds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If cooldownDelta &lt;= cooldownTime, the next bullet can be shot.</para>
+<para>Accumulates delta time between shots. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/gameplay/ShootComponent.ixx" line="88" column="15" bodyfile="include/helios/engine/game/components/gameplay/ShootComponent.ixx" bodystart="88" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1afba2f37150b83cc00ddd065697884711" compoundref="ShootComponent_8ixx" startline="148" endline="170">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1ab992b6e2b6cdc7fa9444c46ea3744484" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::gameplay::ShootComponent::cooldownTime_</definition>
+        <argsstring></argsstring>
+        <name>cooldownTime_</name>
+        <qualifiedname>helios::engine::game::components::gameplay::ShootComponent::cooldownTime_</qualifiedname>
+        <initializer>= 0.0625f</initializer>
+        <briefdescription>
+<para>Cooldown timer for fire rate limiting, in seconds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Accumulates delta time between shots. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/gameplay/ShootComponent.ixx" line="95" column="15" bodyfile="include/helios/engine/game/components/gameplay/ShootComponent.ixx" bodystart="95" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a6eaf2e3d7510d0757afdebe2999cc554" compoundref="ShootComponent_8ixx" startline="187" endline="189">cooldownTime</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a402bc3581ebfdfc2e852647f10c68201" compoundref="ShootComponent_8ixx" startline="196" endline="198">setCooldownTime</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1afba2f37150b83cc00ddd065697884711" compoundref="ShootComponent_8ixx" startline="148" endline="170">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a3dcdfd66746c24a5cd1afea815bcafd1" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::gameplay::ShootComponent::bulletSpeed_</definition>
+        <argsstring></argsstring>
+        <name>bulletSpeed_</name>
+        <qualifiedname>helios::engine::game::components::gameplay::ShootComponent::bulletSpeed_</qualifiedname>
+        <initializer>= 60.0f</initializer>
+        <briefdescription>
+<para>The bullet speed, in meters per second. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/gameplay/ShootComponent.ixx" line="101" column="15" bodyfile="include/helios/engine/game/components/gameplay/ShootComponent.ixx" bodystart="101" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1ab3201af334a82b4906dd67549a6fcf67" compoundref="ShootComponent_8ixx" startline="205" endline="207">bulletSpeed</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1adc2ca6473b817bc169d63ed7b7e04022" compoundref="ShootComponent_8ixx" startline="214" endline="216">setBulletSpeed</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1afba2f37150b83cc00ddd065697884711" compoundref="ShootComponent_8ixx" startline="148" endline="170">update</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a982f9dee44c71d5b368daeeece71e2af" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::gameplay::ShootComponent::onAttach</definition>
+        <argsstring>(::helios::engine::game::GameObject *gameObject) noexcept override</argsstring>
+        <name>onAttach</name>
+        <qualifiedname>helios::engine::game::components::gameplay::ShootComponent::onAttach</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">::helios::engine::game::GameObject</ref> *</type>
+          <declname>gameObject</declname>
+        </param>
+        <briefdescription>
+<para>Called when the component is attached to a <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Retrieves references to required sibling components.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameObject</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> this component is being attached to. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/gameplay/ShootComponent.ixx" line="113" column="14" bodyfile="include/helios/engine/game/components/gameplay/ShootComponent.ixx" bodystart="113" bodyend="120"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1af48a875fc4cfba8f6eaec96d714bdbda" compoundref="ShootComponent_8ixx" startline="72">aimComponent_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1Component_1a0894e93b95d6d0b71602b8803d2cc213" compoundref="Component_8ixx" startline="71" endline="73">helios::engine::game::Component::gameObject</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1Component_1a3a4f0b840b179c07299fc291a57fb51f" compoundref="Component_8ixx" startline="62" endline="64">helios::engine::game::Component::onAttach</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a03477c621a0057c2d5a1fce21f977702" compoundref="ShootComponent_8ixx" startline="79">sceneNodeComponent_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a4a535fee3dd77c44c3043c4b010d1b69" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::gameplay::ShootComponent::shoot</definition>
+        <argsstring>(float intensity)</argsstring>
+        <name>shoot</name>
+        <qualifiedname>helios::engine::game::components::gameplay::ShootComponent::shoot</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>intensity</declname>
+        </param>
+        <briefdescription>
+<para>Sets the shooting intensity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Call with a non-zero value to start shooting, or zero to stop. The intensity affects whether projectiles are spawned during <ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1afba2f37150b83cc00ddd065697884711" kindref="member">update()</ref>.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>intensity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Fire intensity (0.0 to 1.0). Zero stops firing. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/gameplay/ShootComponent.ixx" line="130" column="14" bodyfile="include/helios/engine/game/components/gameplay/ShootComponent.ixx" bodystart="130" bodyend="137"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1af48a875fc4cfba8f6eaec96d714bdbda" compoundref="ShootComponent_8ixx" startline="72">aimComponent_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1ad0720ba0447d3b293c5aed0e378bef29" compoundref="ShootComponent_8ixx" startline="178" endline="180">intensity</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a8d2b2bb9128045b171e48fffcca0c4b7" compoundref="ShootComponent_8ixx" startline="65">intensity_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1afba2f37150b83cc00ddd065697884711" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::gameplay::ShootComponent::update</definition>
+        <argsstring>(helios::engine::game::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::game::components::gameplay::ShootComponent::update</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1game_1_1Updatable_1a015e7f65d24ee77ba1f0ef21f17788bc">update</reimplements>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1game_1_1UpdateContext" kindref="compound">helios::engine::game::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Updates the component, spawning projectiles when ready. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Checks the cooldown timer and aim direction. If conditions are met, spawns a bullet from the BulletPool at the current position traveling in the aim direction.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The update context containing timing and game state. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/gameplay/ShootComponent.ixx" line="148" column="14" bodyfile="include/helios/engine/game/components/gameplay/ShootComponent.ixx" bodystart="148" bodyend="170"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1af48a875fc4cfba8f6eaec96d714bdbda" compoundref="ShootComponent_8ixx" startline="72">aimComponent_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a3dcdfd66746c24a5cd1afea815bcafd1" compoundref="ShootComponent_8ixx" startline="101">bulletSpeed_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1af2d88d77ead3ad9f358419f9d41df6da" compoundref="ShootComponent_8ixx" startline="88">cooldownDelta_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1ab992b6e2b6cdc7fa9444c46ea3744484" compoundref="ShootComponent_8ixx" startline="95">cooldownTime_</references>
+        <references refid="namespacehelios_1_1math_1af25d93f23f91acae02abfd7706b2e36d" compoundref="utils_8ixx" startline="22">helios::math::EPSILON_LENGTH</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a8d2b2bb9128045b171e48fffcca0c4b7" compoundref="ShootComponent_8ixx" startline="65">intensity_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a03477c621a0057c2d5a1fce21f977702" compoundref="ShootComponent_8ixx" startline="79">sceneNodeComponent_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1systems_1_1BulletPool_1a67416e07596661bd282ee46974cf83b8" compoundref="BulletPool_8ixx" startline="208" endline="249">helios::engine::game::systems::BulletPool::spawn</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1ad0720ba0447d3b293c5aed0e378bef29" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::game::components::gameplay::ShootComponent::intensity</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>intensity</name>
+        <qualifiedname>helios::engine::game::components::gameplay::ShootComponent::intensity</qualifiedname>
+        <briefdescription>
+<para>Returns the current fire intensity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The intensity value (0.0 to 1.0). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/gameplay/ShootComponent.ixx" line="178" column="16" bodyfile="include/helios/engine/game/components/gameplay/ShootComponent.ixx" bodystart="178" bodyend="180"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a8d2b2bb9128045b171e48fffcca0c4b7" compoundref="ShootComponent_8ixx" startline="65">intensity_</references>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a4a535fee3dd77c44c3043c4b010d1b69" compoundref="ShootComponent_8ixx" startline="130" endline="137">shoot</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a6eaf2e3d7510d0757afdebe2999cc554" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::game::components::gameplay::ShootComponent::cooldownTime</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cooldownTime</name>
+        <qualifiedname>helios::engine::game::components::gameplay::ShootComponent::cooldownTime</qualifiedname>
+        <briefdescription>
+<para>Returns the cooldown time between shots. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Cooldown duration in seconds. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/gameplay/ShootComponent.ixx" line="187" column="16" bodyfile="include/helios/engine/game/components/gameplay/ShootComponent.ixx" bodystart="187" bodyend="189"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1ab992b6e2b6cdc7fa9444c46ea3744484" compoundref="ShootComponent_8ixx" startline="95">cooldownTime_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a402bc3581ebfdfc2e852647f10c68201" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::gameplay::ShootComponent::setCooldownTime</definition>
+        <argsstring>(float cooldown) noexcept</argsstring>
+        <name>setCooldownTime</name>
+        <qualifiedname>helios::engine::game::components::gameplay::ShootComponent::setCooldownTime</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>cooldown</declname>
+        </param>
+        <briefdescription>
+<para>Sets the cooldown time between shots. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cooldown</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New cooldown duration in seconds. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/gameplay/ShootComponent.ixx" line="196" column="14" bodyfile="include/helios/engine/game/components/gameplay/ShootComponent.ixx" bodystart="196" bodyend="198"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1ab992b6e2b6cdc7fa9444c46ea3744484" compoundref="ShootComponent_8ixx" startline="95">cooldownTime_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1ab3201af334a82b4906dd67549a6fcf67" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::game::components::gameplay::ShootComponent::bulletSpeed</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>bulletSpeed</name>
+        <qualifiedname>helios::engine::game::components::gameplay::ShootComponent::bulletSpeed</qualifiedname>
+        <briefdescription>
+<para>Returns the bullet speed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Bullet speed in meters per second. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/gameplay/ShootComponent.ixx" line="205" column="16" bodyfile="include/helios/engine/game/components/gameplay/ShootComponent.ixx" bodystart="205" bodyend="207"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a3dcdfd66746c24a5cd1afea815bcafd1" compoundref="ShootComponent_8ixx" startline="101">bulletSpeed_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1adc2ca6473b817bc169d63ed7b7e04022" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::gameplay::ShootComponent::setBulletSpeed</definition>
+        <argsstring>(float speed) noexcept</argsstring>
+        <name>setBulletSpeed</name>
+        <qualifiedname>helios::engine::game::components::gameplay::ShootComponent::setBulletSpeed</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>speed</declname>
+        </param>
+        <briefdescription>
+<para>Sets the bullet speed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>speed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New bullet speed in meters per second. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/gameplay/ShootComponent.ixx" line="214" column="14" bodyfile="include/helios/engine/game/components/gameplay/ShootComponent.ixx" bodystart="214" bodyend="216"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a3dcdfd66746c24a5cd1afea815bcafd1" compoundref="ShootComponent_8ixx" startline="101">bulletSpeed_</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para><ref refid="classhelios_1_1engine_1_1game_1_1Component" kindref="compound">Component</ref> for handling projectile shooting with rate limiting. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Manages the shooting mechanics for a <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> by coordinating with aim-components for direction and a bullet pool for projectile spawning. Implements a cooldown timer to control fire rate.</para>
+<para>Example usage: ```cpp auto shootComponent = std::make_unique&lt;ShootComponent&gt;(); gameObject.add(std::move(shootComponent));</para>
+<para>// Trigger shooting (typically from ShootCommand) shootComponent-&gt;shoot(1.0f); ``` </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::game::Component</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1Component"/>
+      </node>
+      <node id="3">
+        <label>helios::engine::game::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::game::components::gameplay::ShootComponent</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>helios::engine::game::Component</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1Component"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>gameObject_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::game::GameObject</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1GameObject"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>guid_</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>helios::engine::game::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1Updatable"/>
+      </node>
+      <node id="6">
+        <label>helios::engine::game::components::gameplay::Aim2DComponent</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>helios::engine::game::components::gameplay::ShootComponent</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>aimComponent_</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>sceneNodeComponent_</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>helios::engine::game::components::scene::SceneNodeComponent</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>canonicalSize_</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>sceneNode_</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>helios::math::vec3&lt; float &gt;</label>
+        <link refid="structhelios_1_1math_1_1vec3"/>
+      </node>
+      <node id="9">
+        <label>helios::scene::SceneNode</label>
+        <link refid="classhelios_1_1scene_1_1SceneNode"/>
+        <childnode refid="9" relation="usage">
+          <edgelabel>parent_</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>localTransform_</edgelabel>
+        </childnode>
+      </node>
+      <node id="10">
+        <label>helios::scene::Transform</label>
+        <link refid="classhelios_1_1scene_1_1Transform"/>
+      </node>
+      <node id="4">
+        <label>helios::util::Guid</label>
+        <link refid="classhelios_1_1util_1_1Guid"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/game/components/gameplay/ShootComponent.ixx" line="55" column="5" bodyfile="include/helios/engine/game/components/gameplay/ShootComponent.ixx" bodystart="55" bodyend="218"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1af48a875fc4cfba8f6eaec96d714bdbda" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::gameplay::ShootComponent</scope><name>aimComponent_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1ab3201af334a82b4906dd67549a6fcf67" prot="public" virt="non-virtual"><scope>helios::engine::game::components::gameplay::ShootComponent</scope><name>bulletSpeed</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a3dcdfd66746c24a5cd1afea815bcafd1" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::gameplay::ShootComponent</scope><name>bulletSpeed_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1a4a167553b4aed32f0ad96e8836a01b88" prot="public" virt="non-virtual"><scope>helios::engine::game::components::gameplay::ShootComponent</scope><name>Component</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1af2d88d77ead3ad9f358419f9d41df6da" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::gameplay::ShootComponent</scope><name>cooldownDelta_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a6eaf2e3d7510d0757afdebe2999cc554" prot="public" virt="non-virtual"><scope>helios::engine::game::components::gameplay::ShootComponent</scope><name>cooldownTime</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1ab992b6e2b6cdc7fa9444c46ea3744484" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::gameplay::ShootComponent</scope><name>cooldownTime_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1a0894e93b95d6d0b71602b8803d2cc213" prot="public" virt="non-virtual"><scope>helios::engine::game::components::gameplay::ShootComponent</scope><name>gameObject</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1a70665759561369340448e6015f0a2552" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::gameplay::ShootComponent</scope><name>gameObject_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1ad0720ba0447d3b293c5aed0e378bef29" prot="public" virt="non-virtual"><scope>helios::engine::game::components::gameplay::ShootComponent</scope><name>intensity</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a8d2b2bb9128045b171e48fffcca0c4b7" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::gameplay::ShootComponent</scope><name>intensity_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a982f9dee44c71d5b368daeeece71e2af" prot="public" virt="non-virtual"><scope>helios::engine::game::components::gameplay::ShootComponent</scope><name>onAttach</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1a3a4f0b840b179c07299fc291a57fb51f" prot="public" virt="virtual" ambiguityscope="helios::engine::game::Component::"><scope>helios::engine::game::components::gameplay::ShootComponent</scope><name>onAttach</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a03477c621a0057c2d5a1fce21f977702" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::gameplay::ShootComponent</scope><name>sceneNodeComponent_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1adc2ca6473b817bc169d63ed7b7e04022" prot="public" virt="non-virtual"><scope>helios::engine::game::components::gameplay::ShootComponent</scope><name>setBulletSpeed</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a402bc3581ebfdfc2e852647f10c68201" prot="public" virt="non-virtual"><scope>helios::engine::game::components::gameplay::ShootComponent</scope><name>setCooldownTime</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1a4a535fee3dd77c44c3043c4b010d1b69" prot="public" virt="non-virtual"><scope>helios::engine::game::components::gameplay::ShootComponent</scope><name>shoot</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Updatable_1a80ad1928d4b394f69860b47969541e34" prot="public" virt="non-virtual"><scope>helios::engine::game::components::gameplay::ShootComponent</scope><name>Updatable</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1afba2f37150b83cc00ddd065697884711" prot="public" virt="virtual"><scope>helios::engine::game::components::gameplay::ShootComponent</scope><name>update</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1abeb3af407878cf9f2d1019fdc9e2712a" prot="public" virt="virtual"><scope>helios::engine::game::components::gameplay::ShootComponent</scope><name>~Component</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Updatable_1aac5760f908621631c4e7ac40f25e9361" prot="public" virt="virtual"><scope>helios::engine::game::components::gameplay::ShootComponent</scope><name>~Updatable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

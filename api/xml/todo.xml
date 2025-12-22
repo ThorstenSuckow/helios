@@ -13,16 +13,16 @@
 <varlistentry><term>Member <ref refid="classhelios_1_1engine_1_1FramePacer_1a32ee1e380de39424a708a979a982d19d" kindref="member">helios::engine::FramePacer::sync</ref>  ()</term></varlistentry>
 <listitem><para><anchor id="todo_1_todo000004"/>Implement hybrid spinning for the last millisecond of the wait time to improve timing precision and mitigate OS scheduler wake-up latency.  </para>
 </listitem>
-<varlistentry><term>Class <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">helios::engine::game::GameObject</ref>  </term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000005"/>Implement observer pattern or weak_ptr to detect SceneNode destruction and invalidate the transform pointer to prevent dangling pointer issues.  </para>
-</listitem>
-<varlistentry><term>Member <ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a2453e79f258cf580d9ef54b7f87e60cc" kindref="member">helios::engine::game::GameObject::transform_</ref>  </term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000006"/>Implement notification mechanism to invalidate this pointer when the SceneNode is destroyed. Consider using observer pattern or std::weak_ptr to safely detect SceneNode destruction.  </para>
-</listitem>
 <varlistentry><term>Class <ref refid="classhelios_1_1engine_1_1game_1_1InputSnapshot" kindref="compound">helios::engine::game::InputSnapshot</ref>  </term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000007"/>Extend to support multiple gamepads, keyboard, and mouse input. </para>
+<listitem><para><anchor id="todo_1_todo000005"/>Extend to support multiple gamepads, keyboard, and mouse input. </para>
 <para></para>
 <para>Add timestamp to enable precise replay and network synchronization.  </para>
+</listitem>
+<varlistentry><term>Member <ref refid="classhelios_1_1engine_1_1game_1_1systems_1_1BulletPool_1a3e4965821122d00c070ea45265aebd71" kindref="member">helios::engine::game::systems::BulletPool::arenaBox_</ref>  </term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000006"/>should be implemented using an interface &quot;ArenaProvider&quot; or similar  </para>
+</listitem>
+<varlistentry><term>Member <ref refid="classhelios_1_1engine_1_1game_1_1systems_1_1BulletPool_1a67416e07596661bd282ee46974cf83b8" kindref="member">helios::engine::game::systems::BulletPool::spawn</ref>  (<ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref> position, <ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref> velocity, <ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref> aimDir) noexcept</term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000007"/>the bulletpool assumes to shoot in 2d, projected on the xy plane. This has to be configured later on.  </para>
 </listitem>
 <varlistentry><term>Class <ref refid="classhelios_1_1event_1_1Event" kindref="compound">helios::event::Event</ref>  </term></varlistentry>
 <listitem><para><anchor id="todo_1_todo000008"/>can we reset the value for Guids in between frames, if events are guaranteed to be dispatched and processed in between frames?  </para>

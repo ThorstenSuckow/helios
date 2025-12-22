@@ -1,11 +1,15 @@
 var searchData=
 [
-  ['texcoords_0',['texCoords',['../structhelios_1_1rendering_1_1Vertex.html#a6a60a969f8b46c06dfd111cad987a017',1,'helios::rendering::Vertex']]],
-  ['throttle_5f_1',['throttle_',['../classhelios_1_1engine_1_1game_1_1GameObject.html#ab54ea2a72c7e6b107d71d3e07a0b1f2a',1,'helios::engine::game::GameObject']]],
-  ['timestamp_2',['timestamp',['../structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html#ad362d393aa91890ffd592c025cd4f226',1,'helios::ext::imgui::widgets::LogEntry']]],
-  ['title_3',['title',['../structhelios_1_1window_1_1WindowConfig.html#a3ffc9f8d5d4e517423dda6f691dfe14e',1,'helios::window::WindowConfig']]],
-  ['title_5f_4',['title_',['../classhelios_1_1window_1_1Window.html#a27dc6e221464e5675b20816130a0e948',1,'helios::window::Window']]],
-  ['totalframetime_5',['totalFrameTime',['../structhelios_1_1engine_1_1FrameStats.html#ab76f59f1bd1a35ee9d4316fdb46efa63',1,'helios::engine::FrameStats']]],
-  ['transform_5f_6',['transform_',['../classhelios_1_1engine_1_1game_1_1GameObject.html#a2453e79f258cf580d9ef54b7f87e60cc',1,'helios::engine::game::GameObject']]],
-  ['type_5fid_7',['TYPE_ID',['../classhelios_1_1ext_1_1imgui_1_1ImGuiLogSink.html#a4e0540a3ef8f7838fdaa082225863e2f',1,'helios::ext::imgui::ImGuiLogSink::TYPE_ID'],['../classhelios_1_1util_1_1log_1_1ConsoleSink.html#aa7a0c9d6f6536c90ed342cadc6246107',1,'helios::util::log::ConsoleSink::TYPE_ID']]]
+  ['red_0',['Red',['../structhelios_1_1util_1_1Colors.html#a1184a41c4e65a433c48a5721419e6e27',1,'helios::util::Colors']]],
+  ['renderable_5f_1',['renderable_',['../classhelios_1_1scene_1_1SceneNode.html#adc5b1c905e0a2eee271107ebb91652af',1,'helios::scene::SceneNode']]],
+  ['rendercommands_5f_2',['renderCommands_',['../classhelios_1_1rendering_1_1RenderQueue.html#a495b608f1570db9532d10ad81ac8cdb2',1,'helios::rendering::RenderQueue']]],
+  ['renderingdevice_5f_3',['renderingDevice_',['../classhelios_1_1app_1_1Application.html#aa04eb0a14f12afe4323122a4698c04f7',1,'helios::app::Application']]],
+  ['renderprototype_5f_4',['renderPrototype_',['../classhelios_1_1rendering_1_1Renderable.html#a8fd3f447a861f9fe08d5a4555d12b5b1',1,'helios::rendering::Renderable']]],
+  ['rendertarget_5f_5',['renderTarget_',['../classhelios_1_1window_1_1Window.html#a3aadafde86d1cf52080eda7a8209b8ba',1,'helios::window::Window']]],
+  ['rotationangledelta_5f_6',['rotationAngleDelta_',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#ae61dae73e5fbd6c49ce2ac3311e94273',1,'helios::engine::game::components::physics::Move2DComponent']]],
+  ['rotationdampening_5f_7',['rotationDampening_',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#ac2c90c6fd38a2822a96b06a63958f667',1,'helios::engine::game::components::physics::Move2DComponent']]],
+  ['rotationspeed_5f_8',['rotationSpeed_',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#a483daaad08f6019cdd8fcd2b21503d76',1,'helios::engine::game::components::physics::Move2DComponent']]],
+  ['rotationspeedthreshold_5f_9',['rotationSpeedThreshold_',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#abccead76ea179c5442fd7f0270116bbc',1,'helios::engine::game::components::physics::Move2DComponent']]],
+  ['roughness_10',['roughness',['../structhelios_1_1rendering_1_1model_1_1config_1_1MaterialPropertiesOverride.html#a1804954f7d3b24661fd3cab94c80e460',1,'helios::rendering::model::config::MaterialPropertiesOverride']]],
+  ['royalblue_11',['RoyalBlue',['../structhelios_1_1util_1_1Colors.html#a8f0acba8b55bc10caa17d42f0ba94d10',1,'helios::util::Colors']]]
 ];

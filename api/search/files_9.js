@@ -6,7 +6,6 @@ var searchData=
   ['imguioverlay_2eixx_3',['ImGuiOverlay.ixx',['../ImGuiOverlay_8ixx.html',1,'']]],
   ['imguiwidget_2eixx_4',['ImGuiWidget.ixx',['../ImGuiWidget_8ixx.html',1,'']]],
   ['inputadapter_2eixx_5',['InputAdapter.ixx',['../InputAdapter_8ixx.html',1,'']]],
-  ['inputhandler_2eixx_6',['InputHandler.ixx',['../InputHandler_8ixx.html',1,'']]],
-  ['inputmanager_2eixx_7',['InputManager.ixx',['../InputManager_8ixx.html',1,'']]],
-  ['inputsnapshot_2eixx_8',['InputSnapshot.ixx',['../InputSnapshot_8ixx.html',1,'']]]
+  ['inputmanager_2eixx_6',['InputManager.ixx',['../InputManager_8ixx.html',1,'']]],
+  ['inputsnapshot_2eixx_7',['InputSnapshot.ixx',['../InputSnapshot_8ixx.html',1,'']]]
 ];

@@ -1,0 +1,281 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structhelios_1_1engine_1_1game_1_1UpdateContext" kind="struct" language="C++" prot="public">
+    <compoundname>helios::engine::game::UpdateContext</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structhelios_1_1engine_1_1game_1_1UpdateContext_1a7d440648e01475cbe5049a57c60708a0" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::UpdateContext::deltaTime_</definition>
+        <argsstring></argsstring>
+        <name>deltaTime_</name>
+        <qualifiedname>helios::engine::game::UpdateContext::deltaTime_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Time elapsed since the last frame, in seconds. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/UpdateContext.ixx" line="32" column="15" bodyfile="include/helios/engine/game/UpdateContext.ixx" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhelios_1_1engine_1_1game_1_1UpdateContext_1a41b2990fb57e9a466b697a17c33b2e39" prot="private" static="no" mutable="no">
+        <type>const <ref refid="classhelios_1_1engine_1_1game_1_1InputSnapshot" kindref="compound">helios::engine::game::InputSnapshot</ref> *</type>
+        <definition>const helios::engine::game::InputSnapshot* helios::engine::game::UpdateContext::inputSnapshot_</definition>
+        <argsstring></argsstring>
+        <name>inputSnapshot_</name>
+        <qualifiedname>helios::engine::game::UpdateContext::inputSnapshot_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Immutable snapshot of input state for this frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/UpdateContext.ixx" line="37" column="51" bodyfile="include/helios/engine/game/UpdateContext.ixx" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhelios_1_1engine_1_1game_1_1UpdateContext_1a653d1c7cac75d90e1c15baa8ad334b4c" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1game_1_1CommandBuffer" kindref="compound">helios::engine::game::CommandBuffer</ref> *</type>
+        <definition>helios::engine::game::CommandBuffer* helios::engine::game::UpdateContext::commandBuffer_</definition>
+        <argsstring></argsstring>
+        <name>commandBuffer_</name>
+        <qualifiedname>helios::engine::game::UpdateContext::commandBuffer_</qualifiedname>
+        <briefdescription>
+<para>Buffer for queueing commands to be executed at end of frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/UpdateContext.ixx" line="42" column="45" bodyfile="include/helios/engine/game/UpdateContext.ixx" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhelios_1_1engine_1_1game_1_1UpdateContext_1a58f525767ddae54935821b76dcc4f1ed" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">helios::engine::game::GameWorld</ref> *</type>
+        <definition>helios::engine::game::GameWorld* helios::engine::game::UpdateContext::gameWorld_</definition>
+        <argsstring></argsstring>
+        <name>gameWorld_</name>
+        <qualifiedname>helios::engine::game::UpdateContext::gameWorld_</qualifiedname>
+        <briefdescription>
+<para>Reference to the game world for entity lookups. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/UpdateContext.ixx" line="47" column="41" bodyfile="include/helios/engine/game/UpdateContext.ixx" bodystart="47" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structhelios_1_1engine_1_1game_1_1UpdateContext_1a2144af14fa3ae62f75de20cfb4eea5a6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::game::UpdateContext::UpdateContext</definition>
+        <argsstring>(helios::engine::game::CommandBuffer *commandBuffer, helios::engine::game::GameWorld *gameWorld)</argsstring>
+        <name>UpdateContext</name>
+        <qualifiedname>helios::engine::game::UpdateContext::UpdateContext</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1game_1_1CommandBuffer" kindref="compound">helios::engine::game::CommandBuffer</ref> *</type>
+          <declname>commandBuffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">helios::engine::game::GameWorld</ref> *</type>
+          <declname>gameWorld</declname>
+        </param>
+        <briefdescription>
+<para>Constructs an <ref refid="structhelios_1_1engine_1_1game_1_1UpdateContext" kindref="compound">UpdateContext</ref> with required dependencies. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>commandBuffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Non-owning pointer to the command buffer. Must not be nullptr. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Non-owning pointer to the game world. Must not be nullptr.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if either commandBuffer or gameWorld are nullptr </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/UpdateContext.ixx" line="59" column="9" bodyfile="include/helios/engine/game/UpdateContext.ixx" bodystart="59" bodyend="68"/>
+        <references refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a8282c9dcfe53edfa615372dc537d4e76" compoundref="UpdateContext_8ixx" startline="117" endline="119">commandBuffer</references>
+        <references refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1ae12523c4ac013b3b4907dd83cba3519e" compoundref="UpdateContext_8ixx" startline="126" endline="128">gameWorld</references>
+        <referencedby refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a0b42a27336552776221f1c260d5abdd2" compoundref="UpdateContext_8ixx" startline="84" endline="88">setDeltaTime</referencedby>
+        <referencedby refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1ad7d1812f2b80a365d37df32228f85ecd" compoundref="UpdateContext_8ixx" startline="106" endline="110">setInputSnapshot</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1engine_1_1game_1_1UpdateContext_1a6c701eadfa46994b96fbf00d2026489f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::game::UpdateContext::deltaTime</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>deltaTime</name>
+        <qualifiedname>helios::engine::game::UpdateContext::deltaTime</qualifiedname>
+        <briefdescription>
+<para>Returns the time elapsed since the last frame, in seconds. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/UpdateContext.ixx" line="73" column="16" bodyfile="include/helios/engine/game/UpdateContext.ixx" bodystart="73" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1engine_1_1game_1_1UpdateContext_1a0b42a27336552776221f1c260d5abdd2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a2144af14fa3ae62f75de20cfb4eea5a6" kindref="member">UpdateContext</ref> &amp;</type>
+        <definition>UpdateContext &amp; helios::engine::game::UpdateContext::setDeltaTime</definition>
+        <argsstring>(float dt) noexcept</argsstring>
+        <name>setDeltaTime</name>
+        <qualifiedname>helios::engine::game::UpdateContext::setDeltaTime</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+<para>Sets the time elapsed since the last frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Delta time in seconds. Must be non-negative.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A reference to this <ref refid="structhelios_1_1engine_1_1game_1_1UpdateContext" kindref="compound">UpdateContext</ref> instance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/UpdateContext.ixx" line="84" column="23" bodyfile="include/helios/engine/game/UpdateContext.ixx" bodystart="84" bodyend="88"/>
+        <references refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a2144af14fa3ae62f75de20cfb4eea5a6" compoundref="UpdateContext_8ixx" startline="59" endline="68">UpdateContext</references>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1engine_1_1game_1_1UpdateContext_1abab0869bbecf4800e77d2fa355d66a9e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classhelios_1_1engine_1_1game_1_1InputSnapshot" kindref="compound">helios::engine::game::InputSnapshot</ref> *</type>
+        <definition>const helios::engine::game::InputSnapshot * helios::engine::game::UpdateContext::inputSnapshot</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>inputSnapshot</name>
+        <qualifiedname>helios::engine::game::UpdateContext::inputSnapshot</qualifiedname>
+        <briefdescription>
+<para>Returns the immutable input snapshot for this frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Non-owning pointer. May be nullptr if no input is available. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/UpdateContext.ixx" line="95" column="52" bodyfile="include/helios/engine/game/UpdateContext.ixx" bodystart="95" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1engine_1_1game_1_1UpdateContext_1ad7d1812f2b80a365d37df32228f85ecd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a2144af14fa3ae62f75de20cfb4eea5a6" kindref="member">UpdateContext</ref> &amp;</type>
+        <definition>UpdateContext &amp; helios::engine::game::UpdateContext::setInputSnapshot</definition>
+        <argsstring>(const helios::engine::game::InputSnapshot *snapshot) noexcept</argsstring>
+        <name>setInputSnapshot</name>
+        <qualifiedname>helios::engine::game::UpdateContext::setInputSnapshot</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1game_1_1InputSnapshot" kindref="compound">helios::engine::game::InputSnapshot</ref> *</type>
+          <declname>snapshot</declname>
+        </param>
+        <briefdescription>
+<para>Sets the input snapshot for this frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>snapshot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Non-owning pointer to the input snapshot.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A reference to this <ref refid="structhelios_1_1engine_1_1game_1_1UpdateContext" kindref="compound">UpdateContext</ref> instance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/UpdateContext.ixx" line="106" column="23" bodyfile="include/helios/engine/game/UpdateContext.ixx" bodystart="106" bodyend="110"/>
+        <references refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a2144af14fa3ae62f75de20cfb4eea5a6" compoundref="UpdateContext_8ixx" startline="59" endline="68">UpdateContext</references>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1engine_1_1game_1_1UpdateContext_1a8282c9dcfe53edfa615372dc537d4e76" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1game_1_1CommandBuffer" kindref="compound">helios::engine::game::CommandBuffer</ref> *</type>
+        <definition>helios::engine::game::CommandBuffer * helios::engine::game::UpdateContext::commandBuffer</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>commandBuffer</name>
+        <qualifiedname>helios::engine::game::UpdateContext::commandBuffer</qualifiedname>
+        <briefdescription>
+<para>Returns the command buffer for queueing commands. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Non-owning pointer. Guaranteed non-null after construction. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/UpdateContext.ixx" line="117" column="46" bodyfile="include/helios/engine/game/UpdateContext.ixx" bodystart="117" bodyend="119"/>
+        <referencedby refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a2144af14fa3ae62f75de20cfb4eea5a6" compoundref="UpdateContext_8ixx" startline="59" endline="68">UpdateContext</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1engine_1_1game_1_1UpdateContext_1ae12523c4ac013b3b4907dd83cba3519e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">helios::engine::game::GameWorld</ref> *</type>
+        <definition>helios::engine::game::GameWorld * helios::engine::game::UpdateContext::gameWorld</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>gameWorld</name>
+        <qualifiedname>helios::engine::game::UpdateContext::gameWorld</qualifiedname>
+        <briefdescription>
+<para>Returns the game world for entity lookups. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Non-owning pointer. Guaranteed non-null after construction. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/UpdateContext.ixx" line="126" column="42" bodyfile="include/helios/engine/game/UpdateContext.ixx" bodystart="126" bodyend="128"/>
+        <referencedby refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a2144af14fa3ae62f75de20cfb4eea5a6" compoundref="UpdateContext_8ixx" startline="59" endline="68">UpdateContext</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Context passed to <ref refid="classhelios_1_1engine_1_1game_1_1Updatable" kindref="compound">Updatable</ref> components during per-frame updates. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Provides all necessary state for components to perform their update logic, including frame timing, input state, and access to the command system. All pointers are non-owning; the caller is responsible for lifetime management. </para>
+    </detaileddescription>
+    <location file="include/helios/engine/game/UpdateContext.ixx" line="26" column="5" bodyfile="include/helios/engine/game/UpdateContext.ixx" bodystart="26" bodyend="129"/>
+    <listofallmembers>
+      <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a8282c9dcfe53edfa615372dc537d4e76" prot="public" virt="non-virtual"><scope>helios::engine::game::UpdateContext</scope><name>commandBuffer</name></member>
+      <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a653d1c7cac75d90e1c15baa8ad334b4c" prot="private" virt="non-virtual"><scope>helios::engine::game::UpdateContext</scope><name>commandBuffer_</name></member>
+      <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a6c701eadfa46994b96fbf00d2026489f" prot="public" virt="non-virtual"><scope>helios::engine::game::UpdateContext</scope><name>deltaTime</name></member>
+      <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a7d440648e01475cbe5049a57c60708a0" prot="private" virt="non-virtual"><scope>helios::engine::game::UpdateContext</scope><name>deltaTime_</name></member>
+      <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1ae12523c4ac013b3b4907dd83cba3519e" prot="public" virt="non-virtual"><scope>helios::engine::game::UpdateContext</scope><name>gameWorld</name></member>
+      <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a58f525767ddae54935821b76dcc4f1ed" prot="private" virt="non-virtual"><scope>helios::engine::game::UpdateContext</scope><name>gameWorld_</name></member>
+      <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1abab0869bbecf4800e77d2fa355d66a9e" prot="public" virt="non-virtual"><scope>helios::engine::game::UpdateContext</scope><name>inputSnapshot</name></member>
+      <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a41b2990fb57e9a466b697a17c33b2e39" prot="private" virt="non-virtual"><scope>helios::engine::game::UpdateContext</scope><name>inputSnapshot_</name></member>
+      <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a0b42a27336552776221f1c260d5abdd2" prot="public" virt="non-virtual"><scope>helios::engine::game::UpdateContext</scope><name>setDeltaTime</name></member>
+      <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1ad7d1812f2b80a365d37df32228f85ecd" prot="public" virt="non-virtual"><scope>helios::engine::game::UpdateContext</scope><name>setInputSnapshot</name></member>
+      <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a2144af14fa3ae62f75de20cfb4eea5a6" prot="public" virt="non-virtual"><scope>helios::engine::game::UpdateContext</scope><name>UpdateContext</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

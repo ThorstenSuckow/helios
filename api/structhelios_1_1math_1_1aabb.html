@@ -126,6 +126,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a885dcd6e532de6aacddc24256247e588"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the center point of the AABB.  <br /></td></tr>
 <tr class="memitem:ad9d08175f5cacc839bd28476cf1bc4e0" id="r_ad9d08175f5cacc839bd28476cf1bc4e0"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="structhelios_1_1math_1_1vec3.html">helios::math::vec3</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad9d08175f5cacc839bd28476cf1bc4e0">getSize</a> () const noexcept</td></tr>
 <tr class="memdesc:ad9d08175f5cacc839bd28476cf1bc4e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the size of the AABB over all axes.  <br /></td></tr>
+<tr class="memitem:ab2281d98a7cb28b46ce163d96a2f4469" id="r_ab2281d98a7cb28b46ce163d96a2f4469"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab2281d98a7cb28b46ce163d96a2f4469">contains</a> (const <a class="el" href="structhelios_1_1math_1_1aabb.html">helios::math::aabb</a>&lt; T &gt; &amp;box) const noexcept</td></tr>
+<tr class="memdesc:ab2281d98a7cb28b46ce163d96a2f4469"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this AABB fully contains another AABB.  <br /></td></tr>
+<tr class="memitem:ab6aadb560a2c8ee5dd381592b653578b" id="r_ab6aadb560a2c8ee5dd381592b653578b"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="structhelios_1_1math_1_1aabb.html">helios::math::aabb</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab6aadb560a2c8ee5dd381592b653578b">translate</a> (const <a class="el" href="structhelios_1_1math_1_1vec3.html">helios::math::vec3</a>&lt; T &gt; &amp;v) const noexcept</td></tr>
+<tr class="memdesc:ab6aadb560a2c8ee5dd381592b653578b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translates the AABB by a given vector.  <br /></td></tr>
 <tr class="memitem:a92106c4efc1b1aae8466956903020665" id="r_a92106c4efc1b1aae8466956903020665"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a92106c4efc1b1aae8466956903020665">add</a> (const <a class="el" href="structhelios_1_1math_1_1vec3.html">helios::math::vec3</a>&lt; T &gt; &amp;point) noexcept</td></tr>
 <tr class="memdesc:a92106c4efc1b1aae8466956903020665"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expands the AABB to include a given point.  <br /></td></tr>
 <tr class="memitem:a22eaa32ee9d9c415e4d3ce5b9ddcec74" id="r_a22eaa32ee9d9c415e4d3ce5b9ddcec74"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#aa503a6e73ae299cc5e2cef2fe2513857">aabb</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a22eaa32ee9d9c415e4d3ce5b9ddcec74">transform</a> (const <a class="el" href="structhelios_1_1math_1_1mat4.html">mat4</a>&lt; T &gt; &amp;mat) const noexcept</td></tr>
@@ -176,9 +180,9 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
 <p>Constructs an empty AABB with inverted min/max values. </p>
 <p>The AABB is initialized with min set to the maximum representable value and max set to the minimum representable value. This allows the first `add()` call to properly establish the initial bounds. </p>
 
-<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00062">62</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00059">59</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="aabb_8ixx_source.html#l00166">helios::math::aabb&lt; float &gt;::transform()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="aabb_8ixx_source.html#l00200">helios::math::aabb&lt; float &gt;::transform()</a>.</p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
@@ -250,7 +254,7 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00077">77</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00074">74</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
 
 </div>
 </div>
@@ -292,7 +296,7 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00088">88</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00085">85</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
 
 </div>
 </div>
@@ -334,7 +338,46 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00139">139</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00174">174</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+
+</div>
+</div>
+<a id="ab2281d98a7cb28b46ce163d96a2f4469" name="ab2281d98a7cb28b46ce163d96a2f4469"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2281d98a7cb28b46ce163d96a2f4469">&#9670;&#160;</a></span>contains()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::math::Numeric</a> T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="structhelios_1_1math_1_1aabb.html">helios::math::aabb</a>&lt; T &gt;::contains </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structhelios_1_1math_1_1aabb.html">helios::math::aabb</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>box</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if this AABB fully contains another AABB. </p>
+<p>Tests whether all corners of the specified bounding box lie within the bounds of this AABB. Both minimum and maximum corners must be contained.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">box</td><td>The AABB to test for containment.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the specified box is fully contained within this AABB, false otherwise. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00136">136</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
 
 </div>
 </div>
@@ -366,7 +409,7 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
 <p>Computes the center point of the AABB. </p>
 <dl class="section return"><dt>Returns</dt><dd>The center point, calculated as `(min + max) / 2`. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00116">116</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00113">113</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
 
 </div>
 </div>
@@ -398,7 +441,7 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
 <p>Computes the size of the AABB over all axes. </p>
 <dl class="section return"><dt>Returns</dt><dd>A vector representing the width, height, and depth of the AABB. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00125">125</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00122">122</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
 
 </div>
 </div>
@@ -430,7 +473,7 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
 <p>Returns the maximum corner point of the AABB. </p>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the maximum corner point. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00107">107</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00104">104</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
 
 </div>
 </div>
@@ -462,7 +505,7 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
 <p>Returns the minimum corner point of the AABB. </p>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the minimum corner point. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00098">98</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00095">95</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
 
 </div>
 </div>
@@ -503,7 +546,54 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
 <dl class="section return"><dt>Returns</dt><dd>A new AABB that fully contains the transformed bounding box.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd>[Gla95, pp. 548-550] "Transforming Axis-Aligned Bounding Boxes" by James Arvo </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00166">166</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00200">200</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+
+</div>
+</div>
+<a id="ab6aadb560a2c8ee5dd381592b653578b" name="ab6aadb560a2c8ee5dd381592b653578b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6aadb560a2c8ee5dd381592b653578b">&#9670;&#160;</a></span>translate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::math::Numeric</a> T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structhelios_1_1math_1_1aabb.html">helios::math::aabb</a>&lt; T &gt; <a class="el" href="structhelios_1_1math_1_1aabb.html">helios::math::aabb</a>&lt; T &gt;::translate </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structhelios_1_1math_1_1vec3.html">helios::math::vec3</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Translates the AABB by a given vector. </p>
+<p>Creates a new AABB by adding the components of the given translation vector to the minimum and maximum corner points of the current AABB.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>The translation vector to apply to the AABB.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A new AABB translated by the given vector. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00156">156</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="aabb_8ixx_source.html#l00246">helios::math::operator+()</a>.</p>
+<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structhelios_1_1math_1_1aabb_ab6aadb560a2c8ee5dd381592b653578b_icgraph.svg" width="379" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>

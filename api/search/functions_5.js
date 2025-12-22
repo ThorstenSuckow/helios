@@ -11,10 +11,13 @@ var searchData=
   ['framebuffersizecallback_8',['frameBufferSizeCallback',['../classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow.html#ac059798b32743ed8a710358bc660316f',1,'helios::ext::glfw::window::GLFWWindow']]],
   ['framepacer_9',['FramePacer',['../classhelios_1_1engine_1_1FramePacer.html#a6cfb7ba87a5da0cb5ab0a7c0ff5938fd',1,'helios::engine::FramePacer']]],
   ['frameuniformvalues_10',['frameUniformValues',['../classhelios_1_1rendering_1_1RenderPass.html#a9b3b86c9d3d2455bba80ee4b410fbb5b',1,'helios::rendering::RenderPass']]],
-  ['from_11',['from',['../namespacehelios_1_1ext_1_1glfw_1_1input_1_1GLFWGamepadLookup.html#a62b69cffc672cd5aaf3b0d9145d92cbf',1,'helios::ext::glfw::input::GLFWGamepadLookup::from()'],['../namespacehelios_1_1ext_1_1glfw_1_1input_1_1GLFWKeyLookup.html#a0ffb2d402b8554928e160ca34fe723b1',1,'helios::ext::glfw::input::GLFWKeyLookup::from()'],['../namespacehelios_1_1core_1_1units.html#a9c75f83e0476f8560ef6b20129582381',1,'helios::core::units::from(const float v, const Unit unit) noexcept']]],
-  ['fromcm_12',['fromCm',['../namespacehelios_1_1core_1_1units.html#a44a24afd27dff622a0f8fb7d5009122c',1,'helios::core::units']]],
-  ['fromm_13',['fromM',['../namespacehelios_1_1core_1_1units.html#a3e0dff14fa37b52f552758069814ae54',1,'helios::core::units']]],
-  ['fromms_14',['fromMs',['../namespacehelios_1_1core_1_1units.html#a08f92aa18e9437370fe364675a387c8f',1,'helios::core::units']]],
-  ['froms_15',['fromS',['../namespacehelios_1_1core_1_1units.html#ae56929b63f135d167f9f10c1a1cef5d3',1,'helios::core::units']]],
-  ['frustumcullingstrategy_16',['FrustumCullingStrategy',['../classhelios_1_1scene_1_1FrustumCullingStrategy.html#a6132bcbaab01c563b08a97036f985e5a',1,'helios::scene::FrustumCullingStrategy']]]
+  ['frequency_11',['frequency',['../classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent.html#a29dabd1db2928c448c427afb1fe1ec3d',1,'helios::engine::game::components::gameplay::Aim2DComponent']]],
+  ['from_12',['from',['../namespacehelios_1_1ext_1_1glfw_1_1input_1_1GLFWGamepadLookup.html#a62b69cffc672cd5aaf3b0d9145d92cbf',1,'helios::ext::glfw::input::GLFWGamepadLookup::from()'],['../namespacehelios_1_1ext_1_1glfw_1_1input_1_1GLFWKeyLookup.html#a0ffb2d402b8554928e160ca34fe723b1',1,'helios::ext::glfw::input::GLFWKeyLookup::from()'],['../namespacehelios_1_1core_1_1units.html#a9c75f83e0476f8560ef6b20129582381',1,'helios::core::units::from(const float v, const Unit unit) noexcept']]],
+  ['fromcm_13',['fromCm',['../namespacehelios_1_1core_1_1units.html#a44a24afd27dff622a0f8fb7d5009122c',1,'helios::core::units']]],
+  ['fromhex_14',['fromHex',['../structhelios_1_1util_1_1Colors.html#aae841356fbdedc986c66cca4cda4e27f',1,'helios::util::Colors']]],
+  ['fromm_15',['fromM',['../namespacehelios_1_1core_1_1units.html#a3e0dff14fa37b52f552758069814ae54',1,'helios::core::units']]],
+  ['fromms_16',['fromMs',['../namespacehelios_1_1core_1_1units.html#a08f92aa18e9437370fe364675a387c8f',1,'helios::core::units']]],
+  ['fromrgb_17',['fromRGB',['../structhelios_1_1util_1_1Colors.html#a2503417c0dd450cd361ce7886c1c775f',1,'helios::util::Colors']]],
+  ['froms_18',['fromS',['../namespacehelios_1_1core_1_1units.html#ae56929b63f135d167f9f10c1a1cef5d3',1,'helios::core::units']]],
+  ['frustumcullingstrategy_19',['FrustumCullingStrategy',['../classhelios_1_1scene_1_1FrustumCullingStrategy.html#a6132bcbaab01c563b08a97036f985e5a',1,'helios::scene::FrustumCullingStrategy']]]
 ];

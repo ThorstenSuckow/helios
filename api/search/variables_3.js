@@ -1,6 +1,26 @@
 var searchData=
 [
-  ['deadzonestrategy_5f_0',['deadzoneStrategy_',['../classhelios_1_1input_1_1InputAdapter.html#a7864654aa3988de5f27f625c7f743e3c',1,'helios::input::InputAdapter']]],
-  ['default_5fstick_5fnoise_5fthreshold_1',['DEFAULT_STICK_NOISE_THRESHOLD',['../classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy.html#ab2d601fa84b631f66270f28f2fed9e06',1,'helios::input::gamepad::DeadzoneStrategy']]],
-  ['dispatcher_5f_2',['dispatcher_',['../classhelios_1_1event_1_1EventManager.html#a1deac9e3799c2f473fdb16bddb4dada8',1,'helios::event::EventManager']]]
+  ['darkblue_0',['DarkBlue',['../structhelios_1_1util_1_1Colors.html#af4ae094e2fb1c1a9f088af78ecf56a09',1,'helios::util::Colors']]],
+  ['darkcyan_1',['DarkCyan',['../structhelios_1_1util_1_1Colors.html#a49eb2d8c040ebfaf886d4c81041ffa52',1,'helios::util::Colors']]],
+  ['darkgray_2',['DarkGray',['../structhelios_1_1util_1_1Colors.html#ac8d73358cbd5e51510e2e85219ad1b70',1,'helios::util::Colors']]],
+  ['darkgreen_3',['DarkGreen',['../structhelios_1_1util_1_1Colors.html#aa5a6681a8620e652b2415501a417f9dc',1,'helios::util::Colors']]],
+  ['darkorange_4',['DarkOrange',['../structhelios_1_1util_1_1Colors.html#a09e7da6da925dca81429e7fb8622f3ef',1,'helios::util::Colors']]],
+  ['darkorchid_5',['DarkOrchid',['../structhelios_1_1util_1_1Colors.html#a052bffd05c5aa96e029b51bea7669670',1,'helios::util::Colors']]],
+  ['darkred_6',['DarkRed',['../structhelios_1_1util_1_1Colors.html#a05cd1bdc71787d41575f7f95dd581ec5',1,'helios::util::Colors']]],
+  ['darkviolet_7',['DarkViolet',['../structhelios_1_1util_1_1Colors.html#a6926d2f44711dd6fb988d7df406964a6',1,'helios::util::Colors']]],
+  ['deadzonestrategy_5f_8',['deadzoneStrategy_',['../classhelios_1_1input_1_1InputAdapter.html#a7864654aa3988de5f27f625c7f743e3c',1,'helios::input::InputAdapter']]],
+  ['deeppink_9',['DeepPink',['../structhelios_1_1util_1_1Colors.html#ae5abdddbcf7b1b9d5c12d1619ec94fc6',1,'helios::util::Colors']]],
+  ['deepskyblue_10',['DeepSkyBlue',['../structhelios_1_1util_1_1Colors.html#a04787e5e1f3c0ce5201c1f132c2ef70f',1,'helios::util::Colors']]],
+  ['default_5fbase_5frotation_5fspeed_5fmultiplier_11',['DEFAULT_BASE_ROTATION_SPEED_MULTIPLIER',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#a58a94791417accc02c9c3e6f4451f5d9',1,'helios::engine::game::components::physics::Move2DComponent']]],
+  ['default_5fmovement_5facceleration_12',['DEFAULT_MOVEMENT_ACCELERATION',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#a58d811906dfa014dd1220c474b02aff7',1,'helios::engine::game::components::physics::Move2DComponent']]],
+  ['default_5fmovement_5fdampening_13',['DEFAULT_MOVEMENT_DAMPENING',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#ab685360bbbc0a46ec64ca4e43e38cdbf',1,'helios::engine::game::components::physics::Move2DComponent']]],
+  ['default_5fmovement_5fspeed_14',['DEFAULT_MOVEMENT_SPEED',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#a9d1e52de0c68d9dce805bbd766b51f2f',1,'helios::engine::game::components::physics::Move2DComponent']]],
+  ['default_5fmovement_5fspeed_5fthreshold_15',['DEFAULT_MOVEMENT_SPEED_THRESHOLD',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#a55c066b45893c97db0c245235fe22b1c',1,'helios::engine::game::components::physics::Move2DComponent']]],
+  ['default_5frotation_5fdampening_16',['DEFAULT_ROTATION_DAMPENING',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#ad86a71d09afc29ca152901ecfd262c92',1,'helios::engine::game::components::physics::Move2DComponent']]],
+  ['default_5frotation_5fspeed_17',['DEFAULT_ROTATION_SPEED',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#aeaa627024b68fa1bc5e4e48f6a1b389f',1,'helios::engine::game::components::physics::Move2DComponent']]],
+  ['default_5frotation_5fspeed_5fthreshold_18',['DEFAULT_ROTATION_SPEED_THRESHOLD',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#aed2d9dc0fa76b1163359a3f2d613ceed',1,'helios::engine::game::components::physics::Move2DComponent']]],
+  ['default_5fstick_5fnoise_5fthreshold_19',['DEFAULT_STICK_NOISE_THRESHOLD',['../classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy.html#ab2d601fa84b631f66270f28f2fed9e06',1,'helios::input::gamepad::DeadzoneStrategy']]],
+  ['direction_5f_20',['direction_',['../classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent.html#ad4c2805e40da02108df2c0a016614510',1,'helios::engine::game::components::gameplay::Aim2DComponent']]],
+  ['dispatcher_5f_21',['dispatcher_',['../classhelios_1_1event_1_1EventManager.html#a1deac9e3799c2f473fdb16bddb4dada8',1,'helios::event::EventManager']]],
+  ['dodgerblue_22',['DodgerBlue',['../structhelios_1_1util_1_1Colors.html#a92a058bf66d6e8b1980c1c0b481fcc9b',1,'helios::util::Colors']]]
 ];

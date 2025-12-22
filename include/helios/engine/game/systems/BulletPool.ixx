@@ -6,6 +6,7 @@ module;
 
 #include <cassert>
 #include <memory>
+#include <stdexcept>
 #include <vector>
 
 
@@ -30,6 +31,7 @@ import helios.engine.game.components.gameplay.Aim2DComponent;
 import helios.engine.game.components.scene.SceneNodeComponent;
 
 import helios.engine.game.UpdateContext;
+import helios.util.Guid;
 
 export namespace helios::engine::game::systems {
 
@@ -91,6 +93,13 @@ export namespace helios::engine::game::systems {
         std::shared_ptr<helios::rendering::Renderable> bulletRenderable_;
 
         /**
+         * @brief The aabb of the bullet, cached.
+         */
+        helios::math::aabbf bulletAABB_{};
+
+
+
+        /**
          * @brief Current frequency factor (0.0 to 1.0) for fire rate control.
          */
         float intensity_ = 0.0f;
@@ -120,6 +129,17 @@ export namespace helios::engine::game::systems {
          */
         std::shared_ptr<helios::rendering::RenderPrototype> bulletPrototype_ = nullptr;
 
+        /**
+         * @brief The aabb for the arena, in which bounds bullets can spawn.
+         *
+         * If any bullet outside the box is found, it will automatically despawn.
+         *
+         * @see update()
+         *
+         * @todo should be implemented using an interface "ArenaProvider" or similar
+         */
+        helios::math::aabbf arenaBox_{};
+
     public:
 
         /**
@@ -127,9 +147,17 @@ export namespace helios::engine::game::systems {
          *
          * @param bulletRenderable The renderable to use for all bullet instances.
          * @param poolSize Maximum number of bullets to pre-allocate.
+         * @param arenaBox The aabb in which the bullets can spawn.
          */
-        explicit BulletPool(std::shared_ptr<helios::rendering::Renderable> bulletRenderable, unsigned int poolSize) :
-        System(), bulletRenderable_(std::move(bulletRenderable)), poolSize_(poolSize) {
+        explicit BulletPool(
+            std::shared_ptr<helios::rendering::Renderable> bulletRenderable,
+            unsigned int poolSize,
+            const helios::math::aabbf& arenaBox
+        ) :
+        System(),
+        bulletRenderable_(std::move(bulletRenderable)),
+        poolSize_(poolSize),
+        arenaBox_(arenaBox) {
 
             pool_.reserve(poolSize);
             activeBullets_.reserve(poolSize);
@@ -154,12 +182,17 @@ export namespace helios::engine::game::systems {
             sceneRoot_ = &(gameWorld_->scene()->root());
             assert(sceneRoot_ != nullptr && "Unexpected nullptr for sceneRoot_");
 
+            helios::scene::SceneNode* nodePtr = nullptr;
+
             for (auto& bulletObject : pool_) {
                 auto node = std::make_unique<helios::scene::SceneNode>(bulletRenderable_);
-                auto* nodePtr = node.get();
+                node->setActive(false);
+                nodePtr = node.get();
                 std::ignore = sceneRoot_->addNode(std::move(node));
                 bulletObject->bulletNodePtr = nodePtr;
             }
+            assert(nodePtr != nullptr && "Unexpected nullptr for nodePtr");
+            bulletAABB_ = nodePtr->aabb();
         }
 
         /**
@@ -181,8 +214,27 @@ export namespace helios::engine::game::systems {
             pool_.pop_back();
             bullet->velocity = velocity;
             bullet->bulletNodePtr->setTranslation(position);
+            bullet->bulletNodePtr->setActive(true);
 
             activeBullets_.emplace_back(std::move(bullet));
+        }
+
+        /**
+         * @brief Despawns the bullet at the specified index.
+         *
+         * @details Moves the bullet from the active list to the inactive pool
+         * and deactivates its SceneNode so it is no longer rendered.
+         *
+         * @param idx Index of the bullet in the activeBullets_ vector.
+         */
+        void despawn(unsigned int idx) {
+
+            assert(idx < activeBullets_.size() && "unexpected value for idx");
+
+            activeBullets_[idx]->bulletNodePtr->setActive(false);
+            auto ptr = std::move(activeBullets_[idx]);
+            activeBullets_.erase(activeBullets_.begin() + idx);
+            pool_.push_back(std::move(ptr));
         }
 
         /**
@@ -190,15 +242,31 @@ export namespace helios::engine::game::systems {
          *
          * @details Moves each active bullet according to its velocity scaled by delta time.
          *
+         * @note update uses the cached bulletAABB_ to check whether the bullet should despawn.
+         *
          * @param updateContext The update context containing frame timing information.
          */
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
-            for (auto& bulletPtr: activeBullets_) {
+            for (unsigned int i = 0; i < activeBullets_.size(); /* i gets increment below */ ) {
+
+                auto& bulletPtr = activeBullets_[i];
+
                 auto& bullet = *(bulletPtr->bulletNodePtr);
-                bullet.setTranslation(
-                    bullet.localTransform().translation() + bulletPtr->velocity * updateContext.deltaTime()
-                );
+
+                auto translation = bullet.localTransform().translation() +
+                                   bulletPtr->velocity *
+                                   updateContext.deltaTime();
+                if (arenaBox_.contains(bulletAABB_ + translation)) {
+                    bullet.setTranslation(translation);
+                } else {
+                    despawn(i);
+                    // do not increment i since despawn() will erase the
+                    // element ad resize the vector
+                    continue;
+                }
+
+                ++i;
             }
 
 

@@ -162,7 +162,7 @@ export namespace helios::engine::game::systems {
             pool_.reserve(poolSize);
             activeBullets_.reserve(poolSize);
 
-            for (int i = 0; i < poolSize; i++) {
+            for (unsigned int i = 0; i < poolSize; i++) {
                 auto bullet = std::make_unique<BulletObject>();
                 pool_.emplace_back(std::move(bullet));
             }
@@ -177,7 +177,7 @@ export namespace helios::engine::game::systems {
          *
          * @param gameWorld The GameWorld this system is added to.
          */
-        void onAdd(::helios::engine::game::GameWorld* gameWorld) noexcept override {
+        void onAdd(helios::engine::game::GameWorld* gameWorld) noexcept override {
             System::onAdd(gameWorld);
             sceneRoot_ = &(gameWorld_->scene()->root());
             assert(sceneRoot_ != nullptr && "Unexpected nullptr for sceneRoot_");

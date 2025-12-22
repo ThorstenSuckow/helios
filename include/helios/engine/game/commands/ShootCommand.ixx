@@ -9,7 +9,7 @@ export module helios.engine.game.commands.ShootCommand;
 import helios.engine.game.Command;
 import helios.engine.game.GameObject;
 import helios.math.types;
-import helios.engine.game.components.physics.ShootComponent;
+import helios.engine.game.components.gameplay.ShootComponent;
 
 export namespace helios::engine::game::commands {
 
@@ -24,7 +24,7 @@ export namespace helios::engine::game::commands {
      *       command to have any effect.
      *
      * @see helios::engine::game::Command
-     * @see helios::engine::game::components::physics::ShootComponent
+     * @see helios::engine::game::components::gameplay::ShootComponent
      */
     class ShootCommand : public helios::engine::game::Command {
 
@@ -54,7 +54,7 @@ export namespace helios::engine::game::commands {
          */
         void execute(helios::engine::game::GameObject& gameObject) override {
 
-            auto* shootComponent = gameObject.get<helios::engine::game::components::physics::ShootComponent>();
+            auto* shootComponent = gameObject.get<helios::engine::game::components::gameplay::ShootComponent>();
 
             if (shootComponent) {
                 shootComponent->shoot(intensity_);

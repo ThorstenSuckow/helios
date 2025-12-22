@@ -36,7 +36,6 @@ export namespace helios::math {
         /**
          * @brief Minimum corner point of the bounding box.
          *
-         * @details
          * Contains the smallest x, y, and z coordinates across all points within the AABB.
          */
         helios::math::vec3<T> min_;
@@ -44,7 +43,6 @@ export namespace helios::math {
         /**
          * @brief Maximum corner point of the bounding box.
          *
-         * @details
          * Contains the largest x, y, and z coordinates across all points within the AABB.
          */
         helios::math::vec3<T> max_;
@@ -54,7 +52,6 @@ export namespace helios::math {
         /**
          * @brief Constructs an empty AABB with inverted min/max values.
          *
-         * @details
          * The AABB is initialized with min set to the maximum representable value
          * and max set to the minimum representable value. This allows the first
          * `add()` call to properly establish the initial bounds.
@@ -127,6 +124,26 @@ export namespace helios::math {
         }
 
         /**
+         * @brief Checks if this AABB fully contains another AABB.
+         *
+         * @details Tests whether all corners of the specified bounding box lie within
+         * the bounds of this AABB. Both minimum and maximum corners must be contained.
+         *
+         * @param box The AABB to test for containment.
+         *
+         * @return True if the specified box is fully contained within this AABB, false otherwise.
+         */
+        [[nodiscard]] constexpr bool contains(const helios::math::aabb<T>& box) const noexcept {
+
+            auto v_min = box.min();
+            auto v_max = box.max();
+
+            return v_min[0] >= min_[0] && v_min[1] >= min_[1] && v_min[2] >= min_[2] &&
+                   v_max[0] <= max_[0] && v_max[1] <= max_[1] && v_max[2] <= max_[2];
+
+        }
+
+        /**
          * @brief Expands the AABB to include a given point.
          *
          * Updates the minimum and maximum bounds to ensure the specified point
@@ -149,7 +166,6 @@ export namespace helios::math {
         /**
          * @brief Transforms the AABB by a 4x4 transformation matrix.
          *
-         * @details
          * Applies a transformation matrix to the AABB and returns a new axis-aligned bounding box
          * that fully contains the transformed original. This method preserves the axis-aligned property
          * by computing new min/max bounds from the transformed corners.

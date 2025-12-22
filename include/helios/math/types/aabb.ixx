@@ -144,6 +144,24 @@ export namespace helios::math {
         }
 
         /**
+         * @brief Translates the AABB by a given vector.
+         *
+         * Creates a new AABB by adding the components of the given translation vector
+         * to the minimum and maximum corner points of the current AABB.
+         *
+         * @param v The translation vector to apply to the AABB.
+         *
+         * @return A new AABB translated by the given vector.
+         */
+        [[nodiscard]] constexpr helios::math::aabb<T> translate(const helios::math::vec3<T>& v) const noexcept {
+            return helios::math::aabb<T>{
+                min_ + v, max_ + v
+            };
+        }
+
+
+
+        /**
          * @brief Expands the AABB to include a given point.
          *
          * Updates the minimum and maximum bounds to ensure the specified point
@@ -211,6 +229,24 @@ export namespace helios::math {
 
 
     };
+
+    /**
+     * @brief Adds a translation vector to an AABB.
+     *
+     * This operator overload allows the addition of a translation vector
+     * to an axis-aligned bounding box (AABB), resulting in a new translated AABB.
+     *
+     * @tparam T The numeric type of the vector components (e.g., `float` or `double`).
+     * @param aabb The AABB to be translated.
+     * @param v The translation vector to apply.
+     *
+     * @return A new AABB translated by the given vector.
+     */
+    template<typename T>
+    [[nodiscard]] constexpr helios::math::aabb<T> operator+(
+        const helios::math::aabb<T> aabb, const helios::math::vec3<T> v) noexcept {
+        return aabb.translate(v);
+    }
 
     /**
      * @brief Single-precision floating-point AABB.

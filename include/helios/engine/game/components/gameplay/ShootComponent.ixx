@@ -92,13 +92,13 @@ export namespace helios::engine::game::components::physics {
          *
          * @details Accumulates delta time between shots.
          */
-        float cooldownTime_ = 0.250f;
+        float cooldownTime_ = 0.0625f;
 
 
         /**
          * @brief The bullet speed, in meters per second.
          */
-        float bulletSpeed_ = 15.0f;
+        float bulletSpeed_ = 60.0f;
 
 
     public:
@@ -175,6 +175,42 @@ export namespace helios::engine::game::components::physics {
          */
         [[nodiscard]] float intensity() const noexcept {
             return intensity_;
+        }
+
+        /**
+         * @brief Returns the cooldown time between shots.
+         *
+         * @return Cooldown duration in seconds.
+         */
+        [[nodiscard]] float cooldownTime() const noexcept {
+            return cooldownTime_;
+        }
+
+        /**
+         * @brief Sets the cooldown time between shots.
+         *
+         * @param cooldown New cooldown duration in seconds.
+         */
+        void setCooldownTime(float cooldown) noexcept {
+            cooldownTime_ = cooldown;
+        }
+
+        /**
+         * @brief Returns the bullet speed.
+         *
+         * @return Bullet speed in meters per second.
+         */
+        [[nodiscard]] float bulletSpeed() const noexcept {
+            return bulletSpeed_;
+        }
+
+        /**
+         * @brief Sets the bullet speed.
+         *
+         * @param speed New bullet speed in meters per second.
+         */
+        void setBulletSpeed(float speed) noexcept {
+            bulletSpeed_ = speed;
         }
 
     };

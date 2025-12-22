@@ -160,9 +160,11 @@ export namespace helios::engine::game::components::physics {
                 auto* bulletPool = updateContext.gameWorld()
                                         ->get<helios::engine::game::systems::BulletPool>();
 
+                auto aimDirNorm = aimDir.normalize().toVec3();
+
                 bulletPool->spawn(
                     sceneNodeComponent_->translation(),
-                    aimDir.normalize().toVec3() * bulletSpeed_
+                    aimDirNorm * bulletSpeed_, aimDirNorm
                 );
             }
         }

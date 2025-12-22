@@ -1,12 +1,13 @@
 # Spaceship Control Example
 
-This example demonstrates a complete game loop with input handling, logging, and ImGui debug overlay integration.
+This example demonstrates a complete game loop using the component-based game system, input handling, logging, and ImGui debug overlay integration.
 
 ## Features
 
-- **Gamepad Input** - Control a spaceship using analog sticks
-- **Command Pattern** - Input mapped to reusable command objects
-- **ImGui Debug Overlay** - Real-time logging, camera control, and settings via dockable widgets
+- **Component System** - GameObject with attachable components (Move2DComponent, SceneNodeComponent)
+- **Gamepad Input** - Control a spaceship using analog sticks via TwinStickInputComponent
+- **Command Pattern** - Input mapped to reusable command objects (Move2DCommand, Aim2DCommand)
+- **ImGui Debug Overlay** - Real-time logging, camera control, physics tuning via dockable widgets
 - **Frame Pacing** - Configurable target FPS with performance metrics
 - **Scene Graph Camera** - Camera follows spaceship using transform inheritance
 - **Units System** - Object sizes defined in meters (1 hu = 1 m)
@@ -26,10 +27,10 @@ cmake --build build --target spaceship_control
 
 ## Controls
 
-| Input | Action                  |
-|-------|-------------------------|
-| Left Stick  | Move spaceship / Rotate |
-| ESC         | Exit application        |
+| Input | Action |
+|-------|--------|
+| Left Stick | Move spaceship / Rotate |
+| ESC | Exit application |
 
 
 ## Code Structure
@@ -37,10 +38,15 @@ cmake --build build --target spaceship_control
 | File | Purpose |
 |------|---------|
 | `main.cpp` | Application entry point and game loop |
-| `Spaceship.ixx` | Spaceship entity with transform and physics |
-| `TheGrid.ixx` | Grid game object for the play area |
-| `InputHandler.ixx` | Maps input to commands |
-| `commands/` | Command implementations (MoveCommand, etc.) |
+| `SpaceshipWidget.ixx` | ImGui widget for physics parameter tuning |
+
+The spaceship behavior is implemented via engine components:
+
+| Component | Purpose |
+|-----------|---------|
+| `SceneNodeComponent` | Links GameObject to scene graph |
+| `Move2DComponent` | 2D physics with rotation and dampening |
+| `TwinStickInputComponent` | Translates gamepad input to commands |
 
 ## Camera System
 
@@ -66,42 +72,47 @@ auto imguiBackend = ImGuiGlfwOpenGLBackend(window->nativeHandle());
 auto imguiOverlay = ImGuiOverlay::forBackend(&imguiBackend);
 
 // Add widgets
-imguiOverlay.addWidget(new MainMenuWidget());      // Settings menu
-imguiOverlay.addWidget(new FpsWidget(&metrics));   // FPS display
-imguiOverlay.addWidget(new GamepadWidget(&input)); // Gamepad state
-imguiOverlay.addWidget(new LogWidget());           // Log console
-imguiOverlay.addWidget(new CameraWidget());        // Camera control
+imguiOverlay.addWidget(new MainMenuWidget());       // Settings menu
+imguiOverlay.addWidget(new FpsWidget(&metrics));    // FPS display
+imguiOverlay.addWidget(new GamepadWidget(&input));  // Gamepad state
+imguiOverlay.addWidget(new LogWidget());            // Log console
+imguiOverlay.addWidget(new CameraWidget());         // Camera control
+imguiOverlay.addWidget(new SpaceshipWidget());      // Physics tuning
 ```
 
-## Game System
+## Component-Based Game System
 
-The example uses helios's game framework:
+The example uses helios's component-based game framework:
 
 ```cpp
-// Create game world and objects
+// Create game world and command buffer
 auto gameWorld = GameWorld{};
-auto* spaceship = gameWorld.addGameObject(
-    std::make_unique<Spaceship>(spaceshipNode)
-);
+auto commandBuffer = CommandBuffer{};
+auto updateContext = UpdateContext{&commandBuffer, &gameWorld};
+
+// Create spaceship as GameObject with components
+auto shipGameObject = std::make_unique<GameObject>();
+shipGameObject->add<SceneNodeComponent>(spaceshipSceneNode);
+shipGameObject->add<Move2DComponent>();
+shipGameObject->add<TwinStickInputComponent>();
+
+auto* ship = gameWorld.addGameObject(std::move(shipGameObject));
 
 // Set size in meters
-spaceship->setSize(5.0f, 5.0f, 0.0f, Unit::Meter);
+ship->get<SceneNodeComponent>()->setSize(5.0f, 5.0f, 0.0f, Unit::Meter);
 
-// Game loop with command pattern
-auto commandBuffer = CommandBuffer{};
-inputHandler.handleInput(inputSnapshot, spaceship->guid(), commandBuffer);
+// Game loop
+updateContext.setDeltaTime(deltaTime);
+updateContext.setInputSnapshot(&inputSnapshot);
+gameWorld.update(updateContext);
 commandBuffer.flush(gameWorld);
-gameWorld.update(deltaTime);
 ```
 
-## Logging
+## Physics Tuning
 
-The spaceship logs its state updates:
+Use the Spaceship Physics widget to adjust movement parameters at runtime:
 
-```cpp
-auto& logger = LogManager::loggerForScope("helios::examples::spaceshipControl::Spaceship");
-logger.debug(std::format("Updating at {}", deltaTime));
-```
-
-Use the Log Console's scope filter to isolate messages from specific modules.
+- **Movement**: Max speed, acceleration, dampening
+- **Rotation**: Max rotation speed, dampening
+- **Reset**: Restore default physics values
 

@@ -200,6 +200,8 @@ export namespace helios::scene {
          *
          * Taking a snapshot will frustum cull the SceneNodes and place their Renderables
          * along with the current matrices of this scene into the Snapshot object.
+         * Only those SceneNodes are considered that were configured with a Renderable and
+         * have their `isActive`-flag set to true.
          *
          * @param viewport The viewport for which the Snapshot is created.
          *

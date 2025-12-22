@@ -4,62 +4,41 @@
  */
 module;
 
+#include <memory>
+#include <vector>
+
+
 export module helios.engine.game.GameObject;
 
-import helios.scene.SceneNode;
 import helios.util.Guid;
-import helios.scene.Transform;
-import helios.math.types;
-import helios.core.units;
+import helios.engine.game.Component;
+import helios.engine.game.UpdateContext;
+import helios.engine.game.Updatable;
 
 export namespace helios::engine::game {
 
     /**
-     * @brief Base class representing an interactive game entity in the game world.
+     * @brief Base class for interactive game entities using a component-based architecture.
      *
-     * @details The `GameObject` provides a game-logic-level abstraction over a `SceneNode`.
-     * It serves as the primary building block for game-specific entities like players or enemies,
-     * designed to be subclassed to add further behavior. Each `GameObject` has a unique
-     * `Guid` for easy identification and provides convenient methods for manipulating the
-     * transform of its underlying `SceneNode`. It also acts as the target for `Command` execution.
+     * @details A GameObject is a container for Component instances that define its behavior.
+     * Each GameObject has a unique Guid for identification in the GameWorld and supports
+     * per-frame updates for components implementing the Updatable interface.
+     *
+     * GameObjects are typically owned by a GameWorld and should be created using
+     * std::make_unique before being added to the world.
      *
      * Example usage:
      * ```cpp
-     * class Player : public helios::engine::game::GameObject {
-     * public:
-     *     using GameObject::GameObject;
+     * auto entity = std::make_unique<helios::engine::game::GameObject>();
+     * entity->add<SceneNodeComponent>(sceneNode);
+     * entity->add<Move2DComponent>();
      *
-     *     void jump() {
-     *         setTranslation({0.0f, 5.0f, 0.0f});
-     *     }
-     * };
-     *
-     * auto sceneNode = std::make_shared<helios::scene::SceneNode>();
-     * auto player = std::make_unique<Player>(sceneNode.get());
-     * player->setTranslation({1.0f, 0.0f, 0.0f});
+     * auto* ptr = world.addGameObject(std::move(entity));
      * ```
-     *
-     * @warning The GameObject does NOT own the SceneNode. The caller must ensure the SceneNode
-     *          outlives the GameObject. If the SceneNode is destroyed while the GameObject is
-     *          still alive, all transform operations will result in undefined behavior.
-     *
-     * @todo Implement observer pattern or weak_ptr to detect SceneNode destruction and
-     *       invalidate the transform pointer to prevent dangling pointer issues.
      */
     class GameObject {
 
     protected:
-
-        /**
-        * @brief Canonical size of the GameObject.
-        *
-        * @details Represents the default or intrinsic size of the GameObject
-        * in object space. This value is used as a reference for applying
-        * a scaling factor with setSize(), ensuring the method operates on
-        * appropriate values as the GameObject represents its size in model space.
-        */
-        const helios::math::vec3f canonicalSize_{};
-
         /**
          * @brief Unique identifier for this GameObject.
          *
@@ -69,193 +48,104 @@ export namespace helios::engine::game {
         helios::util::Guid guid_;
 
         /**
-         * @brief Pointer to the SceneNode's transform component.
+         * @brief List of components attached to this GameObject.
          *
-         * @details This is a non-owning pointer. The GameObject does not manage the lifetime
-         * of the SceneNode or its Transform. The pointer remains valid only as long as the
-         * associated SceneNode exists.
-         *
-         * @warning This pointer can become dangling if the SceneNode is destroyed before
-         *          this GameObject. Accessing a dangling pointer results in undefined behavior.
-         *
-         * @todo Implement notification mechanism to invalidate this pointer when the
-         *       SceneNode is destroyed. Consider using observer pattern or std::weak_ptr
-         *       to safely detect SceneNode destruction.
+         * @details Components are owned by the GameObject via std::unique_ptr.
          */
-        helios::scene::Transform* transform_;
+        std::vector<std::unique_ptr<Component>> components_;
 
         /**
-         * @brief The current velocity-vector, if any.
-         */
-        helios::math::vec3f velocity_{};
-
-        /**
-         * @brief The current position-vector in local coordinates (model space).
+         * @brief Cached list of components that implement the Updatable interface.
          *
-         * @details Represents the GameObject's position relative to its local/model space,
-         * consistent with the position() accessor.
+         * @details This list is maintained for efficient iteration during the update phase.
+         * The pointers are non-owning references to elements within components_.
          */
-        helios::math::vec3f position_{};
-
-        /**
-         * @brief The current steeringInput-vector, if any.
-         */
-        helios::math::vec2f steeringInput_{};
-
-        /**
-         * @brief Normalized value for the throttle, if any.
-         */
-        float throttle_ = 0.0f;
+        std::vector<Updatable*> updatables_;
 
     public:
+        GameObject() : guid_(helios::util::Guid::generate()) {};
 
-        /**
-         * @brief Constructs a GameObject associated with a SceneNode.
-         *
-         * @param sceneNode Pointer to the SceneNode this GameObject wraps. Must not be null.
-         *
-         * @pre sceneNode != nullptr
-         *
-         * @note The GameObject does NOT take ownership of the SceneNode. The caller is responsible
-         *       for ensuring the SceneNode outlives this GameObject.
-         * @note A unique Guid is automatically generated during construction.
-         *
-         * @warning Passing a null sceneNode will result in undefined behavior when accessing
-         *          transform methods. In debug builds, this should trigger an assertion.
-         */
-        explicit GameObject(helios::scene::SceneNode* sceneNode);
-
-        /**
-         * @brief Virtual destructor to ensure proper cleanup of derived classes.
-         */
         virtual ~GameObject() = default;
 
+        /**
+         * @brief Adds a new component of type T to the GameObject.
+         *
+         * @tparam T The type of component to add. Must derive from Component.
+         * @tparam Args Argument types for the component's constructor.
+         * @param args Arguments forwarded to the component's constructor.
+         * @return Reference to the newly created component.
+         *
+         * @details The component is created, attached to this GameObject (onAttach is called),
+         * and if it implements Updatable, it is added to the update list.
+         */
+        template<typename T, typename... Args>
+        T& add(Args&&... args) {
+
+            auto component_ptr = std::make_unique<T>(std::forward<Args>(args)...);
+            T* raw_component_ptr = component_ptr.get();
+
+            component_ptr->onAttach(this);
+
+            if constexpr (std::derived_from<T, helios::engine::game::Updatable>) {
+                updatables_.push_back(raw_component_ptr);
+            }
+
+            components_.push_back(std::move(component_ptr));
+
+            return *raw_component_ptr;
+        }
 
         /**
-         * @brief Sets the size of the GameObject in the game world.
+         * @brief Retrieves a component of type T.
          *
-         * @param width The width of the GameObject, specified in the given unit.
-         * @param height The height of the GameObject, specified in the given unit.
-         * @param depth The depth of the GameObject, specified in the given unit.
-         * @param unit The unit of measurement for the size (default is meters).
+         * @tparam T The type of component to retrieve.
+         * @return Pointer to the component if found, nullptr otherwise.
          *
-         * @return Reference to this GameObject for method chaining.
-         *
-         * @note The size is applied to the underlying SceneNode's transform.
-         *
-         * @warning If the associated SceneNode is destroyed, calling this method
-         *          will result in undefined behavior.
+         * @details Performs a linear search through the components.
          */
-        GameObject& setSize(float width, float height, float depth, helios::core::units::Unit unit=helios::core::units::Unit::Meter) noexcept;
+        template<typename T>
+        T* get() const {
+            for (const auto& component : components_) {
+                if (auto* comp = dynamic_cast<T*>(component.get())) {
+                    return comp;
+                }
+            }
+
+            return nullptr;
+        }
+
 
         /**
-         * @brief Returns a ref to the current position of the GameObject in local coordinates.
+         * @brief Checks if the GameObject has a component of type T.
          *
-         * @return The position vector in model space (local).
+         * @tparam T The type of component to check for.
+         * @return true if the component exists, false otherwise.
          */
-        [[nodiscard]] const helios::math::vec3f& position() const noexcept;
+        template<typename T>
+        [[nodiscard]] bool has() const {
+            return get<T>() != nullptr;
+        }
 
         /**
-         * @brief Returns a const ref to the current steering input vector.
+         * @brief Updates all updatable components attached to this GameObject.
          *
-         * @return The normalized direction vector representing input from controls.
-         *
-         * @details This vector indicates the desired movement direction as provided
-         *          by the player or AI controller. A zero vector indicates no input.
+         * @param updateContext Context containing frame delta time and other update data.
          */
-        [[nodiscard]] const helios::math::vec2f& steeringInput() const noexcept;
+        void update(helios::engine::game::UpdateContext& updateContext) {
+            for (auto* updatable: updatables_) {
+                updatable->update(updateContext);
+            }
+        }
 
         /**
-         * @brief Returns the current throttle value.
+         * @brief Returns the unique identifier for this GameObject.
          *
-         * @return A normalized value between 0.0 (idle) and 1.0 (full throttle).
-         *
-         * @details Represents the intensity of the movement input, typically derived
-         *          from analog stick magnitude or key press duration.
+         * @return Const reference to the Guid, valid for the lifetime of this object.
          */
-        [[nodiscard]] float throttle() const noexcept;
-
-        /**
-         * @brief Returns a const ref to the current velocity vector.
-         *
-         * @return The velocity vector in units per second.
-         *
-         * @details Represents the current movement direction and speed of the
-         *          GameObject in world space.
-         */
-        [[nodiscard]] const helios::math::vec3f& velocity() const noexcept;
-
-        /**
-         * @brief Returns the current speed as a ratio of maximum speed.
-         *
-         * @return A value between 0.0 (stationary) and 1.0 (maximum speed).
-         *
-         * @details This ratio can be used for UI elements (e.g., speedometer),
-         *          audio effects (e.g., engine pitch), or visual effects that
-         *          scale with velocity. Derived classes should override this
-         *          method to provide entity-specific speed calculations.
-         */
-        [[nodiscard]] virtual float speedRatio() const noexcept;
-
-        /**
-         * @brief Updates the GameObject state for the current frame.
-         *
-         * @param deltaTime Time elapsed since the last frame, in seconds.
-         *
-         * @note Derived classes must implement this method to define frame-by-frame behavior
-         *       such as physics updates, animation, AI logic, or other time-dependent state changes.
-         * @note Called once per frame by the GameWorld during its update cycle.
-         */
-        virtual void update(float deltaTime) = 0;
-
-        /**
-         * @brief Returns the unique identifier of this GameObject.
-         *
-         * @return Const reference to the GameObject's Guid.
-         *
-         * @note The Guid is generated during construction and never changes.
-         */
-        [[nodiscard]] const helios::util::Guid& guid() const noexcept;
-
-        /**
-         * @brief Applies a scaling transformation to the GameObject.
-         *
-         * @param scale The scale vector to apply (x, y, z components).
-         *
-         * @return Reference to this GameObject for method chaining.
-         *
-         * @note This modifies the underlying SceneNode's local transform.
-         *
-         * @warning If the SceneNode has been destroyed, this will cause undefined behavior.
-         */
-        GameObject& setScale(const helios::math::vec3f& scale) noexcept;
-
-        /**
-         * @brief Applies a rotation transformation to the GameObject.
-         *
-         * @param rotation The rotation matrix to apply.
-         *
-         * @return Reference to this GameObject for method chaining.
-         *
-         * @note This modifies the underlying SceneNode's local transform.
-         *
-         * @warning If the SceneNode has been destroyed, this will cause undefined behavior.
-         */
-        GameObject& setRotation(const helios::math::mat4f& rotation) noexcept;
-
-        /**
-         * @brief Applies a translation transformation to the GameObject.
-         *
-         * @param translation The translation vector to apply (x, y, z components).
-         *
-         * @return Reference to this GameObject for method chaining.
-         *
-         * @note This modifies the underlying SceneNode's local transform.
-         *
-         * @warning If the SceneNode has been destroyed, this will cause undefined behavior.
-         */
-        GameObject& setTranslation(const helios::math::vec3f& translation) noexcept;
+        [[nodiscard]] const helios::util::Guid& guid() const noexcept {
+            return guid_;
+        };
     };
 
 
-}
+} // namespace helios::engine::game

@@ -12,9 +12,12 @@ export module helios.engine.game.GameWorld;
 
 import helios.engine.game.GameObject;
 import helios.util.Guid;
-
+import helios.engine.game.UpdateContext;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
+import helios.scene.Scene;
+import helios.engine.game.System;
+
 
 #define HELIOS_LOG_SCOPE "helios::engine::game::GameWorld"
 export namespace helios::engine::game {
@@ -49,6 +52,7 @@ export namespace helios::engine::game {
      */
     class GameWorld {
 
+    protected:
         /**
          * @brief Hash map storing all active GameObjects, indexed by their Guid.
          *
@@ -65,19 +69,110 @@ export namespace helios::engine::game {
         inline static const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(
             HELIOS_LOG_SCOPE);
 
+        /**
+         * @brief Pointer to the Scene for scene graph integration.
+         *
+         * @details Non-owning pointer; may be nullptr if scene integration is not required.
+         */
+        helios::scene::Scene* scene_;
+
+        /**
+         * @brief Vector storing all registered Systems.
+         *
+         * @details Systems are updated in order of registration after all GameObjects
+         *          have been updated.
+         */
+        std::vector<std::unique_ptr<System>> systems_;
+
     public:
+
+        /**
+         * @brief Constructs a GameWorld with a reference to the scene graph.
+         *
+         * @param scene Pointer to the Scene used for scene graph integration.
+         *              May be nullptr if scene graph integration is not required.
+         */
+        explicit GameWorld(helios::scene::Scene* scene) noexcept : scene_(scene) {}
+
+        /**
+         * @brief Returns the scene graph associated with this GameWorld.
+         *
+         * @return Const pointer to the Scene, or nullptr if not set.
+         */
+        [[nodiscard]] const helios::scene::Scene* scene() const noexcept;
+
+        /**
+         * @brief Adds a System to the GameWorld.
+         *
+         * @details Creates a System of the specified type with the given constructor arguments,
+         *          invokes its `onAdd()` callback, and registers it with this GameWorld.
+         *          Systems are updated each frame after GameObjects.
+         *
+         * @tparam T The System type to add. Must derive from System.
+         * @tparam Args Constructor argument types.
+         * @param args Arguments forwarded to the System constructor.
+         *
+         * @return Reference to the newly added System.
+         *
+         * @note The GameWorld takes ownership of the System.
+         */
+        template<typename T, typename... Args>
+        T& add(Args&&... args) {
+            auto system_ptr = std::make_unique<T>(std::forward<Args>(args)...);
+            T* raw_ptr = system_ptr.get();
+
+            system_ptr->onAdd(this);
+            systems_.push_back(std::move(system_ptr));
+
+            return *raw_ptr;
+        }
+
+        /**
+         * @brief Retrieves a System of the specified type.
+         *
+         * @details Searches through all registered Systems using dynamic_cast
+         *          to find a matching type.
+         *
+         * @tparam T The System type to retrieve. Must derive from System.
+         *
+         * @return Pointer to the System if found, nullptr otherwise.
+         *
+         * @note Uses dynamic_cast internally; consider type-based registry for
+         *       performance-critical paths.
+         */
+        template<typename T>
+        [[nodiscard]] T* get() const {
+            for (const auto& system : systems_) {
+                if (auto* sys = dynamic_cast<T*>(system.get())) {
+                    return sys;
+                }
+            }
+            return nullptr;
+        }
+
+        /**
+         * @brief Checks if a System of the specified type is registered.
+         *
+         * @tparam T The System type to check for. Must derive from System.
+         *
+         * @return True if a System of type T exists, false otherwise.
+         */
+        template<typename T>
+        [[nodiscard]] bool has() const {
+            return get<T>() != nullptr;
+        }
 
         /**
          * @brief Updates all GameObjects in the world for the current frame.
          *
-         * @param deltaTime Time elapsed since the last frame, in seconds.
+         * @param updateContext Context containing deltaTime, input snapshot, game world and command buffer.
          *
          * @note Iterates through all registered GameObjects and invokes their update() method.
          *       The order of updates is not guaranteed due to the underlying unordered_map storage.
          * @note This method is noexcept; individual GameObject::update() implementations should
          *       handle their own exceptions to prevent propagation.
          */
-        void update(float deltaTime) const noexcept;
+        void update(helios::engine::game::UpdateContext& updateContext) const noexcept;
 
         /**
          * @brief Adds a GameObject to the world and transfers ownership.

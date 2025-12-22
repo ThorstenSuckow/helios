@@ -144,7 +144,7 @@ namespace helios::scene {
 
 
     const helios::math::mat4f& SceneNode::worldTransform() noexcept {
-        if (needsUpdate_) {
+        if (needsUpdate()) {
             update();
         }
 
@@ -162,12 +162,11 @@ namespace helios::scene {
     }
 
     helios::math::aabbf SceneNode::aabb() noexcept {
-        if (needsUpdate_) {
+        if (needsUpdate()) {
             update();
         }
 
         return aabb_;
-
     }
 
 
@@ -200,6 +199,18 @@ namespace helios::scene {
     void SceneNode::setInheritance(const helios::math::TransformType inherit) noexcept {
         inheritance_ = inherit;
         needsUpdate_ = true;
+    }
+
+    bool SceneNode::isActive() const noexcept {
+        return isActive_;
+    }
+
+    void SceneNode::setActive(bool active) noexcept {
+        isActive_ = active;
+    }
+
+    bool SceneNode::hasRenderable() const noexcept {
+        return renderable() != nullptr;
     }
 
 };

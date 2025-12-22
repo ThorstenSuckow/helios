@@ -73,6 +73,19 @@ export namespace helios::math {
          */
         explicit constexpr vec4(const vec3<T>& vec) noexcept : v{vec[0], vec[1], vec[2], static_cast<T>(1)} {}
 
+        /**
+         * @brief Creates a new vec4 with the same x, y, z components but a modified w component.
+         *
+         * This method returns a new vec4 instance where the x, y, and z components remain unchanged,
+         * and the w component is set to the specified value.
+         *
+         * @param w The new value for the w component.
+         *
+         * @return A new vec4<T> instance with the updated w component.
+         */
+        [[nodiscard]] constexpr vec4<T> withW(T w) const noexcept {
+            return helios::math::vec4<T>{v[0], v[1], v[2], w};
+        }
 
         /**
          * @brief Provides read only access to the vector components.

@@ -1,0 +1,69 @@
+/**
+ * @file ShootCommand.ixx
+ * @brief Command for triggering shooting actions on GameObjects.
+ */
+module;
+
+export module helios.engine.game.commands.ShootCommand;
+
+import helios.engine.game.Command;
+import helios.engine.game.GameObject;
+import helios.math.types;
+import helios.engine.game.components.gameplay.ShootComponent;
+
+export namespace helios::engine::game::commands {
+
+    /**
+     * @brief Command that triggers a shooting action on a GameObject.
+     *
+     * @details This command encapsulates a shoot request with an intensity factor
+     * derived from trigger pressure or button state. When executed, it invokes
+     * ShootComponent::shoot() to initiate projectile spawning.
+     *
+     * @note The target GameObject must have a ShootComponent attached for this
+     *       command to have any effect.
+     *
+     * @see helios::engine::game::Command
+     * @see helios::engine::game::components::gameplay::ShootComponent
+     */
+    class ShootCommand : public helios::engine::game::Command {
+
+        /**
+         * @brief The magnitude determining fire intensity.
+         */
+        const float intensity_;
+
+    public:
+
+        /**
+         * @brief Constructs a shoot command with the given intensity.
+         *
+         * @param intensity Fire intensity factor (0.0 to 1.0).
+         */
+        explicit ShootCommand(
+            float intensity
+        ) :
+            intensity_(intensity)
+        {}
+
+
+        /**
+         * @brief Executes the shoot command on a GameObject.
+         *
+         * @param gameObject The target entity with a ShootComponent.
+         */
+        void execute(helios::engine::game::GameObject& gameObject) override {
+
+            auto* shootComponent = gameObject.get<helios::engine::game::components::gameplay::ShootComponent>();
+
+            if (shootComponent) {
+                shootComponent->shoot(intensity_);
+            }
+
+        }
+
+
+    };
+
+
+}

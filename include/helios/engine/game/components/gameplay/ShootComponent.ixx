@@ -8,7 +8,7 @@ module;
 #include <iostream>
 #include <memory>
 
-export module helios.engine.game.components.physics.ShootComponent;
+export module helios.engine.game.components.gameplay.ShootComponent;
 
 import helios.math.types;
 import helios.math.utils;
@@ -33,7 +33,7 @@ import helios.rendering.model.config.MaterialProperties;
 
 import helios.engine.game.systems.BulletPool;
 
-export namespace helios::engine::game::components::physics {
+export namespace helios::engine::game::components::gameplay {
 
     /**
      * @brief Component for handling projectile shooting with rate limiting.

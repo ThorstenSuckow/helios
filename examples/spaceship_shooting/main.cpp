@@ -59,6 +59,7 @@ import helios.scene.CameraSceneNode;
 
 
 // util
+import helios.util.Colors;
 import helios.util.io.BasicStringFileReader;
 import helios.util.time.Stopwatch;
 import helios.util.log.LogSink;
@@ -98,7 +99,7 @@ import helios.engine.game.components.scene.SceneNodeComponent;
 import helios.engine.game.components.input.TwinStickInputComponent;
 import helios.engine.game.components.physics.Move2DComponent;
 import helios.engine.game.components.gameplay.Aim2DComponent;
-import helios.engine.game.components.physics.ShootComponent;
+import helios.engine.game.components.gameplay.ShootComponent;
 
 import helios.engine.game.systems.BulletPool;
 
@@ -218,12 +219,12 @@ int main() {
     // ========================================
 
     // spaceship
-    auto spaceshipMaterialProps = MaterialProperties(vec4(1.0f, 1.0f, 0.0f, 1.0f));
+    auto spaceshipMaterialProps = MaterialProperties(helios::util::Colors::Yellow);
     auto spaceshipMaterialProps_shared = std::make_shared<MaterialProperties>(spaceshipMaterialProps);
     auto material_ptr = std::make_shared<Material>(shader_ptr, spaceshipMaterialProps_shared);
 
     // grid
-    auto gridMaterialProps = MaterialProperties(vec4(0.0f, 1.0f, 1.0f, 0.2f));
+    auto gridMaterialProps = MaterialProperties(helios::util::Colors::Turquoise.withW(0.2f));
     auto gridMaterialProps_shared = std::make_shared<MaterialProperties>(gridMaterialProps);
     auto gridMaterial_ptr = std::make_shared<Material>(shader_ptr, gridMaterialProps_shared);
 
@@ -267,12 +268,12 @@ int main() {
 
     auto rightStickGizmoRenderable = std::make_shared<Renderable>(
         leftStickGizmoPrototype,
-        leftStickGizmoMaterialProps.overrideBaseColor(helios::math::vec4f{0.0f, 1.0f, 1.0f, 1.0f})
+        leftStickGizmoMaterialProps.overrideBaseColor(helios::util::Colors::Magenta)
     );
 
     auto shipDirectionGizmoRenderable = std::make_shared<Renderable>(
         leftStickGizmoPrototype,
-        leftStickGizmoMaterialProps.overrideBaseColor(helios::math::vec4f{1.0f, 0.0f, 0.0f, 1.0f})
+        leftStickGizmoMaterialProps.overrideBaseColor(helios::util::Colors::Red)
     );
 
     const auto gridPrototype = std::make_shared<RenderPrototype>(gridMaterial_ptr, gridMesh_ptr);
@@ -348,7 +349,7 @@ int main() {
     shipGameObject->add<helios::engine::game::components::input::TwinStickInputComponent>();
     shipGameObject->add<helios::engine::game::components::physics::Move2DComponent>();
     shipGameObject->add<helios::engine::game::components::gameplay::Aim2DComponent>();
-    shipGameObject->add<helios::engine::game::components::physics::ShootComponent>();
+    shipGameObject->add<helios::engine::game::components::gameplay::ShootComponent>();
     auto* theShipPtr = gameWorld.addGameObject(std::move(shipGameObject));
 
     // Register the spaceship with the tuning widget

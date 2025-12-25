@@ -65,7 +65,7 @@ export namespace helios::math {
         * @brief Creates a diagonal matrix with the components of vec3<T> as the
         * diagonal elements. Element at [4, 4] is set to 1.
         *
-        * @param f The scalar value for the diagonal components.
+        * @param f The vector containing the diagonal components.
         */
         explicit constexpr mat4(const vec3<T> f) noexcept
             : m{ f[0],  T{}, T{}, T{},
@@ -285,6 +285,65 @@ export namespace helios::math {
         }
 
         /**
+         * @brief Returns the i-th column of the matrix.
+         *
+         * @param i The zero-based index of the column (0-3).
+         * @return A vec4<T> representing the column.
+         */
+        helios::math::vec4<T> column(unsigned int i) const noexcept {
+            assert(i <= 3 && "unecpected value for column");
+            const auto m = *this;
+            return helios::math::vec4<T>{
+                m(0, i), m(1, i), m(2, i), m(3, i)
+            };
+        }
+
+        /**
+         * @brief Computes the inverse of the matrix.
+         *
+         * @return The inverse matrix.
+         *
+         * @see [Len16, Listing 1.11, 44]
+         */
+        constexpr helios::math::mat4<T> inverse() const noexcept {
+            const auto m = *this;
+
+            const auto a = column(0).toVec3();
+            const auto b = column(1).toVec3();
+            const auto c = column(2).toVec3();
+            const auto d = column(3).toVec3();
+
+            const float x = m(3, 0);
+            const float y = m(3, 1);
+            const float z = m(3, 2);
+            const float w = m(3, 3);
+
+            auto s = helios::math::cross(a, b);
+            auto t = helios::math::cross(c, d);
+            auto u = a*y - b*x;
+            auto v = c*w - d*z;
+
+            T invDet = static_cast<T>(1.0f) / (helios::math::dot(s, v) + helios::math::dot(t, u));
+
+            s = s * invDet;
+            t = t * invDet;
+            u = u * invDet;
+            v = v * invDet;
+
+            auto r0 = (helios::math::cross(b, v)) + t*y;
+            auto r1 = (helios::math::cross(v, a)) - t*x;
+            auto r2 = (helios::math::cross(d, u)) + s*w;
+            auto r3 = (helios::math::cross(u, c)) - s*z;
+
+            return helios::math::mat4<T>{
+                r0[0], r0[1], r0[2], -helios::math::dot(b, t),
+                r1[0], r1[1], r1[2],  helios::math::dot(a, t),
+                r2[0], r2[1], r2[2], -helios::math::dot(d, s),
+                r3[0], r3[1], r3[2],  helios::math::dot(c, s)
+            };
+        }
+
+        /**
          * @brief Extracts the translation component from this matrix.
          *
          * @details Returns the translation vector stored in column 3 (elements [0,3], [1,3], [2,3]).
@@ -309,7 +368,7 @@ export namespace helios::math {
          *
          * @return A new mat4<T> with the updated translation component.
          */
-        helios::math::mat4<T> setTranslation(helios::math:: vec3f v) const noexcept {
+        helios::math::mat4<T> setTranslation(helios::math::vec3<T> v) const noexcept {
             const auto m = *this;
             return helios::math::mat4<T>{
                 m(0, 0), m(1, 0), m(2, 0), m(3, 0),
@@ -365,18 +424,18 @@ export namespace helios::math {
                 id(2, 0) = m(2, 0); id(2, 1) = m(2, 1); id(2, 2) = m(2, 2);
                 } else {
 
-                    const auto bx = vec3f(m(0, 0), m(1, 0),  m(2, 0));
-                    const auto by = vec3f(m(0, 1), m(1, 1),  m(2, 1));
-                    const auto bz = vec3f(m(0, 2), m(1, 2),  m(2, 2));
+                    const auto bx = vec3<T>(m(0, 0), m(1, 0),  m(2, 0));
+                    const auto by = vec3<T>(m(0, 1), m(1, 1),  m(2, 1));
+                    const auto bz = vec3<T>(m(0, 2), m(1, 2),  m(2, 2));
 
                     const auto sx = bx.length();
                     const auto sy = by.length();
                     const auto sz = bz.length();
 
                     if (helios::math::transformTypeMatch(type, helios::math::TransformType::Rotation)) {
-                        vec3f rx = sx != 0 ? bx/sx : vec3f{1, 0, 0};
-                        vec3f ry = sy != 0 ? by/sy : vec3f{0, 1, 0};
-                        vec3f rz = sz != 0 ? bz/sz : vec3f{0, 0, 1};
+                        vec3<T> rx = sx != 0 ? bx/sx : vec3<T>{1, 0, 0};
+                        vec3<T> ry = sy != 0 ? by/sy : vec3<T>{0, 1, 0};
+                        vec3<T> rz = sz != 0 ? bz/sz : vec3<T>{0, 0, 1};
 
                         id(0, 0) = rx[0]; id(0, 1) = ry[0]; id(0, 2) = rz[0];
                         id(1, 0) = rx[1]; id(1, 1) = ry[1]; id(1, 2) = rz[1];

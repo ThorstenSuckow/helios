@@ -148,11 +148,23 @@ export namespace helios::math {
          * @details
          * Creates a vec4 with the x, y, z components from this vector and sets
          * the w component to 0, representing a direction in homogeneous coordinates.
-         * For position vectors (w = 1), construct the vec4 directly.
          *
          * @return A new vec4<T> instance with components (x, y, z, 0).
          */
         [[nodiscard]] vec4<T> toVec4() const noexcept;
+
+        /**
+         * @brief Converts this 3D vector to a 4D homogeneous vector.
+         *
+         * @details
+         * Creates a vec4 with the x, y, z components from this vector and sets
+         * the w component accordingly, representing a direction in homogeneous coordinates.
+         *
+         * @param w The value of the w component.
+         *
+         * @return A new vec4<T> instance with components (x, y, z, w).
+         */
+        [[nodiscard]] vec4<T> toVec4(T w) const noexcept;
 
         /**
          * @brief Returns a normalized version of this vector.
@@ -195,6 +207,44 @@ export namespace helios::math {
             return std::fabs(v[0] - rgt[0]) <= epsilon &&
                    std::fabs(v[1] - rgt[1]) <= epsilon &&
                    std::fabs(v[2] - rgt[2]) <= epsilon;
+        }
+
+        /**
+         * @brief Returns a new vector with the y-component negated.
+         *
+         * @return A new vec3<T> with (x, -y, z).
+         */
+        constexpr helios::math::vec3<T> flipY() const noexcept {
+            return helios::math::vec3<T>{v[0], -v[1], v[2]};
+        }
+
+        /**
+         * @brief Returns a new vector with the y-component replaced by the given value.
+         *
+         * @param y The new y value.
+         * @return A new vec3<T> with (x, y, z).
+         */
+        constexpr helios::math::vec3<T> withY(T y) const noexcept {
+            return helios::math::vec3<T>{v[0], y, v[2]};
+        }
+
+        /**
+         * @brief Returns a new vector with the x-component negated.
+         *
+         * @return A new vec3<T> with (-x, y, z).
+         */
+        constexpr helios::math::vec3<T> flipX() const noexcept {
+            return helios::math::vec3<T>{-v[0], v[1], v[2]};
+        }
+
+        /**
+         * @brief Returns a new vector with the x-component replaced by the given value.
+         *
+         * @param x The new x value.
+         * @return A new vec3<T> with (x, y, z).
+         */
+        constexpr helios::math::vec3<T> withX(T x) const noexcept {
+            return helios::math::vec3<T>{x, v[1], v[2]};
         }
     };
 
@@ -296,7 +346,6 @@ export namespace helios::math {
         };
     }
 
-
     /**
      * @brief Computes the dot product of two 3D vectors.
      *
@@ -338,6 +387,11 @@ export namespace helios::math {
     template<helios::math::Numeric T>
     inline vec4<T> vec3<T>::toVec4() const noexcept {
         return vec4<T>{v[0], v[1], v[2], static_cast<T>(0)};
+    }
+
+    template<helios::math::Numeric T>
+   inline vec4<T> vec3<T>::toVec4(T w) const noexcept {
+        return vec4<T>{v[0], v[1], v[2], w};
     }
 
     template<helios::math::Numeric T>

@@ -17,7 +17,6 @@ import helios.util.Guid;
 import helios.core.Transform;
 import helios.math.types;
 import helios.math.transform;
-import helios.core.Transform;
 
 export namespace helios::scene {
 

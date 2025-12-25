@@ -60,7 +60,7 @@ export namespace helios::engine::game::commands {
             if (shootComponent) {
                 auto* m2d            =  gameObject.get<helios::engine::game::components::physics::Move2DComponent>();
 
-                shootComponent->shoot(intensity_, m2d != nullptr ? m2d->velocity() : helios::math::vec3f{1.0f, 1.0f, 0.0f});
+                shootComponent->shoot(intensity_, m2d != nullptr ? m2d->velocity() : helios::math::vec3f{0.0f, 0.0f, 0.0f});
             }
 
         }

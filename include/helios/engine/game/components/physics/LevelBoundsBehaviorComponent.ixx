@@ -53,7 +53,7 @@ export namespace helios::engine::game::components::physics {
          */
         void setRestitution(const float restitution) noexcept {
             assert(restitution >= 0.0f && restitution <= 1.0f && "Unexpected value for restitution");
-            restitution_ = std::clamp(restitution, 0.0f, 1.0f);;
+            restitution_ = std::clamp(restitution, 0.0f, 1.0f);
         }
 
 

@@ -1,5 +1,5 @@
 /**
-* @file _module.ixx
+ * @file _module.ixx
  * @brief Aggregate module for helios::engine::game::systems::gameplay namespace.
  */
 export module helios.engine.game.systems.gameplay;

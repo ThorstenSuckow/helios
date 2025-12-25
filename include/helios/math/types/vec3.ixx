@@ -390,7 +390,7 @@ export namespace helios::math {
     }
 
     template<helios::math::Numeric T>
-   inline vec4<T> vec3<T>::toVec4(T w) const noexcept {
+    inline vec4<T> vec3<T>::toVec4(T w) const noexcept {
         return vec4<T>{v[0], v[1], v[2], w};
     }
 

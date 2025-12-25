@@ -307,7 +307,7 @@ export namespace helios::engine::game::systems::gameplay {
                 } else {
                     despawn(i);
                     // do not increment i since despawn() will erase the
-                    // element ad resize the vector
+                    // element and resize the vector
                     continue;
                 }
 

@@ -277,10 +277,45 @@ export namespace helios::math {
         helios::math::mat4<T> transpose() const noexcept {
             const auto m = *this;
             return helios::math::mat4<T>{
+                m(0, 0), m(0, 1), m(0, 2), m(0, 3),
+                m(1, 0), m(1, 1), m(1, 2), m(1, 3),
+                m(2, 0), m(2, 1), m(2, 2), m(2, 3),
+                m(3, 0), m(3, 1), m(3, 2), m(3, 3)
+            };
+        }
+
+        /**
+         * @brief Extracts the translation component from this matrix.
+         *
+         * @details Returns the translation vector stored in column 3 (elements [0,3], [1,3], [2,3]).
+         * This represents the position offset in a standard TRS (Translation-Rotation-Scale) matrix.
+         *
+         * @return A vec3<T> containing the x, y, z translation components.
+         */
+        helios::math::vec3<T> translation() const noexcept {
+            const auto m = *this;
+            return helios::math::vec3<T>{
+                m(0, 3), m(1, 3), m(2, 3)
+            };
+        }
+
+        /**
+         * @brief Creates a new matrix with the specified translation, preserving other components.
+         *
+         * @details Returns a copy of this matrix with column 3 (translation) replaced by the
+         * given vector. The w-component [3,3] is set to 1.0 for homogeneous coordinates.
+         *
+         * @param v The new translation vector (x, y, z).
+         *
+         * @return A new mat4<T> with the updated translation component.
+         */
+        helios::math::mat4<T> setTranslation(helios::math:: vec3f v) const noexcept {
+            const auto m = *this;
+            return helios::math::mat4<T>{
                 m(0, 0), m(1, 0), m(2, 0), m(3, 0),
                 m(0, 1), m(1, 1), m(2, 1), m(3, 1),
                 m(0, 2), m(1, 2), m(2, 2), m(3, 2),
-                m(0, 3), m(1, 3), m(2, 3), m(3, 3)
+                v[0], v[1], v[2], static_cast<T>(1.0f)
             };
         }
 

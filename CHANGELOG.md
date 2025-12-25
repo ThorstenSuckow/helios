@@ -7,6 +7,79 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [Milestone 3] - 2025-12-25
+
+### Added
+
+#### Component System Architecture
+- `TransformComponent` for independent transform management (local/world)
+- `ScaleComponent` for unit-based sizing with dirty flag tracking
+- `AabbColliderComponent` for world-space bounding boxes
+- `ModelAabbComponent` for original model AABB storage
+- `LevelBoundsBehaviorComponent` for configurable boundary reactions (bounce, restitution)
+- Automatic AABB capture from SceneNode meshes via `onAttach()`
+
+#### Game Systems
+- `Move2DSystem` for 2D physics with rotation, velocity integration, and dampening
+- `ScaleSystem` for applying unit-based scaling from ScaleComponent
+- `BoundsUpdateSystem` for updating AABB colliders from world transforms
+- `LevelBoundsBehaviorSystem` for boundary collisions with bounce behavior
+- `SceneSyncSystem` for synchronizing gameplay transforms with scene graph
+- `TransformClearSystem` for clearing dirty flags at end of frame
+- `ScaleClearSystem` for clearing scale dirty flags at end of frame
+- `ProjectilePoolSystem` for efficient projectile object pooling
+
+#### Level System
+- `Level` class with configurable world bounds
+- AABB-based arena boundaries
+- Root SceneNode reference for level hierarchy
+- Unit-aware bounds configuration via `setBounds()`
+
+#### Gameplay Components
+- `Aim2DComponent` for direction tracking and firing frequency
+- `ShootComponent` for projectile firing with configurable cooldown and speed
+
+#### Rendering Assets
+- `Ellipse` 2D shape primitive for projectile and particle rendering
+- Configurable width, height, and segment count
+
+#### Utility
+- `Colors` struct with comprehensive color palette as `vec4f` (RGBA)
+- Standard colors (Black, White, Red, Green, Blue, Yellow, Cyan, Magenta)
+- Grayscale variants (LightGray, Gray, DarkGray)
+- Extended palette (Coral, Salmon, Orange, Turquoise, Gold, etc.)
+- `withW()` method for alpha channel modification
+
+#### ImGui Widgets
+- `LogWidget`: "None" scope option to completely disable logging (default)
+- `GamepadWidget`: Settings panel with side-by-side stick configuration
+- Left/Right stick deadzone and inversion in two-column layout
+- Settings panel initially expanded by default
+
+#### Examples
+- `spaceship_shooting` demo showcasing twin-stick shooter mechanics
+- Complete projectile pool integration with arena boundaries
+- Debug gizmo visualization for aim and velocity directions
+
+### Changed
+
+#### SceneNodeComponent
+- **BREAKING**: `setSize()` method removed - use `ScaleComponent` instead
+- `onAttach()` now automatically captures AABB from SceneNode mesh
+
+#### GameWorld
+- **BREAKING**: Constructor no longer requires `Scene*` parameter
+- Systems must be explicitly registered for game logic
+
+#### Move2DComponent
+- **BREAKING**: `position()` method removed (transforms managed by TransformComponent)
+- **BREAKING**: `rotationAngle()` renamed to `currentRotationAngle()`
+- Component now stores only physics state, not position
+
+### Fixed
+- Forward declaration conflicts between Component and GameObject modules
+- Circular dependency in module imports resolved via shared headers
+
 
 ## [Milestone 2] - 2025-12-16
 

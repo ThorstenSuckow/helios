@@ -27,6 +27,8 @@ Synchronizes markdown documentation from the repository root into the website's 
 | `examples/README.md` | `docs/examples/overview.md` | Examples overview |
 | `examples/simple_cube_rendering/README.md` | `docs/examples/simple-cube.md` | Cube rendering tutorial |
 | `examples/game_controller_input/README.md` | `docs/examples/gamepad-input.md` | Gamepad input tutorial |
+| `examples/spaceship_control/README.md` | `docs/examples/spaceship-control.md` | Spaceship control demo |
+| `examples/spaceship_shooting/README.md` | `docs/examples/spaceship-shooting.md` | Twin-stick shooting demo |
 
 **Usage:**
 

@@ -1,0 +1,612 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::game::systems::gameplay::ProjectilePoolSystem</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1game_1_1System" prot="public" virt="non-virtual">helios::engine::game::System</basecompoundref>
+    <innerclass refid="structhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1_1ProjectileObject" prot="protected">helios::engine::game::systems::gameplay::ProjectilePoolSystem::ProjectileObject</innerclass>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a11e1448f38a001f82ce7ca99140b6903" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; std::unique_ptr&lt; <ref refid="structhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1_1ProjectileObject" kindref="compound">ProjectileObject</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::unique_ptr&lt;ProjectileObject&gt; &gt; helios::engine::game::systems::gameplay::ProjectilePoolSystem::activeProjectiles_</definition>
+        <argsstring></argsstring>
+        <name>activeProjectiles_</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::ProjectilePoolSystem::activeProjectiles_</qualifiedname>
+        <briefdescription>
+<para>Collection of currently active projectiles in the scene. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" line="84" column="21" bodyfile="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" bodystart="84" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1ae62eb078952ee0ea5838d872c045f6c3" compoundref="ProjectilePoolSystem_8ixx" startline="275" endline="283">despawn</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a7f83f67ab1a60b7313ab9fd33aa30539" compoundref="ProjectilePoolSystem_8ixx" startline="146" endline="162">ProjectilePoolSystem</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a211dd83f0fdffdb4c106fdd0a9466867" compoundref="ProjectilePoolSystem_8ixx" startline="218" endline="265">spawn</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a1f817f28abc5bf6b56cd7641aff514d9" compoundref="ProjectilePoolSystem_8ixx" startline="294" endline="319">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1ac51c7dd05190058f56cd91e3e25f792a" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; std::unique_ptr&lt; <ref refid="structhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1_1ProjectileObject" kindref="compound">ProjectileObject</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::unique_ptr&lt;ProjectileObject&gt; &gt; helios::engine::game::systems::gameplay::ProjectilePoolSystem::pool_</definition>
+        <argsstring></argsstring>
+        <name>pool_</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::ProjectilePoolSystem::pool_</qualifiedname>
+        <briefdescription>
+<para>Pool of inactive projectiles available for spawning. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" line="89" column="21" bodyfile="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" bodystart="89" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1ae62eb078952ee0ea5838d872c045f6c3" compoundref="ProjectilePoolSystem_8ixx" startline="275" endline="283">despawn</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a2a64b5c683b4ff6fb6dfac8f64acab39" compoundref="ProjectilePoolSystem_8ixx" startline="182" endline="205">prepareProjectiles</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a7f83f67ab1a60b7313ab9fd33aa30539" compoundref="ProjectilePoolSystem_8ixx" startline="146" endline="162">ProjectilePoolSystem</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a211dd83f0fdffdb4c106fdd0a9466867" compoundref="ProjectilePoolSystem_8ixx" startline="218" endline="265">spawn</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a6e58986c51ebc08cf1004f0e718e0623" prot="protected" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classhelios_1_1rendering_1_1Renderable" kindref="compound">helios::rendering::Renderable</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;helios::rendering::Renderable&gt; helios::engine::game::systems::gameplay::ProjectilePoolSystem::projectileRenderable_</definition>
+        <argsstring></argsstring>
+        <name>projectileRenderable_</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::ProjectilePoolSystem::projectileRenderable_</qualifiedname>
+        <briefdescription>
+<para>Shared renderable used for all projectile instances. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" line="94" column="25" bodyfile="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" bodystart="94" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a2a64b5c683b4ff6fb6dfac8f64acab39" compoundref="ProjectilePoolSystem_8ixx" startline="182" endline="205">prepareProjectiles</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a7f83f67ab1a60b7313ab9fd33aa30539" compoundref="ProjectilePoolSystem_8ixx" startline="146" endline="162">ProjectilePoolSystem</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a5e752f895c6b8c236d807f3e5f10cc43" prot="protected" static="no" mutable="no">
+        <type><ref refid="namespacehelios_1_1math_1a124c0492430aeecedc1c1a5ece4ba488" kindref="member">helios::math::aabbf</ref></type>
+        <definition>helios::math::aabbf helios::engine::game::systems::gameplay::ProjectilePoolSystem::projectileAABB_</definition>
+        <argsstring></argsstring>
+        <name>projectileAABB_</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::ProjectilePoolSystem::projectileAABB_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>The aabb of the projectile, cached. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" line="99" column="29" bodyfile="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" bodystart="99" bodyend="99"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a2a64b5c683b4ff6fb6dfac8f64acab39" compoundref="ProjectilePoolSystem_8ixx" startline="182" endline="205">prepareProjectiles</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a1f817f28abc5bf6b56cd7641aff514d9" compoundref="ProjectilePoolSystem_8ixx" startline="294" endline="319">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a7a31697384f0b0280ea39ea74f6fa2bc" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::systems::gameplay::ProjectilePoolSystem::intensity_</definition>
+        <argsstring></argsstring>
+        <name>intensity_</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::ProjectilePoolSystem::intensity_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Current frequency factor (0.0 to 1.0) for fire rate control. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" line="106" column="15" bodyfile="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1acd4f8b9c52d122a783f2342e816b2277" prot="protected" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent" kindref="compound">helios::engine::game::components::gameplay::Aim2DComponent</ref> *</type>
+        <definition>helios::engine::game::components::gameplay::Aim2DComponent* helios::engine::game::systems::gameplay::ProjectilePoolSystem::aimComponent_</definition>
+        <argsstring></argsstring>
+        <name>aimComponent_</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::ProjectilePoolSystem::aimComponent_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Optional reference to an aim component for direction. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" line="111" column="68" bodyfile="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a4f6a03a36459e8fb47ec0be2df0e03c2" prot="protected" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent" kindref="compound">helios::engine::game::components::scene::SceneNodeComponent</ref> *</type>
+        <definition>helios::engine::game::components::scene::SceneNodeComponent* helios::engine::game::systems::gameplay::ProjectilePoolSystem::sceneNodeComponent_</definition>
+        <argsstring></argsstring>
+        <name>sceneNodeComponent_</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::ProjectilePoolSystem::sceneNodeComponent_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Optional reference to a scene node component for spawn position. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" line="116" column="69" bodyfile="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a4207b7e317e39723c50e86b293d9680d" prot="protected" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">helios::scene::SceneNode</ref> *</type>
+        <definition>helios::scene::SceneNode* helios::engine::game::systems::gameplay::ProjectilePoolSystem::rootNode_</definition>
+        <argsstring></argsstring>
+        <name>rootNode_</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::ProjectilePoolSystem::rootNode_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Root node of the scene graph where projectiles are attached. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" line="121" column="34" bodyfile="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" bodystart="121" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a2a64b5c683b4ff6fb6dfac8f64acab39" compoundref="ProjectilePoolSystem_8ixx" startline="182" endline="205">prepareProjectiles</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1afb0c2c626f0b164cc619dfd828b5637c" prot="protected" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int helios::engine::game::systems::gameplay::ProjectilePoolSystem::poolSize_</definition>
+        <argsstring></argsstring>
+        <name>poolSize_</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::ProjectilePoolSystem::poolSize_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Maximum number of projectiles in the pool. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" line="126" column="22" bodyfile="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" bodystart="126" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a7f83f67ab1a60b7313ab9fd33aa30539" compoundref="ProjectilePoolSystem_8ixx" startline="146" endline="162">ProjectilePoolSystem</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a4d27560a1e4d8d31386609e204265ca2" prot="protected" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classhelios_1_1rendering_1_1RenderPrototype" kindref="compound">helios::rendering::RenderPrototype</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;helios::rendering::RenderPrototype&gt; helios::engine::game::systems::gameplay::ProjectilePoolSystem::projectilePrototype_</definition>
+        <argsstring></argsstring>
+        <name>projectilePrototype_</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::ProjectilePoolSystem::projectilePrototype_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Prototype for creating projectile render instances. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" line="131" column="25" bodyfile="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a9b58ba9999fe81b8357dbbb99306b7e3" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::engine::game::systems::gameplay::ProjectilePoolSystem::projectilesInitialized_</definition>
+        <argsstring></argsstring>
+        <name>projectilesInitialized_</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::ProjectilePoolSystem::projectilesInitialized_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" line="133" column="14" bodyfile="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" bodystart="133" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a2a64b5c683b4ff6fb6dfac8f64acab39" compoundref="ProjectilePoolSystem_8ixx" startline="182" endline="205">prepareProjectiles</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a3d4f8206578ba99d543cb4f708ce43c4" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::systems::gameplay::ProjectilePoolSystem::sourceVelocityInheritFactor_</definition>
+        <argsstring></argsstring>
+        <name>sourceVelocityInheritFactor_</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::ProjectilePoolSystem::sourceVelocityInheritFactor_</qualifiedname>
+        <initializer>= 0.5f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" line="135" column="15" bodyfile="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" bodystart="135" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a211dd83f0fdffdb4c106fdd0a9466867" compoundref="ProjectilePoolSystem_8ixx" startline="218" endline="265">spawn</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a7f83f67ab1a60b7313ab9fd33aa30539" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::game::systems::gameplay::ProjectilePoolSystem::ProjectilePoolSystem</definition>
+        <argsstring>(std::shared_ptr&lt; helios::rendering::Renderable &gt; projectileRenderable, unsigned int poolSize)</argsstring>
+        <name>ProjectilePoolSystem</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::ProjectilePoolSystem::ProjectilePoolSystem</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classhelios_1_1rendering_1_1Renderable" kindref="compound">helios::rendering::Renderable</ref> &gt;</type>
+          <declname>projectileRenderable</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>poolSize</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem" kindref="compound">ProjectilePoolSystem</ref> with a shared renderable and pool size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>projectileRenderable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The renderable to use for all projectile instances. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>poolSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum number of projectiles to pre-allocate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>arenaBox</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The aabb in which the projectiles can spawn. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" line="146" column="18" bodyfile="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" bodystart="146" bodyend="162"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a11e1448f38a001f82ce7ca99140b6903" compoundref="ProjectilePoolSystem_8ixx" startline="84">activeProjectiles_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1ac51c7dd05190058f56cd91e3e25f792a" compoundref="ProjectilePoolSystem_8ixx" startline="89">pool_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1afb0c2c626f0b164cc619dfd828b5637c" compoundref="ProjectilePoolSystem_8ixx" startline="126">poolSize_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a6e58986c51ebc08cf1004f0e718e0623" compoundref="ProjectilePoolSystem_8ixx" startline="94">projectileRenderable_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a4ec8c849cddbd6bf8a247fbfe4edf51f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::systems::gameplay::ProjectilePoolSystem::onAdd</definition>
+        <argsstring>(helios::engine::game::GameWorld *gameWorld) noexcept override</argsstring>
+        <name>onAdd</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::ProjectilePoolSystem::onAdd</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1game_1_1System_1a3abad1bebaa98c46f28105702c58b473">onAdd</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">helios::engine::game::GameWorld</ref> *</type>
+          <declname>gameWorld</declname>
+        </param>
+        <briefdescription>
+<para>Called when the system is added to a <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the scene root reference and creates SceneNodes for all pooled projectiles, attaching them to the scene graph.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref> this system is added to. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" line="172" column="14" bodyfile="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" bodystart="172" bodyend="180"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1System_1ab575d815b362bc7bc2fdfe021632c83b" compoundref="System_8ixx" startline="48">helios::engine::game::System::gameWorld_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1System_1a3abad1bebaa98c46f28105702c58b473" compoundref="System_8ixx" startline="66" endline="69">helios::engine::game::System::onAdd</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a2a64b5c683b4ff6fb6dfac8f64acab39" compoundref="ProjectilePoolSystem_8ixx" startline="182" endline="205">prepareProjectiles</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a2a64b5c683b4ff6fb6dfac8f64acab39" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::game::systems::gameplay::ProjectilePoolSystem::prepareProjectiles</definition>
+        <argsstring>()</argsstring>
+        <name>prepareProjectiles</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::ProjectilePoolSystem::prepareProjectiles</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" line="182" column="15" bodyfile="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" bodystart="182" bodyend="205"/>
+        <references refid="classhelios_1_1scene_1_1SceneNode_1a1020ca70c5268619a3bdfb3acb843e34">helios::scene::SceneNode::aabb</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1System_1ab575d815b362bc7bc2fdfe021632c83b" compoundref="System_8ixx" startline="48">helios::engine::game::System::gameWorld_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1ac51c7dd05190058f56cd91e3e25f792a" compoundref="ProjectilePoolSystem_8ixx" startline="89">pool_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a5e752f895c6b8c236d807f3e5f10cc43" compoundref="ProjectilePoolSystem_8ixx" startline="99" endline="99">projectileAABB_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a6e58986c51ebc08cf1004f0e718e0623" compoundref="ProjectilePoolSystem_8ixx" startline="94">projectileRenderable_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a9b58ba9999fe81b8357dbbb99306b7e3" compoundref="ProjectilePoolSystem_8ixx" startline="133">projectilesInitialized_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a4207b7e317e39723c50e86b293d9680d" compoundref="ProjectilePoolSystem_8ixx" startline="121">rootNode_</references>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a4ec8c849cddbd6bf8a247fbfe4edf51f" compoundref="ProjectilePoolSystem_8ixx" startline="172" endline="180">onAdd</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a211dd83f0fdffdb4c106fdd0a9466867" compoundref="ProjectilePoolSystem_8ixx" startline="218" endline="265">spawn</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a211dd83f0fdffdb4c106fdd0a9466867" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::systems::gameplay::ProjectilePoolSystem::spawn</definition>
+        <argsstring>(helios::math::vec3f position, helios::math::vec3f muzzleVelocity, helios::math::vec3f aimDir, helios::math::vec3f sourceVelocity) noexcept</argsstring>
+        <name>spawn</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::ProjectilePoolSystem::spawn</qualifiedname>
+        <param>
+          <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+          <declname>muzzleVelocity</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+          <declname>aimDir</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+          <declname>sourceVelocity</declname>
+        </param>
+        <briefdescription>
+<para>Spawns a projectile from the pool at the given position with muzzleVelocity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the pool is empty, the spawn request is silently ignored. The projectile is moved from the inactive pool to the active projectiles list.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>World-space spawn position. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>muzzleVelocity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Initial muzzleVelocity vector for the projectile. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>aimDir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The normalized aim direction vector. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sourceVelocity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The velocity of the emitting object. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+<para><xrefsect id="todo_1_todo000007"><xreftitle>Todo</xreftitle><xrefdescription><para>the <ref refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem" kindref="compound">ProjectilePoolSystem</ref> assumes to shoot in 2d, projected on the xy plane. This has to be configured later on. </para>
+</xrefdescription></xrefsect></para>
+<para>we simply create a rotation matrix that rotates about the z-axis: cos A -sin A 0 0 sin A cos A 0 0 0 0 1 0 0 0 0 1</para>
+<para>Since aimDir is normalized, we benefit from cos A = aimDir[0], sin A = aimDir[1].</para>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" line="218" column="14" bodyfile="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" bodystart="218" bodyend="265"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a11e1448f38a001f82ce7ca99140b6903" compoundref="ProjectilePoolSystem_8ixx" startline="84">activeProjectiles_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1ac51c7dd05190058f56cd91e3e25f792a" compoundref="ProjectilePoolSystem_8ixx" startline="89">pool_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a2a64b5c683b4ff6fb6dfac8f64acab39" compoundref="ProjectilePoolSystem_8ixx" startline="182" endline="205">prepareProjectiles</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a3d4f8206578ba99d543cb4f708ce43c4" compoundref="ProjectilePoolSystem_8ixx" startline="135">sourceVelocityInheritFactor_</references>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent_1afba2f37150b83cc00ddd065697884711" compoundref="ShootComponent_8ixx" startline="157" endline="179">helios::engine::game::components::gameplay::ShootComponent::update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1ae62eb078952ee0ea5838d872c045f6c3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::systems::gameplay::ProjectilePoolSystem::despawn</definition>
+        <argsstring>(unsigned int idx)</argsstring>
+        <name>despawn</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::ProjectilePoolSystem::despawn</qualifiedname>
+        <param>
+          <type>unsigned int</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Despawns the projectile at the specified index. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Moves the projectile from the active list to the inactive pool and deactivates its SceneNode so it is no longer rendered.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of the projectile in the activeProjectiles_ vector. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" line="275" column="14" bodyfile="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" bodystart="275" bodyend="283"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a11e1448f38a001f82ce7ca99140b6903" compoundref="ProjectilePoolSystem_8ixx" startline="84">activeProjectiles_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1ac51c7dd05190058f56cd91e3e25f792a" compoundref="ProjectilePoolSystem_8ixx" startline="89">pool_</references>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a1f817f28abc5bf6b56cd7641aff514d9" compoundref="ProjectilePoolSystem_8ixx" startline="294" endline="319">update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a1f817f28abc5bf6b56cd7641aff514d9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::systems::gameplay::ProjectilePoolSystem::update</definition>
+        <argsstring>(helios::engine::game::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::ProjectilePoolSystem::update</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1game_1_1System_1ac268567131ffdbd96e0ee29dc8717609">update</reimplements>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1game_1_1UpdateContext" kindref="compound">helios::engine::game::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Updates all active projectiles each frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Moves each active projectile according to its muzzleVelocity scaled by delta time.</para>
+<para><simplesect kind="note"><para>update uses the cached projectileAABB_ to check whether the projectile should despawn.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The update context containing frame timing information. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" line="294" column="14" bodyfile="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" bodystart="294" bodyend="319"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a11e1448f38a001f82ce7ca99140b6903" compoundref="ProjectilePoolSystem_8ixx" startline="84">activeProjectiles_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1ae62eb078952ee0ea5838d872c045f6c3" compoundref="ProjectilePoolSystem_8ixx" startline="275" endline="283">despawn</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1System_1ab575d815b362bc7bc2fdfe021632c83b" compoundref="System_8ixx" startline="48">helios::engine::game::System::gameWorld_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a5e752f895c6b8c236d807f3e5f10cc43" compoundref="ProjectilePoolSystem_8ixx" startline="99" endline="99">projectileAABB_</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Object pool system for efficient projectile spawning and lifecycle management. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This system pre-allocates a fixed number of projectile objects to avoid runtime allocations during gameplay. Projectiles are spawned from the pool and returned when they are no longer active. Each projectile is represented as a `SceneNode` attached to the scene graph root.</para>
+<para>The pool pattern ensures consistent performance in scenarios with high projectile throughput (e.g., twin-stick shooters, projectile-hell games).</para>
+<para><simplesect kind="note"><para>To further reduce the number of draw calls, instancing should be considered.</para>
+</simplesect>
+Example usage: ```cpp auto projectileRenderable = createProjectileRenderable(); auto pool = std::make_unique&lt;ProjectilePoolSystem&gt;(projectileRenderable, 100); gameWorld.addSystem(std::move(pool));</para>
+<para>// During gameplay pool-&gt;spawn(playerPosition, aimDirection * projectileSpeed); ``` </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::game::System</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::game::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::game::systems::gameplay::ProjectilePoolSystem</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="12">
+        <label>helios::core::Transform</label>
+        <link refid="classhelios_1_1core_1_1Transform"/>
+      </node>
+      <node id="7">
+        <label>helios::engine::game::Component</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1Component"/>
+        <childnode refid="8" relation="usage">
+          <edgelabel>gameObject_</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>helios::engine::game::GameObject</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1GameObject"/>
+        <childnode refid="9" relation="usage">
+          <edgelabel>guid_</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>helios::engine::game::GameWorld</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1GameWorld"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>logger_</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::engine::game::System</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>gameWorld_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::game::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1Updatable"/>
+      </node>
+      <node id="6">
+        <label>helios::engine::game::components::gameplay::Aim2DComponent</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>helios::engine::game::components::scene::SceneNodeComponent</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>sceneNode_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>helios::engine::game::systems::gameplay::ProjectilePoolSystem</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>aimComponent_</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>sceneNodeComponent_</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>rootNode_</edgelabel>
+        </childnode>
+      </node>
+      <node id="11">
+        <label>helios::scene::SceneNode</label>
+        <link refid="classhelios_1_1scene_1_1SceneNode"/>
+        <childnode refid="11" relation="usage">
+          <edgelabel>parent_</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
+          <edgelabel>localTransform_</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>helios::util::Guid</label>
+        <link refid="classhelios_1_1util_1_1Guid"/>
+      </node>
+      <node id="5">
+        <label>helios::util::log::Logger</label>
+        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" line="61" column="5" bodyfile="include/helios/engine/game/systems/gameplay/ProjectilePoolSystem.ixx" bodystart="61" bodyend="321"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a11e1448f38a001f82ce7ca99140b6903" prot="protected" virt="non-virtual"><scope>helios::engine::game::systems::gameplay::ProjectilePoolSystem</scope><name>activeProjectiles_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1acd4f8b9c52d122a783f2342e816b2277" prot="protected" virt="non-virtual"><scope>helios::engine::game::systems::gameplay::ProjectilePoolSystem</scope><name>aimComponent_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1ae62eb078952ee0ea5838d872c045f6c3" prot="public" virt="non-virtual"><scope>helios::engine::game::systems::gameplay::ProjectilePoolSystem</scope><name>despawn</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1System_1ab575d815b362bc7bc2fdfe021632c83b" prot="protected" virt="non-virtual"><scope>helios::engine::game::systems::gameplay::ProjectilePoolSystem</scope><name>gameWorld_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a7a31697384f0b0280ea39ea74f6fa2bc" prot="protected" virt="non-virtual"><scope>helios::engine::game::systems::gameplay::ProjectilePoolSystem</scope><name>intensity_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a4ec8c849cddbd6bf8a247fbfe4edf51f" prot="public" virt="virtual"><scope>helios::engine::game::systems::gameplay::ProjectilePoolSystem</scope><name>onAdd</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1ac51c7dd05190058f56cd91e3e25f792a" prot="protected" virt="non-virtual"><scope>helios::engine::game::systems::gameplay::ProjectilePoolSystem</scope><name>pool_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1afb0c2c626f0b164cc619dfd828b5637c" prot="protected" virt="non-virtual"><scope>helios::engine::game::systems::gameplay::ProjectilePoolSystem</scope><name>poolSize_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a2a64b5c683b4ff6fb6dfac8f64acab39" prot="public" virt="non-virtual"><scope>helios::engine::game::systems::gameplay::ProjectilePoolSystem</scope><name>prepareProjectiles</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a5e752f895c6b8c236d807f3e5f10cc43" prot="protected" virt="non-virtual"><scope>helios::engine::game::systems::gameplay::ProjectilePoolSystem</scope><name>projectileAABB_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a7f83f67ab1a60b7313ab9fd33aa30539" prot="public" virt="non-virtual"><scope>helios::engine::game::systems::gameplay::ProjectilePoolSystem</scope><name>ProjectilePoolSystem</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a4d27560a1e4d8d31386609e204265ca2" prot="protected" virt="non-virtual"><scope>helios::engine::game::systems::gameplay::ProjectilePoolSystem</scope><name>projectilePrototype_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a6e58986c51ebc08cf1004f0e718e0623" prot="protected" virt="non-virtual"><scope>helios::engine::game::systems::gameplay::ProjectilePoolSystem</scope><name>projectileRenderable_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a9b58ba9999fe81b8357dbbb99306b7e3" prot="protected" virt="non-virtual"><scope>helios::engine::game::systems::gameplay::ProjectilePoolSystem</scope><name>projectilesInitialized_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a4207b7e317e39723c50e86b293d9680d" prot="protected" virt="non-virtual"><scope>helios::engine::game::systems::gameplay::ProjectilePoolSystem</scope><name>rootNode_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a4f6a03a36459e8fb47ec0be2df0e03c2" prot="protected" virt="non-virtual"><scope>helios::engine::game::systems::gameplay::ProjectilePoolSystem</scope><name>sceneNodeComponent_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a3d4f8206578ba99d543cb4f708ce43c4" prot="protected" virt="non-virtual"><scope>helios::engine::game::systems::gameplay::ProjectilePoolSystem</scope><name>sourceVelocityInheritFactor_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a211dd83f0fdffdb4c106fdd0a9466867" prot="public" virt="non-virtual"><scope>helios::engine::game::systems::gameplay::ProjectilePoolSystem</scope><name>spawn</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Updatable_1a80ad1928d4b394f69860b47969541e34" prot="public" virt="non-virtual"><scope>helios::engine::game::systems::gameplay::ProjectilePoolSystem</scope><name>Updatable</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a1f817f28abc5bf6b56cd7641aff514d9" prot="public" virt="virtual"><scope>helios::engine::game::systems::gameplay::ProjectilePoolSystem</scope><name>update</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1System_1aa4ed4f421d0b37eb63dbd23c25b889f8" prot="public" virt="virtual"><scope>helios::engine::game::systems::gameplay::ProjectilePoolSystem</scope><name>~System</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Updatable_1aac5760f908621631c4e7ac40f25e9361" prot="public" virt="virtual"><scope>helios::engine::game::systems::gameplay::ProjectilePoolSystem</scope><name>~Updatable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

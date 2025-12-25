@@ -14,5 +14,6 @@ var searchData=
   ['movementacceleration_5f_11',['movementAcceleration_',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#a1cc79a7594f9b7e350b57e4b05379646',1,'helios::engine::game::components::physics::Move2DComponent']]],
   ['movementdampening_5f_12',['movementDampening_',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#a06613bdc3ef2bb7725129ddec553dbba',1,'helios::engine::game::components::physics::Move2DComponent']]],
   ['movementspeed_5f_13',['movementSpeed_',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#af0b8633ba1d7886aeeed2313312c7998',1,'helios::engine::game::components::physics::Move2DComponent']]],
-  ['movementspeedthreshold_5f_14',['movementSpeedThreshold_',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#a91c11ed8bc317ffcb010fc9d348bc0c8',1,'helios::engine::game::components::physics::Move2DComponent']]]
+  ['movementspeedthreshold_5f_14',['movementSpeedThreshold_',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#a91c11ed8bc317ffcb010fc9d348bc0c8',1,'helios::engine::game::components::physics::Move2DComponent']]],
+  ['muzzlevelocity_15',['muzzleVelocity',['../structhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1_1ProjectileObject.html#a5107c5b1c4ea00251096e52c9e96aeaa',1,'helios::engine::game::systems::gameplay::ProjectilePoolSystem::ProjectileObject']]]
 ];

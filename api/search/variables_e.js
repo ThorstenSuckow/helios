@@ -5,12 +5,18 @@ var searchData=
   ['peru_2',['Peru',['../structhelios_1_1util_1_1Colors.html#a23d8909707bb40c0666bd6450a40f391',1,'helios::util::Colors']]],
   ['pink_3',['Pink',['../structhelios_1_1util_1_1Colors.html#a006c3ee312b31a9cb40b42efd523b5b1',1,'helios::util::Colors']]],
   ['plum_4',['Plum',['../structhelios_1_1util_1_1Colors.html#a22ad01ece48cf0139b685904109a7fad',1,'helios::util::Colors']]],
-  ['pool_5f_5',['pool_',['../classhelios_1_1engine_1_1game_1_1systems_1_1BulletPool.html#a7c6f45c44d78fb14e70703a3323e8e67',1,'helios::engine::game::systems::BulletPool']]],
-  ['poolsize_5f_6',['poolSize_',['../classhelios_1_1engine_1_1game_1_1systems_1_1BulletPool.html#add65c7f57f063a057b2c788497cce409',1,'helios::engine::game::systems::BulletPool']]],
+  ['pool_5f_5',['pool_',['../classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem.html#ac51c7dd05190058f56cd91e3e25f792a',1,'helios::engine::game::systems::gameplay::ProjectilePoolSystem']]],
+  ['poolsize_5f_6',['poolSize_',['../classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem.html#afb0c2c626f0b164cc619dfd828b5637c',1,'helios::engine::game::systems::gameplay::ProjectilePoolSystem']]],
   ['position_7',['position',['../structhelios_1_1rendering_1_1Vertex.html#aad5f040c6ccd955709d5f38e236aa3c8',1,'helios::rendering::Vertex']]],
   ['powderblue_8',['PowderBlue',['../structhelios_1_1util_1_1Colors.html#a5676b94198fada7e2a90360dfbc2f20d',1,'helios::util::Colors']]],
   ['primitivetype_9',['primitiveType',['../structhelios_1_1rendering_1_1model_1_1config_1_1MeshConfig.html#a7cb1229de566ac92aa1e26068f661fd4',1,'helios::rendering::model::config::MeshConfig']]],
   ['progid_5f_10',['progId_',['../classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader.html#a8026bd0761ea2fcf7a95a180dd04c6da',1,'helios::ext::opengl::rendering::shader::OpenGLShader']]],
-  ['projectionmatrix_5f_11',['projectionMatrix_',['../classhelios_1_1scene_1_1Camera.html#a73a85eb4966fb4524dc6b87736500f62',1,'helios::scene::Camera::projectionMatrix_'],['../classhelios_1_1scene_1_1Snapshot.html#a47dffe6969f2ed64915d1fd4599cd44a',1,'helios::scene::Snapshot::projectionMatrix_']]],
-  ['purple_12',['Purple',['../structhelios_1_1util_1_1Colors.html#a2e4230f832ab139ed7ee932413de6540',1,'helios::util::Colors']]]
+  ['projectileaabb_5f_11',['projectileAABB_',['../classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem.html#a5e752f895c6b8c236d807f3e5f10cc43',1,'helios::engine::game::systems::gameplay::ProjectilePoolSystem']]],
+  ['projectilenodeptr_12',['projectileNodePtr',['../structhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1_1ProjectileObject.html#a0be4d232e8ab8a304872d2644c535ba2',1,'helios::engine::game::systems::gameplay::ProjectilePoolSystem::ProjectileObject']]],
+  ['projectileprototype_5f_13',['projectilePrototype_',['../classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem.html#a4d27560a1e4d8d31386609e204265ca2',1,'helios::engine::game::systems::gameplay::ProjectilePoolSystem']]],
+  ['projectilerenderable_5f_14',['projectileRenderable_',['../classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem.html#a6e58986c51ebc08cf1004f0e718e0623',1,'helios::engine::game::systems::gameplay::ProjectilePoolSystem']]],
+  ['projectilesinitialized_5f_15',['projectilesInitialized_',['../classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem.html#a9b58ba9999fe81b8357dbbb99306b7e3',1,'helios::engine::game::systems::gameplay::ProjectilePoolSystem']]],
+  ['projectilespeed_5f_16',['projectileSpeed_',['../classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent.html#a85c78c4b84497c27655b589e487074d3',1,'helios::engine::game::components::gameplay::ShootComponent']]],
+  ['projectionmatrix_5f_17',['projectionMatrix_',['../classhelios_1_1scene_1_1Camera.html#a73a85eb4966fb4524dc6b87736500f62',1,'helios::scene::Camera::projectionMatrix_'],['../classhelios_1_1scene_1_1Snapshot.html#a47dffe6969f2ed64915d1fd4599cd44a',1,'helios::scene::Snapshot::projectionMatrix_']]],
+  ['purple_18',['Purple',['../structhelios_1_1util_1_1Colors.html#a2e4230f832ab139ed7ee932413de6540',1,'helios::util::Colors']]]
 ];

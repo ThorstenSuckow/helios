@@ -10,7 +10,8 @@ var searchData=
   ['title_5f_7',['title_',['../classhelios_1_1window_1_1Window.html#a27dc6e221464e5675b20816130a0e948',1,'helios::window::Window']]],
   ['tomato_8',['Tomato',['../structhelios_1_1util_1_1Colors.html#af3a7d279a9cc893a685c4db77574dcc9',1,'helios::util::Colors']]],
   ['totalframetime_9',['totalFrameTime',['../structhelios_1_1engine_1_1FrameStats.html#ab76f59f1bd1a35ee9d4316fdb46efa63',1,'helios::engine::FrameStats']]],
-  ['transparent_10',['Transparent',['../structhelios_1_1util_1_1Colors.html#a4a6dd5125285c30f2e9be2e6dd7f8510',1,'helios::util::Colors']]],
-  ['turquoise_11',['Turquoise',['../structhelios_1_1util_1_1Colors.html#a145d589bf122d504caa66be55f1d58d0',1,'helios::util::Colors']]],
-  ['type_5fid_12',['TYPE_ID',['../classhelios_1_1ext_1_1imgui_1_1ImGuiLogSink.html#a4e0540a3ef8f7838fdaa082225863e2f',1,'helios::ext::imgui::ImGuiLogSink::TYPE_ID'],['../classhelios_1_1util_1_1log_1_1ConsoleSink.html#aa7a0c9d6f6536c90ed342cadc6246107',1,'helios::util::log::ConsoleSink::TYPE_ID']]]
+  ['transformcomponent_5f_10',['transformComponent_',['../classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent.html#a41622b780b0a3041347bd6bc4340d104',1,'helios::engine::game::components::gameplay::ShootComponent']]],
+  ['transparent_11',['Transparent',['../structhelios_1_1util_1_1Colors.html#a4a6dd5125285c30f2e9be2e6dd7f8510',1,'helios::util::Colors']]],
+  ['turquoise_12',['Turquoise',['../structhelios_1_1util_1_1Colors.html#a145d589bf122d504caa66be55f1d58d0',1,'helios::util::Colors']]],
+  ['type_5fid_13',['TYPE_ID',['../classhelios_1_1ext_1_1imgui_1_1ImGuiLogSink.html#a4e0540a3ef8f7838fdaa082225863e2f',1,'helios::ext::imgui::ImGuiLogSink::TYPE_ID'],['../classhelios_1_1util_1_1log_1_1ConsoleSink.html#aa7a0c9d6f6536c90ed342cadc6246107',1,'helios::util::log::ConsoleSink::TYPE_ID']]]
 ];

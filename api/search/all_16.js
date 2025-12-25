@@ -2,7 +2,7 @@ var searchData=
 [
   ['nativehandle_0',['nativeHandle',['../classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow.html#a84d2fb73f8eb3c1610f4159cff592be2',1,'helios::ext::glfw::window::GLFWWindow']]],
   ['navy_1',['Navy',['../structhelios_1_1util_1_1Colors.html#a14494b093c5a4860bbcd3dd2f1f6b935',1,'helios::util::Colors']]],
-  ['needsupdate_2',['needsUpdate',['../classhelios_1_1scene_1_1SceneNode.html#a88551e7d166868342b87fd83e767442c',1,'helios::scene::SceneNode::needsUpdate()'],['../classhelios_1_1scene_1_1Transform.html#af38969c80c6fcc700ffb70e839048755',1,'helios::scene::Transform::needsUpdate()']]],
+  ['needsupdate_2',['needsUpdate',['../classhelios_1_1core_1_1Transform.html#a529d67903cbe3b547a07637f37a85b57',1,'helios::core::Transform::needsUpdate()'],['../classhelios_1_1scene_1_1SceneNode.html#a88551e7d166868342b87fd83e767442c',1,'helios::scene::SceneNode::needsUpdate()']]],
   ['needsupdate_5f_3',['needsUpdate_',['../classhelios_1_1rendering_1_1model_1_1Mesh.html#a44cd897e756326310294eb5f1aec1202',1,'helios::rendering::model::Mesh::needsUpdate_'],['../classhelios_1_1scene_1_1Camera.html#af1b0b6d8716871661a66609b5bed1255',1,'helios::scene::Camera::needsUpdate_'],['../classhelios_1_1scene_1_1SceneNode.html#a7810bc9069939badd249ce54f794d1e7',1,'helios::scene::SceneNode::needsUpdate_']]],
   ['new_20backend_4',['Creating a New Backend',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md31',1,'']]],
   ['newframe_5',['newFrame',['../classhelios_1_1ext_1_1imgui_1_1ImGuiBackend.html#ac5ab307f136d90b6c914ccb1f75838e1',1,'helios::ext::imgui::ImGuiBackend::newFrame()'],['../classhelios_1_1ext_1_1imgui_1_1ImGuiGlfwOpenGLBackend.html#a6c6725e9e259f3fed66a930bb5d1bbe4',1,'helios::ext::imgui::ImGuiGlfwOpenGLBackend::newFrame()']]],

@@ -9,6 +9,5 @@ var dir_b6e017bc8c299f04fc1162fc4677be61 =
     [ "SceneFwd.ixx", "SceneFwd_8ixx.html", null ],
     [ "SceneNode.ixx", "SceneNode_8ixx.html", "SceneNode_8ixx" ],
     [ "Snapshot.ixx", "Snapshot_8ixx.html", "Snapshot_8ixx" ],
-    [ "SnapshotItem.ixx", "SnapshotItem_8ixx.html", "SnapshotItem_8ixx" ],
-    [ "Transform.ixx", "Transform_8ixx.html", "Transform_8ixx" ]
+    [ "SnapshotItem.ixx", "SnapshotItem_8ixx.html", "SnapshotItem_8ixx" ]
 ];

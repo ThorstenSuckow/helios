@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1game_1_1systems_1_1post_1_1ScaleClearSystem" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::game::systems::post::ScaleClearSystem</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1game_1_1System" prot="public" virt="non-virtual">helios::engine::game::System</basecompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1systems_1_1post_1_1ScaleClearSystem_1a03c6a600f2da567608b2e438d478a0e6" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::systems::post::ScaleClearSystem::update</definition>
+        <argsstring>(helios::engine::game::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::game::systems::post::ScaleClearSystem::update</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1game_1_1System_1ac268567131ffdbd96e0ee29dc8717609">update</reimplements>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1game_1_1UpdateContext" kindref="compound">helios::engine::game::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Updates the system, clearing dirty flags. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The update context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/post/ScaleClearSystem.ixx" line="37" column="14" bodyfile="include/helios/engine/game/systems/post/ScaleClearSystem.ixx" bodystart="37" bodyend="53"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1ScaleComponent_1ad52c25efd6237864f4f7c735639ee8ca" compoundref="ScaleComponent_8ixx" startline="77" endline="79">helios::engine::game::components::physics::ScaleComponent::clearDirty</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1System_1ab575d815b362bc7bc2fdfe021632c83b" compoundref="System_8ixx" startline="48">helios::engine::game::System::gameWorld_</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para><ref refid="classhelios_1_1engine_1_1game_1_1System" kindref="compound">System</ref> that clears the dirty state of ScaleComponents at the end of a frame. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This system runs in the post-update phase. It iterates over all ScaleComponents and resets their dirty flag if it was set. This ensures that changes are only processed once per frame by other systems (like SceneSyncSystem). </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::game::System</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::game::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::game::systems::post::ScaleClearSystem</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1systems_1_1post_1_1ScaleClearSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>helios::engine::game::GameWorld</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1GameWorld"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>logger_</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::engine::game::System</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>gameWorld_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::game::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::game::systems::post::ScaleClearSystem</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1systems_1_1post_1_1ScaleClearSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>helios::util::log::Logger</label>
+        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/game/systems/post/ScaleClearSystem.ixx" line="26" column="5" bodyfile="include/helios/engine/game/systems/post/ScaleClearSystem.ixx" bodystart="26" bodyend="55"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1game_1_1System_1ab575d815b362bc7bc2fdfe021632c83b" prot="protected" virt="non-virtual"><scope>helios::engine::game::systems::post::ScaleClearSystem</scope><name>gameWorld_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1System_1a3abad1bebaa98c46f28105702c58b473" prot="public" virt="virtual"><scope>helios::engine::game::systems::post::ScaleClearSystem</scope><name>onAdd</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Updatable_1a80ad1928d4b394f69860b47969541e34" prot="public" virt="non-virtual"><scope>helios::engine::game::systems::post::ScaleClearSystem</scope><name>Updatable</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1post_1_1ScaleClearSystem_1a03c6a600f2da567608b2e438d478a0e6" prot="public" virt="virtual"><scope>helios::engine::game::systems::post::ScaleClearSystem</scope><name>update</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1System_1aa4ed4f421d0b37eb63dbd23c25b889f8" prot="public" virt="virtual"><scope>helios::engine::game::systems::post::ScaleClearSystem</scope><name>~System</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Updatable_1aac5760f908621631c4e7ac40f25e9361" prot="public" virt="virtual"><scope>helios::engine::game::systems::post::ScaleClearSystem</scope><name>~Updatable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

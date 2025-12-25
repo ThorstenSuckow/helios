@@ -213,6 +213,7 @@ export namespace helios::engine::game::systems::gameplay {
          * @param position World-space spawn position.
          * @param muzzleVelocity Initial muzzleVelocity vector for the projectile.
          * @param aimDir The normalized aim direction vector.
+         * @param sourceVelocity The velocity of the emitting object.
          */
         void spawn(
             helios::math::vec3f position,

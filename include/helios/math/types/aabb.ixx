@@ -110,7 +110,7 @@ export namespace helios::math {
          *
          * @return The center point, calculated as `(min + max) / 2`.
          */
-        [[nodiscard]] constexpr helios::math::vec3<T> getCenter() const noexcept {
+        [[nodiscard]] constexpr helios::math::vec3<T> center() const noexcept {
             return (min_ + max_) * static_cast<T>(0.5);
         }
 
@@ -119,7 +119,7 @@ export namespace helios::math {
          *
          * @return A vector representing the width, height, and depth of the AABB.
          */
-        [[nodiscard]] constexpr helios::math::vec3<T> getSize() const noexcept {
+        [[nodiscard]] constexpr helios::math::vec3<T> size() const noexcept {
             return max_ - min_;
         }
 
@@ -197,7 +197,7 @@ export namespace helios::math {
          *
          * @see [Gla95, pp. 548-550] "Transforming Axis-Aligned Bounding Boxes" by James Arvo
          */
-        [[nodiscard]] aabb<T> transform(const mat4<T>& mat) const noexcept {
+        [[nodiscard]] aabb<T> applyTransform(const mat4<T>& mat) const noexcept {
 
             const T translationX = static_cast<T>(mat(0, 3));
             const T translationY = static_cast<T>(mat(1, 3));
@@ -246,6 +246,24 @@ export namespace helios::math {
     [[nodiscard]] constexpr helios::math::aabb<T> operator+(
         const helios::math::aabb<T> aabb, const helios::math::vec3<T> v) noexcept {
         return aabb.translate(v);
+    }
+
+    /**
+     * @brief Scales an AABB by a given vector.
+     *
+     * This operator overload allows scaling of an axis-aligned bounding box (AABB)
+     * by multiplying its min and max points with the given vector.
+     *
+     * @tparam T The numeric type of the vector components.
+     * @param aabb The AABB to be scaled.
+     * @param v The scaling vector.
+     *
+     * @return A new AABB scaled by the given vector.
+     */
+    template<typename T>
+    [[nodiscard]] constexpr helios::math::aabb<T> operator*(
+    const helios::math::aabb<T> aabb, const helios::math::vec3<T> v) noexcept {
+        return helios::math::aabb<T>{aabb.min() * v, aabb.max() * v};
     }
 
     /**

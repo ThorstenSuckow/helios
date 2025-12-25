@@ -14,7 +14,7 @@ export module helios.ext.imgui.widgets.CameraWidget;
 import helios.ext.imgui.ImGuiWidget;
 import helios.scene.Camera;
 import helios.scene.CameraSceneNode;
-import helios.scene.Transform;
+import helios.core.Transform;
 import helios.math.types;
 import helios.math.utils;
 

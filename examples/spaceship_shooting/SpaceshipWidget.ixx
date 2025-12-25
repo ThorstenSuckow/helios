@@ -179,12 +179,10 @@ export namespace helios::examples::spaceshipShooting {
             // ========================================
             ImGui::Text("Status");
 
-            const auto& pos = move2D->position();
             const auto& vel = move2D->velocity();
             float speedRatio = move2D->speedRatio();
-            float angle = move2D->rotationAngle();
+            float angle = move2D->currentRotationAngle();
 
-            ImGui::TextDisabled("Position: (%.1f, %.1f, %.1f)", pos[0], pos[1], pos[2]);
             ImGui::TextDisabled("Velocity: (%.2f, %.2f, %.2f)", vel[0], vel[1], vel[2]);
             ImGui::TextDisabled("Speed: %.1f%% | Angle: %.1f deg", speedRatio * 100.0f, angle);
 

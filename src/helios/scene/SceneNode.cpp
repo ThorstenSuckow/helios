@@ -8,7 +8,7 @@ module helios.scene.SceneNode;
 
 import helios.rendering.Renderable;
 import helios.util.Guid;
-import helios.scene.Transform;
+import helios.core.Transform;
 import helios.math.types;
 import helios.math.TransformType;
 
@@ -187,7 +187,7 @@ namespace helios::scene {
         if (renderable_) {
             if (const auto prototype = renderable_->renderPrototype()) {
                 const auto& localAABB = prototype->mesh().aabb();
-                aabb_ = localAABB.transform(worldTransform_);
+                aabb_ = localAABB.applyTransform(worldTransform_);
             }
         }
     }

@@ -96,6 +96,14 @@ import helios.engine.game.UpdateContext;
 import helios.engine.game.components.scene.SceneNodeComponent;
 import helios.engine.game.components.input.TwinStickInputComponent;
 import helios.engine.game.components.physics.Move2DComponent;
+import helios.engine.game.components.physics.TransformComponent;
+import helios.engine.game.components.physics.ScaleComponent;
+
+import helios.engine.game.systems.physics.Move2DSystem;
+import helios.engine.game.systems.physics.ScaleSystem;
+import helios.engine.game.systems.scene.SceneSyncSystem;
+import helios.engine.game.systems.post.TransformClearSystem;
+import helios.engine.game.systems.post.ScaleClearSystem;
 
 // ============================================================================
 // Using Declarations
@@ -321,27 +329,35 @@ int main() {
     // 9. Game-related Input-handling, GameWorld and GameObjects
     // ========================================
 
-    auto gameWorld = helios::engine::game::GameWorld{scene.get()};
+    auto gameWorld = helios::engine::game::GameWorld{};
     auto commandBuffer = helios::engine::game::CommandBuffer{};
 
     auto shipGameObject = std::make_unique<helios::engine::game::GameObject>();
     shipGameObject->add<helios::engine::game::components::scene::SceneNodeComponent>(spaceshipSceneNode);
-    shipGameObject->get<helios::engine::game::components::scene::SceneNodeComponent>()
-                      ->setSize(SPACESHIP_SIZE, SPACESHIP_SIZE, 0.0f, helios::core::units::Unit::Meter);
     shipGameObject->add<helios::engine::game::components::input::TwinStickInputComponent>();
     shipGameObject->add<helios::engine::game::components::physics::Move2DComponent>();
+    shipGameObject->add<helios::engine::game::components::physics::TransformComponent>();
+    shipGameObject->add<helios::engine::game::components::physics::ScaleComponent>(
+        SPACESHIP_SIZE, SPACESHIP_SIZE, 0.0f, helios::core::units::Unit::Meter);
     auto* theShipPtr = gameWorld.addGameObject(std::move(shipGameObject));
 
     // Register the spaceship with the tuning widget
     spaceshipWidget->addGameObject("Player 1", theShipPtr);
 
     auto gridGameObject = std::make_unique<helios::engine::game::GameObject>();
-    auto* gridGameObjectPtr = gridGameObject.get();
     gridGameObject->add<helios::engine::game::components::scene::SceneNodeComponent>(gridSceneNode);
-    gridGameObjectPtr->get<helios::engine::game::components::scene::SceneNodeComponent>()
-                      ->setSize(GRID_X * CELL_SIZE, GRID_Y * CELL_SIZE, 0.0f, helios::core::units::Unit::Meter);
-
+    gridGameObject->add<helios::engine::game::components::physics::TransformComponent>();
+    gridGameObject->add<helios::engine::game::components::physics::ScaleComponent>(
+        GRID_X * CELL_SIZE, GRID_Y * CELL_SIZE, 0.0f, helios::core::units::Unit::Meter
+    );
     std::ignore = gameWorld.addGameObject(std::move(gridGameObject));
+
+    // register the game systems
+    gameWorld.add<helios::engine::game::systems::physics::ScaleSystem>();
+    gameWorld.add<helios::engine::game::systems::physics::Move2DSystem>();
+    gameWorld.add<helios::engine::game::systems::scene::SceneSyncSystem>(scene.get());
+    gameWorld.add<helios::engine::game::systems::post::TransformClearSystem>();
+    gameWorld.add<helios::engine::game::systems::post::ScaleClearSystem>();
 
 
 

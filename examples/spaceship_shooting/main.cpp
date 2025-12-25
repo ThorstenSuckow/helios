@@ -88,6 +88,7 @@ import helios.examples.spaceshipShooting.SpaceshipWidget;
 
 // game input handling, game objects
 import helios.core.units;
+import helios.engine.game.Level;
 import helios.engine.game.GameWorld;
 import helios.engine.game.CommandBuffer;
 import helios.engine.game.GameObject;
@@ -98,10 +99,21 @@ import helios.engine.game.UpdateContext;
 import helios.engine.game.components.scene.SceneNodeComponent;
 import helios.engine.game.components.input.TwinStickInputComponent;
 import helios.engine.game.components.physics.Move2DComponent;
+import helios.engine.game.components.physics.TransformComponent;
+import helios.engine.game.components.physics.ScaleComponent;
 import helios.engine.game.components.gameplay.Aim2DComponent;
 import helios.engine.game.components.gameplay.ShootComponent;
+import helios.engine.game.components.physics.LevelBoundsBehaviorComponent;
+import helios.engine.game.components.physics.AabbColliderComponent;
 
-import helios.engine.game.systems.BulletPool;
+import helios.engine.game.systems.gameplay.ProjectilePoolSystem;
+import helios.engine.game.systems.physics.Move2DSystem;
+import helios.engine.game.systems.physics.ScaleSystem;
+import helios.engine.game.systems.scene.SceneSyncSystem;
+import helios.engine.game.systems.physics.BoundsUpdateSystem;
+import helios.engine.game.systems.physics.LevelBoundsBehaviorSystem;
+import helios.engine.game.systems.post.TransformClearSystem;
+import helios.engine.game.systems.post.ScaleClearSystem;
 
 // ============================================================================
 // Using Declarations
@@ -238,15 +250,15 @@ int main() {
     // ========================================
     auto spaceship = Triangle{};
     auto leftStickGizmo = Line{};
-    auto bullet = Ellipse{1.0f, 0.4f, 8};
+    auto projectile = Ellipse{1.0f, 0.4f, 8};
     auto grid = Grid{29, 19};
 
     // Configure the mesh for the spaceship to render as a line loop (wireframe)
     auto meshConfig = std::make_shared<const MeshConfig>(PrimitiveType::LineLoop);
     auto mesh_ptr = std::make_shared<OpenGLMesh>(spaceship, meshConfig);
 
-    // configure the bullet
-    auto bulletMeshPtr = std::make_shared<OpenGLMesh>(bullet, meshConfig);
+    // configure the projectile
+    auto projectileMeshPtr = std::make_shared<OpenGLMesh>(projectile, meshConfig);
 
     // configure the gizmos for controller input, as well as the grid rendering
     auto meshLineConfig = std::make_shared<const MeshConfig>(PrimitiveType::Lines);
@@ -259,8 +271,8 @@ int main() {
     const auto renderPrototype = std::make_shared<RenderPrototype>(material_ptr, mesh_ptr);
     auto spaceshipRenderable = std::make_shared<Renderable>(renderPrototype);
 
-    auto bulletPrototype = std::make_shared<helios::rendering::RenderPrototype>(material_ptr, bulletMeshPtr);
-    auto bulletRenderable = std::make_shared<helios::rendering::Renderable>(std::move(bulletPrototype));
+    auto projectilePrototype = std::make_shared<helios::rendering::RenderPrototype>(material_ptr, projectileMeshPtr);
+    auto projectileRenderable = std::make_shared<helios::rendering::Renderable>(std::move(projectilePrototype));
 
     const auto leftStickGizmoPrototype =
             std::make_shared<RenderPrototype>(leftStickGizmoMaterial_ptr, leftStickGizmoMesh);
@@ -292,7 +304,7 @@ int main() {
     auto* spaceshipSceneNode =
             scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(spaceshipRenderable)));
     /**
-     * @todo we are using the aabb of the grid as the arenaBox for the bullet pool.
+     * @todo we are using the aabb of the grid as the arenaBox for the projectile pool.
      * The grid has its zindex at 0 (min/max), this should be improved later
      */
     spaceshipSceneNode->setTranslation(helios::math::vec3f{0.0f, 0.0f, 0.0f});
@@ -339,33 +351,57 @@ int main() {
     // 9. Game-related Input-handling, GameWorld and GameObjects
     // ========================================
 
-    auto gameWorld = helios::engine::game::GameWorld{scene.get()};
+    auto gameWorld = helios::engine::game::GameWorld{};
     auto commandBuffer = helios::engine::game::CommandBuffer{};
 
     auto shipGameObject = std::make_unique<helios::engine::game::GameObject>();
     shipGameObject->add<helios::engine::game::components::scene::SceneNodeComponent>(spaceshipSceneNode);
-    shipGameObject->get<helios::engine::game::components::scene::SceneNodeComponent>()
-                      ->setSize(SPACESHIP_SIZE, SPACESHIP_SIZE, 0.0f, helios::core::units::Unit::Meter);
     shipGameObject->add<helios::engine::game::components::input::TwinStickInputComponent>();
     shipGameObject->add<helios::engine::game::components::physics::Move2DComponent>();
+    shipGameObject->add<helios::engine::game::components::physics::TransformComponent>();
+    shipGameObject->add<helios::engine::game::components::physics::ScaleComponent>(
+        SPACESHIP_SIZE, SPACESHIP_SIZE, 0.0f, helios::core::units::Unit::Meter);
     shipGameObject->add<helios::engine::game::components::gameplay::Aim2DComponent>();
     shipGameObject->add<helios::engine::game::components::gameplay::ShootComponent>();
+    shipGameObject->add<helios::engine::game::components::physics::LevelBoundsBehaviorComponent>();
+    shipGameObject->add<helios::engine::game::components::physics::AabbColliderComponent>();
     auto* theShipPtr = gameWorld.addGameObject(std::move(shipGameObject));
 
     // Register the spaceship with the tuning widget
     spaceshipWidget->addGameObject("Player 1", theShipPtr);
 
     auto gridGameObject = std::make_unique<helios::engine::game::GameObject>();
-    auto* gridGameObjectPtr = gridGameObject.get();
     gridGameObject->add<helios::engine::game::components::scene::SceneNodeComponent>(gridSceneNode);
-    gridGameObjectPtr->get<helios::engine::game::components::scene::SceneNodeComponent>()
-                      ->setSize(GRID_X * CELL_SIZE, GRID_Y * CELL_SIZE, 0.0f, helios::core::units::Unit::Meter);
-
+    gridGameObject->add<helios::engine::game::components::physics::TransformComponent>();
+    gridGameObject->add<helios::engine::game::components::physics::ScaleComponent>(
+        GRID_X * CELL_SIZE, GRID_Y * CELL_SIZE, 0.0f, helios::core::units::Unit::Meter
+    );
+    gridGameObject->add<helios::engine::game::components::physics::AabbColliderComponent>();
     std::ignore = gameWorld.addGameObject(std::move(gridGameObject));
 
-    gameWorld.add<helios::engine::game::systems::BulletPool>(
-        std::move(bulletRenderable), 50, gridSceneNode->aabb()
+    // register the game systems
+    gameWorld.add<helios::engine::game::systems::gameplay::ProjectilePoolSystem>(
+        std::move(projectileRenderable), 50
     );
+
+    auto level = std::make_unique<helios::engine::game::Level>(&(scene.get()->root()));
+    level->setBounds(
+        helios::math::aabb{
+     -(GRID_X * CELL_SIZE)/2.0f, -(GRID_Y * CELL_SIZE)/2.0f, 0.0f,
+            (GRID_X * CELL_SIZE)/2.0f, (GRID_Y * CELL_SIZE)/2.0f, 0.0f
+        },
+        helios::core::units::Unit::Meter
+    );
+    gameWorld.setLevel(std::move(level));
+
+    gameWorld.add<helios::engine::game::systems::physics::ScaleSystem>();
+    gameWorld.add<helios::engine::game::systems::physics::Move2DSystem>();
+    gameWorld.add<helios::engine::game::systems::scene::SceneSyncSystem>(scene.get());
+    gameWorld.add<helios::engine::game::systems::physics::BoundsUpdateSystem>();
+    gameWorld.add<helios::engine::game::systems::physics::LevelBoundsBehaviorSystem>();
+    gameWorld.add<helios::engine::game::systems::post::TransformClearSystem>();
+    gameWorld.add<helios::engine::game::systems::post::ScaleClearSystem>();
+
 
 
     float DELTA_TIME = 0.0f;

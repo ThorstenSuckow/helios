@@ -196,6 +196,11 @@ async function main() {
       dest: path.join(websiteRoot, 'docs', 'examples', 'spaceship-control.md'),
       meta: { title: 'Spaceship Control', description: 'Example: Complete game loop with command pattern, scene graph cameras, transform inheritance, and ImGui debug overlay.', slug: '/examples/spaceship-control', tags: ['examples', 'input', 'imgui', 'logging', 'game-loop', 'camera', 'scene-graph'], keywords: ['helios', 'gamepad', 'ImGui', 'logging', 'debug overlay', 'camera', 'transform inheritance', 'game system'], sidebar_label: 'Spaceship Control' }
     },
+    {
+      src: path.join(repoRoot, 'examples', 'spaceship_shooting', 'README.md'),
+      dest: path.join(websiteRoot, 'docs', 'examples', 'spaceship-shooting.md'),
+      meta: { title: 'Spaceship Shooting', description: 'Example: Twin-stick shooter with bullet pooling, shooting components, aim tracking, and arena collision.', slug: '/examples/spaceship-shooting', tags: ['examples', 'input', 'gameplay', 'bullet-pool', 'components'], keywords: ['helios', 'twin-stick', 'shooter', 'bullet pool', 'shooting', 'aiming', 'game system'], sidebar_label: 'Spaceship Shooting' }
+    },
   ];
 
   console.log('[sync-docs] Synchronizing repository documentation...');

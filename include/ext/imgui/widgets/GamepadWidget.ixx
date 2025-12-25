@@ -58,7 +58,7 @@ export namespace helios::ext::imgui::widgets {
         /**
          * @brief Flag to control visibility of the settings panel.
          */
-        bool showSettings_ = false;
+        bool showSettings_ = true;
 
         /**
          * @brief Helper to map an integer index (0-3) to a Gamepad enum ID.
@@ -123,38 +123,38 @@ export namespace helios::ext::imgui::widgets {
 
             ImGui::Spacing();
 
-            // --- Deadzone Configuration ---
-            ImGui::Text("Deadzone");
+            // --- Deadzone Configuration (Side by Side) ---
+            ImGui::Columns(2, "deadzoneColumns", false);
 
-            float leftDeadzone = settings.leftStickDeadzone();
+            // Left Stick Column
             ImGui::Text("Left Stick");
+            float leftDeadzone = settings.leftStickDeadzone();
             if (ImGui::SliderFloat("##LeftDZ", &leftDeadzone, 0.0f, 0.9f, "%.2f")) {
                 settings.setLeftStickDeadzone(leftDeadzone);
             }
 
-            float rightDeadzone = settings.rightStickDeadzone();
+            bool invertLX = settings.invertLeftX();
+            bool invertLY = settings.invertLeftY();
+            if (ImGui::Checkbox("Invert X##L", &invertLX)) settings.setInvertLeftX(invertLX);
+            ImGui::SameLine();
+            if (ImGui::Checkbox("Invert Y##L", &invertLY)) settings.setInvertLeftY(invertLY);
+
+            ImGui::NextColumn();
+
+            // Right Stick Column
             ImGui::Text("Right Stick");
+            float rightDeadzone = settings.rightStickDeadzone();
             if (ImGui::SliderFloat("##RightDZ", &rightDeadzone, 0.0f, 0.9f, "%.2f")) {
                 settings.setRightStickDeadzone(rightDeadzone);
             }
 
-            ImGui::Spacing();
-
-            // --- Axis Inversion ---
-            ImGui::Text("Invert Axes");
-
-            bool invertLX = settings.invertLeftX();
-            bool invertLY = settings.invertLeftY();
             bool invertRX = settings.invertRightX();
             bool invertRY = settings.invertRightY();
+            if (ImGui::Checkbox("Invert X##R", &invertRX)) settings.setInvertRightX(invertRX);
+            ImGui::SameLine();
+            if (ImGui::Checkbox("Invert Y##R", &invertRY)) settings.setInvertRightY(invertRY);
 
-            if (ImGui::Checkbox("L-X", &invertLX)) settings.setInvertLeftX(invertLX);
-            ImGui::SameLine();
-            if (ImGui::Checkbox("L-Y", &invertLY)) settings.setInvertLeftY(invertLY);
-            ImGui::SameLine();
-            if (ImGui::Checkbox("R-X", &invertRX)) settings.setInvertRightX(invertRX);
-            ImGui::SameLine();
-            if (ImGui::Checkbox("R-Y", &invertRY)) settings.setInvertRightY(invertRY);
+            ImGui::Columns(1);
 
             ImGui::Spacing();
 

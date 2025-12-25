@@ -13,13 +13,11 @@ export module helios.engine.game.components.physics.Move2DComponent;
 
 import helios.scene.SceneNode;
 import helios.util.Guid;
-import helios.scene.Transform;
+import helios.core.Transform;
 import helios.math;
 import helios.core.units;
-import helios.engine.game.GameObject;
-import helios.engine.game.UpdateContext;
-import helios.engine.game.Updatable;
 import helios.engine.game.Component;
+import helios.engine.game.GameObject;
 import helios.engine.game.components.scene.SceneNodeComponent;
 
 
@@ -28,18 +26,16 @@ export namespace helios::engine::game::components::physics {
     /**
      * @brief Component for 2D physics-based movement with rotation.
      *
-     * @details Handles directional movement and rotation for GameObjects in a 2D plane.
-     * Implements smooth acceleration, deceleration with exponential dampening, and
-     * rotation towards the input direction. Movement is applied to the associated
-     * SceneNode through a SceneNodeComponent.
+     * @details
+     * Stores configuration and runtime state for 2D physics-based movement.
+     * This component is used by the movement system to apply smooth acceleration,
+     * deceleration, and rotation to the entity.
      *
      * The component receives input via move() which sets target direction and throttle.
-     * Each frame, update() applies physics calculations to smoothly rotate towards
-     * the target direction and move in the current facing direction.
-     *
-     * @note Requires a SceneNodeComponent to be attached to the same GameObject.
+     * The actual physics simulation (integration of velocity, application of dampening)
+     * is performed by the Movement2DSystem.
      */
-    class Move2DComponent : public helios::engine::game::Updatable, public helios::engine::game::Component {
+    class Move2DComponent : public helios::engine::game::Component {
 
     protected:
 
@@ -139,12 +135,12 @@ export namespace helios::engine::game::components::physics {
         /**
          * @brief Current movement speed after applying input and dampening.
          */
-        float actualMovementSpeed_ = 0.0f;
+        float currentMovementSpeed_ = 0.0f;
 
         /**
          * @brief Current rotation angle in degrees.
          */
-        float actualRotationAngle_ = 0;
+        float currentRotationAngle_ = 0;
 
         /**
          * @brief Target rotation angle derived from input direction.
@@ -159,7 +155,7 @@ export namespace helios::engine::game::components::physics {
         /**
          * @brief Current rotation speed after applying input and dampening.
          */
-        float actualRotationSpeed_ = 0.0f;
+        float currentRotationSpeed_ = 0.0f;
 
         /**
          * @brief Indicates whether input is currently being received.
@@ -181,27 +177,9 @@ export namespace helios::engine::game::components::physics {
          */
         helios::math::vec3f velocity_;
 
-        /**
-         * @brief Pointer to the scene node component for transform operations.
-         *
-         * @details Set during onAttach(). Must not be null for movement to apply.
-         */
-        helios::engine::game::components::scene::SceneNodeComponent* sceneNodeComponent_;
 
     public:
 
-        /**
-         * @brief Called when the component is attached to a GameObject.
-         *
-         * @details Retrieves reference to the SceneNodeComponent for transform operations.
-         *
-         * @param gameObject The GameObject this component is being attached to.
-         */
-        void onAttach(helios::engine::game::GameObject* gameObject) noexcept override {
-            gameObject_ = gameObject;
-            sceneNodeComponent_ = gameObject_->get<helios::engine::game::components::scene::SceneNodeComponent>();
-            assert(sceneNodeComponent_ != nullptr && "Unexpected nullptr for sceneNodeComponent_");
-        };
 
         /**
          * @brief Sets the movement direction and throttle.
@@ -227,110 +205,116 @@ export namespace helios::engine::game::components::physics {
 
 
             targetRotationAngle_ = helios::math::degrees(std::atan2(direction[1], direction[0]));
-            rotationAngleDelta_ = std::fmod((targetRotationAngle_ - actualRotationAngle_) + 540.0f, 360.0f) - 180.0f;
+            rotationAngleDelta_ = std::fmod((targetRotationAngle_ - currentRotationAngle_) + 540.0f, 360.0f) - 180.0f;
 
 
             isInputActive_ = true;
 
             float turnBoost = 1.0f + 0.5f*std::clamp((abs(rotationAngleDelta_))/180.f, 0.0f, 1.0f);
-            actualRotationSpeed_ = turnBoost * rotationSpeed_ * throttle_;
-            actualMovementSpeed_ = movementSpeed_ * throttle_;
+            currentRotationSpeed_ = turnBoost * rotationSpeed_ * throttle_;
+            currentMovementSpeed_ = movementSpeed_ * throttle_;
 
         }
 
         /**
-         * @brief Updates movement and rotation each frame.
+         * @brief Sets the current rotation speed.
          *
-         * @details Applies rotation towards the target angle with dampening, then
-         * integrates velocity to update position. Handles both active input and
-         * coasting (when input stops) with exponential decay.
-         *
-         * @param updateContext Context containing frame delta time.
+         * @param speed The new rotation speed.
          */
-        void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
+        void setCurrentRotationSpeed(float speed) noexcept {
+            currentRotationSpeed_ = speed;
+        }
 
-            float deltaTime = updateContext.deltaTime();
-
-            assert(deltaTime >= 0 && "Unexpected negative value for deltaTime");
-
-
-
-            if (deltaTime == 0) {
-                return;
-            }
-
-            // ROTATION
-            if (!isInputActive_) {
-                actualRotationSpeed_ *= std::pow(rotationDampening_, deltaTime);;
-                if (actualRotationSpeed_ < rotationSpeedThreshold_) {
-                    actualRotationSpeed_ = 0.0f;
-                }
-            }
-
-            if (actualRotationSpeed_ > 0.0f) {
-                float rotationStep = std::copysign(
-                 std::min(std::abs(rotationAngleDelta_), actualRotationSpeed_ * deltaTime),
-                 rotationAngleDelta_
-                );
-                actualRotationAngle_ += rotationStep;
-
-                rotationAngleDelta_ = std::fmod((targetRotationAngle_ - actualRotationAngle_) + 540.0f, 360.0f) - 180.0f;
-
-                if (std::abs(rotationAngleDelta_) <= 0.5f) {
-                    actualRotationAngle_ = targetRotationAngle_;
-                    rotationAngleDelta_  = 0.0f;
-                    actualRotationSpeed_ = 0.0f;
-                }
-
-                if (sceneNodeComponent_) {
-                    sceneNodeComponent_->setRotation(helios::math::rotate(
-                    helios::math::mat4f::identity(),
-                    helios::math::radians(actualRotationAngle_),
-                    helios::math::vec3f(0.0f, 0.0f, 1.0f)
-                    ));
-                }
+        /**
+         * @brief Sets the current velocity vector.
+         *
+         * @param velocity The new velocity vector.
+         */
+        void setVelocity(helios::math::vec3f velocity) noexcept {
+            velocity_ = velocity;
+        }
 
 
-            }
+        /**
+         * @brief Returns the current rotation speed.
+         *
+         * @return The current rotation speed.
+         */
+        [[nodiscard]] float currentRotationSpeed() const noexcept {
+            return currentRotationSpeed_;
+        }
 
-            // MOVEMENT
-            // Compute the current facing direction from the actual rotation angle.
-            // This converts the angle to a unit vector in the XY plane.
-            const auto actualDirection_ = helios::math::vec3f(
-                cos(helios::math::radians(actualRotationAngle_)), sin(helios::math::radians(actualRotationAngle_)), 0.0f
-            );
+        /**
+         * @brief Returns the angular distance to the target rotation.
+         *
+         * @return The angle delta in degrees.
+         */
+        [[nodiscard]] float rotationAngleDelta() const noexcept {
+            return rotationAngleDelta_;
+        }
 
-            if (!isInputActive_) {
-                // Apply exponential drag when no input is active.
-                // This creates a smooth deceleration effect (velocity approaches zero over time).
-                const float drag  = std::pow(movementDampening_, deltaTime);
-                velocity_ = velocity_ * drag;
+        /**
+         * @brief Returns the current movement speed.
+         *
+         * @return The current movement speed.
+         */
+        [[nodiscard]] float currentMovementSpeed() const noexcept {
+            return currentMovementSpeed_;
+        }
 
-                if (drag <= helios::math::EPSILON_LENGTH) {
-                    velocity_ = helios::math::vec3f{0.0f, 0.0f, 0.0f};
-                }
+        /**
+         * @brief Returns the current rotation angle.
+         *
+         * @return The current rotation angle in degrees.
+         */
+        [[nodiscard]] float currentRotationAngle() const noexcept {
+            return currentRotationAngle_;
+        }
 
-            } else {
-                // Accelerate in the current facing direction.
-                // Uses throttle (input intensity) to scale acceleration.
-                velocity_ = velocity_ +  actualDirection_ *  (movementAcceleration_ * throttle_ * deltaTime);
-            }
+        /**
+         * @brief Returns the target rotation angle.
+         *
+         * @return The target rotation angle in degrees.
+         */
+        [[nodiscard]] float targetRotationAngle() const noexcept {
+            return targetRotationAngle_;
+        }
 
-            // Clamp velocity to maximum speed to prevent unlimited acceleration.
-            if (velocity_.length() > movementSpeed_) {
-                velocity_ = velocity_.normalize() * movementSpeed_;
-            }
+        /**
+         * @brief Sets the current rotation angle.
+         *
+         * @param angle The new rotation angle in degrees.
+         */
+        void setCurrentRotationAngle(float angle) noexcept {
+            currentRotationAngle_ = angle;
+        }
 
+        /**
+         * @brief Sets the angular distance to the target rotation.
+         *
+         * @param delta The new angle delta in degrees.
+         */
+        void setRotationAngleDelta(float delta) noexcept {
+            rotationAngleDelta_ = delta;
+        }
 
-            if (sceneNodeComponent_) {
-                // Integrate velocity to update position.
-                sceneNodeComponent_->setTranslation(sceneNodeComponent_->translation() + velocity_ * deltaTime);
-            }
+        /**
+         * @brief Sets the current movement speed.
+         *
+         * @param speed The new movement speed.
+         */
+        void setCurrentMovementSpeed(float speed) noexcept {
+            currentMovementSpeed_ = speed;
+        }
 
-
-
-
-        };
+        /**
+         * @brief Checks if input is currently active.
+         *
+         * @return True if input is active, false otherwise.
+         */
+        [[nodiscard]] bool isInputActive() const noexcept {
+            return isInputActive_;
+        }
 
         /**
          * @brief Returns the current steering input direction.
@@ -425,21 +409,6 @@ export namespace helios::engine::game::components::physics {
          */
         [[nodiscard]] float movementDampening() const noexcept { return movementDampening_; }
 
-        /**
-         * @brief Returns the current rotation angle in degrees.
-         *
-         * @return Current facing angle in degrees.
-         */
-        [[nodiscard]] float rotationAngle() const noexcept { return actualRotationAngle_; }
-
-        /**
-         * @brief Returns the current position from the SceneNodeComponent.
-         *
-         * @return Current world-space position, or zero vector if no SceneNodeComponent.
-         */
-        [[nodiscard]] helios::math::vec3f position() const noexcept {
-            return sceneNodeComponent_ ? sceneNodeComponent_->translation() : helios::math::vec3f{0.0f, 0.0f, 0.0f};
-        }
 
         // ========================================
         // Physics Parameter Setters
@@ -514,3 +483,4 @@ export namespace helios::engine::game::components::physics {
 
 
 }
+

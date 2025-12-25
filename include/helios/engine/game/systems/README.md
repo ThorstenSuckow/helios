@@ -10,6 +10,6 @@ Systems are ideal for cross-cutting concerns that span multiple entities, such a
 <summary>Doxygen</summary><p>
 @namespace helios::engine::game::systems
 @brief Global game systems for cross-cutting concerns.
-@details This namespace contains System implementations that operate on the GameWorld level. Systems handle concerns that span multiple GameObjects, such as object pooling (BulletPool), physics simulation, and collision detection.
+@details This namespace contains System implementations that operate on the GameWorld level. Systems handle concerns that span multiple GameObjects, such as object pooling (ProjectilePoolSystem), physics simulation, and collision detection.
 </p></details>
 

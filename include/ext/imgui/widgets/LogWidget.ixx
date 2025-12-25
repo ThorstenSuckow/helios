@@ -79,6 +79,11 @@ export namespace helios::ext::imgui::widgets {
         static constexpr const char* ALL_SCOPES_KEY = "__all__";
 
         /**
+         * @brief Key for the "none" option that disables logging.
+         */
+        static constexpr const char* NONE_SCOPES_KEY = "__none__";
+
+        /**
          * @brief Per-scope log buffers. Key is scope name, value is entry vector.
          *
          * Special key "__all__" contains all entries (for "All Scopes" view).
@@ -151,14 +156,19 @@ export namespace helios::ext::imgui::widgets {
         std::vector<std::string> collectedScopes_;
 
         /**
-         * @brief Currently selected scope index in the combo box (0 = "All").
+         * @brief Currently selected scope index in the combo box (0 = "All", -1 = "None").
          */
-        int selectedScopeIndex_ = 0;
+        int selectedScopeIndex_ = -1;
 
         /**
          * @brief Currently active scope filter (empty = show all).
          */
         std::string activeScopeFilter_;
+
+        /**
+         * @brief Whether logging is completely disabled (None selected).
+         */
+        bool loggingDisabled_ = true;
 
         /**
          * @brief Callback function to notify external systems of scope filter changes.
@@ -278,6 +288,11 @@ export namespace helios::ext::imgui::widgets {
          * Thread-safe. Adds to both the scope-specific buffer and the "all" buffer.
          */
         void addLog(LogLevel level, const std::string& scope, const std::string& message) {
+            // If logging is completely disabled, skip
+            if (loggingDisabled_) {
+                return;
+            }
+
             // If user scrolls up and AutoScroll is off, we do not accept new entries
             // to make sure memory is not flooded with new log entries in the background.
             if (!acceptNewEntries_.load(std::memory_order_relaxed)) {
@@ -450,16 +465,37 @@ export namespace helios::ext::imgui::widgets {
                 {
                     std::lock_guard<std::mutex> lock(bufferMutex_);
 
-                    std::string scopePreview = (selectedScopeIndex_ == 0)
-                        ? "All Scopes"
-                        : (selectedScopeIndex_ <= static_cast<int>(collectedScopes_.size())
-                            ? collectedScopes_[selectedScopeIndex_ - 1]
-                            : "All Scopes");
+                    std::string scopePreview;
+                    if (loggingDisabled_) {
+                        scopePreview = "None";
+                    } else if (selectedScopeIndex_ == 0) {
+                        scopePreview = "All Scopes";
+                    } else if (selectedScopeIndex_ <= static_cast<int>(collectedScopes_.size())) {
+                        scopePreview = collectedScopes_[selectedScopeIndex_ - 1];
+                    } else {
+                        scopePreview = "All Scopes";
+                    }
 
                     ImGui::SetNextItemWidth(150);
                     if (ImGui::BeginCombo("Scope", scopePreview.c_str())) {
-                        bool isSelected = (selectedScopeIndex_ == 0);
+                        // "None" option - disables logging completely
+                        bool isNoneSelected = loggingDisabled_;
+                        if (ImGui::Selectable("None", isNoneSelected)) {
+                            loggingDisabled_ = true;
+                            selectedScopeIndex_ = -1;
+                            activeScopeFilter_.clear();
+                            if (onScopeFilterChanged_) {
+                                onScopeFilterChanged_(NONE_SCOPES_KEY);
+                            }
+                        }
+                        if (isNoneSelected) {
+                            ImGui::SetItemDefaultFocus();
+                        }
+
+                        // "All Scopes" option
+                        bool isSelected = (!loggingDisabled_ && selectedScopeIndex_ == 0);
                         if (ImGui::Selectable("All Scopes", isSelected)) {
+                            loggingDisabled_ = false;
                             selectedScopeIndex_ = 0;
                             activeScopeFilter_.clear();
                             if (onScopeFilterChanged_) {
@@ -471,8 +507,9 @@ export namespace helios::ext::imgui::widgets {
                         }
 
                         for (std::size_t i = 0; i < collectedScopes_.size(); ++i) {
-                            isSelected = (selectedScopeIndex_ == static_cast<int>(i + 1));
+                            isSelected = (!loggingDisabled_ && selectedScopeIndex_ == static_cast<int>(i + 1));
                             if (ImGui::Selectable(collectedScopes_[i].c_str(), isSelected)) {
+                                loggingDisabled_ = false;
                                 selectedScopeIndex_ = static_cast<int>(i + 1);
                                 activeScopeFilter_ = collectedScopes_[i];
                                 if (onScopeFilterChanged_) {

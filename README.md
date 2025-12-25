@@ -223,3 +223,4 @@ This project is inspired by and builds upon concepts from industry-standard game
 - **[PJH23]** Pharr, Matt; Jakob, Wenzel; Humphreys, Greg: *Physically Based Rendering, 4th ed.* (2023), MIT Press
 - **[DP11]** Dunn, Fletcher; Parberry, Ian: *3D Math Primer for Graphics and Game Development, 2nd ed.* (2011), CRC Press
 - **[Gla95]** Glassner, Andrew S. (ed.): Graphics Gems. AP Professional / Academic Press, Boston, 1995.
+- **[Len16]** Lengyel, Eric: Foundations of Game Engine Development (2016), Terathon Software LCC

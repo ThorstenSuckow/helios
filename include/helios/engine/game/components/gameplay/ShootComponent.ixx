@@ -16,7 +16,7 @@ import helios.engine.game.UpdateContext;
 import helios.engine.game.Updatable;
 import helios.engine.game.Component;
 import helios.engine.game.components.gameplay.Aim2DComponent;
-import helios.engine.game.components.scene.SceneNodeComponent;
+import helios.engine.game.components.physics.TransformComponent;
 
 import helios.math;
 
@@ -31,7 +31,7 @@ import helios.ext.opengl.rendering.shader.OpenGLShader;
 import helios.util.io.BasicStringFileReader;
 import helios.rendering.model.config.MaterialProperties;
 
-import helios.engine.game.systems.BulletPool;
+import helios.engine.game.systems.gameplay.ProjectilePoolSystem;
 
 export namespace helios::engine::game::components::gameplay {
 
@@ -39,7 +39,7 @@ export namespace helios::engine::game::components::gameplay {
      * @brief Component for handling projectile shooting with rate limiting.
      *
      * @details Manages the shooting mechanics for a GameObject by coordinating with
-     * aim-components for direction and a bullet pool for projectile spawning. Implements
+     * aim-components for direction and a projectile pool for projectile spawning. Implements
      * a cooldown timer to control fire rate.
      *
      *
@@ -76,12 +76,12 @@ export namespace helios::engine::game::components::gameplay {
          *
          * @details Set during onAttach(). Must not be null when shooting.
          */
-        helios::engine::game::components::scene::SceneNodeComponent* sceneNodeComponent_ = nullptr;
+        helios::engine::game::components::physics::TransformComponent* transformComponent_ = nullptr;
 
         /**
          * @brief Cooldown timer for fire rate limiting, in seconds.
          *
-         * If cooldownDelta <= cooldownTime, the next bullet can be shot.
+         * If cooldownDelta <= cooldownTime, the next projectile can be shot.
          *
          * @details Accumulates delta time between shots.
          */
@@ -96,9 +96,16 @@ export namespace helios::engine::game::components::gameplay {
 
 
         /**
-         * @brief The bullet speed, in meters per second.
+         * @brief The projectile speed, in meters per second.
          */
-        float bulletSpeed_ = 60.0f;
+        float projectileSpeed_ = 60.0f;
+
+        /**
+         * @brief Velocity of the source object in three-dimensional space.
+         *
+         * Used to adjust the trajectory of projectiles emitted by the source's movement.
+         */
+        helios::math::vec3f sourceVelocity_;
 
 
     public:
@@ -114,9 +121,9 @@ export namespace helios::engine::game::components::gameplay {
             Component::onAttach(gameObject);
 
             aimComponent_ = gameObject->get<helios::engine::game::components::gameplay::Aim2DComponent>();
-            sceneNodeComponent_ = gameObject->get<helios::engine::game::components::scene::SceneNodeComponent>();
+            transformComponent_ = gameObject->get<helios::engine::game::components::physics::TransformComponent>();
             assert(aimComponent_ != nullptr && "Unexpected nullptr for aimComponent_");
-            assert(sceneNodeComponent_ != nullptr && "Unexpected nullptr for sceneNodeComponent_");
+            assert(transformComponent_ != nullptr && "Unexpected nullptr for transformComponent_");
         }
 
         /**
@@ -126,13 +133,15 @@ export namespace helios::engine::game::components::gameplay {
          * The intensity affects whether projectiles are spawned during update().
          *
          * @param intensity Fire intensity (0.0 to 1.0). Zero stops firing.
+         * @param sourceVelocity The velocity of the object emitting the projectile.
          */
-        void shoot(float intensity) {
+        void shoot(float intensity, helios::math::vec3f sourceVelocity) {
 
             if (intensity == 0.0f || !aimComponent_) {
                 intensity_ = 0.0f;
                 return;
             }
+            sourceVelocity_ = sourceVelocity;
             intensity_ = intensity;
         }
 
@@ -140,7 +149,7 @@ export namespace helios::engine::game::components::gameplay {
          * @brief Updates the component, spawning projectiles when ready.
          *
          * @details Checks the cooldown timer and aim direction. If conditions are met,
-         * spawns a bullet from the BulletPool at the current position traveling in
+         * spawns a projectile from the ProjectilePoolSystem at the current position traveling in
          * the aim direction.
          *
          * @param updateContext The update context containing timing and game state.
@@ -157,14 +166,14 @@ export namespace helios::engine::game::components::gameplay {
 
             if (cooldownDelta_ >= cooldownTime_ && aimDir.length() > helios::math::EPSILON_LENGTH) {
                 cooldownDelta_ = 0;
-                auto* bulletPool = updateContext.gameWorld()
-                                        ->get<helios::engine::game::systems::BulletPool>();
+                auto* projectilePoolSystem = updateContext.gameWorld()
+                                        ->get<helios::engine::game::systems::gameplay::ProjectilePoolSystem>();
 
                 auto aimDirNorm = aimDir.normalize().toVec3();
 
-                bulletPool->spawn(
-                    sceneNodeComponent_->translation(),
-                    aimDirNorm * bulletSpeed_, aimDirNorm
+                projectilePoolSystem->spawn(
+                    transformComponent_->localTranslation(),
+                    aimDirNorm * projectileSpeed_, aimDirNorm, sourceVelocity_
                 );
             }
         }
@@ -198,21 +207,21 @@ export namespace helios::engine::game::components::gameplay {
         }
 
         /**
-         * @brief Returns the bullet speed.
+         * @brief Returns the projectile speed.
          *
-         * @return Bullet speed in meters per second.
+         * @return Projectile speed in meters per second.
          */
-        [[nodiscard]] float bulletSpeed() const noexcept {
-            return bulletSpeed_;
+        [[nodiscard]] float projectileSpeed() const noexcept {
+            return projectileSpeed_;
         }
 
         /**
-         * @brief Sets the bullet speed.
+         * @brief Sets the projectile speed.
          *
-         * @param speed New bullet speed in meters per second.
+         * @param speed New projectile speed in meters per second.
          */
-        void setBulletSpeed(float speed) noexcept {
-            bulletSpeed_ = speed;
+        void setProjectileSpeed(float speed) noexcept {
+            projectileSpeed_ = speed;
         }
 
     };

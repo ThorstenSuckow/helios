@@ -313,17 +313,17 @@ export namespace helios::math {
             const auto c = column(2).toVec3();
             const auto d = column(3).toVec3();
 
-            const float x = m(3, 0);
-            const float y = m(3, 1);
-            const float z = m(3, 2);
-            const float w = m(3, 3);
+            const T x = m(3, 0);
+            const T y = m(3, 1);
+            const T z = m(3, 2);
+            const T w = m(3, 3);
 
             auto s = helios::math::cross(a, b);
             auto t = helios::math::cross(c, d);
             auto u = a*y - b*x;
             auto v = c*w - d*z;
 
-            T invDet = static_cast<T>(1.0f) / (helios::math::dot(s, v) + helios::math::dot(t, u));
+            T invDet = static_cast<T>(1) / (helios::math::dot(s, v) + helios::math::dot(t, u));
 
             s = s * invDet;
             t = t * invDet;

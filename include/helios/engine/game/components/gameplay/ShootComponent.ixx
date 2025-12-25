@@ -166,12 +166,12 @@ export namespace helios::engine::game::components::gameplay {
 
             if (cooldownDelta_ >= cooldownTime_ && aimDir.length() > helios::math::EPSILON_LENGTH) {
                 cooldownDelta_ = 0;
-                auto* ProjectilePoolSystem = updateContext.gameWorld()
+                auto* projectilePoolSystem = updateContext.gameWorld()
                                         ->get<helios::engine::game::systems::gameplay::ProjectilePoolSystem>();
 
                 auto aimDirNorm = aimDir.normalize().toVec3();
 
-                ProjectilePoolSystem->spawn(
+                projectilePoolSystem->spawn(
                     transformComponent_->localTranslation(),
                     aimDirNorm * projectileSpeed_, aimDirNorm, sourceVelocity_
                 );

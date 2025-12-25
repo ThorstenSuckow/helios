@@ -291,7 +291,7 @@ export namespace helios::math {
          * @return A vec4<T> representing the column.
          */
         helios::math::vec4<T> column(unsigned int i) const noexcept {
-            assert(i <= 3 && "unecpected value for column");
+            assert(i <= 3 && "unexpected value for column");
             const auto m = *this;
             return helios::math::vec4<T>{
                 m(0, i), m(1, i), m(2, i), m(3, i)

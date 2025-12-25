@@ -57,7 +57,7 @@ export namespace helios::engine::game::systems::physics {
                 auto* tc = obj->get<helios::engine::game::components::physics::TransformComponent>();
                 auto* bc = obj->get<helios::engine::game::components::physics::AabbColliderComponent>();
 
-                if (bc && tc->isDirty()) {
+                if (bc && tc && tc->isDirty()) {
                     bc->setBounds(mab->aabb().applyTransform(tc->worldTransform()));
                 }
 

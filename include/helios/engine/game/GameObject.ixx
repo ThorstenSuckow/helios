@@ -115,7 +115,7 @@ export namespace helios::engine::game {
                 return *cmp;
             }
 
-            return add<T>(std::forward<Args>(args)...);;
+            return add<T>(std::forward<Args>(args)...);
         }
 
         /**

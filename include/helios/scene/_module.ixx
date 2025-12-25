@@ -20,4 +20,3 @@ export import helios.scene.Scene;
 export import helios.scene.SceneNode;
 export import helios.scene.Snapshot;
 export import helios.scene.SnapshotItem;
-export import helios.scene.Transform;

@@ -14,13 +14,14 @@ import :SceneFwd;
 
 import helios.rendering.Renderable;
 import helios.util.Guid;
-import helios.scene.Transform;
+import helios.core.Transform;
 import helios.math.types;
 import helios.math.transform;
-
+import helios.core.Transform;
 
 export namespace helios::scene {
 
+    using namespace helios::core;
 
     /**
      * @brief SceneGraphKey as passkey idiom for accessing `setWorldTransform()`.

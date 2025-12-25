@@ -14,6 +14,9 @@ export import helios.engine.game.Component;
 export import helios.engine.game.GameObject;
 export import helios.engine.game.GameWorld;
 
+// level
+export import helios.engine.game.Level;
+
 // Command pattern
 export import helios.engine.game.Command;
 export import helios.engine.game.CommandBuffer;

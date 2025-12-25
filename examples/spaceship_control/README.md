@@ -47,6 +47,18 @@ The spaceship behavior is implemented via engine components:
 | `SceneNodeComponent` | Links GameObject to scene graph |
 | `Move2DComponent` | 2D physics with rotation and dampening |
 | `TwinStickInputComponent` | Translates gamepad input to commands |
+| `TransformComponent` | Stores local/world transform state |
+| `ScaleComponent` | Unit-based sizing (meters) |
+
+### Systems Used
+
+| System | Purpose |
+|--------|---------|
+| `ScaleSystem` | Applies ScaleComponent sizing |
+| `Move2DSystem` | Physics simulation (rotation, velocity) |
+| `SceneSyncSystem` | Syncs transforms to scene graph |
+| `TransformClearSystem` | Clears dirty flags post-frame |
+| `ScaleClearSystem` | Clears scale dirty flags |
 
 ## Camera System
 
@@ -82,7 +94,7 @@ imguiOverlay.addWidget(new SpaceshipWidget());      // Physics tuning
 
 ## Component-Based Game System
 
-The example uses helios's component-based game framework:
+The example uses helios's component-based game framework with dedicated systems:
 
 ```cpp
 // Create game world and command buffer
@@ -95,11 +107,17 @@ auto shipGameObject = std::make_unique<GameObject>();
 shipGameObject->add<SceneNodeComponent>(spaceshipSceneNode);
 shipGameObject->add<Move2DComponent>();
 shipGameObject->add<TwinStickInputComponent>();
+shipGameObject->add<TransformComponent>();
+shipGameObject->add<ScaleComponent>(5.0f, 5.0f, 0.0f, Unit::Meter);
 
 auto* ship = gameWorld.addGameObject(std::move(shipGameObject));
 
-// Set size in meters
-ship->get<SceneNodeComponent>()->setSize(5.0f, 5.0f, 0.0f, Unit::Meter);
+// Register game systems
+gameWorld.add<ScaleSystem>();
+gameWorld.add<Move2DSystem>();
+gameWorld.add<SceneSyncSystem>(scene.get());
+gameWorld.add<TransformClearSystem>();
+gameWorld.add<ScaleClearSystem>();
 
 // Game loop
 updateContext.setDeltaTime(deltaTime);

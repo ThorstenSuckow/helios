@@ -84,15 +84,38 @@ export namespace helios::engine::game {
             auto component_ptr = std::make_unique<T>(std::forward<Args>(args)...);
             T* raw_component_ptr = component_ptr.get();
 
-            component_ptr->onAttach(this);
-
             if constexpr (std::derived_from<T, helios::engine::game::Updatable>) {
                 updatables_.push_back(raw_component_ptr);
             }
-
             components_.push_back(std::move(component_ptr));
 
+            // make sure component is registered before onAttach is called,
+            // in case onAttach implementations query the gameObject for **this** component
+            // Use raw_component_ptr instead of component_ptr since ownership was moved above
+            raw_component_ptr->onAttach(this);
+
             return *raw_component_ptr;
+        }
+
+        /**
+         * @brief Retrieves an existing component of type T, or creates and adds it if not present.
+         *
+         * @tparam T The type of component to retrieve or add. Must derive from Component.
+         * @tparam Args Argument types for the component's constructor.
+         * @param args Arguments forwarded to the component's constructor if it needs to be created.
+         * @return Reference to the existing or newly created component.
+         *
+         * @details This is a convenience method that combines get() and add().
+         *          If the component already exists, the arguments are ignored.
+         */
+        template<typename T, typename... Args>
+        T& getOrAdd(Args&&... args) {
+
+            if (auto* cmp = get<T>()) {
+                return *cmp;
+            }
+
+            return add<T>(std::forward<Args>(args)...);
         }
 
         /**
@@ -113,7 +136,6 @@ export namespace helios::engine::game {
 
             return nullptr;
         }
-
 
         /**
          * @brief Checks if the GameObject has a component of type T.

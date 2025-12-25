@@ -4,7 +4,6 @@
  */
 module;
 
-#include <format>
 #include <memory>
 #include <unordered_map>
 
@@ -15,40 +14,25 @@ import helios.util.Guid;
 import helios.engine.game.UpdateContext;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
-import helios.scene.Scene;
 import helios.engine.game.System;
-
+import helios.engine.game.Level;
 
 #define HELIOS_LOG_SCOPE "helios::engine::game::GameWorld"
 export namespace helios::engine::game {
 
+
     /**
-     * @brief Central registry and owner of all active GameObjects in the game world.
+     * @brief Central registry for managing game entities, systems, and the active level.
      *
-     * @details The `GameWorld` manages the lifetime and lookup of all `GameObject` instances.
-     * It provides fast, `Guid`-based lookup and handles the lifecycle of game
-     * entities through a clear ownership model. The world serves as the central registry for all
-     * objects and is used by the `CommandBuffer` to execute commands against them.
+     * @details
+     * The GameWorld is the root container for the game state. It manages the lifecycle
+     * of GameObjects, executes Systems, and holds the current Level.
      *
-     * Typical usage:
-     * ```cpp
-     * helios::engine::game::GameWorld world;
-     *
-     * // Add a new entity
-     * auto player = std::make_unique<Player>(sceneNode);
-     * auto* playerPtr = world.addGameObject(std::move(player));
-     *
-     * // Lookup by Guid
-     * if (auto* obj = world.find(playerPtr->guid())) {
-     *     obj->setTranslation({1.0f, 0.0f, 0.0f});
-     * }
-     *
-     * // Remove entity (returns ownership)
-     * auto removed = world.removeGameObject(*playerPtr);
-     * ```
-     *
-     * @note GameWorld owns all GameObjects added to it. When a GameObject is removed,
-     *       ownership is transferred back to the caller via std::unique_ptr.
+     * Key responsibilities:
+     * - **Entity Management:** Owns all GameObjects and provides lookup by Guid.
+     * - **System Execution:** Manages and updates registered Systems.
+     * - **Level Management:** Holds the active Level instance.
+     * - **Update Loop:** Orchestrates the frame update by updating GameObjects and then Systems.
      */
     class GameWorld {
 
@@ -70,13 +54,6 @@ export namespace helios::engine::game {
             HELIOS_LOG_SCOPE);
 
         /**
-         * @brief Pointer to the Scene for scene graph integration.
-         *
-         * @details Non-owning pointer; may be nullptr if scene integration is not required.
-         */
-        helios::scene::Scene* scene_;
-
-        /**
          * @brief Vector storing all registered Systems.
          *
          * @details Systems are updated in order of registration after all GameObjects
@@ -84,22 +61,47 @@ export namespace helios::engine::game {
          */
         std::vector<std::unique_ptr<System>> systems_;
 
+        /**
+         * @brief The current level loaded in the game world.
+         *
+         * @details Can be null if no level is currently active.
+         */
+        std::unique_ptr<helios::engine::game::Level> level_ = nullptr;
+
     public:
 
-        /**
-         * @brief Constructs a GameWorld with a reference to the scene graph.
-         *
-         * @param scene Pointer to the Scene used for scene graph integration.
-         *              May be nullptr if scene graph integration is not required.
-         */
-        explicit GameWorld(helios::scene::Scene* scene) noexcept : scene_(scene) {}
+
+        explicit GameWorld() = default;
+
 
         /**
-         * @brief Returns the scene graph associated with this GameWorld.
+         * @brief Sets the current level for the game world.
          *
-         * @return Const pointer to the Scene, or nullptr if not set.
+         * @param level Unique pointer to the Level instance. Ownership is transferred to the GameWorld.
          */
-        [[nodiscard]] const helios::scene::Scene* scene() const noexcept;
+        void setLevel(std::unique_ptr<helios::engine::game::Level> level) noexcept {
+            level_ = std::move(level);
+        }
+
+        /**
+         * @brief Checks if a level is currently loaded.
+         *
+         * @return True if a level is set, false otherwise.
+         */
+        [[nodiscard]] bool hasLevel() const noexcept{
+            return level_ != nullptr;
+        }
+
+        /**
+         * @brief Retrieves the currently loaded level.
+         *
+         * @return Reference to the active Level.
+         *
+         * @warning Calling this method when hasLevel() returns false results in undefined behavior.
+         */
+        [[nodiscard]] const helios::engine::game::Level& level() const noexcept{
+            return *level_;
+        }
 
         /**
          * @brief Adds a System to the GameWorld.
@@ -163,14 +165,16 @@ export namespace helios::engine::game {
         }
 
         /**
-         * @brief Updates all GameObjects in the world for the current frame.
+         * @brief Updates the game world state for the current frame.
+         *
+         * @details
+         * This method performs the following steps:
+         * 1. Updates all active GameObjects (invoking their `update()` method).
+         * 2. Updates all registered Systems (invoking their `update()` method).
          *
          * @param updateContext Context containing deltaTime, input snapshot, game world and command buffer.
          *
-         * @note Iterates through all registered GameObjects and invokes their update() method.
-         *       The order of updates is not guaranteed due to the underlying unordered_map storage.
-         * @note This method is noexcept; individual GameObject::update() implementations should
-         *       handle their own exceptions to prevent propagation.
+         * @note The order of GameObject updates is not guaranteed. Systems are updated in registration order.
          */
         void update(helios::engine::game::UpdateContext& updateContext) const noexcept;
 
@@ -235,6 +239,20 @@ export namespace helios::engine::game {
          *       and logs a warning.
          */
         [[nodiscard]] std::unique_ptr<helios::engine::game::GameObject> removeGameObject(const GameObject& gameObject);
+
+        /**
+         * @brief Retrieves a const ref to the map of all active GameObjects.
+         *
+         * @return A const reference to the internal map of GameObjects, indexed by Guid.
+         *
+         * @warning Modifying the map directly (e.g. adding/removing elements) bypasses
+         *          GameWorld's management logic and should be avoided. Use addGameObject()
+         *          and removeGameObject() instead.
+         */
+        [[nodiscard]] const std::unordered_map<helios::util::Guid, std::unique_ptr<GameObject>>& gameObjects() const noexcept {
+            return gameObjects_;
+        }
     };
 
 }
+

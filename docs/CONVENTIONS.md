@@ -225,7 +225,7 @@ mat4f transposed = rotationMatrix.transpose();
 - `helios.math.types` — Core vector and matrix types (`vec3f`, `mat4f`) with `decompose()` and `transpose()`
 - `helios.math.utils` — Mathematical utility functions (`perspective`, `radians`, `degrees`)
 - `helios.math.transform` — Transform utilities including `TransformType`
-- `helios.scene.Transform` — Encapsulates translation, rotation, and scale
+- `helios.core.Transform` — Encapsulates translation, rotation, and scale
 - `helios.scene.Camera` — Projection matrix management
 - `helios.scene.CameraSceneNode` — View matrix computation and scene graph integration
 

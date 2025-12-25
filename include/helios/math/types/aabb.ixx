@@ -256,13 +256,14 @@ export namespace helios::math {
      *
      * @tparam T The numeric type of the vector components.
      * @param aabb The AABB to be scaled.
-     * @param v The scaling vector.
+     * @param v The scaling vector, for which only positive values are allowed.
      *
      * @return A new AABB scaled by the given vector.
      */
     template<typename T>
     [[nodiscard]] constexpr helios::math::aabb<T> operator*(
-    const helios::math::aabb<T> aabb, const helios::math::vec3<T> v) noexcept {
+    const helios::math::aabb<T>& aabb, const helios::math::vec3<T> v) noexcept {
+        assert(v[0] >= 0 && v[1] >= 0 && v[2] >= 0 && "unexpected negative value for scaling vector");
         return helios::math::aabb<T>{aabb.min() * v, aabb.max() * v};
     }
 

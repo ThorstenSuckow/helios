@@ -8,6 +8,5 @@ var namespacehelios_1_1scene =
     [ "SceneGraphKey", "structhelios_1_1scene_1_1SceneGraphKey.html", "structhelios_1_1scene_1_1SceneGraphKey" ],
     [ "SceneNode", "classhelios_1_1scene_1_1SceneNode.html", "classhelios_1_1scene_1_1SceneNode" ],
     [ "Snapshot", "classhelios_1_1scene_1_1Snapshot.html", "classhelios_1_1scene_1_1Snapshot" ],
-    [ "SnapshotItem", "structhelios_1_1scene_1_1SnapshotItem.html", "structhelios_1_1scene_1_1SnapshotItem" ],
-    [ "Transform", "classhelios_1_1scene_1_1Transform.html", "classhelios_1_1scene_1_1Transform" ]
+    [ "SnapshotItem", "structhelios_1_1scene_1_1SnapshotItem.html", "structhelios_1_1scene_1_1SnapshotItem" ]
 ];

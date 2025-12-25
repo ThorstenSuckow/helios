@@ -5,7 +5,7 @@ var searchData=
   ['decompose_2',['decompose',['../structhelios_1_1math_1_1mat4.html#a9c19cb795b7d8a032dd4cb415803f163',1,'helios::math::mat4']]],
   ['degrees_3',['degrees',['../namespacehelios_1_1math.html#a73c58ac1ac41973b9927ab6893662104',1,'helios::math']]],
   ['deltatime_4',['deltaTime',['../structhelios_1_1engine_1_1game_1_1UpdateContext.html#a6c701eadfa46994b96fbf00d2026489f',1,'helios::engine::game::UpdateContext']]],
-  ['despawn_5',['despawn',['../classhelios_1_1engine_1_1game_1_1systems_1_1BulletPool.html#a529c4377519652525f91c581b3a4ff78',1,'helios::engine::game::systems::BulletPool']]],
+  ['despawn_5',['despawn',['../classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem.html#ae62eb078952ee0ea5838d872c045f6c3',1,'helios::engine::game::systems::gameplay::ProjectilePoolSystem']]],
   ['destroy_6',['destroy',['../classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow.html#a23367b706abec70b54e45031a43f9185',1,'helios::ext::glfw::window::GLFWWindow']]],
   ['direction_7',['direction',['../classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent.html#a70bafe4a7bcc2e7f4de02ef6bb397ef6',1,'helios::engine::game::components::gameplay::Aim2DComponent']]],
   ['disableallsinks_8',['disableAllSinks',['../classhelios_1_1util_1_1log_1_1LogManager.html#a7fd1afc8a2049fee3212387976a748ed',1,'helios::util::log::LogManager']]],

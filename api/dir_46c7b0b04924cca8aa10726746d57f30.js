@@ -10,6 +10,7 @@ var dir_46c7b0b04924cca8aa10726746d57f30 =
     [ "GameObject.ixx", "GameObject_8ixx.html", "GameObject_8ixx" ],
     [ "GameWorld.ixx", "GameWorld_8ixx.html", "GameWorld_8ixx" ],
     [ "InputSnapshot.ixx", "InputSnapshot_8ixx.html", "InputSnapshot_8ixx" ],
+    [ "Level.ixx", "Level_8ixx.html", "Level_8ixx" ],
     [ "System.ixx", "System_8ixx.html", "System_8ixx" ],
     [ "Updatable.ixx", "Updatable_8ixx.html", "Updatable_8ixx" ],
     [ "UpdateContext.ixx", "UpdateContext_8ixx.html", "UpdateContext_8ixx" ]

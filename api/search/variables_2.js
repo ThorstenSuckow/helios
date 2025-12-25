@@ -1,17 +1,19 @@
 var searchData=
 [
   ['camera_5f_0',['camera_',['../classhelios_1_1scene_1_1CameraSceneNode.html#a8769190acba3182ad1c6e95cbec70bcf',1,'helios::scene::CameraSceneNode']]],
-  ['canonicalsize_5f_1',['canonicalSize_',['../classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent.html#a20e7982188317894df8013623fc98ecd',1,'helios::engine::game::components::scene::SceneNodeComponent']]],
-  ['centimeters_2',['CENTIMETERS',['../namespacehelios_1_1core_1_1units.html#a5473b1a6bc297ba19cd0bda1d08abddb',1,'helios::core::units']]],
-  ['children_5f_3',['children_',['../classhelios_1_1scene_1_1SceneNode.html#aa362a46b4917ee9955a38d6422b72668',1,'helios::scene::SceneNode']]],
-  ['chocolate_4',['Chocolate',['../structhelios_1_1util_1_1Colors.html#af38558b5c9fdbab88af402fb86695f6a',1,'helios::util::Colors']]],
-  ['components_5f_5',['components_',['../classhelios_1_1engine_1_1game_1_1GameObject.html#a04c48c868e86b9f5c38ef0cf3176c828',1,'helios::engine::game::GameObject']]],
-  ['controllers_5f_6',['controllers_',['../classhelios_1_1app_1_1Application.html#a2dfaeb4cd7c741b225bd968c827983d3',1,'helios::app::Application']]],
-  ['cooldowndelta_5f_7',['cooldownDelta_',['../classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent.html#af2d88d77ead3ad9f358419f9d41df6da',1,'helios::engine::game::components::gameplay::ShootComponent']]],
-  ['cooldowntime_5f_8',['cooldownTime_',['../classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent.html#ab992b6e2b6cdc7fa9444c46ea3744484',1,'helios::engine::game::components::gameplay::ShootComponent']]],
-  ['coral_9',['Coral',['../structhelios_1_1util_1_1Colors.html#aa838b1e06e642d8db196c746257a7e77',1,'helios::util::Colors']]],
-  ['cornflowerblue_10',['CornflowerBlue',['../structhelios_1_1util_1_1Colors.html#a9946f3e407794882a5e74cd7538dd5d6',1,'helios::util::Colors']]],
-  ['cornsilk_11',['Cornsilk',['../structhelios_1_1util_1_1Colors.html#a89ce602c43039ac5b9dafb38fa826393',1,'helios::util::Colors']]],
-  ['crimson_12',['Crimson',['../structhelios_1_1util_1_1Colors.html#af6dbf0f33eed975a09f99670b241ad3e',1,'helios::util::Colors']]],
-  ['cyan_13',['Cyan',['../structhelios_1_1util_1_1Colors.html#abb6bb209cd59bde73356183b6c3ea063',1,'helios::util::Colors']]]
+  ['centimeters_1',['CENTIMETERS',['../namespacehelios_1_1core_1_1units.html#a5473b1a6bc297ba19cd0bda1d08abddb',1,'helios::core::units']]],
+  ['children_5f_2',['children_',['../classhelios_1_1scene_1_1SceneNode.html#aa362a46b4917ee9955a38d6422b72668',1,'helios::scene::SceneNode']]],
+  ['chocolate_3',['Chocolate',['../structhelios_1_1util_1_1Colors.html#af38558b5c9fdbab88af402fb86695f6a',1,'helios::util::Colors']]],
+  ['components_5f_4',['components_',['../classhelios_1_1engine_1_1game_1_1GameObject.html#a04c48c868e86b9f5c38ef0cf3176c828',1,'helios::engine::game::GameObject']]],
+  ['controllers_5f_5',['controllers_',['../classhelios_1_1app_1_1Application.html#a2dfaeb4cd7c741b225bd968c827983d3',1,'helios::app::Application']]],
+  ['cooldowndelta_5f_6',['cooldownDelta_',['../classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent.html#af2d88d77ead3ad9f358419f9d41df6da',1,'helios::engine::game::components::gameplay::ShootComponent']]],
+  ['cooldowntime_5f_7',['cooldownTime_',['../classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent.html#ab992b6e2b6cdc7fa9444c46ea3744484',1,'helios::engine::game::components::gameplay::ShootComponent']]],
+  ['coral_8',['Coral',['../structhelios_1_1util_1_1Colors.html#aa838b1e06e642d8db196c746257a7e77',1,'helios::util::Colors']]],
+  ['cornflowerblue_9',['CornflowerBlue',['../structhelios_1_1util_1_1Colors.html#a9946f3e407794882a5e74cd7538dd5d6',1,'helios::util::Colors']]],
+  ['cornsilk_10',['Cornsilk',['../structhelios_1_1util_1_1Colors.html#a89ce602c43039ac5b9dafb38fa826393',1,'helios::util::Colors']]],
+  ['crimson_11',['Crimson',['../structhelios_1_1util_1_1Colors.html#af6dbf0f33eed975a09f99670b241ad3e',1,'helios::util::Colors']]],
+  ['currentmovementspeed_5f_12',['currentMovementSpeed_',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#ad015d05507a7dedc7fdbc211761252a4',1,'helios::engine::game::components::physics::Move2DComponent']]],
+  ['currentrotationangle_5f_13',['currentRotationAngle_',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#af0ee1a577ae0aa986d31e473d47e2c2b',1,'helios::engine::game::components::physics::Move2DComponent']]],
+  ['currentrotationspeed_5f_14',['currentRotationSpeed_',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#a57d69bb23476c514e82a44fafa93204c',1,'helios::engine::game::components::physics::Move2DComponent']]],
+  ['cyan_15',['Cyan',['../structhelios_1_1util_1_1Colors.html#abb6bb209cd59bde73356183b6c3ea063',1,'helios::util::Colors']]]
 ];

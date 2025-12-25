@@ -21,7 +21,7 @@
         </inbodydescription>
         <location file="include/helios/engine/game/GameObject.ixx" line="48" column="28" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="48" bodyend="-1"/>
         <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a56372781ae87e48521a7678634a43578" compoundref="GameObject_8ixx" startline="66" endline="66">helios::engine::game::GameObject::GameObject</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1abf3cf53d3aa0c9b62da27d7934928168" compoundref="GameObject_8ixx" startline="145" endline="147">helios::engine::game::GameObject::guid</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1abf3cf53d3aa0c9b62da27d7934928168" compoundref="GameObject_8ixx" startline="167" endline="169">helios::engine::game::GameObject::guid</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1GameObject_1a04c48c868e86b9f5c38ef0cf3176c828" prot="protected" static="no" mutable="no">
         <type>std::vector&lt; std::unique_ptr&lt; Component &gt; &gt;</type>
@@ -38,8 +38,8 @@
         <inbodydescription>
         </inbodydescription>
         <location file="include/helios/engine/game/GameObject.ixx" line="55" column="21" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="55" bodyend="-1"/>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6efd5ef390fc9b7b8468682659f5a1fb" compoundref="GameObject_8ixx" startline="82" endline="96">helios::engine::game::GameObject::add</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a2306d52f0450467d64ef1ddcdf5448d2" compoundref="GameObject_8ixx" startline="107" endline="115">helios::engine::game::GameObject::get</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6efd5ef390fc9b7b8468682659f5a1fb" compoundref="GameObject_8ixx" startline="82" endline="98">helios::engine::game::GameObject::add</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a2306d52f0450467d64ef1ddcdf5448d2" compoundref="GameObject_8ixx" startline="130" endline="138">helios::engine::game::GameObject::get</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1GameObject_1a6a942f57a7de5c5e06d145c565e0cabd" prot="protected" static="no" mutable="no">
         <type>std::vector&lt; Updatable * &gt;</type>
@@ -56,8 +56,8 @@
         <inbodydescription>
         </inbodydescription>
         <location file="include/helios/engine/game/GameObject.ixx" line="63" column="21" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="63" bodyend="-1"/>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6efd5ef390fc9b7b8468682659f5a1fb" compoundref="GameObject_8ixx" startline="82" endline="96">helios::engine::game::GameObject::add</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a64afc8b3ae7ed69e9763d51169328af2" compoundref="GameObject_8ixx" startline="134" endline="138">helios::engine::game::GameObject::update</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6efd5ef390fc9b7b8468682659f5a1fb" compoundref="GameObject_8ixx" startline="82" endline="98">helios::engine::game::GameObject::add</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a64afc8b3ae7ed69e9763d51169328af2" compoundref="GameObject_8ixx" startline="156" endline="160">helios::engine::game::GameObject::update</referencedby>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -146,9 +146,70 @@ The component is created, attached to this <ref refid="classhelios_1_1engine_1_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="82" column="11" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="82" bodyend="96"/>
+        <location file="include/helios/engine/game/GameObject.ixx" line="82" column="11" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="82" bodyend="98"/>
         <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1a04c48c868e86b9f5c38ef0cf3176c828" compoundref="GameObject_8ixx" startline="55">helios::engine::game::GameObject::components_</references>
         <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6a942f57a7de5c5e06d145c565e0cabd" compoundref="GameObject_8ixx" startline="63">helios::engine::game::GameObject::updatables_</references>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a834e29f3aef6fa533f1bc3adf7752343" compoundref="GameObject_8ixx" startline="112" endline="119">helios::engine::game::GameObject::getOrAdd</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObject_1a834e29f3aef6fa533f1bc3adf7752343" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>T &amp;</type>
+        <definition>T &amp; helios::engine::game::GameObject::getOrAdd</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>getOrAdd</name>
+        <qualifiedname>helios::engine::game::GameObject::getOrAdd</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Retrieves an existing component of type T, or creates and adds it if not present. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of component to retrieve or add. Must derive from <ref refid="classhelios_1_1engine_1_1game_1_1Component" kindref="compound">Component</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Argument types for the component&apos;s constructor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Arguments forwarded to the component&apos;s constructor if it needs to be created. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to the existing or newly created component.</para>
+</simplesect>
+This is a convenience method that combines <ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a2306d52f0450467d64ef1ddcdf5448d2" kindref="member">get()</ref> and <ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6efd5ef390fc9b7b8468682659f5a1fb" kindref="member">add()</ref>. If the component already exists, the arguments are ignored. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/GameObject.ixx" line="112" column="11" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="112" bodyend="119"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6efd5ef390fc9b7b8468682659f5a1fb" compoundref="GameObject_8ixx" startline="82" endline="98">helios::engine::game::GameObject::add</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1a2306d52f0450467d64ef1ddcdf5448d2" compoundref="GameObject_8ixx" startline="130" endline="138">helios::engine::game::GameObject::get</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObject_1a2306d52f0450467d64ef1ddcdf5448d2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -180,12 +241,13 @@ Performs a linear search through the components. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="107" column="11" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="107" bodyend="115"/>
+        <location file="include/helios/engine/game/GameObject.ixx" line="130" column="11" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="130" bodyend="138"/>
         <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1a04c48c868e86b9f5c38ef0cf3176c828" compoundref="GameObject_8ixx" startline="55">helios::engine::game::GameObject::components_</references>
         <referencedby refid="classhelios_1_1engine_1_1game_1_1commands_1_1Aim2DCommand_1adcf8bbd3975dd917ebc77fa3ea20128a" compoundref="Aim2DCommand_8ixx" startline="64" endline="72">helios::engine::game::commands::Aim2DCommand::execute</referencedby>
         <referencedby refid="classhelios_1_1engine_1_1game_1_1commands_1_1Move2DCommand_1aa350d238ae20ca8089a7869b8860f903" compoundref="Move2DCommand_8ixx" startline="63" endline="71">helios::engine::game::commands::Move2DCommand::execute</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1commands_1_1ShootCommand_1a9e012933d5cf99796c46f677dcb7a151" compoundref="ShootCommand_8ixx" startline="55" endline="63">helios::engine::game::commands::ShootCommand::execute</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a75ba7876058a260289f28b39c6fce25a" compoundref="GameObject_8ixx" startline="125" endline="127">helios::engine::game::GameObject::has</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1commands_1_1ShootCommand_1a9e012933d5cf99796c46f677dcb7a151" compoundref="ShootCommand_8ixx" startline="56" endline="66">helios::engine::game::commands::ShootCommand::execute</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a834e29f3aef6fa533f1bc3adf7752343" compoundref="GameObject_8ixx" startline="112" endline="119">helios::engine::game::GameObject::getOrAdd</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObject_1a75ba7876058a260289f28b39c6fce25a" compoundref="GameObject_8ixx" startline="147" endline="149">helios::engine::game::GameObject::has</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObject_1a75ba7876058a260289f28b39c6fce25a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -217,8 +279,8 @@ Performs a linear search through the components. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="125" column="15" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="125" bodyend="127"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1a2306d52f0450467d64ef1ddcdf5448d2" compoundref="GameObject_8ixx" startline="107" endline="115">helios::engine::game::GameObject::get</references>
+        <location file="include/helios/engine/game/GameObject.ixx" line="147" column="15" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="147" bodyend="149"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1a2306d52f0450467d64ef1ddcdf5448d2" compoundref="GameObject_8ixx" startline="130" endline="138">helios::engine::game::GameObject::get</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObject_1a64afc8b3ae7ed69e9763d51169328af2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -247,7 +309,7 @@ Performs a linear search through the components. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="134" column="14" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="134" bodyend="138"/>
+        <location file="include/helios/engine/game/GameObject.ixx" line="156" column="14" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="156" bodyend="160"/>
         <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6a942f57a7de5c5e06d145c565e0cabd" compoundref="GameObject_8ixx" startline="63">helios::engine::game::GameObject::updatables_</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObject_1abf3cf53d3aa0c9b62da27d7934928168" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
@@ -266,7 +328,7 @@ Performs a linear search through the components. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameObject.ixx" line="145" column="35" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="145" bodyend="147"/>
+        <location file="include/helios/engine/game/GameObject.ixx" line="167" column="35" bodyfile="include/helios/engine/game/GameObject.ixx" bodystart="167" bodyend="169"/>
         <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1a8ccca9fdee32b72202b6b1cca51288c3" compoundref="GameObject_8ixx" startline="48">helios::engine::game::GameObject::guid_</references>
       </memberdef>
     </sectiondef>

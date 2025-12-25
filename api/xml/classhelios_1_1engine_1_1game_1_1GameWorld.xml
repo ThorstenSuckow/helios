@@ -17,23 +17,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="62" column="28" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="62" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a9dd831f2877302b575bd125b59726900" prot="protected" static="no" mutable="no">
-        <type><ref refid="classhelios_1_1scene_1_1Scene" kindref="compound">helios::scene::Scene</ref> *</type>
-        <definition>helios::scene::Scene* helios::engine::game::GameWorld::scene_</definition>
-        <argsstring></argsstring>
-        <name>scene_</name>
-        <qualifiedname>helios::engine::game::GameWorld::scene_</qualifiedname>
-        <briefdescription>
-<para>Pointer to the Scene for scene graph integration. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Non-owning pointer; may be nullptr if scene integration is not required. </para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="77" column="30" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="77" bodyend="-1"/>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="46" column="28" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="46" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0a28cfa4a49e74a11b4c1420d99bb72d" compoundref="GameWorld_8ixx" startline="252" endline="254">gameObjects</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1GameWorld_1ac4ed48c579a99900ce634413375ad477" prot="protected" static="no" mutable="no">
         <type>std::vector&lt; std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1game_1_1System" kindref="compound">System</ref> &gt; &gt;</type>
@@ -49,9 +34,29 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="85" column="21" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="85" bodyend="-1"/>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1aa43d58ad9e4c3fbf3efb9c6936b4c708" compoundref="GameWorld_8ixx" startline="120" endline="128">add</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a42fe4629a34aa357763255f499b8d9ab" compoundref="GameWorld_8ixx" startline="144" endline="151">get</referencedby>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="62" column="21" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="62" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1aa43d58ad9e4c3fbf3efb9c6936b4c708" compoundref="GameWorld_8ixx" startline="122" endline="130">add</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a42fe4629a34aa357763255f499b8d9ab" compoundref="GameWorld_8ixx" startline="146" endline="153">get</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a61f6a7faf3129b156e0f923abcfb5f09" prot="protected" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1game_1_1Level" kindref="compound">helios::engine::game::Level</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;helios::engine::game::Level&gt; helios::engine::game::GameWorld::level_</definition>
+        <argsstring></argsstring>
+        <name>level_</name>
+        <qualifiedname>helios::engine::game::GameWorld::level_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>The current level loaded in the game world. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Can be null if no level is currently active. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="69" column="25" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="69" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a2a2383d3d780c562b1d7a2c680ace6f0" compoundref="GameWorld_8ixx" startline="91" endline="93">hasLevel</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ae74dc0a0df46ba43456da2922ea2315e" compoundref="GameWorld_8ixx" startline="102" endline="104">level</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a3c063037908af8aa35f0b8bb926af9ef" compoundref="GameWorld_8ixx" startline="82" endline="84">setLevel</referencedby>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-static-attrib">
@@ -71,30 +76,44 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="69" column="55" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="69" bodyend="-1"/>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="53" column="55" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="53" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a299645aa99710bebeaefe5a42bd60f48" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a7664be82599876f17a458ba6fb7684fb" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
         <type></type>
         <definition>helios::engine::game::GameWorld::GameWorld</definition>
-        <argsstring>(helios::scene::Scene *scene) noexcept</argsstring>
+        <argsstring>()=default</argsstring>
         <name>GameWorld</name>
         <qualifiedname>helios::engine::game::GameWorld::GameWorld</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="74" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a3c063037908af8aa35f0b8bb926af9ef" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::GameWorld::setLevel</definition>
+        <argsstring>(std::unique_ptr&lt; helios::engine::game::Level &gt; level) noexcept</argsstring>
+        <name>setLevel</name>
+        <qualifiedname>helios::engine::game::GameWorld::setLevel</qualifiedname>
         <param>
-          <type><ref refid="classhelios_1_1scene_1_1Scene" kindref="compound">helios::scene::Scene</ref> *</type>
-          <declname>scene</declname>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1game_1_1Level" kindref="compound">helios::engine::game::Level</ref> &gt;</type>
+          <declname>level</declname>
         </param>
         <briefdescription>
-<para>Constructs a <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref> with a reference to the scene graph. </para>
+<para>Sets the current level for the game world. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>scene</parametername>
+<parametername>level</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Pointer to the Scene used for scene graph integration. May be nullptr if scene graph integration is not required. </para>
+<para>Unique pointer to the <ref refid="classhelios_1_1engine_1_1game_1_1Level" kindref="compound">Level</ref> instance. Ownership is transferred to the <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref>. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -102,27 +121,50 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="95" column="18" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="95" bodyend="95"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1af548d18af084d378de85e295fc4e97c0">scene</references>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="82" column="14" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="82" bodyend="84"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ae74dc0a0df46ba43456da2922ea2315e" compoundref="GameWorld_8ixx" startline="102" endline="104">level</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a61f6a7faf3129b156e0f923abcfb5f09" compoundref="GameWorld_8ixx" startline="69">level_</references>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1af548d18af084d378de85e295fc4e97c0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>const <ref refid="classhelios_1_1scene_1_1Scene" kindref="compound">helios::scene::Scene</ref> *</type>
-        <definition>const helios::scene::Scene * helios::engine::game::GameWorld::scene</definition>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a2a2383d3d780c562b1d7a2c680ace6f0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::game::GameWorld::hasLevel</definition>
         <argsstring>() const noexcept</argsstring>
-        <name>scene</name>
-        <qualifiedname>helios::engine::game::GameWorld::scene</qualifiedname>
+        <name>hasLevel</name>
+        <qualifiedname>helios::engine::game::GameWorld::hasLevel</qualifiedname>
         <briefdescription>
-<para>Returns the scene graph associated with this <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref>. </para>
+<para>Checks if a level is currently loaded. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>Const pointer to the Scene, or nullptr if not set. </para>
+<para><simplesect kind="return"><para>True if a level is set, false otherwise. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="102" column="37"/>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a299645aa99710bebeaefe5a42bd60f48" compoundref="GameWorld_8ixx" startline="95" endline="95">GameWorld</referencedby>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="91" column="15" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="91" bodyend="93"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a61f6a7faf3129b156e0f923abcfb5f09" compoundref="GameWorld_8ixx" startline="69">level_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1ae74dc0a0df46ba43456da2922ea2315e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classhelios_1_1engine_1_1game_1_1Level" kindref="compound">helios::engine::game::Level</ref> &amp;</type>
+        <definition>const helios::engine::game::Level &amp; helios::engine::game::GameWorld::level</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>level</name>
+        <qualifiedname>helios::engine::game::GameWorld::level</qualifiedname>
+        <briefdescription>
+<para>Retrieves the currently loaded level. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Reference to the active <ref refid="classhelios_1_1engine_1_1game_1_1Level" kindref="compound">Level</ref>.</para>
+</simplesect>
+<simplesect kind="warning"><para>Calling this method when <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a2a2383d3d780c562b1d7a2c680ace6f0" kindref="member">hasLevel()</ref> returns false results in undefined behavior. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="102" column="44" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="102" bodyend="104"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a61f6a7faf3129b156e0f923abcfb5f09" compoundref="GameWorld_8ixx" startline="69">level_</references>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a3c063037908af8aa35f0b8bb926af9ef" compoundref="GameWorld_8ixx" startline="82" endline="84">setLevel</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1aa43d58ad9e4c3fbf3efb9c6936b4c708" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -183,10 +225,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="120" column="11" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="120" bodyend="128"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1aa43d58ad9e4c3fbf3efb9c6936b4c708" compoundref="GameWorld_8ixx" startline="120" endline="128">add</references>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ac4ed48c579a99900ce634413375ad477" compoundref="GameWorld_8ixx" startline="85">systems_</references>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1aa43d58ad9e4c3fbf3efb9c6936b4c708" compoundref="GameWorld_8ixx" startline="120" endline="128">add</referencedby>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="122" column="11" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="122" bodyend="130"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ac4ed48c579a99900ce634413375ad477" compoundref="GameWorld_8ixx" startline="62">systems_</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a42fe4629a34aa357763255f499b8d9ab" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -221,9 +261,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="144" column="12" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="144" bodyend="151"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ac4ed48c579a99900ce634413375ad477" compoundref="GameWorld_8ixx" startline="85">systems_</references>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ad6adcd1256a97a4ecf2045eb10de8f0b" compoundref="GameWorld_8ixx" startline="161" endline="163">has</referencedby>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="146" column="12" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="146" bodyend="153"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ac4ed48c579a99900ce634413375ad477" compoundref="GameWorld_8ixx" startline="62">systems_</references>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ad6adcd1256a97a4ecf2045eb10de8f0b" compoundref="GameWorld_8ixx" startline="163" endline="165">has</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1ad6adcd1256a97a4ecf2045eb10de8f0b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -255,8 +295,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="161" column="15" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="161" bodyend="163"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a42fe4629a34aa357763255f499b8d9ab" compoundref="GameWorld_8ixx" startline="144" endline="151">get</references>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="163" column="15" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="163" bodyend="165"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a42fe4629a34aa357763255f499b8d9ab" compoundref="GameWorld_8ixx" startline="146" endline="153">get</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a3c520229c0ff0a74019dc10fcb71a439" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -269,9 +309,10 @@
           <declname>updateContext</declname>
         </param>
         <briefdescription>
-<para>Updates all GameObjects in the world for the current frame. </para>
+<para>Updates the game world state for the current frame. </para>
         </briefdescription>
         <detaileddescription>
+<para>This method performs the following steps: 1. Updates all active GameObjects (invoking their `update()` method). 2. Updates all registered Systems (invoking their `update()` method).</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>updateContext</parametername>
@@ -281,15 +322,13 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="note"><para>Iterates through all registered GameObjects and invokes their <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a3c520229c0ff0a74019dc10fcb71a439" kindref="member">update()</ref> method. The order of updates is not guaranteed due to the underlying unordered_map storage. </para>
-</simplesect>
-<simplesect kind="note"><para>This method is noexcept; individual <ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a64afc8b3ae7ed69e9763d51169328af2" kindref="member">GameObject::update()</ref> implementations should handle their own exceptions to prevent propagation. </para>
+<simplesect kind="note"><para>The order of <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> updates is not guaranteed. Systems are updated in registration order. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="175" column="14"/>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="179" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a4e85936a3662c8dfc85cf83e2e901541" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">helios::engine::game::GameObject</ref> *</type>
@@ -341,7 +380,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="192" column="43"/>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="196" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a10feb30a293f8266c398fc5b42872a4a" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">helios::engine::game::GameObject</ref> *</type>
@@ -391,7 +430,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="206" column="43"/>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="210" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1aada0325e1ee9928451c6149a6f5643b3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">helios::engine::game::GameObject</ref> *</type>
@@ -441,7 +480,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="220" column="49"/>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="224" column="49"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a0e8351e088564887aaabd806752e30f2" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">helios::engine::game::GameObject</ref> &gt;</type>
@@ -493,20 +532,41 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="237" column="26"/>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="241" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a0a28cfa4a49e74a11b4c1420d99bb72d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::unordered_map&lt; <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref>, std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> &gt; &gt; &amp;</type>
+        <definition>const std::unordered_map&lt; helios::util::Guid, std::unique_ptr&lt; GameObject &gt; &gt; &amp; helios::engine::game::GameWorld::gameObjects</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>gameObjects</name>
+        <qualifiedname>helios::engine::game::GameWorld::gameObjects</qualifiedname>
+        <briefdescription>
+<para>Retrieves a const ref to the map of all active GameObjects. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A const reference to the internal map of GameObjects, indexed by Guid.</para>
+</simplesect>
+<simplesect kind="warning"><para>Modifying the map directly (e.g. adding/removing elements) bypasses <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref>&apos;s management logic and should be avoided. Use <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a4e85936a3662c8dfc85cf83e2e901541" kindref="member">addGameObject()</ref> and <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0e8351e088564887aaabd806752e30f2" kindref="member">removeGameObject()</ref> instead. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="252" column="35" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="252" bodyend="254"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ade9c156ea18ef1363364f5c2817665aa" compoundref="GameWorld_8ixx" startline="46">gameObjects_</references>
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>Central registry and owner of all active GameObjects in the game world. </para>
+<para>Central registry for managing game entities, systems, and the active level. </para>
     </briefdescription>
     <detaileddescription>
-<para>The `GameWorld` manages the lifetime and lookup of all `GameObject` instances. It provides fast, `Guid`-based lookup and handles the lifecycle of game entities through a clear ownership model. The world serves as the central registry for all objects and is used by the `CommandBuffer` to execute commands against them.</para>
-<para>Typical usage: ```cpp <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">helios::engine::game::GameWorld</ref> world;</para>
-<para>// Add a new entity auto player = std::make_unique&lt;Player&gt;(sceneNode); auto* playerPtr = world.addGameObject(std::move(player));</para>
-<para>// Lookup by Guid if (auto* obj = world.find(playerPtr-&gt;guid())) { obj-&gt;setTranslation({1.0f, 0.0f, 0.0f}); }</para>
-<para>// Remove entity (returns ownership) auto removed = world.removeGameObject(*playerPtr); ```</para>
-<para><simplesect kind="note"><para><ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref> owns all GameObjects added to it. When a <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> is removed, ownership is transferred back to the caller via std::unique_ptr. </para>
-</simplesect>
+<para>The <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref> is the root container for the game state. It manages the lifecycle of GameObjects, executes Systems, and holds the current <ref refid="classhelios_1_1engine_1_1game_1_1Level" kindref="compound">Level</ref>.</para>
+<para>Key responsibilities:<itemizedlist>
+<listitem><para>**Entity Management:** Owns all GameObjects and provides lookup by Guid.</para>
+</listitem><listitem><para>**System Execution:** Manages and updates registered Systems.</para>
+</listitem><listitem><para>**Level Management:** Holds the active <ref refid="classhelios_1_1engine_1_1game_1_1Level" kindref="compound">Level</ref> instance.</para>
+</listitem><listitem><para>**Update Loop:** Orchestrates the frame update by updating GameObjects and then Systems. </para>
+</listitem></itemizedlist>
 </para>
     </detaileddescription>
     <collaborationgraph>
@@ -516,33 +576,29 @@
         <childnode refid="2" relation="usage">
           <edgelabel>logger_</edgelabel>
         </childnode>
-        <childnode refid="3" relation="usage">
-          <edgelabel>scene_</edgelabel>
-        </childnode>
-      </node>
-      <node id="3">
-        <label>helios::scene::Scene</label>
-        <link refid="classhelios_1_1scene_1_1Scene"/>
       </node>
       <node id="2">
         <label>helios::util::log::Logger</label>
         <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
       </node>
     </collaborationgraph>
-    <location file="include/helios/engine/game/GameWorld.ixx" line="53" column="5" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="53" bodyend="238"/>
+    <location file="include/helios/engine/game/GameWorld.ixx" line="37" column="5" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="37" bodyend="255"/>
     <listofallmembers>
       <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1aa43d58ad9e4c3fbf3efb9c6936b4c708" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>add</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a4e85936a3662c8dfc85cf83e2e901541" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>addGameObject</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a10feb30a293f8266c398fc5b42872a4a" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>find</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1aada0325e1ee9928451c6149a6f5643b3" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>find</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0a28cfa4a49e74a11b4c1420d99bb72d" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>gameObjects</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ade9c156ea18ef1363364f5c2817665aa" prot="protected" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>gameObjects_</name></member>
-      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a299645aa99710bebeaefe5a42bd60f48" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>GameWorld</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a7664be82599876f17a458ba6fb7684fb" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>GameWorld</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a42fe4629a34aa357763255f499b8d9ab" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>get</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ad6adcd1256a97a4ecf2045eb10de8f0b" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>has</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a2a2383d3d780c562b1d7a2c680ace6f0" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>hasLevel</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ae74dc0a0df46ba43456da2922ea2315e" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>level</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a61f6a7faf3129b156e0f923abcfb5f09" prot="protected" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>level_</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0586ac1c766822252c3422bafda3b917" prot="protected" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>logger_</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0e8351e088564887aaabd806752e30f2" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>removeGameObject</name></member>
-      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1af548d18af084d378de85e295fc4e97c0" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>scene</name></member>
-      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a9dd831f2877302b575bd125b59726900" prot="protected" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>scene_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a3c063037908af8aa35f0b8bb926af9ef" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>setLevel</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ac4ed48c579a99900ce634413375ad477" prot="protected" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>systems_</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a3c520229c0ff0a74019dc10fcb71a439" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>update</name></member>
     </listofallmembers>

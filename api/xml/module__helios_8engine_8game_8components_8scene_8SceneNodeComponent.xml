@@ -5,24 +5,23 @@
     <innerfile refid="SceneNodeComponent_8ixx">SceneNodeComponent.ixx</innerfile>
     <innerclass refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent" prot="public">helios::engine::game::components::scene::SceneNodeComponent</innerclass>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1a20e7982188317894df8013623fc98ecd" prot="protected" static="no" mutable="no">
-        <type>const <ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
-        <definition>const helios::math::vec3f helios::engine::game::components::scene::SceneNodeComponent::canonicalSize_</definition>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1ae4bc18dd75ebc2ef2b5f2dc9a36baea6" prot="protected" static="no" mutable="no">
+        <type><ref refid="namespacehelios_1_1math_1a124c0492430aeecedc1c1a5ece4ba488" kindref="member">helios::math::aabbf</ref></type>
+        <definition>helios::math::aabbf helios::engine::game::components::scene::SceneNodeComponent::aabb_</definition>
         <argsstring></argsstring>
-        <name>canonicalSize_</name>
-        <qualifiedname>helios::engine::game::components::scene::SceneNodeComponent::canonicalSize_</qualifiedname>
+        <name>aabb_</name>
+        <qualifiedname>helios::engine::game::components::scene::SceneNodeComponent::aabb_</qualifiedname>
         <initializer>{}</initializer>
         <briefdescription>
-<para>Original mesh dimensions from the SceneNode&apos;s AABB. </para>
+<para>The initial AABB of the model associated with the SceneNode. </para>
         </briefdescription>
         <detaileddescription>
-<para>Used as reference for <ref refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1a474bc8594d916f2581236304e4c96f08" kindref="member">setSize()</ref> calculations. Defaults to (1,1,1) if no renderable or mesh is available. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/components/scene/SceneNodeComponent.ixx" line="39" column="35" bodyfile="include/helios/engine/game/components/scene/SceneNodeComponent.ixx" bodystart="39" bodyend="39"/>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1adff31f8c22cd249ac4fdbde4e2142f33" compoundref="SceneNodeComponent_8ixx" startline="54" endline="60">helios::engine::game::components::scene::SceneNodeComponent::SceneNodeComponent</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1a474bc8594d916f2581236304e4c96f08" compoundref="SceneNodeComponent_8ixx" startline="78" endline="92">helios::engine::game::components::scene::SceneNodeComponent::setSize</referencedby>
+        <location file="include/helios/engine/game/components/scene/SceneNodeComponent.ixx" line="40" column="29" bodyfile="include/helios/engine/game/components/scene/SceneNodeComponent.ixx" bodystart="40" bodyend="40"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1ae7578125e68c725783741c57a0cc9313" compoundref="SceneNodeComponent_8ixx" startline="72" endline="78">helios::engine::game::components::scene::SceneNodeComponent::onAttach</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1adff31f8c22cd249ac4fdbde4e2142f33" compoundref="SceneNodeComponent_8ixx" startline="54" endline="61">helios::engine::game::components::scene::SceneNodeComponent::SceneNodeComponent</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1adc064ac6a57786124c9d6fe2e428dd73" prot="protected" static="no" mutable="no">
         <type><ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">helios::scene::SceneNode</ref> *</type>
@@ -37,15 +36,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/components/scene/SceneNodeComponent.ixx" line="44" column="34" bodyfile="include/helios/engine/game/components/scene/SceneNodeComponent.ixx" bodystart="44" bodyend="-1"/>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1a80c946428cb5c12725c99d86c456f2e4" compoundref="SceneNodeComponent_8ixx" startline="147" endline="149">helios::engine::game::components::scene::SceneNodeComponent::rotation</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1a816de0b48fbf0bf47e9b68268883ca49" compoundref="SceneNodeComponent_8ixx" startline="156" endline="158">helios::engine::game::components::scene::SceneNodeComponent::scaling</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1a9b4d1157d5b7259b967885e9d1c502a0" compoundref="SceneNodeComponent_8ixx" startline="165" endline="167">helios::engine::game::components::scene::SceneNodeComponent::sceneNode</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1adff31f8c22cd249ac4fdbde4e2142f33" compoundref="SceneNodeComponent_8ixx" startline="54" endline="60">helios::engine::game::components::scene::SceneNodeComponent::SceneNodeComponent</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1aaeabd00aebdcd3a0877d0aff831f3c55" compoundref="SceneNodeComponent_8ixx" startline="114" endline="118">helios::engine::game::components::scene::SceneNodeComponent::setRotation</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1ae53005960db6dfecaca85b6937fb5802" compoundref="SceneNodeComponent_8ixx" startline="101" endline="105">helios::engine::game::components::scene::SceneNodeComponent::setScale</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1afd09197bf9dc2528cca9d64aeec5d2fc" compoundref="SceneNodeComponent_8ixx" startline="127" endline="131">helios::engine::game::components::scene::SceneNodeComponent::setTranslation</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1a36f1257879ede049606489da2e1ea90f" compoundref="SceneNodeComponent_8ixx" startline="138" endline="140">helios::engine::game::components::scene::SceneNodeComponent::translation</referencedby>
+        <location file="include/helios/engine/game/components/scene/SceneNodeComponent.ixx" line="45" column="34" bodyfile="include/helios/engine/game/components/scene/SceneNodeComponent.ixx" bodystart="45" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1a9b4d1157d5b7259b967885e9d1c502a0" compoundref="SceneNodeComponent_8ixx" startline="85" endline="87">helios::engine::game::components::scene::SceneNodeComponent::sceneNode</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1adff31f8c22cd249ac4fdbde4e2142f33" compoundref="SceneNodeComponent_8ixx" startline="54" endline="61">helios::engine::game::components::scene::SceneNodeComponent::SceneNodeComponent</referencedby>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -76,20 +69,71 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/components/scene/SceneNodeComponent.ixx" line="54" column="18" bodyfile="include/helios/engine/game/components/scene/SceneNodeComponent.ixx" bodystart="54" bodyend="60"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1a20e7982188317894df8013623fc98ecd" compoundref="SceneNodeComponent_8ixx" startline="39" endline="39">helios::engine::game::components::scene::SceneNodeComponent::canonicalSize_</references>
-        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1a9b4d1157d5b7259b967885e9d1c502a0" compoundref="SceneNodeComponent_8ixx" startline="165" endline="167">helios::engine::game::components::scene::SceneNodeComponent::sceneNode</references>
-        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1adc064ac6a57786124c9d6fe2e428dd73" compoundref="SceneNodeComponent_8ixx" startline="44">helios::engine::game::components::scene::SceneNodeComponent::sceneNode_</references>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1aaeabd00aebdcd3a0877d0aff831f3c55" compoundref="SceneNodeComponent_8ixx" startline="114" endline="118">helios::engine::game::components::scene::SceneNodeComponent::setRotation</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1ae53005960db6dfecaca85b6937fb5802" compoundref="SceneNodeComponent_8ixx" startline="101" endline="105">helios::engine::game::components::scene::SceneNodeComponent::setScale</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1a474bc8594d916f2581236304e4c96f08" compoundref="SceneNodeComponent_8ixx" startline="78" endline="92">helios::engine::game::components::scene::SceneNodeComponent::setSize</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1afd09197bf9dc2528cca9d64aeec5d2fc" compoundref="SceneNodeComponent_8ixx" startline="127" endline="131">helios::engine::game::components::scene::SceneNodeComponent::setTranslation</referencedby>
+        <location file="include/helios/engine/game/components/scene/SceneNodeComponent.ixx" line="54" column="18" bodyfile="include/helios/engine/game/components/scene/SceneNodeComponent.ixx" bodystart="54" bodyend="61"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1ae4bc18dd75ebc2ef2b5f2dc9a36baea6" compoundref="SceneNodeComponent_8ixx" startline="40" endline="40">helios::engine::game::components::scene::SceneNodeComponent::aabb_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1a9b4d1157d5b7259b967885e9d1c502a0" compoundref="SceneNodeComponent_8ixx" startline="85" endline="87">helios::engine::game::components::scene::SceneNodeComponent::sceneNode</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1adc064ac6a57786124c9d6fe2e428dd73" compoundref="SceneNodeComponent_8ixx" startline="45">helios::engine::game::components::scene::SceneNodeComponent::sceneNode_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1ae7578125e68c725783741c57a0cc9313" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::scene::SceneNodeComponent::onAttach</definition>
+        <argsstring>(helios::engine::game::GameObject *gameObject) noexcept override</argsstring>
+        <name>onAttach</name>
+        <qualifiedname>helios::engine::game::components::scene::SceneNodeComponent::onAttach</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1game_1_1Component_1a3a4f0b840b179c07299fc291a57fb51f">onAttach</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">helios::engine::game::GameObject</ref> *</type>
+          <declname>gameObject</declname>
+        </param>
+        <briefdescription>
+<para>Called when the component is attached to a <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Automatically adds or retrieves a ModelAabbComponent on the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> and initializes it with the captured AABB from the SceneNode.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameObject</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the parent <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/scene/SceneNodeComponent.ixx" line="72" column="14" bodyfile="include/helios/engine/game/components/scene/SceneNodeComponent.ixx" bodystart="72" bodyend="78"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1ae4bc18dd75ebc2ef2b5f2dc9a36baea6" compoundref="SceneNodeComponent_8ixx" startline="40" endline="40">helios::engine::game::components::scene::SceneNodeComponent::aabb_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1Component_1a0894e93b95d6d0b71602b8803d2cc213" compoundref="Component_8ixx" startline="71" endline="73">helios::engine::game::Component::gameObject</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1Component_1a3a4f0b840b179c07299fc291a57fb51f" compoundref="Component_8ixx" startline="62" endline="64">helios::engine::game::Component::onAttach</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1model_1_1ModelAabbComponent_1af6bfb7c93720d3859802f0ab58f1b685" compoundref="ModelAabbComponent_8ixx" startline="39" endline="41">helios::engine::game::components::model::ModelAabbComponent::setAabb</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1a9b4d1157d5b7259b967885e9d1c502a0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">helios::scene::SceneNode</ref> *</type>
+        <definition>helios::scene::SceneNode * helios::engine::game::components::scene::SceneNodeComponent::sceneNode</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>sceneNode</name>
+        <qualifiedname>helios::engine::game::components::scene::SceneNodeComponent::sceneNode</qualifiedname>
+        <briefdescription>
+<para>Returns the underlying SceneNode. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Non-owning pointer to the associated SceneNode. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/scene/SceneNodeComponent.ixx" line="85" column="35" bodyfile="include/helios/engine/game/components/scene/SceneNodeComponent.ixx" bodystart="85" bodyend="87"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1adc064ac6a57786124c9d6fe2e428dd73" compoundref="SceneNodeComponent_8ixx" startline="45">helios::engine::game::components::scene::SceneNodeComponent::sceneNode_</references>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1adff31f8c22cd249ac4fdbde4e2142f33" compoundref="SceneNodeComponent_8ixx" startline="54" endline="61">helios::engine::game::components::scene::SceneNodeComponent::SceneNodeComponent</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="include/helios/engine/game/components/scene/SceneNodeComponent.ixx" line="7" column="15"/>
+    <location file="include/helios/engine/game/components/scene/SceneNodeComponent.ixx" line="9" column="15"/>
   </compounddef>
 </doxygen>

@@ -10,7 +10,6 @@ import helios.engine.game.GameWorld;
 import helios.engine.game.System;
 import helios.engine.game.UpdateContext;
 
-import helios.engine.game.components.scene.SceneNodeComponent;
 import helios.engine.game.components.physics.ScaleComponent;
 
 
@@ -36,19 +35,14 @@ export namespace helios::engine::game::systems::post {
          */
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
-            auto& gameObjects = gameWorld_->gameObjects();
+            gameWorld_->find<helios::engine::game::components::physics::ScaleComponent>().each(
+                [](auto* entity, auto& sc) {
 
-            for (auto& gameObjectPair : gameObjects) {
-
-                auto* gameObject = gameObjectPair.second.get();
-                auto* sc = gameObject->get<helios::engine::game::components::physics::ScaleComponent>();
-
-                if (!sc || !sc->isDirty()) {
-                    continue;
+                if (sc.isDirty()) {
+                    sc.clearDirty();
                 }
 
-                sc->clearDirty();
-            }
+            });
 
         }
 

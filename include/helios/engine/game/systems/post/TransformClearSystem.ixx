@@ -3,7 +3,7 @@
  * @brief System for resetting dirty flags on TransformComponents.
  */
 module;
-
+#pragma optimize("", off)
 export module helios.engine.game.systems.post.TransformClearSystem;
 
 import helios.engine.game.GameWorld;
@@ -35,19 +35,14 @@ export namespace helios::engine::game::systems::post {
          */
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
-            auto& gameObjects = gameWorld_->gameObjects();
+            gameWorld_->find<helios::engine::game::components::physics::TransformComponent>().each(
+                [&](auto* entity, auto& tc) {
 
-            for (auto& gameObjectPair : gameObjects) {
-
-                auto* gameObject = gameObjectPair.second.get();
-                auto* tc = gameObject->get<helios::engine::game::components::physics::TransformComponent>();
-
-                if (!tc || !tc->isDirty()) {
-                    continue;
+                if (tc.isDirty()) {
+                    tc.clearDirty();
                 }
 
-                tc->clearDirty();
-            }
+            });
 
         }
 

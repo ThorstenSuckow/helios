@@ -47,21 +47,15 @@ export namespace helios::engine::game::systems::physics {
          */
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
-            const auto& gameObjects = gameWorld_->gameObjects();
-
-            for (auto& gameObjectPair : gameObjects) {
-
-                auto* obj = gameObjectPair.second.get();
-
-                auto* mab = obj->get<helios::engine::game::components::model::ModelAabbComponent>();
-                auto* tc = obj->get<helios::engine::game::components::physics::TransformComponent>();
-                auto* bc = obj->get<helios::engine::game::components::physics::AabbColliderComponent>();
-
-                if (bc && tc && tc->isDirty()) {
-                    bc->setBounds(mab->aabb().applyTransform(tc->worldTransform()));
+            gameWorld_->find<
+                helios::engine::game::components::model::ModelAabbComponent,
+                helios::engine::game::components::physics::TransformComponent,
+                helios::engine::game::components::physics::AabbColliderComponent
+            >().each([](auto* entity, auto&mab, auto&tc, auto& bc) {
+                if (tc.isDirty()) {
+                    bc.setBounds(mab.aabb().applyTransform(tc.worldTransform()));
                 }
-
-            }
+            });
         }
 
     };

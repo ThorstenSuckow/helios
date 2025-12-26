@@ -60,27 +60,23 @@ export namespace helios::engine::game::systems::physics {
          */
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
-            auto& gameObjects = gameWorld_->gameObjects();
+            gameWorld_->find<
+                helios::engine::game::components::model::ModelAabbComponent,
+                helios::engine::game::components::physics::ScaleComponent,
+                helios::engine::game::components::physics::TransformComponent
+            >().each([](auto* obj, auto& mab, auto& wsc, auto& tc) {
 
-            for (auto& gameObjectPair : gameObjects) {
-
-                auto* obj = gameObjectPair.second.get();
-
-                auto* mab = obj->get<helios::engine::game::components::model::ModelAabbComponent>();
-                auto* wsc = obj->get<helios::engine::game::components::physics::ScaleComponent>();
-                auto* tc = obj->get<helios::engine::game::components::physics::TransformComponent>();
-
-                if (!wsc || !mab || !tc || !wsc->isDirty()) {
-                    continue;
+                if (!wsc.isDirty()) {
+                    return;
                 }
 
                 // Get current model size and desired size
-                auto cscale = mab->aabb().size();
-                auto wscale = wsc->scaling();
+                auto cscale = mab.aabb().size();
+                auto wscale = wsc.scaling();
 
-                auto currentScale = tc->localScaling();
+                auto currentScale = tc.localScaling();
 
-                auto unit = wsc->unit();
+                auto unit = wsc.unit();
 
                 // Calculate scale factors: desired_size / current_size
                 // Convert desired size to engine units (meters)
@@ -90,9 +86,9 @@ export namespace helios::engine::game::systems::physics {
                     wscale[2] != 0 && cscale[2] != 0 ? helios::core::units::from(wscale[2], unit)/cscale[2] : currentScale[2]
                 };
 
-                tc->setLocalScale(scale);
+                tc.setLocalScale(scale);
 
-            }
+            });
         }
 
     };

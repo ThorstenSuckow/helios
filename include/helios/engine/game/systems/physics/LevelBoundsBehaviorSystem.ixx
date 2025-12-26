@@ -48,50 +48,38 @@ export namespace helios::engine::game::systems::physics {
          * @param updateContext Context containing deltaTime and other frame data.
          */
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
+            
+            gameWorld_->find<
+                helios::engine::game::components::physics::Move2DComponent,
+                helios::engine::game::components::model::ModelAabbComponent,
+                helios::engine::game::components::scene::SceneNodeComponent,
+                helios::engine::game::components::physics::TransformComponent,
+                helios::engine::game::components::physics::AabbColliderComponent,
+                helios::engine::game::components::physics::LevelBoundsBehaviorComponent
+            >().each([&](auto* entity, auto& m2d, auto& ab, auto &sc, auto &tc, auto& bc, auto& bbc) {
+                
+                auto objectBounds = bc.bounds();
+                auto levelBounds  = gameWorld_->level().bounds();
 
-            auto& gameObjects = gameWorld_->gameObjects();
+                if (!levelBounds.contains(objectBounds)) {
 
-            for (auto& gameObjectPair : gameObjects) {
+                    auto worldTranslation  = tc.worldTranslation();
+                    auto worldTransform = tc.worldTransform();
 
-                auto* obj = gameObjectPair.second.get();
+                    worldTranslation = bounce(worldTranslation, objectBounds, levelBounds, m2d, bbc);
 
-                auto* m2d = obj->get<helios::engine::game::components::physics::Move2DComponent>();
+                    auto& parentTransform = sc.sceneNode()->parent()->worldTransform();
+                    auto parentTransform_inverse = parentTransform.inverse();
 
-                if (m2d) {
+                    auto childLocalTranslation = parentTransform_inverse * worldTranslation.toVec4(1.0f);
 
-                    auto* ab = obj->get<helios::engine::game::components::model::ModelAabbComponent>();
-                    auto* sc = obj->get<helios::engine::game::components::scene::SceneNodeComponent>();
-                    auto* tc = obj->get<helios::engine::game::components::physics::TransformComponent>();
-                    auto* bc = obj->get<helios::engine::game::components::physics::AabbColliderComponent>();
-                    auto* bbc = obj->get<helios::engine::game::components::physics::LevelBoundsBehaviorComponent>();
-
-                    if (ab && sc && tc && bc && bbc) {
-
-                        auto objectBounds = bc->bounds();
-                        auto levelBounds  = gameWorld_->level().bounds();
-
-                        if (!levelBounds.contains(objectBounds)) {
-
-                            auto worldTranslation  = tc->worldTranslation();
-                            auto worldTransform = tc->worldTransform();
-
-                            worldTranslation = bounce(worldTranslation, objectBounds, levelBounds, *m2d, *bbc);
-
-                            auto& parentTransform = sc->sceneNode()->parent()->worldTransform();
-                            auto parentTransform_inverse = parentTransform.inverse();
-
-                            auto childLocalTranslation = parentTransform_inverse * worldTranslation.toVec4(1.0f);
-
-                            tc->setLocalTranslation(childLocalTranslation.toVec3());
-                            bc->setBounds(ab->aabb().applyTransform(
-                                worldTransform.setTranslation(worldTranslation)
-                            ));
-                        }
-
-                    }
-
-                }
-            }
+                    tc.setLocalTranslation(childLocalTranslation.toVec3());
+                    bc.setBounds(ab.aabb().applyTransform(
+                        worldTransform.setTranslation(worldTranslation)
+                    ));
+                } 
+                
+            });
         }
 
     private:

@@ -5,7 +5,11 @@
 module;
 
 #include <memory>
+#include <typeindex>
+#include <type_traits>
+#include <unordered_map>
 #include <vector>
+#include <cassert>
 
 
 export module helios.engine.game.GameObject;
@@ -55,6 +59,11 @@ export namespace helios::engine::game {
         std::vector<std::unique_ptr<Component>> components_;
 
         /**
+         * @brief Type-indexed map for O(1) component lookups.
+         */
+        std::unordered_map<std::type_index, helios::engine::game::Component*> componentIndex_;
+
+        /**
          * @brief Cached list of components that implement the Updatable interface.
          *
          * @details This list is maintained for efficient iteration during the update phase.
@@ -70,24 +79,29 @@ export namespace helios::engine::game {
         /**
          * @brief Adds a new component of type T to the GameObject.
          *
+         * The component is created, attached to this GameObject (onAttach is called),
+         * and if it implements Updatable, it is added to the update list.
+         * Normalizes T and uses the type-indexed componentIndex_ for O(1) lookup complexity.
+         *
          * @tparam T The type of component to add. Must derive from Component.
          * @tparam Args Argument types for the component's constructor.
          * @param args Arguments forwarded to the component's constructor.
          * @return Reference to the newly created component.
-         *
-         * @details The component is created, attached to this GameObject (onAttach is called),
-         * and if it implements Updatable, it is added to the update list.
          */
         template<typename T, typename... Args>
         T& add(Args&&... args) {
+            using U = std::remove_cvref_t<T>;
 
-            auto component_ptr = std::make_unique<T>(std::forward<Args>(args)...);
-            T* raw_component_ptr = component_ptr.get();
+            assert(!has<U>() && "Cannot add, Component is already existing.");
 
-            if constexpr (std::derived_from<T, helios::engine::game::Updatable>) {
+            auto component_ptr = std::make_unique<U>(std::forward<Args>(args)...);
+            U* raw_component_ptr = component_ptr.get();
+
+            if constexpr (std::derived_from<U, helios::engine::game::Updatable>) {
                 updatables_.push_back(raw_component_ptr);
             }
             components_.push_back(std::move(component_ptr));
+            componentIndex_[typeid(U)] = raw_component_ptr;
 
             // make sure component is registered before onAttach is called,
             // in case onAttach implementations query the gameObject for **this** component
@@ -100,52 +114,60 @@ export namespace helios::engine::game {
         /**
          * @brief Retrieves an existing component of type T, or creates and adds it if not present.
          *
+        * Normalizes T and uses the type-indexed componentIndex_ for O(1) lookup complexity. This is a convenience
+        * method that combines get() and add(). If the component already exists, the arguments are ignored.
+         *
          * @tparam T The type of component to retrieve or add. Must derive from Component.
          * @tparam Args Argument types for the component's constructor.
          * @param args Arguments forwarded to the component's constructor if it needs to be created.
          * @return Reference to the existing or newly created component.
-         *
-         * @details This is a convenience method that combines get() and add().
-         *          If the component already exists, the arguments are ignored.
          */
         template<typename T, typename... Args>
-        T& getOrAdd(Args&&... args) {
+        std::remove_cvref_t<T>& getOrAdd(Args&&... args) {
 
-            if (auto* cmp = get<T>()) {
+            using U = std::remove_cvref_t<T>;
+            if (auto* cmp = get<U>()) {
                 return *cmp;
             }
 
-            return add<T>(std::forward<Args>(args)...);
+            return add<U>(std::forward<Args>(args)...);
         }
 
         /**
          * @brief Retrieves a component of type T.
          *
-         * @tparam T The type of component to retrieve.
-         * @return Pointer to the component if found, nullptr otherwise.
+         * Normalizes T and Uuses the type-indexed componentIndex_ for O(1) lookup complexity.
          *
-         * @details Performs a linear search through the components.
+         * @tparam T The type of component to retrieve.
+         *
+         * @return Pointer to the component if found, nullptr otherwise.
          */
         template<typename T>
-        T* get() const {
-            for (const auto& component : components_) {
-                if (auto* comp = dynamic_cast<T*>(component.get())) {
-                    return comp;
-                }
+        std::remove_cvref_t<T>* get() const {
+            // remove ref (if provided) and return type refered to by T
+            using U = std::remove_cvref_t<T>;
+            auto it = componentIndex_.find(typeid(U));
+
+            if (it == componentIndex_.end()) {
+                return nullptr;
             }
 
-            return nullptr;
+            return static_cast<U*>(it->second);
         }
 
         /**
          * @brief Checks if the GameObject has a component of type T.
          *
+         * Normalizes T and Uuses the type-indexed componentIndex_ for O(1) lookup complexity.
+         *
          * @tparam T The type of component to check for.
+         *
          * @return true if the component exists, false otherwise.
          */
         template<typename T>
         [[nodiscard]] bool has() const {
-            return get<T>() != nullptr;
+            using U = std::remove_cvref_t<T>;
+            return componentIndex_.contains(typeid(U));
         }
 
         /**

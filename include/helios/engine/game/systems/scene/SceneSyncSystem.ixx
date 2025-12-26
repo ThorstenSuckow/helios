@@ -52,46 +52,46 @@ export namespace helios::engine::game::systems::scene {
          */
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
-            auto& gameObjects = gameWorld_->gameObjects();
+            // First pass: push local transforms from TransformComponent to SceneNode
+            const auto range = gameWorld_->find<
+                helios::engine::game::components::physics::TransformComponent,
+                helios::engine::game::components::scene::SceneNodeComponent
+            >();
 
-            for (auto& gameObjectPair : gameObjects) {
-                auto* gameObject = gameObjectPair.second.get();
-                auto* tc = gameObject->get<helios::engine::game::components::physics::TransformComponent>();
-                auto* nc = gameObject->get<helios::engine::game::components::scene::SceneNodeComponent>();
+            range.each([](auto* obj, auto& tc, auto& nc) {
 
-                if (!tc || !nc || !tc->isDirty()) {
-                    continue;
+                if (!tc.isDirty()) {
+                    return;
                 }
 
-                auto* sceneNode = nc->sceneNode();
+                auto* sceneNode = nc.sceneNode();
                 if (!sceneNode || !sceneNode->isActive()) {
-                    continue;
+                    return;
                 }
 
-                sceneNode->setScale(tc->localScaling());
-                sceneNode->setRotation(tc->localRotation());
-                sceneNode->setTranslation(tc->localTranslation());
-            }
+                sceneNode->setScale(tc.localScaling());
+                sceneNode->setRotation(tc.localRotation());
+                sceneNode->setTranslation(tc.localTranslation());
+            });
 
             // propagate changes and update the nodes
             scene_->updateNodes();
 
-            for (auto& gameObjectPair : gameObjects) {
-                auto* gameObject = gameObjectPair.second.get();
-                auto* tc = gameObject->get<helios::engine::game::components::physics::TransformComponent>();
-                auto* nc = gameObject->get<helios::engine::game::components::scene::SceneNodeComponent>();
+            // Second pass: read back world transforms from SceneNode to TransformComponent
+            range.each([](auto* obj, auto& tc, auto& nc) {
 
-                if (!tc || !nc || !tc->isDirty()) {
-                    continue;
+                if (!tc.isDirty()) {
+                    return;
                 }
 
-                auto* sceneNode = nc->sceneNode();
+                auto* sceneNode = nc.sceneNode();
                 if (!sceneNode || !sceneNode->isActive()) {
-                    continue;
+                    return;
                 }
 
-                tc->setWorldTransform(sceneNode->worldTransform());
-            }
+                tc.setWorldTransform(sceneNode->worldTransform());
+
+            });
 
         }
 

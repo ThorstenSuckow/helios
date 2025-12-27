@@ -7,6 +7,7 @@ module;
 #include <cassert>
 #include <cmath>
 #include <algorithm>
+#include <helios/engine/game/GameObjectView.h>
 
 export module helios.engine.game.systems.physics.Move2DSystem;
 
@@ -59,17 +60,17 @@ export namespace helios::engine::game::systems::physics {
          */
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
-            gameWorld_->find<
+            for (auto [entity, m2d, tc] : gameWorld_->find<
                 helios::engine::game::components::physics::Move2DComponent,
                 helios::engine::game::components::physics::TransformComponent
-            >().each([&](auto* obj, auto& m2d, auto& tc) {
+            >().each()) {
 
-                auto rotation = rotateGameObject(&m2d, updateContext.deltaTime());
-                auto translationDelta = moveGameObject(&m2d, updateContext.deltaTime());
+                auto rotation = rotateGameObject(m2d, updateContext.deltaTime());
+                auto translationDelta = moveGameObject(m2d, updateContext.deltaTime());
 
-                tc.setLocalRotation(rotation);
-                tc.setLocalTranslation(tc.localTranslation() + translationDelta);
-            });
+                tc->setLocalRotation(rotation);
+                tc->setLocalTranslation(tc->localTranslation() + translationDelta);
+            }
         }
 
     private:
@@ -81,12 +82,15 @@ export namespace helios::engine::game::systems::physics {
          * dampening when input is inactive. Rotation speed decreases exponentially
          * until the threshold is reached.
          *
-         * @param cmp Reference to the Move2DComponent.
+         * @param cmp Pointer to the Move2DComponent.
          * @param deltaTime Frame delta time in seconds.
          *
          * @return Rotation matrix to apply to the entity.
          */
-        [[nodiscard]] helios::math::mat4f rotateGameObject(helios::engine::game::components::physics::Move2DComponent* cmp, float deltaTime) noexcept {
+        [[nodiscard]] static helios::math::mat4f rotateGameObject(
+            helios::engine::game::components::physics::Move2DComponent* cmp,
+            float deltaTime
+        ) noexcept {
 
             assert(cmp != nullptr && "Unexpected invalid Move2DComponent passed");
             assert(deltaTime >= 0 && "Unexpected negative value for deltaTime");
@@ -150,12 +154,15 @@ export namespace helios::engine::game::systems::physics {
          * accelerates in the facing direction. When inactive, applies exponential
          * drag to slow down. Velocity is clamped to maximum speed.
          *
-         * @param cmp Reference to the Move2DComponent.
+         * @param cmp Pointer to the Move2DComponent.
          * @param deltaTime Frame delta time in seconds.
          *
          * @return Translation delta to apply to the entity this frame.
          */
-        [[nodiscard]] helios::math::vec3f moveGameObject(helios::engine::game::components::physics::Move2DComponent* cmp, float deltaTime) {
+        [[nodiscard]] static helios::math::vec3f moveGameObject(
+            helios::engine::game::components::physics::Move2DComponent* cmp,
+            float deltaTime
+        ) noexcept {
 
             assert(cmp != nullptr && "Unexpected invalid Move2DComponent passed");
             assert(deltaTime >= 0 && "Unexpected negative value for deltaTime");

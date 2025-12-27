@@ -4,6 +4,7 @@
  */
 module;
 
+#include <helios/engine/game/GameObjectView.h>
 
 export module helios.engine.game.systems.physics.ScaleSystem;
 
@@ -60,37 +61,36 @@ export namespace helios::engine::game::systems::physics {
          */
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
-            gameWorld_->find<
+            for (auto [entity, mab, wsc, tc] : gameWorld_->find<
                 helios::engine::game::components::model::ModelAabbComponent,
                 helios::engine::game::components::physics::ScaleComponent,
                 helios::engine::game::components::physics::TransformComponent
-            >().each([](auto* obj, auto& mab, auto& wsc, auto& tc) {
+            >().each()) {
 
-                if (!wsc.isDirty()) {
-                    return;
+                if (!wsc->isDirty()) {
+                    continue;
                 }
 
                 // Get current model size and desired size
-                auto cscale = mab.aabb().size();
-                auto wscale = wsc.scaling();
+                auto cscale = mab->aabb().size();
+                auto wscale = wsc->scaling();
 
-                auto currentScale = tc.localScaling();
+                auto currentScale = tc->localScaling();
 
-                auto unit = wsc.unit();
+                auto unit = wsc->unit();
 
                 // Calculate scale factors: desired_size / current_size
                 // Convert desired size to engine units (meters)
                 auto scale = helios::math::vec3f{
-                    wscale[0] != 0 && cscale[0] != 0 ? helios::core::units::from(wscale[0], unit)/cscale[0] : currentScale[0],
-                    wscale[1] != 0 && cscale[1] != 0 ? helios::core::units::from(wscale[1], unit)/cscale[1] : currentScale[1],
-                    wscale[2] != 0 && cscale[2] != 0 ? helios::core::units::from(wscale[2], unit)/cscale[2] : currentScale[2]
+                    wscale[0] != 0 && cscale[0] != 0 ? helios::core::units::from(wscale[0], unit) / cscale[0] : currentScale[0],
+                    wscale[1] != 0 && cscale[1] != 0 ? helios::core::units::from(wscale[1], unit) / cscale[1] : currentScale[1],
+                    wscale[2] != 0 && cscale[2] != 0 ? helios::core::units::from(wscale[2], unit) / cscale[2] : currentScale[2]
                 };
 
-                tc.setLocalScale(scale);
-
-            });
+                tc->setLocalScale(scale);
+            }
         }
 
     };
 
-};
+}

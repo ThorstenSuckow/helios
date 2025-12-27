@@ -4,6 +4,7 @@
  */
 module;
 
+#include <helios/engine/game/GameObjectView.h>
 
 export module helios.engine.game.systems.physics.BoundsUpdateSystem;
 
@@ -47,17 +48,17 @@ export namespace helios::engine::game::systems::physics {
          */
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
-            gameWorld_->find<
+            for (auto [entity, mab, tc, bc] : gameWorld_->find<
                 helios::engine::game::components::model::ModelAabbComponent,
                 helios::engine::game::components::physics::TransformComponent,
                 helios::engine::game::components::physics::AabbColliderComponent
-            >().each([](auto* entity, auto&mab, auto&tc, auto& bc) {
-                if (tc.isDirty()) {
-                    bc.setBounds(mab.aabb().applyTransform(tc.worldTransform()));
+            >().each()) {
+                if (tc->isDirty()) {
+                    bc->setBounds(mab->aabb().applyTransform(tc->worldTransform()));
                 }
-            });
+            }
         }
 
     };
 
-};
+}

@@ -293,7 +293,7 @@ export namespace helios::engine::game::systems::gameplay {
          */
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
-            for (unsigned int i = 0; i < activeProjectiles_.size(); /* i gets increment below */ ) {
+            for (unsigned int i = 0; i < activeProjectiles_.size();) { // i gets increment below
 
                 auto& projectilePtr = activeProjectiles_[i];
 
@@ -315,9 +315,8 @@ export namespace helios::engine::game::systems::gameplay {
                 ++i;
             }
 
-
         }
 
     };
 
-};
+}

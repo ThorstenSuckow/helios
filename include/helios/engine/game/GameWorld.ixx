@@ -4,16 +4,21 @@
  */
 module;
 
+// NOTE: GameObjectView is intentionally a .h header instead of a .ixx module interface.
+// Using it as a module interface unit causes Internal Compiler Errors (ICE) in MSVC
+// (VS2022/VS2026) when structured bindings are used with the each() iterator.
+// The workaround is to include it in the global module fragment.
+#include <helios/engine/game/GameObjectView.h>
 #include <memory>
-#include <unordered_map>
 #include <type_traits>
-#include <vector>
-#include <cassert>
+#include <unordered_map>
 #include <utility>
+#include <vector>
 
 export module helios.engine.game.GameWorld;
 
 import helios.engine.game.GameObject;
+
 import helios.util.Guid;
 import helios.engine.game.UpdateContext;
 import helios.util.log.Logger;
@@ -21,292 +26,6 @@ import helios.util.log.LogManager;
 import helios.engine.game.System;
 import helios.engine.game.Level;
 
-namespace {
-
-    /**
-     * @brief Type alias for the internal GameObject storage map.
-     */
-    using Map = std::unordered_map<helios::util::Guid, std::unique_ptr<helios::engine::game::GameObject>>;
-
-    /**
-     * @brief A lazy range adapter for filtering GameObjects by component types.
-     *
-     * FindRange provides a lazy iteration mechanism for querying GameObjects
-     * that possess a specific set of components. It wraps the GameWorld's internal map
-     * and filters entities on-the-fly during iteration.
-     *
-     * The range supports both const and non-const access depending on the underlying
-     * map type, automatically selecting appropriate iterator and pointer types.
-     *
-     * Example usage:
-     * ```cpp
-     * // Iterate over all GameObjects with Move2DComponent and SceneNodeComponent
-     * for (auto* obj : gameWorld.find<Move2DComponent, SceneNodeComponent>()) {
-     *     // obj is a pointer to a matching GameObject
-     * }
-     *
-     * // Alternative: use each() for direct component access
-     * gameWorld.find<Move2DComponent>().each([](GameObject* obj, Move2DComponent& move) {
-     *     move.setVelocity({1.0f, 0.0f, 0.0f});
-     * });
-     * ```
-     *
-     * @tparam MapT The map type (const or non-const).
-     * @tparam Cs The component types to filter by.
-     */
-    template <class MapT, class... Cs>
-    class FindRange {
-
-    private:
-
-        using Obj = helios::engine::game::GameObject;
-        using RawMap = std::remove_const_t<MapT>;
-
-        /**
-         * @brief Iterator type, const_iterator for const maps, iterator otherwise.
-         */
-        using It = std::conditional_t<std::is_const_v<MapT>,
-                    typename RawMap::const_iterator,
-                    typename RawMap::iterator>;
-
-        /**
-         * @brief Pointer type, const pointer for const maps, non-const otherwise.
-         */
-        using Ptr = std::conditional_t<std::is_const_v<MapT>, const Obj*, Obj*>;
-
-        /**
-         * @brief Non-owning pointer to the underlying GameObject map.
-         */
-        MapT* objects_;
-
-        /**
-         * @brief Checks if a GameObject has all required component types.
-         *
-         * @param obj The GameObject to check.
-         *
-         * @return True if the object has all components Cs..., false otherwise.
-         */
-        static bool matches(const Obj* obj) {
-            return (obj->template has<std::remove_cvref_t<Cs>>() && ...);
-        }
-
-    public:
-
-        /**
-         * @brief Constructs a FindRange for the given GameObject map.
-         *
-         * @param objects Reference to the map to iterate over.
-         */
-        explicit FindRange(MapT& objects) : objects_(&objects) {}
-
-        /**
-         * @brief Forward iterator for filtered GameObject traversal.
-         *
-         * This iterator skips GameObjects that do not match the component filter,
-         * advancing to the next matching entity automatically.
-         */
-        class Iterator {
-
-        private:
-            MapT* objects_{nullptr};
-            It it_;
-            It end_;
-
-            /**
-             * @brief Advances the iterator to the next matching GameObject.
-             *
-             * @details Skips entries that do not have all required components.
-             */
-            void query_next() {
-                while (it_ != end_) {
-                    auto* obj = it_->second.get();
-
-                    if (matches(obj)) {
-                        return;
-                    }
-
-                    ++it_;
-                }
-            }
-
-        public:
-
-            /**
-             * @brief Constructs an iterator at the given position.
-             *
-             * @param objects Pointer to the underlying map.
-             * @param it Starting iterator position.
-             * @param end End iterator position.
-             */
-            Iterator(MapT* objects, It it, It end) : objects_(objects), it_(it), end_(end) {
-                query_next();
-            }
-
-            /**
-             * @brief Dereferences the iterator to get the current GameObject.
-             *
-             * @return Pointer to the current matching GameObject.
-             */
-            Ptr operator*() const {
-                return static_cast<Ptr>(it_->second.get());
-            }
-
-            /**
-             * @brief Advances the iterator to the next matching GameObject.
-             *
-             * @return Reference to this iterator.
-             */
-            Iterator& operator++() {
-                ++it_;
-                query_next();
-                return *this;
-            }
-
-            /**
-             * @brief Compares two iterators for equality.
-             *
-             * @param other The iterator to compare with.
-             *
-             * @return True if both iterators point to the same position.
-             */
-            bool operator==(const Iterator& other) const {
-                return objects_ == other.objects_ && it_ == other.it_;
-            }
-
-            /**
-             * @brief Compares two iterators for inequality.
-             *
-             * @param other The iterator to compare with.
-             *
-             * @return True if iterators point to different positions.
-             */
-            bool operator!=(const Iterator& other) const {
-                return !(*this == other);
-            }
-
-        };
-
-        /*
-         // the following code does not compile when each() is invoked and tuples are considered
-         // as return types: auto [entity, tc] = gameWorld->_find<TransformComponent>().each();
-         // this leads to a ICE with VSC 17
-         class EachRange {
-
-            FindRange* baseRange_;
-
-        public:
-            explicit EachRange(FindRange& baseRange) : baseRange_(&baseRange) {}
-
-            class EachIterator {
-                Iterator it_;
-
-            public:
-                explicit EachIterator(Iterator it) : it_(it) {}
-
-                EachIterator& operator++() {
-                    ++it_;
-                    return *this;
-                }
-
-                bool operator==(const EachIterator& other) const {
-                    return it_ == other.it_;
-                }
-
-                bool operator!=(const EachIterator& other) const {
-                    return !(*this == other);
-                }
-
-                auto operator*() const {
-                    auto* obj = *it_;
-                    assert(((obj->template get<std::remove_cvref_t<Cs>>() != nullptr) && ...));
-                    return std::tuple{
-                        obj,
-                        std::ref(*obj->template get<std::remove_cvref_t<Cs>>())...
-                    };
-                }
-            };
-
-            EachIterator begin() const {
-                return EachIterator(baseRange_->begin());
-            }
-
-            EachIterator end() const {
-                return EachIterator(baseRange_->end());
-            }
-        };
-
-        EachRange each() const {
-            return EachRange(const_cast<FindRange&>(*this));
-        }
-
-        EachRange each()  {
-            return EachRange(*this);
-        }*/
-
-        /**
-         * @brief Invokes a callback for each matching GameObject with its components.
-         *
-         * @details This method iterates over all GameObjects that have all specified component types
-         * and invokes the provided callback with a pointer to the GameObject and references
-         * to each requested component.
-         *
-         * Example:
-         * ```cpp
-         * gameWorld.find<Move2DComponent, SceneNodeComponent>().each(
-         *     [](GameObject* obj, Move2DComponent& move, SceneNodeComponent& scene) {
-         *         move.setVelocity({1.0f, 0.0f, 0.0f});
-         *     }
-         * );
-         * ```
-         *
-         * @tparam Func Callable type accepting (GameObject*, Cs&...).
-         *
-         * @param func The callback to invoke for each matching entity.
-         *
-         * @note Components are passed by reference. The assertion ensures all components exist.
-         */
-        template <typename Func>
-
-        void each(Func&& func) const {
-            for (auto& [id, uptr] : *objects_) {
-
-                auto* raw = uptr.get();
-                if (!matches(raw)) {
-                    continue;
-                }
-
-                Ptr obj = static_cast<Ptr>(raw);
-
-                assert(((raw->template get<std::remove_cvref_t<Cs>>() != nullptr) && ...) && "Unexpected nullptr in each.");
-
-                std::forward<Func>(func)(
-                    obj,
-                    (*raw->template get<std::remove_cvref_t<Cs>>())...
-                );
-            }
-        }
-
-        /**
-         * @brief Returns an iterator to the first matching GameObject.
-         *
-         * @return Iterator pointing to the first GameObject with all required components,
-         *         or end() if no match exists.
-         */
-        Iterator begin() const {
-            return Iterator(objects_, objects_->begin(), objects_->end());
-        }
-
-        /**
-         * @brief Returns an iterator past the last GameObject.
-         *
-         * @return Iterator representing the end of the range.
-         */
-        Iterator end() const {
-            return Iterator(objects_, objects_->end(), objects_->end());
-        }
-    };
-
-}
 
 #define HELIOS_LOG_SCOPE "helios::engine::game::GameWorld"
 export namespace helios::engine::game {
@@ -327,6 +46,27 @@ export namespace helios::engine::game {
      * - **Update Loop:** Orchestrates the frame update by updating GameObjects and then Systems.
      */
     class GameWorld {
+
+        /** @brief Internal map type for GameObject storage. */
+        using Map = std::unordered_map<helios::util::Guid, std::unique_ptr<GameObject>>;
+
+        /**
+         * @brief Lazy range type for component-filtered GameObject iteration.
+         *
+         * @details
+         * This alias wraps GameObjectView with the appropriate map and component types.
+         * The view filters GameObjects on-the-fly during iteration, yielding only
+         * those that possess all specified component types.
+         *
+         * @note GameObjectView is included as a .h header in the global module fragment
+         *       due to MSVC ICE issues when used as a .ixx module interface unit.
+         *
+         * @tparam MapT The map type (const or non-const).
+         * @tparam Cs The component types to filter by.
+         */
+        template<class MapT, class... Cs>
+        using GameObjectRange = GameObjectView<MapT, helios::engine::game::GameObject, Cs...>;
+
 
     protected:
         /**
@@ -516,35 +256,34 @@ export namespace helios::engine::game {
          *     move->setVelocity({1.0f, 0.0f, 0.0f});
          * }
          *
-         * // Using each() for direct component access
-         * gameWorld.find<Move2DComponent>().each(
-         *     [](GameObject* obj, Move2DComponent& move) {
-         *         move.setVelocity({1.0f, 0.0f, 0.0f});
-         *     }
-         * );
+         * // Using each() for direct component access (structured bindings)
+         * for (auto [obj, move] : gameWorld.find<Move2DComponent>().each()) {
+         *     move.get().setVelocity({1.0f, 0.0f, 0.0f});
+         * }
          * ```
          *
          * @tparam Cs The component types to filter by. GameObjects must have all types.
          *
-         * @return A FindRange object that can be iterated over.
+         * @return A GameObjectView object that can be iterated over.
          */
         template<class... Cs>
         [[nodiscard]] auto find() {
-            return FindRange<Map, Cs...>(gameObjects_);
+            return GameObjectRange<Map, Cs...>(gameObjects_);
         }
 
         /**
          * @brief Finds all GameObjects that have the specified component types (const overload).
          *
-         * @details Const version of the component-based find. Returns const pointers to GameObjects.
+         * @details
+         * Const version of the component-based find. Returns const pointers to GameObjects.
          *
          * @tparam Cs The component types to filter by. GameObjects must have all types.
          *
-         * @return A const FindRange object that can be iterated over.
+         * @return A const GameObjectView object that can be iterated over.
          */
         template<class... Cs>
         [[nodiscard]] auto find() const {
-            return FindRange<const Map, Cs...>(gameObjects_);
+            return GameObjectRange<const Map, Cs...>(gameObjects_);
         }
 
         /**

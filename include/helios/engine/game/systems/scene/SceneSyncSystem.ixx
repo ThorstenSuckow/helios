@@ -5,6 +5,7 @@
 module;
 
 #include <cassert>
+#include <helios/engine/game/GameObjectView.h>
 
 export module helios.engine.game.systems.scene.SceneSyncSystem;
 
@@ -52,46 +53,45 @@ export namespace helios::engine::game::systems::scene {
          */
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
-            // First pass: push local transforms from TransformComponent to SceneNode
-            const auto range = gameWorld_->find<
+            auto view = gameWorld_->find<
                 helios::engine::game::components::physics::TransformComponent,
                 helios::engine::game::components::scene::SceneNodeComponent
             >();
 
-            range.each([](auto* obj, auto& tc, auto& nc) {
+            // First pass: push local transforms from TransformComponent to SceneNode
+            for (auto [entity, tc, nc] : view.each()) {
 
-                if (!tc.isDirty()) {
-                    return;
+                if (!tc->isDirty()) {
+                    continue;
                 }
 
-                auto* sceneNode = nc.sceneNode();
+                auto* sceneNode = nc->sceneNode();
                 if (!sceneNode || !sceneNode->isActive()) {
-                    return;
+                    continue;
                 }
 
-                sceneNode->setScale(tc.localScaling());
-                sceneNode->setRotation(tc.localRotation());
-                sceneNode->setTranslation(tc.localTranslation());
-            });
+                sceneNode->setScale(tc->localScaling());
+                sceneNode->setRotation(tc->localRotation());
+                sceneNode->setTranslation(tc->localTranslation());
+            }
 
-            // propagate changes and update the nodes
+            // Propagate changes and update the nodes
             scene_->updateNodes();
 
             // Second pass: read back world transforms from SceneNode to TransformComponent
-            range.each([](auto* obj, auto& tc, auto& nc) {
+            for (auto [entity, tc, nc] : view.each()) {
 
-                if (!tc.isDirty()) {
-                    return;
+                if (!tc->isDirty()) {
+                    continue;
                 }
 
-                auto* sceneNode = nc.sceneNode();
+                auto* sceneNode = nc->sceneNode();
                 if (!sceneNode || !sceneNode->isActive()) {
-                    return;
+                    continue;
                 }
 
-                tc.setWorldTransform(sceneNode->worldTransform());
-
-            });
+                tc->setWorldTransform(sceneNode->worldTransform());
+            }
 
         }
 

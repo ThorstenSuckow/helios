@@ -199,7 +199,7 @@ export namespace helios::engine::game::components::physics {
          * @details Updates the target rotation angle based on the input direction
          * and calculates the shortest angular distance to the target.
          *
-         * @param direction Normalized 2D direction vector from analog stick.
+         * @param direction Normalized 3D direction vector.
          * @param throttle Magnitude of the stick input (0.0 to 1.0).
          */
         void move(helios::math::vec3f direction, float throttle) {

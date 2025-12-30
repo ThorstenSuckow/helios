@@ -26,10 +26,10 @@ import helios.util.log.LogManager;
 import helios.engine.game.System;
 import helios.engine.game.Level;
 
+import helios.engine.game.GameObjectFilterType;
 
 #define HELIOS_LOG_SCOPE "helios::engine::game::GameWorld"
 export namespace helios::engine::game {
-
 
 
     /**
@@ -102,7 +102,9 @@ export namespace helios::engine::game {
 
     public:
 
-
+        /**
+         * @brief Constructs an empty GameWorld with no entities, systems, or level.
+         */
         explicit GameWorld() = default;
 
 
@@ -151,7 +153,10 @@ export namespace helios::engine::game {
          * @note The GameWorld takes ownership of the System.
          */
         template<typename T, typename... Args>
-        T& add(Args&&... args) {
+        T& addSystem(Args&&... args) {
+
+            assert(!hasSystem<T>() && "System already registered with GameWorld");
+
             auto system_ptr = std::make_unique<T>(std::forward<Args>(args)...);
             T* raw_ptr = system_ptr.get();
 
@@ -175,7 +180,7 @@ export namespace helios::engine::game {
          *       performance-critical paths.
          */
         template<typename T>
-        [[nodiscard]] T* get() const {
+        [[nodiscard]] T* getSystem() const {
             for (const auto& system : systems_) {
                 if (auto* sys = dynamic_cast<T*>(system.get())) {
                     return sys;
@@ -192,8 +197,8 @@ export namespace helios::engine::game {
          * @return True if a System of type T exists, false otherwise.
          */
         template<typename T>
-        [[nodiscard]] bool has() const {
-            return get<T>() != nullptr;
+        [[nodiscard]] bool hasSystem() const {
+            return getSystem<T>() != nullptr;
         }
 
         /**
@@ -267,8 +272,8 @@ export namespace helios::engine::game {
          * @return A GameObjectView object that can be iterated over.
          */
         template<class... Cs>
-        [[nodiscard]] auto find() {
-            return GameObjectRange<Map, Cs...>(gameObjects_);
+        [[nodiscard]] auto find(GameObjectFilterType query = GameObjectFilterType::Active) {
+            return GameObjectRange<Map, Cs...>(gameObjects_, query);
         }
 
         /**
@@ -282,8 +287,8 @@ export namespace helios::engine::game {
          * @return A const GameObjectView object that can be iterated over.
          */
         template<class... Cs>
-        [[nodiscard]] auto find() const {
-            return GameObjectRange<const Map, Cs...>(gameObjects_);
+        [[nodiscard]] auto find(GameObjectFilterType query = GameObjectFilterType::Active) const {
+            return GameObjectRange<const Map, Cs...>(gameObjects_, query);
         }
 
         /**

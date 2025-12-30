@@ -130,8 +130,17 @@ export namespace helios::engine::game::systems::gameplay {
          */
         std::shared_ptr<helios::rendering::RenderPrototype> projectilePrototype_ = nullptr;
 
+        /**
+         * @brief Flag indicating whether projectile SceneNodes have been initialized.
+         */
         bool projectilesInitialized_ = false;
 
+        /**
+         * @brief Factor determining how much of the source's velocity is inherited by projectiles.
+         *
+         * @details A value of 0.0 means projectiles ignore source velocity, while 1.0 means
+         * full inheritance. Default is 0.5.
+         */
         float sourceVelocityInheritFactor_ = 0.5f;
 
     public:
@@ -141,7 +150,6 @@ export namespace helios::engine::game::systems::gameplay {
          *
          * @param projectileRenderable The renderable to use for all projectile instances.
          * @param poolSize Maximum number of projectiles to pre-allocate.
-         * @param arenaBox The aabb in which the projectiles can spawn.
          */
         explicit ProjectilePoolSystem(
             std::shared_ptr<helios::rendering::Renderable> projectileRenderable,
@@ -179,6 +187,14 @@ export namespace helios::engine::game::systems::gameplay {
             }
         }
 
+        /**
+         * @brief Initializes projectile SceneNodes in the scene graph.
+         *
+         * @details Called lazily when the level becomes available. Creates SceneNodes
+         * for all pooled projectiles and attaches them to the level's root node.
+         *
+         * @return True if projectiles were successfully prepared, false if no level is available.
+         */
         [[nodiscard]] bool prepareProjectiles() {
             if (!gameWorld_->hasLevel()) {
                 return false;

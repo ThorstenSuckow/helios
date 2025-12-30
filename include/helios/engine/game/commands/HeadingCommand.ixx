@@ -67,7 +67,7 @@ export namespace helios::engine::game::commands {
             auto* hc = gameObject.get<helios::engine::game::components::physics::HeadingComponent>();
 
             if (hc) {
-                hc->setHeading(direction_, turnFactor_);
+                hc->setHeading(direction_.toVec3(), turnFactor_);
             }
 
         }

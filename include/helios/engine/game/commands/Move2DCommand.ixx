@@ -44,7 +44,7 @@ export namespace helios::engine::game::commands {
         /**
          * @brief Constructs a movement command with direction and speed.
          *
-         * @param direction Normalized 2D direction vector from analog stick.
+         * @param direction Normalized 2D direction vector.
          * @param speedFactor Magnitude of the stick input (0.0 to 1.0).
          */
         explicit Move2DCommand(

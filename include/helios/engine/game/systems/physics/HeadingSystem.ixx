@@ -55,7 +55,7 @@ export namespace helios::engine::game::systems::physics {
             assert(deltaTime >= 0 && "Unexpected negative value for deltaTime");
 
             if (deltaTime == 0) {
-                return;;
+                return;
             }
 
             float currentRotationSpeed = cmp->currentRotationSpeed();
@@ -133,7 +133,8 @@ export namespace helios::engine::game::systems::physics {
 
                 updateHeading(hc, updateContext.deltaTime());
 
-                float rotationAngle = hc->currentRotationAngle();rsc->setHeadingRotationAngle(rotationAngle);
+                float rotationAngle = hc->currentRotationAngle();
+                rsc->setHeadingRotationAngle(rotationAngle);
                 rsc->setHeadingRotationAxis(hc->rotationAxis());
 
                 float rad = helios::math::radians(rotationAngle);
@@ -144,7 +145,7 @@ export namespace helios::engine::game::systems::physics {
             }
 
         }
-        
+
     };
 
 };

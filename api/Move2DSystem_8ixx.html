@@ -107,21 +107,18 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>System for processing 2D movement and rotation physics.  
+<p>System for processing 2D movement physics.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;cassert&gt;</code><br />
 <code>#include &lt;cmath&gt;</code><br />
-<code>#include &lt;memory&gt;</code><br />
-<code>#include &lt;stdexcept&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;helios/engine/game/GameObjectView.h&gt;</code><br />
 <code>import <a class="el" href="UpdateContext_8ixx_source.html">helios.engine.game.UpdateContext</a>;</code><br />
-<code>import <a class="el" href="LevelBoundsBehaviorComponent_8ixx_source.html">helios.engine.game.components.physics.LevelBoundsBehaviorComponent</a>;</code><br />
-<code>import <a class="el" href="TransformComponent_8ixx_source.html">helios.engine.game.components.physics.TransformComponent</a>;</code><br />
-<code>import <a class="el" href="Move2DComponent_8ixx_source.html">helios.engine.game.components.physics.Move2DComponent</a>;</code><br />
+<code>import <a class="el" href="DirectionComponent_8ixx_source.html">helios.engine.game.components.physics.DirectionComponent</a>;</code><br />
+<code>import <a class="el" href="TranslationStateComponent_8ixx_source.html">helios.engine.game.components.physics.TranslationStateComponent</a>;</code><br />
 <code>import <a class="el" href="GameWorld_8ixx_source.html">helios.engine.game.GameWorld</a>;</code><br />
-<code>import <a class="el" href="GameObject_8ixx_source.html">helios.engine.game.GameObject</a>;</code><br />
 <code>import <a class="el" href="helios_2math_2__module_8ixx_source.html">helios.math</a>;</code><br />
-<code>import <a class="el" href="AabbColliderComponent_8ixx_source.html">helios.engine.game.components.physics.AabbColliderComponent</a>;</code><br />
+<code>import <a class="el" href="Move2DComponent_8ixx_source.html">helios.engine.game.components.physics.Move2DComponent</a>;</code><br />
 <code>import <a class="el" href="System_8ixx_source.html">helios.engine.game.System</a>;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Include dependency graph for Move2DSystem.ixx:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -135,7 +132,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:helios_3A_3Aengine_3A_3Agame_3A_3Asystems_3A_3Aphysics_3A_3AMove2DSystem" id="r_helios_3A_3Aengine_3A_3Agame_3A_3Asystems_3A_3Aphysics_3A_3AMove2DSystem"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1Move2DSystem.html">helios::engine::game::systems::physics::Move2DSystem</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classhelios_1_1engine_1_1game_1_1System.html" title="Abstract base class for game systems.">System</a> that processes 2D movement and rotation for entities.  <a href="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1Move2DSystem.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classhelios_1_1engine_1_1game_1_1System.html" title="Abstract base class for game systems.">System</a> that processes 2D movement for entities.  <a href="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1Move2DSystem.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -150,7 +147,7 @@ Namespaces</h2></td></tr>
 <tr class="memdesc:namespacehelios_1_1engine_1_1game_1_1systems_1_1physics"><td class="mdescLeft">&#160;</td><td class="mdescRight">Physics and movement systems for the game engine. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>System for processing 2D movement and rotation physics. </p>
+<div class="textblock"><p>System for processing 2D movement physics. </p>
 
 <p class="definition">Definition in file <a class="el" href="Move2DSystem_8ixx_source.html">Move2DSystem.ixx</a>.</p>
 </div></div><!-- contents -->

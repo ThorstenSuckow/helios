@@ -8,6 +8,8 @@ var dir_46c7b0b04924cca8aa10726746d57f30 =
     [ "CommandBuffer.ixx", "CommandBuffer_8ixx.html", "CommandBuffer_8ixx" ],
     [ "Component.ixx", "Component_8ixx.html", "Component_8ixx" ],
     [ "GameObject.ixx", "GameObject_8ixx.html", "GameObject_8ixx" ],
+    [ "GameObjectFilterType.ixx", "GameObjectFilterType_8ixx.html", "GameObjectFilterType_8ixx" ],
+    [ "GameObjectPool.ixx", "GameObjectPool_8ixx.html", "GameObjectPool_8ixx" ],
     [ "GameWorld.ixx", "GameWorld_8ixx.html", "GameWorld_8ixx" ],
     [ "InputSnapshot.ixx", "InputSnapshot_8ixx.html", "InputSnapshot_8ixx" ],
     [ "Level.ixx", "Level_8ixx.html", "Level_8ixx" ],

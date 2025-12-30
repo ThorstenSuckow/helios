@@ -2,6 +2,69 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classhelios_1_1engine_1_1game_1_1GameWorld" kind="class" language="C++" prot="public">
     <compoundname>helios::engine::game::GameWorld</compoundname>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classhelios_1_1engine_1_1game_1_1GameWorld_1aaa4a2366fd132dd0336e8abe6a9db91e" prot="private" static="no">
+        <type>std::unordered_map&lt; <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref>, std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> &gt; &gt;</type>
+        <definition>using helios::engine::game::GameWorld::Map =  std::unordered_map&lt;helios::util::Guid, std::unique_ptr&lt;GameObject&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>Map</name>
+        <qualifiedname>helios::engine::game::GameWorld::Map</qualifiedname>
+        <briefdescription>
+<para>Internal map type for <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> storage. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="51" column="9" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classhelios_1_1engine_1_1game_1_1GameWorld_1adeee4d3fef4da0bfc3e254aec427ac15" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>class MapT</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>Cs</declname>
+            <defname>Cs</defname>
+          </param>
+        </templateparamlist>
+        <type>GameObjectView&lt; MapT, <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">helios::engine::game::GameObject</ref>, Cs... &gt;</type>
+        <definition>using helios::engine::game::GameWorld::GameObjectRange =  GameObjectView&lt;MapT, helios::engine::game::GameObject, Cs...&gt;</definition>
+        <argsstring></argsstring>
+        <name>GameObjectRange</name>
+        <qualifiedname>helios::engine::game::GameWorld::GameObjectRange</qualifiedname>
+        <briefdescription>
+<para>Lazy range type for component-filtered <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> iteration. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This alias wraps GameObjectView with the appropriate map and component types. The view filters GameObjects on-the-fly during iteration, yielding only those that possess all specified component types.</para>
+<para><simplesect kind="note"><para>GameObjectView is included as a .h header in the global module fragment due to MSVC ICE issues when used as a .ixx module interface unit.</para>
+</simplesect>
+<parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>MapT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The map type (const or non-const). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Cs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component types to filter by. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="68" column="9" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="68" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="protected-attrib">
       <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1GameWorld_1ade9c156ea18ef1363364f5c2817665aa" prot="protected" static="no" mutable="no">
         <type>std::unordered_map&lt; <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref>, std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> &gt; &gt;</type>
@@ -17,8 +80,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="46" column="28" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="46" bodyend="-1"/>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0a28cfa4a49e74a11b4c1420d99bb72d" compoundref="GameWorld_8ixx" startline="252" endline="254">gameObjects</referencedby>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="78" column="28" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="78" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0b4dbd1c69f3529fb722b06088500a9e" compoundref="GameWorld_8ixx" startline="275" endline="277">find</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ad0c11deb99d085edf7c13a448d4866fa" compoundref="GameWorld_8ixx" startline="290" endline="292">find</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0a28cfa4a49e74a11b4c1420d99bb72d" compoundref="GameWorld_8ixx" startline="334" endline="336">gameObjects</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1GameWorld_1ac4ed48c579a99900ce634413375ad477" prot="protected" static="no" mutable="no">
         <type>std::vector&lt; std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1game_1_1System" kindref="compound">System</ref> &gt; &gt;</type>
@@ -34,9 +99,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="62" column="21" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="62" bodyend="-1"/>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1aa43d58ad9e4c3fbf3efb9c6936b4c708" compoundref="GameWorld_8ixx" startline="122" endline="130">add</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a42fe4629a34aa357763255f499b8d9ab" compoundref="GameWorld_8ixx" startline="146" endline="153">get</referencedby>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="94" column="21" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="94" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ad6ff449301dbcfbb1214376a4ee3ebae" compoundref="GameWorld_8ixx" startline="156" endline="167">addSystem</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a90f78fa2cfb469d75cb6876bcc58a189" compoundref="GameWorld_8ixx" startline="183" endline="190">getSystem</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a61f6a7faf3129b156e0f923abcfb5f09" prot="protected" static="no" mutable="no">
         <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1game_1_1Level" kindref="compound">helios::engine::game::Level</ref> &gt;</type>
@@ -53,10 +118,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="69" column="25" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="69" bodyend="-1"/>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a2a2383d3d780c562b1d7a2c680ace6f0" compoundref="GameWorld_8ixx" startline="91" endline="93">hasLevel</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ae74dc0a0df46ba43456da2922ea2315e" compoundref="GameWorld_8ixx" startline="102" endline="104">level</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a3c063037908af8aa35f0b8bb926af9ef" compoundref="GameWorld_8ixx" startline="82" endline="84">setLevel</referencedby>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="101" column="25" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="101" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a2a2383d3d780c562b1d7a2c680ace6f0" compoundref="GameWorld_8ixx" startline="125" endline="127">hasLevel</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ae74dc0a0df46ba43456da2922ea2315e" compoundref="GameWorld_8ixx" startline="136" endline="138">level</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a3c063037908af8aa35f0b8bb926af9ef" compoundref="GameWorld_8ixx" startline="116" endline="118">setLevel</referencedby>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-static-attrib">
@@ -76,7 +141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="53" column="55" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="53" bodyend="-1"/>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="85" column="55" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="85" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -87,12 +152,13 @@
         <name>GameWorld</name>
         <qualifiedname>helios::engine::game::GameWorld::GameWorld</qualifiedname>
         <briefdescription>
+<para>Constructs an empty <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref> with no entities, systems, or level. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="74" column="18"/>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="108" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a3c063037908af8aa35f0b8bb926af9ef" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -121,9 +187,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="82" column="14" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="82" bodyend="84"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ae74dc0a0df46ba43456da2922ea2315e" compoundref="GameWorld_8ixx" startline="102" endline="104">level</references>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a61f6a7faf3129b156e0f923abcfb5f09" compoundref="GameWorld_8ixx" startline="69">level_</references>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="116" column="14" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="116" bodyend="118"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ae74dc0a0df46ba43456da2922ea2315e" compoundref="GameWorld_8ixx" startline="136" endline="138">level</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a61f6a7faf3129b156e0f923abcfb5f09" compoundref="GameWorld_8ixx" startline="101">level_</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a2a2383d3d780c562b1d7a2c680ace6f0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -141,8 +207,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="91" column="15" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="91" bodyend="93"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a61f6a7faf3129b156e0f923abcfb5f09" compoundref="GameWorld_8ixx" startline="69">level_</references>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="125" column="15" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="125" bodyend="127"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a61f6a7faf3129b156e0f923abcfb5f09" compoundref="GameWorld_8ixx" startline="101">level_</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1ae74dc0a0df46ba43456da2922ea2315e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="classhelios_1_1engine_1_1game_1_1Level" kindref="compound">helios::engine::game::Level</ref> &amp;</type>
@@ -162,11 +228,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="102" column="44" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="102" bodyend="104"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a61f6a7faf3129b156e0f923abcfb5f09" compoundref="GameWorld_8ixx" startline="69">level_</references>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a3c063037908af8aa35f0b8bb926af9ef" compoundref="GameWorld_8ixx" startline="82" endline="84">setLevel</referencedby>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="136" column="44" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="136" bodyend="138"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a61f6a7faf3129b156e0f923abcfb5f09" compoundref="GameWorld_8ixx" startline="101">level_</references>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a3c063037908af8aa35f0b8bb926af9ef" compoundref="GameWorld_8ixx" startline="116" endline="118">setLevel</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1aa43d58ad9e4c3fbf3efb9c6936b4c708" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1ad6ff449301dbcfbb1214376a4ee3ebae" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -178,10 +244,10 @@
           </param>
         </templateparamlist>
         <type>T &amp;</type>
-        <definition>T &amp; helios::engine::game::GameWorld::add</definition>
+        <definition>T &amp; helios::engine::game::GameWorld::addSystem</definition>
         <argsstring>(Args &amp;&amp;... args)</argsstring>
-        <name>add</name>
-        <qualifiedname>helios::engine::game::GameWorld::add</qualifiedname>
+        <name>addSystem</name>
+        <qualifiedname>helios::engine::game::GameWorld::addSystem</qualifiedname>
         <param>
           <type>Args &amp;&amp;...</type>
           <declname>args</declname>
@@ -225,20 +291,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="122" column="11" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="122" bodyend="130"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ac4ed48c579a99900ce634413375ad477" compoundref="GameWorld_8ixx" startline="62">systems_</references>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="156" column="11" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="156" bodyend="167"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a891f6e8c25e5419df48491233605d79d" compoundref="GameWorld_8ixx" startline="200" endline="202">hasSystem</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ac4ed48c579a99900ce634413375ad477" compoundref="GameWorld_8ixx" startline="94">systems_</references>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a42fe4629a34aa357763255f499b8d9ab" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a90f78fa2cfb469d75cb6876bcc58a189" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>T *</type>
-        <definition>T * helios::engine::game::GameWorld::get</definition>
+        <definition>T * helios::engine::game::GameWorld::getSystem</definition>
         <argsstring>() const</argsstring>
-        <name>get</name>
-        <qualifiedname>helios::engine::game::GameWorld::get</qualifiedname>
+        <name>getSystem</name>
+        <qualifiedname>helios::engine::game::GameWorld::getSystem</qualifiedname>
         <briefdescription>
 <para>Retrieves a <ref refid="classhelios_1_1engine_1_1game_1_1System" kindref="compound">System</ref> of the specified type. </para>
         </briefdescription>
@@ -261,21 +328,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="146" column="12" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="146" bodyend="153"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ac4ed48c579a99900ce634413375ad477" compoundref="GameWorld_8ixx" startline="62">systems_</references>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ad6adcd1256a97a4ecf2045eb10de8f0b" compoundref="GameWorld_8ixx" startline="163" endline="165">has</referencedby>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="183" column="12" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="183" bodyend="190"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ac4ed48c579a99900ce634413375ad477" compoundref="GameWorld_8ixx" startline="94">systems_</references>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a891f6e8c25e5419df48491233605d79d" compoundref="GameWorld_8ixx" startline="200" endline="202">hasSystem</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1ad6adcd1256a97a4ecf2045eb10de8f0b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a891f6e8c25e5419df48491233605d79d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
         <type>bool</type>
-        <definition>bool helios::engine::game::GameWorld::has</definition>
+        <definition>bool helios::engine::game::GameWorld::hasSystem</definition>
         <argsstring>() const</argsstring>
-        <name>has</name>
-        <qualifiedname>helios::engine::game::GameWorld::has</qualifiedname>
+        <name>hasSystem</name>
+        <qualifiedname>helios::engine::game::GameWorld::hasSystem</qualifiedname>
         <briefdescription>
 <para>Checks if a <ref refid="classhelios_1_1engine_1_1game_1_1System" kindref="compound">System</ref> of the specified type is registered. </para>
         </briefdescription>
@@ -295,8 +362,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="163" column="15" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="163" bodyend="165"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a42fe4629a34aa357763255f499b8d9ab" compoundref="GameWorld_8ixx" startline="146" endline="153">get</references>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="200" column="15" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="200" bodyend="202"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a90f78fa2cfb469d75cb6876bcc58a189" compoundref="GameWorld_8ixx" startline="183" endline="190">getSystem</references>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ad6ff449301dbcfbb1214376a4ee3ebae" compoundref="GameWorld_8ixx" startline="156" endline="167">addSystem</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a3c520229c0ff0a74019dc10fcb71a439" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -328,7 +396,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="179" column="14"/>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="216" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a4e85936a3662c8dfc85cf83e2e901541" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">helios::engine::game::GameObject</ref> *</type>
@@ -380,7 +448,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="196" column="43"/>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="233" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a10feb30a293f8266c398fc5b42872a4a" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">helios::engine::game::GameObject</ref> *</type>
@@ -430,7 +498,93 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="210" column="43"/>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="247" column="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a0b4dbd1c69f3529fb722b06088500a9e" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>Cs</declname>
+            <defname>Cs</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto helios::engine::game::GameWorld::find</definition>
+        <argsstring>(GameObjectFilterType query=GameObjectFilterType::Active)</argsstring>
+        <name>find</name>
+        <qualifiedname>helios::engine::game::GameWorld::find</qualifiedname>
+        <param>
+          <type><ref refid="namespacehelios_1_1engine_1_1game_1a260d868cc67d729c4dbce5e9ea0b6e47" kindref="member">GameObjectFilterType</ref></type>
+          <declname>query</declname>
+          <defval><ref refid="namespacehelios_1_1engine_1_1game_1a260d868cc67d729c4dbce5e9ea0b6e47a4d3d769b812b6faa6b76e1a8abaece2d" kindref="member">GameObjectFilterType::Active</ref></defval>
+        </param>
+        <briefdescription>
+<para>Finds all GameObjects that have the specified component types. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns a lazy range that filters GameObjects on-the-fly during iteration. Only GameObjects possessing all specified component types are yielded.</para>
+<para>Example usage: ```cpp // Range-based for loop for (auto* obj : gameWorld.find&lt;Move2DComponent, SceneNodeComponent&gt;()) { auto* move = obj-&gt;get&lt;Move2DComponent&gt;(); move-&gt;setVelocity({1.0f, 0.0f, 0.0f}); }</para>
+<para>// Using each() for direct component access (structured bindings) for (auto [obj, move] : gameWorld.find&lt;Move2DComponent&gt;().each()) { move.get().setVelocity({1.0f, 0.0f, 0.0f}); } ```</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Cs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component types to filter by. GameObjects must have all types.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A GameObjectView object that can be iterated over. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="275" column="15" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="275" bodyend="277"/>
+        <references refid="namespacehelios_1_1engine_1_1game_1a260d868cc67d729c4dbce5e9ea0b6e47a4d3d769b812b6faa6b76e1a8abaece2d" compoundref="GameObjectFilterType_8ixx" startline="23">helios::engine::game::Active</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ade9c156ea18ef1363364f5c2817665aa" compoundref="GameWorld_8ixx" startline="78">gameObjects_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1ad0c11deb99d085edf7c13a448d4866fa" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>Cs</declname>
+            <defname>Cs</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto helios::engine::game::GameWorld::find</definition>
+        <argsstring>(GameObjectFilterType query=GameObjectFilterType::Active) const</argsstring>
+        <name>find</name>
+        <qualifiedname>helios::engine::game::GameWorld::find</qualifiedname>
+        <param>
+          <type><ref refid="namespacehelios_1_1engine_1_1game_1a260d868cc67d729c4dbce5e9ea0b6e47" kindref="member">GameObjectFilterType</ref></type>
+          <declname>query</declname>
+          <defval><ref refid="namespacehelios_1_1engine_1_1game_1a260d868cc67d729c4dbce5e9ea0b6e47a4d3d769b812b6faa6b76e1a8abaece2d" kindref="member">GameObjectFilterType::Active</ref></defval>
+        </param>
+        <briefdescription>
+<para>Finds all GameObjects that have the specified component types (const overload). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Const version of the component-based find. Returns const pointers to GameObjects.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Cs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component types to filter by. GameObjects must have all types.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A const GameObjectView object that can be iterated over. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="290" column="15" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="290" bodyend="292"/>
+        <references refid="namespacehelios_1_1engine_1_1game_1a260d868cc67d729c4dbce5e9ea0b6e47a4d3d769b812b6faa6b76e1a8abaece2d" compoundref="GameObjectFilterType_8ixx" startline="23">helios::engine::game::Active</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ade9c156ea18ef1363364f5c2817665aa" compoundref="GameWorld_8ixx" startline="78">gameObjects_</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1aada0325e1ee9928451c6149a6f5643b3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">helios::engine::game::GameObject</ref> *</type>
@@ -480,7 +634,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="224" column="49"/>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="306" column="49"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a0e8351e088564887aaabd806752e30f2" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">helios::engine::game::GameObject</ref> &gt;</type>
@@ -532,7 +686,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="241" column="26"/>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="323" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameWorld_1a0a28cfa4a49e74a11b4c1420d99bb72d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const std::unordered_map&lt; <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref>, std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> &gt; &gt; &amp;</type>
@@ -552,8 +706,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/GameWorld.ixx" line="252" column="35" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="252" bodyend="254"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ade9c156ea18ef1363364f5c2817665aa" compoundref="GameWorld_8ixx" startline="46">gameObjects_</references>
+        <location file="include/helios/engine/game/GameWorld.ixx" line="334" column="35" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="334" bodyend="336"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ade9c156ea18ef1363364f5c2817665aa" compoundref="GameWorld_8ixx" startline="78">gameObjects_</references>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -582,21 +736,25 @@
         <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
       </node>
     </collaborationgraph>
-    <location file="include/helios/engine/game/GameWorld.ixx" line="37" column="5" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="37" bodyend="255"/>
+    <location file="include/helios/engine/game/GameWorld.ixx" line="48" column="5" bodyfile="include/helios/engine/game/GameWorld.ixx" bodystart="48" bodyend="337"/>
     <listofallmembers>
-      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1aa43d58ad9e4c3fbf3efb9c6936b4c708" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>add</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a4e85936a3662c8dfc85cf83e2e901541" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>addGameObject</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ad6ff449301dbcfbb1214376a4ee3ebae" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>addSystem</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a10feb30a293f8266c398fc5b42872a4a" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>find</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0b4dbd1c69f3529fb722b06088500a9e" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>find</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ad0c11deb99d085edf7c13a448d4866fa" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>find</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1aada0325e1ee9928451c6149a6f5643b3" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>find</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1adeee4d3fef4da0bfc3e254aec427ac15" prot="private" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>GameObjectRange</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0a28cfa4a49e74a11b4c1420d99bb72d" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>gameObjects</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ade9c156ea18ef1363364f5c2817665aa" prot="protected" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>gameObjects_</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a7664be82599876f17a458ba6fb7684fb" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>GameWorld</name></member>
-      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a42fe4629a34aa357763255f499b8d9ab" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>get</name></member>
-      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ad6adcd1256a97a4ecf2045eb10de8f0b" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>has</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a90f78fa2cfb469d75cb6876bcc58a189" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>getSystem</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a2a2383d3d780c562b1d7a2c680ace6f0" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>hasLevel</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a891f6e8c25e5419df48491233605d79d" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>hasSystem</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ae74dc0a0df46ba43456da2922ea2315e" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>level</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a61f6a7faf3129b156e0f923abcfb5f09" prot="protected" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>level_</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0586ac1c766822252c3422bafda3b917" prot="protected" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>logger_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1aaa4a2366fd132dd0336e8abe6a9db91e" prot="private" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>Map</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0e8351e088564887aaabd806752e30f2" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>removeGameObject</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a3c063037908af8aa35f0b8bb926af9ef" prot="public" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>setLevel</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ac4ed48c579a99900ce634413375ad477" prot="protected" virt="non-virtual"><scope>helios::engine::game::GameWorld</scope><name>systems_</name></member>

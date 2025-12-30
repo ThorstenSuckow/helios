@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['find_0',['find',['../classhelios_1_1engine_1_1game_1_1GameWorld.html#a10feb30a293f8266c398fc5b42872a4a',1,'helios::engine::game::GameWorld::find(const helios::util::Guid &amp;guid)'],['../classhelios_1_1engine_1_1game_1_1GameWorld.html#aada0325e1ee9928451c6149a6f5643b3',1,'helios::engine::game::GameWorld::find(const helios::util::Guid &amp;guid) const']]],
+  ['find_0',['find',['../classhelios_1_1engine_1_1game_1_1GameWorld.html#a10feb30a293f8266c398fc5b42872a4a',1,'helios::engine::game::GameWorld::find(const helios::util::Guid &amp;guid)'],['../classhelios_1_1engine_1_1game_1_1GameWorld.html#a0b4dbd1c69f3529fb722b06088500a9e',1,'helios::engine::game::GameWorld::find(GameObjectFilterType query=GameObjectFilterType::Active)'],['../classhelios_1_1engine_1_1game_1_1GameWorld.html#ad0c11deb99d085edf7c13a448d4866fa',1,'helios::engine::game::GameWorld::find(GameObjectFilterType query=GameObjectFilterType::Active) const'],['../classhelios_1_1engine_1_1game_1_1GameWorld.html#aada0325e1ee9928451c6149a6f5643b3',1,'helios::engine::game::GameWorld::find(const helios::util::Guid &amp;guid) const']]],
   ['findvisiblenodes_1',['findVisibleNodes',['../classhelios_1_1scene_1_1Scene.html#a3daf47f04c82372f22c8a6f85b277160',1,'helios::scene::Scene']]],
   ['flipx_2',['flipX',['../structhelios_1_1math_1_1vec3.html#a09cdd10bca94c120bfcdc466a75b1306',1,'helios::math::vec3']]],
   ['flipy_3',['flipY',['../structhelios_1_1math_1_1vec3.html#adf0bd63ca6a323457f859e8199138d09',1,'helios::math::vec3']]],

@@ -19,6 +19,7 @@
 <para>Updates collider bounds for all applicable entities. </para>
         </briefdescription>
         <detaileddescription>
+<para>For each entity with the required components, composes the local transform from translation, rotation, and scale, then applies the parent world transform to compute the final world-space AABB.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>updateContext</parametername>
@@ -32,21 +33,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/systems/physics/BoundsUpdateSystem.ixx" line="48" column="14" bodyfile="include/helios/engine/game/systems/physics/BoundsUpdateSystem.ixx" bodystart="48" bodyend="65"/>
+        <location file="include/helios/engine/game/systems/physics/BoundsUpdateSystem.ixx" line="60" column="14" bodyfile="include/helios/engine/game/systems/physics/BoundsUpdateSystem.ixx" bodystart="60" bodyend="84"/>
         <references refid="classhelios_1_1engine_1_1game_1_1System_1ab575d815b362bc7bc2fdfe021632c83b" compoundref="System_8ixx" startline="48">helios::engine::game::System::gameWorld_</references>
+        <references refid="structhelios_1_1math_1_1mat4_1ad856b4652346ff475b653e257d64428d" compoundref="mat4_8ixx" startline="104" endline="106">helios::math::mat4&lt; float &gt;::identity</references>
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para><ref refid="classhelios_1_1engine_1_1game_1_1System" kindref="compound">System</ref> that updates AABB colliders based on entity world transforms. </para>
+<para><ref refid="classhelios_1_1engine_1_1game_1_1System" kindref="compound">System</ref> that updates AABB colliders based on entity transforms. </para>
     </briefdescription>
     <detaileddescription>
-<para>This system iterates through all GameObjects that have:<itemizedlist>
-<listitem><para>ModelAabbComponent (source AABB)</para>
-</listitem><listitem><para>TransformComponent (world transform)</para>
-</listitem><listitem><para>AabbColliderComponent (target collider)</para>
+<para>This system recalculates the world-space AABB for entities by transforming the canonical model AABB through the composed local transform (Translation * Rotation * Scale) and the parent&apos;s world transform.</para>
+<para>Required components:<itemizedlist>
+<listitem><para>ModelAabbComponent (source canonical AABB)</para>
+</listitem><listitem><para>SceneNodeComponent (for parent world transform)</para>
+</listitem><listitem><para>TranslationStateComponent (local translation)</para>
+</listitem><listitem><para>ScaleComponent (local scaling)</para>
+</listitem><listitem><para>RotationStateComponent (local rotation)</para>
+</listitem><listitem><para>AabbColliderComponent (receives the updated world-space AABB) </para>
 </listitem></itemizedlist>
 </para>
-<para>When the TransformComponent is marked dirty, the system transforms the model AABB into world space and updates the collider bounds. </para>
     </detaileddescription>
     <inheritancegraph>
       <node id="2">
@@ -98,7 +103,7 @@
         <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
       </node>
     </collaborationgraph>
-    <location file="include/helios/engine/game/systems/physics/BoundsUpdateSystem.ixx" line="39" column="5" bodyfile="include/helios/engine/game/systems/physics/BoundsUpdateSystem.ixx" bodystart="39" bodyend="67"/>
+    <location file="include/helios/engine/game/systems/physics/BoundsUpdateSystem.ixx" line="46" column="5" bodyfile="include/helios/engine/game/systems/physics/BoundsUpdateSystem.ixx" bodystart="46" bodyend="86"/>
     <listofallmembers>
       <member refid="classhelios_1_1engine_1_1game_1_1System_1ab575d815b362bc7bc2fdfe021632c83b" prot="protected" virt="non-virtual"><scope>helios::engine::game::systems::physics::BoundsUpdateSystem</scope><name>gameWorld_</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1System_1a3abad1bebaa98c46f28105702c58b473" prot="public" virt="virtual"><scope>helios::engine::game::systems::physics::BoundsUpdateSystem</scope><name>onAdd</name></member>

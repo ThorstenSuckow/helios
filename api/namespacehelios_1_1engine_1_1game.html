@@ -129,6 +129,8 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract base class for components attached to GameObjects.  <a href="classhelios_1_1engine_1_1game_1_1Component.html#details">More...</a><br /></td></tr>
 <tr class="memitem:GameObject" id="r_GameObject"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1game_1_1GameObject.html">GameObject</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for interactive game entities using a component-based architecture.  <a href="classhelios_1_1engine_1_1game_1_1GameObject.html#details">More...</a><br /></td></tr>
+<tr class="memitem:GameObjectPool" id="r_GameObjectPool"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1game_1_1GameObjectPool.html">GameObjectPool</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A reusable object pool for GameObjects.  <a href="classhelios_1_1engine_1_1game_1_1GameObjectPool.html#details">More...</a><br /></td></tr>
 <tr class="memitem:GameWorld" id="r_GameWorld"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1game_1_1GameWorld.html">GameWorld</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Central registry for managing game entities, systems, and the active level.  <a href="classhelios_1_1engine_1_1game_1_1GameWorld.html#details">More...</a><br /></td></tr>
 <tr class="memitem:InputSnapshot" id="r_InputSnapshot"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1game_1_1InputSnapshot.html">InputSnapshot</a></td></tr>
@@ -141,11 +143,55 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface for components that require per-frame updates.  <a href="classhelios_1_1engine_1_1game_1_1Updatable.html#details">More...</a><br /></td></tr>
 <tr class="memitem:UpdateContext" id="r_UpdateContext"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1engine_1_1game_1_1UpdateContext.html">UpdateContext</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Context passed to <a class="el" href="classhelios_1_1engine_1_1game_1_1Updatable.html" title="Interface for components that require per-frame updates.">Updatable</a> components during per-frame updates.  <a href="structhelios_1_1engine_1_1game_1_1UpdateContext.html#details">More...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a260d868cc67d729c4dbce5e9ea0b6e47" id="r_a260d868cc67d729c4dbce5e9ea0b6e47"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a260d868cc67d729c4dbce5e9ea0b6e47">helios::engine::game::GameObjectFilterType</a> { <a class="el" href="#a260d868cc67d729c4dbce5e9ea0b6e47a4d3d769b812b6faa6b76e1a8abaece2d">Active</a>
+, <a class="el" href="#a260d868cc67d729c4dbce5e9ea0b6e47a3cab03c00dbd11bc3569afa0748013f0">Inactive</a>
+, <a class="el" href="#a260d868cc67d729c4dbce5e9ea0b6e47ab1c94ca2fbc3e78fc30069c8d0f01680">All</a>
+ }</td></tr>
+<tr class="memdesc:a260d868cc67d729c4dbce5e9ea0b6e47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines criteria for filtering GameObjects during iteration.  <a href="#a260d868cc67d729c4dbce5e9ea0b6e47">More...</a><br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Game logic infrastructure using <a class="el" href="classhelios_1_1engine_1_1game_1_1Command.html" title="Abstract base class for encapsulating game actions as executable commands.">Command</a> pattern for decoupled, deterministic game systems. </p>
 <p>This namespace provides game logic infrastructure using the <a class="el" href="classhelios_1_1engine_1_1game_1_1Command.html" title="Abstract base class for encapsulating game actions as executable commands.">Command</a> pattern for decoupled, testable, and deterministic game systems. It includes entity management (<a class="el" href="classhelios_1_1engine_1_1game_1_1GameWorld.html" title="Central registry for managing game entities, systems, and the active level.">GameWorld</a>, <a class="el" href="classhelios_1_1engine_1_1game_1_1GameObject.html" title="Base class for interactive game entities using a component-based architecture.">GameObject</a>), system infrastructure (<a class="el" href="classhelios_1_1engine_1_1game_1_1System.html" title="Abstract base class for game systems.">System</a>), input processing (<a class="el" href="classhelios_1_1engine_1_1game_1_1InputSnapshot.html" title="Immutable snapshot capturing input state at a specific point in time.">InputSnapshot</a>), component system (<a class="el" href="classhelios_1_1engine_1_1game_1_1Component.html" title="Abstract base class for components attached to GameObjects.">Component</a>, <a class="el" href="classhelios_1_1engine_1_1game_1_1Updatable.html" title="Interface for components that require per-frame updates.">Updatable</a>), and command execution (<a class="el" href="classhelios_1_1engine_1_1game_1_1Command.html" title="Abstract base class for encapsulating game actions as executable commands.">Command</a>, <a class="el" href="classhelios_1_1engine_1_1game_1_1CommandBuffer.html" title="Queue for deferred execution of game commands.">CommandBuffer</a>) facilities that enable advanced features like replay systems and undo/redo. </p>
-</div></div><!-- contents -->
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
+<a id="a260d868cc67d729c4dbce5e9ea0b6e47" name="a260d868cc67d729c4dbce5e9ea0b6e47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a260d868cc67d729c4dbce5e9ea0b6e47">&#9670;&#160;</a></span>GameObjectFilterType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a260d868cc67d729c4dbce5e9ea0b6e47">helios::engine::game::GameObjectFilterType</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Defines criteria for filtering GameObjects during iteration. </p>
+<p>Used by `GameWorld::find()` and `GameObjectView` to select which entities should be included in the results based on their active state. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a260d868cc67d729c4dbce5e9ea0b6e47a4d3d769b812b6faa6b76e1a8abaece2d" name="a260d868cc67d729c4dbce5e9ea0b6e47a4d3d769b812b6faa6b76e1a8abaece2d"></a>Active&#160;</td><td class="fielddoc"><p>Include only active GameObjects. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a260d868cc67d729c4dbce5e9ea0b6e47a3cab03c00dbd11bc3569afa0748013f0" name="a260d868cc67d729c4dbce5e9ea0b6e47a3cab03c00dbd11bc3569afa0748013f0"></a>Inactive&#160;</td><td class="fielddoc"><p>Include only inactive GameObjects. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a260d868cc67d729c4dbce5e9ea0b6e47ab1c94ca2fbc3e78fc30069c8d0f01680" name="a260d868cc67d729c4dbce5e9ea0b6e47ab1c94ca2fbc3e78fc30069c8d0f01680"></a>All&#160;</td><td class="fielddoc"><p>Include all GameObjects regardless of state. </p>
+</td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="GameObjectFilterType_8ixx_source.html#l00019">19</a> of file <a class="el" href="GameObjectFilterType_8ixx_source.html">GameObjectFilterType.ixx</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>

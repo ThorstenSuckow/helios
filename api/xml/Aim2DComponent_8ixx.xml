@@ -3,7 +3,6 @@
   <compounddef id="Aim2DComponent_8ixx" kind="file" language="C++">
     <compoundname>Aim2DComponent.ixx</compoundname>
     <includes refid="Component_8ixx" local="no">helios.engine.game.Component</includes>
-    <includes refid="Updatable_8ixx" local="no">helios.engine.game.Updatable</includes>
     <includes refid="UpdateContext_8ixx" local="no">helios.engine.game.UpdateContext</includes>
     <includes refid="helios_2math_2types_2__module_8ixx" local="no">helios.math.types</includes>
     <incdepgraph>
@@ -11,22 +10,18 @@
         <label>helios.engine.game.Component</label>
         <link refid="Component_8ixx"/>
       </node>
-      <node id="6">
+      <node id="5">
         <label>helios.engine.game.InputSnapshot</label>
         <link refid="InputSnapshot_8ixx"/>
-        <childnode refid="7" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
       </node>
       <node id="3">
-        <label>helios.engine.game.Updatable</label>
-        <link refid="Updatable_8ixx"/>
-      </node>
-      <node id="4">
         <label>helios.engine.game.UpdateContext</label>
         <link refid="UpdateContext_8ixx"/>
-        <childnode refid="5" relation="include">
+        <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="6" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -36,30 +31,30 @@
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="4" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
+      </node>
+      <node id="6">
+        <label>helios.input.gamepad.GamepadState</label>
+        <link refid="GamepadState_8ixx"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>helios.math.types</label>
+        <link refid="helios_2math_2types_2__module_8ixx"/>
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
       <node id="7">
-        <label>helios.input.gamepad.GamepadState</label>
-        <link refid="GamepadState_8ixx"/>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-      </node>
-      <node id="17">
-        <label>helios.math.types</label>
-        <link refid="helios_2math_2types_2__module_8ixx"/>
-        <childnode refid="17" relation="include">
-        </childnode>
-      </node>
-      <node id="8">
         <label>helios.util.log.LogManager</label>
         <link refid="LogManager_8ixx"/>
+        <childnode refid="8" relation="include">
+        </childnode>
         <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
@@ -74,48 +69,46 @@
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
-        </childnode>
-      </node>
-      <node id="16">
-        <label>helios.util.log.LogSink</label>
-        <link refid="LogSink_8ixx"/>
-        <childnode refid="9" relation="include">
-        </childnode>
       </node>
       <node id="15">
+        <label>helios.util.log.LogSink</label>
+        <link refid="LogSink_8ixx"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
         <label>helios.util.log.Logger</label>
         <link refid="Logger_8ixx"/>
-        <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
-      <node id="12">
+      <node id="11">
         <label>memory</label>
       </node>
-      <node id="13">
+      <node id="12">
         <label>mutex</label>
       </node>
-      <node id="5">
+      <node id="4">
         <label>stdexcept</label>
       </node>
-      <node id="9">
+      <node id="8">
         <label>string</label>
       </node>
-      <node id="10">
+      <node id="9">
         <label>unordered_map</label>
       </node>
-      <node id="11">
+      <node id="10">
         <label>unordered_set</label>
       </node>
-      <node id="14">
+      <node id="13">
         <label>vector</label>
       </node>
     </incdepgraph>
@@ -141,71 +134,70 @@
 <codeline lineno="8"><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8math_8types" kindref="compound">helios.math.types</ref>;</highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8game_8UpdateContext" kindref="compound">helios.engine.game.UpdateContext</ref>;</highlight></codeline>
-<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8game_8Updatable" kindref="compound">helios.engine.game.Updatable</ref>;</highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8game_8Component" kindref="compound">helios.engine.game.Component</ref>;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8game_8Component" kindref="compound">helios.engine.game.Component</ref>;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight></codeline>
-<codeline lineno="15" refid="namespacehelios_1_1engine_1_1game_1_1components" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1game_1_1components_1_1gameplay" kindref="compound">helios::engine::game::components::gameplay</ref><sp/>{</highlight></codeline>
-<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Component<sp/>for<sp/>handling<sp/>2D<sp/>aiming<sp/>direction<sp/>and<sp/>fire<sp/>frequency.</highlight></codeline>
-<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Receives<sp/>aim<sp/>direction<sp/>and<sp/>frequency<sp/>factor<sp/>from<sp/>Aim2DCommand.</highlight></codeline>
-<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Derived<sp/>classes<sp/>can<sp/>override<sp/>to<sp/>implement<sp/>specific<sp/>aiming<sp/>behaviors<sp/>such</highlight></codeline>
-<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>as<sp/>cannon<sp/>rotation<sp/>or<sp/>crosshair<sp/>positioning.</highlight></codeline>
-<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>This<sp/>is<sp/>a<sp/>base<sp/>implementation<sp/>with<sp/>empty<sp/>methods.<sp/>Derive<sp/>from<sp/>this</highlight></codeline>
-<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>class<sp/>to<sp/>implement<sp/>game-specific<sp/>aiming<sp/>logic.</highlight></codeline>
-<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="27" refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent" kindref="compound">Aim2DComponent</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1Component" kindref="compound">helios::engine::game::Component</ref><sp/>{</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"></highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Current<sp/>aim<sp/>direction<sp/>as<sp/>normalized<sp/>2D<sp/>vector.</highlight></codeline>
-<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="34" refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1ad4c2805e40da02108df2c0a016614510" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1math_1aeab5c7e555a142f8f763a3317460d5c0" kindref="member">helios::math::vec2f</ref><sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1ad4c2805e40da02108df2c0a016614510" kindref="member">direction_</ref>{0.0f,<sp/>0.0f};</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Current<sp/>frequency<sp/>factor<sp/>(0.0<sp/>to<sp/>1.0)<sp/>for<sp/>additional<sp/>fire<sp/>rate<sp/>control.</highlight></codeline>
-<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="39" refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1a09d423fa0f88492920879d5ba9b00ff7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1a09d423fa0f88492920879d5ba9b00ff7" kindref="member">frequency_</ref><sp/>=<sp/>0.0f;</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"></highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="42"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Sets<sp/>the<sp/>aim<sp/>direction<sp/>and<sp/>fire<sp/>frequency.</highlight></codeline>
-<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>direction<sp/>Normalized<sp/>2D<sp/>direction<sp/>vector.</highlight></codeline>
-<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>freq<sp/>Fire<sp/>frequency<sp/>factor<sp/>(0.0<sp/>to<sp/>1.0).</highlight></codeline>
-<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="49" refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1a5696a84a0cb97531794308f611082107" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1a5696a84a0cb97531794308f611082107" kindref="member">aim</ref>(<ref refid="namespacehelios_1_1math_1aeab5c7e555a142f8f763a3317460d5c0" kindref="member">helios::math::vec2f</ref><sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1a70bafe4a7bcc2e7f4de02ef6bb397ef6" kindref="member">direction</ref>,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>freq)<sp/>{</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1ad4c2805e40da02108df2c0a016614510" kindref="member">direction_</ref><sp/>=<sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1a70bafe4a7bcc2e7f4de02ef6bb397ef6" kindref="member">direction</ref>;</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1a09d423fa0f88492920879d5ba9b00ff7" kindref="member">frequency_</ref><sp/>=<sp/>freq;</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"></highlight></codeline>
-<codeline lineno="54"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="56"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>the<sp/>current<sp/>aim<sp/>direction.</highlight></codeline>
-<codeline lineno="57"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="58"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>Const<sp/>reference<sp/>to<sp/>the<sp/>normalized<sp/>2D<sp/>direction<sp/>vector.</highlight></codeline>
-<codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="60" refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1a70bafe4a7bcc2e7f4de02ef6bb397ef6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1math_1aeab5c7e555a142f8f763a3317460d5c0" kindref="member">helios::math::vec2f</ref>&amp;<sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1a70bafe4a7bcc2e7f4de02ef6bb397ef6" kindref="member">direction</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1ad4c2805e40da02108df2c0a016614510" kindref="member">direction_</ref>;</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="64"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="65"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>the<sp/>current<sp/>frequency<sp/>factor.</highlight></codeline>
-<codeline lineno="66"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>Fire<sp/>frequency<sp/>factor<sp/>in<sp/>range<sp/>[0.0,<sp/>1.0].</highlight></codeline>
-<codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="69" refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1a29dabd1db2928c448c427afb1fe1ec3d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1a29dabd1db2928c448c427afb1fe1ec3d" kindref="member">frequency</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1a09d423fa0f88492920879d5ba9b00ff7" kindref="member">frequency_</ref>;</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="14" refid="namespacehelios_1_1engine_1_1game_1_1components" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1game_1_1components_1_1gameplay" kindref="compound">helios::engine::game::components::gameplay</ref><sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Component<sp/>for<sp/>handling<sp/>2D<sp/>aiming<sp/>direction<sp/>and<sp/>fire<sp/>frequency.</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Receives<sp/>aim<sp/>direction<sp/>and<sp/>frequency<sp/>factor<sp/>from<sp/>Aim2DCommand.</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Derived<sp/>classes<sp/>can<sp/>override<sp/>to<sp/>implement<sp/>specific<sp/>aiming<sp/>behaviors<sp/>such</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>as<sp/>cannon<sp/>rotation<sp/>or<sp/>crosshair<sp/>positioning.</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>This<sp/>is<sp/>a<sp/>base<sp/>implementation<sp/>with<sp/>empty<sp/>methods.<sp/>Derive<sp/>from<sp/>this</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>class<sp/>to<sp/>implement<sp/>game-specific<sp/>aiming<sp/>logic.</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26" refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent" kindref="compound">Aim2DComponent</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1Component" kindref="compound">helios::engine::game::Component</ref><sp/>{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Current<sp/>aim<sp/>direction<sp/>as<sp/>normalized<sp/>2D<sp/>vector.</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33" refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1ad4c2805e40da02108df2c0a016614510" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1math_1aeab5c7e555a142f8f763a3317460d5c0" kindref="member">helios::math::vec2f</ref><sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1ad4c2805e40da02108df2c0a016614510" kindref="member">direction_</ref>{0.0f,<sp/>0.0f};</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Current<sp/>frequency<sp/>factor<sp/>(0.0<sp/>to<sp/>1.0)<sp/>for<sp/>additional<sp/>fire<sp/>rate<sp/>control.</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38" refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1a09d423fa0f88492920879d5ba9b00ff7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1a09d423fa0f88492920879d5ba9b00ff7" kindref="member">frequency_</ref><sp/>=<sp/>0.0f;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Sets<sp/>the<sp/>aim<sp/>direction<sp/>and<sp/>fire<sp/>frequency.</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>direction<sp/>Normalized<sp/>2D<sp/>direction<sp/>vector.</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>freq<sp/>Fire<sp/>frequency<sp/>factor<sp/>(0.0<sp/>to<sp/>1.0).</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1a5696a84a0cb97531794308f611082107" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1a5696a84a0cb97531794308f611082107" kindref="member">aim</ref>(<ref refid="namespacehelios_1_1math_1aeab5c7e555a142f8f763a3317460d5c0" kindref="member">helios::math::vec2f</ref><sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1a70bafe4a7bcc2e7f4de02ef6bb397ef6" kindref="member">direction</ref>,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>freq)<sp/>{</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1ad4c2805e40da02108df2c0a016614510" kindref="member">direction_</ref><sp/>=<sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1a70bafe4a7bcc2e7f4de02ef6bb397ef6" kindref="member">direction</ref>;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1a09d423fa0f88492920879d5ba9b00ff7" kindref="member">frequency_</ref><sp/>=<sp/>freq;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>the<sp/>current<sp/>aim<sp/>direction.</highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="57"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>Const<sp/>reference<sp/>to<sp/>the<sp/>normalized<sp/>2D<sp/>direction<sp/>vector.</highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59" refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1a70bafe4a7bcc2e7f4de02ef6bb397ef6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1math_1aeab5c7e555a142f8f763a3317460d5c0" kindref="member">helios::math::vec2f</ref>&amp;<sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1a70bafe4a7bcc2e7f4de02ef6bb397ef6" kindref="member">direction</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1ad4c2805e40da02108df2c0a016614510" kindref="member">direction_</ref>;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="63"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="64"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>the<sp/>current<sp/>frequency<sp/>factor.</highlight></codeline>
+<codeline lineno="65"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>Fire<sp/>frequency<sp/>factor<sp/>in<sp/>range<sp/>[0.0,<sp/>1.0].</highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68" refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1a29dabd1db2928c448c427afb1fe1ec3d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1a29dabd1db2928c448c427afb1fe1ec3d" kindref="member">frequency</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent_1a09d423fa0f88492920879d5ba9b00ff7" kindref="member">frequency_</ref>;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
 <codeline lineno="73"><highlight class="normal"></highlight></codeline>
-<codeline lineno="74"><highlight class="normal"></highlight></codeline>
-<codeline lineno="75"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="include/helios/engine/game/components/gameplay/Aim2DComponent.ixx"/>
   </compounddef>

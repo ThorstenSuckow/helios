@@ -5,7 +5,7 @@
 module;
 
 #include <cassert>
-
+#include <cmath>
 
 export module helios.engine.game.components.physics.DirectionComponent;
 
@@ -41,7 +41,7 @@ export namespace helios::engine::game::components::physics {
          * @param direction The new normalized direction vector.
          */
         void setDirection(const helios::math::vec3f direction) noexcept {
-            assert(1.0f - direction.length() <= helios::math::EPSILON_LENGTH
+            assert(std::abs(1.0f - direction.length()) <= helios::math::EPSILON_LENGTH
                 && "direction must be normalized");
             direction_ = direction;
         }

@@ -1,4 +1,4 @@
-/**
+t/**
  * @file _module.ixx
  * @brief Aggregate module for helios::engine::game namespace.
  */
@@ -12,6 +12,8 @@ export import helios.engine.game.InputSnapshot;
 // Component system
 export import helios.engine.game.Component;
 export import helios.engine.game.GameObject;
+export import helios.engine.game.GameObjectFilterType;
+export import helios.engine.game.GameObjectPool;
 export import helios.engine.game.GameWorld;
 
 // level

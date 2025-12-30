@@ -154,6 +154,13 @@ export namespace helios::math {
         [[nodiscard]] vec4<T> toVec4() const noexcept;
 
         /**
+         * @brief Converts this 3D vector to a 2D vector by discarding the z-component.
+         *
+         * @return A new vec2<T> instance with components (x, y).
+         */
+        [[nodiscard]] vec2<T> toVec2() const noexcept;
+
+        /**
          * @brief Converts this 3D vector to a 4D homogeneous vector.
          *
          * @details
@@ -390,6 +397,11 @@ export namespace helios::math {
     }
 
     template<helios::math::Numeric T>
+    inline vec2<T> vec3<T>::toVec2() const noexcept {
+        return vec2<T>{v[0], v[1]};
+    }
+
+    template<helios::math::Numeric T>
     inline vec4<T> vec3<T>::toVec4(T w) const noexcept {
         return vec4<T>{v[0], v[1], v[2], w};
     }
@@ -431,5 +443,14 @@ export namespace helios::math {
      * @brief Double-precision floating-point 3D vector.
      */
     using vec3d = vec3<double>;
+
+    /**
+     * @brief Unit vector along the positive Z-axis (0, 0, 1).
+     *
+     * @details Commonly used as the default "forward" direction in helios's
+     * left-handed coordinate system.
+     */
+    inline constexpr vec3f Z_AXISf{0.0f, 0.0f, 1.0f};
+
 
 } // namespace helios::math

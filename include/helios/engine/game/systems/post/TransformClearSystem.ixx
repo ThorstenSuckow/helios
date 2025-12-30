@@ -4,6 +4,8 @@
  */
 module;
 
+#include <helios/engine/game/GameObjectView.h>
+
 export module helios.engine.game.systems.post.TransformClearSystem;
 
 import helios.engine.game.GameWorld;
@@ -35,19 +37,13 @@ export namespace helios::engine::game::systems::post {
          */
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
-            auto& gameObjects = gameWorld_->gameObjects();
-
-            for (auto& gameObjectPair : gameObjects) {
-
-                auto* gameObject = gameObjectPair.second.get();
-                auto* tc = gameObject->get<helios::engine::game::components::physics::TransformComponent>();
-
-                if (!tc || !tc->isDirty()) {
-                    continue;
-                }
+            for (auto [entity, tc] : gameWorld_->find<
+                helios::engine::game::components::physics::TransformComponent
+                >().each()) {
 
                 tc->clearDirty();
             }
+
 
         }
 

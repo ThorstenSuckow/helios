@@ -4,6 +4,7 @@
  */
 module;
 
+#include <helios/engine/game/GameObjectView.h>
 
 export module helios.engine.game.systems.physics.BoundsUpdateSystem;
 
@@ -16,8 +17,10 @@ import helios.engine.game.GameObject;
 import helios.engine.game.GameWorld;
 import helios.engine.game.UpdateContext;
 
+import helios.engine.game.components.scene.SceneNodeComponent;
 import helios.engine.game.components.physics.ScaleComponent;
-import helios.engine.game.components.physics.TransformComponent;
+import helios.engine.game.components.physics.TranslationStateComponent;
+import helios.engine.game.components.physics.RotationStateComponent;
 import helios.engine.game.components.physics.AabbColliderComponent;
 
 import helios.engine.game.components.model.ModelAabbComponent;
@@ -25,16 +28,20 @@ import helios.engine.game.components.model.ModelAabbComponent;
 export namespace helios::engine::game::systems::physics {
 
     /**
-     * @brief System that updates AABB colliders based on entity world transforms.
+     * @brief System that updates AABB colliders based on entity transforms.
      *
      * @details
-     * This system iterates through all GameObjects that have:
-     * - ModelAabbComponent (source AABB)
-     * - TransformComponent (world transform)
-     * - AabbColliderComponent (target collider)
+     * This system recalculates the world-space AABB for entities by transforming
+     * the canonical model AABB through the composed local transform (Translation * Rotation * Scale)
+     * and the parent's world transform.
      *
-     * When the TransformComponent is marked dirty, the system transforms the
-     * model AABB into world space and updates the collider bounds.
+     * Required components:
+     * - ModelAabbComponent (source canonical AABB)
+     * - SceneNodeComponent (for parent world transform)
+     * - TranslationStateComponent (local translation)
+     * - ScaleComponent (local scaling)
+     * - RotationStateComponent (local rotation)
+     * - AabbColliderComponent (receives the updated world-space AABB)
      */
     class BoundsUpdateSystem : public System {
 
@@ -43,27 +50,39 @@ export namespace helios::engine::game::systems::physics {
         /**
          * @brief Updates collider bounds for all applicable entities.
          *
+         * @details
+         * For each entity with the required components, composes the local transform
+         * from translation, rotation, and scale, then applies the parent world transform
+         * to compute the final world-space AABB.
+         *
          * @param updateContext Context containing deltaTime and other frame data.
          */
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
-            const auto& gameObjects = gameWorld_->gameObjects();
+            for (auto [entity, mab, sc, tsc, sca, rsc, bc] : gameWorld_->find<
+                helios::engine::game::components::model::ModelAabbComponent,
+                helios::engine::game::components::scene::SceneNodeComponent,
+                helios::engine::game::components::physics::TranslationStateComponent,
+                helios::engine::game::components::physics::ScaleComponent,
+                helios::engine::game::components::physics::RotationStateComponent,
+                helios::engine::game::components::physics::AabbColliderComponent
+            >().each()) {
 
-            for (auto& gameObjectPair : gameObjects) {
+                const helios::math::mat4f& parentTransform = sc->sceneNode()->parent()->worldTransform();
 
-                auto* obj = gameObjectPair.second.get();
+                helios::math::vec3f localTranslation = tsc->translation();
+                helios::math::mat4f localRotation    = rsc->rotation();
+                helios::math::vec3f localScaling     = sca->scaling();
 
-                auto* mab = obj->get<helios::engine::game::components::model::ModelAabbComponent>();
-                auto* tc = obj->get<helios::engine::game::components::physics::TransformComponent>();
-                auto* bc = obj->get<helios::engine::game::components::physics::AabbColliderComponent>();
+                helios::math::mat4f mScaling     = helios::math::mat4f::identity().withScaling(localScaling);
+                helios::math::mat4f mTranslation = helios::math::mat4f::identity().withTranslation(localTranslation);
 
-                if (bc && tc && tc->isDirty()) {
-                    bc->setBounds(mab->aabb().applyTransform(tc->worldTransform()));
-                }
+                helios::math::mat4f localTransform =  mTranslation * (localRotation * mScaling);
 
+                bc->setBounds(mab->aabb().applyTransform(parentTransform * localTransform));
             }
         }
 
     };
 
-};
+}

@@ -7,6 +7,7 @@ This module provides the foundational architecture for game logic in helios. It 
 The `GameWorld` serves as the central registry for all entities and systems. It manages:
 - **GameObjects**: Individual game entities identified by unique `Guid`.
 - **Systems**: Global logic processors for cross-cutting concerns (physics, collision, pooling).
+- **GameObjectPool**: Memory-efficient object pooling for frequently spawned/despawned entities.
 
 Systems are updated each frame after all GameObjects, providing a clear execution order.
 

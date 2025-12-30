@@ -44,7 +44,7 @@ export namespace helios::engine::game::commands {
         /**
          * @brief Constructs an aim command with direction and frequency.
          *
-         * @param direction Normalized 2D direction vector from analog stick.
+         * @param direction Normalized 2D direction vector.
          * @param freqFactor Magnitude of the stick input (0.0 to 1.0).
          */
         explicit Aim2DCommand(

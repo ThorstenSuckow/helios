@@ -43,6 +43,24 @@ A complete game loop example featuring:
 
 ---
 
+### 4. Spaceship Shooting
+
+**Location:** `spaceship_shooting/`
+
+A twin-stick shooter example extending Spaceship Control with:
+- Component-based architecture with helios game framework
+- Projectile pooling system for efficient bullet management
+- Aiming and shooting via right analog stick
+- Level bounds with bounce behavior
+- 2D collision detection via AABB
+
+**Controls:**
+- Left Stick - Move/Rotate spaceship
+- Right Stick - Aim and fire projectiles
+- ESC - Exit application
+
+---
+
 ## Building the Examples
 
 All examples are automatically built when you build the helios project.
@@ -203,7 +221,8 @@ We recommend exploring examples in this order:
 
 1. **simple_cube_rendering** - Core rendering concepts
 2. **game_controller_input** - Input handling
-3. _(More examples coming soon...)_
+3. **spaceship_control** - Game loop, command pattern, ImGui overlay
+4. **spaceship_shooting** - Component system, projectile pooling, collision
 
 ## Further Resources
 

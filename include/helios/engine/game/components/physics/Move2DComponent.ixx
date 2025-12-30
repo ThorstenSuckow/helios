@@ -1,6 +1,6 @@
 /**
  * @file Move2DComponent.ixx
- * @brief Component for 2D physics-based movement with rotation.
+ * @brief Component for 2D physics-based movement .
  */
 module;
 
@@ -24,16 +24,21 @@ import helios.engine.game.components.scene.SceneNodeComponent;
 export namespace helios::engine::game::components::physics {
 
     /**
-     * @brief Component for 2D physics-based movement with rotation.
+     * @brief Component for 2D physics-based movement.
      *
      * @details
      * Stores configuration and runtime state for 2D physics-based movement.
-     * This component is used by the movement system to apply smooth acceleration,
-     * deceleration, and rotation to the entity.
+     * This component is used by the Move2DSystem to apply smooth acceleration
+     * and deceleration to the entity.
      *
      * The component receives input via move() which sets target direction and throttle.
      * The actual physics simulation (integration of velocity, application of dampening)
-     * is performed by the Movement2DSystem.
+     * is performed by the Move2DSystem.
+     *
+     * @note Rotation/heading is handled separately by HeadingComponent and HeadingSystem.
+     *
+     * @see helios::engine::game::components::physics::HeadingComponent
+     * @see helios::engine::game::systems::physics::Move2DSystem
      */
     class Move2DComponent : public helios::engine::game::Component {
 
@@ -44,20 +49,12 @@ export namespace helios::engine::game::components::physics {
         // Default Physics Constants
         // ========================================
 
-        /**
-         * @brief Default maximum rotation speed in degrees per second.
-         */
-        static constexpr float DEFAULT_ROTATION_SPEED = 560.0f;
 
         /**
          * @brief Default minimum movement speed before the ship stops completely.
          */
         static constexpr float DEFAULT_MOVEMENT_SPEED_THRESHOLD = 0.1f;
 
-        /**
-         * @brief Default minimum rotation speed before rotation stops completely.
-         */
-        static constexpr float DEFAULT_ROTATION_SPEED_THRESHOLD = 0.1f;
 
         /**
          * @brief Default movement acceleration in units per second squared.
@@ -69,39 +66,21 @@ export namespace helios::engine::game::components::physics {
          */
         static constexpr float DEFAULT_MOVEMENT_SPEED = 30.0f;
 
-        /**
-         * @brief Default exponential decay factor for rotation when input stops.
-         */
-        static constexpr float DEFAULT_ROTATION_DAMPENING = 0.0001f;
 
         /**
          * @brief Default exponential decay factor for movement when input stops.
          */
         static constexpr float DEFAULT_MOVEMENT_DAMPENING = 0.1f;
 
-        /**
-         * @brief Default base rotation speed multiplier.
-         */
-        static constexpr float DEFAULT_BASE_ROTATION_SPEED_MULTIPLIER = 16.0f;
 
         // ========================================
         // Configurable Physics Parameters
         // ========================================
 
         /**
-         * @brief Maximum rotation speed in degrees per second.
-         */
-        float rotationSpeed_ = DEFAULT_ROTATION_SPEED;
-
-        /**
          * @brief Minimum movement speed before the ship stops completely.
          */
         float movementSpeedThreshold_ = DEFAULT_MOVEMENT_SPEED_THRESHOLD;
-
-        /**
-         * @brief Minimum rotation speed before rotation stops completely.
-         */
-        float rotationSpeedThreshold_ = DEFAULT_ROTATION_SPEED_THRESHOLD;
 
         /**
          * @brief Movement acceleration in units per second squared.
@@ -113,20 +92,11 @@ export namespace helios::engine::game::components::physics {
          */
         float movementSpeed_ = DEFAULT_MOVEMENT_SPEED;
 
-        /**
-         * @brief Exponential decay factor for rotation when input stops.
-         */
-        float rotationDampening_ = DEFAULT_ROTATION_DAMPENING;
 
         /**
          * @brief Exponential decay factor for movement when input stops.
          */
         float movementDampening_ = DEFAULT_MOVEMENT_DAMPENING;
-
-        /**
-         * @brief Base rotation speed multiplier.
-         */
-        float baseRotationSpeedMultiplier_ = DEFAULT_BASE_ROTATION_SPEED_MULTIPLIER;
 
         // ========================================
         // Runtime State Variables
@@ -136,26 +106,6 @@ export namespace helios::engine::game::components::physics {
          * @brief Current movement speed after applying input and dampening.
          */
         float currentMovementSpeed_ = 0.0f;
-
-        /**
-         * @brief Current rotation angle in degrees.
-         */
-        float currentRotationAngle_ = 0;
-
-        /**
-         * @brief Target rotation angle derived from input direction.
-         */
-        float targetRotationAngle_  = 0;
-
-        /**
-         * @brief Shortest angular distance to target rotation.
-         */
-        float rotationAngleDelta_ = 0;
-
-        /**
-         * @brief Current rotation speed after applying input and dampening.
-         */
-        float currentRotationSpeed_ = 0.0f;
 
         /**
          * @brief Indicates whether input is currently being received.
@@ -180,17 +130,26 @@ export namespace helios::engine::game::components::physics {
 
     public:
 
+        /**
+         * @brief Default constructor with default physics parameters.
+         */
+        Move2DComponent() = default;
+
+        /**
+         * @brief Constructs a Move2DComponent with a specified movement speed.
+         *
+         * @param movementSpeed The maximum movement speed in units per second.
+         */
+        explicit Move2DComponent(float movementSpeed) : movementSpeed_(movementSpeed) {}
+
 
         /**
          * @brief Sets the movement direction and throttle.
          *
-         * @details Updates the target rotation angle based on the input direction
-         * and calculates the shortest angular distance to the target.
-         *
-         * @param direction Normalized 2D direction vector from analog stick.
+         * @param direction Normalized 3D direction vector.
          * @param throttle Magnitude of the stick input (0.0 to 1.0).
          */
-        void move(helios::math::vec2f direction, float throttle) {
+        void move(helios::math::vec3f direction, float throttle) {
             if (throttle <= helios::math::EPSILON_LENGTH) {
                 steeringInput_ = helios::math::vec2f{0.0f, 0.0f};
                 throttle_ = 0.0f;
@@ -198,31 +157,16 @@ export namespace helios::engine::game::components::physics {
                 return;
             }
 
-            steeringInput_ = direction;
+            steeringInput_ = direction.toVec2();
             throttle_ = throttle;
 
             assert(std::abs(direction.length() - 1.0f) <= 0.001f && "Unexpected direction vector - not normalized");
-
-
-            targetRotationAngle_ = helios::math::degrees(std::atan2(direction[1], direction[0]));
-            rotationAngleDelta_ = std::fmod((targetRotationAngle_ - currentRotationAngle_) + 540.0f, 360.0f) - 180.0f;
-
+            
 
             isInputActive_ = true;
 
-            float turnBoost = 1.0f + 0.5f*std::clamp((abs(rotationAngleDelta_))/180.f, 0.0f, 1.0f);
-            currentRotationSpeed_ = turnBoost * rotationSpeed_ * throttle_;
             currentMovementSpeed_ = movementSpeed_ * throttle_;
 
-        }
-
-        /**
-         * @brief Sets the current rotation speed.
-         *
-         * @param speed The new rotation speed.
-         */
-        void setCurrentRotationSpeed(float speed) noexcept {
-            currentRotationSpeed_ = speed;
         }
 
         /**
@@ -234,25 +178,6 @@ export namespace helios::engine::game::components::physics {
             velocity_ = velocity;
         }
 
-
-        /**
-         * @brief Returns the current rotation speed.
-         *
-         * @return The current rotation speed.
-         */
-        [[nodiscard]] float currentRotationSpeed() const noexcept {
-            return currentRotationSpeed_;
-        }
-
-        /**
-         * @brief Returns the angular distance to the target rotation.
-         *
-         * @return The angle delta in degrees.
-         */
-        [[nodiscard]] float rotationAngleDelta() const noexcept {
-            return rotationAngleDelta_;
-        }
-
         /**
          * @brief Returns the current movement speed.
          *
@@ -260,42 +185,6 @@ export namespace helios::engine::game::components::physics {
          */
         [[nodiscard]] float currentMovementSpeed() const noexcept {
             return currentMovementSpeed_;
-        }
-
-        /**
-         * @brief Returns the current rotation angle.
-         *
-         * @return The current rotation angle in degrees.
-         */
-        [[nodiscard]] float currentRotationAngle() const noexcept {
-            return currentRotationAngle_;
-        }
-
-        /**
-         * @brief Returns the target rotation angle.
-         *
-         * @return The target rotation angle in degrees.
-         */
-        [[nodiscard]] float targetRotationAngle() const noexcept {
-            return targetRotationAngle_;
-        }
-
-        /**
-         * @brief Sets the current rotation angle.
-         *
-         * @param angle The new rotation angle in degrees.
-         */
-        void setCurrentRotationAngle(float angle) noexcept {
-            currentRotationAngle_ = angle;
-        }
-
-        /**
-         * @brief Sets the angular distance to the target rotation.
-         *
-         * @param delta The new angle delta in degrees.
-         */
-        void setRotationAngleDelta(float delta) noexcept {
-            rotationAngleDelta_ = delta;
         }
 
         /**
@@ -361,25 +250,11 @@ export namespace helios::engine::game::components::physics {
         // ========================================
 
         /**
-         * @brief Returns the maximum rotation speed in degrees per second.
-         *
-         * @return Maximum rotation speed value.
-         */
-        [[nodiscard]] float rotationSpeed() const noexcept { return rotationSpeed_; }
-
-        /**
          * @brief Returns the minimum movement speed threshold.
          *
          * @return Movement speed threshold below which movement stops.
          */
         [[nodiscard]] float movementSpeedThreshold() const noexcept { return movementSpeedThreshold_; }
-
-        /**
-         * @brief Returns the minimum rotation speed threshold.
-         *
-         * @return Rotation speed threshold below which rotation stops.
-         */
-        [[nodiscard]] float rotationSpeedThreshold() const noexcept { return rotationSpeedThreshold_; }
 
         /**
          * @brief Returns the movement acceleration in units per second squared.
@@ -396,13 +271,6 @@ export namespace helios::engine::game::components::physics {
         [[nodiscard]] float movementSpeed() const noexcept { return movementSpeed_; }
 
         /**
-         * @brief Returns the rotation dampening factor.
-         *
-         * @return Exponential decay factor for rotation.
-         */
-        [[nodiscard]] float rotationDampening() const noexcept { return rotationDampening_; }
-
-        /**
          * @brief Returns the movement dampening factor.
          *
          * @return Exponential decay factor for movement.
@@ -415,25 +283,12 @@ export namespace helios::engine::game::components::physics {
         // ========================================
 
         /**
-         * @brief Sets the maximum rotation speed in degrees per second.
-         *
-         * @param value New rotation speed value.
-         */
-        void setRotationSpeed(float value) noexcept { rotationSpeed_ = value; }
-
-        /**
          * @brief Sets the minimum movement speed threshold.
          *
          * @param value New threshold value.
          */
         void setMovementSpeedThreshold(float value) noexcept { movementSpeedThreshold_ = value; }
 
-        /**
-         * @brief Sets the minimum rotation speed threshold.
-         *
-         * @param value New threshold value.
-         */
-        void setRotationSpeedThreshold(float value) noexcept { rotationSpeedThreshold_ = value; }
 
         /**
          * @brief Sets the movement acceleration in units per second squared.
@@ -450,13 +305,6 @@ export namespace helios::engine::game::components::physics {
         void setMovementSpeed(float value) noexcept { movementSpeed_ = value; }
 
         /**
-         * @brief Sets the rotation dampening factor.
-         *
-         * @param value New dampening factor (exponential decay).
-         */
-        void setRotationDampening(float value) noexcept { rotationDampening_ = value; }
-
-        /**
          * @brief Sets the movement dampening factor.
          *
          * @param value New dampening factor (exponential decay).
@@ -471,12 +319,9 @@ export namespace helios::engine::game::components::physics {
          * @brief Resets all physics parameters to their default values.
          */
         void resetToDefaults() noexcept {
-            rotationSpeed_ = DEFAULT_ROTATION_SPEED;
             movementSpeedThreshold_ = DEFAULT_MOVEMENT_SPEED_THRESHOLD;
-            rotationSpeedThreshold_ = DEFAULT_ROTATION_SPEED_THRESHOLD;
             movementAcceleration_ = DEFAULT_MOVEMENT_ACCELERATION;
             movementSpeed_ = DEFAULT_MOVEMENT_SPEED;
-            rotationDampening_ = DEFAULT_ROTATION_DAMPENING;
             movementDampening_ = DEFAULT_MOVEMENT_DAMPENING;
         }
     };

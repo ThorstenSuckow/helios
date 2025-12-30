@@ -8,7 +8,6 @@ export module helios.engine.game.components.gameplay.Aim2DComponent;
 
 import helios.math.types;
 import helios.engine.game.UpdateContext;
-import helios.engine.game.Updatable;
 import helios.engine.game.Component;
 
 

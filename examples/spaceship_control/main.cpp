@@ -96,11 +96,17 @@ import helios.engine.game.UpdateContext;
 import helios.engine.game.components.scene.SceneNodeComponent;
 import helios.engine.game.components.input.TwinStickInputComponent;
 import helios.engine.game.components.physics.Move2DComponent;
+import helios.engine.game.components.physics.RotationStateComponent;
+import helios.engine.game.components.physics.TranslationStateComponent;
+import helios.engine.game.components.physics.HeadingComponent;
+import helios.engine.game.components.physics.DirectionComponent;
 import helios.engine.game.components.physics.TransformComponent;
 import helios.engine.game.components.physics.ScaleComponent;
 
 import helios.engine.game.systems.physics.Move2DSystem;
 import helios.engine.game.systems.physics.ScaleSystem;
+import helios.engine.game.systems.physics.HeadingSystem;
+import helios.engine.game.systems.physics.ComposeTransformSystem;
 import helios.engine.game.systems.scene.SceneSyncSystem;
 import helios.engine.game.systems.post.TransformClearSystem;
 import helios.engine.game.systems.post.ScaleClearSystem;
@@ -336,7 +342,11 @@ int main() {
     shipGameObject->add<helios::engine::game::components::scene::SceneNodeComponent>(spaceshipSceneNode);
     shipGameObject->add<helios::engine::game::components::input::TwinStickInputComponent>();
     shipGameObject->add<helios::engine::game::components::physics::Move2DComponent>();
+    shipGameObject->add<helios::engine::game::components::physics::HeadingComponent>();
+    shipGameObject->add<helios::engine::game::components::physics::DirectionComponent>();
     shipGameObject->add<helios::engine::game::components::physics::TransformComponent>();
+    shipGameObject->add<helios::engine::game::components::physics::TranslationStateComponent>();
+    shipGameObject->add<helios::engine::game::components::physics::RotationStateComponent>();
     shipGameObject->add<helios::engine::game::components::physics::ScaleComponent>(
         SPACESHIP_SIZE, SPACESHIP_SIZE, 0.0f, helios::core::units::Unit::Meter);
     auto* theShipPtr = gameWorld.addGameObject(std::move(shipGameObject));
@@ -353,11 +363,13 @@ int main() {
     std::ignore = gameWorld.addGameObject(std::move(gridGameObject));
 
     // register the game systems
-    gameWorld.add<helios::engine::game::systems::physics::ScaleSystem>();
-    gameWorld.add<helios::engine::game::systems::physics::Move2DSystem>();
-    gameWorld.add<helios::engine::game::systems::scene::SceneSyncSystem>(scene.get());
-    gameWorld.add<helios::engine::game::systems::post::TransformClearSystem>();
-    gameWorld.add<helios::engine::game::systems::post::ScaleClearSystem>();
+    gameWorld.addSystem<helios::engine::game::systems::physics::ScaleSystem>();
+    gameWorld.addSystem<helios::engine::game::systems::physics::Move2DSystem>();
+    gameWorld.addSystem<helios::engine::game::systems::physics::HeadingSystem>();
+    gameWorld.addSystem<helios::engine::game::systems::physics::ComposeTransformSystem>();
+    gameWorld.addSystem<helios::engine::game::systems::scene::SceneSyncSystem>(scene.get());
+    gameWorld.addSystem<helios::engine::game::systems::post::TransformClearSystem>();
+    gameWorld.addSystem<helios::engine::game::systems::post::ScaleClearSystem>();
 
 
 

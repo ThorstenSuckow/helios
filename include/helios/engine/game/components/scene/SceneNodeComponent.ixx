@@ -15,7 +15,7 @@ import helios.core.units;
 import helios.engine.game.Component;
 import helios.engine.game.GameObject;
 
-import helios.engine.game.components.model.ModelAabbComponent;
+import helios.engine.game.components.rendering.RenderableComponent;
 
 
 export namespace helios::engine::game::components::scene {
@@ -35,16 +35,13 @@ export namespace helios::engine::game::components::scene {
     protected:
 
         /**
-         * @brief The initial AABB of the model associated with the SceneNode.
-         */
-        helios::math::aabbf aabb_{};
-
-        /**
          * @brief Non-owning pointer to the associated SceneNode.
          */
         helios::scene::SceneNode* sceneNode_;
 
     public:
+
+
 
         /**
          * @brief Constructs a SceneNodeComponent linked to a SceneNode.
@@ -55,9 +52,6 @@ export namespace helios::engine::game::components::scene {
             sceneNode_(sceneNode)  {
 
             assert(sceneNode_ != nullptr && "sceneNode must not be nullptr");
-            aabb_ = sceneNode->renderable() && sceneNode->renderable()->renderPrototype()
-                  ? sceneNode->renderable()->renderPrototype()->mesh().aabb()
-                  : helios::math::aabbf{};
         }
 
         /**
@@ -72,9 +66,26 @@ export namespace helios::engine::game::components::scene {
         void onAttach(helios::engine::game::GameObject* gameObject) noexcept override {
             Component::onAttach(gameObject);
 
-            auto& msc = gameObject->getOrAdd<helios::engine::game::components::model::ModelAabbComponent>();
+            // this will automatically create the RenderableComponent if not alreay registered
+            gameObject->getOrAdd<helios::engine::game::components::rendering::RenderableComponent>(sceneNode_->renderable());
+        }
 
-            msc.setAabb(aabb_);
+        /**
+         * @brief Called when the owning GameObject becomes active.
+         *
+         * @details Activates the underlying SceneNode so it is included in rendering.
+         */
+        void onActivate() noexcept override {
+            sceneNode_->setActive(true);
+        }
+
+        /**
+         * @brief Called when the owning GameObject becomes inactive.
+         *
+         * @details Deactivates the underlying SceneNode so it is excluded from rendering.
+         */
+        void onDeactivate() noexcept override {
+            sceneNode_->setActive(false);
         }
 
         /**

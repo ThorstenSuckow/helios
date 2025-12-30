@@ -65,7 +65,7 @@ export namespace helios::engine::game::commands {
             auto* moveComponent2D = gameObject.get<helios::engine::game::components::physics::Move2DComponent>();
 
             if (moveComponent2D) {
-                moveComponent2D->move(direction_, speedFactor_);
+                moveComponent2D->move(direction_.toVec3(), speedFactor_);
             }
 
         }

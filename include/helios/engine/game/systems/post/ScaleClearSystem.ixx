@@ -4,13 +4,14 @@
  */
 module;
 
+#include <helios/engine/game/GameObjectView.h>
+
 export module helios.engine.game.systems.post.ScaleClearSystem;
 
 import helios.engine.game.GameWorld;
 import helios.engine.game.System;
 import helios.engine.game.UpdateContext;
 
-import helios.engine.game.components.scene.SceneNodeComponent;
 import helios.engine.game.components.physics.ScaleComponent;
 
 
@@ -25,9 +26,7 @@ export namespace helios::engine::game::systems::post {
      */
     class ScaleClearSystem : public System {
 
-
     public:
-
 
         /**
          * @brief Updates the system, clearing dirty flags.
@@ -36,17 +35,7 @@ export namespace helios::engine::game::systems::post {
          */
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
-            auto& gameObjects = gameWorld_->gameObjects();
-
-            for (auto& gameObjectPair : gameObjects) {
-
-                auto* gameObject = gameObjectPair.second.get();
-                auto* sc = gameObject->get<helios::engine::game::components::physics::ScaleComponent>();
-
-                if (!sc || !sc->isDirty()) {
-                    continue;
-                }
-
+            for (auto [entity, sc] : gameWorld_->find<helios::engine::game::components::physics::ScaleComponent>().each()) {
                 sc->clearDirty();
             }
 

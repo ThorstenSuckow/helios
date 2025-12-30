@@ -5,6 +5,7 @@
 module;
 
 #include <cassert>
+#include <helios/engine/game/GameObjectView.h>
 
 export module helios.engine.game.systems.scene.SceneSyncSystem;
 
@@ -52,14 +53,15 @@ export namespace helios::engine::game::systems::scene {
          */
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
-            auto& gameObjects = gameWorld_->gameObjects();
+            auto view = gameWorld_->find<
+                helios::engine::game::components::physics::TransformComponent,
+                helios::engine::game::components::scene::SceneNodeComponent
+            >();
 
-            for (auto& gameObjectPair : gameObjects) {
-                auto* gameObject = gameObjectPair.second.get();
-                auto* tc = gameObject->get<helios::engine::game::components::physics::TransformComponent>();
-                auto* nc = gameObject->get<helios::engine::game::components::scene::SceneNodeComponent>();
+            // First pass: push local transforms from TransformComponent to SceneNode
+            for (auto [entity, tc, nc] : view.each()) {
 
-                if (!tc || !nc || !tc->isDirty()) {
+                if (!tc->isDirty()) {
                     continue;
                 }
 
@@ -73,15 +75,13 @@ export namespace helios::engine::game::systems::scene {
                 sceneNode->setTranslation(tc->localTranslation());
             }
 
-            // propagate changes and update the nodes
+            // Propagate changes and update the nodes
             scene_->updateNodes();
 
-            for (auto& gameObjectPair : gameObjects) {
-                auto* gameObject = gameObjectPair.second.get();
-                auto* tc = gameObject->get<helios::engine::game::components::physics::TransformComponent>();
-                auto* nc = gameObject->get<helios::engine::game::components::scene::SceneNodeComponent>();
+            // Second pass: read back world transforms from SceneNode to TransformComponent
+            for (auto [entity, tc, nc] : view.each()) {
 
-                if (!tc || !nc || !tc->isDirty()) {
+                if (!tc->isDirty()) {
                     continue;
                 }
 

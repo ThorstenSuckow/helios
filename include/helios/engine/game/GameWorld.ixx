@@ -4,18 +4,29 @@
  */
 module;
 
+// NOTE: GameObjectView is intentionally a .h header instead of a .ixx module interface.
+// Using it as a module interface unit causes Internal Compiler Errors (ICE) in MSVC
+// (VS2022/VS2026) when structured bindings are used with the each() iterator.
+// The workaround is to include it in the global module fragment.
+#include <helios/engine/game/GameObjectView.h>
 #include <memory>
+#include <type_traits>
 #include <unordered_map>
+#include <utility>
+#include <vector>
 
 export module helios.engine.game.GameWorld;
 
 import helios.engine.game.GameObject;
+
 import helios.util.Guid;
 import helios.engine.game.UpdateContext;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
 import helios.engine.game.System;
 import helios.engine.game.Level;
+
+import helios.engine.game.GameObjectFilterType;
 
 #define HELIOS_LOG_SCOPE "helios::engine::game::GameWorld"
 export namespace helios::engine::game {
@@ -35,6 +46,27 @@ export namespace helios::engine::game {
      * - **Update Loop:** Orchestrates the frame update by updating GameObjects and then Systems.
      */
     class GameWorld {
+
+        /** @brief Internal map type for GameObject storage. */
+        using Map = std::unordered_map<helios::util::Guid, std::unique_ptr<GameObject>>;
+
+        /**
+         * @brief Lazy range type for component-filtered GameObject iteration.
+         *
+         * @details
+         * This alias wraps GameObjectView with the appropriate map and component types.
+         * The view filters GameObjects on-the-fly during iteration, yielding only
+         * those that possess all specified component types.
+         *
+         * @note GameObjectView is included as a .h header in the global module fragment
+         *       due to MSVC ICE issues when used as a .ixx module interface unit.
+         *
+         * @tparam MapT The map type (const or non-const).
+         * @tparam Cs The component types to filter by.
+         */
+        template<class MapT, class... Cs>
+        using GameObjectRange = GameObjectView<MapT, helios::engine::game::GameObject, Cs...>;
+
 
     protected:
         /**
@@ -70,7 +102,9 @@ export namespace helios::engine::game {
 
     public:
 
-
+        /**
+         * @brief Constructs an empty GameWorld with no entities, systems, or level.
+         */
         explicit GameWorld() = default;
 
 
@@ -119,7 +153,10 @@ export namespace helios::engine::game {
          * @note The GameWorld takes ownership of the System.
          */
         template<typename T, typename... Args>
-        T& add(Args&&... args) {
+        T& addSystem(Args&&... args) {
+
+            assert(!hasSystem<T>() && "System already registered with GameWorld");
+
             auto system_ptr = std::make_unique<T>(std::forward<Args>(args)...);
             T* raw_ptr = system_ptr.get();
 
@@ -143,7 +180,7 @@ export namespace helios::engine::game {
          *       performance-critical paths.
          */
         template<typename T>
-        [[nodiscard]] T* get() const {
+        [[nodiscard]] T* getSystem() const {
             for (const auto& system : systems_) {
                 if (auto* sys = dynamic_cast<T*>(system.get())) {
                     return sys;
@@ -160,8 +197,8 @@ export namespace helios::engine::game {
          * @return True if a System of type T exists, false otherwise.
          */
         template<typename T>
-        [[nodiscard]] bool has() const {
-            return get<T>() != nullptr;
+        [[nodiscard]] bool hasSystem() const {
+            return getSystem<T>() != nullptr;
         }
 
         /**
@@ -208,6 +245,51 @@ export namespace helios::engine::game {
          * @note This is the non-const overload. Use the const overload for read-only access.
          */
         [[nodiscard]] helios::engine::game::GameObject* find(const helios::util::Guid& guid);
+
+        /**
+         * @brief Finds all GameObjects that have the specified component types.
+         *
+         * @details
+         * Returns a lazy range that filters GameObjects on-the-fly during iteration.
+         * Only GameObjects possessing all specified component types are yielded.
+         *
+         * Example usage:
+         * ```cpp
+         * // Range-based for loop
+         * for (auto* obj : gameWorld.find<Move2DComponent, SceneNodeComponent>()) {
+         *     auto* move = obj->get<Move2DComponent>();
+         *     move->setVelocity({1.0f, 0.0f, 0.0f});
+         * }
+         *
+         * // Using each() for direct component access (structured bindings)
+         * for (auto [obj, move] : gameWorld.find<Move2DComponent>().each()) {
+         *     move.get().setVelocity({1.0f, 0.0f, 0.0f});
+         * }
+         * ```
+         *
+         * @tparam Cs The component types to filter by. GameObjects must have all types.
+         *
+         * @return A GameObjectView object that can be iterated over.
+         */
+        template<class... Cs>
+        [[nodiscard]] auto find(GameObjectFilterType query = GameObjectFilterType::Active) {
+            return GameObjectRange<Map, Cs...>(gameObjects_, query);
+        }
+
+        /**
+         * @brief Finds all GameObjects that have the specified component types (const overload).
+         *
+         * @details
+         * Const version of the component-based find. Returns const pointers to GameObjects.
+         *
+         * @tparam Cs The component types to filter by. GameObjects must have all types.
+         *
+         * @return A const GameObjectView object that can be iterated over.
+         */
+        template<class... Cs>
+        [[nodiscard]] auto find(GameObjectFilterType query = GameObjectFilterType::Active) const {
+            return GameObjectRange<const Map, Cs...>(gameObjects_, query);
+        }
 
         /**
          * @brief Finds a GameObject by its unique identifier (const overload).

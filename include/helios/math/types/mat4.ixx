@@ -74,12 +74,12 @@ export namespace helios::math {
                 T{}, T{}, T{},  static_cast<T>(1)} {}
 
         /**
-         * @brief Constructs a new `mat4` with all 16 components explicitly
-         * specified.
-         * The values are stored in column major order, that is, the first 4 arguments
+         * @brief Constructs a new `mat4` with all 16 components explicitly specified.
+         *
+         * @details The values are stored in column major order, that is, the first 4 arguments
          * represent the first column, and so on.
          *
-         * @param fi_j (i==row, j == col)
+         * Parameter naming convention: `fR_C` where R is the row index and C is the column index.
          */
         constexpr mat4(
             const T f0_0, const T f1_0, const T f2_0, const T f3_0,
@@ -368,13 +368,55 @@ export namespace helios::math {
          *
          * @return A new mat4<T> with the updated translation component.
          */
-        helios::math::mat4<T> setTranslation(helios::math::vec3<T> v) const noexcept {
+        helios::math::mat4<T> withTranslation(helios::math::vec3<T> v) const noexcept {
             const auto m = *this;
             return helios::math::mat4<T>{
                 m(0, 0), m(1, 0), m(2, 0), m(3, 0),
                 m(0, 1), m(1, 1), m(2, 1), m(3, 1),
                 m(0, 2), m(1, 2), m(2, 2), m(3, 2),
-                v[0], v[1], v[2], static_cast<T>(1.0f)
+                v[0], v[1], v[2], static_cast<T>(1)
+            };
+        }
+
+        /**
+         * @brief Returns a new 4x4 matrix derived by applying a scaling transformation.
+         *
+         * This function scales the current matrix by modifying specific components
+         * based on the scaling factors provided in the input vector.
+         *
+         * @tparam T The numeric type used for the matrix and vector components.
+         * @param v A 3D vector representing the scaling factors along the x, y, and z axes.
+         * @return A new 4x4 matrix with the scaling transformation applied.
+         * @note The operation maintains column-major order for the matrix components.
+         */
+        helios::math::mat4<T> withScaling(helios::math::vec3<T> v) const noexcept {
+            const auto m = *this;
+            return helios::math::mat4<T>{
+                m(0, 0) * v[0], m(1, 0) * v[0], m(2, 0) * v[0], m(3, 0) * v[0],
+                m(0, 1) * v[1], m(1, 1) * v[1], m(2, 1) * v[1], m(3, 1) * v[1],
+                m(0, 2) * v[2], m(1, 2) * v[2], m(2, 2) * v[2], m(3, 2) * v[2],
+                m(0, 3), m(1, 3), m(2, 3), m(3, 3),
+            };
+        }
+
+
+        /**
+         * @brief Creates a new matrix with the specified translation, preserving other components.
+         *
+         * @details Overload accepting a vec4. Only the xyz components are used; the w component
+         * is ignored and set to 1.0 in the resulting matrix.
+         *
+         * @param v The new translation vector (x, y, z, w). The w component is ignored.
+         *
+         * @return A new mat4<T> with the updated translation component.
+         */
+        helios::math::mat4<T> withTranslation(helios::math::vec4<T> v) const noexcept {
+            const auto m = *this;
+            return helios::math::mat4<T>{
+                m(0, 0), m(1, 0), m(2, 0), m(3, 0),
+                m(0, 1), m(1, 1), m(2, 1), m(3, 1),
+                m(0, 2), m(1, 2), m(2, 2), m(3, 2),
+                v[0], v[1], v[2], static_cast<T>(1)
             };
         }
 
@@ -486,8 +528,19 @@ export namespace helios::math {
         return &m(0, 0);
     }
 
+    /**
+     * @brief Type alias for a 4x4 float matrix.
+     */
     using mat4f = mat4<float>;
+
+    /**
+     * @brief Type alias for a 4x4 double matrix.
+     */
     using mat4d = mat4<double>;
+
+    /**
+     * @brief Type alias for a 4x4 integer matrix.
+     */
     using mat4i = mat4<int>;
 
 } // namespace helios::math

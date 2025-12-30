@@ -1,3 +1,7 @@
+/**
+ * @file ModelAabbComponent.ixx
+ * @brief Component for storing the canonical AABB of a model.
+ */
 module;
 
 export module helios.engine.game.components.model.ModelAabbComponent;

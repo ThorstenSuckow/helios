@@ -4,6 +4,8 @@
  */
 module;
 
+#include <helios/engine/game/GameObjectView.h>
+
 export module helios.engine.game.systems.physics.LevelBoundsBehaviorSystem;
 
 
@@ -14,9 +16,12 @@ import helios.engine.game.GameObject;
 import helios.engine.game.GameWorld;
 import helios.engine.game.components.physics.Move2DComponent;
 import helios.engine.game.components.physics.TransformComponent;
+import helios.engine.game.components.physics.TranslationStateComponent;
+import helios.engine.game.components.physics.DirectionComponent;
 import helios.engine.game.components.physics.LevelBoundsBehaviorComponent;
 import helios.engine.game.components.physics.AabbColliderComponent;
 import helios.engine.game.components.model.ModelAabbComponent;
+import helios.engine.game.components.physics.RotationStateComponent;
 import helios.scene.SceneNode;
 import helios.engine.game.components.scene.SceneNodeComponent;
 
@@ -37,7 +42,6 @@ export namespace helios::engine::game::systems::physics {
 
     public:
 
-
         /**
          * @brief Updates all entities that may have left level bounds.
          *
@@ -49,47 +53,37 @@ export namespace helios::engine::game::systems::physics {
          */
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
-            auto& gameObjects = gameWorld_->gameObjects();
+            for (auto [entity, m2d, ab, sc, dc, tsc, bc, bbc] : gameWorld_->find<
+                helios::engine::game::components::physics::Move2DComponent,
+                helios::engine::game::components::model::ModelAabbComponent,
+                helios::engine::game::components::scene::SceneNodeComponent,
+                helios::engine::game::components::physics::DirectionComponent,
+                helios::engine::game::components::physics::TranslationStateComponent,
+                helios::engine::game::components::physics::AabbColliderComponent,
+                helios::engine::game::components::physics::LevelBoundsBehaviorComponent
+            >().each()) {
 
-            for (auto& gameObjectPair : gameObjects) {
 
-                auto* obj = gameObjectPair.second.get();
+                auto& objectBounds = bc->bounds();
+                auto levelBounds  = gameWorld_->level().bounds();
 
-                auto* m2d = obj->get<helios::engine::game::components::physics::Move2DComponent>();
+                if (!levelBounds.contains(objectBounds)) {
 
-                if (m2d) {
+                    helios::math::mat4f parentWorldTransform = sc->sceneNode()->parent()->worldTransform();
+                    helios::math::vec4f childWorldTranslation = parentWorldTransform * tsc->translation().toVec4(1.0f);
 
-                    auto* ab = obj->get<helios::engine::game::components::model::ModelAabbComponent>();
-                    auto* sc = obj->get<helios::engine::game::components::scene::SceneNodeComponent>();
-                    auto* tc = obj->get<helios::engine::game::components::physics::TransformComponent>();
-                    auto* bc = obj->get<helios::engine::game::components::physics::AabbColliderComponent>();
-                    auto* bbc = obj->get<helios::engine::game::components::physics::LevelBoundsBehaviorComponent>();
+                    auto bouncedWorldTranslation = bounce(
+                        childWorldTranslation.toVec3(), objectBounds, levelBounds, *m2d, *bbc, *dc
+                    );
 
-                    if (ab && sc && tc && bc && bbc) {
+                    auto parentTransform_inverse = parentWorldTransform.inverse();
 
-                        auto objectBounds = bc->bounds();
-                        auto levelBounds  = gameWorld_->level().bounds();
+                    auto childLocalTranslation = parentTransform_inverse * bouncedWorldTranslation.toVec4(1.0f);
 
-                        if (!levelBounds.contains(objectBounds)) {
-
-                            auto worldTranslation  = tc->worldTranslation();
-                            auto worldTransform = tc->worldTransform();
-
-                            worldTranslation = bounce(worldTranslation, objectBounds, levelBounds, *m2d, *bbc);
-
-                            auto& parentTransform = sc->sceneNode()->parent()->worldTransform();
-                            auto parentTransform_inverse = parentTransform.inverse();
-
-                            auto childLocalTranslation = parentTransform_inverse * worldTranslation.toVec4(1.0f);
-
-                            tc->setLocalTranslation(childLocalTranslation.toVec3());
-                            bc->setBounds(ab->aabb().applyTransform(
-                                worldTransform.setTranslation(worldTranslation)
-                            ));
-                        }
-
-                    }
-
+                    tsc->setTranslation(childLocalTranslation.toVec3());
+                    bc->setBounds(ab->aabb().applyTransform(
+                        parentWorldTransform.withTranslation(bouncedWorldTranslation)
+                    ));
                 }
             }
         }
@@ -102,23 +96,26 @@ export namespace helios::engine::game::systems::physics {
          * @details
          * Calculates the corrected position and reflected velocity when an entity
          * collides with level boundaries. The restitution coefficient determines
-         * how much velocity is preserved after the bounce.
+         * how much velocity is preserved after the bounce. The DirectionComponent
+         * will be updated with the new direction.
          *
          * @param worldTranslation Current world position of the entity.
          * @param objectBounds World-space AABB of the entity.
          * @param levelBounds World-space AABB of the level.
          * @param m2d Reference to the Move2DComponent for velocity modification.
          * @param bbc Reference to the LevelBoundsBehaviorComponent for restitution.
+         * @param dc Reference to the DirectionComponent for direction update.
          *
          * @return Corrected world position after bounce.
          */
-        helios::math::vec3f bounce(
+        [[nodiscard]] static helios::math::vec3f bounce(
             helios::math::vec3f worldTranslation,
-             helios::math::aabbf objectBounds,
-             helios::math::aabbf levelBounds,
-             helios::engine::game::components::physics::Move2DComponent& m2d,
-             helios::engine::game::components::physics::LevelBoundsBehaviorComponent& bbc
-             ){
+            helios::math::aabbf objectBounds,
+            helios::math::aabbf levelBounds,
+            helios::engine::game::components::physics::Move2DComponent& m2d,
+            helios::engine::game::components::physics::LevelBoundsBehaviorComponent& bbc,
+            helios::engine::game::components::physics::DirectionComponent& dc
+        ) noexcept {
 
 
             auto velocity = m2d.velocity();
@@ -162,6 +159,7 @@ export namespace helios::engine::game::systems::physics {
 
             if (hitX || hitY) {
                 m2d.setVelocity(velocity);
+                dc.setDirection(velocity.normalize());
             }
 
             return translation;

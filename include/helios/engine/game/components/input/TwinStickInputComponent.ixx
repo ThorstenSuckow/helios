@@ -16,6 +16,7 @@ import helios.engine.game.Updatable;
 import helios.engine.game.Component;
 import helios.engine.game.CommandBuffer;
 import helios.engine.game.commands.Move2DCommand;
+import helios.engine.game.commands.HeadingCommand;
 import helios.engine.game.commands.Aim2DCommand;
 import helios.engine.game.commands.ShootCommand;
 
@@ -29,7 +30,7 @@ export namespace helios::engine::game::components::input {
      * controls aiming direction and intensity.
      *
      * Each frame, this component reads the current input snapshot and generates
-     * Move2DCommand and Aim2DCommand instances that are queued in the CommandBuffer
+     * Move2DCommand, HeadingCommand and Aim2DCommand instances that are queued in the CommandBuffer
      * for later execution.
      *
      * @note Requires the owning GameObject to have Move2DComponent and Aim2DComponent
@@ -71,6 +72,11 @@ export namespace helios::engine::game::components::input {
             commandBuffer->add(
                 gameObject()->guid(),
                 std::make_unique<helios::engine::game::commands::Move2DCommand>(ldir, finalSpeed)
+            );
+
+            commandBuffer->add(
+                gameObject()->guid(),
+                std::make_unique<helios::engine::game::commands::HeadingCommand>(ldir, finalSpeed)
             );
 
             // Right stick: aiming

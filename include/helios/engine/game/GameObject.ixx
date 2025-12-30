@@ -4,12 +4,13 @@
  */
 module;
 
+#include <cassert>
+#include <functional>
 #include <memory>
-#include <typeindex>
 #include <type_traits>
+#include <typeindex>
 #include <unordered_map>
 #include <vector>
-#include <cassert>
 
 
 export module helios.engine.game.GameObject;
@@ -71,9 +72,27 @@ export namespace helios::engine::game {
          */
         std::vector<Updatable*> updatables_;
 
+        /**
+         * @brief Active state flag for this GameObject.
+         *
+         * @details Inactive GameObjects are skipped during iteration and updates.
+         * When the state changes, onActivate() or onDeactivate() is called on all components.
+         */
+        bool isActive_ = true;
+
+
     public:
+        /**
+         * @brief Constructs a new GameObject with a unique Guid.
+         *
+         * @details The Guid is automatically generated and remains constant for the
+         * lifetime of this object.
+         */
         GameObject() : guid_(helios::util::Guid::generate()) {};
 
+        /**
+         * @brief Virtual destructor for proper polymorphic cleanup.
+         */
         virtual ~GameObject() = default;
 
         /**
@@ -136,7 +155,7 @@ export namespace helios::engine::game {
         /**
          * @brief Retrieves a component of type T.
          *
-         * Normalizes T and Uuses the type-indexed componentIndex_ for O(1) lookup complexity.
+         * Normalizes T and uses the type-indexed componentIndex_ for O(1) lookup complexity.
          *
          * @tparam T The type of component to retrieve.
          *
@@ -158,7 +177,7 @@ export namespace helios::engine::game {
         /**
          * @brief Checks if the GameObject has a component of type T.
          *
-         * Normalizes T and Uuses the type-indexed componentIndex_ for O(1) lookup complexity.
+         * Normalizes T and uses the type-indexed componentIndex_ for O(1) lookup complexity.
          *
          * @tparam T The type of component to check for.
          *
@@ -189,6 +208,46 @@ export namespace helios::engine::game {
         [[nodiscard]] const helios::util::Guid& guid() const noexcept {
             return guid_;
         };
+
+        /**
+         * @brief Checks if this GameObject is currently active.
+         *
+         * @return True if the GameObject is active, false otherwise.
+         *
+         * @note Inactive GameObjects are typically skipped during updates and rendering.
+         */
+        [[nodiscard]] bool isActive() const noexcept {
+            return isActive_;
+        }
+
+        /**
+         * @brief Sets the active state of this GameObject.
+         *
+         * @details When the active state changes, this method notifies all attached
+         * components by calling onActivate() or onDeactivate() accordingly.
+         * If the new state equals the current state, no action is taken.
+         *
+         * @param active The new active state.
+         */
+        void setActive(bool active) noexcept {
+            if (isActive_ == active) {
+                return;
+            }
+
+            isActive_ = active;
+
+            if (isActive_) {
+                for (auto& it: components_) {
+                    it->onActivate();
+                }
+            } else {
+                for (auto& it: components_) {
+                    it->onDeactivate();
+                }
+            }
+
+
+        }
     };
 
 

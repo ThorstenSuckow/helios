@@ -4,4 +4,5 @@
  */
 export module helios.engine.game.systems.gameplay;
 
+export import helios.engine.game.systems.gameplay.GameObjectSpawnSystem;
 export import helios.engine.game.systems.gameplay.ProjectilePoolSystem;

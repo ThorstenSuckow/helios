@@ -5,8 +5,8 @@
  * @note This file is intentionally a .h header instead of a .ixx module interface unit.
  *       Using this as a module interface unit causes Internal Compiler Errors (ICE)
  *       in MSVC (VS2022/VS2026) when structured bindings are used with the each()
- *       iterator (C1001 in p2/main.cpp). The workaround is to keep this as a
- *       traditional header included in the module's global fragment.
+ *       iterator. The workaround is to keep this as a traditional header included in
+ *       the module's global fragment.
  */
 
 #ifndef HELIOS_ENGINE_GAME_GAMEOBJECTVIEW_H
@@ -17,9 +17,14 @@
 #include <utility>
 #include <tuple>
 
+
+import helios.engine.game.GameObjectFilterType;
+
 namespace helios::engine::game {
 class GameObject;
 } // namespace helios::engine::game
+
+
 
 
 /**
@@ -106,25 +111,49 @@ private:
     MapT* objects_{nullptr};
 
     /**
-     * @brief Checks if a GameObject has all required component types.
+     * @brief Checks if a GameObject matches the filter criteria.
+     *
+     * @details Validates that the GameObject has all required component types
+     * and matches the specified active/inactive state filter.
      *
      * @param obj Pointer to the GameObject to check.
+     * @param filterType The filter criteria for GameObject state.
      *
-     * @return True if the GameObject has all component types Cs..., false otherwise.
+     * @return True if the GameObject has all component types Cs... and matches the filter, false otherwise.
      *
      * @note Uses Comp<Cs> to normalize types for the has<>() check.
      */
-    [[nodiscard]] static bool matches(const Obj* obj) noexcept {
-        return (obj->template has<Comp<Cs>>() && ...);
+    [[nodiscard]] static bool matches(const Obj* obj, helios::engine::game::GameObjectFilterType filterType) noexcept {
+
+        switch (filterType) {
+            case helios::engine::game::GameObjectFilterType::Active:
+                return (obj->isActive() && (obj->template has<Comp<Cs>>() && ...));
+            case helios::engine::game::GameObjectFilterType::Inactive:
+                return (!obj->isActive() && (obj->template has<Comp<Cs>>() && ...));
+            case helios::engine::game::GameObjectFilterType::All:
+                return ((obj->template has<Comp<Cs>>() && ...));
+        }
+
+        std::unreachable();
+
     }
+
+    /**
+     * @brief The filter type used for GameObject state matching.
+     *
+     * @details Determines whether to include Active, Inactive, or All GameObjects
+     * during iteration.
+     */
+    helios::engine::game::GameObjectFilterType filterType_;
 
 public:
     /**
      * @brief Constructs a view over the given map.
      *
      * @param objects Reference to the map to iterate over.
+     * @param filterType Filter criteria for GameObject state (Active, Inactive, or All).
      */
-    explicit GameObjectView(MapT& objects) noexcept : objects_(&objects) {}
+    explicit GameObjectView(MapT& objects, helios::engine::game::GameObjectFilterType filterType = helios::engine::game::GameObjectFilterType::Active) noexcept : objects_(&objects), filterType_(filterType) {}
 
     /**
      * @brief Forward iterator for filtered GameObject traversal.
@@ -139,7 +168,7 @@ public:
         /**
          * @brief Current position in the map.
          */
-        It it_;   ///< Current position in the map.
+        It it_;
 
         /**
          * @brief End iterator for bounds checking.
@@ -147,12 +176,17 @@ public:
         It end_;
 
         /**
+         * @brief Filter type for GameObject state matching.
+         */
+        helios::engine::game::GameObjectFilterType filterType_;
+
+        /**
          * @brief Advances to the next matching GameObject.
          *
          * @note Simplified implementation without storing objects_ reference.
          */
         void advanceToNextMatch() noexcept {
-            while (it_ != end_ && !matches(it_->second.get())) {
+            while (it_ != end_ && !matches(it_->second.get(), filterType_)) {
                 ++it_;
             }
         }
@@ -163,8 +197,9 @@ public:
          *
          * @param it Current iterator position.
          * @param end End iterator for bounds checking.
+         * @param filterType Filter criteria for GameObject state matching.
          */
-        Iterator(It it, It end) noexcept : it_(it), end_(end) {
+        Iterator(It it, It end, helios::engine::game::GameObjectFilterType filterType) noexcept : it_(it), end_(end), filterType_(filterType) {
             advanceToNextMatch();
         }
 
@@ -362,7 +397,7 @@ public:
      * @note Builds iterators directly from map iterators.
      */
     [[nodiscard]] Iterator begin() const noexcept {
-        return Iterator(objects_->begin(), objects_->end());
+        return Iterator(objects_->begin(), objects_->end(), filterType_);
     }
 
     /**
@@ -371,7 +406,7 @@ public:
      * @return Iterator representing the end of the range.
      */
     [[nodiscard]] Iterator end() const noexcept {
-        return Iterator(objects_->end(), objects_->end());
+        return Iterator(objects_->end(), objects_->end(), filterType_);
     }
 };
 

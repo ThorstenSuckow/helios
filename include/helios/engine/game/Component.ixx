@@ -48,7 +48,14 @@ export namespace helios::engine::game {
 
 
     public:
+        /**
+         * @brief Virtual destructor for proper polymorphic cleanup.
+         */
         virtual ~Component() = default;
+
+        /**
+         * @brief Default constructor.
+         */
         Component() = default;
 
         /**
@@ -61,6 +68,26 @@ export namespace helios::engine::game {
          */
         virtual void onAttach(GameObject* gameObject) noexcept {
             gameObject_ = gameObject;
+        };
+
+        /**
+         * @brief Called when the owning GameObject becomes active.
+         *
+         * @details Override this method to perform initialization or state restoration
+         * when the GameObject is activated. The default implementation does nothing.
+         */
+        virtual void onActivate() noexcept {
+
+        };
+
+        /**
+         * @brief Called when the owning GameObject becomes inactive.
+         *
+         * @details Override this method to perform cleanup or state preservation
+         * when the GameObject is deactivated. The default implementation does nothing.
+         */
+        virtual void onDeactivate() noexcept {
+
         };
 
         /**

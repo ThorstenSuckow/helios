@@ -180,6 +180,18 @@ export namespace helios::engine::game::components::physics {
 
     public:
 
+        /**
+         * @brief Default constructor with default physics parameters.
+         */
+        Move2DComponent() = default;
+
+        /**
+         * @brief Constructs a Move2DComponent with a specified movement speed.
+         *
+         * @param movementSpeed The maximum movement speed in units per second.
+         */
+        explicit Move2DComponent(float movementSpeed) : movementSpeed_(movementSpeed) {}
+
 
         /**
          * @brief Sets the movement direction and throttle.
@@ -190,7 +202,7 @@ export namespace helios::engine::game::components::physics {
          * @param direction Normalized 2D direction vector from analog stick.
          * @param throttle Magnitude of the stick input (0.0 to 1.0).
          */
-        void move(helios::math::vec2f direction, float throttle) {
+        void move(helios::math::vec3f direction, float throttle) {
             if (throttle <= helios::math::EPSILON_LENGTH) {
                 steeringInput_ = helios::math::vec2f{0.0f, 0.0f};
                 throttle_ = 0.0f;
@@ -198,20 +210,14 @@ export namespace helios::engine::game::components::physics {
                 return;
             }
 
-            steeringInput_ = direction;
+            steeringInput_ = direction.toVec2();
             throttle_ = throttle;
 
             assert(std::abs(direction.length() - 1.0f) <= 0.001f && "Unexpected direction vector - not normalized");
-
-
-            targetRotationAngle_ = helios::math::degrees(std::atan2(direction[1], direction[0]));
-            rotationAngleDelta_ = std::fmod((targetRotationAngle_ - currentRotationAngle_) + 540.0f, 360.0f) - 180.0f;
-
+            
 
             isInputActive_ = true;
 
-            float turnBoost = 1.0f + 0.5f*std::clamp((abs(rotationAngleDelta_))/180.f, 0.0f, 1.0f);
-            currentRotationSpeed_ = turnBoost * rotationSpeed_ * throttle_;
             currentMovementSpeed_ = movementSpeed_ * throttle_;
 
         }

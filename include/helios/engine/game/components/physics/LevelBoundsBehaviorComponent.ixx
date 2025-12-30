@@ -37,6 +37,18 @@ export namespace helios::engine::game::components::physics {
     public:
 
         /**
+         * @brief Default constructor with default restitution (0.5).
+         */
+        LevelBoundsBehaviorComponent() = default;
+
+        /**
+         * @brief Constructs a LevelBoundsBehaviorComponent with a specified restitution.
+         *
+         * @param restitution The coefficient of restitution (0.0 to 1.0).
+         */
+        explicit LevelBoundsBehaviorComponent(float restitution) : Component(), restitution_(restitution) {}
+
+        /**
          * @brief Retrieves the restitution coefficient.
          *
          * @return The restitution value.

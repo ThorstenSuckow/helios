@@ -268,7 +268,12 @@
     <member refid="classhelios_1_1engine_1_1game_1_1Component_1abeb3af407878cf9f2d1019fdc9e2712a" kind="function"><name>~Component</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1Component_1a4a167553b4aed32f0ad96e8836a01b88" kind="function"><name>Component</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1Component_1a3a4f0b840b179c07299fc291a57fb51f" kind="function"><name>onAttach</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1Component_1ab36bb364af461dd789e7477f1bafa13b" kind="function"><name>onActivate</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1Component_1a7e5a02b0500c65e9606839059bdda398" kind="function"><name>onDeactivate</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1Component_1a0894e93b95d6d0b71602b8803d2cc213" kind="function"><name>gameObject</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1ComposeTransformSystem" kind="class"><name>helios::engine::game::systems::physics::ComposeTransformSystem</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1ComposeTransformSystem_1a90188476238f7e6d96da63e6510751c7" kind="function"><name>update</name></member>
   </compound>
   <compound refid="classhelios_1_1util_1_1log_1_1ConsoleSink" kind="class"><name>helios::util::log::ConsoleSink</name>
     <member refid="classhelios_1_1util_1_1log_1_1ConsoleSink_1aa7a0c9d6f6536c90ed342cadc6246107" kind="variable"><name>TYPE_ID</name></member>
@@ -306,6 +311,11 @@
     <member refid="classhelios_1_1event_1_1DequeEventQueue_1a3fe351df50c4bb50d575471cc0bc195b" kind="function"><name>addOrReplace</name></member>
     <member refid="classhelios_1_1event_1_1DequeEventQueue_1a594ade70466608e86045c4b1679772fc" kind="function"><name>empty</name></member>
     <member refid="classhelios_1_1event_1_1DequeEventQueue_1a400f3c1111c28d503e64464922147505" kind="function"><name>next</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1DirectionComponent" kind="class"><name>helios::engine::game::components::physics::DirectionComponent</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1DirectionComponent_1aa631747c7ccb66afda36187cb4693291" kind="variable"><name>direction_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1DirectionComponent_1ae68703e93605531d87edd653f2eaa5fc" kind="function"><name>setDirection</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1DirectionComponent_1a8ea2b6b308b7a11e5847120b96f7954e" kind="function"><name>direction</name></member>
   </compound>
   <compound refid="classhelios_1_1event_1_1Dispatcher" kind="class"><name>helios::event::Dispatcher</name>
     <member refid="classhelios_1_1event_1_1Dispatcher_1afa5eef849fd9c7cb2b11d1929713de19" kind="variable"><name>callbacks_</name></member>
@@ -413,15 +423,36 @@
   <compound refid="classhelios_1_1engine_1_1game_1_1GameObject" kind="class"><name>helios::engine::game::GameObject</name>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a8ccca9fdee32b72202b6b1cca51288c3" kind="variable"><name>guid_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a04c48c868e86b9f5c38ef0cf3176c828" kind="variable"><name>components_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a0e3710fd2c9d61fde0654c8a17b06517" kind="variable"><name>componentIndex_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6a942f57a7de5c5e06d145c565e0cabd" kind="variable"><name>updatables_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1af6ab980a0077b15c389d5ba27a0b84e4" kind="variable"><name>isActive_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a56372781ae87e48521a7678634a43578" kind="function"><name>GameObject</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1ab15ff967c8bf14b0d4fbece6cb7d38e4" kind="function"><name>~GameObject</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6efd5ef390fc9b7b8468682659f5a1fb" kind="function"><name>add</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a834e29f3aef6fa533f1bc3adf7752343" kind="function"><name>getOrAdd</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a2306d52f0450467d64ef1ddcdf5448d2" kind="function"><name>get</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1ae5dcc52eda581579cb00e9c4fff90a37" kind="function"><name>getOrAdd</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a1de477ec6f0718697589c8d69498939d" kind="function"><name>get</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a75ba7876058a260289f28b39c6fce25a" kind="function"><name>has</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a64afc8b3ae7ed69e9763d51169328af2" kind="function"><name>update</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1abf3cf53d3aa0c9b62da27d7934928168" kind="function"><name>guid</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a1604683eea731721ee7193a004794b21" kind="function"><name>isActive</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1af1e443b83abcd51b2fa5d18ac5b22efa" kind="function"><name>setActive</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1game_1_1GameObjectPool" kind="class"><name>helios::engine::game::GameObjectPool</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1aa74b049b36bc39be7648601206230f25" kind="typedef"><name>Factory</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1aba52979d608a7782e5deb40c106923fe" kind="variable"><name>activeIndex_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a17ac625de593f40866ebf3377de4f5da" kind="variable"><name>activeGameObjects_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1ac87d05322db81fd2c8c8870d131289ac" kind="variable"><name>inactiveGameObjects_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a1d851306ee05a07ab0b68dff88b2f711" kind="variable"><name>poolSize_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a16b1f234b1f0ecbcc44b18e740aaa176" kind="variable"><name>gameWorld_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a8fbbfa2b83195d52fe826fc4ad11f782" kind="variable"><name>gameObjectFactory_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1aa3f92f903921ae186b1f4cd9721c8db8" kind="variable"><name>guid_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a4f50e9ec7c32aa93dab2203baa16bad3" kind="function"><name>warmup</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a74c933b59081808944263a94a62240f9" kind="function"><name>GameObjectPool</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a9917d7ae53b08752a680d6ea9729f0ed" kind="function"><name>guid</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1ac53ed0a26e7dca1df6fb96830abda06a" kind="function"><name>acquire</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a073485a4a359cbd48a2e5b8633020239" kind="function"><name>release</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a722d64b5eff08ee053cb45184dd70801" kind="function"><name>release</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a3179669f6a21f905e8eb9dca7e99b865" kind="function"><name>inactiveGameObjects</name></member>
   </compound>
   <compound refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings" kind="class"><name>helios::input::gamepad::GamepadSettings</name>
     <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1a0afd4f380d88d940ba4edb8906a8936d" kind="variable"><name>leftStickDeadzone_</name></member>
@@ -520,6 +551,8 @@
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1GamepadWidget_1a014d3bec3cd6af14a0870687d896fc30" kind="function"><name>draw</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1game_1_1GameWorld" kind="class"><name>helios::engine::game::GameWorld</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1aaa4a2366fd132dd0336e8abe6a9db91e" kind="typedef"><name>Map</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1adeee4d3fef4da0bfc3e254aec427ac15" kind="typedef"><name>GameObjectRange</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ade9c156ea18ef1363364f5c2817665aa" kind="variable"><name>gameObjects_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ac4ed48c579a99900ce634413375ad477" kind="variable"><name>systems_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a61f6a7faf3129b156e0f923abcfb5f09" kind="variable"><name>level_</name></member>
@@ -528,12 +561,14 @@
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a3c063037908af8aa35f0b8bb926af9ef" kind="function"><name>setLevel</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a2a2383d3d780c562b1d7a2c680ace6f0" kind="function"><name>hasLevel</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ae74dc0a0df46ba43456da2922ea2315e" kind="function"><name>level</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1aa43d58ad9e4c3fbf3efb9c6936b4c708" kind="function"><name>add</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a42fe4629a34aa357763255f499b8d9ab" kind="function"><name>get</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ad6adcd1256a97a4ecf2045eb10de8f0b" kind="function"><name>has</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ad6ff449301dbcfbb1214376a4ee3ebae" kind="function"><name>addSystem</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a90f78fa2cfb469d75cb6876bcc58a189" kind="function"><name>getSystem</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a891f6e8c25e5419df48491233605d79d" kind="function"><name>hasSystem</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a3c520229c0ff0a74019dc10fcb71a439" kind="function"><name>update</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a4e85936a3662c8dfc85cf83e2e901541" kind="function"><name>addGameObject</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a10feb30a293f8266c398fc5b42872a4a" kind="function"><name>find</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0b4dbd1c69f3529fb722b06088500a9e" kind="function"><name>find</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ad0c11deb99d085edf7c13a448d4866fa" kind="function"><name>find</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1aada0325e1ee9928451c6149a6f5643b3" kind="function"><name>find</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0e8351e088564887aaabd806752e30f2" kind="function"><name>removeGameObject</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0a28cfa4a49e74a11b4c1420d99bb72d" kind="function"><name>gameObjects</name></member>
@@ -615,6 +650,51 @@
   </compound>
   <compound refid="structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4" kind="struct"><name>std::hash&lt; helios::util::Guid &gt;</name>
     <member refid="structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4_1a60abc24fa057aaf88b4ee94437da80bf" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1game_1_1commands_1_1HeadingCommand" kind="class"><name>helios::engine::game::commands::HeadingCommand</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1commands_1_1HeadingCommand_1a77aaa55495a1c5855eb39f13bd29e396" kind="variable"><name>turnFactor_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1commands_1_1HeadingCommand_1a21321a7d8f86c3f338b59ed9626af3c7" kind="variable"><name>direction_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1commands_1_1HeadingCommand_1ae70ab4dd6428c0a222a7430bf4379f9b" kind="function"><name>HeadingCommand</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1commands_1_1HeadingCommand_1a38c19be5c36ce0334636d45fd1909373" kind="function"><name>execute</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent" kind="class"><name>helios::engine::game::components::physics::HeadingComponent</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a26b967c7431ca91367e2e072a385da2e" kind="variable"><name>DEFAULT_ROTATION_SPEED</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a72d6d92e19ad71541fdcd78146f5c4ab" kind="variable"><name>DEFAULT_ROTATION_SPEED_THRESHOLD</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1aaa196dec42e22f1b00b4903e2f080104" kind="variable"><name>DEFAULT_ROTATION_DAMPENING</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a92230ab59736a87ceeb769ff541820e3" kind="variable"><name>rotationSpeed_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1af8fab691fc62541dc030e749f3a7a68f" kind="variable"><name>rotationSpeedThreshold_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a7cc69eefa225aec06f878727586bef20" kind="variable"><name>rotationDampening_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1aa539cc09677674d009f52f36400e530e" kind="variable"><name>currentRotationAngle_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a44d14f71dde7f4bbed79ad4085381801" kind="variable"><name>targetRotationAngle_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a05824205566839d8031ff237c77a227d" kind="variable"><name>rotationAngleDelta_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a11fe301fa917be855ae3eb3d87615822" kind="variable"><name>currentRotationSpeed_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1ae5ac80ffaafd2b8b91cfc4a979a9781b" kind="variable"><name>isInputActive_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1ad086508c6dbe7f88c00796e81a884410" kind="variable"><name>turnIntensity_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a1b8be31d5c80997d939b9e6d448eb524" kind="variable"><name>headingInput_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a2c9329e3dbf47d2e6d818c556614cb07" kind="function"><name>setHeading</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a0e2de075a1aa973efe9a4d8758137583" kind="function"><name>rotationAxis</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a7334b44384f0adbf47d1553490a8fe77" kind="function"><name>setCurrentRotationSpeed</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a4537e856d70be505b6de455aa5c77e48" kind="function"><name>currentRotationSpeed</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a78c31a64bd6786a9baf7803480f426ab" kind="function"><name>rotationAngleDelta</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a2ddc22661574259cf60bbc0bdaea8258" kind="function"><name>currentRotationAngle</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a4b6616322ab2379a3db329b748642e9b" kind="function"><name>targetRotationAngle</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a375c0bed9050876ec3dc09119660b47b" kind="function"><name>setTargetRotationAngle</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1adf92aede31f0127389e7661e1828c334" kind="function"><name>setCurrentRotationAngle</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a1be212f2c232dc815392161427cbaac4" kind="function"><name>setRotationAngleDelta</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1ab93888efcb162ecd8f6ef34fce63b181" kind="function"><name>isInputActive</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a7e800e5502e43babc22d05a8fb0d81cb" kind="function"><name>headingInput</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1ade023e57d9a5d7412ab8bad78ec4ba4b" kind="function"><name>rotationSpeed</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a32308cfeff5de9c512572399f871088f" kind="function"><name>rotationSpeedThreshold</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a0234a3fdde1c3761a10d459ae38d8746" kind="function"><name>rotationDampening</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1afd2d3ff4808478006f81c17827a1fd9f" kind="function"><name>setRotationSpeed</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a0ddc8f98793f7a6cbab0dd566aa0793d" kind="function"><name>setRotationSpeedThreshold</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a94591ed9a3cb2c75eb56311621d029fe" kind="function"><name>setRotationDampening</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a6400e2e07a46c0f4c760ff958be63200" kind="function"><name>turnIntensity</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a9e571a1771e0da7831afb2e0e576b16f" kind="function"><name>resetToDefaults</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1HeadingSystem" kind="class"><name>helios::engine::game::systems::physics::HeadingSystem</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1HeadingSystem_1a1bbad29e1a0c49d320b11df70c78716d" kind="function"><name>updateHeading</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1HeadingSystem_1ab663b281b488f7ce2ba595146cbccdd4" kind="function"><name>update</name></member>
   </compound>
   <compound refid="classhelios_1_1ext_1_1imgui_1_1ImGuiBackend" kind="class"><name>helios::ext::imgui::ImGuiBackend</name>
     <member refid="classhelios_1_1ext_1_1imgui_1_1ImGuiBackend_1a78ca09a0223a87f25adfbbbb1fa358e7" kind="function"><name>ImGuiBackend</name></member>
@@ -699,12 +779,14 @@
   </compound>
   <compound refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent" kind="class"><name>helios::engine::game::components::physics::LevelBoundsBehaviorComponent</name>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1a43f5eac15b732fb4a6a5aeda9771aa3c" kind="variable"><name>restitution_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1a2db70951b43725a6f0fd7b09957e210f" kind="function"><name>LevelBoundsBehaviorComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1abf7dd41d729883dce445a66fe04705c4" kind="function"><name>LevelBoundsBehaviorComponent</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1a6748387a003beb211e88f5f4ed24a3e6" kind="function"><name>restitution</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1aa700b00e7ca94649741548271f568751" kind="function"><name>setRestitution</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1LevelBoundsBehaviorSystem" kind="class"><name>helios::engine::game::systems::physics::LevelBoundsBehaviorSystem</name>
     <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1LevelBoundsBehaviorSystem_1a7026fa062c7aed092bcc20878b38a0c3" kind="function"><name>update</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1LevelBoundsBehaviorSystem_1a756c6a667c23b9c665318c77b21e362d" kind="function"><name>bounce</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1LevelBoundsBehaviorSystem_1a6d974192c58560167769307c66372cd1" kind="function"><name>bounce</name></member>
   </compound>
   <compound refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Line" kind="struct"><name>helios::rendering::asset::shape::basic::Line</name>
     <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Line_1a427210e20dc07acf0a3d765892d66074" kind="function"><name>Line</name></member>
@@ -846,7 +928,9 @@
     <member refid="structhelios_1_1math_1_1mat4_1a43af56ad57ea70cbf00895e396ceccbd" kind="function"><name>column</name></member>
     <member refid="structhelios_1_1math_1_1mat4_1a85b80b06a1e1d401e9bf3f4f338a219a" kind="function"><name>inverse</name></member>
     <member refid="structhelios_1_1math_1_1mat4_1a6c51266bc7e6f142ce172b8c2022645a" kind="function"><name>translation</name></member>
-    <member refid="structhelios_1_1math_1_1mat4_1a47a4e8f9edb058866e33f4bc029b779e" kind="function"><name>setTranslation</name></member>
+    <member refid="structhelios_1_1math_1_1mat4_1a451a24222a56a80e6a7e01a93d6e867a" kind="function"><name>withTranslation</name></member>
+    <member refid="structhelios_1_1math_1_1mat4_1a6168417f43e3cf34c6376fe5f288b038" kind="function"><name>withScaling</name></member>
+    <member refid="structhelios_1_1math_1_1mat4_1adf5462371557ac38947700b261f5c848" kind="function"><name>withTranslation</name></member>
     <member refid="structhelios_1_1math_1_1mat4_1a9c19cb795b7d8a032dd4cb415803f163" kind="function"><name>decompose</name></member>
     <member refid="structhelios_1_1math_1_1mat4_1ad856b4652346ff475b653e257d64428d" kind="function"><name>identity</name></member>
   </compound>
@@ -911,68 +995,44 @@
     <member refid="classhelios_1_1engine_1_1game_1_1commands_1_1Move2DCommand_1aa350d238ae20ca8089a7869b8860f903" kind="function"><name>execute</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent" kind="class"><name>helios::engine::game::components::physics::Move2DComponent</name>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aeaa627024b68fa1bc5e4e48f6a1b389f" kind="variable"><name>DEFAULT_ROTATION_SPEED</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a55c066b45893c97db0c245235fe22b1c" kind="variable"><name>DEFAULT_MOVEMENT_SPEED_THRESHOLD</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aed2d9dc0fa76b1163359a3f2d613ceed" kind="variable"><name>DEFAULT_ROTATION_SPEED_THRESHOLD</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a58d811906dfa014dd1220c474b02aff7" kind="variable"><name>DEFAULT_MOVEMENT_ACCELERATION</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9d1e52de0c68d9dce805bbd766b51f2f" kind="variable"><name>DEFAULT_MOVEMENT_SPEED</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ad86a71d09afc29ca152901ecfd262c92" kind="variable"><name>DEFAULT_ROTATION_DAMPENING</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab685360bbbc0a46ec64ca4e43e38cdbf" kind="variable"><name>DEFAULT_MOVEMENT_DAMPENING</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a58a94791417accc02c9c3e6f4451f5d9" kind="variable"><name>DEFAULT_BASE_ROTATION_SPEED_MULTIPLIER</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a483daaad08f6019cdd8fcd2b21503d76" kind="variable"><name>rotationSpeed_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a91c11ed8bc317ffcb010fc9d348bc0c8" kind="variable"><name>movementSpeedThreshold_</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1abccead76ea179c5442fd7f0270116bbc" kind="variable"><name>rotationSpeedThreshold_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a1cc79a7594f9b7e350b57e4b05379646" kind="variable"><name>movementAcceleration_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1af0b8633ba1d7886aeeed2313312c7998" kind="variable"><name>movementSpeed_</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac2c90c6fd38a2822a96b06a63958f667" kind="variable"><name>rotationDampening_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a06613bdc3ef2bb7725129ddec553dbba" kind="variable"><name>movementDampening_</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa59fc1943eb000f3f88b359a01cc292d" kind="variable"><name>baseRotationSpeedMultiplier_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ad015d05507a7dedc7fdbc211761252a4" kind="variable"><name>currentMovementSpeed_</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1af0ee1a577ae0aa986d31e473d47e2c2b" kind="variable"><name>currentRotationAngle_</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aee9dd997ec318afc598d801c19c474ad" kind="variable"><name>targetRotationAngle_</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ae61dae73e5fbd6c49ce2ac3311e94273" kind="variable"><name>rotationAngleDelta_</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a57d69bb23476c514e82a44fafa93204c" kind="variable"><name>currentRotationSpeed_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a7701b2398957d8225ca888acaa51acdc" kind="variable"><name>isInputActive_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a093c4cca5faf629e828abd8237d4cbd6" kind="variable"><name>throttle_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac90e40d347ccc487bbe03b00cf29b415" kind="variable"><name>steeringInput_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a501d638f93dddc695767e97cd85cd55c" kind="variable"><name>velocity_</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aca8a4ccdd4bdedc05bb52c2b931cfc7a" kind="function"><name>move</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1af05888282800d62273882ddf47e03b2d" kind="function"><name>setCurrentRotationSpeed</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a7cde155452f7ae86683fb44e2de3bba0" kind="function"><name>Move2DComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a767ad44cde8b65ac92df736cfaf7b8a4" kind="function"><name>Move2DComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aebd3f3ed2a52567f78033171d978a3df" kind="function"><name>move</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a8c80335088f4ceb2abf4848418f42f2b" kind="function"><name>setVelocity</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a8ebb3298b19adebbbece18063f8a7737" kind="function"><name>currentRotationSpeed</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a7c62c4b5cf6bba18c2afc0aab1ec6e9a" kind="function"><name>rotationAngleDelta</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a2b6f396eefe712f0d4f8ed187d07f29b" kind="function"><name>currentMovementSpeed</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac002bf8fbe58bc608a8d0875c37bb03d" kind="function"><name>currentRotationAngle</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a0e5ed29b368c42b42d3b14b98f465445" kind="function"><name>targetRotationAngle</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac68cf88969fc1de8382de50ba52776f6" kind="function"><name>setCurrentRotationAngle</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a36156283469d6fef22e3a2da856fe0ef" kind="function"><name>setRotationAngleDelta</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a87553155876940f2eaacfa6f3cac962c" kind="function"><name>setCurrentMovementSpeed</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a18486bbe86bca7e14c9b5c68f9a71365" kind="function"><name>isInputActive</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1af44bf76b94da4db4a9197ab0b56c96ff" kind="function"><name>steeringInput</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab097d0a5c803ab9dd295368b155decbb" kind="function"><name>throttle</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a5830a38dda58627afc80c6584acc4707" kind="function"><name>velocity</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a265f6c6df527ea612de40ad4533024b8" kind="function"><name>speedRatio</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ae4a0d20de42b8fe03c72fb622f9ba97e" kind="function"><name>rotationSpeed</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a4a216d05752dc12f436acf247d1e16d3" kind="function"><name>movementSpeedThreshold</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a1d416ece697cd4664edc2aa86dd061ff" kind="function"><name>rotationSpeedThreshold</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab198a5185c5d33e98d1acfe36fc2e9ba" kind="function"><name>movementAcceleration</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a04fb3570cf8f5622ab45409772023e6b" kind="function"><name>movementSpeed</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab653fbe372142139b6a29131b536cdfa" kind="function"><name>rotationDampening</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ad4589251426864a83cdc4c2323439861" kind="function"><name>movementDampening</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a58d08e85ae29f30af33e04f9b8919812" kind="function"><name>setRotationSpeed</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab898079764e16435f66e93d231ddace7" kind="function"><name>setMovementSpeedThreshold</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a4b75d35c7e776785f0b72a32aa1f69bc" kind="function"><name>setRotationSpeedThreshold</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a14fbdbb443327447d12218c5620c479a" kind="function"><name>setMovementAcceleration</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a919f3843314dced81437d2e46cc85dbd" kind="function"><name>setMovementSpeed</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac4bdb189364cc00e55b93b9aec804893" kind="function"><name>setRotationDampening</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a1fe1c582b0bc5d00ae76c934a6ba5b37" kind="function"><name>setMovementDampening</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9f9f7cd8cbdc2525e130b9ce7d6fb054" kind="function"><name>resetToDefaults</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1Move2DSystem" kind="class"><name>helios::engine::game::systems::physics::Move2DSystem</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1Move2DSystem_1a81511c2d7769b913ae6d7d574af05258" kind="function"><name>moveGameObject</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1Move2DSystem_1a6125947c755c48c8019504848e181e58" kind="function"><name>onAdd</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1Move2DSystem_1ae3e177877e8595f9f3522ca67ae0c2fc" kind="function"><name>update</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1Move2DSystem_1a168e781b6e58516b02eec22cdaf4ce70" kind="function"><name>rotateGameObject</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1Move2DSystem_1a47ec92336c9454cec9b128f4ec511d49" kind="function"><name>moveGameObject</name></member>
   </compound>
   <compound refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice" kind="class"><name>helios::ext::opengl::rendering::OpenGLDevice</name>
     <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a232b9959fd6bc53b3e012b6a2587ddad" kind="function"><name>toOpenGL</name></member>
@@ -1072,6 +1132,13 @@
     <member refid="classhelios_1_1rendering_1_1Renderable_1a936e692f977095b6fcc40fb931024617" kind="function"><name>hasMaterialOverride</name></member>
     <member refid="classhelios_1_1rendering_1_1Renderable_1ac84d4c3a3639c01c10ab926fab13c1cd" kind="function"><name>writeUniformValues</name></member>
   </compound>
+  <compound refid="classhelios_1_1engine_1_1game_1_1components_1_1rendering_1_1RenderableComponent" kind="class"><name>helios::engine::game::components::rendering::RenderableComponent</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1rendering_1_1RenderableComponent_1af5bf0abda328aca5fbf807d54b7ba207" kind="variable"><name>renderable_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1rendering_1_1RenderableComponent_1a98ea77be561f54ac6083848b7deacc27" kind="variable"><name>aabb_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1rendering_1_1RenderableComponent_1a82c5e46f249995797249103a3c2f6355" kind="function"><name>RenderableComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1rendering_1_1RenderableComponent_1a40ef27ef8ac6f5437dadd2da51d089bf" kind="function"><name>onAttach</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1rendering_1_1RenderableComponent_1a788a4f787aa1bfa1b815272ce4096b5e" kind="function"><name>renderable</name></member>
+  </compound>
   <compound refid="classhelios_1_1rendering_1_1RenderCommand" kind="class"><name>helios::rendering::RenderCommand</name>
     <member refid="classhelios_1_1rendering_1_1RenderCommand_1a63492ab4e3849e708277db00436e0f42" kind="variable"><name>renderPrototype_</name></member>
     <member refid="classhelios_1_1rendering_1_1RenderCommand_1a8ab1bc458f350972d5f44575d4a36c60" kind="variable"><name>objectUniformValues_</name></member>
@@ -1153,6 +1220,28 @@
     <member refid="classhelios_1_1rendering_1_1RenderTarget_1a65cfc3bea57ac3b5eb398c85754dc049" kind="function"><name>setSize</name></member>
     <member refid="classhelios_1_1rendering_1_1RenderTarget_1a4e5e2981a9a80dcf74936038c14d21f6" kind="function"><name>width</name></member>
     <member refid="classhelios_1_1rendering_1_1RenderTarget_1a3e4f37f9cfb37b3327ef7285319552fe" kind="function"><name>height</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent" kind="class"><name>helios::engine::game::components::physics::RotationStateComponent</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1a49a1074f925973600a173af6d2a9c784" kind="variable"><name>headingRotationAngle_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1a37b73724d51759b4636727304b6ac6cf" kind="variable"><name>headingRotationAxis_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1ad4e473e403270464e0f70f5aefeb4c88" kind="variable"><name>spinRotationAngle_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1aa78f24d0f6ded03413542e788409bb9b" kind="variable"><name>spinRotationAxis_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1a3e6d9b1ac048db20244a9f684a1152cc" kind="variable"><name>needsUpdate_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1a1f8d91baff777caf30c883da92bda0a7" kind="variable"><name>spinRotationMatrix_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1a06a69156b70bec51e855aada7d087b71" kind="variable"><name>headingRotationMatrix_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1ae564a13a26b5596e4682766cb5b523eb" kind="variable"><name>composedRotationMatrix_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1a37fb9979699a3edfc98bc7fea9a76941" kind="function"><name>update</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1aa5136cd999ce81f0206690f792a6f1c4" kind="function"><name>setHeadingRotationAngle</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1a24eebb0003fe0a59a1cf8b02c3122b9e" kind="function"><name>headingRotationAngle</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1ab323a3966ef02c5f21f8170e348083c9" kind="function"><name>setHeadingRotationAxis</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1a765eb792f10109f1a5cef92eff7ebb64" kind="function"><name>headingRotationAxis</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1ac46688336d16e3527ac0446e1828cc3e" kind="function"><name>setSpinRotationAngle</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1ad4087fddb5f033652551bf3c2b3e0a9e" kind="function"><name>spinRotationAngle</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1aa846368000ac2d169ab61caa541f2ca5" kind="function"><name>setSpinRotationAxis</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1a8466ab6c87d62411b94a027de4951464" kind="function"><name>spinRotationAxis</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1aba10ee08ea87769d9d38ce0d52455024" kind="function"><name>spinRotation</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1a40892776ca44556d30577948453d8d5f" kind="function"><name>headingRotation</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1a3e683bb17a71a50a874eb3d8ba41876a" kind="function"><name>rotation</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1game_1_1systems_1_1post_1_1ScaleClearSystem" kind="class"><name>helios::engine::game::systems::post::ScaleClearSystem</name>
     <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1post_1_1ScaleClearSystem_1a03c6a600f2da567608b2e438d478a0e6" kind="function"><name>update</name></member>
@@ -1244,10 +1333,11 @@
     <member refid="classhelios_1_1scene_1_1SceneNode_1a6fc8bb37765c30988515c45845208f4d" kind="function"><name>setActive</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent" kind="class"><name>helios::engine::game::components::scene::SceneNodeComponent</name>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1ae4bc18dd75ebc2ef2b5f2dc9a36baea6" kind="variable"><name>aabb_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1adc064ac6a57786124c9d6fe2e428dd73" kind="variable"><name>sceneNode_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1adff31f8c22cd249ac4fdbde4e2142f33" kind="function"><name>SceneNodeComponent</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1ae7578125e68c725783741c57a0cc9313" kind="function"><name>onAttach</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1a13d44c8f503ae245c085540322ef3232" kind="function"><name>onActivate</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1aab326552afc91cf15da9aee068604f4f" kind="function"><name>onDeactivate</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1a9b4d1157d5b7259b967885e9d1c502a0" kind="function"><name>sceneNode</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1game_1_1systems_1_1scene_1_1SceneSyncSystem" kind="class"><name>helios::engine::game::systems::scene::SceneSyncSystem</name>
@@ -1314,6 +1404,22 @@
     <member refid="structhelios_1_1scene_1_1SnapshotItem_1a3145126ee37604f07f27f3f8ed8d30e2" kind="function"><name>renderable</name></member>
     <member refid="structhelios_1_1scene_1_1SnapshotItem_1a9b1e4c1e12d5c92284036256995442f5" kind="function"><name>worldMatrix</name></member>
   </compound>
+  <compound refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent" kind="class"><name>helios::engine::game::components::physics::SpinComponent</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1aa7d70b91a8c5a5dc66db7096020f0e28" kind="variable"><name>rotationSpeed_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1ad4dccd47815880b34059f496986f8b58" kind="variable"><name>rotationAxis_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1ac9f05d3c90d0af097745bf93896e872b" kind="variable"><name>spinAngle_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1afdf6b88f8b992e9ce797c57dd0161651" kind="variable"><name>currentRotation_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1a6674dc000c72891ff68a84d71fcdb74e" kind="function"><name>SpinComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1a75299f545b82baa4c2d73d7f07de09cd" kind="function"><name>axis</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1ab5dba59060b775aa95462b5f9b5386e7" kind="function"><name>speed</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1a79f977f26e83fc962c9c730d441835e6" kind="function"><name>rotation</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1a7e0d966046294d0bfa202883f74ef814" kind="function"><name>spinAngle</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1adeb3a31039806bf28a2a27111f056ec2" kind="function"><name>setRotation</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1SpinSystem" kind="class"><name>helios::engine::game::systems::physics::SpinSystem</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1SpinSystem_1a22570e39e1c83f0c3f918eb8acb243fd" kind="variable"><name>identity</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1SpinSystem_1aa1c8e020cde5700f27eaedf0317095e9" kind="function"><name>update</name></member>
+  </compound>
   <compound refid="classhelios_1_1util_1_1time_1_1Stopwatch" kind="class"><name>helios::util::time::Stopwatch</name>
     <member refid="classhelios_1_1util_1_1time_1_1Stopwatch_1a566502bce5d609b2db5a5955d0de8c13" kind="variable"><name>start_</name></member>
     <member refid="classhelios_1_1util_1_1time_1_1Stopwatch_1a1eee2ebce8dcd1f2b4d0b5d1a21fb09f" kind="function"><name>Stopwatch</name></member>
@@ -1377,6 +1483,12 @@
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1TransformComponent_1a18fe0fd7b2105fcb624493cfd77bb13e" kind="function"><name>setWorldTransform</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1TransformComponent_1afc9047774e2f2a13c2f2a2f494095877" kind="function"><name>worldTransform</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1TransformComponent_1a54c5be33d4dff917ddd4f7fb32e502e2" kind="function"><name>worldTranslation</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1TranslationStateComponent" kind="class"><name>helios::engine::game::components::physics::TranslationStateComponent</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1TranslationStateComponent_1aac46abb3009950d366174f6b435b344b" kind="variable"><name>translation_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1TranslationStateComponent_1a43067331476428e4411b148df72c1dc2" kind="function"><name>setTranslation</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1TranslationStateComponent_1a6ca60c18c30ff28a5dca014e42d5cb23" kind="function"><name>translateBy</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1TranslationStateComponent_1afc19f1b5204de427f23619e6c0d93164" kind="function"><name>translation</name></member>
   </compound>
   <compound refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Triangle" kind="struct"><name>helios::rendering::asset::shape::basic::Triangle</name>
     <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Triangle_1acfd0d45878444edb071fb66cd8d0ee1d" kind="function"><name>Triangle</name></member>
@@ -1442,6 +1554,7 @@
     <member refid="structhelios_1_1math_1_1vec3_1ae59861132e8e9d8cde196eeebec0faae" kind="function"><name>cross</name></member>
     <member refid="structhelios_1_1math_1_1vec3_1ad64bf63ac24905fed6d397d59088340d" kind="function"><name>dot</name></member>
     <member refid="structhelios_1_1math_1_1vec3_1a98db2375fe3de090655548f4d29c8192" kind="function"><name>toVec4</name></member>
+    <member refid="structhelios_1_1math_1_1vec3_1a899d8b0cba0d969fd32333ec739c3a61" kind="function"><name>toVec2</name></member>
     <member refid="structhelios_1_1math_1_1vec3_1a9b2414714b83f54d12c67f4d90a19145" kind="function"><name>toVec4</name></member>
     <member refid="structhelios_1_1math_1_1vec3_1a3bbdd06a78770b9dadc233e0acca4295" kind="function"><name>normalize</name></member>
     <member refid="structhelios_1_1math_1_1vec3_1aa551f170f2cba46c0b50cf48fdfb326b" kind="function"><name>operator==</name></member>
@@ -1579,6 +1692,10 @@
   <compound refid="namespacehelios_1_1engine" kind="namespace"><name>helios::engine</name>
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1game" kind="namespace"><name>helios::engine::game</name>
+    <member refid="namespacehelios_1_1engine_1_1game_1a260d868cc67d729c4dbce5e9ea0b6e47" kind="enum"><name>GameObjectFilterType</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1a260d868cc67d729c4dbce5e9ea0b6e47a4d3d769b812b6faa6b76e1a8abaece2d" kind="enumvalue"><name>Active</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1a260d868cc67d729c4dbce5e9ea0b6e47a3cab03c00dbd11bc3569afa0748013f0" kind="enumvalue"><name>Inactive</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1a260d868cc67d729c4dbce5e9ea0b6e47ab1c94ca2fbc3e78fc30069c8d0f01680" kind="enumvalue"><name>All</name></member>
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1game_1_1commands" kind="namespace"><name>helios::engine::game::commands</name>
   </compound>
@@ -1591,6 +1708,8 @@
   <compound refid="namespacehelios_1_1engine_1_1game_1_1components_1_1model" kind="namespace"><name>helios::engine::game::components::model</name>
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1game_1_1components_1_1physics" kind="namespace"><name>helios::engine::game::components::physics</name>
+  </compound>
+  <compound refid="namespacehelios_1_1engine_1_1game_1_1components_1_1rendering" kind="namespace"><name>helios::engine::game::components::rendering</name>
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1game_1_1components_1_1scene" kind="namespace"><name>helios::engine::game::components::scene</name>
   </compound>
@@ -1681,6 +1800,7 @@
     <member refid="namespacehelios_1_1math_1a08252f81850c5902e3c8dead272f3332" kind="typedef"><name>vec4f</name></member>
     <member refid="namespacehelios_1_1math_1a78a0f495523b71681b549f098f994126" kind="typedef"><name>vec4d</name></member>
     <member refid="namespacehelios_1_1math_1a9ce6ecf5869b53d92a26354e2c48d0b4" kind="typedef"><name>vec4i</name></member>
+    <member refid="namespacehelios_1_1math_1a64379fe55f1794fad912feafd5051224" kind="variable"><name>Z_AXISf</name></member>
     <member refid="namespacehelios_1_1math_1af25d93f23f91acae02abfd7706b2e36d" kind="variable"><name>EPSILON_LENGTH</name></member>
     <member refid="namespacehelios_1_1math_1a3009ee1714550dc2af4d7e5e952e8a90" kind="function"><name>perspective</name></member>
     <member refid="namespacehelios_1_1math_1aef6bef7ca3d31a4908a66e16c9771420" kind="function"><name>lookAt</name></member>
@@ -1822,6 +1942,8 @@
   </compound>
   <compound refid="helios_2engine_2game_2components_2physics_2__module_8ixx" kind="file"><name>_module.ixx</name>
   </compound>
+  <compound refid="helios_2engine_2game_2components_2rendering_2__module_8ixx" kind="file"><name>_module.ixx</name>
+  </compound>
   <compound refid="helios_2engine_2game_2components_2scene_2__module_8ixx" kind="file"><name>_module.ixx</name>
   </compound>
   <compound refid="helios_2engine_2game_2systems_2__module_8ixx" kind="file"><name>_module.ixx</name>
@@ -1929,6 +2051,8 @@
   <compound refid="helios_2engine_2game_2components_2physics_2README_8md" kind="file"><name>README.md</name>
   </compound>
   <compound refid="helios_2engine_2game_2components_2README_8md" kind="file"><name>README.md</name>
+  </compound>
+  <compound refid="helios_2engine_2game_2components_2rendering_2README_8md" kind="file"><name>README.md</name>
   </compound>
   <compound refid="helios_2engine_2game_2components_2scene_2README_8md" kind="file"><name>README.md</name>
   </compound>
@@ -2038,6 +2162,8 @@
   </compound>
   <compound refid="Aim2DCommand_8ixx" kind="file"><name>Aim2DCommand.ixx</name>
   </compound>
+  <compound refid="HeadingCommand_8ixx" kind="file"><name>HeadingCommand.ixx</name>
+  </compound>
   <compound refid="Move2DCommand_8ixx" kind="file"><name>Move2DCommand.ixx</name>
   </compound>
   <compound refid="ShootCommand_8ixx" kind="file"><name>ShootCommand.ixx</name>
@@ -2054,17 +2180,33 @@
   </compound>
   <compound refid="AabbColliderComponent_8ixx" kind="file"><name>AabbColliderComponent.ixx</name>
   </compound>
+  <compound refid="DirectionComponent_8ixx" kind="file"><name>DirectionComponent.ixx</name>
+  </compound>
+  <compound refid="HeadingComponent_8ixx" kind="file"><name>HeadingComponent.ixx</name>
+  </compound>
   <compound refid="LevelBoundsBehaviorComponent_8ixx" kind="file"><name>LevelBoundsBehaviorComponent.ixx</name>
   </compound>
   <compound refid="Move2DComponent_8ixx" kind="file"><name>Move2DComponent.ixx</name>
   </compound>
+  <compound refid="RotationStateComponent_8ixx" kind="file"><name>RotationStateComponent.ixx</name>
+  </compound>
   <compound refid="ScaleComponent_8ixx" kind="file"><name>ScaleComponent.ixx</name>
   </compound>
+  <compound refid="SpinComponent_8ixx" kind="file"><name>SpinComponent.ixx</name>
+  </compound>
   <compound refid="TransformComponent_8ixx" kind="file"><name>TransformComponent.ixx</name>
+  </compound>
+  <compound refid="TranslationStateComponent_8ixx" kind="file"><name>TranslationStateComponent.ixx</name>
+  </compound>
+  <compound refid="RenderableComponent_8ixx" kind="file"><name>RenderableComponent.ixx</name>
   </compound>
   <compound refid="SceneNodeComponent_8ixx" kind="file"><name>SceneNodeComponent.ixx</name>
   </compound>
   <compound refid="GameObject_8ixx" kind="file"><name>GameObject.ixx</name>
+  </compound>
+  <compound refid="GameObjectFilterType_8ixx" kind="file"><name>GameObjectFilterType.ixx</name>
+  </compound>
+  <compound refid="GameObjectPool_8ixx" kind="file"><name>GameObjectPool.ixx</name>
   </compound>
   <compound refid="GameWorld_8ixx" kind="file"><name>GameWorld.ixx</name>
     <member refid="GameWorld_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
@@ -2079,11 +2221,17 @@
   </compound>
   <compound refid="BoundsUpdateSystem_8ixx" kind="file"><name>BoundsUpdateSystem.ixx</name>
   </compound>
+  <compound refid="ComposeTransformSystem_8ixx" kind="file"><name>ComposeTransformSystem.ixx</name>
+  </compound>
+  <compound refid="HeadingSystem_8ixx" kind="file"><name>HeadingSystem.ixx</name>
+  </compound>
   <compound refid="LevelBoundsBehaviorSystem_8ixx" kind="file"><name>LevelBoundsBehaviorSystem.ixx</name>
   </compound>
   <compound refid="Move2DSystem_8ixx" kind="file"><name>Move2DSystem.ixx</name>
   </compound>
   <compound refid="ScaleSystem_8ixx" kind="file"><name>ScaleSystem.ixx</name>
+  </compound>
+  <compound refid="SpinSystem_8ixx" kind="file"><name>SpinSystem.ixx</name>
   </compound>
   <compound refid="ScaleClearSystem_8ixx" kind="file"><name>ScaleClearSystem.ixx</name>
   </compound>
@@ -2341,6 +2489,8 @@
   <compound refid="dir_d35e9ff41279209263f6c1b8d9281645" kind="dir"><name>include/helios/engine/game/systems/post</name>
   </compound>
   <compound refid="dir_18b5bfcc7de6179f7b9f926996bd827e" kind="dir"><name>include/ext/opengl/rendering</name>
+  </compound>
+  <compound refid="dir_985d4ed54faec87b01987d3b14a16a81" kind="dir"><name>include/helios/engine/game/components/rendering</name>
   </compound>
   <compound refid="dir_9ba586a504c756f19720715161f17166" kind="dir"><name>include/helios/rendering</name>
   </compound>
@@ -2796,6 +2946,12 @@
     <member refid="classhelios_1_1engine_1_1game_1_1commands_1_1Aim2DCommand_1ac1967593d3afa31a055da2a702339ebb" kind="function"><name>Aim2DCommand</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1commands_1_1Aim2DCommand_1adcf8bbd3975dd917ebc77fa3ea20128a" kind="function"><name>execute</name></member>
   </compound>
+  <compound refid="module__helios_8engine_8game_8commands_8HeadingCommand" kind="module"><name>helios.engine.game.commands.HeadingCommand</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1commands_1_1HeadingCommand_1a77aaa55495a1c5855eb39f13bd29e396" kind="variable"><name>turnFactor_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1commands_1_1HeadingCommand_1a21321a7d8f86c3f338b59ed9626af3c7" kind="variable"><name>direction_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1commands_1_1HeadingCommand_1ae70ab4dd6428c0a222a7430bf4379f9b" kind="function"><name>HeadingCommand</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1commands_1_1HeadingCommand_1a38c19be5c36ce0334636d45fd1909373" kind="function"><name>execute</name></member>
+  </compound>
   <compound refid="module__helios_8engine_8game_8commands_8Move2DCommand" kind="module"><name>helios.engine.game.commands.Move2DCommand</name>
     <member refid="classhelios_1_1engine_1_1game_1_1commands_1_1Move2DCommand_1a0daa3fec0571d9c3b9db863faf6bfce9" kind="variable"><name>speedFactor_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1commands_1_1Move2DCommand_1a1a794217711d6bb74977380c50176417" kind="variable"><name>direction_</name></member>
@@ -2812,6 +2968,8 @@
     <member refid="classhelios_1_1engine_1_1game_1_1Component_1abeb3af407878cf9f2d1019fdc9e2712a" kind="function"><name>~Component</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1Component_1a4a167553b4aed32f0ad96e8836a01b88" kind="function"><name>Component</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1Component_1a3a4f0b840b179c07299fc291a57fb51f" kind="function"><name>onAttach</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1Component_1ab36bb364af461dd789e7477f1bafa13b" kind="function"><name>onActivate</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1Component_1a7e5a02b0500c65e9606839059bdda398" kind="function"><name>onDeactivate</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1Component_1a0894e93b95d6d0b71602b8803d2cc213" kind="function"><name>gameObject</name></member>
   </compound>
   <compound refid="module__helios_8engine_8game_8components" kind="module"><name>helios.engine.game.components</name>
@@ -2866,68 +3024,109 @@
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1AabbColliderComponent_1addf3e0db2c2a332d7d9b27911cc81585" kind="function"><name>bounds</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1AabbColliderComponent_1a246b7fc71e674629b5c066b04ea1ad94" kind="function"><name>setBounds</name></member>
   </compound>
+  <compound refid="module__helios_8engine_8game_8components_8physics_8DirectionComponent" kind="module"><name>helios.engine.game.components.physics.DirectionComponent</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1DirectionComponent_1aa631747c7ccb66afda36187cb4693291" kind="variable"><name>direction_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1DirectionComponent_1ae68703e93605531d87edd653f2eaa5fc" kind="function"><name>setDirection</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1DirectionComponent_1a8ea2b6b308b7a11e5847120b96f7954e" kind="function"><name>direction</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8game_8components_8physics_8HeadingComponent" kind="module"><name>helios.engine.game.components.physics.HeadingComponent</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a26b967c7431ca91367e2e072a385da2e" kind="variable"><name>DEFAULT_ROTATION_SPEED</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a72d6d92e19ad71541fdcd78146f5c4ab" kind="variable"><name>DEFAULT_ROTATION_SPEED_THRESHOLD</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1aaa196dec42e22f1b00b4903e2f080104" kind="variable"><name>DEFAULT_ROTATION_DAMPENING</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a92230ab59736a87ceeb769ff541820e3" kind="variable"><name>rotationSpeed_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1af8fab691fc62541dc030e749f3a7a68f" kind="variable"><name>rotationSpeedThreshold_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a7cc69eefa225aec06f878727586bef20" kind="variable"><name>rotationDampening_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1aa539cc09677674d009f52f36400e530e" kind="variable"><name>currentRotationAngle_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a44d14f71dde7f4bbed79ad4085381801" kind="variable"><name>targetRotationAngle_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a05824205566839d8031ff237c77a227d" kind="variable"><name>rotationAngleDelta_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a11fe301fa917be855ae3eb3d87615822" kind="variable"><name>currentRotationSpeed_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1ae5ac80ffaafd2b8b91cfc4a979a9781b" kind="variable"><name>isInputActive_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1ad086508c6dbe7f88c00796e81a884410" kind="variable"><name>turnIntensity_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a1b8be31d5c80997d939b9e6d448eb524" kind="variable"><name>headingInput_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a2c9329e3dbf47d2e6d818c556614cb07" kind="function"><name>setHeading</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a0e2de075a1aa973efe9a4d8758137583" kind="function"><name>rotationAxis</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a7334b44384f0adbf47d1553490a8fe77" kind="function"><name>setCurrentRotationSpeed</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a4537e856d70be505b6de455aa5c77e48" kind="function"><name>currentRotationSpeed</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a78c31a64bd6786a9baf7803480f426ab" kind="function"><name>rotationAngleDelta</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a2ddc22661574259cf60bbc0bdaea8258" kind="function"><name>currentRotationAngle</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a4b6616322ab2379a3db329b748642e9b" kind="function"><name>targetRotationAngle</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a375c0bed9050876ec3dc09119660b47b" kind="function"><name>setTargetRotationAngle</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1adf92aede31f0127389e7661e1828c334" kind="function"><name>setCurrentRotationAngle</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a1be212f2c232dc815392161427cbaac4" kind="function"><name>setRotationAngleDelta</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1ab93888efcb162ecd8f6ef34fce63b181" kind="function"><name>isInputActive</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a7e800e5502e43babc22d05a8fb0d81cb" kind="function"><name>headingInput</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1ade023e57d9a5d7412ab8bad78ec4ba4b" kind="function"><name>rotationSpeed</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a32308cfeff5de9c512572399f871088f" kind="function"><name>rotationSpeedThreshold</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a0234a3fdde1c3761a10d459ae38d8746" kind="function"><name>rotationDampening</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1afd2d3ff4808478006f81c17827a1fd9f" kind="function"><name>setRotationSpeed</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a0ddc8f98793f7a6cbab0dd566aa0793d" kind="function"><name>setRotationSpeedThreshold</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a94591ed9a3cb2c75eb56311621d029fe" kind="function"><name>setRotationDampening</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a6400e2e07a46c0f4c760ff958be63200" kind="function"><name>turnIntensity</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a9e571a1771e0da7831afb2e0e576b16f" kind="function"><name>resetToDefaults</name></member>
+  </compound>
   <compound refid="module__helios_8engine_8game_8components_8physics_8LevelBoundsBehaviorComponent" kind="module"><name>helios.engine.game.components.physics.LevelBoundsBehaviorComponent</name>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1a43f5eac15b732fb4a6a5aeda9771aa3c" kind="variable"><name>restitution_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1a2db70951b43725a6f0fd7b09957e210f" kind="function"><name>LevelBoundsBehaviorComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1abf7dd41d729883dce445a66fe04705c4" kind="function"><name>LevelBoundsBehaviorComponent</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1a6748387a003beb211e88f5f4ed24a3e6" kind="function"><name>restitution</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1aa700b00e7ca94649741548271f568751" kind="function"><name>setRestitution</name></member>
   </compound>
   <compound refid="module__helios_8engine_8game_8components_8physics_8Move2DComponent" kind="module"><name>helios.engine.game.components.physics.Move2DComponent</name>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aeaa627024b68fa1bc5e4e48f6a1b389f" kind="variable"><name>DEFAULT_ROTATION_SPEED</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a55c066b45893c97db0c245235fe22b1c" kind="variable"><name>DEFAULT_MOVEMENT_SPEED_THRESHOLD</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aed2d9dc0fa76b1163359a3f2d613ceed" kind="variable"><name>DEFAULT_ROTATION_SPEED_THRESHOLD</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a58d811906dfa014dd1220c474b02aff7" kind="variable"><name>DEFAULT_MOVEMENT_ACCELERATION</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9d1e52de0c68d9dce805bbd766b51f2f" kind="variable"><name>DEFAULT_MOVEMENT_SPEED</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ad86a71d09afc29ca152901ecfd262c92" kind="variable"><name>DEFAULT_ROTATION_DAMPENING</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab685360bbbc0a46ec64ca4e43e38cdbf" kind="variable"><name>DEFAULT_MOVEMENT_DAMPENING</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a58a94791417accc02c9c3e6f4451f5d9" kind="variable"><name>DEFAULT_BASE_ROTATION_SPEED_MULTIPLIER</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a483daaad08f6019cdd8fcd2b21503d76" kind="variable"><name>rotationSpeed_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a91c11ed8bc317ffcb010fc9d348bc0c8" kind="variable"><name>movementSpeedThreshold_</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1abccead76ea179c5442fd7f0270116bbc" kind="variable"><name>rotationSpeedThreshold_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a1cc79a7594f9b7e350b57e4b05379646" kind="variable"><name>movementAcceleration_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1af0b8633ba1d7886aeeed2313312c7998" kind="variable"><name>movementSpeed_</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac2c90c6fd38a2822a96b06a63958f667" kind="variable"><name>rotationDampening_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a06613bdc3ef2bb7725129ddec553dbba" kind="variable"><name>movementDampening_</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aa59fc1943eb000f3f88b359a01cc292d" kind="variable"><name>baseRotationSpeedMultiplier_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ad015d05507a7dedc7fdbc211761252a4" kind="variable"><name>currentMovementSpeed_</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1af0ee1a577ae0aa986d31e473d47e2c2b" kind="variable"><name>currentRotationAngle_</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aee9dd997ec318afc598d801c19c474ad" kind="variable"><name>targetRotationAngle_</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ae61dae73e5fbd6c49ce2ac3311e94273" kind="variable"><name>rotationAngleDelta_</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a57d69bb23476c514e82a44fafa93204c" kind="variable"><name>currentRotationSpeed_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a7701b2398957d8225ca888acaa51acdc" kind="variable"><name>isInputActive_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a093c4cca5faf629e828abd8237d4cbd6" kind="variable"><name>throttle_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac90e40d347ccc487bbe03b00cf29b415" kind="variable"><name>steeringInput_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a501d638f93dddc695767e97cd85cd55c" kind="variable"><name>velocity_</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aca8a4ccdd4bdedc05bb52c2b931cfc7a" kind="function"><name>move</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1af05888282800d62273882ddf47e03b2d" kind="function"><name>setCurrentRotationSpeed</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a7cde155452f7ae86683fb44e2de3bba0" kind="function"><name>Move2DComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a767ad44cde8b65ac92df736cfaf7b8a4" kind="function"><name>Move2DComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1aebd3f3ed2a52567f78033171d978a3df" kind="function"><name>move</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a8c80335088f4ceb2abf4848418f42f2b" kind="function"><name>setVelocity</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a8ebb3298b19adebbbece18063f8a7737" kind="function"><name>currentRotationSpeed</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a7c62c4b5cf6bba18c2afc0aab1ec6e9a" kind="function"><name>rotationAngleDelta</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a2b6f396eefe712f0d4f8ed187d07f29b" kind="function"><name>currentMovementSpeed</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac002bf8fbe58bc608a8d0875c37bb03d" kind="function"><name>currentRotationAngle</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a0e5ed29b368c42b42d3b14b98f465445" kind="function"><name>targetRotationAngle</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac68cf88969fc1de8382de50ba52776f6" kind="function"><name>setCurrentRotationAngle</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a36156283469d6fef22e3a2da856fe0ef" kind="function"><name>setRotationAngleDelta</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a87553155876940f2eaacfa6f3cac962c" kind="function"><name>setCurrentMovementSpeed</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a18486bbe86bca7e14c9b5c68f9a71365" kind="function"><name>isInputActive</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1af44bf76b94da4db4a9197ab0b56c96ff" kind="function"><name>steeringInput</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab097d0a5c803ab9dd295368b155decbb" kind="function"><name>throttle</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a5830a38dda58627afc80c6584acc4707" kind="function"><name>velocity</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a265f6c6df527ea612de40ad4533024b8" kind="function"><name>speedRatio</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ae4a0d20de42b8fe03c72fb622f9ba97e" kind="function"><name>rotationSpeed</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a4a216d05752dc12f436acf247d1e16d3" kind="function"><name>movementSpeedThreshold</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a1d416ece697cd4664edc2aa86dd061ff" kind="function"><name>rotationSpeedThreshold</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab198a5185c5d33e98d1acfe36fc2e9ba" kind="function"><name>movementAcceleration</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a04fb3570cf8f5622ab45409772023e6b" kind="function"><name>movementSpeed</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab653fbe372142139b6a29131b536cdfa" kind="function"><name>rotationDampening</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ad4589251426864a83cdc4c2323439861" kind="function"><name>movementDampening</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a58d08e85ae29f30af33e04f9b8919812" kind="function"><name>setRotationSpeed</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ab898079764e16435f66e93d231ddace7" kind="function"><name>setMovementSpeedThreshold</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a4b75d35c7e776785f0b72a32aa1f69bc" kind="function"><name>setRotationSpeedThreshold</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a14fbdbb443327447d12218c5620c479a" kind="function"><name>setMovementAcceleration</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a919f3843314dced81437d2e46cc85dbd" kind="function"><name>setMovementSpeed</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1ac4bdb189364cc00e55b93b9aec804893" kind="function"><name>setRotationDampening</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a1fe1c582b0bc5d00ae76c934a6ba5b37" kind="function"><name>setMovementDampening</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent_1a9f9f7cd8cbdc2525e130b9ce7d6fb054" kind="function"><name>resetToDefaults</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8game_8components_8physics_8RotationStateComponent" kind="module"><name>helios.engine.game.components.physics.RotationStateComponent</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1a49a1074f925973600a173af6d2a9c784" kind="variable"><name>headingRotationAngle_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1a37b73724d51759b4636727304b6ac6cf" kind="variable"><name>headingRotationAxis_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1ad4e473e403270464e0f70f5aefeb4c88" kind="variable"><name>spinRotationAngle_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1aa78f24d0f6ded03413542e788409bb9b" kind="variable"><name>spinRotationAxis_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1a3e6d9b1ac048db20244a9f684a1152cc" kind="variable"><name>needsUpdate_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1a1f8d91baff777caf30c883da92bda0a7" kind="variable"><name>spinRotationMatrix_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1a06a69156b70bec51e855aada7d087b71" kind="variable"><name>headingRotationMatrix_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1ae564a13a26b5596e4682766cb5b523eb" kind="variable"><name>composedRotationMatrix_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1a37fb9979699a3edfc98bc7fea9a76941" kind="function"><name>update</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1aa5136cd999ce81f0206690f792a6f1c4" kind="function"><name>setHeadingRotationAngle</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1a24eebb0003fe0a59a1cf8b02c3122b9e" kind="function"><name>headingRotationAngle</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1ab323a3966ef02c5f21f8170e348083c9" kind="function"><name>setHeadingRotationAxis</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1a765eb792f10109f1a5cef92eff7ebb64" kind="function"><name>headingRotationAxis</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1ac46688336d16e3527ac0446e1828cc3e" kind="function"><name>setSpinRotationAngle</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1ad4087fddb5f033652551bf3c2b3e0a9e" kind="function"><name>spinRotationAngle</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1aa846368000ac2d169ab61caa541f2ca5" kind="function"><name>setSpinRotationAxis</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1a8466ab6c87d62411b94a027de4951464" kind="function"><name>spinRotationAxis</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1aba10ee08ea87769d9d38ce0d52455024" kind="function"><name>spinRotation</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1a40892776ca44556d30577948453d8d5f" kind="function"><name>headingRotation</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_1a3e683bb17a71a50a874eb3d8ba41876a" kind="function"><name>rotation</name></member>
   </compound>
   <compound refid="module__helios_8engine_8game_8components_8physics_8ScaleComponent" kind="module"><name>helios.engine.game.components.physics.ScaleComponent</name>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1ScaleComponent_1a8accd57e9a4c8069713179a5b867c53e" kind="variable"><name>width_</name></member>
@@ -2942,6 +3141,18 @@
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1ScaleComponent_1ac3ce8c296546c135db69f7e2c5c7d890" kind="function"><name>unit</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1ScaleComponent_1ad0329f393d45e24966faa65b713c3c1d" kind="function"><name>scaling</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1ScaleComponent_1a8660c78f809840e3c2dfd565ae6a047c" kind="function"><name>setScale</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8game_8components_8physics_8SpinComponent" kind="module"><name>helios.engine.game.components.physics.SpinComponent</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1aa7d70b91a8c5a5dc66db7096020f0e28" kind="variable"><name>rotationSpeed_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1ad4dccd47815880b34059f496986f8b58" kind="variable"><name>rotationAxis_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1ac9f05d3c90d0af097745bf93896e872b" kind="variable"><name>spinAngle_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1afdf6b88f8b992e9ce797c57dd0161651" kind="variable"><name>currentRotation_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1a6674dc000c72891ff68a84d71fcdb74e" kind="function"><name>SpinComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1a75299f545b82baa4c2d73d7f07de09cd" kind="function"><name>axis</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1ab5dba59060b775aa95462b5f9b5386e7" kind="function"><name>speed</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1a79f977f26e83fc962c9c730d441835e6" kind="function"><name>rotation</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1a7e0d966046294d0bfa202883f74ef814" kind="function"><name>spinAngle</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1adeb3a31039806bf28a2a27111f056ec2" kind="function"><name>setRotation</name></member>
   </compound>
   <compound refid="module__helios_8engine_8game_8components_8physics_8TransformComponent" kind="module"><name>helios.engine.game.components.physics.TransformComponent</name>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1TransformComponent_1a1f7f413ec3d0531759662fc69470054f" kind="variable"><name>transform_</name></member>
@@ -2961,29 +3172,74 @@
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1TransformComponent_1afc9047774e2f2a13c2f2a2f494095877" kind="function"><name>worldTransform</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1TransformComponent_1a54c5be33d4dff917ddd4f7fb32e502e2" kind="function"><name>worldTranslation</name></member>
   </compound>
+  <compound refid="module__helios_8engine_8game_8components_8physics_8TranslationStateComponent" kind="module"><name>helios.engine.game.components.physics.TranslationStateComponent</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1TranslationStateComponent_1aac46abb3009950d366174f6b435b344b" kind="variable"><name>translation_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1TranslationStateComponent_1a43067331476428e4411b148df72c1dc2" kind="function"><name>setTranslation</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1TranslationStateComponent_1a6ca60c18c30ff28a5dca014e42d5cb23" kind="function"><name>translateBy</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1TranslationStateComponent_1afc19f1b5204de427f23619e6c0d93164" kind="function"><name>translation</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8game_8components_8rendering" kind="module"><name>helios.engine.game.components.rendering</name>
+  </compound>
+  <compound refid="module__helios_8engine_8game_8components_8rendering_8RenderableComponent" kind="module"><name>helios.engine.game.components.rendering.RenderableComponent</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1rendering_1_1RenderableComponent_1af5bf0abda328aca5fbf807d54b7ba207" kind="variable"><name>renderable_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1rendering_1_1RenderableComponent_1a98ea77be561f54ac6083848b7deacc27" kind="variable"><name>aabb_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1rendering_1_1RenderableComponent_1a82c5e46f249995797249103a3c2f6355" kind="function"><name>RenderableComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1rendering_1_1RenderableComponent_1a40ef27ef8ac6f5437dadd2da51d089bf" kind="function"><name>onAttach</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1rendering_1_1RenderableComponent_1a788a4f787aa1bfa1b815272ce4096b5e" kind="function"><name>renderable</name></member>
+  </compound>
   <compound refid="module__helios_8engine_8game_8components_8scene" kind="module"><name>helios.engine.game.components.scene</name>
   </compound>
   <compound refid="module__helios_8engine_8game_8components_8scene_8SceneNodeComponent" kind="module"><name>helios.engine.game.components.scene.SceneNodeComponent</name>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1ae4bc18dd75ebc2ef2b5f2dc9a36baea6" kind="variable"><name>aabb_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1adc064ac6a57786124c9d6fe2e428dd73" kind="variable"><name>sceneNode_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1adff31f8c22cd249ac4fdbde4e2142f33" kind="function"><name>SceneNodeComponent</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1ae7578125e68c725783741c57a0cc9313" kind="function"><name>onAttach</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1a13d44c8f503ae245c085540322ef3232" kind="function"><name>onActivate</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1aab326552afc91cf15da9aee068604f4f" kind="function"><name>onDeactivate</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1a9b4d1157d5b7259b967885e9d1c502a0" kind="function"><name>sceneNode</name></member>
   </compound>
   <compound refid="module__helios_8engine_8game_8GameObject" kind="module"><name>helios.engine.game.GameObject</name>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a8ccca9fdee32b72202b6b1cca51288c3" kind="variable"><name>guid_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a04c48c868e86b9f5c38ef0cf3176c828" kind="variable"><name>components_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a0e3710fd2c9d61fde0654c8a17b06517" kind="variable"><name>componentIndex_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6a942f57a7de5c5e06d145c565e0cabd" kind="variable"><name>updatables_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1af6ab980a0077b15c389d5ba27a0b84e4" kind="variable"><name>isActive_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a56372781ae87e48521a7678634a43578" kind="function"><name>GameObject</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1ab15ff967c8bf14b0d4fbece6cb7d38e4" kind="function"><name>~GameObject</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a6efd5ef390fc9b7b8468682659f5a1fb" kind="function"><name>add</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a834e29f3aef6fa533f1bc3adf7752343" kind="function"><name>getOrAdd</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a2306d52f0450467d64ef1ddcdf5448d2" kind="function"><name>get</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1ae5dcc52eda581579cb00e9c4fff90a37" kind="function"><name>getOrAdd</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a1de477ec6f0718697589c8d69498939d" kind="function"><name>get</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a75ba7876058a260289f28b39c6fce25a" kind="function"><name>has</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a64afc8b3ae7ed69e9763d51169328af2" kind="function"><name>update</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1abf3cf53d3aa0c9b62da27d7934928168" kind="function"><name>guid</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a1604683eea731721ee7193a004794b21" kind="function"><name>isActive</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1af1e443b83abcd51b2fa5d18ac5b22efa" kind="function"><name>setActive</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8game_8GameObjectFilterType" kind="module"><name>helios.engine.game.GameObjectFilterType</name>
+    <member refid="namespacehelios_1_1engine_1_1game_1a260d868cc67d729c4dbce5e9ea0b6e47" kind="enum"><name>GameObjectFilterType</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1a260d868cc67d729c4dbce5e9ea0b6e47a4d3d769b812b6faa6b76e1a8abaece2d" kind="enumvalue"><name>Active</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1a260d868cc67d729c4dbce5e9ea0b6e47a3cab03c00dbd11bc3569afa0748013f0" kind="enumvalue"><name>Inactive</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1a260d868cc67d729c4dbce5e9ea0b6e47ab1c94ca2fbc3e78fc30069c8d0f01680" kind="enumvalue"><name>All</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8game_8GameObjectPool" kind="module"><name>helios.engine.game.GameObjectPool</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1aa74b049b36bc39be7648601206230f25" kind="typedef"><name>Factory</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1aba52979d608a7782e5deb40c106923fe" kind="variable"><name>activeIndex_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a17ac625de593f40866ebf3377de4f5da" kind="variable"><name>activeGameObjects_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1ac87d05322db81fd2c8c8870d131289ac" kind="variable"><name>inactiveGameObjects_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a1d851306ee05a07ab0b68dff88b2f711" kind="variable"><name>poolSize_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a16b1f234b1f0ecbcc44b18e740aaa176" kind="variable"><name>gameWorld_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a8fbbfa2b83195d52fe826fc4ad11f782" kind="variable"><name>gameObjectFactory_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1aa3f92f903921ae186b1f4cd9721c8db8" kind="variable"><name>guid_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a4f50e9ec7c32aa93dab2203baa16bad3" kind="function"><name>warmup</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a74c933b59081808944263a94a62240f9" kind="function"><name>GameObjectPool</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a9917d7ae53b08752a680d6ea9729f0ed" kind="function"><name>guid</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1ac53ed0a26e7dca1df6fb96830abda06a" kind="function"><name>acquire</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a073485a4a359cbd48a2e5b8633020239" kind="function"><name>release</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a722d64b5eff08ee053cb45184dd70801" kind="function"><name>release</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a3179669f6a21f905e8eb9dca7e99b865" kind="function"><name>inactiveGameObjects</name></member>
   </compound>
   <compound refid="module__helios_8engine_8game_8GameWorld" kind="module"><name>helios.engine.game.GameWorld</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1aaa4a2366fd132dd0336e8abe6a9db91e" kind="typedef"><name>Map</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1adeee4d3fef4da0bfc3e254aec427ac15" kind="typedef"><name>GameObjectRange</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ade9c156ea18ef1363364f5c2817665aa" kind="variable"><name>gameObjects_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0586ac1c766822252c3422bafda3b917" kind="variable"><name>logger_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ac4ed48c579a99900ce634413375ad477" kind="variable"><name>systems_</name></member>
@@ -2992,12 +3248,14 @@
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a3c063037908af8aa35f0b8bb926af9ef" kind="function"><name>setLevel</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a2a2383d3d780c562b1d7a2c680ace6f0" kind="function"><name>hasLevel</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ae74dc0a0df46ba43456da2922ea2315e" kind="function"><name>level</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1aa43d58ad9e4c3fbf3efb9c6936b4c708" kind="function"><name>add</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a42fe4629a34aa357763255f499b8d9ab" kind="function"><name>get</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ad6adcd1256a97a4ecf2045eb10de8f0b" kind="function"><name>has</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ad6ff449301dbcfbb1214376a4ee3ebae" kind="function"><name>addSystem</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a90f78fa2cfb469d75cb6876bcc58a189" kind="function"><name>getSystem</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a891f6e8c25e5419df48491233605d79d" kind="function"><name>hasSystem</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a3c520229c0ff0a74019dc10fcb71a439" kind="function"><name>update</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a4e85936a3662c8dfc85cf83e2e901541" kind="function"><name>addGameObject</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a10feb30a293f8266c398fc5b42872a4a" kind="function"><name>find</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0b4dbd1c69f3529fb722b06088500a9e" kind="function"><name>find</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ad0c11deb99d085edf7c13a448d4866fa" kind="function"><name>find</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1aada0325e1ee9928451c6149a6f5643b3" kind="function"><name>find</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0e8351e088564887aaabd806752e30f2" kind="function"><name>removeGameObject</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0a28cfa4a49e74a11b4c1420d99bb72d" kind="function"><name>gameObjects</name></member>
@@ -3052,19 +3310,29 @@
   <compound refid="module__helios_8engine_8game_8systems_8physics_8BoundsUpdateSystem" kind="module"><name>helios.engine.game.systems.physics.BoundsUpdateSystem</name>
     <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1BoundsUpdateSystem_1a97e57a7bcde348feb7a7da9968661002" kind="function"><name>update</name></member>
   </compound>
+  <compound refid="module__helios_8engine_8game_8systems_8physics_8ComposeTransformSystem" kind="module"><name>helios.engine.game.systems.physics.ComposeTransformSystem</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1ComposeTransformSystem_1a90188476238f7e6d96da63e6510751c7" kind="function"><name>update</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8game_8systems_8physics_8HeadingSystem" kind="module"><name>helios.engine.game.systems.physics.HeadingSystem</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1HeadingSystem_1a1bbad29e1a0c49d320b11df70c78716d" kind="function"><name>updateHeading</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1HeadingSystem_1ab663b281b488f7ce2ba595146cbccdd4" kind="function"><name>update</name></member>
+  </compound>
   <compound refid="module__helios_8engine_8game_8systems_8physics_8LevelBoundsBehaviorSystem" kind="module"><name>helios.engine.game.systems.physics.LevelBoundsBehaviorSystem</name>
     <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1LevelBoundsBehaviorSystem_1a7026fa062c7aed092bcc20878b38a0c3" kind="function"><name>update</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1LevelBoundsBehaviorSystem_1a756c6a667c23b9c665318c77b21e362d" kind="function"><name>bounce</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1LevelBoundsBehaviorSystem_1a6d974192c58560167769307c66372cd1" kind="function"><name>bounce</name></member>
   </compound>
   <compound refid="module__helios_8engine_8game_8systems_8physics_8Move2DSystem" kind="module"><name>helios.engine.game.systems.physics.Move2DSystem</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1Move2DSystem_1a81511c2d7769b913ae6d7d574af05258" kind="function"><name>moveGameObject</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1Move2DSystem_1a6125947c755c48c8019504848e181e58" kind="function"><name>onAdd</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1Move2DSystem_1ae3e177877e8595f9f3522ca67ae0c2fc" kind="function"><name>update</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1Move2DSystem_1a168e781b6e58516b02eec22cdaf4ce70" kind="function"><name>rotateGameObject</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1Move2DSystem_1a47ec92336c9454cec9b128f4ec511d49" kind="function"><name>moveGameObject</name></member>
   </compound>
   <compound refid="module__helios_8engine_8game_8systems_8physics_8ScaleSystem" kind="module"><name>helios.engine.game.systems.physics.ScaleSystem</name>
     <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1ScaleSystem_1a32557d196742d615b17eb040c0039cba" kind="function"><name>onAdd</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1ScaleSystem_1a4edab0f66d98332c9142a13881aa6639" kind="function"><name>update</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8game_8systems_8physics_8SpinSystem" kind="module"><name>helios.engine.game.systems.physics.SpinSystem</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1SpinSystem_1a22570e39e1c83f0c3f918eb8acb243fd" kind="variable"><name>identity</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1SpinSystem_1aa1c8e020cde5700f27eaedf0317095e9" kind="function"><name>update</name></member>
   </compound>
   <compound refid="module__helios_8engine_8game_8systems_8post" kind="module"><name>helios.engine.game.systems.post</name>
   </compound>
@@ -3324,6 +3592,7 @@
     <member refid="structhelios_1_1math_1_1vec2_1a27c76024d0a33a2e8166abb8248352df" kind="variable"><name>v</name></member>
     <member refid="structhelios_1_1math_1_1vec4_1a74c386d3972234057071df985738962a" kind="variable"><name>v</name></member>
     <member refid="structhelios_1_1math_1_1vec3_1aff80fce744473fc0ec94b2ea7cb3ea1a" kind="variable"><name>v</name></member>
+    <member refid="namespacehelios_1_1math_1a64379fe55f1794fad912feafd5051224" kind="variable"><name>Z_AXISf</name></member>
     <member refid="structhelios_1_1math_1_1aabb_1a3649ba1b1b848f3cce6eba5647ef557f" kind="variable"><name>min_</name></member>
     <member refid="structhelios_1_1math_1_1aabb_1a5ed36f911a5ff17e2bfc629bcb6eee27" kind="variable"><name>max_</name></member>
     <member refid="structhelios_1_1math_1_1mat4_1a769b094f17ea9b06bee37f0dab69149f" kind="function"><name>mat4</name></member>
@@ -3341,7 +3610,9 @@
     <member refid="structhelios_1_1math_1_1mat4_1a43af56ad57ea70cbf00895e396ceccbd" kind="function"><name>column</name></member>
     <member refid="structhelios_1_1math_1_1mat4_1a85b80b06a1e1d401e9bf3f4f338a219a" kind="function"><name>inverse</name></member>
     <member refid="structhelios_1_1math_1_1mat4_1a6c51266bc7e6f142ce172b8c2022645a" kind="function"><name>translation</name></member>
-    <member refid="structhelios_1_1math_1_1mat4_1a47a4e8f9edb058866e33f4bc029b779e" kind="function"><name>setTranslation</name></member>
+    <member refid="structhelios_1_1math_1_1mat4_1a451a24222a56a80e6a7e01a93d6e867a" kind="function"><name>withTranslation</name></member>
+    <member refid="structhelios_1_1math_1_1mat4_1a6168417f43e3cf34c6376fe5f288b038" kind="function"><name>withScaling</name></member>
+    <member refid="structhelios_1_1math_1_1mat4_1adf5462371557ac38947700b261f5c848" kind="function"><name>withTranslation</name></member>
     <member refid="structhelios_1_1math_1_1mat4_1a9c19cb795b7d8a032dd4cb415803f163" kind="function"><name>decompose</name></member>
     <member refid="namespacehelios_1_1math_1a0e37b93487d103aa6588ba44bdb1a0b6" kind="function"><name>value_ptr</name></member>
     <member refid="namespacehelios_1_1math_1a581fd38f8554d49c33a42b46255cc983" kind="function"><name>value_ptr</name></member>
@@ -3376,6 +3647,7 @@
     <member refid="structhelios_1_1math_1_1vec3_1ae59861132e8e9d8cde196eeebec0faae" kind="function"><name>cross</name></member>
     <member refid="structhelios_1_1math_1_1vec3_1ad64bf63ac24905fed6d397d59088340d" kind="function"><name>dot</name></member>
     <member refid="structhelios_1_1math_1_1vec3_1a98db2375fe3de090655548f4d29c8192" kind="function"><name>toVec4</name></member>
+    <member refid="structhelios_1_1math_1_1vec3_1a899d8b0cba0d969fd32333ec739c3a61" kind="function"><name>toVec2</name></member>
     <member refid="structhelios_1_1math_1_1vec3_1a9b2414714b83f54d12c67f4d90a19145" kind="function"><name>toVec4</name></member>
     <member refid="structhelios_1_1math_1_1vec3_1a3bbdd06a78770b9dadc233e0acca4295" kind="function"><name>normalize</name></member>
     <member refid="structhelios_1_1math_1_1vec3_1aa551f170f2cba46c0b50cf48fdfb326b" kind="function"><name>operator==</name></member>

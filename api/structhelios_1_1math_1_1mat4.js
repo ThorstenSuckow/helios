@@ -14,7 +14,9 @@ var structhelios_1_1math_1_1mat4 =
     [ "operator*", "structhelios_1_1math_1_1mat4.html#a23a55beb9005b24b1e50ae2bf8a71ad8", null ],
     [ "operator==", "structhelios_1_1math_1_1mat4.html#a33c47f9920f5e88b98caca96a889d0aa", null ],
     [ "same", "structhelios_1_1math_1_1mat4.html#a11484773381edf083309360d6c940d3f", null ],
-    [ "setTranslation", "structhelios_1_1math_1_1mat4.html#a47a4e8f9edb058866e33f4bc029b779e", null ],
     [ "translation", "structhelios_1_1math_1_1mat4.html#a6c51266bc7e6f142ce172b8c2022645a", null ],
-    [ "transpose", "structhelios_1_1math_1_1mat4.html#aa5940ba880eb6ac1c64ca4f7117d7cc2", null ]
+    [ "transpose", "structhelios_1_1math_1_1mat4.html#aa5940ba880eb6ac1c64ca4f7117d7cc2", null ],
+    [ "withScaling", "structhelios_1_1math_1_1mat4.html#a6168417f43e3cf34c6376fe5f288b038", null ],
+    [ "withTranslation", "structhelios_1_1math_1_1mat4.html#a451a24222a56a80e6a7e01a93d6e867a", null ],
+    [ "withTranslation", "structhelios_1_1math_1_1mat4.html#adf5462371557ac38947700b261f5c848", null ]
 ];

@@ -1,7 +1,7 @@
 var searchData=
 [
   ['tan_0',['Tan',['../structhelios_1_1util_1_1Colors.html#a99da239ae84105c6e4d71a22b3498a08',1,'helios::util::Colors']]],
-  ['targetrotationangle_5f_1',['targetRotationAngle_',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#aee9dd997ec318afc598d801c19c474ad',1,'helios::engine::game::components::physics::Move2DComponent']]],
+  ['targetrotationangle_5f_1',['targetRotationAngle_',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent.html#a44d14f71dde7f4bbed79ad4085381801',1,'helios::engine::game::components::physics::HeadingComponent']]],
   ['teal_2',['Teal',['../structhelios_1_1util_1_1Colors.html#aee5e12bc73a21570c4f6dbabcddb060d',1,'helios::util::Colors']]],
   ['texcoords_3',['texCoords',['../structhelios_1_1rendering_1_1Vertex.html#a6a60a969f8b46c06dfd111cad987a017',1,'helios::rendering::Vertex']]],
   ['throttle_5f_4',['throttle_',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html#a093c4cca5faf629e828abd8237d4cbd6',1,'helios::engine::game::components::physics::Move2DComponent']]],
@@ -12,6 +12,7 @@ var searchData=
   ['totalframetime_9',['totalFrameTime',['../structhelios_1_1engine_1_1FrameStats.html#ab76f59f1bd1a35ee9d4316fdb46efa63',1,'helios::engine::FrameStats']]],
   ['transformcomponent_5f_10',['transformComponent_',['../classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent.html#a41622b780b0a3041347bd6bc4340d104',1,'helios::engine::game::components::gameplay::ShootComponent']]],
   ['transparent_11',['Transparent',['../structhelios_1_1util_1_1Colors.html#a4a6dd5125285c30f2e9be2e6dd7f8510',1,'helios::util::Colors']]],
-  ['turquoise_12',['Turquoise',['../structhelios_1_1util_1_1Colors.html#a145d589bf122d504caa66be55f1d58d0',1,'helios::util::Colors']]],
-  ['type_5fid_13',['TYPE_ID',['../classhelios_1_1ext_1_1imgui_1_1ImGuiLogSink.html#a4e0540a3ef8f7838fdaa082225863e2f',1,'helios::ext::imgui::ImGuiLogSink::TYPE_ID'],['../classhelios_1_1util_1_1log_1_1ConsoleSink.html#aa7a0c9d6f6536c90ed342cadc6246107',1,'helios::util::log::ConsoleSink::TYPE_ID']]]
+  ['turnintensity_5f_12',['turnIntensity_',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent.html#ad086508c6dbe7f88c00796e81a884410',1,'helios::engine::game::components::physics::HeadingComponent']]],
+  ['turquoise_13',['Turquoise',['../structhelios_1_1util_1_1Colors.html#a145d589bf122d504caa66be55f1d58d0',1,'helios::util::Colors']]],
+  ['type_5fid_14',['TYPE_ID',['../classhelios_1_1ext_1_1imgui_1_1ImGuiLogSink.html#a4e0540a3ef8f7838fdaa082225863e2f',1,'helios::ext::imgui::ImGuiLogSink::TYPE_ID'],['../classhelios_1_1util_1_1log_1_1ConsoleSink.html#aa7a0c9d6f6536c90ed342cadc6246107',1,'helios::util::log::ConsoleSink::TYPE_ID']]]
 ];

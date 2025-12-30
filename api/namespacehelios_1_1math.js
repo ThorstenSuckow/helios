@@ -56,5 +56,6 @@ var namespacehelios_1_1math =
     [ "value_ptr", "namespacehelios_1_1math.html#a0e37b93487d103aa6588ba44bdb1a0b6", null ],
     [ "value_ptr", "namespacehelios_1_1math.html#afba89a2aa6938d85fd8be3974a9aed36", null ],
     [ "value_ptr", "namespacehelios_1_1math.html#a581fd38f8554d49c33a42b46255cc983", null ],
-    [ "EPSILON_LENGTH", "namespacehelios_1_1math.html#af25d93f23f91acae02abfd7706b2e36d", null ]
+    [ "EPSILON_LENGTH", "namespacehelios_1_1math.html#af25d93f23f91acae02abfd7706b2e36d", null ],
+    [ "Z_AXISf", "namespacehelios_1_1math.html#a64379fe55f1794fad912feafd5051224", null ]
 ];

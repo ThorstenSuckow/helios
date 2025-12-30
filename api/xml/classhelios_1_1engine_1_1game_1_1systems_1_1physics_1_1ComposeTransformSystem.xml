@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1ComposeTransformSystem" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::game::systems::physics::ComposeTransformSystem</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1game_1_1System" prot="public" virt="non-virtual">helios::engine::game::System</basecompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1ComposeTransformSystem_1a90188476238f7e6d96da63e6510751c7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::systems::physics::ComposeTransformSystem::update</definition>
+        <argsstring>(helios::engine::game::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::game::systems::physics::ComposeTransformSystem::update</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1game_1_1System_1ac268567131ffdbd96e0ee29dc8717609">update</reimplements>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1game_1_1UpdateContext" kindref="compound">helios::engine::game::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Updates TransformComponents based on state components. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Context containing frame timing and game state. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/physics/ComposeTransformSystem.ixx" line="44" column="14" bodyfile="include/helios/engine/game/systems/physics/ComposeTransformSystem.ixx" bodystart="44" bodyend="62"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1System_1ab575d815b362bc7bc2fdfe021632c83b" compoundref="System_8ixx" startline="48">helios::engine::game::System::gameWorld_</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para><ref refid="classhelios_1_1engine_1_1game_1_1System" kindref="compound">System</ref> that composes the final TransformComponent from state components. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This system takes the raw state from TranslationStateComponent and RotationStateComponent and applies it to the TransformComponent. It combines heading and spin rotations into a single rotation matrix and updates the local translation. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::game::System</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::game::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::game::systems::physics::ComposeTransformSystem</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1ComposeTransformSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>helios::engine::game::GameWorld</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1GameWorld"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>logger_</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::engine::game::System</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>gameWorld_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::game::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::game::systems::physics::ComposeTransformSystem</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1ComposeTransformSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>helios::util::log::Logger</label>
+        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/game/systems/physics/ComposeTransformSystem.ixx" line="35" column="5" bodyfile="include/helios/engine/game/systems/physics/ComposeTransformSystem.ixx" bodystart="35" bodyend="66"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1game_1_1System_1ab575d815b362bc7bc2fdfe021632c83b" prot="protected" virt="non-virtual"><scope>helios::engine::game::systems::physics::ComposeTransformSystem</scope><name>gameWorld_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1System_1a3abad1bebaa98c46f28105702c58b473" prot="public" virt="virtual"><scope>helios::engine::game::systems::physics::ComposeTransformSystem</scope><name>onAdd</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Updatable_1a80ad1928d4b394f69860b47969541e34" prot="public" virt="non-virtual"><scope>helios::engine::game::systems::physics::ComposeTransformSystem</scope><name>Updatable</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1ComposeTransformSystem_1a90188476238f7e6d96da63e6510751c7" prot="public" virt="virtual"><scope>helios::engine::game::systems::physics::ComposeTransformSystem</scope><name>update</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1System_1aa4ed4f421d0b37eb63dbd23c25b889f8" prot="public" virt="virtual"><scope>helios::engine::game::systems::physics::ComposeTransformSystem</scope><name>~System</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Updatable_1aac5760f908621631c4e7ac40f25e9361" prot="public" virt="virtual"><scope>helios::engine::game::systems::physics::ComposeTransformSystem</scope><name>~Updatable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

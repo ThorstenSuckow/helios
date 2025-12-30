@@ -131,6 +131,10 @@ Files</h2></td></tr>
 <tr class="memdesc:Component_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for components attached to GameObjects. <br /></td></tr>
 <tr class="memitem:GameObject_2Eixx" id="r_GameObject_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="GameObject_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="GameObject_8ixx.html">GameObject.ixx</a></td></tr>
 <tr class="memdesc:GameObject_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for interactive game entities with transform capabilities. <br /></td></tr>
+<tr class="memitem:GameObjectFilterType_2Eixx" id="r_GameObjectFilterType_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="GameObjectFilterType_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="GameObjectFilterType_8ixx.html">GameObjectFilterType.ixx</a></td></tr>
+<tr class="memdesc:GameObjectFilterType_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration for filtering GameObjects in queries. <br /></td></tr>
+<tr class="memitem:GameObjectPool_2Eixx" id="r_GameObjectPool_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="GameObjectPool_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="GameObjectPool_8ixx.html">GameObjectPool.ixx</a></td></tr>
+<tr class="memdesc:GameObjectPool_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Object pool for efficient GameObject management and recycling. <br /></td></tr>
 <tr class="memitem:GameWorld_2Eixx" id="r_GameWorld_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="GameWorld_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="GameWorld_8ixx.html">GameWorld.ixx</a></td></tr>
 <tr class="memdesc:GameWorld_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Central registry for managing game entities. <br /></td></tr>
 <tr class="memitem:InputSnapshot_2Eixx" id="r_InputSnapshot_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="InputSnapshot_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="InputSnapshot_8ixx.html">InputSnapshot.ixx</a></td></tr>
@@ -145,13 +149,14 @@ Files</h2></td></tr>
 <tr class="memdesc:UpdateContext_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Context struct passed to components during per-frame updates. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md59"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md61"></a>
 helios::engine::game</h1>
 <p>Game logic infrastructure using the Command pattern for decoupled, testable, and deterministic game systems.</p>
 <p>This module provides the foundational architecture for game logic in helios. It follows a composition-based component model where <span class="tt">GameObject</span> instances own <span class="tt">Component</span> instances that define behavior. Game actions are encapsulated as <span class="tt">Command</span> objects, enabling features like replay systems, undo/redo, and network synchronization.</p>
 <p>The <span class="tt">GameWorld</span> serves as the central registry for all entities and systems. It manages:</p><ul>
 <li><b>GameObjects</b>: Individual game entities identified by unique <span class="tt">Guid</span>.</li>
 <li><b>Systems</b>: Global logic processors for cross-cutting concerns (physics, collision, pooling).</li>
+<li><b>GameObjectPool</b>: Memory-efficient object pooling for frequently spawned/despawned entities.</li>
 </ul>
 <p>Systems are updated each frame after all GameObjects, providing a clear execution order.</p>
 <hr  />

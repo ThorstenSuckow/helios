@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1SpinSystem" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::game::systems::physics::SpinSystem</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1game_1_1System" prot="public" virt="non-virtual">helios::engine::game::System</basecompoundref>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1SpinSystem_1a22570e39e1c83f0c3f918eb8acb243fd" prot="private" static="yes" mutable="no">
+        <type>const <ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref></type>
+        <definition>const helios::math::mat4f helios::engine::game::systems::physics::SpinSystem::identity</definition>
+        <argsstring></argsstring>
+        <name>identity</name>
+        <qualifiedname>helios::engine::game::systems::physics::SpinSystem::identity</qualifiedname>
+        <initializer>= <ref refid="structhelios_1_1math_1_1mat4_1ad856b4652346ff475b653e257d64428d" kindref="member">helios::math::mat4f::identity</ref>()</initializer>
+        <briefdescription>
+<para>Identity matrix constant. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/physics/SpinSystem.ixx" line="37" column="49" bodyfile="include/helios/engine/game/systems/physics/SpinSystem.ixx" bodystart="37" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1SpinSystem_1aa1c8e020cde5700f27eaedf0317095e9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::systems::physics::SpinSystem::update</definition>
+        <argsstring>(helios::engine::game::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::game::systems::physics::SpinSystem::update</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1game_1_1System_1ac268567131ffdbd96e0ee29dc8717609">update</reimplements>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1game_1_1UpdateContext" kindref="compound">helios::engine::game::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Updates spin rotation for all applicable entities. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Context containing frame timing and game state. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/physics/SpinSystem.ixx" line="46" column="14" bodyfile="include/helios/engine/game/systems/physics/SpinSystem.ixx" bodystart="46" bodyend="63"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1System_1ab575d815b362bc7bc2fdfe021632c83b" compoundref="System_8ixx" startline="48">helios::engine::game::System::gameWorld_</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para><ref refid="classhelios_1_1engine_1_1game_1_1System" kindref="compound">System</ref> that updates the spin rotation of entities. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This system iterates over entities with a SpinComponent and updates their accumulated rotation angle based on the spin speed and delta time. The updated rotation state is then written to the RotationStateComponent. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::game::System</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::game::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::game::systems::physics::SpinSystem</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1SpinSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>helios::engine::game::GameWorld</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1GameWorld"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>logger_</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::engine::game::System</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>gameWorld_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::game::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::game::systems::physics::SpinSystem</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1SpinSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>helios::util::log::Logger</label>
+        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/game/systems/physics/SpinSystem.ixx" line="32" column="5" bodyfile="include/helios/engine/game/systems/physics/SpinSystem.ixx" bodystart="32" bodyend="64"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1game_1_1System_1ab575d815b362bc7bc2fdfe021632c83b" prot="protected" virt="non-virtual"><scope>helios::engine::game::systems::physics::SpinSystem</scope><name>gameWorld_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1SpinSystem_1a22570e39e1c83f0c3f918eb8acb243fd" prot="private" virt="non-virtual"><scope>helios::engine::game::systems::physics::SpinSystem</scope><name>identity</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1System_1a3abad1bebaa98c46f28105702c58b473" prot="public" virt="virtual"><scope>helios::engine::game::systems::physics::SpinSystem</scope><name>onAdd</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Updatable_1a80ad1928d4b394f69860b47969541e34" prot="public" virt="non-virtual"><scope>helios::engine::game::systems::physics::SpinSystem</scope><name>Updatable</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1SpinSystem_1aa1c8e020cde5700f27eaedf0317095e9" prot="public" virt="virtual"><scope>helios::engine::game::systems::physics::SpinSystem</scope><name>update</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1System_1aa4ed4f421d0b37eb63dbd23c25b889f8" prot="public" virt="virtual"><scope>helios::engine::game::systems::physics::SpinSystem</scope><name>~System</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Updatable_1aac5760f908621631c4e7ac40f25e9361" prot="public" virt="virtual"><scope>helios::engine::game::systems::physics::SpinSystem</scope><name>~Updatable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

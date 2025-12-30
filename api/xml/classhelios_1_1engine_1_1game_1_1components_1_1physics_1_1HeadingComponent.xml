@@ -1,0 +1,826 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::game::components::physics::HeadingComponent</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1game_1_1Component" prot="public" virt="non-virtual">helios::engine::game::Component</basecompoundref>
+    <sectiondef kind="protected-static-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a26b967c7431ca91367e2e072a385da2e" prot="protected" static="yes" constexpr="yes" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::HeadingComponent::DEFAULT_ROTATION_SPEED</definition>
+        <argsstring></argsstring>
+        <name>DEFAULT_ROTATION_SPEED</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::DEFAULT_ROTATION_SPEED</qualifiedname>
+        <initializer>= 560.0f</initializer>
+        <briefdescription>
+<para>Default maximum rotation speed in degrees per second. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="42" column="32" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="42" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a9e571a1771e0da7831afb2e0e576b16f" compoundref="HeadingComponent_8ixx" startline="305" endline="309">resetToDefaults</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a72d6d92e19ad71541fdcd78146f5c4ab" prot="protected" static="yes" constexpr="yes" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::HeadingComponent::DEFAULT_ROTATION_SPEED_THRESHOLD</definition>
+        <argsstring></argsstring>
+        <name>DEFAULT_ROTATION_SPEED_THRESHOLD</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::DEFAULT_ROTATION_SPEED_THRESHOLD</qualifiedname>
+        <initializer>= 0.1f</initializer>
+        <briefdescription>
+<para>Default minimum rotation speed before rotation stops completely. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="47" column="32" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="47" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a9e571a1771e0da7831afb2e0e576b16f" compoundref="HeadingComponent_8ixx" startline="305" endline="309">resetToDefaults</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1aaa196dec42e22f1b00b4903e2f080104" prot="protected" static="yes" constexpr="yes" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::HeadingComponent::DEFAULT_ROTATION_DAMPENING</definition>
+        <argsstring></argsstring>
+        <name>DEFAULT_ROTATION_DAMPENING</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::DEFAULT_ROTATION_DAMPENING</qualifiedname>
+        <initializer>= 0.0001f</initializer>
+        <briefdescription>
+<para>Default exponential decay factor for rotation when input stops. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="52" column="32" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="52" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a9e571a1771e0da7831afb2e0e576b16f" compoundref="HeadingComponent_8ixx" startline="305" endline="309">resetToDefaults</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a92230ab59736a87ceeb769ff541820e3" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::HeadingComponent::rotationSpeed_</definition>
+        <argsstring></argsstring>
+        <name>rotationSpeed_</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::rotationSpeed_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a26b967c7431ca91367e2e072a385da2e" kindref="member">DEFAULT_ROTATION_SPEED</ref></initializer>
+        <briefdescription>
+<para>Maximum rotation speed in degrees per second. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="57" column="15" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="57" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a9e571a1771e0da7831afb2e0e576b16f" compoundref="HeadingComponent_8ixx" startline="305" endline="309">resetToDefaults</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1ade023e57d9a5d7412ab8bad78ec4ba4b" compoundref="HeadingComponent_8ixx" startline="244" endline="244">rotationSpeed</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1afd2d3ff4808478006f81c17827a1fd9f" compoundref="HeadingComponent_8ixx" startline="265" endline="265">setRotationSpeed</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1af8fab691fc62541dc030e749f3a7a68f" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::HeadingComponent::rotationSpeedThreshold_</definition>
+        <argsstring></argsstring>
+        <name>rotationSpeedThreshold_</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::rotationSpeedThreshold_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a72d6d92e19ad71541fdcd78146f5c4ab" kindref="member">DEFAULT_ROTATION_SPEED_THRESHOLD</ref></initializer>
+        <briefdescription>
+<para>Minimum rotation speed before rotation stops completely. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="62" column="15" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="62" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a9e571a1771e0da7831afb2e0e576b16f" compoundref="HeadingComponent_8ixx" startline="305" endline="309">resetToDefaults</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a32308cfeff5de9c512572399f871088f" compoundref="HeadingComponent_8ixx" startline="251" endline="251">rotationSpeedThreshold</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a0ddc8f98793f7a6cbab0dd566aa0793d" compoundref="HeadingComponent_8ixx" startline="274" endline="276">setRotationSpeedThreshold</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a7cc69eefa225aec06f878727586bef20" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::HeadingComponent::rotationDampening_</definition>
+        <argsstring></argsstring>
+        <name>rotationDampening_</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::rotationDampening_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1aaa196dec42e22f1b00b4903e2f080104" kindref="member">DEFAULT_ROTATION_DAMPENING</ref></initializer>
+        <briefdescription>
+<para>Exponential decay factor for rotation when input stops. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="67" column="15" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="67" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a9e571a1771e0da7831afb2e0e576b16f" compoundref="HeadingComponent_8ixx" startline="305" endline="309">resetToDefaults</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a0234a3fdde1c3761a10d459ae38d8746" compoundref="HeadingComponent_8ixx" startline="258" endline="258">rotationDampening</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a94591ed9a3cb2c75eb56311621d029fe" compoundref="HeadingComponent_8ixx" startline="285" endline="287">setRotationDampening</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1aa539cc09677674d009f52f36400e530e" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::HeadingComponent::currentRotationAngle_</definition>
+        <argsstring></argsstring>
+        <name>currentRotationAngle_</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::currentRotationAngle_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Current rotation angle in degrees. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="72" column="15" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="72" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a2ddc22661574259cf60bbc0bdaea8258" compoundref="HeadingComponent_8ixx" startline="181" endline="183">currentRotationAngle</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1adf92aede31f0127389e7661e1828c334" compoundref="HeadingComponent_8ixx" startline="208" endline="210">setCurrentRotationAngle</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a44d14f71dde7f4bbed79ad4085381801" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::HeadingComponent::targetRotationAngle_</definition>
+        <argsstring></argsstring>
+        <name>targetRotationAngle_</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::targetRotationAngle_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Target rotation angle derived from input direction. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="77" column="15" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="77" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a375c0bed9050876ec3dc09119660b47b" compoundref="HeadingComponent_8ixx" startline="199" endline="201">setTargetRotationAngle</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a4b6616322ab2379a3db329b748642e9b" compoundref="HeadingComponent_8ixx" startline="190" endline="192">targetRotationAngle</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a05824205566839d8031ff237c77a227d" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::HeadingComponent::rotationAngleDelta_</definition>
+        <argsstring></argsstring>
+        <name>rotationAngleDelta_</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::rotationAngleDelta_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Shortest angular distance to target rotation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="82" column="15" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="82" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a78c31a64bd6786a9baf7803480f426ab" compoundref="HeadingComponent_8ixx" startline="172" endline="174">rotationAngleDelta</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a1be212f2c232dc815392161427cbaac4" compoundref="HeadingComponent_8ixx" startline="217" endline="219">setRotationAngleDelta</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a11fe301fa917be855ae3eb3d87615822" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::HeadingComponent::currentRotationSpeed_</definition>
+        <argsstring></argsstring>
+        <name>currentRotationSpeed_</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::currentRotationSpeed_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Current rotation speed after applying input and dampening. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="87" column="15" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="87" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a4537e856d70be505b6de455aa5c77e48" compoundref="HeadingComponent_8ixx" startline="163" endline="165">currentRotationSpeed</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a7334b44384f0adbf47d1553490a8fe77" compoundref="HeadingComponent_8ixx" startline="154" endline="156">setCurrentRotationSpeed</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1ae5ac80ffaafd2b8b91cfc4a979a9781b" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::engine::game::components::physics::HeadingComponent::isInputActive_</definition>
+        <argsstring></argsstring>
+        <name>isInputActive_</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::isInputActive_</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>Indicates whether input is currently being received. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="92" column="14" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="92" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1ab93888efcb162ecd8f6ef34fce63b181" compoundref="HeadingComponent_8ixx" startline="226" endline="228">isInputActive</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a2c9329e3dbf47d2e6d818c556614cb07" compoundref="HeadingComponent_8ixx" startline="122" endline="136">setHeading</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1ad086508c6dbe7f88c00796e81a884410" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::HeadingComponent::turnIntensity_</definition>
+        <argsstring></argsstring>
+        <name>turnIntensity_</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::turnIntensity_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Intensity of the turn input, typically from 0.0 to 1.0. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Derived from the magnitude of the input direction vector. Used to modulate rotation speed based on stick deflection. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="100" column="15" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="100" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a2c9329e3dbf47d2e6d818c556614cb07" compoundref="HeadingComponent_8ixx" startline="122" endline="136">setHeading</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a6400e2e07a46c0f4c760ff958be63200" compoundref="HeadingComponent_8ixx" startline="294" endline="296">turnIntensity</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a1b8be31d5c80997d939b9e6d448eb524" prot="protected" static="no" mutable="no">
+        <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+        <definition>helios::math::vec3f helios::engine::game::components::physics::HeadingComponent::headingInput_</definition>
+        <argsstring></argsstring>
+        <name>headingInput_</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::headingInput_</qualifiedname>
+        <briefdescription>
+<para>Current steering input as 2D direction vector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="105" column="29" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="105" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a7e800e5502e43babc22d05a8fb0d81cb" compoundref="HeadingComponent_8ixx" startline="235" endline="237">headingInput</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a2c9329e3dbf47d2e6d818c556614cb07" compoundref="HeadingComponent_8ixx" startline="122" endline="136">setHeading</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a2c9329e3dbf47d2e6d818c556614cb07" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::physics::HeadingComponent::setHeading</definition>
+        <argsstring>(helios::math::vec3f direction, float turnIntensity)</argsstring>
+        <name>setHeading</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::setHeading</qualifiedname>
+        <param>
+          <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+          <declname>direction</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>turnIntensity</declname>
+        </param>
+        <briefdescription>
+<para>Sets the heading direction and turn intensity from input. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Updates the heading input vector and turn intensity. If the turn intensity is below the epsilon threshold, input is deactivated and the heading is reset to zero.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>direction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Normalized direction vector representing the desired heading. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>turnIntensity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Magnitude of the input (0.0 to 1.0).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="pre"><para>direction must be a normalized vector (length ~= 1.0). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="122" column="14" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="122" bodyend="136"/>
+        <references refid="namespacehelios_1_1math_1af25d93f23f91acae02abfd7706b2e36d" compoundref="utils_8ixx" startline="22">helios::math::EPSILON_LENGTH</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a1b8be31d5c80997d939b9e6d448eb524" compoundref="HeadingComponent_8ixx" startline="105">headingInput_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1ae5ac80ffaafd2b8b91cfc4a979a9781b" compoundref="HeadingComponent_8ixx" startline="92">isInputActive_</references>
+        <references refid="structhelios_1_1math_1_1vec3_1a6146713ae785c06b31121c953357dda4" compoundref="vec3_8ixx" startline="119" endline="125">helios::math::vec3&lt; T &gt;::length</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a6400e2e07a46c0f4c760ff958be63200" compoundref="HeadingComponent_8ixx" startline="294" endline="296">turnIntensity</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1ad086508c6dbe7f88c00796e81a884410" compoundref="HeadingComponent_8ixx" startline="100">turnIntensity_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a0e2de075a1aa973efe9a4d8758137583" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+        <definition>helios::math::vec3f helios::engine::game::components::physics::HeadingComponent::rotationAxis</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rotationAxis</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::rotationAxis</qualifiedname>
+        <briefdescription>
+<para>Returns the axis around which rotation occurs. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For 2D gameplay on the XY plane, this is typically the Z-axis.</para>
+<para><simplesect kind="return"><para>The rotation axis as a unit vector. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="145" column="30" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="145" bodyend="147"/>
+        <references refid="namespacehelios_1_1math_1a64379fe55f1794fad912feafd5051224" compoundref="vec3_8ixx" startline="453" endline="453">helios::math::Z_AXISf</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a7334b44384f0adbf47d1553490a8fe77" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::physics::HeadingComponent::setCurrentRotationSpeed</definition>
+        <argsstring>(float speed) noexcept</argsstring>
+        <name>setCurrentRotationSpeed</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::setCurrentRotationSpeed</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>speed</declname>
+        </param>
+        <briefdescription>
+<para>Sets the current rotation speed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>speed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new rotation speed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="154" column="14" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="154" bodyend="156"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a11fe301fa917be855ae3eb3d87615822" compoundref="HeadingComponent_8ixx" startline="87">currentRotationSpeed_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a4537e856d70be505b6de455aa5c77e48" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::HeadingComponent::currentRotationSpeed</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>currentRotationSpeed</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::currentRotationSpeed</qualifiedname>
+        <briefdescription>
+<para>Returns the current rotation speed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The current rotation speed. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="163" column="16" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="163" bodyend="165"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a11fe301fa917be855ae3eb3d87615822" compoundref="HeadingComponent_8ixx" startline="87">currentRotationSpeed_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a78c31a64bd6786a9baf7803480f426ab" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::HeadingComponent::rotationAngleDelta</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rotationAngleDelta</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::rotationAngleDelta</qualifiedname>
+        <briefdescription>
+<para>Returns the angular distance to the target rotation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The angle delta in degrees. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="172" column="16" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="172" bodyend="174"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a05824205566839d8031ff237c77a227d" compoundref="HeadingComponent_8ixx" startline="82">rotationAngleDelta_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a2ddc22661574259cf60bbc0bdaea8258" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::HeadingComponent::currentRotationAngle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>currentRotationAngle</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::currentRotationAngle</qualifiedname>
+        <briefdescription>
+<para>Returns the current rotation angle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The current rotation angle in degrees. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="181" column="16" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="181" bodyend="183"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1aa539cc09677674d009f52f36400e530e" compoundref="HeadingComponent_8ixx" startline="72">currentRotationAngle_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a4b6616322ab2379a3db329b748642e9b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::HeadingComponent::targetRotationAngle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>targetRotationAngle</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::targetRotationAngle</qualifiedname>
+        <briefdescription>
+<para>Returns the target rotation angle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The target rotation angle in degrees. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="190" column="16" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="190" bodyend="192"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a44d14f71dde7f4bbed79ad4085381801" compoundref="HeadingComponent_8ixx" startline="77">targetRotationAngle_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a375c0bed9050876ec3dc09119660b47b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::physics::HeadingComponent::setTargetRotationAngle</definition>
+        <argsstring>(float angle) noexcept</argsstring>
+        <name>setTargetRotationAngle</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::setTargetRotationAngle</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>angle</declname>
+        </param>
+        <briefdescription>
+<para>Sets the target rotation angle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>angle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new target rotation angle in degrees. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="199" column="14" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="199" bodyend="201"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a44d14f71dde7f4bbed79ad4085381801" compoundref="HeadingComponent_8ixx" startline="77">targetRotationAngle_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1adf92aede31f0127389e7661e1828c334" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::physics::HeadingComponent::setCurrentRotationAngle</definition>
+        <argsstring>(float angle) noexcept</argsstring>
+        <name>setCurrentRotationAngle</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::setCurrentRotationAngle</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>angle</declname>
+        </param>
+        <briefdescription>
+<para>Sets the current rotation angle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>angle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new rotation angle in degrees. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="208" column="14" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="208" bodyend="210"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1aa539cc09677674d009f52f36400e530e" compoundref="HeadingComponent_8ixx" startline="72">currentRotationAngle_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a1be212f2c232dc815392161427cbaac4" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::physics::HeadingComponent::setRotationAngleDelta</definition>
+        <argsstring>(float delta) noexcept</argsstring>
+        <name>setRotationAngleDelta</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::setRotationAngleDelta</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>delta</declname>
+        </param>
+        <briefdescription>
+<para>Sets the angular distance to the target rotation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>delta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new angle delta in degrees. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="217" column="14" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="217" bodyend="219"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a05824205566839d8031ff237c77a227d" compoundref="HeadingComponent_8ixx" startline="82">rotationAngleDelta_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1ab93888efcb162ecd8f6ef34fce63b181" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::game::components::physics::HeadingComponent::isInputActive</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isInputActive</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::isInputActive</qualifiedname>
+        <briefdescription>
+<para>Checks if input is currently active. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if input is active, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="226" column="15" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="226" bodyend="228"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1ae5ac80ffaafd2b8b91cfc4a979a9781b" compoundref="HeadingComponent_8ixx" startline="92">isInputActive_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a7e800e5502e43babc22d05a8fb0d81cb" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref> &amp;</type>
+        <definition>const helios::math::vec3f &amp; helios::engine::game::components::physics::HeadingComponent::headingInput</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>headingInput</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::headingInput</qualifiedname>
+        <briefdescription>
+<para>Returns the current steering input direction. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Const reference to the 2D steering input vector. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="235" column="36" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="235" bodyend="237"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a1b8be31d5c80997d939b9e6d448eb524" compoundref="HeadingComponent_8ixx" startline="105">headingInput_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1ade023e57d9a5d7412ab8bad78ec4ba4b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::HeadingComponent::rotationSpeed</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rotationSpeed</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::rotationSpeed</qualifiedname>
+        <briefdescription>
+<para>Returns the maximum rotation speed in degrees per second. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Maximum rotation speed value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="244" column="16" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="244" bodyend="244"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a92230ab59736a87ceeb769ff541820e3" compoundref="HeadingComponent_8ixx" startline="57">rotationSpeed_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a32308cfeff5de9c512572399f871088f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::HeadingComponent::rotationSpeedThreshold</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rotationSpeedThreshold</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::rotationSpeedThreshold</qualifiedname>
+        <briefdescription>
+<para>Returns the minimum rotation speed threshold. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Rotation speed threshold below which rotation stops. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="251" column="16" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="251" bodyend="251"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1af8fab691fc62541dc030e749f3a7a68f" compoundref="HeadingComponent_8ixx" startline="62">rotationSpeedThreshold_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a0234a3fdde1c3761a10d459ae38d8746" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::HeadingComponent::rotationDampening</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rotationDampening</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::rotationDampening</qualifiedname>
+        <briefdescription>
+<para>Returns the rotation dampening factor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Exponential decay factor for rotation. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="258" column="16" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="258" bodyend="258"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a7cc69eefa225aec06f878727586bef20" compoundref="HeadingComponent_8ixx" startline="67">rotationDampening_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1afd2d3ff4808478006f81c17827a1fd9f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::physics::HeadingComponent::setRotationSpeed</definition>
+        <argsstring>(float value) noexcept</argsstring>
+        <name>setRotationSpeed</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::setRotationSpeed</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Sets the maximum rotation speed in degrees per second. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New rotation speed value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="265" column="14" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="265" bodyend="265"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a92230ab59736a87ceeb769ff541820e3" compoundref="HeadingComponent_8ixx" startline="57">rotationSpeed_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a0ddc8f98793f7a6cbab0dd566aa0793d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::physics::HeadingComponent::setRotationSpeedThreshold</definition>
+        <argsstring>(float value) noexcept</argsstring>
+        <name>setRotationSpeedThreshold</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::setRotationSpeedThreshold</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Sets the minimum rotation speed threshold. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New threshold value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="274" column="14" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="274" bodyend="276"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1af8fab691fc62541dc030e749f3a7a68f" compoundref="HeadingComponent_8ixx" startline="62">rotationSpeedThreshold_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a94591ed9a3cb2c75eb56311621d029fe" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::physics::HeadingComponent::setRotationDampening</definition>
+        <argsstring>(float value) noexcept</argsstring>
+        <name>setRotationDampening</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::setRotationDampening</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Sets the rotation dampening factor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New dampening factor (exponential decay). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="285" column="14" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="285" bodyend="287"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a7cc69eefa225aec06f878727586bef20" compoundref="HeadingComponent_8ixx" startline="67">rotationDampening_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a6400e2e07a46c0f4c760ff958be63200" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::game::components::physics::HeadingComponent::turnIntensity</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>turnIntensity</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::turnIntensity</qualifiedname>
+        <briefdescription>
+<para>Returns the current turn intensity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Turn intensity value, typically from 0.0 to 1.0. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="294" column="16" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="294" bodyend="296"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1ad086508c6dbe7f88c00796e81a884410" compoundref="HeadingComponent_8ixx" startline="100">turnIntensity_</references>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a2c9329e3dbf47d2e6d818c556614cb07" compoundref="HeadingComponent_8ixx" startline="122" endline="136">setHeading</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a9e571a1771e0da7831afb2e0e576b16f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::components::physics::HeadingComponent::resetToDefaults</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>resetToDefaults</name>
+        <qualifiedname>helios::engine::game::components::physics::HeadingComponent::resetToDefaults</qualifiedname>
+        <briefdescription>
+<para>Resets all physics parameters to their default values. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="305" column="14" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="305" bodyend="309"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1aaa196dec42e22f1b00b4903e2f080104" compoundref="HeadingComponent_8ixx" startline="52">DEFAULT_ROTATION_DAMPENING</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a26b967c7431ca91367e2e072a385da2e" compoundref="HeadingComponent_8ixx" startline="42">DEFAULT_ROTATION_SPEED</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a72d6d92e19ad71541fdcd78146f5c4ab" compoundref="HeadingComponent_8ixx" startline="47">DEFAULT_ROTATION_SPEED_THRESHOLD</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a7cc69eefa225aec06f878727586bef20" compoundref="HeadingComponent_8ixx" startline="67">rotationDampening_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a92230ab59736a87ceeb769ff541820e3" compoundref="HeadingComponent_8ixx" startline="57">rotationSpeed_</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1af8fab691fc62541dc030e749f3a7a68f" compoundref="HeadingComponent_8ixx" startline="62">rotationSpeedThreshold_</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para><ref refid="classhelios_1_1engine_1_1game_1_1Component" kindref="compound">Component</ref> that manages the heading (orientation) of an entity. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This component handles the rotational physics of an entity, including turning towards a target direction, rotation speed limits, and dampening. It maintains the current and target rotation angles and is used by the HeadingSystem to update the entity&apos;s orientation. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::game::Component</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1Component"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::game::components::physics::HeadingComponent</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>helios::engine::game::Component</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1Component"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>gameObject_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::game::GameObject</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1GameObject"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>guid_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>helios::engine::game::components::physics::HeadingComponent</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>helios::util::Guid</label>
+        <link refid="classhelios_1_1util_1_1Guid"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/game/components/physics/HeadingComponent.ixx" line="35" column="5" bodyfile="include/helios/engine/game/components/physics/HeadingComponent.ixx" bodystart="35" bodyend="310"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1a4a167553b4aed32f0ad96e8836a01b88" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>Component</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a2ddc22661574259cf60bbc0bdaea8258" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>currentRotationAngle</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1aa539cc09677674d009f52f36400e530e" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>currentRotationAngle_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a4537e856d70be505b6de455aa5c77e48" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>currentRotationSpeed</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a11fe301fa917be855ae3eb3d87615822" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>currentRotationSpeed_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1aaa196dec42e22f1b00b4903e2f080104" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>DEFAULT_ROTATION_DAMPENING</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a26b967c7431ca91367e2e072a385da2e" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>DEFAULT_ROTATION_SPEED</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a72d6d92e19ad71541fdcd78146f5c4ab" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>DEFAULT_ROTATION_SPEED_THRESHOLD</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1a0894e93b95d6d0b71602b8803d2cc213" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>gameObject</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1a70665759561369340448e6015f0a2552" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>gameObject_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a7e800e5502e43babc22d05a8fb0d81cb" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>headingInput</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a1b8be31d5c80997d939b9e6d448eb524" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>headingInput_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1ab93888efcb162ecd8f6ef34fce63b181" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>isInputActive</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1ae5ac80ffaafd2b8b91cfc4a979a9781b" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>isInputActive_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1ab36bb364af461dd789e7477f1bafa13b" prot="public" virt="virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>onActivate</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1a3a4f0b840b179c07299fc291a57fb51f" prot="public" virt="virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>onAttach</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1a7e5a02b0500c65e9606839059bdda398" prot="public" virt="virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>onDeactivate</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a9e571a1771e0da7831afb2e0e576b16f" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>resetToDefaults</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a78c31a64bd6786a9baf7803480f426ab" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>rotationAngleDelta</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a05824205566839d8031ff237c77a227d" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>rotationAngleDelta_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a0e2de075a1aa973efe9a4d8758137583" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>rotationAxis</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a0234a3fdde1c3761a10d459ae38d8746" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>rotationDampening</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a7cc69eefa225aec06f878727586bef20" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>rotationDampening_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1ade023e57d9a5d7412ab8bad78ec4ba4b" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>rotationSpeed</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a92230ab59736a87ceeb769ff541820e3" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>rotationSpeed_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a32308cfeff5de9c512572399f871088f" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>rotationSpeedThreshold</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1af8fab691fc62541dc030e749f3a7a68f" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>rotationSpeedThreshold_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1adf92aede31f0127389e7661e1828c334" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>setCurrentRotationAngle</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a7334b44384f0adbf47d1553490a8fe77" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>setCurrentRotationSpeed</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a2c9329e3dbf47d2e6d818c556614cb07" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>setHeading</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a1be212f2c232dc815392161427cbaac4" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>setRotationAngleDelta</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a94591ed9a3cb2c75eb56311621d029fe" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>setRotationDampening</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1afd2d3ff4808478006f81c17827a1fd9f" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>setRotationSpeed</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a0ddc8f98793f7a6cbab0dd566aa0793d" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>setRotationSpeedThreshold</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a375c0bed9050876ec3dc09119660b47b" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>setTargetRotationAngle</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a4b6616322ab2379a3db329b748642e9b" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>targetRotationAngle</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a44d14f71dde7f4bbed79ad4085381801" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>targetRotationAngle_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1a6400e2e07a46c0f4c760ff958be63200" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>turnIntensity</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent_1ad086508c6dbe7f88c00796e81a884410" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>turnIntensity_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1abeb3af407878cf9f2d1019fdc9e2712a" prot="public" virt="virtual"><scope>helios::engine::game::components::physics::HeadingComponent</scope><name>~Component</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

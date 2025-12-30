@@ -107,7 +107,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classhelios_1_1engine_1_1game_1_1System.html" title="Abstract base class for game systems.">System</a> that updates AABB colliders based on entity world transforms.  
+<p><a class="el" href="classhelios_1_1engine_1_1game_1_1System.html" title="Abstract base class for game systems.">System</a> that updates AABB colliders based on entity transforms.  
  <a href="#details">More...</a></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Inheritance diagram for helios::engine::game::systems::physics::BoundsUpdateSystem:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -143,15 +143,18 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:ab575d815b362bc7bc2fdfe021632c83b inherit pro_attribs_classhelios_1_1engine_1_1game_1_1System"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the <a class="el" href="classhelios_1_1engine_1_1game_1_1GameWorld.html" title="Central registry for managing game entities, systems, and the active level.">GameWorld</a> this system belongs to. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classhelios_1_1engine_1_1game_1_1System.html" title="Abstract base class for game systems.">System</a> that updates AABB colliders based on entity world transforms. </p>
-<p>This system iterates through all GameObjects that have:</p><ul>
-<li>ModelAabbComponent (source AABB)</li>
-<li>TransformComponent (world transform)</li>
-<li>AabbColliderComponent (target collider)</li>
+<div class="textblock"><p><a class="el" href="classhelios_1_1engine_1_1game_1_1System.html" title="Abstract base class for game systems.">System</a> that updates AABB colliders based on entity transforms. </p>
+<p>This system recalculates the world-space AABB for entities by transforming the canonical model AABB through the composed local transform (Translation * Rotation * Scale) and the parent's world transform.</p>
+<p>Required components:</p><ul>
+<li>ModelAabbComponent (source canonical AABB)</li>
+<li>SceneNodeComponent (for parent world transform)</li>
+<li>TranslationStateComponent (local translation)</li>
+<li>ScaleComponent (local scaling)</li>
+<li>RotationStateComponent (local rotation)</li>
+<li>AabbColliderComponent (receives the updated world-space AABB) </li>
 </ul>
-<p>When the TransformComponent is marked dirty, the system transforms the model AABB into world space and updates the collider bounds. </p>
 
-<p class="definition">Definition at line <a class="el" href="BoundsUpdateSystem_8ixx_source.html#l00039">39</a> of file <a class="el" href="BoundsUpdateSystem_8ixx_source.html">BoundsUpdateSystem.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BoundsUpdateSystem_8ixx_source.html#l00046">46</a> of file <a class="el" href="BoundsUpdateSystem_8ixx_source.html">BoundsUpdateSystem.ixx</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a97e57a7bcde348feb7a7da9968661002" name="a97e57a7bcde348feb7a7da9968661002"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a97e57a7bcde348feb7a7da9968661002">&#9670;&#160;</a></span>update()</h2>
@@ -177,6 +180,7 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Updates collider bounds for all applicable entities. </p>
+<p>For each entity with the required components, composes the local transform from translation, rotation, and scale, then applies the parent world transform to compute the final world-space AABB.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">updateContext</td><td>Context containing deltaTime and other frame data. </td></tr>
@@ -186,9 +190,15 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classhelios_1_1engine_1_1game_1_1System.html#ac268567131ffdbd96e0ee29dc8717609">helios::engine::game::System</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="BoundsUpdateSystem_8ixx_source.html#l00048">48</a> of file <a class="el" href="BoundsUpdateSystem_8ixx_source.html">BoundsUpdateSystem.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BoundsUpdateSystem_8ixx_source.html#l00060">60</a> of file <a class="el" href="BoundsUpdateSystem_8ixx_source.html">BoundsUpdateSystem.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="System_8ixx_source.html#l00048">helios::engine::game::System::gameWorld_</a>.</p>
+<p class="reference">References <a class="el" href="System_8ixx_source.html#l00048">helios::engine::game::System::gameWorld_</a>, and <a class="el" href="mat4_8ixx_source.html#l00104">helios::math::mat4&lt; float &gt;::identity()</a>.</p>
+<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1BoundsUpdateSystem_a97e57a7bcde348feb7a7da9968661002_cgraph.svg" width="643" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>

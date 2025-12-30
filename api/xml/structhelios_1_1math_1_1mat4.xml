@@ -173,19 +173,11 @@
           <declname>f3_3</declname>
         </param>
         <briefdescription>
-<para>Constructs a new `mat4` with all 16 components explicitly specified. The values are stored in column major order, that is, the first 4 arguments represent the first column, and so on. </para>
+<para>Constructs a new `mat4` with all 16 components explicitly specified. </para>
         </briefdescription>
         <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>fi_j</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>(i==row, j == col) </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-</para>
+<para>The values are stored in column major order, that is, the first 4 arguments represent the first column, and so on.</para>
+<para>Parameter naming convention: `fR_C` where R is the row index and C is the column index. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -311,7 +303,7 @@
 </simplesect>
 <simplesect kind="see"><para><ulink url="https://realtimecollisiondetection.net/blog/?p=89">https://realtimecollisiondetection.net/blog/?p=89</ulink></para>
 </simplesect>
-<xrefsect id="todo_1_todo000009"><xreftitle>Todo</xreftitle><xrefdescription><para>account for abs (values close to zero) and rel (larger values), move EPSILON to global constant </para>
+<xrefsect id="todo_1_todo000010"><xreftitle>Todo</xreftitle><xrefdescription><para>account for abs (values close to zero) and rel (larger values), move EPSILON to global constant </para>
 </xrefdescription></xrefsect></para>
         </detaileddescription>
         <inbodydescription>
@@ -493,6 +485,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="include/helios/math/types/mat4.ixx" line="308" column="38" bodyfile="include/helios/math/types/mat4.ixx" bodystart="308" bodyend="344"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1LevelBoundsBehaviorSystem_1a7026fa062c7aed092bcc20878b38a0c3" compoundref="LevelBoundsBehaviorSystem_8ixx" startline="54" endline="89">helios::engine::game::systems::physics::LevelBoundsBehaviorSystem::update</referencedby>
       </memberdef>
       <memberdef kind="function" id="structhelios_1_1math_1_1mat4_1a6c51266bc7e6f142ce172b8c2022645a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3</ref>&lt; T &gt;</type>
@@ -512,13 +505,14 @@
         <inbodydescription>
         </inbodydescription>
         <location file="include/helios/math/types/mat4.ixx" line="354" column="28" bodyfile="include/helios/math/types/mat4.ixx" bodystart="354" bodyend="359"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1LevelBoundsBehaviorSystem_1a7026fa062c7aed092bcc20878b38a0c3" compoundref="LevelBoundsBehaviorSystem_8ixx" startline="54" endline="89">helios::engine::game::systems::physics::LevelBoundsBehaviorSystem::update</referencedby>
       </memberdef>
-      <memberdef kind="function" id="structhelios_1_1math_1_1mat4_1a47a4e8f9edb058866e33f4bc029b779e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="structhelios_1_1math_1_1mat4_1a451a24222a56a80e6a7e01a93d6e867a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="structhelios_1_1math_1_1mat4" kindref="compound">helios::math::mat4</ref>&lt; T &gt;</type>
-        <definition>helios::math::mat4&lt; T &gt; helios::math::mat4&lt; T &gt;::setTranslation</definition>
+        <definition>helios::math::mat4&lt; T &gt; helios::math::mat4&lt; T &gt;::withTranslation</definition>
         <argsstring>(helios::math::vec3&lt; T &gt; v) const noexcept</argsstring>
-        <name>setTranslation</name>
-        <qualifiedname>helios::math::mat4::setTranslation</qualifiedname>
+        <name>withTranslation</name>
+        <qualifiedname>helios::math::mat4::withTranslation</qualifiedname>
         <param>
           <type><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3</ref>&lt; T &gt;</type>
           <declname>v</declname>
@@ -544,6 +538,82 @@
         <inbodydescription>
         </inbodydescription>
         <location file="include/helios/math/types/mat4.ixx" line="371" column="28" bodyfile="include/helios/math/types/mat4.ixx" bodystart="371" bodyend="379"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1LevelBoundsBehaviorSystem_1a7026fa062c7aed092bcc20878b38a0c3" compoundref="LevelBoundsBehaviorSystem_8ixx" startline="54" endline="89">helios::engine::game::systems::physics::LevelBoundsBehaviorSystem::update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1math_1_1mat4_1a6168417f43e3cf34c6376fe5f288b038" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structhelios_1_1math_1_1mat4" kindref="compound">helios::math::mat4</ref>&lt; T &gt;</type>
+        <definition>helios::math::mat4&lt; T &gt; helios::math::mat4&lt; T &gt;::withScaling</definition>
+        <argsstring>(helios::math::vec3&lt; T &gt; v) const noexcept</argsstring>
+        <name>withScaling</name>
+        <qualifiedname>helios::math::mat4::withScaling</qualifiedname>
+        <param>
+          <type><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3</ref>&lt; T &gt;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+<para>Returns a new 4x4 matrix derived by applying a scaling transformation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function scales the current matrix by modifying specific components based on the scaling factors provided in the input vector.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The numeric type used for the matrix and vector components. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A 3D vector representing the scaling factors along the x, y, and z axes. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new 4x4 matrix with the scaling transformation applied. </para>
+</simplesect>
+<simplesect kind="note"><para>The operation maintains column-major order for the matrix components. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/types/mat4.ixx" line="392" column="28" bodyfile="include/helios/math/types/mat4.ixx" bodystart="392" bodyend="400"/>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1math_1_1mat4_1adf5462371557ac38947700b261f5c848" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structhelios_1_1math_1_1mat4" kindref="compound">helios::math::mat4</ref>&lt; T &gt;</type>
+        <definition>helios::math::mat4&lt; T &gt; helios::math::mat4&lt; T &gt;::withTranslation</definition>
+        <argsstring>(helios::math::vec4&lt; T &gt; v) const noexcept</argsstring>
+        <name>withTranslation</name>
+        <qualifiedname>helios::math::mat4::withTranslation</qualifiedname>
+        <param>
+          <type><ref refid="structhelios_1_1math_1_1vec4" kindref="compound">helios::math::vec4</ref>&lt; T &gt;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+<para>Creates a new matrix with the specified translation, preserving other components. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Overload accepting a <ref refid="structhelios_1_1math_1_1vec4" kindref="compound">vec4</ref>. Only the xyz components are used; the w component is ignored and set to 1.0 in the resulting matrix.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new translation vector (x, y, z, w). The w component is ignored.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A new mat4&lt;T&gt; with the updated translation component. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/math/types/mat4.ixx" line="413" column="28" bodyfile="include/helios/math/types/mat4.ixx" bodystart="413" bodyend="421"/>
       </memberdef>
       <memberdef kind="function" id="structhelios_1_1math_1_1mat4_1a9c19cb795b7d8a032dd4cb415803f163" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="structhelios_1_1math_1_1mat4" kindref="compound">helios::math::mat4</ref>&lt; T &gt;</type>
@@ -598,7 +668,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/math/types/mat4.ixx" line="407" column="28" bodyfile="include/helios/math/types/mat4.ixx" bodystart="407" bodyend="451"/>
+        <location file="include/helios/math/types/mat4.ixx" line="449" column="28" bodyfile="include/helios/math/types/mat4.ixx" bodystart="449" bodyend="493"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -628,7 +698,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="include/helios/math/types/mat4.ixx" line="104" column="21" bodyfile="include/helios/math/types/mat4.ixx" bodystart="104" bodyend="106"/>
-        <referencedby refid="structhelios_1_1math_1_1mat4_1a9c19cb795b7d8a032dd4cb415803f163" compoundref="mat4_8ixx" startline="407" endline="451">helios::math::mat4&lt; float &gt;::decompose</referencedby>
+        <referencedby refid="structhelios_1_1math_1_1mat4_1a9c19cb795b7d8a032dd4cb415803f163" compoundref="mat4_8ixx" startline="449" endline="493">helios::math::mat4&lt; float &gt;::decompose</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -647,7 +717,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="include/helios/math/types/mat4.ixx" line="36" column="5" bodyfile="include/helios/math/types/mat4.ixx" bodystart="36" bodyend="453"/>
+    <location file="include/helios/math/types/mat4.ixx" line="36" column="5" bodyfile="include/helios/math/types/mat4.ixx" bodystart="36" bodyend="495"/>
     <listofallmembers>
       <member refid="structhelios_1_1math_1_1mat4_1a43af56ad57ea70cbf00895e396ceccbd" prot="public" virt="non-virtual"><scope>helios::math::mat4</scope><name>column</name></member>
       <member refid="structhelios_1_1math_1_1mat4_1a9c19cb795b7d8a032dd4cb415803f163" prot="public" virt="non-virtual"><scope>helios::math::mat4</scope><name>decompose</name></member>
@@ -664,9 +734,11 @@
       <member refid="structhelios_1_1math_1_1mat4_1a23a55beb9005b24b1e50ae2bf8a71ad8" prot="public" virt="non-virtual"><scope>helios::math::mat4</scope><name>operator*</name></member>
       <member refid="structhelios_1_1math_1_1mat4_1a33c47f9920f5e88b98caca96a889d0aa" prot="public" virt="non-virtual"><scope>helios::math::mat4</scope><name>operator==</name></member>
       <member refid="structhelios_1_1math_1_1mat4_1a11484773381edf083309360d6c940d3f" prot="public" virt="non-virtual"><scope>helios::math::mat4</scope><name>same</name></member>
-      <member refid="structhelios_1_1math_1_1mat4_1a47a4e8f9edb058866e33f4bc029b779e" prot="public" virt="non-virtual"><scope>helios::math::mat4</scope><name>setTranslation</name></member>
       <member refid="structhelios_1_1math_1_1mat4_1a6c51266bc7e6f142ce172b8c2022645a" prot="public" virt="non-virtual"><scope>helios::math::mat4</scope><name>translation</name></member>
       <member refid="structhelios_1_1math_1_1mat4_1aa5940ba880eb6ac1c64ca4f7117d7cc2" prot="public" virt="non-virtual"><scope>helios::math::mat4</scope><name>transpose</name></member>
+      <member refid="structhelios_1_1math_1_1mat4_1a6168417f43e3cf34c6376fe5f288b038" prot="public" virt="non-virtual"><scope>helios::math::mat4</scope><name>withScaling</name></member>
+      <member refid="structhelios_1_1math_1_1mat4_1a451a24222a56a80e6a7e01a93d6e867a" prot="public" virt="non-virtual"><scope>helios::math::mat4</scope><name>withTranslation</name></member>
+      <member refid="structhelios_1_1math_1_1mat4_1adf5462371557ac38947700b261f5c848" prot="public" virt="non-virtual"><scope>helios::math::mat4</scope><name>withTranslation</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

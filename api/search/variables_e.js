@@ -6,7 +6,7 @@ var searchData=
   ['pink_3',['Pink',['../structhelios_1_1util_1_1Colors.html#a006c3ee312b31a9cb40b42efd523b5b1',1,'helios::util::Colors']]],
   ['plum_4',['Plum',['../structhelios_1_1util_1_1Colors.html#a22ad01ece48cf0139b685904109a7fad',1,'helios::util::Colors']]],
   ['pool_5f_5',['pool_',['../classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem.html#ac51c7dd05190058f56cd91e3e25f792a',1,'helios::engine::game::systems::gameplay::ProjectilePoolSystem']]],
-  ['poolsize_5f_6',['poolSize_',['../classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem.html#afb0c2c626f0b164cc619dfd828b5637c',1,'helios::engine::game::systems::gameplay::ProjectilePoolSystem']]],
+  ['poolsize_5f_6',['poolSize_',['../classhelios_1_1engine_1_1game_1_1GameObjectPool.html#a1d851306ee05a07ab0b68dff88b2f711',1,'helios::engine::game::GameObjectPool::poolSize_'],['../classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem.html#afb0c2c626f0b164cc619dfd828b5637c',1,'helios::engine::game::systems::gameplay::ProjectilePoolSystem::poolSize_']]],
   ['position_7',['position',['../structhelios_1_1rendering_1_1Vertex.html#aad5f040c6ccd955709d5f38e236aa3c8',1,'helios::rendering::Vertex']]],
   ['powderblue_8',['PowderBlue',['../structhelios_1_1util_1_1Colors.html#a5676b94198fada7e2a90360dfbc2f20d',1,'helios::util::Colors']]],
   ['primitivetype_9',['primitiveType',['../structhelios_1_1rendering_1_1model_1_1config_1_1MeshConfig.html#a7cb1229de566ac92aa1e26068f661fd4',1,'helios::rendering::model::config::MeshConfig']]],

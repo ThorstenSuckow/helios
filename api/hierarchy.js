@@ -8,6 +8,7 @@ var hierarchy =
     [ "helios::util::Colors", "structhelios_1_1util_1_1Colors.html", null ],
     [ "helios::engine::game::Command", "classhelios_1_1engine_1_1game_1_1Command.html", [
       [ "helios::engine::game::commands::Aim2DCommand", "classhelios_1_1engine_1_1game_1_1commands_1_1Aim2DCommand.html", null ],
+      [ "helios::engine::game::commands::HeadingCommand", "classhelios_1_1engine_1_1game_1_1commands_1_1HeadingCommand.html", null ],
       [ "helios::engine::game::commands::Move2DCommand", "classhelios_1_1engine_1_1game_1_1commands_1_1Move2DCommand.html", null ],
       [ "helios::engine::game::commands::ShootCommand", "classhelios_1_1engine_1_1game_1_1commands_1_1ShootCommand.html", null ]
     ] ],
@@ -18,10 +19,16 @@ var hierarchy =
       [ "helios::engine::game::components::input::TwinStickInputComponent", "classhelios_1_1engine_1_1game_1_1components_1_1input_1_1TwinStickInputComponent.html", null ],
       [ "helios::engine::game::components::model::ModelAabbComponent", "classhelios_1_1engine_1_1game_1_1components_1_1model_1_1ModelAabbComponent.html", null ],
       [ "helios::engine::game::components::physics::AabbColliderComponent", "classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1AabbColliderComponent.html", null ],
+      [ "helios::engine::game::components::physics::DirectionComponent", "classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1DirectionComponent.html", null ],
+      [ "helios::engine::game::components::physics::HeadingComponent", "classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent.html", null ],
       [ "helios::engine::game::components::physics::LevelBoundsBehaviorComponent", "classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent.html", null ],
       [ "helios::engine::game::components::physics::Move2DComponent", "classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1Move2DComponent.html", null ],
+      [ "helios::engine::game::components::physics::RotationStateComponent", "classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html", null ],
       [ "helios::engine::game::components::physics::ScaleComponent", "classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1ScaleComponent.html", null ],
+      [ "helios::engine::game::components::physics::SpinComponent", "classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent.html", null ],
       [ "helios::engine::game::components::physics::TransformComponent", "classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1TransformComponent.html", null ],
+      [ "helios::engine::game::components::physics::TranslationStateComponent", "classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1TranslationStateComponent.html", null ],
+      [ "helios::engine::game::components::rendering::RenderableComponent", "classhelios_1_1engine_1_1game_1_1components_1_1rendering_1_1RenderableComponent.html", null ],
       [ "helios::engine::game::components::scene::SceneNodeComponent", "classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent.html", null ]
     ] ],
     [ "helios::app::controller::Controller", "classhelios_1_1app_1_1controller_1_1Controller.html", [
@@ -51,6 +58,7 @@ var hierarchy =
       [ "helios::scene::CullNoneStrategy", "classhelios_1_1scene_1_1CullNoneStrategy.html", null ]
     ] ],
     [ "helios::engine::game::GameObject", "classhelios_1_1engine_1_1game_1_1GameObject.html", null ],
+    [ "helios::engine::game::GameObjectPool", "classhelios_1_1engine_1_1game_1_1GameObjectPool.html", null ],
     [ "helios::input::gamepad::GamepadSettings", "classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html", null ],
     [ "helios::input::gamepad::GamepadState", "classhelios_1_1input_1_1gamepad_1_1GamepadState.html", null ],
     [ "helios::engine::game::GameWorld", "classhelios_1_1engine_1_1game_1_1GameWorld.html", null ],
@@ -133,9 +141,12 @@ var hierarchy =
       [ "helios::engine::game::System", "classhelios_1_1engine_1_1game_1_1System.html", [
         [ "helios::engine::game::systems::gameplay::ProjectilePoolSystem", "classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem.html", null ],
         [ "helios::engine::game::systems::physics::BoundsUpdateSystem", "classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1BoundsUpdateSystem.html", null ],
+        [ "helios::engine::game::systems::physics::ComposeTransformSystem", "classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1ComposeTransformSystem.html", null ],
+        [ "helios::engine::game::systems::physics::HeadingSystem", "classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1HeadingSystem.html", null ],
         [ "helios::engine::game::systems::physics::LevelBoundsBehaviorSystem", "classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1LevelBoundsBehaviorSystem.html", null ],
         [ "helios::engine::game::systems::physics::Move2DSystem", "classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1Move2DSystem.html", null ],
         [ "helios::engine::game::systems::physics::ScaleSystem", "classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1ScaleSystem.html", null ],
+        [ "helios::engine::game::systems::physics::SpinSystem", "classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1SpinSystem.html", null ],
         [ "helios::engine::game::systems::post::ScaleClearSystem", "classhelios_1_1engine_1_1game_1_1systems_1_1post_1_1ScaleClearSystem.html", null ],
         [ "helios::engine::game::systems::post::TransformClearSystem", "classhelios_1_1engine_1_1game_1_1systems_1_1post_1_1TransformClearSystem.html", null ],
         [ "helios::engine::game::systems::scene::SceneSyncSystem", "classhelios_1_1engine_1_1game_1_1systems_1_1scene_1_1SceneSyncSystem.html", null ]

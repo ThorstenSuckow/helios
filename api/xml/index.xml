@@ -76,6 +76,12 @@
   <compound refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1BoundsUpdateSystem" kind="class"><name>helios::engine::game::systems::physics::BoundsUpdateSystem</name>
     <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1BoundsUpdateSystem_1a97e57a7bcde348feb7a7da9968661002" kind="function"><name>update</name></member>
   </compound>
+  <compound refid="classhelios_1_1engine_1_1game_1_1CallbackSpawnStrategy" kind="class"><name>helios::engine::game::CallbackSpawnStrategy</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1CallbackSpawnStrategy_1ab1edc8e159cbe8d3b0a8ae3a0dbd66c2" kind="typedef"><name>SpawnFunction</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1CallbackSpawnStrategy_1a4f580e853e0885b7c4d456908838113e" kind="variable"><name>spawnFunction_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1CallbackSpawnStrategy_1a5ca26aee1b8639d97816ccb51b61e0d3" kind="function"><name>CallbackSpawnStrategy</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1CallbackSpawnStrategy_1a1d07e90388360a0f8f9ff3294ce4571d" kind="function"><name>spawn</name></member>
+  </compound>
   <compound refid="classhelios_1_1scene_1_1Camera" kind="class"><name>helios::scene::Camera</name>
     <member refid="classhelios_1_1scene_1_1Camera_1a73a85eb4966fb4524dc6b87736500f62" kind="variable"><name>projectionMatrix_</name></member>
     <member refid="classhelios_1_1scene_1_1Camera_1a5c915d9ba00c11dcef1885f02e32945c" kind="variable"><name>viewMatrix_</name></member>
@@ -453,6 +459,17 @@
     <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a073485a4a359cbd48a2e5b8633020239" kind="function"><name>release</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a722d64b5eff08ee053cb45184dd70801" kind="function"><name>release</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a3179669f6a21f905e8eb9dca7e99b865" kind="function"><name>inactiveGameObjects</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a2efedfc26309b7755948171449aa54b1" kind="function"><name>activeCount</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a5f7cfe851ecdd7368cd0900e1c4420ec" kind="function"><name>inactiveCount</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem" kind="class"><name>helios::engine::game::systems::gameplay::GameObjectSpawnSystem</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem_1a1c1df9e898f1897e3c00dd7855aeb751" kind="variable"><name>gameObjectPool_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem_1aa4724befb2cba0d34a6aef02b6dccd2b" kind="variable"><name>level_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem_1ae121c1193b890cda442631e7563d0354" kind="variable"><name>spawnStrategy_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem_1ad5fe4bae595e3184d8f5267b6705221f" kind="variable"><name>spawnCondition_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem_1aa67c358f501ae6303b0bebf8945553eb" kind="function"><name>warmup</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem_1a4b66f02541338b4e300579354741531f" kind="function"><name>GameObjectSpawnSystem</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem_1a8654a76331169bc5ea5f1cbb84bdfc94" kind="function"><name>update</name></member>
   </compound>
   <compound refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings" kind="class"><name>helios::input::gamepad::GamepadSettings</name>
     <member refid="classhelios_1_1input_1_1gamepad_1_1GamepadSettings_1a0afd4f380d88d940ba4edb8906a8936d" kind="variable"><name>leftStickDeadzone_</name></member>
@@ -775,7 +792,7 @@
     <member refid="classhelios_1_1engine_1_1game_1_1Level_1a03196a938096d47e56f46062df4727a4" kind="function"><name>Level</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1Level_1a884afabf62c77c8daa874bae386a0a42" kind="function"><name>setBounds</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1Level_1a6d06cb1a710c1f6fb81d24e24ead2c2c" kind="function"><name>rootNode</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1Level_1a040737104ff14df58baf3861e95838c7" kind="function"><name>bounds</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1Level_1aa67e79211ffb1b7d572274c798765db0" kind="function"><name>bounds</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent" kind="class"><name>helios::engine::game::components::physics::LevelBoundsBehaviorComponent</name>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1a43f5eac15b732fb4a6a5aeda9771aa3c" kind="variable"><name>restitution_</name></member>
@@ -1112,6 +1129,12 @@
     <member refid="classhelios_1_1input_1_1gamepad_1_1RadialDeadzoneStrategy_1aa1c7ac7f01e8a2936027aa68c96a3acd" kind="function"><name>RadialDeadzoneStrategy</name></member>
     <member refid="classhelios_1_1input_1_1gamepad_1_1RadialDeadzoneStrategy_1ab2978ad6d7b34ede7dcf4a91c24cab8e" kind="function"><name>normalize</name></member>
   </compound>
+  <compound refid="classhelios_1_1util_1_1Random" kind="class"><name>helios::util::Random</name>
+    <member refid="classhelios_1_1util_1_1Random_1a3eb82ecc7dea3ef9450e5a18a7a7dc03" kind="variable"><name>gen_</name></member>
+    <member refid="classhelios_1_1util_1_1Random_1a32a777bd31ce726fbe2c52aeb8d872f3" kind="variable"><name>uniformDist_</name></member>
+    <member refid="classhelios_1_1util_1_1Random_1a65f34a4c69ccb7dc6e12faf42c62ad86" kind="function"><name>Random</name></member>
+    <member refid="classhelios_1_1util_1_1Random_1a8f32c6075d653622da519b783386a205" kind="function"><name>randomFloat</name></member>
+  </compound>
   <compound refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Rectangle" kind="struct"><name>helios::rendering::asset::shape::basic::Rectangle</name>
     <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Rectangle_1a107d9bec5afd9fdf6e99ca68deee8f7f" kind="function"><name>Rectangle</name></member>
     <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Rectangle_1a14b69420627783fd6097998d61a06a5a" kind="function"><name>primitiveType</name></member>
@@ -1404,16 +1427,23 @@
     <member refid="structhelios_1_1scene_1_1SnapshotItem_1a3145126ee37604f07f27f3f8ed8d30e2" kind="function"><name>renderable</name></member>
     <member refid="structhelios_1_1scene_1_1SnapshotItem_1a9b1e4c1e12d5c92284036256995442f5" kind="function"><name>worldMatrix</name></member>
   </compound>
+  <compound refid="classhelios_1_1engine_1_1game_1_1SpawnCondition" kind="class"><name>helios::engine::game::SpawnCondition</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1SpawnCondition_1a3c2b7fbd1138483584d1a6f14ab40adb" kind="function"><name>~SpawnCondition</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1SpawnCondition_1ab7745a17eaf091b9be765aa6b616aaa1" kind="function"><name>spawnBudget</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1game_1_1SpawnStrategy" kind="class"><name>helios::engine::game::SpawnStrategy</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1SpawnStrategy_1ae11977ed10fc8a43ab6a6c23521a177c" kind="function"><name>SpawnStrategy</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1SpawnStrategy_1aefac662e005a42cca62f71b0ca534c16" kind="function"><name>~SpawnStrategy</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1SpawnStrategy_1a147cb5b62a4d36efba65237e1454d4ca" kind="function"><name>spawn</name></member>
+  </compound>
   <compound refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent" kind="class"><name>helios::engine::game::components::physics::SpinComponent</name>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1aa7d70b91a8c5a5dc66db7096020f0e28" kind="variable"><name>rotationSpeed_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1ad4dccd47815880b34059f496986f8b58" kind="variable"><name>rotationAxis_</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1ac9f05d3c90d0af097745bf93896e872b" kind="variable"><name>spinAngle_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1afdf6b88f8b992e9ce797c57dd0161651" kind="variable"><name>currentRotation_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1a6674dc000c72891ff68a84d71fcdb74e" kind="function"><name>SpinComponent</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1a75299f545b82baa4c2d73d7f07de09cd" kind="function"><name>axis</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1ab5dba59060b775aa95462b5f9b5386e7" kind="function"><name>speed</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1a79f977f26e83fc962c9c730d441835e6" kind="function"><name>rotation</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1a7e0d966046294d0bfa202883f74ef814" kind="function"><name>spinAngle</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1adeb3a31039806bf28a2a27111f056ec2" kind="function"><name>setRotation</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1SpinSystem" kind="class"><name>helios::engine::game::systems::physics::SpinSystem</name>
@@ -1443,6 +1473,12 @@
   <compound refid="structhelios_1_1engine_1_1game_1_1CommandBuffer_1_1TargetedCommand" kind="struct"><name>helios::engine::game::CommandBuffer::TargetedCommand</name>
     <member refid="structhelios_1_1engine_1_1game_1_1CommandBuffer_1_1TargetedCommand_1a755369a3424411651252d3287a65a36d" kind="variable"><name>guid</name></member>
     <member refid="structhelios_1_1engine_1_1game_1_1CommandBuffer_1_1TargetedCommand_1a9c8568bdb8a8ed131a2b8f92106ea3bd" kind="variable"><name>command</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1game_1_1TimerSpawnCondition" kind="class"><name>helios::engine::game::TimerSpawnCondition</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1TimerSpawnCondition_1a38d1e8bea528daf91fd27980dd576d76" kind="variable"><name>interval_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1TimerSpawnCondition_1a30897958dd2b89fb7b7c86ed3bd9188d" kind="variable"><name>countdown_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1TimerSpawnCondition_1a3e7d90d97375ef9510f90bb720929c1c" kind="function"><name>TimerSpawnCondition</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1TimerSpawnCondition_1a61d8a5760a3b04b77fc69f797fd59921" kind="function"><name>spawnBudget</name></member>
   </compound>
   <compound refid="classhelios_1_1core_1_1Transform" kind="class"><name>helios::core::Transform</name>
     <member refid="classhelios_1_1core_1_1Transform_1a6e39c60efe56a62e4e7542905713d73d" kind="variable"><name>needsUpdate_</name></member>
@@ -2155,6 +2191,8 @@
   </compound>
   <compound refid="FrameStats_8ixx" kind="file"><name>FrameStats.ixx</name>
   </compound>
+  <compound refid="CallbackSpawnStrategy_8ixx" kind="file"><name>CallbackSpawnStrategy.ixx</name>
+  </compound>
   <compound refid="Command_8ixx" kind="file"><name>Command.ixx</name>
   </compound>
   <compound refid="CommandBuffer_8ixx" kind="file"><name>CommandBuffer.ixx</name>
@@ -2215,7 +2253,13 @@
   </compound>
   <compound refid="Level_8ixx" kind="file"><name>Level.ixx</name>
   </compound>
+  <compound refid="SpawnCondition_8ixx" kind="file"><name>SpawnCondition.ixx</name>
+  </compound>
+  <compound refid="SpawnStrategy_8ixx" kind="file"><name>SpawnStrategy.ixx</name>
+  </compound>
   <compound refid="System_8ixx" kind="file"><name>System.ixx</name>
+  </compound>
+  <compound refid="GameObjectSpawnSystem_8ixx" kind="file"><name>GameObjectSpawnSystem.ixx</name>
   </compound>
   <compound refid="ProjectilePoolSystem_8ixx" kind="file"><name>ProjectilePoolSystem.ixx</name>
   </compound>
@@ -2238,6 +2282,8 @@
   <compound refid="TransformClearSystem_8ixx" kind="file"><name>TransformClearSystem.ixx</name>
   </compound>
   <compound refid="SceneSyncSystem_8ixx" kind="file"><name>SceneSyncSystem.ixx</name>
+  </compound>
+  <compound refid="TimerSpawnCondition_8ixx" kind="file"><name>TimerSpawnCondition.ixx</name>
   </compound>
   <compound refid="Updatable_8ixx" kind="file"><name>Updatable.ixx</name>
   </compound>
@@ -2402,6 +2448,8 @@
     <member refid="LogManager_8ixx_1a3ccdf5e151cf4faa7bea9d68a1af829a" kind="define"><name>LOGGING_ENABLED</name></member>
   </compound>
   <compound refid="LogSink_8ixx" kind="file"><name>LogSink.ixx</name>
+  </compound>
+  <compound refid="Random_8ixx" kind="file"><name>Random.ixx</name>
   </compound>
   <compound refid="Stopwatch_8ixx" kind="file"><name>Stopwatch.ixx</name>
   </compound>
@@ -2925,6 +2973,12 @@
   </compound>
   <compound refid="module__helios_8engine_8game" kind="module"><name>helios.engine.game</name>
   </compound>
+  <compound refid="module__helios_8engine_8game_8CallbackSpawnStrategy" kind="module"><name>helios.engine.game.CallbackSpawnStrategy</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1CallbackSpawnStrategy_1ab1edc8e159cbe8d3b0a8ae3a0dbd66c2" kind="typedef"><name>SpawnFunction</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1CallbackSpawnStrategy_1a4f580e853e0885b7c4d456908838113e" kind="variable"><name>spawnFunction_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1CallbackSpawnStrategy_1a5ca26aee1b8639d97816ccb51b61e0d3" kind="function"><name>CallbackSpawnStrategy</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1CallbackSpawnStrategy_1a1d07e90388360a0f8f9ff3294ce4571d" kind="function"><name>spawn</name></member>
+  </compound>
   <compound refid="module__helios_8engine_8game_8Command" kind="module"><name>helios.engine.game.Command</name>
     <member refid="classhelios_1_1engine_1_1game_1_1Command_1aa7a627acdae0a48a11770bd116db9f1e" kind="function"><name>~Command</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1Command_1a9e7515d68b42e8bff683df15d4f95ab7" kind="function"><name>execute</name></member>
@@ -3145,13 +3199,11 @@
   <compound refid="module__helios_8engine_8game_8components_8physics_8SpinComponent" kind="module"><name>helios.engine.game.components.physics.SpinComponent</name>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1aa7d70b91a8c5a5dc66db7096020f0e28" kind="variable"><name>rotationSpeed_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1ad4dccd47815880b34059f496986f8b58" kind="variable"><name>rotationAxis_</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1ac9f05d3c90d0af097745bf93896e872b" kind="variable"><name>spinAngle_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1afdf6b88f8b992e9ce797c57dd0161651" kind="variable"><name>currentRotation_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1a6674dc000c72891ff68a84d71fcdb74e" kind="function"><name>SpinComponent</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1a75299f545b82baa4c2d73d7f07de09cd" kind="function"><name>axis</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1ab5dba59060b775aa95462b5f9b5386e7" kind="function"><name>speed</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1a79f977f26e83fc962c9c730d441835e6" kind="function"><name>rotation</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1a7e0d966046294d0bfa202883f74ef814" kind="function"><name>spinAngle</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent_1adeb3a31039806bf28a2a27111f056ec2" kind="function"><name>setRotation</name></member>
   </compound>
   <compound refid="module__helios_8engine_8game_8components_8physics_8TransformComponent" kind="module"><name>helios.engine.game.components.physics.TransformComponent</name>
@@ -3236,6 +3288,8 @@
     <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a073485a4a359cbd48a2e5b8633020239" kind="function"><name>release</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a722d64b5eff08ee053cb45184dd70801" kind="function"><name>release</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a3179669f6a21f905e8eb9dca7e99b865" kind="function"><name>inactiveGameObjects</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a2efedfc26309b7755948171449aa54b1" kind="function"><name>activeCount</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a5f7cfe851ecdd7368cd0900e1c4420ec" kind="function"><name>inactiveCount</name></member>
   </compound>
   <compound refid="module__helios_8engine_8game_8GameWorld" kind="module"><name>helios.engine.game.GameWorld</name>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1aaa4a2366fd132dd0336e8abe6a9db91e" kind="typedef"><name>Map</name></member>
@@ -3271,7 +3325,16 @@
     <member refid="classhelios_1_1engine_1_1game_1_1Level_1a03196a938096d47e56f46062df4727a4" kind="function"><name>Level</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1Level_1a884afabf62c77c8daa874bae386a0a42" kind="function"><name>setBounds</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1Level_1a6d06cb1a710c1f6fb81d24e24ead2c2c" kind="function"><name>rootNode</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1Level_1a040737104ff14df58baf3861e95838c7" kind="function"><name>bounds</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1Level_1aa67e79211ffb1b7d572274c798765db0" kind="function"><name>bounds</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8game_8SpawnCondition" kind="module"><name>helios.engine.game.SpawnCondition</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1SpawnCondition_1a3c2b7fbd1138483584d1a6f14ab40adb" kind="function"><name>~SpawnCondition</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1SpawnCondition_1ab7745a17eaf091b9be765aa6b616aaa1" kind="function"><name>spawnBudget</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8game_8SpawnStrategy" kind="module"><name>helios.engine.game.SpawnStrategy</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1SpawnStrategy_1ae11977ed10fc8a43ab6a6c23521a177c" kind="function"><name>SpawnStrategy</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1SpawnStrategy_1aefac662e005a42cca62f71b0ca534c16" kind="function"><name>~SpawnStrategy</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1SpawnStrategy_1a147cb5b62a4d36efba65237e1454d4ca" kind="function"><name>spawn</name></member>
   </compound>
   <compound refid="module__helios_8engine_8game_8System" kind="module"><name>helios.engine.game.System</name>
     <member refid="classhelios_1_1engine_1_1game_1_1System_1ab575d815b362bc7bc2fdfe021632c83b" kind="variable"><name>gameWorld_</name></member>
@@ -3282,6 +3345,15 @@
   <compound refid="module__helios_8engine_8game_8systems" kind="module"><name>helios.engine.game.systems</name>
   </compound>
   <compound refid="module__helios_8engine_8game_8systems_8gameplay" kind="module"><name>helios.engine.game.systems.gameplay</name>
+  </compound>
+  <compound refid="module__helios_8engine_8game_8systems_8gameplay_8GameObjectSpawnSystem" kind="module"><name>helios.engine.game.systems.gameplay.GameObjectSpawnSystem</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem_1a1c1df9e898f1897e3c00dd7855aeb751" kind="variable"><name>gameObjectPool_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem_1aa4724befb2cba0d34a6aef02b6dccd2b" kind="variable"><name>level_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem_1ae121c1193b890cda442631e7563d0354" kind="variable"><name>spawnStrategy_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem_1ad5fe4bae595e3184d8f5267b6705221f" kind="variable"><name>spawnCondition_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem_1aa67c358f501ae6303b0bebf8945553eb" kind="function"><name>warmup</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem_1a4b66f02541338b4e300579354741531f" kind="function"><name>GameObjectSpawnSystem</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem_1a8654a76331169bc5ea5f1cbb84bdfc94" kind="function"><name>update</name></member>
   </compound>
   <compound refid="module__helios_8engine_8game_8systems_8gameplay_8ProjectilePoolSystem" kind="module"><name>helios.engine.game.systems.gameplay.ProjectilePoolSystem</name>
     <member refid="structhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1_1ProjectileObject_1a0be4d232e8ab8a304872d2644c535ba2" kind="variable"><name>projectileNodePtr</name></member>
@@ -3348,6 +3420,12 @@
     <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1scene_1_1SceneSyncSystem_1abd1718d31b799667814d8213a969b302" kind="variable"><name>scene_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1scene_1_1SceneSyncSystem_1a433b25a8b2a5ee17e6f31bb3836ae471" kind="function"><name>SceneSyncSystem</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1scene_1_1SceneSyncSystem_1a76a6ea882c0ab1715cd5431b65a71fa5" kind="function"><name>update</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8game_8TimerSpawnCondition" kind="module"><name>helios.engine.game.TimerSpawnCondition</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1TimerSpawnCondition_1a38d1e8bea528daf91fd27980dd576d76" kind="variable"><name>interval_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1TimerSpawnCondition_1a30897958dd2b89fb7b7c86ed3bd9188d" kind="variable"><name>countdown_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1TimerSpawnCondition_1a3e7d90d97375ef9510f90bb720929c1c" kind="function"><name>TimerSpawnCondition</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1TimerSpawnCondition_1a61d8a5760a3b04b77fc69f797fd59921" kind="function"><name>spawnBudget</name></member>
   </compound>
   <compound refid="module__helios_8engine_8game_8Updatable" kind="module"><name>helios.engine.game.Updatable</name>
     <member refid="classhelios_1_1engine_1_1game_1_1Updatable_1aac5760f908621631c4e7ac40f25e9361" kind="function"><name>~Updatable</name></member>
@@ -4325,6 +4403,12 @@
     <member refid="classhelios_1_1util_1_1log_1_1LogSink_1a1eac0bfe8af64547c7f6f2fb9d815b17" kind="function"><name>typeId</name></member>
     <member refid="classhelios_1_1util_1_1log_1_1LogSink_1aa8a9b93a650cd8111fa5a5358d2c2376" kind="function"><name>write</name></member>
     <member refid="classhelios_1_1util_1_1log_1_1LogSink_1a63612d9abf81ff9610a1b3bccccc1af5" kind="function"><name>flush</name></member>
+  </compound>
+  <compound refid="module__helios_8util_8Random" kind="module"><name>helios.util.Random</name>
+    <member refid="classhelios_1_1util_1_1Random_1a3eb82ecc7dea3ef9450e5a18a7a7dc03" kind="variable"><name>gen_</name></member>
+    <member refid="classhelios_1_1util_1_1Random_1a32a777bd31ce726fbe2c52aeb8d872f3" kind="variable"><name>uniformDist_</name></member>
+    <member refid="classhelios_1_1util_1_1Random_1a65f34a4c69ccb7dc6e12faf42c62ad86" kind="function"><name>Random</name></member>
+    <member refid="classhelios_1_1util_1_1Random_1a8f32c6075d653622da519b783386a205" kind="function"><name>randomFloat</name></member>
   </compound>
   <compound refid="module__helios_8util_8time" kind="module"><name>helios.util.time</name>
   </compound>

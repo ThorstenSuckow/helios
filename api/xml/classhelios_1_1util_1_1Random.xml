@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1util_1_1Random" kind="class" language="C++" prot="public">
+    <compoundname>helios::util::Random</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1util_1_1Random_1a3eb82ecc7dea3ef9450e5a18a7a7dc03" prot="private" static="no" mutable="no">
+        <type>std::mt19937</type>
+        <definition>std::mt19937 helios::util::Random::gen_</definition>
+        <argsstring></argsstring>
+        <name>gen_</name>
+        <qualifiedname>helios::util::Random::gen_</qualifiedname>
+        <briefdescription>
+<para>The Mersenne Twister pseudo-random number generator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/Random.ixx" line="34" column="22" bodyfile="include/helios/util/Random.ixx" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1util_1_1Random_1a32a777bd31ce726fbe2c52aeb8d872f3" prot="private" static="no" mutable="no">
+        <type>std::uniform_real_distribution&lt; float &gt;</type>
+        <definition>std::uniform_real_distribution&lt;float&gt; helios::util::Random::uniformDist_</definition>
+        <argsstring></argsstring>
+        <name>uniformDist_</name>
+        <qualifiedname>helios::util::Random::uniformDist_</qualifiedname>
+        <briefdescription>
+<para>Uniform real distribution for generating floating-point numbers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ulink url="https://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution">https://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution</ulink> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/Random.ixx" line="41" column="40" bodyfile="include/helios/util/Random.ixx" bodystart="41" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1util_1_1Random_1a65f34a4c69ccb7dc6e12faf42c62ad86" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::util::Random::Random</definition>
+        <argsstring>(uint32_t seed)</argsstring>
+        <name>Random</name>
+        <qualifiedname>helios::util::Random::Random</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>seed</declname>
+        </param>
+        <briefdescription>
+<para>Initializes the generator with the provided seed value. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/Random.ixx" line="49" column="18" bodyfile="include/helios/util/Random.ixx" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1util_1_1Random_1a8f32c6075d653622da519b783386a205" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::util::Random::randomFloat</definition>
+        <argsstring>(float a, float b) noexcept</argsstring>
+        <name>randomFloat</name>
+        <qualifiedname>helios::util::Random::randomFloat</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Generates a pseudo-random float in the range [a, b). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Uses `std::uniform_real_distribution` to generate a uniformly distributed floating-point number.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The lower bound of the range (inclusive). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The upper bound of the range (exclusive).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A random float value in the range [a, b).</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution">https://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution</ulink> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/util/Random.ixx" line="65" column="16" bodyfile="include/helios/util/Random.ixx" bodystart="65" bodyend="79"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Utility class for generating pseudo-random numbers. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This class provides a random number generator based on the Mersenne Twister algorithm (`std::mt19937`).</para>
+<para>Example usage: ```cpp auto rng = <ref refid="classhelios_1_1util_1_1Random" kindref="compound">helios::util::Random(12345)</ref>; float value = rng.randomFloat(0.0f, 1.0f); ``` </para>
+    </detaileddescription>
+    <location file="include/helios/util/Random.ixx" line="27" column="5" bodyfile="include/helios/util/Random.ixx" bodystart="27" bodyend="81"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1util_1_1Random_1a3eb82ecc7dea3ef9450e5a18a7a7dc03" prot="private" virt="non-virtual"><scope>helios::util::Random</scope><name>gen_</name></member>
+      <member refid="classhelios_1_1util_1_1Random_1a65f34a4c69ccb7dc6e12faf42c62ad86" prot="public" virt="non-virtual"><scope>helios::util::Random</scope><name>Random</name></member>
+      <member refid="classhelios_1_1util_1_1Random_1a8f32c6075d653622da519b783386a205" prot="public" virt="non-virtual"><scope>helios::util::Random</scope><name>randomFloat</name></member>
+      <member refid="classhelios_1_1util_1_1Random_1a32a777bd31ce726fbe2c52aeb8d872f3" prot="private" virt="non-virtual"><scope>helios::util::Random</scope><name>uniformDist_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

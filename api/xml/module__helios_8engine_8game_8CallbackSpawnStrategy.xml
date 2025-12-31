@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8game_8CallbackSpawnStrategy" kind="module">
+    <compoundname>helios.engine.game.CallbackSpawnStrategy</compoundname>
+    <innerfile refid="CallbackSpawnStrategy_8ixx">CallbackSpawnStrategy.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1game_1_1CallbackSpawnStrategy" prot="public">helios::engine::game::CallbackSpawnStrategy</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="classhelios_1_1engine_1_1game_1_1CallbackSpawnStrategy_1ab1edc8e159cbe8d3b0a8ae3a0dbd66c2" prot="private" static="no">
+        <type>std::function&lt; bool( const <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">helios::engine::game::GameWorld</ref> *, const <ref refid="classhelios_1_1engine_1_1game_1_1Level" kindref="compound">helios::engine::game::Level</ref> *, <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">helios::engine::game::GameObject</ref> *, const <ref refid="structhelios_1_1engine_1_1game_1_1UpdateContext" kindref="compound">helios::engine::game::UpdateContext</ref> &amp;)&gt;</type>
+        <definition>using helios::engine::game::CallbackSpawnStrategy::SpawnFunction =  std::function&lt;bool(
+            const helios::engine::game::GameWorld*,
+            const helios::engine::game::Level*,
+            helios::engine::game::GameObject*,
+            const helios::engine::game::UpdateContext&amp;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>SpawnFunction</name>
+        <qualifiedname>helios::engine::game::CallbackSpawnStrategy::SpawnFunction</qualifiedname>
+        <briefdescription>
+<para>Function signature for the spawn callback. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Must not throw </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/CallbackSpawnStrategy.ixx" line="56" column="9" bodyfile="include/helios/engine/game/CallbackSpawnStrategy.ixx" bodystart="56" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1CallbackSpawnStrategy_1a4f580e853e0885b7c4d456908838113e" prot="private" static="no" mutable="no">
+        <type>SpawnFunction</type>
+        <definition>SpawnFunction helios::engine::game::CallbackSpawnStrategy::spawnFunction_</definition>
+        <argsstring></argsstring>
+        <name>spawnFunction_</name>
+        <qualifiedname>helios::engine::game::CallbackSpawnStrategy::spawnFunction_</qualifiedname>
+        <briefdescription>
+<para>The user-provided spawn callback function. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/CallbackSpawnStrategy.ixx" line="65" column="23" bodyfile="include/helios/engine/game/CallbackSpawnStrategy.ixx" bodystart="65" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1CallbackSpawnStrategy_1a5ca26aee1b8639d97816ccb51b61e0d3" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::game::CallbackSpawnStrategy::CallbackSpawnStrategy</definition>
+        <argsstring>(SpawnFunction spawnFunction) noexcept</argsstring>
+        <name>CallbackSpawnStrategy</name>
+        <qualifiedname>helios::engine::game::CallbackSpawnStrategy::CallbackSpawnStrategy</qualifiedname>
+        <param>
+          <type>SpawnFunction</type>
+          <declname>spawnFunction</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classhelios_1_1engine_1_1game_1_1CallbackSpawnStrategy" kindref="compound">CallbackSpawnStrategy</ref> with the given spawn function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>spawnFunction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The callback function to invoke during spawning. Must be a valid, noexcept callable. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/CallbackSpawnStrategy.ixx" line="75" column="18" bodyfile="include/helios/engine/game/CallbackSpawnStrategy.ixx" bodystart="75" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1CallbackSpawnStrategy_1a1d07e90388360a0f8f9ff3294ce4571d" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::game::CallbackSpawnStrategy::spawn</definition>
+        <argsstring>(const helios::engine::game::GameWorld *gameWorld, const helios::engine::game::Level *level, helios::engine::game::GameObject *gameObject, const helios::engine::game::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>spawn</name>
+        <qualifiedname>helios::engine::game::CallbackSpawnStrategy::spawn</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1game_1_1SpawnStrategy_1a147cb5b62a4d36efba65237e1454d4ca">spawn</reimplements>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">helios::engine::game::GameWorld</ref> *</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1game_1_1Level" kindref="compound">helios::engine::game::Level</ref> *</type>
+          <declname>level</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">helios::engine::game::GameObject</ref> *</type>
+          <declname>gameObject</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1game_1_1UpdateContext" kindref="compound">helios::engine::game::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Spawns a <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> by invoking the stored callback function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the current <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref>. May be nullptr. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the current <ref refid="classhelios_1_1engine_1_1game_1_1Level" kindref="compound">Level</ref> containing bounds and spawn info. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>gameObject</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> being spawned. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s update context.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The result of the callback function. True if spawning succeeded, false if the object should be returned to the pool. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/CallbackSpawnStrategy.ixx" line="89" column="15" bodyfile="include/helios/engine/game/CallbackSpawnStrategy.ixx" bodystart="89" bodyend="96"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/engine/game/CallbackSpawnStrategy.ixx" line="10" column="15"/>
+  </compounddef>
+</doxygen>

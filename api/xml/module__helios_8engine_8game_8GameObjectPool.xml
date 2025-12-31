@@ -56,6 +56,7 @@
         </inbodydescription>
         <location file="include/helios/engine/game/GameObjectPool.ixx" line="94" column="21" bodyfile="include/helios/engine/game/GameObjectPool.ixx" bodystart="94" bodyend="-1"/>
         <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1ac53ed0a26e7dca1df6fb96830abda06a" compoundref="GameObjectPool_8ixx" startline="190" endline="216">helios::engine::game::GameObjectPool::acquire</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a2efedfc26309b7755948171449aa54b1" compoundref="GameObjectPool_8ixx" startline="313" endline="315">helios::engine::game::GameObjectPool::activeCount</referencedby>
         <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a74c933b59081808944263a94a62240f9" compoundref="GameObjectPool_8ixx" startline="150" endline="164">helios::engine::game::GameObjectPool::GameObjectPool</referencedby>
         <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a722d64b5eff08ee053cb45184dd70801" compoundref="GameObjectPool_8ixx" startline="243" endline="274">helios::engine::game::GameObjectPool::release</referencedby>
       </memberdef>
@@ -75,6 +76,7 @@
         <location file="include/helios/engine/game/GameObjectPool.ixx" line="99" column="21" bodyfile="include/helios/engine/game/GameObjectPool.ixx" bodystart="99" bodyend="-1"/>
         <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1ac53ed0a26e7dca1df6fb96830abda06a" compoundref="GameObjectPool_8ixx" startline="190" endline="216">helios::engine::game::GameObjectPool::acquire</referencedby>
         <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a74c933b59081808944263a94a62240f9" compoundref="GameObjectPool_8ixx" startline="150" endline="164">helios::engine::game::GameObjectPool::GameObjectPool</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a5f7cfe851ecdd7368cd0900e1c4420ec" compoundref="GameObjectPool_8ixx" startline="322" endline="324">helios::engine::game::GameObjectPool::inactiveCount</referencedby>
         <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a3179669f6a21f905e8eb9dca7e99b865" compoundref="GameObjectPool_8ixx" startline="288" endline="306">helios::engine::game::GameObjectPool::inactiveGameObjects</referencedby>
         <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a722d64b5eff08ee053cb45184dd70801" compoundref="GameObjectPool_8ixx" startline="243" endline="274">helios::engine::game::GameObjectPool::release</referencedby>
         <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a4f50e9ec7c32aa93dab2203baa16bad3" compoundref="GameObjectPool_8ixx" startline="129" endline="137">helios::engine::game::GameObjectPool::warmup</referencedby>
@@ -316,7 +318,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="include/helios/engine/game/GameObjectPool.ixx" line="226" column="14" bodyfile="include/helios/engine/game/GameObjectPool.ixx" bodystart="226" bodyend="228"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1abf3cf53d3aa0c9b62da27d7934928168" compoundref="GameObject_8ixx" startline="208" endline="210">helios::engine::game::GameObject::guid</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameObject_1abf3cf53d3aa0c9b62da27d7934928168" compoundref="GameObject_8ixx" startline="214" endline="216">helios::engine::game::GameObject::guid</references>
         <references refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a073485a4a359cbd48a2e5b8633020239" compoundref="GameObjectPool_8ixx" startline="226" endline="228">helios::engine::game::GameObjectPool::release</references>
         <referencedby refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a073485a4a359cbd48a2e5b8633020239" compoundref="GameObjectPool_8ixx" startline="226" endline="228">helios::engine::game::GameObjectPool::release</referencedby>
       </memberdef>
@@ -379,6 +381,44 @@
         <location file="include/helios/engine/game/GameObjectPool.ixx" line="288" column="21" bodyfile="include/helios/engine/game/GameObjectPool.ixx" bodystart="288" bodyend="306"/>
         <references refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a16b1f234b1f0ecbcc44b18e740aaa176" compoundref="GameObjectPool_8ixx" startline="109">helios::engine::game::GameObjectPool::gameWorld_</references>
         <references refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a9917d7ae53b08752a680d6ea9729f0ed" compoundref="GameObjectPool_8ixx" startline="171" endline="173">helios::engine::game::GameObjectPool::guid</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1ac87d05322db81fd2c8c8870d131289ac" compoundref="GameObjectPool_8ixx" startline="99">helios::engine::game::GameObjectPool::inactiveGameObjects_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a2efedfc26309b7755948171449aa54b1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t helios::engine::game::GameObjectPool::activeCount</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>activeCount</name>
+        <qualifiedname>helios::engine::game::GameObjectPool::activeCount</qualifiedname>
+        <briefdescription>
+<para>Returns the number of active game objects. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The number of active game objects. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/GameObjectPool.ixx" line="313" column="17" bodyfile="include/helios/engine/game/GameObjectPool.ixx" bodystart="313" bodyend="315"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a17ac625de593f40866ebf3377de4f5da" compoundref="GameObjectPool_8ixx" startline="94">helios::engine::game::GameObjectPool::activeGameObjects_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1GameObjectPool_1a5f7cfe851ecdd7368cd0900e1c4420ec" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t helios::engine::game::GameObjectPool::inactiveCount</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>inactiveCount</name>
+        <qualifiedname>helios::engine::game::GameObjectPool::inactiveCount</qualifiedname>
+        <briefdescription>
+<para>Returns the number of inactive game objects. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The number of inactive game objects. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/GameObjectPool.ixx" line="322" column="17" bodyfile="include/helios/engine/game/GameObjectPool.ixx" bodystart="322" bodyend="324"/>
         <references refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1ac87d05322db81fd2c8c8870d131289ac" compoundref="GameObjectPool_8ixx" startline="99">helios::engine::game::GameObjectPool::inactiveGameObjects_</references>
       </memberdef>
     </sectiondef>

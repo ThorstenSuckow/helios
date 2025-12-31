@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8game_8SpawnCondition" kind="module">
+    <compoundname>helios.engine.game.SpawnCondition</compoundname>
+    <innerfile refid="SpawnCondition_8ixx">SpawnCondition.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1game_1_1SpawnCondition" prot="public">helios::engine::game::SpawnCondition</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1SpawnCondition_1a3c2b7fbd1138483584d1a6f14ab40adb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::engine::game::SpawnCondition::~SpawnCondition</definition>
+        <argsstring>()=default</argsstring>
+        <name>~SpawnCondition</name>
+        <qualifiedname>helios::engine::game::SpawnCondition::~SpawnCondition</qualifiedname>
+        <briefdescription>
+<para>Virtual destructor for proper polymorphic cleanup. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/SpawnCondition.ixx" line="39" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1SpawnCondition_1ab7745a17eaf091b9be765aa6b616aaa1" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>size_t</type>
+        <definition>virtual size_t helios::engine::game::SpawnCondition::spawnBudget</definition>
+        <argsstring>(const helios::engine::game::GameWorld *gameWorld, const helios::engine::game::Level *level, const helios::engine::game::GameObjectPool *gameObjectPool, const helios::engine::game::UpdateContext &amp;updateContext) noexcept=0</argsstring>
+        <name>spawnBudget</name>
+        <qualifiedname>helios::engine::game::SpawnCondition::spawnBudget</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1game_1_1TimerSpawnCondition_1a61d8a5760a3b04b77fc69f797fd59921">spawnBudget</reimplementedby>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">helios::engine::game::GameWorld</ref> *</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1game_1_1Level" kindref="compound">helios::engine::game::Level</ref> *</type>
+          <declname>level</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1game_1_1GameObjectPool" kindref="compound">helios::engine::game::GameObjectPool</ref> *</type>
+          <declname>gameObjectPool</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1game_1_1UpdateContext" kindref="compound">helios::engine::game::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Calculates how many GameObjects should be spawned this frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Called each frame by the spawn system to determine how many objects to activate from the pool. The implementation may consider elapsed time, pool capacity, game state, or any other relevant factors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the current <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref>. May be nullptr. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the current <ref refid="classhelios_1_1engine_1_1game_1_1Level" kindref="compound">Level</ref> containing bounds and spawn info. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>gameObjectPool</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the pool from which objects will be acquired. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s update context with delta time.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The number of GameObjects to spawn this frame (spawn budget). Returns 0 if no spawning should occur. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/SpawnCondition.ixx" line="57" column="24"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/engine/game/SpawnCondition.ixx" line="8" column="15"/>
+  </compounddef>
+</doxygen>

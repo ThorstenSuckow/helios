@@ -14,9 +14,11 @@ var searchData=
   ['shootcomponent_11',['ShootComponent',['../classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent.html',1,'helios::engine::game::components::gameplay']]],
   ['snapshot_12',['Snapshot',['../classhelios_1_1scene_1_1Snapshot.html',1,'helios::scene']]],
   ['snapshotitem_13',['SnapshotItem',['../structhelios_1_1scene_1_1SnapshotItem.html',1,'helios::scene']]],
-  ['spincomponent_14',['SpinComponent',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent.html',1,'helios::engine::game::components::physics']]],
-  ['spinsystem_15',['SpinSystem',['../classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1SpinSystem.html',1,'helios::engine::game::systems::physics']]],
-  ['stopwatch_16',['Stopwatch',['../classhelios_1_1util_1_1time_1_1Stopwatch.html',1,'helios::util::time']]],
-  ['stringfilereader_17',['StringFileReader',['../classhelios_1_1util_1_1io_1_1StringFileReader.html',1,'helios::util::io']]],
-  ['system_18',['System',['../classhelios_1_1engine_1_1game_1_1System.html',1,'helios::engine::game']]]
+  ['spawncondition_14',['SpawnCondition',['../classhelios_1_1engine_1_1game_1_1SpawnCondition.html',1,'helios::engine::game']]],
+  ['spawnstrategy_15',['SpawnStrategy',['../classhelios_1_1engine_1_1game_1_1SpawnStrategy.html',1,'helios::engine::game']]],
+  ['spincomponent_16',['SpinComponent',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1SpinComponent.html',1,'helios::engine::game::components::physics']]],
+  ['spinsystem_17',['SpinSystem',['../classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1SpinSystem.html',1,'helios::engine::game::systems::physics']]],
+  ['stopwatch_18',['Stopwatch',['../classhelios_1_1util_1_1time_1_1Stopwatch.html',1,'helios::util::time']]],
+  ['stringfilereader_19',['StringFileReader',['../classhelios_1_1util_1_1io_1_1StringFileReader.html',1,'helios::util::io']]],
+  ['system_20',['System',['../classhelios_1_1engine_1_1game_1_1System.html',1,'helios::engine::game']]]
 ];

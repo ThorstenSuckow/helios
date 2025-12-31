@@ -14,7 +14,9 @@ namespace helios::scene {
     void CullNoneStrategy::cull(
         std::vector<const helios::scene::SceneNode*>& nodes, const SceneNode& node
     ) const {
-        nodes.push_back(&node);
+        if (node.isActive()) {
+            nodes.push_back(&node);
+        }
         for (auto& child: node.children()) {
             cull(nodes, *child);
         }

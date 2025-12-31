@@ -34,11 +34,6 @@ export namespace helios::engine::game::components::physics {
         helios::math::vec3f rotationAxis_ = helios::math::Z_AXISf;
 
         /**
-         * @brief Initial spin angle offset in degrees.
-         */
-        float spinAngle_ = 45.0f;
-
-        /**
          * @brief Current accumulated rotation angle in degrees.
          */
         float currentRotation_ = 0.0f;
@@ -81,15 +76,6 @@ export namespace helios::engine::game::components::physics {
          */
         [[nodiscard]] float rotation() const {
             return currentRotation_;
-        }
-
-        /**
-         * @brief Returns the initial spin angle offset.
-         *
-         * @return Initial angle in degrees.
-         */
-        [[nodiscard]] float spinAngle() const {
-            return spinAngle_;
         }
 
         /**

@@ -72,8 +72,7 @@ export namespace helios::engine::game {
          *
          * @return The axis-aligned bounding box of the level.
          */
-        [[nodiscard]] helios::math::aabbf bounds() const noexcept {
-
+        [[nodiscard]] const helios::math::aabbf& bounds() const noexcept {
             return bounds_;
         }
 

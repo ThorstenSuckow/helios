@@ -127,6 +127,12 @@ export namespace helios::engine::game {
             // Use raw_component_ptr instead of component_ptr since ownership was moved above
             raw_component_ptr->onAttach(this);
 
+            if (isActive_) {
+                raw_component_ptr->onActivate();
+            } else {
+                raw_component_ptr->onDeactivate();
+            }
+
             return *raw_component_ptr;
         }
 
@@ -225,7 +231,7 @@ export namespace helios::engine::game {
          *
          * @details When the active state changes, this method notifies all attached
          * components by calling onActivate() or onDeactivate() accordingly.
-         * If the new state equals the current state, no action is taken.
+         * If the new state equals the current state, no action is taken. (@see add())
          *
          * @param active The new active state.
          */

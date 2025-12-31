@@ -31,9 +31,9 @@ export namespace helios::engine::game {
      * public:
      *     bool spawn(const GameWorld*, const Level* level,
      *                GameObject* obj, const UpdateContext&) noexcept override {
-     *         auto&rng = helios::util::Random(12345);
-     *         float x = rng.randomFloat(level->bounds().min[0], level->bounds().max[0]);
-     *         float y = rng.randomFloat(level->bounds().min[1], level->bounds().max[1]);
+     *         auto  rng = helios::util::Random(12345);
+     *         float x   = rng.randomFloat(level->bounds().min[0], level->bounds().max[0]);
+     *         float y   = rng.randomFloat(level->bounds().min[1], level->bounds().max[1]);
      *         obj->get<TranslationStateComponent>()->setTranslation({x, y, 0});
      *         return true;
      *     }

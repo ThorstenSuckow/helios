@@ -306,7 +306,7 @@ export namespace helios::engine::game {
         }
 
         /**
-         * Returns the number of active game objects.
+         * @brief Returns the number of active game objects.
          *
          * @return The number of active game objects.
          */
@@ -315,7 +315,7 @@ export namespace helios::engine::game {
         }
 
         /**
-         * Returns the number of inactive game objects.
+         * @brief Returns the number of inactive game objects.
          *
          * @return The number of inactive game objects.
          */

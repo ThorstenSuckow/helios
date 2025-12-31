@@ -304,6 +304,24 @@ export namespace helios::engine::game {
             return gameObjects;
 
         }
+
+        /**
+         * Returns the number of active game objects.
+         *
+         * @return The number of active game objects.
+         */
+        [[nodiscard]] size_t activeCount() const noexcept {
+            return activeGameObjects_.size();
+        }
+
+        /**
+         * Returns the number of inactive game objects.
+         *
+         * @return The number of inactive game objects.
+         */
+        [[nodiscard]] size_t inactiveCount() const noexcept {
+            return inactiveGameObjects_.size();
+        }
     };
 
 }

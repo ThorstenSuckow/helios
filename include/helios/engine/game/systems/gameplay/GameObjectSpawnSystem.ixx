@@ -117,6 +117,7 @@ export namespace helios::engine::game::systems::gameplay {
             spawnStrategy_(std::move(spawnStrategy))
         {
             assert(spawnStrategy_ != nullptr && "Unexpected nullptr for SpawnStrategy");
+            assert(spawnCondition_ != nullptr && "Unexpected nullptr for SpawnCondition");
             assert(gameObjectPool_ != nullptr && "Unexpected nullptr for GameObjectPool");
             warmup();
         }

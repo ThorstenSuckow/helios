@@ -135,11 +135,14 @@ export namespace helios::engine::game::systems::gameplay {
          */
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
-            if (gameObjectPool_->inactiveCount() == 0) {
+            auto available = gameObjectPool_->inactiveCount();
+            if (available == 0) {
                 return;
             }
 
             size_t spawnCount = spawnCondition_->spawnBudget(gameWorld_, &level_, gameObjectPool_.get(), updateContext);
+
+            spawnCount = std::min(spawnCount, available);
 
             for (size_t i = 0; i < spawnCount; i++) {
                 helios::engine::game::GameObject* go = gameObjectPool_->acquire();

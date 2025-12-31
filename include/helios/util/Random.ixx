@@ -1,6 +1,6 @@
 /**
  * @file Random.ixx
- * @brief Singleton utility for pseudo-random number generation.
+ * @brief Utility class for pseudo-random number generation.
  */
 module;
 
@@ -12,9 +12,9 @@ export module helios.util.Random;
 export namespace helios::util {
 
     /**
-     * @brief A singleton class for generating pseudo-random numbers.
+     * @brief Utility class for generating pseudo-random numbers.
      *
-     * @details This class provides a  random number generator based on the
+     * @details This class provides a random number generator based on the
      * Mersenne Twister algorithm (`std::mt19937`).
      *
      * Example usage:
@@ -36,13 +36,9 @@ export namespace helios::util {
     public:
 
         /**
-        * @brief Private constructor to enforce singleton pattern.
-        *
-        * @details Initializes the generator with a seed from `std::random_device`.
+        * @brief Initializes the generator with a seed from `std::random_device`.
         */
-        explicit Random(uint32_t seed) : gen_(std::random_device{}()) {
-            gen_.seed(seed);
-        };
+        explicit Random(uint32_t seed) : gen_(seed) {};
 
 
         /**

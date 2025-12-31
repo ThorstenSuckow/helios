@@ -141,7 +141,7 @@ export namespace helios::engine::game::systems::gameplay {
 
             size_t spawnCount = spawnCondition_->spawnBudget(gameWorld_, &level_, gameObjectPool_.get(), updateContext);
 
-            for (int i = 0; i < spawnCount; i++) {
+            for (size_t i = 0; i < spawnCount; i++) {
                 helios::engine::game::GameObject* go = gameObjectPool_->acquire();
 
                 if (go == nullptr) {

@@ -97,6 +97,7 @@ var annotated_dup =
           ] ],
           [ "systems", "namespacehelios_1_1engine_1_1game_1_1systems.html", [
             [ "gameplay", "namespacehelios_1_1engine_1_1game_1_1systems_1_1gameplay.html", [
+              [ "GameObjectSpawnSystem", "classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem.html", "classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem" ],
               [ "ProjectilePoolSystem", "classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem.html", "classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem" ]
             ] ],
             [ "physics", "namespacehelios_1_1engine_1_1game_1_1systems_1_1physics.html", [
@@ -116,6 +117,7 @@ var annotated_dup =
               [ "SceneSyncSystem", "classhelios_1_1engine_1_1game_1_1systems_1_1scene_1_1SceneSyncSystem.html", "classhelios_1_1engine_1_1game_1_1systems_1_1scene_1_1SceneSyncSystem" ]
             ] ]
           ] ],
+          [ "CallbackSpawnStrategy", "classhelios_1_1engine_1_1game_1_1CallbackSpawnStrategy.html", "classhelios_1_1engine_1_1game_1_1CallbackSpawnStrategy" ],
           [ "Command", "classhelios_1_1engine_1_1game_1_1Command.html", "classhelios_1_1engine_1_1game_1_1Command" ],
           [ "CommandBuffer", "classhelios_1_1engine_1_1game_1_1CommandBuffer.html", "classhelios_1_1engine_1_1game_1_1CommandBuffer" ],
           [ "Component", "classhelios_1_1engine_1_1game_1_1Component.html", "classhelios_1_1engine_1_1game_1_1Component" ],
@@ -124,7 +126,10 @@ var annotated_dup =
           [ "GameWorld", "classhelios_1_1engine_1_1game_1_1GameWorld.html", "classhelios_1_1engine_1_1game_1_1GameWorld" ],
           [ "InputSnapshot", "classhelios_1_1engine_1_1game_1_1InputSnapshot.html", "classhelios_1_1engine_1_1game_1_1InputSnapshot" ],
           [ "Level", "classhelios_1_1engine_1_1game_1_1Level.html", "classhelios_1_1engine_1_1game_1_1Level" ],
+          [ "SpawnCondition", "classhelios_1_1engine_1_1game_1_1SpawnCondition.html", "classhelios_1_1engine_1_1game_1_1SpawnCondition" ],
+          [ "SpawnStrategy", "classhelios_1_1engine_1_1game_1_1SpawnStrategy.html", "classhelios_1_1engine_1_1game_1_1SpawnStrategy" ],
           [ "System", "classhelios_1_1engine_1_1game_1_1System.html", "classhelios_1_1engine_1_1game_1_1System" ],
+          [ "TimerSpawnCondition", "classhelios_1_1engine_1_1game_1_1TimerSpawnCondition.html", "classhelios_1_1engine_1_1game_1_1TimerSpawnCondition" ],
           [ "Updatable", "classhelios_1_1engine_1_1game_1_1Updatable.html", "classhelios_1_1engine_1_1game_1_1Updatable" ],
           [ "UpdateContext", "structhelios_1_1engine_1_1game_1_1UpdateContext.html", "structhelios_1_1engine_1_1game_1_1UpdateContext" ]
         ] ],
@@ -225,7 +230,8 @@ var annotated_dup =
           [ "Stopwatch", "classhelios_1_1util_1_1time_1_1Stopwatch.html", "classhelios_1_1util_1_1time_1_1Stopwatch" ]
         ] ],
         [ "Colors", "structhelios_1_1util_1_1Colors.html", "structhelios_1_1util_1_1Colors" ],
-        [ "Guid", "classhelios_1_1util_1_1Guid.html", "classhelios_1_1util_1_1Guid" ]
+        [ "Guid", "classhelios_1_1util_1_1Guid.html", "classhelios_1_1util_1_1Guid" ],
+        [ "Random", "classhelios_1_1util_1_1Random.html", "classhelios_1_1util_1_1Random" ]
       ] ],
       [ "window", "namespacehelios_1_1window.html", [
         [ "event", "namespacehelios_1_1window_1_1event.html", [

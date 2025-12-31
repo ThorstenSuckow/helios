@@ -2,7 +2,9 @@ var classhelios_1_1engine_1_1game_1_1GameObjectPool =
 [
     [ "GameObjectPool", "classhelios_1_1engine_1_1game_1_1GameObjectPool.html#a74c933b59081808944263a94a62240f9", null ],
     [ "acquire", "classhelios_1_1engine_1_1game_1_1GameObjectPool.html#ac53ed0a26e7dca1df6fb96830abda06a", null ],
+    [ "activeCount", "classhelios_1_1engine_1_1game_1_1GameObjectPool.html#a2efedfc26309b7755948171449aa54b1", null ],
     [ "guid", "classhelios_1_1engine_1_1game_1_1GameObjectPool.html#a9917d7ae53b08752a680d6ea9729f0ed", null ],
+    [ "inactiveCount", "classhelios_1_1engine_1_1game_1_1GameObjectPool.html#a5f7cfe851ecdd7368cd0900e1c4420ec", null ],
     [ "inactiveGameObjects", "classhelios_1_1engine_1_1game_1_1GameObjectPool.html#a3179669f6a21f905e8eb9dca7e99b865", null ],
     [ "release", "classhelios_1_1engine_1_1game_1_1GameObjectPool.html#a073485a4a359cbd48a2e5b8633020239", null ],
     [ "release", "classhelios_1_1engine_1_1game_1_1GameObjectPool.html#a722d64b5eff08ee053cb45184dd70801", null ],

@@ -8,6 +8,8 @@ var module__helios_8engine_8game_8GameObjectPool =
     [ "helios::engine::game::GameObjectPool::release", "module__helios_8engine_8game_8GameObjectPool.html#a073485a4a359cbd48a2e5b8633020239", null ],
     [ "helios::engine::game::GameObjectPool::release", "module__helios_8engine_8game_8GameObjectPool.html#a722d64b5eff08ee053cb45184dd70801", null ],
     [ "helios::engine::game::GameObjectPool::inactiveGameObjects", "module__helios_8engine_8game_8GameObjectPool.html#a3179669f6a21f905e8eb9dca7e99b865", null ],
+    [ "helios::engine::game::GameObjectPool::activeCount", "module__helios_8engine_8game_8GameObjectPool.html#a2efedfc26309b7755948171449aa54b1", null ],
+    [ "helios::engine::game::GameObjectPool::inactiveCount", "module__helios_8engine_8game_8GameObjectPool.html#a5f7cfe851ecdd7368cd0900e1c4420ec", null ],
     [ "helios::engine::game::GameObjectPool::activeIndex_", "module__helios_8engine_8game_8GameObjectPool.html#aba52979d608a7782e5deb40c106923fe", null ],
     [ "helios::engine::game::GameObjectPool::activeGameObjects_", "module__helios_8engine_8game_8GameObjectPool.html#a17ac625de593f40866ebf3377de4f5da", null ],
     [ "helios::engine::game::GameObjectPool::inactiveGameObjects_", "module__helios_8engine_8game_8GameObjectPool.html#ac87d05322db81fd2c8c8870d131289ac", null ],

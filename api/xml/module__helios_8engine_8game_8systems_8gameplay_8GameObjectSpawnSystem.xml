@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8game_8systems_8gameplay_8GameObjectSpawnSystem" kind="module">
+    <compoundname>helios.engine.game.systems.gameplay.GameObjectSpawnSystem</compoundname>
+    <innerfile refid="GameObjectSpawnSystem_8ixx">GameObjectSpawnSystem.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem" prot="public">helios::engine::game::systems::gameplay::GameObjectSpawnSystem</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem_1a1c1df9e898f1897e3c00dd7855aeb751" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1game_1_1GameObjectPool" kindref="compound">helios::engine::game::GameObjectPool</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;helios::engine::game::GameObjectPool&gt; helios::engine::game::systems::gameplay::GameObjectSpawnSystem::gameObjectPool_</definition>
+        <argsstring></argsstring>
+        <name>gameObjectPool_</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::GameObjectSpawnSystem::gameObjectPool_</qualifiedname>
+        <briefdescription>
+<para>The pool of GameObjects to manage. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/GameObjectSpawnSystem.ixx" line="50" column="25" bodyfile="include/helios/engine/game/systems/gameplay/GameObjectSpawnSystem.ixx" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem_1aa4724befb2cba0d34a6aef02b6dccd2b" prot="private" static="no" mutable="no">
+        <type>const <ref refid="classhelios_1_1engine_1_1game_1_1Level" kindref="compound">helios::engine::game::Level</ref> &amp;</type>
+        <definition>const helios::engine::game::Level&amp; helios::engine::game::systems::gameplay::GameObjectSpawnSystem::level_</definition>
+        <argsstring></argsstring>
+        <name>level_</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::GameObjectSpawnSystem::level_</qualifiedname>
+        <briefdescription>
+<para>Reference to the active level. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/GameObjectSpawnSystem.ixx" line="55" column="43" bodyfile="include/helios/engine/game/systems/gameplay/GameObjectSpawnSystem.ixx" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem_1ae121c1193b890cda442631e7563d0354" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1game_1_1SpawnStrategy" kindref="compound">helios::engine::game::SpawnStrategy</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;helios::engine::game::SpawnStrategy&gt; helios::engine::game::systems::gameplay::GameObjectSpawnSystem::spawnStrategy_</definition>
+        <argsstring></argsstring>
+        <name>spawnStrategy_</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::GameObjectSpawnSystem::spawnStrategy_</qualifiedname>
+        <briefdescription>
+<para>Strategy used to determine how GameObjects are spawned in the level. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/GameObjectSpawnSystem.ixx" line="60" column="25" bodyfile="include/helios/engine/game/systems/gameplay/GameObjectSpawnSystem.ixx" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem_1ad5fe4bae595e3184d8f5267b6705221f" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1game_1_1SpawnCondition" kindref="compound">helios::engine::game::SpawnCondition</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;helios::engine::game::SpawnCondition&gt; helios::engine::game::systems::gameplay::GameObjectSpawnSystem::spawnCondition_</definition>
+        <argsstring></argsstring>
+        <name>spawnCondition_</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::GameObjectSpawnSystem::spawnCondition_</qualifiedname>
+        <briefdescription>
+<para>Strategy for determining the conditions under which GameObjects are spawned. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/GameObjectSpawnSystem.ixx" line="65" column="25" bodyfile="include/helios/engine/game/systems/gameplay/GameObjectSpawnSystem.ixx" bodystart="65" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem_1aa67c358f501ae6303b0bebf8945553eb" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::systems::gameplay::GameObjectSpawnSystem::warmup</definition>
+        <argsstring>()</argsstring>
+        <name>warmup</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::GameObjectSpawnSystem::warmup</qualifiedname>
+        <briefdescription>
+<para>Prepares the object pool and scene graph. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Iterates through all inactive objects in the pool. If an object has a RenderableComponent, a corresponding SceneNode is created and attached to the level&apos;s root node. A SceneNodeComponent is then added to the <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref> to link it with the scene graph. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/GameObjectSpawnSystem.ixx" line="76" column="14" bodyfile="include/helios/engine/game/systems/gameplay/GameObjectSpawnSystem.ixx" bodystart="76" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem_1a4b66f02541338b4e300579354741531f" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::game::systems::gameplay::GameObjectSpawnSystem::GameObjectSpawnSystem</definition>
+        <argsstring>(std::unique_ptr&lt; helios::engine::game::GameObjectPool &gt; gameObjectPool, const helios::engine::game::Level &amp;level, std::unique_ptr&lt; helios::engine::game::SpawnCondition &gt; spawnCondition, std::unique_ptr&lt; helios::engine::game::SpawnStrategy &gt; spawnStrategy)</argsstring>
+        <name>GameObjectSpawnSystem</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::GameObjectSpawnSystem::GameObjectSpawnSystem</qualifiedname>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1game_1_1GameObjectPool" kindref="compound">helios::engine::game::GameObjectPool</ref> &gt;</type>
+          <declname>gameObjectPool</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1game_1_1Level" kindref="compound">helios::engine::game::Level</ref> &amp;</type>
+          <declname>level</declname>
+        </param>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1game_1_1SpawnCondition" kindref="compound">helios::engine::game::SpawnCondition</ref> &gt;</type>
+          <declname>spawnCondition</declname>
+        </param>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1game_1_1SpawnStrategy" kindref="compound">helios::engine::game::SpawnStrategy</ref> &gt;</type>
+          <declname>spawnStrategy</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a new <ref refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem" kindref="compound">GameObjectSpawnSystem</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameObjectPool</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Unique pointer to the <ref refid="classhelios_1_1engine_1_1game_1_1GameObjectPool" kindref="compound">GameObjectPool</ref> to manage. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the <ref refid="classhelios_1_1engine_1_1game_1_1Level" kindref="compound">Level</ref> where objects will be spawned. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/GameObjectSpawnSystem.ixx" line="108" column="18" bodyfile="include/helios/engine/game/systems/gameplay/GameObjectSpawnSystem.ixx" bodystart="108" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem_1a8654a76331169bc5ea5f1cbb84bdfc94" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::game::systems::gameplay::GameObjectSpawnSystem::update</definition>
+        <argsstring>(helios::engine::game::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::game::systems::gameplay::GameObjectSpawnSystem::update</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1game_1_1System_1ac268567131ffdbd96e0ee29dc8717609">update</reimplements>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1game_1_1UpdateContext" kindref="compound">helios::engine::game::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Updates the system by spawning GameObjects based on <ref refid="classhelios_1_1engine_1_1game_1_1SpawnCondition" kindref="compound">SpawnCondition</ref> and <ref refid="classhelios_1_1engine_1_1game_1_1SpawnStrategy" kindref="compound">SpawnStrategy</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Checks whether there are remaining inactive objects that could be spawned. Delegates to the <ref refid="classhelios_1_1engine_1_1game_1_1SpawnCondition" kindref="compound">SpawnCondition</ref> this instance was configured with to determine how many objects should be considered for spawning, then calls the <ref refid="classhelios_1_1engine_1_1game_1_1SpawnStrategy" kindref="compound">SpawnStrategy</ref> for spawning the GameObjects into the <ref refid="classhelios_1_1engine_1_1game_1_1GameWorld" kindref="compound">GameWorld</ref>.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The update context for the current frame. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/systems/gameplay/GameObjectSpawnSystem.ixx" line="136" column="14" bodyfile="include/helios/engine/game/systems/gameplay/GameObjectSpawnSystem.ixx" bodystart="136" bodyend="159"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1System_1ab575d815b362bc7bc2fdfe021632c83b" compoundref="System_8ixx" startline="48">helios::engine::game::System::gameWorld_</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/engine/game/systems/gameplay/GameObjectSpawnSystem.ixx" line="11" column="15"/>
+  </compounddef>
+</doxygen>

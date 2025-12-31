@@ -102,6 +102,7 @@ var hierarchy =
     [ "helios::rendering::model::config::MeshConfig", "structhelios_1_1rendering_1_1model_1_1config_1_1MeshConfig.html", null ],
     [ "helios::ext::opengl::rendering::shader::OpenGLUniformLocationMap", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLUniformLocationMap.html", null ],
     [ "helios::engine::game::systems::gameplay::ProjectilePoolSystem::ProjectileObject", "structhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1_1ProjectileObject.html", null ],
+    [ "helios::util::Random", "classhelios_1_1util_1_1Random.html", null ],
     [ "helios::rendering::Renderable", "classhelios_1_1rendering_1_1Renderable.html", null ],
     [ "helios::rendering::RenderCommand", "classhelios_1_1rendering_1_1RenderCommand.html", null ],
     [ "helios::rendering::RenderingDevice", "classhelios_1_1rendering_1_1RenderingDevice.html", [
@@ -131,6 +132,12 @@ var hierarchy =
     ] ],
     [ "helios::scene::Snapshot", "classhelios_1_1scene_1_1Snapshot.html", null ],
     [ "helios::scene::SnapshotItem", "structhelios_1_1scene_1_1SnapshotItem.html", null ],
+    [ "helios::engine::game::SpawnCondition", "classhelios_1_1engine_1_1game_1_1SpawnCondition.html", [
+      [ "helios::engine::game::TimerSpawnCondition", "classhelios_1_1engine_1_1game_1_1TimerSpawnCondition.html", null ]
+    ] ],
+    [ "helios::engine::game::SpawnStrategy", "classhelios_1_1engine_1_1game_1_1SpawnStrategy.html", [
+      [ "helios::engine::game::CallbackSpawnStrategy", "classhelios_1_1engine_1_1game_1_1CallbackSpawnStrategy.html", null ]
+    ] ],
     [ "helios::util::time::Stopwatch", "classhelios_1_1util_1_1time_1_1Stopwatch.html", null ],
     [ "helios::util::io::StringFileReader", "classhelios_1_1util_1_1io_1_1StringFileReader.html", [
       [ "helios::util::io::BasicStringFileReader", "classhelios_1_1util_1_1io_1_1BasicStringFileReader.html", null ]
@@ -139,6 +146,7 @@ var hierarchy =
     [ "helios::rendering::shader::UniformValueMap", "classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html", null ],
     [ "helios::engine::game::Updatable", "classhelios_1_1engine_1_1game_1_1Updatable.html", [
       [ "helios::engine::game::System", "classhelios_1_1engine_1_1game_1_1System.html", [
+        [ "helios::engine::game::systems::gameplay::GameObjectSpawnSystem", "classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1GameObjectSpawnSystem.html", null ],
         [ "helios::engine::game::systems::gameplay::ProjectilePoolSystem", "classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem.html", null ],
         [ "helios::engine::game::systems::physics::BoundsUpdateSystem", "classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1BoundsUpdateSystem.html", null ],
         [ "helios::engine::game::systems::physics::ComposeTransformSystem", "classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1ComposeTransformSystem.html", null ],

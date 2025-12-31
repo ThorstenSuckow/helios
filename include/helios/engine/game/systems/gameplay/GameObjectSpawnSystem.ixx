@@ -124,7 +124,7 @@ export namespace helios::engine::game::systems::gameplay {
 
 
         /**
-         * @brief Updates the system, spawning and moving objects.
+         * @brief Updates the system by spawning GameObjects based on SpawnCondition and SpawnStrategy.
          *
          * @details Checks whether there are remaining inactive objects that could be spawned.
          * Delegates to the SpawnCondition this instance was configured with to determine how many

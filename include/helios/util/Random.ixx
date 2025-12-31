@@ -19,7 +19,7 @@ export namespace helios::util {
      *
      * Example usage:
      * ```cpp
-     * auto& rng = helios::util::Random(12345);
+     * auto rng = helios::util::Random(12345);
      * float value = rng.randomFloat(0.0f, 1.0f);
      * ```
      */

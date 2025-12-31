@@ -50,6 +50,8 @@ export namespace helios::engine::game {
 
         /**
          * @brief Function signature for the spawn callback.
+         *
+         * Must not throw
          */
         using SpawnFunction = std::function<bool(
             const helios::engine::game::GameWorld*,
@@ -68,9 +70,9 @@ export namespace helios::engine::game {
          * @brief Constructs a CallbackSpawnStrategy with the given spawn function.
          *
          * @param spawnFunction The callback function to invoke during spawning.
-         *                      Must be a valid callable.
+         *                      Must be a valid, noexcept callable.
          */
-        explicit CallbackSpawnStrategy(SpawnFunction spawnFunction) :
+        explicit CallbackSpawnStrategy(SpawnFunction spawnFunction) noexcept :
             spawnFunction_(std::move(spawnFunction)) {}
 
         /**

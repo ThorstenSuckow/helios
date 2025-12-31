@@ -59,12 +59,15 @@ export namespace helios::engine::game {
         /**
          * @brief Constructs a TimerSpawnCondition with the specified interval.
          *
+         * Countdown gets initialized with interval to make sure the first spawn occurs
+         * after interval seconds.
+         *
          * @param interval The time in seconds between spawn events. Must be greater than 0.
          *
          * @pre interval > 0.0f
          */
         explicit TimerSpawnCondition(float interval)
-            : interval_(interval), countdown_(0.0f) {
+            : interval_(interval), countdown_(interval) {
             assert(interval > 0.0f && "Interval must be > 0");
         }
 
@@ -94,9 +97,13 @@ export namespace helios::engine::game {
 
             countdown_ -= updateContext.deltaTime();
 
-            while (countdown_ <= 0.0f) {
-                countdown_ += interval_;
-                budget++;
+            if (countdown_ <= 0) {
+                const float spill = -countdown_;
+                const auto intervalsMissed = static_cast<size_t>(spill/interval_);
+                const auto spawnCount = intervalsMissed + 1U; // 1U accounts for the current call
+
+                budget += spawnCount;
+                countdown_ += static_cast<float>(spawnCount) * interval_;
             }
 
             return budget;

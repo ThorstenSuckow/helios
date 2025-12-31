@@ -4,6 +4,7 @@
  */
 module;
 
+#include <cstdint>
 #include <random>
 
 export module helios.util.Random;
@@ -32,11 +33,18 @@ export namespace helios::util {
          */
         std::mt19937 gen_;
 
+        /**
+         * @brief Uniform real distribution for generating floating-point numbers.
+         *
+         * @see https://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution
+         */
+        std::uniform_real_distribution<float> uniformDist_;
+
 
     public:
 
         /**
-        * @brief Initializes the generator with a seed from `std::random_device`.
+        * @brief Initializes the generator with the provided seed value.
         */
         explicit Random(uint32_t seed) : gen_(seed) {};
 
@@ -55,8 +63,19 @@ export namespace helios::util {
          * @see https://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution
          */
         [[nodiscard]] float randomFloat(float a, float b) noexcept {
-            std::uniform_real_distribution<float> dis{a, b};
-            return dis(gen_);
+
+            if (b < a) {
+                auto tmp = a; a = b; b = tmp;
+            }
+
+            if (a == b) {
+                return a;
+            }
+
+            return uniformDist_(
+                gen_,
+                std::uniform_real_distribution<float>::param_type{a, b}
+            );
         }
 
     };

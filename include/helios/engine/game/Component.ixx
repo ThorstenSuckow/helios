@@ -46,6 +46,11 @@ export namespace helios::engine::game {
          */
         GameObject* gameObject_ = nullptr;
 
+        /**
+         * @brief Boolean flag indicating whether this component is enabled.
+         */
+        bool isEnabled_ = true;
+
 
     public:
         /**
@@ -69,6 +74,33 @@ export namespace helios::engine::game {
         virtual void onAttach(GameObject* gameObject) noexcept {
             gameObject_ = gameObject;
         };
+
+        /**
+         * @brief Checks whether the component is enabled.
+         *
+         * @details An enabled component is expected to actively participate in
+         * the GameObject's lifecycle, such as rendering, updating, or responding
+         * to events. A disabled component is effectively ignored in these processes.
+         *
+         * @return true if the component is enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
 
         /**
          * @brief Called when the owning GameObject becomes active.

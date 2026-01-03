@@ -173,9 +173,9 @@ public:
      * @brief Constructs a view over the given map.
      *
      * @param objects Reference to the map to iterate over.
-     * @param filterType Filter criteria for GameObject state (Active, Inactive, or All).
+     * @param filterType Filter criteria for GameObject state (Bitmask consisting of Active, Inactive, ComponentEnabled, ComponentDisabled, All).
      */
-    explicit GameObjectView(MapT& objects, helios::engine::game::GameObjectFilter filterType = helios::engine::game::GameObjectFilter::Active) noexcept : objects_(&objects), filterType_(filterType) {}
+    explicit GameObjectView(MapT& objects, const helios::engine::game::GameObjectFilter filterType) noexcept : objects_(&objects), filterType_(filterType) {}
 
     /**
      * @brief Forward iterator for filtered GameObject traversal.

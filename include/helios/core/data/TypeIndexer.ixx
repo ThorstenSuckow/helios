@@ -6,9 +6,9 @@ module;
 
 #include <atomic>
 
-export module helios.core.TypeIndexer;
+export module helios.core.data.TypeIndexer;
 
-export namespace helios::core {
+export namespace helios::core::data {
 
     /**
      * @class TypeIndexer

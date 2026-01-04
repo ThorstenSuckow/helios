@@ -4,6 +4,7 @@
  */
 export module helios.engine.game.event;
 
+export import helios.engine.game.event.GameLoopEventBus;
 export import helios.engine.game.event.SolidCollisionEvent;
 export import helios.engine.game.event.TriggerCollisionEvent;
 

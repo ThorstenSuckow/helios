@@ -27,9 +27,9 @@ export import helios.engine.game.CommandBuffer;
 export import helios.engine.game.System;
 
 // Aggregate sub-modules
-export import helios.engine.game.commands;
 export import helios.engine.game.components;
 export import helios.engine.game.event;
 export import helios.engine.game.gameplay;
 export import helios.engine.game.physics;
+export import helios.engine.game.spatial;
 export import helios.engine.game.systems;

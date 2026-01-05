@@ -30,4 +30,6 @@ export import helios.engine.game.System;
 export import helios.engine.game.commands;
 export import helios.engine.game.components;
 export import helios.engine.game.event;
+export import helios.engine.game.gameplay;
+export import helios.engine.game.physics;
 export import helios.engine.game.systems;

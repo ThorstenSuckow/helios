@@ -8,14 +8,14 @@ module;
 #include <iostream>
 #include <memory>
 
-export module helios.engine.game.gameplay.components.ShootComponent;
+export module helios.engine.game.gameplay.combat.components.ShootComponent;
 
 import helios.math.types;
 import helios.math.utils;
 import helios.engine.game.UpdateContext;
 import helios.engine.game.Updatable;
 import helios.engine.game.Component;
-import helios.engine.game.gameplay.components.Aim2DComponent;
+import helios.engine.game.gameplay.combat.components.Aim2DComponent;
 import helios.engine.game.physics.components.TransformComponent;
 
 import helios.math;
@@ -33,7 +33,7 @@ import helios.rendering.model.config.MaterialProperties;
 
 import helios.engine.game.gameplay.systems.ProjectilePoolSystem;
 
-export namespace helios::engine::game::gameplay::components {
+export namespace helios::engine::game::gameplay::combat::components {
 
     /**
      * @brief Component for handling projectile shooting with rate limiting.
@@ -69,7 +69,7 @@ export namespace helios::engine::game::gameplay::components {
          *
          * @details Set during onAttach(). Must not be null when shooting.
          */
-        helios::engine::game::gameplay::components::Aim2DComponent* aimComponent_ = nullptr;
+        helios::engine::game::gameplay::combat::components::Aim2DComponent* aimComponent_ = nullptr;
 
         /**
          * @brief Pointer to the scene node component for spawn position.
@@ -120,7 +120,7 @@ export namespace helios::engine::game::gameplay::components {
         void onAttach(::helios::engine::game::GameObject* gameObject) noexcept override {
             Component::onAttach(gameObject);
 
-            aimComponent_ = gameObject->get<helios::engine::game::gameplay::components::Aim2DComponent>();
+            aimComponent_ = gameObject->get<helios::engine::game::gameplay::combat::components::Aim2DComponent>();
             transformComponent_ = gameObject->get<helios::engine::game::physics::components::TransformComponent>();
             assert(aimComponent_ != nullptr && "Unexpected nullptr for aimComponent_");
             assert(transformComponent_ != nullptr && "Unexpected nullptr for transformComponent_");

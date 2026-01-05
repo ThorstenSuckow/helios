@@ -7,9 +7,9 @@ module;
 
 #include <functional>
 
-export module helios.engine.game.CallbackSpawnStrategy;
+export module helios.engine.game.gameplay.spawn.logic.CallbackSpawnStrategy;
 
-import helios.engine.game.SpawnStrategy;
+import helios.engine.game.gameplay.spawn.logic.SpawnStrategy;
 import helios.engine.game.UpdateContext;
 
 import helios.engine.game.GameWorld;
@@ -17,7 +17,7 @@ import helios.engine.game.GameObject;
 import helios.engine.game.Level;
 
 
-export namespace helios::engine::game {
+export namespace helios::engine::game::gameplay::spawn::logic {
 
     /**
      * @brief A SpawnStrategy that delegates spawning logic to a callback function.

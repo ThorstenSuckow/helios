@@ -4,6 +4,7 @@
  */
 export module helios.engine.game.gameplay;
 
-export import helios.engine.game.gameplay.components;
-export import helios.engine.game.gameplay.systems;
+export import helios.engine.game.gameplay.combat;
+export import helios.engine.game.gameplay.spawn;
+
 

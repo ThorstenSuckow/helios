@@ -4,14 +4,14 @@
  */
 module;
 
-export module helios.engine.game.commands.Aim2DCommand;
+export module helios.engine.game.gameplay.combat.commands.Aim2DCommand;
 
 import helios.engine.game.Command;
 import helios.engine.game.GameObject;
 import helios.math.types;
-import helios.engine.game.gameplay.components.Aim2DComponent;
+import helios.engine.game.gameplay.combat.components.Aim2DComponent;
 
-export namespace helios::engine::game::commands {
+export namespace helios::engine::game::gameplay::combat::commands {
 
     /**
      * @brief Command that applies 2D aiming direction to a GameObject.
@@ -63,7 +63,7 @@ export namespace helios::engine::game::commands {
          */
         void execute(helios::engine::game::GameObject& gameObject) override {
 
-            auto* aimComponent = gameObject.get<helios::engine::game::gameplay::components::Aim2DComponent>();
+            auto* aimComponent = gameObject.get<helios::engine::game::gameplay::combat::components::Aim2DComponent>();
 
             if (aimComponent) {
                 aimComponent->aim(direction_, freqFactor_);

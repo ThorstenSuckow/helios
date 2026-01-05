@@ -11,9 +11,9 @@ module;
 export module helios.ext.imgui.widgets.FpsWidget;
 
 import helios.ext.imgui.ImGuiWidget;
-import helios.tooling.FpsMetrics;
-import helios.engine.FramePacer;
-import helios.engine.FrameStats;
+import helios.engine.tooling.FpsMetrics;
+import helios.engine.tooling.FramePacer;
+import helios.engine.tooling.FrameStats;
 
 export namespace helios::ext::imgui::widgets {
 
@@ -40,7 +40,7 @@ export namespace helios::ext::imgui::widgets {
          *
          * @note The pointer must remain valid throughout the lifetime of the FpsWidget instance.
          */
-        helios::tooling::FpsMetrics* fpsMetrics_ = nullptr;
+        helios::engine::tooling::FpsMetrics* fpsMetrics_ = nullptr;
 
         /**
          * @brief Pointer to a `FramePacer` instance for managing frame pacing and target FPS.
@@ -53,7 +53,7 @@ export namespace helios::ext::imgui::widgets {
          * set to `nullptr` if frame pacing is not required. Ensure the lifetime of the
          * referenced `FramePacer` extends beyond the usage of this pointer.
          */
-        helios::engine::FramePacer* framePacer_ = nullptr;
+        helios::engine::tooling::FramePacer* framePacer_ = nullptr;
 
         /**
          * @brief Stores the user-configured target frames per second (FPS) for frame pacing.
@@ -100,8 +100,8 @@ export namespace helios::ext::imgui::widgets {
          * @param framePacer Optional pointer to FramePacer for runtime FPS configuration.
          */
         explicit FpsWidget(
-                    helios::tooling::FpsMetrics* fpsMetrics,
-                    helios::engine::FramePacer* framePacer = nullptr
+                    helios::engine::tooling::FpsMetrics* fpsMetrics,
+                    helios::engine::tooling::FramePacer* framePacer = nullptr
                 ) : fpsMetrics_(fpsMetrics), framePacer_(framePacer)
         {
             if (fpsMetrics_) {

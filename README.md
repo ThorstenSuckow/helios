@@ -224,3 +224,5 @@ This project is inspired by and builds upon concepts from industry-standard game
 - **[DP11]** Dunn, Fletcher; Parberry, Ian: *3D Math Primer for Graphics and Game Development, 2nd ed.* (2011), CRC Press
 - **[Gla95]** Glassner, Andrew S. (ed.): Graphics Gems. AP Professional / Academic Press, Boston, 1995.
 - **[Len16]** Lengyel, Eric: Foundations of Game Engine Development (2016), Terathon Software LCC
+- **[Eri05]** Ericson, Christer: Real-Time Collision Detection (2005), CRC Press
+- **[HS99]** Havran, Vlastimil and Sixta, Filip: Comparison of Hierarchical Grids (1999), https://www.realtimerendering.com/resources/RTNews/html//rtnv12n1.html#art3

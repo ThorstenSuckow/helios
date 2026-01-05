@@ -18,7 +18,7 @@
 #include <tuple>
 
 
-import helios.engine.game.GameObjectFilterType;
+import helios.engine.game.GameObjectFilter;
 
 namespace helios::engine::game {
 class GameObject;
@@ -114,28 +114,50 @@ private:
      * @brief Checks if a GameObject matches the filter criteria.
      *
      * @details Validates that the GameObject has all required component types
-     * and matches the specified active/inactive state filter.
+     * and matches the specified active/inactive/enabledComponent/disabledComponent state filter.
      *
      * @param obj Pointer to the GameObject to check.
      * @param filterType The filter criteria for GameObject state.
      *
-     * @return True if the GameObject has all component types Cs... and matches the filter, false otherwise.
+     * @return True if the GameObject has all enabled/disabled component types Cs... and matches
+     * the filter, false otherwise.
      *
      * @note Uses Comp<Cs> to normalize types for the has<>() check.
      */
-    [[nodiscard]] static bool matches(const Obj* obj, helios::engine::game::GameObjectFilterType filterType) noexcept {
+    [[nodiscard]] static bool matches(const Obj* obj,
+                                      const helios::engine::game::GameObjectFilter filterType) noexcept {
 
-        switch (filterType) {
-            case helios::engine::game::GameObjectFilterType::Active:
-                return (obj->isActive() && (obj->template has<Comp<Cs>>() && ...));
-            case helios::engine::game::GameObjectFilterType::Inactive:
-                return (!obj->isActive() && (obj->template has<Comp<Cs>>() && ...));
-            case helios::engine::game::GameObjectFilterType::All:
-                return ((obj->template has<Comp<Cs>>() && ...));
+        using namespace helios::engine::game;
+
+        static constexpr auto activeMask  = GameObjectFilter::Active | GameObjectFilter::Inactive;
+        static constexpr auto enabledMask = GameObjectFilter::ComponentEnabled | GameObjectFilter::ComponentDisabled;
+
+        const auto objectMask = filterType & activeMask;
+        const auto componentMask = filterType & enabledMask;
+
+        if (objectMask == GameObjectFilter::Active) {
+            if (!obj->isActive()) {
+                return false;
+            }
+        } else if (objectMask == GameObjectFilter::Inactive) {
+            if (obj->isActive()) {
+                return false;
+            }
         }
 
-        std::unreachable();
+        if (componentMask == GameObjectFilter::ComponentEnabled) {
+            if (!(obj->template hasEnabledComponent<Comp<Cs>>() && ...)) {
+                return false;
+            }
+        } else if (componentMask == GameObjectFilter::ComponentDisabled) {
+            if (!(obj->template hasDisabledComponent<Comp<Cs>>() && ...)) {
+                return false;
+            }
+        } else if (!(obj->template has<Comp<Cs>>() && ...)) {
+            return false;
+        }
 
+        return true;
     }
 
     /**
@@ -144,16 +166,16 @@ private:
      * @details Determines whether to include Active, Inactive, or All GameObjects
      * during iteration.
      */
-    helios::engine::game::GameObjectFilterType filterType_;
+    helios::engine::game::GameObjectFilter filterType_;
 
 public:
     /**
      * @brief Constructs a view over the given map.
      *
      * @param objects Reference to the map to iterate over.
-     * @param filterType Filter criteria for GameObject state (Active, Inactive, or All).
+     * @param filterType Filter criteria for GameObject state (Bitmask consisting of Active, Inactive, ComponentEnabled, ComponentDisabled, All).
      */
-    explicit GameObjectView(MapT& objects, helios::engine::game::GameObjectFilterType filterType = helios::engine::game::GameObjectFilterType::Active) noexcept : objects_(&objects), filterType_(filterType) {}
+    explicit GameObjectView(MapT& objects, const helios::engine::game::GameObjectFilter filterType) noexcept : objects_(&objects), filterType_(filterType) {}
 
     /**
      * @brief Forward iterator for filtered GameObject traversal.
@@ -178,7 +200,7 @@ public:
         /**
          * @brief Filter type for GameObject state matching.
          */
-        helios::engine::game::GameObjectFilterType filterType_;
+        helios::engine::game::GameObjectFilter filterType_;
 
         /**
          * @brief Advances to the next matching GameObject.
@@ -199,7 +221,7 @@ public:
          * @param end End iterator for bounds checking.
          * @param filterType Filter criteria for GameObject state matching.
          */
-        Iterator(It it, It end, helios::engine::game::GameObjectFilterType filterType) noexcept : it_(it), end_(end), filterType_(filterType) {
+        Iterator(It it, It end, helios::engine::game::GameObjectFilter filterType) noexcept : it_(it), end_(end), filterType_(filterType) {
             advanceToNextMatch();
         }
 

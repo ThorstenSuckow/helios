@@ -196,6 +196,47 @@ export namespace helios::engine::game {
         }
 
         /**
+        * @brief Checks if the GameObject has a component of type T and returns true if
+        * this component is enabled.
+        *
+        * @tparam T The type of component to check for existence and if it's enabled.
+        *
+        * @return true if the component exists and is enabled, false otherwise.
+        */
+        template<typename T>
+        [[nodiscard]] bool hasEnabledComponent() const {
+            using U = std::remove_cvref_t<T>;
+            U* cmp = get<T>();
+
+            if (!cmp) {
+                return false;
+            }
+
+            return cmp->isEnabled();
+        }
+
+        /**
+         * @brief Checks if the GameObject has a component of type T and returns true if
+         * this component is disabled.
+         *
+         * @tparam T The type of component to check for existence and if it's disabled.
+         *
+         * @return true if the component exists and is disabled, false otherwise.
+         */
+        template<typename T>
+        [[nodiscard]] bool hasDisabledComponent() const {
+            using U = std::remove_cvref_t<T>;
+            U* cmp = get<T>();
+
+            if (!cmp) {
+                return false;
+            }
+
+            return cmp->isDisabled();
+        }
+
+
+        /**
          * @brief Updates all updatable components attached to this GameObject.
          *
          * @param updateContext Context containing frame delta time and other update data.

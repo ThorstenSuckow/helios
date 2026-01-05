@@ -3,11 +3,11 @@ module;
 #include <deque>
 #include <numeric>
 
-module helios.tooling.FpsMetrics;
+module helios.engine.tooling.FpsMetrics;
 
-import helios.engine.FrameStats;
+import helios.engine.tooling.FrameStats;
 
-namespace helios::tooling {
+namespace helios::engine::tooling {
 
     void FpsMetrics::update() noexcept {
         if (!needsUpdate_ || history_.empty()) {
@@ -30,7 +30,7 @@ namespace helios::tooling {
         needsUpdate_ = false;
     }
 
-    void FpsMetrics::addFrame(const helios::engine::FrameStats& stats) {
+    void FpsMetrics::addFrame(const helios::engine::tooling::FrameStats& stats) {
         needsUpdate_ = true;
 
         history_.push_back(stats);
@@ -92,7 +92,7 @@ namespace helios::tooling {
         return lastWaitTime_ * 0.001f;
     }
 
-    const std::deque<helios::engine::FrameStats>& FpsMetrics::getHistory() const noexcept {
+    const std::deque<helios::engine::tooling::FrameStats>& FpsMetrics::getHistory() const noexcept {
         return history_;
     }
 

@@ -214,7 +214,7 @@ export namespace helios::core::data {
 
             const size_t idx = index<T>();
 
-            if (buffers_.size() <= index || !buffers_[idx]) {
+            if (buffers_.size() <= idx || !buffers_[idx]) {
                 return {};
             }
 

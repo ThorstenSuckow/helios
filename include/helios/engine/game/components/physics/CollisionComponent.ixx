@@ -96,7 +96,7 @@ export namespace helios::engine::game::components::physics {
          *
          * @return Reference to this component for method chaining.
          */
-        CollisionComponent setSolidCollisionMask(const uint32_t solidCollisionMask) noexcept {
+        CollisionComponent& setSolidCollisionMask(const uint32_t solidCollisionMask) noexcept {
             solidCollisionMask_ = solidCollisionMask;
             return *this;
         }
@@ -108,7 +108,7 @@ export namespace helios::engine::game::components::physics {
          *
          * @return Reference to this component for method chaining.
          */
-        CollisionComponent setTriggerCollisionMask(const uint32_t triggerCollisionMask) noexcept {
+        CollisionComponent& setTriggerCollisionMask(const uint32_t triggerCollisionMask) noexcept {
             triggerCollisionMask_ = triggerCollisionMask;
             return *this;
         }

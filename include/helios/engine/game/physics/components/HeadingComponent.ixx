@@ -9,7 +9,7 @@ module;
 #include <cmath>
 #include <memory>
 
-export module helios.engine.game.components.physics.HeadingComponent;
+export module helios.engine.game.physics.components.HeadingComponent;
 
 import helios.scene.SceneNode;
 import helios.util.Guid;
@@ -21,7 +21,7 @@ import helios.engine.game.GameObject;
 import helios.engine.game.components.scene.SceneNodeComponent;
 
 
-export namespace helios::engine::game::components::physics {
+export namespace helios::engine::game::physics::components {
 
     /**
      * @brief Component that manages the heading (orientation) of an entity.

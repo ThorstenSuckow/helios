@@ -9,21 +9,21 @@ module;
 #include <algorithm>
 #include <helios/engine/game/GameObjectView.h>
 
-export module helios.engine.game.systems.physics.HeadingSystem;
+export module helios.engine.game.physics.systems.HeadingSystem;
 
 
 import helios.engine.game.System;
 import helios.math;
 
 import helios.engine.game.GameWorld;
-import helios.engine.game.components.physics.HeadingComponent;
-import helios.engine.game.components.physics.TransformComponent;
-import helios.engine.game.components.physics.DirectionComponent;
-import helios.engine.game.components.physics.RotationStateComponent;
+import helios.engine.game.physics.components.HeadingComponent;
+import helios.engine.game.physics.components.TransformComponent;
+import helios.engine.game.physics.components.DirectionComponent;
+import helios.engine.game.physics.components.RotationStateComponent;
 
 import helios.engine.game.UpdateContext;
 
-export namespace helios::engine::game::systems::physics {
+export namespace helios::engine::game::physics::systems {
 
     /**
      * @brief System that processes heading and rotation physics.
@@ -47,7 +47,7 @@ export namespace helios::engine::game::systems::physics {
          * @param deltaTime Time elapsed since last frame in seconds.
          */
         void updateHeading(
-            helios::engine::game::components::physics::HeadingComponent* cmp,
+            helios::engine::game::physics::components::HeadingComponent* cmp,
             float deltaTime
         ) noexcept {
 
@@ -112,9 +112,9 @@ export namespace helios::engine::game::systems::physics {
 
 
             for (auto [entity, hc, rsc, dc] : gameWorld_->find<
-                helios::engine::game::components::physics::HeadingComponent,
-                helios::engine::game::components::physics::RotationStateComponent,
-                helios::engine::game::components::physics::DirectionComponent
+                helios::engine::game::physics::components::HeadingComponent,
+                helios::engine::game::physics::components::RotationStateComponent,
+                helios::engine::game::physics::components::DirectionComponent
             >().each()) {
 
                 if (hc->isInputActive()) {

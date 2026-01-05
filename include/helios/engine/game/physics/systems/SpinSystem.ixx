@@ -7,7 +7,7 @@ module;
 #include <cmath>
 #include <helios/engine/game/GameObjectView.h>
 
-export module helios.engine.game.systems.physics.SpinSystem;
+export module helios.engine.game.physics.systems.SpinSystem;
 
 import helios.engine.game.System;
 import helios.engine.game.UpdateContext;
@@ -15,11 +15,11 @@ import helios.engine.game.GameWorld;
 
 import helios.math;
 
-import helios.engine.game.components.physics.SpinComponent;
-import helios.engine.game.components.physics.TransformComponent;
-import helios.engine.game.components.physics.RotationStateComponent;
+import helios.engine.game.physics.components.SpinComponent;
+import helios.engine.game.physics.components.TransformComponent;
+import helios.engine.game.physics.components.RotationStateComponent;
 
-export namespace helios::engine::game::systems::physics {
+export namespace helios::engine::game::physics::systems {
     
     /**
      * @brief System that updates the spin rotation of entities.
@@ -47,8 +47,8 @@ export namespace helios::engine::game::systems::physics {
 
 
             for (auto [entity, sc, rsc] : gameWorld_->find<
-                helios::engine::game::components::physics::SpinComponent,
-                helios::engine::game::components::physics::RotationStateComponent
+                helios::engine::game::physics::components::SpinComponent,
+                helios::engine::game::physics::components::RotationStateComponent
             >().each()) {
 
                 float delta = updateContext.deltaTime();

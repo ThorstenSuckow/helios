@@ -9,7 +9,7 @@ module;
 #include <cmath>
 #include <memory>
 
-export module helios.engine.game.components.physics.Move2DComponent;
+export module helios.engine.game.physics.components.Move2DComponent;
 
 import helios.scene.SceneNode;
 import helios.util.Guid;
@@ -21,7 +21,7 @@ import helios.engine.game.GameObject;
 import helios.engine.game.components.scene.SceneNodeComponent;
 
 
-export namespace helios::engine::game::components::physics {
+export namespace helios::engine::game::physics::components {
 
     /**
      * @brief Component for 2D physics-based movement.
@@ -37,8 +37,8 @@ export namespace helios::engine::game::components::physics {
      *
      * @note Rotation/heading is handled separately by HeadingComponent and HeadingSystem.
      *
-     * @see helios::engine::game::components::physics::HeadingComponent
-     * @see helios::engine::game::systems::physics::Move2DSystem
+     * @see helios::engine::game::physics::components::HeadingComponent
+     * @see helios::engine::game::physics::systems::Move2DSystem
      */
     class Move2DComponent : public helios::engine::game::Component {
 

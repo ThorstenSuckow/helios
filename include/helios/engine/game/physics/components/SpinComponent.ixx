@@ -5,13 +5,13 @@
 module;
 
 
-export module helios.engine.game.components.physics.SpinComponent;
+export module helios.engine.game.physics.components.SpinComponent;
 
 import helios.engine.game.Component;
 
 import helios.math;
 
-export namespace helios::engine::game::components::physics {
+export namespace helios::engine::game::physics::components {
 
     /**
      * @brief Component that defines spin properties for an entity.

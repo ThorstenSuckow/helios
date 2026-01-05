@@ -7,11 +7,11 @@ module;
 #include <algorithm>
 #include <cassert>
 
-export module helios.engine.game.components.physics.LevelBoundsBehaviorComponent;
+export module helios.engine.game.physics.components.LevelBoundsBehaviorComponent;
 
 import helios.engine.game.Component;
 
-export namespace helios::engine::game::components::physics {
+export namespace helios::engine::game::physics::components {
 
     /**
      * @brief Component that defines how an entity reacts to level boundaries.

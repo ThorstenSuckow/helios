@@ -4,12 +4,12 @@
  */
 module;
 
-export module helios.engine.game.event.TriggerCollisionEvent;
+export module helios.engine.game.physics.events.TriggerCollisionEvent;
 
 import helios.engine.game.GameObject;
 import helios.math;
 
-export namespace helios::engine::game::event {
+export namespace helios::engine::game::physics::events {
 
     /**
      * @brief Event representing a non-physical collision with a trigger volume.

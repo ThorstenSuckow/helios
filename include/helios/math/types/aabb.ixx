@@ -148,7 +148,7 @@ export namespace helios::math {
          *
          * @param box The AABB to test for intersection.
          *
-         * @return True if the specified box is intersects this AABB, false otherwise.
+         * @return True if the specified box intersects this AABB, false otherwise.
          */
         [[nodiscard]] constexpr bool intersects(const helios::math::aabb<T>& box) const noexcept {
 

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['license_0',['License',['../index.html#autotoc_md145',1,'']]],
+  ['license_0',['License',['../index.html#autotoc_md149',1,'']]],
   ['list_1',['Todo List',['../todo.html',1,'']]],
-  ['logging_20system_2',['5. Logging System',['../index.html#autotoc_md132',1,'']]]
+  ['logging_20system_2',['5. Logging System',['../index.html#autotoc_md136',1,'']]]
 ];

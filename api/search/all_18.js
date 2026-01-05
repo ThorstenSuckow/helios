@@ -1,14 +1,14 @@
 var searchData=
 [
-  ['pacing_20and_20performance_20metrics_0',['7. Frame Pacing and Performance Metrics',['../index.html#autotoc_md136',1,'']]],
+  ['pacing_20and_20performance_20metrics_0',['7. Frame Pacing and Performance Metrics',['../index.html#autotoc_md140',1,'']]],
   ['palegreen_1',['PaleGreen',['../structhelios_1_1util_1_1Colors.html#a1629826282c18dd666ac54e696f66aa3',1,'helios::util::Colors']]],
   ['parent_2',['parent',['../classhelios_1_1scene_1_1SceneNode.html#a4e31b52717a76a9bae9a80a1db0b808b',1,'helios::scene::SceneNode']]],
   ['parent_5f_3',['parent_',['../classhelios_1_1scene_1_1SceneNode.html#a718f8d4e4ecddeb659031dd9ad9ad079',1,'helios::scene::SceneNode']]],
-  ['performance_20metrics_4',['7. Frame Pacing and Performance Metrics',['../index.html#autotoc_md136',1,'']]],
+  ['performance_20metrics_4',['7. Frame Pacing and Performance Metrics',['../index.html#autotoc_md140',1,'']]],
   ['perspective_5',['perspective',['../namespacehelios_1_1math.html#a3009ee1714550dc2af4d7e5e952e8a90',1,'helios::math']]],
   ['peru_6',['Peru',['../structhelios_1_1util_1_1Colors.html#a23d8909707bb40c0666bd6450a40f391',1,'helios::util::Colors']]],
   ['pink_7',['Pink',['../structhelios_1_1util_1_1Colors.html#a006c3ee312b31a9cb40b42efd523b5b1',1,'helios::util::Colors']]],
-  ['pipeline_8',['2. Rendering Pipeline',['../index.html#autotoc_md129',1,'']]],
+  ['pipeline_8',['2. Rendering Pipeline',['../index.html#autotoc_md133',1,'']]],
   ['plum_9',['Plum',['../structhelios_1_1util_1_1Colors.html#a22ad01ece48cf0139b685904109a7fad',1,'helios::util::Colors']]],
   ['points_10',['Points',['../namespacehelios_1_1rendering_1_1model_1_1config.html#a13a7711e9718d01b8f09dd183c6777d5a75dd5f1160a3f02b6fae89c54361a1b3',1,'helios::rendering::model::config']]],
   ['poll_11',['poll',['../classhelios_1_1input_1_1InputManager.html#ab46c4ce60870839d557ba3d141964f01',1,'helios::input::InputManager']]],
@@ -40,5 +40,7 @@ var searchData=
   ['projectionmatrix_37',['projectionMatrix',['../classhelios_1_1scene_1_1Camera.html#a1dc42ba642ae41f7028a4cb927a6feb0',1,'helios::scene::Camera::projectionMatrix()'],['../classhelios_1_1scene_1_1Snapshot.html#aae4b2f152fd9144ce8e264064495e867',1,'helios::scene::Snapshot::projectionMatrix()']]],
   ['projectionmatrix_5f_38',['projectionMatrix_',['../classhelios_1_1scene_1_1Camera.html#a73a85eb4966fb4524dc6b87736500f62',1,'helios::scene::Camera::projectionMatrix_'],['../classhelios_1_1scene_1_1Snapshot.html#a47dffe6969f2ed64915d1fd4599cd44a',1,'helios::scene::Snapshot::projectionMatrix_']]],
   ['purple_39',['Purple',['../structhelios_1_1util_1_1Colors.html#a2e4230f832ab139ed7ee932413de6540',1,'helios::util::Colors']]],
-  ['purpose_40',['Core Purpose',['../index.html#autotoc_md123',1,'']]]
+  ['purpose_40',['Core Purpose',['../index.html#autotoc_md127',1,'']]],
+  ['push_41',['push',['../classhelios_1_1core_1_1data_1_1ReadWriteDoubleBuffer.html#ad4686a51e53f044d0fe8316f380e6e79',1,'helios::core::data::ReadWriteDoubleBuffer::push()'],['../classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer.html#a1d5ba1bcf6a4d1ad5b9369832a6fff8b',1,'helios::core::data::TypeIndexedDoubleBuffer::push()'],['../classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1_1WriteSink.html#a8851d5042f1b0506d484194634d6d737',1,'helios::core::data::TypeIndexedDoubleBuffer::WriteSink::push()'],['../classhelios_1_1core_1_1data_1_1WriteBuffer.html#a309ab5b0750eb814fc7cc8a4bdebeec0',1,'helios::core::data::WriteBuffer::push()']]],
+  ['pushevent_42',['pushEvent',['../structhelios_1_1engine_1_1game_1_1UpdateContext.html#aa80c54f8ba498be063e4ef651c0dca05',1,'helios::engine::game::UpdateContext']]]
 ];

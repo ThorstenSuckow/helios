@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="namespacehelios_1_1engine_1_1game_1_1event" kind="namespace" language="C++">
+    <compoundname>helios::engine::game::event</compoundname>
+    <innerclass refid="structhelios_1_1engine_1_1game_1_1event_1_1GameLoopEventBusGroup" prot="public">helios::engine::game::event::GameLoopEventBusGroup</innerclass>
+    <innerclass refid="classhelios_1_1engine_1_1game_1_1event_1_1SolidCollisionEvent" prot="public">helios::engine::game::event::SolidCollisionEvent</innerclass>
+    <innerclass refid="classhelios_1_1engine_1_1game_1_1event_1_1TriggerCollisionEvent" prot="public">helios::engine::game::event::TriggerCollisionEvent</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacehelios_1_1engine_1_1game_1_1event_1a3165d454094258640891c90d0a8ab6d0" prot="public" static="no">
+        <type><ref refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer" kindref="compound">helios::core::data::TypeIndexedDoubleBuffer</ref>&lt; <ref refid="classhelios_1_1core_1_1data_1_1TypeIndexer" kindref="compound">helios::core::data::TypeIndexer</ref>&lt; <ref refid="structhelios_1_1engine_1_1game_1_1event_1_1GameLoopEventBusGroup" kindref="compound">GameLoopEventBusGroup</ref> &gt; &gt;</type>
+        <definition>using helios::engine::game::event::GameLoopEventBus =  helios::core::data::TypeIndexedDoubleBuffer&lt;
+        helios::core::data::TypeIndexer&lt;GameLoopEventBusGroup&gt;
+    &gt;</definition>
+        <argsstring></argsstring>
+        <name>GameLoopEventBus</name>
+        <qualifiedname>helios::engine::game::event::GameLoopEventBus</qualifiedname>
+        <briefdescription>
+<para>Double-buffered event bus for decoupled inter-system communication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><ref refid="namespacehelios_1_1engine_1_1game_1_1event_1a3165d454094258640891c90d0a8ab6d0" kindref="member">GameLoopEventBus</ref> is a type alias for TypeIndexedDoubleBuffer configured with a dedicated index space for game loop events. It enables systems to publish events during their update phase, which become available for consumption after the buffer swap at frame boundaries.</para>
+<para>Events are pushed during system updates and read in subsequent phases or frames, enabling temporal decoupling between event producers and consumers.</para>
+<para>Example usage: ```cpp // Define an event type struct CollisionEvent { EntityId a; EntityId b; vec3f contactPoint; };</para>
+<para>// In collision detection system eventBus.push&lt;CollisionEvent&gt;(entityA, entityB, contact);</para>
+<para>// At frame boundary (in game loop) eventBus.swapBuffers();</para>
+<para>// In damage system (reads events from previous frame) for (const auto&amp; evt : eventBus.read&lt;CollisionEvent&gt;()) { applyDamage(evt.a, evt.b); } ```</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer" kindref="compound">helios::core::data::TypeIndexedDoubleBuffer</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/event/GameLoopEventBus.ixx" line="59" column="5" bodyfile="include/helios/engine/game/event/GameLoopEventBus.ixx" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacehelios_1_1engine_1_1game_1_1event_1a77528665b07944a8b49455991d8eb9ad" prot="public" static="no">
+        <type>GameLoopEventBus::WriteSink</type>
+        <definition>using helios::engine::game::event::GameLoopEventSink =  GameLoopEventBus::WriteSink</definition>
+        <argsstring></argsstring>
+        <name>GameLoopEventSink</name>
+        <qualifiedname>helios::engine::game::event::GameLoopEventSink</qualifiedname>
+        <briefdescription>
+<para>Write-only handle for pushing events to the <ref refid="namespacehelios_1_1engine_1_1game_1_1event_1a3165d454094258640891c90d0a8ab6d0" kindref="member">GameLoopEventBus</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><ref refid="namespacehelios_1_1engine_1_1game_1_1event_1a77528665b07944a8b49455991d8eb9ad" kindref="member">GameLoopEventSink</ref> provides a focused interface for event producers that only need to publish events. It wraps the <ref refid="namespacehelios_1_1engine_1_1game_1_1event_1a3165d454094258640891c90d0a8ab6d0" kindref="member">GameLoopEventBus</ref> and exposes only the push() operation, preventing accidental buffer manipulation.</para>
+<para>Use this type for dependency injection when a system should be able to emit events but should not have access to swap or clear operations.</para>
+<para>Example usage: ```cpp class CollisionSystem { public: void update(GameLoopEventSink&amp; sink) { // Can only push, cannot swap or read sink.push&lt;CollisionEvent&gt;(a, b, contact); } }; ```</para>
+<para><simplesect kind="see"><para>GameLoopEventBus::WriteSink </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/event/GameLoopEventBus.ixx" line="87" column="5" bodyfile="include/helios/engine/game/event/GameLoopEventBus.ixx" bodystart="87" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Collision and interaction events for the game event system. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This module provides system-specific event types, like events dispatched by the collision detection system when GameObjects interact. Events follow an pub-sub pattern via the <computeroutput>EventBus</computeroutput>, enabling decoupled gameplay responses to collisions without tight coupling between systems. </para>
+    </detaileddescription>
+    <location file="include/helios/engine/game/event/GameLoopEventBus.ixx" line="13" column="1"/>
+  </compounddef>
+</doxygen>

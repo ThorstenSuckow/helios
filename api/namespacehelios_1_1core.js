@@ -1,5 +1,6 @@
 var namespacehelios_1_1core =
 [
+    [ "data", "namespacehelios_1_1core_1_1data.html", "namespacehelios_1_1core_1_1data" ],
     [ "units", "namespacehelios_1_1core_1_1units.html", [
       [ "Unit", "namespacehelios_1_1core_1_1units.html#a13b5c00c42b03ebe1d85cd575f346e55", [
         [ "Meter", "namespacehelios_1_1core_1_1units.html#a13b5c00c42b03ebe1d85cd575f346e55a17c9c40b9db5a0983d1075a012c1f90a", null ],

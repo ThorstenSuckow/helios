@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1core_1_1data_1_1TypeIndexer" kind="class" language="C++" prot="public">
+    <compoundname>helios::core::data::TypeIndexer</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename Group</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classhelios_1_1core_1_1data_1_1TypeIndexer_1a613d0231ae579f40c48a355758c67612" prot="private" static="yes" mutable="no">
+        <type>std::atomic&lt; size_t &gt;</type>
+        <definition>std::atomic&lt;size_t&gt; helios::core::data::TypeIndexer&lt; Group &gt;::counter_</definition>
+        <argsstring></argsstring>
+        <name>counter_</name>
+        <qualifiedname>helios::core::data::TypeIndexer::counter_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>A static atomic counter used for generating unique type indices. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/core/data/TypeIndexer.ixx" line="52" column="35" bodyfile="include/helios/core/data/TypeIndexer.ixx" bodystart="52" bodyend="52"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classhelios_1_1core_1_1data_1_1TypeIndexer_1a33aff035cb667c63fcd123a69a91b3cc" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>size_t</type>
+        <definition>static size_t helios::core::data::TypeIndexer&lt; Group &gt;::typeIndex</definition>
+        <argsstring>()</argsstring>
+        <name>typeIndex</name>
+        <qualifiedname>helios::core::data::TypeIndexer::typeIndex</qualifiedname>
+        <briefdescription>
+<para>Generates and returns a unique type index for a specific type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method assigns a unique index to each type within the scope of the associated <ref refid="classhelios_1_1core_1_1data_1_1TypeIndexer" kindref="compound">TypeIndexer</ref>.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type for which to retrieve the unique index.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A unique index representing the specific type T within this Group. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/core/data/TypeIndexer.ixx" line="67" column="23" bodyfile="include/helios/core/data/TypeIndexer.ixx" bodystart="67" bodyend="70"/>
+        <references refid="classhelios_1_1core_1_1data_1_1TypeIndexer_1a33aff035cb667c63fcd123a69a91b3cc" compoundref="TypeIndexer_8ixx" startline="67" endline="70">helios::core::data::TypeIndexer&lt; Group &gt;::typeIndex</references>
+        <referencedby refid="classhelios_1_1core_1_1data_1_1TypeIndexer_1a33aff035cb667c63fcd123a69a91b3cc" compoundref="TypeIndexer_8ixx" startline="67" endline="70">helios::core::data::TypeIndexer&lt; Group &gt;::typeIndex</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Utility class to generate unique type indices at runtime. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This class provides a mechanism to generate and retrieve unique indices for different types. It ensures that each type gets a distinct index which remains constant throughout the program&apos;s execution.</para>
+<para>The indices are generated in a thread-safe manner using atomic operations.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Group</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A tag type used to create separate index spaces. Different Group types maintain independent counters, allowing the same type T to have different indices in different contexts.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+Example usage: ```cpp class EventBus {</para>
+<para>struct EventTypeGroup {};</para>
+<para>using EventTypeIndexer = helios::core::TypeIndexer&lt;EventTypeGroup&gt;;</para>
+<para>public:</para>
+<para>template&lt;typename T&gt; EventBuffer&lt;T&gt;&amp; getOrAddBuffer() { const size_t index = EventTypeIndexer::typeIndex&lt;T&gt;(); auto&amp; buffer = lookupBufferAt(index); // ... } }; ``` </para>
+    </detaileddescription>
+    <location file="include/helios/core/data/TypeIndexer.ixx" line="47" column="5" bodyfile="include/helios/core/data/TypeIndexer.ixx" bodystart="47" bodyend="72"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1core_1_1data_1_1TypeIndexer_1a613d0231ae579f40c48a355758c67612" prot="private" virt="non-virtual"><scope>helios::core::data::TypeIndexer</scope><name>counter_</name></member>
+      <member refid="classhelios_1_1core_1_1data_1_1TypeIndexer_1a33aff035cb667c63fcd123a69a91b3cc" prot="public" virt="non-virtual"><scope>helios::core::data::TypeIndexer</scope><name>typeIndex</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

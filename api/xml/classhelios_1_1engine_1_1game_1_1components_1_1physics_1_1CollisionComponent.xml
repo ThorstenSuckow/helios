@@ -1,0 +1,341 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::game::components::physics::CollisionComponent</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1game_1_1Component" prot="public" virt="non-virtual">helios::engine::game::Component</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1ac6c46bbf1ad863b97befdd3f5b18f8fa" prot="private" static="no" mutable="no">
+        <type>const uint32_t</type>
+        <definition>const uint32_t helios::engine::game::components::physics::CollisionComponent::layerId_</definition>
+        <argsstring></argsstring>
+        <name>layerId_</name>
+        <qualifiedname>helios::engine::game::components::physics::CollisionComponent::layerId_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>The collision layer this component belongs to. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/CollisionComponent.ixx" line="48" column="24" bodyfile="include/helios/engine/game/components/physics/CollisionComponent.ixx" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a973da37af292302904063ac5bec05406" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t helios::engine::game::components::physics::CollisionComponent::triggerCollisionMask_</definition>
+        <argsstring></argsstring>
+        <name>triggerCollisionMask_</name>
+        <qualifiedname>helios::engine::game::components::physics::CollisionComponent::triggerCollisionMask_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Bitmask specifying layers that generate trigger collisions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Trigger collision masks may be asymmetric, i.e. a component B must not know about the existence of another layerId. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/CollisionComponent.ixx" line="56" column="18" bodyfile="include/helios/engine/game/components/physics/CollisionComponent.ixx" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1ac54790899660f85522a296d07073fccb" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t helios::engine::game::components::physics::CollisionComponent::solidCollisionMask_</definition>
+        <argsstring></argsstring>
+        <name>solidCollisionMask_</name>
+        <qualifiedname>helios::engine::game::components::physics::CollisionComponent::solidCollisionMask_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Bitmask specifying layers that generate solid collisions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Solid collision should be symmetric and in the calling API treated as such: `(maskB &amp; thisLayerId) != 0 &amp;&amp; (thisMask &amp; layerBId) != 0` </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/CollisionComponent.ixx" line="64" column="18" bodyfile="include/helios/engine/game/components/physics/CollisionComponent.ixx" bodystart="64" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a04cf81657ec653fa56752e5f27d88ebb" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::engine::game::components::physics::CollisionComponent::isCollisionReporter_</definition>
+        <argsstring></argsstring>
+        <name>isCollisionReporter_</name>
+        <qualifiedname>helios::engine::game::components::physics::CollisionComponent::isCollisionReporter_</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>Flag indicating whether this component can report collision events. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/CollisionComponent.ixx" line="69" column="14" bodyfile="include/helios/engine/game/components/physics/CollisionComponent.ixx" bodystart="69" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a125339839ee8fd945183e28c00a2e693" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::game::components::physics::CollisionComponent::CollisionComponent</definition>
+        <argsstring>(uint32_t layerId, bool isCollisionReporter=true)</argsstring>
+        <name>CollisionComponent</name>
+        <qualifiedname>helios::engine::game::components::physics::CollisionComponent::CollisionComponent</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>layerId</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isCollisionReporter</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent" kindref="compound">CollisionComponent</ref> with a layer ID. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>layerId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The collision layer this entity belongs to. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>isCollisionReporter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether this entity can emit collision events. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/CollisionComponent.ixx" line="79" column="18" bodyfile="include/helios/engine/game/components/physics/CollisionComponent.ixx" bodystart="79" bodyend="81"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a769d713a0364afdb9da98b35c26d8221" compoundref="CollisionComponent_8ixx" startline="88" endline="90">isCollisionReporter</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a16a670cf593f3725c0c5cb16561f2dec" compoundref="CollisionComponent_8ixx" startline="139" endline="141">layerId</references>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a9e0df16a3fb134c66d25c007322af6a6" compoundref="CollisionComponent_8ixx" startline="99" endline="102">setSolidCollisionMask</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a73854f9fc4ce213e3d9785f5d53fd2a0" compoundref="CollisionComponent_8ixx" startline="111" endline="114">setTriggerCollisionMask</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a769d713a0364afdb9da98b35c26d8221" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::game::components::physics::CollisionComponent::isCollisionReporter</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isCollisionReporter</name>
+        <qualifiedname>helios::engine::game::components::physics::CollisionComponent::isCollisionReporter</qualifiedname>
+        <briefdescription>
+<para>Returns whether this component can emit collision events. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if collision events can be generated, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/CollisionComponent.ixx" line="88" column="15" bodyfile="include/helios/engine/game/components/physics/CollisionComponent.ixx" bodystart="88" bodyend="90"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a125339839ee8fd945183e28c00a2e693" compoundref="CollisionComponent_8ixx" startline="79" endline="81">CollisionComponent</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a9e0df16a3fb134c66d25c007322af6a6" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a125339839ee8fd945183e28c00a2e693" kindref="member">CollisionComponent</ref> &amp;</type>
+        <definition>CollisionComponent &amp; helios::engine::game::components::physics::CollisionComponent::setSolidCollisionMask</definition>
+        <argsstring>(const uint32_t solidCollisionMask) noexcept</argsstring>
+        <name>setSolidCollisionMask</name>
+        <qualifiedname>helios::engine::game::components::physics::CollisionComponent::setSolidCollisionMask</qualifiedname>
+        <param>
+          <type>const uint32_t</type>
+          <declname>solidCollisionMask</declname>
+        </param>
+        <briefdescription>
+<para>Sets the solid collision mask. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>solidCollisionMask</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bitmask of layers to generate solid collisions with.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to this component for method chaining. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/CollisionComponent.ixx" line="99" column="28" bodyfile="include/helios/engine/game/components/physics/CollisionComponent.ixx" bodystart="99" bodyend="102"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a125339839ee8fd945183e28c00a2e693" compoundref="CollisionComponent_8ixx" startline="79" endline="81">CollisionComponent</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a294df526e42e8db9ad014f1a34c8c90b" compoundref="CollisionComponent_8ixx" startline="121" endline="123">solidCollisionMask</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a73854f9fc4ce213e3d9785f5d53fd2a0" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a125339839ee8fd945183e28c00a2e693" kindref="member">CollisionComponent</ref> &amp;</type>
+        <definition>CollisionComponent &amp; helios::engine::game::components::physics::CollisionComponent::setTriggerCollisionMask</definition>
+        <argsstring>(const uint32_t triggerCollisionMask) noexcept</argsstring>
+        <name>setTriggerCollisionMask</name>
+        <qualifiedname>helios::engine::game::components::physics::CollisionComponent::setTriggerCollisionMask</qualifiedname>
+        <param>
+          <type>const uint32_t</type>
+          <declname>triggerCollisionMask</declname>
+        </param>
+        <briefdescription>
+<para>Sets the trigger collision mask. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>triggerCollisionMask</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bitmask of layers to generate trigger collisions with.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to this component for method chaining. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/CollisionComponent.ixx" line="111" column="28" bodyfile="include/helios/engine/game/components/physics/CollisionComponent.ixx" bodystart="111" bodyend="114"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a125339839ee8fd945183e28c00a2e693" compoundref="CollisionComponent_8ixx" startline="79" endline="81">CollisionComponent</references>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a66ee66d41de47875faa51339fd4b80a6" compoundref="CollisionComponent_8ixx" startline="130" endline="132">triggerCollisionMask</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a294df526e42e8db9ad014f1a34c8c90b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t helios::engine::game::components::physics::CollisionComponent::solidCollisionMask</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>solidCollisionMask</name>
+        <qualifiedname>helios::engine::game::components::physics::CollisionComponent::solidCollisionMask</qualifiedname>
+        <briefdescription>
+<para>Returns the solid collision mask. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Bitmask of layers this entity generates solid collisions with. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/CollisionComponent.ixx" line="121" column="19" bodyfile="include/helios/engine/game/components/physics/CollisionComponent.ixx" bodystart="121" bodyend="123"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a9e0df16a3fb134c66d25c007322af6a6" compoundref="CollisionComponent_8ixx" startline="99" endline="102">setSolidCollisionMask</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1afbdf17442ab9ff6e8fca1c43f5677314" compoundref="GridCollisionDetectionSystem_8ixx" startline="399" endline="438">helios::engine::game::systems::physics::GridCollisionDetectionSystem::update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a66ee66d41de47875faa51339fd4b80a6" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t helios::engine::game::components::physics::CollisionComponent::triggerCollisionMask</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>triggerCollisionMask</name>
+        <qualifiedname>helios::engine::game::components::physics::CollisionComponent::triggerCollisionMask</qualifiedname>
+        <briefdescription>
+<para>Returns the trigger collision mask. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Bitmask of layers this entity generates trigger collisions with. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/CollisionComponent.ixx" line="130" column="19" bodyfile="include/helios/engine/game/components/physics/CollisionComponent.ixx" bodystart="130" bodyend="132"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a73854f9fc4ce213e3d9785f5d53fd2a0" compoundref="CollisionComponent_8ixx" startline="111" endline="114">setTriggerCollisionMask</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1afbdf17442ab9ff6e8fca1c43f5677314" compoundref="GridCollisionDetectionSystem_8ixx" startline="399" endline="438">helios::engine::game::systems::physics::GridCollisionDetectionSystem::update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a16a670cf593f3725c0c5cb16561f2dec" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int helios::engine::game::components::physics::CollisionComponent::layerId</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>layerId</name>
+        <qualifiedname>helios::engine::game::components::physics::CollisionComponent::layerId</qualifiedname>
+        <briefdescription>
+<para>Returns the collision layer ID. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The layer this entity belongs to. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/CollisionComponent.ixx" line="139" column="23" bodyfile="include/helios/engine/game/components/physics/CollisionComponent.ixx" bodystart="139" bodyend="141"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a125339839ee8fd945183e28c00a2e693" compoundref="CollisionComponent_8ixx" startline="79" endline="81">CollisionComponent</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Defines collision layer membership and interaction masks for a <ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">GameObject</ref>. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent" kindref="compound">CollisionComponent</ref> enables layer-based collision filtering by assigning each entity to a specific layer and defining which other layers it can interact with. Two separate bitmasks control trigger (non-physical) or solid (physical) collision generation.</para>
+<para>Trigger collisions are asymmetric: entity A can detect entity B without B detecting A. Solid collisions should be treated symmetrically by the collision system.</para>
+<para>The collision reporter flag controls whether this entity can emit collision events. Non-reporter entities participate in collision detection but do not generate events.</para>
+<para>Example usage: ```cpp constexpr uint32_t LAYER_PLAYER = 1 &lt;&lt; 0; constexpr uint32_t LAYER_ENEMY = 1 &lt;&lt; 1; constexpr uint32_t LAYER_BULLET = 1 &lt;&lt; 2;</para>
+<para>auto&amp; collision = gameObject.add&lt;CollisionComponent&gt;(LAYER_PLAYER); collision.setTriggerCollisionMask(LAYER_ENEMY | LAYER_BULLET); collision.setSolidCollisionMask(LAYER_ENEMY); ``` </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::game::Component</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1Component"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::game::components::physics::CollisionComponent</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>helios::engine::game::Component</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1Component"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>gameObject_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::game::GameObject</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1GameObject"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>guid_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>helios::engine::game::components::physics::CollisionComponent</label>
+        <link refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>helios::util::Guid</label>
+        <link refid="classhelios_1_1util_1_1Guid"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/game/components/physics/CollisionComponent.ixx" line="43" column="5" bodyfile="include/helios/engine/game/components/physics/CollisionComponent.ixx" bodystart="43" bodyend="143"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a125339839ee8fd945183e28c00a2e693" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::CollisionComponent</scope><name>CollisionComponent</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1a4a167553b4aed32f0ad96e8836a01b88" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::CollisionComponent</scope><name>Component</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1a51f66da7d99ad34fb1d9d4e89c009498" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::CollisionComponent</scope><name>disable</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1a97304e19daafdffdfc6cae6657a45849" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::CollisionComponent</scope><name>enable</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1a0894e93b95d6d0b71602b8803d2cc213" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::CollisionComponent</scope><name>gameObject</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1a70665759561369340448e6015f0a2552" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::CollisionComponent</scope><name>gameObject_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a769d713a0364afdb9da98b35c26d8221" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::CollisionComponent</scope><name>isCollisionReporter</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a04cf81657ec653fa56752e5f27d88ebb" prot="private" virt="non-virtual"><scope>helios::engine::game::components::physics::CollisionComponent</scope><name>isCollisionReporter_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1ab8a1b93c0495284b0e50d4f5e48b6e07" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::CollisionComponent</scope><name>isDisabled</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1ae99b4fa437cb38ce8a093d1ac7073771" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::CollisionComponent</scope><name>isEnabled</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1a83c64ffb9f8ba287e9c30a8871c5976e" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::CollisionComponent</scope><name>isEnabled_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a16a670cf593f3725c0c5cb16561f2dec" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::CollisionComponent</scope><name>layerId</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1ac6c46bbf1ad863b97befdd3f5b18f8fa" prot="private" virt="non-virtual"><scope>helios::engine::game::components::physics::CollisionComponent</scope><name>layerId_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1ab36bb364af461dd789e7477f1bafa13b" prot="public" virt="virtual"><scope>helios::engine::game::components::physics::CollisionComponent</scope><name>onActivate</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1a3a4f0b840b179c07299fc291a57fb51f" prot="public" virt="virtual"><scope>helios::engine::game::components::physics::CollisionComponent</scope><name>onAttach</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1a7e5a02b0500c65e9606839059bdda398" prot="public" virt="virtual"><scope>helios::engine::game::components::physics::CollisionComponent</scope><name>onDeactivate</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a9e0df16a3fb134c66d25c007322af6a6" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::CollisionComponent</scope><name>setSolidCollisionMask</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a73854f9fc4ce213e3d9785f5d53fd2a0" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::CollisionComponent</scope><name>setTriggerCollisionMask</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a294df526e42e8db9ad014f1a34c8c90b" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::CollisionComponent</scope><name>solidCollisionMask</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1ac54790899660f85522a296d07073fccb" prot="private" virt="non-virtual"><scope>helios::engine::game::components::physics::CollisionComponent</scope><name>solidCollisionMask_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a66ee66d41de47875faa51339fd4b80a6" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::CollisionComponent</scope><name>triggerCollisionMask</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a973da37af292302904063ac5bec05406" prot="private" virt="non-virtual"><scope>helios::engine::game::components::physics::CollisionComponent</scope><name>triggerCollisionMask_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1abeb3af407878cf9f2d1019fdc9e2712a" prot="public" virt="virtual"><scope>helios::engine::game::components::physics::CollisionComponent</scope><name>~Component</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

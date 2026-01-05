@@ -45,8 +45,9 @@ var searchData=
   ['_7estringfilereader_42',['~StringFileReader',['../classhelios_1_1util_1_1io_1_1StringFileReader.html#a4ba4553c81cc82a40278d3ecd02088fa',1,'helios::util::io::StringFileReader']]],
   ['_7esystem_43',['~System',['../classhelios_1_1engine_1_1game_1_1System.html#aa4ed4f421d0b37eb63dbd23c25b889f8',1,'helios::engine::game::System']]],
   ['_7etransform_44',['~Transform',['../classhelios_1_1core_1_1Transform.html#a335de33391a74061a608029751a1baa7',1,'helios::core::Transform']]],
-  ['_7euniformvaluemap_45',['~UniformValueMap',['../classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html#a8b461f354660a3b58e432b7fc3c5aae6',1,'helios::rendering::shader::UniformValueMap']]],
-  ['_7eupdatable_46',['~Updatable',['../classhelios_1_1engine_1_1game_1_1Updatable.html#aac5760f908621631c4e7ac40f25e9361',1,'helios::engine::game::Updatable']]],
-  ['_7ewindow_47',['~Window',['../classhelios_1_1window_1_1Window.html#a42e441b82a4e44295864f7919d958355',1,'helios::window::Window']]],
-  ['_7ewindowconfig_48',['~WindowConfig',['../structhelios_1_1window_1_1WindowConfig.html#a0dcd226f963cf9976b19e0a0a894b4d8',1,'helios::window::WindowConfig']]]
+  ['_7etypeindexeddoublebuffer_45',['~TypeIndexedDoubleBuffer',['../classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer.html#a6c0480a641075cdf4246ad7f0d03edad',1,'helios::core::data::TypeIndexedDoubleBuffer']]],
+  ['_7euniformvaluemap_46',['~UniformValueMap',['../classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html#a8b461f354660a3b58e432b7fc3c5aae6',1,'helios::rendering::shader::UniformValueMap']]],
+  ['_7eupdatable_47',['~Updatable',['../classhelios_1_1engine_1_1game_1_1Updatable.html#aac5760f908621631c4e7ac40f25e9361',1,'helios::engine::game::Updatable']]],
+  ['_7ewindow_48',['~Window',['../classhelios_1_1window_1_1Window.html#a42e441b82a4e44295864f7919d958355',1,'helios::window::Window']]],
+  ['_7ewindowconfig_49',['~WindowConfig',['../structhelios_1_1window_1_1WindowConfig.html#a0dcd226f963cf9976b19e0a0a894b4d8',1,'helios::window::WindowConfig']]]
 ];

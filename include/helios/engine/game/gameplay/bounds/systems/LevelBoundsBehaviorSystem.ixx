@@ -6,7 +6,7 @@ module;
 
 #include <helios/engine/game/GameObjectView.h>
 
-export module helios.engine.game.physics.systems.LevelBoundsBehaviorSystem;
+export module helios.engine.game.gameplay.bounds.systems.LevelBoundsBehaviorSystem;
 
 
 import helios.engine.game.System;
@@ -14,21 +14,21 @@ import helios.math;
 
 import helios.engine.game.GameObject;
 import helios.engine.game.GameWorld;
-import helios.engine.game.physics.components.Move2DComponent;
-import helios.engine.game.physics.components.TransformComponent;
-import helios.engine.game.physics.components.TranslationStateComponent;
-import helios.engine.game.physics.components.DirectionComponent;
-import helios.engine.game.physics.components.LevelBoundsBehaviorComponent;
-import helios.engine.game.physics.components.AabbColliderComponent;
+import helios.engine.game.physics.motion.components.Move2DComponent;
+import helios.engine.game.spatial.transform.components.TransformComponent;
+import helios.engine.game.spatial.transform.components.TranslationStateComponent;
+import helios.engine.game.physics.motion.components.DirectionComponent;
+import helios.engine.game.gameplay.bounds.components.LevelBoundsBehaviorComponent;
+import helios.engine.game.physics.collision.components.AabbColliderComponent;
 import helios.engine.game.components.model.ModelAabbComponent;
-import helios.engine.game.physics.components.RotationStateComponent;
+import helios.engine.game.physics.motion.components.RotationStateComponent;
 import helios.scene.SceneNode;
 import helios.engine.game.components.scene.SceneNodeComponent;
 
 import helios.engine.game.UpdateContext;
 
 
-export namespace helios::engine::game::physics::systems {
+export namespace helios::engine::game::gameplay::bounds::systems {
 
     /**
      * @brief System that handles entity behavior when colliding with level boundaries.
@@ -54,13 +54,13 @@ export namespace helios::engine::game::physics::systems {
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
             for (auto [entity, m2d, ab, sc, dc, tsc, bc, bbc] : gameWorld_->find<
-                helios::engine::game::physics::components::Move2DComponent,
+                helios::engine::game::physics::motion::components::Move2DComponent,
                 helios::engine::game::components::model::ModelAabbComponent,
                 helios::engine::game::components::scene::SceneNodeComponent,
-                helios::engine::game::physics::components::DirectionComponent,
-                helios::engine::game::physics::components::TranslationStateComponent,
-                helios::engine::game::physics::components::AabbColliderComponent,
-                helios::engine::game::physics::components::LevelBoundsBehaviorComponent
+                helios::engine::game::physics::motion::components::DirectionComponent,
+                helios::engine::game::spatial::transform::components::TranslationStateComponent,
+                helios::engine::game::physics::collision::components::AabbColliderComponent,
+                helios::engine::game::gameplay::bounds::components::LevelBoundsBehaviorComponent
             >().each()) {
 
 
@@ -112,9 +112,9 @@ export namespace helios::engine::game::physics::systems {
             helios::math::vec3f worldTranslation,
             helios::math::aabbf objectBounds,
             helios::math::aabbf levelBounds,
-            helios::engine::game::physics::components::Move2DComponent& m2d,
-            helios::engine::game::physics::components::LevelBoundsBehaviorComponent& bbc,
-            helios::engine::game::physics::components::DirectionComponent& dc
+            helios::engine::game::physics::motion::components::Move2DComponent& m2d,
+            helios::engine::game::gameplay::bounds::components::LevelBoundsBehaviorComponent& bbc,
+            helios::engine::game::physics::motion::components::DirectionComponent& dc
         ) noexcept {
 
 

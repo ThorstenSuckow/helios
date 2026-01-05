@@ -4,5 +4,5 @@
  */
 export module helios.core;
 
-export import helios.core.units;
+export import helios.core.data;
 export import helios.core.Transform;

@@ -5,12 +5,12 @@ module;
 #include <chrono>
 #include <cassert>
 
-module helios.engine.FramePacer;
+module helios.engine.tooling.FramePacer;
 
 import helios.util.time.Stopwatch;
-import helios.engine.FrameStats;
+import helios.engine.tooling.FrameStats;
 
-namespace helios::engine {
+namespace helios::engine::tooling {
 
     FramePacer::FramePacer(std::unique_ptr<helios::util::time::Stopwatch> stopwatch) :
         stopwatch_(std::move(stopwatch)) {

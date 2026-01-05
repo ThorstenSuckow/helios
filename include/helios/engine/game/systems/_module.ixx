@@ -4,7 +4,7 @@
  */
 export module helios.engine.game.systems;
 
-export import helios.engine.game.systems.gameplay;
+export import helios.engine.game.gameplay.systems;
 export import helios.engine.game.physics.systems;
 export import helios.engine.game.systems.post;
 export import helios.engine.game.systems.scene;

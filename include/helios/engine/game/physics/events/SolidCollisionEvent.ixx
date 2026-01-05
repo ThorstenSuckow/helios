@@ -4,12 +4,12 @@
  */
 module;
 
-export module helios.engine.game.event.SolidCollisionEvent;
+export module helios.engine.game.physics.events.SolidCollisionEvent;
 
 import helios.engine.game.GameObject;
 import helios.math;
 
-export namespace helios::engine::game::event {
+export namespace helios::engine::game::physics::events {
 
     /**
      * @brief Event representing a physical collision between two solid objects.

@@ -13,7 +13,7 @@ import helios.engine.game.System;
 import helios.engine.game.UpdateContext;
 
 import helios.engine.game.components.scene.SceneNodeComponent;
-import helios.engine.game.components.physics.TransformComponent;
+import helios.engine.game.physics.components.TransformComponent;
 
 
 export namespace helios::engine::game::systems::post {
@@ -38,7 +38,7 @@ export namespace helios::engine::game::systems::post {
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
             for (auto [entity, tc] : gameWorld_->find<
-                helios::engine::game::components::physics::TransformComponent
+                helios::engine::game::physics::components::TransformComponent
                 >().each()) {
 
                 tc->clearDirty();

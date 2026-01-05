@@ -9,7 +9,7 @@ export module helios.engine.game.commands.HeadingCommand;
 import helios.engine.game.Command;
 import helios.engine.game.GameObject;
 import helios.math.types;
-import helios.engine.game.components.physics.HeadingComponent;
+import helios.engine.game.physics.components.HeadingComponent;
 
 export namespace helios::engine::game::commands {
 
@@ -64,7 +64,7 @@ export namespace helios::engine::game::commands {
          */
         void execute(helios::engine::game::GameObject& gameObject) override {
 
-            auto* hc = gameObject.get<helios::engine::game::components::physics::HeadingComponent>();
+            auto* hc = gameObject.get<helios::engine::game::physics::components::HeadingComponent>();
 
             if (hc) {
                 hc->setHeading(direction_.toVec3(), turnFactor_);

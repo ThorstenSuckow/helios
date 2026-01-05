@@ -9,20 +9,20 @@ module;
 #include <algorithm>
 #include <helios/engine/game/GameObjectView.h>
 
-export module helios.engine.game.systems.physics.Move2DSystem;
+export module helios.engine.game.physics.systems.Move2DSystem;
 
 
 import helios.engine.game.System;
 import helios.math;
 
 import helios.engine.game.GameWorld;
-import helios.engine.game.components.physics.Move2DComponent;
-import helios.engine.game.components.physics.TranslationStateComponent;
-import helios.engine.game.components.physics.DirectionComponent;
+import helios.engine.game.physics.components.Move2DComponent;
+import helios.engine.game.physics.components.TranslationStateComponent;
+import helios.engine.game.physics.components.DirectionComponent;
 
 import helios.engine.game.UpdateContext;
 
-export namespace helios::engine::game::systems::physics {
+export namespace helios::engine::game::physics::systems {
 
     /**
      * @brief System that processes 2D movement for entities.
@@ -58,7 +58,7 @@ export namespace helios::engine::game::systems::physics {
          * @return Translation delta to apply to the entity this frame.
          */
         [[nodiscard]] static helios::math::vec3f moveGameObject(
-            helios::engine::game::components::physics::Move2DComponent* cmp,
+            helios::engine::game::physics::components::Move2DComponent* cmp,
             helios::math::vec3f currentDirection,
             float deltaTime
         ) noexcept {
@@ -126,9 +126,9 @@ export namespace helios::engine::game::systems::physics {
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
             for (auto [entity, m2d, dc, tsc] : gameWorld_->find<
-                helios::engine::game::components::physics::Move2DComponent,
-                helios::engine::game::components::physics::DirectionComponent,
-                helios::engine::game::components::physics::TranslationStateComponent
+                helios::engine::game::physics::components::Move2DComponent,
+                helios::engine::game::physics::components::DirectionComponent,
+                helios::engine::game::physics::components::TranslationStateComponent
             >().each()) {
 
                 helios::math::vec3f translationDelta;

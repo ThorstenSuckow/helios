@@ -6,13 +6,13 @@ module;
 
 #include <cmath>
 
-export module helios.engine.game.components.physics.TranslationStateComponent;
+export module helios.engine.game.physics.components.TranslationStateComponent;
 
 import helios.engine.game.Component;
 
 import helios.math;
 
-export namespace helios::engine::game::components::physics {
+export namespace helios::engine::game::physics::components {
 
     /**
      * @brief Component that holds the current translation (position) state.

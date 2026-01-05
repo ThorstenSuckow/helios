@@ -10,7 +10,7 @@ import helios.engine.game.Command;
 import helios.engine.game.GameObject;
 import helios.math.types;
 import helios.engine.game.components.gameplay.ShootComponent;
-import helios.engine.game.components.physics.Move2DComponent;
+import helios.engine.game.physics.components.Move2DComponent;
 
 export namespace helios::engine::game::commands {
 
@@ -58,7 +58,7 @@ export namespace helios::engine::game::commands {
             auto* shootComponent = gameObject.get<helios::engine::game::components::gameplay::ShootComponent>();
 
             if (shootComponent) {
-                auto* m2d            =  gameObject.get<helios::engine::game::components::physics::Move2DComponent>();
+                auto* m2d            =  gameObject.get<helios::engine::game::physics::components::Move2DComponent>();
 
                 shootComponent->shoot(intensity_, m2d != nullptr ? m2d->velocity() : helios::math::vec3f{0.0f, 0.0f, 0.0f});
             }

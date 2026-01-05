@@ -4,13 +4,13 @@
  */
 module;
 
-export module helios.engine.game.components.physics.TransformComponent;
+export module helios.engine.game.physics.components.TransformComponent;
 
 import helios.math.types;
 import helios.engine.game.Component;
 import helios.core.Transform;
 
-export namespace helios::engine::game::components::physics {
+export namespace helios::engine::game::physics::components {
 
     /**
      * @brief Component that holds transformation data (position, rotation, scale).

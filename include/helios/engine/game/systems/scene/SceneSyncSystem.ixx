@@ -16,7 +16,7 @@ import helios.engine.game.System;
 import helios.engine.game.UpdateContext;
 
 import helios.engine.game.components.scene.SceneNodeComponent;
-import helios.engine.game.components.physics.TransformComponent;
+import helios.engine.game.physics.components.TransformComponent;
 
 export namespace helios::engine::game::systems::scene {
 
@@ -54,7 +54,7 @@ export namespace helios::engine::game::systems::scene {
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
             auto view = gameWorld_->find<
-                helios::engine::game::components::physics::TransformComponent,
+                helios::engine::game::physics::components::TransformComponent,
                 helios::engine::game::components::scene::SceneNodeComponent
             >();
 

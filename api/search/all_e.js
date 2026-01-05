@@ -7,7 +7,7 @@ var searchData=
   ['ellipse_4',['Ellipse',['../structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse.html',1,'helios::rendering::asset::shape::basic::Ellipse'],['../structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse.html#acaf9134b8929a9153dfcc95dd65280fc',1,'helios::rendering::asset::shape::basic::Ellipse::Ellipse()'],['../structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse.html#a0a00d877402b4a268fff6d4321c40c02',1,'helios::rendering::asset::shape::basic::Ellipse::Ellipse(float radiusX, float radiusY, unsigned int segments)']]],
   ['ellipse_2eixx_5',['Ellipse.ixx',['../Ellipse_8ixx.html',1,'']]],
   ['empty_6',['empty',['../classhelios_1_1event_1_1DequeEventQueue.html#a594ade70466608e86045c4b1679772fc',1,'helios::event::DequeEventQueue::empty()'],['../classhelios_1_1event_1_1EventQueue.html#af36e46db487566d8d3c51a690c46ab86',1,'helios::event::EventQueue::empty()']]],
-  ['enable_7',['enable',['../classhelios_1_1util_1_1log_1_1Logger.html#a60ef33d5014392cbb88633fb8d0521e4',1,'helios::util::log::Logger']]],
+  ['enable_7',['enable',['../classhelios_1_1engine_1_1game_1_1Component.html#a97304e19daafdffdfc6cae6657a45849',1,'helios::engine::game::Component::enable()'],['../classhelios_1_1util_1_1log_1_1Logger.html#a60ef33d5014392cbb88633fb8d0521e4',1,'helios::util::log::Logger::enable()']]],
   ['enableallsinks_8',['enableAllSinks',['../classhelios_1_1util_1_1log_1_1LogManager.html#ab28c446b9b8746425ec9e3cfa4ed8159',1,'helios::util::log::LogManager']]],
   ['enablelogging_9',['enableLogging',['../classhelios_1_1util_1_1log_1_1LogManager.html#adab66fefed9700defd5199358f4f9874',1,'helios::util::log::LogManager']]],
   ['enablesink_10',['enableSink',['../classhelios_1_1util_1_1log_1_1LogManager.html#a086cef17194c4df915de290181df412f',1,'helios::util::log::LogManager::enableSink(SinkTypeId typeId)'],['../classhelios_1_1util_1_1log_1_1LogManager.html#a22a17438bf79400830c333c0433470e9',1,'helios::util::log::LogManager::enableSink(std::shared_ptr&lt; LogSink &gt; sink)']]],
@@ -26,11 +26,11 @@ var searchData=
   ['eventqueue_23',['EventQueue',['../classhelios_1_1event_1_1EventQueue.html',1,'helios::event']]],
   ['eventqueue_2eixx_24',['EventQueue.ixx',['../EventQueue_8ixx.html',1,'']]],
   ['eventqueue_5f_25',['eventQueue_',['../classhelios_1_1event_1_1EventManager.html#a06528b307d0e99a55a4aea8b608f6f8b',1,'helios::event::EventManager']]],
-  ['examples_26',['Examples',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md37',1,'Examples'],['../index.html#autotoc_md144',1,'Examples']]],
+  ['examples_26',['Examples',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md37',1,'Examples'],['../index.html#autotoc_md148',1,'Examples']]],
   ['execute_27',['execute',['../classhelios_1_1engine_1_1game_1_1Command.html#a9e7515d68b42e8bff683df15d4f95ab7',1,'helios::engine::game::Command::execute()'],['../classhelios_1_1engine_1_1game_1_1commands_1_1Aim2DCommand.html#adcf8bbd3975dd917ebc77fa3ea20128a',1,'helios::engine::game::commands::Aim2DCommand::execute()'],['../classhelios_1_1engine_1_1game_1_1commands_1_1HeadingCommand.html#a38c19be5c36ce0334636d45fd1909373',1,'helios::engine::game::commands::HeadingCommand::execute()'],['../classhelios_1_1engine_1_1game_1_1commands_1_1Move2DCommand.html#aa350d238ae20ca8089a7869b8860f903',1,'helios::engine::game::commands::Move2DCommand::execute()'],['../classhelios_1_1engine_1_1game_1_1commands_1_1ShootCommand.html#a9e012933d5cf99796c46f677dcb7a151',1,'helios::engine::game::commands::ShootCommand::execute()']]],
   ['ext_20glfw_28',['&lt;span class=&quot;tt&quot;&gt;helios.ext.glfw&lt;/span&gt;',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md29',1,'']]],
   ['ext_20opengl_29',['&lt;span class=&quot;tt&quot;&gt;helios.ext.opengl&lt;/span&gt;',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md30',1,'']]],
-  ['extension_20modules_30',['Extension Modules',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md28',1,'Extension Modules'],['../index.html#autotoc_md126',1,'Extension Modules']]],
+  ['extension_20modules_30',['Extension Modules',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md28',1,'Extension Modules'],['../index.html#autotoc_md130',1,'Extension Modules']]],
   ['extension_20responsibilities_31',['Extension Responsibilities',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md24',1,'']]],
   ['extensions_32',['Extensions',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md22',1,'Available Extensions'],['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md26',1,'Using Extensions']]]
 ];

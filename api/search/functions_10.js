@@ -19,8 +19,12 @@ var searchData=
   ['transpose_16',['transpose',['../structhelios_1_1math_1_1mat4.html#aa5940ba880eb6ac1c64ca4f7117d7cc2',1,'helios::math::mat4']]],
   ['triangle_17',['Triangle',['../structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Triangle.html#acfd0d45878444edb071fb66cd8d0ee1d',1,'helios::rendering::asset::shape::basic::Triangle']]],
   ['trigger_18',['trigger',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#add4cb5588dfbc246ba5ba729afee2743',1,'helios::input::gamepad::GamepadState']]],
-  ['triggerleft_19',['triggerLeft',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#a24dee448f65b242cfa6fb36a2615559a',1,'helios::input::gamepad::GamepadState']]],
-  ['triggerright_20',['triggerRight',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#a71cd296694d25b524c2d48943faa1590',1,'helios::input::gamepad::GamepadState']]],
-  ['turnintensity_21',['turnIntensity',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent.html#a6400e2e07a46c0f4c760ff958be63200',1,'helios::engine::game::components::physics::HeadingComponent']]],
-  ['typeid_22',['typeId',['../classhelios_1_1ext_1_1imgui_1_1ImGuiLogSink.html#ab80c1cfe5b99ab3a1d0b4a811995e912',1,'helios::ext::imgui::ImGuiLogSink::typeId()'],['../classhelios_1_1util_1_1log_1_1ConsoleSink.html#a8ff58267b554bfb4edc32d0e22804485',1,'helios::util::log::ConsoleSink::typeId()'],['../classhelios_1_1util_1_1log_1_1LogSink.html#a1eac0bfe8af64547c7f6f2fb9d815b17',1,'helios::util::log::LogSink::typeId()']]]
+  ['triggercollisionevent_19',['TriggerCollisionEvent',['../classhelios_1_1engine_1_1game_1_1event_1_1TriggerCollisionEvent.html#a6e1bfa2aab4c61eafd73d7e8eec66d5c',1,'helios::engine::game::event::TriggerCollisionEvent']]],
+  ['triggercollisionmask_20',['triggerCollisionMask',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent.html#a66ee66d41de47875faa51339fd4b80a6',1,'helios::engine::game::components::physics::CollisionComponent']]],
+  ['triggerleft_21',['triggerLeft',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#a24dee448f65b242cfa6fb36a2615559a',1,'helios::input::gamepad::GamepadState']]],
+  ['triggerright_22',['triggerRight',['../classhelios_1_1input_1_1gamepad_1_1GamepadState.html#a71cd296694d25b524c2d48943faa1590',1,'helios::input::gamepad::GamepadState']]],
+  ['turnintensity_23',['turnIntensity',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent.html#a6400e2e07a46c0f4c760ff958be63200',1,'helios::engine::game::components::physics::HeadingComponent']]],
+  ['typeid_24',['typeId',['../classhelios_1_1ext_1_1imgui_1_1ImGuiLogSink.html#ab80c1cfe5b99ab3a1d0b4a811995e912',1,'helios::ext::imgui::ImGuiLogSink::typeId()'],['../classhelios_1_1util_1_1log_1_1ConsoleSink.html#a8ff58267b554bfb4edc32d0e22804485',1,'helios::util::log::ConsoleSink::typeId()'],['../classhelios_1_1util_1_1log_1_1LogSink.html#a1eac0bfe8af64547c7f6f2fb9d815b17',1,'helios::util::log::LogSink::typeId()']]],
+  ['typeindex_25',['typeIndex',['../classhelios_1_1core_1_1data_1_1TypeIndexer.html#a33aff035cb667c63fcd123a69a91b3cc',1,'helios::core::data::TypeIndexer']]],
+  ['typeindexeddoublebuffer_26',['TypeIndexedDoubleBuffer',['../classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer.html#aa7b4ee2009864c7f775c6368fbc03cd3',1,'helios::core::data::TypeIndexedDoubleBuffer']]]
 ];

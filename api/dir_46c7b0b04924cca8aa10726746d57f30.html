@@ -110,13 +110,14 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_46c7b0b04924cca8aa10726746d57f30_dep.svg" width="484" height="387"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_46c7b0b04924cca8aa10726746d57f30_dep.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-subdirs" class="groupheader"><a id="subdirs" name="subdirs"></a>
 Directories</h2></td></tr>
 <tr class="memitem:commands" id="r_commands"><td class="memItemLeft" align="right" valign="top"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_e0c1a906bd0da41122364a897b83de07.html">commands</a></td></tr>
 <tr class="memitem:components" id="r_components"><td class="memItemLeft" align="right" valign="top"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_f71deafbc833970927ad1dfabdb805be.html">components</a></td></tr>
+<tr class="memitem:event" id="r_event"><td class="memItemLeft" align="right" valign="top"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_86d8e8e4bfdb09c041580463eb962dec.html">event</a></td></tr>
 <tr class="memitem:systems" id="r_systems"><td class="memItemLeft" align="right" valign="top"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_36ea2b7be3cb8c26515d956982029a89.html">systems</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-files" class="groupheader"><a id="files" name="files"></a>
@@ -133,8 +134,8 @@ Files</h2></td></tr>
 <tr class="memdesc:Component_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for components attached to GameObjects. <br /></td></tr>
 <tr class="memitem:GameObject_2Eixx" id="r_GameObject_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="GameObject_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="GameObject_8ixx.html">GameObject.ixx</a></td></tr>
 <tr class="memdesc:GameObject_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for interactive game entities with transform capabilities. <br /></td></tr>
-<tr class="memitem:GameObjectFilterType_2Eixx" id="r_GameObjectFilterType_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="GameObjectFilterType_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="GameObjectFilterType_8ixx.html">GameObjectFilterType.ixx</a></td></tr>
-<tr class="memdesc:GameObjectFilterType_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration for filtering GameObjects in queries. <br /></td></tr>
+<tr class="memitem:GameObjectFilter_2Eixx" id="r_GameObjectFilter_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="GameObjectFilter_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="GameObjectFilter_8ixx.html">GameObjectFilter.ixx</a></td></tr>
+<tr class="memdesc:GameObjectFilter_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration for filtering GameObjects in queries. <br /></td></tr>
 <tr class="memitem:GameObjectPool_2Eixx" id="r_GameObjectPool_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="GameObjectPool_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="GameObjectPool_8ixx.html">GameObjectPool.ixx</a></td></tr>
 <tr class="memdesc:GameObjectPool_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Object pool for efficient GameObject management and recycling. <br /></td></tr>
 <tr class="memitem:GameWorld_2Eixx" id="r_GameWorld_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="GameWorld_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="GameWorld_8ixx.html">GameWorld.ixx</a></td></tr>
@@ -157,7 +158,7 @@ Files</h2></td></tr>
 <tr class="memdesc:UpdateContext_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Context struct passed to components during per-frame updates. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md61"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md65"></a>
 helios::engine::game</h1>
 <p>Game logic infrastructure using the Command pattern for decoupled, testable, and deterministic game systems.</p>
 <p>This module provides the foundational architecture for game logic in helios. It follows a composition-based component model where <span class="tt">GameObject</span> instances own <span class="tt">Component</span> instances that define behavior. Game actions are encapsulated as <span class="tt">Command</span> objects, enabling features like replay systems, undo/redo, and network synchronization.</p>

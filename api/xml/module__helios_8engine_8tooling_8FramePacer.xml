@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8tooling_8FramePacer" kind="module">
+    <compoundname>helios.engine.tooling.FramePacer</compoundname>
+    <innerfile refid="FramePacer_8ixx">FramePacer.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1tooling_1_1FramePacer" prot="public">helios::engine::tooling::FramePacer</innerclass>
+    <innerclass refid="classhelios_1_1engine_1_1tooling_1_1FramePacer" prot="public">helios::engine::tooling::FramePacer</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1tooling_1_1FramePacer_1aacdb3ed90d858b5e54ef6fdf24eb6dde" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classhelios_1_1util_1_1time_1_1Stopwatch" kindref="compound">helios::util::time::Stopwatch</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;helios::util::time::Stopwatch&gt; helios::engine::tooling::FramePacer::stopwatch_</definition>
+        <argsstring></argsstring>
+        <name>stopwatch_</name>
+        <qualifiedname>helios::engine::tooling::FramePacer::stopwatch_</qualifiedname>
+        <briefdescription>
+<para>The stopwatch used for high-resolution time measurement. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/tooling/FramePacer.ixx" line="47" column="25" bodyfile="include/helios/engine/tooling/FramePacer.ixx" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a0b30f32b681fe90b77b985c9b86762c7" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::tooling::FramePacer::targetFps_</definition>
+        <argsstring></argsstring>
+        <name>targetFps_</name>
+        <qualifiedname>helios::engine::tooling::FramePacer::targetFps_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>The target frame rate in Frames Per Second (FPS). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/tooling/FramePacer.ixx" line="52" column="15" bodyfile="include/helios/engine/tooling/FramePacer.ixx" bodystart="52" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a19da16d13fb67519b06e64f7cdd44bc7" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::tooling::FramePacer::FramePacer</definition>
+        <argsstring>(std::unique_ptr&lt; helios::util::time::Stopwatch &gt; stopwatch)</argsstring>
+        <name>FramePacer</name>
+        <qualifiedname>helios::engine::tooling::FramePacer::FramePacer</qualifiedname>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1util_1_1time_1_1Stopwatch" kindref="compound">helios::util::time::Stopwatch</ref> &gt;</type>
+          <declname>stopwatch</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classhelios_1_1engine_1_1tooling_1_1FramePacer" kindref="compound">FramePacer</ref> with the given stopwatch. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes a new <ref refid="classhelios_1_1engine_1_1tooling_1_1FramePacer" kindref="compound">FramePacer</ref> instance in unlimited FPS mode (targetFps = 0.0f).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stopwatch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Unique pointer to a valid `Stopwatch` instance. Ownership is transferred to the <ref refid="classhelios_1_1engine_1_1tooling_1_1FramePacer" kindref="compound">FramePacer</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/tooling/FramePacer.ixx" line="63" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a432af3249703e9edab2712a7bc577699" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::tooling::FramePacer::setTargetFps</definition>
+        <argsstring>(float fps)</argsstring>
+        <name>setTargetFps</name>
+        <qualifiedname>helios::engine::tooling::FramePacer::setTargetFps</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>fps</declname>
+        </param>
+        <briefdescription>
+<para>Sets the desired target frame rate. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target frame rate in Frames Per Second (FPS). Set to 0.0f to disable pacing (unlocked framerate). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/tooling/FramePacer.ixx" line="71" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a69df9490a44888bd14297544e380ae7b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::tooling::FramePacer::getTargetFps</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getTargetFps</name>
+        <qualifiedname>helios::engine::tooling::FramePacer::getTargetFps</qualifiedname>
+        <briefdescription>
+<para>Retrieves the current target frame rate. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns the frame rate target that has been set for pacing, expressed in Frames Per Second (FPS). If the target frame rate is set to 0.0f, frame pacing is disabled, and the frame rate is unlocked.</para>
+<para><simplesect kind="return"><para>The target frame rate in FPS.</para>
+</simplesect>
+<simplesect kind="note"><para>A return value of 0.0f indicates that the frame pacing mechanism is not active. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/tooling/FramePacer.ixx" line="84" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a44ad35ea34434c3ce534ad032a49c409" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::tooling::FramePacer::beginFrame</definition>
+        <argsstring>()</argsstring>
+        <name>beginFrame</name>
+        <qualifiedname>helios::engine::tooling::FramePacer::beginFrame</qualifiedname>
+        <briefdescription>
+<para>Marks the beginning of a new frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Starts the internal stopwatch to begin measuring the frame&apos;s work time. This method must be called at the very beginning of each frame cycle, before any game logic, physics, or rendering operations. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/tooling/FramePacer.ixx" line="93" column="14"/>
+        <references refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a44ad35ea34434c3ce534ad032a49c409">helios::engine::tooling::FramePacer::beginFrame</references>
+        <referencedby refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a44ad35ea34434c3ce534ad032a49c409">helios::engine::tooling::FramePacer::beginFrame</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1tooling_1_1FramePacer_1ac6b55e3ef2b685222358c14e69e89f06" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>FrameStats</type>
+        <definition>FrameStats helios::engine::tooling::FramePacer::sync</definition>
+        <argsstring>()</argsstring>
+        <name>sync</name>
+        <qualifiedname>helios::engine::tooling::FramePacer::sync</qualifiedname>
+        <briefdescription>
+<para>Synchronizes frame timing and returns frame statistics. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Measures the elapsed work time since `beginFrame()`. If a target FPS is set and the work time is less than the target frame duration, this method sleeps the current thread to meet the target timing.</para>
+<para><simplesect kind="return"><para>A `FrameStats` structure containing the total frame time (including wait), the actual work time (CPU processing), and the wait time (idle).</para>
+</simplesect>
+<simplesect kind="note"><para>If `targetFps` is 0.0f or the frame took longer than the target duration, no sleeping occurs, and `waitTime` in the returned stats will be 0.0f.</para>
+</simplesect>
+<xrefsect id="todo_1_todo000009"><xreftitle>Todo</xreftitle><xrefdescription><para>Implement hybrid spinning for the last millisecond of the wait time to improve timing precision and mitigate OS scheduler wake-up latency. </para>
+</xrefdescription></xrefsect></para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/tooling/FramePacer.ixx" line="111" column="21"/>
+        <references refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1ac6b55e3ef2b685222358c14e69e89f06">helios::engine::tooling::FramePacer::sync</references>
+        <referencedby refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1ac6b55e3ef2b685222358c14e69e89f06">helios::engine::tooling::FramePacer::sync</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/engine/tooling/FramePacer.ixx" line="9" column="15"/>
+  </compounddef>
+</doxygen>

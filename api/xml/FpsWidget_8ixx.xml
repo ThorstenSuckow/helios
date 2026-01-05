@@ -5,9 +5,9 @@
     <includes local="no">vector</includes>
     <includes local="no">string</includes>
     <includes local="yes">imgui.h</includes>
-    <includes refid="FrameStats_8ixx" local="no">helios.engine.FrameStats</includes>
-    <includes refid="FramePacer_8ixx" local="no">helios.engine.FramePacer</includes>
-    <includes refid="FpsMetrics_8ixx" local="no">helios.tooling.FpsMetrics</includes>
+    <includes refid="FrameStats_8ixx" local="no">helios.engine.tooling.FrameStats</includes>
+    <includes refid="FramePacer_8ixx" local="no">helios.engine.tooling.FramePacer</includes>
+    <includes refid="FpsMetrics_8ixx" local="no">helios.engine.tooling.FpsMetrics</includes>
     <includes refid="ImGuiWidget_8ixx" local="no">helios.ext.imgui.ImGuiWidget</includes>
     <incdepgraph>
       <node id="12">
@@ -32,8 +32,16 @@
         <childnode refid="12" relation="include">
         </childnode>
       </node>
+      <node id="10">
+        <label>helios.engine.tooling.FpsMetrics</label>
+        <link refid="FpsMetrics_8ixx"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
       <node id="6">
-        <label>helios.engine.FramePacer</label>
+        <label>helios.engine.tooling.FramePacer</label>
         <link refid="FramePacer_8ixx"/>
         <childnode refid="7" relation="include">
         </childnode>
@@ -43,16 +51,8 @@
         </childnode>
       </node>
       <node id="5">
-        <label>helios.engine.FrameStats</label>
+        <label>helios.engine.tooling.FrameStats</label>
         <link refid="FrameStats_8ixx"/>
-      </node>
-      <node id="10">
-        <label>helios.tooling.FpsMetrics</label>
-        <link refid="FpsMetrics_8ixx"/>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
       </node>
       <node id="8">
         <label>helios.util.time.Stopwatch</label>
@@ -103,9 +103,9 @@
 <codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8ext_8imgui_8widgets_8FpsWidget" kindref="compound">helios.ext.imgui.widgets.FpsWidget</ref>;</highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8ext_8imgui_8ImGuiWidget" kindref="compound">helios.ext.imgui.ImGuiWidget</ref>;</highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8tooling_8FpsMetrics" kindref="compound">helios.tooling.FpsMetrics</ref>;</highlight></codeline>
-<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8FramePacer" kindref="compound">helios.engine.FramePacer</ref>;</highlight></codeline>
-<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8FrameStats" kindref="compound">helios.engine.FrameStats</ref>;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8tooling_8FpsMetrics" kindref="compound">helios.engine.tooling.FpsMetrics</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8tooling_8FramePacer" kindref="compound">helios.engine.tooling.FramePacer</ref>;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8tooling_8FrameStats" kindref="compound">helios.engine.tooling.FrameStats</ref>;</highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight></codeline>
 <codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1ext_1_1imgui_1_1widgets" kindref="compound">helios::ext::imgui::widgets</ref><sp/>{</highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
@@ -119,7 +119,7 @@
 <codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>This<sp/>widget<sp/>is<sp/>not<sp/>thread-safe.<sp/>Use<sp/>from<sp/>the<sp/>main/render<sp/>thread<sp/>only.</highlight></codeline>
 <codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="30" refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a5beb965047e8e583295ced59916687cd" kindref="member">FpsWidget</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ext_1_1imgui_1_1ImGuiWidget_1aac2ed1b7d339b387d91158b00d26c089" kindref="member">ImGuiWidget</ref><sp/>{</highlight></codeline>
+<codeline lineno="30" refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a8054bfc5ba37251f2abcd4ae88b83ded" kindref="member">FpsWidget</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ext_1_1imgui_1_1ImGuiWidget_1aac2ed1b7d339b387d91158b00d26c089" kindref="member">ImGuiWidget</ref><sp/>{</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight></codeline>
 <codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
@@ -132,7 +132,7 @@
 <codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>The<sp/>pointer<sp/>must<sp/>remain<sp/>valid<sp/>throughout<sp/>the<sp/>lifetime<sp/>of<sp/>the<sp/>FpsWidget<sp/>instance.</highlight></codeline>
 <codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1tooling_1_1FpsMetrics" kindref="compound">helios::tooling::FpsMetrics</ref>*<sp/>fpsMetrics_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics" kindref="compound">helios::engine::tooling::FpsMetrics</ref>*<sp/>fpsMetrics_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="44"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Pointer<sp/>to<sp/>a<sp/>`FramePacer`<sp/>instance<sp/>for<sp/>managing<sp/>frame<sp/>pacing<sp/>and<sp/>target<sp/>FPS.</highlight></codeline>
@@ -145,7 +145,7 @@
 <codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>set<sp/>to<sp/>`nullptr`<sp/>if<sp/>frame<sp/>pacing<sp/>is<sp/>not<sp/>required.<sp/>Ensure<sp/>the<sp/>lifetime<sp/>of<sp/>the</highlight></codeline>
 <codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>referenced<sp/>`FramePacer`<sp/>extends<sp/>beyond<sp/>the<sp/>usage<sp/>of<sp/>this<sp/>pointer.</highlight></codeline>
 <codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1FramePacer" kindref="compound">helios::engine::FramePacer</ref>*<sp/>framePacer_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1tooling_1_1FramePacer" kindref="compound">helios::engine::tooling::FramePacer</ref>*<sp/>framePacer_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="58"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Stores<sp/>the<sp/>user-configured<sp/>target<sp/>frames<sp/>per<sp/>second<sp/>(FPS)<sp/>for<sp/>frame<sp/>pacing.</highlight></codeline>
@@ -191,9 +191,9 @@
 <codeline lineno="99"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>fpsMetrics<sp/>Pointer<sp/>to<sp/>the<sp/>FpsMetrics<sp/>instance<sp/>(must<sp/>remain<sp/>valid).</highlight></codeline>
 <codeline lineno="100"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>framePacer<sp/>Optional<sp/>pointer<sp/>to<sp/>FramePacer<sp/>for<sp/>runtime<sp/>FPS<sp/>configuration.</highlight></codeline>
 <codeline lineno="101"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="102" refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a5beb965047e8e583295ced59916687cd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a5beb965047e8e583295ced59916687cd" kindref="member">FpsWidget</ref>(</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1tooling_1_1FpsMetrics" kindref="compound">helios::tooling::FpsMetrics</ref>*<sp/>fpsMetrics,</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1FramePacer" kindref="compound">helios::engine::FramePacer</ref>*<sp/>framePacer<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="102" refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a8054bfc5ba37251f2abcd4ae88b83ded" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a8054bfc5ba37251f2abcd4ae88b83ded" kindref="member">FpsWidget</ref>(</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics" kindref="compound">helios::engine::tooling::FpsMetrics</ref>*<sp/>fpsMetrics,</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1tooling_1_1FramePacer" kindref="compound">helios::engine::tooling::FramePacer</ref>*<sp/>framePacer<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>)<sp/>:<sp/>fpsMetrics_(fpsMetrics),<sp/>framePacer_(framePacer)</highlight></codeline>
 <codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(fpsMetrics_)<sp/>{</highlight></codeline>

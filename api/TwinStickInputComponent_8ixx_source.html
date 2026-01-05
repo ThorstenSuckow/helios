@@ -165,11 +165,11 @@ $(function() {
 <div class="foldopen" id="foldopen00056" data-start="{" data-end="}">
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1game_1_1components_1_1input_1_1TwinStickInputComponent.html#aaeab3d39edea2bbbb2da0cf521fd6059">   56</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1game_1_1components_1_1input_1_1TwinStickInputComponent.html#aaeab3d39edea2bbbb2da0cf521fd6059">update</a>(<a class="code hl_struct" href="structhelios_1_1engine_1_1game_1_1UpdateContext.html">helios::engine::game::UpdateContext</a>&amp; updateContext) <span class="keyword">noexcept</span> <span class="keyword">override</span> {</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="keyword">auto</span>* inputSnapshot = updateContext.inputSnapshot();</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            <span class="keyword">auto</span>* commandBuffer = updateContext.commandBuffer();</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="keyword">auto</span>&amp; inputSnapshot = updateContext.inputSnapshot();</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            <span class="keyword">auto</span>&amp; commandBuffer = updateContext.commandBuffer();</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            <span class="comment">// Left stick: movement</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            <span class="keyword">const</span> <span class="keyword">auto</span> leftStick = inputSnapshot-&gt;gamepadState().left();</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            <span class="keyword">const</span> <span class="keyword">auto</span> leftStick = inputSnapshot.gamepadState().left();</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <span class="keywordtype">float</span> finalSpeed = 0.0f;</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            <span class="keywordtype">float</span> speed = leftStick.length();</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>            <span class="keyword">auto</span> ldir = <a class="code hl_typedef" href="namespacehelios_1_1math.html#aeab5c7e555a142f8f763a3317460d5c0">helios::math::vec2f</a>{0.0f, 0.0f};</div>
@@ -179,18 +179,18 @@ $(function() {
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                finalSpeed = speed;</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            }</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            commandBuffer-&gt;add(</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            commandBuffer.add(</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                <a class="code hl_function" href="classhelios_1_1engine_1_1game_1_1Component.html#a0894e93b95d6d0b71602b8803d2cc213">gameObject</a>()-&gt;guid(),</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                std::make_unique&lt;helios::engine::game::commands::Move2DCommand&gt;(ldir, finalSpeed)</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            );</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            commandBuffer-&gt;add(</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            commandBuffer.add(</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>                <a class="code hl_function" href="classhelios_1_1engine_1_1game_1_1Component.html#a0894e93b95d6d0b71602b8803d2cc213">gameObject</a>()-&gt;guid(),</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>                std::make_unique&lt;helios::engine::game::commands::HeadingCommand&gt;(ldir, finalSpeed)</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            );</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            <span class="comment">// Right stick: aiming</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            <span class="keyword">const</span> <span class="keyword">auto</span> rightStick = inputSnapshot-&gt;gamepadState().right();</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            <span class="keyword">const</span> <span class="keyword">auto</span> rightStick = inputSnapshot.gamepadState().right();</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            <span class="keywordtype">float</span> freq = rightStick.length();</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            <span class="keywordtype">float</span> finalFreq = 0.0f;</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            <span class="keyword">auto</span> rdir = <a class="code hl_typedef" href="namespacehelios_1_1math.html#aeab5c7e555a142f8f763a3317460d5c0">helios::math::vec2f</a>{0.0f, 0.0f};</div>
@@ -200,21 +200,21 @@ $(function() {
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                finalFreq = freq;</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            }</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            commandBuffer-&gt;add(</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            commandBuffer.add(</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                <a class="code hl_function" href="classhelios_1_1engine_1_1game_1_1Component.html#a0894e93b95d6d0b71602b8803d2cc213">gameObject</a>()-&gt;guid(),</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                std::make_unique&lt;helios::engine::game::commands::Aim2DCommand&gt;(rdir, finalFreq)</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            );</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            <span class="keywordflow">if</span> (useDedicatedShootInput_) {</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                <span class="comment">// right trigger: shooting</span></div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                <span class="keyword">const</span> <span class="keyword">auto</span> rightTrigger = inputSnapshot-&gt;gamepadState().triggerRight();</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                <span class="keyword">const</span> <span class="keyword">auto</span> rightTrigger = inputSnapshot.gamepadState().triggerRight();</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                commandBuffer-&gt;add(</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                commandBuffer.add(</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                   <a class="code hl_function" href="classhelios_1_1engine_1_1game_1_1Component.html#a0894e93b95d6d0b71602b8803d2cc213">gameObject</a>()-&gt;guid(),</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                   std::make_unique&lt;helios::engine::game::commands::ShootCommand&gt;(rightTrigger)</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>               );</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                commandBuffer-&gt;add(</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                commandBuffer.add(</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                   <a class="code hl_function" href="classhelios_1_1engine_1_1game_1_1Component.html#a0894e93b95d6d0b71602b8803d2cc213">gameObject</a>()-&gt;guid(),</div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                   std::make_unique&lt;helios::engine::game::commands::ShootCommand&gt;(finalFreq)</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>               );</div>
@@ -254,7 +254,7 @@ $(function() {
 <div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
 <div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>}</div>
 <div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1Component_html"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1Component.html">helios::engine::game::Component</a></div><div class="ttdoc">Abstract base class for components attached to GameObjects.</div><div class="ttdef"><b>Definition</b> <a href="Component_8ixx_source.html#l00038">Component.ixx:38</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1Component_html_a0894e93b95d6d0b71602b8803d2cc213"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1Component.html#a0894e93b95d6d0b71602b8803d2cc213">helios::engine::game::Component::gameObject</a></div><div class="ttdeci">GameObject * gameObject() const noexcept</div><div class="ttdoc">Returns the owning GameObject.</div><div class="ttdef"><b>Definition</b> <a href="Component_8ixx_source.html#l00098">Component.ixx:98</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1Component_html_a0894e93b95d6d0b71602b8803d2cc213"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1Component.html#a0894e93b95d6d0b71602b8803d2cc213">helios::engine::game::Component::gameObject</a></div><div class="ttdeci">GameObject * gameObject() const noexcept</div><div class="ttdoc">Returns the owning GameObject.</div><div class="ttdef"><b>Definition</b> <a href="Component_8ixx_source.html#l00141">Component.ixx:141</a></div></div>
 <div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1Updatable_html"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1Updatable.html">helios::engine::game::Updatable</a></div><div class="ttdoc">Interface for components that require per-frame updates.</div><div class="ttdef"><b>Definition</b> <a href="Updatable_8ixx_source.html#l00036">Updatable.ixx:36</a></div></div>
 <div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1components_1_1input_1_1TwinStickInputComponent_html"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1components_1_1input_1_1TwinStickInputComponent.html">helios::engine::game::components::input::TwinStickInputComponent</a></div><div class="ttdoc">Input component for twin-stick gamepad control schemes.</div><div class="ttdef"><b>Definition</b> <a href="#l00039">TwinStickInputComponent.ixx:39</a></div></div>
 <div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1components_1_1input_1_1TwinStickInputComponent_html_a650c68ef2b82352cd674fc37e6e99ef1"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1components_1_1input_1_1TwinStickInputComponent.html#a650c68ef2b82352cd674fc37e6e99ef1">helios::engine::game::components::input::TwinStickInputComponent::useDedicatedShootInput</a></div><div class="ttdeci">bool useDedicatedShootInput() const noexcept</div><div class="ttdoc">Returns whether dedicated shoot input mode is enabled.</div><div class="ttdef"><b>Definition</b> <a href="#l00132">TwinStickInputComponent.ixx:132</a></div></div>
@@ -275,7 +275,7 @@ $(function() {
 <div class="ttc" id="anamespacehelios_1_1engine_1_1game_1_1components_1_1input_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1game_1_1components_1_1input.html">helios::engine::game::components::input</a></div><div class="ttdoc">Input handling components that translate device input into game commands. .</div></div>
 <div class="ttc" id="anamespacehelios_1_1math_html_aeab5c7e555a142f8f763a3317460d5c0"><div class="ttname"><a href="namespacehelios_1_1math.html#aeab5c7e555a142f8f763a3317460d5c0">helios::math::vec2f</a></div><div class="ttdeci">vec2&lt; float &gt; vec2f</div><div class="ttdef"><b>Definition</b> <a href="vec2_8ixx_source.html#l00187">vec2.ixx:187</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1math_html_af25d93f23f91acae02abfd7706b2e36d"><div class="ttname"><a href="namespacehelios_1_1math.html#af25d93f23f91acae02abfd7706b2e36d">helios::math::EPSILON_LENGTH</a></div><div class="ttdeci">constexpr float EPSILON_LENGTH</div><div class="ttdoc">A small epsilon value used for length-based comparisons.</div><div class="ttdef"><b>Definition</b> <a href="utils_8ixx_source.html#l00022">utils.ixx:22</a></div></div>
-<div class="ttc" id="astructhelios_1_1engine_1_1game_1_1UpdateContext_html"><div class="ttname"><a href="structhelios_1_1engine_1_1game_1_1UpdateContext.html">helios::engine::game::UpdateContext</a></div><div class="ttdoc">Context passed to Updatable components during per-frame updates.</div><div class="ttdef"><b>Definition</b> <a href="UpdateContext_8ixx_source.html#l00026">UpdateContext.ixx:26</a></div></div>
+<div class="ttc" id="astructhelios_1_1engine_1_1game_1_1UpdateContext_html"><div class="ttname"><a href="structhelios_1_1engine_1_1game_1_1UpdateContext.html">helios::engine::game::UpdateContext</a></div><div class="ttdoc">Context passed to Updatable components during per-frame updates.</div><div class="ttdef"><b>Definition</b> <a href="UpdateContext_8ixx_source.html#l00028">UpdateContext.ixx:28</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

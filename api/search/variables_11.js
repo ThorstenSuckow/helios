@@ -9,7 +9,7 @@ var searchData=
   ['title_6',['title',['../structhelios_1_1window_1_1WindowConfig.html#a3ffc9f8d5d4e517423dda6f691dfe14e',1,'helios::window::WindowConfig']]],
   ['title_5f_7',['title_',['../classhelios_1_1window_1_1Window.html#a27dc6e221464e5675b20816130a0e948',1,'helios::window::Window']]],
   ['tomato_8',['Tomato',['../structhelios_1_1util_1_1Colors.html#af3a7d279a9cc893a685c4db77574dcc9',1,'helios::util::Colors']]],
-  ['totalframetime_9',['totalFrameTime',['../structhelios_1_1engine_1_1FrameStats.html#ab76f59f1bd1a35ee9d4316fdb46efa63',1,'helios::engine::FrameStats']]],
+  ['totalframetime_9',['totalFrameTime',['../structhelios_1_1engine_1_1tooling_1_1FrameStats.html#ab04381ee38036ba51eadacaea264d8dc',1,'helios::engine::tooling::FrameStats']]],
   ['transformcomponent_5f_10',['transformComponent_',['../classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1ShootComponent.html#a41622b780b0a3041347bd6bc4340d104',1,'helios::engine::game::components::gameplay::ShootComponent']]],
   ['transparent_11',['Transparent',['../structhelios_1_1util_1_1Colors.html#a4a6dd5125285c30f2e9be2e6dd7f8510',1,'helios::util::Colors']]],
   ['turnintensity_5f_12',['turnIntensity_',['../classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1HeadingComponent.html#ad086508c6dbe7f88c00796e81a884410',1,'helios::engine::game::components::physics::HeadingComponent']]],

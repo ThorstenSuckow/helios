@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/components/physics/AabbColliderComponent.ixx" line="26" column="29" bodyfile="include/helios/engine/game/components/physics/AabbColliderComponent.ixx" bodystart="26" bodyend="-1"/>
+        <location file="include/helios/engine/game/components/physics/AabbColliderComponent.ixx" line="28" column="29" bodyfile="include/helios/engine/game/components/physics/AabbColliderComponent.ixx" bodystart="28" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/components/physics/AabbColliderComponent.ixx" line="33" column="18"/>
+        <location file="include/helios/engine/game/components/physics/AabbColliderComponent.ixx" line="35" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1AabbColliderComponent_1addf3e0db2c2a332d7d9b27911cc81585" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>const <ref refid="namespacehelios_1_1math_1a124c0492430aeecedc1c1a5ece4ba488" kindref="member">helios::math::aabbf</ref> &amp;</type>
@@ -52,8 +52,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/components/physics/AabbColliderComponent.ixx" line="41" column="36" bodyfile="include/helios/engine/game/components/physics/AabbColliderComponent.ixx" bodystart="41" bodyend="43"/>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1AabbColliderComponent_1a246b7fc71e674629b5c066b04ea1ad94" compoundref="AabbColliderComponent_8ixx" startline="50" endline="52">setBounds</referencedby>
+        <location file="include/helios/engine/game/components/physics/AabbColliderComponent.ixx" line="43" column="36" bodyfile="include/helios/engine/game/components/physics/AabbColliderComponent.ixx" bodystart="43" bodyend="45"/>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1AabbColliderComponent_1a246b7fc71e674629b5c066b04ea1ad94" compoundref="AabbColliderComponent_8ixx" startline="52" endline="54">setBounds</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1aa1dad076c58ad7ae95262162bd364689" compoundref="GridCollisionDetectionSystem_8ixx" startline="535" endline="598">helios::engine::game::systems::physics::GridCollisionDetectionSystem::solveCell</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1AabbColliderComponent_1a246b7fc71e674629b5c066b04ea1ad94" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -82,8 +83,27 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/game/components/physics/AabbColliderComponent.ixx" line="50" column="14" bodyfile="include/helios/engine/game/components/physics/AabbColliderComponent.ixx" bodystart="50" bodyend="52"/>
-        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1AabbColliderComponent_1addf3e0db2c2a332d7d9b27911cc81585" compoundref="AabbColliderComponent_8ixx" startline="41" endline="43">bounds</references>
+        <location file="include/helios/engine/game/components/physics/AabbColliderComponent.ixx" line="52" column="14" bodyfile="include/helios/engine/game/components/physics/AabbColliderComponent.ixx" bodystart="52" bodyend="54"/>
+        <references refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1AabbColliderComponent_1addf3e0db2c2a332d7d9b27911cc81585" compoundref="AabbColliderComponent_8ixx" startline="43" endline="45">bounds</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1AabbColliderComponent_1a216a9a2979b4f788d70b433f50d079f0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::game::components::physics::AabbColliderComponent::boundsInitialized</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>boundsInitialized</name>
+        <qualifiedname>helios::engine::game::components::physics::AabbColliderComponent::boundsInitialized</qualifiedname>
+        <briefdescription>
+<para>Checks whether the bounds of the collider have been initialized. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Bounds of the collider component are considered to be initialized if the minimum X coordinate is less or equal to the maximum X coordinate.</para>
+<para><simplesect kind="return"><para>true if the bounds are considered to be initialized; otherwise, false. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/game/components/physics/AabbColliderComponent.ixx" line="64" column="15" bodyfile="include/helios/engine/game/components/physics/AabbColliderComponent.ixx" bodystart="64" bodyend="66"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -130,14 +150,20 @@
         <link refid="classhelios_1_1util_1_1Guid"/>
       </node>
     </collaborationgraph>
-    <location file="include/helios/engine/game/components/physics/AabbColliderComponent.ixx" line="21" column="5" bodyfile="include/helios/engine/game/components/physics/AabbColliderComponent.ixx" bodystart="21" bodyend="54"/>
+    <location file="include/helios/engine/game/components/physics/AabbColliderComponent.ixx" line="23" column="5" bodyfile="include/helios/engine/game/components/physics/AabbColliderComponent.ixx" bodystart="23" bodyend="67"/>
     <listofallmembers>
       <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1AabbColliderComponent_1ad1d727c6e7a3abe13bb4e49fa1c14c05" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::AabbColliderComponent</scope><name>AabbColliderComponent</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1AabbColliderComponent_1addf3e0db2c2a332d7d9b27911cc81585" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::AabbColliderComponent</scope><name>bounds</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1AabbColliderComponent_1a6d81f34be723cd10cc4bd21ff75499cf" prot="private" virt="non-virtual"><scope>helios::engine::game::components::physics::AabbColliderComponent</scope><name>bounds_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1AabbColliderComponent_1a216a9a2979b4f788d70b433f50d079f0" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::AabbColliderComponent</scope><name>boundsInitialized</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1Component_1a4a167553b4aed32f0ad96e8836a01b88" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::AabbColliderComponent</scope><name>Component</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1a51f66da7d99ad34fb1d9d4e89c009498" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::AabbColliderComponent</scope><name>disable</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1a97304e19daafdffdfc6cae6657a45849" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::AabbColliderComponent</scope><name>enable</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1Component_1a0894e93b95d6d0b71602b8803d2cc213" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::AabbColliderComponent</scope><name>gameObject</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1Component_1a70665759561369340448e6015f0a2552" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::AabbColliderComponent</scope><name>gameObject_</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1ab8a1b93c0495284b0e50d4f5e48b6e07" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::AabbColliderComponent</scope><name>isDisabled</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1ae99b4fa437cb38ce8a093d1ac7073771" prot="public" virt="non-virtual"><scope>helios::engine::game::components::physics::AabbColliderComponent</scope><name>isEnabled</name></member>
+      <member refid="classhelios_1_1engine_1_1game_1_1Component_1a83c64ffb9f8ba287e9c30a8871c5976e" prot="protected" virt="non-virtual"><scope>helios::engine::game::components::physics::AabbColliderComponent</scope><name>isEnabled_</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1Component_1ab36bb364af461dd789e7477f1bafa13b" prot="public" virt="virtual"><scope>helios::engine::game::components::physics::AabbColliderComponent</scope><name>onActivate</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1Component_1a3a4f0b840b179c07299fc291a57fb51f" prot="public" virt="virtual"><scope>helios::engine::game::components::physics::AabbColliderComponent</scope><name>onAttach</name></member>
       <member refid="classhelios_1_1engine_1_1game_1_1Component_1a7e5a02b0500c65e9606839059bdda398" prot="public" virt="virtual"><scope>helios::engine::game::components::physics::AabbColliderComponent</scope><name>onDeactivate</name></member>

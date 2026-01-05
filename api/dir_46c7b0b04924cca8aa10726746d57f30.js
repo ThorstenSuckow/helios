@@ -2,6 +2,7 @@ var dir_46c7b0b04924cca8aa10726746d57f30 =
 [
     [ "commands", "dir_e0c1a906bd0da41122364a897b83de07.html", "dir_e0c1a906bd0da41122364a897b83de07" ],
     [ "components", "dir_f71deafbc833970927ad1dfabdb805be.html", "dir_f71deafbc833970927ad1dfabdb805be" ],
+    [ "event", "dir_86d8e8e4bfdb09c041580463eb962dec.html", "dir_86d8e8e4bfdb09c041580463eb962dec" ],
     [ "systems", "dir_36ea2b7be3cb8c26515d956982029a89.html", "dir_36ea2b7be3cb8c26515d956982029a89" ],
     [ "_module.ixx", "helios_2engine_2game_2__module_8ixx.html", null ],
     [ "CallbackSpawnStrategy.ixx", "CallbackSpawnStrategy_8ixx.html", "CallbackSpawnStrategy_8ixx" ],
@@ -9,7 +10,7 @@ var dir_46c7b0b04924cca8aa10726746d57f30 =
     [ "CommandBuffer.ixx", "CommandBuffer_8ixx.html", "CommandBuffer_8ixx" ],
     [ "Component.ixx", "Component_8ixx.html", "Component_8ixx" ],
     [ "GameObject.ixx", "GameObject_8ixx.html", "GameObject_8ixx" ],
-    [ "GameObjectFilterType.ixx", "GameObjectFilterType_8ixx.html", "GameObjectFilterType_8ixx" ],
+    [ "GameObjectFilter.ixx", "GameObjectFilter_8ixx.html", "GameObjectFilter_8ixx" ],
     [ "GameObjectPool.ixx", "GameObjectPool_8ixx.html", "GameObjectPool_8ixx" ],
     [ "GameWorld.ixx", "GameWorld_8ixx.html", "GameWorld_8ixx" ],
     [ "InputSnapshot.ixx", "InputSnapshot_8ixx.html", "InputSnapshot_8ixx" ],

@@ -11,6 +11,7 @@
     <member refid="structhelios_1_1math_1_1aabb_1ad9c6ae9ba53638b5acb98843d24d766b" kind="function"><name>center</name></member>
     <member refid="structhelios_1_1math_1_1aabb_1a78c11f960ab2cd331e354bd274c85a27" kind="function"><name>size</name></member>
     <member refid="structhelios_1_1math_1_1aabb_1ab2281d98a7cb28b46ce163d96a2f4469" kind="function"><name>contains</name></member>
+    <member refid="structhelios_1_1math_1_1aabb_1ade126b97a45a33942359c01b5f268c24" kind="function"><name>intersects</name></member>
     <member refid="structhelios_1_1math_1_1aabb_1ab6aadb560a2c8ee5dd381592b653578b" kind="function"><name>translate</name></member>
     <member refid="structhelios_1_1math_1_1aabb_1a92106c4efc1b1aae8466956903020665" kind="function"><name>add</name></member>
     <member refid="structhelios_1_1math_1_1aabb_1aa1e69fb646399dae7c02c52e972532b5" kind="function"><name>applyTransform</name></member>
@@ -20,6 +21,7 @@
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1AabbColliderComponent_1ad1d727c6e7a3abe13bb4e49fa1c14c05" kind="function"><name>AabbColliderComponent</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1AabbColliderComponent_1addf3e0db2c2a332d7d9b27911cc81585" kind="function"><name>bounds</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1AabbColliderComponent_1a246b7fc71e674629b5c066b04ea1ad94" kind="function"><name>setBounds</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1AabbColliderComponent_1a216a9a2979b4f788d70b433f50d079f0" kind="function"><name>boundsInitialized</name></member>
   </compound>
   <compound refid="classhelios_1_1engine_1_1game_1_1commands_1_1Aim2DCommand" kind="class"><name>helios::engine::game::commands::Aim2DCommand</name>
     <member refid="classhelios_1_1engine_1_1game_1_1commands_1_1Aim2DCommand_1a70a1c89042b16d2a7330c1ec849b59b3" kind="variable"><name>freqFactor_</name></member>
@@ -163,6 +165,31 @@
     <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Circle_1a7216e5fe912fe498b88884e55966be91" kind="function"><name>Circle</name></member>
     <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Circle_1a1a8dac2fd4d728aba2d5e763d9d87e24" kind="function"><name>primitiveType</name></member>
   </compound>
+  <compound refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1CollisionCandidate" kind="struct"><name>helios::engine::game::systems::physics::GridCollisionDetectionSystem::CollisionCandidate</name>
+    <member refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1CollisionCandidate_1aa8db8fc0b110f11b31d39286ba341889" kind="variable"><name>gameObject</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1CollisionCandidate_1ae687e9e6b0890ca2facbd9199b3d7ada" kind="variable"><name>aabbColliderComponent</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1CollisionCandidate_1a808550663383820e6e815cabc2c2acdc" kind="variable"><name>collisionComponent</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent" kind="class"><name>helios::engine::game::components::physics::CollisionComponent</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1ac6c46bbf1ad863b97befdd3f5b18f8fa" kind="variable"><name>layerId_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a973da37af292302904063ac5bec05406" kind="variable"><name>triggerCollisionMask_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1ac54790899660f85522a296d07073fccb" kind="variable"><name>solidCollisionMask_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a04cf81657ec653fa56752e5f27d88ebb" kind="variable"><name>isCollisionReporter_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a125339839ee8fd945183e28c00a2e693" kind="function"><name>CollisionComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a769d713a0364afdb9da98b35c26d8221" kind="function"><name>isCollisionReporter</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a9e0df16a3fb134c66d25c007322af6a6" kind="function"><name>setSolidCollisionMask</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a73854f9fc4ce213e3d9785f5d53fd2a0" kind="function"><name>setTriggerCollisionMask</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a294df526e42e8db9ad014f1a34c8c90b" kind="function"><name>solidCollisionMask</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a66ee66d41de47875faa51339fd4b80a6" kind="function"><name>triggerCollisionMask</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a16a670cf593f3725c0c5cb16561f2dec" kind="function"><name>layerId</name></member>
+  </compound>
+  <compound refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1CollisionStruct" kind="struct"><name>helios::engine::game::systems::physics::GridCollisionDetectionSystem::CollisionStruct</name>
+    <member refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1a732352a57c5c4984b1120fe2cfc5b334" kind="variable"><name>isSolidCollision</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1addf19bdee1eda887eb02c6110bcc1ff6" kind="variable"><name>isTriggerCollision</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1a859bffeea9d0da6a6e51ecbff056ba1b" kind="variable"><name>aIsCollisionReporter</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1a35d79eec998195ec2db56fc4589ddc14" kind="variable"><name>bIsCollisionReporter</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1a7331a0e3475d74384c17ffbd22ed4197" kind="function"><name>hasAnyInteraction</name></member>
+  </compound>
   <compound refid="structhelios_1_1util_1_1Colors" kind="struct"><name>helios::util::Colors</name>
     <member refid="structhelios_1_1util_1_1Colors_1af4c86c5fcc6d41740a31df96780243a1" kind="variable"><name>Black</name></member>
     <member refid="structhelios_1_1util_1_1Colors_1a0e4a94112e7e0901a03c309621beba72" kind="variable"><name>White</name></member>
@@ -271,9 +298,14 @@
   </compound>
   <compound refid="classhelios_1_1engine_1_1game_1_1Component" kind="class"><name>helios::engine::game::Component</name>
     <member refid="classhelios_1_1engine_1_1game_1_1Component_1a70665759561369340448e6015f0a2552" kind="variable"><name>gameObject_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1Component_1a83c64ffb9f8ba287e9c30a8871c5976e" kind="variable"><name>isEnabled_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1Component_1abeb3af407878cf9f2d1019fdc9e2712a" kind="function"><name>~Component</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1Component_1a4a167553b4aed32f0ad96e8836a01b88" kind="function"><name>Component</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1Component_1a3a4f0b840b179c07299fc291a57fb51f" kind="function"><name>onAttach</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1Component_1ae99b4fa437cb38ce8a093d1ac7073771" kind="function"><name>isEnabled</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1Component_1ab8a1b93c0495284b0e50d4f5e48b6e07" kind="function"><name>isDisabled</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1Component_1a97304e19daafdffdfc6cae6657a45849" kind="function"><name>enable</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1Component_1a51f66da7d99ad34fb1d9d4e89c009498" kind="function"><name>disable</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1Component_1ab36bb364af461dd789e7477f1bafa13b" kind="function"><name>onActivate</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1Component_1a7e5a02b0500c65e9606839059bdda398" kind="function"><name>onDeactivate</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1Component_1a0894e93b95d6d0b71602b8803d2cc213" kind="function"><name>gameObject</name></member>
@@ -367,37 +399,37 @@
     <member refid="classhelios_1_1event_1_1EventQueue_1af36e46db487566d8d3c51a690c46ab86" kind="function"><name>empty</name></member>
     <member refid="classhelios_1_1event_1_1EventQueue_1a5a2fd34261a19ae471f4ede5bf474963" kind="function"><name>next</name></member>
   </compound>
-  <compound refid="classhelios_1_1tooling_1_1FpsMetrics" kind="class"><name>helios::tooling::FpsMetrics</name>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1a3a7d0201bc3525d76c8d13ce57669204" kind="variable"><name>history_</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1aab698ab064ec80deaa7f4f860151a4d8" kind="variable"><name>historySize_</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1adc8f9273cb02c462a5f0f6a6f2174e81" kind="variable"><name>avgFps_</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1a63927ce18180aea235f37d63614684d0" kind="variable"><name>avgFrameTime_</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1a13ba5ad46198f86717495024ec13ed1f" kind="variable"><name>lastWorkTime_</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1a5c6d0abe9389e6682f38089fa037fb59" kind="variable"><name>lastWaitTime_</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1a1a470282e9eae209edaa97547e49e72f" kind="variable"><name>frameCount_</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1aa66ecad91b3019914ff0407253046df8" kind="variable"><name>needsUpdate_</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1aee0bd84c593dc2624105f420cca51650" kind="function"><name>update</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1ae8943cc6ac1a9c984c8fc54a4bd7a69c" kind="function"><name>addFrame</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1a5e280f4d8ed79364387ff656ae2b8dfe" kind="function"><name>setHistorySize</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1ac80fe24ff63dc8bb469068ffaff1f0cf" kind="function"><name>getHistorySize</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1a5369c8f597cb4e229d95fcd33f8e27d7" kind="function"><name>getFps</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1ab41fefe34dc9fa7ee4d640750a38ef1b" kind="function"><name>getFrameTimeMs</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1a6971ce2cf9b8a57b00af0fa7aed6a530" kind="function"><name>getWorkTimeMs</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1aef8831b30ea5de405abae996f63c6b6e" kind="function"><name>getIdleTimeMs</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1a8ac9781cf4ccdc0533c907acba825647" kind="function"><name>getFrameCount</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1adc69500e3e485a47f90fa6d5163bd31f" kind="function"><name>getFrameTimeSeconds</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1a2ef5a0dcb17b135c79b3a2cb5cb1e7f1" kind="function"><name>getWorkTimeSeconds</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1aa8a39ae309db60200b319a2facf74ce2" kind="function"><name>getIdleTimeSeconds</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1aa8a90be70e58c7168aaead25bbdcbfd5" kind="function"><name>getHistory</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1acf271b3c606df57550500cc9b7d0966f" kind="function"><name>reset</name></member>
+  <compound refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics" kind="class"><name>helios::engine::tooling::FpsMetrics</name>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1aa44304d9a8fa12e0598daf53f56edab6" kind="variable"><name>history_</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1ab166b0743965dd7cf777046f46da2848" kind="variable"><name>historySize_</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1acf037103ba09e653d234795ff7f410b2" kind="variable"><name>avgFps_</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1acf54be8855e445297eb1c1fd3b18d21d" kind="variable"><name>avgFrameTime_</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1a1052d2bcaf7a47db1a30353de342350d" kind="variable"><name>lastWorkTime_</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1a3e50859e33818f0938a9c2561a499607" kind="variable"><name>lastWaitTime_</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1a51247eac1d6dbf1b55b8efd182708065" kind="variable"><name>frameCount_</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1a5956e8602270c59c517b5885c92e6d94" kind="variable"><name>needsUpdate_</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1ab6fb6b9d6b0e3e5afa8a4bbde8418af1" kind="function"><name>update</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1af833a6e7f41c5aa169c73ba6b96be9b2" kind="function"><name>addFrame</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1aba1373724df39b46b8d19cc6f316e971" kind="function"><name>setHistorySize</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1aa409a687ee1e87371274f41653702159" kind="function"><name>getHistorySize</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1af6f7e9d36b9e499216e2b8f573ade6d5" kind="function"><name>getFps</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1a902c44f12d326e5f4cb4d3643b62dd8c" kind="function"><name>getFrameTimeMs</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1a2cd3a59669f6755c77681af1a8e890d5" kind="function"><name>getWorkTimeMs</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1a1e58ec32b7bfe1470a48d63fd3f81e9e" kind="function"><name>getIdleTimeMs</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1ab8bd08959d1021083708d14456edb4c4" kind="function"><name>getFrameCount</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1af61aa224056329e89d7cadacf895b33e" kind="function"><name>getFrameTimeSeconds</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1ac873e7ed9952b1b5bb724393af6da1ab" kind="function"><name>getWorkTimeSeconds</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1a89c2f97f8bc7f8e8602beeab2326247e" kind="function"><name>getIdleTimeSeconds</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1ae28442d7fa258e117a87f55a4fd39368" kind="function"><name>getHistory</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1ac313274306dac08211169482bf243f53" kind="function"><name>reset</name></member>
   </compound>
   <compound refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget" kind="class"><name>helios::ext::imgui::widgets::FpsWidget</name>
-    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1af7c3bb5200e4d97215af2293cfc37efd" kind="variable"><name>fpsMetrics_</name></member>
-    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1af2933944234d2a40a6a8f4b2370dd5b4" kind="variable"><name>framePacer_</name></member>
+    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1ad75bfec7c19cf21b5926579b68ec0ec0" kind="variable"><name>fpsMetrics_</name></member>
+    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a66f0505fe16e0cd919904b8aaca1a118" kind="variable"><name>framePacer_</name></member>
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a602ce264527f5c72c180b471d47f37ff" kind="variable"><name>targetFpsInput_</name></member>
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1ab79c767acc553c230f855de10af2627a" kind="variable"><name>showInSeconds_</name></member>
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a6e6366a82bafd2cd1c948e57091adf1b" kind="variable"><name>historySizeInput_</name></member>
-    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a5beb965047e8e583295ced59916687cd" kind="function"><name>FpsWidget</name></member>
+    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a8054bfc5ba37251f2abcd4ae88b83ded" kind="function"><name>FpsWidget</name></member>
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a17f388a994c99823df57e0a2c014df4f" kind="function"><name>draw</name></member>
   </compound>
   <compound refid="classhelios_1_1window_1_1event_1_1FrameBufferResizeEvent" kind="class"><name>helios::window::event::FrameBufferResizeEvent</name>
@@ -407,24 +439,26 @@
     <member refid="classhelios_1_1window_1_1event_1_1FrameBufferResizeEvent_1a48c03ab86ea3ba9358c6c9b95a810a8c" kind="function"><name>FrameBufferResizeEvent</name></member>
     <member refid="classhelios_1_1window_1_1event_1_1FrameBufferResizeEvent_1a007ff0e741584eb88b5a7a9653af3d06" kind="function"><name>toString</name></member>
   </compound>
-  <compound refid="classhelios_1_1engine_1_1FramePacer" kind="class"><name>helios::engine::FramePacer</name>
-    <member refid="classhelios_1_1engine_1_1FramePacer_1a08c5f7072af7d40c420438cd40ac9472" kind="variable"><name>stopwatch_</name></member>
-    <member refid="classhelios_1_1engine_1_1FramePacer_1a100210eb083957c7cb9e2c78914453b9" kind="variable"><name>targetFps_</name></member>
-    <member refid="classhelios_1_1engine_1_1FramePacer_1a6cfb7ba87a5da0cb5ab0a7c0ff5938fd" kind="function"><name>FramePacer</name></member>
-    <member refid="classhelios_1_1engine_1_1FramePacer_1ab6c8eedb96c5252dd75335e67cc082d1" kind="function"><name>setTargetFps</name></member>
-    <member refid="classhelios_1_1engine_1_1FramePacer_1af108f079857c8a5cbbb674bfdd87fb47" kind="function"><name>getTargetFps</name></member>
-    <member refid="classhelios_1_1engine_1_1FramePacer_1a6bd8aee9b1656f7e9731d74909823f14" kind="function"><name>beginFrame</name></member>
-    <member refid="classhelios_1_1engine_1_1FramePacer_1a32ee1e380de39424a708a979a982d19d" kind="function"><name>sync</name></member>
+  <compound refid="classhelios_1_1engine_1_1tooling_1_1FramePacer" kind="class"><name>helios::engine::tooling::FramePacer</name>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1aacdb3ed90d858b5e54ef6fdf24eb6dde" kind="variable"><name>stopwatch_</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a0b30f32b681fe90b77b985c9b86762c7" kind="variable"><name>targetFps_</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a19da16d13fb67519b06e64f7cdd44bc7" kind="function"><name>FramePacer</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a432af3249703e9edab2712a7bc577699" kind="function"><name>setTargetFps</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a69df9490a44888bd14297544e380ae7b" kind="function"><name>getTargetFps</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a44ad35ea34434c3ce534ad032a49c409" kind="function"><name>beginFrame</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1ac6b55e3ef2b685222358c14e69e89f06" kind="function"><name>sync</name></member>
   </compound>
-  <compound refid="structhelios_1_1engine_1_1FrameStats" kind="struct"><name>helios::engine::FrameStats</name>
-    <member refid="structhelios_1_1engine_1_1FrameStats_1ab76f59f1bd1a35ee9d4316fdb46efa63" kind="variable"><name>totalFrameTime</name></member>
-    <member refid="structhelios_1_1engine_1_1FrameStats_1a09bdca6ddc99e99be4868157f069a385" kind="variable"><name>workTime</name></member>
-    <member refid="structhelios_1_1engine_1_1FrameStats_1a531092b7438c7c37a7c6e5f19249efb4" kind="variable"><name>waitTime</name></member>
+  <compound refid="structhelios_1_1engine_1_1tooling_1_1FrameStats" kind="struct"><name>helios::engine::tooling::FrameStats</name>
+    <member refid="structhelios_1_1engine_1_1tooling_1_1FrameStats_1ab04381ee38036ba51eadacaea264d8dc" kind="variable"><name>totalFrameTime</name></member>
+    <member refid="structhelios_1_1engine_1_1tooling_1_1FrameStats_1a08981b4423ccc2ffca7a0563f080e242" kind="variable"><name>workTime</name></member>
+    <member refid="structhelios_1_1engine_1_1tooling_1_1FrameStats_1a440b831ec15460153d47deda0ad76e9f" kind="variable"><name>waitTime</name></member>
   </compound>
   <compound refid="classhelios_1_1scene_1_1FrustumCullingStrategy" kind="class"><name>helios::scene::FrustumCullingStrategy</name>
     <member refid="classhelios_1_1scene_1_1FrustumCullingStrategy_1ad9f145bb29b43f0142eb417f14e83498" kind="function"><name>~FrustumCullingStrategy</name></member>
     <member refid="classhelios_1_1scene_1_1FrustumCullingStrategy_1a6132bcbaab01c563b08a97036f985e5a" kind="function"><name>FrustumCullingStrategy</name></member>
     <member refid="classhelios_1_1scene_1_1FrustumCullingStrategy_1a12f23b3d9ecc16858fedf7483d9890ae" kind="function"><name>cull</name></member>
+  </compound>
+  <compound refid="structhelios_1_1engine_1_1game_1_1event_1_1GameLoopEventBusGroup" kind="struct"><name>helios::engine::game::event::GameLoopEventBusGroup</name>
   </compound>
   <compound refid="classhelios_1_1engine_1_1game_1_1GameObject" kind="class"><name>helios::engine::game::GameObject</name>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a8ccca9fdee32b72202b6b1cca51288c3" kind="variable"><name>guid_</name></member>
@@ -438,6 +472,8 @@
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1ae5dcc52eda581579cb00e9c4fff90a37" kind="function"><name>getOrAdd</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a1de477ec6f0718697589c8d69498939d" kind="function"><name>get</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a75ba7876058a260289f28b39c6fce25a" kind="function"><name>has</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1ab4eb8c1edaf534f632772bc6e6b339b3" kind="function"><name>hasEnabledComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a8dd8bd8a83a90aa32770e705f2c81b59" kind="function"><name>hasDisabledComponent</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a64afc8b3ae7ed69e9763d51169328af2" kind="function"><name>update</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1abf3cf53d3aa0c9b62da27d7934928168" kind="function"><name>guid</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a1604683eea731721ee7193a004794b21" kind="function"><name>isActive</name></member>
@@ -584,8 +620,8 @@
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a3c520229c0ff0a74019dc10fcb71a439" kind="function"><name>update</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a4e85936a3662c8dfc85cf83e2e901541" kind="function"><name>addGameObject</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a10feb30a293f8266c398fc5b42872a4a" kind="function"><name>find</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0b4dbd1c69f3529fb722b06088500a9e" kind="function"><name>find</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ad0c11deb99d085edf7c13a448d4866fa" kind="function"><name>find</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a54beb57b70182fe3af35aecab6e070ed" kind="function"><name>find</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a74d32688101ad9291574a8a19a8edc8a" kind="function"><name>find</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1aada0325e1ee9928451c6149a6f5643b3" kind="function"><name>find</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0e8351e088564887aaabd806752e30f2" kind="function"><name>removeGameObject</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0a28cfa4a49e74a11b4c1420d99bb72d" kind="function"><name>gameObjects</name></member>
@@ -656,14 +692,48 @@
     <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Grid_1a0cfe72303608a25721b9621d71c21376" kind="function"><name>Grid</name></member>
     <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Grid_1ab98957f39cd0aca57ad18525ea9c85e8" kind="function"><name>primitiveType</name></member>
   </compound>
+  <compound refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1GridCell" kind="struct"><name>helios::engine::game::systems::physics::GridCollisionDetectionSystem::GridCell</name>
+    <member refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1GridCell_1a6e900518fe0383e902c3c0641f6df7b8" kind="variable"><name>collisionCandidates</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1GridCell_1abfa15f6f7256d4c927b5b4694bd12766" kind="function"><name>clear</name></member>
+  </compound>
+  <compound refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem" kind="class"><name>helios::engine::game::systems::physics::GridCollisionDetectionSystem</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1aa1afe91f11214f96099cc0e392e98105" kind="variable"><name>logger_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1afc419768bab54e1115697e4c5110d5ef" kind="variable"><name>solvedCollisions_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a94d72ed93abd0557bb34734c49fda869" kind="variable"><name>cellSize_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a8bad6e047fd8aaa8520d739b41c45b70" kind="variable"><name>gridBounds_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1aaa8222c3650f81a4793b35a63a882d3f" kind="variable"><name>cells_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a3b6d249d1b97ae4f5654ecb9d1a52abc" kind="variable"><name>cellsX_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1aec8c5a1c7ccb2121dd7d13f965fab8cc" kind="variable"><name>cellsY_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a88e2c9dfdda4101c153b9ab215f7d29e" kind="variable"><name>cellsZ_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1ab8e183d918eab1ecb80d95e17f103b77" kind="variable"><name>trackedCells_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1aa9221e503d157cee81c57de9487c5651" kind="function"><name>initGrid</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a6d6a9a91dc9ac63ac8f872df9645e29d" kind="function"><name>prepareCollisionDetection</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a7c97a20a3412085c21a1fa03492335d9" kind="function"><name>postEvent</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a00fb7bf97e26fb7c14ad974a43929844" kind="function"><name>findCollisionType</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a61adff29d4e0d5df7cd94bfd0873aa4a" kind="function"><name>GridCollisionDetectionSystem</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1afbdf17442ab9ff6e8fca1c43f5677314" kind="function"><name>update</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a12f8dd63e0e9f1f185678d01ab9b0e14" kind="function"><name>worldBoundsToGridBounds</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a104f6ed7446c5cb5cd6944ef7bce51dc" kind="function"><name>updateCollisionCandidate</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1aa1dad076c58ad7ae95262162bd364689" kind="function"><name>solveCell</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1ac5985971bc1c1f1cfcb0e41fc5863cf8" kind="function"><name>cell</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a757b591359bd905ec551bf64f72c14ad" kind="function"><name>cellIndex</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a08bce6c9fde4db67d0f6978663bf77d7" kind="function"><name>cellsX</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a6c831ce0f6cca510f6f97038d0e42398" kind="function"><name>cellsY</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a81d2efb343c1622d98f9f262fce07626" kind="function"><name>cellsZ</name></member>
+  </compound>
   <compound refid="classhelios_1_1util_1_1Guid" kind="class"><name>helios::util::Guid</name>
     <member refid="classhelios_1_1util_1_1Guid_1ab2ced4c00a25e6304adab843e0226746" kind="variable"><name>value_</name></member>
     <member refid="classhelios_1_1util_1_1Guid_1a7b481be503f8d379fddd82342e569060" kind="function"><name>Guid</name></member>
     <member refid="classhelios_1_1util_1_1Guid_1a56c29dc3db8911269e868b4581e621ec" kind="function"><name>operator==</name></member>
     <member refid="classhelios_1_1util_1_1Guid_1a2978dd83ba248095e02b05d8a33271d0" kind="function"><name>operator!=</name></member>
+    <member refid="classhelios_1_1util_1_1Guid_1a7d0970d3c0663ba7305297a3bf80ea98" kind="function"><name>operator&lt;</name></member>
+    <member refid="classhelios_1_1util_1_1Guid_1a8e11af4b0525df68918a3f3e8d2726af" kind="function"><name>operator&gt;</name></member>
     <member refid="classhelios_1_1util_1_1Guid_1a42652f894bf300b8d3060a1d8352458c" kind="function"><name>value</name></member>
     <member refid="classhelios_1_1util_1_1Guid_1a2be0de1a0c0c0d321459531e9b308c34" kind="function"><name>hash</name></member>
     <member refid="classhelios_1_1util_1_1Guid_1abec6ac186114474b23bfb8369e4080a9" kind="function"><name>generate</name></member>
+  </compound>
+  <compound refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1GuidPairHash" kind="struct"><name>helios::engine::game::systems::physics::GridCollisionDetectionSystem::GuidPairHash</name>
+    <member refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1GuidPairHash_1a53cf1b18d96c3cfad1c4081ae8915ca8" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4" kind="struct"><name>std::hash&lt; helios::util::Guid &gt;</name>
     <member refid="structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4_1a60abc24fa057aaf88b4ee94437da80bf" kind="function"><name>operator()</name></member>
@@ -1135,6 +1205,24 @@
     <member refid="classhelios_1_1util_1_1Random_1a65f34a4c69ccb7dc6e12faf42c62ad86" kind="function"><name>Random</name></member>
     <member refid="classhelios_1_1util_1_1Random_1a8f32c6075d653622da519b783386a205" kind="function"><name>randomFloat</name></member>
   </compound>
+  <compound refid="classhelios_1_1core_1_1data_1_1ReadBuffer" kind="class"><name>helios::core::data::ReadBuffer</name>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadBuffer_1ae9f54304116740e5e49b8c6811d153e3" kind="friend"><name>ReadWriteDoubleBuffer&lt; T &gt;</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadBuffer_1a66808c714fe0afa1dae59dc01571b66e" kind="variable"><name>bufferData_</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadBuffer_1a8b915c850ece8680f12435bd20e23109" kind="function"><name>bufferData</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadBuffer_1a45d07ce7c36451f8609f8e81b27df51d" kind="function"><name>read</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadBuffer_1ab868068c52d6901ff9845f53f5f14ba2" kind="function"><name>reserve</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadBuffer_1aded17804e932f01e06eea4a1052462fd" kind="function"><name>clear</name></member>
+  </compound>
+  <compound refid="classhelios_1_1core_1_1data_1_1ReadWriteDoubleBuffer" kind="class"><name>helios::core::data::ReadWriteDoubleBuffer</name>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadWriteDoubleBuffer_1a8d5e6471b2e119b5fe03310fb0335c24" kind="variable"><name>readBuffer_</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadWriteDoubleBuffer_1adf92da668658fac0d82ee52031aeaabc" kind="variable"><name>writeBuffer_</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadWriteDoubleBuffer_1abde09922dfdcb5a892c05794b0ecf61f" kind="function"><name>reserve</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadWriteDoubleBuffer_1ad4686a51e53f044d0fe8316f380e6e79" kind="function"><name>push</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadWriteDoubleBuffer_1a71fb4913a5bf404ccdf4d188ee194250" kind="function"><name>read</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadWriteDoubleBuffer_1ac2c1f32a2626f022fec2e01bcaf53eda" kind="function"><name>swap</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadWriteDoubleBuffer_1a2847c40bc8863dc73bb66764471814ec" kind="function"><name>clearReadBuffer</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadWriteDoubleBuffer_1ade423179f2f3dbc2af1c7f5234cdc253" kind="function"><name>clearWriteBuffer</name></member>
+  </compound>
   <compound refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Rectangle" kind="struct"><name>helios::rendering::asset::shape::basic::Rectangle</name>
     <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Rectangle_1a107d9bec5afd9fdf6e99ca68deee8f7f" kind="function"><name>Rectangle</name></member>
     <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Rectangle_1a14b69420627783fd6097998d61a06a5a" kind="function"><name>primitiveType</name></member>
@@ -1427,6 +1515,15 @@
     <member refid="structhelios_1_1scene_1_1SnapshotItem_1a3145126ee37604f07f27f3f8ed8d30e2" kind="function"><name>renderable</name></member>
     <member refid="structhelios_1_1scene_1_1SnapshotItem_1a9b1e4c1e12d5c92284036256995442f5" kind="function"><name>worldMatrix</name></member>
   </compound>
+  <compound refid="classhelios_1_1engine_1_1game_1_1event_1_1SolidCollisionEvent" kind="class"><name>helios::engine::game::event::SolidCollisionEvent</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1SolidCollisionEvent_1a707397470044d84898489c6c35e3add2" kind="variable"><name>source_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1SolidCollisionEvent_1a0cf90ae3576f26f7704aafb388e5516f" kind="variable"><name>match_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1SolidCollisionEvent_1a9cdc519b8c12d9993b2a0ead5e571773" kind="variable"><name>contact_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1SolidCollisionEvent_1acce30e4284f277d708b26b6f672bcf7a" kind="function"><name>SolidCollisionEvent</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1SolidCollisionEvent_1a5b5a05ff168d759af2a948b72a55bbde" kind="function"><name>contact</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1SolidCollisionEvent_1af641a4f8fc7821447a922ab4b7745ff1" kind="function"><name>source</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1SolidCollisionEvent_1a8f161faefc0e135d43d086b3e68e3d4e" kind="function"><name>match</name></member>
+  </compound>
   <compound refid="classhelios_1_1engine_1_1game_1_1SpawnCondition" kind="class"><name>helios::engine::game::SpawnCondition</name>
     <member refid="classhelios_1_1engine_1_1game_1_1SpawnCondition_1a3c2b7fbd1138483584d1a6f14ab40adb" kind="function"><name>~SpawnCondition</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1SpawnCondition_1ab7745a17eaf091b9be765aa6b616aaa1" kind="function"><name>spawnBudget</name></member>
@@ -1530,11 +1627,38 @@
     <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Triangle_1acfd0d45878444edb071fb66cd8d0ee1d" kind="function"><name>Triangle</name></member>
     <member refid="structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Triangle_1a5b1f6d81020ef7c143e70cc177faa8fc" kind="function"><name>primitiveType</name></member>
   </compound>
+  <compound refid="classhelios_1_1engine_1_1game_1_1event_1_1TriggerCollisionEvent" kind="class"><name>helios::engine::game::event::TriggerCollisionEvent</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1TriggerCollisionEvent_1ae2c85dceb0fa278af3830f40fde3ad93" kind="variable"><name>source_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1TriggerCollisionEvent_1a2353fe1fbe9f0cefa95f84d51a8f9608" kind="variable"><name>match_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1TriggerCollisionEvent_1af8ea164e0334100b66df989cd1f7ebf3" kind="variable"><name>contact_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1TriggerCollisionEvent_1a6e1bfa2aab4c61eafd73d7e8eec66d5c" kind="function"><name>TriggerCollisionEvent</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1TriggerCollisionEvent_1ad5b0b05aae503393211e1fa517b5c4e9" kind="function"><name>contact</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1TriggerCollisionEvent_1a578612b649f40aed2d24f8c6baf41c7a" kind="function"><name>source</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1TriggerCollisionEvent_1a89561847267cdda19260fe0b988a3ef0" kind="function"><name>match</name></member>
+  </compound>
   <compound refid="classhelios_1_1engine_1_1game_1_1components_1_1input_1_1TwinStickInputComponent" kind="class"><name>helios::engine::game::components::input::TwinStickInputComponent</name>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1input_1_1TwinStickInputComponent_1a5fb938cd0fcf1b3d9109eedf79b07e6d" kind="variable"><name>useDedicatedShootInput_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1input_1_1TwinStickInputComponent_1aaeab3d39edea2bbbb2da0cf521fd6059" kind="function"><name>update</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1input_1_1TwinStickInputComponent_1a8d22ccbe2b41ea75fb9840f6ea38592f" kind="function"><name>setUseDedicatedShootInput</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1input_1_1TwinStickInputComponent_1a650c68ef2b82352cd674fc37e6e99ef1" kind="function"><name>useDedicatedShootInput</name></member>
+  </compound>
+  <compound refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer" kind="class"><name>helios::core::data::TypeIndexedDoubleBuffer</name>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1aef06d4f5f0efda8990720b5e91b891db" kind="variable"><name>buffers_</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1a8e671ac564aca20f225769bc6615032a" kind="function"><name>index</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1a6c0480a641075cdf4246ad7f0d03edad" kind="function"><name>~TypeIndexedDoubleBuffer</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1aa7b4ee2009864c7f775c6368fbc03cd3" kind="function"><name>TypeIndexedDoubleBuffer</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1a1d5ba1bcf6a4d1ad5b9369832a6fff8b" kind="function"><name>push</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1a426418e066ba58d17291a6196efc03bf" kind="function"><name>read</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1a0960e21d4d3cfb8d449035a17c65d936" kind="function"><name>reserve</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1a93889de7f1ada54cf7f7e7bb9429ba83" kind="function"><name>getOrCreateBuffer</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1add644c3f3236fd8427ca71065b61a9a6" kind="function"><name>swapBuffers</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1a0a514a3b92c16fe059835f09ede389ca" kind="function"><name>clearReadBuffers</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1ad9ffddeb77bd0ca504c570941d39cc5c" kind="function"><name>clearWriteBuffers</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1a5b747feb559266a39c8c92cb87b0077d" kind="function"><name>writeSink</name></member>
+  </compound>
+  <compound refid="classhelios_1_1core_1_1data_1_1TypeIndexer" kind="class"><name>helios::core::data::TypeIndexer</name>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexer_1a613d0231ae579f40c48a355758c67612" kind="variable"><name>counter_</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexer_1a33aff035cb667c63fcd123a69a91b3cc" kind="function"><name>typeIndex</name></member>
   </compound>
   <compound refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap" kind="class"><name>helios::rendering::shader::UniformValueMap</name>
     <member refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap_1a4f039c48836f62d3c6b5243b5d55cefb" kind="variable"><name>map_</name></member>
@@ -1555,15 +1679,17 @@
   <compound refid="structhelios_1_1engine_1_1game_1_1UpdateContext" kind="struct"><name>helios::engine::game::UpdateContext</name>
     <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a7d440648e01475cbe5049a57c60708a0" kind="variable"><name>deltaTime_</name></member>
     <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a41b2990fb57e9a466b697a17c33b2e39" kind="variable"><name>inputSnapshot_</name></member>
-    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a653d1c7cac75d90e1c15baa8ad334b4c" kind="variable"><name>commandBuffer_</name></member>
-    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a58f525767ddae54935821b76dcc4f1ed" kind="variable"><name>gameWorld_</name></member>
-    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a2144af14fa3ae62f75de20cfb4eea5a6" kind="function"><name>UpdateContext</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1afbc73e172891c74d7ba678c26b48dfcf" kind="variable"><name>commandBuffer_</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1aefa8a4a59fa64362e4688997806bddaa" kind="variable"><name>gameWorld_</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1ac2a9beea57e0e291882c7f27fe2d6fbe" kind="variable"><name>eventSink_</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a3aa551f811300eff3d5be9f9db202469" kind="function"><name>UpdateContext</name></member>
     <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a6c701eadfa46994b96fbf00d2026489f" kind="function"><name>deltaTime</name></member>
     <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a0b42a27336552776221f1c260d5abdd2" kind="function"><name>setDeltaTime</name></member>
-    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1abab0869bbecf4800e77d2fa355d66a9e" kind="function"><name>inputSnapshot</name></member>
-    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1ad7d1812f2b80a365d37df32228f85ecd" kind="function"><name>setInputSnapshot</name></member>
-    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a8282c9dcfe53edfa615372dc537d4e76" kind="function"><name>commandBuffer</name></member>
-    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1ae12523c4ac013b3b4907dd83cba3519e" kind="function"><name>gameWorld</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1ab8b649b4f03157ab8ca65bdd54fa91e2" kind="function"><name>inputSnapshot</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1ad2f0de05f125c38ead3efc23fdb7d7dc" kind="function"><name>setInputSnapshot</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1aa07a1cea4e44509a75394436e190c054" kind="function"><name>commandBuffer</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1aa00ba6ef8486bd4d451f673b046721c6" kind="function"><name>gameWorld</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1aa80c54f8ba498be063e4ef651c0dca05" kind="function"><name>pushEvent</name></member>
   </compound>
   <compound refid="structhelios_1_1math_1_1vec2" kind="struct"><name>helios::math::vec2</name>
     <member refid="structhelios_1_1math_1_1vec2_1a27c76024d0a33a2e8166abb8248352df" kind="variable"><name>v</name></member>
@@ -1694,7 +1820,22 @@
     <member refid="classhelios_1_1app_1_1controller_1_1WindowRenderingController_1a5ad51073d5249874f036abc437da1317" kind="variable"><name>logger_</name></member>
     <member refid="classhelios_1_1app_1_1controller_1_1WindowRenderingController_1ace819d72b524524ee6b8e596ae96b859" kind="function"><name>onFrameBufferResize</name></member>
   </compound>
+  <compound refid="classhelios_1_1core_1_1data_1_1WriteBuffer" kind="class"><name>helios::core::data::WriteBuffer</name>
+    <member refid="classhelios_1_1core_1_1data_1_1WriteBuffer_1ae9f54304116740e5e49b8c6811d153e3" kind="friend"><name>ReadWriteDoubleBuffer&lt; T &gt;</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1WriteBuffer_1a0012c5a9f6081089b6c04af2943654e5" kind="variable"><name>bufferData_</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1WriteBuffer_1a910f5fe9172bebb2e7692b36e0f7ab5b" kind="function"><name>bufferData</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1WriteBuffer_1a309ab5b0750eb814fc7cc8a4bdebeec0" kind="function"><name>push</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1WriteBuffer_1a64de30da6ce3e4b37ae627bf003ddafb" kind="function"><name>reserve</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1WriteBuffer_1a04bd07a528dc02a3d8487c86d3661b16" kind="function"><name>clear</name></member>
+  </compound>
+  <compound refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1_1WriteSink" kind="class"><name>helios::core::data::TypeIndexedDoubleBuffer::WriteSink</name>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1_1WriteSink_1a1cb31d5e54c48f5f01f3d7e81339f814" kind="variable"><name>db_</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1_1WriteSink_1a000e655858fe9065005787d6470c1de1" kind="function"><name>WriteSink</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1_1WriteSink_1a8851d5042f1b0506d484194634d6d737" kind="function"><name>push</name></member>
+  </compound>
   <compound refid="concepthelios_1_1math_1_1Numeric" kind="concept"><name>helios::math::Numeric</name>
+  </compound>
+  <compound refid="namespace_0d042147115070223026003163037074151256232047102230" kind="namespace"><name>@042147115070223026003163037074151256232047102230</name>
   </compound>
   <compound refid="namespacehelios" kind="namespace"><name>helios</name>
   </compound>
@@ -1703,6 +1844,8 @@
   <compound refid="namespacehelios_1_1app_1_1controller" kind="namespace"><name>helios::app::controller</name>
   </compound>
   <compound refid="namespacehelios_1_1core" kind="namespace"><name>helios::core</name>
+  </compound>
+  <compound refid="namespacehelios_1_1core_1_1data" kind="namespace"><name>helios::core::data</name>
   </compound>
   <compound refid="namespacehelios_1_1core_1_1units" kind="namespace"><name>helios::core::units</name>
     <member refid="namespacehelios_1_1core_1_1units_1a13b5c00c42b03ebe1d85cd575f346e55" kind="enum"><name>Unit</name></member>
@@ -1728,10 +1871,15 @@
   <compound refid="namespacehelios_1_1engine" kind="namespace"><name>helios::engine</name>
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1game" kind="namespace"><name>helios::engine::game</name>
-    <member refid="namespacehelios_1_1engine_1_1game_1a260d868cc67d729c4dbce5e9ea0b6e47" kind="enum"><name>GameObjectFilterType</name></member>
-    <member refid="namespacehelios_1_1engine_1_1game_1a260d868cc67d729c4dbce5e9ea0b6e47a4d3d769b812b6faa6b76e1a8abaece2d" kind="enumvalue"><name>Active</name></member>
-    <member refid="namespacehelios_1_1engine_1_1game_1a260d868cc67d729c4dbce5e9ea0b6e47a3cab03c00dbd11bc3569afa0748013f0" kind="enumvalue"><name>Inactive</name></member>
-    <member refid="namespacehelios_1_1engine_1_1game_1a260d868cc67d729c4dbce5e9ea0b6e47ab1c94ca2fbc3e78fc30069c8d0f01680" kind="enumvalue"><name>All</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1aab7d6adba3cce4672682c21fb05ec571" kind="enum"><name>GameObjectFilter</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1aab7d6adba3cce4672682c21fb05ec571a6adf97f83acf6453d4a6a4b1070f3754" kind="enumvalue"><name>None</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1aab7d6adba3cce4672682c21fb05ec571a4d3d769b812b6faa6b76e1a8abaece2d" kind="enumvalue"><name>Active</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1aab7d6adba3cce4672682c21fb05ec571a3cab03c00dbd11bc3569afa0748013f0" kind="enumvalue"><name>Inactive</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1aab7d6adba3cce4672682c21fb05ec571ac2b28dd68eea15a01721595aec7ae686" kind="enumvalue"><name>ComponentEnabled</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1aab7d6adba3cce4672682c21fb05ec571a2dbabf6c32dda02da7e2db1f8c05080b" kind="enumvalue"><name>ComponentDisabled</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1aab7d6adba3cce4672682c21fb05ec571ab1c94ca2fbc3e78fc30069c8d0f01680" kind="enumvalue"><name>All</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1a8f81ad0258c8291fe26c8de6077c0e5b" kind="function"><name>operator&amp;</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1a6bfb349ea51ff5445dc27dc85c0cd621" kind="function"><name>operator|</name></member>
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1game_1_1commands" kind="namespace"><name>helios::engine::game::commands</name>
   </compound>
@@ -1749,6 +1897,10 @@
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1game_1_1components_1_1scene" kind="namespace"><name>helios::engine::game::components::scene</name>
   </compound>
+  <compound refid="namespacehelios_1_1engine_1_1game_1_1event" kind="namespace"><name>helios::engine::game::event</name>
+    <member refid="namespacehelios_1_1engine_1_1game_1_1event_1a3165d454094258640891c90d0a8ab6d0" kind="typedef"><name>GameLoopEventBus</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1_1event_1a77528665b07944a8b49455991d8eb9ad" kind="typedef"><name>GameLoopEventSink</name></member>
+  </compound>
   <compound refid="namespacehelios_1_1engine_1_1game_1_1systems" kind="namespace"><name>helios::engine::game::systems</name>
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1game_1_1systems_1_1gameplay" kind="namespace"><name>helios::engine::game::systems::gameplay</name>
@@ -1758,6 +1910,8 @@
   <compound refid="namespacehelios_1_1engine_1_1game_1_1systems_1_1post" kind="namespace"><name>helios::engine::game::systems::post</name>
   </compound>
   <compound refid="namespacehelios_1_1engine_1_1game_1_1systems_1_1scene" kind="namespace"><name>helios::engine::game::systems::scene</name>
+  </compound>
+  <compound refid="namespacehelios_1_1engine_1_1tooling" kind="namespace"><name>helios::engine::tooling</name>
   </compound>
   <compound refid="namespacehelios_1_1event" kind="namespace"><name>helios::event</name>
     <member refid="namespacehelios_1_1event_1a68d7042f97d91ed8414724453213e7f0" kind="enum"><name>PostPolicy</name></member>
@@ -1823,6 +1977,7 @@
     <member refid="namespacehelios_1_1math_1a4c90766d59f3c1ce32821bbbd3cdd62b" kind="typedef"><name>FloatingPointType</name></member>
     <member refid="namespacehelios_1_1math_1a124c0492430aeecedc1c1a5ece4ba488" kind="typedef"><name>aabbf</name></member>
     <member refid="namespacehelios_1_1math_1a3c63775a7d6ff09058288223291660b7" kind="typedef"><name>aabbi</name></member>
+    <member refid="namespacehelios_1_1math_1a55cd2251d2249ab35eb5f2ea9999f414" kind="typedef"><name>aabbui</name></member>
     <member refid="namespacehelios_1_1math_1a8cdcd5dfceca20081416ef7ac3374e01" kind="typedef"><name>aabbd</name></member>
     <member refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kind="typedef"><name>mat4f</name></member>
     <member refid="namespacehelios_1_1math_1a058bd8629e8b9fdd7914ec513cf515f5" kind="typedef"><name>mat4d</name></member>
@@ -1846,6 +2001,8 @@
     <member refid="namespacehelios_1_1math_1a8cc238c96b9b131d26357870e87ed668" kind="function"><name>scale</name></member>
     <member refid="namespacehelios_1_1math_1aca9266bbc6a927b4e082fb75d0d31434" kind="function"><name>operator|</name></member>
     <member refid="namespacehelios_1_1math_1a21fb88902bc365300cd88dad37e1d123" kind="function"><name>transformTypeMatch</name></member>
+    <member refid="namespacehelios_1_1math_1af526a25ddc0ed10b47b832bedbde26cd" kind="function"><name>overlap</name></member>
+    <member refid="namespacehelios_1_1math_1a83d3fdd630c2f9d9179d0263fa515571" kind="function"><name>overlapCenter</name></member>
     <member refid="namespacehelios_1_1math_1aee9df9ba24371aefd6a84af803813f1e" kind="function"><name>operator+</name></member>
     <member refid="namespacehelios_1_1math_1ac91a9a73632368c02a726bc3f070254d" kind="function"><name>operator*</name></member>
     <member refid="namespacehelios_1_1math_1a0e37b93487d103aa6588ba44bdb1a0b6" kind="function"><name>value_ptr</name></member>
@@ -1962,6 +2119,8 @@
   </compound>
   <compound refid="helios_2core_2__module_8ixx" kind="file"><name>_module.ixx</name>
   </compound>
+  <compound refid="helios_2core_2data_2__module_8ixx" kind="file"><name>_module.ixx</name>
+  </compound>
   <compound refid="helios_2engine_2__module_8ixx" kind="file"><name>_module.ixx</name>
   </compound>
   <compound refid="helios_2engine_2game_2__module_8ixx" kind="file"><name>_module.ixx</name>
@@ -1982,6 +2141,8 @@
   </compound>
   <compound refid="helios_2engine_2game_2components_2scene_2__module_8ixx" kind="file"><name>_module.ixx</name>
   </compound>
+  <compound refid="helios_2engine_2game_2event_2__module_8ixx" kind="file"><name>_module.ixx</name>
+  </compound>
   <compound refid="helios_2engine_2game_2systems_2__module_8ixx" kind="file"><name>_module.ixx</name>
   </compound>
   <compound refid="helios_2engine_2game_2systems_2gameplay_2__module_8ixx" kind="file"><name>_module.ixx</name>
@@ -1991,6 +2152,8 @@
   <compound refid="helios_2engine_2game_2systems_2post_2__module_8ixx" kind="file"><name>_module.ixx</name>
   </compound>
   <compound refid="helios_2engine_2game_2systems_2scene_2__module_8ixx" kind="file"><name>_module.ixx</name>
+  </compound>
+  <compound refid="helios_2engine_2tooling_2__module_8ixx" kind="file"><name>_module.ixx</name>
   </compound>
   <compound refid="helios_2event_2__module_8ixx" kind="file"><name>_module.ixx</name>
   </compound>
@@ -2023,8 +2186,6 @@
   <compound refid="helios_2rendering_2shader_2__module_8ixx" kind="file"><name>_module.ixx</name>
   </compound>
   <compound refid="helios_2scene_2__module_8ixx" kind="file"><name>_module.ixx</name>
-  </compound>
-  <compound refid="helios_2tooling_2__module_8ixx" kind="file"><name>_module.ixx</name>
   </compound>
   <compound refid="helios_2util_2__module_8ixx" kind="file"><name>_module.ixx</name>
   </compound>
@@ -2074,6 +2235,8 @@
   </compound>
   <compound refid="helios_2app_2README_8md" kind="file"><name>README.md</name>
   </compound>
+  <compound refid="helios_2core_2data_2README_8md" kind="file"><name>README.md</name>
+  </compound>
   <compound refid="helios_2core_2README_8md" kind="file"><name>README.md</name>
   </compound>
   <compound refid="helios_2engine_2game_2commands_2README_8md" kind="file"><name>README.md</name>
@@ -2092,6 +2255,8 @@
   </compound>
   <compound refid="helios_2engine_2game_2components_2scene_2README_8md" kind="file"><name>README.md</name>
   </compound>
+  <compound refid="helios_2engine_2game_2event_2README_8md" kind="file"><name>README.md</name>
+  </compound>
   <compound refid="helios_2engine_2game_2README_8md" kind="file"><name>README.md</name>
   </compound>
   <compound refid="helios_2engine_2game_2systems_2gameplay_2README_8md" kind="file"><name>README.md</name>
@@ -2105,6 +2270,8 @@
   <compound refid="helios_2engine_2game_2systems_2scene_2README_8md" kind="file"><name>README.md</name>
   </compound>
   <compound refid="helios_2engine_2README_8md" kind="file"><name>README.md</name>
+  </compound>
+  <compound refid="helios_2engine_2tooling_2README_8md" kind="file"><name>README.md</name>
   </compound>
   <compound refid="helios_2event_2README_8md" kind="file"><name>README.md</name>
   </compound>
@@ -2137,8 +2304,6 @@
   <compound refid="helios_2rendering_2shader_2README_8md" kind="file"><name>README.md</name>
   </compound>
   <compound refid="helios_2scene_2README_8md" kind="file"><name>README.md</name>
-  </compound>
-  <compound refid="helios_2tooling_2README_8md" kind="file"><name>README.md</name>
   </compound>
   <compound refid="helios_2util_2io_2README_8md" kind="file"><name>README.md</name>
   </compound>
@@ -2183,13 +2348,15 @@
   <compound refid="WindowRenderingController_8ixx" kind="file"><name>WindowRenderingController.ixx</name>
     <member refid="WindowRenderingController_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
   </compound>
+  <compound refid="ReadBuffer_8ixx" kind="file"><name>ReadBuffer.ixx</name>
+  </compound>
+  <compound refid="TypeIndexedDoubleBuffer_8ixx" kind="file"><name>TypeIndexedDoubleBuffer.ixx</name>
+  </compound>
+  <compound refid="TypeIndexer_8ixx" kind="file"><name>TypeIndexer.ixx</name>
+  </compound>
+  <compound refid="WriteBuffer_8ixx" kind="file"><name>WriteBuffer.ixx</name>
+  </compound>
   <compound refid="Transform_8ixx" kind="file"><name>Transform.ixx</name>
-  </compound>
-  <compound refid="units_8ixx" kind="file"><name>units.ixx</name>
-  </compound>
-  <compound refid="FramePacer_8ixx" kind="file"><name>FramePacer.ixx</name>
-  </compound>
-  <compound refid="FrameStats_8ixx" kind="file"><name>FrameStats.ixx</name>
   </compound>
   <compound refid="CallbackSpawnStrategy_8ixx" kind="file"><name>CallbackSpawnStrategy.ixx</name>
   </compound>
@@ -2218,6 +2385,8 @@
   </compound>
   <compound refid="AabbColliderComponent_8ixx" kind="file"><name>AabbColliderComponent.ixx</name>
   </compound>
+  <compound refid="CollisionComponent_8ixx" kind="file"><name>CollisionComponent.ixx</name>
+  </compound>
   <compound refid="DirectionComponent_8ixx" kind="file"><name>DirectionComponent.ixx</name>
   </compound>
   <compound refid="HeadingComponent_8ixx" kind="file"><name>HeadingComponent.ixx</name>
@@ -2240,9 +2409,15 @@
   </compound>
   <compound refid="SceneNodeComponent_8ixx" kind="file"><name>SceneNodeComponent.ixx</name>
   </compound>
+  <compound refid="GameLoopEventBus_8ixx" kind="file"><name>GameLoopEventBus.ixx</name>
+  </compound>
+  <compound refid="SolidCollisionEvent_8ixx" kind="file"><name>SolidCollisionEvent.ixx</name>
+  </compound>
+  <compound refid="TriggerCollisionEvent_8ixx" kind="file"><name>TriggerCollisionEvent.ixx</name>
+  </compound>
   <compound refid="GameObject_8ixx" kind="file"><name>GameObject.ixx</name>
   </compound>
-  <compound refid="GameObjectFilterType_8ixx" kind="file"><name>GameObjectFilterType.ixx</name>
+  <compound refid="GameObjectFilter_8ixx" kind="file"><name>GameObjectFilter.ixx</name>
   </compound>
   <compound refid="GameObjectPool_8ixx" kind="file"><name>GameObjectPool.ixx</name>
   </compound>
@@ -2267,6 +2442,9 @@
   </compound>
   <compound refid="ComposeTransformSystem_8ixx" kind="file"><name>ComposeTransformSystem.ixx</name>
   </compound>
+  <compound refid="GridCollisionDetectionSystem_8ixx" kind="file"><name>GridCollisionDetectionSystem.ixx</name>
+    <member refid="GridCollisionDetectionSystem_8ixx_1acbc04f24078582c7d42b2085be5d5750" kind="define"><name>HELIOS_LOG_SCOPE</name></member>
+  </compound>
   <compound refid="HeadingSystem_8ixx" kind="file"><name>HeadingSystem.ixx</name>
   </compound>
   <compound refid="LevelBoundsBehaviorSystem_8ixx" kind="file"><name>LevelBoundsBehaviorSystem.ixx</name>
@@ -2288,6 +2466,14 @@
   <compound refid="Updatable_8ixx" kind="file"><name>Updatable.ixx</name>
   </compound>
   <compound refid="UpdateContext_8ixx" kind="file"><name>UpdateContext.ixx</name>
+  </compound>
+  <compound refid="FpsMetrics_8ixx" kind="file"><name>FpsMetrics.ixx</name>
+  </compound>
+  <compound refid="FramePacer_8ixx" kind="file"><name>FramePacer.ixx</name>
+  </compound>
+  <compound refid="FrameStats_8ixx" kind="file"><name>FrameStats.ixx</name>
+  </compound>
+  <compound refid="units_8ixx" kind="file"><name>units.ixx</name>
   </compound>
   <compound refid="BasicEventManager_8ixx" kind="file"><name>BasicEventManager.ixx</name>
   </compound>
@@ -2429,8 +2615,6 @@
   </compound>
   <compound refid="SnapshotItem_8ixx" kind="file"><name>SnapshotItem.ixx</name>
   </compound>
-  <compound refid="FpsMetrics_8ixx" kind="file"><name>FpsMetrics.ixx</name>
-  </compound>
   <compound refid="Colors_8ixx" kind="file"><name>Colors.ixx</name>
   </compound>
   <compound refid="Guid_8ixx" kind="file"><name>Guid.ixx</name>
@@ -2484,9 +2668,13 @@
   </compound>
   <compound refid="dir_6a0662f282a699b80270a7344921b324" kind="dir"><name>include/helios/core</name>
   </compound>
+  <compound refid="dir_c410080f2530add24189461552c20e06" kind="dir"><name>include/helios/core/data</name>
+  </compound>
   <compound refid="dir_49e56c817e5e54854c35e136979f97ca" kind="dir"><name>docs</name>
   </compound>
   <compound refid="dir_860c9de2f65c10e8e262a0e7b5bfee5e" kind="dir"><name>include/helios/engine</name>
+  </compound>
+  <compound refid="dir_86d8e8e4bfdb09c041580463eb962dec" kind="dir"><name>include/helios/engine/game/event</name>
   </compound>
   <compound refid="dir_9b52b993eaa3e3f802dc9c71987b2802" kind="dir"><name>include/helios/event</name>
   </compound>
@@ -2558,7 +2746,7 @@
   </compound>
   <compound refid="dir_f5bf7461226e2ff6cddccbfb1a3604e3" kind="dir"><name>include/helios/util/time</name>
   </compound>
-  <compound refid="dir_136b19899be4d20901a1979f99e5abb1" kind="dir"><name>include/helios/tooling</name>
+  <compound refid="dir_b455ca46f56b25e6f79d18a91f2ddf15" kind="dir"><name>include/helios/engine/tooling</name>
   </compound>
   <compound refid="dir_0f3bb995a0a75ecfd44dd1bf3336549a" kind="dir"><name>include/helios/math/traits</name>
   </compound>
@@ -2567,6 +2755,8 @@
   <compound refid="dir_c0c6fcd240d3ec0338ff02192e6ff17b" kind="dir"><name>include/helios/input/types</name>
   </compound>
   <compound refid="dir_ec1f341d187cb06b8fc5c1e70ce7a6b5" kind="dir"><name>include/helios/math/types</name>
+  </compound>
+  <compound refid="dir_9b3d1298929a73144e250b15a31d397d" kind="dir"><name>include/helios/engine/units</name>
   </compound>
   <compound refid="dir_7f0768799dd37ef2f2adcdfec91ab1e9" kind="dir"><name>include/helios/util</name>
   </compound>
@@ -2726,12 +2916,12 @@
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1CameraWidget_1a07fc0fbbf52e97d447e2f3177980dd00" kind="function"><name>draw</name></member>
   </compound>
   <compound refid="module__helios_8ext_8imgui_8widgets_8FpsWidget" kind="module"><name>helios.ext.imgui.widgets.FpsWidget</name>
-    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1af7c3bb5200e4d97215af2293cfc37efd" kind="variable"><name>fpsMetrics_</name></member>
-    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1af2933944234d2a40a6a8f4b2370dd5b4" kind="variable"><name>framePacer_</name></member>
+    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1ad75bfec7c19cf21b5926579b68ec0ec0" kind="variable"><name>fpsMetrics_</name></member>
+    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a66f0505fe16e0cd919904b8aaca1a118" kind="variable"><name>framePacer_</name></member>
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a602ce264527f5c72c180b471d47f37ff" kind="variable"><name>targetFpsInput_</name></member>
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1ab79c767acc553c230f855de10af2627a" kind="variable"><name>showInSeconds_</name></member>
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a6e6366a82bafd2cd1c948e57091adf1b" kind="variable"><name>historySizeInput_</name></member>
-    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a5beb965047e8e583295ced59916687cd" kind="function"><name>FpsWidget</name></member>
+    <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a8054bfc5ba37251f2abcd4ae88b83ded" kind="function"><name>FpsWidget</name></member>
     <member refid="classhelios_1_1ext_1_1imgui_1_1widgets_1_1FpsWidget_1a17f388a994c99823df57e0a2c014df4f" kind="function"><name>draw</name></member>
   </compound>
   <compound refid="module__helios_8ext_8imgui_8widgets_8GamepadSettingsWidget" kind="module"><name>helios.ext.imgui.widgets.GamepadSettingsWidget</name>
@@ -2915,6 +3105,51 @@
   </compound>
   <compound refid="module__helios_8core" kind="module"><name>helios.core</name>
   </compound>
+  <compound refid="module__helios_8core_8data" kind="module"><name>helios.core.data</name>
+  </compound>
+  <compound refid="module__helios_8core_8data_8ReadBuffer" kind="module"><name>helios.core.data.ReadBuffer</name>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadBuffer_1a66808c714fe0afa1dae59dc01571b66e" kind="variable"><name>bufferData_</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadBuffer_1a8b915c850ece8680f12435bd20e23109" kind="function"><name>bufferData</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadBuffer_1a45d07ce7c36451f8609f8e81b27df51d" kind="function"><name>read</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadBuffer_1ab868068c52d6901ff9845f53f5f14ba2" kind="function"><name>reserve</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadBuffer_1aded17804e932f01e06eea4a1052462fd" kind="function"><name>clear</name></member>
+  </compound>
+  <compound refid="module__helios_8core_8data_8TypeIndexedDoubleBuffer" kind="module"><name>helios.core.data.TypeIndexedDoubleBuffer</name>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadWriteDoubleBuffer_1a8d5e6471b2e119b5fe03310fb0335c24" kind="variable"><name>readBuffer_</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadWriteDoubleBuffer_1adf92da668658fac0d82ee52031aeaabc" kind="variable"><name>writeBuffer_</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1aef06d4f5f0efda8990720b5e91b891db" kind="variable"><name>buffers_</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1_1WriteSink_1a1cb31d5e54c48f5f01f3d7e81339f814" kind="variable"><name>db_</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadWriteDoubleBuffer_1abde09922dfdcb5a892c05794b0ecf61f" kind="function"><name>reserve</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadWriteDoubleBuffer_1ad4686a51e53f044d0fe8316f380e6e79" kind="function"><name>push</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadWriteDoubleBuffer_1a71fb4913a5bf404ccdf4d188ee194250" kind="function"><name>read</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadWriteDoubleBuffer_1ac2c1f32a2626f022fec2e01bcaf53eda" kind="function"><name>swap</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadWriteDoubleBuffer_1a2847c40bc8863dc73bb66764471814ec" kind="function"><name>clearReadBuffer</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1ReadWriteDoubleBuffer_1ade423179f2f3dbc2af1c7f5234cdc253" kind="function"><name>clearWriteBuffer</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1a8e671ac564aca20f225769bc6615032a" kind="function"><name>index</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1a6c0480a641075cdf4246ad7f0d03edad" kind="function"><name>~TypeIndexedDoubleBuffer</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1aa7b4ee2009864c7f775c6368fbc03cd3" kind="function"><name>TypeIndexedDoubleBuffer</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1a1d5ba1bcf6a4d1ad5b9369832a6fff8b" kind="function"><name>push</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1a426418e066ba58d17291a6196efc03bf" kind="function"><name>read</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1a0960e21d4d3cfb8d449035a17c65d936" kind="function"><name>reserve</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1a93889de7f1ada54cf7f7e7bb9429ba83" kind="function"><name>getOrCreateBuffer</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1add644c3f3236fd8427ca71065b61a9a6" kind="function"><name>swapBuffers</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1a0a514a3b92c16fe059835f09ede389ca" kind="function"><name>clearReadBuffers</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1ad9ffddeb77bd0ca504c570941d39cc5c" kind="function"><name>clearWriteBuffers</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1_1WriteSink_1a000e655858fe9065005787d6470c1de1" kind="function"><name>WriteSink</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1_1WriteSink_1a8851d5042f1b0506d484194634d6d737" kind="function"><name>push</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer_1a5b747feb559266a39c8c92cb87b0077d" kind="function"><name>writeSink</name></member>
+  </compound>
+  <compound refid="module__helios_8core_8data_8TypeIndexer" kind="module"><name>helios.core.data.TypeIndexer</name>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexer_1a613d0231ae579f40c48a355758c67612" kind="variable"><name>counter_</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1TypeIndexer_1a33aff035cb667c63fcd123a69a91b3cc" kind="function"><name>typeIndex</name></member>
+  </compound>
+  <compound refid="module__helios_8core_8data_8WriteBuffer" kind="module"><name>helios.core.data.WriteBuffer</name>
+    <member refid="classhelios_1_1core_1_1data_1_1WriteBuffer_1a0012c5a9f6081089b6c04af2943654e5" kind="variable"><name>bufferData_</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1WriteBuffer_1a910f5fe9172bebb2e7692b36e0f7ab5b" kind="function"><name>bufferData</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1WriteBuffer_1a309ab5b0750eb814fc7cc8a4bdebeec0" kind="function"><name>push</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1WriteBuffer_1a64de30da6ce3e4b37ae627bf003ddafb" kind="function"><name>reserve</name></member>
+    <member refid="classhelios_1_1core_1_1data_1_1WriteBuffer_1a04bd07a528dc02a3d8487c86d3661b16" kind="function"><name>clear</name></member>
+  </compound>
   <compound refid="module__helios_8core_8Transform" kind="module"><name>helios.core.Transform</name>
     <member refid="classhelios_1_1core_1_1Transform_1a6e39c60efe56a62e4e7542905713d73d" kind="variable"><name>needsUpdate_</name></member>
     <member refid="classhelios_1_1core_1_1Transform_1af5af4106548fb00371b4451c33e231cb" kind="variable"><name>rotation_</name></member>
@@ -2934,42 +3169,7 @@
     <member refid="classhelios_1_1core_1_1Transform_1a91bdb86377e051a727c02c6573d5947e" kind="function"><name>transform</name></member>
     <member refid="classhelios_1_1core_1_1Transform_1a529d67903cbe3b547a07637f37a85b57" kind="function"><name>needsUpdate</name></member>
   </compound>
-  <compound refid="module__helios_8core_8units" kind="module"><name>helios.core.units</name>
-    <member refid="namespacehelios_1_1core_1_1units_1a13b5c00c42b03ebe1d85cd575f346e55" kind="enum"><name>Unit</name></member>
-    <member refid="namespacehelios_1_1core_1_1units_1a13b5c00c42b03ebe1d85cd575f346e55a17c9c40b9db5a0983d1075a012c1f90a" kind="enumvalue"><name>Meter</name></member>
-    <member refid="namespacehelios_1_1core_1_1units_1a13b5c00c42b03ebe1d85cd575f346e55aa2edad498840d7233b2f56697b02e623" kind="enumvalue"><name>Centimeter</name></member>
-    <member refid="namespacehelios_1_1core_1_1units_1a13b5c00c42b03ebe1d85cd575f346e55a8f19a8c7566af54ea8981029730e5465" kind="enumvalue"><name>Seconds</name></member>
-    <member refid="namespacehelios_1_1core_1_1units_1a13b5c00c42b03ebe1d85cd575f346e55a127d04b8e81bf4b13fbdd35647a0e8b8" kind="enumvalue"><name>MilliSeconds</name></member>
-    <member refid="namespacehelios_1_1core_1_1units_1ab5f933228ed9ab64410fde3b0a23272e" kind="variable"><name>HELIOS_SPATIAL_UNIT</name></member>
-    <member refid="namespacehelios_1_1core_1_1units_1a64f86d9012d9b67419b315e97f5c2172" kind="variable"><name>HELIOS_TEMPORAL_UNIT</name></member>
-    <member refid="namespacehelios_1_1core_1_1units_1a5473b1a6bc297ba19cd0bda1d08abddb" kind="variable"><name>CENTIMETERS</name></member>
-    <member refid="namespacehelios_1_1core_1_1units_1ace729ad7e380ecea1dc68139c748e4e8" kind="variable"><name>METERS</name></member>
-    <member refid="namespacehelios_1_1core_1_1units_1a205fe3ccea7988ba4b616c046b5d8246" kind="variable"><name>MILLISECONDS</name></member>
-    <member refid="namespacehelios_1_1core_1_1units_1a90333ee787d05c7f8003cace76268c41" kind="variable"><name>SECONDS</name></member>
-    <member refid="namespacehelios_1_1core_1_1units_1a44a24afd27dff622a0f8fb7d5009122c" kind="function"><name>fromCm</name></member>
-    <member refid="namespacehelios_1_1core_1_1units_1a3e0dff14fa37b52f552758069814ae54" kind="function"><name>fromM</name></member>
-    <member refid="namespacehelios_1_1core_1_1units_1af9eba268770515f70be075b04cc3eb3d" kind="function"><name>fromM</name></member>
-    <member refid="namespacehelios_1_1core_1_1units_1a2577bbed1b30219b294b8d1552117f2f" kind="function"><name>fromM</name></member>
-    <member refid="namespacehelios_1_1core_1_1units_1ae56929b63f135d167f9f10c1a1cef5d3" kind="function"><name>fromS</name></member>
-    <member refid="namespacehelios_1_1core_1_1units_1a08f92aa18e9437370fe364675a387c8f" kind="function"><name>fromMs</name></member>
-    <member refid="namespacehelios_1_1core_1_1units_1a9c75f83e0476f8560ef6b20129582381" kind="function"><name>from</name></member>
-    <member refid="namespacehelios_1_1core_1_1units_1aecd415b12f170019aa22cf947662c2f4" kind="function"><name>from</name></member>
-  </compound>
   <compound refid="module__helios_8engine" kind="module"><name>helios.engine</name>
-  </compound>
-  <compound refid="module__helios_8engine_8FramePacer" kind="module"><name>helios.engine.FramePacer</name>
-    <member refid="classhelios_1_1engine_1_1FramePacer_1a08c5f7072af7d40c420438cd40ac9472" kind="variable"><name>stopwatch_</name></member>
-    <member refid="classhelios_1_1engine_1_1FramePacer_1a100210eb083957c7cb9e2c78914453b9" kind="variable"><name>targetFps_</name></member>
-    <member refid="classhelios_1_1engine_1_1FramePacer_1a6cfb7ba87a5da0cb5ab0a7c0ff5938fd" kind="function"><name>FramePacer</name></member>
-    <member refid="classhelios_1_1engine_1_1FramePacer_1ab6c8eedb96c5252dd75335e67cc082d1" kind="function"><name>setTargetFps</name></member>
-    <member refid="classhelios_1_1engine_1_1FramePacer_1af108f079857c8a5cbbb674bfdd87fb47" kind="function"><name>getTargetFps</name></member>
-    <member refid="classhelios_1_1engine_1_1FramePacer_1a6bd8aee9b1656f7e9731d74909823f14" kind="function"><name>beginFrame</name></member>
-    <member refid="classhelios_1_1engine_1_1FramePacer_1a32ee1e380de39424a708a979a982d19d" kind="function"><name>sync</name></member>
-  </compound>
-  <compound refid="module__helios_8engine_8FrameStats" kind="module"><name>helios.engine.FrameStats</name>
-    <member refid="structhelios_1_1engine_1_1FrameStats_1ab76f59f1bd1a35ee9d4316fdb46efa63" kind="variable"><name>totalFrameTime</name></member>
-    <member refid="structhelios_1_1engine_1_1FrameStats_1a09bdca6ddc99e99be4868157f069a385" kind="variable"><name>workTime</name></member>
-    <member refid="structhelios_1_1engine_1_1FrameStats_1a531092b7438c7c37a7c6e5f19249efb4" kind="variable"><name>waitTime</name></member>
   </compound>
   <compound refid="module__helios_8engine_8game" kind="module"><name>helios.engine.game</name>
   </compound>
@@ -3019,9 +3219,14 @@
   </compound>
   <compound refid="module__helios_8engine_8game_8Component" kind="module"><name>helios.engine.game.Component</name>
     <member refid="classhelios_1_1engine_1_1game_1_1Component_1a70665759561369340448e6015f0a2552" kind="variable"><name>gameObject_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1Component_1a83c64ffb9f8ba287e9c30a8871c5976e" kind="variable"><name>isEnabled_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1Component_1abeb3af407878cf9f2d1019fdc9e2712a" kind="function"><name>~Component</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1Component_1a4a167553b4aed32f0ad96e8836a01b88" kind="function"><name>Component</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1Component_1a3a4f0b840b179c07299fc291a57fb51f" kind="function"><name>onAttach</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1Component_1ae99b4fa437cb38ce8a093d1ac7073771" kind="function"><name>isEnabled</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1Component_1ab8a1b93c0495284b0e50d4f5e48b6e07" kind="function"><name>isDisabled</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1Component_1a97304e19daafdffdfc6cae6657a45849" kind="function"><name>enable</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1Component_1a51f66da7d99ad34fb1d9d4e89c009498" kind="function"><name>disable</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1Component_1ab36bb364af461dd789e7477f1bafa13b" kind="function"><name>onActivate</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1Component_1a7e5a02b0500c65e9606839059bdda398" kind="function"><name>onDeactivate</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1Component_1a0894e93b95d6d0b71602b8803d2cc213" kind="function"><name>gameObject</name></member>
@@ -3077,6 +3282,20 @@
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1AabbColliderComponent_1ad1d727c6e7a3abe13bb4e49fa1c14c05" kind="function"><name>AabbColliderComponent</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1AabbColliderComponent_1addf3e0db2c2a332d7d9b27911cc81585" kind="function"><name>bounds</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1AabbColliderComponent_1a246b7fc71e674629b5c066b04ea1ad94" kind="function"><name>setBounds</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1AabbColliderComponent_1a216a9a2979b4f788d70b433f50d079f0" kind="function"><name>boundsInitialized</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8game_8components_8physics_8CollisionComponent" kind="module"><name>helios.engine.game.components.physics.CollisionComponent</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1ac6c46bbf1ad863b97befdd3f5b18f8fa" kind="variable"><name>layerId_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a973da37af292302904063ac5bec05406" kind="variable"><name>triggerCollisionMask_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1ac54790899660f85522a296d07073fccb" kind="variable"><name>solidCollisionMask_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a04cf81657ec653fa56752e5f27d88ebb" kind="variable"><name>isCollisionReporter_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a125339839ee8fd945183e28c00a2e693" kind="function"><name>CollisionComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a769d713a0364afdb9da98b35c26d8221" kind="function"><name>isCollisionReporter</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a9e0df16a3fb134c66d25c007322af6a6" kind="function"><name>setSolidCollisionMask</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a73854f9fc4ce213e3d9785f5d53fd2a0" kind="function"><name>setTriggerCollisionMask</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a294df526e42e8db9ad014f1a34c8c90b" kind="function"><name>solidCollisionMask</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a66ee66d41de47875faa51339fd4b80a6" kind="function"><name>triggerCollisionMask</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1CollisionComponent_1a16a670cf593f3725c0c5cb16561f2dec" kind="function"><name>layerId</name></member>
   </compound>
   <compound refid="module__helios_8engine_8game_8components_8physics_8DirectionComponent" kind="module"><name>helios.engine.game.components.physics.DirectionComponent</name>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1DirectionComponent_1aa631747c7ccb66afda36187cb4693291" kind="variable"><name>direction_</name></member>
@@ -3249,6 +3468,30 @@
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1aab326552afc91cf15da9aee068604f4f" kind="function"><name>onDeactivate</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1components_1_1scene_1_1SceneNodeComponent_1a9b4d1157d5b7259b967885e9d1c502a0" kind="function"><name>sceneNode</name></member>
   </compound>
+  <compound refid="module__helios_8engine_8game_8event" kind="module"><name>helios.engine.game.event</name>
+  </compound>
+  <compound refid="module__helios_8engine_8game_8event_8GameLoopEventBus" kind="module"><name>helios.engine.game.event.GameLoopEventBus</name>
+    <member refid="namespacehelios_1_1engine_1_1game_1_1event_1a3165d454094258640891c90d0a8ab6d0" kind="typedef"><name>GameLoopEventBus</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1_1event_1a77528665b07944a8b49455991d8eb9ad" kind="typedef"><name>GameLoopEventSink</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8game_8event_8SolidCollisionEvent" kind="module"><name>helios.engine.game.event.SolidCollisionEvent</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1SolidCollisionEvent_1a707397470044d84898489c6c35e3add2" kind="variable"><name>source_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1SolidCollisionEvent_1a0cf90ae3576f26f7704aafb388e5516f" kind="variable"><name>match_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1SolidCollisionEvent_1a9cdc519b8c12d9993b2a0ead5e571773" kind="variable"><name>contact_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1SolidCollisionEvent_1acce30e4284f277d708b26b6f672bcf7a" kind="function"><name>SolidCollisionEvent</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1SolidCollisionEvent_1a5b5a05ff168d759af2a948b72a55bbde" kind="function"><name>contact</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1SolidCollisionEvent_1af641a4f8fc7821447a922ab4b7745ff1" kind="function"><name>source</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1SolidCollisionEvent_1a8f161faefc0e135d43d086b3e68e3d4e" kind="function"><name>match</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8game_8event_8TriggerCollisionEvent" kind="module"><name>helios.engine.game.event.TriggerCollisionEvent</name>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1TriggerCollisionEvent_1ae2c85dceb0fa278af3830f40fde3ad93" kind="variable"><name>source_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1TriggerCollisionEvent_1a2353fe1fbe9f0cefa95f84d51a8f9608" kind="variable"><name>match_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1TriggerCollisionEvent_1af8ea164e0334100b66df989cd1f7ebf3" kind="variable"><name>contact_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1TriggerCollisionEvent_1a6e1bfa2aab4c61eafd73d7e8eec66d5c" kind="function"><name>TriggerCollisionEvent</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1TriggerCollisionEvent_1ad5b0b05aae503393211e1fa517b5c4e9" kind="function"><name>contact</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1TriggerCollisionEvent_1a578612b649f40aed2d24f8c6baf41c7a" kind="function"><name>source</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1event_1_1TriggerCollisionEvent_1a89561847267cdda19260fe0b988a3ef0" kind="function"><name>match</name></member>
+  </compound>
   <compound refid="module__helios_8engine_8game_8GameObject" kind="module"><name>helios.engine.game.GameObject</name>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a8ccca9fdee32b72202b6b1cca51288c3" kind="variable"><name>guid_</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a04c48c868e86b9f5c38ef0cf3176c828" kind="variable"><name>components_</name></member>
@@ -3261,16 +3504,23 @@
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1ae5dcc52eda581579cb00e9c4fff90a37" kind="function"><name>getOrAdd</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a1de477ec6f0718697589c8d69498939d" kind="function"><name>get</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a75ba7876058a260289f28b39c6fce25a" kind="function"><name>has</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1ab4eb8c1edaf534f632772bc6e6b339b3" kind="function"><name>hasEnabledComponent</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a8dd8bd8a83a90aa32770e705f2c81b59" kind="function"><name>hasDisabledComponent</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a64afc8b3ae7ed69e9763d51169328af2" kind="function"><name>update</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1abf3cf53d3aa0c9b62da27d7934928168" kind="function"><name>guid</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1a1604683eea731721ee7193a004794b21" kind="function"><name>isActive</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObject_1af1e443b83abcd51b2fa5d18ac5b22efa" kind="function"><name>setActive</name></member>
   </compound>
-  <compound refid="module__helios_8engine_8game_8GameObjectFilterType" kind="module"><name>helios.engine.game.GameObjectFilterType</name>
-    <member refid="namespacehelios_1_1engine_1_1game_1a260d868cc67d729c4dbce5e9ea0b6e47" kind="enum"><name>GameObjectFilterType</name></member>
-    <member refid="namespacehelios_1_1engine_1_1game_1a260d868cc67d729c4dbce5e9ea0b6e47a4d3d769b812b6faa6b76e1a8abaece2d" kind="enumvalue"><name>Active</name></member>
-    <member refid="namespacehelios_1_1engine_1_1game_1a260d868cc67d729c4dbce5e9ea0b6e47a3cab03c00dbd11bc3569afa0748013f0" kind="enumvalue"><name>Inactive</name></member>
-    <member refid="namespacehelios_1_1engine_1_1game_1a260d868cc67d729c4dbce5e9ea0b6e47ab1c94ca2fbc3e78fc30069c8d0f01680" kind="enumvalue"><name>All</name></member>
+  <compound refid="module__helios_8engine_8game_8GameObjectFilter" kind="module"><name>helios.engine.game.GameObjectFilter</name>
+    <member refid="namespacehelios_1_1engine_1_1game_1aab7d6adba3cce4672682c21fb05ec571" kind="enum"><name>GameObjectFilter</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1aab7d6adba3cce4672682c21fb05ec571a6adf97f83acf6453d4a6a4b1070f3754" kind="enumvalue"><name>None</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1aab7d6adba3cce4672682c21fb05ec571a4d3d769b812b6faa6b76e1a8abaece2d" kind="enumvalue"><name>Active</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1aab7d6adba3cce4672682c21fb05ec571a3cab03c00dbd11bc3569afa0748013f0" kind="enumvalue"><name>Inactive</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1aab7d6adba3cce4672682c21fb05ec571ac2b28dd68eea15a01721595aec7ae686" kind="enumvalue"><name>ComponentEnabled</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1aab7d6adba3cce4672682c21fb05ec571a2dbabf6c32dda02da7e2db1f8c05080b" kind="enumvalue"><name>ComponentDisabled</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1aab7d6adba3cce4672682c21fb05ec571ab1c94ca2fbc3e78fc30069c8d0f01680" kind="enumvalue"><name>All</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1a8f81ad0258c8291fe26c8de6077c0e5b" kind="function"><name>operator&amp;</name></member>
+    <member refid="namespacehelios_1_1engine_1_1game_1a6bfb349ea51ff5445dc27dc85c0cd621" kind="function"><name>operator|</name></member>
   </compound>
   <compound refid="module__helios_8engine_8game_8GameObjectPool" kind="module"><name>helios.engine.game.GameObjectPool</name>
     <member refid="classhelios_1_1engine_1_1game_1_1GameObjectPool_1aa74b049b36bc39be7648601206230f25" kind="typedef"><name>Factory</name></member>
@@ -3308,8 +3558,8 @@
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a3c520229c0ff0a74019dc10fcb71a439" kind="function"><name>update</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a4e85936a3662c8dfc85cf83e2e901541" kind="function"><name>addGameObject</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a10feb30a293f8266c398fc5b42872a4a" kind="function"><name>find</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0b4dbd1c69f3529fb722b06088500a9e" kind="function"><name>find</name></member>
-    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1ad0c11deb99d085edf7c13a448d4866fa" kind="function"><name>find</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a54beb57b70182fe3af35aecab6e070ed" kind="function"><name>find</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a74d32688101ad9291574a8a19a8edc8a" kind="function"><name>find</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1aada0325e1ee9928451c6149a6f5643b3" kind="function"><name>find</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0e8351e088564887aaabd806752e30f2" kind="function"><name>removeGameObject</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1GameWorld_1a0a28cfa4a49e74a11b4c1420d99bb72d" kind="function"><name>gameObjects</name></member>
@@ -3385,6 +3635,42 @@
   <compound refid="module__helios_8engine_8game_8systems_8physics_8ComposeTransformSystem" kind="module"><name>helios.engine.game.systems.physics.ComposeTransformSystem</name>
     <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1ComposeTransformSystem_1a90188476238f7e6d96da63e6510751c7" kind="function"><name>update</name></member>
   </compound>
+  <compound refid="module__helios_8engine_8game_8systems_8physics_8GridCollisionDetectionSystem" kind="module"><name>helios.engine.game.systems.physics.GridCollisionDetectionSystem</name>
+    <member refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1a732352a57c5c4984b1120fe2cfc5b334" kind="variable"><name>isSolidCollision</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1addf19bdee1eda887eb02c6110bcc1ff6" kind="variable"><name>isTriggerCollision</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1a859bffeea9d0da6a6e51ecbff056ba1b" kind="variable"><name>aIsCollisionReporter</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1a35d79eec998195ec2db56fc4589ddc14" kind="variable"><name>bIsCollisionReporter</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1CollisionCandidate_1aa8db8fc0b110f11b31d39286ba341889" kind="variable"><name>gameObject</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1CollisionCandidate_1ae687e9e6b0890ca2facbd9199b3d7ada" kind="variable"><name>aabbColliderComponent</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1CollisionCandidate_1a808550663383820e6e815cabc2c2acdc" kind="variable"><name>collisionComponent</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1GridCell_1a6e900518fe0383e902c3c0641f6df7b8" kind="variable"><name>collisionCandidates</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1aa1afe91f11214f96099cc0e392e98105" kind="variable"><name>logger_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1afc419768bab54e1115697e4c5110d5ef" kind="variable"><name>solvedCollisions_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a94d72ed93abd0557bb34734c49fda869" kind="variable"><name>cellSize_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a8bad6e047fd8aaa8520d739b41c45b70" kind="variable"><name>gridBounds_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1aaa8222c3650f81a4793b35a63a882d3f" kind="variable"><name>cells_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a3b6d249d1b97ae4f5654ecb9d1a52abc" kind="variable"><name>cellsX_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1aec8c5a1c7ccb2121dd7d13f965fab8cc" kind="variable"><name>cellsY_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a88e2c9dfdda4101c153b9ab215f7d29e" kind="variable"><name>cellsZ_</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1ab8e183d918eab1ecb80d95e17f103b77" kind="variable"><name>trackedCells_</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1CollisionStruct_1a7331a0e3475d74384c17ffbd22ed4197" kind="function"><name>hasAnyInteraction</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1GuidPairHash_1a53cf1b18d96c3cfad1c4081ae8915ca8" kind="function"><name>operator()</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1_1GridCell_1abfa15f6f7256d4c927b5b4694bd12766" kind="function"><name>clear</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1aa9221e503d157cee81c57de9487c5651" kind="function"><name>initGrid</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a6d6a9a91dc9ac63ac8f872df9645e29d" kind="function"><name>prepareCollisionDetection</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a7c97a20a3412085c21a1fa03492335d9" kind="function"><name>postEvent</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a00fb7bf97e26fb7c14ad974a43929844" kind="function"><name>findCollisionType</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a61adff29d4e0d5df7cd94bfd0873aa4a" kind="function"><name>GridCollisionDetectionSystem</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1afbdf17442ab9ff6e8fca1c43f5677314" kind="function"><name>update</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a12f8dd63e0e9f1f185678d01ab9b0e14" kind="function"><name>worldBoundsToGridBounds</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a104f6ed7446c5cb5cd6944ef7bce51dc" kind="function"><name>updateCollisionCandidate</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1aa1dad076c58ad7ae95262162bd364689" kind="function"><name>solveCell</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1ac5985971bc1c1f1cfcb0e41fc5863cf8" kind="function"><name>cell</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a757b591359bd905ec551bf64f72c14ad" kind="function"><name>cellIndex</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a08bce6c9fde4db67d0f6978663bf77d7" kind="function"><name>cellsX</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a6c831ce0f6cca510f6f97038d0e42398" kind="function"><name>cellsY</name></member>
+    <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem_1a81d2efb343c1622d98f9f262fce07626" kind="function"><name>cellsZ</name></member>
+  </compound>
   <compound refid="module__helios_8engine_8game_8systems_8physics_8HeadingSystem" kind="module"><name>helios.engine.game.systems.physics.HeadingSystem</name>
     <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1HeadingSystem_1a1bbad29e1a0c49d320b11df70c78716d" kind="function"><name>updateHeading</name></member>
     <member refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1HeadingSystem_1ab663b281b488f7ce2ba595146cbccdd4" kind="function"><name>update</name></member>
@@ -3435,15 +3721,78 @@
   <compound refid="module__helios_8engine_8game_8UpdateContext" kind="module"><name>helios.engine.game.UpdateContext</name>
     <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a7d440648e01475cbe5049a57c60708a0" kind="variable"><name>deltaTime_</name></member>
     <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a41b2990fb57e9a466b697a17c33b2e39" kind="variable"><name>inputSnapshot_</name></member>
-    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a653d1c7cac75d90e1c15baa8ad334b4c" kind="variable"><name>commandBuffer_</name></member>
-    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a58f525767ddae54935821b76dcc4f1ed" kind="variable"><name>gameWorld_</name></member>
-    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a2144af14fa3ae62f75de20cfb4eea5a6" kind="function"><name>UpdateContext</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1afbc73e172891c74d7ba678c26b48dfcf" kind="variable"><name>commandBuffer_</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1aefa8a4a59fa64362e4688997806bddaa" kind="variable"><name>gameWorld_</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1ac2a9beea57e0e291882c7f27fe2d6fbe" kind="variable"><name>eventSink_</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a3aa551f811300eff3d5be9f9db202469" kind="function"><name>UpdateContext</name></member>
     <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a6c701eadfa46994b96fbf00d2026489f" kind="function"><name>deltaTime</name></member>
     <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a0b42a27336552776221f1c260d5abdd2" kind="function"><name>setDeltaTime</name></member>
-    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1abab0869bbecf4800e77d2fa355d66a9e" kind="function"><name>inputSnapshot</name></member>
-    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1ad7d1812f2b80a365d37df32228f85ecd" kind="function"><name>setInputSnapshot</name></member>
-    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1a8282c9dcfe53edfa615372dc537d4e76" kind="function"><name>commandBuffer</name></member>
-    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1ae12523c4ac013b3b4907dd83cba3519e" kind="function"><name>gameWorld</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1ab8b649b4f03157ab8ca65bdd54fa91e2" kind="function"><name>inputSnapshot</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1ad2f0de05f125c38ead3efc23fdb7d7dc" kind="function"><name>setInputSnapshot</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1aa07a1cea4e44509a75394436e190c054" kind="function"><name>commandBuffer</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1aa00ba6ef8486bd4d451f673b046721c6" kind="function"><name>gameWorld</name></member>
+    <member refid="structhelios_1_1engine_1_1game_1_1UpdateContext_1aa80c54f8ba498be063e4ef651c0dca05" kind="function"><name>pushEvent</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8tooling" kind="module"><name>helios.engine.tooling</name>
+  </compound>
+  <compound refid="module__helios_8engine_8tooling_8FpsMetrics" kind="module"><name>helios.engine.tooling.FpsMetrics</name>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1aa44304d9a8fa12e0598daf53f56edab6" kind="variable"><name>history_</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1ab166b0743965dd7cf777046f46da2848" kind="variable"><name>historySize_</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1acf037103ba09e653d234795ff7f410b2" kind="variable"><name>avgFps_</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1acf54be8855e445297eb1c1fd3b18d21d" kind="variable"><name>avgFrameTime_</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1a1052d2bcaf7a47db1a30353de342350d" kind="variable"><name>lastWorkTime_</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1a3e50859e33818f0938a9c2561a499607" kind="variable"><name>lastWaitTime_</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1a51247eac1d6dbf1b55b8efd182708065" kind="variable"><name>frameCount_</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1a5956e8602270c59c517b5885c92e6d94" kind="variable"><name>needsUpdate_</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1ab6fb6b9d6b0e3e5afa8a4bbde8418af1" kind="function"><name>update</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1af833a6e7f41c5aa169c73ba6b96be9b2" kind="function"><name>addFrame</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1aba1373724df39b46b8d19cc6f316e971" kind="function"><name>setHistorySize</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1aa409a687ee1e87371274f41653702159" kind="function"><name>getHistorySize</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1af6f7e9d36b9e499216e2b8f573ade6d5" kind="function"><name>getFps</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1a902c44f12d326e5f4cb4d3643b62dd8c" kind="function"><name>getFrameTimeMs</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1a2cd3a59669f6755c77681af1a8e890d5" kind="function"><name>getWorkTimeMs</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1a1e58ec32b7bfe1470a48d63fd3f81e9e" kind="function"><name>getIdleTimeMs</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1ab8bd08959d1021083708d14456edb4c4" kind="function"><name>getFrameCount</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1af61aa224056329e89d7cadacf895b33e" kind="function"><name>getFrameTimeSeconds</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1ac873e7ed9952b1b5bb724393af6da1ab" kind="function"><name>getWorkTimeSeconds</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1a89c2f97f8bc7f8e8602beeab2326247e" kind="function"><name>getIdleTimeSeconds</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1ae28442d7fa258e117a87f55a4fd39368" kind="function"><name>getHistory</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1ac313274306dac08211169482bf243f53" kind="function"><name>reset</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8tooling_8FramePacer" kind="module"><name>helios.engine.tooling.FramePacer</name>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1aacdb3ed90d858b5e54ef6fdf24eb6dde" kind="variable"><name>stopwatch_</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a0b30f32b681fe90b77b985c9b86762c7" kind="variable"><name>targetFps_</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a19da16d13fb67519b06e64f7cdd44bc7" kind="function"><name>FramePacer</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a432af3249703e9edab2712a7bc577699" kind="function"><name>setTargetFps</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a69df9490a44888bd14297544e380ae7b" kind="function"><name>getTargetFps</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a44ad35ea34434c3ce534ad032a49c409" kind="function"><name>beginFrame</name></member>
+    <member refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1ac6b55e3ef2b685222358c14e69e89f06" kind="function"><name>sync</name></member>
+  </compound>
+  <compound refid="module__helios_8engine_8tooling_8FrameStats" kind="module"><name>helios.engine.tooling.FrameStats</name>
+    <member refid="structhelios_1_1engine_1_1tooling_1_1FrameStats_1ab04381ee38036ba51eadacaea264d8dc" kind="variable"><name>totalFrameTime</name></member>
+    <member refid="structhelios_1_1engine_1_1tooling_1_1FrameStats_1a08981b4423ccc2ffca7a0563f080e242" kind="variable"><name>workTime</name></member>
+    <member refid="structhelios_1_1engine_1_1tooling_1_1FrameStats_1a440b831ec15460153d47deda0ad76e9f" kind="variable"><name>waitTime</name></member>
+  </compound>
+  <compound refid="module__helios_8core_8units" kind="module"><name>helios.core.units</name>
+    <member refid="namespacehelios_1_1core_1_1units_1a13b5c00c42b03ebe1d85cd575f346e55" kind="enum"><name>Unit</name></member>
+    <member refid="namespacehelios_1_1core_1_1units_1a13b5c00c42b03ebe1d85cd575f346e55a17c9c40b9db5a0983d1075a012c1f90a" kind="enumvalue"><name>Meter</name></member>
+    <member refid="namespacehelios_1_1core_1_1units_1a13b5c00c42b03ebe1d85cd575f346e55aa2edad498840d7233b2f56697b02e623" kind="enumvalue"><name>Centimeter</name></member>
+    <member refid="namespacehelios_1_1core_1_1units_1a13b5c00c42b03ebe1d85cd575f346e55a8f19a8c7566af54ea8981029730e5465" kind="enumvalue"><name>Seconds</name></member>
+    <member refid="namespacehelios_1_1core_1_1units_1a13b5c00c42b03ebe1d85cd575f346e55a127d04b8e81bf4b13fbdd35647a0e8b8" kind="enumvalue"><name>MilliSeconds</name></member>
+    <member refid="namespacehelios_1_1core_1_1units_1ab5f933228ed9ab64410fde3b0a23272e" kind="variable"><name>HELIOS_SPATIAL_UNIT</name></member>
+    <member refid="namespacehelios_1_1core_1_1units_1a64f86d9012d9b67419b315e97f5c2172" kind="variable"><name>HELIOS_TEMPORAL_UNIT</name></member>
+    <member refid="namespacehelios_1_1core_1_1units_1a5473b1a6bc297ba19cd0bda1d08abddb" kind="variable"><name>CENTIMETERS</name></member>
+    <member refid="namespacehelios_1_1core_1_1units_1ace729ad7e380ecea1dc68139c748e4e8" kind="variable"><name>METERS</name></member>
+    <member refid="namespacehelios_1_1core_1_1units_1a205fe3ccea7988ba4b616c046b5d8246" kind="variable"><name>MILLISECONDS</name></member>
+    <member refid="namespacehelios_1_1core_1_1units_1a90333ee787d05c7f8003cace76268c41" kind="variable"><name>SECONDS</name></member>
+    <member refid="namespacehelios_1_1core_1_1units_1a44a24afd27dff622a0f8fb7d5009122c" kind="function"><name>fromCm</name></member>
+    <member refid="namespacehelios_1_1core_1_1units_1a3e0dff14fa37b52f552758069814ae54" kind="function"><name>fromM</name></member>
+    <member refid="namespacehelios_1_1core_1_1units_1af9eba268770515f70be075b04cc3eb3d" kind="function"><name>fromM</name></member>
+    <member refid="namespacehelios_1_1core_1_1units_1a2577bbed1b30219b294b8d1552117f2f" kind="function"><name>fromM</name></member>
+    <member refid="namespacehelios_1_1core_1_1units_1ae56929b63f135d167f9f10c1a1cef5d3" kind="function"><name>fromS</name></member>
+    <member refid="namespacehelios_1_1core_1_1units_1a08f92aa18e9437370fe364675a387c8f" kind="function"><name>fromMs</name></member>
+    <member refid="namespacehelios_1_1core_1_1units_1a9c75f83e0476f8560ef6b20129582381" kind="function"><name>from</name></member>
+    <member refid="namespacehelios_1_1core_1_1units_1aecd415b12f170019aa22cf947662c2f4" kind="function"><name>from</name></member>
   </compound>
   <compound refid="module__helios_8event" kind="module"><name>helios.event</name>
   </compound>
@@ -3750,9 +4099,12 @@
     <member refid="structhelios_1_1math_1_1aabb_1ad9c6ae9ba53638b5acb98843d24d766b" kind="function"><name>center</name></member>
     <member refid="structhelios_1_1math_1_1aabb_1a78c11f960ab2cd331e354bd274c85a27" kind="function"><name>size</name></member>
     <member refid="structhelios_1_1math_1_1aabb_1ab2281d98a7cb28b46ce163d96a2f4469" kind="function"><name>contains</name></member>
+    <member refid="structhelios_1_1math_1_1aabb_1ade126b97a45a33942359c01b5f268c24" kind="function"><name>intersects</name></member>
     <member refid="structhelios_1_1math_1_1aabb_1ab6aadb560a2c8ee5dd381592b653578b" kind="function"><name>translate</name></member>
     <member refid="structhelios_1_1math_1_1aabb_1a92106c4efc1b1aae8466956903020665" kind="function"><name>add</name></member>
     <member refid="structhelios_1_1math_1_1aabb_1aa1e69fb646399dae7c02c52e972532b5" kind="function"><name>applyTransform</name></member>
+    <member refid="namespacehelios_1_1math_1af526a25ddc0ed10b47b832bedbde26cd" kind="function"><name>overlap</name></member>
+    <member refid="namespacehelios_1_1math_1a83d3fdd630c2f9d9179d0263fa515571" kind="function"><name>overlapCenter</name></member>
     <member refid="namespacehelios_1_1math_1aee9df9ba24371aefd6a84af803813f1e" kind="function"><name>operator+</name></member>
     <member refid="namespacehelios_1_1math_1ac91a9a73632368c02a726bc3f070254d" kind="function"><name>operator*</name></member>
     <member refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kind="typedef"><name>mat4f</name></member>
@@ -3769,6 +4121,7 @@
     <member refid="namespacehelios_1_1math_1a57c950d4cb887c103dc2423f3ea81ce4" kind="typedef"><name>vec3d</name></member>
     <member refid="namespacehelios_1_1math_1a124c0492430aeecedc1c1a5ece4ba488" kind="typedef"><name>aabbf</name></member>
     <member refid="namespacehelios_1_1math_1a3c63775a7d6ff09058288223291660b7" kind="typedef"><name>aabbi</name></member>
+    <member refid="namespacehelios_1_1math_1a55cd2251d2249ab35eb5f2ea9999f414" kind="typedef"><name>aabbui</name></member>
     <member refid="namespacehelios_1_1math_1a8cdcd5dfceca20081416ef7ac3374e01" kind="typedef"><name>aabbd</name></member>
   </compound>
   <compound refid="module__helios_8math_8utils" kind="module"><name>helios.math.utils</name>
@@ -4192,32 +4545,6 @@
     <member refid="structhelios_1_1scene_1_1SnapshotItem_1a3145126ee37604f07f27f3f8ed8d30e2" kind="function"><name>renderable</name></member>
     <member refid="structhelios_1_1scene_1_1SnapshotItem_1a9b1e4c1e12d5c92284036256995442f5" kind="function"><name>worldMatrix</name></member>
   </compound>
-  <compound refid="module__helios_8tooling" kind="module"><name>helios.tooling</name>
-  </compound>
-  <compound refid="module__helios_8tooling_8FpsMetrics" kind="module"><name>helios.tooling.FpsMetrics</name>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1a3a7d0201bc3525d76c8d13ce57669204" kind="variable"><name>history_</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1aab698ab064ec80deaa7f4f860151a4d8" kind="variable"><name>historySize_</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1adc8f9273cb02c462a5f0f6a6f2174e81" kind="variable"><name>avgFps_</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1a63927ce18180aea235f37d63614684d0" kind="variable"><name>avgFrameTime_</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1a13ba5ad46198f86717495024ec13ed1f" kind="variable"><name>lastWorkTime_</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1a5c6d0abe9389e6682f38089fa037fb59" kind="variable"><name>lastWaitTime_</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1a1a470282e9eae209edaa97547e49e72f" kind="variable"><name>frameCount_</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1aa66ecad91b3019914ff0407253046df8" kind="variable"><name>needsUpdate_</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1aee0bd84c593dc2624105f420cca51650" kind="function"><name>update</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1ae8943cc6ac1a9c984c8fc54a4bd7a69c" kind="function"><name>addFrame</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1a5e280f4d8ed79364387ff656ae2b8dfe" kind="function"><name>setHistorySize</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1ac80fe24ff63dc8bb469068ffaff1f0cf" kind="function"><name>getHistorySize</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1a5369c8f597cb4e229d95fcd33f8e27d7" kind="function"><name>getFps</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1ab41fefe34dc9fa7ee4d640750a38ef1b" kind="function"><name>getFrameTimeMs</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1a6971ce2cf9b8a57b00af0fa7aed6a530" kind="function"><name>getWorkTimeMs</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1aef8831b30ea5de405abae996f63c6b6e" kind="function"><name>getIdleTimeMs</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1a8ac9781cf4ccdc0533c907acba825647" kind="function"><name>getFrameCount</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1adc69500e3e485a47f90fa6d5163bd31f" kind="function"><name>getFrameTimeSeconds</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1a2ef5a0dcb17b135c79b3a2cb5cb1e7f1" kind="function"><name>getWorkTimeSeconds</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1aa8a39ae309db60200b319a2facf74ce2" kind="function"><name>getIdleTimeSeconds</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1aa8a90be70e58c7168aaead25bbdcbfd5" kind="function"><name>getHistory</name></member>
-    <member refid="classhelios_1_1tooling_1_1FpsMetrics_1acf271b3c606df57550500cc9b7d0966f" kind="function"><name>reset</name></member>
-  </compound>
   <compound refid="module__helios_8util" kind="module"><name>helios.util</name>
   </compound>
   <compound refid="module__helios_8util_8Colors" kind="module"><name>helios.util.Colors</name>
@@ -4320,6 +4647,8 @@
     <member refid="classhelios_1_1util_1_1Guid_1a7b481be503f8d379fddd82342e569060" kind="function"><name>Guid</name></member>
     <member refid="classhelios_1_1util_1_1Guid_1a56c29dc3db8911269e868b4581e621ec" kind="function"><name>operator==</name></member>
     <member refid="classhelios_1_1util_1_1Guid_1a2978dd83ba248095e02b05d8a33271d0" kind="function"><name>operator!=</name></member>
+    <member refid="classhelios_1_1util_1_1Guid_1a7d0970d3c0663ba7305297a3bf80ea98" kind="function"><name>operator&lt;</name></member>
+    <member refid="classhelios_1_1util_1_1Guid_1a8e11af4b0525df68918a3f3e8d2726af" kind="function"><name>operator&gt;</name></member>
     <member refid="classhelios_1_1util_1_1Guid_1abec6ac186114474b23bfb8369e4080a9" kind="function"><name>generate</name></member>
     <member refid="classhelios_1_1util_1_1Guid_1a42652f894bf300b8d3060a1d8352458c" kind="function"><name>value</name></member>
     <member refid="classhelios_1_1util_1_1Guid_1a2be0de1a0c0c0d321459531e9b308c34" kind="function"><name>hash</name></member>

@@ -152,11 +152,16 @@ export namespace helios::math {
          */
         [[nodiscard]] constexpr bool intersects(const helios::math::aabb<T>& box) const noexcept {
 
-            auto overlapsAt = overlap(*this, box);
-
-            const T c = static_cast<T>(0);
-
-            return overlapsAt[0] > c && overlapsAt[1] > c && overlapsAt[2] > c;
+            if (max_[0] <= box.min()[0] || min_[0] >= box.max()[0]) {
+                return false;
+            }
+            if (max_[1] <= box.min()[1] || min_[1] >= box.max()[1]) {
+                return false;
+            }
+            if (max_[2] <= box.min()[2] || min_[2] >= box.max()[2]) {
+                return false;
+            }
+            return true;
         }
 
 

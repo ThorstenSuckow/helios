@@ -16,7 +16,7 @@ import helios.engine.game.UpdateContext;
 import helios.engine.game.Updatable;
 import helios.engine.game.Component;
 import helios.engine.game.gameplay.combat.components.Aim2DComponent;
-import helios.engine.game.physics.components.TransformComponent;
+import helios.engine.game.spatial.transform.components.TransformComponent;
 
 import helios.math;
 
@@ -76,7 +76,7 @@ export namespace helios::engine::game::gameplay::combat::components {
          *
          * @details Set during onAttach(). Must not be null when shooting.
          */
-        helios::engine::game::physics::components::TransformComponent* transformComponent_ = nullptr;
+        helios::engine::game::spatial::transform::components::TransformComponent* transformComponent_ = nullptr;
 
         /**
          * @brief Cooldown timer for fire rate limiting, in seconds.
@@ -121,7 +121,7 @@ export namespace helios::engine::game::gameplay::combat::components {
             Component::onAttach(gameObject);
 
             aimComponent_ = gameObject->get<helios::engine::game::gameplay::combat::components::Aim2DComponent>();
-            transformComponent_ = gameObject->get<helios::engine::game::physics::components::TransformComponent>();
+            transformComponent_ = gameObject->get<helios::engine::game::spatial::transform::components::TransformComponent>();
             assert(aimComponent_ != nullptr && "Unexpected nullptr for aimComponent_");
             assert(transformComponent_ != nullptr && "Unexpected nullptr for transformComponent_");
         }

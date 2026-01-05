@@ -89,25 +89,25 @@ export namespace helios::engine::game {
         }
 
         /**
-         * @brief Checks whether the component is enabled.
+         * @brief Checks whether the component is disabled.
          *
          * @details Inverse of isEnabled()
          *
-         * @return true if the component is enabled, false otherwise.
+         * @return true if the component is disabled, false otherwise.
          */
         [[nodiscard]] bool isDisabled() const noexcept {
             return !isEnabled_;
         }
 
         /**
-         * @brief Disables this component.
+         * @brief Enables this component.
          */
         void enable() noexcept {
             isEnabled_ = true;
         }
 
         /**
-         * @brief Enables this component.
+         * @brief Disables this component.
          */
         void disable() noexcept {
             isEnabled_ = false;

@@ -5,7 +5,7 @@
 module;
 
 
-export module helios.engine.game.SpawnStrategy;
+export module helios.engine.game.gameplay.spawn.logic.SpawnStrategy;
 
 
 import helios.engine.game.UpdateContext;
@@ -15,7 +15,7 @@ import helios.engine.game.GameObject;
 import helios.engine.game.Level;
 
 
-export namespace helios::engine::game {
+export namespace helios::engine::game::gameplay::spawn::logic {
 
     /**
      * @brief Abstract base class defining how GameObjects are spawned.

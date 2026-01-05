@@ -5,7 +5,7 @@
 module;
 
 
-export module helios.engine.game.SpawnCondition;
+export module helios.engine.game.gameplay.spawn.logic.SpawnCondition;
 
 import helios.engine.game.GameWorld;
 import helios.engine.game.Level;
@@ -13,7 +13,7 @@ import helios.engine.game.GameObjectPool;
 import helios.engine.game.UpdateContext;
 
 
-export namespace helios::engine::game {
+export namespace helios::engine::game::gameplay::spawn::logic {
 
     /**
      * @brief Abstract base class defining when and how many GameObjects should spawn.

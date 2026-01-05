@@ -27,7 +27,7 @@ import helios.ext.opengl.rendering.shader.OpenGLShader;
 import helios.util.io.BasicStringFileReader;
 import helios.rendering.model.config.MaterialProperties;
 
-import helios.engine.game.gameplay.components.Aim2DComponent;
+import helios.engine.game.gameplay.combat.components.Aim2DComponent;
 import helios.engine.game.components.scene.SceneNodeComponent;
 
 import helios.engine.game.UpdateContext;
@@ -108,7 +108,7 @@ export namespace helios::engine::game::gameplay::systems {
         /**
          * @brief Optional reference to an aim component for direction.
          */
-        helios::engine::game::gameplay::components::Aim2DComponent* aimComponent_ = nullptr;
+        helios::engine::game::gameplay::combat::components::Aim2DComponent* aimComponent_ = nullptr;
 
         /**
          * @brief Optional reference to a scene node component for spawn position.

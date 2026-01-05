@@ -28,7 +28,5 @@ export import helios.engine.game.components.rendering.RenderableComponent;
 // Model components
 export import helios.engine.game.components.model.ModelAabbComponent;
 
-// Gameplay components
-export import helios.engine.game.gameplay.components.Aim2DComponent;
-export import helios.engine.game.gameplay.components.ShootComponent;
+
 

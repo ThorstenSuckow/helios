@@ -5,7 +5,5 @@
 
 export module helios.engine.game.commands;
 
-export import helios.engine.game.commands.Aim2DCommand;
 export import helios.engine.game.commands.HeadingCommand;
 export import helios.engine.game.commands.Move2DCommand;
-export import helios.engine.game.commands.ShootCommand;

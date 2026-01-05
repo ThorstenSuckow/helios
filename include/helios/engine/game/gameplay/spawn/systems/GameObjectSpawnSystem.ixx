@@ -8,7 +8,7 @@ module;
 #include <memory>
 #include <vector>
 
-export module helios.engine.game.gameplay.systems.GameObjectSpawnSystem;
+export module helios.engine.game.gameplay.spawn.systems.GameObjectSpawnSystem;
 
 import helios.engine.game.System;
 import helios.engine.game.GameObjectPool;
@@ -25,11 +25,11 @@ import helios.engine.game.components.rendering.RenderableComponent;
 
 import helios.scene.SceneNode;
 
-import helios.engine.game.SpawnCondition;
-import helios.engine.game.SpawnStrategy;
+import helios.engine.game.gameplay.spawn.logic.SpawnCondition;
+import helios.engine.game.gameplay.spawn.logic.SpawnStrategy;
 
 
-export namespace helios::engine::game::gameplay::systems {
+export namespace helios::engine::game::gameplay::spawn::systems {
     
     /**
      * @brief System responsible for spawning GameObjects into the level.
@@ -57,12 +57,12 @@ export namespace helios::engine::game::gameplay::systems {
         /**
          * @brief Strategy used to determine how GameObjects are spawned in the level.
          */
-        std::unique_ptr<helios::engine::game::SpawnStrategy> spawnStrategy_;
+        std::unique_ptr<helios::engine::game::gameplay::spawn::logic::SpawnStrategy> spawnStrategy_;
 
         /**
          * @brief Strategy for determining the conditions under which GameObjects are spawned.
          */
-        std::unique_ptr<helios::engine::game::SpawnCondition> spawnCondition_;
+        std::unique_ptr<helios::engine::game::gameplay::spawn::logic::SpawnCondition> spawnCondition_;
 
         /**
          * @brief Prepares the object pool and scene graph.
@@ -108,8 +108,8 @@ export namespace helios::engine::game::gameplay::systems {
         explicit GameObjectSpawnSystem(
             std::unique_ptr<helios::engine::game::GameObjectPool> gameObjectPool,
             const helios::engine::game::Level& level,
-            std::unique_ptr<helios::engine::game::SpawnCondition> spawnCondition,
-            std::unique_ptr<helios::engine::game::SpawnStrategy> spawnStrategy
+            std::unique_ptr<helios::engine::game::gameplay::spawn::logic::SpawnCondition> spawnCondition,
+            std::unique_ptr<helios::engine::game::gameplay::spawn::logic::SpawnStrategy> spawnStrategy
         ) :
             gameObjectPool_(std::move(gameObjectPool)),
             level_(level),

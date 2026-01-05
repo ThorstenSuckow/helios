@@ -17,8 +17,8 @@ import helios.engine.game.Component;
 import helios.engine.game.CommandBuffer;
 import helios.engine.game.commands.Move2DCommand;
 import helios.engine.game.commands.HeadingCommand;
-import helios.engine.game.commands.Aim2DCommand;
-import helios.engine.game.commands.ShootCommand;
+import helios.engine.game.gameplay.combat.commands.Aim2DCommand;
+import helios.engine.game.gameplay.combat.commands.ShootCommand;
 
 export namespace helios::engine::game::components::input {
 
@@ -92,7 +92,7 @@ export namespace helios::engine::game::components::input {
 
             commandBuffer.add(
                 gameObject()->guid(),
-                std::make_unique<helios::engine::game::commands::Aim2DCommand>(rdir, finalFreq)
+                std::make_unique<helios::engine::game::gameplay::combat::commands::Aim2DCommand>(rdir, finalFreq)
             );
 
             if (useDedicatedShootInput_) {
@@ -101,12 +101,12 @@ export namespace helios::engine::game::components::input {
 
                 commandBuffer.add(
                    gameObject()->guid(),
-                   std::make_unique<helios::engine::game::commands::ShootCommand>(rightTrigger)
+                   std::make_unique<helios::engine::game::gameplay::combat::commands::ShootCommand>(rightTrigger)
                );
             } else {
                 commandBuffer.add(
                    gameObject()->guid(),
-                   std::make_unique<helios::engine::game::commands::ShootCommand>(finalFreq)
+                   std::make_unique<helios::engine::game::gameplay::combat::commands::ShootCommand>(finalFreq)
                );
             }
 

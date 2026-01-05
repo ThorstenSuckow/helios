@@ -6,17 +6,17 @@ module;
 
 #include <cassert>
 
-export module helios.engine.game.TimerSpawnCondition;
+export module helios.engine.game.gameplay.spawn.logic.TimerSpawnCondition;
 
 import helios.engine.game.GameWorld;
 import helios.engine.game.Level;
 import helios.engine.game.GameObjectPool;
 import helios.engine.game.UpdateContext;
 
-import helios.engine.game.SpawnCondition;
+import helios.engine.game.gameplay.spawn.logic.SpawnCondition;
 
 
-export namespace helios::engine::game {
+export namespace helios::engine::game::gameplay::spawn::logic {
 
     /**
      * @brief A SpawnCondition that triggers spawning at fixed time intervals.

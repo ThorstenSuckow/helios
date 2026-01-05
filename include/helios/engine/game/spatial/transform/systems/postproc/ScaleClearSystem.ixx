@@ -6,7 +6,7 @@ module;
 
 #include <helios/engine/game/GameObjectView.h>
 
-export module helios.engine.game.systems.post.ScaleClearSystem;
+export module helios.engine.game.spatial.transform.systems.postproc.ScaleClearSystem;
 
 import helios.engine.game.GameWorld;
 import helios.engine.game.System;
@@ -15,7 +15,7 @@ import helios.engine.game.UpdateContext;
 import helios.engine.game.spatial.transform.components.ScaleComponent;
 
 
-export namespace helios::engine::game::systems::post {
+export namespace helios::engine::game::spatial::transform::systems::postproc {
 
     /**
      * @brief System that clears the dirty state of ScaleComponents at the end of a frame.

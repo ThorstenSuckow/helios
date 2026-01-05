@@ -4,11 +4,13 @@
  */
 module;
 
+#include <cassert>
 #include <stdexcept>
 
 export module helios.engine.game.UpdateContext;
 
 import helios.engine.game.InputSnapshot;
+import helios.engine.game.event.GameLoopEventBus;
 
 
 export namespace helios::engine::game {
@@ -32,19 +34,27 @@ export namespace helios::engine::game {
         float deltaTime_ = 0.0f;
 
         /**
-         * @brief Immutable snapshot of input state for this frame.
+         * @brief Immutable snapshot of input state for the current frame.
          */
         const helios::engine::game::InputSnapshot* inputSnapshot_ = nullptr;
 
         /**
          * @brief Buffer for queueing commands to be executed at end of frame.
          */
-        helios::engine::game::CommandBuffer* commandBuffer_;
+        helios::engine::game::CommandBuffer& commandBuffer_;
 
         /**
          * @brief Reference to the game world for entity lookups.
          */
-        helios::engine::game::GameWorld* gameWorld_;
+        helios::engine::game::GameWorld& gameWorld_;
+
+        /**
+         * @brief Sink for pushing game loop events during update.
+         *
+         * Used by systems and components to publish events (e.g., collision,
+         * spawn requests) that will be processed in a later phase (N+1) of the game loop.
+         */
+        helios::engine::game::event::GameLoopEventSink eventSink_;
 
     public:
 
@@ -53,19 +63,16 @@ export namespace helios::engine::game {
          *
          * @param commandBuffer Non-owning pointer to the command buffer. Must not be nullptr.
          * @param gameWorld Non-owning pointer to the game world. Must not be nullptr.
+         * @param eventSink Sink for pushing game loop events. Used to publish events
+         *                  during update phases for later processing.
          *
-         * @throws std::invalid_argument if either commandBuffer or gameWorld are nullptr
+         * @throws std::invalid_argument if either commandBuffer or gameWorld are nullptr.
          */
         UpdateContext(
-            helios::engine::game::CommandBuffer* commandBuffer,
-            helios::engine::game::GameWorld* gameWorld
-        ) : commandBuffer_(commandBuffer), gameWorld_(gameWorld) {
-
-            if (commandBuffer_ == nullptr || gameWorld_ == nullptr) {
-                throw std::invalid_argument("UpdateContext received unexpected nullptr for commandBuffer or gameWorld.");
-            }
-
-        }
+            helios::engine::game::CommandBuffer& commandBuffer,
+            helios::engine::game::GameWorld& gameWorld,
+            const helios::engine::game::event::GameLoopEventSink& eventSink
+        ) : commandBuffer_(commandBuffer), gameWorld_(gameWorld), eventSink_(eventSink) {}
 
         /**
          * @brief Returns the time elapsed since the last frame, in seconds.
@@ -90,21 +97,22 @@ export namespace helios::engine::game {
         /**
          * @brief Returns the immutable input snapshot for this frame.
          *
-         * @return Non-owning pointer. May be nullptr if no input is available.
+         * @return Const ref to the current InputSnapshot.
          */
-        [[nodiscard]] const helios::engine::game::InputSnapshot* inputSnapshot() const noexcept {
-            return inputSnapshot_;
+        [[nodiscard]] const helios::engine::game::InputSnapshot& inputSnapshot() const noexcept {
+            assert(inputSnapshot_ && "Unexpected nullptr for InputSnapshot");
+            return *inputSnapshot_;
         }
 
         /**
          * @brief Sets the input snapshot for this frame.
          *
-         * @param snapshot Non-owning pointer to the input snapshot.
+         * @param snapshot Const ref to the input snapshot.
          *
          * @return A reference to this UpdateContext instance.
          */
-        UpdateContext& setInputSnapshot(const helios::engine::game::InputSnapshot* snapshot) noexcept {
-            inputSnapshot_ = snapshot;
+        UpdateContext& setInputSnapshot(const helios::engine::game::InputSnapshot& snapshot) noexcept {
+            inputSnapshot_ = &snapshot;
 
             return *this;
         }
@@ -112,19 +120,41 @@ export namespace helios::engine::game {
         /**
          * @brief Returns the command buffer for queueing commands.
          *
-         * @return Non-owning pointer. Guaranteed non-null after construction.
+         * @return Ref to the CommandBuffer used with this UpdateContext.
          */
-        [[nodiscard]] helios::engine::game::CommandBuffer* commandBuffer() const noexcept {
+        [[nodiscard]] helios::engine::game::CommandBuffer& commandBuffer() const noexcept {
             return commandBuffer_;
         }
 
         /**
          * @brief Returns the game world for entity lookups.
          *
-         * @return Non-owning pointer. Guaranteed non-null after construction.
+         * @return Ref to the GameWorld used with this UpdateContext.
          */
-        [[nodiscard]] helios::engine::game::GameWorld* gameWorld() const noexcept {
+        [[nodiscard]] helios::engine::game::GameWorld& gameWorld() const noexcept {
             return gameWorld_;
+        }
+
+        /**
+         * @brief Pushes an event to the game loop event bus.
+         *
+         * @details This method allows systems and components to publish events during
+         * their update phase. Events are buffered and processed in a subsequent phase
+         * (N+1) of the game loop, ensuring decoupled communication between systems.
+         *
+         * @tparam E The event type to push.
+         * @tparam Args Constructor argument types for the event.
+         *
+         * @param args Arguments forwarded to the event constructor.
+         *
+         * Example usage:
+         * ```cpp
+         * updateContext.pushEvent<CollisionEvent>(entityA, entityB, contactPoint);
+         * ```
+         */
+        template<typename E, typename... Args>
+        void pushEvent(Args&&... args) {
+            eventSink_.template push<E>(std::forward<Args>(args)...);
         }
     };
 }

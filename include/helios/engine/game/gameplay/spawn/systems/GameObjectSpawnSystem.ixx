@@ -17,10 +17,10 @@ import helios.engine.game.UpdateContext;
 
 import helios.engine.game.Level;
 
-import helios.engine.game.physics.components.Move2DComponent;
+import helios.engine.game.physics.motion.components.Move2DComponent;
 
 import helios.engine.game.components.scene.SceneNodeComponent;
-import helios.engine.game.physics.components.DirectionComponent;
+import helios.engine.game.physics.motion.components.DirectionComponent;
 import helios.engine.game.components.rendering.RenderableComponent;
 
 import helios.scene.SceneNode;

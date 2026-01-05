@@ -7,8 +7,11 @@ module;
 #include <algorithm>
 #include <cassert>
 #include <cmath>
+#include <format>
+#include <helios/helios_config.h>
 #include <unordered_set>
 #include <vector>
+
 
 export module helios.engine.game.systems.physics.GridCollisionDetectionSystem;
 
@@ -28,7 +31,9 @@ import helios.engine.game.components.physics.AabbColliderComponent;
 import helios.util.Guid;
 import helios.math;
 
+import helios.util.log;
 
+#define HELIOS_LOG_SCOPE "helios::engine::game::systems::physics::GridCollisionDetectionSystem"
 export namespace helios::engine::game::systems::physics {
 
     /**
@@ -61,6 +66,21 @@ export namespace helios::engine::game::systems::physics {
      * @see [Eri05, Chapter 7]
      */
     class GridCollisionDetectionSystem : public System {
+
+        /**
+         * @brief Helper-struct representing the properties and interaction state of a collision
+         * event between two entities.
+         */
+        struct CollisionStruct {
+            bool isSolidCollision = false;
+            bool isTriggerCollision = false;
+            bool aIsCollisionReporter = false;
+            bool bIsCollisionReporter = false;
+
+            [[nodiscard]] inline constexpr bool hasAnyInteraction() const noexcept {
+                return (isSolidCollision || isTriggerCollision) && (aIsCollisionReporter || bIsCollisionReporter);
+            }
+        };
 
         /**
          * @brief Hash functor for pairs of GUIDs.
@@ -136,6 +156,11 @@ export namespace helios::engine::game::systems::physics {
         };
 
         /**
+         * @brief Scoped logger instance for structured logging within the current context.
+         */
+        static inline const auto& logger_ = helios::util::log::LogManager::loggerForScope(HELIOS_LOG_SCOPE);
+
+        /**
          * @brief Set of already-processed collision pairs to avoid duplicate events.
          *
          * Stores pairs of GUIDs in canonical order (smaller GUID first) to ensure each
@@ -174,6 +199,11 @@ export namespace helios::engine::game::systems::physics {
         unsigned int cellsZ_;
 
         /**
+         * @brief Helper to keep track of updated cells (with potential collisions candidates) in one pass.
+         */
+        std::vector<size_t> trackedCells_;
+
+        /**
          * @brief Initializes the grid based on world bounds and cell size.
          *
          * Computes the number of cells needed in each dimension and allocates
@@ -183,13 +213,21 @@ export namespace helios::engine::game::systems::physics {
 
             helios::math::vec3f size = gridBounds_.size();
 
-            cellsX_ = std::max(1, static_cast<int>(std::ceil(size[0] / cellSize_)));
-            cellsY_ = std::max(1, static_cast<int>(std::ceil(size[1] / cellSize_)));
-            cellsZ_ = std::max(1, static_cast<int>(std::ceil(size[2] / cellSize_)));
+            cellsX_ = std::max(1u, static_cast<unsigned int>(std::ceil(size[0] / cellSize_)));
+            cellsY_ = std::max(1u, static_cast<unsigned int>(std::ceil(size[1] / cellSize_)));
+            cellsZ_ = std::max(1u, static_cast<unsigned int>(std::ceil(size[2] / cellSize_)));
 
-            assert(cellsX_ <= 100'000 && cellsY_ <= 100'000 && cellsZ_ <= 100'000 && "number of cells too large.");
+            const size_t cellCount = static_cast<size_t>(cellsX_) * cellsY_ * cellsZ_;
 
-            cells_.resize(cellsX_ * cellsY_ * cellsZ_);
+            // this would make 100'000'000 * sizeof(GridCell) Bytes
+            // if we have 24 Bytes per GridCell, we end up with 2,4 GB alone for this spatial grid.
+            if (cellCount > 100'000'000) {
+                logger_.warn(std::format("Spatial Grid requested {0} cells", cellCount));
+                throw std::runtime_error("Cell count too high.");
+            }
+
+            trackedCells_.reserve(cellCount);
+            cells_.resize(cellCount);
         }
 
         /**
@@ -199,10 +237,11 @@ export namespace helios::engine::game::systems::physics {
          * already-solved collision pairs.
          */
         inline void prepareCollisionDetection() {
-            for (auto& cell : cells_) {
-                cell.clear();
+            for (const auto idx : trackedCells_) {
+                cells_[idx].clear();
             }
 
+            trackedCells_.clear();
             solvedCollisions_.clear();
         }
 
@@ -222,7 +261,7 @@ export namespace helios::engine::game::systems::physics {
          * @param isTriggerCollision True if this is a trigger (gameplay) collision.
          * @param updateContext Context for pushing events to the event queue.
          */
-        void postEvent(
+        inline void postEvent(
             helios::engine::game::GameObject* candidate,
             helios::engine::game::GameObject* match,
             helios::math::vec3f contact,
@@ -273,29 +312,23 @@ export namespace helios::engine::game::systems::physics {
          *
          * @param cc Collision component of the first entity.
          * @param matchCC Collision component of the second entity.
-         * @param isSolidCollision Output: set to true if a solid collision is detected.
-         * @param isTriggerCollision Output: set to true if a trigger collision is detected.
-         * @param aIsCollisionReporter Output: true if the first entity reports collisions.
-         * @param bIsCollisionReporter Output: true if the second entity reports collisions.
+         *
+         * @return CollisionStruct a struct with the requested collision information.
          */
-        void findCollisionType(
+        [[nodiscard]] inline CollisionStruct findCollisionType(
             const helios::engine::game::components::physics::CollisionComponent* cc,
-            const helios::engine::game::components::physics::CollisionComponent* matchCC,
-            bool& isSolidCollision,
-            bool& isTriggerCollision,
-            bool& aIsCollisionReporter,
-            bool& bIsCollisionReporter
-            ) const noexcept {
+            const helios::engine::game::components::physics::CollisionComponent* matchCC
+        ) const noexcept {
 
-            isSolidCollision   = false;
-            isTriggerCollision = false;
+            auto isSolidCollision   = false;
+            auto isTriggerCollision = false;
 
-            aIsCollisionReporter = cc->isCollisionReporter();
-            bIsCollisionReporter = matchCC->isCollisionReporter();
+            auto aIsCollisionReporter = cc->isCollisionReporter();
+            auto bIsCollisionReporter = matchCC->isCollisionReporter();
 
             // none of the reports a collision as a pair? skip!
             if (!aIsCollisionReporter && !bIsCollisionReporter) {
-                return;
+                return CollisionStruct{};
             }
 
             bool aCanSolidCollideWithB = (cc->solidCollisionMask() & matchCC->layerId()) != 0;
@@ -306,9 +339,23 @@ export namespace helios::engine::game::systems::physics {
 
             // solid collision is treated symmetric
             isSolidCollision = aCanSolidCollideWithB && bCanSolidCollideWithA;
+
+            #if HELIOS_DEBUG
+            // detect asymmetric solid collision
+            if (aCanSolidCollideWithB && !bCanSolidCollideWithA) {
+                logger_.warn("Collision Asymmetry detected!");
+            }
+            #endif
+
             // trigger collision is treated asymmetric
             isTriggerCollision = aCanTriggerCollideWithB || bCanTriggerCollideWithA;
 
+            return CollisionStruct {
+                isSolidCollision,
+                isTriggerCollision,
+                aIsCollisionReporter,
+                bIsCollisionReporter
+            };
         }
 
     public:
@@ -380,13 +427,13 @@ export namespace helios::engine::game::systems::physics {
                 );
             }
 
-            for (auto& cell : cells_) {
+            for (const auto idx : trackedCells_) {
 
-                if (cell.collisionCandidates.size() < 2) {
+                if (cells_[idx].collisionCandidates.size() < 2) {
                     continue;
                 }
 
-                solveCell(cell, updateContext);
+                solveCell(cells_[idx], updateContext);
             }
         }
 
@@ -436,7 +483,7 @@ export namespace helios::engine::game::systems::physics {
          * @param aabbColliderComponent Pointer to the entity's AABB collider component.
          * @param collisionComponent Pointer to the entity's collision component.
          */
-        void updateCollisionCandidate(
+        inline void updateCollisionCandidate(
             helios::engine::game::GameObject* go,
             const helios::math::aabbi& bounds,
             helios::engine::game::components::physics::AabbColliderComponent* aabbColliderComponent,
@@ -452,15 +499,21 @@ export namespace helios::engine::game::systems::physics {
             for (int x = xMin; x <= xMax; x++) {
                 for (int y = yMin; y <= yMax; y++) {
                     for (int z = zMin; z <= zMax; z++) {
-                        auto& gridCell = cell(x, y, z);
+                        auto& [collisionCandidates] = cell(x, y, z);
 
-                        gridCell.collisionCandidates.push_back(
+                        collisionCandidates.push_back(
                             CollisionCandidate{
                                 go,
                                 aabbColliderComponent,
                                 collisionComponent
                             }
                         );
+
+                        // only consider the first added to prevent dups
+                        if (collisionCandidates.size() == 1) {
+                            const auto idx = cellIndex(x, y, z);
+                            trackedCells_.push_back(idx);
+                        }
                     }
                 }
             }
@@ -479,13 +532,13 @@ export namespace helios::engine::game::systems::physics {
          * @param cell The grid cell containing collision candidates to test.
          * @param updateContext Context for pushing collision events to the event queue.
          */
-        void solveCell(GridCell& cell, helios::engine::game::UpdateContext& updateContext) {
+        inline void solveCell(GridCell& cell, helios::engine::game::UpdateContext& updateContext) {
 
             auto& candidates = cell.collisionCandidates;
 
             // we will skip this cell if none of the candidates reports a collision
             bool isCollisionReporter = false;
-            for (auto& candidate : candidates) {
+            for (const auto& candidate : candidates) {
                 if (candidate.collisionComponent->isCollisionReporter()) {
                     isCollisionReporter = true;
                     break;
@@ -505,32 +558,23 @@ export namespace helios::engine::game::systems::physics {
 
                 for (size_t j = i+1; j < candidates.size(); j++) {
 
-                    CollisionCandidate& match = candidates[j];
+                    auto& [gameObject, aabbColliderComponent, collisionComponent] = candidates[j];
 
-                    helios::engine::game::components::physics::CollisionComponent* matchCC = match.collisionComponent;
+                    helios::engine::game::components::physics::CollisionComponent* matchCC = collisionComponent;
 
-                    bool isSolidCollision = false;
-                    bool isTriggerCollision = false;
-                    bool aIsCollisionReporter = false;
-                    bool bIsCollisionReporter = false;
+                    const auto collisionStruct = findCollisionType(cc, matchCC);
 
-                    findCollisionType(
-                        cc, matchCC,
-                        isSolidCollision, isTriggerCollision,
-                        aIsCollisionReporter, bIsCollisionReporter);
-
-                    if ((!isSolidCollision && !isTriggerCollision) ||
-                        (!aIsCollisionReporter && !bIsCollisionReporter)) {
+                    if (!collisionStruct.hasAnyInteraction()) {
                         continue;
                     }
 
-                    const helios::math::aabbf& aabbMatch = match.aabbColliderComponent->bounds();
+                    const helios::math::aabbf& aabbMatch = aabbColliderComponent->bounds();
                     if (!aabbCandidate.intersects(aabbMatch)) {
                         continue;
                     }
 
                     auto lGuid = candidate.gameObject->guid();
-                    auto rGuid = match.gameObject->guid();
+                    auto rGuid = gameObject->guid();
 
                     if (lGuid > rGuid) {
                         std::swap(lGuid, rGuid);
@@ -543,10 +587,10 @@ export namespace helios::engine::game::systems::physics {
                     solvedCollisions_.insert({lGuid, rGuid});
 
                     postEvent(
-                        candidate.gameObject, match.gameObject,
+                        candidate.gameObject, gameObject,
                         helios::math::overlapCenter(aabbCandidate, aabbMatch),
-                        aIsCollisionReporter, bIsCollisionReporter,
-                        isSolidCollision, isTriggerCollision,
+                        collisionStruct.aIsCollisionReporter, collisionStruct.bIsCollisionReporter,
+                        collisionStruct.isSolidCollision, collisionStruct.isTriggerCollision,
                         updateContext
                     );
                 }
@@ -562,12 +606,23 @@ export namespace helios::engine::game::systems::physics {
          *
          * @return Reference to the GridCell at the specified coordinates.
          */
-        [[nodiscard]] GridCell& cell(unsigned int x, unsigned int y, unsigned int z) noexcept {
+        [[nodiscard]] inline GridCell& cell(const unsigned int x, const  unsigned int y, const unsigned int z) noexcept {
+            return cells_[cellIndex(x, y, z)];
+        }
+
+        /**
+         * Computes the flattened representative out of the 3D coordinates.
+         *
+         * @param x
+         * @param y
+         * @param z
+         *
+         * @return
+         */
+        [[nodiscard]] inline constexpr size_t cellIndex(const unsigned int x, const unsigned int y, const unsigned int z) const noexcept {
             assert (x < cellsX_ && y < cellsY_ && z < cellsZ_ && "Invalid range values");
 
-            return cells_[
-                x + y * cellsX_ + z * (cellsX_ * cellsY_)
-            ];
+            return x + y * cellsX_ + (z * cellsX_ * cellsY_);
         }
 
         /**

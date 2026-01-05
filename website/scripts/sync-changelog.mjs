@@ -167,14 +167,30 @@ async function main() {
       meta: { title: 'Testing', description: 'Running tests in helios: CTest usage, test patterns, debugging failures.', slug: '/testing', tags: ['testing', 'quality'], keywords: ['helios', 'testing', 'ctest', 'unit tests'], sidebar_label: 'Testing', sidebar_position: 3 }
     },
     {
-      src: path.join(repoRoot, 'docs', 'CONVENTIONS.md'),
-      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'conventions.md'),
-      meta: { title: 'Technical Conventions', description: 'Coordinate systems (LHS), matrix storage (column-major), and mathematical foundations used in helios.', slug: '/core-concepts/conventions', tags: ['math', 'architecture'], keywords: ['helios', 'coordinate system', 'left-handed', 'matrix', 'column-major', 'conventions'], sidebar_label: 'Conventions', sidebar_position: 2 }
-    },
-    {
       src: path.join(repoRoot, 'docs', 'PREREQUISITES.md'),
       dest: path.join(websiteRoot, 'docs', 'prerequisites.md'),
       meta: { title: 'Prerequisites', description: 'Required tools and environment for building helios: CMake 4.0+, C++23 compilers, OpenGL, platform setup.', slug: '/prerequisites', tags: ['setup', 'requirements'], keywords: ['helios', 'prerequisites', 'C++23', 'CMake', 'OpenGL'], sidebar_label: 'Prerequisites', sidebar_position: 1 }
+    },
+    // Core Concepts - Source of Truth for architectural patterns
+    {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'conventions.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'conventions.md'),
+      meta: { title: 'Technical Conventions', description: 'Coordinate systems (LHS), matrix storage (column-major), units (1 hu = 1 m), and mathematical foundations used in helios.', slug: '/core-concepts/conventions', tags: ['math', 'architecture'], keywords: ['helios', 'coordinate system', 'left-handed', 'matrix', 'column-major', 'conventions', 'units'], sidebar_label: 'Conventions', sidebar_position: 2 }
+    },
+    {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'scene-graph.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'scene-graph.md'),
+      meta: { title: 'Scene Graph', description: 'Hierarchical scene organization with transform inheritance, parent-child relationships, and camera integration.', slug: '/core-concepts/scene-graph', tags: ['scene', 'architecture'], keywords: ['helios', 'scene graph', 'transform', 'hierarchy', 'SceneNode', 'Camera'], sidebar_label: 'Scene Graph', sidebar_position: 1 }
+    },
+    {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'component-system.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'component-system.md'),
+      meta: { title: 'Component System', description: 'Composition-based entity design with Components, Systems, and GameWorld for flexible game logic.', slug: '/core-concepts/component-system', tags: ['gameplay', 'architecture'], keywords: ['helios', 'component', 'system', 'GameObject', 'GameWorld', 'composition'], sidebar_label: 'Component System', sidebar_position: 3 }
+    },
+    {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'gameloop-architecture.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'gameloop-architecture.md'),
+      meta: { title: 'Game Loop Architecture', description: 'Commands, Events, double-buffered EventBus, and ImmediateBus for decoupled game systems.', slug: '/core-concepts/gameloop-architecture', tags: ['gameplay', 'architecture'], keywords: ['helios', 'game loop', 'commands', 'events', 'EventBus', 'CommandBuffer'], sidebar_label: 'Game Loop', sidebar_position: 4 }
     },
     {
       src: path.join(repoRoot, 'examples', 'README.md'),

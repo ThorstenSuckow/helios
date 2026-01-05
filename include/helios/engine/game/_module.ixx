@@ -12,7 +12,7 @@ export import helios.engine.game.InputSnapshot;
 // Component system
 export import helios.engine.game.Component;
 export import helios.engine.game.GameObject;
-export import helios.engine.game.GameObjectFilterType;
+export import helios.engine.game.GameObjectFilter;
 export import helios.engine.game.GameObjectPool;
 export import helios.engine.game.GameWorld;
 
@@ -29,4 +29,5 @@ export import helios.engine.game.System;
 // Aggregate sub-modules
 export import helios.engine.game.commands;
 export import helios.engine.game.components;
+export import helios.engine.game.event;
 export import helios.engine.game.systems;

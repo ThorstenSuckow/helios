@@ -144,6 +144,28 @@ export namespace helios::math {
         }
 
         /**
+         * @brief Checks if this AABB intersects another AABB.
+         *
+         * @param box The AABB to test for intersection.
+         *
+         * @return True if the specified box intersects this AABB, false otherwise.
+         */
+        [[nodiscard]] constexpr bool intersects(const helios::math::aabb<T>& box) const noexcept {
+
+            if (max_[0] <= box.min()[0] || min_[0] >= box.max()[0]) {
+                return false;
+            }
+            if (max_[1] <= box.min()[1] || min_[1] >= box.max()[1]) {
+                return false;
+            }
+            if (max_[2] <= box.min()[2] || min_[2] >= box.max()[2]) {
+                return false;
+            }
+            return true;
+        }
+
+
+        /**
          * @brief Translates the AABB by a given vector.
          *
          * Creates a new AABB by adding the components of the given translation vector
@@ -226,9 +248,73 @@ export namespace helios::math {
 
             return aabb<T>(newMin, newMax);
         }
-
-
     };
+
+    /**
+     * @brief Computes the signed dimensions of the overlapping region between two axis-aligned
+     * bounding boxes (AABBs).
+     *
+     * Given two AABBs, this function calculates the intersection bounds along each axis.
+     * The resulting vector represents the size (extents) of the intersection.
+     *
+     * @tparam T The numeric type used for the vector components (e.g., `float` or `double`).
+     * @param a The first AABB.
+     * @param b The second AABB.
+     *
+     * @return A 3D vector representing the dimensions of the overlapping region between
+     *         the AABBs. If no overlap exists, the resulting vector may contain non-positive
+     *         values in one or more components.
+     */
+    template<typename T>
+    [[nodiscard]] constexpr helios::math::vec3<T> overlap(
+       const helios::math::aabb<T> a, const helios::math::aabb<T> b) noexcept {
+
+        const auto overlapMin = helios::math::vec3<T>{
+            std::max(a.min()[0], b.min()[0]),
+            std::max(a.min()[1], b.min()[1]),
+            std::max(a.min()[2], b.min()[2])
+        };
+
+        const auto overlapMax = helios::math::vec3<T>{
+            std::min(a.max()[0], b.max()[0]),
+            std::min(a.max()[1], b.max()[1]),
+            std::min(a.max()[2], b.max()[2])
+        };
+
+        return overlapMax - overlapMin;
+    }
+
+    /**
+     * @brief Computes the center of intersection of the overlapping region between two axis-aligned bounding
+     * boxes (AABBs).
+     *
+     * This function calculates the center of the intersection region of the two AABBs.
+     *  If the AABBs do not overlap, the returned value represents the midpoint of the gap between them.
+     *
+     * @tparam T The numeric type used for the vector components (e.g., `float` or `double`).
+     * @param a The first AABB.
+     * @param b The second AABB.
+     *
+     * @return A 3D vector representing the center point of the overlapping or gapping region between the AABBs.
+     */
+    template<typename T>
+    [[nodiscard]] constexpr helios::math::vec3<T> overlapCenter(
+        const helios::math::aabb<T> a, const helios::math::aabb<T> b) noexcept {
+
+        const auto overlapMin = helios::math::vec3<T>{
+            std::max(a.min()[0], b.min()[0]),
+            std::max(a.min()[1], b.min()[1]),
+            std::max(a.min()[2], b.min()[2])
+        };
+
+        const auto overlapMax = helios::math::vec3<T>{
+            std::min(a.max()[0], b.max()[0]),
+            std::min(a.max()[1], b.max()[1]),
+            std::min(a.max()[2], b.max()[2])
+        };
+
+        return (overlapMax + overlapMin) * static_cast<T>(0.5);
+    }
 
     /**
      * @brief Adds a translation vector to an AABB.
@@ -276,6 +362,11 @@ export namespace helios::math {
      * @brief Integer AABB.
      */
     using aabbi = aabb<int>;
+
+    /**
+     * @brief Unsigned Integer AABB.
+     */
+    using aabbui = aabb<unsigned int>;
 
     /**
      * @brief Double-precision floating-point AABB.

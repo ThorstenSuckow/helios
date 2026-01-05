@@ -24,6 +24,13 @@ Synchronizes markdown documentation from the repository root into the website's 
 | `docs/CONTRIBUTING.md` | `docs/contributing/guide.md` | Contributing guide |
 | `docs/CHANGELOG_GUIDE.md` | `docs/contributing/changelog-guide.md` | Changelog maintenance |
 | `docs/testing.md` | `docs/testing.md` | Testing guide (CTest) |
+| `docs/PREREQUISITES.md` | `docs/prerequisites.md` | Build prerequisites |
+| **Core Concepts (Source of Truth)** | | |
+| `docs/core-concepts/conventions.md` | `docs/core-concepts/conventions.md` | LHS, matrix storage, units |
+| `docs/core-concepts/scene-graph.md` | `docs/core-concepts/scene-graph.md` | Scene hierarchy, transforms |
+| `docs/core-concepts/component-system.md` | `docs/core-concepts/component-system.md` | Components, Systems, GameWorld |
+| `docs/core-concepts/gameloop-architecture.md` | `docs/core-concepts/gameloop-architecture.md` | Commands, Events, EventBus |
+| **Examples** | | |
 | `examples/README.md` | `docs/examples/overview.md` | Examples overview |
 | `examples/simple_cube_rendering/README.md` | `docs/examples/simple-cube.md` | Cube rendering tutorial |
 | `examples/game_controller_input/README.md` | `docs/examples/gamepad-input.md` | Gamepad input tutorial |

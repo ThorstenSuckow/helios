@@ -6,12 +6,12 @@ module;
 
 #include <memory>
 
-export module helios.engine.FramePacer;
+export module helios.engine.tooling.FramePacer;
 
 import helios.util.time.Stopwatch;
-import helios.engine.FrameStats;
+import helios.engine.tooling.FrameStats;
 
-export namespace helios::engine {
+export namespace helios::engine::tooling {
 
     /**
      * @class FramePacer

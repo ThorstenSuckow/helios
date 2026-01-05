@@ -26,7 +26,7 @@ import helios.util.log.LogManager;
 import helios.engine.game.System;
 import helios.engine.game.Level;
 
-import helios.engine.game.GameObjectFilterType;
+import helios.engine.game.GameObjectFilter;
 
 #define HELIOS_LOG_SCOPE "helios::engine::game::GameWorld"
 export namespace helios::engine::game {
@@ -272,7 +272,7 @@ export namespace helios::engine::game {
          * @return A GameObjectView object that can be iterated over.
          */
         template<class... Cs>
-        [[nodiscard]] auto find(GameObjectFilterType query = GameObjectFilterType::Active) {
+        [[nodiscard]] auto find(GameObjectFilter query = GameObjectFilter::Active | GameObjectFilter::ComponentEnabled) {
             return GameObjectRange<Map, Cs...>(gameObjects_, query);
         }
 
@@ -287,7 +287,7 @@ export namespace helios::engine::game {
          * @return A const GameObjectView object that can be iterated over.
          */
         template<class... Cs>
-        [[nodiscard]] auto find(GameObjectFilterType query = GameObjectFilterType::Active) const {
+        [[nodiscard]] auto find(GameObjectFilter query = GameObjectFilter::Active | GameObjectFilter::ComponentEnabled) const {
             return GameObjectRange<const Map, Cs...>(gameObjects_, query);
         }
 

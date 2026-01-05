@@ -32,7 +32,8 @@ import helios.math;
 export namespace helios::engine::game::systems::physics {
 
     /**
-     * @brief Broad-phase collision detection system using uniform spatial partitioning.
+     * @brief Collision detection system using uniform spatial partitioning for Broadphase and
+     * AABB overlappings in the Narowphase.
      *
      * This system implements a grid-based spatial partitioning approach for efficient collision
      * detection, following the principles outlined in Ericson's "Real-Time Collision Detection"
@@ -40,17 +41,17 @@ export namespace helios::engine::game::systems::physics {
      * each collidable entity to the cells it overlaps.
      *
      * The detection process consists of two phases:
-     * 1. **Broad Phase:** Entities are inserted into grid cells based on their AABB. Only entities
+     * 1. **Broadphase:** Entities are inserted into grid cells based on their AABB. Only entities
      *    sharing the same cell are considered potential collision pairs.
-     * 2. **Narrow Phase:** For each cell with multiple candidates, AABB intersection tests
+     * 2. **Narrowphase:** For each cell with multiple candidates, AABB intersection tests
      *    determine actual collisions.
      *
-     * Collision events are published to the `UpdateContext` event queue, distinguishing between:
+     * Collision events are published to the `UpdateContext`'s event sink, distinguishing between:
      * - **Solid collisions:** Symmetric collisions where both entities can physically interact.
      * - **Trigger collisions:** Asymmetric collisions for gameplay logic (e.g., pickups, zones).
      *
-     * The system uses layer masks to filter which entity types can collide with each other,
-     * enabling fine-grained control over collision pairs.
+     * During the broadphase, the system uses additional layer masks to filter which entity types
+     * can collide with each other, enabling fine-grained control over collision pairs.
      *
      * @see CollisionComponent
      * @see AabbColliderComponent
@@ -66,6 +67,8 @@ export namespace helios::engine::game::systems::physics {
          *
          * Enables the use of GUID pairs as keys in unordered containers. The hash combines
          * both GUIDs using XOR with a bit-shift to reduce collision probability for symmetric pairs.
+         *
+         * @todo switch to unit32_t once helios/#174 is implemented
          */
         struct GuidPairHash {
 
@@ -207,7 +210,7 @@ export namespace helios::engine::game::systems::physics {
         }
 
         /**
-         * @brief Posts collision events to the event queue.
+         * @brief Posts collision events to the UpdateContext's event sink.
          *
          * Publishes TriggerCollisionEvent and/or SolidCollisionEvent to the UpdateContext
          * based on the collision type and reporter flags. An entity marked as
@@ -264,7 +267,7 @@ export namespace helios::engine::game::systems::physics {
 
         }
 
-                /**
+        /**
          * @brief Determines the collision type between two entities based on their layer masks.
          *
          * Evaluates both solid and trigger collision masks to determine if and how two entities

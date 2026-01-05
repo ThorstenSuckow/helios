@@ -38,7 +38,7 @@ export namespace helios::engine::game::systems::physics {
 
     /**
      * @brief Collision detection system using uniform spatial partitioning for Broadphase and
-     * AABB overlappings in the Narrowphase.
+     * AABB overlaps in the Narrowphase.
      *
      * This system implements a grid-based spatial partitioning approach for efficient collision
      * detection, following the principles outlined in Ericson's "Real-Time Collision Detection"
@@ -611,13 +611,13 @@ export namespace helios::engine::game::systems::physics {
         }
 
         /**
-         * Computes the flattened representative out of the 3D coordinates.
+         * @brief Computes the 1D index of a cell in a 3D grid based on its x, y, and z coordinates.
          *
-         * @param x
-         * @param y
-         * @param z
+         * @param x The x-coordinate of the cell (must be less than the grid's x-dimension).
+         * @param y The y-coordinate of the cell (must be less than the grid's y-dimension).
+         * @param z The z-coordinate of the cell (must be less than the grid's z-dimension).
          *
-         * @return
+         * @return The 1D index of the cell in the grid.
          */
         [[nodiscard]] inline constexpr size_t cellIndex(const unsigned int x, const unsigned int y, const unsigned int z) const noexcept {
             assert (x < cellsX_ && y < cellsY_ && z < cellsZ_ && "Invalid range values");

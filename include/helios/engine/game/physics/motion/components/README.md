@@ -1,4 +1,4 @@
-# helios::engine::game::physics::components
+# helios::engine::game::physics::motion::components
 
 Physics and movement components for game entities.
 
@@ -9,6 +9,6 @@ This namespace contains components that handle physics simulation, movement, and
 
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::game::physics::components
+@namespace helios::engine::game::physics::motion::components
 @brief This namespace contains components that handle physics simulation, movement, and related behaviors.
 </p></details>

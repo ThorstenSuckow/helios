@@ -6,12 +6,12 @@ module;
 
 #include <limits>
 
-export module helios.engine.game.physics.components.AabbColliderComponent;
+export module helios.engine.game.physics.collision.components.AabbColliderComponent;
 
 import helios.math.types;
 import helios.engine.game.Component;
 
-export namespace helios::engine::game::physics::components {
+export namespace helios::engine::game::physics::collision::components {
 
     /**
      * @brief Component that defines an Axis-Aligned Bounding Box (AABB) for physics interactions.

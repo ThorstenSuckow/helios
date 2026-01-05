@@ -13,7 +13,7 @@ module;
 #include <vector>
 
 
-export module helios.engine.game.physics.systems.GridCollisionDetectionSystem;
+export module helios.engine.game.physics.collision.systems.GridCollisionDetectionSystem;
 
 import helios.engine.game.System;
 import helios.engine.game.UpdateContext;
@@ -22,19 +22,22 @@ import helios.engine.game.GameObject;
 import helios.engine.game.GameWorld;
 
 
-import helios.engine.game.physics.events.TriggerCollisionEvent;
-import helios.engine.game.physics.events.SolidCollisionEvent;
+import helios.engine.game.physics.collision.events.TriggerCollisionEvent;
+import helios.engine.game.physics.collision.events.SolidCollisionEvent;
 
-import helios.engine.game.physics.components.CollisionComponent;
-import helios.engine.game.physics.components.AabbColliderComponent;
+import helios.engine.game.physics.collision.components.CollisionComponent;
+import helios.engine.game.physics.collision.components.AabbColliderComponent;
 
 import helios.util.Guid;
 import helios.math;
 
 import helios.util.log;
 
+using namespace helios::engine::game::physics::collision::components;
+using namespace helios::engine::game::physics::collision::events;
+
 #define HELIOS_LOG_SCOPE "helios::engine::game::physics::systems::GridCollisionDetectionSystem"
-export namespace helios::engine::game::physics::systems {
+export namespace helios::engine::game::physics::collision::systems {
 
     /**
      * @brief Collision detection system using uniform spatial partitioning for Broadphase and
@@ -126,12 +129,12 @@ export namespace helios::engine::game::physics::systems {
             /**
              * @brief Pointer to the AABB collider component providing world-space bounds.
              */
-            helios::engine::game::physics::components::AabbColliderComponent* aabbColliderComponent;
+            AabbColliderComponent* aabbColliderComponent;
 
             /**
              * @brief Pointer to the collision component defining layer masks and collision behavior.
              */
-            helios::engine::game::physics::components::CollisionComponent* collisionComponent;
+            CollisionComponent* collisionComponent;
         };
 
         /**
@@ -279,11 +282,11 @@ export namespace helios::engine::game::physics::systems {
             // post the events
             if (isTriggerCollision) {
                 if (aIsCollisionReporter) {
-                    updateContext.pushEvent<helios::engine::game::physics::events::TriggerCollisionEvent>(
+                    updateContext.pushEvent<helios::engine::game::physics::collision::events::TriggerCollisionEvent>(
                         candidate, match, contact
                     );
                 } else if (bIsCollisionReporter) {
-                    updateContext.pushEvent<helios::engine::game::physics::events::TriggerCollisionEvent>(
+                    updateContext.pushEvent<helios::engine::game::physics::collision::events::TriggerCollisionEvent>(
                         match, candidate, contact
                     );
                 }
@@ -291,11 +294,11 @@ export namespace helios::engine::game::physics::systems {
 
             if (isSolidCollision) {
                 if (aIsCollisionReporter) {
-                    updateContext.pushEvent<helios::engine::game::physics::events::SolidCollisionEvent>(
+                    updateContext.pushEvent<helios::engine::game::physics::collision::events::SolidCollisionEvent>(
                         candidate, match, contact
                     );
                 } else if (bIsCollisionReporter) {
-                    updateContext.pushEvent<helios::engine::game::physics::events::SolidCollisionEvent>(
+                    updateContext.pushEvent<helios::engine::game::physics::collision::events::SolidCollisionEvent>(
                         match, candidate, contact
                     );
                 }
@@ -316,8 +319,8 @@ export namespace helios::engine::game::physics::systems {
          * @return CollisionStruct a struct with the requested collision information.
          */
         [[nodiscard]] inline CollisionStruct findCollisionType(
-            const helios::engine::game::physics::components::CollisionComponent* cc,
-            const helios::engine::game::physics::components::CollisionComponent* matchCC
+            const CollisionComponent* cc,
+            const CollisionComponent* matchCC
         ) const noexcept {
 
             auto isSolidCollision   = false;
@@ -404,8 +407,8 @@ export namespace helios::engine::game::physics::systems {
             constexpr auto filter = helios::engine::game::GameObjectFilter::Active | helios::engine::game::GameObjectFilter::ComponentEnabled;
 
             for (auto [entity, cc, acc] : gameWorld_->find<
-                helios::engine::game::physics::components::CollisionComponent,
-                helios::engine::game::physics::components::AabbColliderComponent
+                CollisionComponent,
+                AabbColliderComponent
 
             >(filter).each()) {
 
@@ -486,8 +489,8 @@ export namespace helios::engine::game::physics::systems {
         inline void updateCollisionCandidate(
             helios::engine::game::GameObject* go,
             const helios::math::aabbi& bounds,
-            helios::engine::game::physics::components::AabbColliderComponent* aabbColliderComponent,
-            helios::engine::game::physics::components::CollisionComponent* collisionComponent
+            AabbColliderComponent* aabbColliderComponent,
+            CollisionComponent* collisionComponent
         ) {
             const auto xMin = bounds.min()[0];
             const auto xMax = bounds.max()[0];
@@ -552,7 +555,7 @@ export namespace helios::engine::game::physics::systems {
             for (size_t i = 0; i < candidates.size(); i++) {
 
                 CollisionCandidate& candidate = candidates[i];
-                helios::engine::game::physics::components::CollisionComponent* cc = candidate.collisionComponent;
+                CollisionComponent* cc = candidate.collisionComponent;
 
                 const helios::math::aabbf& aabbCandidate = candidate.aabbColliderComponent->bounds();
 
@@ -560,7 +563,7 @@ export namespace helios::engine::game::physics::systems {
 
                     auto& [gameObject, aabbColliderComponent, collisionComponent] = candidates[j];
 
-                    helios::engine::game::physics::components::CollisionComponent* matchCC = collisionComponent;
+                    CollisionComponent* matchCC = collisionComponent;
 
                     const auto collisionStruct = findCollisionType(cc, matchCC);
 

@@ -4,7 +4,6 @@
  */
 export module helios.engine.game.physics;
 
-export import helios.engine.game.physics.components;
-export import helios.engine.game.physics.events;
-export import helios.engine.game.physics.systems;
+export import helios.engine.game.physics.collision;
+export import helios.engine.game.physics.motion;
 

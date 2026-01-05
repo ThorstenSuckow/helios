@@ -6,13 +6,13 @@ module;
 
 #include <cmath>
 
-export module helios.engine.game.physics.components.RotationStateComponent;
+export module helios.engine.game.physics.motion.components.RotationStateComponent;
 
 import helios.engine.game.Component;
 
 import helios.math;
 
-export namespace helios::engine::game::physics::components {
+export namespace helios::engine::game::physics::motion::components {
 
     /**
      * @brief Component that manages composite rotation from heading and spin rotations.

@@ -25,8 +25,46 @@ export namespace helios::util {
 
     public:
 
+        /**
+         * @brief Compares two Guid instances for equality.
+         *
+         * @param guid The Guid to compare against.
+         *
+         * @return `true` if both Guids have the same underlying value, `false` otherwise.
+         */
         constexpr bool operator==(const Guid& guid) const = default;
+
+        /**
+         * @brief Compares two Guid instances for inequality.
+         *
+         * @param guid The Guid to compare against.
+         *
+         * @return `true` if the Guids have different underlying values, `false` otherwise.
+         */
         constexpr bool operator!=(const Guid& guid) const = default;
+
+        /**
+         * @brief Less-than comparison operator, enabling ordering of Guid instances.
+         *
+         * @param guid The Guid to compare against.
+         *
+         * @return `true` if this Guid's value is less than the other, `false` otherwise.
+         */
+        constexpr bool operator<(const Guid& guid) const noexcept {
+            return value_ < guid.value();
+        }
+
+        /**
+         * @brief Greater-than comparison operator, enabling ordering of Guid instances.
+         *
+         * @param guid The Guid to compare against.
+         *
+         * @return `true` if this Guid's value is greater than the other, `false` otherwise.
+         */
+        constexpr bool operator>(const Guid& guid) const noexcept {
+            return value_ > guid.value();
+        }
+
 
         /**
          * @brief Generates a new Guid.
@@ -63,7 +101,7 @@ export namespace helios::util {
 } // namespace helios::util
 
 
-export template<>
+template<>
 struct std::hash<helios::util::Guid> {
     std::size_t operator()(const helios::util::Guid& guid) const noexcept {
         return guid.hash();

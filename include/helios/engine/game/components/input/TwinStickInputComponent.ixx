@@ -55,11 +55,11 @@ export namespace helios::engine::game::components::input {
          */
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
-            auto* inputSnapshot = updateContext.inputSnapshot();
-            auto* commandBuffer = updateContext.commandBuffer();
+            auto& inputSnapshot = updateContext.inputSnapshot();
+            auto& commandBuffer = updateContext.commandBuffer();
 
             // Left stick: movement
-            const auto leftStick = inputSnapshot->gamepadState().left();
+            const auto leftStick = inputSnapshot.gamepadState().left();
             float finalSpeed = 0.0f;
             float speed = leftStick.length();
             auto ldir = helios::math::vec2f{0.0f, 0.0f};
@@ -69,18 +69,18 @@ export namespace helios::engine::game::components::input {
                 finalSpeed = speed;
             }
 
-            commandBuffer->add(
+            commandBuffer.add(
                 gameObject()->guid(),
                 std::make_unique<helios::engine::game::commands::Move2DCommand>(ldir, finalSpeed)
             );
 
-            commandBuffer->add(
+            commandBuffer.add(
                 gameObject()->guid(),
                 std::make_unique<helios::engine::game::commands::HeadingCommand>(ldir, finalSpeed)
             );
 
             // Right stick: aiming
-            const auto rightStick = inputSnapshot->gamepadState().right();
+            const auto rightStick = inputSnapshot.gamepadState().right();
             float freq = rightStick.length();
             float finalFreq = 0.0f;
             auto rdir = helios::math::vec2f{0.0f, 0.0f};
@@ -90,21 +90,21 @@ export namespace helios::engine::game::components::input {
                 finalFreq = freq;
             }
 
-            commandBuffer->add(
+            commandBuffer.add(
                 gameObject()->guid(),
                 std::make_unique<helios::engine::game::commands::Aim2DCommand>(rdir, finalFreq)
             );
 
             if (useDedicatedShootInput_) {
                 // right trigger: shooting
-                const auto rightTrigger = inputSnapshot->gamepadState().triggerRight();
+                const auto rightTrigger = inputSnapshot.gamepadState().triggerRight();
 
-                commandBuffer->add(
+                commandBuffer.add(
                    gameObject()->guid(),
                    std::make_unique<helios::engine::game::commands::ShootCommand>(rightTrigger)
                );
             } else {
-                commandBuffer->add(
+                commandBuffer.add(
                    gameObject()->guid(),
                    std::make_unique<helios::engine::game::commands::ShootCommand>(finalFreq)
                );

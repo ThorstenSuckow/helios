@@ -32,8 +32,10 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Core Concepts',
       items: [
-        'core-concepts/conventions',
         'core-concepts/scene-graph',
+        'core-concepts/conventions',
+        'core-concepts/component-system',
+        'core-concepts/gameloop-architecture',
       ],
     },
     {
@@ -47,6 +49,7 @@ const sidebars: SidebarsConfig = {
         'examples/simple-cube',
         'examples/gamepad-input',
         'examples/spaceship-control',
+        'examples/spaceship-shooting',
       ],
     },
     'testing',

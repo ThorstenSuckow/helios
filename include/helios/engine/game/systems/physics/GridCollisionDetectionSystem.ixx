@@ -33,7 +33,7 @@ export namespace helios::engine::game::systems::physics {
 
     /**
      * @brief Collision detection system using uniform spatial partitioning for Broadphase and
-     * AABB overlappings in the Narowphase.
+     * AABB overlappings in the Narrowphase.
      *
      * This system implements a grid-based spatial partitioning approach for efficient collision
      * detection, following the principles outlined in Ericson's "Real-Time Collision Detection"
@@ -68,7 +68,7 @@ export namespace helios::engine::game::systems::physics {
          * Enables the use of GUID pairs as keys in unordered containers. The hash combines
          * both GUIDs using XOR with a bit-shift to reduce collision probability for symmetric pairs.
          *
-         * @todo switch to unit32_t once helios/#174 is implemented
+         * @todo switch to uint32_t once helios/#174 is implemented
          */
         struct GuidPairHash {
 
@@ -302,13 +302,13 @@ export namespace helios::engine::game::systems::physics {
             }
 
             bool aCanSolidCollideWithB = (cc->solidCollisionMask() & matchCC->layerId()) != 0;
-            bool bCanSollidCollideWithA = (matchCC->solidCollisionMask() & cc->layerId()) != 0;
+            bool bCanSolidCollideWithA = (matchCC->solidCollisionMask() & cc->layerId()) != 0;
 
             bool aCanTriggerCollideWithB = (cc->triggerCollisionMask() & matchCC->layerId()) != 0;
             bool bCanTriggerCollideWithA = (matchCC->triggerCollisionMask() & cc->layerId()) != 0;
 
             // solid collision is treated symmetric
-            isSolidCollision = aCanSolidCollideWithB && bCanSollidCollideWithA;
+            isSolidCollision = aCanSolidCollideWithB && bCanSolidCollideWithA;
             // trigger collision is treated asymmetric
             isTriggerCollision = aCanTriggerCollideWithB || bCanTriggerCollideWithA;
 
@@ -410,12 +410,12 @@ export namespace helios::engine::game::systems::physics {
             helios::math::vec3f max = aabbf.max() - gridBounds_.min();
 
             int xMin = static_cast<int>(std::floor(min[0] / cellSize_));
-            int yMin = static_cast<int>(std::floor(min[1] / cellSize_));;
-            int zMin = static_cast<int>(std::floor(min[2] / cellSize_));;
+            int yMin = static_cast<int>(std::floor(min[1] / cellSize_));
+            int zMin = static_cast<int>(std::floor(min[2] / cellSize_));
 
-            int xMax = static_cast<int>(std::floor(max[0] / cellSize_));;
-            int yMax = static_cast<int>(std::floor(max[1] / cellSize_));;
-            int zMax = static_cast<int>(std::floor(max[2] / cellSize_));;
+            int xMax = static_cast<int>(std::floor(max[0] / cellSize_));
+            int yMax = static_cast<int>(std::floor(max[1] / cellSize_));
+            int zMax = static_cast<int>(std::floor(max[2] / cellSize_));
 
             return helios::math::aabbi{
                 std::clamp(xMin, 0, static_cast<int>(cellsX_ -1)),

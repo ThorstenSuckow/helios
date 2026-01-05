@@ -6,11 +6,11 @@ module;
 
 #include <deque>
 
-export module helios.tooling.FpsMetrics;
+export module helios.engine.tooling.FpsMetrics;
 
 import helios.engine.tooling.FrameStats;
 
-export namespace helios::tooling {
+export namespace helios::engine::tooling {
 
     /**
      * @class FpsMetrics
@@ -25,7 +25,7 @@ export namespace helios::tooling {
      *
      * @par Usage Example:
      * ```cpp
-     * helios::tooling::FpsMetrics metrics;
+     * helios::engine::tooling::FpsMetrics metrics;
      * metrics.setHistorySize(120);
      *
      * // In game loop:

@@ -15,8 +15,8 @@ import helios.engine.game.UpdateContext;
 import helios.engine.game.Updatable;
 import helios.engine.game.Component;
 import helios.engine.game.CommandBuffer;
-import helios.engine.game.commands.Move2DCommand;
-import helios.engine.game.commands.HeadingCommand;
+import helios.engine.game.physics.motion.commands.Move2DCommand;
+import helios.engine.game.physics.motion.commands.HeadingCommand;
 import helios.engine.game.gameplay.combat.commands.Aim2DCommand;
 import helios.engine.game.gameplay.combat.commands.ShootCommand;
 
@@ -71,12 +71,12 @@ export namespace helios::engine::game::components::input {
 
             commandBuffer.add(
                 gameObject()->guid(),
-                std::make_unique<helios::engine::game::commands::Move2DCommand>(ldir, finalSpeed)
+                std::make_unique<helios::engine::game::physics::motion::commands::Move2DCommand>(ldir, finalSpeed)
             );
 
             commandBuffer.add(
                 gameObject()->guid(),
-                std::make_unique<helios::engine::game::commands::HeadingCommand>(ldir, finalSpeed)
+                std::make_unique<helios::engine::game::physics::motion::commands::HeadingCommand>(ldir, finalSpeed)
             );
 
             // Right stick: aiming

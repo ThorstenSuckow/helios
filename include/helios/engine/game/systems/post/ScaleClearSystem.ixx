@@ -12,7 +12,7 @@ import helios.engine.game.GameWorld;
 import helios.engine.game.System;
 import helios.engine.game.UpdateContext;
 
-import helios.engine.game.physics.components.ScaleComponent;
+import helios.engine.game.spatial.transform.components.ScaleComponent;
 
 
 export namespace helios::engine::game::systems::post {
@@ -35,7 +35,7 @@ export namespace helios::engine::game::systems::post {
          */
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
-            for (auto [entity, sc] : gameWorld_->find<helios::engine::game::physics::components::ScaleComponent>().each()) {
+            for (auto [entity, sc] : gameWorld_->find<helios::engine::game::spatial::transform::components::ScaleComponent>().each()) {
                 sc->clearDirty();
             }
 

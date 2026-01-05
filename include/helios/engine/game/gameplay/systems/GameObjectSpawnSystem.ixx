@@ -8,7 +8,7 @@ module;
 #include <memory>
 #include <vector>
 
-export module helios.engine.game.systems.gameplay.GameObjectSpawnSystem;
+export module helios.engine.game.gameplay.systems.GameObjectSpawnSystem;
 
 import helios.engine.game.System;
 import helios.engine.game.GameObjectPool;
@@ -29,7 +29,7 @@ import helios.engine.game.SpawnCondition;
 import helios.engine.game.SpawnStrategy;
 
 
-export namespace helios::engine::game::systems::gameplay {
+export namespace helios::engine::game::gameplay::systems {
     
     /**
      * @brief System responsible for spawning GameObjects into the level.

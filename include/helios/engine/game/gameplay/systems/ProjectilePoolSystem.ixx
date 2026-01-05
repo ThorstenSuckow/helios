@@ -10,7 +10,7 @@ module;
 #include <vector>
 
 
-export module helios.engine.game.systems.gameplay.ProjectilePoolSystem;
+export module helios.engine.game.gameplay.systems.ProjectilePoolSystem;
 
 
 import helios.engine.game.System;
@@ -27,13 +27,13 @@ import helios.ext.opengl.rendering.shader.OpenGLShader;
 import helios.util.io.BasicStringFileReader;
 import helios.rendering.model.config.MaterialProperties;
 
-import helios.engine.game.components.gameplay.Aim2DComponent;
+import helios.engine.game.gameplay.components.Aim2DComponent;
 import helios.engine.game.components.scene.SceneNodeComponent;
 
 import helios.engine.game.UpdateContext;
 import helios.util.Guid;
 
-export namespace helios::engine::game::systems::gameplay {
+export namespace helios::engine::game::gameplay::systems {
 
     /**
      * @brief Object pool system for efficient projectile spawning and lifecycle management.
@@ -108,7 +108,7 @@ export namespace helios::engine::game::systems::gameplay {
         /**
          * @brief Optional reference to an aim component for direction.
          */
-        helios::engine::game::components::gameplay::Aim2DComponent* aimComponent_ = nullptr;
+        helios::engine::game::gameplay::components::Aim2DComponent* aimComponent_ = nullptr;
 
         /**
          * @brief Optional reference to a scene node component for spawn position.

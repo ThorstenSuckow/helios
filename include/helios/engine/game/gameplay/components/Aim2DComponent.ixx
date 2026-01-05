@@ -4,14 +4,14 @@
  */
 module;
 
-export module helios.engine.game.components.gameplay.Aim2DComponent;
+export module helios.engine.game.gameplay.components.Aim2DComponent;
 
 import helios.math.types;
 import helios.engine.game.UpdateContext;
 import helios.engine.game.Component;
 
 
-export namespace helios::engine::game::components::gameplay {
+export namespace helios::engine::game::gameplay::components {
 
     /**
      * @brief Component for handling 2D aiming direction and fire frequency.

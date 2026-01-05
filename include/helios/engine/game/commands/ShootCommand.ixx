@@ -9,7 +9,7 @@ export module helios.engine.game.commands.ShootCommand;
 import helios.engine.game.Command;
 import helios.engine.game.GameObject;
 import helios.math.types;
-import helios.engine.game.components.gameplay.ShootComponent;
+import helios.engine.game.gameplay.components.ShootComponent;
 import helios.engine.game.physics.components.Move2DComponent;
 
 export namespace helios::engine::game::commands {
@@ -25,7 +25,7 @@ export namespace helios::engine::game::commands {
      *       command to have any effect.
      *
      * @see helios::engine::game::Command
-     * @see helios::engine::game::components::gameplay::ShootComponent
+     * @see helios::engine::game::gameplay::components::ShootComponent
      */
     class ShootCommand : public helios::engine::game::Command {
 
@@ -55,7 +55,7 @@ export namespace helios::engine::game::commands {
          */
         void execute(helios::engine::game::GameObject& gameObject) override {
 
-            auto* shootComponent = gameObject.get<helios::engine::game::components::gameplay::ShootComponent>();
+            auto* shootComponent = gameObject.get<helios::engine::game::gameplay::components::ShootComponent>();
 
             if (shootComponent) {
                 auto* m2d            =  gameObject.get<helios::engine::game::physics::components::Move2DComponent>();

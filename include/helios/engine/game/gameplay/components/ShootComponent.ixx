@@ -8,14 +8,14 @@ module;
 #include <iostream>
 #include <memory>
 
-export module helios.engine.game.components.gameplay.ShootComponent;
+export module helios.engine.game.gameplay.components.ShootComponent;
 
 import helios.math.types;
 import helios.math.utils;
 import helios.engine.game.UpdateContext;
 import helios.engine.game.Updatable;
 import helios.engine.game.Component;
-import helios.engine.game.components.gameplay.Aim2DComponent;
+import helios.engine.game.gameplay.components.Aim2DComponent;
 import helios.engine.game.physics.components.TransformComponent;
 
 import helios.math;
@@ -31,9 +31,9 @@ import helios.ext.opengl.rendering.shader.OpenGLShader;
 import helios.util.io.BasicStringFileReader;
 import helios.rendering.model.config.MaterialProperties;
 
-import helios.engine.game.systems.gameplay.ProjectilePoolSystem;
+import helios.engine.game.gameplay.systems.ProjectilePoolSystem;
 
-export namespace helios::engine::game::components::gameplay {
+export namespace helios::engine::game::gameplay::components {
 
     /**
      * @brief Component for handling projectile shooting with rate limiting.
@@ -69,7 +69,7 @@ export namespace helios::engine::game::components::gameplay {
          *
          * @details Set during onAttach(). Must not be null when shooting.
          */
-        helios::engine::game::components::gameplay::Aim2DComponent* aimComponent_ = nullptr;
+        helios::engine::game::gameplay::components::Aim2DComponent* aimComponent_ = nullptr;
 
         /**
          * @brief Pointer to the scene node component for spawn position.
@@ -120,7 +120,7 @@ export namespace helios::engine::game::components::gameplay {
         void onAttach(::helios::engine::game::GameObject* gameObject) noexcept override {
             Component::onAttach(gameObject);
 
-            aimComponent_ = gameObject->get<helios::engine::game::components::gameplay::Aim2DComponent>();
+            aimComponent_ = gameObject->get<helios::engine::game::gameplay::components::Aim2DComponent>();
             transformComponent_ = gameObject->get<helios::engine::game::physics::components::TransformComponent>();
             assert(aimComponent_ != nullptr && "Unexpected nullptr for aimComponent_");
             assert(transformComponent_ != nullptr && "Unexpected nullptr for transformComponent_");
@@ -167,7 +167,7 @@ export namespace helios::engine::game::components::gameplay {
             if (cooldownDelta_ >= cooldownTime_ && aimDir.length() > helios::math::EPSILON_LENGTH) {
                 cooldownDelta_ = 0;
                 auto* projectilePoolSystem = updateContext.gameWorld()
-                                        .getSystem<helios::engine::game::systems::gameplay::ProjectilePoolSystem>();
+                                        .getSystem<helios::engine::game::gameplay::systems::ProjectilePoolSystem>();
 
                 auto aimDirNorm = aimDir.normalize().toVec3();
 

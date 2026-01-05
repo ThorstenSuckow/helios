@@ -136,11 +136,6 @@ export namespace helios::engine::game::systems::physics {
         };
 
         /**
-         * @brief Type alias for min/max bounds as unsigned integer pair.
-         */
-        using BoundsMinMax = std::pair<unsigned int, unsigned int>;
-
-        /**
          * @brief Set of already-processed collision pairs to avoid duplicate events.
          *
          * Stores pairs of GUIDs in canonical order (smaller GUID first) to ensure each
@@ -191,6 +186,8 @@ export namespace helios::engine::game::systems::physics {
             cellsX_ = std::max(1, static_cast<int>(std::ceil(size[0] / cellSize_)));
             cellsY_ = std::max(1, static_cast<int>(std::ceil(size[1] / cellSize_)));
             cellsZ_ = std::max(1, static_cast<int>(std::ceil(size[2] / cellSize_)));
+
+            assert(cellsX_ <= 100'000 && cellsY_ <= 100'000 && cellsZ_ <= 100'000 && "number of cells too large.");
 
             cells_.resize(cellsX_ * cellsY_ * cellsZ_);
         }
@@ -418,12 +415,12 @@ export namespace helios::engine::game::systems::physics {
             int zMax = static_cast<int>(std::floor(max[2] / cellSize_));
 
             return helios::math::aabbi{
-                std::clamp(xMin, 0, static_cast<int>(cellsX_ -1)),
-                std::clamp(yMin, 0, static_cast<int>(cellsY_ -1)),
-                std::clamp(zMin, 0, static_cast<int>(cellsZ_ -1)),
-                std::clamp(xMax, 0, static_cast<int>(cellsX_ -1)),
-                std::clamp(yMax, 0, static_cast<int>(cellsY_ -1)),
-                std::clamp(zMax, 0, static_cast<int>(cellsZ_ -1)),
+                std::clamp(xMin, 0, static_cast<int>(cellsX_ - 1)),
+                std::clamp(yMin, 0, static_cast<int>(cellsY_ - 1)),
+                std::clamp(zMin, 0, static_cast<int>(cellsZ_ - 1)),
+                std::clamp(xMax, 0, static_cast<int>(cellsX_ - 1)),
+                std::clamp(yMax, 0, static_cast<int>(cellsY_ - 1)),
+                std::clamp(zMax, 0, static_cast<int>(cellsZ_ - 1)),
             };
         }
 
@@ -452,12 +449,12 @@ export namespace helios::engine::game::systems::physics {
             const auto zMin = bounds.min()[2];
             const auto zMax = bounds.max()[2];
 
-            for (int x = xMin; x <  xMax + 1; x++) {
-                for (int y = yMin; y <  yMax + 1; y++) {
-                    for (int z = zMin; z <  zMax + 1; z++) {
+            for (int x = xMin; x <= xMax; x++) {
+                for (int y = yMin; y <= yMax; y++) {
+                    for (int z = zMin; z <= zMax; z++) {
                         auto& gridCell = cell(x, y, z);
 
-                       gridCell.collisionCandidates.push_back(
+                        gridCell.collisionCandidates.push_back(
                             CollisionCandidate{
                                 go,
                                 aabbColliderComponent,

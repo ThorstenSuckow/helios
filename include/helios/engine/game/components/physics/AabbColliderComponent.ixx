@@ -57,13 +57,12 @@ export namespace helios::engine::game::components::physics {
          * @brief Checks whether the bounds of the collider have been initialized.
          *
          * Bounds of the collider component are considered to be initialized
-         * if the minimum X coordinate of the bounding box is not equal
-         * to the maximum value representable by a float.
+         * if the minimum X coordinate is less or equal to the maximum X coordinate.
          *
          * @return true if the bounds are considered to be initialized; otherwise, false.
          */
         [[nodiscard]] bool boundsInitialized() const noexcept {
-            return bounds_.min()[0] != std::numeric_limits<float>::max();
+            return bounds_.min()[0] <= bounds_.max()[0];
         }
     };
 

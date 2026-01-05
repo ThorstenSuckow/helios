@@ -7,12 +7,12 @@ module;
 #include <iostream>
 #include <format>
 
-export module helios.engine.game.physics.components.CollisionComponent;
+export module helios.engine.game.physics.collision.components.CollisionComponent;
 
 import helios.engine.game.Component;
 import helios.engine.game.GameObject;
 
-export namespace helios::engine::game::physics::components {
+export namespace helios::engine::game::physics::collision::components {
 
     /**
      * @class CollisionComponent

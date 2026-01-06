@@ -5,11 +5,11 @@
 module;
 
 
-export module helios.engine.game.InputSnapshot;
+export module helios.input.InputSnapshot;
 
 import helios.input.gamepad.GamepadState;
 
-export namespace helios::engine::game {
+export namespace helios::input {
 
     /**
      * @brief Immutable snapshot capturing input state at a specific point in time.
@@ -27,7 +27,7 @@ export namespace helios::engine::game {
      * Typical usage:
      * ```cpp
      * // Capture input at start of frame
-     * auto snapshot = helios::engine::game::InputSnapshot(
+     * auto snapshot = helios::input::InputSnapshot(
      *     inputManager.gamepadState(helios::input::types::Gamepad::ONE)
      * );
      *

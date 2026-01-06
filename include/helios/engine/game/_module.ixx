@@ -7,7 +7,6 @@ export module helios.engine.game;
 // Core game loop types
 export import helios.engine.game.Updatable;
 export import helios.engine.game.UpdateContext;
-export import helios.engine.game.InputSnapshot;
 
 // Component system
 export import helios.engine.game.Component;

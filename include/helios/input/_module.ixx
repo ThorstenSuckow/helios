@@ -16,3 +16,4 @@ export import helios.input.types;
 export import helios.input.gamepad;
 export import helios.input.InputAdapter;
 export import helios.input.InputManager;
+export import helios.input.InputSnapshot;

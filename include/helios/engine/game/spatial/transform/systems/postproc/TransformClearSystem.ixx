@@ -12,7 +12,7 @@ import helios.engine.game.GameWorld;
 import helios.engine.game.System;
 import helios.engine.game.UpdateContext;
 
-import helios.engine.game.components.scene.SceneNodeComponent;
+import helios.engine.game.scene.components.SceneNodeComponent;
 import helios.engine.game.spatial.transform.components.TransformComponent;
 
 

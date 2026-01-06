@@ -10,7 +10,7 @@ export module helios.engine.game.components.scene.SceneNodeComponent;
 
 import helios.scene.SceneNode;
 import helios.math.types;
-import helios.core.units;
+import helios.core.units.Unit;
 
 import helios.engine.game.Component;
 import helios.engine.game.GameObject;

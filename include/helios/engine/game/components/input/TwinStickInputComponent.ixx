@@ -14,7 +14,7 @@ import helios.engine.game.GameObject;
 import helios.engine.game.UpdateContext;
 import helios.engine.game.Updatable;
 import helios.engine.game.Component;
-import helios.engine.game.CommandBuffer;
+import helios.engine.core.messaging.command.CommandBuffer;
 import helios.engine.game.physics.motion.commands.Move2DCommand;
 import helios.engine.game.physics.motion.commands.HeadingCommand;
 import helios.engine.game.gameplay.combat.commands.Aim2DCommand;

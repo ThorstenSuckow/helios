@@ -8,11 +8,11 @@ module;
 #include <span>
 #include <vector>
 
-export module helios.core.data.TypeIndexedDoubleBuffer;
+export module helios.core.buffer.TypeIndexedDoubleBuffer;
 
 import helios.core.data.TypeIndexer;
-import helios.core.data.WriteBuffer;
-import helios.core.data.ReadBuffer;
+import helios.core.buffer.WriteBuffer;
+import helios.core.buffer.ReadBuffer;
 
 namespace {
     /**
@@ -51,7 +51,7 @@ namespace {
     };
 }
 
-export namespace helios::core::data {
+export namespace helios::core::buffer {
 
 
     /**

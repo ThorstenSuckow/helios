@@ -7,7 +7,7 @@ module;
 export module helios.engine.game.Level;
 
 import helios.math.types;
-import helios.core.units;
+import helios.core.units.Unit;
 import helios.scene.SceneNode;
 
 

@@ -7,7 +7,7 @@ module;
 
 #include <string>
 
-export module helios.core.units;
+export module helios.core.units.Unit;
 import helios.math.types;
 
 export namespace helios::core::units {

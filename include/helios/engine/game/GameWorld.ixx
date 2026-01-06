@@ -8,12 +8,9 @@ module;
 // Using it as a module interface unit causes Internal Compiler Errors (ICE) in MSVC
 // (VS2022/VS2026) when structured bindings are used with the each() iterator.
 // The workaround is to include it in the global module fragment.
-#include <helios/engine/game/GameObjectView.h>
+#include <helios/engine/core/data/GameObjectView.h>
 #include <memory>
-#include <type_traits>
 #include <unordered_map>
-#include <utility>
-#include <vector>
 
 export module helios.engine.game.GameWorld;
 
@@ -26,7 +23,7 @@ import helios.util.log.LogManager;
 import helios.engine.game.System;
 import helios.engine.game.Level;
 
-import helios.engine.game.GameObjectFilter;
+import helios.engine.core.data.GameObjectFilter;
 
 #define HELIOS_LOG_SCOPE "helios::engine::game::GameWorld"
 export namespace helios::engine::game {

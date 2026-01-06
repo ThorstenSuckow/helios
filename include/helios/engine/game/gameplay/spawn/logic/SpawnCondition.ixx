@@ -9,7 +9,7 @@ export module helios.engine.game.gameplay.spawn.logic.SpawnCondition;
 
 import helios.engine.game.GameWorld;
 import helios.engine.game.Level;
-import helios.engine.game.GameObjectPool;
+import helios.engine.core.data.GameObjectPool;
 import helios.engine.game.UpdateContext;
 
 

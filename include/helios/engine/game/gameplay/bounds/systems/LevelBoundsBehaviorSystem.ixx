@@ -4,7 +4,7 @@
  */
 module;
 
-#include <helios/engine/game/GameObjectView.h>
+#include <helios/engine/core/data/GameObjectView.h>
 
 export module helios.engine.game.gameplay.bounds.systems.LevelBoundsBehaviorSystem;
 

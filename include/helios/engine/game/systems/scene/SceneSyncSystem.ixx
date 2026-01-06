@@ -4,8 +4,8 @@
  */
 module;
 
+#include <helios/engine/core/data/GameObjectView.h>
 #include <cassert>
-#include <helios/engine/game/GameObjectView.h>
 
 export module helios.engine.game.systems.scene.SceneSyncSystem;
 

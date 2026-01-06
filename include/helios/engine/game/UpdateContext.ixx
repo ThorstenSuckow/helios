@@ -10,13 +10,17 @@ module;
 export module helios.engine.game.UpdateContext;
 
 import helios.engine.game.InputSnapshot;
-import helios.engine.game.event.GameLoopEventBus;
+import helios.engine.core.messaging.event.GameLoopEventBus;
+
+export namespace helios::engine::core::messaging::command {
+    class CommandBuffer;
+}
 
 
 export namespace helios::engine::game {
 
+
     class GameWorld;
-    class CommandBuffer;
 
     /**
      * @brief Context passed to Updatable components during per-frame updates.
@@ -41,7 +45,7 @@ export namespace helios::engine::game {
         /**
          * @brief Buffer for queueing commands to be executed at end of frame.
          */
-        helios::engine::game::CommandBuffer& commandBuffer_;
+        helios::engine::core::messaging::command::CommandBuffer& commandBuffer_;
 
         /**
          * @brief Reference to the game world for entity lookups.
@@ -54,7 +58,7 @@ export namespace helios::engine::game {
          * Used by systems and components to publish events (e.g., collision,
          * spawn requests) that will be processed in a later phase (N+1) of the game loop.
          */
-        helios::engine::game::event::GameLoopEventSink eventSink_;
+        helios::engine::core::messaging::event::GameLoopEventSink eventSink_;
 
     public:
 
@@ -69,9 +73,9 @@ export namespace helios::engine::game {
          * @throws std::invalid_argument if either commandBuffer or gameWorld are nullptr.
          */
         UpdateContext(
-            helios::engine::game::CommandBuffer& commandBuffer,
+            helios::engine::core::messaging::command::CommandBuffer& commandBuffer,
             helios::engine::game::GameWorld& gameWorld,
-            const helios::engine::game::event::GameLoopEventSink& eventSink
+            const helios::engine::core::messaging::event::GameLoopEventSink& eventSink
         ) : commandBuffer_(commandBuffer), gameWorld_(gameWorld), eventSink_(eventSink) {}
 
         /**
@@ -122,7 +126,7 @@ export namespace helios::engine::game {
          *
          * @return Ref to the CommandBuffer used with this UpdateContext.
          */
-        [[nodiscard]] helios::engine::game::CommandBuffer& commandBuffer() const noexcept {
+        [[nodiscard]] helios::engine::core::messaging::command::CommandBuffer& commandBuffer() const noexcept {
             return commandBuffer_;
         }
 

@@ -11,7 +11,7 @@ module;
 export module helios.engine.game.gameplay.spawn.systems.GameObjectSpawnSystem;
 
 import helios.engine.game.System;
-import helios.engine.game.GameObjectPool;
+import helios.engine.core.data.GameObjectPool;
 import helios.engine.game.GameObject;
 import helios.engine.game.UpdateContext;
 

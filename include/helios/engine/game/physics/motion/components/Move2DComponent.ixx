@@ -13,9 +13,9 @@ export module helios.engine.game.physics.motion.components.Move2DComponent;
 
 import helios.scene.SceneNode;
 import helios.util.Guid;
-import helios.core.Transform;
+import helios.core.spatial.Transform;
 import helios.math;
-import helios.core.units;
+import helios.core.units.Unit;
 import helios.engine.game.Component;
 import helios.engine.game.GameObject;
 import helios.engine.game.components.scene.SceneNodeComponent;

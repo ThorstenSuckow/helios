@@ -4,8 +4,8 @@
  */
 module;
 
+#include <helios/engine/core/data/GameObjectView.h>
 #include <cmath>
-#include <helios/engine/game/GameObjectView.h>
 
 export module helios.engine.game.physics.motion.systems.SpinSystem;
 

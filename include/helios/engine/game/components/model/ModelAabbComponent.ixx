@@ -8,7 +8,7 @@ export module helios.engine.game.components.model.ModelAabbComponent;
 
 import helios.math.types;
 import helios.engine.game.Component;
-import helios.core.Transform;
+import helios.core.spatial.Transform;
 
 export namespace helios::engine::game::components::model {
 

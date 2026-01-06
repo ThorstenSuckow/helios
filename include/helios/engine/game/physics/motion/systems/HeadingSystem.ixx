@@ -4,10 +4,10 @@
  */
 module;
 
+#include <helios/engine/core/data/GameObjectView.h>
+#include <algorithm>
 #include <cassert>
 #include <cmath>
-#include <algorithm>
-#include <helios/engine/game/GameObjectView.h>
 
 export module helios.engine.game.physics.motion.systems.HeadingSystem;
 

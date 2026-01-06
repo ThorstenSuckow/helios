@@ -14,7 +14,7 @@ module;
 #include <vector>
 
 
-export module helios.engine.game.GameObjectPool;
+export module helios.engine.core.data.GameObjectPool;
 
 import helios.engine.game.System;
 

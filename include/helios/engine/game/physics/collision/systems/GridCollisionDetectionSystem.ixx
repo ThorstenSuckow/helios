@@ -17,7 +17,7 @@ export module helios.engine.game.physics.collision.systems.GridCollisionDetectio
 
 import helios.engine.game.System;
 import helios.engine.game.UpdateContext;
-import helios.engine.game.GameObjectFilter;
+import helios.engine.core.data.GameObjectFilter;
 import helios.engine.game.GameObject;
 import helios.engine.game.GameWorld;
 
@@ -404,7 +404,7 @@ export namespace helios::engine::game::physics::collision::systems {
             prepareCollisionDetection();
 
             // only consider enabled CollisionComponents
-            constexpr auto filter = helios::engine::game::GameObjectFilter::Active | helios::engine::game::GameObjectFilter::ComponentEnabled;
+            constexpr auto filter = helios::engine::core::data::GameObjectFilter::Active | helios::engine::core::data::GameObjectFilter::ComponentEnabled;
 
             for (auto [entity, cc, acc] : gameWorld_->find<
                 CollisionComponent,

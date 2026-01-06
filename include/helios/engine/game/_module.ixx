@@ -12,23 +12,22 @@ export import helios.engine.game.InputSnapshot;
 // Component system
 export import helios.engine.game.Component;
 export import helios.engine.game.GameObject;
-export import helios.engine.game.GameObjectFilter;
-export import helios.engine.game.GameObjectPool;
+export import helios.engine.core.data.GameObjectFilter;
+export import helios.engine.core.data.GameObjectPool;
 export import helios.engine.game.GameWorld;
 
 // level
 export import helios.engine.game.Level;
 
 // Command pattern
-export import helios.engine.game.Command;
-export import helios.engine.game.CommandBuffer;
+export import helios.engine.core.messaging.command.Command;
+export import helios.engine.core.messaging.command.CommandBuffer;
 
 // System base class
 export import helios.engine.game.System;
 
 // Aggregate sub-modules
 export import helios.engine.game.components;
-export import helios.engine.game.event;
 export import helios.engine.game.gameplay;
 export import helios.engine.game.physics;
 export import helios.engine.game.spatial;

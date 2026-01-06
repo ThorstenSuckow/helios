@@ -8,9 +8,9 @@ module;
 #include <deque>
 #include <memory>
 
-export module helios.engine.game.CommandBuffer;
+export module helios.engine.core.messaging.command.CommandBuffer;
 
-import helios.engine.game.Command;
+import helios.engine.core.messaging.command.Command;
 import helios.engine.game.GameWorld;
 import helios.engine.game.GameObject;
 import helios.util.Guid;
@@ -18,8 +18,8 @@ import helios.util.Guid;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
 
-#define HELIOS_LOG_SCOPE "helios::engine::game::CommandBuffer"
-export namespace helios::engine::game {
+#define HELIOS_LOG_SCOPE "helios::engine::core::messaging::command::CommandBuffer"
+export namespace helios::engine::core::messaging::command {
 
     /**
      * @brief Queue for deferred execution of game commands.
@@ -31,7 +31,7 @@ export namespace helios::engine::game {
      *
      * Typical usage pattern:
      * ```cpp
-     * helios::engine::game::CommandBuffer cmdBuffer;
+     * helios::engine::core::messaging::command::CommandBuffer cmdBuffer;
      * helios::engine::game::GameWorld world;
      *
      * // Queue commands during input processing
@@ -52,7 +52,7 @@ export namespace helios::engine::game {
          */
         struct TargetedCommand {
             helios::util::Guid guid;
-            std::unique_ptr<helios::engine::game::Command> command;
+            std::unique_ptr<helios::engine::core::messaging::command::Command> command;
         };
 
         /**
@@ -84,7 +84,7 @@ export namespace helios::engine::game {
          * @note This overload is useful when the GameObject instance is not directly available,
          *       such as in networked scenarios or when processing serialized commands.
          */
-        void add(const helios::util::Guid& guid, std::unique_ptr<helios::engine::game::Command> command);
+        void add(const helios::util::Guid& guid, std::unique_ptr<helios::engine::core::messaging::command::Command> command);
 
         /**
          * @brief Executes all buffered commands against the GameWorld and clears the buffer.

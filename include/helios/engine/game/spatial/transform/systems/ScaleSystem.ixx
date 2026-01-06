@@ -4,14 +4,14 @@
  */
 module;
 
-#include <helios/engine/game/GameObjectView.h>
+#include <helios/engine/core/data/GameObjectView.h>
 
 export module helios.engine.game.spatial.transform.systems.ScaleSystem;
 
 import helios.engine.game.System;
 import helios.math;
 
-import helios.core.units;
+import helios.core.units.Unit;
 
 import helios.engine.game.GameObject;
 import helios.engine.game.GameWorld;

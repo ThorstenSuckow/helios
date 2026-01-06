@@ -4,12 +4,12 @@
  */
 module;
 
-export module helios.engine.game.Command;
+export module helios.engine.core.messaging.command.Command;
 
 import helios.engine.game.GameObject;
 
 
-export namespace helios::engine::game {
+export namespace helios::engine::core::messaging::command {
 
     /**
      * @brief Abstract base class for encapsulating game actions as executable commands.
@@ -23,7 +23,7 @@ export namespace helios::engine::game {
      *
      * Example implementation:
      * ```cpp
-     * class MoveCommand : public helios::engine::game::Command {
+     * class MoveCommand : public helios::engine::core::messaging::command::Command {
      *     helios::math::vec3f direction_;
      *     float speed_;
      * public:

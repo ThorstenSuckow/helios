@@ -8,7 +8,7 @@ export module helios.engine.game.spatial.transform.components.TransformComponent
 
 import helios.math.types;
 import helios.engine.game.Component;
-import helios.core.Transform;
+import helios.core.spatial.Transform;
 
 export namespace helios::engine::game::spatial::transform::components {
 
@@ -25,7 +25,7 @@ export namespace helios::engine::game::spatial::transform::components {
         /**
          * @brief The local transformation (translation, rotation, scale).
          */
-        helios::core::Transform transform_{};
+        helios::core::spatial::Transform transform_{};
 
         /**
          * @brief Flag indicating if the transform has changed since the last update.

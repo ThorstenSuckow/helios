@@ -8,8 +8,8 @@ export module helios.engine.game.spatial.transform.components.ScaleComponent;
 
 import helios.math.types;
 import helios.engine.game.Component;
-import helios.core.Transform;
-import helios.core.units;
+import helios.core.spatial.Transform;
+import helios.core.units.Unit;
 
 
 export namespace helios::engine::game::spatial::transform::components {

@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.game.physics.motion.commands.HeadingCommand;
 
-import helios.engine.game.Command;
+import helios.engine.core.messaging.command.Command;
 import helios.engine.game.GameObject;
 import helios.math.types;
 import helios.engine.game.physics.motion.components.HeadingComponent;
@@ -22,7 +22,7 @@ export namespace helios::engine::game::physics::motion::commands {
      * of a GameObject. It targets the HeadingComponent and applies the specified
      * direction and turn factor (interpolation speed).
      */
-    class HeadingCommand : public helios::engine::game::Command {
+    class HeadingCommand : public helios::engine::core::messaging::command::Command {
         
 
         /**

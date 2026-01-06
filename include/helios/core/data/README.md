@@ -1,13 +1,16 @@
-## helios::core::data
+# helios.core.data
 
-This namespace provides fundamental data structures for efficient, type-safe inter-system communication. The primary pattern implemented is a double-buffered, type-indexed message system that enables lock-free producer-consumer communication in single-threaded game loops.
+Core data structures for type indexing and efficient lookups.
 
+This module provides fundamental data structures including type indexing utilities for efficient type-based lookups at compile and runtime.
 
 ---
 <details>
 <summary>Doxygen</summary><p>
 @namespace helios::core::data
-@brief Core data structures for inter-system communication.
-@details This namespace provides fundamental data structures for efficient, type-safe inter-system communication. Implements a double-buffered, type-indexed message system that enables lock-free producer-consumer communication in single-threaded game loops.
+@brief Core data structures for type indexing.
+@details This module provides fundamental data structures including type indexing utilities for efficient type-based lookups.
 </p></details>
+
+
 

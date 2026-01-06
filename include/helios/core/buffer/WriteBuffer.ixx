@@ -1,34 +1,35 @@
 /**
- * @file ReadBuffer.ixx
- * @brief Read-only buffer for the double-buffering pattern.
+ * @file WriteBuffer.ixx
+ * @brief Write-only buffer for the double-buffering pattern.
  */
 module;
 
-#include <span>
 #include <vector>
 
-export module helios.core.data.ReadBuffer;
+export module helios.core.buffer.WriteBuffer;
 
-export namespace helios::core::data {
+import helios.core.buffer.ReadBuffer;
+
+export namespace helios::core::buffer {
 
     template <typename T>
     class ReadWriteDoubleBuffer{};
 
     /**
-     * @class ReadBuffer
-     * @brief Read-only buffer for consuming messages in a double-buffered system.
+     * @class WriteBuffer
+     * @brief Write-only buffer for accumulating messages in a double-buffered system.
      *
-     * @details ReadBuffer is the consumer-side of a double-buffered message system.
-     * After a swap operation, this buffer contains messages that were pushed to the
-     * corresponding WriteBuffer during the previous frame. Consumers iterate over
-     * these messages via the read() method.
+     * @details WriteBuffer is the producer-side of a double-buffered message system.
+     * Messages are pushed to this buffer during frame processing, then swapped with a
+     * ReadBuffer at frame boundaries. This separation enables lock-free, single-threaded
+     * producer-consumer patterns.
      *
      * The internal storage is only accessible to ReadWriteDoubleBuffer for swap operations.
      *
-     * @tparam T The message type stored in the buffer.
+     * @tparam T The message type stored in the buffer. Must be move-constructible.
      */
     template<typename T>
-    class ReadBuffer {
+    class WriteBuffer {
 
         friend class ReadWriteDoubleBuffer<T>;
 
@@ -51,12 +52,18 @@ export namespace helios::core::data {
     public:
 
         /**
-         * @brief Returns a read-only view of all buffered messages.
+         * @brief Constructs and appends a message to the buffer.
          *
-         * @return A span over all messages in the buffer.
+         * @tparam Args Constructor argument types for T.
+         *
+         * @param args Arguments forwarded to T's constructor.
+         *
+         * @return Reference to this buffer for method chaining.
          */
-        std::span<const T> read() const noexcept {
-            return bufferData_;
+        template<typename... Args>
+        WriteBuffer& push(Args&&... args) {
+            bufferData_.emplace_back(std::forward<Args>(args)...);
+            return *this;
         }
 
         /**
@@ -66,7 +73,7 @@ export namespace helios::core::data {
          *
          * @return Reference to this buffer for method chaining.
          */
-        ReadBuffer& reserve(size_t size) {
+        WriteBuffer& reserve(size_t size) {
             bufferData_.reserve(size);
             return *this;
         }
@@ -76,7 +83,7 @@ export namespace helios::core::data {
          *
          * @return Reference to this buffer for method chaining.
          */
-        ReadBuffer& clear() {
+        WriteBuffer& clear() {
             bufferData_.clear();
             return *this;
         }

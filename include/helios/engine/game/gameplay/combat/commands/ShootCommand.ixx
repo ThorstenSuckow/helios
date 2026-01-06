@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.game.gameplay.combat.commands.ShootCommand;
 
-import helios.engine.game.Command;
+import helios.engine.core.messaging.command.Command;
 import helios.engine.game.GameObject;
 import helios.math.types;
 import helios.engine.game.gameplay.combat.components.ShootComponent;
@@ -24,10 +24,10 @@ export namespace helios::engine::game::gameplay::combat::commands {
      * @note The target GameObject must have a ShootComponent attached for this
      *       command to have any effect.
      *
-     * @see helios::engine::game::Command
+     * @see helios::engine::core::messaging::command::Command
      * @see helios::engine::game::gameplay::components::ShootComponent
      */
-    class ShootCommand : public helios::engine::game::Command {
+    class ShootCommand : public helios::engine::core::messaging::command::Command {
 
         /**
          * @brief The magnitude determining fire intensity.

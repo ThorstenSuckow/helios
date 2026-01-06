@@ -9,7 +9,7 @@ module;
 
 export module helios.engine.game.UpdateContext;
 
-import helios.engine.game.InputSnapshot;
+import helios.input.InputSnapshot;
 import helios.engine.core.messaging.event.GameLoopEventBus;
 
 export namespace helios::engine::core::messaging::command {
@@ -40,7 +40,7 @@ export namespace helios::engine::game {
         /**
          * @brief Immutable snapshot of input state for the current frame.
          */
-        const helios::engine::game::InputSnapshot* inputSnapshot_ = nullptr;
+        const helios::input::InputSnapshot* inputSnapshot_ = nullptr;
 
         /**
          * @brief Buffer for queueing commands to be executed at end of frame.
@@ -103,7 +103,7 @@ export namespace helios::engine::game {
          *
          * @return Const ref to the current InputSnapshot.
          */
-        [[nodiscard]] const helios::engine::game::InputSnapshot& inputSnapshot() const noexcept {
+        [[nodiscard]] const helios::input::InputSnapshot& inputSnapshot() const noexcept {
             assert(inputSnapshot_ && "Unexpected nullptr for InputSnapshot");
             return *inputSnapshot_;
         }
@@ -115,7 +115,7 @@ export namespace helios::engine::game {
          *
          * @return A reference to this UpdateContext instance.
          */
-        UpdateContext& setInputSnapshot(const helios::engine::game::InputSnapshot& snapshot) noexcept {
+        UpdateContext& setInputSnapshot(const helios::input::InputSnapshot& snapshot) noexcept {
             inputSnapshot_ = &snapshot;
 
             return *this;

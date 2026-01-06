@@ -7,7 +7,7 @@ module;
 #include <helios/engine/core/data/GameObjectView.h>
 #include <cassert>
 
-export module helios.engine.game.systems.scene.SceneSyncSystem;
+export module helios.engine.game.scene.systems.SceneSyncSystem;
 
 import helios.scene.Scene;
 
@@ -15,7 +15,7 @@ import helios.engine.game.GameWorld;
 import helios.engine.game.System;
 import helios.engine.game.UpdateContext;
 
-import helios.engine.game.components.scene.SceneNodeComponent;
+import helios.engine.game.scene.components.SceneNodeComponent;
 import helios.engine.game.spatial.transform.components.TransformComponent;
 
 export namespace helios::engine::game::systems::scene {
@@ -55,7 +55,7 @@ export namespace helios::engine::game::systems::scene {
 
             auto view = gameWorld_->find<
                 helios::engine::game::spatial::transform::components::TransformComponent,
-                helios::engine::game::components::scene::SceneNodeComponent
+                helios::engine::game::scene::components::SceneNodeComponent
             >();
 
             // First pass: push local transforms from TransformComponent to SceneNode

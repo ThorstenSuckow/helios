@@ -20,8 +20,8 @@ import helios.engine.game.System;
 
 import helios.scene.SceneNode;
 
-import helios.engine.game.components.rendering.RenderableComponent;
-import helios.engine.game.components.scene.SceneNodeComponent;
+import helios.engine.game.rendering.components.RenderableComponent;
+import helios.engine.game.scene.components.SceneNodeComponent;
 import helios.engine.game.spatial.transform.components.TransformComponent;
 import helios.engine.game.physics.motion.components.Move2DComponent;
 

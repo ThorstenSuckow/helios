@@ -6,7 +6,7 @@ module;
 
 #include <cassert>
 
-export module helios.engine.game.components.scene.SceneNodeComponent;
+export module helios.engine.game.scene.components.SceneNodeComponent;
 
 import helios.scene.SceneNode;
 import helios.math.types;
@@ -15,10 +15,10 @@ import helios.core.units.Unit;
 import helios.engine.game.Component;
 import helios.engine.game.GameObject;
 
-import helios.engine.game.components.rendering.RenderableComponent;
+import helios.engine.game.rendering.components.RenderableComponent;
 
 
-export namespace helios::engine::game::components::scene {
+export namespace helios::engine::game::scene::components {
 
     /**
      * @brief Component that links a GameObject to a SceneNode in the scene graph.
@@ -67,7 +67,7 @@ export namespace helios::engine::game::components::scene {
             Component::onAttach(gameObject);
 
             // this will automatically create the RenderableComponent if not alreay registered
-            gameObject->getOrAdd<helios::engine::game::components::rendering::RenderableComponent>(sceneNode_->renderable());
+            gameObject->getOrAdd<helios::engine::game::rendering::components::RenderableComponent>(sceneNode_->renderable());
         }
 
         /**

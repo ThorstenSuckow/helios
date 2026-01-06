@@ -19,9 +19,9 @@ import helios.engine.game.Level;
 
 import helios.engine.game.physics.motion.components.Move2DComponent;
 
-import helios.engine.game.components.scene.SceneNodeComponent;
+import helios.engine.game.scene.components.SceneNodeComponent;
 import helios.engine.game.physics.motion.components.DirectionComponent;
-import helios.engine.game.components.rendering.RenderableComponent;
+import helios.engine.game.rendering.components.RenderableComponent;
 
 import helios.scene.SceneNode;
 
@@ -80,7 +80,7 @@ export namespace helios::engine::game::gameplay::spawn::systems {
             auto* spawnNode = level_.rootNode();
 
             for (auto* go : gameObjects) {
-                auto* rc = go->get<helios::engine::game::components::rendering::RenderableComponent>();
+                auto* rc = go->get<helios::engine::game::rendering::components::RenderableComponent>();
 
                 assert(rc != nullptr && "RenderableComponent must not be nullptr");
 
@@ -91,7 +91,7 @@ export namespace helios::engine::game::gameplay::spawn::systems {
                 auto sceneNode = std::make_unique<helios::scene::SceneNode>(rc->renderable());
                 auto sceneNode_ptr = sceneNode.get();
                 std::ignore = spawnNode->addNode(std::move(sceneNode));
-                go->add<helios::engine::game::components::scene::SceneNodeComponent>(sceneNode_ptr);
+                go->add<helios::engine::game::scene::components::SceneNodeComponent>(sceneNode_ptr);
                 go->setActive(false);
             }
 

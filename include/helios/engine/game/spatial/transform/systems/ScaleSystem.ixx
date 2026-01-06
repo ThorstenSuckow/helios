@@ -20,7 +20,7 @@ import helios.engine.game.UpdateContext;
 import helios.engine.game.spatial.transform.components.ScaleComponent;
 import helios.engine.game.spatial.transform.components.TransformComponent;
 
-import helios.engine.game.components.model.ModelAabbComponent;
+import helios.engine.game.model.components.ModelAabbComponent;
 
 export namespace helios::engine::game::spatial::transform::systems {
 
@@ -62,7 +62,7 @@ export namespace helios::engine::game::spatial::transform::systems {
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
             for (auto [entity, mab, wsc, tc] : gameWorld_->find<
-                helios::engine::game::components::model::ModelAabbComponent,
+                helios::engine::game::model::components::ModelAabbComponent,
                 helios::engine::game::spatial::transform::components::ScaleComponent,
                 helios::engine::game::spatial::transform::components::TransformComponent
             >().each()) {

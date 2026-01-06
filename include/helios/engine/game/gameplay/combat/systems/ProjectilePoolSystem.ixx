@@ -28,7 +28,7 @@ import helios.util.io.BasicStringFileReader;
 import helios.rendering.model.config.MaterialProperties;
 
 import helios.engine.game.gameplay.combat.components.Aim2DComponent;
-import helios.engine.game.components.scene.SceneNodeComponent;
+import helios.engine.game.scene.components.SceneNodeComponent;
 
 import helios.engine.game.UpdateContext;
 import helios.util.Guid;
@@ -113,7 +113,7 @@ export namespace helios::engine::game::gameplay::systems {
         /**
          * @brief Optional reference to a scene node component for spawn position.
          */
-        helios::engine::game::components::scene::SceneNodeComponent* sceneNodeComponent_ = nullptr;
+        helios::engine::game::scene::components::SceneNodeComponent* sceneNodeComponent_ = nullptr;
 
         /**
          * @brief Root node of the scene graph where projectiles are attached.

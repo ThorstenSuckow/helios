@@ -49,7 +49,7 @@ export namespace helios::event {
 
 
         /**
-         * @brief Constructs a new event with a unique Guid and teh specified default tag.
+         * @brief Constructs a new event with a unique Guid and the specified default tag.
          *
          * @param tag
          */

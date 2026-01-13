@@ -11,7 +11,7 @@ export import helios.engine.ecs.UpdateContext;
 // Component system
 export import helios.engine.ecs.Component;
 export import helios.engine.ecs.GameObject;
-export import helios.engine.core.data.GameObjectFilter;
+export import helios.engine.ecs.query.GameObjectFilter;
 export import helios.engine.core.data.GameObjectPool;
 export import helios.engine.ecs.GameWorld;
 

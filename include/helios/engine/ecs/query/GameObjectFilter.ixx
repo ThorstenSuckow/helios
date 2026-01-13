@@ -6,9 +6,9 @@ module;
 
 #include <cstdint>
 
-export module helios.engine.core.data.GameObjectFilter;
+export module helios.engine.ecs.query.GameObjectFilter;
 
-export namespace helios::engine::core::data {
+export namespace helios::engine::ecs::query {
 
     /**
      * @brief Defines criteria for filtering GameObjects during iteration.

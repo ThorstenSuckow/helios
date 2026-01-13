@@ -4,7 +4,7 @@
  */
 module;
 
-#include <helios/engine/core/data/GameObjectView.h>
+#include <helios/engine/ecs/query/GameObjectView.h>
 
 export module helios.engine.game.spatial.transform.systems.postproc.ScaleClearSystem;
 

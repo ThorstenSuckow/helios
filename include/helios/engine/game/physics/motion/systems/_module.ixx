@@ -4,6 +4,6 @@
  */
 export module helios.engine.game.physics.motion.systems;
 
-export import helios.engine.game.physics.motion.systems.HeadingSystem;
+export import helios.engine.game.physics.motion.systems.SteeringSystem;
 export import helios.engine.game.physics.motion.systems.Move2DSystem;
 export import helios.engine.game.physics.motion.systems.SpinSystem;

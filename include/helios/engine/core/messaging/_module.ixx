@@ -6,4 +6,4 @@
 export module helios.engine.core.messaging;
 
 export import helios.engine.core.messaging.command;
-export import helios.engine.core.event;
+export import helios.engine.core.messaging.event;

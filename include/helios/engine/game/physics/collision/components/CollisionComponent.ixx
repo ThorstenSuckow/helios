@@ -226,7 +226,7 @@ export namespace helios::engine::game::physics::collision::components {
          *
          * @return The collision behavior for the specified layer.
          */
-        helios::engine::game::physics::collision::types::CollisionBehavior solidCollisionBehavior(uint32_t otherLayerId) const noexcept {
+        [[nodiscard]] helios::engine::game::physics::collision::types::CollisionBehavior solidCollisionBehavior(uint32_t otherLayerId) const noexcept {
             using helios::engine::game::physics::collision::types::CollisionBehavior;
             if ((solidCollisionMask_ & otherLayerId) == 0) {
                 return CollisionBehavior::None;
@@ -253,7 +253,7 @@ export namespace helios::engine::game::physics::collision::components {
          *
          * @return The collision behavior for the specified layer.
          */
-        helios::engine::game::physics::collision::types::CollisionBehavior triggerCollisionBehavior(uint32_t otherLayerId) const noexcept {
+        [[nodiscard]] helios::engine::game::physics::collision::types::CollisionBehavior triggerCollisionBehavior(uint32_t otherLayerId) const noexcept {
             using helios::engine::game::physics::collision::types::CollisionBehavior;
             if ((triggerCollisionMask_ & otherLayerId) == 0) {
                 return CollisionBehavior::None;

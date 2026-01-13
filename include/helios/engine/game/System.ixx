@@ -55,18 +55,21 @@ export namespace helios::engine::game {
         virtual ~System() = default;
 
         /**
-         * @brief Called when the system is added to a GameWorld.
+         * @brief Called when the system is initialized by the GameWorld.
          *
          * @details Override this method to perform initialization that requires
          * access to the GameWorld (e.g., querying the scene graph, registering
          * event handlers).
          *
          * @param gameWorld The GameWorld this system is being added to.
+         *
+         * @deprected use init
          */
-        virtual void onAdd(helios::engine::game::GameWorld* gameWorld) noexcept {
-            gameWorld_ = gameWorld;
-
+        virtual void init(helios::engine::game::GameWorld& gameWorld) noexcept {
+            gameWorld_ = &gameWorld;
         }
+
+
 
         /**
          * @brief Updates the system each frame.

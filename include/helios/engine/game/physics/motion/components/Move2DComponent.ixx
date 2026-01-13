@@ -16,7 +16,7 @@ import helios.util.Guid;
 import helios.core.spatial.Transform;
 import helios.math;
 import helios.core.units.Unit;
-import helios.engine.game.Component;
+import helios.engine.game.CloneableComponent;
 import helios.engine.game.GameObject;
 import helios.engine.game.scene.components.SceneNodeComponent;
 
@@ -35,12 +35,12 @@ export namespace helios::engine::game::physics::motion::components {
      * The actual physics simulation (integration of velocity, application of dampening)
      * is performed by the Move2DSystem.
      *
-     * @note Rotation/heading is handled separately by HeadingComponent and HeadingSystem.
+     * @note Rotation/heading is handled separately by SteeringComponent and SteeringSystem.
      *
-     * @see helios::engine::game::physics::motion::components::HeadingComponent
+     * @see helios::engine::game::physics::motion::components::SteeringComponent
      * @see helios::engine::game::physics::systems::Move2DSystem
      */
-    class Move2DComponent : public helios::engine::game::Component {
+    class Move2DComponent : public helios::engine::game::CloneableComponent<Move2DComponent> {
 
     protected:
 
@@ -110,8 +110,9 @@ export namespace helios::engine::game::physics::motion::components {
         /**
          * @brief Indicates whether input is currently being received.
          */
-        bool isInputActive_ = true;
+        bool stateChanged_ = true;
 
+        
         /**
          * @brief Current throttle value from input (0.0 to 1.0).
          */
@@ -120,13 +121,27 @@ export namespace helios::engine::game::physics::motion::components {
         /**
          * @brief Current steering input as 2D direction vector.
          */
-        helios::math::vec2f steeringInput_;
+        helios::math::vec2f direction_;
 
         /**
          * @brief Current velocity vector in world space.
          */
         helios::math::vec3f velocity_;
 
+        /**
+         * @brief Inherited velocity from parent or external forces.
+         *
+         * @details Used for momentum inheritance when detaching from parent objects.
+         */
+        helios::math::vec3f inheritedVelocity_{0.0f};
+
+        /**
+         * @brief Flag for instant acceleration mode.
+         *
+         * @details When true, the entity accelerates instantly to target speed
+         * rather than smoothly ramping up.
+         */
+        bool useInstantAcceleration_ = false;
 
     public:
 
@@ -139,8 +154,40 @@ export namespace helios::engine::game::physics::motion::components {
          * @brief Constructs a Move2DComponent with a specified movement speed.
          *
          * @param movementSpeed The maximum movement speed in units per second.
+         * @param movementAcceleration The acceleration rate (default: DEFAULT_MOVEMENT_ACCELERATION).
          */
-        explicit Move2DComponent(float movementSpeed) : movementSpeed_(movementSpeed) {}
+        explicit Move2DComponent(
+            float movementSpeed, 
+            float movementAcceleration = DEFAULT_MOVEMENT_ACCELERATION
+            
+        ) :
+        movementSpeed_(movementSpeed), movementAcceleration_(movementAcceleration) {}
+
+        /**
+         * @brief Constructs a Move2DComponent with instant acceleration mode.
+         *
+         * @param movementSpeed The maximum movement speed in units per second.
+         * @param useInstantAcceleration If true, acceleration is instant.
+         */
+        explicit Move2DComponent(
+            float movementSpeed,
+            bool useInstantAcceleration
+
+        ) :
+        movementSpeed_(movementSpeed), useInstantAcceleration_(useInstantAcceleration) {}
+
+        /**
+         * @brief Copy constructor.
+         *
+         * @param other The component to copy from.
+         */
+        explicit Move2DComponent(const Move2DComponent& other) :
+        useInstantAcceleration_(other.useInstantAcceleration_),
+        movementSpeed_(other.movementSpeed_),
+        movementSpeedThreshold_(other.movementSpeedThreshold_),
+        movementAcceleration_ (other.movementAcceleration_),
+        movementDampening_ (other.movementDampening_)
+        {}
 
 
         /**
@@ -148,25 +195,63 @@ export namespace helios::engine::game::physics::motion::components {
          *
          * @param direction Normalized 3D direction vector.
          * @param throttle Magnitude of the stick input (0.0 to 1.0).
+         * 
+         * @deprecated use setMoveIntent
          */
         void move(helios::math::vec3f direction, float throttle) {
+            setMoveIntent(direction, throttle);
+        }
+        
+        /**
+         * @brief Sets the movement direction and throttle.
+         *
+         * @param direction Normalized 3D direction vector.
+         * @param throttle Magnitude of the stick input (0.0 to 1.0).
+         */
+        void setMoveIntent(helios::math::vec3f direction, float throttle) {
+            
             if (throttle <= helios::math::EPSILON_LENGTH) {
-                steeringInput_ = helios::math::vec2f{0.0f, 0.0f};
+                direction_ = helios::math::vec2f{0.0f, 0.0f};
                 throttle_ = 0.0f;
-                isInputActive_ = false;
+                stateChanged_ = false;
                 return;
             }
 
-            steeringInput_ = direction.toVec2();
+            direction_ = direction.toVec2();
             throttle_ = throttle;
 
-            assert(std::abs(direction.length() - 1.0f) <= 0.001f && "Unexpected direction vector - not normalized");
-            
+            assert(std::abs(direction.length() - 1.0f) <= helios::math::EPSILON_LENGTH && "Unexpected direction vector - not normalized");
 
-            isInputActive_ = true;
+            stateChanged_ = true;
 
             currentMovementSpeed_ = movementSpeed_ * throttle_;
+        }
 
+        /**
+         * @brief Returns whether instant acceleration mode is enabled.
+         *
+         * @return True if acceleration is instant, false for smooth ramping.
+         */
+        [[nodiscard]] bool useInstantAcceleration() const noexcept {
+            return useInstantAcceleration_;
+        }
+
+        /**
+         * @brief Sets the inherited velocity from parent or external forces.
+         *
+         * @param inheritedVelocity The velocity vector to inherit.
+         */
+        void setInheritedVelocity(helios::math::vec3f inheritedVelocity) {
+            inheritedVelocity_ = inheritedVelocity;
+        }
+
+        /**
+         * @brief Returns the inherited velocity vector.
+         *
+         * @return The inherited velocity from parent or external forces.
+         */
+        [[nodiscard]] helios::math::vec3f inheritedVelocity() const noexcept {
+            return inheritedVelocity_;
         }
 
         /**
@@ -201,8 +286,8 @@ export namespace helios::engine::game::physics::motion::components {
          *
          * @return True if input is active, false otherwise.
          */
-        [[nodiscard]] bool isInputActive() const noexcept {
-            return isInputActive_;
+        [[nodiscard]] bool stateChanged() const noexcept {
+            return stateChanged_;
         }
 
         /**
@@ -210,8 +295,8 @@ export namespace helios::engine::game::physics::motion::components {
          *
          * @return Const reference to the 2D steering input vector.
          */
-        [[nodiscard]] const helios::math::vec2f& steeringInput() const noexcept {
-            return steeringInput_;
+        [[nodiscard]] const helios::math::vec2f& direction() const noexcept {
+            return direction_;
         }
 
         /**

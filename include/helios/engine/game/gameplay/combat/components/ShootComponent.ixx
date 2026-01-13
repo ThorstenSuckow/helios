@@ -31,8 +31,6 @@ import helios.ext.opengl.rendering.shader.OpenGLShader;
 import helios.util.io.BasicStringFileReader;
 import helios.rendering.model.config.MaterialProperties;
 
-import helios.engine.game.gameplay.systems.ProjectilePoolSystem;
-
 export namespace helios::engine::game::gameplay::combat::components {
 
     /**

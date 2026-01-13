@@ -8,8 +8,8 @@ export module helios.engine.game.PoolRequestHandler;
 
 import helios.engine.ecs.GameObject;
 
-import helios.engine.game.gameplay.spawn.requests.DespawnRequest;
-import helios.engine.game.gameplay.spawn.requests.SpawnRequest;
+import helios.engine.mechanics.spawn.requests.DespawnRequest;
+import helios.engine.mechanics.spawn.requests.SpawnRequest;
 
 export namespace helios::engine::game {
 
@@ -68,7 +68,7 @@ export namespace helios::engine::game {
          * @return True if the request was accepted, false otherwise.
          */
         virtual bool submit(
-            helios::engine::game::gameplay::spawn::requests::DespawnRequest despawnRequest
+            helios::engine::mechanics::spawn::requests::DespawnRequest despawnRequest
        ) noexcept = 0;
 
         /**
@@ -79,7 +79,7 @@ export namespace helios::engine::game {
          * @return True if the request was accepted, false otherwise.
          */
         virtual bool submit(
-            helios::engine::game::gameplay::spawn::requests::SpawnRequest spawnRequest
+            helios::engine::mechanics::spawn::requests::SpawnRequest spawnRequest
        ) noexcept = 0;
     };
 

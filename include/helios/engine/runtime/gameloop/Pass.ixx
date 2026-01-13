@@ -10,9 +10,9 @@ module;
 export module helios.engine.runtime.gameloop.Pass;
 
 import helios.engine.ecs.System;
-import helios.engine.ecs.SystemRegistry;
+import helios.engine.runtime.world.SystemRegistry;
 
-import helios.engine.ecs.UpdateContext;
+import helios.engine.runtime.world.UpdateContext;
 
 
 export namespace helios::engine::game {
@@ -54,7 +54,7 @@ export namespace helios::engine::runtime::gameloop {
         /**
          * @brief Registry holding all systems for this pass.
          */
-        helios::engine::ecs::SystemRegistry systemRegistry_{};
+        helios::engine::runtime::world::SystemRegistry systemRegistry_{};
 
         /**
          * @brief Reference to the owning Phase.
@@ -66,7 +66,7 @@ export namespace helios::engine::runtime::gameloop {
          *
          * @param updateContext The current update context.
          */
-        void update(helios::engine::ecs::UpdateContext& updateContext) ;
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) ;
 
         /**
          * @brief Commits pass-level events if a commit point is configured.
@@ -78,7 +78,7 @@ export namespace helios::engine::runtime::gameloop {
          *
          * @param gameWorld Reference to the game world.
          */
-        void init(helios::engine::ecs::GameWorld& gameWorld);
+        void init(helios::engine::runtime::world::GameWorld& gameWorld);
 
 
         /**

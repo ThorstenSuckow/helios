@@ -6,17 +6,17 @@ export module helios.engine.game;
 
 // Core game loop types
 export import helios.engine.ecs.Updatable;
-export import helios.engine.ecs.UpdateContext;
+export import helios.engine.runtime.world.UpdateContext;
 
 // Component system
 export import helios.engine.ecs.Component;
 export import helios.engine.ecs.GameObject;
 export import helios.engine.ecs.query.GameObjectFilter;
 export import helios.engine.core.data.GameObjectPool;
-export import helios.engine.ecs.GameWorld;
+export import helios.engine.runtime.world.GameWorld;
 
 // level
-export import helios.engine.ecs.Level;
+export import helios.engine.runtime.world.Level;
 
 // Command pattern
 export import helios.engine.core.messaging.command.TargetedCommand;

@@ -8,7 +8,7 @@ module;
 #include <span>
 #include <stdexcept>
 
-export module helios.engine.ecs.UpdateContext;
+export module helios.engine.runtime.world.UpdateContext;
 
 import helios.input.InputSnapshot;
 import helios.engine.core.messaging.event.GameLoopEventBus;
@@ -18,7 +18,7 @@ export namespace helios::engine::core::messaging::command {
 }
 
 
-export namespace helios::engine::ecs {
+export namespace helios::engine::runtime::world {
 
 
 
@@ -63,7 +63,7 @@ export namespace helios::engine::ecs {
         /**
          * @brief Reference to the game world for entity lookups.
          */
-        helios::engine::ecs::GameWorld& gameWorld_;
+        helios::engine::runtime::world::GameWorld& gameWorld_;
 
         /**
          * @brief Sink for pushing phase-level events during update.
@@ -104,7 +104,7 @@ export namespace helios::engine::ecs {
          */
         UpdateContext(
             helios::engine::core::messaging::command::CommandBuffer& commandBuffer,
-            helios::engine::ecs::GameWorld& gameWorld,
+            helios::engine::runtime::world::GameWorld& gameWorld,
             helios::engine::core::messaging::event::GameLoopEventBus& phaseEventBus,
             helios::engine::core::messaging::event::GameLoopEventBus& passEventBus
         ) : commandBuffer_(commandBuffer), gameWorld_(gameWorld),
@@ -173,7 +173,7 @@ export namespace helios::engine::ecs {
          *
          * @return Ref to the GameWorld used with this UpdateContext.
          */
-        [[nodiscard]] helios::engine::ecs::GameWorld& gameWorld() const noexcept {
+        [[nodiscard]] helios::engine::runtime::world::GameWorld& gameWorld() const noexcept {
             return gameWorld_;
         }
 

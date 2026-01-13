@@ -16,10 +16,10 @@ module;
 export module helios.engine.game.physics.collision.systems.GridCollisionDetectionSystem;
 
 import helios.engine.ecs.System;
-import helios.engine.ecs.UpdateContext;
+import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.query.GameObjectFilter;
 import helios.engine.ecs.GameObject;
-import helios.engine.ecs.GameWorld;
+import helios.engine.runtime.world.GameWorld;
 
 
 import helios.engine.game.physics.collision.events.TriggerCollisionEvent;
@@ -278,7 +278,7 @@ export namespace helios::engine::game::physics::collision::systems {
             const helios::engine::ecs::GameObject* match,
             const helios::math::vec3f contact,
             const CollisionStruct collisionStruct,
-            const helios::engine::ecs::UpdateContext& updateContext,
+            const helios::engine::runtime::world::UpdateContext& updateContext,
             CollisionStateComponent* csc_a,
             CollisionStateComponent* csc_b
         ) const noexcept {
@@ -403,7 +403,7 @@ export namespace helios::engine::game::physics::collision::systems {
          *
          * @param updateContext The update context providing access to GameWorld and event queue.
          */
-        void update(helios::engine::ecs::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
             prepareCollisionDetection();
 
@@ -543,7 +543,7 @@ export namespace helios::engine::game::physics::collision::systems {
          * @param cell The grid cell containing collision candidates to test.
          * @param updateContext Context for pushing collision events to the event queue.
          */
-        inline void solveCell(GridCell& cell, helios::engine::ecs::UpdateContext& updateContext) {
+        inline void solveCell(GridCell& cell, helios::engine::runtime::world::UpdateContext& updateContext) {
 
             auto& candidates = cell.collisionCandidates;
 

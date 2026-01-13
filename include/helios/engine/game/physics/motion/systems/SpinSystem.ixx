@@ -10,8 +10,8 @@ module;
 export module helios.engine.game.physics.motion.systems.SpinSystem;
 
 import helios.engine.ecs.System;
-import helios.engine.ecs.UpdateContext;
-import helios.engine.ecs.GameWorld;
+import helios.engine.runtime.world.UpdateContext;
+import helios.engine.runtime.world.GameWorld;
 
 import helios.math;
 
@@ -43,7 +43,7 @@ export namespace helios::engine::game::physics::motion::systems {
          *
          * @param updateContext Context containing frame timing and game state.
          */
-        void update(helios::engine::ecs::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
 
             for (auto [entity, sc, rsc] : gameWorld_->find<

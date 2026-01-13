@@ -45,7 +45,7 @@ export namespace helios::engine::core::messaging::command {
          * @note Implementations must be noexcept.
          */
         virtual void dispatchTyped(
-            helios::engine::ecs::GameWorld& gameWorld,
+            helios::engine::runtime::world::GameWorld& gameWorld,
             const T& command
         ) noexcept = 0;
 
@@ -58,7 +58,7 @@ export namespace helios::engine::core::messaging::command {
          * @param command The base command reference.
          */
         void dispatch(
-            helios::engine::ecs::GameWorld& gameWorld,
+            helios::engine::runtime::world::GameWorld& gameWorld,
             const WorldCommand& command
         ) override {
             dispatchTyped(gameWorld, static_cast<const T&>(command));

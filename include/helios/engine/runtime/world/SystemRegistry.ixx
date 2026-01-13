@@ -9,12 +9,12 @@ module;
 #include <cassert>
 
 
-export module helios.engine.ecs.SystemRegistry;
+export module helios.engine.runtime.world.SystemRegistry;
 
 import helios.engine.ecs.System;
 
 
-export namespace helios::engine::ecs {
+export namespace helios::engine::runtime::world {
 
     /**
      * @brief Container for System instances within a game loop pass.

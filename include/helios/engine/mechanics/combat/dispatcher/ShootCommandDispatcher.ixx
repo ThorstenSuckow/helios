@@ -24,7 +24,7 @@ import helios.engine.core.messaging.command.TargetedCommandDispatcher;
 import helios.engine.core.messaging.command.TypedTargetedCommandDispatcher;
 import helios.engine.ecs.GameObject;
 
-import helios.engine.ecs.GameWorld;
+import helios.engine.runtime.world.GameWorld;
 
 
 export namespace helios::engine::mechanics::combat::dispatcher {

@@ -11,7 +11,7 @@ export module helios.engine.game.input.systems.TwinStickInputSystem;
 import helios.math.types;
 import helios.math.utils;
 import helios.engine.ecs.GameObject;
-import helios.engine.ecs.UpdateContext;
+import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.System;
 import helios.engine.ecs.Component;
 import helios.engine.core.messaging.command.CommandBuffer;
@@ -66,7 +66,7 @@ export namespace helios::engine::game::input::systems {
          *
          * @param updateContext Context containing input snapshot and command buffer.
          */
-        void update(helios::engine::ecs::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
             auto& inputSnapshot = updateContext.inputSnapshot();
             auto& commandBuffer = updateContext.commandBuffer();

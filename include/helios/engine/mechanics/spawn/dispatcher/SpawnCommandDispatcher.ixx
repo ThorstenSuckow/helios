@@ -24,7 +24,7 @@ import helios.engine.core.messaging.command.WorldCommandDispatcher;
 import helios.engine.core.messaging.command.TypedWorldCommandDispatcher;
 import helios.engine.ecs.GameObject;
 
-import helios.engine.ecs.GameWorld;
+import helios.engine.runtime.world.GameWorld;
 
 
 export namespace helios::engine::mechanics::spawn::dispatcher {
@@ -64,7 +64,7 @@ export namespace helios::engine::mechanics::spawn::dispatcher {
          * @param command The SpawnCommand to dispatch.
          */
         void dispatchTyped(
-            helios::engine::ecs::GameWorld& gameWorld,
+            helios::engine::runtime::world::GameWorld& gameWorld,
             const helios::engine::mechanics::spawn::commands::SpawnCommand& command
         ) noexcept override {
 

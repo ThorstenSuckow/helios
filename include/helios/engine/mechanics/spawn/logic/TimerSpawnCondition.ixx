@@ -8,10 +8,10 @@ module;
 
 export module helios.engine.mechanics.spawn.logic.TimerSpawnCondition;
 
-import helios.engine.ecs.GameWorld;
-import helios.engine.ecs.Level;
+import helios.engine.runtime.world.GameWorld;
+import helios.engine.runtime.world.Level;
 import helios.engine.core.data.GameObjectPool;
-import helios.engine.ecs.UpdateContext;
+import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.mechanics.spawn.logic.SpawnCondition;
 
@@ -86,9 +86,9 @@ export namespace helios::engine::mechanics::spawn::logic {
          * @return The number of objects to spawn this frame based on elapsed intervals.
          */
         [[nodiscard]] float spawnBudget(
-            const helios::engine::ecs::GameWorld& gameWorld,
+            const helios::engine::runtime::world::GameWorld& gameWorld,
             const helios::engine::core::data::GameObjectPool& gameObjectPool,
-            const helios::engine::ecs::UpdateContext& updateContext
+            const helios::engine::runtime::world::UpdateContext& updateContext
         ) noexcept override {
 
             float budget = 0;

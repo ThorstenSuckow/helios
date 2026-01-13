@@ -7,7 +7,7 @@ module;
 export module helios.engine.core.messaging.command.WorldCommandDispatcher;
 
 
-export namespace helios::engine::ecs {
+export namespace helios::engine::runtime::world {
     class GameWorld;
 }
 
@@ -45,7 +45,7 @@ export namespace helios::engine::core::messaging::command {
          * @param command The command to dispatch.
          */
         virtual void dispatch(
-            helios::engine::ecs::GameWorld& gameWorld,
+            helios::engine::runtime::world::GameWorld& gameWorld,
             const WorldCommand& command
         ) = 0;
     };

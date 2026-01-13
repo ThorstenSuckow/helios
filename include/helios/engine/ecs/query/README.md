@@ -55,7 +55,7 @@ for (auto [obj, move, collision] : gameWorld.find<Move2DComponent, CollisionComp
 
 ## Related Modules
 
-- `helios.engine.ecs.GameWorld` — Provides `find<Components...>()` methods
+- `helios.engine.runtime.world.GameWorld` — Provides `find<Components...>()` methods
 - `helios.engine.ecs.GameObject` — Entity container being queried
 - `helios.engine.ecs.Component` — Base class for component types
 

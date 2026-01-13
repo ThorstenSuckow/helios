@@ -45,7 +45,7 @@ export namespace helios::engine::ecs {
          * @details Set by `onAdd()` when the system is registered with a GameWorld.
          * Non-owning pointer; valid for the lifetime of the system.
          */
-        helios::engine::ecs::GameWorld* gameWorld_ = nullptr;
+        helios::engine::runtime::world::GameWorld* gameWorld_ = nullptr;
 
     public:
 
@@ -65,7 +65,7 @@ export namespace helios::engine::ecs {
          *
          * @deprected use init
          */
-        virtual void init(helios::engine::ecs::GameWorld& gameWorld) noexcept {
+        virtual void init(helios::engine::runtime::world::GameWorld& gameWorld) noexcept {
             gameWorld_ = &gameWorld;
         }
 
@@ -76,7 +76,7 @@ export namespace helios::engine::ecs {
          *
          * @param updateContext The update context containing frame timing information.
          */
-        void update(helios::engine::ecs::UpdateContext& updateContext) noexcept override = 0;
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override = 0;
 
     };
 

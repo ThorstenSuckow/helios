@@ -13,11 +13,11 @@ module;
 #include <unordered_map>
 #include <string>
 
-export module helios.engine.ecs.GameWorld;
+export module helios.engine.runtime.world.GameWorld;
 
-import helios.engine.ecs.UpdateContext;
+import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.GameObject;
-import helios.engine.ecs.Manager;
+import helios.engine.runtime.world.Manager;
 import helios.engine.game.PoolRequestHandler;
 import helios.engine.ecs.Component;
 import helios.engine.ecs.CloneableComponent;
@@ -25,7 +25,7 @@ import helios.engine.ecs.CloneableComponent;
 import helios.util.Guid;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
-import helios.engine.ecs.Level;
+import helios.engine.runtime.world.Level;
 
 
 import helios.engine.ecs.query.GameObjectFilter;
@@ -40,8 +40,8 @@ export namespace helios::engine::core::data {
 }
 
 
-#define HELIOS_LOG_SCOPE "helios::engine::ecs::GameWorld"
-export namespace helios::engine::ecs {
+#define HELIOS_LOG_SCOPE "helios::engine::runtime::world::GameWorld"
+export namespace helios::engine::runtime::world {
 
 
     /**
@@ -96,7 +96,7 @@ export namespace helios::engine::ecs {
     class GameWorld {
 
         /** @brief Internal map type for GameObject storage. */
-        using Map = std::unordered_map<helios::util::Guid, std::unique_ptr<GameObject>>;
+        using Map = std::unordered_map<helios::util::Guid, std::unique_ptr<helios::engine::ecs::GameObject>>;
 
         /**
          * @brief Lazy range type for component-filtered GameObject iteration.
@@ -125,7 +125,7 @@ export namespace helios::engine::ecs {
          * in case of hash collisions, but the sequential Guid generation ensures good
          * hash distribution in practice.
          */
-        std::unordered_map<helios::util::Guid, std::unique_ptr<GameObject>> gameObjects_;
+        std::unordered_map<helios::util::Guid, std::unique_ptr<helios::engine::ecs::GameObject>> gameObjects_;
 
 
 
@@ -144,14 +144,14 @@ export namespace helios::engine::ecs {
          * spawn management, and projectile lifecycle. They are initialized via init()
          * and flushed each frame via flushManagers().
          */
-        std::vector<std::unique_ptr<helios::engine::ecs::Manager>> managers_;
+        std::vector<std::unique_ptr<helios::engine::runtime::world::Manager>> managers_;
 
         /**
          * @brief The current level loaded in the game world.
          *
          * @details Can be null if no level is currently active.
          */
-        std::unique_ptr<helios::engine::ecs::Level> level_ = nullptr;
+        std::unique_ptr<helios::engine::runtime::world::Level> level_ = nullptr;
 
         /**
          * @brief Registry of GameObjectPools for entity recycling.
@@ -222,7 +222,7 @@ export namespace helios::engine::ecs {
          *
          * @param level Unique pointer to the Level instance. Ownership is transferred to the GameWorld.
          */
-        void setLevel(std::unique_ptr<helios::engine::ecs::Level> level) noexcept {
+        void setLevel(std::unique_ptr<helios::engine::runtime::world::Level> level) noexcept {
             level_ = std::move(level);
         }
 
@@ -242,7 +242,7 @@ export namespace helios::engine::ecs {
          *
          * @warning Calling this method when hasLevel() returns false results in undefined behavior.
          */
-        [[nodiscard]] const helios::engine::ecs::Level& level() const noexcept{
+        [[nodiscard]] const helios::engine::runtime::world::Level& level() const noexcept{
             return *level_;
         }
 
@@ -254,7 +254,7 @@ export namespace helios::engine::ecs {
          * @return True if a Manager of type T is registered, false otherwise.
          */
         template<typename T>
-        requires std::is_base_of_v<helios::engine::ecs::Manager, T>
+        requires std::is_base_of_v<helios::engine::runtime::world::Manager, T>
         [[nodiscard]] bool hasManager() const {
             return getManager<T>() != nullptr;
         }
@@ -275,7 +275,7 @@ export namespace helios::engine::ecs {
          * @pre No Manager of type T is already registered.
          */
         template<typename T, typename... Args>
-        requires std::is_base_of_v<helios::engine::ecs::Manager, T>
+        requires std::is_base_of_v<helios::engine::runtime::world::Manager, T>
         T& addManager(Args&&... args) {
 
             assert(!hasManager<T>() && "Manager already registered.");
@@ -330,7 +330,7 @@ export namespace helios::engine::ecs {
          * @return Pointer to the Manager if found, nullptr otherwise.
          */
         template<typename T>
-        requires std::is_base_of_v<helios::engine::ecs::Manager, T>
+        requires std::is_base_of_v<helios::engine::runtime::world::Manager, T>
         [[nodiscard]] T* getManager() const {
 
             for (auto& mgr : managers_) {
@@ -350,7 +350,7 @@ export namespace helios::engine::ecs {
          *
          * @param updateContext The current frame's update context.
          */
-        void flushManagers(helios::engine::ecs::UpdateContext& updateContext) {
+        void flushManagers(helios::engine::runtime::world::UpdateContext& updateContext) {
             for (auto& mgr :  managers_) {
                 mgr->flush(*this, updateContext);
             }
@@ -373,7 +373,7 @@ export namespace helios::engine::ecs {
          * @note Attempting to add a nullptr or a GameObject with a duplicate Guid will fail,
          *       return nullptr, and log a warning.
          */
-        [[nodiscard]] helios::engine::ecs::GameObject* addGameObject(std::unique_ptr<GameObject> gameObject);
+        [[nodiscard]] helios::engine::ecs::GameObject* addGameObject(std::unique_ptr<helios::engine::ecs::GameObject> gameObject);
 
         /**
          * @brief Finds a GameObject by its unique identifier.
@@ -499,7 +499,7 @@ export namespace helios::engine::ecs {
             newGo->setActive(false);
 
             for (const auto& component : gameObject.components()) {
-                if (const auto* cc = dynamic_cast<const Cloneable*>(component.get())) {
+                if (const auto* cc = dynamic_cast<const helios::engine::ecs::Cloneable*>(component.get())) {
                     auto cComponent = cc->clone();
                     // use getOrAdd since cloned components may have already added
                     // other components in onAttach(), which we will not defer for now.
@@ -531,7 +531,7 @@ export namespace helios::engine::ecs {
          * @note Attempting to remove a GameObject that doesn't exist returns nullptr
          *       and logs a warning.
          */
-        [[nodiscard]] std::unique_ptr<helios::engine::ecs::GameObject> removeGameObject(const GameObject& gameObject);
+        [[nodiscard]] std::unique_ptr<helios::engine::ecs::GameObject> removeGameObject(const helios::engine::ecs::GameObject& gameObject);
 
         /**
          * @brief Retrieves a const ref to the map of all active GameObjects.
@@ -542,7 +542,7 @@ export namespace helios::engine::ecs {
          *          GameWorld's management logic and should be avoided. Use addGameObject()
          *          and removeGameObject() instead.
          */
-        [[nodiscard]] const std::unordered_map<helios::util::Guid, std::unique_ptr<GameObject>>& gameObjects() const noexcept {
+        [[nodiscard]] const std::unordered_map<helios::util::Guid, std::unique_ptr<helios::engine::ecs::GameObject>>& gameObjects() const noexcept {
             return gameObjects_;
         }
     };

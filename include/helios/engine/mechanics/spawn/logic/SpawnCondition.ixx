@@ -7,11 +7,11 @@ module;
 
 export module helios.engine.mechanics.spawn.logic.SpawnCondition;
 
-import helios.engine.ecs.GameWorld;
-import helios.engine.ecs.Level;
+import helios.engine.runtime.world.GameWorld;
+import helios.engine.runtime.world.Level;
 import helios.engine.core.data.GameObjectPoolId;
 import helios.engine.core.data.GameObjectPool;
-import helios.engine.ecs.UpdateContext;
+import helios.engine.runtime.world.UpdateContext;
 
 
 export namespace helios::engine::mechanics::spawn::logic {
@@ -55,9 +55,9 @@ export namespace helios::engine::mechanics::spawn::logic {
          *         Returns 0 if no spawning should occur.
          */
         virtual float spawnBudget(
-            const helios::engine::ecs::GameWorld& gameWorld,
+            const helios::engine::runtime::world::GameWorld& gameWorld,
             const helios::engine::core::data::GameObjectPool& gameObjectPool,
-            const helios::engine::ecs::UpdateContext& updateContext
+            const helios::engine::runtime::world::UpdateContext& updateContext
         ) noexcept = 0;
 
     };

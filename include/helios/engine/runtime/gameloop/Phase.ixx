@@ -10,8 +10,8 @@ module;
 export module helios.engine.runtime.gameloop.Phase;
 
 import helios.engine.runtime.gameloop.Pass;
-import helios.engine.ecs.UpdateContext;
-import helios.engine.ecs.GameWorld;
+import helios.engine.runtime.world.UpdateContext;
+import helios.engine.runtime.world.GameWorld;
 
 export namespace helios::engine::runtime::gameloop {
 
@@ -63,7 +63,7 @@ export namespace helios::engine::runtime::gameloop {
          *
          * @param gameWorld Reference to the game world.
          */
-        void init(helios::engine::ecs::GameWorld& gameWorld){
+        void init(helios::engine::runtime::world::GameWorld& gameWorld){
             for (auto& pass : passEntries_) {
                 // every pass contains systems that are updated here
                 pass->init(gameWorld);
@@ -75,7 +75,7 @@ export namespace helios::engine::runtime::gameloop {
          *
          * @param updateContext The current update context.
          */
-        void update(helios::engine::ecs::UpdateContext& updateContext){
+        void update(helios::engine::runtime::world::UpdateContext& updateContext){
             for (auto& pass : passEntries_) {
                 // every pass contains systems that are updated here
                 pass->update(updateContext);

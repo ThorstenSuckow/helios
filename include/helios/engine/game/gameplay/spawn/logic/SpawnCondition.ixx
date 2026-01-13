@@ -9,6 +9,7 @@ export module helios.engine.game.gameplay.spawn.logic.SpawnCondition;
 
 import helios.engine.game.GameWorld;
 import helios.engine.game.Level;
+import helios.engine.core.data.GameObjectPoolId;
 import helios.engine.core.data.GameObjectPool;
 import helios.engine.game.UpdateContext;
 
@@ -47,17 +48,15 @@ export namespace helios::engine::game::gameplay::spawn::logic {
          * pool capacity, game state, or any other relevant factors.
          *
          * @param gameWorld Pointer to the current GameWorld. May be nullptr.
-         * @param level Pointer to the current Level containing bounds and spawn info.
          * @param gameObjectPool Pointer to the pool from which objects will be acquired.
          * @param updateContext The current frame's update context with delta time.
          *
          * @return The number of GameObjects to spawn this frame (spawn budget).
          *         Returns 0 if no spawning should occur.
          */
-        virtual size_t spawnBudget(
-            const helios::engine::game::GameWorld* gameWorld,
-            const helios::engine::game::Level* level,
-            const helios::engine::game::GameObjectPool* gameObjectPool,
+        virtual float spawnBudget(
+            const helios::engine::game::GameWorld& gameWorld,
+            const helios::engine::core::data::GameObjectPool& gameObjectPool,
             const helios::engine::game::UpdateContext& updateContext
         ) noexcept = 0;
 

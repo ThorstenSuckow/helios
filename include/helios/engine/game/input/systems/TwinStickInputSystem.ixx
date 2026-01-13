@@ -1,26 +1,26 @@
 /**
- * @file TwinStickInputComponent.ixx
+ * @file TwinStickInputSystem.ixx
  * @brief Input component for twin-stick gamepad controls.
  */
 module;
 
 #include <memory>
 
-export module helios.engine.game.input.components.TwinStickInputComponent;
+export module helios.engine.game.input.systems.TwinStickInputSystem;
 
 import helios.math.types;
 import helios.math.utils;
 import helios.engine.game.GameObject;
 import helios.engine.game.UpdateContext;
-import helios.engine.game.Updatable;
+import helios.engine.game.System;
 import helios.engine.game.Component;
 import helios.engine.core.messaging.command.CommandBuffer;
 import helios.engine.game.physics.motion.commands.Move2DCommand;
-import helios.engine.game.physics.motion.commands.HeadingCommand;
+import helios.engine.game.physics.motion.commands.SteeringCommand;
 import helios.engine.game.gameplay.combat.commands.Aim2DCommand;
 import helios.engine.game.gameplay.combat.commands.ShootCommand;
 
-export namespace helios::engine::game::input::components {
+export namespace helios::engine::game::input::systems {
 
     /**
      * @brief Input component for twin-stick gamepad control schemes.
@@ -30,13 +30,13 @@ export namespace helios::engine::game::input::components {
      * controls aiming direction and intensity.
      *
      * Each frame, this component reads the current input snapshot and generates
-     * Move2DCommand, HeadingCommand and Aim2DCommand instances that are queued in the CommandBuffer
+     * Move2DCommand, SteeringCommand and Aim2DCommand instances that are queued in the CommandBuffer
      * for later execution.
      *
      * @note Requires the owning GameObject to have Move2DComponent and Aim2DComponent
      *       attached for the generated commands to have any effect.
      */
-    class TwinStickInputComponent : public helios::engine::game::Updatable, public helios::engine::game::Component {
+    class TwinStickInputSystem : public helios::engine::game::System {
 
         /**
          * @brief Flag to indicate whether shoot commands should be derived
@@ -46,7 +46,20 @@ export namespace helios::engine::game::input::components {
          */
         bool useDedicatedShootInput_ = false;
 
+        /**
+         * @brief Reference to the GameObject this system reads input for.
+         */
+        helios::engine::game::GameObject& gameObject_;
+
     public:
+
+        /**
+         * @brief Constructs a TwinStickInputSystem for the specified GameObject.
+         *
+         * @param gameObject Reference to the GameObject to generate input commands for.
+         */
+        explicit TwinStickInputSystem(helios::engine::game::GameObject& gameObject) :
+        gameObject_(gameObject) {}
 
         /**
          * @brief Processes gamepad input and generates movement/aiming commands.
@@ -68,15 +81,16 @@ export namespace helios::engine::game::input::components {
                 ldir = leftStick.normalize();
                 finalSpeed = speed;
             }
-
-            commandBuffer.add(
-                gameObject()->guid(),
-                std::make_unique<helios::engine::game::physics::motion::commands::Move2DCommand>(ldir, finalSpeed)
+            /**
+             * @todo DO NOT POST IF input is already inactive in shootComponent
+             * and no input was detected (after normalizing)
+             */
+            commandBuffer.add<helios::engine::game::physics::motion::commands::Move2DCommand>(
+                gameObject_.guid(), ldir, finalSpeed
             );
 
-            commandBuffer.add(
-                gameObject()->guid(),
-                std::make_unique<helios::engine::game::physics::motion::commands::HeadingCommand>(ldir, finalSpeed)
+            commandBuffer.add<helios::engine::game::physics::motion::commands::SteeringCommand>(
+                gameObject_.guid(), ldir, finalSpeed
             );
 
             // Right stick: aiming
@@ -90,24 +104,24 @@ export namespace helios::engine::game::input::components {
                 finalFreq = freq;
             }
 
-            commandBuffer.add(
-                gameObject()->guid(),
-                std::make_unique<helios::engine::game::gameplay::combat::commands::Aim2DCommand>(rdir, finalFreq)
+            commandBuffer.add<helios::engine::game::gameplay::combat::commands::Aim2DCommand>(
+                gameObject_.guid(), rdir, finalFreq
             );
 
             if (useDedicatedShootInput_) {
                 // right trigger: shooting
                 const auto rightTrigger = inputSnapshot.gamepadState().triggerRight();
-
-                commandBuffer.add(
-                   gameObject()->guid(),
-                   std::make_unique<helios::engine::game::gameplay::combat::commands::ShootCommand>(rightTrigger)
-               );
+                if (rightTrigger > 0.0f) {
+                    commandBuffer.add<helios::engine::game::gameplay::combat::commands::ShootCommand>(
+                       gameObject_.guid(), rightTrigger
+                   );
+                }
             } else {
-                commandBuffer.add(
-                   gameObject()->guid(),
-                   std::make_unique<helios::engine::game::gameplay::combat::commands::ShootCommand>(finalFreq)
-               );
+                if (finalFreq > 0.0f) {
+                    commandBuffer.add<helios::engine::game::gameplay::combat::commands::ShootCommand>(
+                       gameObject_.guid(), finalFreq
+                   );
+                }
             }
 
 

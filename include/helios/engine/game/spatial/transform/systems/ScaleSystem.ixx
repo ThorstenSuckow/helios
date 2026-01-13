@@ -46,8 +46,8 @@ export namespace helios::engine::game::spatial::transform::systems {
          *
          * @param gameWorld Pointer to the GameWorld this system belongs to.
          */
-        void onAdd(helios::engine::game::GameWorld* gameWorld) noexcept override {
-            System::onAdd(gameWorld);
+        void init(helios::engine::game::GameWorld& gameWorld) noexcept override {
+            System::init(gameWorld);
         }
 
         /**
@@ -61,23 +61,23 @@ export namespace helios::engine::game::spatial::transform::systems {
          */
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
-            for (auto [entity, mab, wsc, tc] : gameWorld_->find<
+            for (auto [entity, mab, sc, tc] : gameWorld_->find<
                 helios::engine::game::model::components::ModelAabbComponent,
                 helios::engine::game::spatial::transform::components::ScaleComponent,
                 helios::engine::game::spatial::transform::components::TransformComponent
             >().each()) {
 
-                if (!wsc->isDirty()) {
+                if (!sc->isDirty()) {
                     continue;
                 }
 
                 // Get current model size and desired size
                 auto cscale = mab->aabb().size();
-                auto wscale = wsc->scaling();
+                auto wscale = sc->scaling();
 
                 auto currentScale = tc->localScaling();
 
-                auto unit = wsc->unit();
+                auto unit = sc->unit();
 
                 // Calculate scale factors: desired_size / current_size
                 // Convert desired size to engine units (meters)

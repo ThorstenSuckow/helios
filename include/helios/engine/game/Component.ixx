@@ -4,6 +4,7 @@
  */
 module;
 
+#include <memory>
 
 export module helios.engine.game.Component;
 
@@ -74,6 +75,29 @@ export namespace helios::engine::game {
         virtual void onAttach(GameObject* gameObject) noexcept {
             gameObject_ = gameObject;
         };
+
+        /**
+         * @brief Called when the component's GameObject is re-acquired from a pool.
+         *
+         * @details Override this method to reinitialize component state when the
+         * owning GameObject is recycled from an object pool. This allows components
+         * to reset their internal state for reuse without requiring a full destruction
+         * and reconstruction cycle.
+         *
+         * The default implementation does nothing.
+         */
+        virtual void onAcquire() noexcept {
+            // noop
+        };
+
+        /**
+         * @brief Checks whether this component is attached to a GameObject.
+         *
+         * @return True if the component has an owning GameObject, false otherwise.
+         */
+        [[nodiscard]] bool isAttached() const noexcept {
+            return gameObject_ != nullptr;
+        }
 
         /**
          * @brief Checks whether the component is enabled.

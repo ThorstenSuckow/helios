@@ -8,7 +8,6 @@
  */
 module;
 
-#include <functional>
 #include <memory>
 #include <unordered_map>
 #include <vector>
@@ -16,68 +15,29 @@ module;
 
 export module helios.engine.core.data.GameObjectPool;
 
-import helios.engine.game.System;
-
-import helios.scene.SceneNode;
-
-import helios.engine.game.rendering.components.RenderableComponent;
-import helios.engine.game.scene.components.SceneNodeComponent;
-import helios.engine.game.spatial.transform.components.TransformComponent;
-import helios.engine.game.physics.motion.components.Move2DComponent;
-
-import helios.engine.game.GameObject;
-import helios.engine.game.GameWorld;
-import helios.engine.game.UpdateContext;
-
 import helios.util.Guid;
 
-export namespace helios::engine::game {
+export namespace helios::engine::core::data {
+
 
     /**
-     * @brief A reusable object pool for GameObjects.
+     * @brief Object pool for efficient GameObject lifecycle management.
      *
-     * @details
-     * GameObjectPool implements the Object Pool pattern to efficiently manage
-     * GameObjects that are frequently created and destroyed. Instead of allocating
-     * new objects at runtime, the pool pre-allocates a fixed number of objects
-     * during warmup and recycles them.
+     * @details GameObjectPool manages a fixed-size collection of GameObject identifiers,
+     * tracking which objects are currently active (in-use) and which are inactive (available).
+     * This pattern eliminates runtime allocation overhead for frequently spawned entities
+     * like projectiles, particles, or enemies.
      *
-     * The pool tracks objects by their Guid and validates them against the GameWorld
-     * on acquire to handle external removal gracefully.
+     * The pool uses O(1) operations for both acquire and release:
+     * - **acquire**: Pops from the inactive list and adds to active tracking
+     * - **release**: Swap-and-pop removal from active list, push to inactive
      *
-     * Typical use cases:
-     * - Projectile/bullet spawning
-     * - Particle systems
-     * - Enemy wave spawning
+     * GameObjects themselves are owned by GameWorld; this pool only tracks their Guids.
      *
-     * Example usage:
-     * ```cpp
-     * auto factory = []() {
-     *     auto bullet = std::make_unique<GameObject>();
-     *     bullet->addComponent<Move2DComponent>();
-     *     return bullet;
-     * };
-     *
-     * GameObjectPool bulletPool(gameWorld, factory, 100);
-     *
-     * // Acquire an object from the pool
-     * if (auto* bullet = bulletPool.acquire()) {
-     *     bullet->get<Move2DComponent>()->setVelocity({0, 1, 0});
-     * }
-     *
-     * // Release the object back to the pool
-     * bulletPool.release(bullet);
-     * ```
+     * @todo Prevent duplicate Guids from being added to the pool.
      */
     class GameObjectPool {
 
-        /**
-         * @brief Factory function type for creating new GameObjects.
-         *
-         * The factory is invoked during pool warmup to create all pooled objects.
-         * It should return a fully configured GameObject ready for use.
-         */
-        using Factory = std::function<std::unique_ptr<helios::engine::game::GameObject>()>;
 
     protected:
 
@@ -103,65 +63,33 @@ export namespace helios::engine::game {
          */
         size_t poolSize_ = 0;
 
-        /**
-         * @brief Reference to the GameWorld that owns the pooled GameObjects.
-         */
-        helios::engine::game::GameWorld& gameWorld_;
-
-        /**
-         * @brief Factory function used to create new GameObjects during warmup.
-         */
-        Factory gameObjectFactory_;
 
         /**
          * @brief Unique identifier for this pool instance.
          */
         const helios::util::Guid guid_;
 
-        /**
-         * @brief Pre-allocates all pooled objects and adds them to the GameWorld.
-         *
-         * @details
-         * Creates poolSize_ GameObjects using the factory, sets them inactive,
-         * adds them to the GameWorld, and tracks their Guids for later acquisition.
-         * Called automatically during construction.
-         */
-        void warmup() {
-            for (unsigned int i = 0; i < poolSize_; i++) {
-                std::unique_ptr<helios::engine::game::GameObject> gameObject = gameObjectFactory_();
-                gameObject->setActive(false);
-                helios::util::Guid guid = gameObject->guid();
-                std::ignore = gameWorld_.addGameObject(std::move(gameObject));
-                inactiveGameObjects_.push_back(guid);
-            }
-        }
 
     public:
 
+
         /**
-         * @brief Constructs a new GameObjectPool.
+         * @brief Constructs a GameObjectPool with the specified capacity.
          *
-         * @param gameWorld Reference to the GameWorld that will own the pooled objects.
-         * @param gameObjectFactory Factory function to create new GameObjects.
-         * @param poolSize Number of objects to pre-allocate in the pool.
+         * @details Pre-allocates internal storage for the given pool size.
+         * The pool starts empty; use `addInactive()` or a factory to populate it.
          *
-         * @note The pool immediately calls warmup() to pre-allocate all objects.
+         * @param poolSize The maximum number of GameObjects this pool can manage.
          */
         explicit GameObjectPool(
-            helios::engine::game::GameWorld& gameWorld,
-            Factory gameObjectFactory,
             size_t poolSize
         ) :
         poolSize_(poolSize),
-        gameWorld_(gameWorld),
-        gameObjectFactory_(std::move(gameObjectFactory)),
         guid_(helios::util::Guid::generate()) {
-
             activeGameObjects_.reserve(poolSize);
             inactiveGameObjects_.reserve(poolSize);
-
-            warmup();
         }
+
 
         /**
          * @brief Returns the unique identifier of this pool.
@@ -172,59 +100,62 @@ export namespace helios::engine::game {
             return guid_;
         }
 
-
         /**
-         * @brief Acquires the next available GameObject from the pool.
+         * @brief Returns the maximum capacity of this pool.
          *
-         * @details
-         * Retrieves an inactive GameObject, validates it against the GameWorld,
-         * marks it as active, and returns it. If a Guid references an object
-         * that no longer exists in the GameWorld (e.g., externally removed),
-         * it is silently discarded and the next available object is tried.
-         *
-         * @return Pointer to an activated GameObject, or nullptr if the pool is exhausted.
-         *
-         * @note The returned object is marked as active and tracked internally.
-         *       Call release() to return it to the pool when done.
+         * @return The pool size specified at construction.
          */
-        [[nodiscard]] helios::engine::game::GameObject* acquire() {
-
-            if (inactiveGameObjects_.empty()) {
-                return nullptr;
-            }
-
-            while (!inactiveGameObjects_.empty()) {
-
-                auto guid = inactiveGameObjects_.back();
-                auto* gameObject = gameWorld_.find(guid);
-
-                inactiveGameObjects_.pop_back();
-
-                if (gameObject == nullptr) {
-                    continue;
-                }
-
-                activeIndex_[guid] = activeGameObjects_.size();
-                activeGameObjects_.push_back(guid);
-                gameObject->setActive(true);
-
-                return gameObject;
-            }
-
-            return nullptr;
-
+        [[nodiscard]] size_t size() const noexcept {
+            return poolSize_;
         }
 
         /**
-         * @brief Releases a GameObject back to the pool.
+         * @brief Acquires an inactive GameObject from the pool.
          *
-         * @param gameObject Pointer to the GameObject to release. May be nullptr.
+         * @details Removes a Guid from the inactive list and adds it to the active
+         * tracking structures. The caller is responsible for activating the actual
+         * GameObject in the GameWorld.
          *
-         * @return True if the object was successfully released, false if gameObject
-         *         was nullptr or not tracked by this pool.
+         * @param[out] guid Receives the Guid of the acquired object on success.
+         *
+         * @return True if an object was acquired, false if the pool is exhausted.
          */
-        bool release(const helios::engine::game::GameObject* gameObject) {
-            return gameObject != nullptr ? release(gameObject->guid()) : false;
+        [[nodiscard]] bool acquire(helios::util::Guid& guid) {
+
+            if (inactiveGameObjects_.empty()) {
+                return false;
+            }
+
+            guid = inactiveGameObjects_.back();
+
+            inactiveGameObjects_.pop_back();
+
+            activeIndex_[guid] = activeGameObjects_.size();
+            activeGameObjects_.push_back(guid);
+
+            return true;
+        }
+
+        /**
+         * @brief Adds a Guid to the inactive list without acquiring it.
+         *
+         * @details Used during pool initialization to register pre-created GameObjects.
+         * Fails if the pool is already at capacity.
+         *
+         * @param guid The Guid of the GameObject to add.
+         *
+         * @return True if added successfully, false if pool is full.
+         */
+        bool addInactive(const helios::util::Guid& guid) {
+
+            const size_t used = (activeCount() + inactiveCount());
+
+            if (used < size()) {
+                inactiveGameObjects_.push_back(guid);
+                return true;
+            }
+
+            return false;
         }
 
         /**
@@ -242,12 +173,11 @@ export namespace helios::engine::game {
          */
         bool release(const helios::util::Guid& guid) {
 
-            auto* gameObject = gameWorld_.find(guid);
             auto it = activeIndex_.find(guid);
 
-            if (!gameObject || it == activeIndex_.end()) {
+            if (it == activeIndex_.end()) {
                 return false;
-            }
+           }
 
 
             size_t idx = it->second;
@@ -268,42 +198,43 @@ export namespace helios::engine::game {
             activeIndex_.erase(it);
             inactiveGameObjects_.push_back(guid);
 
-            gameObject->setActive(false);
-
             return true;
         }
 
         /**
-         * @brief Retrieves all currently inactive GameObjects.
+         * @brief Releases and permanently removes a GameObject from the pool.
          *
-         * @details
-         * Iterates the inactive Guid list and resolves each to a GameObject pointer.
-         * Objects that no longer exist in the GameWorld are silently skipped.
+         * @details Unlike `release()`, this method does not add the Guid back to the
+         * inactive list. Use this when a pooled object is being destroyed rather than
+         * recycled.
          *
-         * @return Vector of pointers to inactive GameObjects. The vector may be
-         *         smaller than the inactive count if some objects were externally removed.
+         * @param guid The unique identifier of the GameObject to remove.
          *
-         * @note This operation has O(n) complexity where n is the number of inactive objects.
+         * @return True if removed successfully, false if Guid was not active.
          */
-        std::vector<helios::engine::game::GameObject*> inactiveGameObjects() {
+        bool releaseAndRemove(const helios::util::Guid& guid) {
 
-            std::vector<helios::engine::game::GameObject*> gameObjects{};
+            auto it = activeIndex_.find(guid);
 
-            for (int i = inactiveGameObjects_.size() - 1; i >= 0; i--) {
-
-                auto guid = inactiveGameObjects_[i];
-                auto* gameObject = gameWorld_.find(guid);
-
-                if (gameObject == nullptr) {
-                    continue;
-                }
-
-                gameObjects.push_back(gameObject);
+            if (it == activeIndex_.end()) {
+                return false;
             }
 
-            return gameObjects;
+            const size_t idx = it->second;
+            const auto lastGuid = activeGameObjects_.back();
 
+            activeGameObjects_[idx] = lastGuid;
+            activeGameObjects_.pop_back();
+
+            activeIndex_.erase(it);
+
+            if (lastGuid != guid) {
+                activeIndex_[lastGuid] = idx;
+            }
+
+            return true;
         }
+
 
         /**
          * @brief Returns the number of active game objects.

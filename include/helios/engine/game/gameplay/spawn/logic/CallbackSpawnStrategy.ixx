@@ -54,9 +54,8 @@ export namespace helios::engine::game::gameplay::spawn::logic {
          * Must not throw
          */
         using SpawnFunction = std::function<bool(
-            const helios::engine::game::GameWorld*,
-            const helios::engine::game::Level*,
-            helios::engine::game::GameObject*,
+            const helios::engine::game::GameWorld&,
+            helios::engine::game::GameObject&,
             const helios::engine::game::UpdateContext&)>;
 
         /**
@@ -87,12 +86,11 @@ export namespace helios::engine::game::gameplay::spawn::logic {
          *         false if the object should be returned to the pool.
          */
         [[nodiscard]] bool spawn(
-            const helios::engine::game::GameWorld* gameWorld,
-            const helios::engine::game::Level* level,
-            helios::engine::game::GameObject* gameObject,
+            const helios::engine::game::GameWorld& gameWorld,
+            helios::engine::game::GameObject& gameObject,
             const helios::engine::game::UpdateContext& updateContext
         ) noexcept override {
-            return spawnFunction_(gameWorld, level, gameObject, updateContext);
+            return spawnFunction_(gameWorld, gameObject, updateContext);
         }
 
     };

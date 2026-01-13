@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.game.gameplay.combat.commands.Aim2DCommand;
 
-import helios.engine.core.messaging.command.Command;
+import helios.engine.core.messaging.command.TargetedCommand;
 import helios.engine.game.GameObject;
 import helios.math.types;
 import helios.engine.game.gameplay.combat.components.Aim2DComponent;
@@ -27,7 +27,7 @@ export namespace helios::engine::game::gameplay::combat::commands {
      * @see helios::engine::core::messaging::command::Command
      * @see helios::engine::game::gameplay::components::Aim2DComponent
      */
-    class Aim2DCommand : public helios::engine::core::messaging::command::Command {
+    class Aim2DCommand : public helios::engine::core::messaging::command::TargetedCommand {
 
         /**
          * @brief The analog stick magnitude determining fire frequency.
@@ -61,7 +61,7 @@ export namespace helios::engine::game::gameplay::combat::commands {
          *
          * @param gameObject The target entity with an Aim2DComponent.
          */
-        void execute(helios::engine::game::GameObject& gameObject) override {
+        void execute(helios::engine::game::GameObject& gameObject) const noexcept override {
 
             auto* aimComponent = gameObject.get<helios::engine::game::gameplay::combat::components::Aim2DComponent>();
 

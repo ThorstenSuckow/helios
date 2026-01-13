@@ -1,44 +1,59 @@
 /**
  * @file TriggerCollisionEvent.ixx
- * @brief Event dispatched when a GameObject enters a trigger volume.
+ * @brief Event dispatched when two solid colliders physically collide.
  */
 module;
 
 export module helios.engine.game.physics.collision.events.TriggerCollisionEvent;
 
-import helios.engine.game.GameObject;
+import helios.util.Guid;
 import helios.math;
 
 export namespace helios::engine::game::physics::collision::events {
 
     /**
-     * @brief Event representing a non-physical collision with a trigger volume.
+     * @brief Event representing a physical collision between two solid objects.
      *
-     * @details TriggerCollisionEvent is dispatched by the collision detection system
-     * when a GameObject enters a trigger collider. Trigger colliders are non-solid
-     * volumes used to detect presence without physical collision response. Common
-     * use cases include pickup zones, damage areas, spawn triggers, and checkpoints.
+     * @details TriggerCollisionEvent is used to communicate trigger (non-solid) collisions
+     * between GameObjects. Unlike SolidCollisionEvent, this event does not indicate a
+     * direct physical interaction that may require resolution such as position correction,
+     * velocity reflection, or damage calculation.
      *
-     * Unlike SolidCollisionEvent, trigger events do not imply any physics-based
-     * resolution. The receiving system is responsible for defining the gameplay
-     * response (e.g., collecting an item, activating a trap, starting a cutscene).
+     * The GridCollisionDetectionSystem detects collisions and stores the result in
+     * CollisionStateComponent. Downstream systems can then create and dispatch
+     * TriggerCollisionEvent instances based on the collision state.
+     *
+     * The event carries GUIDs of both participating GameObjects and the
+     * contact point in world space where the collision was recorded.
+     *
+     * Example usage (reading from event bus):
+     * ```cpp
+     * for (const auto& event : eventBus.readPass<TriggerCollisionEvent>()) {
+     *     auto* sourceObj = gameWorld.find(event.source());
+     *     auto* matchObj = gameWorld.find(event.match());
+     *     // Handle trigger collision response...
+     * }
+     * ```
      *
      * @see SolidCollisionEvent
+     * @see CollisionStateComponent
+     * @see GridCollisionDetectionSystem
+     * @see CollisionComponent
      */
     class TriggerCollisionEvent {
 
         /**
-         * @brief The GameObject that entered the trigger volume.
+         * @brief GUID of the GameObject that initiated or detected the collision.
          */
-        const helios::engine::game::GameObject* source_;
+        const helios::util::Guid source_;
 
         /**
-         * @brief The trigger volume GameObject that was entered.
+         * @brief GUID of the GameObject that was collided with.
          */
-        const helios::engine::game::GameObject* match_;
+        const helios::util::Guid match_;
 
         /**
-         * @brief The world-space contact point where the trigger was activated.
+         * @brief The world-space contact point of the collision.
          */
         const helios::math::vec3f contact_;
 
@@ -47,40 +62,46 @@ export namespace helios::engine::game::physics::collision::events {
         /**
          * @brief Constructs a TriggerCollisionEvent.
          *
-         * @param source The GameObject that entered the trigger.
-         * @param match The trigger volume GameObject.
-         * @param contact The world-space position where the trigger was activated.
+         * @param source GUID of the GameObject that detected or initiated the collision.
+         * @param match GUID of the GameObject that was collided with.
+         * @param contact The world-space position where the collision occurred.
          */
         explicit TriggerCollisionEvent(
-            const helios::engine::game::GameObject* source,
-            const helios::engine::game::GameObject* match,
+            const helios::util::Guid source,
+            const helios::util::Guid match,
             const helios::math::vec3f contact
         ) : source_(source), match_(match), contact_(contact) {}
 
         /**
          * @brief Returns the contact point in world space.
          *
-         * @return The 3D position where the trigger was activated.
+         * @return The 3D position where the collision occurred.
          */
         [[nodiscard]] helios::math::vec3f contact() const noexcept {
             return contact_;
         }
 
         /**
-         * @brief Returns the source GameObject.
+         * @brief Returns the GUID of the source GameObject.
          *
-         * @return Non-owning pointer to the GameObject that entered the trigger.
+         * @details The source is the entity that detected/reported the collision.
+         * Use `GameWorld::find()` to retrieve the actual GameObject.
+         *
+         * @return GUID of the collision reporter.
          */
-        [[nodiscard]] const helios::engine::game::GameObject* source() const noexcept {
+        [[nodiscard]] helios::util::Guid source() const noexcept {
             return source_;
         }
 
         /**
-         * @brief Returns the trigger volume GameObject.
+         * @brief Returns the GUID of the matched GameObject.
          *
-         * @return Non-owning pointer to the trigger volume that was entered.
+         * @details The match is the entity that was collided with.
+         * Use `GameWorld::find()` to retrieve the actual GameObject.
+         *
+         * @return GUID of the collided entity.
          */
-        [[nodiscard]] const helios::engine::game::GameObject* match() const noexcept {
+        [[nodiscard]] helios::util::Guid match() const noexcept {
             return match_;
         }
 

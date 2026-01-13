@@ -9,7 +9,7 @@ module;
 
 export module helios.engine.game.physics.motion.components.DirectionComponent;
 
-import helios.engine.game.Component;
+import helios.engine.game.CloneableComponent;
 
 import helios.math;
 
@@ -23,7 +23,7 @@ export namespace helios::engine::game::physics::motion::components {
      * movement direction, facing direction, or other vector-based properties.
      * It enforces normalization of the stored vector.
      */
-    class  DirectionComponent : public Component {
+    class  DirectionComponent : public CloneableComponent<DirectionComponent> {
 
         /**
          * @brief The stored normalized direction vector.
@@ -31,6 +31,18 @@ export namespace helios::engine::game::physics::motion::components {
         helios::math::vec3f direction_{};
 
     public:
+
+        /**
+         * @brief Default constructor.
+         */
+        DirectionComponent() = default;
+
+        /**
+         * @brief Copy constructor.
+         *
+         * @param other The component to copy from.
+         */
+        explicit DirectionComponent(const DirectionComponent& other) : direction_(other.direction()) {}
 
         /**
          * @brief Sets the direction vector.
@@ -41,7 +53,7 @@ export namespace helios::engine::game::physics::motion::components {
          * @param direction The new normalized direction vector.
          */
         void setDirection(const helios::math::vec3f direction) noexcept {
-            assert(std::abs(1.0f - direction.length()) <= helios::math::EPSILON_LENGTH
+            assert(direction.length() - 1.0f <= helios::math::EPSILON_LENGTH
                 && "direction must be normalized");
             direction_ = direction;
         }

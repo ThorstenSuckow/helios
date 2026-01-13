@@ -8,10 +8,13 @@ module;
 
 export module helios.engine.game.physics.motion.components.RotationStateComponent;
 
-import helios.engine.game.Component;
+import helios.engine.game.CloneableComponent;
 
 import helios.math;
 
+/**
+ * @todo move to spatial transform
+ */
 export namespace helios::engine::game::physics::motion::components {
 
     /**
@@ -25,7 +28,7 @@ export namespace helios::engine::game::physics::motion::components {
      * The component caches the computed rotation matrices and only recalculates them
      * when the underlying angles or axes change (dirty flag pattern).
      */
-    class RotationStateComponent : public Component {
+    class RotationStateComponent : public CloneableComponent<RotationStateComponent> {
 
         /**
          * @brief Current heading rotation angle in degrees.
@@ -99,6 +102,23 @@ export namespace helios::engine::game::physics::motion::components {
         }
 
     public:
+
+        /**
+         * @brief Default constructor.
+         */
+        RotationStateComponent() = default;
+
+        /**
+         * @brief Copy constructor.
+         *
+         * @param other The component to copy from.
+         *
+         * @details Copies rotation axes but resets angles and matrices.
+         */
+        explicit RotationStateComponent(const RotationStateComponent& other) :
+        headingRotationAxis_(other.headingRotationAxis_),
+        spinRotationAxis_(other.spinRotationAxis_)
+        {}
 
         /**
          * @brief Sets the heading rotation angle.

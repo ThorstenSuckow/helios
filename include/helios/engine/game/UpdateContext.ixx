@@ -5,6 +5,7 @@
 module;
 
 #include <cassert>
+#include <span>
 #include <stdexcept>
 
 export module helios.engine.game.UpdateContext;
@@ -20,14 +21,26 @@ export namespace helios::engine::core::messaging::command {
 export namespace helios::engine::game {
 
 
+
     class GameWorld;
 
     /**
-     * @brief Context passed to Updatable components during per-frame updates.
+     * @brief Context passed to systems and components during per-frame updates.
      *
-     * @details Provides all necessary state for components to perform their update logic,
-     * including frame timing, input state, and access to the command system.
-     * All pointers are non-owning; the caller is responsible for lifetime management.
+     * Provides all necessary state for systems to perform their update logic,
+     * including frame timing, input state, command buffer access, and event propagation.
+     *
+     * The UpdateContext serves as the central communication hub within the game loop,
+     * offering two levels of event propagation:
+     *
+     * **Pass-level events** are pushed via pushPass() and become readable in subsequent
+     * passes within the same phase after a commit point is reached.
+     *
+     * **Phase-level events** are pushed via pushPhase() and become readable in subsequent
+     * phases after the current phase commits.
+     *
+     * @see GameLoop
+     * @see Pass
      */
     struct UpdateContext {
 
@@ -53,33 +66,58 @@ export namespace helios::engine::game {
         helios::engine::game::GameWorld& gameWorld_;
 
         /**
-         * @brief Sink for pushing game loop events during update.
+         * @brief Sink for pushing phase-level events during update.
          *
          * Used by systems and components to publish events (e.g., collision,
-         * spawn requests) that will be processed in a later phase (N+1) of the game loop.
+         * spawn requests) that will be processed in the next phase of the game loop.
          */
-        helios::engine::core::messaging::event::GameLoopEventSink eventSink_;
+        helios::engine::core::messaging::event::GameLoopEventBus::WriteSink phaseEventSink_;
+
+        /**
+         * @brief Source for reading phase-level events from the previous phase.
+         */
+        const helios::engine::core::messaging::event::GameLoopEventBus::ReadSource phaseEventSource_;
+
+        /**
+         * @brief Sink for pushing pass-level events during update.
+         *
+         * Used by systems and components to publish events that will be processed
+         * in subsequent passes within the same phase, after a commit point.
+         */
+        helios::engine::core::messaging::event::GameLoopEventBus::WriteSink passEventSink_;
+
+        /**
+         * @brief Source for reading pass-level events from previous passes.
+         */
+        const helios::engine::core::messaging::event::GameLoopEventBus::ReadSource passEventSource_;
 
     public:
+
 
         /**
          * @brief Constructs an UpdateContext with required dependencies.
          *
-         * @param commandBuffer Non-owning pointer to the command buffer. Must not be nullptr.
-         * @param gameWorld Non-owning pointer to the game world. Must not be nullptr.
-         * @param eventSink Sink for pushing game loop events. Used to publish events
-         *                  during update phases for later processing.
-         *
-         * @throws std::invalid_argument if either commandBuffer or gameWorld are nullptr.
+         * @param commandBuffer Reference to the command buffer for queueing commands.
+         * @param gameWorld Reference to the game world for entity lookups.
+         * @param phaseEventBus Reference to the phase-level event bus for cross-phase communication.
+         * @param passEventBus Reference to the pass-level event bus for cross-pass communication.
          */
         UpdateContext(
             helios::engine::core::messaging::command::CommandBuffer& commandBuffer,
             helios::engine::game::GameWorld& gameWorld,
-            const helios::engine::core::messaging::event::GameLoopEventSink& eventSink
-        ) : commandBuffer_(commandBuffer), gameWorld_(gameWorld), eventSink_(eventSink) {}
+            helios::engine::core::messaging::event::GameLoopEventBus& phaseEventBus,
+            helios::engine::core::messaging::event::GameLoopEventBus& passEventBus
+        ) : commandBuffer_(commandBuffer), gameWorld_(gameWorld),
+        phaseEventSink_(phaseEventBus.writeSink()),
+        phaseEventSource_(phaseEventBus.readSource()),
+        passEventSink_(passEventBus.writeSink()),
+        passEventSource_(passEventBus.readSource())
+        {}
 
         /**
          * @brief Returns the time elapsed since the last frame, in seconds.
+         *
+         * @return Delta time in seconds.
          */
         [[nodiscard]] float deltaTime() const noexcept {
             return deltaTime_;
@@ -140,25 +178,79 @@ export namespace helios::engine::game {
         }
 
         /**
-         * @brief Pushes an event to the game loop event bus.
+         * @brief Pushes an event to the pass-level event bus.
          *
-         * @details This method allows systems and components to publish events during
-         * their update phase. Events are buffered and processed in a subsequent phase
-         * (N+1) of the game loop, ensuring decoupled communication between systems.
+         * Events pushed here become readable in subsequent passes within the same
+         * phase, after a commit point is reached.
          *
          * @tparam E The event type to push.
          * @tparam Args Constructor argument types for the event.
          *
          * @param args Arguments forwarded to the event constructor.
          *
-         * Example usage:
-         * ```cpp
-         * updateContext.pushEvent<CollisionEvent>(entityA, entityB, contactPoint);
-         * ```
+         * @see readPass()
+         * @see Pass::addCommitPoint()
          */
         template<typename E, typename... Args>
-        void pushEvent(Args&&... args) {
-            eventSink_.template push<E>(std::forward<Args>(args)...);
+        void pushPass(Args&&... args) {
+            passEventSink_.template push<E>(std::forward<Args>(args)...);
+        }
+
+        /**
+         * @brief Pushes an event to the phase-level event bus.
+         *
+         * Events pushed here become readable in subsequent phases,
+         * after the current phase commits.
+         *
+         * @tparam E The event type to push.
+         * @tparam Args Constructor argument types for the event.
+         *
+         * @param args Arguments forwarded to the event constructor.
+         *
+         * @see readPhase()
+         * @see GameLoop
+         */
+        template<typename E, typename... Args>
+        void pushPhase(Args&&... args) {
+            phaseEventSink_.template push<E>(std::forward<Args>(args)...);
+        }
+
+        /**
+         * @brief Reads events from the phase-level event bus.
+         *
+         * Returns events that were pushed during the previous phase via
+         * `pushPhase()`. The phase event bus is swapped at phase boundaries,
+         * configured in GameLoop::phaseCommit().
+         *
+         * @tparam E The event type to read.
+         *
+         * @return A span of const events of type E.
+         *
+         * @see pushPhase()
+         * @see GameLoop
+         */
+        template<typename E>
+        std::span<const E> readPhase() {
+            return phaseEventSource_.template read<E>();
+        }
+
+        /**
+         * @brief Reads events from the pass-level event bus.
+         *
+         * Returns events that were pushed during previous passes within the
+         * current phase via `pushPass()`. The pass event bus is swapped at
+         * commit points, configured via Pass::addCommitPoint().
+         *
+         * @tparam E The event type to read.
+         *
+         * @return A span of const events of type E.
+         *
+         * @see pushPass()
+         * @see Pass::addCommitPoint()
+         */
+        template<typename E>
+        std::span<const E> readPass() {
+            return passEventSource_.template read<E>();
         }
     };
 }

@@ -28,6 +28,8 @@ import helios.util.Guid;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
 
+
+
 #define HELIOS_LOG_SCOPE "helios::engine::core::messaging::command::CommandBuffer"
 export namespace helios::engine::core::messaging::command {
 
@@ -257,7 +259,7 @@ export namespace helios::engine::core::messaging::command {
          */
         CommandBuffer& flush(helios::engine::game::GameWorld& gameWorld) {
 
-            // world command
+            // World commands are processed first
             for (auto& worldCommandProxy : worldCommandBuffer_) {
 
                 auto it = worldCommandDispatchers_.find(worldCommandProxy.typeIdx);
@@ -267,11 +269,9 @@ export namespace helios::engine::core::messaging::command {
                 } else {
                     worldCommandProxy.worldCommand->execute(gameWorld);
                 }
-
-
             }
 
-            // targeted command
+            // Targeted commands are processed second
             for (auto& targetedCommandProxy : targetedCommandBuffer_) {
 
                 auto* gameObject = gameWorld.find(targetedCommandProxy.guid);
@@ -286,13 +286,11 @@ export namespace helios::engine::core::messaging::command {
 
                 if (it != targetedCommandDispatchers_.end()) {
                     targetedCommandProxy.targetedCommand->accept(*gameObject, *(it->second));
-                    //it->second->dispatch(std::move(targetedCommand.command));
                 } else {
                     targetedCommandProxy.targetedCommand->execute(*gameObject);
                 }
-
-
             }
+
             clear();
             return *this;
         }

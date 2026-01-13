@@ -6,4 +6,5 @@ export module helios.engine.game.physics.collision.components;
 
 export import helios.engine.game.physics.collision.components.AabbColliderComponent;
 export import helios.engine.game.physics.collision.components.CollisionComponent;
+export import helios.engine.game.physics.collision.components.CollisionStateComponent;
 

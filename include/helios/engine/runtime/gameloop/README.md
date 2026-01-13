@@ -1,4 +1,4 @@
-# helios::engine::gameloop
+# helios::engine::runtime::gameloop
 
 Central game loop orchestration module providing phased system execution.
 
@@ -31,7 +31,7 @@ Commands can be enqueued into the CommandBuffer during any phase, not just the P
 ```cpp
 #include "helios/engine/gameloop/GameLoop.ixx"
 
-helios.engine.gameloop.GameLoop gameLoop;
+helios.engine.runtime.gameloop.GameLoop gameLoop;
 
 // Configure Pre phase
 gameLoop.phase(PhaseType.Pre)
@@ -122,7 +122,7 @@ The game loop provides two levels of event synchronization:
 ---
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::gameloop
+@namespace helios::engine::runtime::gameloop
 @brief Central game loop orchestration module.
 @details Provides the GameLoop, Phase, and Pass classes for managing phased system execution with deterministic ordering and event synchronization.
 </p></details>

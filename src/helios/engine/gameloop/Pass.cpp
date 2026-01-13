@@ -3,7 +3,7 @@ module;
 #include <type_traits>
 #include <utility>
 
-module helios.engine.gameloop.Pass;
+module helios.engine.runtime.gameloop.Pass;
 
 import helios.engine.ecs.System;
 import helios.engine.ecs.SystemRegistry;
@@ -11,10 +11,10 @@ import helios.engine.ecs.SystemRegistry;
 import helios.engine.ecs.UpdateContext;
 import helios.engine.ecs.GameWorld;
 
-import helios.engine.gameloop.GameLoop;
-import helios.engine.gameloop.Phase;
+import helios.engine.runtime.gameloop.GameLoop;
+import helios.engine.runtime.gameloop.Phase;
 
-namespace helios::engine::gameloop {
+namespace helios::engine::runtime::gameloop {
 
 
     void Pass::init(helios::engine::ecs::GameWorld& gameWorld) {

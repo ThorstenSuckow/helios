@@ -7,7 +7,7 @@ module;
 #include <type_traits>
 #include <utility>
 
-export module helios.engine.gameloop.Pass;
+export module helios.engine.runtime.gameloop.Pass;
 
 import helios.engine.ecs.System;
 import helios.engine.ecs.SystemRegistry;
@@ -19,7 +19,7 @@ export namespace helios::engine::game {
     class GameWorld;
 }
 
-export namespace helios::engine::gameloop {
+export namespace helios::engine::runtime::gameloop {
 
     class Phase;
 
@@ -49,7 +49,7 @@ export namespace helios::engine::gameloop {
      */
     class Pass {
 
-        friend class helios::engine::gameloop::Phase;
+        friend class helios::engine::runtime::gameloop::Phase;
 
         /**
          * @brief Registry holding all systems for this pass.

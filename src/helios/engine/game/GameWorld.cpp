@@ -16,16 +16,6 @@ import helios.engine.game.UpdateContext;
 namespace helios::engine::game {
 
 
-
-    void GameWorld::update(helios::engine::game::UpdateContext& updateContext) const noexcept {
-        for (auto& [guid, gameObject] : gameObjects_) {
-            gameObject->update(updateContext);
-        }
-        for (auto& system : systems_) {
-            system->update(updateContext);
-        }
-    }
-
     helios::engine::game::GameObject* GameWorld::addGameObject(std::unique_ptr<GameObject> gameObject) {
         if (!gameObject) {
             logger_.warn("Attempted to add null GameObject to GameWorld");

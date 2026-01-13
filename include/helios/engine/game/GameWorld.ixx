@@ -11,36 +11,87 @@ module;
 #include <helios/engine/core/data/GameObjectView.h>
 #include <memory>
 #include <unordered_map>
+#include <string>
 
 export module helios.engine.game.GameWorld;
 
+import helios.engine.game.UpdateContext;
 import helios.engine.game.GameObject;
+import helios.engine.game.Manager;
+import helios.engine.game.PoolRequestHandler;
+import helios.engine.game.Component;
+import helios.engine.game.CloneableComponent;
 
 import helios.util.Guid;
-import helios.engine.game.UpdateContext;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
-import helios.engine.game.System;
 import helios.engine.game.Level;
 
+
 import helios.engine.core.data.GameObjectFilter;
+import helios.engine.core.data.GameObjectPoolId;
+import helios.engine.core.data.GameObjectPoolRegistry;
+
+
+import helios.engine.game.PoolRequestHandlerRegistry;
+
+export namespace helios::engine::core::data {
+    class GameObjectPool;
+}
+
 
 #define HELIOS_LOG_SCOPE "helios::engine::game::GameWorld"
 export namespace helios::engine::game {
 
 
     /**
-     * @brief Central registry for managing game entities, systems, and the active level.
+     * @brief Central registry for game entities, managers, pools, and the active level.
      *
      * @details
      * The GameWorld is the root container for the game state. It manages the lifecycle
-     * of GameObjects, executes Systems, and holds the current Level.
+     * of GameObjects, coordinates Managers, and holds the current Level.
      *
-     * Key responsibilities:
-     * - **Entity Management:** Owns all GameObjects and provides lookup by Guid.
-     * - **System Execution:** Manages and updates registered Systems.
-     * - **Level Management:** Holds the active Level instance.
-     * - **Update Loop:** Orchestrates the frame update by updating GameObjects and then Systems.
+     * ## Key Responsibilities
+     *
+     * - **Entity Management:** Owns all GameObjects and provides amortized O(1) lookup by Guid
+     *   via `std::unordered_map`.
+     * - **Component Queries:** Efficient iteration over GameObjects with specific components
+     *   via `find<Components...>()` with optional filtering by active/enabled state.
+     * - **Pool Management:** Registers and provides access to GameObjectPools for entity recycling.
+     * - **Manager Coordination:** Holds Managers that handle cross-cutting concerns
+     *   (spawning, projectile pooling) and flushes them each frame.
+     * - **Level Management:** Holds the active Level instance with arena bounds.
+     *
+     * ## Usage with GameLoop
+     *
+     * The GameWorld is passed to Systems via UpdateContext. Systems query GameObjects
+     * and their components, while mutations are typically performed through Commands
+     * that are flushed by the CommandBuffer.
+     *
+     * ```cpp
+     * // In a System
+     * void update(UpdateContext& ctx) noexcept override {
+     *     for (auto [obj, move] : ctx.gameWorld().find<Move2DComponent>().each()) {
+     *         // Process entities with Move2DComponent
+     *     }
+     * }
+     * ```
+     *
+     * ## Filtering
+     *
+     * The `find()` methods accept a `GameObjectFilter` bitmask to control which
+     * entities are returned:
+     *
+     * - `GameObjectFilter::Active` — Only active GameObjects
+     * - `GameObjectFilter::ComponentEnabled` — Only objects with enabled components
+     *
+     * Default filter is `Active | ComponentEnabled`.
+     *
+     * @see GameObject
+     * @see GameObjectFilter
+     * @see UpdateContext
+     * @see Manager
+     * @see Level
      */
     class GameWorld {
 
@@ -69,10 +120,14 @@ export namespace helios::engine::game {
         /**
          * @brief Hash map storing all active GameObjects, indexed by their Guid.
          *
-         * @details Uses std::unordered_map for O(1) average-case lookup performance.
-         * The map owns all GameObjects via std::unique_ptr.
+         * @details Uses `std::unordered_map` for amortized O(1) average-case lookup.
+         * The map owns all GameObjects via `std::unique_ptr`. Worst-case lookup is O(n)
+         * in case of hash collisions, but the sequential Guid generation ensures good
+         * hash distribution in practice.
          */
         std::unordered_map<helios::util::Guid, std::unique_ptr<GameObject>> gameObjects_;
+
+
 
         /**
          * @brief The logger used with this GameWorld instance.
@@ -83,12 +138,13 @@ export namespace helios::engine::game {
             HELIOS_LOG_SCOPE);
 
         /**
-         * @brief Vector storing all registered Systems.
+         * @brief Collection of registered Manager instances.
          *
-         * @details Systems are updated in order of registration after all GameObjects
-         *          have been updated.
+         * @details Managers handle cross-cutting concerns such as object pooling,
+         * spawn management, and projectile lifecycle. They are initialized via init()
+         * and flushed each frame via flushManagers().
          */
-        std::vector<std::unique_ptr<System>> systems_;
+        std::vector<std::unique_ptr<helios::engine::game::Manager>> managers_;
 
         /**
          * @brief The current level loaded in the game world.
@@ -97,13 +153,69 @@ export namespace helios::engine::game {
          */
         std::unique_ptr<helios::engine::game::Level> level_ = nullptr;
 
+        /**
+         * @brief Registry of GameObjectPools for entity recycling.
+         *
+         * @details Pools enable efficient reuse of GameObjects without repeated
+         * allocation/deallocation. Each pool is identified by a GameObjectPoolId.
+         */
+        helios::engine::core::data::GameObjectPoolRegistry pools_{};
+
+        /**
+         * @brief Registry mapping pool IDs to their request handlers.
+         *
+         * @details Request handlers process spawn/despawn requests for specific pools,
+         * enabling custom lifecycle management per pool type.
+         */
+        helios::engine::game::PoolManagerRegistry poolManagerRegistry_{};
+
+
+
     public:
 
         /**
-         * @brief Constructs an empty GameWorld with no entities, systems, or level.
+         * @brief Retrieves a GameObjectPool by its identifier.
+         *
+         * @param gamePoolId The unique identifier of the pool.
+         *
+         * @return Pointer to the pool if found, nullptr otherwise.
          */
-        explicit GameWorld() = default;
+        [[nodiscard]] GameObjectPool* pool(
+            helios::engine::core::data::GameObjectPoolId gamePoolId) const {
+            return pools_.pool(gamePoolId);
+        }
 
+        /**
+         * @brief Registers a new GameObjectPool with the world.
+         *
+         * @param gamePoolId The unique identifier for the pool.
+         * @param gameObjectPool The pool instance. Ownership is transferred.
+         *
+         * @return Pointer to the added pool, or nullptr on failure.
+         */
+        [[nodiscard]] GameObjectPool* addPool(
+            helios::engine::core::data::GameObjectPoolId gamePoolId,
+            std::unique_ptr<helios::engine::core::data::GameObjectPool> gameObjectPool) {
+            auto* pool =  pools_.addPool(gamePoolId, std::move(gameObjectPool));
+            assert(pool != nullptr && "unexpected nullptr for pool");
+            if (pool == nullptr) {
+                return nullptr;
+            }
+            return pool;
+        }
+
+        /**
+         * @brief Initializes all registered managers.
+         *
+         * @details Should be called after all managers have been added and before
+         * the game loop starts. Each manager's init() method is invoked with a
+         * reference to this GameWorld.
+         */
+        void init() {
+            for (auto& mgr :  managers_) {
+                mgr->init(*this);
+            }
+        }
 
         /**
          * @brief Sets the current level for the game world.
@@ -135,82 +247,116 @@ export namespace helios::engine::game {
         }
 
         /**
-         * @brief Adds a System to the GameWorld.
+         * @brief Checks if a Manager of the specified type is registered.
          *
-         * @details Creates a System of the specified type with the given constructor arguments,
-         *          invokes its `onAdd()` callback, and registers it with this GameWorld.
-         *          Systems are updated each frame after GameObjects.
+         * @tparam T The Manager type to check for.
          *
-         * @tparam T The System type to add. Must derive from System.
-         * @tparam Args Constructor argument types.
-         * @param args Arguments forwarded to the System constructor.
-         *
-         * @return Reference to the newly added System.
-         *
-         * @note The GameWorld takes ownership of the System.
+         * @return True if a Manager of type T is registered, false otherwise.
          */
-        template<typename T, typename... Args>
-        T& addSystem(Args&&... args) {
-
-            assert(!hasSystem<T>() && "System already registered with GameWorld");
-
-            auto system_ptr = std::make_unique<T>(std::forward<Args>(args)...);
-            T* raw_ptr = system_ptr.get();
-
-            system_ptr->onAdd(this);
-            systems_.push_back(std::move(system_ptr));
-
-            return *raw_ptr;
+        template<typename T>
+        requires std::is_base_of_v<helios::engine::game::Manager, T>
+        [[nodiscard]] bool hasManager() const {
+            return getManager<T>() != nullptr;
         }
 
         /**
-         * @brief Retrieves a System of the specified type.
+         * @brief Adds and registers a Manager of the specified type.
          *
-         * @details Searches through all registered Systems using dynamic_cast
-         *          to find a matching type.
+         * @details Creates a new Manager instance and adds it to the world.
+         * The manager's onAdd() callback is invoked after registration.
          *
-         * @tparam T The System type to retrieve. Must derive from System.
+         * @tparam T The Manager type to add. Must derive from Manager.
+         * @tparam Args Constructor argument types.
          *
-         * @return Pointer to the System if found, nullptr otherwise.
+         * @param args Arguments forwarded to the Manager constructor.
          *
-         * @note Uses dynamic_cast internally; consider type-based registry for
-         *       performance-critical paths.
+         * @return Reference to the newly added Manager.
+         *
+         * @pre No Manager of type T is already registered.
+         */
+        template<typename T, typename... Args>
+        requires std::is_base_of_v<helios::engine::game::Manager, T>
+        T& addManager(Args&&... args) {
+
+            assert(!hasManager<T>() && "Manager already registered.");
+
+            auto manager = std::make_unique<T>(std::forward<Args>(args)...);
+            auto* manager_ptr = manager.get();
+
+            managers_.push_back(std::move(manager));
+
+            manager_ptr->onAdd(*this);
+            return *manager_ptr;
+        }
+
+        /**
+         * @brief Registers a PoolRequestHandler for a specific pool.
+         *
+         * @details Associates a handler with a pool ID. The handler processes
+         * spawn and despawn requests for entities in that pool.
+         *
+         * @param gameObjectPoolId The pool identifier to associate with the handler.
+         * @param poolManager Reference to the handler to register.
+         *
+         * @return True if registration succeeded, false if already registered.
+         */
+        bool registerPoolRequestHandler(
+            const helios::engine::core::data::GameObjectPoolId gameObjectPoolId,
+            helios::engine::game::PoolRequestHandler& poolManager
+        ) {
+            bool added = poolManagerRegistry_.add(gameObjectPoolId, poolManager);
+
+            assert(added && "PoolManager already registered");
+
+            return added;
+        }
+
+        /**
+         * @brief Retrieves the PoolRequestHandler for a specific pool.
+         *
+         * @param gameObjectPoolId The pool identifier.
+         *
+         * @return Pointer to the handler if found, nullptr otherwise.
+         */
+        helios::engine::game::PoolRequestHandler* poolRequestHandler(helios::engine::core::data::GameObjectPoolId gameObjectPoolId) {
+            return poolManagerRegistry_.get(gameObjectPoolId);
+        }
+
+        /**
+         * @brief Retrieves a registered Manager by type.
+         *
+         * @tparam T The Manager type to retrieve. Must derive from Manager.
+         *
+         * @return Pointer to the Manager if found, nullptr otherwise.
          */
         template<typename T>
-        [[nodiscard]] T* getSystem() const {
-            for (const auto& system : systems_) {
-                if (auto* sys = dynamic_cast<T*>(system.get())) {
-                    return sys;
+        requires std::is_base_of_v<helios::engine::game::Manager, T>
+        [[nodiscard]] T* getManager() const {
+
+            for (auto& mgr : managers_) {
+                if (auto* c = dynamic_cast<T*>(mgr.get())) {
+                    return c;
                 }
             }
+
             return nullptr;
         }
 
         /**
-         * @brief Checks if a System of the specified type is registered.
+         * @brief Flushes all registered managers.
          *
-         * @tparam T The System type to check for. Must derive from System.
+         * @details Called during the game loop to allow managers to process
+         * their queued requests (e.g., spawn requests, pool returns).
          *
-         * @return True if a System of type T exists, false otherwise.
+         * @param updateContext The current frame's update context.
          */
-        template<typename T>
-        [[nodiscard]] bool hasSystem() const {
-            return getSystem<T>() != nullptr;
+        void flushManagers(helios::engine::game::UpdateContext& updateContext) {
+            for (auto& mgr :  managers_) {
+                mgr->flush(*this, updateContext);
+            }
         }
 
-        /**
-         * @brief Updates the game world state for the current frame.
-         *
-         * @details
-         * This method performs the following steps:
-         * 1. Updates all active GameObjects (invoking their `update()` method).
-         * 2. Updates all registered Systems (invoking their `update()` method).
-         *
-         * @param updateContext Context containing deltaTime, input snapshot, game world and command buffer.
-         *
-         * @note The order of GameObject updates is not guaranteed. Systems are updated in registration order.
-         */
-        void update(helios::engine::game::UpdateContext& updateContext) const noexcept;
+
 
         /**
          * @brief Adds a GameObject to the world and transfers ownership.
@@ -250,9 +396,20 @@ export namespace helios::engine::game {
          * Returns a lazy range that filters GameObjects on-the-fly during iteration.
          * Only GameObjects possessing all specified component types are yielded.
          *
+         * The query is controlled by a `GameObjectFilter` bitmask:
+         *
+         * | Filter | Effect |
+         * |--------|--------|
+         * | `Active` | Only `obj->isActive() == true` |
+         * | `Inactive` | Only `obj->isActive() == false` |
+         * | `ComponentEnabled` | Only objects where queried components are enabled |
+         * | `ComponentDisabled` | Only objects where queried components are disabled |
+         *
+         * Filters can be combined: `Active | ComponentEnabled` (default).
+         *
          * Example usage:
          * ```cpp
-         * // Range-based for loop
+         * // Range-based for loop with default filter (Active + ComponentEnabled)
          * for (auto* obj : gameWorld.find<Move2DComponent, SceneNodeComponent>()) {
          *     auto* move = obj->get<Move2DComponent>();
          *     move->setVelocity({1.0f, 0.0f, 0.0f});
@@ -262,11 +419,22 @@ export namespace helios::engine::game {
          * for (auto [obj, move] : gameWorld.find<Move2DComponent>().each()) {
          *     move.get().setVelocity({1.0f, 0.0f, 0.0f});
          * }
+         *
+         * // Custom filter: find inactive objects
+         * for (auto* obj : gameWorld.find<HealthComponent>(GameObjectFilter::Inactive)) {
+         *     // Process inactive entities (e.g., respawn logic)
+         * }
          * ```
          *
          * @tparam Cs The component types to filter by. GameObjects must have all types.
          *
+         * @param query Filter bitmask controlling which entities are included.
+         *              Default: `Active | ComponentEnabled`.
+         *
          * @return A GameObjectView object that can be iterated over.
+         *
+         * @see GameObjectFilter
+         * @see GameObjectView
          */
         template<class... Cs>
         [[nodiscard]] auto find(GameObjectFilter query = GameObjectFilter::Active | GameObjectFilter::ComponentEnabled) {
@@ -278,10 +446,16 @@ export namespace helios::engine::game {
          *
          * @details
          * Const version of the component-based find. Returns const pointers to GameObjects.
+         * See the non-const overload for detailed usage and filter documentation.
          *
          * @tparam Cs The component types to filter by. GameObjects must have all types.
          *
+         * @param query Filter bitmask controlling which entities are included.
+         *              Default: `Active | ComponentEnabled`.
+         *
          * @return A const GameObjectView object that can be iterated over.
+         *
+         * @see GameObjectFilter
          */
         template<class... Cs>
         [[nodiscard]] auto find(GameObjectFilter query = GameObjectFilter::Active | GameObjectFilter::ComponentEnabled) const {
@@ -301,6 +475,46 @@ export namespace helios::engine::game {
          * @note This overload is used when the GameWorld is accessed via const reference.
          */
         [[nodiscard]] const helios::engine::game::GameObject* find(const helios::util::Guid& guid) const;
+
+        /**
+         * @brief Creates a clone of an existing GameObject.
+         *
+         * @details Clones all Cloneable components from the source GameObject.
+         * The cloned GameObject is initially inactive and receives a new Guid.
+         * Non-cloneable components are skipped with a warning.
+         *
+         * @param gameObject The source GameObject to clone.
+         *
+         * @return Pointer to the newly created clone, or nullptr on failure.
+         *
+         * @note The clone is added to the world in an inactive state.
+         */
+        [[nodiscard]] helios::engine::game::GameObject* clone(helios::engine::game::GameObject& gameObject) {
+
+
+            auto newGo = std::make_unique<helios::engine::game::GameObject>();
+            /**
+             * @todo Optional ClonePolicy where rules are specified?
+             */
+            newGo->setActive(false);
+
+            for (const auto& component : gameObject.components()) {
+                if (const auto* cc = dynamic_cast<const Cloneable*>(component.get())) {
+                    auto cComponent = cc->clone();
+                    // use getOrAdd since cloned components may have already added
+                    // other components in onAttach(), which we will not defer for now.
+                    // we assume that the cloned component that allows for adding
+                    // components in onAttach is the source of truth for said components
+                    newGo->getOrAdd(std::move(cComponent));
+                } else {
+                    logger_.warn("Component not cloneable.");
+                }
+
+            }
+
+            return addGameObject(std::move(newGo));
+        }
+
 
         /**
          * @brief Removes a GameObject from the world and transfers ownership to the caller.

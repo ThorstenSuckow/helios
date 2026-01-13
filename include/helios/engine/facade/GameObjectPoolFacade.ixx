@@ -85,7 +85,7 @@ export namespace helios::engine::facade {
             helios::engine::game::GameWorld& gameWorld,
             helios::engine::core::data::GameObjectPool& gameObjectPool
         )  {
-            helios::util::Guid guid{};
+            helios::util::Guid guid{helios::util::no_init};
 
             while (gameObjectPool.acquire(guid)) {
 

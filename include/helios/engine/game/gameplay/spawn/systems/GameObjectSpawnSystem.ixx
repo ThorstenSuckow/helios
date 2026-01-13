@@ -11,9 +11,14 @@ module;
 export module helios.engine.game.gameplay.spawn.systems.GameObjectSpawnSystem;
 
 import helios.engine.game.System;
-import helios.engine.core.data.GameObjectPool;
+
+
+import helios.engine.core.messaging.command.CommandBuffer;
+import helios.engine.core.data.GameObjectPoolId;
 import helios.engine.game.GameObject;
 import helios.engine.game.UpdateContext;
+
+
 
 import helios.engine.game.Level;
 
@@ -25,137 +30,92 @@ import helios.engine.game.rendering.components.RenderableComponent;
 
 import helios.scene.SceneNode;
 
+import helios.engine.game.GameWorld;
+
+import helios.engine.game.gameplay.spawn.commands.SpawnCommand;
 import helios.engine.game.gameplay.spawn.logic.SpawnCondition;
 import helios.engine.game.gameplay.spawn.logic.SpawnStrategy;
 
 
 export namespace helios::engine::game::gameplay::spawn::systems {
-    
+
     /**
-     * @brief System responsible for spawning GameObjects into the level.
+     * @brief System that evaluates spawn conditions and emits SpawnCommands.
      *
-     * @details
-     * This system manages the activation of GameObjects from a pool and their
-     * placement within the level. It handles the initialization of SceneNodeComponents
-     * for renderable objects during the warmup phase.
+     * @details GameObjectSpawnSystem integrates spawning into the game loop by
+     * evaluating a SpawnCondition each frame to determine how many objects should
+     * be spawned. When the spawn budget is greater than zero, it emits a SpawnCommand
+     * to the CommandBuffer for deferred execution.
      *
-     * During update, it acquires inactive GameObjects from the pool, and delegates
-     * Spawn condition and logic to SpawnCondition and SpawnStrategy, respectively.
+     * The actual spawning is handled by the SpawnCommandDispatcher and SpawnManager
+     * during the command flush phase.
+     *
+     * Example usage:
+     * ```cpp
+     * auto condition = std::make_unique<TimerSpawnCondition>(2.0f);
+     *
+     * gameLoop.phase(PhaseType::Main)
+     *     .addPass()
+     *     .addSystem<GameObjectSpawnSystem>(poolId, std::move(condition));
+     * ```
+     *
+     * @see SpawnCondition
+     * @see SpawnCommand
+     * @see SpawnManager
      */
     class GameObjectSpawnSystem : public System {
 
         /**
-         * @brief The pool of GameObjects to manage.
+         * @brief The ID of the pool to spawn from.
          */
-        std::unique_ptr<helios::engine::game::GameObjectPool> gameObjectPool_;
+        helios::engine::core::data::GameObjectPoolId gameObjectPoolId_;
 
         /**
-         * @brief Reference to the active level.
-         */
-        const helios::engine::game::Level& level_;
-
-        /**
-         * @brief Strategy used to determine how GameObjects are spawned in the level.
-         */
-        std::unique_ptr<helios::engine::game::gameplay::spawn::logic::SpawnStrategy> spawnStrategy_;
-
-        /**
-         * @brief Strategy for determining the conditions under which GameObjects are spawned.
+         * @brief The condition that determines when and how many objects to spawn.
          */
         std::unique_ptr<helios::engine::game::gameplay::spawn::logic::SpawnCondition> spawnCondition_;
 
-        /**
-         * @brief Prepares the object pool and scene graph.
-         *
-         * @details
-         * Iterates through all inactive objects in the pool. If an object has a
-         * RenderableComponent, a corresponding SceneNode is created and attached
-         * to the level's root node. A SceneNodeComponent is then added to the
-         * GameObject to link it with the scene graph.
-         */
-        void warmup() {
-
-            std::vector<helios::engine::game::GameObject*> gameObjects = gameObjectPool_->inactiveGameObjects();
-
-            auto* spawnNode = level_.rootNode();
-
-            for (auto* go : gameObjects) {
-                auto* rc = go->get<helios::engine::game::rendering::components::RenderableComponent>();
-
-                assert(rc != nullptr && "RenderableComponent must not be nullptr");
-
-                if (!rc) {
-                    continue;
-                }
-
-                auto sceneNode = std::make_unique<helios::scene::SceneNode>(rc->renderable());
-                auto sceneNode_ptr = sceneNode.get();
-                std::ignore = spawnNode->addNode(std::move(sceneNode));
-                go->add<helios::engine::game::scene::components::SceneNodeComponent>(sceneNode_ptr);
-                go->setActive(false);
-            }
-
-        }
-
 
     public:
+
         /**
-         * @brief Constructs a new GameObjectSpawnSystem.
+         * @brief Constructs a GameObjectSpawnSystem.
          *
-         * @param gameObjectPool Unique pointer to the GameObjectPool to manage.
-         * @param level Reference to the Level where objects will be spawned.
+         * @param gameObjectPoolId The ID of the pool to spawn from.
+         * @param spawnCondition The condition that controls spawn timing. Must not be nullptr.
+         *
+         * @pre spawnCondition != nullptr
          */
         explicit GameObjectSpawnSystem(
-            std::unique_ptr<helios::engine::game::GameObjectPool> gameObjectPool,
-            const helios::engine::game::Level& level,
-            std::unique_ptr<helios::engine::game::gameplay::spawn::logic::SpawnCondition> spawnCondition,
-            std::unique_ptr<helios::engine::game::gameplay::spawn::logic::SpawnStrategy> spawnStrategy
+            helios::engine::core::data::GameObjectPoolId gameObjectPoolId,
+            std::unique_ptr<helios::engine::game::gameplay::spawn::logic::SpawnCondition> spawnCondition
         ) :
-            gameObjectPool_(std::move(gameObjectPool)),
-            level_(level),
-            spawnCondition_(std::move(spawnCondition)),
-            spawnStrategy_(std::move(spawnStrategy))
+            gameObjectPoolId_(gameObjectPoolId),
+            spawnCondition_(std::move(spawnCondition))
         {
-            assert(spawnStrategy_ != nullptr && "Unexpected nullptr for SpawnStrategy");
             assert(spawnCondition_ != nullptr && "Unexpected nullptr for SpawnCondition");
-            assert(gameObjectPool_ != nullptr && "Unexpected nullptr for GameObjectPool");
-            warmup();
         }
 
-
         /**
-         * @brief Updates the system by spawning GameObjects based on SpawnCondition and SpawnStrategy.
+         * @brief Evaluates the spawn condition and emits SpawnCommands.
          *
-         * @details Checks whether there are remaining inactive objects that could be spawned.
-         * Delegates to the SpawnCondition this instance was configured with to determine how many
-         * objects should be considered for spawning, then calls the SpawnStrategy for spawning
-         * the GameObjects into the GameWorld.
+         * @details Each frame, queries the spawn condition for the spawn budget.
+         * If the budget is greater than zero, emits a SpawnCommand to the
+         * CommandBuffer for deferred processing.
          *
-         * @param updateContext The update context for the current frame.
+         * @param updateContext The current update context.
          */
         void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
 
-            auto available = gameObjectPool_->inactiveCount();
-            if (available == 0) {
-                return;
+            const auto* gameObjectPool = updateContext.gameWorld().pool(gameObjectPoolId_);
+            size_t spawnCount = spawnCondition_->spawnBudget(*gameWorld_, *gameObjectPool, updateContext);
+
+            if (spawnCount > 0) {
+                updateContext.commandBuffer().add<helios::engine::game::gameplay::spawn::commands::SpawnCommand>(
+                    gameObjectPoolId_,
+                    spawnCount
+                );
             }
-
-            size_t spawnCount = spawnCondition_->spawnBudget(gameWorld_, &level_, gameObjectPool_.get(), updateContext);
-
-            spawnCount = std::min(spawnCount, available);
-
-            for (size_t i = 0; i < spawnCount; i++) {
-                helios::engine::game::GameObject* go = gameObjectPool_->acquire();
-
-                if (go == nullptr) {
-                    return;
-                }
-
-                if (!spawnStrategy_->spawn(gameWorld_, &level_, go, updateContext)) {
-                    gameObjectPool_->release(go);
-                }
-            }
-
         }
         
     };

@@ -11,131 +11,16 @@ module;
 export module helios.core.buffer.TypeIndexedDoubleBuffer;
 
 import helios.core.data.TypeIndexer;
+
+import helios.core.buffer.DoubleBuffer;
 import helios.core.buffer.WriteBuffer;
 import helios.core.buffer.ReadBuffer;
+import helios.core.buffer.ReadWriteDoubleBuffer;
 
-namespace {
-    /**
-     * @class BufferBase
-     * @brief Abstract base class for type-erased message buffers.
-     *
-     * @details Provides a common interface for buffer operations (swap, clear)
-     * without exposing the concrete message type. Used internally by TypeIndexedDoubleBuffer
-     * to manage heterogeneous message buffers in a single container.
-     */
-    class BufferBase {
-
-    public:
-        BufferBase() = default;
-
-        virtual ~BufferBase() = default;
-
-        /**
-         * @brief Swaps the read and write buffers.
-         *
-         * @details Clears the current read buffer, then exchanges it with the write buffer.
-         * After this call, previously written messages become available for reading.
-         */
-        virtual void swap() = 0;
-
-        /**
-         * @brief Clears all messages from the read buffer.
-         */
-        virtual void clearReadBuffer() = 0;
-
-        /**
-         * @brief Clears all messages from the write buffer.
-         */
-        virtual void clearWriteBuffer() = 0;
-
-    };
-}
 
 export namespace helios::core::buffer {
 
 
-    /**
-     * @class ReadWriteDoubleBuffer
-     * @brief Type-safe double-buffered container for messages of type T.
-     *
-     * @details Implements a producer-consumer pattern where messages are written
-     * to one buffer while consumers read from another. This decouples message
-     * production from consumption and allows lock-free operation in single-threaded
-     * game loops.
-     *
-     * @tparam T The message type stored in this buffer. Must be movable.
-     */
-    template<typename T>
-    class ReadWriteDoubleBuffer : public BufferBase {
-
-        /**
-         * @brief Buffer containing messages available for reading.
-         */
-        ReadBuffer<T> readBuffer_;
-
-        /**
-         * @brief Buffer where new messages are pushed.
-         */
-        WriteBuffer<T> writeBuffer_;
-
-
-    public:
-
-        /**
-         * @brief Pre-allocates memory for both buffers.
-         *
-         * @param size The number of messages to reserve capacity for.
-         */
-        void reserve(size_t size) {
-            readBuffer_.reserve(size);
-            writeBuffer_.reserve(size);
-        }
-
-        /**
-         * @brief Constructs and pushes a message to the write buffer.
-         *
-         * @tparam Args Constructor argument types for T.
-         *
-         * @param args Arguments forwarded to T's constructor.
-         */
-        template<typename... Args>
-        void push(Args&&... args) {
-            writeBuffer_.push(std::forward<Args>(args)...);
-        }
-
-        /**
-         * @brief Returns a read-only view of messages in the read buffer.
-         *
-         * @return A span over all messages written in the previous frame.
-         */
-        std::span<const T> read() const noexcept {
-            return readBuffer_.read();
-        }
-
-        /**
-         * @brief Swaps read with write buffer.
-         *
-         * @details Swaps the read- with the write-buffer. The write buffer is empty after
-         * this operation, while the read buffer contains the contents of the write buffer.
-         */
-        void swap() override {
-            readBuffer_.clear().bufferData().swap(writeBuffer_.bufferData());
-        }
-
-        /**
-         * @brief Clears the read buffer.
-         */
-        void clearReadBuffer() override {
-            readBuffer_.clear();
-        }
-
-        /**
-         * @brief Clears the write buffer.
-         */
-        void clearWriteBuffer() override {
-            writeBuffer_.clear();
-        }
-    };
 
     template<typename Indexer>
     /**
@@ -174,8 +59,18 @@ export namespace helios::core::buffer {
      */
     class TypeIndexedDoubleBuffer {
 
-        std::vector<std::unique_ptr<BufferBase>> buffers_;
+        /**
+         * @brief Type-erased storage for message buffers, indexed by type.
+         */
+        std::vector<std::unique_ptr<DoubleBuffer>> buffers_;
 
+        /**
+         * @brief Returns the buffer index for message type T.
+         *
+         * @tparam T The message type.
+         *
+         * @return The index assigned to type T by the Indexer.
+         */
         template<typename T>
         static size_t index() {
             return Indexer::template typeIndex<T>();
@@ -183,7 +78,14 @@ export namespace helios::core::buffer {
 
     public:
 
+        /**
+         * @brief Default destructor.
+         */
         ~TypeIndexedDoubleBuffer() = default;
+
+        /**
+         * @brief Default constructor.
+         */
         TypeIndexedDoubleBuffer() = default;
 
         /**
@@ -299,6 +201,16 @@ export namespace helios::core::buffer {
         }
 
         /**
+         * @brief Clears both read and write buffers for all message types.
+         *
+         * @details Completely resets the buffer state, discarding all messages.
+         */
+        void clearAll() {
+            clearReadBuffers();
+            clearWriteBuffers();
+        }
+
+        /**
          * @class WriteSink
          * @brief Lightweight handle for pushing messages to a TypeIndexedDoubleBuffer.
          *
@@ -341,12 +253,61 @@ export namespace helios::core::buffer {
         };
 
         /**
+         * @class ReadSource
+         * @brief Lightweight handle for reading messages from a TypeIndexedDoubleBuffer.
+         *
+         * @details ReadSource provides a focused interface for message consumers that only
+         * need read access. It holds a non-owning pointer to a TypeIndexedDoubleBuffer
+         * and exposes only the read() operation.
+         *
+         * This class is useful for dependency injection where systems should be able to
+         * consume messages without having access to buffer management operations.
+         */
+        class ReadSource {
+
+            /**
+             * @brief Non-owning pointer to the parent buffer.
+             */
+            TypeIndexedDoubleBuffer* db_ = nullptr;
+
+        public:
+
+            /**
+             * @brief Constructs a ReadSource from a TypeIndexedDoubleBuffer reference.
+             *
+             * @param db The buffer to read from. Must remain valid for the lifetime of this source.
+             */
+            explicit ReadSource(TypeIndexedDoubleBuffer& db) noexcept : db_(&db) {}
+
+            /**
+             * @brief Returns a read-only view of messages of type E.
+             *
+             * @tparam E The message type to read.
+             *
+             * @return A span over all messages of type E in the read buffer.
+             */
+            template<typename E>
+            std::span<const E> read() const noexcept {
+                return db_->template read<E>();
+            }
+        };
+
+        /**
          * @brief Creates a WriteSink handle for this buffer.
          *
          * @return A WriteSink that can push messages to this buffer.
          */
         [[nodiscard]] WriteSink writeSink() noexcept {
             return WriteSink(*this);
+        }
+
+        /**
+         * @brief Creates a ReadSource handle for this buffer.
+         *
+         * @return A ReadSource that can read messages from this buffer.
+         */
+        [[nodiscard]] ReadSource readSource() noexcept {
+            return ReadSource(*this);
         }
 
     };

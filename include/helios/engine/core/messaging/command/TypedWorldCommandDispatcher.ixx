@@ -11,8 +11,10 @@ export module helios.engine.core.messaging.command.TypedWorldCommandDispatcher;
 import helios.engine.core.messaging.command.WorldCommand;
 import helios.engine.core.messaging.command.WorldCommandDispatcher;
 
-import helios.engine.game.GameWorld;
 
+export namespace helios::engine::game {
+    class GameWorld;
+}
 
 export namespace helios::engine::core::messaging::command {
 

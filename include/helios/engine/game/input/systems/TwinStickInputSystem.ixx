@@ -17,8 +17,8 @@ import helios.engine.ecs.Component;
 import helios.engine.core.messaging.command.CommandBuffer;
 import helios.engine.game.physics.motion.commands.Move2DCommand;
 import helios.engine.game.physics.motion.commands.SteeringCommand;
-import helios.engine.game.gameplay.combat.commands.Aim2DCommand;
-import helios.engine.game.gameplay.combat.commands.ShootCommand;
+import helios.engine.mechanics.combat.commands.Aim2DCommand;
+import helios.engine.mechanics.combat.commands.ShootCommand;
 
 export namespace helios::engine::game::input::systems {
 
@@ -104,7 +104,7 @@ export namespace helios::engine::game::input::systems {
                 finalFreq = freq;
             }
 
-            commandBuffer.add<helios::engine::game::gameplay::combat::commands::Aim2DCommand>(
+            commandBuffer.add<helios::engine::mechanics::combat::commands::Aim2DCommand>(
                 gameObject_.guid(), rdir, finalFreq
             );
 
@@ -112,13 +112,13 @@ export namespace helios::engine::game::input::systems {
                 // right trigger: shooting
                 const auto rightTrigger = inputSnapshot.gamepadState().triggerRight();
                 if (rightTrigger > 0.0f) {
-                    commandBuffer.add<helios::engine::game::gameplay::combat::commands::ShootCommand>(
+                    commandBuffer.add<helios::engine::mechanics::combat::commands::ShootCommand>(
                        gameObject_.guid(), rightTrigger
                    );
                 }
             } else {
                 if (finalFreq > 0.0f) {
-                    commandBuffer.add<helios::engine::game::gameplay::combat::commands::ShootCommand>(
+                    commandBuffer.add<helios::engine::mechanics::combat::commands::ShootCommand>(
                        gameObject_.guid(), finalFreq
                    );
                 }

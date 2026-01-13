@@ -25,13 +25,13 @@ import helios.engine.game.physics.collision.types.CollisionBehavior;
 
 import helios.engine.game.physics.collision.components.CollisionStateComponent;
 
-import helios.engine.game.gameplay.spawn.commands.DespawnCommand;
+import helios.engine.mechanics.spawn.commands.DespawnCommand;
 
 import helios.engine.game.pool.components.PoolIdComponent;
 
 using namespace helios::engine::game::physics::collision::components;
 using namespace helios::engine::game::physics::collision::types;
-using namespace helios::engine::game::gameplay::spawn::commands;
+using namespace helios::engine::mechanics::spawn::commands;
 
 
 export namespace helios::engine::game::physics::collision::systems {

@@ -52,7 +52,7 @@ export namespace helios::engine::game::gameplay::combat::components {
      * shootComponent->shoot(1.0f);
      * ```
      */
-    class ShootComponent : public helios::engine::game::Component, public helios::engine::game::Updatable {
+    class ShootComponent : public helios::engine::game::Component {
 
     protected:
 
@@ -144,40 +144,7 @@ export namespace helios::engine::game::gameplay::combat::components {
             sourceVelocity_ = sourceVelocity;
             intensity_ = intensity;
         }
-
-        /**
-         * @brief Updates the component, spawning projectiles when ready.
-         *
-         * @details Checks the cooldown timer and aim direction. If conditions are met,
-         * spawns a projectile from the ProjectilePoolSystem at the current position traveling in
-         * the aim direction.
-         *
-         * @param updateContext The update context containing timing and game state.
-         */
-        void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
-
-            cooldownDelta_ += updateContext.deltaTime() * intensity_;
-
-            if (intensity_ == 0.0f) {
-                return;
-            }
-
-            const auto aimDir = aimComponent_->direction();
-
-            if (cooldownDelta_ >= cooldownTime_ && aimDir.length() > helios::math::EPSILON_LENGTH) {
-                cooldownDelta_ = 0;
-                auto* projectilePoolSystem = updateContext.gameWorld()
-                                        .getSystem<helios::engine::game::gameplay::systems::ProjectilePoolSystem>();
-
-                auto aimDirNorm = aimDir.normalize().toVec3();
-
-                projectilePoolSystem->spawn(
-                    transformComponent_->localTranslation(),
-                    aimDirNorm * projectileSpeed_, aimDirNorm, sourceVelocity_
-                );
-            }
-        }
-
+        
 
         /**
          * @brief Returns the current fire intensity.

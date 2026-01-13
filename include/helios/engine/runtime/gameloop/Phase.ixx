@@ -7,13 +7,13 @@ module;
 #include <memory>
 #include <vector>
 
-export module helios.engine.gameloop.Phase;
+export module helios.engine.runtime.gameloop.Phase;
 
-import helios.engine.gameloop.Pass;
+import helios.engine.runtime.gameloop.Pass;
 import helios.engine.ecs.UpdateContext;
 import helios.engine.ecs.GameWorld;
 
-export namespace helios::engine::gameloop {
+export namespace helios::engine::runtime::gameloop {
 
     class GameLoop;
 
@@ -56,7 +56,7 @@ export namespace helios::engine::gameloop {
      */
     class Phase {
 
-        friend class helios::engine::gameloop::GameLoop;
+        friend class helios::engine::runtime::gameloop::GameLoop;
 
         /**
          * @brief Initializes all passes within this phase.
@@ -93,7 +93,7 @@ export namespace helios::engine::gameloop {
         /**
          * @brief Reference to the owning GameLoop.
          */
-        helios::engine::gameloop::GameLoop& gameloop_;
+        helios::engine::runtime::gameloop::GameLoop& gameloop_;
 
     public:
 
@@ -102,7 +102,7 @@ export namespace helios::engine::gameloop {
          *
          * @param gameloop Reference to the parent GameLoop.
          */
-        explicit Phase(helios::engine::gameloop::GameLoop& gameloop) : gameloop_(gameloop) {
+        explicit Phase(helios::engine::runtime::gameloop::GameLoop& gameloop) : gameloop_(gameloop) {
 
         }
 
@@ -125,7 +125,7 @@ export namespace helios::engine::gameloop {
          *
          * @return Reference to the parent GameLoop.
          */
-        [[nodiscard]] helios::engine::gameloop::GameLoop& gameLoop()  {
+        [[nodiscard]] helios::engine::runtime::gameloop::GameLoop& gameLoop()  {
             return gameloop_;
         }
 

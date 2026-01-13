@@ -78,7 +78,7 @@ for (auto [obj, move] : world.find<Move2DComponent>().each()) {
 
 ## Related Modules
 
-- `helios.engine.gameloop` — Game loop orchestration with phases and passes
+- `helios.engine.runtime.gameloop` — Game loop orchestration with phases and passes
 - `helios.engine.core.messaging` — Command and event systems
 - `helios.engine.game` — Domain-specific components and systems
 

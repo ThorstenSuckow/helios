@@ -7,7 +7,7 @@ module;
 #include <cassert>
 #include <memory>
 
-export module helios.engine.gameloop.GameLoop;
+export module helios.engine.runtime.gameloop.GameLoop;
 
 import helios.engine.ecs.GameWorld;
 
@@ -18,13 +18,13 @@ import helios.util.log.LogManager;
 import helios.engine.core.messaging.command.CommandBuffer;
 import helios.engine.core.messaging.event.GameLoopEventBus;
 
-import helios.engine.gameloop.Pass;
-import helios.engine.gameloop.Phase;
+import helios.engine.runtime.gameloop.Pass;
+import helios.engine.runtime.gameloop.Phase;
 
 import helios.input.InputSnapshot;
 
-#define HELIOS_LOG_SCOPE "helios::engine::gameloop::GameLoop"
-export namespace helios::engine::gameloop {
+#define HELIOS_LOG_SCOPE "helios::engine::runtime::gameloop::GameLoop"
+export namespace helios::engine::runtime::gameloop {
 
     /**
      * @brief Central orchestrator for the game update cycle.
@@ -49,7 +49,7 @@ export namespace helios::engine::gameloop {
     protected:
 
 
-        friend class helios::engine::gameloop::Pass;
+        friend class helios::engine::runtime::gameloop::Pass;
 
         /**
          * @brief The logger used with this GameLoop instance.
@@ -61,17 +61,17 @@ export namespace helios::engine::gameloop {
         /**
          * @brief The pre-update phase, executed before main gameplay logic.
          */
-        helios::engine::gameloop::Phase prePhase_{*this};
+        helios::engine::runtime::gameloop::Phase prePhase_{*this};
 
         /**
          * @brief The main update phase for core gameplay systems.
          */
-        helios::engine::gameloop::Phase mainPhase_{*this};
+        helios::engine::runtime::gameloop::Phase mainPhase_{*this};
 
         /**
          * @brief The post-update phase for cleanup and synchronization.
          */
-        helios::engine::gameloop::Phase postPhase_{*this};
+        helios::engine::runtime::gameloop::Phase postPhase_{*this};
 
         /**
          * @brief Buffer for deferred command execution.
@@ -158,16 +158,16 @@ export namespace helios::engine::gameloop {
          *
          * @return Reference to the requested Phase.
          */
-        helios::engine::gameloop::Phase& phase(helios::engine::gameloop::PhaseType phaseType) {
+        helios::engine::runtime::gameloop::Phase& phase(helios::engine::runtime::gameloop::PhaseType phaseType) {
 
             switch (phaseType) {
-                case helios::engine::gameloop::PhaseType::Pre:
+                case helios::engine::runtime::gameloop::PhaseType::Pre:
                     return prePhase_;
                     break;
-                case helios::engine::gameloop::PhaseType::Main:
+                case helios::engine::runtime::gameloop::PhaseType::Main:
                     return mainPhase_;
                     break;
-                case helios::engine::gameloop::PhaseType::Post:
+                case helios::engine::runtime::gameloop::PhaseType::Post:
                     return postPhase_;
                     break;
             }
@@ -196,17 +196,17 @@ export namespace helios::engine::gameloop {
 
             assert(!initialized_ && "init() already called");
 
-            for (auto phase : {helios::engine::gameloop::PhaseType::Pre,
-                               helios::engine::gameloop::PhaseType::Main,
-                               helios::engine::gameloop::PhaseType::Post}) {
+            for (auto phase : {helios::engine::runtime::gameloop::PhaseType::Pre,
+                               helios::engine::runtime::gameloop::PhaseType::Main,
+                               helios::engine::runtime::gameloop::PhaseType::Post}) {
                 switch (phase) {
-                    case helios::engine::gameloop::PhaseType::Pre:
+                    case helios::engine::runtime::gameloop::PhaseType::Pre:
                         prePhase_.init(gameWorld);
                         break;
-                    case helios::engine::gameloop::PhaseType::Main:
+                    case helios::engine::runtime::gameloop::PhaseType::Main:
                         mainPhase_.init(gameWorld);
                         break;
-                    case helios::engine::gameloop::PhaseType::Post:
+                    case helios::engine::runtime::gameloop::PhaseType::Post:
                         postPhase_.init(gameWorld);
                         break;
                 }
@@ -240,18 +240,18 @@ export namespace helios::engine::gameloop {
             updateContext.setInputSnapshot(inputSnapshot);
 
             // gameloop phases
-            for (auto phase : {helios::engine::gameloop::PhaseType::Pre,
-                               helios::engine::gameloop::PhaseType::Main,
-                               helios::engine::gameloop::PhaseType::Post}) {
+            for (auto phase : {helios::engine::runtime::gameloop::PhaseType::Pre,
+                               helios::engine::runtime::gameloop::PhaseType::Main,
+                               helios::engine::runtime::gameloop::PhaseType::Post}) {
 
                 switch (phase) {
-                    case helios::engine::gameloop::PhaseType::Pre:
+                    case helios::engine::runtime::gameloop::PhaseType::Pre:
                         prePhase_.update(updateContext);
                         break;
-                    case helios::engine::gameloop::PhaseType::Main:
+                    case helios::engine::runtime::gameloop::PhaseType::Main:
                         mainPhase_.update(updateContext);
                         break;
-                    case helios::engine::gameloop::PhaseType::Post:
+                    case helios::engine::runtime::gameloop::PhaseType::Post:
                         postPhase_.update(updateContext);
                         break;
                 }

@@ -13,7 +13,7 @@ This module provides access to the complete helios engine functionality, includi
 | `helios.engine.core` | Messaging (commands, events), pools, units |
 | `helios.engine.ecs` | Entity-Component-System base classes (GameObject, Component, System, GameWorld) |
 | `helios.engine.game` | Domain-specific components, systems, and gameplay mechanics |
-| `helios.engine.gameloop` | Phase/Pass game loop orchestration |
+| `helios.engine.runtime.gameloop` | Phase/Pass game loop orchestration |
 | `helios.engine.factory` | GameObject creation utilities |
 | `helios.engine.facade` | Pool access facade |
 | `helios.engine.tooling` | Frame pacing and performance metrics |

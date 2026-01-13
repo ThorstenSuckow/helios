@@ -9,9 +9,12 @@ module;
 
 export module helios.engine.game.gameplay.bounds.components.LevelBoundsBehaviorComponent;
 
-import helios.engine.game.Component;
+import helios.engine.game.CloneableComponent;
+
+import helios.engine.game.physics.collision.types.CollisionBehavior;
 
 export namespace helios::engine::game::gameplay::bounds::components {
+
 
     /**
      * @brief Component that defines how an entity reacts to level boundaries.
@@ -21,7 +24,7 @@ export namespace helios::engine::game::gameplay::bounds::components {
      * restitution (bounciness) when colliding with level walls, used by physics
      * or movement systems to resolve out-of-bounds conditions.
      */
-    class LevelBoundsBehaviorComponent : public helios::engine::game::Component {
+    class LevelBoundsBehaviorComponent : public helios::engine::game::CloneableComponent<LevelBoundsBehaviorComponent> {
 
     private:
         /**
@@ -34,19 +37,42 @@ export namespace helios::engine::game::gameplay::bounds::components {
          */
         float restitution_ = 0.5f;
 
-    public:
-
         /**
-         * @brief Default constructor with default restitution (0.5).
+         * @brief The behavior type for boundary collisions.
+         *
+         * @details Defines how the entity reacts when hitting level bounds
+         * (e.g., Bounce, Reflect, Clamp, Despawn).
          */
-        LevelBoundsBehaviorComponent() = default;
+        helios::engine::game::physics::collision::types::CollisionBehavior collisionBehavior_ = helios::engine::game::physics::collision::types::CollisionBehavior::Bounce;
+
+    public:
 
         /**
          * @brief Constructs a LevelBoundsBehaviorComponent with a specified restitution.
          *
          * @param restitution The coefficient of restitution (0.0 to 1.0).
          */
-        explicit LevelBoundsBehaviorComponent(float restitution) : Component(), restitution_(restitution) {}
+        explicit LevelBoundsBehaviorComponent(const float restitution) :
+        restitution_(restitution) {}
+
+        /**
+         * @brief Constructs a LevelBoundsBehaviorComponent with a specified collision behavior.
+         *
+         * @param collisionBehavior The collision behavior type (default: Reflect).
+         */
+        explicit LevelBoundsBehaviorComponent(
+            const helios::engine::game::physics::collision::types::CollisionBehavior collisionBehavior = helios::engine::game::physics::collision::types::CollisionBehavior::Reflect) :
+        collisionBehavior_(collisionBehavior){}
+
+        /**
+         * @brief Copy constructor.
+         *
+         * @param other The component to copy from.
+         */
+        explicit LevelBoundsBehaviorComponent(const LevelBoundsBehaviorComponent& other) :
+        restitution_(other.restitution_),
+        collisionBehavior_(other.collisionBehavior_)
+        {}
 
         /**
          * @brief Retrieves the restitution coefficient.
@@ -55,6 +81,15 @@ export namespace helios::engine::game::gameplay::bounds::components {
          */
         [[nodiscard]] float restitution() const noexcept {
             return restitution_;
+        }
+
+        /**
+         * @brief Retrieves the collision behavior type.
+         *
+         * @return The collision behavior (e.g., Bounce, Reflect, Clamp, Despawn).
+         */
+        [[nodiscard]] helios::engine::game::physics::collision::types::CollisionBehavior collisionBehavior() const noexcept {
+            return collisionBehavior_;
         }
 
         /**

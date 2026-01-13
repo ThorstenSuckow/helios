@@ -13,7 +13,7 @@ module;
 export module helios.engine.game.gameplay.combat.manager.ProjectilePoolManager;
 
 
-import helios.engine.game.Manager;
+import helios.engine.ecs.Manager;
 import helios.engine.ecs.GameObject;
 import helios.engine.ecs.UpdateContext;
 
@@ -33,7 +33,7 @@ import helios.engine.game.spatial.transform.components.TranslationStateComponent
 
 import helios.engine.core.data.GameObjectPool;
 import helios.engine.core.data.GameObjectPoolId;
-import helios.engine.game.Manager;
+import helios.engine.ecs.Manager;
 import helios.engine.ecs.GameWorld;
 
 import helios.engine.game.PoolRequestHandler;
@@ -70,7 +70,7 @@ export namespace helios::engine::game::gameplay::combat::manager {
      * @see SpawnCondition
      * @see PoolRequestHandler
      */
-    class ProjectilePoolManager : public helios::engine::game::Manager, public helios::engine::game::PoolRequestHandler {
+    class ProjectilePoolManager : public helios::engine::ecs::Manager, public helios::engine::game::PoolRequestHandler {
 
         /**
          * @brief The pool ID this manager is responsible for.

@@ -12,7 +12,7 @@ module;
 export module helios.engine.game.gameplay.spawn.manager.SpawnManager;
 
 
-import helios.engine.game.Manager;
+import helios.engine.ecs.Manager;
 
 import helios.engine.core.data.GameObjectPool;
 import helios.engine.core.data.GameObjectPoolId;
@@ -62,7 +62,7 @@ export namespace helios::engine::game::gameplay::spawn::manager {
      * @see GameObjectFactory
      * @see PoolRequestHandler
      */
-    class SpawnManager : public helios::engine::game::Manager, public helios::engine::game::PoolRequestHandler {
+    class SpawnManager : public helios::engine::ecs::Manager, public helios::engine::game::PoolRequestHandler {
 
         /**
          * @brief The pool ID this manager is responsible for.

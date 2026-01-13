@@ -9,7 +9,7 @@ module;
 
 export module helios.engine.game.physics.motion.components.DirectionComponent;
 
-import helios.engine.game.CloneableComponent;
+import helios.engine.ecs.CloneableComponent;
 
 import helios.math;
 
@@ -23,7 +23,7 @@ export namespace helios::engine::game::physics::motion::components {
      * movement direction, facing direction, or other vector-based properties.
      * It enforces normalization of the stored vector.
      */
-    class  DirectionComponent : public CloneableComponent<DirectionComponent> {
+    class  DirectionComponent : public helios::engine::ecs::CloneableComponent<DirectionComponent> {
 
         /**
          * @brief The stored normalized direction vector.

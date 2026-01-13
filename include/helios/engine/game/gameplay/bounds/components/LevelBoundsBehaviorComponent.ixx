@@ -9,7 +9,7 @@ module;
 
 export module helios.engine.game.gameplay.bounds.components.LevelBoundsBehaviorComponent;
 
-import helios.engine.game.CloneableComponent;
+import helios.engine.ecs.CloneableComponent;
 
 import helios.engine.game.physics.collision.types.CollisionBehavior;
 
@@ -24,7 +24,7 @@ export namespace helios::engine::game::gameplay::bounds::components {
      * restitution (bounciness) when colliding with level walls, used by physics
      * or movement systems to resolve out-of-bounds conditions.
      */
-    class LevelBoundsBehaviorComponent : public helios::engine::game::CloneableComponent<LevelBoundsBehaviorComponent> {
+    class LevelBoundsBehaviorComponent : public helios::engine::ecs::CloneableComponent<LevelBoundsBehaviorComponent> {
 
     private:
         /**

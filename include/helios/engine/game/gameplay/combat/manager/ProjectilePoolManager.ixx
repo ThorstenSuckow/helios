@@ -14,8 +14,8 @@ export module helios.engine.game.gameplay.combat.manager.ProjectilePoolManager;
 
 
 import helios.engine.game.Manager;
-import helios.engine.game.GameObject;
-import helios.engine.game.UpdateContext;
+import helios.engine.ecs.GameObject;
+import helios.engine.ecs.UpdateContext;
 
 import helios.engine.facade.GameObjectPoolFacade;
 import helios.engine.factory.GameObjectFactory;
@@ -34,7 +34,7 @@ import helios.engine.game.spatial.transform.components.TranslationStateComponent
 import helios.engine.core.data.GameObjectPool;
 import helios.engine.core.data.GameObjectPoolId;
 import helios.engine.game.Manager;
-import helios.engine.game.GameWorld;
+import helios.engine.ecs.GameWorld;
 
 import helios.engine.game.PoolRequestHandler;
 
@@ -122,7 +122,7 @@ export namespace helios::engine::game::gameplay::combat::manager {
          * @param spawnRequest The request containing spawn parameters.
          */
         void prepareBullet(
-            helios::engine::game::GameObject* go,
+            helios::engine::ecs::GameObject* go,
             const ProjectileSpawnRequest& spawnRequest
         ) const noexcept {
 
@@ -168,8 +168,8 @@ export namespace helios::engine::game::gameplay::combat::manager {
          * @param updateContext The current frame's update context.
          */
         void spawnProjectiles(
-            helios::engine::game::GameWorld& gameWorld,
-            helios::engine::game::UpdateContext& updateContext
+            helios::engine::ecs::GameWorld& gameWorld,
+            helios::engine::ecs::UpdateContext& updateContext
         ) {
 
             float spawnBudget = spawnCondition_->spawnBudget(gameWorld, *gameObjectPool_, updateContext);
@@ -279,8 +279,8 @@ export namespace helios::engine::game::gameplay::combat::manager {
          * @param updateContext The current frame's update context.
          */
         void flush(
-            helios::engine::game::GameWorld& gameWorld,
-            helios::engine::game::UpdateContext& updateContext
+            helios::engine::ecs::GameWorld& gameWorld,
+            helios::engine::ecs::UpdateContext& updateContext
         ) noexcept override {
 
             spawnProjectiles(gameWorld, updateContext);
@@ -298,7 +298,7 @@ export namespace helios::engine::game::gameplay::combat::manager {
          *
          * @pre The pool with gameObjectPoolId_ must exist in gameWorld.
          */
-        void init(helios::engine::game::GameWorld& gameWorld) noexcept {
+        void init(helios::engine::ecs::GameWorld& gameWorld) noexcept {
             gameObjectPool_ = gameWorld.pool(gameObjectPoolId_);
             assert(gameObjectPool_ != nullptr && "Unexpected nullptr for GameObjectPool");
 

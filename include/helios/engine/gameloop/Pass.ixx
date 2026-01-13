@@ -9,10 +9,10 @@ module;
 
 export module helios.engine.gameloop.Pass;
 
-import helios.engine.game.System;
-import helios.engine.game.SystemRegistry;
+import helios.engine.ecs.System;
+import helios.engine.ecs.SystemRegistry;
 
-import helios.engine.game.UpdateContext;
+import helios.engine.ecs.UpdateContext;
 
 
 export namespace helios::engine::game {
@@ -54,7 +54,7 @@ export namespace helios::engine::gameloop {
         /**
          * @brief Registry holding all systems for this pass.
          */
-        helios::engine::game::SystemRegistry systemRegistry_{};
+        helios::engine::ecs::SystemRegistry systemRegistry_{};
 
         /**
          * @brief Reference to the owning Phase.
@@ -66,7 +66,7 @@ export namespace helios::engine::gameloop {
          *
          * @param updateContext The current update context.
          */
-        void update(helios::engine::game::UpdateContext& updateContext) ;
+        void update(helios::engine::ecs::UpdateContext& updateContext) ;
 
         /**
          * @brief Commits pass-level events if a commit point is configured.
@@ -78,7 +78,7 @@ export namespace helios::engine::gameloop {
          *
          * @param gameWorld Reference to the game world.
          */
-        void init(helios::engine::game::GameWorld& gameWorld);
+        void init(helios::engine::ecs::GameWorld& gameWorld);
 
 
         /**
@@ -108,7 +108,7 @@ export namespace helios::engine::gameloop {
          * @return Reference to this Pass for method chaining.
          */
         template<typename T, typename... Args>
-        requires std::is_base_of_v<helios::engine::game::System, T>
+        requires std::is_base_of_v<helios::engine::ecs::System, T>
         Pass& add(Args&&... args) {
             systemRegistry_.add<T>(std::forward<Args>(args)...);
 

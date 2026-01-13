@@ -6,8 +6,9 @@ module;
 
 export module helios.engine.game.spatial.transform.components.ScaleComponent;
 
+import helios.engine.ecs.GameObject;
 import helios.math.types;
-import helios.engine.game.CloneableComponent;
+import helios.engine.ecs.CloneableComponent;
 import helios.core.spatial.Transform;
 import helios.core.units.Unit;
 
@@ -22,7 +23,7 @@ export namespace helios::engine::game::spatial::transform::components {
      * unit of measurement. It tracks changes via a dirty flag, allowing other systems
      * to react to scale updates.
      */
-    class ScaleComponent : public helios::engine::game::CloneableComponent<ScaleComponent> {
+    class ScaleComponent : public helios::engine::ecs::CloneableComponent<ScaleComponent> {
 
         /**
          * @brief Width of the entity.
@@ -76,7 +77,7 @@ export namespace helios::engine::game::spatial::transform::components {
          *
          * @param gameObject Pointer to the parent GameObject.
          */
-        void onAttach(GameObject* gameObject) noexcept override {
+        void onAttach(helios::engine::ecs::GameObject* gameObject) noexcept override {
             Component::onAttach(gameObject);
         }
 

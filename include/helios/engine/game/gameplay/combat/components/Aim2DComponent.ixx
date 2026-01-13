@@ -7,8 +7,8 @@ module;
 export module helios.engine.game.gameplay.combat.components.Aim2DComponent;
 
 import helios.math.types;
-import helios.engine.game.UpdateContext;
-import helios.engine.game.Component;
+import helios.engine.ecs.UpdateContext;
+import helios.engine.ecs.Component;
 
 
 export namespace helios::engine::game::gameplay::combat::components {
@@ -23,7 +23,7 @@ export namespace helios::engine::game::gameplay::combat::components {
      * @note This is a base implementation with empty methods. Derive from this
      *       class to implement game-specific aiming logic.
      */
-    class Aim2DComponent : public helios::engine::game::Component {
+    class Aim2DComponent : public helios::engine::ecs::Component {
 
     protected:
 

@@ -21,8 +21,8 @@ import helios.engine.core.messaging.command.WorldCommand;
 import helios.engine.core.messaging.command.WorldCommandDispatcher;
 import helios.engine.core.messaging.command.TypedWorldCommandDispatcher;
 
-import helios.engine.game.GameWorld;
-import helios.engine.game.GameObject;
+import helios.engine.ecs.GameWorld;
+import helios.engine.ecs.GameObject;
 import helios.util.Guid;
 
 import helios.util.log.Logger;
@@ -44,7 +44,7 @@ export namespace helios::engine::core::messaging::command {
      * Typical usage pattern:
      * ```cpp
      * helios::engine::core::messaging::command::CommandBuffer cmdBuffer;
-     * helios::engine::game::GameWorld world;
+     * helios::engine::ecs::GameWorld world;
      *
      * // Queue commands during input processing
      * cmdBuffer.add(player.guid(), std::make_unique<MoveCommand>(direction, speed));
@@ -257,7 +257,7 @@ export namespace helios::engine::core::messaging::command {
          * @warning Command execution should be noexcept. If execute() throws, the flush
          *          operation aborts and remaining commands are not executed.
          */
-        CommandBuffer& flush(helios::engine::game::GameWorld& gameWorld) {
+        CommandBuffer& flush(helios::engine::ecs::GameWorld& gameWorld) {
 
             // World commands are processed first
             for (auto& worldCommandProxy : worldCommandBuffer_) {

@@ -24,9 +24,9 @@ import helios.engine.factory.GameObjectFactory;
 
 import helios.engine.facade.GameObjectPoolFacade;
 
-import helios.engine.game.GameObject;
-import helios.engine.game.GameWorld;
-import helios.engine.game.UpdateContext;
+import helios.engine.ecs.GameObject;
+import helios.engine.ecs.GameWorld;
+import helios.engine.ecs.UpdateContext;
 
 
 import helios.engine.game.physics.motion.components.Move2DComponent;
@@ -114,8 +114,8 @@ export namespace helios::engine::game::gameplay::spawn::manager {
          */
         void spawnObjects(
             std::span<helios::engine::game::gameplay::spawn::requests::SpawnRequest> requests,
-            helios::engine::game::GameWorld& gameWorld,
-            helios::engine::game::UpdateContext& updateContext) {
+            helios::engine::ecs::GameWorld& gameWorld,
+            helios::engine::ecs::UpdateContext& updateContext) {
 
             for (auto& spawnRequest : requests) {
                 auto* gameObject = gameObjectPoolFacade_.acquire(gameWorld, *gameObjectPool_);
@@ -154,8 +154,8 @@ export namespace helios::engine::game::gameplay::spawn::manager {
          */
         void despawnObjects(
             std::span<helios::engine::game::gameplay::spawn::requests::DespawnRequest> requests,
-            helios::engine::game::GameWorld& gameWorld,
-            helios::engine::game::UpdateContext& updateContext) {
+            helios::engine::ecs::GameWorld& gameWorld,
+            helios::engine::ecs::UpdateContext& updateContext) {
 
             for (auto& despawnRequest : requests) {
                 if (despawnRequest.gameObjectPoolId.has_value()) {
@@ -212,8 +212,8 @@ export namespace helios::engine::game::gameplay::spawn::manager {
          * @param updateContext The current update context.
          */
         void flush(
-            helios::engine::game::GameWorld& gameWorld,
-            helios::engine::game::UpdateContext& updateContext
+            helios::engine::ecs::GameWorld& gameWorld,
+            helios::engine::ecs::UpdateContext& updateContext
         ) noexcept override {
             if (despawnRequests_.size() > 0) {
                 despawnObjects(despawnRequests_, gameWorld, updateContext);
@@ -235,7 +235,7 @@ export namespace helios::engine::game::gameplay::spawn::manager {
          *
          * @param gameWorld The game world containing the pool.
          */
-        void init(helios::engine::game::GameWorld& gameWorld) noexcept {
+        void init(helios::engine::ecs::GameWorld& gameWorld) noexcept {
             gameObjectPool_ = gameWorld.pool(gameObjectPoolId_);
             assert(gameObjectPool_ != nullptr && "Unexpected nullptr for GameObjectPool");
             gameObjectFactory_->fillPool(gameWorld, *gameObjectPool_);

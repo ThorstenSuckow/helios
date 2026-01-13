@@ -9,8 +9,8 @@ module;
 
 export module helios.engine.game.physics.collision.components.CollisionComponent;
 
-import helios.engine.game.CloneableComponent;
-import helios.engine.game.GameObject;
+import helios.engine.ecs.CloneableComponent;
+import helios.engine.ecs.GameObject;
 
 import helios.engine.game.physics.collision.types.CollisionBehavior;
 
@@ -42,7 +42,7 @@ export namespace helios::engine::game::physics::collision::components {
      * collision.setSolidCollisionMask(LAYER_ENEMY);
      * ```
      */
-    class CollisionComponent : public CloneableComponent<CollisionComponent> {
+    class CollisionComponent : public helios::engine::ecs::CloneableComponent<CollisionComponent> {
 
         /**
          * @brief The collision layer this component belongs to.

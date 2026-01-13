@@ -8,14 +8,14 @@ module;
 
 export module helios.engine.game.physics.collision.systems.BoundsUpdateSystem;
 
-import helios.engine.game.System;
+import helios.engine.ecs.System;
 import helios.math;
 
 import helios.core.units.Unit;
 
-import helios.engine.game.GameObject;
-import helios.engine.game.GameWorld;
-import helios.engine.game.UpdateContext;
+import helios.engine.ecs.GameObject;
+import helios.engine.ecs.GameWorld;
+import helios.engine.ecs.UpdateContext;
 
 import helios.engine.game.scene.components.SceneNodeComponent;
 import helios.engine.game.spatial.transform.components.ScaleComponent;
@@ -43,7 +43,7 @@ export namespace helios::engine::game::physics::collision::systems {
      * - RotationStateComponent (local rotation)
      * - AabbColliderComponent (receives the updated world-space AABB)
      */
-    class BoundsUpdateSystem : public System {
+    class BoundsUpdateSystem : public helios::engine::ecs::System {
 
     public:
 
@@ -57,7 +57,7 @@ export namespace helios::engine::game::physics::collision::systems {
          *
          * @param updateContext Context containing deltaTime and other frame data.
          */
-        void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::ecs::UpdateContext& updateContext) noexcept override {
 
             for (auto [entity, mab, sc, tsc, sca, rsc, bc] : gameWorld_->find<
                 helios::engine::game::model::components::ModelAabbComponent,

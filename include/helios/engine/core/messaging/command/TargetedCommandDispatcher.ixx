@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.core.messaging.command.TargetedCommandDispatcher;
 
-import helios.engine.game.GameObject;
+import helios.engine.ecs.GameObject;
 
 
 export namespace helios::engine::core::messaging::command {
@@ -43,7 +43,7 @@ export namespace helios::engine::core::messaging::command {
          * @param command The command to dispatch.
          */
         virtual void dispatch(
-            helios::engine::game::GameObject& gameObject,
+            helios::engine::ecs::GameObject& gameObject,
             const TargetedCommand& command
         ) = 0;
     };

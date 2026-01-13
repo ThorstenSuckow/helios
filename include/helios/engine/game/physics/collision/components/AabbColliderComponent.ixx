@@ -9,7 +9,7 @@ module;
 export module helios.engine.game.physics.collision.components.AabbColliderComponent;
 
 import helios.math.types;
-import helios.engine.game.CloneableComponent;
+import helios.engine.ecs.CloneableComponent;
 
 export namespace helios::engine::game::physics::collision::components {
 
@@ -20,7 +20,7 @@ export namespace helios::engine::game::physics::collision::components {
      * This component attaches a spatial bounding box to a GameObject, which can be used
      * by physics systems for broad-phase collision detection or simple trigger interactions.
      */
-    class AabbColliderComponent : public helios::engine::game::CloneableComponent<AabbColliderComponent> {
+    class AabbColliderComponent : public helios::engine::ecs::CloneableComponent<AabbColliderComponent> {
 
         /**
          * @brief The local bounds of the collider.

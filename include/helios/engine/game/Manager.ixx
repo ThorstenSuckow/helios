@@ -8,7 +8,7 @@ module;
 
 export module helios.engine.game.Manager;
 
-import helios.engine.game.UpdateContext;
+import helios.engine.ecs.UpdateContext;
 
 export namespace helios::engine::game {
 
@@ -58,7 +58,7 @@ export namespace helios::engine::game {
          *
          * @details Set during onAdd() and remains valid for the Manager's lifetime.
          */
-        helios::engine::game::GameWorld* gameWorld_;
+        helios::engine::ecs::GameWorld* gameWorld_;
 
     public:
 
@@ -72,7 +72,7 @@ export namespace helios::engine::game {
          *
          * @param gameWorld The GameWorld this manager was added to.
          */
-        virtual void onAdd(helios::engine::game::GameWorld& gameWorld) {
+        virtual void onAdd(helios::engine::ecs::GameWorld& gameWorld) {
             gameWorld_ = &gameWorld;
         }
 
@@ -85,7 +85,7 @@ export namespace helios::engine::game {
          * @param gameWorld The GameWorld to initialize with.
          */
         virtual void init(
-            helios::engine::game::GameWorld& gameWorld
+            helios::engine::ecs::GameWorld& gameWorld
         ) {
             // template method
         };
@@ -101,8 +101,8 @@ export namespace helios::engine::game {
          * @param update_context The current frame's update context.
          */
         virtual void flush(
-            helios::engine::game::GameWorld& gameWorld,
-            helios::engine::game::UpdateContext& update_context
+            helios::engine::ecs::GameWorld& gameWorld,
+            helios::engine::ecs::UpdateContext& update_context
         ) noexcept = 0;
     };
 

@@ -6,9 +6,9 @@ module;
 
 #include <memory>
 
-export module helios.engine.game.Component;
+export module helios.engine.ecs.Component;
 
-export namespace helios::engine::game {
+export namespace helios::engine::ecs {
 
     class GameObject;
 
@@ -48,7 +48,7 @@ export namespace helios::engine::game {
      *
      * Example usage:
      * ```cpp
-     * class HealthComponent : public helios::engine::game::Component {
+     * class HealthComponent : public helios::engine::ecs::Component {
      *     int health_ = 100;
      * public:
      *     void takeDamage(int amount) { health_ -= amount; }

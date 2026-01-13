@@ -7,7 +7,7 @@ module;
 export module helios.engine.game.physics.motion.commands.SteeringCommand;
 
 import helios.engine.core.messaging.command.TargetedCommand;
-import helios.engine.game.GameObject;
+import helios.engine.ecs.GameObject;
 import helios.math.types;
 import helios.engine.game.physics.motion.components.SteeringComponent;
 
@@ -62,7 +62,7 @@ export namespace helios::engine::game::physics::motion::commands {
          *
          * @param gameObject The GameObject to apply the command to.
          */
-        void execute(helios::engine::game::GameObject& gameObject) const noexcept override {
+        void execute(helios::engine::ecs::GameObject& gameObject) const noexcept override {
 
             auto* hc = gameObject.get<helios::engine::game::physics::motion::components::SteeringComponent>();
 

@@ -10,13 +10,13 @@ module;
 
 export module helios.engine.game.gameplay.spawn.systems.GameObjectSpawnSystem;
 
-import helios.engine.game.System;
+import helios.engine.ecs.System;
 
 
 import helios.engine.core.messaging.command.CommandBuffer;
 import helios.engine.core.data.GameObjectPoolId;
-import helios.engine.game.GameObject;
-import helios.engine.game.UpdateContext;
+import helios.engine.ecs.GameObject;
+import helios.engine.ecs.UpdateContext;
 
 
 
@@ -30,7 +30,7 @@ import helios.engine.game.rendering.components.RenderableComponent;
 
 import helios.scene.SceneNode;
 
-import helios.engine.game.GameWorld;
+import helios.engine.ecs.GameWorld;
 
 import helios.engine.game.gameplay.spawn.commands.SpawnCommand;
 import helios.engine.game.gameplay.spawn.logic.SpawnCondition;
@@ -63,7 +63,7 @@ export namespace helios::engine::game::gameplay::spawn::systems {
      * @see SpawnCommand
      * @see SpawnManager
      */
-    class GameObjectSpawnSystem : public System {
+    class GameObjectSpawnSystem : public helios::engine::ecs::System {
 
         /**
          * @brief The ID of the pool to spawn from.
@@ -105,7 +105,7 @@ export namespace helios::engine::game::gameplay::spawn::systems {
          *
          * @param updateContext The current update context.
          */
-        void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::ecs::UpdateContext& updateContext) noexcept override {
 
             const auto* gameObjectPool = updateContext.gameWorld().pool(gameObjectPoolId_);
             size_t spawnCount = spawnCondition_->spawnBudget(*gameWorld_, *gameObjectPool, updateContext);

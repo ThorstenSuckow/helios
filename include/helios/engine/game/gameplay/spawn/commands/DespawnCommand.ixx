@@ -12,7 +12,7 @@ export module helios.engine.game.gameplay.spawn.commands.DespawnCommand;
 import helios.engine.core.messaging.command.WorldCommand;
 import helios.util.Guid;
 
-import helios.engine.game.GameWorld;
+import helios.engine.ecs.GameWorld;
 
 import helios.engine.core.data.GameObjectPoolId;
 
@@ -73,7 +73,7 @@ export namespace helios::engine::game::gameplay::spawn::commands {
          *
          * @note Asserts in debug builds if called directly.
          */
-        void execute(helios::engine::game::GameWorld& gameWorld) const noexcept override {
+        void execute(helios::engine::ecs::GameWorld& gameWorld) const noexcept override {
             assert(false && "unexpected execute for despawn, needs dispatcher");
         }
 
@@ -84,7 +84,7 @@ export namespace helios::engine::game::gameplay::spawn::commands {
          * @param dispatcher The dispatcher to route this command to.
          */
         void accept(
-            helios::engine::game::GameWorld& gameWorld,
+            helios::engine::ecs::GameWorld& gameWorld,
             helios::engine::core::messaging::command::WorldCommandDispatcher& dispatcher
         ) const noexcept override {
             dispatcher.dispatch(gameWorld, *this);

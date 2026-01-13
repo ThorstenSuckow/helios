@@ -16,8 +16,8 @@ import helios.engine.game.gameplay.spawn.requests.DespawnRequest;
 import helios.engine.core.messaging.command.WorldCommandDispatcher;
 import helios.engine.core.messaging.command.TypedWorldCommandDispatcher;
 
-import helios.engine.game.GameObject;
-import helios.engine.game.GameWorld;
+import helios.engine.ecs.GameObject;
+import helios.engine.ecs.GameWorld;
 import helios.engine.game.PoolRequestHandler;
 
 
@@ -32,7 +32,7 @@ export namespace helios::engine::game::gameplay::spawn::dispatcher {
 
     protected:
         void dispatchTyped(
-        helios::engine::game::GameWorld& gameWorld,
+        helios::engine::ecs::GameWorld& gameWorld,
         const helios::engine::game::gameplay::spawn::commands::DespawnCommand& command
         ) noexcept override {
 

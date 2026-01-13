@@ -8,7 +8,7 @@ module;
 
 export module helios.engine.game.physics.motion.components.RotationStateComponent;
 
-import helios.engine.game.CloneableComponent;
+import helios.engine.ecs.CloneableComponent;
 
 import helios.math;
 
@@ -28,7 +28,7 @@ export namespace helios::engine::game::physics::motion::components {
      * The component caches the computed rotation matrices and only recalculates them
      * when the underlying angles or axes change (dirty flag pattern).
      */
-    class RotationStateComponent : public CloneableComponent<RotationStateComponent> {
+    class RotationStateComponent : public helios::engine::ecs::CloneableComponent<RotationStateComponent> {
 
         /**
          * @brief Current heading rotation angle in degrees.

@@ -13,14 +13,14 @@ module;
 #include <unordered_map>
 #include <string>
 
-export module helios.engine.game.GameWorld;
+export module helios.engine.ecs.GameWorld;
 
-import helios.engine.game.UpdateContext;
-import helios.engine.game.GameObject;
+import helios.engine.ecs.UpdateContext;
+import helios.engine.ecs.GameObject;
 import helios.engine.game.Manager;
 import helios.engine.game.PoolRequestHandler;
-import helios.engine.game.Component;
-import helios.engine.game.CloneableComponent;
+import helios.engine.ecs.Component;
+import helios.engine.ecs.CloneableComponent;
 
 import helios.util.Guid;
 import helios.util.log.Logger;
@@ -40,8 +40,8 @@ export namespace helios::engine::core::data {
 }
 
 
-#define HELIOS_LOG_SCOPE "helios::engine::game::GameWorld"
-export namespace helios::engine::game {
+#define HELIOS_LOG_SCOPE "helios::engine::ecs::GameWorld"
+export namespace helios::engine::ecs {
 
 
     /**
@@ -113,7 +113,7 @@ export namespace helios::engine::game {
          * @tparam Cs The component types to filter by.
          */
         template<class MapT, class... Cs>
-        using GameObjectRange = GameObjectView<MapT, helios::engine::game::GameObject, Cs...>;
+        using GameObjectRange = GameObjectView<MapT, helios::engine::ecs::GameObject, Cs...>;
 
 
     protected:
@@ -350,7 +350,7 @@ export namespace helios::engine::game {
          *
          * @param updateContext The current frame's update context.
          */
-        void flushManagers(helios::engine::game::UpdateContext& updateContext) {
+        void flushManagers(helios::engine::ecs::UpdateContext& updateContext) {
             for (auto& mgr :  managers_) {
                 mgr->flush(*this, updateContext);
             }
@@ -373,7 +373,7 @@ export namespace helios::engine::game {
          * @note Attempting to add a nullptr or a GameObject with a duplicate Guid will fail,
          *       return nullptr, and log a warning.
          */
-        [[nodiscard]] helios::engine::game::GameObject* addGameObject(std::unique_ptr<GameObject> gameObject);
+        [[nodiscard]] helios::engine::ecs::GameObject* addGameObject(std::unique_ptr<GameObject> gameObject);
 
         /**
          * @brief Finds a GameObject by its unique identifier.
@@ -387,7 +387,7 @@ export namespace helios::engine::game {
          *
          * @note This is the non-const overload. Use the const overload for read-only access.
          */
-        [[nodiscard]] helios::engine::game::GameObject* find(const helios::util::Guid& guid);
+        [[nodiscard]] helios::engine::ecs::GameObject* find(const helios::util::Guid& guid);
 
         /**
          * @brief Finds all GameObjects that have the specified component types.
@@ -474,7 +474,7 @@ export namespace helios::engine::game {
          *
          * @note This overload is used when the GameWorld is accessed via const reference.
          */
-        [[nodiscard]] const helios::engine::game::GameObject* find(const helios::util::Guid& guid) const;
+        [[nodiscard]] const helios::engine::ecs::GameObject* find(const helios::util::Guid& guid) const;
 
         /**
          * @brief Creates a clone of an existing GameObject.
@@ -489,10 +489,10 @@ export namespace helios::engine::game {
          *
          * @note The clone is added to the world in an inactive state.
          */
-        [[nodiscard]] helios::engine::game::GameObject* clone(helios::engine::game::GameObject& gameObject) {
+        [[nodiscard]] helios::engine::ecs::GameObject* clone(helios::engine::ecs::GameObject& gameObject) {
 
 
-            auto newGo = std::make_unique<helios::engine::game::GameObject>();
+            auto newGo = std::make_unique<helios::engine::ecs::GameObject>();
             /**
              * @todo Optional ClonePolicy where rules are specified?
              */
@@ -531,7 +531,7 @@ export namespace helios::engine::game {
          * @note Attempting to remove a GameObject that doesn't exist returns nullptr
          *       and logs a warning.
          */
-        [[nodiscard]] std::unique_ptr<helios::engine::game::GameObject> removeGameObject(const GameObject& gameObject);
+        [[nodiscard]] std::unique_ptr<helios::engine::ecs::GameObject> removeGameObject(const GameObject& gameObject);
 
         /**
          * @brief Retrieves a const ref to the map of all active GameObjects.

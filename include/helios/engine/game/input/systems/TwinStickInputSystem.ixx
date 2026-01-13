@@ -10,10 +10,10 @@ export module helios.engine.game.input.systems.TwinStickInputSystem;
 
 import helios.math.types;
 import helios.math.utils;
-import helios.engine.game.GameObject;
-import helios.engine.game.UpdateContext;
-import helios.engine.game.System;
-import helios.engine.game.Component;
+import helios.engine.ecs.GameObject;
+import helios.engine.ecs.UpdateContext;
+import helios.engine.ecs.System;
+import helios.engine.ecs.Component;
 import helios.engine.core.messaging.command.CommandBuffer;
 import helios.engine.game.physics.motion.commands.Move2DCommand;
 import helios.engine.game.physics.motion.commands.SteeringCommand;
@@ -36,7 +36,7 @@ export namespace helios::engine::game::input::systems {
      * @note Requires the owning GameObject to have Move2DComponent and Aim2DComponent
      *       attached for the generated commands to have any effect.
      */
-    class TwinStickInputSystem : public helios::engine::game::System {
+    class TwinStickInputSystem : public helios::engine::ecs::System {
 
         /**
          * @brief Flag to indicate whether shoot commands should be derived
@@ -49,7 +49,7 @@ export namespace helios::engine::game::input::systems {
         /**
          * @brief Reference to the GameObject this system reads input for.
          */
-        helios::engine::game::GameObject& gameObject_;
+        helios::engine::ecs::GameObject& gameObject_;
 
     public:
 
@@ -58,7 +58,7 @@ export namespace helios::engine::game::input::systems {
          *
          * @param gameObject Reference to the GameObject to generate input commands for.
          */
-        explicit TwinStickInputSystem(helios::engine::game::GameObject& gameObject) :
+        explicit TwinStickInputSystem(helios::engine::ecs::GameObject& gameObject) :
         gameObject_(gameObject) {}
 
         /**
@@ -66,7 +66,7 @@ export namespace helios::engine::game::input::systems {
          *
          * @param updateContext Context containing input snapshot and command buffer.
          */
-        void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::ecs::UpdateContext& updateContext) noexcept override {
 
             auto& inputSnapshot = updateContext.inputSnapshot();
             auto& commandBuffer = updateContext.commandBuffer();

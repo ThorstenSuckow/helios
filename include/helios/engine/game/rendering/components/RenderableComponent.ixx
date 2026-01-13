@@ -9,8 +9,8 @@ module;
 
 export module helios.engine.game.rendering.components.RenderableComponent;
 
-import helios.engine.game.CloneableComponent;
-import helios.engine.game.GameObject;
+import helios.engine.ecs.CloneableComponent;
+import helios.engine.ecs.GameObject;
 
 import helios.rendering.Renderable;
 import helios.math.types;
@@ -27,7 +27,7 @@ export namespace helios::engine::game::rendering::components {
      * When attached, it automatically extracts the AABB from the renderable's mesh
      * and populates a ModelAabbComponent on the same GameObject.
      */
-    class RenderableComponent : public helios::engine::game::CloneableComponent<RenderableComponent> {
+    class RenderableComponent : public helios::engine::ecs::CloneableComponent<RenderableComponent> {
 
         /**
          * @brief Shared pointer to the renderable resource.
@@ -72,7 +72,7 @@ export namespace helios::engine::game::rendering::components {
          *
          * @param gameObject Pointer to the parent GameObject.
          */
-        void onAttach(helios::engine::game::GameObject* gameObject) noexcept override {
+        void onAttach(helios::engine::ecs::GameObject* gameObject) noexcept override {
             Component::onAttach(gameObject);
 
             auto& msc = gameObject->getOrAdd<helios::engine::game::model::components::ModelAabbComponent>();

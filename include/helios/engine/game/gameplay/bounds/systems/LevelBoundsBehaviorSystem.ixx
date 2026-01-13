@@ -9,15 +9,15 @@ module;
 export module helios.engine.game.gameplay.bounds.systems.LevelBoundsBehaviorSystem;
 
 
-import helios.engine.game.System;
+import helios.engine.ecs.System;
 import helios.math;
 
 import helios.engine.core.messaging.command.CommandBuffer;
 
 import helios.engine.game.physics.collision.types.CollisionBehavior;
 
-import helios.engine.game.GameObject;
-import helios.engine.game.GameWorld;
+import helios.engine.ecs.GameObject;
+import helios.engine.ecs.GameWorld;
 import helios.engine.game.physics.motion.components.Move2DComponent;
 import helios.engine.game.physics.motion.components.SteeringComponent;
 import helios.engine.game.spatial.transform.components.TransformComponent;
@@ -31,7 +31,7 @@ import helios.engine.game.physics.motion.components.RotationStateComponent;
 import helios.scene.SceneNode;
 import helios.engine.game.scene.components.SceneNodeComponent;
 
-import helios.engine.game.UpdateContext;
+import helios.engine.ecs.UpdateContext;
 
 import helios.engine.game.gameplay.spawn.commands.DespawnCommand;
 
@@ -47,7 +47,7 @@ export namespace helios::engine::game::gameplay::bounds::systems {
      * When an entity leaves the bounds, it applies bounce behavior based on the
      * LevelBoundsBehaviorComponent's restitution coefficient.
      */
-    class LevelBoundsBehaviorSystem : public System {
+    class LevelBoundsBehaviorSystem : public helios::engine::ecs::System {
 
     public:
 
@@ -60,7 +60,7 @@ export namespace helios::engine::game::gameplay::bounds::systems {
          *
          * @param updateContext Context containing deltaTime and other frame data.
          */
-        void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::ecs::UpdateContext& updateContext) noexcept override {
 
             using namespace helios::engine::game::physics::collision::types;
 

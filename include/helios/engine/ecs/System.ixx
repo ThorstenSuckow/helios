@@ -5,11 +5,11 @@
 module;
 
 
-export module helios.engine.game.System;
+export module helios.engine.ecs.System;
 
-import helios.engine.game.Updatable;
+import helios.engine.ecs.Updatable;
 
-export namespace helios::engine::game {
+export namespace helios::engine::ecs {
 
     class GameWorld;
 
@@ -35,7 +35,7 @@ export namespace helios::engine::game {
      * gameWorld.addSystem(std::make_unique<PhysicsSystem>());
      * ```
      */
-    class System : public helios::engine::game::Updatable {
+    class System : public helios::engine::ecs::Updatable {
 
     protected:
 
@@ -45,7 +45,7 @@ export namespace helios::engine::game {
          * @details Set by `onAdd()` when the system is registered with a GameWorld.
          * Non-owning pointer; valid for the lifetime of the system.
          */
-        helios::engine::game::GameWorld* gameWorld_ = nullptr;
+        helios::engine::ecs::GameWorld* gameWorld_ = nullptr;
 
     public:
 
@@ -65,7 +65,7 @@ export namespace helios::engine::game {
          *
          * @deprected use init
          */
-        virtual void init(helios::engine::game::GameWorld& gameWorld) noexcept {
+        virtual void init(helios::engine::ecs::GameWorld& gameWorld) noexcept {
             gameWorld_ = &gameWorld;
         }
 
@@ -76,7 +76,7 @@ export namespace helios::engine::game {
          *
          * @param updateContext The update context containing frame timing information.
          */
-        void update(helios::engine::game::UpdateContext& updateContext) noexcept override = 0;
+        void update(helios::engine::ecs::UpdateContext& updateContext) noexcept override = 0;
 
     };
 

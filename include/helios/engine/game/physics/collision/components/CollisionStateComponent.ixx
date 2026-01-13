@@ -12,8 +12,8 @@ export module helios.engine.game.physics.collision.components.CollisionStateComp
 
 import helios.engine.game.physics.collision.types.CollisionBehavior;
 
-import helios.engine.game.CloneableComponent;
-import helios.engine.game.GameObject;
+import helios.engine.ecs.CloneableComponent;
+import helios.engine.ecs.GameObject;
 import helios.util.Guid;
 import helios.math;
 
@@ -30,7 +30,7 @@ export namespace helios::engine::game::physics::collision::components {
      * The state should be reset at the start of each frame by the collision system or
      * when the owning GameObject is acquired from a pool.
      */
-    class CollisionStateComponent : public CloneableComponent<CollisionStateComponent> {
+    class CollisionStateComponent : public helios::engine::ecs::CloneableComponent<CollisionStateComponent> {
 
         /**
          * @brief World-space contact point of the collision.

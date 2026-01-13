@@ -12,14 +12,14 @@ module;
 #include <vector>
 
 
-export module helios.engine.game.GameObject;
+export module helios.engine.ecs.GameObject;
 
 import helios.util.Guid;
-import helios.engine.game.Component;
-import helios.engine.game.UpdateContext;
-import helios.engine.game.Updatable;
+import helios.engine.ecs.Component;
+import helios.engine.ecs.UpdateContext;
+import helios.engine.ecs.Updatable;
 
-export namespace helios::engine::game {
+export namespace helios::engine::ecs {
 
     /**
      * @brief Container for components that represents an entity in the game world.
@@ -96,7 +96,7 @@ export namespace helios::engine::game {
          * retrieval by type. The map is updated when components are added.
          * Worst-case is O(n) due to hash collisions, but typical lookups are O(1).
          */
-        std::unordered_map<std::type_index, helios::engine::game::Component*> componentIndex_;
+        std::unordered_map<std::type_index, helios::engine::ecs::Component*> componentIndex_;
 
         /**
          * @brief Cached list of components that implement the Updatable interface.
@@ -158,7 +158,7 @@ export namespace helios::engine::game {
             auto component_ptr = std::make_unique<U>(std::forward<Args>(args)...);
             U* raw_component_ptr = component_ptr.get();
 
-            if constexpr (std::derived_from<U, helios::engine::game::Updatable>) {
+            if constexpr (std::derived_from<U, helios::engine::ecs::Updatable>) {
                 updatables_.push_back(raw_component_ptr);
             }
             components_.push_back(std::move(component_ptr));
@@ -187,8 +187,8 @@ export namespace helios::engine::game {
          * @return Pointer to the existing or newly added component, or nullptr if
          *         the input was nullptr.
          */
-        helios::engine::game::Component* getOrAdd(
-            std::unique_ptr<helios::engine::game::Component> component) {
+        helios::engine::ecs::Component* getOrAdd(
+            std::unique_ptr<helios::engine::ecs::Component> component) {
 
             assert(component != nullptr && "Unexpected nullptr for component.");
 
@@ -334,7 +334,7 @@ export namespace helios::engine::game {
          *
          * @param updateContext Context containing frame delta time and other update data.
          */
-        void update(helios::engine::game::UpdateContext& updateContext) {
+        void update(helios::engine::ecs::UpdateContext& updateContext) {
             for (auto* updatable: updatables_) {
                 updatable->update(updateContext);
             }
@@ -371,7 +371,7 @@ export namespace helios::engine::game {
          * @warning Modifying the vector directly bypasses lifecycle callbacks.
          *          Use add() and remove() methods for proper component management.
          */
-        [[nodiscard]] std::vector<std::unique_ptr<helios::engine::game::Component>>& components() noexcept {
+        [[nodiscard]] std::vector<std::unique_ptr<helios::engine::ecs::Component>>& components() noexcept {
             return components_;
         }
 
@@ -444,7 +444,7 @@ export namespace helios::engine::game {
          * @param component Optional pointer to a specific component to finalize.
          *                  If nullptr, all components are processed.
          */
-        void finalizeAttach(helios::engine::game::Component* component = nullptr) {
+        void finalizeAttach(helios::engine::ecs::Component* component = nullptr) {
 
             // call attach on all components
             if (component != nullptr) {

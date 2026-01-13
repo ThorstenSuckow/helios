@@ -9,9 +9,9 @@ module;
 
 export module helios.engine.game.physics.motion.systems.SpinSystem;
 
-import helios.engine.game.System;
-import helios.engine.game.UpdateContext;
-import helios.engine.game.GameWorld;
+import helios.engine.ecs.System;
+import helios.engine.ecs.UpdateContext;
+import helios.engine.ecs.GameWorld;
 
 import helios.math;
 
@@ -29,7 +29,7 @@ export namespace helios::engine::game::physics::motion::systems {
      * accumulated rotation angle based on the spin speed and delta time.
      * The updated rotation state is then written to the RotationStateComponent.
      */
-    class SpinSystem : public System {
+    class SpinSystem : public helios::engine::ecs::System {
 
         /**
          * @brief Identity matrix constant.
@@ -43,7 +43,7 @@ export namespace helios::engine::game::physics::motion::systems {
          *
          * @param updateContext Context containing frame timing and game state.
          */
-        void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::ecs::UpdateContext& updateContext) noexcept override {
 
 
             for (auto [entity, sc, rsc] : gameWorld_->find<

@@ -10,7 +10,7 @@ export module helios.engine.game.gameplay.spawn.commands.SpawnCommand;
 
 import helios.engine.core.messaging.command.WorldCommand;
 import helios.engine.core.messaging.command.WorldCommandDispatcher;
-import helios.engine.game.GameWorld;
+import helios.engine.ecs.GameWorld;
 import helios.math.types;
 
 import helios.engine.core.data.GameObjectPoolId;
@@ -66,7 +66,7 @@ export namespace helios::engine::game::gameplay::spawn::commands {
          *
          * @param gameWorld The game world (unused).
          */
-        void execute(helios::engine::game::GameWorld& gameWorld) const noexcept override {
+        void execute(helios::engine::ecs::GameWorld& gameWorld) const noexcept override {
             // noop - requires dispatcher
         }
 
@@ -77,7 +77,7 @@ export namespace helios::engine::game::gameplay::spawn::commands {
          * @param dispatcher The dispatcher to route this command to.
          */
         virtual void accept(
-            helios::engine::game::GameWorld& gameWorld,
+            helios::engine::ecs::GameWorld& gameWorld,
             helios::engine::core::messaging::command::WorldCommandDispatcher& dispatcher) const noexcept override {
 
             dispatcher.dispatch(gameWorld, *this);

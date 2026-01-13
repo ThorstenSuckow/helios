@@ -9,9 +9,9 @@ module;
 
 export module helios.engine.gameloop.GameLoop;
 
-import helios.engine.game.GameWorld;
+import helios.engine.ecs.GameWorld;
 
-import helios.engine.game.UpdateContext;
+import helios.engine.ecs.UpdateContext;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
 
@@ -134,7 +134,7 @@ export namespace helios::engine::gameloop {
          * @see UpdateContext::pushPhase()
          * @see UpdateContext::readPhase()
          */
-        void phaseCommit(helios::engine::game::GameWorld& gameWorld, helios::engine::game::UpdateContext& updateContext) {
+        void phaseCommit(helios::engine::ecs::GameWorld& gameWorld, helios::engine::ecs::UpdateContext& updateContext) {
             phaseEventBus_.swapBuffers();
             passEventBus_.clearAll();
 
@@ -192,7 +192,7 @@ export namespace helios::engine::gameloop {
          *
          * @param gameWorld Reference to the game world to initialize with.
          */
-        void init(helios::engine::game::GameWorld& gameWorld) {
+        void init(helios::engine::ecs::GameWorld& gameWorld) {
 
             assert(!initialized_ && "init() already called");
 
@@ -225,11 +225,11 @@ export namespace helios::engine::gameloop {
          * @param deltaTime Time elapsed since the last frame in seconds.
          * @param inputSnapshot Snapshot of the current input state.
          */
-        void update(helios::engine::game::GameWorld& gameWorld, float deltaTime, const helios::input::InputSnapshot& inputSnapshot) noexcept {
+        void update(helios::engine::ecs::GameWorld& gameWorld, float deltaTime, const helios::input::InputSnapshot& inputSnapshot) noexcept {
 
             assert(initialized_ && "GameLoop not initialized");
 
-            auto updateContext = helios::engine::game::UpdateContext(
+            auto updateContext = helios::engine::ecs::UpdateContext(
                   commandBuffer_,
                   gameWorld,
                   phaseEventBus_,

@@ -10,7 +10,7 @@ export module helios.engine.core.messaging.command.TypedTargetedCommandDispatche
 
 import helios.engine.core.messaging.command.TargetedCommandDispatcher;
 
-import helios.engine.game.GameObject;
+import helios.engine.ecs.GameObject;
 
 
 export namespace helios::engine::core::messaging::command {
@@ -44,7 +44,7 @@ export namespace helios::engine::core::messaging::command {
          * @note Implementations must be noexcept.
          */
         virtual void dispatchTyped(
-            helios::engine::game::GameObject& gameObject,
+            helios::engine::ecs::GameObject& gameObject,
             const T& command
         ) noexcept = 0;
 
@@ -57,7 +57,7 @@ export namespace helios::engine::core::messaging::command {
          * @param command The base command reference.
          */
         void dispatch(
-            helios::engine::game::GameObject& gameObject,
+            helios::engine::ecs::GameObject& gameObject,
             const TargetedCommand& command
         ) override {
             dispatchTyped(gameObject, static_cast<const T&>(command));

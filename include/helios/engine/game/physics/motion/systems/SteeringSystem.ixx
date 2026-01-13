@@ -12,16 +12,16 @@ module;
 export module helios.engine.game.physics.motion.systems.SteeringSystem;
 
 
-import helios.engine.game.System;
+import helios.engine.ecs.System;
 import helios.math;
 
-import helios.engine.game.GameWorld;
+import helios.engine.ecs.GameWorld;
 import helios.engine.game.physics.motion.components.SteeringComponent;
 import helios.engine.game.spatial.transform.components.TransformComponent;
 import helios.engine.game.physics.motion.components.DirectionComponent;
 import helios.engine.game.physics.motion.components.RotationStateComponent;
 
-import helios.engine.game.UpdateContext;
+import helios.engine.ecs.UpdateContext;
 
 export namespace helios::engine::game::physics::motion::systems {
 
@@ -33,7 +33,7 @@ export namespace helios::engine::game::physics::motion::systems {
      * It calculates the target rotation from input, applies rotation speed and dampening,
      * and updates the RotationStateComponent and DirectionComponent.
      */
-    class SteeringSystem : public System {
+    class SteeringSystem : public helios::engine::ecs::System {
 
         private:
 
@@ -115,7 +115,7 @@ export namespace helios::engine::game::physics::motion::systems {
          *
          * @param updateContext Context containing frame timing and game state.
          */
-        void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::ecs::UpdateContext& updateContext) noexcept override {
 
 
             for (auto [entity, hc, rsc, dc] : gameWorld_->find<

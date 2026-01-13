@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.game.PoolRequestHandler;
 
-import helios.engine.game.GameObject;
+import helios.engine.ecs.GameObject;
 
 import helios.engine.game.gameplay.spawn.requests.DespawnRequest;
 import helios.engine.game.gameplay.spawn.requests.SpawnRequest;

@@ -7,7 +7,7 @@ module;
 export module helios.engine.core.messaging.command.WorldCommand;
 
 
-export namespace helios::engine::game {
+export namespace helios::engine::ecs {
     class GameWorld;
 }
 
@@ -45,7 +45,7 @@ export namespace helios::engine::core::messaging::command {
          *
          * @note Implementations must be exception-safe (noexcept).
          */
-        virtual void execute(helios::engine::game::GameWorld& gameWorld) const noexcept = 0;
+        virtual void execute(helios::engine::ecs::GameWorld& gameWorld) const noexcept = 0;
 
         /**
          * @brief Accepts a dispatcher for type-safe command handling.
@@ -57,7 +57,7 @@ export namespace helios::engine::core::messaging::command {
          * to specialized handlers. The default implementation is a no-op.
          */
         virtual void accept(
-            helios::engine::game::GameWorld& gameWorld,
+            helios::engine::ecs::GameWorld& gameWorld,
             helios::engine::core::messaging::command::WorldCommandDispatcher& dispatcher) const noexcept {
             // no-op by default
         }

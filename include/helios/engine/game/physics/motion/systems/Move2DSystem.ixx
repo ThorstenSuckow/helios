@@ -70,12 +70,12 @@ export namespace helios::engine::game::physics::motion::systems {
                 return helios::math::vec3f{0.0f};
             }
 
-            bool isInputActive = cmp->isInputActive();
+            bool movementStateChanged = cmp->throttle() > helios::math::EPSILON_LENGTH;
 
 
             auto velocity = cmp->velocity();
 
-            if (!isInputActive) {
+            if (!movementStateChanged) {
                 float movementDampening = cmp->movementDampening();
 
                 // Apply exponential drag when no input is active.
@@ -89,9 +89,14 @@ export namespace helios::engine::game::physics::motion::systems {
 
             } else {
 
-                // Accelerate in the current facing direction.
-                // Uses throttle (input intensity) to scale acceleration.
-                velocity = velocity +  currentDirection *  (cmp->movementAcceleration() * cmp->throttle() * deltaTime);
+                if (cmp->useInstantAcceleration()) {
+                    velocity = currentDirection * cmp->movementSpeed() * cmp->throttle();
+                } else {
+                    // Accelerate in the current facing direction.
+                    // Uses throttle (input intensity) to scale acceleration.
+                    velocity = velocity + (currentDirection  *  (cmp->movementAcceleration() * cmp->throttle() * deltaTime));
+                }
+
             }
 
             // Clamp velocity to maximum speed to prevent unlimited acceleration.
@@ -101,7 +106,7 @@ export namespace helios::engine::game::physics::motion::systems {
 
             cmp->setVelocity(velocity);
 
-            return velocity * deltaTime;
+            return (velocity + cmp->inheritedVelocity()) * deltaTime;
         }
 
     public:
@@ -111,8 +116,8 @@ export namespace helios::engine::game::physics::motion::systems {
          *
          * @param gameWorld Pointer to the GameWorld this system belongs to.
          */
-        void onAdd(helios::engine::game::GameWorld* gameWorld) noexcept override {
-            System::onAdd(gameWorld);
+        void init(helios::engine::game::GameWorld& gameWorld) noexcept override {
+            System::init(gameWorld);
         }
 
         /**

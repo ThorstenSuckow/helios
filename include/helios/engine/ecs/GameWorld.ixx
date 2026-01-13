@@ -8,7 +8,7 @@ module;
 // Using it as a module interface unit causes Internal Compiler Errors (ICE) in MSVC
 // (VS2022/VS2026) when structured bindings are used with the each() iterator.
 // The workaround is to include it in the global module fragment.
-#include <helios/engine/core/data/GameObjectView.h>
+#include <helios/engine/ecs/query/GameObjectView.h>
 #include <memory>
 #include <unordered_map>
 #include <string>
@@ -28,7 +28,7 @@ import helios.util.log.LogManager;
 import helios.engine.game.Level;
 
 
-import helios.engine.core.data.GameObjectFilter;
+import helios.engine.ecs.query.GameObjectFilter;
 import helios.engine.core.data.GameObjectPoolId;
 import helios.engine.core.data.GameObjectPoolRegistry;
 
@@ -180,7 +180,7 @@ export namespace helios::engine::ecs {
          *
          * @return Pointer to the pool if found, nullptr otherwise.
          */
-        [[nodiscard]] GameObjectPool* pool(
+        [[nodiscard]] helios::engine::core::data::GameObjectPool* pool(
             helios::engine::core::data::GameObjectPoolId gamePoolId) const {
             return pools_.pool(gamePoolId);
         }
@@ -193,7 +193,7 @@ export namespace helios::engine::ecs {
          *
          * @return Pointer to the added pool, or nullptr on failure.
          */
-        [[nodiscard]] GameObjectPool* addPool(
+        [[nodiscard]] helios::engine::core::data::GameObjectPool* addPool(
             helios::engine::core::data::GameObjectPoolId gamePoolId,
             std::unique_ptr<helios::engine::core::data::GameObjectPool> gameObjectPool) {
             auto* pool =  pools_.addPool(gamePoolId, std::move(gameObjectPool));

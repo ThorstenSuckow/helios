@@ -4,7 +4,7 @@
  */
 module;
 
-#include <helios/engine/core/data/GameObjectView.h>
+#include <helios/engine/ecs/query/GameObjectView.h>
 #include <algorithm>
 #include <cassert>
 #include <cmath>

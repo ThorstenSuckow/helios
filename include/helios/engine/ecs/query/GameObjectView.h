@@ -18,13 +18,13 @@
 #include <tuple>
 
 
-import helios.engine.core.data.GameObjectFilter;
+import helios.engine.ecs.query.GameObjectFilter;
 
 namespace helios::engine::game {
 class GameObject;
 } // namespace helios::engine::game
 
-using namespace helios::engine::core::data;
+using namespace helios::engine::ecs::query;
 
 
 /**
@@ -166,7 +166,7 @@ private:
      * @details Determines whether to include Active, Inactive, or All GameObjects
      * during iteration.
      */
-    helios::engine::core::data::GameObjectFilter filterType_;
+    helios::engine::ecs::query::GameObjectFilter filterType_;
 
 public:
     /**
@@ -175,7 +175,7 @@ public:
      * @param objects Reference to the map to iterate over.
      * @param filterType Filter criteria for GameObject state (Bitmask consisting of Active, Inactive, ComponentEnabled, ComponentDisabled, All).
      */
-    explicit GameObjectView(MapT& objects, const helios::engine::core::data::GameObjectFilter filterType) noexcept : objects_(&objects), filterType_(filterType) {}
+    explicit GameObjectView(MapT& objects, const helios::engine::ecs::query::GameObjectFilter filterType) noexcept : objects_(&objects), filterType_(filterType) {}
 
     /**
      * @brief Forward iterator for filtered GameObject traversal.
@@ -200,7 +200,7 @@ public:
         /**
          * @brief Filter type for GameObject state matching.
          */
-        helios::engine::core::data::GameObjectFilter filterType_;
+        helios::engine::ecs::query::GameObjectFilter filterType_;
 
         /**
          * @brief Advances to the next matching GameObject.
@@ -221,7 +221,7 @@ public:
          * @param end End iterator for bounds checking.
          * @param filterType Filter criteria for GameObject state matching.
          */
-        Iterator(It it, It end, helios::engine::core::data::GameObjectFilter filterType) noexcept : it_(it), end_(end), filterType_(filterType) {
+        Iterator(It it, It end, helios::engine::ecs::query::GameObjectFilter filterType) noexcept : it_(it), end_(end), filterType_(filterType) {
             advanceToNextMatch();
         }
 

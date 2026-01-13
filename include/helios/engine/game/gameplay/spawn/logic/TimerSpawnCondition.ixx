@@ -9,7 +9,7 @@ module;
 export module helios.engine.game.gameplay.spawn.logic.TimerSpawnCondition;
 
 import helios.engine.ecs.GameWorld;
-import helios.engine.game.Level;
+import helios.engine.ecs.Level;
 import helios.engine.core.data.GameObjectPool;
 import helios.engine.ecs.UpdateContext;
 

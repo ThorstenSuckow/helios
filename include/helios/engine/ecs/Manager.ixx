@@ -4,13 +4,12 @@
  */
 module;
 
-#include <vector>
 
-export module helios.engine.game.Manager;
+export module helios.engine.ecs.Manager;
 
 import helios.engine.ecs.UpdateContext;
 
-export namespace helios::engine::game {
+export namespace helios::engine::ecs {
 
     class GameWorld;
 

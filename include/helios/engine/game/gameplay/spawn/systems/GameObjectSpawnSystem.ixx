@@ -20,7 +20,7 @@ import helios.engine.ecs.UpdateContext;
 
 
 
-import helios.engine.game.Level;
+import helios.engine.ecs.Level;
 
 import helios.engine.game.physics.motion.components.Move2DComponent;
 

@@ -14,7 +14,7 @@ import helios.engine.ecs.UpdateContext;
 
 import helios.engine.ecs.GameWorld;
 import helios.engine.ecs.GameObject;
-import helios.engine.game.Level;
+import helios.engine.ecs.Level;
 
 
 export namespace helios::engine::game::gameplay::spawn::logic {

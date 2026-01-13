@@ -4,7 +4,7 @@
  */
 export module helios.engine.core.data;
 
-export import helios.engine.core.data.GameObjectFilter;
+export import helios.engine.ecs.query.GameObjectFilter;
 export import helios.engine.core.data.GameObjectPool;
 export import helios.engine.core.data.GameObjectPoolId;
 export import helios.engine.core.data.GameObjectPoolRegistry;

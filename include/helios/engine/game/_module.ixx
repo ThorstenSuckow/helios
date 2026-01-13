@@ -16,7 +16,7 @@ export import helios.engine.core.data.GameObjectPool;
 export import helios.engine.ecs.GameWorld;
 
 // level
-export import helios.engine.game.Level;
+export import helios.engine.ecs.Level;
 
 // Command pattern
 export import helios.engine.core.messaging.command.TargetedCommand;

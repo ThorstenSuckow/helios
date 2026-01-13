@@ -17,7 +17,7 @@ export module helios.engine.ecs.GameWorld;
 
 import helios.engine.ecs.UpdateContext;
 import helios.engine.ecs.GameObject;
-import helios.engine.game.Manager;
+import helios.engine.ecs.Manager;
 import helios.engine.game.PoolRequestHandler;
 import helios.engine.ecs.Component;
 import helios.engine.ecs.CloneableComponent;
@@ -25,7 +25,7 @@ import helios.engine.ecs.CloneableComponent;
 import helios.util.Guid;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
-import helios.engine.game.Level;
+import helios.engine.ecs.Level;
 
 
 import helios.engine.ecs.query.GameObjectFilter;
@@ -144,14 +144,14 @@ export namespace helios::engine::ecs {
          * spawn management, and projectile lifecycle. They are initialized via init()
          * and flushed each frame via flushManagers().
          */
-        std::vector<std::unique_ptr<helios::engine::game::Manager>> managers_;
+        std::vector<std::unique_ptr<helios::engine::ecs::Manager>> managers_;
 
         /**
          * @brief The current level loaded in the game world.
          *
          * @details Can be null if no level is currently active.
          */
-        std::unique_ptr<helios::engine::game::Level> level_ = nullptr;
+        std::unique_ptr<helios::engine::ecs::Level> level_ = nullptr;
 
         /**
          * @brief Registry of GameObjectPools for entity recycling.
@@ -222,7 +222,7 @@ export namespace helios::engine::ecs {
          *
          * @param level Unique pointer to the Level instance. Ownership is transferred to the GameWorld.
          */
-        void setLevel(std::unique_ptr<helios::engine::game::Level> level) noexcept {
+        void setLevel(std::unique_ptr<helios::engine::ecs::Level> level) noexcept {
             level_ = std::move(level);
         }
 
@@ -242,7 +242,7 @@ export namespace helios::engine::ecs {
          *
          * @warning Calling this method when hasLevel() returns false results in undefined behavior.
          */
-        [[nodiscard]] const helios::engine::game::Level& level() const noexcept{
+        [[nodiscard]] const helios::engine::ecs::Level& level() const noexcept{
             return *level_;
         }
 
@@ -254,7 +254,7 @@ export namespace helios::engine::ecs {
          * @return True if a Manager of type T is registered, false otherwise.
          */
         template<typename T>
-        requires std::is_base_of_v<helios::engine::game::Manager, T>
+        requires std::is_base_of_v<helios::engine::ecs::Manager, T>
         [[nodiscard]] bool hasManager() const {
             return getManager<T>() != nullptr;
         }
@@ -275,7 +275,7 @@ export namespace helios::engine::ecs {
          * @pre No Manager of type T is already registered.
          */
         template<typename T, typename... Args>
-        requires std::is_base_of_v<helios::engine::game::Manager, T>
+        requires std::is_base_of_v<helios::engine::ecs::Manager, T>
         T& addManager(Args&&... args) {
 
             assert(!hasManager<T>() && "Manager already registered.");
@@ -330,7 +330,7 @@ export namespace helios::engine::ecs {
          * @return Pointer to the Manager if found, nullptr otherwise.
          */
         template<typename T>
-        requires std::is_base_of_v<helios::engine::game::Manager, T>
+        requires std::is_base_of_v<helios::engine::ecs::Manager, T>
         [[nodiscard]] T* getManager() const {
 
             for (auto& mgr : managers_) {

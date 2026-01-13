@@ -23,6 +23,29 @@ export namespace helios::engine::game {
      * or input handling. Components can optionally implement the Updatable interface
      * if they require per-frame updates.
      *
+     * ## Enabled State
+     *
+     * Each component has an `isEnabled()` flag that controls whether it participates
+     * in system processing. This allows fine-grained control over individual behaviors
+     * without removing components from the GameObject.
+     *
+     * - `isEnabled() == true` — Component is active and processed by systems
+     * - `isEnabled() == false` — Component is skipped by systems but remains attached
+     *
+     * Systems should check `isEnabled()` before processing a component:
+     *
+     * ```cpp
+     * for (auto [obj, collision] : gameWorld.find<CollisionComponent>().each()) {
+     *     if (collision.isDisabled()) {
+     *         continue;  // Skip disabled components
+     *     }
+     *     // Process enabled component...
+     * }
+     * ```
+     *
+     * @note Disabling a component does **not** disable the entire GameObject.
+     *       Use `GameObject::setActive(false)` to exclude an entity from all processing.
+     *
      * Example usage:
      * ```cpp
      * class HealthComponent : public helios::engine::game::Component {
@@ -34,7 +57,13 @@ export namespace helios::engine::game {
      *
      * // Attach to a GameObject
      * auto& health = gameObject.add<HealthComponent>();
+     *
+     * // Temporarily disable collision
+     * gameObject.get<CollisionComponent>()->disable();
      * ```
+     *
+     * @see GameObject
+     * @see CloneableComponent
      */
     class Component {
 
@@ -91,6 +120,19 @@ export namespace helios::engine::game {
         };
 
         /**
+         * @brief Called when the component's GameObject is released to a pool.
+         *
+         * @details Override this method to prune any component state when the owning GameObject
+         * is released to an object pool. This allows for reducing memory footprints
+         * of GameObjects not actively participating in the GameWorld.
+         *
+         * The default implementation does nothing.
+         */
+        virtual void onRelease() noexcept {
+            // noop
+        };
+
+        /**
          * @brief Checks whether this component is attached to a GameObject.
          *
          * @return True if the component has an owning GameObject, false otherwise.
@@ -102,11 +144,18 @@ export namespace helios::engine::game {
         /**
          * @brief Checks whether the component is enabled.
          *
-         * @details An enabled component is expected to actively participate in
-         * the GameObject's lifecycle, such as rendering, updating, or responding
-         * to events. A disabled component is effectively ignored in these processes.
+         * @details An enabled component is processed by systems during the game loop.
+         * A disabled component remains attached to the GameObject but is skipped
+         * by systems that check this flag.
          *
-         * @return true if the component is enabled, false otherwise.
+         * Use this for temporary deactivation of specific behaviors without removing
+         * the component entirely (e.g., temporary invulnerability, disabled collision).
+         *
+         * @return True if the component is enabled, false otherwise.
+         *
+         * @see disable()
+         * @see enable()
+         * @see isDisabled()
          */
         [[nodiscard]] bool isEnabled() const noexcept {
             return isEnabled_;
@@ -115,9 +164,11 @@ export namespace helios::engine::game {
         /**
          * @brief Checks whether the component is disabled.
          *
-         * @details Inverse of isEnabled()
+         * @details Convenience method, equivalent to `!isEnabled()`.
          *
-         * @return true if the component is disabled, false otherwise.
+         * @return True if the component is disabled, false otherwise.
+         *
+         * @see isEnabled()
          */
         [[nodiscard]] bool isDisabled() const noexcept {
             return !isEnabled_;
@@ -125,6 +176,12 @@ export namespace helios::engine::game {
 
         /**
          * @brief Enables this component.
+         *
+         * @details An enabled component will be processed by systems that check
+         * the enabled state. This is the default state for newly created components.
+         *
+         * @see disable()
+         * @see isEnabled()
          */
         void enable() noexcept {
             isEnabled_ = true;
@@ -132,6 +189,21 @@ export namespace helios::engine::game {
 
         /**
          * @brief Disables this component.
+         *
+         * @details A disabled component remains attached to the GameObject but
+         * should be skipped by systems. This allows temporary deactivation of
+         * specific behaviors without modifying the component configuration.
+         *
+         * Example use cases:
+         * - Temporary invulnerability (disable CollisionComponent)
+         * - Frozen movement (disable Move2DComponent)
+         * - Stealth mode (disable detection-related components)
+         *
+         * @note This does **not** call any lifecycle callbacks. The component
+         *       remains fully attached and can be re-enabled at any time.
+         *
+         * @see enable()
+         * @see isDisabled()
          */
         void disable() noexcept {
             isEnabled_ = false;

@@ -80,30 +80,28 @@ export namespace helios::engine::game::gameplay::spawn::logic {
          * frame spikes gracefully by spawning multiple objects if needed.
          *
          * @param gameWorld Pointer to the current GameWorld. Unused.
-         * @param level Pointer to the current Level. Unused.
          * @param gameObjectPool Pointer to the pool. Unused.
          * @param updateContext The current frame's update context with delta time.
          *
          * @return The number of objects to spawn this frame based on elapsed intervals.
          */
-        [[nodiscard]] size_t spawnBudget(
-            const helios::engine::game::GameWorld* gameWorld,
-            const helios::engine::game::Level* level,
-            const helios::engine::game::GameObjectPool* gameObjectPool,
+        [[nodiscard]] float spawnBudget(
+            const helios::engine::game::GameWorld& gameWorld,
+            const helios::engine::core::data::GameObjectPool& gameObjectPool,
             const helios::engine::game::UpdateContext& updateContext
         ) noexcept override {
 
-            size_t budget = 0;
+            float budget = 0;
 
             countdown_ -= updateContext.deltaTime();
 
             if (countdown_ <= 0) {
                 const float spill = -countdown_;
                 const auto intervalsMissed = static_cast<size_t>(spill/interval_);
-                const auto spawnCount = intervalsMissed + 1U; // 1U accounts for the current call
+                const auto spawnCount = intervalsMissed + 1.0f; // 1.0f accounts for the current call
 
                 budget += spawnCount;
-                countdown_ += static_cast<float>(spawnCount) * interval_;
+                countdown_ += spawnCount * interval_;
             }
 
             return budget;

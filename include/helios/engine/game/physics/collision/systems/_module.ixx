@@ -5,5 +5,7 @@
 export module helios.engine.game.physics.collision.systems;
 
 export import helios.engine.game.physics.collision.systems.BoundsUpdateSystem;
+export import helios.engine.game.physics.collision.systems.CollisionStateClearSystem;
+export import helios.engine.game.physics.collision.systems.CollisionStateResponseSystem;
 export import helios.engine.game.physics.collision.systems.GridCollisionDetectionSystem;
 

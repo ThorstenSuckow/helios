@@ -19,7 +19,7 @@ export import helios.engine.game.GameWorld;
 export import helios.engine.game.Level;
 
 // Command pattern
-export import helios.engine.core.messaging.command.Command;
+export import helios.engine.core.messaging.command.TargetedCommand;
 export import helios.engine.core.messaging.command.CommandBuffer;
 
 // System base class

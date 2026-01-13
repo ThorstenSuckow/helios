@@ -5,5 +5,5 @@
 
 export module helios.engine.game.physics.motion.commands;
 
-export import helios.engine.game.physics.motion.commands.HeadingCommand;
+export import helios.engine.game.physics.motion.commands.SteeringCommand;
 export import helios.engine.game.physics.motion.commands.Move2DCommand;

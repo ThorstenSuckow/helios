@@ -1,11 +1,30 @@
-## helios::engine::game::gameplay::systems
+# helios::engine::game::gameplay::spawn::systems
 
-Gameplay-specific systems for game mechanics. This namespace contains systems that implement gameplay features such as object pooling, projectile management, and other game-specific mechanics.
+Systems for spawn lifecycle management within the game loop.
+
+This namespace contains the GameObjectSpawnSystem which integrates spawning into the game loop by evaluating conditions and emitting spawn commands.
+
+## Systems
+
+| System | Purpose |
+|--------|---------|
+| `GameObjectSpawnSystem` | Evaluates SpawnConditions and emits SpawnCommands |
+
+## Usage
+
+```cpp
+auto condition = std::make_unique<TimerSpawnCondition>(2.0f);
+auto system = std::make_unique<GameObjectSpawnSystem>(poolId, std::move(condition));
+
+gameLoop.phase(PhaseType::Main)
+    .addPass()
+    .addSystem(std::move(system));
+```
 
 ---
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::game::gameplay::systems
-@brief Gameplay-specific systems for game mechanics.
-@details This namespace contains systems that implement gameplay features such as object pooling and projectile management.
+@namespace helios::engine::game::gameplay::spawn::systems
+@brief Systems for spawn lifecycle management.
+@details This namespace contains the GameObjectSpawnSystem which integrates spawning into the game loop by evaluating conditions and emitting spawn commands.
 </p></details>

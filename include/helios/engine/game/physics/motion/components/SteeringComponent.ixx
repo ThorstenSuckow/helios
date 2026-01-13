@@ -1,5 +1,5 @@
 /**
- * @file HeadingComponent.ixx
+ * @file SteeringComponent.ixx
  * @brief Component for managing entity heading and rotation physics.
  */
 module;
@@ -9,14 +9,14 @@ module;
 #include <cmath>
 #include <memory>
 
-export module helios.engine.game.physics.motion.components.HeadingComponent;
+export module helios.engine.game.physics.motion.components.SteeringComponent;
 
 import helios.scene.SceneNode;
 import helios.util.Guid;
 import helios.core.spatial.Transform;
 import helios.math;
 import helios.core.units.Unit;
-import helios.engine.game.Component;
+import helios.engine.game.CloneableComponent;
 import helios.engine.game.GameObject;
 import helios.engine.game.scene.components.SceneNodeComponent;
 
@@ -30,9 +30,9 @@ export namespace helios::engine::game::physics::motion::components {
      * This component handles the rotational physics of an entity, including
      * turning towards a target direction, rotation speed limits, and dampening.
      * It maintains the current and target rotation angles and is used by the
-     * HeadingSystem to update the entity's orientation.
+     * SteeringSystem to update the entity's orientation.
      */
-    class HeadingComponent : public helios::engine::game::Component {
+    class SteeringComponent : public helios::engine::game::CloneableComponent<SteeringComponent> {
 
     protected:
 
@@ -89,7 +89,7 @@ export namespace helios::engine::game::physics::motion::components {
         /**
          * @brief Indicates whether input is currently being received.
          */
-        bool isInputActive_ = true;
+        bool stateChanged_ = true;
 
         /**
          * @brief Intensity of the turn input, typically from 0.0 to 1.0.
@@ -102,10 +102,65 @@ export namespace helios::engine::game::physics::motion::components {
         /**
          * @brief Current steering input as 2D direction vector.
          */
-        helios::math::vec3f headingInput_;
+        helios::math::vec3f steeringInput_;
 
+        /**
+         * @brief The axis around which rotation occurs.
+         *
+         * @details Defaults to Z-axis for 2D top-down rotation.
+         */
+        helios::math::vec3f rotationAxis_ = helios::math::Z_AXISf;
+
+        /**
+         * @brief Flag for instant rotation mode.
+         *
+         * @details When true, the entity snaps to the target rotation instantly
+         * rather than smoothly interpolating.
+         */
+        bool useInstantRotation_ = false;
 
     public:
+
+        /**
+         * @brief Default constructor.
+         */
+        SteeringComponent() = default;
+
+        /**
+         * @brief Constructs a SteeringComponent with specified instant rotation mode.
+         *
+         * @param useInstantRotation If true, rotation snaps instantly to target.
+         */
+        explicit SteeringComponent(bool useInstantRotation) :
+        useInstantRotation_(useInstantRotation) {}
+
+        /**
+         * @brief Copy constructor.
+         *
+         * @param other The component to copy from.
+         */
+        explicit SteeringComponent(const SteeringComponent& other) :
+            useInstantRotation_(other.useInstantRotation_),
+            rotationSpeed_(other.rotationSpeed_),
+            rotationSpeedThreshold_(other.rotationSpeedThreshold_),
+            rotationDampening_(other.rotationDampening_),
+            rotationAxis_(other.rotationAxis_) {}
+
+        /**
+         * @deprecated Use setSteeringIntent instead.
+         */
+        void setHeading(helios::math::vec3f direction, float turnIntensity) {
+            setSteeringIntent(direction, turnIntensity);
+        }
+
+        /**
+         * @brief Returns whether instant rotation mode is enabled.
+         *
+         * @return True if rotation snaps instantly, false for smooth interpolation.
+         */
+        [[nodiscard]] bool useInstantRotation() const noexcept {
+            return useInstantRotation_;
+        }
 
         /**
          * @brief Sets the heading direction and turn intensity from input.
@@ -119,15 +174,15 @@ export namespace helios::engine::game::physics::motion::components {
          *
          * @pre direction must be a normalized vector (length ~= 1.0).
          */
-        void setHeading(helios::math::vec3f direction, float turnIntensity) {
+        void setSteeringIntent(helios::math::vec3f direction, float turnIntensity) {
 
-            headingInput_ = direction;
+            steeringInput_ = direction;
             turnIntensity_ = turnIntensity;
-            isInputActive_ = true;
+            stateChanged_ = true;
 
             if (turnIntensity_ <= helios::math::EPSILON_LENGTH) {
-                headingInput_ = {0.0f, 0.0f, 0.0f};
-                isInputActive_ = false;
+                steeringInput_ = {0.0f, 0.0f, 0.0f};
+                stateChanged_ = false;
                 turnIntensity_ = 0.0f;
                 return;
             }
@@ -143,7 +198,7 @@ export namespace helios::engine::game::physics::motion::components {
          * @return The rotation axis as a unit vector.
          */
         [[nodiscard]] helios::math::vec3f rotationAxis() const noexcept {
-            return helios::math::Z_AXISf;
+            return rotationAxis_;
         }
 
         /**
@@ -223,8 +278,8 @@ export namespace helios::engine::game::physics::motion::components {
          *
          * @return True if input is active, false otherwise.
          */
-        [[nodiscard]] bool isInputActive() const noexcept {
-            return isInputActive_;
+        [[nodiscard]] bool stateChanged() const noexcept {
+            return stateChanged_;
         }
 
         /**
@@ -232,8 +287,8 @@ export namespace helios::engine::game::physics::motion::components {
          *
          * @return Const reference to the 2D steering input vector.
          */
-        [[nodiscard]] const helios::math::vec3f& headingInput() const noexcept {
-            return headingInput_;
+        [[nodiscard]] const helios::math::vec3f& steeringInput() const noexcept {
+            return steeringInput_;
         }
 
         /**
@@ -274,8 +329,6 @@ export namespace helios::engine::game::physics::motion::components {
         void setRotationSpeedThreshold(float value) noexcept {
             rotationSpeedThreshold_ = value;
         }
-
-
 
         /**
          * @brief Sets the rotation dampening factor.

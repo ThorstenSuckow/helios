@@ -1,4 +1,4 @@
-# helios.engine.core
+# helios::engine::core
 
 Core engine infrastructure providing fundamental building blocks for the helios engine.
 

@@ -1,4 +1,4 @@
-# helios.engine.factory
+# helios::engine::factory
 
 Factory classes for creating and pooling GameObjects from prefab templates.
 

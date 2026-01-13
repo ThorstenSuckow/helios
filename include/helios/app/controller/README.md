@@ -1,4 +1,4 @@
-## helios::app::controller
+# helios::app::controller
 
 This namespace contains various controller classes that manage the interaction between windows, rendering, and application logic.
 

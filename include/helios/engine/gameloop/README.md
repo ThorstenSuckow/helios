@@ -1,4 +1,4 @@
-# helios.engine.gameloop
+# helios::engine::gameloop
 
 Central game loop orchestration module providing phased system execution.
 
@@ -31,15 +31,15 @@ Commands can be enqueued into the CommandBuffer during any phase, not just the P
 ```cpp
 #include "helios/engine/gameloop/GameLoop.ixx"
 
-helios::engine::gameloop::GameLoop gameLoop;
+helios.engine.gameloop.GameLoop gameLoop;
 
 // Configure Pre phase
-gameLoop.phase(PhaseType::Pre)
+gameLoop.phase(PhaseType.Pre)
     .addPass()
         .add<InputSystem>(&inputManager);
 
 // Configure Main phase
-gameLoop.phase(PhaseType::Main)
+gameLoop.phase(PhaseType.Main)
     .addPass()
         .add<MovementSystem>(&gameWorld)
         .add<HeadingSystem>(&gameWorld)
@@ -51,7 +51,7 @@ gameLoop.phase(PhaseType::Main)
         .add<CollisionSystem>(&gameWorld); 
 
 // Configure Post phase
-gameLoop.phase(PhaseType::Post)
+gameLoop.phase(PhaseType.Post)
     .addPass()
         .add<SceneSyncSystem>(&gameWorld, &scene)
         .add<TransformClearSystem>(&gameWorld);

@@ -1,4 +1,4 @@
-## helios::rendering::asset::shape::basic
+# helios::rendering::asset::shape::basic
 
 This namespace provides basic geometric primitives such as cubes and other fundamental shapes commonly used in 3D rendering. Provides commonly used primitive shapes for rapid prototyping and basic scene construction.
 

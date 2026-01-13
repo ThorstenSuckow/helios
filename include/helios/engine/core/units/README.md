@@ -1,4 +1,4 @@
-# helios.engine.core.units
+# helios::engine::core::units
 
 Canonical unit definitions for consistent spatial and temporal measurements.
 

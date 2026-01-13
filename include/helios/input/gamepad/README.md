@@ -1,4 +1,4 @@
-## helios::input::gamepad
+# helios::input::gamepad
 
 This namespace provides gamepad input handling, state management, and input normalization. It offers a flexible architecture for processing analog stick input with configurable deadzones and axis inversion.
 

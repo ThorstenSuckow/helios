@@ -1,21 +1,75 @@
 # helios::engine::game
 
-Game logic infrastructure using the Command pattern for decoupled, testable, and deterministic game systems.
+Domain-specific components, systems, and gameplay mechanics built on top of the ECS architecture.
 
-This module provides the foundational architecture for game logic in helios. It follows a composition-based component model where `GameObject` instances own `Component` instances that define behavior. Game actions are encapsulated as `Command` objects, enabling features like replay systems, undo/redo, and network synchronization.
+## Overview
 
-The `GameWorld` serves as the central registry for all entities and systems. It manages:
-- **GameObjects**: Individual game entities identified by unique `Guid`.
-- **Systems**: Global logic processors for cross-cutting concerns (physics, collision, pooling).
-- **GameObjectPool**: Memory-efficient object pooling for frequently spawned/despawned entities.
+This module provides concrete game logic implementations using the composition-based component model. While `helios.engine.ecs` provides the base classes (GameObject, Component, System), this module contains the actual gameplay functionality.
 
-Systems are updated each frame after all GameObjects, providing a clear execution order.
+## Submodules
+
+| Module | Purpose |
+|--------|---------|
+| `gameplay/` | High-level mechanics (bounds, combat, spawn) |
+| `physics/` | Physics simulation (collision, motion) |
+| `spatial/` | Transform management (translation, rotation, scale) |
+| `scene/` | Scene graph integration |
+| `rendering/` | Renderable components |
+| `model/` | Model/mesh-related components |
+| `input/` | Input handling components |
+| `pool/` | Object pool components |
+
+## Architecture
+
+```
+helios.engine.game
+├── gameplay/
+│   ├── bounds/      # Level boundary behavior
+│   ├── combat/      # Shooting, projectiles
+│   └── spawn/       # Entity spawning
+├── physics/
+│   ├── collision/   # AABB, collision detection
+│   └── motion/      # Movement, steering
+├── spatial/
+│   └── transform/   # Translation, rotation, scale components
+├── scene/           # SceneNode integration
+├── rendering/       # Renderable components
+├── model/           # Model AABB components
+├── input/           # Twin-stick input
+└── pool/            # Pool ID components
+```
+
+## Relationship to ECS
+
+This module **imports** from `helios.engine.ecs`:
+
+- `GameObject`, `Component` — Base classes extended by domain components
+- `System` — Base class extended by domain systems
+- `GameWorld` — Used by systems for entity queries
+- `Manager` — Extended by domain managers (ProjectilePoolManager)
+
+## Usage Example
+
+```cpp
+import helios.engine.game;
+
+// Add domain components
+entity->add<Move2DComponent>();
+entity->add<CollisionComponent>(layerId, mask);
+entity->add<SceneNodeComponent>(sceneNode);
+
+// Add domain systems to game loop
+gameLoop.phase(PhaseType.Main)
+    .addPass()
+    .addSystem<Move2DSystem>(gameWorld)
+    .addSystem<GridCollisionDetectionSystem>(gameWorld);
+```
 
 ---
 
 <details>
 <summary>Doxygen</summary><p>
 @namespace helios::engine::game
-@brief Game logic infrastructure using Command pattern for decoupled, deterministic game systems.
-@details This namespace provides game logic infrastructure using the Command pattern for decoupled, testable, and deterministic game systems. It includes entity management (GameWorld, GameObject), system infrastructure (System), input processing (InputSnapshot), component system (Component, Updatable), and command execution (Command, CommandBuffer) facilities that enable advanced features like replay systems and undo/redo.
+@brief Domain-specific components, systems, and gameplay mechanics.
+@details This namespace provides concrete game logic implementations built on top of the ECS architecture. It includes physics systems (collision, motion), gameplay mechanics (combat, spawn, bounds), scene integration, and input handling components.
 </p></details>

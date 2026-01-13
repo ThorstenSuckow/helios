@@ -1,4 +1,4 @@
-# helios.engine.ecs
+# helios::engine::ecs
 
 Core Entity-Component-System architecture for the helios game engine.
 

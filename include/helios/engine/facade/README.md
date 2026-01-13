@@ -1,4 +1,4 @@
-# helios.engine.facade
+# helios::engine::facade
 
 Facade classes for coordinating interactions between engine subsystems.
 

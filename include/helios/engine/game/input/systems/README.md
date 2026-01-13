@@ -1,4 +1,4 @@
-# helios.engine.game.input.components
+# helios::engine::game::input::components
 
 Input handling components that translate device input into game commands.
 

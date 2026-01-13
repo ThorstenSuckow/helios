@@ -1,4 +1,4 @@
-## helios::rendering::model::config
+# helios::rendering::model::config
 
 This namespace provides configuration containers for providing configuration options for models, impacting draw calls.
 

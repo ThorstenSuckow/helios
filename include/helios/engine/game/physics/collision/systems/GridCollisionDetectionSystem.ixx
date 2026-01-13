@@ -26,7 +26,10 @@ import helios.engine.game.physics.collision.events.TriggerCollisionEvent;
 import helios.engine.game.physics.collision.events.SolidCollisionEvent;
 
 import helios.engine.game.physics.collision.components.CollisionComponent;
+import helios.engine.game.physics.collision.components.CollisionStateComponent;
 import helios.engine.game.physics.collision.components.AabbColliderComponent;
+
+import helios.engine.game.physics.collision.types.CollisionBehavior;
 
 import helios.util.Guid;
 import helios.math;
@@ -79,6 +82,8 @@ export namespace helios::engine::game::physics::collision::systems {
             bool isTriggerCollision = false;
             bool aIsCollisionReporter = false;
             bool bIsCollisionReporter = false;
+            helios::engine::game::physics::collision::types::CollisionBehavior aCollisionBehavior;
+            helios::engine::game::physics::collision::types::CollisionBehavior bCollisionBehavior;
 
             [[nodiscard]] inline constexpr bool hasAnyInteraction() const noexcept {
                 return (isSolidCollision || isTriggerCollision) && (aIsCollisionReporter || bIsCollisionReporter);
@@ -135,6 +140,11 @@ export namespace helios::engine::game::physics::collision::systems {
              * @brief Pointer to the collision component defining layer masks and collision behavior.
              */
             CollisionComponent* collisionComponent;
+
+            /**
+             * @brief Pointer to the collision state component for storing collision results.
+             */
+            CollisionStateComponent* collisionStateComponent;
         };
 
         /**
@@ -251,57 +261,47 @@ export namespace helios::engine::game::physics::collision::systems {
         /**
          * @brief Posts collision events to the UpdateContext's event sink.
          *
-         * Publishes TriggerCollisionEvent and/or SolidCollisionEvent to the UpdateContext
-         * based on the collision type and reporter flags. An entity marked as
-         * collision reporter receives the event as the "source" entity.
+         * @details Updates the CollisionStateComponent of both entities with collision
+         * information including contact point, collision type, behavior, and reporter status.
+         * An entity marked as collision reporter receives the event as the "source" entity.
          *
          * @param candidate First collision candidate (potential event source).
          * @param match Second collision candidate (collision partner).
          * @param contact The contact point between the two AABBs.
-         * @param aIsCollisionReporter True if candidate reports collisions.
-         * @param bIsCollisionReporter True if match reports collisions.
-         * @param isSolidCollision True if this is a solid (physical) collision.
-         * @param isTriggerCollision True if this is a trigger (gameplay) collision.
+         * @param collisionStruct Struct containing collision type and behavior information.
          * @param updateContext Context for pushing events to the event queue.
+         * @param csc_a Collision state component of the first entity.
+         * @param csc_b Collision state component of the second entity.
          */
         inline void postEvent(
-            helios::engine::game::GameObject* candidate,
-            helios::engine::game::GameObject* match,
-            helios::math::vec3f contact,
-            bool aIsCollisionReporter,
-            bool bIsCollisionReporter,
-            bool isSolidCollision,
-            bool isTriggerCollision,
-            helios::engine::game::UpdateContext& updateContext
+            const helios::engine::game::GameObject* candidate,
+            const helios::engine::game::GameObject* match,
+            const helios::math::vec3f contact,
+            const CollisionStruct collisionStruct,
+            const helios::engine::game::UpdateContext& updateContext,
+            CollisionStateComponent* csc_a,
+            CollisionStateComponent* csc_b
         ) const noexcept {
+
+            bool aIsCollisionReporter = collisionStruct.aIsCollisionReporter;
+            bool bIsCollisionReporter = collisionStruct.bIsCollisionReporter;
+            bool isSolidCollision     = collisionStruct.isSolidCollision;
+            bool isTriggerCollision   = collisionStruct.isTriggerCollision;
 
             assert((isSolidCollision || isTriggerCollision)
                 && (aIsCollisionReporter || bIsCollisionReporter)
                 && "Preconditions not matched for postEvent.");
 
             // post the events
-            if (isTriggerCollision) {
-                if (aIsCollisionReporter) {
-                    updateContext.pushEvent<helios::engine::game::physics::collision::events::TriggerCollisionEvent>(
-                        candidate, match, contact
-                    );
-                } else if (bIsCollisionReporter) {
-                    updateContext.pushEvent<helios::engine::game::physics::collision::events::TriggerCollisionEvent>(
-                        match, candidate, contact
-                    );
-                }
-            }
-
-            if (isSolidCollision) {
-                if (aIsCollisionReporter) {
-                    updateContext.pushEvent<helios::engine::game::physics::collision::events::SolidCollisionEvent>(
-                        candidate, match, contact
-                    );
-                } else if (bIsCollisionReporter) {
-                    updateContext.pushEvent<helios::engine::game::physics::collision::events::SolidCollisionEvent>(
-                        match, candidate, contact
-                    );
-                }
+            if (isTriggerCollision || isSolidCollision) {
+                csc_a->setState(
+                    contact, isSolidCollision, isTriggerCollision, collisionStruct.aCollisionBehavior,
+                    aIsCollisionReporter, match->guid()
+                );
+                csc_b->setState(
+                    contact, isSolidCollision, isTriggerCollision, collisionStruct.bCollisionBehavior,
+                    bIsCollisionReporter, candidate->guid()
+                );
             }
 
         }
@@ -357,7 +357,11 @@ export namespace helios::engine::game::physics::collision::systems {
                 isSolidCollision,
                 isTriggerCollision,
                 aIsCollisionReporter,
-                bIsCollisionReporter
+                bIsCollisionReporter,
+                isSolidCollision
+                ? cc->solidCollisionBehavior(matchCC->layerId()) : cc->triggerCollisionBehavior(matchCC->layerId()),
+                isSolidCollision
+                ? matchCC->solidCollisionBehavior(cc->layerId()) : matchCC->triggerCollisionBehavior(cc->layerId())
             };
         }
 
@@ -403,11 +407,12 @@ export namespace helios::engine::game::physics::collision::systems {
 
             prepareCollisionDetection();
 
-            // only consider enabled CollisionComponents
+            // only consider enabled CollisionSettingsComponents
             constexpr auto filter = helios::engine::core::data::GameObjectFilter::Active | helios::engine::core::data::GameObjectFilter::ComponentEnabled;
 
-            for (auto [entity, cc, acc] : gameWorld_->find<
+            for (auto [entity, cc, csc, acc] : gameWorld_->find<
                 CollisionComponent,
+                CollisionStateComponent,
                 AabbColliderComponent
 
             >(filter).each()) {
@@ -426,7 +431,8 @@ export namespace helios::engine::game::physics::collision::systems {
                     entity,
                     worldBoundsToGridBounds(worldBounds),
                     acc,
-                    cc
+                    cc,
+                    csc
                 );
             }
 
@@ -490,7 +496,8 @@ export namespace helios::engine::game::physics::collision::systems {
             helios::engine::game::GameObject* go,
             const helios::math::aabbi& bounds,
             AabbColliderComponent* aabbColliderComponent,
-            CollisionComponent* collisionComponent
+            CollisionComponent* collisionComponent,
+            CollisionStateComponent* collisionStateComponent
         ) {
             const auto xMin = bounds.min()[0];
             const auto xMax = bounds.max()[0];
@@ -508,7 +515,8 @@ export namespace helios::engine::game::physics::collision::systems {
                             CollisionCandidate{
                                 go,
                                 aabbColliderComponent,
-                                collisionComponent
+                                collisionComponent,
+                                collisionStateComponent
                             }
                         );
 
@@ -556,14 +564,16 @@ export namespace helios::engine::game::physics::collision::systems {
 
                 CollisionCandidate& candidate = candidates[i];
                 CollisionComponent* cc = candidate.collisionComponent;
+                CollisionStateComponent* csc = candidate.collisionStateComponent;
 
                 const helios::math::aabbf& aabbCandidate = candidate.aabbColliderComponent->bounds();
 
                 for (size_t j = i+1; j < candidates.size(); j++) {
 
-                    auto& [gameObject, aabbColliderComponent, collisionComponent] = candidates[j];
+                    auto& [gameObject, aabbColliderComponent, collisionComponent, collisionStateComponent] = candidates[j];
 
-                    CollisionComponent* matchCC = collisionComponent;
+                    CollisionComponent* matchCC       = collisionComponent;
+                    CollisionStateComponent* matchCSC = collisionStateComponent;
 
                     const auto collisionStruct = findCollisionType(cc, matchCC);
 
@@ -583,6 +593,7 @@ export namespace helios::engine::game::physics::collision::systems {
                         std::swap(lGuid, rGuid);
                     }
 
+                    // if we have already processed a collision, do not add this collision again.
                     if (solvedCollisions_.contains({lGuid, rGuid})) {
                         continue;
                     }
@@ -592,9 +603,8 @@ export namespace helios::engine::game::physics::collision::systems {
                     postEvent(
                         candidate.gameObject, gameObject,
                         helios::math::overlapCenter(aabbCandidate, aabbMatch),
-                        collisionStruct.aIsCollisionReporter, collisionStruct.bIsCollisionReporter,
-                        collisionStruct.isSolidCollision, collisionStruct.isTriggerCollision,
-                        updateContext
+                        collisionStruct,
+                        updateContext, csc, matchCSC
                     );
                 }
             }

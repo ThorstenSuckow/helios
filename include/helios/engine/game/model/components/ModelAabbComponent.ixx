@@ -7,7 +7,7 @@ module;
 export module helios.engine.game.model.components.ModelAabbComponent;
 
 import helios.math.types;
-import helios.engine.game.Component;
+import helios.engine.game.CloneableComponent;
 import helios.core.spatial.Transform;
 
 export namespace helios::engine::game::model::components {
@@ -20,7 +20,7 @@ export namespace helios::engine::game::model::components {
      * from a 3D model or mesh. It is essential for culling, collision detection, and
      * other spatial queries.
      */
-    class ModelAabbComponent : public helios::engine::game::Component {
+    class ModelAabbComponent : public helios::engine::game::CloneableComponent<ModelAabbComponent> {
 
         /**
          * @brief The stored AABB.
@@ -34,6 +34,9 @@ export namespace helios::engine::game::model::components {
          * @brief Default constructor.
          */
         ModelAabbComponent() = default;
+
+        explicit ModelAabbComponent(const ModelAabbComponent& other) :
+        aabb_(other.aabb_) {}
 
         /**
          * @brief Sets the AABB for this component.

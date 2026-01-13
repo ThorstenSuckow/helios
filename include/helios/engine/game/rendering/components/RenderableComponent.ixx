@@ -9,7 +9,7 @@ module;
 
 export module helios.engine.game.rendering.components.RenderableComponent;
 
-import helios.engine.game.Component;
+import helios.engine.game.CloneableComponent;
 import helios.engine.game.GameObject;
 
 import helios.rendering.Renderable;
@@ -27,7 +27,7 @@ export namespace helios::engine::game::rendering::components {
      * When attached, it automatically extracts the AABB from the renderable's mesh
      * and populates a ModelAabbComponent on the same GameObject.
      */
-    class RenderableComponent : public helios::engine::game::Component {
+    class RenderableComponent : public helios::engine::game::CloneableComponent<RenderableComponent> {
 
         /**
          * @brief Shared pointer to the renderable resource.
@@ -47,7 +47,6 @@ export namespace helios::engine::game::rendering::components {
          * @param renderable Shared pointer to the Renderable. Must not be nullptr.
          */
         explicit RenderableComponent(std::shared_ptr<helios::rendering::Renderable> renderable) :
-        Component(),
         renderable_(std::move(renderable)) {
 
             assert(renderable_ != nullptr && "renderable must not be nullptr");
@@ -56,6 +55,12 @@ export namespace helios::engine::game::rendering::components {
                   : helios::math::aabbf{};
 
         }
+
+        /**
+         * @brief Copy Constructor
+         */
+        explicit RenderableComponent(const RenderableComponent& other)  :
+        renderable_(std::move(other.renderable_)), aabb_(other.aabb_) {}
 
 
         /**

@@ -5,6 +5,8 @@
 module;
 
 #include <cassert>
+#include <memory>
+
 
 export module helios.engine.game.scene.components.SceneNodeComponent;
 
@@ -12,7 +14,7 @@ import helios.scene.SceneNode;
 import helios.math.types;
 import helios.core.units.Unit;
 
-import helios.engine.game.Component;
+import helios.engine.game.CloneableComponent;
 import helios.engine.game.GameObject;
 
 import helios.engine.game.rendering.components.RenderableComponent;
@@ -30,7 +32,7 @@ export namespace helios::engine::game::scene::components {
      *
      * @note The SceneNode must remain valid for the lifetime of this component.
      */
-    class SceneNodeComponent : public helios::engine::game::Component {
+    class SceneNodeComponent : public helios::engine::game::CloneableComponent<SceneNodeComponent> {
 
     protected:
 
@@ -54,6 +56,19 @@ export namespace helios::engine::game::scene::components {
             assert(sceneNode_ != nullptr && "sceneNode must not be nullptr");
         }
 
+        explicit SceneNodeComponent(const SceneNodeComponent& other) {
+
+            auto* parent = other.sceneNode_->parent();
+
+            assert(parent != nullptr && "unexpected nullptr for SceneNode's parent");
+
+            auto sceneNode = std::make_unique<helios::scene::SceneNode>(other.sceneNode_->renderable());
+
+            sceneNode_ = parent->addNode(std::move(sceneNode));
+        }
+
+
+
         /**
          * @brief Called when the component is attached to a GameObject.
          *
@@ -65,6 +80,8 @@ export namespace helios::engine::game::scene::components {
          */
         void onAttach(helios::engine::game::GameObject* gameObject) noexcept override {
             Component::onAttach(gameObject);
+
+            assert(sceneNode_->renderable() != nullptr && "Unexpected nullptr for SceneNode's renderable");
 
             // this will automatically create the RenderableComponent if not alreay registered
             gameObject->getOrAdd<helios::engine::game::rendering::components::RenderableComponent>(sceneNode_->renderable());

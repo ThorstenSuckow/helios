@@ -7,7 +7,7 @@ module;
 export module helios.engine.game.spatial.transform.components.TransformComponent;
 
 import helios.math.types;
-import helios.engine.game.Component;
+import helios.engine.game.CloneableComponent;
 import helios.core.spatial.Transform;
 
 export namespace helios::engine::game::spatial::transform::components {
@@ -20,7 +20,7 @@ export namespace helios::engine::game::spatial::transform::components {
      * Changes to local properties mark the component as dirty, signaling systems to
      * recompute the world transform.
      */
-    class TransformComponent : public helios::engine::game::Component {
+    class TransformComponent : public helios::engine::game::CloneableComponent<TransformComponent> {
 
         /**
          * @brief The local transformation (translation, rotation, scale).
@@ -40,6 +40,21 @@ export namespace helios::engine::game::spatial::transform::components {
 
     public:
 
+        /**
+         * @brief Default constructor.
+         */
+        TransformComponent() = default;
+
+        /**
+         * @brief Copy constructor.
+         *
+         * @param other The component to copy from.
+         */
+        explicit TransformComponent(const TransformComponent& other) :
+            transform_(other.transform_),
+            worldTransform_(other.worldTransform_),
+            isDirty_(other.isDirty_){
+        }
 
         /**
          * @brief Checks if the transform is dirty.

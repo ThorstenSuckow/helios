@@ -7,10 +7,13 @@ module;
 
 export module helios.engine.game.physics.motion.components.SpinComponent;
 
-import helios.engine.game.Component;
+import helios.engine.game.CloneableComponent;
 
 import helios.math;
 
+/**
+ * @todo move to spatial or effects
+ */
 export namespace helios::engine::game::physics::motion::components {
 
     /**
@@ -21,7 +24,7 @@ export namespace helios::engine::game::physics::motion::components {
      * around a specific axis. It stores the rotation speed, axis, and current
      * rotation state.
      */
-    class SpinComponent : public Component {
+    class SpinComponent : public CloneableComponent<SpinComponent> {
 
         /**
          * @brief Rotation speed in degrees per second.
@@ -50,6 +53,15 @@ export namespace helios::engine::game::physics::motion::components {
             const float rotationSpeed, const helios::math::vec3f rotationAxis
         ) : rotationSpeed_(rotationSpeed),
             rotationAxis_(rotationAxis) {}
+
+        /**
+         * @brief Copy constructor.
+         *
+         * @param other The component to copy from.
+         */
+        explicit SpinComponent(const SpinComponent& other)
+        : rotationSpeed_(other.rotationSpeed_),
+          rotationAxis_(other.rotationAxis_) {}
 
         /**
          * @brief Returns the rotation axis.

@@ -7,7 +7,7 @@ module;
 export module helios.engine.game.spatial.transform.components.ScaleComponent;
 
 import helios.math.types;
-import helios.engine.game.Component;
+import helios.engine.game.CloneableComponent;
 import helios.core.spatial.Transform;
 import helios.core.units.Unit;
 
@@ -22,7 +22,7 @@ export namespace helios::engine::game::spatial::transform::components {
      * unit of measurement. It tracks changes via a dirty flag, allowing other systems
      * to react to scale updates.
      */
-    class ScaleComponent : public helios::engine::game::Component {
+    class ScaleComponent : public helios::engine::game::CloneableComponent<ScaleComponent> {
 
         /**
          * @brief Width of the entity.
@@ -61,6 +61,15 @@ export namespace helios::engine::game::spatial::transform::components {
          */
         explicit ScaleComponent(const float width, const float height, const float depth, helios::core::units::Unit unit) :
         width_(width), height_(height), depth_(depth), unit_(unit) {}
+
+        /**
+         * @brief Copy constructor.
+         *
+         * @param other The component to copy from.
+         */
+        explicit ScaleComponent(const ScaleComponent& other) :
+               width_(other.width_), height_(other.height_), depth_(other.depth_), unit_(other.unit_) {}
+
 
         /**
          * @brief Called when the component is attached to a GameObject.

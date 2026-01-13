@@ -8,7 +8,7 @@ module;
 
 export module helios.engine.game.spatial.transform.components.TranslationStateComponent;
 
-import helios.engine.game.Component;
+import helios.engine.game.CloneableComponent;
 
 import helios.math;
 
@@ -22,7 +22,7 @@ export namespace helios::engine::game::spatial::transform::components {
      * container for the ComposeTransformSystem to build the final translation matrix.
      * It separates the raw position data from the computed TransformComponent.
      */
-    class TranslationStateComponent : public Component {
+    class TranslationStateComponent : public CloneableComponent<TranslationStateComponent> {
 
         /**
          * @brief The current translation vector.
@@ -30,6 +30,21 @@ export namespace helios::engine::game::spatial::transform::components {
         helios::math::vec3f translation_{};
 
     public:
+
+        /**
+         * @brief Default constructor.
+         */
+        TranslationStateComponent() = default;
+
+        /**
+         * @brief Copy constructor.
+         *
+         * @param other The component to copy from.
+         */
+        explicit TranslationStateComponent(const TranslationStateComponent& other) :
+            translation_(other.translation_){
+        }
+
         /**
          * @brief Sets the absolute translation.
          *

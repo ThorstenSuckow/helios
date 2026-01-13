@@ -28,62 +28,79 @@ export namespace helios::engine::core::messaging::event {
      * @details GameLoopEventBus is a type alias for TypeIndexedDoubleBuffer configured
      * with a dedicated index space for game loop events. It enables systems to publish
      * events during their update phase, which become available for consumption after
-     * the buffer swap at frame boundaries.
+     * the buffer swap.
      *
-     * Events are pushed during system updates and read in subsequent phases or frames,
-     * enabling temporal decoupling between event producers and consumers.
+     * ## Phase/Pass Event Model
      *
-     * Example usage:
+     * The GameLoop uses multiple event buses to control event visibility:
+     *
+     * - **Pass Events:** Events written with `push()` are available to subsequent passes
+     *   within the **same phase only**. They are **always cleared** at the end of the phase.
+     *
+     * - **Phase Events:** Events written with `phasePush()` are preserved across phase
+     *   boundaries and available in subsequent phases of the same frame.
+     *
+     * This allows fine-grained control over event propagation:
+     *
+     * ```
+     * ┌─────────────────────────────────────────────────────────────┐
+     * │                         FRAME                               │
+     * ├─────────────────────────────────────────────────────────────┤
+     * │  PRE PHASE                                                  │
+     * │    Pass 1: push<InputEvent>()     → available in Pass 2     │
+     * │    Pass 2: read<InputEvent>()     ✓ works                   │
+     * │            phasePush<SpawnReq>()  → available in MAIN       │
+     * │    [Phase Commit] ← Pass events CLEARED                     │
+     * │                                                             │
+     * │  MAIN PHASE                                                 │
+     * │    Pass 1: read<InputEvent>()     ✗ EMPTY (cleared!)        │
+     * │            read<SpawnReq>()       ✓ works (phasePush)       │
+     * │            push<CollisionEvent>() → available in Pass 2     │
+     * │    Pass 2: read<CollisionEvent>() ✓ works                   │
+     * │    [Phase Commit] ← Pass events CLEARED                     │
+     * │                                                             │
+     * │  POST PHASE                                                 │
+     * │    Pass 1: read<CollisionEvent>() ✗ EMPTY (cleared!)        │
+     * │            read<SpawnReq>()       ✓ works (phasePush)       │
+     * │    [Phase Commit] ← All events CLEARED for next frame       │
+     * └─────────────────────────────────────────────────────────────┘
+     * ```
+     *
+     * ## Usage Example
+     *
      * ```cpp
      * // Define an event type
      * struct CollisionEvent {
-     *     EntityId a;
-     *     EntityId b;
+     *     Guid entityA;
+     *     Guid entityB;
      *     vec3f contactPoint;
      * };
      *
-     * // In collision detection system
+     * // In collision detection system (Main Phase, Pass 1)
+     * // Use push() for events only needed within this phase
      * eventBus.push<CollisionEvent>(entityA, entityB, contact);
      *
-     * // At frame boundary (in game loop)
-     * eventBus.swapBuffers();
-     *
-     * // In damage system (reads events from previous frame)
+     * // In damage system (Main Phase, Pass 2) - same phase, works!
      * for (const auto& evt : eventBus.read<CollisionEvent>()) {
-     *     applyDamage(evt.a, evt.b);
+     *     applyDamage(evt.entityA, evt.entityB);
      * }
+     *
+     * // For events needed in subsequent phases, use phasePush()
+     * eventBus.phasePush<SpawnRequestEvent>(poolId, position);
      * ```
      *
+     * @warning Pass events (`push()`) are **always cleared** at phase boundaries.
+     *          They are NOT available in subsequent phases. Use `phasePush()` for
+     *          events that must survive into subsequent phases.
+     *
      * @see helios::core::buffer::TypeIndexedDoubleBuffer
+     * @see UpdateContext — Provides access to the event bus in systems
+     * @see GameLoop — Manages event bus lifecycle and commit points
      */
     using GameLoopEventBus = helios::core::buffer::TypeIndexedDoubleBuffer<
         helios::core::data::TypeIndexer<GameLoopEventBusGroup>
     >;
 
-    /**
-     * @typedef GameLoopEventSink
-     * @brief Write-only handle for pushing events to the GameLoopEventBus.
-     *
-     * @details GameLoopEventSink provides a focused interface for event producers
-     * that only need to publish events. It wraps the GameLoopEventBus and exposes
-     * only the push() operation, preventing accidental buffer manipulation.
-     *
-     * Use this type for dependency injection when a system should be able to emit
-     * events but should not have access to swap or clear operations.
-     *
-     * Example usage:
-     * ```cpp
-     * class CollisionSystem {
-     * public:
-     *     void update(GameLoopEventSink& sink) {
-     *         // Can only push, cannot swap or read
-     *         sink.push<CollisionEvent>(a, b, contact);
-     *     }
-     * };
-     * ```
-     *
-     * @see GameLoopEventBus::WriteSink
-     */
-    using GameLoopEventSink = GameLoopEventBus::WriteSink;
+
 
 }

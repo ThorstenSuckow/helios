@@ -8,9 +8,9 @@ module;
 
 export module helios.engine.game.spatial.transform.systems.postproc.TransformClearSystem;
 
-import helios.engine.game.GameWorld;
-import helios.engine.game.System;
-import helios.engine.game.UpdateContext;
+import helios.engine.ecs.GameWorld;
+import helios.engine.ecs.System;
+import helios.engine.ecs.UpdateContext;
 
 import helios.engine.game.scene.components.SceneNodeComponent;
 import helios.engine.game.spatial.transform.components.TransformComponent;
@@ -25,7 +25,7 @@ export namespace helios::engine::game::spatial::transform::systems::postproc {
      * TransformComponents and resets their dirty flag if it was set. This ensures that
      * changes are only processed once per frame by other systems (like SceneSyncSystem).
      */
-    class TransformClearSystem : public System {
+    class TransformClearSystem : public helios::engine::ecs::System {
 
 
     public:
@@ -35,7 +35,7 @@ export namespace helios::engine::game::spatial::transform::systems::postproc {
          *
          * @param updateContext The update context.
          */
-        void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::ecs::UpdateContext& updateContext) noexcept override {
 
             for (auto [entity, tc] : gameWorld_->find<
                 helios::engine::game::spatial::transform::components::TransformComponent

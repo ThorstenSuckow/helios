@@ -8,16 +8,16 @@ module;
 
 export module helios.engine.game.spatial.transform.systems.ComposeTransformSystem;
 
-import helios.engine.game.System;
+import helios.engine.ecs.System;
 
 import helios.engine.game.spatial.transform.components.TranslationStateComponent;
 import helios.engine.game.physics.motion.components.RotationStateComponent;
 import helios.engine.game.spatial.transform.components.TransformComponent;
 import helios.engine.game.physics.motion.components.SpinComponent;
 
-import helios.engine.game.GameWorld;
+import helios.engine.ecs.GameWorld;
 
-import helios.engine.game.UpdateContext;
+import helios.engine.ecs.UpdateContext;
 
 import helios.math;
 
@@ -32,7 +32,7 @@ export namespace helios::engine::game::spatial::transform::systems {
      * It combines heading and spin rotations into a single rotation matrix
      * and updates the local translation.
      */
-    class ComposeTransformSystem : public System {
+    class ComposeTransformSystem : public helios::engine::ecs::System {
 
     public:
 
@@ -41,7 +41,7 @@ export namespace helios::engine::game::spatial::transform::systems {
          *
          * @param updateContext Context containing frame timing and game state.
          */
-        void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::ecs::UpdateContext& updateContext) noexcept override {
 
             const float deltaTime = updateContext.deltaTime();
 

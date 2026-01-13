@@ -8,7 +8,7 @@ module;
 
 export module helios.engine.game.pool.components.PoolIdComponent;
 
-import helios.engine.game.CloneableComponent;
+import helios.engine.ecs.CloneableComponent;
 import helios.engine.core.data.GameObjectPoolId;
 
 export namespace helios::engine::game::pool::components {
@@ -43,7 +43,7 @@ export namespace helios::engine::game::pool::components {
      * @see GameObjectPoolId
      * @see PoolRequestHandler
      */
-    class PoolIdComponent : public helios::engine::game::CloneableComponent<PoolIdComponent> {
+    class PoolIdComponent : public helios::engine::ecs::CloneableComponent<PoolIdComponent> {
 
         /**
          * @brief The ID of the pool this GameObject belongs to.

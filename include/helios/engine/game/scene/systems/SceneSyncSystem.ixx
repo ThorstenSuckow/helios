@@ -11,9 +11,9 @@ export module helios.engine.game.scene.systems.SceneSyncSystem;
 
 import helios.scene.Scene;
 
-import helios.engine.game.GameWorld;
-import helios.engine.game.System;
-import helios.engine.game.UpdateContext;
+import helios.engine.ecs.GameWorld;
+import helios.engine.ecs.System;
+import helios.engine.ecs.UpdateContext;
 
 import helios.engine.game.scene.components.SceneNodeComponent;
 import helios.engine.game.spatial.transform.components.TransformComponent;
@@ -28,7 +28,7 @@ export namespace helios::engine::game::systems::scene {
      * corresponding SceneNodes, triggers a scene graph update, and then reads back
      * the computed world transforms into the TransformComponents.
      */
-    class SceneSyncSystem : public System {
+    class SceneSyncSystem : public helios::engine::ecs::System {
 
         /**
          * @brief Pointer to the Scene being synchronized.
@@ -51,7 +51,7 @@ export namespace helios::engine::game::systems::scene {
          *
          * @param updateContext Context containing frame timing and game state.
          */
-        void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::ecs::UpdateContext& updateContext) noexcept override {
 
             auto view = gameWorld_->find<
                 helios::engine::game::spatial::transform::components::TransformComponent,

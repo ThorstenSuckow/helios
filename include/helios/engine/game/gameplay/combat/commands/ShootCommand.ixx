@@ -7,7 +7,7 @@ module;
 export module helios.engine.game.gameplay.combat.commands.ShootCommand;
 
 import helios.engine.core.messaging.command.TargetedCommand;
-import helios.engine.game.GameObject;
+import helios.engine.ecs.GameObject;
 import helios.math.types;
 import helios.engine.game.gameplay.combat.components.ShootComponent;
 import helios.engine.game.physics.motion.components.Move2DComponent;
@@ -90,7 +90,7 @@ export namespace helios::engine::game::gameplay::combat::commands {
          *
          * @param gameObject The target entity with a ShootComponent.
          */
-        void execute(helios::engine::game::GameObject& gameObject) const noexcept override {
+        void execute(helios::engine::ecs::GameObject& gameObject) const noexcept override {
 
             auto* shootComponent = gameObject.get<helios::engine::game::gameplay::combat::components::ShootComponent>();
 
@@ -112,7 +112,7 @@ export namespace helios::engine::game::gameplay::combat::commands {
          * @param dispatcher The dispatcher to route this command to.
          */
         void accept(
-            helios::engine::game::GameObject& gameObject,
+            helios::engine::ecs::GameObject& gameObject,
             helios::engine::core::messaging::command::TargetedCommandDispatcher& dispatcher
         ) const noexcept override {
             dispatcher.dispatch(gameObject, *this);

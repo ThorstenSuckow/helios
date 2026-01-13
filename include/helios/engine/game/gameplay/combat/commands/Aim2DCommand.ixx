@@ -7,7 +7,7 @@ module;
 export module helios.engine.game.gameplay.combat.commands.Aim2DCommand;
 
 import helios.engine.core.messaging.command.TargetedCommand;
-import helios.engine.game.GameObject;
+import helios.engine.ecs.GameObject;
 import helios.math.types;
 import helios.engine.game.gameplay.combat.components.Aim2DComponent;
 
@@ -61,7 +61,7 @@ export namespace helios::engine::game::gameplay::combat::commands {
          *
          * @param gameObject The target entity with an Aim2DComponent.
          */
-        void execute(helios::engine::game::GameObject& gameObject) const noexcept override {
+        void execute(helios::engine::ecs::GameObject& gameObject) const noexcept override {
 
             auto* aimComponent = gameObject.get<helios::engine::game::gameplay::combat::components::Aim2DComponent>();
 

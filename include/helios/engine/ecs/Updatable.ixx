@@ -5,10 +5,10 @@
 module;
 
 
-export module helios.engine.game.Updatable;
+export module helios.engine.ecs.Updatable;
 
 
-export namespace helios::engine::game {
+export namespace helios::engine::ecs {
 
     struct UpdateContext;
 
@@ -45,7 +45,7 @@ export namespace helios::engine::game {
          * @param updateContext Context containing deltaTime, input state, and references
          *                      to CommandBuffer and GameWorld.
          */
-        virtual void update(helios::engine::game::UpdateContext& updateContext) noexcept = 0;
+        virtual void update(helios::engine::ecs::UpdateContext& updateContext) noexcept = 0;
     };
 
 }

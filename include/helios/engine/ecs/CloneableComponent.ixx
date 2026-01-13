@@ -6,11 +6,11 @@ module;
 
 #include <memory>
 
-export module helios.engine.game.CloneableComponent;
+export module helios.engine.ecs.CloneableComponent;
 
-import helios.engine.game.Component;
+import helios.engine.ecs.Component;
 
-export namespace helios::engine::game {
+export namespace helios::engine::ecs {
 
     /**
      * @brief Interface for components that support cloning.

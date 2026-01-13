@@ -9,8 +9,8 @@ module;
 
 export module helios.engine.factory.GameObjectFactory;
 
-import helios.engine.game.GameObject;
-import helios.engine.game.GameWorld;
+import helios.engine.ecs.GameObject;
+import helios.engine.ecs.GameWorld;
 
 import helios.engine.core.data.GameObjectPool;
 import helios.engine.core.data.GameObjectPoolId;
@@ -49,7 +49,7 @@ export namespace helios::engine::factory {
          * This prefab is cloned into the GameWorld when filling a pool.
          * The factory owns this prefab exclusively.
          */
-        std::unique_ptr<helios::engine::game::GameObject> gameObjectPrefab_ = nullptr;
+        std::unique_ptr<helios::engine::ecs::GameObject> gameObjectPrefab_ = nullptr;
 
 
     public:
@@ -62,7 +62,7 @@ export namespace helios::engine::factory {
          * @pre `gameObjectPrefab != nullptr`
          */
         explicit GameObjectFactory(
-            std::unique_ptr<helios::engine::game::GameObject> gameObjectPrefab
+            std::unique_ptr<helios::engine::ecs::GameObject> gameObjectPrefab
         ) : gameObjectPrefab_(std::move(gameObjectPrefab)) {
             assert(gameObjectPrefab_ != nullptr && "unexpected nullptr for prefab");
             assert(gameObjectPrefab_->get<helios::engine::game::pool::components::PoolIdComponent>()
@@ -86,14 +86,14 @@ export namespace helios::engine::factory {
          * @param gameObjectPool The pool to fill with inactive clones.
          */
         void fillPool(
-            helios::engine::game::GameWorld& gameWorld,
+            helios::engine::ecs::GameWorld& gameWorld,
             helios::engine::core::data::GameObjectPool& gameObjectPool
         ) {
             const size_t used  = gameObjectPool.activeCount() + gameObjectPool.inactiveCount();
             const size_t space = used < gameObjectPool.size() ? gameObjectPool.size() - used : 0;
 
             for (size_t i = 0; i < space; i++) {
-                helios::engine::game::GameObject* go = gameWorld.clone(*gameObjectPrefab_);
+                helios::engine::ecs::GameObject* go = gameWorld.clone(*gameObjectPrefab_);
                 if (go) {
                     go->setActive(false);
                     gameObjectPool.addInactive(go->guid());

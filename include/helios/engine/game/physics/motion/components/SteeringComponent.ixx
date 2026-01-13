@@ -16,8 +16,8 @@ import helios.util.Guid;
 import helios.core.spatial.Transform;
 import helios.math;
 import helios.core.units.Unit;
-import helios.engine.game.CloneableComponent;
-import helios.engine.game.GameObject;
+import helios.engine.ecs.CloneableComponent;
+import helios.engine.ecs.GameObject;
 import helios.engine.game.scene.components.SceneNodeComponent;
 
 
@@ -32,7 +32,7 @@ export namespace helios::engine::game::physics::motion::components {
      * It maintains the current and target rotation angles and is used by the
      * SteeringSystem to update the entity's orientation.
      */
-    class SteeringComponent : public helios::engine::game::CloneableComponent<SteeringComponent> {
+    class SteeringComponent : public helios::engine::ecs::CloneableComponent<SteeringComponent> {
 
     protected:
 

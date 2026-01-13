@@ -12,16 +12,16 @@ export module helios.engine.game.gameplay.combat.components.ShootComponent;
 
 import helios.math.types;
 import helios.math.utils;
-import helios.engine.game.UpdateContext;
-import helios.engine.game.Updatable;
-import helios.engine.game.Component;
+import helios.engine.ecs.UpdateContext;
+import helios.engine.ecs.Updatable;
+import helios.engine.ecs.Component;
 import helios.engine.game.gameplay.combat.components.Aim2DComponent;
 import helios.engine.game.spatial.transform.components.TransformComponent;
 
 import helios.math;
 
-import helios.engine.game.GameObject;
-import helios.engine.game.GameWorld;
+import helios.engine.ecs.GameObject;
+import helios.engine.ecs.GameWorld;
 import helios.scene.SceneNode;
 
 import helios.rendering;
@@ -50,7 +50,7 @@ export namespace helios::engine::game::gameplay::combat::components {
      * shootComponent->shoot(1.0f);
      * ```
      */
-    class ShootComponent : public helios::engine::game::Component {
+    class ShootComponent : public helios::engine::ecs::Component {
 
     protected:
 
@@ -115,7 +115,7 @@ export namespace helios::engine::game::gameplay::combat::components {
          *
          * @param gameObject The GameObject this component is being attached to.
          */
-        void onAttach(::helios::engine::game::GameObject* gameObject) noexcept override {
+        void onAttach(::helios::engine::ecs::GameObject* gameObject) noexcept override {
             Component::onAttach(gameObject);
 
             aimComponent_ = gameObject->get<helios::engine::game::gameplay::combat::components::Aim2DComponent>();

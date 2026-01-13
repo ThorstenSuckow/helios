@@ -5,11 +5,11 @@ module;
 
 module helios.engine.gameloop.Pass;
 
-import helios.engine.game.System;
-import helios.engine.game.SystemRegistry;
+import helios.engine.ecs.System;
+import helios.engine.ecs.SystemRegistry;
 
-import helios.engine.game.UpdateContext;
-import helios.engine.game.GameWorld;
+import helios.engine.ecs.UpdateContext;
+import helios.engine.ecs.GameWorld;
 
 import helios.engine.gameloop.GameLoop;
 import helios.engine.gameloop.Phase;
@@ -17,12 +17,12 @@ import helios.engine.gameloop.Phase;
 namespace helios::engine::gameloop {
 
 
-    void Pass::init(helios::engine::game::GameWorld& gameWorld) {
+    void Pass::init(helios::engine::ecs::GameWorld& gameWorld) {
         for (auto& sys : systemRegistry_.systems()) {
             sys->init(gameWorld);
         }
     }
-    void Pass::update(helios::engine::game::UpdateContext& updateContext) {
+    void Pass::update(helios::engine::ecs::UpdateContext& updateContext) {
         for (auto& sys : systemRegistry_.systems()) {
             sys->update(updateContext);
         }

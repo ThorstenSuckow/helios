@@ -8,9 +8,9 @@ module;
 
 export module helios.engine.game.spatial.transform.systems.postproc.ScaleClearSystem;
 
-import helios.engine.game.GameWorld;
-import helios.engine.game.System;
-import helios.engine.game.UpdateContext;
+import helios.engine.ecs.GameWorld;
+import helios.engine.ecs.System;
+import helios.engine.ecs.UpdateContext;
 
 import helios.engine.game.spatial.transform.components.ScaleComponent;
 
@@ -24,7 +24,7 @@ export namespace helios::engine::game::spatial::transform::systems::postproc {
      * ScaleComponents and resets their dirty flag if it was set. This ensures that
      * changes are only processed once per frame by other systems (like SceneSyncSystem).
      */
-    class ScaleClearSystem : public System {
+    class ScaleClearSystem : public helios::engine::ecs::System {
 
     public:
 
@@ -33,7 +33,7 @@ export namespace helios::engine::game::spatial::transform::systems::postproc {
          *
          * @param updateContext The update context.
          */
-        void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::ecs::UpdateContext& updateContext) noexcept override {
 
             for (auto [entity, sc] : gameWorld_->find<helios::engine::game::spatial::transform::components::ScaleComponent>().each()) {
                 sc->clearDirty();

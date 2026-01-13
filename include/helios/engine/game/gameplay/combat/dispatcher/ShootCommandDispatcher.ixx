@@ -22,9 +22,9 @@ import helios.engine.game.gameplay.combat.ProjectileSpawnRequest;
 
 import helios.engine.core.messaging.command.TargetedCommandDispatcher;
 import helios.engine.core.messaging.command.TypedTargetedCommandDispatcher;
-import helios.engine.game.GameObject;
+import helios.engine.ecs.GameObject;
 
-import helios.engine.game.GameWorld;
+import helios.engine.ecs.GameWorld;
 
 
 export namespace helios::engine::game::gameplay::combat::dispatcher {
@@ -72,7 +72,7 @@ export namespace helios::engine::game::gameplay::combat::dispatcher {
          *      and Aim2DComponent attached.
          */
         void dispatchTyped(
-            helios::engine::game::GameObject& gameObject,
+            helios::engine::ecs::GameObject& gameObject,
             const helios::engine::game::gameplay::combat::commands::ShootCommand& command
         ) noexcept override {
 

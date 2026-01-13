@@ -14,8 +14,8 @@ import helios.scene.SceneNode;
 import helios.math.types;
 import helios.core.units.Unit;
 
-import helios.engine.game.CloneableComponent;
-import helios.engine.game.GameObject;
+import helios.engine.ecs.CloneableComponent;
+import helios.engine.ecs.GameObject;
 
 import helios.engine.game.rendering.components.RenderableComponent;
 
@@ -32,7 +32,7 @@ export namespace helios::engine::game::scene::components {
      *
      * @note The SceneNode must remain valid for the lifetime of this component.
      */
-    class SceneNodeComponent : public helios::engine::game::CloneableComponent<SceneNodeComponent> {
+    class SceneNodeComponent : public helios::engine::ecs::CloneableComponent<SceneNodeComponent> {
 
     protected:
 
@@ -78,7 +78,7 @@ export namespace helios::engine::game::scene::components {
          *
          * @param gameObject Pointer to the parent GameObject.
          */
-        void onAttach(helios::engine::game::GameObject* gameObject) noexcept override {
+        void onAttach(helios::engine::ecs::GameObject* gameObject) noexcept override {
             Component::onAttach(gameObject);
 
             assert(sceneNode_->renderable() != nullptr && "Unexpected nullptr for SceneNode's renderable");

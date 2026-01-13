@@ -16,8 +16,8 @@ import helios.util.Guid;
 import helios.core.spatial.Transform;
 import helios.math;
 import helios.core.units.Unit;
-import helios.engine.game.CloneableComponent;
-import helios.engine.game.GameObject;
+import helios.engine.ecs.CloneableComponent;
+import helios.engine.ecs.GameObject;
 import helios.engine.game.scene.components.SceneNodeComponent;
 
 
@@ -40,7 +40,7 @@ export namespace helios::engine::game::physics::motion::components {
      * @see helios::engine::game::physics::motion::components::SteeringComponent
      * @see helios::engine::game::physics::systems::Move2DSystem
      */
-    class Move2DComponent : public helios::engine::game::CloneableComponent<Move2DComponent> {
+    class Move2DComponent : public helios::engine::ecs::CloneableComponent<Move2DComponent> {
 
     protected:
 

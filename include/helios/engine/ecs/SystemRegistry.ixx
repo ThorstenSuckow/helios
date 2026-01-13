@@ -9,12 +9,12 @@ module;
 #include <cassert>
 
 
-export module helios.engine.game.SystemRegistry;
+export module helios.engine.ecs.SystemRegistry;
 
-import helios.engine.game.System;
+import helios.engine.ecs.System;
 
 
-export namespace helios::engine::game {
+export namespace helios::engine::ecs {
 
     /**
      * @brief Container for System instances within a game loop pass.
@@ -61,7 +61,7 @@ export namespace helios::engine::game {
         /**
          * @brief Collection of owned System instances.
          */
-        std::vector<std::unique_ptr<helios::engine::game::System>> systems_;
+        std::vector<std::unique_ptr<helios::engine::ecs::System>> systems_;
 
     public:
 
@@ -70,7 +70,7 @@ export namespace helios::engine::game {
          *
          * @return Reference to the vector of System unique_ptrs.
          */
-        [[nodiscard]] std::vector<std::unique_ptr<helios::engine::game::System>>& systems() noexcept {
+        [[nodiscard]] std::vector<std::unique_ptr<helios::engine::ecs::System>>& systems() noexcept {
             return systems_;
         }
 
@@ -87,7 +87,7 @@ export namespace helios::engine::game {
          * @pre No System of type T is already registered.
          */
         template<typename T, typename... Args>
-        requires std::is_base_of_v<helios::engine::game::System, T>
+        requires std::is_base_of_v<helios::engine::ecs::System, T>
         T& add(Args&&... args) {
             assert(!hasSystem<T>() && "System already registered with GameLoopPhase");
             auto system_ptr = std::make_unique<T>(std::forward<Args>(args)...);
@@ -104,7 +104,7 @@ export namespace helios::engine::game {
          * @return True if the System exists, false otherwise.
          */
         template<typename T>
-        requires std::is_base_of_v<helios::engine::game::System, T>
+        requires std::is_base_of_v<helios::engine::ecs::System, T>
         [[nodiscard]] bool hasSystem() const {
             return getSystem<T>() != nullptr;
         }
@@ -119,7 +119,7 @@ export namespace helios::engine::game {
          * @note Uses dynamic_cast for type checking. O(n) complexity.
          */
         template<typename T>
-        requires std::is_base_of_v<helios::engine::game::System, T>
+        requires std::is_base_of_v<helios::engine::ecs::System, T>
         [[nodiscard]] T* getSystem() const {
             for (const auto& system : systems_) {
                 if (auto* sys = dynamic_cast<T*>(system.get())) {

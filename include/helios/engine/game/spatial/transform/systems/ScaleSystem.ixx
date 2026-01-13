@@ -8,14 +8,14 @@ module;
 
 export module helios.engine.game.spatial.transform.systems.ScaleSystem;
 
-import helios.engine.game.System;
+import helios.engine.ecs.System;
 import helios.math;
 
 import helios.core.units.Unit;
 
-import helios.engine.game.GameObject;
-import helios.engine.game.GameWorld;
-import helios.engine.game.UpdateContext;
+import helios.engine.ecs.GameObject;
+import helios.engine.ecs.GameWorld;
+import helios.engine.ecs.UpdateContext;
 
 import helios.engine.game.spatial.transform.components.ScaleComponent;
 import helios.engine.game.spatial.transform.components.TransformComponent;
@@ -37,7 +37,7 @@ export namespace helios::engine::game::spatial::transform::systems {
      * - ModelAabbComponent (original model bounds)
      * - TransformComponent (receives scale updates)
      */
-    class ScaleSystem : public System {
+    class ScaleSystem : public helios::engine::ecs::System {
 
     public:
 
@@ -46,7 +46,7 @@ export namespace helios::engine::game::spatial::transform::systems {
          *
          * @param gameWorld Pointer to the GameWorld this system belongs to.
          */
-        void init(helios::engine::game::GameWorld& gameWorld) noexcept override {
+        void init(helios::engine::ecs::GameWorld& gameWorld) noexcept override {
             System::init(gameWorld);
         }
 
@@ -59,7 +59,7 @@ export namespace helios::engine::game::spatial::transform::systems {
          *
          * @param updateContext Context containing deltaTime and other frame data.
          */
-        void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::ecs::UpdateContext& updateContext) noexcept override {
 
             for (auto [entity, mab, sc, tc] : gameWorld_->find<
                 helios::engine::game::model::components::ModelAabbComponent,

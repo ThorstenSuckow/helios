@@ -15,11 +15,11 @@ module;
 
 export module helios.engine.game.physics.collision.systems.GridCollisionDetectionSystem;
 
-import helios.engine.game.System;
-import helios.engine.game.UpdateContext;
+import helios.engine.ecs.System;
+import helios.engine.ecs.UpdateContext;
 import helios.engine.core.data.GameObjectFilter;
-import helios.engine.game.GameObject;
-import helios.engine.game.GameWorld;
+import helios.engine.ecs.GameObject;
+import helios.engine.ecs.GameWorld;
 
 
 import helios.engine.game.physics.collision.events.TriggerCollisionEvent;
@@ -71,7 +71,7 @@ export namespace helios::engine::game::physics::collision::systems {
      *
      * @see [Eri05, Chapter 7]
      */
-    class GridCollisionDetectionSystem : public System {
+    class GridCollisionDetectionSystem : public helios::engine::ecs::System {
 
         /**
          * @brief Helper-struct representing the properties and interaction state of a collision
@@ -129,7 +129,7 @@ export namespace helios::engine::game::physics::collision::systems {
             /**
              * @brief Pointer to the GameObject entity.
              */
-            helios::engine::game::GameObject* gameObject;
+            helios::engine::ecs::GameObject* gameObject;
 
             /**
              * @brief Pointer to the AABB collider component providing world-space bounds.
@@ -274,11 +274,11 @@ export namespace helios::engine::game::physics::collision::systems {
          * @param csc_b Collision state component of the second entity.
          */
         inline void postEvent(
-            const helios::engine::game::GameObject* candidate,
-            const helios::engine::game::GameObject* match,
+            const helios::engine::ecs::GameObject* candidate,
+            const helios::engine::ecs::GameObject* match,
             const helios::math::vec3f contact,
             const CollisionStruct collisionStruct,
-            const helios::engine::game::UpdateContext& updateContext,
+            const helios::engine::ecs::UpdateContext& updateContext,
             CollisionStateComponent* csc_a,
             CollisionStateComponent* csc_b
         ) const noexcept {
@@ -403,7 +403,7 @@ export namespace helios::engine::game::physics::collision::systems {
          *
          * @param updateContext The update context providing access to GameWorld and event queue.
          */
-        void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::ecs::UpdateContext& updateContext) noexcept override {
 
             prepareCollisionDetection();
 
@@ -493,7 +493,7 @@ export namespace helios::engine::game::physics::collision::systems {
          * @param collisionComponent Pointer to the entity's collision component.
          */
         inline void updateCollisionCandidate(
-            helios::engine::game::GameObject* go,
+            helios::engine::ecs::GameObject* go,
             const helios::math::aabbi& bounds,
             AabbColliderComponent* aabbColliderComponent,
             CollisionComponent* collisionComponent,
@@ -543,7 +543,7 @@ export namespace helios::engine::game::physics::collision::systems {
          * @param cell The grid cell containing collision candidates to test.
          * @param updateContext Context for pushing collision events to the event queue.
          */
-        inline void solveCell(GridCell& cell, helios::engine::game::UpdateContext& updateContext) {
+        inline void solveCell(GridCell& cell, helios::engine::ecs::UpdateContext& updateContext) {
 
             auto& candidates = cell.collisionCandidates;
 

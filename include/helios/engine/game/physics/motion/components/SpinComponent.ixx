@@ -7,7 +7,7 @@ module;
 
 export module helios.engine.game.physics.motion.components.SpinComponent;
 
-import helios.engine.game.CloneableComponent;
+import helios.engine.ecs.CloneableComponent;
 
 import helios.math;
 
@@ -24,7 +24,7 @@ export namespace helios::engine::game::physics::motion::components {
      * around a specific axis. It stores the rotation speed, axis, and current
      * rotation state.
      */
-    class SpinComponent : public CloneableComponent<SpinComponent> {
+    class SpinComponent : public helios::engine::ecs::CloneableComponent<SpinComponent> {
 
         /**
          * @brief Rotation speed in degrees per second.

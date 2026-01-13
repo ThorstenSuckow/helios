@@ -9,8 +9,8 @@ module;
 
 export module helios.engine.facade.GameObjectPoolFacade;
 
-import helios.engine.game.GameObject;
-import helios.engine.game.GameWorld;
+import helios.engine.ecs.GameObject;
+import helios.engine.ecs.GameWorld;
 import helios.engine.core.data.GameObjectPool;
 
 import helios.util.Guid;
@@ -48,12 +48,12 @@ export namespace helios::engine::facade {
          *
          * @return Pointer to the released GameObject, or `nullptr` if not found.
          */
-        helios::engine::game::GameObject* release(
-            helios::engine::game::GameWorld& gameWorld,
+        helios::engine::ecs::GameObject* release(
+            helios::engine::ecs::GameWorld& gameWorld,
             helios::engine::core::data::GameObjectPool& gameObjectPool,
             const helios::util::Guid& entityId
         ) {
-            helios::engine::game::GameObject* worldGo = gameWorld.find(entityId);
+            helios::engine::ecs::GameObject* worldGo = gameWorld.find(entityId);
 
             if (worldGo) {
                 if (gameObjectPool.release(entityId)) {
@@ -81,8 +81,8 @@ export namespace helios::engine::facade {
          * @return Pointer to the acquired GameObject, or `nullptr` if the pool
          *         is exhausted or no valid entities are available.
          */
-        [[nodiscard]] helios::engine::game::GameObject* acquire(
-            helios::engine::game::GameWorld& gameWorld,
+        [[nodiscard]] helios::engine::ecs::GameObject* acquire(
+            helios::engine::ecs::GameWorld& gameWorld,
             helios::engine::core::data::GameObjectPool& gameObjectPool
         )  {
             helios::util::Guid guid{helios::util::no_init};

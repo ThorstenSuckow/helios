@@ -12,15 +12,15 @@ module;
 export module helios.engine.game.physics.motion.systems.Move2DSystem;
 
 
-import helios.engine.game.System;
+import helios.engine.ecs.System;
 import helios.math;
 
-import helios.engine.game.GameWorld;
+import helios.engine.ecs.GameWorld;
 import helios.engine.game.physics.motion.components.Move2DComponent;
 import helios.engine.game.spatial.transform.components.TranslationStateComponent;
 import helios.engine.game.physics.motion.components.DirectionComponent;
 
-import helios.engine.game.UpdateContext;
+import helios.engine.ecs.UpdateContext;
 
 export namespace helios::engine::game::physics::motion::systems {
 
@@ -38,7 +38,7 @@ export namespace helios::engine::game::physics::motion::systems {
      * - DirectionComponent (current movement direction)
      * - TranslationStateComponent (receives translation updates)
      */
-    class Move2DSystem : public System {
+    class Move2DSystem : public helios::engine::ecs::System {
 
          private:
 
@@ -116,7 +116,7 @@ export namespace helios::engine::game::physics::motion::systems {
          *
          * @param gameWorld Pointer to the GameWorld this system belongs to.
          */
-        void init(helios::engine::game::GameWorld& gameWorld) noexcept override {
+        void init(helios::engine::ecs::GameWorld& gameWorld) noexcept override {
             System::init(gameWorld);
         }
 
@@ -128,7 +128,7 @@ export namespace helios::engine::game::physics::motion::systems {
          *
          * @param updateContext Context containing deltaTime and other frame data.
          */
-        void update(helios::engine::game::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::ecs::UpdateContext& updateContext) noexcept override {
 
             for (auto [entity, m2d, dc, tsc] : gameWorld_->find<
                 helios::engine::game::physics::motion::components::Move2DComponent,

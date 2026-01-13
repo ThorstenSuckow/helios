@@ -15,9 +15,9 @@ import helios.engine.game.physics.motion.components.RotationStateComponent;
 import helios.engine.game.spatial.transform.components.TransformComponent;
 import helios.engine.game.physics.motion.components.SpinComponent;
 
-import helios.engine.ecs.GameWorld;
+import helios.engine.runtime.world.GameWorld;
 
-import helios.engine.ecs.UpdateContext;
+import helios.engine.runtime.world.UpdateContext;
 
 import helios.math;
 
@@ -41,7 +41,7 @@ export namespace helios::engine::game::spatial::transform::systems {
          *
          * @param updateContext Context containing frame timing and game state.
          */
-        void update(helios::engine::ecs::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
             const float deltaTime = updateContext.deltaTime();
 

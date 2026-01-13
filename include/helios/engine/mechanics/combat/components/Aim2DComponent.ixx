@@ -7,7 +7,7 @@ module;
 export module helios.engine.mechanics.combat.components.Aim2DComponent;
 
 import helios.math.types;
-import helios.engine.ecs.UpdateContext;
+import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.Component;
 
 

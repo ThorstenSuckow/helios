@@ -15,8 +15,8 @@ module;
 
 export module helios.engine.game.physics.collision.systems.CollisionStateClearSystem;
 
-import helios.engine.ecs.GameWorld;
-import helios.engine.ecs.UpdateContext;
+import helios.engine.runtime.world.GameWorld;
+import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.System;
 
 import helios.engine.core.messaging.command.CommandBuffer;
@@ -56,7 +56,7 @@ export namespace helios::engine::game::physics::collision::systems {
          *
          * @param updateContext Context containing frame data and world access.
          */
-        void update(helios::engine::ecs::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
             for (auto [entity, csc] : gameWorld_->find<
                CollisionStateComponent
            >().each()) {

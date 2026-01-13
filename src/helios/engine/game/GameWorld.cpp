@@ -4,19 +4,19 @@ module;
 #include <memory>
 #include <unordered_map>
 
-module helios.engine.ecs.GameWorld;
+module helios.engine.runtime.world.GameWorld;
 
 import helios.engine.ecs.GameObject;
 import helios.util.Guid;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
-import helios.engine.ecs.UpdateContext;
+import helios.engine.runtime.world.UpdateContext;
 
 
-namespace helios::engine::ecs {
+namespace helios::engine::runtime::world {
 
 
-    helios::engine::ecs::GameObject* GameWorld::addGameObject(std::unique_ptr<GameObject> gameObject) {
+    helios::engine::ecs::GameObject* helios::engine::runtime::world::GameWorld::addGameObject(std::unique_ptr<helios::engine::ecs::GameObject> gameObject) {
         if (!gameObject) {
             logger_.warn("Attempted to add null GameObject to GameWorld");
             return nullptr;
@@ -33,21 +33,21 @@ namespace helios::engine::ecs {
         return ptr;
     }
 
-    helios::engine::ecs::GameObject* GameWorld::find(const helios::util::Guid& guid) {
+    helios::engine::ecs::GameObject* helios::engine::runtime::world::GameWorld::find(const helios::util::Guid& guid) {
         if (auto it = gameObjects_.find(guid); it != gameObjects_.end()) {
             return it->second.get();
         }
         return nullptr;
     }
 
-    const helios::engine::ecs::GameObject* GameWorld::find(const helios::util::Guid& guid) const {
+    const helios::engine::ecs::GameObject* helios::engine::runtime::world::GameWorld::find(const helios::util::Guid& guid) const {
         if (auto it = gameObjects_.find(guid); it != gameObjects_.end()) {
             return it->second.get();
         }
         return nullptr;
     }
 
-    std::unique_ptr<helios::engine::ecs::GameObject> GameWorld::removeGameObject(const GameObject& gameObject) {
+    std::unique_ptr<helios::engine::ecs::GameObject> helios::engine::runtime::world::GameWorld::removeGameObject(const helios::engine::ecs::GameObject& gameObject) {
         auto node = gameObjects_.extract(gameObject.guid());
 
         if (node.empty()) {

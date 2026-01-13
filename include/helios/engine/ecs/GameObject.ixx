@@ -16,7 +16,7 @@ export module helios.engine.ecs.GameObject;
 
 import helios.util.Guid;
 import helios.engine.ecs.Component;
-import helios.engine.ecs.UpdateContext;
+import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.Updatable;
 
 export namespace helios::engine::ecs {
@@ -334,7 +334,7 @@ export namespace helios::engine::ecs {
          *
          * @param updateContext Context containing frame delta time and other update data.
          */
-        void update(helios::engine::ecs::UpdateContext& updateContext) {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) {
             for (auto* updatable: updatables_) {
                 updatable->update(updateContext);
             }

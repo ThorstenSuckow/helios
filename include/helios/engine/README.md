@@ -42,7 +42,7 @@ helios.engine
 import helios.engine;
 
 // Access ECS classes
-helios.engine.ecs.GameWorld world;
+helios.engine.runtime.world.GameWorld world;
 auto entity = std.make_unique<helios.engine.ecs.GameObject>();
 
 // Access game systems

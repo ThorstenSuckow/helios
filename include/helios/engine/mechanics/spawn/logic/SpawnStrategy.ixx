@@ -8,11 +8,11 @@ module;
 export module helios.engine.mechanics.spawn.logic.SpawnStrategy;
 
 
-import helios.engine.ecs.UpdateContext;
+import helios.engine.runtime.world.UpdateContext;
 
-import helios.engine.ecs.GameWorld;
+import helios.engine.runtime.world.GameWorld;
 import helios.engine.ecs.GameObject;
-import helios.engine.ecs.Level;
+import helios.engine.runtime.world.Level;
 
 
 export namespace helios::engine::mechanics::spawn::logic {
@@ -75,9 +75,9 @@ export namespace helios::engine::mechanics::spawn::logic {
          *         False if spawning failed and the object should be returned to the pool.
          */
         virtual bool spawn(
-            const helios::engine::ecs::GameWorld& gameWorld,
+            const helios::engine::runtime::world::GameWorld& gameWorld,
             helios::engine::ecs::GameObject& gameObject,
-            const helios::engine::ecs::UpdateContext& updateContext
+            const helios::engine::runtime::world::UpdateContext& updateContext
         ) noexcept = 0;
 
     };

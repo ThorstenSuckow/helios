@@ -8,9 +8,9 @@ module;
 
 export module helios.engine.game.spatial.transform.systems.postproc.ScaleClearSystem;
 
-import helios.engine.ecs.GameWorld;
+import helios.engine.runtime.world.GameWorld;
 import helios.engine.ecs.System;
-import helios.engine.ecs.UpdateContext;
+import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.game.spatial.transform.components.ScaleComponent;
 
@@ -33,7 +33,7 @@ export namespace helios::engine::game::spatial::transform::systems::postproc {
          *
          * @param updateContext The update context.
          */
-        void update(helios::engine::ecs::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
             for (auto [entity, sc] : gameWorld_->find<helios::engine::game::spatial::transform::components::ScaleComponent>().each()) {
                 sc->clearDirty();

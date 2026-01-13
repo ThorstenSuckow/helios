@@ -10,11 +10,11 @@ module;
 export module helios.engine.mechanics.spawn.logic.CallbackSpawnStrategy;
 
 import helios.engine.mechanics.spawn.logic.SpawnStrategy;
-import helios.engine.ecs.UpdateContext;
+import helios.engine.runtime.world.UpdateContext;
 
-import helios.engine.ecs.GameWorld;
+import helios.engine.runtime.world.GameWorld;
 import helios.engine.ecs.GameObject;
-import helios.engine.ecs.Level;
+import helios.engine.runtime.world.Level;
 
 
 export namespace helios::engine::mechanics::spawn::logic {
@@ -54,9 +54,9 @@ export namespace helios::engine::mechanics::spawn::logic {
          * Must not throw
          */
         using SpawnFunction = std::function<bool(
-            const helios::engine::ecs::GameWorld&,
+            const helios::engine::runtime::world::GameWorld&,
             helios::engine::ecs::GameObject&,
-            const helios::engine::ecs::UpdateContext&)>;
+            const helios::engine::runtime::world::UpdateContext&)>;
 
         /**
          * @brief The user-provided spawn callback function.
@@ -86,9 +86,9 @@ export namespace helios::engine::mechanics::spawn::logic {
          *         false if the object should be returned to the pool.
          */
         [[nodiscard]] bool spawn(
-            const helios::engine::ecs::GameWorld& gameWorld,
+            const helios::engine::runtime::world::GameWorld& gameWorld,
             helios::engine::ecs::GameObject& gameObject,
-            const helios::engine::ecs::UpdateContext& updateContext
+            const helios::engine::runtime::world::UpdateContext& updateContext
         ) noexcept override {
             return spawnFunction_(gameWorld, gameObject, updateContext);
         }

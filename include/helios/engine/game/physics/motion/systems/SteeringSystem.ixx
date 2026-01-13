@@ -15,13 +15,13 @@ export module helios.engine.game.physics.motion.systems.SteeringSystem;
 import helios.engine.ecs.System;
 import helios.math;
 
-import helios.engine.ecs.GameWorld;
+import helios.engine.runtime.world.GameWorld;
 import helios.engine.game.physics.motion.components.SteeringComponent;
 import helios.engine.game.spatial.transform.components.TransformComponent;
 import helios.engine.game.physics.motion.components.DirectionComponent;
 import helios.engine.game.physics.motion.components.RotationStateComponent;
 
-import helios.engine.ecs.UpdateContext;
+import helios.engine.runtime.world.UpdateContext;
 
 export namespace helios::engine::game::physics::motion::systems {
 
@@ -115,7 +115,7 @@ export namespace helios::engine::game::physics::motion::systems {
          *
          * @param updateContext Context containing frame timing and game state.
          */
-        void update(helios::engine::ecs::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
 
             for (auto [entity, hc, rsc, dc] : gameWorld_->find<

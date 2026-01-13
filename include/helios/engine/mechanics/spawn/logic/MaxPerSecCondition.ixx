@@ -8,10 +8,10 @@ module;
 
 export module helios.engine.mechanics.spawn.logic.MaxPerSecCondition;
 
-import helios.engine.ecs.GameWorld;
-import helios.engine.ecs.Level;
+import helios.engine.runtime.world.GameWorld;
+import helios.engine.runtime.world.Level;
 import helios.engine.core.data.GameObjectPoolId;
-import helios.engine.ecs.UpdateContext;
+import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.mechanics.spawn.logic.SpawnCondition;
 
@@ -79,9 +79,9 @@ export namespace helios::engine::mechanics::spawn::logic {
          * @return The number of spawns allowed this frame (fractional values accumulate).
          */
         [[nodiscard]] float spawnBudget(
-            const helios::engine::ecs::GameWorld& gameWorld,
+            const helios::engine::runtime::world::GameWorld& gameWorld,
             const helios::engine::core::data::GameObjectPool& gameObjectPool,
-            const helios::engine::ecs::UpdateContext& updateContext
+            const helios::engine::runtime::world::UpdateContext& updateContext
         ) noexcept override {
 
             if (maxRequestsPerSecond_ == 0.0f) {

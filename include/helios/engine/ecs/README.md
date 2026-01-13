@@ -62,7 +62,7 @@ Entity query utilities for filtering and iterating GameObjects:
 import helios.engine.ecs;
 
 // Create game world
-helios.engine.ecs.GameWorld world;
+helios.engine.runtime.world.GameWorld world;
 
 // Add entity with components
 auto entity = std.make_unique<GameObject>();

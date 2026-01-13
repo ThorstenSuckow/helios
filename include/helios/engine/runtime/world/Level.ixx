@@ -4,14 +4,14 @@
  */
 module;
 
-export module helios.engine.ecs.Level;
+export module helios.engine.runtime.world.Level;
 
 import helios.math.types;
 import helios.core.units.Unit;
 import helios.scene.SceneNode;
 
 
-export namespace helios::engine::ecs {
+export namespace helios::engine::runtime::world {
 
     /**
      * @brief Represents a game level containing the scene graph and world boundaries.

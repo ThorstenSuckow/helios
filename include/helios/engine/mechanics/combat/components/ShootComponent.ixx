@@ -12,7 +12,7 @@ export module helios.engine.mechanics.combat.components.ShootComponent;
 
 import helios.math.types;
 import helios.math.utils;
-import helios.engine.ecs.UpdateContext;
+import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.Updatable;
 import helios.engine.ecs.Component;
 import helios.engine.mechanics.combat.components.Aim2DComponent;
@@ -21,7 +21,7 @@ import helios.engine.game.spatial.transform.components.TransformComponent;
 import helios.math;
 
 import helios.engine.ecs.GameObject;
-import helios.engine.ecs.GameWorld;
+import helios.engine.runtime.world.GameWorld;
 import helios.scene.SceneNode;
 
 import helios.rendering;

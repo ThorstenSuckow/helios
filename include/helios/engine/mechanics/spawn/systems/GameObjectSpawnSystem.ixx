@@ -16,11 +16,11 @@ import helios.engine.ecs.System;
 import helios.engine.core.messaging.command.CommandBuffer;
 import helios.engine.core.data.GameObjectPoolId;
 import helios.engine.ecs.GameObject;
-import helios.engine.ecs.UpdateContext;
+import helios.engine.runtime.world.UpdateContext;
 
 
 
-import helios.engine.ecs.Level;
+import helios.engine.runtime.world.Level;
 
 import helios.engine.game.physics.motion.components.Move2DComponent;
 
@@ -30,7 +30,7 @@ import helios.engine.game.rendering.components.RenderableComponent;
 
 import helios.scene.SceneNode;
 
-import helios.engine.ecs.GameWorld;
+import helios.engine.runtime.world.GameWorld;
 
 import helios.engine.mechanics.spawn.commands.SpawnCommand;
 import helios.engine.mechanics.spawn.logic.SpawnCondition;
@@ -105,7 +105,7 @@ export namespace helios::engine::mechanics::spawn::systems {
          *
          * @param updateContext The current update context.
          */
-        void update(helios::engine::ecs::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
             const auto* gameObjectPool = updateContext.gameWorld().pool(gameObjectPoolId_);
             size_t spawnCount = spawnCondition_->spawnBudget(*gameWorld_, *gameObjectPool, updateContext);

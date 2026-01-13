@@ -17,7 +17,7 @@ import helios.engine.core.messaging.command.CommandBuffer;
 import helios.engine.game.physics.collision.types.CollisionBehavior;
 
 import helios.engine.ecs.GameObject;
-import helios.engine.ecs.GameWorld;
+import helios.engine.runtime.world.GameWorld;
 import helios.engine.game.physics.motion.components.Move2DComponent;
 import helios.engine.game.physics.motion.components.SteeringComponent;
 import helios.engine.game.spatial.transform.components.TransformComponent;
@@ -31,7 +31,7 @@ import helios.engine.game.physics.motion.components.RotationStateComponent;
 import helios.scene.SceneNode;
 import helios.engine.game.scene.components.SceneNodeComponent;
 
-import helios.engine.ecs.UpdateContext;
+import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.mechanics.spawn.commands.DespawnCommand;
 
@@ -60,7 +60,7 @@ export namespace helios::engine::mechanics::bounds::systems {
          *
          * @param updateContext Context containing deltaTime and other frame data.
          */
-        void update(helios::engine::ecs::UpdateContext& updateContext) noexcept override {
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
             using namespace helios::engine::game::physics::collision::types;
 

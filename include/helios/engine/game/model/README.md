@@ -1,4 +1,4 @@
-# helios.engine.game.model
+# helios::engine::game::model
 
 Model-related components for game entities.
 

@@ -1,4 +1,4 @@
-# helios.engine.core.messaging.event
+# helios::engine::core::messaging::event
 
 Event bus for inter-system communication within the game loop.
 

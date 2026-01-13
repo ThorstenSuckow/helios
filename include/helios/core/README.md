@@ -1,4 +1,4 @@
-# helios.core
+# helios::core
 
 Core-level utilities shared across the helios engine.
 

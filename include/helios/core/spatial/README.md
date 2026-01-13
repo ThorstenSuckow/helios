@@ -1,4 +1,4 @@
-# helios.core.spatial
+# helios::core::spatial
 
 Spatial transformation utilities for 3D transformations.
 

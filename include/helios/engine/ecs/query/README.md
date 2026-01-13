@@ -1,4 +1,4 @@
-# helios.engine.ecs.query
+# helios::engine::ecs::query
 
 Entity query utilities for filtering and iterating GameObjects by component.
 

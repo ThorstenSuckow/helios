@@ -33,4 +33,5 @@ export import helios.engine.game.rendering;
 export import helios.engine.game.scene;
 export import helios.engine.game.model;
 export import helios.engine.game.input;
+export import helios.engine.game.pool;
 

@@ -1,4 +1,4 @@
-## helios::event
+# helios::event
 
 This namespace provides a comprehensive event management system including event managers, queues, dispatchers, and base event types.
 

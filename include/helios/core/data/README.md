@@ -1,4 +1,4 @@
-# helios.core.data
+# helios::core::data
 
 Core data structures for type indexing and efficient lookups.
 

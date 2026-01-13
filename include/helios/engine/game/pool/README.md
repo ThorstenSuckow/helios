@@ -1,4 +1,4 @@
-# helios.engine.game.pool
+# helios::engine::game::pool
 
 Object pool components for entity recycling.
 

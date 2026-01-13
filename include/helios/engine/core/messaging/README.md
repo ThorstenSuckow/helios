@@ -1,4 +1,4 @@
-# helios.engine.core.messaging
+# helios::engine::core::messaging
 
 Communication infrastructure for commands and events within the game loop.
 

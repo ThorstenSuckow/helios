@@ -22,7 +22,7 @@ import helios.engine.mechanics.spawn.requests.DespawnRequest;
 
 import helios.engine.factory.GameObjectFactory;
 
-import helios.engine.facade.GameObjectPoolFacade;
+import helios.engine.runtime.pooling.GameObjectPoolFacade;
 
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.GameWorld;
@@ -92,7 +92,7 @@ export namespace helios::engine::mechanics::spawn::manager {
         /**
          * @brief Facade for pool acquire/release operations.
          */
-        helios::engine::facade::GameObjectPoolFacade gameObjectPoolFacade_{};
+        helios::engine::runtime::pooling::GameObjectPoolFacade gameObjectPoolFacade_{};
 
         /**
          * @brief Prepares a spawn request before execution.

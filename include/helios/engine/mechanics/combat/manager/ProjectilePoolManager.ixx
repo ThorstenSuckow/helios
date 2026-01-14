@@ -17,7 +17,7 @@ import helios.engine.runtime.world.Manager;
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.UpdateContext;
 
-import helios.engine.facade.GameObjectPoolFacade;
+import helios.engine.runtime.pooling.GameObjectPoolFacade;
 import helios.engine.factory.GameObjectFactory;
 
 import helios.engine.mechanics.spawn.logic.SpawnCondition;
@@ -110,7 +110,7 @@ export namespace helios::engine::mechanics::combat::manager {
         /**
          * @brief Facade for pool acquire/release operations.
          */
-        helios::engine::facade::GameObjectPoolFacade gameObjectPoolFacade_{};
+        helios::engine::runtime::pooling::GameObjectPoolFacade gameObjectPoolFacade_{};
 
         /**
          * @brief Initializes a projectile GameObject from a spawn request.

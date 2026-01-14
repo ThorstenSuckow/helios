@@ -7,7 +7,7 @@ module;
 #include <cassert>
 #include <memory>
 
-export module helios.engine.facade.GameObjectPoolFacade;
+export module helios.engine.runtime.pooling.GameObjectPoolFacade;
 
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.GameWorld;
@@ -15,7 +15,7 @@ import helios.engine.runtime.pooling.GameObjectPool;
 
 import helios.util.Guid;
 
-export namespace helios::engine::facade {
+export namespace helios::engine::runtime::pooling {
 
     /**
      * @brief Facade class that coordinates object pooling with the game world.

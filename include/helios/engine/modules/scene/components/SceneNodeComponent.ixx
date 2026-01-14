@@ -17,7 +17,7 @@ import helios.core.units.Unit;
 import helios.engine.ecs.CloneableComponent;
 import helios.engine.ecs.GameObject;
 
-import helios.engine.game.rendering.components.RenderableComponent;
+import helios.engine.game.rendering.renderable.components.RenderableComponent;
 
 
 export namespace helios::engine::game::scene::components {
@@ -84,7 +84,7 @@ export namespace helios::engine::game::scene::components {
             assert(sceneNode_->renderable() != nullptr && "Unexpected nullptr for SceneNode's renderable");
 
             // this will automatically create the RenderableComponent if not alreay registered
-            gameObject->getOrAdd<helios::engine::game::rendering::components::RenderableComponent>(sceneNode_->renderable());
+            gameObject->getOrAdd<helios::engine::game::rendering::renderable::components::RenderableComponent>(sceneNode_->renderable());
         }
 
         /**

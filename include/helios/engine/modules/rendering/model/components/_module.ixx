@@ -6,4 +6,4 @@
 
 export module helios.engine.game.model.components;
 
-export import helios.engine.game.model.components.ModelAabbComponent;
+export import helios.engine.game.rendering.model.components.ModelAabbComponent;

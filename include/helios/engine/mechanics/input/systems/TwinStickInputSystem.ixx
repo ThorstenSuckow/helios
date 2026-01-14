@@ -6,7 +6,7 @@ module;
 
 #include <memory>
 
-export module helios.engine.game.input.systems.TwinStickInputSystem;
+export module helios.engine.mechanics.input.systems.TwinStickInputSystem;
 
 import helios.math.types;
 import helios.math.utils;
@@ -20,7 +20,7 @@ import helios.engine.game.physics.motion.commands.SteeringCommand;
 import helios.engine.mechanics.combat.commands.Aim2DCommand;
 import helios.engine.mechanics.combat.commands.ShootCommand;
 
-export namespace helios::engine::game::input::systems {
+export namespace helios::engine::mechanics::input::systems {
 
     /**
      * @brief Input component for twin-stick gamepad control schemes.

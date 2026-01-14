@@ -5,4 +5,4 @@
 
 export module helios.engine.game.input.components;
 
-export import helios.engine.game.input.systems.TwinStickInputSystem;
+export import helios.engine.mechanics.input.systems.TwinStickInputSystem;

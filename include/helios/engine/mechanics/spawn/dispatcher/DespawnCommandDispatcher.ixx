@@ -13,8 +13,8 @@ import helios.engine.game.pool.components.PoolIdComponent;
 import helios.engine.mechanics.spawn.requests.DespawnRequest;
           
 
-import helios.engine.core.messaging.command.WorldCommandDispatcher;
-import helios.engine.core.messaging.command.TypedWorldCommandDispatcher;
+import helios.engine.runtime.messaging.command.WorldCommandDispatcher;
+import helios.engine.runtime.messaging.command.TypedWorldCommandDispatcher;
 
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.GameWorld;
@@ -26,7 +26,7 @@ import helios.engine.runtime.pooling.PoolRequestHandler;
 
 export namespace helios::engine::mechanics::spawn::dispatcher {
 
-    class DespawnCommandDispatcher final : public helios::engine::core::messaging::command::TypedWorldCommandDispatcher<
+    class DespawnCommandDispatcher final : public helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher<
         helios::engine::mechanics::spawn::commands::DespawnCommand> {
 
 

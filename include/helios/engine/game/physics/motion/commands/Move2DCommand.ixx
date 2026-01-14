@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.game.physics.motion.commands.Move2DCommand;
 
-import helios.engine.core.messaging.command.TargetedCommand;
+import helios.engine.runtime.messaging.command.TargetedCommand;
 import helios.engine.ecs.GameObject;
 import helios.math.types;
 import helios.engine.game.physics.motion.components.Move2DComponent;
@@ -25,10 +25,10 @@ export namespace helios::engine::game::physics::motion::commands {
      * @note The target GameObject must have a Move2DComponent attached for this
      *       command to have any effect.
      *
-     * @see helios::engine::core::messaging::command::Command
+     * @see helios::engine::runtime::messaging::command::Command
      * @see helios::engine::game::physics::motion::components::Move2DComponent
      */
-    class Move2DCommand : public helios::engine::core::messaging::command::TargetedCommand {
+    class Move2DCommand : public helios::engine::runtime::messaging::command::TargetedCommand {
 
         /**
          * @brief The analog stick magnitude determining movement intensity.

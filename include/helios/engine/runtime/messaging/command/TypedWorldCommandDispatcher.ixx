@@ -6,17 +6,17 @@ module;
 
 #include <memory>
 
-export module helios.engine.core.messaging.command.TypedWorldCommandDispatcher;
+export module helios.engine.runtime.messaging.command.TypedWorldCommandDispatcher;
 
-import helios.engine.core.messaging.command.WorldCommand;
-import helios.engine.core.messaging.command.WorldCommandDispatcher;
+import helios.engine.runtime.messaging.command.WorldCommand;
+import helios.engine.runtime.messaging.command.WorldCommandDispatcher;
 
 
 export namespace helios::engine::game {
     class GameWorld;
 }
 
-export namespace helios::engine::core::messaging::command {
+export namespace helios::engine::runtime::messaging::command {
 
     /**
      * @brief Type-safe dispatcher template for handling specific WorldCommand types.

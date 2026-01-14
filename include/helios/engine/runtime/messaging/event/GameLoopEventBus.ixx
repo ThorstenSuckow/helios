@@ -4,13 +4,13 @@
  */
 module;
 
-export module helios.engine.core.messaging.event.GameLoopEventBus;
+export module helios.engine.runtime.messaging.event.GameLoopEventBus;
 
 import helios.core.data.TypeIndexer;
 import helios.core.buffer.TypeIndexedDoubleBuffer;
 
 
-export namespace helios::engine::core::messaging::event {
+export namespace helios::engine::runtime::messaging::event {
 
     /**
      * @struct GameLoopEventBusGroup

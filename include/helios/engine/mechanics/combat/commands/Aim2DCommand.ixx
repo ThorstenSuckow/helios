@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.mechanics.combat.commands.Aim2DCommand;
 
-import helios.engine.core.messaging.command.TargetedCommand;
+import helios.engine.runtime.messaging.command.TargetedCommand;
 import helios.engine.ecs.GameObject;
 import helios.math.types;
 import helios.engine.mechanics.combat.components.Aim2DComponent;
@@ -24,10 +24,10 @@ export namespace helios::engine::mechanics::combat::commands {
      * @note The target GameObject must have an Aim2DComponent attached for this
      *       command to have any effect.
      *
-     * @see helios::engine::core::messaging::command::Command
+     * @see helios::engine::runtime::messaging::command::Command
      * @see helios::engine::mechanics::components::Aim2DComponent
      */
-    class Aim2DCommand : public helios::engine::core::messaging::command::TargetedCommand {
+    class Aim2DCommand : public helios::engine::runtime::messaging::command::TargetedCommand {
 
         /**
          * @brief The analog stick magnitude determining fire frequency.

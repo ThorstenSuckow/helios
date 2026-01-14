@@ -5,5 +5,5 @@
 
 export module helios.engine.core.messaging;
 
-export import helios.engine.core.messaging.command;
-export import helios.engine.core.messaging.event;
+export import helios.engine.runtime.messaging.command;
+export import helios.engine.runtime.messaging.event;

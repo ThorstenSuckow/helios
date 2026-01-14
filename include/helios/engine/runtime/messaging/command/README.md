@@ -1,4 +1,4 @@
-# helios::engine::core::messaging::command
+# helios::engine::runtime::messaging::command
 
 Command pattern implementation for deferred action execution.
 
@@ -23,7 +23,7 @@ During `CommandBuffer::flush()`:
 ---
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::core::messaging::command
+@namespace helios::engine::runtime::messaging::command
 @brief Command pattern implementation for deferred action execution.
 @details Provides TargetedCommand and WorldCommand base classes for encapsulating game actions. Commands are buffered in CommandBuffer and executed during the game loop update phase. Dispatchers enable type-safe routing to specialized handlers via the Visitor pattern.
 </p></details>

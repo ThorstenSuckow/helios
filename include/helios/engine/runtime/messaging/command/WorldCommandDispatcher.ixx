@@ -4,14 +4,14 @@
  */
 module;
 
-export module helios.engine.core.messaging.command.WorldCommandDispatcher;
+export module helios.engine.runtime.messaging.command.WorldCommandDispatcher;
 
 
 export namespace helios::engine::runtime::world {
     class GameWorld;
 }
 
-export namespace helios::engine::core::messaging::command {
+export namespace helios::engine::runtime::messaging::command {
 
     class WorldCommand;
 

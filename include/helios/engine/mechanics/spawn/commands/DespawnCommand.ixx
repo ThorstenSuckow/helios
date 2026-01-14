@@ -9,14 +9,14 @@ module;
 
 export module helios.engine.mechanics.spawn.commands.DespawnCommand;
 
-import helios.engine.core.messaging.command.WorldCommand;
+import helios.engine.runtime.messaging.command.WorldCommand;
 import helios.util.Guid;
 
 import helios.engine.runtime.world.GameWorld;
 
 import helios.engine.core.data.GameObjectPoolId;
 
-import helios.engine.core.messaging.command.WorldCommandDispatcher;
+import helios.engine.runtime.messaging.command.WorldCommandDispatcher;
 
 export namespace helios::engine::mechanics::spawn::commands {
 
@@ -34,7 +34,7 @@ export namespace helios::engine::mechanics::spawn::commands {
      * @see DespawnCommandDispatcher
      * @see SpawnManager
      */
-    class DespawnCommand : public helios::engine::core::messaging::command::WorldCommand {
+    class DespawnCommand : public helios::engine::runtime::messaging::command::WorldCommand {
 
         /**
          * @brief The GUID of the entity to despawn.
@@ -85,7 +85,7 @@ export namespace helios::engine::mechanics::spawn::commands {
          */
         void accept(
             helios::engine::runtime::world::GameWorld& gameWorld,
-            helios::engine::core::messaging::command::WorldCommandDispatcher& dispatcher
+            helios::engine::runtime::messaging::command::WorldCommandDispatcher& dispatcher
         ) const noexcept override {
             dispatcher.dispatch(gameWorld, *this);
         }

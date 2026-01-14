@@ -11,9 +11,9 @@ module;
 export module helios.engine.runtime.world.UpdateContext;
 
 import helios.input.InputSnapshot;
-import helios.engine.core.messaging.event.GameLoopEventBus;
+import helios.engine.runtime.messaging.event.GameLoopEventBus;
 
-export namespace helios::engine::core::messaging::command {
+export namespace helios::engine::runtime::messaging::command {
     class CommandBuffer;
 }
 
@@ -58,7 +58,7 @@ export namespace helios::engine::runtime::world {
         /**
          * @brief Buffer for queueing commands to be executed at end of frame.
          */
-        helios::engine::core::messaging::command::CommandBuffer& commandBuffer_;
+        helios::engine::runtime::messaging::command::CommandBuffer& commandBuffer_;
 
         /**
          * @brief Reference to the game world for entity lookups.
@@ -71,12 +71,12 @@ export namespace helios::engine::runtime::world {
          * Used by systems and components to publish events (e.g., collision,
          * spawn requests) that will be processed in the next phase of the game loop.
          */
-        helios::engine::core::messaging::event::GameLoopEventBus::WriteSink phaseEventSink_;
+        helios::engine::runtime::messaging::event::GameLoopEventBus::WriteSink phaseEventSink_;
 
         /**
          * @brief Source for reading phase-level events from the previous phase.
          */
-        const helios::engine::core::messaging::event::GameLoopEventBus::ReadSource phaseEventSource_;
+        const helios::engine::runtime::messaging::event::GameLoopEventBus::ReadSource phaseEventSource_;
 
         /**
          * @brief Sink for pushing pass-level events during update.
@@ -84,12 +84,12 @@ export namespace helios::engine::runtime::world {
          * Used by systems and components to publish events that will be processed
          * in subsequent passes within the same phase, after a commit point.
          */
-        helios::engine::core::messaging::event::GameLoopEventBus::WriteSink passEventSink_;
+        helios::engine::runtime::messaging::event::GameLoopEventBus::WriteSink passEventSink_;
 
         /**
          * @brief Source for reading pass-level events from previous passes.
          */
-        const helios::engine::core::messaging::event::GameLoopEventBus::ReadSource passEventSource_;
+        const helios::engine::runtime::messaging::event::GameLoopEventBus::ReadSource passEventSource_;
 
     public:
 
@@ -103,10 +103,10 @@ export namespace helios::engine::runtime::world {
          * @param passEventBus Reference to the pass-level event bus for cross-pass communication.
          */
         UpdateContext(
-            helios::engine::core::messaging::command::CommandBuffer& commandBuffer,
+            helios::engine::runtime::messaging::command::CommandBuffer& commandBuffer,
             helios::engine::runtime::world::GameWorld& gameWorld,
-            helios::engine::core::messaging::event::GameLoopEventBus& phaseEventBus,
-            helios::engine::core::messaging::event::GameLoopEventBus& passEventBus
+            helios::engine::runtime::messaging::event::GameLoopEventBus& phaseEventBus,
+            helios::engine::runtime::messaging::event::GameLoopEventBus& passEventBus
         ) : commandBuffer_(commandBuffer), gameWorld_(gameWorld),
         phaseEventSink_(phaseEventBus.writeSink()),
         phaseEventSource_(phaseEventBus.readSource()),
@@ -164,7 +164,7 @@ export namespace helios::engine::runtime::world {
          *
          * @return Ref to the CommandBuffer used with this UpdateContext.
          */
-        [[nodiscard]] helios::engine::core::messaging::command::CommandBuffer& commandBuffer() const noexcept {
+        [[nodiscard]] helios::engine::runtime::messaging::command::CommandBuffer& commandBuffer() const noexcept {
             return commandBuffer_;
         }
 

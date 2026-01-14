@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.game.physics.motion.commands.SteeringCommand;
 
-import helios.engine.core.messaging.command.TargetedCommand;
+import helios.engine.runtime.messaging.command.TargetedCommand;
 import helios.engine.ecs.GameObject;
 import helios.math.types;
 import helios.engine.game.physics.motion.components.SteeringComponent;
@@ -22,7 +22,7 @@ export namespace helios::engine::game::physics::motion::commands {
      * of a GameObject. It targets the SteeringComponent and applies the specified
      * direction and turn factor (interpolation speed).
      */
-    class SteeringCommand : public helios::engine::core::messaging::command::TargetedCommand {
+    class SteeringCommand : public helios::engine::runtime::messaging::command::TargetedCommand {
         
 
         /**

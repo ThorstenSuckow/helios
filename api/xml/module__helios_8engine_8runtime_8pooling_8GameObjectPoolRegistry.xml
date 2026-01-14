@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8runtime_8pooling_8GameObjectPoolRegistry" kind="module">
+    <compoundname>helios.engine.runtime.pooling.GameObjectPoolRegistry</compoundname>
+    <innerfile refid="GameObjectPoolRegistry_8ixx">GameObjectPoolRegistry.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolRegistry" prot="public">helios::engine::runtime::pooling::GameObjectPoolRegistry</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolRegistry_1a7a2209463a5cab5185f99490271e0f6d" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">helios::engine::core::data::GameObjectPoolId</ref>, std::unique_ptr&lt; GameObjectPool &gt; &gt;</type>
+        <definition>std::unordered_map&lt;helios::engine::core::data::GameObjectPoolId, std::unique_ptr&lt;GameObjectPool&gt; &gt; helios::engine::runtime::pooling::GameObjectPoolRegistry::pools_</definition>
+        <argsstring></argsstring>
+        <name>pools_</name>
+        <qualifiedname>helios::engine::runtime::pooling::GameObjectPoolRegistry::pools_</qualifiedname>
+        <briefdescription>
+<para>Maps pool IDs to their corresponding <ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool" kindref="compound">GameObjectPool</ref> instances. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/pooling/GameObjectPoolRegistry.ixx" line="51" column="28" bodyfile="include/helios/engine/runtime/pooling/GameObjectPoolRegistry.ixx" bodystart="51" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolRegistry_1a6b447a82262d3edfcb4b94b3be3d7eea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::runtime::pooling::GameObjectPoolRegistry::GameObjectPoolRegistry</definition>
+        <argsstring>()=default</argsstring>
+        <name>GameObjectPoolRegistry</name>
+        <qualifiedname>helios::engine::runtime::pooling::GameObjectPoolRegistry::GameObjectPoolRegistry</qualifiedname>
+        <briefdescription>
+<para>Default constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/pooling/GameObjectPoolRegistry.ixx" line="58" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolRegistry_1a83f27617fa435b8183760804f14d9ef6" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>GameObjectPool *</type>
+        <definition>GameObjectPool * helios::engine::runtime::pooling::GameObjectPoolRegistry::addPool</definition>
+        <argsstring>(const helios::engine::core::data::GameObjectPoolId id, std::unique_ptr&lt; GameObjectPool &gt; gameObjectPool) noexcept</argsstring>
+        <name>addPool</name>
+        <qualifiedname>helios::engine::runtime::pooling::GameObjectPoolRegistry::addPool</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">helios::engine::core::data::GameObjectPoolId</ref></type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>std::unique_ptr&lt; GameObjectPool &gt;</type>
+          <declname>gameObjectPool</declname>
+        </param>
+        <briefdescription>
+<para>Adds a new pool to the registry. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If a pool with the given ID already exists, it will be replaced. Ownership of the pool is transferred to the registry.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unique identifier for this pool. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>gameObjectPool</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The pool to add (ownership is transferred).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Raw pointer to the added pool for immediate use. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/pooling/GameObjectPoolRegistry.ixx" line="71" column="24" bodyfile="include/helios/engine/runtime/pooling/GameObjectPoolRegistry.ixx" bodystart="71" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolRegistry_1a64a7e0dc59d36bb2f1056214b534f350" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>GameObjectPool *</type>
+        <definition>GameObjectPool * helios::engine::runtime::pooling::GameObjectPoolRegistry::pool</definition>
+        <argsstring>(const helios::engine::core::data::GameObjectPoolId id) const</argsstring>
+        <name>pool</name>
+        <qualifiedname>helios::engine::runtime::pooling::GameObjectPoolRegistry::pool</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">helios::engine::core::data::GameObjectPoolId</ref></type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+<para>Retrieves a pool by its ID. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The identifier of the pool to retrieve.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the pool, or nullptr if not found. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/pooling/GameObjectPoolRegistry.ixx" line="86" column="25" bodyfile="include/helios/engine/runtime/pooling/GameObjectPoolRegistry.ixx" bodystart="86" bodyend="95"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/engine/runtime/pooling/GameObjectPoolRegistry.ixx" line="10" column="15"/>
+  </compounddef>
+</doxygen>

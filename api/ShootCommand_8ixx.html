@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>helios: include/helios/engine/game/commands/ShootCommand.ixx File Reference</title>
+<title>helios: include/helios/engine/mechanics/combat/commands/ShootCommand.ixx File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
@@ -103,17 +103,19 @@ $(function() {
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">ShootCommand.ixx File Reference<div class="ingroups">module <a class="el" href="module__helios_8engine_8game_8commands_8ShootCommand.html">helios.engine.game.commands.ShootCommand</a></div></div></div>
+  <div class="headertitle"><div class="title">ShootCommand.ixx File Reference<div class="ingroups">module <a class="el" href="module__helios_8engine_8mechanics_8combat_8commands_8ShootCommand.html">helios.engine.mechanics.combat.commands.ShootCommand</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>Command for triggering shooting actions on GameObjects.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>import <a class="el" href="Move2DComponent_8ixx_source.html">helios.engine.game.components.physics.Move2DComponent</a>;</code><br />
+<div class="textblock"><code>import <a class="el" href="TargetedCommandDispatcher_8ixx_source.html">helios.engine.runtime.messaging.command.TargetedCommandDispatcher</a>;</code><br />
+<code>import <a class="el" href="Move2DComponent_8ixx_source.html">helios.engine.modules.physics.motion.components.Move2DComponent</a>;</code><br />
+<code>import <a class="el" href="TypedTargetedCommandDispatcher_8ixx_source.html">helios.engine.runtime.messaging.command.TypedTargetedCommandDispatcher</a>;</code><br />
+<code>import <a class="el" href="ShootComponent_8ixx_source.html">helios.engine.mechanics.combat.components.ShootComponent</a>;</code><br />
+<code>import <a class="el" href="GameObject_8ixx_source.html">helios.engine.ecs.GameObject</a>;</code><br />
 <code>import <a class="el" href="helios_2math_2types_2__module_8ixx_source.html">helios.math.types</a>;</code><br />
-<code>import <a class="el" href="ShootComponent_8ixx_source.html">helios.engine.game.components.gameplay.ShootComponent</a>;</code><br />
-<code>import <a class="el" href="GameObject_8ixx_source.html">helios.engine.game.GameObject</a>;</code><br />
-<code>import <a class="el" href="Command_8ixx_source.html">helios.engine.game.Command</a>;</code><br />
+<code>import <a class="el" href="TargetedCommand_8ixx_source.html">helios.engine.runtime.messaging.command.TargetedCommand</a>;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Include dependency graph for ShootCommand.ixx:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
@@ -125,18 +127,20 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:helios_3A_3Aengine_3A_3Agame_3A_3Acommands_3A_3AShootCommand" id="r_helios_3A_3Aengine_3A_3Agame_3A_3Acommands_3A_3AShootCommand"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1game_1_1commands_1_1ShootCommand.html">helios::engine::game::commands::ShootCommand</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classhelios_1_1engine_1_1game_1_1Command.html" title="Abstract base class for encapsulating game actions as executable commands.">Command</a> that triggers a shooting action on a <a class="el" href="classhelios_1_1engine_1_1game_1_1GameObject.html" title="Base class for interactive game entities using a component-based architecture.">GameObject</a>.  <a href="classhelios_1_1engine_1_1game_1_1commands_1_1ShootCommand.html#details">More...</a><br /></td></tr>
+<tr class="memitem:helios_3A_3Aengine_3A_3Amechanics_3A_3Acombat_3A_3Acommands_3A_3AShootCommand" id="r_helios_3A_3Aengine_3A_3Amechanics_3A_3Acombat_3A_3Acommands_3A_3AShootCommand"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1ShootCommand.html">helios::engine::mechanics::combat::commands::ShootCommand</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command that triggers a shooting action on a GameObject.  <a href="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1ShootCommand.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:helios" id="r_helios"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html">helios</a></td></tr>
 <tr class="memitem:helios_3A_3Aengine" id="r_helios_3A_3Aengine"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine.html">helios::engine</a></td></tr>
-<tr class="memdesc:namespacehelios_1_1engine"><td class="mdescLeft">&#160;</td><td class="mdescRight">Engine utilities for frame pacing and tick/update lifecycle management. <br /></td></tr>
-<tr class="memitem:helios_3A_3Aengine_3A_3Agame" id="r_helios_3A_3Aengine_3A_3Agame"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine_1_1game.html">helios::engine::game</a></td></tr>
-<tr class="memdesc:namespacehelios_1_1engine_1_1game"><td class="mdescLeft">&#160;</td><td class="mdescRight">Game logic infrastructure using <a class="el" href="classhelios_1_1engine_1_1game_1_1Command.html" title="Abstract base class for encapsulating game actions as executable commands.">Command</a> pattern for decoupled, deterministic game systems. <br /></td></tr>
-<tr class="memitem:helios_3A_3Aengine_3A_3Agame_3A_3Acommands" id="r_helios_3A_3Aengine_3A_3Agame_3A_3Acommands"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine_1_1game_1_1commands.html">helios::engine::game::commands</a></td></tr>
-<tr class="memdesc:namespacehelios_1_1engine_1_1game_1_1commands"><td class="mdescLeft">&#160;</td><td class="mdescRight">Built-in <a class="el" href="classhelios_1_1engine_1_1game_1_1Command.html" title="Abstract base class for encapsulating game actions as executable commands.">Command</a> implementations for common game actions. . <br /></td></tr>
+<tr class="memdesc:namespacehelios_1_1engine"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main engine module aggregating core infrastructure and game systems. <br /></td></tr>
+<tr class="memitem:helios_3A_3Aengine_3A_3Amechanics" id="r_helios_3A_3Aengine_3A_3Amechanics"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine_1_1mechanics.html">helios::engine::mechanics</a></td></tr>
+<tr class="memdesc:namespacehelios_1_1engine_1_1mechanics"><td class="mdescLeft">&#160;</td><td class="mdescRight">High-level gameplay systems and components for game logic. <br /></td></tr>
+<tr class="memitem:helios_3A_3Aengine_3A_3Amechanics_3A_3Acombat" id="r_helios_3A_3Aengine_3A_3Amechanics_3A_3Acombat"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine_1_1mechanics_1_1combat.html">helios::engine::mechanics::combat</a></td></tr>
+<tr class="memdesc:namespacehelios_1_1engine_1_1mechanics_1_1combat"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combat-related gameplay systems, components, and commands. <br /></td></tr>
+<tr class="memitem:helios_3A_3Aengine_3A_3Amechanics_3A_3Acombat_3A_3Acommands" id="r_helios_3A_3Aengine_3A_3Amechanics_3A_3Acombat_3A_3Acommands"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine_1_1mechanics_1_1combat_1_1commands.html">helios::engine::mechanics::combat::commands</a></td></tr>
+<tr class="memdesc:namespacehelios_1_1engine_1_1mechanics_1_1combat_1_1commands"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combat-related commands for translating input into combat actions. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Command for triggering shooting actions on GameObjects. </p>
@@ -155,7 +159,7 @@ Namespaces</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_08c09894bd9f0ab4b1e9fdc7a2628766.html">helios</a></li><li class="navelem"><a href="dir_860c9de2f65c10e8e262a0e7b5bfee5e.html">engine</a></li><li class="navelem"><a href="dir_46c7b0b04924cca8aa10726746d57f30.html">game</a></li><li class="navelem"><a href="dir_e0c1a906bd0da41122364a897b83de07.html">commands</a></li><li class="navelem"><a href="ShootCommand_8ixx.html">ShootCommand.ixx</a></li>
+    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_08c09894bd9f0ab4b1e9fdc7a2628766.html">helios</a></li><li class="navelem"><a href="dir_860c9de2f65c10e8e262a0e7b5bfee5e.html">engine</a></li><li class="navelem"><a href="dir_38660f863d95a2f91776843a957349cd.html">mechanics</a></li><li class="navelem"><a href="dir_d4a3144816e2a342522614ea4b514ce1.html">combat</a></li><li class="navelem"><a href="dir_b80e0f1cf6bdfe5c2b3c8d32692ef89f.html">commands</a></li><li class="navelem"><a href="ShootCommand_8ixx.html">ShootCommand.ixx</a></li>
     <li class="footer">Generated on <span class="timestamp"></span> for helios by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

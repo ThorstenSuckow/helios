@@ -1,0 +1,519 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::runtime::gameloop::GameLoop</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a4cff6e4e7cab7702132062e1a3025a2c" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::engine::runtime::gameloop::GameLoop::initialized_</definition>
+        <argsstring></argsstring>
+        <name>initialized_</name>
+        <qualifiedname>helios::engine::runtime::gameloop::GameLoop::initialized_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/gameloop/GameLoop.ixx" line="48" column="14" bodyfile="include/helios/engine/runtime/gameloop/GameLoop.ixx" bodystart="48" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1ab9de47f4cf8c4eb818c6ae2614cbc6c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class helios::engine::runtime::gameloop::Pass</definition>
+        <argsstring></argsstring>
+        <name>helios::engine::runtime::gameloop::Pass</name>
+        <qualifiedname>helios::engine::runtime::gameloop::GameLoop::Pass</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass" kindref="compound">helios::engine::runtime::gameloop::Pass</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/gameloop/GameLoop.ixx" line="52" column="22" bodyfile="include/helios/engine/runtime/gameloop/GameLoop.ixx" bodystart="52" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-static-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a8abc8cce8e4faa1a54d61531b10781bd" prot="protected" static="yes" mutable="no">
+        <type>const <ref refid="classhelios_1_1util_1_1log_1_1Logger" kindref="compound">helios::util::log::Logger</ref> &amp;</type>
+        <definition>const helios::util::log::Logger&amp; helios::engine::runtime::gameloop::GameLoop::logger_</definition>
+        <argsstring></argsstring>
+        <name>logger_</name>
+        <qualifiedname>helios::engine::runtime::gameloop::GameLoop::logger_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1util_1_1log_1_1LogManager_1a750d8fd5b3ee3678600644756b0631e7" kindref="member">helios::util::log::LogManager::loggerForScope</ref>(
+            <ref refid="OpenGLUniformLocationMap_8ixx_1acbc04f24078582c7d42b2085be5d5750" kindref="member">HELIOS_LOG_SCOPE</ref>)</initializer>
+        <briefdescription>
+<para>The logger used with this <ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop" kindref="compound">GameLoop</ref> instance. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/gameloop/GameLoop.ixx" line="57" column="55" bodyfile="include/helios/engine/runtime/gameloop/GameLoop.ixx" bodystart="57" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a7d4eb13220ecd447c6af0914fd214921" prot="protected" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase" kindref="compound">helios::engine::runtime::gameloop::Phase</ref></type>
+        <definition>helios::engine::runtime::gameloop::Phase helios::engine::runtime::gameloop::GameLoop::prePhase_</definition>
+        <argsstring></argsstring>
+        <name>prePhase_</name>
+        <qualifiedname>helios::engine::runtime::gameloop::GameLoop::prePhase_</qualifiedname>
+        <initializer>{*this}</initializer>
+        <briefdescription>
+<para>The pre-update phase, executed before main gameplay logic. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/gameloop/GameLoop.ixx" line="64" column="50" bodyfile="include/helios/engine/runtime/gameloop/GameLoop.ixx" bodystart="64" bodyend="64"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a7915a98afe2de477625904422cf6d029" compoundref="GameLoop_8ixx" startline="195" endline="216">init</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a72b7ba2e6461d61b0f384a3d7b940a82" compoundref="GameLoop_8ixx" startline="161" endline="177">phase</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aff5330464fa41a1d7a8ebcc41b75b571" compoundref="GameLoop_8ixx" startline="228" endline="261">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1adaff711d38a5a95c0494c527ae4a1714" prot="protected" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase" kindref="compound">helios::engine::runtime::gameloop::Phase</ref></type>
+        <definition>helios::engine::runtime::gameloop::Phase helios::engine::runtime::gameloop::GameLoop::mainPhase_</definition>
+        <argsstring></argsstring>
+        <name>mainPhase_</name>
+        <qualifiedname>helios::engine::runtime::gameloop::GameLoop::mainPhase_</qualifiedname>
+        <initializer>{*this}</initializer>
+        <briefdescription>
+<para>The main update phase for core gameplay systems. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/gameloop/GameLoop.ixx" line="69" column="50" bodyfile="include/helios/engine/runtime/gameloop/GameLoop.ixx" bodystart="69" bodyend="69"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a7915a98afe2de477625904422cf6d029" compoundref="GameLoop_8ixx" startline="195" endline="216">init</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a72b7ba2e6461d61b0f384a3d7b940a82" compoundref="GameLoop_8ixx" startline="161" endline="177">phase</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aff5330464fa41a1d7a8ebcc41b75b571" compoundref="GameLoop_8ixx" startline="228" endline="261">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a53abfe8e0aed479d00ec3867d5fd0412" prot="protected" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase" kindref="compound">helios::engine::runtime::gameloop::Phase</ref></type>
+        <definition>helios::engine::runtime::gameloop::Phase helios::engine::runtime::gameloop::GameLoop::postPhase_</definition>
+        <argsstring></argsstring>
+        <name>postPhase_</name>
+        <qualifiedname>helios::engine::runtime::gameloop::GameLoop::postPhase_</qualifiedname>
+        <initializer>{*this}</initializer>
+        <briefdescription>
+<para>The post-update phase for cleanup and synchronization. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/gameloop/GameLoop.ixx" line="74" column="50" bodyfile="include/helios/engine/runtime/gameloop/GameLoop.ixx" bodystart="74" bodyend="74"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a7915a98afe2de477625904422cf6d029" compoundref="GameLoop_8ixx" startline="195" endline="216">init</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a72b7ba2e6461d61b0f384a3d7b940a82" compoundref="GameLoop_8ixx" startline="161" endline="177">phase</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aff5330464fa41a1d7a8ebcc41b75b571" compoundref="GameLoop_8ixx" startline="228" endline="261">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a1ee2f3b652d9619f4f328b43862b15c2" prot="protected" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" kindref="compound">helios::engine::runtime::messaging::command::CommandBuffer</ref></type>
+        <definition>helios::engine::runtime::messaging::command::CommandBuffer helios::engine::runtime::gameloop::GameLoop::commandBuffer_</definition>
+        <argsstring></argsstring>
+        <name>commandBuffer_</name>
+        <qualifiedname>helios::engine::runtime::gameloop::GameLoop::commandBuffer_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Buffer for deferred command execution. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/gameloop/GameLoop.ixx" line="79" column="68" bodyfile="include/helios/engine/runtime/gameloop/GameLoop.ixx" bodystart="79" bodyend="79"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a6b6e5665315d75f4e7007b78eb6f449e" compoundref="GameLoop_8ixx" startline="184" endline="186">commandBuffer</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aa8aeafec5ba655ccacde623ad32f40ec" compoundref="GameLoop_8ixx" startline="137" endline="146">phaseCommit</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aff5330464fa41a1d7a8ebcc41b75b571" compoundref="GameLoop_8ixx" startline="228" endline="261">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aa4fa49a8c51021ff24404e84b20696b5" prot="protected" static="no" mutable="no">
+        <type><ref refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event_1a59b7e7d4204d917672591bc8a383d9b4" kindref="member">helios::engine::runtime::messaging::event::GameLoopEventBus</ref></type>
+        <definition>helios::engine::runtime::messaging::event::GameLoopEventBus helios::engine::runtime::gameloop::GameLoop::phaseEventBus_</definition>
+        <argsstring></argsstring>
+        <name>phaseEventBus_</name>
+        <qualifiedname>helios::engine::runtime::gameloop::GameLoop::phaseEventBus_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Event bus for phase-level event propagation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Events pushed via `UpdateContext::pushPhase()` are buffered here and become readable in the next phase via `UpdateContext::readPhase()`. The buffer swap occurs in <ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aa8aeafec5ba655ccacde623ad32f40ec" kindref="member">phaseCommit()</ref>.</para>
+<para><simplesect kind="see"><para>UpdateContext::pushPhase() </para>
+</simplesect>
+<simplesect kind="see"><para>UpdateContext::readPhase() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/gameloop/GameLoop.ixx" line="91" column="69" bodyfile="include/helios/engine/runtime/gameloop/GameLoop.ixx" bodystart="91" bodyend="91"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aa8aeafec5ba655ccacde623ad32f40ec" compoundref="GameLoop_8ixx" startline="137" endline="146">phaseCommit</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aff5330464fa41a1d7a8ebcc41b75b571" compoundref="GameLoop_8ixx" startline="228" endline="261">update</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1abf5317ab24eb3c9dbfe5c0a827680699" prot="protected" static="no" mutable="no">
+        <type><ref refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event_1a59b7e7d4204d917672591bc8a383d9b4" kindref="member">helios::engine::runtime::messaging::event::GameLoopEventBus</ref></type>
+        <definition>helios::engine::runtime::messaging::event::GameLoopEventBus helios::engine::runtime::gameloop::GameLoop::passEventBus_</definition>
+        <argsstring></argsstring>
+        <name>passEventBus_</name>
+        <qualifiedname>helios::engine::runtime::gameloop::GameLoop::passEventBus_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Event bus for pass-level event propagation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Events pushed via `UpdateContext::pushPass()` are buffered here and become readable in subsequent passes via `UpdateContext::readPass()`. The buffer swap occurs when a pass has a commit point.</para>
+<para><simplesect kind="see"><para>UpdateContext::pushPass() </para>
+</simplesect>
+<simplesect kind="see"><para>UpdateContext::readPass() </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_1a3f6b86a024c8b87e7794a024c2342d6c" kindref="member">Pass::addCommitPoint()</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/gameloop/GameLoop.ixx" line="104" column="69" bodyfile="include/helios/engine/runtime/gameloop/GameLoop.ixx" bodystart="104" bodyend="104"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a5956cb29f15f1a8bdde49e994eaf223f" compoundref="GameLoop_8ixx" startline="118" endline="120">passCommit</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aa8aeafec5ba655ccacde623ad32f40ec" compoundref="GameLoop_8ixx" startline="137" endline="146">phaseCommit</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aff5330464fa41a1d7a8ebcc41b75b571" compoundref="GameLoop_8ixx" startline="228" endline="261">update</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a5956cb29f15f1a8bdde49e994eaf223f" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::gameloop::GameLoop::passCommit</definition>
+        <argsstring>()</argsstring>
+        <name>passCommit</name>
+        <qualifiedname>helios::engine::runtime::gameloop::GameLoop::passCommit</qualifiedname>
+        <briefdescription>
+<para>Commits pass-level events by swapping the pass event bus buffers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Called after each pass that has a commit point. Events pushed via `UpdateContext::pushPass()` become readable in subsequent passes via `UpdateContext::readPass()`.</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_1a3f6b86a024c8b87e7794a024c2342d6c" kindref="member">Pass::addCommitPoint()</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>UpdateContext::pushPass() </para>
+</simplesect>
+<simplesect kind="see"><para>UpdateContext::readPass() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/gameloop/GameLoop.ixx" line="118" column="14" bodyfile="include/helios/engine/runtime/gameloop/GameLoop.ixx" bodystart="118" bodyend="120"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1abf5317ab24eb3c9dbfe5c0a827680699" compoundref="GameLoop_8ixx" startline="104" endline="104">passEventBus_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aa8aeafec5ba655ccacde623ad32f40ec" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::gameloop::GameLoop::phaseCommit</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld, helios::engine::runtime::world::UpdateContext &amp;updateContext)</argsstring>
+        <name>phaseCommit</name>
+        <qualifiedname>helios::engine::runtime::gameloop::GameLoop::phaseCommit</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Commits phase-level events and flushes commands and managers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Called after each phase completes. This method: 1. Swaps phase event bus buffers, making events readable in the next phase. 2. Clears pass event buffers for the new phase. 3. Flushes the command buffer, executing deferred commands. 4. Flushes managers, allowing to process any request generated by the commands.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the game world. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current update context.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para>UpdateContext::pushPhase() </para>
+</simplesect>
+<simplesect kind="see"><para>UpdateContext::readPhase() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/gameloop/GameLoop.ixx" line="137" column="14" bodyfile="include/helios/engine/runtime/gameloop/GameLoop.ixx" bodystart="137" bodyend="146"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a1ee2f3b652d9619f4f328b43862b15c2" compoundref="GameLoop_8ixx" startline="79" endline="79">commandBuffer_</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a72cd30e709f646b83f18c50c97f57b3c" compoundref="GameWorld_8ixx" startline="353" endline="357">helios::engine::runtime::world::GameWorld::flushManagers</references>
+        <references refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_1a459e72fe47399985183cc6ca35531dfa" compoundref="UpdateContext_8ixx" startline="176" endline="178">helios::engine::runtime::world::UpdateContext::gameWorld</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1abf5317ab24eb3c9dbfe5c0a827680699" compoundref="GameLoop_8ixx" startline="104" endline="104">passEventBus_</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aa4fa49a8c51021ff24404e84b20696b5" compoundref="GameLoop_8ixx" startline="91" endline="91">phaseEventBus_</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aff5330464fa41a1d7a8ebcc41b75b571" compoundref="GameLoop_8ixx" startline="228" endline="261">update</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a41b297a4ee926ed2b989996ceb61bb7f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::runtime::gameloop::GameLoop::GameLoop</definition>
+        <argsstring>()=default</argsstring>
+        <name>GameLoop</name>
+        <qualifiedname>helios::engine::runtime::gameloop::GameLoop::GameLoop</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/gameloop/GameLoop.ixx" line="152" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a72b7ba2e6461d61b0f384a3d7b940a82" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase" kindref="compound">helios::engine::runtime::gameloop::Phase</ref> &amp;</type>
+        <definition>helios::engine::runtime::gameloop::Phase &amp; helios::engine::runtime::gameloop::GameLoop::phase</definition>
+        <argsstring>(helios::engine::runtime::gameloop::PhaseType phaseType)</argsstring>
+        <name>phase</name>
+        <qualifiedname>helios::engine::runtime::gameloop::GameLoop::phase</qualifiedname>
+        <param>
+          <type><ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1aa57e7c5caf8850bd2c56ef8d345afa71" kindref="member">helios::engine::runtime::gameloop::PhaseType</ref></type>
+          <declname>phaseType</declname>
+        </param>
+        <briefdescription>
+<para>Returns a reference to the specified phase. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>phaseType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of phase to retrieve (Pre, Main, or Post).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to the requested <ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase" kindref="compound">Phase</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/gameloop/GameLoop.ixx" line="161" column="50" bodyfile="include/helios/engine/runtime/gameloop/GameLoop.ixx" bodystart="161" bodyend="177"/>
+        <references refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1aa57e7c5caf8850bd2c56ef8d345afa71aa02c83a7dbd96295beaefb72c2bee2de" compoundref="Phase_8ixx" startline="37">helios::engine::runtime::gameloop::Main</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1adaff711d38a5a95c0494c527ae4a1714" compoundref="GameLoop_8ixx" startline="69" endline="69">mainPhase_</references>
+        <references refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1aa57e7c5caf8850bd2c56ef8d345afa71a03d947a2158373c3b9d74325850cb8b9" compoundref="Phase_8ixx" startline="42">helios::engine::runtime::gameloop::Post</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a53abfe8e0aed479d00ec3867d5fd0412" compoundref="GameLoop_8ixx" startline="74" endline="74">postPhase_</references>
+        <references refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1aa57e7c5caf8850bd2c56ef8d345afa71afb55a965b77791b31ffd2bb548f71080" compoundref="Phase_8ixx" startline="32">helios::engine::runtime::gameloop::Pre</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a7d4eb13220ecd447c6af0914fd214921" compoundref="GameLoop_8ixx" startline="64" endline="64">prePhase_</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a7915a98afe2de477625904422cf6d029" compoundref="GameLoop_8ixx" startline="195" endline="216">init</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aff5330464fa41a1d7a8ebcc41b75b571" compoundref="GameLoop_8ixx" startline="228" endline="261">update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a6b6e5665315d75f4e7007b78eb6f449e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" kindref="compound">helios::engine::runtime::messaging::command::CommandBuffer</ref> &amp;</type>
+        <definition>helios::engine::runtime::messaging::command::CommandBuffer &amp; helios::engine::runtime::gameloop::GameLoop::commandBuffer</definition>
+        <argsstring>()</argsstring>
+        <name>commandBuffer</name>
+        <qualifiedname>helios::engine::runtime::gameloop::GameLoop::commandBuffer</qualifiedname>
+        <briefdescription>
+<para>Returns a reference to the command buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Reference to the CommandBuffer owned by this <ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop" kindref="compound">GameLoop</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/gameloop/GameLoop.ixx" line="184" column="68" bodyfile="include/helios/engine/runtime/gameloop/GameLoop.ixx" bodystart="184" bodyend="186"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a1ee2f3b652d9619f4f328b43862b15c2" compoundref="GameLoop_8ixx" startline="79" endline="79">commandBuffer_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a7915a98afe2de477625904422cf6d029" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::gameloop::GameLoop::init</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld)</argsstring>
+        <name>init</name>
+        <qualifiedname>helios::engine::runtime::gameloop::GameLoop::init</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <briefdescription>
+<para>Initializes the <ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop" kindref="compound">GameLoop</ref> and all registered phases and passes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Must be called once before the first <ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aff5330464fa41a1d7a8ebcc41b75b571" kindref="member">update()</ref>. Asserts if called multiple times.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the game world to initialize with. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/gameloop/GameLoop.ixx" line="195" column="14" bodyfile="include/helios/engine/runtime/gameloop/GameLoop.ixx" bodystart="195" bodyend="216"/>
+        <references refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1aa57e7c5caf8850bd2c56ef8d345afa71aa02c83a7dbd96295beaefb72c2bee2de" compoundref="Phase_8ixx" startline="37">helios::engine::runtime::gameloop::Main</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1adaff711d38a5a95c0494c527ae4a1714" compoundref="GameLoop_8ixx" startline="69" endline="69">mainPhase_</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a72b7ba2e6461d61b0f384a3d7b940a82" compoundref="GameLoop_8ixx" startline="161" endline="177">phase</references>
+        <references refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1aa57e7c5caf8850bd2c56ef8d345afa71a03d947a2158373c3b9d74325850cb8b9" compoundref="Phase_8ixx" startline="42">helios::engine::runtime::gameloop::Post</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a53abfe8e0aed479d00ec3867d5fd0412" compoundref="GameLoop_8ixx" startline="74" endline="74">postPhase_</references>
+        <references refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1aa57e7c5caf8850bd2c56ef8d345afa71afb55a965b77791b31ffd2bb548f71080" compoundref="Phase_8ixx" startline="32">helios::engine::runtime::gameloop::Pre</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a7d4eb13220ecd447c6af0914fd214921" compoundref="GameLoop_8ixx" startline="64" endline="64">prePhase_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aff5330464fa41a1d7a8ebcc41b75b571" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::gameloop::GameLoop::update</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld, float deltaTime, const helios::input::InputSnapshot &amp;inputSnapshot) noexcept</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::runtime::gameloop::GameLoop::update</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>deltaTime</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1input_1_1InputSnapshot" kindref="compound">helios::input::InputSnapshot</ref> &amp;</type>
+          <declname>inputSnapshot</declname>
+        </param>
+        <briefdescription>
+<para>Executes one full frame update across all phases. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Iterates through Pre, Main, and Post phases, updating all registered systems and committing events and commands after each phase.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the game world. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>deltaTime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time elapsed since the last frame in seconds. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>inputSnapshot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Snapshot of the current input state. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/gameloop/GameLoop.ixx" line="228" column="14" bodyfile="include/helios/engine/runtime/gameloop/GameLoop.ixx" bodystart="228" bodyend="261"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a1ee2f3b652d9619f4f328b43862b15c2" compoundref="GameLoop_8ixx" startline="79" endline="79">commandBuffer_</references>
+        <references refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1aa57e7c5caf8850bd2c56ef8d345afa71aa02c83a7dbd96295beaefb72c2bee2de" compoundref="Phase_8ixx" startline="37">helios::engine::runtime::gameloop::Main</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1adaff711d38a5a95c0494c527ae4a1714" compoundref="GameLoop_8ixx" startline="69" endline="69">mainPhase_</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1abf5317ab24eb3c9dbfe5c0a827680699" compoundref="GameLoop_8ixx" startline="104" endline="104">passEventBus_</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a72b7ba2e6461d61b0f384a3d7b940a82" compoundref="GameLoop_8ixx" startline="161" endline="177">phase</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aa8aeafec5ba655ccacde623ad32f40ec" compoundref="GameLoop_8ixx" startline="137" endline="146">phaseCommit</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aa4fa49a8c51021ff24404e84b20696b5" compoundref="GameLoop_8ixx" startline="91" endline="91">phaseEventBus_</references>
+        <references refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1aa57e7c5caf8850bd2c56ef8d345afa71a03d947a2158373c3b9d74325850cb8b9" compoundref="Phase_8ixx" startline="42">helios::engine::runtime::gameloop::Post</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a53abfe8e0aed479d00ec3867d5fd0412" compoundref="GameLoop_8ixx" startline="74" endline="74">postPhase_</references>
+        <references refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1aa57e7c5caf8850bd2c56ef8d345afa71afb55a965b77791b31ffd2bb548f71080" compoundref="Phase_8ixx" startline="32">helios::engine::runtime::gameloop::Pre</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a7d4eb13220ecd447c6af0914fd214921" compoundref="GameLoop_8ixx" startline="64" endline="64">prePhase_</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Central orchestrator for the game update cycle. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The <ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop" kindref="compound">GameLoop</ref> manages the execution of game systems across three distinct phases: Pre, Main, and Post. Each phase can contain multiple passes, and each pass can have an optional commit point for event synchronization.</para>
+<para>The <ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop" kindref="compound">GameLoop</ref> owns:<itemizedlist>
+<listitem><para>Three phases (Pre, Main, Post), each containing passes with registered systems.</para>
+</listitem><listitem><para>A CommandBuffer for deferred command execution.</para>
+</listitem><listitem><para>Two event buses: one for phase-level and one for pass-level event propagation.</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase" kindref="compound">Phase</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass" kindref="compound">Pass</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>CommandBuffer </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="5">
+        <label>helios::core::buffer::TypeIndexedDoubleBuffer&lt; helios::core::data::TypeIndexer&lt; GameLoopEventBusGroup &gt; &gt;</label>
+        <link refid="classhelios_1_1core_1_1buffer_1_1TypeIndexedDoubleBuffer"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::runtime::gameloop::GameLoop</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>logger_</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>mainPhase_</edgelabel>
+          <edgelabel>postPhase_</edgelabel>
+          <edgelabel>prePhase_</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>commandBuffer_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>passEventBus_</edgelabel>
+          <edgelabel>phaseEventBus_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::runtime::gameloop::Phase</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase"/>
+      </node>
+      <node id="4">
+        <label>helios::engine::runtime::messaging::command::CommandBuffer</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer"/>
+      </node>
+      <node id="2">
+        <label>helios::util::log::Logger</label>
+        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/runtime/gameloop/GameLoop.ixx" line="45" column="5" bodyfile="include/helios/engine/runtime/gameloop/GameLoop.ixx" bodystart="45" bodyend="265"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a6b6e5665315d75f4e7007b78eb6f449e" prot="public" virt="non-virtual"><scope>helios::engine::runtime::gameloop::GameLoop</scope><name>commandBuffer</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a1ee2f3b652d9619f4f328b43862b15c2" prot="protected" virt="non-virtual"><scope>helios::engine::runtime::gameloop::GameLoop</scope><name>commandBuffer_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a41b297a4ee926ed2b989996ceb61bb7f" prot="public" virt="non-virtual"><scope>helios::engine::runtime::gameloop::GameLoop</scope><name>GameLoop</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1ab9de47f4cf8c4eb818c6ae2614cbc6c3" prot="public" virt="non-virtual"><scope>helios::engine::runtime::gameloop::GameLoop</scope><name>helios::engine::runtime::gameloop::Pass</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a7915a98afe2de477625904422cf6d029" prot="public" virt="non-virtual"><scope>helios::engine::runtime::gameloop::GameLoop</scope><name>init</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a4cff6e4e7cab7702132062e1a3025a2c" prot="private" virt="non-virtual"><scope>helios::engine::runtime::gameloop::GameLoop</scope><name>initialized_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a8abc8cce8e4faa1a54d61531b10781bd" prot="protected" virt="non-virtual"><scope>helios::engine::runtime::gameloop::GameLoop</scope><name>logger_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1adaff711d38a5a95c0494c527ae4a1714" prot="protected" virt="non-virtual"><scope>helios::engine::runtime::gameloop::GameLoop</scope><name>mainPhase_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a5956cb29f15f1a8bdde49e994eaf223f" prot="protected" virt="non-virtual"><scope>helios::engine::runtime::gameloop::GameLoop</scope><name>passCommit</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1abf5317ab24eb3c9dbfe5c0a827680699" prot="protected" virt="non-virtual"><scope>helios::engine::runtime::gameloop::GameLoop</scope><name>passEventBus_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a72b7ba2e6461d61b0f384a3d7b940a82" prot="public" virt="non-virtual"><scope>helios::engine::runtime::gameloop::GameLoop</scope><name>phase</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aa8aeafec5ba655ccacde623ad32f40ec" prot="protected" virt="non-virtual"><scope>helios::engine::runtime::gameloop::GameLoop</scope><name>phaseCommit</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aa4fa49a8c51021ff24404e84b20696b5" prot="protected" virt="non-virtual"><scope>helios::engine::runtime::gameloop::GameLoop</scope><name>phaseEventBus_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a53abfe8e0aed479d00ec3867d5fd0412" prot="protected" virt="non-virtual"><scope>helios::engine::runtime::gameloop::GameLoop</scope><name>postPhase_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a7d4eb13220ecd447c6af0914fd214921" prot="protected" virt="non-virtual"><scope>helios::engine::runtime::gameloop::GameLoop</scope><name>prePhase_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aff5330464fa41a1d7a8ebcc41b75b571" prot="public" virt="non-virtual"><scope>helios::engine::runtime::gameloop::GameLoop</scope><name>update</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

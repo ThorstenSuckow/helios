@@ -10,25 +10,30 @@
 <varlistentry><term>Member <ref refid="classhelios_1_1app_1_1Application_1aec579824c0704542d3f7d6c4f47851a1" kindref="member">helios::app::Application::~Application</ref>  ()=default</term></varlistentry>
 <listitem><para><anchor id="todo_1_todo000003"/>free resource allocations from renderingDevice, window and InputManager  </para>
 </listitem>
-<varlistentry><term>Class <ref refid="classhelios_1_1core_1_1Transform" kindref="compound">helios::core::Transform</ref>  </term></varlistentry>
+<varlistentry><term>Class <ref refid="classhelios_1_1core_1_1spatial_1_1Transform" kindref="compound">helios::core::spatial::Transform</ref>  </term></varlistentry>
 <listitem><para><anchor id="todo_1_todo000004"/>use quaternions for rotation  </para>
 </listitem>
-<varlistentry><term>Class <ref refid="classhelios_1_1engine_1_1game_1_1InputSnapshot" kindref="compound">helios::engine::game::InputSnapshot</ref>  </term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000005"/>Extend to support multiple gamepads, keyboard, and mouse input. </para>
-<para></para>
-<para>Add timestamp to enable precise replay and network synchronization.  </para>
+<varlistentry><term>Member <ref refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1systems_1_1LevelBoundsBehaviorSystem_1ac1e97cde1b5f98aaec15989da6e864ab" kindref="member">helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem::update</ref>  (<ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;updateContext) noexcept override</term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000005"/>optimize  </para>
 </listitem>
-<varlistentry><term>Member <ref refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a211dd83f0fdffdb4c106fdd0a9466867" kindref="member">helios::engine::game::systems::gameplay::ProjectilePoolSystem::spawn</ref>  (<ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref> position, <ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref> muzzleVelocity, <ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref> aimDir, <ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref> sourceVelocity) noexcept</term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000006"/>the <ref refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem" kindref="compound">ProjectilePoolSystem</ref> assumes to shoot in 2d, projected on the xy plane. This has to be configured later on.  </para>
+<varlistentry><term>Member <ref refid="classhelios_1_1engine_1_1mechanics_1_1input_1_1systems_1_1TwinStickInputSystem_1acca47c4456273d89230d78679270eef9" kindref="member">helios::engine::mechanics::input::systems::TwinStickInputSystem::update</ref>  (<ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;updateContext) noexcept override</term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000007"/>DO NOT POST IF input is already inactive in shootComponent and no input was detected (after normalizing)  </para>
 </listitem>
-<varlistentry><term>Member <ref refid="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1HeadingSystem_1ab663b281b488f7ce2ba595146cbccdd4" kindref="member">helios::engine::game::systems::physics::HeadingSystem::update</ref>  (<ref refid="structhelios_1_1engine_1_1game_1_1UpdateContext" kindref="compound">helios::engine::game::UpdateContext</ref> &amp;updateContext) noexcept override</term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000008"/>could be moved to policy component &quot;DirectionFromHeading&quot;  </para>
+<varlistentry><term>Namespace <ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components" kindref="compound">helios::engine::modules::physics::motion::components</ref>  </term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000009"/>move to spatial transform </para>
+<para><anchor id="todo_1_todo000010"/>move to spatial or effects  </para>
+</listitem>
+<varlistentry><term>Class <ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool" kindref="compound">helios::engine::runtime::pooling::GameObjectPool</ref>  </term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000011"/>Prevent duplicate Guids from being added to the pool.  </para>
+</listitem>
+<varlistentry><term>Member <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a0893b5b23f23de4e093c69f10b5ca2e3" kindref="member">helios::engine::runtime::world::GameWorld::clone</ref>  (<ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> &amp;gameObject)</term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000012"/>Optional ClonePolicy where rules are specified?  </para>
 </listitem>
 <varlistentry><term>Member <ref refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1ac6b55e3ef2b685222358c14e69e89f06" kindref="member">helios::engine::tooling::FramePacer::sync</ref>  ()</term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000009"/>Implement hybrid spinning for the last millisecond of the wait time to improve timing precision and mitigate OS scheduler wake-up latency.  </para>
+<listitem><para><anchor id="todo_1_todo000013"/>Implement hybrid spinning for the last millisecond of the wait time to improve timing precision and mitigate OS scheduler wake-up latency.  </para>
 </listitem>
 <varlistentry><term>Class <ref refid="classhelios_1_1event_1_1Event" kindref="compound">helios::event::Event</ref>  </term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000010"/>can we reset the value for Guids in between frames, if events are guaranteed to be dispatched and processed in between frames?  </para>
+<listitem><para><anchor id="todo_1_todo000014"/>can we reset the value for Guids in between frames, if events are guaranteed to be dispatched and processed in between frames?  </para>
 </listitem>
 <varlistentry><term>Class <ref refid="classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow" kindref="compound">helios::ext::glfw::window::GLFWWindow</ref>  </term></varlistentry>
 <listitem><para><anchor id="todo_1_todo000001"/>add glfwSetWindowRefreshCallback  </para>
@@ -36,48 +41,53 @@
 <varlistentry><term>Member <ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1aa97dd0a5a8fb57989616b7fac5139f8b" kindref="member">helios::ext::opengl::rendering::OpenGLDevice::init</ref>  () override</term></varlistentry>
 <listitem><para><anchor id="todo_1_todo000002"/>Provide abstraction for glfwGetProcAddress.  </para>
 </listitem>
+<varlistentry><term>Class <ref refid="classhelios_1_1input_1_1InputSnapshot" kindref="compound">helios::input::InputSnapshot</ref>  </term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000015"/>Extend to support multiple gamepads, keyboard, and mouse input. </para>
+<para></para>
+<para>Add timestamp to enable precise replay and network synchronization.  </para>
+</listitem>
 <varlistentry><term>Member <ref refid="structhelios_1_1math_1_1mat4_1a11484773381edf083309360d6c940d3f" kindref="member">helios::math::mat4&lt; T &gt;::same</ref>  (const mat4&lt; T &gt; &amp;rgt) const</term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000011"/>account for abs (values close to zero) and rel (larger values), move EPSILON to global constant  </para>
+<listitem><para><anchor id="todo_1_todo000016"/>account for abs (values close to zero) and rel (larger values), move EPSILON to global constant  </para>
 </listitem>
 <varlistentry><term>Member <ref refid="structhelios_1_1math_1_1vec2_1a14a40e171d65f8df56deab0b80a6c800" kindref="member">helios::math::vec2&lt; T &gt;::same</ref>  (const vec2&lt; T &gt; &amp;rgt, T epsilon=0.0001) const</term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000012"/>account for abs (values close to zero) and rel (larger values), move epsilon to global constant?  </para>
+<listitem><para><anchor id="todo_1_todo000017"/>account for abs (values close to zero) and rel (larger values), move epsilon to global constant?  </para>
 </listitem>
 <varlistentry><term>Member <ref refid="structhelios_1_1math_1_1vec3_1a38d076eec3ebd34f4353d99e3f58ad1e" kindref="member">helios::math::vec3&lt; T &gt;::same</ref>  (const vec3&lt; T &gt; &amp;rgt, T epsilon=0.0001) const</term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000013"/>account for abs (values close to zero) and rel (larger values), move epsilon to global constant?  </para>
+<listitem><para><anchor id="todo_1_todo000018"/>account for abs (values close to zero) and rel (larger values), move epsilon to global constant?  </para>
 </listitem>
 <varlistentry><term>Member <ref refid="classhelios_1_1rendering_1_1model_1_1Mesh_1abd79cc39a499bd1b368afd4dd534b00b" kindref="member">helios::rendering::model::Mesh::init</ref>  ()=0</term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000014"/> std::shared_ptr&lt;const std::vector&lt;Texture&gt;&gt; textures_;  </para>
+<listitem><para><anchor id="todo_1_todo000019"/> std::shared_ptr&lt;const std::vector&lt;Texture&gt;&gt; textures_;  </para>
 </listitem>
 <varlistentry><term>Member <ref refid="classhelios_1_1rendering_1_1RenderPassFactory_1a18d1346e8e3c78358ccb1872da3125a3" kindref="member">helios::rendering::RenderPassFactory::makeRenderCommand</ref>  (const <ref refid="structhelios_1_1scene_1_1SnapshotItem" kindref="compound">helios::scene::SnapshotItem</ref> &amp;snapshotItem) const noexcept</term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000015"/>future versions might want to use a FactoryMethod in <ref refid="classhelios_1_1rendering_1_1RenderCommand" kindref="compound">RenderCommand</ref> that takes a SnapshotItem and creates a <ref refid="classhelios_1_1rendering_1_1RenderCommand" kindref="compound">RenderCommand</ref> from it (e.g. `RenderCommand::fromSnapshotItem()`); or a Factory `RenderCommandBuilder()` with fluent configuration `.withShader().withMesh().build();`  </para>
+<listitem><para><anchor id="todo_1_todo000020"/>future versions might want to use a FactoryMethod in <ref refid="classhelios_1_1rendering_1_1RenderCommand" kindref="compound">RenderCommand</ref> that takes a SnapshotItem and creates a <ref refid="classhelios_1_1rendering_1_1RenderCommand" kindref="compound">RenderCommand</ref> from it (e.g. `RenderCommand::fromSnapshotItem()`); or a Factory `RenderCommandBuilder()` with fluent configuration `.withShader().withMesh().build();`  </para>
 </listitem>
 <varlistentry><term>Member <ref refid="classhelios_1_1rendering_1_1RenderQueue_1ace107c45024c29efc237107e3307c2ab" kindref="member">helios::rendering::RenderQueue::add</ref>  (std::unique_ptr&lt; const helios::rendering::RenderCommand &gt; renderCommand)</term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000016"/>prevent adding renderables while rendering  </para>
+<listitem><para><anchor id="todo_1_todo000021"/>prevent adding renderables while rendering  </para>
 </listitem>
 <varlistentry><term>Class <ref refid="classhelios_1_1rendering_1_1RenderTarget" kindref="compound">helios::rendering::RenderTarget</ref>  </term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000017"/>This implementation currently represents only the **default framebuffer**. Future extensions should allow it to represent arbitrary framebuffer objects (FBOs), using indices.  </para>
+<listitem><para><anchor id="todo_1_todo000022"/>This implementation currently represents only the **default framebuffer**. Future extensions should allow it to represent arbitrary framebuffer objects (FBOs), using indices.  </para>
 </listitem>
 <varlistentry><term>Member <ref refid="classhelios_1_1rendering_1_1RenderTarget_1a65cfc3bea57ac3b5eb398c85754dc049" kindref="member">helios::rendering::RenderTarget::setSize</ref>  (unsigned int width, unsigned int height) noexcept</term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000019"/>A LayoutManager could be introduced to manage the arrangement of multiple viewports. </para>
+<listitem><para><anchor id="todo_1_todo000024"/>A LayoutManager could be introduced to manage the arrangement of multiple viewports. </para>
 </listitem>
 <varlistentry><term>Class <ref refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap" kindref="compound">helios::rendering::shader::UniformValueMap</ref>  </term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000020"/>UniformMap must allow only one index for all data structures, i.e. if map_[semantics] contains a mat4f, other types should not be allowed for the same semantics.</para>
-<para><anchor id="todo_1_todo000021"/>UniformValueMaps should be scoped, e.g. per frame (world matrix, projection, view...), per material (colors, emissive...), per object (world matrix...), which allows for better handling of assigning uniforms: per-frame values change once per frame, while per-object values change per object.  </para>
+<listitem><para><anchor id="todo_1_todo000025"/>UniformMap must allow only one index for all data structures, i.e. if map_[semantics] contains a mat4f, other types should not be allowed for the same semantics.</para>
+<para><anchor id="todo_1_todo000026"/>UniformValueMaps should be scoped, e.g. per frame (world matrix, projection, view...), per material (colors, emissive...), per object (world matrix...), which allows for better handling of assigning uniforms: per-frame values change once per frame, while per-object values change per object.  </para>
 </listitem>
 <varlistentry><term>Member <ref refid="classhelios_1_1rendering_1_1Viewport_1a9c8ed040c0e35728770ddd462860c5bc" kindref="member">helios::rendering::Viewport::setRenderTarget</ref>  (const <ref refid="classhelios_1_1rendering_1_1RenderTarget" kindref="compound">helios::rendering::RenderTarget</ref> *renderTarget, <ref refid="structhelios_1_1rendering_1_1ViewportKey" kindref="compound">ViewportKey</ref> key) noexcept</term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000022"/>The <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">Viewport</ref> should observe the <ref refid="classhelios_1_1rendering_1_1RenderTarget" kindref="compound">RenderTarget</ref> for state changes (e.g., resize).  </para>
+<listitem><para><anchor id="todo_1_todo000027"/>The <ref refid="classhelios_1_1rendering_1_1Viewport" kindref="compound">Viewport</ref> should observe the <ref refid="classhelios_1_1rendering_1_1RenderTarget" kindref="compound">RenderTarget</ref> for state changes (e.g., resize).  </para>
 </listitem>
 <varlistentry><term>Class <ref refid="classhelios_1_1scene_1_1FrustumCullingStrategy" kindref="compound">helios::scene::FrustumCullingStrategy</ref>  </term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000023"/>The returned list should be considered &quot;as is&quot; for now: Each entry in the list is a single renderable entity to consider. Its child nodes (i.e. the sub tree for which this node is the root) should _not_ be automatically considered for rendering. Later iterations should probably use an individual struct that provides a hint whether for a given node a whole subtree should be considered, saving time for culling and memory when constructing the list.  </para>
+<listitem><para><anchor id="todo_1_todo000028"/>The returned list should be considered &quot;as is&quot; for now: Each entry in the list is a single renderable entity to consider. Its child nodes (i.e. the sub tree for which this node is the root) should _not_ be automatically considered for rendering. Later iterations should probably use an individual struct that provides a hint whether for a given node a whole subtree should be considered, saving time for culling and memory when constructing the list.  </para>
 </listitem>
 <varlistentry><term>Member <ref refid="classhelios_1_1scene_1_1Scene_1ab3ad742392c2a2b159cf8927ee6cf375" kindref="member">helios::scene::Scene::createSnapshot</ref>  (const std::shared_ptr&lt; const rendering::Viewport &gt; &amp;viewport) const</term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000025"/>This should be refactored into a factory to prevent domain leakage between <ref refid="classhelios_1_1scene_1_1Scene" kindref="compound">Scene</ref> and Rendering.  </para>
+<listitem><para><anchor id="todo_1_todo000030"/>This should be refactored into a factory to prevent domain leakage between <ref refid="classhelios_1_1scene_1_1Scene" kindref="compound">Scene</ref> and Rendering.  </para>
 </listitem>
 <varlistentry><term>Member <ref refid="classhelios_1_1scene_1_1SceneNode_1a316494fedf68d4ca53cd4453885e0b07" kindref="member">helios::scene::SceneNode::SceneNode</ref>  () noexcept</term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000026"/>explicitly implement move (assignment) constructor if required, since we have deleted the copy constructors  </para>
+<listitem><para><anchor id="todo_1_todo000031"/>explicitly implement move (assignment) constructor if required, since we have deleted the copy constructors  </para>
 </listitem>
 <varlistentry><term>Struct <ref refid="structhelios_1_1scene_1_1SnapshotItem" kindref="compound">helios::scene::SnapshotItem</ref>  </term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000027"/>we&apos;re intentionally preferring stability over performance by using weak_ptr instead of raw pointers. This leaves room for (performance) improvements in later iterations. The Renderable as a weak pointer can later on be further implemented into a pure DTO, storing only scalar values that get send directly to the underlying rendering backend (e.g. vaos, vbos etc.). </para>
+<listitem><para><anchor id="todo_1_todo000032"/>we&apos;re intentionally preferring stability over performance by using weak_ptr instead of raw pointers. This leaves room for (performance) improvements in later iterations. The Renderable as a weak pointer can later on be further implemented into a pure DTO, storing only scalar values that get send directly to the underlying rendering backend (e.g. vaos, vbos etc.). </para>
 </listitem>
 </variablelist>
 </para>

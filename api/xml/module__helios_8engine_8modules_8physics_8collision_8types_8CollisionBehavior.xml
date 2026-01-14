@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8modules_8physics_8collision_8types_8CollisionBehavior" kind="module">
+    <compoundname>helios.engine.modules.physics.collision.types.CollisionBehavior</compoundname>
+    <innerfile refid="CollisionBehavior_8ixx">CollisionBehavior.ixx</innerfile>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>CollisionBehavior</name>
+        <qualifiedname>helios::engine::modules::physics::collision::types::CollisionBehavior</qualifiedname>
+        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2a6adf97f83acf6453d4a6a4b1070f3754" prot="public">
+          <name>None</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>No collision response. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2a74de3e45e4491e956e8dc18d841d9b00" prot="public">
+          <name>Reflect</name>
+          <initializer>= 1 &lt;&lt; 0</initializer>
+          <briefdescription>
+<para>Reflect the entity&apos;s velocity off the collision surface. </para>
+          </briefdescription>
+          <detaileddescription>
+<para>Uses the surface normal to calculate a reflected velocity vector. Commonly used for projectiles bouncing off walls. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2aeb9a56428f85bbdfd3846322baaffe6e" prot="public">
+          <name>Bounce</name>
+          <initializer>= 1 &lt;&lt; 1</initializer>
+          <briefdescription>
+<para>Bounce the entity with restitution applied. </para>
+          </briefdescription>
+          <detaileddescription>
+<para>Similar to Reflect but applies a restitution coefficient to reduce velocity. Used for physics-based bouncing. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2abf865bdc779ea87d172a8b1e5adc01b8" prot="public">
+          <name>Stick</name>
+          <initializer>= 1 &lt;&lt; 2</initializer>
+          <briefdescription>
+<para>Stick the entity to the collision surface. </para>
+          </briefdescription>
+          <detaileddescription>
+<para>Stops the entity&apos;s movement and attaches it to the collided object. Used for projectiles that embed on impact. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2a573a38c8ee30e1c0d6ad84ce4f965cf0" prot="public">
+          <name>Despawn</name>
+          <initializer>= 1 &lt;&lt; 3</initializer>
+          <briefdescription>
+<para>Despawn the entity on collision. </para>
+          </briefdescription>
+          <detaileddescription>
+<para>Marks the entity for removal from the game world. Used for projectiles that are destroyed on impact. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2aa4ecfc70574394990cf17bd83df499f7" prot="public">
+          <name>Event</name>
+          <initializer>= 1 &lt;&lt; 4</initializer>
+          <briefdescription>
+<para>Emit an event without physical response. </para>
+          </briefdescription>
+          <detaileddescription>
+<para>Generates a collision event for game logic processing without affecting the entity&apos;s physics state. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2a4eecfb50c5a20eb78bc4d5304e9d8618" prot="public">
+          <name>size_</name>
+          <initializer>= 6</initializer>
+          <briefdescription>
+<para>Internal: Number of behavior types for array sizing. </para>
+          </briefdescription>
+          <detaileddescription>
+<para><simplesect kind="warning"><para>Do not use as a behavior value. </para>
+</simplesect>
+</para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Defines how an entity responds to a collision event. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2" kindref="member">CollisionBehavior</ref> values are used as bitmasks to configure per-layer collision responses in CollisionComponent. Multiple behaviors can be combined using bitwise operations.</para>
+<para>The behavior determines what action the collision system takes when two entities collide based on their layer configuration.</para>
+<para><simplesect kind="note"><para>Not all behaviors are currently fully implemented. Currently supported:<itemizedlist>
+<listitem><para>`Reflect` — Fully supported</para>
+</listitem><listitem><para>`Bounce` — Fully supported</para>
+</listitem><listitem><para>`Despawn` — Fully supported </para>
+</listitem></itemizedlist>
+</para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/types/CollisionBehavior.ixx" line="30" column="5" bodyfile="include/helios/engine/modules/physics/collision/types/CollisionBehavior.ixx" bodystart="30" bodyend="83"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/engine/modules/physics/collision/types/CollisionBehavior.ixx" line="9" column="15"/>
+  </compounddef>
+</doxygen>

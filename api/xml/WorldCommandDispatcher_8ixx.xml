@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="WorldCommandDispatcher_8ixx" kind="file" language="C++">
+    <compoundname>WorldCommandDispatcher.ixx</compoundname>
+    <innerclass refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher" prot="public">helios::engine::runtime::messaging::command::WorldCommandDispatcher</innerclass>
+    <innernamespace refid="namespacehelios">helios</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine">helios::engine</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime">helios::engine::runtime</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1world">helios::engine::runtime::world</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1messaging">helios::engine::runtime::messaging</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1command">helios::engine::runtime::messaging::command</innernamespace>
+    <briefdescription>
+<para>Abstract dispatcher interface for WorldCommand handling. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/**</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>@file<sp/>WorldCommandDispatcher.ixx</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>@brief<sp/>Abstract<sp/>dispatcher<sp/>interface<sp/>for<sp/>WorldCommand<sp/>handling.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">module</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8runtime_8messaging_8command_8WorldCommandDispatcher" kindref="compound">helios.engine.runtime.messaging.command.WorldCommandDispatcher</ref>;</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1runtime_1_1world" kindref="compound">helios::engine::runtime::world</ref><sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref>;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1command" kindref="compound">helios::engine::runtime::messaging::command</ref><sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand" kindref="compound">WorldCommand</ref>;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Abstract<sp/>dispatcher<sp/>interface<sp/>for<sp/>type-safe<sp/>WorldCommand<sp/>handling.</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>WorldCommandDispatcher<sp/>enables<sp/>the<sp/>Visitor<sp/>pattern<sp/>for<sp/>WorldCommand</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>processing.<sp/>When<sp/>registered<sp/>with<sp/>a<sp/>CommandBuffer,<sp/>the<sp/>dispatcher<sp/>receives</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>commands<sp/>of<sp/>the<sp/>appropriate<sp/>type<sp/>and<sp/>can<sp/>route<sp/>them<sp/>to<sp/>specialized<sp/>handlers</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>(e.g.,<sp/>managers,<sp/>pools,<sp/>or<sp/>systems).</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>decouples<sp/>command<sp/>execution<sp/>from<sp/>command<sp/>definition,<sp/>allowing<sp/>commands</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>to<sp/>be<sp/>processed<sp/>by<sp/>external<sp/>systems<sp/>without<sp/>the<sp/>command<sp/>knowing<sp/>about<sp/>them.</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>TypedWorldCommandDispatcher<sp/>for<sp/>type-safe<sp/>derived<sp/>implementation</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>CommandBuffer::addDispatcher<sp/>for<sp/>registration</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32" refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher" kindref="compound">WorldCommandDispatcher</ref><sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Virtual<sp/>destructor<sp/>for<sp/>proper<sp/>cleanup<sp/>of<sp/>derived<sp/>dispatchers.</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39" refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher_1a99cfdc9890b444664a9ae3a98e8b6d1f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher_1a99cfdc9890b444664a9ae3a98e8b6d1f" kindref="member">~WorldCommandDispatcher</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Dispatches<sp/>a<sp/>WorldCommand<sp/>for<sp/>specialized<sp/>handling.</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>gameWorld<sp/>The<sp/>game<sp/>world<sp/>context.</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>command<sp/>The<sp/>command<sp/>to<sp/>dispatch.</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47" refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher_1ad64b55eac8560337da958baeee49bbca" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher_1ad64b55eac8560337da958baeee49bbca" kindref="member">dispatch</ref>(</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref>&amp;<sp/>gameWorld,</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand" kindref="compound">WorldCommand</ref>&amp;<sp/><ref refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1command" kindref="compound">command</ref></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="include/helios/engine/runtime/messaging/command/WorldCommandDispatcher.ixx"/>
+  </compounddef>
+</doxygen>

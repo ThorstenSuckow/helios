@@ -1,4 +1,4 @@
 var TriggerCollisionEvent_8ixx =
 [
-    [ "helios::engine::game::event::TriggerCollisionEvent", "classhelios_1_1engine_1_1game_1_1event_1_1TriggerCollisionEvent.html", "classhelios_1_1engine_1_1game_1_1event_1_1TriggerCollisionEvent" ]
+    [ "helios::engine::modules::physics::collision::events::TriggerCollisionEvent", "classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1events_1_1TriggerCollisionEvent.html", "classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1events_1_1TriggerCollisionEvent" ]
 ];

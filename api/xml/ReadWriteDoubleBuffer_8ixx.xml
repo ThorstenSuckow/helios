@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="ReadWriteDoubleBuffer_8ixx" kind="file" language="C++">
+    <compoundname>ReadWriteDoubleBuffer.ixx</compoundname>
+    <includes local="no">memory</includes>
+    <includes local="no">span</includes>
+    <includes local="no">vector</includes>
+    <includes refid="ReadBuffer_8ixx" local="no">helios.core.buffer.ReadBuffer</includes>
+    <includes refid="WriteBuffer_8ixx" local="no">helios.core.buffer.WriteBuffer</includes>
+    <includes refid="DoubleBuffer_8ixx" local="no">helios.core.buffer.DoubleBuffer</includes>
+    <incdepgraph>
+      <node id="7">
+        <label>helios.core.buffer.DoubleBuffer</label>
+        <link refid="DoubleBuffer_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>helios.core.buffer.ReadBuffer</label>
+        <link refid="ReadBuffer_8ixx"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>include/helios/core/buffer/ReadWriteDoubleBuffer.ixx</label>
+        <link refid="ReadWriteDoubleBuffer_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>helios.core.buffer.WriteBuffer</label>
+        <link refid="WriteBuffer_8ixx"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>memory</label>
+      </node>
+      <node id="3">
+        <label>span</label>
+      </node>
+      <node id="4">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer" prot="public">helios::core::buffer::ReadWriteDoubleBuffer</innerclass>
+    <innernamespace refid="namespacehelios">helios</innernamespace>
+    <innernamespace refid="namespacehelios_1_1core">helios::core</innernamespace>
+    <innernamespace refid="namespacehelios_1_1core_1_1buffer">helios::core::buffer</innernamespace>
+    <briefdescription>
+<para>Type-safe double-buffered container for producer-consumer patterns. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/**</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>@file<sp/>ReadWriteDoubleBuffer.ixx</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>@brief<sp/>Type-safe<sp/>double-buffered<sp/>container<sp/>for<sp/>producer-consumer<sp/>patterns.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">module</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;span&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8buffer_8ReadWriteDoubleBuffer" kindref="compound">helios.core.buffer.ReadWriteDoubleBuffer</ref>;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8buffer_8DoubleBuffer" kindref="compound">helios.core.buffer.DoubleBuffer</ref>;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8buffer_8WriteBuffer" kindref="compound">helios.core.buffer.WriteBuffer</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8buffer_8ReadBuffer" kindref="compound">helios.core.buffer.ReadBuffer</ref>;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1core_1_1buffer" kindref="compound">helios::core::buffer</ref><sp/>{</highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@class<sp/>ReadWriteDoubleBuffer</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Type-safe<sp/>double-buffered<sp/>container<sp/>for<sp/>messages<sp/>of<sp/>type<sp/>T.</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Implements<sp/>a<sp/>producer-consumer<sp/>pattern<sp/>where<sp/>messages<sp/>are<sp/>written</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>to<sp/>one<sp/>buffer<sp/>while<sp/>consumers<sp/>read<sp/>from<sp/>another.<sp/>This<sp/>decouples<sp/>message</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>production<sp/>from<sp/>consumption<sp/>and<sp/>allows<sp/>lock-free<sp/>operation<sp/>in<sp/>single-threaded</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>game<sp/>loops.</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@tparam<sp/>T<sp/>The<sp/>message<sp/>type<sp/>stored<sp/>in<sp/>this<sp/>buffer.<sp/>Must<sp/>be<sp/>movable.</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer" kindref="compound">ReadWriteDoubleBuffer</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1core_1_1buffer_1_1DoubleBuffer" kindref="compound">DoubleBuffer</ref><sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Buffer<sp/>containing<sp/>messages<sp/>available<sp/>for<sp/>reading.</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ReadBuffer&lt;T&gt;<sp/>readBuffer_;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Buffer<sp/>where<sp/>new<sp/>messages<sp/>are<sp/>pushed.</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>WriteBuffer&lt;T&gt;<sp/>writeBuffer_;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Pre-allocates<sp/>memory<sp/>for<sp/>both<sp/>buffers.</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>size<sp/>The<sp/>number<sp/>of<sp/>messages<sp/>to<sp/>reserve<sp/>capacity<sp/>for.</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51" refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1a189e7403fdd5b8916b7c8425d469b1d8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1a189e7403fdd5b8916b7c8425d469b1d8" kindref="member">reserve</ref>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>size)<sp/>{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>readBuffer_.reserve(size);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>writeBuffer_.reserve(size);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="57"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Constructs<sp/>and<sp/>pushes<sp/>a<sp/>message<sp/>to<sp/>the<sp/>write<sp/>buffer.</highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@tparam<sp/>Args<sp/>Constructor<sp/>argument<sp/>types<sp/>for<sp/>T.</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>args<sp/>Arguments<sp/>forwarded<sp/>to<sp/>T&apos;s<sp/>constructor.</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args&gt;</highlight></codeline>
+<codeline lineno="64" refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1a58201a0c2b43ea168bc46d376a12baad" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1a58201a0c2b43ea168bc46d376a12baad" kindref="member">push</ref>(Args&amp;&amp;...<sp/>args)<sp/>{</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>writeBuffer_.push(std::forward&lt;Args&gt;(args)...);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>a<sp/>read-only<sp/>view<sp/>of<sp/>messages<sp/>in<sp/>the<sp/>read<sp/>buffer.</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>span<sp/>over<sp/>all<sp/>messages<sp/>written<sp/>in<sp/>the<sp/>previous<sp/>frame.</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73" refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1a667f354ff0c9ab49cf13f72028e4b293" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::span&lt;const<sp/>T&gt;<sp/><ref refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1a667f354ff0c9ab49cf13f72028e4b293" kindref="member">read</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>readBuffer_.read();</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Swaps<sp/>read<sp/>with<sp/>write<sp/>buffer.</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Swaps<sp/>the<sp/>read-<sp/>with<sp/>the<sp/>write-buffer.<sp/>The<sp/>write<sp/>buffer<sp/>is<sp/>empty<sp/>after</highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>this<sp/>operation,<sp/>while<sp/>the<sp/>read<sp/>buffer<sp/>contains<sp/>the<sp/>contents<sp/>of<sp/>the<sp/>write<sp/>buffer.</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83" refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1affdea9122103eeb24113621c3a062449" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1affdea9122103eeb24113621c3a062449" kindref="member">swap</ref>()</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>readBuffer_.clear().bufferData().swap(writeBuffer_.bufferData());</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="87"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="88"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Clears<sp/>the<sp/>read<sp/>buffer.</highlight></codeline>
+<codeline lineno="89"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90" refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1a1336f5dc298f2dddf5ca370e2a1ef667" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1a1336f5dc298f2dddf5ca370e2a1ef667" kindref="member">clearReadBuffer</ref>()</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>readBuffer_.clear();</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="94"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="95"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Clears<sp/>the<sp/>write<sp/>buffer.</highlight></codeline>
+<codeline lineno="96"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="97" refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1a7b3ae2b79078162b3964d7450f5f161e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1a7b3ae2b79078162b3964d7450f5f161e" kindref="member">clearWriteBuffer</ref>()</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>writeBuffer_.clear();</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="101"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="include/helios/core/buffer/ReadWriteDoubleBuffer.ixx"/>
+  </compounddef>
+</doxygen>

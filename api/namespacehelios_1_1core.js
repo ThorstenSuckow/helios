@@ -1,6 +1,8 @@
 var namespacehelios_1_1core =
 [
+    [ "buffer", "namespacehelios_1_1core_1_1buffer.html", "namespacehelios_1_1core_1_1buffer" ],
     [ "data", "namespacehelios_1_1core_1_1data.html", "namespacehelios_1_1core_1_1data" ],
+    [ "spatial", "namespacehelios_1_1core_1_1spatial.html", "namespacehelios_1_1core_1_1spatial" ],
     [ "units", "namespacehelios_1_1core_1_1units.html", [
       [ "Unit", "namespacehelios_1_1core_1_1units.html#a13b5c00c42b03ebe1d85cd575f346e55", [
         [ "Meter", "namespacehelios_1_1core_1_1units.html#a13b5c00c42b03ebe1d85cd575f346e55a17c9c40b9db5a0983d1075a012c1f90a", null ],
@@ -22,6 +24,5 @@ var namespacehelios_1_1core =
       [ "METERS", "namespacehelios_1_1core_1_1units.html#ace729ad7e380ecea1dc68139c748e4e8", null ],
       [ "MILLISECONDS", "namespacehelios_1_1core_1_1units.html#a205fe3ccea7988ba4b616c046b5d8246", null ],
       [ "SECONDS", "namespacehelios_1_1core_1_1units.html#a90333ee787d05c7f8003cace76268c41", null ]
-    ] ],
-    [ "Transform", "classhelios_1_1core_1_1Transform.html", "classhelios_1_1core_1_1Transform" ]
+    ] ]
 ];

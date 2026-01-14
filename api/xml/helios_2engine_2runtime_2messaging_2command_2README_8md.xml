@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2runtime_2messaging_2command_2README_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1command">helios::engine::runtime::messaging::command</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::runtime::messaging::command</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Command<sp/>pattern<sp/>implementation<sp/>for<sp/>deferred<sp/>action<sp/>execution.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>the<sp/>Command<sp/>pattern<sp/>implementation<sp/>for<sp/>the<sp/>helios<sp/>engine.<sp/>Commands<sp/>encapsulate<sp/>game<sp/>actions<sp/>that<sp/>can<sp/>be<sp/>buffered<sp/>and<sp/>executed<sp/>at<sp/>a<sp/>later<sp/>point<sp/>in<sp/>the<sp/>game<sp/>loop,<sp/>enabling<sp/>decoupled<sp/>input<sp/>handling<sp/>and<sp/>action<sp/>processing.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Components:**</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>**TargetedCommand**<sp/>-<sp/>Abstract<sp/>base<sp/>for<sp/>commands<sp/>targeting<sp/>a<sp/>specific<sp/>GameObject.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**WorldCommand**<sp/>-<sp/>Abstract<sp/>base<sp/>for<sp/>commands<sp/>operating<sp/>on<sp/>the<sp/>entire<sp/>GameWorld.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**CommandBuffer**<sp/>-<sp/>Queue<sp/>for<sp/>buffering<sp/>and<sp/>batch-executing<sp/>commands.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**TargetedCommandDispatcher**<sp/>-<sp/>Abstract<sp/>dispatcher<sp/>interface<sp/>for<sp/>TargetedCommand<sp/>handling.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**WorldCommandDispatcher**<sp/>-<sp/>Abstract<sp/>dispatcher<sp/>interface<sp/>for<sp/>WorldCommand<sp/>handling.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**TypedTargetedCommandDispatcher**<sp/>-<sp/>Type-safe<sp/>dispatcher<sp/>template<sp/>for<sp/>specific<sp/>TargetedCommand<sp/>types.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**TypedWorldCommandDispatcher**<sp/>-<sp/>Type-safe<sp/>dispatcher<sp/>template<sp/>for<sp/>specific<sp/>WorldCommand<sp/>types.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Execution<sp/>order:**</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">During<sp/>`CommandBuffer::flush()`:</highlight></codeline>
+<codeline><highlight class="normal">1.<sp/>**WorldCommands**<sp/>are<sp/>processed<sp/>first<sp/>(global<sp/>game<sp/>actions<sp/>like<sp/>spawning).</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>**TargetedCommands**<sp/>are<sp/>processed<sp/>second<sp/>(per-entity<sp/>actions<sp/>like<sp/>movement).</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::runtime::messaging::command</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Command<sp/>pattern<sp/>implementation<sp/>for<sp/>deferred<sp/>action<sp/>execution.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>TargetedCommand<sp/>and<sp/>WorldCommand<sp/>base<sp/>classes<sp/>for<sp/>encapsulating<sp/>game<sp/>actions.<sp/>Commands<sp/>are<sp/>buffered<sp/>in<sp/>CommandBuffer<sp/>and<sp/>executed<sp/>during<sp/>the<sp/>game<sp/>loop<sp/>update<sp/>phase.<sp/>Dispatchers<sp/>enable<sp/>type-safe<sp/>routing<sp/>to<sp/>specialized<sp/>handlers<sp/>via<sp/>the<sp/>Visitor<sp/>pattern.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline></codeline>
+    </programlisting>
+    <location file="include/helios/engine/runtime/messaging/command/README.md"/>
+  </compounddef>
+</doxygen>

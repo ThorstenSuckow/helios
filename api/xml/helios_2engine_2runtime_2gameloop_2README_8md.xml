@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2runtime_2gameloop_2README_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop">helios::engine::runtime::gameloop</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::runtime::gameloop</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Central<sp/>game<sp/>loop<sp/>orchestration<sp/>module<sp/>providing<sp/>phased<sp/>system<sp/>execution.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>`gameloop`<sp/>module<sp/>provides<sp/>the<sp/>core<sp/>infrastructure<sp/>for<sp/>managing<sp/>the<sp/>game<sp/>update<sp/>cycle.<sp/>It<sp/>organizes<sp/>systems<sp/>into<sp/>a<sp/>hierarchical<sp/>structure<sp/>of<sp/>phases<sp/>and<sp/>passes,<sp/>enabling<sp/>deterministic<sp/>execution<sp/>order<sp/>and<sp/>event<sp/>synchronization.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Architecture</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>game<sp/>loop<sp/>follows<sp/>a<sp/>three-phase<sp/>architecture:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Pre<sp/>Phase**<sp/>—<sp/>Processes<sp/>input<sp/>and<sp/>generates<sp/>commands.<sp/>Systems<sp/>in<sp/>this<sp/>phase<sp/>read<sp/>player<sp/>input<sp/>and<sp/>enqueue<sp/>commands<sp/>into<sp/>the<sp/>CommandBuffer.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Main<sp/>Phase**<sp/>—<sp/>Executes<sp/>core<sp/>gameplay<sp/>simulation.<sp/>This<sp/>includes<sp/>physics,<sp/>AI,<sp/>game<sp/>logic,<sp/>and<sp/>collision<sp/>detection<sp/>systems.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Post<sp/>Phase**<sp/>—<sp/>Handles<sp/>cleanup<sp/>and<sp/>synchronization.<sp/>Systems<sp/>in<sp/>this<sp/>phase<sp/>synchronize<sp/>the<sp/>gameplay<sp/>state<sp/>with<sp/>the<sp/>scene<sp/>graph<sp/>and<sp/>clear<sp/>dirty<sp/>flags.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Each<sp/>phase<sp/>contains<sp/>one<sp/>or<sp/>more<sp/>passes.<sp/>A<sp/>pass<sp/>groups<sp/>related<sp/>systems<sp/>and<sp/>can<sp/>optionally<sp/>define<sp/>a<sp/>commit<sp/>point<sp/>for<sp/>event<sp/>synchronization<sp/>within<sp/>the<sp/>phase.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Commands<sp/>can<sp/>be<sp/>enqueued<sp/>into<sp/>the<sp/>CommandBuffer<sp/>during<sp/>any<sp/>phase,<sp/>not<sp/>just<sp/>the<sp/>Pre<sp/>phase.<sp/>After<sp/>each<sp/>phase<sp/>completes,<sp/>the<sp/>CommandBuffer<sp/>is<sp/>flushed<sp/>and<sp/>all<sp/>registered<sp/>managers<sp/>process<sp/>their<sp/>pending<sp/>requests.<sp/>This<sp/>ensures<sp/>that<sp/>spawn/despawn<sp/>operations<sp/>and<sp/>other<sp/>deferred<sp/>actions<sp/>are<sp/>executed<sp/>at<sp/>well-defined<sp/>points<sp/>in<sp/>the<sp/>update<sp/>cycle.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Components</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**GameLoop**<sp/>is<sp/>the<sp/>central<sp/>orchestrator<sp/>that<sp/>owns<sp/>the<sp/>three<sp/>phases,<sp/>the<sp/>CommandBuffer,<sp/>and<sp/>the<sp/>event<sp/>buses.<sp/>It<sp/>drives<sp/>the<sp/>frame<sp/>update<sp/>by<sp/>iterating<sp/>through<sp/>all<sp/>phases<sp/>and<sp/>committing<sp/>events<sp/>and<sp/>commands<sp/>after<sp/>each<sp/>phase.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Phase**<sp/>represents<sp/>a<sp/>distinct<sp/>stage<sp/>in<sp/>the<sp/>update<sp/>cycle.<sp/>Phases<sp/>contain<sp/>passes<sp/>and<sp/>are<sp/>executed<sp/>in<sp/>fixed<sp/>order<sp/>(Pre<sp/>→<sp/>Main<sp/>→<sp/>Post).</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Pass**<sp/>contains<sp/>a<sp/>registry<sp/>of<sp/>systems<sp/>that<sp/>execute<sp/>sequentially.<sp/>Passes<sp/>support<sp/>commit<sp/>points<sp/>to<sp/>synchronize<sp/>pass-level<sp/>events<sp/>before<sp/>the<sp/>next<sp/>pass<sp/>begins.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">#include<sp/>&quot;helios/engine/gameloop/GameLoop.ixx&quot;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">helios.engine.runtime.gameloop.GameLoop<sp/>gameLoop;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Configure<sp/>Pre<sp/>phase</highlight></codeline>
+<codeline><highlight class="normal">gameLoop.phase(PhaseType.Pre)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;InputSystem&gt;(&amp;inputManager);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Configure<sp/>Main<sp/>phase</highlight></codeline>
+<codeline><highlight class="normal">gameLoop.phase(PhaseType.Main)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;MovementSystem&gt;(&amp;gameWorld)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;HeadingSystem&gt;(&amp;gameWorld)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.addCommitPoint()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>due<sp/>to<sp/>the<sp/>previous<sp/>commit<sp/>point,<sp/>CollisionSystem</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>can<sp/>read<sp/>all<sp/>events<sp/>pushed<sp/>to<sp/>the<sp/>PassEventBus<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>by<sp/>the<sp/>systems<sp/>in<sp/>the<sp/>previous<sp/>pass.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;CollisionSystem&gt;(&amp;gameWorld);<sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Configure<sp/>Post<sp/>phase</highlight></codeline>
+<codeline><highlight class="normal">gameLoop.phase(PhaseType.Post)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;SceneSyncSystem&gt;(&amp;gameWorld,<sp/>&amp;scene)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;TransformClearSystem&gt;(&amp;gameWorld);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Initialize<sp/>once<sp/>before<sp/>the<sp/>first<sp/>update</highlight></codeline>
+<codeline><highlight class="normal">gameLoop.init(gameWorld);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>In<sp/>your<sp/>main<sp/>loop</highlight></codeline>
+<codeline><highlight class="normal">while<sp/>(running)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>gameLoop.update(gameWorld,<sp/>deltaTime,<sp/>inputSnapshot);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>renderer.render(scene);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Event<sp/>Synchronization</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>game<sp/>loop<sp/>provides<sp/>two<sp/>levels<sp/>of<sp/>event<sp/>synchronization:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Pass-level<sp/>events**<sp/>are<sp/>synchronized<sp/>at<sp/>commit<sp/>points<sp/>within<sp/>a<sp/>phase.<sp/>This<sp/>allows<sp/>systems<sp/>in<sp/>the<sp/>next<sp/>pass<sp/>to<sp/>react<sp/>to<sp/>events<sp/>generated<sp/>by<sp/>the<sp/>previous<sp/>pass<sp/>-<sp/>within<sp/>the<sp/>same<sp/>phase.<sp/>Pass-level<sp/>events<sp/>are<sp/>discarded<sp/>at<sp/>the<sp/>end<sp/>of<sp/>the<sp/>phase<sp/>and<sp/>do<sp/>not<sp/>carry<sp/>over<sp/>to<sp/>the<sp/>next<sp/>phase.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Phase-level<sp/>events**<sp/>are<sp/>synchronized<sp/>after<sp/>each<sp/>phase<sp/>completes.<sp/>Only<sp/>events<sp/>written<sp/>via<sp/>`phasePush()`<sp/>are<sp/>available<sp/>to<sp/>systems<sp/>in<sp/>the<sp/>following<sp/>phase.<sp/>Commands<sp/>are<sp/>flushed<sp/>and<sp/>managers<sp/>process<sp/>their<sp/>requests<sp/>at<sp/>phase<sp/>boundaries.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">┌─────────────────────────────────────────────────────────────────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FRAME<sp/>UPDATE<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">├─────────────────────────────────────────────────────────────────────────┤</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>┌───────────────<sp/>PRE<sp/>PHASE<sp/>───────────────┐<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>Pass<sp/>1<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Pass<sp/>2<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>┌──────┐<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>┌──────┐<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>│Sys<sp/>A<sp/>│──┬────▶│Sys<sp/>B<sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>└──────┘<sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>└──────┘<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/>passPush()<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/>(commit<sp/>point)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>└─────────────────────────────────────────┘<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>phasePush()<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>┌──────────────<sp/>MAIN<sp/>PHASE<sp/>───────────────┐<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>Pass<sp/>1<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Pass<sp/>2<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>┌──────┐<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>┌──────┐<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>│Sys<sp/>C<sp/>│──┬────▶│Sys<sp/>D<sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>◀──<sp/>reads<sp/>phase<sp/>events<sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>└──────┘<sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>└──────┘<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/>from<sp/>Pre<sp/>phase<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/>passPush()<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/>(commit<sp/>point)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>└─────────────────────────────────────────┘<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>phasePush()<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>┌──────────────<sp/>POST<sp/>PHASE<sp/>───────────────┐<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>Pass<sp/>1<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>┌──────┐<sp/><sp/>┌──────┐<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>◀──<sp/>reads<sp/>phase<sp/>events<sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>│Sys<sp/>E<sp/>│<sp/><sp/>│Sys<sp/>F<sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/>from<sp/>Main<sp/>phase<sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>└──────┘<sp/><sp/>└──────┘<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>└─────────────────────────────────────────┘<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>Legend:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/>passPush()<sp/><sp/>→<sp/>events<sp/>available<sp/>in<sp/>next<sp/>pass<sp/>(same<sp/>phase)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/>phasePush()<sp/>→<sp/>events<sp/>available<sp/>in<sp/>next<sp/>phase<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/>───────────<sp/>→<sp/>pass<sp/>events<sp/>discarded<sp/>at<sp/>phase<sp/>boundary<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">└─────────────────────────────────────────────────────────────────────────┘</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::runtime::gameloop</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Central<sp/>game<sp/>loop<sp/>orchestration<sp/>module.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>the<sp/>GameLoop,<sp/>Phase,<sp/>and<sp/>Pass<sp/>classes<sp/>for<sp/>managing<sp/>phased<sp/>system<sp/>execution<sp/>with<sp/>deterministic<sp/>ordering<sp/>and<sp/>event<sp/>synchronization.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+<codeline></codeline>
+    </programlisting>
+    <location file="include/helios/engine/runtime/gameloop/README.md"/>
+  </compounddef>
+</doxygen>

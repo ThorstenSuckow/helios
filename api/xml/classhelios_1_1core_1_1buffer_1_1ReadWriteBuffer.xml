@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1core_1_1buffer_1_1ReadWriteBuffer" kind="class" language="C++" prot="public">
+    <compoundname>helios::core::buffer::ReadWriteBuffer</compoundname>
+    <basecompoundref refid="classhelios_1_1core_1_1buffer_1_1Buffer" prot="public" virt="non-virtual">helios::core::buffer::Buffer</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1core_1_1buffer_1_1ReadWriteBuffer_1ab5cd587eb036cab31bd59a0e28461c5e" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; T &gt;</type>
+        <definition>std::vector&lt;T&gt; helios::core::buffer::ReadWriteBuffer&lt; T &gt;::bufferData_</definition>
+        <argsstring></argsstring>
+        <name>bufferData_</name>
+        <qualifiedname>helios::core::buffer::ReadWriteBuffer::bufferData_</qualifiedname>
+        <briefdescription>
+<para>Internal storage for buffered messages. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/core/buffer/ReadWriteBuffer.ixx" line="35" column="21" bodyfile="include/helios/core/buffer/ReadWriteBuffer.ixx" bodystart="35" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classhelios_1_1core_1_1buffer_1_1ReadWriteBuffer_1ac3c42fefa23c6b0c90e4c5ca9b955656" prot="private" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; T &gt; &amp;</type>
+        <definition>std::vector&lt; T &gt; &amp; helios::core::buffer::ReadWriteBuffer&lt; T &gt;::bufferData</definition>
+        <argsstring>()</argsstring>
+        <name>bufferData</name>
+        <qualifiedname>helios::core::buffer::ReadWriteBuffer::bufferData</qualifiedname>
+        <briefdescription>
+<para>Returns a mutable reference to the internal buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Reference to the internal vector. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/core/buffer/ReadWriteBuffer.ixx" line="42" column="22" bodyfile="include/helios/core/buffer/ReadWriteBuffer.ixx" bodystart="42" bodyend="44"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1core_1_1buffer_1_1ReadWriteBuffer_1a79b333ce10e9d62db796f6429fc07844" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::span&lt; const T &gt;</type>
+        <definition>std::span&lt; const T &gt; helios::core::buffer::ReadWriteBuffer&lt; T &gt;::read</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>read</name>
+        <qualifiedname>helios::core::buffer::ReadWriteBuffer::read</qualifiedname>
+        <briefdescription>
+<para>Returns a read-only view of all buffered messages. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A span over all messages in the buffer. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/core/buffer/ReadWriteBuffer.ixx" line="53" column="19" bodyfile="include/helios/core/buffer/ReadWriteBuffer.ixx" bodystart="53" bodyend="55"/>
+        <referencedby refid="classhelios_1_1core_1_1buffer_1_1TypeIndexedReadWriteBuffer_1acb9e52853edf9c87872a4384907596b8" compoundref="TypeIndexedReadWriteBuffer_8ixx" startline="91" endline="100">helios::core::buffer::TypeIndexedReadWriteBuffer&lt; Indexer &gt;::read</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1buffer_1_1ReadWriteBuffer_1ada342a8546c6d088429670922978ac35" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classhelios_1_1core_1_1buffer_1_1ReadWriteBuffer" kindref="compound">ReadWriteBuffer</ref> &amp;</type>
+        <definition>ReadWriteBuffer &amp; helios::core::buffer::ReadWriteBuffer&lt; T &gt;::push</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>push</name>
+        <qualifiedname>helios::core::buffer::ReadWriteBuffer::push</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Constructs and appends a message to the buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Constructor argument types for T.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Arguments forwarded to T&apos;s constructor.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to this buffer for method chaining. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/core/buffer/ReadWriteBuffer.ixx" line="67" column="25" bodyfile="include/helios/core/buffer/ReadWriteBuffer.ixx" bodystart="67" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1buffer_1_1ReadWriteBuffer_1aa2768ad2a6c77382c871368e663548bc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1core_1_1buffer_1_1ReadWriteBuffer" kindref="compound">ReadWriteBuffer</ref> &amp;</type>
+        <definition>ReadWriteBuffer &amp; helios::core::buffer::ReadWriteBuffer&lt; T &gt;::reserve</definition>
+        <argsstring>(size_t size)</argsstring>
+        <name>reserve</name>
+        <qualifiedname>helios::core::buffer::ReadWriteBuffer::reserve</qualifiedname>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Pre-allocates memory for the specified number of messages. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of messages to reserve capacity for.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to this buffer for method chaining. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/core/buffer/ReadWriteBuffer.ixx" line="79" column="25" bodyfile="include/helios/core/buffer/ReadWriteBuffer.ixx" bodystart="79" bodyend="82"/>
+        <references refid="classhelios_1_1core_1_1buffer_1_1ReadWriteBuffer_1aa2768ad2a6c77382c871368e663548bc" compoundref="ReadWriteBuffer_8ixx" startline="79" endline="82">helios::core::buffer::ReadWriteBuffer&lt; T &gt;::reserve</references>
+        <referencedby refid="classhelios_1_1core_1_1buffer_1_1ReadWriteBuffer_1aa2768ad2a6c77382c871368e663548bc" compoundref="ReadWriteBuffer_8ixx" startline="79" endline="82">helios::core::buffer::ReadWriteBuffer&lt; T &gt;::reserve</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1buffer_1_1ReadWriteBuffer_1aeb670becfa868a9a41fb9c2dce625e66" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::core::buffer::ReadWriteBuffer&lt; T &gt;::clear</definition>
+        <argsstring>() override</argsstring>
+        <name>clear</name>
+        <qualifiedname>helios::core::buffer::ReadWriteBuffer::clear</qualifiedname>
+        <reimplements refid="classhelios_1_1core_1_1buffer_1_1Buffer_1a391f40d3d90b1ca7118a54a767b6c4d6">clear</reimplements>
+        <briefdescription>
+<para>Removes all messages from the buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/core/buffer/ReadWriteBuffer.ixx" line="87" column="14" bodyfile="include/helios/core/buffer/ReadWriteBuffer.ixx" bodystart="87" bodyend="89"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Combined read-write buffer with immediate visibility. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Unlike the double-buffered ReadBuffer/WriteBuffer pair, <ref refid="classhelios_1_1core_1_1buffer_1_1ReadWriteBuffer" kindref="compound">ReadWriteBuffer</ref> provides immediate access to pushed messages within the same frame. Messages are visible to readers as soon as they are pushed.</para>
+<para>Use this when message producers and consumers operate in the same phase and immediate visibility is required. For cross-phase communication, prefer <ref refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer" kindref="compound">ReadWriteDoubleBuffer</ref>.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The message type stored in the buffer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::core::buffer::Buffer</label>
+        <link refid="classhelios_1_1core_1_1buffer_1_1Buffer"/>
+      </node>
+      <node id="1">
+        <label>helios::core::buffer::ReadWriteBuffer&lt; T &gt;</label>
+        <link refid="classhelios_1_1core_1_1buffer_1_1ReadWriteBuffer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>helios::core::buffer::Buffer</label>
+        <link refid="classhelios_1_1core_1_1buffer_1_1Buffer"/>
+      </node>
+      <node id="1">
+        <label>helios::core::buffer::ReadWriteBuffer&lt; T &gt;</label>
+        <link refid="classhelios_1_1core_1_1buffer_1_1ReadWriteBuffer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/core/buffer/ReadWriteBuffer.ixx" line="30" column="5" bodyfile="include/helios/core/buffer/ReadWriteBuffer.ixx" bodystart="30" bodyend="90"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1core_1_1buffer_1_1Buffer_1ad1705f673a3085124b7674ae52ff2713" prot="public" virt="non-virtual"><scope>helios::core::buffer::ReadWriteBuffer</scope><name>Buffer</name></member>
+      <member refid="classhelios_1_1core_1_1buffer_1_1ReadWriteBuffer_1ac3c42fefa23c6b0c90e4c5ca9b955656" prot="private" virt="non-virtual"><scope>helios::core::buffer::ReadWriteBuffer</scope><name>bufferData</name></member>
+      <member refid="classhelios_1_1core_1_1buffer_1_1ReadWriteBuffer_1ab5cd587eb036cab31bd59a0e28461c5e" prot="private" virt="non-virtual"><scope>helios::core::buffer::ReadWriteBuffer</scope><name>bufferData_</name></member>
+      <member refid="classhelios_1_1core_1_1buffer_1_1ReadWriteBuffer_1aeb670becfa868a9a41fb9c2dce625e66" prot="public" virt="virtual"><scope>helios::core::buffer::ReadWriteBuffer</scope><name>clear</name></member>
+      <member refid="classhelios_1_1core_1_1buffer_1_1ReadWriteBuffer_1ada342a8546c6d088429670922978ac35" prot="public" virt="non-virtual"><scope>helios::core::buffer::ReadWriteBuffer</scope><name>push</name></member>
+      <member refid="classhelios_1_1core_1_1buffer_1_1ReadWriteBuffer_1a79b333ce10e9d62db796f6429fc07844" prot="public" virt="non-virtual"><scope>helios::core::buffer::ReadWriteBuffer</scope><name>read</name></member>
+      <member refid="classhelios_1_1core_1_1buffer_1_1ReadWriteBuffer_1aa2768ad2a6c77382c871368e663548bc" prot="public" virt="non-virtual"><scope>helios::core::buffer::ReadWriteBuffer</scope><name>reserve</name></member>
+      <member refid="classhelios_1_1core_1_1buffer_1_1Buffer_1a8b183cc56c9e2eb9c2694d3723d35ae8" prot="public" virt="virtual"><scope>helios::core::buffer::ReadWriteBuffer</scope><name>~Buffer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

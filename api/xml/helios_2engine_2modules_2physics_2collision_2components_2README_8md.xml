@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2modules_2physics_2collision_2components_2README_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components">helios::engine::modules::physics::collision::components</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::modules::physics::collision::components</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Collider<sp/>components<sp/>for<sp/>collision<sp/>detection.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>namespace<sp/>contains<sp/>data<sp/>components<sp/>that<sp/>define<sp/>entity<sp/>collision<sp/>properties<sp/>used<sp/>by<sp/>the<sp/>physics<sp/>and<sp/>collision<sp/>detection<sp/>systems.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Components</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Component<sp/>|<sp/>Description<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-----------|-------------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`AabbColliderComponent`<sp/>|<sp/>Axis-Aligned<sp/>Bounding<sp/>Box<sp/>for<sp/>broad-phase<sp/>collision<sp/>detection.<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`CollisionComponent`<sp/>|<sp/>Layer<sp/>membership<sp/>and<sp/>collision<sp/>masks<sp/>(trigger/solid).<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`CollisionStateComponent`<sp/>|<sp/>Per-frame<sp/>collision<sp/>state<sp/>written<sp/>by<sp/>detection<sp/>systems.<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Attach<sp/>`AabbColliderComponent`<sp/>to<sp/>define<sp/>spatial<sp/>bounds<sp/>and<sp/>`CollisionComponent`<sp/>to<sp/>specify<sp/>layer-based<sp/>filtering.<sp/>After<sp/>collision<sp/>detection<sp/>runs,<sp/>query<sp/>`CollisionStateComponent`<sp/>to<sp/>read<sp/>collision<sp/>results<sp/>for<sp/>the<sp/>current<sp/>frame.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">auto&amp;<sp/>collider<sp/>=<sp/>gameObject.add&lt;AabbColliderComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal">collider.setBounds(helios::math::aabbf{{-0.5f,<sp/>-0.5f,<sp/>-0.5f},<sp/>{0.5f,<sp/>0.5f,<sp/>0.5f}});</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">constexpr<sp/>uint32_t<sp/>LAYER_PLAYER<sp/><sp/><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>0;</highlight></codeline>
+<codeline><highlight class="normal">constexpr<sp/>uint32_t<sp/>LAYER_ENEMY<sp/><sp/><sp/><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>1;</highlight></codeline>
+<codeline><highlight class="normal">constexpr<sp/>uint32_t<sp/>LAYER_POWER_UP<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>2;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">auto&amp;<sp/>collision<sp/>=<sp/>gameObject.add&lt;CollisionComponent&gt;(LAYER_PLAYER);</highlight></codeline>
+<codeline><highlight class="normal">collision.setTriggerCollisionMask(LAYER_ENEMY<sp/>|<sp/>LAYER_POWER_UP);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::modules::physics::collision::components</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Collider<sp/>components<sp/>for<sp/>collision<sp/>detection.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>This<sp/>namespace<sp/>contains<sp/>components<sp/>that<sp/>define<sp/>entity<sp/>collision<sp/>properties<sp/>including<sp/>bounds,<sp/>layer<sp/>membership,<sp/>and<sp/>per-frame<sp/>collision<sp/>state.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+<codeline></codeline>
+    </programlisting>
+    <location file="include/helios/engine/modules/physics/collision/components/README.md"/>
+  </compounddef>
+</doxygen>

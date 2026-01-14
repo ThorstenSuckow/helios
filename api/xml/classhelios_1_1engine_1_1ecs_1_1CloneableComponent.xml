@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::ecs::CloneableComponent</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1ecs_1_1Component" prot="public" virt="non-virtual">helios::engine::ecs::Component</basecompoundref>
+    <basecompoundref refid="classhelios_1_1engine_1_1ecs_1_1Cloneable" prot="public" virt="non-virtual">helios::engine::ecs::Cloneable</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename Derived</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1aea2a33eed58899d7f93accbe7a89149f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1ecs_1_1Component_1a5b888a1acd1799700525f3eab51b1a62" kindref="member">Component</ref> &gt;</type>
+        <definition>std::unique_ptr&lt; Component &gt; helios::engine::ecs::CloneableComponent&lt; Derived &gt;::clone</definition>
+        <argsstring>() const override</argsstring>
+        <name>clone</name>
+        <qualifiedname>helios::engine::ecs::CloneableComponent::clone</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1ecs_1_1Cloneable_1abf32930b00e68721c70047f334a59a30">clone</reimplements>
+        <briefdescription>
+<para>Creates a deep copy of the derived component. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Uses the copy constructor of the Derived type to create a new instance wrapped in a unique_ptr.</para>
+<para><simplesect kind="return"><para>A unique_ptr owning the cloned component. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/ecs/CloneableComponent.ixx" line="73" column="26" bodyfile="include/helios/engine/ecs/CloneableComponent.ixx" bodystart="73" bodyend="75"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>CRTP base class for components that support cloning. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" kindref="compound">CloneableComponent</ref> uses the Curiously Recurring Template Pattern (CRTP) to provide automatic <ref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1aea2a33eed58899d7f93accbe7a89149f" kindref="member">clone()</ref> implementation for derived component types. The derived class must have a copy constructor.</para>
+<para>Example usage: ```cpp class HealthComponent : public <ref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" kindref="compound">CloneableComponent&lt;HealthComponent&gt;</ref> { int health_ = 100; public: HealthComponent() = default; HealthComponent(const HealthComponent&amp;) = default; };</para>
+<para>auto clone = original.clone(); ```</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Derived</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The derived component type (CRTP pattern). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>helios::engine::ecs::Cloneable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Cloneable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::ecs::CloneableComponent&lt; Derived &gt;</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::engine::ecs::Component</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Component"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="5">
+        <label>helios::engine::ecs::Cloneable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Cloneable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::ecs::CloneableComponent&lt; Derived &gt;</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::engine::ecs::Component</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Component"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>gameObject_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::GameObject</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1GameObject"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>guid_</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>helios::util::Guid</label>
+        <link refid="classhelios_1_1util_1_1Guid"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/ecs/CloneableComponent.ixx" line="61" column="5" bodyfile="include/helios/engine/ecs/CloneableComponent.ixx" bodystart="61" bodyend="77"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1aea2a33eed58899d7f93accbe7a89149f" prot="public" virt="virtual"><scope>helios::engine::ecs::CloneableComponent</scope><name>clone</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a5b888a1acd1799700525f3eab51b1a62" prot="public" virt="non-virtual"><scope>helios::engine::ecs::CloneableComponent</scope><name>Component</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a21492dd1100f113c7f049c3bd8a7a179" prot="public" virt="non-virtual"><scope>helios::engine::ecs::CloneableComponent</scope><name>disable</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a8c2eb9405720e29d3a637061d523fb89" prot="public" virt="non-virtual"><scope>helios::engine::ecs::CloneableComponent</scope><name>enable</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a3489588d238d04928e767908a0721be1" prot="public" virt="non-virtual"><scope>helios::engine::ecs::CloneableComponent</scope><name>gameObject</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1aff1c0d42b10c04da6034ff5e49d42f12" prot="protected" virt="non-virtual"><scope>helios::engine::ecs::CloneableComponent</scope><name>gameObject_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a081d44a554b723d719f7909638735819" prot="public" virt="non-virtual"><scope>helios::engine::ecs::CloneableComponent</scope><name>isAttached</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a58e0f3384ee76bb9961ffb46e3181bda" prot="public" virt="non-virtual"><scope>helios::engine::ecs::CloneableComponent</scope><name>isDisabled</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a4edb1632c9901e8276f77ad53e773911" prot="public" virt="non-virtual"><scope>helios::engine::ecs::CloneableComponent</scope><name>isEnabled</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1ab5895e14ca5df63711d46a492fb40c64" prot="protected" virt="non-virtual"><scope>helios::engine::ecs::CloneableComponent</scope><name>isEnabled_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a9f6ca8f70b132c8d5ca1d0ffdb8f39f9" prot="public" virt="virtual"><scope>helios::engine::ecs::CloneableComponent</scope><name>onAcquire</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1ab9614bf06e8e2d970cca3d2eb03e2425" prot="public" virt="virtual"><scope>helios::engine::ecs::CloneableComponent</scope><name>onActivate</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1ac08c7be419071c67780342322aa1e679" prot="public" virt="virtual"><scope>helios::engine::ecs::CloneableComponent</scope><name>onAttach</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1ae18881cca0af5463608e59d112b3f257" prot="public" virt="virtual"><scope>helios::engine::ecs::CloneableComponent</scope><name>onDeactivate</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1aacc77dfd9a7a39b733e0f90a7e50d43e" prot="public" virt="virtual"><scope>helios::engine::ecs::CloneableComponent</scope><name>onRelease</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Cloneable_1a7663aa6519f970dc8f0255a0e09bac17" prot="public" virt="virtual"><scope>helios::engine::ecs::CloneableComponent</scope><name>~Cloneable</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1aa014415a814f5252c94d040c2e80c83f" prot="public" virt="virtual"><scope>helios::engine::ecs::CloneableComponent</scope><name>~Component</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,4 +1,4 @@
 var GameObject_8ixx =
 [
-    [ "helios::engine::game::GameObject", "classhelios_1_1engine_1_1game_1_1GameObject.html", "classhelios_1_1engine_1_1game_1_1GameObject" ]
+    [ "helios::engine::ecs::GameObject", "classhelios_1_1engine_1_1ecs_1_1GameObject.html", "classhelios_1_1engine_1_1ecs_1_1GameObject" ]
 ];

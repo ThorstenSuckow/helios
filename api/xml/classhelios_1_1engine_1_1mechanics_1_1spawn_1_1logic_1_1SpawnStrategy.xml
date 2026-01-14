@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnStrategy" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>helios::engine::mechanics::spawn::logic::SpawnStrategy</compoundname>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1CallbackSpawnStrategy" prot="public" virt="non-virtual">helios::engine::mechanics::spawn::logic::CallbackSpawnStrategy</derivedcompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnStrategy_1ab42a6036b2cdbd8d32669e6b48572310" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::mechanics::spawn::logic::SpawnStrategy::SpawnStrategy</definition>
+        <argsstring>()=default</argsstring>
+        <name>SpawnStrategy</name>
+        <qualifiedname>helios::engine::mechanics::spawn::logic::SpawnStrategy::SpawnStrategy</qualifiedname>
+        <briefdescription>
+<para>Default constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/spawn/logic/SpawnStrategy.ixx" line="53" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnStrategy_1a7e4451b0db671c72e143a9dc93b50cfb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::engine::mechanics::spawn::logic::SpawnStrategy::~SpawnStrategy</definition>
+        <argsstring>()=default</argsstring>
+        <name>~SpawnStrategy</name>
+        <qualifiedname>helios::engine::mechanics::spawn::logic::SpawnStrategy::~SpawnStrategy</qualifiedname>
+        <briefdescription>
+<para>Virtual destructor for proper polymorphic cleanup. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/spawn/logic/SpawnStrategy.ixx" line="58" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnStrategy_1a73b4faa3da364380e03a56060f7f2510" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool helios::engine::mechanics::spawn::logic::SpawnStrategy::spawn</definition>
+        <argsstring>(const helios::engine::runtime::world::GameWorld &amp;gameWorld, helios::engine::ecs::GameObject &amp;gameObject, const helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept=0</argsstring>
+        <name>spawn</name>
+        <qualifiedname>helios::engine::mechanics::spawn::logic::SpawnStrategy::spawn</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1CallbackSpawnStrategy_1a620d2fa24f982133f1ee99d26d397bc6">spawn</reimplementedby>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> &amp;</type>
+          <declname>gameObject</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Spawns and configures a GameObject. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Called by the spawn system when a GameObject is acquired from a pool and needs to be initialized for gameplay. The implementation should configure the object&apos;s position, direction, and any other spawn-specific state.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the current GameWorld. May be nullptr. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the current Level containing bounds and spawn info. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>gameObject</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the GameObject being spawned. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s update context.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if spawning was successful and the object should remain active. False if spawning failed and the object should be returned to the pool. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/spawn/logic/SpawnStrategy.ixx" line="77" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Abstract base class defining how GameObjects are spawned. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnStrategy" kindref="compound">SpawnStrategy</ref> implements the Strategy pattern for GameObject spawning. Concrete implementations define the placement, initialization, and configuration of GameObjects when they are activated by a spawn system.</para>
+<para>Example usage: ```cpp class RandomSpawnStrategy : public <ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnStrategy" kindref="compound">SpawnStrategy</ref> { public: bool <ref refid="namespacehelios_1_1engine_1_1mechanics_1_1spawn" kindref="compound">spawn(const GameWorld*, const Level* level,
+               GameObject* obj, const UpdateContext&amp;)</ref> noexcept override { auto rng = <ref refid="classhelios_1_1util_1_1Random" kindref="compound">helios::util::Random(12345)</ref>; float x = rng.randomFloat(level-&gt;<ref refid="namespacehelios_1_1engine_1_1mechanics_1_1bounds" kindref="compound">bounds()</ref>.min[0], level-&gt;<ref refid="namespacehelios_1_1engine_1_1mechanics_1_1bounds" kindref="compound">bounds()</ref>.max[0]); float y = rng.randomFloat(level-&gt;<ref refid="namespacehelios_1_1engine_1_1mechanics_1_1bounds" kindref="compound">bounds()</ref>.min[1], level-&gt;<ref refid="namespacehelios_1_1engine_1_1mechanics_1_1bounds" kindref="compound">bounds()</ref>.max[1]); obj-&gt;get&lt;TranslationStateComponent&gt;()-&gt;setTranslation({x, y, 0}); return true; } }; ```</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1CallbackSpawnStrategy" kindref="compound">CallbackSpawnStrategy</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>GameObjectSpawnSystem </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::mechanics::spawn::logic::CallbackSpawnStrategy</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1CallbackSpawnStrategy"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>helios::engine::mechanics::spawn::logic::SpawnStrategy</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnStrategy"/>
+      </node>
+    </inheritancegraph>
+    <location file="include/helios/engine/mechanics/spawn/logic/SpawnStrategy.ixx" line="46" column="5" bodyfile="include/helios/engine/mechanics/spawn/logic/SpawnStrategy.ixx" bodystart="46" bodyend="83"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnStrategy_1a73b4faa3da364380e03a56060f7f2510" prot="public" virt="pure-virtual"><scope>helios::engine::mechanics::spawn::logic::SpawnStrategy</scope><name>spawn</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnStrategy_1ab42a6036b2cdbd8d32669e6b48572310" prot="public" virt="non-virtual"><scope>helios::engine::mechanics::spawn::logic::SpawnStrategy</scope><name>SpawnStrategy</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnStrategy_1a7e4451b0db671c72e143a9dc93b50cfb" prot="public" virt="virtual"><scope>helios::engine::mechanics::spawn::logic::SpawnStrategy</scope><name>~SpawnStrategy</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

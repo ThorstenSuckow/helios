@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="CollisionBehavior_8ixx" kind="file" language="C++">
+    <compoundname>CollisionBehavior.ixx</compoundname>
+    <includes local="no">cstdint</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>include/helios/engine/modules/physics/collision/types/CollisionBehavior.ixx</label>
+        <link refid="CollisionBehavior_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>cstdint</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacehelios">helios</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine">helios::engine</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1modules">helios::engine::modules</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1modules_1_1physics">helios::engine::modules::physics</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision">helios::engine::modules::physics::collision</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types">helios::engine::modules::physics::collision::types</innernamespace>
+    <briefdescription>
+<para>Enumeration of collision response behaviors. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/**</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>@file<sp/>CollisionBehavior.ixx</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>@brief<sp/>Enumeration<sp/>of<sp/>collision<sp/>response<sp/>behaviors.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">module</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdint&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8modules_8physics_8collision_8types_8CollisionBehavior" kindref="compound">helios.engine.modules.physics.collision.types.CollisionBehavior</ref>;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13" refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types" kindref="compound">helios::engine::modules::physics::collision::types</ref><sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Defines<sp/>how<sp/>an<sp/>entity<sp/>responds<sp/>to<sp/>a<sp/>collision<sp/>event.</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>CollisionBehavior<sp/>values<sp/>are<sp/>used<sp/>as<sp/>bitmasks<sp/>to<sp/>configure</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>per-layer<sp/>collision<sp/>responses<sp/>in<sp/>CollisionComponent.<sp/>Multiple<sp/>behaviors</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>can<sp/>be<sp/>combined<sp/>using<sp/>bitwise<sp/>operations.</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>behavior<sp/>determines<sp/>what<sp/>action<sp/>the<sp/>collision<sp/>system<sp/>takes<sp/>when</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>two<sp/>entities<sp/>collide<sp/>based<sp/>on<sp/>their<sp/>layer<sp/>configuration.</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>Not<sp/>all<sp/>behaviors<sp/>are<sp/>currently<sp/>fully<sp/>implemented.<sp/>Currently<sp/>supported:</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>`Reflect`<sp/>—<sp/>Fully<sp/>supported</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>`Bounce`<sp/>—<sp/>Fully<sp/>supported</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>`Despawn`<sp/>—<sp/>Fully<sp/>supported</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30" refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2" kindref="member">CollisionBehavior</ref><sp/>:<sp/>uint8_t<sp/>{</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>No<sp/>collision<sp/>response.</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35" refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2a6adf97f83acf6453d4a6a4b1070f3754" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2a6adf97f83acf6453d4a6a4b1070f3754" kindref="member">None</ref><sp/><sp/><sp/><sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Reflect<sp/>the<sp/>entity&apos;s<sp/>velocity<sp/>off<sp/>the<sp/>collision<sp/>surface.</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Uses<sp/>the<sp/>surface<sp/>normal<sp/>to<sp/>calculate<sp/>a<sp/>reflected<sp/>velocity</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>vector.<sp/>Commonly<sp/>used<sp/>for<sp/>projectiles<sp/>bouncing<sp/>off<sp/>walls.</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43" refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2a74de3e45e4491e956e8dc18d841d9b00" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2a74de3e45e4491e956e8dc18d841d9b00" kindref="member">Reflect</ref><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>0,</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Bounce<sp/>the<sp/>entity<sp/>with<sp/>restitution<sp/>applied.</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Similar<sp/>to<sp/>Reflect<sp/>but<sp/>applies<sp/>a<sp/>restitution<sp/>coefficient</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>to<sp/>reduce<sp/>velocity.<sp/>Used<sp/>for<sp/>physics-based<sp/>bouncing.</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51" refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2aeb9a56428f85bbdfd3846322baaffe6e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2aeb9a56428f85bbdfd3846322baaffe6e" kindref="member">Bounce</ref><sp/><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>1,</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Stick<sp/>the<sp/>entity<sp/>to<sp/>the<sp/>collision<sp/>surface.</highlight></codeline>
+<codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Stops<sp/>the<sp/>entity&apos;s<sp/>movement<sp/>and<sp/>attaches<sp/>it<sp/>to<sp/>the</highlight></codeline>
+<codeline lineno="57"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>collided<sp/>object.<sp/>Used<sp/>for<sp/>projectiles<sp/>that<sp/>embed<sp/>on<sp/>impact.</highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59" refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2abf865bdc779ea87d172a8b1e5adc01b8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2abf865bdc779ea87d172a8b1e5adc01b8" kindref="member">Stick</ref><sp/><sp/><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>2,</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Despawn<sp/>the<sp/>entity<sp/>on<sp/>collision.</highlight></codeline>
+<codeline lineno="63"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="64"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Marks<sp/>the<sp/>entity<sp/>for<sp/>removal<sp/>from<sp/>the<sp/>game<sp/>world.</highlight></codeline>
+<codeline lineno="65"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Used<sp/>for<sp/>projectiles<sp/>that<sp/>are<sp/>destroyed<sp/>on<sp/>impact.</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67" refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2a573a38c8ee30e1c0d6ad84ce4f965cf0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2a573a38c8ee30e1c0d6ad84ce4f965cf0" kindref="member">Despawn</ref><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>3,</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Emit<sp/>an<sp/>event<sp/>without<sp/>physical<sp/>response.</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Generates<sp/>a<sp/>collision<sp/>event<sp/>for<sp/>game<sp/>logic<sp/>processing</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>without<sp/>affecting<sp/>the<sp/>entity&apos;s<sp/>physics<sp/>state.</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75" refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2aa4ecfc70574394990cf17bd83df499f7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2aa4ecfc70574394990cf17bd83df499f7" kindref="member">Event</ref><sp/><sp/><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>4,</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Internal:<sp/>Number<sp/>of<sp/>behavior<sp/>types<sp/>for<sp/>array<sp/>sizing.</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@warning<sp/>Do<sp/>not<sp/>use<sp/>as<sp/>a<sp/>behavior<sp/>value.</highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82" refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2a4eecfb50c5a20eb78bc4d5304e9d8618" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2a4eecfb50c5a20eb78bc4d5304e9d8618" kindref="member">size_</ref><sp/>=<sp/>6</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="include/helios/engine/modules/physics/collision/types/CollisionBehavior.ixx"/>
+  </compounddef>
+</doxygen>

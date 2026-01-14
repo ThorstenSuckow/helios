@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1ScaleSystem" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::modules::spatial::transform::systems::ScaleSystem</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1ecs_1_1System" prot="public" virt="non-virtual">helios::engine::ecs::System</basecompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1ScaleSystem_1a24540bfe4ac899228df6a260eb51d2a3" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::spatial::transform::systems::ScaleSystem::init</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld) noexcept override</argsstring>
+        <name>init</name>
+        <qualifiedname>helios::engine::modules::spatial::transform::systems::ScaleSystem::init</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1ecs_1_1System_1ae0464c1668e257439243a4f25979a7ff">init</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <briefdescription>
+<para>Called when the system is added to a GameWorld. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the GameWorld this system belongs to. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/spatial/transform/systems/ScaleSystem.ixx" line="49" column="14" bodyfile="include/helios/engine/modules/spatial/transform/systems/ScaleSystem.ixx" bodystart="49" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1ScaleSystem_1a1c204070034eb602a47cc90b5b830d81" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::spatial::transform::systems::ScaleSystem::update</definition>
+        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::modules::spatial::transform::systems::ScaleSystem::update</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1ecs_1_1System_1a4e9969641985fa04db6214332c88605b">update</reimplements>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Updates scale for all entities with dirty ScaleComponents. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For each entity with the required components, calculates the scale factor needed to resize the model from its original dimensions to the desired world-space dimensions.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Context containing deltaTime and other frame data. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/spatial/transform/systems/ScaleSystem.ixx" line="62" column="14" bodyfile="include/helios/engine/modules/spatial/transform/systems/ScaleSystem.ixx" bodystart="62" bodyend="92"/>
+        <references refid="namespacehelios_1_1core_1_1units_1a9c75f83e0476f8560ef6b20129582381" compoundref="Unit_8ixx" startline="155" endline="168">helios::core::units::from</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="48">helios::engine::ecs::System::gameWorld_</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>System that applies scaling to entities based on their ScaleComponent. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This system converts the desired world-space dimensions from ScaleComponent into scale factors relative to the model&apos;s original AABB. It handles unit conversion (e.g., centimeters to meters) based on the ScaleComponent&apos;s unit.</para>
+<para>Required components:<itemizedlist>
+<listitem><para>ScaleComponent (desired dimensions and unit)</para>
+</listitem><listitem><para>ModelAabbComponent (original model bounds)</para>
+</listitem><listitem><para>TransformComponent (receives scale updates) </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::ecs::System</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::modules::spatial::transform::systems::ScaleSystem</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1ScaleSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>helios::engine::ecs::System</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>gameWorld_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::modules::spatial::transform::systems::ScaleSystem</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1ScaleSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>helios::engine::runtime::pooling::GameObjectPoolRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolRegistry"/>
+      </node>
+      <node id="7">
+        <label>helios::engine::runtime::pooling::PoolManagerRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry"/>
+      </node>
+      <node id="4">
+        <label>helios::engine::runtime::world::GameWorld</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>logger_</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>pools_</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>poolManagerRegistry_</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>helios::util::log::Logger</label>
+        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/modules/spatial/transform/systems/ScaleSystem.ixx" line="40" column="5" bodyfile="include/helios/engine/modules/spatial/transform/systems/ScaleSystem.ixx" bodystart="40" bodyend="94"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" prot="protected" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::systems::ScaleSystem</scope><name>gameWorld_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1ScaleSystem_1a24540bfe4ac899228df6a260eb51d2a3" prot="public" virt="virtual"><scope>helios::engine::modules::spatial::transform::systems::ScaleSystem</scope><name>init</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a26d81abcda05fe8b12a1ddb4ed6099a3" prot="public" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::systems::ScaleSystem</scope><name>Updatable</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1ScaleSystem_1a1c204070034eb602a47cc90b5b830d81" prot="public" virt="virtual"><scope>helios::engine::modules::spatial::transform::systems::ScaleSystem</scope><name>update</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a937c99bfacd777c53e0f811ab9d335a6" prot="public" virt="virtual"><scope>helios::engine::modules::spatial::transform::systems::ScaleSystem</scope><name>~System</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a0f54f92a2a8d6c8dc2fc2ebed41d5a85" prot="public" virt="virtual"><scope>helios::engine::modules::spatial::transform::systems::ScaleSystem</scope><name>~Updatable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

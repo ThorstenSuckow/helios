@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_421e32f00e1d9f04a50f71a0b4750541" kind="dir">
+    <compoundname>include/helios/engine/mechanics/spawn/manager</compoundname>
+    <innerfile refid="helios_2engine_2mechanics_2spawn_2manager_2__module_8ixx">_module.ixx</innerfile>
+    <innerfile refid="SpawnManager_8ixx">SpawnManager.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_421e32f00e1d9f04a50f71a0b4750541_1autotoc_md126">
+<title>helios::engine::mechanics::spawn::manager</title><para>Managers for spawn and despawn request processing.</para>
+<para>This namespace contains the SpawnManager which handles the actual spawning and despawning of GameObjects from pools.</para>
+</sect1>
+<sect1 id="dir_421e32f00e1d9f04a50f71a0b4750541_1autotoc_md127">
+<title>Managers</title><para><table rows="2" cols="2"><row>
+<entry thead="yes"><para>Manager  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SpawnManager</computeroutput>  </para>
+</entry><entry thead="no"><para>Processes spawn/despawn requests, manages pool lifecycle  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_421e32f00e1d9f04a50f71a0b4750541_1autotoc_md128">
+<title>Responsibilities</title><para>The SpawnManager:</para>
+<para>1. Receives SpawnRequest and DespawnRequest instances 2. Queues requests for deferred processing 3. During flush: processes despawns first, then spawns 4. Uses GameObjectFactory to populate pools 5. Registers as PoolRequestHandler for its assigned pool</para>
+</sect1>
+<sect1 id="dir_421e32f00e1d9f04a50f71a0b4750541_1autotoc_md129">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>factory<sp/>=<sp/>std::make_unique&lt;GameObjectFactory&gt;(...);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>manager<sp/>=<sp/>std::make_unique&lt;SpawnManager&gt;(poolId,<sp/>std::move(factory));</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Initialize<sp/>and<sp/>register<sp/>with<sp/>GameWorld</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">manager-&gt;init(gameWorld);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Register<sp/>as<sp/>manager<sp/>in<sp/>game<sp/>loop</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">gameLoop.addManager(std::move(manager));</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="include/helios/engine/mechanics/spawn/manager/"/>
+  </compounddef>
+</doxygen>

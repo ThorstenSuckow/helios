@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>helios::engine::mechanics::spawn::logic::SpawnCondition</compoundname>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1MaxPerSecCondition" prot="public" virt="non-virtual">helios::engine::mechanics::spawn::logic::MaxPerSecCondition</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1TimerSpawnCondition" prot="public" virt="non-virtual">helios::engine::mechanics::spawn::logic::TimerSpawnCondition</derivedcompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition_1a7f5fd620853a636b55fa0740253f2221" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::engine::mechanics::spawn::logic::SpawnCondition::~SpawnCondition</definition>
+        <argsstring>()=default</argsstring>
+        <name>~SpawnCondition</name>
+        <qualifiedname>helios::engine::mechanics::spawn::logic::SpawnCondition::~SpawnCondition</qualifiedname>
+        <briefdescription>
+<para>Virtual destructor for proper polymorphic cleanup. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/spawn/logic/SpawnCondition.ixx" line="40" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition_1aa6c7b422a4434464c37d1751462284e3" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>float</type>
+        <definition>virtual float helios::engine::mechanics::spawn::logic::SpawnCondition::spawnBudget</definition>
+        <argsstring>(const helios::engine::runtime::world::GameWorld &amp;gameWorld, const helios::engine::runtime::pooling::GameObjectPool &amp;gameObjectPool, const helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept=0</argsstring>
+        <name>spawnBudget</name>
+        <qualifiedname>helios::engine::mechanics::spawn::logic::SpawnCondition::spawnBudget</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1MaxPerSecCondition_1a1f5744d20228cd3f98fcc68f5c9b5473">spawnBudget</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1TimerSpawnCondition_1ad684dcb6004fbcb8b8f03830898a2c25">spawnBudget</reimplementedby>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool" kindref="compound">helios::engine::runtime::pooling::GameObjectPool</ref> &amp;</type>
+          <declname>gameObjectPool</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Calculates how many GameObjects should be spawned this frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Called each frame by the spawn system to determine how many objects to activate from the pool. The implementation may consider elapsed time, pool capacity, game state, or any other relevant factors.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the current GameWorld. May be nullptr. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>gameObjectPool</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the pool from which objects will be acquired. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s update context with delta time.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The number of GameObjects to spawn this frame (spawn budget). Returns 0 if no spawning should occur. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/spawn/logic/SpawnCondition.ixx" line="57" column="23"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Abstract base class defining when and how many GameObjects should spawn. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition" kindref="compound">SpawnCondition</ref> implements the Strategy pattern for spawn timing control. Concrete implementations determine how many objects should be spawned each frame based on time, game state, pool availability, or other conditions.</para>
+<para>The spawn budget returned by `spawnBudget()` represents the number of GameObjects that the spawn system should attempt to activate this frame.</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1TimerSpawnCondition" kindref="compound">TimerSpawnCondition</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>GameObjectSpawnSystem </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::mechanics::spawn::logic::MaxPerSecCondition</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1MaxPerSecCondition"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>helios::engine::mechanics::spawn::logic::SpawnCondition</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition"/>
+      </node>
+      <node id="3">
+        <label>helios::engine::mechanics::spawn::logic::TimerSpawnCondition</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1TimerSpawnCondition"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="include/helios/engine/mechanics/spawn/logic/SpawnCondition.ixx" line="33" column="5" bodyfile="include/helios/engine/mechanics/spawn/logic/SpawnCondition.ixx" bodystart="33" bodyend="63"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition_1aa6c7b422a4434464c37d1751462284e3" prot="public" virt="pure-virtual"><scope>helios::engine::mechanics::spawn::logic::SpawnCondition</scope><name>spawnBudget</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition_1a7f5fd620853a636b55fa0740253f2221" prot="public" virt="virtual"><scope>helios::engine::mechanics::spawn::logic::SpawnCondition</scope><name>~SpawnCondition</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

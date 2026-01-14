@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8runtime_8factory_8GameObjectFactory" kind="module">
+    <compoundname>helios.engine.runtime.factory.GameObjectFactory</compoundname>
+    <innerfile refid="GameObjectFactory_8ixx">GameObjectFactory.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1runtime_1_1factory_1_1GameObjectFactory" prot="public">helios::engine::runtime::factory::GameObjectFactory</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1factory_1_1GameObjectFactory_1ae2063bc8dbb0a0e1b64885de4dea83b3" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;helios::engine::ecs::GameObject&gt; helios::engine::runtime::factory::GameObjectFactory::gameObjectPrefab_</definition>
+        <argsstring></argsstring>
+        <name>gameObjectPrefab_</name>
+        <qualifiedname>helios::engine::runtime::factory::GameObjectFactory::gameObjectPrefab_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>The prototype GameObject used as a template for cloning. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This prefab is cloned into the GameWorld when filling a pool. The factory owns this prefab exclusively. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/factory/GameObjectFactory.ixx" line="52" column="25" bodyfile="include/helios/engine/runtime/factory/GameObjectFactory.ixx" bodystart="52" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1factory_1_1GameObjectFactory_1a5fcd8ec69d15094996216d6c35a0158d" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::runtime::factory::GameObjectFactory::GameObjectFactory</definition>
+        <argsstring>(std::unique_ptr&lt; helios::engine::ecs::GameObject &gt; gameObjectPrefab)</argsstring>
+        <name>GameObjectFactory</name>
+        <qualifiedname>helios::engine::runtime::factory::GameObjectFactory::GameObjectFactory</qualifiedname>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> &gt;</type>
+          <declname>gameObjectPrefab</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classhelios_1_1engine_1_1runtime_1_1factory_1_1GameObjectFactory" kindref="compound">GameObjectFactory</ref> with a prefab template. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameObjectPrefab</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The prototype GameObject to clone. Must not be nullptr.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="pre"><para>`gameObjectPrefab != nullptr` </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/factory/GameObjectFactory.ixx" line="64" column="18" bodyfile="include/helios/engine/runtime/factory/GameObjectFactory.ixx" bodystart="64" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1factory_1_1GameObjectFactory_1ad334258a72af933b4b834b9592b4f7d3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::factory::GameObjectFactory::fillPool</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld, helios::engine::runtime::pooling::GameObjectPool &amp;gameObjectPool)</argsstring>
+        <name>fillPool</name>
+        <qualifiedname>helios::engine::runtime::factory::GameObjectFactory::fillPool</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool" kindref="compound">helios::engine::runtime::pooling::GameObjectPool</ref> &amp;</type>
+          <declname>gameObjectPool</declname>
+        </param>
+        <briefdescription>
+<para>Fills a GameObjectPool with cloned instances of the prefab. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Calculates the remaining capacity in the pool and creates that many clones of the prefab. Each clone is:<itemizedlist>
+<listitem><para>Added to the GameWorld via `clone()`</para>
+</listitem><listitem><para>Marked as inactive (`setActive(false)`)</para>
+</listitem><listitem><para>Registered with the pool&apos;s inactive list</para>
+</listitem></itemizedlist>
+</para>
+<para>This method is typically called once during initialization to pre-populate the pool with ready-to-use objects.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The GameWorld that will own the cloned GameObjects. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>gameObjectPool</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The pool to fill with inactive clones. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/factory/GameObjectFactory.ixx" line="88" column="14" bodyfile="include/helios/engine/runtime/factory/GameObjectFactory.ixx" bodystart="88" bodyend="103"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a7103aa91a43d728efa94eb2a9c55cb44" compoundref="GameObjectPool_8ixx" startline="244" endline="246">helios::engine::runtime::pooling::GameObjectPool::activeCount</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a60e9a358d1f385eb9f058013ce441f35" compoundref="GameObjectPool_8ixx" startline="149" endline="159">helios::engine::runtime::pooling::GameObjectPool::addInactive</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a0893b5b23f23de4e093c69f10b5ca2e3" compoundref="GameWorld_8ixx" startline="492" endline="516">helios::engine::runtime::world::GameWorld::clone</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1GameObject_1a3674dd45d53436ffeaf50ee266e9f101" compoundref="GameObject_8ixx" startline="348" endline="350">helios::engine::ecs::GameObject::guid</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a0a2c82c68a0214cf96b7b627c53d4716" compoundref="GameObjectPool_8ixx" startline="253" endline="255">helios::engine::runtime::pooling::GameObjectPool::inactiveCount</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1GameObject_1a72a9d3833a1ae1464dab535bce3166ed" compoundref="GameObject_8ixx" startline="387" endline="405">helios::engine::ecs::GameObject::setActive</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a81b5e2ed58b5db8445480bcd458db5c7" compoundref="GameObjectPool_8ixx" startline="108" endline="110">helios::engine::runtime::pooling::GameObjectPool::size</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/engine/runtime/factory/GameObjectFactory.ixx" line="10" column="15"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher" prot="public" virt="non-virtual">helios::engine::runtime::messaging::command::WorldCommandDispatcher</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher_1ae99b8d4dc66acf8340000f97c0fdd16d" prot="protected" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; T &gt;::dispatchTyped</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld, const T &amp;command) noexcept=0</argsstring>
+        <name>dispatchTyped</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher::dispatchTyped</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1dispatcher_1_1DespawnCommandDispatcher_1ad08fabecd0d1ee691f336833f7dc85fb">dispatchTyped</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher_1ae5dba7176c1c054265878d57d6812b51">dispatchTyped</reimplementedby>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>command</declname>
+        </param>
+        <briefdescription>
+<para>Handles the dispatched command with full type information. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world context. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>command</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The typed command to process.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>Implementations must be noexcept. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/messaging/command/TypedWorldCommandDispatcher.ixx" line="47" column="22"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher_1ada9b7af011e293a1d5712a1134bdf66d" compoundref="TypedWorldCommandDispatcher_8ixx" startline="60" endline="65">helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; T &gt;::dispatch</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher_1ada9b7af011e293a1d5712a1134bdf66d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; T &gt;::dispatch</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld, const WorldCommand &amp;command) override</argsstring>
+        <name>dispatch</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher::dispatch</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher_1ad64b55eac8560337da958baeee49bbca">dispatch</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand" kindref="compound">WorldCommand</ref> &amp;</type>
+          <declname>command</declname>
+        </param>
+        <briefdescription>
+<para>Dispatches the command by downcasting to the concrete type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world context. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>command</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The base command reference. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/messaging/command/TypedWorldCommandDispatcher.ixx" line="60" column="14" bodyfile="include/helios/engine/runtime/messaging/command/TypedWorldCommandDispatcher.ixx" bodystart="60" bodyend="65"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher_1ae99b8d4dc66acf8340000f97c0fdd16d">helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; T &gt;::dispatchTyped</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Type-safe dispatcher template for handling specific <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand" kindref="compound">WorldCommand</ref> types. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The concrete <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand" kindref="compound">WorldCommand</ref> type this dispatcher handles.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher" kindref="compound">TypedWorldCommandDispatcher</ref> provides a type-safe bridge between the polymorphic <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher_1ada9b7af011e293a1d5712a1134bdf66d" kindref="member">dispatch()</ref> method and a typed <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher_1ae99b8d4dc66acf8340000f97c0fdd16d" kindref="member">dispatchTyped()</ref> handler. Derived classes override <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher_1ae99b8d4dc66acf8340000f97c0fdd16d" kindref="member">dispatchTyped()</ref> to handle commands with full type information.</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher" kindref="compound">WorldCommandDispatcher</ref> for the base interface </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1a1e18ddc1c434f97049f407a900511d59" kindref="member">CommandBuffer::addDispatcher</ref> for registration </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; T &gt;</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::engine::runtime::messaging::command::WorldCommandDispatcher</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; T &gt;</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::engine::runtime::messaging::command::WorldCommandDispatcher</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/runtime/messaging/command/TypedWorldCommandDispatcher.ixx" line="34" column="5" bodyfile="include/helios/engine/runtime/messaging/command/TypedWorldCommandDispatcher.ixx" bodystart="34" bodyend="67"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher_1ada9b7af011e293a1d5712a1134bdf66d" prot="public" virt="virtual"><scope>helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher</scope><name>dispatch</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher_1ae99b8d4dc66acf8340000f97c0fdd16d" prot="protected" virt="pure-virtual"><scope>helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher</scope><name>dispatchTyped</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher_1a99cfdc9890b444664a9ae3a98e8b6d1f" prot="public" virt="virtual"><scope>helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher</scope><name>~WorldCommandDispatcher</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

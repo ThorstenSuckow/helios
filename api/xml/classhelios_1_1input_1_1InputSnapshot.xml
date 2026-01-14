@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1input_1_1InputSnapshot" kind="class" language="C++" prot="public">
+    <compoundname>helios::input::InputSnapshot</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1input_1_1InputSnapshot_1a798159c514dc8a2a2c51a4d2593a4036" prot="private" static="no" mutable="no">
+        <type>const <ref refid="classhelios_1_1input_1_1gamepad_1_1GamepadState" kindref="compound">helios::input::gamepad::GamepadState</ref></type>
+        <definition>const helios::input::gamepad::GamepadState helios::input::InputSnapshot::gamepadState_</definition>
+        <argsstring></argsstring>
+        <name>gamepadState_</name>
+        <qualifiedname>helios::input::InputSnapshot::gamepadState_</qualifiedname>
+        <briefdescription>
+<para>Captured gamepad state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Stored as a const member to enforce immutability of the snapshot. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/input/InputSnapshot.ixx" line="52" column="52" bodyfile="include/helios/input/InputSnapshot.ixx" bodystart="52" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1input_1_1InputSnapshot_1a399a0d9b40195ad8470ee73ff44fd113" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::input::InputSnapshot::InputSnapshot</definition>
+        <argsstring>(const helios::input::gamepad::GamepadState &amp;gamepadState) noexcept</argsstring>
+        <name>InputSnapshot</name>
+        <qualifiedname>helios::input::InputSnapshot::InputSnapshot</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1input_1_1gamepad_1_1GamepadState" kindref="compound">helios::input::gamepad::GamepadState</ref> &amp;</type>
+          <declname>gamepadState</declname>
+        </param>
+        <briefdescription>
+<para>Constructs an <ref refid="classhelios_1_1input_1_1InputSnapshot" kindref="compound">InputSnapshot</ref> capturing the current gamepad state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gamepadState</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The gamepad state to capture. Copied into the snapshot.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>This operation is noexcept and cheap as GamepadState is a small struct. The snapshot remains valid even if the source state is modified or destroyed. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/input/InputSnapshot.ixx" line="64" column="18" bodyfile="include/helios/input/InputSnapshot.ixx" bodystart="64" bodyend="66"/>
+        <references refid="classhelios_1_1input_1_1InputSnapshot_1a5ff8aba18168b8843329886e68a7ee99" compoundref="InputSnapshot_8ixx" startline="75" endline="77">gamepadState</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1input_1_1InputSnapshot_1a5ff8aba18168b8843329886e68a7ee99" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classhelios_1_1input_1_1gamepad_1_1GamepadState" kindref="compound">helios::input::gamepad::GamepadState</ref> &amp;</type>
+        <definition>const helios::input::gamepad::GamepadState &amp; helios::input::InputSnapshot::gamepadState</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>gamepadState</name>
+        <qualifiedname>helios::input::InputSnapshot::gamepadState</qualifiedname>
+        <briefdescription>
+<para>Returns the captured gamepad state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Const reference to the captured GamepadState, valid for the lifetime of this <ref refid="classhelios_1_1input_1_1InputSnapshot" kindref="compound">InputSnapshot</ref>. The state is immutable and reflects input at the time of snapshot creation. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/input/InputSnapshot.ixx" line="75" column="53" bodyfile="include/helios/input/InputSnapshot.ixx" bodystart="75" bodyend="77"/>
+        <referencedby refid="classhelios_1_1input_1_1InputSnapshot_1a399a0d9b40195ad8470ee73ff44fd113" compoundref="InputSnapshot_8ixx" startline="64" endline="66">InputSnapshot</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Immutable snapshot capturing input state at a specific point in time. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classhelios_1_1input_1_1InputSnapshot" kindref="compound">InputSnapshot</ref> decouples input polling from input processing by capturing the complete input state at a single moment. This immutable design enables deterministic replay where snapshots can be recorded and replayed exactly, network synchronization by transmitting snapshots to remote clients, frame-consistent processing where all systems see identical input state, and multi-threaded safety as snapshots can be shared across threads without locking.</para>
+<para>The current implementation captures only gamepad input. Future versions may extend this to include keyboard, mouse, and other input devices.</para>
+<para>Typical usage: ```cpp // Capture input at start of frame auto snapshot = <ref refid="classhelios_1_1input_1_1InputSnapshot" kindref="compound">helios::input::InputSnapshot</ref>( inputManager.gamepadState(helios::input::types::Gamepad::ONE) );</para>
+<para>// Process input (potentially in parallel or deferred) inputHandler.handleInput(snapshot, player, commandBuffer, deltaTime); ```</para>
+<para><simplesect kind="note"><para>The snapshot is immutable after construction and reflects input state at construction time. Currently only supports a single gamepad; multi-input support is planned.</para>
+</simplesect>
+<xrefsect id="todo_1_todo000015"><xreftitle>Todo</xreftitle><xrefdescription><para>Extend to support multiple gamepads, keyboard, and mouse input. </para>
+<para>Add timestamp to enable precise replay and network synchronization. </para>
+</xrefdescription></xrefsect></para>
+    </detaileddescription>
+    <location file="include/helios/input/InputSnapshot.ixx" line="45" column="5" bodyfile="include/helios/input/InputSnapshot.ixx" bodystart="45" bodyend="78"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1input_1_1InputSnapshot_1a5ff8aba18168b8843329886e68a7ee99" prot="public" virt="non-virtual"><scope>helios::input::InputSnapshot</scope><name>gamepadState</name></member>
+      <member refid="classhelios_1_1input_1_1InputSnapshot_1a798159c514dc8a2a2c51a4d2593a4036" prot="private" virt="non-virtual"><scope>helios::input::InputSnapshot</scope><name>gamepadState_</name></member>
+      <member refid="classhelios_1_1input_1_1InputSnapshot_1a399a0d9b40195ad8470ee73ff44fd113" prot="public" virt="non-virtual"><scope>helios::input::InputSnapshot</scope><name>InputSnapshot</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

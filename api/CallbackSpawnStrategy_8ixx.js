@@ -1,4 +1,4 @@
 var CallbackSpawnStrategy_8ixx =
 [
-    [ "helios::engine::game::CallbackSpawnStrategy", "classhelios_1_1engine_1_1game_1_1CallbackSpawnStrategy.html", "classhelios_1_1engine_1_1game_1_1CallbackSpawnStrategy" ]
+    [ "helios::engine::mechanics::spawn::logic::CallbackSpawnStrategy", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1CallbackSpawnStrategy.html", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1CallbackSpawnStrategy" ]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>helios: include/helios/engine/game/SpawnCondition.ixx Source File</title>
+<title>helios: include/helios/engine/mechanics/spawn/logic/SpawnCondition.ixx Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
@@ -113,87 +113,86 @@ $(function() {
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">module</span>;</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">export</span> <span class="keyword">module</span> <a class="code" href="module__helios_8engine_8game_8SpawnCondition.html">helios.engine.game.SpawnCondition</a>;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">export</span> <span class="keyword">module</span> <a class="code" href="module__helios_8engine_8mechanics_8spawn_8logic_8SpawnCondition.html">helios.engine.mechanics.spawn.logic.SpawnCondition</a>;</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8game_8GameWorld.html">helios.engine.game.GameWorld</a>;</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8game_8Level.html">helios.engine.game.Level</a>;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8game_8GameObjectPool.html">helios.engine.game.GameObjectPool</a>;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8game_8UpdateContext.html">helios.engine.game.UpdateContext</a>;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8runtime_8world_8GameWorld.html">helios.engine.runtime.world.GameWorld</a>;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8runtime_8world_8Level.html">helios.engine.runtime.world.Level</a>;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8core_8data_8GameObjectPoolId.html">helios.engine.core.data.GameObjectPoolId</a>;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8runtime_8pooling_8GameObjectPool.html">helios.engine.runtime.pooling.GameObjectPool</a>;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8runtime_8world_8UpdateContext.html">helios.engine.runtime.world.UpdateContext</a>;</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">export</span> <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine_1_1game.html">helios::engine::game</a> {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"></span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">    /**</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">     * @brief Abstract base class defining when and how many GameObjects should spawn.</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">     * @details</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">     * SpawnCondition implements the Strategy pattern for spawn timing control.</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">     * Concrete implementations determine how many objects should be spawned each</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">     * frame based on time, game state, pool availability, or other conditions.</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">     * The spawn budget returned by `spawnBudget()` represents the number of</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">     * GameObjects that the spawn system should attempt to activate this frame.</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">     * @see TimerSpawnCondition</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">     * @see GameObjectSpawnSystem</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">     */</span></div>
-<div class="foldopen" id="foldopen00032" data-start="{" data-end="};">
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1game_1_1SpawnCondition.html">   32</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classhelios_1_1engine_1_1game_1_1SpawnCondition.html">SpawnCondition</a> {</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment"></span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">         * @brief Virtual destructor for proper polymorphic cleanup.</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1game_1_1SpawnCondition.html#a3c2b7fbd1138483584d1a6f14ab40adb">   39</a></span>        <span class="keyword">virtual</span> <a class="code hl_function" href="classhelios_1_1engine_1_1game_1_1SpawnCondition.html#a3c2b7fbd1138483584d1a6f14ab40adb">~SpawnCondition</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment"></span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">         * @brief Calculates how many GameObjects should be spawned this frame.</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">         * @details</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">         * Called each frame by the spawn system to determine how many objects</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">         * to activate from the pool. The implementation may consider elapsed time,</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">         * pool capacity, game state, or any other relevant factors.</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">         * @param gameWorld Pointer to the current GameWorld. May be nullptr.</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">         * @param level Pointer to the current Level containing bounds and spawn info.</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">export</span> <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine_1_1mechanics_1_1spawn_1_1logic.html">helios::engine::mechanics::spawn::logic</a> {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"></span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">    /**</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">     * @brief Abstract base class defining when and how many GameObjects should spawn.</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">     * @details</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">     * SpawnCondition implements the Strategy pattern for spawn timing control.</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">     * Concrete implementations determine how many objects should be spawned each</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">     * frame based on time, game state, pool availability, or other conditions.</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">     * The spawn budget returned by `spawnBudget()` represents the number of</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">     * GameObjects that the spawn system should attempt to activate this frame.</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">     * @see TimerSpawnCondition</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">     * @see GameObjectSpawnSystem</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">     */</span></div>
+<div class="foldopen" id="foldopen00033" data-start="{" data-end="};">
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition.html">   33</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition.html">SpawnCondition</a> {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"></span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">         * @brief Virtual destructor for proper polymorphic cleanup.</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition.html#a7f5fd620853a636b55fa0740253f2221">   40</a></span>        <span class="keyword">virtual</span> <a class="code hl_function" href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition.html#a7f5fd620853a636b55fa0740253f2221">~SpawnCondition</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment"></span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">         * @brief Calculates how many GameObjects should be spawned this frame.</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">         * @details</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">         * Called each frame by the spawn system to determine how many objects</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">         * to activate from the pool. The implementation may consider elapsed time,</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">         * pool capacity, game state, or any other relevant factors.</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">         * @param gameWorld Pointer to the current GameWorld. May be nullptr.</span></div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">         * @param gameObjectPool Pointer to the pool from which objects will be acquired.</span></div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">         * @param updateContext The current frame&#39;s update context with delta time.</span></div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">         *</span></div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">         * @return The number of GameObjects to spawn this frame (spawn budget).</span></div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">         *         Returns 0 if no spawning should occur.</span></div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1game_1_1SpawnCondition.html#ab7745a17eaf091b9be765aa6b616aaa1">   57</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="classhelios_1_1engine_1_1game_1_1SpawnCondition.html#ab7745a17eaf091b9be765aa6b616aaa1">spawnBudget</a>(</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1engine_1_1game_1_1GameWorld.html">helios::engine::game::GameWorld</a>* gameWorld,</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            <span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1engine_1_1game_1_1Level.html">helios::engine::game::Level</a>* level,</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            <span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1engine_1_1game_1_1GameObjectPool.html">helios::engine::game::GameObjectPool</a>* gameObjectPool,</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            <span class="keyword">const</span> <a class="code hl_struct" href="structhelios_1_1engine_1_1game_1_1UpdateContext.html">helios::engine::game::UpdateContext</a>&amp; updateContext</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        ) <span class="keyword">noexcept</span> = 0;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    };</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition.html#aa6c7b422a4434464c37d1751462284e3">   57</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition.html#aa6c7b422a4434464c37d1751462284e3">spawnBudget</a>(</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a>&amp; gameWorld,</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            <span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html">helios::engine::runtime::pooling::GameObjectPool</a>&amp; gameObjectPool,</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            <span class="keyword">const</span> <a class="code hl_struct" href="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a>&amp; updateContext</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        ) <span class="keyword">noexcept</span> = 0;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    };</div>
 </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>}</div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1GameObjectPool_html"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1GameObjectPool.html">helios::engine::game::GameObjectPool</a></div><div class="ttdoc">A reusable object pool for GameObjects.</div><div class="ttdef"><b>Definition</b> <a href="GameObjectPool_8ixx_source.html#l00072">GameObjectPool.ixx:72</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1GameWorld_html"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1GameWorld.html">helios::engine::game::GameWorld</a></div><div class="ttdoc">Central registry for managing game entities, systems, and the active level.</div><div class="ttdef"><b>Definition</b> <a href="GameWorld_8ixx_source.html#l00048">GameWorld.ixx:48</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1Level_html"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1Level.html">helios::engine::game::Level</a></div><div class="ttdoc">Represents a game level containing the scene graph and world boundaries.</div><div class="ttdef"><b>Definition</b> <a href="Level_8ixx_source.html#l00023">Level.ixx:23</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1SpawnCondition_html"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1SpawnCondition.html">helios::engine::game::SpawnCondition</a></div><div class="ttdoc">Abstract base class defining when and how many GameObjects should spawn.</div><div class="ttdef"><b>Definition</b> <a href="#l00032">SpawnCondition.ixx:32</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1SpawnCondition_html_a3c2b7fbd1138483584d1a6f14ab40adb"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1SpawnCondition.html#a3c2b7fbd1138483584d1a6f14ab40adb">helios::engine::game::SpawnCondition::~SpawnCondition</a></div><div class="ttdeci">virtual ~SpawnCondition()=default</div><div class="ttdoc">Virtual destructor for proper polymorphic cleanup.</div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1SpawnCondition_html_ab7745a17eaf091b9be765aa6b616aaa1"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1SpawnCondition.html#ab7745a17eaf091b9be765aa6b616aaa1">helios::engine::game::SpawnCondition::spawnBudget</a></div><div class="ttdeci">virtual size_t spawnBudget(const helios::engine::game::GameWorld *gameWorld, const helios::engine::game::Level *level, const helios::engine::game::GameObjectPool *gameObjectPool, const helios::engine::game::UpdateContext &amp;updateContext) noexcept=0</div><div class="ttdoc">Calculates how many GameObjects should be spawned this frame.</div></div>
-<div class="ttc" id="amodule__helios_8engine_8game_8GameObjectPool_html"><div class="ttname"><a href="module__helios_8engine_8game_8GameObjectPool.html">helios.engine.game.GameObjectPool</a></div></div>
-<div class="ttc" id="amodule__helios_8engine_8game_8GameWorld_html"><div class="ttname"><a href="module__helios_8engine_8game_8GameWorld.html">helios.engine.game.GameWorld</a></div></div>
-<div class="ttc" id="amodule__helios_8engine_8game_8Level_html"><div class="ttname"><a href="module__helios_8engine_8game_8Level.html">helios.engine.game.Level</a></div></div>
-<div class="ttc" id="amodule__helios_8engine_8game_8SpawnCondition_html"><div class="ttname"><a href="module__helios_8engine_8game_8SpawnCondition.html">helios.engine.game.SpawnCondition</a></div></div>
-<div class="ttc" id="amodule__helios_8engine_8game_8UpdateContext_html"><div class="ttname"><a href="module__helios_8engine_8game_8UpdateContext.html">helios.engine.game.UpdateContext</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1engine_1_1game_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1game.html">helios::engine::game</a></div><div class="ttdoc">Game logic infrastructure using Command pattern for decoupled, deterministic game systems.</div><div class="ttdef"><b>Definition</b> <a href="CallbackSpawnStrategy_8ixx_source.html#l00020">CallbackSpawnStrategy.ixx:20</a></div></div>
-<div class="ttc" id="astructhelios_1_1engine_1_1game_1_1UpdateContext_html"><div class="ttname"><a href="structhelios_1_1engine_1_1game_1_1UpdateContext.html">helios::engine::game::UpdateContext</a></div><div class="ttdoc">Context passed to Updatable components during per-frame updates.</div><div class="ttdef"><b>Definition</b> <a href="UpdateContext_8ixx_source.html#l00028">UpdateContext.ixx:28</a></div></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>}</div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition_html"><div class="ttname"><a href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition.html">helios::engine::mechanics::spawn::logic::SpawnCondition</a></div><div class="ttdoc">Abstract base class defining when and how many GameObjects should spawn.</div><div class="ttdef"><b>Definition</b> <a href="#l00033">SpawnCondition.ixx:33</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition_html_a7f5fd620853a636b55fa0740253f2221"><div class="ttname"><a href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition.html#a7f5fd620853a636b55fa0740253f2221">helios::engine::mechanics::spawn::logic::SpawnCondition::~SpawnCondition</a></div><div class="ttdeci">virtual ~SpawnCondition()=default</div><div class="ttdoc">Virtual destructor for proper polymorphic cleanup.</div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition_html_aa6c7b422a4434464c37d1751462284e3"><div class="ttname"><a href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition.html#aa6c7b422a4434464c37d1751462284e3">helios::engine::mechanics::spawn::logic::SpawnCondition::spawnBudget</a></div><div class="ttdeci">virtual float spawnBudget(const helios::engine::runtime::world::GameWorld &amp;gameWorld, const helios::engine::runtime::pooling::GameObjectPool &amp;gameObjectPool, const helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept=0</div><div class="ttdoc">Calculates how many GameObjects should be spawned this frame.</div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_html"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html">helios::engine::runtime::pooling::GameObjectPool</a></div><div class="ttdoc">Object pool for efficient GameObject lifecycle management.</div><div class="ttdef"><b>Definition</b> <a href="GameObjectPool_8ixx_source.html#l00039">GameObjectPool.ixx:39</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_html"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a></div><div class="ttdoc">Central registry for game entities, managers, pools, and the active level.</div><div class="ttdef"><b>Definition</b> <a href="GameWorld_8ixx_source.html#l00096">GameWorld.ixx:96</a></div></div>
+<div class="ttc" id="amodule__helios_8engine_8core_8data_8GameObjectPoolId_html"><div class="ttname"><a href="module__helios_8engine_8core_8data_8GameObjectPoolId.html">helios.engine.core.data.GameObjectPoolId</a></div></div>
+<div class="ttc" id="amodule__helios_8engine_8mechanics_8spawn_8logic_8SpawnCondition_html"><div class="ttname"><a href="module__helios_8engine_8mechanics_8spawn_8logic_8SpawnCondition.html">helios.engine.mechanics.spawn.logic.SpawnCondition</a></div></div>
+<div class="ttc" id="amodule__helios_8engine_8runtime_8pooling_8GameObjectPool_html"><div class="ttname"><a href="module__helios_8engine_8runtime_8pooling_8GameObjectPool.html">helios.engine.runtime.pooling.GameObjectPool</a></div></div>
+<div class="ttc" id="amodule__helios_8engine_8runtime_8world_8GameWorld_html"><div class="ttname"><a href="module__helios_8engine_8runtime_8world_8GameWorld.html">helios.engine.runtime.world.GameWorld</a></div></div>
+<div class="ttc" id="amodule__helios_8engine_8runtime_8world_8Level_html"><div class="ttname"><a href="module__helios_8engine_8runtime_8world_8Level.html">helios.engine.runtime.world.Level</a></div></div>
+<div class="ttc" id="amodule__helios_8engine_8runtime_8world_8UpdateContext_html"><div class="ttname"><a href="module__helios_8engine_8runtime_8world_8UpdateContext.html">helios.engine.runtime.world.UpdateContext</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1mechanics_1_1spawn_1_1logic.html">helios::engine::mechanics::spawn::logic</a></div><div class="ttdoc">Spawn conditions and strategies for controlling entity creation.</div><div class="ttdef"><b>Definition</b> <a href="CallbackSpawnStrategy_8ixx_source.html#l00020">CallbackSpawnStrategy.ixx:20</a></div></div>
+<div class="ttc" id="astructhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_html"><div class="ttname"><a href="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a></div><div class="ttdoc">Context passed to systems and components during per-frame updates.</div><div class="ttdef"><b>Definition</b> <a href="UpdateContext_8ixx_source.html#l00045">UpdateContext.ixx:45</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_08c09894bd9f0ab4b1e9fdc7a2628766.html">helios</a></li><li class="navelem"><a href="dir_860c9de2f65c10e8e262a0e7b5bfee5e.html">engine</a></li><li class="navelem"><a href="dir_46c7b0b04924cca8aa10726746d57f30.html">game</a></li><li class="navelem"><a href="SpawnCondition_8ixx.html">SpawnCondition.ixx</a></li>
+    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_08c09894bd9f0ab4b1e9fdc7a2628766.html">helios</a></li><li class="navelem"><a href="dir_860c9de2f65c10e8e262a0e7b5bfee5e.html">engine</a></li><li class="navelem"><a href="dir_38660f863d95a2f91776843a957349cd.html">mechanics</a></li><li class="navelem"><a href="dir_ec78eb07ca45680dda148d5b3c7a447e.html">spawn</a></li><li class="navelem"><a href="dir_e5915e51628795b15babf33bf45a77aa.html">logic</a></li><li class="navelem"><a href="SpawnCondition_8ixx.html">SpawnCondition.ixx</a></li>
     <li class="footer">Generated on <span class="timestamp"></span> for helios by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

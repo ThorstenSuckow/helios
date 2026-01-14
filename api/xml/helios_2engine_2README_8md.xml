@@ -8,16 +8,82 @@
     <detaileddescription>
     </detaileddescription>
     <programlisting>
-<codeline><highlight class="normal">##<sp/>helios::engine</highlight></codeline>
+<codeline><highlight class="normal">#<sp/>helios::engine</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">This<sp/>namespace<sp/>provides<sp/>core<sp/>engine<sp/>utilities<sp/>for<sp/>frame<sp/>timing<sp/>and<sp/>update<sp/>lifecycle<sp/>management.<sp/>It<sp/>includes<sp/>classes<sp/>for<sp/>frame<sp/>pacing<sp/>and<sp/>measurement,<sp/>and<sp/>interfaces<sp/>for<sp/>objects<sp/>that<sp/>need<sp/>per-frame<sp/>updates.</highlight></codeline>
+<codeline><highlight class="normal">Main<sp/>engine<sp/>module<sp/>aggregating<sp/>core<sp/>infrastructure<sp/>and<sp/>game<sp/>systems.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>access<sp/>to<sp/>the<sp/>complete<sp/>helios<sp/>engine<sp/>functionality,<sp/>including<sp/>the<sp/>ECS<sp/>architecture,<sp/>game<sp/>systems,<sp/>messaging<sp/>infrastructure,<sp/>and<sp/>development<sp/>tooling.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Submodules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Module<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|--------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.engine.core`<sp/>|<sp/>Data<sp/>structures,<sp/>messaging<sp/>re-exports,<sp/>units<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.engine.ecs`<sp/>|<sp/>ECS<sp/>base<sp/>classes<sp/>(GameObject,<sp/>Component,<sp/>System)<sp/>and<sp/>query<sp/>system<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.engine.runtime`<sp/>|<sp/>Runtime<sp/>infrastructure<sp/>(world,<sp/>gameloop,<sp/>pooling,<sp/>messaging,<sp/>factory)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.engine.game`<sp/>|<sp/>Facade<sp/>re-exporting<sp/>common<sp/>game<sp/>development<sp/>types<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.engine.tooling`<sp/>|<sp/>Frame<sp/>pacing<sp/>and<sp/>performance<sp/>metrics<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Architecture</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">helios.engine</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>core/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Infrastructure</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>data/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Type-indexed<sp/>containers,<sp/>pool<sp/>IDs</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>units/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Measurement<sp/>units<sp/>(meters,<sp/>seconds)</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>ecs/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>ECS<sp/>base<sp/>classes</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>Component<sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Data<sp/>container<sp/>base</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>GameObject<sp/><sp/><sp/><sp/><sp/>#<sp/>Entity<sp/>container</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>System<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Logic<sp/>processor<sp/>base</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>query/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameObjectFilter,<sp/>GameObjectView</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>runtime/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Runtime<sp/>infrastructure</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>world/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameWorld,<sp/>Level,<sp/>UpdateContext,<sp/>Manager</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>gameloop/<sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameLoop,<sp/>Phase,<sp/>Pass</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>pooling/<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameObjectPool,<sp/>PoolRegistry,<sp/>PoolFacade</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>messaging/<sp/><sp/><sp/><sp/><sp/>#<sp/>CommandBuffer,<sp/>Dispatchers,<sp/>EventBus</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>factory/<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameObjectFactory</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>modules/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Domain-specific<sp/>components<sp/>and<sp/>systems</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>physics/<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Collision,<sp/>motion<sp/>systems</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>spatial/<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Transform<sp/>components</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>scene/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Scene<sp/>graph<sp/>integration</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>rendering/<sp/><sp/><sp/><sp/><sp/>#<sp/>Renderable<sp/>components</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>pool/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Pool<sp/>ID<sp/>components</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>mechanics/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Gameplay<sp/>mechanics</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>bounds/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Level<sp/>boundary<sp/>behavior</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>combat/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Shooting,<sp/>projectiles</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>spawn/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Entity<sp/>spawning</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>input/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Twin-stick<sp/>input<sp/>systems</highlight></codeline>
+<codeline><highlight class="normal">└──<sp/>tooling/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Performance<sp/>monitoring</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.engine;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Access<sp/>ECS<sp/>classes</highlight></codeline>
+<codeline><highlight class="normal">helios::engine::runtime::world::GameWorld<sp/>world;</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>entity<sp/>=<sp/>std::make_unique&lt;helios::engine::ecs::GameObject&gt;();</highlight></codeline>
+<codeline><highlight class="normal">world.addGameObject(std::move(entity));</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Access<sp/>game<sp/>loop<sp/>-<sp/>systems<sp/>are<sp/>registered<sp/>with<sp/>phases/passes</highlight></codeline>
+<codeline><highlight class="normal">helios::engine::runtime::gameloop::GameLoop<sp/>gameLoop;</highlight></codeline>
+<codeline><highlight class="normal">gameLoop.phase(PhaseType::Main)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addSystem&lt;Move2DSystem&gt;(&amp;world);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Access<sp/>tooling</highlight></codeline>
+<codeline><highlight class="normal">helios::engine::tooling::FramePacer<sp/>pacer;</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
 <codeline><highlight class="normal">@namespace<sp/>helios::engine</highlight></codeline>
-<codeline><highlight class="normal">@brief<sp/>Engine<sp/>utilities<sp/>for<sp/>frame<sp/>pacing<sp/>and<sp/>tick/update<sp/>lifecycle<sp/>management.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>This<sp/>namespace<sp/>provides<sp/>core<sp/>engine<sp/>utilities<sp/>for<sp/>frame<sp/>timing<sp/>and<sp/>update<sp/>lifecycle<sp/>management.<sp/>It<sp/>includes<sp/>classes<sp/>for<sp/>frame<sp/>pacing<sp/>and<sp/>measurement<sp/>(FramePacer,<sp/>FrameStats,<sp/>FPS<sp/>metrics),<sp/>and<sp/>the<sp/>Tickable<sp/>interface<sp/>for<sp/>objects<sp/>that<sp/>are<sp/>updated<sp/>every<sp/>frame.</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Main<sp/>engine<sp/>module<sp/>aggregating<sp/>core<sp/>infrastructure<sp/>and<sp/>game<sp/>systems.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>This<sp/>module<sp/>provides<sp/>access<sp/>to<sp/>the<sp/>complete<sp/>helios<sp/>engine<sp/>functionality,<sp/>including<sp/>the<sp/>ECS<sp/>architecture,<sp/>game<sp/>systems,<sp/>messaging<sp/>infrastructure,<sp/>and<sp/>development<sp/>tooling.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
 <codeline></codeline>
     </programlisting>

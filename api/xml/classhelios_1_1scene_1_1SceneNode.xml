@@ -100,7 +100,7 @@
         <location file="include/helios/scene/SceneNode.ixx" line="105" column="21" bodyfile="include/helios/scene/SceneNode.ixx" bodystart="105" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1scene_1_1SceneNode_1acf949ca732802c66d4d0d3fee757e719" prot="protected" static="no" mutable="no">
-        <type><ref refid="classhelios_1_1core_1_1Transform" kindref="compound">Transform</ref></type>
+        <type><ref refid="classhelios_1_1core_1_1spatial_1_1Transform" kindref="compound">Transform</ref></type>
         <definition>Transform helios::scene::SceneNode::localTransform_</definition>
         <argsstring></argsstring>
         <name>localTransform_</name>
@@ -280,7 +280,7 @@
 <para>Constructs a new <ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">SceneNode</ref> that represents no renderable object. Nodes constructed in this way should be treated as transformation nodes. </para>
         </briefdescription>
         <detaileddescription>
-<para><xrefsect id="todo_1_todo000026"><xreftitle>Todo</xreftitle><xrefdescription><para>explicitly implement move (assignment) constructor if required, since we have deleted the copy constructors </para>
+<para><xrefsect id="todo_1_todo000031"><xreftitle>Todo</xreftitle><xrefdescription><para>explicitly implement move (assignment) constructor if required, since we have deleted the copy constructors </para>
 </xrefdescription></xrefsect></para>
         </detaileddescription>
         <inbodydescription>
@@ -294,7 +294,7 @@
         <name>SceneNode</name>
         <qualifiedname>helios::scene::SceneNode::SceneNode</qualifiedname>
         <param>
-          <type>const <ref refid="classhelios_1_1core_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <type>const <ref refid="classhelios_1_1core_1_1spatial_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
           <declname>transform</declname>
         </param>
         <briefdescription>
@@ -328,7 +328,7 @@
           <declname>renderable</declname>
         </param>
         <param>
-          <type>const <ref refid="classhelios_1_1core_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <type>const <ref refid="classhelios_1_1core_1_1spatial_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
           <declname>transform</declname>
         </param>
         <briefdescription>
@@ -489,6 +489,7 @@
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1a01e293e31d8c30a3f9cbae3ad19ca6d8">renderable</referencedby>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1af2af3ad7c17ecf2a693724deed12ce02">SceneNode</referencedby>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1ac391d6973219428d9048caffe721cfb1">SceneNode</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1scene_1_1components_1_1SceneNodeComponent_1aa700d35d1fbf5bb920fada8003a4184a" compoundref="SceneNodeComponent_8ixx" startline="59" endline="68">helios::engine::modules::scene::components::SceneNodeComponent::SceneNodeComponent</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1SceneNode_1a3a41a256979415a6678bb391660b0ced" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -632,7 +633,7 @@
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1a1f08f342381c9ad0f2d5d8b88c450229">setTranslation</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1SceneNode_1a52ac30adf28408c010626d9236c78828" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>const <ref refid="classhelios_1_1core_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+        <type>const <ref refid="classhelios_1_1core_1_1spatial_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
         <definition>const Transform &amp; helios::scene::SceneNode::localTransform</definition>
         <argsstring>() const noexcept</argsstring>
         <name>localTransform</name>
@@ -653,7 +654,7 @@
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1a3f28e5b3a6b7fe4c1af4e5770ad42227">localTransform</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1SceneNode_1a3f28e5b3a6b7fe4c1af4e5770ad42227" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="classhelios_1_1core_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+        <type><ref refid="classhelios_1_1core_1_1spatial_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
         <definition>Transform &amp; helios::scene::SceneNode::localTransform</definition>
         <argsstring>() noexcept</argsstring>
         <name>localTransform</name>
@@ -691,6 +692,7 @@
         <references refid="classhelios_1_1scene_1_1SceneNode_1a4e31b52717a76a9bae9a80a1db0b808b">parent</references>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a30ad1d7f49d6114a261cbac2706546ab">SceneNode</references>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1a4e31b52717a76a9bae9a80a1db0b808b">parent</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1scene_1_1components_1_1SceneNodeComponent_1aa700d35d1fbf5bb920fada8003a4184a" compoundref="SceneNodeComponent_8ixx" startline="59" endline="68">helios::engine::modules::scene::components::SceneNodeComponent::SceneNodeComponent</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1SceneNode_1ae95fa852a86bcfbcc981dbb6d70113d8" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -818,7 +820,6 @@
         <location file="include/helios/scene/SceneNode.ixx" line="362" column="34"/>
         <references refid="classhelios_1_1scene_1_1SceneNode_1a1020ca70c5268619a3bdfb3acb843e34">aabb</references>
         <referencedby refid="classhelios_1_1scene_1_1SceneNode_1a1020ca70c5268619a3bdfb3acb843e34">aabb</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1game_1_1systems_1_1gameplay_1_1ProjectilePoolSystem_1a2a64b5c683b4ff6fb6dfac8f64acab39" compoundref="ProjectilePoolSystem_8ixx" startline="198" endline="221">helios::engine::game::systems::gameplay::ProjectilePoolSystem::prepareProjectiles</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1scene_1_1SceneNode_1aeb8fe0f5531a26fa2fc3a353572a1115" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -1026,8 +1027,8 @@
     </inheritancegraph>
     <collaborationgraph>
       <node id="2">
-        <label>helios::core::Transform</label>
-        <link refid="classhelios_1_1core_1_1Transform"/>
+        <label>helios::core::spatial::Transform</label>
+        <link refid="classhelios_1_1core_1_1spatial_1_1Transform"/>
       </node>
       <node id="1">
         <label>helios::scene::SceneNode</label>

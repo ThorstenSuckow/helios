@@ -7,5 +7,5 @@ var searchData=
   ['imguiwidget_4',['ImGuiWidget',['../classhelios_1_1ext_1_1imgui_1_1ImGuiWidget.html',1,'helios::ext::imgui']]],
   ['inputadapter_5',['InputAdapter',['../classhelios_1_1input_1_1InputAdapter.html',1,'helios::input']]],
   ['inputmanager_6',['InputManager',['../classhelios_1_1input_1_1InputManager.html',1,'helios::input']]],
-  ['inputsnapshot_7',['InputSnapshot',['../classhelios_1_1engine_1_1game_1_1InputSnapshot.html',1,'helios::engine::game']]]
+  ['inputsnapshot_7',['InputSnapshot',['../classhelios_1_1input_1_1InputSnapshot.html',1,'helios::input']]]
 ];

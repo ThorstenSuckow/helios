@@ -1,0 +1,510 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8modules_8physics_8collision_8components_8CollisionComponent" kind="module">
+    <compoundname>helios.engine.modules.physics.collision.components.CollisionComponent</compoundname>
+    <innerfile refid="CollisionComponent_8ixx">CollisionComponent.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent" prot="public">helios::engine::modules::physics::collision::components::CollisionComponent</innerclass>
+    <innerclass refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent" prot="public">helios::engine::modules::physics::collision::components::CollisionComponent</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1a9d03d13b6c867d0a772587f7bde2b164" prot="private" static="no" mutable="no">
+        <type>const uint32_t</type>
+        <definition>const uint32_t helios::engine::modules::physics::collision::components::CollisionComponent::layerId_</definition>
+        <argsstring></argsstring>
+        <name>layerId_</name>
+        <qualifiedname>helios::engine::modules::physics::collision::components::CollisionComponent::layerId_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>The collision layer this component belongs to. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" line="50" column="24" bodyfile="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1a80cb9e15fc8311ddd4f8a37c661e0dac" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t helios::engine::modules::physics::collision::components::CollisionComponent::triggerCollisionMask_</definition>
+        <argsstring></argsstring>
+        <name>triggerCollisionMask_</name>
+        <qualifiedname>helios::engine::modules::physics::collision::components::CollisionComponent::triggerCollisionMask_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Bitmask specifying layers that generate trigger collisions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Trigger collision masks may be asymmetric, i.e. a component B must not know about the existence of another layerId. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" line="58" column="18" bodyfile="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" bodystart="58" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1ab3309751188df7f628689864c7149e0e" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t helios::engine::modules::physics::collision::components::CollisionComponent::solidCollisionMask_</definition>
+        <argsstring></argsstring>
+        <name>solidCollisionMask_</name>
+        <qualifiedname>helios::engine::modules::physics::collision::components::CollisionComponent::solidCollisionMask_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Bitmask specifying layers that generate solid collisions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Solid collision should be symmetric and in the calling API treated as such: `(maskB &amp; thisLayerId) != 0 &amp;&amp; (thisMask &amp; layerBId) != 0` </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" line="66" column="18" bodyfile="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1a94b1addec2135826f2054b8f03554da3" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::engine::modules::physics::collision::components::CollisionComponent::isCollisionReporter_</definition>
+        <argsstring></argsstring>
+        <name>isCollisionReporter_</name>
+        <qualifiedname>helios::engine::modules::physics::collision::components::CollisionComponent::isCollisionReporter_</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>Flag indicating whether this component can report collision events. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" line="71" column="14" bodyfile="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1a8dd3fe553621e8975ab0afe07e7df92a" prot="private" static="no" mutable="no">
+        <type>std::array&lt; uint32_t, std::to_underlying(<ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2a4eecfb50c5a20eb78bc4d5304e9d8618" kindref="member">helios::engine::modules::physics::collision::types::CollisionBehavior::size_</ref>) &gt;</type>
+        <definition>std::array&lt; uint32_t, std::to_underlying(helios::engine::modules::physics::collision::types::CollisionBehavior::size_) &gt; helios::engine::modules::physics::collision::components::CollisionComponent::solidCollisionBehavior_</definition>
+        <argsstring></argsstring>
+        <name>solidCollisionBehavior_</name>
+        <qualifiedname>helios::engine::modules::physics::collision::components::CollisionComponent::solidCollisionBehavior_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Per-behavior layer masks for solid collisions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Each array index corresponds to a CollisionBehavior enum value. The bitmask at each index indicates which layers trigger that behavior for solid collisions. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" line="85" column="2" bodyfile="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" bodystart="85" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1a9da29acd47a3d8a555e3da32dea93963" prot="private" static="no" mutable="no">
+        <type>std::array&lt; uint32_t, std::to_underlying(<ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2a4eecfb50c5a20eb78bc4d5304e9d8618" kindref="member">helios::engine::modules::physics::collision::types::CollisionBehavior::size_</ref>) &gt;</type>
+        <definition>std::array&lt; uint32_t, std::to_underlying(helios::engine::modules::physics::collision::types::CollisionBehavior::size_) &gt; helios::engine::modules::physics::collision::components::CollisionComponent::triggerCollisionBehavior_</definition>
+        <argsstring></argsstring>
+        <name>triggerCollisionBehavior_</name>
+        <qualifiedname>helios::engine::modules::physics::collision::components::CollisionComponent::triggerCollisionBehavior_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Per-behavior layer masks for trigger collisions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Each array index corresponds to a CollisionBehavior enum value. The bitmask at each index indicates which layers trigger that behavior for trigger collisions. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" line="97" column="2" bodyfile="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" bodystart="97" bodyend="97"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1ad29df29ac0306ef63b9b2eb0ff005ab3" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::modules::physics::collision::components::CollisionComponent::CollisionComponent</definition>
+        <argsstring>(uint32_t layerId, bool isCollisionReporter=true, uint32_t solidCollisionMask=0, uint32_t triggerCollisionMask=0)</argsstring>
+        <name>CollisionComponent</name>
+        <qualifiedname>helios::engine::modules::physics::collision::components::CollisionComponent::CollisionComponent</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>layerId</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isCollisionReporter</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>solidCollisionMask</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>triggerCollisionMask</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent" kindref="compound">CollisionComponent</ref> with a layer ID. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>layerId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The collision layer this entity belongs to. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>isCollisionReporter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether this entity can emit collision events. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" line="107" column="18" bodyfile="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" bodystart="107" bodyend="113"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1af848b7ce354c1cf64fec9113f9d9fcfa" compoundref="CollisionComponent_8ixx" startline="137" endline="139">helios::engine::modules::physics::collision::components::CollisionComponent::isCollisionReporter</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1a65697e9fbaa7e25f76954b97467c50f6" compoundref="CollisionComponent_8ixx" startline="188" endline="190">helios::engine::modules::physics::collision::components::CollisionComponent::layerId</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1a7fc0511ebc7fc2b50ff37f839c32da41" compoundref="CollisionComponent_8ixx" startline="170" endline="172">helios::engine::modules::physics::collision::components::CollisionComponent::solidCollisionMask</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1adcafd16782f7bf52d4211003b483ec4e" compoundref="CollisionComponent_8ixx" startline="179" endline="181">helios::engine::modules::physics::collision::components::CollisionComponent::triggerCollisionMask</references>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1ad97782993f898ab1899989030a8f1885" compoundref="CollisionComponent_8ixx" startline="203" endline="217">helios::engine::modules::physics::collision::components::CollisionComponent::addSolidCollisionBehavior</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1abd0cbb1d35fa211181dc7420421abcf7" compoundref="CollisionComponent_8ixx" startline="284" endline="298">helios::engine::modules::physics::collision::components::CollisionComponent::addTriggerCollisionBehavior</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1aaa099391612601e7e8a94534b6165a39" compoundref="CollisionComponent_8ixx" startline="123" endline="130">helios::engine::modules::physics::collision::components::CollisionComponent::CollisionComponent</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1ac0c93feba62b68c29ea1eefe3ada60f8" compoundref="CollisionComponent_8ixx" startline="148" endline="151">helios::engine::modules::physics::collision::components::CollisionComponent::setSolidCollisionMask</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1a0b57711a70ed3dc1a6c00b49e7394cd9" compoundref="CollisionComponent_8ixx" startline="160" endline="163">helios::engine::modules::physics::collision::components::CollisionComponent::setTriggerCollisionMask</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1aaa099391612601e7e8a94534b6165a39" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::modules::physics::collision::components::CollisionComponent::CollisionComponent</definition>
+        <argsstring>(const CollisionComponent &amp;other)</argsstring>
+        <name>CollisionComponent</name>
+        <qualifiedname>helios::engine::modules::physics::collision::components::CollisionComponent::CollisionComponent</qualifiedname>
+        <param>
+          <type>const CollisionComponent &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Creates a deep copy of the collision component, preserving layer ID, masks, and all behavior configurations.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component to copy from. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" line="123" column="18" bodyfile="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" bodystart="123" bodyend="130"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1ad29df29ac0306ef63b9b2eb0ff005ab3" compoundref="CollisionComponent_8ixx" startline="107" endline="113">helios::engine::modules::physics::collision::components::CollisionComponent::CollisionComponent</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1af848b7ce354c1cf64fec9113f9d9fcfa" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::modules::physics::collision::components::CollisionComponent::isCollisionReporter</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isCollisionReporter</name>
+        <qualifiedname>helios::engine::modules::physics::collision::components::CollisionComponent::isCollisionReporter</qualifiedname>
+        <briefdescription>
+<para>Returns whether this component can emit collision events. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if collision events can be generated, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" line="137" column="15" bodyfile="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" bodystart="137" bodyend="139"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1ad29df29ac0306ef63b9b2eb0ff005ab3" compoundref="CollisionComponent_8ixx" startline="107" endline="113">helios::engine::modules::physics::collision::components::CollisionComponent::CollisionComponent</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1ac0c93feba62b68c29ea1eefe3ada60f8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>CollisionComponent &amp;</type>
+        <definition>CollisionComponent &amp; helios::engine::modules::physics::collision::components::CollisionComponent::setSolidCollisionMask</definition>
+        <argsstring>(const uint32_t solidCollisionMask) noexcept</argsstring>
+        <name>setSolidCollisionMask</name>
+        <qualifiedname>helios::engine::modules::physics::collision::components::CollisionComponent::setSolidCollisionMask</qualifiedname>
+        <param>
+          <type>const uint32_t</type>
+          <declname>solidCollisionMask</declname>
+        </param>
+        <briefdescription>
+<para>Sets the solid collision mask. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>solidCollisionMask</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bitmask of layers to generate solid collisions with.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to this component for method chaining. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" line="148" column="28" bodyfile="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" bodystart="148" bodyend="151"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1ad29df29ac0306ef63b9b2eb0ff005ab3" compoundref="CollisionComponent_8ixx" startline="107" endline="113">helios::engine::modules::physics::collision::components::CollisionComponent::CollisionComponent</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1a7fc0511ebc7fc2b50ff37f839c32da41" compoundref="CollisionComponent_8ixx" startline="170" endline="172">helios::engine::modules::physics::collision::components::CollisionComponent::solidCollisionMask</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1a0b57711a70ed3dc1a6c00b49e7394cd9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>CollisionComponent &amp;</type>
+        <definition>CollisionComponent &amp; helios::engine::modules::physics::collision::components::CollisionComponent::setTriggerCollisionMask</definition>
+        <argsstring>(const uint32_t triggerCollisionMask) noexcept</argsstring>
+        <name>setTriggerCollisionMask</name>
+        <qualifiedname>helios::engine::modules::physics::collision::components::CollisionComponent::setTriggerCollisionMask</qualifiedname>
+        <param>
+          <type>const uint32_t</type>
+          <declname>triggerCollisionMask</declname>
+        </param>
+        <briefdescription>
+<para>Sets the trigger collision mask. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>triggerCollisionMask</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bitmask of layers to generate trigger collisions with.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to this component for method chaining. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" line="160" column="28" bodyfile="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" bodystart="160" bodyend="163"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1ad29df29ac0306ef63b9b2eb0ff005ab3" compoundref="CollisionComponent_8ixx" startline="107" endline="113">helios::engine::modules::physics::collision::components::CollisionComponent::CollisionComponent</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1adcafd16782f7bf52d4211003b483ec4e" compoundref="CollisionComponent_8ixx" startline="179" endline="181">helios::engine::modules::physics::collision::components::CollisionComponent::triggerCollisionMask</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1a7fc0511ebc7fc2b50ff37f839c32da41" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t helios::engine::modules::physics::collision::components::CollisionComponent::solidCollisionMask</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>solidCollisionMask</name>
+        <qualifiedname>helios::engine::modules::physics::collision::components::CollisionComponent::solidCollisionMask</qualifiedname>
+        <briefdescription>
+<para>Returns the solid collision mask. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Bitmask of layers this entity generates solid collisions with. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" line="170" column="19" bodyfile="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" bodystart="170" bodyend="172"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1ad29df29ac0306ef63b9b2eb0ff005ab3" compoundref="CollisionComponent_8ixx" startline="107" endline="113">helios::engine::modules::physics::collision::components::CollisionComponent::CollisionComponent</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1ac0c93feba62b68c29ea1eefe3ada60f8" compoundref="CollisionComponent_8ixx" startline="148" endline="151">helios::engine::modules::physics::collision::components::CollisionComponent::setSolidCollisionMask</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a398512331f26b4a44dda02476249f610" compoundref="GridCollisionDetectionSystem_8ixx" startline="406" endline="447">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1adcafd16782f7bf52d4211003b483ec4e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t helios::engine::modules::physics::collision::components::CollisionComponent::triggerCollisionMask</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>triggerCollisionMask</name>
+        <qualifiedname>helios::engine::modules::physics::collision::components::CollisionComponent::triggerCollisionMask</qualifiedname>
+        <briefdescription>
+<para>Returns the trigger collision mask. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Bitmask of layers this entity generates trigger collisions with. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" line="179" column="19" bodyfile="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" bodystart="179" bodyend="181"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1ad29df29ac0306ef63b9b2eb0ff005ab3" compoundref="CollisionComponent_8ixx" startline="107" endline="113">helios::engine::modules::physics::collision::components::CollisionComponent::CollisionComponent</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1a0b57711a70ed3dc1a6c00b49e7394cd9" compoundref="CollisionComponent_8ixx" startline="160" endline="163">helios::engine::modules::physics::collision::components::CollisionComponent::setTriggerCollisionMask</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a398512331f26b4a44dda02476249f610" compoundref="GridCollisionDetectionSystem_8ixx" startline="406" endline="447">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1a65697e9fbaa7e25f76954b97467c50f6" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int helios::engine::modules::physics::collision::components::CollisionComponent::layerId</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>layerId</name>
+        <qualifiedname>helios::engine::modules::physics::collision::components::CollisionComponent::layerId</qualifiedname>
+        <briefdescription>
+<para>Returns the collision layer ID. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The layer this entity belongs to. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" line="188" column="23" bodyfile="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" bodystart="188" bodyend="190"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1ad29df29ac0306ef63b9b2eb0ff005ab3" compoundref="CollisionComponent_8ixx" startline="107" endline="113">helios::engine::modules::physics::collision::components::CollisionComponent::CollisionComponent</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1ad97782993f898ab1899989030a8f1885" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>CollisionComponent &amp;</type>
+        <definition>CollisionComponent &amp; helios::engine::modules::physics::collision::components::CollisionComponent::addSolidCollisionBehavior</definition>
+        <argsstring>(const helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior, const uint32_t otherLayerId) noexcept</argsstring>
+        <name>addSolidCollisionBehavior</name>
+        <qualifiedname>helios::engine::modules::physics::collision::components::CollisionComponent::addSolidCollisionBehavior</qualifiedname>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2" kindref="member">helios::engine::modules::physics::collision::types::CollisionBehavior</ref></type>
+          <declname>collisionBehavior</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>otherLayerId</declname>
+        </param>
+        <briefdescription>
+<para>Adds a solid collision behavior for a specific layer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Associates a collision behavior with a target layer for solid collisions. If a behavior was previously set for the same layer, it is replaced.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>collisionBehavior</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The behavior to apply on collision. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>otherLayerId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The layer ID to associate the behavior with.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to this component for method chaining. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" line="203" column="28" bodyfile="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" bodystart="203" bodyend="217"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1ad29df29ac0306ef63b9b2eb0ff005ab3" compoundref="CollisionComponent_8ixx" startline="107" endline="113">helios::engine::modules::physics::collision::components::CollisionComponent::CollisionComponent</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1ac7b2b1292a7ad57c57ddb2ff69fa66ce" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2" kindref="member">helios::engine::modules::physics::collision::types::CollisionBehavior</ref></type>
+        <definition>helios::engine::modules::physics::collision::types::CollisionBehavior helios::engine::modules::physics::collision::components::CollisionComponent::solidCollisionBehavior</definition>
+        <argsstring>(uint32_t otherLayerId) const noexcept</argsstring>
+        <name>solidCollisionBehavior</name>
+        <qualifiedname>helios::engine::modules::physics::collision::components::CollisionComponent::solidCollisionBehavior</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>otherLayerId</declname>
+        </param>
+        <briefdescription>
+<para>Returns the solid collision behavior for a specific layer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Looks up the configured behavior for collisions with the specified layer. Returns `CollisionBehavior::None` if no solid collision mask is set for the layer.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>otherLayerId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The layer ID to query.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The collision behavior for the specified layer. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" line="229" column="80" bodyfile="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" bodystart="229" bodyend="243"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1a3c1ded727a2613a4808854883b39d0e5" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2" kindref="member">helios::engine::modules::physics::collision::types::CollisionBehavior</ref></type>
+        <definition>helios::engine::modules::physics::collision::types::CollisionBehavior helios::engine::modules::physics::collision::components::CollisionComponent::triggerCollisionBehavior</definition>
+        <argsstring>(uint32_t otherLayerId) const noexcept</argsstring>
+        <name>triggerCollisionBehavior</name>
+        <qualifiedname>helios::engine::modules::physics::collision::components::CollisionComponent::triggerCollisionBehavior</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>otherLayerId</declname>
+        </param>
+        <briefdescription>
+<para>Returns the trigger collision behavior for a specific layer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Looks up the configured behavior for trigger collisions with the specified layer. Returns `CollisionBehavior::None` if no trigger collision mask is set for the layer.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>otherLayerId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The layer ID to query.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The collision behavior for the specified layer. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" line="256" column="80" bodyfile="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" bodystart="256" bodyend="270"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1abd0cbb1d35fa211181dc7420421abcf7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>CollisionComponent &amp;</type>
+        <definition>CollisionComponent &amp; helios::engine::modules::physics::collision::components::CollisionComponent::addTriggerCollisionBehavior</definition>
+        <argsstring>(const helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior, const uint32_t otherLayerId) noexcept</argsstring>
+        <name>addTriggerCollisionBehavior</name>
+        <qualifiedname>helios::engine::modules::physics::collision::components::CollisionComponent::addTriggerCollisionBehavior</qualifiedname>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2" kindref="member">helios::engine::modules::physics::collision::types::CollisionBehavior</ref></type>
+          <declname>collisionBehavior</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>otherLayerId</declname>
+        </param>
+        <briefdescription>
+<para>Adds a trigger collision behavior for a specific layer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Associates a collision behavior with a target layer for trigger collisions. If a behavior was previously set for the same layer, it is replaced.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>collisionBehavior</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The behavior to apply on collision. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>otherLayerId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The layer ID to associate the behavior with.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to this component for method chaining. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" line="284" column="28" bodyfile="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" bodystart="284" bodyend="298"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1ad29df29ac0306ef63b9b2eb0ff005ab3" compoundref="CollisionComponent_8ixx" startline="107" endline="113">helios::engine::modules::physics::collision::components::CollisionComponent::CollisionComponent</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/engine/modules/physics/collision/components/CollisionComponent.ixx" line="10" column="15"/>
+  </compounddef>
+</doxygen>

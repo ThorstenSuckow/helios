@@ -4,7 +4,6 @@ var namespacehelios =
     [ "app", "namespacehelios_1_1app.html", "namespacehelios_1_1app" ],
     [ "core", "namespacehelios_1_1core.html", "namespacehelios_1_1core" ],
     [ "engine", "namespacehelios_1_1engine.html", "namespacehelios_1_1engine" ],
-    [ "tooling", "namespacehelios_1_1tooling.html", null ],
     [ "event", "namespacehelios_1_1event.html", "namespacehelios_1_1event" ],
     [ "input", "namespacehelios_1_1input.html", "namespacehelios_1_1input" ],
     [ "math", "namespacehelios_1_1math.html", "namespacehelios_1_1math" ],

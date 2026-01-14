@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>helios: include/helios/engine/game/UpdateContext.ixx File Reference</title>
+<title>helios: include/helios/engine/runtime/world/UpdateContext.ixx File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
@@ -103,16 +103,17 @@ $(function() {
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">UpdateContext.ixx File Reference<div class="ingroups">module <a class="el" href="module__helios_8engine_8game_8UpdateContext.html">helios.engine.game.UpdateContext</a></div></div></div>
+  <div class="headertitle"><div class="title">UpdateContext.ixx File Reference<div class="ingroups">module <a class="el" href="module__helios_8engine_8runtime_8world_8UpdateContext.html">helios.engine.runtime.world.UpdateContext</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>Context struct passed to components during per-frame updates.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;cassert&gt;</code><br />
+<code>#include &lt;span&gt;</code><br />
 <code>#include &lt;stdexcept&gt;</code><br />
-<code>import <a class="el" href="GameLoopEventBus_8ixx_source.html">helios.engine.game.event.GameLoopEventBus</a>;</code><br />
-<code>import <a class="el" href="InputSnapshot_8ixx_source.html">helios.engine.game.InputSnapshot</a>;</code><br />
+<code>import <a class="el" href="GameLoopEventBus_8ixx_source.html">helios.engine.runtime.messaging.event.GameLoopEventBus</a>;</code><br />
+<code>import <a class="el" href="InputSnapshot_8ixx_source.html">helios.input.InputSnapshot</a>;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Include dependency graph for UpdateContext.ixx:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
@@ -124,16 +125,21 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:helios_3A_3Aengine_3A_3Agame_3A_3AUpdateContext" id="r_helios_3A_3Aengine_3A_3Agame_3A_3AUpdateContext"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1engine_1_1game_1_1UpdateContext.html">helios::engine::game::UpdateContext</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Context passed to <a class="el" href="classhelios_1_1engine_1_1game_1_1Updatable.html" title="Interface for components that require per-frame updates.">Updatable</a> components during per-frame updates.  <a href="structhelios_1_1engine_1_1game_1_1UpdateContext.html#details">More...</a><br /></td></tr>
+<tr class="memitem:helios_3A_3Aengine_3A_3Aruntime_3A_3Aworld_3A_3AUpdateContext" id="r_helios_3A_3Aengine_3A_3Aruntime_3A_3Aworld_3A_3AUpdateContext"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Context passed to systems and components during per-frame updates.  <a href="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:helios" id="r_helios"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html">helios</a></td></tr>
 <tr class="memitem:helios_3A_3Aengine" id="r_helios_3A_3Aengine"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine.html">helios::engine</a></td></tr>
-<tr class="memdesc:namespacehelios_1_1engine"><td class="mdescLeft">&#160;</td><td class="mdescRight">Engine utilities for frame pacing and tick/update lifecycle management. <br /></td></tr>
-<tr class="memitem:helios_3A_3Aengine_3A_3Agame" id="r_helios_3A_3Aengine_3A_3Agame"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine_1_1game.html">helios::engine::game</a></td></tr>
-<tr class="memdesc:namespacehelios_1_1engine_1_1game"><td class="mdescLeft">&#160;</td><td class="mdescRight">Game logic infrastructure using <a class="el" href="classhelios_1_1engine_1_1game_1_1Command.html" title="Abstract base class for encapsulating game actions as executable commands.">Command</a> pattern for decoupled, deterministic game systems. <br /></td></tr>
+<tr class="memdesc:namespacehelios_1_1engine"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main engine module aggregating core infrastructure and game systems. <br /></td></tr>
+<tr class="memitem:helios_3A_3Aengine_3A_3Aruntime" id="r_helios_3A_3Aengine_3A_3Aruntime"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine_1_1runtime.html">helios::engine::runtime</a></td></tr>
+<tr class="memdesc:namespacehelios_1_1engine_1_1runtime"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runtime infrastructure for game execution and lifecycle orchestration. <br /></td></tr>
+<tr class="memitem:helios_3A_3Aengine_3A_3Aruntime_3A_3Amessaging" id="r_helios_3A_3Aengine_3A_3Aruntime_3A_3Amessaging"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1messaging.html">helios::engine::runtime::messaging</a></td></tr>
+<tr class="memitem:helios_3A_3Aengine_3A_3Aruntime_3A_3Amessaging_3A_3Acommand" id="r_helios_3A_3Aengine_3A_3Aruntime_3A_3Amessaging_3A_3Acommand"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1command.html">helios::engine::runtime::messaging::command</a></td></tr>
+<tr class="memdesc:namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1command"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command pattern implementation for deferred action execution. <br /></td></tr>
+<tr class="memitem:helios_3A_3Aengine_3A_3Aruntime_3A_3Aworld" id="r_helios_3A_3Aengine_3A_3Aruntime_3A_3Aworld"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1world.html">helios::engine::runtime::world</a></td></tr>
+<tr class="memdesc:namespacehelios_1_1engine_1_1runtime_1_1world"><td class="mdescLeft">&#160;</td><td class="mdescRight">World state management and per-frame update context. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Context struct passed to components during per-frame updates. </p>
@@ -152,7 +158,7 @@ Namespaces</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_08c09894bd9f0ab4b1e9fdc7a2628766.html">helios</a></li><li class="navelem"><a href="dir_860c9de2f65c10e8e262a0e7b5bfee5e.html">engine</a></li><li class="navelem"><a href="dir_46c7b0b04924cca8aa10726746d57f30.html">game</a></li><li class="navelem"><a href="UpdateContext_8ixx.html">UpdateContext.ixx</a></li>
+    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_08c09894bd9f0ab4b1e9fdc7a2628766.html">helios</a></li><li class="navelem"><a href="dir_860c9de2f65c10e8e262a0e7b5bfee5e.html">engine</a></li><li class="navelem"><a href="dir_d7d61354c43df5b3f9e499bdacf27dcd.html">runtime</a></li><li class="navelem"><a href="dir_734da5e9060906fd2f909892a288292e.html">world</a></li><li class="navelem"><a href="UpdateContext_8ixx.html">UpdateContext.ixx</a></li>
     <li class="footer">Generated on <span class="timestamp"></span> for helios by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

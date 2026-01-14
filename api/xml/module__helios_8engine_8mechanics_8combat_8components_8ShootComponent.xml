@@ -1,0 +1,342 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8mechanics_8combat_8components_8ShootComponent" kind="module">
+    <compoundname>helios.engine.mechanics.combat.components.ShootComponent</compoundname>
+    <innerfile refid="ShootComponent_8ixx">ShootComponent.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent" prot="public">helios::engine::mechanics::combat::components::ShootComponent</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1a7571f57473bd46ce4be7be42c786802c" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::mechanics::combat::components::ShootComponent::intensity_</definition>
+        <argsstring></argsstring>
+        <name>intensity_</name>
+        <qualifiedname>helios::engine::mechanics::combat::components::ShootComponent::intensity_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Current fire intensity (0.0 to 1.0). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Set by <ref refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1ad866328dc0d880a00918f9c430d0a7d1" kindref="member">shoot()</ref> and cleared when intensity is zero. Controls whether projectiles are spawned during update(). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" line="63" column="15" bodyfile="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" bodystart="63" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1acb35f190e76bbe799d8064f10ab30258" compoundref="ShootComponent_8ixx" startline="152" endline="154">helios::engine::mechanics::combat::components::ShootComponent::intensity</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1ad866328dc0d880a00918f9c430d0a7d1" compoundref="ShootComponent_8ixx" startline="136" endline="144">helios::engine::mechanics::combat::components::ShootComponent::shoot</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1a06bc48f53fccd78964104ad61f0af2a1" prot="protected" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent" kindref="compound">helios::engine::mechanics::combat::components::Aim2DComponent</ref> *</type>
+        <definition>helios::engine::mechanics::combat::components::Aim2DComponent* helios::engine::mechanics::combat::components::ShootComponent::aimComponent_</definition>
+        <argsstring></argsstring>
+        <name>aimComponent_</name>
+        <qualifiedname>helios::engine::mechanics::combat::components::ShootComponent::aimComponent_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Pointer to the aim component for direction. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Set during <ref refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1a8c6cf3e6ae421313e9d05f09e2e1a600" kindref="member">onAttach()</ref>. Must not be null when shooting. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" line="70" column="71" bodyfile="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" bodystart="70" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1a8c6cf3e6ae421313e9d05f09e2e1a600" compoundref="ShootComponent_8ixx" startline="118" endline="125">helios::engine::mechanics::combat::components::ShootComponent::onAttach</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1ad866328dc0d880a00918f9c430d0a7d1" compoundref="ShootComponent_8ixx" startline="136" endline="144">helios::engine::mechanics::combat::components::ShootComponent::shoot</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1a75f0b3d2651423be06fdc865189264f3" prot="protected" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1TransformComponent" kindref="compound">helios::engine::modules::spatial::transform::components::TransformComponent</ref> *</type>
+        <definition>helios::engine::modules::spatial::transform::components::TransformComponent* helios::engine::mechanics::combat::components::ShootComponent::transformComponent_</definition>
+        <argsstring></argsstring>
+        <name>transformComponent_</name>
+        <qualifiedname>helios::engine::mechanics::combat::components::ShootComponent::transformComponent_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Pointer to the scene node component for spawn position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Set during <ref refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1a8c6cf3e6ae421313e9d05f09e2e1a600" kindref="member">onAttach()</ref>. Must not be null when shooting. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" line="77" column="85" bodyfile="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" bodystart="77" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1a8c6cf3e6ae421313e9d05f09e2e1a600" compoundref="ShootComponent_8ixx" startline="118" endline="125">helios::engine::mechanics::combat::components::ShootComponent::onAttach</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1a4a9163802f6ee046ac0fd62e7ac091dd" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::mechanics::combat::components::ShootComponent::cooldownDelta_</definition>
+        <argsstring></argsstring>
+        <name>cooldownDelta_</name>
+        <qualifiedname>helios::engine::mechanics::combat::components::ShootComponent::cooldownDelta_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Cooldown timer for fire rate limiting, in seconds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If cooldownDelta &lt;= cooldownTime, the next projectile can be shot.</para>
+<para>Accumulates delta time between shots. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" line="86" column="15" bodyfile="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1ad95bcc0495e9ba5c258328b5ea2a39a4" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::mechanics::combat::components::ShootComponent::cooldownTime_</definition>
+        <argsstring></argsstring>
+        <name>cooldownTime_</name>
+        <qualifiedname>helios::engine::mechanics::combat::components::ShootComponent::cooldownTime_</qualifiedname>
+        <initializer>= 0.0625f</initializer>
+        <briefdescription>
+<para>Cooldown timer for fire rate limiting, in seconds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Accumulates delta time between shots. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" line="93" column="15" bodyfile="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" bodystart="93" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1aae4acb8b495c64183a67f2434d5936fb" compoundref="ShootComponent_8ixx" startline="161" endline="163">helios::engine::mechanics::combat::components::ShootComponent::cooldownTime</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1aa3ece325951229b0c52054b1523c2127" compoundref="ShootComponent_8ixx" startline="170" endline="172">helios::engine::mechanics::combat::components::ShootComponent::setCooldownTime</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1accb4b59ab1fecb6cab41ce51ab97b6ac" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::mechanics::combat::components::ShootComponent::projectileSpeed_</definition>
+        <argsstring></argsstring>
+        <name>projectileSpeed_</name>
+        <qualifiedname>helios::engine::mechanics::combat::components::ShootComponent::projectileSpeed_</qualifiedname>
+        <initializer>= 60.0f</initializer>
+        <briefdescription>
+<para>The projectile speed, in meters per second. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" line="99" column="15" bodyfile="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" bodystart="99" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1aa131b39446bcdf1aef12a56c435221f7" compoundref="ShootComponent_8ixx" startline="179" endline="181">helios::engine::mechanics::combat::components::ShootComponent::projectileSpeed</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1aed943c8e683590677c6c57a333e29d8f" compoundref="ShootComponent_8ixx" startline="188" endline="190">helios::engine::mechanics::combat::components::ShootComponent::setProjectileSpeed</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1ab0858a76ad9850f19c1ce92b49da1f4f" prot="protected" static="no" mutable="no">
+        <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+        <definition>helios::math::vec3f helios::engine::mechanics::combat::components::ShootComponent::sourceVelocity_</definition>
+        <argsstring></argsstring>
+        <name>sourceVelocity_</name>
+        <qualifiedname>helios::engine::mechanics::combat::components::ShootComponent::sourceVelocity_</qualifiedname>
+        <briefdescription>
+<para>Velocity of the source object in three-dimensional space. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Used to adjust the trajectory of projectiles emitted by the source&apos;s movement. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" line="106" column="29" bodyfile="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" bodystart="106" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1ad866328dc0d880a00918f9c430d0a7d1" compoundref="ShootComponent_8ixx" startline="136" endline="144">helios::engine::mechanics::combat::components::ShootComponent::shoot</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1a8c6cf3e6ae421313e9d05f09e2e1a600" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::mechanics::combat::components::ShootComponent::onAttach</definition>
+        <argsstring>(::helios::engine::ecs::GameObject *gameObject) noexcept override</argsstring>
+        <name>onAttach</name>
+        <qualifiedname>helios::engine::mechanics::combat::components::ShootComponent::onAttach</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">::helios::engine::ecs::GameObject</ref> *</type>
+          <declname>gameObject</declname>
+        </param>
+        <briefdescription>
+<para>Called when the component is attached to a GameObject. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Retrieves references to required sibling components.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameObject</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The GameObject this component is being attached to. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" line="118" column="14" bodyfile="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" bodystart="118" bodyend="125"/>
+        <references refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1a06bc48f53fccd78964104ad61f0af2a1" compoundref="ShootComponent_8ixx" startline="70">helios::engine::mechanics::combat::components::ShootComponent::aimComponent_</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1Component_1a3489588d238d04928e767908a0721be1" compoundref="Component_8ixx" startline="237" endline="239">helios::engine::ecs::Component::gameObject</references>
+        <references refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1a75f0b3d2651423be06fdc865189264f3" compoundref="ShootComponent_8ixx" startline="77">helios::engine::mechanics::combat::components::ShootComponent::transformComponent_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1ad866328dc0d880a00918f9c430d0a7d1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::mechanics::combat::components::ShootComponent::shoot</definition>
+        <argsstring>(float intensity, helios::math::vec3f sourceVelocity)</argsstring>
+        <name>shoot</name>
+        <qualifiedname>helios::engine::mechanics::combat::components::ShootComponent::shoot</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>intensity</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+          <declname>sourceVelocity</declname>
+        </param>
+        <briefdescription>
+<para>Sets the shooting intensity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Call with a non-zero value to start shooting, or zero to stop. The intensity affects whether projectiles are spawned during update().</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>intensity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Fire intensity (0.0 to 1.0). Zero stops firing. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sourceVelocity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The velocity of the object emitting the projectile. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" line="136" column="14" bodyfile="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" bodystart="136" bodyend="144"/>
+        <references refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1a06bc48f53fccd78964104ad61f0af2a1" compoundref="ShootComponent_8ixx" startline="70">helios::engine::mechanics::combat::components::ShootComponent::aimComponent_</references>
+        <references refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1acb35f190e76bbe799d8064f10ab30258" compoundref="ShootComponent_8ixx" startline="152" endline="154">helios::engine::mechanics::combat::components::ShootComponent::intensity</references>
+        <references refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1a7571f57473bd46ce4be7be42c786802c" compoundref="ShootComponent_8ixx" startline="63">helios::engine::mechanics::combat::components::ShootComponent::intensity_</references>
+        <references refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1ab0858a76ad9850f19c1ce92b49da1f4f" compoundref="ShootComponent_8ixx" startline="106">helios::engine::mechanics::combat::components::ShootComponent::sourceVelocity_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1acb35f190e76bbe799d8064f10ab30258" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::mechanics::combat::components::ShootComponent::intensity</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>intensity</name>
+        <qualifiedname>helios::engine::mechanics::combat::components::ShootComponent::intensity</qualifiedname>
+        <briefdescription>
+<para>Returns the current fire intensity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The intensity value (0.0 to 1.0). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" line="152" column="16" bodyfile="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" bodystart="152" bodyend="154"/>
+        <references refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1a7571f57473bd46ce4be7be42c786802c" compoundref="ShootComponent_8ixx" startline="63">helios::engine::mechanics::combat::components::ShootComponent::intensity_</references>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1ad866328dc0d880a00918f9c430d0a7d1" compoundref="ShootComponent_8ixx" startline="136" endline="144">helios::engine::mechanics::combat::components::ShootComponent::shoot</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1aae4acb8b495c64183a67f2434d5936fb" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::mechanics::combat::components::ShootComponent::cooldownTime</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cooldownTime</name>
+        <qualifiedname>helios::engine::mechanics::combat::components::ShootComponent::cooldownTime</qualifiedname>
+        <briefdescription>
+<para>Returns the cooldown time between shots. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Cooldown duration in seconds. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" line="161" column="16" bodyfile="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" bodystart="161" bodyend="163"/>
+        <references refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1ad95bcc0495e9ba5c258328b5ea2a39a4" compoundref="ShootComponent_8ixx" startline="93">helios::engine::mechanics::combat::components::ShootComponent::cooldownTime_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1aa3ece325951229b0c52054b1523c2127" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::mechanics::combat::components::ShootComponent::setCooldownTime</definition>
+        <argsstring>(float cooldown) noexcept</argsstring>
+        <name>setCooldownTime</name>
+        <qualifiedname>helios::engine::mechanics::combat::components::ShootComponent::setCooldownTime</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>cooldown</declname>
+        </param>
+        <briefdescription>
+<para>Sets the cooldown time between shots. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cooldown</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New cooldown duration in seconds. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" line="170" column="14" bodyfile="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" bodystart="170" bodyend="172"/>
+        <references refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1ad95bcc0495e9ba5c258328b5ea2a39a4" compoundref="ShootComponent_8ixx" startline="93">helios::engine::mechanics::combat::components::ShootComponent::cooldownTime_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1aa131b39446bcdf1aef12a56c435221f7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::mechanics::combat::components::ShootComponent::projectileSpeed</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>projectileSpeed</name>
+        <qualifiedname>helios::engine::mechanics::combat::components::ShootComponent::projectileSpeed</qualifiedname>
+        <briefdescription>
+<para>Returns the projectile speed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Projectile speed in meters per second. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" line="179" column="16" bodyfile="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" bodystart="179" bodyend="181"/>
+        <references refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1accb4b59ab1fecb6cab41ce51ab97b6ac" compoundref="ShootComponent_8ixx" startline="99">helios::engine::mechanics::combat::components::ShootComponent::projectileSpeed_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1aed943c8e683590677c6c57a333e29d8f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::mechanics::combat::components::ShootComponent::setProjectileSpeed</definition>
+        <argsstring>(float speed) noexcept</argsstring>
+        <name>setProjectileSpeed</name>
+        <qualifiedname>helios::engine::mechanics::combat::components::ShootComponent::setProjectileSpeed</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>speed</declname>
+        </param>
+        <briefdescription>
+<para>Sets the projectile speed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>speed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New projectile speed in meters per second. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" line="188" column="14" bodyfile="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" bodystart="188" bodyend="190"/>
+        <references refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1accb4b59ab1fecb6cab41ce51ab97b6ac" compoundref="ShootComponent_8ixx" startline="99">helios::engine::mechanics::combat::components::ShootComponent::projectileSpeed_</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/engine/mechanics/combat/components/ShootComponent.ixx" line="11" column="15"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>helios::engine::mechanics::spawn::dispatcher::SpawnCommandDispatcher</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher" prot="public" virt="non-virtual">helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::mechanics::spawn::commands::SpawnCommand &gt;</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher_1aaa264688195a4a204ddafbae30269b0b" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1manager_1_1SpawnManager" kindref="compound">helios::engine::mechanics::spawn::manager::SpawnManager</ref> &amp;</type>
+        <definition>helios::engine::mechanics::spawn::manager::SpawnManager&amp; helios::engine::mechanics::spawn::dispatcher::SpawnCommandDispatcher::spawnManager_</definition>
+        <argsstring></argsstring>
+        <name>spawnManager_</name>
+        <qualifiedname>helios::engine::mechanics::spawn::dispatcher::SpawnCommandDispatcher::spawnManager_</qualifiedname>
+        <briefdescription>
+<para>Reference to the SpawnManager for handling spawn requests. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/spawn/dispatcher/SpawnCommandDispatcher.ixx" line="53" column="65" bodyfile="include/helios/engine/mechanics/spawn/dispatcher/SpawnCommandDispatcher.ixx" bodystart="53" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher_1ae5dba7176c1c054265878d57d6812b51" prot="protected" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::mechanics::spawn::dispatcher::SpawnCommandDispatcher::dispatchTyped</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld, const helios::engine::mechanics::spawn::commands::SpawnCommand &amp;command) noexcept override</argsstring>
+        <name>dispatchTyped</name>
+        <qualifiedname>helios::engine::mechanics::spawn::dispatcher::SpawnCommandDispatcher::dispatchTyped</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher_1ae99b8d4dc66acf8340000f97c0fdd16d">dispatchTyped</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1commands_1_1SpawnCommand" kindref="compound">helios::engine::mechanics::spawn::commands::SpawnCommand</ref> &amp;</type>
+          <declname>command</declname>
+        </param>
+        <briefdescription>
+<para>Dispatches a SpawnCommand by creating a SpawnRequest. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Creates a SpawnRequest from the command and submits it to the pool&apos;s registered PoolRequestHandler for deferred processing.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world containing the pool. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>command</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The SpawnCommand to dispatch. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/spawn/dispatcher/SpawnCommandDispatcher.ixx" line="66" column="14" bodyfile="include/helios/engine/mechanics/spawn/dispatcher/SpawnCommandDispatcher.ixx" bodystart="66" bodyend="84"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher_1a420420b6069eb67e4c25a0805d1d6a68" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::mechanics::spawn::dispatcher::SpawnCommandDispatcher::SpawnCommandDispatcher</definition>
+        <argsstring>(helios::engine::mechanics::spawn::manager::SpawnManager &amp;spawnManager)</argsstring>
+        <name>SpawnCommandDispatcher</name>
+        <qualifiedname>helios::engine::mechanics::spawn::dispatcher::SpawnCommandDispatcher::SpawnCommandDispatcher</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1manager_1_1SpawnManager" kindref="compound">helios::engine::mechanics::spawn::manager::SpawnManager</ref> &amp;</type>
+          <declname>spawnManager</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher" kindref="compound">SpawnCommandDispatcher</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>spawnManager</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the SpawnManager to route requests to. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/spawn/dispatcher/SpawnCommandDispatcher.ixx" line="93" column="18" bodyfile="include/helios/engine/mechanics/spawn/dispatcher/SpawnCommandDispatcher.ixx" bodystart="93" bodyend="97"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Dispatcher that routes SpawnCommands to the appropriate handler. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher" kindref="compound">SpawnCommandDispatcher</ref> is a typed command dispatcher that handles SpawnCommand instances. When a SpawnCommand is dispatched, it creates a SpawnRequest and submits it to the pool&apos;s registered PoolRequestHandler.</para>
+<para>This enables the command-based spawn architecture where the GameObjectSpawnSystem emits SpawnCommands that are later processed by the SpawnManager during the manager flush phase.</para>
+<para><simplesect kind="see"><para>SpawnCommand </para>
+</simplesect>
+<simplesect kind="see"><para>SpawnManager </para>
+</simplesect>
+<simplesect kind="see"><para>PoolRequestHandler </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>helios::engine::mechanics::spawn::dispatcher::SpawnCommandDispatcher</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::mechanics::spawn::commands::SpawnCommand &gt;</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::runtime::messaging::command::WorldCommandDispatcher</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>helios::engine::mechanics::spawn::dispatcher::SpawnCommandDispatcher</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::mechanics::spawn::commands::SpawnCommand &gt;</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::runtime::messaging::command::WorldCommandDispatcher</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/mechanics/spawn/dispatcher/SpawnCommandDispatcher.ixx" line="47" column="5" bodyfile="include/helios/engine/mechanics/spawn/dispatcher/SpawnCommandDispatcher.ixx" bodystart="48" bodyend="102"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher_1ada9b7af011e293a1d5712a1134bdf66d" prot="public" virt="virtual"><scope>helios::engine::mechanics::spawn::dispatcher::SpawnCommandDispatcher</scope><name>dispatch</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher_1ae5dba7176c1c054265878d57d6812b51" prot="protected" virt="virtual"><scope>helios::engine::mechanics::spawn::dispatcher::SpawnCommandDispatcher</scope><name>dispatchTyped</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher_1a420420b6069eb67e4c25a0805d1d6a68" prot="public" virt="non-virtual"><scope>helios::engine::mechanics::spawn::dispatcher::SpawnCommandDispatcher</scope><name>SpawnCommandDispatcher</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher_1aaa264688195a4a204ddafbae30269b0b" prot="private" virt="non-virtual"><scope>helios::engine::mechanics::spawn::dispatcher::SpawnCommandDispatcher</scope><name>spawnManager_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher_1a99cfdc9890b444664a9ae3a98e8b6d1f" prot="public" virt="virtual"><scope>helios::engine::mechanics::spawn::dispatcher::SpawnCommandDispatcher</scope><name>~WorldCommandDispatcher</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

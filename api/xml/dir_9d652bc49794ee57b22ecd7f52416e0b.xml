@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_9d652bc49794ee57b22ecd7f52416e0b" kind="dir">
+    <compoundname>include/helios/engine/modules/pool</compoundname>
+    <innerdir refid="dir_bf0838d2a9c934752e73ed5ea26c102a">include/helios/engine/modules/pool/components</innerdir>
+    <innerfile refid="helios_2engine_2modules_2pool_2__module_8ixx">_module.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_9d652bc49794ee57b22ecd7f52416e0b_1autotoc_md172">
+<title>helios::engine::modules::pool</title><para>Object pool components for entity recycling.</para>
+</sect1>
+<sect1 id="dir_9d652bc49794ee57b22ecd7f52416e0b_1autotoc_md173">
+<title>Overview</title><para>This module provides components related to object pooling, enabling efficient entity reuse without repeated allocation/deallocation.</para>
+</sect1>
+<sect1 id="dir_9d652bc49794ee57b22ecd7f52416e0b_1autotoc_md174">
+<title>Components</title><para><table rows="2" cols="2"><row>
+<entry thead="yes"><para>Component  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>PoolIdComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Identifies which pool a GameObject belongs to  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_9d652bc49794ee57b22ecd7f52416e0b_1autotoc_md175">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8modules_8pool_8components_8PoolIdComponent" kindref="compound">helios.engine.modules.pool.components.PoolIdComponent</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>During<sp/>pool<sp/>population</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">gameObject-&gt;add&lt;PoolIdComponent&gt;(bulletPoolId);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>During<sp/>despawn</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>pic<sp/>=<sp/>gameObject-&gt;get&lt;PoolIdComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(pic)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>handler<sp/>=<sp/>gameWorld.poolRequestHandler(pic-&gt;gameObjectPoolId());</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>handler-&gt;submit(DespawnRequest{gameObject-&gt;guid(),<sp/>pic-&gt;gameObjectPoolId()});</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_9d652bc49794ee57b22ecd7f52416e0b_1autotoc_md176">
+<title>Related Modules</title><para><itemizedlist>
+<listitem><para><computeroutput><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool" kindref="compound">helios.engine.runtime.pooling.GameObjectPool</ref></computeroutput> — Pool data structure</para>
+</listitem><listitem><para><computeroutput><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">helios.engine.core.data.GameObjectPoolId</ref></computeroutput> — Pool identifier</para>
+</listitem><listitem><para><computeroutput><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolRequestHandler" kindref="compound">helios.engine.runtime.pooling.PoolRequestHandler</ref></computeroutput> — Spawn/despawn request handling</para>
+</listitem></itemizedlist>
+</para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="include/helios/engine/modules/pool/"/>
+  </compounddef>
+</doxygen>

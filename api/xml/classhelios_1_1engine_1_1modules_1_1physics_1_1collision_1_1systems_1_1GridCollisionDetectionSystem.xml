@@ -1,0 +1,864 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1ecs_1_1System" prot="public" virt="non-virtual">helios::engine::ecs::System</basecompoundref>
+    <innerclass refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1_1CollisionStruct" prot="private">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::CollisionStruct</innerclass>
+    <innerclass refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1_1GuidPairHash" prot="private">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::GuidPairHash</innerclass>
+    <innerclass refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1_1CollisionCandidate" prot="private">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::CollisionCandidate</innerclass>
+    <innerclass refid="structhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1_1GridCell" prot="private">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::GridCell</innerclass>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a305c839e94a69fafac6550f19d862e2b" prot="private" static="yes" mutable="no">
+        <type>const auto &amp;</type>
+        <definition>const auto&amp; helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::logger_</definition>
+        <argsstring></argsstring>
+        <name>logger_</name>
+        <qualifiedname>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::logger_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1util_1_1log_1_1LogManager_1a750d8fd5b3ee3678600644756b0631e7" kindref="member">helios::util::log::LogManager::loggerForScope</ref>(<ref refid="OpenGLUniformLocationMap_8ixx_1acbc04f24078582c7d42b2085be5d5750" kindref="member">HELIOS_LOG_SCOPE</ref>)</initializer>
+        <briefdescription>
+<para>Scoped logger instance for structured logging within the current context. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" line="174" column="34" bodyfile="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" bodystart="174" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a9ef4634d732076cda0ecb61894941e96" prot="private" static="no" mutable="no">
+        <type>std::unordered_set&lt; std::pair&lt; <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref>, <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref> &gt;, GuidPairHash &gt;</type>
+        <definition>std::unordered_set&lt;std::pair&lt;helios::util::Guid, helios::util::Guid&gt;, GuidPairHash&gt; helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::solvedCollisions_</definition>
+        <argsstring></argsstring>
+        <name>solvedCollisions_</name>
+        <qualifiedname>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::solvedCollisions_</qualifiedname>
+        <briefdescription>
+<para>Set of already-processed collision pairs to avoid duplicate events. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Stores pairs of GUIDs in canonical order (smaller GUID first) to ensure each collision pair is processed only once per frame, even when entities span multiple cells. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" line="182" column="28" bodyfile="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" bodystart="182" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a67a648a519c4feb7395b17e6df387bfd" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::cellSize_</definition>
+        <argsstring></argsstring>
+        <name>cellSize_</name>
+        <qualifiedname>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::cellSize_</qualifiedname>
+        <briefdescription>
+<para>Size of each grid cell in world units. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" line="187" column="15" bodyfile="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" bodystart="187" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a121bac9801b1d1dde668e72d1e0f0878" prot="private" static="no" mutable="no">
+        <type><ref refid="namespacehelios_1_1math_1a124c0492430aeecedc1c1a5ece4ba488" kindref="member">helios::math::aabbf</ref></type>
+        <definition>helios::math::aabbf helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::gridBounds_</definition>
+        <argsstring></argsstring>
+        <name>gridBounds_</name>
+        <qualifiedname>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::gridBounds_</qualifiedname>
+        <briefdescription>
+<para>World-space bounds defining the spatial region covered by the grid. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" line="192" column="29" bodyfile="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" bodystart="192" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a0da57a448bec6e4618f21f53a6ee0ed4" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; GridCell &gt;</type>
+        <definition>std::vector&lt;GridCell&gt; helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::cells_</definition>
+        <argsstring></argsstring>
+        <name>cells_</name>
+        <qualifiedname>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::cells_</qualifiedname>
+        <briefdescription>
+<para>Flat storage for all grid cells, indexed as x + y * cellsX + z * (cellsX * cellsY). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" line="197" column="21" bodyfile="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" bodystart="197" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a12601c6fba3e364419fb8d978b99832a" prot="private" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::cellsX_</definition>
+        <argsstring></argsstring>
+        <name>cellsX_</name>
+        <qualifiedname>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::cellsX_</qualifiedname>
+        <briefdescription>
+<para>Number of cells along the X axis. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" line="202" column="22" bodyfile="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" bodystart="202" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a04dae77da78c11c2efbfbb979079bf26" prot="private" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::cellsY_</definition>
+        <argsstring></argsstring>
+        <name>cellsY_</name>
+        <qualifiedname>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::cellsY_</qualifiedname>
+        <briefdescription>
+<para>Number of cells along the Y axis. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" line="207" column="22" bodyfile="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" bodystart="207" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a67a1a9dcce8bc09dc94c10c1aeb0d08c" prot="private" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::cellsZ_</definition>
+        <argsstring></argsstring>
+        <name>cellsZ_</name>
+        <qualifiedname>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::cellsZ_</qualifiedname>
+        <briefdescription>
+<para>Number of cells along the Z axis. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" line="212" column="22" bodyfile="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" bodystart="212" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a766ca0cccf07cd339f440cdc2a219218" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; size_t &gt;</type>
+        <definition>std::vector&lt;size_t&gt; helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::trackedCells_</definition>
+        <argsstring></argsstring>
+        <name>trackedCells_</name>
+        <qualifiedname>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::trackedCells_</qualifiedname>
+        <briefdescription>
+<para>Helper to keep track of updated cells (with potential collisions candidates) in one pass. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" line="217" column="21" bodyfile="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" bodystart="217" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a69cdc1329c4b992ecb90d96284928727" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::initGrid</definition>
+        <argsstring>()</argsstring>
+        <name>initGrid</name>
+        <qualifiedname>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::initGrid</qualifiedname>
+        <briefdescription>
+<para>Initializes the grid based on world bounds and cell size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Computes the number of cells needed in each dimension and allocates the cell storage. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" line="225" column="14" bodyfile="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" bodystart="225" bodyend="244"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1af7a487f7df61b51ab6f66824d9cd8586" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::prepareCollisionDetection</definition>
+        <argsstring>()</argsstring>
+        <name>prepareCollisionDetection</name>
+        <qualifiedname>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::prepareCollisionDetection</qualifiedname>
+        <briefdescription>
+<para>Prepares the grid for a new collision detection pass. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Clears all collision candidates from every cell and resets the set of already-solved collision pairs. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" line="252" column="21" bodyfile="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" bodystart="252" bodyend="259"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1ad187c684a43cff9a8155037fef41aa68" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::postEvent</definition>
+        <argsstring>(const helios::engine::ecs::GameObject *candidate, const helios::engine::ecs::GameObject *match, const helios::math::vec3f contact, const CollisionStruct collisionStruct, const helios::engine::runtime::world::UpdateContext &amp;updateContext, CollisionStateComponent *csc_a, CollisionStateComponent *csc_b) const noexcept</argsstring>
+        <name>postEvent</name>
+        <qualifiedname>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::postEvent</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> *</type>
+          <declname>candidate</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> *</type>
+          <declname>match</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+          <declname>contact</declname>
+        </param>
+        <param>
+          <type>const CollisionStruct</type>
+          <declname>collisionStruct</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionStateComponent" kindref="compound">CollisionStateComponent</ref> *</type>
+          <declname>csc_a</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionStateComponent" kindref="compound">CollisionStateComponent</ref> *</type>
+          <declname>csc_b</declname>
+        </param>
+        <briefdescription>
+<para>Posts collision events to the UpdateContext&apos;s event sink. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Updates the <ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionStateComponent" kindref="compound">CollisionStateComponent</ref> of both entities with collision information including contact point, collision type, behavior, and reporter status. An entity marked as collision reporter receives the event as the &quot;source&quot; entity.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>candidate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>First collision candidate (potential event source). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>match</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Second collision candidate (collision partner). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>contact</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The contact point between the two AABBs. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>collisionStruct</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Struct containing collision type and behavior information. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Context for pushing events to the event queue. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>csc_a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Collision state component of the first entity. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>csc_b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Collision state component of the second entity. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" line="276" column="21" bodyfile="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" bodystart="276" bodyend="307"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a2363089774ad57bfa2fd76b2f5ff90d5" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>CollisionStruct</type>
+        <definition>CollisionStruct helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::findCollisionType</definition>
+        <argsstring>(const CollisionComponent *cc, const CollisionComponent *matchCC) const noexcept</argsstring>
+        <name>findCollisionType</name>
+        <qualifiedname>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::findCollisionType</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent" kindref="compound">CollisionComponent</ref> *</type>
+          <declname>cc</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent" kindref="compound">CollisionComponent</ref> *</type>
+          <declname>matchCC</declname>
+        </param>
+        <briefdescription>
+<para>Determines the collision type between two entities based on their layer masks. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Evaluates both solid and trigger collision masks to determine if and how two entities can collide. Solid collisions are symmetric (both entities must accept collision with each other), while trigger collisions are asymmetric (either entity can trigger).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Collision component of the first entity. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>matchCC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Collision component of the second entity.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>CollisionStruct a struct with the requested collision information. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" line="321" column="33" bodyfile="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" bodystart="321" bodyend="366"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a5379dffaf0d365df1ae82498bc563a4c" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::GridCollisionDetectionSystem</definition>
+        <argsstring>(const helios::math::aabbf &amp;bounds, const float cellSize)</argsstring>
+        <name>GridCollisionDetectionSystem</name>
+        <qualifiedname>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::GridCollisionDetectionSystem</qualifiedname>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1math_1a124c0492430aeecedc1c1a5ece4ba488" kindref="member">helios::math::aabbf</ref> &amp;</type>
+          <declname>bounds</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>cellSize</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem" kindref="compound">GridCollisionDetectionSystem</ref> with specified bounds and cell size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The grid is initialized to cover the given world bounds. Cell size determines the granularity of spatial partitioning; smaller cells reduce false positives but increase memory and insertion overhead.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bounds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>World-space AABB defining the region where collision detection is active. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cellSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size of each grid cell in world units. Must be greater than zero.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>Given n objects, the 1/3 rule should be applied for determining the number of cells for partitioning, i.e. with n objects, the cube should consist of k x k x k cells, with k = n^{1/3} - that is, on average, one cell fits one object that should be tested for collision. Dimensions of said cells are derived by taking the reference space into account, e.g. WorldBounds.size/k (see [HS99]). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" line="385" column="18" bodyfile="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" bodystart="385" bodyend="392"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a398512331f26b4a44dda02476249f610" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::update</definition>
+        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::update</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1ecs_1_1System_1a4e9969641985fa04db6214332c88605b">update</reimplements>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Performs collision detection for all active entities. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Executes the complete collision detection pipeline each frame: 1. Clears all grid cells and resets solved collision pairs. 2. Iterates all active GameObjects with <ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent" kindref="compound">CollisionComponent</ref> and <ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1AabbColliderComponent" kindref="compound">AabbColliderComponent</ref>. 3. Inserts each entity into all grid cells its AABB overlaps. 4. For each cell with multiple candidates, runs narrow-phase AABB intersection tests. 5. Publishes collision events (<ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1events_1_1TriggerCollisionEvent" kindref="compound">TriggerCollisionEvent</ref>, <ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1events_1_1SolidCollisionEvent" kindref="compound">SolidCollisionEvent</ref>) to the event queue.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The update context providing access to GameWorld and event queue. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" line="406" column="14" bodyfile="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" bodystart="406" bodyend="447"/>
+        <references refid="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262a4d3d769b812b6faa6b76e1a8abaece2d" compoundref="GameObjectFilter_8ixx" startline="29">helios::engine::ecs::query::Active</references>
+        <references refid="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262ac2b28dd68eea15a01721595aec7ae686" compoundref="GameObjectFilter_8ixx" startline="39">helios::engine::ecs::query::ComponentEnabled</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="48">helios::engine::ecs::System::gameWorld_</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1Component_1a4edb1632c9901e8276f77ad53e773911" compoundref="Component_8ixx" startline="160" endline="162">helios::engine::ecs::Component::isEnabled</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1a7fc0511ebc7fc2b50ff37f839c32da41" compoundref="CollisionComponent_8ixx" startline="170" endline="172">helios::engine::modules::physics::collision::components::CollisionComponent::solidCollisionMask</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1aeb615f2b8547602d0ee61d776fefa9e8" compoundref="GridCollisionDetectionSystem_8ixx" startline="546" endline="611">solveCell</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent_1adcafd16782f7bf52d4211003b483ec4e" compoundref="CollisionComponent_8ixx" startline="179" endline="181">helios::engine::modules::physics::collision::components::CollisionComponent::triggerCollisionMask</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1aeba1bbe3d8c095148444e63d48dbe445" compoundref="GridCollisionDetectionSystem_8ixx" startline="495" endline="532">updateCollisionCandidate</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1ad1eb770b6a4aac11036603232ece927e" compoundref="GridCollisionDetectionSystem_8ixx" startline="460" endline="481">worldBoundsToGridBounds</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1ad1eb770b6a4aac11036603232ece927e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespacehelios_1_1math_1a3c63775a7d6ff09058288223291660b7" kindref="member">helios::math::aabbi</ref></type>
+        <definition>helios::math::aabbi helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::worldBoundsToGridBounds</definition>
+        <argsstring>(const helios::math::aabbf &amp;aabbf) const noexcept</argsstring>
+        <name>worldBoundsToGridBounds</name>
+        <qualifiedname>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::worldBoundsToGridBounds</qualifiedname>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1math_1a124c0492430aeecedc1c1a5ece4ba488" kindref="member">helios::math::aabbf</ref> &amp;</type>
+          <declname>aabbf</declname>
+        </param>
+        <briefdescription>
+<para>Converts world-space AABB bounds to grid cell indices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Transforms a floating-point AABB in world space to integer cell coordinates, clamped to the valid grid range. Used to determine which cells an entity occupies.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>aabbf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The world-space AABB to convert.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>An integer AABB representing the range of grid cell indices the entity spans. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" line="460" column="30" bodyfile="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" bodystart="460" bodyend="481"/>
+        <references refid="structhelios_1_1math_1_1aabb_1aa5836a6c13c4a5ddd421adb3a168970e" compoundref="aabb_8ixx" startline="104" endline="106">helios::math::aabb&lt; T &gt;::max</references>
+        <references refid="structhelios_1_1math_1_1aabb_1ab53ba0c88b465fb3f9e6ae410c3f0b70" compoundref="aabb_8ixx" startline="95" endline="97">helios::math::aabb&lt; T &gt;::min</references>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a398512331f26b4a44dda02476249f610" compoundref="GridCollisionDetectionSystem_8ixx" startline="406" endline="447">update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1aeba1bbe3d8c095148444e63d48dbe445" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::updateCollisionCandidate</definition>
+        <argsstring>(helios::engine::ecs::GameObject *go, const helios::math::aabbi &amp;bounds, AabbColliderComponent *aabbColliderComponent, CollisionComponent *collisionComponent, CollisionStateComponent *collisionStateComponent)</argsstring>
+        <name>updateCollisionCandidate</name>
+        <qualifiedname>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::updateCollisionCandidate</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> *</type>
+          <declname>go</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1math_1a3c63775a7d6ff09058288223291660b7" kindref="member">helios::math::aabbi</ref> &amp;</type>
+          <declname>bounds</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1AabbColliderComponent" kindref="compound">AabbColliderComponent</ref> *</type>
+          <declname>aabbColliderComponent</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent" kindref="compound">CollisionComponent</ref> *</type>
+          <declname>collisionComponent</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionStateComponent" kindref="compound">CollisionStateComponent</ref> *</type>
+          <declname>collisionStateComponent</declname>
+        </param>
+        <briefdescription>
+<para>Inserts a collision candidate into all grid cells it overlaps. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Iterates through all cells within the given bounds and adds the candidate to each cell&apos;s collision candidate list for subsequent narrow-phase testing.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>go</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the GameObject entity. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bounds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Grid cell index bounds (integer AABB) the entity spans. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>aabbColliderComponent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the entity&apos;s AABB collider component. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>collisionComponent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the entity&apos;s collision component. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" line="495" column="21" bodyfile="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" bodystart="495" bodyend="532"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a7117db53bda939cdfe169476e3314e46" compoundref="GridCollisionDetectionSystem_8ixx" startline="622" endline="624">cell</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1adff842963a79ccee912444e3d444d1e4" compoundref="GridCollisionDetectionSystem_8ixx" startline="635" endline="639">cellIndex</references>
+        <references refid="structhelios_1_1math_1_1aabb_1aa5836a6c13c4a5ddd421adb3a168970e" compoundref="aabb_8ixx" startline="104" endline="106">helios::math::aabb&lt; T &gt;::max</references>
+        <references refid="structhelios_1_1math_1_1aabb_1ab53ba0c88b465fb3f9e6ae410c3f0b70" compoundref="aabb_8ixx" startline="95" endline="97">helios::math::aabb&lt; T &gt;::min</references>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a398512331f26b4a44dda02476249f610" compoundref="GridCollisionDetectionSystem_8ixx" startline="406" endline="447">update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1aeb615f2b8547602d0ee61d776fefa9e8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::solveCell</definition>
+        <argsstring>(GridCell &amp;cell, helios::engine::runtime::world::UpdateContext &amp;updateContext)</argsstring>
+        <name>solveCell</name>
+        <qualifiedname>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::solveCell</qualifiedname>
+        <param>
+          <type>GridCell &amp;</type>
+          <declname>cell</declname>
+        </param>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Performs narrow-phase collision detection for all candidates in a cell. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Tests all unique pairs of collision candidates within the cell using AABB intersection. For each collision detected, determines collision type (solid/trigger) based on layer masks and publishes appropriate events. Uses a solved-set to avoid duplicate events when entities span multiple cells.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cell</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The grid cell containing collision candidates to test. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Context for pushing collision events to the event queue. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" line="546" column="21" bodyfile="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" bodystart="546" bodyend="611"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1AabbColliderComponent_1a93f83ca5d202bb41487ca1c1c21b5465" compoundref="AabbColliderComponent_8ixx" startline="51" endline="53">helios::engine::modules::physics::collision::components::AabbColliderComponent::bounds</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a7117db53bda939cdfe169476e3314e46" compoundref="GridCollisionDetectionSystem_8ixx" startline="622" endline="624">cell</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1GameObject_1a3674dd45d53436ffeaf50ee266e9f101" compoundref="GameObject_8ixx" startline="348" endline="350">helios::engine::ecs::GameObject::guid</references>
+        <references refid="structhelios_1_1math_1_1aabb_1ade126b97a45a33942359c01b5f268c24" compoundref="aabb_8ixx" startline="153" endline="165">helios::math::aabb&lt; T &gt;::intersects</references>
+        <references refid="namespacehelios_1_1math_1a83d3fdd630c2f9d9179d0263fa515571" compoundref="aabb_8ixx" startline="301" endline="317">helios::math::overlapCenter</references>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a398512331f26b4a44dda02476249f610" compoundref="GridCollisionDetectionSystem_8ixx" startline="406" endline="447">update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a7117db53bda939cdfe169476e3314e46" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>GridCell &amp;</type>
+        <definition>GridCell &amp; helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::cell</definition>
+        <argsstring>(const unsigned int x, const unsigned int y, const unsigned int z) noexcept</argsstring>
+        <name>cell</name>
+        <qualifiedname>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::cell</qualifiedname>
+        <param>
+          <type>const unsigned int</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+<para>Accesses a grid cell by its 3D coordinates. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>X-coordinate of the cell (0 to cellsX - 1). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Y-coordinate of the cell (0 to cellsY - 1). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>z</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Z-coordinate of the cell (0 to cellsZ - 1).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to the GridCell at the specified coordinates. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" line="622" column="26" bodyfile="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" bodystart="622" bodyend="624"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1adff842963a79ccee912444e3d444d1e4" compoundref="GridCollisionDetectionSystem_8ixx" startline="635" endline="639">cellIndex</references>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1aeb615f2b8547602d0ee61d776fefa9e8" compoundref="GridCollisionDetectionSystem_8ixx" startline="546" endline="611">solveCell</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1aeba1bbe3d8c095148444e63d48dbe445" compoundref="GridCollisionDetectionSystem_8ixx" startline="495" endline="532">updateCollisionCandidate</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1adff842963a79ccee912444e3d444d1e4" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::cellIndex</definition>
+        <argsstring>(const unsigned int x, const unsigned int y, const unsigned int z) const noexcept</argsstring>
+        <name>cellIndex</name>
+        <qualifiedname>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::cellIndex</qualifiedname>
+        <param>
+          <type>const unsigned int</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+<para>Computes the 1D index of a cell in a 3D grid based on its x, y, and z coordinates. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The x-coordinate of the cell (must be less than the grid&apos;s x-dimension). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The y-coordinate of the cell (must be less than the grid&apos;s y-dimension). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>z</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The z-coordinate of the cell (must be less than the grid&apos;s z-dimension).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The 1D index of the cell in the grid. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" line="635" column="34" bodyfile="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" bodystart="635" bodyend="639"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a7117db53bda939cdfe169476e3314e46" compoundref="GridCollisionDetectionSystem_8ixx" startline="622" endline="624">cell</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1aeba1bbe3d8c095148444e63d48dbe445" compoundref="GridCollisionDetectionSystem_8ixx" startline="495" endline="532">updateCollisionCandidate</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a75d36fc0afc3d749580c9502b07fc8e8" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::cellsX</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cellsX</name>
+        <qualifiedname>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::cellsX</qualifiedname>
+        <briefdescription>
+<para>Returns the number of cells along the X axis. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Number of grid cells in the X dimension. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" line="646" column="23" bodyfile="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" bodystart="646" bodyend="648"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a0d2b3fe09246d05fde1270c7e5e33257" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::cellsY</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cellsY</name>
+        <qualifiedname>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::cellsY</qualifiedname>
+        <briefdescription>
+<para>Returns the number of cells along the Y axis. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Number of grid cells in the Y dimension. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" line="655" column="23" bodyfile="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" bodystart="655" bodyend="657"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a0130b077a332ef76ce8173d9ccb28b4b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::cellsZ</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cellsZ</name>
+        <qualifiedname>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::cellsZ</qualifiedname>
+        <briefdescription>
+<para>Returns the number of cells along the Z axis. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Number of grid cells in the Z dimension. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" line="664" column="23" bodyfile="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" bodystart="664" bodyend="666"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Collision detection system using uniform spatial partitioning for Broadphase and AABB overlaps in the Narrowphase. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This system implements a grid-based spatial partitioning approach for efficient collision detection, following the principles outlined in Ericson&apos;s &quot;Real-Time Collision Detection&quot; (Chapter 7). The algorithm divides the world into a uniform 3D grid of cells and assigns each collidable entity to the cells it overlaps.</para>
+<para>The detection process consists of two phases: 1. **Broadphase:** Entities are inserted into grid cells based on their AABB. Only entities sharing the same cell are considered potential collision pairs. 2. **Narrowphase:** For each cell with multiple candidates, AABB intersection tests determine actual collisions.</para>
+<para>Collision events are published to the `UpdateContext`&apos;s event sink, distinguishing between:<itemizedlist>
+<listitem><para>**Solid collisions:** Symmetric collisions where both entities can physically interact.</para>
+</listitem><listitem><para>**Trigger collisions:** Asymmetric collisions for gameplay logic (e.g., pickups, zones).</para>
+</listitem></itemizedlist>
+</para>
+<para>During the broadphase, the system uses additional layer masks to filter which entity types can collide with each other, enabling fine-grained control over collision pairs.</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent" kindref="compound">CollisionComponent</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1AabbColliderComponent" kindref="compound">AabbColliderComponent</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1events_1_1TriggerCollisionEvent" kindref="compound">TriggerCollisionEvent</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1events_1_1SolidCollisionEvent" kindref="compound">SolidCollisionEvent</ref></para>
+</simplesect>
+<simplesect kind="see"><para>[Eri05, Chapter 7] </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::ecs::System</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>helios::engine::ecs::System</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>gameWorld_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>helios::engine::runtime::pooling::GameObjectPoolRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolRegistry"/>
+      </node>
+      <node id="7">
+        <label>helios::engine::runtime::pooling::PoolManagerRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry"/>
+      </node>
+      <node id="4">
+        <label>helios::engine::runtime::world::GameWorld</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>logger_</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>pools_</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>poolManagerRegistry_</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>helios::util::log::Logger</label>
+        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" line="74" column="5" bodyfile="include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx" bodystart="74" bodyend="668"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a7117db53bda939cdfe169476e3314e46" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>cell</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1adff842963a79ccee912444e3d444d1e4" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>cellIndex</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a0da57a448bec6e4618f21f53a6ee0ed4" prot="private" virt="non-virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>cells_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a67a648a519c4feb7395b17e6df387bfd" prot="private" virt="non-virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>cellSize_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a75d36fc0afc3d749580c9502b07fc8e8" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>cellsX</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a12601c6fba3e364419fb8d978b99832a" prot="private" virt="non-virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>cellsX_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a0d2b3fe09246d05fde1270c7e5e33257" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>cellsY</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a04dae77da78c11c2efbfbb979079bf26" prot="private" virt="non-virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>cellsY_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a0130b077a332ef76ce8173d9ccb28b4b" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>cellsZ</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a67a1a9dcce8bc09dc94c10c1aeb0d08c" prot="private" virt="non-virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>cellsZ_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a2363089774ad57bfa2fd76b2f5ff90d5" prot="private" virt="non-virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>findCollisionType</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" prot="protected" virt="non-virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>gameWorld_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a121bac9801b1d1dde668e72d1e0f0878" prot="private" virt="non-virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>gridBounds_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a5379dffaf0d365df1ae82498bc563a4c" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>GridCollisionDetectionSystem</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1ae0464c1668e257439243a4f25979a7ff" prot="public" virt="virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>init</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a69cdc1329c4b992ecb90d96284928727" prot="private" virt="non-virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>initGrid</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a305c839e94a69fafac6550f19d862e2b" prot="private" virt="non-virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>logger_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1ad187c684a43cff9a8155037fef41aa68" prot="private" virt="non-virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>postEvent</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1af7a487f7df61b51ab6f66824d9cd8586" prot="private" virt="non-virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>prepareCollisionDetection</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1aeb615f2b8547602d0ee61d776fefa9e8" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>solveCell</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a9ef4634d732076cda0ecb61894941e96" prot="private" virt="non-virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>solvedCollisions_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a766ca0cccf07cd339f440cdc2a219218" prot="private" virt="non-virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>trackedCells_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a26d81abcda05fe8b12a1ddb4ed6099a3" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>Updatable</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a398512331f26b4a44dda02476249f610" prot="public" virt="virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>update</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1aeba1bbe3d8c095148444e63d48dbe445" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>updateCollisionCandidate</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1ad1eb770b6a4aac11036603232ece927e" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>worldBoundsToGridBounds</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a937c99bfacd777c53e0f811ab9d335a6" prot="public" virt="virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>~System</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a0f54f92a2a8d6c8dc2fc2ebed41d5a85" prot="public" virt="virtual"><scope>helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</scope><name>~Updatable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

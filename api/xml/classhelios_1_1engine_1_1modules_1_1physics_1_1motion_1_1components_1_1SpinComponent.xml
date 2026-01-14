@@ -1,0 +1,311 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::modules::physics::motion::components::SpinComponent</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; SpinComponent &gt;</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1a551a6131375345636ef6bbc557402c3d" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::modules::physics::motion::components::SpinComponent::rotationSpeed_</definition>
+        <argsstring></argsstring>
+        <name>rotationSpeed_</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SpinComponent::rotationSpeed_</qualifiedname>
+        <initializer>= 720.0f</initializer>
+        <briefdescription>
+<para>Rotation speed in degrees per second. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SpinComponent.ixx" line="32" column="15" bodyfile="include/helios/engine/modules/physics/motion/components/SpinComponent.ixx" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1af241629e988a9562a353a307250e87c2" prot="private" static="no" mutable="no">
+        <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+        <definition>helios::math::vec3f helios::engine::modules::physics::motion::components::SpinComponent::rotationAxis_</definition>
+        <argsstring></argsstring>
+        <name>rotationAxis_</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SpinComponent::rotationAxis_</qualifiedname>
+        <initializer>= <ref refid="namespacehelios_1_1math_1a64379fe55f1794fad912feafd5051224" kindref="member">helios::math::Z_AXISf</ref></initializer>
+        <briefdescription>
+<para>The axis around which the entity spins. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SpinComponent.ixx" line="37" column="29" bodyfile="include/helios/engine/modules/physics/motion/components/SpinComponent.ixx" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1ab29a1224c9ec0e0a524fe6d2cf1c761d" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::modules::physics::motion::components::SpinComponent::currentRotation_</definition>
+        <argsstring></argsstring>
+        <name>currentRotation_</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SpinComponent::currentRotation_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Current accumulated rotation angle in degrees. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SpinComponent.ixx" line="42" column="15" bodyfile="include/helios/engine/modules/physics/motion/components/SpinComponent.ixx" bodystart="42" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1a68495dc0eb91e01b6827db8bbd974713" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::modules::physics::motion::components::SpinComponent::SpinComponent</definition>
+        <argsstring>(const float rotationSpeed, const helios::math::vec3f rotationAxis)</argsstring>
+        <name>SpinComponent</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SpinComponent::SpinComponent</qualifiedname>
+        <param>
+          <type>const float</type>
+          <declname>rotationSpeed</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+          <declname>rotationAxis</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent" kindref="compound">SpinComponent</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rotationSpeed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Speed of rotation in degrees per second. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rotationAxis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The axis to rotate around. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SpinComponent.ixx" line="52" column="18" bodyfile="include/helios/engine/modules/physics/motion/components/SpinComponent.ixx" bodystart="52" bodyend="55"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1a2d1fbe309a48ff61bedf4d381c66ca80" compoundref="SpinComponent_8ixx" startline="62" endline="64">SpinComponent</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1a2d1fbe309a48ff61bedf4d381c66ca80" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::modules::physics::motion::components::SpinComponent::SpinComponent</definition>
+        <argsstring>(const SpinComponent &amp;other)</argsstring>
+        <name>SpinComponent</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SpinComponent::SpinComponent</qualifiedname>
+        <param>
+          <type>const SpinComponent &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component to copy from. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SpinComponent.ixx" line="62" column="18" bodyfile="include/helios/engine/modules/physics/motion/components/SpinComponent.ixx" bodystart="62" bodyend="64"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1a68495dc0eb91e01b6827db8bbd974713" compoundref="SpinComponent_8ixx" startline="52" endline="55">SpinComponent</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1a1d33e86b0903e19fa64d4cdcc358c5ea" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+        <definition>helios::math::vec3f helios::engine::modules::physics::motion::components::SpinComponent::axis</definition>
+        <argsstring>()</argsstring>
+        <name>axis</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SpinComponent::axis</qualifiedname>
+        <briefdescription>
+<para>Returns the rotation axis. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The normalized rotation axis vector. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SpinComponent.ixx" line="71" column="30" bodyfile="include/helios/engine/modules/physics/motion/components/SpinComponent.ixx" bodystart="71" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1ac7c98c9b972db2793b1a2b563b2cb7ad" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::modules::physics::motion::components::SpinComponent::speed</definition>
+        <argsstring>() const</argsstring>
+        <name>speed</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SpinComponent::speed</qualifiedname>
+        <briefdescription>
+<para>Returns the rotation speed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Speed in degrees per second. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SpinComponent.ixx" line="80" column="16" bodyfile="include/helios/engine/modules/physics/motion/components/SpinComponent.ixx" bodystart="80" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1aeb4cb4499065992c9bad7a745d403f1d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::modules::physics::motion::components::SpinComponent::rotation</definition>
+        <argsstring>() const</argsstring>
+        <name>rotation</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SpinComponent::rotation</qualifiedname>
+        <briefdescription>
+<para>Returns the current accumulated rotation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Current rotation angle in degrees. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SpinComponent.ixx" line="89" column="16" bodyfile="include/helios/engine/modules/physics/motion/components/SpinComponent.ixx" bodystart="89" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1a8b52f87fef438128d6c9a24f51aa3282" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::physics::motion::components::SpinComponent::setRotation</definition>
+        <argsstring>(float currentRotation)</argsstring>
+        <name>setRotation</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SpinComponent::setRotation</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>currentRotation</declname>
+        </param>
+        <briefdescription>
+<para>Sets the current accumulated rotation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>currentRotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new rotation angle in degrees. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SpinComponent.ixx" line="98" column="14" bodyfile="include/helios/engine/modules/physics/motion/components/SpinComponent.ixx" bodystart="98" bodyend="100"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Component that defines spin properties for an entity. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This component is used by the SpinSystem to apply continuous rotation around a specific axis. It stores the rotation speed, axis, and current rotation state. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>helios::engine::ecs::Cloneable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Cloneable"/>
+      </node>
+      <node id="2">
+        <label>helios::engine::ecs::CloneableComponent&lt; SpinComponent &gt;</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Component</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Component"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::modules::physics::motion::components::SpinComponent</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="6">
+        <label>helios::engine::ecs::Cloneable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Cloneable"/>
+      </node>
+      <node id="2">
+        <label>helios::engine::ecs::CloneableComponent&lt; SpinComponent &gt;</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Component</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Component"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>gameObject_</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>helios::engine::ecs::GameObject</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1GameObject"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>guid_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>helios::engine::modules::physics::motion::components::SpinComponent</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>helios::util::Guid</label>
+        <link refid="classhelios_1_1util_1_1Guid"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/modules/physics/motion/components/SpinComponent.ixx" line="27" column="5" bodyfile="include/helios/engine/modules/physics/motion/components/SpinComponent.ixx" bodystart="27" bodyend="101"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1a1d33e86b0903e19fa64d4cdcc358c5ea" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>axis</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1aea2a33eed58899d7f93accbe7a89149f" prot="public" virt="virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>clone</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a5b888a1acd1799700525f3eab51b1a62" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>Component</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1ab29a1224c9ec0e0a524fe6d2cf1c761d" prot="private" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>currentRotation_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a21492dd1100f113c7f049c3bd8a7a179" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>disable</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a8c2eb9405720e29d3a637061d523fb89" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>enable</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a3489588d238d04928e767908a0721be1" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>gameObject</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1aff1c0d42b10c04da6034ff5e49d42f12" prot="protected" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>gameObject_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a081d44a554b723d719f7909638735819" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>isAttached</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a58e0f3384ee76bb9961ffb46e3181bda" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>isDisabled</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a4edb1632c9901e8276f77ad53e773911" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>isEnabled</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1ab5895e14ca5df63711d46a492fb40c64" prot="protected" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>isEnabled_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a9f6ca8f70b132c8d5ca1d0ffdb8f39f9" prot="public" virt="virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>onAcquire</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1ab9614bf06e8e2d970cca3d2eb03e2425" prot="public" virt="virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>onActivate</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1ac08c7be419071c67780342322aa1e679" prot="public" virt="virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>onAttach</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1ae18881cca0af5463608e59d112b3f257" prot="public" virt="virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>onDeactivate</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1aacc77dfd9a7a39b733e0f90a7e50d43e" prot="public" virt="virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>onRelease</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1aeb4cb4499065992c9bad7a745d403f1d" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>rotation</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1af241629e988a9562a353a307250e87c2" prot="private" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>rotationAxis_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1a551a6131375345636ef6bbc557402c3d" prot="private" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>rotationSpeed_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1a8b52f87fef438128d6c9a24f51aa3282" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>setRotation</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1ac7c98c9b972db2793b1a2b563b2cb7ad" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>speed</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1a68495dc0eb91e01b6827db8bbd974713" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>SpinComponent</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1a2d1fbe309a48ff61bedf4d381c66ca80" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>SpinComponent</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Cloneable_1a7663aa6519f970dc8f0255a0e09bac17" prot="public" virt="virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>~Cloneable</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1aa014415a814f5252c94d040c2e80c83f" prot="public" virt="virtual"><scope>helios::engine::modules::physics::motion::components::SpinComponent</scope><name>~Component</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

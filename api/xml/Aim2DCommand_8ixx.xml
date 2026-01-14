@@ -2,27 +2,37 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="Aim2DCommand_8ixx" kind="file" language="C++">
     <compoundname>Aim2DCommand.ixx</compoundname>
-    <includes refid="Aim2DComponent_8ixx" local="no">helios.engine.game.components.gameplay.Aim2DComponent</includes>
+    <includes refid="Aim2DComponent_8ixx" local="no">helios.engine.mechanics.combat.components.Aim2DComponent</includes>
     <includes refid="helios_2math_2types_2__module_8ixx" local="no">helios.math.types</includes>
-    <includes refid="GameObject_8ixx" local="no">helios.engine.game.GameObject</includes>
-    <includes refid="Command_8ixx" local="no">helios.engine.game.Command</includes>
+    <includes refid="GameObject_8ixx" local="no">helios.engine.ecs.GameObject</includes>
+    <includes refid="TargetedCommand_8ixx" local="no">helios.engine.runtime.messaging.command.TargetedCommand</includes>
     <incdepgraph>
-      <node id="12">
-        <label>helios.core.data.ReadBuffer</label>
-        <link refid="ReadBuffer_8ixx"/>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-      </node>
-      <node id="8">
-        <label>helios.core.data.TypeIndexedDoubleBuffer</label>
-        <link refid="TypeIndexedDoubleBuffer_8ixx"/>
+      <node id="14">
+        <label>helios.core.buffer.DoubleBuffer</label>
+        <link refid="DoubleBuffer_8ixx"/>
         <childnode refid="9" relation="include">
         </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
         <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+      </node>
+      <node id="12">
+        <label>helios.core.buffer.ReadBuffer</label>
+        <link refid="ReadBuffer_8ixx"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>helios.core.buffer.ReadWriteDoubleBuffer</label>
+        <link refid="ReadWriteDoubleBuffer_8ixx"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
@@ -31,220 +41,242 @@
         <childnode refid="14" relation="include">
         </childnode>
       </node>
-      <node id="14">
-        <label>helios.core.data.TypeIndexer</label>
-        <link refid="TypeIndexer_8ixx"/>
-        <childnode refid="15" relation="include">
+      <node id="8">
+        <label>helios.core.buffer.TypeIndexedDoubleBuffer</label>
+        <link refid="TypeIndexedDoubleBuffer_8ixx"/>
+        <childnode refid="9" relation="include">
         </childnode>
-      </node>
-      <node id="13">
-        <label>helios.core.data.WriteBuffer</label>
-        <link refid="WriteBuffer_8ixx"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
         <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-      </node>
-      <node id="33">
-        <label>helios.engine.game.Command</label>
-        <link refid="Command_8ixx"/>
-        <childnode refid="26" relation="include">
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
-      <node id="3">
-        <label>helios.engine.game.Component</label>
+      <node id="13">
+        <label>helios.core.buffer.WriteBuffer</label>
+        <link refid="WriteBuffer_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>helios.core.data.TypeIndexer</label>
+        <link refid="TypeIndexer_8ixx"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>helios.engine.ecs.Component</label>
         <link refid="Component_8ixx"/>
-      </node>
-      <node id="26">
-        <label>helios.engine.game.GameObject</label>
-        <link refid="GameObject_8ixx"/>
-        <childnode refid="5" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="27" relation="include">
+      </node>
+      <node id="28">
+        <label>helios.engine.ecs.GameObject</label>
+        <link refid="GameObject_8ixx"/>
+        <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="28" relation="include">
-        </childnode>
         <childnode refid="29" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
         <childnode refid="31" relation="include">
         </childnode>
-      </node>
-      <node id="16">
-        <label>helios.engine.game.InputSnapshot</label>
-        <link refid="InputSnapshot_8ixx"/>
-        <childnode refid="17" relation="include">
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
         </childnode>
       </node>
-      <node id="30">
-        <label>helios.engine.game.Updatable</label>
+      <node id="31">
+        <label>helios.engine.ecs.Updatable</label>
         <link refid="Updatable_8ixx"/>
+        <childnode refid="3" relation="include">
+        </childnode>
       </node>
-      <node id="4">
-        <label>helios.engine.game.UpdateContext</label>
+      <node id="1">
+        <label>include/helios/engine/mechanics/combat/commands/Aim2DCommand.ixx</label>
+        <link refid="Aim2DCommand_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios.engine.mechanics.combat.components.Aim2DComponent</label>
+        <link refid="Aim2DComponent_8ixx"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>helios.engine.runtime.messaging.command.TargetedCommand</label>
+        <link refid="TargetedCommand_8ixx"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>helios.engine.runtime.messaging.event.GameLoopEventBus</label>
+        <link refid="GameLoopEventBus_8ixx"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios.engine.runtime.world.UpdateContext</label>
         <link refid="UpdateContext_8ixx"/>
+        <childnode refid="4" relation="include">
+        </childnode>
         <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="1">
-        <label>include/helios/engine/game/commands/Aim2DCommand.ixx</label>
-        <link refid="Aim2DCommand_8ixx"/>
-        <childnode refid="2" relation="include">
+      <node id="17">
+        <label>helios.input.InputSnapshot</label>
+        <link refid="InputSnapshot_8ixx"/>
+        <childnode refid="18" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
+      </node>
+      <node id="18">
+        <label>helios.input.gamepad.GamepadState</label>
+        <link refid="GamepadState_8ixx"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
         </childnode>
         <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>helios.math.types</label>
+        <link refid="helios_2math_2types_2__module_8ixx"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>helios.util.Guid</label>
+        <link refid="Guid_8ixx"/>
+        <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="33" relation="include">
         </childnode>
       </node>
-      <node id="2">
-        <label>helios.engine.game.components.gameplay.Aim2DComponent</label>
-        <link refid="Aim2DComponent_8ixx"/>
-        <childnode refid="3" relation="include">
+      <node id="19">
+        <label>helios.util.log.LogManager</label>
+        <link refid="LogManager_8ixx"/>
+        <childnode refid="20" relation="include">
         </childnode>
-        <childnode refid="4" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
-      </node>
-      <node id="7">
-        <label>helios.engine.game.event.GameLoopEventBus</label>
-        <link refid="GameLoopEventBus_8ixx"/>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-      </node>
-      <node id="17">
-        <label>helios.input.gamepad.GamepadState</label>
-        <link refid="GamepadState_8ixx"/>
-        <childnode refid="18" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
         </childnode>
         <childnode refid="25" relation="include">
         </childnode>
       </node>
       <node id="25">
-        <label>helios.math.types</label>
-        <link refid="helios_2math_2types_2__module_8ixx"/>
-        <childnode refid="25" relation="include">
-        </childnode>
-      </node>
-      <node id="31">
-        <label>helios.util.Guid</label>
-        <link refid="Guid_8ixx"/>
-        <childnode refid="15" relation="include">
-        </childnode>
-        <childnode refid="32" relation="include">
-        </childnode>
-      </node>
-      <node id="18">
-        <label>helios.util.log.LogManager</label>
-        <link refid="LogManager_8ixx"/>
-        <childnode refid="19" relation="include">
-        </childnode>
+        <label>helios.util.log.LogSink</label>
+        <link refid="LogSink_8ixx"/>
         <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="23" relation="include">
-        </childnode>
-        <childnode refid="24" relation="include">
         </childnode>
       </node>
       <node id="24">
-        <label>helios.util.log.LogSink</label>
-        <link refid="LogSink_8ixx"/>
-        <childnode refid="19" relation="include">
-        </childnode>
-      </node>
-      <node id="23">
         <label>helios.util.log.Logger</label>
         <link refid="Logger_8ixx"/>
-        <childnode refid="19" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
-        <childnode refid="24" relation="include">
+        <childnode refid="25" relation="include">
         </childnode>
       </node>
-      <node id="15">
+      <node id="16">
         <label>atomic</label>
       </node>
-      <node id="5">
+      <node id="4">
         <label>cassert</label>
       </node>
-      <node id="32">
+      <node id="33">
         <label>cstdint</label>
-      </node>
-      <node id="27">
-        <label>functional</label>
       </node>
       <node id="9">
         <label>memory</label>
       </node>
-      <node id="22">
+      <node id="23">
         <label>mutex</label>
       </node>
-      <node id="10">
+      <node id="5">
         <label>span</label>
       </node>
       <node id="6">
         <label>stdexcept</label>
       </node>
-      <node id="19">
+      <node id="20">
         <label>string</label>
       </node>
-      <node id="28">
+      <node id="29">
         <label>type_traits</label>
       </node>
-      <node id="29">
+      <node id="30">
         <label>typeindex</label>
       </node>
-      <node id="20">
+      <node id="21">
         <label>unordered_map</label>
       </node>
-      <node id="21">
+      <node id="22">
         <label>unordered_set</label>
       </node>
-      <node id="11">
+      <node id="10">
         <label>vector</label>
       </node>
     </incdepgraph>
-    <innerclass refid="classhelios_1_1engine_1_1game_1_1commands_1_1Aim2DCommand" prot="public">helios::engine::game::commands::Aim2DCommand</innerclass>
+    <innerclass refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand" prot="public">helios::engine::mechanics::combat::commands::Aim2DCommand</innerclass>
     <innernamespace refid="namespacehelios">helios</innernamespace>
     <innernamespace refid="namespacehelios_1_1engine">helios::engine</innernamespace>
-    <innernamespace refid="namespacehelios_1_1engine_1_1game">helios::engine::game</innernamespace>
-    <innernamespace refid="namespacehelios_1_1engine_1_1game_1_1commands">helios::engine::game::commands</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1mechanics">helios::engine::mechanics</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1mechanics_1_1combat">helios::engine::mechanics::combat</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1mechanics_1_1combat_1_1commands">helios::engine::mechanics::combat::commands</innernamespace>
     <briefdescription>
 <para>Command for applying 2D aiming direction to GameObjects. </para>
     </briefdescription>
@@ -257,14 +289,14 @@
 <codeline lineno="4"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">module</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight></codeline>
-<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8game_8commands_8Aim2DCommand" kindref="compound">helios.engine.game.commands.Aim2DCommand</ref>;</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8mechanics_8combat_8commands_8Aim2DCommand" kindref="compound">helios.engine.mechanics.combat.commands.Aim2DCommand</ref>;</highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight></codeline>
-<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8game_8Command" kindref="compound">helios.engine.game.Command</ref>;</highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8game_8GameObject" kindref="compound">helios.engine.game.GameObject</ref>;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8runtime_8messaging_8command_8TargetedCommand" kindref="compound">helios.engine.runtime.messaging.command.TargetedCommand</ref>;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8ecs_8GameObject" kindref="compound">helios.engine.ecs.GameObject</ref>;</highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8math_8types" kindref="compound">helios.math.types</ref>;</highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8game_8components_8gameplay_8Aim2DComponent" kindref="compound">helios.engine.game.components.gameplay.Aim2DComponent</ref>;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8mechanics_8combat_8components_8Aim2DComponent" kindref="compound">helios.engine.mechanics.combat.components.Aim2DComponent</ref>;</highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight></codeline>
-<codeline lineno="14" refid="namespacehelios_1_1engine_1_1game_1_1commands" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1game_1_1commands" kindref="compound">helios::engine::game::commands</ref><sp/>{</highlight></codeline>
+<codeline lineno="14" refid="namespacehelios_1_1engine_1_1mechanics_1_1combat" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1mechanics_1_1combat_1_1commands" kindref="compound">helios::engine::mechanics::combat::commands</ref><sp/>{</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="16"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Command<sp/>that<sp/>applies<sp/>2D<sp/>aiming<sp/>direction<sp/>to<sp/>a<sp/>GameObject.</highlight></codeline>
@@ -277,10 +309,10 @@
 <codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>The<sp/>target<sp/>GameObject<sp/>must<sp/>have<sp/>an<sp/>Aim2DComponent<sp/>attached<sp/>for<sp/>this</highlight></codeline>
 <codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/>command<sp/>to<sp/>have<sp/>any<sp/>effect.</highlight></codeline>
 <codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>helios::engine::game::Command</highlight></codeline>
-<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>helios::engine::game::components::gameplay::Aim2DComponent</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>helios::engine::runtime::messaging::command::Command</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>helios::engine::mechanics::components::Aim2DComponent</highlight></codeline>
 <codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="30" refid="classhelios_1_1engine_1_1game_1_1commands_1_1Aim2DCommand" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1engine_1_1game_1_1commands_1_1Aim2DCommand_1ac1967593d3afa31a055da2a702339ebb" kindref="member">Aim2DCommand</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1Command" kindref="compound">helios::engine::game::Command</ref><sp/>{</highlight></codeline>
+<codeline lineno="30" refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand_1a1671b06743d4e0021b3249b41805aaab" kindref="member">Aim2DCommand</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand" kindref="compound">helios::engine::runtime::messaging::command::TargetedCommand</ref><sp/>{</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>The<sp/>analog<sp/>stick<sp/>magnitude<sp/>determining<sp/>fire<sp/>frequency.</highlight></codeline>
@@ -300,7 +332,7 @@
 <codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>direction<sp/>Normalized<sp/>2D<sp/>direction<sp/>vector.</highlight></codeline>
 <codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>freqFactor<sp/>Magnitude<sp/>of<sp/>the<sp/>stick<sp/>input<sp/>(0.0<sp/>to<sp/>1.0).</highlight></codeline>
 <codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="50" refid="classhelios_1_1engine_1_1game_1_1commands_1_1Aim2DCommand_1ac1967593d3afa31a055da2a702339ebb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1commands_1_1Aim2DCommand_1ac1967593d3afa31a055da2a702339ebb" kindref="member">Aim2DCommand</ref>(</highlight></codeline>
+<codeline lineno="50" refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand_1a1671b06743d4e0021b3249b41805aaab" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand_1a1671b06743d4e0021b3249b41805aaab" kindref="member">Aim2DCommand</ref>(</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1math_1aeab5c7e555a142f8f763a3317460d5c0" kindref="member">helios::math::vec2f</ref><sp/>direction,</highlight></codeline>
 <codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>freqFactor</highlight></codeline>
 <codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>)<sp/>:</highlight></codeline>
@@ -314,9 +346,9 @@
 <codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="62"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>gameObject<sp/>The<sp/>target<sp/>entity<sp/>with<sp/>an<sp/>Aim2DComponent.</highlight></codeline>
 <codeline lineno="63"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="64" refid="classhelios_1_1engine_1_1game_1_1commands_1_1Aim2DCommand_1adcf8bbd3975dd917ebc77fa3ea20128a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1commands_1_1Aim2DCommand_1adcf8bbd3975dd917ebc77fa3ea20128a" kindref="member">execute</ref>(<ref refid="classhelios_1_1engine_1_1game_1_1GameObject" kindref="compound">helios::engine::game::GameObject</ref>&amp;<sp/>gameObject)</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="64" refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand_1ac0c629ab75061dde4a02d165009d8bac" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand_1ac0c629ab75061dde4a02d165009d8bac" kindref="member">execute</ref>(<ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref>&amp;<sp/>gameObject)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="65"><highlight class="normal"></highlight></codeline>
-<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>aimComponent<sp/>=<sp/>gameObject.<ref refid="classhelios_1_1engine_1_1game_1_1GameObject_1a1de477ec6f0718697589c8d69498939d" kindref="member">get</ref>&lt;<ref refid="classhelios_1_1engine_1_1game_1_1components_1_1gameplay_1_1Aim2DComponent" kindref="compound">helios::engine::game::components::gameplay::Aim2DComponent</ref>&gt;();</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>aimComponent<sp/>=<sp/>gameObject.get&lt;<ref refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent" kindref="compound">helios::engine::mechanics::combat::components::Aim2DComponent</ref>&gt;();</highlight></codeline>
 <codeline lineno="67"><highlight class="normal"></highlight></codeline>
 <codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(aimComponent)<sp/>{</highlight></codeline>
 <codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>aimComponent-&gt;aim(direction_,<sp/>freqFactor_);</highlight></codeline>
@@ -330,6 +362,6 @@
 <codeline lineno="77"><highlight class="normal"></highlight></codeline>
 <codeline lineno="78"><highlight class="normal">}</highlight></codeline>
     </programlisting>
-    <location file="include/helios/engine/game/commands/Aim2DCommand.ixx"/>
+    <location file="include/helios/engine/mechanics/combat/commands/Aim2DCommand.ixx"/>
   </compounddef>
 </doxygen>

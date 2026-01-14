@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="namespacehelios_1_1engine_1_1ecs_1_1query" kind="namespace" language="C++">
+    <compoundname>helios::engine::ecs::query</compoundname>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>GameObjectFilter</name>
+        <qualifiedname>helios::engine::ecs::query::GameObjectFilter</qualifiedname>
+        <enumvalue id="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262a6adf97f83acf6453d4a6a4b1070f3754" prot="public">
+          <name>None</name>
+          <initializer>=  0</initializer>
+          <briefdescription>
+<para>No filtering applied. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262a4d3d769b812b6faa6b76e1a8abaece2d" prot="public">
+          <name>Active</name>
+          <initializer>= 1 &lt;&lt; 0</initializer>
+          <briefdescription>
+<para>Include only active GameObjects. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262a3cab03c00dbd11bc3569afa0748013f0" prot="public">
+          <name>Inactive</name>
+          <initializer>= 1 &lt;&lt; 1</initializer>
+          <briefdescription>
+<para>Include only inactive GameObjects. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262ac2b28dd68eea15a01721595aec7ae686" prot="public">
+          <name>ComponentEnabled</name>
+          <initializer>= 1 &lt;&lt; 2</initializer>
+          <briefdescription>
+<para>Include GameObjects with enabled components. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262a2dbabf6c32dda02da7e2db1f8c05080b" prot="public">
+          <name>ComponentDisabled</name>
+          <initializer>= 1 &lt;&lt; 3</initializer>
+          <briefdescription>
+<para>Include GameObjects with disabled components. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262ab1c94ca2fbc3e78fc30069c8d0f01680" prot="public">
+          <name>All</name>
+          <initializer>= Active | Inactive | ComponentEnabled | ComponentDisabled</initializer>
+          <briefdescription>
+<para>Include all GameObjects regardless of state. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Defines criteria for filtering GameObjects during iteration. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Used by `GameWorld::find()` and `GameObjectView` to select which entities should be included in the results based on their active state or component state. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/ecs/query/GameObjectFilter.ixx" line="20" column="5" bodyfile="include/helios/engine/ecs/query/GameObjectFilter.ixx" bodystart="20" bodyend="50"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespacehelios_1_1engine_1_1ecs_1_1query_1a58b8d09b7187ca9b2d1c8e7f13971a5a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262" kindref="member">GameObjectFilter</ref></type>
+        <definition>GameObjectFilter helios::engine::ecs::query::operator&amp;</definition>
+        <argsstring>(GameObjectFilter a, GameObjectFilter b) noexcept</argsstring>
+        <name>operator&amp;</name>
+        <qualifiedname>helios::engine::ecs::query::operator&amp;</qualifiedname>
+        <param>
+          <type><ref refid="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262" kindref="member">GameObjectFilter</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262" kindref="member">GameObjectFilter</ref></type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Performs a bitwise AND operation between two <ref refid="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262" kindref="member">GameObjectFilter</ref> values. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first <ref refid="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262" kindref="member">GameObjectFilter</ref> value. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second <ref refid="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262" kindref="member">GameObjectFilter</ref> value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A <ref refid="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262" kindref="member">GameObjectFilter</ref> value representing the result of the AND operation. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/ecs/query/GameObjectFilter.ixx" line="59" column="32" bodyfile="include/helios/engine/ecs/query/GameObjectFilter.ixx" bodystart="59" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacehelios_1_1engine_1_1ecs_1_1query_1aaf7aedcae2b8367cdaee9294b37e11f7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262" kindref="member">GameObjectFilter</ref></type>
+        <definition>GameObjectFilter helios::engine::ecs::query::operator|</definition>
+        <argsstring>(GameObjectFilter a, GameObjectFilter b) noexcept</argsstring>
+        <name>operator|</name>
+        <qualifiedname>helios::engine::ecs::query::operator|</qualifiedname>
+        <param>
+          <type><ref refid="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262" kindref="member">GameObjectFilter</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262" kindref="member">GameObjectFilter</ref></type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Performs a bitwise OR operation between two <ref refid="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262" kindref="member">GameObjectFilter</ref> values. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first <ref refid="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262" kindref="member">GameObjectFilter</ref> value. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second <ref refid="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262" kindref="member">GameObjectFilter</ref> value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A <ref refid="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262" kindref="member">GameObjectFilter</ref> value representing the result of the OR operation. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/ecs/query/GameObjectFilter.ixx" line="70" column="32" bodyfile="include/helios/engine/ecs/query/GameObjectFilter.ixx" bodystart="70" bodyend="72"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Entity query utilities for filtering and iterating GameObjects. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This module provides efficient mechanisms for querying GameObjects based on their component composition. It includes <ref refid="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262" kindref="member">GameObjectFilter</ref> for filtering by active/enabled state and GameObjectView for lazy component-based iteration with structured binding support. </para>
+    </detaileddescription>
+    <location file="include/helios/engine/ecs/query/GameObjectFilter.ixx" line="11" column="1"/>
+  </compounddef>
+</doxygen>

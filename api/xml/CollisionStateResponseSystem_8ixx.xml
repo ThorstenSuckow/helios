@@ -1,0 +1,971 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="CollisionStateResponseSystem_8ixx" kind="file" language="C++">
+    <compoundname>CollisionStateResponseSystem.ixx</compoundname>
+    <includes local="no">algorithm</includes>
+    <includes local="no">cassert</includes>
+    <includes local="no">cmath</includes>
+    <includes local="no">format</includes>
+    <includes local="no">helios/helios_config.h</includes>
+    <includes local="no">unordered_set</includes>
+    <includes local="no">vector</includes>
+    <includes refid="PoolIdComponent_8ixx" local="no">helios.engine.modules.pool.components.PoolIdComponent</includes>
+    <includes refid="DespawnCommand_8ixx" local="no">helios.engine.mechanics.spawn.commands.DespawnCommand</includes>
+    <includes refid="CollisionStateComponent_8ixx" local="no">helios.engine.modules.physics.collision.components.CollisionStateComponent</includes>
+    <includes refid="CollisionBehavior_8ixx" local="no">helios.engine.modules.physics.collision.types.CollisionBehavior</includes>
+    <includes refid="CommandBuffer_8ixx" local="no">helios.engine.runtime.messaging.command.CommandBuffer</includes>
+    <includes refid="System_8ixx" local="no">helios.engine.ecs.System</includes>
+    <includes refid="UpdateContext_8ixx" local="no">helios.engine.runtime.world.UpdateContext</includes>
+    <includes refid="GameWorld_8ixx" local="no">helios.engine.runtime.world.GameWorld</includes>
+    <incdepgraph>
+      <node id="31">
+        <label>helios.core.buffer.DoubleBuffer</label>
+        <link refid="DoubleBuffer_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>helios.core.buffer.ReadBuffer</label>
+        <link refid="ReadBuffer_8ixx"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>helios.core.buffer.ReadWriteDoubleBuffer</label>
+        <link refid="ReadWriteDoubleBuffer_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>helios.core.buffer.TypeIndexedDoubleBuffer</label>
+        <link refid="TypeIndexedDoubleBuffer_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>helios.core.buffer.WriteBuffer</label>
+        <link refid="WriteBuffer_8ixx"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>helios.core.data.TypeIndexer</label>
+        <link refid="TypeIndexer_8ixx"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="60">
+        <label>helios.core.spatial.Transform</label>
+        <link refid="Transform_8ixx"/>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>helios.engine.core.data.GameObjectPoolId</label>
+        <link refid="GameObjectPoolId_8ixx"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="78">
+        <label>helios.core.units.Unit</label>
+        <link refid="Unit_8ixx"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>helios.engine.ecs.CloneableComponent</label>
+        <link refid="CloneableComponent_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>helios.engine.ecs.Component</label>
+        <link refid="Component_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>helios.engine.ecs.GameObject</label>
+        <link refid="GameObject_8ixx"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="92">
+        <label>helios.engine.ecs.System</label>
+        <link refid="System_8ixx"/>
+        <childnode refid="44" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>helios.engine.ecs.Updatable</label>
+        <link refid="Updatable_8ixx"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="79">
+        <label>helios.engine.ecs.query.GameObjectFilter</label>
+        <link refid="GameObjectFilter_8ixx"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>helios.engine.mechanics.spawn.commands.DespawnCommand</label>
+        <link refid="DespawnCommand_8ixx"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+      </node>
+      <node id="56">
+        <label>helios.engine.mechanics.spawn.requests.DespawnRequest</label>
+        <link refid="DespawnRequest_8ixx"/>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>helios.engine.mechanics.spawn.requests.SpawnRequest</label>
+        <link refid="SpawnRequest_8ixx"/>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+      </node>
+      <node id="83">
+        <label>helios.engine.modules.physics.collision.components.CollisionStateComponent</label>
+        <link refid="CollisionStateComponent_8ixx"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>include/helios/engine/modules/physics/collision/systems/CollisionStateResponseSystem.ixx</label>
+        <link refid="CollisionStateResponseSystem_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="85">
+        <label>helios.engine.modules.physics.collision.types.CollisionBehavior</label>
+        <link refid="CollisionBehavior_8ixx"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>helios.engine.modules.pool.components.PoolIdComponent</label>
+        <link refid="PoolIdComponent_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="86">
+        <label>helios.engine.runtime.messaging.command.CommandBuffer</label>
+        <link refid="CommandBuffer_8ixx"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+      </node>
+      <node id="91">
+        <label>helios.engine.runtime.messaging.command.TargetedCommand</label>
+        <link refid="TargetedCommand_8ixx"/>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="90">
+        <label>helios.engine.runtime.messaging.command.TargetedCommandDispatcher</label>
+        <link refid="TargetedCommandDispatcher_8ixx"/>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="89">
+        <label>helios.engine.runtime.messaging.command.TypedTargetedCommandDispatcher</label>
+        <link refid="TypedTargetedCommandDispatcher_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
+      </node>
+      <node id="88">
+        <label>helios.engine.runtime.messaging.command.TypedWorldCommandDispatcher</label>
+        <link refid="TypedWorldCommandDispatcher_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+      </node>
+      <node id="82">
+        <label>helios.engine.runtime.messaging.command.WorldCommand</label>
+        <link refid="WorldCommand_8ixx"/>
+      </node>
+      <node id="18">
+        <label>helios.engine.runtime.messaging.command.WorldCommandDispatcher</label>
+        <link refid="WorldCommandDispatcher_8ixx"/>
+      </node>
+      <node id="26">
+        <label>helios.engine.runtime.messaging.event.GameLoopEventBus</label>
+        <link refid="GameLoopEventBus_8ixx"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+      </node>
+      <node id="81">
+        <label>helios.engine.runtime.pooling.GameObjectPool</label>
+        <link refid="GameObjectPool_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="80">
+        <label>helios.engine.runtime.pooling.GameObjectPoolRegistry</label>
+        <link refid="GameObjectPoolRegistry_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>helios.engine.runtime.pooling.PoolRequestHandler</label>
+        <link refid="PoolRequestHandler_8ixx"/>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="57">
+        <label>helios.engine.runtime.pooling.PoolRequestHandlerRegistry</label>
+        <link refid="PoolRequestHandlerRegistry_8ixx"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>helios.engine.runtime.world.GameWorld</label>
+        <link refid="GameWorld_8ixx"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="58">
+        <label>helios.engine.runtime.world.Level</label>
+        <link refid="Level_8ixx"/>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>helios.engine.runtime.world.Manager</label>
+        <link refid="Manager_8ixx"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>helios.engine.runtime.world.UpdateContext</label>
+        <link refid="UpdateContext_8ixx"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>helios.input.InputSnapshot</label>
+        <link refid="InputSnapshot_8ixx"/>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>helios.input.gamepad.GamepadState</label>
+        <link refid="GamepadState_8ixx"/>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="55">
+        <label>helios.math.TransformType</label>
+        <link refid="TransformType_8ixx"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>helios.math</label>
+        <link refid="helios_2math_2__module_8ixx"/>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>helios.math.concepts</label>
+        <link refid="helios_2math_2concepts_2__module_8ixx"/>
+        <childnode refid="51" relation="include">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>helios.math.transform</label>
+        <link refid="helios_2math_2transform_2__module_8ixx"/>
+        <childnode refid="54" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>helios.math.types</label>
+        <link refid="helios_2math_2types_2__module_8ixx"/>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="52">
+        <label>helios.math.utils</label>
+        <link refid="utils_8ixx"/>
+        <childnode refid="53" relation="include">
+        </childnode>
+      </node>
+      <node id="67">
+        <label>helios.rendering.RenderPrototype</label>
+        <link refid="RenderPrototype_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+      </node>
+      <node id="61">
+        <label>helios.rendering.Renderable</label>
+        <link refid="Renderable_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+      </node>
+      <node id="71">
+        <label>helios.rendering.Vertex</label>
+        <link refid="Vertex_8ixx"/>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="69">
+        <label>helios.rendering.asset.shape.Shape</label>
+        <link refid="Shape_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+      </node>
+      <node id="73">
+        <label>helios.rendering.model.Material</label>
+        <link refid="Material_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+      </node>
+      <node id="68">
+        <label>helios.rendering.model.Mesh</label>
+        <link refid="Mesh_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+      </node>
+      <node id="76">
+        <label>helios.rendering.model.config.MaterialProperties</label>
+        <link refid="MaterialProperties_8ixx"/>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+      </node>
+      <node id="66">
+        <label>helios.rendering.model.config.MaterialPropertiesOverride</label>
+        <link refid="MaterialPropertiesOverride_8ixx"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="72">
+        <label>helios.rendering.model.config.MeshConfig</label>
+        <link refid="MeshConfig_8ixx"/>
+        <childnode refid="70" relation="include">
+        </childnode>
+      </node>
+      <node id="70">
+        <label>helios.rendering.model.config.PrimitiveType</label>
+        <link refid="PrimitiveType_8ixx"/>
+      </node>
+      <node id="77">
+        <label>helios.rendering.shader.Shader</label>
+        <link refid="Shader_8ixx"/>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="65">
+        <label>helios.rendering.shader.UniformSemantics</label>
+        <link refid="UniformSemantics_8ixx"/>
+      </node>
+      <node id="62">
+        <label>helios.rendering.shader.UniformValueMap</label>
+        <link refid="UniformValueMap_8ixx"/>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+      </node>
+      <node id="59">
+        <label>helios.scene.SceneNode</label>
+        <link refid="SceneNode_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>helios.util.Guid</label>
+        <link refid="Guid_8ixx"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="75">
+        <label>helios.util.log.ConsoleSink</label>
+        <link refid="ConsoleSink_8ixx"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>helios.util.log.LogManager</label>
+        <link refid="LogManager_8ixx"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>helios.util.log.LogSink</label>
+        <link refid="LogSink_8ixx"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>helios.util.log.Logger</label>
+        <link refid="Logger_8ixx"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="74">
+        <label>helios.util.log</label>
+        <link refid="helios_2util_2log_2__module_8ixx"/>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>algorithm</label>
+      </node>
+      <node id="63">
+        <label>array</label>
+      </node>
+      <node id="33">
+        <label>atomic</label>
+      </node>
+      <node id="3">
+        <label>cassert</label>
+      </node>
+      <node id="49">
+        <label>cinttypes</label>
+      </node>
+      <node id="4">
+        <label>cmath</label>
+      </node>
+      <node id="13">
+        <label>compare</label>
+      </node>
+      <node id="12">
+        <label>cstdint</label>
+      </node>
+      <node id="87">
+        <label>deque</label>
+      </node>
+      <node id="5">
+        <label>format</label>
+      </node>
+      <node id="20">
+        <label>helios/engine/ecs/query/GameObjectView.h</label>
+      </node>
+      <node id="6">
+        <label>helios/helios_config.h</label>
+      </node>
+      <node id="84">
+        <label>iostream</label>
+      </node>
+      <node id="10">
+        <label>memory</label>
+      </node>
+      <node id="37">
+        <label>mutex</label>
+      </node>
+      <node id="53">
+        <label>numbers</label>
+      </node>
+      <node id="17">
+        <label>optional</label>
+      </node>
+      <node id="24">
+        <label>span</label>
+      </node>
+      <node id="25">
+        <label>stdexcept</label>
+      </node>
+      <node id="22">
+        <label>string</label>
+      </node>
+      <node id="42">
+        <label>type_traits</label>
+      </node>
+      <node id="43">
+        <label>typeindex</label>
+      </node>
+      <node id="21">
+        <label>unordered_map</label>
+      </node>
+      <node id="7">
+        <label>unordered_set</label>
+      </node>
+      <node id="64">
+        <label>variant</label>
+      </node>
+      <node id="8">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1CollisionStateResponseSystem" prot="public">helios::engine::modules::physics::collision::systems::CollisionStateResponseSystem</innerclass>
+    <innernamespace refid="namespacehelios">helios</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine">helios::engine</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1modules">helios::engine::modules</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1modules_1_1physics">helios::engine::modules::physics</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision">helios::engine::modules::physics::collision</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems">helios::engine::modules::physics::collision::systems</innernamespace>
+    <briefdescription>
+<para>System for processing collision states and executing collision behaviors. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/**</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>@file<sp/>CollisionStateResponseSystem.ixx</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>@brief<sp/>System<sp/>for<sp/>processing<sp/>collision<sp/>states<sp/>and<sp/>executing<sp/>collision<sp/>behaviors.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">module</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;algorithm&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cassert&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cmath&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;format&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;helios/helios_config.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;unordered_set&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8modules_8physics_8collision_8systems_8CollisionStateResponseSystem" kindref="compound">helios.engine.modules.physics.collision.systems.CollisionStateResponseSystem</ref>;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8runtime_8world_8GameWorld" kindref="compound">helios.engine.runtime.world.GameWorld</ref>;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8runtime_8world_8UpdateContext" kindref="compound">helios.engine.runtime.world.UpdateContext</ref>;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8ecs_8System" kindref="compound">helios.engine.ecs.System</ref>;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8runtime_8messaging_8command_8CommandBuffer" kindref="compound">helios.engine.runtime.messaging.command.CommandBuffer</ref>;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8modules_8physics_8collision_8types_8CollisionBehavior" kindref="compound">helios.engine.modules.physics.collision.types.CollisionBehavior</ref>;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8modules_8physics_8collision_8components_8CollisionStateComponent" kindref="compound">helios.engine.modules.physics.collision.components.CollisionStateComponent</ref>;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8mechanics_8spawn_8commands_8DespawnCommand" kindref="compound">helios.engine.mechanics.spawn.commands.DespawnCommand</ref>;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8modules_8pool_8components_8PoolIdComponent" kindref="compound">helios.engine.modules.pool.components.PoolIdComponent</ref>;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components" kindref="compound">helios::engine::modules::physics::collision::components</ref>;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types" kindref="compound">helios::engine::modules::physics::collision::types</ref>;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1mechanics_1_1spawn_1_1commands" kindref="compound">helios::engine::mechanics::spawn::commands</ref>;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems" kindref="compound">helios::engine::modules::physics::collision::systems</ref><sp/>{</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>System<sp/>that<sp/>processes<sp/>collision<sp/>states<sp/>and<sp/>executes<sp/>configured<sp/>behaviors.</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>This<sp/>system<sp/>reads<sp/>the<sp/>CollisionStateComponent<sp/>of<sp/>each<sp/>entity<sp/>to<sp/>determine</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>how<sp/>to<sp/>respond<sp/>to<sp/>detected<sp/>collisions.<sp/>Based<sp/>on<sp/>the<sp/>configured<sp/>CollisionBehavior,</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>the<sp/>system<sp/>issues<sp/>appropriate<sp/>commands<sp/>(e.g.,<sp/>DespawnCommand<sp/>for<sp/>entities<sp/>marked</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>with<sp/>Despawn<sp/>behavior).</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>system<sp/>requires<sp/>entities<sp/>to<sp/>have<sp/>both<sp/>a<sp/>CollisionStateComponent<sp/>(for<sp/>collision</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>data)<sp/>and<sp/>a<sp/>PoolIdComponent<sp/>(for<sp/>pool-based<sp/>lifecycle<sp/>management).</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Supported<sp/>behaviors:</highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>**Despawn:**<sp/>Issues<sp/>a<sp/>DespawnCommand<sp/>to<sp/>return<sp/>the<sp/>entity<sp/>to<sp/>its<sp/>object<sp/>pool.</highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>system<sp/>should<sp/>run<sp/>after<sp/>collision<sp/>detection<sp/>but<sp/>before<sp/>collision<sp/>state<sp/>clearing.</highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55" refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1CollisionStateResponseSystem" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1CollisionStateResponseSystem" kindref="compound">CollisionStateResponseSystem</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1ecs_1_1System" kindref="compound">helios::engine::ecs::System</ref><sp/>{</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Processes<sp/>collision<sp/>states<sp/>and<sp/>issues<sp/>response<sp/>commands.</highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Iterates<sp/>over<sp/>all<sp/>entities<sp/>with<sp/>CollisionStateComponent<sp/>and<sp/>PoolIdComponent.</highlight></codeline>
+<codeline lineno="63"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>For<sp/>entities<sp/>with<sp/>active<sp/>collisions,<sp/>reads<sp/>the<sp/>collision<sp/>behavior<sp/>and<sp/>issues</highlight></codeline>
+<codeline lineno="64"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>appropriate<sp/>commands<sp/>to<sp/>the<sp/>command<sp/>buffer.</highlight></codeline>
+<codeline lineno="65"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>updateContext<sp/>Context<sp/>providing<sp/>access<sp/>to<sp/>the<sp/>command<sp/>buffer<sp/>and<sp/>world.</highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68" refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1CollisionStateResponseSystem_1a93a2954ef3b5d76fbaeb0ad878afb5a7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1CollisionStateResponseSystem_1a93a2954ef3b5d76fbaeb0ad878afb5a7" kindref="member">update</ref>(<ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref>&amp;<sp/>updateContext)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>[entity,<sp/>csc,<sp/>pic]<sp/>:<sp/><ref refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" kindref="member">gameWorld_</ref>-&gt;find&lt;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionStateComponent" kindref="compound">CollisionStateComponent</ref>,</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1modules_1_1pool_1_1components_1_1PoolIdComponent" kindref="compound">helios::engine::modules::pool::components::PoolIdComponent</ref></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&gt;().each())<sp/>{</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!csc-&gt;hasCollision())<sp/>{</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">continue</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2" kindref="member">CollisionBehavior</ref><sp/>collisionBehavior<sp/>=<sp/>csc-&gt;collisionBehavior();</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(collisionBehavior<sp/>==<sp/><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2a573a38c8ee30e1c0d6ad84ce4f965cf0" kindref="member">CollisionBehavior::Despawn</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>updateContext.commandBuffer().add&lt;<ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1commands_1_1DespawnCommand" kindref="compound">DespawnCommand</ref>&gt;(</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>entity-&gt;guid(),</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pic-&gt;gameObjectPoolId()</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="include/helios/engine/modules/physics/collision/systems/CollisionStateResponseSystem.ixx"/>
+  </compounddef>
+</doxygen>

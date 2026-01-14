@@ -1,4 +1,4 @@
 var ScaleClearSystem_8ixx =
 [
-    [ "helios::engine::game::systems::post::ScaleClearSystem", "classhelios_1_1engine_1_1game_1_1systems_1_1post_1_1ScaleClearSystem.html", "classhelios_1_1engine_1_1game_1_1systems_1_1post_1_1ScaleClearSystem" ]
+    [ "helios::engine::modules::spatial::transform::systems::ScaleClearSystem", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1ScaleClearSystem.html", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1ScaleClearSystem" ]
 ];

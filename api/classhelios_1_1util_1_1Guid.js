@@ -1,5 +1,6 @@
 var classhelios_1_1util_1_1Guid =
 [
+    [ "Guid", "classhelios_1_1util_1_1Guid.html#a9ac7d9af1cce2125dd8d19c22330c928", null ],
     [ "generate", "classhelios_1_1util_1_1Guid.html#abec6ac186114474b23bfb8369e4080a9", null ],
     [ "hash", "classhelios_1_1util_1_1Guid.html#a2be0de1a0c0c0d321459531e9b308c34", null ],
     [ "operator!=", "classhelios_1_1util_1_1Guid.html#a2978dd83ba248095e02b05d8a33271d0", null ],

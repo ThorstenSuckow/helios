@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2ecs_2query_2README_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1ecs_1_1query">helios::engine::ecs::query</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::ecs::query</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Entity<sp/>query<sp/>utilities<sp/>for<sp/>filtering<sp/>and<sp/>iterating<sp/>GameObjects<sp/>by<sp/>component.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>efficient<sp/>mechanisms<sp/>for<sp/>querying<sp/>GameObjects<sp/>based<sp/>on<sp/>their<sp/>component<sp/>composition.<sp/>The<sp/>query<sp/>system<sp/>supports<sp/>lazy<sp/>evaluation<sp/>and<sp/>flexible<sp/>filtering.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`GameObjectFilter`<sp/>|<sp/>Bitmask<sp/>enum<sp/>for<sp/>filtering<sp/>by<sp/>active<sp/>state<sp/>and<sp/>component<sp/>enabled<sp/>state<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`GameObjectView`<sp/>|<sp/>Lazy<sp/>range<sp/>adapter<sp/>for<sp/>component-based<sp/>iteration<sp/>with<sp/>structured<sp/>bindings<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>GameObjectFilter</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Filter<sp/>options<sp/>for<sp/>entity<sp/>queries:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Flag<sp/>|<sp/>Effect<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|------|--------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`Active`<sp/>|<sp/>Only<sp/>`obj-&gt;isActive()<sp/>==<sp/>true`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`Inactive`<sp/>|<sp/>Only<sp/>`obj-&gt;isActive()<sp/>==<sp/>false`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ComponentEnabled`<sp/>|<sp/>Only<sp/>objects<sp/>where<sp/>queried<sp/>components<sp/>are<sp/>enabled<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ComponentDisabled`<sp/>|<sp/>Only<sp/>objects<sp/>where<sp/>queried<sp/>components<sp/>are<sp/>disabled<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Filters<sp/>can<sp/>be<sp/>combined:<sp/>`Active<sp/>|<sp/>ComponentEnabled`<sp/>(default).</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage<sp/>Example</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.engine.ecs.query.GameObjectFilter;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">using<sp/>helios.engine.ecs.query.GameObjectFilter;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Default:<sp/>active<sp/>objects<sp/>with<sp/>enabled<sp/>components</highlight></codeline>
+<codeline><highlight class="normal">for<sp/>(auto*<sp/>obj<sp/>:<sp/>gameWorld.find&lt;Move2DComponent&gt;())<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>...</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Custom<sp/>filter:<sp/>inactive<sp/>objects<sp/>only</highlight></codeline>
+<codeline><highlight class="normal">for<sp/>(auto*<sp/>obj<sp/>:<sp/>gameWorld.find&lt;HealthComponent&gt;(GameObjectFilter.Inactive))<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Process<sp/>inactive<sp/>entities<sp/>(e.g.,<sp/>respawn<sp/>logic)</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Using<sp/>each()<sp/>for<sp/>structured<sp/>bindings</highlight></codeline>
+<codeline><highlight class="normal">for<sp/>(auto<sp/>[obj,<sp/>move,<sp/>collision]<sp/>:<sp/>gameWorld.find&lt;Move2DComponent,<sp/>CollisionComponent&gt;().each())<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>move.get().setVelocity({1.0f,<sp/>0.0f,<sp/>0.0f});</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Implementation<sp/>Note</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">`GameObjectView`<sp/>is<sp/>implemented<sp/>as<sp/>a<sp/>`.h`<sp/>header<sp/>instead<sp/>of<sp/>a<sp/>`.ixx`<sp/>module<sp/>interface<sp/>unit<sp/>due<sp/>to<sp/>MSVC<sp/>Internal<sp/>Compiler<sp/>Errors<sp/>(ICE)<sp/>when<sp/>using<sp/>structured<sp/>bindings<sp/>with<sp/>the<sp/>`each()`<sp/>iterator<sp/>in<sp/>module<sp/>contexts.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Related<sp/>Modules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>`helios.engine.runtime.world.GameWorld`<sp/>—<sp/>Provides<sp/>`find&lt;Components...&gt;()`<sp/>methods</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`helios.engine.ecs.GameObject`<sp/>—<sp/>Entity<sp/>container<sp/>being<sp/>queried</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`helios.engine.ecs.Component`<sp/>—<sp/>Base<sp/>class<sp/>for<sp/>component<sp/>types</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::ecs::query</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Entity<sp/>query<sp/>utilities<sp/>for<sp/>filtering<sp/>and<sp/>iterating<sp/>GameObjects.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>This<sp/>module<sp/>provides<sp/>efficient<sp/>mechanisms<sp/>for<sp/>querying<sp/>GameObjects<sp/>based<sp/>on<sp/>their<sp/>component<sp/>composition.<sp/>It<sp/>includes<sp/>GameObjectFilter<sp/>for<sp/>filtering<sp/>by<sp/>active/enabled<sp/>state<sp/>and<sp/>GameObjectView<sp/>for<sp/>lazy<sp/>component-based<sp/>iteration<sp/>with<sp/>structured<sp/>binding<sp/>support.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+    </programlisting>
+    <location file="include/helios/engine/ecs/query/README.md"/>
+  </compounddef>
+</doxygen>

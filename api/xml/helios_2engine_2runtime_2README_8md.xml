@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2runtime_2README_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime">helios::engine::runtime</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::runtime</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Runtime<sp/>infrastructure<sp/>for<sp/>game<sp/>execution,<sp/>world<sp/>management,<sp/>and<sp/>lifecycle<sp/>orchestration.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>the<sp/>core<sp/>runtime<sp/>components<sp/>that<sp/>manage<sp/>game<sp/>execution.<sp/>It<sp/>includes<sp/>world<sp/>state<sp/>management,<sp/>messaging<sp/>infrastructure<sp/>for<sp/>commands<sp/>and<sp/>events,<sp/>object<sp/>pooling<sp/>for<sp/>efficient<sp/>memory<sp/>reuse,<sp/>and<sp/>the<sp/>game<sp/>loop<sp/>orchestration<sp/>system.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Submodules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Submodule<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-----------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`gameloop/`<sp/>|<sp/>Phase-based<sp/>game<sp/>loop<sp/>with<sp/>configurable<sp/>passes<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`world/`<sp/>|<sp/>GameWorld,<sp/>Level,<sp/>UpdateContext,<sp/>and<sp/>system<sp/>registration<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`messaging/`<sp/>|<sp/>Command<sp/>buffer,<sp/>dispatchers,<sp/>and<sp/>event<sp/>buses<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`pooling/`<sp/>|<sp/>GameObject<sp/>pools<sp/>and<sp/>request<sp/>handlers<sp/>for<sp/>object<sp/>recycling<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`factory/`<sp/>|<sp/>GameObject<sp/>creation<sp/>from<sp/>prefab<sp/>templates<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`api/`<sp/>|<sp/>(Planned)<sp/>Stable<sp/>runtime<sp/>entry<sp/>points<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Architecture</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">runtime/</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>gameloop/<sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Game<sp/>loop<sp/>orchestration<sp/>(Pre/Main/Post<sp/>phases)</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>world/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameWorld,<sp/>Level,<sp/>UpdateContext</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>messaging/<sp/><sp/><sp/><sp/><sp/>#<sp/>Commands<sp/>+<sp/>Events<sp/>(buffer,<sp/>dispatch,<sp/>bus)</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>pooling/<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameObject<sp/>pools<sp/>and<sp/>request<sp/>handlers</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>factory/<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameObjectFactory<sp/>for<sp/>prefab<sp/>instantiation</highlight></codeline>
+<codeline><highlight class="normal">└──<sp/>api/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>(Future)<sp/>Stable<sp/>entry<sp/>points</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Concepts</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**GameWorld**<sp/>owns<sp/>all<sp/>GameObjects<sp/>and<sp/>provides<sp/>query<sp/>methods<sp/>for<sp/>component-based<sp/>iteration.<sp/>It<sp/>manages<sp/>the<sp/>lifecycle<sp/>of<sp/>entities<sp/>and<sp/>coordinates<sp/>with<sp/>pools<sp/>and<sp/>managers.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**GameLoop**<sp/>orchestrates<sp/>the<sp/>frame<sp/>update<sp/>cycle<sp/>through<sp/>three<sp/>phases<sp/>(Pre,<sp/>Main,<sp/>Post),<sp/>each<sp/>containing<sp/>passes<sp/>that<sp/>execute<sp/>systems<sp/>in<sp/>order.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**CommandBuffer**<sp/>collects<sp/>commands<sp/>during<sp/>a<sp/>phase<sp/>and<sp/>flushes<sp/>them<sp/>to<sp/>dispatchers<sp/>after<sp/>each<sp/>phase<sp/>completes.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**GameLoopEventBus**<sp/>manages<sp/>phase-level<sp/>and<sp/>pass-level<sp/>event<sp/>propagation<sp/>using<sp/>a<sp/>double-buffer<sp/>pattern.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::runtime</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Runtime<sp/>infrastructure<sp/>for<sp/>game<sp/>execution<sp/>and<sp/>lifecycle<sp/>orchestration.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>the<sp/>core<sp/>runtime<sp/>components<sp/>including<sp/>GameWorld,<sp/>GameLoop,<sp/>messaging<sp/>(commands/events),<sp/>and<sp/>object<sp/>pooling<sp/>systems.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+<codeline></codeline>
+    </programlisting>
+    <location file="include/helios/engine/runtime/README.md"/>
+  </compounddef>
+</doxygen>

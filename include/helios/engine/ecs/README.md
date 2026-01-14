@@ -13,7 +13,7 @@ This module provides the foundational classes for the composition-based game arc
 | `GameObject` | Container for components representing a game entity |
 | `Component` | Base class for data containers attached to GameObjects |
 | `CloneableComponent` | CRTP base for components that support cloning |
-| `System` | Abstract base for logic processors operating on GameWorld |
+| `System` | Abstract base for logic processors (registered with `GameLoop`) |
 | `Updatable` | Interface for per-frame updatable objects |
 
 ## Submodules

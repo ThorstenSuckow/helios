@@ -90,6 +90,7 @@ This project follows a consistent C++ syntax and formatting style to improve rea
 - Trailing whitespace: Avoid any trailing whitespace on lines.
 - Header/include order in module fragments: `module;`, then `#include`s, then `export module` / `module` declaration, then `import`s.
 - Comments: Prefer concise `//` comments for short notes, and `/** ... */` Doxygen comments for public API elements.
+- **No inline comments:** Do not place comments on the same line as code. Always place comments on a separate line above the element they describe.
 
 Code examples (use these as canonical examples):
 
@@ -197,6 +198,47 @@ Splitter / comment for namespace end
 ### Documentation
 - Public API must include Doxygen comments (in the interface `.ixx`).
 - Provide a short description, parameters, return values, and notes about side effects or threading when applicable.
+
+### README Files
+Each module directory should contain a `README.md` file following this structure:
+
+1. **Title:** Use the C++ namespace as the heading (with `::` separators), prefixed with `#`:
+   ```markdown
+   # helios::engine::modules::physics
+   ```
+   Not the module name (`helios.engine.modules.physics`).
+
+2. **Description:** A brief paragraph describing the module's purpose.
+
+3. **Doxygen Section:** At the end, include a collapsible Doxygen block:
+   ```markdown
+   ---
+   <details>
+   <summary>Doxygen</summary><p>
+   @namespace helios::engine::modules::physics
+   @brief Physics simulation and collision detection.
+   @details Extended description...
+   </p></details>
+   ```
+
+4. **Consistency:** The namespace in the title and `@namespace` tag must match exactly.
+
+Example README:
+```markdown
+# helios::window
+
+Window management and platform abstraction layer.
+
+This module provides the abstract Window interface and related event handling...
+
+---
+<details>
+<summary>Doxygen</summary><p>
+@namespace helios::window
+@brief Window management and platform abstraction.
+@details Provides the Window base class and event types for window lifecycle...
+</p></details>
+```
 
 ### Tests, examples, benchmarks
 - Tests live under `tests/helios/...`, benchmarks under `benchmarks/helios/...`, and examples under `examples/`.

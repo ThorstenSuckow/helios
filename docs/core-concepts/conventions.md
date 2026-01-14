@@ -129,6 +129,96 @@ Perspective projection uses standard parameters:
 
 Both `zNear` and `zFar` are specified as positive values representing distances from the camera, regardless of the coordinate system handedness.
 
+## GameObject Active State
+
+### The `isActive()` Flag
+
+Every `GameObject` has an `isActive()` flag that determines whether it participates in the game loop:
+
+```cpp
+bool isActive() const noexcept;
+void setActive(bool active) noexcept;
+```
+
+### Behavior
+
+When a GameObject is **inactive**:
+
+- It **exists** in the GameWorld and retains all its components and state
+- It is **not rendered** (SceneNode is deactivated)
+- It is **not processed** by systems (movement, physics, collision detection)
+- It does **not participate** in gameplay calculations
+
+This is essential for object pooling where pre-allocated objects wait in an inactive state until acquired.
+
+### System Filtering
+
+By default, systems should only process active GameObjects. Use `GameObjectFilter` to filter queries:
+
+```cpp
+import helios.engine.ecs.query.GameObjectFilter;
+
+using helios::engine::ecs::query::GameObjectFilter;
+
+void update(UpdateContext& ctx) noexcept override {
+    // Filter for active GameObjects with enabled components
+    auto filter = GameObjectFilter::Active | GameObjectFilter::ComponentEnabled;
+    
+    for (auto [obj, component] : gameWorld_->find<MyComponent>(filter).each()) {
+        // Only active objects with enabled components
+    }
+}
+```
+
+Alternatively, filter manually within the loop:
+
+```cpp
+void update(UpdateContext& ctx) noexcept override {
+    for (auto [obj, component] : gameWorld_->find<MyComponent>().each()) {
+        if (!obj->isActive()) {
+            continue;  // Skip inactive objects
+        }
+        if (component.isDisabled()) {
+            continue;  // Skip disabled components
+        }
+        // Process active object with enabled component...
+    }
+}
+```
+
+### Lifecycle Callbacks
+
+Components receive lifecycle notifications when their owning GameObject changes state:
+
+```cpp
+class MyComponent : public Component {
+    void onActivate() noexcept override {
+        // Called when GameObject becomes active
+    }
+    
+    void onDeactivate() noexcept override {
+        // Called when GameObject becomes inactive
+    }
+    
+    void onAcquire() noexcept override {
+        // Called when acquired from a pool
+    }
+    
+    void onRelease() noexcept override {
+        // Called when released back to a pool
+    }
+};
+```
+
+### Pool Integration
+
+The active state integrates with the object pool system:
+
+1. **Pool Creation:** Objects are created inactive
+2. **Acquire:** Object is activated and `onAcquire()` is called on components
+3. **Gameplay:** Object participates in all systems while active
+4. **Release:** Object is deactivated and `onRelease()` is called, then returned to pool
+
 ## Units System
 
 ### Standard Units
@@ -152,7 +242,7 @@ This provides intuitive world-scale dimensions that match real-world measurement
 ### Usage Example
 
 ```cpp
-import helios.core.units;
+import helios.core.units.Unit;
 
 using namespace helios::core::units;
 
@@ -177,7 +267,7 @@ constexpr float HELIOS_UNITS_PER_METER = 1.0f;
 
 ## Related Modules
 
-- `helios.core.units` — Unit conversion and constants
+- `helios.core.units.Unit` — Unit conversion and constants
 - `helios.math.types` — Core vector and matrix types (`vec3f`, `mat4f`)
 - `helios.math.utils` — Mathematical utility functions (`perspective`, `radians`, `degrees`)
 - `helios.scene.Transform` — Encapsulates translation, rotation, and scale

@@ -4,11 +4,11 @@
  */
 module;
 
-export module helios.engine.mechanics.combat.ProjectileSpawnRequest;
+export module helios.engine.mechanics.combat.requests.ProjectileSpawnRequest;
 
 import helios.math;
 
-export namespace helios::engine::mechanics::combat {
+export namespace helios::engine::mechanics::combat::requests {
 
     /**
      * @brief Data transfer object for projectile spawn requests.

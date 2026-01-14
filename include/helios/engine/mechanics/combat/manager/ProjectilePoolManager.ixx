@@ -40,7 +40,7 @@ import helios.engine.runtime.pooling.PoolRequestHandler;
 
 import helios.engine.modules.pool.components.PoolIdComponent;
 
-import helios.engine.mechanics.combat.ProjectileSpawnRequest;
+import helios.engine.mechanics.combat.requests.ProjectileSpawnRequest;
 
 export namespace helios::engine::mechanics::combat::manager {
 
@@ -85,7 +85,7 @@ export namespace helios::engine::mechanics::combat::manager {
         /**
          * @brief Queue of pending projectile spawn requests.
          */
-        std::vector<ProjectileSpawnRequest> requests_;
+        std::vector<helios::engine::mechanics::combat::requests::ProjectileSpawnRequest> requests_;
 
         /**
          * @brief Condition that determines spawn budget per frame.
@@ -123,7 +123,7 @@ export namespace helios::engine::mechanics::combat::manager {
          */
         void prepareBullet(
             helios::engine::ecs::GameObject* go,
-            const ProjectileSpawnRequest& spawnRequest
+            const helios::engine::mechanics::combat::requests::ProjectileSpawnRequest& spawnRequest
         ) const noexcept {
 
             auto* m2c = go->get<helios::engine::modules::physics::motion::components::Move2DComponent>();
@@ -264,7 +264,7 @@ export namespace helios::engine::mechanics::combat::manager {
          *
          * @param request The spawn request containing position, direction, and intensity.
          */
-        void addRequest(const ProjectileSpawnRequest& request) {
+        void addRequest(const helios::engine::mechanics::combat::requests::ProjectileSpawnRequest& request) {
             requests_.push_back(request);
         }
 

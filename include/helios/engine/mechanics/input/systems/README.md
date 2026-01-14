@@ -1,18 +1,22 @@
-# helios::engine::modules::input::components
+# helios::engine::mechanics::input::systems
 
-Input handling components that translate device input into game commands.
+Input processing systems that translate device input into game commands.
 
-This module contains components that process input from various devices and generate Command objects for the game logic system.
+## Overview
 
+This module contains systems that process input from various devices (gamepads, keyboards) and generate Command objects for the game logic layer.
+
+## Key Classes
+
+| Class | Purpose |
+|-------|---------|
+| `TwinStickInputSystem` | Processes twin-stick gamepad input for movement and aiming |
 
 ---
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::modules::input::components
-@brief Input handling components that translate device input into game commands.
-@details This module contains components that process input from various devices and generate Command objects for the game logic system.
+@namespace helios::engine::mechanics::input::systems
+@brief Input processing systems that translate device input into game commands.
+@details This module contains systems that process input from various devices and generate Command objects for the game logic system.
 </p></details>
-
-
-
 

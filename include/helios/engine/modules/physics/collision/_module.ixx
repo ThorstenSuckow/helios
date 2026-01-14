@@ -4,6 +4,7 @@
  */
 export module helios.engine.modules.physics.collision;
 
+export import helios.engine.modules.physics.collision.types;
 export import helios.engine.modules.physics.collision.components;
 export import helios.engine.modules.physics.collision.events;
 export import helios.engine.modules.physics.collision.systems;

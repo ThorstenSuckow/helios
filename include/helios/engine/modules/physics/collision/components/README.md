@@ -1,4 +1,4 @@
-# helios::engine::game::physics::collision::components
+# helios::engine::modules::physics::collision::components
 
 Collider components for collision detection.
 
@@ -32,7 +32,7 @@ collision.setTriggerCollisionMask(LAYER_ENEMY | LAYER_POWER_UP);
 
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::game::physics::collision::components
+@namespace helios::engine::modules::physics::collision::components
 @brief Collider components for collision detection.
 @details This namespace contains components that define entity collision properties including bounds, layer membership, and per-frame collision state.
 </p></details>

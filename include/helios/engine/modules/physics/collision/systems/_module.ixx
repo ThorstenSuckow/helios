@@ -1,11 +1,11 @@
 /**
  * @file _module.ixx
- * @brief Aggregate module for helios::engine::game::physics::collision::systems namespace.
+ * @brief Aggregate module for helios::engine::modules::physics::collision::systems namespace.
  */
-export module helios.engine.game.physics.collision.systems;
+export module helios.engine.modules.physics.collision.systems;
 
-export import helios.engine.game.physics.collision.systems.BoundsUpdateSystem;
-export import helios.engine.game.physics.collision.systems.CollisionStateClearSystem;
-export import helios.engine.game.physics.collision.systems.CollisionStateResponseSystem;
-export import helios.engine.game.physics.collision.systems.GridCollisionDetectionSystem;
+export import helios.engine.modules.physics.collision.systems.BoundsUpdateSystem;
+export import helios.engine.modules.physics.collision.systems.CollisionStateClearSystem;
+export import helios.engine.modules.physics.collision.systems.CollisionStateResponseSystem;
+export import helios.engine.modules.physics.collision.systems.GridCollisionDetectionSystem;
 

@@ -59,5 +59,5 @@ namespace helios::engine::runtime::world {
         return std::move(node.mapped());
     }
 
-} // namespace helios::engine::game
+} // namespace helios::engine::modules
 

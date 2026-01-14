@@ -1,4 +1,4 @@
-# helios::engine::game::physics::events
+# helios::engine::modules::physics::events
 
 Physics event types for collision and trigger notifications.
 
@@ -7,7 +7,7 @@ This namespace contains event structures dispatched by the collision detection s
 
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::game::physics::events
+@namespace helios::engine::modules::physics::events
 @brief Physics event types for collision and trigger notifications.
 @details Contains event structures dispatched by the collision detection system for
 consumption by gameplay systems.

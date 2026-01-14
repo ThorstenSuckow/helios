@@ -24,12 +24,12 @@ import helios.engine.mechanics.spawn.logic.SpawnCondition;
 import helios.engine.mechanics.spawn.requests.SpawnRequest;
 import helios.engine.mechanics.spawn.requests.DespawnRequest;
 
-import helios.engine.game.physics.motion.components.Move2DComponent;
-import helios.engine.game.physics.motion.components.SteeringComponent;
-import helios.engine.game.physics.motion.components.RotationStateComponent;
-import helios.engine.game.physics.motion.components.DirectionComponent;
+import helios.engine.modules.physics.motion.components.Move2DComponent;
+import helios.engine.modules.physics.motion.components.SteeringComponent;
+import helios.engine.modules.physics.motion.components.RotationStateComponent;
+import helios.engine.modules.physics.motion.components.DirectionComponent;
 
-import helios.engine.game.spatial.transform.components.TranslationStateComponent;
+import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
 
 import helios.engine.runtime.pooling.GameObjectPool;
 import helios.engine.core.data.GameObjectPoolId;
@@ -38,7 +38,7 @@ import helios.engine.runtime.world.GameWorld;
 
 import helios.engine.runtime.pooling.PoolRequestHandler;
 
-import helios.engine.game.pool.components.PoolIdComponent;
+import helios.engine.modules.pool.components.PoolIdComponent;
 
 import helios.engine.mechanics.combat.ProjectileSpawnRequest;
 
@@ -126,8 +126,8 @@ export namespace helios::engine::mechanics::combat::manager {
             const ProjectileSpawnRequest& spawnRequest
         ) const noexcept {
 
-            auto* m2c = go->get<helios::engine::game::physics::motion::components::Move2DComponent>();
-            auto* tsc = go->get<helios::engine::game::spatial::transform::components::TranslationStateComponent>();
+            auto* m2c = go->get<helios::engine::modules::physics::motion::components::Move2DComponent>();
+            auto* tsc = go->get<helios::engine::modules::spatial::transform::components::TranslationStateComponent>();
 
             if (m2c && tsc) {
                 m2c->setMoveIntent(spawnRequest.direction, spawnRequest.throttle);
@@ -135,8 +135,8 @@ export namespace helios::engine::mechanics::combat::manager {
                 tsc->setTranslation(spawnRequest.location);
             }
 
-            auto* dc = go->get<helios::engine::game::physics::motion::components::DirectionComponent>();
-            auto* hc = go->get<helios::engine::game::physics::motion::components::SteeringComponent>();
+            auto* dc = go->get<helios::engine::modules::physics::motion::components::DirectionComponent>();
+            auto* hc = go->get<helios::engine::modules::physics::motion::components::SteeringComponent>();
 
            // rsc->setHeadingRotationAngle(spawnRequest.direction);
 

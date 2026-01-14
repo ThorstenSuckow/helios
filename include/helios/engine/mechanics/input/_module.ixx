@@ -1,8 +1,8 @@
 /**
  * @file _module.ixx
- * @brief Aggregate module for helios::engine::game::input namespace.
+ * @brief Aggregate module for helios::engine::modules::input namespace.
  */
 
-export module helios.engine.game.input;
+export module helios.engine.modules.input;
 
-export import helios.engine.game.input.components;
+export import helios.engine.modules.input.components;

@@ -15,7 +15,7 @@ import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.pooling.GameObjectPool;
 import helios.engine.core.data.GameObjectPoolId;
 
-import helios.engine.game.pool.components.PoolIdComponent;
+import helios.engine.modules.pool.components.PoolIdComponent;
 
 export namespace helios::engine::runtime::factory {
 
@@ -65,7 +65,7 @@ export namespace helios::engine::runtime::factory {
             std::unique_ptr<helios::engine::ecs::GameObject> gameObjectPrefab
         ) : gameObjectPrefab_(std::move(gameObjectPrefab)) {
             assert(gameObjectPrefab_ != nullptr && "unexpected nullptr for prefab");
-            assert(gameObjectPrefab_->get<helios::engine::game::pool::components::PoolIdComponent>()
+            assert(gameObjectPrefab_->get<helios::engine::modules::pool::components::PoolIdComponent>()
                 && "Prefab should provide PoolIdComponent");
 
         }

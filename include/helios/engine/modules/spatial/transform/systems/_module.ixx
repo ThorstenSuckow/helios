@@ -1,11 +1,11 @@
 /**
  * @file _module.ixx
- * @brief Aggregate module for helios::engine::game::spatial::transform::systems namespace.
+ * @brief Aggregate module for helios::engine::modules::spatial::transform::systems namespace.
  */
-export module helios.engine.game.spatial.transform.systems;
+export module helios.engine.modules.spatial.transform.systems;
 
-export import helios.engine.game.spatial.transform.systems.postproc;
+export import helios.engine.modules.spatial.transform.systems.postproc;
 
-export import helios.engine.game.spatial.transform.systems.ComposeTransformSystem;
-export import helios.engine.game.spatial.transform.systems.ScaleSystem;
+export import helios.engine.modules.spatial.transform.systems.ComposeTransformSystem;
+export import helios.engine.modules.spatial.transform.systems.ScaleSystem;
 

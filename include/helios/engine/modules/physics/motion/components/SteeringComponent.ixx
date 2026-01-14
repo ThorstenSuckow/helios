@@ -9,7 +9,7 @@ module;
 #include <cmath>
 #include <memory>
 
-export module helios.engine.game.physics.motion.components.SteeringComponent;
+export module helios.engine.modules.physics.motion.components.SteeringComponent;
 
 import helios.scene.SceneNode;
 import helios.util.Guid;
@@ -18,10 +18,10 @@ import helios.math;
 import helios.core.units.Unit;
 import helios.engine.ecs.CloneableComponent;
 import helios.engine.ecs.GameObject;
-import helios.engine.game.scene.components.SceneNodeComponent;
+import helios.engine.modules.scene.components.SceneNodeComponent;
 
 
-export namespace helios::engine::game::physics::motion::components {
+export namespace helios::engine::modules::physics::motion::components {
 
     /**
      * @brief Component that manages the heading (orientation) of an entity.

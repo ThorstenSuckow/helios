@@ -1,9 +1,9 @@
 /**
  * @file _module.ixx
- * @brief Aggregate module for helios::engine::game::physics namespace.
+ * @brief Aggregate module for helios::engine::modules::physics namespace.
  */
-export module helios.engine.game.physics;
+export module helios.engine.modules.physics;
 
-export import helios.engine.game.physics.collision;
-export import helios.engine.game.physics.motion;
+export import helios.engine.modules.physics.collision;
+export import helios.engine.modules.physics.motion;
 

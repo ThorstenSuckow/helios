@@ -6,11 +6,11 @@ module;
 
 #include <cstdint>
 
-export module helios.engine.game.physics.collision.types.CollisionBehavior;
+export module helios.engine.modules.physics.collision.types.CollisionBehavior;
 
 
 
-export namespace helios::engine::game::physics::collision::types {
+export namespace helios::engine::modules::physics::collision::types {
 
     /**
      * @brief Defines how an entity responds to a collision event.

@@ -1,4 +1,4 @@
-# helios::engine::game::model::components
+# helios::engine::modules::model::components
 
 Components for 3D model management and spatial representation.
 
@@ -13,7 +13,7 @@ This module contains components related to 3D models and spatial representation 
 ---
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::game::model::components
+@namespace helios::engine::modules::model::components
 @brief Components for 3D model management and spatial representation.
 @details This module contains components related to 3D models and their spatial bounds within the game engine.
 </p></details>

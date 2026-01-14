@@ -1,6 +1,6 @@
 /**
  * @file _module.ixx
- * @brief Aggregate module for helios::engine::game namespace.
+ * @brief Aggregate module for helios::engine::modules namespace.
  */
 export module helios.engine.game;
 
@@ -26,12 +26,12 @@ export import helios.engine.runtime.messaging.command.CommandBuffer;
 export import helios.engine.ecs.System;
 
 // Aggregate sub-modules
-export import helios.engine.game.gameplay;
-export import helios.engine.game.physics;
-export import helios.engine.game.spatial;
-export import helios.engine.game.rendering;
-export import helios.engine.game.scene;
-export import helios.engine.game.model;
-export import helios.engine.game.input;
-export import helios.engine.game.pool;
+export import helios.engine.modules.gameplay;
+export import helios.engine.modules.physics;
+export import helios.engine.modules.spatial;
+export import helios.engine.modules.rendering;
+export import helios.engine.modules.scene;
+export import helios.engine.modules.model;
+export import helios.engine.modules.input;
+export import helios.engine.modules.pool;
 

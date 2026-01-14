@@ -1,4 +1,4 @@
-# helios::engine::game
+# helios::engine::modules
 
 Domain-specific components, systems, and gameplay mechanics built on top of the ECS architecture.
 
@@ -69,7 +69,7 @@ gameLoop.phase(PhaseType.Main)
 
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::game
+@namespace helios::engine::modules
 @brief Domain-specific components, systems, and gameplay mechanics.
 @details This namespace provides concrete game logic implementations built on top of the ECS architecture. It includes physics systems (collision, motion), gameplay mechanics (combat, spawn, bounds), scene integration, and input handling components.
 </p></details>

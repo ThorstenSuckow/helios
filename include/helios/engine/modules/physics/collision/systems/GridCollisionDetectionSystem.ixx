@@ -13,7 +13,7 @@ module;
 #include <vector>
 
 
-export module helios.engine.game.physics.collision.systems.GridCollisionDetectionSystem;
+export module helios.engine.modules.physics.collision.systems.GridCollisionDetectionSystem;
 
 import helios.engine.ecs.System;
 import helios.engine.runtime.world.UpdateContext;
@@ -22,25 +22,25 @@ import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.GameWorld;
 
 
-import helios.engine.game.physics.collision.events.TriggerCollisionEvent;
-import helios.engine.game.physics.collision.events.SolidCollisionEvent;
+import helios.engine.modules.physics.collision.events.TriggerCollisionEvent;
+import helios.engine.modules.physics.collision.events.SolidCollisionEvent;
 
-import helios.engine.game.physics.collision.components.CollisionComponent;
-import helios.engine.game.physics.collision.components.CollisionStateComponent;
-import helios.engine.game.physics.collision.components.AabbColliderComponent;
+import helios.engine.modules.physics.collision.components.CollisionComponent;
+import helios.engine.modules.physics.collision.components.CollisionStateComponent;
+import helios.engine.modules.physics.collision.components.AabbColliderComponent;
 
-import helios.engine.game.physics.collision.types.CollisionBehavior;
+import helios.engine.modules.physics.collision.types.CollisionBehavior;
 
 import helios.util.Guid;
 import helios.math;
 
 import helios.util.log;
 
-using namespace helios::engine::game::physics::collision::components;
-using namespace helios::engine::game::physics::collision::events;
+using namespace helios::engine::modules::physics::collision::components;
+using namespace helios::engine::modules::physics::collision::events;
 
-#define HELIOS_LOG_SCOPE "helios::engine::game::physics::systems::GridCollisionDetectionSystem"
-export namespace helios::engine::game::physics::collision::systems {
+#define HELIOS_LOG_SCOPE "helios::engine::modules::physics::systems::GridCollisionDetectionSystem"
+export namespace helios::engine::modules::physics::collision::systems {
 
     /**
      * @brief Collision detection system using uniform spatial partitioning for Broadphase and
@@ -82,8 +82,8 @@ export namespace helios::engine::game::physics::collision::systems {
             bool isTriggerCollision = false;
             bool aIsCollisionReporter = false;
             bool bIsCollisionReporter = false;
-            helios::engine::game::physics::collision::types::CollisionBehavior aCollisionBehavior;
-            helios::engine::game::physics::collision::types::CollisionBehavior bCollisionBehavior;
+            helios::engine::modules::physics::collision::types::CollisionBehavior aCollisionBehavior;
+            helios::engine::modules::physics::collision::types::CollisionBehavior bCollisionBehavior;
 
             [[nodiscard]] inline constexpr bool hasAnyInteraction() const noexcept {
                 return (isSolidCollision || isTriggerCollision) && (aIsCollisionReporter || bIsCollisionReporter);

@@ -1,4 +1,4 @@
-# helios::engine::game::physics::collision::systems
+# helios::engine::modules::physics::collision::systems
 
 Collision detection and response systems for the helios engine.
 
@@ -14,7 +14,7 @@ This namespace contains systems for spatial partitioning, collision detection, a
 
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::game::physics::collision::systems
+@namespace helios::engine::modules::physics::collision::systems
 @brief Collision detection and response systems.
 @details This namespace contains systems for updating collider bounds, performing grid-based spatial partitioning for efficient broad-phase detection, processing collision responses, and clearing collision state at frame end.
 </p></details>

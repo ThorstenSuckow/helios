@@ -15,7 +15,7 @@ import helios.engine.runtime.world.SystemRegistry;
 import helios.engine.runtime.world.UpdateContext;
 
 
-export namespace helios::engine::game {
+export namespace helios::engine::modules {
     class GameWorld;
 }
 

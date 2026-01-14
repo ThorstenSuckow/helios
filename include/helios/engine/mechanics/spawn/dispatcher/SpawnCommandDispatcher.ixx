@@ -13,8 +13,8 @@ export module helios.engine.mechanics.spawn.dispatcher.SpawnCommandDispatcher;
 import helios.engine.mechanics.spawn.manager.SpawnManager;
 import helios.engine.mechanics.spawn.commands.SpawnCommand;
 
-import helios.engine.game.physics.motion.components.Move2DComponent;
-import helios.engine.game.spatial.transform.components.TranslationStateComponent;
+import helios.engine.modules.physics.motion.components.Move2DComponent;
+import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
 import helios.engine.mechanics.combat.components.Aim2DComponent;
 
 import helios.engine.mechanics.spawn.requests.SpawnRequest;

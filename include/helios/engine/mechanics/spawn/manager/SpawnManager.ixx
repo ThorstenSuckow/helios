@@ -29,9 +29,9 @@ import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 
 
-import helios.engine.game.physics.motion.components.Move2DComponent;
-import helios.engine.game.physics.motion.components.DirectionComponent;
-import helios.engine.game.spatial.transform.components.TranslationStateComponent;
+import helios.engine.modules.physics.motion.components.Move2DComponent;
+import helios.engine.modules.physics.motion.components.DirectionComponent;
+import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
 
 import helios.engine.runtime.pooling.PoolRequestHandler;
 
@@ -125,9 +125,9 @@ export namespace helios::engine::mechanics::spawn::manager {
 
                 static auto rGen = helios::util::Random(12345);
 
-                auto* mc = gameObject->get<helios::engine::game::physics::motion::components::Move2DComponent>();
-                auto* dc = gameObject->get<helios::engine::game::physics::motion::components::DirectionComponent>();
-                auto* tsc = gameObject->get<helios::engine::game::spatial::transform::components::TranslationStateComponent>();
+                auto* mc = gameObject->get<helios::engine::modules::physics::motion::components::Move2DComponent>();
+                auto* dc = gameObject->get<helios::engine::modules::physics::motion::components::DirectionComponent>();
+                auto* tsc = gameObject->get<helios::engine::modules::spatial::transform::components::TranslationStateComponent>();
 
                 auto& levelBounds = gameWorld.level().bounds();
 

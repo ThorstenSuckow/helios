@@ -1,9 +1,9 @@
 /**
  * @file _module.ixx
- * @brief Aggregate module for helios::engine::game::model::components namespace.
+ * @brief Aggregate module for helios::engine::modules::model::components namespace.
  */
 
 
-export module helios.engine.game.model.components;
+export module helios.engine.modules.model.components;
 
-export import helios.engine.game.rendering.model.components.ModelAabbComponent;
+export import helios.engine.modules.rendering.model.components.ModelAabbComponent;

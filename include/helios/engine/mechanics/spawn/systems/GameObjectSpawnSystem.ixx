@@ -22,11 +22,11 @@ import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.runtime.world.Level;
 
-import helios.engine.game.physics.motion.components.Move2DComponent;
+import helios.engine.modules.physics.motion.components.Move2DComponent;
 
-import helios.engine.game.scene.components.SceneNodeComponent;
-import helios.engine.game.physics.motion.components.DirectionComponent;
-import helios.engine.game.rendering.renderable.components.RenderableComponent;
+import helios.engine.modules.scene.components.SceneNodeComponent;
+import helios.engine.modules.physics.motion.components.DirectionComponent;
+import helios.engine.modules.rendering.renderable.components.RenderableComponent;
 
 import helios.scene.SceneNode;
 

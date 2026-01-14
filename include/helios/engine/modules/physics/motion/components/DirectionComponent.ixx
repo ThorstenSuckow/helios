@@ -7,13 +7,13 @@ module;
 #include <cassert>
 #include <cmath>
 
-export module helios.engine.game.physics.motion.components.DirectionComponent;
+export module helios.engine.modules.physics.motion.components.DirectionComponent;
 
 import helios.engine.ecs.CloneableComponent;
 
 import helios.math;
 
-export namespace helios::engine::game::physics::motion::components {
+export namespace helios::engine::modules::physics::motion::components {
 
     /**
      * @brief Component that holds a normalized direction vector.

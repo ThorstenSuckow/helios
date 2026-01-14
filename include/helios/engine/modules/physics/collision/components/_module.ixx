@@ -1,10 +1,10 @@
 /**
  * @file _module.ixx
- * @brief Aggregate module for helios::engine::game::physics::collision::components namespace.
+ * @brief Aggregate module for helios::engine::modules::physics::collision::components namespace.
  */
-export module helios.engine.game.physics.collision.components;
+export module helios.engine.modules.physics.collision.components;
 
-export import helios.engine.game.physics.collision.components.AabbColliderComponent;
-export import helios.engine.game.physics.collision.components.CollisionComponent;
-export import helios.engine.game.physics.collision.components.CollisionStateComponent;
+export import helios.engine.modules.physics.collision.components.AabbColliderComponent;
+export import helios.engine.modules.physics.collision.components.CollisionComponent;
+export import helios.engine.modules.physics.collision.components.CollisionStateComponent;
 

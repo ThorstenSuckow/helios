@@ -8,7 +8,7 @@ module;
 #include <memory>
 
 
-export module helios.engine.game.scene.components.SceneNodeComponent;
+export module helios.engine.modules.scene.components.SceneNodeComponent;
 
 import helios.scene.SceneNode;
 import helios.math.types;
@@ -17,10 +17,10 @@ import helios.core.units.Unit;
 import helios.engine.ecs.CloneableComponent;
 import helios.engine.ecs.GameObject;
 
-import helios.engine.game.rendering.renderable.components.RenderableComponent;
+import helios.engine.modules.rendering.renderable.components.RenderableComponent;
 
 
-export namespace helios::engine::game::scene::components {
+export namespace helios::engine::modules::scene::components {
 
     /**
      * @brief Component that links a GameObject to a SceneNode in the scene graph.
@@ -84,7 +84,7 @@ export namespace helios::engine::game::scene::components {
             assert(sceneNode_->renderable() != nullptr && "Unexpected nullptr for SceneNode's renderable");
 
             // this will automatically create the RenderableComponent if not alreay registered
-            gameObject->getOrAdd<helios::engine::game::rendering::renderable::components::RenderableComponent>(sceneNode_->renderable());
+            gameObject->getOrAdd<helios::engine::modules::rendering::renderable::components::RenderableComponent>(sceneNode_->renderable());
         }
 
         /**

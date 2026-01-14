@@ -14,28 +14,28 @@ import helios.math;
 
 import helios.engine.runtime.messaging.command.CommandBuffer;
 
-import helios.engine.game.physics.collision.types.CollisionBehavior;
+import helios.engine.modules.physics.collision.types.CollisionBehavior;
 
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.GameWorld;
-import helios.engine.game.physics.motion.components.Move2DComponent;
-import helios.engine.game.physics.motion.components.SteeringComponent;
-import helios.engine.game.spatial.transform.components.TransformComponent;
-import helios.engine.game.spatial.transform.components.TranslationStateComponent;
-import helios.engine.game.physics.motion.components.DirectionComponent;
+import helios.engine.modules.physics.motion.components.Move2DComponent;
+import helios.engine.modules.physics.motion.components.SteeringComponent;
+import helios.engine.modules.spatial.transform.components.TransformComponent;
+import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
+import helios.engine.modules.physics.motion.components.DirectionComponent;
 import helios.engine.mechanics.bounds.components.LevelBoundsBehaviorComponent;
-import helios.engine.game.physics.collision.components.AabbColliderComponent;
-import helios.engine.game.physics.motion.components.RotationStateComponent;
-import helios.engine.game.rendering.model.components.ModelAabbComponent;
-import helios.engine.game.physics.motion.components.RotationStateComponent;
+import helios.engine.modules.physics.collision.components.AabbColliderComponent;
+import helios.engine.modules.physics.motion.components.RotationStateComponent;
+import helios.engine.modules.rendering.model.components.ModelAabbComponent;
+import helios.engine.modules.physics.motion.components.RotationStateComponent;
 import helios.scene.SceneNode;
-import helios.engine.game.scene.components.SceneNodeComponent;
+import helios.engine.modules.scene.components.SceneNodeComponent;
 
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.mechanics.spawn.commands.DespawnCommand;
 
-import helios.engine.game.pool.components.PoolIdComponent;
+import helios.engine.modules.pool.components.PoolIdComponent;
 
 export namespace helios::engine::mechanics::bounds::systems {
 
@@ -62,17 +62,17 @@ export namespace helios::engine::mechanics::bounds::systems {
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
-            using namespace helios::engine::game::physics::collision::types;
+            using namespace helios::engine::modules::physics::collision::types;
 
             for (auto [entity, m2d, ab, sc, dc, tsc, bc, bbc, rsc] : gameWorld_->find<
-                helios::engine::game::physics::motion::components::Move2DComponent,
-                helios::engine::game::rendering::model::components::ModelAabbComponent,
-                helios::engine::game::scene::components::SceneNodeComponent,
-                helios::engine::game::physics::motion::components::DirectionComponent,
-                helios::engine::game::spatial::transform::components::TranslationStateComponent,
-                helios::engine::game::physics::collision::components::AabbColliderComponent,
+                helios::engine::modules::physics::motion::components::Move2DComponent,
+                helios::engine::modules::rendering::model::components::ModelAabbComponent,
+                helios::engine::modules::scene::components::SceneNodeComponent,
+                helios::engine::modules::physics::motion::components::DirectionComponent,
+                helios::engine::modules::spatial::transform::components::TranslationStateComponent,
+                helios::engine::modules::physics::collision::components::AabbColliderComponent,
                 helios::engine::mechanics::bounds::components::LevelBoundsBehaviorComponent,
-                helios::engine::game::physics::motion::components::RotationStateComponent
+                helios::engine::modules::physics::motion::components::RotationStateComponent
             >().each()) {
 
 
@@ -97,7 +97,7 @@ export namespace helios::engine::mechanics::bounds::systems {
                         /**
                          * @todo optimize
                          */
-                        auto* pic = entity->get<helios::engine::game::pool::components::PoolIdComponent>();
+                        auto* pic = entity->get<helios::engine::modules::pool::components::PoolIdComponent>();
                         if (!pic) {
                             updateContext.commandBuffer().add<helios::engine::mechanics::spawn::commands::DespawnCommand>(
                                 entity->guid()
@@ -146,9 +146,9 @@ export namespace helios::engine::mechanics::bounds::systems {
             helios::math::aabbf objectBounds,
             helios::math::aabbf levelBounds,
             const float restitution,
-            helios::engine::game::physics::motion::components::Move2DComponent& m2d,
-            helios::engine::game::physics::motion::components::DirectionComponent& dc,
-            helios::engine::game::physics::motion::components::RotationStateComponent& rsc
+            helios::engine::modules::physics::motion::components::Move2DComponent& m2d,
+            helios::engine::modules::physics::motion::components::DirectionComponent& dc,
+            helios::engine::modules::physics::motion::components::RotationStateComponent& rsc
         ) noexcept {
 
 

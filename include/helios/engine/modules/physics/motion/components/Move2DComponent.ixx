@@ -9,7 +9,7 @@ module;
 #include <cmath>
 #include <memory>
 
-export module helios.engine.game.physics.motion.components.Move2DComponent;
+export module helios.engine.modules.physics.motion.components.Move2DComponent;
 
 import helios.scene.SceneNode;
 import helios.util.Guid;
@@ -18,10 +18,10 @@ import helios.math;
 import helios.core.units.Unit;
 import helios.engine.ecs.CloneableComponent;
 import helios.engine.ecs.GameObject;
-import helios.engine.game.scene.components.SceneNodeComponent;
+import helios.engine.modules.scene.components.SceneNodeComponent;
 
 
-export namespace helios::engine::game::physics::motion::components {
+export namespace helios::engine::modules::physics::motion::components {
 
     /**
      * @brief Component for 2D physics-based movement.
@@ -37,8 +37,8 @@ export namespace helios::engine::game::physics::motion::components {
      *
      * @note Rotation/heading is handled separately by SteeringComponent and SteeringSystem.
      *
-     * @see helios::engine::game::physics::motion::components::SteeringComponent
-     * @see helios::engine::game::physics::systems::Move2DSystem
+     * @see helios::engine::modules::physics::motion::components::SteeringComponent
+     * @see helios::engine::modules::physics::systems::Move2DSystem
      */
     class Move2DComponent : public helios::engine::ecs::CloneableComponent<Move2DComponent> {
 

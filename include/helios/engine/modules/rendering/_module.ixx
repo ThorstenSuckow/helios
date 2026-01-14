@@ -1,8 +1,8 @@
 /**
  * @file _module.ixx
- * @brief Aggregate module for helios::engine::game::rendering namespace.
+ * @brief Aggregate module for helios::engine::modules::rendering namespace.
  */
 
-export module helios.engine.game.rendering;
+export module helios.engine.modules.rendering;
 
-export import helios.engine.game.rendering.components;
+export import helios.engine.modules.rendering.components;

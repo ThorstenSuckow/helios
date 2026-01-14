@@ -4,13 +4,13 @@
  */
 module;
 
-export module helios.engine.game.spatial.transform.components.TransformComponent;
+export module helios.engine.modules.spatial.transform.components.TransformComponent;
 
 import helios.math.types;
 import helios.engine.ecs.CloneableComponent;
 import helios.core.spatial.Transform;
 
-export namespace helios::engine::game::spatial::transform::components {
+export namespace helios::engine::modules::spatial::transform::components {
 
     /**
      * @brief Component that holds transformation data (position, rotation, scale).

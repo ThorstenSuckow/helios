@@ -1,4 +1,4 @@
-# helios::engine::game::rendering
+# helios::engine::modules::rendering
 Rendering components for game entities.
 
 This module provides components that link game logic entities to the rendering system, enabling visual representation.
@@ -7,7 +7,7 @@ This module provides components that link game logic entities to the rendering s
 ---
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::game::rendering
+@namespace helios::engine::modules::rendering
 @brief Rendering components for game entities.
 @details This module provides components that link game logic entities to the rendering system.
 </p></details>

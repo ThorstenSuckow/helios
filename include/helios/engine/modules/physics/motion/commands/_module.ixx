@@ -1,9 +1,9 @@
 /**
  * @file _module.ixx
- * @brief Aggregate module for helios::engine::game::physics::motion::commands namespace.
+ * @brief Aggregate module for helios::engine::modules::physics::motion::commands namespace.
  */
 
-export module helios.engine.game.physics.motion.commands;
+export module helios.engine.modules.physics.motion.commands;
 
-export import helios.engine.game.physics.motion.commands.SteeringCommand;
-export import helios.engine.game.physics.motion.commands.Move2DCommand;
+export import helios.engine.modules.physics.motion.commands.SteeringCommand;
+export import helios.engine.modules.physics.motion.commands.Move2DCommand;

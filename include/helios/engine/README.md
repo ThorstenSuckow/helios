@@ -46,7 +46,7 @@ helios.engine.runtime.world.GameWorld world;
 auto entity = std.make_unique<helios.engine.ecs.GameObject>();
 
 // Access game systems
-world.add<helios.engine.game.Move2DSystem>();
+world.add<helios.engine.modules.Move2DSystem>();
 
 // Access tooling
 helios.engine.tooling.FramePacer pacer;

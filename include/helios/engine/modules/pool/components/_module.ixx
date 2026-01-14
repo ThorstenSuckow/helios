@@ -1,8 +1,8 @@
 /**
  * @file _module.ixx
- * @brief Aggregate module for helios.engine.game.pool.components.
+ * @brief Aggregate module for helios.engine.modules.pool.components.
  */
-export module helios.engine.game.pool.components;
+export module helios.engine.modules.pool.components;
 
-export import helios.engine.game.pool.components.PoolIdComponent;
+export import helios.engine.modules.pool.components.PoolIdComponent;
 

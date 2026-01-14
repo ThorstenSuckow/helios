@@ -6,12 +6,12 @@ module;
 
 #include <memory>
 
-export module helios.engine.game.pool.components.PoolIdComponent;
+export module helios.engine.modules.pool.components.PoolIdComponent;
 
 import helios.engine.ecs.CloneableComponent;
 import helios.engine.core.data.GameObjectPoolId;
 
-export namespace helios::engine::game::pool::components {
+export namespace helios::engine::modules::pool::components {
 
     /**
      * @brief Component that identifies which pool a GameObject belongs to.

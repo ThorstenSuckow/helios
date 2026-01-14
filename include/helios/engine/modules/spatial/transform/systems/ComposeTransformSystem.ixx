@@ -6,14 +6,14 @@ module;
 
 #include <helios/engine/ecs/query/GameObjectView.h>
 
-export module helios.engine.game.spatial.transform.systems.ComposeTransformSystem;
+export module helios.engine.modules.spatial.transform.systems.ComposeTransformSystem;
 
 import helios.engine.ecs.System;
 
-import helios.engine.game.spatial.transform.components.TranslationStateComponent;
-import helios.engine.game.physics.motion.components.RotationStateComponent;
-import helios.engine.game.spatial.transform.components.TransformComponent;
-import helios.engine.game.physics.motion.components.SpinComponent;
+import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
+import helios.engine.modules.physics.motion.components.RotationStateComponent;
+import helios.engine.modules.spatial.transform.components.TransformComponent;
+import helios.engine.modules.physics.motion.components.SpinComponent;
 
 import helios.engine.runtime.world.GameWorld;
 
@@ -21,7 +21,7 @@ import helios.engine.runtime.world.UpdateContext;
 
 import helios.math;
 
-export namespace helios::engine::game::spatial::transform::systems {
+export namespace helios::engine::modules::spatial::transform::systems {
 
     /**
      * @brief System that composes the final TransformComponent from state components.
@@ -46,15 +46,15 @@ export namespace helios::engine::game::spatial::transform::systems {
             const float deltaTime = updateContext.deltaTime();
 
             for (auto [entity, tc, tsc] : gameWorld_->find<
-                helios::engine::game::spatial::transform::components::TransformComponent,
-                helios::engine::game::spatial::transform::components::TranslationStateComponent
+                helios::engine::modules::spatial::transform::components::TransformComponent,
+                helios::engine::modules::spatial::transform::components::TranslationStateComponent
             >().each()) {
                 tc->setLocalTranslation(tsc->translation());
             }
 
             for (auto [entity, tc, rsc] : gameWorld_->find<
-                helios::engine::game::spatial::transform::components::TransformComponent,
-                helios::engine::game::physics::motion::components::RotationStateComponent
+                helios::engine::modules::spatial::transform::components::TransformComponent,
+                helios::engine::modules::physics::motion::components::RotationStateComponent
             >().each()) {
 
                tc->setLocalRotation(rsc->rotation());

@@ -1,4 +1,4 @@
-# helios::engine::game::physics::motion::components
+# helios::engine::modules::physics::motion::components
 
 Physics and movement components for game entities.
 
@@ -31,7 +31,7 @@ steering.setRotationSpeed(360.0f);
 
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::game::physics::motion::components
+@namespace helios::engine::modules::physics::motion::components
 @brief Physics and movement components for game entities.
 @details This namespace contains components that handle 2D physics simulation, movement velocity, rotation/heading, and spin effects.
 </p></details>

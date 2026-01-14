@@ -15,8 +15,8 @@ import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.System;
 import helios.engine.ecs.Component;
 import helios.engine.runtime.messaging.command.CommandBuffer;
-import helios.engine.game.physics.motion.commands.Move2DCommand;
-import helios.engine.game.physics.motion.commands.SteeringCommand;
+import helios.engine.modules.physics.motion.commands.Move2DCommand;
+import helios.engine.modules.physics.motion.commands.SteeringCommand;
 import helios.engine.mechanics.combat.commands.Aim2DCommand;
 import helios.engine.mechanics.combat.commands.ShootCommand;
 
@@ -85,11 +85,11 @@ export namespace helios::engine::mechanics::input::systems {
              * @todo DO NOT POST IF input is already inactive in shootComponent
              * and no input was detected (after normalizing)
              */
-            commandBuffer.add<helios::engine::game::physics::motion::commands::Move2DCommand>(
+            commandBuffer.add<helios::engine::modules::physics::motion::commands::Move2DCommand>(
                 gameObject_.guid(), ldir, finalSpeed
             );
 
-            commandBuffer.add<helios::engine::game::physics::motion::commands::SteeringCommand>(
+            commandBuffer.add<helios::engine::modules::physics::motion::commands::SteeringCommand>(
                 gameObject_.guid(), ldir, finalSpeed
             );
 

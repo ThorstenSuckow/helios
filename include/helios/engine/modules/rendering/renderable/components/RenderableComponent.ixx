@@ -7,7 +7,7 @@ module;
 #include <cassert>
 #include <memory>
 
-export module helios.engine.game.rendering.renderable.components.RenderableComponent;
+export module helios.engine.modules.rendering.renderable.components.RenderableComponent;
 
 import helios.engine.ecs.CloneableComponent;
 import helios.engine.ecs.GameObject;
@@ -15,9 +15,9 @@ import helios.engine.ecs.GameObject;
 import helios.rendering.Renderable;
 import helios.math.types;
 
-import helios.engine.game.rendering.model.components.ModelAabbComponent;
+import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 
-export namespace helios::engine::game::rendering::renderable::components {
+export namespace helios::engine::modules::rendering::renderable::components {
 
     /**
      * @brief Component that holds a shared pointer to a Renderable resource.
@@ -75,7 +75,7 @@ export namespace helios::engine::game::rendering::renderable::components {
         void onAttach(helios::engine::ecs::GameObject* gameObject) noexcept override {
             Component::onAttach(gameObject);
 
-            auto& msc = gameObject->getOrAdd<helios::engine::game::rendering::model::components::ModelAabbComponent>();
+            auto& msc = gameObject->getOrAdd<helios::engine::modules::rendering::model::components::ModelAabbComponent>();
 
             msc.setAabb(aabb_);
         }

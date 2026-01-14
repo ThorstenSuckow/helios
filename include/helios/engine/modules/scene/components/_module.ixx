@@ -1,9 +1,9 @@
 /**
  * @file _module.ixx
- * @brief Aggregate module for helios::engine::game::scene::components namespace.
+ * @brief Aggregate module for helios::engine::modules::scene::components namespace.
  */
 
 
-export module helios.engine.game.scene.components;
+export module helios.engine.modules.scene.components;
 
-export import helios.engine.game.scene.components.SceneNodeComponent;
+export import helios.engine.modules.scene.components.SceneNodeComponent;

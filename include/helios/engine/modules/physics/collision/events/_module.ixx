@@ -1,8 +1,8 @@
 /**
  * @file _module.ixx
- * @brief Aggregate module for helios::engine::game::physics::collision::events namespace.
+ * @brief Aggregate module for helios::engine::modules::physics::collision::events namespace.
  */
-export module helios.engine.game.physics.collision.events;
+export module helios.engine.modules.physics.collision.events;
 
-export import helios.engine.game.physics.collision.events.SolidCollisionEvent;
-export import helios.engine.game.physics.collision.events.TriggerCollisionEvent;
+export import helios.engine.modules.physics.collision.events.SolidCollisionEvent;
+export import helios.engine.modules.physics.collision.events.TriggerCollisionEvent;

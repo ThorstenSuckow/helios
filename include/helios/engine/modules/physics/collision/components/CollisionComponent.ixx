@@ -7,14 +7,14 @@ module;
 #include <array>
 #include <format>
 
-export module helios.engine.game.physics.collision.components.CollisionComponent;
+export module helios.engine.modules.physics.collision.components.CollisionComponent;
 
 import helios.engine.ecs.CloneableComponent;
 import helios.engine.ecs.GameObject;
 
-import helios.engine.game.physics.collision.types.CollisionBehavior;
+import helios.engine.modules.physics.collision.types.CollisionBehavior;
 
-export namespace helios::engine::game::physics::collision::components {
+export namespace helios::engine::modules::physics::collision::components {
 
     /**
      * @class CollisionComponent
@@ -70,7 +70,7 @@ export namespace helios::engine::game::physics::collision::components {
          */
         bool isCollisionReporter_ = true;
 
-        static_assert(std::to_underlying(helios::engine::game::physics::collision::types::CollisionBehavior::size_) <= 32);
+        static_assert(std::to_underlying(helios::engine::modules::physics::collision::types::CollisionBehavior::size_) <= 32);
 
         /**
          * @brief Per-behavior layer masks for solid collisions.
@@ -81,7 +81,7 @@ export namespace helios::engine::game::physics::collision::components {
          */
         std::array<
             uint32_t,
-            std::to_underlying(helios::engine::game::physics::collision::types::CollisionBehavior::size_)
+            std::to_underlying(helios::engine::modules::physics::collision::types::CollisionBehavior::size_)
         > solidCollisionBehavior_{};
 
         /**
@@ -93,7 +93,7 @@ export namespace helios::engine::game::physics::collision::components {
          */
         std::array<
             uint32_t,
-            std::to_underlying(helios::engine::game::physics::collision::types::CollisionBehavior::size_)
+            std::to_underlying(helios::engine::modules::physics::collision::types::CollisionBehavior::size_)
         > triggerCollisionBehavior_{};
 
     public:
@@ -201,7 +201,7 @@ export namespace helios::engine::game::physics::collision::components {
          * @return Reference to this component for method chaining.
          */
         CollisionComponent& addSolidCollisionBehavior(
-                const helios::engine::game::physics::collision::types::CollisionBehavior collisionBehavior,
+                const helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior,
                 const uint32_t otherLayerId
         ) noexcept {
 
@@ -226,8 +226,8 @@ export namespace helios::engine::game::physics::collision::components {
          *
          * @return The collision behavior for the specified layer.
          */
-        [[nodiscard]] helios::engine::game::physics::collision::types::CollisionBehavior solidCollisionBehavior(uint32_t otherLayerId) const noexcept {
-            using helios::engine::game::physics::collision::types::CollisionBehavior;
+        [[nodiscard]] helios::engine::modules::physics::collision::types::CollisionBehavior solidCollisionBehavior(uint32_t otherLayerId) const noexcept {
+            using helios::engine::modules::physics::collision::types::CollisionBehavior;
             if ((solidCollisionMask_ & otherLayerId) == 0) {
                 return CollisionBehavior::None;
             }
@@ -253,8 +253,8 @@ export namespace helios::engine::game::physics::collision::components {
          *
          * @return The collision behavior for the specified layer.
          */
-        [[nodiscard]] helios::engine::game::physics::collision::types::CollisionBehavior triggerCollisionBehavior(uint32_t otherLayerId) const noexcept {
-            using helios::engine::game::physics::collision::types::CollisionBehavior;
+        [[nodiscard]] helios::engine::modules::physics::collision::types::CollisionBehavior triggerCollisionBehavior(uint32_t otherLayerId) const noexcept {
+            using helios::engine::modules::physics::collision::types::CollisionBehavior;
             if ((triggerCollisionMask_ & otherLayerId) == 0) {
                 return CollisionBehavior::None;
             }
@@ -282,7 +282,7 @@ export namespace helios::engine::game::physics::collision::components {
          * @return Reference to this component for method chaining.
          */
         CollisionComponent& addTriggerCollisionBehavior(
-                const helios::engine::game::physics::collision::types::CollisionBehavior collisionBehavior,
+                const helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior,
                 const uint32_t otherLayerId
         ) noexcept {
 

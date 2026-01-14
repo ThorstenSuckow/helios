@@ -12,19 +12,16 @@
     </briefdescription>
     <detaileddescription>
 <sect1 id="dir_0b25300d10cd1aefe5f6cbf740a7fedf_1autotoc_md178">
-<title>helios::engine::modules</title><para>Domain-specific components, systems, and gameplay mechanics built on top of the ECS architecture.</para>
+<title>helios::engine::modules</title><para>Domain-specific components and systems built on top of the ECS architecture.</para>
 </sect1>
 <sect1 id="dir_0b25300d10cd1aefe5f6cbf740a7fedf_1autotoc_md179">
-<title>Overview</title><para>This module provides concrete game logic implementations using the composition-based component model. While <computeroutput><ref refid="namespacehelios_1_1engine_1_1ecs" kindref="compound">helios.engine.ecs</ref></computeroutput> provides the base classes (GameObject, Component, System), this module contains the actual gameplay functionality.</para>
+<title>Overview</title><para>This module provides concrete game logic implementations using the composition-based component model. While <computeroutput><ref refid="namespacehelios_1_1engine_1_1ecs" kindref="compound">helios.engine.ecs</ref></computeroutput> provides the base classes (GameObject, Component, System), this module contains domain-specific functionality for physics, scene integration, and rendering.</para>
+<para>For gameplay mechanics (bounds, combat, spawn, input), see <computeroutput><ref refid="namespacehelios_1_1engine_1_1mechanics" kindref="compound">helios.engine.mechanics</ref></computeroutput>.</para>
 </sect1>
 <sect1 id="dir_0b25300d10cd1aefe5f6cbf740a7fedf_1autotoc_md180">
-<title>Submodules</title><para><table rows="9" cols="2"><row>
+<title>Submodules</title><para><table rows="6" cols="2"><row>
 <entry thead="yes"><para>Module  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
-</entry></row>
-<row>
-<entry thead="no"><para><computeroutput>gameplay/</computeroutput>  </para>
-</entry><entry thead="no"><para>High-level mechanics (bounds, combat, spawn)  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>physics/</computeroutput>  </para>
@@ -43,14 +40,6 @@
 </entry><entry thead="no"><para>Renderable components  </para>
 </entry></row>
 <row>
-<entry thead="no"><para><computeroutput>model/</computeroutput>  </para>
-</entry><entry thead="no"><para>Model/mesh-related components  </para>
-</entry></row>
-<row>
-<entry thead="no"><para><computeroutput>input/</computeroutput>  </para>
-</entry><entry thead="no"><para>Input handling components  </para>
-</entry></row>
-<row>
 <entry thead="no"><para><computeroutput>pool/</computeroutput>  </para>
 </entry><entry thead="no"><para>Object pool components  </para>
 </entry></row>
@@ -58,11 +47,7 @@
 </para>
 </sect1>
 <sect1 id="dir_0b25300d10cd1aefe5f6cbf740a7fedf_1autotoc_md181">
-<title>Architecture</title><para><programlisting><codeline><highlight class="normal">helios.engine.game</highlight></codeline>
-<codeline><highlight class="normal">├──<sp/>gameplay/</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>bounds/<sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Level<sp/>boundary<sp/>behavior</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>combat/<sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Shooting,<sp/>projectiles</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>spawn/<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Entity<sp/>spawning</highlight></codeline>
+<title>Architecture</title><para><programlisting><codeline><highlight class="normal">helios.engine.modules</highlight></codeline>
 <codeline><highlight class="normal">├──<sp/>physics/</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>collision/<sp/><sp/><sp/>#<sp/>AABB,<sp/>collision<sp/>detection</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>motion/<sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Movement,<sp/>steering</highlight></codeline>
@@ -70,23 +55,27 @@
 <codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>transform/<sp/><sp/><sp/>#<sp/>Translation,<sp/>rotation,<sp/>scale<sp/>components</highlight></codeline>
 <codeline><highlight class="normal">├──<sp/>scene/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>SceneNode<sp/>integration</highlight></codeline>
 <codeline><highlight class="normal">├──<sp/>rendering/<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Renderable<sp/>components</highlight></codeline>
-<codeline><highlight class="normal">├──<sp/>model/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Model<sp/>AABB<sp/>components</highlight></codeline>
-<codeline><highlight class="normal">├──<sp/>input/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Twin-stick<sp/>input</highlight></codeline>
 <codeline><highlight class="normal">└──<sp/>pool/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Pool<sp/>ID<sp/>components</highlight></codeline>
 </programlisting></para>
 </sect1>
 <sect1 id="dir_0b25300d10cd1aefe5f6cbf740a7fedf_1autotoc_md182">
-<title>Relationship to ECS</title><para>This module <bold>imports</bold> from <computeroutput><ref refid="namespacehelios_1_1engine_1_1ecs" kindref="compound">helios.engine.ecs</ref></computeroutput>:</para>
+<title>Relationship to ECS and Runtime</title><para>This module <bold>imports</bold> from <computeroutput><ref refid="namespacehelios_1_1engine_1_1ecs" kindref="compound">helios.engine.ecs</ref></computeroutput>:</para>
 <para><itemizedlist>
 <listitem><para><computeroutput>GameObject</computeroutput>, <computeroutput>Component</computeroutput> — Base classes extended by domain components</para>
 </listitem><listitem><para><computeroutput>System</computeroutput> — Base class extended by domain systems</para>
-</listitem><listitem><para><computeroutput>GameWorld</computeroutput> — Used by systems for entity queries</para>
+</listitem></itemizedlist>
+</para>
+<para>This module <bold>imports</bold> from <computeroutput><ref refid="namespacehelios_1_1engine_1_1runtime_1_1world" kindref="compound">helios.engine.runtime.world</ref></computeroutput>:</para>
+<para><itemizedlist>
+<listitem><para><computeroutput>GameWorld</computeroutput> — Used by systems for entity queries</para>
 </listitem><listitem><para><computeroutput>Manager</computeroutput> — Extended by domain managers (ProjectilePoolManager)</para>
 </listitem></itemizedlist>
 </para>
 </sect1>
 <sect1 id="dir_0b25300d10cd1aefe5f6cbf740a7fedf_1autotoc_md183">
-<title>Usage Example</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8game" kindref="compound">helios.engine.game</ref>;</highlight></codeline>
+<title>Usage Example</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8modules_8physics_8motion_8components_8Move2DComponent" kindref="compound">helios.engine.modules.physics.motion.components.Move2DComponent</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8modules_8physics_8collision_8components_8CollisionComponent" kindref="compound">helios.engine.modules.physics.collision.components.CollisionComponent</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8modules_8scene_8components_8SceneNodeComponent" kindref="compound">helios.engine.modules.scene.components.SceneNodeComponent</ref>;</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Add<sp/>domain<sp/>components</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal">entity-&gt;add&lt;Move2DComponent&gt;();</highlight></codeline>
@@ -94,10 +83,10 @@
 <codeline><highlight class="normal">entity-&gt;add&lt;SceneNodeComponent&gt;(sceneNode);</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Add<sp/>domain<sp/>systems<sp/>to<sp/>game<sp/>loop</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal">gameLoop.phase(<ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1aa57e7c5caf8850bd2c56ef8d345afa71" kindref="member">PhaseType</ref>.Main)</highlight></codeline>
+<codeline><highlight class="normal">gameLoop.phase(PhaseType::Main)</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass()</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addSystem&lt;Move2DSystem&gt;(gameWorld)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addSystem&lt;GridCollisionDetectionSystem&gt;(gameWorld);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addSystem&lt;Move2DSystem&gt;(&amp;gameWorld)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addSystem&lt;GridCollisionDetectionSystem&gt;(&amp;gameWorld);</highlight></codeline>
 </programlisting></para>
 <para><hruler/>
 </para>

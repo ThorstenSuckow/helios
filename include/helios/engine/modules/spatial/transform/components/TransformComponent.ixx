@@ -30,7 +30,7 @@ export namespace helios::engine::modules::spatial::transform::components {
         /**
          * @brief Flag indicating if the transform has changed since the last update.
          */
-        bool isDirty_= false;
+        bool isDirty_= true;
 
         /**
          * @brief The computed world transformation matrix.
@@ -53,8 +53,7 @@ export namespace helios::engine::modules::spatial::transform::components {
         explicit TransformComponent(const TransformComponent& other) :
             transform_(other.transform_),
             worldTransform_(other.worldTransform_),
-            isDirty_(other.isDirty_){
-        }
+            isDirty_(true){}
 
         /**
          * @brief Checks if the transform is dirty.
@@ -70,6 +69,24 @@ export namespace helios::engine::modules::spatial::transform::components {
          */
         void clearDirty() noexcept {
             isDirty_ = false;
+        }
+
+        /**
+         * @brief Resets the dirty flag to true when acquired.
+         *
+         * Makes sure the transform is considered after the component was acquired.
+         */
+        void onAcquire() noexcept override {
+            isDirty_ = true;
+        }
+
+        /**
+         * @brief Resets the dirty flag to true when released.
+         *
+         * Makes sure the entities dirty-state is reset to the default state.
+         */
+        void onRelease() noexcept override {
+            isDirty_ = true;
         }
 
         /**

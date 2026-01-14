@@ -9,6 +9,8 @@ module;
 
 export module helios.engine.runtime.gameloop.Pass;
 
+import helios.engine.runtime.gameloop.CommitPoint;
+
 import helios.engine.ecs.System;
 import helios.engine.runtime.world.SystemRegistry;
 
@@ -70,8 +72,10 @@ export namespace helios::engine::runtime::gameloop {
 
         /**
          * @brief Commits pass-level events if a commit point is configured.
+         *
+         * @param updateContext The current update context.
          */
-        void commit();
+        void commit(const CommitPoint commitPoint, helios::engine::runtime::world::UpdateContext& updateContext);
 
         /**
          * @brief Initializes all systems registered in this pass.
@@ -85,6 +89,8 @@ export namespace helios::engine::runtime::gameloop {
          * @brief Flag indicating whether this pass has a commit point.
          */
         bool hasCommitPoint_ = false;
+
+        CommitPoint commitPoint_ = CommitPoint::None;
 
         public:
 
@@ -118,24 +124,50 @@ export namespace helios::engine::runtime::gameloop {
         /**
          * @brief Marks this pass with a commit point and returns the owning Phase.
          *
-         * When a commit point is set, pass-level events are synchronized after
-         * this pass completes, making them available to subsequent passes.
+         * @details When a commit point is set, the specified synchronization actions are
+         * performed after this pass completes. The default is `CommitPoint::PassEvents`
+         * which only synchronizes pass-level events.
          *
-         * Events pushed via `UpdateContext::pushPass()` become readable in the next
-         * pass through `UpdateContext::readPass()`. The event buses are configured
-         * in GameLoop and passed to systems via UpdateContext.
+         * Available CommitPoint flags:
+         * - `PassEvents` — Events pushed via `UpdateContext::pushPass()` become readable.
+         * - `FlushCommands` — Pending commands from the CommandBuffer are executed.
+         * - `FlushManagers` — Managers process their queued requests.
+         * - `Structural` — Combines all three flags.
+         *
+         * Flags can be combined using bitwise OR:
+         * ```cpp
+         * pass.addCommitPoint(CommitPoint::PassEvents | CommitPoint::FlushCommands);
+         * ```
+         *
+         * @param commitPoint The flags specifying which actions to perform (default: PassEvents).
          *
          * @return Reference to the owning Phase for continued configuration.
          *
+         * @see CommitPoint
          * @see UpdateContext::pushPass()
          * @see UpdateContext::readPass()
-         * @see GameLoop
+         * @see GameLoop::passCommit()
          */
-        Phase& addCommitPoint() {
-            hasCommitPoint_ = true;
+        Phase& addCommitPoint(const CommitPoint commitPoint = CommitPoint::PassEvents) {
+            commitPoint_ = commitPoint;
             return owner_;
         }
 
+
+        /**
+         * @brief Returns the configured commit point for this pass.
+         *
+         * @details The commit point determines what synchronization actions are performed
+         * after this pass completes. If no commit point was added, returns CommitPoint::None.
+         *
+         * @return The commit point flags for this pass.
+         *
+         * @see CommitPoint
+         * @see addCommitPoint()
+         */
+        [[nodiscard]] CommitPoint commitPoint() const noexcept {
+            return commitPoint_;
+        }
 
 
     };

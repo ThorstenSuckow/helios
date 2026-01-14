@@ -18,6 +18,7 @@ import helios.util.log.LogManager;
 import helios.engine.runtime.messaging.command.CommandBuffer;
 import helios.engine.runtime.messaging.event.GameLoopEventBus;
 
+import helios.engine.runtime.gameloop.CommitPoint;
 import helios.engine.runtime.gameloop.Pass;
 import helios.engine.runtime.gameloop.Phase;
 
@@ -31,15 +32,20 @@ export namespace helios::engine::runtime::gameloop {
      *
      * The GameLoop manages the execution of game systems across three distinct phases:
      * Pre, Main, and Post. Each phase can contain multiple passes, and each pass can
-     * have an optional commit point for event synchronization.
+     * have a configurable commit point for fine-grained synchronization control.
      *
      * The GameLoop owns:
      * - Three phases (Pre, Main, Post), each containing passes with registered systems.
      * - A CommandBuffer for deferred command execution.
      * - Two event buses: one for phase-level and one for pass-level event propagation.
      *
+     * Commit points allow systems to specify when commands should be flushed, managers
+     * should process their requests, and pass-level events should be synchronized.
+     * This enables deterministic ordering and fine-grained control over the update cycle.
+     *
      * @see Phase
      * @see Pass
+     * @see CommitPoint
      * @see CommandBuffer
      */
     class GameLoop {
@@ -105,18 +111,46 @@ export namespace helios::engine::runtime::gameloop {
 
 
         /**
-         * @brief Commits pass-level events by swapping the pass event bus buffers.
+         * @brief Commits pass-level state based on the specified CommitPoint flags.
          *
-         * Called after each pass that has a commit point. Events pushed via
-         * `UpdateContext::pushPass()` become readable in subsequent passes
-         * via `UpdateContext::readPass()`.
+         * @details Called after each pass that has a commit point configured. The
+         * CommitPoint flags determine which synchronization actions are performed:
          *
+         * - **PassEvents:** Swaps pass event bus buffers, making events pushed via
+         *   `UpdateContext::pushPass()` readable in subsequent passes.
+         * - **FlushCommands:** Executes pending commands from the CommandBuffer.
+         * - **FlushManagers:** Processes manager requests (e.g., spawning from pools).
+         *
+         * The order is: PassEvents → FlushCommands → FlushManagers.
+         * Commands must be flushed before managers to ensure spawn requests are
+         * generated before being processed.
+         *
+         * @param commitPoint The flags specifying which actions to perform.
+         * @param updateContext The current update context.
+         *
+         * @see CommitPoint
          * @see Pass::addCommitPoint()
          * @see UpdateContext::pushPass()
          * @see UpdateContext::readPass()
          */
-        void passCommit() {
-            passEventBus_.swapBuffers();
+        void passCommit(
+            const CommitPoint commitPoint,
+            helios::engine::runtime::world::UpdateContext& updateContext) {
+
+
+            if ((commitPoint & CommitPoint::PassEvents) == CommitPoint::PassEvents)  {
+                passEventBus_.swapBuffers();
+            }
+
+            // commands must be executed before Managers
+            if ((commitPoint & CommitPoint::FlushCommands) == CommitPoint::FlushCommands) {
+                commandBuffer_.flush(updateContext.gameWorld());
+            }
+
+            if ((commitPoint & CommitPoint::FlushManagers) == CommitPoint::FlushManagers) {
+                updateContext.gameWorld().flushManagers(updateContext);
+            }
+
         }
 
         /**

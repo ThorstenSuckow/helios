@@ -80,7 +80,7 @@ export namespace helios::engine::mechanics::spawn::logic {
          */
         [[nodiscard]] float spawnBudget(
             const helios::engine::runtime::world::GameWorld& gameWorld,
-            const helios::engine::core::data::GameObjectPool& gameObjectPool,
+            const helios::engine::runtime::pooling::GameObjectPool& gameObjectPool,
             const helios::engine::runtime::world::UpdateContext& updateContext
         ) noexcept override {
 

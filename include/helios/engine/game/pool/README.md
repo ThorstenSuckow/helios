@@ -30,9 +30,9 @@ if (pic) {
 
 ## Related Modules
 
-- `helios.engine.core.data.GameObjectPool` — Pool data structure
+- `helios.engine.runtime.pooling.GameObjectPool` — Pool data structure
 - `helios.engine.core.data.GameObjectPoolId` — Pool identifier
-- `helios.engine.game.PoolRequestHandler` — Spawn/despawn request handling
+- `helios.engine.runtime.pooling.PoolRequestHandler` — Spawn/despawn request handling
 
 ---
 

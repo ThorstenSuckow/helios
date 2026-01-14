@@ -1,5 +1,4 @@
-/**
- * @file GameObjectPoolId.ixx
+/** @file GameObjectPoolId.ixx
  * @brief Strongly-typed identifier for GameObjectPool instances.
  */
 module;

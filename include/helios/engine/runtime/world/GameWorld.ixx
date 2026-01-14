@@ -18,7 +18,7 @@ export module helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.Manager;
-import helios.engine.game.PoolRequestHandler;
+import helios.engine.runtime.pooling.PoolRequestHandler;
 import helios.engine.ecs.Component;
 import helios.engine.ecs.CloneableComponent;
 
@@ -30,10 +30,10 @@ import helios.engine.runtime.world.Level;
 
 import helios.engine.ecs.query.GameObjectFilter;
 import helios.engine.core.data.GameObjectPoolId;
-import helios.engine.core.data.GameObjectPoolRegistry;
+import helios.engine.runtime.pooling.GameObjectPoolRegistry;
 
 
-import helios.engine.game.PoolRequestHandlerRegistry;
+import helios.engine.runtime.pooling.PoolRequestHandlerRegistry;
 
 export namespace helios::engine::core::data {
     class GameObjectPool;
@@ -159,7 +159,7 @@ export namespace helios::engine::runtime::world {
          * @details Pools enable efficient reuse of GameObjects without repeated
          * allocation/deallocation. Each pool is identified by a GameObjectPoolId.
          */
-        helios::engine::core::data::GameObjectPoolRegistry pools_{};
+        helios::engine::runtime::pooling::GameObjectPoolRegistry pools_{};
 
         /**
          * @brief Registry mapping pool IDs to their request handlers.
@@ -167,7 +167,7 @@ export namespace helios::engine::runtime::world {
          * @details Request handlers process spawn/despawn requests for specific pools,
          * enabling custom lifecycle management per pool type.
          */
-        helios::engine::game::PoolManagerRegistry poolManagerRegistry_{};
+        helios::engine::runtime::pooling::PoolManagerRegistry poolManagerRegistry_{};
 
 
 
@@ -180,7 +180,7 @@ export namespace helios::engine::runtime::world {
          *
          * @return Pointer to the pool if found, nullptr otherwise.
          */
-        [[nodiscard]] helios::engine::core::data::GameObjectPool* pool(
+        [[nodiscard]] helios::engine::runtime::pooling::GameObjectPool* pool(
             helios::engine::core::data::GameObjectPoolId gamePoolId) const {
             return pools_.pool(gamePoolId);
         }
@@ -193,9 +193,9 @@ export namespace helios::engine::runtime::world {
          *
          * @return Pointer to the added pool, or nullptr on failure.
          */
-        [[nodiscard]] helios::engine::core::data::GameObjectPool* addPool(
+        [[nodiscard]] helios::engine::runtime::pooling::GameObjectPool* addPool(
             helios::engine::core::data::GameObjectPoolId gamePoolId,
-            std::unique_ptr<helios::engine::core::data::GameObjectPool> gameObjectPool) {
+            std::unique_ptr<helios::engine::runtime::pooling::GameObjectPool> gameObjectPool) {
             auto* pool =  pools_.addPool(gamePoolId, std::move(gameObjectPool));
             assert(pool != nullptr && "unexpected nullptr for pool");
             if (pool == nullptr) {
@@ -302,7 +302,7 @@ export namespace helios::engine::runtime::world {
          */
         bool registerPoolRequestHandler(
             const helios::engine::core::data::GameObjectPoolId gameObjectPoolId,
-            helios::engine::game::PoolRequestHandler& poolManager
+            helios::engine::runtime::pooling::PoolRequestHandler& poolManager
         ) {
             bool added = poolManagerRegistry_.add(gameObjectPoolId, poolManager);
 
@@ -318,7 +318,7 @@ export namespace helios::engine::runtime::world {
          *
          * @return Pointer to the handler if found, nullptr otherwise.
          */
-        helios::engine::game::PoolRequestHandler* poolRequestHandler(helios::engine::core::data::GameObjectPoolId gameObjectPoolId) {
+        helios::engine::runtime::pooling::PoolRequestHandler* poolRequestHandler(helios::engine::core::data::GameObjectPoolId gameObjectPoolId) {
             return poolManagerRegistry_.get(gameObjectPoolId);
         }
 

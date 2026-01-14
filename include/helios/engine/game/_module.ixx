@@ -12,7 +12,7 @@ export import helios.engine.runtime.world.UpdateContext;
 export import helios.engine.ecs.Component;
 export import helios.engine.ecs.GameObject;
 export import helios.engine.ecs.query.GameObjectFilter;
-export import helios.engine.core.data.GameObjectPool;
+export import helios.engine.runtime.pooling.GameObjectPool;
 export import helios.engine.runtime.world.GameWorld;
 
 // level

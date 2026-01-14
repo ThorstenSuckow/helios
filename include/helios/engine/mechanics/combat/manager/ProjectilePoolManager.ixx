@@ -31,12 +31,12 @@ import helios.engine.game.physics.motion.components.DirectionComponent;
 
 import helios.engine.game.spatial.transform.components.TranslationStateComponent;
 
-import helios.engine.core.data.GameObjectPool;
+import helios.engine.runtime.pooling.GameObjectPool;
 import helios.engine.core.data.GameObjectPoolId;
 import helios.engine.runtime.world.Manager;
 import helios.engine.runtime.world.GameWorld;
 
-import helios.engine.game.PoolRequestHandler;
+import helios.engine.runtime.pooling.PoolRequestHandler;
 
 import helios.engine.game.pool.components.PoolIdComponent;
 
@@ -70,7 +70,7 @@ export namespace helios::engine::mechanics::combat::manager {
      * @see SpawnCondition
      * @see PoolRequestHandler
      */
-    class ProjectilePoolManager : public helios::engine::runtime::world::Manager, public helios::engine::game::PoolRequestHandler {
+    class ProjectilePoolManager : public helios::engine::runtime::world::Manager, public helios::engine::runtime::pooling::PoolRequestHandler {
 
         /**
          * @brief The pool ID this manager is responsible for.
@@ -80,7 +80,7 @@ export namespace helios::engine::mechanics::combat::manager {
         /**
          * @brief Pointer to the managed projectile pool.
          */
-        helios::engine::core::data::GameObjectPool* gameObjectPool_;
+        helios::engine::runtime::pooling::GameObjectPool* gameObjectPool_;
 
         /**
          * @brief Queue of pending projectile spawn requests.

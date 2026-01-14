@@ -8,13 +8,13 @@ module;
 #include <unordered_map>
 #include <vector>
 
-export module helios.engine.game.PoolRequestHandlerRegistry;
+export module helios.engine.runtime.pooling.PoolRequestHandlerRegistry;
 
 import helios.engine.core.data.GameObjectPoolId;
-import helios.engine.game.PoolRequestHandler;
+import helios.engine.runtime.pooling.PoolRequestHandler;
 
 
-export namespace helios::engine::game {
+export namespace helios::engine::runtime::pooling  {
 
     /**
      * @brief Registry that maps GameObjectPoolIds to their PoolRequestHandlers.
@@ -56,7 +56,7 @@ export namespace helios::engine::game {
          * @details Stores non-owning pointers to handlers. Handlers must outlive
          * this registry.
          */
-        std::unordered_map<helios::engine::core::data::GameObjectPoolId, helios::engine::game::PoolRequestHandler*> registry_{};
+        std::unordered_map<helios::engine::core::data::GameObjectPoolId, helios::engine::runtime::pooling::PoolRequestHandler*> registry_{};
 
 
     public:
@@ -73,7 +73,7 @@ export namespace helios::engine::game {
          */
         [[nodiscard]] bool add(
             const helios::engine::core::data::GameObjectPoolId gameObjectPoolId,
-            helios::engine::game::PoolRequestHandler& poolManager
+            helios::engine::runtime::pooling::PoolRequestHandler& poolManager
         ) {
             if (registry_.contains(gameObjectPoolId)) {
                 return false;
@@ -91,7 +91,7 @@ export namespace helios::engine::game {
          *
          * @return Pointer to the handler if found, nullptr otherwise.
          */
-        [[nodiscard]] helios::engine::game::PoolRequestHandler* get(helios::engine::core::data::GameObjectPoolId gameObjectPoolId) {
+        [[nodiscard]] helios::engine::runtime::pooling::PoolRequestHandler* get(helios::engine::core::data::GameObjectPoolId gameObjectPoolId) {
             auto it = registry_.find(gameObjectPoolId);
 
             if (it == registry_.end()) {

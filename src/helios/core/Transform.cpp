@@ -1,12 +1,12 @@
 module;
 
-module helios.core.Transform;
+module helios.core.spatial.Transform;
 
 import helios.math.types;
 import helios.math.transform;
 
 
-namespace helios::core {
+namespace helios::core::spatial {
 
     helios::math::mat4f Transform::updateCache() const {
         needsUpdate_ = false;

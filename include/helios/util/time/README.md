@@ -1,4 +1,4 @@
-## helios::util::time
+# helios::util::time
 
 Utilities related to high-resolution timing and simple time helpers used throughout the engine.
 

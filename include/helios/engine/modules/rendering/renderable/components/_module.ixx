@@ -5,4 +5,4 @@
 
 export module helios.engine.game.rendering.components;
 
-export import helios.engine.game.rendering.components.RenderableComponent;
+export import helios.engine.game.rendering.renderable.components.RenderableComponent;

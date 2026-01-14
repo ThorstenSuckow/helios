@@ -23,7 +23,7 @@ import helios.engine.game.spatial.transform.components.TranslationStateComponent
 import helios.engine.game.physics.motion.components.RotationStateComponent;
 import helios.engine.game.physics.collision.components.AabbColliderComponent;
 
-import helios.engine.game.model.components.ModelAabbComponent;
+import helios.engine.game.rendering.model.components.ModelAabbComponent;
 
 export namespace helios::engine::game::physics::collision::systems {
 
@@ -60,7 +60,7 @@ export namespace helios::engine::game::physics::collision::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
             for (auto [entity, mab, sc, tsc, sca, rsc, bc] : gameWorld_->find<
-                helios::engine::game::model::components::ModelAabbComponent,
+                helios::engine::game::rendering::model::components::ModelAabbComponent,
                 helios::engine::game::scene::components::SceneNodeComponent,
                 helios::engine::game::spatial::transform::components::TranslationStateComponent,
                 helios::engine::game::spatial::transform::components::ScaleComponent,

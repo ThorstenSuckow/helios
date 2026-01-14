@@ -144,7 +144,7 @@ export namespace helios::math {
         }
 
         /**
-         * @brief Checks if this AABB intersects another AABB.
+         * @brief Checks if this AABB intersects or touches another AABB.
          *
          * @param box The AABB to test for intersection.
          *
@@ -152,13 +152,13 @@ export namespace helios::math {
          */
         [[nodiscard]] constexpr bool intersects(const helios::math::aabb<T>& box) const noexcept {
 
-            if (max_[0] <= box.min()[0] || min_[0] >= box.max()[0]) {
+            if (max_[0] < box.min()[0] || min_[0] > box.max()[0]) {
                 return false;
             }
-            if (max_[1] <= box.min()[1] || min_[1] >= box.max()[1]) {
+            if (max_[1] < box.min()[1] || min_[1] > box.max()[1]) {
                 return false;
             }
-            if (max_[2] <= box.min()[2] || min_[2] >= box.max()[2]) {
+            if (max_[2] < box.min()[2] || min_[2] > box.max()[2]) {
                 return false;
             }
             return true;

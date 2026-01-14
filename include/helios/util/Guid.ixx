@@ -13,6 +13,10 @@ export module helios.util.Guid;
 
 export namespace helios::util {
 
+    struct no_init_t{};
+
+    inline constexpr no_init_t no_init;
+
     /**
      * @brief Representative of a Globally Unique Identifier.
      *
@@ -20,10 +24,15 @@ export namespace helios::util {
      */
     class Guid final {
     private:
-        explicit Guid(uint64_t value) noexcept;
-        uint64_t value_;
+        explicit Guid(uint64_t value) noexcept : value_(value) {}
+        uint64_t value_{};
 
     public:
+
+        /**
+         * @brief Unsafe Guid initializer for (local) var initialization.
+         */
+        explicit Guid(no_init_t) {};
 
         /**
          * @brief Compares two Guid instances for equality.
@@ -74,7 +83,10 @@ export namespace helios::util {
          *
          * @return A newly generated `Guid` instance.
          */
-        static Guid generate() noexcept;
+        static Guid generate() noexcept {
+            static std::atomic<uint64_t> counter{1};
+            return Guid(counter.fetch_add(1, std::memory_order_relaxed));
+        }
 
         /**
          * @brief Returns the raw 64-bit value of this Guid.

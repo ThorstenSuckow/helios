@@ -193,6 +193,16 @@ async function main() {
       meta: { title: 'Game Loop Architecture', description: 'Commands, Events, double-buffered EventBus, and ImmediateBus for decoupled game systems.', slug: '/core-concepts/gameloop-architecture', tags: ['gameplay', 'architecture'], keywords: ['helios', 'game loop', 'commands', 'events', 'EventBus', 'CommandBuffer'], sidebar_label: 'Game Loop', sidebar_position: 4 }
     },
     {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'command-system.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'command-system.md'),
+      meta: { title: 'Command System', description: 'Command pattern implementation with CommandBuffer, Dispatchers, and Manager integration for deferred action execution.', slug: '/core-concepts/command-system', tags: ['gameplay', 'architecture', 'commands'], keywords: ['helios', 'command pattern', 'CommandBuffer', 'dispatcher', 'manager', 'deferred execution'], sidebar_label: 'Command System', sidebar_position: 5 }
+    },
+    {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'event-system.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'event-system.md'),
+      meta: { title: 'Event System', description: 'Double-buffered event buses with phase/pass propagation for decoupled system communication.', slug: '/core-concepts/event-system', tags: ['gameplay', 'architecture', 'events'], keywords: ['helios', 'event system', 'EventBus', 'phase', 'pass', 'double-buffer', 'decoupled communication'], sidebar_label: 'Event System', sidebar_position: 6 }
+    },
+    {
       src: path.join(repoRoot, 'examples', 'README.md'),
       dest: path.join(websiteRoot, 'docs', 'examples', 'overview.md'),
       meta: { title: 'Examples Overview', description: 'Example applications demonstrating helios features: rendering, input, scene graph, and more.', slug: '/examples', tags: ['examples', 'tutorial'], keywords: ['helios', 'examples', 'tutorials', 'getting started'], sidebar_label: 'Overview' }

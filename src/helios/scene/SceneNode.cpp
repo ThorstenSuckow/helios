@@ -8,7 +8,7 @@ module helios.scene.SceneNode;
 
 import helios.rendering.Renderable;
 import helios.util.Guid;
-import helios.core.Transform;
+import helios.core.spatial.Transform;
 import helios.math.types;
 import helios.math.TransformType;
 

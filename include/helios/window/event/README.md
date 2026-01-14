@@ -1,4 +1,4 @@
-## helios::window::event
+# helios::window::event
 
 This namespace provides window-specific event types such as resize events and framebuffer events for handling window state changes. Defines event types for communicating window state changes to the application, enabling responsive handling of window operations.
 

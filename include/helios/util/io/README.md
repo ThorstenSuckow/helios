@@ -1,4 +1,4 @@
-## helios::util::io
+# helios::util::io
 
 This namespace provides file reading utilities including string-based file readers for loading text and shader files. Provides file I/O utilities for loading resources such as shader source files and configuration data.
 

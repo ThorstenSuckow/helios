@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-import helios.core.units;
+import helios.core.units.Unit;
 
 using namespace helios::core::units;
 

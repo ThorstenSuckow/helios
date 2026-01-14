@@ -20,20 +20,49 @@ The framework's architecture follows a component-based philosophy, providing abs
 
 ```
 helios
-├── core              # Units and fundamental constants
+├── core              # Units, buffers, and fundamental constants
+│   ├── buffer        # Double-buffered data structures
+│   ├── data          # Type indexing and typed containers
+│   └── units         # Measurement units (meters, seconds)
 ├── rendering         # Rendering pipeline and render commands
 │   ├── model         # Mesh, Material, and configuration
 │   ├── shader        # Shader programs and uniform management
-│   └── asset         # Geometric shapes and assets
+│   └── asset         # Geometric shapes and primitives
 ├── scene             # Scene graph, camera, and culling
 ├── input             # Keyboard, mouse, and gamepad input
+│   └── gamepad       # Gamepad state and deadzone handling
 ├── window            # Window management and events
-├── engine            # Frame pacing and timing control
-│   └── game          # Game objects and command pattern
-├── math              # Vectors, matrices, transforms
-├── util              # Logging, file I/O, utilities
-├── tooling           # Performance metrics and profiling
-└── app               # Application lifecycle and event management
+├── engine            # Game engine core
+│   ├── core          # Messaging, data structures, units
+│   │   ├── data          # Type-indexed containers, pool IDs
+│   │   ├── messaging     # Commands and events (re-exports runtime.messaging)
+│   │   └── units         # Measurement units (meters, seconds)
+│   ├── ecs           # Entity-Component-System base classes
+│   │   ├── Component     # Data container base
+│   │   ├── GameObject    # Entity container
+│   │   ├── System        # Logic processor base
+│   │   └── query/        # GameObjectFilter, GameObjectView
+│   ├── runtime       # Runtime infrastructure
+│   │   ├── world         # GameWorld, Level, UpdateContext, Manager
+│   │   ├── gameloop      # GameLoop, Phase, Pass
+│   │   ├── pooling       # GameObjectPool, PoolRegistry, PoolFacade
+│   │   ├── messaging     # CommandBuffer, Dispatchers, EventBus
+│   │   └── factory       # GameObjectFactory
+│   ├── modules       # Domain-specific components and systems
+│   │   ├── physics       # Collision, motion systems
+│   │   ├── spatial       # Transform components
+│   │   ├── scene         # Scene graph integration
+│   │   ├── rendering     # Renderable components
+│   │   └── pool          # Pool ID components
+│   ├── mechanics     # Gameplay mechanics
+│   │   ├── bounds        # Level boundary behavior
+│   │   ├── combat        # Shooting, projectiles
+│   │   ├── spawn         # Entity spawning
+│   │   └── input         # Twin-stick input systems
+│   └── tooling       # Frame pacing and performance metrics
+├── math              # Vectors, matrices, transforms, AABB
+├── util              # Logging, file I/O, GUID, utilities
+└── app               # Application lifecycle and controllers
 ```
 
 ### Extension Modules
@@ -291,48 +320,79 @@ overlay.render();
 
 ### 8. Game System
 
-A lightweight framework for game object management and input handling.
+A composition-based game architecture separating data (Components) from behavior (Systems).
 
 **Key Classes:**
-- `GameObject` - Base class for game entities with GUID identification
-- `GameWorld` - Container for game objects with update loop
-- `CommandBuffer` - Deferred command execution pattern
-- `InputSnapshot` - Captures input state for a single frame
-- `InputHandler` - Interface for translating input to commands
+- `GameObject` - Container for Components with unique GUID
+- `Component` - Data container attached to GameObjects
+- `System` - Processes GameObjects with specific component configurations
+- `GameWorld` - Root container for entities, managers, and pools
+- `GameLoop` - Orchestrates Systems across Phases (Pre, Main, Post)
+- `Manager` - Handles deferred operations (spawning, pooling)
+- `CommandBuffer` - Buffers commands for deterministic execution
 
-**Example:**
+**Component-Based Design:**
 ```cpp
-import helios.engine.game.GameWorld;
-import helios.engine.game.GameObject;
-import helios.engine.game.CommandBuffer;
-import helios.engine.game.InputSnapshot;
+import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameWorld;
 
-// Create game world
-auto gameWorld = GameWorld{};
+// Create entity with components
+auto entity = std::make_unique<GameObject>();
+entity->add<SceneNodeComponent>(sceneNode);
+entity->add<Move2DComponent>();
+entity->add<CollisionComponent>(layerId, collisionMask);
 
-// Add game objects
-auto spaceship = std::make_unique<Spaceship>(sceneNode);
-auto* spaceshipPtr = gameWorld.addGameObject(std::move(spaceship));
+// Add to world
+auto* player = gameWorld.addGameObject(std::move(entity));
 
-// Set size using engine units (1 hu = 1 meter)
-spaceshipPtr->setSize(5.0f, 5.0f, 0.0f, helios::core::units::Unit::Meter);
-
-// Game loop
-auto commandBuffer = CommandBuffer{};
-while (running) {
-    // Capture input
-    auto snapshot = InputSnapshot(gamepadState);
-    
-    // Translate input to commands
-    inputHandler.handleInput(snapshot, spaceshipPtr->guid(), commandBuffer);
-    
-    // Execute commands
-    commandBuffer.flush(gameWorld);
-    
-    // Update all game objects
-    gameWorld.update(deltaTime);
+// Query entities by component (O(1) per entity)
+for (auto [obj, move] : gameWorld.find<Move2DComponent>().each()) {
+    // Process all entities with Move2DComponent
 }
 ```
+
+**GameLoop with Phases:**
+```cpp
+import helios.engine.runtime.gameloop.GameLoop;
+
+GameLoop gameLoop;
+
+// Pre Phase: Input processing
+gameLoop.phase(PhaseType::Pre)
+    .addPass()
+    .addSystem<InputSystem>(gameWorld);
+
+// Main Phase: Gameplay logic
+gameLoop.phase(PhaseType::Main)
+    .addPass()
+    .addSystem<Move2DSystem>(gameWorld)
+    .addSystem<CollisionSystem>(gameWorld);
+
+// Post Phase: Synchronization
+gameLoop.phase(PhaseType::Post)
+    .addPass()
+    .addSystem<SceneSyncSystem>(gameWorld, scene);
+
+// Run game loop
+gameLoop.init(gameWorld);
+while (running) {
+    gameLoop.update(updateContext);
+}
+```
+
+**Object Pooling:**
+```cpp
+import helios.engine.runtime.pooling.GameObjectPool;
+
+// Create pool for projectiles
+auto pool = std::make_unique<GameObjectPool>();
+gameWorld.addPool(bulletPoolId, std::move(pool));
+
+// Register manager for spawn/despawn
+gameWorld.addManager<ProjectilePoolManager>(bulletPoolId, factory, spawnCondition);
+```
+
+See [Component System](core-concepts/component-system.md), [Game Loop Architecture](core-concepts/gameloop-architecture.md), and [Command System](core-concepts/command-system.md) for details.
 
 ### 9. Units System
 
@@ -344,7 +404,7 @@ Standardized measurement units for consistent object sizing across the engine.
 
 **Example:**
 ```cpp
-import helios.core.units;
+import helios.core.units.Unit;
 
 using namespace helios::core::units;
 
@@ -366,8 +426,8 @@ Control frame rate and monitor performance with built-in timing tools.
 
 **Example:**
 ```cpp
-import helios.engine.FramePacer;
-import helios.tooling.FpsMetrics;
+import helios.engine.tooling.FramePacer;
+import helios.engine.tooling.FpsMetrics;
 
 // Setup frame pacing
 FramePacer pacer;
@@ -474,13 +534,25 @@ int main() {
 
 For detailed information about each module, see:
 
+### Core Concepts
+
+- **[Component System](core-concepts/component-system.md)** - ECS-style composition architecture
+- **[Game Loop Architecture](core-concepts/gameloop-architecture.md)** - Phase/Pass structure and event handling
+- **[Command System](core-concepts/command-system.md)** - Deferred action execution
+- **[Event System](core-concepts/event-system.md)** - Phase/Pass event propagation
+- **[Scene Graph](core-concepts/scene-graph.md)** - Hierarchical scene organization
+- **[Conventions](core-concepts/conventions.md)** - Coordinate system, units, matrix storage
+
+### Module References
+
 - **[Core](../include/helios/core/README.md)** - Units and fundamental constants
 - **[Rendering](../include/helios/rendering/README.md)** - Rendering system and pipeline
 - **[Scene](../include/helios/scene/README.md)** - Scene graph and camera
-- **[Game](../include/helios/engine/game/README.md)** - Game objects and command pattern
+- **[Engine](../include/helios/engine/README.md)** - Game engine core (ECS, runtime, modules)
+- **[Modules](../include/helios/engine/modules/README.md)** - Domain-specific components and systems
+- **[Mechanics](../include/helios/engine/mechanics/README.md)** - Gameplay mechanics (combat, spawn, bounds)
 - **[Input](../include/helios/input/README.md)** - Input handling
-- **[Engine](../include/helios/engine/README.md)** - Frame pacing and timing control
-- **[Tooling](../include/helios/tooling/README.md)** - Performance metrics and profiling
+- **[Tooling](../include/helios/engine/tooling/README.md)** - Performance metrics and profiling
 - **[Math](../include/helios/math/README.md)** - Mathematical operations
 - **[Window](../include/helios/window/README.md)** - Window management
 - **[Utilities](../include/helios/util/README.md)** - Logging, file I/O
@@ -516,6 +588,8 @@ Check the [examples/](../examples/) directory for complete working examples:
 - **[Simple Cube Rendering](../examples/simple_cube_rendering/README.md)** - Basic rendering tutorial
 - **[Game Controller Input](../examples/game_controller_input/README.md)** - Gamepad input handling
 - **[Spaceship Control](../examples/spaceship_control/README.md)** - Complete game loop with input, logging, and ImGui overlay
+- **[Spaceship Shooting](../examples/spaceship_shooting/README.md)** - Twin-stick shooter with collision detection and object pooling
+- **[Enemy Spawn](../examples/enemy_spawn/README.md)** - Entity spawning with spawn conditions and strategies
 
 ## License
 

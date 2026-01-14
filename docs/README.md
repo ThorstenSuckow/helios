@@ -10,11 +10,23 @@ Here's an overview of the available documents:
 |--------------------------------------------------------------------------------------------|---|
 | ▸  **[API Reference (`heliosapi.md`)](./heliosapi.md)**                                    | A high-level overview of the framework's architecture and core concepts. |
 | ▸ **[Coding Styleguide (`styleguide.md`)](./styleguide.md)**                               | Defines the C++ coding conventions, module structure, and formatting rules for the project. |
-| ▸ **[Technical Conventions (`CONVENTIONS.md`)](CONVENTIONS.md)**                           | Documents coordinate systems (LHS), matrix storage (column-major), units system, and mathematical foundations. |
+| ▸ **[Technical Conventions](./core-concepts/conventions.md)**                              | Documents coordinate systems (LHS), matrix storage (column-major), units system, and mathematical foundations. |
 | ▸  **[Doxygen Styleguide (`doxygen-style.md`)](./doxygen-style.md)**                       | Guidelines for writing consistent and effective Doxygen comments for the public API. |
 | ▸  **[Contributing Guide (`CONTRIBUTING.md`)](./CONTRIBUTING.md)**                         | A comprehensive guide on how to contribute, including commit conventions and the PR process. |
 | ▸  **[Issue Submission Guide (`issue_submission_guide.md`)](./issue_submission_guide.md)** | Guidelines for submitting well-structured bug reports, feature requests, and refactoring proposals. |
 | ▸  **[Changelog Guide (`CHANGELOG_GUIDE.md`)](./CHANGELOG_GUIDE.md)**                      | How to write and maintain changelog entries. |
+
+## Core Concepts
+
+Detailed architectural documentation:
+
+| Document | Description |
+|----------|-------------|
+| ▸ **[Component System](./core-concepts/component-system.md)** | ECS-style composition architecture with GameObjects and Components |
+| ▸ **[Game Loop Architecture](./core-concepts/gameloop-architecture.md)** | Phase/Pass structure, event handling, and update flow |
+| ▸ **[Command System](./core-concepts/command-system.md)** | Deferred action execution via CommandBuffer |
+| ▸ **[Event System](./core-concepts/event-system.md)** | Phase/Pass event propagation with double-buffered buses |
+| ▸ **[Scene Graph](./core-concepts/scene-graph.md)** | Hierarchical scene organization and transform inheritance |
 
 
 ## API Docs (Doxygen)

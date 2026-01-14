@@ -1,8 +1,11 @@
 /**
  * @file _module.ixx
- * @brief Facade module for helios::core.
+ * @brief Aggregate module for helios::core namespace.
  */
+
 export module helios.core;
 
+export import helios.core.buffer;
 export import helios.core.data;
-export import helios.core.Transform;
+export import helios.core.spatial;
+

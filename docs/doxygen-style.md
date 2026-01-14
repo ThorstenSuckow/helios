@@ -9,6 +9,7 @@ This document summarizes the minimal rules we use for Doxygen comments in the He
 - Use these Doxygen tags as needed: `@brief, @param, @return, @tparam, @see, @note, @todo`.
 - No empty `@return` or `@param` tags. Omit tags if there is nothing to say.
 - Write complete sentences, simple phrasing, correct capitalization and punctuation.
+- **No inline comments:** Do not place comments on the same line as code. Always place comments on a separate line above the code they describe.
 
 ## Format & Examples
 

@@ -1,0 +1,84 @@
+/**
+ * @file System.ixx
+ * @brief Base class for game systems that operate on the GameWorld.
+ */
+module;
+
+
+export module helios.engine.ecs.System;
+
+import helios.engine.ecs.Updatable;
+
+export namespace helios::engine::ecs {
+
+    class GameWorld;
+
+    /**
+     * @brief Abstract base class for game systems.
+     *
+     * @details Systems are global game logic processors that operate on the GameWorld
+     * rather than individual GameObjects, ideal for cross-cutting concerns
+     * like physics simulation, collision detection, or object pooling.
+     *
+     * Systems are added to a GameWorld and receive update calls each frame.
+     * The `onAdd()` callback provides access to the GameWorld for initialization.
+     *
+     * Example usage:
+     * ```cpp
+     * class PhysicsSystem : public System {
+     * public:
+     *     void update(UpdateContext& ctx) noexcept override {
+     *         // Apply physics to all rigid bodies
+     *     }
+     * };
+     *
+     * gameWorld.addSystem(std::make_unique<PhysicsSystem>());
+     * ```
+     */
+    class System : public helios::engine::ecs::Updatable {
+
+    protected:
+
+        /**
+         * @brief Pointer to the GameWorld this system belongs to.
+         *
+         * @details Set by `onAdd()` when the system is registered with a GameWorld.
+         * Non-owning pointer; valid for the lifetime of the system.
+         */
+        helios::engine::runtime::world::GameWorld* gameWorld_ = nullptr;
+
+    public:
+
+        /**
+         * @brief Virtual destructor for proper cleanup of derived systems.
+         */
+        virtual ~System() = default;
+
+        /**
+         * @brief Called when the system is initialized by the GameWorld.
+         *
+         * @details Override this method to perform initialization that requires
+         * access to the GameWorld (e.g., querying the scene graph, registering
+         * event handlers).
+         *
+         * @param gameWorld The GameWorld this system is being added to.
+         *
+         * @deprected use init
+         */
+        virtual void init(helios::engine::runtime::world::GameWorld& gameWorld) noexcept {
+            gameWorld_ = &gameWorld;
+        }
+
+
+
+        /**
+         * @brief Updates the system each frame.
+         *
+         * @param updateContext The update context containing frame timing information.
+         */
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override = 0;
+
+    };
+
+
+}

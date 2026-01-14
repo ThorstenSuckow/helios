@@ -1,4 +1,4 @@
-## helios::util::log
+# helios::util::log
 
 Flexible logging system with configurable output destinations. Sinks register themselves with unique identifiers, allowing dynamic enable/disable at runtime without compile-time knowledge of all sink types.
 

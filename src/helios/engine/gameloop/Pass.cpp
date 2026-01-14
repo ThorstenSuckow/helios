@@ -28,10 +28,8 @@ namespace helios::engine::runtime::gameloop {
         }
     }
 
-    void Pass::commit() {
-        if (hasCommitPoint_) {
-            owner_.gameLoop().passCommit();
-        }
+    void Pass::commit(const CommitPoint commitPoint, helios::engine::runtime::world::UpdateContext& updateContext) {
+        owner_.gameLoop().passCommit(commitPoint, updateContext);
     }
 
 

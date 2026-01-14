@@ -32,10 +32,12 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Core Concepts',
       items: [
-        'core-concepts/scene-graph',
         'core-concepts/conventions',
+        'core-concepts/scene-graph',
         'core-concepts/component-system',
         'core-concepts/gameloop-architecture',
+        'core-concepts/command-system',
+        'core-concepts/event-system'
       ],
     },
     {

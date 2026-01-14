@@ -4,14 +4,14 @@
  */
 module;
 
-export module helios.engine.game.PoolRequestHandler;
+export module helios.engine.runtime.pooling.PoolRequestHandler;
 
 import helios.engine.ecs.GameObject;
 
 import helios.engine.mechanics.spawn.requests.DespawnRequest;
 import helios.engine.mechanics.spawn.requests.SpawnRequest;
 
-export namespace helios::engine::game {
+export namespace helios::engine::runtime::pooling {
 
     class GameWorld;
 

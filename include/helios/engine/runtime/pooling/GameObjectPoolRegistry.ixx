@@ -7,14 +7,14 @@ module;
 #include <memory>
 #include <unordered_map>
 
-export module helios.engine.core.data.GameObjectPoolRegistry;
+export module helios.engine.runtime.pooling.GameObjectPoolRegistry;
 
 
-import helios.engine.core.data.GameObjectPool;
+import helios.engine.runtime.pooling.GameObjectPool;
 import helios.engine.core.data.GameObjectPoolId;
 
 
-export namespace helios::engine::core::data {
+export namespace helios::engine::runtime::pooling {
 
     /**
      * @brief Central registry for managing multiple named GameObjectPools.
@@ -48,7 +48,7 @@ export namespace helios::engine::core::data {
         /**
          * @brief Maps pool IDs to their corresponding GameObjectPool instances.
          */
-        std::unordered_map<GameObjectPoolId, std::unique_ptr<GameObjectPool>> pools_;
+        std::unordered_map<helios::engine::core::data::GameObjectPoolId, std::unique_ptr<GameObjectPool>> pools_;
 
     public:
 
@@ -69,7 +69,7 @@ export namespace helios::engine::core::data {
          * @return Raw pointer to the added pool for immediate use.
          */
         GameObjectPool* addPool(
-            const GameObjectPoolId id,
+            const helios::engine::core::data::GameObjectPoolId id,
             std::unique_ptr<GameObjectPool> gameObjectPool
         ) noexcept {
             pools_[id] = std::move(gameObjectPool);
@@ -83,7 +83,7 @@ export namespace helios::engine::core::data {
          *
          * @return Pointer to the pool, or nullptr if not found.
          */
-        [[nodiscard]] GameObjectPool* pool(const GameObjectPoolId id) const {
+        [[nodiscard]] GameObjectPool* pool(const helios::engine::core::data::GameObjectPoolId id) const {
 
             const auto& it = pools_.find(id);
 

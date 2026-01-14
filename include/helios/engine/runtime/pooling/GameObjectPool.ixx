@@ -13,11 +13,11 @@ module;
 #include <vector>
 
 
-export module helios.engine.core.data.GameObjectPool;
+export module helios.engine.runtime.pooling.GameObjectPool;
 
 import helios.util.Guid;
 
-export namespace helios::engine::core::data {
+export namespace helios::engine::runtime::pooling {
 
 
     /**

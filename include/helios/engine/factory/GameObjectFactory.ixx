@@ -12,7 +12,7 @@ export module helios.engine.factory.GameObjectFactory;
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.GameWorld;
 
-import helios.engine.core.data.GameObjectPool;
+import helios.engine.runtime.pooling.GameObjectPool;
 import helios.engine.core.data.GameObjectPoolId;
 
 import helios.engine.game.pool.components.PoolIdComponent;
@@ -87,7 +87,7 @@ export namespace helios::engine::factory {
          */
         void fillPool(
             helios::engine::runtime::world::GameWorld& gameWorld,
-            helios::engine::core::data::GameObjectPool& gameObjectPool
+            helios::engine::runtime::pooling::GameObjectPool& gameObjectPool
         ) {
             const size_t used  = gameObjectPool.activeCount() + gameObjectPool.inactiveCount();
             const size_t space = used < gameObjectPool.size() ? gameObjectPool.size() - used : 0;

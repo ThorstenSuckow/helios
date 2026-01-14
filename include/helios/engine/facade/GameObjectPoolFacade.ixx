@@ -11,7 +11,7 @@ export module helios.engine.facade.GameObjectPoolFacade;
 
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.GameWorld;
-import helios.engine.core.data.GameObjectPool;
+import helios.engine.runtime.pooling.GameObjectPool;
 
 import helios.util.Guid;
 
@@ -50,7 +50,7 @@ export namespace helios::engine::facade {
          */
         helios::engine::ecs::GameObject* release(
             helios::engine::runtime::world::GameWorld& gameWorld,
-            helios::engine::core::data::GameObjectPool& gameObjectPool,
+            helios::engine::runtime::pooling::GameObjectPool& gameObjectPool,
             const helios::util::Guid& entityId
         ) {
             helios::engine::ecs::GameObject* worldGo = gameWorld.find(entityId);
@@ -83,7 +83,7 @@ export namespace helios::engine::facade {
          */
         [[nodiscard]] helios::engine::ecs::GameObject* acquire(
             helios::engine::runtime::world::GameWorld& gameWorld,
-            helios::engine::core::data::GameObjectPool& gameObjectPool
+            helios::engine::runtime::pooling::GameObjectPool& gameObjectPool
         )  {
             helios::util::Guid guid{helios::util::no_init};
 

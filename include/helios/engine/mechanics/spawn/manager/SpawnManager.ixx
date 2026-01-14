@@ -14,7 +14,7 @@ export module helios.engine.mechanics.spawn.manager.SpawnManager;
 
 import helios.engine.runtime.world.Manager;
 
-import helios.engine.core.data.GameObjectPool;
+import helios.engine.runtime.pooling.GameObjectPool;
 import helios.engine.core.data.GameObjectPoolId;
 
 import helios.engine.mechanics.spawn.requests.SpawnRequest;
@@ -33,7 +33,7 @@ import helios.engine.game.physics.motion.components.Move2DComponent;
 import helios.engine.game.physics.motion.components.DirectionComponent;
 import helios.engine.game.spatial.transform.components.TranslationStateComponent;
 
-import helios.engine.game.PoolRequestHandler;
+import helios.engine.runtime.pooling.PoolRequestHandler;
 
 import helios.util.Random;
 
@@ -62,7 +62,7 @@ export namespace helios::engine::mechanics::spawn::manager {
      * @see GameObjectFactory
      * @see PoolRequestHandler
      */
-    class SpawnManager : public helios::engine::runtime::world::Manager, public helios::engine::game::PoolRequestHandler {
+    class SpawnManager : public helios::engine::runtime::world::Manager, public helios::engine::runtime::pooling::PoolRequestHandler {
 
         /**
          * @brief The pool ID this manager is responsible for.
@@ -72,7 +72,7 @@ export namespace helios::engine::mechanics::spawn::manager {
         /**
          * @brief Pointer to the managed pool.
          */
-        helios::engine::core::data::GameObjectPool* gameObjectPool_;
+        helios::engine::runtime::pooling::GameObjectPool* gameObjectPool_;
 
         /**
          * @brief Queue of pending spawn requests.

@@ -10,7 +10,7 @@ export module helios.engine.mechanics.spawn.logic.SpawnCondition;
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.Level;
 import helios.engine.core.data.GameObjectPoolId;
-import helios.engine.core.data.GameObjectPool;
+import helios.engine.runtime.pooling.GameObjectPool;
 import helios.engine.runtime.world.UpdateContext;
 
 
@@ -56,7 +56,7 @@ export namespace helios::engine::mechanics::spawn::logic {
          */
         virtual float spawnBudget(
             const helios::engine::runtime::world::GameWorld& gameWorld,
-            const helios::engine::core::data::GameObjectPool& gameObjectPool,
+            const helios::engine::runtime::pooling::GameObjectPool& gameObjectPool,
             const helios::engine::runtime::world::UpdateContext& updateContext
         ) noexcept = 0;
 

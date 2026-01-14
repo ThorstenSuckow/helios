@@ -18,7 +18,7 @@ import helios.engine.core.messaging.command.TypedWorldCommandDispatcher;
 
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.GameWorld;
-import helios.engine.game.PoolRequestHandler;
+import helios.engine.runtime.pooling.PoolRequestHandler;
 
 
 

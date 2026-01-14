@@ -6,7 +6,7 @@ module;
 
 #include <helios/engine/ecs/query/GameObjectView.h>
 
-export module helios.engine.modules.spatial.transform.systems.postproc.TransformClearSystem;
+export module helios.engine.modules.spatial.transform.systems.TransformClearSystem;
 
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.ecs.System;
@@ -16,7 +16,7 @@ import helios.engine.modules.scene.components.SceneNodeComponent;
 import helios.engine.modules.spatial.transform.components.TransformComponent;
 
 
-export namespace helios::engine::modules::spatial::transform::systems::postproc {
+export namespace helios::engine::modules::spatial::transform::systems {
 
     /**
      * @brief System that clears the dirty state of TransformComponents at the end of a frame.

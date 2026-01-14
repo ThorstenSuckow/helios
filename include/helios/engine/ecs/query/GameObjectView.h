@@ -20,9 +20,9 @@
 
 import helios.engine.ecs.query.GameObjectFilter;
 
-namespace helios::engine::modules {
+namespace helios::engine::ecs {
 class GameObject;
-} // namespace helios::engine::modules
+} // namespace helios::engine::ecs
 
 using namespace helios::engine::ecs::query;
 
@@ -127,7 +127,7 @@ private:
     [[nodiscard]] static bool matches(const Obj* obj,
                                       const GameObjectFilter filterType) noexcept {
 
-        using namespace helios::engine::modules;
+        using namespace helios::engine::ecs;
 
         static constexpr auto activeMask  = GameObjectFilter::Active | GameObjectFilter::Inactive;
         static constexpr auto enabledMask = GameObjectFilter::ComponentEnabled | GameObjectFilter::ComponentDisabled;

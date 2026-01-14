@@ -7,194 +7,122 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [Milestone 3] - 2025-12-25
+### Added
+- `helios.engine.ecs` module with base classes (`Component`, `GameObject`, `System`, `Updatable`)
+- `helios.engine.ecs.query` submodule with `GameObjectFilter` and `GameObjectView`
+- `helios.engine.runtime` aggregate module for runtime infrastructure
+- `helios.engine.runtime.world` submodule with `GameWorld`, `Level`, `UpdateContext`, `SystemRegistry`, `Manager`
+- `helios.engine.runtime.pooling` submodule with `GameObjectPool`, `GameObjectPoolRegistry`, `GameObjectPoolFacade`, `PoolRequestHandler`, `PoolRequestHandlerRegistry`
+- `helios.engine.runtime.gameloop` submodule with `GameLoop`, `Phase`, `Pass`
+- `helios.engine.runtime.messaging` for commands and events
+- `helios.engine.mechanics` for gameplay-specific systems (bounds, combat, spawn, input)
+- `helios.engine.modules` for domain-agnostic subsystems (physics, spatial, scene, rendering, pool)
+- `ShootCommandDispatcher` for routing shoot commands to `ProjectilePoolManager`
+- `ProjectileSpawnRequest` data structure for projectile spawn parameters
+- `PoolIdComponent` for pool membership identification
+
+### Changed
+- **BREAKING**: Reorganized `helios.engine` into distinct submodules: `core`, `ecs`, `runtime`, `modules`, `mechanics`, `tooling`
+- **BREAKING**: Systems are now registered with `GameLoop` phases/passes instead of `GameWorld`
+- **BREAKING**: `GameWorld` no longer manages System instances — use `GameLoop::phase().addPass().addSystem<T>()`
+- Moved ECS base classes from `helios.engine.game` to `helios.engine.ecs`
+- Moved world management classes to `helios.engine.runtime.world`
+- Moved pooling infrastructure to `helios.engine.runtime.pooling`
+- Moved messaging infrastructure to `helios.engine.runtime.messaging`
+- `helios.engine.game` is now a facade module re-exporting common game development types
+- `helios.engine._module.ixx` updated to export `core`, `ecs`, `game`, `runtime`, `tooling` modules
+- All aggregate `_module.ixx` files now only export their direct submodules (clean hierarchy)
+- `SystemRegistry` is now internal to the `GameLoop` pass structure
+
+## [0.3.0-milestone3] - 2025-12-25
 
 ### Added
-
-#### Component System Architecture
 - `TransformComponent` for independent transform management (local/world)
 - `ScaleComponent` for unit-based sizing with dirty flag tracking
 - `AabbColliderComponent` for world-space bounding boxes
 - `ModelAabbComponent` for original model AABB storage
 - `LevelBoundsBehaviorComponent` for configurable boundary reactions (bounce, restitution)
 - Automatic AABB capture from SceneNode meshes via `onAttach()`
-
-#### Game Systems
 - `Move2DSystem` for 2D physics with rotation, velocity integration, and dampening
-- `ScaleSystem` for applying unit-based scaling from ScaleComponent
+- `ScaleSystem` for applying unit-based scaling from `ScaleComponent`
 - `BoundsUpdateSystem` for updating AABB colliders from world transforms
 - `LevelBoundsBehaviorSystem` for boundary collisions with bounce behavior
 - `SceneSyncSystem` for synchronizing gameplay transforms with scene graph
 - `TransformClearSystem` for clearing dirty flags at end of frame
 - `ScaleClearSystem` for clearing scale dirty flags at end of frame
 - `ProjectilePoolSystem` for efficient projectile object pooling
-
-#### Level System
-- `Level` class with configurable world bounds
-- AABB-based arena boundaries
-- Root SceneNode reference for level hierarchy
-- Unit-aware bounds configuration via `setBounds()`
-
-#### Gameplay Components
+- `Level` class with configurable world bounds and AABB-based arena boundaries
 - `Aim2DComponent` for direction tracking and firing frequency
 - `ShootComponent` for projectile firing with configurable cooldown and speed
-
-#### Rendering Assets
 - `Ellipse` 2D shape primitive for projectile and particle rendering
-- Configurable width, height, and segment count
-
-#### Utility
 - `Colors` struct with comprehensive color palette as `vec4f` (RGBA)
-- Standard colors (Black, White, Red, Green, Blue, Yellow, Cyan, Magenta)
-- Grayscale variants (LightGray, Gray, DarkGray)
-- Extended palette (Coral, Salmon, Orange, Turquoise, Gold, etc.)
-- `withW()` method for alpha channel modification
-
-#### ImGui Widgets
 - `LogWidget`: "None" scope option to completely disable logging (default)
 - `GamepadWidget`: Settings panel with side-by-side stick configuration
-- Left/Right stick deadzone and inversion in two-column layout
-- Settings panel initially expanded by default
-
-#### Examples
 - `spaceship_shooting` demo showcasing twin-stick shooter mechanics
-- Complete projectile pool integration with arena boundaries
-- Debug gizmo visualization for aim and velocity directions
 
 ### Changed
-
-#### SceneNodeComponent
-- **BREAKING**: `setSize()` method removed - use `ScaleComponent` instead
-- `onAttach()` now automatically captures AABB from SceneNode mesh
-
-#### GameWorld
-- **BREAKING**: Constructor no longer requires `Scene*` parameter
+- **BREAKING**: `SceneNodeComponent::setSize()` removed — use `ScaleComponent` instead
+- **BREAKING**: `GameWorld` constructor no longer requires `Scene*` parameter
+- **BREAKING**: `Move2DComponent::position()` removed (transforms managed by `TransformComponent`)
+- **BREAKING**: `Move2DComponent::rotationAngle()` renamed to `currentRotationAngle()`
+- `SceneNodeComponent::onAttach()` now automatically captures AABB from SceneNode mesh
 - Systems must be explicitly registered for game logic
 
-#### Move2DComponent
-- **BREAKING**: `position()` method removed (transforms managed by TransformComponent)
-- **BREAKING**: `rotationAngle()` renamed to `currentRotationAngle()`
-- Component now stores only physics state, not position
 
 ### Fixed
 - Forward declaration conflicts between Component and GameObject modules
 - Circular dependency in module imports resolved via shared headers
 
 
-## [Milestone 2] - 2025-12-16
+## [0.2.0-milestone2] - 2025-12-16
 
 ### Added
-
-#### Engine & Tooling
 - `FramePacer` class for frame rate control with configurable target FPS (#111)
 - `FrameStats` structure for frame timing information (frame time, idle time, work time)
 - `FpsMetrics` class for frame rate analysis and statistics
 - `Stopwatch` high-resolution timer utility
-
-#### Scene Graph & Camera System
 - `CameraSceneNode` for camera integration into scene hierarchy
-- `TransformType` enum for selective transform inheritance (Translation, Rotation, Scale) in `helios.math.transform`
+- `TransformType` enum for selective transform inheritance (Translation, Rotation, Scale)
 - `mat4::decompose()` member function for extracting transform components
 - `mat4::transpose()` member function for matrix transposition
-- `transformTypeMatch()` helper for bitmask flag testing
 - `lookAt()` and `lookAtLocal()` methods for camera orientation
 - `onWorldTransformUpdate()` virtual callback for transform change notifications
 - Camera-follows-object pattern via scene graph parenting
-
-#### Game System (`helios.engine.game`)
 - `GameObject` base class for game entities with GUID identification
 - `GameWorld` container for game object management and updates
 - `CommandBuffer` for deferred command execution pattern
 - `InputSnapshot` for capturing input state per frame
-- `InputHandler` interface for input-to-command translation
-- `setSize()` method for unit-based object sizing
-
-#### Units System (`helios.core.units`)
 - `Unit` enum (Meter, Centimeter, Seconds, MilliSeconds)
-- Conversion utilities between unit types
-- Standard unit: 1 Meter = 100 Centimeters (cm)
-- Time measurement standard: Seconds
-
-#### Gamepad Input System
 - `GamepadSettings` class for per-controller configuration
 - `DeadzoneStrategy` abstract interface for input normalization
 - `RadialDeadzoneStrategy` implementation for circular deadzone handling
-- Per-stick deadzone thresholds (0.0 to 0.9)
-- Individual axis inversion (X/Y for left and right sticks)
-- `InputAdapter::gamepadSettings()` for runtime configuration access
-- `InputManager::inputAdapter()` non-const overload for settings modification
-
-#### ImGui Integration Layer
 - `ImGuiBackend` abstraction for platform backends
 - `ImGuiGlfwOpenGLBackend` concrete implementation for GLFW/OpenGL
 - `ImGuiOverlay` singleton manager with DockSpace support
-- `ImGuiWidget` base interface for custom widgets
-- Semi-transparent window backgrounds (configurable)
-
-#### ImGui Widgets
 - `FpsWidget` for frame rate display and target FPS control
 - `GamepadWidget` for real-time gamepad state visualization (#114)
-  - Integrated settings panel for deadzone and axis inversion
-  - Real-time stick position and button state display
-  - Connection status indicator
-  - Multi-controller support (1-4)
 - `LogWidget` for scrollable log console with advanced filtering
-  - Per-scope message buffers (1000 entries each)
-  - Filter by log level and scope via ComboBox
-  - Text search filter
-  - Auto-scroll with pause on manual scroll
-  - Scope-specific buffering on scope switch
 - `CameraWidget` for camera parameter control
-  - Position, LookAt target, and Up vector editing
-  - Local/World space toggle for transforms
-  - FOV, Near/Far plane, and Aspect Ratio controls
-  - Quick view presets (Front, Top, Side, Isometric)
-  - Reset to initial values
 - `MainMenuWidget` for application settings
-  - Window transparency control (slider + presets)
-  - Docking toggle
-  - Style themes (Dark, Light, Classic)
-  - Settings persistence via `imgui.ini`
-
-#### Logging System
 - `LogSink` abstract interface with self-registering type identifiers
 - `ConsoleSink` for stdout output
-- `ImGuiLogSink` for LogWidget integration
-- `LogManager` with enable/disable sinks by type identifier
-- Scope-based filtering support
+- `ImGuiLogSink` for `LogWidget` integration
 
 ### Changed
-
-#### Camera Architecture
 - **BREAKING**: Cameras are now managed via `CameraSceneNode` instead of standalone `Camera` objects
-- `Viewport` now holds `CameraSceneNode*` instead of `Camera*`
-- View matrix computed from inverse of `CameraSceneNode::worldTransform()`
-- Projection matrix remains responsibility of `Camera` (optics)
-
-#### Logging System
-- Refactored to use self-registering sinks
-- Sinks define their own `TYPE_ID` string instead of central `SinkFlags` enum
-- `LogManager::enableSink("console")` / `disableSink("imgui")` API
-- Extensible without modifying core logging code
-
-#### Core & Rendering
+- **BREAKING**: `Viewport` now holds `CameraSceneNode*` instead of `Camera*`
 - **BREAKING**: Enum counter entries renamed to `size_` (#34)
 - **BREAKING**: `MeshData` merged with `Mesh` (#22)
+- View matrix computed from inverse of `CameraSceneNode::worldTransform()`
+- Logging system refactored to use self-registering sinks
 - `UniformValueMap::float_val` return type refactored (#33)
 - `Material` ownership structure improved (#13)
 
 ### Fixed
 - Potential nullptr dereference in `MaterialData` (#16)
 
-### Documentation
-- Added `CONVENTIONS.md` with LHS coordinate system documentation
-- Matrix storage format (column-major) documentation
-- View matrix construction explanation
-- Units system documentation (`helios.core.units`)
-- Updated API documentation for new modules
-- Example code comments improved with section headers
 
-## [Milestone 1] - 2025-10-21
+## [0.1.0-milestone1] - 2025-10-21
 
 ### Added
 - Application layer with event system
@@ -207,104 +135,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Mesh and geometry handling
 - Math library (vectors, matrices, transforms)
 - Scoped logger implementation (#8)
-  - Default loggers for specific scopes (e.g., `helios.rendering.shader`)
-  - LogManager for centralized logger access
-
-### Infrastructure
 - CMake build system with C++23 modules support
 - Cross-platform support (Windows, Linux, macOS)
 - Unit testing framework with Google Test
 - Example applications (simple cube rendering, game controller input)
 
----
 
-## Release Notes
-
-### Milestone 2 Breaking Changes
-
-The following breaking changes are included in this release:
-
-#### Camera System Refactor
-Cameras are now integrated into the scene graph via `CameraSceneNode`:
-
-```cpp
-// Before (Milestone 1)
-auto camera = std::make_shared<Camera>();
-viewport->setCamera(camera.get());
-camera->setPosition({0, 0, 5});
-camera->lookAt({0, 0, 0}, {0, 1, 0});
-
-// After (Milestone 2)
-auto camera = std::make_unique<Camera>();
-auto cameraNode = std::make_unique<CameraSceneNode>(std::move(camera));
-auto* nodePtr = scene->addNode(std::move(cameraNode));
-viewport->setCameraSceneNode(nodePtr);
-nodePtr->setTranslation({0, 0, 5});
-nodePtr->lookAt({0, 0, 0}, {0, 1, 0});
-```
-
-**Migration:** Replace `Camera` usage with `CameraSceneNode`. Use scene graph methods (`translate`, `rotate`) instead of direct camera manipulation.
-
-#### Transform Inheritance
-Child nodes can now selectively inherit transform components using `helios::math::TransformType`:
-
-```cpp
-import helios.math.transform;
-
-// Camera follows parent position only, maintains own orientation
-cameraNode->setInheritance(helios::math::TransformType::Translation);
-
-// Full inheritance (default)
-childNode->setInheritance(helios::math::TransformType::All);
-
-// Combine flags
-node->setInheritance(helios::math::TransformType::Translation | helios::math::TransformType::Rotation);
-```
-
-#### Enum Sentinel Naming (#34)
-All enum counter/size entries have been renamed to `size_`:
-
-```cpp
-// Before
-enum class Key { A, B, C, COUNT };
-
-// After
-enum class Key { A, B, C, size_ };
-```
-
-#### MeshData Removal (#22)
-`MeshData` has been merged into `Mesh`:
-
-```cpp
-// Before
-MeshData meshData = ...;
-Mesh mesh(meshData);
-
-// After
-Mesh mesh = ...;
-```
-
-#### Material Ownership (#13)
-Materials now own their shader and material data:
-
-```cpp
-// Before
-MaterialData materialData(shader, properties);
-Material material(materialData);
-
-// After
-auto shader = std::make_shared<Shader>(...);
-auto properties = std::make_shared<MaterialProperties>(...);
-auto material = std::make_shared<Material>(shader, properties);
-```
-
-
----
-
-## Links
-
-- [Documentation](https://thorstensuckow.github.io/helios/)
-- [GitHub Repository](https://github.com/thorstensuckow/helios)
-- [Issue Tracker](https://github.com/thorstensuckow/helios/issues)
-- [Contributing Guide](docs/CONTRIBUTING.md)
-
+[Unreleased]: https://github.com/thorstensuckow/helios/compare/v0.3.0-milestone3...HEAD
+[0.3.0-milestone3]: https://github.com/thorstensuckow/helios/compare/v0.2.0-milestone2...v0.3.0-milestone3
+[0.2.0-milestone2]: https://github.com/thorstensuckow/helios/compare/v0.1.0-milestone1...v0.2.0-milestone2
+[0.1.0-milestone1]: https://github.com/thorstensuckow/helios/releases/tag/v0.1.0-milestone1

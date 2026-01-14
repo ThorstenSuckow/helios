@@ -13,7 +13,8 @@ This module provides access to the complete helios engine functionality, includi
 | `helios.engine.core` | Data structures, messaging re-exports, units |
 | `helios.engine.ecs` | ECS base classes (GameObject, Component, System) and query system |
 | `helios.engine.runtime` | Runtime infrastructure (world, gameloop, pooling, messaging, factory) |
-| `helios.engine.game` | Facade re-exporting common game development types |
+| `helios.engine.modules` | Domain-specific components and systems (physics, spatial, scene) |
+| `helios.engine.mechanics` | Gameplay mechanics (bounds, combat, spawn, input) |
 | `helios.engine.tooling` | Frame pacing and performance metrics |
 
 ## Architecture

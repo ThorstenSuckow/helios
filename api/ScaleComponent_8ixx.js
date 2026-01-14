@@ -1,4 +1,4 @@
 var ScaleComponent_8ixx =
 [
-    [ "helios::engine::game::components::physics::ScaleComponent", "classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1ScaleComponent.html", "classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1ScaleComponent" ]
+    [ "helios::engine::modules::spatial::transform::components::ScaleComponent", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1ScaleComponent.html", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1ScaleComponent" ]
 ];

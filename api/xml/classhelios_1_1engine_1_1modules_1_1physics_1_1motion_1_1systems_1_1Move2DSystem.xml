@@ -1,0 +1,216 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1systems_1_1Move2DSystem" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::modules::physics::motion::systems::Move2DSystem</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1ecs_1_1System" prot="public" virt="non-virtual">helios::engine::ecs::System</basecompoundref>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1systems_1_1Move2DSystem_1a06244f7d6af7fb3d96c8ad4287c56640" prot="private" static="yes" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+        <definition>static helios::math::vec3f helios::engine::modules::physics::motion::systems::Move2DSystem::moveGameObject</definition>
+        <argsstring>(helios::engine::modules::physics::motion::components::Move2DComponent *cmp, helios::math::vec3f currentDirection, float deltaTime) noexcept</argsstring>
+        <name>moveGameObject</name>
+        <qualifiedname>helios::engine::modules::physics::motion::systems::Move2DSystem::moveGameObject</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent" kindref="compound">helios::engine::modules::physics::motion::components::Move2DComponent</ref> *</type>
+          <declname>cmp</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+          <declname>currentDirection</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>deltaTime</declname>
+        </param>
+        <briefdescription>
+<para>Computes translation delta for an entity based on its Move2DComponent state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Calculates velocity changes based on input state. When input is active, accelerates in the facing direction. When inactive, applies exponential drag to slow down. Velocity is clamped to maximum speed.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cmp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the Move2DComponent. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>currentDirection</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current direction vector from DirectionComponent. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>deltaTime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frame delta time in seconds.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Translation delta to apply to the entity this frame. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/systems/Move2DSystem.ixx" line="60" column="37" bodyfile="include/helios/engine/modules/physics/motion/systems/Move2DSystem.ixx" bodystart="60" bodyend="110"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1systems_1_1Move2DSystem_1a1d678a72f5876ac9781f05745aa93528" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::physics::motion::systems::Move2DSystem::init</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld) noexcept override</argsstring>
+        <name>init</name>
+        <qualifiedname>helios::engine::modules::physics::motion::systems::Move2DSystem::init</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1ecs_1_1System_1ae0464c1668e257439243a4f25979a7ff">init</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <briefdescription>
+<para>Called when the system is added to a GameWorld. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the GameWorld this system belongs to. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/systems/Move2DSystem.ixx" line="119" column="14" bodyfile="include/helios/engine/modules/physics/motion/systems/Move2DSystem.ixx" bodystart="119" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1systems_1_1Move2DSystem_1ae1724d97a76c141bfbf57669280b572a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::physics::motion::systems::Move2DSystem::update</definition>
+        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::modules::physics::motion::systems::Move2DSystem::update</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1ecs_1_1System_1a4e9969641985fa04db6214332c88605b">update</reimplements>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Updates movement for all applicable entities. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For each entity with Move2DComponent, computes translation changes and applies them to the TranslationStateComponent.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Context containing deltaTime and other frame data. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/systems/Move2DSystem.ixx" line="131" column="14" bodyfile="include/helios/engine/modules/physics/motion/systems/Move2DSystem.ixx" bodystart="131" bodyend="146"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="48">helios::engine::ecs::System::gameWorld_</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>System that processes 2D movement for entities. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This system reads from Move2DComponent and applies physics simulation including velocity integration and dampening when input is inactive.</para>
+<para>The system updates TranslationStateComponent with the computed translation changes each frame.</para>
+<para>Required components:<itemizedlist>
+<listitem><para>Move2DComponent (physics configuration and state)</para>
+</listitem><listitem><para>DirectionComponent (current movement direction)</para>
+</listitem><listitem><para>TranslationStateComponent (receives translation updates) </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::ecs::System</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::modules::physics::motion::systems::Move2DSystem</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1systems_1_1Move2DSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>helios::engine::ecs::System</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>gameWorld_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::modules::physics::motion::systems::Move2DSystem</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1systems_1_1Move2DSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>helios::engine::runtime::pooling::GameObjectPoolRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolRegistry"/>
+      </node>
+      <node id="7">
+        <label>helios::engine::runtime::pooling::PoolManagerRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry"/>
+      </node>
+      <node id="4">
+        <label>helios::engine::runtime::world::GameWorld</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>logger_</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>pools_</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>poolManagerRegistry_</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>helios::util::log::Logger</label>
+        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/modules/physics/motion/systems/Move2DSystem.ixx" line="41" column="5" bodyfile="include/helios/engine/modules/physics/motion/systems/Move2DSystem.ixx" bodystart="41" bodyend="149"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" prot="protected" virt="non-virtual"><scope>helios::engine::modules::physics::motion::systems::Move2DSystem</scope><name>gameWorld_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1systems_1_1Move2DSystem_1a1d678a72f5876ac9781f05745aa93528" prot="public" virt="virtual"><scope>helios::engine::modules::physics::motion::systems::Move2DSystem</scope><name>init</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1systems_1_1Move2DSystem_1a06244f7d6af7fb3d96c8ad4287c56640" prot="private" virt="non-virtual"><scope>helios::engine::modules::physics::motion::systems::Move2DSystem</scope><name>moveGameObject</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a26d81abcda05fe8b12a1ddb4ed6099a3" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::systems::Move2DSystem</scope><name>Updatable</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1systems_1_1Move2DSystem_1ae1724d97a76c141bfbf57669280b572a" prot="public" virt="virtual"><scope>helios::engine::modules::physics::motion::systems::Move2DSystem</scope><name>update</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a937c99bfacd777c53e0f811ab9d335a6" prot="public" virt="virtual"><scope>helios::engine::modules::physics::motion::systems::Move2DSystem</scope><name>~System</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a0f54f92a2a8d6c8dc2fc2ebed41d5a85" prot="public" virt="virtual"><scope>helios::engine::modules::physics::motion::systems::Move2DSystem</scope><name>~Updatable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

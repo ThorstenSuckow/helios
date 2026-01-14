@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1systems_1_1SpinSystem" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::modules::physics::motion::systems::SpinSystem</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1ecs_1_1System" prot="public" virt="non-virtual">helios::engine::ecs::System</basecompoundref>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1systems_1_1SpinSystem_1a24fc2dce067c68673f6100e748046940" prot="private" static="yes" mutable="no">
+        <type>const <ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">helios::math::mat4f</ref></type>
+        <definition>const helios::math::mat4f helios::engine::modules::physics::motion::systems::SpinSystem::identity</definition>
+        <argsstring></argsstring>
+        <name>identity</name>
+        <qualifiedname>helios::engine::modules::physics::motion::systems::SpinSystem::identity</qualifiedname>
+        <initializer>= <ref refid="structhelios_1_1math_1_1mat4_1ad856b4652346ff475b653e257d64428d" kindref="member">helios::math::mat4f::identity</ref>()</initializer>
+        <briefdescription>
+<para>Identity matrix constant. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/systems/SpinSystem.ixx" line="37" column="49" bodyfile="include/helios/engine/modules/physics/motion/systems/SpinSystem.ixx" bodystart="37" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1systems_1_1SpinSystem_1af71f623e85e939a670b3f7d510b94175" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::physics::motion::systems::SpinSystem::update</definition>
+        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::modules::physics::motion::systems::SpinSystem::update</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1ecs_1_1System_1a4e9969641985fa04db6214332c88605b">update</reimplements>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Updates spin rotation for all applicable entities. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Context containing frame timing and game state. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/systems/SpinSystem.ixx" line="46" column="14" bodyfile="include/helios/engine/modules/physics/motion/systems/SpinSystem.ixx" bodystart="46" bodyend="63"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="48">helios::engine::ecs::System::gameWorld_</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>System that updates the spin rotation of entities. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This system iterates over entities with a SpinComponent and updates their accumulated rotation angle based on the spin speed and delta time. The updated rotation state is then written to the RotationStateComponent. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::ecs::System</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::modules::physics::motion::systems::SpinSystem</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1systems_1_1SpinSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>helios::engine::ecs::System</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>gameWorld_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::modules::physics::motion::systems::SpinSystem</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1systems_1_1SpinSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>helios::engine::runtime::pooling::GameObjectPoolRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolRegistry"/>
+      </node>
+      <node id="7">
+        <label>helios::engine::runtime::pooling::PoolManagerRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry"/>
+      </node>
+      <node id="4">
+        <label>helios::engine::runtime::world::GameWorld</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>logger_</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>pools_</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>poolManagerRegistry_</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>helios::util::log::Logger</label>
+        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/modules/physics/motion/systems/SpinSystem.ixx" line="32" column="5" bodyfile="include/helios/engine/modules/physics/motion/systems/SpinSystem.ixx" bodystart="32" bodyend="64"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" prot="protected" virt="non-virtual"><scope>helios::engine::modules::physics::motion::systems::SpinSystem</scope><name>gameWorld_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1systems_1_1SpinSystem_1a24fc2dce067c68673f6100e748046940" prot="private" virt="non-virtual"><scope>helios::engine::modules::physics::motion::systems::SpinSystem</scope><name>identity</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1ae0464c1668e257439243a4f25979a7ff" prot="public" virt="virtual"><scope>helios::engine::modules::physics::motion::systems::SpinSystem</scope><name>init</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a26d81abcda05fe8b12a1ddb4ed6099a3" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::systems::SpinSystem</scope><name>Updatable</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1systems_1_1SpinSystem_1af71f623e85e939a670b3f7d510b94175" prot="public" virt="virtual"><scope>helios::engine::modules::physics::motion::systems::SpinSystem</scope><name>update</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a937c99bfacd777c53e0f811ab9d335a6" prot="public" virt="virtual"><scope>helios::engine::modules::physics::motion::systems::SpinSystem</scope><name>~System</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a0f54f92a2a8d6c8dc2fc2ebed41d5a85" prot="public" virt="virtual"><scope>helios::engine::modules::physics::motion::systems::SpinSystem</scope><name>~Updatable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

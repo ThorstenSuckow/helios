@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>helios::engine::runtime::messaging::command::WorldCommand</compoundname>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1commands_1_1DespawnCommand" prot="public" virt="non-virtual">helios::engine::mechanics::spawn::commands::DespawnCommand</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1commands_1_1SpawnCommand" prot="public" virt="non-virtual">helios::engine::mechanics::spawn::commands::SpawnCommand</derivedcompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand_1a4d66424c22b64a9712778d6697d558b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::engine::runtime::messaging::command::WorldCommand::~WorldCommand</definition>
+        <argsstring>()=default</argsstring>
+        <name>~WorldCommand</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::WorldCommand::~WorldCommand</qualifiedname>
+        <briefdescription>
+<para>Virtual destructor to ensure proper cleanup of derived classes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/messaging/command/WorldCommand.ixx" line="38" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand_1aca8697eac44a696ada96078626b0b103" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void helios::engine::runtime::messaging::command::WorldCommand::execute</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld) const noexcept=0</argsstring>
+        <name>execute</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::WorldCommand::execute</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1commands_1_1DespawnCommand_1aa859d8c0ab0abc1a73fe3fb2e834cf2b">execute</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1commands_1_1SpawnCommand_1a48baf8a7df10748515579cc31a4e4b0d">execute</reimplementedby>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <briefdescription>
+<para>Executes the command against the entire GameWorld. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world to apply the command to.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>Implementations must be exception-safe (noexcept). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/messaging/command/WorldCommand.ixx" line="47" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand_1a5cbe95921020642bfef379ec1bf97c53" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void helios::engine::runtime::messaging::command::WorldCommand::accept</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld, helios::engine::runtime::messaging::command::WorldCommandDispatcher &amp;dispatcher) const noexcept</argsstring>
+        <name>accept</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::WorldCommand::accept</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1commands_1_1DespawnCommand_1af662c5d483040c22d524c7ecb598da34">accept</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1commands_1_1SpawnCommand_1a0415e8e6923bc0838136aa8f1fa3d4a0">accept</reimplementedby>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher" kindref="compound">helios::engine::runtime::messaging::command::WorldCommandDispatcher</ref> &amp;</type>
+          <declname>dispatcher</declname>
+        </param>
+        <briefdescription>
+<para>Accepts a dispatcher for type-safe command handling. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world context. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dispatcher</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dispatcher to delegate command handling to.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+Override this method in derived commands to enable dispatch to specialized handlers. The default implementation is a no-op. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/messaging/command/WorldCommand.ixx" line="58" column="22" bodyfile="include/helios/engine/runtime/messaging/command/WorldCommand.ixx" bodystart="58" bodyend="62"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Abstract base class for commands that operate on the entire GameWorld. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Unlike <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand" kindref="compound">TargetedCommand</ref> which operates on a specific GameObject, a <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand" kindref="compound">WorldCommand</ref> executes against the entire GameWorld. This is useful for global game actions such as spawning entities, clearing levels, or applying world-wide effects.</para>
+<para>WorldCommands support the Visitor pattern through <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand_1a5cbe95921020642bfef379ec1bf97c53" kindref="member">accept()</ref>, enabling type-safe dispatch to specialized handlers without explicit type checking.</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand" kindref="compound">TargetedCommand</ref> for commands targeting specific GameObjects </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher" kindref="compound">WorldCommandDispatcher</ref> for type-safe <ref refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1command" kindref="compound">command</ref> dispatch </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::mechanics::spawn::commands::DespawnCommand</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1commands_1_1DespawnCommand"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::mechanics::spawn::commands::SpawnCommand</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1commands_1_1SpawnCommand"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>helios::engine::runtime::messaging::command::WorldCommand</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand"/>
+      </node>
+    </inheritancegraph>
+    <location file="include/helios/engine/runtime/messaging/command/WorldCommand.ixx" line="31" column="5" bodyfile="include/helios/engine/runtime/messaging/command/WorldCommand.ixx" bodystart="31" bodyend="63"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand_1a5cbe95921020642bfef379ec1bf97c53" prot="public" virt="virtual"><scope>helios::engine::runtime::messaging::command::WorldCommand</scope><name>accept</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand_1aca8697eac44a696ada96078626b0b103" prot="public" virt="pure-virtual"><scope>helios::engine::runtime::messaging::command::WorldCommand</scope><name>execute</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand_1a4d66424c22b64a9712778d6697d558b7" prot="public" virt="virtual"><scope>helios::engine::runtime::messaging::command::WorldCommand</scope><name>~WorldCommand</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

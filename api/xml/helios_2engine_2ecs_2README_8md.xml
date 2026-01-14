@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2ecs_2README_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1ecs">helios::engine::ecs</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::ecs</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Core<sp/>Entity-Component-System<sp/>architecture<sp/>for<sp/>the<sp/>helios<sp/>game<sp/>engine.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>the<sp/>foundational<sp/>classes<sp/>for<sp/>the<sp/>composition-based<sp/>game<sp/>architecture.<sp/>It<sp/>separates<sp/>data<sp/>(Components)<sp/>from<sp/>behavior<sp/>(Systems).<sp/>Entity<sp/>lifecycle<sp/>and<sp/>world<sp/>management<sp/>are<sp/>provided<sp/>by<sp/>`helios.engine.runtime.world`.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`GameObject`<sp/>|<sp/>Container<sp/>for<sp/>components<sp/>representing<sp/>a<sp/>game<sp/>entity<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`Component`<sp/>|<sp/>Base<sp/>class<sp/>for<sp/>data<sp/>containers<sp/>attached<sp/>to<sp/>GameObjects<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`CloneableComponent`<sp/>|<sp/>CRTP<sp/>base<sp/>for<sp/>components<sp/>that<sp/>support<sp/>cloning<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`System`<sp/>|<sp/>Abstract<sp/>base<sp/>for<sp/>logic<sp/>processors<sp/>operating<sp/>on<sp/>GameWorld<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`Updatable`<sp/>|<sp/>Interface<sp/>for<sp/>per-frame<sp/>updatable<sp/>objects<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Submodules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>query/</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Entity<sp/>query<sp/>utilities<sp/>for<sp/>filtering<sp/>and<sp/>iterating<sp/>GameObjects:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`GameObjectFilter`<sp/>|<sp/>Bitmask<sp/>for<sp/>filtering<sp/>by<sp/>active/enabled<sp/>state<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`GameObjectView`<sp/>|<sp/>Lazy<sp/>range<sp/>for<sp/>component-based<sp/>iteration<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Related<sp/>Modules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Module<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|--------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.engine.runtime.world`<sp/>|<sp/>GameWorld,<sp/>Level,<sp/>UpdateContext,<sp/>Manager,<sp/>SystemRegistry<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.engine.runtime.gameloop`<sp/>|<sp/>GameLoop,<sp/>Phase,<sp/>Pass<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Architecture</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">┌─────────────────────────────────────────────────────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GameWorld<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>┌─────────────┐<sp/><sp/>┌─────────────┐<sp/><sp/>┌─────────────────────┐<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>GameObjects<sp/>│<sp/><sp/>│<sp/><sp/>Managers<sp/><sp/><sp/>│<sp/><sp/>│<sp/><sp/>Pools/Registry<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>(entities)<sp/>│<sp/><sp/>│<sp/>(deferred)<sp/><sp/>│<sp/><sp/>│<sp/><sp/>(object<sp/>recycling)<sp/>│<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>└─────────────┘<sp/><sp/>└─────────────┘<sp/><sp/>└─────────────────────┘<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">└─────────────────────────────────────────────────────────────┘</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼</highlight></codeline>
+<codeline><highlight class="normal">┌─────────────────────────────────────────────────────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GameLoop<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>┌─────────┐<sp/><sp/>┌─────────┐<sp/><sp/>┌─────────┐<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/>Pre<sp/><sp/><sp/>│─&gt;│<sp/><sp/>Main<sp/><sp/><sp/>│─&gt;│<sp/><sp/>Post<sp/><sp/><sp/>│<sp/><sp/>(Phases)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>Phase<sp/><sp/><sp/>│<sp/><sp/>│<sp/>Phase<sp/><sp/><sp/>│<sp/><sp/>│<sp/>Phase<sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>└─────────┘<sp/><sp/>└─────────┘<sp/><sp/>└─────────┘<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/>Systems<sp/><sp/><sp/><sp/><sp/><sp/>Systems<sp/><sp/><sp/><sp/><sp/><sp/>Systems<sp/><sp/><sp/><sp/><sp/>(execute<sp/>in<sp/>order)<sp/>│</highlight></codeline>
+<codeline><highlight class="normal">└─────────────────────────────────────────────────────────────┘</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage<sp/>Example</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.engine.ecs;</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.engine.runtime.world.GameWorld;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Create<sp/>game<sp/>world</highlight></codeline>
+<codeline><highlight class="normal">helios::engine::runtime::world::GameWorld<sp/>world;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Add<sp/>entity<sp/>with<sp/>components</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>entity<sp/>=<sp/>std::make_unique&lt;helios::engine::ecs::GameObject&gt;();</highlight></codeline>
+<codeline><highlight class="normal">entity-&gt;add&lt;Move2DComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal">entity-&gt;add&lt;SceneNodeComponent&gt;(sceneNode);</highlight></codeline>
+<codeline><highlight class="normal">auto*<sp/>player<sp/>=<sp/>world.addGameObject(std::move(entity));</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Query<sp/>entities<sp/>by<sp/>component</highlight></codeline>
+<codeline><highlight class="normal">for<sp/>(auto<sp/>[obj,<sp/>move]<sp/>:<sp/>world.find&lt;Move2DComponent&gt;().each())<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Process<sp/>matching<sp/>entities</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::ecs</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Core<sp/>Entity-Component-System<sp/>architecture.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>This<sp/>module<sp/>provides<sp/>the<sp/>foundational<sp/>classes<sp/>for<sp/>the<sp/>composition-based<sp/>game<sp/>architecture.<sp/>It<sp/>includes<sp/>entity<sp/>base<sp/>classes<sp/>(GameObject,<sp/>Component,<sp/>CloneableComponent),<sp/>system<sp/>infrastructure<sp/>(System),<sp/>and<sp/>query<sp/>utilities<sp/>(GameObjectFilter,<sp/>GameObjectView).</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+<codeline></codeline>
+    </programlisting>
+    <location file="include/helios/engine/ecs/README.md"/>
+  </compounddef>
+</doxygen>

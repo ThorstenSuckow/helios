@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8modules_8physics_8motion_8systems_8SteeringSystem" kind="module">
+    <compoundname>helios.engine.modules.physics.motion.systems.SteeringSystem</compoundname>
+    <innerfile refid="SteeringSystem_8ixx">SteeringSystem.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1systems_1_1SteeringSystem" prot="public">helios::engine::modules::physics::motion::systems::SteeringSystem</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1systems_1_1SteeringSystem_1a4f74653fd488b845f43897919dd2522c" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::physics::motion::systems::SteeringSystem::updateHeading</definition>
+        <argsstring>(helios::engine::modules::physics::motion::components::SteeringComponent *cmp, float deltaTime) noexcept</argsstring>
+        <name>updateHeading</name>
+        <qualifiedname>helios::engine::modules::physics::motion::systems::SteeringSystem::updateHeading</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent" kindref="compound">helios::engine::modules::physics::motion::components::SteeringComponent</ref> *</type>
+          <declname>cmp</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>deltaTime</declname>
+        </param>
+        <briefdescription>
+<para>Performs the rotation physics update for a SteeringComponent. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Applies dampening when input is inactive, calculates rotation steps, and snaps to target when within threshold.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cmp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The SteeringComponent to update. Must not be nullptr. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>deltaTime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time elapsed since last frame in seconds. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/systems/SteeringSystem.ixx" line="49" column="14" bodyfile="include/helios/engine/modules/physics/motion/systems/SteeringSystem.ixx" bodystart="49" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1systems_1_1SteeringSystem_1a44ed98ca8b1602c24fac94d1017c73fd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::physics::motion::systems::SteeringSystem::update</definition>
+        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::modules::physics::motion::systems::SteeringSystem::update</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1ecs_1_1System_1a4e9969641985fa04db6214332c88605b">update</reimplements>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Updates the heading of entities. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Context containing frame timing and game state. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/systems/SteeringSystem.ixx" line="118" column="14" bodyfile="include/helios/engine/modules/physics/motion/systems/SteeringSystem.ixx" bodystart="118" bodyend="156"/>
+        <references refid="namespacehelios_1_1math_1a73c58ac1ac41973b9927ab6893662104" compoundref="utils_8ixx" startline="40" endline="42">helios::math::degrees</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="48">helios::engine::ecs::System::gameWorld_</references>
+        <references refid="namespacehelios_1_1math_1a4949642a7cca09c7950bb6a1b75260c9" compoundref="utils_8ixx" startline="30" endline="32">helios::math::radians</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/engine/modules/physics/motion/systems/SteeringSystem.ixx" line="12" column="15"/>
+  </compounddef>
+</doxygen>

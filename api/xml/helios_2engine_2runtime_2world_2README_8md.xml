@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2runtime_2world_2README_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1world">helios::engine::runtime::world</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::runtime::world</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">World<sp/>state<sp/>management<sp/>and<sp/>per-frame<sp/>update<sp/>context.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>the<sp/>core<sp/>classes<sp/>for<sp/>managing<sp/>game<sp/>state<sp/>during<sp/>runtime.<sp/>The<sp/>`GameWorld`<sp/>class<sp/>serves<sp/>as<sp/>the<sp/>central<sp/>registry<sp/>for<sp/>all<sp/>GameObjects,<sp/>while<sp/>`UpdateContext`<sp/>provides<sp/>the<sp/>frame<sp/>context<sp/>passed<sp/>to<sp/>systems<sp/>during<sp/>updates.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`GameWorld`<sp/>|<sp/>Central<sp/>registry<sp/>for<sp/>GameObjects,<sp/>managers,<sp/>and<sp/>pool<sp/>access<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`Level`<sp/>|<sp/>Game<sp/>level<sp/>with<sp/>world<sp/>bounds<sp/>and<sp/>root<sp/>scene<sp/>node<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`UpdateContext`<sp/>|<sp/>Per-frame<sp/>context<sp/>with<sp/>delta<sp/>time,<sp/>event<sp/>buses,<sp/>and<sp/>command<sp/>buffer<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SystemRegistry`<sp/>|<sp/>Container<sp/>for<sp/>System<sp/>instances<sp/>within<sp/>a<sp/>pass<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`Manager`<sp/>|<sp/>Abstract<sp/>base<sp/>for<sp/>deferred<sp/>operation<sp/>handlers<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.engine.runtime.world.GameWorld;</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.engine.runtime.world.UpdateContext;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Create<sp/>world<sp/>and<sp/>add<sp/>entities</highlight></codeline>
+<codeline><highlight class="normal">helios::engine::runtime::world::GameWorld<sp/>world;</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>entity<sp/>=<sp/>std::make_unique&lt;GameObject&gt;();</highlight></codeline>
+<codeline><highlight class="normal">world.addGameObject(std::move(entity));</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Query<sp/>entities<sp/>by<sp/>component</highlight></codeline>
+<codeline><highlight class="normal">for<sp/>(auto*<sp/>obj<sp/>:<sp/>world.find&lt;TransformComponent&gt;())<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Process<sp/>matching<sp/>entities</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::runtime::world</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>World<sp/>state<sp/>management<sp/>and<sp/>per-frame<sp/>update<sp/>context.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>GameWorld<sp/>for<sp/>entity<sp/>management,<sp/>UpdateContext<sp/>for<sp/>frame<sp/>state,<sp/>Level<sp/>for<sp/>world<sp/>bounds,<sp/>and<sp/>SystemRegistry<sp/>for<sp/>system<sp/>organization.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+<codeline></codeline>
+    </programlisting>
+    <location file="include/helios/engine/runtime/world/README.md"/>
+  </compounddef>
+</doxygen>

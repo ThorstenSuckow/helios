@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_0b25300d10cd1aefe5f6cbf740a7fedf" kind="dir">
+    <compoundname>include/helios/engine/modules</compoundname>
+    <innerdir refid="dir_4cf3e568933a39133476fd0cdd0720ad">include/helios/engine/modules/physics</innerdir>
+    <innerdir refid="dir_9d652bc49794ee57b22ecd7f52416e0b">include/helios/engine/modules/pool</innerdir>
+    <innerdir refid="dir_616630fd0adec1772873768e31678ae7">include/helios/engine/modules/rendering</innerdir>
+    <innerdir refid="dir_9901a41432e1411a521c23d6f490a264">include/helios/engine/modules/scene</innerdir>
+    <innerdir refid="dir_40a07d66e7fedbdef195364f73b9e6a6">include/helios/engine/modules/spatial</innerdir>
+    <innerfile refid="helios_2engine_2modules_2__module_8ixx">_module.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_0b25300d10cd1aefe5f6cbf740a7fedf_1autotoc_md178">
+<title>helios::engine::modules</title><para>Domain-specific components, systems, and gameplay mechanics built on top of the ECS architecture.</para>
+</sect1>
+<sect1 id="dir_0b25300d10cd1aefe5f6cbf740a7fedf_1autotoc_md179">
+<title>Overview</title><para>This module provides concrete game logic implementations using the composition-based component model. While <computeroutput><ref refid="namespacehelios_1_1engine_1_1ecs" kindref="compound">helios.engine.ecs</ref></computeroutput> provides the base classes (GameObject, Component, System), this module contains the actual gameplay functionality.</para>
+</sect1>
+<sect1 id="dir_0b25300d10cd1aefe5f6cbf740a7fedf_1autotoc_md180">
+<title>Submodules</title><para><table rows="9" cols="2"><row>
+<entry thead="yes"><para>Module  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>gameplay/</computeroutput>  </para>
+</entry><entry thead="no"><para>High-level mechanics (bounds, combat, spawn)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>physics/</computeroutput>  </para>
+</entry><entry thead="no"><para>Physics simulation (collision, motion)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>spatial/</computeroutput>  </para>
+</entry><entry thead="no"><para>Transform management (translation, rotation, scale)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>scene/</computeroutput>  </para>
+</entry><entry thead="no"><para>Scene graph integration  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>rendering/</computeroutput>  </para>
+</entry><entry thead="no"><para>Renderable components  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>model/</computeroutput>  </para>
+</entry><entry thead="no"><para>Model/mesh-related components  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>input/</computeroutput>  </para>
+</entry><entry thead="no"><para>Input handling components  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>pool/</computeroutput>  </para>
+</entry><entry thead="no"><para>Object pool components  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_0b25300d10cd1aefe5f6cbf740a7fedf_1autotoc_md181">
+<title>Architecture</title><para><programlisting><codeline><highlight class="normal">helios.engine.game</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>gameplay/</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>bounds/<sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Level<sp/>boundary<sp/>behavior</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>combat/<sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Shooting,<sp/>projectiles</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>spawn/<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Entity<sp/>spawning</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>physics/</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>collision/<sp/><sp/><sp/>#<sp/>AABB,<sp/>collision<sp/>detection</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>motion/<sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Movement,<sp/>steering</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>spatial/</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>transform/<sp/><sp/><sp/>#<sp/>Translation,<sp/>rotation,<sp/>scale<sp/>components</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>scene/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>SceneNode<sp/>integration</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>rendering/<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Renderable<sp/>components</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>model/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Model<sp/>AABB<sp/>components</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>input/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Twin-stick<sp/>input</highlight></codeline>
+<codeline><highlight class="normal">└──<sp/>pool/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Pool<sp/>ID<sp/>components</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_0b25300d10cd1aefe5f6cbf740a7fedf_1autotoc_md182">
+<title>Relationship to ECS</title><para>This module <bold>imports</bold> from <computeroutput><ref refid="namespacehelios_1_1engine_1_1ecs" kindref="compound">helios.engine.ecs</ref></computeroutput>:</para>
+<para><itemizedlist>
+<listitem><para><computeroutput>GameObject</computeroutput>, <computeroutput>Component</computeroutput> — Base classes extended by domain components</para>
+</listitem><listitem><para><computeroutput>System</computeroutput> — Base class extended by domain systems</para>
+</listitem><listitem><para><computeroutput>GameWorld</computeroutput> — Used by systems for entity queries</para>
+</listitem><listitem><para><computeroutput>Manager</computeroutput> — Extended by domain managers (ProjectilePoolManager)</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="dir_0b25300d10cd1aefe5f6cbf740a7fedf_1autotoc_md183">
+<title>Usage Example</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8game" kindref="compound">helios.engine.game</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Add<sp/>domain<sp/>components</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">entity-&gt;add&lt;Move2DComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal">entity-&gt;add&lt;CollisionComponent&gt;(layerId,<sp/>mask);</highlight></codeline>
+<codeline><highlight class="normal">entity-&gt;add&lt;SceneNodeComponent&gt;(sceneNode);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Add<sp/>domain<sp/>systems<sp/>to<sp/>game<sp/>loop</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">gameLoop.phase(<ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1aa57e7c5caf8850bd2c56ef8d345afa71" kindref="member">PhaseType</ref>.Main)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addSystem&lt;Move2DSystem&gt;(gameWorld)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addSystem&lt;GridCollisionDetectionSystem&gt;(gameWorld);</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="include/helios/engine/modules/"/>
+  </compounddef>
+</doxygen>

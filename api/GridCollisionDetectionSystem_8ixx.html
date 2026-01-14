@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>helios: include/helios/engine/game/systems/physics/GridCollisionDetectionSystem.ixx File Reference</title>
+<title>helios: include/helios/engine/modules/physics/collision/systems/GridCollisionDetectionSystem.ixx File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
@@ -103,7 +103,7 @@ $(function() {
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">GridCollisionDetectionSystem.ixx File Reference<div class="ingroups">module <a class="el" href="module__helios_8engine_8game_8systems_8physics_8GridCollisionDetectionSystem.html">helios.engine.game.systems.physics.GridCollisionDetectionSystem</a></div></div></div>
+  <div class="headertitle"><div class="title">GridCollisionDetectionSystem.ixx File Reference<div class="ingroups">module <a class="el" href="module__helios_8engine_8modules_8physics_8collision_8systems_8GridCollisionDetectionSystem.html">helios.engine.modules.physics.collision.systems.GridCollisionDetectionSystem</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -116,18 +116,20 @@ $(function() {
 <code>#include &lt;helios/helios_config.h&gt;</code><br />
 <code>#include &lt;unordered_set&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
-<code>import <a class="el" href="helios_2util_2log_2__module_8ixx_source.html">helios.util.log</a>;</code><br />
-<code>import <a class="el" href="helios_2math_2__module_8ixx_source.html">helios.math</a>;</code><br />
-<code>import <a class="el" href="CollisionComponent_8ixx_source.html">helios.engine.game.components.physics.CollisionComponent</a>;</code><br />
-<code>import <a class="el" href="SolidCollisionEvent_8ixx_source.html">helios.engine.game.event.SolidCollisionEvent</a>;</code><br />
-<code>import <a class="el" href="TriggerCollisionEvent_8ixx_source.html">helios.engine.game.event.TriggerCollisionEvent</a>;</code><br />
-<code>import <a class="el" href="GameWorld_8ixx_source.html">helios.engine.game.GameWorld</a>;</code><br />
-<code>import <a class="el" href="GameObject_8ixx_source.html">helios.engine.game.GameObject</a>;</code><br />
+<code>import <a class="el" href="UpdateContext_8ixx_source.html">helios.engine.runtime.world.UpdateContext</a>;</code><br />
+<code>import <a class="el" href="SolidCollisionEvent_8ixx_source.html">helios.engine.modules.physics.collision.events.SolidCollisionEvent</a>;</code><br />
 <code>import <a class="el" href="Guid_8ixx_source.html">helios.util.Guid</a>;</code><br />
-<code>import <a class="el" href="AabbColliderComponent_8ixx_source.html">helios.engine.game.components.physics.AabbColliderComponent</a>;</code><br />
-<code>import <a class="el" href="GameObjectFilter_8ixx_source.html">helios.engine.game.GameObjectFilter</a>;</code><br />
-<code>import <a class="el" href="UpdateContext_8ixx_source.html">helios.engine.game.UpdateContext</a>;</code><br />
-<code>import <a class="el" href="System_8ixx_source.html">helios.engine.game.System</a>;</code><br />
+<code>import <a class="el" href="GameWorld_8ixx_source.html">helios.engine.runtime.world.GameWorld</a>;</code><br />
+<code>import <a class="el" href="GameObjectFilter_8ixx_source.html">helios.engine.ecs.query.GameObjectFilter</a>;</code><br />
+<code>import <a class="el" href="CollisionBehavior_8ixx_source.html">helios.engine.modules.physics.collision.types.CollisionBehavior</a>;</code><br />
+<code>import <a class="el" href="System_8ixx_source.html">helios.engine.ecs.System</a>;</code><br />
+<code>import <a class="el" href="TriggerCollisionEvent_8ixx_source.html">helios.engine.modules.physics.collision.events.TriggerCollisionEvent</a>;</code><br />
+<code>import <a class="el" href="helios_2util_2log_2__module_8ixx_source.html">helios.util.log</a>;</code><br />
+<code>import <a class="el" href="CollisionComponent_8ixx_source.html">helios.engine.modules.physics.collision.components.CollisionComponent</a>;</code><br />
+<code>import <a class="el" href="CollisionStateComponent_8ixx_source.html">helios.engine.modules.physics.collision.components.CollisionStateComponent</a>;</code><br />
+<code>import <a class="el" href="AabbColliderComponent_8ixx_source.html">helios.engine.modules.physics.collision.components.AabbColliderComponent</a>;</code><br />
+<code>import <a class="el" href="GameObject_8ixx_source.html">helios.engine.ecs.GameObject</a>;</code><br />
+<code>import <a class="el" href="helios_2math_2__module_8ixx_source.html">helios.math</a>;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Include dependency graph for GridCollisionDetectionSystem.ixx:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
@@ -139,24 +141,25 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:helios_3A_3Aengine_3A_3Agame_3A_3Asystems_3A_3Aphysics_3A_3AGridCollisionDetectionSystem" id="r_helios_3A_3Aengine_3A_3Agame_3A_3Asystems_3A_3Aphysics_3A_3AGridCollisionDetectionSystem"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem.html">helios::engine::game::systems::physics::GridCollisionDetectionSystem</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collision detection system using uniform spatial partitioning for Broadphase and AABB overlaps in the Narrowphase.  <a href="classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1GridCollisionDetectionSystem.html#details">More...</a><br /></td></tr>
+<tr class="memitem:helios_3A_3Aengine_3A_3Amodules_3A_3Aphysics_3A_3Acollision_3A_3Asystems_3A_3AGridCollisionDetectionSystem" id="r_helios_3A_3Aengine_3A_3Amodules_3A_3Aphysics_3A_3Acollision_3A_3Asystems_3A_3AGridCollisionDetectionSystem"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem.html">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collision detection system using uniform spatial partitioning for Broadphase and AABB overlaps in the Narrowphase.  <a href="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:helios" id="r_helios"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html">helios</a></td></tr>
 <tr class="memitem:helios_3A_3Aengine" id="r_helios_3A_3Aengine"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine.html">helios::engine</a></td></tr>
-<tr class="memdesc:namespacehelios_1_1engine"><td class="mdescLeft">&#160;</td><td class="mdescRight">Engine utilities for frame pacing and tick/update lifecycle management. <br /></td></tr>
-<tr class="memitem:helios_3A_3Aengine_3A_3Agame" id="r_helios_3A_3Aengine_3A_3Agame"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine_1_1game.html">helios::engine::game</a></td></tr>
-<tr class="memdesc:namespacehelios_1_1engine_1_1game"><td class="mdescLeft">&#160;</td><td class="mdescRight">Game logic infrastructure using <a class="el" href="classhelios_1_1engine_1_1game_1_1Command.html" title="Abstract base class for encapsulating game actions as executable commands.">Command</a> pattern for decoupled, deterministic game systems. <br /></td></tr>
-<tr class="memitem:helios_3A_3Aengine_3A_3Agame_3A_3Asystems" id="r_helios_3A_3Aengine_3A_3Agame_3A_3Asystems"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine_1_1game_1_1systems.html">helios::engine::game::systems</a></td></tr>
-<tr class="memdesc:namespacehelios_1_1engine_1_1game_1_1systems"><td class="mdescLeft">&#160;</td><td class="mdescRight">Global game systems for cross-cutting concerns. <br /></td></tr>
-<tr class="memitem:helios_3A_3Aengine_3A_3Agame_3A_3Asystems_3A_3Aphysics" id="r_helios_3A_3Aengine_3A_3Agame_3A_3Asystems_3A_3Aphysics"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine_1_1game_1_1systems_1_1physics.html">helios::engine::game::systems::physics</a></td></tr>
-<tr class="memdesc:namespacehelios_1_1engine_1_1game_1_1systems_1_1physics"><td class="mdescLeft">&#160;</td><td class="mdescRight">Physics and movement systems for the game engine. <br /></td></tr>
+<tr class="memdesc:namespacehelios_1_1engine"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main engine module aggregating core infrastructure and game systems. <br /></td></tr>
+<tr class="memitem:helios_3A_3Aengine_3A_3Amodules" id="r_helios_3A_3Aengine_3A_3Amodules"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine_1_1modules.html">helios::engine::modules</a></td></tr>
+<tr class="memdesc:namespacehelios_1_1engine_1_1modules"><td class="mdescLeft">&#160;</td><td class="mdescRight">Domain-specific components, systems, and gameplay mechanics. <br /></td></tr>
+<tr class="memitem:helios_3A_3Aengine_3A_3Amodules_3A_3Aphysics" id="r_helios_3A_3Aengine_3A_3Amodules_3A_3Aphysics"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine_1_1modules_1_1physics.html">helios::engine::modules::physics</a></td></tr>
+<tr class="memdesc:namespacehelios_1_1engine_1_1modules_1_1physics"><td class="mdescLeft">&#160;</td><td class="mdescRight">Physics simulation and collision detection subsystem for the game engine. <br /></td></tr>
+<tr class="memitem:helios_3A_3Aengine_3A_3Amodules_3A_3Aphysics_3A_3Acollision" id="r_helios_3A_3Aengine_3A_3Amodules_3A_3Aphysics_3A_3Acollision"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision.html">helios::engine::modules::physics::collision</a></td></tr>
+<tr class="memitem:helios_3A_3Aengine_3A_3Amodules_3A_3Aphysics_3A_3Acollision_3A_3Asystems" id="r_helios_3A_3Aengine_3A_3Amodules_3A_3Aphysics_3A_3Acollision_3A_3Asystems"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems.html">helios::engine::modules::physics::collision::systems</a></td></tr>
+<tr class="memdesc:namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collision detection and response systems. <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:acbc04f24078582c7d42b2085be5d5750" id="r_acbc04f24078582c7d42b2085be5d5750"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acbc04f24078582c7d42b2085be5d5750">HELIOS_LOG_SCOPE</a>&#160;&#160;&#160;&quot;helios::engine::game::systems::physics::GridCollisionDetectionSystem&quot;</td></tr>
+<tr class="memitem:acbc04f24078582c7d42b2085be5d5750" id="r_acbc04f24078582c7d42b2085be5d5750"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acbc04f24078582c7d42b2085be5d5750">HELIOS_LOG_SCOPE</a>&#160;&#160;&#160;&quot;helios::engine::modules::physics::systems::GridCollisionDetectionSystem&quot;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Spatial-partitioning based collision detection using a uniform 3D grid. </p>
@@ -170,12 +173,12 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define HELIOS_LOG_SCOPE&#160;&#160;&#160;&quot;helios::engine::game::systems::physics::GridCollisionDetectionSystem&quot;</td>
+          <td class="memname">#define HELIOS_LOG_SCOPE&#160;&#160;&#160;&quot;helios::engine::modules::physics::systems::GridCollisionDetectionSystem&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="GridCollisionDetectionSystem_8ixx_source.html#l00036">36</a> of file <a class="el" href="GridCollisionDetectionSystem_8ixx_source.html">GridCollisionDetectionSystem.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GridCollisionDetectionSystem_8ixx_source.html#l00042">42</a> of file <a class="el" href="GridCollisionDetectionSystem_8ixx_source.html">GridCollisionDetectionSystem.ixx</a>.</p>
 
 </div>
 </div>
@@ -192,7 +195,7 @@ Macros</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_08c09894bd9f0ab4b1e9fdc7a2628766.html">helios</a></li><li class="navelem"><a href="dir_860c9de2f65c10e8e262a0e7b5bfee5e.html">engine</a></li><li class="navelem"><a href="dir_46c7b0b04924cca8aa10726746d57f30.html">game</a></li><li class="navelem"><a href="dir_36ea2b7be3cb8c26515d956982029a89.html">systems</a></li><li class="navelem"><a href="dir_d8be9b0e446dd8c9e5aa09f48fb49f4f.html">physics</a></li><li class="navelem"><a href="GridCollisionDetectionSystem_8ixx.html">GridCollisionDetectionSystem.ixx</a></li>
+    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_08c09894bd9f0ab4b1e9fdc7a2628766.html">helios</a></li><li class="navelem"><a href="dir_860c9de2f65c10e8e262a0e7b5bfee5e.html">engine</a></li><li class="navelem"><a href="dir_0b25300d10cd1aefe5f6cbf740a7fedf.html">modules</a></li><li class="navelem"><a href="dir_4cf3e568933a39133476fd0cdd0720ad.html">physics</a></li><li class="navelem"><a href="dir_76d267a04bc326793b7e59f3c1dbdf93.html">collision</a></li><li class="navelem"><a href="dir_d287006e021bface2e3297b49de4e91e.html">systems</a></li><li class="navelem"><a href="GridCollisionDetectionSystem_8ixx.html">GridCollisionDetectionSystem.ixx</a></li>
     <li class="footer">Generated on <span class="timestamp"></span> for helios by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

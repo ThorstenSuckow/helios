@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>helios: include/helios/engine/game/System.ixx Source File</title>
+<title>helios: include/helios/engine/ecs/System.ixx Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
@@ -113,13 +113,13 @@ $(function() {
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">module</span>;</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">export</span> <span class="keyword">module</span> <a class="code" href="module__helios_8engine_8game_8System.html">helios.engine.game.System</a>;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">export</span> <span class="keyword">module</span> <a class="code" href="module__helios_8engine_8ecs_8System.html">helios.engine.ecs.System</a>;</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8game_8Updatable.html">helios.engine.game.Updatable</a>;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8ecs_8Updatable.html">helios.engine.ecs.Updatable</a>;</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">export</span> <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine_1_1game.html">helios::engine::game</a> {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">export</span> <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine_1_1ecs.html">helios::engine::ecs</a> {</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">class </span><a class="code hl_class" href="classhelios_1_1engine_1_1game_1_1GameWorld.html">GameWorld</a>;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">class </span>GameWorld;</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"></span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">    /**</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">     * @brief Abstract base class for game systems.</span></div>
@@ -144,7 +144,7 @@ $(function() {
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">     * ```</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">     */</span></div>
 <div class="foldopen" id="foldopen00038" data-start="{" data-end="};">
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1game_1_1System.html">   38</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classhelios_1_1engine_1_1game_1_1System.html">System</a> : <span class="keyword">public</span> <a class="code hl_class" href="classhelios_1_1engine_1_1game_1_1Updatable.html">helios::engine::game::Updatable</a> {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1ecs_1_1System.html">   38</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classhelios_1_1engine_1_1ecs_1_1System.html">System</a> : <span class="keyword">public</span> <a class="code hl_class" href="classhelios_1_1engine_1_1ecs_1_1Updatable.html">helios::engine::ecs::Updatable</a> {</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keyword">protected</span>:</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment"></span> </div>
@@ -154,61 +154,64 @@ $(function() {
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">         * @details Set by `onAdd()` when the system is registered with a GameWorld.</span></div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">         * Non-owning pointer; valid for the lifetime of the system.</span></div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1game_1_1System.html#ab575d815b362bc7bc2fdfe021632c83b">   48</a></span>        <a class="code hl_class" href="classhelios_1_1engine_1_1game_1_1GameWorld.html">helios::engine::game::GameWorld</a>* <a class="code hl_variable" href="classhelios_1_1engine_1_1game_1_1System.html#ab575d815b362bc7bc2fdfe021632c83b">gameWorld_</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1ecs_1_1System.html#a1b71da2e3fb9d2effca00a1ecdfca1f5">   48</a></span>        <a class="code hl_class" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a>* <a class="code hl_variable" href="classhelios_1_1engine_1_1ecs_1_1System.html#a1b71da2e3fb9d2effca00a1ecdfca1f5">gameWorld_</a> = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment"></span> </div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">        /**</span></div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">         * @brief Virtual destructor for proper cleanup of derived systems.</span></div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1game_1_1System.html#aa4ed4f421d0b37eb63dbd23c25b889f8">   55</a></span>        <span class="keyword">virtual</span> <a class="code hl_function" href="classhelios_1_1engine_1_1game_1_1System.html#aa4ed4f421d0b37eb63dbd23c25b889f8">~System</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1ecs_1_1System.html#a937c99bfacd777c53e0f811ab9d335a6">   55</a></span>        <span class="keyword">virtual</span> <a class="code hl_function" href="classhelios_1_1engine_1_1ecs_1_1System.html#a937c99bfacd777c53e0f811ab9d335a6">~System</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment"></span> </div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">         * @brief Called when the system is added to a GameWorld.</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">         * @brief Called when the system is initialized by the GameWorld.</span></div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">         *</span></div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">         * @details Override this method to perform initialization that requires</span></div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">         * access to the GameWorld (e.g., querying the scene graph, registering</span></div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">         * event handlers).</span></div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">         *</span></div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">         * @param gameWorld The GameWorld this system is being added to.</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00066" data-start="{" data-end="}">
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1game_1_1System.html#a3abad1bebaa98c46f28105702c58b473">   66</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1game_1_1System.html#a3abad1bebaa98c46f28105702c58b473">onAdd</a>(<a class="code hl_class" href="classhelios_1_1engine_1_1game_1_1GameWorld.html">helios::engine::game::GameWorld</a>* gameWorld) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            <a class="code hl_variable" href="classhelios_1_1engine_1_1game_1_1System.html#ab575d815b362bc7bc2fdfe021632c83b">gameWorld_</a> = gameWorld;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        }</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">         * @deprected use init</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00068" data-start="{" data-end="}">
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1ecs_1_1System.html#ae0464c1668e257439243a4f25979a7ff">   68</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1ecs_1_1System.html#ae0464c1668e257439243a4f25979a7ff">init</a>(<a class="code hl_class" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a>&amp; gameWorld) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            <a class="code hl_variable" href="classhelios_1_1engine_1_1ecs_1_1System.html#a1b71da2e3fb9d2effca00a1ecdfca1f5">gameWorld_</a> = &amp;gameWorld;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        }</div>
 </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment"></span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">         * @brief Updates the system each frame.</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">         * @param updateContext The update context containing frame timing information.</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1game_1_1System.html#ac268567131ffdbd96e0ee29dc8717609">   76</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1game_1_1System.html#ac268567131ffdbd96e0ee29dc8717609">update</a>(<a class="code hl_struct" href="structhelios_1_1engine_1_1game_1_1UpdateContext.html">helios::engine::game::UpdateContext</a>&amp; updateContext) <span class="keyword">noexcept</span> <span class="keyword">override</span> = 0;</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    };</div>
-</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment"></span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">         * @brief Updates the system each frame.</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">         * @param updateContext The update context containing frame timing information.</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1ecs_1_1System.html#a4e9969641985fa04db6214332c88605b">   79</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1ecs_1_1System.html#a4e9969641985fa04db6214332c88605b">update</a>(<a class="code hl_struct" href="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a>&amp; updateContext) <span class="keyword">noexcept</span> <span class="keyword">override</span> = 0;</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>}</div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1GameWorld_html"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1GameWorld.html">helios::engine::game::GameWorld</a></div><div class="ttdoc">Central registry for managing game entities, systems, and the active level.</div><div class="ttdef"><b>Definition</b> <a href="GameWorld_8ixx_source.html#l00048">GameWorld.ixx:48</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1System_html"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1System.html">helios::engine::game::System</a></div><div class="ttdoc">Abstract base class for game systems.</div><div class="ttdef"><b>Definition</b> <a href="#l00038">System.ixx:38</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1System_html_a3abad1bebaa98c46f28105702c58b473"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1System.html#a3abad1bebaa98c46f28105702c58b473">helios::engine::game::System::onAdd</a></div><div class="ttdeci">virtual void onAdd(helios::engine::game::GameWorld *gameWorld) noexcept</div><div class="ttdoc">Called when the system is added to a GameWorld.</div><div class="ttdef"><b>Definition</b> <a href="#l00066">System.ixx:66</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1System_html_aa4ed4f421d0b37eb63dbd23c25b889f8"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1System.html#aa4ed4f421d0b37eb63dbd23c25b889f8">helios::engine::game::System::~System</a></div><div class="ttdeci">virtual ~System()=default</div><div class="ttdoc">Virtual destructor for proper cleanup of derived systems.</div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1System_html_ab575d815b362bc7bc2fdfe021632c83b"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1System.html#ab575d815b362bc7bc2fdfe021632c83b">helios::engine::game::System::gameWorld_</a></div><div class="ttdeci">helios::engine::game::GameWorld * gameWorld_</div><div class="ttdoc">Pointer to the GameWorld this system belongs to.</div><div class="ttdef"><b>Definition</b> <a href="#l00048">System.ixx:48</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1System_html_ac268567131ffdbd96e0ee29dc8717609"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1System.html#ac268567131ffdbd96e0ee29dc8717609">helios::engine::game::System::update</a></div><div class="ttdeci">void update(helios::engine::game::UpdateContext &amp;updateContext) noexcept override=0</div><div class="ttdoc">Updates the system each frame.</div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1Updatable_html"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1Updatable.html">helios::engine::game::Updatable</a></div><div class="ttdoc">Interface for components that require per-frame updates.</div><div class="ttdef"><b>Definition</b> <a href="Updatable_8ixx_source.html#l00036">Updatable.ixx:36</a></div></div>
-<div class="ttc" id="amodule__helios_8engine_8game_8System_html"><div class="ttname"><a href="module__helios_8engine_8game_8System.html">helios.engine.game.System</a></div></div>
-<div class="ttc" id="amodule__helios_8engine_8game_8Updatable_html"><div class="ttname"><a href="module__helios_8engine_8game_8Updatable.html">helios.engine.game.Updatable</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1engine_1_1game_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1game.html">helios::engine::game</a></div><div class="ttdoc">Game logic infrastructure using Command pattern for decoupled, deterministic game systems.</div><div class="ttdef"><b>Definition</b> <a href="CallbackSpawnStrategy_8ixx_source.html#l00020">CallbackSpawnStrategy.ixx:20</a></div></div>
-<div class="ttc" id="astructhelios_1_1engine_1_1game_1_1UpdateContext_html"><div class="ttname"><a href="structhelios_1_1engine_1_1game_1_1UpdateContext.html">helios::engine::game::UpdateContext</a></div><div class="ttdoc">Context passed to Updatable components during per-frame updates.</div><div class="ttdef"><b>Definition</b> <a href="UpdateContext_8ixx_source.html#l00028">UpdateContext.ixx:28</a></div></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    };</div>
+</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>}</div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1ecs_1_1System_html"><div class="ttname"><a href="classhelios_1_1engine_1_1ecs_1_1System.html">helios::engine::ecs::System</a></div><div class="ttdoc">Abstract base class for game systems.</div><div class="ttdef"><b>Definition</b> <a href="#l00038">System.ixx:38</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1ecs_1_1System_html_a1b71da2e3fb9d2effca00a1ecdfca1f5"><div class="ttname"><a href="classhelios_1_1engine_1_1ecs_1_1System.html#a1b71da2e3fb9d2effca00a1ecdfca1f5">helios::engine::ecs::System::gameWorld_</a></div><div class="ttdeci">helios::engine::runtime::world::GameWorld * gameWorld_</div><div class="ttdoc">Pointer to the GameWorld this system belongs to.</div><div class="ttdef"><b>Definition</b> <a href="#l00048">System.ixx:48</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1ecs_1_1System_html_a4e9969641985fa04db6214332c88605b"><div class="ttname"><a href="classhelios_1_1engine_1_1ecs_1_1System.html#a4e9969641985fa04db6214332c88605b">helios::engine::ecs::System::update</a></div><div class="ttdeci">void update(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override=0</div><div class="ttdoc">Updates the system each frame.</div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1ecs_1_1System_html_a937c99bfacd777c53e0f811ab9d335a6"><div class="ttname"><a href="classhelios_1_1engine_1_1ecs_1_1System.html#a937c99bfacd777c53e0f811ab9d335a6">helios::engine::ecs::System::~System</a></div><div class="ttdeci">virtual ~System()=default</div><div class="ttdoc">Virtual destructor for proper cleanup of derived systems.</div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1ecs_1_1System_html_ae0464c1668e257439243a4f25979a7ff"><div class="ttname"><a href="classhelios_1_1engine_1_1ecs_1_1System.html#ae0464c1668e257439243a4f25979a7ff">helios::engine::ecs::System::init</a></div><div class="ttdeci">virtual void init(helios::engine::runtime::world::GameWorld &amp;gameWorld) noexcept</div><div class="ttdoc">Called when the system is initialized by the GameWorld.</div><div class="ttdef"><b>Definition</b> <a href="#l00068">System.ixx:68</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1ecs_1_1Updatable_html"><div class="ttname"><a href="classhelios_1_1engine_1_1ecs_1_1Updatable.html">helios::engine::ecs::Updatable</a></div><div class="ttdoc">Interface for components that require per-frame updates.</div><div class="ttdef"><b>Definition</b> <a href="Updatable_8ixx_source.html#l00037">Updatable.ixx:37</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_html"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a></div><div class="ttdoc">Central registry for game entities, managers, pools, and the active level.</div><div class="ttdef"><b>Definition</b> <a href="GameWorld_8ixx_source.html#l00096">GameWorld.ixx:96</a></div></div>
+<div class="ttc" id="amodule__helios_8engine_8ecs_8System_html"><div class="ttname"><a href="module__helios_8engine_8ecs_8System.html">helios.engine.ecs.System</a></div></div>
+<div class="ttc" id="amodule__helios_8engine_8ecs_8Updatable_html"><div class="ttname"><a href="module__helios_8engine_8ecs_8Updatable.html">helios.engine.ecs.Updatable</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1engine_1_1ecs_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1ecs.html">helios::engine::ecs</a></div><div class="ttdoc">Core Entity-Component-System architecture.</div><div class="ttdef"><b>Definition</b> <a href="CloneableComponent_8ixx_source.html#l00013">CloneableComponent.ixx:13</a></div></div>
+<div class="ttc" id="astructhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext_html"><div class="ttname"><a href="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext.html">helios::engine::runtime::world::UpdateContext</a></div><div class="ttdoc">Context passed to systems and components during per-frame updates.</div><div class="ttdef"><b>Definition</b> <a href="UpdateContext_8ixx_source.html#l00045">UpdateContext.ixx:45</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_08c09894bd9f0ab4b1e9fdc7a2628766.html">helios</a></li><li class="navelem"><a href="dir_860c9de2f65c10e8e262a0e7b5bfee5e.html">engine</a></li><li class="navelem"><a href="dir_46c7b0b04924cca8aa10726746d57f30.html">game</a></li><li class="navelem"><a href="System_8ixx.html">System.ixx</a></li>
+    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_08c09894bd9f0ab4b1e9fdc7a2628766.html">helios</a></li><li class="navelem"><a href="dir_860c9de2f65c10e8e262a0e7b5bfee5e.html">engine</a></li><li class="navelem"><a href="dir_48a6261162fe477a11d047d5b69d2726.html">ecs</a></li><li class="navelem"><a href="System_8ixx.html">System.ixx</a></li>
     <li class="footer">Generated on <span class="timestamp"></span> for helios by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

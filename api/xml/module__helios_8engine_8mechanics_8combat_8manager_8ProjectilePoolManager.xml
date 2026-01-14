@@ -1,0 +1,440 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8mechanics_8combat_8manager_8ProjectilePoolManager" kind="module">
+    <compoundname>helios.engine.mechanics.combat.manager.ProjectilePoolManager</compoundname>
+    <innerfile refid="ProjectilePoolManager_8ixx">ProjectilePoolManager.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager" prot="public">helios::engine::mechanics::combat::manager::ProjectilePoolManager</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager_1a5fe7964edce418c63ac71db9b6d77cba" prot="private" static="no" mutable="no">
+        <type><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">helios::engine::core::data::GameObjectPoolId</ref></type>
+        <definition>helios::engine::core::data::GameObjectPoolId helios::engine::mechanics::combat::manager::ProjectilePoolManager::gameObjectPoolId_</definition>
+        <argsstring></argsstring>
+        <name>gameObjectPoolId_</name>
+        <qualifiedname>helios::engine::mechanics::combat::manager::ProjectilePoolManager::gameObjectPoolId_</qualifiedname>
+        <briefdescription>
+<para>The pool ID this manager is responsible for. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" line="78" column="54" bodyfile="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager_1a00303f6696a0b20ac53c941350f543ef" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool" kindref="compound">helios::engine::runtime::pooling::GameObjectPool</ref> *</type>
+        <definition>helios::engine::runtime::pooling::GameObjectPool* helios::engine::mechanics::combat::manager::ProjectilePoolManager::gameObjectPool_</definition>
+        <argsstring></argsstring>
+        <name>gameObjectPool_</name>
+        <qualifiedname>helios::engine::mechanics::combat::manager::ProjectilePoolManager::gameObjectPool_</qualifiedname>
+        <briefdescription>
+<para>Pointer to the managed projectile pool. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" line="83" column="58" bodyfile="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager_1ae6727144c092c43c0f4758992936775d" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structhelios_1_1engine_1_1mechanics_1_1combat_1_1requests_1_1ProjectileSpawnRequest" kindref="compound">helios::engine::mechanics::combat::requests::ProjectileSpawnRequest</ref> &gt;</type>
+        <definition>std::vector&lt;helios::engine::mechanics::combat::requests::ProjectileSpawnRequest&gt; helios::engine::mechanics::combat::manager::ProjectilePoolManager::requests_</definition>
+        <argsstring></argsstring>
+        <name>requests_</name>
+        <qualifiedname>helios::engine::mechanics::combat::manager::ProjectilePoolManager::requests_</qualifiedname>
+        <briefdescription>
+<para>Queue of pending projectile spawn requests. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" line="88" column="21" bodyfile="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager_1ab86d2a6efb04d7ac3476cfba1e6b5504" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition" kindref="compound">helios::engine::mechanics::spawn::logic::SpawnCondition</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;helios::engine::mechanics::spawn::logic::SpawnCondition&gt; helios::engine::mechanics::combat::manager::ProjectilePoolManager::spawnCondition_</definition>
+        <argsstring></argsstring>
+        <name>spawnCondition_</name>
+        <qualifiedname>helios::engine::mechanics::combat::manager::ProjectilePoolManager::spawnCondition_</qualifiedname>
+        <briefdescription>
+<para>Condition that determines spawn budget per frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" line="93" column="25" bodyfile="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager_1ac45b0a14ffdb9ea145c3d60ef0f67ee3" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::mechanics::combat::manager::ProjectilePoolManager::sourceAccumulator_</definition>
+        <argsstring></argsstring>
+        <name>sourceAccumulator_</name>
+        <qualifiedname>helios::engine::mechanics::combat::manager::ProjectilePoolManager::sourceAccumulator_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Accumulator for fractional spawn counts. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Stores the fractional part of spawn calculations between frames. When the accumulator exceeds 1.0, a projectile is spawned.</para>
+<para><xrefsect id="todo_1_todo000006"><xreftitle>Todo</xreftitle><xrefdescription><para>If the Manager manages multiple sources, this should be mapped accordingly. </para>
+</xrefdescription></xrefsect></para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" line="103" column="15" bodyfile="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager_1a3556af508aac0e776eac07dabb96a744" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1factory_1_1GameObjectFactory" kindref="compound">helios::engine::runtime::factory::GameObjectFactory</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;helios::engine::runtime::factory::GameObjectFactory&gt; helios::engine::mechanics::combat::manager::ProjectilePoolManager::gameObjectFactory_</definition>
+        <argsstring></argsstring>
+        <name>gameObjectFactory_</name>
+        <qualifiedname>helios::engine::mechanics::combat::manager::ProjectilePoolManager::gameObjectFactory_</qualifiedname>
+        <briefdescription>
+<para>Factory for populating the pool with projectile GameObjects. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" line="108" column="25" bodyfile="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager_1a5f838470e0472717ea5db55b287c4790" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolFacade" kindref="compound">helios::engine::runtime::pooling::GameObjectPoolFacade</ref></type>
+        <definition>helios::engine::runtime::pooling::GameObjectPoolFacade helios::engine::mechanics::combat::manager::ProjectilePoolManager::gameObjectPoolFacade_</definition>
+        <argsstring></argsstring>
+        <name>gameObjectPoolFacade_</name>
+        <qualifiedname>helios::engine::mechanics::combat::manager::ProjectilePoolManager::gameObjectPoolFacade_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Facade for pool acquire/release operations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" line="113" column="64" bodyfile="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" bodystart="113" bodyend="113"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager_1a9e5654986768e8cb767da88c97af59f0" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::mechanics::combat::manager::ProjectilePoolManager::prepareBullet</definition>
+        <argsstring>(helios::engine::ecs::GameObject *go, const helios::engine::mechanics::combat::requests::ProjectileSpawnRequest &amp;spawnRequest) const noexcept</argsstring>
+        <name>prepareBullet</name>
+        <qualifiedname>helios::engine::mechanics::combat::manager::ProjectilePoolManager::prepareBullet</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> *</type>
+          <declname>go</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1mechanics_1_1combat_1_1requests_1_1ProjectileSpawnRequest" kindref="compound">helios::engine::mechanics::combat::requests::ProjectileSpawnRequest</ref> &amp;</type>
+          <declname>spawnRequest</declname>
+        </param>
+        <briefdescription>
+<para>Initializes a projectile GameObject from a spawn request. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Sets up position, direction, velocity inheritance, and activates the projectile.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>go</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The projectile GameObject to initialize. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spawnRequest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The request containing spawn parameters. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" line="124" column="14" bodyfile="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" bodystart="124" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager_1ad3eea2229e3456de1070c1ff7f299e6f" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::mechanics::combat::manager::ProjectilePoolManager::spawnProjectiles</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld, helios::engine::runtime::world::UpdateContext &amp;updateContext)</argsstring>
+        <name>spawnProjectiles</name>
+        <qualifiedname>helios::engine::mechanics::combat::manager::ProjectilePoolManager::spawnProjectiles</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Spawns projectiles from queued requests based on spawn budget. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Iterates through all pending spawn requests and spawns projectiles using an accumulator-based rate limiting system:</para>
+<para>1. For each request, calculates spawn count as `spawnBudget * intensity` 2. Adds this to the accumulator (preserving fractional values across frames) 3. Spawns floor(accumulator) projectiles and subtracts from accumulator 4. Acquires projectiles from pool and initializes via prepareBullet()</para>
+<para>This allows sub-frame spawn timing and smooth fire rate control.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world for entity access. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s update context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" line="170" column="14" bodyfile="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" bodystart="170" bodyend="201"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager_1a73ef396f8d4d31cc630482b850931cd0" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::mechanics::combat::manager::ProjectilePoolManager::ProjectilePoolManager</definition>
+        <argsstring>(helios::engine::core::data::GameObjectPoolId gameObjectPoolId, std::unique_ptr&lt; helios::engine::runtime::factory::GameObjectFactory &gt; gameObjectFactory, std::unique_ptr&lt; helios::engine::mechanics::spawn::logic::SpawnCondition &gt; spawnCondition)</argsstring>
+        <name>ProjectilePoolManager</name>
+        <qualifiedname>helios::engine::mechanics::combat::manager::ProjectilePoolManager::ProjectilePoolManager</qualifiedname>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">helios::engine::core::data::GameObjectPoolId</ref></type>
+          <declname>gameObjectPoolId</declname>
+        </param>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1factory_1_1GameObjectFactory" kindref="compound">helios::engine::runtime::factory::GameObjectFactory</ref> &gt;</type>
+          <declname>gameObjectFactory</declname>
+        </param>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition" kindref="compound">helios::engine::mechanics::spawn::logic::SpawnCondition</ref> &gt;</type>
+          <declname>spawnCondition</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager" kindref="compound">ProjectilePoolManager</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameObjectPoolId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ID of the pool to manage. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>gameObjectFactory</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factory for populating the pool. Ownership is transferred. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spawnCondition</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Condition that controls spawn rate. Ownership is transferred. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" line="213" column="18" bodyfile="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" bodystart="213" bodyend="221"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager_1a2860e0bce11c84d06e83e0642350bdc8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::mechanics::combat::manager::ProjectilePoolManager::submit</definition>
+        <argsstring>(helios::engine::mechanics::spawn::requests::SpawnRequest spawnRequest) noexcept override</argsstring>
+        <name>submit</name>
+        <qualifiedname>helios::engine::mechanics::combat::manager::ProjectilePoolManager::submit</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolRequestHandler_1ac09fb396362b945686cf52c02b1df214">submit</reimplements>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1mechanics_1_1spawn_1_1requests_1_1SpawnRequest" kindref="compound">helios::engine::mechanics::spawn::requests::SpawnRequest</ref></type>
+          <declname>spawnRequest</declname>
+        </param>
+        <briefdescription>
+<para>Not supported for <ref refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager" kindref="compound">ProjectilePoolManager</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>spawnRequest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ignored.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Always returns false.</para>
+</simplesect>
+<simplesect kind="note"><para>Use <ref refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager_1aa99d998eabb0565ba0bbae7f9bdcc81e" kindref="member">addRequest()</ref> instead for projectile spawning. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" line="232" column="14" bodyfile="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" bodystart="232" bodyend="235"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager_1ab4c6c61de5c4f5737307da1bf00f68c6" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::mechanics::combat::manager::ProjectilePoolManager::submit</definition>
+        <argsstring>(helios::engine::mechanics::spawn::requests::DespawnRequest despawnRequest) noexcept override</argsstring>
+        <name>submit</name>
+        <qualifiedname>helios::engine::mechanics::combat::manager::ProjectilePoolManager::submit</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolRequestHandler_1a361622fa0b7d421b0e55df9dbe798edd">submit</reimplements>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1mechanics_1_1spawn_1_1requests_1_1DespawnRequest" kindref="compound">helios::engine::mechanics::spawn::requests::DespawnRequest</ref></type>
+          <declname>despawnRequest</declname>
+        </param>
+        <briefdescription>
+<para>Submits a despawn request to return a projectile to the pool. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>despawnRequest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The request containing the entity GUID and pool ID.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the projectile was successfully released, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" line="244" column="14" bodyfile="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" bodystart="244" bodyend="258"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager_1aa99d998eabb0565ba0bbae7f9bdcc81e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::mechanics::combat::manager::ProjectilePoolManager::addRequest</definition>
+        <argsstring>(const helios::engine::mechanics::combat::requests::ProjectileSpawnRequest &amp;request)</argsstring>
+        <name>addRequest</name>
+        <qualifiedname>helios::engine::mechanics::combat::manager::ProjectilePoolManager::addRequest</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1mechanics_1_1combat_1_1requests_1_1ProjectileSpawnRequest" kindref="compound">helios::engine::mechanics::combat::requests::ProjectileSpawnRequest</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <briefdescription>
+<para>Queues a projectile spawn request for processing. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Requests are accumulated and processed during the <ref refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager_1a9ec8753e84b8b8c90127c8754c54fa08" kindref="member">flush()</ref> phase.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spawn request containing position, direction, and intensity. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" line="267" column="14" bodyfile="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" bodystart="267" bodyend="269"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager_1a9ec8753e84b8b8c90127c8754c54fa08" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::mechanics::combat::manager::ProjectilePoolManager::flush</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld, helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>flush</name>
+        <qualifiedname>helios::engine::mechanics::combat::manager::ProjectilePoolManager::flush</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a290b20a4d512d096650dc187f1f3e940">flush</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Processes all queued spawn requests. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Called during the game loop&apos;s manager flush phase. Spawns projectiles based on the accumulated requests and spawn condition budget, then clears the request queue.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world for entity access. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s update context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" line="281" column="14" bodyfile="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" bodystart="281" bodyend="288"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager_1a4190bbc58bfeda6fa493d6dcc0221591" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::mechanics::combat::manager::ProjectilePoolManager::init</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld) noexcept</argsstring>
+        <name>init</name>
+        <qualifiedname>helios::engine::mechanics::combat::manager::ProjectilePoolManager::init</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ae7e2cd7531de5ce1fdc1f4a179b70929">init</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <briefdescription>
+<para>Initializes the manager with the game world. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Retrieves the pool, registers as the pool&apos;s request handler, and populates the pool with projectile templates via the factory.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world to initialize with.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="pre"><para>The pool with gameObjectPoolId_ must exist in gameWorld. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" line="301" column="14" bodyfile="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" bodystart="301" bodyend="309"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a171b914053b1b8b15fa2465fe97c2a6b" compoundref="GameWorld_8ixx" startline="183" endline="186">helios::engine::runtime::world::GameWorld::pool</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a9cdad1b5227aa308094d0e77b31050a3" compoundref="GameWorld_8ixx" startline="303" endline="312">helios::engine::runtime::world::GameWorld::registerPoolRequestHandler</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/engine/mechanics/combat/manager/ProjectilePoolManager.ixx" line="13" column="15"/>
+  </compounddef>
+</doxygen>

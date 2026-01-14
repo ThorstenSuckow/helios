@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1ecs_1_1System" prot="public" virt="non-virtual">helios::engine::ecs::System</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1afbd15b00a3cf9da773c1ad617c8eaae2" prot="private" static="no" mutable="no">
+        <type><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">helios::engine::core::data::GameObjectPoolId</ref></type>
+        <definition>helios::engine::core::data::GameObjectPoolId helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::gameObjectPoolId_</definition>
+        <argsstring></argsstring>
+        <name>gameObjectPoolId_</name>
+        <qualifiedname>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::gameObjectPoolId_</qualifiedname>
+        <briefdescription>
+<para>The ID of the pool to spawn from. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="71" column="54" bodyfile="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1a01b2728d3afa4aa2f1401a6164dfcaf5" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition" kindref="compound">helios::engine::mechanics::spawn::logic::SpawnCondition</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;helios::engine::mechanics::spawn::logic::SpawnCondition&gt; helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::spawnCondition_</definition>
+        <argsstring></argsstring>
+        <name>spawnCondition_</name>
+        <qualifiedname>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::spawnCondition_</qualifiedname>
+        <briefdescription>
+<para>The condition that determines when and how many objects to spawn. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="76" column="25" bodyfile="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="76" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1aa1d2f40557e255a563d6f89e74b090b2" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::GameObjectSpawnSystem</definition>
+        <argsstring>(helios::engine::core::data::GameObjectPoolId gameObjectPoolId, std::unique_ptr&lt; helios::engine::mechanics::spawn::logic::SpawnCondition &gt; spawnCondition)</argsstring>
+        <name>GameObjectSpawnSystem</name>
+        <qualifiedname>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::GameObjectSpawnSystem</qualifiedname>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">helios::engine::core::data::GameObjectPoolId</ref></type>
+          <declname>gameObjectPoolId</declname>
+        </param>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition" kindref="compound">helios::engine::mechanics::spawn::logic::SpawnCondition</ref> &gt;</type>
+          <declname>spawnCondition</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem" kindref="compound">GameObjectSpawnSystem</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameObjectPoolId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ID of the pool to spawn from. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spawnCondition</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The condition that controls spawn timing. Must not be nullptr.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="pre"><para>spawnCondition != nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="89" column="18" bodyfile="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="89" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1a69d47de2e4bae743dab2fc03349b3902" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::update</definition>
+        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::update</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1ecs_1_1System_1a4e9969641985fa04db6214332c88605b">update</reimplements>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Evaluates the spawn condition and emits SpawnCommands. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Each frame, queries the spawn condition for the spawn budget. If the budget is greater than zero, emits a SpawnCommand to the CommandBuffer for deferred processing.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current update context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="108" column="14" bodyfile="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="108" bodyend="119"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="48">helios::engine::ecs::System::gameWorld_</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>System that evaluates spawn conditions and emits SpawnCommands. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem" kindref="compound">GameObjectSpawnSystem</ref> integrates spawning into the game loop by evaluating a SpawnCondition each frame to determine how many objects should be spawned. When the spawn budget is greater than zero, it emits a SpawnCommand to the CommandBuffer for deferred execution.</para>
+<para>The actual spawning is handled by the SpawnCommandDispatcher and SpawnManager during the command flush phase.</para>
+<para>Example usage: ```cpp auto condition = std::make_unique&lt;TimerSpawnCondition&gt;(2.0f);</para>
+<para>gameLoop.phase(PhaseType::Main) .addPass() .addSystem&lt;GameObjectSpawnSystem&gt;(poolId, std::move(condition)); ```</para>
+<para><simplesect kind="see"><para>SpawnCondition </para>
+</simplesect>
+<simplesect kind="see"><para>SpawnCommand </para>
+</simplesect>
+<simplesect kind="see"><para>SpawnManager </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::ecs::System</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>helios::engine::ecs::System</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1System"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>gameWorld_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Updatable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Updatable"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>helios::engine::runtime::pooling::GameObjectPoolRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolRegistry"/>
+      </node>
+      <node id="7">
+        <label>helios::engine::runtime::pooling::PoolManagerRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry"/>
+      </node>
+      <node id="4">
+        <label>helios::engine::runtime::world::GameWorld</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>logger_</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>pools_</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>poolManagerRegistry_</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>helios::util::log::Logger</label>
+        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="66" column="5" bodyfile="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="66" bodyend="121"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1afbd15b00a3cf9da773c1ad617c8eaae2" prot="private" virt="non-virtual"><scope>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</scope><name>gameObjectPoolId_</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1aa1d2f40557e255a563d6f89e74b090b2" prot="public" virt="non-virtual"><scope>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</scope><name>GameObjectSpawnSystem</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" prot="protected" virt="non-virtual"><scope>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</scope><name>gameWorld_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1ae0464c1668e257439243a4f25979a7ff" prot="public" virt="virtual"><scope>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</scope><name>init</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1a01b2728d3afa4aa2f1401a6164dfcaf5" prot="private" virt="non-virtual"><scope>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</scope><name>spawnCondition_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a26d81abcda05fe8b12a1ddb4ed6099a3" prot="public" virt="non-virtual"><scope>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</scope><name>Updatable</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1a69d47de2e4bae743dab2fc03349b3902" prot="public" virt="virtual"><scope>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</scope><name>update</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a937c99bfacd777c53e0f811ab9d335a6" prot="public" virt="virtual"><scope>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</scope><name>~System</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a0f54f92a2a8d6c8dc2fc2ebed41d5a85" prot="public" virt="virtual"><scope>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</scope><name>~Updatable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

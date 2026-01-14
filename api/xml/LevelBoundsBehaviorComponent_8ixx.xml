@@ -4,20 +4,39 @@
     <compoundname>LevelBoundsBehaviorComponent.ixx</compoundname>
     <includes local="no">algorithm</includes>
     <includes local="no">cassert</includes>
-    <includes refid="Component_8ixx" local="no">helios.engine.game.Component</includes>
+    <includes refid="CollisionBehavior_8ixx" local="no">helios.engine.modules.physics.collision.types.CollisionBehavior</includes>
+    <includes refid="CloneableComponent_8ixx" local="no">helios.engine.ecs.CloneableComponent</includes>
     <incdepgraph>
-      <node id="4">
-        <label>helios.engine.game.Component</label>
+      <node id="6">
+        <label>helios.engine.ecs.CloneableComponent</label>
+        <link refid="CloneableComponent_8ixx"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>helios.engine.ecs.Component</label>
         <link refid="Component_8ixx"/>
+        <childnode refid="7" relation="include">
+        </childnode>
       </node>
       <node id="1">
-        <label>include/helios/engine/game/components/physics/LevelBoundsBehaviorComponent.ixx</label>
+        <label>include/helios/engine/mechanics/bounds/components/LevelBoundsBehaviorComponent.ixx</label>
         <link refid="LevelBoundsBehaviorComponent_8ixx"/>
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>helios.engine.modules.physics.collision.types.CollisionBehavior</label>
+        <link refid="CollisionBehavior_8ixx"/>
+        <childnode refid="5" relation="include">
         </childnode>
       </node>
       <node id="2">
@@ -26,13 +45,19 @@
       <node id="3">
         <label>cassert</label>
       </node>
+      <node id="5">
+        <label>cstdint</label>
+      </node>
+      <node id="7">
+        <label>memory</label>
+      </node>
     </incdepgraph>
-    <innerclass refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent" prot="public">helios::engine::game::components::physics::LevelBoundsBehaviorComponent</innerclass>
+    <innerclass refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent" prot="public">helios::engine::mechanics::bounds::components::LevelBoundsBehaviorComponent</innerclass>
     <innernamespace refid="namespacehelios">helios</innernamespace>
     <innernamespace refid="namespacehelios_1_1engine">helios::engine</innernamespace>
-    <innernamespace refid="namespacehelios_1_1engine_1_1game">helios::engine::game</innernamespace>
-    <innernamespace refid="namespacehelios_1_1engine_1_1game_1_1components">helios::engine::game::components</innernamespace>
-    <innernamespace refid="namespacehelios_1_1engine_1_1game_1_1components_1_1physics">helios::engine::game::components::physics</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1mechanics">helios::engine::mechanics</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1mechanics_1_1bounds">helios::engine::mechanics::bounds</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1mechanics_1_1bounds_1_1components">helios::engine::mechanics::bounds::components</innernamespace>
     <briefdescription>
 <para>Component defining behavior when an entity interacts with level boundaries. </para>
     </briefdescription>
@@ -48,73 +73,108 @@
 <codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;algorithm&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cassert&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8game_8components_8physics_8LevelBoundsBehaviorComponent" kindref="compound">helios.engine.game.components.physics.LevelBoundsBehaviorComponent</ref>;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8mechanics_8bounds_8components_8LevelBoundsBehaviorComponent" kindref="compound">helios.engine.mechanics.bounds.components.LevelBoundsBehaviorComponent</ref>;</highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8game_8Component" kindref="compound">helios.engine.game.Component</ref>;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8ecs_8CloneableComponent" kindref="compound">helios.engine.ecs.CloneableComponent</ref>;</highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1game_1_1components_1_1physics" kindref="compound">helios::engine::game::components::physics</ref><sp/>{</highlight></codeline>
-<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="16"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Component<sp/>that<sp/>defines<sp/>how<sp/>an<sp/>entity<sp/>reacts<sp/>to<sp/>level<sp/>boundaries.</highlight></codeline>
-<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@details</highlight></codeline>
-<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>component<sp/>stores<sp/>properties<sp/>related<sp/>to<sp/>boundary<sp/>interactions,<sp/>such<sp/>as</highlight></codeline>
-<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>restitution<sp/>(bounciness)<sp/>when<sp/>colliding<sp/>with<sp/>level<sp/>walls,<sp/>used<sp/>by<sp/>physics</highlight></codeline>
-<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>or<sp/>movement<sp/>systems<sp/>to<sp/>resolve<sp/>out-of-bounds<sp/>conditions.</highlight></codeline>
-<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="24" refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1a2db70951b43725a6f0fd7b09957e210f" kindref="member">LevelBoundsBehaviorComponent</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1Component" kindref="compound">helios::engine::game::Component</ref><sp/>{</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"></highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Coefficient<sp/>of<sp/>restitution<sp/>(bounciness).</highlight></codeline>
-<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details</highlight></codeline>
-<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>A<sp/>value<sp/>of<sp/>1.0<sp/>means<sp/>a<sp/>perfectly<sp/>elastic<sp/>collision<sp/>(no<sp/>energy<sp/>lost).</highlight></codeline>
-<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>A<sp/>value<sp/>of<sp/>0.0<sp/>means<sp/>a<sp/>perfectly<sp/>inelastic<sp/>collision<sp/>(no<sp/>bounce).</highlight></codeline>
-<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Default<sp/>is<sp/>0.5.</highlight></codeline>
-<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>restitution_<sp/>=<sp/>0.5f;</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"></highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Default<sp/>constructor<sp/>with<sp/>default<sp/>restitution<sp/>(0.5).</highlight></codeline>
-<codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="42" refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1a2db70951b43725a6f0fd7b09957e210f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1a2db70951b43725a6f0fd7b09957e210f" kindref="member">LevelBoundsBehaviorComponent</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="43"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Constructs<sp/>a<sp/>LevelBoundsBehaviorComponent<sp/>with<sp/>a<sp/>specified<sp/>restitution.</highlight></codeline>
-<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>restitution<sp/>The<sp/>coefficient<sp/>of<sp/>restitution<sp/>(0.0<sp/>to<sp/>1.0).</highlight></codeline>
-<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="49" refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1abf7dd41d729883dce445a66fe04705c4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1abf7dd41d729883dce445a66fe04705c4" kindref="member">LevelBoundsBehaviorComponent</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1a6748387a003beb211e88f5f4ed24a3e6" kindref="member">restitution</ref>)<sp/>:<sp/><ref refid="classhelios_1_1engine_1_1game_1_1Component_1a4a167553b4aed32f0ad96e8836a01b88" kindref="member">Component</ref>(),<sp/>restitution_(<ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1a6748387a003beb211e88f5f4ed24a3e6" kindref="member">restitution</ref>)<sp/>{}</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Retrieves<sp/>the<sp/>restitution<sp/>coefficient.</highlight></codeline>
-<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>restitution<sp/>value.</highlight></codeline>
-<codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="56" refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1a6748387a003beb211e88f5f4ed24a3e6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1a6748387a003beb211e88f5f4ed24a3e6" kindref="member">restitution</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>restitution_;</highlight></codeline>
-<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="59"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="60"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Sets<sp/>the<sp/>coefficient<sp/>of<sp/>restitution<sp/>(bounciness).</highlight></codeline>
-<codeline lineno="62"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="63"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>restitution<sp/>The<sp/>new<sp/>restitution<sp/>value<sp/>to<sp/>set.<sp/>Must<sp/>be<sp/>within<sp/>the</highlight></codeline>
-<codeline lineno="64"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>range<sp/>[0.0,<sp/>1.0].<sp/>Values<sp/>outside<sp/>this<sp/>range<sp/>will<sp/>be<sp/>clamped.</highlight></codeline>
-<codeline lineno="65"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="66" refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1aa700b00e7ca94649741548271f568751" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1aa700b00e7ca94649741548271f568751" kindref="member">setRestitution</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1a6748387a003beb211e88f5f4ed24a3e6" kindref="member">restitution</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assert(<ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1a6748387a003beb211e88f5f4ed24a3e6" kindref="member">restitution</ref><sp/>&gt;=<sp/>0.0f<sp/>&amp;&amp;<sp/><ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1a6748387a003beb211e88f5f4ed24a3e6" kindref="member">restitution</ref><sp/>&lt;=<sp/>1.0f<sp/>&amp;&amp;<sp/></highlight><highlight class="stringliteral">&quot;Unexpected<sp/>value<sp/>for<sp/>restitution&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>restitution_<sp/>=<sp/>std::clamp(<ref refid="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1LevelBoundsBehaviorComponent_1a6748387a003beb211e88f5f4ed24a3e6" kindref="member">restitution</ref>,<sp/>0.0f,<sp/>1.0f);</highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"></highlight></codeline>
-<codeline lineno="71"><highlight class="normal"></highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"></highlight></codeline>
-<codeline lineno="74"><highlight class="normal"></highlight></codeline>
-<codeline lineno="75"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8modules_8physics_8collision_8types_8CollisionBehavior" kindref="compound">helios.engine.modules.physics.collision.types.CollisionBehavior</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16" refid="namespacehelios_1_1engine_1_1mechanics" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1mechanics_1_1bounds_1_1components" kindref="compound">helios::engine::mechanics::bounds::components</ref><sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Component<sp/>that<sp/>defines<sp/>how<sp/>an<sp/>entity<sp/>reacts<sp/>to<sp/>level<sp/>boundaries.</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@details</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>component<sp/>stores<sp/>properties<sp/>related<sp/>to<sp/>boundary<sp/>interactions,<sp/>such<sp/>as</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>restitution<sp/>(bounciness)<sp/>when<sp/>colliding<sp/>with<sp/>level<sp/>walls,<sp/>used<sp/>by<sp/>physics</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>or<sp/>movement<sp/>systems<sp/>to<sp/>resolve<sp/>out-of-bounds<sp/>conditions.</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27" refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent_1acae634ae702083c1e70cfd1c96403eb5" kindref="member">LevelBoundsBehaviorComponent</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" kindref="compound">helios::engine::ecs::CloneableComponent</ref>&lt;LevelBoundsBehaviorComponent&gt;<sp/>{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Coefficient<sp/>of<sp/>restitution<sp/>(bounciness).</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>A<sp/>value<sp/>of<sp/>1.0<sp/>means<sp/>a<sp/>perfectly<sp/>elastic<sp/>collision<sp/>(no<sp/>energy<sp/>lost).</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>A<sp/>value<sp/>of<sp/>0.0<sp/>means<sp/>a<sp/>perfectly<sp/>inelastic<sp/>collision<sp/>(no<sp/>bounce).</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Default<sp/>is<sp/>0.5.</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>restitution_<sp/>=<sp/>0.5f;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>The<sp/>behavior<sp/>type<sp/>for<sp/>boundary<sp/>collisions.</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Defines<sp/>how<sp/>the<sp/>entity<sp/>reacts<sp/>when<sp/>hitting<sp/>level<sp/>bounds</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>(e.g.,<sp/>Bounce,<sp/>Reflect,<sp/>Clamp,<sp/>Despawn).</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2" kindref="member">helios::engine::modules::physics::collision::types::CollisionBehavior</ref><sp/>collisionBehavior_<sp/>=<sp/><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2aeb9a56428f85bbdfd3846322baaffe6e" kindref="member">helios::engine::modules::physics::collision::types::CollisionBehavior::Bounce</ref>;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Constructs<sp/>a<sp/>LevelBoundsBehaviorComponent<sp/>with<sp/>a<sp/>specified<sp/>restitution.</highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>restitution<sp/>The<sp/>coefficient<sp/>of<sp/>restitution<sp/>(0.0<sp/>to<sp/>1.0).</highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55" refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent_1acae634ae702083c1e70cfd1c96403eb5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent_1acae634ae702083c1e70cfd1c96403eb5" kindref="member">LevelBoundsBehaviorComponent</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent_1a577a3cecd645297d5f47278834551be1" kindref="member">restitution</ref>)<sp/>:</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>restitution_(<ref refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent_1a577a3cecd645297d5f47278834551be1" kindref="member">restitution</ref>)<sp/>{}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Constructs<sp/>a<sp/>LevelBoundsBehaviorComponent<sp/>with<sp/>a<sp/>specified<sp/>collision<sp/>behavior.</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>collisionBehavior<sp/>The<sp/>collision<sp/>behavior<sp/>type<sp/>(default:<sp/>Reflect).</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63" refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent_1a965fcbab93d53df8876985422890afbd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent_1a965fcbab93d53df8876985422890afbd" kindref="member">LevelBoundsBehaviorComponent</ref>(</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2" kindref="member">helios::engine::modules::physics::collision::types::CollisionBehavior</ref><sp/><ref refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent_1af460c58e7b2e601856b24bbec6bf93da" kindref="member">collisionBehavior</ref><sp/>=<sp/><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2a74de3e45e4491e956e8dc18d841d9b00" kindref="member">helios::engine::modules::physics::collision::types::CollisionBehavior::Reflect</ref>)<sp/>:</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>collisionBehavior_(<ref refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent_1af460c58e7b2e601856b24bbec6bf93da" kindref="member">collisionBehavior</ref>){}</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Copy<sp/>constructor.</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>other<sp/>The<sp/>component<sp/>to<sp/>copy<sp/>from.</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72" refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent_1a654cda8dbd3ca4e969a895afaa3f3bcf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent_1a654cda8dbd3ca4e969a895afaa3f3bcf" kindref="member">LevelBoundsBehaviorComponent</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent_1acae634ae702083c1e70cfd1c96403eb5" kindref="member">LevelBoundsBehaviorComponent</ref>&amp;<sp/>other)<sp/>:</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>restitution_(other.restitution_),</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>collisionBehavior_(other.collisionBehavior_)</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{}</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Retrieves<sp/>the<sp/>restitution<sp/>coefficient.</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>restitution<sp/>value.</highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82" refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent_1a577a3cecd645297d5f47278834551be1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent_1a577a3cecd645297d5f47278834551be1" kindref="member">restitution</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>restitution_;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="86"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="87"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Retrieves<sp/>the<sp/>collision<sp/>behavior<sp/>type.</highlight></codeline>
+<codeline lineno="88"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="89"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>collision<sp/>behavior<sp/>(e.g.,<sp/>Bounce,<sp/>Reflect,<sp/>Clamp,<sp/>Despawn).</highlight></codeline>
+<codeline lineno="90"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="91" refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent_1af460c58e7b2e601856b24bbec6bf93da" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2" kindref="member">helios::engine::modules::physics::collision::types::CollisionBehavior</ref><sp/><ref refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent_1af460c58e7b2e601856b24bbec6bf93da" kindref="member">collisionBehavior</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>collisionBehavior_;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="95"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="96"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Sets<sp/>the<sp/>coefficient<sp/>of<sp/>restitution<sp/>(bounciness).</highlight></codeline>
+<codeline lineno="97"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>restitution<sp/>The<sp/>new<sp/>restitution<sp/>value<sp/>to<sp/>set.<sp/>Must<sp/>be<sp/>within<sp/>the</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>range<sp/>[0.0,<sp/>1.0].<sp/>Values<sp/>outside<sp/>this<sp/>range<sp/>will<sp/>be<sp/>clamped.</highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="101" refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent_1abe0ab3bf391aa0a0b4e8a8b65a34c41f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent_1abe0ab3bf391aa0a0b4e8a8b65a34c41f" kindref="member">setRestitution</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent_1a577a3cecd645297d5f47278834551be1" kindref="member">restitution</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assert(<ref refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent_1a577a3cecd645297d5f47278834551be1" kindref="member">restitution</ref><sp/>&gt;=<sp/>0.0f<sp/>&amp;&amp;<sp/><ref refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent_1a577a3cecd645297d5f47278834551be1" kindref="member">restitution</ref><sp/>&lt;=<sp/>1.0f<sp/>&amp;&amp;<sp/></highlight><highlight class="stringliteral">&quot;Unexpected<sp/>value<sp/>for<sp/>restitution&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>restitution_<sp/>=<sp/>std::clamp(<ref refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1components_1_1LevelBoundsBehaviorComponent_1a577a3cecd645297d5f47278834551be1" kindref="member">restitution</ref>,<sp/>0.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal">}</highlight></codeline>
     </programlisting>
-    <location file="include/helios/engine/game/components/physics/LevelBoundsBehaviorComponent.ixx"/>
+    <location file="include/helios/engine/mechanics/bounds/components/LevelBoundsBehaviorComponent.ixx"/>
   </compounddef>
 </doxygen>

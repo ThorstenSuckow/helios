@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2mechanics_2spawn_2logic_2README_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1mechanics_1_1spawn_1_1logic">helios::engine::mechanics::spawn::logic</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::mechanics::spawn::logic</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Spawn<sp/>conditions<sp/>and<sp/>strategies<sp/>for<sp/>controlling<sp/>entity<sp/>creation.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>namespace<sp/>provides<sp/>the<sp/>policy<sp/>interfaces<sp/>and<sp/>implementations<sp/>for<sp/>the<sp/>spawn<sp/>system.<sp/>Conditions<sp/>determine<sp/>*when*<sp/>to<sp/>spawn,<sp/>while<sp/>strategies<sp/>handle<sp/>*how*<sp/>to<sp/>configure<sp/>spawned<sp/>entities.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Classes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SpawnCondition`<sp/>|<sp/>Abstract<sp/>base<sp/>for<sp/>determining<sp/>spawn<sp/>timing<sp/>and<sp/>quantity<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`TimerSpawnCondition`<sp/>|<sp/>Spawns<sp/>at<sp/>fixed<sp/>time<sp/>intervals<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`MaxPerSecCondition`<sp/>|<sp/>Rate-limited<sp/>spawning<sp/>based<sp/>on<sp/>requests<sp/>per<sp/>second<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SpawnStrategy`<sp/>|<sp/>Abstract<sp/>base<sp/>for<sp/>configuring<sp/>spawned<sp/>GameObjects<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`CallbackSpawnStrategy`<sp/>|<sp/>Delegates<sp/>spawning<sp/>logic<sp/>to<sp/>a<sp/>callback<sp/>function<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Timer-based<sp/>spawning<sp/>(one<sp/>object<sp/>every<sp/>2<sp/>seconds)</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>condition<sp/>=<sp/>std::make_unique&lt;TimerSpawnCondition&gt;(2.0f);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Rate-limited<sp/>spawning<sp/>(max<sp/>10<sp/>per<sp/>second)</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>condition<sp/>=<sp/>std::make_unique&lt;MaxPerSecCondition&gt;(10);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Callback-based<sp/>strategy<sp/>for<sp/>flexible<sp/>initialization</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>strategy<sp/>=<sp/>std::make_unique&lt;CallbackSpawnStrategy&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>[](const<sp/>GameWorld&amp;<sp/>w,<sp/>GameObject&amp;<sp/>o,<sp/>const<sp/>UpdateContext&amp;<sp/>c)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Initialize<sp/>object...</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>true;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::mechanics::spawn::logic</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Spawn<sp/>conditions<sp/>and<sp/>strategies<sp/>for<sp/>controlling<sp/>entity<sp/>creation.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>This<sp/>namespace<sp/>provides<sp/>the<sp/>policy<sp/>interfaces<sp/>and<sp/>implementations<sp/>for<sp/>the<sp/>spawn<sp/>system.<sp/>Conditions<sp/>determine<sp/>timing<sp/>(interval-based<sp/>or<sp/>rate-limited),<sp/>while<sp/>strategies<sp/>handle<sp/>entity<sp/>initialization<sp/>and<sp/>configuration.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+<codeline></codeline>
+    </programlisting>
+    <location file="include/helios/engine/mechanics/spawn/logic/README.md"/>
+  </compounddef>
+</doxygen>

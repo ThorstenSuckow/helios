@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8mechanics_8combat_8dispatcher_8ShootCommandDispatcher" kind="module">
+    <compoundname>helios.engine.mechanics.combat.dispatcher.ShootCommandDispatcher</compoundname>
+    <innerfile refid="ShootCommandDispatcher_8ixx">ShootCommandDispatcher.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1dispatcher_1_1ShootCommandDispatcher" prot="public">helios::engine::mechanics::combat::dispatcher::ShootCommandDispatcher</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1dispatcher_1_1ShootCommandDispatcher_1a7b4acd005025c8fc735e563699ee7824" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager" kindref="compound">helios::engine::mechanics::combat::manager::ProjectilePoolManager</ref> &amp;</type>
+        <definition>helios::engine::mechanics::combat::manager::ProjectilePoolManager&amp; helios::engine::mechanics::combat::dispatcher::ShootCommandDispatcher::projectilePoolManager_</definition>
+        <argsstring></argsstring>
+        <name>projectilePoolManager_</name>
+        <qualifiedname>helios::engine::mechanics::combat::dispatcher::ShootCommandDispatcher::projectilePoolManager_</qualifiedname>
+        <briefdescription>
+<para>Reference to the ProjectilePoolManager for spawning projectiles. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/dispatcher/ShootCommandDispatcher.ixx" line="58" column="75" bodyfile="include/helios/engine/mechanics/combat/dispatcher/ShootCommandDispatcher.ixx" bodystart="58" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1dispatcher_1_1ShootCommandDispatcher_1a8fb987d7d25a03e970ffe0b9ac8ec010" prot="protected" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::mechanics::combat::dispatcher::ShootCommandDispatcher::dispatchTyped</definition>
+        <argsstring>(helios::engine::ecs::GameObject &amp;gameObject, const helios::engine::mechanics::combat::commands::ShootCommand &amp;command) noexcept override</argsstring>
+        <name>dispatchTyped</name>
+        <qualifiedname>helios::engine::mechanics::combat::dispatcher::ShootCommandDispatcher::dispatchTyped</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedTargetedCommandDispatcher_1a538b91fd69872a65d3c8566f4eea99a4">dispatchTyped</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> &amp;</type>
+          <declname>gameObject</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1ShootCommand" kindref="compound">helios::engine::mechanics::combat::commands::ShootCommand</ref> &amp;</type>
+          <declname>command</declname>
+        </param>
+        <briefdescription>
+<para>Dispatches a ShootCommand by creating a ProjectileSpawnRequest. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Gathers position, aim direction, and velocity from the source GameObject and submits a spawn request to the ProjectilePoolManager.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameObject</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The source GameObject that fired the shot. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>command</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ShootCommand containing intensity information.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="pre"><para>gameObject must have Move2DComponent, TranslationStateComponent, and Aim2DComponent attached. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/dispatcher/ShootCommandDispatcher.ixx" line="74" column="14" bodyfile="include/helios/engine/mechanics/combat/dispatcher/ShootCommandDispatcher.ixx" bodystart="74" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1dispatcher_1_1ShootCommandDispatcher_1a1557cfae4b1a196eab887c3a555b2138" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::mechanics::combat::dispatcher::ShootCommandDispatcher::ShootCommandDispatcher</definition>
+        <argsstring>(helios::engine::mechanics::combat::manager::ProjectilePoolManager &amp;projectilePoolManager)</argsstring>
+        <name>ShootCommandDispatcher</name>
+        <qualifiedname>helios::engine::mechanics::combat::dispatcher::ShootCommandDispatcher::ShootCommandDispatcher</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager" kindref="compound">helios::engine::mechanics::combat::manager::ProjectilePoolManager</ref> &amp;</type>
+          <declname>projectilePoolManager</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1dispatcher_1_1ShootCommandDispatcher" kindref="compound">ShootCommandDispatcher</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>projectilePoolManager</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the manager that handles projectile spawning. Must remain valid for the dispatcher&apos;s lifetime. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/dispatcher/ShootCommandDispatcher.ixx" line="108" column="18" bodyfile="include/helios/engine/mechanics/combat/dispatcher/ShootCommandDispatcher.ixx" bodystart="108" bodyend="112"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/engine/mechanics/combat/dispatcher/ShootCommandDispatcher.ixx" line="10" column="15"/>
+  </compounddef>
+</doxygen>

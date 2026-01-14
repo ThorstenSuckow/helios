@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_e5915e51628795b15babf33bf45a77aa" kind="dir">
+    <compoundname>include/helios/engine/mechanics/spawn/logic</compoundname>
+    <innerfile refid="helios_2engine_2mechanics_2spawn_2logic_2__module_8ixx">_module.ixx</innerfile>
+    <innerfile refid="CallbackSpawnStrategy_8ixx">CallbackSpawnStrategy.ixx</innerfile>
+    <innerfile refid="MaxPerSecCondition_8ixx">MaxPerSecCondition.ixx</innerfile>
+    <innerfile refid="SpawnCondition_8ixx">SpawnCondition.ixx</innerfile>
+    <innerfile refid="SpawnStrategy_8ixx">SpawnStrategy.ixx</innerfile>
+    <innerfile refid="TimerSpawnCondition_8ixx">TimerSpawnCondition.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_e5915e51628795b15babf33bf45a77aa_1autotoc_md122">
+<title>helios::engine::mechanics::spawn::logic</title><para>Spawn conditions and strategies for controlling entity creation.</para>
+<para>This namespace provides the policy interfaces and implementations for the spawn system. Conditions determine <emphasis>when</emphasis> to spawn, while strategies handle <emphasis>how</emphasis> to configure spawned entities.</para>
+</sect1>
+<sect1 id="dir_e5915e51628795b15babf33bf45a77aa_1autotoc_md123">
+<title>Classes</title><para><table rows="6" cols="2"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SpawnCondition</computeroutput>  </para>
+</entry><entry thead="no"><para>Abstract base for determining spawn timing and quantity  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>TimerSpawnCondition</computeroutput>  </para>
+</entry><entry thead="no"><para>Spawns at fixed time intervals  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>MaxPerSecCondition</computeroutput>  </para>
+</entry><entry thead="no"><para>Rate-limited spawning based on requests per second  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SpawnStrategy</computeroutput>  </para>
+</entry><entry thead="no"><para>Abstract base for configuring spawned GameObjects  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>CallbackSpawnStrategy</computeroutput>  </para>
+</entry><entry thead="no"><para>Delegates spawning logic to a callback function  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_e5915e51628795b15babf33bf45a77aa_1autotoc_md124">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Timer-based<sp/>spawning<sp/>(one<sp/>object<sp/>every<sp/>2<sp/>seconds)</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>condition<sp/>=<sp/>std::make_unique&lt;TimerSpawnCondition&gt;(2.0f);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Rate-limited<sp/>spawning<sp/>(max<sp/>10<sp/>per<sp/>second)</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>condition<sp/>=<sp/>std::make_unique&lt;MaxPerSecCondition&gt;(10);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Callback-based<sp/>strategy<sp/>for<sp/>flexible<sp/>initialization</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>strategy<sp/>=<sp/>std::make_unique&lt;CallbackSpawnStrategy&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>[](</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GameWorld&amp;<sp/>w,<sp/>GameObject&amp;<sp/>o,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>UpdateContext&amp;<sp/>c)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Initialize<sp/>object...</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="include/helios/engine/mechanics/spawn/logic/"/>
+  </compounddef>
+</doxygen>

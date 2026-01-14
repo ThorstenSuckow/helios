@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event" kind="namespace" language="C++">
+    <compoundname>helios::engine::runtime::messaging::event</compoundname>
+    <innerclass refid="structhelios_1_1engine_1_1runtime_1_1messaging_1_1event_1_1GameLoopEventBusGroup" prot="public">helios::engine::runtime::messaging::event::GameLoopEventBusGroup</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event_1a59b7e7d4204d917672591bc8a383d9b4" prot="public" static="no">
+        <type><ref refid="classhelios_1_1core_1_1buffer_1_1TypeIndexedDoubleBuffer" kindref="compound">helios::core::buffer::TypeIndexedDoubleBuffer</ref>&lt; <ref refid="classhelios_1_1core_1_1data_1_1TypeIndexer" kindref="compound">helios::core::data::TypeIndexer</ref>&lt; <ref refid="structhelios_1_1engine_1_1runtime_1_1messaging_1_1event_1_1GameLoopEventBusGroup" kindref="compound">GameLoopEventBusGroup</ref> &gt; &gt;</type>
+        <definition>using helios::engine::runtime::messaging::event::GameLoopEventBus =  helios::core::buffer::TypeIndexedDoubleBuffer&lt;
+        helios::core::data::TypeIndexer&lt;GameLoopEventBusGroup&gt;
+    &gt;</definition>
+        <argsstring></argsstring>
+        <name>GameLoopEventBus</name>
+        <qualifiedname>helios::engine::runtime::messaging::event::GameLoopEventBus</qualifiedname>
+        <briefdescription>
+<para>Double-buffered event bus for decoupled inter-system communication. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><ref refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event_1a59b7e7d4204d917672591bc8a383d9b4" kindref="member">GameLoopEventBus</ref> is a type alias for TypeIndexedDoubleBuffer configured with a dedicated index space for game loop events. It enables systems to publish events during their update phase, which become available for consumption after the buffer swap.</para>
+<para>## Phase/Pass Event Model</para>
+<para>The GameLoop uses multiple event buses to control event visibility:</para>
+<para><itemizedlist>
+<listitem><para>**Pass Events:** Events written with `push()` are available to subsequent passes within the **same phase only**. They are **always cleared** at the end of the phase.</para>
+</listitem><listitem><para>**Phase Events:** Events written with `phasePush()` are preserved across phase boundaries and available in subsequent phases of the same frame.</para>
+</listitem></itemizedlist>
+</para>
+<para>This allows fine-grained control over event propagation:</para>
+<para>``` ┌─────────────────────────────────────────────────────────────┐ │ FRAME │ ├─────────────────────────────────────────────────────────────┤ │ PRE PHASE │ │ Pass 1: push&lt;InputEvent&gt;() → available in Pass 2 │ │ Pass 2: read&lt;InputEvent&gt;() ✓ works │ │ phasePush&lt;SpawnReq&gt;() → available in MAIN │ │ [Phase Commit] ← Pass events CLEARED │ │ │ │ MAIN PHASE │ │ Pass 1: read&lt;InputEvent&gt;() ✗ EMPTY (cleared!) │ │ read&lt;SpawnReq&gt;() ✓ works (phasePush) │ │ push&lt;CollisionEvent&gt;() → available in Pass 2 │ │ Pass 2: read&lt;CollisionEvent&gt;() ✓ works │ │ [Phase Commit] ← Pass events CLEARED │ │ │ │ POST PHASE │ │ Pass 1: read&lt;CollisionEvent&gt;() ✗ EMPTY (cleared!) │ │ read&lt;SpawnReq&gt;() ✓ works (phasePush) │ │ [Phase Commit] ← All events CLEARED for next frame │ └─────────────────────────────────────────────────────────────┘ ```</para>
+<para>## Usage Example</para>
+<para>```cpp // Define an event type struct CollisionEvent { Guid entityA; Guid entityB; vec3f contactPoint; };</para>
+<para>// In collision detection system (Main Phase, Pass 1) // Use push() for events only needed within this phase eventBus.push&lt;CollisionEvent&gt;(entityA, entityB, contact);</para>
+<para>// In damage system (Main Phase, Pass 2) - same phase, works! for (const auto&amp; evt : eventBus.read&lt;CollisionEvent&gt;()) { applyDamage(evt.entityA, evt.entityB); }</para>
+<para>// For events needed in subsequent phases, use phasePush() eventBus.phasePush&lt;SpawnRequestEvent&gt;(poolId, position); ```</para>
+<para><simplesect kind="warning"><para>Pass events (`push()`) are **always cleared** at phase boundaries. They are NOT available in subsequent phases. Use `phasePush()` for events that must survive into subsequent phases.</para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1core_1_1buffer_1_1TypeIndexedDoubleBuffer" kindref="compound">helios::core::buffer::TypeIndexedDoubleBuffer</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>UpdateContext — Provides access to the <ref refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event" kindref="compound">event</ref> bus in systems </para>
+</simplesect>
+<simplesect kind="see"><para>GameLoop — Manages <ref refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event" kindref="compound">event</ref> bus lifecycle and commit points </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/messaging/event/GameLoopEventBus.ixx" line="100" column="5" bodyfile="include/helios/engine/runtime/messaging/event/GameLoopEventBus.ixx" bodystart="100" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Event bus for inter-system communication within the game loop. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Provides type-safe, double-buffered event publishing and consumption for decoupled communication between game systems. </para>
+    </detaileddescription>
+    <location file="include/helios/engine/runtime/messaging/event/GameLoopEventBus.ixx" line="13" column="1"/>
+  </compounddef>
+</doxygen>

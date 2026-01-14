@@ -1,0 +1,1039 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::modules::physics::motion::components::SteeringComponent</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; SteeringComponent &gt;</basecompoundref>
+    <sectiondef kind="protected-static-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a7e2bd667c26624d657ed36b28cb83886" prot="protected" static="yes" constexpr="yes" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::modules::physics::motion::components::SteeringComponent::DEFAULT_ROTATION_SPEED</definition>
+        <argsstring></argsstring>
+        <name>DEFAULT_ROTATION_SPEED</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::DEFAULT_ROTATION_SPEED</qualifiedname>
+        <initializer>= 560.0f</initializer>
+        <briefdescription>
+<para>Default maximum rotation speed in degrees per second. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="42" column="32" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="42" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a33eed3766ab11c0c59034d6747b78589" compoundref="SteeringComponent_8ixx" startline="358" endline="362">resetToDefaults</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a386fc8d239cade1231982c391202080c" prot="protected" static="yes" constexpr="yes" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::modules::physics::motion::components::SteeringComponent::DEFAULT_ROTATION_SPEED_THRESHOLD</definition>
+        <argsstring></argsstring>
+        <name>DEFAULT_ROTATION_SPEED_THRESHOLD</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::DEFAULT_ROTATION_SPEED_THRESHOLD</qualifiedname>
+        <initializer>= 0.1f</initializer>
+        <briefdescription>
+<para>Default minimum rotation speed before rotation stops completely. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="47" column="32" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="47" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a33eed3766ab11c0c59034d6747b78589" compoundref="SteeringComponent_8ixx" startline="358" endline="362">resetToDefaults</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ada8f62712416cf7f9cf00b9fd19db4c5" prot="protected" static="yes" constexpr="yes" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::modules::physics::motion::components::SteeringComponent::DEFAULT_ROTATION_DAMPENING</definition>
+        <argsstring></argsstring>
+        <name>DEFAULT_ROTATION_DAMPENING</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::DEFAULT_ROTATION_DAMPENING</qualifiedname>
+        <initializer>= 0.0001f</initializer>
+        <briefdescription>
+<para>Default exponential decay factor for rotation when input stops. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="52" column="32" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="52" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a33eed3766ab11c0c59034d6747b78589" compoundref="SteeringComponent_8ixx" startline="358" endline="362">resetToDefaults</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a467dc84861caa0e4e2e2b06a5cf8c855" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::modules::physics::motion::components::SteeringComponent::rotationSpeed_</definition>
+        <argsstring></argsstring>
+        <name>rotationSpeed_</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::rotationSpeed_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a7e2bd667c26624d657ed36b28cb83886" kindref="member">DEFAULT_ROTATION_SPEED</ref></initializer>
+        <briefdescription>
+<para>Maximum rotation speed in degrees per second. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="57" column="15" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="57" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a33eed3766ab11c0c59034d6747b78589" compoundref="SteeringComponent_8ixx" startline="358" endline="362">resetToDefaults</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1aa9e8ce8f1686be4dc8f03e1e8dbe5e3a" compoundref="SteeringComponent_8ixx" startline="299" endline="299">rotationSpeed</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a5c7dfcac2f8dc0368ac8fc4c62606ac7" compoundref="SteeringComponent_8ixx" startline="320" endline="320">setRotationSpeed</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a41ce6af90ffb93ea37f4b7a106daf0d7" compoundref="SteeringComponent_8ixx" startline="142" endline="147">SteeringComponent</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a5a0afa8ae69181756eb2bbf0297b5e19" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::modules::physics::motion::components::SteeringComponent::rotationSpeedThreshold_</definition>
+        <argsstring></argsstring>
+        <name>rotationSpeedThreshold_</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::rotationSpeedThreshold_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a386fc8d239cade1231982c391202080c" kindref="member">DEFAULT_ROTATION_SPEED_THRESHOLD</ref></initializer>
+        <briefdescription>
+<para>Minimum rotation speed before rotation stops completely. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="62" column="15" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="62" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a33eed3766ab11c0c59034d6747b78589" compoundref="SteeringComponent_8ixx" startline="358" endline="362">resetToDefaults</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a53178e31006b1e0af5b0ef11f5a43a1b" compoundref="SteeringComponent_8ixx" startline="306" endline="306">rotationSpeedThreshold</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1af7aafbee5a27bb55beafa52ffdbc72d8" compoundref="SteeringComponent_8ixx" startline="329" endline="331">setRotationSpeedThreshold</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a41ce6af90ffb93ea37f4b7a106daf0d7" compoundref="SteeringComponent_8ixx" startline="142" endline="147">SteeringComponent</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a5e24c2ed859f9b732c5ea6826dd9609a" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::modules::physics::motion::components::SteeringComponent::rotationDampening_</definition>
+        <argsstring></argsstring>
+        <name>rotationDampening_</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::rotationDampening_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ada8f62712416cf7f9cf00b9fd19db4c5" kindref="member">DEFAULT_ROTATION_DAMPENING</ref></initializer>
+        <briefdescription>
+<para>Exponential decay factor for rotation when input stops. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="67" column="15" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="67" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a33eed3766ab11c0c59034d6747b78589" compoundref="SteeringComponent_8ixx" startline="358" endline="362">resetToDefaults</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a585001c98d6c69dd3438dabb129b19d1" compoundref="SteeringComponent_8ixx" startline="313" endline="313">rotationDampening</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a022a12e0c2811d94f37abe981976686a" compoundref="SteeringComponent_8ixx" startline="338" endline="340">setRotationDampening</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a41ce6af90ffb93ea37f4b7a106daf0d7" compoundref="SteeringComponent_8ixx" startline="142" endline="147">SteeringComponent</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a3e49106ff730d240301f35572ad28f49" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::modules::physics::motion::components::SteeringComponent::currentRotationAngle_</definition>
+        <argsstring></argsstring>
+        <name>currentRotationAngle_</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::currentRotationAngle_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Current rotation angle in degrees. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="72" column="15" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="72" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ad2d2b3bc714fb49d3ba009ca07225308" compoundref="SteeringComponent_8ixx" startline="236" endline="238">currentRotationAngle</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a0bc188e72305530be63465465498facb" compoundref="SteeringComponent_8ixx" startline="263" endline="265">setCurrentRotationAngle</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a59d9c2a6b6544158426c199a1f89147e" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::modules::physics::motion::components::SteeringComponent::targetRotationAngle_</definition>
+        <argsstring></argsstring>
+        <name>targetRotationAngle_</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::targetRotationAngle_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Target rotation angle derived from input direction. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="77" column="15" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="77" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a68530082752b43fea862a6157e2bf76a" compoundref="SteeringComponent_8ixx" startline="254" endline="256">setTargetRotationAngle</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a566d4c3bfab09a8ae710f9a6ba3e741b" compoundref="SteeringComponent_8ixx" startline="245" endline="247">targetRotationAngle</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a39f978b479f41f6c5a7f1539132e23ab" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::modules::physics::motion::components::SteeringComponent::rotationAngleDelta_</definition>
+        <argsstring></argsstring>
+        <name>rotationAngleDelta_</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::rotationAngleDelta_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Shortest angular distance to target rotation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="82" column="15" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="82" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ad956a2d4066e0b66a0694db78c5fab7e" compoundref="SteeringComponent_8ixx" startline="227" endline="229">rotationAngleDelta</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a8a067344a75c379a61af1ce4508abd5c" compoundref="SteeringComponent_8ixx" startline="272" endline="274">setRotationAngleDelta</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1aefed8ad4611a04d7cde17199543acbda" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::modules::physics::motion::components::SteeringComponent::currentRotationSpeed_</definition>
+        <argsstring></argsstring>
+        <name>currentRotationSpeed_</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::currentRotationSpeed_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Current rotation speed after applying input and dampening. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="87" column="15" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="87" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a0e95aecf39d77f15fc63d7fc0164cedc" compoundref="SteeringComponent_8ixx" startline="218" endline="220">currentRotationSpeed</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ade0a4254510d8eb6f145f267683f7577" compoundref="SteeringComponent_8ixx" startline="209" endline="211">setCurrentRotationSpeed</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a18ed16f23e582a2f396bb0fad5da972c" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::engine::modules::physics::motion::components::SteeringComponent::stateChanged_</definition>
+        <argsstring></argsstring>
+        <name>stateChanged_</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::stateChanged_</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>Indicates whether input is currently being received. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="92" column="14" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="92" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ae16cb98b0b4df5ac92ef2fa49ec1b498" compoundref="SteeringComponent_8ixx" startline="177" endline="191">setSteeringIntent</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1aa243ff43f191ea2e87303e6c813c5341" compoundref="SteeringComponent_8ixx" startline="281" endline="283">stateChanged</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a1b4625c01b841e418be4defe89a81e82" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::modules::physics::motion::components::SteeringComponent::turnIntensity_</definition>
+        <argsstring></argsstring>
+        <name>turnIntensity_</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::turnIntensity_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Intensity of the turn input, typically from 0.0 to 1.0. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Derived from the magnitude of the input direction vector. Used to modulate rotation speed based on stick deflection. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="100" column="15" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="100" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ae16cb98b0b4df5ac92ef2fa49ec1b498" compoundref="SteeringComponent_8ixx" startline="177" endline="191">setSteeringIntent</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1add0e0c71ae5fc0cb944b258d13b81f5c" compoundref="SteeringComponent_8ixx" startline="347" endline="349">turnIntensity</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a623e6ee4c6073dad69377c46b68cf6e6" prot="protected" static="no" mutable="no">
+        <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+        <definition>helios::math::vec3f helios::engine::modules::physics::motion::components::SteeringComponent::steeringInput_</definition>
+        <argsstring></argsstring>
+        <name>steeringInput_</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::steeringInput_</qualifiedname>
+        <briefdescription>
+<para>Current steering input as 2D direction vector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="105" column="29" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="105" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ae16cb98b0b4df5ac92ef2fa49ec1b498" compoundref="SteeringComponent_8ixx" startline="177" endline="191">setSteeringIntent</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a041a18afe239ff88abb873c6a554880e" compoundref="SteeringComponent_8ixx" startline="290" endline="292">steeringInput</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1afd181512ba623155d8d7e140ed128806" prot="protected" static="no" mutable="no">
+        <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+        <definition>helios::math::vec3f helios::engine::modules::physics::motion::components::SteeringComponent::rotationAxis_</definition>
+        <argsstring></argsstring>
+        <name>rotationAxis_</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::rotationAxis_</qualifiedname>
+        <initializer>= <ref refid="namespacehelios_1_1math_1a64379fe55f1794fad912feafd5051224" kindref="member">helios::math::Z_AXISf</ref></initializer>
+        <briefdescription>
+<para>The axis around which rotation occurs. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Defaults to Z-axis for 2D top-down rotation. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="112" column="29" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="112" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ac9194439a950df5a8943a579eaf968fa" compoundref="SteeringComponent_8ixx" startline="200" endline="202">rotationAxis</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a41ce6af90ffb93ea37f4b7a106daf0d7" compoundref="SteeringComponent_8ixx" startline="142" endline="147">SteeringComponent</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1aa8b45c3a03f76f72703178551fbb1bb2" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool helios::engine::modules::physics::motion::components::SteeringComponent::useInstantRotation_</definition>
+        <argsstring></argsstring>
+        <name>useInstantRotation_</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::useInstantRotation_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>Flag for instant rotation mode. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>When true, the entity snaps to the target rotation instantly rather than smoothly interpolating. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="120" column="14" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="120" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1aa2ae44c22cdf0ac71f245155b49578f8" compoundref="SteeringComponent_8ixx" startline="134" endline="135">SteeringComponent</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a41ce6af90ffb93ea37f4b7a106daf0d7" compoundref="SteeringComponent_8ixx" startline="142" endline="147">SteeringComponent</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ad901178918f87249c1adecf9766c3e9e" compoundref="SteeringComponent_8ixx" startline="161" endline="163">useInstantRotation</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1af0b1f793e845de05a8eba273338a1be9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::modules::physics::motion::components::SteeringComponent::SteeringComponent</definition>
+        <argsstring>()=default</argsstring>
+        <name>SteeringComponent</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::SteeringComponent</qualifiedname>
+        <briefdescription>
+<para>Default constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="127" column="9"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a41ce6af90ffb93ea37f4b7a106daf0d7" compoundref="SteeringComponent_8ixx" startline="142" endline="147">SteeringComponent</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1aa2ae44c22cdf0ac71f245155b49578f8" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::modules::physics::motion::components::SteeringComponent::SteeringComponent</definition>
+        <argsstring>(bool useInstantRotation)</argsstring>
+        <name>SteeringComponent</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::SteeringComponent</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>useInstantRotation</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent" kindref="compound">SteeringComponent</ref> with specified instant rotation mode. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>useInstantRotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If true, rotation snaps instantly to target. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="134" column="18" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="134" bodyend="135"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ad901178918f87249c1adecf9766c3e9e" compoundref="SteeringComponent_8ixx" startline="161" endline="163">useInstantRotation</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1aa8b45c3a03f76f72703178551fbb1bb2" compoundref="SteeringComponent_8ixx" startline="120">useInstantRotation_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a41ce6af90ffb93ea37f4b7a106daf0d7" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::modules::physics::motion::components::SteeringComponent::SteeringComponent</definition>
+        <argsstring>(const SteeringComponent &amp;other)</argsstring>
+        <name>SteeringComponent</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::SteeringComponent</qualifiedname>
+        <param>
+          <type>const SteeringComponent &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component to copy from. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="142" column="18" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="142" bodyend="147"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1afd181512ba623155d8d7e140ed128806" compoundref="SteeringComponent_8ixx" startline="112">rotationAxis_</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a5e24c2ed859f9b732c5ea6826dd9609a" compoundref="SteeringComponent_8ixx" startline="67">rotationDampening_</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a467dc84861caa0e4e2e2b06a5cf8c855" compoundref="SteeringComponent_8ixx" startline="57">rotationSpeed_</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a5a0afa8ae69181756eb2bbf0297b5e19" compoundref="SteeringComponent_8ixx" startline="62">rotationSpeedThreshold_</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1af0b1f793e845de05a8eba273338a1be9">SteeringComponent</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1aa8b45c3a03f76f72703178551fbb1bb2" compoundref="SteeringComponent_8ixx" startline="120">useInstantRotation_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1aeb9bfa0f76d72aa8c63328181e527354" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::physics::motion::components::SteeringComponent::setHeading</definition>
+        <argsstring>(helios::math::vec3f direction, float turnIntensity)</argsstring>
+        <name>setHeading</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::setHeading</qualifiedname>
+        <param>
+          <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+          <declname>direction</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>turnIntensity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><xrefsect id="deprecated_1_deprecated000002"><xreftitle>Deprecated</xreftitle><xrefdescription><para>Use setSteeringIntent instead. </para>
+</xrefdescription></xrefsect></para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="152" column="14" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="152" bodyend="154"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ae16cb98b0b4df5ac92ef2fa49ec1b498" compoundref="SteeringComponent_8ixx" startline="177" endline="191">setSteeringIntent</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1add0e0c71ae5fc0cb944b258d13b81f5c" compoundref="SteeringComponent_8ixx" startline="347" endline="349">turnIntensity</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ad901178918f87249c1adecf9766c3e9e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::modules::physics::motion::components::SteeringComponent::useInstantRotation</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>useInstantRotation</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::useInstantRotation</qualifiedname>
+        <briefdescription>
+<para>Returns whether instant rotation mode is enabled. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if rotation snaps instantly, false for smooth interpolation. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="161" column="15" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="161" bodyend="163"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1aa8b45c3a03f76f72703178551fbb1bb2" compoundref="SteeringComponent_8ixx" startline="120">useInstantRotation_</references>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1aa2ae44c22cdf0ac71f245155b49578f8" compoundref="SteeringComponent_8ixx" startline="134" endline="135">SteeringComponent</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ae16cb98b0b4df5ac92ef2fa49ec1b498" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::physics::motion::components::SteeringComponent::setSteeringIntent</definition>
+        <argsstring>(helios::math::vec3f direction, float turnIntensity)</argsstring>
+        <name>setSteeringIntent</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::setSteeringIntent</qualifiedname>
+        <param>
+          <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+          <declname>direction</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>turnIntensity</declname>
+        </param>
+        <briefdescription>
+<para>Sets the heading direction and turn intensity from input. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Updates the heading input vector and turn intensity. If the turn intensity is below the epsilon threshold, input is deactivated and the heading is reset to zero.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>direction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Normalized direction vector representing the desired heading. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>turnIntensity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Magnitude of the input (0.0 to 1.0).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="pre"><para>direction must be a normalized vector (length ~= 1.0). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="177" column="14" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="177" bodyend="191"/>
+        <references refid="namespacehelios_1_1math_1af25d93f23f91acae02abfd7706b2e36d" compoundref="utils_8ixx" startline="22">helios::math::EPSILON_LENGTH</references>
+        <references refid="structhelios_1_1math_1_1vec3_1a6146713ae785c06b31121c953357dda4" compoundref="vec3_8ixx" startline="119" endline="125">helios::math::vec3&lt; T &gt;::length</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a18ed16f23e582a2f396bb0fad5da972c" compoundref="SteeringComponent_8ixx" startline="92">stateChanged_</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a623e6ee4c6073dad69377c46b68cf6e6" compoundref="SteeringComponent_8ixx" startline="105">steeringInput_</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1add0e0c71ae5fc0cb944b258d13b81f5c" compoundref="SteeringComponent_8ixx" startline="347" endline="349">turnIntensity</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a1b4625c01b841e418be4defe89a81e82" compoundref="SteeringComponent_8ixx" startline="100">turnIntensity_</references>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1aeb9bfa0f76d72aa8c63328181e527354" compoundref="SteeringComponent_8ixx" startline="152" endline="154">setHeading</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ac9194439a950df5a8943a579eaf968fa" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+        <definition>helios::math::vec3f helios::engine::modules::physics::motion::components::SteeringComponent::rotationAxis</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rotationAxis</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::rotationAxis</qualifiedname>
+        <briefdescription>
+<para>Returns the axis around which rotation occurs. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For 2D gameplay on the XY plane, this is typically the Z-axis.</para>
+<para><simplesect kind="return"><para>The rotation axis as a unit vector. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="200" column="30" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="200" bodyend="202"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1afd181512ba623155d8d7e140ed128806" compoundref="SteeringComponent_8ixx" startline="112">rotationAxis_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ade0a4254510d8eb6f145f267683f7577" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::physics::motion::components::SteeringComponent::setCurrentRotationSpeed</definition>
+        <argsstring>(float speed) noexcept</argsstring>
+        <name>setCurrentRotationSpeed</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::setCurrentRotationSpeed</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>speed</declname>
+        </param>
+        <briefdescription>
+<para>Sets the current rotation speed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>speed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new rotation speed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="209" column="14" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="209" bodyend="211"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1aefed8ad4611a04d7cde17199543acbda" compoundref="SteeringComponent_8ixx" startline="87">currentRotationSpeed_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a0e95aecf39d77f15fc63d7fc0164cedc" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::modules::physics::motion::components::SteeringComponent::currentRotationSpeed</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>currentRotationSpeed</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::currentRotationSpeed</qualifiedname>
+        <briefdescription>
+<para>Returns the current rotation speed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The current rotation speed. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="218" column="16" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="218" bodyend="220"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1aefed8ad4611a04d7cde17199543acbda" compoundref="SteeringComponent_8ixx" startline="87">currentRotationSpeed_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ad956a2d4066e0b66a0694db78c5fab7e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::modules::physics::motion::components::SteeringComponent::rotationAngleDelta</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rotationAngleDelta</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::rotationAngleDelta</qualifiedname>
+        <briefdescription>
+<para>Returns the angular distance to the target rotation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The angle delta in degrees. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="227" column="16" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="227" bodyend="229"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a39f978b479f41f6c5a7f1539132e23ab" compoundref="SteeringComponent_8ixx" startline="82">rotationAngleDelta_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ad2d2b3bc714fb49d3ba009ca07225308" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::modules::physics::motion::components::SteeringComponent::currentRotationAngle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>currentRotationAngle</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::currentRotationAngle</qualifiedname>
+        <briefdescription>
+<para>Returns the current rotation angle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The current rotation angle in degrees. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="236" column="16" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="236" bodyend="238"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a3e49106ff730d240301f35572ad28f49" compoundref="SteeringComponent_8ixx" startline="72">currentRotationAngle_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a566d4c3bfab09a8ae710f9a6ba3e741b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::modules::physics::motion::components::SteeringComponent::targetRotationAngle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>targetRotationAngle</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::targetRotationAngle</qualifiedname>
+        <briefdescription>
+<para>Returns the target rotation angle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The target rotation angle in degrees. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="245" column="16" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="245" bodyend="247"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a59d9c2a6b6544158426c199a1f89147e" compoundref="SteeringComponent_8ixx" startline="77">targetRotationAngle_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a68530082752b43fea862a6157e2bf76a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::physics::motion::components::SteeringComponent::setTargetRotationAngle</definition>
+        <argsstring>(float angle) noexcept</argsstring>
+        <name>setTargetRotationAngle</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::setTargetRotationAngle</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>angle</declname>
+        </param>
+        <briefdescription>
+<para>Sets the target rotation angle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>angle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new target rotation angle in degrees. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="254" column="14" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="254" bodyend="256"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a59d9c2a6b6544158426c199a1f89147e" compoundref="SteeringComponent_8ixx" startline="77">targetRotationAngle_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a0bc188e72305530be63465465498facb" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::physics::motion::components::SteeringComponent::setCurrentRotationAngle</definition>
+        <argsstring>(float angle) noexcept</argsstring>
+        <name>setCurrentRotationAngle</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::setCurrentRotationAngle</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>angle</declname>
+        </param>
+        <briefdescription>
+<para>Sets the current rotation angle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>angle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new rotation angle in degrees. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="263" column="14" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="263" bodyend="265"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a3e49106ff730d240301f35572ad28f49" compoundref="SteeringComponent_8ixx" startline="72">currentRotationAngle_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a8a067344a75c379a61af1ce4508abd5c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::physics::motion::components::SteeringComponent::setRotationAngleDelta</definition>
+        <argsstring>(float delta) noexcept</argsstring>
+        <name>setRotationAngleDelta</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::setRotationAngleDelta</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>delta</declname>
+        </param>
+        <briefdescription>
+<para>Sets the angular distance to the target rotation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>delta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new angle delta in degrees. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="272" column="14" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="272" bodyend="274"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a39f978b479f41f6c5a7f1539132e23ab" compoundref="SteeringComponent_8ixx" startline="82">rotationAngleDelta_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1aa243ff43f191ea2e87303e6c813c5341" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::modules::physics::motion::components::SteeringComponent::stateChanged</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>stateChanged</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::stateChanged</qualifiedname>
+        <briefdescription>
+<para>Checks if input is currently active. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if input is active, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="281" column="15" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="281" bodyend="283"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a18ed16f23e582a2f396bb0fad5da972c" compoundref="SteeringComponent_8ixx" startline="92">stateChanged_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a041a18afe239ff88abb873c6a554880e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref> &amp;</type>
+        <definition>const helios::math::vec3f &amp; helios::engine::modules::physics::motion::components::SteeringComponent::steeringInput</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>steeringInput</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::steeringInput</qualifiedname>
+        <briefdescription>
+<para>Returns the current steering input direction. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Const reference to the 2D steering input vector. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="290" column="36" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="290" bodyend="292"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a623e6ee4c6073dad69377c46b68cf6e6" compoundref="SteeringComponent_8ixx" startline="105">steeringInput_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1aa9e8ce8f1686be4dc8f03e1e8dbe5e3a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::modules::physics::motion::components::SteeringComponent::rotationSpeed</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rotationSpeed</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::rotationSpeed</qualifiedname>
+        <briefdescription>
+<para>Returns the maximum rotation speed in degrees per second. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Maximum rotation speed value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="299" column="16" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="299" bodyend="299"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a467dc84861caa0e4e2e2b06a5cf8c855" compoundref="SteeringComponent_8ixx" startline="57">rotationSpeed_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a53178e31006b1e0af5b0ef11f5a43a1b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::modules::physics::motion::components::SteeringComponent::rotationSpeedThreshold</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rotationSpeedThreshold</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::rotationSpeedThreshold</qualifiedname>
+        <briefdescription>
+<para>Returns the minimum rotation speed threshold. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Rotation speed threshold below which rotation stops. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="306" column="16" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="306" bodyend="306"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a5a0afa8ae69181756eb2bbf0297b5e19" compoundref="SteeringComponent_8ixx" startline="62">rotationSpeedThreshold_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a585001c98d6c69dd3438dabb129b19d1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::modules::physics::motion::components::SteeringComponent::rotationDampening</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rotationDampening</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::rotationDampening</qualifiedname>
+        <briefdescription>
+<para>Returns the rotation dampening factor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Exponential decay factor for rotation. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="313" column="16" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="313" bodyend="313"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a5e24c2ed859f9b732c5ea6826dd9609a" compoundref="SteeringComponent_8ixx" startline="67">rotationDampening_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a5c7dfcac2f8dc0368ac8fc4c62606ac7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::physics::motion::components::SteeringComponent::setRotationSpeed</definition>
+        <argsstring>(float value) noexcept</argsstring>
+        <name>setRotationSpeed</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::setRotationSpeed</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Sets the maximum rotation speed in degrees per second. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New rotation speed value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="320" column="14" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="320" bodyend="320"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a467dc84861caa0e4e2e2b06a5cf8c855" compoundref="SteeringComponent_8ixx" startline="57">rotationSpeed_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1af7aafbee5a27bb55beafa52ffdbc72d8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::physics::motion::components::SteeringComponent::setRotationSpeedThreshold</definition>
+        <argsstring>(float value) noexcept</argsstring>
+        <name>setRotationSpeedThreshold</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::setRotationSpeedThreshold</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Sets the minimum rotation speed threshold. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New threshold value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="329" column="14" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="329" bodyend="331"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a5a0afa8ae69181756eb2bbf0297b5e19" compoundref="SteeringComponent_8ixx" startline="62">rotationSpeedThreshold_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a022a12e0c2811d94f37abe981976686a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::physics::motion::components::SteeringComponent::setRotationDampening</definition>
+        <argsstring>(float value) noexcept</argsstring>
+        <name>setRotationDampening</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::setRotationDampening</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Sets the rotation dampening factor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New dampening factor (exponential decay). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="338" column="14" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="338" bodyend="340"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a5e24c2ed859f9b732c5ea6826dd9609a" compoundref="SteeringComponent_8ixx" startline="67">rotationDampening_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1add0e0c71ae5fc0cb944b258d13b81f5c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::modules::physics::motion::components::SteeringComponent::turnIntensity</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>turnIntensity</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::turnIntensity</qualifiedname>
+        <briefdescription>
+<para>Returns the current turn intensity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Turn intensity value, typically from 0.0 to 1.0. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="347" column="16" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="347" bodyend="349"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a1b4625c01b841e418be4defe89a81e82" compoundref="SteeringComponent_8ixx" startline="100">turnIntensity_</references>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1aeb9bfa0f76d72aa8c63328181e527354" compoundref="SteeringComponent_8ixx" startline="152" endline="154">setHeading</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ae16cb98b0b4df5ac92ef2fa49ec1b498" compoundref="SteeringComponent_8ixx" startline="177" endline="191">setSteeringIntent</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a33eed3766ab11c0c59034d6747b78589" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::physics::motion::components::SteeringComponent::resetToDefaults</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>resetToDefaults</name>
+        <qualifiedname>helios::engine::modules::physics::motion::components::SteeringComponent::resetToDefaults</qualifiedname>
+        <briefdescription>
+<para>Resets all physics parameters to their default values. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="358" column="14" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="358" bodyend="362"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ada8f62712416cf7f9cf00b9fd19db4c5" compoundref="SteeringComponent_8ixx" startline="52">DEFAULT_ROTATION_DAMPENING</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a7e2bd667c26624d657ed36b28cb83886" compoundref="SteeringComponent_8ixx" startline="42">DEFAULT_ROTATION_SPEED</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a386fc8d239cade1231982c391202080c" compoundref="SteeringComponent_8ixx" startline="47">DEFAULT_ROTATION_SPEED_THRESHOLD</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a5e24c2ed859f9b732c5ea6826dd9609a" compoundref="SteeringComponent_8ixx" startline="67">rotationDampening_</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a467dc84861caa0e4e2e2b06a5cf8c855" compoundref="SteeringComponent_8ixx" startline="57">rotationSpeed_</references>
+        <references refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a5a0afa8ae69181756eb2bbf0297b5e19" compoundref="SteeringComponent_8ixx" startline="62">rotationSpeedThreshold_</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Component that manages the heading (orientation) of an entity. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This component handles the rotational physics of an entity, including turning towards a target direction, rotation speed limits, and dampening. It maintains the current and target rotation angles and is used by the SteeringSystem to update the entity&apos;s orientation. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>helios::engine::ecs::Cloneable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Cloneable"/>
+      </node>
+      <node id="2">
+        <label>helios::engine::ecs::CloneableComponent&lt; SteeringComponent &gt;</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Component</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Component"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::modules::physics::motion::components::SteeringComponent</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="6">
+        <label>helios::engine::ecs::Cloneable</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Cloneable"/>
+      </node>
+      <node id="2">
+        <label>helios::engine::ecs::CloneableComponent&lt; SteeringComponent &gt;</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::ecs::Component</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1Component"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>gameObject_</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>helios::engine::ecs::GameObject</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1GameObject"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>guid_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>helios::engine::modules::physics::motion::components::SteeringComponent</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>helios::util::Guid</label>
+        <link refid="classhelios_1_1util_1_1Guid"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" line="35" column="5" bodyfile="include/helios/engine/modules/physics/motion/components/SteeringComponent.ixx" bodystart="35" bodyend="363"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1aea2a33eed58899d7f93accbe7a89149f" prot="public" virt="virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>clone</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a5b888a1acd1799700525f3eab51b1a62" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>Component</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ad2d2b3bc714fb49d3ba009ca07225308" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>currentRotationAngle</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a3e49106ff730d240301f35572ad28f49" prot="protected" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>currentRotationAngle_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a0e95aecf39d77f15fc63d7fc0164cedc" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>currentRotationSpeed</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1aefed8ad4611a04d7cde17199543acbda" prot="protected" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>currentRotationSpeed_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ada8f62712416cf7f9cf00b9fd19db4c5" prot="protected" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>DEFAULT_ROTATION_DAMPENING</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a7e2bd667c26624d657ed36b28cb83886" prot="protected" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>DEFAULT_ROTATION_SPEED</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a386fc8d239cade1231982c391202080c" prot="protected" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>DEFAULT_ROTATION_SPEED_THRESHOLD</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a21492dd1100f113c7f049c3bd8a7a179" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>disable</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a8c2eb9405720e29d3a637061d523fb89" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>enable</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a3489588d238d04928e767908a0721be1" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>gameObject</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1aff1c0d42b10c04da6034ff5e49d42f12" prot="protected" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>gameObject_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a081d44a554b723d719f7909638735819" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>isAttached</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a58e0f3384ee76bb9961ffb46e3181bda" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>isDisabled</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a4edb1632c9901e8276f77ad53e773911" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>isEnabled</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1ab5895e14ca5df63711d46a492fb40c64" prot="protected" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>isEnabled_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a9f6ca8f70b132c8d5ca1d0ffdb8f39f9" prot="public" virt="virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>onAcquire</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1ab9614bf06e8e2d970cca3d2eb03e2425" prot="public" virt="virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>onActivate</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1ac08c7be419071c67780342322aa1e679" prot="public" virt="virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>onAttach</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1ae18881cca0af5463608e59d112b3f257" prot="public" virt="virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>onDeactivate</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1aacc77dfd9a7a39b733e0f90a7e50d43e" prot="public" virt="virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>onRelease</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a33eed3766ab11c0c59034d6747b78589" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>resetToDefaults</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ad956a2d4066e0b66a0694db78c5fab7e" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>rotationAngleDelta</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a39f978b479f41f6c5a7f1539132e23ab" prot="protected" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>rotationAngleDelta_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ac9194439a950df5a8943a579eaf968fa" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>rotationAxis</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1afd181512ba623155d8d7e140ed128806" prot="protected" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>rotationAxis_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a585001c98d6c69dd3438dabb129b19d1" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>rotationDampening</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a5e24c2ed859f9b732c5ea6826dd9609a" prot="protected" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>rotationDampening_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1aa9e8ce8f1686be4dc8f03e1e8dbe5e3a" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>rotationSpeed</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a467dc84861caa0e4e2e2b06a5cf8c855" prot="protected" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>rotationSpeed_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a53178e31006b1e0af5b0ef11f5a43a1b" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>rotationSpeedThreshold</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a5a0afa8ae69181756eb2bbf0297b5e19" prot="protected" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>rotationSpeedThreshold_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a0bc188e72305530be63465465498facb" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>setCurrentRotationAngle</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ade0a4254510d8eb6f145f267683f7577" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>setCurrentRotationSpeed</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1aeb9bfa0f76d72aa8c63328181e527354" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>setHeading</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a8a067344a75c379a61af1ce4508abd5c" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>setRotationAngleDelta</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a022a12e0c2811d94f37abe981976686a" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>setRotationDampening</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a5c7dfcac2f8dc0368ac8fc4c62606ac7" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>setRotationSpeed</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1af7aafbee5a27bb55beafa52ffdbc72d8" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>setRotationSpeedThreshold</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ae16cb98b0b4df5ac92ef2fa49ec1b498" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>setSteeringIntent</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a68530082752b43fea862a6157e2bf76a" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>setTargetRotationAngle</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1aa243ff43f191ea2e87303e6c813c5341" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>stateChanged</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a18ed16f23e582a2f396bb0fad5da972c" prot="protected" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>stateChanged_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1af0b1f793e845de05a8eba273338a1be9" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>SteeringComponent</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1aa2ae44c22cdf0ac71f245155b49578f8" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>SteeringComponent</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a41ce6af90ffb93ea37f4b7a106daf0d7" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>SteeringComponent</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a041a18afe239ff88abb873c6a554880e" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>steeringInput</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a623e6ee4c6073dad69377c46b68cf6e6" prot="protected" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>steeringInput_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a566d4c3bfab09a8ae710f9a6ba3e741b" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>targetRotationAngle</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a59d9c2a6b6544158426c199a1f89147e" prot="protected" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>targetRotationAngle_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1add0e0c71ae5fc0cb944b258d13b81f5c" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>turnIntensity</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1a1b4625c01b841e418be4defe89a81e82" prot="protected" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>turnIntensity_</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1ad901178918f87249c1adecf9766c3e9e" prot="public" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>useInstantRotation</name></member>
+      <member refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent_1aa8b45c3a03f76f72703178551fbb1bb2" prot="protected" virt="non-virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>useInstantRotation_</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Cloneable_1a7663aa6519f970dc8f0255a0e09bac17" prot="public" virt="virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>~Cloneable</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1aa014415a814f5252c94d040c2e80c83f" prot="public" virt="virtual"><scope>helios::engine::modules::physics::motion::components::SteeringComponent</scope><name>~Component</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

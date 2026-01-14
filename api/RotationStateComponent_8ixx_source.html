@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>helios: include/helios/engine/game/components/physics/RotationStateComponent.ixx Source File</title>
+<title>helios: include/helios/engine/modules/physics/motion/components/RotationStateComponent.ixx Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
@@ -114,257 +114,280 @@ $(function() {
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;cmath&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">export</span> <span class="keyword">module</span> <a class="code" href="module__helios_8engine_8game_8components_8physics_8RotationStateComponent.html">helios.engine.game.components.physics.RotationStateComponent</a>;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">export</span> <span class="keyword">module</span> <a class="code" href="module__helios_8engine_8modules_8physics_8motion_8components_8RotationStateComponent.html">helios.engine.modules.physics.motion.components.RotationStateComponent</a>;</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8game_8Component.html">helios.engine.game.Component</a>;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8ecs_8CloneableComponent.html">helios.engine.ecs.CloneableComponent</a>;</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">import</span> <a class="code" href="module__helios_8math.html">helios.math</a>;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">export</span> <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine_1_1game_1_1components_1_1physics.html">helios::engine::game::components::physics</a> {</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"></span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">    /**</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">     * @brief Component that manages composite rotation from heading and spin rotations.</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">     * @details</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">     * This component combines two independent rotation sources:</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">     * - **Heading Rotation:** The direction the entity is facing (controlled by input).</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">     * - **Spin Rotation:** Additional rotation for visual effects (e.g., rolling, tumbling).</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">     * The component caches the computed rotation matrices and only recalculates them</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">     * when the underlying angles or axes change (dirty flag pattern).</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">     */</span></div>
-<div class="foldopen" id="foldopen00028" data-start="{" data-end="};">
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html">   28</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html">RotationStateComponent</a> : <span class="keyword">public</span> <a class="code hl_function" href="classhelios_1_1engine_1_1game_1_1Component.html#a4a167553b4aed32f0ad96e8836a01b88">Component</a> {</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"></span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">         * @brief Current heading rotation angle in degrees.</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <span class="keywordtype">float</span> headingRotationAngle_ = 0.0f;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"></span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">         * @brief Axis around which heading rotation occurs.</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <a class="code hl_typedef" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">helios::math::vec3f</a> headingRotationAxis_{};</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"></span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">         * @brief Current spin rotation angle in degrees.</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keywordtype">float</span> spinRotationAngle_ = 0.0f;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment"></span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">         * @brief Axis around which spin rotation occurs.</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <a class="code hl_typedef" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">helios::math::vec3f</a> spinRotationAxis_{};</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment"></span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">         * @brief Dirty flag indicating matrices need recalculation.</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordtype">bool</span> needsUpdate_ = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment"></span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">         * @brief Cached spin rotation matrix.</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> spinRotationMatrix_;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment"></span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">         * @brief Cached heading rotation matrix.</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> headingRotationMatrix_;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment"></span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">         * @brief Cached composed rotation matrix (heading * spin).</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> composedRotationMatrix_;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment"></span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">         * @brief Recalculates rotation matrices if dirty.</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">         * @details Updates spinRotationMatrix_, headingRotationMatrix_, and</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">         * composedRotationMatrix_ based on current angles and axes.</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keywordtype">void</span> update() {</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            <span class="keywordflow">if</span> (!needsUpdate_) {</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            }</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            needsUpdate_ = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            spinRotationMatrix_ =  <a class="code hl_function" href="namespacehelios_1_1math.html#a643691235959c2f53d144a4ee9a0e251">helios::math::rotate</a>(</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            <a class="code hl_function" href="structhelios_1_1math_1_1mat4.html#ad856b4652346ff475b653e257d64428d">helios::math::mat4f::identity</a>(),</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            <a class="code hl_function" href="namespacehelios_1_1math.html#a4949642a7cca09c7950bb6a1b75260c9">helios::math::radians</a>(spinRotationAngle_),</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            spinRotationAxis_</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            );</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            headingRotationMatrix_ =  <a class="code hl_function" href="namespacehelios_1_1math.html#a643691235959c2f53d144a4ee9a0e251">helios::math::rotate</a>(</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                <a class="code hl_function" href="structhelios_1_1math_1_1mat4.html#ad856b4652346ff475b653e257d64428d">helios::math::mat4f::identity</a>(),</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                <a class="code hl_function" href="namespacehelios_1_1math.html#a4949642a7cca09c7950bb6a1b75260c9">helios::math::radians</a>(headingRotationAngle_),</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                headingRotationAxis_</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            );</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            composedRotationMatrix_ = headingRotationMatrix_ * spinRotationMatrix_;</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        }</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"></span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> * @todo move to spatial transform</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">export</span> <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components.html">helios::engine::modules::physics::motion::components</a> {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"></span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">    /**</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">     * @brief Component that manages composite rotation from heading and spin rotations.</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">     * @details</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">     * This component combines two independent rotation sources:</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">     * - **Heading Rotation:** The direction the entity is facing (controlled by input).</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">     * - **Spin Rotation:** Additional rotation for visual effects (e.g., rolling, tumbling).</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">     * The component caches the computed rotation matrices and only recalculates them</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">     * when the underlying angles or axes change (dirty flag pattern).</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">     */</span></div>
+<div class="foldopen" id="foldopen00031" data-start="{" data-end="};">
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html">   31</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#ade63c29a3ade0d54d625ec7c035e5c03">RotationStateComponent</a> : <span class="keyword">public</span> <a class="code hl_class" href="classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html">helios::engine::ecs::CloneableComponent</a>&lt;RotationStateComponent&gt; {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"></span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">         * @brief Current heading rotation angle in degrees.</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keywordtype">float</span> headingRotationAngle_ = 0.0f;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"></span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">         * @brief Axis around which heading rotation occurs.</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <a class="code hl_typedef" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">helios::math::vec3f</a> headingRotationAxis_{};</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"></span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">         * @brief Current spin rotation angle in degrees.</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordtype">float</span> spinRotationAngle_ = 0.0f;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment"></span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">         * @brief Axis around which spin rotation occurs.</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <a class="code hl_typedef" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">helios::math::vec3f</a> spinRotationAxis_{};</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment"></span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">         * @brief Dirty flag indicating matrices need recalculation.</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordtype">bool</span> needsUpdate_ = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment"></span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">         * @brief Cached spin rotation matrix.</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> spinRotationMatrix_;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment"></span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">         * @brief Cached heading rotation matrix.</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> headingRotationMatrix_;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment"></span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">         * @brief Cached composed rotation matrix (heading * spin).</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> composedRotationMatrix_;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment"></span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">         * @brief Recalculates rotation matrices if dirty.</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">         * @details Updates spinRotationMatrix_, headingRotationMatrix_, and</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">         * composedRotationMatrix_ based on current angles and axes.</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordtype">void</span> update() {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            <span class="keywordflow">if</span> (!needsUpdate_) {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            }</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            needsUpdate_ = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            spinRotationMatrix_ =  <a class="code hl_function" href="namespacehelios_1_1math.html#a643691235959c2f53d144a4ee9a0e251">helios::math::rotate</a>(</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            <a class="code hl_function" href="structhelios_1_1math_1_1mat4.html#ad856b4652346ff475b653e257d64428d">helios::math::mat4f::identity</a>(),</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            <a class="code hl_function" href="namespacehelios_1_1math.html#a4949642a7cca09c7950bb6a1b75260c9">helios::math::radians</a>(spinRotationAngle_),</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            spinRotationAxis_</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            );</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            headingRotationMatrix_ =  <a class="code hl_function" href="namespacehelios_1_1math.html#a643691235959c2f53d144a4ee9a0e251">helios::math::rotate</a>(</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                <a class="code hl_function" href="structhelios_1_1math_1_1mat4.html#ad856b4652346ff475b653e257d64428d">helios::math::mat4f::identity</a>(),</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                <a class="code hl_function" href="namespacehelios_1_1math.html#a4949642a7cca09c7950bb6a1b75260c9">helios::math::radians</a>(headingRotationAngle_),</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                headingRotationAxis_</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            );</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment"></span> </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">         * @brief Sets the heading rotation angle.</span></div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">         * @param angle The new heading rotation angle in degrees (wrapped to 0-360).</span></div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00108" data-start="{" data-end="}">
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#aa5136cd999ce81f0206690f792a6f1c4">  108</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#aa5136cd999ce81f0206690f792a6f1c4">setHeadingRotationAngle</a>(<span class="keywordtype">float</span> angle) {</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            headingRotationAngle_ = std::fmod(angle, 360.0f);</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            needsUpdate_ = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        }</div>
-</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment"></span> </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment">         * @brief Returns the current heading rotation angle.</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            composedRotationMatrix_ = headingRotationMatrix_ * spinRotationMatrix_;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        }</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment"></span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment">         * @brief Default constructor.</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#ade63c29a3ade0d54d625ec7c035e5c03">  109</a></span>        <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#ade63c29a3ade0d54d625ec7c035e5c03">RotationStateComponent</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment"></span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment">         * @brief Copy constructor.</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment">         * @param other The component to copy from.</span></div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment">         * @return The heading rotation angle in degrees.</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment">         * @details Copies rotation axes but resets angles and matrices.</span></div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment">         */</span></div>
 <div class="foldopen" id="foldopen00118" data-start="{" data-end="}">
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#a24eebb0003fe0a59a1cf8b02c3122b9e">  118</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#a24eebb0003fe0a59a1cf8b02c3122b9e">headingRotationAngle</a>() const noexcept {</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>            <span class="keywordflow">return</span> headingRotationAngle_;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        }</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#a1783f9a5bf6968daa639a548c242c1d7">  118</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#a1783f9a5bf6968daa639a548c242c1d7">RotationStateComponent</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#ade63c29a3ade0d54d625ec7c035e5c03">RotationStateComponent</a>&amp; other) :</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        headingRotationAxis_(other.headingRotationAxis_),</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        spinRotationAxis_(other.spinRotationAxis_)</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        {}</div>
 </div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment"></span> </div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="comment">         * @brief Sets the heading rotation axis.</span></div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="comment">         * @param axis The new rotation axis (should be normalized).</span></div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00127" data-start="{" data-end="}">
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#ab323a3966ef02c5f21f8170e348083c9">  127</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#ab323a3966ef02c5f21f8170e348083c9">setHeadingRotationAxis</a>(<a class="code hl_typedef" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">helios::math::vec3f</a> axis) {</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            headingRotationAxis_ = axis;</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            needsUpdate_ = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        }</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="comment"></span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="comment">         * @brief Sets the heading rotation angle.</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="comment">         * @param angle The new heading rotation angle in degrees (wrapped to 0-360).</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00128" data-start="{" data-end="}">
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#a1c90600204eed81cbc0bd9b8653c66ef">  128</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#a1c90600204eed81cbc0bd9b8653c66ef">setHeadingRotationAngle</a>(<span class="keywordtype">float</span> angle) {</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            headingRotationAngle_ = std::fmod(angle, 360.0f);</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            needsUpdate_ = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        }</div>
 </div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="comment"></span> </div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="comment">         * @brief Returns the heading rotation axis.</span></div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="comment">         * @return The current heading rotation axis.</span></div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00137" data-start="{" data-end="}">
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#a765eb792f10109f1a5cef92eff7ebb64">  137</a></span>        [[nodiscard]] <a class="code hl_typedef" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">helios::math::vec3f</a> <a class="code hl_function" href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#a765eb792f10109f1a5cef92eff7ebb64">headingRotationAxis</a>() const noexcept {</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>            <span class="keywordflow">return</span> headingRotationAxis_;</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        }</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="comment"></span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="comment">         * @brief Returns the current heading rotation angle.</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="comment">         * @return The heading rotation angle in degrees.</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00138" data-start="{" data-end="}">
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#aa5651c4b71e265d2fd8c0b5aadec8226">  138</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#aa5651c4b71e265d2fd8c0b5aadec8226">headingRotationAngle</a>() const noexcept {</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>            <span class="keywordflow">return</span> headingRotationAngle_;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        }</div>
 </div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="comment"></span> </div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="comment">         * @brief Sets the spin rotation angle.</span></div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="comment">         * @param angle The new spin rotation angle in degrees (wrapped to 0-360).</span></div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00146" data-start="{" data-end="}">
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#ac46688336d16e3527ac0446e1828cc3e">  146</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#ac46688336d16e3527ac0446e1828cc3e">setSpinRotationAngle</a>(<span class="keywordtype">float</span> angle) {</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            spinRotationAngle_ =  std::fmod(angle, 360.0f);</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            needsUpdate_ = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        }</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="comment"></span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="comment">         * @brief Sets the heading rotation axis.</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="comment">         * @param axis The new rotation axis (should be normalized).</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00147" data-start="{" data-end="}">
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#a9fc74f36f6ab901c7e6543bf9bae166e">  147</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#a9fc74f36f6ab901c7e6543bf9bae166e">setHeadingRotationAxis</a>(<a class="code hl_typedef" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">helios::math::vec3f</a> axis) {</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            headingRotationAxis_ = axis;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            needsUpdate_ = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        }</div>
 </div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="comment"></span> </div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span><span class="comment">         * @brief Returns the current spin rotation angle.</span></div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="comment">         * @return The spin rotation angle in degrees.</span></div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00156" data-start="{" data-end="}">
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#ad4087fddb5f033652551bf3c2b3e0a9e">  156</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#ad4087fddb5f033652551bf3c2b3e0a9e">spinRotationAngle</a>() const noexcept {</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>            <span class="keywordflow">return</span> spinRotationAngle_;</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        }</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="comment"></span> </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="comment">         * @brief Returns the heading rotation axis.</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="comment">         * @return The current heading rotation axis.</span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00157" data-start="{" data-end="}">
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#ace4bd4b58ceb48b2b3ddb5f5a14e220f">  157</a></span>        [[nodiscard]] <a class="code hl_typedef" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">helios::math::vec3f</a> <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#ace4bd4b58ceb48b2b3ddb5f5a14e220f">headingRotationAxis</a>() const noexcept {</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>            <span class="keywordflow">return</span> headingRotationAxis_;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        }</div>
 </div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="comment"></span> </div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="comment">         * @brief Sets the spin rotation axis.</span></div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="comment">         * @param axis The new spin rotation axis (should be normalized).</span></div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00165" data-start="{" data-end="}">
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#aa846368000ac2d169ab61caa541f2ca5">  165</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#aa846368000ac2d169ab61caa541f2ca5">setSpinRotationAxis</a>(<a class="code hl_typedef" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">helios::math::vec3f</a> axis) {</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>            spinRotationAxis_ = axis;</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>            needsUpdate_ = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        }</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="comment"></span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="comment">         * @brief Sets the spin rotation angle.</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="comment">         * @param angle The new spin rotation angle in degrees (wrapped to 0-360).</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00166" data-start="{" data-end="}">
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#a1d0405a635f5a57f68632ebdfcd6ace3">  166</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#a1d0405a635f5a57f68632ebdfcd6ace3">setSpinRotationAngle</a>(<span class="keywordtype">float</span> angle) {</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>            spinRotationAngle_ =  std::fmod(angle, 360.0f);</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>            needsUpdate_ = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        }</div>
 </div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="comment"></span> </div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="comment">         * @brief Returns the spin rotation axis.</span></div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="comment">         * @return The current spin rotation axis.</span></div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00175" data-start="{" data-end="}">
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#a8466ab6c87d62411b94a027de4951464">  175</a></span>        [[nodiscard]] <a class="code hl_typedef" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">helios::math::vec3f</a> <a class="code hl_function" href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#a8466ab6c87d62411b94a027de4951464">spinRotationAxis</a>() const noexcept {</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>            <span class="keywordflow">return</span> spinRotationAxis_;</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        }</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="comment"></span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="comment">         * @brief Returns the current spin rotation angle.</span></div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="comment">         * @return The spin rotation angle in degrees.</span></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00176" data-start="{" data-end="}">
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#a231f5f570b7485c82d9b8dd312053a4f">  176</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#a231f5f570b7485c82d9b8dd312053a4f">spinRotationAngle</a>() const noexcept {</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>            <span class="keywordflow">return</span> spinRotationAngle_;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        }</div>
 </div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="comment"></span> </div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="comment">         * @brief Returns the spin rotation matrix.</span></div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="comment">         * @details Triggers matrix update if dirty.</span></div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span><span class="comment">         * @return Const reference to the spin rotation matrix.</span></div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00186" data-start="{" data-end="}">
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#aba10ee08ea87769d9d38ce0d52455024">  186</a></span>        <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a>&amp; <a class="code hl_function" href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#aba10ee08ea87769d9d38ce0d52455024">spinRotation</a>() noexcept {</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>            update();</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>            <span class="keywordflow">return</span> spinRotationMatrix_;</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        }</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="comment"></span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="comment">         * @brief Sets the spin rotation axis.</span></div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="comment">         * @param axis The new spin rotation axis (should be normalized).</span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00185" data-start="{" data-end="}">
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#acf242f188ba39aa6d3e56e642503c809">  185</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#acf242f188ba39aa6d3e56e642503c809">setSpinRotationAxis</a>(<a class="code hl_typedef" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">helios::math::vec3f</a> axis) {</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>            spinRotationAxis_ = axis;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>            needsUpdate_ = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        }</div>
 </div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="comment"></span> </div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="comment">         * @brief Returns the heading rotation matrix.</span></div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="comment">         * @details Triggers matrix update if dirty.</span></div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="comment">         * @return Const reference to the heading rotation matrix.</span></div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00198" data-start="{" data-end="}">
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#a40892776ca44556d30577948453d8d5f">  198</a></span>        <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a>&amp; <a class="code hl_function" href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#a40892776ca44556d30577948453d8d5f">headingRotation</a>() noexcept {</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>            update();</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>            <span class="keywordflow">return</span> headingRotationMatrix_;</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        }</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="comment"></span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="comment">         * @brief Returns the spin rotation axis.</span></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="comment">         * @return The current spin rotation axis.</span></div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00195" data-start="{" data-end="}">
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#abb1601d1fc8a97a7edb90493aba5a0f2">  195</a></span>        [[nodiscard]] <a class="code hl_typedef" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">helios::math::vec3f</a> <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#abb1601d1fc8a97a7edb90493aba5a0f2">spinRotationAxis</a>() const noexcept {</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>            <span class="keywordflow">return</span> spinRotationAxis_;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        }</div>
 </div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="comment"></span> </div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="comment">         * @brief Returns the composed rotation matrix (heading * spin).</span></div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="comment">         * @details Triggers matrix update if dirty.</span></div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="comment">         * @return Const reference to the composed rotation matrix.</span></div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00210" data-start="{" data-end="}">
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#a3e683bb17a71a50a874eb3d8ba41876a">  210</a></span>        <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a>&amp; <a class="code hl_function" href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#a3e683bb17a71a50a874eb3d8ba41876a">rotation</a>() noexcept {</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>            update();</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>            <span class="keywordflow">return</span> composedRotationMatrix_;</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        }</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="comment"></span> </div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="comment">         * @brief Returns the spin rotation matrix.</span></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="comment">         * @details Triggers matrix update if dirty.</span></div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="comment">         * @return Const reference to the spin rotation matrix.</span></div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00206" data-start="{" data-end="}">
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#a7359c43023a32259b891c3599fb8b94f">  206</a></span>        <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a>&amp; <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#a7359c43023a32259b891c3599fb8b94f">spinRotation</a>() noexcept {</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>            update();</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>            <span class="keywordflow">return</span> spinRotationMatrix_;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        }</div>
 </div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    };</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="comment"></span> </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="comment">         * @brief Returns the heading rotation matrix.</span></div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="comment">         * @details Triggers matrix update if dirty.</span></div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span><span class="comment">         * @return Const reference to the heading rotation matrix.</span></div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00218" data-start="{" data-end="}">
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#adaa2b68822da0973742ef0fd202b724f">  218</a></span>        <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a>&amp; <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#adaa2b68822da0973742ef0fd202b724f">headingRotation</a>() noexcept {</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>            update();</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>            <span class="keywordflow">return</span> headingRotationMatrix_;</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>        }</div>
 </div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span> </div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>};</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1Component_html_a4a167553b4aed32f0ad96e8836a01b88"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1Component.html#a4a167553b4aed32f0ad96e8836a01b88">helios::engine::game::Component::Component</a></div><div class="ttdeci">Component()=default</div><div class="ttdoc">Default constructor.</div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_html"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html">helios::engine::game::components::physics::RotationStateComponent</a></div><div class="ttdoc">Component that manages composite rotation from heading and spin rotations.</div><div class="ttdef"><b>Definition</b> <a href="#l00028">RotationStateComponent.ixx:28</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_html_a24eebb0003fe0a59a1cf8b02c3122b9e"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#a24eebb0003fe0a59a1cf8b02c3122b9e">helios::engine::game::components::physics::RotationStateComponent::headingRotationAngle</a></div><div class="ttdeci">float headingRotationAngle() const noexcept</div><div class="ttdoc">Returns the current heading rotation angle.</div><div class="ttdef"><b>Definition</b> <a href="#l00118">RotationStateComponent.ixx:118</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_html_a3e683bb17a71a50a874eb3d8ba41876a"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#a3e683bb17a71a50a874eb3d8ba41876a">helios::engine::game::components::physics::RotationStateComponent::rotation</a></div><div class="ttdeci">const helios::math::mat4f &amp; rotation() noexcept</div><div class="ttdoc">Returns the composed rotation matrix (heading * spin).</div><div class="ttdef"><b>Definition</b> <a href="#l00210">RotationStateComponent.ixx:210</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_html_a40892776ca44556d30577948453d8d5f"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#a40892776ca44556d30577948453d8d5f">helios::engine::game::components::physics::RotationStateComponent::headingRotation</a></div><div class="ttdeci">const helios::math::mat4f &amp; headingRotation() noexcept</div><div class="ttdoc">Returns the heading rotation matrix.</div><div class="ttdef"><b>Definition</b> <a href="#l00198">RotationStateComponent.ixx:198</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_html_a765eb792f10109f1a5cef92eff7ebb64"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#a765eb792f10109f1a5cef92eff7ebb64">helios::engine::game::components::physics::RotationStateComponent::headingRotationAxis</a></div><div class="ttdeci">helios::math::vec3f headingRotationAxis() const noexcept</div><div class="ttdoc">Returns the heading rotation axis.</div><div class="ttdef"><b>Definition</b> <a href="#l00137">RotationStateComponent.ixx:137</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_html_a8466ab6c87d62411b94a027de4951464"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#a8466ab6c87d62411b94a027de4951464">helios::engine::game::components::physics::RotationStateComponent::spinRotationAxis</a></div><div class="ttdeci">helios::math::vec3f spinRotationAxis() const noexcept</div><div class="ttdoc">Returns the spin rotation axis.</div><div class="ttdef"><b>Definition</b> <a href="#l00175">RotationStateComponent.ixx:175</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_html_aa5136cd999ce81f0206690f792a6f1c4"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#aa5136cd999ce81f0206690f792a6f1c4">helios::engine::game::components::physics::RotationStateComponent::setHeadingRotationAngle</a></div><div class="ttdeci">void setHeadingRotationAngle(float angle)</div><div class="ttdoc">Sets the heading rotation angle.</div><div class="ttdef"><b>Definition</b> <a href="#l00108">RotationStateComponent.ixx:108</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_html_aa846368000ac2d169ab61caa541f2ca5"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#aa846368000ac2d169ab61caa541f2ca5">helios::engine::game::components::physics::RotationStateComponent::setSpinRotationAxis</a></div><div class="ttdeci">void setSpinRotationAxis(helios::math::vec3f axis)</div><div class="ttdoc">Sets the spin rotation axis.</div><div class="ttdef"><b>Definition</b> <a href="#l00165">RotationStateComponent.ixx:165</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_html_ab323a3966ef02c5f21f8170e348083c9"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#ab323a3966ef02c5f21f8170e348083c9">helios::engine::game::components::physics::RotationStateComponent::setHeadingRotationAxis</a></div><div class="ttdeci">void setHeadingRotationAxis(helios::math::vec3f axis)</div><div class="ttdoc">Sets the heading rotation axis.</div><div class="ttdef"><b>Definition</b> <a href="#l00127">RotationStateComponent.ixx:127</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_html_aba10ee08ea87769d9d38ce0d52455024"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#aba10ee08ea87769d9d38ce0d52455024">helios::engine::game::components::physics::RotationStateComponent::spinRotation</a></div><div class="ttdeci">const helios::math::mat4f &amp; spinRotation() noexcept</div><div class="ttdoc">Returns the spin rotation matrix.</div><div class="ttdef"><b>Definition</b> <a href="#l00186">RotationStateComponent.ixx:186</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_html_ac46688336d16e3527ac0446e1828cc3e"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#ac46688336d16e3527ac0446e1828cc3e">helios::engine::game::components::physics::RotationStateComponent::setSpinRotationAngle</a></div><div class="ttdeci">void setSpinRotationAngle(float angle)</div><div class="ttdoc">Sets the spin rotation angle.</div><div class="ttdef"><b>Definition</b> <a href="#l00146">RotationStateComponent.ixx:146</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent_html_ad4087fddb5f033652551bf3c2b3e0a9e"><div class="ttname"><a href="classhelios_1_1engine_1_1game_1_1components_1_1physics_1_1RotationStateComponent.html#ad4087fddb5f033652551bf3c2b3e0a9e">helios::engine::game::components::physics::RotationStateComponent::spinRotationAngle</a></div><div class="ttdeci">float spinRotationAngle() const noexcept</div><div class="ttdoc">Returns the current spin rotation angle.</div><div class="ttdef"><b>Definition</b> <a href="#l00156">RotationStateComponent.ixx:156</a></div></div>
-<div class="ttc" id="amodule__helios_8engine_8game_8Component_html"><div class="ttname"><a href="module__helios_8engine_8game_8Component.html">helios.engine.game.Component</a></div></div>
-<div class="ttc" id="amodule__helios_8engine_8game_8components_8physics_8RotationStateComponent_html"><div class="ttname"><a href="module__helios_8engine_8game_8components_8physics_8RotationStateComponent.html">helios.engine.game.components.physics.RotationStateComponent</a></div></div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span><span class="comment"></span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span><span class="comment">         * @brief Returns the composed rotation matrix (heading * spin).</span></div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span><span class="comment">         * @details Triggers matrix update if dirty.</span></div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><span class="comment">         * @return Const reference to the composed rotation matrix.</span></div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00230" data-start="{" data-end="}">
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#abfb8c71bfb6728c98f63ab49d86d9b87">  230</a></span>        <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a>&amp; <a class="code hl_function" href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#abfb8c71bfb6728c98f63ab49d86d9b87">rotation</a>() noexcept {</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>            update();</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>            <span class="keywordflow">return</span> composedRotationMatrix_;</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        }</div>
+</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    };</div>
+</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span> </div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>};</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span> </div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1ecs_1_1CloneableComponent_html"><div class="ttname"><a href="classhelios_1_1engine_1_1ecs_1_1CloneableComponent.html">helios::engine::ecs::CloneableComponent</a></div><div class="ttdoc">CRTP base class for components that support cloning.</div><div class="ttdef"><b>Definition</b> <a href="CloneableComponent_8ixx_source.html#l00061">CloneableComponent.ixx:61</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent_html_a1783f9a5bf6968daa639a548c242c1d7"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#a1783f9a5bf6968daa639a548c242c1d7">helios::engine::modules::physics::motion::components::RotationStateComponent::RotationStateComponent</a></div><div class="ttdeci">RotationStateComponent(const RotationStateComponent &amp;other)</div><div class="ttdoc">Copy constructor.</div><div class="ttdef"><b>Definition</b> <a href="#l00118">RotationStateComponent.ixx:118</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent_html_a1c90600204eed81cbc0bd9b8653c66ef"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#a1c90600204eed81cbc0bd9b8653c66ef">helios::engine::modules::physics::motion::components::RotationStateComponent::setHeadingRotationAngle</a></div><div class="ttdeci">void setHeadingRotationAngle(float angle)</div><div class="ttdoc">Sets the heading rotation angle.</div><div class="ttdef"><b>Definition</b> <a href="#l00128">RotationStateComponent.ixx:128</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent_html_a1d0405a635f5a57f68632ebdfcd6ace3"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#a1d0405a635f5a57f68632ebdfcd6ace3">helios::engine::modules::physics::motion::components::RotationStateComponent::setSpinRotationAngle</a></div><div class="ttdeci">void setSpinRotationAngle(float angle)</div><div class="ttdoc">Sets the spin rotation angle.</div><div class="ttdef"><b>Definition</b> <a href="#l00166">RotationStateComponent.ixx:166</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent_html_a231f5f570b7485c82d9b8dd312053a4f"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#a231f5f570b7485c82d9b8dd312053a4f">helios::engine::modules::physics::motion::components::RotationStateComponent::spinRotationAngle</a></div><div class="ttdeci">float spinRotationAngle() const noexcept</div><div class="ttdoc">Returns the current spin rotation angle.</div><div class="ttdef"><b>Definition</b> <a href="#l00176">RotationStateComponent.ixx:176</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent_html_a7359c43023a32259b891c3599fb8b94f"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#a7359c43023a32259b891c3599fb8b94f">helios::engine::modules::physics::motion::components::RotationStateComponent::spinRotation</a></div><div class="ttdeci">const helios::math::mat4f &amp; spinRotation() noexcept</div><div class="ttdoc">Returns the spin rotation matrix.</div><div class="ttdef"><b>Definition</b> <a href="#l00206">RotationStateComponent.ixx:206</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent_html_a9fc74f36f6ab901c7e6543bf9bae166e"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#a9fc74f36f6ab901c7e6543bf9bae166e">helios::engine::modules::physics::motion::components::RotationStateComponent::setHeadingRotationAxis</a></div><div class="ttdeci">void setHeadingRotationAxis(helios::math::vec3f axis)</div><div class="ttdoc">Sets the heading rotation axis.</div><div class="ttdef"><b>Definition</b> <a href="#l00147">RotationStateComponent.ixx:147</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent_html_aa5651c4b71e265d2fd8c0b5aadec8226"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#aa5651c4b71e265d2fd8c0b5aadec8226">helios::engine::modules::physics::motion::components::RotationStateComponent::headingRotationAngle</a></div><div class="ttdeci">float headingRotationAngle() const noexcept</div><div class="ttdoc">Returns the current heading rotation angle.</div><div class="ttdef"><b>Definition</b> <a href="#l00138">RotationStateComponent.ixx:138</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent_html_abb1601d1fc8a97a7edb90493aba5a0f2"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#abb1601d1fc8a97a7edb90493aba5a0f2">helios::engine::modules::physics::motion::components::RotationStateComponent::spinRotationAxis</a></div><div class="ttdeci">helios::math::vec3f spinRotationAxis() const noexcept</div><div class="ttdoc">Returns the spin rotation axis.</div><div class="ttdef"><b>Definition</b> <a href="#l00195">RotationStateComponent.ixx:195</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent_html_abfb8c71bfb6728c98f63ab49d86d9b87"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#abfb8c71bfb6728c98f63ab49d86d9b87">helios::engine::modules::physics::motion::components::RotationStateComponent::rotation</a></div><div class="ttdeci">const helios::math::mat4f &amp; rotation() noexcept</div><div class="ttdoc">Returns the composed rotation matrix (heading * spin).</div><div class="ttdef"><b>Definition</b> <a href="#l00230">RotationStateComponent.ixx:230</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent_html_ace4bd4b58ceb48b2b3ddb5f5a14e220f"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#ace4bd4b58ceb48b2b3ddb5f5a14e220f">helios::engine::modules::physics::motion::components::RotationStateComponent::headingRotationAxis</a></div><div class="ttdeci">helios::math::vec3f headingRotationAxis() const noexcept</div><div class="ttdoc">Returns the heading rotation axis.</div><div class="ttdef"><b>Definition</b> <a href="#l00157">RotationStateComponent.ixx:157</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent_html_acf242f188ba39aa6d3e56e642503c809"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#acf242f188ba39aa6d3e56e642503c809">helios::engine::modules::physics::motion::components::RotationStateComponent::setSpinRotationAxis</a></div><div class="ttdeci">void setSpinRotationAxis(helios::math::vec3f axis)</div><div class="ttdoc">Sets the spin rotation axis.</div><div class="ttdef"><b>Definition</b> <a href="#l00185">RotationStateComponent.ixx:185</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent_html_adaa2b68822da0973742ef0fd202b724f"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#adaa2b68822da0973742ef0fd202b724f">helios::engine::modules::physics::motion::components::RotationStateComponent::headingRotation</a></div><div class="ttdeci">const helios::math::mat4f &amp; headingRotation() noexcept</div><div class="ttdoc">Returns the heading rotation matrix.</div><div class="ttdef"><b>Definition</b> <a href="#l00218">RotationStateComponent.ixx:218</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent_html_ade63c29a3ade0d54d625ec7c035e5c03"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent.html#ade63c29a3ade0d54d625ec7c035e5c03">helios::engine::modules::physics::motion::components::RotationStateComponent::RotationStateComponent</a></div><div class="ttdeci">RotationStateComponent()=default</div><div class="ttdoc">Default constructor.</div></div>
+<div class="ttc" id="amodule__helios_8engine_8ecs_8CloneableComponent_html"><div class="ttname"><a href="module__helios_8engine_8ecs_8CloneableComponent.html">helios.engine.ecs.CloneableComponent</a></div></div>
+<div class="ttc" id="amodule__helios_8engine_8modules_8physics_8motion_8components_8RotationStateComponent_html"><div class="ttname"><a href="module__helios_8engine_8modules_8physics_8motion_8components_8RotationStateComponent.html">helios.engine.modules.physics.motion.components.RotationStateComponent</a></div></div>
 <div class="ttc" id="amodule__helios_8math_html"><div class="ttname"><a href="module__helios_8math.html">helios.math</a></div><div class="ttdoc">Mathematical operations and types module.</div></div>
-<div class="ttc" id="anamespacehelios_1_1engine_1_1game_1_1components_1_1physics_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1game_1_1components_1_1physics.html">helios::engine::game::components::physics</a></div><div class="ttdoc">This namespace contains components that handle physics simulation, movement, and related behaviors....</div><div class="ttdef"><b>Definition</b> <a href="AabbColliderComponent_8ixx_source.html#l00014">AabbColliderComponent.ixx:14</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components.html">helios::engine::modules::physics::motion::components</a></div><div class="ttdoc">Physics and movement components for game entities.</div><div class="ttdef"><b>Definition</b> <a href="DirectionComponent_8ixx_source.html#l00016">DirectionComponent.ixx:16</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1math_html_a4949642a7cca09c7950bb6a1b75260c9"><div class="ttname"><a href="namespacehelios_1_1math.html#a4949642a7cca09c7950bb6a1b75260c9">helios::math::radians</a></div><div class="ttdeci">constexpr float radians(const float angle) noexcept</div><div class="ttdoc">Converts an angle from degrees to radians.</div><div class="ttdef"><b>Definition</b> <a href="utils_8ixx_source.html#l00030">utils.ixx:30</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1math_html_a643691235959c2f53d144a4ee9a0e251"><div class="ttname"><a href="namespacehelios_1_1math.html#a643691235959c2f53d144a4ee9a0e251">helios::math::rotate</a></div><div class="ttdeci">mat4f rotate(const mat4f &amp;model, float radians, const vec3f &amp;axis) noexcept</div><div class="ttdoc">Creates an affine rotation matrix R&#39; = M * R by &quot;baking&quot; the rotation part into the model matrix....</div></div>
 <div class="ttc" id="anamespacehelios_1_1math_html_a71f1e40e636f47229c3122bdb63099d5"><div class="ttname"><a href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">helios::math::vec3f</a></div><div class="ttdeci">vec3&lt; float &gt; vec3f</div><div class="ttdoc">Single-precision floating-point 3D vector.</div><div class="ttdef"><b>Definition</b> <a href="vec3_8ixx_source.html#l00435">vec3.ixx:435</a></div></div>
@@ -376,7 +399,7 @@ $(function() {
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_08c09894bd9f0ab4b1e9fdc7a2628766.html">helios</a></li><li class="navelem"><a href="dir_860c9de2f65c10e8e262a0e7b5bfee5e.html">engine</a></li><li class="navelem"><a href="dir_46c7b0b04924cca8aa10726746d57f30.html">game</a></li><li class="navelem"><a href="dir_f71deafbc833970927ad1dfabdb805be.html">components</a></li><li class="navelem"><a href="dir_df55b9b4d946c8e2a0754190098e7cc2.html">physics</a></li><li class="navelem"><a href="RotationStateComponent_8ixx.html">RotationStateComponent.ixx</a></li>
+    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_08c09894bd9f0ab4b1e9fdc7a2628766.html">helios</a></li><li class="navelem"><a href="dir_860c9de2f65c10e8e262a0e7b5bfee5e.html">engine</a></li><li class="navelem"><a href="dir_0b25300d10cd1aefe5f6cbf740a7fedf.html">modules</a></li><li class="navelem"><a href="dir_4cf3e568933a39133476fd0cdd0720ad.html">physics</a></li><li class="navelem"><a href="dir_ad3e739cbc5e81514c03c7a8b77a9a7c.html">motion</a></li><li class="navelem"><a href="dir_32b8e9ad30ce1e5df614822d7a45465e.html">components</a></li><li class="navelem"><a href="RotationStateComponent_8ixx.html">RotationStateComponent.ixx</a></li>
     <li class="footer">Generated on <span class="timestamp"></span> for helios by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

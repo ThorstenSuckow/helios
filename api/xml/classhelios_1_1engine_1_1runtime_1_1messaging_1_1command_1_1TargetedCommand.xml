@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>helios::engine::runtime::messaging::command::TargetedCommand</compoundname>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand" prot="public" virt="non-virtual">helios::engine::mechanics::combat::commands::Aim2DCommand</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1ShootCommand" prot="public" virt="non-virtual">helios::engine::mechanics::combat::commands::ShootCommand</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand" prot="public" virt="non-virtual">helios::engine::modules::physics::motion::commands::Move2DCommand</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1SteeringCommand" prot="public" virt="non-virtual">helios::engine::modules::physics::motion::commands::SteeringCommand</derivedcompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand_1afdb2e242ce5c8d3d5a642529ba21f96f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::engine::runtime::messaging::command::TargetedCommand::~TargetedCommand</definition>
+        <argsstring>()=default</argsstring>
+        <name>~TargetedCommand</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::TargetedCommand::~TargetedCommand</qualifiedname>
+        <briefdescription>
+<para>Virtual destructor to ensure proper cleanup of derived classes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/messaging/command/TargetedCommand.ixx" line="54" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand_1afb88bb52b4cdfa2dbf5867690d132793" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void helios::engine::runtime::messaging::command::TargetedCommand::execute</definition>
+        <argsstring>(helios::engine::ecs::GameObject &amp;gameObject) const noexcept=0</argsstring>
+        <name>execute</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::TargetedCommand::execute</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand_1ac0c629ab75061dde4a02d165009d8bac">execute</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1ShootCommand_1a193b4eff8c457a885c72d602ccfff601">execute</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand_1a0d5f4a8a8ef0668bb052ed577426db66">execute</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1SteeringCommand_1a5faf71297753def59805676b937cb691">execute</reimplementedby>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> &amp;</type>
+          <declname>gameObject</declname>
+        </param>
+        <briefdescription>
+<para>Executes the command on the specified GameObject. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameObject</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target GameObject to apply the command to.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>Implementations must be noexcept. If <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand_1afb88bb52b4cdfa2dbf5867690d132793" kindref="member">execute()</ref> could fail, handle errors internally (e.g., log and skip). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/messaging/command/TargetedCommand.ixx" line="64" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand_1ace7d60bfa2adf707ab4812533d9afd83" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void helios::engine::runtime::messaging::command::TargetedCommand::accept</definition>
+        <argsstring>(helios::engine::ecs::GameObject &amp;gameObject, helios::engine::runtime::messaging::command::TargetedCommandDispatcher &amp;dispatcher) const noexcept</argsstring>
+        <name>accept</name>
+        <qualifiedname>helios::engine::runtime::messaging::command::TargetedCommand::accept</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1ShootCommand_1ac2016f0c84782704dd90026f87724ad9">accept</reimplementedby>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> &amp;</type>
+          <declname>gameObject</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommandDispatcher" kindref="compound">helios::engine::runtime::messaging::command::TargetedCommandDispatcher</ref> &amp;</type>
+          <declname>dispatcher</declname>
+        </param>
+        <briefdescription>
+<para>Accepts a dispatcher for type-safe command handling. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameObject</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The target GameObject context. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dispatcher</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dispatcher to delegate command handling to.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+Override this method in derived commands to enable dispatch to specialized handlers. The default implementation is a no-op. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/messaging/command/TargetedCommand.ixx" line="75" column="22" bodyfile="include/helios/engine/runtime/messaging/command/TargetedCommand.ixx" bodystart="75" bodyend="79"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Abstract base class for commands targeting a specific GameObject. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>A <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand" kindref="compound">TargetedCommand</ref> encapsulates a single game action (e.g., movement, attack) to be performed on a specific GameObject identified by its Guid.</para>
+<para>Concrete commands are typically created by input systems and queued in a <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer" kindref="compound">CommandBuffer</ref>. The buffer then executes them against the target GameObject during the command flush phase.</para>
+<para>Commands support the Visitor pattern through <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand_1ace7d60bfa2adf707ab4812533d9afd83" kindref="member">accept()</ref>, enabling type-safe dispatch to specialized handlers without explicit type checking.</para>
+<para>Example implementation: ```cpp class MoveCommand : public <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand" kindref="compound">TargetedCommand</ref> { <ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref> direction_; float speed_; public: MoveCommand(helios::math::vec3f dir, float speed) : direction_(dir), speed_(speed) {}</para>
+<para>void <ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand_1afb88bb52b4cdfa2dbf5867690d132793" kindref="member">execute(helios::engine::ecs::GameObject&amp; obj) const </ref>noexcept override { auto* move = obj.get&lt;Move2DComponent&gt;(); if (move) move-&gt;setVelocity(direction_ * speed_); } }; ```</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand" kindref="compound">WorldCommand</ref> for commands operating on the entire GameWorld </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommandDispatcher" kindref="compound">TargetedCommandDispatcher</ref> for type-safe <ref refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1command" kindref="compound">command</ref> dispatch </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::mechanics::combat::commands::Aim2DCommand</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1Aim2DCommand"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::mechanics::combat::commands::ShootCommand</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1commands_1_1ShootCommand"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>helios::engine::modules::physics::motion::commands::Move2DCommand</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1Move2DCommand"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>helios::engine::modules::physics::motion::commands::SteeringCommand</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1commands_1_1SteeringCommand"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>helios::engine::runtime::messaging::command::TargetedCommand</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand"/>
+      </node>
+    </inheritancegraph>
+    <location file="include/helios/engine/runtime/messaging/command/TargetedCommand.ixx" line="47" column="5" bodyfile="include/helios/engine/runtime/messaging/command/TargetedCommand.ixx" bodystart="47" bodyend="80"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand_1ace7d60bfa2adf707ab4812533d9afd83" prot="public" virt="virtual"><scope>helios::engine::runtime::messaging::command::TargetedCommand</scope><name>accept</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand_1afb88bb52b4cdfa2dbf5867690d132793" prot="public" virt="pure-virtual"><scope>helios::engine::runtime::messaging::command::TargetedCommand</scope><name>execute</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TargetedCommand_1afdb2e242ce5c8d3d5a642529ba21f96f" prot="public" virt="virtual"><scope>helios::engine::runtime::messaging::command::TargetedCommand</scope><name>~TargetedCommand</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

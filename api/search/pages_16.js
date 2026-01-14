@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['pacing_20and_20performance_20metrics_0',['7. Frame Pacing and Performance Metrics',['../index.html#autotoc_md140',1,'']]],
-  ['performance_20metrics_1',['7. Frame Pacing and Performance Metrics',['../index.html#autotoc_md140',1,'']]],
-  ['pipeline_2',['2. Rendering Pipeline',['../index.html#autotoc_md133',1,'']]],
-  ['principles_3',['Design Principles',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md36',1,'']]],
-  ['purpose_4',['Core Purpose',['../index.html#autotoc_md127',1,'']]]
+  ['of_20concerns_0',['Separation of Concerns',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md25',1,'']]],
+  ['opengl_1',['Quick Start with GLFW + OpenGL',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md27',1,'']]],
+  ['opengl_2',['&lt;span class=&quot;tt&quot;&gt;helios.ext.opengl&lt;/span&gt;',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md30',1,'']]],
+  ['overlay_3',['6. ImGui Debug Overlay',['../index.html#autotoc_md308',1,'']]],
+  ['overview_4',['Overview',['../index.html#autotoc_md299',1,'Architecture Overview'],['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md21',1,'Overview'],['../dir_4abfc5de19138d0df20e9d7e5fc1ea64.html#autotoc_md58',1,'Overview'],['../dir_48a6261162fe477a11d047d5b69d2726.html#autotoc_md66',1,'Overview'],['../dir_e249a089eb573210cdebc77c7b621d83.html#autotoc_md87',1,'Overview'],['../dir_360254ed3e431ae1158cc6ecf920a44f.html#autotoc_md91',1,'Overview'],['../dir_d4a3144816e2a342522614ea4b514ce1.html#autotoc_md95',1,'Overview'],['../dir_e6d4a5646232a1b87d4de14f4f493fea.html#autotoc_md99',1,'Overview'],['../dir_6436463a013eab53fa3d2ff87050f6f7.html#autotoc_md103',1,'Overview'],['../dir_e99a45b7ac1dde38b3fec34c3ae0d46b.html#autotoc_md107',1,'Overview'],['../dir_38660f863d95a2f91776843a957349cd.html#autotoc_md111',1,'Overview'],['../dir_34850ce29214ffcb6312803c208de43b.html#autotoc_md153',1,'Overview'],['../dir_bf0838d2a9c934752e73ed5ea26c102a.html#autotoc_md169',1,'Overview'],['../dir_9d652bc49794ee57b22ecd7f52416e0b.html#autotoc_md173',1,'Overview'],['../dir_0b25300d10cd1aefe5f6cbf740a7fedf.html#autotoc_md179',1,'Overview'],['../dir_9ead251bd23441c96f36786d76ab0fcb.html#autotoc_md196',1,'Overview'],['../dir_860c9de2f65c10e8e262a0e7b5bfee5e.html#autotoc_md217',1,'Overview'],['../dir_1f05af774b1537994876600c714c9eab.html#autotoc_md236',1,'Overview'],['../dir_d7d61354c43df5b3f9e499bdacf27dcd.html#autotoc_md240',1,'Overview'],['../dir_734da5e9060906fd2f909892a288292e.html#autotoc_md246',1,'Overview']]]
 ];

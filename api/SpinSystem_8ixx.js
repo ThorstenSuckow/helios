@@ -1,4 +1,4 @@
 var SpinSystem_8ixx =
 [
-    [ "helios::engine::game::systems::physics::SpinSystem", "classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1SpinSystem.html", "classhelios_1_1engine_1_1game_1_1systems_1_1physics_1_1SpinSystem" ]
+    [ "helios::engine::modules::physics::motion::systems::SpinSystem", "classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1systems_1_1SpinSystem.html", "classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1systems_1_1SpinSystem" ]
 ];

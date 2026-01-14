@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8runtime_8world_8SystemRegistry" kind="module">
+    <compoundname>helios.engine.runtime.world.SystemRegistry</compoundname>
+    <innerfile refid="SystemRegistry_8ixx">SystemRegistry.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry" prot="public">helios::engine::runtime::world::SystemRegistry</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry_1a694ce0f04a983452cddb0c9724b956d7" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1ecs_1_1System" kindref="compound">helios::engine::ecs::System</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::unique_ptr&lt;helios::engine::ecs::System&gt; &gt; helios::engine::runtime::world::SystemRegistry::systems_</definition>
+        <argsstring></argsstring>
+        <name>systems_</name>
+        <qualifiedname>helios::engine::runtime::world::SystemRegistry::systems_</qualifiedname>
+        <briefdescription>
+<para>Collection of owned System instances. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/SystemRegistry.ixx" line="64" column="21" bodyfile="include/helios/engine/runtime/world/SystemRegistry.ixx" bodystart="64" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry_1a5f0d708775beb14b77c95304b7c1a333" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::vector&lt; std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1ecs_1_1System" kindref="compound">helios::engine::ecs::System</ref> &gt; &gt; &amp;</type>
+        <definition>std::vector&lt; std::unique_ptr&lt; helios::engine::ecs::System &gt; &gt; &amp; helios::engine::runtime::world::SystemRegistry::systems</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>systems</name>
+        <qualifiedname>helios::engine::runtime::world::SystemRegistry::systems</qualifiedname>
+        <briefdescription>
+<para>Returns a reference to the system collection. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Reference to the vector of System unique_ptrs. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/SystemRegistry.ixx" line="73" column="22" bodyfile="include/helios/engine/runtime/world/SystemRegistry.ixx" bodystart="73" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry_1a1faaf4789249106828fa02c91274b610" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>T &amp;</type>
+        <definition>T &amp; helios::engine::runtime::world::SystemRegistry::add</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>add</name>
+        <qualifiedname>helios::engine::runtime::world::SystemRegistry::add</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+    <requiresclause>std::is_base_of_v&lt;<ref refid="classhelios_1_1engine_1_1ecs_1_1System" kindref="compound">helios::engine::ecs::System</ref>, T&gt;    </requiresclause>
+        <briefdescription>
+<para>Adds a new System of type T to the registry. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The System type to add. Must derive from System. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Constructor argument types.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Arguments forwarded to the System constructor.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to the newly added System.</para>
+</simplesect>
+<simplesect kind="pre"><para>No System of type T is already registered. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/SystemRegistry.ixx" line="91" column="11" bodyfile="include/helios/engine/runtime/world/SystemRegistry.ixx" bodystart="91" bodyend="97"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry_1a3e879c017e4283b971b738f55a7b3e4a" compoundref="SystemRegistry_8ixx" startline="108" endline="110">helios::engine::runtime::world::SystemRegistry::hasSystem</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry_1a3e879c017e4283b971b738f55a7b3e4a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool helios::engine::runtime::world::SystemRegistry::hasSystem</definition>
+        <argsstring>() const</argsstring>
+        <name>hasSystem</name>
+        <qualifiedname>helios::engine::runtime::world::SystemRegistry::hasSystem</qualifiedname>
+    <requiresclause>std::is_base_of_v&lt;<ref refid="classhelios_1_1engine_1_1ecs_1_1System" kindref="compound">helios::engine::ecs::System</ref>, T&gt;    </requiresclause>
+        <briefdescription>
+<para>Checks if a System of type T is registered. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The System type to check for.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the System exists, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/SystemRegistry.ixx" line="108" column="15" bodyfile="include/helios/engine/runtime/world/SystemRegistry.ixx" bodystart="108" bodyend="110"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry_1ae0d6499790a83073e18ec91c5800fb4a" compoundref="SystemRegistry_8ixx" startline="123" endline="131">helios::engine::runtime::world::SystemRegistry::getSystem</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry_1a1faaf4789249106828fa02c91274b610" compoundref="SystemRegistry_8ixx" startline="91" endline="97">helios::engine::runtime::world::SystemRegistry::add</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry_1ae0d6499790a83073e18ec91c5800fb4a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * helios::engine::runtime::world::SystemRegistry::getSystem</definition>
+        <argsstring>() const</argsstring>
+        <name>getSystem</name>
+        <qualifiedname>helios::engine::runtime::world::SystemRegistry::getSystem</qualifiedname>
+    <requiresclause>std::is_base_of_v&lt;<ref refid="classhelios_1_1engine_1_1ecs_1_1System" kindref="compound">helios::engine::ecs::System</ref>, T&gt;    </requiresclause>
+        <briefdescription>
+<para>Retrieves a System by type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The System type to retrieve.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the System if found, nullptr otherwise.</para>
+</simplesect>
+<simplesect kind="note"><para>Uses dynamic_cast for type checking. O(n) complexity. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/SystemRegistry.ixx" line="123" column="12" bodyfile="include/helios/engine/runtime/world/SystemRegistry.ixx" bodystart="123" bodyend="131"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1SystemRegistry_1a3e879c017e4283b971b738f55a7b3e4a" compoundref="SystemRegistry_8ixx" startline="108" endline="110">helios::engine::runtime::world::SystemRegistry::hasSystem</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/engine/runtime/world/SystemRegistry.ixx" line="12" column="15"/>
+  </compounddef>
+</doxygen>

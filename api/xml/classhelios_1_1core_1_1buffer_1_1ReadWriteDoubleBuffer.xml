@@ -1,0 +1,241 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer" kind="class" language="C++" prot="public">
+    <compoundname>helios::core::buffer::ReadWriteDoubleBuffer</compoundname>
+    <basecompoundref refid="classhelios_1_1core_1_1buffer_1_1DoubleBuffer" prot="public" virt="non-virtual">helios::core::buffer::DoubleBuffer</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1a3447c951738298f02b4f468f7b77a86f" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1core_1_1buffer_1_1ReadBuffer" kindref="compound">ReadBuffer</ref>&lt; T &gt;</type>
+        <definition>ReadBuffer&lt;T&gt; helios::core::buffer::ReadWriteDoubleBuffer&lt; T &gt;::readBuffer_</definition>
+        <argsstring></argsstring>
+        <name>readBuffer_</name>
+        <qualifiedname>helios::core::buffer::ReadWriteDoubleBuffer::readBuffer_</qualifiedname>
+        <briefdescription>
+<para><ref refid="classhelios_1_1core_1_1buffer_1_1Buffer" kindref="compound">Buffer</ref> containing messages available for reading. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/core/buffer/ReadWriteDoubleBuffer.ixx" line="36" column="20" bodyfile="include/helios/core/buffer/ReadWriteDoubleBuffer.ixx" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1aa1b95c346500c3964493b217dbf65708" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1core_1_1buffer_1_1WriteBuffer" kindref="compound">WriteBuffer</ref>&lt; T &gt;</type>
+        <definition>WriteBuffer&lt;T&gt; helios::core::buffer::ReadWriteDoubleBuffer&lt; T &gt;::writeBuffer_</definition>
+        <argsstring></argsstring>
+        <name>writeBuffer_</name>
+        <qualifiedname>helios::core::buffer::ReadWriteDoubleBuffer::writeBuffer_</qualifiedname>
+        <briefdescription>
+<para><ref refid="classhelios_1_1core_1_1buffer_1_1Buffer" kindref="compound">Buffer</ref> where new messages are pushed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/core/buffer/ReadWriteDoubleBuffer.ixx" line="41" column="21" bodyfile="include/helios/core/buffer/ReadWriteDoubleBuffer.ixx" bodystart="41" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1a189e7403fdd5b8916b7c8425d469b1d8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::core::buffer::ReadWriteDoubleBuffer&lt; T &gt;::reserve</definition>
+        <argsstring>(size_t size)</argsstring>
+        <name>reserve</name>
+        <qualifiedname>helios::core::buffer::ReadWriteDoubleBuffer::reserve</qualifiedname>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Pre-allocates memory for both buffers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of messages to reserve capacity for. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/core/buffer/ReadWriteDoubleBuffer.ixx" line="51" column="14" bodyfile="include/helios/core/buffer/ReadWriteDoubleBuffer.ixx" bodystart="51" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1a58201a0c2b43ea168bc46d376a12baad" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void helios::core::buffer::ReadWriteDoubleBuffer&lt; T &gt;::push</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>push</name>
+        <qualifiedname>helios::core::buffer::ReadWriteDoubleBuffer::push</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Constructs and pushes a message to the write buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Constructor argument types for T.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Arguments forwarded to T&apos;s constructor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/core/buffer/ReadWriteDoubleBuffer.ixx" line="64" column="14" bodyfile="include/helios/core/buffer/ReadWriteDoubleBuffer.ixx" bodystart="64" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1a667f354ff0c9ab49cf13f72028e4b293" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::span&lt; const T &gt;</type>
+        <definition>std::span&lt; const T &gt; helios::core::buffer::ReadWriteDoubleBuffer&lt; T &gt;::read</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>read</name>
+        <qualifiedname>helios::core::buffer::ReadWriteDoubleBuffer::read</qualifiedname>
+        <briefdescription>
+<para>Returns a read-only view of messages in the read buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A span over all messages written in the previous frame. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/core/buffer/ReadWriteDoubleBuffer.ixx" line="73" column="19" bodyfile="include/helios/core/buffer/ReadWriteDoubleBuffer.ixx" bodystart="73" bodyend="75"/>
+        <referencedby refid="classhelios_1_1core_1_1buffer_1_1TypeIndexedDoubleBuffer_1af660c4ced9dcb156f93e43f841c2c358" compoundref="TypeIndexedDoubleBuffer_8ixx" startline="115" endline="124">helios::core::buffer::TypeIndexedDoubleBuffer&lt; helios::core::data::TypeIndexer&lt; GameLoopEventBusGroup &gt; &gt;::read</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1affdea9122103eeb24113621c3a062449" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::core::buffer::ReadWriteDoubleBuffer&lt; T &gt;::swap</definition>
+        <argsstring>() override</argsstring>
+        <name>swap</name>
+        <qualifiedname>helios::core::buffer::ReadWriteDoubleBuffer::swap</qualifiedname>
+        <reimplements refid="classhelios_1_1core_1_1buffer_1_1DoubleBuffer_1af0955a8252d3d9c7888f843ac050d262">swap</reimplements>
+        <briefdescription>
+<para>Swaps read with write buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Swaps the read- with the write-buffer. The write buffer is empty after this operation, while the read buffer contains the contents of the write buffer. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/core/buffer/ReadWriteDoubleBuffer.ixx" line="83" column="14" bodyfile="include/helios/core/buffer/ReadWriteDoubleBuffer.ixx" bodystart="83" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1a1336f5dc298f2dddf5ca370e2a1ef667" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::core::buffer::ReadWriteDoubleBuffer&lt; T &gt;::clearReadBuffer</definition>
+        <argsstring>() override</argsstring>
+        <name>clearReadBuffer</name>
+        <qualifiedname>helios::core::buffer::ReadWriteDoubleBuffer::clearReadBuffer</qualifiedname>
+        <reimplements refid="classhelios_1_1core_1_1buffer_1_1DoubleBuffer_1ac54fe77643bde46dcaefbfdf717dcb55">clearReadBuffer</reimplements>
+        <briefdescription>
+<para>Clears the read buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/core/buffer/ReadWriteDoubleBuffer.ixx" line="90" column="14" bodyfile="include/helios/core/buffer/ReadWriteDoubleBuffer.ixx" bodystart="90" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1a7b3ae2b79078162b3964d7450f5f161e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::core::buffer::ReadWriteDoubleBuffer&lt; T &gt;::clearWriteBuffer</definition>
+        <argsstring>() override</argsstring>
+        <name>clearWriteBuffer</name>
+        <qualifiedname>helios::core::buffer::ReadWriteDoubleBuffer::clearWriteBuffer</qualifiedname>
+        <reimplements refid="classhelios_1_1core_1_1buffer_1_1DoubleBuffer_1a7c87a3c33f523e48a5be3b7fa461473a">clearWriteBuffer</reimplements>
+        <briefdescription>
+<para>Clears the write buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/core/buffer/ReadWriteDoubleBuffer.ixx" line="97" column="14" bodyfile="include/helios/core/buffer/ReadWriteDoubleBuffer.ixx" bodystart="97" bodyend="99"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Type-safe double-buffered container for messages of type T. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Implements a producer-consumer pattern where messages are written to one buffer while consumers read from another. This decouples message production from consumption and allows lock-free operation in single-threaded game loops.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The message type stored in this buffer. Must be movable. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::core::buffer::DoubleBuffer</label>
+        <link refid="classhelios_1_1core_1_1buffer_1_1DoubleBuffer"/>
+      </node>
+      <node id="1">
+        <label>helios::core::buffer::ReadWriteDoubleBuffer&lt; T &gt;</label>
+        <link refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>helios::core::buffer::DoubleBuffer</label>
+        <link refid="classhelios_1_1core_1_1buffer_1_1DoubleBuffer"/>
+      </node>
+      <node id="1">
+        <label>helios::core::buffer::ReadWriteDoubleBuffer&lt; T &gt;</label>
+        <link refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/core/buffer/ReadBuffer.ixx" line="15" column="5" bodyfile="include/helios/core/buffer/ReadBuffer.ixx" bodystart="15" bodyend="15"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1a1336f5dc298f2dddf5ca370e2a1ef667" prot="public" virt="virtual"><scope>helios::core::buffer::ReadWriteDoubleBuffer</scope><name>clearReadBuffer</name></member>
+      <member refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1a7b3ae2b79078162b3964d7450f5f161e" prot="public" virt="virtual"><scope>helios::core::buffer::ReadWriteDoubleBuffer</scope><name>clearWriteBuffer</name></member>
+      <member refid="classhelios_1_1core_1_1buffer_1_1DoubleBuffer_1af0cc55a115036e3c5427961a26f38691" prot="public" virt="non-virtual"><scope>helios::core::buffer::ReadWriteDoubleBuffer</scope><name>DoubleBuffer</name></member>
+      <member refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1a58201a0c2b43ea168bc46d376a12baad" prot="public" virt="non-virtual"><scope>helios::core::buffer::ReadWriteDoubleBuffer</scope><name>push</name></member>
+      <member refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1a667f354ff0c9ab49cf13f72028e4b293" prot="public" virt="non-virtual"><scope>helios::core::buffer::ReadWriteDoubleBuffer</scope><name>read</name></member>
+      <member refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1a3447c951738298f02b4f468f7b77a86f" prot="private" virt="non-virtual"><scope>helios::core::buffer::ReadWriteDoubleBuffer</scope><name>readBuffer_</name></member>
+      <member refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1a189e7403fdd5b8916b7c8425d469b1d8" prot="public" virt="non-virtual"><scope>helios::core::buffer::ReadWriteDoubleBuffer</scope><name>reserve</name></member>
+      <member refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1affdea9122103eeb24113621c3a062449" prot="public" virt="virtual"><scope>helios::core::buffer::ReadWriteDoubleBuffer</scope><name>swap</name></member>
+      <member refid="classhelios_1_1core_1_1buffer_1_1ReadWriteDoubleBuffer_1aa1b95c346500c3964493b217dbf65708" prot="private" virt="non-virtual"><scope>helios::core::buffer::ReadWriteDoubleBuffer</scope><name>writeBuffer_</name></member>
+      <member refid="classhelios_1_1core_1_1buffer_1_1DoubleBuffer_1a70d94b503e85e454e4d84f4980b84451" prot="public" virt="virtual"><scope>helios::core::buffer::ReadWriteDoubleBuffer</scope><name>~DoubleBuffer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

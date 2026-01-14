@@ -2,19 +2,45 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="GameLoopEventBus_8ixx" kind="file" language="C++">
     <compoundname>GameLoopEventBus.ixx</compoundname>
-    <includes refid="TypeIndexedDoubleBuffer_8ixx" local="no">helios.core.data.TypeIndexedDoubleBuffer</includes>
+    <includes refid="TypeIndexedDoubleBuffer_8ixx" local="no">helios.core.buffer.TypeIndexedDoubleBuffer</includes>
     <includes refid="TypeIndexer_8ixx" local="no">helios.core.data.TypeIndexer</includes>
     <incdepgraph>
-      <node id="6">
-        <label>helios.core.data.ReadBuffer</label>
+      <node id="9">
+        <label>helios.core.buffer.DoubleBuffer</label>
+        <link refid="DoubleBuffer_8ixx"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>helios.core.buffer.ReadBuffer</label>
         <link refid="ReadBuffer_8ixx"/>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
       </node>
+      <node id="6">
+        <label>helios.core.buffer.ReadWriteDoubleBuffer</label>
+        <link refid="ReadWriteDoubleBuffer_8ixx"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
       <node id="2">
-        <label>helios.core.data.TypeIndexedDoubleBuffer</label>
+        <label>helios.core.buffer.TypeIndexedDoubleBuffer</label>
         <link refid="TypeIndexedDoubleBuffer_8ixx"/>
         <childnode refid="3" relation="include">
         </childnode>
@@ -26,32 +52,36 @@
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
         <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
         </childnode>
       </node>
       <node id="8">
-        <label>helios.core.data.TypeIndexer</label>
-        <link refid="TypeIndexer_8ixx"/>
-        <childnode refid="9" relation="include">
-        </childnode>
-      </node>
-      <node id="7">
-        <label>helios.core.data.WriteBuffer</label>
+        <label>helios.core.buffer.WriteBuffer</label>
         <link refid="WriteBuffer_8ixx"/>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="6" relation="include">
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>helios.core.data.TypeIndexer</label>
+        <link refid="TypeIndexer_8ixx"/>
+        <childnode refid="11" relation="include">
         </childnode>
       </node>
       <node id="1">
-        <label>include/helios/engine/game/event/GameLoopEventBus.ixx</label>
+        <label>include/helios/engine/runtime/messaging/event/GameLoopEventBus.ixx</label>
         <link refid="GameLoopEventBus_8ixx"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="9">
+      <node id="11">
         <label>atomic</label>
       </node>
       <node id="3">
@@ -64,11 +94,12 @@
         <label>vector</label>
       </node>
     </incdepgraph>
-    <innerclass refid="structhelios_1_1engine_1_1game_1_1event_1_1GameLoopEventBusGroup" prot="public">helios::engine::game::event::GameLoopEventBusGroup</innerclass>
+    <innerclass refid="structhelios_1_1engine_1_1runtime_1_1messaging_1_1event_1_1GameLoopEventBusGroup" prot="public">helios::engine::runtime::messaging::event::GameLoopEventBusGroup</innerclass>
     <innernamespace refid="namespacehelios">helios</innernamespace>
     <innernamespace refid="namespacehelios_1_1engine">helios::engine</innernamespace>
-    <innernamespace refid="namespacehelios_1_1engine_1_1game">helios::engine::game</innernamespace>
-    <innernamespace refid="namespacehelios_1_1engine_1_1game_1_1event">helios::engine::game::event</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime">helios::engine::runtime</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1messaging">helios::engine::runtime::messaging</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event">helios::engine::runtime::messaging::event</innernamespace>
     <briefdescription>
 <para>Type-safe event bus for inter-system communication within the game loop. </para>
     </briefdescription>
@@ -81,13 +112,13 @@
 <codeline lineno="4"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">module</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight></codeline>
-<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8game_8event_8GameLoopEventBus" kindref="compound">helios.engine.game.event.GameLoopEventBus</ref>;</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8runtime_8messaging_8event_8GameLoopEventBus" kindref="compound">helios.engine.runtime.messaging.event.GameLoopEventBus</ref>;</highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8data_8TypeIndexer" kindref="compound">helios.core.data.TypeIndexer</ref>;</highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8data_8TypeIndexedDoubleBuffer" kindref="compound">helios.core.data.TypeIndexedDoubleBuffer</ref>;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8buffer_8TypeIndexedDoubleBuffer" kindref="compound">helios.core.buffer.TypeIndexedDoubleBuffer</ref>;</highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight></codeline>
-<codeline lineno="13" refid="namespacehelios_1_1engine_1_1game_1_1event" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1game_1_1event" kindref="compound">helios::engine::game::event</ref><sp/>{</highlight></codeline>
+<codeline lineno="13" refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event" kindref="compound">helios::engine::runtime::messaging::event</ref><sp/>{</highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="15"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="16"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@struct<sp/>GameLoopEventBusGroup</highlight></codeline>
@@ -96,7 +127,7 @@
 <codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Used<sp/>as<sp/>a<sp/>template<sp/>parameter<sp/>for<sp/>TypeIndexer<sp/>to<sp/>create<sp/>a<sp/>dedicated</highlight></codeline>
 <codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>index<sp/>space<sp/>for<sp/>game<sp/>loop<sp/>events,<sp/>separate<sp/>from<sp/>other<sp/>typed<sp/>buffer<sp/>systems.</highlight></codeline>
 <codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="22" refid="structhelios_1_1engine_1_1game_1_1event_1_1GameLoopEventBusGroup" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structhelios_1_1engine_1_1game_1_1event_1_1GameLoopEventBusGroup" kindref="compound">GameLoopEventBusGroup</ref><sp/>{};</highlight></codeline>
+<codeline lineno="22" refid="structhelios_1_1engine_1_1runtime_1_1messaging_1_1event_1_1GameLoopEventBusGroup" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structhelios_1_1engine_1_1runtime_1_1messaging_1_1event_1_1GameLoopEventBusGroup" kindref="compound">GameLoopEventBusGroup</ref><sp/>{};</highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@typedef<sp/>GameLoopEventBus</highlight></codeline>
@@ -105,66 +136,83 @@
 <codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>GameLoopEventBus<sp/>is<sp/>a<sp/>type<sp/>alias<sp/>for<sp/>TypeIndexedDoubleBuffer<sp/>configured</highlight></codeline>
 <codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>with<sp/>a<sp/>dedicated<sp/>index<sp/>space<sp/>for<sp/>game<sp/>loop<sp/>events.<sp/>It<sp/>enables<sp/>systems<sp/>to<sp/>publish</highlight></codeline>
 <codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>events<sp/>during<sp/>their<sp/>update<sp/>phase,<sp/>which<sp/>become<sp/>available<sp/>for<sp/>consumption<sp/>after</highlight></codeline>
-<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>the<sp/>buffer<sp/>swap<sp/>at<sp/>frame<sp/>boundaries.</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>the<sp/>buffer<sp/>swap.</highlight></codeline>
 <codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Events<sp/>are<sp/>pushed<sp/>during<sp/>system<sp/>updates<sp/>and<sp/>read<sp/>in<sp/>subsequent<sp/>phases<sp/>or<sp/>frames,</highlight></codeline>
-<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>enabling<sp/>temporal<sp/>decoupling<sp/>between<sp/>event<sp/>producers<sp/>and<sp/>consumers.</highlight></codeline>
-<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Example<sp/>usage:</highlight></codeline>
-<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```cpp</highlight></codeline>
-<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>//<sp/>Define<sp/>an<sp/>event<sp/>type</highlight></codeline>
-<codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>struct<sp/>CollisionEvent<sp/>{</highlight></codeline>
-<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/>EntityId<sp/>a;</highlight></codeline>
-<codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/>EntityId<sp/>b;</highlight></codeline>
-<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/>vec3f<sp/>contactPoint;</highlight></codeline>
-<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>};</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>##<sp/>Phase/Pass<sp/>Event<sp/>Model</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>GameLoop<sp/>uses<sp/>multiple<sp/>event<sp/>buses<sp/>to<sp/>control<sp/>event<sp/>visibility:</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>**Pass<sp/>Events:**<sp/>Events<sp/>written<sp/>with<sp/>`push()`<sp/>are<sp/>available<sp/>to<sp/>subsequent<sp/>passes</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/>within<sp/>the<sp/>**same<sp/>phase<sp/>only**.<sp/>They<sp/>are<sp/>**always<sp/>cleared**<sp/>at<sp/>the<sp/>end<sp/>of<sp/>the<sp/>phase.</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>**Phase<sp/>Events:**<sp/>Events<sp/>written<sp/>with<sp/>`phasePush()`<sp/>are<sp/>preserved<sp/>across<sp/>phase</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/>boundaries<sp/>and<sp/>available<sp/>in<sp/>subsequent<sp/>phases<sp/>of<sp/>the<sp/>same<sp/>frame.</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>allows<sp/>fine-grained<sp/>control<sp/>over<sp/>event<sp/>propagation:</highlight></codeline>
 <codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>//<sp/>In<sp/>collision<sp/>detection<sp/>system</highlight></codeline>
-<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>eventBus.push&lt;CollisionEvent&gt;(entityA,<sp/>entityB,<sp/>contact);</highlight></codeline>
-<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>//<sp/>At<sp/>frame<sp/>boundary<sp/>(in<sp/>game<sp/>loop)</highlight></codeline>
-<codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>eventBus.swapBuffers();</highlight></codeline>
-<codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>//<sp/>In<sp/>damage<sp/>system<sp/>(reads<sp/>events<sp/>from<sp/>previous<sp/>frame)</highlight></codeline>
-<codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>for<sp/>(const<sp/>auto&amp;<sp/>evt<sp/>:<sp/>eventBus.read&lt;CollisionEvent&gt;())<sp/>{</highlight></codeline>
-<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/>applyDamage(evt.a,<sp/>evt.b);</highlight></codeline>
-<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>}</highlight></codeline>
-<codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```</highlight></codeline>
-<codeline lineno="56"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="57"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>helios::core::data::TypeIndexedDoubleBuffer</highlight></codeline>
-<codeline lineno="58"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="59" refid="namespacehelios_1_1engine_1_1game_1_1event_1a3165d454094258640891c90d0a8ab6d0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1game_1_1event_1a3165d454094258640891c90d0a8ab6d0" kindref="member">GameLoopEventBus</ref><sp/>=<sp/><ref refid="classhelios_1_1core_1_1data_1_1TypeIndexedDoubleBuffer" kindref="compound">helios::core::data::TypeIndexedDoubleBuffer</ref>&lt;</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1core_1_1data_1_1TypeIndexer" kindref="compound">helios::core::data::TypeIndexer&lt;GameLoopEventBusGroup&gt;</ref></highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>&gt;;</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="63"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="64"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@typedef<sp/>GameLoopEventSink</highlight></codeline>
-<codeline lineno="65"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Write-only<sp/>handle<sp/>for<sp/>pushing<sp/>events<sp/>to<sp/>the<sp/>GameLoopEventBus.</highlight></codeline>
-<codeline lineno="66"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>GameLoopEventSink<sp/>provides<sp/>a<sp/>focused<sp/>interface<sp/>for<sp/>event<sp/>producers</highlight></codeline>
-<codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>that<sp/>only<sp/>need<sp/>to<sp/>publish<sp/>events.<sp/>It<sp/>wraps<sp/>the<sp/>GameLoopEventBus<sp/>and<sp/>exposes</highlight></codeline>
-<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>only<sp/>the<sp/>push()<sp/>operation,<sp/>preventing<sp/>accidental<sp/>buffer<sp/>manipulation.</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>┌─────────────────────────────────────────────────────────────┐</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FRAME<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>├─────────────────────────────────────────────────────────────┤</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>│<sp/><sp/>PRE<sp/>PHASE<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>│<sp/><sp/><sp/><sp/>Pass<sp/>1:<sp/>push&lt;InputEvent&gt;()<sp/><sp/><sp/><sp/><sp/>→<sp/>available<sp/>in<sp/>Pass<sp/>2<sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>│<sp/><sp/><sp/><sp/>Pass<sp/>2:<sp/>read&lt;InputEvent&gt;()<sp/><sp/><sp/><sp/><sp/>✓<sp/>works<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>phasePush&lt;SpawnReq&gt;()<sp/><sp/>→<sp/>available<sp/>in<sp/>MAIN<sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>│<sp/><sp/><sp/><sp/>[Phase<sp/>Commit]<sp/>←<sp/>Pass<sp/>events<sp/>CLEARED<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>│<sp/><sp/>MAIN<sp/>PHASE<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>│<sp/><sp/><sp/><sp/>Pass<sp/>1:<sp/>read&lt;InputEvent&gt;()<sp/><sp/><sp/><sp/><sp/>✗<sp/>EMPTY<sp/>(cleared!)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline lineno="57"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>read&lt;SpawnReq&gt;()<sp/><sp/><sp/><sp/><sp/><sp/><sp/>✓<sp/>works<sp/>(phasePush)<sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>push&lt;CollisionEvent&gt;()<sp/>→<sp/>available<sp/>in<sp/>Pass<sp/>2<sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>│<sp/><sp/><sp/><sp/>Pass<sp/>2:<sp/>read&lt;CollisionEvent&gt;()<sp/>✓<sp/>works<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>│<sp/><sp/><sp/><sp/>[Phase<sp/>Commit]<sp/>←<sp/>Pass<sp/>events<sp/>CLEARED<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>│<sp/><sp/>POST<sp/>PHASE<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline lineno="63"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>│<sp/><sp/><sp/><sp/>Pass<sp/>1:<sp/>read&lt;CollisionEvent&gt;()<sp/>✗<sp/>EMPTY<sp/>(cleared!)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline lineno="64"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>read&lt;SpawnReq&gt;()<sp/><sp/><sp/><sp/><sp/><sp/><sp/>✓<sp/>works<sp/>(phasePush)<sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline lineno="65"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>│<sp/><sp/><sp/><sp/>[Phase<sp/>Commit]<sp/>←<sp/>All<sp/>events<sp/>CLEARED<sp/>for<sp/>next<sp/>frame<sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>└─────────────────────────────────────────────────────────────┘</highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>##<sp/>Usage<sp/>Example</highlight></codeline>
 <codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Use<sp/>this<sp/>type<sp/>for<sp/>dependency<sp/>injection<sp/>when<sp/>a<sp/>system<sp/>should<sp/>be<sp/>able<sp/>to<sp/>emit</highlight></codeline>
-<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>events<sp/>but<sp/>should<sp/>not<sp/>have<sp/>access<sp/>to<sp/>swap<sp/>or<sp/>clear<sp/>operations.</highlight></codeline>
-<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Example<sp/>usage:</highlight></codeline>
-<codeline lineno="75"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```cpp</highlight></codeline>
-<codeline lineno="76"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>class<sp/>CollisionSystem<sp/>{</highlight></codeline>
-<codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>public:</highlight></codeline>
-<codeline lineno="78"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/>void<sp/>update(GameLoopEventSink&amp;<sp/>sink)<sp/>{</highlight></codeline>
-<codeline lineno="79"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Can<sp/>only<sp/>push,<sp/>cannot<sp/>swap<sp/>or<sp/>read</highlight></codeline>
-<codeline lineno="80"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sink.push&lt;CollisionEvent&gt;(a,<sp/>b,<sp/>contact);</highlight></codeline>
-<codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>};</highlight></codeline>
-<codeline lineno="83"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```</highlight></codeline>
-<codeline lineno="84"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="85"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>GameLoopEventBus::WriteSink</highlight></codeline>
-<codeline lineno="86"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="87" refid="namespacehelios_1_1engine_1_1game_1_1event_1a77528665b07944a8b49455991d8eb9ad" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1game_1_1event_1a77528665b07944a8b49455991d8eb9ad" kindref="member">GameLoopEventSink</ref><sp/>=<sp/>GameLoopEventBus::WriteSink;</highlight></codeline>
-<codeline lineno="88"><highlight class="normal"></highlight></codeline>
-<codeline lineno="89"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```cpp</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>//<sp/>Define<sp/>an<sp/>event<sp/>type</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>struct<sp/>CollisionEvent<sp/>{</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/>Guid<sp/>entityA;</highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/>Guid<sp/>entityB;</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/>vec3f<sp/>contactPoint;</highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>};</highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>//<sp/>In<sp/>collision<sp/>detection<sp/>system<sp/>(Main<sp/>Phase,<sp/>Pass<sp/>1)</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>//<sp/>Use<sp/>push()<sp/>for<sp/>events<sp/>only<sp/>needed<sp/>within<sp/>this<sp/>phase</highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>eventBus.push&lt;CollisionEvent&gt;(entityA,<sp/>entityB,<sp/>contact);</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="83"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>//<sp/>In<sp/>damage<sp/>system<sp/>(Main<sp/>Phase,<sp/>Pass<sp/>2)<sp/>-<sp/>same<sp/>phase,<sp/>works!</highlight></codeline>
+<codeline lineno="84"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>for<sp/>(const<sp/>auto&amp;<sp/>evt<sp/>:<sp/>eventBus.read&lt;CollisionEvent&gt;())<sp/>{</highlight></codeline>
+<codeline lineno="85"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/>applyDamage(evt.entityA,<sp/>evt.entityB);</highlight></codeline>
+<codeline lineno="86"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>}</highlight></codeline>
+<codeline lineno="87"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="88"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>//<sp/>For<sp/>events<sp/>needed<sp/>in<sp/>subsequent<sp/>phases,<sp/>use<sp/>phasePush()</highlight></codeline>
+<codeline lineno="89"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>eventBus.phasePush&lt;SpawnRequestEvent&gt;(poolId,<sp/>position);</highlight></codeline>
+<codeline lineno="90"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```</highlight></codeline>
+<codeline lineno="91"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="92"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@warning<sp/>Pass<sp/>events<sp/>(`push()`)<sp/>are<sp/>**always<sp/>cleared**<sp/>at<sp/>phase<sp/>boundaries.</highlight></codeline>
+<codeline lineno="93"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>They<sp/>are<sp/>NOT<sp/>available<sp/>in<sp/>subsequent<sp/>phases.<sp/>Use<sp/>`phasePush()`<sp/>for</highlight></codeline>
+<codeline lineno="94"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>events<sp/>that<sp/>must<sp/>survive<sp/>into<sp/>subsequent<sp/>phases.</highlight></codeline>
+<codeline lineno="95"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="96"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>helios::core::buffer::TypeIndexedDoubleBuffer</highlight></codeline>
+<codeline lineno="97"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>UpdateContext<sp/>—<sp/>Provides<sp/>access<sp/>to<sp/>the<sp/>event<sp/>bus<sp/>in<sp/>systems</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>GameLoop<sp/>—<sp/>Manages<sp/>event<sp/>bus<sp/>lifecycle<sp/>and<sp/>commit<sp/>points</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="100" refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event_1a59b7e7d4204d917672591bc8a383d9b4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1event_1a59b7e7d4204d917672591bc8a383d9b4" kindref="member">GameLoopEventBus</ref><sp/>=<sp/><ref refid="classhelios_1_1core_1_1buffer_1_1TypeIndexedDoubleBuffer" kindref="compound">helios::core::buffer::TypeIndexedDoubleBuffer</ref>&lt;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1core_1_1data_1_1TypeIndexer" kindref="compound">helios::core::data::TypeIndexer&lt;GameLoopEventBusGroup&gt;</ref></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>&gt;;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal">}</highlight></codeline>
     </programlisting>
-    <location file="include/helios/engine/game/event/GameLoopEventBus.ixx"/>
+    <location file="include/helios/engine/runtime/messaging/event/GameLoopEventBus.ixx"/>
   </compounddef>
 </doxygen>

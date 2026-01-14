@@ -1,0 +1,991 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8runtime_8world_8GameWorld" kind="module">
+    <compoundname>helios.engine.runtime.world.GameWorld</compoundname>
+    <innerfile refid="GameWorld_8ixx">GameWorld.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" prot="public">helios::engine::runtime::world::GameWorld</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1adaa4c2cd8c0d394d13f5cbdde2aa6b50" prot="private" static="no">
+        <type>std::unordered_map&lt; <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref>, std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> &gt; &gt;</type>
+        <definition>using helios::engine::runtime::world::GameWorld::Map =  std::unordered_map&lt;helios::util::Guid, std::unique_ptr&lt;helios::engine::ecs::GameObject&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>Map</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::Map</qualifiedname>
+        <briefdescription>
+<para>Internal map type for GameObject storage. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="99" column="9" bodyfile="include/helios/engine/runtime/world/GameWorld.ixx" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a5986bb6ed24ed68b3f7888be0daaf16c" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>class MapT</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>Cs</declname>
+            <defname>Cs</defname>
+          </param>
+        </templateparamlist>
+        <type>GameObjectView&lt; MapT, <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref>, Cs... &gt;</type>
+        <definition>using helios::engine::runtime::world::GameWorld::GameObjectRange =  GameObjectView&lt;MapT, helios::engine::ecs::GameObject, Cs...&gt;</definition>
+        <argsstring></argsstring>
+        <name>GameObjectRange</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::GameObjectRange</qualifiedname>
+        <briefdescription>
+<para>Lazy range type for component-filtered GameObject iteration. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This alias wraps GameObjectView with the appropriate map and component types. The view filters GameObjects on-the-fly during iteration, yielding only those that possess all specified component types.</para>
+<para><simplesect kind="note"><para>GameObjectView is included as a .h header in the global module fragment due to MSVC ICE issues when used as a .ixx module interface unit.</para>
+</simplesect>
+<parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>MapT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The map type (const or non-const). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Cs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component types to filter by. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="116" column="9" bodyfile="include/helios/engine/runtime/world/GameWorld.ixx" bodystart="116" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ae6be15dea22ccb29caf122440d8021c7" prot="protected" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref>, std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> &gt; &gt;</type>
+        <definition>std::unordered_map&lt;helios::util::Guid, std::unique_ptr&lt;helios::engine::ecs::GameObject&gt; &gt; helios::engine::runtime::world::GameWorld::gameObjects_</definition>
+        <argsstring></argsstring>
+        <name>gameObjects_</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::gameObjects_</qualifiedname>
+        <briefdescription>
+<para>Hash map storing all active GameObjects, indexed by their Guid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Uses `std::unordered_map` for amortized O(1) average-case lookup. The map owns all GameObjects via `std::unique_ptr`. Worst-case lookup is O(n) in case of hash collisions, but the sequential Guid generation ensures good hash distribution in practice. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="128" column="28" bodyfile="include/helios/engine/runtime/world/GameWorld.ixx" bodystart="128" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a921748d17b3066da3ae1fb9e0fec88ea" compoundref="GameWorld_8ixx" startline="440" endline="442">helios::engine::runtime::world::GameWorld::find</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a9d7394e4bd8c8a2d80b132eaf9a25f32" compoundref="GameWorld_8ixx" startline="461" endline="463">helios::engine::runtime::world::GameWorld::find</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1acc44ae135167516acd2f9488f4486e38" compoundref="GameWorld_8ixx" startline="545" endline="547">helios::engine::runtime::world::GameWorld::gameObjects</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a5cc257dd2ebbd269a60b9891889f4b50" prot="protected" static="yes" mutable="no">
+        <type>const <ref refid="classhelios_1_1util_1_1log_1_1Logger" kindref="compound">helios::util::log::Logger</ref> &amp;</type>
+        <definition>const helios::util::log::Logger&amp; helios::engine::runtime::world::GameWorld::logger_</definition>
+        <argsstring></argsstring>
+        <name>logger_</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::logger_</qualifiedname>
+        <initializer>= <ref refid="classhelios_1_1util_1_1log_1_1LogManager_1a750d8fd5b3ee3678600644756b0631e7" kindref="member">helios::util::log::LogManager::loggerForScope</ref>(
+            <ref refid="OpenGLUniformLocationMap_8ixx_1acbc04f24078582c7d42b2085be5d5750" kindref="member">HELIOS_LOG_SCOPE</ref>)</initializer>
+        <briefdescription>
+<para>The logger used with this <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Defaults to HELIOS_LOG_SCOPE. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="137" column="55" bodyfile="include/helios/engine/runtime/world/GameWorld.ixx" bodystart="137" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a0893b5b23f23de4e093c69f10b5ca2e3" compoundref="GameWorld_8ixx" startline="492" endline="516">helios::engine::runtime::world::GameWorld::clone</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aae88d3ee210e2e4ed03cbba46419734d" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">helios::engine::runtime::world::Manager</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::unique_ptr&lt;helios::engine::runtime::world::Manager&gt; &gt; helios::engine::runtime::world::GameWorld::managers_</definition>
+        <argsstring></argsstring>
+        <name>managers_</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::managers_</qualifiedname>
+        <briefdescription>
+<para>Collection of registered <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> instances. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Managers handle cross-cutting concerns such as object pooling, spawn management, and projectile lifecycle. They are initialized via <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aae71c0fe187189d167cb967181831740" kindref="member">init()</ref> and flushed each frame via <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a72cd30e709f646b83f18c50c97f57b3c" kindref="member">flushManagers()</ref>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="147" column="21" bodyfile="include/helios/engine/runtime/world/GameWorld.ixx" bodystart="147" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a7c60c2fdaba967d2415a3d8b253a425d" compoundref="GameWorld_8ixx" startline="279" endline="290">helios::engine::runtime::world::GameWorld::addManager</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a72cd30e709f646b83f18c50c97f57b3c" compoundref="GameWorld_8ixx" startline="353" endline="357">helios::engine::runtime::world::GameWorld::flushManagers</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aa5461339dafdae850a4327e59a1ba112" compoundref="GameWorld_8ixx" startline="334" endline="343">helios::engine::runtime::world::GameWorld::getManager</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aae71c0fe187189d167cb967181831740" compoundref="GameWorld_8ixx" startline="214" endline="218">helios::engine::runtime::world::GameWorld::init</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a70d324aa0446f3bc86e89b0774bdd963" prot="protected" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Level" kindref="compound">helios::engine::runtime::world::Level</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;helios::engine::runtime::world::Level&gt; helios::engine::runtime::world::GameWorld::level_</definition>
+        <argsstring></argsstring>
+        <name>level_</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::level_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>The current level loaded in the game world. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Can be null if no level is currently active. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="154" column="25" bodyfile="include/helios/engine/runtime/world/GameWorld.ixx" bodystart="154" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a03d2275138a928e04c4bb527ba41830a" compoundref="GameWorld_8ixx" startline="234" endline="236">helios::engine::runtime::world::GameWorld::hasLevel</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a49f6a9068ec4cc0408ded2c8bd60f1ba" compoundref="GameWorld_8ixx" startline="245" endline="247">helios::engine::runtime::world::GameWorld::level</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a8d76de93fc524c7cfe07d506a79130db" compoundref="GameWorld_8ixx" startline="225" endline="227">helios::engine::runtime::world::GameWorld::setLevel</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a89c7d5c9049a9869278d829ff3aa7862" prot="protected" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolRegistry" kindref="compound">helios::engine::runtime::pooling::GameObjectPoolRegistry</ref></type>
+        <definition>helios::engine::runtime::pooling::GameObjectPoolRegistry helios::engine::runtime::world::GameWorld::pools_</definition>
+        <argsstring></argsstring>
+        <name>pools_</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::pools_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Registry of GameObjectPools for entity recycling. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pools enable efficient reuse of GameObjects without repeated allocation/deallocation. Each pool is identified by a GameObjectPoolId. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="162" column="66" bodyfile="include/helios/engine/runtime/world/GameWorld.ixx" bodystart="162" bodyend="162"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aa67736070b2c9a679a6fc1a8e49631bb" compoundref="GameWorld_8ixx" startline="196" endline="205">helios::engine::runtime::world::GameWorld::addPool</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a171b914053b1b8b15fa2465fe97c2a6b" compoundref="GameWorld_8ixx" startline="183" endline="186">helios::engine::runtime::world::GameWorld::pool</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a023df3b9ab0ffdc129c3126a672dff5a" prot="protected" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry" kindref="compound">helios::engine::runtime::pooling::PoolManagerRegistry</ref></type>
+        <definition>helios::engine::runtime::pooling::PoolManagerRegistry helios::engine::runtime::world::GameWorld::poolManagerRegistry_</definition>
+        <argsstring></argsstring>
+        <name>poolManagerRegistry_</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::poolManagerRegistry_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Registry mapping pool IDs to their request handlers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Request handlers process spawn/despawn requests for specific pools, enabling custom lifecycle management per pool type. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="170" column="63" bodyfile="include/helios/engine/runtime/world/GameWorld.ixx" bodystart="170" bodyend="170"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ad90d494c9bdc32f0250dbf4750a4cedd" compoundref="GameWorld_8ixx" startline="321" endline="323">helios::engine::runtime::world::GameWorld::poolRequestHandler</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a9cdad1b5227aa308094d0e77b31050a3" compoundref="GameWorld_8ixx" startline="303" endline="312">helios::engine::runtime::world::GameWorld::registerPoolRequestHandler</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a171b914053b1b8b15fa2465fe97c2a6b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool" kindref="compound">helios::engine::runtime::pooling::GameObjectPool</ref> *</type>
+        <definition>helios::engine::runtime::pooling::GameObjectPool * helios::engine::runtime::world::GameWorld::pool</definition>
+        <argsstring>(helios::engine::core::data::GameObjectPoolId gamePoolId) const</argsstring>
+        <name>pool</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::pool</qualifiedname>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">helios::engine::core::data::GameObjectPoolId</ref></type>
+          <declname>gamePoolId</declname>
+        </param>
+        <briefdescription>
+<para>Retrieves a GameObjectPool by its identifier. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gamePoolId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unique identifier of the pool.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the pool if found, nullptr otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="183" column="59" bodyfile="include/helios/engine/runtime/world/GameWorld.ixx" bodystart="183" bodyend="186"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a89c7d5c9049a9869278d829ff3aa7862" compoundref="GameWorld_8ixx" startline="162" endline="162">helios::engine::runtime::world::GameWorld::pools_</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aa67736070b2c9a679a6fc1a8e49631bb" compoundref="GameWorld_8ixx" startline="196" endline="205">helios::engine::runtime::world::GameWorld::addPool</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager_1a4190bbc58bfeda6fa493d6dcc0221591" compoundref="ProjectilePoolManager_8ixx" startline="301" endline="309">helios::engine::mechanics::combat::manager::ProjectilePoolManager::init</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1manager_1_1SpawnManager_1ad609d041ba078551a13d2a4b979d5162" compoundref="SpawnManager_8ixx" startline="238" endline="244">helios::engine::mechanics::spawn::manager::SpawnManager::init</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aa67736070b2c9a679a6fc1a8e49631bb" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool" kindref="compound">helios::engine::runtime::pooling::GameObjectPool</ref> *</type>
+        <definition>helios::engine::runtime::pooling::GameObjectPool * helios::engine::runtime::world::GameWorld::addPool</definition>
+        <argsstring>(helios::engine::core::data::GameObjectPoolId gamePoolId, std::unique_ptr&lt; helios::engine::runtime::pooling::GameObjectPool &gt; gameObjectPool)</argsstring>
+        <name>addPool</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::addPool</qualifiedname>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">helios::engine::core::data::GameObjectPoolId</ref></type>
+          <declname>gamePoolId</declname>
+        </param>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool" kindref="compound">helios::engine::runtime::pooling::GameObjectPool</ref> &gt;</type>
+          <declname>gameObjectPool</declname>
+        </param>
+        <briefdescription>
+<para>Registers a new GameObjectPool with the world. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gamePoolId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unique identifier for the pool. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>gameObjectPool</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The pool instance. Ownership is transferred.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the added pool, or nullptr on failure. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="196" column="59" bodyfile="include/helios/engine/runtime/world/GameWorld.ixx" bodystart="196" bodyend="205"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a171b914053b1b8b15fa2465fe97c2a6b" compoundref="GameWorld_8ixx" startline="183" endline="186">helios::engine::runtime::world::GameWorld::pool</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a89c7d5c9049a9869278d829ff3aa7862" compoundref="GameWorld_8ixx" startline="162" endline="162">helios::engine::runtime::world::GameWorld::pools_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aae71c0fe187189d167cb967181831740" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::world::GameWorld::init</definition>
+        <argsstring>()</argsstring>
+        <name>init</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::init</qualifiedname>
+        <briefdescription>
+<para>Initializes all registered managers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Should be called after all managers have been added and before the game loop starts. Each manager&apos;s <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aae71c0fe187189d167cb967181831740" kindref="member">init()</ref> method is invoked with a reference to this <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="214" column="14" bodyfile="include/helios/engine/runtime/world/GameWorld.ixx" bodystart="214" bodyend="218"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aae88d3ee210e2e4ed03cbba46419734d" compoundref="GameWorld_8ixx" startline="147">helios::engine::runtime::world::GameWorld::managers_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a8d76de93fc524c7cfe07d506a79130db" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::world::GameWorld::setLevel</definition>
+        <argsstring>(std::unique_ptr&lt; helios::engine::runtime::world::Level &gt; level) noexcept</argsstring>
+        <name>setLevel</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::setLevel</qualifiedname>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Level" kindref="compound">helios::engine::runtime::world::Level</ref> &gt;</type>
+          <declname>level</declname>
+        </param>
+        <briefdescription>
+<para>Sets the current level for the game world. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Unique pointer to the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Level" kindref="compound">Level</ref> instance. Ownership is transferred to the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="225" column="14" bodyfile="include/helios/engine/runtime/world/GameWorld.ixx" bodystart="225" bodyend="227"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a49f6a9068ec4cc0408ded2c8bd60f1ba" compoundref="GameWorld_8ixx" startline="245" endline="247">helios::engine::runtime::world::GameWorld::level</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a70d324aa0446f3bc86e89b0774bdd963" compoundref="GameWorld_8ixx" startline="154">helios::engine::runtime::world::GameWorld::level_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a03d2275138a928e04c4bb527ba41830a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::runtime::world::GameWorld::hasLevel</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>hasLevel</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::hasLevel</qualifiedname>
+        <briefdescription>
+<para>Checks if a level is currently loaded. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if a level is set, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="234" column="15" bodyfile="include/helios/engine/runtime/world/GameWorld.ixx" bodystart="234" bodyend="236"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a70d324aa0446f3bc86e89b0774bdd963" compoundref="GameWorld_8ixx" startline="154">helios::engine::runtime::world::GameWorld::level_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a49f6a9068ec4cc0408ded2c8bd60f1ba" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Level" kindref="compound">helios::engine::runtime::world::Level</ref> &amp;</type>
+        <definition>const helios::engine::runtime::world::Level &amp; helios::engine::runtime::world::GameWorld::level</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>level</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::level</qualifiedname>
+        <briefdescription>
+<para>Retrieves the currently loaded level. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Reference to the active <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Level" kindref="compound">Level</ref>.</para>
+</simplesect>
+<simplesect kind="warning"><para>Calling this method when <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a03d2275138a928e04c4bb527ba41830a" kindref="member">hasLevel()</ref> returns false results in undefined behavior. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="245" column="54" bodyfile="include/helios/engine/runtime/world/GameWorld.ixx" bodystart="245" bodyend="247"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a70d324aa0446f3bc86e89b0774bdd963" compoundref="GameWorld_8ixx" startline="154">helios::engine::runtime::world::GameWorld::level_</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a8d76de93fc524c7cfe07d506a79130db" compoundref="GameWorld_8ixx" startline="225" endline="227">helios::engine::runtime::world::GameWorld::setLevel</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ab53994280aeec233c1dd91f02a09e589" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool helios::engine::runtime::world::GameWorld::hasManager</definition>
+        <argsstring>() const</argsstring>
+        <name>hasManager</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::hasManager</qualifiedname>
+    <requiresclause>std::is_base_of_v&lt;<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">helios::engine::runtime::world::Manager</ref>, T&gt;    </requiresclause>
+        <briefdescription>
+<para>Checks if a <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> of the specified type is registered. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> type to check for.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if a <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> of type T is registered, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="258" column="15" bodyfile="include/helios/engine/runtime/world/GameWorld.ixx" bodystart="258" bodyend="260"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aa5461339dafdae850a4327e59a1ba112" compoundref="GameWorld_8ixx" startline="334" endline="343">helios::engine::runtime::world::GameWorld::getManager</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a7c60c2fdaba967d2415a3d8b253a425d" compoundref="GameWorld_8ixx" startline="279" endline="290">helios::engine::runtime::world::GameWorld::addManager</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a7c60c2fdaba967d2415a3d8b253a425d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>T &amp;</type>
+        <definition>T &amp; helios::engine::runtime::world::GameWorld::addManager</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>addManager</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::addManager</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+    <requiresclause>std::is_base_of_v&lt;<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">helios::engine::runtime::world::Manager</ref>, T&gt;    </requiresclause>
+        <briefdescription>
+<para>Adds and registers a <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> of the specified type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Creates a new <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> instance and adds it to the world. The manager&apos;s onAdd() callback is invoked after registration.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> type to add. Must derive from <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Constructor argument types.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Arguments forwarded to the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> constructor.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to the newly added <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref>.</para>
+</simplesect>
+<simplesect kind="pre"><para>No <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> of type T is already registered. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="279" column="11" bodyfile="include/helios/engine/runtime/world/GameWorld.ixx" bodystart="279" bodyend="290"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ab53994280aeec233c1dd91f02a09e589" compoundref="GameWorld_8ixx" startline="258" endline="260">helios::engine::runtime::world::GameWorld::hasManager</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aae88d3ee210e2e4ed03cbba46419734d" compoundref="GameWorld_8ixx" startline="147">helios::engine::runtime::world::GameWorld::managers_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a9cdad1b5227aa308094d0e77b31050a3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::runtime::world::GameWorld::registerPoolRequestHandler</definition>
+        <argsstring>(const helios::engine::core::data::GameObjectPoolId gameObjectPoolId, helios::engine::runtime::pooling::PoolRequestHandler &amp;poolManager)</argsstring>
+        <name>registerPoolRequestHandler</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::registerPoolRequestHandler</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">helios::engine::core::data::GameObjectPoolId</ref></type>
+          <declname>gameObjectPoolId</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolRequestHandler" kindref="compound">helios::engine::runtime::pooling::PoolRequestHandler</ref> &amp;</type>
+          <declname>poolManager</declname>
+        </param>
+        <briefdescription>
+<para>Registers a PoolRequestHandler for a specific pool. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Associates a handler with a pool ID. The handler processes spawn and despawn requests for entities in that pool.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameObjectPoolId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The pool identifier to associate with the handler. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>poolManager</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the handler to register.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if registration succeeded, false if already registered. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="303" column="14" bodyfile="include/helios/engine/runtime/world/GameWorld.ixx" bodystart="303" bodyend="312"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a023df3b9ab0ffdc129c3126a672dff5a" compoundref="GameWorld_8ixx" startline="170" endline="170">helios::engine::runtime::world::GameWorld::poolManagerRegistry_</references>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager_1a4190bbc58bfeda6fa493d6dcc0221591" compoundref="ProjectilePoolManager_8ixx" startline="301" endline="309">helios::engine::mechanics::combat::manager::ProjectilePoolManager::init</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1manager_1_1SpawnManager_1ad609d041ba078551a13d2a4b979d5162" compoundref="SpawnManager_8ixx" startline="238" endline="244">helios::engine::mechanics::spawn::manager::SpawnManager::init</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ad90d494c9bdc32f0250dbf4750a4cedd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolRequestHandler" kindref="compound">helios::engine::runtime::pooling::PoolRequestHandler</ref> *</type>
+        <definition>helios::engine::runtime::pooling::PoolRequestHandler * helios::engine::runtime::world::GameWorld::poolRequestHandler</definition>
+        <argsstring>(helios::engine::core::data::GameObjectPoolId gameObjectPoolId)</argsstring>
+        <name>poolRequestHandler</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::poolRequestHandler</qualifiedname>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">helios::engine::core::data::GameObjectPoolId</ref></type>
+          <declname>gameObjectPoolId</declname>
+        </param>
+        <briefdescription>
+<para>Retrieves the PoolRequestHandler for a specific pool. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameObjectPoolId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The pool identifier.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the handler if found, nullptr otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="321" column="62" bodyfile="include/helios/engine/runtime/world/GameWorld.ixx" bodystart="321" bodyend="323"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a023df3b9ab0ffdc129c3126a672dff5a" compoundref="GameWorld_8ixx" startline="170" endline="170">helios::engine::runtime::world::GameWorld::poolManagerRegistry_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aa5461339dafdae850a4327e59a1ba112" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * helios::engine::runtime::world::GameWorld::getManager</definition>
+        <argsstring>() const</argsstring>
+        <name>getManager</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::getManager</qualifiedname>
+    <requiresclause>std::is_base_of_v&lt;<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">helios::engine::runtime::world::Manager</ref>, T&gt;    </requiresclause>
+        <briefdescription>
+<para>Retrieves a registered <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> by type. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> type to retrieve. Must derive from <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> if found, nullptr otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="334" column="12" bodyfile="include/helios/engine/runtime/world/GameWorld.ixx" bodystart="334" bodyend="343"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aae88d3ee210e2e4ed03cbba46419734d" compoundref="GameWorld_8ixx" startline="147">helios::engine::runtime::world::GameWorld::managers_</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ab53994280aeec233c1dd91f02a09e589" compoundref="GameWorld_8ixx" startline="258" endline="260">helios::engine::runtime::world::GameWorld::hasManager</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a72cd30e709f646b83f18c50c97f57b3c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::world::GameWorld::flushManagers</definition>
+        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext)</argsstring>
+        <name>flushManagers</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::flushManagers</qualifiedname>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Flushes all registered managers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Called during the game loop to allow managers to process their queued requests (e.g., spawn requests, pool returns).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s update context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="353" column="14" bodyfile="include/helios/engine/runtime/world/GameWorld.ixx" bodystart="353" bodyend="357"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aae88d3ee210e2e4ed03cbba46419734d" compoundref="GameWorld_8ixx" startline="147">helios::engine::runtime::world::GameWorld::managers_</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1aa8aeafec5ba655ccacde623ad32f40ec" compoundref="GameLoop_8ixx" startline="137" endline="146">helios::engine::runtime::gameloop::GameLoop::phaseCommit</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a28a53dcdcfb8880867db35145d88d3e2" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> *</type>
+        <definition>helios::engine::ecs::GameObject * helios::engine::runtime::world::GameWorld::addGameObject</definition>
+        <argsstring>(std::unique_ptr&lt; helios::engine::ecs::GameObject &gt; gameObject)</argsstring>
+        <name>addGameObject</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::addGameObject</qualifiedname>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> &gt;</type>
+          <declname>gameObject</declname>
+        </param>
+        <briefdescription>
+<para>Adds a GameObject to the world and transfers ownership. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameObject</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The GameObject to add. Ownership is transferred to the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref>.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the added GameObject, or nullptr if addition failed.</para>
+</simplesect>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>GameObject*</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Non-owning pointer to the added object (valid until removed) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nullptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If gameObject was null or a GameObject with the same Guid already exists</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>The <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> takes ownership of the GameObject. The returned pointer remains valid until the GameObject is removed from the world. </para>
+</simplesect>
+<simplesect kind="note"><para>Attempting to add a nullptr or a GameObject with a duplicate Guid will fail, return nullptr, and log a warning. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="376" column="42"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a0893b5b23f23de4e093c69f10b5ca2e3" compoundref="GameWorld_8ixx" startline="492" endline="516">helios::engine::runtime::world::GameWorld::clone</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a83857f38d3ffb10560f863107707929d" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> *</type>
+        <definition>helios::engine::ecs::GameObject * helios::engine::runtime::world::GameWorld::find</definition>
+        <argsstring>(const helios::util::Guid &amp;guid)</argsstring>
+        <name>find</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref> &amp;</type>
+          <declname>guid</declname>
+        </param>
+        <briefdescription>
+<para>Finds a GameObject by its unique identifier. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>guid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unique identifier of the GameObject to find.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the GameObject if found, nullptr otherwise.</para>
+</simplesect>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>GameObject*</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Non-owning pointer to the found object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nullptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If no GameObject with the specified Guid exists</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>This is the non-const overload. Use the const overload for read-only access. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="390" column="42"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolFacade_1a395eedea23ef36ef472e143aae66a9ab" compoundref="GameObjectPoolFacade_8ixx" startline="84" endline="107">helios::engine::runtime::pooling::GameObjectPoolFacade::acquire</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1CommandBuffer_1accac0953fe00e2fe4c480334bdd826ec" compoundref="CommandBuffer_8ixx" startline="260" endline="296">helios::engine::runtime::messaging::command::CommandBuffer::flush</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolFacade_1ad6867efdaa4e047d365869e4e367b5c1" compoundref="GameObjectPoolFacade_8ixx" startline="51" endline="65">helios::engine::runtime::pooling::GameObjectPoolFacade::release</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a921748d17b3066da3ae1fb9e0fec88ea" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>Cs</declname>
+            <defname>Cs</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto helios::engine::runtime::world::GameWorld::find</definition>
+        <argsstring>(GameObjectFilter query=GameObjectFilter::Active|GameObjectFilter::ComponentEnabled)</argsstring>
+        <name>find</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::find</qualifiedname>
+        <param>
+          <type>GameObjectFilter</type>
+          <declname>query</declname>
+          <defval>GameObjectFilter::Active|GameObjectFilter::ComponentEnabled</defval>
+        </param>
+        <briefdescription>
+<para>Finds all GameObjects that have the specified component types. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns a lazy range that filters GameObjects on-the-fly during iteration. Only GameObjects possessing all specified component types are yielded.</para>
+<para>The query is controlled by a `GameObjectFilter` bitmask:</para>
+<para>| Filter | Effect | |--------|--------| | `Active` | Only `obj-&gt;isActive() == true` | | `Inactive` | Only `obj-&gt;isActive() == false` | | `ComponentEnabled` | Only objects where queried components are enabled | | `ComponentDisabled` | Only objects where queried components are disabled |</para>
+<para>Filters can be combined: `Active | ComponentEnabled` (default).</para>
+<para>Example usage: ```cpp // Range-based for loop with default filter (Active + ComponentEnabled) for (auto* obj : gameWorld.find&lt;Move2DComponent, SceneNodeComponent&gt;()) { auto* move = obj-&gt;get&lt;Move2DComponent&gt;(); move-&gt;setVelocity({1.0f, 0.0f, 0.0f}); }</para>
+<para>// Using each() for direct component access (structured bindings) for (auto [obj, move] : gameWorld.find&lt;Move2DComponent&gt;().each()) { move.get().setVelocity({1.0f, 0.0f, 0.0f}); }</para>
+<para>// Custom filter: find inactive objects for (auto* obj : gameWorld.find&lt;HealthComponent&gt;(GameObjectFilter::Inactive)) { // Process inactive entities (e.g., respawn logic) } ```</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Cs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component types to filter by. GameObjects must have all types.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>query</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Filter bitmask controlling which entities are included. Default: `Active | ComponentEnabled`.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A GameObjectView object that can be iterated over.</para>
+</simplesect>
+<simplesect kind="see"><para>GameObjectFilter </para>
+</simplesect>
+<simplesect kind="see"><para>GameObjectView </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="440" column="15" bodyfile="include/helios/engine/runtime/world/GameWorld.ixx" bodystart="440" bodyend="442"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ae6be15dea22ccb29caf122440d8021c7" compoundref="GameWorld_8ixx" startline="128">helios::engine::runtime::world::GameWorld::gameObjects_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a9d7394e4bd8c8a2d80b132eaf9a25f32" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>Cs</declname>
+            <defname>Cs</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto helios::engine::runtime::world::GameWorld::find</definition>
+        <argsstring>(GameObjectFilter query=GameObjectFilter::Active|GameObjectFilter::ComponentEnabled) const</argsstring>
+        <name>find</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::find</qualifiedname>
+        <param>
+          <type>GameObjectFilter</type>
+          <declname>query</declname>
+          <defval>GameObjectFilter::Active|GameObjectFilter::ComponentEnabled</defval>
+        </param>
+        <briefdescription>
+<para>Finds all GameObjects that have the specified component types (const overload). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Const version of the component-based find. Returns const pointers to GameObjects. See the non-const overload for detailed usage and filter documentation.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Cs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The component types to filter by. GameObjects must have all types.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>query</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Filter bitmask controlling which entities are included. Default: `Active | ComponentEnabled`.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A const GameObjectView object that can be iterated over.</para>
+</simplesect>
+<simplesect kind="see"><para>GameObjectFilter </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="461" column="15" bodyfile="include/helios/engine/runtime/world/GameWorld.ixx" bodystart="461" bodyend="463"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ae6be15dea22ccb29caf122440d8021c7" compoundref="GameWorld_8ixx" startline="128">helios::engine::runtime::world::GameWorld::gameObjects_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a37bad8da78a527039499a39def9d084c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> *</type>
+        <definition>const helios::engine::ecs::GameObject * helios::engine::runtime::world::GameWorld::find</definition>
+        <argsstring>(const helios::util::Guid &amp;guid) const</argsstring>
+        <name>find</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref> &amp;</type>
+          <declname>guid</declname>
+        </param>
+        <briefdescription>
+<para>Finds a GameObject by its unique identifier (const overload). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>guid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unique identifier of the GameObject to find.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Const pointer to the GameObject if found, nullptr otherwise.</para>
+</simplesect>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>const</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>GameObject* Non-owning const pointer to the found object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nullptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If no GameObject with the specified Guid exists</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>This overload is used when the <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> is accessed via const reference. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="477" column="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a0893b5b23f23de4e093c69f10b5ca2e3" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> *</type>
+        <definition>helios::engine::ecs::GameObject * helios::engine::runtime::world::GameWorld::clone</definition>
+        <argsstring>(helios::engine::ecs::GameObject &amp;gameObject)</argsstring>
+        <name>clone</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::clone</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> &amp;</type>
+          <declname>gameObject</declname>
+        </param>
+        <briefdescription>
+<para>Creates a clone of an existing GameObject. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Clones all Cloneable components from the source GameObject. The cloned GameObject is initially inactive and receives a new Guid. Non-cloneable components are skipped with a warning.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameObject</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The source GameObject to clone.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the newly created clone, or nullptr on failure.</para>
+</simplesect>
+<simplesect kind="note"><para>The clone is added to the world in an inactive state. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+<para><xrefsect id="todo_1_todo000012"><xreftitle>Todo</xreftitle><xrefdescription><para>Optional ClonePolicy where rules are specified? </para>
+</xrefdescription></xrefsect></para>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="492" column="42" bodyfile="include/helios/engine/runtime/world/GameWorld.ixx" bodystart="492" bodyend="516"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a28a53dcdcfb8880867db35145d88d3e2">helios::engine::runtime::world::GameWorld::addGameObject</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1GameObject_1a36c315dfb3091d39f9a50307d763ec7b" compoundref="GameObject_8ixx" startline="374" endline="376">helios::engine::ecs::GameObject::components</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a5cc257dd2ebbd269a60b9891889f4b50" compoundref="GameWorld_8ixx" startline="137">helios::engine::runtime::world::GameWorld::logger_</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1factory_1_1GameObjectFactory_1ad334258a72af933b4b834b9592b4f7d3" compoundref="GameObjectFactory_8ixx" startline="88" endline="103">helios::engine::runtime::factory::GameObjectFactory::fillPool</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1abd79ce03a1a9cda53d24be4236e7ba5c" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> &gt;</type>
+        <definition>std::unique_ptr&lt; helios::engine::ecs::GameObject &gt; helios::engine::runtime::world::GameWorld::removeGameObject</definition>
+        <argsstring>(const helios::engine::ecs::GameObject &amp;gameObject)</argsstring>
+        <name>removeGameObject</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::removeGameObject</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> &amp;</type>
+          <declname>gameObject</declname>
+        </param>
+        <briefdescription>
+<para>Removes a GameObject from the world and transfers ownership to the caller. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameObject</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the GameObject to remove.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Unique pointer to the removed GameObject, or nullptr if not found.</para>
+</simplesect>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>std::unique_ptr&lt;GameObject&gt;</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ownership of the removed object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nullptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the GameObject was not found in the world</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>After successful removal, all non-owning pointers to the GameObject become invalid unless the caller maintains the returned unique_ptr. </para>
+</simplesect>
+<simplesect kind="note"><para>Attempting to remove a GameObject that doesn&apos;t exist returns nullptr and logs a warning. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="534" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1acc44ae135167516acd2f9488f4486e38" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::unordered_map&lt; <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref>, std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> &gt; &gt; &amp;</type>
+        <definition>const std::unordered_map&lt; helios::util::Guid, std::unique_ptr&lt; helios::engine::ecs::GameObject &gt; &gt; &amp; helios::engine::runtime::world::GameWorld::gameObjects</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>gameObjects</name>
+        <qualifiedname>helios::engine::runtime::world::GameWorld::gameObjects</qualifiedname>
+        <briefdescription>
+<para>Retrieves a const ref to the map of all active GameObjects. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A const reference to the internal map of GameObjects, indexed by Guid.</para>
+</simplesect>
+<simplesect kind="warning"><para>Modifying the map directly (e.g. adding/removing elements) bypasses <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref>&apos;s management logic and should be avoided. Use <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a28a53dcdcfb8880867db35145d88d3e2" kindref="member">addGameObject()</ref> and <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1abd79ce03a1a9cda53d24be4236e7ba5c" kindref="member">removeGameObject()</ref> instead. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="545" column="35" bodyfile="include/helios/engine/runtime/world/GameWorld.ixx" bodystart="545" bodyend="547"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1ae6be15dea22ccb29caf122440d8021c7" compoundref="GameWorld_8ixx" startline="128">helios::engine::runtime::world::GameWorld::gameObjects_</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/engine/runtime/world/GameWorld.ixx" line="16" column="15"/>
+  </compounddef>
+</doxygen>

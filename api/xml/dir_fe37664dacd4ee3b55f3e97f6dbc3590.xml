@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_fe37664dacd4ee3b55f3e97f6dbc3590" kind="dir">
+    <compoundname>include/helios/engine/runtime/messaging/command</compoundname>
+    <innerfile refid="helios_2engine_2runtime_2messaging_2command_2__module_8ixx">_module.ixx</innerfile>
+    <innerfile refid="CommandBuffer_8ixx">CommandBuffer.ixx</innerfile>
+    <innerfile refid="TargetedCommand_8ixx">TargetedCommand.ixx</innerfile>
+    <innerfile refid="TargetedCommandDispatcher_8ixx">TargetedCommandDispatcher.ixx</innerfile>
+    <innerfile refid="TypedTargetedCommandDispatcher_8ixx">TypedTargetedCommandDispatcher.ixx</innerfile>
+    <innerfile refid="TypedWorldCommandDispatcher_8ixx">TypedWorldCommandDispatcher.ixx</innerfile>
+    <innerfile refid="WorldCommand_8ixx">WorldCommand.ixx</innerfile>
+    <innerfile refid="WorldCommandDispatcher_8ixx">WorldCommandDispatcher.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_fe37664dacd4ee3b55f3e97f6dbc3590_1autotoc_md230">
+<title>helios::engine::runtime::messaging::command</title><para>Command pattern implementation for deferred action execution.</para>
+<para>This module provides the Command pattern implementation for the helios engine. Commands encapsulate game actions that can be buffered and executed at a later point in the game loop, enabling decoupled input handling and action processing.</para>
+<para><bold>Components:</bold></para>
+<para><itemizedlist>
+<listitem><para><bold>TargetedCommand</bold> - Abstract base for commands targeting a specific GameObject.</para>
+</listitem><listitem><para><bold>WorldCommand</bold> - Abstract base for commands operating on the entire GameWorld.</para>
+</listitem><listitem><para><bold>CommandBuffer</bold> - Queue for buffering and batch-executing commands.</para>
+</listitem><listitem><para><bold>TargetedCommandDispatcher</bold> - Abstract dispatcher interface for TargetedCommand handling.</para>
+</listitem><listitem><para><bold>WorldCommandDispatcher</bold> - Abstract dispatcher interface for WorldCommand handling.</para>
+</listitem><listitem><para><bold>TypedTargetedCommandDispatcher</bold> - Type-safe dispatcher template for specific TargetedCommand types.</para>
+</listitem><listitem><para><bold>TypedWorldCommandDispatcher</bold> - Type-safe dispatcher template for specific WorldCommand types.</para>
+</listitem></itemizedlist>
+</para>
+<para><bold>Execution order:</bold></para>
+<para>During <computeroutput>CommandBuffer::flush()</computeroutput>: 1. <bold>WorldCommands</bold> are processed first (global game actions like spawning). 2. <bold>TargetedCommands</bold> are processed second (per-entity actions like movement).</para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="include/helios/engine/runtime/messaging/command/"/>
+  </compounddef>
+</doxygen>

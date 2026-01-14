@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_06ee9275ee912daca8cd477154f66702" kind="dir">
+    <compoundname>include/helios/engine/mechanics/spawn/systems</compoundname>
+    <innerfile refid="helios_2engine_2mechanics_2spawn_2systems_2__module_8ixx">_module.ixx</innerfile>
+    <innerfile refid="GameObjectSpawnSystem_8ixx">GameObjectSpawnSystem.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_06ee9275ee912daca8cd477154f66702_1autotoc_md139">
+<title>helios::engine::mechanics::spawn::systems</title><para>Systems for spawn lifecycle management within the game loop.</para>
+<para>This namespace contains the GameObjectSpawnSystem which integrates spawning into the game loop by evaluating conditions and emitting spawn commands.</para>
+</sect1>
+<sect1 id="dir_06ee9275ee912daca8cd477154f66702_1autotoc_md140">
+<title>Systems</title><para><table rows="2" cols="2"><row>
+<entry thead="yes"><para>System  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>GameObjectSpawnSystem</computeroutput>  </para>
+</entry><entry thead="no"><para>Evaluates SpawnConditions and emits SpawnCommands  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_06ee9275ee912daca8cd477154f66702_1autotoc_md141">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>condition<sp/>=<sp/>std::make_unique&lt;TimerSpawnCondition&gt;(2.0f);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>system<sp/>=<sp/>std::make_unique&lt;GameObjectSpawnSystem&gt;(poolId,<sp/>std::move(condition));</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">gameLoop.phase(PhaseType::Main)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addSystem(std::move(system));</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="include/helios/engine/mechanics/spawn/systems/"/>
+  </compounddef>
+</doxygen>

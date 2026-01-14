@@ -1,0 +1,379 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8runtime_8pooling_8GameObjectPool" kind="module">
+    <compoundname>helios.engine.runtime.pooling.GameObjectPool</compoundname>
+    <innerfile refid="GameObjectPool_8ixx">GameObjectPool.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool" prot="public">helios::engine::runtime::pooling::GameObjectPool</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a1b6402445fd9dac5901832a72cf8fa7c" prot="protected" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref>, size_t &gt;</type>
+        <definition>std::unordered_map&lt;helios::util::Guid, size_t&gt; helios::engine::runtime::pooling::GameObjectPool::activeIndex_</definition>
+        <argsstring></argsstring>
+        <name>activeIndex_</name>
+        <qualifiedname>helios::engine::runtime::pooling::GameObjectPool::activeIndex_</qualifiedname>
+        <briefdescription>
+<para>Maps active GameObject Guids to their index in activeGameObjects_. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Enables O(1) lookup for release operations. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/pooling/GameObjectPool.ixx" line="49" column="28" bodyfile="include/helios/engine/runtime/pooling/GameObjectPool.ixx" bodystart="49" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1afb2b70dfef45864ea3bfd1e148542007" compoundref="GameObjectPool_8ixx" startline="123" endline="137">helios::engine::runtime::pooling::GameObjectPool::acquire</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1aaba699ebdbc101329c7324addd9afe38" compoundref="GameObjectPool_8ixx" startline="174" endline="202">helios::engine::runtime::pooling::GameObjectPool::release</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a5fc0afe6ecd0e0d923fd294496f1115e" compoundref="GameObjectPool_8ixx" startline="215" endline="236">helios::engine::runtime::pooling::GameObjectPool::releaseAndRemove</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a713727c90eca4836c2310195dd9aff43" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref> &gt;</type>
+        <definition>std::vector&lt;helios::util::Guid&gt; helios::engine::runtime::pooling::GameObjectPool::activeGameObjects_</definition>
+        <argsstring></argsstring>
+        <name>activeGameObjects_</name>
+        <qualifiedname>helios::engine::runtime::pooling::GameObjectPool::activeGameObjects_</qualifiedname>
+        <briefdescription>
+<para>List of Guids for currently active (in-use) GameObjects. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/pooling/GameObjectPool.ixx" line="54" column="21" bodyfile="include/helios/engine/runtime/pooling/GameObjectPool.ixx" bodystart="54" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1afb2b70dfef45864ea3bfd1e148542007" compoundref="GameObjectPool_8ixx" startline="123" endline="137">helios::engine::runtime::pooling::GameObjectPool::acquire</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a7103aa91a43d728efa94eb2a9c55cb44" compoundref="GameObjectPool_8ixx" startline="244" endline="246">helios::engine::runtime::pooling::GameObjectPool::activeCount</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a7eef46f5767afbd4e92e38a7938c0750" compoundref="GameObjectPool_8ixx" startline="84" endline="91">helios::engine::runtime::pooling::GameObjectPool::GameObjectPool</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1aaba699ebdbc101329c7324addd9afe38" compoundref="GameObjectPool_8ixx" startline="174" endline="202">helios::engine::runtime::pooling::GameObjectPool::release</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a5fc0afe6ecd0e0d923fd294496f1115e" compoundref="GameObjectPool_8ixx" startline="215" endline="236">helios::engine::runtime::pooling::GameObjectPool::releaseAndRemove</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a379daf214aeac51f8c4e9835357e5924" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref> &gt;</type>
+        <definition>std::vector&lt;helios::util::Guid&gt; helios::engine::runtime::pooling::GameObjectPool::inactiveGameObjects_</definition>
+        <argsstring></argsstring>
+        <name>inactiveGameObjects_</name>
+        <qualifiedname>helios::engine::runtime::pooling::GameObjectPool::inactiveGameObjects_</qualifiedname>
+        <briefdescription>
+<para>List of Guids for currently inactive (available) GameObjects. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/pooling/GameObjectPool.ixx" line="59" column="21" bodyfile="include/helios/engine/runtime/pooling/GameObjectPool.ixx" bodystart="59" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1afb2b70dfef45864ea3bfd1e148542007" compoundref="GameObjectPool_8ixx" startline="123" endline="137">helios::engine::runtime::pooling::GameObjectPool::acquire</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a60e9a358d1f385eb9f058013ce441f35" compoundref="GameObjectPool_8ixx" startline="149" endline="159">helios::engine::runtime::pooling::GameObjectPool::addInactive</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a7eef46f5767afbd4e92e38a7938c0750" compoundref="GameObjectPool_8ixx" startline="84" endline="91">helios::engine::runtime::pooling::GameObjectPool::GameObjectPool</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a0a2c82c68a0214cf96b7b627c53d4716" compoundref="GameObjectPool_8ixx" startline="253" endline="255">helios::engine::runtime::pooling::GameObjectPool::inactiveCount</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1aaba699ebdbc101329c7324addd9afe38" compoundref="GameObjectPool_8ixx" startline="174" endline="202">helios::engine::runtime::pooling::GameObjectPool::release</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a266a99fd8a31439417b7a1c4ed759c42" prot="protected" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t helios::engine::runtime::pooling::GameObjectPool::poolSize_</definition>
+        <argsstring></argsstring>
+        <name>poolSize_</name>
+        <qualifiedname>helios::engine::runtime::pooling::GameObjectPool::poolSize_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>The maximum number of objects this pool manages. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/pooling/GameObjectPool.ixx" line="64" column="16" bodyfile="include/helios/engine/runtime/pooling/GameObjectPool.ixx" bodystart="64" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a7eef46f5767afbd4e92e38a7938c0750" compoundref="GameObjectPool_8ixx" startline="84" endline="91">helios::engine::runtime::pooling::GameObjectPool::GameObjectPool</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a81b5e2ed58b5db8445480bcd458db5c7" compoundref="GameObjectPool_8ixx" startline="108" endline="110">helios::engine::runtime::pooling::GameObjectPool::size</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a22a7227e1f59facdd4eeecc6de3f9ddc" prot="protected" static="no" mutable="no">
+        <type>const <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref></type>
+        <definition>const helios::util::Guid helios::engine::runtime::pooling::GameObjectPool::guid_</definition>
+        <argsstring></argsstring>
+        <name>guid_</name>
+        <qualifiedname>helios::engine::runtime::pooling::GameObjectPool::guid_</qualifiedname>
+        <briefdescription>
+<para>Unique identifier for this pool instance. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/pooling/GameObjectPool.ixx" line="70" column="34" bodyfile="include/helios/engine/runtime/pooling/GameObjectPool.ixx" bodystart="70" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a7eef46f5767afbd4e92e38a7938c0750" compoundref="GameObjectPool_8ixx" startline="84" endline="91">helios::engine::runtime::pooling::GameObjectPool::GameObjectPool</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a2589e780d738d2a5f2c6d2a47a19abc7" compoundref="GameObjectPool_8ixx" startline="99" endline="101">helios::engine::runtime::pooling::GameObjectPool::guid</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a7eef46f5767afbd4e92e38a7938c0750" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::runtime::pooling::GameObjectPool::GameObjectPool</definition>
+        <argsstring>(size_t poolSize)</argsstring>
+        <name>GameObjectPool</name>
+        <qualifiedname>helios::engine::runtime::pooling::GameObjectPool::GameObjectPool</qualifiedname>
+        <param>
+          <type>size_t</type>
+          <declname>poolSize</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool" kindref="compound">GameObjectPool</ref> with the specified capacity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pre-allocates internal storage for the given pool size. The pool starts empty; use `addInactive()` or a factory to populate it.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>poolSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum number of GameObjects this pool can manage. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/pooling/GameObjectPool.ixx" line="84" column="18" bodyfile="include/helios/engine/runtime/pooling/GameObjectPool.ixx" bodystart="84" bodyend="91"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a713727c90eca4836c2310195dd9aff43" compoundref="GameObjectPool_8ixx" startline="54">helios::engine::runtime::pooling::GameObjectPool::activeGameObjects_</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a22a7227e1f59facdd4eeecc6de3f9ddc" compoundref="GameObjectPool_8ixx" startline="70">helios::engine::runtime::pooling::GameObjectPool::guid_</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a379daf214aeac51f8c4e9835357e5924" compoundref="GameObjectPool_8ixx" startline="59">helios::engine::runtime::pooling::GameObjectPool::inactiveGameObjects_</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a266a99fd8a31439417b7a1c4ed759c42" compoundref="GameObjectPool_8ixx" startline="64">helios::engine::runtime::pooling::GameObjectPool::poolSize_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a2589e780d738d2a5f2c6d2a47a19abc7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref></type>
+        <definition>helios::util::Guid helios::engine::runtime::pooling::GameObjectPool::guid</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>guid</name>
+        <qualifiedname>helios::engine::runtime::pooling::GameObjectPool::guid</qualifiedname>
+        <briefdescription>
+<para>Returns the unique identifier of this pool. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The Guid assigned to this pool instance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/pooling/GameObjectPool.ixx" line="99" column="29" bodyfile="include/helios/engine/runtime/pooling/GameObjectPool.ixx" bodystart="99" bodyend="101"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a22a7227e1f59facdd4eeecc6de3f9ddc" compoundref="GameObjectPool_8ixx" startline="70">helios::engine::runtime::pooling::GameObjectPool::guid_</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1afb2b70dfef45864ea3bfd1e148542007" compoundref="GameObjectPool_8ixx" startline="123" endline="137">helios::engine::runtime::pooling::GameObjectPool::acquire</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a60e9a358d1f385eb9f058013ce441f35" compoundref="GameObjectPool_8ixx" startline="149" endline="159">helios::engine::runtime::pooling::GameObjectPool::addInactive</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1aaba699ebdbc101329c7324addd9afe38" compoundref="GameObjectPool_8ixx" startline="174" endline="202">helios::engine::runtime::pooling::GameObjectPool::release</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a5fc0afe6ecd0e0d923fd294496f1115e" compoundref="GameObjectPool_8ixx" startline="215" endline="236">helios::engine::runtime::pooling::GameObjectPool::releaseAndRemove</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a81b5e2ed58b5db8445480bcd458db5c7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t helios::engine::runtime::pooling::GameObjectPool::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>helios::engine::runtime::pooling::GameObjectPool::size</qualifiedname>
+        <briefdescription>
+<para>Returns the maximum capacity of this pool. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The pool size specified at construction. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/pooling/GameObjectPool.ixx" line="108" column="17" bodyfile="include/helios/engine/runtime/pooling/GameObjectPool.ixx" bodystart="108" bodyend="110"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a266a99fd8a31439417b7a1c4ed759c42" compoundref="GameObjectPool_8ixx" startline="64">helios::engine::runtime::pooling::GameObjectPool::poolSize_</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a60e9a358d1f385eb9f058013ce441f35" compoundref="GameObjectPool_8ixx" startline="149" endline="159">helios::engine::runtime::pooling::GameObjectPool::addInactive</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1factory_1_1GameObjectFactory_1ad334258a72af933b4b834b9592b4f7d3" compoundref="GameObjectFactory_8ixx" startline="88" endline="103">helios::engine::runtime::factory::GameObjectFactory::fillPool</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1afb2b70dfef45864ea3bfd1e148542007" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::runtime::pooling::GameObjectPool::acquire</definition>
+        <argsstring>(helios::util::Guid &amp;guid)</argsstring>
+        <name>acquire</name>
+        <qualifiedname>helios::engine::runtime::pooling::GameObjectPool::acquire</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref> &amp;</type>
+          <declname>guid</declname>
+        </param>
+        <briefdescription>
+<para>Acquires an inactive GameObject from the pool. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Removes a Guid from the inactive list and adds it to the active tracking structures. The caller is responsible for activating the actual GameObject in the GameWorld.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">guid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Receives the Guid of the acquired object on success.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if an object was acquired, false if the pool is exhausted. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/pooling/GameObjectPool.ixx" line="123" column="15" bodyfile="include/helios/engine/runtime/pooling/GameObjectPool.ixx" bodystart="123" bodyend="137"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a713727c90eca4836c2310195dd9aff43" compoundref="GameObjectPool_8ixx" startline="54">helios::engine::runtime::pooling::GameObjectPool::activeGameObjects_</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a1b6402445fd9dac5901832a72cf8fa7c" compoundref="GameObjectPool_8ixx" startline="49">helios::engine::runtime::pooling::GameObjectPool::activeIndex_</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a2589e780d738d2a5f2c6d2a47a19abc7" compoundref="GameObjectPool_8ixx" startline="99" endline="101">helios::engine::runtime::pooling::GameObjectPool::guid</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a379daf214aeac51f8c4e9835357e5924" compoundref="GameObjectPool_8ixx" startline="59">helios::engine::runtime::pooling::GameObjectPool::inactiveGameObjects_</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolFacade_1a395eedea23ef36ef472e143aae66a9ab" compoundref="GameObjectPoolFacade_8ixx" startline="84" endline="107">helios::engine::runtime::pooling::GameObjectPoolFacade::acquire</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a60e9a358d1f385eb9f058013ce441f35" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::runtime::pooling::GameObjectPool::addInactive</definition>
+        <argsstring>(const helios::util::Guid &amp;guid)</argsstring>
+        <name>addInactive</name>
+        <qualifiedname>helios::engine::runtime::pooling::GameObjectPool::addInactive</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref> &amp;</type>
+          <declname>guid</declname>
+        </param>
+        <briefdescription>
+<para>Adds a Guid to the inactive list without acquiring it. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Used during pool initialization to register pre-created GameObjects. Fails if the pool is already at capacity.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>guid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Guid of the GameObject to add.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if added successfully, false if pool is full. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/pooling/GameObjectPool.ixx" line="149" column="14" bodyfile="include/helios/engine/runtime/pooling/GameObjectPool.ixx" bodystart="149" bodyend="159"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a7103aa91a43d728efa94eb2a9c55cb44" compoundref="GameObjectPool_8ixx" startline="244" endline="246">helios::engine::runtime::pooling::GameObjectPool::activeCount</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a2589e780d738d2a5f2c6d2a47a19abc7" compoundref="GameObjectPool_8ixx" startline="99" endline="101">helios::engine::runtime::pooling::GameObjectPool::guid</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a0a2c82c68a0214cf96b7b627c53d4716" compoundref="GameObjectPool_8ixx" startline="253" endline="255">helios::engine::runtime::pooling::GameObjectPool::inactiveCount</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a379daf214aeac51f8c4e9835357e5924" compoundref="GameObjectPool_8ixx" startline="59">helios::engine::runtime::pooling::GameObjectPool::inactiveGameObjects_</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a81b5e2ed58b5db8445480bcd458db5c7" compoundref="GameObjectPool_8ixx" startline="108" endline="110">helios::engine::runtime::pooling::GameObjectPool::size</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1factory_1_1GameObjectFactory_1ad334258a72af933b4b834b9592b4f7d3" compoundref="GameObjectFactory_8ixx" startline="88" endline="103">helios::engine::runtime::factory::GameObjectFactory::fillPool</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1aaba699ebdbc101329c7324addd9afe38" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::runtime::pooling::GameObjectPool::release</definition>
+        <argsstring>(const helios::util::Guid &amp;guid)</argsstring>
+        <name>release</name>
+        <qualifiedname>helios::engine::runtime::pooling::GameObjectPool::release</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref> &amp;</type>
+          <declname>guid</declname>
+        </param>
+        <briefdescription>
+<para>Releases a GameObject back to the pool by its Guid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Validates the Guid against both the GameWorld and the active tracking list. Uses swap-and-pop for O(1) removal from the active list. The object is marked inactive and added to the inactive list for future acquisition.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>guid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unique identifier of the GameObject to release.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the object was successfully released, false if the Guid was not found in the GameWorld or not tracked as active. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/pooling/GameObjectPool.ixx" line="174" column="14" bodyfile="include/helios/engine/runtime/pooling/GameObjectPool.ixx" bodystart="174" bodyend="202"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a713727c90eca4836c2310195dd9aff43" compoundref="GameObjectPool_8ixx" startline="54">helios::engine::runtime::pooling::GameObjectPool::activeGameObjects_</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a1b6402445fd9dac5901832a72cf8fa7c" compoundref="GameObjectPool_8ixx" startline="49">helios::engine::runtime::pooling::GameObjectPool::activeIndex_</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a2589e780d738d2a5f2c6d2a47a19abc7" compoundref="GameObjectPool_8ixx" startline="99" endline="101">helios::engine::runtime::pooling::GameObjectPool::guid</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a379daf214aeac51f8c4e9835357e5924" compoundref="GameObjectPool_8ixx" startline="59">helios::engine::runtime::pooling::GameObjectPool::inactiveGameObjects_</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolFacade_1ad6867efdaa4e047d365869e4e367b5c1" compoundref="GameObjectPoolFacade_8ixx" startline="51" endline="65">helios::engine::runtime::pooling::GameObjectPoolFacade::release</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a5fc0afe6ecd0e0d923fd294496f1115e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::runtime::pooling::GameObjectPool::releaseAndRemove</definition>
+        <argsstring>(const helios::util::Guid &amp;guid)</argsstring>
+        <name>releaseAndRemove</name>
+        <qualifiedname>helios::engine::runtime::pooling::GameObjectPool::releaseAndRemove</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref> &amp;</type>
+          <declname>guid</declname>
+        </param>
+        <briefdescription>
+<para>Releases and permanently removes a GameObject from the pool. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Unlike `release()`, this method does not add the Guid back to the inactive list. Use this when a pooled object is being destroyed rather than recycled.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>guid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unique identifier of the GameObject to remove.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if removed successfully, false if Guid was not active. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/pooling/GameObjectPool.ixx" line="215" column="14" bodyfile="include/helios/engine/runtime/pooling/GameObjectPool.ixx" bodystart="215" bodyend="236"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a713727c90eca4836c2310195dd9aff43" compoundref="GameObjectPool_8ixx" startline="54">helios::engine::runtime::pooling::GameObjectPool::activeGameObjects_</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a1b6402445fd9dac5901832a72cf8fa7c" compoundref="GameObjectPool_8ixx" startline="49">helios::engine::runtime::pooling::GameObjectPool::activeIndex_</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a2589e780d738d2a5f2c6d2a47a19abc7" compoundref="GameObjectPool_8ixx" startline="99" endline="101">helios::engine::runtime::pooling::GameObjectPool::guid</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolFacade_1a395eedea23ef36ef472e143aae66a9ab" compoundref="GameObjectPoolFacade_8ixx" startline="84" endline="107">helios::engine::runtime::pooling::GameObjectPoolFacade::acquire</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a7103aa91a43d728efa94eb2a9c55cb44" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t helios::engine::runtime::pooling::GameObjectPool::activeCount</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>activeCount</name>
+        <qualifiedname>helios::engine::runtime::pooling::GameObjectPool::activeCount</qualifiedname>
+        <briefdescription>
+<para>Returns the number of active game objects. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The number of active game objects. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/pooling/GameObjectPool.ixx" line="244" column="17" bodyfile="include/helios/engine/runtime/pooling/GameObjectPool.ixx" bodystart="244" bodyend="246"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a713727c90eca4836c2310195dd9aff43" compoundref="GameObjectPool_8ixx" startline="54">helios::engine::runtime::pooling::GameObjectPool::activeGameObjects_</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a60e9a358d1f385eb9f058013ce441f35" compoundref="GameObjectPool_8ixx" startline="149" endline="159">helios::engine::runtime::pooling::GameObjectPool::addInactive</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1factory_1_1GameObjectFactory_1ad334258a72af933b4b834b9592b4f7d3" compoundref="GameObjectFactory_8ixx" startline="88" endline="103">helios::engine::runtime::factory::GameObjectFactory::fillPool</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a0a2c82c68a0214cf96b7b627c53d4716" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t helios::engine::runtime::pooling::GameObjectPool::inactiveCount</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>inactiveCount</name>
+        <qualifiedname>helios::engine::runtime::pooling::GameObjectPool::inactiveCount</qualifiedname>
+        <briefdescription>
+<para>Returns the number of inactive game objects. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The number of inactive game objects. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/pooling/GameObjectPool.ixx" line="253" column="17" bodyfile="include/helios/engine/runtime/pooling/GameObjectPool.ixx" bodystart="253" bodyend="255"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a379daf214aeac51f8c4e9835357e5924" compoundref="GameObjectPool_8ixx" startline="59">helios::engine::runtime::pooling::GameObjectPool::inactiveGameObjects_</references>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_1a60e9a358d1f385eb9f058013ce441f35" compoundref="GameObjectPool_8ixx" startline="149" endline="159">helios::engine::runtime::pooling::GameObjectPool::addInactive</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1factory_1_1GameObjectFactory_1ad334258a72af933b4b834b9592b4f7d3" compoundref="GameObjectFactory_8ixx" startline="88" endline="103">helios::engine::runtime::factory::GameObjectFactory::fillPool</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/engine/runtime/pooling/GameObjectPool.ixx" line="16" column="15"/>
+  </compounddef>
+</doxygen>

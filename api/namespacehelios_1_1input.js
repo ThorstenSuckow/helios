@@ -15,5 +15,6 @@ var namespacehelios_1_1input =
       ] ]
     ] ],
     [ "InputAdapter", "classhelios_1_1input_1_1InputAdapter.html", "classhelios_1_1input_1_1InputAdapter" ],
-    [ "InputManager", "classhelios_1_1input_1_1InputManager.html", "classhelios_1_1input_1_1InputManager" ]
+    [ "InputManager", "classhelios_1_1input_1_1InputManager.html", "classhelios_1_1input_1_1InputManager" ],
+    [ "InputSnapshot", "classhelios_1_1input_1_1InputSnapshot.html", "classhelios_1_1input_1_1InputSnapshot" ]
 ];

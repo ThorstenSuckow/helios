@@ -17,7 +17,7 @@ import helios.engine.modules.physics.motion.components.Move2DComponent;
 import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
 import helios.engine.mechanics.combat.components.Aim2DComponent;
 
-import helios.engine.mechanics.combat.ProjectileSpawnRequest;
+import helios.engine.mechanics.combat.requests.ProjectileSpawnRequest;
           
 
 import helios.engine.runtime.messaging.command.TargetedCommandDispatcher;
@@ -84,7 +84,7 @@ export namespace helios::engine::mechanics::combat::dispatcher {
 
             const float throttle = 1.0f;
 
-            helios::engine::mechanics::combat::ProjectileSpawnRequest shootRequest{
+            helios::engine::mechanics::combat::requests::ProjectileSpawnRequest shootRequest{
                 t2c->translation(),
                 a2c->direction().toVec3(),
                 throttle,

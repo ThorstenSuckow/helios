@@ -1,15 +1,21 @@
-# helios::engine::modules::input
+# helios::engine::mechanics::input
 
-Input handling components and systems for game entities.
+Input handling systems for game entities.
 
+## Overview
 
-This module provides input-related functionality for the game layer, including components that translate device input into game commands.
+This module provides input-related functionality for the game layer, including systems that translate device input (gamepads, keyboards) into game commands.
 
+## Submodules
+
+| Submodule | Purpose |
+|-----------|---------|
+| `systems/` | Input processing systems (TwinStickInputSystem) |
 
 ---
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::modules::input
-@brief Input handling components and systems for game entities.
-@details This module provides input-related functionality for the game layer, including components that translate device input into game commands.
+@namespace helios::engine::mechanics::input
+@brief Input handling systems for game entities.
+@details This module provides input-related functionality for the game layer, including systems that translate device input into game commands.
 </p></details>

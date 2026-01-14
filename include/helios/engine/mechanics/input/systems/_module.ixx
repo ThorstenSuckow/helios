@@ -1,8 +1,8 @@
 /**
  * @file _module.ixx
- * @brief Aggregate module for helios::engine::modules::input::components namespace.
+ * @brief Aggregate module for helios::engine::mechanics::input::systems namespace.
  */
 
-export module helios.engine.modules.input.components;
+export module helios.engine.mechanics.input.systems;
 
 export import helios.engine.mechanics.input.systems.TwinStickInputSystem;

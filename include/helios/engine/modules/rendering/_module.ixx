@@ -5,4 +5,5 @@
 
 export module helios.engine.modules.rendering;
 
-export import helios.engine.modules.rendering.components;
+export import helios.engine.modules.rendering.renderable;
+export import helios.engine.modules.rendering.model;

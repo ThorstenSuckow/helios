@@ -6,13 +6,13 @@ module;
 
 #include <cmath>
 
-export module helios.engine.game.spatial.transform.components.TranslationStateComponent;
+export module helios.engine.modules.spatial.transform.components.TranslationStateComponent;
 
 import helios.engine.ecs.CloneableComponent;
 
 import helios.math;
 
-export namespace helios::engine::game::spatial::transform::components {
+export namespace helios::engine::modules::spatial::transform::components {
 
     /**
      * @brief Component that holds the current translation (position) state.

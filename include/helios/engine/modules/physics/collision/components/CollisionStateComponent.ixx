@@ -8,16 +8,16 @@ module;
 #include <iostream>
 #include <optional>
 
-export module helios.engine.game.physics.collision.components.CollisionStateComponent;
+export module helios.engine.modules.physics.collision.components.CollisionStateComponent;
 
-import helios.engine.game.physics.collision.types.CollisionBehavior;
+import helios.engine.modules.physics.collision.types.CollisionBehavior;
 
 import helios.engine.ecs.CloneableComponent;
 import helios.engine.ecs.GameObject;
 import helios.util.Guid;
 import helios.math;
 
-export namespace helios::engine::game::physics::collision::components {
+export namespace helios::engine::modules::physics::collision::components {
 
     /**
      * @class CollisionStateComponent
@@ -60,7 +60,7 @@ export namespace helios::engine::game::physics::collision::components {
         /**
          * @brief The collision behavior to apply.
          */
-        helios::engine::game::physics::collision::types::CollisionBehavior collisionBehavior_;
+        helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior_;
 
         /**
          * @brief Flag indicating whether a collision was detected this frame.
@@ -100,7 +100,7 @@ export namespace helios::engine::game::physics::collision::components {
             helios::math::vec3f contact,
             const bool isSolid,
             const bool isTrigger,
-            const helios::engine::game::physics::collision::types::CollisionBehavior collisionBehavior,
+            const helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior,
             const bool isCollisionReporter,
             std::optional<helios::util::Guid> other = std::nullopt) {
 
@@ -200,7 +200,7 @@ export namespace helios::engine::game::physics::collision::components {
          *
          * @return The CollisionBehavior enum value.
          */
-        [[nodiscard]] helios::engine::game::physics::collision::types::CollisionBehavior collisionBehavior() const noexcept {
+        [[nodiscard]] helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior() const noexcept {
             return collisionBehavior_;
         }
 

@@ -4,7 +4,7 @@
  */
 module;
 
-export module helios.engine.game.spatial.transform.components.ScaleComponent;
+export module helios.engine.modules.spatial.transform.components.ScaleComponent;
 
 import helios.engine.ecs.GameObject;
 import helios.math.types;
@@ -13,7 +13,7 @@ import helios.core.spatial.Transform;
 import helios.core.units.Unit;
 
 
-export namespace helios::engine::game::spatial::transform::components {
+export namespace helios::engine::modules::spatial::transform::components {
 
     /**
      * @brief Component that defines the physical dimensions (scale) of an entity.

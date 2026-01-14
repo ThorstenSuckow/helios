@@ -481,4 +481,4 @@ export namespace helios::engine::ecs {
     };
 
 
-} // namespace helios::engine::game
+} // namespace helios::engine::modules

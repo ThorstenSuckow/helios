@@ -8,7 +8,7 @@ export module helios.engine.mechanics.spawn.dispatcher.DespawnCommandDispatcher;
 
 import helios.engine.mechanics.spawn.commands.DespawnCommand;
 
-import helios.engine.game.pool.components.PoolIdComponent;
+import helios.engine.modules.pool.components.PoolIdComponent;
 
 import helios.engine.mechanics.spawn.requests.DespawnRequest;
           

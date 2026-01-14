@@ -1,10 +1,10 @@
 /**
  * @file _module.ixx
- * @brief Aggregate module for helios::engine::game::scene namespace.
+ * @brief Aggregate module for helios::engine::modules::scene namespace.
  */
 
 
-export module helios.engine.game.scene;
+export module helios.engine.modules.scene;
 
-export import helios.engine.game.scene.components;
-export import helios.engine.game.scene.systems;
+export import helios.engine.modules.scene.components;
+export import helios.engine.modules.scene.systems;

@@ -13,8 +13,8 @@ export module helios.engine.mechanics.combat.dispatcher.ShootCommandDispatcher;
 import helios.engine.mechanics.combat.manager.ProjectilePoolManager;
 import helios.engine.mechanics.combat.commands.ShootCommand;
 
-import helios.engine.game.physics.motion.components.Move2DComponent;
-import helios.engine.game.spatial.transform.components.TranslationStateComponent;
+import helios.engine.modules.physics.motion.components.Move2DComponent;
+import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
 import helios.engine.mechanics.combat.components.Aim2DComponent;
 
 import helios.engine.mechanics.combat.ProjectileSpawnRequest;
@@ -76,8 +76,8 @@ export namespace helios::engine::mechanics::combat::dispatcher {
             const helios::engine::mechanics::combat::commands::ShootCommand& command
         ) noexcept override {
 
-            auto* m2d = gameObject.get<helios::engine::game::physics::motion::components::Move2DComponent>();
-            auto* t2c = gameObject.get<helios::engine::game::spatial::transform::components::TranslationStateComponent>();
+            auto* m2d = gameObject.get<helios::engine::modules::physics::motion::components::Move2DComponent>();
+            auto* t2c = gameObject.get<helios::engine::modules::spatial::transform::components::TranslationStateComponent>();
             auto* a2c = gameObject.get<helios::engine::mechanics::combat::components::Aim2DComponent>();
 
             assert(m2d != nullptr && t2c != nullptr && a2c!= nullptr && "Unexpected nullptr when dispatching");

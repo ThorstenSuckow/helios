@@ -11,7 +11,7 @@ export module helios.engine.mechanics.bounds.components.LevelBoundsBehaviorCompo
 
 import helios.engine.ecs.CloneableComponent;
 
-import helios.engine.game.physics.collision.types.CollisionBehavior;
+import helios.engine.modules.physics.collision.types.CollisionBehavior;
 
 export namespace helios::engine::mechanics::bounds::components {
 
@@ -43,7 +43,7 @@ export namespace helios::engine::mechanics::bounds::components {
          * @details Defines how the entity reacts when hitting level bounds
          * (e.g., Bounce, Reflect, Clamp, Despawn).
          */
-        helios::engine::game::physics::collision::types::CollisionBehavior collisionBehavior_ = helios::engine::game::physics::collision::types::CollisionBehavior::Bounce;
+        helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior_ = helios::engine::modules::physics::collision::types::CollisionBehavior::Bounce;
 
     public:
 
@@ -61,7 +61,7 @@ export namespace helios::engine::mechanics::bounds::components {
          * @param collisionBehavior The collision behavior type (default: Reflect).
          */
         explicit LevelBoundsBehaviorComponent(
-            const helios::engine::game::physics::collision::types::CollisionBehavior collisionBehavior = helios::engine::game::physics::collision::types::CollisionBehavior::Reflect) :
+            const helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior = helios::engine::modules::physics::collision::types::CollisionBehavior::Reflect) :
         collisionBehavior_(collisionBehavior){}
 
         /**
@@ -88,7 +88,7 @@ export namespace helios::engine::mechanics::bounds::components {
          *
          * @return The collision behavior (e.g., Bounce, Reflect, Clamp, Despawn).
          */
-        [[nodiscard]] helios::engine::game::physics::collision::types::CollisionBehavior collisionBehavior() const noexcept {
+        [[nodiscard]] helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior() const noexcept {
             return collisionBehavior_;
         }
 

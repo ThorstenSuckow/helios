@@ -4,15 +4,15 @@
  */
 module;
 
-export module helios.engine.game.physics.motion.commands.Move2DCommand;
+export module helios.engine.modules.physics.motion.commands.Move2DCommand;
 
 import helios.engine.runtime.messaging.command.TargetedCommand;
 import helios.engine.ecs.GameObject;
 import helios.math.types;
-import helios.engine.game.physics.motion.components.Move2DComponent;
-import helios.engine.game.physics.motion.components.DirectionComponent;
+import helios.engine.modules.physics.motion.components.Move2DComponent;
+import helios.engine.modules.physics.motion.components.DirectionComponent;
 
-export namespace helios::engine::game::physics::motion::commands {
+export namespace helios::engine::modules::physics::motion::commands {
 
     /**
      * @brief Command that applies 2D directional movement to a GameObject.
@@ -26,7 +26,7 @@ export namespace helios::engine::game::physics::motion::commands {
      *       command to have any effect.
      *
      * @see helios::engine::runtime::messaging::command::Command
-     * @see helios::engine::game::physics::motion::components::Move2DComponent
+     * @see helios::engine::modules::physics::motion::components::Move2DComponent
      */
     class Move2DCommand : public helios::engine::runtime::messaging::command::TargetedCommand {
 
@@ -63,7 +63,7 @@ export namespace helios::engine::game::physics::motion::commands {
          */
         void execute(helios::engine::ecs::GameObject& gameObject) const noexcept override {
 
-            auto* moveComponent2D = gameObject.get<helios::engine::game::physics::motion::components::Move2DComponent>();
+            auto* moveComponent2D = gameObject.get<helios::engine::modules::physics::motion::components::Move2DComponent>();
 
             if (moveComponent2D) {
                 moveComponent2D->move(direction_.toVec3(), speedFactor_);

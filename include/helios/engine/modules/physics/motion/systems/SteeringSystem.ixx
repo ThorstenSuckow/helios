@@ -9,21 +9,21 @@ module;
 #include <cassert>
 #include <cmath>
 
-export module helios.engine.game.physics.motion.systems.SteeringSystem;
+export module helios.engine.modules.physics.motion.systems.SteeringSystem;
 
 
 import helios.engine.ecs.System;
 import helios.math;
 
 import helios.engine.runtime.world.GameWorld;
-import helios.engine.game.physics.motion.components.SteeringComponent;
-import helios.engine.game.spatial.transform.components.TransformComponent;
-import helios.engine.game.physics.motion.components.DirectionComponent;
-import helios.engine.game.physics.motion.components.RotationStateComponent;
+import helios.engine.modules.physics.motion.components.SteeringComponent;
+import helios.engine.modules.spatial.transform.components.TransformComponent;
+import helios.engine.modules.physics.motion.components.DirectionComponent;
+import helios.engine.modules.physics.motion.components.RotationStateComponent;
 
 import helios.engine.runtime.world.UpdateContext;
 
-export namespace helios::engine::game::physics::motion::systems {
+export namespace helios::engine::modules::physics::motion::systems {
 
     /**
      * @brief System that processes heading and rotation physics.
@@ -47,7 +47,7 @@ export namespace helios::engine::game::physics::motion::systems {
          * @param deltaTime Time elapsed since last frame in seconds.
          */
         void updateHeading(
-            helios::engine::game::physics::motion::components::SteeringComponent* cmp,
+            helios::engine::modules::physics::motion::components::SteeringComponent* cmp,
             float deltaTime
         ) noexcept {
 
@@ -119,9 +119,9 @@ export namespace helios::engine::game::physics::motion::systems {
 
 
             for (auto [entity, hc, rsc, dc] : gameWorld_->find<
-                helios::engine::game::physics::motion::components::SteeringComponent,
-                helios::engine::game::physics::motion::components::RotationStateComponent,
-                helios::engine::game::physics::motion::components::DirectionComponent
+                helios::engine::modules::physics::motion::components::SteeringComponent,
+                helios::engine::modules::physics::motion::components::RotationStateComponent,
+                helios::engine::modules::physics::motion::components::DirectionComponent
             >().each()) {
 
 

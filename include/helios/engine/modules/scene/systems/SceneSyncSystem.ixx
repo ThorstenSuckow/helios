@@ -7,7 +7,7 @@ module;
 #include <helios/engine/ecs/query/GameObjectView.h>
 #include <cassert>
 
-export module helios.engine.game.scene.systems.SceneSyncSystem;
+export module helios.engine.modules.scene.systems.SceneSyncSystem;
 
 import helios.scene.Scene;
 
@@ -15,10 +15,10 @@ import helios.engine.runtime.world.GameWorld;
 import helios.engine.ecs.System;
 import helios.engine.runtime.world.UpdateContext;
 
-import helios.engine.game.scene.components.SceneNodeComponent;
-import helios.engine.game.spatial.transform.components.TransformComponent;
+import helios.engine.modules.scene.components.SceneNodeComponent;
+import helios.engine.modules.spatial.transform.components.TransformComponent;
 
-export namespace helios::engine::game::systems::scene {
+export namespace helios::engine::modules::systems::scene {
 
     /**
      * @brief System that synchronizes TransformComponents with SceneNodes.
@@ -54,8 +54,8 @@ export namespace helios::engine::game::systems::scene {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
             auto view = gameWorld_->find<
-                helios::engine::game::spatial::transform::components::TransformComponent,
-                helios::engine::game::scene::components::SceneNodeComponent
+                helios::engine::modules::spatial::transform::components::TransformComponent,
+                helios::engine::modules::scene::components::SceneNodeComponent
             >();
 
             // First pass: push local transforms from TransformComponent to SceneNode

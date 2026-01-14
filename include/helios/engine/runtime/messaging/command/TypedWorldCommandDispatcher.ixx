@@ -12,7 +12,7 @@ import helios.engine.runtime.messaging.command.WorldCommand;
 import helios.engine.runtime.messaging.command.WorldCommandDispatcher;
 
 
-export namespace helios::engine::game {
+export namespace helios::engine::modules {
     class GameWorld;
 }
 

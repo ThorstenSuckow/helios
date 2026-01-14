@@ -6,7 +6,7 @@ module;
 
 #include <helios/engine/ecs/query/GameObjectView.h>
 
-export module helios.engine.game.spatial.transform.systems.ScaleSystem;
+export module helios.engine.modules.spatial.transform.systems.ScaleSystem;
 
 import helios.engine.ecs.System;
 import helios.math;
@@ -17,12 +17,12 @@ import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 
-import helios.engine.game.spatial.transform.components.ScaleComponent;
-import helios.engine.game.spatial.transform.components.TransformComponent;
+import helios.engine.modules.spatial.transform.components.ScaleComponent;
+import helios.engine.modules.spatial.transform.components.TransformComponent;
 
-import helios.engine.game.rendering.model.components.ModelAabbComponent;
+import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 
-export namespace helios::engine::game::spatial::transform::systems {
+export namespace helios::engine::modules::spatial::transform::systems {
 
     /**
      * @brief System that applies scaling to entities based on their ScaleComponent.
@@ -62,9 +62,9 @@ export namespace helios::engine::game::spatial::transform::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
             for (auto [entity, mab, sc, tc] : gameWorld_->find<
-                helios::engine::game::rendering::model::components::ModelAabbComponent,
-                helios::engine::game::spatial::transform::components::ScaleComponent,
-                helios::engine::game::spatial::transform::components::TransformComponent
+                helios::engine::modules::rendering::model::components::ModelAabbComponent,
+                helios::engine::modules::spatial::transform::components::ScaleComponent,
+                helios::engine::modules::spatial::transform::components::TransformComponent
             >().each()) {
 
                 if (!sc->isDirty()) {

@@ -1,4 +1,4 @@
-# helios::engine::game::pool
+# helios::engine::modules::pool
 
 Object pool components for entity recycling.
 
@@ -15,7 +15,7 @@ This module provides components related to object pooling, enabling efficient en
 ## Usage
 
 ```cpp
-import helios.engine.game.pool.components.PoolIdComponent;
+import helios.engine.modules.pool.components.PoolIdComponent;
 
 // During pool population
 gameObject->add<PoolIdComponent>(bulletPoolId);
@@ -38,7 +38,7 @@ if (pic) {
 
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::game::pool
+@namespace helios::engine::modules::pool
 @brief Object pool components for entity recycling.
 @details This module provides components related to object pooling, enabling efficient entity reuse without repeated allocation/deallocation. Includes PoolIdComponent for identifying which pool a GameObject belongs to.
 </p></details>

@@ -6,17 +6,17 @@ module;
 
 #include <helios/engine/ecs/query/GameObjectView.h>
 
-export module helios.engine.game.spatial.transform.systems.postproc.TransformClearSystem;
+export module helios.engine.modules.spatial.transform.systems.postproc.TransformClearSystem;
 
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.ecs.System;
 import helios.engine.runtime.world.UpdateContext;
 
-import helios.engine.game.scene.components.SceneNodeComponent;
-import helios.engine.game.spatial.transform.components.TransformComponent;
+import helios.engine.modules.scene.components.SceneNodeComponent;
+import helios.engine.modules.spatial.transform.components.TransformComponent;
 
 
-export namespace helios::engine::game::spatial::transform::systems::postproc {
+export namespace helios::engine::modules::spatial::transform::systems::postproc {
 
     /**
      * @brief System that clears the dirty state of TransformComponents at the end of a frame.
@@ -38,7 +38,7 @@ export namespace helios::engine::game::spatial::transform::systems::postproc {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
             for (auto [entity, tc] : gameWorld_->find<
-                helios::engine::game::spatial::transform::components::TransformComponent
+                helios::engine::modules::spatial::transform::components::TransformComponent
                 >().each()) {
 
                 tc->clearDirty();

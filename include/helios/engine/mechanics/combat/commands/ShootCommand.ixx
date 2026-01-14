@@ -10,7 +10,7 @@ import helios.engine.runtime.messaging.command.TargetedCommand;
 import helios.engine.ecs.GameObject;
 import helios.math.types;
 import helios.engine.mechanics.combat.components.ShootComponent;
-import helios.engine.game.physics.motion.components.Move2DComponent;
+import helios.engine.modules.physics.motion.components.Move2DComponent;
 
 import helios.engine.runtime.messaging.command.TypedTargetedCommandDispatcher;
 import helios.engine.runtime.messaging.command.TargetedCommandDispatcher;
@@ -95,7 +95,7 @@ export namespace helios::engine::mechanics::combat::commands {
             auto* shootComponent = gameObject.get<helios::engine::mechanics::combat::components::ShootComponent>();
 
             if (shootComponent) {
-                auto* m2d = gameObject.get<helios::engine::game::physics::motion::components::Move2DComponent>();
+                auto* m2d = gameObject.get<helios::engine::modules::physics::motion::components::Move2DComponent>();
 
                 shootComponent->shoot(
                     intensity_,

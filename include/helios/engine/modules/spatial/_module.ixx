@@ -1,7 +1,7 @@
 /**
  * @file _module.ixx
- * @brief Aggregate module for helios::engine::game::spatial namespace.
+ * @brief Aggregate module for helios::engine::modules::spatial namespace.
  */
-export module helios.engine.game.spatial;
+export module helios.engine.modules.spatial;
 
-export import helios.engine.game.spatial.transform;
+export import helios.engine.modules.spatial.transform;

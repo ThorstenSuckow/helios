@@ -1,4 +1,4 @@
-# helios::engine::game::physics::motion
+# helios::engine::modules::physics::motion
 
 Motion physics components and systems.
 
@@ -9,7 +9,7 @@ This module provides components and systems for entity movement including veloci
 
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::game::physics::motion
+@namespace helios::engine::modules::physics::motion
 @brief Motion physics components and systems.
 @details This namespace contains the motion layer of the physics system. It provides velocity-based movement, heading control, and rotation physics.
 </p></details>

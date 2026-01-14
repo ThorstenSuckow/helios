@@ -6,7 +6,7 @@ module;
 
 #include <helios/engine/ecs/query/GameObjectView.h>
 
-export module helios.engine.game.physics.collision.systems.BoundsUpdateSystem;
+export module helios.engine.modules.physics.collision.systems.BoundsUpdateSystem;
 
 import helios.engine.ecs.System;
 import helios.math;
@@ -17,15 +17,15 @@ import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 
-import helios.engine.game.scene.components.SceneNodeComponent;
-import helios.engine.game.spatial.transform.components.ScaleComponent;
-import helios.engine.game.spatial.transform.components.TranslationStateComponent;
-import helios.engine.game.physics.motion.components.RotationStateComponent;
-import helios.engine.game.physics.collision.components.AabbColliderComponent;
+import helios.engine.modules.scene.components.SceneNodeComponent;
+import helios.engine.modules.spatial.transform.components.ScaleComponent;
+import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
+import helios.engine.modules.physics.motion.components.RotationStateComponent;
+import helios.engine.modules.physics.collision.components.AabbColliderComponent;
 
-import helios.engine.game.rendering.model.components.ModelAabbComponent;
+import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 
-export namespace helios::engine::game::physics::collision::systems {
+export namespace helios::engine::modules::physics::collision::systems {
 
     /**
      * @brief System that updates AABB colliders based on entity transforms.
@@ -60,12 +60,12 @@ export namespace helios::engine::game::physics::collision::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
             for (auto [entity, mab, sc, tsc, sca, rsc, bc] : gameWorld_->find<
-                helios::engine::game::rendering::model::components::ModelAabbComponent,
-                helios::engine::game::scene::components::SceneNodeComponent,
-                helios::engine::game::spatial::transform::components::TranslationStateComponent,
-                helios::engine::game::spatial::transform::components::ScaleComponent,
-                helios::engine::game::physics::motion::components::RotationStateComponent,
-                helios::engine::game::physics::collision::components::AabbColliderComponent
+                helios::engine::modules::rendering::model::components::ModelAabbComponent,
+                helios::engine::modules::scene::components::SceneNodeComponent,
+                helios::engine::modules::spatial::transform::components::TranslationStateComponent,
+                helios::engine::modules::spatial::transform::components::ScaleComponent,
+                helios::engine::modules::physics::motion::components::RotationStateComponent,
+                helios::engine::modules::physics::collision::components::AabbColliderComponent
             >().each()) {
 
                 const helios::math::mat4f& parentTransform = sc->sceneNode()->parent()->worldTransform();

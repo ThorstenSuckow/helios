@@ -109,7 +109,7 @@ export namespace helios::engine::runtime::gameloop {
          */
         template<typename T, typename... Args>
         requires std::is_base_of_v<helios::engine::ecs::System, T>
-        Pass& add(Args&&... args) {
+        Pass& addSystem(Args&&... args) {
             systemRegistry_.add<T>(std::forward<Args>(args)...);
 
             return *this;

@@ -18,7 +18,7 @@ var searchData=
   ['timestamp_15',['timestamp',['../structhelios_1_1ext_1_1imgui_1_1widgets_1_1LogEntry.html#ad362d393aa91890ffd592c025cd4f226',1,'helios::ext::imgui::widgets::LogEntry']]],
   ['title_16',['title',['../structhelios_1_1window_1_1WindowConfig.html#a3ffc9f8d5d4e517423dda6f691dfe14e',1,'helios::window::WindowConfig']]],
   ['title_5f_17',['title_',['../classhelios_1_1window_1_1Window.html#a27dc6e221464e5675b20816130a0e948',1,'helios::window::Window']]],
-  ['to_20ecs_18',['Relationship to ECS',['../dir_0b25300d10cd1aefe5f6cbf740a7fedf.html#autotoc_md182',1,'']]],
+  ['to_20ecs_20and_20runtime_18',['Relationship to ECS and Runtime',['../dir_0b25300d10cd1aefe5f6cbf740a7fedf.html#autotoc_md182',1,'']]],
   ['toarrayindex_19',['toArrayIndex',['../namespacehelios_1_1ext_1_1glfw_1_1input_1_1GLFWGamepadLookup.html#a04e708cf31e825e1e8f7a3d3c574cbd0',1,'helios::ext::glfw::input::GLFWGamepadLookup']]],
   ['todo_20list_20',['Todo List',['../todo.html',1,'']]],
   ['tomato_21',['Tomato',['../structhelios_1_1util_1_1Colors.html#af3a7d279a9cc893a685c4db77574dcc9',1,'helios::util::Colors']]],

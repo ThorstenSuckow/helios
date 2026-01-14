@@ -2,7 +2,7 @@ var searchData=
 [
   ['ebo_0',['ebo',['../classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh.html#ab1c841c168c176cc2e562be919f612aa',1,'helios::ext::opengl::rendering::model::OpenGLMesh']]],
   ['ebo_5f_1',['ebo_',['../classhelios_1_1ext_1_1opengl_1_1rendering_1_1model_1_1OpenGLMesh.html#a6c2571a610293e55b51faa79f3b10f1d',1,'helios::ext::opengl::rendering::model::OpenGLMesh']]],
-  ['ecs_2',['Relationship to ECS',['../dir_0b25300d10cd1aefe5f6cbf740a7fedf.html#autotoc_md182',1,'']]],
+  ['ecs_20and_20runtime_2',['Relationship to ECS and Runtime',['../dir_0b25300d10cd1aefe5f6cbf740a7fedf.html#autotoc_md182',1,'']]],
   ['elapsedms_3',['elapsedMs',['../classhelios_1_1util_1_1time_1_1Stopwatch.html#aaa33b220a4f5e2682f8408b81a1367d0',1,'helios::util::time::Stopwatch']]],
   ['elapsedseconds_4',['elapsedSeconds',['../classhelios_1_1util_1_1time_1_1Stopwatch.html#ac25c9dc3b13ddef5e3d168036aec68a0',1,'helios::util::time::Stopwatch']]],
   ['ellipse_5',['Ellipse',['../structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse.html',1,'helios::rendering::asset::shape::basic::Ellipse'],['../structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse.html#acaf9134b8929a9153dfcc95dd65280fc',1,'helios::rendering::asset::shape::basic::Ellipse::Ellipse()'],['../structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Ellipse.html#a0a00d877402b4a268fff6d4321c40c02',1,'helios::rendering::asset::shape::basic::Ellipse::Ellipse(float radiusX, float radiusY, unsigned int segments)']]],

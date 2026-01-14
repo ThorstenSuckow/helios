@@ -4,7 +4,7 @@ Core Entity-Component-System architecture for the helios game engine.
 
 ## Overview
 
-This module provides the foundational classes for the composition-based game architecture. It separates data (Components) from behavior (Systems) and manages entity lifecycle through the GameWorld.
+This module provides the foundational classes for the composition-based game architecture. It separates data (Components) from behavior (Systems). Entity lifecycle and world management are provided by `helios.engine.runtime.world`.
 
 ## Key Classes
 
@@ -14,12 +14,7 @@ This module provides the foundational classes for the composition-based game arc
 | `Component` | Base class for data containers attached to GameObjects |
 | `CloneableComponent` | CRTP base for components that support cloning |
 | `System` | Abstract base for logic processors operating on GameWorld |
-| `GameWorld` | Root container managing entities, managers, and pools |
-| `Manager` | Abstract base for deferred operation handlers |
-| `UpdateContext` | Frame context passed to systems during updates |
-| `Level` | Game level with world bounds and root scene node |
 | `Updatable` | Interface for per-frame updatable objects |
-| `SystemRegistry` | Container for System instances within a game loop pass |
 
 ## Submodules
 
@@ -31,6 +26,13 @@ Entity query utilities for filtering and iterating GameObjects:
 |-------|---------|
 | `GameObjectFilter` | Bitmask for filtering by active/enabled state |
 | `GameObjectView` | Lazy range for component-based iteration |
+
+## Related Modules
+
+| Module | Purpose |
+|--------|---------|
+| `helios.engine.runtime.world` | GameWorld, Level, UpdateContext, Manager, SystemRegistry |
+| `helios.engine.runtime.gameloop` | GameLoop, Phase, Pass |
 
 ## Architecture
 
@@ -60,15 +62,16 @@ Entity query utilities for filtering and iterating GameObjects:
 
 ```cpp
 import helios.engine.ecs;
+import helios.engine.runtime.world.GameWorld;
 
 // Create game world
-helios.engine.runtime.world.GameWorld world;
+helios::engine::runtime::world::GameWorld world;
 
 // Add entity with components
-auto entity = std.make_unique<GameObject>();
+auto entity = std::make_unique<helios::engine::ecs::GameObject>();
 entity->add<Move2DComponent>();
 entity->add<SceneNodeComponent>(sceneNode);
-auto* player = world.addGameObject(std.move(entity));
+auto* player = world.addGameObject(std::move(entity));
 
 // Query entities by component
 for (auto [obj, move] : world.find<Move2DComponent>().each()) {
@@ -76,18 +79,12 @@ for (auto [obj, move] : world.find<Move2DComponent>().each()) {
 }
 ```
 
-## Related Modules
-
-- `helios.engine.runtime.gameloop` — Game loop orchestration with phases and passes
-- `helios.engine.core.messaging` — Command and event systems
-- `helios.engine.game` — Domain-specific components and systems
-
 ---
 
 <details>
 <summary>Doxygen</summary><p>
 @namespace helios::engine::ecs
 @brief Core Entity-Component-System architecture.
-@details This module provides the foundational classes for the composition-based game architecture. It includes entity management (GameObject, GameWorld), component base classes (Component, CloneableComponent), system infrastructure (System, SystemRegistry, Manager), and query utilities (GameObjectFilter, GameObjectView).
+@details This module provides the foundational classes for the composition-based game architecture. It includes entity base classes (GameObject, Component, CloneableComponent), system infrastructure (System), and query utilities (GameObjectFilter, GameObjectView).
 </p></details>
 

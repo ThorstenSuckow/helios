@@ -10,30 +10,42 @@ This module provides access to the complete helios engine functionality, includi
 
 | Module | Purpose |
 |--------|---------|
-| `helios.engine.core` | Messaging (commands, events), pools, units |
-| `helios.engine.ecs` | Entity-Component-System base classes (GameObject, Component, System, GameWorld) |
-| `helios.engine.game` | Domain-specific components, systems, and gameplay mechanics |
-| `helios.engine.runtime.gameloop` | Phase/Pass game loop orchestration |
-| `helios.engine.factory` | GameObject creation utilities |
-| `helios.engine.facade` | Pool access facade |
+| `helios.engine.core` | Data structures, messaging re-exports, units |
+| `helios.engine.ecs` | ECS base classes (GameObject, Component, System) and query system |
+| `helios.engine.runtime` | Runtime infrastructure (world, gameloop, pooling, messaging, factory) |
+| `helios.engine.game` | Facade re-exporting common game development types |
 | `helios.engine.tooling` | Frame pacing and performance metrics |
 
 ## Architecture
 
 ```
 helios.engine
-├── core/          # Infrastructure (messaging, pools, units)
-├── ecs/           # ECS base classes and query system
-├── game/          # Domain components and systems
-│   ├── gameplay/  # Bounds, combat, spawn mechanics
-│   ├── physics/   # Collision, motion systems
-│   ├── spatial/   # Transform components
-│   ├── scene/     # Scene graph integration
-│   └── ...
-├── gameloop/      # Game loop phases and passes
-├── factory/       # GameObject creation
-├── facade/        # Pool access
-└── tooling/       # Performance monitoring
+├── core/              # Infrastructure
+│   ├── data/          # Type-indexed containers, pool IDs
+│   └── units/         # Measurement units (meters, seconds)
+├── ecs/               # ECS base classes
+│   ├── Component      # Data container base
+│   ├── GameObject     # Entity container
+│   ├── System         # Logic processor base
+│   └── query/         # GameObjectFilter, GameObjectView
+├── runtime/           # Runtime infrastructure
+│   ├── world/         # GameWorld, Level, UpdateContext, Manager
+│   ├── gameloop/      # GameLoop, Phase, Pass
+│   ├── pooling/       # GameObjectPool, PoolRegistry, PoolFacade
+│   ├── messaging/     # CommandBuffer, Dispatchers, EventBus
+│   └── factory/       # GameObjectFactory
+├── modules/           # Domain-specific components and systems
+│   ├── physics/       # Collision, motion systems
+│   ├── spatial/       # Transform components
+│   ├── scene/         # Scene graph integration
+│   ├── rendering/     # Renderable components
+│   └── pool/          # Pool ID components
+├── mechanics/         # Gameplay mechanics
+│   ├── bounds/        # Level boundary behavior
+│   ├── combat/        # Shooting, projectiles
+│   ├── spawn/         # Entity spawning
+│   └── input/         # Twin-stick input systems
+└── tooling/           # Performance monitoring
 ```
 
 ## Usage
@@ -42,14 +54,18 @@ helios.engine
 import helios.engine;
 
 // Access ECS classes
-helios.engine.runtime.world.GameWorld world;
-auto entity = std.make_unique<helios.engine.ecs.GameObject>();
+helios::engine::runtime::world::GameWorld world;
+auto entity = std::make_unique<helios::engine::ecs::GameObject>();
+world.addGameObject(std::move(entity));
 
-// Access game systems
-world.add<helios.engine.modules.Move2DSystem>();
+// Access game loop - systems are registered with phases/passes
+helios::engine::runtime::gameloop::GameLoop gameLoop;
+gameLoop.phase(PhaseType::Main)
+    .addPass()
+    .addSystem<Move2DSystem>(&world);
 
 // Access tooling
-helios.engine.tooling.FramePacer pacer;
+helios::engine::tooling::FramePacer pacer;
 ```
 
 ---

@@ -20,7 +20,7 @@ import helios.engine.core.data.GameObjectPoolId;
 import helios.engine.mechanics.spawn.requests.SpawnRequest;
 import helios.engine.mechanics.spawn.requests.DespawnRequest;
 
-import helios.engine.factory.GameObjectFactory;
+import helios.engine.runtime.factory.GameObjectFactory;
 
 import helios.engine.runtime.pooling.GameObjectPoolFacade;
 
@@ -87,7 +87,7 @@ export namespace helios::engine::mechanics::spawn::manager {
         /**
          * @brief Factory for creating and populating pool objects.
          */
-        std::shared_ptr<helios::engine::factory::GameObjectFactory> gameObjectFactory_;
+        std::shared_ptr<helios::engine::runtime::factory::GameObjectFactory> gameObjectFactory_;
 
         /**
          * @brief Facade for pool acquire/release operations.
@@ -175,7 +175,7 @@ export namespace helios::engine::mechanics::spawn::manager {
          */
         explicit SpawnManager(
             helios::engine::core::data::GameObjectPoolId gameObjectPoolId,
-            std::unique_ptr<helios::engine::factory::GameObjectFactory> gameObjectFactory
+            std::unique_ptr<helios::engine::runtime::factory::GameObjectFactory> gameObjectFactory
         ) :
             gameObjectPoolId_(gameObjectPoolId),
             gameObjectFactory_(std::move(gameObjectFactory))

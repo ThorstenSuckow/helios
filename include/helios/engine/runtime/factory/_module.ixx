@@ -4,5 +4,5 @@
  */
 export module helios.engine.factory;
 
-export import helios.engine.factory.GameObjectFactory;
+export import helios.engine.runtime.factory.GameObjectFactory;
 

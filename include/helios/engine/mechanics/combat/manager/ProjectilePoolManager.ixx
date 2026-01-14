@@ -18,7 +18,7 @@ import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.runtime.pooling.GameObjectPoolFacade;
-import helios.engine.factory.GameObjectFactory;
+import helios.engine.runtime.factory.GameObjectFactory;
 
 import helios.engine.mechanics.spawn.logic.SpawnCondition;
 import helios.engine.mechanics.spawn.requests.SpawnRequest;
@@ -105,7 +105,7 @@ export namespace helios::engine::mechanics::combat::manager {
         /**
          * @brief Factory for populating the pool with projectile GameObjects.
          */
-        std::shared_ptr<helios::engine::factory::GameObjectFactory> gameObjectFactory_;
+        std::shared_ptr<helios::engine::runtime::factory::GameObjectFactory> gameObjectFactory_;
 
         /**
          * @brief Facade for pool acquire/release operations.
@@ -212,7 +212,7 @@ export namespace helios::engine::mechanics::combat::manager {
          */
         explicit ProjectilePoolManager(
             helios::engine::core::data::GameObjectPoolId gameObjectPoolId,
-            std::unique_ptr<helios::engine::factory::GameObjectFactory> gameObjectFactory,
+            std::unique_ptr<helios::engine::runtime::factory::GameObjectFactory> gameObjectFactory,
             std::unique_ptr<helios::engine::mechanics::spawn::logic::SpawnCondition> spawnCondition
         ) :
             gameObjectPoolId_(gameObjectPoolId),

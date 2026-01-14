@@ -7,7 +7,7 @@ module;
 #include <cassert>
 #include <memory>
 
-export module helios.engine.factory.GameObjectFactory;
+export module helios.engine.runtime.factory.GameObjectFactory;
 
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.GameWorld;
@@ -17,7 +17,7 @@ import helios.engine.core.data.GameObjectPoolId;
 
 import helios.engine.game.pool.components.PoolIdComponent;
 
-export namespace helios::engine::factory {
+export namespace helios::engine::runtime::factory {
 
     /**
      * @brief Factory class for mass-producing GameObjects from a prefab.

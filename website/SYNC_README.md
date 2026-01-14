@@ -17,7 +17,9 @@ The following files are **automatically copied** from the repository during the 
 | `docs/doxygen-style.md` | `docs/contributing/doxygen-style.md`  | Documentation style guide |
 | `docs/CONTRIBUTING.md` | `docs/contributing/commits.md`        | Commit message conventions |
 | `docs/CHANGELOG_GUIDE.md` | `docs/contributing/changelog-guide.md` | Changelog maintenance guide |
-| `docs/CONVENTIONS.md` | `docs/core-concepts/conventions.md`   | Technical conventions (LHS, matrices) |
+| `docs/core-concepts/conventions.md` | `docs/core-concepts/conventions.md`   | Technical conventions (LHS, matrices, units) |
+| `docs/core-concepts/command-system.md` | `docs/core-concepts/command-system.md` | Command pattern, dispatchers, managers |
+| `docs/core-concepts/event-system.md` | `docs/core-concepts/event-system.md` | Phase/pass event propagation |
 
 ### How It Works
 

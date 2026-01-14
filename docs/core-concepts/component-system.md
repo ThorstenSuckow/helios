@@ -24,11 +24,14 @@ import helios.engine.ecs.Component;
 
 class HealthComponent : public helios::engine::ecs::Component {
     int health_ = 100;
+    
 public:
     void takeDamage(int amount) { health_ -= amount; }
     int health() const { return health_; }
 };
 ```
+
+> **Note:** The namespace `helios::engine::ecs` contains the core entity-component classes (`GameObject`, `Component`, `System`), while `helios::engine::runtime::world` manages the game world and lifecycle (`GameWorld`, `UpdateContext`, `Manager`).
 
 Components receive a back-reference to their owning GameObject via `onAttach()`, allowing them to interact with sibling components or the entity as a whole.
 
@@ -95,7 +98,7 @@ Systems are organized into Phases (Pre, Main, Post) and Passes within each Phase
 
 ### `GameWorld`
 
-The root container managing GameObjects, Managers, and Pools.
+The root container managing GameObjects, Managers, and Pools. Located in `helios::engine::runtime::world`.
 
 ```cpp
 import helios.engine.runtime.world.GameWorld;
@@ -116,12 +119,12 @@ for (auto* obj : world.find<Move2DComponent, SceneNodeComponent>()) {
 
 ### `GameLoop`
 
-The orchestrator for system execution. Systems are added to Phases and Passes:
+The orchestrator for system execution, located in `helios::engine::runtime::gameloop`. Systems are added to Phases and Passes:
 
 ```cpp
 import helios.engine.runtime.gameloop.GameLoop;
 
-GameLoop gameLoop;
+helios::engine::runtime::gameloop::GameLoop gameLoop;
 
 // Pre Phase: Input processing
 gameLoop.phase(PhaseType::Pre)
@@ -225,7 +228,7 @@ Systems are organized by their typical Phase placement:
 
 ## Creating Custom Components
 
-Define a class inheriting from `Component`:
+Define a class inheriting from `Component`. Components should be placed in your project's modules namespace:
 
 ```cpp
 export module myproject.components.Inventory;
@@ -262,20 +265,22 @@ public:
 
 ## Creating Custom Systems
 
-Define a class inheriting from `System`:
+Define a class inheriting from `System`. Systems are registered with the GameLoop and operate on the GameWorld:
 
 ```cpp
 export module myproject.systems.Spawner;
 
 import helios.engine.ecs.System;
+import helios.engine.runtime.world.GameWorld;
 
 export class SpawnerSystem : public helios::engine::ecs::System {
     float timer_ = 0.0f;
     
 public:
-    explicit SpawnerSystem(GameWorld& world) : System(world) {}
+    explicit SpawnerSystem(helios::engine::runtime::world::GameWorld& world) 
+        : System(world) {}
     
-    void update(UpdateContext& ctx) noexcept override {
+    void update(helios::engine::runtime::world::UpdateContext& ctx) noexcept override {
         timer_ += ctx.deltaTime();
         if (timer_ > 5.0f) {
             timer_ = 0.0f;
@@ -381,6 +386,7 @@ for (auto [obj, invuln] : gameWorld_->find<InvulnerabilityComponent>(
     // Re-enable collision after invulnerability ends
     obj->get<CollisionComponent>()->enable();
 }
+```
 
 ## Update Order
 

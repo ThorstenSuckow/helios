@@ -38,8 +38,11 @@ For detailed event propagation rules, see [Event System](event-system.md).
 
 ## Commands and CommandBuffer
 
-Participating systems can write Commands into the CommandBuffer in frame N.
-At the beginning of each frame N+1, the CommandBuffer is flushed, which commits the Commands - i.e. their `execute()` method is invoked. This method contains the logic that mutates the world state (e.g. spawning, despawning, health changes, component changes). Commands are "bare metal" and therefore the lowest level in the game-loop layer, i.e. no further preparation of a Command is required. The system should therefore also be able to commit Commands coming directly from a developer console into the GameWorld (optionally delegating them to their respective managers - see below).
+Systems can write Commands into the CommandBuffer during any phase. At each **Phase Commit**, the CommandBuffer is flushed — i.e., their `execute()` method is invoked. This method contains the logic that mutates the world state (e.g., spawning, despawning, health changes, component changes).
+
+This means commands added during the Pre Phase are executed at the Pre Phase Commit, commands added during Main Phase at Main Phase Commit, and so on. This allows for responsive gameplay where actions taken in one phase are immediately visible in the next.
+
+Commands are "bare metal" and therefore the lowest level in the game-loop layer — no further preparation of a Command is required. The system should therefore also be able to commit Commands coming directly from a developer console into the GameWorld (optionally delegating them to their respective managers — see below).
 
 For detailed command handling, dispatchers, and manager integration, see [Command System](command-system.md).
 

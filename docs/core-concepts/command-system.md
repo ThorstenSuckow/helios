@@ -36,6 +36,7 @@ A `TargetedCommand` operates on a **specific GameObject** identified by its `Gui
 class MoveCommand : public TargetedCommand {
     helios::math::vec3f direction_;
     float speed_;
+    
 public:
     MoveCommand(helios::math::vec3f dir, float speed)
         : direction_(dir), speed_(speed) {}
@@ -56,11 +57,12 @@ A `WorldCommand` operates on the **entire GameWorld** rather than a specific ent
 ```cpp
 class SpawnEnemyCommand : public WorldCommand {
     helios::math::vec3f position_;
+    
 public:
     explicit SpawnEnemyCommand(helios::math::vec3f pos) : position_(pos) {}
 
     void execute(helios::engine::runtime::world::GameWorld& world) const noexcept override {
-        auto enemy = std::make_unique<GameObject>();
+        auto enemy = std::make_unique<helios::engine::ecs::GameObject>();
         // Configure enemy...
         world.addGameObject(std::move(enemy));
     }
@@ -186,44 +188,68 @@ auto& projectileMgr = gameWorld.addManager<ProjectileManager>(/* args */);
 
 ## Game Loop Integration
 
-The Command System integrates with the game loop as follows:
+The Command System integrates with the Phase/Pass game loop architecture. Commands can be added during **any phase**, and are flushed at each **Phase Commit**.
 
 ```
-┌──────────────────────────────────────────────────────────────────┐
-│                         FRAME                                    │
-├──────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  ┌────────────────┐                                              │
-│  │  INPUT PHASE   │  Systems read input, create Commands         │
-│  │                │  cmdBuffer.add<MoveCommand>(guid, dir, spd); │
-│  └───────┬────────┘                                              │
-│          │                                                       │
-│          ▼                                                       │
-│  ┌────────────────┐                                              │
-│  │  COMMAND FLUSH │  cmdBuffer.flush(gameWorld);                 │
-│  │                │  - WorldCommands execute/dispatch            │
-│  │                │  - TargetedCommands execute/dispatch         │
-│  └───────┬────────┘                                              │
-│          │                                                       │
-│          ▼                                                       │
-│  ┌────────────────┐                                              │
-│  │  MANAGER FLUSH │  gameWorld.flushManagers(updateContext);     │
-│  │                │  - Managers process queued requests          │
-│  │                │  - Spawns/despawns occur here                │
-│  └───────┬────────┘                                              │
-│          │                                                       │
-│          ▼                                                       │
-│  ┌────────────────┐                                              │
-│  │ SIMULATION     │  Physics, AI, Movement systems update        │
-│  └───────┬────────┘                                              │
-│          │                                                       │
-│          ▼                                                       │
-│  ┌────────────────┐                                              │
-│  │    RENDER      │  Scene synchronized, rendered                │
-│  └────────────────┘                                              │
-│                                                                  │
-└──────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────┐
+│                            FRAME                                    │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  PRE PHASE ──────────────────────────────────────────────────────   │
+│    Pass 1 (Input): Systems read input, add Commands                 │
+│        cmdBuffer.add<MoveCommand>(guid, dir, spd);                  │
+│    Pass 2, Pass 3, ...                                              │
+│  ────────────────────────────────────────────────── Phase Commit    │
+│       │  1. phaseEventBus.swapBuffers()                             │
+│       │  2. passEventBus.clearAll()                                 │
+│       │  3. commandBuffer.flush()      ◄── Commands execute here    │
+│       │  4. gameWorld.flushManagers()  ◄── Managers process queues  │
+│       ▼                                                             │
+│  MAIN PHASE ─────────────────────────────────────────────────────   │
+│    Pass 1 (Gameplay): Movement, Physics systems                     │
+│    Pass 2 (Collision): Collision detection                          │
+│           Pass 2 commit!                                            │
+│    Pass 3 (AI): AI systems                                          │
+│           (Access to events from Pass 1/2                           │
+│           due to Pass 2 commit)                                     │
+│        Commands can still be added here!                            │
+│  ────────────────────────────────────────────────── Phase Commit    │
+│       │  commandBuffer.flush() + gameWorld.flushManagers()          │
+│       ▼                                                             │
+│  POST PHASE ─────────────────────────────────────────────────────   │
+│    Pass 1 (Scene Sync): Sync transforms to scene graph              │
+│    Pass 2 (Cleanup): Clear dirty flags                              │
+│  ────────────────────────────────────────────────── Phase Commit    │
+│       │  commandBuffer.flush() + gameWorld.flushManagers()          │
+│       ▼                                                             │
+│                          RENDER                                     │
+└─────────────────────────────────────────────────────────────────────┘
 ```
+
+### Key Points
+
+Commands are **not** limited to the Pre Phase. Systems in any phase can add commands:
+
+```cpp
+void update(UpdateContext& ctx) noexcept override {
+    // Add command during any phase
+    ctx.commandBuffer().add<DespawnCommand>(entity.guid(), poolId);
+}
+```
+
+At each Phase Commit, the following sequence occurs:
+
+```cpp
+// Phase Commit sequence
+phaseEventBus.swapBuffers();    // Phase events become readable
+passEventBus.clearAll();         // Pass events are cleared
+commandBuffer.flush();           // Commands execute (world mutations)
+gameWorld.flushManagers();       // Managers process queued requests
+```
+
+This means spawns and despawns triggered in one phase are visible to systems in the next phase.
+
+For detailed phase/pass event handling, see [Game Loop Architecture](gameloop-architecture.md).
 
 ## Best Practices
 

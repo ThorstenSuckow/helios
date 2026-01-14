@@ -4,12 +4,12 @@
  */
 module;
 
-export module helios.engine.core.messaging.command.TargetedCommandDispatcher;
+export module helios.engine.runtime.messaging.command.TargetedCommandDispatcher;
 
 import helios.engine.ecs.GameObject;
 
 
-export namespace helios::engine::core::messaging::command {
+export namespace helios::engine::runtime::messaging::command {
 
     class TargetedCommand;
 

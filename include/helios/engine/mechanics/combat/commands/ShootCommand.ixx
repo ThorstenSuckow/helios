@@ -6,14 +6,14 @@ module;
 
 export module helios.engine.mechanics.combat.commands.ShootCommand;
 
-import helios.engine.core.messaging.command.TargetedCommand;
+import helios.engine.runtime.messaging.command.TargetedCommand;
 import helios.engine.ecs.GameObject;
 import helios.math.types;
 import helios.engine.mechanics.combat.components.ShootComponent;
 import helios.engine.game.physics.motion.components.Move2DComponent;
 
-import helios.engine.core.messaging.command.TypedTargetedCommandDispatcher;
-import helios.engine.core.messaging.command.TargetedCommandDispatcher;
+import helios.engine.runtime.messaging.command.TypedTargetedCommandDispatcher;
+import helios.engine.runtime.messaging.command.TargetedCommandDispatcher;
 
 export namespace helios::engine::mechanics::combat::commands {
 
@@ -48,7 +48,7 @@ export namespace helios::engine::mechanics::combat::commands {
      * @see TargetedCommand
      * @see TwinStickInputSystem
      */
-    class ShootCommand : public helios::engine::core::messaging::command::TargetedCommand {
+    class ShootCommand : public helios::engine::runtime::messaging::command::TargetedCommand {
 
         /**
          * @brief The fire intensity factor (0.0 to 1.0).
@@ -113,7 +113,7 @@ export namespace helios::engine::mechanics::combat::commands {
          */
         void accept(
             helios::engine::ecs::GameObject& gameObject,
-            helios::engine::core::messaging::command::TargetedCommandDispatcher& dispatcher
+            helios::engine::runtime::messaging::command::TargetedCommandDispatcher& dispatcher
         ) const noexcept override {
             dispatcher.dispatch(gameObject, *this);
         }

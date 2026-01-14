@@ -20,8 +20,8 @@ import helios.engine.mechanics.combat.components.Aim2DComponent;
 import helios.engine.mechanics.spawn.requests.SpawnRequest;
           
 
-import helios.engine.core.messaging.command.WorldCommandDispatcher;
-import helios.engine.core.messaging.command.TypedWorldCommandDispatcher;
+import helios.engine.runtime.messaging.command.WorldCommandDispatcher;
+import helios.engine.runtime.messaging.command.TypedWorldCommandDispatcher;
 import helios.engine.ecs.GameObject;
 
 import helios.engine.runtime.world.GameWorld;
@@ -44,7 +44,7 @@ export namespace helios::engine::mechanics::spawn::dispatcher {
      * @see SpawnManager
      * @see PoolRequestHandler
      */
-    class SpawnCommandDispatcher final : public helios::engine::core::messaging::command::TypedWorldCommandDispatcher<
+    class SpawnCommandDispatcher final : public helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher<
         helios::engine::mechanics::spawn::commands::SpawnCommand> {
 
         /**

@@ -11,15 +11,15 @@ module;
 #include <typeindex>
 #include <unordered_map>
 
-export module helios.engine.core.messaging.command.CommandBuffer;
+export module helios.engine.runtime.messaging.command.CommandBuffer;
 
-import helios.engine.core.messaging.command.TargetedCommand;
-import helios.engine.core.messaging.command.TargetedCommandDispatcher;
-import helios.engine.core.messaging.command.TypedTargetedCommandDispatcher;
+import helios.engine.runtime.messaging.command.TargetedCommand;
+import helios.engine.runtime.messaging.command.TargetedCommandDispatcher;
+import helios.engine.runtime.messaging.command.TypedTargetedCommandDispatcher;
 
-import helios.engine.core.messaging.command.WorldCommand;
-import helios.engine.core.messaging.command.WorldCommandDispatcher;
-import helios.engine.core.messaging.command.TypedWorldCommandDispatcher;
+import helios.engine.runtime.messaging.command.WorldCommand;
+import helios.engine.runtime.messaging.command.WorldCommandDispatcher;
+import helios.engine.runtime.messaging.command.TypedWorldCommandDispatcher;
 
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.ecs.GameObject;
@@ -30,8 +30,8 @@ import helios.util.log.LogManager;
 
 
 
-#define HELIOS_LOG_SCOPE "helios::engine::core::messaging::command::CommandBuffer"
-export namespace helios::engine::core::messaging::command {
+#define HELIOS_LOG_SCOPE "helios::engine::runtime::messaging::command::CommandBuffer"
+export namespace helios::engine::runtime::messaging::command {
 
     /**
      * @brief Queue for deferred execution of game commands.
@@ -43,7 +43,7 @@ export namespace helios::engine::core::messaging::command {
      *
      * Typical usage pattern:
      * ```cpp
-     * helios::engine::core::messaging::command::CommandBuffer cmdBuffer;
+     * helios::engine::runtime::messaging::command::CommandBuffer cmdBuffer;
      * helios::engine::runtime::world::GameWorld world;
      *
      * // Queue commands during input processing
@@ -65,7 +65,7 @@ export namespace helios::engine::core::messaging::command {
         struct TargetedCommandProxy {
             std::type_index typeIdx;
             helios::util::Guid guid;
-            std::unique_ptr<helios::engine::core::messaging::command::TargetedCommand> targetedCommand;
+            std::unique_ptr<helios::engine::runtime::messaging::command::TargetedCommand> targetedCommand;
         };
 
         /**
@@ -73,7 +73,7 @@ export namespace helios::engine::core::messaging::command {
          */
         struct WorldCommandProxy {
             std::type_index typeIdx;
-            std::unique_ptr<helios::engine::core::messaging::command::WorldCommand> worldCommand;
+            std::unique_ptr<helios::engine::runtime::messaging::command::WorldCommand> worldCommand;
         };
 
         /**
@@ -105,7 +105,7 @@ export namespace helios::engine::core::messaging::command {
          * When a command is flushed and a dispatcher is registered for its type,
          * the command is routed through the dispatcher instead of executing directly.
          */
-        std::unordered_map<std::type_index, std::unique_ptr<helios::engine::core::messaging::command::TargetedCommandDispatcher>> targetedCommandDispatchers_;
+        std::unordered_map<std::type_index, std::unique_ptr<helios::engine::runtime::messaging::command::TargetedCommandDispatcher>> targetedCommandDispatchers_;
 
         /**
          * @brief Registry of dispatchers for WorldCommand types.
@@ -114,7 +114,7 @@ export namespace helios::engine::core::messaging::command {
          * When a command is flushed and a dispatcher is registered for its type,
          * the command is routed through the dispatcher instead of executing directly.
          */
-        std::unordered_map<std::type_index, std::unique_ptr<helios::engine::core::messaging::command::WorldCommandDispatcher>> worldCommandDispatchers_;
+        std::unordered_map<std::type_index, std::unique_ptr<helios::engine::runtime::messaging::command::WorldCommandDispatcher>> worldCommandDispatchers_;
 
     public:
 
@@ -132,7 +132,7 @@ export namespace helios::engine::core::messaging::command {
          */
         template<typename T>
         requires std::is_base_of_v<TargetedCommand, T>
-        void addDispatcher(std::unique_ptr<helios::engine::core::messaging::command::TypedTargetedCommandDispatcher<T>> d) {
+        void addDispatcher(std::unique_ptr<helios::engine::runtime::messaging::command::TypedTargetedCommandDispatcher<T>> d) {
 
             assert(!hasDispatcher<T>() && "Dispatcher already added");
 
@@ -169,7 +169,7 @@ export namespace helios::engine::core::messaging::command {
          */
         template<typename T>
         requires std::is_base_of_v<WorldCommand, T>
-        void addDispatcher(std::unique_ptr<helios::engine::core::messaging::command::TypedWorldCommandDispatcher<T>> d) {
+        void addDispatcher(std::unique_ptr<helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher<T>> d) {
 
             assert(!hasDispatcher<T>() && "Dispatcher already added");
 

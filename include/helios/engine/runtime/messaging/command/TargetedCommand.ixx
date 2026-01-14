@@ -4,11 +4,11 @@
  */
 module;
 
-export module helios.engine.core.messaging.command.TargetedCommand;
+export module helios.engine.runtime.messaging.command.TargetedCommand;
 
 import helios.engine.ecs.GameObject;
 
-export namespace helios::engine::core::messaging::command {
+export namespace helios::engine::runtime::messaging::command {
 
     class TargetedCommandDispatcher;
 
@@ -74,7 +74,7 @@ export namespace helios::engine::core::messaging::command {
          */
         virtual void accept(
             helios::engine::ecs::GameObject& gameObject,
-            helios::engine::core::messaging::command::TargetedCommandDispatcher& dispatcher) const noexcept {
+            helios::engine::runtime::messaging::command::TargetedCommandDispatcher& dispatcher) const noexcept {
             // no-op by default
         }
     };

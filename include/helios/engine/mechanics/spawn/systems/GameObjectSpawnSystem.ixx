@@ -13,7 +13,7 @@ export module helios.engine.mechanics.spawn.systems.GameObjectSpawnSystem;
 import helios.engine.ecs.System;
 
 
-import helios.engine.core.messaging.command.CommandBuffer;
+import helios.engine.runtime.messaging.command.CommandBuffer;
 import helios.engine.core.data.GameObjectPoolId;
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.UpdateContext;

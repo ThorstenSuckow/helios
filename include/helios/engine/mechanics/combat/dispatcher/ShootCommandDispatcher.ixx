@@ -20,8 +20,8 @@ import helios.engine.mechanics.combat.components.Aim2DComponent;
 import helios.engine.mechanics.combat.ProjectileSpawnRequest;
           
 
-import helios.engine.core.messaging.command.TargetedCommandDispatcher;
-import helios.engine.core.messaging.command.TypedTargetedCommandDispatcher;
+import helios.engine.runtime.messaging.command.TargetedCommandDispatcher;
+import helios.engine.runtime.messaging.command.TypedTargetedCommandDispatcher;
 import helios.engine.ecs.GameObject;
 
 import helios.engine.runtime.world.GameWorld;
@@ -49,7 +49,7 @@ export namespace helios::engine::mechanics::combat::dispatcher {
      * @see ProjectilePoolManager
      * @see ProjectileSpawnRequest
      */
-    class ShootCommandDispatcher final : public helios::engine::core::messaging::command::TypedTargetedCommandDispatcher<
+    class ShootCommandDispatcher final : public helios::engine::runtime::messaging::command::TypedTargetedCommandDispatcher<
         helios::engine::mechanics::combat::commands::ShootCommand> {
 
         /**

@@ -15,8 +15,8 @@ import helios.engine.runtime.world.UpdateContext;
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
 
-import helios.engine.core.messaging.command.CommandBuffer;
-import helios.engine.core.messaging.event.GameLoopEventBus;
+import helios.engine.runtime.messaging.command.CommandBuffer;
+import helios.engine.runtime.messaging.event.GameLoopEventBus;
 
 import helios.engine.runtime.gameloop.Pass;
 import helios.engine.runtime.gameloop.Phase;
@@ -76,7 +76,7 @@ export namespace helios::engine::runtime::gameloop {
         /**
          * @brief Buffer for deferred command execution.
          */
-        helios::engine::core::messaging::command::CommandBuffer commandBuffer_{};
+        helios::engine::runtime::messaging::command::CommandBuffer commandBuffer_{};
 
         /**
          * @brief Event bus for phase-level event propagation.
@@ -88,7 +88,7 @@ export namespace helios::engine::runtime::gameloop {
          * @see UpdateContext::pushPhase()
          * @see UpdateContext::readPhase()
          */
-        helios::engine::core::messaging::event::GameLoopEventBus phaseEventBus_{};
+        helios::engine::runtime::messaging::event::GameLoopEventBus phaseEventBus_{};
 
         /**
          * @brief Event bus for pass-level event propagation.
@@ -101,7 +101,7 @@ export namespace helios::engine::runtime::gameloop {
          * @see UpdateContext::readPass()
          * @see Pass::addCommitPoint()
          */
-        helios::engine::core::messaging::event::GameLoopEventBus passEventBus_{};
+        helios::engine::runtime::messaging::event::GameLoopEventBus passEventBus_{};
 
 
         /**
@@ -181,7 +181,7 @@ export namespace helios::engine::runtime::gameloop {
          *
          * @return Reference to the CommandBuffer owned by this GameLoop.
          */
-        helios::engine::core::messaging::command::CommandBuffer& commandBuffer() {
+        helios::engine::runtime::messaging::command::CommandBuffer& commandBuffer() {
             return commandBuffer_;
         }
 

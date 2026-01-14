@@ -19,7 +19,7 @@ import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.System;
 
-import helios.engine.core.messaging.command.CommandBuffer;
+import helios.engine.runtime.messaging.command.CommandBuffer;
 
 import helios.engine.game.physics.collision.types.CollisionBehavior;
 

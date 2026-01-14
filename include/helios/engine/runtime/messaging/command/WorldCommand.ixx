@@ -4,14 +4,13 @@
  */
 module;
 
-export module helios.engine.core.messaging.command.WorldCommand;
-
+export module helios.engine.runtime.messaging.command.WorldCommand;
 
 export namespace helios::engine::runtime::world {
     class GameWorld;
 }
 
-export namespace helios::engine::core::messaging::command {
+export namespace helios::engine::runtime::messaging::command {
 
     class WorldCommandDispatcher;
 
@@ -58,7 +57,7 @@ export namespace helios::engine::core::messaging::command {
          */
         virtual void accept(
             helios::engine::runtime::world::GameWorld& gameWorld,
-            helios::engine::core::messaging::command::WorldCommandDispatcher& dispatcher) const noexcept {
+            helios::engine::runtime::messaging::command::WorldCommandDispatcher& dispatcher) const noexcept {
             // no-op by default
         }
     };

@@ -8,8 +8,8 @@ module;
 
 export module helios.engine.mechanics.spawn.commands.SpawnCommand;
 
-import helios.engine.core.messaging.command.WorldCommand;
-import helios.engine.core.messaging.command.WorldCommandDispatcher;
+import helios.engine.runtime.messaging.command.WorldCommand;
+import helios.engine.runtime.messaging.command.WorldCommandDispatcher;
 import helios.engine.runtime.world.GameWorld;
 import helios.math.types;
 
@@ -33,7 +33,7 @@ export namespace helios::engine::mechanics::spawn::commands {
      * @see SpawnManager
      * @see GameObjectSpawnSystem
      */
-    class SpawnCommand : public helios::engine::core::messaging::command::WorldCommand {
+    class SpawnCommand : public helios::engine::runtime::messaging::command::WorldCommand {
 
         /**
          * @brief The number of GameObjects to spawn.
@@ -78,7 +78,7 @@ export namespace helios::engine::mechanics::spawn::commands {
          */
         virtual void accept(
             helios::engine::runtime::world::GameWorld& gameWorld,
-            helios::engine::core::messaging::command::WorldCommandDispatcher& dispatcher) const noexcept override {
+            helios::engine::runtime::messaging::command::WorldCommandDispatcher& dispatcher) const noexcept override {
 
             dispatcher.dispatch(gameWorld, *this);
 

@@ -81,10 +81,6 @@ export namespace helios::engine::modules::systems::scene {
             // Second pass: read back world transforms from SceneNode to TransformComponent
             for (auto [entity, tc, nc] : view.each()) {
 
-                if (!tc->isDirty()) {
-                    continue;
-                }
-
                 auto* sceneNode = nc->sceneNode();
                 if (!sceneNode || !sceneNode->isActive()) {
                     continue;

@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/runtime/gameloop/Phase.ixx" line="59" column="22" bodyfile="include/helios/engine/runtime/gameloop/Phase.ixx" bodystart="59" bodyend="-1"/>
+        <location file="include/helios/engine/runtime/gameloop/Phase.ixx" line="64" column="22" bodyfile="include/helios/engine/runtime/gameloop/Phase.ixx" bodystart="64" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/runtime/gameloop/Phase.ixx" line="91" column="21" bodyfile="include/helios/engine/runtime/gameloop/Phase.ixx" bodystart="91" bodyend="-1"/>
+        <location file="include/helios/engine/runtime/gameloop/Phase.ixx" line="104" column="21" bodyfile="include/helios/engine/runtime/gameloop/Phase.ixx" bodystart="104" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase_1aed3eee28baff6d029330c136a3e955c6" prot="private" static="no" mutable="no">
         <type><ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop" kindref="compound">helios::engine::runtime::gameloop::GameLoop</ref> &amp;</type>
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/runtime/gameloop/Phase.ixx" line="96" column="53" bodyfile="include/helios/engine/runtime/gameloop/Phase.ixx" bodystart="96" bodyend="-1"/>
+        <location file="include/helios/engine/runtime/gameloop/Phase.ixx" line="109" column="53" bodyfile="include/helios/engine/runtime/gameloop/Phase.ixx" bodystart="109" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/runtime/gameloop/Phase.ixx" line="66" column="14" bodyfile="include/helios/engine/runtime/gameloop/Phase.ixx" bodystart="66" bodyend="71"/>
+        <location file="include/helios/engine/runtime/gameloop/Phase.ixx" line="71" column="14" bodyfile="include/helios/engine/runtime/gameloop/Phase.ixx" bodystart="71" bodyend="76"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase_1a9a5b87fa679e89d3c0b840131fe21242" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -97,20 +97,25 @@
 <para>Updates all passes within this phase. </para>
         </briefdescription>
         <detaileddescription>
+<para>Iterates through all passes, updating their systems and then invoking the commit action based on the pass&apos;s configured <ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ec" kindref="member">CommitPoint</ref>. The commit point determines whether pass-level events are synchronized, the command buffer is flushed, or managers are processed.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>updateContext</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The current update context. </para>
+<para>The current update context.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
+<simplesect kind="see"><para><ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ec" kindref="member">CommitPoint</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_1a36ee909a78fabac1cf997d98b0f8438c" kindref="member">Pass::addCommitPoint()</ref> </para>
+</simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/runtime/gameloop/Phase.ixx" line="78" column="14" bodyfile="include/helios/engine/runtime/gameloop/Phase.ixx" bodystart="78" bodyend="86"/>
+        <location file="include/helios/engine/runtime/gameloop/Phase.ixx" line="91" column="14" bodyfile="include/helios/engine/runtime/gameloop/Phase.ixx" bodystart="91" bodyend="99"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -141,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/runtime/gameloop/Phase.ixx" line="105" column="18" bodyfile="include/helios/engine/runtime/gameloop/Phase.ixx" bodystart="105" bodyend="107"/>
+        <location file="include/helios/engine/runtime/gameloop/Phase.ixx" line="118" column="18" bodyfile="include/helios/engine/runtime/gameloop/Phase.ixx" bodystart="118" bodyend="120"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase_1ab6843bc03abe3867cd46c4888f88176f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass" kindref="compound">Pass</ref> &amp;</type>
@@ -159,7 +164,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/runtime/gameloop/Phase.ixx" line="114" column="14" bodyfile="include/helios/engine/runtime/gameloop/Phase.ixx" bodystart="114" bodyend="121"/>
+        <location file="include/helios/engine/runtime/gameloop/Phase.ixx" line="127" column="14" bodyfile="include/helios/engine/runtime/gameloop/Phase.ixx" bodystart="127" bodyend="134"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase_1a792bbe1e6cdc378bccc7234c2e57b295" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop" kindref="compound">helios::engine::runtime::gameloop::GameLoop</ref> &amp;</type>
@@ -177,7 +182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/runtime/gameloop/Phase.ixx" line="128" column="54" bodyfile="include/helios/engine/runtime/gameloop/Phase.ixx" bodystart="128" bodyend="130"/>
+        <location file="include/helios/engine/runtime/gameloop/Phase.ixx" line="141" column="54" bodyfile="include/helios/engine/runtime/gameloop/Phase.ixx" bodystart="141" bodyend="143"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -185,14 +190,17 @@
     </briefdescription>
     <detaileddescription>
 <para>A <ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase" kindref="compound">Phase</ref> groups related systems into passes that are executed sequentially. Each pass can contain multiple systems and may have a commit point for event synchronization.</para>
+<para>Commit points allow fine-grained control over when commands are flushed, managers are processed, and pass-level events are synchronized. See <ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ec" kindref="member">CommitPoint</ref> for available synchronization options.</para>
 <para>Phases are owned by the <ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop" kindref="compound">GameLoop</ref> and should not be created directly.</para>
 <para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass" kindref="compound">Pass</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ec" kindref="member">CommitPoint</ref> </para>
 </simplesect>
 <simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop" kindref="compound">GameLoop</ref> </para>
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="include/helios/engine/runtime/gameloop/Phase.ixx" line="57" column="5" bodyfile="include/helios/engine/runtime/gameloop/Phase.ixx" bodystart="57" bodyend="133"/>
+    <location file="include/helios/engine/runtime/gameloop/Phase.ixx" line="62" column="5" bodyfile="include/helios/engine/runtime/gameloop/Phase.ixx" bodystart="62" bodyend="146"/>
     <listofallmembers>
       <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase_1ab6843bc03abe3867cd46c4888f88176f" prot="public" virt="non-virtual"><scope>helios::engine::runtime::gameloop::Phase</scope><name>addPass</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase_1a792bbe1e6cdc378bccc7234c2e57b295" prot="public" virt="non-virtual"><scope>helios::engine::runtime::gameloop::Phase</scope><name>gameLoop</name></member>

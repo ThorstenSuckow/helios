@@ -1,5 +1,14 @@
 var NAVTREEINDEX13 =
 {
+"classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#adf78328ccc756a4d8a514fdc6b7cf653":[4,0,0,5,0,1,7],
+"classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#adf78328ccc756a4d8a514fdc6b7cf653":[6,0,0,5,0,1,7],
+"classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#aeeb056d8dcc5c7007e3a1dd542c4ddea":[3,0,203,0,9],
+"classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#aeeb056d8dcc5c7007e3a1dd542c4ddea":[4,0,0,5,0,1,9],
+"classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#aeeb056d8dcc5c7007e3a1dd542c4ddea":[6,0,0,5,0,1,9],
+"classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#af5ac72dc6b04400f79bc7fab851c0d02":[3,0,203,0,8],
+"classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#af5ac72dc6b04400f79bc7fab851c0d02":[4,0,0,5,0,1,8],
+"classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#af5ac72dc6b04400f79bc7fab851c0d02":[6,0,0,5,0,1,8],
+"classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#af93e6e1d89959cc5e75a690106067bbb":[3,0,203,0,10],
 "classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#af93e6e1d89959cc5e75a690106067bbb":[4,0,0,5,0,1,10],
 "classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#af93e6e1d89959cc5e75a690106067bbb":[6,0,0,5,0,1,10],
 "classhelios_1_1input_1_1gamepad_1_1GamepadState.html":[3,0,204,0],
@@ -240,14 +249,5 @@ var NAVTREEINDEX13 =
 "classhelios_1_1rendering_1_1RenderQueue.html#af3141c90009b7d87bc9f6a40ff6f852d":[4,0,0,7,9,6],
 "classhelios_1_1rendering_1_1RenderQueue.html#af3141c90009b7d87bc9f6a40ff6f852d":[6,0,0,7,9,6],
 "classhelios_1_1rendering_1_1RenderTarget.html":[3,0,247,0],
-"classhelios_1_1rendering_1_1RenderTarget.html":[4,0,0,7,10],
-"classhelios_1_1rendering_1_1RenderTarget.html":[6,0,0,7,10],
-"classhelios_1_1rendering_1_1RenderTarget.html#a33affb07801058a9950c0daba6e0aeaf":[3,0,247,0,1],
-"classhelios_1_1rendering_1_1RenderTarget.html#a33affb07801058a9950c0daba6e0aeaf":[4,0,0,7,10,1],
-"classhelios_1_1rendering_1_1RenderTarget.html#a33affb07801058a9950c0daba6e0aeaf":[6,0,0,7,10,1],
-"classhelios_1_1rendering_1_1RenderTarget.html#a3e4f37f9cfb37b3327ef7285319552fe":[3,0,247,0,3],
-"classhelios_1_1rendering_1_1RenderTarget.html#a3e4f37f9cfb37b3327ef7285319552fe":[4,0,0,7,10,3],
-"classhelios_1_1rendering_1_1RenderTarget.html#a3e4f37f9cfb37b3327ef7285319552fe":[6,0,0,7,10,3],
-"classhelios_1_1rendering_1_1RenderTarget.html#a45cfbd90ee4f0fa1f303e13721de0a76":[3,0,247,0,2],
-"classhelios_1_1rendering_1_1RenderTarget.html#a45cfbd90ee4f0fa1f303e13721de0a76":[4,0,0,7,10,2]
+"classhelios_1_1rendering_1_1RenderTarget.html":[4,0,0,7,10]
 };

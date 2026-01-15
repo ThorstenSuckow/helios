@@ -193,25 +193,21 @@ $(function() {
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            <span class="comment">// Second pass: read back world transforms from SceneNode to TransformComponent</span></div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            <span class="keywordflow">for</span> (<span class="keyword">auto</span> [entity, tc, nc] : view.each()) {</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                <span class="keywordflow">if</span> (!tc-&gt;isDirty()) {</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                    <span class="keywordflow">continue</span>;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                }</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                <span class="keyword">auto</span>* sceneNode = nc-&gt;sceneNode();</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                <span class="keywordflow">if</span> (!sceneNode || !sceneNode-&gt;isActive()) {</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                    <span class="keywordflow">continue</span>;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                }</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                tc-&gt;setWorldTransform(sceneNode-&gt;worldTransform());</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            }</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                <span class="keyword">auto</span>* sceneNode = nc-&gt;sceneNode();</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                <span class="keywordflow">if</span> (!sceneNode || !sceneNode-&gt;isActive()) {</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                    <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                }</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                tc-&gt;setWorldTransform(sceneNode-&gt;worldTransform());</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            }</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        }</div>
+</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    };</div>
+</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        }</div>
-</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    };</div>
-</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>}</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>}</div>
 <div class="ttc" id="aclasshelios_1_1engine_1_1ecs_1_1System_html"><div class="ttname"><a href="classhelios_1_1engine_1_1ecs_1_1System.html">helios::engine::ecs::System</a></div><div class="ttdoc">Abstract base class for game systems.</div><div class="ttdef"><b>Definition</b> <a href="System_8ixx_source.html#l00038">System.ixx:38</a></div></div>
 <div class="ttc" id="aclasshelios_1_1engine_1_1ecs_1_1System_html_a1b71da2e3fb9d2effca00a1ecdfca1f5"><div class="ttname"><a href="classhelios_1_1engine_1_1ecs_1_1System.html#a1b71da2e3fb9d2effca00a1ecdfca1f5">helios::engine::ecs::System::gameWorld_</a></div><div class="ttdeci">helios::engine::runtime::world::GameWorld * gameWorld_</div><div class="ttdoc">Pointer to the GameWorld this system belongs to.</div><div class="ttdef"><b>Definition</b> <a href="System_8ixx_source.html#l00048">System.ixx:48</a></div></div>
 <div class="ttc" id="aclasshelios_1_1engine_1_1modules_1_1scene_1_1components_1_1SceneNodeComponent_html"><div class="ttname"><a href="classhelios_1_1engine_1_1modules_1_1scene_1_1components_1_1SceneNodeComponent.html">helios::engine::modules::scene::components::SceneNodeComponent</a></div><div class="ttdoc">Component that links a GameObject to a SceneNode in the scene graph.</div><div class="ttdef"><b>Definition</b> <a href="SceneNodeComponent_8ixx_source.html#l00035">SceneNodeComponent.ixx:35</a></div></div>

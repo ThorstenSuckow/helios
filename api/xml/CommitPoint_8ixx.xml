@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="CommitPoint_8ixx" kind="file" language="C++">
+    <compoundname>CommitPoint.ixx</compoundname>
+    <includes local="no">cstdint</includes>
+    <includes local="no">utility</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>include/helios/engine/runtime/gameloop/CommitPoint.ixx</label>
+        <link refid="CommitPoint_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>cstdint</label>
+      </node>
+      <node id="3">
+        <label>utility</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacehelios">helios</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine">helios::engine</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime">helios::engine::runtime</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop">helios::engine::runtime::gameloop</innernamespace>
+    <briefdescription>
+<para>Defines commit points for synchronization within the game loop. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/**</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>@file<sp/>CommitPoint.ixx</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>@brief<sp/>Defines<sp/>commit<sp/>points<sp/>for<sp/>synchronization<sp/>within<sp/>the<sp/>game<sp/>loop.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">module</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdint&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;utility&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8runtime_8gameloop_8CommitPoint" kindref="compound">helios.engine.runtime.gameloop.CommitPoint</ref>;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13" refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop" kindref="compound">helios::engine::runtime::gameloop</ref><sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Flags<sp/>defining<sp/>synchronization<sp/>actions<sp/>at<sp/>the<sp/>end<sp/>of<sp/>a<sp/>pass.</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>A<sp/>CommitPoint<sp/>specifies<sp/>what<sp/>operations<sp/>should<sp/>be<sp/>performed<sp/>when<sp/>a<sp/>pass</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>completes.<sp/>Multiple<sp/>flags<sp/>can<sp/>be<sp/>combined<sp/>using<sp/>bitwise<sp/>OR<sp/>to<sp/>trigger<sp/>several</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>actions<sp/>at<sp/>once.</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Commit<sp/>points<sp/>are<sp/>essential<sp/>for<sp/>the<sp/>deterministic<sp/>ordering<sp/>of<sp/>the<sp/>game<sp/>loop:</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>Commands<sp/>are<sp/>queued<sp/>during<sp/>passes<sp/>and<sp/>executed<sp/>at<sp/>commit<sp/>points</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>Pass-level<sp/>events<sp/>become<sp/>readable<sp/>only<sp/>after<sp/>a<sp/>commit</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>Managers<sp/>process<sp/>their<sp/>queued<sp/>requests<sp/>at<sp/>commit<sp/>points</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Example<sp/>usage:</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```cpp</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>pass.addCommitPoint(CommitPoint::PassEvents<sp/>|<sp/>CommitPoint::FlushCommands);</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>Pass::addCommitPoint()</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>GameLoop::passCommit()</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35" refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ec" kindref="member">CommitPoint</ref><sp/>:<sp/>uint8_t<sp/>{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>No<sp/>commit<sp/>action.</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40" refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8eca6adf97f83acf6453d4a6a4b1070f3754" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8eca6adf97f83acf6453d4a6a4b1070f3754" kindref="member">None</ref><sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Commits<sp/>pass-level<sp/>events.</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Events<sp/>pushed<sp/>via<sp/>`UpdateContext::pushPass()`<sp/>become<sp/>readable<sp/>in<sp/>subsequent</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>passes<sp/>through<sp/>`UpdateContext::readPass()`.<sp/>Pass<sp/>events<sp/>are<sp/>discarded<sp/>at<sp/>the</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>end<sp/>of<sp/>the<sp/>phase.</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49" refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f" kindref="member">PassEvents</ref><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>0,</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Flushes<sp/>the<sp/>command<sp/>buffer.</highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Pending<sp/>commands<sp/>are<sp/>dispatched<sp/>to<sp/>their<sp/>registered<sp/>handlers<sp/>and<sp/>executed.</highlight></codeline>
+<codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56" refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8" kindref="member">FlushCommands</ref><sp/><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>1,</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Flushes<sp/>all<sp/>registered<sp/>managers.</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Managers<sp/>process<sp/>their<sp/>queued<sp/>requests<sp/>(e.g.,<sp/>ProjectileManager<sp/>spawns</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>projectiles<sp/>from<sp/>its<sp/>request<sp/>queue).</highlight></codeline>
+<codeline lineno="63"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64" refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ecae58c90136fb14137d5f8d945b1b0db41" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ecae58c90136fb14137d5f8d945b1b0db41" kindref="member">FlushManagers</ref><sp/><sp/><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>2,</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Full<sp/>structural<sp/>commit.</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Combines<sp/>PassEvents,<sp/>FlushManagers,<sp/>and<sp/>FlushCommands<sp/>for<sp/>a<sp/>complete</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>synchronization<sp/>point.</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72" refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ecaa9a0f8e36e7dcc2b446c20be15322dc9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ecaa9a0f8e36e7dcc2b446c20be15322dc9" kindref="member">Structural</ref><sp/>=<sp/><ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f" kindref="member">PassEvents</ref><sp/>|<sp/><ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8" kindref="member">FlushCommands</ref><sp/>|<sp/><ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ecae58c90136fb14137d5f8d945b1b0db41" kindref="member">FlushManagers</ref></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Bitwise<sp/>AND<sp/>operator<sp/>for<sp/>CommitPoint<sp/>flags.</highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>a<sp/>First<sp/>operand.</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>b<sp/>Second<sp/>operand.</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>combined<sp/>flags.</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83" refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1a575a13ff55382c2226f56af26ed21c9b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ec" kindref="member">CommitPoint</ref><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1a575a13ff55382c2226f56af26ed21c9b" kindref="member">operator &amp;</ref>(<ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ec" kindref="member">CommitPoint</ref><sp/>a,<sp/><ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ec" kindref="member">CommitPoint</ref><sp/>b)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ec" kindref="member">CommitPoint</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(std::to_underlying(a)<sp/>&amp;<sp/>std::to_underlying(b));</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="87"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="88"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Bitwise<sp/>OR<sp/>operator<sp/>for<sp/>CommitPoint<sp/>flags.</highlight></codeline>
+<codeline lineno="89"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="90"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>a<sp/>First<sp/>operand.</highlight></codeline>
+<codeline lineno="91"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>b<sp/>Second<sp/>operand.</highlight></codeline>
+<codeline lineno="92"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="93"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>combined<sp/>flags.</highlight></codeline>
+<codeline lineno="94"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="95" refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1aeccfb837ed873bcca8d40f8312f36686" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ec" kindref="member">CommitPoint</ref><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1aeccfb837ed873bcca8d40f8312f36686" kindref="member">operator |</ref>(<ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ec" kindref="member">CommitPoint</ref><sp/>a,<sp/><ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ec" kindref="member">CommitPoint</ref><sp/>b)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ec" kindref="member">CommitPoint</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(std::to_underlying(a)<sp/>|<sp/>std::to_underlying(b));</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="include/helios/engine/runtime/gameloop/CommitPoint.ixx"/>
+  </compounddef>
+</doxygen>

@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">helios-engine-runtime-gameloop-phase | helios</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://helios.garagecraft.games/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://helios.garagecraft.games/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://helios.garagecraft.games/docs/helios/classes/helios/engine/runtime/gameloop/phase"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="helios-engine-runtime-gameloop-phase | helios"><meta data-rh="true" name="description" content="Represents a phase in the game loop containing multiple passes. More..."><meta data-rh="true" property="og:description" content="Represents a phase in the game loop containing multiple passes. More..."><meta data-rh="true" name="keywords" content="doxygen,reference,class"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://helios.garagecraft.games/docs/helios/classes/helios/engine/runtime/gameloop/phase"><link data-rh="true" rel="alternate" href="https://helios.garagecraft.games/docs/helios/classes/helios/engine/runtime/gameloop/phase" hreflang="en"><link data-rh="true" rel="alternate" href="https://helios.garagecraft.games/docs/helios/classes/helios/engine/runtime/gameloop/phase" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://LK14YGETTG-dsn.algolia.net" crossorigin="anonymous"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"API Reference (Doxygen)","item":"https://helios.garagecraft.games/docs/helios/"},{"@type":"ListItem","position":2,"name":"Classes","item":"https://helios.garagecraft.games/docs/helios/classes"},{"@type":"ListItem","position":3,"name":"Phase","item":"https://helios.garagecraft.games/docs/helios/classes/helios/engine/runtime/gameloop/phase"}]}</script><link rel="search" type="application/opensearchdescription+xml" title="helios" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.d8266996.css">
-<script src="/assets/js/runtime~main.3593c6ef.js" defer="defer"></script>
-<script src="/assets/js/main.5dd95e7e.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.ecd6c71c.js" defer="defer"></script>
+<script src="/assets/js/main.a3c6554d.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -59,6 +59,7 @@ class helios::engine::runtime::gameloop::Phase { ... }
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="details">Description<a href="#details" class="hash-link" aria-label="Direct link to Description" title="Direct link to Description" translate="no">​</a></h2>
 <p>Represents a phase in the game loop containing multiple passes.</p>
 <p>A <a class="" href="/docs/helios/classes/helios/engine/runtime/gameloop/phase">Phase</a> groups related systems into passes that are executed sequentially. Each pass can contain multiple systems and may have a commit point for event synchronization.</p>
+<p>Commit points allow fine-grained control over when commands are flushed, managers are processed, and pass-level events are synchronized. See <a class="" href="/docs/helios/namespaces/helios/engine/runtime/gameloop/#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a> for available synchronization options.</p>
 <p>Phases are owned by the <a class="" href="/docs/helios/classes/helios/engine/runtime/gameloop/gameloop">GameLoop</a> and should not be created directly.</p>
 <dl class="doxySectionUser">
 <dt>See Also</dt>
@@ -66,9 +67,13 @@ class helios::engine::runtime::gameloop::Phase { ... }
 </dl>
 <dl class="doxySectionUser">
 <dt>See Also</dt>
+<dd><p><a class="" href="/docs/helios/namespaces/helios/engine/runtime/gameloop/#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a></p></dd>
+</dl>
+<dl class="doxySectionUser">
+<dt>See Also</dt>
 <dd><p><a class="" href="/docs/helios/classes/helios/engine/runtime/gameloop/gameloop">GameLoop</a></p></dd>
 </dl>
-<p>Definition at line 57 of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx">Phase.ixx</a>.</p>
+<p>Definition at line 62 of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx">Phase.ixx</a>.</p>
 <div class="doxySectionDef">
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="friends">Friends<a href="#friends" class="hash-link" aria-label="Direct link to Friends" title="Direct link to Friends" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ace0e397149fac0d6f4bc27914eb103b8">helios::engine::runtime::gameloop::GameLoop<a href="#ace0e397149fac0d6f4bc27914eb103b8" class="hash-link" aria-label="Direct link to helios::engine::runtime::gameloop::GameLoop" title="Direct link to helios::engine::runtime::gameloop::GameLoop" translate="no">​</a></h3>
@@ -79,9 +84,9 @@ class helios::engine::runtime::gameloop::Phase { ... }
 </td></tr></tbody></table>
 </div>
 <div class="doxyMemberDoc">
-<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx/#l00059">59</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx">Phase.ixx</a>.</p>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx/#l00064">64</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx">Phase.ixx</a>.</p>
 <div class="doxyProgramListing">
-<div class="doxyCodeLine"><span class="doxyLineNumber"><a href="#ace0e397149fac0d6f4bc27914eb103b8" class="">59</a></span><span class="doxyLineContent"><span class="doxyHighlight">        </span><span class="doxyHighlightKeyword">friend</span><span class="doxyHighlight"> </span><span class="doxyHighlightKeyword">class </span><span class="doxyHighlight"><a class="" href="/docs/helios/classes/helios/engine/runtime/gameloop/gameloop">helios::engine::runtime::gameloop::GameLoop</a>;</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber"><a href="#ace0e397149fac0d6f4bc27914eb103b8" class="">64</a></span><span class="doxyLineContent"><span class="doxyHighlight">        </span><span class="doxyHighlightKeyword">friend</span><span class="doxyHighlight"> </span><span class="doxyHighlightKeyword">class </span><span class="doxyHighlight"><a class="" href="/docs/helios/classes/helios/engine/runtime/gameloop/gameloop">helios::engine::runtime::gameloop::GameLoop</a>;</span></span></div>
 </div>
 </div>
 </div>
@@ -108,11 +113,11 @@ class helios::engine::runtime::gameloop::Phase { ... }
 <table class="doxyParamsTable"><tbody><tr class="doxyParamItem"><td class="doxyParamItemName">gameloop</td><td class="doxyParamItemDescription"><p>Reference to the parent <a class="" href="/docs/helios/classes/helios/engine/runtime/gameloop/gameloop">GameLoop</a>.</p></td></tr></tbody></table>
 </dd>
 </dl>
-<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx/#l00105">105</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx">Phase.ixx</a>.</p>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx/#l00118">118</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx">Phase.ixx</a>.</p>
 <div class="doxyProgramListing">
-<div class="doxyCodeLine"><span class="doxyLineNumber"><a href="#a1c22609dfb21151cb2c60db9c1a4c196" class="">105</a></span><span class="doxyLineContent"><span class="doxyHighlight">        </span><span class="doxyHighlightKeyword">explicit</span><span class="doxyHighlight"> <a href="#a1c22609dfb21151cb2c60db9c1a4c196" class="">Phase</a>(<a class="" href="/docs/helios/classes/helios/engine/runtime/gameloop/gameloop">helios::engine::runtime::gameloop::GameLoop</a>&amp; <a class="" href="/docs/helios/namespaces/helios/engine/runtime/gameloop">gameloop</a>) : gameloop_(<a class="" href="/docs/helios/namespaces/helios/engine/runtime/gameloop">gameloop</a>) {</span></span></div>
-<div class="doxyCodeLine"><span class="doxyLineNumber">106</span></div>
-<div class="doxyCodeLine"><span class="doxyLineNumber">107</span><span class="doxyLineContent"><span class="doxyHighlight">        }</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber"><a href="#a1c22609dfb21151cb2c60db9c1a4c196" class="">118</a></span><span class="doxyLineContent"><span class="doxyHighlight">        </span><span class="doxyHighlightKeyword">explicit</span><span class="doxyHighlight"> <a href="#a1c22609dfb21151cb2c60db9c1a4c196" class="">Phase</a>(<a class="" href="/docs/helios/classes/helios/engine/runtime/gameloop/gameloop">helios::engine::runtime::gameloop::GameLoop</a>&amp; <a class="" href="/docs/helios/namespaces/helios/engine/runtime/gameloop">gameloop</a>) : gameloop_(<a class="" href="/docs/helios/namespaces/helios/engine/runtime/gameloop">gameloop</a>) {</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">119</span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">120</span><span class="doxyLineContent"><span class="doxyHighlight">        }</span></span></div>
 </div>
 </div>
 </div>
@@ -136,16 +141,16 @@ class helios::engine::runtime::gameloop::Phase { ... }
 <dt>Returns</dt>
 <dd><p>Reference to the newly created <a class="" href="/docs/helios/classes/helios/engine/runtime/gameloop/pass">Pass</a> for method chaining.</p></dd>
 </dl>
-<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx/#l00114">114</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx">Phase.ixx</a>.</p>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx/#l00127">127</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx">Phase.ixx</a>.</p>
 <div class="doxyProgramListing">
-<div class="doxyCodeLine"><span class="doxyLineNumber"><a href="#ab6843bc03abe3867cd46c4888f88176f" class="">114</a></span><span class="doxyLineContent"><span class="doxyHighlight">        <a class="" href="/docs/helios/classes/helios/engine/runtime/gameloop/pass">Pass</a>&amp; <a href="#ab6843bc03abe3867cd46c4888f88176f" class="">addPass</a>() {</span></span></div>
-<div class="doxyCodeLine"><span class="doxyLineNumber">115</span></div>
-<div class="doxyCodeLine"><span class="doxyLineNumber">116</span><span class="doxyLineContent"><span class="doxyHighlight">            </span><span class="doxyHighlightKeyword">auto</span><span class="doxyHighlight"> entry = std::make_unique&lt;Pass&gt;(*</span><span class="doxyHighlightKeyword">this</span><span class="doxyHighlight">);</span></span></div>
-<div class="doxyCodeLine"><span class="doxyLineNumber">117</span><span class="doxyLineContent"><span class="doxyHighlight">            </span><span class="doxyHighlightKeyword">auto</span><span class="doxyHighlight">* raw = entry.get();</span></span></div>
-<div class="doxyCodeLine"><span class="doxyLineNumber">118</span><span class="doxyLineContent"><span class="doxyHighlight">            passEntries_.emplace_back(std::move(entry));</span></span></div>
-<div class="doxyCodeLine"><span class="doxyLineNumber">119</span></div>
-<div class="doxyCodeLine"><span class="doxyLineNumber">120</span><span class="doxyLineContent"><span class="doxyHighlight">            </span><span class="doxyHighlightKeywordFlow">return</span><span class="doxyHighlight"> *raw;</span></span></div>
-<div class="doxyCodeLine"><span class="doxyLineNumber">121</span><span class="doxyLineContent"><span class="doxyHighlight">        }</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber"><a href="#ab6843bc03abe3867cd46c4888f88176f" class="">127</a></span><span class="doxyLineContent"><span class="doxyHighlight">        <a class="" href="/docs/helios/classes/helios/engine/runtime/gameloop/pass">Pass</a>&amp; <a href="#ab6843bc03abe3867cd46c4888f88176f" class="">addPass</a>() {</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">128</span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">129</span><span class="doxyLineContent"><span class="doxyHighlight">            </span><span class="doxyHighlightKeyword">auto</span><span class="doxyHighlight"> entry = std::make_unique&lt;Pass&gt;(*</span><span class="doxyHighlightKeyword">this</span><span class="doxyHighlight">);</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">130</span><span class="doxyLineContent"><span class="doxyHighlight">            </span><span class="doxyHighlightKeyword">auto</span><span class="doxyHighlight">* raw = entry.get();</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">131</span><span class="doxyLineContent"><span class="doxyHighlight">            passEntries_.emplace_back(std::move(entry));</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">132</span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">133</span><span class="doxyLineContent"><span class="doxyHighlight">            </span><span class="doxyHighlightKeywordFlow">return</span><span class="doxyHighlight"> *raw;</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">134</span><span class="doxyLineContent"><span class="doxyHighlight">        }</span></span></div>
 </div>
 </div>
 </div>
@@ -167,11 +172,11 @@ class helios::engine::runtime::gameloop::Phase { ... }
 <dt>Returns</dt>
 <dd><p>Reference to the parent <a class="" href="/docs/helios/classes/helios/engine/runtime/gameloop/gameloop">GameLoop</a>.</p></dd>
 </dl>
-<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx/#l00128">128</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx">Phase.ixx</a>.</p>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx/#l00141">141</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx">Phase.ixx</a>.</p>
 <div class="doxyProgramListing">
-<div class="doxyCodeLine"><span class="doxyLineNumber"><a href="#a792bbe1e6cdc378bccc7234c2e57b295" class="">128</a></span><span class="doxyLineContent"><span class="doxyHighlight">        [[nodiscard]] <a class="" href="/docs/helios/classes/helios/engine/runtime/gameloop/gameloop">helios::engine::runtime::gameloop::GameLoop</a>&amp; <a href="#a792bbe1e6cdc378bccc7234c2e57b295" class="">gameLoop</a>()  {</span></span></div>
-<div class="doxyCodeLine"><span class="doxyLineNumber">129</span><span class="doxyLineContent"><span class="doxyHighlight">            </span><span class="doxyHighlightKeywordFlow">return</span><span class="doxyHighlight"> gameloop_;</span></span></div>
-<div class="doxyCodeLine"><span class="doxyLineNumber">130</span><span class="doxyLineContent"><span class="doxyHighlight">        }</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber"><a href="#a792bbe1e6cdc378bccc7234c2e57b295" class="">141</a></span><span class="doxyLineContent"><span class="doxyHighlight">        [[nodiscard]] <a class="" href="/docs/helios/classes/helios/engine/runtime/gameloop/gameloop">helios::engine::runtime::gameloop::GameLoop</a>&amp; <a href="#a792bbe1e6cdc378bccc7234c2e57b295" class="">gameLoop</a>()  {</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">142</span><span class="doxyLineContent"><span class="doxyHighlight">            </span><span class="doxyHighlightKeywordFlow">return</span><span class="doxyHighlight"> gameloop_;</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">143</span><span class="doxyLineContent"><span class="doxyHighlight">        }</span></span></div>
 </div>
 </div>
 </div>
@@ -197,14 +202,14 @@ class helios::engine::runtime::gameloop::Phase { ... }
 <table class="doxyParamsTable"><tbody><tr class="doxyParamItem"><td class="doxyParamItemName">gameWorld</td><td class="doxyParamItemDescription"><p>Reference to the game world.</p></td></tr></tbody></table>
 </dd>
 </dl>
-<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx/#l00066">66</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx">Phase.ixx</a>.</p>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx/#l00071">71</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx">Phase.ixx</a>.</p>
 <div class="doxyProgramListing">
-<div class="doxyCodeLine"><span class="doxyLineNumber">66</span><span class="doxyLineContent"><span class="doxyHighlight">        </span><span class="doxyHighlightKeywordType">void</span><span class="doxyHighlight"> init(<a class="" href="/docs/helios/classes/helios/engine/runtime/world/gameworld">helios::engine::runtime::world::GameWorld</a>&amp; gameWorld){</span></span></div>
-<div class="doxyCodeLine"><span class="doxyLineNumber">67</span><span class="doxyLineContent"><span class="doxyHighlight">            </span><span class="doxyHighlightKeywordFlow">for</span><span class="doxyHighlight"> (</span><span class="doxyHighlightKeyword">auto</span><span class="doxyHighlight">&amp; pass : passEntries_) {</span></span></div>
-<div class="doxyCodeLine"><span class="doxyLineNumber">68</span><span class="doxyLineContent"><span class="doxyHighlight">                </span><span class="doxyHighlightComment">// every pass contains systems that are updated here</span></span></div>
-<div class="doxyCodeLine"><span class="doxyLineNumber">69</span><span class="doxyLineContent"><span class="doxyHighlight">                pass-&gt;init(gameWorld);</span></span></div>
-<div class="doxyCodeLine"><span class="doxyLineNumber">70</span><span class="doxyLineContent"><span class="doxyHighlight">            }</span></span></div>
-<div class="doxyCodeLine"><span class="doxyLineNumber">71</span><span class="doxyLineContent"><span class="doxyHighlight">        };</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">71</span><span class="doxyLineContent"><span class="doxyHighlight">        </span><span class="doxyHighlightKeywordType">void</span><span class="doxyHighlight"> init(<a class="" href="/docs/helios/classes/helios/engine/runtime/world/gameworld">helios::engine::runtime::world::GameWorld</a>&amp; gameWorld){</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">72</span><span class="doxyLineContent"><span class="doxyHighlight">            </span><span class="doxyHighlightKeywordFlow">for</span><span class="doxyHighlight"> (</span><span class="doxyHighlightKeyword">auto</span><span class="doxyHighlight">&amp; pass : passEntries_) {</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">73</span><span class="doxyLineContent"><span class="doxyHighlight">                </span><span class="doxyHighlightComment">// every pass contains systems that are updated here</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">74</span><span class="doxyLineContent"><span class="doxyHighlight">                pass-&gt;init(gameWorld);</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">75</span><span class="doxyLineContent"><span class="doxyHighlight">            }</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">76</span><span class="doxyLineContent"><span class="doxyHighlight">        };</span></span></div>
 </div>
 </div>
 </div>
@@ -221,23 +226,32 @@ class helios::engine::runtime::gameloop::Phase { ... }
 </div>
 <div class="doxyMemberDoc">
 <p>Updates all passes within this phase.</p>
+<p>Iterates through all passes, updating their systems and then invoking the commit action based on the pass&#x27;s configured <a class="" href="/docs/helios/namespaces/helios/engine/runtime/gameloop/#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a>. The commit point determines whether pass-level events are synchronized, the command buffer is flushed, or managers are processed.</p>
 <dl class="doxyParamsList">
 <dt class="doxyParamsTableTitle">Parameters</dt>
 <dd>
 <table class="doxyParamsTable"><tbody><tr class="doxyParamItem"><td class="doxyParamItemName">updateContext</td><td class="doxyParamItemDescription"><p>The current update context.</p></td></tr></tbody></table>
 </dd>
 </dl>
-<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx/#l00078">78</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx">Phase.ixx</a>.</p>
+<dl class="doxySectionUser">
+<dt>See Also</dt>
+<dd><p><a class="" href="/docs/helios/namespaces/helios/engine/runtime/gameloop/#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a></p></dd>
+</dl>
+<dl class="doxySectionUser">
+<dt>See Also</dt>
+<dd><p><a class="" href="/docs/helios/classes/helios/engine/runtime/gameloop/pass/#a36ee909a78fabac1cf997d98b0f8438c">Pass::addCommitPoint()</a></p></dd>
+</dl>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx/#l00091">91</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx">Phase.ixx</a>.</p>
 <div class="doxyProgramListing">
-<div class="doxyCodeLine"><span class="doxyLineNumber">78</span><span class="doxyLineContent"><span class="doxyHighlight">        </span><span class="doxyHighlightKeywordType">void</span><span class="doxyHighlight"> update(<a class="" href="/docs/helios/structs/helios/engine/runtime/world/updatecontext">helios::engine::runtime::world::UpdateContext</a>&amp; updateContext){</span></span></div>
-<div class="doxyCodeLine"><span class="doxyLineNumber">79</span><span class="doxyLineContent"><span class="doxyHighlight">            </span><span class="doxyHighlightKeywordFlow">for</span><span class="doxyHighlight"> (</span><span class="doxyHighlightKeyword">auto</span><span class="doxyHighlight">&amp; pass : passEntries_) {</span></span></div>
-<div class="doxyCodeLine"><span class="doxyLineNumber">80</span><span class="doxyLineContent"><span class="doxyHighlight">                </span><span class="doxyHighlightComment">// every pass contains systems that are updated here</span></span></div>
-<div class="doxyCodeLine"><span class="doxyLineNumber">81</span><span class="doxyLineContent"><span class="doxyHighlight">                pass-&gt;update(updateContext);</span></span></div>
-<div class="doxyCodeLine"><span class="doxyLineNumber">82</span></div>
-<div class="doxyCodeLine"><span class="doxyLineNumber">83</span><span class="doxyLineContent"><span class="doxyHighlight">                </span><span class="doxyHighlightComment">// once all systems were updated, we commit</span></span></div>
-<div class="doxyCodeLine"><span class="doxyLineNumber">84</span><span class="doxyLineContent"><span class="doxyHighlight">                pass-&gt;commit();</span></span></div>
-<div class="doxyCodeLine"><span class="doxyLineNumber">85</span><span class="doxyLineContent"><span class="doxyHighlight">            }</span></span></div>
-<div class="doxyCodeLine"><span class="doxyLineNumber">86</span><span class="doxyLineContent"><span class="doxyHighlight">        };</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">91</span><span class="doxyLineContent"><span class="doxyHighlight">        </span><span class="doxyHighlightKeywordType">void</span><span class="doxyHighlight"> update(<a class="" href="/docs/helios/structs/helios/engine/runtime/world/updatecontext">helios::engine::runtime::world::UpdateContext</a>&amp; updateContext){</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">92</span><span class="doxyLineContent"><span class="doxyHighlight">            </span><span class="doxyHighlightKeywordFlow">for</span><span class="doxyHighlight"> (</span><span class="doxyHighlightKeyword">auto</span><span class="doxyHighlight">&amp; pass : passEntries_) {</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">93</span><span class="doxyLineContent"><span class="doxyHighlight">                </span><span class="doxyHighlightComment">// every pass contains systems that are updated here</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">94</span><span class="doxyLineContent"><span class="doxyHighlight">                pass-&gt;update(updateContext);</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">95</span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">96</span><span class="doxyLineContent"><span class="doxyHighlight">                </span><span class="doxyHighlightComment">// once all systems were updated, we commit based on the configured CommitPoint</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">97</span><span class="doxyLineContent"><span class="doxyHighlight">                pass-&gt;commit(pass-&gt;commitPoint(), updateContext);</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">98</span><span class="doxyLineContent"><span class="doxyHighlight">            }</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">99</span><span class="doxyLineContent"><span class="doxyHighlight">        };</span></span></div>
 </div>
 </div>
 </div>
@@ -253,9 +267,9 @@ class helios::engine::runtime::gameloop::Phase { ... }
 </div>
 <div class="doxyMemberDoc">
 <p>Reference to the owning <a class="" href="/docs/helios/classes/helios/engine/runtime/gameloop/gameloop">GameLoop</a>.</p>
-<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx/#l00096">96</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx">Phase.ixx</a>.</p>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx/#l00109">109</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx">Phase.ixx</a>.</p>
 <div class="doxyProgramListing">
-<div class="doxyCodeLine"><span class="doxyLineNumber">96</span><span class="doxyLineContent"><span class="doxyHighlight">        <a class="" href="/docs/helios/classes/helios/engine/runtime/gameloop/gameloop">helios::engine::runtime::gameloop::GameLoop</a>&amp; gameloop_;</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">109</span><span class="doxyLineContent"><span class="doxyHighlight">        <a class="" href="/docs/helios/classes/helios/engine/runtime/gameloop/gameloop">helios::engine::runtime::gameloop::GameLoop</a>&amp; gameloop_;</span></span></div>
 </div>
 </div>
 </div>
@@ -268,9 +282,9 @@ class helios::engine::runtime::gameloop::Phase { ... }
 </div>
 <div class="doxyMemberDoc">
 <p>Collection of passes belonging to this phase.</p>
-<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx/#l00091">91</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx">Phase.ixx</a>.</p>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx/#l00104">104</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx">Phase.ixx</a>.</p>
 <div class="doxyProgramListing">
-<div class="doxyCodeLine"><span class="doxyLineNumber">91</span><span class="doxyLineContent"><span class="doxyHighlight">        std::vector&lt;std::unique_ptr&lt;Pass&gt;&gt; passEntries_;</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">104</span><span class="doxyLineContent"><span class="doxyHighlight">        std::vector&lt;std::unique_ptr&lt;Pass&gt;&gt; passEntries_;</span></span></div>
 </div>
 </div>
 </div>

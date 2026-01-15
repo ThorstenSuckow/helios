@@ -1,5 +1,14 @@
 var NAVTREEINDEX12 =
 {
+"classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html":[3,0,23,0],
+"classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html":[4,0,0,0,2,0,2],
+"classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html":[6,0,0,0,2,0,2],
+"classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html#a205e92c86ad75f4a23903f80e092a9f0":[3,0,23,0,2],
+"classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html#a205e92c86ad75f4a23903f80e092a9f0":[4,0,0,0,2,0,2,2],
+"classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html#a205e92c86ad75f4a23903f80e092a9f0":[6,0,0,0,2,0,2,2],
+"classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html#a2f589946c2ca4029fc3d3f3ba7820c99":[3,0,23,0,1],
+"classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html#a2f589946c2ca4029fc3d3f3ba7820c99":[4,0,0,0,2,0,2,1],
+"classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html#a2f589946c2ca4029fc3d3f3ba7820c99":[6,0,0,0,2,0,2,1],
 "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html#a8f15cee19cf071f05f1f320ca30243a8":[3,0,23,0,0],
 "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html#a8f15cee19cf071f05f1f320ca30243a8":[4,0,0,0,2,0,2,0],
 "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html#a8f15cee19cf071f05f1f320ca30243a8":[6,0,0,0,2,0,2,0],
@@ -240,14 +249,5 @@ var NAVTREEINDEX12 =
 "classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#ac95d69c9b3265c0b598e0020bbb80309":[3,0,203,0,4],
 "classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#ac95d69c9b3265c0b598e0020bbb80309":[4,0,0,5,0,1,4],
 "classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#ac95d69c9b3265c0b598e0020bbb80309":[6,0,0,5,0,1,4],
-"classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#adf78328ccc756a4d8a514fdc6b7cf653":[3,0,203,0,7],
-"classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#adf78328ccc756a4d8a514fdc6b7cf653":[4,0,0,5,0,1,7],
-"classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#adf78328ccc756a4d8a514fdc6b7cf653":[6,0,0,5,0,1,7],
-"classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#aeeb056d8dcc5c7007e3a1dd542c4ddea":[3,0,203,0,9],
-"classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#aeeb056d8dcc5c7007e3a1dd542c4ddea":[4,0,0,5,0,1,9],
-"classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#aeeb056d8dcc5c7007e3a1dd542c4ddea":[6,0,0,5,0,1,9],
-"classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#af5ac72dc6b04400f79bc7fab851c0d02":[3,0,203,0,8],
-"classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#af5ac72dc6b04400f79bc7fab851c0d02":[4,0,0,5,0,1,8],
-"classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#af5ac72dc6b04400f79bc7fab851c0d02":[6,0,0,5,0,1,8],
-"classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#af93e6e1d89959cc5e75a690106067bbb":[3,0,203,0,10]
+"classhelios_1_1input_1_1gamepad_1_1GamepadSettings.html#adf78328ccc756a4d8a514fdc6b7cf653":[3,0,203,0,7]
 };

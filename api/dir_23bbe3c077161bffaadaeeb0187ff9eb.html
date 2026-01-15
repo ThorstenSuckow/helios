@@ -117,6 +117,8 @@ $(function() {
 Files</h2></td></tr>
 <tr class="memitem:_5Fmodule_2Eixx" id="r__5Fmodule_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="helios_2engine_2runtime_2gameloop_2__module_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="helios_2engine_2runtime_2gameloop_2__module_8ixx.html">_module.ixx</a></td></tr>
 <tr class="memdesc:helios_2engine_2runtime_2gameloop_2__module_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Module aggregator for <a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html" title="Central game loop orchestration module.">helios.engine.runtime.gameloop</a>. <br /></td></tr>
+<tr class="memitem:CommitPoint_2Eixx" id="r_CommitPoint_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="CommitPoint_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CommitPoint_8ixx.html">CommitPoint.ixx</a></td></tr>
+<tr class="memdesc:CommitPoint_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines commit points for synchronization within the game loop. <br /></td></tr>
 <tr class="memitem:GameLoop_2Eixx" id="r_GameLoop_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="GameLoop_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="GameLoop_8ixx.html">GameLoop.ixx</a></td></tr>
 <tr class="memdesc:GameLoop_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Central orchestrator for the game update cycle. <br /></td></tr>
 <tr class="memitem:Pass_2Eixx" id="r_Pass_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="Pass_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Pass_8ixx.html">Pass.ixx</a></td></tr>
@@ -142,6 +144,13 @@ Key Components</h1>
 <p><b>GameLoop</b> is the central orchestrator that owns the three phases, the CommandBuffer, and the event buses. It drives the frame update by iterating through all phases and committing events and commands after each phase.</p>
 <p><b>Phase</b> represents a distinct stage in the update cycle. Phases contain passes and are executed in fixed order (Pre → Main → Post).</p>
 <p><b>Pass</b> contains a registry of systems that execute sequentially. Passes support commit points to synchronize pass-level events before the next pass begins.</p>
+<p><b>CommitPoint</b> is a flag enum that specifies which synchronization actions occur at the end of a pass. Available flags include:</p><ul>
+<li><span class="tt">PassEvents</span> — Synchronizes pass-level events for the next pass.</li>
+<li><span class="tt">FlushCommands</span> — Executes pending commands from the CommandBuffer.</li>
+<li><span class="tt">FlushManagers</span> — Processes manager requests (e.g., spawning from pools).</li>
+<li><span class="tt">Structural</span> — Combines all three flags for a full structural commit.</li>
+</ul>
+<p>Flags can be combined using bitwise OR to trigger multiple actions at once.</p>
 <h1 class="doxsection"><a class="anchor" id="autotoc_md227"></a>
 Usage</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;helios/engine/gameloop/GameLoop.ixx&quot;</span></div>
@@ -153,17 +162,18 @@ Usage</h1>
 <div class="line">    .<a class="code hl_function" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html#ab6843bc03abe3867cd46c4888f88176f">addPass</a>()</div>
 <div class="line">        .add&lt;InputSystem&gt;(&amp;inputManager);</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Configure Main phase</span></div>
+<div class="line"><span class="comment">// Configure Main phase with custom commit points</span></div>
 <div class="line">gameLoop.phase(PhaseType.Main)</div>
 <div class="line">    .addPass()</div>
 <div class="line">        .add&lt;MovementSystem&gt;(&amp;gameWorld)</div>
 <div class="line">        .add&lt;HeadingSystem&gt;(&amp;gameWorld)</div>
-<div class="line">        .<a class="code hl_function" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html#a3f6b86a024c8b87e7794a024c2342d6c">addCommitPoint</a>()</div>
+<div class="line">        <span class="comment">// Commit pass events and flush commands, but defer manager flush</span></div>
+<div class="line">        .<a class="code hl_function" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html#a36ee909a78fabac1cf997d98b0f8438c">addCommitPoint</a>(CommitPoint::PassEvents | CommitPoint::FlushCommands)</div>
 <div class="line">    .<a class="code hl_function" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html#ab6843bc03abe3867cd46c4888f88176f">addPass</a>()</div>
-<div class="line">        <span class="comment">// due to the previous commit point, CollisionSystem</span></div>
-<div class="line">        <span class="comment">// can read all events pushed to the PassEventBus </span></div>
-<div class="line">        <span class="comment">// by the systems in the previous pass.</span></div>
-<div class="line">        .add&lt;CollisionSystem&gt;(&amp;gameWorld); </div>
+<div class="line">        <span class="comment">// CollisionSystem can now read events from the previous pass</span></div>
+<div class="line">        .add&lt;CollisionSystem&gt;(&amp;gameWorld)</div>
+<div class="line">        <span class="comment">// Full structural commit: events, commands, and managers</span></div>
+<div class="line">        .addCommitPoint(CommitPoint::Structural); </div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Configure Post phase</span></div>
 <div class="line">gameLoop.phase(PhaseType.Post)</div>
@@ -179,11 +189,11 @@ Usage</h1>
 <div class="line">    gameLoop.update(gameWorld, deltaTime, inputSnapshot);</div>
 <div class="line">    renderer.render(scene);</div>
 <div class="line">}</div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_html"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html">helios::engine::runtime::gameloop::GameLoop</a></div><div class="ttdoc">Central orchestrator for the game update cycle.</div><div class="ttdef"><b>Definition</b> <a href="GameLoop_8ixx_source.html#l00045">GameLoop.ixx:45</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_html_a72b7ba2e6461d61b0f384a3d7b940a82"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html#a72b7ba2e6461d61b0f384a3d7b940a82">helios::engine::runtime::gameloop::GameLoop::phase</a></div><div class="ttdeci">helios::engine::runtime::gameloop::Phase &amp; phase(helios::engine::runtime::gameloop::PhaseType phaseType)</div><div class="ttdoc">Returns a reference to the specified phase.</div><div class="ttdef"><b>Definition</b> <a href="GameLoop_8ixx_source.html#l00161">GameLoop.ixx:161</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_html_a3f6b86a024c8b87e7794a024c2342d6c"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html#a3f6b86a024c8b87e7794a024c2342d6c">helios::engine::runtime::gameloop::Pass::addCommitPoint</a></div><div class="ttdeci">Phase &amp; addCommitPoint()</div><div class="ttdoc">Marks this pass with a commit point and returns the owning Phase.</div><div class="ttdef"><b>Definition</b> <a href="Pass_8ixx_source.html#l00134">Pass.ixx:134</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase_html_ab6843bc03abe3867cd46c4888f88176f"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html#ab6843bc03abe3867cd46c4888f88176f">helios::engine::runtime::gameloop::Phase::addPass</a></div><div class="ttdeci">Pass &amp; addPass()</div><div class="ttdoc">Creates and adds a new pass to this phase.</div><div class="ttdef"><b>Definition</b> <a href="Phase_8ixx_source.html#l00114">Phase.ixx:114</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1engine_1_1runtime_1_1gameloop_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html">helios::engine::runtime::gameloop</a></div><div class="ttdoc">Central game loop orchestration module.</div><div class="ttdef"><b>Definition</b> <a href="GameLoop_8ixx_source.html#l00027">GameLoop.ixx:27</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_html"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html">helios::engine::runtime::gameloop::GameLoop</a></div><div class="ttdoc">Central orchestrator for the game update cycle.</div><div class="ttdef"><b>Definition</b> <a href="GameLoop_8ixx_source.html#l00051">GameLoop.ixx:51</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_html_a72b7ba2e6461d61b0f384a3d7b940a82"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html#a72b7ba2e6461d61b0f384a3d7b940a82">helios::engine::runtime::gameloop::GameLoop::phase</a></div><div class="ttdeci">helios::engine::runtime::gameloop::Phase &amp; phase(helios::engine::runtime::gameloop::PhaseType phaseType)</div><div class="ttdoc">Returns a reference to the specified phase.</div><div class="ttdef"><b>Definition</b> <a href="GameLoop_8ixx_source.html#l00195">GameLoop.ixx:195</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_html_a36ee909a78fabac1cf997d98b0f8438c"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html#a36ee909a78fabac1cf997d98b0f8438c">helios::engine::runtime::gameloop::Pass::addCommitPoint</a></div><div class="ttdeci">Phase &amp; addCommitPoint(const CommitPoint commitPoint=CommitPoint::PassEvents)</div><div class="ttdoc">Marks this pass with a commit point and returns the owning Phase.</div><div class="ttdef"><b>Definition</b> <a href="Pass_8ixx_source.html#l00151">Pass.ixx:151</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase_html_ab6843bc03abe3867cd46c4888f88176f"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html#ab6843bc03abe3867cd46c4888f88176f">helios::engine::runtime::gameloop::Phase::addPass</a></div><div class="ttdeci">Pass &amp; addPass()</div><div class="ttdoc">Creates and adds a new pass to this phase.</div><div class="ttdef"><b>Definition</b> <a href="Phase_8ixx_source.html#l00127">Phase.ixx:127</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1engine_1_1runtime_1_1gameloop_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1runtime_1_1gameloop.html">helios::engine::runtime::gameloop</a></div><div class="ttdoc">Central game loop orchestration module.</div><div class="ttdef"><b>Definition</b> <a href="CommitPoint_8ixx_source.html#l00013">CommitPoint.ixx:13</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1engine_1_1runtime_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1runtime.html">helios::engine::runtime</a></div><div class="ttdoc">Runtime infrastructure for game execution and lifecycle orchestration.</div><div class="ttdef"><b>Definition</b> <a href="GameObjectFactory_8ixx_source.html#l00020">GameObjectFactory.ixx:20</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1engine_html"><div class="ttname"><a href="namespacehelios_1_1engine.html">helios::engine</a></div><div class="ttdoc">Main engine module aggregating core infrastructure and game systems.</div><div class="ttdef"><b>Definition</b> <a href="GameObjectPoolId_8ixx_source.html#l00013">GameObjectPoolId.ixx:13</a></div></div>
 <div class="ttc" id="anamespacehelios_html"><div class="ttname"><a href="namespacehelios.html">helios</a></div><div class="ttdef"><b>Definition</b> <a href="GLFWApplication_8ixx_source.html#l00025">GLFWApplication.ixx:25</a></div></div>
@@ -192,6 +202,23 @@ Event Synchronization</h1>
 <p>The game loop provides two levels of event synchronization:</p>
 <p><b>Pass-level events</b> are synchronized at commit points within a phase. This allows systems in the next pass to react to events generated by the previous pass - within the same phase. Pass-level events are discarded at the end of the phase and do not carry over to the next phase.</p>
 <p><b>Phase-level events</b> are synchronized after each phase completes. Only events written via <span class="tt">phasePush()</span> are available to systems in the following phase. Commands are flushed and managers process their requests at phase boundaries.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md229"></a>
+CommitPoint Configuration</h1>
+<p>Commit points provide fine-grained control over synchronization within a phase. By default, <span class="tt">addCommitPoint()</span> uses <span class="tt">CommitPoint::PassEvents</span> which only synchronizes pass-level events.</p>
+<p>For more control, specify the desired flags explicitly:</p>
+<div class="fragment"><div class="line"><span class="comment">// Only synchronize pass events (default)</span></div>
+<div class="line">pass.addCommitPoint(CommitPoint::PassEvents);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Flush commands after this pass, but defer manager processing</span></div>
+<div class="line">pass.addCommitPoint(CommitPoint::FlushCommands);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Full structural commit: events + commands + managers</span></div>
+<div class="line">pass.addCommitPoint(CommitPoint::Structural);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Custom combination</span></div>
+<div class="line">pass.addCommitPoint(CommitPoint::PassEvents | CommitPoint::FlushManagers);</div>
+</div><!-- fragment --><p>The execution order within a commit point is deterministic: 1. Pass events are synchronized (if <span class="tt">PassEvents</span> is set) 2. Commands are flushed (if <span class="tt">FlushCommands</span> is set) 3. Managers process requests (if <span class="tt">FlushManagers</span> is set)</p>
+<p>This ordering ensures that commands can generate manager requests before managers are flushed.</p>
 <div class="fragment"><div class="line">┌─────────────────────────────────────────────────────────────────────────┐</div>
 <div class="line">│                              FRAME UPDATE                               │</div>
 <div class="line">├─────────────────────────────────────────────────────────────────────────┤</div>

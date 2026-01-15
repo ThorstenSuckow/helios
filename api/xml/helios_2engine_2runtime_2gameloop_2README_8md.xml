@@ -36,6 +36,14 @@
 <codeline></codeline>
 <codeline><highlight class="normal">**Pass**<sp/>contains<sp/>a<sp/>registry<sp/>of<sp/>systems<sp/>that<sp/>execute<sp/>sequentially.<sp/>Passes<sp/>support<sp/>commit<sp/>points<sp/>to<sp/>synchronize<sp/>pass-level<sp/>events<sp/>before<sp/>the<sp/>next<sp/>pass<sp/>begins.</highlight></codeline>
 <codeline></codeline>
+<codeline><highlight class="normal">**CommitPoint**<sp/>is<sp/>a<sp/>flag<sp/>enum<sp/>that<sp/>specifies<sp/>which<sp/>synchronization<sp/>actions<sp/>occur<sp/>at<sp/>the<sp/>end<sp/>of<sp/>a<sp/>pass.<sp/>Available<sp/>flags<sp/>include:</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`PassEvents`<sp/>—<sp/>Synchronizes<sp/>pass-level<sp/>events<sp/>for<sp/>the<sp/>next<sp/>pass.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`FlushCommands`<sp/>—<sp/>Executes<sp/>pending<sp/>commands<sp/>from<sp/>the<sp/>CommandBuffer.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`FlushManagers`<sp/>—<sp/>Processes<sp/>manager<sp/>requests<sp/>(e.g.,<sp/>spawning<sp/>from<sp/>pools).</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`Structural`<sp/>—<sp/>Combines<sp/>all<sp/>three<sp/>flags<sp/>for<sp/>a<sp/>full<sp/>structural<sp/>commit.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Flags<sp/>can<sp/>be<sp/>combined<sp/>using<sp/>bitwise<sp/>OR<sp/>to<sp/>trigger<sp/>multiple<sp/>actions<sp/>at<sp/>once.</highlight></codeline>
+<codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">```cpp</highlight></codeline>
@@ -48,17 +56,18 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass()</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;InputSystem&gt;(&amp;inputManager);</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">//<sp/>Configure<sp/>Main<sp/>phase</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Configure<sp/>Main<sp/>phase<sp/>with<sp/>custom<sp/>commit<sp/>points</highlight></codeline>
 <codeline><highlight class="normal">gameLoop.phase(PhaseType.Main)</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass()</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;MovementSystem&gt;(&amp;gameWorld)</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;HeadingSystem&gt;(&amp;gameWorld)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.addCommitPoint()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Commit<sp/>pass<sp/>events<sp/>and<sp/>flush<sp/>commands,<sp/>but<sp/>defer<sp/>manager<sp/>flush</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.addCommitPoint(CommitPoint::PassEvents<sp/>|<sp/>CommitPoint::FlushCommands)</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass()</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>due<sp/>to<sp/>the<sp/>previous<sp/>commit<sp/>point,<sp/>CollisionSystem</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>can<sp/>read<sp/>all<sp/>events<sp/>pushed<sp/>to<sp/>the<sp/>PassEventBus<sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>by<sp/>the<sp/>systems<sp/>in<sp/>the<sp/>previous<sp/>pass.</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;CollisionSystem&gt;(&amp;gameWorld);<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>CollisionSystem<sp/>can<sp/>now<sp/>read<sp/>events<sp/>from<sp/>the<sp/>previous<sp/>pass</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;CollisionSystem&gt;(&amp;gameWorld)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Full<sp/>structural<sp/>commit:<sp/>events,<sp/>commands,<sp/>and<sp/>managers</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.addCommitPoint(CommitPoint::Structural);<sp/></highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">//<sp/>Configure<sp/>Post<sp/>phase</highlight></codeline>
 <codeline><highlight class="normal">gameLoop.phase(PhaseType.Post)</highlight></codeline>
@@ -83,6 +92,33 @@
 <codeline><highlight class="normal">**Pass-level<sp/>events**<sp/>are<sp/>synchronized<sp/>at<sp/>commit<sp/>points<sp/>within<sp/>a<sp/>phase.<sp/>This<sp/>allows<sp/>systems<sp/>in<sp/>the<sp/>next<sp/>pass<sp/>to<sp/>react<sp/>to<sp/>events<sp/>generated<sp/>by<sp/>the<sp/>previous<sp/>pass<sp/>-<sp/>within<sp/>the<sp/>same<sp/>phase.<sp/>Pass-level<sp/>events<sp/>are<sp/>discarded<sp/>at<sp/>the<sp/>end<sp/>of<sp/>the<sp/>phase<sp/>and<sp/>do<sp/>not<sp/>carry<sp/>over<sp/>to<sp/>the<sp/>next<sp/>phase.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">**Phase-level<sp/>events**<sp/>are<sp/>synchronized<sp/>after<sp/>each<sp/>phase<sp/>completes.<sp/>Only<sp/>events<sp/>written<sp/>via<sp/>`phasePush()`<sp/>are<sp/>available<sp/>to<sp/>systems<sp/>in<sp/>the<sp/>following<sp/>phase.<sp/>Commands<sp/>are<sp/>flushed<sp/>and<sp/>managers<sp/>process<sp/>their<sp/>requests<sp/>at<sp/>phase<sp/>boundaries.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>CommitPoint<sp/>Configuration</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Commit<sp/>points<sp/>provide<sp/>fine-grained<sp/>control<sp/>over<sp/>synchronization<sp/>within<sp/>a<sp/>phase.<sp/>By<sp/>default,<sp/>`addCommitPoint()`<sp/>uses<sp/>`CommitPoint::PassEvents`<sp/>which<sp/>only<sp/>synchronizes<sp/>pass-level<sp/>events.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">For<sp/>more<sp/>control,<sp/>specify<sp/>the<sp/>desired<sp/>flags<sp/>explicitly:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Only<sp/>synchronize<sp/>pass<sp/>events<sp/>(default)</highlight></codeline>
+<codeline><highlight class="normal">pass.addCommitPoint(CommitPoint::PassEvents);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Flush<sp/>commands<sp/>after<sp/>this<sp/>pass,<sp/>but<sp/>defer<sp/>manager<sp/>processing</highlight></codeline>
+<codeline><highlight class="normal">pass.addCommitPoint(CommitPoint::FlushCommands);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Full<sp/>structural<sp/>commit:<sp/>events<sp/>+<sp/>commands<sp/>+<sp/>managers</highlight></codeline>
+<codeline><highlight class="normal">pass.addCommitPoint(CommitPoint::Structural);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Custom<sp/>combination</highlight></codeline>
+<codeline><highlight class="normal">pass.addCommitPoint(CommitPoint::PassEvents<sp/>|<sp/>CommitPoint::FlushManagers);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>execution<sp/>order<sp/>within<sp/>a<sp/>commit<sp/>point<sp/>is<sp/>deterministic:</highlight></codeline>
+<codeline><highlight class="normal">1.<sp/>Pass<sp/>events<sp/>are<sp/>synchronized<sp/>(if<sp/>`PassEvents`<sp/>is<sp/>set)</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>Commands<sp/>are<sp/>flushed<sp/>(if<sp/>`FlushCommands`<sp/>is<sp/>set)</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>Managers<sp/>process<sp/>requests<sp/>(if<sp/>`FlushManagers`<sp/>is<sp/>set)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>ordering<sp/>ensures<sp/>that<sp/>commands<sp/>can<sp/>generate<sp/>manager<sp/>requests<sp/>before<sp/>managers<sp/>are<sp/>flushed.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline><highlight class="normal">┌─────────────────────────────────────────────────────────────────────────┐</highlight></codeline>

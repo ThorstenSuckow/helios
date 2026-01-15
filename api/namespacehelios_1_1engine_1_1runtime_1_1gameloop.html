@@ -121,16 +121,85 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
+<tr class="memitem:abdb94a899ecc215ffa46e24880ebd8ec" id="r_abdb94a899ecc215ffa46e24880ebd8ec"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abdb94a899ecc215ffa46e24880ebd8ec">helios::engine::runtime::gameloop::CommitPoint</a> : uint8_t { <br />
+&#160;&#160;<a class="el" href="#abdb94a899ecc215ffa46e24880ebd8eca6adf97f83acf6453d4a6a4b1070f3754">None</a> = 0
+, <a class="el" href="#abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f">PassEvents</a> = 1 &lt;&lt; 0
+, <a class="el" href="#abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8">FlushCommands</a> = 1 &lt;&lt; 1
+, <a class="el" href="#abdb94a899ecc215ffa46e24880ebd8ecae58c90136fb14137d5f8d945b1b0db41">FlushManagers</a> = 1 &lt;&lt; 2
+, <br />
+&#160;&#160;<a class="el" href="#abdb94a899ecc215ffa46e24880ebd8ecaa9a0f8e36e7dcc2b446c20be15322dc9">Structural</a> = PassEvents | FlushCommands | FlushManagers
+<br />
+ }</td></tr>
+<tr class="memdesc:abdb94a899ecc215ffa46e24880ebd8ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flags defining synchronization actions at the end of a pass.  <a href="#abdb94a899ecc215ffa46e24880ebd8ec">More...</a><br /></td></tr>
 <tr class="memitem:aa57e7c5caf8850bd2c56ef8d345afa71" id="r_aa57e7c5caf8850bd2c56ef8d345afa71"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa57e7c5caf8850bd2c56ef8d345afa71">helios::engine::runtime::gameloop::PhaseType</a> { <a class="el" href="#aa57e7c5caf8850bd2c56ef8d345afa71afb55a965b77791b31ffd2bb548f71080">Pre</a>
 , <a class="el" href="#aa57e7c5caf8850bd2c56ef8d345afa71aa02c83a7dbd96295beaefb72c2bee2de">Main</a>
 , <a class="el" href="#aa57e7c5caf8850bd2c56ef8d345afa71a03d947a2158373c3b9d74325850cb8b9">Post</a>
  }</td></tr>
 <tr class="memdesc:aa57e7c5caf8850bd2c56ef8d345afa71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration of game loop phase types.  <a href="#aa57e7c5caf8850bd2c56ef8d345afa71">More...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a575a13ff55382c2226f56af26ed21c9b" id="r_a575a13ff55382c2226f56af26ed21c9b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a> constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a575a13ff55382c2226f56af26ed21c9b">helios::engine::runtime::gameloop::operator&amp;</a> (<a class="el" href="#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a> a, <a class="el" href="#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a> b) noexcept</td></tr>
+<tr class="memdesc:a575a13ff55382c2226f56af26ed21c9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bitwise AND operator for <a class="el" href="#abdb94a899ecc215ffa46e24880ebd8ec" title="Flags defining synchronization actions at the end of a pass.">CommitPoint</a> flags.  <br /></td></tr>
+<tr class="memitem:aeccfb837ed873bcca8d40f8312f36686" id="r_aeccfb837ed873bcca8d40f8312f36686"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a> constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeccfb837ed873bcca8d40f8312f36686">helios::engine::runtime::gameloop::operator|</a> (<a class="el" href="#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a> a, <a class="el" href="#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a> b) noexcept</td></tr>
+<tr class="memdesc:aeccfb837ed873bcca8d40f8312f36686"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bitwise OR operator for <a class="el" href="#abdb94a899ecc215ffa46e24880ebd8ec" title="Flags defining synchronization actions at the end of a pass.">CommitPoint</a> flags.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Central game loop orchestration module. </p>
 <p>Provides the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html" title="Central orchestrator for the game update cycle.">GameLoop</a>, <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase.html" title="Represents a phase in the game loop containing multiple passes.">Phase</a>, and <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html" title="Represents a single pass within a game loop phase.">Pass</a> classes for managing phased system execution with deterministic ordering and event synchronization. </p>
 </div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
+<a id="abdb94a899ecc215ffa46e24880ebd8ec" name="abdb94a899ecc215ffa46e24880ebd8ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdb94a899ecc215ffa46e24880ebd8ec">&#9670;&#160;</a></span>CommitPoint</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#abdb94a899ecc215ffa46e24880ebd8ec">helios::engine::runtime::gameloop::CommitPoint</a> : uint8_t</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Flags defining synchronization actions at the end of a pass. </p>
+<p>A <a class="el" href="#abdb94a899ecc215ffa46e24880ebd8ec" title="Flags defining synchronization actions at the end of a pass.">CommitPoint</a> specifies what operations should be performed when a pass completes. Multiple flags can be combined using bitwise OR to trigger several actions at once.</p>
+<p>Commit points are essential for the deterministic ordering of the game loop:</p><ul>
+<li>Commands are queued during passes and executed at commit points</li>
+<li>Pass-level events become readable only after a commit</li>
+<li>Managers process their queued requests at commit points</li>
+</ul>
+<p>Example usage: ```cpp pass.addCommitPoint(<a class="el" href="#abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f" title="Commits pass-level events.">CommitPoint::PassEvents</a> | <a class="el" href="#abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8" title="Flushes the command buffer.">CommitPoint::FlushCommands</a>); ```</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html#a36ee909a78fabac1cf997d98b0f8438c" title="Marks this pass with a commit point and returns the owning Phase.">Pass::addCommitPoint()</a> </dd>
+<dd>
+<a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html#a69e915eeb5af7691e30096fa22d1eacb" title="Commits pass-level state based on the specified CommitPoint flags.">GameLoop::passCommit()</a> </dd></dl>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="abdb94a899ecc215ffa46e24880ebd8eca6adf97f83acf6453d4a6a4b1070f3754" name="abdb94a899ecc215ffa46e24880ebd8eca6adf97f83acf6453d4a6a4b1070f3754"></a>None&#160;</td><td class="fielddoc"><p>No commit action. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f" name="abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f"></a>PassEvents&#160;</td><td class="fielddoc"><p>Commits pass-level events. </p>
+<p>Events pushed via `UpdateContext::pushPass()` become readable in subsequent passes through `UpdateContext::readPass()`. <a class="el" href="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html" title="Represents a single pass within a game loop phase.">Pass</a> events are discarded at the end of the phase. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8" name="abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8"></a>FlushCommands&#160;</td><td class="fielddoc"><p>Flushes the command buffer. </p>
+<p>Pending commands are dispatched to their registered handlers and executed. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="abdb94a899ecc215ffa46e24880ebd8ecae58c90136fb14137d5f8d945b1b0db41" name="abdb94a899ecc215ffa46e24880ebd8ecae58c90136fb14137d5f8d945b1b0db41"></a>FlushManagers&#160;</td><td class="fielddoc"><p>Flushes all registered managers. </p>
+<p>Managers process their queued requests (e.g., ProjectileManager spawns projectiles from its request queue). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="abdb94a899ecc215ffa46e24880ebd8ecaa9a0f8e36e7dcc2b446c20be15322dc9" name="abdb94a899ecc215ffa46e24880ebd8ecaa9a0f8e36e7dcc2b446c20be15322dc9"></a>Structural&#160;</td><td class="fielddoc"><p>Full structural commit. </p>
+<p>Combines PassEvents, FlushManagers, and FlushCommands for a complete synchronization point. </p>
+</td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="CommitPoint_8ixx_source.html#l00035">35</a> of file <a class="el" href="CommitPoint_8ixx_source.html">CommitPoint.ixx</a>.</p>
+
+</div>
+</div>
 <a id="aa57e7c5caf8850bd2c56ef8d345afa71" name="aa57e7c5caf8850bd2c56ef8d345afa71"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa57e7c5caf8850bd2c56ef8d345afa71">&#9670;&#160;</a></span>PhaseType</h2>
 
@@ -167,6 +236,89 @@ Enumerations</h2></td></tr>
 </table>
 
 <p class="definition">Definition at line <a class="el" href="Phase_8ixx_source.html#l00028">28</a> of file <a class="el" href="Phase_8ixx_source.html">Phase.ixx</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a575a13ff55382c2226f56af26ed21c9b" name="a575a13ff55382c2226f56af26ed21c9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a575a13ff55382c2226f56af26ed21c9b">&#9670;&#160;</a></span>operator&amp;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a> constexpr helios::engine::runtime::gameloop::operator&amp; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a></td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a></td>          <td class="paramname"><span class="paramname"><em>b</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Bitwise AND operator for <a class="el" href="#abdb94a899ecc215ffa46e24880ebd8ec" title="Flags defining synchronization actions at the end of a pass.">CommitPoint</a> flags. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>First operand. </td></tr>
+    <tr><td class="paramname">b</td><td>Second operand.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The combined flags. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="CommitPoint_8ixx_source.html#l00083">83</a> of file <a class="el" href="CommitPoint_8ixx_source.html">CommitPoint.ixx</a>.</p>
+
+</div>
+</div>
+<a id="aeccfb837ed873bcca8d40f8312f36686" name="aeccfb837ed873bcca8d40f8312f36686"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeccfb837ed873bcca8d40f8312f36686">&#9670;&#160;</a></span>operator|()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a> constexpr helios::engine::runtime::gameloop::operator| </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a></td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint</a></td>          <td class="paramname"><span class="paramname"><em>b</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Bitwise OR operator for <a class="el" href="#abdb94a899ecc215ffa46e24880ebd8ec" title="Flags defining synchronization actions at the end of a pass.">CommitPoint</a> flags. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>First operand. </td></tr>
+    <tr><td class="paramname">b</td><td>Second operand.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The combined flags. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="CommitPoint_8ixx_source.html#l00095">95</a> of file <a class="el" href="CommitPoint_8ixx_source.html">CommitPoint.ixx</a>.</p>
 
 </div>
 </div>

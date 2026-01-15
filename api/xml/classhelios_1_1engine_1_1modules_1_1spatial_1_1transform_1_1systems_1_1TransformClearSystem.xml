@@ -16,7 +16,7 @@
           <declname>updateContext</declname>
         </param>
         <briefdescription>
-<para>Updates the system, clearing dirty flags. </para>
+<para>Updates the system, clearing dirty flags of Transform- and ScaleComponent. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -32,12 +32,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/modules/spatial/transform/systems/TransformClearSystem.ixx" line="38" column="14" bodyfile="include/helios/engine/modules/spatial/transform/systems/TransformClearSystem.ixx" bodystart="38" bodyend="48"/>
+        <location file="include/helios/engine/modules/spatial/transform/systems/TransformClearSystem.ixx" line="40" column="14" bodyfile="include/helios/engine/modules/spatial/transform/systems/TransformClearSystem.ixx" bodystart="40" bodyend="52"/>
         <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="48">helios::engine::ecs::System::gameWorld_</references>
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>System that clears the dirty state of TransformComponents at the end of a frame. </para>
+<para>System that clears the dirty state of TransformComponents and ScaleComponents at the end of a frame. </para>
     </briefdescription>
     <detaileddescription>
 <para>This system runs in the post-update phase. It iterates over all TransformComponents and resets their dirty flag if it was set. This ensures that changes are only processed once per frame by other systems (like SceneSyncSystem). </para>
@@ -106,7 +106,7 @@
         <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
       </node>
     </collaborationgraph>
-    <location file="include/helios/engine/modules/spatial/transform/systems/TransformClearSystem.ixx" line="28" column="5" bodyfile="include/helios/engine/modules/spatial/transform/systems/TransformClearSystem.ixx" bodystart="28" bodyend="50"/>
+    <location file="include/helios/engine/modules/spatial/transform/systems/TransformClearSystem.ixx" line="30" column="5" bodyfile="include/helios/engine/modules/spatial/transform/systems/TransformClearSystem.ixx" bodystart="30" bodyend="54"/>
     <listofallmembers>
       <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" prot="protected" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::systems::TransformClearSystem</scope><name>gameWorld_</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1System_1ae0464c1668e257439243a4f25979a7ff" prot="public" virt="virtual"><scope>helios::engine::modules::spatial::transform::systems::TransformClearSystem</scope><name>init</name></member>

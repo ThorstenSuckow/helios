@@ -167,67 +167,69 @@ $(function() {
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="keywordflow">if</span> (worldGo) {</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                <span class="keywordflow">if</span> (gameObjectPool.<a class="code hl_function" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#aaba699ebdbc101329c7324addd9afe38">release</a>(entityId)) {</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                    worldGo-&gt;<a class="code hl_function" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html#a72a9d3833a1ae1464dab535bce3166ed">setActive</a>(<span class="keyword">false</span>);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                }</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            }</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            <span class="keywordflow">return</span> worldGo;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        }</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                    worldGo-&gt;<a class="code hl_function" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html#a2a7b9dc93c0a360e83ed33534742b7ae">onRelease</a>();</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                    worldGo-&gt;<a class="code hl_function" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html#a72a9d3833a1ae1464dab535bce3166ed">setActive</a>(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                }</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            }</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>            <span class="keywordflow">return</span> worldGo;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        }</div>
 </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment"></span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">         * @brief Acquires an available GameObject from the pool.</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">         * @details Attempts to acquire an available entity from the pool and</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">         * validates that it exists in the GameWorld. If an acquired entity is</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">         * considered stale (no longer present in the world), it is automatically</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">         * removed from the pool and the next available entity is tried.</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">         * If a GameObject was successfully identified, its onAcquire()-method</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">         * is called before its returned.</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">         * @param gameWorld The GameWorld to validate entities against.</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">         * @param gameObjectPool The pool to acquire from.</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">         * @return Pointer to the acquired GameObject, or `nullptr` if the pool</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">         *         is exhausted or no valid entities are available.</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00084" data-start="{" data-end="}">
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolFacade.html#a395eedea23ef36ef472e143aae66a9ab">   84</a></span>        [[nodiscard]] <a class="code hl_class" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html">helios::engine::ecs::GameObject</a>* <a class="code hl_function" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolFacade.html#a395eedea23ef36ef472e143aae66a9ab">acquire</a>(</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            <a class="code hl_class" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a>&amp; gameWorld,</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            <a class="code hl_class" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html">helios::engine::runtime::pooling::GameObjectPool</a>&amp; gameObjectPool</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        )  {</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            <a class="code hl_class" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</a> guid{<a class="code hl_variable" href="namespacehelios_1_1util.html#a823ac3cd0195df65873156bc76284364">helios::util::no_init</a>};</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            <span class="keywordflow">while</span> (gameObjectPool.<a class="code hl_function" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#afb2b70dfef45864ea3bfd1e148542007">acquire</a>(guid)) {</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                <span class="keyword">auto</span>* worldGo = gameWorld.<a class="code hl_function" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a83857f38d3ffb10560f863107707929d">find</a>(guid);</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                <span class="keywordflow">if</span> (worldGo) {</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                    worldGo-&gt;onAcquire();</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                    <span class="keywordflow">return</span> worldGo;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                }</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                <span class="comment">// we assert the pool is owned by this gameWorld,</span></div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                <span class="comment">// so removing this guid does not impact another gameWorld that is</span></div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                <span class="comment">// using this pool</span></div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                gameObjectPool.<a class="code hl_function" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#a5fc0afe6ecd0e0d923fd294496f1115e">releaseAndRemove</a>(guid);</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            }</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        }</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment"></span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">         * @brief Acquires an available GameObject from the pool.</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">         * @details Attempts to acquire an available entity from the pool and</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">         * validates that it exists in the GameWorld. If an acquired entity is</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">         * considered stale (no longer present in the world), it is automatically</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">         * removed from the pool and the next available entity is tried.</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">         * If a GameObject was successfully identified, its onAcquire()-method</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">         * is called before its returned.</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">         * @param gameWorld The GameWorld to validate entities against.</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">         * @param gameObjectPool The pool to acquire from.</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">         * @return Pointer to the acquired GameObject, or `nullptr` if the pool</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">         *         is exhausted or no valid entities are available.</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00085" data-start="{" data-end="}">
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolFacade.html#a395eedea23ef36ef472e143aae66a9ab">   85</a></span>        [[nodiscard]] <a class="code hl_class" href="classhelios_1_1engine_1_1ecs_1_1GameObject.html">helios::engine::ecs::GameObject</a>* <a class="code hl_function" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolFacade.html#a395eedea23ef36ef472e143aae66a9ab">acquire</a>(</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            <a class="code hl_class" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a>&amp; gameWorld,</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            <a class="code hl_class" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html">helios::engine::runtime::pooling::GameObjectPool</a>&amp; gameObjectPool</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        )  {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            <a class="code hl_class" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</a> guid{<a class="code hl_variable" href="namespacehelios_1_1util.html#a823ac3cd0195df65873156bc76284364">helios::util::no_init</a>};</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            <span class="keywordflow">while</span> (gameObjectPool.<a class="code hl_function" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#afb2b70dfef45864ea3bfd1e148542007">acquire</a>(guid)) {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                <span class="keyword">auto</span>* worldGo = gameWorld.<a class="code hl_function" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html#a83857f38d3ffb10560f863107707929d">find</a>(guid);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                <span class="keywordflow">if</span> (worldGo) {</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                    worldGo-&gt;onAcquire();</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                    <span class="keywordflow">return</span> worldGo;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                }</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                <span class="comment">// we assert the pool is owned by this gameWorld,</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                <span class="comment">// so removing this guid does not impact another gameWorld that is</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                <span class="comment">// using this pool</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                gameObjectPool.<a class="code hl_function" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#a5fc0afe6ecd0e0d923fd294496f1115e">releaseAndRemove</a>(guid);</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            }</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        }</div>
 </div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    };</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    };</div>
 </div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>}</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>}</div>
 <div class="ttc" id="aclasshelios_1_1engine_1_1ecs_1_1GameObject_html"><div class="ttname"><a href="classhelios_1_1engine_1_1ecs_1_1GameObject.html">helios::engine::ecs::GameObject</a></div><div class="ttdoc">Container for components that represents an entity in the game world.</div><div class="ttdef"><b>Definition</b> <a href="GameObject_8ixx_source.html#l00073">GameObject.ixx:73</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1ecs_1_1GameObject_html_a2a7b9dc93c0a360e83ed33534742b7ae"><div class="ttname"><a href="classhelios_1_1engine_1_1ecs_1_1GameObject.html#a2a7b9dc93c0a360e83ed33534742b7ae">helios::engine::ecs::GameObject::onRelease</a></div><div class="ttdeci">void onRelease()</div><div class="ttdoc">Called when this GameObject is released back to a pool.</div><div class="ttdef"><b>Definition</b> <a href="GameObject_8ixx_source.html#l00431">GameObject.ixx:431</a></div></div>
 <div class="ttc" id="aclasshelios_1_1engine_1_1ecs_1_1GameObject_html_a72a9d3833a1ae1464dab535bce3166ed"><div class="ttname"><a href="classhelios_1_1engine_1_1ecs_1_1GameObject.html#a72a9d3833a1ae1464dab535bce3166ed">helios::engine::ecs::GameObject::setActive</a></div><div class="ttdeci">void setActive(bool active) noexcept</div><div class="ttdoc">Sets the active state of this GameObject.</div><div class="ttdef"><b>Definition</b> <a href="GameObject_8ixx_source.html#l00387">GameObject.ixx:387</a></div></div>
 <div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolFacade_html"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolFacade.html">helios::engine::runtime::pooling::GameObjectPoolFacade</a></div><div class="ttdoc">Facade class that coordinates object pooling with the game world.</div><div class="ttdef"><b>Definition</b> <a href="#l00033">GameObjectPoolFacade.ixx:33</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolFacade_html_a395eedea23ef36ef472e143aae66a9ab"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolFacade.html#a395eedea23ef36ef472e143aae66a9ab">helios::engine::runtime::pooling::GameObjectPoolFacade::acquire</a></div><div class="ttdeci">helios::engine::ecs::GameObject * acquire(helios::engine::runtime::world::GameWorld &amp;gameWorld, helios::engine::runtime::pooling::GameObjectPool &amp;gameObjectPool)</div><div class="ttdoc">Acquires an available GameObject from the pool.</div><div class="ttdef"><b>Definition</b> <a href="#l00084">GameObjectPoolFacade.ixx:84</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolFacade_html_a395eedea23ef36ef472e143aae66a9ab"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolFacade.html#a395eedea23ef36ef472e143aae66a9ab">helios::engine::runtime::pooling::GameObjectPoolFacade::acquire</a></div><div class="ttdeci">helios::engine::ecs::GameObject * acquire(helios::engine::runtime::world::GameWorld &amp;gameWorld, helios::engine::runtime::pooling::GameObjectPool &amp;gameObjectPool)</div><div class="ttdoc">Acquires an available GameObject from the pool.</div><div class="ttdef"><b>Definition</b> <a href="#l00085">GameObjectPoolFacade.ixx:85</a></div></div>
 <div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolFacade_html_ad6867efdaa4e047d365869e4e367b5c1"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolFacade.html#ad6867efdaa4e047d365869e4e367b5c1">helios::engine::runtime::pooling::GameObjectPoolFacade::release</a></div><div class="ttdeci">helios::engine::ecs::GameObject * release(helios::engine::runtime::world::GameWorld &amp;gameWorld, helios::engine::runtime::pooling::GameObjectPool &amp;gameObjectPool, const helios::util::Guid &amp;entityId)</div><div class="ttdoc">Releases a GameObject back to the pool and deactivates it.</div><div class="ttdef"><b>Definition</b> <a href="#l00051">GameObjectPoolFacade.ixx:51</a></div></div>
 <div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_html"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html">helios::engine::runtime::pooling::GameObjectPool</a></div><div class="ttdoc">Object pool for efficient GameObject lifecycle management.</div><div class="ttdef"><b>Definition</b> <a href="GameObjectPool_8ixx_source.html#l00039">GameObjectPool.ixx:39</a></div></div>
 <div class="ttc" id="aclasshelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool_html_a5fc0afe6ecd0e0d923fd294496f1115e"><div class="ttname"><a href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#a5fc0afe6ecd0e0d923fd294496f1115e">helios::engine::runtime::pooling::GameObjectPool::releaseAndRemove</a></div><div class="ttdeci">bool releaseAndRemove(const helios::util::Guid &amp;guid)</div><div class="ttdoc">Releases and permanently removes a GameObject from the pool.</div><div class="ttdef"><b>Definition</b> <a href="GameObjectPool_8ixx_source.html#l00215">GameObjectPool.ixx:215</a></div></div>

@@ -266,12 +266,12 @@ export namespace helios::engine::runtime::gameloop {
             auto updateContext = helios::engine::runtime::world::UpdateContext(
                   commandBuffer_,
                   gameWorld,
+                  deltaTime,
                   phaseEventBus_,
-                  passEventBus_
+                  passEventBus_,
+                  inputSnapshot
               );
 
-            updateContext.setDeltaTime(deltaTime);
-            updateContext.setInputSnapshot(inputSnapshot);
 
             // gameloop phases
             for (auto phase : {helios::engine::runtime::gameloop::PhaseType::Pre,

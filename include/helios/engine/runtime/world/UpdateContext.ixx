@@ -51,9 +51,14 @@ export namespace helios::engine::runtime::world {
         float deltaTime_ = 0.0f;
 
         /**
+        * @brief Time elapsed since the first frame, in seconds.
+         */
+        float totalTime_ = 0.0f;
+
+        /**
          * @brief Immutable snapshot of input state for the current frame.
          */
-        const helios::input::InputSnapshot* inputSnapshot_ = nullptr;
+        const helios::input::InputSnapshot& inputSnapshot_;
 
         /**
          * @brief Buffer for queueing commands to be executed at end of frame.
@@ -99,20 +104,28 @@ export namespace helios::engine::runtime::world {
          *
          * @param commandBuffer Reference to the command buffer for queueing commands.
          * @param gameWorld Reference to the game world for entity lookups.
+         * @param deltaTime Time since last frame / update in seconds
          * @param phaseEventBus Reference to the phase-level event bus for cross-phase communication.
          * @param passEventBus Reference to the pass-level event bus for cross-pass communication.
+         * @param inputSnapshot The input snapshot for this frame.
          */
         UpdateContext(
             helios::engine::runtime::messaging::command::CommandBuffer& commandBuffer,
             helios::engine::runtime::world::GameWorld& gameWorld,
+            const float deltaTime,
             helios::engine::runtime::messaging::event::GameLoopEventBus& phaseEventBus,
-            helios::engine::runtime::messaging::event::GameLoopEventBus& passEventBus
+            helios::engine::runtime::messaging::event::GameLoopEventBus& passEventBus,
+            const helios::input::InputSnapshot& inputSnapshot
         ) : commandBuffer_(commandBuffer), gameWorld_(gameWorld),
+        deltaTime_(deltaTime),
+        totalTime_(totalTime_ + deltaTime),
         phaseEventSink_(phaseEventBus.writeSink()),
         phaseEventSource_(phaseEventBus.readSource()),
         passEventSink_(passEventBus.writeSink()),
-        passEventSource_(passEventBus.readSource())
-        {}
+        passEventSource_(passEventBus.readSource()),
+        inputSnapshot_(inputSnapshot) {
+
+        }
 
         /**
          * @brief Returns the time elapsed since the last frame, in seconds.
@@ -124,16 +137,12 @@ export namespace helios::engine::runtime::world {
         }
 
         /**
-         * @brief Sets the time elapsed since the last frame.
+         * @brief Returns the time elapsed since the first frame, in seconds.
          *
-         * @param dt Delta time in seconds. Must be non-negative.
-         *
-         * @return A reference to this UpdateContext instance.
+         * @return Total time in seconds.
          */
-        UpdateContext& setDeltaTime(float dt) noexcept {
-            deltaTime_ = dt;
-
-            return *this;
+        [[nodiscard]] float totalTime() const noexcept {
+            return totalTime_;
         }
 
         /**
@@ -142,21 +151,7 @@ export namespace helios::engine::runtime::world {
          * @return Const ref to the current InputSnapshot.
          */
         [[nodiscard]] const helios::input::InputSnapshot& inputSnapshot() const noexcept {
-            assert(inputSnapshot_ && "Unexpected nullptr for InputSnapshot");
-            return *inputSnapshot_;
-        }
-
-        /**
-         * @brief Sets the input snapshot for this frame.
-         *
-         * @param snapshot Const ref to the input snapshot.
-         *
-         * @return A reference to this UpdateContext instance.
-         */
-        UpdateContext& setInputSnapshot(const helios::input::InputSnapshot& snapshot) noexcept {
-            inputSnapshot_ = &snapshot;
-
-            return *this;
+            return inputSnapshot_;
         }
 
         /**

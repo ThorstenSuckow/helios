@@ -57,6 +57,7 @@ export namespace helios::engine::runtime::pooling {
 
             if (worldGo) {
                 if (gameObjectPool.release(entityId)) {
+                    worldGo->onRelease();
                     worldGo->setActive(false);
                 }
             }

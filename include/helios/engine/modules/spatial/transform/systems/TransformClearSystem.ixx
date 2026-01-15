@@ -15,11 +15,13 @@ import helios.engine.runtime.world.UpdateContext;
 import helios.engine.modules.scene.components.SceneNodeComponent;
 import helios.engine.modules.spatial.transform.components.TransformComponent;
 
+import helios.engine.modules.spatial.transform.components.ScaleComponent;
 
 export namespace helios::engine::modules::spatial::transform::systems {
 
     /**
-     * @brief System that clears the dirty state of TransformComponents at the end of a frame.
+     * @brief System that clears the dirty state of TransformComponents and ScaleComponents
+     * at the end of a frame.
      *
      * @details This system runs in the post-update phase. It iterates over all
      * TransformComponents and resets their dirty flag if it was set. This ensures that
@@ -31,7 +33,7 @@ export namespace helios::engine::modules::spatial::transform::systems {
     public:
 
         /**
-         * @brief Updates the system, clearing dirty flags.
+         * @brief Updates the system, clearing dirty flags of Transform- and ScaleComponent.
          *
          * @param updateContext The update context.
          */
@@ -40,10 +42,12 @@ export namespace helios::engine::modules::spatial::transform::systems {
             for (auto [entity, tc] : gameWorld_->find<
                 helios::engine::modules::spatial::transform::components::TransformComponent
                 >().each()) {
-
                 tc->clearDirty();
             }
 
+            for (auto [entity, sc] : gameWorld_->find<helios::engine::modules::spatial::transform::components::ScaleComponent>().each()) {
+                sc->clearDirty();
+            }
 
         }
 

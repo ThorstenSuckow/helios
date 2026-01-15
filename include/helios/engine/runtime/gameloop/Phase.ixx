@@ -49,9 +49,14 @@ export namespace helios::engine::runtime::gameloop {
      * Each pass can contain multiple systems and may have a commit point for
      * event synchronization.
      *
+     * Commit points allow fine-grained control over when commands are flushed,
+     * managers are processed, and pass-level events are synchronized. See
+     * CommitPoint for available synchronization options.
+     *
      * Phases are owned by the GameLoop and should not be created directly.
      *
      * @see Pass
+     * @see CommitPoint
      * @see GameLoop
      */
     class Phase {
@@ -73,15 +78,23 @@ export namespace helios::engine::runtime::gameloop {
         /**
          * @brief Updates all passes within this phase.
          *
+         * @details Iterates through all passes, updating their systems and then
+         * invoking the commit action based on the pass's configured CommitPoint.
+         * The commit point determines whether pass-level events are synchronized,
+         * the command buffer is flushed, or managers are processed.
+         *
          * @param updateContext The current update context.
+         *
+         * @see CommitPoint
+         * @see Pass::addCommitPoint()
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext){
             for (auto& pass : passEntries_) {
                 // every pass contains systems that are updated here
                 pass->update(updateContext);
 
-                // once all systems were updated, we commit
-                pass->commit();
+                // once all systems were updated, we commit based on the configured CommitPoint
+                pass->commit(pass->commitPoint(), updateContext);
             }
         };
 

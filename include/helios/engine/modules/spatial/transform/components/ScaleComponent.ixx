@@ -69,7 +69,11 @@ export namespace helios::engine::modules::spatial::transform::components {
          * @param other The component to copy from.
          */
         explicit ScaleComponent(const ScaleComponent& other) :
-               width_(other.width_), height_(other.height_), depth_(other.depth_), unit_(other.unit_) {}
+            width_(other.width_),
+            height_(other.height_),
+            depth_(other.depth_),
+            unit_(other.unit_),
+            isDirty_(true) {}
 
 
         /**
@@ -79,6 +83,24 @@ export namespace helios::engine::modules::spatial::transform::components {
          */
         void onAttach(helios::engine::ecs::GameObject* gameObject) noexcept override {
             Component::onAttach(gameObject);
+        }
+
+        /**
+         * @brief Resets the dirty flag to true when acquired.
+         *
+         * Makes sure scaling is considered once the component was acquired.
+         */
+        void onAcquire() noexcept override {
+            isDirty_ = true;
+        }
+
+        /**
+         * @brief Resets the dirty flag to true when released.
+         *
+         * Makes sure the entities dirty-state is reset to the default state.
+         */
+        void onRelease() noexcept override {
+            isDirty_ = true;
         }
 
         /**

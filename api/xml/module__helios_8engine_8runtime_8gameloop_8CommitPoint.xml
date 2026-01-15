@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8runtime_8gameloop_8CommitPoint" kind="module">
+    <compoundname>helios.engine.runtime.gameloop.CommitPoint</compoundname>
+    <innerfile refid="CommitPoint_8ixx">CommitPoint.ixx</innerfile>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ec" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>CommitPoint</name>
+        <qualifiedname>helios::engine::runtime::gameloop::CommitPoint</qualifiedname>
+        <enumvalue id="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8eca6adf97f83acf6453d4a6a4b1070f3754" prot="public">
+          <name>None</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>No commit action. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f" prot="public">
+          <name>PassEvents</name>
+          <initializer>= 1 &lt;&lt; 0</initializer>
+          <briefdescription>
+<para>Commits pass-level events. </para>
+          </briefdescription>
+          <detaileddescription>
+<para>Events pushed via `UpdateContext::pushPass()` become readable in subsequent passes through `UpdateContext::readPass()`. <ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass" kindref="compound">Pass</ref> events are discarded at the end of the phase. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8" prot="public">
+          <name>FlushCommands</name>
+          <initializer>= 1 &lt;&lt; 1</initializer>
+          <briefdescription>
+<para>Flushes the command buffer. </para>
+          </briefdescription>
+          <detaileddescription>
+<para>Pending commands are dispatched to their registered handlers and executed. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ecae58c90136fb14137d5f8d945b1b0db41" prot="public">
+          <name>FlushManagers</name>
+          <initializer>= 1 &lt;&lt; 2</initializer>
+          <briefdescription>
+<para>Flushes all registered managers. </para>
+          </briefdescription>
+          <detaileddescription>
+<para>Managers process their queued requests (e.g., ProjectileManager spawns projectiles from its request queue). </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ecaa9a0f8e36e7dcc2b446c20be15322dc9" prot="public">
+          <name>Structural</name>
+          <initializer>= PassEvents | FlushCommands | FlushManagers</initializer>
+          <briefdescription>
+<para>Full structural commit. </para>
+          </briefdescription>
+          <detaileddescription>
+<para>Combines PassEvents, FlushManagers, and FlushCommands for a complete synchronization point. </para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Flags defining synchronization actions at the end of a pass. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>A <ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ec" kindref="member">CommitPoint</ref> specifies what operations should be performed when a pass completes. Multiple flags can be combined using bitwise OR to trigger several actions at once.</para>
+<para>Commit points are essential for the deterministic ordering of the game loop:<itemizedlist>
+<listitem><para>Commands are queued during passes and executed at commit points</para>
+</listitem><listitem><para>Pass-level events become readable only after a commit</para>
+</listitem><listitem><para>Managers process their queued requests at commit points</para>
+</listitem></itemizedlist>
+</para>
+<para>Example usage: ```cpp pass.addCommitPoint(<ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f" kindref="member">CommitPoint::PassEvents</ref> | <ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8" kindref="member">CommitPoint::FlushCommands</ref>); ```</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_1a36ee909a78fabac1cf997d98b0f8438c" kindref="member">Pass::addCommitPoint()</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a69e915eeb5af7691e30096fa22d1eacb" kindref="member">GameLoop::passCommit()</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/gameloop/CommitPoint.ixx" line="35" column="5" bodyfile="include/helios/engine/runtime/gameloop/CommitPoint.ixx" bodystart="35" bodyend="73"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1a575a13ff55382c2226f56af26ed21c9b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>CommitPoint constexpr</type>
+        <definition>CommitPoint constexpr helios::engine::runtime::gameloop::operator&amp;</definition>
+        <argsstring>(CommitPoint a, CommitPoint b) noexcept</argsstring>
+        <name>operator&amp;</name>
+        <qualifiedname>helios::engine::runtime::gameloop::operator&amp;</qualifiedname>
+        <param>
+          <type>CommitPoint</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>CommitPoint</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Bitwise AND operator for <ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ec" kindref="member">CommitPoint</ref> flags. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>First operand. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Second operand.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The combined flags. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/gameloop/CommitPoint.ixx" line="83" column="27" bodyfile="include/helios/engine/runtime/gameloop/CommitPoint.ixx" bodystart="83" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1aeccfb837ed873bcca8d40f8312f36686" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>CommitPoint constexpr</type>
+        <definition>CommitPoint constexpr helios::engine::runtime::gameloop::operator|</definition>
+        <argsstring>(CommitPoint a, CommitPoint b) noexcept</argsstring>
+        <name>operator|</name>
+        <qualifiedname>helios::engine::runtime::gameloop::operator|</qualifiedname>
+        <param>
+          <type>CommitPoint</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>CommitPoint</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Bitwise OR operator for <ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1abdb94a899ecc215ffa46e24880ebd8ec" kindref="member">CommitPoint</ref> flags. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>First operand. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Second operand.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The combined flags. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/gameloop/CommitPoint.ixx" line="95" column="27" bodyfile="include/helios/engine/runtime/gameloop/CommitPoint.ixx" bodystart="95" bodyend="97"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/engine/runtime/gameloop/CommitPoint.ixx" line="10" column="15"/>
+  </compounddef>
+</doxygen>

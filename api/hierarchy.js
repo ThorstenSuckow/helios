@@ -253,7 +253,6 @@ var hierarchy =
         [ "helios::engine::modules::physics::motion::systems::SpinSystem", "classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1systems_1_1SpinSystem.html", null ],
         [ "helios::engine::modules::physics::motion::systems::SteeringSystem", "classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1systems_1_1SteeringSystem.html", null ],
         [ "helios::engine::modules::spatial::transform::systems::ComposeTransformSystem", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1ComposeTransformSystem.html", null ],
-        [ "helios::engine::modules::spatial::transform::systems::ScaleClearSystem", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1ScaleClearSystem.html", null ],
         [ "helios::engine::modules::spatial::transform::systems::ScaleSystem", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1ScaleSystem.html", null ],
         [ "helios::engine::modules::spatial::transform::systems::TransformClearSystem", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1TransformClearSystem.html", null ],
         [ "helios::engine::modules::systems::scene::SceneSyncSystem", "classhelios_1_1engine_1_1modules_1_1systems_1_1scene_1_1SceneSyncSystem.html", null ]

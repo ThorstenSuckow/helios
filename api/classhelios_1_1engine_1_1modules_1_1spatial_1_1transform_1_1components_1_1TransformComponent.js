@@ -8,6 +8,8 @@ var classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1Tr
     [ "localScaling", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1TransformComponent.html#ae0f25e55a7e10f655bd06ad8a94bbe01", null ],
     [ "localTransform", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1TransformComponent.html#afad6d4c7376cd66d9e0bcef57031a28d", null ],
     [ "localTranslation", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1TransformComponent.html#a8e2b9b27e22894604f313a0a2863cfc7", null ],
+    [ "onAcquire", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1TransformComponent.html#a7168796b10deb537fd9c910730328dd5", null ],
+    [ "onRelease", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1TransformComponent.html#a4a8df1550d4471401cf07951b60f0c4f", null ],
     [ "setLocalRotation", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1TransformComponent.html#a9bb427af031dba8a43648ec2f1788e1b", null ],
     [ "setLocalScale", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1TransformComponent.html#aa1d69c2550bda6a51bb56fb79a359fe2", null ],
     [ "setLocalTranslation", "classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1TransformComponent.html#aa82f56184df93ab3a137131827a6a240", null ],

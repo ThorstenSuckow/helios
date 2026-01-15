@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">readme-md-69 | helios</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://helios.garagecraft.games/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://helios.garagecraft.games/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://helios.garagecraft.games/docs/helios/files/readme-md-69"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="readme-md-69 | helios"><meta data-rh="true" name="description" content="Namespaces Index"><meta data-rh="true" property="og:description" content="Namespaces Index"><meta data-rh="true" name="keywords" content="doxygen,reference,file"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://helios.garagecraft.games/docs/helios/files/readme-md-69"><link data-rh="true" rel="alternate" href="https://helios.garagecraft.games/docs/helios/files/readme-md-69" hreflang="en"><link data-rh="true" rel="alternate" href="https://helios.garagecraft.games/docs/helios/files/readme-md-69" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://LK14YGETTG-dsn.algolia.net" crossorigin="anonymous"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"API Reference (Doxygen)","item":"https://helios.garagecraft.games/docs/helios/"},{"@type":"ListItem","position":2,"name":"Files","item":"https://helios.garagecraft.games/docs/helios/files"},{"@type":"ListItem","position":3,"name":"README.md","item":"https://helios.garagecraft.games/docs/helios/files/readme-md-69"}]}</script><link rel="search" type="application/opensearchdescription+xml" title="helios" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.d8266996.css">
-<script src="/assets/js/runtime~main.3593c6ef.js" defer="defer"></script>
-<script src="/assets/js/main.5dd95e7e.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.ecd6c71c.js" defer="defer"></script>
+<script src="/assets/js/main.a3c6554d.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -50,6 +50,14 @@
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">**Pass** contains a registry of systems that execute sequentially. Passes support commit points to synchronize pass-level events before the next pass begins.</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">**CommitPoint** is a flag enum that specifies which synchronization actions occur at the end of a pass. Available flags include:</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">- `PassEvents` — Synchronizes pass-level events for the next pass.</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">- `FlushCommands` — Executes pending commands from the CommandBuffer.</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">- `FlushManagers` — Processes manager requests (e.g., spawning from pools).</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">- `Structural` — Combines all three flags for a full structural commit.</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">Flags can be combined using bitwise OR to trigger multiple actions at once.</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">## Usage</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">```cpp</span></span></div>
@@ -62,17 +70,18 @@
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">    .addPass()</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">        .add&lt;InputSystem&gt;(&amp;inputManager);</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
-<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">// Configure Main phase</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">// Configure Main phase with custom commit points</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">gameLoop.phase(PhaseType.Main)</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">    .addPass()</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">        .add&lt;MovementSystem&gt;(&amp;gameWorld)</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">        .add&lt;HeadingSystem&gt;(&amp;gameWorld)</span></span></div>
-<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">        .addCommitPoint()</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">        // Commit pass events and flush commands, but defer manager flush</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">        .addCommitPoint(CommitPoint::PassEvents | CommitPoint::FlushCommands)</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">    .addPass()</span></span></div>
-<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">        // due to the previous commit point, CollisionSystem</span></span></div>
-<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">        // can read all events pushed to the PassEventBus </span></span></div>
-<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">        // by the systems in the previous pass.</span></span></div>
-<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">        .add&lt;CollisionSystem&gt;(&amp;gameWorld); </span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">        // CollisionSystem can now read events from the previous pass</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">        .add&lt;CollisionSystem&gt;(&amp;gameWorld)</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">        // Full structural commit: events, commands, and managers</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">        .addCommitPoint(CommitPoint::Structural); </span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">// Configure Post phase</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">gameLoop.phase(PhaseType.Post)</span></span></div>
@@ -97,6 +106,33 @@
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">**Pass-level events** are synchronized at commit points within a phase. This allows systems in the next pass to react to events generated by the previous pass - within the same phase. Pass-level events are discarded at the end of the phase and do not carry over to the next phase.</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">**Phase-level events** are synchronized after each phase completes. Only events written via `phasePush()` are available to systems in the following phase. Commands are flushed and managers process their requests at phase boundaries.</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">## CommitPoint Configuration</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">Commit points provide fine-grained control over synchronization within a phase. By default, `addCommitPoint()` uses `CommitPoint::PassEvents` which only synchronizes pass-level events.</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">For more control, specify the desired flags explicitly:</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">```cpp</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">// Only synchronize pass events (default)</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">pass.addCommitPoint(CommitPoint::PassEvents);</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">// Flush commands after this pass, but defer manager processing</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">pass.addCommitPoint(CommitPoint::FlushCommands);</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">// Full structural commit: events + commands + managers</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">pass.addCommitPoint(CommitPoint::Structural);</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">// Custom combination</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">pass.addCommitPoint(CommitPoint::PassEvents | CommitPoint::FlushManagers);</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">```</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">The execution order within a commit point is deterministic:</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">1 Pass events are synchronized (if `PassEvents` is set)</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">2 Commands are flushed (if `FlushCommands` is set)</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">3 Managers process requests (if `FlushManagers` is set)</span></span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
+<div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">This ordering ensures that commands can generate manager requests before managers are flushed.</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">```</span></span></div>
 <div class="doxyCodeLine"><span class="doxyNoLineNumber"> </span><span class="doxyLineContent"><span class="doxyHighlight">┌─────────────────────────────────────────────────────────────────────────┐</span></span></div>

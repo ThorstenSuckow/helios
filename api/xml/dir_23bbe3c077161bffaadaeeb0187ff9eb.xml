@@ -3,6 +3,7 @@
   <compounddef id="dir_23bbe3c077161bffaadaeeb0187ff9eb" kind="dir">
     <compoundname>include/helios/engine/runtime/gameloop</compoundname>
     <innerfile refid="helios_2engine_2runtime_2gameloop_2__module_8ixx">_module.ixx</innerfile>
+    <innerfile refid="CommitPoint_8ixx">CommitPoint.ixx</innerfile>
     <innerfile refid="GameLoop_8ixx">GameLoop.ixx</innerfile>
     <innerfile refid="Pass_8ixx">Pass.ixx</innerfile>
     <innerfile refid="Phase_8ixx">Phase.ixx</innerfile>
@@ -25,6 +26,14 @@
 <title>Key Components</title><para><bold>GameLoop</bold> is the central orchestrator that owns the three phases, the CommandBuffer, and the event buses. It drives the frame update by iterating through all phases and committing events and commands after each phase.</para>
 <para><bold>Phase</bold> represents a distinct stage in the update cycle. Phases contain passes and are executed in fixed order (Pre → Main → Post).</para>
 <para><bold>Pass</bold> contains a registry of systems that execute sequentially. Passes support commit points to synchronize pass-level events before the next pass begins.</para>
+<para><bold>CommitPoint</bold> is a flag enum that specifies which synchronization actions occur at the end of a pass. Available flags include:<itemizedlist>
+<listitem><para><computeroutput>PassEvents</computeroutput> — Synchronizes pass-level events for the next pass.</para>
+</listitem><listitem><para><computeroutput>FlushCommands</computeroutput> — Executes pending commands from the CommandBuffer.</para>
+</listitem><listitem><para><computeroutput>FlushManagers</computeroutput> — Processes manager requests (e.g., spawning from pools).</para>
+</listitem><listitem><para><computeroutput>Structural</computeroutput> — Combines all three flags for a full structural commit.</para>
+</listitem></itemizedlist>
+</para>
+<para>Flags can be combined using bitwise OR to trigger multiple actions at once.</para>
 </sect1>
 <sect1 id="dir_23bbe3c077161bffaadaeeb0187ff9eb_1autotoc_md227">
 <title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="preprocessor">#include<sp/>&quot;helios/engine/gameloop/GameLoop.ixx&quot;</highlight><highlight class="normal"></highlight></codeline>
@@ -36,17 +45,18 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.<ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase_1ab6843bc03abe3867cd46c4888f88176f" kindref="member">addPass</ref>()</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;InputSystem&gt;(&amp;inputManager);</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Configure<sp/>Main<sp/>phase</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Configure<sp/>Main<sp/>phase<sp/>with<sp/>custom<sp/>commit<sp/>points</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal">gameLoop.phase(<ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1aa57e7c5caf8850bd2c56ef8d345afa71" kindref="member">PhaseType</ref>.Main)</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass()</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;MovementSystem&gt;(&amp;gameWorld)</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;HeadingSystem&gt;(&amp;gameWorld)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.<ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_1a3f6b86a024c8b87e7794a024c2342d6c" kindref="member">addCommitPoint</ref>()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Commit<sp/>pass<sp/>events<sp/>and<sp/>flush<sp/>commands,<sp/>but<sp/>defer<sp/>manager<sp/>flush</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.<ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_1a36ee909a78fabac1cf997d98b0f8438c" kindref="member">addCommitPoint</ref>(CommitPoint::PassEvents<sp/>|<sp/>CommitPoint::FlushCommands)</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.<ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase_1ab6843bc03abe3867cd46c4888f88176f" kindref="member">addPass</ref>()</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>due<sp/>to<sp/>the<sp/>previous<sp/>commit<sp/>point,<sp/>CollisionSystem</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>can<sp/>read<sp/>all<sp/>events<sp/>pushed<sp/>to<sp/>the<sp/>PassEventBus<sp/></highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>by<sp/>the<sp/>systems<sp/>in<sp/>the<sp/>previous<sp/>pass.</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;CollisionSystem&gt;(&amp;gameWorld);<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>CollisionSystem<sp/>can<sp/>now<sp/>read<sp/>events<sp/>from<sp/>the<sp/>previous<sp/>pass</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.add&lt;CollisionSystem&gt;(&amp;gameWorld)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Full<sp/>structural<sp/>commit:<sp/>events,<sp/>commands,<sp/>and<sp/>managers</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.addCommitPoint(CommitPoint::Structural);<sp/></highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Configure<sp/>Post<sp/>phase</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal">gameLoop.phase(<ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop_1aa57e7c5caf8850bd2c56ef8d345afa71" kindref="member">PhaseType</ref>.Post)</highlight></codeline>
@@ -68,6 +78,24 @@
 <title>Event Synchronization</title><para>The game loop provides two levels of event synchronization:</para>
 <para><bold>Pass-level events</bold> are synchronized at commit points within a phase. This allows systems in the next pass to react to events generated by the previous pass - within the same phase. Pass-level events are discarded at the end of the phase and do not carry over to the next phase.</para>
 <para><bold>Phase-level events</bold> are synchronized after each phase completes. Only events written via <computeroutput>phasePush()</computeroutput> are available to systems in the following phase. Commands are flushed and managers process their requests at phase boundaries.</para>
+</sect1>
+<sect1 id="dir_23bbe3c077161bffaadaeeb0187ff9eb_1autotoc_md229">
+<title>CommitPoint Configuration</title><para>Commit points provide fine-grained control over synchronization within a phase. By default, <computeroutput>addCommitPoint()</computeroutput> uses <computeroutput>CommitPoint::PassEvents</computeroutput> which only synchronizes pass-level events.</para>
+<para>For more control, specify the desired flags explicitly:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Only<sp/>synchronize<sp/>pass<sp/>events<sp/>(default)</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">pass.addCommitPoint(CommitPoint::PassEvents);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Flush<sp/>commands<sp/>after<sp/>this<sp/>pass,<sp/>but<sp/>defer<sp/>manager<sp/>processing</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">pass.addCommitPoint(CommitPoint::FlushCommands);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Full<sp/>structural<sp/>commit:<sp/>events<sp/>+<sp/>commands<sp/>+<sp/>managers</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">pass.addCommitPoint(CommitPoint::Structural);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Custom<sp/>combination</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">pass.addCommitPoint(CommitPoint::PassEvents<sp/>|<sp/>CommitPoint::FlushManagers);</highlight></codeline>
+</programlisting></para>
+<para>The execution order within a commit point is deterministic: 1. Pass events are synchronized (if <computeroutput>PassEvents</computeroutput> is set) 2. Commands are flushed (if <computeroutput>FlushCommands</computeroutput> is set) 3. Managers process requests (if <computeroutput>FlushManagers</computeroutput> is set)</para>
+<para>This ordering ensures that commands can generate manager requests before managers are flushed.</para>
 <para><programlisting><codeline><highlight class="normal">┌─────────────────────────────────────────────────────────────────────────┐</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FRAME<sp/>UPDATE<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">├─────────────────────────────────────────────────────────────────────────┤</highlight></codeline>

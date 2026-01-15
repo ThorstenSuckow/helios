@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">helios-engine-runtime-gameloop | helios</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://helios.garagecraft.games/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://helios.garagecraft.games/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://helios.garagecraft.games/docs/helios/namespaces/helios/engine/runtime/gameloop"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="helios-engine-runtime-gameloop | helios"><meta data-rh="true" name="description" content="Central game loop orchestration module. More..."><meta data-rh="true" property="og:description" content="Central game loop orchestration module. More..."><meta data-rh="true" name="keywords" content="doxygen,reference,namespace"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://helios.garagecraft.games/docs/helios/namespaces/helios/engine/runtime/gameloop"><link data-rh="true" rel="alternate" href="https://helios.garagecraft.games/docs/helios/namespaces/helios/engine/runtime/gameloop" hreflang="en"><link data-rh="true" rel="alternate" href="https://helios.garagecraft.games/docs/helios/namespaces/helios/engine/runtime/gameloop" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://LK14YGETTG-dsn.algolia.net" crossorigin="anonymous"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"API Reference (Doxygen)","item":"https://helios.garagecraft.games/docs/helios/"},{"@type":"ListItem","position":2,"name":"Namespaces","item":"https://helios.garagecraft.games/docs/helios/namespaces"},{"@type":"ListItem","position":3,"name":"helios","item":"https://helios.garagecraft.games/docs/helios/namespaces/helios"},{"@type":"ListItem","position":4,"name":"engine","item":"https://helios.garagecraft.games/docs/helios/namespaces/helios/engine"},{"@type":"ListItem","position":5,"name":"runtime","item":"https://helios.garagecraft.games/docs/helios/namespaces/helios/engine/runtime"},{"@type":"ListItem","position":6,"name":"gameloop","item":"https://helios.garagecraft.games/docs/helios/namespaces/helios/engine/runtime/gameloop"}]}</script><link rel="search" type="application/opensearchdescription+xml" title="helios" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.d8266996.css">
-<script src="/assets/js/runtime~main.3593c6ef.js" defer="defer"></script>
-<script src="/assets/js/main.5dd95e7e.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.ecd6c71c.js" defer="defer"></script>
+<script src="/assets/js/main.a3c6554d.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -33,14 +33,111 @@ namespace helios::engine::runtime::gameloop { ... }
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="enumerations-index">Enumerations Index<a href="#enumerations-index" class="hash-link" aria-label="Direct link to Enumerations Index" title="Direct link to Enumerations Index" translate="no">​</a></h2>
 
 
-<table class="doxyMembersIndex"><tbody><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left">enum class</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left">PhaseType { <a href="#aa57e7c5caf8850bd2c56ef8d345afa71" class="">...</a> }</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+
+<table class="doxyMembersIndex"><tbody><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left">enum class</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left">CommitPoint : uint8_t { <a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="">...</a> }</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>Flags defining synchronization actions at the end of a pass. <a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left">enum class</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left">PhaseType { <a href="#aa57e7c5caf8850bd2c56ef8d345afa71" class="">...</a> }</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
 <p>Enumeration of game loop phase types. <a href="#aa57e7c5caf8850bd2c56ef8d345afa71" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="operators-index">Operators Index<a href="#operators-index" class="hash-link" aria-label="Direct link to Operators Index" title="Direct link to Operators Index" translate="no">​</a></h2>
+
+
+
+<table class="doxyMembersIndex"><tbody><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left"><a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="">CommitPoint</a> constexpr</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#a575a13ff55382c2226f56af26ed21c9b" class="">operator&amp;</a> (CommitPoint a, CommitPoint b) noexcept</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>Bitwise AND operator for <a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="">CommitPoint</a> flags. <a href="#a575a13ff55382c2226f56af26ed21c9b" class="">More...</a></p>
+</td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr><tr class="doxyMemberIndexItem"><td class="doxyMemberIndexItemType" valign="top" style="text-align:left"><a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="">CommitPoint</a> constexpr</td><td class="doxyMemberIndexItemName" valign="top" style="text-align:left"><a href="#aeccfb837ed873bcca8d40f8312f36686" class="">operator|</a> (CommitPoint a, CommitPoint b) noexcept</td></tr><tr class="doxyMemberIndexDescription"><td class="doxyMemberIndexDescriptionLeft"></td><td class="doxyMemberIndexDescriptionRight">
+<p>Bitwise OR operator for <a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="">CommitPoint</a> flags. <a href="#aeccfb837ed873bcca8d40f8312f36686" class="">More...</a></p>
 </td></tr><tr class="doxyMemberIndexSeparator"><td class="doxyMemberIndexSeparator" colspan="2"></td></tr></tbody></table>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="details">Description<a href="#details" class="hash-link" aria-label="Direct link to Description" title="Direct link to Description" translate="no">​</a></h2>
 <p>Central game loop orchestration module.</p>
 <p>Provides the <a class="" href="/docs/helios/classes/helios/engine/runtime/gameloop/gameloop">GameLoop</a>, <a class="" href="/docs/helios/classes/helios/engine/runtime/gameloop/phase">Phase</a>, and <a class="" href="/docs/helios/classes/helios/engine/runtime/gameloop/pass">Pass</a> classes for managing phased system execution with deterministic ordering and event synchronization.</p>
 <div class="doxySectionDef">
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="enumerations">Enumerations<a href="#enumerations" class="hash-link" aria-label="Direct link to Enumerations" title="Direct link to Enumerations" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="abdb94a899ecc215ffa46e24880ebd8ec">CommitPoint<a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="hash-link" aria-label="Direct link to CommitPoint" title="Direct link to CommitPoint" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">enum class helios::engine::runtime::gameloop::CommitPoint : uint8_t</td></tr></tbody></table>
+</td><td class="doxyMemberLabelsRight">
+<span class="doxyMemberLabels">
+<span class="doxyMemberLabel strong">strong</span>
+</span>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Flags defining synchronization actions at the end of a pass.</p>
+<dl class="doxyEnumList">
+<dt class="doxyEnumTableTitle">Enumeration values</dt>
+<dd>
+
+
+
+
+
+
+<table class="doxyEnumTable"><tbody><tr class="doxyEnumItem"><td class="doxyEnumItemName">None<a id="abdb94a899ecc215ffa46e24880ebd8eca6adf97f83acf6453d4a6a4b1070f3754" class="anchorTargetStickyNavbar_Vzrq"></a></td><td class="doxyEnumItemDescription">No commit action (= 0)</td></tr><tr class="doxyEnumItem"><td class="doxyEnumItemName">PassEvents<a id="abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f" class="anchorTargetStickyNavbar_Vzrq"></a></td><td class="doxyEnumItemDescription">Commits pass-level events (= 1 &lt;&lt; 0)</td></tr><tr class="doxyEnumItem"><td class="doxyEnumItemName">FlushCommands<a id="abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8" class="anchorTargetStickyNavbar_Vzrq"></a></td><td class="doxyEnumItemDescription">Flushes the command buffer (= 1 &lt;&lt; 1)</td></tr><tr class="doxyEnumItem"><td class="doxyEnumItemName">FlushManagers<a id="abdb94a899ecc215ffa46e24880ebd8ecae58c90136fb14137d5f8d945b1b0db41" class="anchorTargetStickyNavbar_Vzrq"></a></td><td class="doxyEnumItemDescription">Flushes all registered managers (= 1 &lt;&lt; 2)</td></tr><tr class="doxyEnumItem"><td class="doxyEnumItemName">Structural<a id="abdb94a899ecc215ffa46e24880ebd8ecaa9a0f8e36e7dcc2b446c20be15322dc9" class="anchorTargetStickyNavbar_Vzrq"></a></td><td class="doxyEnumItemDescription">Full structural commit (= PassEvents | FlushCommands | FlushManagers)</td></tr></tbody></table>
+</dd>
+</dl>
+<p>A <a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="">CommitPoint</a> specifies what operations should be performed when a pass completes. Multiple flags can be combined using bitwise OR to trigger several actions at once.</p>
+<p>Commit points are essential for the deterministic ordering of the game loop:</p>
+<ul class="doxyList">
+<li class="">Commands are queued during passes and executed at commit points</li>
+<li class="">Pass-level events become readable only after a commit</li>
+<li class="">Managers process their queued requests at commit points</li>
+</ul>
+<p>Example usage: ```cpp pass.addCommitPoint(<a href="#abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f" class="">CommitPoint::PassEvents</a> | <a href="#abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8" class="">CommitPoint::FlushCommands</a>); ```</p>
+<dl class="doxySectionUser">
+<dt>See Also</dt>
+<dd><p><a class="" href="/docs/helios/classes/helios/engine/runtime/gameloop/pass/#a36ee909a78fabac1cf997d98b0f8438c">Pass::addCommitPoint()</a></p></dd>
+</dl>
+<dl class="doxySectionUser">
+<dt>See Also</dt>
+<dd><p><a class="" href="/docs/helios/classes/helios/engine/runtime/gameloop/gameloop/#a69e915eeb5af7691e30096fa22d1eacb">GameLoop::passCommit()</a></p></dd>
+</dl>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/commitpoint-ixx/#l00035">35</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/commitpoint-ixx">CommitPoint.ixx</a>.</p>
+<div class="doxyProgramListing">
+<div class="doxyCodeLine"><span class="doxyLineNumber"><a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="">35</a></span><span class="doxyLineContent"><span class="doxyHighlight">    </span><span class="doxyHighlightKeyword">enum class</span><span class="doxyHighlight"> <a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="">CommitPoint</a> : uint8_t {</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">36</span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">37</span><span class="doxyLineContent"><span class="doxyHighlightComment">        /**</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">38</span><span class="doxyLineContent"><span class="doxyHighlightComment">         * @brief No commit action.</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">39</span><span class="doxyLineContent"><span class="doxyHighlightComment">         */</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber"><a href="#abdb94a899ecc215ffa46e24880ebd8eca6adf97f83acf6453d4a6a4b1070f3754" class="">40</a></span><span class="doxyLineContent"><span class="doxyHighlight">        <a href="#abdb94a899ecc215ffa46e24880ebd8eca6adf97f83acf6453d4a6a4b1070f3754" class="">None</a> = 0,</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">41</span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">42</span><span class="doxyLineContent"><span class="doxyHighlightComment">        /**</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">43</span><span class="doxyLineContent"><span class="doxyHighlightComment">         * @brief Commits pass-level events.</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">44</span><span class="doxyLineContent"><span class="doxyHighlightComment">         *</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">45</span><span class="doxyLineContent"><span class="doxyHighlightComment">         * Events pushed via `UpdateContext::pushPass()` become readable in subsequent</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">46</span><span class="doxyLineContent"><span class="doxyHighlightComment">         * passes through `UpdateContext::readPass()`. Pass events are discarded at the</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">47</span><span class="doxyLineContent"><span class="doxyHighlightComment">         * end of the phase.</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">48</span><span class="doxyLineContent"><span class="doxyHighlightComment">         */</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber"><a href="#abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f" class="">49</a></span><span class="doxyLineContent"><span class="doxyHighlight">        <a href="#abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f" class="">PassEvents</a> = 1 &lt;&lt; 0,</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">50</span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">51</span><span class="doxyLineContent"><span class="doxyHighlightComment">        /**</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">52</span><span class="doxyLineContent"><span class="doxyHighlightComment">         * @brief Flushes the command buffer.</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">53</span><span class="doxyLineContent"><span class="doxyHighlightComment">         *</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">54</span><span class="doxyLineContent"><span class="doxyHighlightComment">         * Pending commands are dispatched to their registered handlers and executed.</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">55</span><span class="doxyLineContent"><span class="doxyHighlightComment">         */</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber"><a href="#abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8" class="">56</a></span><span class="doxyLineContent"><span class="doxyHighlight">        <a href="#abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8" class="">FlushCommands</a>  = 1 &lt;&lt; 1,</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">57</span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">58</span><span class="doxyLineContent"><span class="doxyHighlightComment">        /**</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">59</span><span class="doxyLineContent"><span class="doxyHighlightComment">         * @brief Flushes all registered managers.</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">60</span><span class="doxyLineContent"><span class="doxyHighlightComment">         *</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">61</span><span class="doxyLineContent"><span class="doxyHighlightComment">         * Managers process their queued requests (e.g., ProjectileManager spawns</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">62</span><span class="doxyLineContent"><span class="doxyHighlightComment">         * projectiles from its request queue).</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">63</span><span class="doxyLineContent"><span class="doxyHighlightComment">         */</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber"><a href="#abdb94a899ecc215ffa46e24880ebd8ecae58c90136fb14137d5f8d945b1b0db41" class="">64</a></span><span class="doxyLineContent"><span class="doxyHighlight">        <a href="#abdb94a899ecc215ffa46e24880ebd8ecae58c90136fb14137d5f8d945b1b0db41" class="">FlushManagers</a>   = 1 &lt;&lt; 2,</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">65</span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">66</span><span class="doxyLineContent"><span class="doxyHighlightComment">        /**</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">67</span><span class="doxyLineContent"><span class="doxyHighlightComment">         * @brief Full structural commit.</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">68</span><span class="doxyLineContent"><span class="doxyHighlightComment">         *</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">69</span><span class="doxyLineContent"><span class="doxyHighlightComment">         * Combines PassEvents, FlushManagers, and FlushCommands for a complete</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">70</span><span class="doxyLineContent"><span class="doxyHighlightComment">         * synchronization point.</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">71</span><span class="doxyLineContent"><span class="doxyHighlightComment">         */</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber"><a href="#abdb94a899ecc215ffa46e24880ebd8ecaa9a0f8e36e7dcc2b446c20be15322dc9" class="">72</a></span><span class="doxyLineContent"><span class="doxyHighlight">        <a href="#abdb94a899ecc215ffa46e24880ebd8ecaa9a0f8e36e7dcc2b446c20be15322dc9" class="">Structural</a> = <a href="#abdb94a899ecc215ffa46e24880ebd8ecad42654403d0dfa55915ee7ba7fd7af0f" class="">PassEvents</a> | <a href="#abdb94a899ecc215ffa46e24880ebd8eca7ce9ed9ce12e02385a7745e379e97ca8" class="">FlushCommands</a> | <a href="#abdb94a899ecc215ffa46e24880ebd8ecae58c90136fb14137d5f8d945b1b0db41" class="">FlushManagers</a></span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">73</span><span class="doxyLineContent"><span class="doxyHighlight">    };</span></span></div>
+</div>
+</div>
+</div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aa57e7c5caf8850bd2c56ef8d345afa71">PhaseType<a href="#aa57e7c5caf8850bd2c56ef8d345afa71" class="hash-link" aria-label="Direct link to PhaseType" title="Direct link to PhaseType" translate="no">​</a></h3>
 <div class="doxyMemberItem">
 <div class="doxyMemberProto">
@@ -92,13 +189,81 @@ namespace helios::engine::runtime::gameloop { ... }
 </div>
 </div>
 </div>
+<div class="doxySectionDef">
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="operators">Operators<a href="#operators" class="hash-link" aria-label="Direct link to Operators" title="Direct link to Operators" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="a575a13ff55382c2226f56af26ed21c9b">operator&amp;()<a href="#a575a13ff55382c2226f56af26ed21c9b" class="hash-link" aria-label="Direct link to operator&amp;()" title="Direct link to operator&amp;()" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">CommitPoint constexpr helios::engine::runtime::gameloop::operator&amp; (<a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="">CommitPoint</a> a, <a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="">CommitPoint</a> b)</td></tr></tbody></table>
+</td><td class="doxyMemberLabelsRight">
+<span class="doxyMemberLabels">
+<span class="doxyMemberLabel constexpr">constexpr</span>
+<span class="doxyMemberLabel noexcept">noexcept</span>
+</span>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Bitwise AND operator for <a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="">CommitPoint</a> flags.</p>
+<dl class="doxyParamsList">
+<dt class="doxyParamsTableTitle">Parameters</dt>
+<dd>
+<table class="doxyParamsTable"><tbody><tr class="doxyParamItem"><td class="doxyParamItemName">a</td><td class="doxyParamItemDescription"><p>First operand.</p></td></tr><tr class="doxyParamItem"><td class="doxyParamItemName">b</td><td class="doxyParamItemDescription"><p>Second operand.</p></td></tr></tbody></table>
+</dd>
+</dl>
+<dl class="doxySectionUser">
+<dt>Returns</dt>
+<dd><p>The combined flags.</p></dd>
+</dl>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/commitpoint-ixx/#l00083">83</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/commitpoint-ixx">CommitPoint.ixx</a>.</p>
+<div class="doxyProgramListing">
+<div class="doxyCodeLine"><span class="doxyLineNumber"><a href="#a575a13ff55382c2226f56af26ed21c9b" class="">83</a></span><span class="doxyLineContent"><span class="doxyHighlight">    <a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="">CommitPoint</a> </span><span class="doxyHighlightKeyword">constexpr</span><span class="doxyHighlight"> <a href="#a575a13ff55382c2226f56af26ed21c9b" class="">operator &amp;</a>(<a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="">CommitPoint</a> a, <a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="">CommitPoint</a> b) </span><span class="doxyHighlightKeyword">noexcept</span><span class="doxyHighlight"> {</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">84</span><span class="doxyLineContent"><span class="doxyHighlight">        </span><span class="doxyHighlightKeywordFlow">return</span><span class="doxyHighlight"> </span><span class="doxyHighlightKeyword">static_cast&lt;</span><span class="doxyHighlight"><a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="">CommitPoint</a></span><span class="doxyHighlightKeyword">&gt;</span><span class="doxyHighlight">(std::to_underlying(a) &amp; std::to_underlying(b));</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">85</span><span class="doxyLineContent"><span class="doxyHighlight">    }</span></span></div>
+</div>
+</div>
+</div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aeccfb837ed873bcca8d40f8312f36686">operator|()<a href="#aeccfb837ed873bcca8d40f8312f36686" class="hash-link" aria-label="Direct link to operator|()" title="Direct link to operator|()" translate="no">​</a></h3>
+<div class="doxyMemberItem">
+<div class="doxyMemberProto">
+<table class="doxyMemberLabels"><tbody><tr class="doxyMemberLabels"><td class="doxyMemberLabelsLeft">
+<table class="doxyMemberName"><tbody><tr><td class="doxyMemberName">CommitPoint constexpr helios::engine::runtime::gameloop::operator| (<a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="">CommitPoint</a> a, <a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="">CommitPoint</a> b)</td></tr></tbody></table>
+</td><td class="doxyMemberLabelsRight">
+<span class="doxyMemberLabels">
+<span class="doxyMemberLabel constexpr">constexpr</span>
+<span class="doxyMemberLabel noexcept">noexcept</span>
+</span>
+</td></tr></tbody></table>
+</div>
+<div class="doxyMemberDoc">
+<p>Bitwise OR operator for <a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="">CommitPoint</a> flags.</p>
+<dl class="doxyParamsList">
+<dt class="doxyParamsTableTitle">Parameters</dt>
+<dd>
+<table class="doxyParamsTable"><tbody><tr class="doxyParamItem"><td class="doxyParamItemName">a</td><td class="doxyParamItemDescription"><p>First operand.</p></td></tr><tr class="doxyParamItem"><td class="doxyParamItemName">b</td><td class="doxyParamItemDescription"><p>Second operand.</p></td></tr></tbody></table>
+</dd>
+</dl>
+<dl class="doxySectionUser">
+<dt>Returns</dt>
+<dd><p>The combined flags.</p></dd>
+</dl>
+<p>Definition at line <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/commitpoint-ixx/#l00095">95</a> of file <a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/commitpoint-ixx">CommitPoint.ixx</a>.</p>
+<div class="doxyProgramListing">
+<div class="doxyCodeLine"><span class="doxyLineNumber"><a href="#aeccfb837ed873bcca8d40f8312f36686" class="">95</a></span><span class="doxyLineContent"><span class="doxyHighlight">    <a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="">CommitPoint</a> </span><span class="doxyHighlightKeyword">constexpr</span><span class="doxyHighlight"> <a href="#aeccfb837ed873bcca8d40f8312f36686" class="">operator |</a>(<a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="">CommitPoint</a> a, <a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="">CommitPoint</a> b) </span><span class="doxyHighlightKeyword">noexcept</span><span class="doxyHighlight"> {</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">96</span><span class="doxyLineContent"><span class="doxyHighlight">        </span><span class="doxyHighlightKeywordFlow">return</span><span class="doxyHighlight"> </span><span class="doxyHighlightKeyword">static_cast&lt;</span><span class="doxyHighlight"><a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="">CommitPoint</a></span><span class="doxyHighlightKeyword">&gt;</span><span class="doxyHighlight">(std::to_underlying(a) | std::to_underlying(b));</span></span></div>
+<div class="doxyCodeLine"><span class="doxyLineNumber">97</span><span class="doxyLineContent"><span class="doxyHighlight">    }</span></span></div>
+</div>
+</div>
+</div>
+</div>
 <hr>
-<p>The documentation for this namespace was generated from the following file:</p>
+<p>The documentation for this namespace was generated from the following files:</p>
 <ul>
+<li class=""><a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/commitpoint-ixx">CommitPoint.ixx</a></li>
 <li class=""><a class="" href="/docs/helios/files/include/include/helios/include/helios/engine/include/helios/engine/runtime/include/helios/engine/runtime/gameloop/phase-ixx">Phase.ixx</a></li>
 </ul>
 <hr>
 <p class="doxyGeneratedBy">Generated via <a href="https://xpack.github.io/doxygen2docusaurus" target="_blank" rel="noopener noreferrer" class="">doxygen2docusaurus</a> 2.0.0 by <a href="https://www.doxygen.nl" target="_blank" rel="noopener noreferrer" class="">Doxygen</a> 1.15.0.</p>
-</div></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/helios/namespaces/helios/engine/runtime/factory"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">factory</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/helios/namespaces/helios/engine/runtime/messaging"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">helios-engine-runtime-messaging</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#definition" class="table-of-contents__link toc-highlight">Definition</a></li><li><a href="#classes-index" class="table-of-contents__link toc-highlight">Classes Index</a></li><li><a href="#enumerations-index" class="table-of-contents__link toc-highlight">Enumerations Index</a></li><li><a href="#details" class="table-of-contents__link toc-highlight">Description</a></li><li><a href="#enumerations" class="table-of-contents__link toc-highlight">Enumerations</a><ul><li><a href="#aa57e7c5caf8850bd2c56ef8d345afa71" class="table-of-contents__link toc-highlight">PhaseType</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Documentation</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Getting Started</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/api/overview">API Reference</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/examples/simple-cube">Examples</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/thorstensuckow/helios/discussions" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub Discussions<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/thorstensuckow/helios/issues" target="_blank" rel="noopener noreferrer" class="footer__link-item">Issues<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.researchgate.net/publication/397445662_helios_Design_and_prototypical_implementation_of_a_C_game_framework" target="_blank" rel="noopener noreferrer" class="footer__link-item">Academic Paper<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/thorstensuckow/helios" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 <a href="https://thorsten.suckow-homberg.de">Thorsten Suckow-Homberg</a> / <a href="https://garagecraft.games">GarageCraft Games</a>. Licensed under MIT. Built with Docusaurus.</div></div></div></footer></div>
+</div></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/helios/namespaces/helios/engine/runtime/factory"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">factory</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/helios/namespaces/helios/engine/runtime/messaging"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">helios-engine-runtime-messaging</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#definition" class="table-of-contents__link toc-highlight">Definition</a></li><li><a href="#classes-index" class="table-of-contents__link toc-highlight">Classes Index</a></li><li><a href="#enumerations-index" class="table-of-contents__link toc-highlight">Enumerations Index</a></li><li><a href="#operators-index" class="table-of-contents__link toc-highlight">Operators Index</a></li><li><a href="#details" class="table-of-contents__link toc-highlight">Description</a></li><li><a href="#enumerations" class="table-of-contents__link toc-highlight">Enumerations</a><ul><li><a href="#abdb94a899ecc215ffa46e24880ebd8ec" class="table-of-contents__link toc-highlight">CommitPoint</a></li><li><a href="#aa57e7c5caf8850bd2c56ef8d345afa71" class="table-of-contents__link toc-highlight">PhaseType</a></li></ul></li><li><a href="#operators" class="table-of-contents__link toc-highlight">Operators</a><ul><li><a href="#a575a13ff55382c2226f56af26ed21c9b" class="table-of-contents__link toc-highlight">operator&amp;()</a></li><li><a href="#aeccfb837ed873bcca8d40f8312f36686" class="table-of-contents__link toc-highlight">operator|()</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Documentation</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Getting Started</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/api/overview">API Reference</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/examples/simple-cube">Examples</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/thorstensuckow/helios/discussions" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub Discussions<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/thorstensuckow/helios/issues" target="_blank" rel="noopener noreferrer" class="footer__link-item">Issues<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.researchgate.net/publication/397445662_helios_Design_and_prototypical_implementation_of_a_C_game_framework" target="_blank" rel="noopener noreferrer" class="footer__link-item">Academic Paper<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/thorstensuckow/helios" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 <a href="https://thorsten.suckow-homberg.de">Thorsten Suckow-Homberg</a> / <a href="https://garagecraft.games">GarageCraft Games</a>. Licensed under MIT. Built with Docusaurus.</div></div></div></footer></div>
 </body>
 </html>

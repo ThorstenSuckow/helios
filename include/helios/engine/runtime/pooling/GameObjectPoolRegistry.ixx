@@ -94,6 +94,17 @@ export namespace helios::engine::runtime::pooling {
             return it->second.get();
         }
 
+        /**
+         * @brief Checks if a pool with the given ID is registered.
+         *
+         * @param id The identifier of the pool to check.
+         *
+         * @return True if the pool exists, false otherwise.
+         */
+        [[nodiscard]] bool has(const helios::engine::core::data::GameObjectPoolId id) const noexcept {
+            return pools_.find(id) != pools_.end();
+        }
+
 
     };
 

@@ -7,18 +7,18 @@ module;
 #include <cassert>
 #include <optional>
 
-export module helios.engine.mechanics.spawn.commands.DespawnCommand;
+export module helios.engine.runtime.spawn.commands.DespawnCommand;
 
 import helios.engine.runtime.messaging.command.WorldCommand;
 import helios.util.Guid;
 
 import helios.engine.runtime.world.GameWorld;
 
-import helios.engine.core.data.GameObjectPoolId;
+import helios.engine.core.data.SpawnProfileId;
 
 import helios.engine.runtime.messaging.command.WorldCommandDispatcher;
 
-export namespace helios::engine::mechanics::spawn::commands {
+export namespace helios::engine::runtime::spawn::commands {
 
     /**
      * @brief Command to request despawning of a GameObject.
@@ -44,7 +44,7 @@ export namespace helios::engine::mechanics::spawn::commands {
         /**
          * @brief Optional pool ID to return the entity to.
          */
-        std::optional<helios::engine::core::data::GameObjectPoolId> gameObjectPoolId_;
+        std::optional<helios::engine::core::data::SpawnProfileId> spawnProfileId_;
 
     public:
 
@@ -63,8 +63,8 @@ export namespace helios::engine::mechanics::spawn::commands {
          */
         explicit DespawnCommand(
             const helios::util::Guid& guid,
-            const helios::engine::core::data::GameObjectPoolId gameObjectPoolId) :
-            guid_(guid), gameObjectPoolId_(gameObjectPoolId) {}
+            const helios::engine::core::data::SpawnProfileId spawnProfileId) :
+            guid_(guid), spawnProfileId_(spawnProfileId) {}
 
         /**
          * @brief Direct execution is not supported; requires a dispatcher.
@@ -104,8 +104,8 @@ export namespace helios::engine::mechanics::spawn::commands {
          *
          * @return Optional containing the pool ID if specified.
          */
-        [[nodiscard]] std::optional<helios::engine::core::data::GameObjectPoolId> gameObjectPoolId() const noexcept {
-            return gameObjectPoolId_;
+        [[nodiscard]] std::optional<helios::engine::core::data::SpawnProfileId> spawnProfileId() const noexcept {
+            return spawnProfileId_;
         }
 
     };

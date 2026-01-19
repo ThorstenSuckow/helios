@@ -6,17 +6,19 @@ module;
 
 #include <cinttypes>
 
-export module helios.engine.mechanics.spawn.commands.SpawnCommand;
+export module helios.engine.runtime.spawn.commands.SpawnCommand;
+
+import helios.engine.runtime.spawn.SpawnContext;
 
 import helios.engine.runtime.messaging.command.WorldCommand;
 import helios.engine.runtime.messaging.command.WorldCommandDispatcher;
 import helios.engine.runtime.world.GameWorld;
 import helios.math.types;
 
-import helios.engine.core.data.GameObjectPoolId;
+import helios.engine.core.data.SpawnProfileId;
 
 
-export namespace helios::engine::mechanics::spawn::commands {
+export namespace helios::engine::runtime::spawn::commands {
 
     /**
      * @brief Command to request spawning of GameObjects from a pool.
@@ -40,24 +42,21 @@ export namespace helios::engine::mechanics::spawn::commands {
          */
         const size_t spawnBudget_;
 
-        /**
-         * @brief The ID of the pool from which to acquire GameObjects.
-         */
-        const helios::engine::core::data::GameObjectPoolId gameObjectPoolId_;
+
+        const helios::engine::core::data::SpawnProfileId spawnProfileId_;
+
+        const helios::engine::runtime::spawn::SpawnContext spawnContext_;
 
     public:
 
-        /**
-         * @brief Constructs a SpawnCommand.
-         *
-         * @param gameObjectPoolId The ID of the pool to spawn from.
-         * @param spawnBudget The number of objects to spawn.
-         */
+
         explicit SpawnCommand(
-            const helios::engine::core::data::GameObjectPoolId gameObjectPoolId,
-            const size_t spawnBudget
+            const helios::engine::core::data::SpawnProfileId spawnProfileId,
+            const helios::engine::runtime::spawn::SpawnContext& spawnContext,
+            const size_t spawnBudget = 1
         ) :
-        gameObjectPoolId_(gameObjectPoolId),
+        spawnProfileId_(spawnProfileId),
+        spawnContext_(spawnContext),
         spawnBudget_(spawnBudget)
         {}
 
@@ -89,8 +88,8 @@ export namespace helios::engine::mechanics::spawn::commands {
          *
          * @return The GameObjectPoolId to spawn from.
          */
-        [[nodiscard]] helios::engine::core::data::GameObjectPoolId gameObjectPoolId() const noexcept {
-            return gameObjectPoolId_;
+        [[nodiscard]] helios::engine::core::data::SpawnProfileId spawnProfileId() const noexcept {
+            return spawnProfileId_;
         }
 
         /**
@@ -100,6 +99,10 @@ export namespace helios::engine::mechanics::spawn::commands {
          */
         [[nodiscard]] size_t spawnBudget() const noexcept {
             return spawnBudget_;
+        }
+
+        [[nodiscard]] const helios::engine::runtime::spawn::SpawnContext& spawnContext() const noexcept {
+            return spawnContext_;
         }
     };
 

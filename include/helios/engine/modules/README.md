@@ -42,7 +42,7 @@ This module **imports** from `helios.engine.ecs`:
 This module **imports** from `helios.engine.runtime.world`:
 
 - `GameWorld` — Used by systems for entity queries
-- `Manager` — Extended by domain managers (ProjectilePoolManager)
+- `Manager` — Extended by domain managers (ProjectileManager)
 
 ## Usage Example
 

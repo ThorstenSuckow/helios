@@ -12,5 +12,4 @@ export import helios.engine.modules.physics;
 export import helios.engine.modules.spatial;
 export import helios.engine.modules.rendering;
 export import helios.engine.modules.scene;
-export import helios.engine.modules.pool;
 

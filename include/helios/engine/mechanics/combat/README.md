@@ -4,17 +4,24 @@ Combat-related gameplay systems, components, and commands.
 
 ## Overview
 
-This module provides all building blocks for implementing combat mechanics such as aiming, shooting, and projectile management.
+This module provides all building blocks for implementing combat mechanics such as aiming, shooting, and projectile spawning.
 
 ## Submodules
 
 | Submodule | Purpose |
 |-----------|---------|
-| `components/` | Data containers for combat state (aiming, cooldowns) |
 | `commands/` | Commands for combat actions (ShootCommand, Aim2DCommand) |
-| `dispatcher/` | Command dispatchers routing to managers |
-| `manager/` | Managers for deferred projectile operations |
-| `requests/` | Request types for projectile spawning |
+| `components/` | Data containers for combat state (aiming direction, cooldowns, projectile config) |
+| `systems/` | ECS systems for processing combat logic (ProjectileSpawnSystem) |
+
+## Architecture
+
+Combat follows the command pattern integrated with the spawn system:
+
+1. Input systems generate `ShootCommand` and `Aim2DCommand`
+2. Commands update `ShootComponent` and `Aim2DComponent` state
+3. `ProjectileSpawnSystem` reads component state and generates `SpawnCommand`
+4. Spawn system handles actual projectile creation via pool and profile
 
 ---
 
@@ -22,6 +29,6 @@ This module provides all building blocks for implementing combat mechanics such 
 <summary>Doxygen</summary><p>
 @namespace helios::engine::mechanics::combat
 @brief Combat-related gameplay systems, components, and commands.
-@details This namespace contains the combat layer of the gameplay system. It includes components for storing weapon and aiming state, commands for translating input into combat actions, dispatchers for routing commands, managers for deferred projectile operations, and request types for spawn communication.
+@details This namespace contains the combat layer of the gameplay system. It includes components for storing weapon and aiming state, commands for translating input into combat actions, and systems for spawning projectiles based on combat state.
 </p></details>
 

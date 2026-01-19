@@ -22,53 +22,14 @@ import helios.engine.ecs.Updatable;
 export namespace helios::engine::ecs {
 
     /**
-     * @brief Container for components that represents an entity in the game world.
+     * @brief Checks if a component of a specific type exists in the GameObject.
      *
-     * @details A GameObject is the fundamental entity type in helios. It serves as a
-     * container for Component instances that define its behavior and data. Each GameObject
-     * has a unique Guid for identification and lookup within the GameWorld.
+     * @details Uses the type-indexed componentIndex_ for O(1) amortized lookup.
+     * If the type exists in the map, the function returns true; otherwise, false.
      *
-     * ## Component Management
+     * @tparam T The type of component to check for. Must derive from Component.
      *
-     * Components are added via `add<T>()` and retrieved via `get<T>()`. The GameObject
-     * uses a type-indexed map (`std::unordered_map<std::type_index, Component*>`) for
-     * **O(1) amortized** component lookup by type.
-     *
-     * ```cpp
-     * auto entity = std::make_unique<GameObject>();
-     * entity->add<SceneNodeComponent>(sceneNode);
-     * entity->add<Move2DComponent>();
-     *
-     * auto* move = entity->get<Move2DComponent>();  // O(1) lookup
-     * ```
-     *
-     * ## Active State
-     *
-     * Each GameObject has an `isActive()` flag that controls participation in the game loop:
-     *
-     * | State | Behavior |
-     * |-------|----------|
-     * | `isActive() == true` | Processed by systems, rendered, collides |
-     * | `isActive() == false` | Skipped by systems, exists but dormant |
-     *
-     * When the active state changes, `onActivate()` or `onDeactivate()` is called on all
-     * attached components.
-     *
-     * ## Lifecycle Callbacks
-     *
-     * Components receive lifecycle notifications:
-     * - `onAttach()` — Called when a component is added to the GameObject
-     * - `onActivate()` / `onDeactivate()` — Called when active state changes
-     * - `onAcquire()` / `onRelease()` — Called when acquired from/released to a pool
-     *
-     * ## Ownership
-     *
-     * GameObjects are typically owned by a GameWorld via `std::unique_ptr`. The GameWorld
-     * provides lookup by Guid with amortized O(1) complexity.
-     *
-     * @see Component
-     * @see GameWorld
-     * @see GameObjectFilter
+     * @return True if a component of the specified type exists, otherwise false.
      */
     class GameObject {
 
@@ -372,6 +333,15 @@ export namespace helios::engine::ecs {
          *          Use add() and remove() methods for proper component management.
          */
         [[nodiscard]] std::vector<std::unique_ptr<helios::engine::ecs::Component>>& components() noexcept {
+            return components_;
+        }
+
+        /**
+         * @brief Returns a const reference to all attached components.
+         *
+         * @details Provides read-only access to the component container.
+         */
+        [[nodiscard]] const std::vector<std::unique_ptr<helios::engine::ecs::Component>>& components() const noexcept {
             return components_;
         }
 

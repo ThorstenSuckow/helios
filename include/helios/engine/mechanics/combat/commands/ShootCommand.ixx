@@ -105,19 +105,6 @@ export namespace helios::engine::mechanics::combat::commands {
 
         }
 
-        /**
-         * @brief Accepts a dispatcher for command routing.
-         *
-         * @param gameObject The target GameObject.
-         * @param dispatcher The dispatcher to route this command to.
-         */
-        void accept(
-            helios::engine::ecs::GameObject& gameObject,
-            helios::engine::runtime::messaging::command::TargetedCommandDispatcher& dispatcher
-        ) const noexcept override {
-            dispatcher.dispatch(gameObject, *this);
-        }
-
 
     };
 

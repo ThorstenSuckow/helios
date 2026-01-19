@@ -86,10 +86,8 @@ export namespace helios::engine::runtime::gameloop {
 
 
         /**
-         * @brief Flag indicating whether this pass has a commit point.
+         * @brief The CommitPoint configured for this Pass.
          */
-        bool hasCommitPoint_ = false;
-
         CommitPoint commitPoint_ = CommitPoint::None;
 
         public:

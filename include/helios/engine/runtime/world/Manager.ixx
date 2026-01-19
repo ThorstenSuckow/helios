@@ -29,8 +29,8 @@ export namespace helios::engine::runtime::world {
      *
      * ## Use Cases
      *
-     * - **ProjectilePoolManager:** Processes shoot requests and spawns projectiles
-     * - **SpawnManager:** Handles entity spawn/despawn lifecycle
+     * - **GameObjectPoolManager:** Manages entity pooling and acquire/release lifecycle
+     * - **SpawnManager:** Handles spawn request processing and entity initialization
      * - **Custom Managers:** Any deferred processing that doesn't fit the System model
      *
      * Example implementation:
@@ -45,7 +45,7 @@ export namespace helios::engine::runtime::world {
      * ```
      *
      * @see GameWorld
-     * @see PoolRequestHandler
+     * @see GameObjectPoolManager
      * @see System
      */
     class Manager {
@@ -57,7 +57,7 @@ export namespace helios::engine::runtime::world {
          *
          * @details Set during onAdd() and remains valid for the Manager's lifetime.
          */
-        helios::engine::runtime::world::GameWorld* gameWorld_;
+        helios::engine::runtime::world::GameWorld* gameWorld_ = nullptr;
 
     public:
 

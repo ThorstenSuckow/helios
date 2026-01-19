@@ -18,7 +18,7 @@ export module helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.Manager;
-import helios.engine.runtime.pooling.PoolRequestHandler;
+import helios.engine.runtime.pooling.SpawnRequestHandler;
 import helios.engine.ecs.Component;
 import helios.engine.ecs.CloneableComponent;
 
@@ -29,15 +29,10 @@ import helios.engine.runtime.world.Level;
 
 
 import helios.engine.ecs.query.GameObjectFilter;
-import helios.engine.core.data.GameObjectPoolId;
-import helios.engine.runtime.pooling.GameObjectPoolRegistry;
+import helios.engine.core.data.SpawnProfileId;
 
+import helios.engine.runtime.pooling.SpawnRequestHandlerRegistry;
 
-import helios.engine.runtime.pooling.PoolRequestHandlerRegistry;
-
-export namespace helios::engine::core::data {
-    class GameObjectPool;
-}
 
 
 #define HELIOS_LOG_SCOPE "helios::engine::runtime::world::GameWorld"
@@ -153,13 +148,6 @@ export namespace helios::engine::runtime::world {
          */
         std::unique_ptr<helios::engine::runtime::world::Level> level_ = nullptr;
 
-        /**
-         * @brief Registry of GameObjectPools for entity recycling.
-         *
-         * @details Pools enable efficient reuse of GameObjects without repeated
-         * allocation/deallocation. Each pool is identified by a GameObjectPoolId.
-         */
-        helios::engine::runtime::pooling::GameObjectPoolRegistry pools_{};
 
         /**
          * @brief Registry mapping pool IDs to their request handlers.
@@ -173,36 +161,6 @@ export namespace helios::engine::runtime::world {
 
     public:
 
-        /**
-         * @brief Retrieves a GameObjectPool by its identifier.
-         *
-         * @param gamePoolId The unique identifier of the pool.
-         *
-         * @return Pointer to the pool if found, nullptr otherwise.
-         */
-        [[nodiscard]] helios::engine::runtime::pooling::GameObjectPool* pool(
-            helios::engine::core::data::GameObjectPoolId gamePoolId) const {
-            return pools_.pool(gamePoolId);
-        }
-
-        /**
-         * @brief Registers a new GameObjectPool with the world.
-         *
-         * @param gamePoolId The unique identifier for the pool.
-         * @param gameObjectPool The pool instance. Ownership is transferred.
-         *
-         * @return Pointer to the added pool, or nullptr on failure.
-         */
-        [[nodiscard]] helios::engine::runtime::pooling::GameObjectPool* addPool(
-            helios::engine::core::data::GameObjectPoolId gamePoolId,
-            std::unique_ptr<helios::engine::runtime::pooling::GameObjectPool> gameObjectPool) {
-            auto* pool =  pools_.addPool(gamePoolId, std::move(gameObjectPool));
-            assert(pool != nullptr && "unexpected nullptr for pool");
-            if (pool == nullptr) {
-                return nullptr;
-            }
-            return pool;
-        }
 
         /**
          * @brief Initializes all registered managers.
@@ -290,36 +248,44 @@ export namespace helios::engine::runtime::world {
         }
 
         /**
-         * @brief Registers a PoolRequestHandler for a specific pool.
+         * @brief Registers a SpawnRequestHandler for a specific spawn profile.
          *
-         * @details Associates a handler with a pool ID. The handler processes
-         * spawn and despawn requests for entities in that pool.
+         * @details Associates a handler with a spawn profile ID. The handler processes
+         * spawn and despawn requests for entities associated with that profile.
          *
-         * @param gameObjectPoolId The pool identifier to associate with the handler.
+         * @param spawnProfileId The spawn profile identifier to associate with the handler.
          * @param poolManager Reference to the handler to register.
          *
          * @return True if registration succeeded, false if already registered.
          */
-        bool registerPoolRequestHandler(
-            const helios::engine::core::data::GameObjectPoolId gameObjectPoolId,
-            helios::engine::runtime::pooling::PoolRequestHandler& poolManager
+        bool registerSpawnRequestHandler(
+            const helios::engine::core::data::SpawnProfileId spawnProfileId,
+            helios::engine::runtime::pooling::SpawnRequestHandler& poolManager
         ) {
-            bool added = poolManagerRegistry_.add(gameObjectPoolId, poolManager);
+            bool added = poolManagerRegistry_.add(spawnProfileId, poolManager);
 
             assert(added && "PoolManager already registered");
 
             return added;
         }
 
+
         /**
-         * @brief Retrieves the PoolRequestHandler for a specific pool.
+         * @brief Retrieves a SpawnRequestHandler for a specific spawn profile.
          *
-         * @param gameObjectPoolId The pool identifier.
+         * @details Used to submit spawn/despawn requests to the handler responsible
+         * for a particular spawn profile (e.g., bullet pool, enemy pool).
          *
-         * @return Pointer to the handler if found, nullptr otherwise.
+         * @param spawnProfileId The spawn profile identifier to look up.
+         *
+         * @return Pointer to the handler, or nullptr if not registered.
+         *
+         * @see registerSpawnRequestHandler()
+         * @see SpawnRequestHandler
          */
-        helios::engine::runtime::pooling::PoolRequestHandler* poolRequestHandler(helios::engine::core::data::GameObjectPoolId gameObjectPoolId) {
-            return poolManagerRegistry_.get(gameObjectPoolId);
+        [[nodiscard]] helios::engine::runtime::pooling::SpawnRequestHandler* spawnRequestHandler(
+            const helios::engine::core::data::SpawnProfileId spawnProfileId) {
+            return poolManagerRegistry_.get(spawnProfileId);
         }
 
         /**
@@ -489,7 +455,7 @@ export namespace helios::engine::runtime::world {
          *
          * @note The clone is added to the world in an inactive state.
          */
-        [[nodiscard]] helios::engine::ecs::GameObject* clone(helios::engine::ecs::GameObject& gameObject) {
+        [[nodiscard]] helios::engine::ecs::GameObject* clone(const helios::engine::ecs::GameObject& gameObject) {
 
 
             auto newGo = std::make_unique<helios::engine::ecs::GameObject>();

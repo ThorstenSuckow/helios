@@ -33,9 +33,9 @@ import helios.engine.modules.scene.components.SceneNodeComponent;
 
 import helios.engine.runtime.world.UpdateContext;
 
-import helios.engine.mechanics.spawn.commands.DespawnCommand;
+import helios.engine.runtime.spawn.commands.DespawnCommand;
 
-import helios.engine.modules.pool.components.PoolIdComponent;
+import helios.engine.mechanics.spawn.components.SpawnedByProfileComponent;
 
 export namespace helios::engine::mechanics::bounds::systems {
 
@@ -97,14 +97,14 @@ export namespace helios::engine::mechanics::bounds::systems {
                         /**
                          * @todo optimize
                          */
-                        auto* pic = entity->get<helios::engine::modules::pool::components::PoolIdComponent>();
-                        if (!pic) {
-                            updateContext.commandBuffer().add<helios::engine::mechanics::spawn::commands::DespawnCommand>(
+                        auto* sbp = entity->get<helios::engine::mechanics::spawn::components::SpawnedByProfileComponent>();
+                        if (!sbp) {
+                            updateContext.commandBuffer().add<helios::engine::runtime::spawn::commands::DespawnCommand>(
                                 entity->guid()
                             );
                         } else {
-                            updateContext.commandBuffer().add<helios::engine::mechanics::spawn::commands::DespawnCommand>(
-                                entity->guid(), pic->gameObjectPoolId()
+                            updateContext.commandBuffer().add<helios::engine::runtime::spawn::commands::DespawnCommand>(
+                                entity->guid(), sbp->spawnProfileId()
                             );
                         }
                     }

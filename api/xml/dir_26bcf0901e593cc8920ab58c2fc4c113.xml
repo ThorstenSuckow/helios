@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_26bcf0901e593cc8920ab58c2fc4c113" kind="dir">
+    <compoundname>include/helios/engine/runtime/spawn/policy/amount</compoundname>
+    <innerfile refid="helios_2engine_2runtime_2spawn_2policy_2amount_2__module_8ixx">_module.ixx</innerfile>
+    <innerfile refid="FixedSpawnAmount_8ixx">FixedSpawnAmount.ixx</innerfile>
+    <innerfile refid="SpawnAmountByCallback_8ixx">SpawnAmountByCallback.ixx</innerfile>
+    <innerfile refid="SpawnAmountProvider_8ixx">SpawnAmountProvider.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_26bcf0901e593cc8920ab58c2fc4c113_1autotoc_md252">
+<title>helios::engine::runtime::spawn::policy::amount</title><para>Spawn amount providers for determining spawn quantities.</para>
+</sect1>
+<sect1 id="dir_26bcf0901e593cc8920ab58c2fc4c113_1autotoc_md253">
+<title>Overview</title><para>This module provides SpawnAmountProvider implementations that determine how many entities should spawn when a rule&apos;s condition is satisfied.</para>
+</sect1>
+<sect1 id="dir_26bcf0901e593cc8920ab58c2fc4c113_1autotoc_md254">
+<title>Key Classes</title><para><table rows="4" cols="2"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SpawnAmountProvider</computeroutput>  </para>
+</entry><entry thead="no"><para>Abstract interface for calculating spawn quantity  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>FixedSpawnAmount</computeroutput>  </para>
+</entry><entry thead="no"><para>Always returns a fixed count  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SpawnAmountByCallback</computeroutput>  </para>
+</entry><entry thead="no"><para>Delegates to a user-provided callback function  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_26bcf0901e593cc8920ab58c2fc4c113_1autotoc_md255">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Fixed<sp/>amount:<sp/>always<sp/>spawn<sp/>3<sp/>entities</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>amount<sp/>=<sp/>std::make_unique&lt;FixedSpawnAmount&gt;(3);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Callback-based:<sp/>dynamic<sp/>amount<sp/>based<sp/>on<sp/>game<sp/>state</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dynamicAmount<sp/>=<sp/>std::make_unique&lt;SpawnAmountByCallback&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>[&amp;DIFFICULTY_LEVEL](</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GameObjectPoolId&amp;<sp/>poolId,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>SpawnRuleState&amp;<sp/>state,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>UpdateContext&amp;<sp/>ctx)<sp/>-&gt;<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Spawn<sp/>more<sp/>enemies<sp/>as<sp/>difficulty<sp/>increases</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>DIFFICULTY_LEVEL<sp/>+<sp/>1;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Use<sp/>with<sp/>SpawnRule</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>rule<sp/>=<sp/>std::make_unique&lt;SpawnRule&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>std::make_unique&lt;TimerSpawnCondition&gt;(2.0f),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>std::move(amount),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>SpawnRuleId{1}</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="include/helios/engine/runtime/spawn/policy/amount/"/>
+  </compounddef>
+</doxygen>

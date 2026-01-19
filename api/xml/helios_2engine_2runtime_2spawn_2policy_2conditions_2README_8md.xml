@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2runtime_2spawn_2policy_2conditions_2README_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions">helios::engine::runtime::spawn::policy::conditions</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::runtime::spawn::policy::conditions</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Spawn<sp/>conditions<sp/>for<sp/>controlling<sp/>spawn<sp/>timing.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>SpawnCondition<sp/>implementations<sp/>that<sp/>determine<sp/>when<sp/>spawning<sp/>should<sp/>occur<sp/>based<sp/>on<sp/>time,<sp/>triggers,<sp/>or<sp/>other<sp/>game<sp/>state.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`TimerSpawnCondition`<sp/>|<sp/>Triggers<sp/>spawning<sp/>at<sp/>fixed<sp/>time<sp/>intervals<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Spawn<sp/>every<sp/>2<sp/>seconds</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>condition<sp/>=<sp/>std::make_unique&lt;TimerSpawnCondition&gt;(2.0f);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Use<sp/>with<sp/>SpawnRule</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>rule<sp/>=<sp/>std::make_unique&lt;SpawnRule&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>std::move(condition),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>std::make_unique&lt;FixedSpawnAmount&gt;(3),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>SpawnRuleId{1}</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Add<sp/>to<sp/>scheduler</highlight></codeline>
+<codeline><highlight class="normal">scheduler.addRule(enemyProfileId,<sp/>std::move(rule));</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Implementing<sp/>Custom<sp/>Conditions</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">class<sp/>WaveSpawnCondition<sp/>:<sp/>public<sp/>SpawnCondition<sp/>{</highlight></codeline>
+<codeline><highlight class="normal">public:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>bool<sp/>isSatisfied(size_t<sp/>amount,<sp/>const<sp/>SpawnRuleState&amp;<sp/>state,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const<sp/>GameObjectPoolSnapshot&amp;<sp/>pool,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const<sp/>UpdateContext&amp;<sp/>ctx)<sp/>const<sp/>override<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Spawn<sp/>when<sp/>wave<sp/>timer<sp/>expires<sp/>and<sp/>pool<sp/>has<sp/>capacity</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>state.sinceLastSpawn()<sp/>&gt;=<sp/>waveInterval_<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;&amp;<sp/>pool.inactiveCount<sp/>&gt;=<sp/>amount;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>void<sp/>onCommit(SpawnRuleState&amp;<sp/>state,<sp/>size_t<sp/>count)<sp/>const<sp/>override<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>state.setSinceLastSpawn(0.0f);<sp/><sp/>//<sp/>Reset<sp/>timer</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::runtime::spawn::policy::conditions</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Spawn<sp/>conditions<sp/>for<sp/>controlling<sp/>spawn<sp/>timing.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>SpawnCondition<sp/>implementations<sp/>that<sp/>determine<sp/>when<sp/>spawning<sp/>should<sp/>occur<sp/>based<sp/>on<sp/>timers,<sp/>triggers,<sp/>or<sp/>game<sp/>state.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+    </programlisting>
+    <location file="include/helios/engine/runtime/spawn/policy/conditions/README.md"/>
+  </compounddef>
+</doxygen>

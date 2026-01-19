@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_e447f003a403e34311842c1c5571e316" kind="dir">
+    <compoundname>include/helios/engine/runtime/spawn/dispatcher</compoundname>
+    <innerfile refid="helios_2engine_2runtime_2spawn_2dispatcher_2__module_8ixx">_module.ixx</innerfile>
+    <innerfile refid="DespawnCommandDispatcher_8ixx">DespawnCommandDispatcher.ixx</innerfile>
+    <innerfile refid="ScheduledSpawnPlanCommandDispatcher_8ixx">ScheduledSpawnPlanCommandDispatcher.ixx</innerfile>
+    <innerfile refid="SpawnCommandDispatcher_8ixx">SpawnCommandDispatcher.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_e447f003a403e34311842c1c5571e316_1autotoc_md241">
+<title>helios::engine::runtime::spawn::dispatcher</title><para>Command dispatchers for spawn operations.</para>
+</sect1>
+<sect1 id="dir_e447f003a403e34311842c1c5571e316_1autotoc_md242">
+<title>Overview</title><para>This module contains dispatchers that route spawn and despawn commands to the appropriate managers for processing. Dispatchers implement the visitor pattern, allowing the CommandBuffer to route commands without knowing their concrete types.</para>
+</sect1>
+<sect1 id="dir_e447f003a403e34311842c1c5571e316_1autotoc_md243">
+<title>Key Classes</title><para><table rows="4" cols="3"><row>
+<entry thead="yes"><para>Dispatcher  </para>
+</entry><entry thead="yes"><para>Handles  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SpawnCommandDispatcher</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>SpawnCommand</computeroutput>  </para>
+</entry><entry thead="no"><para>Routes spawn requests to SpawnManager  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>DespawnCommandDispatcher</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>DespawnCommand</computeroutput>  </para>
+</entry><entry thead="no"><para>Routes despawn requests to SpawnManager  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ScheduledSpawnPlanCommandDispatcher</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>ScheduledSpawnPlanCommand</computeroutput>  </para>
+</entry><entry thead="no"><para>Routes scheduled plans to SpawnManager  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_e447f003a403e34311842c1c5571e316_1autotoc_md244">
+<title>Architecture</title><para><programlisting><codeline><highlight class="normal">┌─────────────────┐<sp/><sp/><sp/><sp/><sp/>┌───────────────┐<sp/><sp/><sp/><sp/><sp/>┌──────────────────────────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/>CommandBuffer<sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/>Dispatcher<sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/>SpawnRequestHandler<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/>(SpawnManager)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/>flush()<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│────&gt;│<sp/>dispatchTyped<sp/>│────&gt;│<sp/>submit(SpawnRequest)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/>submit(DespawnRequest)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/>submit(ScheduledSpawnPlanRequest)│</highlight></codeline>
+<codeline><highlight class="normal">└─────────────────┘<sp/><sp/><sp/><sp/><sp/>└───────────────┘<sp/><sp/><sp/><sp/><sp/>└──────────────────────────────────┘</highlight></codeline>
+</programlisting></para>
+<para>Dispatchers are registered with the CommandBuffer during game initialization:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal">commandBuffer.addDispatcher&lt;SpawnCommandDispatcher&gt;();</highlight></codeline>
+<codeline><highlight class="normal">commandBuffer.addDispatcher&lt;DespawnCommandDispatcher&gt;();</highlight></codeline>
+<codeline><highlight class="normal">commandBuffer.addDispatcher&lt;ScheduledSpawnPlanCommandDispatcher&gt;();</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_e447f003a403e34311842c1c5571e316_1autotoc_md245">
+<title>Usage</title><para>Commands are added to the buffer by systems and automatically routed during flush:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>In<sp/>a<sp/>system</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">commandBuffer.add&lt;SpawnCommand&gt;(profileId,<sp/>spawnContext,<sp/>count);</highlight></codeline>
+<codeline><highlight class="normal">commandBuffer.add&lt;DespawnCommand&gt;(entityGuid,<sp/>profileId);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>During<sp/>flush,<sp/>dispatchers<sp/>route<sp/>to<sp/>managers</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">commandBuffer.flush(gameWorld);</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="include/helios/engine/runtime/spawn/dispatcher/"/>
+  </compounddef>
+</doxygen>

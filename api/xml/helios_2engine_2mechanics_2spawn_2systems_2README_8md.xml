@@ -12,20 +12,36 @@
 <codeline></codeline>
 <codeline><highlight class="normal">Systems<sp/>for<sp/>spawn<sp/>lifecycle<sp/>management<sp/>within<sp/>the<sp/>game<sp/>loop.</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">This<sp/>namespace<sp/>contains<sp/>the<sp/>GameObjectSpawnSystem<sp/>which<sp/>integrates<sp/>spawning<sp/>into<sp/>the<sp/>game<sp/>loop<sp/>by<sp/>evaluating<sp/>conditions<sp/>and<sp/>emitting<sp/>spawn<sp/>commands.</highlight></codeline>
+<codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">##<sp/>Systems</highlight></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>contains<sp/>the<sp/>GameObjectSpawnSystem<sp/>which<sp/>integrates<sp/>spawning<sp/>into<sp/>the<sp/>game<sp/>loop.<sp/>The<sp/>system<sp/>evaluates<sp/>spawn<sp/>conditions<sp/>via<sp/>a<sp/>SpawnScheduler<sp/>and<sp/>enqueues<sp/>spawn<sp/>commands<sp/>for<sp/>deferred<sp/>execution.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">|<sp/>System<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|--------|---------|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`GameObjectSpawnSystem`<sp/>|<sp/>Evaluates<sp/>SpawnConditions<sp/>and<sp/>emits<sp/>SpawnCommands<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`GameObjectSpawnSystem`<sp/>|<sp/>Evaluates<sp/>SpawnScheduler<sp/>rules<sp/>and<sp/>enqueues<sp/>ScheduledSpawnPlanCommands<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>System<sp/>Flow</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>GameObjectSpawnSystem<sp/>performs<sp/>the<sp/>following<sp/>each<sp/>frame:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">1.<sp/>**Read<sp/>Frame<sp/>Events:**<sp/>Consumes<sp/>`SpawnPlanRequestExecutedEvent`<sp/>from<sp/>the<sp/>previous<sp/>frame</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>**Commit<sp/>Completed<sp/>Spawns:**<sp/>Updates<sp/>the<sp/>scheduler<sp/>with<sp/>successful<sp/>spawn<sp/>counts</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>**Evaluate<sp/>Conditions:**<sp/>Checks<sp/>all<sp/>spawn<sp/>rules<sp/>against<sp/>current<sp/>conditions</highlight></codeline>
+<codeline><highlight class="normal">4.<sp/>**Drain<sp/>Scheduled<sp/>Plans:**<sp/>Enqueues<sp/>ready<sp/>plans<sp/>as<sp/>`ScheduledSpawnPlanCommand`</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">```cpp</highlight></codeline>
-<codeline><highlight class="normal">auto<sp/>condition<sp/>=<sp/>std::make_unique&lt;TimerSpawnCondition&gt;(2.0f);</highlight></codeline>
-<codeline><highlight class="normal">auto<sp/>system<sp/>=<sp/>std::make_unique&lt;GameObjectSpawnSystem&gt;(poolId,<sp/>std::move(condition));</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Create<sp/>scheduler<sp/>with<sp/>spawn<sp/>rules</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>scheduler<sp/>=<sp/>std::make_unique&lt;SpawnScheduler&gt;();</highlight></codeline>
+<codeline><highlight class="normal">scheduler-&gt;addRule(enemyRuleId,<sp/>std::make_unique&lt;TimerSpawnCondition&gt;(2.0f),<sp/>enemyProfileId);</highlight></codeline>
 <codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Create<sp/>system<sp/>with<sp/>scheduler</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>system<sp/>=<sp/>std::make_unique&lt;GameObjectSpawnSystem&gt;(std::move(scheduler));</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Register<sp/>with<sp/>game<sp/>loop</highlight></codeline>
 <codeline><highlight class="normal">gameLoop.phase(PhaseType::Main)</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass()</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addSystem(std::move(system));</highlight></codeline>
@@ -36,7 +52,7 @@
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
 <codeline><highlight class="normal">@namespace<sp/>helios::engine::mechanics::spawn::systems</highlight></codeline>
 <codeline><highlight class="normal">@brief<sp/>Systems<sp/>for<sp/>spawn<sp/>lifecycle<sp/>management.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>This<sp/>namespace<sp/>contains<sp/>the<sp/>GameObjectSpawnSystem<sp/>which<sp/>integrates<sp/>spawning<sp/>into<sp/>the<sp/>game<sp/>loop<sp/>by<sp/>evaluating<sp/>conditions<sp/>and<sp/>emitting<sp/>spawn<sp/>commands.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Contains<sp/>the<sp/>GameObjectSpawnSystem<sp/>which<sp/>integrates<sp/>spawning<sp/>into<sp/>the<sp/>game<sp/>loop<sp/>by<sp/>evaluating<sp/>a<sp/>SpawnScheduler<sp/>and<sp/>enqueuing<sp/>spawn<sp/>commands<sp/>for<sp/>deferred<sp/>execution.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
     </programlisting>
     <location file="include/helios/engine/mechanics/spawn/systems/README.md"/>

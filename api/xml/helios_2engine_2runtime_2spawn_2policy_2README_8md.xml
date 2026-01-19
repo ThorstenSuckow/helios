@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2runtime_2spawn_2policy_2README_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1policy">helios::engine::runtime::spawn::policy</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::runtime::spawn::policy</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Spawn<sp/>rules,<sp/>conditions,<sp/>and<sp/>amount<sp/>providers.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>the<sp/>policy<sp/>layer<sp/>for<sp/>the<sp/>spawn<sp/>system.<sp/>It<sp/>defines<sp/>rules<sp/>that<sp/>combine<sp/>conditions<sp/>(when<sp/>to<sp/>spawn)<sp/>with<sp/>amount<sp/>providers<sp/>(how<sp/>many<sp/>to<sp/>spawn).</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SpawnRule`<sp/>|<sp/>Combines<sp/>condition<sp/>and<sp/>amount<sp/>provider<sp/>into<sp/>evaluatable<sp/>rule<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SpawnCondition`<sp/>|<sp/>Abstract<sp/>interface<sp/>for<sp/>spawn<sp/>timing<sp/>conditions<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SpawnRuleState`<sp/>|<sp/>Runtime<sp/>state<sp/>tracked<sp/>per<sp/>rule<sp/>(e.g.,<sp/>time<sp/>since<sp/>last<sp/>spawn)<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Submodules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Directory<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-----------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`amount/`<sp/>|<sp/>SpawnAmountProvider<sp/>implementations<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`conditions/`<sp/>|<sp/>SpawnCondition<sp/>implementations<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Create<sp/>a<sp/>rule:<sp/>spawn<sp/>3<sp/>enemies<sp/>every<sp/>2<sp/>seconds</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>rule<sp/>=<sp/>std::make_unique&lt;SpawnRule&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>std::make_unique&lt;TimerSpawnCondition&gt;(2.0f),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>std::make_unique&lt;FixedSpawnAmount&gt;(3),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>SpawnRuleId{1}</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Add<sp/>to<sp/>scheduler</highlight></codeline>
+<codeline><highlight class="normal">scheduler.addRule(enemyProfileId,<sp/>std::move(rule));</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::runtime::spawn::policy</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Spawn<sp/>rules,<sp/>conditions,<sp/>and<sp/>amount<sp/>providers.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>the<sp/>policy<sp/>layer<sp/>for<sp/>spawn<sp/>timing<sp/>and<sp/>quantity<sp/>control,<sp/>separating<sp/>&quot;when&quot;<sp/>from<sp/>&quot;how<sp/>many&quot;<sp/>logic.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+    </programlisting>
+    <location file="include/helios/engine/runtime/spawn/policy/README.md"/>
+  </compounddef>
+</doxygen>

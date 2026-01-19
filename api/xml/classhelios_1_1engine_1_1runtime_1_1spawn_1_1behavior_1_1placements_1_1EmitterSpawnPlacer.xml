@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1EmitterSpawnPlacer" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>helios::engine::runtime::spawn::behavior::placements::EmitterSpawnPlacer</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer" prot="public" virt="non-virtual">helios::engine::runtime::spawn::behavior::SpawnPlacer</basecompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1EmitterSpawnPlacer_1a6b59e520120e42b05c751897206a59f4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+        <definition>helios::math::vec3f helios::engine::runtime::spawn::behavior::placements::EmitterSpawnPlacer::getPosition</definition>
+        <argsstring>(const helios::util::Guid &amp;guid, const helios::math::aabbf &amp;bounds, const SpawnPlanCursor &amp;cursor, const SpawnContext &amp;spawnContext) override</argsstring>
+        <name>getPosition</name>
+        <qualifiedname>helios::engine::runtime::spawn::behavior::placements::EmitterSpawnPlacer::getPosition</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer_1a073b2f84c272f2b6feca0f24822bd80d">getPosition</reimplements>
+        <param>
+          <type>const <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref> &amp;</type>
+          <declname>guid</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1math_1a124c0492430aeecedc1c1a5ece4ba488" kindref="member">helios::math::aabbf</ref> &amp;</type>
+          <declname>bounds</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnPlanCursor" kindref="compound">SpawnPlanCursor</ref> &amp;</type>
+          <declname>cursor</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext" kindref="compound">SpawnContext</ref> &amp;</type>
+          <declname>spawnContext</declname>
+        </param>
+        <briefdescription>
+<para>Returns the emitter&apos;s position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>guid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The GUID of the entity being spawned (unused). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bounds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The level bounds (unused). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cursor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current position within the spawn batch (unused). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spawnContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Context containing the emitter information.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The emitter&apos;s world position.</para>
+</simplesect>
+<simplesect kind="pre"><para>spawnContext.emitterContext must have a value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/behavior/placements/EmitterSpawnPlacer.ixx" line="47" column="29" bodyfile="include/helios/engine/runtime/spawn/behavior/placements/EmitterSpawnPlacer.ixx" bodystart="47" bodyend="58"/>
+        <references refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext_1a5dabe9f0e03d964a1f85f76960a31b6f" compoundref="SpawnContext_8ixx" startline="43">helios::engine::runtime::spawn::SpawnContext::emitterContext</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Placer that spawns entities at the emitter&apos;s position. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1EmitterSpawnPlacer" kindref="compound">EmitterSpawnPlacer</ref> uses the position stored in the <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1EmitterContext" kindref="compound">EmitterContext</ref> to place spawned entities. This is commonly used for projectiles that should originate from the firing entity.</para>
+<para><simplesect kind="pre"><para>The <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext" kindref="compound">SpawnContext</ref> must contain a valid <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1EmitterContext" kindref="compound">EmitterContext</ref>.</para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer" kindref="compound">SpawnPlacer</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1EmitterContext" kindref="compound">EmitterContext</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::runtime::spawn::behavior::SpawnPlacer</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::runtime::spawn::behavior::placements::EmitterSpawnPlacer</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1EmitterSpawnPlacer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>helios::engine::runtime::spawn::behavior::SpawnPlacer</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::runtime::spawn::behavior::placements::EmitterSpawnPlacer</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1EmitterSpawnPlacer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/runtime/spawn/behavior/placements/EmitterSpawnPlacer.ixx" line="31" column="5" bodyfile="include/helios/engine/runtime/spawn/behavior/placements/EmitterSpawnPlacer.ixx" bodystart="31" bodyend="61"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1EmitterSpawnPlacer_1a6b59e520120e42b05c751897206a59f4" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::behavior::placements::EmitterSpawnPlacer</scope><name>getPosition</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer_1ac07de59ae9dc454269cdef3a8b9a73ba" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::behavior::placements::EmitterSpawnPlacer</scope><name>~SpawnPlacer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

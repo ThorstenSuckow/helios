@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_2066a05c7cbde581e22905260647742b" kind="dir">
+    <compoundname>include/helios/engine/runtime/spawn/behavior/initializers</compoundname>
+    <innerfile refid="helios_2engine_2runtime_2spawn_2behavior_2initializers_2__module_8ixx">_module.ixx</innerfile>
+    <innerfile refid="EmitterInitializer_8ixx">EmitterInitializer.ixx</innerfile>
+    <innerfile refid="RandomDirectionInitializer_8ixx">RandomDirectionInitializer.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_2066a05c7cbde581e22905260647742b_1autotoc_md217">
+<title>helios::engine::runtime::spawn::behavior::initializers</title><para>Concrete SpawnInitializer implementations.</para>
+</sect1>
+<sect1 id="dir_2066a05c7cbde581e22905260647742b_1autotoc_md218">
+<title>Overview</title><para>This module provides ready-to-use SpawnInitializer implementations for configuring spawned entities.</para>
+</sect1>
+<sect1 id="dir_2066a05c7cbde581e22905260647742b_1autotoc_md219">
+<title>Key Classes</title><para><table rows="3" cols="2"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>EmitterInitializer</computeroutput>  </para>
+</entry><entry thead="no"><para>Configures entity direction/velocity based on emitter state  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>RandomDirectionInitializer</computeroutput>  </para>
+</entry><entry thead="no"><para>Applies a random 2D direction to spawned entities  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_2066a05c7cbde581e22905260647742b_1autotoc_md220">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Projectiles<sp/>inherit<sp/>direction<sp/>from<sp/>firing<sp/>entity</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>profile<sp/>=<sp/>SpawnProfile{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.gameObjectPoolId<sp/>=<sp/>bulletPoolId,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.spawnPlacer<sp/>=<sp/>std::make_unique&lt;EmitterSpawnPlacer&gt;(),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.spawnInitializer<sp/>=<sp/>std::make_unique&lt;EmitterInitializer&gt;()</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Enemies<sp/>spawn<sp/>with<sp/>random<sp/>movement<sp/>directions</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>enemyProfile<sp/>=<sp/>SpawnProfile{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.gameObjectPoolId<sp/>=<sp/>enemyPoolId,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.spawnPlacer<sp/>=<sp/>std::make_unique&lt;RandomSpawnPlacer&gt;(),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.spawnInitializer<sp/>=<sp/>std::make_unique&lt;RandomDirectionInitializer&gt;()</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="include/helios/engine/runtime/spawn/behavior/initializers/"/>
+  </compounddef>
+</doxygen>

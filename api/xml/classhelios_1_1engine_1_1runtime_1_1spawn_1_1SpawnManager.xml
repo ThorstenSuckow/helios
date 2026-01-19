@@ -1,0 +1,628 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::runtime::spawn::SpawnManager</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" prot="public" virt="non-virtual">helios::engine::runtime::world::Manager</basecompoundref>
+    <basecompoundref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1SpawnRequestHandler" prot="public" virt="non-virtual">helios::engine::runtime::pooling::SpawnRequestHandler</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a912b707209959086a23957f218c2fd91" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1requests_1_1SpawnRequest" kindref="compound">helios::engine::runtime::spawn::requests::SpawnRequest</ref> &gt;</type>
+        <definition>std::vector&lt;helios::engine::runtime::spawn::requests::SpawnRequest&gt; helios::engine::runtime::spawn::SpawnManager::spawnRequests_</definition>
+        <argsstring></argsstring>
+        <name>spawnRequests_</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnManager::spawnRequests_</qualifiedname>
+        <briefdescription>
+<para>Queue of pending spawn requests. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/SpawnManager.ixx" line="87" column="21" bodyfile="include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a2bf4af8358f55e32ef3ac2741a2d6a7a" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1requests_1_1DespawnRequest" kindref="compound">helios::engine::runtime::spawn::requests::DespawnRequest</ref> &gt;</type>
+        <definition>std::vector&lt;helios::engine::runtime::spawn::requests::DespawnRequest&gt; helios::engine::runtime::spawn::SpawnManager::despawnRequests_</definition>
+        <argsstring></argsstring>
+        <name>despawnRequests_</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnManager::despawnRequests_</qualifiedname>
+        <briefdescription>
+<para>Queue of pending despawn requests. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/SpawnManager.ixx" line="92" column="21" bodyfile="include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ac578c7d8f58359cd6b07739d2ed15926" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1requests_1_1ScheduledSpawnPlanRequest" kindref="compound">helios::engine::runtime::spawn::requests::ScheduledSpawnPlanRequest</ref> &gt;</type>
+        <definition>std::vector&lt;helios::engine::runtime::spawn::requests::ScheduledSpawnPlanRequest&gt; helios::engine::runtime::spawn::SpawnManager::scheduledSpawnPlanRequests_</definition>
+        <argsstring></argsstring>
+        <name>scheduledSpawnPlanRequests_</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnManager::scheduledSpawnPlanRequests_</qualifiedname>
+        <briefdescription>
+<para>Queue of pending scheduled spawn plan requests. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/SpawnManager.ixx" line="97" column="21" bodyfile="include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a89d55461036f73f89fe562b46ca7f384" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager" kindref="compound">helios::engine::runtime::pooling::GameObjectPoolManager</ref> *</type>
+        <definition>helios::engine::runtime::pooling::GameObjectPoolManager* helios::engine::runtime::spawn::SpawnManager::gameObjectPoolManager_</definition>
+        <argsstring></argsstring>
+        <name>gameObjectPoolManager_</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnManager::gameObjectPoolManager_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Pointer to the pool manager for acquire/release operations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/SpawnManager.ixx" line="102" column="65" bodyfile="include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a4dd482abce2d7e87a3998d534bc76116" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" kindref="compound">helios::engine::core::data::SpawnProfileId</ref>, std::unique_ptr&lt; const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile" kindref="compound">helios::engine::runtime::spawn::SpawnProfile</ref> &gt; &gt;</type>
+        <definition>std::unordered_map&lt; helios::engine::core::data::SpawnProfileId, std::unique_ptr&lt;const helios::engine::runtime::spawn::SpawnProfile&gt; &gt; helios::engine::runtime::spawn::SpawnManager::spawnProfiles_</definition>
+        <argsstring></argsstring>
+        <name>spawnProfiles_</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnManager::spawnProfiles_</qualifiedname>
+        <briefdescription>
+<para>Map from profile IDs to their spawn profiles. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/SpawnManager.ixx" line="109" column="2" bodyfile="include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="109" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a2e9507df1fcd3225919b31e5740c8283" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::spawn::SpawnManager::executeScheduledSpawnPlanRequests</definition>
+        <argsstring>(std::span&lt; helios::engine::runtime::spawn::requests::ScheduledSpawnPlanRequest &gt; requests, helios::engine::runtime::world::GameWorld &amp;gameWorld, helios::engine::runtime::world::UpdateContext &amp;updateContext)</argsstring>
+        <name>executeScheduledSpawnPlanRequests</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnManager::executeScheduledSpawnPlanRequests</qualifiedname>
+        <param>
+          <type>std::span&lt; <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1requests_1_1ScheduledSpawnPlanRequest" kindref="compound">helios::engine::runtime::spawn::requests::ScheduledSpawnPlanRequest</ref> &gt;</type>
+          <declname>requests</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Processes scheduled spawn plan requests. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Iterates through each plan, acquires entities from the pool, positions them using the profile&apos;s placer, initializes them using the profile&apos;s initializer, and pushes a frame event for confirmation.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>requests</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Span of scheduled spawn plan requests to process. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current update context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/SpawnManager.ixx" line="122" column="14" bodyfile="include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="122" bodyend="192"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ac1558ed6c91a093610930301217112a7" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::spawn::SpawnManager::spawnObjects</definition>
+        <argsstring>(std::span&lt; helios::engine::runtime::spawn::requests::SpawnRequest &gt; requests, helios::engine::runtime::world::GameWorld &amp;gameWorld, helios::engine::runtime::world::UpdateContext &amp;updateContext)</argsstring>
+        <name>spawnObjects</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnManager::spawnObjects</qualifiedname>
+        <param>
+          <type>std::span&lt; <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1requests_1_1SpawnRequest" kindref="compound">helios::engine::runtime::spawn::requests::SpawnRequest</ref> &gt;</type>
+          <declname>requests</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Processes spawn requests, acquiring and initializing objects. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>requests</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Span of spawn requests to process. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current update context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/SpawnManager.ixx" line="202" column="14" bodyfile="include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="202" bodyend="242"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ae5887ce1ed85ab5948abf8e418dedc5d" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::spawn::SpawnManager::despawnObjects</definition>
+        <argsstring>(std::span&lt; helios::engine::runtime::spawn::requests::DespawnRequest &gt; requests, helios::engine::runtime::world::GameWorld &amp;gameWorld, helios::engine::runtime::world::UpdateContext &amp;updateContext)</argsstring>
+        <name>despawnObjects</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnManager::despawnObjects</qualifiedname>
+        <param>
+          <type>std::span&lt; <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1requests_1_1DespawnRequest" kindref="compound">helios::engine::runtime::spawn::requests::DespawnRequest</ref> &gt;</type>
+          <declname>requests</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Processes despawn requests, releasing objects back to pools. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>requests</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Span of despawn requests to process. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current update context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/SpawnManager.ixx" line="252" column="14" bodyfile="include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="252" bodyend="270"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a0ed05ecdafaaa1de8bfe0fe4a8540166" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::runtime::spawn::SpawnManager::SpawnManager</definition>
+        <argsstring>()=default</argsstring>
+        <name>SpawnManager</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnManager::SpawnManager</qualifiedname>
+        <briefdescription>
+<para>Default constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/SpawnManager.ixx" line="278" column="9"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ac51fc20588ef7abf0d7e9b675bc6e0b3" compoundref="SpawnManager_8ixx" startline="360" endline="369">addSpawnProfile</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ae10af7fc64d76c95eecc3df95733ee3c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::runtime::spawn::SpawnManager::submit</definition>
+        <argsstring>(const helios::engine::runtime::spawn::requests::SpawnRequest request) noexcept override</argsstring>
+        <name>submit</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnManager::submit</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1SpawnRequestHandler_1acdff3481b701e13fcac00a33c169ea57">submit</reimplements>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1requests_1_1SpawnRequest" kindref="compound">helios::engine::runtime::spawn::requests::SpawnRequest</ref></type>
+          <declname>request</declname>
+        </param>
+        <briefdescription>
+<para>Submits a spawn request for deferred processing. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spawn request to queue.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Always returns true. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/SpawnManager.ixx" line="287" column="14" bodyfile="include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="287" bodyend="290"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a235f08cd5cf037aa2414aad8e262502c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::runtime::spawn::SpawnManager::submit</definition>
+        <argsstring>(const helios::engine::runtime::spawn::requests::DespawnRequest request) noexcept override</argsstring>
+        <name>submit</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnManager::submit</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1SpawnRequestHandler_1aee8a68b09767eb1b1e1e36d56eaa10dd">submit</reimplements>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1requests_1_1DespawnRequest" kindref="compound">helios::engine::runtime::spawn::requests::DespawnRequest</ref></type>
+          <declname>request</declname>
+        </param>
+        <briefdescription>
+<para>Submits a despawn request for deferred processing. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The despawn request to queue.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Always returns true. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/SpawnManager.ixx" line="299" column="14" bodyfile="include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="299" bodyend="302"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a7d924fe8cdf8acdf6aaba5d6cbd3262d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::runtime::spawn::SpawnManager::submit</definition>
+        <argsstring>(helios::engine::runtime::spawn::requests::ScheduledSpawnPlanRequest scheduledSpawnPlanRequest) noexcept override</argsstring>
+        <name>submit</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnManager::submit</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1SpawnRequestHandler_1a43db8eacddd21efd3861767c5533578a">submit</reimplements>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1requests_1_1ScheduledSpawnPlanRequest" kindref="compound">helios::engine::runtime::spawn::requests::ScheduledSpawnPlanRequest</ref></type>
+          <declname>scheduledSpawnPlanRequest</declname>
+        </param>
+        <briefdescription>
+<para>Submits a scheduled spawn plan request for deferred processing. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scheduledSpawnPlanRequest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The scheduled plan request to queue.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Always returns true. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/SpawnManager.ixx" line="312" column="14" bodyfile="include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="312" bodyend="317"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a345caf68f5d311a54f74a921b933705e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::spawn::SpawnManager::flush</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld, helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>flush</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnManager::flush</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a290b20a4d512d096650dc187f1f3e940">flush</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Flushes pending requests, processing despawns then spawns. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current update context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/SpawnManager.ixx" line="325" column="14" bodyfile="include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="325" bodyend="343"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ac51fc20588ef7abf0d7e9b675bc6e0b3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a0ed05ecdafaaa1de8bfe0fe4a8540166" kindref="member">SpawnManager</ref> &amp;</type>
+        <definition>SpawnManager &amp; helios::engine::runtime::spawn::SpawnManager::addSpawnProfile</definition>
+        <argsstring>(const helios::engine::core::data::SpawnProfileId &amp;spawnProfileId, std::unique_ptr&lt; const helios::engine::runtime::spawn::SpawnProfile &gt; spawnProfile)</argsstring>
+        <name>addSpawnProfile</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnManager::addSpawnProfile</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" kindref="compound">helios::engine::core::data::SpawnProfileId</ref> &amp;</type>
+          <declname>spawnProfileId</declname>
+        </param>
+        <param>
+          <type>std::unique_ptr&lt; const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile" kindref="compound">helios::engine::runtime::spawn::SpawnProfile</ref> &gt;</type>
+          <declname>spawnProfile</declname>
+        </param>
+        <briefdescription>
+<para>Adds a spawn profile for a profile ID. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Registers a spawn profile that defines how entities should be spawned for this profile. The profile contains the pool ID, placer, and initializer.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>spawnProfileId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unique ID for this profile. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spawnProfile</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The profile configuration. Ownership transferred.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to this manager for chaining.</para>
+</simplesect>
+<simplesect kind="pre"><para>No profile is already registered for this ID. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/SpawnManager.ixx" line="360" column="22" bodyfile="include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="360" bodyend="369"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a0ed05ecdafaaa1de8bfe0fe4a8540166">SpawnManager</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1aa356bdd063bd2b7ca1f3548218e32411" compoundref="SpawnManager_8ixx" startline="378" endline="386">spawnProfile</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1aa356bdd063bd2b7ca1f3548218e32411" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile" kindref="compound">helios::engine::runtime::spawn::SpawnProfile</ref> *</type>
+        <definition>const helios::engine::runtime::spawn::SpawnProfile * helios::engine::runtime::spawn::SpawnManager::spawnProfile</definition>
+        <argsstring>(const helios::engine::core::data::SpawnProfileId &amp;spawnProfileId) const</argsstring>
+        <name>spawnProfile</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnManager::spawnProfile</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" kindref="compound">helios::engine::core::data::SpawnProfileId</ref> &amp;</type>
+          <declname>spawnProfileId</declname>
+        </param>
+        <briefdescription>
+<para>Returns a spawn profile by ID. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>spawnProfileId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The profile ID to look up.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the profile, or nullptr if not found. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/SpawnManager.ixx" line="378" column="61" bodyfile="include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="378" bodyend="386"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ac51fc20588ef7abf0d7e9b675bc6e0b3" compoundref="SpawnManager_8ixx" startline="360" endline="369">addSpawnProfile</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1aeab1d9b1aabd174751fa20937a9841f2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::spawn::SpawnManager::init</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld) noexcept override</argsstring>
+        <name>init</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnManager::init</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ae7e2cd7531de5ce1fdc1f4a179b70929">init</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <briefdescription>
+<para>Initializes the manager with the game world. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Acquires a reference to the GameObjectPoolManager and registers this manager as the SpawnRequestHandler for all configured spawn profiles.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world to initialize with. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/SpawnManager.ixx" line="397" column="14" bodyfile="include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="397" bodyend="405"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1aa5461339dafdae850a4327e59a1ba112" compoundref="GameWorld_8ixx" startline="300" endline="309">helios::engine::runtime::world::GameWorld::getManager</references>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a375c543b65fe74155bc30cd2dccc083e" compoundref="GameWorld_8ixx" startline="261" endline="270">helios::engine::runtime::world::GameWorld::registerSpawnRequestHandler</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Manager for processing spawn and despawn requests. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kindref="compound">SpawnManager</ref> is a Manager that handles the lifecycle of pooled GameObjects. It receives requests via SpawnRequestHandler::submit() and queues them for deferred processing during the manager flush phase.</para>
+<para>## Request Processing Order</para>
+<para>During <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a345caf68f5d311a54f74a921b933705e" kindref="member">flush()</ref>, requests are processed in this order: 1. **Despawn requests** — Entities are returned to their pools 2. **Spawn requests** — Single entities are acquired and initialized 3. **Scheduled spawn plan requests** — Batch spawns from scheduler</para>
+<para>## Spawn Profiles</para>
+<para>Each spawn profile defines:<itemizedlist>
+<listitem><para>Which pool to acquire entities from</para>
+</listitem><listitem><para>How to position spawned entities (SpawnPlacer)</para>
+</listitem><listitem><para>How to initialize spawned entities (SpawnInitializer)</para>
+</listitem></itemizedlist>
+</para>
+<para>## Integration</para>
+<para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kindref="compound">SpawnManager</ref> registers itself with the GameWorld for each profile ID, allowing commands to route requests to the correct handler.</para>
+<para>Example: ```cpp auto spawnManager = std::make_unique&lt;SpawnManager&gt;();</para>
+<para>spawnManager-&gt;addSpawnProfile(bulletProfileId, std::make_unique&lt;SpawnProfile&gt;( <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile" kindref="compound">SpawnProfile</ref>{ .gameObjectPoolId = bulletPoolId, .spawnPlacer = std::make_unique&lt;EmitterSpawnPlacer&gt;(), .spawnInitializer = std::make_unique&lt;EmitterInitializer&gt;() } ));</para>
+<para>gameWorld.addManager(std::move(spawnManager)); ```</para>
+<para><simplesect kind="see"><para>SpawnRequest </para>
+</simplesect>
+<simplesect kind="see"><para>DespawnRequest </para>
+</simplesect>
+<simplesect kind="see"><para>ScheduledSpawnPlanRequest </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile" kindref="compound">SpawnProfile</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>SpawnRequestHandler </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>helios::engine::runtime::pooling::SpawnRequestHandler</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1SpawnRequestHandler"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::runtime::spawn::SpawnManager</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::engine::runtime::world::Manager</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="5">
+        <label>helios::engine::runtime::pooling::PoolManagerRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry"/>
+      </node>
+      <node id="6">
+        <label>helios::engine::runtime::pooling::SpawnRequestHandler</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1SpawnRequestHandler"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::runtime::spawn::SpawnManager</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::runtime::world::GameWorld</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>logger_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>poolManagerRegistry_</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::engine::runtime::world::Manager</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>gameWorld_</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>helios::util::log::Logger</label>
+        <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/runtime/spawn/SpawnManager.ixx" line="81" column="5" bodyfile="include/helios/engine/runtime/spawn/SpawnManager.ixx" bodystart="82" bodyend="407"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ac51fc20588ef7abf0d7e9b675bc6e0b3" prot="public" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>addSpawnProfile</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ae5887ce1ed85ab5948abf8e418dedc5d" prot="private" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>despawnObjects</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a2bf4af8358f55e32ef3ac2741a2d6a7a" prot="private" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>despawnRequests_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a2e9507df1fcd3225919b31e5740c8283" prot="private" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>executeScheduledSpawnPlanRequests</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a345caf68f5d311a54f74a921b933705e" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>flush</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a89d55461036f73f89fe562b46ca7f384" prot="private" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>gameObjectPoolManager_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1aaa2bc033955a07d4d97592eb2f817659" prot="protected" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>gameWorld_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1aeab1d9b1aabd174751fa20937a9841f2" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>init</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ab0f750d777e2368c08fc413188673622" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>onAdd</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ac578c7d8f58359cd6b07739d2ed15926" prot="private" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>scheduledSpawnPlanRequests_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a0ed05ecdafaaa1de8bfe0fe4a8540166" prot="public" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>SpawnManager</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ac1558ed6c91a093610930301217112a7" prot="private" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>spawnObjects</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1aa356bdd063bd2b7ca1f3548218e32411" prot="public" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>spawnProfile</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a4dd482abce2d7e87a3998d534bc76116" prot="private" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>spawnProfiles_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a912b707209959086a23957f218c2fd91" prot="private" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>spawnRequests_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1ae10af7fc64d76c95eecc3df95733ee3c" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>submit</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a235f08cd5cf037aa2414aad8e262502c" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>submit</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a7d924fe8cdf8acdf6aaba5d6cbd3262d" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>submit</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a116b5758bea5a39bbc0d24bc62bdcdd7" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>~Manager</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1SpawnRequestHandler_1aae185a0ace685738367be62f4055d611" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::SpawnManager</scope><name>~SpawnRequestHandler</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

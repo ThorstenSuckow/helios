@@ -1,7 +1,7 @@
 var searchData=
 [
   ['red_0',['Red',['../structhelios_1_1util_1_1Colors.html#a1184a41c4e65a433c48a5721419e6e27',1,'helios::util::Colors']]],
-  ['registry_5f_1',['registry_',['../classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry.html#ae5442676b4e8b692d247f7e9687a73e5',1,'helios::engine::runtime::pooling::PoolManagerRegistry']]],
+  ['registry_5f_1',['registry_',['../classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry.html#ab66d430221c6c8219b8fef08940c8acb',1,'helios::engine::runtime::pooling::PoolManagerRegistry']]],
   ['renderable_5f_2',['renderable_',['../classhelios_1_1scene_1_1SceneNode.html#adc5b1c905e0a2eee271107ebb91652af',1,'helios::scene::SceneNode']]],
   ['rendercommands_5f_3',['renderCommands_',['../classhelios_1_1rendering_1_1RenderQueue.html#a495b608f1570db9532d10ad81ac8cdb2',1,'helios::rendering::RenderQueue']]],
   ['renderingdevice_5f_4',['renderingDevice_',['../classhelios_1_1app_1_1Application.html#aa04eb0a14f12afe4323122a4698c04f7',1,'helios::app::Application']]],

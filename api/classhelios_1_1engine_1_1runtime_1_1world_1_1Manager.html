@@ -113,13 +113,13 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager__inherit__graph.svg" width="478" height="131"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager__inherit__graph.svg" width="483" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Collaboration diagram for helios::engine::runtime::world::Manager:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager__coll__graph.svg" width="100%" height="434"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager__coll__graph.svg" width="388" height="272"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -135,7 +135,7 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:aaa2bc033955a07d4d97592eb2f817659" id="r_aaa2bc033955a07d4d97592eb2f817659"><td class="memItemLeft" align="right" valign="top"><a id="aaa2bc033955a07d4d97592eb2f817659" name="aaa2bc033955a07d4d97592eb2f817659"></a>
-<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>gameWorld_</b></td></tr>
+<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>gameWorld_</b> = nullptr</td></tr>
 <tr class="memdesc:aaa2bc033955a07d4d97592eb2f817659"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the owning <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central registry for game entities, managers, pools, and the active level.">GameWorld</a>. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
@@ -145,14 +145,14 @@ Protected Attributes</h2></td></tr>
 <p>1. **Registration:** <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html" title="Abstract base class for managers that process deferred operations.">Manager</a> is added via `GameWorld::addManager&lt;T&gt;()` 2. **onAdd():** Called immediately after registration 3. **init():** Called during <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central registry for game entities, managers, pools, and the active level.">GameWorld</a> initialization (before game loop starts) 4. **flush():** Called each frame after Systems complete, to process queued requests</p>
 <p>## Use Cases</p>
 <ul>
-<li>**ProjectilePoolManager:** Processes shoot requests and spawns projectiles</li>
-<li>**SpawnManager:** Handles entity spawn/despawn lifecycle</li>
+<li>**GameObjectPoolManager:** Manages entity pooling and acquire/release lifecycle</li>
+<li>**SpawnManager:** Handles spawn request processing and entity initialization</li>
 <li>**Custom Managers:** Any deferred processing that doesn't fit the System model</li>
 </ul>
 <p>Example implementation: ```cpp class MyManager : public <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html" title="Abstract base class for managers that process deferred operations.">Manager</a> { public: void <a class="el" href="#ae7e2cd7531de5ce1fdc1f4a179b70929" title="Initializes the manager before the game loop starts.">init(GameWorld&amp; gw)</a> override { ... } void <a class="el" href="#a290b20a4d512d096650dc187f1f3e940" title="Processes queued requests each frame.">flush(GameWorld&amp; gw, UpdateContext&amp; ctx)</a> noexcept override { // Process queued requests } }; ```</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html" title="Central registry for game entities, managers, pools, and the active level.">GameWorld</a> </dd>
 <dd>
-PoolRequestHandler </dd>
+GameObjectPoolManager </dd>
 <dd>
 System </dd></dl>
 
@@ -221,7 +221,7 @@ System </dd></dl>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager.html#a9ec8753e84b8b8c90127c8754c54fa08">helios::engine::mechanics::combat::manager::ProjectilePoolManager</a>, and <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1manager_1_1SpawnManager.html#a14cd4ed95f7cbe20d7fe4e7a44558e6d">helios::engine::mechanics::spawn::manager::SpawnManager</a>.</p>
+<p>Implemented in <a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager.html#ab69a353b11e4ee5a834dca810f3239e9">helios::engine::runtime::pooling::GameObjectPoolManager</a>, and <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html#a345caf68f5d311a54f74a921b933705e">helios::engine::runtime::spawn::SpawnManager</a>.</p>
 
 </div>
 </div>
@@ -257,7 +257,7 @@ System </dd></dl>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager.html#a4190bbc58bfeda6fa493d6dcc0221591">helios::engine::mechanics::combat::manager::ProjectilePoolManager</a>, and <a class="el" href="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1manager_1_1SpawnManager.html#ad609d041ba078551a13d2a4b979d5162">helios::engine::mechanics::spawn::manager::SpawnManager</a>.</p>
+<p>Reimplemented in <a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager.html#a7f5ef214b56eba5241a20de5d964eff2">helios::engine::runtime::pooling::GameObjectPoolManager</a>, and <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html#aeab1d9b1aabd174751fa20937a9841f2">helios::engine::runtime::spawn::SpawnManager</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="Manager_8ixx_source.html#l00086">86</a> of file <a class="el" href="Manager_8ixx_source.html">Manager.ixx</a>.</p>
 

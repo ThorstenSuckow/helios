@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::runtime::spawn::policy::amount::SpawnAmountByCallback</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider" prot="public" virt="non-virtual">helios::engine::runtime::spawn::policy::amount::SpawnAmountProvider</basecompoundref>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback_1a4545aac365da81848a01ca42d1e0c31b" prot="private" static="no">
+        <type>std::function&lt; size_t( const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">helios::engine::core::data::GameObjectPoolId</ref>, const <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState" kindref="compound">SpawnRuleState</ref> &amp;, const <ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;)&gt;</type>
+        <definition>using helios::engine::runtime::spawn::policy::amount::SpawnAmountByCallback::AmountEvaluator =  std::function&lt;size_t(
+            const helios::engine::core::data::GameObjectPoolId,
+            const SpawnRuleState&amp;,
+            const helios::engine::runtime::world::UpdateContext&amp;
+        )&gt;</definition>
+        <argsstring></argsstring>
+        <name>AmountEvaluator</name>
+        <qualifiedname>helios::engine::runtime::spawn::policy::amount::SpawnAmountByCallback::AmountEvaluator</qualifiedname>
+        <briefdescription>
+<para>Function signature for amount evaluation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/policy/amount/SpawnAmountByCallback.ixx" line="44" column="9" bodyfile="include/helios/engine/runtime/spawn/policy/amount/SpawnAmountByCallback.ixx" bodystart="44" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback_1a243716bcb11ccb55876c281282f5a248" prot="private" static="no" mutable="no">
+        <type>AmountEvaluator</type>
+        <definition>AmountEvaluator helios::engine::runtime::spawn::policy::amount::SpawnAmountByCallback::evaluator_</definition>
+        <argsstring></argsstring>
+        <name>evaluator_</name>
+        <qualifiedname>helios::engine::runtime::spawn::policy::amount::SpawnAmountByCallback::evaluator_</qualifiedname>
+        <briefdescription>
+<para>The callback function for calculating spawn amount. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/policy/amount/SpawnAmountByCallback.ixx" line="53" column="25" bodyfile="include/helios/engine/runtime/spawn/policy/amount/SpawnAmountByCallback.ixx" bodystart="53" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback_1adea0ac89d2368f2cd18434a02916f4bb" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::runtime::spawn::policy::amount::SpawnAmountByCallback::SpawnAmountByCallback</definition>
+        <argsstring>(AmountEvaluator evaluator)</argsstring>
+        <name>SpawnAmountByCallback</name>
+        <qualifiedname>helios::engine::runtime::spawn::policy::amount::SpawnAmountByCallback::SpawnAmountByCallback</qualifiedname>
+        <param>
+          <type>AmountEvaluator</type>
+          <declname>evaluator</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback" kindref="compound">SpawnAmountByCallback</ref> with the given evaluator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The callback function to calculate spawn amount. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/policy/amount/SpawnAmountByCallback.ixx" line="62" column="18" bodyfile="include/helios/engine/runtime/spawn/policy/amount/SpawnAmountByCallback.ixx" bodystart="62" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback_1a59f1446d2ff418a3b680860f3f358da2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>size_t</type>
+        <definition>size_t helios::engine::runtime::spawn::policy::amount::SpawnAmountByCallback::getAmount</definition>
+        <argsstring>(const helios::engine::core::data::GameObjectPoolId gameObjectPoolId, const SpawnRuleState &amp;spawnRuleState, const helios::engine::runtime::world::UpdateContext &amp;updateContext) const override</argsstring>
+        <name>getAmount</name>
+        <qualifiedname>helios::engine::runtime::spawn::policy::amount::SpawnAmountByCallback::getAmount</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider_1ab8b6b69ca5a82526f73def529a375c90">getAmount</reimplements>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">helios::engine::core::data::GameObjectPoolId</ref></type>
+          <declname>gameObjectPoolId</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState" kindref="compound">SpawnRuleState</ref> &amp;</type>
+          <declname>spawnRuleState</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Returns the spawn amount by invoking the callback. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameObjectPoolId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The pool to spawn from. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spawnRuleState</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The rule&apos;s runtime state. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s context.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The calculated spawn amount. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/policy/amount/SpawnAmountByCallback.ixx" line="74" column="17" bodyfile="include/helios/engine/runtime/spawn/policy/amount/SpawnAmountByCallback.ixx" bodystart="74" bodyend="80"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Amount provider that delegates to a user-provided callback. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback" kindref="compound">SpawnAmountByCallback</ref> allows dynamic spawn quantity calculation by delegating to a std::function. This enables complex logic based on game state, difficulty, pool availability, or other runtime factors.</para>
+<para>Example: ```cpp auto dynamicAmount = std::make_unique&lt;SpawnAmountByCallback&gt;( [&amp;DIFFICULTY_LEVEL](const GameObjectPoolId&amp; poolId, const <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState" kindref="compound">SpawnRuleState</ref>&amp; state, const UpdateContext&amp; ctx) -&gt; size_t { // Scale spawn count with difficulty return 2 * DIFFICULTY_LEVEL; } ); ```</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider" kindref="compound">SpawnAmountProvider</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1FixedSpawnAmount" kindref="compound">FixedSpawnAmount</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>helios::engine::runtime::spawn::policy::amount::SpawnAmountByCallback</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::engine::runtime::spawn::policy::amount::SpawnAmountProvider</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>helios::engine::runtime::spawn::policy::amount::SpawnAmountByCallback</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::engine::runtime::spawn::policy::amount::SpawnAmountProvider</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/runtime/spawn/policy/amount/SpawnAmountByCallback.ixx" line="39" column="5" bodyfile="include/helios/engine/runtime/spawn/policy/amount/SpawnAmountByCallback.ixx" bodystart="39" bodyend="82"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback_1a4545aac365da81848a01ca42d1e0c31b" prot="private" virt="non-virtual"><scope>helios::engine::runtime::spawn::policy::amount::SpawnAmountByCallback</scope><name>AmountEvaluator</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback_1a243716bcb11ccb55876c281282f5a248" prot="private" virt="non-virtual"><scope>helios::engine::runtime::spawn::policy::amount::SpawnAmountByCallback</scope><name>evaluator_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback_1a59f1446d2ff418a3b680860f3f358da2" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::policy::amount::SpawnAmountByCallback</scope><name>getAmount</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback_1adea0ac89d2368f2cd18434a02916f4bb" prot="public" virt="non-virtual"><scope>helios::engine::runtime::spawn::policy::amount::SpawnAmountByCallback</scope><name>SpawnAmountByCallback</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider_1a7ae43eddd23541bcfe12b67b8f493284" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::policy::amount::SpawnAmountByCallback</scope><name>~SpawnAmountProvider</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

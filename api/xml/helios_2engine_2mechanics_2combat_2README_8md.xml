@@ -14,17 +14,24 @@
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>all<sp/>building<sp/>blocks<sp/>for<sp/>implementing<sp/>combat<sp/>mechanics<sp/>such<sp/>as<sp/>aiming,<sp/>shooting,<sp/>and<sp/>projectile<sp/>management.</highlight></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>all<sp/>building<sp/>blocks<sp/>for<sp/>implementing<sp/>combat<sp/>mechanics<sp/>such<sp/>as<sp/>aiming,<sp/>shooting,<sp/>and<sp/>projectile<sp/>spawning.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Submodules</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">|<sp/>Submodule<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|-----------|---------|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`components/`<sp/>|<sp/>Data<sp/>containers<sp/>for<sp/>combat<sp/>state<sp/>(aiming,<sp/>cooldowns)<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`commands/`<sp/>|<sp/>Commands<sp/>for<sp/>combat<sp/>actions<sp/>(ShootCommand,<sp/>Aim2DCommand)<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`dispatcher/`<sp/>|<sp/>Command<sp/>dispatchers<sp/>routing<sp/>to<sp/>managers<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`manager/`<sp/>|<sp/>Managers<sp/>for<sp/>deferred<sp/>projectile<sp/>operations<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`requests/`<sp/>|<sp/>Request<sp/>types<sp/>for<sp/>projectile<sp/>spawning<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`components/`<sp/>|<sp/>Data<sp/>containers<sp/>for<sp/>combat<sp/>state<sp/>(aiming<sp/>direction,<sp/>cooldowns,<sp/>projectile<sp/>config)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`systems/`<sp/>|<sp/>ECS<sp/>systems<sp/>for<sp/>processing<sp/>combat<sp/>logic<sp/>(ProjectileSpawnSystem)<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Architecture</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Combat<sp/>follows<sp/>the<sp/>command<sp/>pattern<sp/>integrated<sp/>with<sp/>the<sp/>spawn<sp/>system:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">1.<sp/>Input<sp/>systems<sp/>generate<sp/>`ShootCommand`<sp/>and<sp/>`Aim2DCommand`</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>Commands<sp/>update<sp/>`ShootComponent`<sp/>and<sp/>`Aim2DComponent`<sp/>state</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>`ProjectileSpawnSystem`<sp/>reads<sp/>component<sp/>state<sp/>and<sp/>generates<sp/>`SpawnCommand`</highlight></codeline>
+<codeline><highlight class="normal">4.<sp/>Spawn<sp/>system<sp/>handles<sp/>actual<sp/>projectile<sp/>creation<sp/>via<sp/>pool<sp/>and<sp/>profile</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline></codeline>
@@ -32,7 +39,7 @@
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
 <codeline><highlight class="normal">@namespace<sp/>helios::engine::mechanics::combat</highlight></codeline>
 <codeline><highlight class="normal">@brief<sp/>Combat-related<sp/>gameplay<sp/>systems,<sp/>components,<sp/>and<sp/>commands.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>This<sp/>namespace<sp/>contains<sp/>the<sp/>combat<sp/>layer<sp/>of<sp/>the<sp/>gameplay<sp/>system.<sp/>It<sp/>includes<sp/>components<sp/>for<sp/>storing<sp/>weapon<sp/>and<sp/>aiming<sp/>state,<sp/>commands<sp/>for<sp/>translating<sp/>input<sp/>into<sp/>combat<sp/>actions,<sp/>dispatchers<sp/>for<sp/>routing<sp/>commands,<sp/>managers<sp/>for<sp/>deferred<sp/>projectile<sp/>operations,<sp/>and<sp/>request<sp/>types<sp/>for<sp/>spawn<sp/>communication.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>This<sp/>namespace<sp/>contains<sp/>the<sp/>combat<sp/>layer<sp/>of<sp/>the<sp/>gameplay<sp/>system.<sp/>It<sp/>includes<sp/>components<sp/>for<sp/>storing<sp/>weapon<sp/>and<sp/>aiming<sp/>state,<sp/>commands<sp/>for<sp/>translating<sp/>input<sp/>into<sp/>combat<sp/>actions,<sp/>and<sp/>systems<sp/>for<sp/>spawning<sp/>projectiles<sp/>based<sp/>on<sp/>combat<sp/>state.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
 <codeline></codeline>
     </programlisting>

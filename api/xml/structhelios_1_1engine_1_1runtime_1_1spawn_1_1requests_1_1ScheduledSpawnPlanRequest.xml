@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structhelios_1_1engine_1_1runtime_1_1spawn_1_1requests_1_1ScheduledSpawnPlanRequest" kind="struct" language="C++" prot="public">
+    <compoundname>helios::engine::runtime::spawn::requests::ScheduledSpawnPlanRequest</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structhelios_1_1engine_1_1runtime_1_1spawn_1_1requests_1_1ScheduledSpawnPlanRequest_1a912920c1269d223e41ab55a411ee2ca5" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1ScheduledSpawnPlan" kindref="compound">helios::engine::runtime::spawn::scheduling::ScheduledSpawnPlan</ref></type>
+        <definition>const helios::engine::runtime::spawn::scheduling::ScheduledSpawnPlan helios::engine::runtime::spawn::requests::ScheduledSpawnPlanRequest::scheduledSpawnPlan</definition>
+        <argsstring></argsstring>
+        <name>scheduledSpawnPlan</name>
+        <qualifiedname>helios::engine::runtime::spawn::requests::ScheduledSpawnPlanRequest::scheduledSpawnPlan</qualifiedname>
+        <briefdescription>
+<para>The scheduled spawn plan containing profile, rule, and amount. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/requests/ScheduledSpawnPlanRequest.ixx" line="31" column="78" bodyfile="include/helios/engine/runtime/spawn/requests/ScheduledSpawnPlanRequest.ixx" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhelios_1_1engine_1_1runtime_1_1spawn_1_1requests_1_1ScheduledSpawnPlanRequest_1ac86a0b814c5d7536b6a4292cda81bc35" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext" kindref="compound">helios::engine::runtime::spawn::SpawnContext</ref></type>
+        <definition>const helios::engine::runtime::spawn::SpawnContext helios::engine::runtime::spawn::requests::ScheduledSpawnPlanRequest::spawnContext</definition>
+        <argsstring></argsstring>
+        <name>spawnContext</name>
+        <qualifiedname>helios::engine::runtime::spawn::requests::ScheduledSpawnPlanRequest::spawnContext</qualifiedname>
+        <briefdescription>
+<para>Context for spawn placement and initialization. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Contains optional <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1EmitterContext" kindref="compound">EmitterContext</ref> for emitter-relative spawning. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/requests/ScheduledSpawnPlanRequest.ixx" line="38" column="60" bodyfile="include/helios/engine/runtime/spawn/requests/ScheduledSpawnPlanRequest.ixx" bodystart="38" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Data structure representing a scheduled spawn plan request. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1requests_1_1ScheduledSpawnPlanRequest" kindref="compound">ScheduledSpawnPlanRequest</ref> is a lightweight data transfer object used by the ScheduledSpawnPlanCommandDispatcher to communicate spawn parameters to the <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kindref="compound">SpawnManager</ref>. It wraps a ScheduledSpawnPlan with additional spawn context.</para>
+<para><simplesect kind="see"><para>ScheduledSpawnPlanCommand </para>
+</simplesect>
+<simplesect kind="see"><para>ScheduledSpawnPlanCommandDispatcher </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kindref="compound">SpawnManager</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>helios::engine::core::data::SpawnProfileId</label>
+        <link refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId"/>
+      </node>
+      <node id="5">
+        <label>helios::engine::core::data::SpawnRuleId</label>
+        <link refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleId"/>
+      </node>
+      <node id="6">
+        <label>helios::engine::runtime::spawn::SpawnContext</label>
+        <link refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::runtime::spawn::requests::ScheduledSpawnPlanRequest</label>
+        <link refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1requests_1_1ScheduledSpawnPlanRequest"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>scheduledSpawnPlan</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>spawnContext</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>helios::engine::runtime::spawn::scheduling::ScheduledSpawnPlan</label>
+        <link refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1ScheduledSpawnPlan"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>spawnProfileId</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>spawnPlan</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>helios::engine::runtime::spawn::scheduling::SpawnPlan</label>
+        <link refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnPlan"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>spawnRuleId</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/runtime/spawn/requests/ScheduledSpawnPlanRequest.ixx" line="26" column="5" bodyfile="include/helios/engine/runtime/spawn/requests/ScheduledSpawnPlanRequest.ixx" bodystart="26" bodyend="40"/>
+    <listofallmembers>
+      <member refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1requests_1_1ScheduledSpawnPlanRequest_1a912920c1269d223e41ab55a411ee2ca5" prot="public" virt="non-virtual"><scope>helios::engine::runtime::spawn::requests::ScheduledSpawnPlanRequest</scope><name>scheduledSpawnPlan</name></member>
+      <member refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1requests_1_1ScheduledSpawnPlanRequest_1ac86a0b814c5d7536b6a4292cda81bc35" prot="public" virt="non-virtual"><scope>helios::engine::runtime::spawn::requests::ScheduledSpawnPlanRequest</scope><name>spawnContext</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

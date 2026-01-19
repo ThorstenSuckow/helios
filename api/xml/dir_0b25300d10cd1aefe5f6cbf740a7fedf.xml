@@ -3,7 +3,6 @@
   <compounddef id="dir_0b25300d10cd1aefe5f6cbf740a7fedf" kind="dir">
     <compoundname>include/helios/engine/modules</compoundname>
     <innerdir refid="dir_4cf3e568933a39133476fd0cdd0720ad">include/helios/engine/modules/physics</innerdir>
-    <innerdir refid="dir_9d652bc49794ee57b22ecd7f52416e0b">include/helios/engine/modules/pool</innerdir>
     <innerdir refid="dir_616630fd0adec1772873768e31678ae7">include/helios/engine/modules/rendering</innerdir>
     <innerdir refid="dir_9901a41432e1411a521c23d6f490a264">include/helios/engine/modules/scene</innerdir>
     <innerdir refid="dir_40a07d66e7fedbdef195364f73b9e6a6">include/helios/engine/modules/spatial</innerdir>
@@ -11,14 +10,14 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_0b25300d10cd1aefe5f6cbf740a7fedf_1autotoc_md178">
+<sect1 id="dir_0b25300d10cd1aefe5f6cbf740a7fedf_1autotoc_md150">
 <title>helios::engine::modules</title><para>Domain-specific components and systems built on top of the ECS architecture.</para>
 </sect1>
-<sect1 id="dir_0b25300d10cd1aefe5f6cbf740a7fedf_1autotoc_md179">
+<sect1 id="dir_0b25300d10cd1aefe5f6cbf740a7fedf_1autotoc_md151">
 <title>Overview</title><para>This module provides concrete game logic implementations using the composition-based component model. While <computeroutput><ref refid="namespacehelios_1_1engine_1_1ecs" kindref="compound">helios.engine.ecs</ref></computeroutput> provides the base classes (GameObject, Component, System), this module contains domain-specific functionality for physics, scene integration, and rendering.</para>
 <para>For gameplay mechanics (bounds, combat, spawn, input), see <computeroutput><ref refid="namespacehelios_1_1engine_1_1mechanics" kindref="compound">helios.engine.mechanics</ref></computeroutput>.</para>
 </sect1>
-<sect1 id="dir_0b25300d10cd1aefe5f6cbf740a7fedf_1autotoc_md180">
+<sect1 id="dir_0b25300d10cd1aefe5f6cbf740a7fedf_1autotoc_md152">
 <title>Submodules</title><para><table rows="6" cols="2"><row>
 <entry thead="yes"><para>Module  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
@@ -46,7 +45,7 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_0b25300d10cd1aefe5f6cbf740a7fedf_1autotoc_md181">
+<sect1 id="dir_0b25300d10cd1aefe5f6cbf740a7fedf_1autotoc_md153">
 <title>Architecture</title><para><programlisting><codeline><highlight class="normal">helios.engine.modules</highlight></codeline>
 <codeline><highlight class="normal">├──<sp/>physics/</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>collision/<sp/><sp/><sp/>#<sp/>AABB,<sp/>collision<sp/>detection</highlight></codeline>
@@ -58,7 +57,7 @@
 <codeline><highlight class="normal">└──<sp/>pool/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Pool<sp/>ID<sp/>components</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_0b25300d10cd1aefe5f6cbf740a7fedf_1autotoc_md182">
+<sect1 id="dir_0b25300d10cd1aefe5f6cbf740a7fedf_1autotoc_md154">
 <title>Relationship to ECS and Runtime</title><para>This module <bold>imports</bold> from <computeroutput><ref refid="namespacehelios_1_1engine_1_1ecs" kindref="compound">helios.engine.ecs</ref></computeroutput>:</para>
 <para><itemizedlist>
 <listitem><para><computeroutput>GameObject</computeroutput>, <computeroutput>Component</computeroutput> — Base classes extended by domain components</para>
@@ -68,11 +67,11 @@
 <para>This module <bold>imports</bold> from <computeroutput><ref refid="namespacehelios_1_1engine_1_1runtime_1_1world" kindref="compound">helios.engine.runtime.world</ref></computeroutput>:</para>
 <para><itemizedlist>
 <listitem><para><computeroutput>GameWorld</computeroutput> — Used by systems for entity queries</para>
-</listitem><listitem><para><computeroutput>Manager</computeroutput> — Extended by domain managers (ProjectilePoolManager)</para>
+</listitem><listitem><para><computeroutput>Manager</computeroutput> — Extended by domain managers (ProjectileManager)</para>
 </listitem></itemizedlist>
 </para>
 </sect1>
-<sect1 id="dir_0b25300d10cd1aefe5f6cbf740a7fedf_1autotoc_md183">
+<sect1 id="dir_0b25300d10cd1aefe5f6cbf740a7fedf_1autotoc_md155">
 <title>Usage Example</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8modules_8physics_8motion_8components_8Move2DComponent" kindref="compound">helios.engine.modules.physics.motion.components.Move2DComponent</ref>;</highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8modules_8physics_8collision_8components_8CollisionComponent" kindref="compound">helios.engine.modules.physics.collision.components.CollisionComponent</ref>;</highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8modules_8scene_8components_8SceneNodeComponent" kindref="compound">helios.engine.modules.scene.components.SceneNodeComponent</ref>;</highlight></codeline>

@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2runtime_2spawn_2behavior_2README_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1behavior">helios::engine::runtime::spawn::behavior</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::runtime::spawn::behavior</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Spawn<sp/>behavior<sp/>strategies<sp/>for<sp/>positioning<sp/>and<sp/>initializing<sp/>entities.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>the<sp/>behavior<sp/>layer<sp/>for<sp/>the<sp/>spawn<sp/>system.<sp/>It<sp/>defines<sp/>abstract<sp/>interfaces<sp/>and<sp/>concrete<sp/>implementations<sp/>for<sp/>determining<sp/>where<sp/>entities<sp/>spawn<sp/>and<sp/>how<sp/>they<sp/>are<sp/>initialized.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SpawnPlacer`<sp/>|<sp/>Abstract<sp/>interface<sp/>for<sp/>calculating<sp/>spawn<sp/>positions<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SpawnInitializer`<sp/>|<sp/>Abstract<sp/>interface<sp/>for<sp/>configuring<sp/>spawned<sp/>entity<sp/>state<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Submodules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Directory<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-----------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`placements/`<sp/>|<sp/>Concrete<sp/>SpawnPlacer<sp/>implementations<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`initializers/`<sp/>|<sp/>Concrete<sp/>SpawnInitializer<sp/>implementations<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Available<sp/>Placers</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Placer<sp/>|<sp/>Description<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|--------|-------------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`RandomSpawnPlacer`<sp/>|<sp/>Places<sp/>entities<sp/>at<sp/>random<sp/>positions<sp/>within<sp/>level<sp/>bounds<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`EmitterSpawnPlacer`<sp/>|<sp/>Places<sp/>entities<sp/>relative<sp/>to<sp/>an<sp/>emitter<sp/>position<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Available<sp/>Initializers</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Initializer<sp/>|<sp/>Description<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------------|-------------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`EmitterInitializer`<sp/>|<sp/>Inherits<sp/>velocity/direction<sp/>from<sp/>emitter<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`RandomDirectionInitializer`<sp/>|<sp/>Applies<sp/>random<sp/>velocity<sp/>within<sp/>constraints<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>profile<sp/>=<sp/>std::make_unique&lt;SpawnProfile&gt;(SpawnProfile{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.gameObjectPoolId<sp/>=<sp/>enemyPoolId,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.spawnPlacer<sp/>=<sp/>std::make_unique&lt;RandomSpawnPlacer&gt;(),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.spawnInitializer<sp/>=<sp/>std::make_unique&lt;RandomDirectionInitializer&gt;(minSpeed,<sp/>maxSpeed)</highlight></codeline>
+<codeline><highlight class="normal">});</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::runtime::spawn::behavior</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Spawn<sp/>behavior<sp/>strategies<sp/>for<sp/>positioning<sp/>and<sp/>initializing<sp/>entities.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>SpawnPlacer<sp/>and<sp/>SpawnInitializer<sp/>interfaces<sp/>with<sp/>concrete<sp/>implementations<sp/>for<sp/>common<sp/>spawn<sp/>patterns.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+    </programlisting>
+    <location file="include/helios/engine/runtime/spawn/behavior/README.md"/>
+  </compounddef>
+</doxygen>

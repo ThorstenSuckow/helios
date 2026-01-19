@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext" kind="struct" language="C++" prot="public">
+    <compoundname>helios::engine::runtime::spawn::SpawnContext</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext_1a5dabe9f0e03d964a1f85f76960a31b6f" prot="public" static="no" mutable="no">
+        <type>std::optional&lt; <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1EmitterContext" kindref="compound">EmitterContext</ref> &gt;</type>
+        <definition>std::optional&lt;EmitterContext&gt; helios::engine::runtime::spawn::SpawnContext::emitterContext</definition>
+        <argsstring></argsstring>
+        <name>emitterContext</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnContext::emitterContext</qualifiedname>
+        <briefdescription>
+<para>Optional context from the entity that triggered the spawn. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Present when an entity (e.g., spaceship) triggered the spawn. Absent for environment spawns or timer-based spawns. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/SpawnContext.ixx" line="43" column="23" bodyfile="include/helios/engine/runtime/spawn/SpawnContext.ixx" bodystart="43" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1EmitterSpawnPlacer_1a6b59e520120e42b05c751897206a59f4" compoundref="EmitterSpawnPlacer_8ixx" startline="47" endline="58">helios::engine::runtime::spawn::behavior::placements::EmitterSpawnPlacer::getPosition</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1EmitterInitializer_1a618402306c09bcb656c31f39715062a3" compoundref="EmitterInitializer_8ixx" startline="51" endline="74">helios::engine::runtime::spawn::behavior::initializers::EmitterInitializer::initialize</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Context data passed to spawn behaviors during entity initialization. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext" kindref="compound">SpawnContext</ref> aggregates all contextual information needed by SpawnPlacer and SpawnInitializer to configure a spawned entity. It may contain an <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1EmitterContext" kindref="compound">EmitterContext</ref> if the spawn was triggered by another entity.</para>
+<para>Example usage: ```cpp <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext" kindref="compound">SpawnContext</ref> ctx; ctx.emitterContext = <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1EmitterContext" kindref="compound">EmitterContext</ref>{shipPos, shipVelocity};</para>
+<para>placer-&gt;getPosition(guid, bounds, cursor, ctx); initializer-&gt;initialize(entity, cursor, ctx); ```</para>
+<para><simplesect kind="see"><para><ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1EmitterContext" kindref="compound">EmitterContext</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>SpawnPlacer </para>
+</simplesect>
+<simplesect kind="see"><para>SpawnInitializer </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="include/helios/engine/runtime/spawn/SpawnContext.ixx" line="35" column="5" bodyfile="include/helios/engine/runtime/spawn/SpawnContext.ixx" bodystart="35" bodyend="45"/>
+    <listofallmembers>
+      <member refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext_1a5dabe9f0e03d964a1f85f76960a31b6f" prot="public" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnContext</scope><name>emitterContext</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

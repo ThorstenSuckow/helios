@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_52936351db34d2a1eebd36b673ba9c6c" kind="dir">
+    <compoundname>include/helios/engine/runtime/spawn/scheduling</compoundname>
+    <innerfile refid="helios_2engine_2runtime_2spawn_2scheduling_2__module_8ixx">_module.ixx</innerfile>
+    <innerfile refid="ScheduledSpawnPlan_8ixx">ScheduledSpawnPlan.ixx</innerfile>
+    <innerfile refid="SpawnPlan_8ixx">SpawnPlan.ixx</innerfile>
+    <innerfile refid="SpawnScheduler_8ixx">SpawnScheduler.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_52936351db34d2a1eebd36b673ba9c6c_1autotoc_md282">
+<title>helios::engine::runtime::spawn::scheduling</title><para>Spawn scheduling and plan management.</para>
+</sect1>
+<sect1 id="dir_52936351db34d2a1eebd36b673ba9c6c_1autotoc_md283">
+<title>Overview</title><para>This module provides the scheduling layer for the spawn system. The SpawnScheduler evaluates spawn rules and produces ScheduledSpawnPlan instances that are then processed by the command pipeline.</para>
+</sect1>
+<sect1 id="dir_52936351db34d2a1eebd36b673ba9c6c_1autotoc_md284">
+<title>Key Classes</title><para><table rows="4" cols="2"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SpawnScheduler</computeroutput>  </para>
+</entry><entry thead="no"><para>Evaluates rules and produces scheduled plans  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SpawnPlan</computeroutput>  </para>
+</entry><entry thead="no"><para>Data describing a planned spawn (rule, amount, pool)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ScheduledSpawnPlan</computeroutput>  </para>
+</entry><entry thead="no"><para>A plan paired with its spawn profile ID  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_52936351db34d2a1eebd36b673ba9c6c_1autotoc_md285">
+<title>Workflow</title><para><programlisting><codeline><highlight class="normal">SpawnRule::evaluate()<sp/>→<sp/>SpawnPlan<sp/>→<sp/>ScheduledSpawnPlan<sp/>→<sp/>Command<sp/>→<sp/>SpawnManager</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_52936351db34d2a1eebd36b673ba9c6c_1autotoc_md286">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="normal">SpawnScheduler<sp/>scheduler;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Add<sp/>rules<sp/>with<sp/>their<sp/>profiles</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">scheduler.addRule(enemyProfileId,<sp/>std::make_unique&lt;TimerSpawnRule&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>ruleId,<sp/>2.0f,<sp/>3<sp/><sp/></highlight><highlight class="comment">//<sp/>Every<sp/>2s,<sp/>spawn<sp/>up<sp/>to<sp/>3</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">));</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Each<sp/>frame<sp/>in<sp/>GameObjectSpawnSystem</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">scheduler.evaluate(updateContext);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>plans<sp/>=<sp/>scheduler.drainScheduledPlans();</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Plans<sp/>are<sp/>converted<sp/>to<sp/>commands<sp/>for<sp/>execution</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="include/helios/engine/runtime/spawn/scheduling/"/>
+  </compounddef>
+</doxygen>

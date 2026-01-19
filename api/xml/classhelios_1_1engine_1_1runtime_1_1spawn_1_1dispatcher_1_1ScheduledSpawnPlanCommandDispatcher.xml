@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1ScheduledSpawnPlanCommandDispatcher" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>helios::engine::runtime::spawn::dispatcher::ScheduledSpawnPlanCommandDispatcher</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher" prot="public" virt="non-virtual">helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand &gt;</basecompoundref>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1ScheduledSpawnPlanCommandDispatcher_1ad2f498d542d4f6364552373cd93d0d7a" prot="protected" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::spawn::dispatcher::ScheduledSpawnPlanCommandDispatcher::dispatchTyped</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld, const helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand &amp;command) noexcept override</argsstring>
+        <name>dispatchTyped</name>
+        <qualifiedname>helios::engine::runtime::spawn::dispatcher::ScheduledSpawnPlanCommandDispatcher::dispatchTyped</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher_1ae99b8d4dc66acf8340000f97c0fdd16d">dispatchTyped</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand" kindref="compound">helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand</ref> &amp;</type>
+          <declname>command</declname>
+        </param>
+        <briefdescription>
+<para>Dispatches a ScheduledSpawnPlanCommand by creating a request. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Creates a ScheduledSpawnPlanRequest from the command and submits it to the profile&apos;s registered SpawnRequestHandler for deferred processing.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world containing the pool. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>command</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ScheduledSpawnPlanCommand to dispatch. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/dispatcher/ScheduledSpawnPlanCommandDispatcher.ixx" line="47" column="14" bodyfile="include/helios/engine/runtime/spawn/dispatcher/ScheduledSpawnPlanCommandDispatcher.ixx" bodystart="47" bodyend="64"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1ScheduledSpawnPlanCommandDispatcher_1adba3d6f1bb3b956a0e2a555887f44e2b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::runtime::spawn::dispatcher::ScheduledSpawnPlanCommandDispatcher::ScheduledSpawnPlanCommandDispatcher</definition>
+        <argsstring>()=default</argsstring>
+        <name>ScheduledSpawnPlanCommandDispatcher</name>
+        <qualifiedname>helios::engine::runtime::spawn::dispatcher::ScheduledSpawnPlanCommandDispatcher::ScheduledSpawnPlanCommandDispatcher</qualifiedname>
+        <briefdescription>
+<para>Default constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/dispatcher/ScheduledSpawnPlanCommandDispatcher.ixx" line="71" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Dispatcher that routes ScheduledSpawnPlanCommands to the appropriate handler. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1ScheduledSpawnPlanCommandDispatcher" kindref="compound">ScheduledSpawnPlanCommandDispatcher</ref> is a typed command dispatcher that handles ScheduledSpawnPlanCommand instances. When a command is dispatched, it creates a ScheduledSpawnPlanRequest and submits it to the pool&apos;s registered SpawnRequestHandler.</para>
+<para>This dispatcher bridges the SpawnScheduler output (ScheduledSpawnPlan) with the <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kindref="compound">SpawnManager</ref>&apos;s request processing pipeline.</para>
+<para><simplesect kind="see"><para>ScheduledSpawnPlanCommand </para>
+</simplesect>
+<simplesect kind="see"><para>SpawnScheduler </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kindref="compound">SpawnManager</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand &gt;</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::runtime::messaging::command::WorldCommandDispatcher</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::runtime::spawn::dispatcher::ScheduledSpawnPlanCommandDispatcher</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1ScheduledSpawnPlanCommandDispatcher"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand &gt;</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::runtime::messaging::command::WorldCommandDispatcher</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::runtime::spawn::dispatcher::ScheduledSpawnPlanCommandDispatcher</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1ScheduledSpawnPlanCommandDispatcher"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/runtime/spawn/dispatcher/ScheduledSpawnPlanCommandDispatcher.ixx" line="33" column="5" bodyfile="include/helios/engine/runtime/spawn/dispatcher/ScheduledSpawnPlanCommandDispatcher.ixx" bodystart="34" bodyend="73"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher_1ada9b7af011e293a1d5712a1134bdf66d" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::dispatcher::ScheduledSpawnPlanCommandDispatcher</scope><name>dispatch</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1ScheduledSpawnPlanCommandDispatcher_1ad2f498d542d4f6364552373cd93d0d7a" prot="protected" virt="virtual"><scope>helios::engine::runtime::spawn::dispatcher::ScheduledSpawnPlanCommandDispatcher</scope><name>dispatchTyped</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1ScheduledSpawnPlanCommandDispatcher_1adba3d6f1bb3b956a0e2a555887f44e2b" prot="public" virt="non-virtual"><scope>helios::engine::runtime::spawn::dispatcher::ScheduledSpawnPlanCommandDispatcher</scope><name>ScheduledSpawnPlanCommandDispatcher</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher_1a99cfdc9890b444664a9ae3a98e8b6d1f" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::dispatcher::ScheduledSpawnPlanCommandDispatcher</scope><name>~WorldCommandDispatcher</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

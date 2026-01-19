@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8mechanics_8combat_8systems_8ProjectileSpawnSystem" kind="module">
+    <compoundname>helios.engine.mechanics.combat.systems.ProjectileSpawnSystem</compoundname>
+    <innerfile refid="ProjectileSpawnSystem_8ixx">ProjectileSpawnSystem.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1systems_1_1ProjectileSpawnSystem" prot="public">helios::engine::mechanics::combat::systems::ProjectileSpawnSystem</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1systems_1_1ProjectileSpawnSystem_1a8d5e884eff9de5d3e20c0c757ebdbf05" prot="private" static="no" mutable="no">
+        <type>const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" kindref="compound">helios::engine::core::data::SpawnProfileId</ref></type>
+        <definition>const helios::engine::core::data::SpawnProfileId helios::engine::mechanics::combat::systems::ProjectileSpawnSystem::spawnProfileId_</definition>
+        <argsstring></argsstring>
+        <name>spawnProfileId_</name>
+        <qualifiedname>helios::engine::mechanics::combat::systems::ProjectileSpawnSystem::spawnProfileId_</qualifiedname>
+        <briefdescription>
+<para>The spawn profile ID used for projectile creation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>References a SpawnProfile in the spawn system that defines how projectiles are placed and initialized. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" line="61" column="58" bodyfile="include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" bodystart="61" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1systems_1_1ProjectileSpawnSystem_1ab0dfd311a620ac58e1d6254bd91d6609" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::mechanics::combat::systems::ProjectileSpawnSystem::ProjectileSpawnSystem</definition>
+        <argsstring>(const helios::engine::core::data::SpawnProfileId &amp;spawnProfileId)</argsstring>
+        <name>ProjectileSpawnSystem</name>
+        <qualifiedname>helios::engine::mechanics::combat::systems::ProjectileSpawnSystem::ProjectileSpawnSystem</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" kindref="compound">helios::engine::core::data::SpawnProfileId</ref> &amp;</type>
+          <declname>spawnProfileId</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1systems_1_1ProjectileSpawnSystem" kindref="compound">ProjectileSpawnSystem</ref> with the specified spawn profile. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>spawnProfileId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ID of the spawn profile to use for projectiles. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" line="70" column="18" bodyfile="include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" bodystart="70" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1systems_1_1ProjectileSpawnSystem_1a95de32d6e0fcd39c83f620f53444884b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::mechanics::combat::systems::ProjectileSpawnSystem::update</definition>
+        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::mechanics::combat::systems::ProjectileSpawnSystem::update</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1ecs_1_1System_1a4e9969641985fa04db6214332c88605b">update</reimplements>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Processes all shooting entities and spawns projectiles. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For each entity with ShootComponent, Aim2DComponent, and TranslationStateComponent: 1. Checks if intensity &gt; 0 and direction is valid (normalized) 2. Calculates projectile velocity from source velocity and aim direction 3. Enqueues a SpawnCommand with EmitterContext containing position and velocity</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s update context. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" line="87" column="14" bodyfile="include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" bodystart="87" bodyend="118"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="48">helios::engine::ecs::System::gameWorld_</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" line="9" column="15"/>
+  </compounddef>
+</doxygen>

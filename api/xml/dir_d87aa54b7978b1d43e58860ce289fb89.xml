@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_d87aa54b7978b1d43e58860ce289fb89" kind="dir">
+    <compoundname>include/helios/engine/runtime/spawn/behavior/placements</compoundname>
+    <innerfile refid="helios_2engine_2runtime_2spawn_2behavior_2placements_2__module_8ixx">_module.ixx</innerfile>
+    <innerfile refid="EmitterSpawnPlacer_8ixx">EmitterSpawnPlacer.ixx</innerfile>
+    <innerfile refid="RandomSpawnPlacer_8ixx">RandomSpawnPlacer.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_d87aa54b7978b1d43e58860ce289fb89_1autotoc_md222">
+<title>helios::engine::runtime::spawn::behavior::placements</title><para>Concrete SpawnPlacer implementations.</para>
+</sect1>
+<sect1 id="dir_d87aa54b7978b1d43e58860ce289fb89_1autotoc_md223">
+<title>Overview</title><para>This module provides ready-to-use SpawnPlacer implementations for determining spawn positions.</para>
+</sect1>
+<sect1 id="dir_d87aa54b7978b1d43e58860ce289fb89_1autotoc_md224">
+<title>Key Classes</title><para><table rows="3" cols="2"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>RandomSpawnPlacer</computeroutput>  </para>
+</entry><entry thead="no"><para>Places entities at random positions within level bounds  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>EmitterSpawnPlacer</computeroutput>  </para>
+</entry><entry thead="no"><para>Places entities at the emitter&apos;s position  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_d87aa54b7978b1d43e58860ce289fb89_1autotoc_md225">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Enemies<sp/>spawn<sp/>at<sp/>random<sp/>locations</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>enemyProfile<sp/>=<sp/>SpawnProfile{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.gameObjectPoolId<sp/>=<sp/>enemyPoolId,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.spawnPlacer<sp/>=<sp/>std::make_unique&lt;RandomSpawnPlacer&gt;(),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.spawnInitializer<sp/>=<sp/>std::make_unique&lt;RandomDirectionInitializer&gt;()</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Projectiles<sp/>spawn<sp/>at<sp/>the<sp/>firing<sp/>entity&apos;s<sp/>position</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>bulletProfile<sp/>=<sp/>SpawnProfile{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.gameObjectPoolId<sp/>=<sp/>bulletPoolId,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.spawnPlacer<sp/>=<sp/>std::make_unique&lt;EmitterSpawnPlacer&gt;(),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.spawnInitializer<sp/>=<sp/>std::make_unique&lt;EmitterInitializer&gt;()</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="include/helios/engine/runtime/spawn/behavior/placements/"/>
+  </compounddef>
+</doxygen>

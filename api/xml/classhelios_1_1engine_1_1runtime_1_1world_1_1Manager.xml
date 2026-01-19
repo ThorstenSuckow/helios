@@ -2,8 +2,8 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>helios::engine::runtime::world::Manager</compoundname>
-    <derivedcompoundref refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager" prot="public" virt="non-virtual">helios::engine::mechanics::combat::manager::ProjectilePoolManager</derivedcompoundref>
-    <derivedcompoundref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1manager_1_1SpawnManager" prot="public" virt="non-virtual">helios::engine::mechanics::spawn::manager::SpawnManager</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager" prot="public" virt="non-virtual">helios::engine::runtime::pooling::GameObjectPoolManager</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" prot="public" virt="non-virtual">helios::engine::runtime::spawn::SpawnManager</derivedcompoundref>
     <sectiondef kind="protected-attrib">
       <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1aaa2bc033955a07d4d97592eb2f817659" prot="protected" static="no" mutable="no">
         <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> *</type>
@@ -11,6 +11,7 @@
         <argsstring></argsstring>
         <name>gameWorld_</name>
         <qualifiedname>helios::engine::runtime::world::Manager::gameWorld_</qualifiedname>
+        <initializer>= nullptr</initializer>
         <briefdescription>
 <para>Pointer to the owning <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref>. </para>
         </briefdescription>
@@ -75,8 +76,8 @@
         <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld)</argsstring>
         <name>init</name>
         <qualifiedname>helios::engine::runtime::world::Manager::init</qualifiedname>
-        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager_1a4190bbc58bfeda6fa493d6dcc0221591">init</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1manager_1_1SpawnManager_1ad609d041ba078551a13d2a4b979d5162">init</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a7f5ef214b56eba5241a20de5d964eff2">init</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1aeab1d9b1aabd174751fa20937a9841f2">init</reimplementedby>
         <param>
           <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
           <declname>gameWorld</declname>
@@ -107,8 +108,8 @@
         <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld, helios::engine::runtime::world::UpdateContext &amp;update_context) noexcept=0</argsstring>
         <name>flush</name>
         <qualifiedname>helios::engine::runtime::world::Manager::flush</qualifiedname>
-        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager_1a9ec8753e84b8b8c90127c8754c54fa08">flush</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1manager_1_1SpawnManager_1a14cd4ed95f7cbe20d7fe4e7a44558e6d">flush</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1ab69a353b11e4ee5a834dca810f3239e9">flush</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager_1a345caf68f5d311a54f74a921b933705e">flush</reimplementedby>
         <param>
           <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
           <declname>gameWorld</declname>
@@ -155,15 +156,15 @@
 <para>1. **Registration:** <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> is added via `GameWorld::addManager&lt;T&gt;()` 2. **onAdd():** Called immediately after registration 3. **init():** Called during <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> initialization (before game loop starts) 4. **flush():** Called each frame after Systems complete, to process queued requests</para>
 <para>## Use Cases</para>
 <para><itemizedlist>
-<listitem><para>**ProjectilePoolManager:** Processes shoot requests and spawns projectiles</para>
-</listitem><listitem><para>**SpawnManager:** Handles entity spawn/despawn lifecycle</para>
+<listitem><para>**GameObjectPoolManager:** Manages entity pooling and acquire/release lifecycle</para>
+</listitem><listitem><para>**SpawnManager:** Handles spawn request processing and entity initialization</para>
 </listitem><listitem><para>**Custom Managers:** Any deferred processing that doesn&apos;t fit the System model</para>
 </listitem></itemizedlist>
 </para>
 <para>Example implementation: ```cpp class MyManager : public <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager" kindref="compound">Manager</ref> { public: void <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1ae7e2cd7531de5ce1fdc1f4a179b70929" kindref="member">init(GameWorld&amp; gw)</ref> override { ... } void <ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager_1a290b20a4d512d096650dc187f1f3e940" kindref="member">flush(GameWorld&amp; gw, UpdateContext&amp; ctx)</ref> noexcept override { // Process queued requests } }; ```</para>
 <para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">GameWorld</ref> </para>
 </simplesect>
-<simplesect kind="see"><para>PoolRequestHandler </para>
+<simplesect kind="see"><para>GameObjectPoolManager </para>
 </simplesect>
 <simplesect kind="see"><para>System </para>
 </simplesect>
@@ -171,14 +172,14 @@
     </detaileddescription>
     <inheritancegraph>
       <node id="2">
-        <label>helios::engine::mechanics::combat::manager::ProjectilePoolManager</label>
-        <link refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager"/>
+        <label>helios::engine::runtime::pooling::GameObjectPoolManager</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
-        <label>helios::engine::mechanics::spawn::manager::SpawnManager</label>
-        <link refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1manager_1_1SpawnManager"/>
+        <label>helios::engine::runtime::spawn::SpawnManager</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
@@ -189,10 +190,6 @@
     </inheritancegraph>
     <collaborationgraph>
       <node id="4">
-        <label>helios::engine::runtime::pooling::GameObjectPoolRegistry</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolRegistry"/>
-      </node>
-      <node id="5">
         <label>helios::engine::runtime::pooling::PoolManagerRegistry</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry"/>
       </node>
@@ -203,9 +200,6 @@
           <edgelabel>logger_</edgelabel>
         </childnode>
         <childnode refid="4" relation="usage">
-          <edgelabel>pools_</edgelabel>
-        </childnode>
-        <childnode refid="5" relation="usage">
           <edgelabel>poolManagerRegistry_</edgelabel>
         </childnode>
       </node>

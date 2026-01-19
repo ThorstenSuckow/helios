@@ -4,9 +4,7 @@
  */
 module;
 
-#include <cassert>
 #include <span>
-#include <stdexcept>
 
 export module helios.engine.runtime.world.UpdateContext;
 
@@ -27,20 +25,33 @@ export namespace helios::engine::runtime::world {
     /**
      * @brief Context passed to systems and components during per-frame updates.
      *
-     * Provides all necessary state for systems to perform their update logic,
+     * @details Provides all necessary state for systems to perform their update logic,
      * including frame timing, input state, command buffer access, and event propagation.
      *
      * The UpdateContext serves as the central communication hub within the game loop,
-     * offering two levels of event propagation:
+     * offering three levels of event propagation:
      *
-     * **Pass-level events** are pushed via pushPass() and become readable in subsequent
-     * passes within the same phase after a commit point is reached.
+     * ## Event Levels
      *
-     * **Phase-level events** are pushed via pushPhase() and become readable in subsequent
-     * phases after the current phase commits.
+     * | Level | Push Method | Read Method | Scope |
+     * |-------|-------------|-------------|-------|
+     * | Pass  | `pushPass()` | `readPass()` | Within same phase, after commit point |
+     * | Phase | `pushPhase()` | `readPhase()` | Across phases within same frame |
+     * | Frame | `pushFrame()` | `readFrame()` | Across frames |
+     *
+     * **Pass-level events** are pushed via `pushPass()` and become readable in subsequent
+     * passes within the same phase after a commit point is reached. Cleared at phase end.
+     *
+     * **Phase-level events** are pushed via `pushPhase()` and become readable in subsequent
+     * phases after the current phase commits. Cleared at frame end.
+     *
+     * **Frame-level events** are pushed via `pushFrame()` and become readable in the next
+     * frame. Useful for cross-frame communication (e.g., collision responses, spawn confirmations).
      *
      * @see GameLoop
      * @see Pass
+     * @see CommandBuffer
+     * @see InputSnapshot
      */
     struct UpdateContext {
 
@@ -96,6 +107,20 @@ export namespace helios::engine::runtime::world {
          */
         const helios::engine::runtime::messaging::event::GameLoopEventBus::ReadSource passEventSource_;
 
+        /**
+         * @brief Sink for pushing frame-level events during update.
+         *
+         * Used by systems and components to publish events that will be processed
+         * in the next frame. Frame-level events persist across all phases and are
+         * swapped at the end of the Post phase.
+         */
+        helios::engine::runtime::messaging::event::GameLoopEventBus::WriteSink frameEventSink_;
+
+        /**
+         * @brief Source for reading frame-level events from the previous frame.
+         */
+        const helios::engine::runtime::messaging::event::GameLoopEventBus::ReadSource frameEventSource_;
+
     public:
 
 
@@ -115,6 +140,7 @@ export namespace helios::engine::runtime::world {
             const float deltaTime,
             helios::engine::runtime::messaging::event::GameLoopEventBus& phaseEventBus,
             helios::engine::runtime::messaging::event::GameLoopEventBus& passEventBus,
+            helios::engine::runtime::messaging::event::GameLoopEventBus& frameEventBus,
             const helios::input::InputSnapshot& inputSnapshot
         ) : commandBuffer_(commandBuffer), gameWorld_(gameWorld),
         deltaTime_(deltaTime),
@@ -123,6 +149,8 @@ export namespace helios::engine::runtime::world {
         phaseEventSource_(phaseEventBus.readSource()),
         passEventSink_(passEventBus.writeSink()),
         passEventSource_(passEventBus.readSource()),
+        frameEventSink_(frameEventBus.writeSink()),
+        frameEventSource_(frameEventBus.readSource()),
         inputSnapshot_(inputSnapshot) {
 
         }
@@ -246,6 +274,53 @@ export namespace helios::engine::runtime::world {
         template<typename E>
         std::span<const E> readPass() {
             return passEventSource_.template read<E>();
+        }
+
+        /**
+         * @brief Reads events from the frame-level event bus.
+         *
+         * @details Returns events that were pushed during the previous frame via
+         * `pushFrame()`. The frame event bus is swapped at the end of the Post
+         * phase, making events readable in the subsequent frame.
+         *
+         * Frame-level events are useful for cross-frame communication, such as:
+         * - Collision events that trigger effects in the next frame
+         * - Spawn confirmations for UI updates
+         * - Audio/VFX triggers
+         *
+         * @tparam E The event type to read.
+         *
+         * @return A span of const events of type E.
+         *
+         * @see pushFrame()
+         * @see GameLoop
+         */
+        template<typename E>
+        std::span<const E> readFrame() {
+            return frameEventSource_.template read<E>();
+        }
+
+        /**
+         * @brief Pushes an event to the frame-level event bus.
+         *
+         * @details Events pushed here become readable in the next frame via
+         * `readFrame()`. The frame event bus is swapped at the end of the Post
+         * phase in GameLoop.
+         *
+         * Use frame-level events for cross-frame communication where events
+         * should persist beyond the current phase.
+         *
+         * @tparam E The event type to push.
+         * @tparam Args Constructor argument types for the event.
+         *
+         * @param args Arguments forwarded to the event constructor.
+         *
+         * @see readFrame()
+         * @see GameLoop
+         */
+        template<typename E, typename... Args>
+        void pushFrame(Args&&... args) {
+            frameEventSink_.template push<E>(std::forward<Args>(args)...);
         }
     };
 }

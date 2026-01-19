@@ -13,6 +13,7 @@ export module helios.math.types:vec3;
 import :vec2;
 import helios.math.concepts;
 import helios.math.traits.FloatingPointType;
+import helios.math.utils;
 
 export namespace helios::math {
 
@@ -252,6 +253,23 @@ export namespace helios::math {
          */
         constexpr helios::math::vec3<T> withX(T x) const noexcept {
             return helios::math::vec3<T>{x, v[1], v[2]};
+        }
+
+        /**
+         * @brief Checks if this vector is normalized (unit length).
+         *
+         * @details A vector is considered normalized if its squared length
+         * equals 1 within the tolerance defined by EPSILON_LENGTH.
+         *
+         * @return true if the vector is approximately unit length, false otherwise.
+         */
+        constexpr bool isNormalized() const noexcept {
+            const auto lenSquared =
+                static_cast<FloatingPointType<T>>(v[0]) * static_cast<FloatingPointType<T>>(v[0]) +
+                static_cast<FloatingPointType<T>>(v[1]) * static_cast<FloatingPointType<T>>(v[1]) +
+                static_cast<FloatingPointType<T>>(v[2]) * static_cast<FloatingPointType<T>>(v[2]);
+
+            return std::abs(lenSquared - static_cast<FloatingPointType<T>>(1.0)) <= helios::math::EPSILON_LENGTH;
         }
     };
 

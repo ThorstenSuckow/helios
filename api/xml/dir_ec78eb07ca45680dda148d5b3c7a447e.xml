@@ -2,22 +2,18 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="dir_ec78eb07ca45680dda148d5b3c7a447e" kind="dir">
     <compoundname>include/helios/engine/mechanics/spawn</compoundname>
-    <innerdir refid="dir_9144a23a4f464d408d92b5f36620fa56">include/helios/engine/mechanics/spawn/commands</innerdir>
-    <innerdir refid="dir_2cb13cc71ad78d02ebabf11244de07f0">include/helios/engine/mechanics/spawn/dispatcher</innerdir>
-    <innerdir refid="dir_e5915e51628795b15babf33bf45a77aa">include/helios/engine/mechanics/spawn/logic</innerdir>
-    <innerdir refid="dir_421e32f00e1d9f04a50f71a0b4750541">include/helios/engine/mechanics/spawn/manager</innerdir>
-    <innerdir refid="dir_7aac421d872c9646933d5bb73835b7be">include/helios/engine/mechanics/spawn/requests</innerdir>
+    <innerdir refid="dir_4d261830018bf22a343170d52ff54ae0">include/helios/engine/mechanics/spawn/components</innerdir>
     <innerdir refid="dir_06ee9275ee912daca8cd477154f66702">include/helios/engine/mechanics/spawn/systems</innerdir>
     <innerfile refid="helios_2engine_2mechanics_2spawn_2__module_8ixx">_module.ixx</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_ec78eb07ca45680dda148d5b3c7a447e_1autotoc_md131">
+<sect1 id="dir_ec78eb07ca45680dda148d5b3c7a447e_1autotoc_md113">
 <title>helios::engine::mechanics::spawn</title><para>Entity spawning and lifecycle management.</para>
-<para>This module provides the infrastructure for spawning and despawning GameObjects at runtime based on configurable conditions and strategies.</para>
+<para>This module provides the infrastructure for spawning and despawning GameObjects at runtime based on configurable conditions and scheduling rules.</para>
 </sect1>
-<sect1 id="dir_ec78eb07ca45680dda148d5b3c7a447e_1autotoc_md132">
-<title>Architecture</title><para>The spawn system follows a command-based architecture with separation of concerns:</para>
+<sect1 id="dir_ec78eb07ca45680dda148d5b3c7a447e_1autotoc_md114">
+<title>Architecture</title><para>The spawn system follows a scheduler-based architecture with separation of concerns:</para>
 <para><programlisting><codeline><highlight class="normal">┌─────────────────────┐<sp/><sp/><sp/><sp/>┌─────────────────────┐</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/>SpawnCondition<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/>│<sp/><sp/><sp/>SpawnStrategy<sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/>(when<sp/>to<sp/>spawn)<sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/>│<sp/><sp/><sp/>(how<sp/>to<sp/>spawn)<sp/><sp/><sp/><sp/>│</highlight></codeline>
@@ -25,47 +21,31 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼</highlight></codeline>
 <codeline><highlight class="normal">┌─────────────────────────────────────────────────┐</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GameObjectSpawnSystem<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/>(calculates<sp/>budget,<sp/>emits<sp/>SpawnCommands)<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SpawnScheduler<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>(evaluates<sp/>rules,<sp/>produces<sp/>ScheduledPlans)<sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">└─────────────────────┬───────────────────────────┘</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼</highlight></codeline>
 <codeline><highlight class="normal">┌─────────────────────────────────────────────────┐</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SpawnCommandDispatcher<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/>(routes<sp/>commands<sp/>to<sp/>SpawnManager)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GameObjectSpawnSystem<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>(reads<sp/>frame<sp/>events,<sp/>enqueues<sp/>SpawnCommands)<sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">└─────────────────────┬───────────────────────────┘</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼</highlight></codeline>
 <codeline><highlight class="normal">┌─────────────────────────────────────────────────┐</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SpawnManager<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/>(acquires<sp/>from<sp/>pool,<sp/>applies<sp/>strategy)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ScheduledSpawnPlanCommand<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>(dispatched<sp/>to<sp/>SpawnManager<sp/>for<sp/>execution)<sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">└─────────────────────────────────────────────────┘</highlight></codeline>
 </programlisting></para>
 </sect1>
-<sect1 id="dir_ec78eb07ca45680dda148d5b3c7a447e_1autotoc_md133">
-<title>Submodules</title><para><table rows="7" cols="2"><row>
+<sect1 id="dir_ec78eb07ca45680dda148d5b3c7a447e_1autotoc_md115">
+<title>Submodules</title><para><table rows="3" cols="2"><row>
 <entry thead="yes"><para>Directory  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
 </entry></row>
 <row>
-<entry thead="no"><para><computeroutput>commands/</computeroutput>  </para>
-</entry><entry thead="no"><para>SpawnCommand and DespawnCommand for deferred execution  </para>
-</entry></row>
-<row>
-<entry thead="no"><para><computeroutput>dispatcher/</computeroutput>  </para>
-</entry><entry thead="no"><para>Command dispatchers that route to managers  </para>
-</entry></row>
-<row>
-<entry thead="no"><para><computeroutput>logic/</computeroutput>  </para>
-</entry><entry thead="no"><para>Spawn conditions and strategies  </para>
-</entry></row>
-<row>
-<entry thead="no"><para><computeroutput>manager/</computeroutput>  </para>
-</entry><entry thead="no"><para>SpawnManager for pool-based spawning  </para>
-</entry></row>
-<row>
-<entry thead="no"><para><computeroutput>requests/</computeroutput>  </para>
-</entry><entry thead="no"><para>Data structures for spawn/despawn requests  </para>
+<entry thead="no"><para><computeroutput>components/</computeroutput>  </para>
+</entry><entry thead="no"><para>Spawn-related components (SpawnedByProfileComponent)  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>systems/</computeroutput>  </para>
@@ -74,25 +54,31 @@
 </table>
 </para>
 </sect1>
-<sect1 id="dir_ec78eb07ca45680dda148d5b3c7a447e_1autotoc_md134">
-<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>1.<sp/>Create<sp/>a<sp/>spawn<sp/>condition<sp/>(when<sp/>to<sp/>spawn)</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>condition<sp/>=<sp/>std::make_unique&lt;TimerSpawnCondition&gt;(2.0f);<sp/><sp/></highlight><highlight class="comment">//<sp/>Every<sp/>2<sp/>seconds</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>2.<sp/>Create<sp/>a<sp/>spawn<sp/>strategy<sp/>(how<sp/>to<sp/>configure<sp/>spawned<sp/>objects)</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>strategy<sp/>=<sp/>std::make_unique&lt;CallbackSpawnStrategy&gt;(</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>[](</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GameWorld&amp;<sp/>world,<sp/>GameObject&amp;<sp/>obj,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>UpdateContext&amp;<sp/>ctx)<sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>transform<sp/>=<sp/>obj.get&lt;TranslationStateComponent&gt;();</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>transform-&gt;setTranslation({0.0f,<sp/>0.0f,<sp/>0.0f});</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<sect1 id="dir_ec78eb07ca45680dda148d5b3c7a447e_1autotoc_md116">
+<title>Related Modules</title><para>The spawn system integrates with several other modules:</para>
+<para><itemizedlist>
+<listitem><para><computeroutput>helios.engine.mechanics.spawn.logic</computeroutput> — SpawnScheduler, SpawnCondition, SpawnStrategy</para>
+</listitem><listitem><para><computeroutput>helios.engine.mechanics.spawn.commands</computeroutput> — ScheduledSpawnPlanCommand</para>
+</listitem><listitem><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1runtime_1_1spawn" kindref="compound">helios.engine.runtime.spawn</ref></computeroutput> — SpawnManager, SpawnRequestHandler</para>
+</listitem><listitem><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1runtime_1_1pooling" kindref="compound">helios.engine.runtime.pooling</ref></computeroutput> — GameObjectPoolManager</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="dir_ec78eb07ca45680dda148d5b3c7a447e_1autotoc_md117">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>1.<sp/>Create<sp/>spawn<sp/>rules<sp/>with<sp/>conditions</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>scheduler<sp/>=<sp/>std::make_unique&lt;SpawnScheduler&gt;();</highlight></codeline>
+<codeline><highlight class="normal">scheduler-&gt;addRule(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>SpawnRuleId{1},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>std::make_unique&lt;TimerSpawnCondition&gt;(2.0f),<sp/><sp/></highlight><highlight class="comment">//<sp/>Every<sp/>2<sp/>seconds</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>enemyProfileId</highlight></codeline>
 <codeline><highlight class="normal">);</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>3.<sp/>Create<sp/>the<sp/>spawn<sp/>system</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>2.<sp/>Create<sp/>the<sp/>spawn<sp/>system<sp/>with<sp/>the<sp/>scheduler</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>spawnSystem<sp/>=<sp/>std::make_unique&lt;GameObjectSpawnSystem&gt;(</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>poolId,<sp/>std::move(condition)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>std::move(scheduler)</highlight></codeline>
 <codeline><highlight class="normal">);</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>4.<sp/>Register<sp/>with<sp/>the<sp/>game<sp/>loop</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>3.<sp/>Register<sp/>with<sp/>the<sp/>game<sp/>loop</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal">gameLoop.phase(PhaseType::Main)</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass()</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addSystem(std::move(spawnSystem));</highlight></codeline>

@@ -9,6 +9,7 @@ var structhelios_1_1math_1_1vec3 =
     [ "dot", "structhelios_1_1math_1_1vec3.html#ad64bf63ac24905fed6d397d59088340d", null ],
     [ "flipX", "structhelios_1_1math_1_1vec3.html#a09cdd10bca94c120bfcdc466a75b1306", null ],
     [ "flipY", "structhelios_1_1math_1_1vec3.html#adf0bd63ca6a323457f859e8199138d09", null ],
+    [ "isNormalized", "structhelios_1_1math_1_1vec3.html#a0daa995449d160d7a618e7055c3f31c8", null ],
     [ "length", "structhelios_1_1math_1_1vec3.html#a6146713ae785c06b31121c953357dda4", null ],
     [ "normalize", "structhelios_1_1math_1_1vec3.html#a3bbdd06a78770b9dadc233e0acca4295", null ],
     [ "operator==", "structhelios_1_1math_1_1vec3.html#aa551f170f2cba46c0b50cf48fdfb326b", null ],

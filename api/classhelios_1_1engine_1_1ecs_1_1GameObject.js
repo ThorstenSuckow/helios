@@ -4,6 +4,7 @@ var classhelios_1_1engine_1_1ecs_1_1GameObject =
     [ "GameObject", "classhelios_1_1engine_1_1ecs_1_1GameObject.html#ad18c1f425a24a178414fb56ac012d03a", null ],
     [ "~GameObject", "classhelios_1_1engine_1_1ecs_1_1GameObject.html#a83bc07b9e583dc3550797320af914d3f", null ],
     [ "add", "classhelios_1_1engine_1_1ecs_1_1GameObject.html#a4ab506f41218f4f1c4c6fad4252c4513", null ],
+    [ "components", "classhelios_1_1engine_1_1ecs_1_1GameObject.html#a9bac658c05ffd3595bbb745736a97d09", null ],
     [ "components", "classhelios_1_1engine_1_1ecs_1_1GameObject.html#a36c315dfb3091d39f9a50307d763ec7b", null ],
     [ "finalizeAttach", "classhelios_1_1engine_1_1ecs_1_1GameObject.html#af7ff904acd77051dd3f36b3a773ad797", null ],
     [ "get", "classhelios_1_1engine_1_1ecs_1_1GameObject.html#a5b1a6365e062590bf79fa725bb5c046c", null ],

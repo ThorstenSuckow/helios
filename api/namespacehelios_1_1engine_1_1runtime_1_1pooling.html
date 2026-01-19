@@ -107,25 +107,29 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>GameObject pooling and request handling for efficient object recycling.  
+<p>GameObject pooling for efficient object recycling.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:GameObjectPool" id="r_GameObjectPool"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html">GameObjectPool</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Object pool for efficient GameObject lifecycle management.  <a href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html#details">More...</a><br /></td></tr>
-<tr class="memitem:GameObjectPoolFacade" id="r_GameObjectPoolFacade"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolFacade.html">GameObjectPoolFacade</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Facade class that coordinates object pooling with the game world.  <a href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolFacade.html#details">More...</a><br /></td></tr>
+<tr class="memitem:GameObjectPoolConfig" id="r_GameObjectPoolConfig"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig.html">GameObjectPoolConfig</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration structure for creating a <a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html" title="Object pool for efficient GameObject lifecycle management.">GameObjectPool</a>.  <a href="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig.html#details">More...</a><br /></td></tr>
+<tr class="memitem:GameObjectPoolManager" id="r_GameObjectPoolManager"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager.html">GameObjectPoolManager</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">High-level manager for GameObject pooling operations.  <a href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager.html#details">More...</a><br /></td></tr>
 <tr class="memitem:GameObjectPoolRegistry" id="r_GameObjectPoolRegistry"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolRegistry.html">GameObjectPoolRegistry</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Central registry for managing multiple named GameObjectPools.  <a href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolRegistry.html#details">More...</a><br /></td></tr>
-<tr class="memitem:PoolRequestHandler" id="r_PoolRequestHandler"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolRequestHandler.html">PoolRequestHandler</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface for handlers that process spawn and despawn requests for a pool.  <a href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolRequestHandler.html#details">More...</a><br /></td></tr>
+<tr class="memitem:GameObjectPoolSnapshot" id="r_GameObjectPoolSnapshot"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolSnapshot.html">GameObjectPoolSnapshot</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Immutable snapshot of a <a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html" title="Object pool for efficient GameObject lifecycle management.">GameObjectPool</a>'s current state.  <a href="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolSnapshot.html#details">More...</a><br /></td></tr>
+<tr class="memitem:SpawnRequestHandler" id="r_SpawnRequestHandler"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1SpawnRequestHandler.html">SpawnRequestHandler</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface for handlers that process spawn and despawn requests.  <a href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1SpawnRequestHandler.html#details">More...</a><br /></td></tr>
 <tr class="memitem:PoolManagerRegistry" id="r_PoolManagerRegistry"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry.html">PoolManagerRegistry</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registry that maps GameObjectPoolIds to their PoolRequestHandlers.  <a href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registry that maps SpawnProfileIds to their SpawnRequestHandlers.  <a href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry.html#details">More...</a><br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>GameObject pooling and request handling for efficient object recycling. </p>
-<p>Provides <a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html" title="Object pool for efficient GameObject lifecycle management.">GameObjectPool</a> for pre-allocation, pooling registries, and request handlers for deferred acquire/release operations. </p>
+<div class="textblock"><p>GameObject pooling for efficient object recycling. </p>
+<p>Provides <a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html" title="Object pool for efficient GameObject lifecycle management.">GameObjectPool</a> for GUID-based entity tracking, registries for pool lookup, configuration structures for declarative pool setup, and managers for integration with GameWorld. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

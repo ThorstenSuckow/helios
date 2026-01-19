@@ -7,26 +7,37 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<sect1 id="dir_06ee9275ee912daca8cd477154f66702_1autotoc_md139">
+<sect1 id="dir_06ee9275ee912daca8cd477154f66702_1autotoc_md119">
 <title>helios::engine::mechanics::spawn::systems</title><para>Systems for spawn lifecycle management within the game loop.</para>
-<para>This namespace contains the GameObjectSpawnSystem which integrates spawning into the game loop by evaluating conditions and emitting spawn commands.</para>
 </sect1>
-<sect1 id="dir_06ee9275ee912daca8cd477154f66702_1autotoc_md140">
-<title>Systems</title><para><table rows="2" cols="2"><row>
+<sect1 id="dir_06ee9275ee912daca8cd477154f66702_1autotoc_md120">
+<title>Overview</title><para>This module contains the GameObjectSpawnSystem which integrates spawning into the game loop. The system evaluates spawn conditions via a SpawnScheduler and enqueues spawn commands for deferred execution.</para>
+</sect1>
+<sect1 id="dir_06ee9275ee912daca8cd477154f66702_1autotoc_md121">
+<title>Key Classes</title><para><table rows="2" cols="2"><row>
 <entry thead="yes"><para>System  </para>
 </entry><entry thead="yes"><para>Purpose  </para>
 </entry></row>
 <row>
 <entry thead="no"><para><computeroutput>GameObjectSpawnSystem</computeroutput>  </para>
-</entry><entry thead="no"><para>Evaluates SpawnConditions and emits SpawnCommands  </para>
+</entry><entry thead="no"><para>Evaluates SpawnScheduler rules and enqueues ScheduledSpawnPlanCommands  </para>
 </entry></row>
 </table>
 </para>
 </sect1>
-<sect1 id="dir_06ee9275ee912daca8cd477154f66702_1autotoc_md141">
-<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>condition<sp/>=<sp/>std::make_unique&lt;TimerSpawnCondition&gt;(2.0f);</highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>system<sp/>=<sp/>std::make_unique&lt;GameObjectSpawnSystem&gt;(poolId,<sp/>std::move(condition));</highlight></codeline>
+<sect1 id="dir_06ee9275ee912daca8cd477154f66702_1autotoc_md122">
+<title>System Flow</title><para>The GameObjectSpawnSystem performs the following each frame:</para>
+<para>1. <bold>Read Frame Events:</bold> Consumes <computeroutput>SpawnPlanRequestExecutedEvent</computeroutput> from the previous frame 2. <bold>Commit Completed Spawns:</bold> Updates the scheduler with successful spawn counts 3. <bold>Evaluate Conditions:</bold> Checks all spawn rules against current conditions 4. <bold>Drain Scheduled Plans:</bold> Enqueues ready plans as <computeroutput>ScheduledSpawnPlanCommand</computeroutput></para>
+</sect1>
+<sect1 id="dir_06ee9275ee912daca8cd477154f66702_1autotoc_md123">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Create<sp/>scheduler<sp/>with<sp/>spawn<sp/>rules</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>scheduler<sp/>=<sp/>std::make_unique&lt;SpawnScheduler&gt;();</highlight></codeline>
+<codeline><highlight class="normal">scheduler-&gt;addRule(enemyRuleId,<sp/>std::make_unique&lt;TimerSpawnCondition&gt;(2.0f),<sp/>enemyProfileId);</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Create<sp/>system<sp/>with<sp/>scheduler</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>system<sp/>=<sp/>std::make_unique&lt;GameObjectSpawnSystem&gt;(std::move(scheduler));</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Register<sp/>with<sp/>game<sp/>loop</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal">gameLoop.phase(PhaseType::Main)</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass()</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addSystem(std::move(system));</highlight></codeline>

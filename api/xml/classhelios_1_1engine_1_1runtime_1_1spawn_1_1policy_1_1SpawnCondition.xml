@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>helios::engine::runtime::spawn::policy::SpawnCondition</compoundname>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions_1_1TimerSpawnCondition" prot="public" virt="non-virtual">helios::engine::runtime::spawn::policy::conditions::TimerSpawnCondition</derivedcompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition_1ae32fb7e2816360aa7d59d3b2a21c656a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::engine::runtime::spawn::policy::SpawnCondition::~SpawnCondition</definition>
+        <argsstring>()=default</argsstring>
+        <name>~SpawnCondition</name>
+        <qualifiedname>helios::engine::runtime::spawn::policy::SpawnCondition::~SpawnCondition</qualifiedname>
+        <briefdescription>
+<para>Virtual destructor for proper polymorphic cleanup. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/policy/SpawnCondition.ixx" line="56" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition_1a8f099492bc15035f9d97382951d036bd" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool helios::engine::runtime::spawn::policy::SpawnCondition::isSatisfied</definition>
+        <argsstring>(const size_t requestedAmount, const SpawnRuleState &amp;spawnState, const helios::engine::runtime::pooling::GameObjectPoolSnapshot poolSnapshot, const helios::engine::runtime::world::UpdateContext &amp;updateContext) const noexcept=0</argsstring>
+        <name>isSatisfied</name>
+        <qualifiedname>helios::engine::runtime::spawn::policy::SpawnCondition::isSatisfied</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions_1_1TimerSpawnCondition_1a137d4f944a008bb75a522125b3a6167d">isSatisfied</reimplementedby>
+        <param>
+          <type>const size_t</type>
+          <declname>requestedAmount</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState" kindref="compound">SpawnRuleState</ref> &amp;</type>
+          <declname>spawnState</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolSnapshot" kindref="compound">helios::engine::runtime::pooling::GameObjectPoolSnapshot</ref></type>
+          <declname>poolSnapshot</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Evaluates whether the spawn condition is satisfied. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Called by <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRule_1a71619bd915eb81db9506579596b96cb8" kindref="member">SpawnRule::evaluate()</ref> to determine if spawning should occur. The implementation should check all required conditions (time elapsed, pool capacity, game state, etc.).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>requestedAmount</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of entities requested to spawn. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spawnState</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The rule&apos;s current runtime state. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>poolSnapshot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Snapshot of the pool&apos;s current capacity. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s context.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if spawning should occur, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/policy/SpawnCondition.ixx" line="72" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition_1a1e0f204a7662fbb8fc83f76a2f7b0abd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void helios::engine::runtime::spawn::policy::SpawnCondition::onCommit</definition>
+        <argsstring>(SpawnRuleState &amp;spawnRuleState, const size_t spawnAmount) const</argsstring>
+        <name>onCommit</name>
+        <qualifiedname>helios::engine::runtime::spawn::policy::SpawnCondition::onCommit</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions_1_1TimerSpawnCondition_1a2f1166b99782f2bbb37e06e0f1eb4dd8">onCommit</reimplementedby>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState" kindref="compound">SpawnRuleState</ref> &amp;</type>
+          <declname>spawnRuleState</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>spawnAmount</declname>
+        </param>
+        <briefdescription>
+<para>Called after a successful spawn to update condition state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Override this method to reset timers, increment counters, or perform other state updates after spawning completes.</para>
+<para>The default implementation is a no-op.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>spawnRuleState</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The rule&apos;s runtime state to update. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spawnAmount</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of entities that were spawned. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/policy/SpawnCondition.ixx" line="90" column="22" bodyfile="include/helios/engine/runtime/spawn/policy/SpawnCondition.ixx" bodystart="90" bodyend="95"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Abstract interface for determining when spawning should occur. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition" kindref="compound">SpawnCondition</ref> implements the Strategy pattern for spawn timing control. Concrete implementations determine whether spawning should occur based on time, game state, pool availability, or other conditions.</para>
+<para>## Responsibilities</para>
+<para><itemizedlist>
+<listitem><para>**isSatisfied():** Evaluates whether the condition is met for spawning</para>
+</listitem><listitem><para>**onCommit():** Updates state after a successful spawn (e.g., reset timer)</para>
+</listitem></itemizedlist>
+</para>
+<para>## Implementation Example</para>
+<para>```cpp class WaveSpawnCondition : public <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition" kindref="compound">SpawnCondition</ref> { public: bool isSatisfied(size_t amount, const SpawnRuleState&amp; state,
+                     GameObjectPoolSnapshot pool,
+                     const UpdateContext&amp; ctx) const noexcept override { return state.sinceLastSpawn() &gt;= waveInterval_ &amp;&amp; pool.inactiveCount &gt;= amount; }</para>
+<para>void <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition_1a1e0f204a7662fbb8fc83f76a2f7b0abd" kindref="member">onCommit(SpawnRuleState&amp; state, size_t count) const </ref>override { state.setSinceLastSpawn(0.0f); } }; ```</para>
+<para><simplesect kind="see"><para>TimerSpawnCondition </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRule" kindref="compound">SpawnRule</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>SpawnScheduler </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>helios::engine::runtime::spawn::policy::SpawnCondition</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition"/>
+      </node>
+      <node id="2">
+        <label>helios::engine::runtime::spawn::policy::conditions::TimerSpawnCondition</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions_1_1TimerSpawnCondition"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="include/helios/engine/runtime/spawn/policy/SpawnCondition.ixx" line="49" column="5" bodyfile="include/helios/engine/runtime/spawn/policy/SpawnCondition.ixx" bodystart="49" bodyend="98"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition_1a8f099492bc15035f9d97382951d036bd" prot="public" virt="pure-virtual"><scope>helios::engine::runtime::spawn::policy::SpawnCondition</scope><name>isSatisfied</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition_1a1e0f204a7662fbb8fc83f76a2f7b0abd" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::policy::SpawnCondition</scope><name>onCommit</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition_1ae32fb7e2816360aa7d59d3b2a21c656a" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::policy::SpawnCondition</scope><name>~SpawnCondition</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

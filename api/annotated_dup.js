@@ -75,7 +75,9 @@ var annotated_dup =
       [ "engine", "namespacehelios_1_1engine.html", [
         [ "core", "namespacehelios_1_1engine_1_1core.html", [
           [ "data", "namespacehelios_1_1engine_1_1core_1_1data.html", [
-            [ "GameObjectPoolId", "structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId.html", "structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" ]
+            [ "GameObjectPoolId", "structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId.html", "structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" ],
+            [ "SpawnProfileId", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId.html", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" ],
+            [ "SpawnRuleId", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleId.html", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleId" ]
           ] ]
         ] ],
         [ "ecs", "namespacehelios_1_1engine_1_1ecs.html", [
@@ -104,14 +106,8 @@ var annotated_dup =
               [ "Aim2DComponent", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent.html", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent" ],
               [ "ShootComponent", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent.html", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent" ]
             ] ],
-            [ "dispatcher", "namespacehelios_1_1engine_1_1mechanics_1_1combat_1_1dispatcher.html", [
-              [ "ShootCommandDispatcher", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1dispatcher_1_1ShootCommandDispatcher.html", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1dispatcher_1_1ShootCommandDispatcher" ]
-            ] ],
-            [ "manager", "namespacehelios_1_1engine_1_1mechanics_1_1combat_1_1manager.html", [
-              [ "ProjectilePoolManager", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager.html", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1manager_1_1ProjectilePoolManager" ]
-            ] ],
-            [ "requests", "namespacehelios_1_1engine_1_1mechanics_1_1combat_1_1requests.html", [
-              [ "ProjectileSpawnRequest", "structhelios_1_1engine_1_1mechanics_1_1combat_1_1requests_1_1ProjectileSpawnRequest.html", "structhelios_1_1engine_1_1mechanics_1_1combat_1_1requests_1_1ProjectileSpawnRequest" ]
+            [ "systems", "namespacehelios_1_1engine_1_1mechanics_1_1combat_1_1systems.html", [
+              [ "ProjectileSpawnSystem", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1systems_1_1ProjectileSpawnSystem.html", "classhelios_1_1engine_1_1mechanics_1_1combat_1_1systems_1_1ProjectileSpawnSystem" ]
             ] ]
           ] ],
           [ "input", "namespacehelios_1_1engine_1_1mechanics_1_1input.html", [
@@ -120,27 +116,8 @@ var annotated_dup =
             ] ]
           ] ],
           [ "spawn", "namespacehelios_1_1engine_1_1mechanics_1_1spawn.html", [
-            [ "commands", "namespacehelios_1_1engine_1_1mechanics_1_1spawn_1_1commands.html", [
-              [ "DespawnCommand", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1commands_1_1DespawnCommand.html", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1commands_1_1DespawnCommand" ],
-              [ "SpawnCommand", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1commands_1_1SpawnCommand.html", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1commands_1_1SpawnCommand" ]
-            ] ],
-            [ "dispatcher", "namespacehelios_1_1engine_1_1mechanics_1_1spawn_1_1dispatcher.html", [
-              [ "DespawnCommandDispatcher", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1dispatcher_1_1DespawnCommandDispatcher.html", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1dispatcher_1_1DespawnCommandDispatcher" ],
-              [ "SpawnCommandDispatcher", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher.html", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher" ]
-            ] ],
-            [ "logic", "namespacehelios_1_1engine_1_1mechanics_1_1spawn_1_1logic.html", [
-              [ "CallbackSpawnStrategy", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1CallbackSpawnStrategy.html", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1CallbackSpawnStrategy" ],
-              [ "MaxPerSecCondition", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1MaxPerSecCondition.html", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1MaxPerSecCondition" ],
-              [ "SpawnCondition", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition.html", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition" ],
-              [ "SpawnStrategy", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnStrategy.html", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnStrategy" ],
-              [ "TimerSpawnCondition", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1TimerSpawnCondition.html", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1TimerSpawnCondition" ]
-            ] ],
-            [ "manager", "namespacehelios_1_1engine_1_1mechanics_1_1spawn_1_1manager.html", [
-              [ "SpawnManager", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1manager_1_1SpawnManager.html", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1manager_1_1SpawnManager" ]
-            ] ],
-            [ "requests", "namespacehelios_1_1engine_1_1mechanics_1_1spawn_1_1requests.html", [
-              [ "DespawnRequest", "structhelios_1_1engine_1_1mechanics_1_1spawn_1_1requests_1_1DespawnRequest.html", "structhelios_1_1engine_1_1mechanics_1_1spawn_1_1requests_1_1DespawnRequest" ],
-              [ "SpawnRequest", "structhelios_1_1engine_1_1mechanics_1_1spawn_1_1requests_1_1SpawnRequest.html", "structhelios_1_1engine_1_1mechanics_1_1spawn_1_1requests_1_1SpawnRequest" ]
+            [ "components", "namespacehelios_1_1engine_1_1mechanics_1_1spawn_1_1components.html", [
+              [ "SpawnedByProfileComponent", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent.html", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent" ]
             ] ],
             [ "systems", "namespacehelios_1_1engine_1_1mechanics_1_1spawn_1_1systems.html", [
               [ "GameObjectSpawnSystem", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem.html", "classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem" ]
@@ -185,11 +162,6 @@ var annotated_dup =
               ] ]
             ] ]
           ] ],
-          [ "pool", "namespacehelios_1_1engine_1_1modules_1_1pool.html", [
-            [ "components", "namespacehelios_1_1engine_1_1modules_1_1pool_1_1components.html", [
-              [ "PoolIdComponent", "classhelios_1_1engine_1_1modules_1_1pool_1_1components_1_1PoolIdComponent.html", "classhelios_1_1engine_1_1modules_1_1pool_1_1components_1_1PoolIdComponent" ]
-            ] ]
-          ] ],
           [ "rendering", "namespacehelios_1_1engine_1_1modules_1_1rendering.html", [
             [ "model", "namespacehelios_1_1engine_1_1modules_1_1rendering_1_1model.html", [
               [ "components", "namespacehelios_1_1engine_1_1modules_1_1rendering_1_1model_1_1components.html", [
@@ -228,9 +200,6 @@ var annotated_dup =
           ] ]
         ] ],
         [ "runtime", "namespacehelios_1_1engine_1_1runtime.html", [
-          [ "factory", "namespacehelios_1_1engine_1_1runtime_1_1factory.html", [
-            [ "GameObjectFactory", "classhelios_1_1engine_1_1runtime_1_1factory_1_1GameObjectFactory.html", "classhelios_1_1engine_1_1runtime_1_1factory_1_1GameObjectFactory" ]
-          ] ],
           [ "gameloop", "namespacehelios_1_1engine_1_1runtime_1_1gameloop.html", [
             [ "GameLoop", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop" ],
             [ "Pass", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass.html", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass" ],
@@ -259,10 +228,67 @@ var annotated_dup =
           ] ],
           [ "pooling", "namespacehelios_1_1engine_1_1runtime_1_1pooling.html", [
             [ "GameObjectPool", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool" ],
-            [ "GameObjectPoolFacade", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolFacade.html", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolFacade" ],
+            [ "GameObjectPoolConfig", "structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig.html", "structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolConfig" ],
+            [ "GameObjectPoolManager", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager.html", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager" ],
             [ "GameObjectPoolRegistry", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolRegistry.html", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolRegistry" ],
-            [ "PoolRequestHandler", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolRequestHandler.html", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolRequestHandler" ],
+            [ "GameObjectPoolSnapshot", "structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolSnapshot.html", "structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolSnapshot" ],
+            [ "SpawnRequestHandler", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1SpawnRequestHandler.html", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1SpawnRequestHandler" ],
             [ "PoolManagerRegistry", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry.html", "classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry" ]
+          ] ],
+          [ "spawn", "namespacehelios_1_1engine_1_1runtime_1_1spawn.html", [
+            [ "behavior", "namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1behavior.html", [
+              [ "initializers", "namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers.html", [
+                [ "EmitterInitializer", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1EmitterInitializer.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1EmitterInitializer" ],
+                [ "RandomDirectionInitializer", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1RandomDirectionInitializer.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1RandomDirectionInitializer" ]
+              ] ],
+              [ "placements", "namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements.html", [
+                [ "EmitterSpawnPlacer", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1EmitterSpawnPlacer.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1EmitterSpawnPlacer" ],
+                [ "RandomSpawnPlacer", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1RandomSpawnPlacer.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1RandomSpawnPlacer" ]
+              ] ],
+              [ "SpawnInitializer", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer" ],
+              [ "SpawnPlacer", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer" ]
+            ] ],
+            [ "commands", "namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1commands.html", [
+              [ "DespawnCommand", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1DespawnCommand" ],
+              [ "ScheduledSpawnPlanCommand", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand" ],
+              [ "SpawnCommand", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand" ]
+            ] ],
+            [ "dispatcher", "namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher.html", [
+              [ "DespawnCommandDispatcher", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1DespawnCommandDispatcher.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1DespawnCommandDispatcher" ],
+              [ "ScheduledSpawnPlanCommandDispatcher", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1ScheduledSpawnPlanCommandDispatcher.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1ScheduledSpawnPlanCommandDispatcher" ],
+              [ "SpawnCommandDispatcher", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher" ]
+            ] ],
+            [ "events", "namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1events.html", [
+              [ "SpawnPlanRequestExecutedEvent", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1events_1_1SpawnPlanRequestExecutedEvent.html", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1events_1_1SpawnPlanRequestExecutedEvent" ]
+            ] ],
+            [ "policy", "namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1policy.html", [
+              [ "amount", "namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount.html", [
+                [ "FixedSpawnAmount", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1FixedSpawnAmount.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1FixedSpawnAmount" ],
+                [ "SpawnAmountByCallback", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback" ],
+                [ "SpawnAmountProvider", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider" ]
+              ] ],
+              [ "conditions", "namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions.html", [
+                [ "TimerSpawnCondition", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions_1_1TimerSpawnCondition.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions_1_1TimerSpawnCondition" ]
+              ] ],
+              [ "SpawnCondition", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition" ],
+              [ "SpawnRule", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRule.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRule" ],
+              [ "SpawnRuleState", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState" ]
+            ] ],
+            [ "requests", "namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1requests.html", [
+              [ "DespawnRequest", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1requests_1_1DespawnRequest.html", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1requests_1_1DespawnRequest" ],
+              [ "ScheduledSpawnPlanRequest", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1requests_1_1ScheduledSpawnPlanRequest.html", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1requests_1_1ScheduledSpawnPlanRequest" ],
+              [ "SpawnRequest", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1requests_1_1SpawnRequest.html", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1requests_1_1SpawnRequest" ]
+            ] ],
+            [ "scheduling", "namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling.html", [
+              [ "ScheduledSpawnPlan", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1ScheduledSpawnPlan.html", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1ScheduledSpawnPlan" ],
+              [ "SpawnPlan", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnPlan.html", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnPlan" ],
+              [ "SpawnScheduler", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler" ]
+            ] ],
+            [ "EmitterContext", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1EmitterContext.html", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1EmitterContext" ],
+            [ "SpawnContext", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext.html", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext" ],
+            [ "SpawnManager", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" ],
+            [ "SpawnPlanCursor", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnPlanCursor.html", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnPlanCursor" ],
+            [ "SpawnProfile", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile.html", "structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile" ]
           ] ]
         ] ],
         [ "tooling", "namespacehelios_1_1engine_1_1tooling.html", [
@@ -378,6 +404,8 @@ var annotated_dup =
     ] ],
     [ "std", null, [
       [ "hash&lt; helios::engine::core::data::GameObjectPoolId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId_01_4" ],
+      [ "hash&lt; helios::engine::core::data::SpawnProfileId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnProfileId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnProfileId_01_4" ],
+      [ "hash&lt; helios::engine::core::data::SpawnRuleId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnRuleId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnRuleId_01_4" ],
       [ "hash&lt; helios::util::Guid &gt;", "structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4.html", "structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4" ]
     ] ]
 ];

@@ -1,0 +1,197 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand" prot="public" virt="non-virtual">helios::engine::runtime::messaging::command::WorldCommand</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1ab0149a376ba342e33db5eb9f095e38d5" prot="private" static="no" mutable="no">
+        <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1ScheduledSpawnPlan" kindref="compound">helios::engine::runtime::spawn::scheduling::ScheduledSpawnPlan</ref></type>
+        <definition>const helios::engine::runtime::spawn::scheduling::ScheduledSpawnPlan helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand::scheduledSpawnPlan_</definition>
+        <argsstring></argsstring>
+        <name>scheduledSpawnPlan_</name>
+        <qualifiedname>helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand::scheduledSpawnPlan_</qualifiedname>
+        <briefdescription>
+<para>The scheduled spawn plan to execute. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/commands/ScheduledSpawnPlanCommand.ixx" line="43" column="78" bodyfile="include/helios/engine/runtime/spawn/commands/ScheduledSpawnPlanCommand.ixx" bodystart="43" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1a8caa4ca33019b264777e735faf2b1d00" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand::ScheduledSpawnPlanCommand</definition>
+        <argsstring>(helios::engine::runtime::spawn::scheduling::ScheduledSpawnPlan scheduledSpawnPlan)</argsstring>
+        <name>ScheduledSpawnPlanCommand</name>
+        <qualifiedname>helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand::ScheduledSpawnPlanCommand</qualifiedname>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1ScheduledSpawnPlan" kindref="compound">helios::engine::runtime::spawn::scheduling::ScheduledSpawnPlan</ref></type>
+          <declname>scheduledSpawnPlan</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a command with the given spawn plan. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scheduledSpawnPlan</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spawn plan to execute. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/commands/ScheduledSpawnPlanCommand.ixx" line="52" column="18" bodyfile="include/helios/engine/runtime/spawn/commands/ScheduledSpawnPlanCommand.ixx" bodystart="52" bodyend="56"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1a43b2f3da8dd5e0a18e0d6e72973c34e1" compoundref="ScheduledSpawnPlanCommand_8ixx" startline="91" endline="93">scheduledSpawnPlan</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1ac52d2b8e0f355b14e1a4777c9519b675" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand::execute</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld) const noexcept override</argsstring>
+        <name>execute</name>
+        <qualifiedname>helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand::execute</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand_1aca8697eac44a696ada96078626b0b103">execute</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <briefdescription>
+<para>Direct execution is a no-op; dispatching is required. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This command requires a dispatcher to route it to the <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kindref="compound">SpawnManager</ref>. Direct execution does nothing.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world (unused). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/commands/ScheduledSpawnPlanCommand.ixx" line="66" column="14" bodyfile="include/helios/engine/runtime/spawn/commands/ScheduledSpawnPlanCommand.ixx" bodystart="66" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1a78a32b69a8df38b4f4c543010467df0c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand::accept</definition>
+        <argsstring>(helios::engine::runtime::world::GameWorld &amp;gameWorld, helios::engine::runtime::messaging::command::WorldCommandDispatcher &amp;dispatcher) const noexcept override</argsstring>
+        <name>accept</name>
+        <qualifiedname>helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand::accept</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand_1a5cbe95921020642bfef379ec1bf97c53">accept</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref> &amp;</type>
+          <declname>gameWorld</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommandDispatcher" kindref="compound">helios::engine::runtime::messaging::command::WorldCommandDispatcher</ref> &amp;</type>
+          <declname>dispatcher</declname>
+        </param>
+        <briefdescription>
+<para>Accepts a dispatcher for command routing. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Invokes the dispatcher&apos;s dispatch method, allowing it to handle this command type appropriately (typically routing to <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kindref="compound">SpawnManager</ref>).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The game world. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dispatcher</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dispatcher to route this command to. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/commands/ScheduledSpawnPlanCommand.ixx" line="79" column="14" bodyfile="include/helios/engine/runtime/spawn/commands/ScheduledSpawnPlanCommand.ixx" bodystart="79" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1a43b2f3da8dd5e0a18e0d6e72973c34e1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1ScheduledSpawnPlan" kindref="compound">helios::engine::runtime::spawn::scheduling::ScheduledSpawnPlan</ref></type>
+        <definition>helios::engine::runtime::spawn::scheduling::ScheduledSpawnPlan helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand::scheduledSpawnPlan</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>scheduledSpawnPlan</name>
+        <qualifiedname>helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand::scheduledSpawnPlan</qualifiedname>
+        <briefdescription>
+<para>Returns the scheduled spawn plan. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The ScheduledSpawnPlan wrapped by this command. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/commands/ScheduledSpawnPlanCommand.ixx" line="91" column="73" bodyfile="include/helios/engine/runtime/spawn/commands/ScheduledSpawnPlanCommand.ixx" bodystart="91" bodyend="93"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1a8caa4ca33019b264777e735faf2b1d00" compoundref="ScheduledSpawnPlanCommand_8ixx" startline="52" endline="56">ScheduledSpawnPlanCommand</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Command for executing a scheduled spawn plan. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand" kindref="compound">ScheduledSpawnPlanCommand</ref> wraps a ScheduledSpawnPlan and routes it to the appropriate dispatcher for execution. The command itself does not perform spawning directly; instead, it delegates to a dispatcher which forwards the request to the <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kindref="compound">SpawnManager</ref>.</para>
+<para>## Execution Flow</para>
+<para>1. GameObjectSpawnSystem creates command from ScheduledSpawnPlan 2. Command is added to CommandBuffer 3. CommandBuffer flushes and calls <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1a78a32b69a8df38b4f4c543010467df0c" kindref="member">accept()</ref> on each command 4. Dispatcher routes command to <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kindref="compound">SpawnManager</ref> 5. <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kindref="compound">SpawnManager</ref> processes the spawn request</para>
+<para><simplesect kind="see"><para>ScheduledSpawnPlan </para>
+</simplesect>
+<simplesect kind="see"><para>ScheduledSpawnPlanCommandDispatcher </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kindref="compound">SpawnManager</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::runtime::messaging::command::WorldCommand</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>helios::engine::runtime::messaging::command::WorldCommand</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/runtime/spawn/commands/ScheduledSpawnPlanCommand.ixx" line="38" column="5" bodyfile="include/helios/engine/runtime/spawn/commands/ScheduledSpawnPlanCommand.ixx" bodystart="38" bodyend="95"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1a78a32b69a8df38b4f4c543010467df0c" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand</scope><name>accept</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1ac52d2b8e0f355b14e1a4777c9519b675" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand</scope><name>execute</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1a43b2f3da8dd5e0a18e0d6e72973c34e1" prot="public" virt="non-virtual"><scope>helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand</scope><name>scheduledSpawnPlan</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1ab0149a376ba342e33db5eb9f095e38d5" prot="private" virt="non-virtual"><scope>helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand</scope><name>scheduledSpawnPlan_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand_1a8caa4ca33019b264777e735faf2b1d00" prot="public" virt="non-virtual"><scope>helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand</scope><name>ScheduledSpawnPlanCommand</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1WorldCommand_1a4d66424c22b64a9712778d6697d558b7" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand</scope><name>~WorldCommand</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

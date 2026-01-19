@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2runtime_2spawn_2scheduling_2README_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling">helios::engine::runtime::spawn::scheduling</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::runtime::spawn::scheduling</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Spawn<sp/>scheduling<sp/>and<sp/>plan<sp/>management.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>the<sp/>scheduling<sp/>layer<sp/>for<sp/>the<sp/>spawn<sp/>system.<sp/>The<sp/>SpawnScheduler<sp/>evaluates<sp/>spawn<sp/>rules<sp/>and<sp/>produces<sp/>ScheduledSpawnPlan<sp/>instances<sp/>that<sp/>are<sp/>then<sp/>processed<sp/>by<sp/>the<sp/>command<sp/>pipeline.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SpawnScheduler`<sp/>|<sp/>Evaluates<sp/>rules<sp/>and<sp/>produces<sp/>scheduled<sp/>plans<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SpawnPlan`<sp/>|<sp/>Data<sp/>describing<sp/>a<sp/>planned<sp/>spawn<sp/>(rule,<sp/>amount,<sp/>pool)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ScheduledSpawnPlan`<sp/>|<sp/>A<sp/>plan<sp/>paired<sp/>with<sp/>its<sp/>spawn<sp/>profile<sp/>ID<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Workflow</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">SpawnRule::evaluate()<sp/>→<sp/>SpawnPlan<sp/>→<sp/>ScheduledSpawnPlan<sp/>→<sp/>Command<sp/>→<sp/>SpawnManager</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">SpawnScheduler<sp/>scheduler;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Add<sp/>rules<sp/>with<sp/>their<sp/>profiles</highlight></codeline>
+<codeline><highlight class="normal">scheduler.addRule(enemyProfileId,<sp/>std::make_unique&lt;TimerSpawnRule&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>ruleId,<sp/>2.0f,<sp/>3<sp/><sp/>//<sp/>Every<sp/>2s,<sp/>spawn<sp/>up<sp/>to<sp/>3</highlight></codeline>
+<codeline><highlight class="normal">));</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Each<sp/>frame<sp/>in<sp/>GameObjectSpawnSystem</highlight></codeline>
+<codeline><highlight class="normal">scheduler.evaluate(updateContext);</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>plans<sp/>=<sp/>scheduler.drainScheduledPlans();</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Plans<sp/>are<sp/>converted<sp/>to<sp/>commands<sp/>for<sp/>execution</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::runtime::spawn::scheduling</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Spawn<sp/>scheduling<sp/>and<sp/>plan<sp/>management.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>the<sp/>SpawnScheduler<sp/>for<sp/>evaluating<sp/>rules<sp/>and<sp/>producing<sp/>spawn<sp/>plans<sp/>that<sp/>feed<sp/>into<sp/>the<sp/>command<sp/>pipeline.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+    </programlisting>
+    <location file="include/helios/engine/runtime/spawn/scheduling/README.md"/>
+  </compounddef>
+</doxygen>

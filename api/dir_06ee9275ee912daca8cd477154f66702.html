@@ -110,7 +110,7 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_06ee9275ee912daca8cd477154f66702_dep.svg" width="635" height="178"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_06ee9275ee912daca8cd477154f66702_dep.svg" width="152" height="156"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-files" class="groupheader"><a id="files" name="files"></a>
@@ -118,26 +118,37 @@ Files</h2></td></tr>
 <tr class="memitem:_5Fmodule_2Eixx" id="r__5Fmodule_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="helios_2engine_2mechanics_2spawn_2systems_2__module_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="helios_2engine_2mechanics_2spawn_2systems_2__module_8ixx.html">_module.ixx</a></td></tr>
 <tr class="memdesc:helios_2engine_2mechanics_2spawn_2systems_2__module_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggregate module for <a class="el" href="namespacehelios_1_1engine_1_1mechanics_1_1spawn_1_1systems.html" title="Systems for spawn lifecycle management.">helios::engine::mechanics::spawn::systems</a> namespace. <br /></td></tr>
 <tr class="memitem:GameObjectSpawnSystem_2Eixx" id="r_GameObjectSpawnSystem_2Eixx"><td class="memItemLeft" align="right" valign="top"><a href="GameObjectSpawnSystem_8ixx_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="GameObjectSpawnSystem_8ixx.html">GameObjectSpawnSystem.ixx</a></td></tr>
-<tr class="memdesc:GameObjectSpawnSystem_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">System for spawning GameObjects from a pool into the level. <br /></td></tr>
+<tr class="memdesc:GameObjectSpawnSystem_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">System for processing spawn schedules and enqueuing spawn commands. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md139"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md119"></a>
 helios::engine::mechanics::spawn::systems</h1>
 <p>Systems for spawn lifecycle management within the game loop.</p>
-<p>This namespace contains the GameObjectSpawnSystem which integrates spawning into the game loop by evaluating conditions and emitting spawn commands.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md140"></a>
-Systems</h1>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md120"></a>
+Overview</h1>
+<p>This module contains the GameObjectSpawnSystem which integrates spawning into the game loop. The system evaluates spawn conditions via a SpawnScheduler and enqueues spawn commands for deferred execution.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md121"></a>
+Key Classes</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">System  </th><th class="markdownTableHeadNone">Purpose  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">GameObjectSpawnSystem</span>  </td><td class="markdownTableBodyNone">Evaluates SpawnConditions and emits SpawnCommands  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">GameObjectSpawnSystem</span>  </td><td class="markdownTableBodyNone">Evaluates SpawnScheduler rules and enqueues ScheduledSpawnPlanCommands  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md141"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md122"></a>
+System Flow</h1>
+<p>The GameObjectSpawnSystem performs the following each frame:</p>
+<p>1. <b>Read Frame Events:</b> Consumes <span class="tt">SpawnPlanRequestExecutedEvent</span> from the previous frame 2. <b>Commit Completed Spawns:</b> Updates the scheduler with successful spawn counts 3. <b>Evaluate Conditions:</b> Checks all spawn rules against current conditions 4. <b>Drain Scheduled Plans:</b> Enqueues ready plans as <span class="tt">ScheduledSpawnPlanCommand</span></p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md123"></a>
 Usage</h1>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> condition = std::make_unique&lt;TimerSpawnCondition&gt;(2.0f);</div>
-<div class="line"><span class="keyword">auto</span> system = std::make_unique&lt;GameObjectSpawnSystem&gt;(poolId, std::move(condition));</div>
+<div class="fragment"><div class="line"><span class="comment">// Create scheduler with spawn rules</span></div>
+<div class="line"><span class="keyword">auto</span> scheduler = std::make_unique&lt;SpawnScheduler&gt;();</div>
+<div class="line">scheduler-&gt;addRule(enemyRuleId, std::make_unique&lt;TimerSpawnCondition&gt;(2.0f), enemyProfileId);</div>
 <div class="line"> </div>
+<div class="line"><span class="comment">// Create system with scheduler</span></div>
+<div class="line"><span class="keyword">auto</span> system = std::make_unique&lt;GameObjectSpawnSystem&gt;(std::move(scheduler));</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Register with game loop</span></div>
 <div class="line">gameLoop.phase(PhaseType::Main)</div>
 <div class="line">    .addPass()</div>
 <div class="line">    .addSystem(std::move(system));</div>

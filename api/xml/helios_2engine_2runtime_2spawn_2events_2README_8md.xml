@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2runtime_2spawn_2events_2README_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1events">helios::engine::runtime::spawn::events</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::runtime::spawn::events</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Spawn-related<sp/>events<sp/>for<sp/>cross-frame<sp/>communication.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>events<sp/>that<sp/>are<sp/>pushed<sp/>to<sp/>the<sp/>frame<sp/>event<sp/>bus<sp/>to<sp/>enable<sp/>communication<sp/>between<sp/>the<sp/>spawn<sp/>system<sp/>and<sp/>the<sp/>scheduling<sp/>system.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SpawnPlanRequestExecutedEvent`<sp/>|<sp/>Signals<sp/>that<sp/>a<sp/>spawn<sp/>plan<sp/>was<sp/>executed<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Events<sp/>are<sp/>pushed<sp/>by<sp/>the<sp/>SpawnManager<sp/>after<sp/>processing<sp/>spawn<sp/>requests:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>In<sp/>SpawnManager::flush()</highlight></codeline>
+<codeline><highlight class="normal">updateContext.pushFrame&lt;SpawnPlanRequestExecutedEvent&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>spawnRuleId,<sp/>actualSpawnCount</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Events<sp/>are<sp/>read<sp/>by<sp/>the<sp/>GameObjectSpawnSystem<sp/>in<sp/>the<sp/>next<sp/>frame:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>In<sp/>GameObjectSpawnSystem::update()</highlight></codeline>
+<codeline><highlight class="normal">for<sp/>(const<sp/>auto&amp;<sp/>evt<sp/>:<sp/>updateContext.readFrame&lt;SpawnPlanRequestExecutedEvent&gt;())<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>spawnScheduler_-&gt;commit(evt.spawnRuleId,<sp/>evt.spawnCount);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::runtime::spawn::events</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Spawn-related<sp/>events<sp/>for<sp/>cross-frame<sp/>communication.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Contains<sp/>events<sp/>pushed<sp/>to<sp/>the<sp/>frame<sp/>event<sp/>bus<sp/>to<sp/>signal<sp/>spawn<sp/>completion<sp/>and<sp/>enable<sp/>scheduler<sp/>state<sp/>updates.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+    </programlisting>
+    <location file="include/helios/engine/runtime/spawn/events/README.md"/>
+  </compounddef>
+</doxygen>

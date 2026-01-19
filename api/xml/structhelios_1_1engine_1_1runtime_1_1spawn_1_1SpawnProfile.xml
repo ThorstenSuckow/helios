@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile" kind="struct" language="C++" prot="public">
+    <compoundname>helios::engine::runtime::spawn::SpawnProfile</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile_1a52e221efa800ca806f3f31828bbc8504" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">helios::engine::core::data::GameObjectPoolId</ref></type>
+        <definition>const helios::engine::core::data::GameObjectPoolId helios::engine::runtime::spawn::SpawnProfile::gameObjectPoolId</definition>
+        <argsstring></argsstring>
+        <name>gameObjectPoolId</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnProfile::gameObjectPoolId</qualifiedname>
+        <briefdescription>
+<para>The pool from which entities are acquired. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/SpawnProfile.ixx" line="48" column="60" bodyfile="include/helios/engine/runtime/spawn/SpawnProfile.ixx" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile_1a31ff9ddd311915656e1e92bfcdc3807f" prot="public" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer" kindref="compound">helios::engine::runtime::spawn::behavior::SpawnPlacer</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;helios::engine::runtime::spawn::behavior::SpawnPlacer&gt; helios::engine::runtime::spawn::SpawnProfile::spawnPlacer</definition>
+        <argsstring></argsstring>
+        <name>spawnPlacer</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnProfile::spawnPlacer</qualifiedname>
+        <briefdescription>
+<para>Strategy for determining spawn positions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/SpawnProfile.ixx" line="53" column="25" bodyfile="include/helios/engine/runtime/spawn/SpawnProfile.ixx" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile_1a94c707d0499fe9773d0ed8617678d36f" prot="public" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer" kindref="compound">helios::engine::runtime::spawn::behavior::SpawnInitializer</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;helios::engine::runtime::spawn::behavior::SpawnInitializer&gt; helios::engine::runtime::spawn::SpawnProfile::spawnInitializer</definition>
+        <argsstring></argsstring>
+        <name>spawnInitializer</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnProfile::spawnInitializer</qualifiedname>
+        <briefdescription>
+<para>Strategy for initializing spawned entity state. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/SpawnProfile.ixx" line="58" column="25" bodyfile="include/helios/engine/runtime/spawn/SpawnProfile.ixx" bodystart="58" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Configuration profile defining spawn behavior for a pool. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile" kindref="compound">SpawnProfile</ref> bundles a pool ID with the behaviors that control how spawned entities are positioned and initialized. Each profile is registered with a SpawnProfileId in the <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kindref="compound">SpawnManager</ref>.</para>
+<para>A profile consists of:<itemizedlist>
+<listitem><para>**Pool ID:** Which pool to acquire entities from</para>
+</listitem><listitem><para>**Placer:** Determines spawn position (random, formation, emitter-relative)</para>
+</listitem><listitem><para>**Initializer:** Configures entity state (velocity, direction, stats)</para>
+</listitem></itemizedlist>
+</para>
+<para>Example: ```cpp auto profile = std::make_unique&lt;SpawnProfile&gt;(<ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile" kindref="compound">SpawnProfile</ref>{ .gameObjectPoolId = bulletPoolId, .spawnPlacer = std::make_unique&lt;EmitterRelativePlacer&gt;(), .spawnInitializer = std::make_unique&lt;ProjectileInitializer&gt;(speed) }); spawnManager.addSpawnProfile(profileId, std::move(profile)); ```</para>
+<para><simplesect kind="see"><para>SpawnPlacer </para>
+</simplesect>
+<simplesect kind="see"><para>SpawnInitializer </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kindref="compound">SpawnManager</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>helios::engine::core::data::GameObjectPoolId</label>
+        <link refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::runtime::spawn::SpawnProfile</label>
+        <link refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>gameObjectPoolId</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="include/helios/engine/runtime/spawn/SpawnProfile.ixx" line="43" column="5" bodyfile="include/helios/engine/runtime/spawn/SpawnProfile.ixx" bodystart="43" bodyend="60"/>
+    <listofallmembers>
+      <member refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile_1a52e221efa800ca806f3f31828bbc8504" prot="public" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnProfile</scope><name>gameObjectPoolId</name></member>
+      <member refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile_1a94c707d0499fe9773d0ed8617678d36f" prot="public" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnProfile</scope><name>spawnInitializer</name></member>
+      <member refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile_1a31ff9ddd311915656e1e92bfcdc3807f" prot="public" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnProfile</scope><name>spawnPlacer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

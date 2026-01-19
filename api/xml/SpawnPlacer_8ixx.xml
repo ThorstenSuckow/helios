@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="SpawnPlacer_8ixx" kind="file" language="C++">
+    <compoundname>SpawnPlacer.ixx</compoundname>
+    <includes local="no">optional</includes>
+    <includes refid="Guid_8ixx" local="no">helios.util.Guid</includes>
+    <includes refid="helios_2math_2__module_8ixx" local="no">helios.math</includes>
+    <includes refid="SpawnContext_8ixx" local="no">helios.engine.runtime.spawn.SpawnContext</includes>
+    <includes refid="SpawnPlanCursor_8ixx" local="no">helios.engine.runtime.spawn.SpawnPlanCursor</includes>
+    <incdepgraph>
+      <node id="14">
+        <label>helios.engine.runtime.spawn.EmitterContext</label>
+        <link refid="EmitterContext_8ixx"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>helios.engine.runtime.spawn.SpawnContext</label>
+        <link refid="SpawnContext_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>helios.engine.runtime.spawn.SpawnPlanCursor</label>
+        <link refid="SpawnPlanCursor_8ixx"/>
+      </node>
+      <node id="1">
+        <label>include/helios/engine/runtime/spawn/behavior/SpawnPlacer.ixx</label>
+        <link refid="SpawnPlacer_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>helios.math.TransformType</label>
+        <link refid="TransformType_8ixx"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>helios.math</label>
+        <link refid="helios_2math_2__module_8ixx"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>helios.math.concepts</label>
+        <link refid="helios_2math_2concepts_2__module_8ixx"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>helios.math.transform</label>
+        <link refid="helios_2math_2transform_2__module_8ixx"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>helios.math.types</label>
+        <link refid="helios_2math_2types_2__module_8ixx"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>helios.math.utils</label>
+        <link refid="utils_8ixx"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios.util.Guid</label>
+        <link refid="Guid_8ixx"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>atomic</label>
+      </node>
+      <node id="5">
+        <label>cstdint</label>
+      </node>
+      <node id="9">
+        <label>numbers</label>
+      </node>
+      <node id="2">
+        <label>optional</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer" prot="public">helios::engine::runtime::spawn::behavior::SpawnPlacer</innerclass>
+    <innernamespace refid="namespacehelios">helios</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine">helios::engine</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime">helios::engine::runtime</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1spawn">helios::engine::runtime::spawn</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1behavior">helios::engine::runtime::spawn::behavior</innernamespace>
+    <briefdescription>
+<para>Abstract interface for determining spawn positions. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/**</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>@file<sp/>SpawnPlacer.ixx</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>@brief<sp/>Abstract<sp/>interface<sp/>for<sp/>determining<sp/>spawn<sp/>positions.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">module</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;optional&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8runtime_8spawn_8behavior_8SpawnPlacer" kindref="compound">helios.engine.runtime.spawn.behavior.SpawnPlacer</ref>;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8runtime_8spawn_8SpawnPlanCursor" kindref="compound">helios.engine.runtime.spawn.SpawnPlanCursor</ref>;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8runtime_8spawn_8SpawnContext" kindref="compound">helios.engine.runtime.spawn.SpawnContext</ref>;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8math" kindref="compound">helios.math</ref>;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8util_8Guid" kindref="compound">helios.util.Guid</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1behavior" kindref="compound">helios::engine::runtime::spawn::behavior</ref><sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Abstract<sp/>interface<sp/>for<sp/>determining<sp/>spawn<sp/>positions.</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>SpawnPlacer<sp/>defines<sp/>the<sp/>strategy<sp/>for<sp/>calculating<sp/>where<sp/>a<sp/>spawned</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>entity<sp/>should<sp/>be<sp/>placed<sp/>in<sp/>the<sp/>world.<sp/>Implementations<sp/>can<sp/>provide<sp/>various</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>placement<sp/>strategies:</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>**RandomPlacer:**<sp/>Random<sp/>position<sp/>within<sp/>level<sp/>bounds</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>**FormationPlacer:**<sp/>Grid<sp/>or<sp/>pattern-based<sp/>placement</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>**EmitterRelativePlacer:**<sp/>Offset<sp/>from<sp/>emitter<sp/>position</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>**FixedPlacer:**<sp/>Predetermined<sp/>spawn<sp/>points</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Example<sp/>implementation:</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```cpp</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>class<sp/>RandomPlacer<sp/>:<sp/>public<sp/>SpawnPlacer<sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>public:</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/>vec3f<sp/>getPosition(const<sp/>Guid&amp;<sp/>guid,<sp/>const<sp/>aabbf&amp;<sp/>bounds,</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const<sp/>SpawnPlanCursor&amp;<sp/>cursor,</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const<sp/>SpawnContext&amp;<sp/>ctx)<sp/>override<sp/>{</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>Random::pointInBounds(bounds);</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>};</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>SpawnProfile</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>SpawnInitializer</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>SpawnContext</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46" refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer" kindref="compound">SpawnPlacer</ref><sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50" refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer_1ac07de59ae9dc454269cdef3a8b9a73ba" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer_1ac07de59ae9dc454269cdef3a8b9a73ba" kindref="member">~SpawnPlacer</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Calculates<sp/>the<sp/>spawn<sp/>position<sp/>for<sp/>an<sp/>entity.</highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>guid<sp/>The<sp/>GUID<sp/>of<sp/>the<sp/>entity<sp/>being<sp/>spawned.</highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>bounds<sp/>The<sp/>level<sp/>bounds<sp/>to<sp/>spawn<sp/>within.</highlight></codeline>
+<codeline lineno="57"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>cursor<sp/>The<sp/>current<sp/>position<sp/>within<sp/>the<sp/>spawn<sp/>batch.</highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>spawnContext<sp/>Context<sp/>data<sp/>including<sp/>optional<sp/>emitter<sp/>info.</highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>world<sp/>position<sp/>for<sp/>the<sp/>spawned<sp/>entity.</highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62" refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer_1a073b2f84c272f2b6feca0f24822bd80d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref><sp/><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer_1a073b2f84c272f2b6feca0f24822bd80d" kindref="member">getPosition</ref>(</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref>&amp;<sp/>guid,</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1math_1a124c0492430aeecedc1c1a5ece4ba488" kindref="member">helios::math::aabbf</ref>&amp;<sp/>bounds,</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnPlanCursor" kindref="compound">SpawnPlanCursor</ref>&amp;<sp/>cursor,</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext" kindref="compound">SpawnContext</ref>&amp;<sp/>spawnContext</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="include/helios/engine/runtime/spawn/behavior/SpawnPlacer.ixx"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnPlanCursor" kind="struct" language="C++" prot="public">
+    <compoundname>helios::engine::runtime::spawn::SpawnPlanCursor</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnPlanCursor_1aa90b7dfe55938a408966953c93535a1b" prot="public" static="no" mutable="no">
+        <type>const size_t</type>
+        <definition>const size_t helios::engine::runtime::spawn::SpawnPlanCursor::spawnCount</definition>
+        <argsstring></argsstring>
+        <name>spawnCount</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnPlanCursor::spawnCount</qualifiedname>
+        <briefdescription>
+<para>Total number of entities to spawn in this batch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/SpawnPlanCursor.ixx" line="35" column="22" bodyfile="include/helios/engine/runtime/spawn/SpawnPlanCursor.ixx" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnPlanCursor_1ab711dfa48564030e6738b6632910a7f4" prot="public" static="no" mutable="no">
+        <type>const size_t</type>
+        <definition>const size_t helios::engine::runtime::spawn::SpawnPlanCursor::position</definition>
+        <argsstring></argsstring>
+        <name>position</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnPlanCursor::position</qualifiedname>
+        <briefdescription>
+<para>Zero-based index of the current spawn within the batch. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/SpawnPlanCursor.ixx" line="40" column="22" bodyfile="include/helios/engine/runtime/spawn/SpawnPlanCursor.ixx" bodystart="40" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Tracks the current position within a spawn batch. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnPlanCursor" kindref="compound">SpawnPlanCursor</ref> provides context to SpawnPlacer and SpawnInitializer about where the current spawn is within its batch. This enables behaviors like distributing spawns in a formation or applying sequential variations.</para>
+<para>Example: ```cpp // Spawning 5 enemies in a row for (size_t i = 0; i &lt; spawnCount; ++i) { <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnPlanCursor" kindref="compound">SpawnPlanCursor</ref> cursor{.spawnCount = spawnCount, .position = i}; auto pos = placer-&gt;getPosition(guid, bounds, cursor, ctx); } ```</para>
+<para><simplesect kind="see"><para>SpawnPlacer </para>
+</simplesect>
+<simplesect kind="see"><para>SpawnInitializer </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="include/helios/engine/runtime/spawn/SpawnPlanCursor.ixx" line="30" column="5" bodyfile="include/helios/engine/runtime/spawn/SpawnPlanCursor.ixx" bodystart="30" bodyend="42"/>
+    <listofallmembers>
+      <member refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnPlanCursor_1ab711dfa48564030e6738b6632910a7f4" prot="public" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnPlanCursor</scope><name>position</name></member>
+      <member refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnPlanCursor_1aa90b7dfe55938a408966953c93535a1b" prot="public" virt="non-virtual"><scope>helios::engine::runtime::spawn::SpawnPlanCursor</scope><name>spawnCount</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

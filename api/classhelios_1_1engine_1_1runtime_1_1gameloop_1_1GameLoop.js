@@ -9,6 +9,7 @@ var classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop =
     [ "update", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html#aff5330464fa41a1d7a8ebcc41b75b571", null ],
     [ "helios::engine::runtime::gameloop::Pass", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html#ab9de47f4cf8c4eb818c6ae2614cbc6c3", null ],
     [ "commandBuffer_", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html#a1ee2f3b652d9619f4f328b43862b15c2", null ],
+    [ "frameEventBus_", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html#ae54b7c4d141a90c2fc65a0bbbe887426", null ],
     [ "logger_", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html#a8abc8cce8e4faa1a54d61531b10781bd", null ],
     [ "mainPhase_", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html#adaff711d38a5a95c0494c527ae4a1714", null ],
     [ "passEventBus_", "classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop.html#abf5317ab24eb3c9dbfe5c0a827680699", null ],

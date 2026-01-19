@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8runtime_8spawn_8policy_8conditions_8TimerSpawnCondition" kind="module">
+    <compoundname>helios.engine.runtime.spawn.policy.conditions.TimerSpawnCondition</compoundname>
+    <innerfile refid="TimerSpawnCondition_8ixx">TimerSpawnCondition.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions_1_1TimerSpawnCondition" prot="public">helios::engine::runtime::spawn::policy::conditions::TimerSpawnCondition</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions_1_1TimerSpawnCondition_1a3991983e6ac58fb24509fbe802f7de34" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::runtime::spawn::policy::conditions::TimerSpawnCondition::interval_</definition>
+        <argsstring></argsstring>
+        <name>interval_</name>
+        <qualifiedname>helios::engine::runtime::spawn::policy::conditions::TimerSpawnCondition::interval_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>The time interval between spawns in seconds. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/policy/conditions/TimerSpawnCondition.ixx" line="54" column="15" bodyfile="include/helios/engine/runtime/spawn/policy/conditions/TimerSpawnCondition.ixx" bodystart="54" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions_1_1TimerSpawnCondition_1a76c6dd3443f09c1cc28d5ca3831a0b1c" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::runtime::spawn::policy::conditions::TimerSpawnCondition::TimerSpawnCondition</definition>
+        <argsstring>(const float interval)</argsstring>
+        <name>TimerSpawnCondition</name>
+        <qualifiedname>helios::engine::runtime::spawn::policy::conditions::TimerSpawnCondition::TimerSpawnCondition</qualifiedname>
+        <param>
+          <type>const float</type>
+          <declname>interval</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions_1_1TimerSpawnCondition" kindref="compound">TimerSpawnCondition</ref> with the specified interval. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The first spawn will occur after the interval has elapsed, not immediately.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>interval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time in seconds between spawn events.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="pre"><para>interval &gt; 0.0f </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/policy/conditions/TimerSpawnCondition.ixx" line="68" column="18" bodyfile="include/helios/engine/runtime/spawn/policy/conditions/TimerSpawnCondition.ixx" bodystart="68" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions_1_1TimerSpawnCondition_1a137d4f944a008bb75a522125b3a6167d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::runtime::spawn::policy::conditions::TimerSpawnCondition::isSatisfied</definition>
+        <argsstring>(const size_t requestedAmount, const SpawnRuleState &amp;spawnState, const helios::engine::runtime::pooling::GameObjectPoolSnapshot poolSnapshot, const helios::engine::runtime::world::UpdateContext &amp;updateContext) const noexcept override</argsstring>
+        <name>isSatisfied</name>
+        <qualifiedname>helios::engine::runtime::spawn::policy::conditions::TimerSpawnCondition::isSatisfied</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition_1a8f099492bc15035f9d97382951d036bd">isSatisfied</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>requestedAmount</declname>
+        </param>
+        <param>
+          <type>const SpawnRuleState &amp;</type>
+          <declname>spawnState</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolSnapshot" kindref="compound">helios::engine::runtime::pooling::GameObjectPoolSnapshot</ref></type>
+          <declname>poolSnapshot</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Checks if the timer interval has elapsed and pool has capacity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>requestedAmount</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of entities requested to spawn. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spawnState</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The rule&apos;s runtime state containing time since last spawn. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>poolSnapshot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Snapshot of the pool&apos;s current capacity. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s context.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if interval elapsed AND pool has enough inactive entities. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/policy/conditions/TimerSpawnCondition.ixx" line="83" column="15" bodyfile="include/helios/engine/runtime/spawn/policy/conditions/TimerSpawnCondition.ixx" bodystart="83" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions_1_1TimerSpawnCondition_1a2f1166b99782f2bbb37e06e0f1eb4dd8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::spawn::policy::conditions::TimerSpawnCondition::onCommit</definition>
+        <argsstring>(SpawnRuleState &amp;spawnRuleState, const size_t spawnAmount) const override</argsstring>
+        <name>onCommit</name>
+        <qualifiedname>helios::engine::runtime::spawn::policy::conditions::TimerSpawnCondition::onCommit</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition_1a1e0f204a7662fbb8fc83f76a2f7b0abd">onCommit</reimplements>
+        <param>
+          <type>SpawnRuleState &amp;</type>
+          <declname>spawnRuleState</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>spawnAmount</declname>
+        </param>
+        <briefdescription>
+<para>Resets the spawn timer after a successful spawn. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>spawnRuleState</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The rule&apos;s runtime state to update. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spawnAmount</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of entities that were spawned (unused). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/policy/conditions/TimerSpawnCondition.ixx" line="104" column="14" bodyfile="include/helios/engine/runtime/spawn/policy/conditions/TimerSpawnCondition.ixx" bodystart="104" bodyend="109"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState_1a4bafae2ee2a3e98fed58dbe69d9c5af4" compoundref="SpawnRuleState_8ixx" startline="35" endline="37">helios::engine::runtime::spawn::policy::SpawnRuleState::setSinceLastSpawn</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/helios/engine/runtime/spawn/policy/conditions/TimerSpawnCondition.ixx" line="9" column="15"/>
+  </compounddef>
+</doxygen>

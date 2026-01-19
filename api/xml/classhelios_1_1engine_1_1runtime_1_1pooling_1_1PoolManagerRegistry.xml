@@ -3,24 +3,24 @@
   <compounddef id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry" kind="class" language="C++" prot="public">
     <compoundname>helios::engine::runtime::pooling::PoolManagerRegistry</compoundname>
     <sectiondef kind="protected-attrib">
-      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry_1ae5442676b4e8b692d247f7e9687a73e5" prot="protected" static="no" mutable="no">
-        <type>std::unordered_map&lt; <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">helios::engine::core::data::GameObjectPoolId</ref>, <ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolRequestHandler" kindref="compound">helios::engine::runtime::pooling::PoolRequestHandler</ref> * &gt;</type>
-        <definition>std::unordered_map&lt;helios::engine::core::data::GameObjectPoolId, helios::engine::runtime::pooling::PoolRequestHandler*&gt; helios::engine::runtime::pooling::PoolManagerRegistry::registry_</definition>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry_1ab66d430221c6c8219b8fef08940c8acb" prot="protected" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" kindref="compound">helios::engine::core::data::SpawnProfileId</ref>, <ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1SpawnRequestHandler" kindref="compound">helios::engine::runtime::pooling::SpawnRequestHandler</ref> * &gt;</type>
+        <definition>std::unordered_map&lt; helios::engine::core::data::SpawnProfileId, helios::engine::runtime::pooling::SpawnRequestHandler*&gt; helios::engine::runtime::pooling::PoolManagerRegistry::registry_</definition>
         <argsstring></argsstring>
         <name>registry_</name>
         <qualifiedname>helios::engine::runtime::pooling::PoolManagerRegistry::registry_</qualifiedname>
         <initializer>{}</initializer>
         <briefdescription>
-<para>Map from pool IDs to their handlers. </para>
+<para>Map from spawn profile IDs to their handlers. </para>
         </briefdescription>
         <detaileddescription>
 <para>Stores non-owning pointers to handlers. Handlers must outlive this registry. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/runtime/pooling/PoolRequestHandlerRegistry.ixx" line="59" column="28" bodyfile="include/helios/engine/runtime/pooling/PoolRequestHandlerRegistry.ixx" bodystart="59" bodyend="59"/>
-        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry_1ae1ab085960f0bdbfa6f15b6e7f03f40e" compoundref="PoolRequestHandlerRegistry_8ixx" startline="74" endline="85">add</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry_1af791b94b02738fa271aee9f44ce299f7" compoundref="PoolRequestHandlerRegistry_8ixx" startline="94" endline="102">get</referencedby>
+        <location file="include/helios/engine/runtime/spawn/SpawnRequestHandlerRegistry.ixx" line="48" column="2" bodyfile="include/helios/engine/runtime/spawn/SpawnRequestHandlerRegistry.ixx" bodystart="48" bodyend="48"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry_1a87358a90a7146a751ff43dc13ee631d4" compoundref="SpawnRequestHandlerRegistry_8ixx" startline="63" endline="74">add</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry_1a0cf2fbbb61b9115b54706da1cb325814" compoundref="SpawnRequestHandlerRegistry_8ixx" startline="83" endline="92">get</referencedby>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -36,32 +36,32 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/runtime/pooling/PoolRequestHandlerRegistry.ixx" line="64" column="9"/>
+        <location file="include/helios/engine/runtime/spawn/SpawnRequestHandlerRegistry.ixx" line="53" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry_1ae1ab085960f0bdbfa6f15b6e7f03f40e" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry_1a87358a90a7146a751ff43dc13ee631d4" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
         <definition>bool helios::engine::runtime::pooling::PoolManagerRegistry::add</definition>
-        <argsstring>(const helios::engine::core::data::GameObjectPoolId gameObjectPoolId, helios::engine::runtime::pooling::PoolRequestHandler &amp;poolManager)</argsstring>
+        <argsstring>(const helios::engine::core::data::SpawnProfileId spawnProfileId, helios::engine::runtime::pooling::SpawnRequestHandler &amp;poolManager)</argsstring>
         <name>add</name>
         <qualifiedname>helios::engine::runtime::pooling::PoolManagerRegistry::add</qualifiedname>
         <param>
-          <type>const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">helios::engine::core::data::GameObjectPoolId</ref></type>
-          <declname>gameObjectPoolId</declname>
+          <type>const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" kindref="compound">helios::engine::core::data::SpawnProfileId</ref></type>
+          <declname>spawnProfileId</declname>
         </param>
         <param>
-          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolRequestHandler" kindref="compound">helios::engine::runtime::pooling::PoolRequestHandler</ref> &amp;</type>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1SpawnRequestHandler" kindref="compound">helios::engine::runtime::pooling::SpawnRequestHandler</ref> &amp;</type>
           <declname>poolManager</declname>
         </param>
         <briefdescription>
-<para>Registers a handler for a pool ID. </para>
+<para>Registers a handler for a spawn profile ID. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>gameObjectPoolId</parametername>
+<parametername>spawnProfileId</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The pool ID to register. </para>
+<para>The spawn profile ID to register. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -79,29 +79,29 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/runtime/pooling/PoolRequestHandlerRegistry.ixx" line="74" column="15" bodyfile="include/helios/engine/runtime/pooling/PoolRequestHandlerRegistry.ixx" bodystart="74" bodyend="85"/>
-        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry_1ae5442676b4e8b692d247f7e9687a73e5" compoundref="PoolRequestHandlerRegistry_8ixx" startline="59" endline="59">registry_</references>
+        <location file="include/helios/engine/runtime/spawn/SpawnRequestHandlerRegistry.ixx" line="63" column="15" bodyfile="include/helios/engine/runtime/spawn/SpawnRequestHandlerRegistry.ixx" bodystart="63" bodyend="74"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry_1ab66d430221c6c8219b8fef08940c8acb" compoundref="SpawnRequestHandlerRegistry_8ixx" startline="48" endline="48">registry_</references>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry_1af791b94b02738fa271aee9f44ce299f7" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolRequestHandler" kindref="compound">helios::engine::runtime::pooling::PoolRequestHandler</ref> *</type>
-        <definition>helios::engine::runtime::pooling::PoolRequestHandler * helios::engine::runtime::pooling::PoolManagerRegistry::get</definition>
-        <argsstring>(helios::engine::core::data::GameObjectPoolId gameObjectPoolId)</argsstring>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry_1a0cf2fbbb61b9115b54706da1cb325814" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1SpawnRequestHandler" kindref="compound">helios::engine::runtime::pooling::SpawnRequestHandler</ref> *</type>
+        <definition>helios::engine::runtime::pooling::SpawnRequestHandler * helios::engine::runtime::pooling::PoolManagerRegistry::get</definition>
+        <argsstring>(helios::engine::core::data::SpawnProfileId spawnProfileId)</argsstring>
         <name>get</name>
         <qualifiedname>helios::engine::runtime::pooling::PoolManagerRegistry::get</qualifiedname>
         <param>
-          <type><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">helios::engine::core::data::GameObjectPoolId</ref></type>
-          <declname>gameObjectPoolId</declname>
+          <type><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" kindref="compound">helios::engine::core::data::SpawnProfileId</ref></type>
+          <declname>spawnProfileId</declname>
         </param>
         <briefdescription>
-<para>Retrieves the handler for a pool ID. </para>
+<para>Retrieves the handler for a spawn profile ID. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>gameObjectPoolId</parametername>
+<parametername>spawnProfileId</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The pool ID to look up.</para>
+<para>The spawn profile ID to look up.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -111,35 +111,32 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/runtime/pooling/PoolRequestHandlerRegistry.ixx" line="94" column="63" bodyfile="include/helios/engine/runtime/pooling/PoolRequestHandlerRegistry.ixx" bodystart="94" bodyend="102"/>
-        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry_1ae5442676b4e8b692d247f7e9687a73e5" compoundref="PoolRequestHandlerRegistry_8ixx" startline="59" endline="59">registry_</references>
+        <location file="include/helios/engine/runtime/spawn/SpawnRequestHandlerRegistry.ixx" line="83" column="64" bodyfile="include/helios/engine/runtime/spawn/SpawnRequestHandlerRegistry.ixx" bodystart="83" bodyend="92"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry_1ab66d430221c6c8219b8fef08940c8acb" compoundref="SpawnRequestHandlerRegistry_8ixx" startline="48" endline="48">registry_</references>
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>Registry that maps GameObjectPoolIds to their PoolRequestHandlers. </para>
+<para>Registry that maps SpawnProfileIds to their SpawnRequestHandlers. </para>
     </briefdescription>
     <detaileddescription>
-<para><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry" kindref="compound">PoolManagerRegistry</ref> provides lookup from pool IDs to the handlers responsible for processing spawn and despawn requests for those pools. This enables the spawn/despawn system to route requests to the correct manager without direct coupling.</para>
+<para><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry" kindref="compound">PoolManagerRegistry</ref> provides lookup from spawn profile IDs to the handlers responsible for processing spawn and despawn requests for those profiles. This enables the spawn/despawn system to route requests to the correct manager without direct coupling.</para>
 <para>The registry is owned by the GameWorld and populated during manager initialization.</para>
-<para>## Usage</para>
-<para>```cpp // During manager init registry.add(bulletPoolId, bulletManager);</para>
-<para>// During despawn processing auto* handler = registry.get(poolId); if (handler) { handler-&gt;submit(despawnRequest); } ```</para>
 <para><simplesect kind="note"><para>Uses amortized O(1) lookup via std::unordered_map.</para>
 </simplesect>
-<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolRequestHandler" kindref="compound">PoolRequestHandler</ref> </para>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1SpawnRequestHandler" kindref="compound">SpawnRequestHandler</ref> </para>
 </simplesect>
 <simplesect kind="see"><para>GameObjectPoolId </para>
 </simplesect>
-<simplesect kind="see"><para>GameWorld::registerPoolRequestHandler </para>
+<simplesect kind="see"><para>GameWorld::registerSpawnRequestHandler </para>
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="include/helios/engine/runtime/pooling/PoolRequestHandlerRegistry.ixx" line="49" column="5" bodyfile="include/helios/engine/runtime/pooling/PoolRequestHandlerRegistry.ixx" bodystart="49" bodyend="103"/>
+    <location file="include/helios/engine/runtime/spawn/SpawnRequestHandlerRegistry.ixx" line="36" column="5" bodyfile="include/helios/engine/runtime/spawn/SpawnRequestHandlerRegistry.ixx" bodystart="36" bodyend="93"/>
     <listofallmembers>
-      <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry_1ae1ab085960f0bdbfa6f15b6e7f03f40e" prot="public" virt="non-virtual"><scope>helios::engine::runtime::pooling::PoolManagerRegistry</scope><name>add</name></member>
-      <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry_1af791b94b02738fa271aee9f44ce299f7" prot="public" virt="non-virtual"><scope>helios::engine::runtime::pooling::PoolManagerRegistry</scope><name>get</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry_1a87358a90a7146a751ff43dc13ee631d4" prot="public" virt="non-virtual"><scope>helios::engine::runtime::pooling::PoolManagerRegistry</scope><name>add</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry_1a0cf2fbbb61b9115b54706da1cb325814" prot="public" virt="non-virtual"><scope>helios::engine::runtime::pooling::PoolManagerRegistry</scope><name>get</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry_1a49e23605de09b1efbcda586e51971018" prot="public" virt="non-virtual"><scope>helios::engine::runtime::pooling::PoolManagerRegistry</scope><name>PoolManagerRegistry</name></member>
-      <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry_1ae5442676b4e8b692d247f7e9687a73e5" prot="protected" virt="non-virtual"><scope>helios::engine::runtime::pooling::PoolManagerRegistry</scope><name>registry_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry_1ab66d430221c6c8219b8fef08940c8acb" prot="protected" virt="non-virtual"><scope>helios::engine::runtime::pooling::PoolManagerRegistry</scope><name>registry_</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

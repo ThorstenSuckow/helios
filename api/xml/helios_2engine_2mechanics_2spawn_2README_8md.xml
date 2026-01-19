@@ -12,11 +12,11 @@
 <codeline></codeline>
 <codeline><highlight class="normal">Entity<sp/>spawning<sp/>and<sp/>lifecycle<sp/>management.</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>the<sp/>infrastructure<sp/>for<sp/>spawning<sp/>and<sp/>despawning<sp/>GameObjects<sp/>at<sp/>runtime<sp/>based<sp/>on<sp/>configurable<sp/>conditions<sp/>and<sp/>strategies.</highlight></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>the<sp/>infrastructure<sp/>for<sp/>spawning<sp/>and<sp/>despawning<sp/>GameObjects<sp/>at<sp/>runtime<sp/>based<sp/>on<sp/>configurable<sp/>conditions<sp/>and<sp/>scheduling<sp/>rules.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Architecture</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">The<sp/>spawn<sp/>system<sp/>follows<sp/>a<sp/>command-based<sp/>architecture<sp/>with<sp/>separation<sp/>of<sp/>concerns:</highlight></codeline>
+<codeline><highlight class="normal">The<sp/>spawn<sp/>system<sp/>follows<sp/>a<sp/>scheduler-based<sp/>architecture<sp/>with<sp/>separation<sp/>of<sp/>concerns:</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline><highlight class="normal">┌─────────────────────┐<sp/><sp/><sp/><sp/>┌─────────────────────┐</highlight></codeline>
@@ -26,20 +26,20 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼</highlight></codeline>
 <codeline><highlight class="normal">┌─────────────────────────────────────────────────┐</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GameObjectSpawnSystem<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/>(calculates<sp/>budget,<sp/>emits<sp/>SpawnCommands)<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SpawnScheduler<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>(evaluates<sp/>rules,<sp/>produces<sp/>ScheduledPlans)<sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">└─────────────────────┬───────────────────────────┘</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼</highlight></codeline>
 <codeline><highlight class="normal">┌─────────────────────────────────────────────────┐</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SpawnCommandDispatcher<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/>(routes<sp/>commands<sp/>to<sp/>SpawnManager)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GameObjectSpawnSystem<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>(reads<sp/>frame<sp/>events,<sp/>enqueues<sp/>SpawnCommands)<sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">└─────────────────────┬───────────────────────────┘</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼</highlight></codeline>
 <codeline><highlight class="normal">┌─────────────────────────────────────────────────┐</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SpawnManager<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/>(acquires<sp/>from<sp/>pool,<sp/>applies<sp/>strategy)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ScheduledSpawnPlanCommand<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>(dispatched<sp/>to<sp/>SpawnManager<sp/>for<sp/>execution)<sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">└─────────────────────────────────────────────────┘</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
@@ -47,34 +47,35 @@
 <codeline></codeline>
 <codeline><highlight class="normal">|<sp/>Directory<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|-----------|---------|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`commands/`<sp/>|<sp/>SpawnCommand<sp/>and<sp/>DespawnCommand<sp/>for<sp/>deferred<sp/>execution<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`dispatcher/`<sp/>|<sp/>Command<sp/>dispatchers<sp/>that<sp/>route<sp/>to<sp/>managers<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`logic/`<sp/>|<sp/>Spawn<sp/>conditions<sp/>and<sp/>strategies<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`manager/`<sp/>|<sp/>SpawnManager<sp/>for<sp/>pool-based<sp/>spawning<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`requests/`<sp/>|<sp/>Data<sp/>structures<sp/>for<sp/>spawn/despawn<sp/>requests<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`components/`<sp/>|<sp/>Spawn-related<sp/>components<sp/>(SpawnedByProfileComponent)<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`systems/`<sp/>|<sp/>GameObjectSpawnSystem<sp/>for<sp/>game<sp/>loop<sp/>integration<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Related<sp/>Modules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>spawn<sp/>system<sp/>integrates<sp/>with<sp/>several<sp/>other<sp/>modules:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>`helios.engine.mechanics.spawn.logic`<sp/>—<sp/>SpawnScheduler,<sp/>SpawnCondition,<sp/>SpawnStrategy</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`helios.engine.mechanics.spawn.commands`<sp/>—<sp/>ScheduledSpawnPlanCommand</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`helios.engine.runtime.spawn`<sp/>—<sp/>SpawnManager,<sp/>SpawnRequestHandler</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>`helios.engine.runtime.pooling`<sp/>—<sp/>GameObjectPoolManager</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">```cpp</highlight></codeline>
-<codeline><highlight class="normal">//<sp/>1.<sp/>Create<sp/>a<sp/>spawn<sp/>condition<sp/>(when<sp/>to<sp/>spawn)</highlight></codeline>
-<codeline><highlight class="normal">auto<sp/>condition<sp/>=<sp/>std::make_unique&lt;TimerSpawnCondition&gt;(2.0f);<sp/><sp/>//<sp/>Every<sp/>2<sp/>seconds</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal">//<sp/>2.<sp/>Create<sp/>a<sp/>spawn<sp/>strategy<sp/>(how<sp/>to<sp/>configure<sp/>spawned<sp/>objects)</highlight></codeline>
-<codeline><highlight class="normal">auto<sp/>strategy<sp/>=<sp/>std::make_unique&lt;CallbackSpawnStrategy&gt;(</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>[](const<sp/>GameWorld&amp;<sp/>world,<sp/>GameObject&amp;<sp/>obj,<sp/>const<sp/>UpdateContext&amp;<sp/>ctx)<sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>auto*<sp/>transform<sp/>=<sp/>obj.get&lt;TranslationStateComponent&gt;();</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>transform-&gt;setTranslation({0.0f,<sp/>0.0f,<sp/>0.0f});</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>true;</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>1.<sp/>Create<sp/>spawn<sp/>rules<sp/>with<sp/>conditions</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>scheduler<sp/>=<sp/>std::make_unique&lt;SpawnScheduler&gt;();</highlight></codeline>
+<codeline><highlight class="normal">scheduler-&gt;addRule(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>SpawnRuleId{1},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>std::make_unique&lt;TimerSpawnCondition&gt;(2.0f),<sp/><sp/>//<sp/>Every<sp/>2<sp/>seconds</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>enemyProfileId</highlight></codeline>
 <codeline><highlight class="normal">);</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">//<sp/>3.<sp/>Create<sp/>the<sp/>spawn<sp/>system</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>2.<sp/>Create<sp/>the<sp/>spawn<sp/>system<sp/>with<sp/>the<sp/>scheduler</highlight></codeline>
 <codeline><highlight class="normal">auto<sp/>spawnSystem<sp/>=<sp/>std::make_unique&lt;GameObjectSpawnSystem&gt;(</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>poolId,<sp/>std::move(condition)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>std::move(scheduler)</highlight></codeline>
 <codeline><highlight class="normal">);</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">//<sp/>4.<sp/>Register<sp/>with<sp/>the<sp/>game<sp/>loop</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>3.<sp/>Register<sp/>with<sp/>the<sp/>game<sp/>loop</highlight></codeline>
 <codeline><highlight class="normal">gameLoop.phase(PhaseType::Main)</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addPass()</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addSystem(std::move(spawnSystem));</highlight></codeline>
@@ -86,7 +87,7 @@
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
 <codeline><highlight class="normal">@namespace<sp/>helios::engine::mechanics::spawn</highlight></codeline>
 <codeline><highlight class="normal">@brief<sp/>Entity<sp/>spawning<sp/>and<sp/>lifecycle<sp/>management.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>This<sp/>namespace<sp/>contains<sp/>the<sp/>spawning<sp/>subsystem<sp/>of<sp/>the<sp/>gameplay<sp/>layer.<sp/>It<sp/>provides<sp/>a<sp/>flexible,<sp/>command-based<sp/>architecture<sp/>using<sp/>conditions<sp/>(when<sp/>to<sp/>spawn),<sp/>strategies<sp/>(how<sp/>to<sp/>spawn),<sp/>and<sp/>managers<sp/>(pool<sp/>integration)<sp/>to<sp/>control<sp/>entity<sp/>creation<sp/>and<sp/>destruction<sp/>at<sp/>runtime.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>This<sp/>namespace<sp/>contains<sp/>the<sp/>spawning<sp/>subsystem<sp/>of<sp/>the<sp/>gameplay<sp/>layer.<sp/>It<sp/>provides<sp/>a<sp/>scheduler-based<sp/>architecture<sp/>using<sp/>conditions<sp/>(when<sp/>to<sp/>spawn),<sp/>strategies<sp/>(how<sp/>to<sp/>spawn),<sp/>and<sp/>integration<sp/>with<sp/>pool<sp/>managers<sp/>to<sp/>control<sp/>entity<sp/>creation<sp/>and<sp/>destruction<sp/>at<sp/>runtime.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
 <codeline></codeline>
     </programlisting>

@@ -10,7 +10,7 @@
     <programlisting>
 <codeline><highlight class="normal">#<sp/>helios::engine::runtime::pooling</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">GameObject<sp/>pooling<sp/>and<sp/>request<sp/>handling<sp/>for<sp/>efficient<sp/>object<sp/>recycling.</highlight></codeline>
+<codeline><highlight class="normal">GameObject<sp/>pooling<sp/>for<sp/>efficient<sp/>object<sp/>recycling.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
 <codeline></codeline>
@@ -20,20 +20,29 @@
 <codeline></codeline>
 <codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|-------|---------|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`GameObjectPool`<sp/>|<sp/>Container<sp/>holding<sp/>pre-allocated<sp/>GameObject<sp/>instances<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`GameObjectPoolRegistry`<sp/>|<sp/>Central<sp/>registry<sp/>mapping<sp/>pool<sp/>IDs<sp/>to<sp/>pools<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`GameObjectPoolFacade`<sp/>|<sp/>Simplified<sp/>access<sp/>to<sp/>pool<sp/>operations<sp/>via<sp/>GameWorld<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`PoolRequestHandler`<sp/>|<sp/>Abstract<sp/>base<sp/>for<sp/>processing<sp/>pool<sp/>acquire/release<sp/>requests<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`PoolRequestHandlerRegistry`<sp/>|<sp/>Registry<sp/>for<sp/>pool<sp/>request<sp/>handlers<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`GameObjectPool`<sp/>|<sp/>Container<sp/>holding<sp/>pre-allocated<sp/>GameObject<sp/>identifiers<sp/>with<sp/>O(1)<sp/>acquire/release<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`GameObjectPoolConfig`<sp/>|<sp/>Configuration<sp/>data<sp/>for<sp/>pool<sp/>initialization<sp/>(ID,<sp/>prefab,<sp/>size)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`GameObjectPoolManager`<sp/>|<sp/>High-level<sp/>manager<sp/>for<sp/>pool<sp/>lifecycle<sp/>and<sp/>acquire/release<sp/>operations<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`GameObjectPoolRegistry`<sp/>|<sp/>Central<sp/>registry<sp/>mapping<sp/>pool<sp/>IDs<sp/>to<sp/>pool<sp/>instances<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`GameObjectPoolSnapshot`<sp/>|<sp/>Read-only<sp/>snapshot<sp/>of<sp/>pool<sp/>state<sp/>(active/inactive<sp/>counts)<sp/>|</highlight></codeline>
 <codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Architecture</highlight></codeline>
 <codeline></codeline>
+<codeline><highlight class="normal">The<sp/>pooling<sp/>system<sp/>follows<sp/>a<sp/>layered<sp/>architecture:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">1.<sp/>**GameObjectPool**:<sp/>Low-level<sp/>GUID<sp/>tracking<sp/>(active/inactive<sp/>lists)</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>**GameObjectPoolRegistry**:<sp/>Pool<sp/>lookup<sp/>by<sp/>typed<sp/>ID</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>**GameObjectPoolManager**:<sp/>Integration<sp/>with<sp/>GameWorld<sp/>for<sp/>prefab<sp/>cloning<sp/>and<sp/>entity<sp/>lookup</highlight></codeline>
+<codeline><highlight class="normal">4.<sp/>**GameObjectPoolConfig**:<sp/>Declarative<sp/>pool<sp/>configuration</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Spawn/despawn<sp/>request<sp/>handling<sp/>has<sp/>been<sp/>moved<sp/>to<sp/>`helios::engine::runtime::spawn`.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
 <codeline><highlight class="normal">@namespace<sp/>helios::engine::runtime::pooling</highlight></codeline>
-<codeline><highlight class="normal">@brief<sp/>GameObject<sp/>pooling<sp/>and<sp/>request<sp/>handling<sp/>for<sp/>efficient<sp/>object<sp/>recycling.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>Provides<sp/>GameObjectPool<sp/>for<sp/>pre-allocation,<sp/>pooling<sp/>registries,<sp/>and<sp/>request<sp/>handlers<sp/>for<sp/>deferred<sp/>acquire/release<sp/>operations.</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>GameObject<sp/>pooling<sp/>for<sp/>efficient<sp/>object<sp/>recycling.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>GameObjectPool<sp/>for<sp/>GUID-based<sp/>entity<sp/>tracking,<sp/>registries<sp/>for<sp/>pool<sp/>lookup,<sp/>configuration<sp/>structures<sp/>for<sp/>declarative<sp/>pool<sp/>setup,<sp/>and<sp/>managers<sp/>for<sp/>integration<sp/>with<sp/>GameWorld.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
 <codeline></codeline>
     </programlisting>

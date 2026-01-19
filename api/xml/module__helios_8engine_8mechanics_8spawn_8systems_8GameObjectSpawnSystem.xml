@@ -5,80 +5,54 @@
     <innerfile refid="GameObjectSpawnSystem_8ixx">GameObjectSpawnSystem.ixx</innerfile>
     <innerclass refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem" prot="public">helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</innerclass>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1afbd15b00a3cf9da773c1ad617c8eaae2" prot="private" static="no" mutable="no">
-        <type><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">helios::engine::core::data::GameObjectPoolId</ref></type>
-        <definition>helios::engine::core::data::GameObjectPoolId helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::gameObjectPoolId_</definition>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1a8f1ca8291bd44a251ed88c22ff8e1d27" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler" kindref="compound">helios::engine::runtime::spawn::scheduling::SpawnScheduler</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;helios::engine::runtime::spawn::scheduling::SpawnScheduler&gt; helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::spawnScheduler_</definition>
         <argsstring></argsstring>
-        <name>gameObjectPoolId_</name>
-        <qualifiedname>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::gameObjectPoolId_</qualifiedname>
+        <name>spawnScheduler_</name>
+        <qualifiedname>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::spawnScheduler_</qualifiedname>
         <briefdescription>
-<para>The ID of the pool to spawn from. </para>
+<para>The scheduler that manages spawn rules and conditions. </para>
         </briefdescription>
         <detaileddescription>
+<para>Owns and evaluates all registered spawn rules. When conditions are met, the scheduler produces ScheduledSpawnPlan instances for execution. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="71" column="54" bodyfile="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="71" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1a01b2728d3afa4aa2f1401a6164dfcaf5" prot="private" static="no" mutable="no">
-        <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition" kindref="compound">helios::engine::mechanics::spawn::logic::SpawnCondition</ref> &gt;</type>
-        <definition>std::unique_ptr&lt;helios::engine::mechanics::spawn::logic::SpawnCondition&gt; helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::spawnCondition_</definition>
-        <argsstring></argsstring>
-        <name>spawnCondition_</name>
-        <qualifiedname>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::spawnCondition_</qualifiedname>
-        <briefdescription>
-<para>The condition that determines when and how many objects to spawn. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="76" column="25" bodyfile="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="76" bodyend="-1"/>
+        <location file="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="66" column="25" bodyfile="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="66" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1aa1d2f40557e255a563d6f89e74b090b2" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1a822b2efc063d0a116d4fa229676b3cd7" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
         <definition>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::GameObjectSpawnSystem</definition>
-        <argsstring>(helios::engine::core::data::GameObjectPoolId gameObjectPoolId, std::unique_ptr&lt; helios::engine::mechanics::spawn::logic::SpawnCondition &gt; spawnCondition)</argsstring>
+        <argsstring>(std::unique_ptr&lt; helios::engine::runtime::spawn::scheduling::SpawnScheduler &gt; spawnScheduler)</argsstring>
         <name>GameObjectSpawnSystem</name>
         <qualifiedname>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::GameObjectSpawnSystem</qualifiedname>
         <param>
-          <type><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">helios::engine::core::data::GameObjectPoolId</ref></type>
-          <declname>gameObjectPoolId</declname>
-        </param>
-        <param>
-          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1logic_1_1SpawnCondition" kindref="compound">helios::engine::mechanics::spawn::logic::SpawnCondition</ref> &gt;</type>
-          <declname>spawnCondition</declname>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler" kindref="compound">helios::engine::runtime::spawn::scheduling::SpawnScheduler</ref> &gt;</type>
+          <declname>spawnScheduler</declname>
         </param>
         <briefdescription>
-<para>Constructs a <ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem" kindref="compound">GameObjectSpawnSystem</ref>. </para>
+<para>Constructs a <ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem" kindref="compound">GameObjectSpawnSystem</ref> with the given scheduler. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>gameObjectPoolId</parametername>
+<parametername>spawnScheduler</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The ID of the pool to spawn from. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>spawnCondition</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The condition that controls spawn timing. Must not be nullptr.</para>
+<para>The scheduler managing spawn rules. Ownership transferred.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="pre"><para>spawnCondition != nullptr </para>
+<simplesect kind="pre"><para>spawnScheduler must not be null. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="89" column="18" bodyfile="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="89" bodyend="97"/>
+        <location file="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="77" column="18" bodyfile="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="77" bodyend="83"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1a69d47de2e4bae743dab2fc03349b3902" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -92,16 +66,16 @@
           <declname>updateContext</declname>
         </param>
         <briefdescription>
-<para>Evaluates the spawn condition and emits SpawnCommands. </para>
+<para>Processes spawn scheduling and enqueues spawn commands. </para>
         </briefdescription>
         <detaileddescription>
-<para>Each frame, queries the spawn condition for the spawn budget. If the budget is greater than zero, emits a SpawnCommand to the CommandBuffer for deferred processing.</para>
+<para>Performs the following steps: 1. Reads `SpawnPlanRequestExecutedEvent` from frame event bus 2. Commits completed spawns to the scheduler (for tracking/cooldowns) 3. Evaluates all spawn rules against current conditions 4. Drains ready spawn plans and enqueues them as commands</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>updateContext</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The current update context. </para>
+<para>The current frame&apos;s update context. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -109,8 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="108" column="14" bodyfile="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="108" bodyend="119"/>
-        <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="48">helios::engine::ecs::System::gameWorld_</references>
+        <location file="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="96" column="14" bodyfile="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="96" bodyend="116"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

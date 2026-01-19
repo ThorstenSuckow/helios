@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>helios::engine::runtime::spawn::policy::amount::SpawnAmountProvider</compoundname>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1FixedSpawnAmount" prot="public" virt="non-virtual">helios::engine::runtime::spawn::policy::amount::FixedSpawnAmount</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback" prot="public" virt="non-virtual">helios::engine::runtime::spawn::policy::amount::SpawnAmountByCallback</derivedcompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider_1a7ae43eddd23541bcfe12b67b8f493284" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::engine::runtime::spawn::policy::amount::SpawnAmountProvider::~SpawnAmountProvider</definition>
+        <argsstring>()=default</argsstring>
+        <name>~SpawnAmountProvider</name>
+        <qualifiedname>helios::engine::runtime::spawn::policy::amount::SpawnAmountProvider::~SpawnAmountProvider</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/policy/amount/SpawnAmountProvider.ixx" line="33" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider_1ab8b6b69ca5a82526f73def529a375c90" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>size_t</type>
+        <definition>virtual size_t helios::engine::runtime::spawn::policy::amount::SpawnAmountProvider::getAmount</definition>
+        <argsstring>(const helios::engine::core::data::GameObjectPoolId gameObjectPoolId, const SpawnRuleState &amp;spawnRuleState, const helios::engine::runtime::world::UpdateContext &amp;updateContext) const =0</argsstring>
+        <name>getAmount</name>
+        <qualifiedname>helios::engine::runtime::spawn::policy::amount::SpawnAmountProvider::getAmount</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1FixedSpawnAmount_1ab96e7e7355b6937dfbd4a4ede9740008">getAmount</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback_1a59f1446d2ff418a3b680860f3f358da2">getAmount</reimplementedby>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">helios::engine::core::data::GameObjectPoolId</ref></type>
+          <declname>gameObjectPoolId</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState" kindref="compound">SpawnRuleState</ref> &amp;</type>
+          <declname>spawnRuleState</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Returns the number of entities to spawn. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameObjectPoolId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The pool to spawn from. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spawnRuleState</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The rule&apos;s current runtime state. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current frame&apos;s context.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Number of entities to spawn. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/policy/amount/SpawnAmountProvider.ixx" line="44" column="25"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Abstract interface for determining spawn quantity. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider" kindref="compound">SpawnAmountProvider</ref> defines the strategy for calculating how many entities should spawn when a rule&apos;s condition is satisfied.</para>
+<para>Implementations include:<itemizedlist>
+<listitem><para>**FixedSpawnAmount:** Always returns a fixed count</para>
+</listitem><listitem><para>**SpawnAmountByCallback:** Delegates to a user-provided function</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1FixedSpawnAmount" kindref="compound">FixedSpawnAmount</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback" kindref="compound">SpawnAmountByCallback</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRule" kindref="compound">SpawnRule</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::runtime::spawn::policy::amount::FixedSpawnAmount</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1FixedSpawnAmount"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::runtime::spawn::policy::amount::SpawnAmountByCallback</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountByCallback"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>helios::engine::runtime::spawn::policy::amount::SpawnAmountProvider</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider"/>
+      </node>
+    </inheritancegraph>
+    <location file="include/helios/engine/runtime/spawn/policy/amount/SpawnAmountProvider.ixx" line="29" column="5" bodyfile="include/helios/engine/runtime/spawn/policy/amount/SpawnAmountProvider.ixx" bodystart="29" bodyend="50"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider_1ab8b6b69ca5a82526f73def529a375c90" prot="public" virt="pure-virtual"><scope>helios::engine::runtime::spawn::policy::amount::SpawnAmountProvider</scope><name>getAmount</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1amount_1_1SpawnAmountProvider_1a7ae43eddd23541bcfe12b67b8f493284" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::policy::amount::SpawnAmountProvider</scope><name>~SpawnAmountProvider</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

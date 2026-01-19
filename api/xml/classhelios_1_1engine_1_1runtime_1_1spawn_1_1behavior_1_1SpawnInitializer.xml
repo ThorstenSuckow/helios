@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>helios::engine::runtime::spawn::behavior::SpawnInitializer</compoundname>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1EmitterInitializer" prot="public" virt="non-virtual">helios::engine::runtime::spawn::behavior::initializers::EmitterInitializer</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1RandomDirectionInitializer" prot="public" virt="non-virtual">helios::engine::runtime::spawn::behavior::initializers::RandomDirectionInitializer</derivedcompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer_1ad5514051aaafea0f164769d695a96991" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::engine::runtime::spawn::behavior::SpawnInitializer::~SpawnInitializer</definition>
+        <argsstring>()=default</argsstring>
+        <name>~SpawnInitializer</name>
+        <qualifiedname>helios::engine::runtime::spawn::behavior::SpawnInitializer::~SpawnInitializer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/behavior/SpawnInitializer.ixx" line="55" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer_1a0d6b4e625d18d579ec91ff33da128190" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void helios::engine::runtime::spawn::behavior::SpawnInitializer::initialize</definition>
+        <argsstring>(const helios::engine::ecs::GameObject &amp;gameObject, const SpawnPlanCursor &amp;cursor, const SpawnContext &amp;spawnContext)=0</argsstring>
+        <name>initialize</name>
+        <qualifiedname>helios::engine::runtime::spawn::behavior::SpawnInitializer::initialize</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1EmitterInitializer_1a618402306c09bcb656c31f39715062a3">initialize</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1RandomDirectionInitializer_1acf5624e44f6f9ecdf519610807902bd2">initialize</reimplementedby>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> &amp;</type>
+          <declname>gameObject</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnPlanCursor" kindref="compound">SpawnPlanCursor</ref> &amp;</type>
+          <declname>cursor</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext" kindref="compound">SpawnContext</ref> &amp;</type>
+          <declname>spawnContext</declname>
+        </param>
+        <briefdescription>
+<para>Initializes a spawned entity&apos;s state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameObject</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The entity to initialize. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cursor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current position within the spawn batch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spawnContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Context data including optional emitter info. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/spawn/behavior/SpawnInitializer.ixx" line="64" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Abstract interface for initializing spawned entity state. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer" kindref="compound">SpawnInitializer</ref> defines the strategy for configuring a spawned entity&apos;s components after it has been placed. Implementations can set velocity, direction, stats, or any other entity-specific state.</para>
+<para>Common implementations:</para>
+<para><itemizedlist>
+<listitem><para>**ProjectileInitializer:** Sets velocity and direction</para>
+</listitem><listitem><para>**EnemyInitializer:** Configures health, AI state, behavior</para>
+</listitem><listitem><para>**PickupInitializer:** Sets pickup type and value</para>
+</listitem></itemizedlist>
+</para>
+<para>Example implementation: ```cpp class ProjectileInitializer : public <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer" kindref="compound">SpawnInitializer</ref> { float speed_; public: explicit ProjectileInitializer(float speed) : speed_(speed) {}</para>
+<para>void initialize(const GameObject&amp; go, const SpawnPlanCursor&amp; cursor,
+                    const SpawnContext&amp; ctx) override { if (auto* dir = go.get&lt;DirectionComponent&gt;()) { dir-&gt;setDirection(ctx.emitterContext-&gt;velocity.normalized()); } if (auto* move = go.get&lt;Move2DComponent&gt;()) { move-&gt;setSpeed(speed_); } } }; ```</para>
+<para><simplesect kind="see"><para><ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnProfile" kindref="compound">SpawnProfile</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer" kindref="compound">SpawnPlacer</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext" kindref="compound">SpawnContext</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>helios::engine::runtime::spawn::behavior::SpawnInitializer</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer"/>
+      </node>
+      <node id="2">
+        <label>helios::engine::runtime::spawn::behavior::initializers::EmitterInitializer</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1EmitterInitializer"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>helios::engine::runtime::spawn::behavior::initializers::RandomDirectionInitializer</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1RandomDirectionInitializer"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="include/helios/engine/runtime/spawn/behavior/SpawnInitializer.ixx" line="51" column="5" bodyfile="include/helios/engine/runtime/spawn/behavior/SpawnInitializer.ixx" bodystart="51" bodyend="71"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer_1a0d6b4e625d18d579ec91ff33da128190" prot="public" virt="pure-virtual"><scope>helios::engine::runtime::spawn::behavior::SpawnInitializer</scope><name>initialize</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer_1ad5514051aaafea0f164769d695a96991" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::behavior::SpawnInitializer</scope><name>~SpawnInitializer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

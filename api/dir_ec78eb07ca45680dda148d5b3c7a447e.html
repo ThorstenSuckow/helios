@@ -110,16 +110,12 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_ec78eb07ca45680dda148d5b3c7a447e_dep.svg" width="100%" height="590"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_ec78eb07ca45680dda148d5b3c7a447e_dep.svg" width="280" height="240"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-subdirs" class="groupheader"><a id="subdirs" name="subdirs"></a>
 Directories</h2></td></tr>
-<tr class="memitem:commands" id="r_commands"><td class="memItemLeft" align="right" valign="top"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_9144a23a4f464d408d92b5f36620fa56.html">commands</a></td></tr>
-<tr class="memitem:dispatcher" id="r_dispatcher"><td class="memItemLeft" align="right" valign="top"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_2cb13cc71ad78d02ebabf11244de07f0.html">dispatcher</a></td></tr>
-<tr class="memitem:logic" id="r_logic"><td class="memItemLeft" align="right" valign="top"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_e5915e51628795b15babf33bf45a77aa.html">logic</a></td></tr>
-<tr class="memitem:manager" id="r_manager"><td class="memItemLeft" align="right" valign="top"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_421e32f00e1d9f04a50f71a0b4750541.html">manager</a></td></tr>
-<tr class="memitem:requests" id="r_requests"><td class="memItemLeft" align="right" valign="top"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_7aac421d872c9646933d5bb73835b7be.html">requests</a></td></tr>
+<tr class="memitem:components" id="r_components"><td class="memItemLeft" align="right" valign="top"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_4d261830018bf22a343170d52ff54ae0.html">components</a></td></tr>
 <tr class="memitem:systems" id="r_systems"><td class="memItemLeft" align="right" valign="top"><span class="iconfolder"><div class="folder-icon"></div></span>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_06ee9275ee912daca8cd477154f66702.html">systems</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-files" class="groupheader"><a id="files" name="files"></a>
@@ -128,13 +124,13 @@ Files</h2></td></tr>
 <tr class="memdesc:helios_2engine_2mechanics_2spawn_2__module_8ixx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggregate module for <a class="el" href="namespacehelios_1_1engine_1_1mechanics_1_1spawn.html" title="Entity spawning and lifecycle management.">helios::engine::mechanics::spawn</a> namespace. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md131"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md113"></a>
 helios::engine::mechanics::spawn</h1>
 <p>Entity spawning and lifecycle management.</p>
-<p>This module provides the infrastructure for spawning and despawning GameObjects at runtime based on configurable conditions and strategies.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md132"></a>
+<p>This module provides the infrastructure for spawning and despawning GameObjects at runtime based on configurable conditions and scheduling rules.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md114"></a>
 Architecture</h1>
-<p>The spawn system follows a command-based architecture with separation of concerns:</p>
+<p>The spawn system follows a scheduler-based architecture with separation of concerns:</p>
 <div class="fragment"><div class="line">┌─────────────────────┐    ┌─────────────────────┐</div>
 <div class="line">│  SpawnCondition     │    │   SpawnStrategy     │</div>
 <div class="line">│  (when to spawn)    │    │   (how to spawn)    │</div>
@@ -142,59 +138,56 @@ Architecture</h1>
 <div class="line">          │                           │</div>
 <div class="line">          ▼                           ▼</div>
 <div class="line">┌─────────────────────────────────────────────────┐</div>
-<div class="line">│           GameObjectSpawnSystem                 │</div>
-<div class="line">│   (calculates budget, emits SpawnCommands)      │</div>
+<div class="line">│              SpawnScheduler                     │</div>
+<div class="line">│   (evaluates rules, produces ScheduledPlans)    │</div>
 <div class="line">└─────────────────────┬───────────────────────────┘</div>
 <div class="line">                      │</div>
 <div class="line">                      ▼</div>
 <div class="line">┌─────────────────────────────────────────────────┐</div>
-<div class="line">│           SpawnCommandDispatcher                │</div>
-<div class="line">│   (routes commands to SpawnManager)             │</div>
+<div class="line">│         GameObjectSpawnSystem                   │</div>
+<div class="line">│   (reads frame events, enqueues SpawnCommands)  │</div>
 <div class="line">└─────────────────────┬───────────────────────────┘</div>
 <div class="line">                      │</div>
 <div class="line">                      ▼</div>
 <div class="line">┌─────────────────────────────────────────────────┐</div>
-<div class="line">│              SpawnManager                       │</div>
-<div class="line">│   (acquires from pool, applies strategy)        │</div>
+<div class="line">│          ScheduledSpawnPlanCommand              │</div>
+<div class="line">│   (dispatched to SpawnManager for execution)    │</div>
 <div class="line">└─────────────────────────────────────────────────┘</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md133"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md115"></a>
 Submodules</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Directory  </th><th class="markdownTableHeadNone">Purpose  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">commands/</span>  </td><td class="markdownTableBodyNone">SpawnCommand and DespawnCommand for deferred execution  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">dispatcher/</span>  </td><td class="markdownTableBodyNone">Command dispatchers that route to managers  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">logic/</span>  </td><td class="markdownTableBodyNone">Spawn conditions and strategies  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><span class="tt">manager/</span>  </td><td class="markdownTableBodyNone">SpawnManager for pool-based spawning  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><span class="tt">requests/</span>  </td><td class="markdownTableBodyNone">Data structures for spawn/despawn requests  </td></tr>
+<td class="markdownTableBodyNone"><span class="tt">components/</span>  </td><td class="markdownTableBodyNone">Spawn-related components (SpawnedByProfileComponent)  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><span class="tt">systems/</span>  </td><td class="markdownTableBodyNone">GameObjectSpawnSystem for game loop integration  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md134"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md116"></a>
+Related Modules</h1>
+<p>The spawn system integrates with several other modules:</p>
+<ul>
+<li><span class="tt">helios.engine.mechanics.spawn.logic</span> — SpawnScheduler, SpawnCondition, SpawnStrategy</li>
+<li><span class="tt">helios.engine.mechanics.spawn.commands</span> — ScheduledSpawnPlanCommand</li>
+<li><span class="tt"><a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1spawn.html" title="Entity spawning infrastructure for the helios engine.">helios.engine.runtime.spawn</a></span> — SpawnManager, SpawnRequestHandler</li>
+<li><span class="tt"><a class="el" href="namespacehelios_1_1engine_1_1runtime_1_1pooling.html" title="GameObject pooling for efficient object recycling.">helios.engine.runtime.pooling</a></span> — GameObjectPoolManager</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md117"></a>
 Usage</h1>
-<div class="fragment"><div class="line"><span class="comment">// 1. Create a spawn condition (when to spawn)</span></div>
-<div class="line"><span class="keyword">auto</span> condition = std::make_unique&lt;TimerSpawnCondition&gt;(2.0f);  <span class="comment">// Every 2 seconds</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// 2. Create a spawn strategy (how to configure spawned objects)</span></div>
-<div class="line"><span class="keyword">auto</span> strategy = std::make_unique&lt;CallbackSpawnStrategy&gt;(</div>
-<div class="line">    [](<span class="keyword">const</span> GameWorld&amp; world, GameObject&amp; obj, <span class="keyword">const</span> UpdateContext&amp; ctx) {</div>
-<div class="line">        <span class="keyword">auto</span>* transform = obj.get&lt;TranslationStateComponent&gt;();</div>
-<div class="line">        transform-&gt;setTranslation({0.0f, 0.0f, 0.0f});</div>
-<div class="line">        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line">    }</div>
+<div class="fragment"><div class="line"><span class="comment">// 1. Create spawn rules with conditions</span></div>
+<div class="line"><span class="keyword">auto</span> scheduler = std::make_unique&lt;SpawnScheduler&gt;();</div>
+<div class="line">scheduler-&gt;addRule(</div>
+<div class="line">    SpawnRuleId{1},</div>
+<div class="line">    std::make_unique&lt;TimerSpawnCondition&gt;(2.0f),  <span class="comment">// Every 2 seconds</span></div>
+<div class="line">    enemyProfileId</div>
 <div class="line">);</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// 3. Create the spawn system</span></div>
+<div class="line"><span class="comment">// 2. Create the spawn system with the scheduler</span></div>
 <div class="line"><span class="keyword">auto</span> spawnSystem = std::make_unique&lt;GameObjectSpawnSystem&gt;(</div>
-<div class="line">    poolId, std::move(condition)</div>
+<div class="line">    std::move(scheduler)</div>
 <div class="line">);</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// 4. Register with the game loop</span></div>
+<div class="line"><span class="comment">// 3. Register with the game loop</span></div>
 <div class="line">gameLoop.phase(PhaseType::Main)</div>
 <div class="line">    .addPass()</div>
 <div class="line">    .addSystem(std::move(spawnSystem));</div>

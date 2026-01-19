@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolSnapshot" kind="struct" language="C++" prot="public">
+    <compoundname>helios::engine::runtime::pooling::GameObjectPoolSnapshot</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolSnapshot_1a2bc5b3c83972e0adbc40f5614b4f0630" prot="public" static="no" mutable="no">
+        <type>const size_t</type>
+        <definition>const size_t helios::engine::runtime::pooling::GameObjectPoolSnapshot::activeCount</definition>
+        <argsstring></argsstring>
+        <name>activeCount</name>
+        <qualifiedname>helios::engine::runtime::pooling::GameObjectPoolSnapshot::activeCount</qualifiedname>
+        <briefdescription>
+<para>Number of currently active (in-use) entities in the pool. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/pooling/GameObjectPoolSnapshot.ixx" line="38" column="22" bodyfile="include/helios/engine/runtime/pooling/GameObjectPoolSnapshot.ixx" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolSnapshot_1af3461e09c8080818b67e7376f4441985" prot="public" static="no" mutable="no">
+        <type>const size_t</type>
+        <definition>const size_t helios::engine::runtime::pooling::GameObjectPoolSnapshot::inactiveCount</definition>
+        <argsstring></argsstring>
+        <name>inactiveCount</name>
+        <qualifiedname>helios::engine::runtime::pooling::GameObjectPoolSnapshot::inactiveCount</qualifiedname>
+        <briefdescription>
+<para>Number of currently inactive (available) entities in the pool. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/helios/engine/runtime/pooling/GameObjectPoolSnapshot.ixx" line="43" column="22" bodyfile="include/helios/engine/runtime/pooling/GameObjectPoolSnapshot.ixx" bodystart="43" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Immutable snapshot of a <ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool" kindref="compound">GameObjectPool</ref>&apos;s current state. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolSnapshot" kindref="compound">GameObjectPoolSnapshot</ref> provides a point-in-time view of a pool&apos;s active and inactive entity counts. This is useful for monitoring pool utilization, debugging spawn issues, and making spawn decisions based on available capacity.</para>
+<para>The snapshot is read-only and captures the state at creation time; subsequent pool operations do not affect it.</para>
+<para>Example usage: ```cpp auto snapshot = poolManager.poolSnapshot(bulletPoolId); if (snapshot.inactiveCount &gt; 0) { // Pool has available capacity for spawning } ```</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool" kindref="compound">GameObjectPool</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_1a8dd6b2a3a5252afb190ab22e0ddbc277" kindref="member">GameObjectPoolManager::poolSnapshot</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="include/helios/engine/runtime/pooling/GameObjectPoolSnapshot.ixx" line="33" column="5" bodyfile="include/helios/engine/runtime/pooling/GameObjectPoolSnapshot.ixx" bodystart="33" bodyend="45"/>
+    <listofallmembers>
+      <member refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolSnapshot_1a2bc5b3c83972e0adbc40f5614b4f0630" prot="public" virt="non-virtual"><scope>helios::engine::runtime::pooling::GameObjectPoolSnapshot</scope><name>activeCount</name></member>
+      <member refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolSnapshot_1af3461e09c8080818b67e7376f4441985" prot="public" virt="non-virtual"><scope>helios::engine::runtime::pooling::GameObjectPoolSnapshot</scope><name>inactiveCount</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

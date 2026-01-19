@@ -14,5 +14,6 @@ var module__helios_8engine_8runtime_8gameloop_8GameLoop =
     [ "helios::engine::runtime::gameloop::GameLoop::postPhase_", "module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a53abfe8e0aed479d00ec3867d5fd0412", null ],
     [ "helios::engine::runtime::gameloop::GameLoop::commandBuffer_", "module__helios_8engine_8runtime_8gameloop_8GameLoop.html#a1ee2f3b652d9619f4f328b43862b15c2", null ],
     [ "helios::engine::runtime::gameloop::GameLoop::phaseEventBus_", "module__helios_8engine_8runtime_8gameloop_8GameLoop.html#aa4fa49a8c51021ff24404e84b20696b5", null ],
-    [ "helios::engine::runtime::gameloop::GameLoop::passEventBus_", "module__helios_8engine_8runtime_8gameloop_8GameLoop.html#abf5317ab24eb3c9dbfe5c0a827680699", null ]
+    [ "helios::engine::runtime::gameloop::GameLoop::passEventBus_", "module__helios_8engine_8runtime_8gameloop_8GameLoop.html#abf5317ab24eb3c9dbfe5c0a827680699", null ],
+    [ "helios::engine::runtime::gameloop::GameLoop::frameEventBus_", "module__helios_8engine_8runtime_8gameloop_8GameLoop.html#ae54b7c4d141a90c2fc65a0bbbe887426", null ]
 ];

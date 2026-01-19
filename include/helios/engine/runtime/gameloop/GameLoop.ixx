@@ -109,6 +109,22 @@ export namespace helios::engine::runtime::gameloop {
          */
         helios::engine::runtime::messaging::event::GameLoopEventBus passEventBus_{};
 
+        /**
+         * @brief Event bus for frame-level event propagation.
+         *
+         * Events pushed via `UpdateContext::pushFrame()` are buffered here
+         * and become readable in the next frame via `UpdateContext::readFrame()`.
+         * The buffer swap occurs at the end of the Post phase.
+         *
+         * Frame-level events persist across all phases within a frame and are
+         * useful for cross-frame communication (e.g., collision events that
+         * should be processed in the next frame).
+         *
+         * @see UpdateContext::pushFrame()
+         * @see UpdateContext::readFrame()
+         */
+        helios::engine::runtime::messaging::event::GameLoopEventBus frameEventBus_{};
+
 
         /**
          * @brief Commits pass-level state based on the specified CommitPoint flags.
@@ -168,7 +184,9 @@ export namespace helios::engine::runtime::gameloop {
          * @see UpdateContext::pushPhase()
          * @see UpdateContext::readPhase()
          */
-        void phaseCommit(helios::engine::runtime::world::GameWorld& gameWorld, helios::engine::runtime::world::UpdateContext& updateContext) {
+        void phaseCommit(
+            helios::engine::runtime::world::GameWorld& gameWorld,
+            helios::engine::runtime::world::UpdateContext& updateContext) {
             phaseEventBus_.swapBuffers();
             passEventBus_.clearAll();
 
@@ -222,9 +240,20 @@ export namespace helios::engine::runtime::gameloop {
         /**
          * @brief Initializes the GameLoop and all registered phases and passes.
          *
-         * Must be called once before the first update(). Asserts if called multiple times.
+         * @details Iterates through all phases (Pre, Main, Post) and calls their
+         * `init()` methods, which in turn initialize all registered passes and
+         * systems. Systems receive a reference to the GameWorld for component
+         * queries and entity access.
+         *
+         * Must be called exactly once before the first `update()` call.
          *
          * @param gameWorld Reference to the game world to initialize with.
+         *
+         * @pre Must not have been called before (asserts on multiple calls).
+         *
+         * @see Phase::init()
+         * @see Pass::init()
+         * @see System::init()
          */
         void init(helios::engine::runtime::world::GameWorld& gameWorld) {
 
@@ -252,12 +281,31 @@ export namespace helios::engine::runtime::gameloop {
         /**
          * @brief Executes one full frame update across all phases.
          *
-         * Iterates through Pre, Main, and Post phases, updating all registered
-         * systems and committing events and commands after each phase.
+         * @details Iterates through Pre, Main, and Post phases, updating all registered
+         * systems and committing events and commands after each phase. The frame lifecycle:
+         *
+         * 1. **Pre Phase:** Input processing, command generation, preparation
+         * 2. **Main Phase:** Core gameplay logic, physics, collision detection
+         * 3. **Post Phase:** Cleanup, synchronization, rendering preparation
+         *
+         * After each phase, `phaseCommit()` is called to:
+         * - Swap phase event buffers (events become readable in next phase)
+         * - Clear pass event buffers
+         * - Flush command buffer
+         * - Flush managers
+         *
+         * After the Post phase, the frame event bus is swapped, making frame-level
+         * events readable in the next frame.
          *
          * @param gameWorld Reference to the game world.
          * @param deltaTime Time elapsed since the last frame in seconds.
          * @param inputSnapshot Snapshot of the current input state.
+         *
+         * @pre init() must have been called before the first update.
+         *
+         * @see Phase
+         * @see phaseCommit()
+         * @see UpdateContext
          */
         void update(helios::engine::runtime::world::GameWorld& gameWorld, float deltaTime, const helios::input::InputSnapshot& inputSnapshot) noexcept {
 
@@ -266,12 +314,13 @@ export namespace helios::engine::runtime::gameloop {
             auto updateContext = helios::engine::runtime::world::UpdateContext(
                   commandBuffer_,
                   gameWorld,
+                  deltaTime,
                   phaseEventBus_,
-                  passEventBus_
+                  passEventBus_,
+                  frameEventBus_,
+                  inputSnapshot
               );
 
-            updateContext.setDeltaTime(deltaTime);
-            updateContext.setInputSnapshot(inputSnapshot);
 
             // gameloop phases
             for (auto phase : {helios::engine::runtime::gameloop::PhaseType::Pre,
@@ -281,16 +330,21 @@ export namespace helios::engine::runtime::gameloop {
                 switch (phase) {
                     case helios::engine::runtime::gameloop::PhaseType::Pre:
                         prePhase_.update(updateContext);
+                        phaseCommit(gameWorld, updateContext);
                         break;
                     case helios::engine::runtime::gameloop::PhaseType::Main:
                         mainPhase_.update(updateContext);
+                        phaseCommit(gameWorld, updateContext);
+
                         break;
                     case helios::engine::runtime::gameloop::PhaseType::Post:
                         postPhase_.update(updateContext);
+                        phaseCommit(gameWorld, updateContext);
+                        frameEventBus_.swapBuffers();
                         break;
                 }
 
-                phaseCommit(gameWorld, updateContext);
+
             }
         }
 

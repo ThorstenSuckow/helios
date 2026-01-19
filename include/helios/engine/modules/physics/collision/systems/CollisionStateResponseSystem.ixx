@@ -25,13 +25,13 @@ import helios.engine.modules.physics.collision.types.CollisionBehavior;
 
 import helios.engine.modules.physics.collision.components.CollisionStateComponent;
 
-import helios.engine.mechanics.spawn.commands.DespawnCommand;
+import helios.engine.runtime.spawn.commands.DespawnCommand;
 
-import helios.engine.modules.pool.components.PoolIdComponent;
+import helios.engine.mechanics.spawn.components.SpawnedByProfileComponent;
 
 using namespace helios::engine::modules::physics::collision::components;
 using namespace helios::engine::modules::physics::collision::types;
-using namespace helios::engine::mechanics::spawn::commands;
+using namespace helios::engine::runtime::spawn::commands;
 
 
 export namespace helios::engine::modules::physics::collision::systems {
@@ -45,7 +45,7 @@ export namespace helios::engine::modules::physics::collision::systems {
      * with Despawn behavior).
      *
      * The system requires entities to have both a CollisionStateComponent (for collision
-     * data) and a PoolIdComponent (for pool-based lifecycle management).
+     * data) and a SpawnedByProfileComponent.
      *
      * Supported behaviors:
      * - **Despawn:** Issues a DespawnCommand to return the entity to its object pool.
@@ -67,9 +67,9 @@ export namespace helios::engine::modules::physics::collision::systems {
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
-            for (auto [entity, csc, pic] : gameWorld_->find<
+            for (auto [entity, csc, sbp] : gameWorld_->find<
                 CollisionStateComponent,
-                helios::engine::modules::pool::components::PoolIdComponent
+                helios::engine::mechanics::spawn::components::SpawnedByProfileComponent
             >().each()) {
 
                 if (!csc->hasCollision()) {
@@ -81,7 +81,7 @@ export namespace helios::engine::modules::physics::collision::systems {
                 if (collisionBehavior == CollisionBehavior::Despawn) {
                     updateContext.commandBuffer().add<DespawnCommand>(
                         entity->guid(),
-                        pic->gameObjectPoolId()
+                        sbp->spawnProfileId()
                     );
                 }
 

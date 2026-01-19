@@ -2,11 +2,11 @@
 
 Entity spawning and lifecycle management.
 
-This module provides the infrastructure for spawning and despawning GameObjects at runtime based on configurable conditions and strategies.
+This module provides the infrastructure for spawning and despawning GameObjects at runtime based on configurable conditions and scheduling rules.
 
 ## Architecture
 
-The spawn system follows a command-based architecture with separation of concerns:
+The spawn system follows a scheduler-based architecture with separation of concerns:
 
 ```
 ┌─────────────────────┐    ┌─────────────────────┐
@@ -16,20 +16,20 @@ The spawn system follows a command-based architecture with separation of concern
           │                           │
           ▼                           ▼
 ┌─────────────────────────────────────────────────┐
-│           GameObjectSpawnSystem                 │
-│   (calculates budget, emits SpawnCommands)      │
+│              SpawnScheduler                     │
+│   (evaluates rules, produces ScheduledPlans)    │
 └─────────────────────┬───────────────────────────┘
                       │
                       ▼
 ┌─────────────────────────────────────────────────┐
-│           SpawnCommandDispatcher                │
-│   (routes commands to SpawnManager)             │
+│         GameObjectSpawnSystem                   │
+│   (reads frame events, enqueues SpawnCommands)  │
 └─────────────────────┬───────────────────────────┘
                       │
                       ▼
 ┌─────────────────────────────────────────────────┐
-│              SpawnManager                       │
-│   (acquires from pool, applies strategy)        │
+│          ScheduledSpawnPlanCommand              │
+│   (dispatched to SpawnManager for execution)    │
 └─────────────────────────────────────────────────┘
 ```
 
@@ -37,34 +37,35 @@ The spawn system follows a command-based architecture with separation of concern
 
 | Directory | Purpose |
 |-----------|---------|
-| `commands/` | SpawnCommand and DespawnCommand for deferred execution |
-| `dispatcher/` | Command dispatchers that route to managers |
-| `logic/` | Spawn conditions and strategies |
-| `manager/` | SpawnManager for pool-based spawning |
-| `requests/` | Data structures for spawn/despawn requests |
+| `components/` | Spawn-related components (SpawnedByProfileComponent) |
 | `systems/` | GameObjectSpawnSystem for game loop integration |
+
+## Related Modules
+
+The spawn system integrates with several other modules:
+
+- `helios.engine.mechanics.spawn.logic` — SpawnScheduler, SpawnCondition, SpawnStrategy
+- `helios.engine.mechanics.spawn.commands` — ScheduledSpawnPlanCommand
+- `helios.engine.runtime.spawn` — SpawnManager, SpawnRequestHandler
+- `helios.engine.runtime.pooling` — GameObjectPoolManager
 
 ## Usage
 
 ```cpp
-// 1. Create a spawn condition (when to spawn)
-auto condition = std::make_unique<TimerSpawnCondition>(2.0f);  // Every 2 seconds
-
-// 2. Create a spawn strategy (how to configure spawned objects)
-auto strategy = std::make_unique<CallbackSpawnStrategy>(
-    [](const GameWorld& world, GameObject& obj, const UpdateContext& ctx) {
-        auto* transform = obj.get<TranslationStateComponent>();
-        transform->setTranslation({0.0f, 0.0f, 0.0f});
-        return true;
-    }
+// 1. Create spawn rules with conditions
+auto scheduler = std::make_unique<SpawnScheduler>();
+scheduler->addRule(
+    SpawnRuleId{1},
+    std::make_unique<TimerSpawnCondition>(2.0f),  // Every 2 seconds
+    enemyProfileId
 );
 
-// 3. Create the spawn system
+// 2. Create the spawn system with the scheduler
 auto spawnSystem = std::make_unique<GameObjectSpawnSystem>(
-    poolId, std::move(condition)
+    std::move(scheduler)
 );
 
-// 4. Register with the game loop
+// 3. Register with the game loop
 gameLoop.phase(PhaseType::Main)
     .addPass()
     .addSystem(std::move(spawnSystem));
@@ -76,6 +77,6 @@ gameLoop.phase(PhaseType::Main)
 <summary>Doxygen</summary><p>
 @namespace helios::engine::mechanics::spawn
 @brief Entity spawning and lifecycle management.
-@details This namespace contains the spawning subsystem of the gameplay layer. It provides a flexible, command-based architecture using conditions (when to spawn), strategies (how to spawn), and managers (pool integration) to control entity creation and destruction at runtime.
+@details This namespace contains the spawning subsystem of the gameplay layer. It provides a scheduler-based architecture using conditions (when to spawn), strategies (how to spawn), and integration with pool managers to control entity creation and destruction at runtime.
 </p></details>
 

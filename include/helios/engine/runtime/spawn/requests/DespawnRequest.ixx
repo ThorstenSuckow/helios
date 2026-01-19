@@ -4,18 +4,14 @@
  */
 module;
 
-#include <cinttypes>
 #include <optional>
 
-export module helios.engine.mechanics.spawn.requests.DespawnRequest;
-
-import helios.math;
+export module helios.engine.runtime.spawn.requests.DespawnRequest;
 
 import helios.util.Guid;
+import helios.engine.core.data.SpawnProfileId;
 
-import helios.engine.core.data.GameObjectPoolId;
-
-export namespace helios::engine::mechanics::spawn::requests {
+export namespace helios::engine::runtime::spawn::requests {
 
     /**
      * @brief Data structure representing a request to despawn a GameObject.
@@ -26,6 +22,7 @@ export namespace helios::engine::mechanics::spawn::requests {
      * to return it to.
      *
      * @see DespawnCommand
+     * @see DespawnCommandDispatcher
      * @see SpawnManager
      */
     struct DespawnRequest {
@@ -36,13 +33,13 @@ export namespace helios::engine::mechanics::spawn::requests {
         const helios::util::Guid entityId;
 
         /**
-         * @brief Optional pool ID to return the entity to.
+         * @brief Optional spawn profile ID for returning entity to correct pool.
          *
-         * @details If specified, the entity will be returned to this pool.
-         * If nullopt, the SpawnManager must determine the correct pool or
-         * handle the despawn without pool return.
+         * If not set, the SpawnManager must determine the pool from the entity's
+         * SpawnedByProfileComponent or handle the despawn without pool return.
          */
-        const std::optional<helios::engine::core::data::GameObjectPoolId> gameObjectPoolId;
+        const std::optional<helios::engine::core::data::SpawnProfileId> spawnProfileId;
+
     };
 
 }

@@ -5,31 +5,15 @@
 module;
 
 #include <cassert>
-#include <iostream>
-#include <memory>
 
 export module helios.engine.mechanics.combat.components.ShootComponent;
 
 import helios.math.types;
-import helios.math.utils;
-import helios.engine.runtime.world.UpdateContext;
-import helios.engine.ecs.Updatable;
 import helios.engine.ecs.Component;
+import helios.engine.ecs.GameObject;
 import helios.engine.mechanics.combat.components.Aim2DComponent;
 import helios.engine.modules.spatial.transform.components.TransformComponent;
 
-import helios.math;
-
-import helios.engine.ecs.GameObject;
-import helios.engine.runtime.world.GameWorld;
-import helios.scene.SceneNode;
-
-import helios.rendering;
-import helios.ext.opengl.rendering.model.OpenGLMesh;
-import helios.ext.opengl.rendering.shader.OpenGLUniformLocationMap;
-import helios.ext.opengl.rendering.shader.OpenGLShader;
-import helios.util.io.BasicStringFileReader;
-import helios.rendering.model.config.MaterialProperties;
 
 export namespace helios::engine::mechanics::combat::components {
 
@@ -133,7 +117,7 @@ export namespace helios::engine::mechanics::combat::components {
          * @param intensity Fire intensity (0.0 to 1.0). Zero stops firing.
          * @param sourceVelocity The velocity of the object emitting the projectile.
          */
-        void shoot(float intensity, helios::math::vec3f sourceVelocity) {
+        void shoot(const float intensity, helios::math::vec3f sourceVelocity) {
 
             if (intensity == 0.0f || !aimComponent_) {
                 intensity_ = 0.0f;
@@ -189,6 +173,10 @@ export namespace helios::engine::mechanics::combat::components {
             projectileSpeed_ = speed;
         }
 
+
+        [[nodiscard]] helios::math::vec3f sourceVelocity() const noexcept {
+            return sourceVelocity_;
+        }
     };
 
 

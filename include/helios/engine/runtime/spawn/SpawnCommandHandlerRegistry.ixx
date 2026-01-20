@@ -1,6 +1,6 @@
 /**
- * @file SpawnRequestHandlerRegistry.ixx
- * @brief Registry mapping spawn profile IDs to their request handlers.
+ * @file SpawnCommandHandlerRegistry.ixx
+ * @brief Registry mapping spawn profile IDs to their command handlers.
  */
 module;
 
@@ -8,32 +8,33 @@ module;
 #include <unordered_map>
 #include <vector>
 
-export module helios.engine.runtime.pooling.SpawnRequestHandlerRegistry;
+export module helios.engine.runtime.spawn.SpawnCommandHandlerRegistry;
 
+import helios.engine.runtime.spawn.SpawnCommandHandler;
 import helios.engine.core.data.SpawnProfileId;
-import helios.engine.runtime.pooling.SpawnRequestHandler;
 
 
-export namespace helios::engine::runtime::pooling  {
+export namespace helios::engine::runtime::spawn  {
+
 
     /**
-     * @brief Registry that maps SpawnProfileIds to their SpawnRequestHandlers.
+     * @brief Registry that maps SpawnProfileIds to their SpawnCommandHandlers.
      *
-     * @details PoolManagerRegistry provides lookup from spawn profile IDs to the handlers
-     * responsible for processing spawn and despawn requests for those profiles.
-     * This enables the spawn/despawn system to route requests to the correct
-     * manager without direct coupling.
+     * @details SpawnCommandHandlerRegistry provides lookup from spawn profile IDs
+     * to the handlers responsible for processing spawn and despawn commands for
+     * those profiles. This enables the spawn/despawn system to route commands to
+     * the correct manager without direct coupling.
      *
      * The registry is owned by the GameWorld and populated during manager
      * initialization.
      *
      * @note Uses amortized O(1) lookup via std::unordered_map.
      *
-     * @see SpawnRequestHandler
-     * @see GameObjectPoolId
-     * @see GameWorld::registerSpawnRequestHandler
+     * @see SpawnCommandHandler
+     * @see SpawnProfileId
+     * @see GameWorld::registerSpawnCommandHandler
      */
-    class PoolManagerRegistry {
+    class SpawnCommandHandlerRegistry {
 
     protected:
 
@@ -45,12 +46,12 @@ export namespace helios::engine::runtime::pooling  {
          */
         std::unordered_map<
             helios::engine::core::data::SpawnProfileId,
-            helios::engine::runtime::pooling::SpawnRequestHandler*> registry_{};
+            helios::engine::runtime::spawn::SpawnCommandHandler*> registry_{};
 
 
     public:
 
-        PoolManagerRegistry() = default;
+        SpawnCommandHandlerRegistry() = default;
 
         /**
          * @brief Registers a handler for a spawn profile ID.
@@ -62,7 +63,7 @@ export namespace helios::engine::runtime::pooling  {
          */
         [[nodiscard]] bool add(
             const helios::engine::core::data::SpawnProfileId spawnProfileId,
-            helios::engine::runtime::pooling::SpawnRequestHandler& poolManager
+            helios::engine::runtime::spawn::SpawnCommandHandler& poolManager
         ) {
             if (registry_.contains(spawnProfileId)) {
                 return false;
@@ -80,7 +81,7 @@ export namespace helios::engine::runtime::pooling  {
          *
          * @return Pointer to the handler if found, nullptr otherwise.
          */
-        [[nodiscard]] helios::engine::runtime::pooling::SpawnRequestHandler* get(
+        [[nodiscard]] helios::engine::runtime::spawn::SpawnCommandHandler* get(
             helios::engine::core::data::SpawnProfileId spawnProfileId) {
             auto it = registry_.find(spawnProfileId);
 

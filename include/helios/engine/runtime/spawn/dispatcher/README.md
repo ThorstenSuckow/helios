@@ -10,19 +10,19 @@ This module contains dispatchers that route spawn and despawn commands to the ap
 
 | Dispatcher | Handles | Purpose |
 |------------|---------|---------|
-| `SpawnCommandDispatcher` | `SpawnCommand` | Routes spawn requests to SpawnManager |
-| `DespawnCommandDispatcher` | `DespawnCommand` | Routes despawn requests to SpawnManager |
+| `SpawnCommandDispatcher` | `SpawnCommand` | Routes spawn commands to SpawnManager |
+| `DespawnCommandDispatcher` | `DespawnCommand` | Routes despawn commands to SpawnManager |
 | `ScheduledSpawnPlanCommandDispatcher` | `ScheduledSpawnPlanCommand` | Routes scheduled plans to SpawnManager |
 
 ## Architecture
 
 ```
 ┌─────────────────┐     ┌───────────────┐     ┌──────────────────────────────────┐
-│ CommandBuffer   │     │ Dispatcher    │     │ SpawnRequestHandler              │
+│ CommandBuffer   │     │ Dispatcher    │     │ SpawnCommandHandler              │
 │                 │     │               │     │ (SpawnManager)                   │
-│ flush()         │────>│ dispatchTyped │────>│ submit(SpawnRequest)             │
-│                 │     │               │     │ submit(DespawnRequest)           │
-│                 │     │               │     │ submit(ScheduledSpawnPlanRequest)│
+│ flush()         │────>│ dispatchTyped │────>│ submit(SpawnCommand)             │
+│                 │     │               │     │ submit(DespawnCommand)           │
+│                 │     │               │     │ submit(ScheduledSpawnPlanCommand)│
 └─────────────────┘     └───────────────┘     └──────────────────────────────────┘
 ```
 
@@ -43,7 +43,7 @@ Commands are added to the buffer by systems and automatically routed during flus
 commandBuffer.add<SpawnCommand>(profileId, spawnContext, count);
 commandBuffer.add<DespawnCommand>(entityGuid, profileId);
 
-// During flush, dispatchers route to managers
+// During flush, dispatchers route commands to handlers
 commandBuffer.flush(gameWorld);
 ```
 
@@ -53,6 +53,6 @@ commandBuffer.flush(gameWorld);
 <summary>Doxygen</summary><p>
 @namespace helios::engine::runtime::spawn::dispatcher
 @brief Command dispatchers for spawn operations.
-@details This namespace contains typed command dispatchers that route spawn and despawn commands to the SpawnManager for deferred processing via SpawnRequestHandler.
+@details This namespace contains typed command dispatchers that route spawn and despawn commands to the SpawnManager for deferred processing via SpawnCommandHandler.
 </p></details>
 

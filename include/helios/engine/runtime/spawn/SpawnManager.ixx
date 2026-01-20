@@ -1,6 +1,6 @@
 /**
  * @file SpawnManager.ixx
- * @brief Manager for processing spawn and despawn requests from pools.
+ * @brief Manager for processing spawn and despawn commands from pools.
  */
 module;
 
@@ -15,15 +15,17 @@ export module helios.engine.runtime.spawn.SpawnManager;
 import helios.engine.runtime.spawn.SpawnPlanCursor;
 import helios.engine.runtime.spawn.SpawnProfile;
 import helios.engine.runtime.spawn.SpawnContext;
-import helios.engine.runtime.spawn.events.SpawnPlanRequestExecutedEvent;
-import helios.engine.runtime.spawn.requests.SpawnRequest;
-import helios.engine.runtime.spawn.requests.ScheduledSpawnPlanRequest;
-import helios.engine.runtime.spawn.requests.DespawnRequest;
+import helios.engine.runtime.spawn.events.SpawnPlanCommandExecutedEvent;
+
+import helios.engine.runtime.spawn.commands.SpawnCommand;
+import helios.engine.runtime.spawn.commands.ScheduledSpawnPlanCommand;
+import helios.engine.runtime.spawn.commands.DespawnCommand;
+
 import helios.engine.runtime.world.Manager;
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.pooling.GameObjectPoolManager;
-import helios.engine.runtime.pooling.SpawnRequestHandler;
+import helios.engine.runtime.spawn.SpawnCommandHandler;
 import helios.engine.core.data.SpawnProfileId;
 import helios.engine.ecs.GameObject;
 import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
@@ -32,18 +34,18 @@ import helios.engine.mechanics.spawn.components.SpawnedByProfileComponent;
 export namespace helios::engine::runtime::spawn {
 
     /**
-     * @brief Manager for processing spawn and despawn requests.
+     * @brief Manager for processing spawn and despawn commands.
      *
      * @details SpawnManager is a Manager that handles the lifecycle of pooled
-     * GameObjects. It receives requests via SpawnRequestHandler::submit() and
+     * GameObjects. It receives commands via SpawnCommandHandler::submit() and
      * queues them for deferred processing during the manager flush phase.
      *
-     * ## Request Processing Order
+     * ## Command Processing Order
      *
-     * During flush(), requests are processed in this order:
-     * 1. **Despawn requests** — Entities are returned to their pools
-     * 2. **Spawn requests** — Single entities are acquired and initialized
-     * 3. **Scheduled spawn plan requests** — Batch spawns from scheduler
+     * During flush(), commands are processed in this order:
+     * 1. **Despawn commands** — Entities are returned to their pools
+     * 2. **Spawn commands** — Single entities are acquired and initialized
+     * 3. **Scheduled spawn plan commands** — Batch spawns from scheduler
      *
      * ## Spawn Profiles
      *
@@ -55,7 +57,7 @@ export namespace helios::engine::runtime::spawn {
      * ## Integration
      *
      * SpawnManager registers itself with the GameWorld for each profile ID,
-     * allowing commands to route requests to the correct handler.
+     * allowing commands to route to the correct handler.
      *
      * Example:
      * ```cpp
@@ -72,29 +74,29 @@ export namespace helios::engine::runtime::spawn {
      * gameWorld.addManager(std::move(spawnManager));
      * ```
      *
-     * @see SpawnRequest
-     * @see DespawnRequest
-     * @see ScheduledSpawnPlanRequest
+     * @see SpawnCommand
+     * @see DespawnCommand
+     * @see ScheduledSpawnPlanCommand
      * @see SpawnProfile
-     * @see SpawnRequestHandler
+     * @see SpawnCommandHandler
      */
     class SpawnManager : public helios::engine::runtime::world::Manager,
-                         public helios::engine::runtime::pooling::SpawnRequestHandler {
+                         public helios::engine::runtime::spawn::SpawnCommandHandler {
 
         /**
-         * @brief Queue of pending spawn requests.
+         * @brief Queue of pending spawn commands.
          */
-        std::vector<helios::engine::runtime::spawn::requests::SpawnRequest> spawnRequests_;
+        std::vector<helios::engine::runtime::spawn::commands::SpawnCommand> spawnCommands_;
 
         /**
-         * @brief Queue of pending despawn requests.
+         * @brief Queue of pending despawn commands.
          */
-        std::vector<helios::engine::runtime::spawn::requests::DespawnRequest> despawnRequests_;
+        std::vector<helios::engine::runtime::spawn::commands::DespawnCommand> despawnCommands_;
 
         /**
-         * @brief Queue of pending scheduled spawn plan requests.
+         * @brief Queue of pending scheduled spawn plan commands.
          */
-        std::vector<helios::engine::runtime::spawn::requests::ScheduledSpawnPlanRequest> scheduledSpawnPlanRequests_;
+        std::vector<helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand> scheduledSpawnPlanCommands_;
 
         /**
          * @brief Pointer to the pool manager for acquire/release operations.
@@ -109,30 +111,29 @@ export namespace helios::engine::runtime::spawn {
             std::unique_ptr<const helios::engine::runtime::spawn::SpawnProfile>> spawnProfiles_;
 
         /**
-         * @brief Processes scheduled spawn plan requests.
+         * @brief Processes scheduled spawn plan commands.
          *
          * @details Iterates through each plan, acquires entities from the pool,
          * positions them using the profile's placer, initializes them using
          * the profile's initializer, and pushes a frame event for confirmation.
          *
-         * @param requests Span of scheduled spawn plan requests to process.
+         * @param commands Span of scheduled spawn plan commands to process.
          * @param gameWorld The game world.
          * @param updateContext The current update context.
          */
-        void executeScheduledSpawnPlanRequests(
-            std::span<helios::engine::runtime::spawn::requests::ScheduledSpawnPlanRequest> requests,
+        void executeScheduledSpawnPlanCommands(
+            std::span<helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand> commands,
             helios::engine::runtime::world::GameWorld& gameWorld,
             helios::engine::runtime::world::UpdateContext& updateContext
         ) {
 
-            for (auto& spawnPlanRequest: requests) {
+            for (auto& scheduledSpawnPlanCommand: commands) {
 
-                auto& scheduledPlan = spawnPlanRequest.scheduledSpawnPlan;
-                auto& spawnPlan     = scheduledPlan.spawnPlan;
+                const auto& spawnPlan          = scheduledSpawnPlanCommand.spawnPlan();
 
-                auto spawnProfileId   = scheduledPlan.spawnProfileId;
-                auto spawnRuleId      = spawnPlan.spawnRuleId;
-                auto amount     = spawnPlan.amount;
+                const auto spawnProfileId   = scheduledSpawnPlanCommand.spawnProfileId();
+                const auto spawnRuleId      = spawnPlan.spawnRuleId;
+                const auto amount     = spawnPlan.amount;
 
                 const auto it = spawnProfiles_.find(spawnProfileId);
                 assert(it != spawnProfiles_.end() && "SpawnProfile not part of SpawnManager");
@@ -168,7 +169,7 @@ export namespace helios::engine::runtime::spawn {
                     assert(sbp && "unexpected missing SpawnedByProfileComponent");
 
                     auto spawnCursor = helios::engine::runtime::spawn::SpawnPlanCursor{spawnCount, i};
-                    const auto& spawnContext =  spawnPlanRequest.spawnContext;
+                    const auto& spawnContext =  scheduledSpawnPlanCommand.spawnContext();
                     if (tsc) {
                         const auto position = spawnProfile->spawnPlacer->getPosition(
                             go->guid(),
@@ -180,12 +181,12 @@ export namespace helios::engine::runtime::spawn {
                         tsc->setTranslation(position);
                     }
 
-                    spawnProfile->spawnInitializer->initialize(*go, spawnCursor, spawnPlanRequest.spawnContext);
+                    spawnProfile->spawnInitializer->initialize(*go, spawnCursor, spawnContext);
                     sbp->setSpawnProfileId(spawnProfileId);
                     go->setActive(true);
                 }
 
-                updateContext.pushFrame<helios::engine::runtime::spawn::events::SpawnPlanRequestExecutedEvent>(
+                updateContext.pushFrame<helios::engine::runtime::spawn::events::SpawnPlanCommandExecutedEvent>(
                     spawnRuleId, spawnCount
                 );
             }
@@ -193,20 +194,20 @@ export namespace helios::engine::runtime::spawn {
 
 
         /**
-         * @brief Processes spawn requests, acquiring and initializing objects.
+         * @brief Processes spawn commands, acquiring and initializing objects.
          *
-         * @param requests Span of spawn requests to process.
+         * @param commands Span of spawn commands to process.
          * @param gameWorld The game world.
          * @param updateContext The current update context.
          */
         void spawnObjects(
-            std::span<helios::engine::runtime::spawn::requests::SpawnRequest> requests,
+            std::span<helios::engine::runtime::spawn::commands::SpawnCommand> commands,
             helios::engine::runtime::world::GameWorld& gameWorld,
             helios::engine::runtime::world::UpdateContext& updateContext) {
 
-            for (auto& spawnRequest: requests) {
-                auto spawnProfileId = spawnRequest.spawnProfileId;
-                auto& spawnContext  = spawnRequest.spawnContext;
+            for (auto& spawnCommand: commands) {
+                const auto spawnProfileId = spawnCommand.spawnProfileId();
+                const auto spawnContext   = spawnCommand.spawnContext();
 
                 const auto it = spawnProfiles_.find(spawnProfileId);
                 assert(it != spawnProfiles_.end() && "SpawnProfile not part of SpawnManager");
@@ -243,29 +244,27 @@ export namespace helios::engine::runtime::spawn {
 
 
         /**
-         * @brief Processes despawn requests, releasing objects back to pools.
+         * @brief Processes despawn commands, releasing objects back to pools.
          *
-         * @param requests Span of despawn requests to process.
+         * @param commands Span of despawn commands to process.
          * @param gameWorld The game world.
          * @param updateContext The current update context.
          */
         void despawnObjects(
-            std::span<helios::engine::runtime::spawn::requests::DespawnRequest> requests,
+            std::span<helios::engine::runtime::spawn::commands::DespawnCommand> commands,
             helios::engine::runtime::world::GameWorld& gameWorld,
             helios::engine::runtime::world::UpdateContext& updateContext) {
 
-            for (auto& despawnRequest : requests) {
-                if (despawnRequest.spawnProfileId.has_value()) {
+            for (auto& despawnCommand : commands) {
+                const auto spawnProfileId = despawnCommand.spawnProfileId();
 
-                    auto spawnProfileId = despawnRequest.spawnProfileId.value();
+                const auto it = spawnProfiles_.find(spawnProfileId);
+                assert(it != spawnProfiles_.end() && "SpawnProfile not part of SpawnManager");
+                const auto spawnProfile = it->second.get();
+                auto gameObjectPoolId = spawnProfile->gameObjectPoolId;
 
-                    const auto it = spawnProfiles_.find(spawnProfileId);
-                    assert(it != spawnProfiles_.end() && "SpawnProfile not part of SpawnManager");
-                    const auto spawnProfile = it->second.get();
-                    auto gameObjectPoolId = spawnProfile->gameObjectPoolId;
+                gameObjectPoolManager_->release(gameObjectPoolId, despawnCommand.guid());
 
-                    gameObjectPoolManager_->release(gameObjectPoolId, despawnRequest.entityId);
-                }
             }
         }
 
@@ -278,46 +277,46 @@ export namespace helios::engine::runtime::spawn {
         SpawnManager() = default;
 
         /**
-         * @brief Submits a spawn request for deferred processing.
+         * @brief Submits a spawn command for deferred processing.
          *
-         * @param request The spawn request to queue.
+         * @param command The spawn command to queue.
          *
          * @return Always returns true.
          */
-        bool submit(const helios::engine::runtime::spawn::requests::SpawnRequest request) noexcept override {
-            spawnRequests_.push_back(request);
+        bool submit(const helios::engine::runtime::spawn::commands::SpawnCommand& command) noexcept override {
+            spawnCommands_.push_back(command);
             return true;
         }
 
         /**
-         * @brief Submits a despawn request for deferred processing.
+         * @brief Submits a despawn command for deferred processing.
          *
-         * @param request The despawn request to queue.
+         * @param command The despawn command to queue.
          *
          * @return Always returns true.
          */
-        bool submit(const helios::engine::runtime::spawn::requests::DespawnRequest request) noexcept override {
-            despawnRequests_.push_back(request);
+        bool submit(const helios::engine::runtime::spawn::commands::DespawnCommand& command) noexcept override {
+            despawnCommands_.push_back(command);
             return true;
         }
 
 
         /**
-         * @brief Submits a scheduled spawn plan request for deferred processing.
+         * @brief Submits a scheduled spawn plan command for deferred processing.
          *
-         * @param scheduledSpawnPlanRequest The scheduled plan request to queue.
+         * @param scheduledSpawnPlanCommand The scheduled plan command to queue.
          *
          * @return Always returns true.
          */
         bool submit(
-            helios::engine::runtime::spawn::requests::ScheduledSpawnPlanRequest scheduledSpawnPlanRequest
+            const helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand& scheduledSpawnPlanCommand
         ) noexcept override {
-            scheduledSpawnPlanRequests_.push_back(scheduledSpawnPlanRequest);
+            scheduledSpawnPlanCommands_.push_back(scheduledSpawnPlanCommand);
             return true;
         }
 
         /**
-         * @brief Flushes pending requests, processing despawns then spawns.
+         * @brief Flushes pending commands, processing despawns then spawns.
          *
          * @param gameWorld The game world.
          * @param updateContext The current update context.
@@ -326,19 +325,19 @@ export namespace helios::engine::runtime::spawn {
             helios::engine::runtime::world::GameWorld& gameWorld,
             helios::engine::runtime::world::UpdateContext& updateContext
         ) noexcept override {
-            if (!despawnRequests_.empty()) {
-                despawnObjects(despawnRequests_, gameWorld, updateContext);
-                despawnRequests_.clear();
+            if (!despawnCommands_.empty()) {
+                despawnObjects(despawnCommands_, gameWorld, updateContext);
+                despawnCommands_.clear();
             }
 
-            if (!spawnRequests_.empty()) {
-                spawnObjects(spawnRequests_, gameWorld, updateContext);
-                spawnRequests_.clear();
+            if (!spawnCommands_.empty()) {
+                spawnObjects(spawnCommands_, gameWorld, updateContext);
+                spawnCommands_.clear();
             }
 
-            if (!scheduledSpawnPlanRequests_.empty()) {
-                executeScheduledSpawnPlanRequests(scheduledSpawnPlanRequests_, gameWorld, updateContext);
-                scheduledSpawnPlanRequests_.clear();
+            if (!scheduledSpawnPlanCommands_.empty()) {
+                executeScheduledSpawnPlanCommands(scheduledSpawnPlanCommands_, gameWorld, updateContext);
+                scheduledSpawnPlanCommands_.clear();
             }
         };
 
@@ -389,7 +388,7 @@ export namespace helios::engine::runtime::spawn {
          * @brief Initializes the manager with the game world.
          *
          * @details Acquires a reference to the GameObjectPoolManager and
-         * registers this manager as the SpawnRequestHandler for all
+         * registers this manager as the SpawnCommandHandler for all
          * configured spawn profiles.
          *
          * @param gameWorld The game world to initialize with.
@@ -399,7 +398,7 @@ export namespace helios::engine::runtime::spawn {
             gameObjectPoolManager_ = gameWorld.getManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
 
             for (const auto& [spawnProfileId, _]: spawnProfiles_) {
-                gameWorld.registerSpawnRequestHandler(spawnProfileId, *this);
+                gameWorld.registerSpawnCommandHandler(spawnProfileId, *this);
             }
 
         }

@@ -213,8 +213,14 @@ export namespace helios::engine::runtime::spawn {
                 assert(it != spawnProfiles_.end() && "SpawnProfile not part of SpawnManager");
 
                 const auto spawnProfile = it->second.get();
-
                 const auto gameObjectPoolId = spawnProfile->gameObjectPoolId;
+
+                if (gameObjectPoolManager_->poolSnapshot(gameObjectPoolId).inactiveCount == 0) {
+                    /**
+                     * @todo log
+                     */
+                    continue;
+                }
 
                 auto* go = gameObjectPoolManager_->acquire(gameObjectPoolId);
                 assert(go && "Failed to acquire GameObject");

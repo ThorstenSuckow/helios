@@ -23,13 +23,14 @@ export namespace helios::engine::mechanics::spawn::systems {
      * @brief System that evaluates spawn conditions and enqueues spawn commands.
      *
      * @details GameObjectSpawnSystem bridges the spawn scheduling logic with the
-     * command-based spawning pipeline. It performs the following each frame:
+     * command-based spawning pipeline. It manages multiple SpawnScheduler instances
+     * and performs the following each frame:
      *
      * 1. **Read Frame Events:** Consumes `SpawnPlanCommandExecutedEvent` from the
-     *    previous frame to commit completed spawn operations to the scheduler.
+     *    previous frame to commit completed spawn operations to all schedulers.
      *
-     * 2. **Evaluate Conditions:** Calls `SpawnScheduler::evaluate()` to check all
-     *    registered spawn rules against their conditions (timer, trigger, etc.).
+     * 2. **Evaluate Conditions:** Calls `SpawnScheduler::evaluate()` on each
+     *    scheduler to check all registered spawn rules against their conditions.
      *
      * 3. **Drain Scheduled Plans:** Retrieves all plans that are ready to execute
      *    and enqueues them as `ScheduledSpawnPlanCommand` into the CommandBuffer.
@@ -39,12 +40,17 @@ export namespace helios::engine::mechanics::spawn::systems {
      *
      * Example setup:
      * ```cpp
-     * auto scheduler = std::make_unique<SpawnScheduler>();
-     * scheduler->addRule(enemyRuleId, enemyCondition, enemyProfileId);
+     * std::vector<std::unique_ptr<SpawnScheduler>> schedulers;
      *
-     * auto spawnSystem = std::make_unique<GameObjectSpawnSystem>(
-     *     std::move(scheduler)
-     * );
+     * auto enemyScheduler = std::make_unique<SpawnScheduler>();
+     * enemyScheduler->addRule(enemyProfileId, std::move(enemyRule));
+     * schedulers.push_back(std::move(enemyScheduler));
+     *
+     * auto powerupScheduler = std::make_unique<SpawnScheduler>();
+     * powerupScheduler->addRule(powerupProfileId, std::move(powerupRule));
+     * schedulers.push_back(std::move(powerupScheduler));
+     *
+     * auto spawnSystem = std::make_unique<GameObjectSpawnSystem>(schedulers);
      * mainPhase.addPass().add(std::move(spawnSystem));
      * ```
      *
@@ -58,34 +64,32 @@ export namespace helios::engine::mechanics::spawn::systems {
     class GameObjectSpawnSystem : public helios::engine::ecs::System {
 
         /**
-         * @brief The scheduler that manages spawn rules and conditions.
+         * @brief Collection of schedulers that manage spawn rules and conditions.
          *
-         * Owns and evaluates all registered spawn rules. When conditions are met,
-         * the scheduler produces ScheduledSpawnPlan instances for execution.
+         * @details Each scheduler owns and evaluates its registered spawn rules
+         * independently. When conditions are met, the scheduler produces
+         * ScheduledSpawnPlan instances for execution. Multiple schedulers allow
+         * grouping spawn rules by category (e.g., enemies, powerups, projectiles).
          */
-        std::unique_ptr<helios::engine::runtime::spawn::scheduling::SpawnScheduler> spawnScheduler_;
+        std::vector<std::unique_ptr<helios::engine::runtime::spawn::scheduling::SpawnScheduler>> spawnSchedulers_;
 
     public:
 
         /**
-         * @brief Constructs a GameObjectSpawnSystem with the given scheduler.
+         * @brief Constructs a GameObjectSpawnSystem with the given schedulers.
          *
-         * @param spawnScheduler The scheduler managing spawn rules. Ownership transferred.
-         *
-         * @pre spawnScheduler must not be null.
+         * @param spawnSchedulers Vector of schedulers managing spawn rules.
+         *        Ownership of all schedulers is transferred to this system.
          */
         explicit GameObjectSpawnSystem(
-            std::unique_ptr<helios::engine::runtime::spawn::scheduling::SpawnScheduler> spawnScheduler
+             std::vector<std::unique_ptr<helios::engine::runtime::spawn::scheduling::SpawnScheduler>>& spawnSchedulers
         ) :
-            spawnScheduler_(std::move(spawnScheduler))
-        {
-            assert(spawnScheduler_ != nullptr && "Unexpected nullptr for SpawnScheduler");
-        }
+            spawnSchedulers_(std::move(spawnSchedulers)) {}
 
         /**
          * @brief Processes spawn scheduling and enqueues spawn commands.
          *
-         * @details Performs the following steps:
+         * @details Iterates through all schedulers and performs these steps for each:
          * 1. Reads `SpawnPlanCommandExecutedEvent` from frame event bus
          * 2. Commits completed spawns to the scheduler (for tracking/cooldowns)
          * 3. Evaluates all spawn rules against current conditions
@@ -99,20 +103,28 @@ export namespace helios::engine::mechanics::spawn::systems {
                 helios::engine::runtime::spawn::events::SpawnPlanCommandExecutedEvent
             >();
 
-            for (const auto& event : events) {
-                spawnScheduler_->commit(event.spawnRuleId, event.spawnCount);
-            }
+            for (const auto& spawnScheduler : spawnSchedulers_) {
 
-            spawnScheduler_->evaluate(updateContext);
+                /**
+                 * @todo this should be processed before iterating over all schedulers: A scheduler owns the rule,
+                 * hence a rule that triggered the event's can be associated with the owning Scheduler, making it
+                 * unneccesary to iterate over already processed events
+                 */
+                for (const auto& event : events) {
+                    spawnScheduler->commit(event.spawnRuleId, event.spawnCount);
+                }
 
-            auto scheduledPlans = spawnScheduler_->drainScheduledPlans();
+                spawnScheduler->evaluate(updateContext);
 
-            for (auto& plan : scheduledPlans) {
-                updateContext.commandBuffer().add<
-                    helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand
-                >(
-                    plan.spawnProfileId, plan.spawnPlan, plan.spawnContext
-                );
+                auto scheduledPlans = spawnScheduler->drainScheduledPlans();
+
+                for (auto& plan : scheduledPlans) {
+                    updateContext.commandBuffer().add<
+                        helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand
+                    >(
+                        plan.spawnProfileId, plan.spawnPlan, plan.spawnContext
+                    );
+                }
             }
 
         }

@@ -18,7 +18,7 @@ export module helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.Manager;
-import helios.engine.runtime.pooling.SpawnRequestHandler;
+import helios.engine.runtime.spawn.SpawnCommandHandler;
 import helios.engine.ecs.Component;
 import helios.engine.ecs.CloneableComponent;
 
@@ -31,7 +31,7 @@ import helios.engine.runtime.world.Level;
 import helios.engine.ecs.query.GameObjectFilter;
 import helios.engine.core.data.SpawnProfileId;
 
-import helios.engine.runtime.pooling.SpawnRequestHandlerRegistry;
+import helios.engine.runtime.spawn.SpawnCommandHandlerRegistry;
 
 
 
@@ -149,13 +149,8 @@ export namespace helios::engine::runtime::world {
         std::unique_ptr<helios::engine::runtime::world::Level> level_ = nullptr;
 
 
-        /**
-         * @brief Registry mapping pool IDs to their request handlers.
-         *
-         * @details Request handlers process spawn/despawn requests for specific pools,
-         * enabling custom lifecycle management per pool type.
-         */
-        helios::engine::runtime::pooling::PoolManagerRegistry poolManagerRegistry_{};
+
+        helios::engine::runtime::spawn::SpawnCommandHandlerRegistry spawnCommandHandlerRegistry_{};
 
 
 
@@ -248,7 +243,7 @@ export namespace helios::engine::runtime::world {
         }
 
         /**
-         * @brief Registers a SpawnRequestHandler for a specific spawn profile.
+         * @brief Registers a SpawnCommandHandler for a specific spawn profile.
          *
          * @details Associates a handler with a spawn profile ID. The handler processes
          * spawn and despawn requests for entities associated with that profile.
@@ -258,11 +253,11 @@ export namespace helios::engine::runtime::world {
          *
          * @return True if registration succeeded, false if already registered.
          */
-        bool registerSpawnRequestHandler(
+        bool registerSpawnCommandHandler(
             const helios::engine::core::data::SpawnProfileId spawnProfileId,
-            helios::engine::runtime::pooling::SpawnRequestHandler& poolManager
+            helios::engine::runtime::spawn::SpawnCommandHandler& poolManager
         ) {
-            bool added = poolManagerRegistry_.add(spawnProfileId, poolManager);
+            bool added = spawnCommandHandlerRegistry_.add(spawnProfileId, poolManager);
 
             assert(added && "PoolManager already registered");
 
@@ -271,21 +266,21 @@ export namespace helios::engine::runtime::world {
 
 
         /**
-         * @brief Retrieves a SpawnRequestHandler for a specific spawn profile.
+         * @brief Retrieves a SpawnCommandHandler for a specific spawn profile.
          *
-         * @details Used to submit spawn/despawn requests to the handler responsible
+         * @details Used to submit spawn/despawn commands to the handler responsible
          * for a particular spawn profile (e.g., bullet pool, enemy pool).
          *
          * @param spawnProfileId The spawn profile identifier to look up.
          *
          * @return Pointer to the handler, or nullptr if not registered.
          *
-         * @see registerSpawnRequestHandler()
-         * @see SpawnRequestHandler
+         * @see registerSpawnCommandHandler()
+         * @see SpawnCommandHandler
          */
-        [[nodiscard]] helios::engine::runtime::pooling::SpawnRequestHandler* spawnRequestHandler(
+        [[nodiscard]] helios::engine::runtime::spawn::SpawnCommandHandler* spawnCommandHandler(
             const helios::engine::core::data::SpawnProfileId spawnProfileId) {
-            return poolManagerRegistry_.get(spawnProfileId);
+            return spawnCommandHandlerRegistry_.get(spawnProfileId);
         }
 
         /**

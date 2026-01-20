@@ -15,7 +15,7 @@ import helios.engine.runtime.messaging.command.CommandBuffer;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.spawn.commands.ScheduledSpawnPlanCommand;
 import helios.engine.runtime.spawn.scheduling.SpawnScheduler;
-import helios.engine.runtime.spawn.events.SpawnPlanRequestExecutedEvent;
+import helios.engine.runtime.spawn.events.SpawnPlanCommandExecutedEvent;
 
 export namespace helios::engine::mechanics::spawn::systems {
 
@@ -25,7 +25,7 @@ export namespace helios::engine::mechanics::spawn::systems {
      * @details GameObjectSpawnSystem bridges the spawn scheduling logic with the
      * command-based spawning pipeline. It performs the following each frame:
      *
-     * 1. **Read Frame Events:** Consumes `SpawnPlanRequestExecutedEvent` from the
+     * 1. **Read Frame Events:** Consumes `SpawnPlanCommandExecutedEvent` from the
      *    previous frame to commit completed spawn operations to the scheduler.
      *
      * 2. **Evaluate Conditions:** Calls `SpawnScheduler::evaluate()` to check all
@@ -53,7 +53,7 @@ export namespace helios::engine::mechanics::spawn::systems {
      *
      * @see SpawnScheduler
      * @see ScheduledSpawnPlanCommand
-     * @see SpawnPlanRequestExecutedEvent
+     * @see SpawnPlanCommandExecutedEvent
      */
     class GameObjectSpawnSystem : public helios::engine::ecs::System {
 
@@ -86,7 +86,7 @@ export namespace helios::engine::mechanics::spawn::systems {
          * @brief Processes spawn scheduling and enqueues spawn commands.
          *
          * @details Performs the following steps:
-         * 1. Reads `SpawnPlanRequestExecutedEvent` from frame event bus
+         * 1. Reads `SpawnPlanCommandExecutedEvent` from frame event bus
          * 2. Commits completed spawns to the scheduler (for tracking/cooldowns)
          * 3. Evaluates all spawn rules against current conditions
          * 4. Drains ready spawn plans and enqueues them as commands
@@ -96,7 +96,7 @@ export namespace helios::engine::mechanics::spawn::systems {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
             const auto& events = updateContext.readFrame<
-                helios::engine::runtime::spawn::events::SpawnPlanRequestExecutedEvent
+                helios::engine::runtime::spawn::events::SpawnPlanCommandExecutedEvent
             >();
 
             for (const auto& event : events) {
@@ -110,7 +110,9 @@ export namespace helios::engine::mechanics::spawn::systems {
             for (auto& plan : scheduledPlans) {
                 updateContext.commandBuffer().add<
                     helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand
-                >(std::move(plan));
+                >(
+                    plan.spawnProfileId, plan.spawnPlan, plan.spawnContext
+                );
             }
 
         }

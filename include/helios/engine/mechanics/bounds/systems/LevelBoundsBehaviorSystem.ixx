@@ -64,15 +64,14 @@ export namespace helios::engine::mechanics::bounds::systems {
 
             using namespace helios::engine::modules::physics::collision::types;
 
-            for (auto [entity, m2d, ab, sc, dc, tsc, bc, bbc, rsc] : gameWorld_->find<
+            for (auto [entity, m2d, ab, sc, dc, tsc, bc, bbc] : gameWorld_->find<
                 helios::engine::modules::physics::motion::components::Move2DComponent,
                 helios::engine::modules::rendering::model::components::ModelAabbComponent,
                 helios::engine::modules::scene::components::SceneNodeComponent,
                 helios::engine::modules::physics::motion::components::DirectionComponent,
                 helios::engine::modules::spatial::transform::components::TranslationStateComponent,
                 helios::engine::modules::physics::collision::components::AabbColliderComponent,
-                helios::engine::mechanics::bounds::components::LevelBoundsBehaviorComponent,
-                helios::engine::modules::physics::motion::components::RotationStateComponent
+                helios::engine::mechanics::bounds::components::LevelBoundsBehaviorComponent
             >().each()) {
 
 
@@ -91,22 +90,19 @@ export namespace helios::engine::mechanics::bounds::systems {
                         bouncedWorldTranslation = bounce(
                            childWorldTranslation.toVec3(), objectBounds, levelBounds,
                            bbc->collisionBehavior() == CollisionBehavior::Reflect ? 1.0f : bbc->restitution(),
-                           *m2d,  *dc, *rsc
+                           *m2d,  *dc
                        );
                     } else if (bbc->collisionBehavior() == CollisionBehavior::Despawn) {
                         /**
                          * @todo optimize
                          */
                         auto* sbp = entity->get<helios::engine::mechanics::spawn::components::SpawnedByProfileComponent>();
-                        if (!sbp) {
-                            updateContext.commandBuffer().add<helios::engine::runtime::spawn::commands::DespawnCommand>(
-                                entity->guid()
-                            );
-                        } else {
-                            updateContext.commandBuffer().add<helios::engine::runtime::spawn::commands::DespawnCommand>(
-                                entity->guid(), sbp->spawnProfileId()
-                            );
-                        }
+                        assert(sbp && "Unexpected missing SpawnProfile");
+
+                        updateContext.commandBuffer().add<helios::engine::runtime::spawn::commands::DespawnCommand>(
+                            entity->guid(), sbp->spawnProfileId()
+                        );
+
                     }
 
                     auto parentTransform_inverse = parentWorldTransform.inverse();
@@ -147,8 +143,7 @@ export namespace helios::engine::mechanics::bounds::systems {
             helios::math::aabbf levelBounds,
             const float restitution,
             helios::engine::modules::physics::motion::components::Move2DComponent& m2d,
-            helios::engine::modules::physics::motion::components::DirectionComponent& dc,
-            helios::engine::modules::physics::motion::components::RotationStateComponent& rsc
+            helios::engine::modules::physics::motion::components::DirectionComponent& dc
         ) noexcept {
 
 

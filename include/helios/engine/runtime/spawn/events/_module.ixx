@@ -4,4 +4,4 @@
  */
 export module helios.engine.runtime.spawn.events;
 
-export import helios.engine.runtime.spawn.events.SpawnPlanRequestExecutedEvent;
+export import helios.engine.runtime.spawn.events.SpawnPlanCommandExecutedEvent;

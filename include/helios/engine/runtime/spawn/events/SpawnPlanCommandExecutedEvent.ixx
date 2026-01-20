@@ -1,26 +1,26 @@
 /**
- * @file SpawnPlanRequestExecutedEvent.ixx
+ * @file SpawnPlanCommandExecutedEvent.ixx
  * @brief Event indicating a spawn plan has been executed.
  */
 module;
 
-export module helios.engine.runtime.spawn.events.SpawnPlanRequestExecutedEvent;
+export module helios.engine.runtime.spawn.events.SpawnPlanCommandExecutedEvent;
 
 import helios.engine.core.data.SpawnRuleId;
 
 export namespace helios::engine::runtime::spawn::events {
 
     /**
-     * @brief Event indicating a spawn plan has been executed.
+     * @brief Event indicating a spawn plan command has been executed.
      *
-     * @details SpawnPlanRequestExecutedEvent is pushed to the frame event bus
-     * after a spawn request completes. The GameObjectSpawnSystem reads these
+     * @details SpawnPlanCommandExecutedEvent is pushed to the frame event bus
+     * after a spawn command completes. The GameObjectSpawnSystem reads these
      * events in the next frame to commit spawn counts to the SpawnScheduler.
      *
      * @see SpawnScheduler::commit
      * @see GameObjectSpawnSystem
      */
-    struct SpawnPlanRequestExecutedEvent {
+    struct SpawnPlanCommandExecutedEvent {
 
         /**
          * @brief The rule that triggered the spawn.

@@ -4,7 +4,7 @@ Commands for spawn and despawn operations.
 
 ## Overview
 
-This module contains command classes that represent spawn and despawn requests. These commands are emitted by systems and processed by dispatchers during the command flush phase.
+This module contains command classes that represent spawn and despawn operations. These commands are emitted by systems and submitted directly to the SpawnCommandHandler during the command flush phase.
 
 ## Key Classes
 
@@ -16,15 +16,23 @@ This module contains command classes that represent spawn and despawn requests. 
 
 ## Architecture
 
-Commands follow the visitor pattern with dispatchers:
+Commands follow the visitor pattern with dispatchers. Commands are submitted directly to the SpawnCommandHandler (typically SpawnManager):
 
 ```
-┌─────────────────┐     ┌───────────────┐     ┌────────────┐     ┌──────────────┐
-│ SpawnSystem     │────>│ CommandBuffer │────>│ Dispatcher │────>│ SpawnManager │
-│                 │     │               │     │            │     │              │
-│ - SpawnCommand  │     │ flush()       │     │ dispatch() │     │ submit()     │
-│ - DespawnCommand│     │               │     │            │     │              │
-└─────────────────┘     └───────────────┘     └────────────┘     └──────────────┘
+┌─────────────────┐     ┌───────────────┐     ┌────────────────────┐
+│ SpawnSystem     │────>│ CommandBuffer │────>│ Dispatcher         │
+│                 │     │               │     │                    │
+│ - SpawnCommand  │     │ flush()       │     │ dispatchTyped()    │
+│ - DespawnCommand│     │               │     │                    │
+└─────────────────┘     └───────────────┘     └─────────┬──────────┘
+                                                        │
+                                                        ▼
+                                              ┌────────────────────┐
+                                              │ SpawnCommandHandler│
+                                              │ (SpawnManager)     │
+                                              │                    │
+                                              │ submit(Command)    │
+                                              └────────────────────┘
 ```
 
 ## Usage
@@ -48,6 +56,6 @@ commandBuffer.add<ScheduledSpawnPlanCommand>(std::move(scheduledPlan));
 <summary>Doxygen</summary><p>
 @namespace helios::engine::runtime::spawn::commands
 @brief Commands for spawn and despawn operations.
-@details This namespace contains command classes for deferred spawn and despawn operations. Commands are processed during the command buffer flush phase and routed to managers via dispatchers.
+@details This namespace contains command classes for deferred spawn and despawn operations. Commands are submitted directly to SpawnCommandHandler during the command buffer flush phase via dispatchers.
 </p></details>
 

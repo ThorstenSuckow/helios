@@ -4,7 +4,9 @@
  */
 module;
 
+#include <cassert>
 #include <cinttypes>
+#include <expected>
 
 export module helios.engine.runtime.spawn.commands.SpawnCommand;
 
@@ -12,7 +14,7 @@ import helios.engine.runtime.spawn.SpawnContext;
 
 import helios.engine.runtime.messaging.command.WorldCommand;
 import helios.engine.runtime.messaging.command.WorldCommandDispatcher;
-import helios.engine.runtime.world.GameWorld;
+
 import helios.math.types;
 
 import helios.engine.core.data.SpawnProfileId;
@@ -28,8 +30,8 @@ export namespace helios::engine::runtime::spawn::commands {
      * indicating how many objects should be spawned.
      *
      * The command itself does not execute spawning directly. Instead, it is
-     * dispatched to a SpawnCommandDispatcher which routes the request to the
-     * appropriate SpawnManager.
+     * dispatched to a SpawnCommandDispatcher which forwards the command to the
+     * appropriate SpawnManager for deferred processing.
      *
      * @see SpawnCommandDispatcher
      * @see SpawnManager
@@ -66,7 +68,7 @@ export namespace helios::engine::runtime::spawn::commands {
          * @param gameWorld The game world (unused).
          */
         void execute(helios::engine::runtime::world::GameWorld& gameWorld) const noexcept override {
-            // noop - requires dispatcher
+            assert(false && "Unexpected execute() on SpawnCommand");
         }
 
         /**
@@ -101,7 +103,12 @@ export namespace helios::engine::runtime::spawn::commands {
             return spawnBudget_;
         }
 
-        [[nodiscard]] const helios::engine::runtime::spawn::SpawnContext& spawnContext() const noexcept {
+        /**
+         * @brief Returns the spawn context.
+         *
+         * @return The spawn context of this command.
+         */
+        [[nodiscard]]  helios::engine::runtime::spawn::SpawnContext spawnContext() const noexcept {
             return spawnContext_;
         }
     };

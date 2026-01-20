@@ -9,7 +9,6 @@ module;
 export module helios.engine.runtime.spawn.dispatcher.ScheduledSpawnPlanCommandDispatcher;
 
 import helios.engine.runtime.spawn.commands.ScheduledSpawnPlanCommand;
-import helios.engine.runtime.spawn.requests.ScheduledSpawnPlanRequest;
 import helios.engine.runtime.messaging.command.TypedWorldCommandDispatcher;
 import helios.engine.runtime.world.GameWorld;
 
@@ -20,11 +19,10 @@ export namespace helios::engine::runtime::spawn::dispatcher {
      *
      * @details ScheduledSpawnPlanCommandDispatcher is a typed command dispatcher that
      * handles ScheduledSpawnPlanCommand instances. When a command is dispatched, it
-     * creates a ScheduledSpawnPlanRequest and submits it to the pool's registered
-     * SpawnRequestHandler.
+     * submits the command directly to the pool's registered SpawnCommandHandler.
      *
      * This dispatcher bridges the SpawnScheduler output (ScheduledSpawnPlan) with
-     * the SpawnManager's request processing pipeline.
+     * the SpawnManager's command processing pipeline.
      *
      * @see ScheduledSpawnPlanCommand
      * @see SpawnScheduler
@@ -36,10 +34,10 @@ export namespace helios::engine::runtime::spawn::dispatcher {
     protected:
 
         /**
-         * @brief Dispatches a ScheduledSpawnPlanCommand by creating a request.
+         * @brief Dispatches a ScheduledSpawnPlanCommand to the registered handler.
          *
-         * @details Creates a ScheduledSpawnPlanRequest from the command and submits
-         * it to the profile's registered SpawnRequestHandler for deferred processing.
+         * @details Looks up the SpawnCommandHandler for the command's profile ID
+         * and submits the command directly for deferred processing.
          *
          * @param gameWorld The game world containing the pool.
          * @param command The ScheduledSpawnPlanCommand to dispatch.
@@ -49,17 +47,10 @@ export namespace helios::engine::runtime::spawn::dispatcher {
             const helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand& command
         ) noexcept override {
 
-            auto scheduledSpawnPlan = command.scheduledSpawnPlan();
-            auto* spawnRequestHandler = gameWorld.spawnRequestHandler(
-                scheduledSpawnPlan.spawnProfileId
-            );
-
-            if (spawnRequestHandler) {
-                helios::engine::runtime::spawn::requests::ScheduledSpawnPlanRequest scheduledSpawnPlanRequest{
-                    scheduledSpawnPlan, {}
-                };
-
-                spawnRequestHandler->submit(scheduledSpawnPlanRequest);
+            if (auto* spawnCommandHandler = gameWorld.spawnCommandHandler(
+                command.spawnProfileId()
+            )) {
+                spawnCommandHandler->submit(command);
             }
         }
 

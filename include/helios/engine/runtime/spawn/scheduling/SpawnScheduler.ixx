@@ -15,6 +15,7 @@ export module helios.engine.runtime.spawn.scheduling.SpawnScheduler;
 
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.spawn.SpawnManager;
+import helios.engine.runtime.spawn.SpawnContext;
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.spawn.scheduling.SpawnPlan;
 import helios.engine.runtime.spawn.scheduling.ScheduledSpawnPlan;
@@ -99,7 +100,9 @@ export namespace helios::engine::runtime::spawn::scheduling {
          *
          * @param updateContext The current frame's update context.
          */
-        void evaluate(const helios::engine::runtime::world::UpdateContext& updateContext) {
+        void evaluate(
+            const helios::engine::runtime::world::UpdateContext& updateContext,
+            const helios::engine::runtime::spawn::SpawnContext& spawnContext = {}) {
 
             const auto* poolManager  = updateContext.gameWorld().getManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
             const auto* spawnManager = updateContext.gameWorld().getManager<helios::engine::runtime::spawn::SpawnManager>();
@@ -137,8 +140,9 @@ export namespace helios::engine::runtime::spawn::scheduling {
 
                 scheduledSpawnPlans_.push_back({
                     spawnProfileId,
-                    std::move(spawnPlan)}
-                );
+                    std::move(spawnPlan),
+                    spawnContext
+                });
 
             }
 

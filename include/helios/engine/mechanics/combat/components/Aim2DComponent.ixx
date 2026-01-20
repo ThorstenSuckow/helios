@@ -10,6 +10,8 @@ import helios.math.types;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.Component;
 
+import helios.math;
+
 
 export namespace helios::engine::mechanics::combat::components {
 
@@ -46,6 +48,10 @@ export namespace helios::engine::mechanics::combat::components {
          * @param freq Fire frequency factor (0.0 to 1.0).
          */
         virtual void aim(helios::math::vec2f direction, float freq) {
+            if (freq <= helios::math::EPSILON_LENGTH) {
+                direction_ = {};
+                frequency_ = 0.0f;
+            }
             direction_ = direction;
             frequency_ = freq;
         }

@@ -37,7 +37,8 @@ const sidebars: SidebarsConfig = {
         'core-concepts/component-system',
         'core-concepts/gameloop-architecture',
         'core-concepts/command-system',
-        'core-concepts/event-system'
+        'core-concepts/event-system',
+        'core-concepts/spawn-system'
       ],
     },
     {

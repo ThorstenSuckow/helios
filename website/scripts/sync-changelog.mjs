@@ -203,6 +203,11 @@ async function main() {
       meta: { title: 'Event System', description: 'Double-buffered event buses with phase/pass propagation for decoupled system communication.', slug: '/core-concepts/event-system', tags: ['gameplay', 'architecture', 'events'], keywords: ['helios', 'event system', 'EventBus', 'phase', 'pass', 'double-buffer', 'decoupled communication'], sidebar_label: 'Event System', sidebar_position: 6 }
     },
     {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'spawn-system.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'spawn-system.md'),
+      meta: { title: 'Spawn System', description: 'Entity lifecycle management with spawn scheduling, profiles, behaviors, and pool integration.', slug: '/core-concepts/spawn-system', tags: ['gameplay', 'architecture', 'spawn'], keywords: ['helios', 'spawn system', 'object pooling', 'entity lifecycle', 'SpawnManager', 'SpawnScheduler'], sidebar_label: 'Spawn System', sidebar_position: 7 }
+    },
+    {
       src: path.join(repoRoot, 'examples', 'README.md'),
       dest: path.join(websiteRoot, 'docs', 'examples', 'overview.md'),
       meta: { title: 'Examples Overview', description: 'Example applications demonstrating helios features: rendering, input, scene graph, and more.', slug: '/examples', tags: ['examples', 'tutorial'], keywords: ['helios', 'examples', 'tutorials', 'getting started'], sidebar_label: 'Overview' }

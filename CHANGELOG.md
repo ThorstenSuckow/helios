@@ -12,19 +12,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `helios.engine.ecs.query` submodule with `GameObjectFilter` and `GameObjectView`
 - `helios.engine.runtime` aggregate module for runtime infrastructure
 - `helios.engine.runtime.world` submodule with `GameWorld`, `Level`, `UpdateContext`, `SystemRegistry`, `Manager`
-- `helios.engine.runtime.pooling` submodule with `GameObjectPool`, `GameObjectPoolRegistry`, `GameObjectPoolFacade`, `PoolRequestHandler`, `PoolRequestHandlerRegistry`
+- `helios.engine.runtime.pooling` submodule with `GameObjectPool`, `GameObjectPoolManager`, `GameObjectPoolRegistry`, `GameObjectPoolConfig`, `GameObjectPoolSnapshot`
 - `helios.engine.runtime.gameloop` submodule with `GameLoop`, `Phase`, `Pass`
 - `helios.engine.runtime.messaging` for commands and events
+- `helios.engine.runtime.spawn` submodule for spawn infrastructure:
+  - `SpawnManager` for processing spawn/despawn commands
+  - `SpawnProfile` for spawn configuration (pool, placer, initializer)
+  - `SpawnScheduler` for rule-based spawn scheduling
+  - `SpawnRule`, `SpawnCondition`, `SpawnRuleState` for policy layer
+  - `TimerSpawnCondition` for interval-based spawning
+  - `SpawnAmountProvider`, `FixedSpawnAmount`, `SpawnAmountByCallback` for amount configuration
+  - `SpawnPlacer`, `SpawnInitializer` interfaces for spawn behaviors
+  - `RandomSpawnPlacer`, `EmitterSpawnPlacer` for positioning
+  - `EmitterInitializer`, `RandomDirectionInitializer` for entity initialization
+  - `SpawnCommand`, `DespawnCommand`, `ScheduledSpawnPlanCommand` for command pipeline
+  - `SpawnCommandDispatcher`, `DespawnCommandDispatcher`, `ScheduledSpawnPlanCommandDispatcher`
+  - `SpawnContext`, `EmitterContext` for spawn state
+  - `SpawnPlanCommandExecutedEvent` for frame events
+  - `SpawnCommandHandler`, `SpawnCommandHandlerRegistry` for handler management
 - `helios.engine.mechanics` for gameplay-specific systems (bounds, combat, spawn, input)
 - `helios.engine.modules` for domain-agnostic subsystems (physics, spatial, scene, rendering, pool)
-- `ShootCommandDispatcher` for routing shoot commands to `ProjectilePoolManager`
-- `ProjectileSpawnRequest` data structure for projectile spawn parameters
-- `PoolIdComponent` for pool membership identification
+- `SpawnedByProfileComponent` for tracking entity spawn origin
+- `ProjectileSpawnSystem` for combat projectile spawning
+- `SpawnProfileId`, `SpawnRuleId` type-safe identifiers
+- Core concepts documentation for spawn system
 
 ### Changed
 - **BREAKING**: Reorganized `helios.engine` into distinct submodules: `core`, `ecs`, `runtime`, `modules`, `mechanics`, `tooling`
 - **BREAKING**: Systems are now registered with `GameLoop` phases/passes instead of `GameWorld`
 - **BREAKING**: `GameWorld` no longer manages System instances — use `GameLoop::phase().addPass().addSystem<T>()`
+- **BREAKING**: Spawn infrastructure moved from `mechanics/spawn` to `runtime/spawn`
+- **BREAKING**: Removed `GameObjectFactory`, `GameObjectPoolFacade`, `PoolRequestHandler`, `PoolRequestHandlerRegistry`
 - Moved ECS base classes from `helios.engine.game` to `helios.engine.ecs`
 - Moved world management classes to `helios.engine.runtime.world`
 - Moved pooling infrastructure to `helios.engine.runtime.pooling`
@@ -33,6 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `helios.engine._module.ixx` updated to export `core`, `ecs`, `game`, `runtime`, `tooling` modules
 - All aggregate `_module.ixx` files now only export their direct submodules (clean hierarchy)
 - `SystemRegistry` is now internal to the `GameLoop` pass structure
+- Updated core concepts documentation with spawn system references
 
 ## [0.3.0-milestone3] - 2025-12-25
 
@@ -49,8 +68,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `LevelBoundsBehaviorSystem` for boundary collisions with bounce behavior
 - `SceneSyncSystem` for synchronizing gameplay transforms with scene graph
 - `TransformClearSystem` for clearing dirty flags at end of frame
-- `ScaleClearSystem` for clearing scale dirty flags at end of frame
-- `ProjectilePoolSystem` for efficient projectile object pooling
 - `Level` class with configurable world bounds and AABB-based arena boundaries
 - `Aim2DComponent` for direction tracking and firing frequency
 - `ShootComponent` for projectile firing with configurable cooldown and speed

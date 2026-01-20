@@ -1,7 +1,7 @@
 # Game Loop Architecture
 
 helios distinguishes between **Commands** (world-mutating operations) and **Events** (signals/facts).
-Commands exist to mutate the world state _deterministically_. Events exist to decouple systems: they either express a request/intent (e.g. SpawnRequest) or a fact (e.g. `SolidCollisionEvent`, `TriggerCollisionEvent`, `SpawnedEvent`).
+Commands exist to mutate the world state _deterministically_. Events exist to decouple systems: they either express a request/intent (e.g. `SpawnCommand`) or a fact (e.g. `SolidCollisionEvent`, `TriggerCollisionEvent`, `SpawnPlanCommandExecutedEvent`).
 
 ## Phase/Pass Structure
 
@@ -50,14 +50,15 @@ For detailed command handling, dispatchers, and manager integration, see [Comman
 
 In addition, systems can emit Events in frame N, e.g. **request events** - events that intend to mutate the world state - or plain signals such as `SolidCollisionEvent`, from which world-mutating Commands (despawn) can be derived.
 
-helios provides two event buses with different visibility scopes:
+helios provides three event buses with different visibility scopes:
 
 | Event Bus | Push Method | Read Method | Visibility |
 |-----------|-------------|-------------|------------|
-| **Phase** | `pushPhase<E>()` | `readPhase<E>()` | Next phase |
 | **Pass** | `pushPass<E>()` | `readPass<E>()` | Subsequent passes (same phase) |
+| **Phase** | `pushPhase<E>()` | `readPhase<E>()` | Next phase |
+| **Frame** | `pushFrame<E>()` | `readFrame<E>()` | Next frame |
 
-Both buses are double-buffered (`helios.core.buffer.TypeIndexedDoubleBuffer`): events are written into the write buffer and become visible in the read buffer only after a buffer swap.
+All buses are double-buffered (`helios.core.buffer.TypeIndexedDoubleBuffer`): events are written into the write buffer and become visible in the read buffer only after a buffer swap.
 
 For detailed event propagation rules and commit points, see [Event System](event-system.md).
 
@@ -71,6 +72,9 @@ phaseEventBus.swapBuffers();    // Phase events become readable
 passEventBus.clearAll();         // Pass events are cleared
 commandBuffer.flush();           // Commands execute (mutations)
 gameWorld.flushManagers();       // Managers process queued requests
+
+// Additionally, at the end of Post phase:
+frameEventBus.swapBuffers();     // Frame events become readable in next frame
 ```
 
 Overall frame execution:
@@ -83,12 +87,16 @@ for (phase : {Pre, Main, Post}) {
             system.update(updateContext);
         }
         
-        if (pass.hasCommitPoint()) {
+        if (pass.commmitPoint() == CommitPoint::PassEvents) {
             passEventBus.swapBuffers();  // Pass events readable
         }
     }
     
     phaseCommit();  // Phase boundary
+    
+    if (phase == Post) {
+        frameEventBus.swapBuffers();  // Frame events readable in next frame
+    }
 }
 
 render();
@@ -104,3 +112,4 @@ Immediate events should be processed within the same frame without additional do
 - [Command System](command-system.md) — Command pattern, dispatchers, managers
 - [Event System](event-system.md) — Phase/Pass event propagation with double-buffered buses
 - [Component System](component-system.md) — ECS-style composition architecture
+- [Spawn System](spawn-system.md) — Entity lifecycle with spawn scheduling and pooling

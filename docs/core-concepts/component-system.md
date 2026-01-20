@@ -109,7 +109,7 @@ helios::engine::runtime::world::GameWorld world;
 auto* player = world.addGameObject(std::move(playerEntity));
 
 // Add managers for deferred processing
-world.addManager<ProjectilePoolManager>(poolId);
+world.addManager(std::move(spawnManager));
 
 // Query entities by component
 for (auto* obj : world.find<Move2DComponent, SceneNodeComponent>()) {
@@ -183,6 +183,12 @@ helios provides several ready-to-use components organized by domain:
 | `ShootComponent` | Projectile firing with cooldown timer |
 | `Aim2DComponent` | Aiming direction for twin-stick controls |
 
+### Spawn/Pool
+
+| Component | Purpose |
+|-----------|---------|
+| `SpawnedByProfileComponent` | Tracks which spawn profile created this entity |
+
 ### Scene
 
 | Component | Purpose |
@@ -217,6 +223,8 @@ Systems are organized by their typical Phase placement:
 | `LevelBoundsBehaviorSystem` | Handles boundary collision behaviors |
 | `ComposeTransformSystem` | Composes transform from translation/rotation/scale |
 | `ScaleSystem` | Applies scale changes |
+| `GameObjectSpawnSystem` | Evaluates spawn rules, creates spawn commands |
+| `ProjectileSpawnSystem` | Handles projectile spawning from shoot commands |
 
 ### Post Phase Systems
 
@@ -224,7 +232,6 @@ Systems are organized by their typical Phase placement:
 |--------|---------|
 | `SceneSyncSystem` | Syncs transforms from gameplay to scene graph |
 | `TransformClearSystem` | Clears dirty flags after frame |
-| `ScaleClearSystem` | Clears scale dirty flags |
 
 ## Creating Custom Components
 
@@ -445,3 +452,4 @@ player->add<TwinStickInputComponent>();
 - [Game Loop Architecture](gameloop-architecture.md) — Phase/Pass structure, commit points
 - [Command System](command-system.md) — Deferred action execution
 - [Event System](event-system.md) — Phase/pass event propagation
+- [Spawn System](spawn-system.md) — Entity lifecycle and object pooling

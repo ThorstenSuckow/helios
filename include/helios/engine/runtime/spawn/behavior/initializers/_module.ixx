@@ -5,4 +5,5 @@
 export module helios.engine.runtime.spawn.behavior.initializers;
 
 export import helios.engine.runtime.spawn.behavior.initializers.EmitterInitializer;
+export import helios.engine.runtime.spawn.behavior.initializers.DirectionInitializer;
 export import helios.engine.runtime.spawn.behavior.initializers.RandomDirectionInitializer;

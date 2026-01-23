@@ -11,3 +11,4 @@ export import helios.engine.runtime;
 export import helios.engine.modules;
 export import helios.engine.mechanics;
 export import helios.engine.tooling;
+export import helios.engine.builder;

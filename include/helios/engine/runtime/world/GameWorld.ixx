@@ -149,7 +149,14 @@ export namespace helios::engine::runtime::world {
         std::unique_ptr<helios::engine::runtime::world::Level> level_ = nullptr;
 
 
-
+        /**
+         * @brief Registry for mapping spawn profiles to their command handlers.
+         *
+         * @details
+         * Stores the association between SpawnProfileIds and their corresponding
+         * SpawnCommandHandlers. This allows the system to look up the correct handler
+         * (e.g., a specific object pool) when processing spawn commands.
+         */
         helios::engine::runtime::spawn::SpawnCommandHandlerRegistry spawnCommandHandlerRegistry_{};
 
 

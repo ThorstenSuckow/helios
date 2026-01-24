@@ -108,7 +108,7 @@ export namespace helios::engine::runtime::spawn::commands {
          *
          * @return The spawn context of this command.
          */
-        [[nodiscard]]  helios::engine::runtime::spawn::SpawnContext spawnContext() const noexcept {
+        [[nodiscard]] helios::engine::runtime::spawn::SpawnContext spawnContext() const noexcept {
             return spawnContext_;
         }
     };

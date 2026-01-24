@@ -155,8 +155,8 @@ helios provides several ready-to-use components organized by domain:
 
 | Component | Purpose |
 |-----------|---------|
-| `TransformComponent` | Stores local transform with dirty tracking |
-| `ScaleComponent` | Unit-based sizing using helios units (meters) |
+| `ComposeTransformComponent` | Stores local transform with dirty tracking |
+| `ScaleStateComponent` | Unit-based sizing using helios units (meters) |
 | `TranslationStateComponent` | Translation delta for frame-based movement |
 
 ### Physics/Motion
@@ -215,7 +215,7 @@ Systems are organized by their typical Phase placement:
 
 | System | Purpose |
 |--------|---------|
-| `Move2DSystem` | Applies velocity/acceleration to TransformComponent |
+| `Move2DSystem` | Applies velocity/acceleration to ComposeTransformComponent |
 | `HeadingSystem` | Smoothly rotates entities toward target angle |
 | `SpinSystem` | Applies continuous rotation |
 | `BoundsUpdateSystem` | Updates AABB colliders from transforms |

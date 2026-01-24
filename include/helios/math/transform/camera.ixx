@@ -4,10 +4,12 @@
  */
 module;
 
+#include <cmath>
 
 export module helios.math.transform:camera;
 
 import helios.math.types;
+import helios.math.utils;
 
 
 export namespace helios::math {
@@ -30,7 +32,18 @@ export namespace helios::math {
      *
      * @see https://thorsten.suckow-homberg.de/docs/articles/computer-graphics/from-camera-to-clip-space-derivation-of-the-projection-matrices
      */
-    mat4f perspective(float fovY, float aspect, float zNear, float zFar) noexcept;
+    inline mat4f perspective(float fovY, float aspect, float zNear, float zFar) noexcept {
+
+        float f = 1 / std::tan(fovY/2);
+
+        return mat4f{
+            f/aspect, 0.0f, 0.0f, 0.0f,
+            0.0f, f, 0.0f, 0.0f,
+            0.0f, 0.0f , -(zFar + zNear)/(zFar - zNear), -1.0f,
+            0.0f, 0.0f, -2 * (zFar * zNear) / (zFar - zNear), 0.0f
+        };
+
+    }
 
     /**
      * @brief Returns the 4x4 lookAt-matrix for transforming world coordinates
@@ -55,6 +68,17 @@ export namespace helios::math {
      * @param up
      * @return
      */
-    mat4f lookAt(const vec3f& eye, const vec3f& center, const vec3f& up) noexcept;
+    inline mat4f lookAt(const vec3f& eye, const vec3f& center, const vec3f& up) noexcept {
+        const auto z = (eye - center).normalize();
+        const auto x = cross(up, z).normalize();
+        const auto y = cross(z, x).normalize();
+
+        return mat4f{
+            x[0], y[0], z[0], 0.0f,
+            x[1], y[1], z[1], 0.0f,
+            x[2], y[2], z[2], 0.0f,
+            -dot(x, eye), -dot(y, eye), -dot(z, eye), 1.0f,
+        };
+    }
 
 }

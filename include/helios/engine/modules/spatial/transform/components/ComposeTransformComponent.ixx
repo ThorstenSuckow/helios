@@ -1,10 +1,10 @@
 /**
- * @file TransformComponent.ixx
+ * @file ComposeTransformComponent.ixx
  * @brief Component for managing local and world transformations of a GameObject.
  */
 module;
 
-export module helios.engine.modules.spatial.transform.components.TransformComponent;
+export module helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
 
 import helios.math.types;
 import helios.engine.ecs.CloneableComponent;
@@ -15,12 +15,12 @@ export namespace helios::engine::modules::spatial::transform::components {
     /**
      * @brief Component that holds transformation data (position, rotation, scale).
      *
-     * @details The TransformComponent manages the spatial state of a GameObject.
+     * @details The ComposeTransformComponent manages the spatial state of a GameObject.
      * It stores the local transform (relative to parent) and the computed world transform.
      * Changes to local properties mark the component as dirty, signaling systems to
      * recompute the world transform.
      */
-    class TransformComponent : public helios::engine::ecs::CloneableComponent<TransformComponent> {
+    class ComposeTransformComponent : public helios::engine::ecs::CloneableComponent<ComposeTransformComponent> {
 
         /**
          * @brief The local transformation (translation, rotation, scale).
@@ -43,14 +43,14 @@ export namespace helios::engine::modules::spatial::transform::components {
         /**
          * @brief Default constructor.
          */
-        TransformComponent() = default;
+        ComposeTransformComponent() = default;
 
         /**
          * @brief Copy constructor.
          *
          * @param other The component to copy from.
          */
-        explicit TransformComponent(const TransformComponent& other) :
+        explicit ComposeTransformComponent(const ComposeTransformComponent& other) :
             transform_(other.transform_),
             worldTransform_(other.worldTransform_),
             isDirty_(true){}
@@ -105,7 +105,7 @@ export namespace helios::engine::modules::spatial::transform::components {
          * @param scale The new scale vector.
          * @return Reference to this component for chaining.
          */
-        TransformComponent& setLocalScale(const helios::math::vec3f& scale) noexcept {
+        ComposeTransformComponent& setLocalScale(const helios::math::vec3f& scale) noexcept {
             transform_.setScale(scale);
             isDirty_ = true;
             return *this;
@@ -118,7 +118,7 @@ export namespace helios::engine::modules::spatial::transform::components {
          * @param rotation The new rotation matrix.
          * @return Reference to this component for chaining.
          */
-        TransformComponent& setLocalRotation(const helios::math::mat4f& rotation) noexcept {
+        ComposeTransformComponent& setLocalRotation(const helios::math::mat4f& rotation) noexcept {
             transform_.setRotation(rotation);
             isDirty_ = true;
             return *this;
@@ -131,7 +131,7 @@ export namespace helios::engine::modules::spatial::transform::components {
          * @param translation The new position vector.
          * @return Reference to this component for chaining.
          */
-        TransformComponent& setLocalTranslation(const helios::math::vec3f& translation) noexcept {
+        ComposeTransformComponent& setLocalTranslation(const helios::math::vec3f& translation) noexcept {
             transform_.setTranslation(translation);
             isDirty_ = true;
             return *this;
@@ -143,7 +143,7 @@ export namespace helios::engine::modules::spatial::transform::components {
          * @param translation The vector to add to the current position.
          * @return Reference to this component for chaining.
          */
-        TransformComponent& translateLocalBy(const helios::math::vec3f& translation) noexcept {
+        ComposeTransformComponent& translateLocalBy(const helios::math::vec3f& translation) noexcept {
             transform_.setTranslation(transform_.translation() + translation);
             isDirty_ = true;
             return *this;

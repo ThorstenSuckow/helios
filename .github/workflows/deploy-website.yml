@@ -41,14 +41,20 @@ jobs:
           rsync -a --delete include src docs /tmp/h/
 
       - name: Generate API Docs (short paths)
+        working-directory: /tmp/h
         run: |
-          rm -rf /tmp/h/docs/api
-          doxygen /tmp/h/docs/Doxyfile.in
+          rm -rf docs/api
+          doxygen docs/Doxyfile.in
+          echo "=== Generated API dir ==="
+          ls -la docs || true
+          ls -la docs/api || true
 
       - name: Copy generated docs back
         run: |
           rm -rf docs/api
           mkdir -p docs
+          ls -la /tmp/h/docs || true
+          ls -la /tmp/h/docs/api || true
           cp -r /tmp/h/docs/api docs/api
 
       - name: List Generated Files

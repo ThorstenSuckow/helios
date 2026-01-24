@@ -28,12 +28,11 @@ export namespace helios::engine::modules::physics::collision::types {
         None = 0,
 
         /**
-         * @brief Flip the entity's direction upon collision.
+         * @brief Aligns the entity's heading direction upon collision.
          *
-         * @details Reverses the movement direction, typically used for
-         * bouncing or reflecting projectiles off surfaces.
+         * @details Aligns the heading of the object to the the movement direction, typically used for bouncing or reflecting projectiles off surfaces.
          */
-        Flip = 1 << 0,
+        AlignHeadingToDirection = 1 << 0,
 
         /**
          * @brief Sentinel value indicating the number of response types.

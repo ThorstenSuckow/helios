@@ -301,15 +301,15 @@ export namespace helios::engine::runtime::gameloop {
                 switch (phase) {
                     case helios::engine::runtime::gameloop::PhaseType::Pre:
                         prePhase_.init(gameWorld);
-                     //   prePhase_.addPassCommitListener(this);
+                        prePhase_.addPassCommitListener(this);
                         break;
                     case helios::engine::runtime::gameloop::PhaseType::Main:
                         mainPhase_.init(gameWorld);
-                     //   prePhase_.addPassCommitListener(this);
+                        mainPhase_.addPassCommitListener(this);
                         break;
                     case helios::engine::runtime::gameloop::PhaseType::Post:
                         postPhase_.init(gameWorld);
-                     //   prePhase_.addPassCommitListener(this);
+                        postPhase_.addPassCommitListener(this);
                         break;
                 }
             }

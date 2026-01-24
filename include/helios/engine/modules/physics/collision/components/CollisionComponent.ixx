@@ -103,6 +103,8 @@ export namespace helios::engine::modules::physics::collision::components {
          *
          * @param layerId The collision layer this entity belongs to.
          * @param isCollisionReporter Whether this entity can emit collision events.
+         * @param solidCollisionMask Initial bitmask for solid collisions.
+         * @param triggerCollisionMask Initial bitmask for trigger collisions.
          */
         explicit CollisionComponent(uint32_t layerId, bool isCollisionReporter = true,
             uint32_t solidCollisionMask = 0, uint32_t triggerCollisionMask = 0
@@ -128,6 +130,16 @@ export namespace helios::engine::modules::physics::collision::components {
             solidCollisionBehavior_(other.solidCollisionBehavior_),
             triggerCollisionBehavior_(other.triggerCollisionBehavior_)
         {}
+
+
+        /**
+         * @brief Sets whether this component should report collision events.
+         *
+         * @param isCollisionReporter True to enable event reporting, false to disable.
+         */
+        void setIsCollisionReporter(bool isCollisionReporter) {
+            isCollisionReporter_ = isCollisionReporter;
+        }
 
         /**
          * @brief Returns whether this component can emit collision events.
@@ -301,3 +313,4 @@ export namespace helios::engine::modules::physics::collision::components {
 
 
 }
+

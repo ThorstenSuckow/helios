@@ -5,6 +5,8 @@
  */
 module;
 
+#include <cassert>
+#include <format>
 #include <memory>
 #include <optional>
 #include <stdexcept>
@@ -15,6 +17,7 @@ export module helios.scene.Scene;
 import helios.scene.Snapshot;
 import helios.scene.SceneNode;
 import helios.scene.CameraSceneNode;
+import helios.scene.Camera;
 import helios.math.types;
 
 import helios.rendering.Viewport;
@@ -81,7 +84,20 @@ export namespace helios::scene {
          *
          * @see updateNodes()
          */
-        void propagateWorldTransform(SceneNode& node, const math::mat4f& parentWorldTransform) const;
+        void propagateWorldTransform(SceneNode& node, const math::mat4f& parentWorldTransform) const {
+
+            // if the worldTransform was not updated,
+            // branch back into selective updates
+            if (!node.applyWorldTransform(parentWorldTransform, sceneGraphKey_)) {
+                for (auto& child: node.children()) {
+                    updateNodes(*child, node.cachedWorldTransform());
+                }
+            } else {
+                for (auto& child: node.children()) {
+                    propagateWorldTransform(*child, node.cachedWorldTransform());
+                }
+            }
+        }
 
         /**
          * @brief Selectively updates the world transformation of SceneNodes in the scene graph.
@@ -97,7 +113,17 @@ export namespace helios::scene {
          * the scene graph is culled. This method must also consider CameraSceneNodes, making sure the
          * associated `Camera` is updated with the view matrix.
          */
-        void updateNodes(SceneNode& node, const math::mat4f& wt) const;
+        void updateNodes(SceneNode& node, const math::mat4f& wt) const {
+
+            if (node.needsUpdate()) {
+                propagateWorldTransform(node, wt);
+            } else {
+                const auto& parentWt = node.worldTransform();
+                for (auto& child: node.children()) {
+                    updateNodes(*child, parentWt);
+                }
+            }
+        }
 
         /**
          * @brief The FrustumCullingStrategy used with this Scene.
@@ -149,7 +175,8 @@ export namespace helios::scene {
          *
          * @param frustumCullingStrategy The frustum culling strategy to use with this Scene.
          */
-        explicit Scene(std::unique_ptr<helios::scene::FrustumCullingStrategy> frustumCullingStrategy);
+        explicit Scene(std::unique_ptr<helios::scene::FrustumCullingStrategy> frustumCullingStrategy) :
+            frustumCullingStrategy_(std::move(frustumCullingStrategy)), root_(std::make_unique<SceneNode>()) {}
 
 
         /**
@@ -161,7 +188,13 @@ export namespace helios::scene {
          *
          * @return The raw pointer to the newly added node, or `nullptr` if the node was not added.
          */
-        [[nodiscard]] SceneNode* addNode(std::unique_ptr<SceneNode> node) const;
+        [[nodiscard]] SceneNode* addNode(std::unique_ptr<SceneNode> node) const {
+            assert(root_ && "Unexpected null-root");
+            if (!root_) {
+                logger_.error("Unexpected nullptr for this Scene's root.");
+            }
+            return root_->addNode(std::move(node));
+        }
 
         /**
          * @brief Updates the world transformations of SceneNodes in the graph.
@@ -169,7 +202,9 @@ export namespace helios::scene {
          * The method traverses the Scene and propagates updated world transformations
          * to their respective child nodes if the processed node is considered to be dirty.
          */
-        void updateNodes() const;
+        void updateNodes() const {
+            updateNodes(*root_, mat4fid);
+        }
 
         /**
          * @brief Applies this Scene's frustumCullingStrategy and returns all nodes visible for the specified
@@ -184,7 +219,16 @@ export namespace helios::scene {
          */
         [[nodiscard]] std::vector<const helios::scene::SceneNode*> findVisibleNodes(
             const helios::scene::CameraSceneNode* cameraSceneNode
-        ) const;
+        ) const {
+            assert(root_ && "Unexpected null-root");
+            if (!root_) {
+                logger_.error("Unexpected nullptr for this Scene's root.");
+            }
+
+            updateNodes();
+
+            return frustumCullingStrategy_->cull(cameraSceneNode, *root_);
+        }
 
         /**
          * @brief Returns the root node of this Scene.
@@ -193,7 +237,13 @@ export namespace helios::scene {
          *
          * @return The root node of this Scene.
          */
-        [[nodiscard]] helios::scene::SceneNode& root() const noexcept;
+        [[nodiscard]] helios::scene::SceneNode& root() const noexcept {
+            assert(root_ && "Unexpected null-root");
+            if (!root_) {
+                logger_.error("Unexpected nullptr for this Scene's root.");
+            }
+            return *root_;
+        }
 
         /**
          * @brief Creates a Snapshot of the Scene and returns it.
@@ -210,7 +260,32 @@ export namespace helios::scene {
          * @todo This should be refactored into a factory to prevent domain leakage between Scene and Rendering.
          */
         [[nodiscard]] std::optional<Snapshot>
-        createSnapshot(const std::shared_ptr<const rendering::Viewport>& viewport) const;
+        createSnapshot(const std::shared_ptr<const rendering::Viewport>& viewport) const {
+
+            const auto* cameraSceneNode = viewport->cameraSceneNode();
+
+            if (!cameraSceneNode) {
+                logger_.warn("Viewport was not configured with a camera, skipping createSnapshot()...");
+                return std::nullopt;
+            }
+
+            const auto nodes = findVisibleNodes(cameraSceneNode);
+
+            std::vector<SnapshotItem> renderables;
+            renderables.reserve(nodes.size());
+            for (const auto& node: nodes) {
+                if (node->isActive() && node->hasRenderable()) {
+                    renderables.emplace_back(node->renderable(), node->cachedWorldTransform());
+                }
+            }
+
+            return std::make_optional<Snapshot>(
+                viewport,
+                cameraSceneNode->camera().projectionMatrix(),
+                cameraSceneNode->camera().viewMatrix(),
+                std::move(renderables)
+            );
+        }
 
     };
 

@@ -62,7 +62,14 @@ export namespace helios::core::spatial {
          *
          * @return The newly computed transformation matrix.
          */
-        helios::math::mat4f updateCache() const;
+        helios::math::mat4f updateCache() const {
+            needsUpdate_ = false;
+            return math::translate(
+                helios::math::mat4f::identity(),
+                translation_)  *
+                (rotation_ * helios::math::mat4f(scale_)
+            );
+        }
 
         public:
             ~Transform() = default;
@@ -83,7 +90,12 @@ export namespace helios::core::spatial {
             Transform(const helios::math::mat4f& rotation,
                 helios::math::vec3f scale,
                 helios::math::vec3f translation
-            ) noexcept;
+            ) noexcept :
+                rotation_(rotation),
+                scale_(scale),
+                translation_(translation),
+                needsUpdate_(true)
+            {}
 
             /**
              * @brief Sets the rotation component of this Transform.
@@ -91,7 +103,10 @@ export namespace helios::core::spatial {
              *
              * @param rotation A const ref to the new rotation matrix.
              */
-            void setRotation(const math::mat4f& rotation) noexcept;
+            void setRotation(const math::mat4f& rotation) noexcept {
+                rotation_ = rotation;
+                needsUpdate_ = true;
+            }
 
             /**
              * @brief Sets the translation component of this Transform.
@@ -99,7 +114,10 @@ export namespace helios::core::spatial {
              *
              * @param translation A const ref to the new translation vector.
              */
-            void setTranslation(const math::vec3f& translation) noexcept;
+            void setTranslation(const math::vec3f& translation) noexcept {
+                translation_ = translation;
+                needsUpdate_ = true;
+            }
 
             /**
              * @brief Sets the scale component of this Transform.
@@ -107,35 +125,49 @@ export namespace helios::core::spatial {
              *
              * @param scale A const ref to the new scale vector.
              */
-            void setScale(const math::vec3f& scale) noexcept;
+            void setScale(const math::vec3f& scale) noexcept {
+                scale_ = scale;
+                needsUpdate_ = true;
+            }
 
             /**
              * @brief Returns the current rotation component of this Transform object.
              *
              * @return The current 4x4 rotation matrix.
              */
-            [[nodiscard]] helios::math::mat4f rotation() const noexcept;
+            [[nodiscard]] helios::math::mat4f rotation() const noexcept {
+                return rotation_;
+            }
 
             /**
              * @brief Returns the current translation component of this Transform object.
              *
              * @return The current 3D translation vector.
              */
-            [[nodiscard]] helios::math::vec3f translation() const noexcept;
+            [[nodiscard]] helios::math::vec3f translation() const noexcept {
+                return translation_;
+            }
 
             /**
              * @brief Returns the current scale component of this Transform object.
              *
              * @return The current 3D scale vector.
              */
-            [[nodiscard]] helios::math::vec3f scaling() const noexcept;
+            [[nodiscard]] helios::math::vec3f scaling() const noexcept {
+                return scale_;
+            }
 
             /**
              * @brief Returns the 4x4 transformation matrix combined from scale, rotation, and translation.
              *
              * @return The current 4x4 affine transformation matrix.
              */
-            [[nodiscard]] helios::math::mat4f transform() const noexcept;
+            [[nodiscard]] helios::math::mat4f transform() const noexcept {
+                if (needsUpdate_) {
+                    cached_ = updateCache();
+                }
+                return cached_;
+            }
 
             /**
              * @brief Checks whether this Transform needs to be updated, e.g. because the
@@ -144,7 +176,9 @@ export namespace helios::core::spatial {
              * @return true if this Transform is considered to be dirty, otherwise
              * false.
              */
-            [[nodiscard]] bool needsUpdate() const noexcept;
+            [[nodiscard]] bool needsUpdate() const noexcept {
+                return needsUpdate_;
+            }
 
     };
 

@@ -47,7 +47,16 @@ export namespace helios::rendering::model::config {
          *
          * @param uniformValueMap Target map receiving the uniform values.
          */
-        void writeUniformValues(helios::rendering::shader::UniformValueMap& uniformValueMap) const noexcept;
+        void writeUniformValues(helios::rendering::shader::UniformValueMap& uniformValueMap) const noexcept {
+
+            if (baseColor) {
+                uniformValueMap.set(helios::rendering::shader::UniformSemantics::MaterialBaseColor, *baseColor);
+            }
+
+            if (roughness) {
+                uniformValueMap.set(helios::rendering::shader::UniformSemantics::MaterialRoughness, *roughness);
+            }
+        }
 
     };
 }

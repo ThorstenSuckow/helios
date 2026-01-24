@@ -10,6 +10,7 @@ module;
 #include <memory>
 #include <mutex>
 #include <vector>
+#include <cstring>
 
 export module helios.util.log.LogManager;
 
@@ -82,14 +83,35 @@ export namespace helios::util::log {
         /**
          * @brief Creates the LogManager and registers an unscoped default logger.
          */
-        LogManager();
+        LogManager() : defaultLogger_(std::make_unique<Logger>("default")) {}
 
         /**
          * @brief Reconfigures all logger sinks based on currently enabled sinks.
          *
          * Called internally after sink enable/disable changes.
          */
-        void updateLoggerSinks();
+        void updateLoggerSinks() {
+            // Called with sinkMutex_ already held
+            std::lock_guard<std::mutex> mapLock(mapMutex_);
+
+            // Update default logger
+            defaultLogger_->clearSinks();
+            for (const auto& sink : registeredSinks_) {
+                if (sink && enabledSinks_.contains(sink->typeId())) {
+                    defaultLogger_->addSink(sink);
+                }
+            }
+
+            // Update all registered loggers
+            for (auto& [scope, logger] : loggers_) {
+                logger->clearSinks();
+                for (const auto& sink : registeredSinks_) {
+                    if (sink && enabledSinks_.contains(sink->typeId())) {
+                        logger->addSink(sink);
+                    }
+                }
+            }
+        }
 
     public:
 
@@ -103,7 +125,9 @@ export namespace helios::util::log {
          *
          * @return The logger registered with the scope, or the default logger if none was found.
          */
-        static const Logger& loggerForScope(const std::string& scope) noexcept;
+        static const Logger& loggerForScope(const std::string& scope) noexcept {
+            return LogManager::getInstance().registerLogger(scope);
+        }
 
         ~LogManager() = default;
 
@@ -120,14 +144,20 @@ export namespace helios::util::log {
          *
          * @return Reference to the global LogManager instance.
          */
-        static LogManager& getInstance() noexcept;
+        static LogManager& getInstance() noexcept {
+            static LogManager instance;
+
+            return instance;
+        }
 
         /**
          * @brief Returns a const reference to the default logger managed with this LogManager.
          *
          * @return The default Logger instance.
          */
-        [[nodiscard]] const Logger& logger() const noexcept;
+        [[nodiscard]] const Logger& logger() const noexcept {
+            return *defaultLogger_;
+        }
 
         /**
          * @brief Returns a const reference to the logger instance for the specified scope.
@@ -140,7 +170,17 @@ export namespace helios::util::log {
          * @return The logger registered with the scope, or the default logger if
          * none was found.
          */
-        [[nodiscard]] const Logger& logger(const std::string& scope) const noexcept;
+        [[nodiscard]] const Logger& logger(const std::string& scope) const noexcept {
+            // mapMutex_ is automatically released when going out of scope
+            std::lock_guard<std::mutex> lock(mapMutex_);
+
+            auto log = loggers_.find(scope);
+            if (log != loggers_.end()) {
+                return *(log->second);
+            }
+
+            return *defaultLogger_;
+        }
 
         /**
          * @brief Registers a new logger with this manager.
@@ -152,14 +192,49 @@ export namespace helios::util::log {
          * @return The logger registered with the scope, or the logger already registered
          * with the LogManager under the given scope.
          */
-        [[nodiscard]] Logger& registerLogger(const std::string& scope) noexcept;
+        [[nodiscard]] Logger& registerLogger(const std::string& scope) noexcept {
+            // mapMutex_ is automatically released when going out of scope
+            std::lock_guard<std::mutex> lock(mapMutex_);
+
+            if (auto log = loggers_.find(scope); log != loggers_.end()) {
+                return *(log->second);
+            }
+
+            auto logger = std::make_unique<Logger>(scope);
+            loggers_[scope] = std::move(logger);
+            loggers_[scope]->enable(loggingEnabled_);
+
+            // Configure sinks for new logger
+            {
+                std::lock_guard<std::mutex> sinkLock(sinkMutex_);
+                for (const auto& sink : registeredSinks_) {
+                    if (sink && enabledSinks_.contains(sink->typeId())) {
+                        loggers_[scope]->addSink(sink);
+                    }
+                }
+            }
+
+            return *loggers_[scope];
+        }
 
         /**
          * @brief Enables or disables all log output of the Loggers registered with this LogManager.
          *
          * @param enable True to enable log output with the registered loggers, otherwise false.
          */
-        void enableLogging(bool enable) noexcept;
+        void enableLogging(bool enable) noexcept {
+            std::lock_guard<std::mutex> lock(mapMutex_);
+
+            if (loggingEnabled_ == enable) {
+                return;
+            }
+
+            loggingEnabled_ = enable;
+
+            for (auto& [fst, snd]: loggers_) {
+                snd->enable(enable);
+            }
+        }
 
         /**
          * @brief Sets the filter scope for the logger.
@@ -169,7 +244,25 @@ export namespace helios::util::log {
          *
          * @param scope The scope to filter. Only log messages with this scope will be logged.
          */
-        void setScopeFilter(const std::string& scope) noexcept;
+        void setScopeFilter(const std::string& scope) noexcept {
+            if (!loggingEnabled_) {
+                return;
+            }
+
+            // Make sure the logger exists first (this acquires mapMutex_ internally)
+            std::ignore = LogManager::getInstance().registerLogger(scope);
+
+            // Now lock and update the filter
+            std::lock_guard<std::mutex> lock(mapMutex_);
+
+            for (auto& [fst, snd] : loggers_) {
+                if (fst == scope) {
+                    snd->enable(true);
+                } else {
+                    snd->enable(false);
+                }
+            }
+        }
 
         // ===== Sink Management =====
 
@@ -180,7 +273,9 @@ export namespace helios::util::log {
          *
          * @param sink The sink to register.
          */
-        void registerSink(std::shared_ptr<LogSink> sink);
+        void registerSink(std::shared_ptr<LogSink> sink) {
+            registerSink(std::move(sink), true);
+        }
 
         /**
          * @brief Registers a sink with optional auto-enable.
@@ -188,7 +283,30 @@ export namespace helios::util::log {
          * @param sink The sink to register.
          * @param enabled Whether to enable the sink immediately (default: true).
          */
-        void registerSink(std::shared_ptr<LogSink> sink, bool enabled);
+        void registerSink(std::shared_ptr<LogSink> sink, bool enabled) {
+            if (!sink) return;
+
+            std::lock_guard<std::mutex> lock(sinkMutex_);
+
+            // Check if sink with same typeId is already registered
+            bool alreadyRegistered = false;
+            for (const auto& existing : registeredSinks_) {
+                if (existing && std::strcmp(existing->typeId(), sink->typeId()) == 0) {
+                    alreadyRegistered = true;
+                    break;
+                }
+            }
+
+            if (!alreadyRegistered) {
+                registeredSinks_.push_back(sink);
+            }
+
+            if (enabled) {
+                enabledSinks_.insert(sink->typeId());
+            }
+
+            updateLoggerSinks();
+        }
 
         /**
          * @brief Enables a sink by its type identifier.
@@ -198,7 +316,11 @@ export namespace helios::util::log {
          *
          * @param typeId The unique type identifier of the sink (e.g., "console", "imgui").
          */
-        void enableSink(SinkTypeId typeId);
+        void enableSink(SinkTypeId typeId) {
+            std::lock_guard<std::mutex> lock(sinkMutex_);
+            enabledSinks_.insert(typeId);
+            updateLoggerSinks();
+        }
 
         /**
          * @brief Enables a sink, registering it first if necessary.
@@ -208,21 +330,49 @@ export namespace helios::util::log {
          *
          * @param sink The sink instance to enable (and register if needed).
          */
-        void enableSink(std::shared_ptr<LogSink> sink);
+        void enableSink(std::shared_ptr<LogSink> sink) {
+            if (!sink) return;
+
+            std::lock_guard<std::mutex> lock(sinkMutex_);
+
+            // Check if already registered
+            bool alreadyRegistered = false;
+            for (const auto& existing : registeredSinks_) {
+                if (existing && std::strcmp(existing->typeId(), sink->typeId()) == 0) {
+                    alreadyRegistered = true;
+                    break;
+                }
+            }
+
+            // Auto-register if not already registered
+            if (!alreadyRegistered) {
+                registeredSinks_.push_back(sink);
+            }
+
+            enabledSinks_.insert(sink->typeId());
+            updateLoggerSinks();
+        }
 
         /**
          * @brief Disables a sink by its type identifier.
          *
          * @param typeId The unique type identifier of the sink.
          */
-        void disableSink(SinkTypeId typeId);
+        void disableSink(SinkTypeId typeId) {
+            std::lock_guard<std::mutex> lock(sinkMutex_);
+            enabledSinks_.erase(typeId);
+            updateLoggerSinks();
+        }
 
         /**
          * @brief Disables a sink by instance.
          *
          * @param sink The sink instance to disable.
          */
-        void disableSink(std::shared_ptr<LogSink> sink);
+        void disableSink(std::shared_ptr<LogSink> sink) {
+            if (!sink) return;
+            disableSink(sink->typeId());
+        }
 
         /**
          * @brief Checks if a sink with the given type identifier is currently enabled.
@@ -231,17 +381,32 @@ export namespace helios::util::log {
          *
          * @return True if the sink is enabled.
          */
-        [[nodiscard]] bool isSinkEnabled(SinkTypeId typeId) const noexcept;
+        [[nodiscard]] bool isSinkEnabled(SinkTypeId typeId) const noexcept {
+            std::lock_guard<std::mutex> lock(sinkMutex_);
+            return enabledSinks_.contains(typeId);
+        }
 
         /**
          * @brief Enables all registered sinks.
          */
-        void enableAllSinks();
+        void enableAllSinks() {
+            std::lock_guard<std::mutex> lock(sinkMutex_);
+            for (const auto& sink : registeredSinks_) {
+                if (sink) {
+                    enabledSinks_.insert(sink->typeId());
+                }
+            }
+            updateLoggerSinks();
+        }
 
         /**
          * @brief Disables all sinks.
          */
-        void disableAllSinks();
+        void disableAllSinks() {
+            std::lock_guard<std::mutex> lock(sinkMutex_);
+            enabledSinks_.clear();
+            updateLoggerSinks();
+        }
     };
 
 }

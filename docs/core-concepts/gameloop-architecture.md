@@ -87,7 +87,7 @@ for (phase : {Pre, Main, Post}) {
             system.update(updateContext);
         }
         
-        if (pass.commmitPoint() == CommitPoint::PassEvents) {
+        if (pass.commitPoint() == CommitPoint::PassEvents) {
             passEventBus.swapBuffers();  // Pass events readable
         }
     }

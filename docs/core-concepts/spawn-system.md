@@ -366,4 +366,4 @@ helios.engine.runtime.spawn/
 
 - [Component System](component-system.md) — Components used by spawned entities
 - [Game Loop Architecture](gameloop-architecture.md) — How spawning integrates with phases
-- [Command System](command-system.md) — Command pipeline for spawn requests
+- [Command System](command-system.md) — Command pipeline for spawn commands

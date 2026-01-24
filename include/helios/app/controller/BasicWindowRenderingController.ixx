@@ -5,6 +5,7 @@
 module;
 
 #include <string>
+#include <format>
 
 export module helios.app.controller.BasicWindowRenderingController;
 
@@ -37,14 +38,19 @@ export namespace helios::app::controller {
          *
          * @param window Reference to the window to be managed by this controller.
          */
-        explicit BasicWindowRenderingController(helios::window::Window& window);
+        explicit BasicWindowRenderingController(helios::window::Window& window):
+        window_(window)
+        {}
 
         /**
          * @brief Handles framebuffer resize events.
          *
          * @param e The framebuffer resize event containing the new dimensions.
          */
-        void onFrameBufferResize(const helios::window::event::FrameBufferResizeEvent& e) override;
+        void onFrameBufferResize(const helios::window::event::FrameBufferResizeEvent& e) override {
+            logger_.debug(std::format("onFrameBufferResize ({0}, {1})", e.width, e.height));
+            window_.renderTarget().setSize(e.width, e.height);
+        }
 
         /**
          * @brief Registers this controller to the framebuffer resize event.
@@ -53,16 +59,27 @@ export namespace helios::app::controller {
          *
          * @see onFrameBufferResize
          */
-        void subscribeTo(helios::event::Dispatcher& dispatcher) override;
+        void subscribeTo(helios::event::Dispatcher& dispatcher) override {
+            logger_.debug("Subscribing to dispatcher.");
+            dispatcher.subscribe<helios::window::event::FrameBufferResizeEvent>(
+                [this](const helios::window::event::FrameBufferResizeEvent& e) {
+                    onFrameBufferResize(e);
+                }
+            );
+        }
 
         /**
          * @brief Initializes this controller.
          *
          * @return True if initialization succeeded, otherwise false.
          */
-        bool init() override;
+        bool init() override {
+            return true;
+        }
 
-        [[nodiscard]] std::string toString() const noexcept override;
+        [[nodiscard]] std::string toString() const noexcept override {
+            return "BasicWindowController";
+        }
     };
 
 

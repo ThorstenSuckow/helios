@@ -208,6 +208,11 @@ async function main() {
       meta: { title: 'Spawn System', description: 'Entity lifecycle management with spawn scheduling, profiles, behaviors, and pool integration.', slug: '/core-concepts/spawn-system', tags: ['gameplay', 'architecture', 'spawn'], keywords: ['helios', 'spawn system', 'object pooling', 'entity lifecycle', 'SpawnManager', 'SpawnScheduler'], sidebar_label: 'Spawn System', sidebar_position: 7 }
     },
     {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'gameobject-builder.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'gameobject-builder.md'),
+      meta: { title: 'GameObject Builder', description: 'Fluent builder pattern for constructing GameObjects with their associated components.', slug: '/core-concepts/gameobject-builder', tags: ['gameplay', 'architecture', 'builder'], keywords: ['helios', 'builder pattern', 'GameObjectFactory', 'fluent API', 'entity construction'], sidebar_label: 'GameObject Builder', sidebar_position: 8 }
+    },
+    {
       src: path.join(repoRoot, 'examples', 'README.md'),
       dest: path.join(websiteRoot, 'docs', 'examples', 'overview.md'),
       meta: { title: 'Examples Overview', description: 'Example applications demonstrating helios features: rendering, input, scene graph, and more.', slug: '/examples', tags: ['examples', 'tutorial'], keywords: ['helios', 'examples', 'tutorials', 'getting started'], sidebar_label: 'Overview' }

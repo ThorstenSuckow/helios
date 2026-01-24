@@ -220,7 +220,7 @@ export namespace helios::engine::modules::physics::motion::components {
             direction_ = direction.toVec2();
             throttle_ = throttle;
 
-            assert(std::abs(direction.length() - 1.0f) <= helios::math::EPSILON_LENGTH && "Unexpected direction vector - not normalized");
+            assert(direction_.isNormalized() && "Unexpected direction vector - not normalized");
 
             stateChanged_ = true;
 
@@ -234,6 +234,15 @@ export namespace helios::engine::modules::physics::motion::components {
          */
         [[nodiscard]] bool useInstantAcceleration() const noexcept {
             return useInstantAcceleration_;
+        }
+
+        /**
+         * @brief Sets the instant acceleration mode.
+         *
+         * @param useInstantAcceleration True to enable instant acceleration, false for smooth ramping.
+         */
+        void setUseInstantAcceleration(const bool useInstantAcceleration) noexcept {
+            useInstantAcceleration_ = useInstantAcceleration;
         }
 
         /**

@@ -21,6 +21,13 @@ import helios.engine.runtime.spawn.commands.SpawnCommand;
 import helios.engine.runtime.spawn.commands.ScheduledSpawnPlanCommand;
 import helios.engine.runtime.spawn.commands.DespawnCommand;
 
+import helios.engine.modules.rendering.model.components.ModelAabbComponent;
+import helios.engine.modules.spatial.transform.components.ScaleStateComponent;
+import helios.engine.modules.spatial.transform.components.RotationStateComponent;
+
+import helios.engine.modules.physics.collision.Bounds;
+import helios.engine.modules.scene.components.SceneNodeComponent;
+
 import helios.engine.runtime.world.Manager;
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
@@ -30,6 +37,10 @@ import helios.engine.core.data.SpawnProfileId;
 import helios.engine.ecs.GameObject;
 import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
 import helios.engine.mechanics.spawn.components.SpawnedByProfileComponent;
+
+import helios.engine.modules.physics.collision.components.AabbColliderComponent;
+
+import helios.math;
 
 export namespace helios::engine::runtime::spawn {
 
@@ -111,6 +122,35 @@ export namespace helios::engine::runtime::spawn {
             std::unique_ptr<const helios::engine::runtime::spawn::SpawnProfile>> spawnProfiles_;
 
         /**
+         * @brief Ensures that the bounds are properly computed..
+         *
+         * @details Checks if the bounding box was initialized (i.e. has valid
+         * min/max values: min <= max).
+         * If the bounds are inverted (min > max), it recomputes the world AABB
+         * using the GameObject's components (ModelAabb, ScaleState, RotationState,
+         * SceneNode, TranslationState).
+         *
+         * @param go The GameObject to compute bounds for.
+         * @param bounds The bounding box to check and potentially update.
+         *
+         * @see helios::engine::modules::physics::collision::Bounds::computeWorldAabb
+         */
+        void ensureBounds(const helios::engine::ecs::GameObject* go, helios::math::aabbf& bounds) {
+            if (bounds.min()[0] > bounds.max()[0]) {
+                const auto mab   = go->get<helios::engine::modules::rendering::model::components::ModelAabbComponent>();
+                const auto sca    = go->get<helios::engine::modules::spatial::transform::components::ScaleStateComponent>();
+                const auto rsc = go->get<helios::engine::modules::spatial::transform::components::RotationStateComponent>();
+                const auto scn   = go->get<helios::engine::modules::scene::components::SceneNodeComponent>();
+                const auto tsc   = go->get<helios::engine::modules::spatial::transform::components::TranslationStateComponent>();
+
+                assert(mab && scn && tsc && sca && rsc && "Missing Components for AABB computation");
+                bounds = helios::engine::modules::physics::collision::Bounds::computeWorldAabb(
+                   *mab, *scn, *tsc, *sca, *rsc
+                );
+            }
+        }
+
+        /**
          * @brief Processes scheduled spawn plan commands.
          *
          * @details Iterates through each plan, acquires entities from the pool,
@@ -168,11 +208,19 @@ export namespace helios::engine::runtime::spawn {
                     auto* sbp = go->get<helios::engine::mechanics::spawn::components::SpawnedByProfileComponent>();
                     assert(sbp && "unexpected missing SpawnedByProfileComponent");
 
+                    auto* aabb = go->get<helios::engine::modules::physics::collision::components::AabbColliderComponent>();
+                    assert(aabb && "unexpected missing AabbColliderComponent");
+
                     auto spawnCursor = helios::engine::runtime::spawn::SpawnPlanCursor{spawnCount, i};
                     const auto& spawnContext =  scheduledSpawnPlanCommand.spawnContext();
                     if (tsc) {
+                        
+                        auto bounds = aabb->bounds();
+                        ensureBounds(go, bounds);
+
                         const auto position = spawnProfile->spawnPlacer->getPosition(
                             go->guid(),
+                            bounds,
                             gameWorld_->level().bounds(),
                             spawnCursor,
                             spawnContext
@@ -229,10 +277,18 @@ export namespace helios::engine::runtime::spawn {
                 auto* sbp = go->get<helios::engine::mechanics::spawn::components::SpawnedByProfileComponent>();
                 assert(sbp && "unexpected missing SpawnedByProfileComponent");
 
+                auto* aabb = go->get<helios::engine::modules::physics::collision::components::AabbColliderComponent>();
+                assert(aabb && "unexpected missing AabbColliderComponent");
+
 
                 if (tsc) {
+
+                    auto bounds = aabb->bounds();
+                    ensureBounds(go, bounds);
+
                     const auto position = spawnProfile->spawnPlacer->getPosition(
                         go->guid(),
+                        bounds,
                         gameWorld_->level().bounds(),
                         {1, 1},
                         spawnContext

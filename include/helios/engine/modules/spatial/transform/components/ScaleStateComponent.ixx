@@ -1,10 +1,10 @@
 /**
- * @file ScaleComponent.ixx
+ * @file ScaleStateComponent.ixx
  * @brief Component for managing the dimensions of an entity.
  */
 module;
 
-export module helios.engine.modules.spatial.transform.components.ScaleComponent;
+export module helios.engine.modules.spatial.transform.components.ScaleStateComponent;
 
 import helios.engine.ecs.GameObject;
 import helios.math.types;
@@ -23,8 +23,7 @@ export namespace helios::engine::modules::spatial::transform::components {
      * unit of measurement. It tracks changes via a dirty flag, allowing other systems
      * to react to scale updates.
      */
-    class ScaleComponent : public helios::engine::ecs::CloneableComponent<ScaleComponent> {
-
+    class ScaleStateComponent : public helios::engine::ecs::CloneableComponent<ScaleStateComponent> {
         /**
          * @brief Width of the entity.
          */
@@ -53,22 +52,25 @@ export namespace helios::engine::modules::spatial::transform::components {
     public:
 
         /**
-         * @brief Constructs a ScaleComponent with specified dimensions and unit.
+         * @brief Constructs a ScaleStateComponent with specified dimensions and unit.
          *
          * @param width Width of the entity.
          * @param height Height of the entity.
          * @param depth Depth of the entity.
          * @param unit Unit of measurement (default: Meter).
          */
-        explicit ScaleComponent(const float width, const float height, const float depth, helios::core::units::Unit unit) :
+        explicit ScaleStateComponent(const float width, const float height, const float depth, const helios::core::units::Unit unit) :
         width_(width), height_(height), depth_(depth), unit_(unit) {}
+
+        explicit ScaleStateComponent(const helios::math::vec3f scale, const helios::core::units::Unit unit = helios::core::units::Unit::Meter) :
+            width_(scale[0]), height_(scale[1]), depth_(scale[2]), unit_(unit) {}
 
         /**
          * @brief Copy constructor.
          *
          * @param other The component to copy from.
          */
-        explicit ScaleComponent(const ScaleComponent& other) :
+        explicit ScaleStateComponent(const ScaleStateComponent& other) :
             width_(other.width_),
             height_(other.height_),
             depth_(other.depth_),

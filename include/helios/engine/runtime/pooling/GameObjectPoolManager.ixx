@@ -60,7 +60,7 @@ export namespace helios::engine::runtime::pooling {
      * poolManager.init(gameWorld);
      *
      * if (auto* bullet = poolManager.acquire(bulletPoolId)) {
-     *     bullet->get<TransformComponent>()->setTranslation(spawnPos);
+     *     bullet->get<ComposeTransformComponent>()->setTranslation(spawnPos);
      * }
      *
      * poolManager.release(bulletPoolId, bullet->guid());

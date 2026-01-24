@@ -316,7 +316,7 @@ for (phase : {Pre, Main, Post}) {
             // - readFrame<E>() for events from previous frame
         }
         
-        if (pass.commmitPoint() == CommitPoint::PassEvents) {
+        if (pass.commitPoint() == CommitPoint::PassEvents) {
             passEventBus.swapBuffers();  // Pass events become readable
         }
     }

@@ -7,6 +7,7 @@ module;
 #include <functional>
 #include <memory>
 #include <utility>
+#include <format>
 
 export module helios.event.EventManager;
 
@@ -85,7 +86,10 @@ export namespace helios::event {
         explicit EventManager(
             std::unique_ptr<EventQueue> eventQueue,
             std::unique_ptr<Dispatcher> dispatcher
-        );
+        ) :
+            eventQueue_(std::move(eventQueue)),
+            dispatcher_(std::move(dispatcher))
+        {}
 
 
         /**
@@ -99,7 +103,9 @@ export namespace helios::event {
          *
          * @return EventManager
          */
-        EventManager& post(std::unique_ptr<const Event> event);
+        EventManager& post(std::unique_ptr<const Event> event) {
+            return post(std::move(event), APPEND, nullptr);
+        }
 
 
         /**
@@ -114,7 +120,10 @@ export namespace helios::event {
          *
          * @return EventManager
          */
-        EventManager& post(std::unique_ptr<const Event> event, PostPolicy policy);
+        EventManager& post(std::unique_ptr<const Event> event, PostPolicy policy) {
+            logger_.debug(std::format("Posting Event {0}", event->toString()));
+            return post(std::move(event), policy, nullptr);
+        }
 
 
         /**
@@ -179,7 +188,9 @@ export namespace helios::event {
          *
          * @return Dispatcher
          */
-        [[nodiscard]] Dispatcher& dispatcher() const noexcept;
+        [[nodiscard]] Dispatcher& dispatcher() const noexcept {
+            return *dispatcher_;
+        }
 
 
     };

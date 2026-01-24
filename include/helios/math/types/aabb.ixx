@@ -5,6 +5,7 @@
 module;
 
 #include <memory>
+#include <cassert>
 
 export module helios.math.types:aabb;
 

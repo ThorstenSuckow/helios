@@ -19,10 +19,11 @@ import helios.engine.runtime.messaging.command.CommandBuffer;
 import helios.engine.runtime.messaging.event.GameLoopEventBus;
 
 import helios.engine.runtime.gameloop.CommitPoint;
-import helios.engine.runtime.gameloop.Pass;
 import helios.engine.runtime.gameloop.Phase;
 
 import helios.input.InputSnapshot;
+
+import helios.engine.runtime.gameloop.PassCommitListener;
 
 #define HELIOS_LOG_SCOPE "helios::engine::runtime::gameloop::GameLoop"
 export namespace helios::engine::runtime::gameloop {
@@ -30,32 +31,60 @@ export namespace helios::engine::runtime::gameloop {
     /**
      * @brief Central orchestrator for the game update cycle.
      *
+     * @details
      * The GameLoop manages the execution of game systems across three distinct phases:
      * Pre, Main, and Post. Each phase can contain multiple passes, and each pass can
      * have a configurable commit point for fine-grained synchronization control.
      *
+     * ## Ownership
+     *
      * The GameLoop owns:
-     * - Three phases (Pre, Main, Post), each containing passes with registered systems.
-     * - A CommandBuffer for deferred command execution.
-     * - Two event buses: one for phase-level and one for pass-level event propagation.
+     * - **Three phases** (Pre, Main, Post), each containing passes with registered systems.
+     * - **A CommandBuffer** for deferred command execution.
+     * - **Three event buses** for different propagation scopes:
+     *   - `phaseEventBus_`: Events readable in the next phase.
+     *   - `passEventBus_`: Events readable in subsequent passes (within the same phase).
+     *   - `frameEventBus_`: Events readable in the next frame.
+     *
+     * ## Commit Points
      *
      * Commit points allow systems to specify when commands should be flushed, managers
      * should process their requests, and pass-level events should be synchronized.
      * This enables deterministic ordering and fine-grained control over the update cycle.
      *
+     * ## Frame Lifecycle
+     *
+     * ```
+     * ┌─────────────────────────────────────────────────────────────┐
+     * │                        FRAME N                              │
+     * ├─────────────────┬─────────────────┬─────────────────────────┤
+     * │   PRE PHASE     │   MAIN PHASE    │      POST PHASE         │
+     * │  (Input, Cmd)   │ (Physics, AI)   │ (Cleanup, Sync)         │
+     * ├─────────────────┼─────────────────┼─────────────────────────┤
+     * │ phaseCommit()   │ phaseCommit()   │ phaseCommit()           │
+     * │                 │                 │ frameEventBus_.swap()   │
+     * └─────────────────┴─────────────────┴─────────────────────────┘
+     * ```
+     *
      * @see Phase
      * @see Pass
      * @see CommitPoint
      * @see CommandBuffer
+     * @see PassCommitListener
      */
-    class GameLoop {
+    class GameLoop : public helios::engine::runtime::gameloop::PassCommitListener {
 
 
+        /**
+         * @brief Flag indicating whether init() has been called.
+         *
+         * Used to assert that init() is called exactly once before the first update()
+         * and to prevent multiple initializations.
+         */
         bool initialized_ = false;
     protected:
 
 
-        friend class helios::engine::runtime::gameloop::Pass;
 
         /**
          * @brief The logger used with this GameLoop instance.
@@ -149,9 +178,9 @@ export namespace helios::engine::runtime::gameloop {
          * @see UpdateContext::pushPass()
          * @see UpdateContext::readPass()
          */
-        void passCommit(
+        void onPassCommit(
             const CommitPoint commitPoint,
-            helios::engine::runtime::world::UpdateContext& updateContext) {
+            helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
 
             if ((commitPoint & CommitPoint::PassEvents) == CommitPoint::PassEvents)  {
@@ -201,6 +230,13 @@ export namespace helios::engine::runtime::gameloop {
     public:
 
 
+        /**
+         * @brief Default constructor.
+         *
+         * @details Creates a GameLoop with empty phases. Systems must be added
+         * to the phases via `phase(PhaseType).addPass().addSystem<T>()` before
+         * calling `init()`.
+         */
         GameLoop() = default;
 
         /**
@@ -265,12 +301,15 @@ export namespace helios::engine::runtime::gameloop {
                 switch (phase) {
                     case helios::engine::runtime::gameloop::PhaseType::Pre:
                         prePhase_.init(gameWorld);
+                     //   prePhase_.addPassCommitListener(this);
                         break;
                     case helios::engine::runtime::gameloop::PhaseType::Main:
                         mainPhase_.init(gameWorld);
+                     //   prePhase_.addPassCommitListener(this);
                         break;
                     case helios::engine::runtime::gameloop::PhaseType::Post:
                         postPhase_.init(gameWorld);
+                     //   prePhase_.addPassCommitListener(this);
                         break;
                 }
             }

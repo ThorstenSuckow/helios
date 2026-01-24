@@ -15,19 +15,20 @@ import helios.math;
 import helios.engine.runtime.messaging.command.CommandBuffer;
 
 import helios.engine.modules.physics.collision.types.CollisionBehavior;
+import helios.engine.modules.physics.collision.types.CollisionResponse;
 
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.modules.physics.motion.components.Move2DComponent;
 import helios.engine.modules.physics.motion.components.SteeringComponent;
-import helios.engine.modules.spatial.transform.components.TransformComponent;
+import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
 import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
 import helios.engine.modules.physics.motion.components.DirectionComponent;
 import helios.engine.mechanics.bounds.components.LevelBoundsBehaviorComponent;
 import helios.engine.modules.physics.collision.components.AabbColliderComponent;
-import helios.engine.modules.physics.motion.components.RotationStateComponent;
+import helios.engine.modules.spatial.transform.components.RotationStateComponent;
 import helios.engine.modules.rendering.model.components.ModelAabbComponent;
-import helios.engine.modules.physics.motion.components.RotationStateComponent;
+import helios.engine.modules.spatial.transform.components.RotationStateComponent;
 import helios.scene.SceneNode;
 import helios.engine.modules.scene.components.SceneNodeComponent;
 
@@ -48,6 +49,22 @@ export namespace helios::engine::mechanics::bounds::systems {
      * LevelBoundsBehaviorComponent's restitution coefficient.
      */
     class LevelBoundsBehaviorSystem : public helios::engine::ecs::System {
+
+        /**
+         * @brief Result of a bounce calculation against level bounds.
+         */
+        struct BounceResult {
+            /** @brief True if the X-axis boundary was hit. */
+            bool hitX;
+            /** @brief True if the Y-axis boundary was hit. */
+            bool hitY;
+            /** @brief The corrected world position. */
+            helios::math::vec3f translation;
+            /** @brief The new velocity after bounce. */
+            helios::math::vec3f velocity;
+            /** @brief The new direction vector. */
+            helios::math::vec3f direction;
+        };
 
     public:
 
@@ -85,13 +102,19 @@ export namespace helios::engine::mechanics::bounds::systems {
 
                     helios::math::vec3f bouncedWorldTranslation;
 
+                    BounceResult bounceResult{};
 
                     if (bbc->collisionBehavior() == CollisionBehavior::Reflect || bbc->collisionBehavior() == CollisionBehavior::Bounce) {
-                        bouncedWorldTranslation = bounce(
+
+                        bounceResult = bounce(
                            childWorldTranslation.toVec3(), objectBounds, levelBounds,
                            bbc->collisionBehavior() == CollisionBehavior::Reflect ? 1.0f : bbc->restitution(),
                            *m2d,  *dc
-                       );
+                        );
+
+                        bouncedWorldTranslation = bounceResult.translation;
+                        updateCollisionResponse(entity, bounceResult, bbc->collisionResponse());
+
                     } else if (bbc->collisionBehavior() == CollisionBehavior::Despawn) {
                         /**
                          * @todo optimize
@@ -103,6 +126,12 @@ export namespace helios::engine::mechanics::bounds::systems {
                             entity->guid(), sbp->spawnProfileId()
                         );
 
+                    }
+
+
+                    if (bounceResult.hitX || bounceResult.hitY) {
+                        m2d->setVelocity(bounceResult.velocity);
+                        dc->setDirection(bounceResult.direction);
                     }
 
                     auto parentTransform_inverse = parentWorldTransform.inverse();
@@ -118,6 +147,35 @@ export namespace helios::engine::mechanics::bounds::systems {
         }
 
     private:
+
+        /**
+         * @brief Updates the entity's state based on the configured collision response.
+         *
+         * @details
+         * If the response is set to AlignHeadingToDirection, this method updates the
+         * SteeringComponent to match the new bounce direction.
+         *
+         * @param go Pointer to the GameObject to update.
+         * @param bounceResult The result data from the bounce calculation.
+         * @param collisionResponse The type of response to apply.
+         */
+        void updateCollisionResponse(
+            helios::engine::ecs::GameObject* go,
+            BounceResult bounceResult,
+            helios::engine::modules::physics::collision::types::CollisionResponse collisionResponse) {
+
+            if (collisionResponse == helios::engine::modules::physics::collision::types::CollisionResponse::AlignHeadingToDirection) {
+                auto* psc = go->get<helios::engine::modules::physics::motion::components::SteeringComponent>();
+
+                const auto direction = bounceResult.direction;
+
+                if (psc) {
+                    psc->setSteeringIntent(
+                        bounceResult.direction, 1.0f
+                    );
+                }
+            }
+        }
 
         /**
          * @brief Applies bounce behavior to an entity that has left level bounds.
@@ -137,7 +195,7 @@ export namespace helios::engine::mechanics::bounds::systems {
          *
          * @return Corrected world position after bounce.
          */
-        [[nodiscard]] static helios::math::vec3f bounce(
+        [[nodiscard]] BounceResult bounce(
             helios::math::vec3f worldTranslation,
             helios::math::aabbf objectBounds,
             helios::math::aabbf levelBounds,
@@ -186,12 +244,10 @@ export namespace helios::engine::mechanics::bounds::systems {
                 hitY = true;
             }
 
-            if (hitX || hitY) {
-                m2d.setVelocity(velocity);
-                dc.setDirection(velocity.normalize());
-            }
 
-            return translation;
+            return {
+                hitX, hitY, translation, velocity, velocity.normalize()
+            };
         }
 
     };

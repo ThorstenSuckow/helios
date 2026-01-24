@@ -34,10 +34,22 @@ jobs:
           which dot
           dot -V
 
-      - name: Generate API Docs
+      - name: Prepare short source tree for doxygen
+        run: |
+          rm -rf /tmp/h
+          mkdir -p /tmp/h
+          rsync -a --delete include src docs /tmp/h/
+
+      - name: Generate API Docs (short paths)
+        run: |
+          rm -rf /tmp/h/docs/api
+          doxygen /tmp/h/docs/Doxyfile.in
+
+      - name: Copy generated docs back
         run: |
           rm -rf docs/api
-          doxygen docs/Doxyfile.in
+          mkdir -p docs
+          cp -r /tmp/h/docs/api docs/api
 
       - name: List Generated Files
         run: |

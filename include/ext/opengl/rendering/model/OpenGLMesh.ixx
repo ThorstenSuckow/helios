@@ -4,8 +4,11 @@
  */
 module;
 
+#include <glad/gl.h>
 #include <memory>
 #include <vector>
+#include <stdexcept>
+#include <string>
 
 export module helios.ext.opengl.rendering.model.OpenGLMesh;
 
@@ -53,7 +56,11 @@ export namespace helios::ext::opengl::rendering::model {
          *
          * @return Vertex Array Object handle.
          */
-        static unsigned int generateGLVertexArray() noexcept;
+        static unsigned int generateGLVertexArray() noexcept {
+            unsigned int vao;
+            glGenVertexArrays(1, &vao);
+            return vao;
+        }
 
 
         /**
@@ -62,7 +69,11 @@ export namespace helios::ext::opengl::rendering::model {
          *
          * @return Vertex Array Object handle.
          */
-        static unsigned int generateGLBuffer() noexcept;
+        static unsigned int generateGLBuffer() noexcept {
+            unsigned int vbo;
+            glGenBuffers(1, &vbo);
+            return vbo;
+        }
 
 
         /**
@@ -72,7 +83,46 @@ export namespace helios::ext::opengl::rendering::model {
          *
          * @see [Vri20, 162]
          */
-        void init() override;
+        void init() override {
+            glBindVertexArray(vao_);
+            glBindBuffer(GL_ARRAY_BUFFER, vbo_);
+
+            glBufferData(
+                GL_ARRAY_BUFFER,
+                vertices_->size() * sizeof(helios::rendering::Vertex),
+                &(*vertices_)[0],
+                GL_STATIC_DRAW
+            );
+
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_);
+            glBufferData(
+                GL_ELEMENT_ARRAY_BUFFER,
+                indices_->size() * sizeof(unsigned int),
+                &(*indices_)[0],
+                GL_STATIC_DRAW
+            );
+
+            // vertex position
+            glEnableVertexAttribArray(0);
+            glVertexAttribPointer(
+                0, 3, GL_FLOAT,
+                GL_FALSE, sizeof(helios::rendering::Vertex), nullptr
+            );
+
+            // vertex normals
+            glEnableVertexAttribArray(1);
+            glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(helios::rendering::Vertex),
+                reinterpret_cast<void*>(offsetof(helios::rendering::Vertex, normal))
+            );
+
+            // vertex texture coords
+            glEnableVertexAttribArray(2);
+            glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(helios::rendering::Vertex),
+                reinterpret_cast<void*>(offsetof(helios::rendering::Vertex, texCoords))
+            );
+
+            glBindVertexArray(0);
+        }
 
     public:
 
@@ -98,7 +148,27 @@ export namespace helios::ext::opengl::rendering::model {
             std::shared_ptr<const std::vector<helios::rendering::Vertex>> vertices,
             std::shared_ptr<const std::vector<unsigned int>> indices,
             std::shared_ptr<const helios::rendering::model::config::MeshConfig> meshConfig
-        );
+        ) :
+            Mesh(
+                std::move(vertices),
+                std::move(indices),
+                std::move(meshConfig)
+            ),
+            vao_(generateGLVertexArray()),
+            vbo_(generateGLBuffer()),
+            ebo_(generateGLBuffer()) {
+
+            if (!vertices_ || !indices_ || !meshConfig_) {
+                const std::string msg = "Mesh constructor received a null shared pointer.";
+                logger_.error(msg);
+                throw std::invalid_argument(msg);
+            }
+            /**
+             * @todo this should not be part of the constructor,
+             * instead, lazy init in render pass, then reuse.
+             */
+            OpenGLMesh::init();
+        }
 
         /**
          * @brief Creates a new OpenGLMesh instance from the specified Shape.
@@ -112,7 +182,27 @@ export namespace helios::ext::opengl::rendering::model {
         explicit OpenGLMesh(
             const helios::rendering::asset::shape::Shape& shape,
             std::shared_ptr<const helios::rendering::model::config::MeshConfig> meshConfig
-        );
+        ) :
+            Mesh(
+                shape,
+                std::move(meshConfig)
+            ),
+            vao_(generateGLVertexArray()),
+            vbo_(generateGLBuffer()),
+            ebo_(generateGLBuffer()) {
+
+            if (!vertices_ || !indices_ || !meshConfig_) {
+                const std::string msg = "Mesh constructor received a null shared pointer.";
+                logger_.error(msg);
+                throw std::invalid_argument(msg);
+            }
+
+            /**
+             * @todo this should not be part of the constructor,
+             * instead, lazy init in render pass, then reuse.
+             */
+            OpenGLMesh::init();
+        }
 
         /**
          * @brief Frees allocated resources bv this instance.
@@ -123,29 +213,40 @@ export namespace helios::ext::opengl::rendering::model {
          * @see https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDeleteVertexArrays.xhtml
          *
          */
-        ~OpenGLMesh() override;
+        ~OpenGLMesh() override {
+            glDeleteVertexArrays(1, &vao_);
+            glDeleteBuffers(1, &vbo_);
+            glDeleteBuffers(1, &ebo_);
+        }
 
         /**
          * @brief Returns the OpenGL Vertex Array Object Handle.
          *
          * @return VAO handle
          */
-        [[nodiscard]] const unsigned int& vao() const noexcept;
+        [[nodiscard]] const unsigned int& vao() const noexcept {
+            return vao_;
+        }
 
         /**
          * @brief Returns the OpenGL Vertex Buffer Object handle.
          *
          * @return VBO handle
          */
-        [[nodiscard]] const unsigned int& vbo() const noexcept;
+        [[nodiscard]] const unsigned int& vbo() const noexcept {
+            return vbo_;
+        }
 
         /**
          * @brief Returns the OpenGL Element Buffer Object handle for indexed rendering.
          *
          * @return EBO handle
          */
-        [[nodiscard]] const unsigned int& ebo() const noexcept;
+        [[nodiscard]] const unsigned int& ebo() const noexcept {
+            return ebo_;
+        }
 
     };
+
 
 }

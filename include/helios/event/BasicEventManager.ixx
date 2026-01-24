@@ -6,6 +6,7 @@ module;
 
 #include <functional>
 #include <memory>
+#include <utility>
 
 export module helios.event.BasicEventManager;
 
@@ -38,7 +39,9 @@ export namespace helios::event {
          * @param dispatcher
          */
         explicit BasicEventManager(std::unique_ptr<EventQueue> eventQueue,
-           std::unique_ptr<Dispatcher> dispatcher);
+           std::unique_ptr<Dispatcher> dispatcher) :
+           EventManager(std::move(eventQueue), std::move(dispatcher))
+        {}
 
 
         /**
@@ -57,7 +60,43 @@ export namespace helios::event {
             const std::function<bool(
                 const std::unique_ptr<const Event>& event,
                 const std::unique_ptr<const Event>& evt)>& func
-        ) override;
+        ) override {
+
+            std::function<bool(const std::unique_ptr<const Event>& event,
+                                    const std::unique_ptr<const Event>& evt)> cmpFunc;
+
+            switch (policy) {
+                case APPEND:
+                    eventQueue_->add(std::move(event));
+                break;
+                case LATEST_WINS:
+
+                    if (!func) {
+                        cmpFunc = [](
+                            const std::unique_ptr<const Event>& event,
+                            const std::unique_ptr<const Event>& evt) {
+                                if (!event  || !evt) {
+                                    return false;
+                                }
+                                return typeid(*event) == typeid(*evt) && event->tag() == evt->tag();
+                        };
+                    } else {
+                        cmpFunc = func;
+                    }
+
+                    /**
+                     * @todo use hashmap instead of queue for faster
+                     * lookup
+                     */
+                    eventQueue_->addOrReplace(std::move(event), cmpFunc);
+                    break;
+                default:
+                    std::unreachable();
+            }
+
+
+            return *this;
+        }
 
 
         /**
@@ -67,7 +106,14 @@ export namespace helios::event {
          *
          * @return EventManager
          */
-        EventManager& dispatchAll() override;
+        EventManager& dispatchAll() override {
+            while (!eventQueue_->empty()) {
+                auto e = eventQueue_->next();
+                dispatcher_->dispatch(std::move(e));
+            }
+
+            return *this;
+        }
 
 
 

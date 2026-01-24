@@ -4,6 +4,8 @@
  */
 module;
 
+#include <algorithm>
+
 export module helios.input.gamepad.DeadzoneStrategy;
 
 
@@ -85,7 +87,9 @@ export namespace helios::input::gamepad {
          *
          * @return The configured noise threshold value.
          */
-        [[nodiscard]] float stickNoiseThreshold() const noexcept;
+        [[nodiscard]] float stickNoiseThreshold() const noexcept {
+            return stickNoiseThreshold_;
+        }
 
         /**
          * @brief Sets the noise threshold for stick inputs to handle minor hardware drift.
@@ -96,7 +100,9 @@ export namespace helios::input::gamepad {
          *
          * @param threshold The new stick noise threshold, typically in the range [0.0, 1.0].
          */
-        void setStickNoiseThreshold(float threshold) noexcept;
+        void setStickNoiseThreshold(float threshold) noexcept {
+            stickNoiseThreshold_ = std::clamp(threshold, 0.0f, 0.9f);
+        }
     };
 
 }

@@ -9,3 +9,4 @@ export import helios.engine.modules.physics.collision.components;
 export import helios.engine.modules.physics.collision.events;
 export import helios.engine.modules.physics.collision.systems;
 
+export import helios.engine.modules.physics.collision.Bounds;

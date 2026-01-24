@@ -1,0 +1,464 @@
+// ============================================================================
+// Includes
+// ============================================================================
+#include <algorithm>
+#include <cstdlib>
+#include <functional>
+#include <glad/gl.h>
+#include <iostream>
+#include <numbers>
+
+// ============================================================================
+// Module Imports
+// ============================================================================
+
+import helios;
+import helios.ext;
+
+
+// ============================================================================
+// Using Declarations
+// ============================================================================
+
+using namespace helios::ext::glfw::app;
+using namespace helios::rendering;
+using namespace helios::rendering::model;
+using namespace helios::rendering::model::config;
+using namespace helios::rendering::shader;
+using namespace helios::ext::opengl::rendering;
+using namespace helios::ext::opengl::rendering::shader;
+using namespace helios::ext::opengl::rendering::model;
+using namespace helios::rendering::asset::shape::basic;
+using namespace helios::input;
+using namespace helios::input::gamepad;
+using namespace helios::input::types;
+using namespace helios::ext::glfw::window;
+using namespace helios::util::io;
+using namespace helios::scene;
+using namespace helios::math;
+
+
+// ============================================================================
+// Entry Point
+// ============================================================================
+
+int main() {
+
+    // ========================================
+    // Constants
+    // ========================================
+    constexpr float CELL_SIZE          = 5.0f;
+    constexpr float SPACESHIP_SIZE     = 5.0f;
+    constexpr float GRID_X             = 29.0f;
+    constexpr float GRID_Y             = 19.0f;
+    constexpr float FOVY               = helios::math::radians(90.0f);
+    constexpr float ASPECT_RATIO_NUMER = 16.0f;
+    constexpr float ASPECT_RATIO_DENOM = 9.0f;
+
+
+
+    // ========================================
+    // 1. Application and Window Setup
+    // ========================================
+
+    const auto app = GLFWFactory::makeOpenGLApp(
+        "helios - Enemy Spawn Demo", 1980, 1024, ASPECT_RATIO_NUMER, ASPECT_RATIO_DENOM
+    );
+
+    auto win = dynamic_cast<GLFWWindow*>(app->current());
+    auto mainViewport = std::make_shared<Viewport>(0.0f, 0.0f, 1.0f, 1.0f);
+
+    mainViewport->setClearFlags(std::to_underlying(ClearFlags::Color))
+                  .setClearColor(vec4f(0.051f, 0.051f, 0.153f, 1.0f));
+    win->addViewport(mainViewport);
+
+    // Get the InputManager for handling keyboard input
+    helios::input::InputManager& inputManager = app->inputManager();
+    // register the gamepads
+    unsigned int mask = inputManager.registerGamepads(Gamepad::ONE);
+
+    const auto basicStringFileReader = BasicStringFileReader();
+
+    // ========================================
+    // 1.2. ImGui & Tooling Setup
+    // ========================================
+    auto imguiBackend = helios::ext::imgui::ImGuiGlfwOpenGLBackend(win->nativeHandle());
+    auto imguiOverlay = helios::ext::imgui::ImGuiOverlay::forBackend(&imguiBackend);
+    auto fpsMetrics = helios::engine::tooling::FpsMetrics();
+    auto stopwatch = std::make_unique<helios::util::time::Stopwatch>();
+    auto framePacer = helios::engine::tooling::FramePacer(std::move(stopwatch));
+    framePacer.setTargetFps(0.0f);
+    helios::engine::tooling::FrameStats frameStats{};
+    auto menu = new helios::ext::imgui::widgets::MainMenuWidget();
+    auto fpsWidget = new helios::ext::imgui::widgets::FpsWidget(&fpsMetrics, &framePacer);
+    auto gamepadWidget = new helios::ext::imgui::widgets::GamepadWidget(&inputManager);
+    auto logWidget = new helios::ext::imgui::widgets::LogWidget();
+    auto cameraWidget = new helios::ext::imgui::widgets::CameraWidget();
+    imguiOverlay.addWidget(menu);
+    imguiOverlay.addWidget(fpsWidget);
+    imguiOverlay.addWidget(gamepadWidget);
+    imguiOverlay.addWidget(logWidget);
+    imguiOverlay.addWidget(cameraWidget);
+
+    // ========================================
+    // 1.3 Logger Configuration
+    // ========================================
+    helios::util::log::LogManager::getInstance().enableLogging(true);
+    auto imguiLogSink = std::make_shared<helios::ext::imgui::ImGuiLogSink>(logWidget);
+    helios::util::log::LogManager::getInstance().enableSink(imguiLogSink);
+
+    // ========================================
+    // 2. Shader Creation
+    // ========================================
+    auto defaultShader =
+            std::make_shared<OpenGLShader>("./resources/cube.vert", "./resources/cube.frag", basicStringFileReader);
+
+    auto uniformLocationMap = std::make_unique<OpenGLUniformLocationMap>();
+    bool mapping = uniformLocationMap->set(UniformSemantics::ModelMatrix, 1);
+    mapping = uniformLocationMap->set(UniformSemantics::ViewMatrix, 2);
+    mapping = uniformLocationMap->set(UniformSemantics::ProjectionMatrix, 3);
+    mapping = uniformLocationMap->set(UniformSemantics::MaterialBaseColor, 4);
+
+    defaultShader->setUniformLocationMap(std::move(uniformLocationMap));
+
+    // ========================================
+    // 3. Scene Graph Setup
+    // ========================================
+    auto frustumCullingStrategy = std::make_unique<CullNoneStrategy>();
+    auto scene = std::make_unique<helios::scene::Scene>(std::move(frustumCullingStrategy));
+
+    // ========================================
+    // 4. Camera Setup
+    // ========================================
+    auto mainViewportCam = std::make_unique<helios::scene::Camera>();
+    auto cameraSceneNode = std::make_unique<helios::scene::CameraSceneNode>(std::move(mainViewportCam));
+    auto cameraSceneNode_ptr = cameraSceneNode.get();
+
+    cameraSceneNode_ptr->setInheritance(
+        helios::math::TransformType::Translation
+    );
+    mainViewport->setCameraSceneNode(cameraSceneNode_ptr);
+    cameraSceneNode_ptr->setTranslation(
+        helios::math::vec3f(0.0f, 0.0f, -100.0f)
+    );
+    cameraSceneNode_ptr->camera().setPerspective(
+        FOVY,
+        ASPECT_RATIO_NUMER / ASPECT_RATIO_DENOM,
+        0.1f,
+        1000.0f
+    );
+    cameraSceneNode_ptr->lookAtLocal(
+        vec3f(0.0f, 0.0f, 0.0f),
+        vec3f(0.0f, 1.0f, 0.0f)
+    );
+    cameraWidget->addCameraSceneNode("Main Camera", cameraSceneNode_ptr);
+
+    // ========================================
+    // 5. GameWorld, Level and GameObjects
+    // ========================================
+
+    helios::engine::runtime::gameloop::GameLoop gameLoop{};
+    helios::engine::runtime::world::GameWorld gameWorld{};
+
+    auto level = std::make_unique<helios::engine::runtime::world::Level>(&(scene.get()->root()));
+    auto* levelPtr = level.get();
+    level->setBounds(
+        helios::math::aabb{
+            -(GRID_X * CELL_SIZE)/2.0f, -(GRID_Y * CELL_SIZE)/2.0f, 0.0f,
+            (GRID_X * CELL_SIZE)/2.0f, (GRID_Y * CELL_SIZE)/2.0f, 0.0f
+        },
+        helios::core::units::Unit::Meter
+    );
+    gameWorld.setLevel(std::move(level));
+
+    // purple enemy prefab
+    auto purpleEnemyPrefab = helios::engine::builder::gameObject::GameObjectFactory::instance()
+        .gameObject()
+        .withRendering([&defaultShader, &root = *levelPtr->rootNode()](auto& rnb) {
+            rnb.renderable()
+               .shader(defaultShader)
+               .color(helios::util::Colors::Pink)
+               .primitiveType(helios::rendering::model::config::PrimitiveType::LineLoop)
+               .shape(std::make_shared<helios::rendering::asset::shape::basic::Rectangle>())
+               .attachTo(&root);
+        })
+        .withTransform([](auto& tb) {
+            tb.transform()
+              .scale(helios::math::vec3f(SPACESHIP_SIZE/2.0f, SPACESHIP_SIZE/2.0f, 0.0f), helios::core::units::Unit::Meter);
+        })
+        .withCollision([](auto& cb) {
+            cb.collision()
+              .useBoundingBox();
+
+            cb.levelBoundsCollision()
+              .onCollision(helios::engine::modules::physics::collision::types::CollisionBehavior::Reflect);
+        })
+        .withMotion([](auto& mcb) {
+            mcb.move2D()
+               .speed(5.0f)
+               .instantAcceleration(true);
+        })
+        .withEffects([](auto& eb) {
+            eb.gfx()
+              .spin(270.0f, helios::math::Z_AXISf);
+        })
+        .withSpawn([](auto& sb) {
+            sb.spawn()
+              .useSpawnProfile();
+        })
+        .make();
+
+    // THE GRID
+    auto theGrid = helios::engine::builder::gameObject::GameObjectFactory::instance()
+        .gameObject()
+        .withRendering([&defaultShader, &root = *levelPtr->rootNode()](auto& rnb) {
+            rnb.renderable()
+               .shader(defaultShader)
+               .color(helios::util::Colors::Turquoise.withW(0.2f))
+               .primitiveType(helios::rendering::model::config::PrimitiveType::Lines)
+               .shape(std::make_shared<helios::rendering::asset::shape::basic::Grid>(29, 19))
+               .attachTo(&root);
+        })
+        .withCollision([](auto& cb) {
+            cb.collision()
+              .useBoundingBox();
+        })
+        .withTransform([](auto& tb) {
+            tb.transform()
+              .translate(helios::math::vec3f(0.0f, 0.0f, 0.5f))
+              .scale(helios::math::vec3f(GRID_X * CELL_SIZE, GRID_Y * CELL_SIZE, 0.0f));
+        })
+        .make();
+
+    // ship game object
+    auto shipGameObject = helios::engine::builder::gameObject::GameObjectFactory::instance()
+        .gameObject()
+        .withRendering([&defaultShader, &root = *levelPtr->rootNode()](auto& rnb) {
+            rnb.renderable()
+               .shader(defaultShader)
+               .color(helios::util::Colors::Yellow)
+               .primitiveType(helios::rendering::model::config::PrimitiveType::LineLoop)
+               .shape(std::make_shared<helios::rendering::asset::shape::basic::Triangle>())
+               .attachTo(&root);
+        })
+        .withTransform([](auto& tb) {
+            tb.transform()
+              .scale(helios::math::vec3f(SPACESHIP_SIZE, SPACESHIP_SIZE, 0.0f));
+        })
+        .withCollision([](auto& cb) {
+            cb.collision()
+              .useBoundingBox();
+
+            cb.levelBoundsCollision()
+              .onCollision(helios::engine::modules::physics::collision::types::CollisionBehavior::Bounce);
+        })
+        .withMotion([](auto& mcb) {
+            mcb.move2D()
+               .speed(30.0f)
+               .instantAcceleration(false);
+            mcb.steering()
+               .steeringSetsDirection(true)
+               .instantSteering(false);
+        })
+        .make();
+
+    // GIZMO Left stick
+    auto leftStickGizmo = helios::engine::builder::gameObject::GameObjectFactory::instance()
+        .gameObject()
+        .withRendering([&defaultShader, &shipGameObject](auto& rnb) {
+            rnb.renderable()
+               .shader(defaultShader)
+               .color(helios::util::Colors::White)
+               .primitiveType(helios::rendering::model::config::PrimitiveType::Lines)
+               .shape(std::make_shared<helios::rendering::asset::shape::basic::Line>())
+               .build();
+
+            rnb.sceneNode()
+               .parent(shipGameObject.get())
+               .inherit(helios::math::TransformType::Translation);
+        }).make();
+
+    auto shipDirectionGizmo = helios::engine::builder::gameObject::GameObjectFactory::instance()
+        .gameObject()
+        .withRendering([&defaultShader, &shipGameObject](auto& rnb) {
+            rnb.renderable()
+               .shader(defaultShader)
+               .color(helios::util::Colors::Red)
+               .primitiveType(helios::rendering::model::config::PrimitiveType::Lines)
+               .shape(std::make_shared<helios::rendering::asset::shape::basic::Line>())
+               .build();
+
+            rnb.sceneNode()
+               .parent(shipGameObject.get())
+               .inherit(helios::math::TransformType::Translation);
+        })
+        .make();
+
+
+    using namespace helios::engine::runtime::spawn;
+
+    // --------------------------
+    //     SPAWN CONFIGURATION
+    // --------------------------
+
+    constexpr helios::engine::core::data::GameObjectPoolId PurpleEnemyPoolId{1};
+    helios::engine::core::data::SpawnProfileId RandomSpawnProfileId{1};
+    helios::engine::core::data::SpawnRuleId PurpleEnemySpawnRuleId{1};
+
+    auto& poolManager = gameWorld.addManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
+    auto& spawnManager = gameWorld.addManager<helios::engine::runtime::spawn::SpawnManager>();
+
+    poolManager.addPoolConfig(std::make_unique<helios::engine::runtime::pooling::GameObjectPoolConfig>(
+                PurpleEnemyPoolId,
+                std::move(purpleEnemyPrefab),
+                200
+            ));
+
+    auto randomSpawnProfile = std::make_unique<helios::engine::runtime::spawn::SpawnProfile>(
+        PurpleEnemyPoolId,
+        std::make_unique<helios::engine::runtime::spawn::behavior::placements::RandomSpawnPlacer>(),
+        std::make_unique<helios::engine::runtime::spawn::behavior::initializers::DirectionInitializer>(
+            helios::engine::runtime::spawn::behavior::initializers::Direction::Random
+        )
+    );
+
+    auto purpleEnemySpawnScheduler = std::make_unique<helios::engine::runtime::spawn::scheduling::SpawnScheduler>();
+    auto purpleEnemySpawnRule = std::make_unique<helios::engine::runtime::spawn::policy::SpawnRule>(
+        std::make_unique<helios::engine::runtime::spawn::policy::conditions::TimerSpawnCondition>(5.0f),
+        std::make_unique<helios::engine::runtime::spawn::policy::amount::FixedSpawnAmount>(1),
+        PurpleEnemySpawnRuleId
+    );
+
+    spawnManager.addSpawnProfile(RandomSpawnProfileId, std::move(randomSpawnProfile));
+    purpleEnemySpawnScheduler->addRule(RandomSpawnProfileId, std::move(purpleEnemySpawnRule));
+
+    // --------------------------
+    //     GAMELOOP PHASES SETUP
+    // --------------------------
+
+    auto spawnSchedulers = std::vector<std::unique_ptr<helios::engine::runtime::spawn::scheduling::SpawnScheduler>>();
+    spawnSchedulers.push_back(std::move(purpleEnemySpawnScheduler));
+
+    gameLoop.commandBuffer().addDispatcher<helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand>(
+        std::make_unique<helios::engine::runtime::spawn::dispatcher::ScheduledSpawnPlanCommandDispatcher>()
+    );
+    gameLoop.commandBuffer().addDispatcher<helios::engine::runtime::spawn::commands::SpawnCommand>(
+        std::make_unique<helios::engine::runtime::spawn::dispatcher::SpawnCommandDispatcher>()
+    );
+    gameLoop.commandBuffer().addDispatcher<helios::engine::runtime::spawn::commands::DespawnCommand>(
+        std::make_unique<helios::engine::runtime::spawn::dispatcher::DespawnCommandDispatcher>()
+    );
+
+    gameLoop.phase(helios::engine::runtime::gameloop::PhaseType::Pre)
+            .addPass()
+            .addSystem<helios::engine::mechanics::input::systems::TwinStickInputSystem>(*shipGameObject)
+            .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::Structural)
+            .addPass()
+            .addSystem<helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem>(spawnSchedulers)
+            .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::Structural)
+            .addPass()
+            .addSystem<helios::engine::modules::spatial::transform::systems::ScaleSystem>()
+            .addSystem<helios::engine::modules::physics::motion::systems::SteeringSystem>()
+            .addSystem<helios::engine::modules::physics::motion::systems::SpinSystem>()
+            .addSystem<helios::engine::modules::physics::motion::systems::Move2DSystem>();
+
+    gameLoop.phase(helios::engine::runtime::gameloop::PhaseType::Main)
+            .addPass()
+            .addSystem<helios::engine::modules::physics::collision::systems::BoundsUpdateSystem>()
+            .addSystem<helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem>()
+            .addCommitPoint();
+
+    gameLoop.phase(helios::engine::runtime::gameloop::PhaseType::Post)
+             .addPass()
+             .addSystem<helios::engine::modules::spatial::transform::systems::ComposeTransformSystem>()
+             .addSystem<helios::engine::modules::systems::scene::SceneSyncSystem>(scene.get())
+             .addSystem<helios::engine::modules::spatial::transform::systems::TransformClearSystem>();
+
+
+    float DELTA_TIME = 0.0f;
+
+
+    // ========================================
+    // 6. Activate GameObjects and Initialize
+    // ========================================
+
+    // embedd the immediate game objects
+    leftStickGizmo->setActive(true);
+    shipDirectionGizmo->setActive(true);
+
+    theGrid->setActive(true);
+    std::ignore = gameWorld.addGameObject(std::move(theGrid));
+    std::ignore = shipGameObject->get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode()->addNode(std::move(cameraSceneNode));
+
+    shipGameObject->setActive(true);
+    auto* theShipPtr = gameWorld.addGameObject(std::move(shipGameObject));
+    auto* leftStickGizmoNode = leftStickGizmo->get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode();
+    auto* shipDirectionGizmoNode = shipDirectionGizmo->get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode();
+
+    // ENGINE INIT
+    gameWorld.init();
+    gameLoop.init(gameWorld);
+
+    // ========================================
+    // 7. Main Game Loop
+    // ========================================
+
+    while (!win->shouldClose()) {
+        framePacer.beginFrame();
+
+        // ----------------------------------------
+        // 7.1 Event and Input Processing
+        // ----------------------------------------
+        app->eventManager().dispatchAll();
+        inputManager.poll(0.0f);
+
+        // Check for ESC key to close the application
+        if (inputManager.isKeyPressed(Key::ESC)) {
+            std::cout << "Key Pressed [ESC] - Exiting..." << std::endl;
+            win->setShouldClose(true);
+        }
+
+        // ----------------------------------------
+        // 7.2 Game Logic Update
+        // ----------------------------------------
+        const GamepadState& gamepadState = inputManager.gamepadState(Gamepad::ONE);
+        const auto inputSnapshot = helios::input::InputSnapshot(gamepadState);
+
+        gameLoop.update(gameWorld, DELTA_TIME, inputSnapshot);
+
+
+        // ----------------------------------------
+        // 7.3 Gizmo / Debug Visualization Update
+        // ----------------------------------------
+        const auto* mc = theShipPtr->get<helios::engine::modules::physics::motion::components::Move2DComponent>();
+        if (mc) {
+            leftStickGizmoNode->setScale((mc->direction() * mc->throttle()  * 4.0f).toVec3());
+            shipDirectionGizmoNode->setScale(mc->velocity().normalize() * mc->speedRatio() * 4.0f);
+        }
+
+        // ----------------------------------------
+        // 7.4 Rendering
+        // ----------------------------------------
+        const auto& snapshot = scene->createSnapshot(mainViewport);
+        if (snapshot.has_value()) {
+            auto renderPass = RenderPassFactory::getInstance().buildRenderPass(*snapshot);
+            app->renderingDevice().render(renderPass);
+        }
+
+        // ----------------------------------------
+        // 7.5 ImGui Rendering
+        // ----------------------------------------
+        imguiOverlay.render();
+
+        // ----------------------------------------
+        // 7.6 Frame Synchronization
+        // ----------------------------------------
+        win->swapBuffers();
+
+        frameStats = framePacer.sync();
+        fpsMetrics.addFrame(frameStats);
+        DELTA_TIME = frameStats.totalFrameTime;
+    }
+
+    return EXIT_SUCCESS;
+}

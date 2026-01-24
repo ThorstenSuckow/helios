@@ -237,6 +237,16 @@ async function main() {
       dest: path.join(websiteRoot, 'docs', 'examples', 'spaceship-shooting.md'),
       meta: { title: 'Spaceship Shooting', description: 'Example: Twin-stick shooter with bullet pooling, shooting components, aim tracking, and arena collision.', slug: '/examples/spaceship-shooting', tags: ['examples', 'input', 'gameplay', 'bullet-pool', 'components'], keywords: ['helios', 'twin-stick', 'shooter', 'bullet pool', 'shooting', 'aiming', 'game system'], sidebar_label: 'Spaceship Shooting' }
     },
+    {
+      src: path.join(repoRoot, 'examples', 'enemy_spawn', 'README.md'),
+      dest: path.join(websiteRoot, 'docs', 'examples', 'enemy-spawn.md'),
+      meta: { title: 'Enemy Spawn', description: 'Example: Timed enemy spawning with object pooling, spawn schedulers, and random placement.', slug: '/examples/enemy-spawn', tags: ['examples', 'spawn', 'pooling', 'gameplay'], keywords: ['helios', 'spawn system', 'object pool', 'enemy', 'timer', 'random placement'], sidebar_label: 'Enemy Spawn' }
+    },
+    {
+      src: path.join(repoRoot, 'examples', 'collision_detection', 'README.md'),
+      dest: path.join(websiteRoot, 'docs', 'examples', 'collision-detection.md'),
+      meta: { title: 'Collision Detection', description: 'Example: Grid-based collision detection with layers, masks, and collision events.', slug: '/examples/collision-detection', tags: ['examples', 'collision', 'physics', 'gameplay'], keywords: ['helios', 'collision detection', 'AABB', 'grid', 'spatial partitioning', 'collision events'], sidebar_label: 'Collision Detection' }
+    },
   ];
 
   console.log('[sync-docs] Synchronizing repository documentation...');

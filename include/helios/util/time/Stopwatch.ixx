@@ -36,21 +36,32 @@ export namespace helios::util::time {
          * @brief Starts (or restarts) the timer.
          * Captures the current timestamp.
          */
-        void start() noexcept;
+        void start() noexcept {
+            start_ = std::chrono::steady_clock::now();
+        }
 
         /**
          * @brief Returns the time elapsed since start() was called.
          *
          * @return The elapsed time in milliseconds as a floating point value.
          */
-        [[nodiscard]] float elapsedMs() const noexcept;
+        [[nodiscard]] float elapsedMs() const noexcept {
+            auto end = std::chrono::steady_clock::now();
+            // Wichtig: Expliziter Cast zu float Millisekunden
+            std::chrono::duration<float, std::milli> duration = end - start_;
+            return duration.count();
+        }
 
         /**
          * @brief Returns the time elapsed in seconds.
          *
          * @return The elapsed time in seconds as a floating point value.
          */
-        [[nodiscard]] float elapsedSeconds() const noexcept;
+        [[nodiscard]] float elapsedSeconds() const noexcept {
+            auto end = std::chrono::steady_clock::now();
+            std::chrono::duration<float> duration = end - start_;
+            return duration.count();
+        }
 
     };
 }

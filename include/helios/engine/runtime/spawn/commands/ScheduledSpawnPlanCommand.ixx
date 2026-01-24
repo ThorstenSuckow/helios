@@ -75,7 +75,7 @@ export namespace helios::engine::runtime::spawn::commands {
          * @param gameWorld The game world (unused).
          */
         void execute(helios::engine::runtime::world::GameWorld& gameWorld) const noexcept override {
-            assert(false && "Unexpected execute() on SpawnCommand");
+            assert(false && "Unexpected execute() on ScheduledSpawnPlanCommand");
         }
 
         /**
@@ -116,7 +116,7 @@ export namespace helios::engine::runtime::spawn::commands {
         /**
          * @brief Retrieves the spawn context associated with this instance.
          *
-         * @return A reference to the spawn context.
+         * @return The spawn context.
          */
         [[nodiscard]] helios::engine::runtime::spawn::SpawnContext spawnContext() const noexcept {
             return spawnContext_;

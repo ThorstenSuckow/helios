@@ -6,6 +6,7 @@ module;
 
 #include <memory>
 #include <vector>
+#include <stdexcept>
 
 export module helios.rendering.RenderTarget;
 
@@ -73,10 +74,21 @@ export namespace helios::rendering {
         explicit RenderTarget(
             std::shared_ptr<helios::rendering::Viewport> viewport,
             unsigned int width = 0,
-            unsigned int height = 0);
+            unsigned int height = 0)
+            : width_(width),
+              height_(height) {
+            if (!viewport) {
+                throw std::invalid_argument("Constructor received a null shared pointer");
+            }
+
+            addViewport(std::move(viewport));
+        }
 
         /**
          * @brief Adds a viewport to this render target and establishes a parent-child relationship.
+         *
+         * Makes sure the viewport is informed about any possible bounds updates by
+         * calling onRenderTargetResize afterwards.
          *
          * @param viewport A shared pointer to the `Viewport` to be added.
          *
@@ -86,7 +98,20 @@ export namespace helios::rendering {
          *         has a parent RenderTarget.
          */
         std::shared_ptr<helios::rendering::Viewport> addViewport(
-            std::shared_ptr<helios::rendering::Viewport> viewport);
+            std::shared_ptr<helios::rendering::Viewport> viewport) {
+            if (!viewport) {
+                throw std::invalid_argument("addViewport() received a null shared pointer");
+            }
+
+            if (viewport->renderTarget()) {
+                throw std::invalid_argument("Viewport already belongs to a RenderTarget.");
+            }
+
+            viewport->setRenderTarget(&*this, viewportKey_);
+            viewports_.emplace_back(viewport);
+
+            return viewport;
+        }
 
         /**
          * @brief Resizes this RenderTarget to the specified dimensions and propagates the change to every viewport.
@@ -98,21 +123,32 @@ export namespace helios::rendering {
          *
          * @see helios::rendering::Viewport::onRenderTargetResize()
          */
-        void setSize(unsigned int width, unsigned int height) noexcept;
+        void setSize(unsigned int width, unsigned int height) noexcept {
+            width_  = width;
+            height_ = height;
+
+            for (auto& it : viewports_) {
+                it->onRenderTargetResize(width_, height_);
+            }
+        }
 
         /**
          * @brief Gets the width of the render target.
          *
          * @return The width in pixels.
          */
-        [[nodiscard]] unsigned int width() const noexcept;
+        [[nodiscard]] unsigned int width() const noexcept {
+            return width_;
+        }
 
         /**
          * @brief Gets the height of the render target.
          *
          * @return The height in pixels.
          */
-        [[nodiscard]] unsigned int height() const noexcept;
+        [[nodiscard]] unsigned int height() const noexcept {
+            return height_;
+        }
 
     };
 

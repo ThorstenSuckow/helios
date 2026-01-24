@@ -72,7 +72,7 @@ export namespace helios::rendering::model::config {
             explicit MaterialProperties(
                 helios::math::vec4f baseColor,
                 float roughness = 0.0f
-            ) noexcept;
+            ) noexcept : baseColor_(baseColor), roughness_(roughness){}
 
 
             /**
@@ -85,7 +85,12 @@ export namespace helios::rendering::model::config {
              *
              * @return A new immutable instance of MaterialProperties with the updated base color.
              */
-            [[nodiscard]] MaterialProperties withBaseColor(helios::math::vec4f baseColor) const noexcept;
+            [[nodiscard]] MaterialProperties withBaseColor(helios::math::vec4f baseColor) const noexcept {
+                return MaterialProperties(
+                    baseColor,
+                    roughness_
+                );
+            }
 
             /**
              * Creates a new MaterialPropertiesOverride instance with an updated base color.
@@ -97,7 +102,12 @@ export namespace helios::rendering::model::config {
              *
              * @return A new instance of MaterialPropertiesOvrride with the updated base color.
              */
-            [[nodiscard]] MaterialPropertiesOverride overrideBaseColor(helios::math::vec4f baseColor) const noexcept;
+            [[nodiscard]] MaterialPropertiesOverride overrideBaseColor(helios::math::vec4f baseColor) const noexcept {
+                return MaterialPropertiesOverride(
+                    baseColor,
+                    roughness_
+                );
+            }
 
             /**
              * Creates a new MaterialProperties instance with an updated roughness factor.
@@ -109,7 +119,12 @@ export namespace helios::rendering::model::config {
              *
              * @return A new immutable instance of MaterialProperties with the updated roughness factor.
              */
-            [[nodiscard]] MaterialProperties withRoughness(float roughness) const noexcept;
+            [[nodiscard]] MaterialProperties withRoughness(float roughness) const noexcept {
+                return MaterialProperties(
+                    baseColor_,
+                    roughness
+                );
+            }
 
 
             /**
@@ -117,7 +132,10 @@ export namespace helios::rendering::model::config {
              *
              * @param uniformValueMap Target map receiving the uniform values.
              */
-            void writeUniformValues(shader::UniformValueMap& uniformValueMap) const noexcept;
+            void writeUniformValues(shader::UniformValueMap& uniformValueMap) const noexcept {
+                uniformValueMap.set(helios::rendering::shader::UniformSemantics::MaterialBaseColor, baseColor_);
+                uniformValueMap.set(helios::rendering::shader::UniformSemantics::MaterialRoughness, roughness_);
+            }
 
     };
 }

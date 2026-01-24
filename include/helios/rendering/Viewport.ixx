@@ -5,6 +5,7 @@
  */
 module;
 
+#include <cassert>
 #include <format>
 #include <memory>
 
@@ -119,21 +120,50 @@ export namespace helios::rendering {
         /**
          * @brief Updates the cached dimensions vector if it is dirty.
          */
-        void updateBounds() const noexcept;
+        void updateBounds() const noexcept {
+            bounds_[0] = x_;
+            bounds_[1] = y_;
+            bounds_[2] = width_;
+            bounds_[3] = height_;
+
+            needsUpdate_ = false;
+        }
 
         /**
          * @brief Updates this Viewport's CameraSceneNode and its associated Camera based on the dimension of the RenderTarget.
          *
+         * @param width The new width of the RenderTarget in pixels.
+         * @param height The new height of the RenderTarget in pixels.
+         *
          * This method should be called internally whenever the dimensions of the owning
          * RenderTarget change.
          */
-        void updateCamera() noexcept;
+        void updateCamera(unsigned int renderTargetWidth, unsigned int renderTargetHeight) noexcept {
+            assert(renderTarget_ && "No RenderTarget available for updateCamera()");
+
+            if (!cameraSceneNode_) {
+                logger_.warn("updateCamera: Viewport was not configured with a CameraSceneNode, nothing to do here.");
+                return;
+            }
+
+            const float w = static_cast<float>(renderTargetWidth) * width_;
+            const float h = static_cast<float>(renderTargetHeight) * height_;
+
+            if (h > 0.0f) {
+                logger_.info(std::format("Setting aspect ratio {0}/{1}", w, h));
+                cameraSceneNode_->camera().setAspectRatio(w / h);
+            } else {
+                logger_.warn("updateCamera: cannot set aspect ratio, height is 0");
+            }
+        }
 
     public:
         /**
          * @brief Constructs a Viewport with normalized bounds set to (0.0f, 0.0f, 1.0f, 1.0f) and z-index 0.
          */
-        Viewport() noexcept;
+        Viewport() noexcept : x_(0.0f), y_(0.0f), width_(1.0f), height_(1.0f), zIndex_(0) {
+            needsUpdate_ = true;
+        }
 
         /**
          * @brief Constructs a Viewport with specified normalized dimensions.
@@ -146,7 +176,10 @@ export namespace helios::rendering {
          */
         explicit Viewport(
             float x, float y, float width, float height, int zIndex = 0
-        ) noexcept;
+        ) noexcept
+            : zIndex_(zIndex) {
+            setBounds(x, y, width, height);
+        }
 
         /**
          * @brief Gets the parent RenderTarget.
@@ -155,7 +188,9 @@ export namespace helios::rendering {
          *
          * @return A const pointer to the parent RenderTarget, or `nullptr` if not set.
          */
-        [[nodiscard]] const helios::rendering::RenderTarget* renderTarget() const noexcept;
+        [[nodiscard]] const helios::rendering::RenderTarget* renderTarget() const noexcept {
+            return renderTarget_;
+        }
 
         /**
          * @brief Assigns a camera scene node to this viewport.
@@ -169,18 +204,22 @@ export namespace helios::rendering {
          *
          * @return A reference to this viewport to allow fluent chaining.
          */
-        Viewport& setCameraSceneNode(helios::scene::CameraSceneNode* cameraSceneNode) noexcept;
+        Viewport& setCameraSceneNode(helios::scene::CameraSceneNode* cameraSceneNode) noexcept {
+            cameraSceneNode_ = cameraSceneNode;
+            return *this;
+        }
 
         /**
          * @brief Gets the camera scene node associated with this viewport.
          *
          * @return A const pointer to the associated `CameraSceneNode`, or `nullptr` if none is set.
          */
-        [[nodiscard]] const helios::scene::CameraSceneNode* cameraSceneNode() const noexcept;
+        [[nodiscard]] const helios::scene::CameraSceneNode* cameraSceneNode() const noexcept {
+            return cameraSceneNode_;
+        }
 
         /**
-         * @brief Sets the parent RenderTarget for this viewport and updates the CameraSceneNode and its
-         * associated Camera of this Viewport with an Aspect Ratio based on the dimensions of the RenderTarget.
+         * @brief Sets the parent RenderTarget for this viewport.
          *
          * This function can only be called by classes that can construct a `ViewportKey`,
          * effectively restricting its use to the `RenderTarget` class.
@@ -194,14 +233,22 @@ export namespace helios::rendering {
          *
          * @todo The Viewport should observe the RenderTarget for state changes (e.g., resize).
          */
-        Viewport& setRenderTarget(const helios::rendering::RenderTarget* renderTarget, ViewportKey key) noexcept;
+        Viewport& setRenderTarget(const helios::rendering::RenderTarget* renderTarget, ViewportKey key) noexcept {
+            renderTarget_ = renderTarget;
+            return *this;
+        }
 
         /**
          * @brief Gets the cached dimensions of the viewport.
          *
          * @return A const reference to a vec4f containing [x, y, width, height].
          */
-        [[nodiscard]] const helios::math::vec4f& bounds() const noexcept;
+        [[nodiscard]] const helios::math::vec4f& bounds() const noexcept {
+            if (needsUpdate_) {
+                updateBounds();
+            }
+            return bounds_;
+        }
 
 
         /**
@@ -214,21 +261,37 @@ export namespace helios::rendering {
          */
         void setBounds(
             float x, float y, float width, float height
-        ) noexcept;
+        ) noexcept {
+            x_ = x;
+            y_ = y;
+            width_ = width;
+            height_ = height;
+
+            needsUpdate_ = true;
+
+            assert((x_ >= 0.0f && x_ <= 1.0f) && "setBounds received unexpected value for x");
+            assert((y_ >= 0.0f && y_ <= 1.0f) && "setBounds received unexpected value for y");
+            assert((width_ >= 0.0f && width_ <= 1.0f) && "setBounds received unexpected value for width");
+            assert((height_ >= 0.0f && height_ <= 1.0f) && "setBounds received unexpected value for height");
+        }
 
         /**
          * @brief Gets the clear flags for this viewport.
          *
          * @return An integer bitmask representing the `ClearFlags`.
          */
-        [[nodiscard]] int clearFlags() const noexcept;
+        [[nodiscard]] int clearFlags() const noexcept {
+            return clearFlags_;
+        }
 
         /**
          * @brief Gets the color used for clearing the color buffer.
          *
          * @return A const reference to the clear color.
          */
-        [[nodiscard]] const helios::math::vec4f& clearColor() const noexcept;
+        [[nodiscard]] const helios::math::vec4f& clearColor() const noexcept {
+            return clearColor_;
+        }
 
         /**
          * @brief Sets the clear flags for this viewport.
@@ -237,7 +300,10 @@ export namespace helios::rendering {
          *
          * @return A reference to this viewport to allow fluent chaining.
          */
-        Viewport& setClearFlags(int clearFlags) noexcept;
+        Viewport& setClearFlags(int clearFlags) noexcept {
+            clearFlags_ = clearFlags;
+            return *this;
+        }
 
         /**
          * @brief Specifies the RGBA values used when clearing color buffers.
@@ -248,7 +314,10 @@ export namespace helios::rendering {
          *
          * @return A reference to this viewport to allow fluent chaining.
          */
-        Viewport& setClearColor(const helios::math::vec4f& color) noexcept;
+        Viewport& setClearColor(const helios::math::vec4f& color) noexcept {
+            clearColor_ = color;
+            return *this;
+        }
 
         /**
          * @brief Sets the z-index that controls rendering order relative to sibling viewports.
@@ -257,7 +326,10 @@ export namespace helios::rendering {
          *
          * @return A reference to this viewport to allow fluent chaining.
          */
-        Viewport& setZIndex(int zIndex) noexcept;
+        Viewport& setZIndex(int zIndex) noexcept {
+            zIndex_ = zIndex;
+            return *this;
+        }
 
 
         /**
@@ -266,14 +338,13 @@ export namespace helios::rendering {
          * This method is called by the parent `RenderTarget` when it is resized. The viewport
          * uses the new dimensions to calculate the correct aspect ratio for its associated camera.
          *
-         * @param source A const reference to the notifying RenderTarget.
          * @param width The new width of the RenderTarget in pixels.
          * @param height The new height of the RenderTarget in pixels.
          *
          * @see updateCamera()
          */
-         void onRenderTargetResize(
-             const helios::rendering::RenderTarget& source,
-             unsigned int width, unsigned int height) noexcept;
+         void onRenderTargetResize(const unsigned int width, const unsigned int height) noexcept {
+            updateCamera(width, height);
+         }
     };
 } // namespace helios::rendering

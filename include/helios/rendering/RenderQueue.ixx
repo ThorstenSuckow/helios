@@ -4,6 +4,7 @@
  */
 module;
 
+#include <cassert>
 #include <format>
 #include <memory>
 #include <vector>
@@ -80,28 +81,47 @@ export namespace helios::rendering {
          *
          * @todo prevent adding renderables while rendering
          */
-        void add(std::unique_ptr<const helios::rendering::RenderCommand> renderCommand);
+        void add(std::unique_ptr<const helios::rendering::RenderCommand> renderCommand) {
+            assert(renderCommand && "Received nullptr RenderCommand.");
+            if (!renderCommand) {
+                logger_.error("Attempted to add a nullptr RenderCommand to the queue.");
+                return; // silently skip nullptr to avoid crashes
+            }
+            renderCommands_.emplace_back(std::move(renderCommand));
+        }
 
         /**
          * @brief Returns a const ref to the internal vector of `RenderCommand`.
          *
          * @return A const ref to the list of `RenderCommand`s of this queue.
          */
-        [[nodiscard]] const std::vector<std::unique_ptr<const helios::rendering::RenderCommand>>& renderCommands() const noexcept;
+        [[nodiscard]] const std::vector<std::unique_ptr<const helios::rendering::RenderCommand>>& renderCommands() const noexcept {
+            return renderCommands_;
+        }
 
         /**
          * @brief Clears all `RenderCommand` objects from the queue.
          *
          * This prepares this queue to be reused in a new rendering pass.
          */
-        void clear();
+        void clear() {
+            renderCommands_.clear();
+            /**
+             * @todo strategy to decide whether shrink_to_fit should only be applied
+             * if expected numbers RenderCommands for the subsequent render passes is
+             * less than current size?
+             */
+            //renderCommands_.shrink_to_fit();
+        }
 
         /**
          * @brief Returns the number of `RenderCommand`s this queue contains.
          *
          * @return The number of RenderCommands in this queue.
          */
-        [[nodiscard]] size_t count() const noexcept;
+        [[nodiscard]] size_t count() const noexcept {
+            return renderCommands_.size();
+        }
     };
 
 } // namespace helios::rendering

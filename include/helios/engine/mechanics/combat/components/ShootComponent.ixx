@@ -12,7 +12,7 @@ import helios.math;
 import helios.engine.ecs.Component;
 import helios.engine.ecs.GameObject;
 import helios.engine.mechanics.combat.components.Aim2DComponent;
-import helios.engine.modules.spatial.transform.components.TransformComponent;
+import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
 
 
 export namespace helios::engine::mechanics::combat::components {
@@ -58,7 +58,7 @@ export namespace helios::engine::mechanics::combat::components {
          *
          * @details Set during onAttach(). Must not be null when shooting.
          */
-        helios::engine::modules::spatial::transform::components::TransformComponent* transformComponent_ = nullptr;
+        helios::engine::modules::spatial::transform::components::ComposeTransformComponent* transformComponent_ = nullptr;
 
         /**
          * @brief Cooldown interval between shots, in seconds.
@@ -98,7 +98,10 @@ export namespace helios::engine::mechanics::combat::components {
 
     public:
 
-        explicit ShootComponent(const float fireRate) : fireRate_(fireRate), cooldownDelta_(1.0f/fireRate) {}
+        /**
+         * @brief Constructs a new ShootComponent with default settings.
+         */
+        ShootComponent() = default;
 
         /**
          * @brief Called when the component is attached to a GameObject.
@@ -111,7 +114,7 @@ export namespace helios::engine::mechanics::combat::components {
             Component::onAttach(gameObject);
 
             aimComponent_ = gameObject->get<helios::engine::mechanics::combat::components::Aim2DComponent>();
-            transformComponent_ = gameObject->get<helios::engine::modules::spatial::transform::components::TransformComponent>();
+            transformComponent_ = gameObject->get<helios::engine::modules::spatial::transform::components::ComposeTransformComponent>();
             assert(aimComponent_ != nullptr && "Unexpected nullptr for aimComponent_");
             assert(transformComponent_ != nullptr && "Unexpected nullptr for transformComponent_");
         }
@@ -216,6 +219,20 @@ export namespace helios::engine::mechanics::combat::components {
          */
         [[nodiscard]] float fireRate() const noexcept {
             return fireRate_;
+        }
+
+        /**
+         * @brief Sets the fire rate.
+         *
+         * @details Updates the cooldown delta based on the new fire rate.
+         *
+         * @param fireRate The number of projectiles per second. Must be greater than zero.
+         */
+        void setFireRate(const float fireRate) noexcept {
+            assert(fireRate > helios::math::EPSILON_LENGTH);
+
+            fireRate_ = fireRate;
+            cooldownDelta_ = 1.0f/fireRate_;
         }
     };
 

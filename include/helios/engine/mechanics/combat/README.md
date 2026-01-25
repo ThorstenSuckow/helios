@@ -14,6 +14,16 @@ This module provides all building blocks for implementing combat mechanics such 
 | `components/` | Data containers for combat state (aiming direction, cooldowns, projectile config) |
 | `systems/` | ECS systems for processing combat logic (ProjectileSpawnSystem) |
 
+## Key Classes
+
+| Class | Purpose |
+|-------|---------|
+| `Aim2DComponent` | Stores aiming direction and fire frequency |
+| `ShootComponent` | Weapon cooldown, spawn profile reference, emitter state |
+| `Aim2DCommand` | Updates aim direction from input |
+| `ShootCommand` | Triggers projectile spawn when cooldown allows |
+| `ProjectileSpawnSystem` | Reads shoot state and enqueues spawn commands |
+
 ## Architecture
 
 Combat follows the command pattern integrated with the spawn system:

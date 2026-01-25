@@ -132,34 +132,14 @@ int main() {
     defaultShader->setUniformLocationMap(std::move(uniformLocationMap));
 
     // ========================================
-    // 3. Game Object Creation (Rendering)
-    // ========================================
-
-
-
-
-    // ========================================
-    // 6. Scene Graph Setup
+    // 3. Scene Graph Setup
     // ========================================
     auto frustumCullingStrategy = std::make_unique<CullNoneStrategy>();
     auto scene = std::make_unique<helios::scene::Scene>(std::move(frustumCullingStrategy));
 
-    // Add the grid
-  /*  auto* gridSceneNode = scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(gridRenderable)));
-
-    auto* spaceshipSceneNode =
-                    scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(spaceshipRenderable)));
-*/
-    /**
-     * @todo we are using the aabb of the grid as the arenaBox for the projectile pool.
-     * The grid has its zindex at 0 (min/max), this should be improved later
-     */
-  //  spaceshipSceneNode->setTranslation(helios::math::vec3f{0.0f, 0.0f, 0.0f});
-
-
 
     // ========================================
-    // 7. Register mainViewport-Camera w/ Setup
+    // 4. Camera Setup
     // ========================================
     auto mainViewportCam = std::make_unique<helios::scene::Camera>();
     auto cameraSceneNode = std::make_unique<helios::scene::CameraSceneNode>(std::move(mainViewportCam));
@@ -185,7 +165,7 @@ int main() {
     cameraWidget->addCameraSceneNode("Main Camera", cameraSceneNode_ptr);
 
     // ========================================
-    // 9. Game-related Input-handling, GameWorld and GameObjects
+    // 5. GameWorld and Level Setup
     // ========================================
 
     helios::engine::runtime::gameloop::GameLoop gameLoop{};
@@ -202,7 +182,10 @@ int main() {
     );
     gameWorld.setLevel(std::move(level));
 
-    
+    // ========================================
+    // 6. GameObject Prefabs
+    // ========================================
+
     // projectile game object
     auto projectilePrefab = helios::engine::builder::gameObject::GameObjectFactory::instance()
         .gameObject()
@@ -528,9 +511,9 @@ int main() {
 
     using namespace helios::engine::runtime::spawn;
 
-    // --------------------------
-    //     SPAWN CONFIGURATION
-    // --------------------------
+    // ========================================
+    // 7. Spawn System Configuration
+    // ========================================
 
     constexpr helios::engine::core::data::GameObjectPoolId PurpleEnemyPoolId{1};
     constexpr helios::engine::core::data::GameObjectPoolId OrangeEnemyPoolId{2};
@@ -638,12 +621,10 @@ int main() {
     orangeEnemySpawnScheduler->addRule(BlueSpawnSpawnProfileId, std::move(blueEnemySpawnRule));
 
 
+    // ========================================
+    // 8. Command Dispatchers
+    // ========================================
 
-    // --------------------------
-    // --------------------------
-
-
-    // register gameplay specific dispatchers that delegate commands to Managers
     gameLoop.commandBuffer().addDispatcher<helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand>(
         std::make_unique<helios::engine::runtime::spawn::dispatcher::ScheduledSpawnPlanCommandDispatcher>()
     );
@@ -654,16 +635,18 @@ int main() {
         std::make_unique<helios::engine::runtime::spawn::dispatcher::DespawnCommandDispatcher>()
     );
 
-    // ... systems.
-
+    // ========================================
+    // 9. GameLoop Phase Configuration
+    // ========================================
+    //
     //                   +----------+
     //                   |  FRAME N |
     //                   +----------+
     //
-    //         UPDATE   -   RESOLVE  -   CLEANUP
-    //
+    //           PRE    -    MAIN   -    POST
+    //         UPDATE      RESOLVE      CLEANUP
     // +----------------------------------------------
-    // | 1. PHASE ONE: Simulation and Intent Updates
+    // | PRE PHASE: Input, Spawning, Movement
     // +----------------------------------------------
 
     auto spawnSchedulers = std::vector<std::unique_ptr<helios::engine::runtime::spawn::scheduling::SpawnScheduler>>();
@@ -685,9 +668,9 @@ int main() {
             .addSystem<helios::engine::modules::physics::motion::systems::SpinSystem>()
             .addSystem<helios::engine::modules::physics::motion::systems::Move2DSystem>();
 
-    // +---------------------------------------------------------------
-    // | 2. PHASE TWO: Constraint Checks and event/command derivation
-    // +--------------------------------------------------------------
+    // +----------------------------------------------
+    // | MAIN PHASE: Collision Detection and Response
+    // +----------------------------------------------
     gameLoop.phase(helios::engine::runtime::gameloop::PhaseType::Main)
             .addPass()
             .addSystem<helios::engine::modules::physics::collision::systems::BoundsUpdateSystem>()
@@ -699,9 +682,9 @@ int main() {
             .addPass()
             .addSystem<helios::engine::modules::physics::collision::systems::CollisionStateResponseSystem>();
 
-    // +----------------------------------------------------------------
-    // | 3. PHASE THREE: Postprocessing and constraint integration
-    // +----------------------------------------------------------------
+    // +----------------------------------------------
+    // | POST PHASE: Transform Composition and Cleanup
+    // +----------------------------------------------
     gameLoop.phase(helios::engine::runtime::gameloop::PhaseType::Post)
              .addPass()
              .addSystem<helios::engine::modules::spatial::transform::systems::ComposeTransformSystem>()
@@ -783,13 +766,13 @@ int main() {
             app->renderingDevice().render(renderPass);
         }
 
-        // ========================================
-        // ImGui Rendering
-        // ========================================
+        // ----------------------------------------
+        // 10.5 ImGui Overlay Rendering
+        // ----------------------------------------
         imguiOverlay.render();
 
         // ----------------------------------------
-        // 10.5 Frame Synchronization
+        // 10.6 Frame Synchronization
         // ----------------------------------------
         // swap time / idle time should be read out here
         win->swapBuffers();

@@ -75,6 +75,27 @@ auto* health = entity->get<HealthComponent>();
 
 Each GameObject has a unique `Guid` for identification and can be queried efficiently via `GameWorld::find<Components...>()`.
 
+#### Type-Indexed Component Storage
+
+Components are stored in a contiguous vector, indexed by their compile-time `ComponentTypeId`. This provides **O(1) direct access** without hash lookups:
+
+| Operation | Complexity | Description |
+|-----------|------------|-------------|
+| `get<T>()` | O(1) | Direct array access via type ID index |
+| `has<T>()` | O(1) | Bounds check + nullptr comparison |
+| `add<T>()` | O(1) amortized | May resize vector for new type IDs |
+| `components()` | O(1) / O(n) | Cached span; rebuilds on first access after modification |
+
+The vector may contain nullptr entries for component types not attached to a particular GameObject. The `components()` method returns a filtered span of non-null entries.
+
+```cpp
+// Conceptual storage layout:
+// Index:     [0]        [1]        [2]        [3]       ...
+// Content: nullptr  Transform   nullptr    Move2D     ...
+//                      ↑                      ↑
+//     ComponentTypeId::id<Transform>()   ComponentTypeId::id<Move2D>()
+```
+
 ### `System`
 
 Global logic processors that operate on the entire GameWorld. Systems are registered with the **GameLoop** and executed within Phases and Passes.

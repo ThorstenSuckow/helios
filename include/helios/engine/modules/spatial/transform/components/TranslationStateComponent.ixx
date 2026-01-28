@@ -46,7 +46,7 @@ export namespace helios::engine::modules::spatial::transform::components {
         }
 
         /**
-         * @brief Created a new TranslationStateComponent with the specified translation vector.
+         * @brief Creates a new TranslationStateComponent with the specified translation vector.
          *
          * @param translation The translation vector this component should be initialized with.
          */

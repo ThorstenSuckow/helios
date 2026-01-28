@@ -19,13 +19,11 @@ export namespace helios::engine::runtime::spawn::policy::conditions {
      * @brief A SpawnCondition that triggers spawning at fixed time intervals.
      *
      * @details TimerSpawnCondition checks if enough time has elapsed since the
-     * last spawn to satisfy the interval requirement. It also verifies that the
-     * pool has sufficient inactive entities to fulfill the requested amount.
+     * last spawn to satisfy the interval requirement.
      *
      * ## Behavior
      *
-     * - **isSatisfied():** Returns true when `sinceLastSpawn >= interval` AND
-     *   the pool has enough inactive entities
+     * - **isSatisfied():** Returns true when `sinceLastSpawn >= interval`.
      * - **onCommit():** Resets the `sinceLastSpawn` timer to 0
      *
      * Example:
@@ -71,7 +69,7 @@ export namespace helios::engine::runtime::spawn::policy::conditions {
         }
 
         /**
-         * @brief Checks if the timer interval has elapsed and pool has capacity.
+         * @brief Checks if the timer interval has elapsed.
          *
          * @param requestedAmount The number of entities requested to spawn.
          * @param spawnState The rule's runtime state containing time since last spawn.
@@ -86,13 +84,7 @@ export namespace helios::engine::runtime::spawn::policy::conditions {
             const helios::engine::runtime::pooling::GameObjectPoolSnapshot poolSnapshot,
             const helios::engine::runtime::world::UpdateContext& updateContext
         ) const noexcept override {
-
-            if (requestedAmount <= poolSnapshot.inactiveCount &&
-                spawnState.sinceLastSpawn() >= interval_) {
-                return true;
-            }
-
-            return false;
+            return  spawnState.sinceLastSpawn() >= interval_;
         }
 
         /**

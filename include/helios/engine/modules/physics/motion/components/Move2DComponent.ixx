@@ -143,6 +143,18 @@ export namespace helios::engine::modules::physics::motion::components {
          */
         bool useInstantAcceleration_ = false;
 
+        /**
+         * @brief Resets this component's properties to default values.
+         */
+        void reset() {
+            currentMovementSpeed_ = 0.0f;
+            stateChanged_ = true;
+            throttle_ = 0.0f;
+            direction_ = {};
+            velocity_ = {};
+            inheritedVelocity_ = {};
+        }
+
     public:
 
         /**
@@ -225,6 +237,24 @@ export namespace helios::engine::modules::physics::motion::components {
             stateChanged_ = true;
 
             currentMovementSpeed_ = movementSpeed_ * throttle_;
+        }
+
+        /**
+         * @brief Calls reset() when this Component is acquired.
+         *
+         * @see reset()
+         */
+        void onAcquire() noexcept override {
+            reset();
+        }
+
+        /**
+         * @brief Calls reset() when this Component is released.
+         *
+         * @see reset()
+         */
+        void onRelease() noexcept override {
+            reset();
         }
 
         /**

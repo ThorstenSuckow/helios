@@ -1,5 +1,5 @@
 /**
- * @file DirectionInitializer.ixx
+ * @file MoveInitializer.ixx
  * @brief Spawn initializer that sets initial movement direction for spawned entities.
  */
 module;
@@ -7,7 +7,7 @@ module;
 #include <cassert>
 #include <cmath>
 
-export module helios.engine.runtime.spawn.behavior.initializers.DirectionInitializer;
+export module helios.engine.runtime.spawn.behavior.initializers.MoveInitializer;
 
 import helios.engine.runtime.spawn.behavior.SpawnInitializer;
 import helios.engine.runtime.spawn.SpawnPlanCursor;
@@ -15,6 +15,8 @@ import helios.engine.runtime.spawn.SpawnContext;
 import helios.engine.ecs.GameObject;
 import helios.engine.modules.physics.motion.components.Move2DComponent;
 import helios.engine.modules.physics.motion.components.DirectionComponent;
+
+import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
 
 import helios.engine.modules.spatial.transform.components.RotationStateComponent;
 import helios.engine.modules.physics.motion.components.SteeringComponent;
@@ -28,7 +30,7 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
     /**
      * @brief Specifies the direction initialization strategy.
      */
-    enum class Direction {
+    enum class DirectionType {
 
         /**
          * @brief Generates a random normalized direction vector.
@@ -48,15 +50,22 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
         /**
          * @brief Sets direction to a custom axis vector.
          */
-        Axis
+        Axis,
 
+        /**
+         * @brief Sets direction toward a specific target point.
+         *
+         * @details The direction is calculated as the normalized vector from
+         * the entity's current position to the specified target point.
+         */
+        Point
     };
 
     /**
      * @brief Initializer that sets movement direction for spawned entities.
      *
-     * @details DirectionInitializer configures the DirectionComponent and
-     * Move2DComponent of spawned entities based on the specified Direction
+     * @details MoveInitializer configures the DirectionComponent and
+     * Move2DComponent of spawned entities based on the specified DirectionType
      * strategy. This determines the initial movement vector of the entity.
      *
      * ## Direction Strategies
@@ -64,7 +73,8 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
      * - **Random:** Generates a random normalized 2D direction using a seeded RNG.
      * - **Right:** Sets direction to positive X-axis (1, 0, 0).
      * - **Left:** Sets direction to negative X-axis (-1, 0, 0).
-     * - **Axis:** Sets direction to a custom provided axis.
+     * - **Axis:** Sets direction to a custom provided axis vector.
+     * - **Point:** Calculates direction toward a specific target point.
      *
      * ## Required Components
      *
@@ -72,28 +82,44 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
      * - `DirectionComponent` — receives the calculated direction.
      * - `Move2DComponent` — receives the move command with direction.
      * - `SteeringComponent` (Optional) — receives the rotation looking at direction.
+     * - `TranslationStateComponent` (Required for `Point` strategy) — provides current position.
      *
-     * Example:
+     * ## Usage Examples
+     *
+     * Random direction:
      * ```cpp
-     * auto initializer = std::make_unique<DirectionInitializer>(Direction::Random);
+     * auto initializer = std::make_unique<MoveInitializer>(DirectionType::Random);
      * spawnProfile.spawnInitializer = std::move(initializer);
+     * ```
+     *
+     * Custom axis direction:
+     * ```cpp
+     * auto axis = helios::math::vec3f{0.707f, 0.707f, 0.0f}; // 45 degrees
+     * auto initializer = std::make_unique<MoveInitializer>(axis);
+     * ```
+     *
+     * Direction toward a target point:
+     * ```cpp
+     * auto target = helios::math::vec3f{100.0f, 50.0f, 0.0f};
+     * auto initializer = std::make_unique<MoveInitializer>(target, DirectionType::Point);
      * ```
      *
      * @see SpawnInitializer
      * @see DirectionComponent
      * @see Move2DComponent
+     * @see TranslationStateComponent
      */
-    class DirectionInitializer final : public SpawnInitializer {
+    class MoveInitializer final : public SpawnInitializer {
 
         /**
          * @brief The direction strategy to apply during initialization.
          */
-        const Direction direction_ = Direction::Random;
+        const DirectionType directionType_ = DirectionType::Random;
 
         /**
-         * @brief Stores the custom direction axis when using Direction::Axis.
+         * @brief Stores the custom direction target (axis/point) when using Direction::Axis/::Point.
          */
-        helios::math::vec3f directionAxis_{};
+        helios::math::vec3f direction_{};
 
         /**
          * @brief Applies a random direction to the entity.
@@ -134,24 +160,30 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
         }
 
         /**
-         * @brief Applies a specific direction axis to the entity.
+         * @brief Aligns the entity's movement direction to a target axis or point.
          *
-         * @details Sets the entity's direction to the provided axis vector
-         * and triggers a move command with full throttle (1.0).
+         * @details Depending on the directionType parameter:
+         * - **Axis:** Sets the entity's direction to the provided normalized vector.
+         * - **Point:** Calculates the direction from the entity's current position
+         *   to the target point and normalizes it.
          *
-         * If a SteeringComponent is present, the entity is rotated to face the
-         * movement direction.
+         * In both cases, triggers a move command with full throttle (1.0) and
+         * updates the SteeringComponent to rotate the entity toward the movement
+         * direction.
          *
          * @param gameObject The spawned entity to initialize.
          * @param cursor The spawn plan cursor (unused).
          * @param spawnContext The spawn context (unused).
-         * @param directionAxis The normalized direction vector to apply.
+         * @param target The target axis vector or point coordinates.
+         * @param directionType The direction strategy (`Axis` or `Point`).
          */
-        void alignToAxis (
+        void alignTo (
             const helios::engine::ecs::GameObject& gameObject,
             const SpawnPlanCursor& cursor,
             const SpawnContext& spawnContext,
-            const helios::math::vec3f directionAxis
+            const helios::math::vec3f target,
+            const DirectionType directionType = DirectionType::Axis
+            
         ) const noexcept {
 
             static auto rGen = helios::util::Random(12345);
@@ -160,34 +192,55 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
             auto* sc = gameObject.get<helios::engine::modules::physics::motion::components::SteeringComponent>();
             auto* dc = gameObject.get<helios::engine::modules::physics::motion::components::DirectionComponent>();
 
-            assert(directionAxis.isNormalized() && "horizontal initializer requires valid direction vector");
-            dc->setDirection(directionAxis);
+            auto direction = target;
+            if (directionType == DirectionType::Axis) {
+                assert(direction.isNormalized() && "axis initializer requires valid direction vector");
+            } else if (directionType == DirectionType::Point) {
+                auto* tsc = gameObject.get<helios::engine::modules::spatial::transform::components::TranslationStateComponent>();
 
-            sc->setTargetRotationAngle(helios::math::degrees(std::atan2(directionAxis[1], directionAxis[0])));
-            sc->setCurrentRotationAngle(helios::math::degrees(std::atan2(directionAxis[1], directionAxis[0])));
+                direction = (target - (tsc->translation() * -1.0f)).normalize();
+                assert(direction.isNormalized() && "point initializer requires valid direction vector");
+            }
+            
+            dc->setDirection(direction);
 
-            mc->move(directionAxis, 1.0f);
+            sc->setTargetRotationAngle(helios::math::degrees(std::atan2(direction[1], direction[0])));
+            sc->setCurrentRotationAngle(helios::math::degrees(std::atan2(direction[1], direction[0])));
+
+            mc->move(direction, 1.0f);
 
 
         }
     public:
 
         /**
-         * @brief Constructs a DirectionInitializer with the specified strategy.
+         * @brief Constructs a MoveInitializer with the specified strategy.
          *
          * @param direction The direction strategy to use during initialization.
          */
-        explicit DirectionInitializer(const Direction direction) : direction_(direction) {}
+        explicit MoveInitializer(const DirectionType direction) : directionType_(direction) {}
 
         /**
-         * @brief Constructs a DirectionInitializer with a custom axis.
+         * @brief Constructs a MoveInitializer with a custom axis.
          *
          * @details Sets the strategy to `Direction::Axis` and stores the provided
          * axis vector.
          *
          * @param directionAxis The custom direction vector to use.
          */
-        explicit DirectionInitializer(const helios::math::vec3f directionAxis) : direction_(Direction::Axis), directionAxis_(directionAxis) {}
+        explicit MoveInitializer(const helios::math::vec3f directionAxis) : directionType_(DirectionType::Axis), direction_(directionAxis) {}
+
+        /**
+         * @brief Constructs a MoveInitializer with a target point or axis and explicit strategy.
+         *
+         * @details Allows specifying both a target vector and the direction strategy.
+         * Use `DirectionType::Point` to calculate direction toward the target point,
+         * or `DirectionType::Axis` to use the vector as a direct direction.
+         *
+         * @param target The target point or axis vector.
+         * @param direction The direction strategy to use.
+         */
+        explicit MoveInitializer(const helios::math::vec3f target, const DirectionType direction) : directionType_(direction), direction_(target) {}
 
 
         /**
@@ -206,18 +259,22 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
             const SpawnContext& spawnContext
         ) override {
 
-            switch (direction_) {
-                case Direction::Random:
+            switch (directionType_) {
+                case DirectionType::Random:
                     random(gameObject, cursor, spawnContext);
                     return;
-                case Direction::Right:
-                    alignToAxis(gameObject, cursor, spawnContext, helios::math::X_AXISf);
+                case DirectionType::Right:
+                    alignTo(gameObject, cursor, spawnContext, helios::math::X_AXISf);
                     return;
-                case Direction::Left:
-                    alignToAxis(gameObject, cursor, spawnContext, helios::math::X_AXISf * -1.0f);
+                case DirectionType::Left:
+                    alignTo(gameObject, cursor, spawnContext, helios::math::X_AXISf * -1.0f);
                     return;
-                case Direction::Axis:
-                    alignToAxis(gameObject, cursor, spawnContext, directionAxis_);
+                case DirectionType::Axis:
+                    alignTo(gameObject, cursor, spawnContext, direction_);
+                    return;
+                    
+                case DirectionType::Point:
+                    alignTo(gameObject, cursor, spawnContext, direction_, directionType_);
                     return;
             }
 

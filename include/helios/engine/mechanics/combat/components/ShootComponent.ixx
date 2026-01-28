@@ -14,6 +14,7 @@ import helios.engine.ecs.GameObject;
 import helios.engine.mechanics.combat.components.Aim2DComponent;
 import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
 
+import helios.engine.core.data.ComponentTypeId;
 
 export namespace helios::engine::mechanics::combat::components {
 
@@ -234,6 +235,15 @@ export namespace helios::engine::mechanics::combat::components {
             fireRate_ = fireRate;
             cooldownDelta_ = 1.0f/fireRate_;
         }
+
+        /**
+         * @brief Returns the ComponentTypeId for this component's type.
+         *
+         * @return The ComponentTypeId for this Component's type.
+         */
+        [[nodiscard]] helios::engine::core::data::ComponentTypeId typeId() const noexcept final {
+            return helios::engine::core::data::ComponentTypeId::id<Aim2DComponent>();
+        };
     };
 
 

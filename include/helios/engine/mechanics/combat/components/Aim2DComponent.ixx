@@ -12,6 +12,7 @@ import helios.engine.ecs.Component;
 
 import helios.math;
 
+import helios.engine.core.data.ComponentTypeId;
 
 export namespace helios::engine::mechanics::combat::components {
 
@@ -74,6 +75,15 @@ export namespace helios::engine::mechanics::combat::components {
         [[nodiscard]] float frequency() const noexcept {
             return frequency_;
         }
+
+        /**
+         * @brief Returns the ComponentTypeId for this component's type.
+         *
+         * @return The ComponentTypeId for this Component's type.
+         */
+        [[nodiscard]] helios::engine::core::data::ComponentTypeId typeId() const noexcept final {
+            return helios::engine::core::data::ComponentTypeId::id<Aim2DComponent>();
+        };
     };
 
 

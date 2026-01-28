@@ -64,7 +64,8 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         TransformConfig& translate(const helios::math::vec3f translation) {
-            gameObject_->add<helios::engine::modules::spatial::transform::components::TranslationStateComponent>(translation);
+            gameObject_->getOrAdd<helios::engine::modules::spatial::transform::components::TranslationStateComponent>()
+                        .setTranslation(translation);
             return *this;
         }
 

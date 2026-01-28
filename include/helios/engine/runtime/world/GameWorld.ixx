@@ -492,8 +492,8 @@ export namespace helios::engine::runtime::world {
              */
             newGo->setActive(false);
 
-            for (const auto& component : gameObject.components()) {
-                if (const auto* cc = dynamic_cast<const helios::engine::ecs::Cloneable*>(component.get())) {
+            for (const auto* component : gameObject.components()) {
+                if (const auto* cc = dynamic_cast<const helios::engine::ecs::Cloneable*>(component)) {
                     auto cComponent = cc->clone();
                     // use getOrAdd since cloned components may have already added
                     // other components in onAttach(), which we will not defer for now.

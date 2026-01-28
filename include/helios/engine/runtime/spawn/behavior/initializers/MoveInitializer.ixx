@@ -117,7 +117,7 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
         const DirectionType directionType_ = DirectionType::Random;
 
         /**
-         * @brief Stores the custom direction target (axis/point) when using Direction::Axis/::Point.
+         * @brief Stores the custom direction target (axis/point) when using DirectionType::Axis/::Point.
          */
         helios::math::vec3f direction_{};
 
@@ -223,7 +223,7 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
         /**
          * @brief Constructs a MoveInitializer with a custom axis.
          *
-         * @details Sets the strategy to `Direction::Axis` and stores the provided
+         * @details Sets the strategy to `DirectionType::Axis` and stores the provided
          * axis vector.
          *
          * @param directionAxis The custom direction vector to use.

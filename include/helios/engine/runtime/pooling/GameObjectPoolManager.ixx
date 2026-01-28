@@ -23,6 +23,7 @@ import helios.engine.runtime.pooling.GameObjectPoolRegistry;
 
 import helios.engine.runtime.pooling.GameObjectPoolConfig;
 
+import helios.core.types;
 import helios.util.Guid;
 
 import helios.engine.runtime.pooling.GameObjectPoolSnapshot;
@@ -112,7 +113,7 @@ export namespace helios::engine::runtime::pooling {
             const helios::engine::core::data::GameObjectPoolId gameObjectPoolId,
             const helios::engine::ecs::GameObject& gameObjectPrefab
         ) {
-            helios::util::Guid guid{helios::util::no_init};
+            helios::util::Guid guid{helios::core::types::no_init};
 
             auto* gameObjectPool = pool(gameObjectPoolId);
             
@@ -219,7 +220,7 @@ export namespace helios::engine::runtime::pooling {
         [[nodiscard]] helios::engine::ecs::GameObject* acquire(
             const helios::engine::core::data::GameObjectPoolId gameObjectPoolId
         )  {
-            helios::util::Guid guid{helios::util::no_init};
+            helios::util::Guid guid{helios::core::types::no_init};
 
             auto* gameObjectPool = pool(gameObjectPoolId);
 

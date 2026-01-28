@@ -2,9 +2,31 @@
 
 Core-level utilities shared across the helios engine.
 
-This module provides foundational infrastructure including double-buffering for thread-safe message passing, spatial transformations, type definitions, and data structures used by higher-level subsystems.
+This module provides foundational infrastructure including double-buffering for thread-safe message passing, spatial transformations, type definitions, hash algorithms, and data structures used by higher-level subsystems.
 
 ## Modules
+
+### algorithms
+
+The `helios.core.algorithms` module provides core algorithms used throughout the engine.
+
+#### FNV-1a Hash
+
+A fast, compile-time capable hash function for generating identifiers from strings:
+
+```cpp
+import helios.core.algorithms;
+
+// Compile-time hash
+constexpr uint32_t id = helios::core::algorithms::fnv1a_hash("enemy_spawn");
+
+// Used internally by strongly-typed ID constructors
+constexpr GameObjectPoolId POOL{"bullets"};    // calls fnv1a_hash
+constexpr SpawnProfileId PROFILE{"enemies"};   // calls fnv1a_hash
+constexpr SpawnRuleId RULE{"wave_spawn"};      // calls fnv1a_hash
+```
+
+> **Note:** FNV-1a is not a cryptographic hash. Do not use for security purposes.
 
 ### types
 
@@ -61,7 +83,7 @@ public:
 <summary>Doxygen</summary><p>
 @namespace helios::core
 @brief Core utilities shared across the helios engine.
-@details This module provides foundational infrastructure including double-buffering, spatial transformations, type definitions, and data structures used by higher-level subsystems.
+@details This module provides foundational infrastructure including double-buffering, spatial transformations, type definitions, hash algorithms, and data structures used by higher-level subsystems.
 </p></details>
 
 

@@ -5,4 +5,4 @@
 
 export module helios.examples;
 
-export import helios.examplves.collisionDetection;
+export import helios.examples.collisionDetection;

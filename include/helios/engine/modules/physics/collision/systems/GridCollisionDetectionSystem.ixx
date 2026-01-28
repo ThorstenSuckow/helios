@@ -30,6 +30,7 @@ import helios.engine.modules.physics.collision.components.CollisionStateComponen
 import helios.engine.modules.physics.collision.components.AabbColliderComponent;
 
 import helios.engine.modules.physics.collision.types.CollisionBehavior;
+import helios.engine.modules.physics.collision.types.HitPolicy;
 
 import helios.util.Guid;
 import helios.math;
@@ -46,28 +47,42 @@ export namespace helios::engine::modules::physics::collision::systems {
      * @brief Collision detection system using uniform spatial partitioning for Broadphase and
      * AABB overlaps in the Narrowphase.
      *
-     * This system implements a grid-based spatial partitioning approach for efficient collision
-     * detection, following the principles outlined in Ericson's "Real-Time Collision Detection"
-     * (Chapter 7). The algorithm divides the world into a uniform 3D grid of cells and assigns
-     * each collidable entity to the cells it overlaps.
+     * @details This system implements a grid-based spatial partitioning approach for efficient
+     * collision detection, following the principles outlined in Ericson's "Real-Time Collision
+     * Detection" (Chapter 7). The algorithm divides the world into a uniform 3D grid of cells
+     * and assigns each collidable entity to the cells it overlaps.
      *
-     * The detection process consists of two phases:
+     * ## Detection Phases
+     *
      * 1. **Broadphase:** Entities are inserted into grid cells based on their AABB. Only entities
      *    sharing the same cell are considered potential collision pairs.
      * 2. **Narrowphase:** For each cell with multiple candidates, AABB intersection tests
      *    determine actual collisions.
      *
+     * ## Collision Types
+     *
      * Collision events are published to the `UpdateContext`'s event sink, distinguishing between:
      * - **Solid collisions:** Symmetric collisions where both entities can physically interact.
      * - **Trigger collisions:** Asymmetric collisions for gameplay logic (e.g., pickups, zones).
      *
-     * During the broadphase, the system uses additional layer masks to filter which entity types
+     * ## Hit Policy
+     *
+     * The system respects each entity's HitPolicy setting:
+     * - **OneHit:** Entity receives only its first collision per frame, then skips further checks.
+     * - **All:** Entity receives collision events for all overlapping entities.
+     *
+     * This allows projectiles to stop on first contact while area effects can damage multiple targets.
+     *
+     * ## Layer Filtering
+     *
+     * During the broadphase, the system uses layer masks to filter which entity types
      * can collide with each other, enabling fine-grained control over collision pairs.
      *
      * @see CollisionComponent
      * @see AabbColliderComponent
      * @see TriggerCollisionEvent
      * @see SolidCollisionEvent
+     * @see HitPolicy
      *
      * @see [Eri05, Chapter 7]
      */
@@ -566,6 +581,11 @@ export namespace helios::engine::modules::physics::collision::systems {
                 CollisionComponent* cc = candidate.collisionComponent;
                 CollisionStateComponent* csc = candidate.collisionStateComponent;
 
+                auto hitPolicy = cc->hitPolicy();
+                if (hitPolicy == helios::engine::modules::physics::collision::types::HitPolicy::OneHit && csc->hasCollision()) {
+                    continue;
+                }
+
                 const helios::math::aabbf& aabbCandidate = candidate.aabbColliderComponent->bounds();
 
                 for (size_t j = i+1; j < candidates.size(); j++) {
@@ -606,6 +626,10 @@ export namespace helios::engine::modules::physics::collision::systems {
                         collisionStruct,
                         updateContext, csc, matchCSC
                     );
+
+                    if (hitPolicy == helios::engine::modules::physics::collision::types::HitPolicy::OneHit) {
+                        break;
+                    }
                 }
             }
         }

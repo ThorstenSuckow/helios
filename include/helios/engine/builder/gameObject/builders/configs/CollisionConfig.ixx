@@ -87,6 +87,29 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         }
 
         /**
+         * @brief Sets the hit policy for collision detection.
+         *
+         * @details Controls how many collision events this entity receives per frame:
+         * - `OneHit`: Only the first collision is reported (default)
+         * - `All`: All collisions with overlapping entities are reported
+         *
+         * @param hitPolicy The hit policy to apply.
+         *
+         * @return Reference to this config for chaining.
+         *
+         * @see HitPolicy
+         */
+        CollisionConfig& hitPolicy(const helios::engine::modules::physics::collision::types::HitPolicy hitPolicy) {
+
+            ensureCollisionComponent(true);
+
+            gameObject_->get<helios::engine::modules::physics::collision::components::CollisionComponent>()
+                        ->setHitPolicy(hitPolicy);
+
+            return *this;
+        }
+
+        /**
          * @brief Sets whether this entity reports collisions.
          *
          * @param isCollisionReporter True to generate collision events.

@@ -145,6 +145,18 @@ export namespace helios::math {
         }
 
         /**
+         * Checks if this AABB fully contains the specified point.
+         *
+         * @param point The vec3 to test for containment.
+         *
+         * @return True is the specified point is fully contained within this AABB, otherwise false.
+         */
+        [[nodiscard]] constexpr bool contains(const helios::math::vec3<T>& point) const noexcept {
+            return point[0] >= min_[0] && point[1] >= min_[1] && point[2] >= min_[2] &&
+                   point[0] <= max_[0] && point[1] <= max_[1] && point[2] <= max_[2];
+        }
+
+        /**
          * @brief Checks if this AABB intersects or touches another AABB.
          *
          * @param box The AABB to test for intersection.

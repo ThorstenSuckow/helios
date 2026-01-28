@@ -9,6 +9,8 @@ module;
 
 export module helios.engine.core.data.SpawnProfileId;
 
+import helios.core.types;
+
 export namespace helios::engine::core::data {
 
     /**
@@ -41,16 +43,18 @@ export namespace helios::engine::core::data {
         /**
          * @brief The underlying numeric identifier.
          */
-        uint32_t id_;
+        uint32_t id_{};
 
     public:
+
+        explicit constexpr SpawnProfileId(helios::core::types::no_init_t) {}
 
         /**
          * @brief Constructs a SpawnProfileId with the given numeric value.
          *
          * @param id The numeric identifier value.
          */
-        explicit constexpr SpawnProfileId(uint32_t id) noexcept
+        explicit constexpr SpawnProfileId(const uint32_t id) noexcept
             : id_(id) {}
 
         /**

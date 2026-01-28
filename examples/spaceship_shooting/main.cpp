@@ -326,8 +326,8 @@ int main() {
     //     SPAWN CONFIGURATION
     // --------------------------
 
-    constexpr helios::engine::core::data::GameObjectPoolId ProjectilePoolId{1};
-    helios::engine::core::data::SpawnProfileId ProjectileSpawnSpawnProfileId{1};
+    constexpr helios::engine::core::data::GameObjectPoolId ProjectilePoolId{"projectile_pool"};
+    helios::engine::core::data::SpawnProfileId ProjectileSpawnSpawnProfileId{"projectile_spawn"};
 
     auto& poolManager = gameWorld.addManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
     auto& spawnManager = gameWorld.addManager<helios::engine::runtime::spawn::SpawnManager>();

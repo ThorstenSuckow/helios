@@ -66,6 +66,8 @@ export namespace helios::engine::builder::gameObject {
 
             std::unique_ptr<helios::engine::builder::gameObject::builders::ShootingBuilder> shootingBuilder_;
 
+            std::unique_ptr<helios::engine::builder::gameObject::builders::LifecycleBuilder> lifecycleBuilder_;
+
         public:
 
             using MotionBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::MotionBuilder&)>;
@@ -86,6 +88,8 @@ export namespace helios::engine::builder::gameObject {
 
             using ShootingBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::ShootingBuilder&)>;
 
+            using LifecycleBuilderCallback = std::function<void(helios::engine::builder::gameObject::builders::LifecycleBuilder&)>;
+
             explicit GameObjectPrototype(std::unique_ptr<helios::engine::ecs::GameObject> gameObject) :
             gameObject_(std::move(gameObject)),
             motionBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::MotionBuilder>(gameObject_.get())),
@@ -96,7 +100,8 @@ export namespace helios::engine::builder::gameObject {
             effectsBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::EffectsBuilder>(gameObject_.get())),
             spawnBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::SpawnBuilder>(gameObject_.get())),
             aiBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::AiBuilder>(gameObject_.get())),
-            shootingBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::ShootingBuilder>(gameObject_.get()))
+            shootingBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::ShootingBuilder>(gameObject_.get())),
+            lifecycleBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::LifecycleBuilder>(gameObject_.get()))
             {}
 
             GameObjectPrototype() :
@@ -109,7 +114,8 @@ export namespace helios::engine::builder::gameObject {
                 effectsBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::EffectsBuilder>(gameObject_.get())),
                 spawnBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::SpawnBuilder>(gameObject_.get())),
                 aiBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::AiBuilder>(gameObject_.get())),
-                shootingBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::ShootingBuilder>(gameObject_.get()))
+                shootingBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::ShootingBuilder>(gameObject_.get())),
+                lifecycleBuilder_(std::make_unique<helios::engine::builder::gameObject::builders::LifecycleBuilder>(gameObject_.get()))
             {}
 
             GameObjectPrototype& prototype() {
@@ -224,6 +230,18 @@ export namespace helios::engine::builder::gameObject {
                 return *this;
             }
 
+            /*
+             * @brief Configures lifecycle components.
+             *
+             * @param sbc Callback receiving a LifecycleBuilder reference.
+             *
+             * @return Reference to this prototype for chaining.
+             */
+            GameObjectPrototype& withLifecycle(const LifecycleBuilderCallback& sbc) {
+                sbc(*lifecycleBuilder_);
+                return *this;
+            }
+
 
         };
 
@@ -257,8 +275,8 @@ export namespace helios::engine::builder::gameObject {
              */
             newGo->setActive(false);
 
-            for (const auto& component : gameObject->components()) {
-                if (const auto* cc = dynamic_cast<const helios::engine::ecs::Cloneable*>(component.get())) {
+            for (const auto* component : gameObject->components()) {
+                if (const auto* cc = dynamic_cast<const helios::engine::ecs::Cloneable*>(component)) {
                     auto cComponent = cc->clone();
                     // use getOrAdd since cloned components may have already added
                     // other components in onAttach(), which we will not defer for now.

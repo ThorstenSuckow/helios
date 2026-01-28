@@ -49,6 +49,12 @@ Config classes provide a fluent interface for adding and configuring specific co
 | `ChaseConfig` | `ChaseComponent` | AI chase behavior |
 | `WeaponConfig` | `Aim2DComponent`, `ShootComponent` | Weapon configuration |
 
+### Lifecycle
+
+| Config | Components Added | Purpose |
+|--------|------------------|---------|
+| `LifecycleConfig` | `DelayedComponentEnabler` | Delayed component activation |
+
 ## Usage Pattern
 
 All configs follow the fluent builder pattern:
@@ -74,6 +80,7 @@ Example: Both `Move2DConfig` and `SteeringConfig` require `ComposeTransformCompo
 | `helios.engine.modules.spatial` | Transform components |
 | `helios.engine.modules.rendering` | Rendering components |
 | `helios.engine.mechanics` | Gameplay components |
+| `helios.engine.mechanics.lifecycle` | Lifecycle and delayed activation |
 
 ---
 

@@ -17,3 +17,4 @@ export import helios.engine.builder.gameObject.builders.configs.GfxEffectsConfig
 export import helios.engine.builder.gameObject.builders.configs.SpawnConfig;
 export import helios.engine.builder.gameObject.builders.configs.ChaseConfig;
 export import helios.engine.builder.gameObject.builders.configs.WeaponConfig;
+export import helios.engine.builder.gameObject.builders.configs.LifecycleConfig;

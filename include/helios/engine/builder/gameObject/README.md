@@ -37,6 +37,7 @@ prototype
     .withSpawn([](SpawnBuilder& b) { /* configure spawn */ })
     .withAi([](AiBuilder& b) { /* configure AI */ })
     .withShooting([](ShootingBuilder& b) { /* configure weapons */ })
+    .withLifecycle([](LifecycleBuilder& b) { /* configure lifecycle */ })
     .make(active);  // Returns std::unique_ptr<GameObject>
 ```
 

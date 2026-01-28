@@ -19,6 +19,7 @@ Each builder encapsulates a specific domain of entity configuration. Builders pr
 | `SpawnBuilder` | Spawning | `SpawnConfig` |
 | `AiBuilder` | AI | `ChaseConfig` |
 | `ShootingBuilder` | Combat | `WeaponConfig` |
+| `LifecycleBuilder` | Lifecycle | `LifecycleConfig` |
 
 ## Usage Pattern
 

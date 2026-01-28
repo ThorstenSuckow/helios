@@ -8,6 +8,7 @@ export module helios.engine.modules.ai.components.ChaseComponent;
 
 import helios.engine.ecs.CloneableComponent;
 
+import helios.core.types;
 import helios.util.Guid;
 
 export namespace helios::engine::modules::ai::components {
@@ -34,7 +35,7 @@ export namespace helios::engine::modules::ai::components {
         /**
          * @brief GUID of the entity to chase.
          */
-        helios::util::Guid target_{helios::util::no_init};
+        helios::util::Guid target_{helios::core::types::no_init};
 
     public:
 

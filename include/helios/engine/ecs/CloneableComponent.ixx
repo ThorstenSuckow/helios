@@ -76,6 +76,11 @@ export namespace helios::engine::ecs {
             return std::make_unique<Derived>(static_cast<const Derived&>(*this));
         }
 
+        /**
+         * @brief Returns the ComponentTypeId for this component's type.
+         *
+         * @return The ComponentTypeId for this Component's type.
+         */
         [[nodiscard]] helios::engine::core::data::ComponentTypeId typeId() const noexcept final {
             return helios::engine::core::data::ComponentTypeId::id<Derived>();
         }

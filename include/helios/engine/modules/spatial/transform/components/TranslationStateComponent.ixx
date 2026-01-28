@@ -45,8 +45,27 @@ export namespace helios::engine::modules::spatial::transform::components {
             translation_(other.translation_){
         }
 
+        /**
+         * @brief Created a new TranslationStateComponent with the specified translation vector.
+         *
+         * @param translation The translation vector this component should be initialized with.
+         */
         explicit TranslationStateComponent(const helios::math::vec3f translation) :
-            translation_(translation){
+            translation_(translation) {}
+
+        /**
+         * @brief Resets the translation vector to 0-vector when acquired.
+         */
+        void onAcquire() noexcept override{
+            translation_ = helios::math::vec3f{};
+        }
+
+
+        /**
+         * @brief Resets the translation vector to 0-vector when released.
+         */
+        void onRelease() noexcept override {
+            translation_ = helios::math::vec3f{};
         }
 
         /**

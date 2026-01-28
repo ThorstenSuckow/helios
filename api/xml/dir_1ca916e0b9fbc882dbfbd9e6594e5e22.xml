@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22" kind="dir">
+    <compoundname>ecs</compoundname>
+    <innerdir refid="dir_6634d24428e27f0a06eb229019da5d06">query</innerdir>
+    <innerfile refid="helios_2engine_2ecs_2__module_8ixx">helios/engine/ecs/_module.ixx</innerfile>
+    <innerfile refid="CloneableComponent_8ixx">CloneableComponent.ixx</innerfile>
+    <innerfile refid="Component_8ixx">Component.ixx</innerfile>
+    <innerfile refid="GameObject_8ixx">GameObject.ixx</innerfile>
+    <innerfile refid="System_8ixx">System.ixx</innerfile>
+    <innerfile refid="Updatable_8ixx">Updatable.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md122">
+<title>helios::engine::ecs</title><para>Core Entity-Component-System architecture for the helios game engine.</para>
+</sect1>
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md123">
+<title>Overview</title><para>This module provides the foundational classes for the composition-based game architecture. It separates data (Components) from behavior (Systems). Entity lifecycle and world management are provided by <computeroutput><ref refid="namespacehelios_1_1engine_1_1runtime_1_1world" kindref="compound">helios.engine.runtime.world</ref></computeroutput>.</para>
+</sect1>
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md124">
+<title>Key Classes</title><para><table rows="6" cols="2"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>GameObject</computeroutput>  </para>
+</entry><entry thead="no"><para>Container for components representing a game entity  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>Component</computeroutput>  </para>
+</entry><entry thead="no"><para>Base class for data containers attached to GameObjects  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>CloneableComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>CRTP base for components that support cloning  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>System</computeroutput>  </para>
+</entry><entry thead="no"><para>Abstract base for logic processors (registered with <computeroutput>GameLoop</computeroutput>)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>Updatable</computeroutput>  </para>
+</entry><entry thead="no"><para>Interface for per-frame updatable objects  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md125">
+<title>Component Storage Model</title><para><computeroutput>GameObject</computeroutput> uses a <bold>type-indexed storage</bold> system for components. Instead of a hash-based lookup, components are stored in a contiguous vector where the index corresponds to the component&apos;s compile-time <computeroutput>ComponentTypeId</computeroutput>.</para>
+<para><bold>Performance Characteristics:</bold></para>
+<para><table rows="5" cols="3"><row>
+<entry thead="yes"><para>Operation  </para>
+</entry><entry thead="yes"><para>Complexity  </para>
+</entry><entry thead="yes"><para>Notes  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>get&lt;T&gt;()</computeroutput>  </para>
+</entry><entry thead="no"><para>O(1)  </para>
+</entry><entry thead="no"><para>Direct array access via type ID  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>has&lt;T&gt;()</computeroutput>  </para>
+</entry><entry thead="no"><para>O(1)  </para>
+</entry><entry thead="no"><para>Bounds check + nullptr check  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>add&lt;T&gt;()</computeroutput>  </para>
+</entry><entry thead="no"><para>O(1) amortized  </para>
+</entry><entry thead="no"><para>May trigger resize if type ID exceeds capacity  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>components()</computeroutput>  </para>
+</entry><entry thead="no"><para>O(1) / O(n)  </para>
+</entry><entry thead="no"><para>O(1) if cache valid, O(n) on first access after modification  </para>
+</entry></row>
+</table>
+</para>
+<para><bold>Trade-offs:</bold><itemizedlist>
+<listitem><para><bold>Memory</bold>: Sparse vector with nullptr slots for unused component types.</para>
+</listitem><listitem><para><bold>Speed</bold>: Direct indexing without hash computation or collision handling.</para>
+</listitem><listitem><para><bold>Cache</bold>: Filtered component views are cached and lazily rebuilt.</para>
+</listitem></itemizedlist>
+</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Storage<sp/>layout<sp/>example<sp/>(conceptual):</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Index:<sp/><sp/><sp/><sp/><sp/><sp/>[0]<sp/><sp/><sp/><sp/><sp/><sp/><sp/>[1]<sp/><sp/><sp/><sp/><sp/><sp/><sp/>[2]<sp/><sp/><sp/><sp/><sp/><sp/><sp/>[3]<sp/><sp/><sp/><sp/><sp/><sp/><sp/>...</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Content:<sp/><sp/>nullptr<sp/><sp/>Transform<sp/><sp/>nullptr<sp/><sp/><sp/>Move2D<sp/><sp/><sp/><sp/>...</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>↑<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>↑</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ComponentTypeId::id&lt;Transform&gt;()<sp/><sp/>ComponentTypeId::id&lt;Move2D&gt;()</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md126">
+<title>Submodules</title><sect2 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md127">
+<title>query/</title><para>Entity query utilities for filtering and iterating GameObjects:</para>
+<para><table rows="3" cols="2"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>GameObjectFilter</computeroutput>  </para>
+</entry><entry thead="no"><para>Bitmask for filtering by active/enabled state  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>GameObjectView</computeroutput>  </para>
+</entry><entry thead="no"><para>Lazy range for component-based iteration  </para>
+</entry></row>
+</table>
+</para>
+</sect2>
+</sect1>
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md128">
+<title>Related Modules</title><para><table rows="3" cols="2"><row>
+<entry thead="yes"><para>Module  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1runtime_1_1world" kindref="compound">helios.engine.runtime.world</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>GameWorld, Level, UpdateContext, Manager, SystemRegistry  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1runtime_1_1gameloop" kindref="compound">helios.engine.runtime.gameloop</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>GameLoop, Phase, Pass  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md129">
+<title>Architecture</title><para><programlisting><codeline><highlight class="normal">┌─────────────────────────────────────────────────────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GameWorld<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>┌─────────────┐<sp/><sp/>┌─────────────┐<sp/><sp/>┌─────────────────────┐<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>GameObjects<sp/>│<sp/><sp/>│<sp/><sp/>Managers<sp/><sp/><sp/>│<sp/><sp/>│<sp/><sp/>Pools/Registry<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>(entities)<sp/>│<sp/><sp/>│<sp/>(deferred)<sp/><sp/>│<sp/><sp/>│<sp/><sp/>(object<sp/>recycling)<sp/>│<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>└─────────────┘<sp/><sp/>└─────────────┘<sp/><sp/>└─────────────────────┘<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">└─────────────────────────────────────────────────────────────┘</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼</highlight></codeline>
+<codeline><highlight class="normal">┌─────────────────────────────────────────────────────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GameLoop<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>┌─────────┐<sp/><sp/>┌─────────┐<sp/><sp/>┌─────────┐<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/>Pre<sp/><sp/><sp/>│─&gt;│<sp/><sp/>Main<sp/><sp/><sp/>│─&gt;│<sp/><sp/>Post<sp/><sp/><sp/>│<sp/><sp/>(Phases)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>Phase<sp/><sp/><sp/>│<sp/><sp/>│<sp/>Phase<sp/><sp/><sp/>│<sp/><sp/>│<sp/>Phase<sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>└─────────┘<sp/><sp/>└─────────┘<sp/><sp/>└─────────┘<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/>Systems<sp/><sp/><sp/><sp/><sp/><sp/>Systems<sp/><sp/><sp/><sp/><sp/><sp/>Systems<sp/><sp/><sp/><sp/><sp/>(execute<sp/>in<sp/>order)<sp/>│</highlight></codeline>
+<codeline><highlight class="normal">└─────────────────────────────────────────────────────────────┘</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_1ca916e0b9fbc882dbfbd9e6594e5e22_1autotoc_md130">
+<title>Usage Example</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8ecs" kindref="compound">helios.engine.ecs</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8runtime_8world_8GameWorld" kindref="compound">helios.engine.runtime.world.GameWorld</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Create<sp/>game<sp/>world</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref><sp/>world;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Add<sp/>entity<sp/>with<sp/>components</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>entity<sp/>=<sp/>std::make_unique&lt;helios::engine::ecs::GameObject&gt;();</highlight></codeline>
+<codeline><highlight class="normal">entity-&gt;add&lt;Move2DComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal">entity-&gt;add&lt;SceneNodeComponent&gt;(sceneNode);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>player<sp/>=<sp/>world.<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a28a53dcdcfb8880867db35145d88d3e2" kindref="member">addGameObject</ref>(std::move(entity));</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Query<sp/>entities<sp/>by<sp/>component</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>[obj,<sp/>move]<sp/>:<sp/>world.<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a83857f38d3ffb10560f863107707929d" kindref="member">find</ref>&lt;Move2DComponent&gt;().each())<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Process<sp/>matching<sp/>entities</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/ecs/"/>
+  </compounddef>
+</doxygen>

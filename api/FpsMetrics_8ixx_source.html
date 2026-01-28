@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>helios: include/helios/engine/tooling/FpsMetrics.ixx Source File</title>
+<title>helios: FpsMetrics.ixx Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
@@ -113,299 +113,393 @@ $(function() {
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">module</span>;</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;deque&gt;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">export</span> <span class="keyword">module</span> <a class="code" href="module__helios_8engine_8tooling_8FpsMetrics.html">helios.engine.tooling.FpsMetrics</a>;</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8tooling_8FrameStats.html">helios.engine.tooling.FrameStats</a>;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="foldopen" id="foldopen00013" data-start="{" data-end="}">
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="namespacehelios_1_1engine_1_1tooling.html">   13</a></span><span class="keyword">export</span> <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine_1_1tooling.html">helios::engine::tooling</a> {</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"></span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">    /**</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">     * @class FpsMetrics</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">     * @brief Aggregates and analyzes frame timing data over a rolling window.</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">     * FpsMetrics collects FrameStats data from multiple frames and calculates</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">     * average FPS and frame times. It maintains a configurable history buffer</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">     * for smoothing out momentary fluctuations in frame rate.</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">     * This class is particularly useful for debugging, profiling, and displaying</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">     * performance metrics in development tools or debug overlays.</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">     * @par Usage Example:</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">     * ```cpp</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">     * helios::engine::tooling::FpsMetrics metrics;</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">     * metrics.setHistorySize(120);</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">     * // In game loop:</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">     * helios::engine::tooling::FrameStats stats = framePacer.sync();</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">     * metrics.addFrame(stats);</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">     * float fps          = metrics.getFps();</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">     * float avgFrameTime = metrics.getFrameTimeMs();</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">     * ```</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">     */</span></div>
-<div class="foldopen" id="foldopen00039" data-start="{" data-end="};">
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html">   39</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html">FpsMetrics</a> {</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment"></span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">         * @brief Stores a rolling history of frame statistics.</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">         * `history_` holds the full timing data (work time, wait time, total frame time)</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">         * for a specified number of recent frames. This buffer is used to compute</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">         * average frame rate and frame time metrics over a configurable window.</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">         * The use of a `std::deque` allows efficient addition and removal</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">         * of frame timing records while maintaining the order of events.</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        std::deque&lt;helios::engine::tooling::FrameStats&gt; history_;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment"></span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">         * @brief Size of the history buffer for storing frame statistics.</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">         * Determines the maximum number of frames for which the frame timing data</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">         * is retained to calculate performance metrics such as average FPS and</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">         * frame times. A larger history size smooths out short-term variations</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">         * but may reduce responsiveness to sudden changes in performance.</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">         * This variable is initialized to a default value of 60 but can be adjusted</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">         * based on the application&#39;s requirements for performance analysis.</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordtype">size_t</span> historySize_ = 60;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment"></span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">         * @brief Stores the calculated average frames per second (FPS).</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">         * The `avgFps_` variable holds the computed average FPS value based on the</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">         * accumulated frame timing data in `history_`. It is recomputed lazily when</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">         * one of the query functions (e.g. `getFps()`) is called after new frames</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">         * have been added.</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keywordtype">float</span> avgFps_ = 0.0f;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment"></span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">         * @brief Stores the average frame time in milliseconds.</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">         * Represents the total frame time (including work and wait) averaged over</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">         * the frames currently stored in the history buffer. The value is stored</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">         * in milliseconds and recomputed lazily when queried via the public getters</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">         * after new frames have been added.</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <span class="keywordtype">float</span> avgFrameTime_ = 0.0f;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment"></span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">         * @brief Tracks the most recent frame&#39;s work time in milliseconds.</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">         * Represents the duration of work performed during the last processed frame.</span></div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">         * This value is derived from the most recent `FrameStats` in the history and</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">         * expressed in milliseconds. It is updated when the metrics are recomputed</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">         * (lazy evaluation triggered by the getters).</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        <span class="keywordtype">float</span> lastWorkTime_ = 0.0f;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment"></span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">         * @brief Tracks the idle time in milliseconds for the most recent frame.</span></div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">         * Represents the duration the system waited (idle time) during the last</span></div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">         * processed frame. This value is derived from the most recent `FrameStats`</span></div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">         * in the history and expressed in milliseconds. It is updated when the</span></div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment">         * metrics are recomputed (lazy evaluation triggered by the getters).</span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <span class="keywordtype">float</span> lastWaitTime_ = 0.0f;</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment"></span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment">         * @brief Tracks the total number of frames processed since initialization.</span></div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment">         * The frameCount_ variable accumulates the count of frames that have been</span></div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment">         * added via `addFrame()`. It starts at 0 and increments with each call,</span></div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment">         * serving as a global counter independent of the current history size.</span></div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> frameCount_ = 0;</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment"></span> </div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment">         * @brief Indicates whether cached metrics need to be recomputed.</span></div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment">         * Set to true whenever new frame data is added or the history changes in a</span></div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment">         * way that invalidates the cached values. The next call to one of the public</span></div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="comment">         * query functions will trigger a recomputation in `update()`.</span></div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        <span class="keywordtype">bool</span> needsUpdate_ = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="comment"></span> </div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="comment">         * @brief Recomputes cached metrics if needed.</span></div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment">         * If `needsUpdate_` is true and the history is non-empty, this function</span></div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment">         * updates `lastWorkTime_`, `lastWaitTime_`, `avgFrameTime_` and `avgFps_`</span></div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment">         * based on the current contents of `history_` and then clears the flag.</span></div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="comment">         * If the history is empty or the cache is already up to date, this function</span></div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="comment">         * returns immediately without modifying any values.</span></div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="comment">         * @note This function is safe to call in hot paths and does not throw under</span></div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="comment">         * normal conditions; it is therefore marked `noexcept`.</span></div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="keywordtype">void</span> update() <span class="keyword">noexcept</span>;</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="comment"></span> </div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="comment">         * @brief Adds a frame&#39;s statistics to the metrics history.</span></div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="comment">         * Processes the provided FrameStats, updates the rolling history,</span></div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="comment">         * and marks cached values as dirty so they will be recomputed on</span></div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="comment">         * the next query. Old frames are automatically removed when the</span></div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="comment">         * history buffer exceeds the configured size. Additionally, the</span></div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="comment">         * `frameCount_` member is increased by one for each call.</span></div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="comment">         * @param stats Frame statistics to add to the history.</span></div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span><span class="comment">         * @note When used together with FramePacer, a typical usage pattern is:</span></div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="comment">         * @code</span></div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="comment">         * helios::engine::tooling::FrameStats stats = framePacer.sync();</span></div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="comment">         * metrics.addFrame(stats);</span></div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="comment">         * @endcode</span></div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="comment">         * This should usually be called once per frame at the end of the</span></div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="comment">         * frame loop, after timing information for the current frame has</span></div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="comment">         * been measured.</span></div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#af833a6e7f41c5aa169c73ba6b96be9b2">  161</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#af833a6e7f41c5aa169c73ba6b96be9b2">addFrame</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structhelios_1_1engine_1_1tooling_1_1FrameStats.html">helios::engine::tooling::FrameStats</a>&amp; stats);</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="comment"></span> </div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="comment">         * @brief Sets the size of the frame history buffer.</span></div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="comment">         * Determines how many frames are used for calculating averages.</span></div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span><span class="comment">         * Larger values produce smoother metrics but respond slower to changes.</span></div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="comment">         * @param size Number of frames to keep in history (default: 60).</span></div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="comment">         * @note Common values: 30 for roughly half-second average at 60 FPS,</span></div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="comment">         *       60 for roughly one-second average at 60 FPS.</span></div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#aba1373724df39b46b8d19cc6f316e971">  174</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#aba1373724df39b46b8d19cc6f316e971">setHistorySize</a>(<span class="keywordtype">size_t</span> size);</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="comment"></span> </div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="comment">         * @brief Gets the current history buffer size.</span></div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="comment">         * @return Maximum number of frames kept in history.</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;numeric&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">export</span> <span class="keyword">module</span> <a class="code" href="module__helios_8engine_8tooling_8FpsMetrics.html">helios.engine.tooling.FpsMetrics</a>;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">import</span> <a class="code" href="module__helios_8engine_8tooling_8FrameStats.html">helios.engine.tooling.FrameStats</a>;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="}">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="namespacehelios_1_1engine_1_1tooling.html">   14</a></span><span class="keyword">export</span> <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1engine_1_1tooling.html">helios::engine::tooling</a> {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"></span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">    /**</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">     * @class FpsMetrics</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">     * @brief Aggregates and analyzes frame timing data over a rolling window.</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">     * FpsMetrics collects FrameStats data from multiple frames and calculates</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">     * average FPS and frame times. It maintains a configurable history buffer</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">     * for smoothing out momentary fluctuations in frame rate.</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">     * This class is particularly useful for debugging, profiling, and displaying</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">     * performance metrics in development tools or debug overlays.</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">     * @par Usage Example:</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">     * ```cpp</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">     * helios::engine::tooling::FpsMetrics metrics;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">     * metrics.setHistorySize(120);</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">     * // In game loop:</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">     * helios::engine::tooling::FrameStats stats = framePacer.sync();</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">     * metrics.addFrame(stats);</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">     * float fps          = metrics.getFps();</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">     * float avgFrameTime = metrics.getFrameTimeMs();</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">     * ```</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">     */</span></div>
+<div class="foldopen" id="foldopen00040" data-start="{" data-end="};">
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html">   40</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html">FpsMetrics</a> {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment"></span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">         * @brief Stores a rolling history of frame statistics.</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">         * `history_` holds the full timing data (work time, wait time, total frame time)</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">         * for a specified number of recent frames. This buffer is used to compute</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">         * average frame rate and frame time metrics over a configurable window.</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">         * The use of a `std::deque` allows efficient addition and removal</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">         * of frame timing records while maintaining the order of events.</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        std::deque&lt;helios::engine::tooling::FrameStats&gt; history_;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment"></span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">         * @brief Size of the history buffer for storing frame statistics.</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">         * Determines the maximum number of frames for which the frame timing data</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">         * is retained to calculate performance metrics such as average FPS and</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">         * frame times. A larger history size smooths out short-term variations</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">         * but may reduce responsiveness to sudden changes in performance.</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">         * This variable is initialized to a default value of 60 but can be adjusted</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">         * based on the application&#39;s requirements for performance analysis.</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keywordtype">size_t</span> historySize_ = 60;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment"></span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">         * @brief Stores the calculated average frames per second (FPS).</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">         * The `avgFps_` variable holds the computed average FPS value based on the</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">         * accumulated frame timing data in `history_`. It is recomputed lazily when</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">         * one of the query functions (e.g. `getFps()`) is called after new frames</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">         * have been added.</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordtype">float</span> avgFps_ = 0.0f;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment"></span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">         * @brief Stores the average frame time in milliseconds.</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">         * Represents the total frame time (including work and wait) averaged over</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">         * the frames currently stored in the history buffer. The value is stored</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">         * in milliseconds and recomputed lazily when queried via the public getters</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">         * after new frames have been added.</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <span class="keywordtype">float</span> avgFrameTime_ = 0.0f;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment"></span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">         * @brief Tracks the most recent frame&#39;s work time in milliseconds.</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">         * Represents the duration of work performed during the last processed frame.</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">         * This value is derived from the most recent `FrameStats` in the history and</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">         * expressed in milliseconds. It is updated when the metrics are recomputed</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">         * (lazy evaluation triggered by the getters).</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="keywordtype">float</span> lastWorkTime_ = 0.0f;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment"></span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">         * @brief Tracks the idle time in milliseconds for the most recent frame.</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">         * Represents the duration the system waited (idle time) during the last</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">         * processed frame. This value is derived from the most recent `FrameStats`</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment">         * in the history and expressed in milliseconds. It is updated when the</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">         * metrics are recomputed (lazy evaluation triggered by the getters).</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <span class="keywordtype">float</span> lastWaitTime_ = 0.0f;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment"></span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">         * @brief Tracks the total number of frames processed since initialization.</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment">         * The frameCount_ variable accumulates the count of frames that have been</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment">         * added via `addFrame()`. It starts at 0 and increments with each call,</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment">         * serving as a global counter independent of the current history size.</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> frameCount_ = 0;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment"></span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment">         * @brief Indicates whether cached metrics need to be recomputed.</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment">         * Set to true whenever new frame data is added or the history changes in a</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="comment">         * way that invalidates the cached values. The next call to one of the public</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment">         * query functions will trigger a recomputation in `update()`.</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <span class="keywordtype">bool</span> needsUpdate_ = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="comment"></span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="comment">         * @brief Recomputes cached metrics if needed.</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment">         * If `needsUpdate_` is true and the history is non-empty, this function</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment">         * updates `lastWorkTime_`, `lastWaitTime_`, `avgFrameTime_` and `avgFps_`</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment">         * based on the current contents of `history_` and then clears the flag.</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="comment">         * If the history is empty or the cache is already up to date, this function</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="comment">         * returns immediately without modifying any values.</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="comment">         * @note This function is safe to call in hot paths and does not throw under</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="comment">         * normal conditions; it is therefore marked `noexcept`.</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        <span class="keywordtype">void</span> update() <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>            <span class="keywordflow">if</span> (!needsUpdate_ || history_.empty()) {</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>                <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            }</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>            <span class="keyword">const</span> <span class="keyword">auto</span>&amp; stats = history_.back();</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>            lastWorkTime_ = stats.workTime * 1000.0f;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>            lastWaitTime_ = stats.waitTime * 1000.0f;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            <span class="keywordtype">float</span> sumMs = 0.0f;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; s : history_) {</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>                sumMs += s.totalFrameTime * 1000.0f;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>            }</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            avgFrameTime_ = sumMs / <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(history_.size());</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            avgFps_ = (avgFrameTime_ &gt; 0.0001f) ? (1000.0f / avgFrameTime_) : 0.0f;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            needsUpdate_ = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        }</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="comment"></span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="comment">         * @brief Adds a frame&#39;s statistics to the metrics history.</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="comment">         * Processes the provided FrameStats, updates the rolling history,</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="comment">         * and marks cached values as dirty so they will be recomputed on</span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="comment">         * the next query. Old frames are automatically removed when the</span></div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span><span class="comment">         * history buffer exceeds the configured size. Additionally, the</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="comment">         * `frameCount_` member is increased by one for each call.</span></div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="comment">         * @param stats Frame statistics to add to the history.</span></div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="comment">         * @note When used together with FramePacer, a typical usage pattern is:</span></div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="comment">         * @code</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="comment">         * helios::engine::tooling::FrameStats stats = framePacer.sync();</span></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="comment">         * metrics.addFrame(stats);</span></div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="comment">         * @endcode</span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="comment">         * This should usually be called once per frame at the end of the</span></div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="comment">         * frame loop, after timing information for the current frame has</span></div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="comment">         * been measured.</span></div>
 <div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#aa409a687ee1e87371274f41653702159">  181</a></span>        [[nodiscard]] <span class="keywordtype">size_t</span> <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#aa409a687ee1e87371274f41653702159">getHistorySize</a>() const noexcept;</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="comment"></span> </div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span><span class="comment">         * @brief Gets the average frames per second.</span></div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="comment">         * Triggers a lazy recomputation of the underlying metrics if</span></div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><span class="comment">         * new frames have been added since the last query.</span></div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="comment">         * @return Average FPS calculated over the frames stored in the history buffer.</span></div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#af6f7e9d36b9e499216e2b8f573ade6d5">  191</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#af6f7e9d36b9e499216e2b8f573ade6d5">getFps</a>() noexcept;</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="comment"></span> </div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="comment">         * @brief Gets the average frame time in milliseconds.</span></div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="comment">         * Triggers a lazy recomputation of the underlying metrics if needed.</span></div>
+<div class="foldopen" id="foldopen00181" data-start="{" data-end="}">
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#af833a6e7f41c5aa169c73ba6b96be9b2">  181</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#af833a6e7f41c5aa169c73ba6b96be9b2">addFrame</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structhelios_1_1engine_1_1tooling_1_1FrameStats.html">helios::engine::tooling::FrameStats</a>&amp; stats) {</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>            needsUpdate_ = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>            history_.push_back(stats);</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>            <span class="keywordflow">if</span> (history_.size() &gt; historySize_) {</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>                history_.pop_front();</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>            }</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>            frameCount_++;</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        }</div>
+</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="comment"></span> </div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="comment">         * @brief Sets the size of the frame history buffer.</span></div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="comment">         * Determines how many frames are used for calculating averages.</span></div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="comment">         * Larger values produce smoother metrics but respond slower to changes.</span></div>
 <div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="comment">         * @return Average total frame time (work + wait) in milliseconds.</span></div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#a902c44f12d326e5f4cb4d3643b62dd8c">  200</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#a902c44f12d326e5f4cb4d3643b62dd8c">getFrameTimeMs</a>() noexcept;</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="comment"></span> </div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="comment">         * @brief Gets the most recent frame&#39;s work time.</span></div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="comment">         * Triggers a lazy recomputation if required.</span></div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span><span class="comment">         * @return Work time of the last processed frame in milliseconds.</span></div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#a2cd3a59669f6755c77681af1a8e890d5">  209</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#a2cd3a59669f6755c77681af1a8e890d5">getWorkTimeMs</a>() noexcept;</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="comment">         * @param size Number of frames to keep in history (default: 60).</span></div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="comment">         * @note Common values: 30 for roughly half-second average at 60 FPS,</span></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="comment">         *       60 for roughly one-second average at 60 FPS.</span></div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00203" data-start="{" data-end="}">
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#aba1373724df39b46b8d19cc6f316e971">  203</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#aba1373724df39b46b8d19cc6f316e971">setHistorySize</a>(<span class="keywordtype">size_t</span> size) {</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>            historySize_ = size;</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            <span class="keywordflow">while</span> (history_.size() &gt; historySize_) {</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>                history_.pop_front();</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>            }</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>            needsUpdate_ = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        }</div>
+</div>
 <div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="comment"></span> </div>
 <div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="comment">         * @brief Gets the most recent frame&#39;s idle time.</span></div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="comment">         * @brief Gets the current history buffer size.</span></div>
 <div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="comment">         * Triggers a lazy recomputation if required.</span></div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span><span class="comment">         * @return Wait/idle time of the last processed frame in milliseconds.</span></div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#a1e58ec32b7bfe1470a48d63fd3f81e9e">  218</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#a1e58ec32b7bfe1470a48d63fd3f81e9e">getIdleTimeMs</a>() noexcept;</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="comment">         * @return Maximum number of frames kept in history.</span></div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00216" data-start="{" data-end="}">
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#aa409a687ee1e87371274f41653702159">  216</a></span>        [[nodiscard]] <span class="keywordtype">size_t</span> <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#aa409a687ee1e87371274f41653702159">getHistorySize</a>() const noexcept {</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>            <span class="keywordflow">return</span> historySize_;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        }</div>
+</div>
 <div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span><span class="comment"></span> </div>
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span><span class="comment">         * @brief Gets the frame count.</span></div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span><span class="comment">         * @brief Gets the average frames per second.</span></div>
 <div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span><span class="comment">         * @return The total number of frames that have been added via `addFrame()`.</span></div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#ab8bd08959d1021083708d14456edb4c4">  225</a></span>        [[nodiscard]] <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#ab8bd08959d1021083708d14456edb4c4">getFrameCount</a>() const noexcept;</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span><span class="comment"></span> </div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><span class="comment">         * @brief Gets the average frame time in seconds.</span></div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span><span class="comment">         * Convenience wrapper returning the same value as `getFrameTimeMs()`</span></div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span><span class="comment">         * converted from milliseconds to seconds.</span></div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span><span class="comment">         * @return Average total frame time (work + wait) in seconds.</span></div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#af61aa224056329e89d7cadacf895b33e">  235</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#af61aa224056329e89d7cadacf895b33e">getFrameTimeSeconds</a>() noexcept;</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span><span class="comment"></span> </div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span><span class="comment">         * @brief Gets the most recent frame&#39;s work time in seconds.</span></div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span><span class="comment">         * Convenience wrapper returning the same value as `getWorkTimeMs()`</span></div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span><span class="comment">         * converted from milliseconds to seconds.</span></div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span><span class="comment">         * @return Work time of the last processed frame in seconds.</span></div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#ac873e7ed9952b1b5bb724393af6da1ab">  245</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#ac873e7ed9952b1b5bb724393af6da1ab">getWorkTimeSeconds</a>() noexcept;</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span><span class="comment"></span> </div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span><span class="comment">         * @brief Gets the most recent frame&#39;s idle time in seconds.</span></div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span><span class="comment">         * Triggers a lazy recomputation of the underlying metrics if</span></div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span><span class="comment">         * new frames have been added since the last query.</span></div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span><span class="comment">         * @return Average FPS calculated over the frames stored in the history buffer.</span></div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00228" data-start="{" data-end="}">
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#af6f7e9d36b9e499216e2b8f573ade6d5">  228</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#af6f7e9d36b9e499216e2b8f573ade6d5">getFps</a>() noexcept {</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>            update();</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>            <span class="keywordflow">return</span> avgFps_;</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        }</div>
+</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="comment"></span> </div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span><span class="comment">         * @brief Gets the average frame time in milliseconds.</span></div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span><span class="comment">         * Triggers a lazy recomputation of the underlying metrics if needed.</span></div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span><span class="comment">         * @return Average total frame time (work + wait) in milliseconds.</span></div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00240" data-start="{" data-end="}">
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#a902c44f12d326e5f4cb4d3643b62dd8c">  240</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#a902c44f12d326e5f4cb4d3643b62dd8c">getFrameTimeMs</a>() noexcept {</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>            update();</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>            <span class="keywordflow">return</span> avgFrameTime_;</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        }</div>
+</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span><span class="comment"></span> </div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span><span class="comment">         * @brief Gets the most recent frame&#39;s work time.</span></div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span><span class="comment">         * Triggers a lazy recomputation if required.</span></div>
 <div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span><span class="comment">         * Convenience wrapper returning the same value as `getIdleTimeMs()`</span></div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span><span class="comment">         * converted from milliseconds to seconds.</span></div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span><span class="comment">         * @return Wait/idle time of the last processed frame in seconds.</span></div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#a89c2f97f8bc7f8e8602beeab2326247e">  255</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#a89c2f97f8bc7f8e8602beeab2326247e">getIdleTimeSeconds</a>() noexcept;</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span><span class="comment">         * @return Work time of the last processed frame in milliseconds.</span></div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00252" data-start="{" data-end="}">
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#a2cd3a59669f6755c77681af1a8e890d5">  252</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#a2cd3a59669f6755c77681af1a8e890d5">getWorkTimeMs</a>() noexcept {</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>            update();</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>            <span class="keywordflow">return</span> lastWorkTime_;</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        }</div>
+</div>
 <div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span><span class="comment"></span> </div>
 <div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span><span class="comment">         * @brief Gets the complete frame history.</span></div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span><span class="comment">         * @brief Gets the most recent frame&#39;s idle time.</span></div>
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span><span class="comment">         * @return Const reference to the deque containing the full frame</span></div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span><span class="comment">         *         statistics history.</span></div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span><span class="comment">         * @note Useful for rendering frame time graphs or diagnostic views</span></div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span><span class="comment">         *       in debug overlays.</span></div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#ae28442d7fa258e117a87f55a4fd39368">  266</a></span>        [[nodiscard]] const std::deque&lt;<a class="code hl_namespace" href="namespacehelios.html">helios</a>::<a class="code hl_namespace" href="namespacehelios_1_1engine.html">engine</a>::<a class="code hl_namespace" href="namespacehelios_1_1engine_1_1tooling.html">tooling</a>::<a class="code hl_struct" href="structhelios_1_1engine_1_1tooling_1_1FrameStats.html">FrameStats</a>&gt;&amp; <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#ae28442d7fa258e117a87f55a4fd39368">getHistory</a>() const noexcept;</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span><span class="comment"></span> </div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span><span class="comment">         * @brief Clears all collected metrics and resets to initial state.</span></div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span><span class="comment">         * Removes all stored frame statistics and resets cached metrics and</span></div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span><span class="comment">         * counters to their default values. After calling this function,</span></div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span><span class="comment">         * all query functions will report zeros until new frames are added.</span></div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#ac313274306dac08211169482bf243f53">  275</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#ac313274306dac08211169482bf243f53">reset</a>();</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    };</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span><span class="comment">         * Triggers a lazy recomputation if required.</span></div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span><span class="comment">         * @return Wait/idle time of the last processed frame in milliseconds.</span></div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00264" data-start="{" data-end="}">
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#a1e58ec32b7bfe1470a48d63fd3f81e9e">  264</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#a1e58ec32b7bfe1470a48d63fd3f81e9e">getIdleTimeMs</a>() noexcept {</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>            update();</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>            <span class="keywordflow">return</span> lastWaitTime_;</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>        }</div>
 </div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>}</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span><span class="comment"></span> </div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span><span class="comment">         * @brief Gets the frame count.</span></div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span><span class="comment">         * @return The total number of frames that have been added via `addFrame()`.</span></div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00274" data-start="{" data-end="}">
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#ab8bd08959d1021083708d14456edb4c4">  274</a></span>        [[nodiscard]] <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#ab8bd08959d1021083708d14456edb4c4">getFrameCount</a>() const noexcept {</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>            <span class="keywordflow">return</span> frameCount_;</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        }</div>
 </div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html">helios::engine::tooling::FpsMetrics</a></div><div class="ttdoc">Aggregates and analyzes frame timing data over a rolling window.</div><div class="ttdef"><b>Definition</b> <a href="#l00039">FpsMetrics.ixx:39</a></div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_a1e58ec32b7bfe1470a48d63fd3f81e9e"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#a1e58ec32b7bfe1470a48d63fd3f81e9e">helios::engine::tooling::FpsMetrics::getIdleTimeMs</a></div><div class="ttdeci">float getIdleTimeMs() noexcept</div><div class="ttdoc">Gets the most recent frame&#39;s idle time.</div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_a2cd3a59669f6755c77681af1a8e890d5"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#a2cd3a59669f6755c77681af1a8e890d5">helios::engine::tooling::FpsMetrics::getWorkTimeMs</a></div><div class="ttdeci">float getWorkTimeMs() noexcept</div><div class="ttdoc">Gets the most recent frame&#39;s work time.</div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_a89c2f97f8bc7f8e8602beeab2326247e"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#a89c2f97f8bc7f8e8602beeab2326247e">helios::engine::tooling::FpsMetrics::getIdleTimeSeconds</a></div><div class="ttdeci">float getIdleTimeSeconds() noexcept</div><div class="ttdoc">Gets the most recent frame&#39;s idle time in seconds.</div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_a902c44f12d326e5f4cb4d3643b62dd8c"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#a902c44f12d326e5f4cb4d3643b62dd8c">helios::engine::tooling::FpsMetrics::getFrameTimeMs</a></div><div class="ttdeci">float getFrameTimeMs() noexcept</div><div class="ttdoc">Gets the average frame time in milliseconds.</div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_aa409a687ee1e87371274f41653702159"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#aa409a687ee1e87371274f41653702159">helios::engine::tooling::FpsMetrics::getHistorySize</a></div><div class="ttdeci">size_t getHistorySize() const noexcept</div><div class="ttdoc">Gets the current history buffer size.</div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_ab8bd08959d1021083708d14456edb4c4"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#ab8bd08959d1021083708d14456edb4c4">helios::engine::tooling::FpsMetrics::getFrameCount</a></div><div class="ttdeci">unsigned long long getFrameCount() const noexcept</div><div class="ttdoc">Gets the frame count.</div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_aba1373724df39b46b8d19cc6f316e971"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#aba1373724df39b46b8d19cc6f316e971">helios::engine::tooling::FpsMetrics::setHistorySize</a></div><div class="ttdeci">void setHistorySize(size_t size)</div><div class="ttdoc">Sets the size of the frame history buffer.</div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_ac313274306dac08211169482bf243f53"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#ac313274306dac08211169482bf243f53">helios::engine::tooling::FpsMetrics::reset</a></div><div class="ttdeci">void reset()</div><div class="ttdoc">Clears all collected metrics and resets to initial state.</div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_ac873e7ed9952b1b5bb724393af6da1ab"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#ac873e7ed9952b1b5bb724393af6da1ab">helios::engine::tooling::FpsMetrics::getWorkTimeSeconds</a></div><div class="ttdeci">float getWorkTimeSeconds() noexcept</div><div class="ttdoc">Gets the most recent frame&#39;s work time in seconds.</div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_ae28442d7fa258e117a87f55a4fd39368"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#ae28442d7fa258e117a87f55a4fd39368">helios::engine::tooling::FpsMetrics::getHistory</a></div><div class="ttdeci">const std::deque&lt; helios::engine::tooling::FrameStats &gt; &amp; getHistory() const noexcept</div><div class="ttdoc">Gets the complete frame history.</div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_af61aa224056329e89d7cadacf895b33e"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#af61aa224056329e89d7cadacf895b33e">helios::engine::tooling::FpsMetrics::getFrameTimeSeconds</a></div><div class="ttdeci">float getFrameTimeSeconds() noexcept</div><div class="ttdoc">Gets the average frame time in seconds.</div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_af6f7e9d36b9e499216e2b8f573ade6d5"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#af6f7e9d36b9e499216e2b8f573ade6d5">helios::engine::tooling::FpsMetrics::getFps</a></div><div class="ttdeci">float getFps() noexcept</div><div class="ttdoc">Gets the average frames per second.</div></div>
-<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_af833a6e7f41c5aa169c73ba6b96be9b2"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#af833a6e7f41c5aa169c73ba6b96be9b2">helios::engine::tooling::FpsMetrics::addFrame</a></div><div class="ttdeci">void addFrame(const helios::engine::tooling::FrameStats &amp;stats)</div><div class="ttdoc">Adds a frame&#39;s statistics to the metrics history.</div></div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span><span class="comment"></span> </div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span><span class="comment">         * @brief Gets the average frame time in seconds.</span></div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span><span class="comment">         * Convenience wrapper returning the same value as `getFrameTimeMs()`</span></div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span><span class="comment">         * converted from milliseconds to seconds.</span></div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span><span class="comment">         * @return Average total frame time (work + wait) in seconds.</span></div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00286" data-start="{" data-end="}">
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#af61aa224056329e89d7cadacf895b33e">  286</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#af61aa224056329e89d7cadacf895b33e">getFrameTimeSeconds</a>() noexcept {</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>            update();</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>            <span class="keywordflow">return</span> avgFrameTime_ * 0.001f;</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        }</div>
+</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span><span class="comment"></span> </div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span><span class="comment">         * @brief Gets the most recent frame&#39;s work time in seconds.</span></div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span><span class="comment">         * Convenience wrapper returning the same value as `getWorkTimeMs()`</span></div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span><span class="comment">         * converted from milliseconds to seconds.</span></div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span><span class="comment">         * @return Work time of the last processed frame in seconds.</span></div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00299" data-start="{" data-end="}">
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#ac873e7ed9952b1b5bb724393af6da1ab">  299</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#ac873e7ed9952b1b5bb724393af6da1ab">getWorkTimeSeconds</a>() noexcept {</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>            update();</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>            <span class="keywordflow">return</span> lastWorkTime_ * 0.001f;</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>        }</div>
+</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span><span class="comment"></span> </div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span><span class="comment">         * @brief Gets the most recent frame&#39;s idle time in seconds.</span></div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span><span class="comment">         * Convenience wrapper returning the same value as `getIdleTimeMs()`</span></div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span><span class="comment">         * converted from milliseconds to seconds.</span></div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span><span class="comment">         * @return Wait/idle time of the last processed frame in seconds.</span></div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00312" data-start="{" data-end="}">
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#a89c2f97f8bc7f8e8602beeab2326247e">  312</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#a89c2f97f8bc7f8e8602beeab2326247e">getIdleTimeSeconds</a>() noexcept {</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>            update();</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>            <span class="keywordflow">return</span> lastWaitTime_ * 0.001f;</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>        }</div>
+</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span><span class="comment"></span> </div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span><span class="comment">         * @brief Gets the complete frame history.</span></div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span><span class="comment">         * @return Const reference to the deque containing the full frame</span></div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span><span class="comment">         *         statistics history.</span></div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span><span class="comment">         * @note Useful for rendering frame time graphs or diagnostic views</span></div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span><span class="comment">         *       in debug overlays.</span></div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00326" data-start="{" data-end="}">
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#ae28442d7fa258e117a87f55a4fd39368">  326</a></span>        [[nodiscard]] <span class="keyword">const</span> std::deque&lt;helios::engine::tooling::FrameStats&gt;&amp; <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#ae28442d7fa258e117a87f55a4fd39368">getHistory</a>() const noexcept {</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>            <span class="keywordflow">return</span> history_;</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>        }</div>
+</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span><span class="comment"></span> </div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span><span class="comment">         * @brief Clears all collected metrics and resets to initial state.</span></div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span><span class="comment">         * Removes all stored frame statistics and resets cached metrics and</span></div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span><span class="comment">         * counters to their default values. After calling this function,</span></div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span><span class="comment">         * all query functions will report zeros until new frames are added.</span></div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00337" data-start="{" data-end="}">
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno"><a class="line" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#ac313274306dac08211169482bf243f53">  337</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#ac313274306dac08211169482bf243f53">reset</a>() {</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>            history_.clear();</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>            avgFps_ = 0.0f;</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>            avgFrameTime_ = 0.0f;</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>            lastWorkTime_ = 0.0f;</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>            lastWaitTime_ = 0.0f;</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>            frameCount_ = 0;</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>            needsUpdate_ = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>        }</div>
+</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>    };</div>
+</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>}</div>
+</div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html">helios::engine::tooling::FpsMetrics</a></div><div class="ttdoc">Aggregates and analyzes frame timing data over a rolling window.</div><div class="ttdef"><b>Definition</b> <a href="#l00040">FpsMetrics.ixx:40</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_a1e58ec32b7bfe1470a48d63fd3f81e9e"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#a1e58ec32b7bfe1470a48d63fd3f81e9e">helios::engine::tooling::FpsMetrics::getIdleTimeMs</a></div><div class="ttdeci">float getIdleTimeMs() noexcept</div><div class="ttdoc">Gets the most recent frame&#39;s idle time.</div><div class="ttdef"><b>Definition</b> <a href="#l00264">FpsMetrics.ixx:264</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_a2cd3a59669f6755c77681af1a8e890d5"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#a2cd3a59669f6755c77681af1a8e890d5">helios::engine::tooling::FpsMetrics::getWorkTimeMs</a></div><div class="ttdeci">float getWorkTimeMs() noexcept</div><div class="ttdoc">Gets the most recent frame&#39;s work time.</div><div class="ttdef"><b>Definition</b> <a href="#l00252">FpsMetrics.ixx:252</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_a89c2f97f8bc7f8e8602beeab2326247e"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#a89c2f97f8bc7f8e8602beeab2326247e">helios::engine::tooling::FpsMetrics::getIdleTimeSeconds</a></div><div class="ttdeci">float getIdleTimeSeconds() noexcept</div><div class="ttdoc">Gets the most recent frame&#39;s idle time in seconds.</div><div class="ttdef"><b>Definition</b> <a href="#l00312">FpsMetrics.ixx:312</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_a902c44f12d326e5f4cb4d3643b62dd8c"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#a902c44f12d326e5f4cb4d3643b62dd8c">helios::engine::tooling::FpsMetrics::getFrameTimeMs</a></div><div class="ttdeci">float getFrameTimeMs() noexcept</div><div class="ttdoc">Gets the average frame time in milliseconds.</div><div class="ttdef"><b>Definition</b> <a href="#l00240">FpsMetrics.ixx:240</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_aa409a687ee1e87371274f41653702159"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#aa409a687ee1e87371274f41653702159">helios::engine::tooling::FpsMetrics::getHistorySize</a></div><div class="ttdeci">size_t getHistorySize() const noexcept</div><div class="ttdoc">Gets the current history buffer size.</div><div class="ttdef"><b>Definition</b> <a href="#l00216">FpsMetrics.ixx:216</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_ab8bd08959d1021083708d14456edb4c4"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#ab8bd08959d1021083708d14456edb4c4">helios::engine::tooling::FpsMetrics::getFrameCount</a></div><div class="ttdeci">unsigned long long getFrameCount() const noexcept</div><div class="ttdoc">Gets the frame count.</div><div class="ttdef"><b>Definition</b> <a href="#l00274">FpsMetrics.ixx:274</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_aba1373724df39b46b8d19cc6f316e971"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#aba1373724df39b46b8d19cc6f316e971">helios::engine::tooling::FpsMetrics::setHistorySize</a></div><div class="ttdeci">void setHistorySize(size_t size)</div><div class="ttdoc">Sets the size of the frame history buffer.</div><div class="ttdef"><b>Definition</b> <a href="#l00203">FpsMetrics.ixx:203</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_ac313274306dac08211169482bf243f53"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#ac313274306dac08211169482bf243f53">helios::engine::tooling::FpsMetrics::reset</a></div><div class="ttdeci">void reset()</div><div class="ttdoc">Clears all collected metrics and resets to initial state.</div><div class="ttdef"><b>Definition</b> <a href="#l00337">FpsMetrics.ixx:337</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_ac873e7ed9952b1b5bb724393af6da1ab"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#ac873e7ed9952b1b5bb724393af6da1ab">helios::engine::tooling::FpsMetrics::getWorkTimeSeconds</a></div><div class="ttdeci">float getWorkTimeSeconds() noexcept</div><div class="ttdoc">Gets the most recent frame&#39;s work time in seconds.</div><div class="ttdef"><b>Definition</b> <a href="#l00299">FpsMetrics.ixx:299</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_ae28442d7fa258e117a87f55a4fd39368"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#ae28442d7fa258e117a87f55a4fd39368">helios::engine::tooling::FpsMetrics::getHistory</a></div><div class="ttdeci">const std::deque&lt; helios::engine::tooling::FrameStats &gt; &amp; getHistory() const noexcept</div><div class="ttdoc">Gets the complete frame history.</div><div class="ttdef"><b>Definition</b> <a href="#l00326">FpsMetrics.ixx:326</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_af61aa224056329e89d7cadacf895b33e"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#af61aa224056329e89d7cadacf895b33e">helios::engine::tooling::FpsMetrics::getFrameTimeSeconds</a></div><div class="ttdeci">float getFrameTimeSeconds() noexcept</div><div class="ttdoc">Gets the average frame time in seconds.</div><div class="ttdef"><b>Definition</b> <a href="#l00286">FpsMetrics.ixx:286</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_af6f7e9d36b9e499216e2b8f573ade6d5"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#af6f7e9d36b9e499216e2b8f573ade6d5">helios::engine::tooling::FpsMetrics::getFps</a></div><div class="ttdeci">float getFps() noexcept</div><div class="ttdoc">Gets the average frames per second.</div><div class="ttdef"><b>Definition</b> <a href="#l00228">FpsMetrics.ixx:228</a></div></div>
+<div class="ttc" id="aclasshelios_1_1engine_1_1tooling_1_1FpsMetrics_html_af833a6e7f41c5aa169c73ba6b96be9b2"><div class="ttname"><a href="classhelios_1_1engine_1_1tooling_1_1FpsMetrics.html#af833a6e7f41c5aa169c73ba6b96be9b2">helios::engine::tooling::FpsMetrics::addFrame</a></div><div class="ttdeci">void addFrame(const helios::engine::tooling::FrameStats &amp;stats)</div><div class="ttdoc">Adds a frame&#39;s statistics to the metrics history.</div><div class="ttdef"><b>Definition</b> <a href="#l00181">FpsMetrics.ixx:181</a></div></div>
 <div class="ttc" id="amodule__helios_8engine_8tooling_8FpsMetrics_html"><div class="ttname"><a href="module__helios_8engine_8tooling_8FpsMetrics.html">helios.engine.tooling.FpsMetrics</a></div></div>
 <div class="ttc" id="amodule__helios_8engine_8tooling_8FrameStats_html"><div class="ttname"><a href="module__helios_8engine_8tooling_8FrameStats.html">helios.engine.tooling.FrameStats</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1engine_1_1tooling_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1tooling.html">helios::engine::tooling</a></div><div class="ttdoc">Tooling utilities for diagnostics, metrics and developer overlays.</div><div class="ttdef"><b>Definition</b> <a href="#l00013">FpsMetrics.ixx:13</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1engine_html"><div class="ttname"><a href="namespacehelios_1_1engine.html">helios::engine</a></div><div class="ttdoc">Main engine module aggregating core infrastructure and game systems.</div><div class="ttdef"><b>Definition</b> <a href="GameObjectPoolId_8ixx_source.html#l00013">GameObjectPoolId.ixx:13</a></div></div>
-<div class="ttc" id="anamespacehelios_html"><div class="ttname"><a href="namespacehelios.html">helios</a></div><div class="ttdef"><b>Definition</b> <a href="GLFWApplication_8ixx_source.html#l00025">GLFWApplication.ixx:25</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1engine_1_1tooling_html"><div class="ttname"><a href="namespacehelios_1_1engine_1_1tooling.html">helios::engine::tooling</a></div><div class="ttdoc">Tooling utilities for diagnostics, metrics and developer overlays.</div><div class="ttdef"><b>Definition</b> <a href="#l00014">FpsMetrics.ixx:14</a></div></div>
 <div class="ttc" id="astructhelios_1_1engine_1_1tooling_1_1FrameStats_html"><div class="ttname"><a href="structhelios_1_1engine_1_1tooling_1_1FrameStats.html">helios::engine::tooling::FrameStats</a></div><div class="ttdoc">Contains timing statistics for a single frame.</div><div class="ttdef"><b>Definition</b> <a href="FrameStats_8ixx_source.html#l00019">FrameStats.ixx:19</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -413,7 +507,7 @@ $(function() {
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_08c09894bd9f0ab4b1e9fdc7a2628766.html">helios</a></li><li class="navelem"><a href="dir_860c9de2f65c10e8e262a0e7b5bfee5e.html">engine</a></li><li class="navelem"><a href="dir_b455ca46f56b25e6f79d18a91f2ddf15.html">tooling</a></li><li class="navelem"><a href="FpsMetrics_8ixx.html">FpsMetrics.ixx</a></li>
+    <li class="navelem"><a href="dir_8af83c0dc83a45a35ca6968cdc29a7af.html">tmp</a></li><li class="navelem"><a href="dir_25ba8c016aaabea63a88c40dc27775c8.html">h</a></li><li class="navelem"><a href="dir_b3f59628e993ded3576abd1cf1101eb8.html">include</a></li><li class="navelem"><a href="dir_1ac1243035b4576c146b8d2c8a6274f6.html">helios</a></li><li class="navelem"><a href="dir_1e46d961eb277b2583ee5b095f5b4c8e.html">engine</a></li><li class="navelem"><a href="dir_417701c4e551058911a40fafc2072bfe.html">tooling</a></li><li class="navelem"><a href="FpsMetrics_8ixx.html">FpsMetrics.ixx</a></li>
     <li class="footer">Generated on <span class="timestamp"></span> for helios by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

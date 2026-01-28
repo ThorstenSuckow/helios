@@ -7,8 +7,8 @@ var module__helios_8engine_8runtime_8world_8GameWorld =
     [ "helios::engine::runtime::world::GameWorld::level", "module__helios_8engine_8runtime_8world_8GameWorld.html#a49f6a9068ec4cc0408ded2c8bd60f1ba", null ],
     [ "helios::engine::runtime::world::GameWorld::hasManager", "module__helios_8engine_8runtime_8world_8GameWorld.html#ab53994280aeec233c1dd91f02a09e589", null ],
     [ "helios::engine::runtime::world::GameWorld::addManager", "module__helios_8engine_8runtime_8world_8GameWorld.html#a7c60c2fdaba967d2415a3d8b253a425d", null ],
-    [ "helios::engine::runtime::world::GameWorld::registerSpawnRequestHandler", "module__helios_8engine_8runtime_8world_8GameWorld.html#a375c543b65fe74155bc30cd2dccc083e", null ],
-    [ "helios::engine::runtime::world::GameWorld::spawnRequestHandler", "module__helios_8engine_8runtime_8world_8GameWorld.html#a31886c089f3f03ad3ea91ba5f5b4782e", null ],
+    [ "helios::engine::runtime::world::GameWorld::registerSpawnCommandHandler", "module__helios_8engine_8runtime_8world_8GameWorld.html#a035f7979ac9743fceecaeea93204cd37", null ],
+    [ "helios::engine::runtime::world::GameWorld::spawnCommandHandler", "module__helios_8engine_8runtime_8world_8GameWorld.html#a81250d5cb4d49746a9702d9f4a66d6ec", null ],
     [ "helios::engine::runtime::world::GameWorld::getManager", "module__helios_8engine_8runtime_8world_8GameWorld.html#aa5461339dafdae850a4327e59a1ba112", null ],
     [ "helios::engine::runtime::world::GameWorld::flushManagers", "module__helios_8engine_8runtime_8world_8GameWorld.html#a72cd30e709f646b83f18c50c97f57b3c", null ],
     [ "helios::engine::runtime::world::GameWorld::addGameObject", "module__helios_8engine_8runtime_8world_8GameWorld.html#a28a53dcdcfb8880867db35145d88d3e2", null ],
@@ -23,5 +23,5 @@ var module__helios_8engine_8runtime_8world_8GameWorld =
     [ "helios::engine::runtime::world::GameWorld::logger_", "module__helios_8engine_8runtime_8world_8GameWorld.html#a5cc257dd2ebbd269a60b9891889f4b50", null ],
     [ "helios::engine::runtime::world::GameWorld::managers_", "module__helios_8engine_8runtime_8world_8GameWorld.html#aae88d3ee210e2e4ed03cbba46419734d", null ],
     [ "helios::engine::runtime::world::GameWorld::level_", "module__helios_8engine_8runtime_8world_8GameWorld.html#a70d324aa0446f3bc86e89b0774bdd963", null ],
-    [ "helios::engine::runtime::world::GameWorld::poolManagerRegistry_", "module__helios_8engine_8runtime_8world_8GameWorld.html#a023df3b9ab0ffdc129c3126a672dff5a", null ]
+    [ "helios::engine::runtime::world::GameWorld::spawnCommandHandlerRegistry_", "module__helios_8engine_8runtime_8world_8GameWorld.html#ae3bae7b84d6f67f747d4129f2e7101ec", null ]
 ];

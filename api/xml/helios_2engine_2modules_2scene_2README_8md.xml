@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="helios_2engine_2modules_2scene_2README_8md" kind="file" language="Markdown">
-    <compoundname>README.md</compoundname>
+    <compoundname>helios/engine/modules/scene/README.md</compoundname>
     <innernamespace refid="namespacehelios_1_1engine_1_1modules_1_1scene">helios::engine::modules::scene</innernamespace>
     <briefdescription>
     </briefdescription>
@@ -14,6 +14,54 @@
 <codeline></codeline>
 <codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>components<sp/>and<sp/>systems<sp/>that<sp/>bridge<sp/>the<sp/>game<sp/>logic<sp/>layer<sp/>(GameObjects)<sp/>with<sp/>the<sp/>rendering<sp/>layer<sp/>(SceneNodes).</highlight></codeline>
 <codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Submodules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Submodule<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-----------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`components/`<sp/>|<sp/>Scene<sp/>node<sp/>reference<sp/>components<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`systems/`<sp/>|<sp/>Transform<sp/>synchronization<sp/>with<sp/>scene<sp/>graph<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SceneNodeComponent`<sp/>|<sp/>Holds<sp/>reference<sp/>to<sp/>the<sp/>entity&apos;s<sp/>SceneNode<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SceneSyncSystem`<sp/>|<sp/>Syncs<sp/>composed<sp/>transforms<sp/>to<sp/>SceneNodes<sp/>each<sp/>frame<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Architecture</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>scene<sp/>module<sp/>bridges<sp/>two<sp/>layers:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>**Game<sp/>Layer**:<sp/>GameObjects<sp/>with<sp/>ComposeTransformComponent</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Render<sp/>Layer**:<sp/>SceneNodes<sp/>with<sp/>world<sp/>transforms</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">`SceneSyncSystem`<sp/>copies<sp/>the<sp/>composed<sp/>transform<sp/>matrix<sp/>from<sp/>each<sp/>GameObject<sp/>to<sp/>its<sp/>associated<sp/>SceneNode,<sp/>keeping<sp/>the<sp/>visual<sp/>representation<sp/>in<sp/>sync<sp/>with<sp/>game<sp/>state.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Create<sp/>scene<sp/>node<sp/>for<sp/>entity</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>sceneNode<sp/>=<sp/>scene.rootNode().createChild();</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Create<sp/>entity<sp/>with<sp/>scene<sp/>integration</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>player<sp/>=<sp/>GameObjectFactory::gameObject()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withRendering([&amp;](auto&amp;<sp/>r)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>r.renderable()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.shape(triangleShape)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.shader(shader)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.attachTo(sceneNode);<sp/><sp/>//<sp/>Links<sp/>to<sp/>SceneNode</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.make(true);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>SceneNodeComponent<sp/>is<sp/>added<sp/>automatically<sp/>by<sp/>RenderingBuilder</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Manual<sp/>access<sp/>if<sp/>needed:</highlight></codeline>
+<codeline><highlight class="normal">auto*<sp/>snc<sp/>=<sp/>player-&gt;get&lt;SceneNodeComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal">helios::scene::SceneNode*<sp/>node<sp/>=<sp/>snc-&gt;sceneNode();</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Register<sp/>sync<sp/>system<sp/>in<sp/>Post<sp/>phase</highlight></codeline>
+<codeline><highlight class="normal">gameLoop.phase(PhaseType::Post).addPass()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addSystem&lt;SceneSyncSystem&gt;(&amp;gameWorld,<sp/>&amp;scene);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
@@ -24,6 +72,6 @@
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
 <codeline></codeline>
     </programlisting>
-    <location file="include/helios/engine/modules/scene/README.md"/>
+    <location file="/tmp/h/include/helios/engine/modules/scene/README.md"/>
   </compounddef>
 </doxygen>

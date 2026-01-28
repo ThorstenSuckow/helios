@@ -1,8 +1,15 @@
 var searchData=
 [
-  ['game_20system_0',['8. Game System',['../index.html#autotoc_md352',1,'']]],
-  ['gameobjectfilter_1',['GameObjectFilter',['../dir_4abfc5de19138d0df20e9d7e5fc1ea64.html#autotoc_md60',1,'']]],
-  ['glfw_2',['&lt;span class=&quot;tt&quot;&gt;helios.ext.glfw&lt;/span&gt;',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md29',1,'']]],
-  ['glfw_20opengl_3',['Quick Start with GLFW + OpenGL',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md27',1,'']]],
-  ['graph_4',['1. Scene Graph',['../index.html#autotoc_md346',1,'']]]
+  ['game_20system_0',['8. Game System',['../index.html#autotoc_md511',1,'']]],
+  ['gameobject_1',['GameObject',['../dir_a8f8c4b70d3587fcf7159bd2d30de216.html#autotoc_md97',1,'Cloning an Existing GameObject'],['../dir_a8f8c4b70d3587fcf7159bd2d30de216.html#autotoc_md96',1,'Creating a New GameObject']]],
+  ['gameobject_2',['gameObject/',['../dir_a8f8c4b70d3587fcf7159bd2d30de216.html#autotoc_md92',1,'']]],
+  ['gameobject_20builders_3',['gameObject/builders/',['../dir_a8f8c4b70d3587fcf7159bd2d30de216.html#autotoc_md93',1,'']]],
+  ['gameobject_20builders_20configs_4',['gameObject/builders/configs/',['../dir_a8f8c4b70d3587fcf7159bd2d30de216.html#autotoc_md94',1,'']]],
+  ['gameobjectfactory_5',['GameObjectFactory',['../dir_a108d9e19c5aa79c49bc6bd27980ebb3.html#autotoc_md83',1,'GameObjectFactory'],['../dir_40abc66e1b4db114e64ae16d6ae11ca0.html#autotoc_md221',1,'Using with GameObjectFactory']]],
+  ['gameobjectfilter_6',['GameObjectFilter',['../dir_6634d24428e27f0a06eb229019da5d06.html#autotoc_md117',1,'']]],
+  ['gameobjectprototype_7',['GameObjectPrototype',['../dir_a108d9e19c5aa79c49bc6bd27980ebb3.html#autotoc_md84',1,'']]],
+  ['gameplay_8',['Gameplay',['../dir_c01646dfa756089b07ac7b4e7ae63e35.html#autotoc_md66',1,'']]],
+  ['glfw_9',['&lt;span class=&quot;tt&quot;&gt;helios.ext.glfw&lt;/span&gt;',['../dir_c65593c1e2ce5122a06a0735d96badb1.html#autotoc_md29',1,'']]],
+  ['glfw_20opengl_10',['Quick Start with GLFW + OpenGL',['../dir_c65593c1e2ce5122a06a0735d96badb1.html#autotoc_md27',1,'']]],
+  ['graph_11',['1. Scene Graph',['../index.html#autotoc_md505',1,'']]]
 ];

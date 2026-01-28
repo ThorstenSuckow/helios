@@ -15,5 +15,5 @@ var module__helios_8rendering_8Viewport =
     [ "helios::rendering::Viewport::setClearFlags", "module__helios_8rendering_8Viewport.html#a7199b3df8a9c5817eaa21173a9c6e434", null ],
     [ "helios::rendering::Viewport::setClearColor", "module__helios_8rendering_8Viewport.html#af94f8b0ec7697edea1c0cf843c03ad3d", null ],
     [ "helios::rendering::Viewport::setZIndex", "module__helios_8rendering_8Viewport.html#af7fa261780058e3f8b85cb2d8b504fc0", null ],
-    [ "helios::rendering::Viewport::onRenderTargetResize", "module__helios_8rendering_8Viewport.html#a7739f87efe62f23fb891fe9cbfc4e1c2", null ]
+    [ "helios::rendering::Viewport::onRenderTargetResize", "module__helios_8rendering_8Viewport.html#a7909b0f32a87664efeaabf7ca6fe51a4", null ]
 ];

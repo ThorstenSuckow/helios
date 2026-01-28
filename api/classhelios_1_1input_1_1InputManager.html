@@ -128,8 +128,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ab46c4ce60870839d557ba3d141964f01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Polls events from the currently observed window and registered gamepads.  <br /></td></tr>
 <tr class="memitem:a9cdcf0b8c5ca77db5cba2498132479f1" id="r_a9cdcf0b8c5ca77db5cba2498132479f1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9cdcf0b8c5ca77db5cba2498132479f1">isKeyPressed</a> (const <a class="el" href="namespacehelios_1_1input_1_1types.html#a963e220296531c047308439c3425bcc5">helios::input::types::Key</a> &amp;key) const noexcept</td></tr>
 <tr class="memdesc:a9cdcf0b8c5ca77db5cba2498132479f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the specified key is currently pressed, otherwise false.  <br /></td></tr>
-<tr class="memitem:a138047fd0784a90715758d5e44afea3d" id="r_a138047fd0784a90715758d5e44afea3d"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a138047fd0784a90715758d5e44afea3d">registerGamepads</a> (unsigned int gamepadMask) noexcept</td></tr>
-<tr class="memdesc:a138047fd0784a90715758d5e44afea3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Explicitly tells this <a class="el" href="classhelios_1_1input_1_1InputManager.html" title="InputManager providing access to various input states.">InputManager</a> which gamepads to poll for input states in `poll()`.  <br /></td></tr>
+<tr class="memitem:a50c3854c194f5f40d1e5a724f5512c0c" id="r_a50c3854c194f5f40d1e5a724f5512c0c"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a50c3854c194f5f40d1e5a724f5512c0c">registerGamepads</a> (unsigned int mask) noexcept</td></tr>
+<tr class="memdesc:a50c3854c194f5f40d1e5a724f5512c0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Explicitly tells this <a class="el" href="classhelios_1_1input_1_1InputManager.html" title="InputManager providing access to various input states.">InputManager</a> which gamepads to poll for input states in `poll()`.  <br /></td></tr>
 <tr class="memitem:a3ae14ffca9c0950090bffa87d8ef7b7f" id="r_a3ae14ffca9c0950090bffa87d8ef7b7f"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classhelios_1_1input_1_1gamepad_1_1GamepadState.html">helios::input::gamepad::GamepadState</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3ae14ffca9c0950090bffa87d8ef7b7f">gamepadState</a> (<a class="el" href="namespacehelios_1_1input_1_1types.html#a4dd39c1a113edbe36b92b088d8dbf2ff">helios::input::types::Gamepad</a> gamepadId) const noexcept</td></tr>
 <tr class="memdesc:a3ae14ffca9c0950090bffa87d8ef7b7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a const reference to the `GamepadState` for the specified `gamepadId`.  <br /></td></tr>
 <tr class="memitem:aabc1c034f222ef983272ac4145575458" id="r_aabc1c034f222ef983272ac4145575458"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aabc1c034f222ef983272ac4145575458">isConnected</a> (<a class="el" href="namespacehelios_1_1input_1_1types.html#a4dd39c1a113edbe36b92b088d8dbf2ff">helios::input::types::Gamepad</a> gamepadId) const noexcept</td></tr>
@@ -150,7 +150,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 <p>The `InputManager` acts as an intermediary between the application and the underlying systems that provide input. Raw events are processed by InputAdapters owned by this `InputManager`.</p>
 <p>An `InputManager` allows querying `GamepadState` objects by calling `gamepadState()`. The method accepts an id that identifies the gamepad whose input state should be returned. </p>
 
-<p class="definition">Definition at line <a class="el" href="InputManager_8ixx_source.html#l00034">34</a> of file <a class="el" href="InputManager_8ixx_source.html">InputManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="InputManager_8ixx_source.html#l00036">36</a> of file <a class="el" href="InputManager_8ixx_source.html">InputManager.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4981679919003c18830da98f4e3c8e65" name="a4981679919003c18830da98f4e3c8e65"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4981679919003c18830da98f4e3c8e65">&#9670;&#160;</a></span>InputManager()</h2>
@@ -170,7 +170,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel explicit">explicit</span><span class="mlabel export">export</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel export">export</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -183,6 +183,8 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="InputManager_8ixx_source.html#l00069">69</a> of file <a class="el" href="InputManager_8ixx_source.html">InputManager.ixx</a>.</p>
 
 </div>
 </div>
@@ -205,7 +207,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -223,6 +225,8 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#aabc1c034f222ef983272ac4145575458" title="Returns true if the specified gamepad is connected, otherwise false.">isConnected()</a> </dd>
 <dd>
 <a class="el" href="#ab46c4ce60870839d557ba3d141964f01" title="Polls events from the currently observed window and registered gamepads.">poll()</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="InputManager_8ixx_source.html#l00186">186</a> of file <a class="el" href="InputManager_8ixx_source.html">InputManager.ixx</a>.</p>
 
 </div>
 </div>
@@ -244,7 +248,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -252,13 +256,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 <p>Retrieves the <a class="el" href="classhelios_1_1input_1_1InputAdapter.html" title="Abstract interface for platform-specific input adapters.">InputAdapter</a> associated with this <a class="el" href="classhelios_1_1input_1_1InputManager.html" title="InputManager providing access to various input states.">InputManager</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd>A reference to the <a class="el" href="classhelios_1_1input_1_1InputAdapter.html" title="Abstract interface for platform-specific input adapters.">InputAdapter</a> associated with this <a class="el" href="classhelios_1_1input_1_1InputManager.html" title="InputManager providing access to various input states.">InputManager</a>. </dd></dl>
 
-<p class="reference">Referenced by <a class="el" href="#a572c0a1172916da778df50383c475e97">inputAdapter()</a>.</p>
-<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1input_1_1InputManager_a3702474b44961f776a97501f13d1620b_icgraph.svg" width="459" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="InputManager_8ixx_source.html#l00207">207</a> of file <a class="el" href="InputManager_8ixx_source.html">InputManager.ixx</a>.</p>
 
 </div>
 </div>
@@ -280,7 +278,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -289,13 +287,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 <p>This non-const overload allows modification of <a class="el" href="classhelios_1_1input_1_1InputAdapter.html" title="Abstract interface for platform-specific input adapters.">InputAdapter</a> settings, such as gamepad deadzone and axis inversion configuration.</p>
 <dl class="section return"><dt>Returns</dt><dd>A reference to the <a class="el" href="classhelios_1_1input_1_1InputAdapter.html" title="Abstract interface for platform-specific input adapters.">InputAdapter</a> associated with this <a class="el" href="classhelios_1_1input_1_1InputManager.html" title="InputManager providing access to various input states.">InputManager</a>. </dd></dl>
 
-<p class="reference">References <a class="el" href="#a3702474b44961f776a97501f13d1620b">inputAdapter()</a>.</p>
-<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1input_1_1InputManager_a572c0a1172916da778df50383c475e97_cgraph.svg" width="459" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="InputManager_8ixx_source.html#l00219">219</a> of file <a class="el" href="InputManager_8ixx_source.html">InputManager.ixx</a>.</p>
 
 </div>
 </div>
@@ -317,7 +309,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -330,6 +322,8 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if a gamepad was found for the specified `gamepadId`, otherwise false. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="InputManager_8ixx_source.html#l00197">197</a> of file <a class="el" href="InputManager_8ixx_source.html">InputManager.ixx</a>.</p>
 
 </div>
 </div>
@@ -351,7 +345,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -366,6 +360,10 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the key is pressed; returns false if the observed window is not set. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="InputManager_8ixx_source.html#l00131">131</a> of file <a class="el" href="InputManager_8ixx_source.html">InputManager.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="InputManager_8ixx_source.html#l00058">logger_</a>.</p>
 
 </div>
 </div>
@@ -387,7 +385,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -400,6 +398,8 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="InputManager_8ixx_source.html#l00080">80</a> of file <a class="el" href="InputManager_8ixx_source.html">InputManager.ixx</a>.</p>
 
 </div>
 </div>
@@ -421,7 +421,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -429,6 +429,8 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 <p>Returns a non-owning pointer to the currently observed window. </p>
 <p>Returns `nullptr` if no window is currently observed.</p>
 <dl class="section return"><dt>Returns</dt><dd>A non-owning pointer to the currently observed window, or `nullptr`. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="InputManager_8ixx_source.html#l00092">92</a> of file <a class="el" href="InputManager_8ixx_source.html">InputManager.ixx</a>.</p>
 
 </div>
 </div>
@@ -450,7 +452,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -465,10 +467,14 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="InputManager_8ixx_source.html#l00110">110</a> of file <a class="el" href="InputManager_8ixx_source.html">InputManager.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="InputManager_8ixx_source.html#l00058">logger_</a>.</p>
+
 </div>
 </div>
-<a id="a138047fd0784a90715758d5e44afea3d" name="a138047fd0784a90715758d5e44afea3d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a138047fd0784a90715758d5e44afea3d">&#9670;&#160;</a></span>registerGamepads()</h2>
+<a id="a50c3854c194f5f40d1e5a724f5512c0c" name="a50c3854c194f5f40d1e5a724f5512c0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50c3854c194f5f40d1e5a724f5512c0c">&#9670;&#160;</a></span>registerGamepads()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -479,13 +485,13 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
         <tr>
           <td class="memname">unsigned int helios::input::InputManager::registerGamepads </td>
           <td>(</td>
-          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>gamepadMask</em></span></td><td>)</td>
+          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>mask</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -499,10 +505,14 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The bitmask this <a class="el" href="classhelios_1_1input_1_1InputManager.html" title="InputManager providing access to various input states.">InputManager</a> uses for polling gamepad states. If an invalid mask is provided, the method returns a mask that represents no gamepads. </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="InputManager_8ixx_source.html#l00151">151</a> of file <a class="el" href="InputManager_8ixx_source.html">InputManager.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="InputManager_8ixx_source.html#l00058">logger_</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>include/helios/input/<a class="el" href="InputManager_8ixx_source.html">InputManager.ixx</a></li>
+<li><a class="el" href="InputManager_8ixx_source.html">InputManager.ixx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

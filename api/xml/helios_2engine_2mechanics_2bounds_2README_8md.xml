@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="helios_2engine_2mechanics_2bounds_2README_8md" kind="file" language="Markdown">
-    <compoundname>README.md</compoundname>
+    <compoundname>helios/engine/mechanics/bounds/README.md</compoundname>
     <innernamespace refid="namespacehelios_1_1engine_1_1mechanics_1_1bounds">helios::engine::mechanics::bounds</innernamespace>
     <briefdescription>
     </briefdescription>
@@ -14,6 +14,54 @@
 <codeline></codeline>
 <codeline><highlight class="normal">This<sp/>module<sp/>handles<sp/>entity<sp/>behavior<sp/>when<sp/>interacting<sp/>with<sp/>level<sp/>boundaries,<sp/>including<sp/>bouncing,<sp/>wrapping,<sp/>and<sp/>despawning.</highlight></codeline>
 <codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Submodules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Submodule<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-----------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`components/`<sp/>|<sp/>Boundary<sp/>behavior<sp/>configuration<sp/>per<sp/>entity<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`systems/`<sp/>|<sp/>Boundary<sp/>check<sp/>and<sp/>response<sp/>logic<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`LevelBoundsBehaviorComponent`<sp/>|<sp/>Stores<sp/>behavior<sp/>type<sp/>(bounce,<sp/>wrap,<sp/>despawn)<sp/>and<sp/>restitution<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`LevelBoundsBehaviorSystem`<sp/>|<sp/>Checks<sp/>bounds<sp/>and<sp/>applies<sp/>configured<sp/>behavior<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Behavior<sp/>Types</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Type<sp/>|<sp/>Effect<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|------|--------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`Bounce`<sp/>|<sp/>Reflects<sp/>velocity<sp/>off<sp/>boundary<sp/>with<sp/>restitution<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`Wrap`<sp/>|<sp/>Teleports<sp/>entity<sp/>to<sp/>opposite<sp/>side<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`Despawn`<sp/>|<sp/>Removes<sp/>entity<sp/>from<sp/>world<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`Clamp`<sp/>|<sp/>Stops<sp/>at<sp/>boundary<sp/>edge<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Configure<sp/>projectile<sp/>to<sp/>despawn<sp/>at<sp/>boundaries</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>bullet<sp/>=<sp/>GameObjectFactory::gameObject()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withCollision([](auto&amp;<sp/>c)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>c.levelBounds()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.behavior(LevelBoundsBehavior::Despawn);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.make(true);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Configure<sp/>enemy<sp/>to<sp/>bounce<sp/>off<sp/>boundaries</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>enemy<sp/>=<sp/>GameObjectFactory::gameObject()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withCollision([](auto&amp;<sp/>c)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>c.levelBounds()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.behavior(LevelBoundsBehavior::Bounce)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.restitution(0.8f);<sp/><sp/>//<sp/>80%<sp/>velocity<sp/>retained</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.make(true);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Add<sp/>system<sp/>to<sp/>game<sp/>loop</highlight></codeline>
+<codeline><highlight class="normal">gameLoop.phase(PhaseType::Main).addPass()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addSystem&lt;LevelBoundsBehaviorSystem&gt;(&amp;gameWorld);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
@@ -24,6 +72,6 @@
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
 <codeline></codeline>
     </programlisting>
-    <location file="include/helios/engine/mechanics/bounds/README.md"/>
+    <location file="/tmp/h/include/helios/engine/mechanics/bounds/README.md"/>
   </compounddef>
 </doxygen>

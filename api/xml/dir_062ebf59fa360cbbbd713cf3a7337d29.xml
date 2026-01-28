@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_062ebf59fa360cbbbd713cf3a7337d29" kind="dir">
+    <compoundname>command</compoundname>
+    <innerfile refid="helios_2engine_2runtime_2messaging_2command_2__module_8ixx">helios/engine/runtime/messaging/command/_module.ixx</innerfile>
+    <innerfile refid="CommandBuffer_8ixx">CommandBuffer.ixx</innerfile>
+    <innerfile refid="TargetedCommand_8ixx">TargetedCommand.ixx</innerfile>
+    <innerfile refid="TargetedCommandDispatcher_8ixx">TargetedCommandDispatcher.ixx</innerfile>
+    <innerfile refid="TypedTargetedCommandDispatcher_8ixx">TypedTargetedCommandDispatcher.ixx</innerfile>
+    <innerfile refid="TypedWorldCommandDispatcher_8ixx">TypedWorldCommandDispatcher.ixx</innerfile>
+    <innerfile refid="WorldCommand_8ixx">WorldCommand.ixx</innerfile>
+    <innerfile refid="WorldCommandDispatcher_8ixx">WorldCommandDispatcher.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md349">
+<title>helios::engine::runtime::messaging::command</title><para>Command pattern implementation for deferred action execution.</para>
+<para>This module provides the Command pattern implementation for the helios engine. Commands encapsulate game actions that can be buffered and executed at a later point in the game loop, enabling decoupled input handling and action processing.</para>
+</sect1>
+<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md350">
+<title>Key Classes</title><para><table rows="6" cols="2"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>TargetedCommand</computeroutput>  </para>
+</entry><entry thead="no"><para>Abstract base for commands targeting a specific GameObject  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>WorldCommand</computeroutput>  </para>
+</entry><entry thead="no"><para>Abstract base for commands operating on the entire GameWorld  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>CommandBuffer</computeroutput>  </para>
+</entry><entry thead="no"><para>Queue for buffering and batch-executing commands  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>TargetedCommandDispatcher</computeroutput>  </para>
+</entry><entry thead="no"><para>Abstract dispatcher interface for TargetedCommand handling  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>WorldCommandDispatcher</computeroutput>  </para>
+</entry><entry thead="no"><para>Abstract dispatcher interface for WorldCommand handling  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md351">
+<title>Execution Order</title><para>During <computeroutput>CommandBuffer::flush()</computeroutput>: 1. <bold>WorldCommands</bold> are processed first (global actions like spawning) 2. <bold>TargetedCommands</bold> are processed second (per-entity actions like movement)</para>
+</sect1>
+<sect1 id="dir_062ebf59fa360cbbbd713cf3a7337d29_1autotoc_md352">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>1.<sp/>Create<sp/>command<sp/>and<sp/>enqueue<sp/>via<sp/>UpdateContext</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>moveCmd<sp/>=<sp/>std::make_unique&lt;Move2DCommand&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>playerGuid,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1math_1aeab5c7e555a142f8f763a3317460d5c0" kindref="member">helios::math::vec2f</ref>{1.0f,<sp/>0.0f},<sp/><sp/></highlight><highlight class="comment">//<sp/>direction</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>1.0f<sp/><sp/></highlight><highlight class="comment">//<sp/>throttle</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal">updateContext.commandBuffer().enqueue(std::move(moveCmd));</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>2.<sp/>Register<sp/>dispatcher<sp/>for<sp/>command<sp/>type</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>moveDispatcher<sp/>=<sp/>std::make_unique&lt;TypedTargetedCommandDispatcher&lt;Move2DCommand&gt;&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>[&amp;](</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Move2DCommand&amp;<sp/>cmd,<sp/>GameObject*<sp/>target)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>move<sp/>=<sp/>target-&gt;get&lt;Move2DComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>move-&gt;setDirection(cmd.direction());</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>move-&gt;setThrottle(cmd.throttle());</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal">commandBuffer.registerDispatcher(std::move(moveDispatcher));</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>3.<sp/>Commands<sp/>are<sp/>automatically<sp/>flushed<sp/>at<sp/>phase<sp/>boundaries</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/runtime/messaging/command/"/>
+  </compounddef>
+</doxygen>

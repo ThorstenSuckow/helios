@@ -1,0 +1,229 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1DistributedSpawnPlacer" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>helios::engine::runtime::spawn::behavior::placements::DistributedSpawnPlacer</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer" prot="public" virt="non-virtual">helios::engine::runtime::spawn::behavior::SpawnPlacer</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>std::size_t</type>
+        <declname>N</declname>
+        <defname>N</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1DistributedSpawnPlacer_1af5d6817a01eaa22c09447d71fd872ee5" prot="private" static="no" mutable="no">
+        <type>std::array&lt; <ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref>, N &gt;</type>
+        <definition>std::array&lt;helios::math::vec3f, N&gt; helios::engine::runtime::spawn::behavior::placements::DistributedSpawnPlacer&lt; N &gt;::locations_</definition>
+        <argsstring></argsstring>
+        <name>locations_</name>
+        <qualifiedname>helios::engine::runtime::spawn::behavior::placements::DistributedSpawnPlacer::locations_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Fixed array of spawn point locations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/behavior/placements/DistributedSpawnPlacer.ixx" line="71" column="20" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/behavior/placements/DistributedSpawnPlacer.ixx" bodystart="71" bodyend="71"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1DistributedSpawnPlacer_1aaf6baab1a55e6dfbb23747fc72259ade" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>helios::engine::runtime::spawn::behavior::placements::DistributedSpawnPlacer&lt; N &gt;::DistributedSpawnPlacer</definition>
+        <argsstring>(Args &amp;&amp;...args)</argsstring>
+        <name>DistributedSpawnPlacer</name>
+        <qualifiedname>helios::engine::runtime::spawn::behavior::placements::DistributedSpawnPlacer::DistributedSpawnPlacer</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+    <requiresclause>(sizeof...(Args) == N)    </requiresclause>
+        <briefdescription>
+<para>Constructs a <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1DistributedSpawnPlacer" kindref="compound">DistributedSpawnPlacer</ref> with N spawn locations. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Types of location arguments (must be vec3f).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Exactly N spawn point locations.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>The number of arguments must match template parameter N. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/behavior/placements/DistributedSpawnPlacer.ixx" line="86" column="18" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/behavior/placements/DistributedSpawnPlacer.ixx" bodystart="86" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1DistributedSpawnPlacer_1a968f02b9bfa718115be88fc58e74a6e0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
+        <definition>helios::math::vec3f helios::engine::runtime::spawn::behavior::placements::DistributedSpawnPlacer&lt; N &gt;::getPosition</definition>
+        <argsstring>(const helios::util::Guid &amp;guid, const helios::math::aabbf &amp;gameObjectBounds, const helios::math::aabbf &amp;environmentBounds, const SpawnPlanCursor &amp;cursor, const SpawnContext &amp;spawnContext) override</argsstring>
+        <name>getPosition</name>
+        <qualifiedname>helios::engine::runtime::spawn::behavior::placements::DistributedSpawnPlacer::getPosition</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer_1a8a6fcc49a1963b16d5ee236c4727d53d">getPosition</reimplements>
+        <param>
+          <type>const <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref> &amp;</type>
+          <declname>guid</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1math_1a124c0492430aeecedc1c1a5ece4ba488" kindref="member">helios::math::aabbf</ref> &amp;</type>
+          <declname>gameObjectBounds</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacehelios_1_1math_1a124c0492430aeecedc1c1a5ece4ba488" kindref="member">helios::math::aabbf</ref> &amp;</type>
+          <declname>environmentBounds</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnPlanCursor" kindref="compound">SpawnPlanCursor</ref> &amp;</type>
+          <declname>cursor</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext" kindref="compound">SpawnContext</ref> &amp;</type>
+          <declname>spawnContext</declname>
+        </param>
+        <briefdescription>
+<para>Returns the spawn location for the current entity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Maps the cursor position to one of the predefined locations by dividing the spawn batch evenly across available spawn points.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>guid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Unique identifier of the entity (unused). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>gameObjectBounds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bounding box of the entity (unused). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>environmentBounds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bounding box of the environment (unused). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cursor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current spawn batch cursor with position and count. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spawnContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Context for the spawn operation (unused).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>World position from the locations array. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/behavior/placements/DistributedSpawnPlacer.ixx" line="102" column="29" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/behavior/placements/DistributedSpawnPlacer.ixx" bodystart="102" bodyend="113"/>
+        <references refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnPlanCursor_1ab711dfa48564030e6738b6632910a7f4" compoundref="SpawnPlanCursor_8ixx" startline="40">helios::engine::runtime::spawn::SpawnPlanCursor::position</references>
+        <references refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnPlanCursor_1aa90b7dfe55938a408966953c93535a1b" compoundref="SpawnPlanCursor_8ixx" startline="35">helios::engine::runtime::spawn::SpawnPlanCursor::spawnCount</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Spawn placer that assigns entities to predefined spawn points. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1DistributedSpawnPlacer" kindref="compound">DistributedSpawnPlacer</ref> uses a fixed-size array of locations to distribute spawned entities. Entities are assigned to locations based on their cursor position within the spawn batch, dividing the batch evenly across all available spawn points.</para>
+<para>## Distribution Algorithm</para>
+<para>Entities are mapped to locations using: `bin = N * (position / spawnCount)`</para>
+<para>This ensures even distribution when spawn count exceeds location count, and direct mapping when spawn count equals location count.</para>
+<para>## Use Cases</para>
+<para><itemizedlist>
+<listitem><para>**Fixed spawn points:** Enemies spawning at predefined positions</para>
+</listitem><listitem><para>**Formation patterns:** Entities placed in specific arrangements</para>
+</listitem><listitem><para>**Level design:** Designer-defined spawn locations</para>
+</listitem></itemizedlist>
+</para>
+<para>## Usage</para>
+<para>```cpp // Create placer with 3 fixed spawn points auto placer = std::make_unique&lt;DistributedSpawnPlacer&lt;3&gt;&gt;( <ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref>{-50.0f, 100.0f, 0.0f}, <ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref>{ 0.0f, 100.0f, 0.0f}, <ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref>{ 50.0f, 100.0f, 0.0f} );</para>
+<para>// 3 entities spawn at the 3 locations // 6 entities: 2 per location ```</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of spawn locations.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer" kindref="compound">SpawnPlacer</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1AxisSpawnPlacer" kindref="compound">AxisSpawnPlacer</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::runtime::spawn::behavior::SpawnPlacer</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::runtime::spawn::behavior::placements::DistributedSpawnPlacer&lt; N &gt;</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1DistributedSpawnPlacer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>helios::engine::runtime::spawn::behavior::SpawnPlacer</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::runtime::spawn::behavior::placements::DistributedSpawnPlacer&lt; N &gt;</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1DistributedSpawnPlacer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/tmp/h/include/helios/engine/runtime/spawn/behavior/placements/DistributedSpawnPlacer.ixx" line="66" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/behavior/placements/DistributedSpawnPlacer.ixx" bodystart="66" bodyend="116"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1DistributedSpawnPlacer_1aaf6baab1a55e6dfbb23747fc72259ade" prot="public" virt="non-virtual"><scope>helios::engine::runtime::spawn::behavior::placements::DistributedSpawnPlacer</scope><name>DistributedSpawnPlacer</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1DistributedSpawnPlacer_1a968f02b9bfa718115be88fc58e74a6e0" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::behavior::placements::DistributedSpawnPlacer</scope><name>getPosition</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1DistributedSpawnPlacer_1af5d6817a01eaa22c09447d71fd872ee5" prot="private" virt="non-virtual"><scope>helios::engine::runtime::spawn::behavior::placements::DistributedSpawnPlacer</scope><name>locations_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnPlacer_1ac07de59ae9dc454269cdef3a8b9a73ba" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::behavior::placements::DistributedSpawnPlacer</scope><name>~SpawnPlacer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

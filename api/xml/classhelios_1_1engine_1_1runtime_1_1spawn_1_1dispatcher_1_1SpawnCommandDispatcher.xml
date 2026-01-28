@@ -20,10 +20,10 @@
           <declname>command</declname>
         </param>
         <briefdescription>
-<para>Dispatches a SpawnCommand by creating a SpawnRequest. </para>
+<para>Dispatches a SpawnCommand to the registered handler. </para>
         </briefdescription>
         <detaileddescription>
-<para>Creates a SpawnRequest from the command and submits it to the pool&apos;s registered SpawnRequestHandler for deferred processing.</para>
+<para>Looks up the <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler" kindref="compound">SpawnCommandHandler</ref> for the command&apos;s profile ID and submits the command directly for deferred processing.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>gameWorld</parametername>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/runtime/spawn/dispatcher/SpawnCommandDispatcher.ixx" line="48" column="14" bodyfile="include/helios/engine/runtime/spawn/dispatcher/SpawnCommandDispatcher.ixx" bodystart="48" bodyend="65"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/dispatcher/SpawnCommandDispatcher.ixx" line="47" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/dispatcher/SpawnCommandDispatcher.ixx" bodystart="47" bodyend="57"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -61,20 +61,20 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/runtime/spawn/dispatcher/SpawnCommandDispatcher.ixx" line="70" column="10"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/dispatcher/SpawnCommandDispatcher.ixx" line="62" column="10"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
 <para>Dispatcher that routes SpawnCommands to the appropriate handler. </para>
     </briefdescription>
     <detaileddescription>
-<para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher" kindref="compound">SpawnCommandDispatcher</ref> is a typed command dispatcher that handles SpawnCommand instances. When a SpawnCommand is dispatched, it creates a SpawnRequest and submits it to the pool&apos;s registered SpawnRequestHandler.</para>
+<para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher" kindref="compound">SpawnCommandDispatcher</ref> is a typed command dispatcher that handles SpawnCommand instances. When a SpawnCommand is dispatched, it submits the command directly to the pool&apos;s registered <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler" kindref="compound">SpawnCommandHandler</ref>.</para>
 <para>This enables the command-based spawn architecture where the GameObjectSpawnSystem emits SpawnCommands that are later processed by the <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kindref="compound">SpawnManager</ref> during the manager flush phase.</para>
 <para><simplesect kind="see"><para>SpawnCommand </para>
 </simplesect>
 <simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager" kindref="compound">SpawnManager</ref> </para>
 </simplesect>
-<simplesect kind="see"><para>SpawnRequestHandler </para>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler" kindref="compound">SpawnCommandHandler</ref> </para>
 </simplesect>
 </para>
     </detaileddescription>
@@ -114,7 +114,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="include/helios/engine/runtime/spawn/dispatcher/SpawnCommandDispatcher.ixx" line="34" column="5" bodyfile="include/helios/engine/runtime/spawn/dispatcher/SpawnCommandDispatcher.ixx" bodystart="35" bodyend="75"/>
+    <location file="/tmp/h/include/helios/engine/runtime/spawn/dispatcher/SpawnCommandDispatcher.ixx" line="33" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/dispatcher/SpawnCommandDispatcher.ixx" bodystart="34" bodyend="67"/>
     <listofallmembers>
       <member refid="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher_1ada9b7af011e293a1d5712a1134bdf66d" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::dispatcher::SpawnCommandDispatcher</scope><name>dispatch</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher_1a5d5a34455ac34b80f18b01880527140b" prot="protected" virt="virtual"><scope>helios::engine::runtime::spawn::dispatcher::SpawnCommandDispatcher</scope><name>dispatchTyped</name></member>

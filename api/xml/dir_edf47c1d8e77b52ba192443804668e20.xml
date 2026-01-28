@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_edf47c1d8e77b52ba192443804668e20" kind="dir">
+    <compoundname>components</compoundname>
+    <innerfile refid="helios_2engine_2modules_2ai_2components_2__module_8ixx">helios/engine/modules/ai/components/_module.ixx</innerfile>
+    <innerfile refid="ChaseComponent_8ixx">ChaseComponent.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_edf47c1d8e77b52ba192443804668e20_1autotoc_md207">
+<title>helios::engine::modules::ai::components</title><para>AI behavior data components.</para>
+</sect1>
+<sect1 id="dir_edf47c1d8e77b52ba192443804668e20_1autotoc_md208">
+<title>Overview</title><para>Components storing AI behavior state. These are pure data containers processed by the corresponding systems in <computeroutput><ref refid="namespacehelios_1_1engine_1_1modules_1_1ai_1_1systems" kindref="compound">helios.engine.modules.ai.systems</ref></computeroutput>.</para>
+</sect1>
+<sect1 id="dir_edf47c1d8e77b52ba192443804668e20_1autotoc_md209">
+<title>Components</title><para><table rows="2" cols="2"><row>
+<entry thead="yes"><para>Component  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ChaseComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Tracks a target entity and controls pursuit timing  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_edf47c1d8e77b52ba192443804668e20_1autotoc_md210">
+<title>ChaseComponent</title><para>Stores data for chase/pursuit behavior:</para>
+<para><table rows="4" cols="3"><row>
+<entry thead="yes"><para>Property  </para>
+</entry><entry thead="yes"><para>Type  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>target_</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>Guid</computeroutput>  </para>
+</entry><entry thead="no"><para>GUID of the entity to chase  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>cooldown_</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>float</computeroutput>  </para>
+</entry><entry thead="no"><para>Interval between direction updates (seconds)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>cooldownTimer_</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>float</computeroutput>  </para>
+</entry><entry thead="no"><para>Elapsed time since last update  </para>
+</entry></row>
+</table>
+</para>
+<sect2 id="dir_edf47c1d8e77b52ba192443804668e20_1autotoc_md211">
+<title>API</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Set<sp/>target<sp/>entity</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>setTarget(Guid<sp/>guid);</highlight></codeline>
+<codeline><highlight class="normal">Guid<sp/>target()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Configure<sp/>update<sp/>frequency</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>setCooldown(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>seconds);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>cooldown()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Timer<sp/>management<sp/>(used<sp/>by<sp/>ChaseSystem)</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>updateCooldownTimerBy(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>delta);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>setCooldownTimer(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>timer);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>cooldownTimer()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+</programlisting></para>
+</sect2>
+</sect1>
+<sect1 id="dir_edf47c1d8e77b52ba192443804668e20_1autotoc_md212">
+<title>Related Modules</title><para><table rows="3" cols="2"><row>
+<entry thead="yes"><para>Module  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1modules_1_1ai_1_1systems" kindref="compound">helios.engine.modules.ai.systems</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>ChaseSystem processes this component  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios.util.Guid</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>Target identification  </para>
+</entry></row>
+</table>
+</para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/modules/ai/components/"/>
+  </compounddef>
+</doxygen>

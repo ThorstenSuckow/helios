@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Changelog | helios</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://helios.garagecraft.games/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://helios.garagecraft.games/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://helios.garagecraft.games/docs/changelog"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Changelog | helios"><meta data-rh="true" name="description" content="Chronological list of notable changes to helios; manually curated release notes."><meta data-rh="true" property="og:description" content="Chronological list of notable changes to helios; manually curated release notes."><meta data-rh="true" name="keywords" content="helios,changelog,releases,version history"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://helios.garagecraft.games/docs/changelog"><link data-rh="true" rel="alternate" href="https://helios.garagecraft.games/docs/changelog" hreflang="en"><link data-rh="true" rel="alternate" href="https://helios.garagecraft.games/docs/changelog" hreflang="x-default"><link data-rh="true" rel="preconnect" href="https://LK14YGETTG-dsn.algolia.net" crossorigin="anonymous"><link rel="search" type="application/opensearchdescription+xml" title="helios" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.d8266996.css">
-<script src="/assets/js/runtime~main.5815fe60.js" defer="defer"></script>
-<script src="/assets/js/main.9b97ec09.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.752f7c33.js" defer="defer"></script>
+<script src="/assets/js/main.5756d2a2.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -15,27 +15,67 @@
 <p>All notable changes to this project will be documented in this file.</p>
 <p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/" target="_blank" rel="noopener noreferrer" class="">Keep a Changelog</a>,
 and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target="_blank" rel="noopener noreferrer" class="">Semantic Versioning</a>.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="unreleased"><a href="https://github.com/thorstensuckow/helios/compare/v0.3.0-milestone3...HEAD" target="_blank" rel="noopener noreferrer" class="">Unreleased</a><a href="#unreleased" class="hash-link" aria-label="Direct link to unreleased" title="Direct link to unreleased" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="unreleased"><a href="https://github.com/thorstensuckow/helios/compare/v0.4.0-milestone4...HEAD" target="_blank" rel="noopener noreferrer" class="">Unreleased</a><a href="#unreleased" class="hash-link" aria-label="Direct link to unreleased" title="Direct link to unreleased" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="040-milestone4---2026-01-29"><a href="https://github.com/thorstensuckow/helios/compare/v0.3.0-milestone3...v0.4.0-milestone4" target="_blank" rel="noopener noreferrer" class="">0.4.0-milestone4</a> - 2026-01-29<a href="#040-milestone4---2026-01-29" class="hash-link" aria-label="Direct link to 040-milestone4---2026-01-29" title="Direct link to 040-milestone4---2026-01-29" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="added">Added<a href="#added" class="hash-link" aria-label="Direct link to Added" title="Direct link to Added" translate="no">​</a></h3>
 <ul>
 <li class=""><code>helios.engine.ecs</code> module with base classes (<code>Component</code>, <code>GameObject</code>, <code>System</code>, <code>Updatable</code>)</li>
 <li class=""><code>helios.engine.ecs.query</code> submodule with <code>GameObjectFilter</code> and <code>GameObjectView</code></li>
 <li class=""><code>helios.engine.runtime</code> aggregate module for runtime infrastructure</li>
 <li class=""><code>helios.engine.runtime.world</code> submodule with <code>GameWorld</code>, <code>Level</code>, <code>UpdateContext</code>, <code>SystemRegistry</code>, <code>Manager</code></li>
-<li class=""><code>helios.engine.runtime.pooling</code> submodule with <code>GameObjectPool</code>, <code>GameObjectPoolRegistry</code>, <code>GameObjectPoolFacade</code>, <code>PoolRequestHandler</code>, <code>PoolRequestHandlerRegistry</code></li>
+<li class=""><code>helios.engine.runtime.pooling</code> submodule with <code>GameObjectPool</code>, <code>GameObjectPoolManager</code>, <code>GameObjectPoolRegistry</code>, <code>GameObjectPoolConfig</code>, <code>GameObjectPoolSnapshot</code></li>
 <li class=""><code>helios.engine.runtime.gameloop</code> submodule with <code>GameLoop</code>, <code>Phase</code>, <code>Pass</code></li>
 <li class=""><code>helios.engine.runtime.messaging</code> for commands and events</li>
+<li class=""><code>helios.engine.runtime.spawn</code> submodule for spawn infrastructure:
+<ul>
+<li class=""><code>SpawnManager</code> for processing spawn/despawn commands</li>
+<li class=""><code>SpawnProfile</code> for spawn configuration (pool, placer, initializer)</li>
+<li class=""><code>SpawnScheduler</code> abstract base for rule-based spawn scheduling</li>
+<li class=""><code>DefaultSpawnScheduler</code> for evaluating all rules each frame</li>
+<li class=""><code>CyclicSpawnScheduler&lt;N&gt;</code> for round-robin rule evaluation</li>
+<li class=""><code>RuleProcessor</code> and <code>DefaultRuleProcessor</code> for spawn rule processing</li>
+<li class=""><code>SpawnRule</code>, <code>SpawnCondition</code>, <code>SpawnRuleState</code> for policy layer</li>
+<li class=""><code>SpawnConditionAll</code> for composite AND conditions</li>
+<li class=""><code>TimerSpawnCondition</code> for interval-based spawning</li>
+<li class=""><code>RequestedAmountIsAvailableCondition</code> for pool availability checks</li>
+<li class=""><code>SpawnAmountProvider</code>, <code>FixedSpawnAmount</code>, <code>SpawnAmountByCallback</code> for amount configuration</li>
+<li class=""><code>SpawnPlacer</code>, <code>SpawnInitializer</code> interfaces for spawn behaviors</li>
+<li class=""><code>RandomSpawnPlacer</code>, <code>EmitterSpawnPlacer</code>, <code>AxisSpawnPlacer</code>, <code>DistributedSpawnPlacer&lt;N&gt;</code> for positioning</li>
+<li class=""><code>EmitterInitializer</code>, <code>MoveInitializer</code>, <code>DelayedComponentEnablerInitializer</code> for entity initialization</li>
+<li class=""><code>SpawnCommand</code>, <code>DespawnCommand</code>, <code>ScheduledSpawnPlanCommand</code> for command pipeline</li>
+<li class=""><code>SpawnCommandDispatcher</code>, <code>DespawnCommandDispatcher</code>, <code>ScheduledSpawnPlanCommandDispatcher</code></li>
+<li class=""><code>SpawnContext</code>, <code>EmitterContext</code> for spawn state</li>
+<li class=""><code>SpawnPlanCommandExecutedEvent</code> for frame events</li>
+<li class=""><code>SpawnCommandHandler</code>, <code>SpawnCommandHandlerRegistry</code> for handler management</li>
+</ul>
+</li>
+<li class=""><code>helios.engine.mechanics.lifecycle</code> for entity lifecycle management:
+<ul>
+<li class=""><code>DelayedComponentEnabler</code> component for deferred activation</li>
+<li class=""><code>DelayedComponentEnablerSystem</code> for processing activation timers</li>
+</ul>
+</li>
+<li class=""><code>helios.engine.builder.gameObject.builders.LifecycleBuilder</code> for lifecycle configuration</li>
+<li class=""><code>helios.engine.builder.gameObject.builders.configs.LifecycleConfig</code> for deferred enablement</li>
+<li class=""><code>GridCollisionDetectionSystem</code> with uniform 3D spatial partitioning</li>
+<li class=""><code>HitPolicy</code> enum (<code>OneHit</code>, <code>All</code>) for collision count control</li>
 <li class=""><code>helios.engine.mechanics</code> for gameplay-specific systems (bounds, combat, spawn, input)</li>
 <li class=""><code>helios.engine.modules</code> for domain-agnostic subsystems (physics, spatial, scene, rendering, pool)</li>
-<li class=""><code>ShootCommandDispatcher</code> for routing shoot commands to <code>ProjectilePoolManager</code></li>
-<li class=""><code>ProjectileSpawnRequest</code> data structure for projectile spawn parameters</li>
-<li class=""><code>PoolIdComponent</code> for pool membership identification</li>
+<li class=""><code>SpawnedByProfileComponent</code> for tracking entity spawn origin</li>
+<li class=""><code>ProjectileSpawnSystem</code> for combat projectile spawning</li>
+<li class=""><code>SpawnProfileId</code>, <code>SpawnRuleId</code>, <code>GameObjectPoolId</code> type-safe identifiers with FNV-1a string hashing</li>
+<li class=""><code>helios.core.algorithms</code> module with <code>fnv1a_hash</code> compile-time hash function</li>
+<li class=""><code>collision_detection</code> example demonstrating grid collision and spawn patterns</li>
+<li class=""><code>enemy_spawn</code> example demonstrating spawn system</li>
+<li class="">Core concepts documentation for spawn system, collision detection, and lifecycle management</li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="changed">Changed<a href="#changed" class="hash-link" aria-label="Direct link to Changed" title="Direct link to Changed" translate="no">​</a></h3>
 <ul>
 <li class=""><strong>BREAKING</strong>: Reorganized <code>helios.engine</code> into distinct submodules: <code>core</code>, <code>ecs</code>, <code>runtime</code>, <code>modules</code>, <code>mechanics</code>, <code>tooling</code></li>
 <li class=""><strong>BREAKING</strong>: Systems are now registered with <code>GameLoop</code> phases/passes instead of <code>GameWorld</code></li>
 <li class=""><strong>BREAKING</strong>: <code>GameWorld</code> no longer manages System instances — use <code>GameLoop::phase().addPass().addSystem&lt;T&gt;()</code></li>
+<li class=""><strong>BREAKING</strong>: Spawn infrastructure moved from <code>mechanics/spawn</code> to <code>runtime/spawn</code></li>
+<li class=""><strong>BREAKING</strong>: Removed <code>GameObjectFactory</code>, <code>GameObjectPoolFacade</code>, <code>PoolRequestHandler</code>, <code>PoolRequestHandlerRegistry</code></li>
 <li class="">Moved ECS base classes from <code>helios.engine.game</code> to <code>helios.engine.ecs</code></li>
 <li class="">Moved world management classes to <code>helios.engine.runtime.world</code></li>
 <li class="">Moved pooling infrastructure to <code>helios.engine.runtime.pooling</code></li>
@@ -44,24 +84,23 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class=""><code>helios.engine._module.ixx</code> updated to export <code>core</code>, <code>ecs</code>, <code>game</code>, <code>runtime</code>, <code>tooling</code> modules</li>
 <li class="">All aggregate <code>_module.ixx</code> files now only export their direct submodules (clean hierarchy)</li>
 <li class=""><code>SystemRegistry</code> is now internal to the <code>GameLoop</code> pass structure</li>
+<li class="">Updated core concepts documentation with spawn system references</li>
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="030-milestone3---2025-12-25"><a href="https://github.com/thorstensuckow/helios/compare/v0.2.0-milestone2...v0.3.0-milestone3" target="_blank" rel="noopener noreferrer" class="">0.3.0-milestone3</a> - 2025-12-25<a href="#030-milestone3---2025-12-25" class="hash-link" aria-label="Direct link to 030-milestone3---2025-12-25" title="Direct link to 030-milestone3---2025-12-25" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="added-1">Added<a href="#added-1" class="hash-link" aria-label="Direct link to Added" title="Direct link to Added" translate="no">​</a></h3>
 <ul>
-<li class=""><code>TransformComponent</code> for independent transform management (local/world)</li>
-<li class=""><code>ScaleComponent</code> for unit-based sizing with dirty flag tracking</li>
+<li class=""><code>ComposeTransformComponent</code> for independent transform management (local/world)</li>
+<li class=""><code>ScaleStateComponent</code> for unit-based sizing with dirty flag tracking</li>
 <li class=""><code>AabbColliderComponent</code> for world-space bounding boxes</li>
 <li class=""><code>ModelAabbComponent</code> for original model AABB storage</li>
 <li class=""><code>LevelBoundsBehaviorComponent</code> for configurable boundary reactions (bounce, restitution)</li>
 <li class="">Automatic AABB capture from SceneNode meshes via <code>onAttach()</code></li>
 <li class=""><code>Move2DSystem</code> for 2D physics with rotation, velocity integration, and dampening</li>
-<li class=""><code>ScaleSystem</code> for applying unit-based scaling from <code>ScaleComponent</code></li>
+<li class=""><code>ScaleSystem</code> for applying unit-based scaling from <code>ScaleStateComponent</code></li>
 <li class=""><code>BoundsUpdateSystem</code> for updating AABB colliders from world transforms</li>
 <li class=""><code>LevelBoundsBehaviorSystem</code> for boundary collisions with bounce behavior</li>
 <li class=""><code>SceneSyncSystem</code> for synchronizing gameplay transforms with scene graph</li>
 <li class=""><code>TransformClearSystem</code> for clearing dirty flags at end of frame</li>
-<li class=""><code>ScaleClearSystem</code> for clearing scale dirty flags at end of frame</li>
-<li class=""><code>ProjectilePoolSystem</code> for efficient projectile object pooling</li>
 <li class=""><code>Level</code> class with configurable world bounds and AABB-based arena boundaries</li>
 <li class=""><code>Aim2DComponent</code> for direction tracking and firing frequency</li>
 <li class=""><code>ShootComponent</code> for projectile firing with configurable cooldown and speed</li>
@@ -73,9 +112,9 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="changed-1">Changed<a href="#changed-1" class="hash-link" aria-label="Direct link to Changed" title="Direct link to Changed" translate="no">​</a></h3>
 <ul>
-<li class=""><strong>BREAKING</strong>: <code>SceneNodeComponent::setSize()</code> removed — use <code>ScaleComponent</code> instead</li>
+<li class=""><strong>BREAKING</strong>: <code>SceneNodeComponent::setSize()</code> removed — use <code>ScaleStateComponent</code> instead</li>
 <li class=""><strong>BREAKING</strong>: <code>GameWorld</code> constructor no longer requires <code>Scene*</code> parameter</li>
-<li class=""><strong>BREAKING</strong>: <code>Move2DComponent::position()</code> removed (transforms managed by <code>TransformComponent</code>)</li>
+<li class=""><strong>BREAKING</strong>: <code>Move2DComponent::position()</code> removed (transforms managed by <code>ComposeTransformComponent</code>)</li>
 <li class=""><strong>BREAKING</strong>: <code>Move2DComponent::rotationAngle()</code> renamed to <code>currentRotationAngle()</code></li>
 <li class=""><code>SceneNodeComponent::onAttach()</code> now automatically captures AABB from SceneNode mesh</li>
 <li class="">Systems must be explicitly registered for game logic</li>
@@ -151,6 +190,6 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html" target
 <li class="">Cross-platform support (Windows, Linux, macOS)</li>
 <li class="">Unit testing framework with Google Test</li>
 <li class="">Example applications (simple cube rendering, game controller input)</li>
-</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-tags-row"><div class="col"><b>Tags:</b><ul class="tags_jXut padding--none margin-left--sm"><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/tags/changelog">changelog</a></li><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/tags/release-notes">release-notes</a></li></ul></div></div><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/thorstensuckow/helios/tree/main/website/docs/changelog.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#unreleased" class="table-of-contents__link toc-highlight">Unreleased</a><ul><li><a href="#added" class="table-of-contents__link toc-highlight">Added</a></li><li><a href="#changed" class="table-of-contents__link toc-highlight">Changed</a></li></ul></li><li><a href="#030-milestone3---2025-12-25" class="table-of-contents__link toc-highlight">0.3.0-milestone3 - 2025-12-25</a><ul><li><a href="#added-1" class="table-of-contents__link toc-highlight">Added</a></li><li><a href="#changed-1" class="table-of-contents__link toc-highlight">Changed</a></li><li><a href="#fixed" class="table-of-contents__link toc-highlight">Fixed</a></li></ul></li><li><a href="#020-milestone2---2025-12-16" class="table-of-contents__link toc-highlight">0.2.0-milestone2 - 2025-12-16</a><ul><li><a href="#added-2" class="table-of-contents__link toc-highlight">Added</a></li><li><a href="#changed-2" class="table-of-contents__link toc-highlight">Changed</a></li><li><a href="#fixed-1" class="table-of-contents__link toc-highlight">Fixed</a></li></ul></li><li><a href="#010-milestone1---2025-10-21" class="table-of-contents__link toc-highlight">0.1.0-milestone1 - 2025-10-21</a><ul><li><a href="#added-3" class="table-of-contents__link toc-highlight">Added</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Documentation</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Getting Started</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/api/overview">API Reference</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/examples/simple-cube">Examples</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/thorstensuckow/helios/discussions" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub Discussions<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/thorstensuckow/helios/issues" target="_blank" rel="noopener noreferrer" class="footer__link-item">Issues<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.researchgate.net/publication/397445662_helios_Design_and_prototypical_implementation_of_a_C_game_framework" target="_blank" rel="noopener noreferrer" class="footer__link-item">Academic Paper<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/thorstensuckow/helios" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 <a href="https://thorsten.suckow-homberg.de">Thorsten Suckow-Homberg</a> / <a href="https://garagecraft.games">GarageCraft Games</a>. Licensed under MIT. Built with Docusaurus.</div></div></div></footer></div>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-tags-row"><div class="col"><b>Tags:</b><ul class="tags_jXut padding--none margin-left--sm"><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/tags/changelog">changelog</a></li><li class="tag_QGVx"><a rel="tag" class="tag_zVej tagRegular_sFm0" href="/docs/tags/release-notes">release-notes</a></li></ul></div></div><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/thorstensuckow/helios/tree/main/website/docs/changelog.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#unreleased" class="table-of-contents__link toc-highlight">Unreleased</a></li><li><a href="#040-milestone4---2026-01-29" class="table-of-contents__link toc-highlight">0.4.0-milestone4 - 2026-01-29</a><ul><li><a href="#added" class="table-of-contents__link toc-highlight">Added</a></li><li><a href="#changed" class="table-of-contents__link toc-highlight">Changed</a></li></ul></li><li><a href="#030-milestone3---2025-12-25" class="table-of-contents__link toc-highlight">0.3.0-milestone3 - 2025-12-25</a><ul><li><a href="#added-1" class="table-of-contents__link toc-highlight">Added</a></li><li><a href="#changed-1" class="table-of-contents__link toc-highlight">Changed</a></li><li><a href="#fixed" class="table-of-contents__link toc-highlight">Fixed</a></li></ul></li><li><a href="#020-milestone2---2025-12-16" class="table-of-contents__link toc-highlight">0.2.0-milestone2 - 2025-12-16</a><ul><li><a href="#added-2" class="table-of-contents__link toc-highlight">Added</a></li><li><a href="#changed-2" class="table-of-contents__link toc-highlight">Changed</a></li><li><a href="#fixed-1" class="table-of-contents__link toc-highlight">Fixed</a></li></ul></li><li><a href="#010-milestone1---2025-10-21" class="table-of-contents__link toc-highlight">0.1.0-milestone1 - 2025-10-21</a><ul><li><a href="#added-3" class="table-of-contents__link toc-highlight">Added</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Documentation</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Getting Started</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/api/overview">API Reference</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/examples/simple-cube">Examples</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/thorstensuckow/helios/discussions" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub Discussions<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/thorstensuckow/helios/issues" target="_blank" rel="noopener noreferrer" class="footer__link-item">Issues<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.researchgate.net/publication/397445662_helios_Design_and_prototypical_implementation_of_a_C_game_framework" target="_blank" rel="noopener noreferrer" class="footer__link-item">Academic Paper<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/thorstensuckow/helios" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 <a href="https://thorsten.suckow-homberg.de">Thorsten Suckow-Homberg</a> / <a href="https://garagecraft.games">GarageCraft Games</a>. Licensed under MIT. Built with Docusaurus.</div></div></div></footer></div>
 </body>
 </html>

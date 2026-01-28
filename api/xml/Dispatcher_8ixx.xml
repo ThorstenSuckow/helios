@@ -7,8 +7,12 @@
     <includes local="no">typeindex</includes>
     <includes refid="Event_8ixx" local="no">helios.event.Event</includes>
     <incdepgraph>
+      <node id="10">
+        <label>helios.core.types</label>
+        <link refid="types_8ixx"/>
+      </node>
       <node id="1">
-        <label>include/helios/event/Dispatcher.ixx</label>
+        <label>Dispatcher.ixx</label>
         <link refid="Dispatcher_8ixx"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -35,6 +39,8 @@
         <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
         </childnode>
       </node>
       <node id="8">
@@ -134,12 +140,20 @@
 <codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>event<sp/>A<sp/>unique_ptr<sp/>to<sp/>the<sp/>event<sp/>instance<sp/>to<sp/>be<sp/>dispatched.</highlight></codeline>
 <codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="70" refid="classhelios_1_1event_1_1Dispatcher_1a191d08252f8ad42a53c00dc90a3423da" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1event_1_1Dispatcher_1a191d08252f8ad42a53c00dc90a3423da" kindref="member">dispatch</ref>(std::unique_ptr&lt;const<sp/>Event&gt;<sp/><ref refid="namespacehelios_1_1event" kindref="compound">event</ref>);</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"></highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"></highlight></codeline>
-<codeline lineno="74"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="70" refid="classhelios_1_1event_1_1Dispatcher_1a191d08252f8ad42a53c00dc90a3423da" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1event_1_1Dispatcher_1a191d08252f8ad42a53c00dc90a3423da" kindref="member">dispatch</ref>(std::unique_ptr&lt;const<sp/>Event&gt;<sp/><ref refid="namespacehelios_1_1event" kindref="compound">event</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>idx<sp/>=<sp/>std::type_index(</highlight><highlight class="keyword">typeid</highlight><highlight class="normal">(*<ref refid="namespacehelios_1_1event" kindref="compound">event</ref>));</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cb<sp/>=<sp/>callbacks_.find(idx);<sp/>cb<sp/>!=<sp/>callbacks_.end())<sp/>{</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>callback<sp/>:<sp/>cb-&gt;second)<sp/>{</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>callback(*<ref refid="namespacehelios_1_1event" kindref="compound">event</ref>);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal">}</highlight></codeline>
     </programlisting>
-    <location file="include/helios/event/Dispatcher.ixx"/>
+    <location file="/tmp/h/include/helios/event/Dispatcher.ixx"/>
   </compounddef>
 </doxygen>

@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2mechanics_2lifecycle_2README_8md" kind="file" language="Markdown">
+    <compoundname>helios/engine/mechanics/lifecycle/README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1mechanics_1_1lifecycle">helios::engine::mechanics::lifecycle</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::mechanics::lifecycle</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Lifecycle<sp/>management<sp/>for<sp/>entity<sp/>components<sp/>with<sp/>delayed<sp/>activation<sp/>support.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>mechanisms<sp/>for<sp/>controlling<sp/>when<sp/>components<sp/>become<sp/>active<sp/>during<sp/>an<sp/>entity&apos;s<sp/>lifecycle.<sp/>The<sp/>primary<sp/>use<sp/>case<sp/>is<sp/>delaying<sp/>component<sp/>activation<sp/>after<sp/>spawn,<sp/>enabling<sp/>patterns<sp/>like<sp/>collision<sp/>immunity,<sp/>staggered<sp/>wave<sp/>spawns,<sp/>and<sp/>effect<sp/>sequencing.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`DelayedComponentEnabler`<sp/>|<sp/>Component<sp/>that<sp/>tracks<sp/>pending<sp/>activations<sp/>with<sp/>timers<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`DelayedComponentEnablerSystem`<sp/>|<sp/>System<sp/>that<sp/>decrements<sp/>timers<sp/>and<sp/>enables<sp/>components<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Architecture</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">DelayedComponentEnablerInitializer</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/>defer(ComponentTypeId,<sp/>delay)</highlight></codeline>
+<codeline><highlight class="normal">┌───────────────────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>DelayedComponentEnabler<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>-<sp/>deferredComponents_[]<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/>{<sp/>delta,<sp/>typeId<sp/>}<sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">└───────────────────────────┘</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/>each<sp/>frame</highlight></codeline>
+<codeline><highlight class="normal">┌────────────────────────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>DelayedComponentEnablerSystem<sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>-<sp/>decrement<sp/>delta<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>-<sp/>enable()<sp/>when<sp/>delta<sp/>&lt;=<sp/>0<sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>-<sp/>sync()<sp/>to<sp/>remove<sp/>completed<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">└────────────────────────────────┘</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>During<sp/>spawn<sp/>initialization,<sp/>defer<sp/>collision<sp/>component<sp/>by<sp/>0.5<sp/>seconds</highlight></codeline>
+<codeline><highlight class="normal">auto*<sp/>enabler<sp/>=<sp/>entity-&gt;get&lt;DelayedComponentEnabler&gt;();</highlight></codeline>
+<codeline><highlight class="normal">enabler-&gt;defer(ComponentTypeId::id&lt;CollisionComponent&gt;(),<sp/>0.5f);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Or<sp/>use<sp/>the<sp/>initializer<sp/>for<sp/>batch<sp/>spawns<sp/>with<sp/>staggered<sp/>activation</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>initializer<sp/>=<sp/>std::make_unique&lt;DelayedComponentEnablerInitializer&lt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>CollisionComponent,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>RenderableComponent</highlight></codeline>
+<codeline><highlight class="normal">&gt;&gt;(0.1f);<sp/><sp/>//<sp/>0.1s<sp/>delay<sp/>between<sp/>each<sp/>entity<sp/>in<sp/>batch</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Common<sp/>Patterns</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Collision<sp/>Immunity**</highlight></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Projectiles<sp/>ignore<sp/>collisions<sp/>for<sp/>0.2s<sp/>after<sp/>spawn</highlight></codeline>
+<codeline><highlight class="normal">DelayedComponentEnablerInitializer&lt;CollisionComponent&gt;(0.2f)</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Staggered<sp/>Wave<sp/>Spawns**</highlight></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>10<sp/>enemies<sp/>appear<sp/>one<sp/>by<sp/>one,<sp/>0.5s<sp/>apart,<sp/>then<sp/>pattern<sp/>repeats</highlight></codeline>
+<codeline><highlight class="normal">DelayedComponentEnablerInitializer&lt;RenderableComponent,<sp/>AIComponent&gt;(0.5f,<sp/>10)</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::mechanics::lifecycle</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Lifecycle<sp/>management<sp/>for<sp/>entity<sp/>components.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>delayed<sp/>component<sp/>activation<sp/>mechanisms<sp/>for<sp/>spawn<sp/>immunity,<sp/>staggered<sp/>effects,<sp/>and<sp/>sequenced<sp/>initialization<sp/>patterns.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+    </programlisting>
+    <location file="/tmp/h/include/helios/engine/mechanics/lifecycle/README.md"/>
+  </compounddef>
+</doxygen>

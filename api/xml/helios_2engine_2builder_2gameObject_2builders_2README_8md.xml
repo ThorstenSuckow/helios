@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2builder_2gameObject_2builders_2README_8md" kind="file" language="Markdown">
+    <compoundname>helios/engine/builder/gameObject/builders/README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1builder_1_1gameObject_1_1builders">helios::engine::builder::gameObject::builders</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::builder::gameObject::builders</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Domain-specific<sp/>builders<sp/>for<sp/>configuring<sp/>different<sp/>aspects<sp/>of<sp/>GameObjects.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Each<sp/>builder<sp/>encapsulates<sp/>a<sp/>specific<sp/>domain<sp/>of<sp/>entity<sp/>configuration.<sp/>Builders<sp/>provide<sp/>methods<sp/>that<sp/>return<sp/>fine-grained<sp/>config<sp/>objects,<sp/>which<sp/>in<sp/>turn<sp/>add<sp/>and<sp/>configure<sp/>the<sp/>appropriate<sp/>components<sp/>on<sp/>the<sp/>target<sp/>GameObject.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Builders</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Builder<sp/>|<sp/>Domain<sp/>|<sp/>Configs<sp/>Provided<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|---------|--------|------------------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`MotionBuilder`<sp/>|<sp/>Movement<sp/>|<sp/>`Move2DConfig`,<sp/>`SteeringConfig`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`RenderingBuilder`<sp/>|<sp/>Visuals<sp/>|<sp/>`RenderableConfig`,<sp/>`SceneNodeConfig`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SceneBuilder`<sp/>|<sp/>Scene<sp/>Graph<sp/>|<sp/>`SceneNodeConfig`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`CollisionBuilder`<sp/>|<sp/>Physics<sp/>|<sp/>`CollisionConfig`,<sp/>`LevelBoundsCollisionConfig`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`TransformBuilder`<sp/>|<sp/>Spatial<sp/>|<sp/>`TransformConfig`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`EffectsBuilder`<sp/>|<sp/>VFX<sp/>|<sp/>`GfxEffectsConfig`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SpawnBuilder`<sp/>|<sp/>Spawning<sp/>|<sp/>`SpawnConfig`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`AiBuilder`<sp/>|<sp/>AI<sp/>|<sp/>`ChaseConfig`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ShootingBuilder`<sp/>|<sp/>Combat<sp/>|<sp/>`WeaponConfig`<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`LifecycleBuilder`<sp/>|<sp/>Lifecycle<sp/>|<sp/>`LifecycleConfig`<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage<sp/>Pattern</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Each<sp/>builder<sp/>follows<sp/>the<sp/>same<sp/>pattern:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">prototype.withMotion([](MotionBuilder&amp;<sp/>builder)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>builder.move2D()<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Returns<sp/>Move2DConfig</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.speed(5.0f)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.acceleration(10.0f);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>builder.steering()<sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Returns<sp/>SteeringConfig</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.instantSteering(true);</highlight></codeline>
+<codeline><highlight class="normal">});</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Architecture</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">┌─────────────────────────────────────────────────────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Builder<sp/>(e.g.<sp/>MotionBuilder)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>┌─────────────────────────────────────────────────────────┐│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>GameObject*<sp/>gameObject_<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>├─────────────────────────────────────────────────────────┤│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>move2D()<sp/><sp/><sp/><sp/><sp/>→<sp/>Move2DConfig{gameObject_}<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>steering()<sp/><sp/><sp/>→<sp/>SteeringConfig{gameObject_}<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>└─────────────────────────────────────────────────────────┘│</highlight></codeline>
+<codeline><highlight class="normal">└─────────────────────────────────────────────────────────────┘</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Related<sp/>Modules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Module<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|--------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.engine.builder.gameObject.builders.configs`<sp/>|<sp/>Config<sp/>classes<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.engine.modules`<sp/>|<sp/>Component<sp/>implementations<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.engine.mechanics`<sp/>|<sp/>Gameplay<sp/>components<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::builder::gameObject::builders</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Domain-specific<sp/>builders<sp/>for<sp/>configuring<sp/>different<sp/>aspects<sp/>of<sp/>GameObjects.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Each<sp/>builder<sp/>encapsulates<sp/>a<sp/>specific<sp/>domain<sp/>of<sp/>entity<sp/>configuration<sp/>(motion,<sp/>rendering,<sp/>collision,<sp/>etc.).<sp/>Builders<sp/>provide<sp/>methods<sp/>that<sp/>return<sp/>fine-grained<sp/>config<sp/>objects,<sp/>which<sp/>add<sp/>and<sp/>configure<sp/>the<sp/>appropriate<sp/>components<sp/>on<sp/>the<sp/>target<sp/>GameObject.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+    </programlisting>
+    <location file="/tmp/h/include/helios/engine/builder/gameObject/builders/README.md"/>
+  </compounddef>
+</doxygen>

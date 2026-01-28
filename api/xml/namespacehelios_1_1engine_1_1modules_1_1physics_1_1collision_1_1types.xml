@@ -95,7 +95,100 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/modules/physics/collision/types/CollisionBehavior.ixx" line="30" column="5" bodyfile="include/helios/engine/modules/physics/collision/types/CollisionBehavior.ixx" bodystart="30" bodyend="83"/>
+        <location file="/tmp/h/include/helios/engine/modules/physics/collision/types/CollisionBehavior.ixx" line="30" column="5" bodyfile="/tmp/h/include/helios/engine/modules/physics/collision/types/CollisionBehavior.ixx" bodystart="30" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a6a9de8f399df76cc158f000a343f02a4" prot="public" static="no" strong="yes">
+        <type>uint8_t</type>
+        <name>CollisionResponse</name>
+        <qualifiedname>helios::engine::modules::physics::collision::types::CollisionResponse</qualifiedname>
+        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a6a9de8f399df76cc158f000a343f02a4a6adf97f83acf6453d4a6a4b1070f3754" prot="public">
+          <name>None</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>No collision response; collision is ignored. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a6a9de8f399df76cc158f000a343f02a4aadf82e824954b90d8d8f4efbadee8f8a" prot="public">
+          <name>AlignHeadingToDirection</name>
+          <initializer>= 1 &lt;&lt; 0</initializer>
+          <briefdescription>
+<para>Aligns the entity&apos;s heading direction upon collision. </para>
+          </briefdescription>
+          <detaileddescription>
+<para>Aligns the heading of the object to the the movement direction, typically used for bouncing or reflecting projectiles off surfaces. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a6a9de8f399df76cc158f000a343f02a4a4eecfb50c5a20eb78bc4d5304e9d8618" prot="public">
+          <name>size_</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+<para>Sentinel value indicating the number of response types. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Defines how an entity responds to a collision event. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a6a9de8f399df76cc158f000a343f02a4" kindref="member">CollisionResponse</ref> is a bitmask enum that specifies the behavior when a collision is detected.</para>
+<para><simplesect kind="see"><para>CollisionComponent </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/physics/collision/types/CollisionResponse.ixx" line="23" column="5" bodyfile="/tmp/h/include/helios/engine/modules/physics/collision/types/CollisionResponse.ixx" bodystart="23" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a352b51a13f9e1b8e02f7d0e905db7cb1" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>HitPolicy</name>
+        <qualifiedname>helios::engine::modules::physics::collision::types::HitPolicy</qualifiedname>
+        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a352b51a13f9e1b8e02f7d0e905db7cb1a2cc49bbf7186136f477266c636d24b69" prot="public">
+          <name>OneHit</name>
+          <briefdescription>
+<para>Reports only the first collision per frame. </para>
+          </briefdescription>
+          <detaileddescription>
+<para>Once a collision is detected, the entity skips further collision checks for the current frame. This is the default policy and provides optimal performance for typical projectile behavior. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a352b51a13f9e1b8e02f7d0e905db7cb1ab1c94ca2fbc3e78fc30069c8d0f01680" prot="public">
+          <name>All</name>
+          <briefdescription>
+<para>Reports all collisions with overlapping entities. </para>
+          </briefdescription>
+          <detaileddescription>
+<para>The entity continues collision checks even after detecting a collision, generating events for every overlapping entity. Use for area-of-effect or multi-target interactions. </para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Specifies how many collision events an entity can receive per frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a352b51a13f9e1b8e02f7d0e905db7cb1" kindref="member">HitPolicy</ref> controls the collision detection behavior when an entity overlaps multiple other entities in the same frame. This affects both performance and gameplay logic.</para>
+<para>## Policies</para>
+<para>| Policy | Behavior | |--------|----------| | `OneHit` | Reports only the first collision detected (default) | | `All` | Reports all collisions with overlapping entities |</para>
+<para>## Use Cases</para>
+<para><itemizedlist>
+<listitem><para>**OneHit:** Projectiles that destroy on first contact, pickups collected once</para>
+</listitem><listitem><para>**All:** Area-of-effect damage, entities affecting multiple targets simultaneously</para>
+</listitem></itemizedlist>
+</para>
+<para>## Usage</para>
+<para>```cpp // Projectile: stops after first hit prototype.withCollision([](CollisionBuilder&amp; b) { b.collision() .layer(Layers::PROJECTILE) .hitPolicy(HitPolicy::OneHit); });</para>
+<para>// Explosion: damages all entities in range prototype.withCollision([](CollisionBuilder&amp; b) { b.collision() .layer(Layers::EXPLOSION) .hitPolicy(HitPolicy::All); }); ```</para>
+<para><simplesect kind="see"><para>CollisionComponent::setHitPolicy </para>
+</simplesect>
+<simplesect kind="see"><para>GridCollisionDetectionSystem </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/physics/collision/types/HitPolicy.ixx" line="53" column="5" bodyfile="/tmp/h/include/helios/engine/modules/physics/collision/types/HitPolicy.ixx" bodystart="53" bodyend="73"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -104,6 +197,6 @@
     <detaileddescription>
 <para>Provides enums and structs that configure collision detection and response behavior. </para>
     </detaileddescription>
-    <location file="include/helios/engine/modules/physics/collision/types/CollisionBehavior.ixx" line="13" column="1"/>
+    <location file="/tmp/h/include/helios/engine/modules/physics/collision/types/CollisionBehavior.ixx" line="13" column="1"/>
   </compounddef>
 </doxygen>

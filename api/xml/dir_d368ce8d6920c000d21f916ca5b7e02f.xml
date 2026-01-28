@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_d368ce8d6920c000d21f916ca5b7e02f" kind="dir">
+    <compoundname>combat</compoundname>
+    <innerdir refid="dir_7d3bcdf99a77c1f991d9debddb7a154b">commands</innerdir>
+    <innerdir refid="dir_991442008f2dac028067584555d54581">components</innerdir>
+    <innerdir refid="dir_9f8a06593596762c781b6162de719b91">systems</innerdir>
+    <innerfile refid="helios_2engine_2mechanics_2combat_2__module_8ixx">helios/engine/mechanics/combat/_module.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md148">
+<title>helios::engine::mechanics::combat</title><para>Combat-related gameplay systems, components, and commands.</para>
+</sect1>
+<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md149">
+<title>Overview</title><para>This module provides all building blocks for implementing combat mechanics such as aiming, shooting, and projectile spawning.</para>
+</sect1>
+<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md150">
+<title>Submodules</title><para><table rows="4" cols="2"><row>
+<entry thead="yes"><para>Submodule  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>commands/</computeroutput>  </para>
+</entry><entry thead="no"><para>Commands for combat actions (ShootCommand, Aim2DCommand)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>components/</computeroutput>  </para>
+</entry><entry thead="no"><para>Data containers for combat state (aiming direction, cooldowns, projectile config)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>systems/</computeroutput>  </para>
+</entry><entry thead="no"><para>ECS systems for processing combat logic (ProjectileSpawnSystem)  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md151">
+<title>Key Classes</title><para><table rows="6" cols="2"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>Aim2DComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Stores aiming direction and fire frequency  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ShootComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Weapon cooldown, spawn profile reference, emitter state  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>Aim2DCommand</computeroutput>  </para>
+</entry><entry thead="no"><para>Updates aim direction from input  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ShootCommand</computeroutput>  </para>
+</entry><entry thead="no"><para>Triggers projectile spawn when cooldown allows  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ProjectileSpawnSystem</computeroutput>  </para>
+</entry><entry thead="no"><para>Reads shoot state and enqueues spawn commands  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_d368ce8d6920c000d21f916ca5b7e02f_1autotoc_md152">
+<title>Architecture</title><para>Combat follows the command pattern integrated with the spawn system:</para>
+<para>1. Input systems generate <computeroutput>ShootCommand</computeroutput> and <computeroutput>Aim2DCommand</computeroutput> 2. Commands update <computeroutput>ShootComponent</computeroutput> and <computeroutput>Aim2DComponent</computeroutput> state 3. <computeroutput>ProjectileSpawnSystem</computeroutput> reads component state and generates <computeroutput>SpawnCommand</computeroutput> 4. Spawn system handles actual projectile creation via pool and profile</para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/mechanics/combat/"/>
+  </compounddef>
+</doxygen>

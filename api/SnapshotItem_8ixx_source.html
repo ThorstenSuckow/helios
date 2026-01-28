@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>helios: include/helios/scene/SnapshotItem.ixx Source File</title>
+<title>helios: SnapshotItem.ixx Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
@@ -186,53 +186,66 @@ $(function() {
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">         * @param renderable A weak_ptr to the Renderable.</span></div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">         * @param worldMatrix A const ref to the world transformation matrix, which gets copied.</span></div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00080" data-start="{" data-end="}">
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="structhelios_1_1scene_1_1SnapshotItem.html#a3d91e9c3e4e5529eb95aee6ca15c3c98">   80</a></span>        <a class="code hl_function" href="structhelios_1_1scene_1_1SnapshotItem.html#a896b2a4f5c6bf92b2dd560281cd0b3f6">SnapshotItem</a>(</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            std::weak_ptr&lt;const <a class="code hl_namespace" href="namespacehelios.html">helios</a>::<a class="code hl_namespace" href="namespacehelios_1_1rendering.html">rendering</a>::Renderable&gt; <a class="code hl_function" href="structhelios_1_1scene_1_1SnapshotItem.html#a3145126ee37604f07f27f3f8ed8d30e2">renderable</a>,</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            const <a class="code hl_namespace" href="namespacehelios.html">helios</a>::<a class="code hl_namespace" href="namespacehelios_1_1math.html">math</a>::mat4f&amp; <a class="code hl_function" href="structhelios_1_1scene_1_1SnapshotItem.html#a9b1e4c1e12d5c92284036256995442f5">worldMatrix</a></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        );</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment"></span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">         * @brief Returns a weak_ptr to the Renderable of this SnapshotItem.</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">         * Use `.lock()` on the returned weak_ptr to obtain a shared_ptr for</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">         * the Renderable, if it still exists. If the Renderable does not exist,</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">         * the SnapshotItem should be ignored for further processing.</span></div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">         * @return A weak_ptr to the Renderable of this SnapshotItem.</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="structhelios_1_1scene_1_1SnapshotItem.html#a3145126ee37604f07f27f3f8ed8d30e2">   93</a></span>        [[nodiscard]] std::weak_ptr&lt;const <a class="code hl_namespace" href="namespacehelios.html">helios</a>::<a class="code hl_namespace" href="namespacehelios_1_1rendering.html">rendering</a>::Renderable&gt; <a class="code hl_function" href="structhelios_1_1scene_1_1SnapshotItem.html#a3145126ee37604f07f27f3f8ed8d30e2">renderable</a>() const noexcept;</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment"></span> </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">         * @brief Returns a const ref to the worldMatrix of this SnapshotItem.</span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">         * The world transformation matrix is a copy from the world transformation matrix</span></div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">         * created with this SnapshotItem.</span></div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">         * @return The const ref to the world matrix of this SnapshotItem.</span></div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="structhelios_1_1scene_1_1SnapshotItem.html#a9b1e4c1e12d5c92284036256995442f5">  102</a></span>        [[nodiscard]] const <a class="code hl_namespace" href="namespacehelios.html">helios</a>::<a class="code hl_namespace" href="namespacehelios_1_1math.html">math</a>::mat4f&amp; <a class="code hl_function" href="structhelios_1_1scene_1_1SnapshotItem.html#a9b1e4c1e12d5c92284036256995442f5">worldMatrix</a>() const noexcept;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    };</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        ) :</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            renderable_(std::move(<a class="code hl_function" href="structhelios_1_1scene_1_1SnapshotItem.html#a3145126ee37604f07f27f3f8ed8d30e2">renderable</a>)),</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            worldMatrix_(<a class="code hl_function" href="structhelios_1_1scene_1_1SnapshotItem.html#a9b1e4c1e12d5c92284036256995442f5">worldMatrix</a>) {</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        }</div>
 </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>}</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment"></span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">         * @brief Returns a weak_ptr to the Renderable of this SnapshotItem.</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">         * Use `.lock()` on the returned weak_ptr to obtain a shared_ptr for</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">         * the Renderable, if it still exists. If the Renderable does not exist,</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">         * the SnapshotItem should be ignored for further processing.</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">         * @return A weak_ptr to the Renderable of this SnapshotItem.</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00096" data-start="{" data-end="}">
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="structhelios_1_1scene_1_1SnapshotItem.html#a3145126ee37604f07f27f3f8ed8d30e2">   96</a></span>        [[nodiscard]] std::weak_ptr&lt;const helios::rendering::Renderable&gt; <a class="code hl_function" href="structhelios_1_1scene_1_1SnapshotItem.html#a3145126ee37604f07f27f3f8ed8d30e2">renderable</a>() const noexcept {</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            <span class="keywordflow">return</span> renderable_;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        }</div>
+</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment"></span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">         * @brief Returns a const ref to the worldMatrix of this SnapshotItem.</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment">         * The world transformation matrix is a copy from the world transformation matrix</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">         * created with this SnapshotItem.</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">         * @return The const ref to the world matrix of this SnapshotItem.</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00107" data-start="{" data-end="}">
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="structhelios_1_1scene_1_1SnapshotItem.html#a9b1e4c1e12d5c92284036256995442f5">  107</a></span>        [[nodiscard]] <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a>&amp; <a class="code hl_function" href="structhelios_1_1scene_1_1SnapshotItem.html#a9b1e4c1e12d5c92284036256995442f5">worldMatrix</a>() const noexcept {</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            <span class="keywordflow">return</span> worldMatrix_;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        }</div>
+</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    };</div>
+</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>}</div>
 <div class="ttc" id="amodule__helios_8math_8types_html"><div class="ttname"><a href="module__helios_8math_8types.html">helios.math.types</a></div><div class="ttdoc">Vector and matrix type definitions.</div></div>
 <div class="ttc" id="amodule__helios_8rendering_8Renderable_html"><div class="ttname"><a href="module__helios_8rendering_8Renderable.html">helios.rendering.Renderable</a></div></div>
 <div class="ttc" id="amodule__helios_8scene_8SnapshotItem_html"><div class="ttname"><a href="module__helios_8scene_8SnapshotItem.html">helios.scene.SnapshotItem</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1math_html"><div class="ttname"><a href="namespacehelios_1_1math.html">helios::math</a></div><div class="ttdoc">Mathematical operations and types.</div><div class="ttdef"><b>Definition</b> <a href="Numeric_8ixx_source.html#l00007">Numeric.ixx:7</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1math_html_ad422120d6e1f106140808f16e348f0b3"><div class="ttname"><a href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a></div><div class="ttdeci">mat4&lt; float &gt; mat4f</div><div class="ttdoc">Type alias for a 4x4 float matrix.</div><div class="ttdef"><b>Definition</b> <a href="mat4_8ixx_source.html#l00534">mat4.ixx:534</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1rendering_html"><div class="ttname"><a href="namespacehelios_1_1rendering.html">helios::rendering</a></div><div class="ttdoc">Graphics rendering infrastructure.</div></div>
-<div class="ttc" id="anamespacehelios_1_1scene_html"><div class="ttname"><a href="namespacehelios_1_1scene.html">helios::scene</a></div><div class="ttdoc">Scene graph and camera management.</div><div class="ttdef"><b>Definition</b> <a href="Camera_8ixx_source.html#l00014">Camera.ixx:14</a></div></div>
-<div class="ttc" id="anamespacehelios_html"><div class="ttname"><a href="namespacehelios.html">helios</a></div><div class="ttdef"><b>Definition</b> <a href="GLFWApplication_8ixx_source.html#l00025">GLFWApplication.ixx:25</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1scene_html"><div class="ttname"><a href="namespacehelios_1_1scene.html">helios::scene</a></div><div class="ttdoc">Scene graph and camera management.</div><div class="ttdef"><b>Definition</b> <a href="Camera_8ixx_source.html#l00016">Camera.ixx:16</a></div></div>
+<div class="ttc" id="anamespacehelios_html"><div class="ttname"><a href="namespacehelios.html">helios</a></div><div class="ttdef"><b>Definition</b> <a href="GLFWApplication_8ixx_source.html#l00029">GLFWApplication.ixx:29</a></div></div>
 <div class="ttc" id="astructhelios_1_1scene_1_1SnapshotItem_html_a10f299edb3444212e2837607f7cba4b9"><div class="ttname"><a href="structhelios_1_1scene_1_1SnapshotItem.html#a10f299edb3444212e2837607f7cba4b9">helios::scene::SnapshotItem::operator=</a></div><div class="ttdeci">SnapshotItem &amp; operator=(const SnapshotItem &amp;)=delete</div></div>
-<div class="ttc" id="astructhelios_1_1scene_1_1SnapshotItem_html_a3145126ee37604f07f27f3f8ed8d30e2"><div class="ttname"><a href="structhelios_1_1scene_1_1SnapshotItem.html#a3145126ee37604f07f27f3f8ed8d30e2">helios::scene::SnapshotItem::renderable</a></div><div class="ttdeci">std::weak_ptr&lt; const helios::rendering::Renderable &gt; renderable() const noexcept</div><div class="ttdoc">Returns a weak_ptr to the Renderable of this SnapshotItem. Use `.lock()` on the returned weak_ptr to ...</div></div>
+<div class="ttc" id="astructhelios_1_1scene_1_1SnapshotItem_html_a3145126ee37604f07f27f3f8ed8d30e2"><div class="ttname"><a href="structhelios_1_1scene_1_1SnapshotItem.html#a3145126ee37604f07f27f3f8ed8d30e2">helios::scene::SnapshotItem::renderable</a></div><div class="ttdeci">std::weak_ptr&lt; const helios::rendering::Renderable &gt; renderable() const noexcept</div><div class="ttdoc">Returns a weak_ptr to the Renderable of this SnapshotItem. Use `.lock()` on the returned weak_ptr to ...</div><div class="ttdef"><b>Definition</b> <a href="#l00096">SnapshotItem.ixx:96</a></div></div>
 <div class="ttc" id="astructhelios_1_1scene_1_1SnapshotItem_html_a6eab653f8e9aca29ddbbf1d147df23b3"><div class="ttname"><a href="structhelios_1_1scene_1_1SnapshotItem.html#a6eab653f8e9aca29ddbbf1d147df23b3">helios::scene::SnapshotItem::SnapshotItem</a></div><div class="ttdeci">SnapshotItem(SnapshotItem &amp;&amp;) noexcept=default</div><div class="ttdoc">Provide custom move constructor.</div></div>
 <div class="ttc" id="astructhelios_1_1scene_1_1SnapshotItem_html_a896b2a4f5c6bf92b2dd560281cd0b3f6"><div class="ttname"><a href="structhelios_1_1scene_1_1SnapshotItem.html#a896b2a4f5c6bf92b2dd560281cd0b3f6">helios::scene::SnapshotItem::SnapshotItem</a></div><div class="ttdeci">SnapshotItem(const SnapshotItem &amp;)=delete</div><div class="ttdoc">Prevent copying.</div></div>
-<div class="ttc" id="astructhelios_1_1scene_1_1SnapshotItem_html_a9b1e4c1e12d5c92284036256995442f5"><div class="ttname"><a href="structhelios_1_1scene_1_1SnapshotItem.html#a9b1e4c1e12d5c92284036256995442f5">helios::scene::SnapshotItem::worldMatrix</a></div><div class="ttdeci">const helios::math::mat4f &amp; worldMatrix() const noexcept</div><div class="ttdoc">Returns a const ref to the worldMatrix of this SnapshotItem. The world transformation matrix is a cop...</div></div>
+<div class="ttc" id="astructhelios_1_1scene_1_1SnapshotItem_html_a9b1e4c1e12d5c92284036256995442f5"><div class="ttname"><a href="structhelios_1_1scene_1_1SnapshotItem.html#a9b1e4c1e12d5c92284036256995442f5">helios::scene::SnapshotItem::worldMatrix</a></div><div class="ttdeci">const helios::math::mat4f &amp; worldMatrix() const noexcept</div><div class="ttdoc">Returns a const ref to the worldMatrix of this SnapshotItem. The world transformation matrix is a cop...</div><div class="ttdef"><b>Definition</b> <a href="#l00107">SnapshotItem.ixx:107</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_08c09894bd9f0ab4b1e9fdc7a2628766.html">helios</a></li><li class="navelem"><a href="dir_b6e017bc8c299f04fc1162fc4677be61.html">scene</a></li><li class="navelem"><a href="SnapshotItem_8ixx.html">SnapshotItem.ixx</a></li>
+    <li class="navelem"><a href="dir_8af83c0dc83a45a35ca6968cdc29a7af.html">tmp</a></li><li class="navelem"><a href="dir_25ba8c016aaabea63a88c40dc27775c8.html">h</a></li><li class="navelem"><a href="dir_b3f59628e993ded3576abd1cf1101eb8.html">include</a></li><li class="navelem"><a href="dir_1ac1243035b4576c146b8d2c8a6274f6.html">helios</a></li><li class="navelem"><a href="dir_dde1b4dbeafc450b8ae5525133d75a82.html">scene</a></li><li class="navelem"><a href="SnapshotItem_8ixx.html">SnapshotItem.ixx</a></li>
     <li class="footer">Generated on <span class="timestamp"></span> for helios by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

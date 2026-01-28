@@ -161,8 +161,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a3f28e5b3a6b7fe4c1af4e5770ad42227"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>'s localTransform.  <br /></td></tr>
 <tr class="memitem:a4e31b52717a76a9bae9a80a1db0b808b" id="r_a4e31b52717a76a9bae9a80a1db0b808b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4e31b52717a76a9bae9a80a1db0b808b">parent</a> () const noexcept</td></tr>
 <tr class="memdesc:a4e31b52717a76a9bae9a80a1db0b808b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to this node's parent node.  <br /></td></tr>
-<tr class="memitem:ae95fa852a86bcfbcc981dbb6d70113d8" id="r_ae95fa852a86bcfbcc981dbb6d70113d8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae95fa852a86bcfbcc981dbb6d70113d8">applyWorldTransform</a> (const <a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> &amp;wf, <a class="el" href="structhelios_1_1scene_1_1SceneGraphKey.html">helios::scene::SceneGraphKey</a> sceneGraphKey) noexcept</td></tr>
-<tr class="memdesc:ae95fa852a86bcfbcc981dbb6d70113d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the world transform for this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>.  <br /></td></tr>
+<tr class="memitem:abc594768ba59f9154b707424aa76a871" id="r_abc594768ba59f9154b707424aa76a871"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abc594768ba59f9154b707424aa76a871">applyWorldTransform</a> (const <a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> &amp;parentWorldTransform, <a class="el" href="structhelios_1_1scene_1_1SceneGraphKey.html">helios::scene::SceneGraphKey</a> sceneGraphKey) noexcept</td></tr>
+<tr class="memdesc:abc594768ba59f9154b707424aa76a871"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the world transform for this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>.  <br /></td></tr>
 <tr class="memitem:a2cd5ee14fdf4990952266c724c916551" id="r_a2cd5ee14fdf4990952266c724c916551"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2cd5ee14fdf4990952266c724c916551">worldTransform</a> () noexcept</td></tr>
 <tr class="memdesc:a2cd5ee14fdf4990952266c724c916551"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes and returns the world transform for this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. Will request the current world transform from the parent node to calculate this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>'s world transform. For efficiency, this method should cache the result and only trigger a recompute if this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> is dirty (`needsUpdate_ == true`).  <br /></td></tr>
 <tr class="memitem:ab908b6a16d34640eca0d92f2573e6cc3" id="r_ab908b6a16d34640eca0d92f2573e6cc3"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab908b6a16d34640eca0d92f2573e6cc3">cachedWorldTransform</a> () const noexcept</td></tr>
@@ -227,7 +227,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>A <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> holds a global unique identifier and tracks a dirty state (`needsUpdate_`) related to any transformations that occurred on the <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. Ownership is managed by a collection of unique pointers of the child nodes. SceneNodes are designed to be not copyable and not assignable to prevent duplication and to enforce the hierarchical tree structure.</p>
 <p>The `worldTransform_` is derived from a <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>'s `localTransform_` and the <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>'s parent's `worldTransform`s. A call to `worldTransform()` will update the particular subtree of the <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> bottom-up to make sure the actual values are available with the <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>'s `worldTransform`. A <a class="el" href="classhelios_1_1scene_1_1Scene.html" title="Represents a hierarchical SceneGraph that organizes all renderable and non-renderable objects within ...">Scene</a> might also propagate changes top-bottom - see `Scene::updateNodes()`. </p>
 
-<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00060">60</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00062">62</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a03ca20aef6224b069891356d5419eead" name="a03ca20aef6224b069891356d5419eead"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a03ca20aef6224b069891356d5419eead">&#9670;&#160;</a></span>~SceneNode()</h2>
@@ -281,7 +281,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 
 <p class="reference">References <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="classhelios_1_1scene_1_1CameraSceneNode.html#a58b5b9c583ddf40dcc81793c19fc0c79">helios::scene::CameraSceneNode::addNode()</a>, <a class="el" href="#a639af371377e5279a7e644da2af05e5a">addNode()</a>, <a class="el" href="#a345af64a75ad370d482051006658c81e">children()</a>, <a class="el" href="#a7cc7b1c8b3b57927c9d33abd8f652964">operator=()</a>, <a class="el" href="#a4e31b52717a76a9bae9a80a1db0b808b">parent()</a>, <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>, <a class="el" href="#a1a7a726c994dd5b29a0719f45845ccb0">SceneNode()</a>, <a class="el" href="#af2af3ad7c17ecf2a693724deed12ce02">SceneNode()</a>, <a class="el" href="#ac391d6973219428d9048caffe721cfb1">SceneNode()</a>, <a class="el" href="#a8e150f0c631aa964846dc20cd627b538">setParent()</a>, <a class="el" href="#acac79a13bb5bb933c3f9c230a98d3daf">setRotation()</a>, <a class="el" href="#aa61104006dc48bc2a57dbe6fc6cbcb5b">setScale()</a>, and <a class="el" href="#a1f08f342381c9ad0f2d5d8b88c450229">setTranslation()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="CameraSceneNode_8ixx_source.html#l00071">helios::scene::CameraSceneNode::addNode()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00240">addNode()</a>, <a class="el" href="#a7cc7b1c8b3b57927c9d33abd8f652964">operator=()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00352">parent()</a>, <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00147">setParent()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00306">setRotation()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00291">setScale()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00322">setTranslation()</a>.</p>
 <div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
@@ -315,13 +315,15 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Constructs a new <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> that represents no renderable object. Nodes constructed in this way should be treated as transformation nodes. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000031">Todo</a></b></dt><dd>explicitly implement move (assignment) constructor if required, since we have deleted the copy constructors </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000039">Todo</a></b></dt><dd>explicitly implement move (assignment) constructor if required, since we have deleted the copy constructors </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00177">177</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
 </div>
 </div>
@@ -343,7 +345,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel explicit">explicit</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -356,12 +358,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00188">188</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="Guid_8ixx_source.html#l00084">helios::util::Guid::generate()</a>.</p>
 <div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-4-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a1a7a726c994dd5b29a0719f45845ccb0_cgraph.svg" width="435" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a1a7a726c994dd5b29a0719f45845ccb0_cgraph.svg" width="375" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -388,7 +392,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel explicit">explicit</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -402,12 +406,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="#a2f4bba61e70c28e98747ee84af651812">renderable()</a>, and <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00200">200</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="Guid_8ixx_source.html#l00084">helios::util::Guid::generate()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00260">renderable()</a>.</p>
 <div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-5-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_ac391d6973219428d9048caffe721cfb1_cgraph.svg" width="435" height="163"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_ac391d6973219428d9048caffe721cfb1_cgraph.svg" width="435" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -430,7 +436,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel explicit">explicit</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -443,12 +449,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="#a2f4bba61e70c28e98747ee84af651812">renderable()</a>, and <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00215">215</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="Guid_8ixx_source.html#l00084">helios::util::Guid::generate()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00260">renderable()</a>.</p>
 <div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-6-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_af2af3ad7c17ecf2a693724deed12ce02_cgraph.svg" width="435" height="163"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_af2af3ad7c17ecf2a693724deed12ce02_cgraph.svg" width="435" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -472,7 +480,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -480,20 +488,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Returns the axis-aligned bounding box for this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> in world coordinates. </p>
 <dl class="section return"><dt>Returns</dt><dd>The AABB transformed to world space. </dd></dl>
 
-<p class="reference">References <a class="el" href="#a1020ca70c5268619a3bdfb3acb843e34">aabb()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00434">434</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#a1020ca70c5268619a3bdfb3acb843e34">aabb()</a>.</p>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00125">aabb_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00424">needsUpdate()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00449">update()</a>.</p>
 <div id="dynsection-7" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-7-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a1020ca70c5268619a3bdfb3acb843e34_cgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-8" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-8-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a1020ca70c5268619a3bdfb3acb843e34_icgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a1020ca70c5268619a3bdfb3acb843e34_cgraph.svg" width="100%" height="410"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -516,7 +518,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel virtual">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel virtual">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -532,26 +534,20 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 
 <p>Reimplemented in <a class="el" href="classhelios_1_1scene_1_1CameraSceneNode.html#a58b5b9c583ddf40dcc81793c19fc0c79">helios::scene::CameraSceneNode</a>.</p>
 
-<p class="reference">References <a class="el" href="#a639af371377e5279a7e644da2af05e5a">addNode()</a>, and <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00240">240</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#a639af371377e5279a7e644da2af05e5a">addNode()</a>.</p>
-<div id="dynsection-9" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00099">children_</a>, and <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
+<div id="dynsection-8" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-9-content" class="dyncontent" style="display:none;">
+<div id="dynsection-8-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a639af371377e5279a7e644da2af05e5a_cgraph.svg" width="435" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-<div id="dynsection-10" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-10-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a639af371377e5279a7e644da2af05e5a_icgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
 
 </div>
 </div>
-<a id="ae95fa852a86bcfbcc981dbb6d70113d8" name="ae95fa852a86bcfbcc981dbb6d70113d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae95fa852a86bcfbcc981dbb6d70113d8">&#9670;&#160;</a></span>applyWorldTransform()</h2>
+<a id="abc594768ba59f9154b707424aa76a871" name="abc594768ba59f9154b707424aa76a871"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc594768ba59f9154b707424aa76a871">&#9670;&#160;</a></span>applyWorldTransform()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -562,7 +558,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
         <tr>
           <td class="memname">bool helios::scene::SceneNode::applyWorldTransform </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>wf</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parentWorldTransform</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -572,7 +568,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -588,20 +584,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if the world transform was updated, otherwise false. </dd></dl>
 
-<p class="reference">References <a class="el" href="#ae95fa852a86bcfbcc981dbb6d70113d8">applyWorldTransform()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00369">369</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#ae95fa852a86bcfbcc981dbb6d70113d8">applyWorldTransform()</a>.</p>
-<div id="dynsection-11" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00491">inheritWorldTransform()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00424">needsUpdate()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00078">needsUpdate_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00468">onWorldTransformUpdate()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00107">worldTransform_</a>.</p>
+<div id="dynsection-9" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-11-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_ae95fa852a86bcfbcc981dbb6d70113d8_cgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-12" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-12-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_ae95fa852a86bcfbcc981dbb6d70113d8_icgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-9-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_abc594768ba59f9154b707424aa76a871_cgraph.svg" width="442" height="179"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -624,7 +614,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -632,20 +622,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Returns the current worldTransform matrix of this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> **without triggering any recomputation**. This method is efficient for access when the world transform is known to be up-to-date. </p>
 <dl class="section return"><dt>Returns</dt><dd>The current worldTransform matrix of this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. </dd></dl>
 
-<p class="reference">References <a class="el" href="#ab908b6a16d34640eca0d92f2573e6cc3">cachedWorldTransform()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00412">412</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#ab908b6a16d34640eca0d92f2573e6cc3">cachedWorldTransform()</a>.</p>
-<div id="dynsection-13" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00107">worldTransform_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Scene_8ixx_source.html#l00263">helios::scene::Scene::createSnapshot()</a>, <a class="el" href="CameraSceneNode_8ixx_source.html#l00112">helios::scene::CameraSceneNode::lookAt()</a>, and <a class="el" href="CameraSceneNode_8ixx_source.html#l00193">helios::scene::CameraSceneNode::onWorldTransformUpdate()</a>.</p>
+<div id="dynsection-10" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-13-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_ab908b6a16d34640eca0d92f2573e6cc3_cgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-14" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-14-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-14-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_ab908b6a16d34640eca0d92f2573e6cc3_icgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-10-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_ab908b6a16d34640eca0d92f2573e6cc3_icgraph.svg" width="476" height="179"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -668,7 +654,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -676,20 +662,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Returns a const ref to the list of this node's children. </p>
 <dl class="section return"><dt>Returns</dt><dd>A const ref to the list of children of this node. </dd></dl>
 
-<p class="reference">References <a class="el" href="#a345af64a75ad370d482051006658c81e">children()</a>, and <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00251">251</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#a345af64a75ad370d482051006658c81e">children()</a>.</p>
-<div id="dynsection-15" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-15-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00099">children_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="CullNoneStrategy_8ixx_source.html#l00033">helios::scene::CullNoneStrategy::cull()</a>.</p>
+<div id="dynsection-11" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-15-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a345af64a75ad370d482051006658c81e_cgraph.svg" width="435" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-16" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-16-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-16-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a345af64a75ad370d482051006658c81e_icgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-11-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a345af64a75ad370d482051006658c81e_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -712,7 +694,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -720,21 +702,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Returns the globally unique identifier for this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd>The unique identifier for this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. </dd></dl>
 
-<p class="reference">References <a class="el" href="#a1488aa0cc05f989400589f36814afba1">guid()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="#a1488aa0cc05f989400589f36814afba1">guid()</a>.</p>
-<div id="dynsection-17" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-17-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-17-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a1488aa0cc05f989400589f36814afba1_cgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-18" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-18-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-18-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a1488aa0cc05f989400589f36814afba1_icgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00227">227</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
 </div>
 </div>
@@ -756,7 +724,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -764,20 +732,22 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Returns true if this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> was configured with a Renderable. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if the <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> was configured with a Renderable, otherwise false. </dd></dl>
 
-<p class="reference">References <a class="el" href="#a3a41a256979415a6678bb391660b0ced">hasRenderable()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00269">269</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#a3a41a256979415a6678bb391660b0ced">hasRenderable()</a>.</p>
-<div id="dynsection-19" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-19-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00260">renderable()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Scene_8ixx_source.html#l00263">helios::scene::Scene::createSnapshot()</a>.</p>
+<div id="dynsection-12" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-19-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a3a41a256979415a6678bb391660b0ced_cgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-12-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a3a41a256979415a6678bb391660b0ced_cgraph.svg" width="435" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-<div id="dynsection-20" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-20-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-13" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-20-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a3a41a256979415a6678bb391660b0ced_icgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-13-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a3a41a256979415a6678bb391660b0ced_icgraph.svg" width="402" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -800,7 +770,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -809,21 +779,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <dl class="section return"><dt>Returns</dt><dd>The active inheritance mask.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#a75103edee2bbacbebe2296dd88d1a1e9" title="Sets which transform components this node inherits from its parent.">setInheritance()</a> </dd></dl>
 
-<p class="reference">References <a class="el" href="#abfaab87eb2e94a094fda0d96ce28a373">inheritance()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00527">527</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#abfaab87eb2e94a094fda0d96ce28a373">inheritance()</a>.</p>
-<div id="dynsection-21" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-21-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-21-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_abfaab87eb2e94a094fda0d96ce28a373_cgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-22" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-22-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-22-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_abfaab87eb2e94a094fda0d96ce28a373_icgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00137">inheritance_</a>.</p>
 
 </div>
 </div>
@@ -845,7 +803,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -863,20 +821,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <dd>
 <a class="el" href="namespacehelios_1_1math.html#a27682cda52181a23edab8c0249fa531d" title="Bitmask enum controlling which transform components a child node inherits from its parent.">helios::math::TransformType</a> </dd></dl>
 
-<p class="reference">References <a class="el" href="#a40a0bcf3df470258d5cc779beb884698">inheritWorldTransform()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00491">491</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#a40a0bcf3df470258d5cc779beb884698">inheritWorldTransform()</a>.</p>
-<div id="dynsection-23" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-23-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="TransformType_8ixx_source.html#l00072">helios::math::All</a>, <a class="el" href="SceneNode_8ixx_source.html#l00137">inheritance_</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00114">localTransform_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="SceneNode_8ixx_source.html#l00369">applyWorldTransform()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00449">update()</a>.</p>
+<div id="dynsection-14" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-14-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-23-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a40a0bcf3df470258d5cc779beb884698_cgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-24" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-24-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-24-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a40a0bcf3df470258d5cc779beb884698_icgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-14-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a40a0bcf3df470258d5cc779beb884698_icgraph.svg" width="100%" height="410"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -899,7 +853,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -907,20 +861,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Returns whether this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> and its child nodes should be considered for rendering. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if the <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> should be considered for rendering, otherwise false. </dd></dl>
 
-<p class="reference">References <a class="el" href="#af9530fc7b8962c228dd883bf0f509a4a">isActive()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00536">536</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#af9530fc7b8962c228dd883bf0f509a4a">isActive()</a>.</p>
-<div id="dynsection-25" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-25-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00120">isActive_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Scene_8ixx_source.html#l00263">helios::scene::Scene::createSnapshot()</a>, and <a class="el" href="CullNoneStrategy_8ixx_source.html#l00033">helios::scene::CullNoneStrategy::cull()</a>.</p>
+<div id="dynsection-15" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-15-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-25-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_af9530fc7b8962c228dd883bf0f509a4a_cgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-26" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-26-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-26-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_af9530fc7b8962c228dd883bf0f509a4a_icgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-15-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_af9530fc7b8962c228dd883bf0f509a4a_icgraph.svg" width="100%" height="404"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -943,7 +893,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -951,20 +901,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Returns this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>'s localTransform. </p>
 <dl class="section return"><dt>Returns</dt><dd>A const reference to this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>'s `Transform` object. </dd></dl>
 
-<p class="reference">References <a class="el" href="#a52ac30adf28408c010626d9236c78828">localTransform()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00333">333</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#a52ac30adf28408c010626d9236c78828">localTransform()</a>, and <a class="el" href="#a3f28e5b3a6b7fe4c1af4e5770ad42227">localTransform()</a>.</p>
-<div id="dynsection-27" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-27-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00114">localTransform_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="CameraSceneNode_8ixx_source.html#l00162">helios::scene::CameraSceneNode::lookAtLocal()</a>.</p>
+<div id="dynsection-16" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-16-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-27-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a52ac30adf28408c010626d9236c78828_cgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-28" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-28-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-28-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a52ac30adf28408c010626d9236c78828_icgraph.svg" width="435" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-16-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a52ac30adf28408c010626d9236c78828_icgraph.svg" width="452" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -987,7 +933,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -995,13 +941,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Returns this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>'s localTransform. </p>
 <dl class="section return"><dt>Returns</dt><dd>A reference to this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>'s `Transform` object. </dd></dl>
 
-<p class="reference">References <a class="el" href="#a52ac30adf28408c010626d9236c78828">localTransform()</a>.</p>
-<div id="dynsection-29" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-29-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-29-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a3f28e5b3a6b7fe4c1af4e5770ad42227_cgraph.svg" width="435" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00342">342</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00114">localTransform_</a>.</p>
 
 </div>
 </div>
@@ -1023,7 +965,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1032,20 +974,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>The <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> is considered "dirty" if either the `localTransform_` needs an update, or if the `needsUpdate_` property is set to true.</p>
 <dl class="section return"><dt>Returns</dt><dd>true if this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> is considered to be dirty, otherwise false. </dd></dl>
 
-<p class="reference">References <a class="el" href="#a88551e7d166868342b87fd83e767442c">needsUpdate()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00424">424</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#a88551e7d166868342b87fd83e767442c">needsUpdate()</a>.</p>
-<div id="dynsection-30" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-30-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00114">localTransform_</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00078">needsUpdate_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="SceneNode_8ixx_source.html#l00434">aabb()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00369">applyWorldTransform()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00396">worldTransform()</a>.</p>
+<div id="dynsection-17" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-17-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-30-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a88551e7d166868342b87fd83e767442c_cgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-31" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-31-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-31-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a88551e7d166868342b87fd83e767442c_icgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-17-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a88551e7d166868342b87fd83e767442c_icgraph.svg" width="100%" height="434"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -1068,7 +1006,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel virtual">virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel virtual">virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1078,20 +1016,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 
 <p>Reimplemented in <a class="el" href="classhelios_1_1scene_1_1CameraSceneNode.html#ae9863cf5d6dde842d58d1c86ccec02e0">helios::scene::CameraSceneNode</a>.</p>
 
-<p class="reference">References <a class="el" href="#a3ea0d74f134d284d702a06d456e633a0">onWorldTransformUpdate()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00468">468</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#a3ea0d74f134d284d702a06d456e633a0">onWorldTransformUpdate()</a>.</p>
-<div id="dynsection-32" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-32-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00125">aabb_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00085">renderable_</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00107">worldTransform_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="SceneNode_8ixx_source.html#l00369">applyWorldTransform()</a>, <a class="el" href="CameraSceneNode_8ixx_source.html#l00193">helios::scene::CameraSceneNode::onWorldTransformUpdate()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00449">update()</a>.</p>
+<div id="dynsection-18" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-18-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-32-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a3ea0d74f134d284d702a06d456e633a0_cgraph.svg" width="206" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-33" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-33-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-33-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a3ea0d74f134d284d702a06d456e633a0_icgraph.svg" width="206" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-18-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a3ea0d74f134d284d702a06d456e633a0_icgraph.svg" width="100%" height="458"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -1123,10 +1057,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>A <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> is not intended to be copied. </p>
 
 <p class="reference">References <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
-<div id="dynsection-34" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-34-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-19" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-19-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-34-content" class="dyncontent" style="display:none;">
+<div id="dynsection-19-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a7cc7b1c8b3b57927c9d33abd8f652964_cgraph.svg" width="435" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -1150,7 +1084,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1158,20 +1092,22 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Returns a pointer to this node's parent node. </p>
 <dl class="section return"><dt>Returns</dt><dd>The pointer to this node's parent, or nullptr if no parent exists, e.g. for the root node. </dd></dl>
 
-<p class="reference">References <a class="el" href="#a4e31b52717a76a9bae9a80a1db0b808b">parent()</a>, and <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00352">352</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#a4e31b52717a76a9bae9a80a1db0b808b">parent()</a>, and <a class="el" href="SceneNodeComponent_8ixx_source.html#l00059">helios::engine::modules::scene::components::SceneNodeComponent::SceneNodeComponent()</a>.</p>
-<div id="dynsection-35" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-35-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00093">parent_</a>, and <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="CameraSceneNode_8ixx_source.html#l00112">helios::scene::CameraSceneNode::lookAt()</a>, and <a class="el" href="SceneNodeComponent_8ixx_source.html#l00059">helios::engine::modules::scene::components::SceneNodeComponent::SceneNodeComponent()</a>.</p>
+<div id="dynsection-20" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-20-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-35-content" class="dyncontent" style="display:none;">
+<div id="dynsection-20-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a4e31b52717a76a9bae9a80a1db0b808b_cgraph.svg" width="435" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-<div id="dynsection-36" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-36-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-21" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-21-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-36-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a4e31b52717a76a9bae9a80a1db0b808b_icgraph.svg" width="500" height="83"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-21-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a4e31b52717a76a9bae9a80a1db0b808b_icgraph.svg" width="500" height="131"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -1194,7 +1130,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1202,20 +1138,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Returns a shared pointer to the Renderable of this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd>A shared_ptr to the Renderable, may be nullptr if none is set. </dd></dl>
 
-<p class="reference">References <a class="el" href="#a2f4bba61e70c28e98747ee84af651812">renderable()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00260">260</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#a2f4bba61e70c28e98747ee84af651812">renderable()</a>, <a class="el" href="#a01e293e31d8c30a3f9cbae3ad19ca6d8">renderable()</a>, <a class="el" href="#af2af3ad7c17ecf2a693724deed12ce02">SceneNode()</a>, <a class="el" href="#ac391d6973219428d9048caffe721cfb1">SceneNode()</a>, and <a class="el" href="SceneNodeComponent_8ixx_source.html#l00059">helios::engine::modules::scene::components::SceneNodeComponent::SceneNodeComponent()</a>.</p>
-<div id="dynsection-37" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-37-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00085">renderable_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Scene_8ixx_source.html#l00263">helios::scene::Scene::createSnapshot()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00269">hasRenderable()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00215">SceneNode()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00200">SceneNode()</a>, and <a class="el" href="SceneNodeComponent_8ixx_source.html#l00059">helios::engine::modules::scene::components::SceneNodeComponent::SceneNodeComponent()</a>.</p>
+<div id="dynsection-22" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-22-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-37-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a2f4bba61e70c28e98747ee84af651812_cgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-38" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-38-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-38-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a2f4bba61e70c28e98747ee84af651812_icgraph.svg" width="500" height="259"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-22-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a2f4bba61e70c28e98747ee84af651812_icgraph.svg" width="100%" height="518"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -1238,7 +1170,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1246,13 +1178,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Returns a shared pointer to the non-const Renderable of this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd>A shared_ptr to the Renderable, may be nullptr if none is set. </dd></dl>
 
-<p class="reference">References <a class="el" href="#a2f4bba61e70c28e98747ee84af651812">renderable()</a>.</p>
-<div id="dynsection-39" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-39-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-39-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a01e293e31d8c30a3f9cbae3ad19ca6d8_cgraph.svg" width="435" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00278">278</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00085">renderable_</a>.</p>
 
 </div>
 </div>
@@ -1274,7 +1202,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1288,21 +1216,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="#a6fc8bb37765c30988515c45845208f4d">setActive()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00547">547</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#a6fc8bb37765c30988515c45845208f4d">setActive()</a>.</p>
-<div id="dynsection-40" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-40-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-40-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a6fc8bb37765c30988515c45845208f4d_cgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-41" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-41-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-41-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a6fc8bb37765c30988515c45845208f4d_icgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00120">isActive_</a>.</p>
 
 </div>
 </div>
@@ -1324,7 +1240,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1339,21 +1255,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="namespacehelios_1_1math.html#a27682cda52181a23edab8c0249fa531d" title="Bitmask enum controlling which transform components a child node inherits from its parent.">helios::math::TransformType</a> </dd></dl>
 
-<p class="reference">References <a class="el" href="#a75103edee2bbacbebe2296dd88d1a1e9">setInheritance()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00515">515</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#a75103edee2bbacbebe2296dd88d1a1e9">setInheritance()</a>.</p>
-<div id="dynsection-42" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-42-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-42-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a75103edee2bbacbebe2296dd88d1a1e9_cgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-43" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-43-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-43-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a75103edee2bbacbebe2296dd88d1a1e9_icgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00137">inheritance_</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00078">needsUpdate_</a>.</p>
 
 </div>
 </div>
@@ -1375,7 +1279,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel protected">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel protected">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1389,11 +1293,13 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#a639af371377e5279a7e644da2af05e5a" title="Adds a new child node to this SceneNode. The node&#39;s parent is automatically set to **this** node.">addNode()</a> </dd></dl>
 
-<p class="reference">References <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
-<div id="dynsection-44" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-44-summary" class="dynsummary" style="display:block;">
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00147">147</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00093">parent_</a>, and <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
+<div id="dynsection-23" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-23-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-44-content" class="dyncontent" style="display:none;">
+<div id="dynsection-23-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a8e150f0c631aa964846dc20cd627b538_cgraph.svg" width="435" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -1417,7 +1323,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1431,20 +1337,22 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. </dd></dl>
 
-<p class="reference">References <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>, and <a class="el" href="#acac79a13bb5bb933c3f9c230a98d3daf">setRotation()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00306">306</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#acac79a13bb5bb933c3f9c230a98d3daf">setRotation()</a>.</p>
-<div id="dynsection-45" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-45-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00114">localTransform_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00078">needsUpdate_</a>, and <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="CameraSceneNode_8ixx_source.html#l00112">helios::scene::CameraSceneNode::lookAt()</a>, and <a class="el" href="CameraSceneNode_8ixx_source.html#l00162">helios::scene::CameraSceneNode::lookAtLocal()</a>.</p>
+<div id="dynsection-24" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-24-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-45-content" class="dyncontent" style="display:none;">
+<div id="dynsection-24-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_acac79a13bb5bb933c3f9c230a98d3daf_cgraph.svg" width="435" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-<div id="dynsection-46" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-46-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-25" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-25-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-46-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_acac79a13bb5bb933c3f9c230a98d3daf_icgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-25-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_acac79a13bb5bb933c3f9c230a98d3daf_icgraph.svg" width="452" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -1467,7 +1375,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1481,20 +1389,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. </dd></dl>
 
-<p class="reference">References <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>, and <a class="el" href="#aa61104006dc48bc2a57dbe6fc6cbcb5b">setScale()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00291">291</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#aa61104006dc48bc2a57dbe6fc6cbcb5b">setScale()</a>.</p>
-<div id="dynsection-47" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-47-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00114">localTransform_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00078">needsUpdate_</a>, and <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
+<div id="dynsection-26" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-26-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-47-content" class="dyncontent" style="display:none;">
+<div id="dynsection-26-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_aa61104006dc48bc2a57dbe6fc6cbcb5b_cgraph.svg" width="435" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-48" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-48-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-48-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_aa61104006dc48bc2a57dbe6fc6cbcb5b_icgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -1517,7 +1419,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1531,20 +1433,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. </dd></dl>
 
-<p class="reference">References <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>, and <a class="el" href="#a1f08f342381c9ad0f2d5d8b88c450229">setTranslation()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00322">322</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#a1f08f342381c9ad0f2d5d8b88c450229">setTranslation()</a>.</p>
-<div id="dynsection-49" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-49-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00114">localTransform_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00078">needsUpdate_</a>, and <a class="el" href="#a30ad1d7f49d6114a261cbac2706546ab">SceneNode()</a>.</p>
+<div id="dynsection-27" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-27-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-49-content" class="dyncontent" style="display:none;">
+<div id="dynsection-27-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a1f08f342381c9ad0f2d5d8b88c450229_cgraph.svg" width="435" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-50" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-50-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-50-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a1f08f342381c9ad0f2d5d8b88c450229_icgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -1567,7 +1463,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1575,20 +1471,22 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Updates the world transform and axis-aligned bounding box of this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. </p>
 <p>Recomputes the `worldTransform_` based on the parent's world transform and this node's `localTransform_`. Also updates the `aabb_` to reflect the current world-space bounds. </p>
 
-<p class="reference">References <a class="el" href="#aeb8fe0f5531a26fa2fc3a353572a1115">update()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00449">449</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#aeb8fe0f5531a26fa2fc3a353572a1115">update()</a>.</p>
-<div id="dynsection-51" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-51-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00491">inheritWorldTransform()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00114">localTransform_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00078">needsUpdate_</a>, <a class="el" href="SceneNode_8ixx_source.html#l00468">onWorldTransformUpdate()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00093">parent_</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00107">worldTransform_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="SceneNode_8ixx_source.html#l00434">aabb()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00396">worldTransform()</a>.</p>
+<div id="dynsection-28" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-28-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-51-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_aeb8fe0f5531a26fa2fc3a353572a1115_cgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-28-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_aeb8fe0f5531a26fa2fc3a353572a1115_cgraph.svg" width="442" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-<div id="dynsection-52" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-52-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-29" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-29-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-52-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_aeb8fe0f5531a26fa2fc3a353572a1115_icgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-29-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_aeb8fe0f5531a26fa2fc3a353572a1115_icgraph.svg" width="100%" height="386"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -1611,7 +1509,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1619,26 +1517,28 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActive_</b> = true<
 <p>Computes and returns the world transform for this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>. Will request the current world transform from the parent node to calculate this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a>'s world transform. For efficiency, this method should cache the result and only trigger a recompute if this <a class="el" href="classhelios_1_1scene_1_1SceneNode.html" title="Represents a SceneNode within a SceneGraph.">SceneNode</a> is dirty (`needsUpdate_ == true`). </p>
 <dl class="section return"><dt>Returns</dt><dd>The current world transform matrix for this scene node. </dd></dl>
 
-<p class="reference">References <a class="el" href="#a2cd5ee14fdf4990952266c724c916551">worldTransform()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneNode_8ixx_source.html#l00396">396</a> of file <a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#a2cd5ee14fdf4990952266c724c916551">worldTransform()</a>.</p>
-<div id="dynsection-53" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-53-summary" class="dynsummary" style="display:block;">
+<p class="reference">References <a class="el" href="SceneNode_8ixx_source.html#l00424">needsUpdate()</a>, <a class="el" href="SceneNode_8ixx_source.html#l00449">update()</a>, and <a class="el" href="SceneNode_8ixx_source.html#l00107">worldTransform_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="CameraSceneNode_8ixx_source.html#l00112">helios::scene::CameraSceneNode::lookAt()</a>.</p>
+<div id="dynsection-30" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-30-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-53-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a2cd5ee14fdf4990952266c724c916551_cgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-30-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a2cd5ee14fdf4990952266c724c916551_cgraph.svg" width="100%" height="410"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
-<div id="dynsection-54" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-54-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-31" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-31-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-54-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a2cd5ee14fdf4990952266c724c916551_icgraph.svg" width="199" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-31-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1scene_1_1SceneNode_a2cd5ee14fdf4990952266c724c916551_icgraph.svg" width="452" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>include/helios/scene/<a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a></li>
+<li><a class="el" href="SceneNode_8ixx_source.html">SceneNode.ixx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -3,11 +3,14 @@
   <compounddef id="FramePacer_8ixx" kind="file" language="C++">
     <compoundname>FramePacer.ixx</compoundname>
     <includes local="no">memory</includes>
+    <includes local="no">thread</includes>
+    <includes local="no">chrono</includes>
+    <includes local="no">cassert</includes>
     <includes refid="FrameStats_8ixx" local="no">helios.engine.tooling.FrameStats</includes>
     <includes refid="Stopwatch_8ixx" local="no">helios.util.time.Stopwatch</includes>
     <incdepgraph>
       <node id="1">
-        <label>include/helios/engine/tooling/FramePacer.ixx</label>
+        <label>FramePacer.ixx</label>
         <link refid="FramePacer_8ixx"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -15,22 +18,34 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
       </node>
-      <node id="3">
+      <node id="6">
         <label>helios.engine.tooling.FrameStats</label>
         <link refid="FrameStats_8ixx"/>
       </node>
-      <node id="4">
+      <node id="7">
         <label>helios.util.time.Stopwatch</label>
         <link refid="Stopwatch_8ixx"/>
-        <childnode refid="5" relation="include">
+        <childnode refid="4" relation="include">
         </childnode>
       </node>
       <node id="5">
+        <label>cassert</label>
+      </node>
+      <node id="4">
         <label>chrono</label>
       </node>
       <node id="2">
         <label>memory</label>
+      </node>
+      <node id="3">
+        <label>thread</label>
       </node>
     </incdepgraph>
     <innerclass refid="classhelios_1_1engine_1_1tooling_1_1FramePacer" prot="public">helios::engine::tooling::FramePacer</innerclass>
@@ -50,113 +65,143 @@
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">module</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight></codeline>
-<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8tooling_8FramePacer" kindref="compound">helios.engine.tooling.FramePacer</ref>;</highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight></codeline>
-<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8util_8time_8Stopwatch" kindref="compound">helios.util.time.Stopwatch</ref>;</highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8tooling_8FrameStats" kindref="compound">helios.engine.tooling.FrameStats</ref>;</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;thread&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;chrono&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cassert&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8tooling_8FramePacer" kindref="compound">helios.engine.tooling.FramePacer</ref>;</highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1tooling" kindref="compound">helios::engine::tooling</ref><sp/>{</highlight></codeline>
-<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="16"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@class<sp/>FramePacer</highlight></codeline>
-<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Controls<sp/>and<sp/>maintains<sp/>a<sp/>target<sp/>frame<sp/>rate<sp/>through<sp/>precise<sp/>timing<sp/>and<sp/>pacing.</highlight></codeline>
-<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>FramePacer<sp/>class<sp/>utilizes<sp/>a<sp/>`Stopwatch`<sp/>to<sp/>measure<sp/>frame<sp/>execution<sp/>time<sp/>and</highlight></codeline>
-<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>introduces<sp/>necessary<sp/>sleep<sp/>delays<sp/>to<sp/>maintain<sp/>a<sp/>consistent<sp/>target<sp/>frame<sp/>rate.</highlight></codeline>
-<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>It<sp/>returns<sp/>detailed<sp/>timing<sp/>statistics<sp/>via<sp/>the<sp/>`FrameStats`<sp/>structure<sp/>upon<sp/>synchronization.</highlight></codeline>
-<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>The<sp/>pacing<sp/>mechanism<sp/>helps<sp/>in<sp/>achieving<sp/>smoother<sp/>frame<sp/>delivery<sp/>by<sp/>minimizing</highlight></codeline>
-<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>jitter,<sp/>although<sp/>strict<sp/>adherence<sp/>depends<sp/>on<sp/>the<sp/>OS<sp/>scheduler&apos;s<sp/>precision.</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8util_8time_8Stopwatch" kindref="compound">helios.util.time.Stopwatch</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8tooling_8FrameStats" kindref="compound">helios.engine.tooling.FrameStats</ref>;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1tooling" kindref="compound">helios::engine::tooling</ref><sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@class<sp/>FramePacer</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Controls<sp/>and<sp/>maintains<sp/>a<sp/>target<sp/>frame<sp/>rate<sp/>through<sp/>precise<sp/>timing<sp/>and<sp/>pacing.</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>FramePacer<sp/>class<sp/>utilizes<sp/>a<sp/>`Stopwatch`<sp/>to<sp/>measure<sp/>frame<sp/>execution<sp/>time<sp/>and</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>introduces<sp/>necessary<sp/>sleep<sp/>delays<sp/>to<sp/>maintain<sp/>a<sp/>consistent<sp/>target<sp/>frame<sp/>rate.</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>It<sp/>returns<sp/>detailed<sp/>timing<sp/>statistics<sp/>via<sp/>the<sp/>`FrameStats`<sp/>structure<sp/>upon<sp/>synchronization.</highlight></codeline>
 <codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>If<sp/>`targetFps`<sp/>is<sp/>set<sp/>to<sp/>0.0f,<sp/>no<sp/>frame<sp/>pacing<sp/>is<sp/>performed,<sp/>and<sp/>frames</highlight></codeline>
-<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>run<sp/>as<sp/>fast<sp/>as<sp/>the<sp/>hardware<sp/>and<sp/>OS<sp/>allow<sp/>(unlocked<sp/>framerate).</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>The<sp/>pacing<sp/>mechanism<sp/>helps<sp/>in<sp/>achieving<sp/>smoother<sp/>frame<sp/>delivery<sp/>by<sp/>minimizing</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>jitter,<sp/>although<sp/>strict<sp/>adherence<sp/>depends<sp/>on<sp/>the<sp/>OS<sp/>scheduler&apos;s<sp/>precision.</highlight></codeline>
 <codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@par<sp/>Usage<sp/>Example:</highlight></codeline>
-<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```cpp</highlight></codeline>
-<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>auto<sp/>stopwatch<sp/>=<sp/>std::make_unique&lt;helios::util::time::Stopwatch&gt;();</highlight></codeline>
-<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>FramePacer<sp/>pacer(std::move(stopwatch));</highlight></codeline>
-<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>pacer.setTargetFps(60.0f);</highlight></codeline>
-<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>while<sp/>(running)<sp/>{</highlight></codeline>
-<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>pacer.beginFrame();</highlight></codeline>
-<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>//<sp/>...<sp/>game<sp/>logic<sp/>and<sp/>rendering<sp/>...</highlight></codeline>
-<codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>FrameStats<sp/>stats<sp/>=<sp/>pacer.sync();</highlight></codeline>
-<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>}</highlight></codeline>
-<codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```</highlight></codeline>
-<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="43" refid="classhelios_1_1engine_1_1tooling_1_1FramePacer" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a19da16d13fb67519b06e64f7cdd44bc7" kindref="member">FramePacer</ref><sp/>{</highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>The<sp/>stopwatch<sp/>used<sp/>for<sp/>high-resolution<sp/>time<sp/>measurement.</highlight></codeline>
-<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unique_ptr&lt;helios::util::time::Stopwatch&gt;<sp/>stopwatch_;</highlight></codeline>
-<codeline lineno="48"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>The<sp/>target<sp/>frame<sp/>rate<sp/>in<sp/>Frames<sp/>Per<sp/>Second<sp/>(FPS).</highlight></codeline>
-<codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>targetFps_<sp/>=<sp/>0.0f;</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"></highlight></codeline>
-<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="56"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Constructs<sp/>a<sp/>FramePacer<sp/>with<sp/>the<sp/>given<sp/>stopwatch.</highlight></codeline>
-<codeline lineno="57"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="58"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Initializes<sp/>a<sp/>new<sp/>FramePacer<sp/>instance<sp/>in<sp/>unlimited<sp/>FPS<sp/>mode<sp/>(targetFps<sp/>=<sp/>0.0f).</highlight></codeline>
-<codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="60"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>stopwatch<sp/>Unique<sp/>pointer<sp/>to<sp/>a<sp/>valid<sp/>`Stopwatch`<sp/>instance.<sp/>Ownership</highlight></codeline>
-<codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>is<sp/>transferred<sp/>to<sp/>the<sp/>FramePacer.</highlight></codeline>
-<codeline lineno="62"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="63" refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a19da16d13fb67519b06e64f7cdd44bc7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a19da16d13fb67519b06e64f7cdd44bc7" kindref="member">FramePacer</ref>(std::unique_ptr&lt;helios::util::time::Stopwatch&gt;<sp/>stopwatch);</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="65"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="66"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Sets<sp/>the<sp/>desired<sp/>target<sp/>frame<sp/>rate.</highlight></codeline>
-<codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>fps<sp/>The<sp/>target<sp/>frame<sp/>rate<sp/>in<sp/>Frames<sp/>Per<sp/>Second<sp/>(FPS).</highlight></codeline>
-<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Set<sp/>to<sp/>0.0f<sp/>to<sp/>disable<sp/>pacing<sp/>(unlocked<sp/>framerate).</highlight></codeline>
-<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="71" refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a432af3249703e9edab2712a7bc577699" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a432af3249703e9edab2712a7bc577699" kindref="member">setTargetFps</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>fps);</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Retrieves<sp/>the<sp/>current<sp/>target<sp/>frame<sp/>rate.</highlight></codeline>
-<codeline lineno="75"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="76"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Returns<sp/>the<sp/>frame<sp/>rate<sp/>target<sp/>that<sp/>has<sp/>been<sp/>set<sp/>for<sp/>pacing,<sp/>expressed<sp/>in</highlight></codeline>
-<codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Frames<sp/>Per<sp/>Second<sp/>(FPS).<sp/>If<sp/>the<sp/>target<sp/>frame<sp/>rate<sp/>is<sp/>set<sp/>to<sp/>0.0f,<sp/>frame<sp/>pacing</highlight></codeline>
-<codeline lineno="78"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>is<sp/>disabled,<sp/>and<sp/>the<sp/>frame<sp/>rate<sp/>is<sp/>unlocked.</highlight></codeline>
-<codeline lineno="79"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="80"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>target<sp/>frame<sp/>rate<sp/>in<sp/>FPS.</highlight></codeline>
-<codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>A<sp/>return<sp/>value<sp/>of<sp/>0.0f<sp/>indicates<sp/>that<sp/>the<sp/>frame<sp/>pacing<sp/>mechanism<sp/>is<sp/>not<sp/>active.</highlight></codeline>
-<codeline lineno="83"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="84" refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a69df9490a44888bd14297544e380ae7b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a69df9490a44888bd14297544e380ae7b" kindref="member">getTargetFps</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="86"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="87"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Marks<sp/>the<sp/>beginning<sp/>of<sp/>a<sp/>new<sp/>frame.</highlight></codeline>
-<codeline lineno="88"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="89"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Starts<sp/>the<sp/>internal<sp/>stopwatch<sp/>to<sp/>begin<sp/>measuring<sp/>the<sp/>frame&apos;s<sp/>work<sp/>time.</highlight></codeline>
-<codeline lineno="90"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>method<sp/>must<sp/>be<sp/>called<sp/>at<sp/>the<sp/>very<sp/>beginning<sp/>of<sp/>each<sp/>frame<sp/>cycle,</highlight></codeline>
-<codeline lineno="91"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>before<sp/>any<sp/>game<sp/>logic,<sp/>physics,<sp/>or<sp/>rendering<sp/>operations.</highlight></codeline>
-<codeline lineno="92"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="93" refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a44ad35ea34434c3ce534ad032a49c409" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a44ad35ea34434c3ce534ad032a49c409" kindref="member">beginFrame</ref>();</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="95"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="96"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Synchronizes<sp/>frame<sp/>timing<sp/>and<sp/>returns<sp/>frame<sp/>statistics.</highlight></codeline>
-<codeline lineno="97"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="98"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Measures<sp/>the<sp/>elapsed<sp/>work<sp/>time<sp/>since<sp/>`beginFrame()`.<sp/>If<sp/>a<sp/>target<sp/>FPS<sp/>is<sp/>set</highlight></codeline>
-<codeline lineno="99"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>and<sp/>the<sp/>work<sp/>time<sp/>is<sp/>less<sp/>than<sp/>the<sp/>target<sp/>frame<sp/>duration,<sp/>this<sp/>method</highlight></codeline>
-<codeline lineno="100"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>sleeps<sp/>the<sp/>current<sp/>thread<sp/>to<sp/>meet<sp/>the<sp/>target<sp/>timing.</highlight></codeline>
-<codeline lineno="101"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="102"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>`FrameStats`<sp/>structure<sp/>containing<sp/>the<sp/>total<sp/>frame<sp/>time<sp/>(including<sp/>wait),</highlight></codeline>
-<codeline lineno="103"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>the<sp/>actual<sp/>work<sp/>time<sp/>(CPU<sp/>processing),<sp/>and<sp/>the<sp/>wait<sp/>time<sp/>(idle).</highlight></codeline>
-<codeline lineno="104"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="105"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>If<sp/>`targetFps`<sp/>is<sp/>0.0f<sp/>or<sp/>the<sp/>frame<sp/>took<sp/>longer<sp/>than<sp/>the<sp/>target<sp/>duration,</highlight></codeline>
-<codeline lineno="106"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>no<sp/>sleeping<sp/>occurs,<sp/>and<sp/>`waitTime`<sp/>in<sp/>the<sp/>returned<sp/>stats<sp/>will<sp/>be<sp/>0.0f.</highlight></codeline>
-<codeline lineno="107"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="108"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@todo<sp/>Implement<sp/>hybrid<sp/>spinning<sp/>for<sp/>the<sp/>last<sp/>millisecond<sp/>of<sp/>the<sp/>wait<sp/>time</highlight></codeline>
-<codeline lineno="109"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>to<sp/>improve<sp/>timing<sp/>precision<sp/>and<sp/>mitigate<sp/>OS<sp/>scheduler<sp/>wake-up<sp/>latency.</highlight></codeline>
-<codeline lineno="110"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="111" refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1ac6b55e3ef2b685222358c14e69e89f06" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="structhelios_1_1engine_1_1tooling_1_1FrameStats" kindref="compound">FrameStats</ref><sp/><ref refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1ac6b55e3ef2b685222358c14e69e89f06" kindref="member">sync</ref>();</highlight></codeline>
-<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="113"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>If<sp/>`targetFps`<sp/>is<sp/>set<sp/>to<sp/>0.0f,<sp/>no<sp/>frame<sp/>pacing<sp/>is<sp/>performed,<sp/>and<sp/>frames</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>run<sp/>as<sp/>fast<sp/>as<sp/>the<sp/>hardware<sp/>and<sp/>OS<sp/>allow<sp/>(unlocked<sp/>framerate).</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@par<sp/>Usage<sp/>Example:</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```cpp</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>auto<sp/>stopwatch<sp/>=<sp/>std::make_unique&lt;helios::util::time::Stopwatch&gt;();</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>FramePacer<sp/>pacer(std::move(stopwatch));</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>pacer.setTargetFps(60.0f);</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>while<sp/>(running)<sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>pacer.beginFrame();</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>//<sp/>...<sp/>game<sp/>logic<sp/>and<sp/>rendering<sp/>...</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>FrameStats<sp/>stats<sp/>=<sp/>pacer.sync();</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>}</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>```</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46" refid="classhelios_1_1engine_1_1tooling_1_1FramePacer" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a19da16d13fb67519b06e64f7cdd44bc7" kindref="member">FramePacer</ref><sp/>{</highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>The<sp/>stopwatch<sp/>used<sp/>for<sp/>high-resolution<sp/>time<sp/>measurement.</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unique_ptr&lt;helios::util::time::Stopwatch&gt;<sp/>stopwatch_;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>The<sp/>target<sp/>frame<sp/>rate<sp/>in<sp/>Frames<sp/>Per<sp/>Second<sp/>(FPS).</highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>targetFps_<sp/>=<sp/>0.0f;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Constructs<sp/>a<sp/>FramePacer<sp/>with<sp/>the<sp/>given<sp/>stopwatch.</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Initializes<sp/>a<sp/>new<sp/>FramePacer<sp/>instance<sp/>in<sp/>unlimited<sp/>FPS<sp/>mode<sp/>(targetFps<sp/>=<sp/>0.0f).</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="63"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>stopwatch<sp/>Unique<sp/>pointer<sp/>to<sp/>a<sp/>valid<sp/>`Stopwatch`<sp/>instance.<sp/>Ownership</highlight></codeline>
+<codeline lineno="64"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>is<sp/>transferred<sp/>to<sp/>the<sp/>FramePacer.</highlight></codeline>
+<codeline lineno="65"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66" refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a19da16d13fb67519b06e64f7cdd44bc7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a19da16d13fb67519b06e64f7cdd44bc7" kindref="member">FramePacer</ref>(std::unique_ptr&lt;helios::util::time::Stopwatch&gt;<sp/>stopwatch)<sp/>:</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>stopwatch_(std::move(stopwatch))<sp/>{</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assert(stopwatch_<sp/>&amp;&amp;<sp/></highlight><highlight class="stringliteral">&quot;FramePacer<sp/>requires<sp/>a<sp/>valid<sp/>Stopwatch<sp/>(non-null)&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Sets<sp/>the<sp/>desired<sp/>target<sp/>frame<sp/>rate.</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>fps<sp/>The<sp/>target<sp/>frame<sp/>rate<sp/>in<sp/>Frames<sp/>Per<sp/>Second<sp/>(FPS).</highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Set<sp/>to<sp/>0.0f<sp/>to<sp/>disable<sp/>pacing<sp/>(unlocked<sp/>framerate).</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77" refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a432af3249703e9edab2712a7bc577699" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a432af3249703e9edab2712a7bc577699" kindref="member">setTargetFps</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>fps)<sp/>{</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>targetFps_<sp/>=<sp/>fps;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Retrieves<sp/>the<sp/>current<sp/>target<sp/>frame<sp/>rate.</highlight></codeline>
+<codeline lineno="83"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="84"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Returns<sp/>the<sp/>frame<sp/>rate<sp/>target<sp/>that<sp/>has<sp/>been<sp/>set<sp/>for<sp/>pacing,<sp/>expressed<sp/>in</highlight></codeline>
+<codeline lineno="85"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Frames<sp/>Per<sp/>Second<sp/>(FPS).<sp/>If<sp/>the<sp/>target<sp/>frame<sp/>rate<sp/>is<sp/>set<sp/>to<sp/>0.0f,<sp/>frame<sp/>pacing</highlight></codeline>
+<codeline lineno="86"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>is<sp/>disabled,<sp/>and<sp/>the<sp/>frame<sp/>rate<sp/>is<sp/>unlocked.</highlight></codeline>
+<codeline lineno="87"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="88"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>target<sp/>frame<sp/>rate<sp/>in<sp/>FPS.</highlight></codeline>
+<codeline lineno="89"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="90"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>A<sp/>return<sp/>value<sp/>of<sp/>0.0f<sp/>indicates<sp/>that<sp/>the<sp/>frame<sp/>pacing<sp/>mechanism<sp/>is<sp/>not<sp/>active.</highlight></codeline>
+<codeline lineno="91"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="92" refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a69df9490a44888bd14297544e380ae7b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a69df9490a44888bd14297544e380ae7b" kindref="member">getTargetFps</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>targetFps_;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="96"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="97"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Marks<sp/>the<sp/>beginning<sp/>of<sp/>a<sp/>new<sp/>frame.</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Starts<sp/>the<sp/>internal<sp/>stopwatch<sp/>to<sp/>begin<sp/>measuring<sp/>the<sp/>frame&apos;s<sp/>work<sp/>time.</highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>method<sp/>must<sp/>be<sp/>called<sp/>at<sp/>the<sp/>very<sp/>beginning<sp/>of<sp/>each<sp/>frame<sp/>cycle,</highlight></codeline>
+<codeline lineno="101"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>before<sp/>any<sp/>game<sp/>logic,<sp/>physics,<sp/>or<sp/>rendering<sp/>operations.</highlight></codeline>
+<codeline lineno="102"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103" refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a44ad35ea34434c3ce534ad032a49c409" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1a44ad35ea34434c3ce534ad032a49c409" kindref="member">beginFrame</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>stopwatch_-&gt;start();</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="107"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="108"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Synchronizes<sp/>frame<sp/>timing<sp/>and<sp/>returns<sp/>frame<sp/>statistics.</highlight></codeline>
+<codeline lineno="109"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="110"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Measures<sp/>the<sp/>elapsed<sp/>work<sp/>time<sp/>since<sp/>`beginFrame()`.<sp/>If<sp/>a<sp/>target<sp/>FPS<sp/>is<sp/>set</highlight></codeline>
+<codeline lineno="111"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>and<sp/>the<sp/>work<sp/>time<sp/>is<sp/>less<sp/>than<sp/>the<sp/>target<sp/>frame<sp/>duration,<sp/>this<sp/>method</highlight></codeline>
+<codeline lineno="112"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>sleeps<sp/>the<sp/>current<sp/>thread<sp/>to<sp/>meet<sp/>the<sp/>target<sp/>timing.</highlight></codeline>
+<codeline lineno="113"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="114"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>`FrameStats`<sp/>structure<sp/>containing<sp/>the<sp/>total<sp/>frame<sp/>time<sp/>(including<sp/>wait),</highlight></codeline>
+<codeline lineno="115"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>the<sp/>actual<sp/>work<sp/>time<sp/>(CPU<sp/>processing),<sp/>and<sp/>the<sp/>wait<sp/>time<sp/>(idle).</highlight></codeline>
+<codeline lineno="116"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="117"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@note<sp/>If<sp/>`targetFps`<sp/>is<sp/>0.0f<sp/>or<sp/>the<sp/>frame<sp/>took<sp/>longer<sp/>than<sp/>the<sp/>target<sp/>duration,</highlight></codeline>
+<codeline lineno="118"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>no<sp/>sleeping<sp/>occurs,<sp/>and<sp/>`waitTime`<sp/>in<sp/>the<sp/>returned<sp/>stats<sp/>will<sp/>be<sp/>0.0f.</highlight></codeline>
+<codeline lineno="119"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="120"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@todo<sp/>Implement<sp/>hybrid<sp/>spinning<sp/>for<sp/>the<sp/>last<sp/>millisecond<sp/>of<sp/>the<sp/>wait<sp/>time</highlight></codeline>
+<codeline lineno="121"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>to<sp/>improve<sp/>timing<sp/>precision<sp/>and<sp/>mitigate<sp/>OS<sp/>scheduler<sp/>wake-up<sp/>latency.</highlight></codeline>
+<codeline lineno="122"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="123" refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1ac6b55e3ef2b685222358c14e69e89f06" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="structhelios_1_1engine_1_1tooling_1_1FrameStats" kindref="compound">FrameStats</ref><sp/><ref refid="classhelios_1_1engine_1_1tooling_1_1FramePacer_1ac6b55e3ef2b685222358c14e69e89f06" kindref="member">sync</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>workTime<sp/>=<sp/>stopwatch_-&gt;elapsedSeconds();</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>waitTime<sp/>=<sp/>0.0f;</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>totalTime<sp/>=<sp/>workTime;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(targetFps_<sp/>&gt;<sp/>0.0f)<sp/>{</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>targetTime<sp/>=<sp/>1.0f<sp/>/<sp/>targetFps_;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(targetTime<sp/>&gt;<sp/>workTime)<sp/>{</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>requestedWaitTime<sp/>=<sp/>targetTime<sp/>-<sp/>workTime;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>sleepDuration<sp/>=<sp/>std::chrono::duration&lt;float&gt;(requestedWaitTime);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::this_thread::sleep_for(sleepDuration);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>totalTime<sp/>=<sp/>stopwatch_-&gt;elapsedSeconds();</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>waitTime<sp/>=<sp/>totalTime<sp/>-<sp/>workTime;</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1engine_1_1tooling_1_1FrameStats" kindref="compound">FrameStats</ref>{<sp/>totalTime,<sp/>workTime,<sp/>waitTime<sp/>};</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="143"><highlight class="normal">}</highlight></codeline>
     </programlisting>
-    <location file="include/helios/engine/tooling/FramePacer.ixx"/>
+    <location file="/tmp/h/include/helios/engine/tooling/FramePacer.ixx"/>
   </compounddef>
 </doxygen>

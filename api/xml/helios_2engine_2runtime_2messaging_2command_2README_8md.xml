@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="helios_2engine_2runtime_2messaging_2command_2README_8md" kind="file" language="Markdown">
-    <compoundname>README.md</compoundname>
+    <compoundname>helios/engine/runtime/messaging/command/README.md</compoundname>
     <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1messaging_1_1command">helios::engine::runtime::messaging::command</innernamespace>
     <briefdescription>
     </briefdescription>
@@ -14,21 +14,45 @@
 <codeline></codeline>
 <codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>the<sp/>Command<sp/>pattern<sp/>implementation<sp/>for<sp/>the<sp/>helios<sp/>engine.<sp/>Commands<sp/>encapsulate<sp/>game<sp/>actions<sp/>that<sp/>can<sp/>be<sp/>buffered<sp/>and<sp/>executed<sp/>at<sp/>a<sp/>later<sp/>point<sp/>in<sp/>the<sp/>game<sp/>loop,<sp/>enabling<sp/>decoupled<sp/>input<sp/>handling<sp/>and<sp/>action<sp/>processing.</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">**Components:**</highlight></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">-<sp/>**TargetedCommand**<sp/>-<sp/>Abstract<sp/>base<sp/>for<sp/>commands<sp/>targeting<sp/>a<sp/>specific<sp/>GameObject.</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>**WorldCommand**<sp/>-<sp/>Abstract<sp/>base<sp/>for<sp/>commands<sp/>operating<sp/>on<sp/>the<sp/>entire<sp/>GameWorld.</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>**CommandBuffer**<sp/>-<sp/>Queue<sp/>for<sp/>buffering<sp/>and<sp/>batch-executing<sp/>commands.</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>**TargetedCommandDispatcher**<sp/>-<sp/>Abstract<sp/>dispatcher<sp/>interface<sp/>for<sp/>TargetedCommand<sp/>handling.</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>**WorldCommandDispatcher**<sp/>-<sp/>Abstract<sp/>dispatcher<sp/>interface<sp/>for<sp/>WorldCommand<sp/>handling.</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>**TypedTargetedCommandDispatcher**<sp/>-<sp/>Type-safe<sp/>dispatcher<sp/>template<sp/>for<sp/>specific<sp/>TargetedCommand<sp/>types.</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>**TypedWorldCommandDispatcher**<sp/>-<sp/>Type-safe<sp/>dispatcher<sp/>template<sp/>for<sp/>specific<sp/>WorldCommand<sp/>types.</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`TargetedCommand`<sp/>|<sp/>Abstract<sp/>base<sp/>for<sp/>commands<sp/>targeting<sp/>a<sp/>specific<sp/>GameObject<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`WorldCommand`<sp/>|<sp/>Abstract<sp/>base<sp/>for<sp/>commands<sp/>operating<sp/>on<sp/>the<sp/>entire<sp/>GameWorld<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`CommandBuffer`<sp/>|<sp/>Queue<sp/>for<sp/>buffering<sp/>and<sp/>batch-executing<sp/>commands<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`TargetedCommandDispatcher`<sp/>|<sp/>Abstract<sp/>dispatcher<sp/>interface<sp/>for<sp/>TargetedCommand<sp/>handling<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`WorldCommandDispatcher`<sp/>|<sp/>Abstract<sp/>dispatcher<sp/>interface<sp/>for<sp/>WorldCommand<sp/>handling<sp/>|</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">**Execution<sp/>order:**</highlight></codeline>
+<codeline><highlight class="normal">##<sp/>Execution<sp/>Order</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">During<sp/>`CommandBuffer::flush()`:</highlight></codeline>
-<codeline><highlight class="normal">1.<sp/>**WorldCommands**<sp/>are<sp/>processed<sp/>first<sp/>(global<sp/>game<sp/>actions<sp/>like<sp/>spawning).</highlight></codeline>
-<codeline><highlight class="normal">2.<sp/>**TargetedCommands**<sp/>are<sp/>processed<sp/>second<sp/>(per-entity<sp/>actions<sp/>like<sp/>movement).</highlight></codeline>
+<codeline><highlight class="normal">1.<sp/>**WorldCommands**<sp/>are<sp/>processed<sp/>first<sp/>(global<sp/>actions<sp/>like<sp/>spawning)</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>**TargetedCommands**<sp/>are<sp/>processed<sp/>second<sp/>(per-entity<sp/>actions<sp/>like<sp/>movement)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>1.<sp/>Create<sp/>command<sp/>and<sp/>enqueue<sp/>via<sp/>UpdateContext</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>moveCmd<sp/>=<sp/>std::make_unique&lt;Move2DCommand&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>playerGuid,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>helios::math::vec2f{1.0f,<sp/>0.0f},<sp/><sp/>//<sp/>direction</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>1.0f<sp/><sp/>//<sp/>throttle</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal">updateContext.commandBuffer().enqueue(std::move(moveCmd));</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>2.<sp/>Register<sp/>dispatcher<sp/>for<sp/>command<sp/>type</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>moveDispatcher<sp/>=<sp/>std::make_unique&lt;TypedTargetedCommandDispatcher&lt;Move2DCommand&gt;&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>[&amp;](const<sp/>Move2DCommand&amp;<sp/>cmd,<sp/>GameObject*<sp/>target)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>auto*<sp/>move<sp/>=<sp/>target-&gt;get&lt;Move2DComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>move-&gt;setDirection(cmd.direction());</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>move-&gt;setThrottle(cmd.throttle());</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal">commandBuffer.registerDispatcher(std::move(moveDispatcher));</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>3.<sp/>Commands<sp/>are<sp/>automatically<sp/>flushed<sp/>at<sp/>phase<sp/>boundaries</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
@@ -40,6 +64,6 @@
 <codeline></codeline>
 <codeline></codeline>
     </programlisting>
-    <location file="include/helios/engine/runtime/messaging/command/README.md"/>
+    <location file="/tmp/h/include/helios/engine/runtime/messaging/command/README.md"/>
   </compounddef>
 </doxygen>

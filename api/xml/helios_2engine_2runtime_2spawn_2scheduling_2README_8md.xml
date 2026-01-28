@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="helios_2engine_2runtime_2spawn_2scheduling_2README_8md" kind="file" language="Markdown">
-    <compoundname>README.md</compoundname>
+    <compoundname>helios/engine/runtime/spawn/scheduling/README.md</compoundname>
     <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling">helios::engine::runtime::spawn::scheduling</innernamespace>
     <briefdescription>
     </briefdescription>
@@ -14,15 +14,78 @@
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>the<sp/>scheduling<sp/>layer<sp/>for<sp/>the<sp/>spawn<sp/>system.<sp/>The<sp/>SpawnScheduler<sp/>evaluates<sp/>spawn<sp/>rules<sp/>and<sp/>produces<sp/>ScheduledSpawnPlan<sp/>instances<sp/>that<sp/>are<sp/>then<sp/>processed<sp/>by<sp/>the<sp/>command<sp/>pipeline.</highlight></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>the<sp/>scheduling<sp/>layer<sp/>for<sp/>the<sp/>spawn<sp/>system.<sp/>Schedulers<sp/>evaluate<sp/>spawn<sp/>rules<sp/>and<sp/>produce<sp/>ScheduledSpawnPlan<sp/>instances<sp/>that<sp/>are<sp/>processed<sp/>by<sp/>the<sp/>command<sp/>pipeline.<sp/>The<sp/>architecture<sp/>separates<sp/>scheduling<sp/>strategies<sp/>from<sp/>rule<sp/>processing<sp/>logic.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|-------|---------|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`SpawnScheduler`<sp/>|<sp/>Evaluates<sp/>rules<sp/>and<sp/>produces<sp/>scheduled<sp/>plans<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`SpawnPlan`<sp/>|<sp/>Data<sp/>describing<sp/>a<sp/>planned<sp/>spawn<sp/>(rule,<sp/>amount,<sp/>pool)<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`ScheduledSpawnPlan`<sp/>|<sp/>A<sp/>plan<sp/>paired<sp/>with<sp/>its<sp/>spawn<sp/>profile<sp/>ID<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SpawnScheduler`<sp/>|<sp/>Abstract<sp/>base<sp/>class<sp/>defining<sp/>the<sp/>scheduler<sp/>interface<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`DefaultSpawnScheduler`<sp/>|<sp/>Evaluates<sp/>all<sp/>rules<sp/>every<sp/>frame<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`CyclicSpawnScheduler&lt;N&gt;`<sp/>|<sp/>Round-robin<sp/>evaluation,<sp/>advances<sp/>on<sp/>successful<sp/>spawn<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`RuleProcessor`<sp/>|<sp/>Abstract<sp/>interface<sp/>for<sp/>rule<sp/>evaluation<sp/>logic<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`DefaultRuleProcessor`<sp/>|<sp/>Standard<sp/>rule<sp/>processing<sp/>implementation<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SpawnPlan`<sp/>|<sp/>Data<sp/>describing<sp/>a<sp/>planned<sp/>spawn<sp/>(rule,<sp/>amount)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ScheduledSpawnPlan`<sp/>|<sp/>A<sp/>plan<sp/>paired<sp/>with<sp/>profile<sp/>ID<sp/>and<sp/>context<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`RuleConfig`<sp/>|<sp/>Configuration<sp/>pairing<sp/>profile<sp/>ID<sp/>with<sp/>a<sp/>rule<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Architecture</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">┌─────────────────────────────────────────────────────────────────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SpawnScheduler<sp/>(abstract)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>┌───────────────────────────────────────────────────────────────────┐<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>evaluate()<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>→<sp/>Process<sp/>rules,<sp/>produce<sp/>plans<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>drainScheduledPlans()<sp/>→<sp/>Return<sp/>and<sp/>clear<sp/>pending<sp/>plans<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>commit()<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>→<sp/>Update<sp/>rule<sp/>state<sp/>after<sp/>spawn<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>└───────────────────────────────────────────────────────────────────┘<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">└─────────────────────────────────────────────────────────────────────────┘</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>┌───────────┴────────────┐<sp/><sp/><sp/><sp/><sp/><sp/><sp/>┌───────────┴────────────┐</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>DefaultSpawnScheduler<sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>CyclicSpawnScheduler<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>(all<sp/>rules/frame)<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>(advance<sp/>on<sp/>success)<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>└───────────┬────────────┘<sp/><sp/><sp/><sp/><sp/><sp/><sp/>└───────────┬────────────┘</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>└───────────┬────────────────────┘</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>┌───────────┴────────────┐</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/>DefaultRuleProcessor<sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/>(shared<sp/>logic)<sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>└────────────────────────┘</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Scheduler<sp/>Strategies</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>DefaultSpawnScheduler</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Evaluates<sp/>**all<sp/>registered<sp/>rules**<sp/>every<sp/>frame.<sp/>Best<sp/>for<sp/>independent<sp/>spawn<sp/>sources<sp/>that<sp/>should<sp/>trigger<sp/>simultaneously.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">DefaultSpawnScheduler<sp/>scheduler;</highlight></codeline>
+<codeline><highlight class="normal">scheduler</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addRule(enemyProfileId,<sp/>std::make_unique&lt;TimerSpawnRule&gt;(ruleA,<sp/>2.0f,<sp/>3))</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addRule(pickupProfileId,<sp/>std::make_unique&lt;TimerSpawnRule&gt;(ruleB,<sp/>5.0f,<sp/>1));</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Both<sp/>rules<sp/>evaluated<sp/>each<sp/>frame</highlight></codeline>
+<codeline><highlight class="normal">scheduler.evaluate(updateContext,<sp/>spawnContext);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>CyclicSpawnScheduler</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Evaluates<sp/>the<sp/>**current<sp/>rule**<sp/>each<sp/>frame<sp/>and<sp/>advances<sp/>to<sp/>the<sp/>next<sp/>rule<sp/>**only<sp/>after<sp/>a<sp/>spawn<sp/>was<sp/>successfull<sp/>committed**.<sp/></highlight></codeline>
+<codeline><highlight class="normal">The<sp/>same<sp/>rule<sp/>is<sp/>re-evaluated<sp/>until<sp/>its<sp/>conditions<sp/>are<sp/>met.<sp/>Best<sp/>for<sp/>sequential<sp/>wave<sp/>patterns<sp/>where<sp/>each<sp/>wave<sp/>must<sp/>complete<sp/>before<sp/>the<sp/>next<sp/>begins.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">CyclicSpawnScheduler&lt;3&gt;<sp/>scheduler;</highlight></codeline>
+<codeline><highlight class="normal">scheduler</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addRule(wave1ProfileId,<sp/>std::make_unique&lt;TimerSpawnRule&gt;(rule1,<sp/>1.0f,<sp/>5))</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addRule(wave2ProfileId,<sp/>std::make_unique&lt;TimerSpawnRule&gt;(rule2,<sp/>1.0f,<sp/>5))</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addRule(bossProfileId,<sp/>std::make_unique&lt;TimerSpawnRule&gt;(rule3,<sp/>2.0f,<sp/>1));</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Evaluates<sp/>wave1<sp/>until<sp/>spawn<sp/>occurs,<sp/>then<sp/>advances<sp/>to<sp/>wave2,<sp/>etc.</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Cycle:<sp/>Wave1<sp/>→<sp/>Wave2<sp/>→<sp/>Boss<sp/>→<sp/>Wave1<sp/>→<sp/>...</highlight></codeline>
+<codeline><highlight class="normal">scheduler.evaluate(updateContext,<sp/>spawnContext);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Workflow</highlight></codeline>
 <codeline></codeline>
@@ -30,31 +93,52 @@
 <codeline><highlight class="normal">SpawnRule::evaluate()<sp/>→<sp/>SpawnPlan<sp/>→<sp/>ScheduledSpawnPlan<sp/>→<sp/>Command<sp/>→<sp/>SpawnManager</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline><highlight class="normal">1.<sp/>**Registration:**<sp/>Rules<sp/>added<sp/>via<sp/>`addRule()`<sp/>with<sp/>profile<sp/>IDs</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>**Evaluation:**<sp/>`evaluate()`<sp/>called<sp/>each<sp/>frame<sp/>by<sp/>GameObjectSpawnSystem</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>**Processing:**<sp/>RuleProcessor<sp/>evaluates<sp/>rules,<sp/>updates<sp/>state</highlight></codeline>
+<codeline><highlight class="normal">4.<sp/>**Scheduling:**<sp/>Rules<sp/>that<sp/>pass<sp/>produce<sp/>ScheduledSpawnPlans</highlight></codeline>
+<codeline><highlight class="normal">5.<sp/>**Draining:**<sp/>`drainScheduledPlans()`<sp/>returns<sp/>pending<sp/>plans</highlight></codeline>
+<codeline><highlight class="normal">6.<sp/>**Commit:**<sp/>`commit()`<sp/>called<sp/>after<sp/>spawns<sp/>to<sp/>update<sp/>rule<sp/>state</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Rule<sp/>Processing</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>`RuleProcessor`<sp/>abstraction<sp/>separates<sp/>evaluation<sp/>logic<sp/>from<sp/>scheduling<sp/>strategy:</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">```cpp</highlight></codeline>
-<codeline><highlight class="normal">SpawnScheduler<sp/>scheduler;</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal">//<sp/>Add<sp/>rules<sp/>with<sp/>their<sp/>profiles</highlight></codeline>
-<codeline><highlight class="normal">scheduler.addRule(enemyProfileId,<sp/>std::make_unique&lt;TimerSpawnRule&gt;(</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>ruleId,<sp/>2.0f,<sp/>3<sp/><sp/>//<sp/>Every<sp/>2s,<sp/>spawn<sp/>up<sp/>to<sp/>3</highlight></codeline>
-<codeline><highlight class="normal">));</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal">//<sp/>Each<sp/>frame<sp/>in<sp/>GameObjectSpawnSystem</highlight></codeline>
-<codeline><highlight class="normal">scheduler.evaluate(updateContext);</highlight></codeline>
-<codeline><highlight class="normal">auto<sp/>plans<sp/>=<sp/>scheduler.drainScheduledPlans();</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal">//<sp/>Plans<sp/>are<sp/>converted<sp/>to<sp/>commands<sp/>for<sp/>execution</highlight></codeline>
+<codeline><highlight class="normal">class<sp/>RuleProcessor<sp/>{</highlight></codeline>
+<codeline><highlight class="normal">public:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>virtual<sp/>SpawnPlan<sp/>processRule(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const<sp/>UpdateContext&amp;<sp/>updateContext,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const<sp/>SpawnContext&amp;<sp/>spawnContext,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SpawnProfileId<sp/>spawnProfileId,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SpawnRule&amp;<sp/>spawnRule,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SpawnRuleState&amp;<sp/>spawnRuleState</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>)<sp/>noexcept<sp/>=<sp/>0;</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">`DefaultRuleProcessor`<sp/>provides<sp/>the<sp/>standard<sp/>implementation:</highlight></codeline>
+<codeline><highlight class="normal">1.<sp/>Retrieve<sp/>pool<sp/>snapshot<sp/>from<sp/>GameObjectPoolManager</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>Update<sp/>rule<sp/>state<sp/>with<sp/>delta<sp/>time</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>Evaluate<sp/>rule<sp/>conditions</highlight></codeline>
+<codeline><highlight class="normal">4.<sp/>Return<sp/>SpawnPlan<sp/>with<sp/>spawn<sp/>amount</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Related<sp/>Modules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Module<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|--------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.engine.runtime.spawn.policy`<sp/>|<sp/>SpawnRule<sp/>implementations<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.engine.runtime.spawn`<sp/>|<sp/>SpawnManager,<sp/>SpawnProfile<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.engine.runtime.pooling`<sp/>|<sp/>GameObjectPoolManager<sp/>|</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
 <codeline><highlight class="normal">@namespace<sp/>helios::engine::runtime::spawn::scheduling</highlight></codeline>
 <codeline><highlight class="normal">@brief<sp/>Spawn<sp/>scheduling<sp/>and<sp/>plan<sp/>management.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>Provides<sp/>the<sp/>SpawnScheduler<sp/>for<sp/>evaluating<sp/>rules<sp/>and<sp/>producing<sp/>spawn<sp/>plans<sp/>that<sp/>feed<sp/>into<sp/>the<sp/>command<sp/>pipeline.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>schedulers<sp/>for<sp/>evaluating<sp/>spawn<sp/>rules<sp/>and<sp/>producing<sp/>spawn<sp/>plans.<sp/>Supports<sp/>multiple<sp/>scheduling<sp/>strategies<sp/>through<sp/>SpawnScheduler<sp/>implementations<sp/>and<sp/>separates<sp/>rule<sp/>processing<sp/>logic<sp/>via<sp/>the<sp/>RuleProcessor<sp/>abstraction.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
     </programlisting>
-    <location file="include/helios/engine/runtime/spawn/scheduling/README.md"/>
+    <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/README.md"/>
   </compounddef>
 </doxygen>

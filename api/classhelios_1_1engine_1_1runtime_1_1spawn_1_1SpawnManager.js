@@ -5,7 +5,7 @@ var classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager =
     [ "flush", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html#a345caf68f5d311a54f74a921b933705e", null ],
     [ "init", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html#aeab1d9b1aabd174751fa20937a9841f2", null ],
     [ "spawnProfile", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html#aa356bdd063bd2b7ca1f3548218e32411", null ],
-    [ "submit", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html#a235f08cd5cf037aa2414aad8e262502c", null ],
-    [ "submit", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html#ae10af7fc64d76c95eecc3df95733ee3c", null ],
-    [ "submit", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html#a7d924fe8cdf8acdf6aaba5d6cbd3262d", null ]
+    [ "submit", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html#a5896ba755340affff00edcd3757068c7", null ],
+    [ "submit", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html#ab2c6562cae1e34f6e90068710044f085", null ],
+    [ "submit", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html#a68c1e1c5bc8e28061333e50e7d5836bc", null ]
 ];

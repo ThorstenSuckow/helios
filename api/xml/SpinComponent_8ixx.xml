@@ -5,6 +5,26 @@
     <includes refid="helios_2math_2__module_8ixx" local="no">helios.math</includes>
     <includes refid="CloneableComponent_8ixx" local="no">helios.engine.ecs.CloneableComponent</includes>
     <incdepgraph>
+      <node id="15">
+        <label>helios.core.data.TypeIndexer</label>
+        <link refid="TypeIndexer_8ixx"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>helios.core.types</label>
+        <link refid="types_8ixx"/>
+      </node>
+      <node id="12">
+        <label>helios.engine.core.data.ComponentTypeId</label>
+        <link refid="ComponentTypeId_8ixx"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
       <node id="10">
         <label>helios.engine.ecs.CloneableComponent</label>
         <link refid="CloneableComponent_8ixx"/>
@@ -12,15 +32,19 @@
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
       </node>
-      <node id="12">
+      <node id="17">
         <label>helios.engine.ecs.Component</label>
         <link refid="Component_8ixx"/>
         <childnode refid="11" relation="include">
         </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
       </node>
       <node id="1">
-        <label>include/helios/engine/modules/physics/motion/components/SpinComponent.ixx</label>
+        <label>SpinComponent.ixx</label>
         <link refid="SpinComponent_8ixx"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -40,9 +64,9 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="6" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="7" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
@@ -53,41 +77,47 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="6">
+      <node id="4">
         <label>helios.math.transform</label>
         <link refid="helios_2math_2transform_2__module_8ixx"/>
-        <childnode refid="6" relation="include">
+        <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="7">
+      <node id="5">
         <label>helios.math.types</label>
         <link refid="helios_2math_2types_2__module_8ixx"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>helios.math.utils</label>
+        <link refid="utils_8ixx"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="4">
-        <label>helios.math.utils</label>
-        <link refid="utils_8ixx"/>
-        <childnode refid="5" relation="include">
-        </childnode>
+      <node id="16">
+        <label>atomic</label>
       </node>
       <node id="9">
         <label>cstdint</label>
       </node>
+      <node id="13">
+        <label>functional</label>
+      </node>
       <node id="11">
         <label>memory</label>
       </node>
-      <node id="5">
+      <node id="7">
         <label>numbers</label>
       </node>
     </incdepgraph>
-    <innerclass refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent" prot="public">helios::engine::modules::physics::motion::components::SpinComponent</innerclass>
+    <innerclass refid="classhelios_1_1engine_1_1modules_1_1effects_1_1gfx_1_1components_1_1SpinComponent" prot="public">helios::engine::modules::effects::gfx::components::SpinComponent</innerclass>
     <innernamespace refid="namespacehelios">helios</innernamespace>
     <innernamespace refid="namespacehelios_1_1engine">helios::engine</innernamespace>
     <innernamespace refid="namespacehelios_1_1engine_1_1modules">helios::engine::modules</innernamespace>
-    <innernamespace refid="namespacehelios_1_1engine_1_1modules_1_1physics">helios::engine::modules::physics</innernamespace>
-    <innernamespace refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1motion">helios::engine::modules::physics::motion</innernamespace>
-    <innernamespace refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components">helios::engine::modules::physics::motion::components</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1modules_1_1effects">helios::engine::modules::effects</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1modules_1_1effects_1_1gfx">helios::engine::modules::effects::gfx</innernamespace>
+    <innernamespace refid="namespacehelios_1_1engine_1_1modules_1_1effects_1_1gfx_1_1components">helios::engine::modules::effects::gfx::components</innernamespace>
     <briefdescription>
 <para>Component for applying continuous spin rotation to an entity. </para>
     </briefdescription>
@@ -101,7 +131,7 @@
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">module</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8modules_8physics_8motion_8components_8SpinComponent" kindref="compound">helios.engine.modules.physics.motion.components.SpinComponent</ref>;</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8modules_8effects_8gfx_8components_8SpinComponent" kindref="compound">helios.engine.modules.effects.gfx.components.SpinComponent</ref>;</highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8ecs_8CloneableComponent" kindref="compound">helios.engine.ecs.CloneableComponent</ref>;</highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
@@ -110,7 +140,7 @@
 <codeline lineno="14"><highlight class="comment">/**</highlight></codeline>
 <codeline lineno="15"><highlight class="comment"><sp/>*<sp/>@todo<sp/>move<sp/>to<sp/>spatial<sp/>or<sp/>effects</highlight></codeline>
 <codeline lineno="16"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components" kindref="compound">helios::engine::modules::physics::motion::components</ref><sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1engine_1_1modules_1_1effects_1_1gfx_1_1components" kindref="compound">helios::engine::modules::effects::gfx::components</ref><sp/>{</highlight></codeline>
 <codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Component<sp/>that<sp/>defines<sp/>spin<sp/>properties<sp/>for<sp/>an<sp/>entity.</highlight></codeline>
@@ -120,7 +150,7 @@
 <codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>around<sp/>a<sp/>specific<sp/>axis.<sp/>It<sp/>stores<sp/>the<sp/>rotation<sp/>speed,<sp/>axis,<sp/>and<sp/>current</highlight></codeline>
 <codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>rotation<sp/>state.</highlight></codeline>
 <codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="27" refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1a68495dc0eb91e01b6827db8bbd974713" kindref="member">SpinComponent</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" kindref="compound">helios::engine::ecs::CloneableComponent</ref>&lt;SpinComponent&gt;<sp/>{</highlight></codeline>
+<codeline lineno="27" refid="classhelios_1_1engine_1_1modules_1_1effects_1_1gfx_1_1components_1_1SpinComponent" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1engine_1_1modules_1_1effects_1_1gfx_1_1components_1_1SpinComponent_1a1980aabf70eb7200caab1838b14095d5" kindref="member">SpinComponent</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" kindref="compound">helios::engine::ecs::CloneableComponent</ref>&lt;SpinComponent&gt;<sp/>{</highlight></codeline>
 <codeline lineno="28"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Rotation<sp/>speed<sp/>in<sp/>degrees<sp/>per<sp/>second.</highlight></codeline>
@@ -145,7 +175,7 @@
 <codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>rotationSpeed<sp/>Speed<sp/>of<sp/>rotation<sp/>in<sp/>degrees<sp/>per<sp/>second.</highlight></codeline>
 <codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>rotationAxis<sp/>The<sp/>axis<sp/>to<sp/>rotate<sp/>around.</highlight></codeline>
 <codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="52" refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1a68495dc0eb91e01b6827db8bbd974713" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1a68495dc0eb91e01b6827db8bbd974713" kindref="member">SpinComponent</ref>(</highlight></codeline>
+<codeline lineno="52" refid="classhelios_1_1engine_1_1modules_1_1effects_1_1gfx_1_1components_1_1SpinComponent_1a1980aabf70eb7200caab1838b14095d5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1modules_1_1effects_1_1gfx_1_1components_1_1SpinComponent_1a1980aabf70eb7200caab1838b14095d5" kindref="member">SpinComponent</ref>(</highlight></codeline>
 <codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>rotationSpeed,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref><sp/>rotationAxis</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>)<sp/>:<sp/>rotationSpeed_(rotationSpeed),</highlight></codeline>
 <codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>rotationAxis_(rotationAxis)<sp/>{}</highlight></codeline>
@@ -155,7 +185,7 @@
 <codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="60"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>other<sp/>The<sp/>component<sp/>to<sp/>copy<sp/>from.</highlight></codeline>
 <codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="62" refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1a2d1fbe309a48ff61bedf4d381c66ca80" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1a2d1fbe309a48ff61bedf4d381c66ca80" kindref="member">SpinComponent</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1a68495dc0eb91e01b6827db8bbd974713" kindref="member">SpinComponent</ref>&amp;<sp/>other)</highlight></codeline>
+<codeline lineno="62" refid="classhelios_1_1engine_1_1modules_1_1effects_1_1gfx_1_1components_1_1SpinComponent_1aa2d75d81126149db2a004cb7998d6a24" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1modules_1_1effects_1_1gfx_1_1components_1_1SpinComponent_1aa2d75d81126149db2a004cb7998d6a24" kindref="member">SpinComponent</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1modules_1_1effects_1_1gfx_1_1components_1_1SpinComponent_1a1980aabf70eb7200caab1838b14095d5" kindref="member">SpinComponent</ref>&amp;<sp/>other)</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>rotationSpeed_(other.rotationSpeed_),</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>rotationAxis_(other.rotationAxis_)<sp/>{}</highlight></codeline>
 <codeline lineno="65"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
@@ -164,7 +194,7 @@
 <codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>normalized<sp/>rotation<sp/>axis<sp/>vector.</highlight></codeline>
 <codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="71" refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1a1d33e86b0903e19fa64d4cdcc358c5ea" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref><sp/><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1a1d33e86b0903e19fa64d4cdcc358c5ea" kindref="member">axis</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="71" refid="classhelios_1_1engine_1_1modules_1_1effects_1_1gfx_1_1components_1_1SpinComponent_1a2907790f13b0be9117b1425c4703ab66" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref><sp/><ref refid="classhelios_1_1engine_1_1modules_1_1effects_1_1gfx_1_1components_1_1SpinComponent_1a2907790f13b0be9117b1425c4703ab66" kindref="member">axis</ref>()<sp/>{</highlight></codeline>
 <codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>rotationAxis_;</highlight></codeline>
 <codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="74"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
@@ -173,7 +203,7 @@
 <codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="78"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>Speed<sp/>in<sp/>degrees<sp/>per<sp/>second.</highlight></codeline>
 <codeline lineno="79"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="80" refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1ac7c98c9b972db2793b1a2b563b2cb7ad" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1ac7c98c9b972db2793b1a2b563b2cb7ad" kindref="member">speed</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="80" refid="classhelios_1_1engine_1_1modules_1_1effects_1_1gfx_1_1components_1_1SpinComponent_1a71dce30ad192c3faf88183b5ae30a0ce" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1modules_1_1effects_1_1gfx_1_1components_1_1SpinComponent_1a71dce30ad192c3faf88183b5ae30a0ce" kindref="member">speed</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>rotationSpeed_;</highlight></codeline>
 <codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="83"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
@@ -182,7 +212,7 @@
 <codeline lineno="86"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="87"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>Current<sp/>rotation<sp/>angle<sp/>in<sp/>degrees.</highlight></codeline>
 <codeline lineno="88"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="89" refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1aeb4cb4499065992c9bad7a745d403f1d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1aeb4cb4499065992c9bad7a745d403f1d" kindref="member">rotation</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="89" refid="classhelios_1_1engine_1_1modules_1_1effects_1_1gfx_1_1components_1_1SpinComponent_1ac82b9a3692a3c0f54e1aec96707cd83a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1modules_1_1effects_1_1gfx_1_1components_1_1SpinComponent_1ac82b9a3692a3c0f54e1aec96707cd83a" kindref="member">rotation</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>currentRotation_;</highlight></codeline>
 <codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="92"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
@@ -191,13 +221,13 @@
 <codeline lineno="95"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="96"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>currentRotation<sp/>The<sp/>new<sp/>rotation<sp/>angle<sp/>in<sp/>degrees.</highlight></codeline>
 <codeline lineno="97"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="98" refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1a8b52f87fef438128d6c9a24f51aa3282" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent_1a8b52f87fef438128d6c9a24f51aa3282" kindref="member">setRotation</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>currentRotation)<sp/>{</highlight></codeline>
+<codeline lineno="98" refid="classhelios_1_1engine_1_1modules_1_1effects_1_1gfx_1_1components_1_1SpinComponent_1aff9ed47528a6eb3afb32c45955369b61" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1engine_1_1modules_1_1effects_1_1gfx_1_1components_1_1SpinComponent_1aff9ed47528a6eb3afb32c45955369b61" kindref="member">setRotation</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>currentRotation)<sp/>{</highlight></codeline>
 <codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>currentRotation_<sp/>=<sp/>currentRotation;</highlight></codeline>
 <codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="102"><highlight class="normal"></highlight></codeline>
 <codeline lineno="103"><highlight class="normal">}</highlight></codeline>
     </programlisting>
-    <location file="include/helios/engine/modules/physics/motion/components/SpinComponent.ixx"/>
+    <location file="/tmp/h/include/helios/engine/modules/effects/gfx/components/SpinComponent.ixx"/>
   </compounddef>
 </doxygen>

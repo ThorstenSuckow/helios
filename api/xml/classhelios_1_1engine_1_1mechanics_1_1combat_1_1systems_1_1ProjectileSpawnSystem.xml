@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" line="61" column="58" bodyfile="include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" bodystart="61" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" line="74" column="58" bodyfile="/tmp/h/include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" bodystart="74" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" line="70" column="18" bodyfile="include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" bodystart="70" bodyend="74"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" line="84" column="18" bodyfile="/tmp/h/include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" bodystart="84" bodyend="88"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1systems_1_1ProjectileSpawnSystem_1a95de32d6e0fcd39c83f620f53444884b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -66,7 +66,8 @@
 <para>Processes all shooting entities and spawns projectiles. </para>
         </briefdescription>
         <detaileddescription>
-<para>For each entity with ShootComponent, Aim2DComponent, and TranslationStateComponent: 1. Checks if intensity &gt; 0 and direction is valid (normalized) 2. Calculates projectile velocity from source velocity and aim direction 3. Enqueues a SpawnCommand with EmitterContext containing position and velocity</para>
+<para>For each entity with ShootComponent, Aim2DComponent, and TranslationStateComponent:</para>
+<para>1. Skips if aim frequency or intensity are near zero 2. Accumulates `deltaTime * intensity` into the cooldown timer 3. If timer &lt; cooldownDelta, updates timer and continues 4. Calculates projectile count as `floor(timer / cooldownDelta)` 5. Reduces timer by `count * cooldownDelta` 6. Enqueues SpawnCommands with EmitterContext for each projectile</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>updateContext</parametername>
@@ -80,7 +81,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" line="87" column="14" bodyfile="include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" bodystart="87" bodyend="118"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" line="105" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" bodystart="105" bodyend="161"/>
+        <references refid="namespacehelios_1_1math_1af25d93f23f91acae02abfd7706b2e36d" compoundref="utils_8ixx" startline="22">helios::math::EPSILON_LENGTH</references>
         <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="48">helios::engine::ecs::System::gameWorld_</references>
       </memberdef>
     </sectiondef>
@@ -88,10 +90,18 @@
 <para>System that spawns projectiles for entities with active ShootComponents. </para>
     </briefdescription>
     <detaileddescription>
-<para><ref refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1systems_1_1ProjectileSpawnSystem" kindref="compound">ProjectileSpawnSystem</ref> iterates all entities that have a ShootComponent, Aim2DComponent, and TranslationStateComponent. When a ShootComponent has non-zero intensity and a valid aim direction, the system creates a SpawnCommand to spawn a projectile from the configured spawn profile.</para>
-<para>The system uses the EmitterContext to pass the emitter&apos;s position and the calculated projectile velocity (source velocity + aim direction * speed) to the spawn logic.</para>
-<para>Example setup: ```cpp // Create system with projectile spawn profile auto projectileSpawnSystem = std::make_unique&lt;ProjectileSpawnSystem&gt;( SpawnProfileId{1} // ID of the projectile spawn profile ); ```</para>
-<para><simplesect kind="note"><para>Entities must have all three required components (ShootComponent, Aim2DComponent, TranslationStateComponent) to be processed.</para>
+<para><ref refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1systems_1_1ProjectileSpawnSystem" kindref="compound">ProjectileSpawnSystem</ref> iterates all entities that have a ShootComponent, Aim2DComponent, and TranslationStateComponent. When a ShootComponent has non-zero intensity and the aim component has a valid frequency, the system calculates how many projectiles to spawn based on accumulated time and cooldown.</para>
+<para>## Fire Rate Mechanics</para>
+<para>The system implements an intensity-based fire rate: 1. Accumulates `deltaTime * intensity` into the cooldown timer 2. When timer &gt;= cooldownDelta, spawns `floor(timer / cooldownDelta)` projectiles 3. Reduces timer by spawned amount, preserving fractional remainder</para>
+<para>This allows continuous fire with variable intensity affecting the effective rate.</para>
+<para>## Spawn Context</para>
+<para>Each SpawnCommand includes an EmitterContext containing:<itemizedlist>
+<listitem><para>**position:** Current translation from TranslationStateComponent</para>
+</listitem><listitem><para>**velocity:** sourceVelocity + (aimDirection * projectileSpeed)</para>
+</listitem></itemizedlist>
+</para>
+<para>Example setup: ```cpp auto projectileSpawnSystem = std::make_unique&lt;ProjectileSpawnSystem&gt;( SpawnProfileId{1} // ID of the projectile spawn profile ); mainPhase.addPass().add(std::move(projectileSpawnSystem)); ```</para>
+<para><simplesect kind="note"><para>Entities must have ShootComponent, Aim2DComponent, and TranslationStateComponent to be processed.</para>
 </simplesect>
 <simplesect kind="see"><para>ShootComponent </para>
 </simplesect>
@@ -142,8 +152,8 @@
         </childnode>
       </node>
       <node id="6">
-        <label>helios::engine::runtime::pooling::PoolManagerRegistry</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry"/>
+        <label>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry"/>
       </node>
       <node id="4">
         <label>helios::engine::runtime::world::GameWorld</label>
@@ -152,7 +162,7 @@
           <edgelabel>logger_</edgelabel>
         </childnode>
         <childnode refid="6" relation="usage">
-          <edgelabel>poolManagerRegistry_</edgelabel>
+          <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
         </childnode>
       </node>
       <node id="5">
@@ -160,7 +170,7 @@
         <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
       </node>
     </collaborationgraph>
-    <location file="include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" line="53" column="5" bodyfile="include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" bodystart="53" bodyend="120"/>
+    <location file="/tmp/h/include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" line="66" column="5" bodyfile="/tmp/h/include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" bodystart="66" bodyend="163"/>
     <listofallmembers>
       <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" prot="protected" virt="non-virtual"><scope>helios::engine::mechanics::combat::systems::ProjectileSpawnSystem</scope><name>gameWorld_</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1System_1ae0464c1668e257439243a4f25979a7ff" prot="public" virt="virtual"><scope>helios::engine::mechanics::combat::systems::ProjectileSpawnSystem</scope><name>init</name></member>

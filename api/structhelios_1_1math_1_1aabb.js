@@ -7,6 +7,7 @@ var structhelios_1_1math_1_1aabb =
     [ "applyTransform", "structhelios_1_1math_1_1aabb.html#aa1e69fb646399dae7c02c52e972532b5", null ],
     [ "center", "structhelios_1_1math_1_1aabb.html#ad9c6ae9ba53638b5acb98843d24d766b", null ],
     [ "contains", "structhelios_1_1math_1_1aabb.html#ab2281d98a7cb28b46ce163d96a2f4469", null ],
+    [ "contains", "structhelios_1_1math_1_1aabb.html#ac80d09d427091a95fd83ac30cc1196cc", null ],
     [ "intersects", "structhelios_1_1math_1_1aabb.html#ade126b97a45a33942359c01b5f268c24", null ],
     [ "max", "structhelios_1_1math_1_1aabb.html#aa5836a6c13c4a5ddd421adb3a168970e", null ],
     [ "min", "structhelios_1_1math_1_1aabb.html#ab53ba0c88b465fb3f9e6ae410c3f0b70", null ],

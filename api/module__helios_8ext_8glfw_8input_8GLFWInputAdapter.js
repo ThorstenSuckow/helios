@@ -5,6 +5,6 @@ var module__helios_8ext_8glfw_8input_8GLFWInputAdapter =
     [ "helios::ext::glfw::input::GLFWInputAdapter::isKeyPressed", "module__helios_8ext_8glfw_8input_8GLFWInputAdapter.html#a7f04d04c60d95fc596929ed1b2bc345c", null ],
     [ "helios::ext::glfw::input::GLFWInputAdapter::isKeyPressed", "module__helios_8ext_8glfw_8input_8GLFWInputAdapter.html#a611ca19866aa15359d01b8a8ef791c84", null ],
     [ "helios::ext::glfw::input::GLFWInputAdapter::gamepadState", "module__helios_8ext_8glfw_8input_8GLFWInputAdapter.html#a281b70c6d8c50731c843c86e5e5e2942", null ],
-    [ "helios::ext::glfw::input::GLFWInputAdapter::updateGamepadState", "module__helios_8ext_8glfw_8input_8GLFWInputAdapter.html#af65a6a8e99aac0f6867b6456d0849f9a", null ],
+    [ "helios::ext::glfw::input::GLFWInputAdapter::updateGamepadState", "module__helios_8ext_8glfw_8input_8GLFWInputAdapter.html#af7ae7b4878b44f0b6ca2c2184a807bf3", null ],
     [ "helios::ext::glfw::input::GLFWInputAdapter::isConnected", "module__helios_8ext_8glfw_8input_8GLFWInputAdapter.html#a703e9e04a1554cebea6f1d1924c034dc", null ]
 ];

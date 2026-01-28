@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_fff8ef54a646d9df8d7b15d27474569f" kind="dir">
+    <compoundname>runtime</compoundname>
+    <innerdir refid="dir_446c3279719b350ae96e237b7ddd8259">gameloop</innerdir>
+    <innerdir refid="dir_3c2debfdd2bfc5d375ae885ec56c77d2">messaging</innerdir>
+    <innerdir refid="dir_50a13eed33dcd9f476e4986821866285">pooling</innerdir>
+    <innerdir refid="dir_920d0445133e8943cdb9dc7f8f55cbd5">spawn</innerdir>
+    <innerdir refid="dir_271ebd1cecf9fce13500c2bd2d622746">world</innerdir>
+    <innerfile refid="helios_2engine_2runtime_2__module_8ixx">helios/engine/runtime/_module.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_fff8ef54a646d9df8d7b15d27474569f_1autotoc_md368">
+<title>helios::engine::runtime</title><para>Runtime infrastructure for game execution, world management, and lifecycle orchestration.</para>
+</sect1>
+<sect1 id="dir_fff8ef54a646d9df8d7b15d27474569f_1autotoc_md369">
+<title>Overview</title><para>This module provides the core runtime components that manage game execution. It includes world state management, messaging infrastructure for commands and events, object pooling for efficient memory reuse, and the game loop orchestration system.</para>
+</sect1>
+<sect1 id="dir_fff8ef54a646d9df8d7b15d27474569f_1autotoc_md370">
+<title>Submodules</title><para><table rows="7" cols="2"><row>
+<entry thead="yes"><para>Submodule  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>gameloop/</computeroutput>  </para>
+</entry><entry thead="no"><para>Phase-based game loop with configurable passes  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>world/</computeroutput>  </para>
+</entry><entry thead="no"><para>GameWorld, Level, UpdateContext, and system registration  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>messaging/</computeroutput>  </para>
+</entry><entry thead="no"><para>Command buffer, dispatchers, and event buses  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>pooling/</computeroutput>  </para>
+</entry><entry thead="no"><para>GameObject pools and request handlers for object recycling  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>factory/</computeroutput>  </para>
+</entry><entry thead="no"><para>GameObject creation from prefab templates  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>api/</computeroutput>  </para>
+</entry><entry thead="no"><para>(Planned) Stable runtime entry points  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_fff8ef54a646d9df8d7b15d27474569f_1autotoc_md371">
+<title>Architecture</title><para><programlisting><codeline><highlight class="normal">runtime/</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>gameloop/<sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Game<sp/>loop<sp/>orchestration<sp/>(Pre/Main/Post<sp/>phases)</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>world/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameWorld,<sp/>Level,<sp/>UpdateContext</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>messaging/<sp/><sp/><sp/><sp/><sp/>#<sp/>Commands<sp/>+<sp/>Events<sp/>(buffer,<sp/>dispatch,<sp/>bus)</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>pooling/<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameObject<sp/>pools<sp/>and<sp/>request<sp/>handlers</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>factory/<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameObjectFactory<sp/>for<sp/>prefab<sp/>instantiation</highlight></codeline>
+<codeline><highlight class="normal">└──<sp/>api/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>(Future)<sp/>Stable<sp/>entry<sp/>points</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_fff8ef54a646d9df8d7b15d27474569f_1autotoc_md372">
+<title>Key Concepts</title><para><bold>GameWorld</bold> owns all GameObjects and provides query methods for component-based iteration. It manages the lifecycle of entities and coordinates with pools and managers.</para>
+<para><bold>GameLoop</bold> orchestrates the frame update cycle through three phases (Pre, Main, Post), each containing passes that execute systems in order.</para>
+<para><bold>CommandBuffer</bold> collects commands during a phase and flushes them to dispatchers after each phase completes.</para>
+<para><bold>GameLoopEventBus</bold> manages phase-level and pass-level event propagation using a double-buffer pattern.</para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/runtime/"/>
+  </compounddef>
+</doxygen>

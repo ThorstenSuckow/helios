@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_4f0da182a846ab23c4f0200a8e7a4684" kind="dir">
+    <compoundname>data</compoundname>
+    <innerfile refid="helios_2engine_2core_2data_2__module_8ixx">helios/engine/core/data/_module.ixx</innerfile>
+    <innerfile refid="ComponentTypeId_8ixx">ComponentTypeId.ixx</innerfile>
+    <innerfile refid="GameObjectPoolId_8ixx">GameObjectPoolId.ixx</innerfile>
+    <innerfile refid="SpawnProfileId_8ixx">SpawnProfileId.ixx</innerfile>
+    <innerfile refid="SpawnRuleId_8ixx">SpawnRuleId.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md102">
+<title>helios::engine::core::data</title><para>Data structures for efficient entity management and querying.</para>
+<para>This module provides core data structures used for managing GameObjects within the helios engine.</para>
+</sect1>
+<sect1 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md103">
+<title>Components</title><para><itemizedlist>
+<listitem><para><bold>ComponentTypeId</bold> - Compile-time type identifier for O(1) component indexing within GameObject.</para>
+</listitem><listitem><para><bold>GameObjectPool</bold> - Low-level O(1) object pooling for entity recycling.</para>
+</listitem><listitem><para><bold>GameObjectPoolId</bold> - Strongly-typed identifier for referencing pools.</para>
+</listitem><listitem><para><bold>GameObjectPoolRegistry</bold> - Central registry managing multiple pools by ID.</para>
+</listitem><listitem><para><bold>GameObjectFilter</bold> - Bitmask enum for filtering entities by active/inactive state and component state.</para>
+</listitem><listitem><para><bold>GameObjectView</bold> - Lazy range adapter for component-filtered iteration with structured binding support.</para>
+</listitem><listitem><para><bold>SpawnProfileId</bold> - Strongly-typed identifier for spawn profiles.</para>
+</listitem><listitem><para><bold>SpawnRuleId</bold> - Strongly-typed identifier for spawn rules.</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="dir_4f0da182a846ab23c4f0200a8e7a4684_1autotoc_md104">
+<title>Strongly-Typed IDs</title><para>The ID types (<computeroutput>GameObjectPoolId</computeroutput>, <computeroutput>SpawnProfileId</computeroutput>, <computeroutput>SpawnRuleId</computeroutput>) provide type-safe identifiers that can be constructed from string literals using FNV-1a hashing:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Compile-time<sp/>constant<sp/>IDs<sp/>from<sp/>strings</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>GameObjectPoolId<sp/>ENEMY_POOL{</highlight><highlight class="stringliteral">&quot;enemies&quot;</highlight><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>SpawnProfileId<sp/>ENEMY_PROFILE{</highlight><highlight class="stringliteral">&quot;enemy_spawn&quot;</highlight><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>SpawnRuleId<sp/>WAVE_RULE{</highlight><highlight class="stringliteral">&quot;wave_spawn&quot;</highlight><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Use<sp/>in<sp/>registries<sp/>and<sp/>schedulers</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">poolManager.createPool(ENEMY_POOL,<sp/>100);</highlight></codeline>
+<codeline><highlight class="normal">spawnManager.registerProfile(ENEMY_PROFILE,<sp/>profile);</highlight></codeline>
+<codeline><highlight class="normal">scheduler.addRule(ENEMY_PROFILE,<sp/>std::make_unique&lt;TimerSpawnRule&gt;(WAVE_RULE,<sp/>2.0f,<sp/>5));</highlight></codeline>
+</programlisting></para>
+<para>All ID types support:<itemizedlist>
+<listitem><para>Hashing for <computeroutput>std::unordered_map</computeroutput> / <computeroutput>std::unordered_set</computeroutput></para>
+</listitem><listitem><para>Comparison operators for <computeroutput>std::map</computeroutput> / <computeroutput>std::set</computeroutput></para>
+</listitem><listitem><para>Equality comparison</para>
+</listitem></itemizedlist>
+</para>
+<para><blockquote><para><bold>Note:</bold> <computeroutput>GameObjectView.h</computeroutput> is intentionally a .h header instead of a .ixx module interface due to MSVC ICE issues with structured bindings. </para>
+</blockquote></para>
+<para><blockquote><para><bold>Tip:</bold> Use <computeroutput>GameObjectPoolFacade</computeroutput> (in <computeroutput>helios.engine.facade</computeroutput>) to coordinate pool operations with the GameWorld. The facade validates entities, handles stale pool entries, and deactivates released objects automatically. </para>
+</blockquote></para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/core/data/"/>
+  </compounddef>
+</doxygen>

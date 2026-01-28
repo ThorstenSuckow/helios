@@ -18,18 +18,18 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/core/data/GameObjectPoolId.ixx" line="41" column="18" bodyfile="include/helios/engine/core/data/GameObjectPoolId.ixx" bodystart="41" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/core/data/GameObjectPoolId.ixx" line="53" column="18" bodyfile="/tmp/h/include/helios/engine/core/data/GameObjectPoolId.ixx" bodystart="53" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId_1a17cf544ea669f7bd5927300d8e3e35fc" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId_1ad91fc550614b1fd6ce10a33e282da14b" prot="private" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
         <type>constexpr</type>
         <definition>helios::engine::core::data::GameObjectPoolId::GameObjectPoolId</definition>
-        <argsstring>(uint32_t id) noexcept</argsstring>
+        <argsstring>(const uint32_t id) noexcept</argsstring>
         <name>GameObjectPoolId</name>
         <qualifiedname>helios::engine::core::data::GameObjectPoolId::GameObjectPoolId</qualifiedname>
         <param>
-          <type>uint32_t</type>
+          <type>const uint32_t</type>
           <declname>id</declname>
         </param>
         <briefdescription>
@@ -49,10 +49,39 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/core/data/GameObjectPoolId.ixx" line="50" column="28" bodyfile="include/helios/engine/core/data/GameObjectPoolId.ixx" bodystart="50" bodyend="51"/>
-        <referencedby refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId_1a65db1d8a9390186cc9219d5ef3a1828b" compoundref="GameObjectPoolId_8ixx" startline="74" endline="76">helios::engine::core::data::GameObjectPoolId::operator&lt;</referencedby>
-        <referencedby refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId_1ac518dd450914f3e8deb070f32c107670">helios::engine::core::data::GameObjectPoolId::operator==</referencedby>
-        <referencedby refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId_1a13389ac938d895903470485efac4c8a8" compoundref="GameObjectPoolId_8ixx" startline="85" endline="87">helios::engine::core::data::GameObjectPoolId::operator&gt;</referencedby>
+        <location file="/tmp/h/include/helios/engine/core/data/GameObjectPoolId.ixx" line="60" column="28" bodyfile="/tmp/h/include/helios/engine/core/data/GameObjectPoolId.ixx" bodystart="60" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId_1a1c616ea4117df2185265396a80c71356" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>helios::engine::core::data::GameObjectPoolId::GameObjectPoolId</definition>
+        <argsstring>(const std::string_view str) noexcept</argsstring>
+        <name>GameObjectPoolId</name>
+        <qualifiedname>helios::engine::core::data::GameObjectPoolId::GameObjectPoolId</qualifiedname>
+        <param>
+          <type>const std::string_view</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">GameObjectPoolId</ref> from a string literal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Uses FNV-1a hashing to compute a numeric ID from the string. This enables readable, compile-time constant pool identifiers.</para>
+<para>```cpp constexpr <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" kindref="compound">GameObjectPoolId</ref> BULLET_POOL{&quot;bullets&quot;}; ```</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The string to hash into an ID. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/core/data/GameObjectPoolId.ixx" line="78" column="28" bodyfile="/tmp/h/include/helios/engine/core/data/GameObjectPoolId.ixx" bodystart="78" bodyend="79"/>
+        <references refid="namespacehelios_1_1core_1_1algorithms_1a3df283d4b3d4c5006c1bb3c30e03ab1e" compoundref="algorithms_8ixx" startline="50" endline="57">helios::core::algorithms::fnv1a_hash</references>
       </memberdef>
       <memberdef kind="function" id="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId_1a594db6311e109a5bd9decc86db6c9f32" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>uint32_t</type>
@@ -70,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/core/data/GameObjectPoolId.ixx" line="58" column="19" bodyfile="include/helios/engine/core/data/GameObjectPoolId.ixx" bodystart="58" bodyend="60"/>
+        <location file="/tmp/h/include/helios/engine/core/data/GameObjectPoolId.ixx" line="86" column="19" bodyfile="/tmp/h/include/helios/engine/core/data/GameObjectPoolId.ixx" bodystart="86" bodyend="88"/>
       </memberdef>
       <memberdef kind="function" id="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId_1a65db1d8a9390186cc9219d5ef3a1828b" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -101,8 +130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/core/data/GameObjectPoolId.ixx" line="74" column="19" bodyfile="include/helios/engine/core/data/GameObjectPoolId.ixx" bodystart="74" bodyend="76"/>
-        <references refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId_1a17cf544ea669f7bd5927300d8e3e35fc" compoundref="GameObjectPoolId_8ixx" startline="50" endline="51">helios::engine::core::data::GameObjectPoolId::GameObjectPoolId</references>
+        <location file="/tmp/h/include/helios/engine/core/data/GameObjectPoolId.ixx" line="102" column="19" bodyfile="/tmp/h/include/helios/engine/core/data/GameObjectPoolId.ixx" bodystart="102" bodyend="104"/>
       </memberdef>
       <memberdef kind="function" id="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId_1a13389ac938d895903470485efac4c8a8" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -133,8 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/core/data/GameObjectPoolId.ixx" line="85" column="24" bodyfile="include/helios/engine/core/data/GameObjectPoolId.ixx" bodystart="85" bodyend="87"/>
-        <references refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId_1a17cf544ea669f7bd5927300d8e3e35fc" compoundref="GameObjectPoolId_8ixx" startline="50" endline="51">helios::engine::core::data::GameObjectPoolId::GameObjectPoolId</references>
+        <location file="/tmp/h/include/helios/engine/core/data/GameObjectPoolId.ixx" line="113" column="24" bodyfile="/tmp/h/include/helios/engine/core/data/GameObjectPoolId.ixx" bodystart="113" bodyend="115"/>
       </memberdef>
       <memberdef kind="function" id="structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId_01_4_1a30ce18512575595abc2daa2a0d1f01bf" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>std::size_t</type>
@@ -152,13 +179,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/core/data/GameObjectPoolId.ixx" line="102" column="17" bodyfile="include/helios/engine/core/data/GameObjectPoolId.ixx" bodystart="102" bodyend="104"/>
+        <location file="/tmp/h/include/helios/engine/core/data/GameObjectPoolId.ixx" line="130" column="17" bodyfile="/tmp/h/include/helios/engine/core/data/GameObjectPoolId.ixx" bodystart="130" bodyend="132"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="include/helios/engine/core/data/GameObjectPoolId.ixx" line="9" column="15"/>
+    <location file="/tmp/h/include/helios/engine/core/data/GameObjectPoolId.ixx" line="11" column="15"/>
   </compounddef>
 </doxygen>

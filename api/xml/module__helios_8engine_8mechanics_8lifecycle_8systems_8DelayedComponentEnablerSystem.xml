@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8mechanics_8lifecycle_8systems_8DelayedComponentEnablerSystem" kind="module">
+    <compoundname>helios.engine.mechanics.lifecycle.systems.DelayedComponentEnablerSystem</compoundname>
+    <innerfile refid="DelayedComponentEnablerSystem_8ixx">DelayedComponentEnablerSystem.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem" prot="public">helios::engine::mechanics::lifecycle::systems::DelayedComponentEnablerSystem</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem_1ade049e8cdc2be7c46fe982fb564015c9" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId" kindref="compound">helios::engine::core::data::ComponentTypeId</ref> &gt;</type>
+        <definition>std::vector&lt;helios::engine::core::data::ComponentTypeId&gt; helios::engine::mechanics::lifecycle::systems::DelayedComponentEnablerSystem::sync_</definition>
+        <argsstring></argsstring>
+        <name>sync_</name>
+        <qualifiedname>helios::engine::mechanics::lifecycle::systems::DelayedComponentEnablerSystem::sync_</qualifiedname>
+        <briefdescription>
+<para>Temporary buffer for components that completed their delay. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/mechanics/lifecycle/systems/DelayedComponentEnablerSystem.ixx" line="42" column="21" bodyfile="/tmp/h/include/helios/engine/mechanics/lifecycle/systems/DelayedComponentEnablerSystem.ixx" bodystart="42" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1systems_1_1DelayedComponentEnablerSystem_1ae7c5a33ae0ce9c8bfdf69a5b3a758bf6" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::mechanics::lifecycle::systems::DelayedComponentEnablerSystem::update</definition>
+        <argsstring>(helios::engine::runtime::world::UpdateContext &amp;updateContext) noexcept override</argsstring>
+        <name>update</name>
+        <qualifiedname>helios::engine::mechanics::lifecycle::systems::DelayedComponentEnablerSystem::update</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1ecs_1_1System_1a4e9969641985fa04db6214332c88605b">update</reimplements>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Processes all deferred components and activates expired ones. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For each entity with DelayedComponentEnabler: 1. Decrements all delay timers by deltaTime 2. Enables components whose timers reach zero 3. Removes activated components from the deferred list</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provides deltaTime for timer updates. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/mechanics/lifecycle/systems/DelayedComponentEnablerSystem.ixx" line="56" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/lifecycle/systems/DelayedComponentEnablerSystem.ixx" bodystart="56" bodyend="87"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="48">helios::engine::ecs::System::gameWorld_</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/mechanics/lifecycle/systems/DelayedComponentEnablerSystem.ixx" line="10" column="15"/>
+  </compounddef>
+</doxygen>

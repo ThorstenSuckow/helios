@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="helios_2engine_2mechanics_2input_2README_8md" kind="file" language="Markdown">
-    <compoundname>README.md</compoundname>
+    <compoundname>helios/engine/mechanics/input/README.md</compoundname>
     <innernamespace refid="namespacehelios_1_1engine_1_1mechanics_1_1input">helios::engine::mechanics::input</innernamespace>
     <briefdescription>
     </briefdescription>
@@ -22,6 +22,36 @@
 <codeline><highlight class="normal">|-----------|---------|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`systems/`<sp/>|<sp/>Input<sp/>processing<sp/>systems<sp/>(TwinStickInputSystem)<sp/>|</highlight></codeline>
 <codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`TwinStickInputSystem`<sp/>|<sp/>Reads<sp/>gamepad<sp/>stick<sp/>input<sp/>and<sp/>enqueues<sp/>Move2D/Aim2D<sp/>commands<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Create<sp/>player<sp/>with<sp/>required<sp/>components</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>player<sp/>=<sp/>GameObjectFactory::gameObject()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withMotion([](auto&amp;<sp/>m)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m.move2D().speed(5.0f).acceleration(10.0f);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m.steering().instantSteering(false);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.make(true);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Create<sp/>input<sp/>system<sp/>for<sp/>gamepad<sp/>control</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>inputSystem<sp/>=<sp/>std::make_unique&lt;TwinStickInputSystem&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&amp;gameWorld,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&amp;inputManager,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>helios::input::types::Gamepad::ONE,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>player-&gt;guid()<sp/><sp/>//<sp/>Target<sp/>entity<sp/>for<sp/>input<sp/>commands</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Register<sp/>in<sp/>Pre<sp/>phase<sp/>(before<sp/>movement<sp/>systems)</highlight></codeline>
+<codeline><highlight class="normal">gameLoop.phase(PhaseType::Pre).addPass()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addSystem(std::move(inputSystem));</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
@@ -30,6 +60,6 @@
 <codeline><highlight class="normal">@details<sp/>This<sp/>module<sp/>provides<sp/>input-related<sp/>functionality<sp/>for<sp/>the<sp/>game<sp/>layer,<sp/>including<sp/>systems<sp/>that<sp/>translate<sp/>device<sp/>input<sp/>into<sp/>game<sp/>commands.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
     </programlisting>
-    <location file="include/helios/engine/mechanics/input/README.md"/>
+    <location file="/tmp/h/include/helios/engine/mechanics/input/README.md"/>
   </compounddef>
 </doxygen>

@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_6634d24428e27f0a06eb229019da5d06" kind="dir">
+    <compoundname>query</compoundname>
+    <innerfile refid="helios_2engine_2ecs_2query_2__module_8ixx">helios/engine/ecs/query/_module.ixx</innerfile>
+    <innerfile refid="GameObjectFilter_8ixx">GameObjectFilter.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_6634d24428e27f0a06eb229019da5d06_1autotoc_md114">
+<title>helios::engine::ecs::query</title><para>Entity query utilities for filtering and iterating GameObjects by component.</para>
+</sect1>
+<sect1 id="dir_6634d24428e27f0a06eb229019da5d06_1autotoc_md115">
+<title>Overview</title><para>This module provides efficient mechanisms for querying GameObjects based on their component composition. The query system supports lazy evaluation and flexible filtering.</para>
+</sect1>
+<sect1 id="dir_6634d24428e27f0a06eb229019da5d06_1autotoc_md116">
+<title>Key Classes</title><para><table rows="3" cols="2"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>GameObjectFilter</computeroutput>  </para>
+</entry><entry thead="no"><para>Bitmask enum for filtering by active state and component enabled state  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>GameObjectView</computeroutput>  </para>
+</entry><entry thead="no"><para>Lazy range adapter for component-based iteration with structured bindings  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_6634d24428e27f0a06eb229019da5d06_1autotoc_md117">
+<title>GameObjectFilter</title><para>Filter options for entity queries:</para>
+<para><table rows="5" cols="2"><row>
+<entry thead="yes"><para>Flag  </para>
+</entry><entry thead="yes"><para>Effect  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>Active</computeroutput>  </para>
+</entry><entry thead="no"><para>Only <computeroutput>obj-&gt;isActive() == true</computeroutput>  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>Inactive</computeroutput>  </para>
+</entry><entry thead="no"><para>Only <computeroutput>obj-&gt;isActive() == false</computeroutput>  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ComponentEnabled</computeroutput>  </para>
+</entry><entry thead="no"><para>Only objects where queried components are enabled  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ComponentDisabled</computeroutput>  </para>
+</entry><entry thead="no"><para>Only objects where queried components are disabled  </para>
+</entry></row>
+</table>
+</para>
+<para>Filters can be combined: <computeroutput>Active | ComponentEnabled</computeroutput> (default).</para>
+</sect1>
+<sect1 id="dir_6634d24428e27f0a06eb229019da5d06_1autotoc_md118">
+<title>Usage Example</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8ecs_8query_8GameObjectFilter" kindref="compound">helios.engine.ecs.query.GameObjectFilter</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="module__helios_8engine_8ecs_8query_8GameObjectFilter" kindref="compound">helios.engine.ecs.query.GameObjectFilter</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Default:<sp/>active<sp/>objects<sp/>with<sp/>enabled<sp/>components</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>obj<sp/>:<sp/>gameWorld.find&lt;Move2DComponent&gt;())<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>...</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Custom<sp/>filter:<sp/>inactive<sp/>objects<sp/>only</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>obj<sp/>:<sp/>gameWorld.find&lt;HealthComponent&gt;(<ref refid="namespacehelios_1_1engine_1_1ecs_1_1query_1a44fa3297c7ad02bbfab68ef4cceb9262" kindref="member">GameObjectFilter</ref>.Inactive))<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Process<sp/>inactive<sp/>entities<sp/>(e.g.,<sp/>respawn<sp/>logic)</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Using<sp/>each()<sp/>for<sp/>structured<sp/>bindings</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>[obj,<sp/>move,<sp/>collision]<sp/>:<sp/>gameWorld.find&lt;Move2DComponent,<sp/>CollisionComponent&gt;().each())<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>move.get().setVelocity({1.0f,<sp/>0.0f,<sp/>0.0f});</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_6634d24428e27f0a06eb229019da5d06_1autotoc_md119">
+<title>Implementation Note</title><para><computeroutput>GameObjectView</computeroutput> is implemented as a <computeroutput>.h</computeroutput> header instead of a <computeroutput>.ixx</computeroutput> module interface unit due to MSVC Internal Compiler Errors (ICE) when using structured bindings with the <computeroutput>each()</computeroutput> iterator in module contexts.</para>
+</sect1>
+<sect1 id="dir_6634d24428e27f0a06eb229019da5d06_1autotoc_md120">
+<title>Related Modules</title><para><itemizedlist>
+<listitem><para><computeroutput><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios.engine.runtime.world.GameWorld</ref></computeroutput> — Provides <computeroutput>find&lt;Components...&gt;()</computeroutput> methods</para>
+</listitem><listitem><para><computeroutput><ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios.engine.ecs.GameObject</ref></computeroutput> — Entity container being queried</para>
+</listitem><listitem><para><computeroutput><ref refid="classhelios_1_1engine_1_1ecs_1_1Component" kindref="compound">helios.engine.ecs.Component</ref></computeroutput> — Base class for component types</para>
+</listitem></itemizedlist>
+</para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/ecs/query/"/>
+  </compounddef>
+</doxygen>

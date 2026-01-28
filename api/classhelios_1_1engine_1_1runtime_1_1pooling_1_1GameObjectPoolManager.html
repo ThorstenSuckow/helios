@@ -119,7 +119,7 @@ $(function() {
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager__coll__graph.svg" width="388" height="362"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager__coll__graph.svg" width="100%" height="398"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -162,7 +162,7 @@ Additional Inherited Members</h2></td></tr>
     bulletPoolId, bulletPrefab, 100
 ); poolManager.addPoolConfig(std::move(config));</p>
 <p>poolManager.init(gameWorld);</p>
-<p>if (auto* bullet = poolManager.acquire(bulletPoolId)) { bullet-&gt;get&lt;TransformComponent&gt;()-&gt;setTranslation(spawnPos); }</p>
+<p>if (auto* bullet = poolManager.acquire(bulletPoolId)) { bullet-&gt;get&lt;ComposeTransformComponent&gt;()-&gt;setTranslation(spawnPos); }</p>
 <p>poolManager.release(bulletPoolId, bullet-&gt;guid()); ```</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html" title="Object pool for efficient GameObject lifecycle management.">GameObjectPool</a> </dd>
 <dd>
@@ -170,7 +170,7 @@ Additional Inherited Members</h2></td></tr>
 <dd>
 Manager </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00073">73</a> of file <a class="el" href="GameObjectPoolManager_8ixx_source.html">GameObjectPoolManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00074">74</a> of file <a class="el" href="GameObjectPoolManager_8ixx_source.html">GameObjectPoolManager.ixx</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="aeb0f9b4d9b8ead974a88e0fc828569b5" name="aeb0f9b4d9b8ead974a88e0fc828569b5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeb0f9b4d9b8ead974a88e0fc828569b5">&#9670;&#160;</a></span>acquire()</h2>
@@ -206,9 +206,9 @@ Manager </dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the acquired GameObject, or nullptr if pool exhausted. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00219">219</a> of file <a class="el" href="GameObjectPoolManager_8ixx_source.html">GameObjectPoolManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00220">220</a> of file <a class="el" href="GameObjectPoolManager_8ixx_source.html">GameObjectPoolManager.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="Guid_8ixx_source.html#l00018">helios::util::no_init</a>, and <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00293">pool()</a>.</p>
+<p class="reference">References <a class="el" href="types_8ixx_source.html#l00060">helios::core::types::no_init</a>, and <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00294">pool()</a>.</p>
 <div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
@@ -257,7 +257,7 @@ Manager </dd></dl>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00146">146</a> of file <a class="el" href="GameObjectPoolManager_8ixx_source.html">GameObjectPoolManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00147">147</a> of file <a class="el" href="GameObjectPoolManager_8ixx_source.html">GameObjectPoolManager.ixx</a>.</p>
 
 </div>
 </div>
@@ -300,7 +300,7 @@ Manager </dd></dl>
 
 <p>Implements <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html#a290b20a4d512d096650dc187f1f3e940">helios::engine::runtime::world::Manager</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00277">277</a> of file <a class="el" href="GameObjectPoolManager_8ixx_source.html">GameObjectPoolManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00278">278</a> of file <a class="el" href="GameObjectPoolManager_8ixx_source.html">GameObjectPoolManager.ixx</a>.</p>
 
 </div>
 </div>
@@ -338,9 +338,9 @@ Manager </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1Manager.html#ae7e2cd7531de5ce1fdc1f4a179b70929">helios::engine::runtime::world::Manager</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00253">253</a> of file <a class="el" href="GameObjectPoolManager_8ixx_source.html">GameObjectPoolManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00254">254</a> of file <a class="el" href="GameObjectPoolManager_8ixx_source.html">GameObjectPoolManager.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00293">pool()</a>.</p>
+<p class="reference">References <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00294">pool()</a>.</p>
 <div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
@@ -383,9 +383,9 @@ Manager </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPool.html" title="Object pool for efficient GameObject lifecycle management.">GameObjectPool</a>.</dd></dl>
 <dl class="section pre"><dt>Precondition</dt><dd>The pool must be registered with this manager. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00293">293</a> of file <a class="el" href="GameObjectPoolManager_8ixx_source.html">GameObjectPoolManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00294">294</a> of file <a class="el" href="GameObjectPoolManager_8ixx_source.html">GameObjectPoolManager.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00219">acquire()</a>, <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00253">init()</a>, <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00167">poolSnapshot()</a>, and <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00188">release()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00220">acquire()</a>, <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00254">init()</a>, <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00168">poolSnapshot()</a>, and <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00189">release()</a>.</p>
 <div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
@@ -428,11 +428,11 @@ Manager </dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolSnapshot.html" title="Immutable snapshot of a GameObjectPool&#39;s current state.">GameObjectPoolSnapshot</a> containing active and inactive counts. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00167">167</a> of file <a class="el" href="GameObjectPoolManager_8ixx_source.html">GameObjectPoolManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00168">168</a> of file <a class="el" href="GameObjectPoolManager_8ixx_source.html">GameObjectPoolManager.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00293">pool()</a>.</p>
+<p class="reference">References <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00294">pool()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="SpawnScheduler_8ixx_source.html#l00102">helios::engine::runtime::spawn::scheduling::SpawnScheduler::evaluate()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="SpawnAll_8ixx_source.html#l00045">helios::engine::runtime::spawn::policy::amount::SpawnAll::getAmount()</a>.</p>
 <div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
@@ -443,7 +443,7 @@ Manager </dd></dl>
 <div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-6-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_a8dd6b2a3a5252afb190ab22e0ddbc277_icgraph.svg" width="576" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolManager_a8dd6b2a3a5252afb190ab22e0ddbc277_icgraph.svg" width="487" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -486,9 +486,9 @@ Manager </dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the released GameObject, or nullptr if not found. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00188">188</a> of file <a class="el" href="GameObjectPoolManager_8ixx_source.html">GameObjectPoolManager.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00189">189</a> of file <a class="el" href="GameObjectPoolManager_8ixx_source.html">GameObjectPoolManager.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00401">helios::engine::ecs::GameObject::onRelease()</a>, <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00293">pool()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00357">helios::engine::ecs::GameObject::setActive()</a>.</p>
+<p class="reference">References <a class="el" href="GameObject_8ixx_source.html#l00541">helios::engine::ecs::GameObject::onRelease()</a>, <a class="el" href="GameObjectPoolManager_8ixx_source.html#l00294">pool()</a>, and <a class="el" href="GameObject_8ixx_source.html#l00489">helios::engine::ecs::GameObject::setActive()</a>.</p>
 <div id="dynsection-7" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
@@ -499,7 +499,7 @@ Manager </dd></dl>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>include/helios/engine/runtime/pooling/<a class="el" href="GameObjectPoolManager_8ixx_source.html">GameObjectPoolManager.ixx</a></li>
+<li><a class="el" href="GameObjectPoolManager_8ixx_source.html">GameObjectPoolManager.ixx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

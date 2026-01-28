@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>helios: include/helios/math/transform/model.ixx File Reference</title>
+<title>helios: model.ixx File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
@@ -109,12 +109,13 @@ $(function() {
 
 <p>Model transform helper functions.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>import <a class="el" href="helios_2math_2types_2__module_8ixx_source.html">helios.math.types</a>;</code><br />
+<div class="textblock"><code>#include &lt;cmath&gt;</code><br />
+<code>import <a class="el" href="helios_2math_2types_2__module_8ixx_source.html">helios.math.types</a>;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Include dependency graph for model.ixx:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="model_8ixx__incl.svg" width="184" height="127"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="model_8ixx__incl.svg" width="262" height="111"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="model_8ixx_source.html">Go to the source code of this file.</a></p>
@@ -124,9 +125,12 @@ Namespaces</h2></td></tr>
 <tr class="memitem:helios" id="r_helios"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios.html">helios</a></td></tr>
 <tr class="memitem:helios_3A_3Amath" id="r_helios_3A_3Amath"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1math.html">helios::math</a></td></tr>
 <tr class="memdesc:namespacehelios_1_1math"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mathematical operations and types. <br /></td></tr>
+<tr class="memitem:helios_3A_3Amath_3A_3Atransform" id="r_helios_3A_3Amath_3A_3Atransform"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1math_1_1transform.html">helios::math::transform</a></td></tr>
+<tr class="memdesc:namespacehelios_1_1math_1_1transform"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transformation utilities for 3D graphics and scene graph inheritance. <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:aed2b59ad3f79109cab95495e9f3546c5" id="r_aed2b59ad3f79109cab95495e9f3546c5"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">mat4f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1math_1_1transform.html#aed2b59ad3f79109cab95495e9f3546c5">helios::math::transform::make_rodrigues_rotation_matrix</a> (const float cos_theta, const float sin_theta, const <a class="el" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">vec3f</a> &amp;normalized_axis) noexcept</td></tr>
 <tr class="memitem:a643691235959c2f53d144a4ee9a0e251" id="r_a643691235959c2f53d144a4ee9a0e251"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">mat4f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1math.html#a643691235959c2f53d144a4ee9a0e251">helios::math::rotate</a> (const <a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">mat4f</a> &amp;model, float <a class="el" href="namespacehelios_1_1math.html#a4949642a7cca09c7950bb6a1b75260c9">radians</a>, const <a class="el" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">vec3f</a> &amp;axis) noexcept</td></tr>
 <tr class="memdesc:a643691235959c2f53d144a4ee9a0e251"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an affine rotation matrix R' = M * R by "baking" the rotation part into the model matrix. Any operation R' * v will make sure that v is rotated around the local origin, then transformed into world space.  <br /></td></tr>
 <tr class="memitem:addafb8dbe33d09352658b55cee9a0898" id="r_addafb8dbe33d09352658b55cee9a0898"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">mat4f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehelios_1_1math.html#addafb8dbe33d09352658b55cee9a0898">helios::math::translate</a> (const <a class="el" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">mat4f</a> &amp;model, const <a class="el" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">vec3f</a> &amp;v) noexcept</td></tr>
@@ -153,7 +157,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_08c09894bd9f0ab4b1e9fdc7a2628766.html">helios</a></li><li class="navelem"><a href="dir_0046d781185df00694c70533b055a138.html">math</a></li><li class="navelem"><a href="dir_88a1fd8d04254e342955f6c0d5b29283.html">transform</a></li><li class="navelem"><a href="model_8ixx.html">model.ixx</a></li>
+    <li class="navelem"><a href="dir_8af83c0dc83a45a35ca6968cdc29a7af.html">tmp</a></li><li class="navelem"><a href="dir_25ba8c016aaabea63a88c40dc27775c8.html">h</a></li><li class="navelem"><a href="dir_b3f59628e993ded3576abd1cf1101eb8.html">include</a></li><li class="navelem"><a href="dir_1ac1243035b4576c146b8d2c8a6274f6.html">helios</a></li><li class="navelem"><a href="dir_268add6b94670641c68bb834cdcb4292.html">math</a></li><li class="navelem"><a href="dir_33cd47729dc1f03ba9a5328b1ca2a965.html">transform</a></li><li class="navelem"><a href="model_8ixx.html">model.ixx</a></li>
     <li class="footer">Generated on <span class="timestamp"></span> for helios by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

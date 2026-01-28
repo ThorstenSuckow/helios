@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8runtime_8spawn_8policy_8conditions_8RequestedAmountIsAvailableCondition" kind="module">
+    <compoundname>helios.engine.runtime.spawn.policy.conditions.RequestedAmountIsAvailableCondition</compoundname>
+    <innerfile refid="RequestedAmountIsAvailableCondition_8ixx">RequestedAmountIsAvailableCondition.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions_1_1RequestedAmountIsAvailableCondition" prot="public">helios::engine::runtime::spawn::policy::conditions::RequestedAmountIsAvailableCondition</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions_1_1RequestedAmountIsAvailableCondition_1a8f2f5288cee128fad15299d266d51268" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::runtime::spawn::policy::conditions::RequestedAmountIsAvailableCondition::isSatisfied</definition>
+        <argsstring>(const size_t requestedAmount, const SpawnRuleState &amp;spawnState, const helios::engine::runtime::pooling::GameObjectPoolSnapshot poolSnapshot, const helios::engine::runtime::world::UpdateContext &amp;updateContext) const noexcept override</argsstring>
+        <name>isSatisfied</name>
+        <qualifiedname>helios::engine::runtime::spawn::policy::conditions::RequestedAmountIsAvailableCondition::isSatisfied</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition_1a8f099492bc15035f9d97382951d036bd">isSatisfied</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>requestedAmount</declname>
+        </param>
+        <param>
+          <type>const SpawnRuleState &amp;</type>
+          <declname>spawnState</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolSnapshot" kindref="compound">helios::engine::runtime::pooling::GameObjectPoolSnapshot</ref></type>
+          <declname>poolSnapshot</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Checks if the pool has enough inactive entities. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>requestedAmount</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of entities requested for spawn. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spawnState</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current state of the spawn rule (unused). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>poolSnapshot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Snapshot containing pool availability info. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current frame context (unused).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>`true` if inactive count &gt;= requested amount. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/conditions/RequestedAmountIsAvailableCondition.ixx" line="61" column="15" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/policy/conditions/RequestedAmountIsAvailableCondition.ixx" bodystart="61" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1conditions_1_1RequestedAmountIsAvailableCondition_1a50459fca1c9637963d296971ca5cef8a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::spawn::policy::conditions::RequestedAmountIsAvailableCondition::onCommit</definition>
+        <argsstring>(SpawnRuleState &amp;spawnRuleState, const size_t spawnAmount) const override</argsstring>
+        <name>onCommit</name>
+        <qualifiedname>helios::engine::runtime::spawn::policy::conditions::RequestedAmountIsAvailableCondition::onCommit</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition_1a1e0f204a7662fbb8fc83f76a2f7b0abd">onCommit</reimplements>
+        <param>
+          <type>SpawnRuleState &amp;</type>
+          <declname>spawnRuleState</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>spawnAmount</declname>
+        </param>
+        <briefdescription>
+<para>Resets the spawn timer after a successful spawn. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Sets `sinceLastSpawn` to zero, restarting the timer for conditions that depend on spawn intervals.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>spawnRuleState</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The rule&apos;s runtime state to update. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spawnAmount</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of entities that were spawned (unused). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/conditions/RequestedAmountIsAvailableCondition.ixx" line="79" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/policy/conditions/RequestedAmountIsAvailableCondition.ixx" bodystart="79" bodyend="84"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState_1a4bafae2ee2a3e98fed58dbe69d9c5af4" compoundref="SpawnRuleState_8ixx" startline="35" endline="37">helios::engine::runtime::spawn::policy::SpawnRuleState::setSinceLastSpawn</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/conditions/RequestedAmountIsAvailableCondition.ixx" line="9" column="15"/>
+  </compounddef>
+</doxygen>

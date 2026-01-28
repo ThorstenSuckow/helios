@@ -1,0 +1,262 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8runtime_8spawn_8scheduling_8CyclicSpawnScheduler" kind="module">
+    <compoundname>helios.engine.runtime.spawn.scheduling.CyclicSpawnScheduler</compoundname>
+    <innerfile refid="CyclicSpawnScheduler_8ixx">CyclicSpawnScheduler.ixx</innerfile>
+    <innerclass refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1RuleConfig" prot="public">helios::engine::runtime::spawn::scheduling::RuleConfig</innerclass>
+    <innerclass refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler" prot="public">helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1RuleConfig_1a221d6807202e36ca4fdae48c6fe4380a" prot="public" static="no" mutable="no">
+        <type><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" kindref="compound">helios::engine::core::data::SpawnProfileId</ref></type>
+        <definition>helios::engine::core::data::SpawnProfileId helios::engine::runtime::spawn::scheduling::RuleConfig::spawnProfileId</definition>
+        <argsstring></argsstring>
+        <name>spawnProfileId</name>
+        <qualifiedname>helios::engine::runtime::spawn::scheduling::RuleConfig::spawnProfileId</qualifiedname>
+        <initializer>{<ref refid="namespacehelios_1_1core_1_1types_1a209d373c4d42ac831d2f6bfd1c4165ad" kindref="member">helios::core::types::no_init</ref>}</initializer>
+        <briefdescription>
+<para>The spawn profile ID for this rule. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" line="44" column="52" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1RuleConfig_1aa8e2a6b81e2fb9e726327703c7a5f484" prot="public" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRule" kindref="compound">helios::engine::runtime::spawn::policy::SpawnRule</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;helios::engine::runtime::spawn::policy::SpawnRule&gt; helios::engine::runtime::spawn::scheduling::RuleConfig::spawnRule</definition>
+        <argsstring></argsstring>
+        <name>spawnRule</name>
+        <qualifiedname>helios::engine::runtime::spawn::scheduling::RuleConfig::spawnRule</qualifiedname>
+        <briefdescription>
+<para>The spawn rule controlling when spawns occur. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" line="49" column="25" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler_1a97e7bac4f7aac3698d77f5c2c7ddc19d" prot="private" static="no" mutable="no">
+        <type>std::array&lt; RuleConfig, N &gt;</type>
+        <definition>std::array&lt;RuleConfig, N&gt; helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler&lt; N &gt;::ringBuffer_</definition>
+        <argsstring></argsstring>
+        <name>ringBuffer_</name>
+        <qualifiedname>helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler::ringBuffer_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Fixed-size ring buffer of rule configurations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" line="97" column="20" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" bodystart="97" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler_1a2eedb7e9e07390c70f1326badeec751e" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler&lt; N &gt;::cursor_</definition>
+        <argsstring></argsstring>
+        <name>cursor_</name>
+        <qualifiedname>helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler::cursor_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Current position in the ring buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" line="102" column="16" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler_1a0baf5dc9250aa2b255c7bec8fddbea80" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler&lt; N &gt;::count_</definition>
+        <argsstring></argsstring>
+        <name>count_</name>
+        <qualifiedname>helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler::count_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Number of rules currently registered. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" line="107" column="16" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler_1a44a6fb7ab7ff69429316c6363036e6c8" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleId" kindref="compound">helios::engine::core::data::SpawnRuleId</ref>, <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState" kindref="compound">helios::engine::runtime::spawn::policy::SpawnRuleState</ref> &gt;</type>
+        <definition>std::unordered_map&lt; helios::engine::core::data::SpawnRuleId, helios::engine::runtime::spawn::policy::SpawnRuleState &gt; helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler&lt; N &gt;::spawnRuleStates_</definition>
+        <argsstring></argsstring>
+        <name>spawnRuleStates_</name>
+        <qualifiedname>helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler::spawnRuleStates_</qualifiedname>
+        <briefdescription>
+<para>Map from spawn rule IDs to their runtime state. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" line="115" column="2" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler_1ab3c04d9c455eb62a5eafec9c9e425e24" prot="private" static="no" mutable="no">
+        <type>DefaultRuleProcessor</type>
+        <definition>DefaultRuleProcessor helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler&lt; N &gt;::ruleProcessor_</definition>
+        <argsstring></argsstring>
+        <name>ruleProcessor_</name>
+        <qualifiedname>helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler::ruleProcessor_</qualifiedname>
+        <briefdescription>
+<para>Processor for evaluating individual rules. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" line="120" column="30" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" bodystart="120" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler_1a103d5ca8b224b755d1f4754d584363e1" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler&lt; N &gt;::evaluate</definition>
+        <argsstring>(const helios::engine::runtime::world::UpdateContext &amp;updateContext, const helios::engine::runtime::spawn::SpawnContext &amp;spawnContext) noexcept override</argsstring>
+        <name>evaluate</name>
+        <qualifiedname>helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler::evaluate</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler_1acc88dc618b35159f8dbfee05b226b432">evaluate</reimplements>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext" kindref="compound">helios::engine::runtime::spawn::SpawnContext</ref> &amp;</type>
+          <declname>spawnContext</declname>
+        </param>
+        <briefdescription>
+<para>Evaluates the current rule in the cycle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Processes only the rule at the current cursor position. If the rule produces a spawn plan, the cursor advances to the next rule. Otherwise, the same rule is evaluated again next frame.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current frame context. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spawnContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Context for spawn operations. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" line="134" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" bodystart="134" bodyend="155"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler_1a4aa1af1b90ed5cfe2413f88aa5b4f0e8" compoundref="SpawnScheduler_8ixx" startline="59">helios::engine::runtime::spawn::scheduling::SpawnScheduler::scheduledSpawnPlans_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler_1a67a0468dc4047525b11d00dabd84f9e1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>CyclicSpawnScheduler &amp;</type>
+        <definition>CyclicSpawnScheduler &amp; helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler&lt; N &gt;::addRule</definition>
+        <argsstring>(const helios::engine::core::data::SpawnProfileId spawnProfileId, std::unique_ptr&lt; helios::engine::runtime::spawn::policy::SpawnRule &gt; spawnRule)</argsstring>
+        <name>addRule</name>
+        <qualifiedname>helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler::addRule</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" kindref="compound">helios::engine::core::data::SpawnProfileId</ref></type>
+          <declname>spawnProfileId</declname>
+        </param>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRule" kindref="compound">helios::engine::runtime::spawn::policy::SpawnRule</ref> &gt;</type>
+          <declname>spawnRule</declname>
+        </param>
+        <briefdescription>
+<para>Adds a spawn rule to the cycle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Appends the rule to the ring buffer. Rules are evaluated in the order they are added.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>spawnProfileId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Profile ID for the spawned entities. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spawnRule</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spawn rule. Ownership transferred.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to this scheduler for chaining.</para>
+</simplesect>
+<simplesect kind="pre"><para>The scheduler has capacity (count_ &lt; N). </para>
+</simplesect>
+<simplesect kind="pre"><para>No duplicate profile IDs or rule IDs. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" line="171" column="30" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" bodystart="171" bodyend="190"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1CyclicSpawnScheduler_1a49245e938da1b02443555ffdd2b57c53" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler&lt; N &gt;::commit</definition>
+        <argsstring>(const helios::engine::core::data::SpawnRuleId spawnRuleId, const size_t spawnCount) noexcept override</argsstring>
+        <name>commit</name>
+        <qualifiedname>helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler::commit</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler_1a7a7feaf2f36c3e38b880e183e3458749">commit</reimplements>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleId" kindref="compound">helios::engine::core::data::SpawnRuleId</ref></type>
+          <declname>spawnRuleId</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>spawnCount</declname>
+        </param>
+        <briefdescription>
+<para>Commits a completed spawn to update rule state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Called after entities are spawned to update the rule&apos;s internal state (e.g., spawn count tracking).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>spawnRuleId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The rule that triggered the spawn. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spawnCount</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of entities actually spawned. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" line="201" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" bodystart="201" bodyend="213"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/runtime/spawn/scheduling/CyclicSpawnScheduler.ixx" line="15" column="15"/>
+  </compounddef>
+</doxygen>

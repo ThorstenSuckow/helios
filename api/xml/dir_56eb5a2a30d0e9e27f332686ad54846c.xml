@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_56eb5a2a30d0e9e27f332686ad54846c" kind="dir">
+    <compoundname>components</compoundname>
+    <innerfile refid="helios_2engine_2modules_2physics_2collision_2components_2__module_8ixx">helios/engine/modules/physics/collision/components/_module.ixx</innerfile>
+    <innerfile refid="AabbColliderComponent_8ixx">AabbColliderComponent.ixx</innerfile>
+    <innerfile refid="CollisionComponent_8ixx">CollisionComponent.ixx</innerfile>
+    <innerfile refid="CollisionStateComponent_8ixx">CollisionStateComponent.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_56eb5a2a30d0e9e27f332686ad54846c_1autotoc_md251">
+<title>helios::engine::modules::physics::collision::components</title><para>Collider components for collision detection.</para>
+<para>This namespace contains data components that define entity collision properties used by the physics and collision detection systems.</para>
+</sect1>
+<sect1 id="dir_56eb5a2a30d0e9e27f332686ad54846c_1autotoc_md252">
+<title>Components</title><para><table rows="4" cols="2"><row>
+<entry thead="yes"><para>Component  </para>
+</entry><entry thead="yes"><para>Description  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>AabbColliderComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Axis-Aligned Bounding Box for broad-phase collision detection.  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>CollisionComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Layer membership and collision masks (trigger/solid).  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>CollisionStateComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Per-frame collision state written by detection systems.  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_56eb5a2a30d0e9e27f332686ad54846c_1autotoc_md253">
+<title>Usage</title><para>Attach <computeroutput>AabbColliderComponent</computeroutput> to define spatial bounds and <computeroutput>CollisionComponent</computeroutput> to specify layer-based filtering. After collision detection runs, query <computeroutput>CollisionStateComponent</computeroutput> to read collision results for the current frame.</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>collider<sp/>=<sp/>gameObject.add&lt;AabbColliderComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal">collider.setBounds(<ref refid="namespacehelios_1_1math_1a124c0492430aeecedc1c1a5ece4ba488" kindref="member">helios::math::aabbf</ref>{{-0.5f,<sp/>-0.5f,<sp/>-0.5f},<sp/>{0.5f,<sp/>0.5f,<sp/>0.5f}});</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>LAYER_PLAYER<sp/><sp/><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>0;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>LAYER_ENEMY<sp/><sp/><sp/><sp/>=<sp/>1<sp/>&lt;&lt;<sp/>1;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>LAYER_POWER_UP<sp/>=<sp/>1<sp/>&lt;&lt;<sp/>2;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>collision<sp/>=<sp/>gameObject.add&lt;CollisionComponent&gt;(LAYER_PLAYER);</highlight></codeline>
+<codeline><highlight class="normal">collision.setTriggerCollisionMask(LAYER_ENEMY<sp/>|<sp/>LAYER_POWER_UP);</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/modules/physics/collision/components/"/>
+  </compounddef>
+</doxygen>

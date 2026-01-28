@@ -1,5 +1,8 @@
 var namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements =
 [
+    [ "AxisSpawnPlacer", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1AxisSpawnPlacer.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1AxisSpawnPlacer" ],
+    [ "ColumnSpawnPlacer", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1ColumnSpawnPlacer.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1ColumnSpawnPlacer" ],
+    [ "DistributedSpawnPlacer", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1DistributedSpawnPlacer.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1DistributedSpawnPlacer" ],
     [ "EmitterSpawnPlacer", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1EmitterSpawnPlacer.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1EmitterSpawnPlacer" ],
     [ "RandomSpawnPlacer", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1RandomSpawnPlacer.html", "classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1placements_1_1RandomSpawnPlacer" ]
 ];

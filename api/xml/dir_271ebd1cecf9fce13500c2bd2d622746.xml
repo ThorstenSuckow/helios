@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_271ebd1cecf9fce13500c2bd2d622746" kind="dir">
+    <compoundname>world</compoundname>
+    <innerfile refid="helios_2engine_2runtime_2world_2__module_8ixx">helios/engine/runtime/world/_module.ixx</innerfile>
+    <innerfile refid="GameWorld_8ixx">GameWorld.ixx</innerfile>
+    <innerfile refid="Level_8ixx">Level.ixx</innerfile>
+    <innerfile refid="Manager_8ixx">Manager.ixx</innerfile>
+    <innerfile refid="SystemRegistry_8ixx">SystemRegistry.ixx</innerfile>
+    <innerfile refid="UpdateContext_8ixx">UpdateContext.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_271ebd1cecf9fce13500c2bd2d622746_1autotoc_md445">
+<title>helios::engine::runtime::world</title><para>World state management and per-frame update context.</para>
+</sect1>
+<sect1 id="dir_271ebd1cecf9fce13500c2bd2d622746_1autotoc_md446">
+<title>Overview</title><para>This module provides the core classes for managing game state during runtime. The <computeroutput>GameWorld</computeroutput> class serves as the central registry for all GameObjects, while <computeroutput>UpdateContext</computeroutput> provides the frame context passed to systems during updates.</para>
+</sect1>
+<sect1 id="dir_271ebd1cecf9fce13500c2bd2d622746_1autotoc_md447">
+<title>Key Classes</title><para><table rows="6" cols="2"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>GameWorld</computeroutput>  </para>
+</entry><entry thead="no"><para>Central registry for GameObjects, managers, and pool access  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>Level</computeroutput>  </para>
+</entry><entry thead="no"><para>Game level with world bounds and root scene node  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>UpdateContext</computeroutput>  </para>
+</entry><entry thead="no"><para>Per-frame context with delta time, event buses, and command buffer  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SystemRegistry</computeroutput>  </para>
+</entry><entry thead="no"><para>Container for System instances within a pass  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>Manager</computeroutput>  </para>
+</entry><entry thead="no"><para>Abstract base for deferred operation handlers  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_271ebd1cecf9fce13500c2bd2d622746_1autotoc_md448">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8runtime_8world_8GameWorld" kindref="compound">helios.engine.runtime.world.GameWorld</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8runtime_8world_8UpdateContext" kindref="compound">helios.engine.runtime.world.UpdateContext</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Create<sp/>world<sp/>and<sp/>add<sp/>entities</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref><sp/>world;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>entity<sp/>=<sp/>std::make_unique&lt;GameObject&gt;();</highlight></codeline>
+<codeline><highlight class="normal">world.<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a28a53dcdcfb8880867db35145d88d3e2" kindref="member">addGameObject</ref>(std::move(entity));</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Query<sp/>entities<sp/>by<sp/>component</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>obj<sp/>:<sp/>world.<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a83857f38d3ffb10560f863107707929d" kindref="member">find</ref>&lt;ComposeTransformComponent&gt;())<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Process<sp/>matching<sp/>entities</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/runtime/world/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_554e74df1a63d9585349b46f0a64af7c" kind="dir">
+    <compoundname>input</compoundname>
+    <innerdir refid="dir_abfc6c9e479b36abff781adc55daf13f">systems</innerdir>
+    <innerfile refid="helios_2engine_2mechanics_2input_2__module_8ixx">helios/engine/mechanics/input/_module.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_554e74df1a63d9585349b46f0a64af7c_1autotoc_md157">
+<title>helios::engine::mechanics::input</title><para>Input handling systems for game entities.</para>
+</sect1>
+<sect1 id="dir_554e74df1a63d9585349b46f0a64af7c_1autotoc_md158">
+<title>Overview</title><para>This module provides input-related functionality for the game layer, including systems that translate device input (gamepads, keyboards) into game commands.</para>
+</sect1>
+<sect1 id="dir_554e74df1a63d9585349b46f0a64af7c_1autotoc_md159">
+<title>Submodules</title><para><table rows="2" cols="2"><row>
+<entry thead="yes"><para>Submodule  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>systems/</computeroutput>  </para>
+</entry><entry thead="no"><para>Input processing systems (TwinStickInputSystem)  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_554e74df1a63d9585349b46f0a64af7c_1autotoc_md160">
+<title>Key Classes</title><para><table rows="2" cols="2"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>TwinStickInputSystem</computeroutput>  </para>
+</entry><entry thead="no"><para>Reads gamepad stick input and enqueues Move2D/Aim2D commands  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_554e74df1a63d9585349b46f0a64af7c_1autotoc_md161">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Create<sp/>player<sp/>with<sp/>required<sp/>components</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>player<sp/>=<sp/>GameObjectFactory::gameObject()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withMotion([](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>m)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m.move2D().speed(5.0f).acceleration(10.0f);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m.steering().instantSteering(</highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.make(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Create<sp/>input<sp/>system<sp/>for<sp/>gamepad<sp/>control</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>inputSystem<sp/>=<sp/>std::make_unique&lt;TwinStickInputSystem&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&amp;gameWorld,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>&amp;inputManager,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1input_1_1types_1a4dd39c1a113edbe36b92b088d8dbf2ffaae8a44e1931122fe9aa20977535aaffb" kindref="member">helios::input::types::Gamepad::ONE</ref>,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>player-&gt;guid()<sp/><sp/></highlight><highlight class="comment">//<sp/>Target<sp/>entity<sp/>for<sp/>input<sp/>commands</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Register<sp/>in<sp/>Pre<sp/>phase<sp/>(before<sp/>movement<sp/>systems)</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">gameLoop.phase(PhaseType::Pre).addPass()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addSystem(std::move(inputSystem));</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/mechanics/input/"/>
+  </compounddef>
+</doxygen>

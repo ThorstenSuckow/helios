@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8modules_8physics_8collision_8Bounds" kind="module">
+    <compoundname>helios.engine.modules.physics.collision.Bounds</compoundname>
+    <innerfile refid="Bounds_8ixx">Bounds.ixx</innerfile>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1Bounds_1abb2fac9b11da117ceed65252f01e5e63" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespacehelios_1_1math_1a124c0492430aeecedc1c1a5ece4ba488" kindref="member">helios::math::aabbf</ref></type>
+        <definition>helios::math::aabbf helios::engine::modules::physics::collision::Bounds::computeWorldAabb</definition>
+        <argsstring>(const helios::engine::modules::rendering::model::components::ModelAabbComponent &amp;mab, const helios::engine::modules::scene::components::SceneNodeComponent &amp;sc, const helios::engine::modules::spatial::transform::components::TranslationStateComponent &amp;tsc, const helios::engine::modules::spatial::transform::components::ScaleStateComponent &amp;sca, helios::engine::modules::spatial::transform::components::RotationStateComponent &amp;rsc) noexcept</argsstring>
+        <name>computeWorldAabb</name>
+        <qualifiedname>helios::engine::modules::physics::collision::Bounds::computeWorldAabb</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1model_1_1components_1_1ModelAabbComponent" kindref="compound">helios::engine::modules::rendering::model::components::ModelAabbComponent</ref> &amp;</type>
+          <declname>mab</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1modules_1_1scene_1_1components_1_1SceneNodeComponent" kindref="compound">helios::engine::modules::scene::components::SceneNodeComponent</ref> &amp;</type>
+          <declname>sc</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1TranslationStateComponent" kindref="compound">helios::engine::modules::spatial::transform::components::TranslationStateComponent</ref> &amp;</type>
+          <declname>tsc</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1ScaleStateComponent" kindref="compound">helios::engine::modules::spatial::transform::components::ScaleStateComponent</ref> &amp;</type>
+          <declname>sca</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent" kindref="compound">helios::engine::modules::spatial::transform::components::RotationStateComponent</ref> &amp;</type>
+          <declname>rsc</declname>
+        </param>
+        <briefdescription>
+<para>Computes the world-space AABB from local model bounds and transforms. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Combines the parent&apos;s world transform with the entity&apos;s local translation, rotation, and scale to transform the model-space AABB into world space.</para>
+<para>The transformation order is: Translation * Rotation * Scale (TRS).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mab</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Model AABB component containing the local bounding box. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scene node component for accessing parent world transform. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tsc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Translation state component with local position. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sca</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scale state component with local scaling factors. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rsc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Rotation state component with local rotation matrix.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>World-space axis-aligned bounding box. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/physics/collision/Bounds.ixx" line="43" column="32" bodyfile="/tmp/h/include/helios/engine/modules/physics/collision/Bounds.ixx" bodystart="43" bodyend="63"/>
+        <references refid="structhelios_1_1math_1_1mat4_1ad856b4652346ff475b653e257d64428d" compoundref="mat4_8ixx" startline="104" endline="106">helios::math::mat4&lt; float &gt;::identity</references>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1BoundsUpdateSystem_1a797a0f4797abcb0fb3a1c06a6bb3ca83" compoundref="BoundsUpdateSystem_8ixx" startline="64" endline="79">helios::engine::modules::physics::collision::systems::BoundsUpdateSystem::update</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/modules/physics/collision/Bounds.ixx" line="7" column="15"/>
+  </compounddef>
+</doxygen>

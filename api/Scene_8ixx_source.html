@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>helios: include/helios/scene/Scene.ixx Source File</title>
+<title>helios: Scene.ixx Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
@@ -113,237 +113,332 @@ $(function() {
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">module</span>;</div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;optional&gt;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">export</span> <span class="keyword">module</span> <a class="code" href="module__helios_8scene_8Scene.html">helios.scene.Scene</a>;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;cassert&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;format&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;optional&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">import</span> <a class="code" href="module__helios_8scene_8Snapshot.html">helios.scene.Snapshot</a>;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">import</span> <a class="code" href="module__helios_8scene_8SceneNode.html">helios.scene.SceneNode</a>;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">import</span> <a class="code" href="module__helios_8scene_8CameraSceneNode.html">helios.scene.CameraSceneNode</a>;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">import</span> <a class="code" href="module__helios_8math_8types.html">helios.math.types</a>;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">import</span> <a class="code" href="module__helios_8rendering_8Viewport.html">helios.rendering.Viewport</a>;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">import</span> <a class="code" href="module__helios_8scene_8FrustumCullingStrategy.html">helios.scene.FrustumCullingStrategy</a>;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">import</span> <a class="code" href="module__helios_8scene_8SnapshotItem.html">helios.scene.SnapshotItem</a>;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">import</span> <a class="code" href="module__helios_8util_8log_8Logger.html">helios.util.log.Logger</a>;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">import</span> <a class="code" href="module__helios_8util_8log_8LogManager.html">helios.util.log.LogManager</a>;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">export</span> <span class="keyword">module</span> <a class="code" href="module__helios_8scene_8Scene.html">helios.scene.Scene</a>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">import</span> <a class="code" href="module__helios_8scene_8Snapshot.html">helios.scene.Snapshot</a>;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">import</span> <a class="code" href="module__helios_8scene_8SceneNode.html">helios.scene.SceneNode</a>;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">import</span> <a class="code" href="module__helios_8scene_8CameraSceneNode.html">helios.scene.CameraSceneNode</a>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">import</span> <a class="code" href="module__helios_8scene_8Camera.html">helios.scene.Camera</a>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">import</span> <a class="code" href="module__helios_8math_8types.html">helios.math.types</a>;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">import</span> <a class="code" href="module__helios_8rendering_8Viewport.html">helios.rendering.Viewport</a>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">import</span> <a class="code" href="module__helios_8scene_8FrustumCullingStrategy.html">helios.scene.FrustumCullingStrategy</a>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">import</span> <a class="code" href="module__helios_8scene_8SnapshotItem.html">helios.scene.SnapshotItem</a>;</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="Scene_8ixx.html#acbc04f24078582c7d42b2085be5d5750">   27</a></span><span class="preprocessor">#define HELIOS_LOG_SCOPE &quot;helios::scene::Scene&quot;</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">export</span> <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1scene.html">helios::scene</a> {</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">import</span> <a class="code" href="module__helios_8util_8log_8Logger.html">helios.util.log.Logger</a>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">import</span> <a class="code" href="module__helios_8util_8log_8LogManager.html">helios.util.log.LogManager</a>;</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment"></span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">    /**</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">     * @brief Represents a hierarchical SceneGraph that organizes all renderable</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">     * and non-renderable objects within a scene.</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">     * Every scene has one implicit root node all nodes are appended to when</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">     * `addNode` is called.</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="Scene_8ixx.html#acbc04f24078582c7d42b2085be5d5750">   30</a></span><span class="preprocessor">#define HELIOS_LOG_SCOPE &quot;helios::scene::Scene&quot;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">export</span> <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1scene.html">helios::scene</a> {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment"></span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">    /**</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">     * @brief Represents a hierarchical SceneGraph that organizes all renderable</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">     * and non-renderable objects within a scene.</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">     * A Scene is responsible for managing the SceneGraph, consisting of SceneNodes;</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">     * it provides methods to frustum cull SceneNodes based on a specific `FrustumCullingStrategy`</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">     * and a particular `CameraSceneNode` and also allows for propagating world transformations</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">     * through the contained subtrees.</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">     * @see [RTR, pp. 828]</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">     * @see [Gre19, pp. 693]</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">     * @see [HDMS+14, pp. 138]</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">     * @note By default, we&#39;re not allowing copying/moving Scenes.</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">     * These constraints may be relaxed in the future, depending on valid use cases.</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">     */</span></div>
-<div class="foldopen" id="foldopen00050" data-start="{" data-end="};">
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Scene.html">   50</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#af485d366a14aae8f69913d9cb01739f1">Scene</a> {</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment"></span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">         * @brief SceneGraphKey for internal use.</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">         * @see helios::scene::SceneNode::setWorldTransform()</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keyword">const</span> <a class="code hl_struct" href="structhelios_1_1scene_1_1SceneGraphKey.html">SceneGraphKey</a> sceneGraphKey_{};</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment"></span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">         * @brief 4x4 identity matrix for internal use.</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> mat4fid = <a class="code hl_function" href="structhelios_1_1math_1_1mat4.html#ad856b4652346ff475b653e257d64428d">helios::math::mat4f::identity</a>();</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment"></span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">         * @brief The root node of this scene.</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">         * All other SceneNodes are (in)direct children of this node.</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        std::unique_ptr&lt;SceneNode&gt; root_;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment"></span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">         * @brief Internal helper function to force-propagate the worldTransformation of SceneNodes to their child nodes.</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">         * Propagation is cancelled for this node if the resulting world transform</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">         * is considered equal to the current world transform of the SceneNode.</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">     * Every scene has one implicit root node all nodes are appended to when</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">     * `addNode` is called.</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">     * A Scene is responsible for managing the SceneGraph, consisting of SceneNodes;</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">     * it provides methods to frustum cull SceneNodes based on a specific `FrustumCullingStrategy`</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">     * and a particular `CameraSceneNode` and also allows for propagating world transformations</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">     * through the contained subtrees.</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">     * @see [RTR, pp. 828]</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">     * @see [Gre19, pp. 693]</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">     * @see [HDMS+14, pp. 138]</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">     * @note By default, we&#39;re not allowing copying/moving Scenes.</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">     * These constraints may be relaxed in the future, depending on valid use cases.</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">     */</span></div>
+<div class="foldopen" id="foldopen00053" data-start="{" data-end="};">
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Scene.html">   53</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#af485d366a14aae8f69913d9cb01739f1">Scene</a> {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment"></span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">         * @brief SceneGraphKey for internal use.</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">         * @see helios::scene::SceneNode::setWorldTransform()</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keyword">const</span> <a class="code hl_struct" href="structhelios_1_1scene_1_1SceneGraphKey.html">SceneGraphKey</a> sceneGraphKey_{};</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment"></span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">         * @brief 4x4 identity matrix for internal use.</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a> mat4fid = <a class="code hl_function" href="structhelios_1_1math_1_1mat4.html#ad856b4652346ff475b653e257d64428d">helios::math::mat4f::identity</a>();</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment"></span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">         * @brief The root node of this scene.</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">         * All other SceneNodes are (in)direct children of this node.</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        std::unique_ptr&lt;SceneNode&gt; root_;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment"></span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">         * @brief Internal helper function to force-propagate the worldTransformation of SceneNodes to their child nodes.</span></div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">         * @param node The current SceneNode for which to propagate the world transformation.</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">         * @param parentWorldTransform The world transformation from the parent node.</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">         * Propagation is cancelled for this node if the resulting world transform</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">         * is considered equal to the current world transform of the SceneNode.</span></div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">         * @see updateNodes()</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <span class="keywordtype">void</span> propagateWorldTransform(<a class="code hl_class" href="classhelios_1_1scene_1_1SceneNode.html">SceneNode</a>&amp; node, <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">math::mat4f</a>&amp; parentWorldTransform) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment"></span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">         * @brief Selectively updates the world transformation of SceneNodes in the scene graph.</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">         * A SceneNode is forced to update its own world transformation and the</span></div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">         * world transformation of its children as soon as a check for the dirty-state of the</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">         * node is true.</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">         * @param node The current SceneNode processed.</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">         * @param wt The world transform to apply.</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">         * @note It is important that this method is called before the next render pass, or before</span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">         * the scene graph is culled. This method must also consider CameraSceneNodes, making sure the</span></div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">         * associated `Camera` is updated with the view matrix.</span></div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#a411492ac5cc05ac601ee0aef03dced51">updateNodes</a>(<a class="code hl_class" href="classhelios_1_1scene_1_1SceneNode.html">SceneNode</a>&amp; node, <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">math::mat4f</a>&amp; wt) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">         * @param node The current SceneNode for which to propagate the world transformation.</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">         * @param parentWorldTransform The world transformation from the parent node.</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">         * @see updateNodes()</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="keywordtype">void</span> propagateWorldTransform(<a class="code hl_class" href="classhelios_1_1scene_1_1SceneNode.html">SceneNode</a>&amp; node, <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">math::mat4f</a>&amp; parentWorldTransform)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            <span class="comment">// if the worldTransform was not updated,</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            <span class="comment">// branch back into selective updates</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            <span class="keywordflow">if</span> (!node.<a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#abc594768ba59f9154b707424aa76a871">applyWorldTransform</a>(parentWorldTransform, sceneGraphKey_)) {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; child: node.<a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#a345af64a75ad370d482051006658c81e">children</a>()) {</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                    <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#a411492ac5cc05ac601ee0aef03dced51">updateNodes</a>(*child, node.<a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#ab908b6a16d34640eca0d92f2573e6cc3">cachedWorldTransform</a>());</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                }</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; child: node.<a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#a345af64a75ad370d482051006658c81e">children</a>()) {</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                    propagateWorldTransform(*child, node.<a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#ab908b6a16d34640eca0d92f2573e6cc3">cachedWorldTransform</a>());</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                }</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            }</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        }</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment"></span> </div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">         * @brief The FrustumCullingStrategy used with this Scene.</span></div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        std::unique_ptr&lt;helios::scene::FrustumCullingStrategy&gt; frustumCullingStrategy_;</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment"></span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">         * @brief The logger used with this Scene instance.</span></div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment">         * Defaults to HELIOS_LOG_SCOPE.</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">         * @brief Selectively updates the world transformation of SceneNodes in the scene graph.</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">         * A SceneNode is forced to update its own world transformation and the</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">         * world transformation of its children as soon as a check for the dirty-state of the</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment">         * node is true.</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment">         * @param node The current SceneNode processed.</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment">         * @param wt The world transform to apply.</span></div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment">         * @todo constructor injection</span></div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::util::log::Logger</a>&amp; logger_ = <a class="code hl_function" href="classhelios_1_1util_1_1log_1_1LogManager.html#a750d8fd5b3ee3678600644756b0631e7">helios::util::log::LogManager::loggerForScope</a>(</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            <a class="code hl_define" href="OpenGLUniformLocationMap_8ixx.html#acbc04f24078582c7d42b2085be5d5750">HELIOS_LOG_SCOPE</a></div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        );</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment">         * @note It is important that this method is called before the next render pass, or before</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment">         * the scene graph is culled. This method must also consider CameraSceneNodes, making sure the</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment">         * associated `Camera` is updated with the view matrix.</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#a411492ac5cc05ac601ee0aef03dced51">updateNodes</a>(<a class="code hl_class" href="classhelios_1_1scene_1_1SceneNode.html">SceneNode</a>&amp; node, <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">math::mat4f</a>&amp; wt)<span class="keyword"> const </span>{</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keyword">public</span>:<span class="comment"></span></div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="comment">         * @brief Prevent copying.</span></div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="comment">         * A Scene is not intended to be copied.</span></div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Scene.html#af485d366a14aae8f69913d9cb01739f1">  124</a></span>        <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#af485d366a14aae8f69913d9cb01739f1">Scene</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#af485d366a14aae8f69913d9cb01739f1">Scene</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="comment"></span> </div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment">         * @brief Prevent copy assignment.</span></div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment">         * A Scene is not intended to be copied.</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            <span class="keywordflow">if</span> (node.<a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#a88551e7d166868342b87fd83e767442c">needsUpdate</a>()) {</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                propagateWorldTransform(node, wt);</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                <span class="keyword">const</span> <span class="keyword">auto</span>&amp; parentWt = node.<a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#a2cd5ee14fdf4990952266c724c916551">worldTransform</a>();</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; child: node.<a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#a345af64a75ad370d482051006658c81e">children</a>()) {</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                    <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#a411492ac5cc05ac601ee0aef03dced51">updateNodes</a>(*child, parentWt);</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                }</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            }</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        }</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment"></span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment">         * @brief The FrustumCullingStrategy used with this Scene.</span></div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Scene.html#a213062a1999076c7fea5688c9831efbf">  131</a></span>        <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#af485d366a14aae8f69913d9cb01739f1">Scene</a>&amp; <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#a213062a1999076c7fea5688c9831efbf">operator=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#af485d366a14aae8f69913d9cb01739f1">Scene</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        std::unique_ptr&lt;helios::scene::FrustumCullingStrategy&gt; frustumCullingStrategy_;</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="comment"></span> </div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="comment">         * @brief Prevent move constructor.</span></div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Scene.html#aed8d3cf0ab98ebd89de94edfdb7f477a">  136</a></span>        <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#aed8d3cf0ab98ebd89de94edfdb7f477a">Scene</a>(<a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#af485d366a14aae8f69913d9cb01739f1">Scene</a>&amp;&amp;) noexcept = delete;</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="comment"></span> </div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="comment">         * @brief Prevent move assignment operator.</span></div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Scene.html#a42bc78c5ad2c016b17ea61860e51a266">  141</a></span>        <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#af485d366a14aae8f69913d9cb01739f1">Scene</a>&amp; operator=(<a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#af485d366a14aae8f69913d9cb01739f1">Scene</a>&amp;&amp;) noexcept = delete;</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Scene.html#ac25813beeeb6cbccf15cb04a14df9113">  143</a></span>        ~<a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#af485d366a14aae8f69913d9cb01739f1">Scene</a>() = default;</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="comment"></span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="comment">         * @brief The logger used with this Scene instance.</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="comment">         * Defaults to HELIOS_LOG_SCOPE.</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="comment">         * @todo constructor injection</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::util::log::Logger</a>&amp; logger_ = <a class="code hl_function" href="classhelios_1_1util_1_1log_1_1LogManager.html#a750d8fd5b3ee3678600644756b0631e7">helios::util::log::LogManager::loggerForScope</a>(</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            <a class="code hl_define" href="OpenGLUniformLocationMap_8ixx.html#acbc04f24078582c7d42b2085be5d5750">HELIOS_LOG_SCOPE</a></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        );</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keyword">public</span>:<span class="comment"></span></div>
 <div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="comment">         * @brief Constructs a new Scene.</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="comment">         * @brief Prevent copying.</span></div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="comment">         * The root node for this scene is automatically created.</span></div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="comment">         * @param frustumCullingStrategy The frustum culling strategy to use with this Scene.</span></div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Scene.html#a9b596ef125f2e58772117279f8b1351c">  152</a></span>        explicit <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#af485d366a14aae8f69913d9cb01739f1">Scene</a>(std::unique_ptr&lt;<a class="code hl_namespace" href="namespacehelios.html">helios</a>::<a class="code hl_namespace" href="namespacehelios_1_1scene.html">scene</a>::<a class="code hl_class" href="classhelios_1_1scene_1_1FrustumCullingStrategy.html">FrustumCullingStrategy</a>&gt; frustumCullingStrategy);</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="comment"></span> </div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="comment">         * @brief Adds a new SceneNode to this scene.</span></div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="comment">         * The SceneNode becomes a direct descendant of this scene&#39;s root.</span></div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="comment">         * @param node The SceneNode to add to this Scene.</span></div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="comment">         * @return The raw pointer to the newly added node, or `nullptr` if the node was not added.</span></div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Scene.html#a776c5b21ffb85e5d63a5117b51797bb9">  164</a></span>        [[nodiscard]] <a class="code hl_class" href="classhelios_1_1scene_1_1SceneNode.html">SceneNode</a>* <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#a776c5b21ffb85e5d63a5117b51797bb9">addNode</a>(std::unique_ptr&lt;<a class="code hl_class" href="classhelios_1_1scene_1_1SceneNode.html">SceneNode</a>&gt; node) const;</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="comment"></span> </div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span><span class="comment">         * @brief Updates the world transformations of SceneNodes in the graph.</span></div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="comment">         * The method traverses the Scene and propagates updated world transformations</span></div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="comment">         * to their respective child nodes if the processed node is considered to be dirty.</span></div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Scene.html#a411492ac5cc05ac601ee0aef03dced51">  172</a></span>        <span class="keywordtype">void</span> updateNodes() const;</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="comment"></span> </div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="comment">         * @brief Applies this Scene&#39;s frustumCullingStrategy and returns all nodes visible for the specified</span></div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="comment">         * CameraSceneNode and its associated `Camera`.</span></div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="comment">         * This method ensures that all nodes&#39; world geometry is properly updated</span></div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="comment">         * before culling is applied.</span></div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="comment">         * @param cameraSceneNode The cameraSceneNode used to determine the view frustum for culling.</span></div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="comment">         * @return A list of currently visible nodes (const pointers into the scene graph).</span></div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Scene.html#a3daf47f04c82372f22c8a6f85b277160">  185</a></span>        [[nodiscard]] std::vector&lt;const <a class="code hl_namespace" href="namespacehelios.html">helios</a>::<a class="code hl_namespace" href="namespacehelios_1_1scene.html">scene</a>::<a class="code hl_class" href="classhelios_1_1scene_1_1SceneNode.html">SceneNode</a>*&gt; <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#a3daf47f04c82372f22c8a6f85b277160">findVisibleNodes</a>(</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>            const <a class="code hl_namespace" href="namespacehelios.html">helios</a>::<a class="code hl_namespace" href="namespacehelios_1_1scene.html">scene</a>::<a class="code hl_class" href="classhelios_1_1scene_1_1CameraSceneNode.html">CameraSceneNode</a>* cameraSceneNode</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        ) const;</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="comment"></span> </div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="comment">         * @brief Returns the root node of this Scene.</span></div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="comment">         * The root node is guaranteed to exist.</span></div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="comment">         * @return The root node of this Scene.</span></div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Scene.html#aff7c39985b9197a877dc4a698168e0c8">  196</a></span>        [[nodiscard]] <a class="code hl_namespace" href="namespacehelios.html">helios</a>::<a class="code hl_namespace" href="namespacehelios_1_1scene.html">scene</a>::<a class="code hl_class" href="classhelios_1_1scene_1_1SceneNode.html">SceneNode</a>&amp; <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#aff7c39985b9197a877dc4a698168e0c8">root</a>() const noexcept;</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="comment"></span> </div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="comment">         * @brief Creates a Snapshot of the Scene and returns it.</span></div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="comment">         * Taking a snapshot will frustum cull the SceneNodes and place their Renderables</span></div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="comment">         * along with the current matrices of this scene into the Snapshot object.</span></div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="comment">         * Only those SceneNodes are considered that were configured with a Renderable and</span></div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="comment">         * have their `isActive`-flag set to true.</span></div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="comment">         * @param viewport The viewport for which the Snapshot is created.</span></div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="comment">         * @return An optional Snapshot created for this Scene, or `std::nullopt` if creation failed.</span></div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="comment">         * @todo This should be refactored into a factory to prevent domain leakage between Scene and Rendering.</span></div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        [[nodiscard]] std::optional&lt;<a class="code hl_class" href="classhelios_1_1scene_1_1Snapshot.html">Snapshot</a>&gt;</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Scene.html#ab3ad742392c2a2b159cf8927ee6cf375">  213</a></span>        <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#ab3ad742392c2a2b159cf8927ee6cf375">createSnapshot</a>(const std::shared_ptr&lt;const <a class="code hl_namespace" href="namespacehelios_1_1rendering.html">rendering</a>::Viewport&gt;&amp; viewport) const;</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    };</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="comment">         * A Scene is not intended to be copied.</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Scene.html#af485d366a14aae8f69913d9cb01739f1">  150</a></span>        <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#af485d366a14aae8f69913d9cb01739f1">Scene</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#af485d366a14aae8f69913d9cb01739f1">Scene</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="comment"></span> </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="comment">         * @brief Prevent copy assignment.</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="comment">         * A Scene is not intended to be copied.</span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Scene.html#a213062a1999076c7fea5688c9831efbf">  157</a></span>        <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#af485d366a14aae8f69913d9cb01739f1">Scene</a>&amp; <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#a213062a1999076c7fea5688c9831efbf">operator=</a>(<span class="keyword">const</span> <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#af485d366a14aae8f69913d9cb01739f1">Scene</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="comment"></span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="comment">         * @brief Prevent move constructor.</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Scene.html#aed8d3cf0ab98ebd89de94edfdb7f477a">  162</a></span>        <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#aed8d3cf0ab98ebd89de94edfdb7f477a">Scene</a>(<a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#af485d366a14aae8f69913d9cb01739f1">Scene</a>&amp;&amp;) noexcept = delete;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="comment"></span> </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="comment">         * @brief Prevent move assignment operator.</span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Scene.html#a42bc78c5ad2c016b17ea61860e51a266">  167</a></span>        <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#af485d366a14aae8f69913d9cb01739f1">Scene</a>&amp; operator=(<a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#af485d366a14aae8f69913d9cb01739f1">Scene</a>&amp;&amp;) noexcept = delete;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Scene.html#ac25813beeeb6cbccf15cb04a14df9113">  169</a></span>        ~<a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#af485d366a14aae8f69913d9cb01739f1">Scene</a>() = default;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="comment"></span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="comment">         * @brief Constructs a new Scene.</span></div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="comment">         * The root node for this scene is automatically created.</span></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="comment">         * @param frustumCullingStrategy The frustum culling strategy to use with this Scene.</span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00178" data-start="{" data-end="}">
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Scene.html#a9b596ef125f2e58772117279f8b1351c">  178</a></span>        explicit <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#af485d366a14aae8f69913d9cb01739f1">Scene</a>(std::unique_ptr&lt;<a class="code hl_namespace" href="namespacehelios.html">helios</a>::<a class="code hl_namespace" href="namespacehelios_1_1scene.html">scene</a>::<a class="code hl_class" href="classhelios_1_1scene_1_1FrustumCullingStrategy.html">FrustumCullingStrategy</a>&gt; frustumCullingStrategy) :</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>            frustumCullingStrategy_(std::move(frustumCullingStrategy)), root_(std::make_unique&lt;<a class="code hl_class" href="classhelios_1_1scene_1_1SceneNode.html">SceneNode</a>&gt;()) {}</div>
 </div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span> </div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>} <span class="comment">// namespace helios::scene</span></div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
-<div class="ttc" id="aOpenGLUniformLocationMap_8ixx_html_acbc04f24078582c7d42b2085be5d5750"><div class="ttname"><a href="OpenGLUniformLocationMap_8ixx.html#acbc04f24078582c7d42b2085be5d5750">HELIOS_LOG_SCOPE</a></div><div class="ttdeci">#define HELIOS_LOG_SCOPE</div><div class="ttdef"><b>Definition</b> <a href="OpenGLUniformLocationMap_8ixx_source.html#l00017">OpenGLUniformLocationMap.ixx:17</a></div></div>
-<div class="ttc" id="aclasshelios_1_1scene_1_1CameraSceneNode_html"><div class="ttname"><a href="classhelios_1_1scene_1_1CameraSceneNode.html">helios::scene::CameraSceneNode</a></div><div class="ttdoc">Represents an adapter for cameras, allowing spatial positioning and transformation within the scene g...</div><div class="ttdef"><b>Definition</b> <a href="CameraSceneNode_8ixx_source.html#l00027">CameraSceneNode.ixx:27</a></div></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="comment"></span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="comment">         * @brief Adds a new SceneNode to this scene.</span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="comment">         * The SceneNode becomes a direct descendant of this scene&#39;s root.</span></div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><span class="comment">         * @param node The SceneNode to add to this Scene.</span></div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="comment">         * @return The raw pointer to the newly added node, or `nullptr` if the node was not added.</span></div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00191" data-start="{" data-end="}">
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Scene.html#a776c5b21ffb85e5d63a5117b51797bb9">  191</a></span>        [[nodiscard]] <a class="code hl_class" href="classhelios_1_1scene_1_1SceneNode.html">SceneNode</a>* <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#a776c5b21ffb85e5d63a5117b51797bb9">addNode</a>(std::unique_ptr&lt;SceneNode&gt; node)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>            assert(root_ &amp;&amp; <span class="stringliteral">&quot;Unexpected null-root&quot;</span>);</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            <span class="keywordflow">if</span> (!root_) {</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>                logger_.error(<span class="stringliteral">&quot;Unexpected nullptr for this Scene&#39;s root.&quot;</span>);</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>            }</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>            <span class="keywordflow">return</span> root_-&gt;addNode(std::move(node));</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        }</div>
+</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="comment"></span> </div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="comment">         * @brief Updates the world transformations of SceneNodes in the graph.</span></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="comment">         * The method traverses the Scene and propagates updated world transformations</span></div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="comment">         * to their respective child nodes if the processed node is considered to be dirty.</span></div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00205" data-start="{" data-end="}">
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Scene.html#a411492ac5cc05ac601ee0aef03dced51">  205</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#a411492ac5cc05ac601ee0aef03dced51">updateNodes</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>            <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#a411492ac5cc05ac601ee0aef03dced51">updateNodes</a>(*root_, mat4fid);</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        }</div>
+</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="comment"></span> </div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="comment">         * @brief Applies this Scene&#39;s frustumCullingStrategy and returns all nodes visible for the specified</span></div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="comment">         * CameraSceneNode and its associated `Camera`.</span></div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="comment">         * This method ensures that all nodes&#39; world geometry is properly updated</span></div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="comment">         * before culling is applied.</span></div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span><span class="comment">         * @param cameraSceneNode The cameraSceneNode used to determine the view frustum for culling.</span></div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span><span class="comment">         * @return A list of currently visible nodes (const pointers into the scene graph).</span></div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00220" data-start="{" data-end="}">
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Scene.html#a3daf47f04c82372f22c8a6f85b277160">  220</a></span>        [[nodiscard]] std::vector&lt;const helios::scene::SceneNode*&gt; <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#a3daf47f04c82372f22c8a6f85b277160">findVisibleNodes</a>(</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>            <span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1scene_1_1CameraSceneNode.html">helios::scene::CameraSceneNode</a>* cameraSceneNode</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>        )<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>            assert(root_ &amp;&amp; <span class="stringliteral">&quot;Unexpected null-root&quot;</span>);</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>            <span class="keywordflow">if</span> (!root_) {</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>                logger_.error(<span class="stringliteral">&quot;Unexpected nullptr for this Scene&#39;s root.&quot;</span>);</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>            }</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span> </div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#a411492ac5cc05ac601ee0aef03dced51">updateNodes</a>();</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span> </div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>            <span class="keywordflow">return</span> frustumCullingStrategy_-&gt;cull(cameraSceneNode, *root_);</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        }</div>
+</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="comment"></span> </div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span><span class="comment">         * @brief Returns the root node of this Scene.</span></div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span><span class="comment">         * The root node is guaranteed to exist.</span></div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span><span class="comment">         * @return The root node of this Scene.</span></div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00240" data-start="{" data-end="}">
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Scene.html#aff7c39985b9197a877dc4a698168e0c8">  240</a></span>        [[nodiscard]] <a class="code hl_class" href="classhelios_1_1scene_1_1SceneNode.html">helios::scene::SceneNode</a>&amp; <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#aff7c39985b9197a877dc4a698168e0c8">root</a>() const noexcept {</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>            assert(root_ &amp;&amp; <span class="stringliteral">&quot;Unexpected null-root&quot;</span>);</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>            <span class="keywordflow">if</span> (!root_) {</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>                logger_.error(<span class="stringliteral">&quot;Unexpected nullptr for this Scene&#39;s root.&quot;</span>);</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>            }</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>            <span class="keywordflow">return</span> *root_;</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        }</div>
+</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span><span class="comment"></span> </div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span><span class="comment">         * @brief Creates a Snapshot of the Scene and returns it.</span></div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span><span class="comment">         * Taking a snapshot will frustum cull the SceneNodes and place their Renderables</span></div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span><span class="comment">         * along with the current matrices of this scene into the Snapshot object.</span></div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span><span class="comment">         * Only those SceneNodes are considered that were configured with a Renderable and</span></div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span><span class="comment">         * have their `isActive`-flag set to true.</span></div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span><span class="comment">         * @param viewport The viewport for which the Snapshot is created.</span></div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span><span class="comment">         * @return An optional Snapshot created for this Scene, or `std::nullopt` if creation failed.</span></div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span><span class="comment">         * @todo This should be refactored into a factory to prevent domain leakage between Scene and Rendering.</span></div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>        [[nodiscard]] std::optional&lt;Snapshot&gt;</div>
+<div class="foldopen" id="foldopen00263" data-start="{" data-end="}">
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno"><a class="line" href="classhelios_1_1scene_1_1Scene.html#ab3ad742392c2a2b159cf8927ee6cf375">  263</a></span>        <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#ab3ad742392c2a2b159cf8927ee6cf375">createSnapshot</a>(<span class="keyword">const</span> std::shared_ptr&lt;const rendering::Viewport&gt;&amp; viewport)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span> </div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>            <span class="keyword">const</span> <span class="keyword">auto</span>* cameraSceneNode = viewport-&gt;cameraSceneNode();</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span> </div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>            <span class="keywordflow">if</span> (!cameraSceneNode) {</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>                logger_.warn(<span class="stringliteral">&quot;Viewport was not configured with a camera, skipping createSnapshot()...&quot;</span>);</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>                <span class="keywordflow">return</span> std::nullopt;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>            }</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span> </div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>            <span class="keyword">const</span> <span class="keyword">auto</span> nodes = <a class="code hl_function" href="classhelios_1_1scene_1_1Scene.html#a3daf47f04c82372f22c8a6f85b277160">findVisibleNodes</a>(cameraSceneNode);</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span> </div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>            std::vector&lt;SnapshotItem&gt; renderables;</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>            renderables.reserve(nodes.size());</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>            <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; node: nodes) {</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>                <span class="keywordflow">if</span> (node-&gt;<a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#af9530fc7b8962c228dd883bf0f509a4a">isActive</a>() &amp;&amp; node-&gt;<a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#a3a41a256979415a6678bb391660b0ced">hasRenderable</a>()) {</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>                    renderables.emplace_back(node-&gt;<a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#a2f4bba61e70c28e98747ee84af651812">renderable</a>(), node-&gt;<a class="code hl_function" href="classhelios_1_1scene_1_1SceneNode.html#ab908b6a16d34640eca0d92f2573e6cc3">cachedWorldTransform</a>());</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>                }</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>            }</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span> </div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>            <span class="keywordflow">return</span> std::make_optional&lt;Snapshot&gt;(</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>                viewport,</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>                cameraSceneNode-&gt;camera().projectionMatrix(),</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>                cameraSceneNode-&gt;camera().viewMatrix(),</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>                std::move(renderables)</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>            );</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        }</div>
+</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span> </div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    };</div>
+</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span> </div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>} <span class="comment">// namespace helios::scene</span></div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span> </div>
+<div class="ttc" id="aOpenGLUniformLocationMap_8ixx_html_acbc04f24078582c7d42b2085be5d5750"><div class="ttname"><a href="OpenGLUniformLocationMap_8ixx.html#acbc04f24078582c7d42b2085be5d5750">HELIOS_LOG_SCOPE</a></div><div class="ttdeci">#define HELIOS_LOG_SCOPE</div><div class="ttdef"><b>Definition</b> <a href="OpenGLUniformLocationMap_8ixx_source.html#l00020">OpenGLUniformLocationMap.ixx:20</a></div></div>
+<div class="ttc" id="aclasshelios_1_1scene_1_1CameraSceneNode_html"><div class="ttname"><a href="classhelios_1_1scene_1_1CameraSceneNode.html">helios::scene::CameraSceneNode</a></div><div class="ttdoc">Represents an adapter for cameras, allowing spatial positioning and transformation within the scene g...</div><div class="ttdef"><b>Definition</b> <a href="CameraSceneNode_8ixx_source.html#l00031">CameraSceneNode.ixx:31</a></div></div>
 <div class="ttc" id="aclasshelios_1_1scene_1_1FrustumCullingStrategy_html"><div class="ttname"><a href="classhelios_1_1scene_1_1FrustumCullingStrategy.html">helios::scene::FrustumCullingStrategy</a></div><div class="ttdoc">Abstract base class for implementing frustum culling strategies.</div><div class="ttdef"><b>Definition</b> <a href="FrustumCullingStrategy_8ixx_source.html#l00032">FrustumCullingStrategy.ixx:32</a></div></div>
-<div class="ttc" id="aclasshelios_1_1scene_1_1SceneNode_html"><div class="ttname"><a href="classhelios_1_1scene_1_1SceneNode.html">helios::scene::SceneNode</a></div><div class="ttdoc">Represents a SceneNode within a SceneGraph.</div><div class="ttdef"><b>Definition</b> <a href="SceneNode_8ixx_source.html#l00060">SceneNode.ixx:60</a></div></div>
+<div class="ttc" id="aclasshelios_1_1scene_1_1SceneNode_html"><div class="ttname"><a href="classhelios_1_1scene_1_1SceneNode.html">helios::scene::SceneNode</a></div><div class="ttdoc">Represents a SceneNode within a SceneGraph.</div><div class="ttdef"><b>Definition</b> <a href="SceneNode_8ixx_source.html#l00062">SceneNode.ixx:62</a></div></div>
+<div class="ttc" id="aclasshelios_1_1scene_1_1SceneNode_html_a2cd5ee14fdf4990952266c724c916551"><div class="ttname"><a href="classhelios_1_1scene_1_1SceneNode.html#a2cd5ee14fdf4990952266c724c916551">helios::scene::SceneNode::worldTransform</a></div><div class="ttdeci">const helios::math::mat4f &amp; worldTransform() noexcept</div><div class="ttdoc">Computes and returns the world transform for this SceneNode. Will request the current world transform...</div><div class="ttdef"><b>Definition</b> <a href="SceneNode_8ixx_source.html#l00396">SceneNode.ixx:396</a></div></div>
+<div class="ttc" id="aclasshelios_1_1scene_1_1SceneNode_html_a2f4bba61e70c28e98747ee84af651812"><div class="ttname"><a href="classhelios_1_1scene_1_1SceneNode.html#a2f4bba61e70c28e98747ee84af651812">helios::scene::SceneNode::renderable</a></div><div class="ttdeci">std::shared_ptr&lt; const helios::rendering::Renderable &gt; renderable() const noexcept</div><div class="ttdoc">Returns a shared pointer to the Renderable of this SceneNode.</div><div class="ttdef"><b>Definition</b> <a href="SceneNode_8ixx_source.html#l00260">SceneNode.ixx:260</a></div></div>
+<div class="ttc" id="aclasshelios_1_1scene_1_1SceneNode_html_a345af64a75ad370d482051006658c81e"><div class="ttname"><a href="classhelios_1_1scene_1_1SceneNode.html#a345af64a75ad370d482051006658c81e">helios::scene::SceneNode::children</a></div><div class="ttdeci">const std::vector&lt; std::unique_ptr&lt; SceneNode &gt; &gt; &amp; children() const noexcept</div><div class="ttdoc">Returns a const ref to the list of this node&#39;s children.</div><div class="ttdef"><b>Definition</b> <a href="SceneNode_8ixx_source.html#l00251">SceneNode.ixx:251</a></div></div>
+<div class="ttc" id="aclasshelios_1_1scene_1_1SceneNode_html_a3a41a256979415a6678bb391660b0ced"><div class="ttname"><a href="classhelios_1_1scene_1_1SceneNode.html#a3a41a256979415a6678bb391660b0ced">helios::scene::SceneNode::hasRenderable</a></div><div class="ttdeci">bool hasRenderable() const noexcept</div><div class="ttdoc">Returns true if this SceneNode was configured with a Renderable.</div><div class="ttdef"><b>Definition</b> <a href="SceneNode_8ixx_source.html#l00269">SceneNode.ixx:269</a></div></div>
+<div class="ttc" id="aclasshelios_1_1scene_1_1SceneNode_html_a88551e7d166868342b87fd83e767442c"><div class="ttname"><a href="classhelios_1_1scene_1_1SceneNode.html#a88551e7d166868342b87fd83e767442c">helios::scene::SceneNode::needsUpdate</a></div><div class="ttdeci">bool needsUpdate() const noexcept</div><div class="ttdoc">Checks whether this SceneNode needs to be updated.</div><div class="ttdef"><b>Definition</b> <a href="SceneNode_8ixx_source.html#l00424">SceneNode.ixx:424</a></div></div>
+<div class="ttc" id="aclasshelios_1_1scene_1_1SceneNode_html_ab908b6a16d34640eca0d92f2573e6cc3"><div class="ttname"><a href="classhelios_1_1scene_1_1SceneNode.html#ab908b6a16d34640eca0d92f2573e6cc3">helios::scene::SceneNode::cachedWorldTransform</a></div><div class="ttdeci">const helios::math::mat4f &amp; cachedWorldTransform() const noexcept</div><div class="ttdoc">Returns the current worldTransform matrix of this SceneNode **without triggering any recomputation**....</div><div class="ttdef"><b>Definition</b> <a href="SceneNode_8ixx_source.html#l00412">SceneNode.ixx:412</a></div></div>
+<div class="ttc" id="aclasshelios_1_1scene_1_1SceneNode_html_abc594768ba59f9154b707424aa76a871"><div class="ttname"><a href="classhelios_1_1scene_1_1SceneNode.html#abc594768ba59f9154b707424aa76a871">helios::scene::SceneNode::applyWorldTransform</a></div><div class="ttdeci">bool applyWorldTransform(const helios::math::mat4f &amp;parentWorldTransform, helios::scene::SceneGraphKey sceneGraphKey) noexcept</div><div class="ttdoc">Sets the world transform for this SceneNode.</div><div class="ttdef"><b>Definition</b> <a href="SceneNode_8ixx_source.html#l00369">SceneNode.ixx:369</a></div></div>
+<div class="ttc" id="aclasshelios_1_1scene_1_1SceneNode_html_af9530fc7b8962c228dd883bf0f509a4a"><div class="ttname"><a href="classhelios_1_1scene_1_1SceneNode.html#af9530fc7b8962c228dd883bf0f509a4a">helios::scene::SceneNode::isActive</a></div><div class="ttdeci">bool isActive() const noexcept</div><div class="ttdoc">Returns whether this SceneNode and its child nodes should be considered for rendering.</div><div class="ttdef"><b>Definition</b> <a href="SceneNode_8ixx_source.html#l00536">SceneNode.ixx:536</a></div></div>
 <div class="ttc" id="aclasshelios_1_1scene_1_1Scene_html_a213062a1999076c7fea5688c9831efbf"><div class="ttname"><a href="classhelios_1_1scene_1_1Scene.html#a213062a1999076c7fea5688c9831efbf">helios::scene::Scene::operator=</a></div><div class="ttdeci">Scene &amp; operator=(const Scene &amp;)=delete</div><div class="ttdoc">Prevent copy assignment.</div></div>
-<div class="ttc" id="aclasshelios_1_1scene_1_1Scene_html_a3daf47f04c82372f22c8a6f85b277160"><div class="ttname"><a href="classhelios_1_1scene_1_1Scene.html#a3daf47f04c82372f22c8a6f85b277160">helios::scene::Scene::findVisibleNodes</a></div><div class="ttdeci">std::vector&lt; const helios::scene::SceneNode * &gt; findVisibleNodes(const helios::scene::CameraSceneNode *cameraSceneNode) const</div><div class="ttdoc">Applies this Scene&#39;s frustumCullingStrategy and returns all nodes visible for the specified CameraSce...</div></div>
-<div class="ttc" id="aclasshelios_1_1scene_1_1Scene_html_a411492ac5cc05ac601ee0aef03dced51"><div class="ttname"><a href="classhelios_1_1scene_1_1Scene.html#a411492ac5cc05ac601ee0aef03dced51">helios::scene::Scene::updateNodes</a></div><div class="ttdeci">void updateNodes() const</div><div class="ttdoc">Updates the world transformations of SceneNodes in the graph.</div></div>
-<div class="ttc" id="aclasshelios_1_1scene_1_1Scene_html_a776c5b21ffb85e5d63a5117b51797bb9"><div class="ttname"><a href="classhelios_1_1scene_1_1Scene.html#a776c5b21ffb85e5d63a5117b51797bb9">helios::scene::Scene::addNode</a></div><div class="ttdeci">SceneNode * addNode(std::unique_ptr&lt; SceneNode &gt; node) const</div><div class="ttdoc">Adds a new SceneNode to this scene.</div></div>
-<div class="ttc" id="aclasshelios_1_1scene_1_1Scene_html_ab3ad742392c2a2b159cf8927ee6cf375"><div class="ttname"><a href="classhelios_1_1scene_1_1Scene.html#ab3ad742392c2a2b159cf8927ee6cf375">helios::scene::Scene::createSnapshot</a></div><div class="ttdeci">std::optional&lt; Snapshot &gt; createSnapshot(const std::shared_ptr&lt; const rendering::Viewport &gt; &amp;viewport) const</div><div class="ttdoc">Creates a Snapshot of the Scene and returns it.</div></div>
+<div class="ttc" id="aclasshelios_1_1scene_1_1Scene_html_a3daf47f04c82372f22c8a6f85b277160"><div class="ttname"><a href="classhelios_1_1scene_1_1Scene.html#a3daf47f04c82372f22c8a6f85b277160">helios::scene::Scene::findVisibleNodes</a></div><div class="ttdeci">std::vector&lt; const helios::scene::SceneNode * &gt; findVisibleNodes(const helios::scene::CameraSceneNode *cameraSceneNode) const</div><div class="ttdoc">Applies this Scene&#39;s frustumCullingStrategy and returns all nodes visible for the specified CameraSce...</div><div class="ttdef"><b>Definition</b> <a href="#l00220">Scene.ixx:220</a></div></div>
+<div class="ttc" id="aclasshelios_1_1scene_1_1Scene_html_a411492ac5cc05ac601ee0aef03dced51"><div class="ttname"><a href="classhelios_1_1scene_1_1Scene.html#a411492ac5cc05ac601ee0aef03dced51">helios::scene::Scene::updateNodes</a></div><div class="ttdeci">void updateNodes() const</div><div class="ttdoc">Updates the world transformations of SceneNodes in the graph.</div><div class="ttdef"><b>Definition</b> <a href="#l00205">Scene.ixx:205</a></div></div>
+<div class="ttc" id="aclasshelios_1_1scene_1_1Scene_html_a776c5b21ffb85e5d63a5117b51797bb9"><div class="ttname"><a href="classhelios_1_1scene_1_1Scene.html#a776c5b21ffb85e5d63a5117b51797bb9">helios::scene::Scene::addNode</a></div><div class="ttdeci">SceneNode * addNode(std::unique_ptr&lt; SceneNode &gt; node) const</div><div class="ttdoc">Adds a new SceneNode to this scene.</div><div class="ttdef"><b>Definition</b> <a href="#l00191">Scene.ixx:191</a></div></div>
+<div class="ttc" id="aclasshelios_1_1scene_1_1Scene_html_ab3ad742392c2a2b159cf8927ee6cf375"><div class="ttname"><a href="classhelios_1_1scene_1_1Scene.html#ab3ad742392c2a2b159cf8927ee6cf375">helios::scene::Scene::createSnapshot</a></div><div class="ttdeci">std::optional&lt; Snapshot &gt; createSnapshot(const std::shared_ptr&lt; const rendering::Viewport &gt; &amp;viewport) const</div><div class="ttdoc">Creates a Snapshot of the Scene and returns it.</div><div class="ttdef"><b>Definition</b> <a href="#l00263">Scene.ixx:263</a></div></div>
 <div class="ttc" id="aclasshelios_1_1scene_1_1Scene_html_aed8d3cf0ab98ebd89de94edfdb7f477a"><div class="ttname"><a href="classhelios_1_1scene_1_1Scene.html#aed8d3cf0ab98ebd89de94edfdb7f477a">helios::scene::Scene::Scene</a></div><div class="ttdeci">Scene(Scene &amp;&amp;) noexcept=delete</div><div class="ttdoc">Prevent move constructor.</div></div>
 <div class="ttc" id="aclasshelios_1_1scene_1_1Scene_html_af485d366a14aae8f69913d9cb01739f1"><div class="ttname"><a href="classhelios_1_1scene_1_1Scene.html#af485d366a14aae8f69913d9cb01739f1">helios::scene::Scene::Scene</a></div><div class="ttdeci">Scene(const Scene &amp;)=delete</div><div class="ttdoc">Prevent copying.</div></div>
-<div class="ttc" id="aclasshelios_1_1scene_1_1Scene_html_aff7c39985b9197a877dc4a698168e0c8"><div class="ttname"><a href="classhelios_1_1scene_1_1Scene.html#aff7c39985b9197a877dc4a698168e0c8">helios::scene::Scene::root</a></div><div class="ttdeci">helios::scene::SceneNode &amp; root() const noexcept</div><div class="ttdoc">Returns the root node of this Scene.</div></div>
-<div class="ttc" id="aclasshelios_1_1scene_1_1Snapshot_html"><div class="ttname"><a href="classhelios_1_1scene_1_1Snapshot.html">helios::scene::Snapshot</a></div><div class="ttdoc">Represents an immutable snapshot of a SceneGraph at a given point in time.</div><div class="ttdef"><b>Definition</b> <a href="Snapshot_8ixx_source.html#l00034">Snapshot.ixx:34</a></div></div>
-<div class="ttc" id="aclasshelios_1_1util_1_1log_1_1LogManager_html_a750d8fd5b3ee3678600644756b0631e7"><div class="ttname"><a href="classhelios_1_1util_1_1log_1_1LogManager.html#a750d8fd5b3ee3678600644756b0631e7">helios::util::log::LogManager::loggerForScope</a></div><div class="ttdeci">static const Logger &amp; loggerForScope(const std::string &amp;scope) noexcept</div><div class="ttdoc">Convenience accessor to obtain a logger for a textual scope via the singleton.</div></div>
-<div class="ttc" id="aclasshelios_1_1util_1_1log_1_1Logger_html"><div class="ttname"><a href="classhelios_1_1util_1_1log_1_1Logger.html">helios::util::log::Logger</a></div><div class="ttdoc">Logger implementation with configurable output sinks.</div><div class="ttdef"><b>Definition</b> <a href="Logger_8ixx_source.html#l00034">Logger.ixx:34</a></div></div>
+<div class="ttc" id="aclasshelios_1_1scene_1_1Scene_html_aff7c39985b9197a877dc4a698168e0c8"><div class="ttname"><a href="classhelios_1_1scene_1_1Scene.html#aff7c39985b9197a877dc4a698168e0c8">helios::scene::Scene::root</a></div><div class="ttdeci">helios::scene::SceneNode &amp; root() const noexcept</div><div class="ttdoc">Returns the root node of this Scene.</div><div class="ttdef"><b>Definition</b> <a href="#l00240">Scene.ixx:240</a></div></div>
+<div class="ttc" id="aclasshelios_1_1util_1_1log_1_1LogManager_html_a750d8fd5b3ee3678600644756b0631e7"><div class="ttname"><a href="classhelios_1_1util_1_1log_1_1LogManager.html#a750d8fd5b3ee3678600644756b0631e7">helios::util::log::LogManager::loggerForScope</a></div><div class="ttdeci">static const Logger &amp; loggerForScope(const std::string &amp;scope) noexcept</div><div class="ttdoc">Convenience accessor to obtain a logger for a textual scope via the singleton.</div><div class="ttdef"><b>Definition</b> <a href="LogManager_8ixx_source.html#l00128">LogManager.ixx:128</a></div></div>
+<div class="ttc" id="aclasshelios_1_1util_1_1log_1_1Logger_html"><div class="ttname"><a href="classhelios_1_1util_1_1log_1_1Logger.html">helios::util::log::Logger</a></div><div class="ttdoc">Logger implementation with configurable output sinks.</div><div class="ttdef"><b>Definition</b> <a href="Logger_8ixx_source.html#l00035">Logger.ixx:35</a></div></div>
 <div class="ttc" id="amodule__helios_8math_8types_html"><div class="ttname"><a href="module__helios_8math_8types.html">helios.math.types</a></div><div class="ttdoc">Vector and matrix type definitions.</div></div>
 <div class="ttc" id="amodule__helios_8rendering_8Viewport_html"><div class="ttname"><a href="module__helios_8rendering_8Viewport.html">helios.rendering.Viewport</a></div></div>
 <div class="ttc" id="amodule__helios_8scene_8CameraSceneNode_html"><div class="ttname"><a href="module__helios_8scene_8CameraSceneNode.html">helios.scene.CameraSceneNode</a></div></div>
+<div class="ttc" id="amodule__helios_8scene_8Camera_html"><div class="ttname"><a href="module__helios_8scene_8Camera.html">helios.scene.Camera</a></div></div>
 <div class="ttc" id="amodule__helios_8scene_8FrustumCullingStrategy_html"><div class="ttname"><a href="module__helios_8scene_8FrustumCullingStrategy.html">helios.scene.FrustumCullingStrategy</a></div></div>
 <div class="ttc" id="amodule__helios_8scene_8SceneNode_html"><div class="ttname"><a href="module__helios_8scene_8SceneNode.html">helios.scene.SceneNode</a></div></div>
 <div class="ttc" id="amodule__helios_8scene_8Scene_html"><div class="ttname"><a href="module__helios_8scene_8Scene.html">helios.scene.Scene</a></div></div>
@@ -352,18 +447,17 @@ $(function() {
 <div class="ttc" id="amodule__helios_8util_8log_8LogManager_html"><div class="ttname"><a href="module__helios_8util_8log_8LogManager.html">helios.util.log.LogManager</a></div></div>
 <div class="ttc" id="amodule__helios_8util_8log_8Logger_html"><div class="ttname"><a href="module__helios_8util_8log_8Logger.html">helios.util.log.Logger</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1math_html_ad422120d6e1f106140808f16e348f0b3"><div class="ttname"><a href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a></div><div class="ttdeci">mat4&lt; float &gt; mat4f</div><div class="ttdoc">Type alias for a 4x4 float matrix.</div><div class="ttdef"><b>Definition</b> <a href="mat4_8ixx_source.html#l00534">mat4.ixx:534</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1rendering_html"><div class="ttname"><a href="namespacehelios_1_1rendering.html">helios::rendering</a></div><div class="ttdoc">Graphics rendering infrastructure.</div></div>
-<div class="ttc" id="anamespacehelios_1_1scene_html"><div class="ttname"><a href="namespacehelios_1_1scene.html">helios::scene</a></div><div class="ttdoc">Scene graph and camera management.</div><div class="ttdef"><b>Definition</b> <a href="Camera_8ixx_source.html#l00014">Camera.ixx:14</a></div></div>
-<div class="ttc" id="anamespacehelios_html"><div class="ttname"><a href="namespacehelios.html">helios</a></div><div class="ttdef"><b>Definition</b> <a href="GLFWApplication_8ixx_source.html#l00025">GLFWApplication.ixx:25</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1scene_html"><div class="ttname"><a href="namespacehelios_1_1scene.html">helios::scene</a></div><div class="ttdoc">Scene graph and camera management.</div><div class="ttdef"><b>Definition</b> <a href="Camera_8ixx_source.html#l00016">Camera.ixx:16</a></div></div>
+<div class="ttc" id="anamespacehelios_html"><div class="ttname"><a href="namespacehelios.html">helios</a></div><div class="ttdef"><b>Definition</b> <a href="GLFWApplication_8ixx_source.html#l00029">GLFWApplication.ixx:29</a></div></div>
 <div class="ttc" id="astructhelios_1_1math_1_1mat4_html_ad856b4652346ff475b653e257d64428d"><div class="ttname"><a href="structhelios_1_1math_1_1mat4.html#ad856b4652346ff475b653e257d64428d">helios::math::mat4&lt; float &gt;::identity</a></div><div class="ttdeci">static mat4&lt; T &gt; identity() noexcept</div><div class="ttdef"><b>Definition</b> <a href="mat4_8ixx_source.html#l00104">mat4.ixx:104</a></div></div>
-<div class="ttc" id="astructhelios_1_1scene_1_1SceneGraphKey_html"><div class="ttname"><a href="structhelios_1_1scene_1_1SceneGraphKey.html">helios::scene::SceneGraphKey</a></div><div class="ttdoc">SceneGraphKey as passkey idiom for accessing `setWorldTransform()`. All friend classes are able to co...</div><div class="ttdef"><b>Definition</b> <a href="SceneNode_8ixx_source.html#l00034">SceneNode.ixx:34</a></div></div>
+<div class="ttc" id="astructhelios_1_1scene_1_1SceneGraphKey_html"><div class="ttname"><a href="structhelios_1_1scene_1_1SceneGraphKey.html">helios::scene::SceneGraphKey</a></div><div class="ttdoc">SceneGraphKey as passkey idiom for accessing `setWorldTransform()`. All friend classes are able to co...</div><div class="ttdef"><b>Definition</b> <a href="SceneNode_8ixx_source.html#l00036">SceneNode.ixx:36</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_08c09894bd9f0ab4b1e9fdc7a2628766.html">helios</a></li><li class="navelem"><a href="dir_b6e017bc8c299f04fc1162fc4677be61.html">scene</a></li><li class="navelem"><a href="Scene_8ixx.html">Scene.ixx</a></li>
+    <li class="navelem"><a href="dir_8af83c0dc83a45a35ca6968cdc29a7af.html">tmp</a></li><li class="navelem"><a href="dir_25ba8c016aaabea63a88c40dc27775c8.html">h</a></li><li class="navelem"><a href="dir_b3f59628e993ded3576abd1cf1101eb8.html">include</a></li><li class="navelem"><a href="dir_1ac1243035b4576c146b8d2c8a6274f6.html">helios</a></li><li class="navelem"><a href="dir_dde1b4dbeafc450b8ae5525133d75a82.html">scene</a></li><li class="navelem"><a href="Scene_8ixx.html">Scene.ixx</a></li>
     <li class="footer">Generated on <span class="timestamp"></span> for helios by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

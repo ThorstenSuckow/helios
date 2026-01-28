@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="helios_2engine_2tooling_2README_8md" kind="file" language="Markdown">
-    <compoundname>README.md</compoundname>
+    <compoundname>helios/engine/tooling/README.md</compoundname>
     <innernamespace refid="namespacehelios_1_1engine_1_1tooling">helios::engine::tooling</innernamespace>
     <briefdescription>
     </briefdescription>
@@ -11,6 +11,35 @@
 <codeline><highlight class="normal">#<sp/>helios::engine::tooling</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">Utilities<sp/>for<sp/>runtime<sp/>diagnostics<sp/>and<sp/>developer<sp/>tooling<sp/>such<sp/>as<sp/>FPS<sp/>and<sp/>frame<sp/>timing<sp/>metrics.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`FramePacer`<sp/>|<sp/>Controls<sp/>frame<sp/>rate<sp/>through<sp/>timing<sp/>and<sp/>pacing<sp/>(vsync-independent)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`FpsMetrics`<sp/>|<sp/>Aggregates<sp/>frame<sp/>timing<sp/>data<sp/>over<sp/>a<sp/>rolling<sp/>window<sp/>for<sp/>analysis<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`FrameStats`<sp/>|<sp/>POD<sp/>struct<sp/>containing<sp/>per-frame<sp/>timing<sp/>(work,<sp/>wait,<sp/>total)<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>stopwatch<sp/>=<sp/>std::make_unique&lt;helios::util::time::Stopwatch&gt;();</highlight></codeline>
+<codeline><highlight class="normal">helios::engine::tooling::FramePacer<sp/>pacer(std::move(stopwatch));</highlight></codeline>
+<codeline><highlight class="normal">pacer.setTargetFps(60.0f);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">helios::engine::tooling::FpsMetrics<sp/>metrics;</highlight></codeline>
+<codeline><highlight class="normal">metrics.setHistorySize(120);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">while<sp/>(running)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>pacer.beginFrame();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>...<sp/>game<sp/>logic<sp/>and<sp/>rendering<sp/>...</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>auto<sp/>stats<sp/>=<sp/>pacer.sync();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>metrics.addFrame(stats);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>float<sp/>fps<sp/>=<sp/>metrics.getFps();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>float<sp/>avgFrameTime<sp/>=<sp/>metrics.getFrameTimeMs();</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
@@ -22,6 +51,6 @@
 <codeline></codeline>
 <codeline></codeline>
     </programlisting>
-    <location file="include/helios/engine/tooling/README.md"/>
+    <location file="/tmp/h/include/helios/engine/tooling/README.md"/>
   </compounddef>
 </doxygen>

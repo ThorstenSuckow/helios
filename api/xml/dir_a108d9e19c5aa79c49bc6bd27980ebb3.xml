@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_a108d9e19c5aa79c49bc6bd27980ebb3" kind="dir">
+    <compoundname>gameObject</compoundname>
+    <innerdir refid="dir_918a2537f64cade110d64935620958ab">builders</innerdir>
+    <innerfile refid="helios_2engine_2builder_2gameObject_2__module_8ixx">helios/engine/builder/gameObject/_module.ixx</innerfile>
+    <innerfile refid="GameObjectFactory_8ixx">GameObjectFactory.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_a108d9e19c5aa79c49bc6bd27980ebb3_1autotoc_md79">
+<title>helios::engine::builder::gameObject</title><para>Factory and prototype classes for constructing GameObjects with fluent configuration.</para>
+</sect1>
+<sect1 id="dir_a108d9e19c5aa79c49bc6bd27980ebb3_1autotoc_md80">
+<title>Overview</title><para>This submodule contains the core factory pattern implementation for entity creation. The <computeroutput>GameObjectFactory</computeroutput> provides static methods for creating new entities or cloning existing ones, while <computeroutput>GameObjectPrototype</computeroutput> enables fluent, callback-based component configuration.</para>
+</sect1>
+<sect1 id="dir_a108d9e19c5aa79c49bc6bd27980ebb3_1autotoc_md81">
+<title>Key Classes</title><para><table rows="3" cols="2"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>GameObjectFactory</computeroutput>  </para>
+</entry><entry thead="no"><para>Static factory for entity creation and cloning  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>GameObjectPrototype</computeroutput>  </para>
+</entry><entry thead="no"><para>Internal builder holding all domain-specific builders  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_a108d9e19c5aa79c49bc6bd27980ebb3_1autotoc_md82">
+<title>API</title><sect2 id="dir_a108d9e19c5aa79c49bc6bd27980ebb3_1autotoc_md83">
+<title>GameObjectFactory</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Create<sp/>a<sp/>new<sp/>empty<sp/>GameObject</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>prototype<sp/>=<sp/>GameObjectFactory::gameObject();</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Clone<sp/>an<sp/>existing<sp/>GameObject<sp/>(copies<sp/>all<sp/>Cloneable<sp/>components)</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>prototype<sp/>=<sp/>GameObjectFactory::from(existingGameObject);</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="dir_a108d9e19c5aa79c49bc6bd27980ebb3_1autotoc_md84">
+<title>GameObjectPrototype</title><para><programlisting filename=".cpp"><codeline><highlight class="normal">prototype</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withMotion([](MotionBuilder&amp;<sp/>b)<sp/>{<sp/></highlight><highlight class="comment">/*<sp/>configure<sp/>motion<sp/>*/</highlight><highlight class="normal"><sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withRendering([](RenderingBuilder&amp;<sp/>b)<sp/>{<sp/></highlight><highlight class="comment">/*<sp/>configure<sp/>rendering<sp/>*/</highlight><highlight class="normal"><sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withCollision([](CollisionBuilder&amp;<sp/>b)<sp/>{<sp/></highlight><highlight class="comment">/*<sp/>configure<sp/>collision<sp/>*/</highlight><highlight class="normal"><sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withTransform([](TransformBuilder&amp;<sp/>b)<sp/>{<sp/></highlight><highlight class="comment">/*<sp/>configure<sp/>transform<sp/>*/</highlight><highlight class="normal"><sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withEffects([](EffectsBuilder&amp;<sp/>b)<sp/>{<sp/></highlight><highlight class="comment">/*<sp/>configure<sp/>effects<sp/>*/</highlight><highlight class="normal"><sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withSpawn([](SpawnBuilder&amp;<sp/>b)<sp/>{<sp/></highlight><highlight class="comment">/*<sp/>configure<sp/>spawn<sp/>*/</highlight><highlight class="normal"><sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withAi([](AiBuilder&amp;<sp/>b)<sp/>{<sp/></highlight><highlight class="comment">/*<sp/>configure<sp/>AI<sp/>*/</highlight><highlight class="normal"><sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withShooting([](ShootingBuilder&amp;<sp/>b)<sp/>{<sp/></highlight><highlight class="comment">/*<sp/>configure<sp/>weapons<sp/>*/</highlight><highlight class="normal"><sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withLifecycle([](LifecycleBuilder&amp;<sp/>b)<sp/>{<sp/></highlight><highlight class="comment">/*<sp/>configure<sp/>lifecycle<sp/>*/</highlight><highlight class="normal"><sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.make(active);<sp/><sp/></highlight><highlight class="comment">//<sp/>Returns<sp/>std::unique_ptr&lt;GameObject&gt;</highlight></codeline>
+</programlisting></para>
+</sect2>
+</sect1>
+<sect1 id="dir_a108d9e19c5aa79c49bc6bd27980ebb3_1autotoc_md85">
+<title>Cloning Behavior</title><para>When using <computeroutput>GameObjectFactory::from()</computeroutput>, only components implementing the <computeroutput>Cloneable</computeroutput> interface are copied. Components that add dependent components in <computeroutput>onAttach()</computeroutput> will have those dependencies resolved via <computeroutput>getOrAdd()</computeroutput> to prevent duplicates.</para>
+</sect1>
+<sect1 id="dir_a108d9e19c5aa79c49bc6bd27980ebb3_1autotoc_md86">
+<title>Related Modules</title><para><table rows="3" cols="2"><row>
+<entry thead="yes"><para>Module  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1builder_1_1gameObject_1_1builders" kindref="compound">helios.engine.builder.gameObject.builders</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>Domain-specific builders  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1ecs" kindref="compound">helios.engine.ecs</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>GameObject, Component, Cloneable  </para>
+</entry></row>
+</table>
+</para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/builder/gameObject/"/>
+  </compounddef>
+</doxygen>

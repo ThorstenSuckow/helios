@@ -50,7 +50,7 @@ export namespace helios::engine::modules::physics::collision::components {
         }
 
         /**
-         * @brief Resets the bounds to invalidate state when this Component is acquired.
+         * @brief Resets the bounds to invalidate state when this Component is released.
          */
         void onRelease() noexcept override {
             bounds_ = {};

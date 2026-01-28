@@ -82,7 +82,7 @@ export namespace helios::engine::mechanics::spawn::systems {
          *        Ownership of all schedulers is transferred to this system.
          */
         explicit GameObjectSpawnSystem(
-             std::vector<std::unique_ptr<helios::engine::runtime::spawn::scheduling::SpawnScheduler>>& spawnSchedulers
+             std::vector<std::unique_ptr<helios::engine::runtime::spawn::scheduling::SpawnScheduler>> spawnSchedulers
         ) :
             spawnSchedulers_(std::move(spawnSchedulers)) {}
 

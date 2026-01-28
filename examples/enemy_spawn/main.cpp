@@ -301,9 +301,9 @@ int main() {
     //     SPAWN CONFIGURATION
     // --------------------------
 
-    constexpr helios::engine::core::data::GameObjectPoolId PurpleEnemyPoolId{1};
-    helios::engine::core::data::SpawnProfileId RandomSpawnProfileId{1};
-    helios::engine::core::data::SpawnRuleId PurpleEnemySpawnRuleId{1};
+    constexpr helios::engine::core::data::GameObjectPoolId PurpleEnemyPoolId{"purple_pool_1"};
+    helios::engine::core::data::SpawnProfileId RandomSpawnProfileId{"random_spawn_1"};
+    helios::engine::core::data::SpawnRuleId PurpleEnemySpawnRuleId{"purple_enemy_spawn_1"};
 
     auto& poolManager = gameWorld.addManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
     auto& spawnManager = gameWorld.addManager<helios::engine::runtime::spawn::SpawnManager>();
@@ -317,12 +317,12 @@ int main() {
     auto randomSpawnProfile = std::make_unique<helios::engine::runtime::spawn::SpawnProfile>(
         PurpleEnemyPoolId,
         std::make_unique<helios::engine::runtime::spawn::behavior::placements::RandomSpawnPlacer>(),
-        std::make_unique<helios::engine::runtime::spawn::behavior::initializers::DirectionInitializer>(
-            helios::engine::runtime::spawn::behavior::initializers::Direction::Random
+        std::make_unique<helios::engine::runtime::spawn::behavior::initializers::MoveInitializer>(
+            helios::engine::runtime::spawn::behavior::initializers::DirectionType::Random
         )
     );
 
-    auto purpleEnemySpawnScheduler = std::make_unique<helios::engine::runtime::spawn::scheduling::SpawnScheduler>();
+    auto purpleEnemySpawnScheduler = std::make_unique<helios::engine::runtime::spawn::scheduling::DefaultSpawnScheduler>();
     auto purpleEnemySpawnRule = std::make_unique<helios::engine::runtime::spawn::policy::SpawnRule>(
         std::make_unique<helios::engine::runtime::spawn::policy::conditions::TimerSpawnCondition>(5.0f),
         std::make_unique<helios::engine::runtime::spawn::policy::amount::FixedSpawnAmount>(1),
@@ -340,21 +340,19 @@ int main() {
     spawnSchedulers.push_back(std::move(purpleEnemySpawnScheduler));
 
     gameLoop.commandBuffer().addDispatcher<helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand>(
-        std::make_unique<helios::engine::runtime::spawn::dispatcher::ScheduledSpawnPlanCommandDispatcher>()
-    );
-    gameLoop.commandBuffer().addDispatcher<helios::engine::runtime::spawn::commands::SpawnCommand>(
-        std::make_unique<helios::engine::runtime::spawn::dispatcher::SpawnCommandDispatcher>()
-    );
-    gameLoop.commandBuffer().addDispatcher<helios::engine::runtime::spawn::commands::DespawnCommand>(
-        std::make_unique<helios::engine::runtime::spawn::dispatcher::DespawnCommandDispatcher>()
-    );
+            std::make_unique<helios::engine::runtime::spawn::dispatcher::ScheduledSpawnPlanCommandDispatcher>()
+        ).addDispatcher<helios::engine::runtime::spawn::commands::SpawnCommand>(
+            std::make_unique<helios::engine::runtime::spawn::dispatcher::SpawnCommandDispatcher>()
+        ).addDispatcher<helios::engine::runtime::spawn::commands::DespawnCommand>(
+            std::make_unique<helios::engine::runtime::spawn::dispatcher::DespawnCommandDispatcher>()
+        );
 
     gameLoop.phase(helios::engine::runtime::gameloop::PhaseType::Pre)
             .addPass()
             .addSystem<helios::engine::mechanics::input::systems::TwinStickInputSystem>(*shipGameObject)
             .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::Structural)
             .addPass()
-            .addSystem<helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem>(spawnSchedulers)
+            .addSystem<helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem>(std::move(spawnSchedulers))
             .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::Structural)
             .addPass()
             .addSystem<helios::engine::modules::spatial::transform::systems::ScaleSystem>()

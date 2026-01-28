@@ -7,24 +7,59 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0-milestone4] - 2026-01-29
+
 ### Added
 - `helios.engine.ecs` module with base classes (`Component`, `GameObject`, `System`, `Updatable`)
 - `helios.engine.ecs.query` submodule with `GameObjectFilter` and `GameObjectView`
 - `helios.engine.runtime` aggregate module for runtime infrastructure
 - `helios.engine.runtime.world` submodule with `GameWorld`, `Level`, `UpdateContext`, `SystemRegistry`, `Manager`
-- `helios.engine.runtime.pooling` submodule with `GameObjectPool`, `GameObjectPoolRegistry`, `GameObjectPoolFacade`, `PoolRequestHandler`, `PoolRequestHandlerRegistry`
+- `helios.engine.runtime.pooling` submodule with `GameObjectPool`, `GameObjectPoolManager`, `GameObjectPoolRegistry`, `GameObjectPoolConfig`, `GameObjectPoolSnapshot`
 - `helios.engine.runtime.gameloop` submodule with `GameLoop`, `Phase`, `Pass`
 - `helios.engine.runtime.messaging` for commands and events
+- `helios.engine.runtime.spawn` submodule for spawn infrastructure:
+  - `SpawnManager` for processing spawn/despawn commands
+  - `SpawnProfile` for spawn configuration (pool, placer, initializer)
+  - `SpawnScheduler` abstract base for rule-based spawn scheduling
+  - `DefaultSpawnScheduler` for evaluating all rules each frame
+  - `CyclicSpawnScheduler<N>` for round-robin rule evaluation
+  - `RuleProcessor` and `DefaultRuleProcessor` for spawn rule processing
+  - `SpawnRule`, `SpawnCondition`, `SpawnRuleState` for policy layer
+  - `SpawnConditionAll` for composite AND conditions
+  - `TimerSpawnCondition` for interval-based spawning
+  - `RequestedAmountIsAvailableCondition` for pool availability checks
+  - `SpawnAmountProvider`, `FixedSpawnAmount`, `SpawnAmountByCallback` for amount configuration
+  - `SpawnPlacer`, `SpawnInitializer` interfaces for spawn behaviors
+  - `RandomSpawnPlacer`, `EmitterSpawnPlacer`, `AxisSpawnPlacer`, `DistributedSpawnPlacer<N>` for positioning
+  - `EmitterInitializer`, `MoveInitializer`, `DelayedComponentEnablerInitializer` for entity initialization
+  - `SpawnCommand`, `DespawnCommand`, `ScheduledSpawnPlanCommand` for command pipeline
+  - `SpawnCommandDispatcher`, `DespawnCommandDispatcher`, `ScheduledSpawnPlanCommandDispatcher`
+  - `SpawnContext`, `EmitterContext` for spawn state
+  - `SpawnPlanCommandExecutedEvent` for frame events
+  - `SpawnCommandHandler`, `SpawnCommandHandlerRegistry` for handler management
+- `helios.engine.mechanics.lifecycle` for entity lifecycle management:
+  - `DelayedComponentEnabler` component for deferred activation
+  - `DelayedComponentEnablerSystem` for processing activation timers
+- `helios.engine.builder.gameObject.builders.LifecycleBuilder` for lifecycle configuration
+- `helios.engine.builder.gameObject.builders.configs.LifecycleConfig` for deferred enablement
+- `GridCollisionDetectionSystem` with uniform 3D spatial partitioning
+- `HitPolicy` enum (`OneHit`, `All`) for collision count control
 - `helios.engine.mechanics` for gameplay-specific systems (bounds, combat, spawn, input)
 - `helios.engine.modules` for domain-agnostic subsystems (physics, spatial, scene, rendering, pool)
-- `ShootCommandDispatcher` for routing shoot commands to `ProjectilePoolManager`
-- `ProjectileSpawnRequest` data structure for projectile spawn parameters
-- `PoolIdComponent` for pool membership identification
+- `SpawnedByProfileComponent` for tracking entity spawn origin
+- `ProjectileSpawnSystem` for combat projectile spawning
+- `SpawnProfileId`, `SpawnRuleId`, `GameObjectPoolId` type-safe identifiers with FNV-1a string hashing
+- `helios.core.algorithms` module with `fnv1a_hash` compile-time hash function
+- `collision_detection` example demonstrating grid collision and spawn patterns
+- `enemy_spawn` example demonstrating spawn system
+- Core concepts documentation for spawn system, collision detection, and lifecycle management
 
 ### Changed
 - **BREAKING**: Reorganized `helios.engine` into distinct submodules: `core`, `ecs`, `runtime`, `modules`, `mechanics`, `tooling`
 - **BREAKING**: Systems are now registered with `GameLoop` phases/passes instead of `GameWorld`
 - **BREAKING**: `GameWorld` no longer manages System instances — use `GameLoop::phase().addPass().addSystem<T>()`
+- **BREAKING**: Spawn infrastructure moved from `mechanics/spawn` to `runtime/spawn`
+- **BREAKING**: Removed `GameObjectFactory`, `GameObjectPoolFacade`, `PoolRequestHandler`, `PoolRequestHandlerRegistry`
 - Moved ECS base classes from `helios.engine.game` to `helios.engine.ecs`
 - Moved world management classes to `helios.engine.runtime.world`
 - Moved pooling infrastructure to `helios.engine.runtime.pooling`
@@ -33,24 +68,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `helios.engine._module.ixx` updated to export `core`, `ecs`, `game`, `runtime`, `tooling` modules
 - All aggregate `_module.ixx` files now only export their direct submodules (clean hierarchy)
 - `SystemRegistry` is now internal to the `GameLoop` pass structure
+- Updated core concepts documentation with spawn system references
 
 ## [0.3.0-milestone3] - 2025-12-25
 
 ### Added
-- `TransformComponent` for independent transform management (local/world)
-- `ScaleComponent` for unit-based sizing with dirty flag tracking
+- `ComposeTransformComponent` for independent transform management (local/world)
+- `ScaleStateComponent` for unit-based sizing with dirty flag tracking
 - `AabbColliderComponent` for world-space bounding boxes
 - `ModelAabbComponent` for original model AABB storage
 - `LevelBoundsBehaviorComponent` for configurable boundary reactions (bounce, restitution)
 - Automatic AABB capture from SceneNode meshes via `onAttach()`
 - `Move2DSystem` for 2D physics with rotation, velocity integration, and dampening
-- `ScaleSystem` for applying unit-based scaling from `ScaleComponent`
+- `ScaleSystem` for applying unit-based scaling from `ScaleStateComponent`
 - `BoundsUpdateSystem` for updating AABB colliders from world transforms
 - `LevelBoundsBehaviorSystem` for boundary collisions with bounce behavior
 - `SceneSyncSystem` for synchronizing gameplay transforms with scene graph
 - `TransformClearSystem` for clearing dirty flags at end of frame
-- `ScaleClearSystem` for clearing scale dirty flags at end of frame
-- `ProjectilePoolSystem` for efficient projectile object pooling
 - `Level` class with configurable world bounds and AABB-based arena boundaries
 - `Aim2DComponent` for direction tracking and firing frequency
 - `ShootComponent` for projectile firing with configurable cooldown and speed
@@ -61,9 +95,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `spaceship_shooting` demo showcasing twin-stick shooter mechanics
 
 ### Changed
-- **BREAKING**: `SceneNodeComponent::setSize()` removed — use `ScaleComponent` instead
+- **BREAKING**: `SceneNodeComponent::setSize()` removed — use `ScaleStateComponent` instead
 - **BREAKING**: `GameWorld` constructor no longer requires `Scene*` parameter
-- **BREAKING**: `Move2DComponent::position()` removed (transforms managed by `TransformComponent`)
+- **BREAKING**: `Move2DComponent::position()` removed (transforms managed by `ComposeTransformComponent`)
 - **BREAKING**: `Move2DComponent::rotationAngle()` renamed to `currentRotationAngle()`
 - `SceneNodeComponent::onAttach()` now automatically captures AABB from SceneNode mesh
 - Systems must be explicitly registered for game logic
@@ -141,7 +175,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Example applications (simple cube rendering, game controller input)
 
 
-[Unreleased]: https://github.com/thorstensuckow/helios/compare/v0.3.0-milestone3...HEAD
+[Unreleased]: https://github.com/thorstensuckow/helios/compare/v0.4.0-milestone4...HEAD
+[0.4.0-milestone4]: https://github.com/thorstensuckow/helios/compare/v0.3.0-milestone3...v0.4.0-milestone4
 [0.3.0-milestone3]: https://github.com/thorstensuckow/helios/compare/v0.2.0-milestone2...v0.3.0-milestone3
 [0.2.0-milestone2]: https://github.com/thorstensuckow/helios/compare/v0.1.0-milestone1...v0.2.0-milestone2
 [0.1.0-milestone1]: https://github.com/thorstensuckow/helios/releases/tag/v0.1.0-milestone1

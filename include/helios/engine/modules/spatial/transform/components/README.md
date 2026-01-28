@@ -8,8 +8,8 @@ This namespace contains components that store individual aspects of an entity's 
 
 | Component | Description |
 |-----------|-------------|
-| `TransformComponent` | Local/world transform matrices with dirty tracking. |
-| `ScaleComponent` | Entity dimensions (width, height, depth) with unit. |
+| `ComposeTransformComponent` | Local/world transform matrices with dirty tracking. |
+| `ScaleStateComponent` | Entity dimensions (width, height, depth) with unit. |
 | `TranslationStateComponent` | Current position/translation vector. |
 
 ## Usage
@@ -17,9 +17,9 @@ This namespace contains components that store individual aspects of an entity's 
 Transform components are composed by the transform systems:
 
 ```cpp
-auto& transform = gameObject.add<TransformComponent>();
+auto& transform = gameObject.add<ComposeTransformComponent>();
 
-auto& scale = gameObject.add<ScaleComponent>(1.0f, 1.0f, 1.0f, Unit::Meter);
+auto& scale = gameObject.add<ScaleStateComponent>(1.0f, 1.0f, 1.0f, Unit::Meter);
 
 auto& translation = gameObject.add<TranslationStateComponent>();
 translation.setTranslation({0.0f, 0.0f, -5.0f});

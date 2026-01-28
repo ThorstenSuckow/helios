@@ -12,7 +12,7 @@ export module helios.engine.runtime.spawn.commands.DespawnCommand;
 import helios.engine.runtime.messaging.command.WorldCommand;
 import helios.util.Guid;
 
-import helios.engine.runtime.world.GameWorld;
+
 
 import helios.engine.core.data.SpawnProfileId;
 
@@ -25,10 +25,10 @@ export namespace helios::engine::runtime::spawn::commands {
      *
      * @details DespawnCommand is a WorldCommand that requests the deactivation
      * and return of a GameObject to its pool. The command identifies the target
-     * entity by its GUID and optionally specifies which pool to return it to.
+     * entity by its GUID and specifies the spawn profile for pool return.
      *
-     * If no pool ID is provided, the dispatcher must determine the correct pool
-     * or handle the despawn without pool return.
+     * The command is dispatched to a DespawnCommandDispatcher which forwards it
+     * to the appropriate SpawnManager for deferred processing.
      *
      * @see SpawnCommand
      * @see DespawnCommandDispatcher
@@ -42,24 +42,17 @@ export namespace helios::engine::runtime::spawn::commands {
         const helios::util::Guid guid_;
 
         /**
-         * @brief Optional pool ID to return the entity to.
+         * @brief The spawn profile ID for pool return.
          */
-        std::optional<helios::engine::core::data::SpawnProfileId> spawnProfileId_;
+        helios::engine::core::data::SpawnProfileId spawnProfileId_;
 
     public:
 
         /**
-         * @brief Constructs a DespawnCommand without a specific pool.
+         * @brief Constructs a DespawnCommand with a target profile.
          *
          * @param guid The GUID of the entity to despawn.
-         */
-        explicit DespawnCommand(const helios::util::Guid& guid) : guid_(guid) {}
-
-        /**
-         * @brief Constructs a DespawnCommand with a target pool.
-         *
-         * @param guid The GUID of the entity to despawn.
-         * @param gameObjectPoolId The pool to return the entity to.
+         * @param spawnProfileId The spawn profile ID for pool return.
          */
         explicit DespawnCommand(
             const helios::util::Guid& guid,
@@ -74,7 +67,7 @@ export namespace helios::engine::runtime::spawn::commands {
          * @note Asserts in debug builds if called directly.
          */
         void execute(helios::engine::runtime::world::GameWorld& gameWorld) const noexcept override {
-            assert(false && "unexpected execute for despawn, needs dispatcher");
+            assert(false && "Unexpected execute() for despawn, needs dispatcher");
         }
 
         /**
@@ -93,18 +86,18 @@ export namespace helios::engine::runtime::spawn::commands {
         /**
          * @brief Returns the GUID of the entity to despawn.
          *
-         * @return Const reference to the entity's GUID.
+         * @return The entity's GUID.
          */
-        [[nodiscard]] const helios::util::Guid& guid() const noexcept {
+        [[nodiscard]] helios::util::Guid guid() const noexcept {
             return guid_;
         }
 
         /**
-         * @brief Returns the optional pool ID.
+         * @brief Returns the spawn profile ID for pool return.
          *
-         * @return Optional containing the pool ID if specified.
+         * @return The spawn profile ID associated with this command.
          */
-        [[nodiscard]] std::optional<helios::engine::core::data::SpawnProfileId> spawnProfileId() const noexcept {
+        [[nodiscard]] helios::engine::core::data::SpawnProfileId spawnProfileId() const noexcept {
             return spawnProfileId_;
         }
 

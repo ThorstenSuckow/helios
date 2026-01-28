@@ -27,6 +27,34 @@ The pooling system follows a layered architecture:
 
 Spawn/despawn request handling has been moved to `helios::engine::runtime::spawn`.
 
+## Usage
+
+```cpp
+// 1. Create a prefab template
+auto bulletPrefab = GameObjectFactory::gameObject()
+    .withMotion([](auto& m) { m.move2D().speed(10.0f); })
+    .withRendering([&](auto& r) { r.renderable().shape(circleShape); })
+    .make(false);  // inactive initially
+
+// 2. Configure and create pool
+GameObjectPoolConfig config{
+    .poolId = GameObjectPoolId{1},
+    .prefab = bulletPrefab.get(),
+    .initialSize = 50
+};
+
+auto poolManager = std::make_unique<GameObjectPoolManager>(&gameWorld);
+poolManager->createPool(config);
+
+// 3. Acquire/Release via SpawnManager (preferred)
+// Or directly via poolManager for low-level access
+auto* bullet = poolManager->acquire(GameObjectPoolId{1});
+bullet->setActive(true);
+
+// Later: release back to pool
+poolManager->release(GameObjectPoolId{1}, bullet->guid());
+```
+
 ---
 <details>
 <summary>Doxygen</summary><p>

@@ -1,12 +1,13 @@
 # Spaceship Control Example
 
-This example demonstrates a complete game loop using the component-based game system, input handling, logging, and ImGui debug overlay integration.
+This example demonstrates the complete GameLoop architecture with phase-based execution, the GameObjectFactory builder pattern, component-based game systems, and ImGui debug overlay integration.
 
 ## Features
 
-- **Component System** - GameObject with attachable components (Move2DComponent, SceneNodeComponent)
-- **Gamepad Input** - Control a spaceship using analog sticks via TwinStickInputComponent
-- **Command Pattern** - Input mapped to reusable command objects (Move2DCommand, Aim2DCommand)
+- **GameLoop Architecture** - Phase-based game loop (Pre/Main/Post) with commit points
+- **GameObjectFactory** - Fluent builder pattern for creating GameObjects with components
+- **Component System** - Composition-based entity design with Move2DComponent, SteeringComponent
+- **Gamepad Input** - Control a spaceship using analog sticks via TwinStickInputSystem
 - **ImGui Debug Overlay** - Real-time logging, camera control, physics tuning via dockable widgets
 - **Frame Pacing** - Configurable target FPS with performance metrics
 - **Scene Graph Camera** - Camera follows spaceship using transform inheritance
@@ -32,7 +33,6 @@ cmake --build build --target spaceship_control
 | Left Stick | Move spaceship / Rotate |
 | ESC | Exit application |
 
-
 ## Code Structure
 
 | File | Purpose |
@@ -40,25 +40,81 @@ cmake --build build --target spaceship_control
 | `main.cpp` | Application entry point and game loop |
 | `SpaceshipWidget.ixx` | ImGui widget for physics parameter tuning |
 
-The spaceship behavior is implemented via engine components:
+### Components Used
 
 | Component | Purpose |
 |-----------|---------|
 | `SceneNodeComponent` | Links GameObject to scene graph |
-| `Move2DComponent` | 2D physics with rotation and dampening |
-| `TwinStickInputComponent` | Translates gamepad input to commands |
-| `TransformComponent` | Stores local/world transform state |
-| `ScaleComponent` | Unit-based sizing (meters) |
+| `Move2DComponent` | 2D physics with velocity, acceleration, dampening |
+| `SteeringComponent` | Rotation control and direction management |
+| `DirectionComponent` | Movement direction vector |
+| `ComposeTransformComponent` | Local/world transform composition |
+| `TranslationStateComponent` | Position state tracking |
+| `RotationStateComponent` | Rotation state tracking |
+| `ScaleStateComponent` | Unit-based sizing (meters) |
 
 ### Systems Used
 
 | System | Purpose |
 |--------|---------|
-| `ScaleSystem` | Applies ScaleComponent sizing |
-| `Move2DSystem` | Physics simulation (rotation, velocity) |
+| `TwinStickInputSystem` | Translates gamepad input to movement commands |
+| `ScaleSystem` | Applies ScaleStateComponent sizing |
+| `SteeringSystem` | Rotation and direction updates |
+| `Move2DSystem` | Physics simulation (velocity integration) |
+| `ComposeTransformSystem` | Computes final transforms |
 | `SceneSyncSystem` | Syncs transforms to scene graph |
 | `TransformClearSystem` | Clears dirty flags post-frame |
-| `ScaleClearSystem` | Clears scale dirty flags |
+
+## GameObjectFactory Builder
+
+The example uses the fluent builder pattern for GameObject creation:
+
+```cpp
+auto shipGameObject = GameObjectFactory::instance()
+    .gameObject()
+    .withRendering([&](auto& rnb) {
+        rnb.renderable()
+           .shader(shader)
+           .color(Colors::Yellow)
+           .primitiveType(PrimitiveType::LineLoop)
+           .shape(std::make_shared<Triangle>())
+           .attachTo(&root);
+    })
+    .withTransform([](auto& tb) {
+        tb.transform()
+          .scale(vec3f(SPACESHIP_SIZE, SPACESHIP_SIZE, 0.0f));
+    })
+    .withMotion([](auto& mcb) {
+        mcb.move2D()
+           .speed(30.0f)
+           .instantAcceleration(false);
+        mcb.steering()
+           .steeringSetsDirection(true)
+           .instantSteering(false);
+    })
+    .make();
+```
+
+## GameLoop Phase Configuration
+
+```cpp
+// Pre-Phase: Input and Physics
+gameLoop.phase(PhaseType::Pre)
+    .addPass()
+    .addSystem<TwinStickInputSystem>(*shipGameObject)
+    .addCommitPoint(CommitPoint::Structural)
+    .addPass()
+    .addSystem<ScaleSystem>()
+    .addSystem<SteeringSystem>()
+    .addSystem<Move2DSystem>();
+
+// Post-Phase: Transform and Rendering
+gameLoop.phase(PhaseType::Post)
+    .addPass()
+    .addSystem<ComposeTransformSystem>()
+    .addSystem<SceneSyncSystem>(scene.get())
+    .addSystem<TransformClearSystem>();
+```
 
 ## Camera System
 
@@ -67,11 +123,11 @@ The camera is attached to the spaceship in the scene graph and uses selective tr
 ```cpp
 // Create camera as child of spaceship
 auto cameraNode = std::make_unique<CameraSceneNode>(std::move(camera));
-auto* camPtr = spaceshipNode->addNode(std::move(cameraNode));
+shipSceneNode->addNode(std::move(cameraNode));
 
 // Inherit only position, not rotation
-camPtr->setInheritance(helios::math::TransformType::Translation);
-camPtr->lookAtLocal(vec3f(0.0f, 0.0f, 0.0f), vec3f(0.0f, 1.0f, 0.0f));
+cameraNode->setInheritance(TransformType::Translation);
+cameraNode->lookAtLocal(vec3f(0.0f, 0.0f, 0.0f), vec3f(0.0f, 1.0f, 0.0f));
 ```
 
 ## ImGui Integration
@@ -79,58 +135,43 @@ camPtr->lookAtLocal(vec3f(0.0f, 0.0f, 0.0f), vec3f(0.0f, 1.0f, 0.0f));
 The example includes a complete ImGui setup with multiple widgets:
 
 ```cpp
-// Backend and overlay
 auto imguiBackend = ImGuiGlfwOpenGLBackend(window->nativeHandle());
 auto imguiOverlay = ImGuiOverlay::forBackend(&imguiBackend);
 
-// Add widgets
-imguiOverlay.addWidget(new MainMenuWidget());       // Settings menu
-imguiOverlay.addWidget(new FpsWidget(&metrics));    // FPS display
-imguiOverlay.addWidget(new GamepadWidget(&input));  // Gamepad state
-imguiOverlay.addWidget(new LogWidget());            // Log console
-imguiOverlay.addWidget(new CameraWidget());         // Camera control
-imguiOverlay.addWidget(new SpaceshipWidget());      // Physics tuning
+imguiOverlay.addWidget(new MainMenuWidget());
+imguiOverlay.addWidget(new FpsWidget(&metrics, &framePacer));
+imguiOverlay.addWidget(new GamepadWidget(&inputManager));
+imguiOverlay.addWidget(new LogWidget());
+imguiOverlay.addWidget(new CameraWidget());
+imguiOverlay.addWidget(new SpaceshipWidget());
 ```
 
-## Component-Based Game System
-
-The example uses helios's component-based game framework with dedicated systems:
+## Main Game Loop
 
 ```cpp
-// Create game world and command buffer
-auto gameWorld = GameWorld{};
-auto commandBuffer = CommandBuffer{};
-auto updateContext = UpdateContext{&commandBuffer, &gameWorld};
-
-// Create spaceship as GameObject with components
-auto shipGameObject = std::make_unique<GameObject>();
-shipGameObject->add<SceneNodeComponent>(spaceshipSceneNode);
-shipGameObject->add<Move2DComponent>();
-shipGameObject->add<TwinStickInputComponent>();
-shipGameObject->add<TransformComponent>();
-shipGameObject->add<ScaleComponent>(5.0f, 5.0f, 0.0f, Unit::Meter);
-
-auto* ship = gameWorld.addGameObject(std::move(shipGameObject));
-
-// Register game systems
-gameWorld.add<ScaleSystem>();
-gameWorld.add<Move2DSystem>();
-gameWorld.add<SceneSyncSystem>(scene.get());
-gameWorld.add<TransformClearSystem>();
-gameWorld.add<ScaleClearSystem>();
-
-// Game loop
-updateContext.setDeltaTime(deltaTime);
-updateContext.setInputSnapshot(&inputSnapshot);
-gameWorld.update(updateContext);
-commandBuffer.flush(gameWorld);
+while (!win->shouldClose()) {
+    framePacer.beginFrame();
+    
+    // Process events and input
+    app->eventManager().dispatchAll();
+    inputManager.poll(0.0f);
+    
+    // Update game logic via GameLoop
+    const auto inputSnapshot = InputSnapshot(gamepadState);
+    gameLoop.update(gameWorld, deltaTime, inputSnapshot);
+    
+    // Render scene
+    const auto& snapshot = scene->createSnapshot(mainViewport);
+    if (snapshot.has_value()) {
+        auto renderPass = RenderPassFactory::getInstance().buildRenderPass(*snapshot);
+        app->renderingDevice().render(renderPass);
+    }
+    
+    // Render ImGui
+    imguiOverlay.render();
+    
+    // Swap and sync
+    win->swapBuffers();
+    frameStats = framePacer.sync();
+}
 ```
-
-## Physics Tuning
-
-Use the Spaceship Physics widget to adjust movement parameters at runtime:
-
-- **Movement**: Max speed, acceleration, dampening
-- **Rotation**: Max rotation speed, dampening
-- **Reset**: Restore default physics values
-

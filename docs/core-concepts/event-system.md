@@ -21,22 +21,32 @@ The Event System provides a mechanism for **decoupled communication** between sy
 │  │              │                   │  (write buffer)              │   │
 │  └──────────────┘                   └──────────────────────────────┘   │
 │                                                                        │
+│  ┌──────────────┐    pushFrame()    ┌──────────────────────────────┐   │
+│  │   System C   │ ─────────────────>│     Frame Event Bus          │   │
+│  │              │                   │  (write buffer)              │   │
+│  └──────────────┘                   └──────────────────────────────┘   │
+│                                                                        │
 └────────────────────────────────────────────────────────────────────────┘
                               │
-                              │ Phase/Pass Commit
+                              │ Phase/Pass/Frame Commit
                               ▼
 ┌────────────────────────────────────────────────────────────────────────┐
-│                           FRAME N+1 / NEXT PASS                        │
+│                    NEXT PASS / NEXT PHASE / FRAME N+1                  │
 ├────────────────────────────────────────────────────────────────────────┤
 │                                                                        │
 │  ┌──────────────────────────────┐    readPhase()    ┌──────────────┐   │
-│  │     Phase Event Bus          │ ─────────────────>│   System C   │   │
+│  │     Phase Event Bus          │ ─────────────────>│   System D   │   │
 │  │  (read buffer)               │                   │              │   │
 │  └──────────────────────────────┘                   └──────────────┘   │
 │                                                                        │
 │  ┌──────────────────────────────┐    readPass()     ┌──────────────┐   │
-│  │     Pass Event Bus           │ ─────────────────>│   System D   │   │
+│  │     Pass Event Bus           │ ─────────────────>│   System E   │   │
 │  │  (read buffer)               │                   │              │   │
+│  └──────────────────────────────┘                   └──────────────┘   │
+│                                                                        │
+│  ┌──────────────────────────────┐    readFrame()    ┌──────────────┐   │
+│  │     Frame Event Bus          │ ─────────────────>│   System F   │   │
+│  │  (read buffer)               │                   │  (Frame N+1) │   │
 │  └──────────────────────────────┘                   └──────────────┘   │
 │                                                                        │
 └────────────────────────────────────────────────────────────────────────┘
@@ -53,9 +63,9 @@ struct TriggerCollisionEvent {
     helios::math::vec3f contactPoint;
 };
 
-struct SpawnRequestEvent {
-    EnemyType type;
-    helios::math::vec3f position;
+struct SpawnPlanCommandExecutedEvent {
+    SpawnRuleId spawnRuleId;
+    size_t spawnCount;
 };
 ```
 
@@ -135,12 +145,12 @@ A pass can optionally have a **Commit Point**. When a pass has a commit point:
 The **Phase Event Bus** enables communication across phase boundaries.
 
 ```cpp
-// In Pre Phase - System pushes an event
-updateContext.pushPhase<SpawnRequestEvent>(EnemyType::Grunt, position);
+// In Main Phase - SpawnManager pushes an event after spawning
+updateContext.pushPhase<SpawnPlanCommandExecutedEvent>(spawnRuleId, actualCount);
 
-// In Main Phase - System reads events from previous phase
-for (const auto& evt : updateContext.readPhase<SpawnRequestEvent>()) {
-    spawnManager.queueSpawn(evt.type, evt.position);
+// In Post Phase - System reads events from previous phase
+for (const auto& evt : updateContext.readPhase<SpawnPlanCommandExecutedEvent>()) {
+    spawnScheduler.commit(evt.spawnRuleId, evt.spawnCount);
 }
 ```
 
@@ -171,6 +181,32 @@ for (const auto& evt : updateContext.readPass<TriggerCollisionEvent>()) {
 - At Pass Commit (if pass has commit point), buffers are swapped
 - Events become readable via `readPass()` in subsequent passes
 - All pass events are cleared at the next Phase Commit
+
+### Frame Event Bus
+
+The **Frame Event Bus** enables communication across frame boundaries.
+
+```cpp
+// In Frame N - System pushes an event
+updateContext.pushFrame<SpawnConfirmedEvent>(entityId, position);
+
+// In Frame N+1 - System reads events from previous frame
+for (const auto& evt : updateContext.readFrame<SpawnConfirmedEvent>()) {
+    uiSystem.showSpawnEffect(evt.position);
+}
+```
+
+**Lifecycle:**
+- Events pushed via `pushFrame()` are written to the write buffer
+- At the end of the Post phase, buffers are swapped
+- Events become readable via `readFrame()` in the next frame
+- Frame events persist across all phases within the current frame
+
+**Use cases:**
+- Audio/VFX triggers that should be processed in the next frame
+- UI updates based on game state changes
+- Analytics and logging events
+- Cross-frame communication where immediate processing is not required
 
 ## Commit Points
 
@@ -227,6 +263,11 @@ void phaseCommit(GameWorld& gameWorld, UpdateContext& updateContext) {
 │    ├── NOT visible in the same phase                                │
 │    └── Cleared after being read (next phase commit)                 │
 │                                                                     │
+│  pushFrame() events:                                                │
+│    ├── Visible in the NEXT frame                                    │
+│    ├── Persist across all phases within the current frame           │
+│    └── Swapped at end of Post phase, cleared after next frame       │
+│                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -238,13 +279,13 @@ void phaseCommit(GameWorld& gameWorld, UpdateContext& updateContext) {
 - Keep events **lightweight** — store only essential data (IDs, not full objects)
 - Use **value types** rather than pointers in events
 
-### Choosing pushPass vs pushPhase
+### Choosing pushPass vs pushPhase vs pushFrame
 
-| Use `pushPass()` when... | Use `pushPhase()` when... |
-|--------------------------|---------------------------|
-| Event needs same-phase processing | Event triggers next-phase logic |
-| Collision → Response within Main phase | Spawn request → Command generation |
-| Tight coupling within a phase | Loose coupling across phases |
+| Use `pushPass()` when... | Use `pushPhase()` when... | Use `pushFrame()` when... |
+|--------------------------|---------------------------|---------------------------|
+| Event needs same-phase processing | Event triggers next-phase logic | Event needs cross-frame processing |
+| Collision → Response within Main phase | Spawn request → Command generation | Audio/VFX triggers for next frame |
+| Tight coupling within a phase | Loose coupling across phases | Analytics, logging, UI updates |
 
 ### Event vs Command
 
@@ -269,11 +310,13 @@ for (phase : {Pre, Main, Post}) {
             // Systems can:
             // - pushPass<E>() for same-phase communication
             // - pushPhase<E>() for next-phase communication
+            // - pushFrame<E>() for next-frame communication
             // - readPass<E>() for events from previous passes
             // - readPhase<E>() for events from previous phase
+            // - readFrame<E>() for events from previous frame
         }
         
-        if (pass.hasCommitPoint()) {
+        if (pass.commitPoint() == CommitPoint::PassEvents) {
             passEventBus.swapBuffers();  // Pass events become readable
         }
     }
@@ -283,6 +326,10 @@ for (phase : {Pre, Main, Post}) {
     passEventBus.clearAll();         // Clear pass events
     commandBuffer.flush();           // Execute commands
     gameWorld.flushManagers();       // Process manager queues
+    
+    if (phase == Post) {
+        frameEventBus.swapBuffers(); // Frame events readable in next frame
+    }
 }
 ```
 
@@ -294,4 +341,11 @@ for (phase : {Pre, Main, Post}) {
 - `helios.engine.runtime.gameloop.Phase` — Phase container
 - `helios.engine.runtime.gameloop.Pass` — Pass container with optional commit point
 - `helios.core.buffer.TypeIndexedDoubleBuffer` — Underlying buffer implementation
+
+## Related Documentation
+
+- [Command System](command-system.md) — Command pattern for world mutations
+- [Game Loop Architecture](gameloop-architecture.md) — Overall frame structure
+- [Component System](component-system.md) — GameObject, Component, System architecture
+- [Spawn System](spawn-system.md) — Entity lifecycle with spawn events
 

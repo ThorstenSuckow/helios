@@ -8,6 +8,8 @@ module;
 
 export module helios.engine.modules.physics.collision.systems.BoundsUpdateSystem;
 
+import helios.engine.modules.physics.collision.Bounds;
+
 import helios.engine.ecs.System;
 import helios.math;
 
@@ -18,9 +20,9 @@ import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.modules.scene.components.SceneNodeComponent;
-import helios.engine.modules.spatial.transform.components.ScaleComponent;
+import helios.engine.modules.spatial.transform.components.ScaleStateComponent;
 import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
-import helios.engine.modules.physics.motion.components.RotationStateComponent;
+import helios.engine.modules.spatial.transform.components.RotationStateComponent;
 import helios.engine.modules.physics.collision.components.AabbColliderComponent;
 
 import helios.engine.modules.rendering.model.components.ModelAabbComponent;
@@ -39,9 +41,11 @@ export namespace helios::engine::modules::physics::collision::systems {
      * - ModelAabbComponent (source canonical AABB)
      * - SceneNodeComponent (for parent world transform)
      * - TranslationStateComponent (local translation)
-     * - ScaleComponent (local scaling)
+     * - ScaleStateComponent (local scaling)
      * - RotationStateComponent (local rotation)
      * - AabbColliderComponent (receives the updated world-space AABB)
+     *
+     * @see helios::engine::modules::physics::collision::Bounds::computeWorldAabb()
      */
     class BoundsUpdateSystem : public helios::engine::ecs::System {
 
@@ -63,23 +67,14 @@ export namespace helios::engine::modules::physics::collision::systems {
                 helios::engine::modules::rendering::model::components::ModelAabbComponent,
                 helios::engine::modules::scene::components::SceneNodeComponent,
                 helios::engine::modules::spatial::transform::components::TranslationStateComponent,
-                helios::engine::modules::spatial::transform::components::ScaleComponent,
-                helios::engine::modules::physics::motion::components::RotationStateComponent,
+                helios::engine::modules::spatial::transform::components::ScaleStateComponent,
+                helios::engine::modules::spatial::transform::components::RotationStateComponent,
                 helios::engine::modules::physics::collision::components::AabbColliderComponent
             >().each()) {
 
-                const helios::math::mat4f& parentTransform = sc->sceneNode()->parent()->worldTransform();
-
-                helios::math::vec3f localTranslation = tsc->translation();
-                helios::math::mat4f localRotation    = rsc->rotation();
-                helios::math::vec3f localScaling     = sca->scaling();
-
-                helios::math::mat4f mScaling     = helios::math::mat4f::identity().withScaling(localScaling);
-                helios::math::mat4f mTranslation = helios::math::mat4f::identity().withTranslation(localTranslation);
-
-                helios::math::mat4f localTransform =  mTranslation * (localRotation * mScaling);
-
-                bc->setBounds(mab->aabb().applyTransform(parentTransform * localTransform));
+                bc->setBounds(helios::engine::modules::physics::collision::Bounds::computeWorldAabb(
+                    *mab, *sc, *tsc, *sca, *rsc
+                ));
             }
         }
 

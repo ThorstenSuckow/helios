@@ -80,7 +80,10 @@ export namespace helios::scene {
         SnapshotItem(
             std::weak_ptr<const helios::rendering::Renderable> renderable,
             const helios::math::mat4f& worldMatrix
-        );
+        ) :
+            renderable_(std::move(renderable)),
+            worldMatrix_(worldMatrix) {
+        }
 
         /**
          * @brief Returns a weak_ptr to the Renderable of this SnapshotItem.
@@ -90,7 +93,9 @@ export namespace helios::scene {
          *
          * @return A weak_ptr to the Renderable of this SnapshotItem.
          */
-        [[nodiscard]] std::weak_ptr<const helios::rendering::Renderable> renderable() const noexcept;
+        [[nodiscard]] std::weak_ptr<const helios::rendering::Renderable> renderable() const noexcept {
+            return renderable_;
+        }
 
         /**
          * @brief Returns a const ref to the worldMatrix of this SnapshotItem.
@@ -99,7 +104,9 @@ export namespace helios::scene {
          *
          * @return The const ref to the world matrix of this SnapshotItem.
          */
-        [[nodiscard]] const helios::math::mat4f& worldMatrix() const noexcept;
+        [[nodiscard]] const helios::math::mat4f& worldMatrix() const noexcept {
+            return worldMatrix_;
+        }
     };
 
 }

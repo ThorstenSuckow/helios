@@ -13,9 +13,9 @@ import helios.engine.ecs.System;
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.modules.scene.components.SceneNodeComponent;
-import helios.engine.modules.spatial.transform.components.TransformComponent;
+import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
 
-import helios.engine.modules.spatial.transform.components.ScaleComponent;
+import helios.engine.modules.spatial.transform.components.ScaleStateComponent;
 
 export namespace helios::engine::modules::spatial::transform::systems {
 
@@ -33,19 +33,19 @@ export namespace helios::engine::modules::spatial::transform::systems {
     public:
 
         /**
-         * @brief Updates the system, clearing dirty flags of Transform- and ScaleComponent.
+         * @brief Updates the system, clearing dirty flags of Transform- and ScaleStateComponent.
          *
          * @param updateContext The update context.
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
             for (auto [entity, tc] : gameWorld_->find<
-                helios::engine::modules::spatial::transform::components::TransformComponent
+                helios::engine::modules::spatial::transform::components::ComposeTransformComponent
                 >().each()) {
                 tc->clearDirty();
             }
 
-            for (auto [entity, sc] : gameWorld_->find<helios::engine::modules::spatial::transform::components::ScaleComponent>().each()) {
+            for (auto [entity, sc] : gameWorld_->find<helios::engine::modules::spatial::transform::components::ScaleStateComponent>().each()) {
                 sc->clearDirty();
             }
 

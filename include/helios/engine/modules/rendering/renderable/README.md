@@ -12,6 +12,12 @@ This module provides components that enable GameObjects to be rendered in the sc
 |-----------|---------|
 | `components/` | Renderable-related components |
 
+## Key Classes
+
+| Class | Purpose |
+|-------|---------|
+| `RenderableComponent` | Stores a shared_ptr to the entity's Renderable |
+
 ---
 <details>
 <summary>Doxygen</summary><p>

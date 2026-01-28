@@ -81,7 +81,10 @@ export namespace helios::rendering {
         std::weak_ptr<const helios::rendering::RenderPrototype> renderPrototype,
         std::unique_ptr<const helios::rendering::shader::UniformValueMap> objectUniformValues,
         std::unique_ptr<const helios::rendering::shader::UniformValueMap> materialUniformValues
-            ) noexcept;
+            ) noexcept :
+        renderPrototype_(std::move(renderPrototype)),
+        objectUniformValues_(std::move(objectUniformValues)),
+        materialUniformValues_(std::move(materialUniformValues)) { }
 
         /**
          * @brief Returns a weak ptr to the RenderPrototype associated with this command.
@@ -90,21 +93,27 @@ export namespace helios::rendering {
          *
          * @return A weak ptr to this command's Shader.
          */
-        [[nodiscard]] std::weak_ptr<const helios::rendering::RenderPrototype> renderPrototype() const noexcept;
+        [[nodiscard]] std::weak_ptr<const helios::rendering::RenderPrototype> renderPrototype() const noexcept {
+            return renderPrototype_;
+        }
 
         /**
          * @brief Returns a const ref to this command's UniformValueMap for the object.
          *
          * @return A const ref to this command's UniformValueMap for the object.
          */
-        [[nodiscard]] const helios::rendering::shader::UniformValueMap& objectUniformValues() const noexcept;
+        [[nodiscard]] const helios::rendering::shader::UniformValueMap& objectUniformValues() const noexcept {
+            return *objectUniformValues_;
+        }
 
         /**
          * @brief Returns a const ref to this command's UniformValueMap for the material.
          *
          * @return A const ref to this command's UniformValueMap for the material.
          */
-        [[nodiscard]] const helios::rendering::shader::UniformValueMap& materialUniformValues() const noexcept;
+        [[nodiscard]] const helios::rendering::shader::UniformValueMap& materialUniformValues() const noexcept {
+            return *materialUniformValues_;
+        }
     };
 
 

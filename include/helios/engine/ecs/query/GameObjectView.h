@@ -42,7 +42,7 @@ using namespace helios::engine::ecs::query;
  * }
  *
  * // Using each() for direct component access via structured bindings
- * for (auto [entity, tc] : gameWorld.find<TransformComponent>().each()) {
+ * for (auto [entity, tc] : gameWorld.find<ComposeTransformComponent>().each()) {
  *     if (tc->isDirty()) tc->clearDirty();
  * }
  * ```

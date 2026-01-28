@@ -11,115 +11,10 @@
 // Module Imports
 // ============================================================================
 
-// Helios Core Modules
-import helios.math;
-
-// Application Framework
-import helios.ext.glfw.app.GLFWFactory;
-import helios.ext.glfw.app.GLFWApplication;
-import helios.ext.glfw.window.GLFWWindow;
-
-// Input Management
-import helios.input.InputManager;
-import helios.input.types.Key;
-import helios.input.types.Gamepad;
-import helios.input.gamepad.GamepadState;
-
-
-// Rendering System
-import helios.rendering.Renderable;
-import helios.rendering.RenderQueue;
-import helios.rendering.RenderPrototype;
-import helios.rendering.RenderPassFactory;
-import helios.rendering.Viewport;
-import helios.rendering.ClearFlags;
-import helios.rendering.model.Material;
-import helios.rendering.model.config.MeshConfig;
-import helios.rendering.model.config.MaterialProperties;
-import helios.rendering.model.config.PrimitiveType;
-
-import helios.rendering.asset.shape.basic.Triangle;
-import helios.rendering.asset.shape.basic.Ellipse;
-import helios.rendering.asset.shape.basic.Line;
-import helios.rendering.asset.shape.basic.Grid;
-
-// OpenGL Backend
-import helios.ext.opengl.rendering.shader.OpenGLShader;
-import helios.ext.opengl.rendering.model.OpenGLMesh;
-import helios.ext.opengl.rendering.shader.OpenGLUniformLocationMap;
-import helios.rendering.shader.UniformSemantics;
-import helios.ext.opengl.rendering.OpenGLDevice;
-
-// Scene Management
-import helios.scene.Scene;
-import helios.scene.SceneNode;
-import helios.scene.CullNoneStrategy;
-import helios.scene.Camera;
-import helios.scene.CameraSceneNode;
-
-
-// util
-import helios.util.Colors;
-import helios.util.io.BasicStringFileReader;
-import helios.util.time.Stopwatch;
-import helios.util.log.LogSink;
-
-
-// engine
-import helios.engine.FramePacer;
-import helios.engine.FrameStats;
-
-// tooling
-import helios.tooling.FpsMetrics;
-
-// imgui
-import helios.ext.imgui.ImGuiGlfwOpenGLBackend;
-import helios.ext.imgui.ImGuiOverlay;
-import helios.ext.imgui.ImGuiWidget;
-import helios.ext.imgui.widgets.MainMenuWidget;
-import helios.ext.imgui.widgets.FpsWidget;
-import helios.ext.imgui.widgets.GamepadWidget;
-import helios.ext.imgui.widgets.LogWidget;
-import helios.ext.imgui.widgets.CameraWidget;
-import helios.ext.imgui.ImGuiLogSink;
-
-// Spaceship Widget
+import helios;
+import helios.ext;
 import helios.examples.spaceshipShooting.SpaceshipWidget;
 
-// game input handling, game objects
-import helios.core.units;
-import helios.engine.game.Level;
-import helios.engine.game.GameWorld;
-import helios.engine.game.CommandBuffer;
-import helios.engine.game.GameObject;
-import helios.engine.game.InputSnapshot;
-import helios.engine.game.UpdateContext;
-
-// components, commands
-import helios.engine.game.components.scene.SceneNodeComponent;
-import helios.engine.game.components.input.TwinStickInputComponent;
-import helios.engine.game.components.physics.Move2DComponent;
-import helios.engine.game.components.physics.TransformComponent;
-import helios.engine.game.components.physics.TranslationStateComponent;
-import helios.engine.game.components.physics.ScaleComponent;
-import helios.engine.game.components.physics.RotationStateComponent;
-import helios.engine.game.components.physics.HeadingComponent;
-import helios.engine.game.components.physics.DirectionComponent;
-import helios.engine.game.components.gameplay.Aim2DComponent;
-import helios.engine.game.components.gameplay.ShootComponent;
-import helios.engine.game.components.physics.LevelBoundsBehaviorComponent;
-import helios.engine.game.components.physics.AabbColliderComponent;
-
-import helios.engine.game.systems.gameplay.ProjectilePoolSystem;
-import helios.engine.game.systems.physics.Move2DSystem;
-import helios.engine.game.systems.physics.ScaleSystem;
-import helios.engine.game.systems.scene.SceneSyncSystem;
-import helios.engine.game.systems.physics.BoundsUpdateSystem;
-import helios.engine.game.systems.physics.LevelBoundsBehaviorSystem;
-import helios.engine.game.systems.physics.HeadingSystem;
-import helios.engine.game.systems.physics.ComposeTransformSystem;
-import helios.engine.game.systems.post.TransformClearSystem;
-import helios.engine.game.systems.post.ScaleClearSystem;
 
 // ============================================================================
 // Using Declarations
@@ -187,16 +82,13 @@ int main() {
     // ========================================
     // 1.2. ImGui & Tooling Setup
     // ========================================
-    // Get native GLFW window
-    // GLFWwindow* nativeWindow = win->nativeHandle();
     auto imguiBackend = helios::ext::imgui::ImGuiGlfwOpenGLBackend(win->nativeHandle());
     auto imguiOverlay = helios::ext::imgui::ImGuiOverlay::forBackend(&imguiBackend);
-    auto fpsMetrics = helios::tooling::FpsMetrics();
+    auto fpsMetrics = helios::engine::tooling::FpsMetrics();
     auto stopwatch = std::make_unique<helios::util::time::Stopwatch>();
-    auto framePacer = helios::engine::FramePacer(std::move(stopwatch));
-    // set target framerate
+    auto framePacer = helios::engine::tooling::FramePacer(std::move(stopwatch));
     framePacer.setTargetFps(0.0f);
-    helios::engine::FrameStats frameStats{};
+    helios::engine::tooling::FrameStats frameStats{};
     auto menu = new helios::ext::imgui::widgets::MainMenuWidget();
     auto fpsWidget = new helios::ext::imgui::widgets::FpsWidget(&fpsMetrics, &framePacer);
     auto gamepadWidget = new helios::ext::imgui::widgets::GamepadWidget(&inputManager);
@@ -220,126 +112,36 @@ int main() {
     // ========================================
     // 2. Shader Creation
     // ========================================
-    auto shader_ptr =
+    auto defaultShader =
             std::make_shared<OpenGLShader>("./resources/cube.vert", "./resources/cube.frag", basicStringFileReader);
 
-    // Map the ModelMatrix uniform to location 1 in the shader
     auto uniformLocationMap = std::make_unique<OpenGLUniformLocationMap>();
     bool mapping = uniformLocationMap->set(UniformSemantics::ModelMatrix, 1);
     mapping = uniformLocationMap->set(UniformSemantics::ViewMatrix, 2);
     mapping = uniformLocationMap->set(UniformSemantics::ProjectionMatrix, 3);
     mapping = uniformLocationMap->set(UniformSemantics::MaterialBaseColor, 4);
 
-    shader_ptr->setUniformLocationMap(std::move(uniformLocationMap));
+    defaultShader->setUniformLocationMap(std::move(uniformLocationMap));
 
     // ========================================
-    // 3. Game Object Creation (Rendering)
-    // ========================================
-
-    // spaceship
-    auto spaceshipMaterialProps = MaterialProperties(helios::util::Colors::Yellow);
-    auto spaceshipMaterialProps_shared = std::make_shared<MaterialProperties>(spaceshipMaterialProps);
-    auto material_ptr = std::make_shared<Material>(shader_ptr, spaceshipMaterialProps_shared);
-
-    // grid
-    auto gridMaterialProps = MaterialProperties(helios::util::Colors::Turquoise.withW(0.2f));
-    auto gridMaterialProps_shared = std::make_shared<MaterialProperties>(gridMaterialProps);
-    auto gridMaterial_ptr = std::make_shared<Material>(shader_ptr, gridMaterialProps_shared);
-
-    // pseudo gizmos
-    auto leftStickGizmoMaterialProps = MaterialProperties();
-    auto leftStickGizmoMaterialProps_shared = std::make_shared<MaterialProperties>(leftStickGizmoMaterialProps);
-    auto leftStickGizmoMaterial_ptr = std::make_shared<Material>(shader_ptr, leftStickGizmoMaterialProps_shared);
-
-    // ========================================
-    // 4. Mesh (Geometry) Creation
-    // ========================================
-    auto spaceship = Triangle{};
-    auto leftStickGizmo = Line{};
-    auto projectile = Ellipse{1.0f, 0.4f, 8};
-    auto grid = Grid{29, 19};
-
-    // Configure the mesh for the spaceship to render as a line loop (wireframe)
-    auto meshConfig = std::make_shared<const MeshConfig>(PrimitiveType::LineLoop);
-    auto mesh_ptr = std::make_shared<OpenGLMesh>(spaceship, meshConfig);
-
-    // configure the projectile
-    auto projectileMeshPtr = std::make_shared<OpenGLMesh>(projectile, meshConfig);
-
-    // configure the gizmos for controller input, as well as the grid rendering
-    auto meshLineConfig = std::make_shared<const MeshConfig>(PrimitiveType::Lines);
-    auto leftStickGizmoMesh = std::make_shared<OpenGLMesh>(leftStickGizmo, meshLineConfig);
-    auto gridMesh_ptr = std::make_shared<OpenGLMesh>(grid, meshLineConfig);
-
-    // ========================================
-    // 5. Renderable and RenderPrototype
-    // ========================================
-    const auto renderPrototype = std::make_shared<RenderPrototype>(material_ptr, mesh_ptr);
-    auto spaceshipRenderable = std::make_shared<Renderable>(renderPrototype);
-
-    auto projectilePrototype = std::make_shared<helios::rendering::RenderPrototype>(material_ptr, projectileMeshPtr);
-    auto projectileRenderable = std::make_shared<helios::rendering::Renderable>(std::move(projectilePrototype));
-
-    const auto leftStickGizmoPrototype =
-            std::make_shared<RenderPrototype>(leftStickGizmoMaterial_ptr, leftStickGizmoMesh);
-    auto leftStickGizmoRenderable = std::make_shared<Renderable>(leftStickGizmoPrototype);
-
-    auto rightStickGizmoRenderable = std::make_shared<Renderable>(
-        leftStickGizmoPrototype,
-        leftStickGizmoMaterialProps.overrideBaseColor(helios::util::Colors::Magenta)
-    );
-
-    auto shipDirectionGizmoRenderable = std::make_shared<Renderable>(
-        leftStickGizmoPrototype,
-        leftStickGizmoMaterialProps.overrideBaseColor(helios::util::Colors::Red)
-    );
-
-    const auto gridPrototype = std::make_shared<RenderPrototype>(gridMaterial_ptr, gridMesh_ptr);
-    auto gridRenderable = std::make_shared<Renderable>(gridPrototype);
-
-    // ========================================
-    // 6. Scene Graph Setup
+    // 3. Scene Graph Setup
     // ========================================
     auto frustumCullingStrategy = std::make_unique<CullNoneStrategy>();
     auto scene = std::make_unique<helios::scene::Scene>(std::move(frustumCullingStrategy));
 
-    // Add the grid
-    auto* gridSceneNode = scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(gridRenderable)));
-
-    // Add the spaceship as a scene node
-    auto* spaceshipSceneNode =
-            scene->addNode(std::make_unique<helios::scene::SceneNode>(std::move(spaceshipRenderable)));
-    /**
-     * @todo we are using the aabb of the grid as the arenaBox for the projectile pool.
-     * The grid has its zindex at 0 (min/max), this should be improved later
-     */
-    spaceshipSceneNode->setTranslation(helios::math::vec3f{0.0f, 0.0f, 0.0f});
-
-    // Add the gizmos
-    auto* leftStickGizmoNode =
-            spaceshipSceneNode->addNode(std::make_unique<helios::scene::SceneNode>(std::move(leftStickGizmoRenderable)));
-    auto* rightStickGizmoNode =
-            spaceshipSceneNode->addNode(std::make_unique<helios::scene::SceneNode>(std::move(rightStickGizmoRenderable)));
-    auto* shipDirectionGizmoNode =
-            spaceshipSceneNode->addNode(std::make_unique<helios::scene::SceneNode>(std::move(shipDirectionGizmoRenderable)));
-    rightStickGizmoNode->setInheritance(helios::math::TransformType::Translation);
-    leftStickGizmoNode->setInheritance(helios::math::TransformType::Translation);
-    shipDirectionGizmoNode->setInheritance(helios::math::TransformType::Translation);
-
-
     // ========================================
-    // 7. Register mainViewport-Camera w/ Setup
+    // 4. Camera Setup
     // ========================================
     auto mainViewportCam = std::make_unique<helios::scene::Camera>();
     auto cameraSceneNode = std::make_unique<helios::scene::CameraSceneNode>(std::move(mainViewportCam));
     auto cameraSceneNode_ptr = cameraSceneNode.get();
-    std::ignore = spaceshipSceneNode->addNode(std::move(cameraSceneNode));
+
     cameraSceneNode_ptr->setInheritance(
         helios::math::TransformType::Translation
     );
     mainViewport->setCameraSceneNode(cameraSceneNode_ptr);
     cameraSceneNode_ptr->setTranslation(
-        helios::math::vec3f(0.0f, 0.0f, -(GRID_Y*CELL_SIZE / 2.0f)/tan(FOVY/2))
+        helios::math::vec3f(0.0f, 0.0f, -100.0f)
     );
     cameraSceneNode_ptr->camera().setPerspective(
         FOVY,
@@ -354,80 +156,269 @@ int main() {
     cameraWidget->addCameraSceneNode("Main Camera", cameraSceneNode_ptr);
 
     // ========================================
-    // 9. Game-related Input-handling, GameWorld and GameObjects
+    // 5. GameWorld, Level and GameObjects
     // ========================================
 
-    auto gameWorld = helios::engine::game::GameWorld{};
-    auto commandBuffer = helios::engine::game::CommandBuffer{};
+    helios::engine::runtime::gameloop::GameLoop gameLoop{};
+    helios::engine::runtime::world::GameWorld gameWorld{};
 
-    auto shipGameObject = std::make_unique<helios::engine::game::GameObject>();
-    shipGameObject->add<helios::engine::game::components::scene::SceneNodeComponent>(spaceshipSceneNode);
-    shipGameObject->add<helios::engine::game::components::input::TwinStickInputComponent>();
-    shipGameObject->add<helios::engine::game::components::physics::Move2DComponent>();
-    shipGameObject->add<helios::engine::game::components::physics::HeadingComponent>();
-    shipGameObject->add<helios::engine::game::components::physics::DirectionComponent>();
-    shipGameObject->add<helios::engine::game::components::physics::TransformComponent>();
-    shipGameObject->add<helios::engine::game::components::physics::TranslationStateComponent>();
-    shipGameObject->add<helios::engine::game::components::physics::RotationStateComponent>();
-    shipGameObject->add<helios::engine::game::components::physics::ScaleComponent>(
-        SPACESHIP_SIZE, SPACESHIP_SIZE, 0.0f, helios::core::units::Unit::Meter);
-    shipGameObject->add<helios::engine::game::components::gameplay::Aim2DComponent>();
-    shipGameObject->add<helios::engine::game::components::gameplay::ShootComponent>();
-    shipGameObject->add<helios::engine::game::components::physics::LevelBoundsBehaviorComponent>();
-    shipGameObject->add<helios::engine::game::components::physics::AabbColliderComponent>();
-    auto* theShipPtr = gameWorld.addGameObject(std::move(shipGameObject));
-
-    // Register the spaceship with the tuning widget
-    spaceshipWidget->addGameObject("Player 1", theShipPtr);
-
-    auto gridGameObject = std::make_unique<helios::engine::game::GameObject>();
-    gridGameObject->add<helios::engine::game::components::scene::SceneNodeComponent>(gridSceneNode);
-    gridGameObject->add<helios::engine::game::components::physics::TransformComponent>();
-    gridGameObject->add<helios::engine::game::components::physics::ScaleComponent>(
-        GRID_X * CELL_SIZE, GRID_Y * CELL_SIZE, 0.0f, helios::core::units::Unit::Meter
-    );
-    gridGameObject->add<helios::engine::game::components::physics::AabbColliderComponent>();
-    std::ignore = gameWorld.addGameObject(std::move(gridGameObject));
-
-    // register the game systems
-    gameWorld.addSystem<helios::engine::game::systems::gameplay::ProjectilePoolSystem>(
-        std::move(projectileRenderable), 50
-    );
-
-    auto level = std::make_unique<helios::engine::game::Level>(&(scene.get()->root()));
+    auto level = std::make_unique<helios::engine::runtime::world::Level>(&(scene.get()->root()));
+    auto* levelPtr = level.get();
     level->setBounds(
         helios::math::aabb{
-     -(GRID_X * CELL_SIZE)/2.0f, -(GRID_Y * CELL_SIZE)/2.0f, 0.0f,
+            -(GRID_X * CELL_SIZE)/2.0f, -(GRID_Y * CELL_SIZE)/2.0f, 0.0f,
             (GRID_X * CELL_SIZE)/2.0f, (GRID_Y * CELL_SIZE)/2.0f, 0.0f
         },
         helios::core::units::Unit::Meter
     );
     gameWorld.setLevel(std::move(level));
 
-    gameWorld.addSystem<helios::engine::game::systems::physics::ScaleSystem>();
-    gameWorld.addSystem<helios::engine::game::systems::physics::Move2DSystem>();
-    gameWorld.addSystem<helios::engine::game::systems::physics::HeadingSystem>();
-    gameWorld.addSystem<helios::engine::game::systems::physics::ComposeTransformSystem>();
-    gameWorld.addSystem<helios::engine::game::systems::scene::SceneSyncSystem>(scene.get());
-    gameWorld.addSystem<helios::engine::game::systems::physics::BoundsUpdateSystem>();
-    gameWorld.addSystem<helios::engine::game::systems::physics::LevelBoundsBehaviorSystem>();
-    gameWorld.addSystem<helios::engine::game::systems::post::TransformClearSystem>();
-    gameWorld.addSystem<helios::engine::game::systems::post::ScaleClearSystem>();
+    // projectile prefab
+    auto projectilePrefab = helios::engine::builder::gameObject::GameObjectFactory::instance()
+        .gameObject()
+        .withRendering([&defaultShader, &root = *levelPtr->rootNode()](auto& rnb) {
+            rnb.renderable()
+               .shader(defaultShader)
+               .color(helios::util::Colors::Yellow)
+               .primitiveType(helios::rendering::model::config::PrimitiveType::LineLoop)
+               .shape(std::make_shared<helios::rendering::asset::shape::basic::Ellipse>(0.5f, 0.2f, 8))
+               .attachTo(&root);
+        })
+        .withTransform([](auto& tb) {
+            tb.transform()
+              .scale(helios::math::vec3f(2.2f, 0.8f, 0.0f), helios::core::units::Unit::Meter);
+        })
+        .withCollision([](auto& cb) {
+            cb.collision()
+              .useBoundingBox();
 
+            cb.levelBoundsCollision()
+              .onCollision(helios::engine::modules::physics::collision::types::CollisionBehavior::Despawn);
+        })
+        .withMotion([](auto& mcb) {
+            mcb.move2D()
+               .speed(80.0f)
+               .instantAcceleration(true);
+            mcb.steering()
+               .steeringSetsDirection(false)
+               .instantSteering(true);
+        })
+        .withSpawn([](auto& sb) {
+             sb.spawn()
+               .useSpawnProfile();
+         })
+        .make();
+
+    // THE GRID
+    auto theGrid = helios::engine::builder::gameObject::GameObjectFactory::instance()
+        .gameObject()
+        .withRendering([&defaultShader, &root = *levelPtr->rootNode()](auto& rnb) {
+            rnb.renderable()
+               .shader(defaultShader)
+               .color(helios::util::Colors::Turquoise.withW(0.2f))
+               .primitiveType(helios::rendering::model::config::PrimitiveType::Lines)
+               .shape(std::make_shared<helios::rendering::asset::shape::basic::Grid>(29, 19))
+               .attachTo(&root);
+        })
+        .withCollision([](auto& cb) {
+            cb.collision()
+              .useBoundingBox();
+        })
+        .withTransform([](auto& tb) {
+            tb.transform()
+              .translate(helios::math::vec3f(0.0f, 0.0f, 0.5f))
+              .scale(helios::math::vec3f(GRID_X * CELL_SIZE, GRID_Y * CELL_SIZE, 0.0f));
+        })
+        .make();
+
+    // ship game object
+    auto shipGameObject = helios::engine::builder::gameObject::GameObjectFactory::instance()
+        .gameObject()
+        .withRendering([&defaultShader, &root = *levelPtr->rootNode()](auto& rnb) {
+            rnb.renderable()
+               .shader(defaultShader)
+               .color(helios::util::Colors::Yellow)
+               .primitiveType(helios::rendering::model::config::PrimitiveType::LineLoop)
+               .shape(std::make_shared<helios::rendering::asset::shape::basic::Triangle>())
+               .attachTo(&root);
+        })
+        .withTransform([](auto& tb) {
+            tb.transform()
+              .scale(helios::math::vec3f(SPACESHIP_SIZE, SPACESHIP_SIZE, 0.0f));
+        })
+        .withCollision([](auto& cb) {
+            cb.collision()
+              .useBoundingBox();
+
+            cb.levelBoundsCollision()
+              .onCollision(helios::engine::modules::physics::collision::types::CollisionBehavior::Bounce);
+        })
+        .withShooting([](auto& ccb) {
+            ccb.weapon()
+               .fireRate(5.0f);
+        })
+        .withMotion([](auto& mcb) {
+            mcb.move2D()
+               .speed(30.0f)
+               .instantAcceleration(false);
+            mcb.steering()
+               .steeringSetsDirection(true)
+               .instantSteering(false);
+        })
+        .withSpawn([](auto& sb) {
+            sb.spawn()
+              .useSpawnProfile();
+        })
+        .make();
+
+    // GIZMO Left stick
+    auto leftStickGizmo = helios::engine::builder::gameObject::GameObjectFactory::instance()
+        .gameObject()
+        .withRendering([&defaultShader, &shipGameObject](auto& rnb) {
+            rnb.renderable()
+               .shader(defaultShader)
+               .color(helios::util::Colors::White)
+               .primitiveType(helios::rendering::model::config::PrimitiveType::Lines)
+               .shape(std::make_shared<helios::rendering::asset::shape::basic::Line>())
+               .build();
+
+            rnb.sceneNode()
+               .parent(shipGameObject.get())
+               .inherit(helios::math::TransformType::Translation);
+        }).make();
+
+    auto rightStickGizmo = helios::engine::builder::gameObject::GameObjectFactory::instance()
+        .gameObject()
+        .withRendering([&defaultShader, &shipGameObject](auto& rnb) {
+            rnb.renderable()
+               .shader(defaultShader)
+               .color(helios::util::Colors::Magenta)
+               .primitiveType(helios::rendering::model::config::PrimitiveType::Lines)
+               .shape(std::make_shared<helios::rendering::asset::shape::basic::Line>())
+               .build();
+
+            rnb.sceneNode()
+               .parent(shipGameObject.get())
+               .inherit(helios::math::TransformType::Translation);
+        })
+        .make();
+
+    auto shipDirectionGizmo = helios::engine::builder::gameObject::GameObjectFactory::instance()
+        .gameObject()
+        .withRendering([&defaultShader, &shipGameObject](auto& rnb) {
+            rnb.renderable()
+               .shader(defaultShader)
+               .color(helios::util::Colors::Red)
+               .primitiveType(helios::rendering::model::config::PrimitiveType::Lines)
+               .shape(std::make_shared<helios::rendering::asset::shape::basic::Line>())
+               .build();
+
+            rnb.sceneNode()
+               .parent(shipGameObject.get())
+               .inherit(helios::math::TransformType::Translation);
+        })
+        .make();
+
+
+    using namespace helios::engine::runtime::spawn;
+
+    // --------------------------
+    //     SPAWN CONFIGURATION
+    // --------------------------
+
+    constexpr helios::engine::core::data::GameObjectPoolId ProjectilePoolId{"projectile_pool"};
+    helios::engine::core::data::SpawnProfileId ProjectileSpawnSpawnProfileId{"projectile_spawn"};
+
+    auto& poolManager = gameWorld.addManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
+    auto& spawnManager = gameWorld.addManager<helios::engine::runtime::spawn::SpawnManager>();
+
+    poolManager.addPoolConfig(std::make_unique<helios::engine::runtime::pooling::GameObjectPoolConfig>(
+                ProjectilePoolId,
+                std::move(projectilePrefab),
+                50
+            ));
+
+    auto projectileSpawnSpawnProfile = std::make_unique<helios::engine::runtime::spawn::SpawnProfile>(
+        ProjectilePoolId,
+        std::make_unique<helios::engine::runtime::spawn::behavior::placements::EmitterSpawnPlacer>(),
+        std::make_unique<helios::engine::runtime::spawn::behavior::initializers::EmitterInitializer>()
+    );
+
+    spawnManager.addSpawnProfile(ProjectileSpawnSpawnProfileId, std::move(projectileSpawnSpawnProfile));
+
+    // --------------------------
+    //     GAMELOOP PHASES SETUP
+    // --------------------------
+
+    gameLoop.commandBuffer().addDispatcher<helios::engine::runtime::spawn::commands::SpawnCommand>(
+        std::make_unique<helios::engine::runtime::spawn::dispatcher::SpawnCommandDispatcher>()
+    );
+    gameLoop.commandBuffer().addDispatcher<helios::engine::runtime::spawn::commands::DespawnCommand>(
+        std::make_unique<helios::engine::runtime::spawn::dispatcher::DespawnCommandDispatcher>()
+    );
+
+    gameLoop.phase(helios::engine::runtime::gameloop::PhaseType::Pre)
+            .addPass()
+            .addSystem<helios::engine::mechanics::input::systems::TwinStickInputSystem>(*shipGameObject)
+            .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::Structural)
+            .addPass()
+            .addSystem<helios::engine::mechanics::combat::systems::ProjectileSpawnSystem>(ProjectileSpawnSpawnProfileId)
+            .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::Structural)
+            .addPass()
+            .addSystem<helios::engine::modules::spatial::transform::systems::ScaleSystem>()
+            .addSystem<helios::engine::modules::physics::motion::systems::SteeringSystem>()
+            .addSystem<helios::engine::modules::physics::motion::systems::Move2DSystem>();
+
+    gameLoop.phase(helios::engine::runtime::gameloop::PhaseType::Main)
+            .addPass()
+            .addSystem<helios::engine::modules::physics::collision::systems::BoundsUpdateSystem>()
+            .addSystem<helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem>()
+            .addCommitPoint();
+
+    gameLoop.phase(helios::engine::runtime::gameloop::PhaseType::Post)
+             .addPass()
+             .addSystem<helios::engine::modules::spatial::transform::systems::ComposeTransformSystem>()
+             .addSystem<helios::engine::modules::systems::scene::SceneSyncSystem>(scene.get())
+             .addSystem<helios::engine::modules::spatial::transform::systems::TransformClearSystem>();
 
 
     float DELTA_TIME = 0.0f;
-    auto updateContext = helios::engine::game::UpdateContext{&commandBuffer, &gameWorld};
+
 
     // ========================================
-    // 10. Main Game Loop
+    // 6. Activate GameObjects and Initialize
+    // ========================================
+
+    leftStickGizmo->setActive(true);
+    rightStickGizmo->setActive(true);
+    shipDirectionGizmo->setActive(true);
+
+    theGrid->setActive(true);
+    std::ignore = gameWorld.addGameObject(std::move(theGrid));
+    std::ignore = shipGameObject->get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode()->addNode(std::move(cameraSceneNode));
+
+    shipGameObject->setActive(true);
+    auto* theShipPtr = gameWorld.addGameObject(std::move(shipGameObject));
+    auto* leftStickGizmoNode = leftStickGizmo->get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode();
+    auto* rightStickGizmoNode = rightStickGizmo->get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode();
+    auto* shipDirectionGizmoNode = shipDirectionGizmo->get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode();
+
+    // Register the spaceship with the tuning widget
+    spaceshipWidget->addGameObject("Player 1", theShipPtr);
+
+    // ENGINE INIT
+    gameWorld.init();
+    gameLoop.init(gameWorld);
+
+    // ========================================
+    // 7. Main Game Loop
     // ========================================
 
     while (!win->shouldClose()) {
         framePacer.beginFrame();
 
         // ----------------------------------------
-        // 10.1 Event and Input Processing
+        // 7.1 Event and Input Processing
         // ----------------------------------------
         app->eventManager().dispatchAll();
         inputManager.poll(0.0f);
@@ -439,34 +430,29 @@ int main() {
         }
 
         // ----------------------------------------
-        // 10.2 Game Logic Update
+        // 7.2 Game Logic Update
         // ----------------------------------------
         const GamepadState& gamepadState = inputManager.gamepadState(Gamepad::ONE);
-        const auto inputSnapshot = helios::engine::game::InputSnapshot(gamepadState);
+        const auto inputSnapshot = helios::input::InputSnapshot(gamepadState);
 
-        updateContext.setDeltaTime(DELTA_TIME);
-        updateContext.setInputSnapshot(&inputSnapshot);
-
-        gameWorld.update(updateContext);
-        commandBuffer.flush(gameWorld);
-
+        gameLoop.update(gameWorld, DELTA_TIME, inputSnapshot);
 
 
         // ----------------------------------------
-        // 10.3 Gizmo / Debug Visualization Update
+        // 7.3 Gizmo / Debug Visualization Update
         // ----------------------------------------
-        const auto* mcLft = theShipPtr->get<helios::engine::game::components::physics::Move2DComponent>();
+        const auto* mcLft = theShipPtr->get<helios::engine::modules::physics::motion::components::Move2DComponent>();
         if (mcLft) {
-            leftStickGizmoNode->setScale((mcLft->steeringInput() * mcLft->throttle()  * 4.0f).toVec3());
+            leftStickGizmoNode->setScale((mcLft->direction() * mcLft->throttle()  * 4.0f).toVec3());
             shipDirectionGizmoNode->setScale(mcLft->velocity().normalize() * mcLft->speedRatio() * 4.0f);
         }
-        const auto* mcRgt = theShipPtr->get<helios::engine::game::components::gameplay::Aim2DComponent>();
+        const auto* mcRgt = theShipPtr->get<helios::engine::mechanics::combat::components::Aim2DComponent>();
         if (mcRgt) {
             rightStickGizmoNode->setScale((mcRgt->direction() * mcRgt->frequency()  * 4.0f).toVec3());
         }
 
         // ----------------------------------------
-        // 10.4 Rendering
+        // 7.4 Rendering
         // ----------------------------------------
         const auto& snapshot = scene->createSnapshot(mainViewport);
         if (snapshot.has_value()) {
@@ -474,15 +460,14 @@ int main() {
             app->renderingDevice().render(renderPass);
         }
 
-        // ========================================
-        // ImGui Rendering
-        // ========================================
+        // ----------------------------------------
+        // 7.5 ImGui Rendering
+        // ----------------------------------------
         imguiOverlay.render();
 
         // ----------------------------------------
-        // 10.5 Frame Synchronization
+        // 7.6 Frame Synchronization
         // ----------------------------------------
-        // swap time / idle time should be read out here
         win->swapBuffers();
 
         frameStats = framePacer.sync();

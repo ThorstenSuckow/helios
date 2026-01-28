@@ -108,18 +108,18 @@ Dispatchers enable the **Visitor pattern** for type-safe command routing. Instea
 ```cpp
 // Create a typed dispatcher for DespawnCommand
 class DespawnDispatcher : public TypedWorldCommandDispatcher<DespawnCommand> {
-    ProjectileManager& manager_;
+    SpawnManager& manager_;
 public:
-    explicit DespawnDispatcher(ProjectileManager& mgr) : manager_(mgr) {}
+    explicit DespawnDispatcher(SpawnManager& mgr) : manager_(mgr) {}
 
     void dispatchTyped(GameWorld& world, const DespawnCommand& cmd) noexcept override {
-        manager_.queueDespawn(cmd.entityGuid(), cmd.poolId());
+        manager_.submit(cmd);
     }
 };
 
 // Register with CommandBuffer
 cmdBuffer.addDispatcher<DespawnCommand>(
-    std::make_unique<DespawnDispatcher>(projectileManager)
+    std::make_unique<DespawnDispatcher>(spawnManager)
 );
 ```
 
@@ -151,29 +151,31 @@ Managers handle cross-cutting concerns that require deferred or batched processi
 ### Manager Lifecycle
 
 ```cpp
-class ProjectileManager : public Manager {
-    std::vector<SpawnRequest> spawnQueue_;
-    std::vector<DespawnRequest> despawnQueue_;
+class SpawnManager : public Manager, public SpawnCommandHandler {
+    std::vector<SpawnCommand> spawnCommands_;
+    std::vector<DespawnCommand> despawnCommands_;
 
 public:
-    void queueSpawn(const SpawnRequest& req) {
-        spawnQueue_.push_back(req);
+    bool submit(const SpawnCommand& cmd) noexcept override {
+        spawnCommands_.push_back(cmd);
+        return true;
     }
 
-    void queueDespawn(const Guid& guid, GameObjectPoolId poolId) {
-        despawnQueue_.push_back({guid, poolId});
+    bool submit(const DespawnCommand& cmd) noexcept override {
+        despawnCommands_.push_back(cmd);
+        return true;
     }
 
     // Called after CommandBuffer::flush()
-    void flush(GameWorld& world, UpdateContext& ctx) override {
-        for (const auto& req : spawnQueue_) {
-            // Actually spawn the projectile
+    void flush(GameWorld& world, UpdateContext& ctx) noexcept override {
+        for (const auto& cmd : spawnCommands_) {
+            // Acquire from pool and initialize
         }
-        for (const auto& req : despawnQueue_) {
+        for (const auto& cmd : despawnCommands_) {
             // Return to pool
         }
-        spawnQueue_.clear();
-        despawnQueue_.clear();
+        spawnCommands_.clear();
+        despawnCommands_.clear();
     }
 };
 ```
@@ -183,7 +185,8 @@ public:
 Managers are registered with the GameWorld:
 
 ```cpp
-auto& projectileMgr = gameWorld.addManager<ProjectileManager>(/* args */);
+auto spawnManager = std::make_unique<SpawnManager>();
+gameWorld.addManager(std::move(spawnManager));
 ```
 
 ## Game Loop Integration
@@ -287,4 +290,5 @@ For detailed phase/pass event handling, see [Game Loop Architecture](gameloop-ar
 - [Event System](event-system.md) — Phase/pass event propagation
 - [Game Loop Architecture](gameloop-architecture.md) — Overall frame structure
 - [Component System](component-system.md) — GameObject, Component, System architecture
+- [Spawn System](spawn-system.md) — Entity lifecycle with spawn scheduling and pooling
 

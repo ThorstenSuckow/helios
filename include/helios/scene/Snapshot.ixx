@@ -91,7 +91,12 @@ export namespace helios::scene {
             std::shared_ptr<const helios::rendering::Viewport> viewport,
             const math::mat4f& projectionMatrix,
             const math::mat4f& viewMatrix,
-            std::vector<SnapshotItem> snapshotItems) noexcept;
+            std::vector<SnapshotItem> snapshotItems) noexcept :
+            viewport_(viewport),
+            projectionMatrix_(projectionMatrix),
+            viewMatrix_(viewMatrix),
+            snapshotItems_(std::move(snapshotItems))
+        {}
 
         /**
          * @brief Returns a const reference to this Snapshot's SnapshotItems.
@@ -100,14 +105,18 @@ export namespace helios::scene {
          *
          * @return A const reference to this Snapshot's collection of SnapshotItems.
          */
-        [[nodiscard]] const std::vector<SnapshotItem>& snapshotItems() const noexcept;
+        [[nodiscard]] const std::vector<SnapshotItem>& snapshotItems() const noexcept {
+            return snapshotItems_;
+        }
 
         /**
          * @brief Returns the viewport associated with this Snapshot.
          *
          * @return A shared pointer to the const Viewport.
          */
-        [[nodiscard]] std::shared_ptr<const helios::rendering::Viewport> viewport() const noexcept;
+        [[nodiscard]] std::shared_ptr<const helios::rendering::Viewport> viewport() const noexcept {
+            return viewport_;
+        }
 
         /**
          * @brief Returns a const reference to the projection matrix for this Snapshot.
@@ -117,7 +126,9 @@ export namespace helios::scene {
          *
          * @return A const reference to the projection matrix used for creating this Snapshot.
          */
-        [[nodiscard]] const helios::math::mat4f& projectionMatrix() const noexcept;
+        [[nodiscard]] const helios::math::mat4f& projectionMatrix() const noexcept {
+            return projectionMatrix_;
+        }
 
         /**
          * @brief Returns a const reference to the view matrix for this Snapshot.
@@ -127,7 +138,9 @@ export namespace helios::scene {
          *
          * @return A const reference to the view matrix used for creating this Snapshot.
          */
-        [[nodiscard]] const helios::math::mat4f& viewMatrix() const noexcept;
+        [[nodiscard]] const helios::math::mat4f& viewMatrix() const noexcept {
+            return viewMatrix_;
+        }
     };
 }
 

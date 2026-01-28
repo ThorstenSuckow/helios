@@ -45,9 +45,9 @@ helios
 │   ├── runtime       # Runtime infrastructure
 │   │   ├── world         # GameWorld, Level, UpdateContext, Manager
 │   │   ├── gameloop      # GameLoop, Phase, Pass
-│   │   ├── pooling       # GameObjectPool, PoolRegistry, PoolFacade
+│   │   ├── pooling       # GameObjectPool, PoolManager, PoolRegistry
 │   │   ├── messaging     # CommandBuffer, Dispatchers, EventBus
-│   │   └── factory       # GameObjectFactory
+│   │   └── spawn         # SpawnManager, SpawnScheduler, behaviors, policies
 │   ├── modules       # Domain-specific components and systems
 │   │   ├── physics       # Collision, motion systems
 │   │   ├── spatial       # Transform components
@@ -382,17 +382,22 @@ while (running) {
 
 **Object Pooling:**
 ```cpp
-import helios.engine.runtime.pooling.GameObjectPool;
+import helios.engine.runtime.pooling.GameObjectPoolManager;
+import helios.engine.runtime.spawn.SpawnManager;
 
-// Create pool for projectiles
-auto pool = std::make_unique<GameObjectPool>();
-gameWorld.addPool(bulletPoolId, std::move(pool));
+// Create pool manager
+auto poolManager = std::make_unique<GameObjectPoolManager>();
 
-// Register manager for spawn/despawn
-gameWorld.addManager<ProjectilePoolManager>(bulletPoolId, factory, spawnCondition);
+// Create spawn manager with profiles
+auto spawnManager = std::make_unique<SpawnManager>();
+spawnManager->addSpawnProfile(enemyProfileId, std::move(enemyProfile));
+
+// Add managers to world
+gameWorld.addManager(std::move(poolManager));
+gameWorld.addManager(std::move(spawnManager));
 ```
 
-See [Component System](core-concepts/component-system.md), [Game Loop Architecture](core-concepts/gameloop-architecture.md), and [Command System](core-concepts/command-system.md) for details.
+See [Component System](core-concepts/component-system.md), [Game Loop Architecture](core-concepts/gameloop-architecture.md), [Command System](core-concepts/command-system.md), and [Spawn System](core-concepts/spawn-system.md) for details.
 
 ### 9. Units System
 
@@ -540,6 +545,7 @@ For detailed information about each module, see:
 - **[Game Loop Architecture](core-concepts/gameloop-architecture.md)** - Phase/Pass structure and event handling
 - **[Command System](core-concepts/command-system.md)** - Deferred action execution
 - **[Event System](core-concepts/event-system.md)** - Phase/Pass event propagation
+- **[Spawn System](core-concepts/spawn-system.md)** - Entity lifecycle with spawn scheduling and pooling
 - **[Scene Graph](core-concepts/scene-graph.md)** - Hierarchical scene organization
 - **[Conventions](core-concepts/conventions.md)** - Coordinate system, units, matrix storage
 
@@ -551,6 +557,7 @@ For detailed information about each module, see:
 - **[Engine](../include/helios/engine/README.md)** - Game engine core (ECS, runtime, modules)
 - **[Modules](../include/helios/engine/modules/README.md)** - Domain-specific components and systems
 - **[Mechanics](../include/helios/engine/mechanics/README.md)** - Gameplay mechanics (combat, spawn, bounds)
+- **[Spawn](../include/helios/engine/runtime/spawn/README.md)** - Spawn scheduling, profiles, and behaviors
 - **[Input](../include/helios/input/README.md)** - Input handling
 - **[Tooling](../include/helios/engine/tooling/README.md)** - Performance metrics and profiling
 - **[Math](../include/helios/math/README.md)** - Mathematical operations

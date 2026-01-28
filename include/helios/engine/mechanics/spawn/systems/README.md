@@ -16,7 +16,7 @@ This module contains the GameObjectSpawnSystem which integrates spawning into th
 
 The GameObjectSpawnSystem performs the following each frame:
 
-1. **Read Frame Events:** Consumes `SpawnPlanRequestExecutedEvent` from the previous frame
+1. **Read Frame Events:** Consumes `SpawnPlanCommandExecutedEvent` from the previous frame
 2. **Commit Completed Spawns:** Updates the scheduler with successful spawn counts
 3. **Evaluate Conditions:** Checks all spawn rules against current conditions
 4. **Drain Scheduled Plans:** Enqueues ready plans as `ScheduledSpawnPlanCommand`

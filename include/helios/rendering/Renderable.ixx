@@ -94,7 +94,18 @@ export namespace helios::rendering {
             std::shared_ptr<const helios::rendering::RenderPrototype> renderPrototype,
             const std::optional<helios::rendering::model::config::MaterialPropertiesOverride>&
             materialOverride = std::nullopt
-        );
+        ) :
+            renderPrototype_(std::move(renderPrototype)),
+            materialOverride_(materialOverride)
+        {
+
+            if (!renderPrototype_) {
+                const std::string msg = "Renderable constructor received a null shared pointer.";
+                logger_.error(msg);
+                throw std::invalid_argument(msg);
+            }
+
+        }
 
 
         /**
@@ -102,7 +113,9 @@ export namespace helios::rendering {
          *
          * @return A shared pointer to the RenderPrototype.
          */
-        [[nodiscard]] std::shared_ptr<const helios::rendering::RenderPrototype> renderPrototype() const noexcept;
+        [[nodiscard]] std::shared_ptr<const helios::rendering::RenderPrototype> renderPrototype() const noexcept {
+            return renderPrototype_;
+        }
 
         /**
          * @brief Returns a const reference to the optional instance-specific MaterialPropertiesOverride.
@@ -113,7 +126,9 @@ export namespace helios::rendering {
          * @return A const reference to the std::optional<MaterialPropertiesOverride>.
          */
 
-        [[nodiscard]] const std::optional<helios::rendering::model::config::MaterialPropertiesOverride>& materialOverride() const noexcept;
+        [[nodiscard]] const std::optional<helios::rendering::model::config::MaterialPropertiesOverride>& materialOverride() const noexcept {
+            return materialOverride_;
+        }
 
         /**
          * @brief Returns a non-const reference to the optional instance-specific MaterialPropertiesOverride.
@@ -123,14 +138,18 @@ export namespace helios::rendering {
          *
          * @return A non-const reference to the std::optional<MaterialPropertiesOverride>.
          */
-        [[nodiscard]] std::optional<helios::rendering::model::config::MaterialPropertiesOverride>& materialOverride() noexcept;
+        [[nodiscard]] std::optional<helios::rendering::model::config::MaterialPropertiesOverride>& materialOverride() noexcept {
+            return materialOverride_;
+        }
 
         /**
          * @brief Returns true if this Renderable was configured with a MaterialPropertiesOverride.
          *
          * @return True if this Renderable was configured with a MaterialPropertiesOverride instance, otherwise false.
          */
-        [[nodiscard]] bool hasMaterialOverride() const noexcept;
+        [[nodiscard]] bool hasMaterialOverride() const noexcept {
+            return materialOverride_.has_value();
+        }
 
 
         /**
@@ -141,7 +160,13 @@ export namespace helios::rendering {
          *
          * @param uniformValueMap Target map receiving the uniform values.
          */
-        void writeUniformValues(helios::rendering::shader::UniformValueMap& uniformValueMap) const noexcept;
+        void writeUniformValues(helios::rendering::shader::UniformValueMap& uniformValueMap) const noexcept {
+            renderPrototype_->material().writeUniformValues(uniformValueMap);
+
+            if (materialOverride_) {
+                materialOverride_->writeUniformValues(uniformValueMap);
+            }
+        }
 
 
 

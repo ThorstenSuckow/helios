@@ -6,6 +6,8 @@ module;
 
 #include <memory>
 #include <stdexcept>
+#include <cassert>
+#include <cmath>
 
 export module helios.input.InputManager;
 
@@ -64,7 +66,8 @@ export namespace helios::input {
          *
          * @param input The InputAdapter used with this InputManager.
          */
-        explicit InputManager(std::unique_ptr<helios::input::InputAdapter> input);
+        explicit InputManager(std::unique_ptr<helios::input::InputAdapter> input)
+            : input_(std::move(input)) {}
 
 
         /**
@@ -74,7 +77,9 @@ export namespace helios::input {
          *
          * @param win A const reference to the window to observe.
          */
-        void observe(const helios::window::Window& win) noexcept;
+        void observe(const helios::window::Window& win) noexcept {
+            observedWin_ = &win;
+        }
 
 
         /**
@@ -84,7 +89,9 @@ export namespace helios::input {
          *
          * @return A non-owning pointer to the currently observed window, or `nullptr`.
          */
-        [[nodiscard]] const helios::window::Window* observedWindow() const;
+        [[nodiscard]] const helios::window::Window* observedWindow() const {
+            return observedWin_;
+        }
 
 
         /**
@@ -100,7 +107,14 @@ export namespace helios::input {
          *
          * @param deltaTime The time elapsed since the last frame, in seconds.
          */
-        void poll(float deltaTime)  noexcept;
+        void poll(float deltaTime)  noexcept {
+            if (observedWin_ != nullptr) {
+                observedWin_->pollEvents();
+            } else {
+                logger_.warn("No window to observe.");
+            }
+            input_->updateGamepadState(gamepadMask_);
+        }
 
 
         /**
@@ -114,7 +128,14 @@ export namespace helios::input {
          *
          * @return True if the key is pressed; returns false if the observed window is not set.
          */
-        [[nodiscard]] bool isKeyPressed(const helios::input::types::Key& key) const noexcept;
+        [[nodiscard]] bool isKeyPressed(const helios::input::types::Key& key) const noexcept {
+            if (observedWin_ == nullptr) {
+                logger_.warn("No window to observe.");
+                return false;
+            }
+
+            return input_->isKeyPressed(key, *observedWin_);
+        }
 
 
         /**
@@ -127,7 +148,22 @@ export namespace helios::input {
          * @return The bitmask this InputManager uses for polling gamepad states. If an invalid
          * mask is provided, the method returns a mask that represents no gamepads.
          */
-        unsigned int registerGamepads(unsigned int gamepadMask) noexcept;
+        unsigned int registerGamepads(unsigned int mask) noexcept {
+            const unsigned int maxMask = static_cast<int>(std::pow(
+                helios::input::types::Gamepad::size_,
+                2.0f
+            ) - 1);
+            assert(mask <= maxMask && "mask out of bounds");
+            if (mask > maxMask) {
+                logger_.warn("Gamepad mask out of bounds. Clamping to maximum valid value.");
+                mask = maxMask;
+            }
+
+
+            gamepadMask_ = mask;
+
+            return gamepadMask_;
+        }
 
 
         /**
@@ -147,7 +183,9 @@ export namespace helios::input {
          * @see isConnected()
          * @see poll()
          */
-        [[nodiscard]] const helios::input::gamepad::GamepadState& gamepadState(helios::input::types::Gamepad gamepadId) const noexcept;
+        [[nodiscard]] const helios::input::gamepad::GamepadState& gamepadState(helios::input::types::Gamepad gamepadId) const noexcept {
+            return input_->gamepadState(gamepadId);
+        }
 
         /**
          * @brief Returns true if the specified gamepad is connected, otherwise false.
@@ -156,7 +194,9 @@ export namespace helios::input {
          *
          * @return True if a gamepad was found for the specified `gamepadId`, otherwise false.
          */
-        [[nodiscard]] bool isConnected(helios::input::types::Gamepad gamepadId) const noexcept;
+        [[nodiscard]] bool isConnected(helios::input::types::Gamepad gamepadId) const noexcept {
+            return input_->isConnected(gamepadId);
+        }
 
 
         /**
@@ -164,7 +204,9 @@ export namespace helios::input {
          *
          * @return A reference to the InputAdapter associated with this InputManager.
          */
-        [[nodiscard]] const helios::input::InputAdapter& inputAdapter() const noexcept;
+        [[nodiscard]] const helios::input::InputAdapter& inputAdapter() const noexcept {
+            return *input_;
+        }
 
         /**
          * @brief Retrieves the InputAdapter associated with this InputManager.
@@ -174,7 +216,9 @@ export namespace helios::input {
          *
          * @return A reference to the InputAdapter associated with this InputManager.
          */
-        [[nodiscard]] helios::input::InputAdapter& inputAdapter() noexcept;
+        [[nodiscard]] helios::input::InputAdapter& inputAdapter() noexcept {
+            return *input_;
+        }
 
     };
 

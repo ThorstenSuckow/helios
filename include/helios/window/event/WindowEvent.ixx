@@ -27,7 +27,8 @@ export namespace helios::window::event {
          *
          * @param sourceGuid The Guid of the Window that triggered the event.
          */
-        explicit WindowEvent(helios::util::Guid sourceGuid);
+        explicit WindowEvent(helios::util::Guid sourceGuid):
+        sourceGuid(sourceGuid)  {}
 
         /**
          * @brief Constructs a new WindowEvent with the specific source Guid and
@@ -36,7 +37,8 @@ export namespace helios::window::event {
          * @param sourceGuid The Guid of the Window that triggered the event.
          * @param tag A `uint64_t` value identifying the specific type of event.
          */
-        explicit WindowEvent(helios::util::Guid sourceGuid, uint64_t tag);
+        explicit WindowEvent(helios::util::Guid sourceGuid, uint64_t tag):
+        Event(tag), sourceGuid(sourceGuid)  {}
 
     public:
 

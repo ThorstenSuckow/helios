@@ -34,7 +34,8 @@ export namespace helios::engine::runtime::spawn::behavior::placements {
          * @brief Returns a random position within the level bounds.
          *
          * @param guid The GUID of the entity being spawned (unused).
-         * @param bounds The level bounds to spawn within.
+         * @param gameObjectBounds The bounding box of the entity to spawn (unused).
+         * @param environmentBounds The level bounds to spawn within.
          * @param cursor The current position within the spawn batch (unused).
          * @param spawnContext Context data (unused).
          *
@@ -42,15 +43,16 @@ export namespace helios::engine::runtime::spawn::behavior::placements {
          */
         helios::math::vec3f getPosition(
             const helios::util::Guid& guid,
-            const helios::math::aabbf& bounds,
+            const helios::math::aabbf& gameObjectBounds,
+            const helios::math::aabbf& environmentBounds,
             const SpawnPlanCursor& cursor,
             const SpawnContext& spawnContext
         ) override {
 
             static auto rGen = helios::util::Random(12345);
 
-            float xPos = rGen.randomFloat(bounds.min()[0], bounds.max()[0]);
-            float yPos = rGen.randomFloat(bounds.min()[1], bounds.max()[1]);
+            float xPos = rGen.randomFloat(environmentBounds.min()[0], environmentBounds.max()[0]);
+            float yPos = rGen.randomFloat(environmentBounds.min()[1], environmentBounds.max()[1]);
 
             return helios::math::vec3f{xPos, yPos, 0.0f};
         }

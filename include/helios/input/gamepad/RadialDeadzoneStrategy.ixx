@@ -4,9 +4,12 @@
  */
 module;
 
+#include <cmath>
+
 export module helios.input.gamepad.RadialDeadzoneStrategy;
 
 import helios.input.gamepad.DeadzoneStrategy;
+import helios.math.utils;
 
 
 export namespace helios::input::gamepad {
@@ -55,7 +58,25 @@ export namespace helios::input::gamepad {
          * @param x Reference to the x-axis value, modified in-place.
          * @param y Reference to the y-axis value, modified in-place.
          */
-        void normalize(float deadzone, float& x, float& y) const noexcept override;
+        void normalize(float deadzone, float& x, float& y) const noexcept override {
+
+            auto len = std::hypot(x, y);
+
+            if (len <= stickNoiseThreshold() || len <= deadzone || deadzone >= 1.0f) {
+                x = 0;
+                y = 0;
+                return;
+            }
+
+            const float clampedLen = len > 1.0f ? 1.0f : len;
+
+            const float normalizedLen = (clampedLen - deadzone)/(1.0f - deadzone);
+
+            const float scale = normalizedLen / len;
+
+            x *= scale;
+            y *= scale;
+        }
 
 
     };

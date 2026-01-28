@@ -9,6 +9,7 @@ module;
 // (VS2022/VS2026) when structured bindings are used with the each() iterator.
 // The workaround is to include it in the global module fragment.
 #include <helios/engine/ecs/query/GameObjectView.h>
+#include <format>
 #include <memory>
 #include <unordered_map>
 #include <string>
@@ -18,7 +19,7 @@ export module helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.Manager;
-import helios.engine.runtime.pooling.SpawnRequestHandler;
+import helios.engine.runtime.spawn.SpawnCommandHandler;
 import helios.engine.ecs.Component;
 import helios.engine.ecs.CloneableComponent;
 
@@ -31,7 +32,7 @@ import helios.engine.runtime.world.Level;
 import helios.engine.ecs.query.GameObjectFilter;
 import helios.engine.core.data.SpawnProfileId;
 
-import helios.engine.runtime.pooling.SpawnRequestHandlerRegistry;
+import helios.engine.runtime.spawn.SpawnCommandHandlerRegistry;
 
 
 
@@ -150,12 +151,14 @@ export namespace helios::engine::runtime::world {
 
 
         /**
-         * @brief Registry mapping pool IDs to their request handlers.
+         * @brief Registry for mapping spawn profiles to their command handlers.
          *
-         * @details Request handlers process spawn/despawn requests for specific pools,
-         * enabling custom lifecycle management per pool type.
+         * @details
+         * Stores the association between SpawnProfileIds and their corresponding
+         * SpawnCommandHandlers. This allows the system to look up the correct handler
+         * (e.g., a specific object pool) when processing spawn commands.
          */
-        helios::engine::runtime::pooling::PoolManagerRegistry poolManagerRegistry_{};
+        helios::engine::runtime::spawn::SpawnCommandHandlerRegistry spawnCommandHandlerRegistry_{};
 
 
 
@@ -248,7 +251,7 @@ export namespace helios::engine::runtime::world {
         }
 
         /**
-         * @brief Registers a SpawnRequestHandler for a specific spawn profile.
+         * @brief Registers a SpawnCommandHandler for a specific spawn profile.
          *
          * @details Associates a handler with a spawn profile ID. The handler processes
          * spawn and despawn requests for entities associated with that profile.
@@ -258,11 +261,11 @@ export namespace helios::engine::runtime::world {
          *
          * @return True if registration succeeded, false if already registered.
          */
-        bool registerSpawnRequestHandler(
+        bool registerSpawnCommandHandler(
             const helios::engine::core::data::SpawnProfileId spawnProfileId,
-            helios::engine::runtime::pooling::SpawnRequestHandler& poolManager
+            helios::engine::runtime::spawn::SpawnCommandHandler& poolManager
         ) {
-            bool added = poolManagerRegistry_.add(spawnProfileId, poolManager);
+            bool added = spawnCommandHandlerRegistry_.add(spawnProfileId, poolManager);
 
             assert(added && "PoolManager already registered");
 
@@ -271,21 +274,21 @@ export namespace helios::engine::runtime::world {
 
 
         /**
-         * @brief Retrieves a SpawnRequestHandler for a specific spawn profile.
+         * @brief Retrieves a SpawnCommandHandler for a specific spawn profile.
          *
-         * @details Used to submit spawn/despawn requests to the handler responsible
+         * @details Used to submit spawn/despawn commands to the handler responsible
          * for a particular spawn profile (e.g., bullet pool, enemy pool).
          *
          * @param spawnProfileId The spawn profile identifier to look up.
          *
          * @return Pointer to the handler, or nullptr if not registered.
          *
-         * @see registerSpawnRequestHandler()
-         * @see SpawnRequestHandler
+         * @see registerSpawnCommandHandler()
+         * @see SpawnCommandHandler
          */
-        [[nodiscard]] helios::engine::runtime::pooling::SpawnRequestHandler* spawnRequestHandler(
+        [[nodiscard]] helios::engine::runtime::spawn::SpawnCommandHandler* spawnCommandHandler(
             const helios::engine::core::data::SpawnProfileId spawnProfileId) {
-            return poolManagerRegistry_.get(spawnProfileId);
+            return spawnCommandHandlerRegistry_.get(spawnProfileId);
         }
 
         /**
@@ -339,7 +342,22 @@ export namespace helios::engine::runtime::world {
          * @note Attempting to add a nullptr or a GameObject with a duplicate Guid will fail,
          *       return nullptr, and log a warning.
          */
-        [[nodiscard]] helios::engine::ecs::GameObject* addGameObject(std::unique_ptr<helios::engine::ecs::GameObject> gameObject);
+        [[nodiscard]] helios::engine::ecs::GameObject* addGameObject(std::unique_ptr<helios::engine::ecs::GameObject> gameObject) {
+            if (!gameObject) {
+                logger_.warn("Attempted to add null GameObject to GameWorld");
+                return nullptr;
+            }
+            if (gameObjects_.contains(gameObject->guid())) {
+                logger_.warn(std::format("GameObject with Guid {} already exists in GameWorld",
+                                         gameObject->guid().value()));
+                return nullptr;
+            }
+
+            auto* ptr = gameObject.get();
+            gameObjects_.emplace(gameObject->guid(), std::move(gameObject));
+
+            return ptr;
+        }
 
         /**
          * @brief Finds a GameObject by its unique identifier.
@@ -353,7 +371,12 @@ export namespace helios::engine::runtime::world {
          *
          * @note This is the non-const overload. Use the const overload for read-only access.
          */
-        [[nodiscard]] helios::engine::ecs::GameObject* find(const helios::util::Guid& guid);
+        [[nodiscard]] helios::engine::ecs::GameObject* find(const helios::util::Guid& guid) {
+            if (auto it = gameObjects_.find(guid); it != gameObjects_.end()) {
+                return it->second.get();
+            }
+            return nullptr;
+        }
 
         /**
          * @brief Finds all GameObjects that have the specified component types.
@@ -440,7 +463,12 @@ export namespace helios::engine::runtime::world {
          *
          * @note This overload is used when the GameWorld is accessed via const reference.
          */
-        [[nodiscard]] const helios::engine::ecs::GameObject* find(const helios::util::Guid& guid) const;
+        [[nodiscard]] const helios::engine::ecs::GameObject* find(const helios::util::Guid& guid) const {
+            if (auto it = gameObjects_.find(guid); it != gameObjects_.end()) {
+                return it->second.get();
+            }
+            return nullptr;
+        }
 
         /**
          * @brief Creates a clone of an existing GameObject.
@@ -464,8 +492,8 @@ export namespace helios::engine::runtime::world {
              */
             newGo->setActive(false);
 
-            for (const auto& component : gameObject.components()) {
-                if (const auto* cc = dynamic_cast<const helios::engine::ecs::Cloneable*>(component.get())) {
+            for (const auto* component : gameObject.components()) {
+                if (const auto* cc = dynamic_cast<const helios::engine::ecs::Cloneable*>(component)) {
                     auto cComponent = cc->clone();
                     // use getOrAdd since cloned components may have already added
                     // other components in onAttach(), which we will not defer for now.
@@ -497,7 +525,17 @@ export namespace helios::engine::runtime::world {
          * @note Attempting to remove a GameObject that doesn't exist returns nullptr
          *       and logs a warning.
          */
-        [[nodiscard]] std::unique_ptr<helios::engine::ecs::GameObject> removeGameObject(const helios::engine::ecs::GameObject& gameObject);
+        [[nodiscard]] std::unique_ptr<helios::engine::ecs::GameObject> removeGameObject(const helios::engine::ecs::GameObject& gameObject) {
+            auto node = gameObjects_.extract(gameObject.guid());
+
+            if (node.empty()) {
+                logger_.warn(std::format("Attempted to remove non-existent GameObject with Guid {} from GameWorld",
+                                         gameObject.guid().value()));
+                return nullptr;
+            }
+
+            return std::move(node.mapped());
+        }
 
         /**
          * @brief Retrieves a const ref to the map of all active GameObjects.

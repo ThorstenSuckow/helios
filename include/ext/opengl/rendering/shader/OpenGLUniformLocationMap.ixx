@@ -7,6 +7,9 @@ module;
 
 #include <array>
 #include <optional>
+#include <cassert>
+#include <format>
+#include <utility>
 
 export module helios.ext.opengl.rendering.shader.OpenGLUniformLocationMap;
 
@@ -77,7 +80,20 @@ export namespace helios::ext::opengl::rendering::shader {
         [[nodiscard]] bool set(
             helios::rendering::shader::UniformSemantics uniformSemantics,
             int position
-        ) noexcept;
+        ) noexcept {
+            assert(position >= 0 && "position must not be less than 0");
+
+            if (position < 0) {
+                logger_.error(std::format("position must not be < 0, was {0}", position));
+                return false;
+            }
+
+            const decltype(sentinel_) index = std::to_underlying(uniformSemantics);
+
+            sentinel_ = (sentinel_ | (decltype(sentinel_){1} << index));
+            map_[std::to_underlying(uniformSemantics)] = position;
+            return true;
+        }
 
         /**
          * @brief Returns the index of the uniform variable for the specified UniformSemantics
@@ -93,7 +109,15 @@ export namespace helios::ext::opengl::rendering::shader {
          * @see glGetUniformLocation
          * @see [KSS17, 47]
          */
-        [[nodiscard]] int get(helios::rendering::shader::UniformSemantics uniformSemantics) const noexcept;
+        [[nodiscard]] int get(helios::rendering::shader::UniformSemantics uniformSemantics) const noexcept {
+            const decltype(sentinel_) index = std::to_underlying(uniformSemantics);
+
+            if (!(sentinel_ & (decltype(sentinel_){1} << index))) {
+                return -1;
+            }
+
+            return map_[index];
+        }
     };
 
 

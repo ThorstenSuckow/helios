@@ -4,13 +4,6 @@
  */
 export module helios.rendering;
 
-/**
- * @brief Rendering system module for graphics rendering infrastructure.
- *
- * @details This module provides the core rendering system including rendering devices,
- * render commands, queues, passes, and vertex definitions. Also exports asset, model,
- * and shader management functionality for comprehensive 3D graphics rendering.
- */
 export import helios.rendering.Vertex;
 export import helios.rendering.RenderQueue;
 export import helios.rendering.RenderPass;

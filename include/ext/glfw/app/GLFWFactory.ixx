@@ -4,13 +4,34 @@
  */
 module;
 
+#include <GLFW/glfw3.h>
+#include <format>
 #include <memory>
 #include <string>
 
 export module helios.ext.glfw.app.GLFWFactory;
 
+import helios.window.Window;
+import helios.window.event.FrameBufferResizeEvent;
+import helios.input.InputManager;
+import helios.input.gamepad.RadialDeadzoneStrategy;
+import helios.event.BasicEventManager;
+import helios.event.DequeEventQueue;
+import helios.event.Dispatcher;
+import helios.app.controller.BasicWindowRenderingController;
+import helios.util.Guid;
+import helios.event.EventManager;
+
 import helios.ext.glfw.app.GLFWApplication;
 import helios.ext.glfw.window.GLFWWindowConfig;
+import helios.ext.glfw.window.GLFWWindowUserPointer;
+import helios.ext.glfw.window.GLFWWindow;
+import helios.ext.glfw.input.GLFWInputAdapter;
+
+import helios.rendering.model.Material;
+import helios.rendering.RenderTarget;
+
+import helios.ext.opengl.rendering.OpenGLDevice;
 
 export namespace helios::ext::glfw::app {
 
@@ -39,7 +60,46 @@ export namespace helios::ext::glfw::app {
             std::string title,
             int width = 800, int height = 600,
             int aspectRatioNumer = 0, int aspectRatioDenom = 0
+        ) {
+            auto openGLDevice = std::make_unique<helios::ext::opengl::rendering::OpenGLDevice>();
+            auto deadzoneStrategy = std::make_unique<helios::input::gamepad::RadialDeadzoneStrategy>();
+            auto inputManager = std::make_unique<helios::input::InputManager>(
+                std::make_unique<helios::ext::glfw::input::GLFWInputAdapter>(std::move(deadzoneStrategy))
             );
+            auto eventManager = std::make_unique<helios::event::BasicEventManager>(
+                std::make_unique<helios::event::DequeEventQueue>(),
+                std::make_unique<helios::event::Dispatcher>()
+            );
+
+            std::unique_ptr<GLFWApplication> app = std::make_unique<GLFWApplication>(
+                std::move(openGLDevice),
+                std::move(inputManager),
+                std::move(eventManager)
+            );
+
+            app->init();
+            auto cfg = makeWindowCfg(
+                std::move(title),
+                width,
+                height,
+                aspectRatioNumer,
+                aspectRatioDenom
+            );
+            auto renderTarget = std::make_unique<helios::rendering::RenderTarget>();
+
+            helios::ext::glfw::window::GLFWWindow& win = app->createWindow(std::move(renderTarget), cfg);
+            app->addController(std::make_unique<helios::app::controller::BasicWindowRenderingController>(win));
+
+            // set the window user pointer so the frameBufferSizeCallback does not break
+            win.setWindowUserPointer(std::make_unique<helios::ext::glfw::window::GLFWWindowUserPointer>(
+                app.get(),
+                &win
+            ));
+
+            app->setCurrent(win);
+
+            return app;
+        }
 
 
         /**
@@ -57,7 +117,33 @@ export namespace helios::ext::glfw::app {
          * @return A `GLFWWindowConfig` object with default properties like height and width.
          */
         static helios::ext::glfw::window::GLFWWindowConfig makeWindowCfg(
-        std::string title, int width = 800, int height = 600,
-        int aspectRatioNumer = 0, int aspectRatioDenom = 0);
+            std::string title, int width = 800, int height = 600,
+            int aspectRatioNumer = 0, int aspectRatioDenom = 0
+        ) {
+            auto cfg             = helios::ext::glfw::window::GLFWWindowConfig{};
+            cfg.title            = std::move(title);
+            cfg.width            = width;
+            cfg.height           = height;
+            cfg.aspectRatioNumer = aspectRatioNumer;
+            cfg.aspectRatioDenom = aspectRatioDenom;
+
+            cfg.frameBufferSizeCallback = [] (GLFWwindow* nativeWin, const int width, const int height) {
+                static const auto evtGuid = helios::util::Guid::generate();
+
+                if (const auto* ptr = static_cast<helios::ext::glfw::window::GLFWWindowUserPointer*>(glfwGetWindowUserPointer(nativeWin))) {
+                    auto event = std::make_unique<helios::window::event::FrameBufferResizeEvent>(
+                        ptr->window->guid(), width, height,
+                        // we will use the window's guid as the tag
+                        ptr->window->guid().value()
+                    );
+                    ptr->application->eventManager().post(
+                        std::move(event),
+                        helios::event::PostPolicy::LATEST_WINS
+                    );
+                }
+            };
+
+            return cfg;
+        }
     };
 }

@@ -23,11 +23,11 @@ export namespace helios::engine::runtime::spawn {
      *     .position = spaceship->position(),
      *     .velocity = spaceship->velocity()
      * };
-     * spawnRequest.emitterContext = ctx;
+     * spawnContext.emitterContext = ctx;
      * ```
      *
      * @see SpawnContext
-     * @see SpawnRequest
+     * @see SpawnCommand
      */
     struct EmitterContext {
 

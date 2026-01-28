@@ -143,6 +143,18 @@ export namespace helios::engine::modules::physics::motion::components {
          */
         bool useInstantAcceleration_ = false;
 
+        /**
+         * @brief Resets this component's properties to default values.
+         */
+        void reset() {
+            currentMovementSpeed_ = 0.0f;
+            stateChanged_ = true;
+            throttle_ = 0.0f;
+            direction_ = {};
+            velocity_ = {};
+            inheritedVelocity_ = {};
+        }
+
     public:
 
         /**
@@ -220,11 +232,29 @@ export namespace helios::engine::modules::physics::motion::components {
             direction_ = direction.toVec2();
             throttle_ = throttle;
 
-            assert(std::abs(direction.length() - 1.0f) <= helios::math::EPSILON_LENGTH && "Unexpected direction vector - not normalized");
+            assert(direction_.isNormalized() && "Unexpected direction vector - not normalized");
 
             stateChanged_ = true;
 
             currentMovementSpeed_ = movementSpeed_ * throttle_;
+        }
+
+        /**
+         * @brief Calls reset() when this Component is acquired.
+         *
+         * @see reset()
+         */
+        void onAcquire() noexcept override {
+            reset();
+        }
+
+        /**
+         * @brief Calls reset() when this Component is released.
+         *
+         * @see reset()
+         */
+        void onRelease() noexcept override {
+            reset();
         }
 
         /**
@@ -234,6 +264,15 @@ export namespace helios::engine::modules::physics::motion::components {
          */
         [[nodiscard]] bool useInstantAcceleration() const noexcept {
             return useInstantAcceleration_;
+        }
+
+        /**
+         * @brief Sets the instant acceleration mode.
+         *
+         * @param useInstantAcceleration True to enable instant acceleration, false for smooth ramping.
+         */
+        void setUseInstantAcceleration(const bool useInstantAcceleration) noexcept {
+            useInstantAcceleration_ = useInstantAcceleration;
         }
 
         /**

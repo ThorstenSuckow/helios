@@ -28,7 +28,7 @@ auto entity = std::make_unique<GameObject>();
 world.addGameObject(std::move(entity));
 
 // Query entities by component
-for (auto* obj : world.find<TransformComponent>()) {
+for (auto* obj : world.find<ComposeTransformComponent>()) {
     // Process matching entities
 }
 ```

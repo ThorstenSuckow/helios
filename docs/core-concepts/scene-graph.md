@@ -149,7 +149,7 @@ moon->rotate(moonRotation);
 
 ## See Also
 
-- [Rendering Pipeline](../rendering-pipeline) - How snapshots become draw calls
-- [Camera](./camera) - Camera setup and projection
-- [API Reference](../api/overview) - Full API documentation
+- [Component System](component-system.md) — ECS architecture with SceneNodeComponent
+- [Conventions](conventions.md) — Coordinate systems and matrix storage
+- [Spawn System](spawn-system.md) — Entity lifecycle with pooling
 

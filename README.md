@@ -226,3 +226,4 @@ This project is inspired by and builds upon concepts from industry-standard game
 - **[Len16]** Lengyel, Eric: Foundations of Game Engine Development (2016), Terathon Software LCC
 - **[Eri05]** Ericson, Christer: Real-Time Collision Detection (2005), CRC Press
 - **[HS99]** Havran, Vlastimil and Sixta, Filip: Comparison of Hierarchical Grids (1999), https://www.realtimerendering.com/resources/RTNews/html//rtnv12n1.html#art3
+- **[Rey99]** Reynolds, Craig W.: Steering Behaviors for Autonomous Characters (1999), https://www.red3d.com/cwr/papers/1999/gdc99steer.pdf

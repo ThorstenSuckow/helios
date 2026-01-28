@@ -8,6 +8,7 @@ export module helios.engine.mechanics.spawn.components.SpawnedByProfileComponent
 
 import helios.engine.ecs.CloneableComponent;
 import helios.engine.core.data.SpawnProfileId;
+import helios.core.types;
 
 export namespace helios::engine::mechanics::spawn::components {
 
@@ -46,7 +47,7 @@ export namespace helios::engine::mechanics::spawn::components {
          *
          * Default-initialized to 0, which represents an invalid/unassigned profile.
          */
-        helios::engine::core::data::SpawnProfileId spawnProfileId_{0};
+        helios::engine::core::data::SpawnProfileId spawnProfileId_{helios::core::types::no_init};
 
     public:
 

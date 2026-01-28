@@ -5,6 +5,8 @@
 module;
 
 #include <memory>
+#include <stdexcept>
+#include <string>
 
 export module helios.rendering.RenderPrototype;
 
@@ -59,7 +61,18 @@ export namespace helios::rendering {
         explicit RenderPrototype(
             std::shared_ptr<const helios::rendering::model::Material> material,
             std::shared_ptr<const helios::rendering::model::Mesh> mesh
-        );
+        ) :
+        material_(std::move(material)),
+        mesh_(std::move(mesh)) {
+
+            if (!material_) {
+                throw std::invalid_argument("RenderPrototype received material nullptr");
+            }
+            if (!mesh_) {
+                throw std::invalid_argument("RenderPrototype received mesh nullptr");
+            }
+
+        }
 
         /**
          * @brief Returns const ref to the immutable Mesh used by this RenderPrototype.
@@ -68,7 +81,9 @@ export namespace helios::rendering {
          * containing geometric data such as vertices and indices used
          * for rendering operations or computational tasks.
          */
-        [[nodiscard]] const helios::rendering::model::Mesh& mesh() const noexcept;
+        [[nodiscard]] const helios::rendering::model::Mesh& mesh() const noexcept {
+            return *mesh_;
+        }
 
 
         /**
@@ -78,7 +93,9 @@ export namespace helios::rendering {
          *
          * @return A const ref to the Material object.
          */
-        [[nodiscard]] const helios::rendering::model::Material& material() const noexcept;
+        [[nodiscard]] const helios::rendering::model::Material& material() const noexcept {
+            return *material_;
+        }
 
     };
 

@@ -32,7 +32,14 @@ export namespace helios::scene {
          */
         void cull(
             std::vector<const helios::scene::SceneNode*>& nodes, const SceneNode& node
-        ) const;
+        ) const {
+            if (node.isActive()) {
+                nodes.push_back(&node);
+            }
+            for (auto& child: node.children()) {
+                cull(nodes, *child);
+            }
+        }
 
 
     public:
@@ -48,7 +55,14 @@ export namespace helios::scene {
          */
         [[nodiscard]] std::vector<const helios::scene::SceneNode*> cull(
             const helios::scene::CameraSceneNode* cameraSceneNode, const helios::scene::SceneNode& root
-        ) override;
+        ) override {
+
+            auto nodes = std::vector<const helios::scene::SceneNode*>();
+
+            cull(nodes, root);
+
+            return nodes;
+        }
 
 
     };

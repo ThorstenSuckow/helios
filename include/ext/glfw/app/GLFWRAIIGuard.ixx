@@ -4,6 +4,9 @@
  */
 module;
 
+#include <GLFW/glfw3.h>
+#include <stdexcept>
+
 export module helios.ext.glfw.app.GLFWRAIIGuard;
 
 export namespace helios::ext::glfw::app {
@@ -26,7 +29,11 @@ export namespace helios::ext::glfw::app {
          *
          * @see https://www.glfw.org/docs/latest/group__init.html#ga317aac130a235ab08c6db0834907d85e
          */
-        GLFWRAIIGuard();
+        GLFWRAIIGuard() {
+            if (glfwInit() == GLFW_FALSE) {
+                throw std::runtime_error("Failed to initialize glfw");
+            }
+        }
 
 
         /**
@@ -34,7 +41,9 @@ export namespace helios::ext::glfw::app {
          *
          * @see https://www.glfw.org/docs/latest/group__init.html#gaaae48c0a18607ea4a4ba951d939f0901
          */
-        ~GLFWRAIIGuard();
+        ~GLFWRAIIGuard() {
+            glfwTerminate();
+        }
 
         /**
          * @brief No copy or move.

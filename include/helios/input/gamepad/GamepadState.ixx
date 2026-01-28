@@ -4,6 +4,9 @@
  */
 module;
 
+#include <algorithm>
+#include <helios/helios_config.h>
+
 export module helios.input.gamepad.GamepadState;
 
 import helios.math.types;
@@ -187,7 +190,13 @@ export namespace helios::input::gamepad {
          * This method should be called when the current values of the axes are queried
          * in vec2f form and `needsUpdate_` evaluates to `true`.
          */
-        void update() const noexcept;
+        void update() const noexcept {
+            left_ = helios::math::vec2f(axisLeftX_, axisLeftY_);
+            right_ = helios::math::vec2f(axisRightX_, axisRightY_);
+            trigger_ = helios::math::vec2f(triggerLeft_, triggerRight_);
+
+            needsUpdate_ = false;
+        }
 
     public:
         ~GamepadState() = default;
@@ -216,7 +225,14 @@ export namespace helios::input::gamepad {
             bool buttonRightThumb, bool buttonDpadUp, bool buttonDpadRight,
             bool buttonDpadDown, bool buttonDpadLeft
 
-        ) noexcept;
+        ) noexcept {
+            updateAxes(
+                axisLeftX, axisLeftY, axisRightX, axisRightY, triggerLeft, triggerRight,
+
+               buttonA, buttonB, buttonX, buttonY, buttonStart, buttonBack, buttonGuide, buttonLeftBumper,
+               buttonRightBumper, buttonLeftThumb, buttonRightThumb, buttonDpadUp, buttonDpadRight,
+               buttonDpadDown, buttonDpadLeft);
+        }
 
 
         /**
@@ -263,7 +279,54 @@ export namespace helios::input::gamepad {
             bool buttonLeftBumper, bool buttonRightBumper, bool buttonLeftThumb,
             bool buttonRightThumb, bool buttonDpadUp, bool buttonDpadRight,
             bool buttonDpadDown, bool buttonDpadLeft
-        ) noexcept;
+        ) noexcept {
+
+            #ifdef HELIOS_DEBUG
+            if(axisLeftX < -1.0f || axisLeftX > 1.0f) {
+                logger_.warn("axisLeftX is out of bounds.");
+            }
+            if(axisLeftY < -1.0f || axisLeftY > 1.0f) {
+                logger_.warn("axisLeftY is out of bounds.");
+            }
+            if(axisRightX < -1.0f || axisRightX > 1.0f) {
+                logger_.warn("axisRightX is out of bounds.");
+            }
+            if(axisRightY < -1.0f || axisRightY > 1.0f) {
+                logger_.warn("axisRightY is out of bounds.");
+            }
+            if(triggerLeft < 0.0f || triggerLeft > 1.0f) {
+                logger_.warn("triggerLeft is out of bounds.");
+            }
+            if(triggerRight < 0.0f || triggerRight > 1.0f) {
+                logger_.warn("triggerRight is out of bounds.");
+            }
+            #endif
+
+            axisLeftX_ = std::clamp(axisLeftX, -1.0f, 1.0f);
+            axisLeftY_ = std::clamp(axisLeftY, -1.0f, 1.0f);
+            axisRightX_ = std::clamp(axisRightX, -1.0f, 1.0f);
+            axisRightY_ = std::clamp(axisRightY, -1.0f, 1.0f);
+            triggerLeft_ = std::clamp(triggerLeft, 0.0f, 1.0f);
+            triggerRight_ = std::clamp(triggerRight, 0.0f, 1.0f);
+
+            buttonA_ = buttonA;
+            buttonB_ = buttonB;
+            buttonX_ = buttonX;
+            buttonY_ = buttonY;
+            buttonStart_ = buttonStart;
+            buttonBack_ = buttonBack;
+            buttonGuide_ = buttonGuide;
+            buttonLeftBumper_ = buttonLeftBumper;
+            buttonRightBumper_ = buttonRightBumper;
+            buttonLeftThumb_ = buttonLeftThumb;
+            buttonRightThumb_ = buttonRightThumb;
+            buttonDpadUp_ = buttonDpadUp;
+            buttonDpadRight_ = buttonDpadRight;
+            buttonDpadDown_ = buttonDpadDown;
+            buttonDpadLeft_ = buttonDpadLeft;
+
+            needsUpdate_ = true;
+        }
 
         /**
          * @brief Returns the current value of the left stick's x-axis.

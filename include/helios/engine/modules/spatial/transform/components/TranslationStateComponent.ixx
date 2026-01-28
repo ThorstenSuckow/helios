@@ -20,7 +20,7 @@ export namespace helios::engine::modules::spatial::transform::components {
      * @details
      * This component stores the accumulated translation vector. It acts as a data
      * container for the ComposeTransformSystem to build the final translation matrix.
-     * It separates the raw position data from the computed TransformComponent.
+     * It separates the raw position data from the computed ComposeTransformComponent.
      */
     class TranslationStateComponent : public helios::engine::ecs::CloneableComponent<TranslationStateComponent> {
 
@@ -43,6 +43,29 @@ export namespace helios::engine::modules::spatial::transform::components {
          */
         explicit TranslationStateComponent(const TranslationStateComponent& other) :
             translation_(other.translation_){
+        }
+
+        /**
+         * @brief Creates a new TranslationStateComponent with the specified translation vector.
+         *
+         * @param translation The translation vector this component should be initialized with.
+         */
+        explicit TranslationStateComponent(const helios::math::vec3f translation) :
+            translation_(translation) {}
+
+        /**
+         * @brief Resets the translation vector to 0-vector when acquired.
+         */
+        void onAcquire() noexcept override{
+            translation_ = helios::math::vec3f{};
+        }
+
+
+        /**
+         * @brief Resets the translation vector to 0-vector when released.
+         */
+        void onRelease() noexcept override {
+            translation_ = helios::math::vec3f{};
         }
 
         /**

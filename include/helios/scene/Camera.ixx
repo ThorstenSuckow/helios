@@ -4,6 +4,8 @@
  */
 module;
 
+#include <cassert>
+
 export module helios.scene.Camera;
 
 import helios.math.utils;
@@ -88,7 +90,10 @@ export namespace helios::scene {
         /**
          * @brief Constructs a camera with identity projection and view matrices.
          */
-        Camera() noexcept;
+        Camera() noexcept :
+            projectionMatrix_(helios::math::mat4f::identity()),
+            viewMatrix_(helios::math::mat4f::identity())
+        {}
 
         /**
          * @brief Gets the current projection matrix.
@@ -97,7 +102,10 @@ export namespace helios::scene {
          *
          * @return A const reference to this camera's projection matrix.
          */
-        [[nodiscard]] const helios::math::mat4f& projectionMatrix() const noexcept;
+        [[nodiscard]] const helios::math::mat4f& projectionMatrix() const noexcept {
+            update();
+            return projectionMatrix_;
+        }
 
         /**
          * @brief Gets the current view matrix.
@@ -106,7 +114,9 @@ export namespace helios::scene {
          *
          * @return A const reference to this camera's view matrix.
          */
-        [[nodiscard]] const helios::math::mat4f& viewMatrix() const noexcept;
+        [[nodiscard]] const helios::math::mat4f& viewMatrix() const noexcept {
+            return viewMatrix_;
+        }
 
         /**
          * @brief Sets the view matrix for this camera.
@@ -120,7 +130,10 @@ export namespace helios::scene {
          *
          * @see helios::scene::CameraSceneNode::worldTransform()
          */
-        Camera& setViewMatrix(const helios::math::mat4f& viewMatrix) noexcept;
+        Camera& setViewMatrix(const helios::math::mat4f& viewMatrix) noexcept {
+            viewMatrix_ = viewMatrix;
+            return *this;
+        }
 
         /**
          * @brief Sets the aspect ratio used by the camera.
@@ -129,7 +142,11 @@ export namespace helios::scene {
          *
          * @return A reference to this camera instance.
          */
-        Camera& setAspectRatio(float aspectRatio) noexcept;
+        Camera& setAspectRatio(float aspectRatio) noexcept {
+            needsUpdate_ = true;
+            aspectRatio_ = aspectRatio;
+            return *this;
+        }
 
         /**
          * @brief Sets the perspective projection parameters.
@@ -141,7 +158,16 @@ export namespace helios::scene {
          *
          * @return A reference to this camera instance.
          */
-        Camera& setPerspective(float fovY, float aspectRatio, float zNear, float zFar) noexcept;
+        Camera& setPerspective(float fovY, float aspectRatio, float zNear, float zFar) noexcept {
+            assert(zNear > 0 && "zNear must be positive");
+            assert(zFar > 0 && zFar > zNear && "zFar must be positive and greater than zNear");
+            fovY_ = fovY;
+            aspectRatio_ = aspectRatio;
+            zNear_ = zNear;
+            zFar_ = zFar;
+            needsUpdate_ = true;
+            return *this;
+        }
 
         /**
          * @brief Sets the near clipping plane distance.
@@ -150,7 +176,11 @@ export namespace helios::scene {
          *
          * @return A reference to this camera instance.
          */
-        Camera& setZNear(float zNear) noexcept;
+        Camera& setZNear(float zNear) noexcept {
+            zNear_ = zNear;
+            needsUpdate_ = true;
+            return *this;
+        }
 
         /**
          * @brief Sets the far clipping plane distance.
@@ -159,7 +189,11 @@ export namespace helios::scene {
          *
          * @return A reference to this camera instance.
          */
-        Camera& setZFar(float zFar) noexcept;
+        Camera& setZFar(float zFar) noexcept {
+            zFar_ = zFar;
+            needsUpdate_ = true;
+            return *this;
+        }
 
         /**
          * @brief Sets the vertical field of view.
@@ -168,35 +202,47 @@ export namespace helios::scene {
          *
          * @return A reference to this camera instance.
          */
-        Camera& setFovY(float fovY) noexcept;
+        Camera& setFovY(float fovY) noexcept {
+            fovY_ = fovY;
+            needsUpdate_ = true;
+            return *this;
+        }
 
         /**
          * @brief Gets the current vertical field of view.
          *
          * @return The vertical field of view in radians.
          */
-        [[nodiscard]] float fovY() const noexcept;
+        [[nodiscard]] float fovY() const noexcept {
+            return fovY_;
+        }
 
         /**
          * @brief Gets the current aspect ratio.
          *
          * @return The aspect ratio (width/height).
          */
-        [[nodiscard]] float aspectRatio() const noexcept;
+        [[nodiscard]] float aspectRatio() const noexcept {
+            return aspectRatio_;
+        }
 
         /**
          * @brief Gets the current near clipping plane distance.
          *
          * @return The near clipping plane distance.
          */
-        [[nodiscard]] float zNear() const noexcept;
+        [[nodiscard]] float zNear() const noexcept {
+            return zNear_;
+        }
 
         /**
          * @brief Gets the current far clipping plane distance.
          *
          * @return The far clipping plane distance.
          */
-        [[nodiscard]] float zFar() const noexcept;
+        [[nodiscard]] float zFar() const noexcept {
+            return zFar_;
+        }
 
     };
 

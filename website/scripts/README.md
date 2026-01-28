@@ -36,6 +36,8 @@ Synchronizes markdown documentation from the repository root into the website's 
 | `examples/game_controller_input/README.md` | `docs/examples/gamepad-input.md` | Gamepad input tutorial |
 | `examples/spaceship_control/README.md` | `docs/examples/spaceship-control.md` | Spaceship control demo |
 | `examples/spaceship_shooting/README.md` | `docs/examples/spaceship-shooting.md` | Twin-stick shooting demo |
+| `examples/enemy_spawn/README.md` | `docs/examples/enemy-spawn.md` | Enemy spawn demo |
+| `examples/collision_detection/README.md` | `docs/examples/collision-detection.md` | Collision detection demo |
 
 **Usage:**
 

@@ -5,9 +5,11 @@
 module;
 
 #include <cstdint>
-#include <compare>
+#include <string_view>
 
 export module helios.engine.core.data.SpawnRuleId;
+
+import helios.core.algorithms;
 
 export namespace helios::engine::core::data {
 
@@ -15,26 +17,31 @@ export namespace helios::engine::core::data {
      * @brief Strongly-typed identifier for SpawnRule instances.
      *
      * @details SpawnRuleId provides type-safe identification for spawn rules,
-     * which combine spawn conditions with spawn profiles to define when and
-     * how entities are spawned. Using a dedicated ID type prevents accidental
-     * misuse of raw integers and enables compile-time enforcement of correct
-     * parameter passing.
+     * which define the conditions under which entities are spawned (timing,
+     * pool limits, etc.). Using a dedicated ID type prevents accidental misuse
+     * and enables compile-time enforcement of correct parameter passing.
      *
      * The ID supports hashing for use in unordered containers and comparison
      * operators for ordered containers.
      *
-     * Example usage:
-     * ```cpp
-     * constexpr SpawnRuleId waveOneRule{1};
-     * constexpr SpawnRuleId bossSpawnRule{2};
+     * ## Construction
      *
-     * std::unordered_map<SpawnRuleId, SpawnRule> rules;
-     * rules[waveOneRule] = createWaveOneRule();
+     * IDs can be constructed from string literals using FNV-1a hashing:
+     * ```cpp
+     * constexpr SpawnRuleId WAVE_RULE{"wave_spawn"};
+     * constexpr SpawnRuleId BOSS_RULE{"boss_spawn"};
+     * ```
+     *
+     * ## Usage
+     *
+     * ```cpp
+     * auto rule = std::make_unique<TimerSpawnRule>(WAVE_RULE, 2.0f, 5);
+     * scheduler.addRule(profileId, std::move(rule));
      * ```
      *
      * @see SpawnRule
      * @see SpawnProfileId
-     * @see SpawnCondition
+     * @see GameObjectPoolId
      */
     struct SpawnRuleId {
 
@@ -45,15 +52,31 @@ export namespace helios::engine::core::data {
          */
         uint32_t id_;
 
-    public:
-
         /**
          * @brief Constructs a SpawnRuleId with the given numeric value.
          *
          * @param id The numeric identifier value.
          */
         explicit constexpr SpawnRuleId(uint32_t id) noexcept
-            : id_(id) {}
+            : id_(id) {
+        }
+
+    public:
+
+        /**
+         * @brief Constructs a SpawnRuleId from a string literal.
+         *
+         * @details Uses FNV-1a hashing to compute a numeric ID from the string.
+         * This enables readable, compile-time constant rule identifiers.
+         *
+         * ```cpp
+         * constexpr SpawnRuleId WAVE_RULE{"wave_spawn"};
+         * ```
+         *
+         * @param str The string to hash into an ID.
+         */
+        explicit constexpr SpawnRuleId(const std::string_view str) noexcept
+            : SpawnRuleId(helios::core::algorithms::fnv1a_hash(str)) {}
 
         /**
          * @brief Returns the underlying numeric value.

@@ -68,21 +68,23 @@ export namespace helios::engine::runtime::gameloop {
          *
          * @param updateContext The current update context.
          */
-        void update(helios::engine::runtime::world::UpdateContext& updateContext) ;
+        void update(helios::engine::runtime::world::UpdateContext& updateContext) {
+            for (auto& sys : systemRegistry_.systems()) {
+                sys->update(updateContext);
+            }
+        }
 
-        /**
-         * @brief Commits pass-level events if a commit point is configured.
-         *
-         * @param updateContext The current update context.
-         */
-        void commit(const CommitPoint commitPoint, helios::engine::runtime::world::UpdateContext& updateContext);
 
         /**
          * @brief Initializes all systems registered in this pass.
          *
          * @param gameWorld Reference to the game world.
          */
-        void init(helios::engine::runtime::world::GameWorld& gameWorld);
+        void init(helios::engine::runtime::world::GameWorld& gameWorld) {
+            for (auto& sys : systemRegistry_.systems()) {
+                sys->init(gameWorld);
+            }
+        }
 
 
         /**

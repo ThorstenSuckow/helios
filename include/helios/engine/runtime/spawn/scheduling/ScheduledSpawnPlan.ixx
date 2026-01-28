@@ -6,6 +6,7 @@ module;
 
 export module helios.engine.runtime.spawn.scheduling.ScheduledSpawnPlan;
 
+import helios.engine.runtime.spawn.SpawnContext;
 import helios.engine.runtime.spawn.scheduling.SpawnPlan;
 import helios.engine.core.data.SpawnProfileId;
 
@@ -35,6 +36,11 @@ export namespace helios::engine::runtime::spawn::scheduling {
          * @brief The spawn plan with rule, amount, and pool information.
          */
         const SpawnPlan spawnPlan;
+
+        /**
+         * @brief The spawn context of the plan.
+         */
+        const SpawnContext spawnContext;
 
     };
 

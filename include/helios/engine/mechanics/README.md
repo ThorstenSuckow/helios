@@ -15,6 +15,15 @@ This module provides the core building blocks for implementing game mechanics. I
 | `spawn/` | Entity spawning and lifecycle management |
 | `input/` | Input processing systems (twin-stick controllers) |
 
+## Key Systems
+
+| System | Purpose |
+|--------|---------|
+| `TwinStickInputSystem` | Translates gamepad input to movement/aim commands |
+| `LevelBoundsBehaviorSystem` | Applies bounce/wrap/despawn at level edges |
+| `ProjectileSpawnSystem` | Spawns projectiles based on weapon state |
+| `GameObjectSpawnSystem` | Executes scheduled spawn plans |
+
 ---
 
 <details>

@@ -16,6 +16,32 @@ This module provides the foundational classes for the composition-based game arc
 | `System` | Abstract base for logic processors (registered with `GameLoop`) |
 | `Updatable` | Interface for per-frame updatable objects |
 
+## Component Storage Model
+
+`GameObject` uses a **type-indexed storage** system for components. Instead of a hash-based lookup, components are stored in a contiguous vector where the index corresponds to the component's compile-time `ComponentTypeId`.
+
+**Performance Characteristics:**
+
+| Operation | Complexity | Notes |
+|-----------|------------|-------|
+| `get<T>()` | O(1) | Direct array access via type ID |
+| `has<T>()` | O(1) | Bounds check + nullptr check |
+| `add<T>()` | O(1) amortized | May trigger resize if type ID exceeds capacity |
+| `components()` | O(1) / O(n) | O(1) if cache valid, O(n) on first access after modification |
+
+**Trade-offs:**
+- **Memory**: Sparse vector with nullptr slots for unused component types.
+- **Speed**: Direct indexing without hash computation or collision handling.
+- **Cache**: Filtered component views are cached and lazily rebuilt.
+
+```cpp
+// Storage layout example (conceptual):
+// Index:      [0]       [1]       [2]       [3]       ...
+// Content:  nullptr  Transform  nullptr   Move2D    ...
+//                       ↑                    ↑
+//           ComponentTypeId::id<Transform>()  ComponentTypeId::id<Move2D>()
+```
+
 ## Submodules
 
 ### query/

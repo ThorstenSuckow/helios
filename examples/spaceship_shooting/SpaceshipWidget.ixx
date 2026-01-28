@@ -1,6 +1,6 @@
 /**
  * @file SpaceshipWidget.ixx
- * @brief ImGui widget for tuning Move2DComponent and HeadingComponent physics parameters at runtime.
+ * @brief ImGui widget for tuning Move2DComponent and SteeringComponent physics parameters at runtime.
  */
 module;
 
@@ -11,11 +11,12 @@ module;
 export module helios.examples.spaceshipShooting.SpaceshipWidget;
 
 import helios.ext.imgui.ImGuiWidget;
-import helios.engine.game.GameObject;
-import helios.engine.game.components.physics.Move2DComponent;
-import helios.engine.game.components.physics.HeadingComponent;
+import helios.engine.ecs.GameObject;
+import helios.engine.modules.physics.motion.components.Move2DComponent;
+import helios.engine.modules.physics.motion.components.SteeringComponent;
 
 using namespace helios::ext::imgui;
+using namespace helios::engine::modules::physics::motion::components;
 
 export namespace helios::examples::spaceshipShooting {
 
@@ -24,7 +25,7 @@ export namespace helios::examples::spaceshipShooting {
      *
      * @details This widget provides sliders and controls for adjusting all
      * configurable physics parameters of a GameObject's Move2DComponent (movement)
-     * and HeadingComponent (rotation).
+     * and SteeringComponent (rotation).
      *
      * Multiple GameObjects can be registered and selected via a dropdown.
      */
@@ -33,13 +34,13 @@ export namespace helios::examples::spaceshipShooting {
     private:
         struct GameObjectEntry {
             std::string name;
-            helios::engine::game::GameObject* gameObject = nullptr;
+            helios::engine::ecs::GameObject* gameObject = nullptr;
         };
 
         std::vector<GameObjectEntry> gameObjects_;
         int selectedIndex_ = 0;
 
-        [[nodiscard]] helios::engine::game::components::physics::Move2DComponent* getSelectedMove2D() noexcept {
+        [[nodiscard]] Move2DComponent* getSelectedMove2D() noexcept {
             if (gameObjects_.empty()) {
                 return nullptr;
             }
@@ -47,10 +48,10 @@ export namespace helios::examples::spaceshipShooting {
                 selectedIndex_ = 0;
             }
             auto* go = gameObjects_[selectedIndex_].gameObject;
-            return go ? go->get<helios::engine::game::components::physics::Move2DComponent>() : nullptr;
+            return go ? go->get<Move2DComponent>() : nullptr;
         }
 
-        [[nodiscard]] helios::engine::game::components::physics::HeadingComponent* getSelectedHeading() noexcept {
+        [[nodiscard]] SteeringComponent* getSelectedHeading() noexcept {
             if (gameObjects_.empty()) {
                 return nullptr;
             }
@@ -58,7 +59,7 @@ export namespace helios::examples::spaceshipShooting {
                 selectedIndex_ = 0;
             }
             auto* go = gameObjects_[selectedIndex_].gameObject;
-            return go ? go->get<helios::engine::game::components::physics::HeadingComponent>() : nullptr;
+            return go ? go->get<SteeringComponent>() : nullptr;
         }
 
     public:
@@ -70,7 +71,7 @@ export namespace helios::examples::spaceshipShooting {
          * @param name Display name for the object in the dropdown.
          * @param gameObject Pointer to the GameObject instance.
          */
-        void addGameObject(const std::string& name, helios::engine::game::GameObject* gameObject) {
+        void addGameObject(const std::string& name, helios::engine::ecs::GameObject* gameObject) {
             gameObjects_.push_back({name, gameObject});
         }
 
@@ -123,7 +124,7 @@ export namespace helios::examples::spaceshipShooting {
             }
 
             if (!move2D && !heading) {
-                ImGui::TextDisabled("Selected object has no Move2DComponent or HeadingComponent.");
+                ImGui::TextDisabled("Selected object has no Move2DComponent or SteeringComponent.");
                 ImGui::End();
                 return;
             }
@@ -165,7 +166,7 @@ export namespace helios::examples::spaceshipShooting {
             }
 
             // ========================================
-            // Rotation Parameters (HeadingComponent)
+            // Rotation Parameters (SteeringComponent)
             // ========================================
             if (heading) {
                 ImGui::Text("Rotation");

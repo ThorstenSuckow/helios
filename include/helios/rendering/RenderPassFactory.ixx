@@ -16,6 +16,7 @@ import helios.rendering.RenderPass;
 import helios.rendering.RenderQueue;
 import helios.rendering.RenderCommand;
 
+import helios.rendering.shader.UniformSemantics;
 import helios.rendering.shader.UniformValueMap;
 
 import helios.util.log.Logger;
@@ -48,7 +49,11 @@ export namespace helios::rendering {
          *
          * @return A reference to the single `RenderPassFactory` instance.
          */
-        static RenderPassFactory& getInstance();
+        static RenderPassFactory& getInstance() {
+            static RenderPassFactory instance;
+
+            return instance;
+        }
 
         /**
          * @brief Builds a `RenderPass` from a given `helios::scene::Snapshot`.
@@ -65,7 +70,25 @@ export namespace helios::rendering {
          *
          * @see ::populateRenderQueue()
          */
-        [[nodiscard]] RenderPass buildRenderPass(const helios::scene::Snapshot& snapshot) const;
+        [[nodiscard]] RenderPass buildRenderPass(const helios::scene::Snapshot& snapshot) const {
+
+            auto renderQueue = std::make_unique<RenderQueue>();
+
+            populateRenderQueue(snapshot, *renderQueue);
+
+            const auto& projectionMatrix = snapshot.projectionMatrix();
+            const auto& viewMatrix = snapshot.viewMatrix();
+
+            auto frameUniformValues = std::make_unique<helios::rendering::shader::UniformValueMap>();
+            frameUniformValues->set(helios::rendering::shader::UniformSemantics::ProjectionMatrix, projectionMatrix);
+            frameUniformValues->set(helios::rendering::shader::UniformSemantics::ViewMatrix, viewMatrix);
+
+            return RenderPass(
+                snapshot.viewport(),
+                std::move(renderQueue),
+                std::move(frameUniformValues)
+            );
+        }
 
         /**
          * @brief Populates an existing `RenderQueue` with `RenderCommand`s based on a `Snapshot`.
@@ -79,7 +102,21 @@ export namespace helios::rendering {
          * @see ::makeRenderCommand()
          */
         void populateRenderQueue(
-            const helios::scene::Snapshot& snapshot, helios::rendering::RenderQueue& renderQueue) const;
+            const helios::scene::Snapshot& snapshot, helios::rendering::RenderQueue& renderQueue) const {
+
+            // clear the queue
+            renderQueue.clear();
+
+            const auto& snapshotItems = snapshot.snapshotItems();
+
+            for (const auto& item : snapshotItems) {
+                auto renderCommand = makeRenderCommand(item);
+                if (renderCommand) {
+                    renderQueue.add(std::move(renderCommand));
+                }
+                // if renderCommand is nullptr, it's already logged in makeRenderCommand, so we skip it
+            }
+        }
 
         /**
          * @brief Creates a single `RenderCommand` from a `helios::scene::SnapshotItem`.
@@ -101,7 +138,38 @@ export namespace helios::rendering {
          * with fluent configuration `.withShader().withMesh().build();`
          */
         [[nodiscard]] std::unique_ptr<RenderCommand> makeRenderCommand(
-            const helios::scene::SnapshotItem& snapshotItem) const noexcept;
+            const helios::scene::SnapshotItem& snapshotItem) const noexcept {
+
+            const auto& renderable = snapshotItem.renderable();
+
+            const auto sharedRenderable = renderable.lock();
+            if (sharedRenderable == nullptr) {
+                logger_.warn("Renderable no longer available");
+                return nullptr;
+            }
+
+            auto objectUniformValues = std::make_unique<helios::rendering::shader::UniformValueMap>();
+            auto materialUniformValues = std::make_unique<helios::rendering::shader::UniformValueMap>();
+            objectUniformValues->set(
+                helios::rendering::shader::UniformSemantics::ModelMatrix,
+                snapshotItem.worldMatrix()
+            );
+
+            // make sure Material writes its uniform values
+            /**
+             * @todo when batching is implemented, this could be refactored
+             * out of this factory method
+             */
+            sharedRenderable->writeUniformValues(*materialUniformValues);
+
+            const auto renderPrototype = sharedRenderable->renderPrototype();
+
+            return std::make_unique<RenderCommand>(
+                renderPrototype,
+                std::move(objectUniformValues),
+                std::move(materialUniformValues)
+            );
+        }
 
     };
 

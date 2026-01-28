@@ -1,6 +1,6 @@
 /**
  * @file ScaleSystem.ixx
- * @brief System for applying scale transformations based on ScaleComponent.
+ * @brief System for applying scale transformations based on ScaleStateComponent.
  */
 module;
 
@@ -17,25 +17,25 @@ import helios.engine.ecs.GameObject;
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
 
-import helios.engine.modules.spatial.transform.components.ScaleComponent;
-import helios.engine.modules.spatial.transform.components.TransformComponent;
+import helios.engine.modules.spatial.transform.components.ScaleStateComponent;
+import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
 
 import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 
 export namespace helios::engine::modules::spatial::transform::systems {
 
     /**
-     * @brief System that applies scaling to entities based on their ScaleComponent.
+     * @brief System that applies scaling to entities based on their ScaleStateComponent.
      *
      * @details
-     * This system converts the desired world-space dimensions from ScaleComponent
+     * This system converts the desired world-space dimensions from ScaleStateComponent
      * into scale factors relative to the model's original AABB. It handles unit
-     * conversion (e.g., centimeters to meters) based on the ScaleComponent's unit.
+     * conversion (e.g., centimeters to meters) based on the ScaleStateComponent's unit.
      *
      * Required components:
-     * - ScaleComponent (desired dimensions and unit)
+     * - ScaleStateComponent (desired dimensions and unit)
      * - ModelAabbComponent (original model bounds)
-     * - TransformComponent (receives scale updates)
+     * - ComposeTransformComponent (receives scale updates)
      */
     class ScaleSystem : public helios::engine::ecs::System {
 
@@ -63,8 +63,8 @@ export namespace helios::engine::modules::spatial::transform::systems {
 
             for (auto [entity, mab, sc, tc] : gameWorld_->find<
                 helios::engine::modules::rendering::model::components::ModelAabbComponent,
-                helios::engine::modules::spatial::transform::components::ScaleComponent,
-                helios::engine::modules::spatial::transform::components::TransformComponent
+                helios::engine::modules::spatial::transform::components::ScaleStateComponent,
+                helios::engine::modules::spatial::transform::components::ComposeTransformComponent
             >().each()) {
 
                 if (!sc->isDirty()) {

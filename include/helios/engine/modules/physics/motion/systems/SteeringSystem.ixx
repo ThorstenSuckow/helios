@@ -17,9 +17,9 @@ import helios.math;
 
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.modules.physics.motion.components.SteeringComponent;
-import helios.engine.modules.spatial.transform.components.TransformComponent;
+import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
 import helios.engine.modules.physics.motion.components.DirectionComponent;
-import helios.engine.modules.physics.motion.components.RotationStateComponent;
+import helios.engine.modules.spatial.transform.components.RotationStateComponent;
 
 import helios.engine.runtime.world.UpdateContext;
 
@@ -120,7 +120,7 @@ export namespace helios::engine::modules::physics::motion::systems {
 
             for (auto [entity, hc, rsc, dc] : gameWorld_->find<
                 helios::engine::modules::physics::motion::components::SteeringComponent,
-                helios::engine::modules::physics::motion::components::RotationStateComponent,
+                helios::engine::modules::spatial::transform::components::RotationStateComponent,
                 helios::engine::modules::physics::motion::components::DirectionComponent
             >().each()) {
 
@@ -140,7 +140,6 @@ export namespace helios::engine::modules::physics::motion::systems {
 
                 }
 
-
                 updateHeading(hc, updateContext.deltaTime());
 
                 float rotationAngle = hc->currentRotationAngle();
@@ -148,7 +147,10 @@ export namespace helios::engine::modules::physics::motion::systems {
                 rsc->setHeadingRotationAxis(hc->rotationAxis());
 
                 float rad = helios::math::radians(rotationAngle);
-                dc->setDirection(helios::math::vec3f{cos(rad), sin(rad), 0.0f});
+
+                if (hc->directionFromSteering()) {
+                    dc->setDirection(helios::math::vec3f{cos(rad), sin(rad), 0.0f});
+                }
 
 
             }

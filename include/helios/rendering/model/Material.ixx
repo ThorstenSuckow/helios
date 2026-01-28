@@ -58,14 +58,27 @@ export namespace helios::rendering::model {
         explicit Material(
             std::shared_ptr<const helios::rendering::shader::Shader> shader,
             std::shared_ptr<const helios::rendering::model::config::MaterialProperties> materialProperties
-        );
+        ) :
+            shader_(std::move(shader)),
+            materialProperties_(std::move(materialProperties))
+        {
+            if (!shader_ || !materialProperties_) {
+                const std::string msg = !shader_ ?
+                                        "Material constructor received a shader nullptr." :
+                                        "Material constructor received a materialProperties nullptr.";
+                logger_.error(msg);
+                throw std::invalid_argument(msg);
+            }
+        }
 
         /**
          * @brief Returns a const reference to the underlying MaterialProperties.
          *
          * @return The const reference to this Material's MaterialProperties.
          */
-        [[nodiscard]] const helios::rendering::model::config::MaterialProperties& materialProperties() const noexcept;
+        [[nodiscard]] const helios::rendering::model::config::MaterialProperties& materialProperties() const noexcept {
+            return *materialProperties_;
+        }
 
 
         /**
@@ -73,7 +86,9 @@ export namespace helios::rendering::model {
          *
          * @return A const ref to the Shader used by this Material.
          */
-        [[nodiscard]] const helios::rendering::shader::Shader& shader() const noexcept;
+        [[nodiscard]] const helios::rendering::shader::Shader& shader() const noexcept {
+            return *shader_;
+        }
 
 
         /**
@@ -83,7 +98,9 @@ export namespace helios::rendering::model {
          *
          * @param uniformValueMap Target map receiving the uniform values.
          */
-        void writeUniformValues(helios::rendering::shader::UniformValueMap& uniformValueMap) const noexcept;
+        void writeUniformValues(helios::rendering::shader::UniformValueMap& uniformValueMap) const noexcept {
+            materialProperties_->writeUniformValues(uniformValueMap);
+        }
     };
 
 } // namespace helios::rendering::model

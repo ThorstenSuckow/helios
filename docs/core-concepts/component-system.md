@@ -75,6 +75,27 @@ auto* health = entity->get<HealthComponent>();
 
 Each GameObject has a unique `Guid` for identification and can be queried efficiently via `GameWorld::find<Components...>()`.
 
+#### Type-Indexed Component Storage
+
+Components are stored in a contiguous vector, indexed by their compile-time `ComponentTypeId`. This provides **O(1) direct access** without hash lookups:
+
+| Operation | Complexity | Description |
+|-----------|------------|-------------|
+| `get<T>()` | O(1) | Direct array access via type ID index |
+| `has<T>()` | O(1) | Bounds check + nullptr comparison |
+| `add<T>()` | O(1) amortized | May resize vector for new type IDs |
+| `components()` | O(1) / O(n) | Cached span; rebuilds on first access after modification |
+
+The vector may contain nullptr entries for component types not attached to a particular GameObject. The `components()` method returns a filtered span of non-null entries.
+
+```cpp
+// Conceptual storage layout:
+// Index:     [0]        [1]        [2]        [3]       ...
+// Content: nullptr  Transform   nullptr    Move2D     ...
+//                      ↑                      ↑
+//     ComponentTypeId::id<Transform>()   ComponentTypeId::id<Move2D>()
+```
+
 ### `System`
 
 Global logic processors that operate on the entire GameWorld. Systems are registered with the **GameLoop** and executed within Phases and Passes.
@@ -109,7 +130,7 @@ helios::engine::runtime::world::GameWorld world;
 auto* player = world.addGameObject(std::move(playerEntity));
 
 // Add managers for deferred processing
-world.addManager<ProjectilePoolManager>(poolId);
+world.addManager(std::move(spawnManager));
 
 // Query entities by component
 for (auto* obj : world.find<Move2DComponent, SceneNodeComponent>()) {
@@ -155,8 +176,8 @@ helios provides several ready-to-use components organized by domain:
 
 | Component | Purpose |
 |-----------|---------|
-| `TransformComponent` | Stores local transform with dirty tracking |
-| `ScaleComponent` | Unit-based sizing using helios units (meters) |
+| `ComposeTransformComponent` | Stores local transform with dirty tracking |
+| `ScaleStateComponent` | Unit-based sizing using helios units (meters) |
 | `TranslationStateComponent` | Translation delta for frame-based movement |
 
 ### Physics/Motion
@@ -182,6 +203,12 @@ helios provides several ready-to-use components organized by domain:
 | `LevelBoundsBehaviorComponent` | Arena boundary interaction (bounce, clamp, wrap, despawn) |
 | `ShootComponent` | Projectile firing with cooldown timer |
 | `Aim2DComponent` | Aiming direction for twin-stick controls |
+
+### Spawn/Pool
+
+| Component | Purpose |
+|-----------|---------|
+| `SpawnedByProfileComponent` | Tracks which spawn profile created this entity |
 
 ### Scene
 
@@ -209,7 +236,7 @@ Systems are organized by their typical Phase placement:
 
 | System | Purpose |
 |--------|---------|
-| `Move2DSystem` | Applies velocity/acceleration to TransformComponent |
+| `Move2DSystem` | Applies velocity/acceleration to ComposeTransformComponent |
 | `HeadingSystem` | Smoothly rotates entities toward target angle |
 | `SpinSystem` | Applies continuous rotation |
 | `BoundsUpdateSystem` | Updates AABB colliders from transforms |
@@ -217,6 +244,8 @@ Systems are organized by their typical Phase placement:
 | `LevelBoundsBehaviorSystem` | Handles boundary collision behaviors |
 | `ComposeTransformSystem` | Composes transform from translation/rotation/scale |
 | `ScaleSystem` | Applies scale changes |
+| `GameObjectSpawnSystem` | Evaluates spawn rules, creates spawn commands |
+| `ProjectileSpawnSystem` | Handles projectile spawning from shoot commands |
 
 ### Post Phase Systems
 
@@ -224,7 +253,6 @@ Systems are organized by their typical Phase placement:
 |--------|---------|
 | `SceneSyncSystem` | Syncs transforms from gameplay to scene graph |
 | `TransformClearSystem` | Clears dirty flags after frame |
-| `ScaleClearSystem` | Clears scale dirty flags |
 
 ## Creating Custom Components
 
@@ -445,3 +473,4 @@ player->add<TwinStickInputComponent>();
 - [Game Loop Architecture](gameloop-architecture.md) — Phase/Pass structure, commit points
 - [Command System](command-system.md) — Deferred action execution
 - [Event System](event-system.md) — Phase/pass event propagation
+- [Spawn System](spawn-system.md) — Entity lifecycle and object pooling

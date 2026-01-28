@@ -5,6 +5,7 @@
 module;
 
 #include <memory>
+#include <cassert>
 
 export module helios.rendering.RenderPass;
 
@@ -98,21 +99,45 @@ export namespace helios::rendering {
             std::shared_ptr<const helios::rendering::Viewport> viewport,
             std::unique_ptr<helios::rendering::RenderQueue> renderQueue,
             std::unique_ptr<const helios::rendering::shader::UniformValueMap> frameUniformValues = nullptr
-            ) noexcept;
+            ) noexcept
+            :
+            viewport_(std::move(viewport)),
+            renderQueue_(std::move(renderQueue)),
+            frameUniformValues_(std::move(frameUniformValues)) {
+
+            if (!viewport_) {
+                logger_.error("Constructor received a nullptr Viewport. Creating a default empty Viewport.");
+                viewport_ = std::make_shared<Viewport>();
+            }
+
+            if (!renderQueue_) {
+                logger_.error("Constructor received a nullptr RenderQueue. Creating a default empty queue.");
+                renderQueue_ = std::make_unique<helios::rendering::RenderQueue>();
+            }
+
+            if (!frameUniformValues_) {
+                logger_.warn("Constructor received a nullptr UniformValueMap. Creating a default empty map.");
+                frameUniformValues_ = std::make_unique<helios::rendering::shader::UniformValueMap>();
+            }
+        }
 
         /**
          * @brief Returns a const ref to the `RenderQueue` this `RenderPass` holds.
          *
          * @return A const ref to this `RenderPass`' `RenderQueue`.
          */
-        [[nodiscard]] const RenderQueue& renderQueue() const noexcept;
+        [[nodiscard]] const RenderQueue& renderQueue() const noexcept {
+            return *renderQueue_;
+        }
 
         /**
          * @brief Returns a const ref to the `Viewport` this `RenderPass` holds.
          *
          * @return A const ref to this `RenderPass`' `Viewport`.
          */
-        [[nodiscard]] const Viewport& viewport() const noexcept;
+        [[nodiscard]] const Viewport& viewport() const noexcept {
+            return *viewport_;
+        }
 
         /**
          * @brief Sets this `RenderPass`' `UniformValueMap` containing per-frame specific uniform values.
@@ -120,7 +145,9 @@ export namespace helios::rendering {
          *
          * @param frameUniformValues A unique ptr to the `UniformValueMap` for frame specific uniform values.
          */
-        void setFrameUniformValues(std::unique_ptr<const helios::rendering::shader::UniformValueMap> frameUniformValues) noexcept;
+        void setFrameUniformValues(std::unique_ptr<const helios::rendering::shader::UniformValueMap> frameUniformValues) noexcept {
+            frameUniformValues_ = std::move(frameUniformValues);
+        }
 
         /**
          * @brief Returns a const reference to this `RenderPass`' `UniformValueMap`.
@@ -129,7 +156,9 @@ export namespace helios::rendering {
          *
          * @return A const reference to this `RenderPass`' `UniformValueMap` for the current frame.
          */
-        [[nodiscard]] const helios::rendering::shader::UniformValueMap& frameUniformValues() const noexcept;
+        [[nodiscard]] const helios::rendering::shader::UniformValueMap& frameUniformValues() const noexcept {
+            return *frameUniformValues_;
+        }
     };
 
 

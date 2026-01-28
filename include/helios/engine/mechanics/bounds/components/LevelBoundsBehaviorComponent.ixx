@@ -13,6 +13,8 @@ import helios.engine.ecs.CloneableComponent;
 
 import helios.engine.modules.physics.collision.types.CollisionBehavior;
 
+import helios.engine.modules.physics.collision.types.CollisionResponse;
+
 export namespace helios::engine::mechanics::bounds::components {
 
 
@@ -45,6 +47,8 @@ export namespace helios::engine::mechanics::bounds::components {
          */
         helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior_ = helios::engine::modules::physics::collision::types::CollisionBehavior::Bounce;
 
+        helios::engine::modules::physics::collision::types::CollisionResponse collisionResponse_ = helios::engine::modules::physics::collision::types::CollisionResponse::None;
+
     public:
 
         /**
@@ -61,8 +65,11 @@ export namespace helios::engine::mechanics::bounds::components {
          * @param collisionBehavior The collision behavior type (default: Reflect).
          */
         explicit LevelBoundsBehaviorComponent(
-            const helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior = helios::engine::modules::physics::collision::types::CollisionBehavior::Reflect) :
-        collisionBehavior_(collisionBehavior){}
+            const helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior = helios::engine::modules::physics::collision::types::CollisionBehavior::Reflect,
+            const helios::engine::modules::physics::collision::types::CollisionResponse collisionResponse = helios::engine::modules::physics::collision::types::CollisionResponse::None) :
+        collisionBehavior_(collisionBehavior),
+        collisionResponse_(collisionResponse)
+        {}
 
         /**
          * @brief Copy constructor.
@@ -71,7 +78,8 @@ export namespace helios::engine::mechanics::bounds::components {
          */
         explicit LevelBoundsBehaviorComponent(const LevelBoundsBehaviorComponent& other) :
         restitution_(other.restitution_),
-        collisionBehavior_(other.collisionBehavior_)
+        collisionBehavior_(other.collisionBehavior_),
+        collisionResponse_(other.collisionResponse_)
         {}
 
         /**
@@ -90,6 +98,33 @@ export namespace helios::engine::mechanics::bounds::components {
          */
         [[nodiscard]] helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior() const noexcept {
             return collisionBehavior_;
+        }
+
+        /**
+         * @brief Retrieves the collision response type.
+         *
+         * @return The collision response type (e.g., None, Event).
+         */
+        [[nodiscard]] helios::engine::modules::physics::collision::types::CollisionResponse collisionResponse() const noexcept {
+            return collisionResponse_;
+        }
+
+        /**
+         * @brief Sets the collision response type.
+         *
+         * @param collisionResponse The new collision response to set.
+         */
+        void setCollisionResponse(const helios::engine::modules::physics::collision::types::CollisionResponse collisionResponse) noexcept {
+            collisionResponse_ = collisionResponse;
+        }
+
+        /**
+         * @brief Sets the collision behavior type.
+         *
+         * @param collisionBehavior The new collision behavior to set.
+         */
+        void setCollisionBehavior(const helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior) noexcept {
+            collisionBehavior_ = collisionBehavior;
         }
 
         /**

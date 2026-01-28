@@ -36,7 +36,8 @@ export namespace helios::engine::runtime::spawn::behavior::placements {
          * @brief Returns the emitter's position.
          *
          * @param guid The GUID of the entity being spawned (unused).
-         * @param bounds The level bounds (unused).
+         * @param gameObjectBounds The bounding box of the entity to spawn (unused).
+         * @param environmentBounds The level bounds (unused).
          * @param cursor The current position within the spawn batch (unused).
          * @param spawnContext Context containing the emitter information.
          *
@@ -46,7 +47,8 @@ export namespace helios::engine::runtime::spawn::behavior::placements {
          */
         helios::math::vec3f getPosition(
             const helios::util::Guid& guid,
-            const helios::math::aabbf& bounds,
+            const helios::math::aabbf& gameObjectBounds,
+            const helios::math::aabbf& environmentBounds,
             const SpawnPlanCursor& cursor,
             const SpawnContext& spawnContext
         ) override {

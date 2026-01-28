@@ -9,7 +9,6 @@ module;
 export module helios.engine.runtime.spawn.dispatcher.SpawnCommandDispatcher;
 
 import helios.engine.runtime.spawn.commands.SpawnCommand;
-import helios.engine.runtime.spawn.requests.SpawnRequest;
 import helios.engine.runtime.messaging.command.TypedWorldCommandDispatcher;
 import helios.engine.runtime.world.GameWorld;
 
@@ -20,8 +19,8 @@ export namespace helios::engine::runtime::spawn::dispatcher {
      * @brief Dispatcher that routes SpawnCommands to the appropriate handler.
      *
      * @details SpawnCommandDispatcher is a typed command dispatcher that handles
-     * SpawnCommand instances. When a SpawnCommand is dispatched, it creates a
-     * SpawnRequest and submits it to the pool's registered SpawnRequestHandler.
+     * SpawnCommand instances. When a SpawnCommand is dispatched, it submits the
+     * command directly to the pool's registered SpawnCommandHandler.
      *
      * This enables the command-based spawn architecture where the GameObjectSpawnSystem
      * emits SpawnCommands that are later processed by the SpawnManager during the
@@ -29,7 +28,7 @@ export namespace helios::engine::runtime::spawn::dispatcher {
      *
      * @see SpawnCommand
      * @see SpawnManager
-     * @see SpawnRequestHandler
+     * @see SpawnCommandHandler
      */
     class SpawnCommandDispatcher final : public helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher<
         helios::engine::runtime::spawn::commands::SpawnCommand> {
@@ -37,10 +36,10 @@ export namespace helios::engine::runtime::spawn::dispatcher {
     protected:
 
         /**
-         * @brief Dispatches a SpawnCommand by creating a SpawnRequest.
+         * @brief Dispatches a SpawnCommand to the registered handler.
          *
-         * @details Creates a SpawnRequest from the command and submits it to
-         * the pool's registered SpawnRequestHandler for deferred processing.
+         * @details Looks up the SpawnCommandHandler for the command's profile ID
+         * and submits the command directly for deferred processing.
          *
          * @param gameWorld The game world containing the pool.
          * @param command The SpawnCommand to dispatch.
@@ -50,17 +49,10 @@ export namespace helios::engine::runtime::spawn::dispatcher {
             const helios::engine::runtime::spawn::commands::SpawnCommand& command
         ) noexcept override {
 
-
             auto spawnProfileId = command.spawnProfileId();
 
-            auto* spawnRequestHandler = gameWorld.spawnRequestHandler(spawnProfileId);
-
-            if (spawnRequestHandler) {
-                helios::engine::runtime::spawn::requests::SpawnRequest spawnRequest(
-                    spawnProfileId, command.spawnContext()
-                );
-
-                spawnRequestHandler->submit(spawnRequest);
+            if (auto* spawnCommandHandler = gameWorld.spawnCommandHandler(spawnProfileId)) {
+                spawnCommandHandler->submit(command);
             }
         };
 

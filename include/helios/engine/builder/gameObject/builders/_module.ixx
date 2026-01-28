@@ -17,4 +17,5 @@ export import helios.engine.builder.gameObject.builders.EffectsBuilder;
 export import helios.engine.builder.gameObject.builders.SpawnBuilder;
 export import helios.engine.builder.gameObject.builders.AiBuilder;
 export import helios.engine.builder.gameObject.builders.ShootingBuilder;
+export import helios.engine.builder.gameObject.builders.LifecycleBuilder;
 

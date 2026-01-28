@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_2acd3dbde9e4306e7ed99cd763cdf058" kind="dir">
+    <compoundname>events</compoundname>
+    <innerfile refid="helios_2engine_2runtime_2spawn_2events_2__module_8ixx">helios/engine/runtime/spawn/events/_module.ixx</innerfile>
+    <innerfile refid="SpawnPlanCommandExecutedEvent_8ixx">SpawnPlanCommandExecutedEvent.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_2acd3dbde9e4306e7ed99cd763cdf058_1autotoc_md405">
+<title>helios::engine::runtime::spawn::events</title><para>Spawn-related events for cross-frame communication.</para>
+</sect1>
+<sect1 id="dir_2acd3dbde9e4306e7ed99cd763cdf058_1autotoc_md406">
+<title>Overview</title><para>This module provides events that are pushed to the frame event bus to enable communication between the spawn system and the scheduling system.</para>
+</sect1>
+<sect1 id="dir_2acd3dbde9e4306e7ed99cd763cdf058_1autotoc_md407">
+<title>Key Classes</title><para><table rows="2" cols="2"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SpawnPlanCommandExecutedEvent</computeroutput>  </para>
+</entry><entry thead="no"><para>Signals that a spawn plan command was executed  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_2acd3dbde9e4306e7ed99cd763cdf058_1autotoc_md408">
+<title>Usage</title><para>Events are pushed by the SpawnManager after processing spawn commands:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>In<sp/>SpawnManager::flush()</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">updateContext.pushFrame&lt;SpawnPlanCommandExecutedEvent&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>spawnRuleId,<sp/>actualSpawnCount</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+</programlisting></para>
+<para>Events are read by the GameObjectSpawnSystem in the next frame:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>In<sp/>GameObjectSpawnSystem::update()</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>evt<sp/>:<sp/>updateContext.readFrame&lt;SpawnPlanCommandExecutedEvent&gt;())<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>spawnScheduler_-&gt;commit(evt.spawnRuleId,<sp/>evt.spawnCount);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/runtime/spawn/events/"/>
+  </compounddef>
+</doxygen>

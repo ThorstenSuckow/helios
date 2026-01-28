@@ -1,7 +1,9 @@
 var namespacehelios_1_1math =
 [
     [ "concepts", "namespacehelios_1_1math_1_1concepts.html", null ],
-    [ "transform", "namespacehelios_1_1math_1_1transform.html", null ],
+    [ "transform", "namespacehelios_1_1math_1_1transform.html", [
+      [ "make_rodrigues_rotation_matrix", "namespacehelios_1_1math_1_1transform.html#aed2b59ad3f79109cab95495e9f3546c5", null ]
+    ] ],
     [ "types", "namespacehelios_1_1math_1_1types.html", null ],
     [ "aabb", "structhelios_1_1math_1_1aabb.html", "structhelios_1_1math_1_1aabb" ],
     [ "mat4", "structhelios_1_1math_1_1mat4.html", "structhelios_1_1math_1_1mat4" ],
@@ -60,5 +62,7 @@ var namespacehelios_1_1math =
     [ "value_ptr", "namespacehelios_1_1math.html#afba89a2aa6938d85fd8be3974a9aed36", null ],
     [ "value_ptr", "namespacehelios_1_1math.html#a581fd38f8554d49c33a42b46255cc983", null ],
     [ "EPSILON_LENGTH", "namespacehelios_1_1math.html#af25d93f23f91acae02abfd7706b2e36d", null ],
+    [ "X_AXISf", "namespacehelios_1_1math.html#a3b36cdff48bf8406427da0da013b8b1e", null ],
+    [ "Y_AXISf", "namespacehelios_1_1math.html#a8cb936aa97c8e1e42cad8ba875a7634c", null ],
     [ "Z_AXISf", "namespacehelios_1_1math.html#a64379fe55f1794fad912feafd5051224", null ]
 ];

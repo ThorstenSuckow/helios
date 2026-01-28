@@ -1,13 +1,17 @@
 var module__helios_8engine_8modules_8physics_8motion_8components_8Move2DComponent =
 [
     [ "Move2DComponent", "classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent.html", "classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent" ],
+    [ "helios::engine::modules::physics::motion::components::Move2DComponent::reset", "module__helios_8engine_8modules_8physics_8motion_8components_8Move2DComponent.html#a745a8663a434c916e61e3bf63530cc34", null ],
     [ "helios::engine::modules::physics::motion::components::Move2DComponent::Move2DComponent", "module__helios_8engine_8modules_8physics_8motion_8components_8Move2DComponent.html#a7d160a626c9d8b54d8cbf881332e6df4", null ],
     [ "helios::engine::modules::physics::motion::components::Move2DComponent::Move2DComponent", "module__helios_8engine_8modules_8physics_8motion_8components_8Move2DComponent.html#ab748cccde8459bf45d44da8412e5d6d3", null ],
     [ "helios::engine::modules::physics::motion::components::Move2DComponent::Move2DComponent", "module__helios_8engine_8modules_8physics_8motion_8components_8Move2DComponent.html#a572186204ffd98c635c0442057280657", null ],
     [ "helios::engine::modules::physics::motion::components::Move2DComponent::Move2DComponent", "module__helios_8engine_8modules_8physics_8motion_8components_8Move2DComponent.html#a9bc38aeec725651b6baf75b74c91ed10", null ],
     [ "helios::engine::modules::physics::motion::components::Move2DComponent::move", "module__helios_8engine_8modules_8physics_8motion_8components_8Move2DComponent.html#ad0446785c240392406ac661bb3545615", null ],
     [ "helios::engine::modules::physics::motion::components::Move2DComponent::setMoveIntent", "module__helios_8engine_8modules_8physics_8motion_8components_8Move2DComponent.html#aa1f4491a3cb463f1af0145b4e70815a7", null ],
+    [ "helios::engine::modules::physics::motion::components::Move2DComponent::onAcquire", "module__helios_8engine_8modules_8physics_8motion_8components_8Move2DComponent.html#a9808fb82250d10b4fd5b0c1bdddfb477", null ],
+    [ "helios::engine::modules::physics::motion::components::Move2DComponent::onRelease", "module__helios_8engine_8modules_8physics_8motion_8components_8Move2DComponent.html#a93c9ddd73f4bc59cdf99cab98418f950", null ],
     [ "helios::engine::modules::physics::motion::components::Move2DComponent::useInstantAcceleration", "module__helios_8engine_8modules_8physics_8motion_8components_8Move2DComponent.html#a034585ef8aed5c20e14800a8e800a54e", null ],
+    [ "helios::engine::modules::physics::motion::components::Move2DComponent::setUseInstantAcceleration", "module__helios_8engine_8modules_8physics_8motion_8components_8Move2DComponent.html#a8043dbb6eb0fc21f6a4b3471bddf8d5c", null ],
     [ "helios::engine::modules::physics::motion::components::Move2DComponent::setInheritedVelocity", "module__helios_8engine_8modules_8physics_8motion_8components_8Move2DComponent.html#a6cff1721356e23d61f79597c9afd6dc4", null ],
     [ "helios::engine::modules::physics::motion::components::Move2DComponent::inheritedVelocity", "module__helios_8engine_8modules_8physics_8motion_8components_8Move2DComponent.html#a790fd6c897233d47c9171f342d5f513c", null ],
     [ "helios::engine::modules::physics::motion::components::Move2DComponent::setVelocity", "module__helios_8engine_8modules_8physics_8motion_8components_8Move2DComponent.html#a73516973fd70a5c7caa84a8b0d2893d0", null ],

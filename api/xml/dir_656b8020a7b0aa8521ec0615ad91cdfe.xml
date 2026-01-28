@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_656b8020a7b0aa8521ec0615ad91cdfe" kind="dir">
+    <compoundname>scene</compoundname>
+    <innerdir refid="dir_fd2aad167166b7c05ae381ec9356c22e">components</innerdir>
+    <innerdir refid="dir_ecc8c78a9a3196411b3443247737022f">systems</innerdir>
+    <innerfile refid="helios_2engine_2modules_2scene_2__module_8ixx">helios/engine/modules/scene/_module.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_656b8020a7b0aa8521ec0615ad91cdfe_1autotoc_md312">
+<title>helios::engine::modules::scene</title><para>Scene graph integration for game entities.</para>
+<para>This module provides components and systems that bridge the game logic layer (GameObjects) with the rendering layer (SceneNodes).</para>
+</sect1>
+<sect1 id="dir_656b8020a7b0aa8521ec0615ad91cdfe_1autotoc_md313">
+<title>Submodules</title><para><table rows="3" cols="2"><row>
+<entry thead="yes"><para>Submodule  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>components/</computeroutput>  </para>
+</entry><entry thead="no"><para>Scene node reference components  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>systems/</computeroutput>  </para>
+</entry><entry thead="no"><para>Transform synchronization with scene graph  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_656b8020a7b0aa8521ec0615ad91cdfe_1autotoc_md314">
+<title>Key Classes</title><para><table rows="3" cols="2"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SceneNodeComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Holds reference to the entity&apos;s SceneNode  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SceneSyncSystem</computeroutput>  </para>
+</entry><entry thead="no"><para>Syncs composed transforms to SceneNodes each frame  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_656b8020a7b0aa8521ec0615ad91cdfe_1autotoc_md315">
+<title>Architecture</title><para>The scene module bridges two layers:</para>
+<para><itemizedlist>
+<listitem><para><bold>Game Layer</bold>: GameObjects with ComposeTransformComponent</para>
+</listitem><listitem><para><bold>Render Layer</bold>: SceneNodes with world transforms</para>
+</listitem></itemizedlist>
+</para>
+<para><computeroutput>SceneSyncSystem</computeroutput> copies the composed transform matrix from each GameObject to its associated SceneNode, keeping the visual representation in sync with game state.</para>
+</sect1>
+<sect1 id="dir_656b8020a7b0aa8521ec0615ad91cdfe_1autotoc_md316">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Create<sp/>scene<sp/>node<sp/>for<sp/>entity</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>sceneNode<sp/>=<sp/>scene.rootNode().createChild();</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Create<sp/>entity<sp/>with<sp/>scene<sp/>integration</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>player<sp/>=<sp/>GameObjectFactory::gameObject()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withRendering([&amp;](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>r)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>r.renderable()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.shape(triangleShape)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.shader(shader)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.attachTo(sceneNode);<sp/><sp/></highlight><highlight class="comment">//<sp/>Links<sp/>to<sp/>SceneNode</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.make(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>SceneNodeComponent<sp/>is<sp/>added<sp/>automatically<sp/>by<sp/>RenderingBuilder</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Manual<sp/>access<sp/>if<sp/>needed:</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>snc<sp/>=<sp/>player-&gt;get&lt;SceneNodeComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classhelios_1_1scene_1_1SceneNode" kindref="compound">helios::scene::SceneNode</ref>*<sp/>node<sp/>=<sp/>snc-&gt;sceneNode();</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Register<sp/>sync<sp/>system<sp/>in<sp/>Post<sp/>phase</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">gameLoop.phase(PhaseType::Post).addPass()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addSystem&lt;SceneSyncSystem&gt;(&amp;gameWorld,<sp/>&amp;scene);</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/modules/scene/"/>
+  </compounddef>
+</doxygen>

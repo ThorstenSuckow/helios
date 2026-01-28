@@ -4,54 +4,52 @@
     <compoundname>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</compoundname>
     <basecompoundref refid="classhelios_1_1engine_1_1ecs_1_1System" prot="public" virt="non-virtual">helios::engine::ecs::System</basecompoundref>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1a8f1ca8291bd44a251ed88c22ff8e1d27" prot="private" static="no" mutable="no">
-        <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler" kindref="compound">helios::engine::runtime::spawn::scheduling::SpawnScheduler</ref> &gt;</type>
-        <definition>std::unique_ptr&lt;helios::engine::runtime::spawn::scheduling::SpawnScheduler&gt; helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::spawnScheduler_</definition>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1ae526d17278bc1ddac71c15c58e133f79" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler" kindref="compound">helios::engine::runtime::spawn::scheduling::SpawnScheduler</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::unique_ptr&lt;helios::engine::runtime::spawn::scheduling::SpawnScheduler&gt; &gt; helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::spawnSchedulers_</definition>
         <argsstring></argsstring>
-        <name>spawnScheduler_</name>
-        <qualifiedname>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::spawnScheduler_</qualifiedname>
+        <name>spawnSchedulers_</name>
+        <qualifiedname>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::spawnSchedulers_</qualifiedname>
         <briefdescription>
-<para>The scheduler that manages spawn rules and conditions. </para>
+<para>Collection of schedulers that manage spawn rules and conditions. </para>
         </briefdescription>
         <detaileddescription>
-<para>Owns and evaluates all registered spawn rules. When conditions are met, the scheduler produces ScheduledSpawnPlan instances for execution. </para>
+<para>Each scheduler owns and evaluates its registered spawn rules independently. When conditions are met, the scheduler produces ScheduledSpawnPlan instances for execution. Multiple schedulers allow grouping spawn rules by category (e.g., enemies, powerups, projectiles). </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="66" column="25" bodyfile="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="66" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="74" column="21" bodyfile="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="74" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1a822b2efc063d0a116d4fa229676b3cd7" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1adf86cf3e07d18b3aabe3bc3278385ca1" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
         <definition>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::GameObjectSpawnSystem</definition>
-        <argsstring>(std::unique_ptr&lt; helios::engine::runtime::spawn::scheduling::SpawnScheduler &gt; spawnScheduler)</argsstring>
+        <argsstring>(std::vector&lt; std::unique_ptr&lt; helios::engine::runtime::spawn::scheduling::SpawnScheduler &gt; &gt; spawnSchedulers)</argsstring>
         <name>GameObjectSpawnSystem</name>
         <qualifiedname>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem::GameObjectSpawnSystem</qualifiedname>
         <param>
-          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler" kindref="compound">helios::engine::runtime::spawn::scheduling::SpawnScheduler</ref> &gt;</type>
-          <declname>spawnScheduler</declname>
+          <type>std::vector&lt; std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1scheduling_1_1SpawnScheduler" kindref="compound">helios::engine::runtime::spawn::scheduling::SpawnScheduler</ref> &gt; &gt;</type>
+          <declname>spawnSchedulers</declname>
         </param>
         <briefdescription>
-<para>Constructs a <ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem" kindref="compound">GameObjectSpawnSystem</ref> with the given scheduler. </para>
+<para>Constructs a <ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem" kindref="compound">GameObjectSpawnSystem</ref> with the given schedulers. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>spawnScheduler</parametername>
+<parametername>spawnSchedulers</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The scheduler managing spawn rules. Ownership transferred.</para>
+<para>Vector of schedulers managing spawn rules. Ownership of all schedulers is transferred to this system. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="pre"><para>spawnScheduler must not be null. </para>
-</simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="77" column="18" bodyfile="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="77" bodyend="83"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="84" column="18" bodyfile="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="84" bodyend="87"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1a69d47de2e4bae743dab2fc03349b3902" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -68,7 +66,7 @@
 <para>Processes spawn scheduling and enqueues spawn commands. </para>
         </briefdescription>
         <detaileddescription>
-<para>Performs the following steps: 1. Reads `SpawnPlanRequestExecutedEvent` from frame event bus 2. Commits completed spawns to the scheduler (for tracking/cooldowns) 3. Evaluates all spawn rules against current conditions 4. Drains ready spawn plans and enqueues them as commands</para>
+<para>Iterates through all schedulers and performs these steps for each: 1. Reads `SpawnPlanCommandExecutedEvent` from frame event bus 2. Commits completed spawns to the scheduler (for tracking/cooldowns) 3. Evaluates all spawn rules against current conditions 4. Drains ready spawn plans and enqueues them as commands</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>updateContext</parametername>
@@ -81,30 +79,32 @@
 </para>
         </detaileddescription>
         <inbodydescription>
+<para><xrefsect id="todo_1_todo000010"><xreftitle>Todo</xreftitle><xrefdescription><para>this should be processed before iterating over all schedulers: A scheduler owns the rule, hence a rule that triggered the event&apos;s can be associated with the owning Scheduler, making it unneccesary to iterate over already processed events </para>
+</xrefdescription></xrefsect></para>
         </inbodydescription>
-        <location file="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="96" column="14" bodyfile="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="96" bodyend="116"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="100" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="100" bodyend="130"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
 <para>System that evaluates spawn conditions and enqueues spawn commands. </para>
     </briefdescription>
     <detaileddescription>
-<para><ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem" kindref="compound">GameObjectSpawnSystem</ref> bridges the spawn scheduling logic with the command-based spawning pipeline. It performs the following each frame:</para>
-<para>1. **Read Frame Events:** Consumes `SpawnPlanRequestExecutedEvent` from the previous frame to commit completed spawn operations to the scheduler.</para>
-<para>2. **Evaluate Conditions:** Calls `SpawnScheduler::evaluate()` to check all registered spawn rules against their conditions (timer, trigger, etc.).</para>
+<para><ref refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem" kindref="compound">GameObjectSpawnSystem</ref> bridges the spawn scheduling logic with the command-based spawning pipeline. It manages multiple SpawnScheduler instances and performs the following each frame:</para>
+<para>1. **Read Frame Events:** Consumes `SpawnPlanCommandExecutedEvent` from the previous frame to commit completed spawn operations to all schedulers.</para>
+<para>2. **Evaluate Conditions:** Calls `SpawnScheduler::evaluate()` on each scheduler to check all registered spawn rules against their conditions.</para>
 <para>3. **Drain Scheduled Plans:** Retrieves all plans that are ready to execute and enqueues them as `ScheduledSpawnPlanCommand` into the CommandBuffer.</para>
 <para>The actual spawning is performed by the command dispatcher/manager layer, keeping this system focused on scheduling logic only.</para>
-<para>Example setup: ```cpp auto scheduler = std::make_unique&lt;SpawnScheduler&gt;(); scheduler-&gt;addRule(enemyRuleId, enemyCondition, enemyProfileId);</para>
-<para>auto spawnSystem = std::make_unique&lt;GameObjectSpawnSystem&gt;(
-    std::move(scheduler)
-); mainPhase.addPass().add(std::move(spawnSystem)); ```</para>
+<para>Example setup: ```cpp std::vector&lt;std::unique_ptr&lt;SpawnScheduler&gt;&gt; schedulers;</para>
+<para>auto enemyScheduler = std::make_unique&lt;SpawnScheduler&gt;(); enemyScheduler-&gt;addRule(enemyProfileId, std::move(enemyRule)); schedulers.push_back(std::move(enemyScheduler));</para>
+<para>auto powerupScheduler = std::make_unique&lt;SpawnScheduler&gt;(); powerupScheduler-&gt;addRule(powerupProfileId, std::move(powerupRule)); schedulers.push_back(std::move(powerupScheduler));</para>
+<para>auto spawnSystem = std::make_unique&lt;GameObjectSpawnSystem&gt;(schedulers); mainPhase.addPass().add(std::move(spawnSystem)); ```</para>
 <para><simplesect kind="note"><para>This system reads frame-level events via `readFrame()`, meaning it processes spawn confirmations from the previous frame.</para>
 </simplesect>
 <simplesect kind="see"><para>SpawnScheduler </para>
 </simplesect>
 <simplesect kind="see"><para>ScheduledSpawnPlanCommand </para>
 </simplesect>
-<simplesect kind="see"><para>SpawnPlanRequestExecutedEvent </para>
+<simplesect kind="see"><para>SpawnPlanCommandExecutedEvent </para>
 </simplesect>
 </para>
     </detaileddescription>
@@ -147,8 +147,8 @@
         </childnode>
       </node>
       <node id="6">
-        <label>helios::engine::runtime::pooling::PoolManagerRegistry</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry"/>
+        <label>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry"/>
       </node>
       <node id="4">
         <label>helios::engine::runtime::world::GameWorld</label>
@@ -157,7 +157,7 @@
           <edgelabel>logger_</edgelabel>
         </childnode>
         <childnode refid="6" relation="usage">
-          <edgelabel>poolManagerRegistry_</edgelabel>
+          <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
         </childnode>
       </node>
       <node id="5">
@@ -165,12 +165,12 @@
         <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
       </node>
     </collaborationgraph>
-    <location file="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="58" column="5" bodyfile="include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="58" bodyend="118"/>
+    <location file="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" line="64" column="5" bodyfile="/tmp/h/include/helios/engine/mechanics/spawn/systems/GameObjectSpawnSystem.ixx" bodystart="64" bodyend="132"/>
     <listofallmembers>
-      <member refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1a822b2efc063d0a116d4fa229676b3cd7" prot="public" virt="non-virtual"><scope>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</scope><name>GameObjectSpawnSystem</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1adf86cf3e07d18b3aabe3bc3278385ca1" prot="public" virt="non-virtual"><scope>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</scope><name>GameObjectSpawnSystem</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" prot="protected" virt="non-virtual"><scope>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</scope><name>gameWorld_</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1System_1ae0464c1668e257439243a4f25979a7ff" prot="public" virt="virtual"><scope>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</scope><name>init</name></member>
-      <member refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1a8f1ca8291bd44a251ed88c22ff8e1d27" prot="private" virt="non-virtual"><scope>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</scope><name>spawnScheduler_</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1ae526d17278bc1ddac71c15c58e133f79" prot="private" virt="non-virtual"><scope>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</scope><name>spawnSchedulers_</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a26d81abcda05fe8b12a1ddb4ed6099a3" prot="public" virt="non-virtual"><scope>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</scope><name>Updatable</name></member>
       <member refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1systems_1_1GameObjectSpawnSystem_1a69d47de2e4bae743dab2fc03349b3902" prot="public" virt="virtual"><scope>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</scope><name>update</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a937c99bfacd777c53e0f811ab9d335a6" prot="public" virt="virtual"><scope>helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem</scope><name>~System</name></member>

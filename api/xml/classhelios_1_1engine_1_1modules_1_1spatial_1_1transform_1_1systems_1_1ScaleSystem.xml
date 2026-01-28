@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/modules/spatial/transform/systems/ScaleSystem.ixx" line="49" column="14" bodyfile="include/helios/engine/modules/spatial/transform/systems/ScaleSystem.ixx" bodystart="49" bodyend="51"/>
+        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/systems/ScaleSystem.ixx" line="49" column="14" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/systems/ScaleSystem.ixx" bodystart="49" bodyend="51"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1ScaleSystem_1a1c204070034eb602a47cc90b5b830d81" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -63,20 +63,20 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/modules/spatial/transform/systems/ScaleSystem.ixx" line="62" column="14" bodyfile="include/helios/engine/modules/spatial/transform/systems/ScaleSystem.ixx" bodystart="62" bodyend="92"/>
+        <location file="/tmp/h/include/helios/engine/modules/spatial/transform/systems/ScaleSystem.ixx" line="62" column="14" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/systems/ScaleSystem.ixx" bodystart="62" bodyend="92"/>
         <references refid="namespacehelios_1_1core_1_1units_1a9c75f83e0476f8560ef6b20129582381" compoundref="Unit_8ixx" startline="155" endline="168">helios::core::units::from</references>
         <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="48">helios::engine::ecs::System::gameWorld_</references>
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>System that applies scaling to entities based on their ScaleComponent. </para>
+<para>System that applies scaling to entities based on their ScaleStateComponent. </para>
     </briefdescription>
     <detaileddescription>
-<para>This system converts the desired world-space dimensions from ScaleComponent into scale factors relative to the model&apos;s original AABB. It handles unit conversion (e.g., centimeters to meters) based on the ScaleComponent&apos;s unit.</para>
+<para>This system converts the desired world-space dimensions from ScaleStateComponent into scale factors relative to the model&apos;s original AABB. It handles unit conversion (e.g., centimeters to meters) based on the ScaleStateComponent&apos;s unit.</para>
 <para>Required components:<itemizedlist>
-<listitem><para>ScaleComponent (desired dimensions and unit)</para>
+<listitem><para>ScaleStateComponent (desired dimensions and unit)</para>
 </listitem><listitem><para>ModelAabbComponent (original model bounds)</para>
-</listitem><listitem><para>TransformComponent (receives scale updates) </para>
+</listitem><listitem><para>ComposeTransformComponent (receives scale updates) </para>
 </listitem></itemizedlist>
 </para>
     </detaileddescription>
@@ -119,8 +119,8 @@
         </childnode>
       </node>
       <node id="6">
-        <label>helios::engine::runtime::pooling::PoolManagerRegistry</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry"/>
+        <label>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry"/>
       </node>
       <node id="4">
         <label>helios::engine::runtime::world::GameWorld</label>
@@ -129,7 +129,7 @@
           <edgelabel>logger_</edgelabel>
         </childnode>
         <childnode refid="6" relation="usage">
-          <edgelabel>poolManagerRegistry_</edgelabel>
+          <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
         </childnode>
       </node>
       <node id="5">
@@ -137,7 +137,7 @@
         <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
       </node>
     </collaborationgraph>
-    <location file="include/helios/engine/modules/spatial/transform/systems/ScaleSystem.ixx" line="40" column="5" bodyfile="include/helios/engine/modules/spatial/transform/systems/ScaleSystem.ixx" bodystart="40" bodyend="94"/>
+    <location file="/tmp/h/include/helios/engine/modules/spatial/transform/systems/ScaleSystem.ixx" line="40" column="5" bodyfile="/tmp/h/include/helios/engine/modules/spatial/transform/systems/ScaleSystem.ixx" bodystart="40" bodyend="94"/>
     <listofallmembers>
       <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" prot="protected" virt="non-virtual"><scope>helios::engine::modules::spatial::transform::systems::ScaleSystem</scope><name>gameWorld_</name></member>
       <member refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1systems_1_1ScaleSystem_1a24540bfe4ac899228df6a260eb51d2a3" prot="public" virt="virtual"><scope>helios::engine::modules::spatial::transform::systems::ScaleSystem</scope><name>init</name></member>

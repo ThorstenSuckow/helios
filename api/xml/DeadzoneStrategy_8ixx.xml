@@ -2,6 +2,18 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="DeadzoneStrategy_8ixx" kind="file" language="C++">
     <compoundname>DeadzoneStrategy.ixx</compoundname>
+    <includes local="no">algorithm</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>DeadzoneStrategy.ixx</label>
+        <link refid="DeadzoneStrategy_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>algorithm</label>
+      </node>
+    </incdepgraph>
     <innerclass refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy" prot="public">helios::input::gamepad::DeadzoneStrategy</innerclass>
     <innernamespace refid="namespacehelios">helios</innernamespace>
     <innernamespace refid="namespacehelios_1_1input">helios::input</innernamespace>
@@ -18,103 +30,109 @@
 <codeline lineno="4"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">module</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight></codeline>
-<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8input_8gamepad_8DeadzoneStrategy" kindref="compound">helios.input.gamepad.DeadzoneStrategy</ref>;</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;algorithm&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight></codeline>
-<codeline lineno="9"><highlight class="normal"></highlight></codeline>
-<codeline lineno="10" refid="namespacehelios_1_1input" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1input_1_1gamepad" kindref="compound">helios::input::gamepad</ref><sp/>{</highlight></codeline>
-<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="12"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="13"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Abstract<sp/>strategy<sp/>interface<sp/>for<sp/>normalizing<sp/>gamepad<sp/>stick<sp/>input<sp/>with<sp/>deadzone<sp/>handling.</highlight></codeline>
-<codeline lineno="14"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="15"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Gamepad<sp/>analog<sp/>sticks<sp/>rarely<sp/>return<sp/>exactly<sp/>(0,<sp/>0)<sp/>when<sp/>at<sp/>rest<sp/>due<sp/>to<sp/>hardware<sp/>drift.</highlight></codeline>
-<codeline lineno="16"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>A<sp/>deadzone<sp/>defines<sp/>a<sp/>threshold<sp/>below<sp/>which<sp/>input<sp/>is<sp/>ignored.<sp/>Implementations<sp/>of<sp/>this</highlight></codeline>
-<codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>interface<sp/>define<sp/>how<sp/>input<sp/>values<sp/>are<sp/>normalized<sp/>once<sp/>they<sp/>exceed<sp/>the<sp/>deadzone<sp/>threshold.</highlight></codeline>
-<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>RadialDeadzoneStrategy<sp/>for<sp/>a<sp/>circular<sp/>deadzone<sp/>implementation.</highlight></codeline>
-<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="21" refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a7066807dc8642ae12d29a5ad7a327473" kindref="member">DeadzoneStrategy</ref><sp/>{</highlight></codeline>
-<codeline lineno="22"><highlight class="normal"></highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Threshold<sp/>used<sp/>to<sp/>filter<sp/>out<sp/>minor<sp/>noise<sp/>in<sp/>gamepad<sp/>stick<sp/>input.</highlight></codeline>
-<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>value<sp/>represents<sp/>the<sp/>minimum<sp/>magnitude<sp/>of<sp/>stick<sp/>input<sp/>required</highlight></codeline>
-<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>to<sp/>be<sp/>treated<sp/>as<sp/>valid.<sp/>Input<sp/>signals<sp/>with<sp/>a<sp/>magnitude<sp/>below<sp/>this</highlight></codeline>
-<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>threshold<sp/>are<sp/>considered<sp/>noise,<sp/>helping<sp/>to<sp/>mitigate<sp/>the<sp/>effect<sp/>of</highlight></codeline>
-<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>hardware<sp/>drift<sp/>or<sp/>minor<sp/>stick<sp/>movements.<sp/>Adjusting<sp/>this<sp/>parameter</highlight></codeline>
-<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>can<sp/>improve<sp/>input<sp/>precision<sp/>and<sp/>reduce<sp/>unintended<sp/>drift<sp/>behavior.</highlight></codeline>
-<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="34" refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a3762bc530d61b887b87757ccc156db99" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a3762bc530d61b887b87757ccc156db99" kindref="member">stickNoiseThreshold_</ref><sp/>=<sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1ab2d601fa84b631f66270f28f2fed9e06" kindref="member">DEFAULT_STICK_NOISE_THRESHOLD</ref>;</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"></highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Default<sp/>threshold<sp/>used<sp/>to<sp/>filter<sp/>out<sp/>minor<sp/>noise<sp/>in<sp/>gamepad<sp/>stick<sp/>input.</highlight></codeline>
-<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="41" refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1ab2d601fa84b631f66270f28f2fed9e06" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1ab2d601fa84b631f66270f28f2fed9e06" kindref="member">DEFAULT_STICK_NOISE_THRESHOLD</ref><sp/>=<sp/>0.002f;</highlight></codeline>
-<codeline lineno="42"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Virtual<sp/>destructor<sp/>for<sp/>proper<sp/>polymorphic<sp/>cleanup.</highlight></codeline>
-<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="46" refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a63d32d60498619f6a0e5f96f5cc30226" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a63d32d60498619f6a0e5f96f5cc30226" kindref="member">~DeadzoneStrategy</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Default<sp/>constructor.</highlight></codeline>
-<codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="51" refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a7066807dc8642ae12d29a5ad7a327473" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a7066807dc8642ae12d29a5ad7a327473" kindref="member">DeadzoneStrategy</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Interface<sp/>for<sp/>applying<sp/>deadzone<sp/>handling<sp/>to<sp/>gamepad<sp/>stick<sp/>input.</highlight></codeline>
-<codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="56"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Defines<sp/>a<sp/>method<sp/>for<sp/>processing<sp/>and<sp/>normalizing<sp/>analog<sp/>stick<sp/>input<sp/>while<sp/>accounting</highlight></codeline>
-<codeline lineno="57"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>for<sp/>a<sp/>deadzone.<sp/>A<sp/>deadzone<sp/>eliminates<sp/>unintended<sp/>small<sp/>input<sp/>values<sp/>caused</highlight></codeline>
-<codeline lineno="58"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>by<sp/>hardware<sp/>imperfections.<sp/>Implementations<sp/>of<sp/>this<sp/>interface<sp/>provide<sp/>specific</highlight></codeline>
-<codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>strategies<sp/>for<sp/>handling<sp/>the<sp/>deadzone<sp/>and<sp/>input<sp/>normalization.</highlight></codeline>
-<codeline lineno="60"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>AxisDeadzoneStrategy<sp/>for<sp/>an<sp/>axis-aligned<sp/>deadzone<sp/>implementation.</highlight></codeline>
-<codeline lineno="62"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="63" refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a52139bff041f7128d0b562684587e32a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a52139bff041f7128d0b562684587e32a" kindref="member">DeadzoneStrategy</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a6c01ef746af11b99c2122617c6f36820" kindref="member">stickNoiseThreshold</ref>)<sp/>:<sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a3762bc530d61b887b87757ccc156db99" kindref="member">stickNoiseThreshold_</ref>(<ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a6c01ef746af11b99c2122617c6f36820" kindref="member">stickNoiseThreshold</ref>)<sp/>{}</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="65"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="66"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Normalizes<sp/>stick<sp/>input<sp/>values<sp/>based<sp/>on<sp/>the<sp/>configured<sp/>deadzone.</highlight></codeline>
-<codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>method<sp/>modifies<sp/>the<sp/>input<sp/>coordinates<sp/>in-place.<sp/>Values<sp/>within<sp/>the<sp/>deadzone</highlight></codeline>
-<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>are<sp/>typically<sp/>zeroed<sp/>out,<sp/>while<sp/>values<sp/>outside<sp/>are<sp/>scaled<sp/>to<sp/>provide<sp/>a<sp/>smooth</highlight></codeline>
-<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>response<sp/>curve<sp/>from<sp/>the<sp/>edge<sp/>of<sp/>the<sp/>deadzone<sp/>to<sp/>the<sp/>maximum<sp/>input<sp/>value.</highlight></codeline>
-<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>deadzone<sp/>The<sp/>deadzone<sp/>threshold<sp/>in<sp/>the<sp/>range<sp/>[0.0,<sp/>1.0].</highlight></codeline>
-<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>x<sp/>Reference<sp/>to<sp/>the<sp/>x-axis<sp/>value,<sp/>modified<sp/>in-place.</highlight></codeline>
-<codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>y<sp/>Reference<sp/>to<sp/>the<sp/>y-axis<sp/>value,<sp/>modified<sp/>in-place.</highlight></codeline>
-<codeline lineno="75"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="76" refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1ad4a87c7ee4ec5b7f08210aae95cac8a1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1ad4a87c7ee4ec5b7f08210aae95cac8a1" kindref="member">normalize</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>deadzone,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">&amp;<sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">&amp;<sp/>y)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"></highlight></codeline>
-<codeline lineno="78"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="79"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="80"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Retrieves<sp/>the<sp/>current<sp/>noise<sp/>threshold<sp/>for<sp/>stick<sp/>input.</highlight></codeline>
-<codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>noise<sp/>threshold<sp/>determines<sp/>the<sp/>minimum<sp/>magnitude<sp/>of<sp/>input</highlight></codeline>
-<codeline lineno="83"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>required<sp/>to<sp/>be<sp/>processed<sp/>as<sp/>valid.<sp/>Values<sp/>below<sp/>this<sp/>threshold<sp/>are</highlight></codeline>
-<codeline lineno="84"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>considered<sp/>noise<sp/>and<sp/>ignored<sp/>to<sp/>prevent<sp/>unintentional<sp/>drift<sp/>detection.</highlight></codeline>
-<codeline lineno="85"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="86"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>configured<sp/>noise<sp/>threshold<sp/>value.</highlight></codeline>
-<codeline lineno="87"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="88" refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a6c01ef746af11b99c2122617c6f36820" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a6c01ef746af11b99c2122617c6f36820" kindref="member">stickNoiseThreshold</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="90"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="91"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Sets<sp/>the<sp/>noise<sp/>threshold<sp/>for<sp/>stick<sp/>inputs<sp/>to<sp/>handle<sp/>minor<sp/>hardware<sp/>drift.</highlight></codeline>
-<codeline lineno="92"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="93"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>noise<sp/>threshold<sp/>defines<sp/>the<sp/>minimum<sp/>magnitude<sp/>for<sp/>stick<sp/>input<sp/>to<sp/>be<sp/>considered<sp/>valid.</highlight></codeline>
-<codeline lineno="94"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Inputs<sp/>with<sp/>a<sp/>magnitude<sp/>below<sp/>this<sp/>threshold<sp/>are<sp/>ignored<sp/>to<sp/>prevent<sp/>unintentional<sp/>movement</highlight></codeline>
-<codeline lineno="95"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>caused<sp/>by<sp/>hardware<sp/>noise<sp/>or<sp/>drift.</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8input_8gamepad_8DeadzoneStrategy" kindref="compound">helios.input.gamepad.DeadzoneStrategy</ref>;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="namespacehelios_1_1input" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1input_1_1gamepad" kindref="compound">helios::input::gamepad</ref><sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Abstract<sp/>strategy<sp/>interface<sp/>for<sp/>normalizing<sp/>gamepad<sp/>stick<sp/>input<sp/>with<sp/>deadzone<sp/>handling.</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Gamepad<sp/>analog<sp/>sticks<sp/>rarely<sp/>return<sp/>exactly<sp/>(0,<sp/>0)<sp/>when<sp/>at<sp/>rest<sp/>due<sp/>to<sp/>hardware<sp/>drift.</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>A<sp/>deadzone<sp/>defines<sp/>a<sp/>threshold<sp/>below<sp/>which<sp/>input<sp/>is<sp/>ignored.<sp/>Implementations<sp/>of<sp/>this</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>interface<sp/>define<sp/>how<sp/>input<sp/>values<sp/>are<sp/>normalized<sp/>once<sp/>they<sp/>exceed<sp/>the<sp/>deadzone<sp/>threshold.</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>RadialDeadzoneStrategy<sp/>for<sp/>a<sp/>circular<sp/>deadzone<sp/>implementation.</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23" refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a7066807dc8642ae12d29a5ad7a327473" kindref="member">DeadzoneStrategy</ref><sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Threshold<sp/>used<sp/>to<sp/>filter<sp/>out<sp/>minor<sp/>noise<sp/>in<sp/>gamepad<sp/>stick<sp/>input.</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>value<sp/>represents<sp/>the<sp/>minimum<sp/>magnitude<sp/>of<sp/>stick<sp/>input<sp/>required</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>to<sp/>be<sp/>treated<sp/>as<sp/>valid.<sp/>Input<sp/>signals<sp/>with<sp/>a<sp/>magnitude<sp/>below<sp/>this</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>threshold<sp/>are<sp/>considered<sp/>noise,<sp/>helping<sp/>to<sp/>mitigate<sp/>the<sp/>effect<sp/>of</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>hardware<sp/>drift<sp/>or<sp/>minor<sp/>stick<sp/>movements.<sp/>Adjusting<sp/>this<sp/>parameter</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>can<sp/>improve<sp/>input<sp/>precision<sp/>and<sp/>reduce<sp/>unintended<sp/>drift<sp/>behavior.</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a3762bc530d61b887b87757ccc156db99" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a3762bc530d61b887b87757ccc156db99" kindref="member">stickNoiseThreshold_</ref><sp/>=<sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1ab2d601fa84b631f66270f28f2fed9e06" kindref="member">DEFAULT_STICK_NOISE_THRESHOLD</ref>;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Default<sp/>threshold<sp/>used<sp/>to<sp/>filter<sp/>out<sp/>minor<sp/>noise<sp/>in<sp/>gamepad<sp/>stick<sp/>input.</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43" refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1ab2d601fa84b631f66270f28f2fed9e06" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1ab2d601fa84b631f66270f28f2fed9e06" kindref="member">DEFAULT_STICK_NOISE_THRESHOLD</ref><sp/>=<sp/>0.002f;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Virtual<sp/>destructor<sp/>for<sp/>proper<sp/>polymorphic<sp/>cleanup.</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a63d32d60498619f6a0e5f96f5cc30226" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a63d32d60498619f6a0e5f96f5cc30226" kindref="member">~DeadzoneStrategy</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Default<sp/>constructor.</highlight></codeline>
+<codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53" refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a7066807dc8642ae12d29a5ad7a327473" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a7066807dc8642ae12d29a5ad7a327473" kindref="member">DeadzoneStrategy</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Interface<sp/>for<sp/>applying<sp/>deadzone<sp/>handling<sp/>to<sp/>gamepad<sp/>stick<sp/>input.</highlight></codeline>
+<codeline lineno="57"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Defines<sp/>a<sp/>method<sp/>for<sp/>processing<sp/>and<sp/>normalizing<sp/>analog<sp/>stick<sp/>input<sp/>while<sp/>accounting</highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>for<sp/>a<sp/>deadzone.<sp/>A<sp/>deadzone<sp/>eliminates<sp/>unintended<sp/>small<sp/>input<sp/>values<sp/>caused</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>by<sp/>hardware<sp/>imperfections.<sp/>Implementations<sp/>of<sp/>this<sp/>interface<sp/>provide<sp/>specific</highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>strategies<sp/>for<sp/>handling<sp/>the<sp/>deadzone<sp/>and<sp/>input<sp/>normalization.</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="63"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>AxisDeadzoneStrategy<sp/>for<sp/>an<sp/>axis-aligned<sp/>deadzone<sp/>implementation.</highlight></codeline>
+<codeline lineno="64"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65" refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a52139bff041f7128d0b562684587e32a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a52139bff041f7128d0b562684587e32a" kindref="member">DeadzoneStrategy</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a6c01ef746af11b99c2122617c6f36820" kindref="member">stickNoiseThreshold</ref>)<sp/>:<sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a3762bc530d61b887b87757ccc156db99" kindref="member">stickNoiseThreshold_</ref>(<ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a6c01ef746af11b99c2122617c6f36820" kindref="member">stickNoiseThreshold</ref>)<sp/>{}</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Normalizes<sp/>stick<sp/>input<sp/>values<sp/>based<sp/>on<sp/>the<sp/>configured<sp/>deadzone.</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>method<sp/>modifies<sp/>the<sp/>input<sp/>coordinates<sp/>in-place.<sp/>Values<sp/>within<sp/>the<sp/>deadzone</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>are<sp/>typically<sp/>zeroed<sp/>out,<sp/>while<sp/>values<sp/>outside<sp/>are<sp/>scaled<sp/>to<sp/>provide<sp/>a<sp/>smooth</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>response<sp/>curve<sp/>from<sp/>the<sp/>edge<sp/>of<sp/>the<sp/>deadzone<sp/>to<sp/>the<sp/>maximum<sp/>input<sp/>value.</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>deadzone<sp/>The<sp/>deadzone<sp/>threshold<sp/>in<sp/>the<sp/>range<sp/>[0.0,<sp/>1.0].</highlight></codeline>
+<codeline lineno="75"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>x<sp/>Reference<sp/>to<sp/>the<sp/>x-axis<sp/>value,<sp/>modified<sp/>in-place.</highlight></codeline>
+<codeline lineno="76"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>y<sp/>Reference<sp/>to<sp/>the<sp/>y-axis<sp/>value,<sp/>modified<sp/>in-place.</highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78" refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1ad4a87c7ee4ec5b7f08210aae95cac8a1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1ad4a87c7ee4ec5b7f08210aae95cac8a1" kindref="member">normalize</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>deadzone,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">&amp;<sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">&amp;<sp/>y)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Retrieves<sp/>the<sp/>current<sp/>noise<sp/>threshold<sp/>for<sp/>stick<sp/>input.</highlight></codeline>
+<codeline lineno="83"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="84"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>noise<sp/>threshold<sp/>determines<sp/>the<sp/>minimum<sp/>magnitude<sp/>of<sp/>input</highlight></codeline>
+<codeline lineno="85"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>required<sp/>to<sp/>be<sp/>processed<sp/>as<sp/>valid.<sp/>Values<sp/>below<sp/>this<sp/>threshold<sp/>are</highlight></codeline>
+<codeline lineno="86"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>considered<sp/>noise<sp/>and<sp/>ignored<sp/>to<sp/>prevent<sp/>unintentional<sp/>drift<sp/>detection.</highlight></codeline>
+<codeline lineno="87"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="88"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>configured<sp/>noise<sp/>threshold<sp/>value.</highlight></codeline>
+<codeline lineno="89"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90" refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a6c01ef746af11b99c2122617c6f36820" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a6c01ef746af11b99c2122617c6f36820" kindref="member">stickNoiseThreshold</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a3762bc530d61b887b87757ccc156db99" kindref="member">stickNoiseThreshold_</ref>;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="94"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="95"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Sets<sp/>the<sp/>noise<sp/>threshold<sp/>for<sp/>stick<sp/>inputs<sp/>to<sp/>handle<sp/>minor<sp/>hardware<sp/>drift.</highlight></codeline>
 <codeline lineno="96"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="97"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>threshold<sp/>The<sp/>new<sp/>stick<sp/>noise<sp/>threshold,<sp/>typically<sp/>in<sp/>the<sp/>range<sp/>[0.0,<sp/>1.0].</highlight></codeline>
-<codeline lineno="98"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="99" refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a9df5a94dd6bf37d477dd6fd7a73c709c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a9df5a94dd6bf37d477dd6fd7a73c709c" kindref="member">setStickNoiseThreshold</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>threshold)<sp/>noexcept;</highlight></codeline>
-<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"></highlight></codeline>
-<codeline lineno="102"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="97"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>noise<sp/>threshold<sp/>defines<sp/>the<sp/>minimum<sp/>magnitude<sp/>for<sp/>stick<sp/>input<sp/>to<sp/>be<sp/>considered<sp/>valid.</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Inputs<sp/>with<sp/>a<sp/>magnitude<sp/>below<sp/>this<sp/>threshold<sp/>are<sp/>ignored<sp/>to<sp/>prevent<sp/>unintentional<sp/>movement</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>caused<sp/>by<sp/>hardware<sp/>noise<sp/>or<sp/>drift.</highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="101"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>threshold<sp/>The<sp/>new<sp/>stick<sp/>noise<sp/>threshold,<sp/>typically<sp/>in<sp/>the<sp/>range<sp/>[0.0,<sp/>1.0].</highlight></codeline>
+<codeline lineno="102"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103" refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a9df5a94dd6bf37d477dd6fd7a73c709c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a9df5a94dd6bf37d477dd6fd7a73c709c" kindref="member">setStickNoiseThreshold</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>threshold)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1input_1_1gamepad_1_1DeadzoneStrategy_1a3762bc530d61b887b87757ccc156db99" kindref="member">stickNoiseThreshold_</ref><sp/>=<sp/>std::clamp(threshold,<sp/>0.0f,<sp/>0.9f);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal">}</highlight></codeline>
     </programlisting>
-    <location file="include/helios/input/gamepad/DeadzoneStrategy.ixx"/>
+    <location file="/tmp/h/include/helios/input/gamepad/DeadzoneStrategy.ixx"/>
   </compounddef>
 </doxygen>

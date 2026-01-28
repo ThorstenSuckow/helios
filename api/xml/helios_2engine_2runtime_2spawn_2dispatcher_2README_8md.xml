@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="helios_2engine_2runtime_2spawn_2dispatcher_2README_8md" kind="file" language="Markdown">
-    <compoundname>README.md</compoundname>
+    <compoundname>helios/engine/runtime/spawn/dispatcher/README.md</compoundname>
     <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher">helios::engine::runtime::spawn::dispatcher</innernamespace>
     <briefdescription>
     </briefdescription>
@@ -20,19 +20,19 @@
 <codeline></codeline>
 <codeline><highlight class="normal">|<sp/>Dispatcher<sp/>|<sp/>Handles<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|------------|---------|---------|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`SpawnCommandDispatcher`<sp/>|<sp/>`SpawnCommand`<sp/>|<sp/>Routes<sp/>spawn<sp/>requests<sp/>to<sp/>SpawnManager<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`DespawnCommandDispatcher`<sp/>|<sp/>`DespawnCommand`<sp/>|<sp/>Routes<sp/>despawn<sp/>requests<sp/>to<sp/>SpawnManager<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SpawnCommandDispatcher`<sp/>|<sp/>`SpawnCommand`<sp/>|<sp/>Routes<sp/>spawn<sp/>commands<sp/>to<sp/>SpawnManager<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`DespawnCommandDispatcher`<sp/>|<sp/>`DespawnCommand`<sp/>|<sp/>Routes<sp/>despawn<sp/>commands<sp/>to<sp/>SpawnManager<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`ScheduledSpawnPlanCommandDispatcher`<sp/>|<sp/>`ScheduledSpawnPlanCommand`<sp/>|<sp/>Routes<sp/>scheduled<sp/>plans<sp/>to<sp/>SpawnManager<sp/>|</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Architecture</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline><highlight class="normal">┌─────────────────┐<sp/><sp/><sp/><sp/><sp/>┌───────────────┐<sp/><sp/><sp/><sp/><sp/>┌──────────────────────────────────┐</highlight></codeline>
-<codeline><highlight class="normal">│<sp/>CommandBuffer<sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/>Dispatcher<sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/>SpawnRequestHandler<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/>CommandBuffer<sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/>Dispatcher<sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/>SpawnCommandHandler<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/>(SpawnManager)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
-<codeline><highlight class="normal">│<sp/>flush()<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│────&gt;│<sp/>dispatchTyped<sp/>│────&gt;│<sp/>submit(SpawnRequest)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/>submit(DespawnRequest)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/>submit(ScheduledSpawnPlanRequest)│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/>flush()<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│────&gt;│<sp/>dispatchTyped<sp/>│────&gt;│<sp/>submit(SpawnCommand)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/>submit(DespawnCommand)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/>submit(ScheduledSpawnPlanCommand)│</highlight></codeline>
 <codeline><highlight class="normal">└─────────────────┘<sp/><sp/><sp/><sp/><sp/>└───────────────┘<sp/><sp/><sp/><sp/><sp/>└──────────────────────────────────┘</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
@@ -53,7 +53,7 @@
 <codeline><highlight class="normal">commandBuffer.add&lt;SpawnCommand&gt;(profileId,<sp/>spawnContext,<sp/>count);</highlight></codeline>
 <codeline><highlight class="normal">commandBuffer.add&lt;DespawnCommand&gt;(entityGuid,<sp/>profileId);</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">//<sp/>During<sp/>flush,<sp/>dispatchers<sp/>route<sp/>to<sp/>managers</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>During<sp/>flush,<sp/>dispatchers<sp/>route<sp/>commands<sp/>to<sp/>handlers</highlight></codeline>
 <codeline><highlight class="normal">commandBuffer.flush(gameWorld);</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
@@ -63,10 +63,10 @@
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
 <codeline><highlight class="normal">@namespace<sp/>helios::engine::runtime::spawn::dispatcher</highlight></codeline>
 <codeline><highlight class="normal">@brief<sp/>Command<sp/>dispatchers<sp/>for<sp/>spawn<sp/>operations.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>This<sp/>namespace<sp/>contains<sp/>typed<sp/>command<sp/>dispatchers<sp/>that<sp/>route<sp/>spawn<sp/>and<sp/>despawn<sp/>commands<sp/>to<sp/>the<sp/>SpawnManager<sp/>for<sp/>deferred<sp/>processing<sp/>via<sp/>SpawnRequestHandler.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>This<sp/>namespace<sp/>contains<sp/>typed<sp/>command<sp/>dispatchers<sp/>that<sp/>route<sp/>spawn<sp/>and<sp/>despawn<sp/>commands<sp/>to<sp/>the<sp/>SpawnManager<sp/>for<sp/>deferred<sp/>processing<sp/>via<sp/>SpawnCommandHandler.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
 <codeline></codeline>
     </programlisting>
-    <location file="include/helios/engine/runtime/spawn/dispatcher/README.md"/>
+    <location file="/tmp/h/include/helios/engine/runtime/spawn/dispatcher/README.md"/>
   </compounddef>
 </doxygen>

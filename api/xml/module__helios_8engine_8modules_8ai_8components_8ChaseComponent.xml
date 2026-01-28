@@ -1,0 +1,252 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8modules_8ai_8components_8ChaseComponent" kind="module">
+    <compoundname>helios.engine.modules.ai.components.ChaseComponent</compoundname>
+    <innerfile refid="ChaseComponent_8ixx">ChaseComponent.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent" prot="public">helios::engine::modules::ai::components::ChaseComponent</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1ab7b6bec1c396a5f58cce19d01eead088" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::modules::ai::components::ChaseComponent::cooldown_</definition>
+        <argsstring></argsstring>
+        <name>cooldown_</name>
+        <qualifiedname>helios::engine::modules::ai::components::ChaseComponent::cooldown_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Time between target direction updates (seconds). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="28" column="15" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a57280da15a9d9a69c80c31220572815d" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float helios::engine::modules::ai::components::ChaseComponent::cooldownTimer_</definition>
+        <argsstring></argsstring>
+        <name>cooldownTimer_</name>
+        <qualifiedname>helios::engine::modules::ai::components::ChaseComponent::cooldownTimer_</qualifiedname>
+        <initializer>= 0.0f</initializer>
+        <briefdescription>
+<para>Current elapsed time since last update. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="33" column="15" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a540083d0c6011d9694576add80f53a1d" prot="private" static="no" mutable="no">
+        <type><ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref></type>
+        <definition>helios::util::Guid helios::engine::modules::ai::components::ChaseComponent::target_</definition>
+        <argsstring></argsstring>
+        <name>target_</name>
+        <qualifiedname>helios::engine::modules::ai::components::ChaseComponent::target_</qualifiedname>
+        <initializer>{<ref refid="namespacehelios_1_1core_1_1types_1a209d373c4d42ac831d2f6bfd1c4165ad" kindref="member">helios::core::types::no_init</ref>}</initializer>
+        <briefdescription>
+<para>GUID of the entity to chase. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="38" column="28" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="38" bodyend="38"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a890b401836d9583a1db14dc515878d71" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::modules::ai::components::ChaseComponent::ChaseComponent</definition>
+        <argsstring>()=default</argsstring>
+        <name>ChaseComponent</name>
+        <qualifiedname>helios::engine::modules::ai::components::ChaseComponent::ChaseComponent</qualifiedname>
+        <briefdescription>
+<para>Default constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="45" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a716e200999e523b0679422e6945e7e05" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref></type>
+        <definition>helios::util::Guid helios::engine::modules::ai::components::ChaseComponent::target</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>target</name>
+        <qualifiedname>helios::engine::modules::ai::components::ChaseComponent::target</qualifiedname>
+        <briefdescription>
+<para>Returns the target entity&apos;s GUID. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The GUID of the chase target. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="52" column="29" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="52" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1af6ed0af72667bcea73e36396266bdf73" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::modules::ai::components::ChaseComponent::cooldown</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cooldown</name>
+        <qualifiedname>helios::engine::modules::ai::components::ChaseComponent::cooldown</qualifiedname>
+        <briefdescription>
+<para>Returns the cooldown duration. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Time between direction updates in seconds. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="61" column="16" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="61" bodyend="63"/>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1acce73a87e74cfeaf2e6d5fb531e344bd" compoundref="ChaseComponent_8ixx" startline="70" endline="72">helios::engine::modules::ai::components::ChaseComponent::setCooldown</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1acce73a87e74cfeaf2e6d5fb531e344bd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::ai::components::ChaseComponent::setCooldown</definition>
+        <argsstring>(const float cooldown) noexcept</argsstring>
+        <name>setCooldown</name>
+        <qualifiedname>helios::engine::modules::ai::components::ChaseComponent::setCooldown</qualifiedname>
+        <param>
+          <type>const float</type>
+          <declname>cooldown</declname>
+        </param>
+        <briefdescription>
+<para>Sets the cooldown duration. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cooldown</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time between direction updates in seconds. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="70" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="70" bodyend="72"/>
+        <references refid="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1af6ed0af72667bcea73e36396266bdf73" compoundref="ChaseComponent_8ixx" startline="61" endline="63">helios::engine::modules::ai::components::ChaseComponent::cooldown</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a87a06d25592e3dd725fd37203f00f4a4" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float helios::engine::modules::ai::components::ChaseComponent::cooldownTimer</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cooldownTimer</name>
+        <qualifiedname>helios::engine::modules::ai::components::ChaseComponent::cooldownTimer</qualifiedname>
+        <briefdescription>
+<para>Returns the current cooldown timer value. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Elapsed time since last direction update. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="79" column="16" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="79" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a4e6b5003b2eebe941e59d6de47e909ff" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::ai::components::ChaseComponent::updateCooldownTimerBy</definition>
+        <argsstring>(const float delta) noexcept</argsstring>
+        <name>updateCooldownTimerBy</name>
+        <qualifiedname>helios::engine::modules::ai::components::ChaseComponent::updateCooldownTimerBy</qualifiedname>
+        <param>
+          <type>const float</type>
+          <declname>delta</declname>
+        </param>
+        <briefdescription>
+<para>Advances the cooldown timer by delta time. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>delta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time to add to the timer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="88" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="88" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a27d23f652883707d12f92be0bf5ea2f0" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::ai::components::ChaseComponent::setCooldownTimer</definition>
+        <argsstring>(const float timer) noexcept</argsstring>
+        <name>setCooldownTimer</name>
+        <qualifiedname>helios::engine::modules::ai::components::ChaseComponent::setCooldownTimer</qualifiedname>
+        <param>
+          <type>const float</type>
+          <declname>timer</declname>
+        </param>
+        <briefdescription>
+<para>Sets the cooldown timer to a specific value. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New timer value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="97" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="97" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent_1a0e0ff93db3d55ddd15629b888f6a4add" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::modules::ai::components::ChaseComponent::setTarget</definition>
+        <argsstring>(const helios::util::Guid guid) noexcept</argsstring>
+        <name>setTarget</name>
+        <qualifiedname>helios::engine::modules::ai::components::ChaseComponent::setTarget</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref></type>
+          <declname>guid</declname>
+        </param>
+        <briefdescription>
+<para>Sets the target entity to chase. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>guid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The GUID of the target entity. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="106" column="14" bodyfile="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" bodystart="106" bodyend="108"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/modules/ai/components/ChaseComponent.ixx" line="7" column="15"/>
+  </compounddef>
+</doxygen>

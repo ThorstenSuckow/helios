@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1InitializerList" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>helios::engine::runtime::spawn::behavior::initializers::InitializerList</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer" prot="public" virt="non-virtual">helios::engine::runtime::spawn::behavior::SpawnInitializer</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>std::size_t</type>
+        <declname>N</declname>
+        <defname>N</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1InitializerList_1ab7be6264f081f981c5feabf6cfa6db3d" prot="private" static="no" mutable="no">
+        <type>const std::array&lt; std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer" kindref="compound">SpawnInitializer</ref> &gt;, N &gt;</type>
+        <definition>const std::array&lt;std::unique_ptr&lt;SpawnInitializer&gt;, N&gt; helios::engine::runtime::spawn::behavior::initializers::InitializerList&lt; N &gt;::initializers_</definition>
+        <argsstring></argsstring>
+        <name>initializers_</name>
+        <qualifiedname>helios::engine::runtime::spawn::behavior::initializers::InitializerList::initializers_</qualifiedname>
+        <briefdescription>
+<para>Fixed-size array of initializers to execute. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/behavior/initializers/InitializerList.ixx" line="47" column="26" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/behavior/initializers/InitializerList.ixx" bodystart="47" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1InitializerList_1a89289cb8873b56fad193c064bb69547a" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>helios::engine::runtime::spawn::behavior::initializers::InitializerList&lt; N &gt;::InitializerList</definition>
+        <argsstring>(std::unique_ptr&lt; Args &gt; &amp;&amp;...args)</argsstring>
+        <name>InitializerList</name>
+        <qualifiedname>helios::engine::runtime::spawn::behavior::initializers::InitializerList::InitializerList</qualifiedname>
+        <param>
+          <type>std::unique_ptr&lt; Args &gt; &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+    <requiresclause>(sizeof...(Args) == N &amp;&amp; (std::derived_from&lt;Args, <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer" kindref="compound">SpawnInitializer</ref>&gt; &amp;&amp; ...))    </requiresclause>
+        <briefdescription>
+<para>Constructs an <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1InitializerList" kindref="compound">InitializerList</ref> from variadic initializer arguments. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Types of the initializer unique_ptrs.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Unique pointers to <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer" kindref="compound">SpawnInitializer</ref> instances. The number of arguments must match the template parameter N. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/behavior/initializers/InitializerList.ixx" line="61" column="18" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/behavior/initializers/InitializerList.ixx" bodystart="61" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1InitializerList_1ac1e943d133dc4cf55102bf5f5513af99" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::spawn::behavior::initializers::InitializerList&lt; N &gt;::initialize</definition>
+        <argsstring>(const helios::engine::ecs::GameObject &amp;gameObject, const SpawnPlanCursor &amp;cursor, const SpawnContext &amp;spawnContext) override</argsstring>
+        <name>initialize</name>
+        <qualifiedname>helios::engine::runtime::spawn::behavior::initializers::InitializerList::initialize</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer_1a0d6b4e625d18d579ec91ff33da128190">initialize</reimplements>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> &amp;</type>
+          <declname>gameObject</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnPlanCursor" kindref="compound">SpawnPlanCursor</ref> &amp;</type>
+          <declname>cursor</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext" kindref="compound">SpawnContext</ref> &amp;</type>
+          <declname>spawnContext</declname>
+        </param>
+        <briefdescription>
+<para>Executes all initializers in sequence on the spawned GameObject. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>gameObject</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The GameObject being initialized. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cursor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current spawn plan cursor with batch and index information. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spawnContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Context providing access to spawn-related data. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/behavior/initializers/InitializerList.ixx" line="70" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/behavior/initializers/InitializerList.ixx" bodystart="70" bodyend="82"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Composite initializer that executes multiple SpawnInitializers in sequence. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1InitializerList" kindref="compound">InitializerList</ref> allows combining multiple initialization behaviors into a single initializer. Each initializer in the list is executed in order during the spawn process.</para>
+<para>**Usage:** ```cpp auto initializer = std::make_unique&lt;InitializerList&lt;2&gt;&gt;( std::make_unique&lt;DirectionInitializer&gt;(vec3f{1, 0, 0}), std::make_unique&lt;VelocityInitializer&gt;(100.0f) ); ```</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of initializers in the list. Must match the number of arguments passed to the constructor.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer" kindref="compound">SpawnInitializer</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="structhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnContext" kindref="compound">SpawnContext</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::runtime::spawn::behavior::SpawnInitializer</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::runtime::spawn::behavior::initializers::InitializerList&lt; N &gt;</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1InitializerList"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>helios::engine::runtime::spawn::behavior::SpawnInitializer</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::runtime::spawn::behavior::initializers::InitializerList&lt; N &gt;</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1InitializerList"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/tmp/h/include/helios/engine/runtime/spawn/behavior/initializers/InitializerList.ixx" line="42" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/behavior/initializers/InitializerList.ixx" bodystart="42" bodyend="84"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1InitializerList_1ac1e943d133dc4cf55102bf5f5513af99" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::behavior::initializers::InitializerList</scope><name>initialize</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1InitializerList_1a89289cb8873b56fad193c064bb69547a" prot="public" virt="non-virtual"><scope>helios::engine::runtime::spawn::behavior::initializers::InitializerList</scope><name>InitializerList</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1InitializerList_1ab7be6264f081f981c5feabf6cfa6db3d" prot="private" virt="non-virtual"><scope>helios::engine::runtime::spawn::behavior::initializers::InitializerList</scope><name>initializers_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer_1ad5514051aaafea0f164769d695a96991" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::behavior::initializers::InitializerList</scope><name>~SpawnInitializer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

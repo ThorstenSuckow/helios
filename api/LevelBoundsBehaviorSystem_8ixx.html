@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>helios: include/helios/engine/mechanics/bounds/systems/LevelBoundsBehaviorSystem.ixx File Reference</title>
+<title>helios: LevelBoundsBehaviorSystem.ixx File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
@@ -110,26 +110,27 @@ $(function() {
 <p>System for handling entity behavior at level boundaries.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;helios/engine/ecs/query/GameObjectView.h&gt;</code><br />
-<code>import <a class="el" href="SpawnedByProfileComponent_8ixx_source.html">helios.engine.mechanics.spawn.components.SpawnedByProfileComponent</a>;</code><br />
 <code>import <a class="el" href="DespawnCommand_8ixx_source.html">helios.engine.runtime.spawn.commands.DespawnCommand</a>;</code><br />
-<code>import <a class="el" href="SceneNode_8ixx_source.html">helios.scene.SceneNode</a>;</code><br />
-<code>import <a class="el" href="System_8ixx_source.html">helios.engine.ecs.System</a>;</code><br />
-<code>import <a class="el" href="GameObject_8ixx_source.html">helios.engine.ecs.GameObject</a>;</code><br />
-<code>import <a class="el" href="SceneNodeComponent_8ixx_source.html">helios.engine.modules.scene.components.SceneNodeComponent</a>;</code><br />
-<code>import <a class="el" href="TranslationStateComponent_8ixx_source.html">helios.engine.modules.spatial.transform.components.TranslationStateComponent</a>;</code><br />
+<code>import <a class="el" href="SpawnedByProfileComponent_8ixx_source.html">helios.engine.mechanics.spawn.components.SpawnedByProfileComponent</a>;</code><br />
 <code>import <a class="el" href="UpdateContext_8ixx_source.html">helios.engine.runtime.world.UpdateContext</a>;</code><br />
-<code>import <a class="el" href="LevelBoundsBehaviorComponent_8ixx_source.html">helios.engine.mechanics.bounds.components.LevelBoundsBehaviorComponent</a>;</code><br />
-<code>import <a class="el" href="CollisionBehavior_8ixx_source.html">helios.engine.modules.physics.collision.types.CollisionBehavior</a>;</code><br />
-<code>import <a class="el" href="TransformComponent_8ixx_source.html">helios.engine.modules.spatial.transform.components.TransformComponent</a>;</code><br />
-<code>import <a class="el" href="RotationStateComponent_8ixx_source.html">helios.engine.modules.physics.motion.components.RotationStateComponent</a>;</code><br />
-<code>import <a class="el" href="GameWorld_8ixx_source.html">helios.engine.runtime.world.GameWorld</a>;</code><br />
-<code>import <a class="el" href="Move2DComponent_8ixx_source.html">helios.engine.modules.physics.motion.components.Move2DComponent</a>;</code><br />
+<code>import <a class="el" href="SceneNodeComponent_8ixx_source.html">helios.engine.modules.scene.components.SceneNodeComponent</a>;</code><br />
+<code>import <a class="el" href="RotationStateComponent_8ixx_source.html">helios.engine.modules.spatial.transform.components.RotationStateComponent</a>;</code><br />
 <code>import <a class="el" href="ModelAabbComponent_8ixx_source.html">helios.engine.modules.rendering.model.components.ModelAabbComponent</a>;</code><br />
-<code>import <a class="el" href="CommandBuffer_8ixx_source.html">helios.engine.runtime.messaging.command.CommandBuffer</a>;</code><br />
-<code>import <a class="el" href="SteeringComponent_8ixx_source.html">helios.engine.modules.physics.motion.components.SteeringComponent</a>;</code><br />
-<code>import <a class="el" href="DirectionComponent_8ixx_source.html">helios.engine.modules.physics.motion.components.DirectionComponent</a>;</code><br />
-<code>import <a class="el" href="helios_2math_2__module_8ixx_source.html">helios.math</a>;</code><br />
 <code>import <a class="el" href="AabbColliderComponent_8ixx_source.html">helios.engine.modules.physics.collision.components.AabbColliderComponent</a>;</code><br />
+<code>import <a class="el" href="System_8ixx_source.html">helios.engine.ecs.System</a>;</code><br />
+<code>import <a class="el" href="helios_2math_2__module_8ixx_source.html">helios.math</a>;</code><br />
+<code>import <a class="el" href="CommandBuffer_8ixx_source.html">helios.engine.runtime.messaging.command.CommandBuffer</a>;</code><br />
+<code>import <a class="el" href="CollisionBehavior_8ixx_source.html">helios.engine.modules.physics.collision.types.CollisionBehavior</a>;</code><br />
+<code>import <a class="el" href="Move2DComponent_8ixx_source.html">helios.engine.modules.physics.motion.components.Move2DComponent</a>;</code><br />
+<code>import <a class="el" href="DirectionComponent_8ixx_source.html">helios.engine.modules.physics.motion.components.DirectionComponent</a>;</code><br />
+<code>import <a class="el" href="CollisionResponse_8ixx_source.html">helios.engine.modules.physics.collision.types.CollisionResponse</a>;</code><br />
+<code>import <a class="el" href="GameObject_8ixx_source.html">helios.engine.ecs.GameObject</a>;</code><br />
+<code>import <a class="el" href="GameWorld_8ixx_source.html">helios.engine.runtime.world.GameWorld</a>;</code><br />
+<code>import <a class="el" href="SceneNode_8ixx_source.html">helios.scene.SceneNode</a>;</code><br />
+<code>import <a class="el" href="ComposeTransformComponent_8ixx_source.html">helios.engine.modules.spatial.transform.components.ComposeTransformComponent</a>;</code><br />
+<code>import <a class="el" href="TranslationStateComponent_8ixx_source.html">helios.engine.modules.spatial.transform.components.TranslationStateComponent</a>;</code><br />
+<code>import <a class="el" href="SteeringComponent_8ixx_source.html">helios.engine.modules.physics.motion.components.SteeringComponent</a>;</code><br />
+<code>import <a class="el" href="LevelBoundsBehaviorComponent_8ixx_source.html">helios.engine.mechanics.bounds.components.LevelBoundsBehaviorComponent</a>;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Include dependency graph for LevelBoundsBehaviorSystem.ixx:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
@@ -172,7 +173,7 @@ Namespaces</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_08c09894bd9f0ab4b1e9fdc7a2628766.html">helios</a></li><li class="navelem"><a href="dir_860c9de2f65c10e8e262a0e7b5bfee5e.html">engine</a></li><li class="navelem"><a href="dir_38660f863d95a2f91776843a957349cd.html">mechanics</a></li><li class="navelem"><a href="dir_d59bdeca710e8f4702e7134f164a3385.html">bounds</a></li><li class="navelem"><a href="dir_5b7185415d000204e441c832ab8e67a8.html">systems</a></li><li class="navelem"><a href="LevelBoundsBehaviorSystem_8ixx.html">LevelBoundsBehaviorSystem.ixx</a></li>
+    <li class="navelem"><a href="dir_8af83c0dc83a45a35ca6968cdc29a7af.html">tmp</a></li><li class="navelem"><a href="dir_25ba8c016aaabea63a88c40dc27775c8.html">h</a></li><li class="navelem"><a href="dir_b3f59628e993ded3576abd1cf1101eb8.html">include</a></li><li class="navelem"><a href="dir_1ac1243035b4576c146b8d2c8a6274f6.html">helios</a></li><li class="navelem"><a href="dir_1e46d961eb277b2583ee5b095f5b4c8e.html">engine</a></li><li class="navelem"><a href="dir_e1a38fd6dc0543c7f97fb1ccf1615de7.html">mechanics</a></li><li class="navelem"><a href="dir_2816aa6ce68bba06b579a19f4299ce30.html">bounds</a></li><li class="navelem"><a href="dir_e9dafb3000ff16395481c9b1403f9007.html">systems</a></li><li class="navelem"><a href="LevelBoundsBehaviorSystem_8ixx.html">LevelBoundsBehaviorSystem.ixx</a></li>
     <li class="footer">Generated on <span class="timestamp"></span> for helios by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

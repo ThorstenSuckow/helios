@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['yellow_0',['Yellow',['../structhelios_1_1util_1_1Colors.html#abf743502d71f41b0321b3cb6930780e1',1,'helios::util::Colors']]]
+  ['x_5faxisf_0',['X_AXISf',['../namespacehelios_1_1math.html#a3b36cdff48bf8406427da0da013b8b1e',1,'helios::math']]]
 ];

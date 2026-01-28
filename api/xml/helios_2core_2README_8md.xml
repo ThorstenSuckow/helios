@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="helios_2core_2README_8md" kind="file" language="Markdown">
-    <compoundname>README.md</compoundname>
+    <compoundname>helios/core/README.md</compoundname>
     <innernamespace refid="namespacehelios_1_1core">helios::core</innernamespace>
     <briefdescription>
     </briefdescription>
@@ -12,20 +12,93 @@
 <codeline></codeline>
 <codeline><highlight class="normal">Core-level<sp/>utilities<sp/>shared<sp/>across<sp/>the<sp/>helios<sp/>engine.</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>foundational<sp/>infrastructure<sp/>including<sp/>double-buffering<sp/>for<sp/>thread-safe<sp/>message<sp/>passing,<sp/>spatial<sp/>transformations,<sp/>and<sp/>data<sp/>structures<sp/>used<sp/>by<sp/>higher-level<sp/>subsystems.</highlight></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>foundational<sp/>infrastructure<sp/>including<sp/>double-buffering<sp/>for<sp/>thread-safe<sp/>message<sp/>passing,<sp/>spatial<sp/>transformations,<sp/>type<sp/>definitions,<sp/>hash<sp/>algorithms,<sp/>and<sp/>data<sp/>structures<sp/>used<sp/>by<sp/>higher-level<sp/>subsystems.</highlight></codeline>
 <codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Modules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>algorithms</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>`helios.core.algorithms`<sp/>module<sp/>provides<sp/>core<sp/>algorithms<sp/>used<sp/>throughout<sp/>the<sp/>engine.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">####<sp/>FNV-1a<sp/>Hash</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">A<sp/>fast,<sp/>compile-time<sp/>capable<sp/>hash<sp/>function<sp/>for<sp/>generating<sp/>identifiers<sp/>from<sp/>strings:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.core.algorithms;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Compile-time<sp/>hash</highlight></codeline>
+<codeline><highlight class="normal">constexpr<sp/>uint32_t<sp/>id<sp/>=<sp/>helios::core::algorithms::fnv1a_hash(&quot;enemy_spawn&quot;);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Used<sp/>internally<sp/>by<sp/>strongly-typed<sp/>ID<sp/>constructors</highlight></codeline>
+<codeline><highlight class="normal">constexpr<sp/>GameObjectPoolId<sp/>POOL{&quot;bullets&quot;};<sp/><sp/><sp/><sp/>//<sp/>calls<sp/>fnv1a_hash</highlight></codeline>
+<codeline><highlight class="normal">constexpr<sp/>SpawnProfileId<sp/>PROFILE{&quot;enemies&quot;};<sp/><sp/><sp/>//<sp/>calls<sp/>fnv1a_hash</highlight></codeline>
+<codeline><highlight class="normal">constexpr<sp/>SpawnRuleId<sp/>RULE{&quot;wave_spawn&quot;};<sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>calls<sp/>fnv1a_hash</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&gt;<sp/>**Note:**<sp/>FNV-1a<sp/>is<sp/>not<sp/>a<sp/>cryptographic<sp/>hash.<sp/>Do<sp/>not<sp/>use<sp/>for<sp/>security<sp/>purposes.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>types</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>`helios.core.types`<sp/>module<sp/>provides<sp/>core<sp/>type<sp/>definitions<sp/>and<sp/>tag<sp/>types<sp/>used<sp/>throughout<sp/>the<sp/>engine.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">####<sp/>Tag<sp/>Types</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Type<sp/>|<sp/>Description<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|------|-------------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`no_init_t`<sp/>|<sp/>Tag<sp/>type<sp/>to<sp/>skip<sp/>default<sp/>initialization<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`no_init`<sp/>|<sp/>Convenience<sp/>constant<sp/>for<sp/>uninitialized<sp/>construction<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">####<sp/>Uninitialized<sp/>Construction</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>`no_init`<sp/>tag<sp/>enables<sp/>performance-critical<sp/>code<sp/>to<sp/>skip<sp/>default<sp/>initialization<sp/>when<sp/>objects<sp/>will<sp/>be<sp/>immediately<sp/>overwritten:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.util.Guid;</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.core.types;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Generate<sp/>a<sp/>new<sp/>unique<sp/>Guid</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>id<sp/>=<sp/>helios::util::Guid::generate();</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Declare<sp/>uninitialized<sp/>Guid<sp/>for<sp/>later<sp/>assignment</highlight></codeline>
+<codeline><highlight class="normal">helios::util::Guid<sp/>deferredId{helios::core::types::no_init};</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Assign<sp/>later<sp/>when<sp/>the<sp/>value<sp/>is<sp/>known</highlight></codeline>
+<codeline><highlight class="normal">deferredId<sp/>=<sp/>helios::util::Guid::generate();</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&gt;<sp/>**Warning:**<sp/>Objects<sp/>constructed<sp/>with<sp/>`no_init`<sp/>are<sp/>in<sp/>an<sp/>indeterminate<sp/>state.<sp/>Reading<sp/>from<sp/>them<sp/>before<sp/>assignment<sp/>is<sp/>undefined<sp/>behavior.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">####<sp/>Supporting<sp/>no_init<sp/>in<sp/>Custom<sp/>Types</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>`helios::util::Guid`<sp/>class<sp/>demonstrates<sp/>how<sp/>to<sp/>add<sp/>`no_init`<sp/>support:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.core.types;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">class<sp/>Guid<sp/>final<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>value_{};</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">public:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Skip<sp/>initialization<sp/>for<sp/>deferred<sp/>assignment</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>explicit<sp/>Guid(helios::core::types::no_init_t)<sp/>{}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Factory<sp/>method<sp/>for<sp/>generating<sp/>valid<sp/>Guids</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>static<sp/>Guid<sp/>generate()<sp/>noexcept;</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
 <codeline><highlight class="normal">@namespace<sp/>helios::core</highlight></codeline>
 <codeline><highlight class="normal">@brief<sp/>Core<sp/>utilities<sp/>shared<sp/>across<sp/>the<sp/>helios<sp/>engine.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>This<sp/>module<sp/>provides<sp/>foundational<sp/>infrastructure<sp/>including<sp/>double-buffering,<sp/>spatial<sp/>transformations,<sp/>and<sp/>data<sp/>structures<sp/>used<sp/>by<sp/>higher-level<sp/>subsystems.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>This<sp/>module<sp/>provides<sp/>foundational<sp/>infrastructure<sp/>including<sp/>double-buffering,<sp/>spatial<sp/>transformations,<sp/>type<sp/>definitions,<sp/>hash<sp/>algorithms,<sp/>and<sp/>data<sp/>structures<sp/>used<sp/>by<sp/>higher-level<sp/>subsystems.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
 <codeline></codeline>
 <codeline></codeline>
 <codeline></codeline>
     </programlisting>
-    <location file="include/helios/core/README.md"/>
+    <location file="/tmp/h/include/helios/core/README.md"/>
   </compounddef>
 </doxygen>

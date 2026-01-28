@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" line="61" column="58" bodyfile="include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" bodystart="61" bodyend="-1"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" line="74" column="58" bodyfile="/tmp/h/include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" bodystart="74" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" line="70" column="18" bodyfile="include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" bodystart="70" bodyend="74"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" line="84" column="18" bodyfile="/tmp/h/include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" bodystart="84" bodyend="88"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1combat_1_1systems_1_1ProjectileSpawnSystem_1a95de32d6e0fcd39c83f620f53444884b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -67,7 +67,8 @@
 <para>Processes all shooting entities and spawns projectiles. </para>
         </briefdescription>
         <detaileddescription>
-<para>For each entity with ShootComponent, Aim2DComponent, and TranslationStateComponent: 1. Checks if intensity &gt; 0 and direction is valid (normalized) 2. Calculates projectile velocity from source velocity and aim direction 3. Enqueues a SpawnCommand with EmitterContext containing position and velocity</para>
+<para>For each entity with ShootComponent, Aim2DComponent, and TranslationStateComponent:</para>
+<para>1. Skips if aim frequency or intensity are near zero 2. Accumulates `deltaTime * intensity` into the cooldown timer 3. If timer &lt; cooldownDelta, updates timer and continues 4. Calculates projectile count as `floor(timer / cooldownDelta)` 5. Reduces timer by `count * cooldownDelta` 6. Enqueues SpawnCommands with EmitterContext for each projectile</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>updateContext</parametername>
@@ -81,7 +82,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" line="87" column="14" bodyfile="include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" bodystart="87" bodyend="118"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" line="105" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" bodystart="105" bodyend="161"/>
+        <references refid="namespacehelios_1_1math_1af25d93f23f91acae02abfd7706b2e36d" compoundref="utils_8ixx" startline="22">helios::math::EPSILON_LENGTH</references>
         <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="48">helios::engine::ecs::System::gameWorld_</references>
       </memberdef>
     </sectiondef>
@@ -89,6 +91,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" line="9" column="15"/>
+    <location file="/tmp/h/include/helios/engine/mechanics/combat/systems/ProjectileSpawnSystem.ixx" line="9" column="15"/>
   </compounddef>
 </doxygen>

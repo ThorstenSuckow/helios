@@ -5,5 +5,5 @@ var classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter =
     [ "isConnected", "classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter.html#a703e9e04a1554cebea6f1d1924c034dc", null ],
     [ "isKeyPressed", "classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter.html#a611ca19866aa15359d01b8a8ef791c84", null ],
     [ "isKeyPressed", "classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter.html#a7f04d04c60d95fc596929ed1b2bc345c", null ],
-    [ "updateGamepadState", "classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter.html#af65a6a8e99aac0f6867b6456d0849f9a", null ]
+    [ "updateGamepadState", "classhelios_1_1ext_1_1glfw_1_1input_1_1GLFWInputAdapter.html#af7ae7b4878b44f0b6ca2c2184a807bf3", null ]
 ];

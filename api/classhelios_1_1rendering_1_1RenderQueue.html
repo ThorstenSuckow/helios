@@ -156,7 +156,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 <p>An instance of `RenderQueue` can be cleared after being processed in a `RenderPass` for reuse in subsequent render passes.</p>
 <p>The class is designed to be non-copyable. </p>
 
-<p class="definition">Definition at line <a class="el" href="RenderQueue_8ixx_source.html#l00033">33</a> of file <a class="el" href="RenderQueue_8ixx_source.html">RenderQueue.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RenderQueue_8ixx_source.html#l00034">34</a> of file <a class="el" href="RenderQueue_8ixx_source.html">RenderQueue.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aeeb69af61f5744c4ca58825ecfe0b78d" name="aeeb69af61f5744c4ca58825ecfe0b78d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeeb69af61f5744c4ca58825ecfe0b78d">&#9670;&#160;</a></span>~RenderQueue()</h2>
@@ -315,7 +315,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -327,11 +327,13 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000021">Todo</a></b></dt><dd>prevent adding renderables while rendering </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000027">Todo</a></b></dt><dd>prevent adding renderables while rendering </dd></dl>
 
-<p class="reference">References <a class="el" href="#ace107c45024c29efc237107e3307c2ab">add()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RenderQueue_8ixx_source.html#l00084">84</a> of file <a class="el" href="RenderQueue_8ixx_source.html">RenderQueue.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#ace107c45024c29efc237107e3307c2ab">add()</a>.</p>
+<p class="reference">References <a class="el" href="RenderQueue_8ixx_source.html#l00084">add()</a>, <a class="el" href="RenderQueue_8ixx_source.html#l00045">logger_</a>, and <a class="el" href="RenderQueue_8ixx_source.html#l00040">renderCommands_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="RenderQueue_8ixx_source.html#l00084">add()</a>, and <a class="el" href="RenderPassFactory_8ixx_source.html#l00104">helios::rendering::RenderPassFactory::populateRenderQueue()</a>.</p>
 <div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
@@ -342,7 +344,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 <div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-6-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderQueue_ace107c45024c29efc237107e3307c2ab_icgraph.svg" width="154" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderQueue_ace107c45024c29efc237107e3307c2ab_icgraph.svg" width="100%" height="362"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -365,28 +367,25 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Clears all `RenderCommand` objects from the queue. </p>
 <p>This prepares this queue to be reused in a new rendering pass. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000028">Todo</a></b></dt><dd>strategy to decide whether shrink_to_fit should only be applied if expected numbers RenderCommands for the subsequent render passes is less than current size? </dd></dl>
 
-<p class="reference">References <a class="el" href="#a2d14f75f8f57728f71608dbfde485d80">clear()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RenderQueue_8ixx_source.html#l00107">107</a> of file <a class="el" href="RenderQueue_8ixx_source.html">RenderQueue.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#a2d14f75f8f57728f71608dbfde485d80">clear()</a>.</p>
-<div id="dynsection-7" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<p class="reference">References <a class="el" href="RenderQueue_8ixx_source.html#l00040">renderCommands_</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="RenderPassFactory_8ixx_source.html#l00104">helios::rendering::RenderPassFactory::populateRenderQueue()</a>.</p>
+<div id="dynsection-7" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-7-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderQueue_a2d14f75f8f57728f71608dbfde485d80_cgraph.svg" width="162" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-8" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-8-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderQueue_a2d14f75f8f57728f71608dbfde485d80_icgraph.svg" width="162" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderQueue_a2d14f75f8f57728f71608dbfde485d80_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -409,7 +408,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -417,21 +416,9 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 <p>Returns the number of `RenderCommand`s this queue contains. </p>
 <dl class="section return"><dt>Returns</dt><dd>The number of RenderCommands in this queue. </dd></dl>
 
-<p class="reference">References <a class="el" href="#af3141c90009b7d87bc9f6a40ff6f852d">count()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RenderQueue_8ixx_source.html#l00122">122</a> of file <a class="el" href="RenderQueue_8ixx_source.html">RenderQueue.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#af3141c90009b7d87bc9f6a40ff6f852d">count()</a>.</p>
-<div id="dynsection-9" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-9-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderQueue_af3141c90009b7d87bc9f6a40ff6f852d_cgraph.svg" width="166" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-10" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-10-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderQueue_af3141c90009b7d87bc9f6a40ff6f852d_icgraph.svg" width="166" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="reference">References <a class="el" href="RenderQueue_8ixx_source.html#l00040">renderCommands_</a>.</p>
 
 </div>
 </div>
@@ -461,10 +448,10 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 <p>Delete copy assignment operator. </p>
 
 <p class="reference">References <a class="el" href="#a68f1afed9c85bf66442861dc17a389b9">RenderQueue()</a>.</p>
-<div id="dynsection-11" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-8" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-11-content" class="dyncontent" style="display:none;">
+<div id="dynsection-8-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderQueue_a5f6863dbb13ce29c39e9051858d036fe_cgraph.svg" width="450" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -496,10 +483,10 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 <p>Delete move assignment operator. </p>
 
 <p class="reference">References <a class="el" href="#a68f1afed9c85bf66442861dc17a389b9">RenderQueue()</a>.</p>
-<div id="dynsection-12" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-9" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-12-content" class="dyncontent" style="display:none;">
+<div id="dynsection-9-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderQueue_a87cdef75d6abae5fbf16cddf692bde88_cgraph.svg" width="450" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
@@ -523,7 +510,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -531,26 +518,14 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 <p>Returns a const ref to the internal vector of `RenderCommand`. </p>
 <dl class="section return"><dt>Returns</dt><dd>A const ref to the list of `RenderCommand`s of this queue. </dd></dl>
 
-<p class="reference">References <a class="el" href="#ae1dc0c33febdc505e85b0607f29594ce">renderCommands()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RenderQueue_8ixx_source.html#l00098">98</a> of file <a class="el" href="RenderQueue_8ixx_source.html">RenderQueue.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#ae1dc0c33febdc505e85b0607f29594ce">renderCommands()</a>.</p>
-<div id="dynsection-13" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-13-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderQueue_ae1dc0c33febdc505e85b0607f29594ce_cgraph.svg" width="246" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-14" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-14-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-14-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderQueue_ae1dc0c33febdc505e85b0607f29594ce_icgraph.svg" width="246" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="reference">References <a class="el" href="RenderQueue_8ixx_source.html#l00040">renderCommands_</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>include/helios/rendering/<a class="el" href="RenderQueue_8ixx_source.html">RenderQueue.ixx</a></li>
+<li><a class="el" href="RenderQueue_8ixx_source.html">RenderQueue.ixx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

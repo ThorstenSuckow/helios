@@ -129,10 +129,10 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><p>Represents a destination for rendering operations, such as a window's framebuffer. </p>
 <p>A <a class="el" href="classhelios_1_1rendering_1_1RenderTarget.html" title="Represents a destination for rendering operations, such as a window&#39;s framebuffer.">RenderTarget</a> encapsulates a buffer (e.g., the default framebuffer or an off-screen texture) into which a scene can be rendered. It manages one or more `Viewport` objects, which define specific rectangular areas within the target.</p>
 <p>When the <a class="el" href="classhelios_1_1rendering_1_1RenderTarget.html" title="Represents a destination for rendering operations, such as a window&#39;s framebuffer.">RenderTarget</a> is resized, it notifies all its associated viewports so they can update their states accordingly (e.g., camera aspect ratio).</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000022">Todo</a></b></dt><dd>This implementation currently represents only the **default framebuffer**. Future extensions should allow it to represent arbitrary framebuffer objects (FBOs), using indices. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000029">Todo</a></b></dt><dd>This implementation currently represents only the **default framebuffer**. Future extensions should allow it to represent arbitrary framebuffer objects (FBOs), using indices. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd>glGenFramebuffers </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RenderTarget_8ixx_source.html#l00031">31</a> of file <a class="el" href="RenderTarget_8ixx_source.html">RenderTarget.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RenderTarget_8ixx_source.html#l00032">32</a> of file <a class="el" href="RenderTarget_8ixx_source.html">RenderTarget.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af6d7b07eb919b51e7b56db8f89fadbbd" name="af6d7b07eb919b51e7b56db8f89fadbbd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af6d7b07eb919b51e7b56db8f89fadbbd">&#9670;&#160;</a></span>RenderTarget() <span class="overload">[1/2]</span></h2>
@@ -188,7 +188,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel explicit">explicit</span><span class="mlabel export">export</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel export">export</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -210,12 +210,14 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#a45cfbd90ee4f0fa1f303e13721de0a76" title="Adds a viewport to this render target and establishes a parent-child relationship.">addViewport()</a> </dd></dl>
 
-<p class="reference">References <a class="el" href="#a3e4f37f9cfb37b3327ef7285319552fe">height()</a>, and <a class="el" href="#a4e5e2981a9a80dcf74936038c14d21f6">width()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RenderTarget_8ixx_source.html#l00074">74</a> of file <a class="el" href="RenderTarget_8ixx_source.html">RenderTarget.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="RenderTarget_8ixx_source.html#l00100">addViewport()</a>, <a class="el" href="RenderTarget_8ixx_source.html#l00149">height()</a>, and <a class="el" href="RenderTarget_8ixx_source.html#l00140">width()</a>.</p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderTarget_a33affb07801058a9950c0daba6e0aeaf_cgraph.svg" width="419" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderTarget_a33affb07801058a9950c0daba6e0aeaf_cgraph.svg" width="460" height="179"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -239,12 +241,13 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Adds a viewport to this render target and establishes a parent-child relationship. </p>
+<p>Makes sure the viewport is informed about any possible bounds updates by calling onRenderTargetResize afterwards.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">viewport</td><td>A shared pointer to the `Viewport` to be added.</td></tr>
@@ -258,6 +261,16 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="RenderTarget_8ixx_source.html#l00100">100</a> of file <a class="el" href="RenderTarget_8ixx_source.html">RenderTarget.ixx</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="RenderTarget_8ixx_source.html#l00074">RenderTarget()</a>.</p>
+<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderTarget_a45cfbd90ee4f0fa1f303e13721de0a76_icgraph.svg" width="460" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>
@@ -279,7 +292,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -287,20 +300,14 @@ Public Member Functions</h2></td></tr>
 <p>Gets the height of the render target. </p>
 <dl class="section return"><dt>Returns</dt><dd>The height in pixels. </dd></dl>
 
-<p class="reference">References <a class="el" href="#a3e4f37f9cfb37b3327ef7285319552fe">height()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RenderTarget_8ixx_source.html#l00149">149</a> of file <a class="el" href="RenderTarget_8ixx_source.html">RenderTarget.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#a3e4f37f9cfb37b3327ef7285319552fe">height()</a>, <a class="el" href="#a33affb07801058a9950c0daba6e0aeaf">RenderTarget()</a>, and <a class="el" href="#a65cfc3bea57ac3b5eb398c85754dc049">setSize()</a>.</p>
-<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderTarget_a3e4f37f9cfb37b3327ef7285319552fe_cgraph.svg" width="168" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="reference">Referenced by <a class="el" href="OpenGLDevice_8ixx_source.html#l00113">helios::ext::opengl::rendering::OpenGLDevice::beginRenderPass()</a>, <a class="el" href="RenderTarget_8ixx_source.html#l00074">RenderTarget()</a>, and <a class="el" href="RenderTarget_8ixx_source.html#l00126">setSize()</a>.</p>
 <div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderTarget_a3e4f37f9cfb37b3327ef7285319552fe_icgraph.svg" width="419" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderTarget_a3e4f37f9cfb37b3327ef7285319552fe_icgraph.svg" width="419" height="195"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -327,7 +334,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -340,15 +347,17 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000024">Todo</a></b></dt><dd>A LayoutManager could be introduced to manage the arrangement of multiple viewports.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1rendering_1_1Viewport.html#a7739f87efe62f23fb891fe9cbfc4e1c2" title="Notifies the viewport of a change in the parent RenderTarget&#39;s dimensions.">helios::rendering::Viewport::onRenderTargetResize()</a> </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000031">Todo</a></b></dt><dd>A LayoutManager could be introduced to manage the arrangement of multiple viewports.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1rendering_1_1Viewport.html#a7909b0f32a87664efeaabf7ca6fe51a4" title="Notifies the viewport of a change in the parent RenderTarget&#39;s dimensions.">helios::rendering::Viewport::onRenderTargetResize()</a> </dd></dl>
 
-<p class="reference">References <a class="el" href="#a3e4f37f9cfb37b3327ef7285319552fe">height()</a>, and <a class="el" href="#a4e5e2981a9a80dcf74936038c14d21f6">width()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RenderTarget_8ixx_source.html#l00126">126</a> of file <a class="el" href="RenderTarget_8ixx_source.html">RenderTarget.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="RenderTarget_8ixx_source.html#l00149">height()</a>, and <a class="el" href="RenderTarget_8ixx_source.html#l00140">width()</a>.</p>
 <div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderTarget_a65cfc3bea57ac3b5eb398c85754dc049_cgraph.svg" width="379" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderTarget_a65cfc3bea57ac3b5eb398c85754dc049_cgraph.svg" width="379" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -371,7 +380,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -379,18 +388,20 @@ Public Member Functions</h2></td></tr>
 <p>Gets the width of the render target. </p>
 <dl class="section return"><dt>Returns</dt><dd>The width in pixels. </dd></dl>
 
-<p class="reference">Referenced by <a class="el" href="#a33affb07801058a9950c0daba6e0aeaf">RenderTarget()</a>, and <a class="el" href="#a65cfc3bea57ac3b5eb398c85754dc049">setSize()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RenderTarget_8ixx_source.html#l00140">140</a> of file <a class="el" href="RenderTarget_8ixx_source.html">RenderTarget.ixx</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="OpenGLDevice_8ixx_source.html#l00113">helios::ext::opengl::rendering::OpenGLDevice::beginRenderPass()</a>, <a class="el" href="RenderTarget_8ixx_source.html#l00074">RenderTarget()</a>, and <a class="el" href="RenderTarget_8ixx_source.html#l00126">setSize()</a>.</p>
 <div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-4-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderTarget_a4e5e2981a9a80dcf74936038c14d21f6_icgraph.svg" width="414" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderTarget_a4e5e2981a9a80dcf74936038c14d21f6_icgraph.svg" width="414" height="195"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>include/helios/rendering/<a class="el" href="RenderTarget_8ixx_source.html">RenderTarget.ixx</a></li>
+<li><a class="el" href="RenderTarget_8ixx_source.html">RenderTarget.ixx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

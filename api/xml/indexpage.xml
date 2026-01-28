@@ -6,11 +6,11 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<para><anchor id="index_1md_docs_2heliosapi"/></para>
-<sect1 id="index_1autotoc_md340">
+<para><anchor id="index_1md__2tmp_2h_2docs_2heliosapi"/></para>
+<sect1 id="index_1autotoc_md499">
 <title>Introduction</title><para><computeroutput><ref refid="namespacehelios" kindref="compound">helios</ref></computeroutput> is an ongoing, educational project and strives for providing a foundational and modular technical backbone for game development. Designed with a top-down, prototype-oriented approach, it emphasizes a clear separation of concerns and robust architectural patterns to help with creating maintainable games.</para>
 </sect1>
-<sect1 id="index_1autotoc_md341">
+<sect1 id="index_1autotoc_md500">
 <title>Core Purpose</title><para>The primary objective of <computeroutput><ref refid="namespacehelios" kindref="compound">helios</ref></computeroutput> is to offer a flexible and extensible platform for interactive games. As a prototype, it provides the following systems:</para>
 <para><itemizedlist>
 <listitem><para><bold>Rendering Pipeline:</bold> A rendering layer with customizable render passes.</para>
@@ -19,9 +19,9 @@
 </listitem></itemizedlist>
 </para>
 </sect1>
-<sect1 id="index_1autotoc_md342">
+<sect1 id="index_1autotoc_md501">
 <title>Architecture Overview</title><para>The framework&apos;s architecture follows a component-based philosophy, providing abstract interfaces that decouple high-level scene descriptions from underlying hardware implementations.</para>
-<sect2 id="index_1autotoc_md343">
+<sect2 id="index_1autotoc_md502">
 <title>Core Modules</title><para><programlisting><codeline><highlight class="normal">helios</highlight></codeline>
 <codeline><highlight class="normal">├──<sp/>core<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Units,<sp/>buffers,<sp/>and<sp/>fundamental<sp/>constants</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>buffer<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Double-buffered<sp/>data<sp/>structures</highlight></codeline>
@@ -48,9 +48,9 @@
 <codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>runtime<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Runtime<sp/>infrastructure</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>├──<sp/>world<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameWorld,<sp/>Level,<sp/>UpdateContext,<sp/>Manager</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>├──<sp/>gameloop<sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameLoop,<sp/>Phase,<sp/>Pass</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>├──<sp/>pooling<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameObjectPool,<sp/>PoolRegistry,<sp/>PoolFacade</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>├──<sp/>pooling<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameObjectPool,<sp/>PoolManager,<sp/>PoolRegistry</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>├──<sp/>messaging<sp/><sp/><sp/><sp/><sp/>#<sp/>CommandBuffer,<sp/>Dispatchers,<sp/>EventBus</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>└──<sp/>factory<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameObjectFactory</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>└──<sp/>spawn<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>SpawnManager,<sp/>SpawnScheduler,<sp/>behaviors,<sp/>policies</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>modules<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Domain-specific<sp/>components<sp/>and<sp/>systems</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>├──<sp/>physics<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Collision,<sp/>motion<sp/>systems</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>├──<sp/>spatial<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Transform<sp/>components</highlight></codeline>
@@ -68,7 +68,7 @@
 <codeline><highlight class="normal">└──<sp/>app<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Application<sp/>lifecycle<sp/>and<sp/>controllers</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="index_1autotoc_md344">
+<sect2 id="index_1autotoc_md503">
 <title>Extension Modules</title><para><programlisting><codeline><highlight class="normal">helios.ext</highlight></codeline>
 <codeline><highlight class="normal">├──<sp/>imgui<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>ImGui<sp/>integration<sp/>for<sp/>debug<sp/>overlays</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>widgets<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Ready-to-use<sp/>debug<sp/>widgets</highlight></codeline>
@@ -90,8 +90,8 @@
 </programlisting></para>
 </sect2>
 </sect1>
-<sect1 id="index_1autotoc_md345">
-<title>Core Concepts</title><sect2 id="index_1autotoc_md346">
+<sect1 id="index_1autotoc_md504">
+<title>Core Concepts</title><sect2 id="index_1autotoc_md505">
 <title>1. Scene Graph</title><para>The scene graph organizes objects hierarchically, with automatic transform propagation from parent to child nodes. Transform inheritance can be selectively controlled per node.</para>
 <para><bold>Key Classes:</bold><itemizedlist>
 <listitem><para><computeroutput>Scene</computeroutput> - Root container for all scene objects</para>
@@ -123,7 +123,7 @@
 <codeline><highlight class="normal">camPtr-&gt;lookAt(<ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">vec3f</ref>(0.0f,<sp/>0.0f,<sp/>0.0f),<sp/><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">vec3f</ref>(0.0f,<sp/>1.0f,<sp/>0.0f));</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="index_1autotoc_md347">
+<sect2 id="index_1autotoc_md506">
 <title>2. Rendering Pipeline</title><para>The rendering pipeline uses a deferred command pattern with render passes.</para>
 <para><bold>Flow:</bold> <programlisting><codeline><highlight class="normal">Scene<sp/>→<sp/>Snapshot<sp/>→<sp/>RenderPass<sp/>→<sp/>RenderQueue<sp/>→<sp/>RenderCommand<sp/>→<sp/>GPU</highlight></codeline>
 </programlisting></para>
@@ -150,7 +150,7 @@
 <codeline><highlight class="normal">};</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="index_1autotoc_md348">
+<sect2 id="index_1autotoc_md507">
 <title>3. Material System</title><para>Materials define surface appearance with shaders and properties.</para>
 <para><bold>Key Classes:</bold><itemizedlist>
 <listitem><para><computeroutput>Material</computeroutput> - Shader + default MaterialProperties</para>
@@ -170,7 +170,7 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>std::make_shared&lt;MaterialProperties&gt;(materialProps));</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="index_1autotoc_md349">
+<sect2 id="index_1autotoc_md508">
 <title>4. Input System</title><para>Unified input handling for keyboard, mouse, and gamepad.</para>
 <para><bold>Key Classes:</bold><itemizedlist>
 <listitem><para><computeroutput>InputManager</computeroutput> - Central input coordinator</para>
@@ -215,7 +215,7 @@
 <codeline><highlight class="normal">settings.setInvertRightY(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="index_1autotoc_md350">
+<sect2 id="index_1autotoc_md509">
 <title>5. Logging System</title><para>Flexible logging with configurable output destinations (sinks).</para>
 <para><bold>Key Classes:</bold><itemizedlist>
 <listitem><para><computeroutput>Logger</computeroutput> - Scoped logger for categorized output</para>
@@ -243,7 +243,7 @@
 <codeline><highlight class="normal">mgr.disableSink(</highlight><highlight class="stringliteral">&quot;imgui&quot;</highlight><highlight class="normal">);</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="index_1autotoc_md351">
+<sect2 id="index_1autotoc_md510">
 <title>6. ImGui Debug Overlay</title><para>Integrated debug UI with docking support and persistent settings.</para>
 <para><bold>Key Classes:</bold><itemizedlist>
 <listitem><para><computeroutput>ImGuiOverlay</computeroutput> - Widget manager with DockSpace support</para>
@@ -297,7 +297,7 @@
 </listitem></itemizedlist>
 </para>
 </sect2>
-<sect2 id="index_1autotoc_md352">
+<sect2 id="index_1autotoc_md511">
 <title>8. Game System</title><para>A composition-based game architecture separating data (Components) from behavior (Systems).</para>
 <para><bold>Key Classes:</bold><itemizedlist>
 <listitem><para><computeroutput>GameObject</computeroutput> - Container for Components with unique GUID</para>
@@ -352,18 +352,23 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>gameLoop.update(updateContext);</highlight></codeline>
 <codeline><highlight class="normal">}</highlight></codeline>
 </programlisting></para>
-<para><bold>Object Pooling:</bold> <programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8runtime_8pooling_8GameObjectPool" kindref="compound">helios.engine.runtime.pooling.GameObjectPool</ref>;</highlight></codeline>
+<para><bold>Object Pooling:</bold> <programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8runtime_8pooling_8GameObjectPoolManager" kindref="compound">helios.engine.runtime.pooling.GameObjectPoolManager</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8runtime_8spawn_8SpawnManager" kindref="compound">helios.engine.runtime.spawn.SpawnManager</ref>;</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Create<sp/>pool<sp/>for<sp/>projectiles</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>pool<sp/>=<sp/>std::make_unique&lt;GameObjectPool&gt;();</highlight></codeline>
-<codeline><highlight class="normal">gameWorld.addPool(bulletPoolId,<sp/>std::move(pool));</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Create<sp/>pool<sp/>manager</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>poolManager<sp/>=<sp/>std::make_unique&lt;GameObjectPoolManager&gt;();</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Register<sp/>manager<sp/>for<sp/>spawn/despawn</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal">gameWorld.addManager&lt;ProjectilePoolManager&gt;(bulletPoolId,<sp/>factory,<sp/>spawnCondition);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Create<sp/>spawn<sp/>manager<sp/>with<sp/>profiles</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>spawnManager<sp/>=<sp/>std::make_unique&lt;SpawnManager&gt;();</highlight></codeline>
+<codeline><highlight class="normal">spawnManager-&gt;addSpawnProfile(enemyProfileId,<sp/>std::move(enemyProfile));</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Add<sp/>managers<sp/>to<sp/>world</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">gameWorld.addManager(std::move(poolManager));</highlight></codeline>
+<codeline><highlight class="normal">gameWorld.addManager(std::move(spawnManager));</highlight></codeline>
 </programlisting></para>
-<para>See Component System, Game Loop Architecture, and Command System for details.</para>
+<para>See Component System, Game Loop Architecture, Command System, and Spawn System for details.</para>
 </sect2>
-<sect2 id="index_1autotoc_md353">
+<sect2 id="index_1autotoc_md512">
 <title>9. Units System</title><para>Standardized measurement units for consistent object sizing across the engine.</para>
 <para><bold>Key Constants:</bold><itemizedlist>
 <listitem><para>Standard unit: <bold>Meter</bold> (1 hu = 1 m)</para>
@@ -381,7 +386,7 @@
 <codeline><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>SHIP_WIDTH<sp/>=<sp/>5.0f;<sp/><sp/></highlight><highlight class="comment">//<sp/>5<sp/>hu<sp/>=<sp/>5<sp/>meters</highlight></codeline>
 </programlisting></para>
 </sect2>
-<sect2 id="index_1autotoc_md354">
+<sect2 id="index_1autotoc_md513">
 <title>7. Frame Pacing and Performance Metrics</title><para>Control frame rate and monitor performance with built-in timing tools.</para>
 <para><bold>Key Classes:</bold><itemizedlist>
 <listitem><para><computeroutput>FramePacer</computeroutput> - Maintains consistent frame rate through precise timing</para>
@@ -432,8 +437,8 @@
 </programlisting></para>
 </sect2>
 </sect1>
-<sect1 id="index_1autotoc_md355">
-<title>Quick Start</title><sect2 id="index_1autotoc_md356">
+<sect1 id="index_1autotoc_md514">
+<title>Quick Start</title><sect2 id="index_1autotoc_md515">
 <title>Creating a Simple Application</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8ext_8glfw_8app_8GLFWFactory" kindref="compound">helios.ext.glfw.app.GLFWFactory</ref>;</highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8scene_8Scene" kindref="compound">helios.scene.Scene</ref>;</highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8scene_8CameraSceneNode" kindref="compound">helios.scene.CameraSceneNode</ref>;</highlight></codeline>
@@ -490,51 +495,53 @@
 </programlisting></para>
 </sect2>
 </sect1>
-<sect1 id="index_1autotoc_md357">
+<sect1 id="index_1autotoc_md516">
 <title>Module Details</title><para>For detailed information about each module, see:</para>
-<sect2 id="index_1autotoc_md358">
+<sect2 id="index_1autotoc_md517">
 <title>Core Concepts</title><para><itemizedlist>
 <listitem><para><bold>Component System</bold> - ECS-style composition architecture</para>
 </listitem><listitem><para><bold>Game Loop Architecture</bold> - Phase/Pass structure and event handling</para>
 </listitem><listitem><para><bold>Command System</bold> - Deferred action execution</para>
 </listitem><listitem><para><bold>Event System</bold> - Phase/Pass event propagation</para>
+</listitem><listitem><para><bold>Spawn System</bold> - Entity lifecycle with spawn scheduling and pooling</para>
 </listitem><listitem><para><bold>Scene Graph</bold> - Hierarchical scene organization</para>
 </listitem><listitem><para><bold>Conventions</bold> - Coordinate system, units, matrix storage</para>
 </listitem></itemizedlist>
 </para>
 </sect2>
-<sect2 id="index_1autotoc_md359">
+<sect2 id="index_1autotoc_md518">
 <title>Module References</title><para><itemizedlist>
-<listitem><para><bold><ref refid="dir_6a0662f282a699b80270a7344921b324" kindref="compound">Core</ref></bold> - Units and fundamental constants</para>
-</listitem><listitem><para><bold><ref refid="dir_9ba586a504c756f19720715161f17166" kindref="compound">Rendering</ref></bold> - Rendering system and pipeline</para>
-</listitem><listitem><para><bold><ref refid="dir_b6e017bc8c299f04fc1162fc4677be61" kindref="compound">Scene</ref></bold> - Scene graph and camera</para>
-</listitem><listitem><para><bold><ref refid="dir_860c9de2f65c10e8e262a0e7b5bfee5e" kindref="compound">Engine</ref></bold> - Game engine core (ECS, runtime, modules)</para>
-</listitem><listitem><para><bold><ref refid="dir_0b25300d10cd1aefe5f6cbf740a7fedf" kindref="compound">Modules</ref></bold> - Domain-specific components and systems</para>
-</listitem><listitem><para><bold><ref refid="dir_38660f863d95a2f91776843a957349cd" kindref="compound">Mechanics</ref></bold> - Gameplay mechanics (combat, spawn, bounds)</para>
-</listitem><listitem><para><bold><ref refid="dir_58a7612d3773fb780b0e5d4a861b7b53" kindref="compound">Input</ref></bold> - Input handling</para>
-</listitem><listitem><para><bold><ref refid="dir_b455ca46f56b25e6f79d18a91f2ddf15" kindref="compound">Tooling</ref></bold> - Performance metrics and profiling</para>
-</listitem><listitem><para><bold><ref refid="dir_0046d781185df00694c70533b055a138" kindref="compound">Math</ref></bold> - Mathematical operations</para>
-</listitem><listitem><para><bold><ref refid="dir_f420875d55816fb78e81b706f36fb7ba" kindref="compound">Window</ref></bold> - Window management</para>
-</listitem><listitem><para><bold><ref refid="dir_7f0768799dd37ef2f2adcdfec91ab1e9" kindref="compound">Utilities</ref></bold> - Logging, file I/O</para>
-</listitem><listitem><para><bold><ref refid="dir_54bae32d8466bfad053a02d5bd535fae" kindref="compound">ImGui Extension</ref></bold> - Debug overlay and widgets</para>
+<listitem><para><bold><ref refid="dir_4e12247f2bbe360a59cd98a83515e8f1" kindref="compound">Core</ref></bold> - Units and fundamental constants</para>
+</listitem><listitem><para><bold><ref refid="dir_614bfcfaacae36fbea464e65a5a85120" kindref="compound">Rendering</ref></bold> - Rendering system and pipeline</para>
+</listitem><listitem><para><bold><ref refid="dir_dde1b4dbeafc450b8ae5525133d75a82" kindref="compound">Scene</ref></bold> - Scene graph and camera</para>
+</listitem><listitem><para><bold><ref refid="dir_1e46d961eb277b2583ee5b095f5b4c8e" kindref="compound">Engine</ref></bold> - Game engine core (ECS, runtime, modules)</para>
+</listitem><listitem><para><bold><ref refid="dir_87b9f5c33f5a8f4d48db11d48f10a572" kindref="compound">Modules</ref></bold> - Domain-specific components and systems</para>
+</listitem><listitem><para><bold><ref refid="dir_e1a38fd6dc0543c7f97fb1ccf1615de7" kindref="compound">Mechanics</ref></bold> - Gameplay mechanics (combat, spawn, bounds)</para>
+</listitem><listitem><para><bold><ref refid="dir_920d0445133e8943cdb9dc7f8f55cbd5" kindref="compound">Spawn</ref></bold> - Spawn scheduling, profiles, and behaviors</para>
+</listitem><listitem><para><bold><ref refid="dir_e838ebfdcf77e050c9d833b3366569df" kindref="compound">Input</ref></bold> - Input handling</para>
+</listitem><listitem><para><bold><ref refid="dir_417701c4e551058911a40fafc2072bfe" kindref="compound">Tooling</ref></bold> - Performance metrics and profiling</para>
+</listitem><listitem><para><bold><ref refid="dir_268add6b94670641c68bb834cdcb4292" kindref="compound">Math</ref></bold> - Mathematical operations</para>
+</listitem><listitem><para><bold><ref refid="dir_96c6bc0c43837fd044c9b580c42bd3e6" kindref="compound">Window</ref></bold> - Window management</para>
+</listitem><listitem><para><bold><ref refid="dir_3e2f71566425d27b6ac8140f1223a941" kindref="compound">Utilities</ref></bold> - Logging, file I/O</para>
+</listitem><listitem><para><bold><ref refid="dir_c3858834553f52344d5b2ca634f5aff5" kindref="compound">ImGui Extension</ref></bold> - Debug overlay and widgets</para>
 </listitem></itemizedlist>
 </para>
 </sect2>
 </sect1>
-<sect1 id="index_1autotoc_md360">
-<title>Advanced Topics</title><sect2 id="index_1autotoc_md361">
+<sect1 id="index_1autotoc_md519">
+<title>Advanced Topics</title><sect2 id="index_1autotoc_md520">
 <title>Custom Rendering Backend</title><para>To implement a custom rendering backend:</para>
 <para>1. Implement <computeroutput>RenderingDevice</computeroutput> interface 2. Extend <computeroutput>Mesh</computeroutput> for your platform (e.g., <computeroutput>VulkanMesh</computeroutput>) 3. Extend <computeroutput>Shader</computeroutput> for your platform (e.g., <computeroutput>VulkanShader</computeroutput>) 4. Create a factory (e.g., <computeroutput>VulkanFactory</computeroutput>)</para>
 </sect2>
-<sect2 id="index_1autotoc_md362">
+<sect2 id="index_1autotoc_md521">
 <title>Custom Input Adapter</title><para>To implement a custom input adapter:</para>
 <para>1. Implement <computeroutput>InputAdapter</computeroutput> interface 2. Map platform-specific events to helios types 3. Update <computeroutput>GamepadState</computeroutput> on polling</para>
 </sect2>
 </sect1>
-<sect1 id="index_1autotoc_md363">
+<sect1 id="index_1autotoc_md522">
 <title>API Documentation</title><para>For detailed class-by-class documentation, see the <ulink url="https://helios.garagecraft.games/docs/helios/">Doxygen-generated API reference</ulink>.</para>
 </sect1>
-<sect1 id="index_1autotoc_md364">
+<sect1 id="index_1autotoc_md523">
 <title>Examples</title><para>Check the <ulink url="../examples/">examples/</ulink> directory for complete working examples:</para>
 <para><itemizedlist>
 <listitem><para><bold>Simple Cube Rendering</bold> - Basic rendering tutorial</para>
@@ -545,10 +552,10 @@
 </listitem></itemizedlist>
 </para>
 </sect1>
-<sect1 id="index_1autotoc_md365">
+<sect1 id="index_1autotoc_md524">
 <title>License</title><para><computeroutput><ref refid="namespacehelios" kindref="compound">helios</ref></computeroutput> is distributed under the MIT-license. </para>
 </sect1>
     </detaileddescription>
-    <location file="docs/heliosapi.md"/>
+    <location file="/tmp/h/docs/heliosapi.md"/>
   </compounddef>
 </doxygen>

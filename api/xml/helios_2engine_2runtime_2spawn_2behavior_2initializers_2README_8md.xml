@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="helios_2engine_2runtime_2spawn_2behavior_2initializers_2README_8md" kind="file" language="Markdown">
-    <compoundname>README.md</compoundname>
+    <compoundname>helios/engine/runtime/spawn/behavior/initializers/README.md</compoundname>
     <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers">helios::engine::runtime::spawn::behavior::initializers</innernamespace>
     <briefdescription>
     </briefdescription>
@@ -21,7 +21,8 @@
 <codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
 <codeline><highlight class="normal">|-------|---------|</highlight></codeline>
 <codeline><highlight class="normal">|<sp/>`EmitterInitializer`<sp/>|<sp/>Configures<sp/>entity<sp/>direction/velocity<sp/>based<sp/>on<sp/>emitter<sp/>state<sp/>|</highlight></codeline>
-<codeline><highlight class="normal">|<sp/>`RandomDirectionInitializer`<sp/>|<sp/>Applies<sp/>a<sp/>random<sp/>2D<sp/>direction<sp/>to<sp/>spawned<sp/>entities<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`MoveInitializer`<sp/>|<sp/>Sets<sp/>movement<sp/>direction<sp/>using<sp/>various<sp/>strategies<sp/>(random,<sp/>axis,<sp/>point)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`DelayedComponentEnablerInitializer`<sp/>|<sp/>Defers<sp/>component<sp/>activation<sp/>with<sp/>configurable<sp/>delay<sp/>|</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
 <codeline></codeline>
@@ -37,8 +38,34 @@
 <codeline><highlight class="normal">auto<sp/>enemyProfile<sp/>=<sp/>SpawnProfile{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.gameObjectPoolId<sp/>=<sp/>enemyPoolId,</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.spawnPlacer<sp/>=<sp/>std::make_unique&lt;RandomSpawnPlacer&gt;(),</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.spawnInitializer<sp/>=<sp/>std::make_unique&lt;RandomDirectionInitializer&gt;()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.spawnInitializer<sp/>=<sp/>std::make_unique&lt;MoveInitializer&gt;(DirectionType::Random)</highlight></codeline>
 <codeline><highlight class="normal">};</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Spawn<sp/>with<sp/>collision<sp/>immunity<sp/>for<sp/>0.5<sp/>seconds</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>immuneProfile<sp/>=<sp/>SpawnProfile{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.gameObjectPoolId<sp/>=<sp/>enemyPoolId,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.spawnInitializer<sp/>=<sp/>std::make_unique&lt;DelayedComponentEnablerInitializer&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0.5f,<sp/><sp/>//<sp/>delay<sp/>in<sp/>seconds</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;ComponentTypeId&gt;{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ComponentTypeId::of&lt;CollisionComponent&gt;()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>)</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Delayed<sp/>Component<sp/>Activation</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>`DelayedComponentEnablerInitializer`<sp/>works<sp/>with<sp/>entities<sp/>that<sp/>have<sp/>a<sp/>`DelayedComponentEnabler`<sp/>component<sp/>attached<sp/>(via<sp/>`LifecycleBuilder`).<sp/>It<sp/>supports:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>**Fixed<sp/>delay:**<sp/>All<sp/>spawned<sp/>entities<sp/>activate<sp/>after<sp/>the<sp/>same<sp/>duration</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Staggered<sp/>delay:**<sp/>Sequential<sp/>entities<sp/>in<sp/>a<sp/>wave<sp/>activate<sp/>progressively</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Staggered<sp/>activation:<sp/>each<sp/>entity<sp/>in<sp/>wave<sp/>activates<sp/>0.1s<sp/>after<sp/>previous</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>staggeredInit<sp/>=<sp/>std::make_unique&lt;DelayedComponentEnablerInitializer&lt;CollisionComponent&gt;&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>0.1f,<sp/><sp/>//<sp/>base<sp/>delay<sp/>per<sp/>entity</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>5<sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>cycle<sp/>length<sp/>(resets<sp/>after<sp/>5<sp/>entities)</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
@@ -46,9 +73,9 @@
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
 <codeline><highlight class="normal">@namespace<sp/>helios::engine::runtime::spawn::behavior::initializers</highlight></codeline>
 <codeline><highlight class="normal">@brief<sp/>Concrete<sp/>SpawnInitializer<sp/>implementations.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>Provides<sp/>ready-to-use<sp/>initializers<sp/>for<sp/>common<sp/>spawn<sp/>patterns<sp/>like<sp/>emitter-relative<sp/>and<sp/>random<sp/>direction<sp/>initialization.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>Provides<sp/>ready-to-use<sp/>initializers<sp/>for<sp/>common<sp/>spawn<sp/>patterns<sp/>like<sp/>emitter-relative<sp/>initialization,<sp/>directional<sp/>movement,<sp/>and<sp/>delayed<sp/>component<sp/>activation.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
     </programlisting>
-    <location file="include/helios/engine/runtime/spawn/behavior/initializers/README.md"/>
+    <location file="/tmp/h/include/helios/engine/runtime/spawn/behavior/initializers/README.md"/>
   </compounddef>
 </doxygen>

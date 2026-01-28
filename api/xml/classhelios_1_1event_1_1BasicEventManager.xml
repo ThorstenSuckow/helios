@@ -4,7 +4,7 @@
     <compoundname>helios::event::BasicEventManager</compoundname>
     <basecompoundref refid="classhelios_1_1event_1_1EventManager" prot="public" virt="non-virtual">helios::event::EventManager</basecompoundref>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classhelios_1_1event_1_1BasicEventManager_1a09c5a6c3edfa8b34e5858606be3e769b" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1event_1_1BasicEventManager_1a09c5a6c3edfa8b34e5858606be3e769b" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
         <definition>helios::event::BasicEventManager::BasicEventManager</definition>
         <argsstring>(std::unique_ptr&lt; EventQueue &gt; eventQueue, std::unique_ptr&lt; Dispatcher &gt; dispatcher)</argsstring>
@@ -43,10 +43,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/event/BasicEventManager.ixx" line="40" column="18"/>
-        <references refid="classhelios_1_1event_1_1EventManager_1a575c31f89f8002b9c507e3a00da32cb1">helios::event::EventManager::dispatcher</references>
+        <location file="/tmp/h/include/helios/event/BasicEventManager.ixx" line="41" column="18" bodyfile="/tmp/h/include/helios/event/BasicEventManager.ixx" bodystart="41" bodyend="44"/>
+        <references refid="classhelios_1_1event_1_1EventManager_1a575c31f89f8002b9c507e3a00da32cb1" compoundref="EventManager_8ixx" startline="191" endline="193">helios::event::EventManager::dispatcher</references>
+        <references refid="classhelios_1_1event_1_1EventManager_1a4a28a6df832bab23b4f9ef4d867a197e">helios::event::EventManager::EventManager</references>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1event_1_1BasicEventManager_1a572c4c66409151b16992008849d9bbe6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classhelios_1_1event_1_1BasicEventManager_1a572c4c66409151b16992008849d9bbe6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type><ref refid="classhelios_1_1event_1_1EventManager_1a4a28a6df832bab23b4f9ef4d867a197e" kindref="member">EventManager</ref> &amp;</type>
         <definition>EventManager &amp; helios::event::BasicEventManager::post</definition>
         <argsstring>(std::unique_ptr&lt; const Event &gt; event, PostPolicy policy, const std::function&lt; bool(const std::unique_ptr&lt; const Event &gt; &amp;event, const std::unique_ptr&lt; const Event &gt; &amp;evt)&gt; &amp;func) override</argsstring>
@@ -99,11 +100,16 @@
 </para>
         </detaileddescription>
         <inbodydescription>
+<para><xrefsect id="todo_1_todo000018"><xreftitle>Todo</xreftitle><xrefdescription><para>use hashmap instead of queue for faster lookup </para>
+</xrefdescription></xrefsect></para>
         </inbodydescription>
-        <location file="include/helios/event/BasicEventManager.ixx" line="54" column="22"/>
+        <location file="/tmp/h/include/helios/event/BasicEventManager.ixx" line="57" column="22" bodyfile="/tmp/h/include/helios/event/BasicEventManager.ixx" bodystart="57" bodyend="99"/>
+        <references refid="namespacehelios_1_1event_1a68d7042f97d91ed8414724453213e7f0aaa441d16ab61fbc5bfbcc7a9450b0e78" compoundref="EventManager_8ixx" startline="40">helios::event::APPEND</references>
         <references refid="classhelios_1_1event_1_1EventManager_1a4a28a6df832bab23b4f9ef4d867a197e">helios::event::EventManager::EventManager</references>
+        <references refid="classhelios_1_1event_1_1EventManager_1a06528b307d0e99a55a4aea8b608f6f8b" compoundref="EventManager_8ixx" startline="65">helios::event::EventManager::eventQueue_</references>
+        <references refid="namespacehelios_1_1event_1a68d7042f97d91ed8414724453213e7f0a9aa2915919b6cbedea1ef3549c8bda49" compoundref="EventManager_8ixx" startline="35">helios::event::LATEST_WINS</references>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1event_1_1BasicEventManager_1ac477416fc138acbb03df5e946dc99240" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classhelios_1_1event_1_1BasicEventManager_1ac477416fc138acbb03df5e946dc99240" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type><ref refid="classhelios_1_1event_1_1EventManager_1a4a28a6df832bab23b4f9ef4d867a197e" kindref="member">EventManager</ref> &amp;</type>
         <definition>EventManager &amp; helios::event::BasicEventManager::dispatchAll</definition>
         <argsstring>() override</argsstring>
@@ -120,10 +126,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/event/BasicEventManager.ixx" line="70" column="22"/>
+        <location file="/tmp/h/include/helios/event/BasicEventManager.ixx" line="109" column="22" bodyfile="/tmp/h/include/helios/event/BasicEventManager.ixx" bodystart="109" bodyend="116"/>
+        <references refid="classhelios_1_1event_1_1EventManager_1a1deac9e3799c2f473fdb16bddb4dada8" compoundref="EventManager_8ixx" startline="70">helios::event::EventManager::dispatcher_</references>
         <references refid="classhelios_1_1event_1_1EventManager_1a4a28a6df832bab23b4f9ef4d867a197e">helios::event::EventManager::EventManager</references>
+        <references refid="classhelios_1_1event_1_1EventManager_1a06528b307d0e99a55a4aea8b608f6f8b" compoundref="EventManager_8ixx" startline="65">helios::event::EventManager::eventQueue_</references>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1event_1_1BasicEventManager_1a1ce9ef29ac8f29915b027fdc888db6a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1event_1_1BasicEventManager_1a1ce9ef29ac8f29915b027fdc888db6a9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classhelios_1_1event_1_1EventManager_1a4a28a6df832bab23b4f9ef4d867a197e" kindref="member">EventManager</ref> &amp;</type>
         <definition>EventManager &amp; helios::event::EventManager::post</definition>
         <argsstring>(std::unique_ptr&lt; const Event &gt; event)</argsstring>
@@ -153,9 +161,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/event/BasicEventManager.ixx" line="31" column="9"/>
+        <location file="/tmp/h/include/helios/event/BasicEventManager.ixx" line="32" column="9" bodyfile="/tmp/h/include/helios/event/EventManager.ixx" bodystart="106" bodyend="108"/>
       </memberdef>
-      <memberdef kind="function" id="classhelios_1_1event_1_1BasicEventManager_1a7355384d93cdcebec0ee5f3fcb57bb2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classhelios_1_1event_1_1BasicEventManager_1a7355384d93cdcebec0ee5f3fcb57bb2f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classhelios_1_1event_1_1EventManager_1a4a28a6df832bab23b4f9ef4d867a197e" kindref="member">EventManager</ref> &amp;</type>
         <definition>EventManager &amp; helios::event::EventManager::post</definition>
         <argsstring>(std::unique_ptr&lt; const Event &gt; event, PostPolicy policy)</argsstring>
@@ -197,7 +205,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/event/BasicEventManager.ixx" line="31" column="9"/>
+        <location file="/tmp/h/include/helios/event/BasicEventManager.ixx" line="32" column="9" bodyfile="/tmp/h/include/helios/event/EventManager.ixx" bodystart="123" bodyend="126"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -237,7 +245,7 @@
         <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
       </node>
     </collaborationgraph>
-    <location file="include/helios/event/BasicEventManager.ixx" line="28" column="5" bodyfile="include/helios/event/BasicEventManager.ixx" bodystart="28" bodyend="74"/>
+    <location file="/tmp/h/include/helios/event/BasicEventManager.ixx" line="29" column="5" bodyfile="/tmp/h/include/helios/event/BasicEventManager.ixx" bodystart="29" bodyend="120"/>
     <listofallmembers>
       <member refid="classhelios_1_1event_1_1BasicEventManager_1a09c5a6c3edfa8b34e5858606be3e769b" prot="public" virt="non-virtual"><scope>helios::event::BasicEventManager</scope><name>BasicEventManager</name></member>
       <member refid="classhelios_1_1event_1_1BasicEventManager_1ac477416fc138acbb03df5e946dc99240" prot="public" virt="virtual"><scope>helios::event::BasicEventManager</scope><name>dispatchAll</name></member>

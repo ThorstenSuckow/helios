@@ -131,7 +131,7 @@ Public Member Functions</h2></td></tr>
 <dl class="section user"><dt>Usage Example:</dt><dd>```cpp auto stopwatch = std::make_unique&lt;helios::util::time::Stopwatch&gt;(); <a class="el" href="classhelios_1_1engine_1_1tooling_1_1FramePacer.html" title="Controls and maintains a target frame rate through precise timing and pacing.">FramePacer</a> pacer(std::move(stopwatch)); pacer.setTargetFps(60.0f);</dd></dl>
 <p>while (running) { pacer.beginFrame(); // ... game logic and rendering ... <a class="el" href="structhelios_1_1engine_1_1tooling_1_1FrameStats.html" title="Contains timing statistics for a single frame.">FrameStats</a> stats = pacer.sync(); } ``` </p>
 
-<p class="definition">Definition at line <a class="el" href="FramePacer_8ixx_source.html#l00043">43</a> of file <a class="el" href="FramePacer_8ixx_source.html">FramePacer.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FramePacer_8ixx_source.html#l00046">46</a> of file <a class="el" href="FramePacer_8ixx_source.html">FramePacer.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a19da16d13fb67519b06e64f7cdd44bc7" name="a19da16d13fb67519b06e64f7cdd44bc7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a19da16d13fb67519b06e64f7cdd44bc7">&#9670;&#160;</a></span>FramePacer()</h2>
@@ -151,7 +151,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel explicit">explicit</span><span class="mlabel export">export</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel export">export</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -164,6 +164,8 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="FramePacer_8ixx_source.html#l00066">66</a> of file <a class="el" href="FramePacer_8ixx_source.html">FramePacer.ixx</a>.</p>
 
 </div>
 </div>
@@ -186,7 +188,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -194,21 +196,7 @@ Public Member Functions</h2></td></tr>
 <p>Marks the beginning of a new frame. </p>
 <p>Starts the internal stopwatch to begin measuring the frame's work time. This method must be called at the very beginning of each frame cycle, before any game logic, physics, or rendering operations. </p>
 
-<p class="reference">References <a class="el" href="#a44ad35ea34434c3ce534ad032a49c409">beginFrame()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="#a44ad35ea34434c3ce534ad032a49c409">beginFrame()</a>.</p>
-<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1tooling_1_1FramePacer_a44ad35ea34434c3ce534ad032a49c409_cgraph.svg" width="202" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1tooling_1_1FramePacer_a44ad35ea34434c3ce534ad032a49c409_icgraph.svg" width="202" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="FramePacer_8ixx_source.html#l00103">103</a> of file <a class="el" href="FramePacer_8ixx_source.html">FramePacer.ixx</a>.</p>
 
 </div>
 </div>
@@ -230,7 +218,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -239,6 +227,8 @@ Public Member Functions</h2></td></tr>
 <p>Returns the frame rate target that has been set for pacing, expressed in Frames Per Second (FPS). If the target frame rate is set to 0.0f, frame pacing is disabled, and the frame rate is unlocked.</p>
 <dl class="section return"><dt>Returns</dt><dd>The target frame rate in FPS.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>A return value of 0.0f indicates that the frame pacing mechanism is not active. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="FramePacer_8ixx_source.html#l00092">92</a> of file <a class="el" href="FramePacer_8ixx_source.html">FramePacer.ixx</a>.</p>
 
 </div>
 </div>
@@ -260,7 +250,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -272,6 +262,8 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="FramePacer_8ixx_source.html#l00077">77</a> of file <a class="el" href="FramePacer_8ixx_source.html">FramePacer.ixx</a>.</p>
 
 </div>
 </div>
@@ -293,7 +285,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -302,28 +294,14 @@ Public Member Functions</h2></td></tr>
 <p>Measures the elapsed work time since `beginFrame()`. If a target FPS is set and the work time is less than the target frame duration, this method sleeps the current thread to meet the target timing.</p>
 <dl class="section return"><dt>Returns</dt><dd>A `FrameStats` structure containing the total frame time (including wait), the actual work time (CPU processing), and the wait time (idle).</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>If `targetFps` is 0.0f or the frame took longer than the target duration, no sleeping occurs, and `waitTime` in the returned stats will be 0.0f.</dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000013">Todo</a></b></dt><dd>Implement hybrid spinning for the last millisecond of the wait time to improve timing precision and mitigate OS scheduler wake-up latency. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000017">Todo</a></b></dt><dd>Implement hybrid spinning for the last millisecond of the wait time to improve timing precision and mitigate OS scheduler wake-up latency. </dd></dl>
 
-<p class="reference">References <a class="el" href="#ac6b55e3ef2b685222358c14e69e89f06">sync()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="#ac6b55e3ef2b685222358c14e69e89f06">sync()</a>.</p>
-<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1tooling_1_1FramePacer_ac6b55e3ef2b685222358c14e69e89f06_cgraph.svg" width="178" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1engine_1_1tooling_1_1FramePacer_ac6b55e3ef2b685222358c14e69e89f06_icgraph.svg" width="178" height="75"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="FramePacer_8ixx_source.html#l00123">123</a> of file <a class="el" href="FramePacer_8ixx_source.html">FramePacer.ixx</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>include/helios/engine/tooling/<a class="el" href="FramePacer_8ixx_source.html">FramePacer.ixx</a></li>
+<li><a class="el" href="FramePacer_8ixx_source.html">FramePacer.ixx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

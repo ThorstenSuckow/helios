@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_adf1e4701ae69b5d79d261bc91ee1401" kind="dir">
+    <compoundname>initializers</compoundname>
+    <innerfile refid="helios_2engine_2runtime_2spawn_2behavior_2initializers_2__module_8ixx">helios/engine/runtime/spawn/behavior/initializers/_module.ixx</innerfile>
+    <innerfile refid="DelayedComponentEnablerInitializer_8ixx">DelayedComponentEnablerInitializer.ixx</innerfile>
+    <innerfile refid="EmitterInitializer_8ixx">EmitterInitializer.ixx</innerfile>
+    <innerfile refid="InitializerList_8ixx">InitializerList.ixx</innerfile>
+    <innerfile refid="MoveInitializer_8ixx">MoveInitializer.ixx</innerfile>
+    <innerfile refid="RandomDirectionInitializer_8ixx">RandomDirectionInitializer.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_adf1e4701ae69b5d79d261bc91ee1401_1autotoc_md374">
+<title>helios::engine::runtime::spawn::behavior::initializers</title><para>Concrete SpawnInitializer implementations.</para>
+</sect1>
+<sect1 id="dir_adf1e4701ae69b5d79d261bc91ee1401_1autotoc_md375">
+<title>Overview</title><para>This module provides ready-to-use SpawnInitializer implementations for configuring spawned entities.</para>
+</sect1>
+<sect1 id="dir_adf1e4701ae69b5d79d261bc91ee1401_1autotoc_md376">
+<title>Key Classes</title><para><table rows="4" cols="2"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>EmitterInitializer</computeroutput>  </para>
+</entry><entry thead="no"><para>Configures entity direction/velocity based on emitter state  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>MoveInitializer</computeroutput>  </para>
+</entry><entry thead="no"><para>Sets movement direction using various strategies (random, axis, point)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>DelayedComponentEnablerInitializer</computeroutput>  </para>
+</entry><entry thead="no"><para>Defers component activation with configurable delay  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_adf1e4701ae69b5d79d261bc91ee1401_1autotoc_md377">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Projectiles<sp/>inherit<sp/>direction<sp/>from<sp/>firing<sp/>entity</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>profile<sp/>=<sp/>SpawnProfile{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.gameObjectPoolId<sp/>=<sp/>bulletPoolId,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.spawnPlacer<sp/>=<sp/>std::make_unique&lt;EmitterSpawnPlacer&gt;(),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.spawnInitializer<sp/>=<sp/>std::make_unique&lt;EmitterInitializer&gt;()</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Enemies<sp/>spawn<sp/>with<sp/>random<sp/>movement<sp/>directions</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>enemyProfile<sp/>=<sp/>SpawnProfile{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.gameObjectPoolId<sp/>=<sp/>enemyPoolId,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.spawnPlacer<sp/>=<sp/>std::make_unique&lt;RandomSpawnPlacer&gt;(),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.spawnInitializer<sp/>=<sp/>std::make_unique&lt;MoveInitializer&gt;(DirectionType::Random)</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Spawn<sp/>with<sp/>collision<sp/>immunity<sp/>for<sp/>0.5<sp/>seconds</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>immuneProfile<sp/>=<sp/>SpawnProfile{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.gameObjectPoolId<sp/>=<sp/>enemyPoolId,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.spawnInitializer<sp/>=<sp/>std::make_unique&lt;DelayedComponentEnablerInitializer&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0.5f,<sp/><sp/></highlight><highlight class="comment">//<sp/>delay<sp/>in<sp/>seconds</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;ComponentTypeId&gt;{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ComponentTypeId::of&lt;CollisionComponent&gt;()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>)</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_adf1e4701ae69b5d79d261bc91ee1401_1autotoc_md378">
+<title>Delayed Component Activation</title><para>The <computeroutput>DelayedComponentEnablerInitializer</computeroutput> works with entities that have a <computeroutput>DelayedComponentEnabler</computeroutput> component attached (via <computeroutput>LifecycleBuilder</computeroutput>). It supports:</para>
+<para><itemizedlist>
+<listitem><para><bold>Fixed delay:</bold> All spawned entities activate after the same duration</para>
+</listitem><listitem><para><bold>Staggered delay:</bold> Sequential entities in a wave activate progressively</para>
+</listitem></itemizedlist>
+</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Staggered<sp/>activation:<sp/>each<sp/>entity<sp/>in<sp/>wave<sp/>activates<sp/>0.1s<sp/>after<sp/>previous</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>staggeredInit<sp/>=<sp/>std::make_unique&lt;DelayedComponentEnablerInitializer&lt;CollisionComponent&gt;&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>0.1f,<sp/><sp/></highlight><highlight class="comment">//<sp/>base<sp/>delay<sp/>per<sp/>entity</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>5<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>cycle<sp/>length<sp/>(resets<sp/>after<sp/>5<sp/>entities)</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/runtime/spawn/behavior/initializers/"/>
+  </compounddef>
+</doxygen>

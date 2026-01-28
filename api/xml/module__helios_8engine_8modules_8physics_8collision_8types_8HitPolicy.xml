@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8modules_8physics_8collision_8types_8HitPolicy" kind="module">
+    <compoundname>helios.engine.modules.physics.collision.types.HitPolicy</compoundname>
+    <innerfile refid="HitPolicy_8ixx">HitPolicy.ixx</innerfile>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a352b51a13f9e1b8e02f7d0e905db7cb1" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>HitPolicy</name>
+        <qualifiedname>helios::engine::modules::physics::collision::types::HitPolicy</qualifiedname>
+        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a352b51a13f9e1b8e02f7d0e905db7cb1a2cc49bbf7186136f477266c636d24b69" prot="public">
+          <name>OneHit</name>
+          <briefdescription>
+<para>Reports only the first collision per frame. </para>
+          </briefdescription>
+          <detaileddescription>
+<para>Once a collision is detected, the entity skips further collision checks for the current frame. This is the default policy and provides optimal performance for typical projectile behavior. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a352b51a13f9e1b8e02f7d0e905db7cb1ab1c94ca2fbc3e78fc30069c8d0f01680" prot="public">
+          <name>All</name>
+          <briefdescription>
+<para>Reports all collisions with overlapping entities. </para>
+          </briefdescription>
+          <detaileddescription>
+<para>The entity continues collision checks even after detecting a collision, generating events for every overlapping entity. Use for area-of-effect or multi-target interactions. </para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Specifies how many collision events an entity can receive per frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a352b51a13f9e1b8e02f7d0e905db7cb1" kindref="member">HitPolicy</ref> controls the collision detection behavior when an entity overlaps multiple other entities in the same frame. This affects both performance and gameplay logic.</para>
+<para>## Policies</para>
+<para>| Policy | Behavior | |--------|----------| | `OneHit` | Reports only the first collision detected (default) | | `All` | Reports all collisions with overlapping entities |</para>
+<para>## Use Cases</para>
+<para><itemizedlist>
+<listitem><para>**OneHit:** Projectiles that destroy on first contact, pickups collected once</para>
+</listitem><listitem><para>**All:** Area-of-effect damage, entities affecting multiple targets simultaneously</para>
+</listitem></itemizedlist>
+</para>
+<para>## Usage</para>
+<para>```cpp // Projectile: stops after first hit prototype.withCollision([](CollisionBuilder&amp; b) { b.collision() .layer(Layers::PROJECTILE) .hitPolicy(HitPolicy::OneHit); });</para>
+<para>// Explosion: damages all entities in range prototype.withCollision([](CollisionBuilder&amp; b) { b.collision() .layer(Layers::EXPLOSION) .hitPolicy(HitPolicy::All); }); ```</para>
+<para><simplesect kind="see"><para>CollisionComponent::setHitPolicy </para>
+</simplesect>
+<simplesect kind="see"><para>GridCollisionDetectionSystem </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/modules/physics/collision/types/HitPolicy.ixx" line="53" column="5" bodyfile="/tmp/h/include/helios/engine/modules/physics/collision/types/HitPolicy.ixx" bodystart="53" bodyend="73"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/modules/physics/collision/types/HitPolicy.ixx" line="8" column="15"/>
+  </compounddef>
+</doxygen>

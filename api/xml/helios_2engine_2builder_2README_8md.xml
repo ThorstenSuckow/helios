@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2builder_2README_8md" kind="file" language="Markdown">
+    <compoundname>helios/engine/builder/README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1builder">helios::engine::builder</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::builder</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Fluent<sp/>builder<sp/>pattern<sp/>implementation<sp/>for<sp/>constructing<sp/>game<sp/>entities<sp/>in<sp/>the<sp/>helios<sp/>engine.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>a<sp/>declarative,<sp/>composable<sp/>API<sp/>for<sp/>creating<sp/>`GameObject`<sp/>instances<sp/>with<sp/>their<sp/>associated<sp/>components.<sp/>The<sp/>builder<sp/>pattern<sp/>enables<sp/>clean,<sp/>readable<sp/>entity<sp/>construction<sp/>while<sp/>abstracting<sp/>the<sp/>complexity<sp/>of<sp/>component<sp/>dependencies<sp/>and<sp/>initialization<sp/>order.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`GameObjectFactory`<sp/>|<sp/>Entry<sp/>point<sp/>for<sp/>creating<sp/>and<sp/>cloning<sp/>GameObjects<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`GameObjectPrototype`<sp/>|<sp/>Fluent<sp/>builder<sp/>for<sp/>configuring<sp/>entity<sp/>components<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Submodules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>gameObject/</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>main<sp/>factory<sp/>and<sp/>prototype<sp/>classes<sp/>for<sp/>GameObject<sp/>construction.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>gameObject/builders/</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Domain-specific<sp/>builders<sp/>for<sp/>different<sp/>aspects<sp/>of<sp/>entity<sp/>configuration:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Builder<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|---------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`MotionBuilder`<sp/>|<sp/>Movement<sp/>and<sp/>steering<sp/>configuration<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`RenderingBuilder`<sp/>|<sp/>Visual<sp/>representation<sp/>setup<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SceneBuilder`<sp/>|<sp/>Scene<sp/>graph<sp/>integration<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`CollisionBuilder`<sp/>|<sp/>Collision<sp/>detection<sp/>configuration<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`TransformBuilder`<sp/>|<sp/>Spatial<sp/>transform<sp/>setup<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`EffectsBuilder`<sp/>|<sp/>Visual<sp/>effects<sp/>(spin,<sp/>etc.)<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SpawnBuilder`<sp/>|<sp/>Spawn<sp/>system<sp/>integration<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`AiBuilder`<sp/>|<sp/>AI<sp/>behavior<sp/>configuration<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ShootingBuilder`<sp/>|<sp/>Weapon<sp/>and<sp/>projectile<sp/>setup<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>gameObject/builders/configs/</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Fine-grained<sp/>configuration<sp/>classes<sp/>used<sp/>by<sp/>builders:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Config<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|--------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`Move2DConfig`<sp/>|<sp/>2D<sp/>movement<sp/>parameters<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SteeringConfig`<sp/>|<sp/>Rotation<sp/>and<sp/>steering<sp/>behavior<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`RenderableConfig`<sp/>|<sp/>Mesh,<sp/>material,<sp/>and<sp/>shader<sp/>setup<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SceneNodeConfig`<sp/>|<sp/>Scene<sp/>graph<sp/>parenting<sp/>and<sp/>inheritance<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`TransformConfig`<sp/>|<sp/>Scale<sp/>and<sp/>translation<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`CollisionConfig`<sp/>|<sp/>Collision<sp/>layers<sp/>and<sp/>responses<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`LevelBoundsCollisionConfig`<sp/>|<sp/>Arena<sp/>boundary<sp/>behavior<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`GfxEffectsConfig`<sp/>|<sp/>Visual<sp/>effects<sp/>parameters<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`SpawnConfig`<sp/>|<sp/>Spawn<sp/>profile<sp/>integration<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ChaseConfig`<sp/>|<sp/>AI<sp/>chase<sp/>behavior<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`WeaponConfig`<sp/>|<sp/>Weapon<sp/>fire<sp/>rate<sp/>and<sp/>projectiles<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Creating<sp/>a<sp/>New<sp/>GameObject</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>player<sp/>=<sp/>GameObjectFactory::gameObject()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withMotion([](auto&amp;<sp/>motion)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>motion.move2D()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.speed(5.0f)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.acceleration(10.0f);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>motion.steering()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.instantSteering(false);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withRendering([&amp;](auto&amp;<sp/>rendering)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>rendering.renderable()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.shape(triangleShape)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.shader(shader)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.primitiveType(PrimitiveType::Triangles)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.color({1.0f,<sp/>0.0f,<sp/>0.0f,<sp/>1.0f})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.attachTo(rootNode);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withCollision([](auto&amp;<sp/>collision)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>collision.collision()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.useBoundingBox()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.layerId(PLAYER_LAYER);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.make(true);<sp/>//<sp/>active<sp/>=<sp/>true</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Cloning<sp/>an<sp/>Existing<sp/>GameObject</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>enemyTemplate<sp/>=<sp/>createEnemyTemplate();</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>enemy<sp/>=<sp/>GameObjectFactory::from(enemyTemplate.get())</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withTransform([&amp;](auto&amp;<sp/>transform)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>transform.transform()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.translate(spawnPosition);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.make(true);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Architecture</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">┌─────────────────────────────────────────────────────────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GameObjectFactory<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>┌───────────────────────────────────────────────────────────┐<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GameObjectPrototype<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>┌─────────────┐<sp/><sp/>┌─────────────┐<sp/><sp/>┌─────────────┐<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>│MotionBuilder│<sp/><sp/>│RenderingBld<sp/>│<sp/><sp/>│CollisionBld<sp/>│<sp/><sp/>...<sp/><sp/><sp/>│<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>└──────┬──────┘<sp/><sp/>└──────┬──────┘<sp/><sp/>└──────┬──────┘<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>┌─────────────┐<sp/><sp/>┌─────────────┐<sp/><sp/>┌─────────────┐<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>│<sp/>Move2DConfig│<sp/><sp/>│RenderableCfg│<sp/><sp/>│CollisionCfg<sp/>│<sp/><sp/>...<sp/><sp/><sp/>│<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>│SteeringCfg<sp/><sp/>│<sp/><sp/>│SceneNodeCfg<sp/>│<sp/><sp/>│LevelBndsCfg<sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>└──────┬──────┘<sp/><sp/>└──────┬──────┘<sp/><sp/>└──────┬──────┘<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>┌─────────────────────────────────────────────────────┐<sp/><sp/>│<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GameObject<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>│<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>│<sp/><sp/>[Move2DComponent]<sp/>[RenderableComponent]<sp/>[...]<sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/>│<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/>└─────────────────────────────────────────────────────┘<sp/><sp/>│<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>└───────────────────────────────────────────────────────────┘<sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">└─────────────────────────────────────────────────────────────────┘</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Design<sp/>Principles</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>builder<sp/>module<sp/>follows<sp/>these<sp/>principles:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">1.<sp/>**Fluent<sp/>Interface**:<sp/>Method<sp/>chaining<sp/>for<sp/>readable<sp/>configuration.</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>**Callback-Based<sp/>Configuration**:<sp/>Builders<sp/>are<sp/>configured<sp/>via<sp/>lambdas,<sp/>allowing<sp/>scoped<sp/>access.</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>**Automatic<sp/>Dependencies**:<sp/>Configs<sp/>automatically<sp/>add<sp/>required<sp/>dependent<sp/>components.</highlight></codeline>
+<codeline><highlight class="normal">4.<sp/>**Separation<sp/>of<sp/>Concerns**:<sp/>Each<sp/>builder<sp/>focuses<sp/>on<sp/>a<sp/>single<sp/>domain<sp/>(motion,<sp/>rendering,<sp/>etc.).</highlight></codeline>
+<codeline><highlight class="normal">5.<sp/>**Cloning<sp/>Support**:<sp/>`GameObjectFactory::from()`<sp/>creates<sp/>new<sp/>entities<sp/>based<sp/>on<sp/>existing<sp/>templates.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Related<sp/>Modules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Module<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|--------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.engine.ecs`<sp/>|<sp/>GameObject,<sp/>Component<sp/>base<sp/>classes<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.engine.modules`<sp/>|<sp/>Component<sp/>implementations<sp/>used<sp/>by<sp/>configs<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.engine.mechanics`<sp/>|<sp/>Gameplay-specific<sp/>components<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::builder</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>Fluent<sp/>builder<sp/>pattern<sp/>for<sp/>constructing<sp/>GameObjects.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>This<sp/>module<sp/>provides<sp/>a<sp/>declarative,<sp/>composable<sp/>API<sp/>for<sp/>creating<sp/>GameObject<sp/>instances<sp/>with<sp/>their<sp/>associated<sp/>components.<sp/>The<sp/>builder<sp/>pattern<sp/>enables<sp/>clean,<sp/>readable<sp/>entity<sp/>construction<sp/>while<sp/>abstracting<sp/>component<sp/>dependencies<sp/>and<sp/>initialization<sp/>order.<sp/>Key<sp/>classes<sp/>include<sp/>GameObjectFactory<sp/>(entry<sp/>point),<sp/>GameObjectPrototype<sp/>(fluent<sp/>configuration),<sp/>domain-specific<sp/>builders<sp/>(MotionBuilder,<sp/>RenderingBuilder,<sp/>CollisionBuilder,<sp/>etc.),<sp/>and<sp/>fine-grained<sp/>config<sp/>classes<sp/>(Move2DConfig,<sp/>RenderableConfig,<sp/>etc.).</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+    </programlisting>
+    <location file="/tmp/h/include/helios/engine/builder/README.md"/>
+  </compounddef>
+</doxygen>

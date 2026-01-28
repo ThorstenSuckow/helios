@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="helios_2engine_2modules_2ai_2README_8md" kind="file" language="Markdown">
+    <compoundname>helios/engine/modules/ai/README.md</compoundname>
+    <innernamespace refid="namespacehelios_1_1engine_1_1modules_1_1ai">helios::engine::modules::ai</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>helios::engine::modules::ai</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">AI<sp/>behavior<sp/>modules<sp/>for<sp/>game<sp/>entities<sp/>in<sp/>the<sp/>helios<sp/>engine.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>components<sp/>and<sp/>systems<sp/>for<sp/>artificial<sp/>intelligence<sp/>behaviors.<sp/>Currently<sp/>focused<sp/>on<sp/>simple<sp/>pursuit/chase<sp/>mechanics,<sp/>with<sp/>architecture<sp/>designed<sp/>for<sp/>expansion<sp/>to<sp/>more<sp/>complex<sp/>AI<sp/>patterns.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Submodules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>components/</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Data<sp/>components<sp/>storing<sp/>AI<sp/>behavior<sp/>state:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Component<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-----------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ChaseComponent`<sp/>|<sp/>Tracks<sp/>a<sp/>target<sp/>entity<sp/>and<sp/>controls<sp/>pursuit<sp/>timing<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>systems/</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Systems<sp/>that<sp/>process<sp/>AI<sp/>components:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>System<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|--------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ChaseSystem`<sp/>|<sp/>Steers<sp/>entities<sp/>towards<sp/>their<sp/>chase<sp/>targets<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Basic<sp/>Chase<sp/>Behavior</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.engine.modules.ai;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Create<sp/>enemy<sp/>that<sp/>chases<sp/>player</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>enemy<sp/>=<sp/>std::make_unique&lt;GameObject&gt;();</highlight></codeline>
+<codeline><highlight class="normal">enemy-&gt;add&lt;ChaseComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal">enemy-&gt;get&lt;ChaseComponent&gt;()-&gt;setTarget(player-&gt;guid());</highlight></codeline>
+<codeline><highlight class="normal">enemy-&gt;get&lt;ChaseComponent&gt;()-&gt;setCooldown(0.5f);<sp/><sp/>//<sp/>Update<sp/>direction<sp/>every<sp/>0.5s</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Required<sp/>companion<sp/>components</highlight></codeline>
+<codeline><highlight class="normal">enemy-&gt;add&lt;SteeringComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal">enemy-&gt;add&lt;TranslationStateComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Using<sp/>with<sp/>GameObjectFactory</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>enemy<sp/>=<sp/>GameObjectFactory::gameObject()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withAi([&amp;](auto&amp;<sp/>ai)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ai.chasing()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.target(player-&gt;guid())</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.seekInterval(0.5f);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withMotion([](auto&amp;<sp/>m)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m.steering().instantSteering(true);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m.move2D().speed(3.0f);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.make(true);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Chase<sp/>Behavior<sp/>Details</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>`ChaseSystem`<sp/>operates<sp/>as<sp/>follows:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">1.<sp/>**Target<sp/>Lookup**:<sp/>Finds<sp/>target<sp/>entity<sp/>by<sp/>GUID<sp/>in<sp/>GameWorld</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>**Cooldown<sp/>Check**:<sp/>Only<sp/>updates<sp/>direction<sp/>after<sp/>cooldown<sp/>expires</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>**Direction<sp/>Calculation**:<sp/>Computes<sp/>normalized<sp/>vector<sp/>from<sp/>entity<sp/>to<sp/>target</highlight></codeline>
+<codeline><highlight class="normal">4.<sp/>**Steering<sp/>Update**:<sp/>Sets<sp/>steering<sp/>intent<sp/>to<sp/>face<sp/>target<sp/>direction</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">┌─────────────────────────────────────────────────────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ChaseSystem<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>┌─────────────────────────────────────────────────────────┐│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>For<sp/>each<sp/>entity<sp/>with:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/>-<sp/>ChaseComponent<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/>-<sp/>SteeringComponent<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/>-<sp/>TranslationStateComponent<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>├─────────────────────────────────────────────────────────┤│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>1.<sp/>Find<sp/>target<sp/>by<sp/>GUID<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>2.<sp/>Update<sp/>cooldown<sp/>timer<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>3.<sp/>If<sp/>timer<sp/>&gt;=<sp/>cooldown:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/><sp/>-<sp/>Calculate<sp/>direction<sp/>to<sp/>target<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/><sp/>-<sp/>Set<sp/>steering<sp/>intent<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/><sp/>-<sp/>Reset<sp/>timer<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>└─────────────────────────────────────────────────────────┘│</highlight></codeline>
+<codeline><highlight class="normal">└─────────────────────────────────────────────────────────────┘</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Component<sp/>Dependencies</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Component<sp/>|<sp/>Required<sp/>Companions<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-----------|---------------------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ChaseComponent`<sp/>|<sp/>`SteeringComponent`,<sp/>`TranslationStateComponent`<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Related<sp/>Modules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Module<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|--------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.engine.modules.physics.motion`<sp/>|<sp/>SteeringComponent<sp/>for<sp/>direction<sp/>control<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.engine.modules.spatial.transform`<sp/>|<sp/>TranslationStateComponent<sp/>for<sp/>position<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`helios.engine.builder`<sp/>|<sp/>ChaseConfig<sp/>for<sp/>fluent<sp/>setup<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
+<codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
+<codeline><highlight class="normal">@namespace<sp/>helios::engine::modules::ai</highlight></codeline>
+<codeline><highlight class="normal">@brief<sp/>AI<sp/>behavior<sp/>modules<sp/>for<sp/>game<sp/>entities.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>This<sp/>module<sp/>provides<sp/>components<sp/>and<sp/>systems<sp/>for<sp/>artificial<sp/>intelligence<sp/>behaviors,<sp/>including<sp/>chase/pursuit<sp/>mechanics.<sp/>ChaseComponent<sp/>stores<sp/>target<sp/>and<sp/>timing<sp/>data,<sp/>while<sp/>ChaseSystem<sp/>processes<sp/>entities<sp/>to<sp/>steer<sp/>them<sp/>towards<sp/>their<sp/>targets.</highlight></codeline>
+<codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
+    </programlisting>
+    <location file="/tmp/h/include/helios/engine/modules/ai/README.md"/>
+  </compounddef>
+</doxygen>

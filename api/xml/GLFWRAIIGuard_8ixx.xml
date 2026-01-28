@@ -2,6 +2,24 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="GLFWRAIIGuard_8ixx" kind="file" language="C++">
     <compoundname>GLFWRAIIGuard.ixx</compoundname>
+    <includes local="no">GLFW/glfw3.h</includes>
+    <includes local="no">stdexcept</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>GLFWRAIIGuard.ixx</label>
+        <link refid="GLFWRAIIGuard_8ixx"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>GLFW/glfw3.h</label>
+      </node>
+      <node id="3">
+        <label>stdexcept</label>
+      </node>
+    </incdepgraph>
     <innerclass refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard" prot="public">helios::ext::glfw::app::GLFWRAIIGuard</innerclass>
     <innernamespace refid="namespacehelios">helios</innernamespace>
     <innernamespace refid="namespacehelios_1_1ext">helios::ext</innernamespace>
@@ -19,49 +37,58 @@
 <codeline lineno="4"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">module</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight></codeline>
-<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8ext_8glfw_8app_8GLFWRAIIGuard" kindref="compound">helios.ext.glfw.app.GLFWRAIIGuard</ref>;</highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight></codeline>
-<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1ext_1_1glfw_1_1app" kindref="compound">helios::ext::glfw::app</ref><sp/>{</highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="11"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="12"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>A<sp/>RAII<sp/>Guard<sp/>for<sp/>GLFW.</highlight></codeline>
-<codeline lineno="13"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="14"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>class<sp/>makes<sp/>sure<sp/>that<sp/>GLFW<sp/>is<sp/>properly<sp/>initialized<sp/>when<sp/>an<sp/>instance<sp/>is<sp/>created</highlight></codeline>
-<codeline lineno="15"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>and<sp/>terminated<sp/>when<sp/>this<sp/>instance<sp/>is<sp/>destroyed.</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;GLFW/glfw3.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdexcept&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8ext_8glfw_8app_8GLFWRAIIGuard" kindref="compound">helios.ext.glfw.app.GLFWRAIIGuard</ref>;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1ext_1_1glfw_1_1app" kindref="compound">helios::ext::glfw::app</ref><sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>A<sp/>RAII<sp/>Guard<sp/>for<sp/>GLFW.</highlight></codeline>
 <codeline lineno="16"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>https://en.cppreference.com/w/cpp/language/raii.html</highlight></codeline>
-<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="19" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a74d8ce68f5364a1cff9d46d15698a18d" kindref="member">GLFWRAIIGuard</ref><sp/>{</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"></highlight></codeline>
-<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Initializes<sp/>the<sp/>glfw<sp/>library<sp/>by<sp/>calling<sp/>`glfwInit()`.</highlight></codeline>
-<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@throws<sp/>std::runtime_error<sp/>if<sp/>initialization<sp/>fails</highlight></codeline>
-<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>https://www.glfw.org/docs/latest/group__init.html#ga317aac130a235ab08c6db0834907d85e</highlight></codeline>
-<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="29" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a74d8ce68f5364a1cff9d46d15698a18d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a74d8ce68f5364a1cff9d46d15698a18d" kindref="member">GLFWRAIIGuard</ref>();</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"></highlight></codeline>
-<codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Terminates<sp/>the<sp/>glfw<sp/>library<sp/>by<sp/>calling<sp/>`glfwTerminate()`.</highlight></codeline>
-<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>https://www.glfw.org/docs/latest/group__init.html#gaaae48c0a18607ea4a4ba951d939f0901</highlight></codeline>
-<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="37" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1aad3c7cba7bd7a792fa2af6658f24e2a1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1aad3c7cba7bd7a792fa2af6658f24e2a1" kindref="member">~GLFWRAIIGuard</ref>();</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>class<sp/>makes<sp/>sure<sp/>that<sp/>GLFW<sp/>is<sp/>properly<sp/>initialized<sp/>when<sp/>an<sp/>instance<sp/>is<sp/>created</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>and<sp/>terminated<sp/>when<sp/>this<sp/>instance<sp/>is<sp/>destroyed.</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>https://en.cppreference.com/w/cpp/language/raii.html</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a74d8ce68f5364a1cff9d46d15698a18d" kindref="member">GLFWRAIIGuard</ref><sp/>{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Initializes<sp/>the<sp/>glfw<sp/>library<sp/>by<sp/>calling<sp/>`glfwInit()`.</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@throws<sp/>std::runtime_error<sp/>if<sp/>initialization<sp/>fails</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>https://www.glfw.org/docs/latest/group__init.html#ga317aac130a235ab08c6db0834907d85e</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a74d8ce68f5364a1cff9d46d15698a18d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a74d8ce68f5364a1cff9d46d15698a18d" kindref="member">GLFWRAIIGuard</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(glfwInit()<sp/>==<sp/>GLFW_FALSE)<sp/>{</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::runtime_error(</highlight><highlight class="stringliteral">&quot;Failed<sp/>to<sp/>initialize<sp/>glfw&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>No<sp/>copy<sp/>or<sp/>move.</highlight></codeline>
-<codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="42" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1ae20f63cd3cda1c6a3673d5962bd4fe13" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1ae20f63cd3cda1c6a3673d5962bd4fe13" kindref="member">GLFWRAIIGuard</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a74d8ce68f5364a1cff9d46d15698a18d" kindref="member">GLFWRAIIGuard</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="43" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a41fef77759e58e66eb27ea3373d3bee9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a74d8ce68f5364a1cff9d46d15698a18d" kindref="member">GLFWRAIIGuard</ref>&amp;<sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a41fef77759e58e66eb27ea3373d3bee9" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a74d8ce68f5364a1cff9d46d15698a18d" kindref="member">GLFWRAIIGuard</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="44" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1abd3a5d9eda6e2f8f739d57b47810d314" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1abd3a5d9eda6e2f8f739d57b47810d314" kindref="member">GLFWRAIIGuard</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a74d8ce68f5364a1cff9d46d15698a18d" kindref="member">GLFWRAIIGuard</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="45" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a676c87e0841663581037a25f2f91b342" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a74d8ce68f5364a1cff9d46d15698a18d" kindref="member">GLFWRAIIGuard</ref>&amp;<sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a676c87e0841663581037a25f2f91b342" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a74d8ce68f5364a1cff9d46d15698a18d" kindref="member">GLFWRAIIGuard</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"></highlight></codeline>
-<codeline lineno="48"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Terminates<sp/>the<sp/>glfw<sp/>library<sp/>by<sp/>calling<sp/>`glfwTerminate()`.</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>https://www.glfw.org/docs/latest/group__init.html#gaaae48c0a18607ea4a4ba951d939f0901</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1aad3c7cba7bd7a792fa2af6658f24e2a1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1aad3c7cba7bd7a792fa2af6658f24e2a1" kindref="member">~GLFWRAIIGuard</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>glfwTerminate();</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>No<sp/>copy<sp/>or<sp/>move.</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1ae20f63cd3cda1c6a3673d5962bd4fe13" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1ae20f63cd3cda1c6a3673d5962bd4fe13" kindref="member">GLFWRAIIGuard</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a74d8ce68f5364a1cff9d46d15698a18d" kindref="member">GLFWRAIIGuard</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="52" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a41fef77759e58e66eb27ea3373d3bee9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a74d8ce68f5364a1cff9d46d15698a18d" kindref="member">GLFWRAIIGuard</ref>&amp;<sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a41fef77759e58e66eb27ea3373d3bee9" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a74d8ce68f5364a1cff9d46d15698a18d" kindref="member">GLFWRAIIGuard</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="53" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1abd3a5d9eda6e2f8f739d57b47810d314" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1abd3a5d9eda6e2f8f739d57b47810d314" kindref="member">GLFWRAIIGuard</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a74d8ce68f5364a1cff9d46d15698a18d" kindref="member">GLFWRAIIGuard</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="54" refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a676c87e0841663581037a25f2f91b342" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a74d8ce68f5364a1cff9d46d15698a18d" kindref="member">GLFWRAIIGuard</ref>&amp;<sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a676c87e0841663581037a25f2f91b342" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1ext_1_1glfw_1_1app_1_1GLFWRAIIGuard_1a74d8ce68f5364a1cff9d46d15698a18d" kindref="member">GLFWRAIIGuard</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal">}</highlight></codeline>
     </programlisting>
-    <location file="include/ext/glfw/app/GLFWRAIIGuard.ixx"/>
+    <location file="/tmp/h/include/ext/glfw/app/GLFWRAIIGuard.ixx"/>
   </compounddef>
 </doxygen>

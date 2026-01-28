@@ -13,6 +13,7 @@ var classhelios_1_1engine_1_1ecs_1_1Component =
     [ "onAttach", "classhelios_1_1engine_1_1ecs_1_1Component.html#ac08c7be419071c67780342322aa1e679", null ],
     [ "onDeactivate", "classhelios_1_1engine_1_1ecs_1_1Component.html#ae18881cca0af5463608e59d112b3f257", null ],
     [ "onRelease", "classhelios_1_1engine_1_1ecs_1_1Component.html#aacc77dfd9a7a39b733e0f90a7e50d43e", null ],
+    [ "typeId", "classhelios_1_1engine_1_1ecs_1_1Component.html#a2876fe546eb8554ce9e4485e9eeee9da", null ],
     [ "gameObject_", "classhelios_1_1engine_1_1ecs_1_1Component.html#aff1c0d42b10c04da6034ff5e49d42f12", null ],
     [ "isEnabled_", "classhelios_1_1engine_1_1ecs_1_1Component.html#ab5895e14ca5df63711d46a492fb40c64", null ]
 ];

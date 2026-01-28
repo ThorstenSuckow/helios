@@ -3,6 +3,7 @@
   <compounddef id="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1systems_1_1LevelBoundsBehaviorSystem" kind="class" language="C++" prot="public">
     <compoundname>helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem</compoundname>
     <basecompoundref refid="classhelios_1_1engine_1_1ecs_1_1System" prot="public" virt="non-virtual">helios::engine::ecs::System</basecompoundref>
+    <innerclass refid="structhelios_1_1engine_1_1mechanics_1_1bounds_1_1systems_1_1LevelBoundsBehaviorSystem_1_1BounceResult" prot="private">helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem::BounceResult</innerclass>
     <sectiondef kind="public-func">
       <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1systems_1_1LevelBoundsBehaviorSystem_1ac1e97cde1b5f98aaec15989da6e864ab" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -32,10 +33,10 @@
 </para>
         </detaileddescription>
         <inbodydescription>
-<para><xrefsect id="todo_1_todo000005"><xreftitle>Todo</xreftitle><xrefdescription><para>optimize </para>
+<para><xrefsect id="todo_1_todo000008"><xreftitle>Todo</xreftitle><xrefdescription><para>optimize </para>
 </xrefdescription></xrefsect></para>
         </inbodydescription>
-        <location file="include/helios/engine/mechanics/bounds/systems/LevelBoundsBehaviorSystem.ixx" line="63" column="14" bodyfile="include/helios/engine/mechanics/bounds/systems/LevelBoundsBehaviorSystem.ixx" bodystart="63" bodyend="122"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/bounds/systems/LevelBoundsBehaviorSystem.ixx" line="80" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/bounds/systems/LevelBoundsBehaviorSystem.ixx" bodystart="80" bodyend="147"/>
         <references refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2aeb9a56428f85bbdfd3846322baaffe6e" compoundref="CollisionBehavior_8ixx" startline="51">helios::engine::modules::physics::collision::types::Bounce</references>
         <references refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a9f9425c2d5920e53c8d1606d546022e2a573a38c8ee30e1c0d6ad84ce4f965cf0" compoundref="CollisionBehavior_8ixx" startline="67">helios::engine::modules::physics::collision::types::Despawn</references>
         <references refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" compoundref="System_8ixx" startline="48">helios::engine::ecs::System::gameWorld_</references>
@@ -47,11 +48,65 @@
         <references refid="structhelios_1_1math_1_1mat4_1a451a24222a56a80e6a7e01a93d6e867a" compoundref="mat4_8ixx" startline="371" endline="379">helios::math::mat4&lt; T &gt;::withTranslation</references>
       </memberdef>
     </sectiondef>
-    <sectiondef kind="private-static-func">
-      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1systems_1_1LevelBoundsBehaviorSystem_1a21e7cd605526b2d812e58c177d62f0b1" prot="private" static="yes" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type><ref refid="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" kindref="member">helios::math::vec3f</ref></type>
-        <definition>static helios::math::vec3f helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem::bounce</definition>
-        <argsstring>(helios::math::vec3f worldTranslation, helios::math::aabbf objectBounds, helios::math::aabbf levelBounds, const float restitution, helios::engine::modules::physics::motion::components::Move2DComponent &amp;m2d, helios::engine::modules::physics::motion::components::DirectionComponent &amp;dc, helios::engine::modules::physics::motion::components::RotationStateComponent &amp;rsc) noexcept</argsstring>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1systems_1_1LevelBoundsBehaviorSystem_1a3d590331dc8162a00582d1be78af25f4" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem::updateCollisionResponse</definition>
+        <argsstring>(helios::engine::ecs::GameObject *go, BounceResult bounceResult, helios::engine::modules::physics::collision::types::CollisionResponse collisionResponse)</argsstring>
+        <name>updateCollisionResponse</name>
+        <qualifiedname>helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem::updateCollisionResponse</qualifiedname>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> *</type>
+          <declname>go</declname>
+        </param>
+        <param>
+          <type>BounceResult</type>
+          <declname>bounceResult</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1types_1a6a9de8f399df76cc158f000a343f02a4" kindref="member">helios::engine::modules::physics::collision::types::CollisionResponse</ref></type>
+          <declname>collisionResponse</declname>
+        </param>
+        <briefdescription>
+<para>Updates the entity&apos;s state based on the configured collision response. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the response is set to AlignHeadingToDirection, this method updates the SteeringComponent to match the new bounce direction.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>go</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the GameObject to update. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bounceResult</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The result data from the bounce calculation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>collisionResponse</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of response to apply. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/mechanics/bounds/systems/LevelBoundsBehaviorSystem.ixx" line="162" column="14" bodyfile="/tmp/h/include/helios/engine/mechanics/bounds/systems/LevelBoundsBehaviorSystem.ixx" bodystart="162" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1systems_1_1LevelBoundsBehaviorSystem_1a65841958926458a5ba58cf9ab862bf27" prot="private" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>BounceResult</type>
+        <definition>BounceResult helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem::bounce</definition>
+        <argsstring>(helios::math::vec3f worldTranslation, helios::math::aabbf objectBounds, helios::math::aabbf levelBounds, const float restitution, helios::engine::modules::physics::motion::components::Move2DComponent &amp;m2d, helios::engine::modules::physics::motion::components::DirectionComponent &amp;dc) noexcept</argsstring>
         <name>bounce</name>
         <qualifiedname>helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem::bounce</qualifiedname>
         <param>
@@ -77,10 +132,6 @@
         <param>
           <type><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1DirectionComponent" kindref="compound">helios::engine::modules::physics::motion::components::DirectionComponent</ref> &amp;</type>
           <declname>dc</declname>
-        </param>
-        <param>
-          <type><ref refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent" kindref="compound">helios::engine::modules::physics::motion::components::RotationStateComponent</ref> &amp;</type>
-          <declname>rsc</declname>
         </param>
         <briefdescription>
 <para>Applies bounce behavior to an entity that has left level bounds. </para>
@@ -142,7 +193,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/mechanics/bounds/systems/LevelBoundsBehaviorSystem.ixx" line="144" column="37" bodyfile="include/helios/engine/mechanics/bounds/systems/LevelBoundsBehaviorSystem.ixx" bodystart="144" bodyend="200"/>
+        <location file="/tmp/h/include/helios/engine/mechanics/bounds/systems/LevelBoundsBehaviorSystem.ixx" line="198" column="23" bodyfile="/tmp/h/include/helios/engine/mechanics/bounds/systems/LevelBoundsBehaviorSystem.ixx" bodystart="198" bodyend="251"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -190,8 +241,8 @@
         </childnode>
       </node>
       <node id="6">
-        <label>helios::engine::runtime::pooling::PoolManagerRegistry</label>
-        <link refid="classhelios_1_1engine_1_1runtime_1_1pooling_1_1PoolManagerRegistry"/>
+        <label>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry"/>
       </node>
       <node id="4">
         <label>helios::engine::runtime::world::GameWorld</label>
@@ -200,7 +251,7 @@
           <edgelabel>logger_</edgelabel>
         </childnode>
         <childnode refid="6" relation="usage">
-          <edgelabel>poolManagerRegistry_</edgelabel>
+          <edgelabel>spawnCommandHandlerRegistry_</edgelabel>
         </childnode>
       </node>
       <node id="5">
@@ -208,13 +259,14 @@
         <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
       </node>
     </collaborationgraph>
-    <location file="include/helios/engine/mechanics/bounds/systems/LevelBoundsBehaviorSystem.ixx" line="50" column="5" bodyfile="include/helios/engine/mechanics/bounds/systems/LevelBoundsBehaviorSystem.ixx" bodystart="50" bodyend="202"/>
+    <location file="/tmp/h/include/helios/engine/mechanics/bounds/systems/LevelBoundsBehaviorSystem.ixx" line="51" column="5" bodyfile="/tmp/h/include/helios/engine/mechanics/bounds/systems/LevelBoundsBehaviorSystem.ixx" bodystart="51" bodyend="253"/>
     <listofallmembers>
-      <member refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1systems_1_1LevelBoundsBehaviorSystem_1a21e7cd605526b2d812e58c177d62f0b1" prot="private" virt="non-virtual"><scope>helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem</scope><name>bounce</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1systems_1_1LevelBoundsBehaviorSystem_1a65841958926458a5ba58cf9ab862bf27" prot="private" virt="non-virtual"><scope>helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem</scope><name>bounce</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a1b71da2e3fb9d2effca00a1ecdfca1f5" prot="protected" virt="non-virtual"><scope>helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem</scope><name>gameWorld_</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1System_1ae0464c1668e257439243a4f25979a7ff" prot="public" virt="virtual"><scope>helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem</scope><name>init</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a26d81abcda05fe8b12a1ddb4ed6099a3" prot="public" virt="non-virtual"><scope>helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem</scope><name>Updatable</name></member>
       <member refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1systems_1_1LevelBoundsBehaviorSystem_1ac1e97cde1b5f98aaec15989da6e864ab" prot="public" virt="virtual"><scope>helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem</scope><name>update</name></member>
+      <member refid="classhelios_1_1engine_1_1mechanics_1_1bounds_1_1systems_1_1LevelBoundsBehaviorSystem_1a3d590331dc8162a00582d1be78af25f4" prot="private" virt="non-virtual"><scope>helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem</scope><name>updateCollisionResponse</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1System_1a937c99bfacd777c53e0f811ab9d335a6" prot="public" virt="virtual"><scope>helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem</scope><name>~System</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1Updatable_1a0f54f92a2a8d6c8dc2fc2ebed41d5a85" prot="public" virt="virtual"><scope>helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem</scope><name>~Updatable</name></member>
     </listofallmembers>

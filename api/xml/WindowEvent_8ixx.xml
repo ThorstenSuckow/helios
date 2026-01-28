@@ -6,6 +6,10 @@
     <includes refid="Event_8ixx" local="no">helios.event.Event</includes>
     <includes refid="Guid_8ixx" local="no">helios.util.Guid</includes>
     <incdepgraph>
+      <node id="8">
+        <label>helios.core.types</label>
+        <link refid="types_8ixx"/>
+      </node>
       <node id="3">
         <label>helios.event.Event</label>
         <link refid="Event_8ixx"/>
@@ -23,9 +27,11 @@
         </childnode>
         <childnode refid="2" relation="include">
         </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
       </node>
       <node id="1">
-        <label>include/helios/window/event/WindowEvent.ixx</label>
+        <label>WindowEvent.ixx</label>
         <link refid="WindowEvent_8ixx"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -86,29 +92,31 @@
 <codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>sourceGuid<sp/>The<sp/>Guid<sp/>of<sp/>the<sp/>Window<sp/>that<sp/>triggered<sp/>the<sp/>event.</highlight></codeline>
 <codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="30" refid="classhelios_1_1window_1_1event_1_1WindowEvent_1aaa39eed04b768d8daa5dc65b5e14bed8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1window_1_1event_1_1WindowEvent_1aaa39eed04b768d8daa5dc65b5e14bed8" kindref="member">WindowEvent</ref>(<ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref><sp/><ref refid="classhelios_1_1window_1_1event_1_1WindowEvent_1a8116ef9bcb82c44bbf6ee846abca9f00" kindref="member">sourceGuid</ref>);</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Constructs<sp/>a<sp/>new<sp/>WindowEvent<sp/>with<sp/>the<sp/>specific<sp/>source<sp/>Guid<sp/>and</highlight></codeline>
-<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>the<sp/>specific<sp/>tag.</highlight></codeline>
-<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>sourceGuid<sp/>The<sp/>Guid<sp/>of<sp/>the<sp/>Window<sp/>that<sp/>triggered<sp/>the<sp/>event.</highlight></codeline>
-<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>tag<sp/>A<sp/>`uint64_t`<sp/>value<sp/>identifying<sp/>the<sp/>specific<sp/>type<sp/>of<sp/>event.</highlight></codeline>
-<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="39" refid="classhelios_1_1window_1_1event_1_1WindowEvent_1ab5286107303e5071ac3d87ac9ba69202" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1window_1_1event_1_1WindowEvent_1ab5286107303e5071ac3d87ac9ba69202" kindref="member">WindowEvent</ref>(<ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref><sp/><ref refid="classhelios_1_1window_1_1event_1_1WindowEvent_1a8116ef9bcb82c44bbf6ee846abca9f00" kindref="member">sourceGuid</ref>,<sp/>uint64_t<sp/><ref refid="classhelios_1_1event_1_1Event_1a6b7048ac1591c2decbbabbb2100e7db7" kindref="member">tag</ref>);</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"></highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="42"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>The<sp/>unique<sp/>and<sp/>immutable<sp/>Guid<sp/>of<sp/>the<sp/>source<sp/>of<sp/>this<sp/>event,<sp/>i.e.</highlight></codeline>
-<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>the<sp/>Window<sp/>that<sp/>trigegred<sp/>the<sp/>event.</highlight></codeline>
-<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="47" refid="classhelios_1_1window_1_1event_1_1WindowEvent_1a8116ef9bcb82c44bbf6ee846abca9f00" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref><sp/><ref refid="classhelios_1_1window_1_1event_1_1WindowEvent_1a8116ef9bcb82c44bbf6ee846abca9f00" kindref="member">sourceGuid</ref>;</highlight></codeline>
-<codeline lineno="48"><highlight class="normal"></highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="30" refid="classhelios_1_1window_1_1event_1_1WindowEvent_1aaa39eed04b768d8daa5dc65b5e14bed8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1window_1_1event_1_1WindowEvent_1aaa39eed04b768d8daa5dc65b5e14bed8" kindref="member">WindowEvent</ref>(<ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref><sp/><ref refid="classhelios_1_1window_1_1event_1_1WindowEvent_1a8116ef9bcb82c44bbf6ee846abca9f00" kindref="member">sourceGuid</ref>):</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1window_1_1event_1_1WindowEvent_1a8116ef9bcb82c44bbf6ee846abca9f00" kindref="member">sourceGuid</ref>(<ref refid="classhelios_1_1window_1_1event_1_1WindowEvent_1a8116ef9bcb82c44bbf6ee846abca9f00" kindref="member">sourceGuid</ref>)<sp/><sp/>{}</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Constructs<sp/>a<sp/>new<sp/>WindowEvent<sp/>with<sp/>the<sp/>specific<sp/>source<sp/>Guid<sp/>and</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>the<sp/>specific<sp/>tag.</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>sourceGuid<sp/>The<sp/>Guid<sp/>of<sp/>the<sp/>Window<sp/>that<sp/>triggered<sp/>the<sp/>event.</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>tag<sp/>A<sp/>`uint64_t`<sp/>value<sp/>identifying<sp/>the<sp/>specific<sp/>type<sp/>of<sp/>event.</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40" refid="classhelios_1_1window_1_1event_1_1WindowEvent_1ab5286107303e5071ac3d87ac9ba69202" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1window_1_1event_1_1WindowEvent_1ab5286107303e5071ac3d87ac9ba69202" kindref="member">WindowEvent</ref>(<ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref><sp/><ref refid="classhelios_1_1window_1_1event_1_1WindowEvent_1a8116ef9bcb82c44bbf6ee846abca9f00" kindref="member">sourceGuid</ref>,<sp/>uint64_t<sp/><ref refid="classhelios_1_1event_1_1Event_1a6b7048ac1591c2decbbabbb2100e7db7" kindref="member">tag</ref>):</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1event_1_1Event_1a6a32122b419e5513a9a76cdb4312bc71" kindref="member">Event</ref>(<ref refid="classhelios_1_1event_1_1Event_1a6b7048ac1591c2decbbabbb2100e7db7" kindref="member">tag</ref>),<sp/><ref refid="classhelios_1_1window_1_1event_1_1WindowEvent_1a8116ef9bcb82c44bbf6ee846abca9f00" kindref="member">sourceGuid</ref>(<ref refid="classhelios_1_1window_1_1event_1_1WindowEvent_1a8116ef9bcb82c44bbf6ee846abca9f00" kindref="member">sourceGuid</ref>)<sp/><sp/>{}</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>The<sp/>unique<sp/>and<sp/>immutable<sp/>Guid<sp/>of<sp/>the<sp/>source<sp/>of<sp/>this<sp/>event,<sp/>i.e.</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>the<sp/>Window<sp/>that<sp/>trigegred<sp/>the<sp/>event.</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49" refid="classhelios_1_1window_1_1event_1_1WindowEvent_1a8116ef9bcb82c44bbf6ee846abca9f00" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref><sp/><ref refid="classhelios_1_1window_1_1event_1_1WindowEvent_1a8116ef9bcb82c44bbf6ee846abca9f00" kindref="member">sourceGuid</ref>;</highlight></codeline>
 <codeline lineno="50"><highlight class="normal"></highlight></codeline>
-<codeline lineno="51"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal">}</highlight></codeline>
     </programlisting>
-    <location file="include/helios/window/event/WindowEvent.ixx"/>
+    <location file="/tmp/h/include/helios/window/event/WindowEvent.ixx"/>
   </compounddef>
 </doxygen>

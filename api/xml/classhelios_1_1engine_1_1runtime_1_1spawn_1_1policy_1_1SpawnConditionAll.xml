@@ -1,0 +1,238 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnConditionAll" kind="class" language="C++" prot="public">
+    <compoundname>helios::engine::runtime::spawn::policy::SpawnConditionAll</compoundname>
+    <basecompoundref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition" prot="public" virt="non-virtual">helios::engine::runtime::spawn::policy::SpawnCondition</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnConditionAll_1afc613008b58da17852d6f07009ea37af" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::unique_ptr&lt; <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition" kindref="compound">helios::engine::runtime::spawn::policy::SpawnCondition</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::unique_ptr&lt;helios::engine::runtime::spawn::policy::SpawnCondition&gt; &gt; helios::engine::runtime::spawn::policy::SpawnConditionAll::spawnConditions_</definition>
+        <argsstring></argsstring>
+        <name>spawnConditions_</name>
+        <qualifiedname>helios::engine::runtime::spawn::policy::SpawnConditionAll::spawnConditions_</qualifiedname>
+        <briefdescription>
+<para>Collection of child conditions to evaluate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/SpawnConditionAll.ixx" line="56" column="21" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/policy/SpawnConditionAll.ixx" bodystart="56" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnConditionAll_1a45377c80104890ac23e65ad4ca0eb2c1" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>helios::engine::runtime::spawn::policy::SpawnConditionAll::SpawnConditionAll</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>SpawnConditionAll</name>
+        <qualifiedname>helios::engine::runtime::spawn::policy::SpawnConditionAll::SpawnConditionAll</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a composite condition from variadic arguments. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Types of spawn conditions (must be unique_ptr&lt;SpawnCondition&gt;).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Spawn conditions to combine. Ownership transferred. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/SpawnConditionAll.ixx" line="68" column="18" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/policy/SpawnConditionAll.ixx" bodystart="68" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnConditionAll_1af92bccd2eaa53210cb9931ce3af59369" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::runtime::spawn::policy::SpawnConditionAll::isSatisfied</definition>
+        <argsstring>(const size_t requestedAmount, const SpawnRuleState &amp;spawnState, const helios::engine::runtime::pooling::GameObjectPoolSnapshot poolSnapshot, const helios::engine::runtime::world::UpdateContext &amp;updateContext) const noexcept override</argsstring>
+        <name>isSatisfied</name>
+        <qualifiedname>helios::engine::runtime::spawn::policy::SpawnConditionAll::isSatisfied</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition_1a8f099492bc15035f9d97382951d036bd">isSatisfied</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>requestedAmount</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState" kindref="compound">SpawnRuleState</ref> &amp;</type>
+          <declname>spawnState</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1pooling_1_1GameObjectPoolSnapshot" kindref="compound">helios::engine::runtime::pooling::GameObjectPoolSnapshot</ref></type>
+          <declname>poolSnapshot</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1runtime_1_1world_1_1UpdateContext" kindref="compound">helios::engine::runtime::world::UpdateContext</ref> &amp;</type>
+          <declname>updateContext</declname>
+        </param>
+        <briefdescription>
+<para>Checks if all child conditions are satisfied. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Iterates through all conditions and returns `false` on the first condition that fails (short-circuit evaluation).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>requestedAmount</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of entities requested for spawn. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spawnState</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current state of the spawn rule. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>poolSnapshot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Snapshot of the entity pool. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>updateContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current frame context.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>`true` if all conditions pass, `false` otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/SpawnConditionAll.ixx" line="89" column="15" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/policy/SpawnConditionAll.ixx" bodystart="89" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnConditionAll_1abb4281649d92188ca17bce0430fae4b6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void helios::engine::runtime::spawn::policy::SpawnConditionAll::onCommit</definition>
+        <argsstring>(SpawnRuleState &amp;spawnRuleState, const size_t spawnAmount) const override</argsstring>
+        <name>onCommit</name>
+        <qualifiedname>helios::engine::runtime::spawn::policy::SpawnConditionAll::onCommit</qualifiedname>
+        <reimplements refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition_1a1e0f204a7662fbb8fc83f76a2f7b0abd">onCommit</reimplements>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnRuleState" kindref="compound">SpawnRuleState</ref> &amp;</type>
+          <declname>spawnRuleState</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>spawnAmount</declname>
+        </param>
+        <briefdescription>
+<para>Propagates commit to all child conditions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Calls `onCommit()` on each child condition to allow them to update their internal state after a successful spawn.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>spawnRuleState</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The rule&apos;s runtime state to update. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spawnAmount</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of entities that were spawned. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/SpawnConditionAll.ixx" line="116" column="14" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/policy/SpawnConditionAll.ixx" bodystart="116" bodyend="124"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Composite condition requiring all child conditions to pass. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnConditionAll" kindref="compound">SpawnConditionAll</ref> implements a logical AND over multiple <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition" kindref="compound">SpawnCondition</ref> instances. The spawn is permitted only when every child condition returns `true` from `isSatisfied()`.</para>
+<para>## Behavior</para>
+<para><itemizedlist>
+<listitem><para>Short-circuits on first failing condition</para>
+</listitem><listitem><para>Propagates `onCommit()` to all child conditions</para>
+</listitem><listitem><para>Accepts variadic condition arguments via constructor</para>
+</listitem></itemizedlist>
+</para>
+<para>## Usage</para>
+<para>```cpp auto condition = std::make_unique&lt;SpawnConditionAll&gt;( std::make_unique&lt;TimerCondition&gt;(2.0f), std::make_unique&lt;RequestedAmountIsAvailableCondition&gt;(), std::make_unique&lt;MaxActiveCondition&gt;(10) );</para>
+<para>// Spawns only when: timer elapsed AND pool available AND under max ```</para>
+<para><simplesect kind="see"><para><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition" kindref="compound">SpawnCondition</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>TimerCondition </para>
+</simplesect>
+<simplesect kind="see"><para>RequestedAmountIsAvailableCondition </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::engine::runtime::spawn::policy::SpawnCondition</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::runtime::spawn::policy::SpawnConditionAll</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnConditionAll"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>helios::engine::runtime::spawn::policy::SpawnCondition</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition"/>
+      </node>
+      <node id="1">
+        <label>helios::engine::runtime::spawn::policy::SpawnConditionAll</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnConditionAll"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/SpawnConditionAll.ixx" line="51" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/policy/SpawnConditionAll.ixx" bodystart="51" bodyend="127"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnConditionAll_1af92bccd2eaa53210cb9931ce3af59369" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::policy::SpawnConditionAll</scope><name>isSatisfied</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnConditionAll_1abb4281649d92188ca17bce0430fae4b6" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::policy::SpawnConditionAll</scope><name>onCommit</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnConditionAll_1a45377c80104890ac23e65ad4ca0eb2c1" prot="public" virt="non-virtual"><scope>helios::engine::runtime::spawn::policy::SpawnConditionAll</scope><name>SpawnConditionAll</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnConditionAll_1afc613008b58da17852d6f07009ea37af" prot="private" virt="non-virtual"><scope>helios::engine::runtime::spawn::policy::SpawnConditionAll</scope><name>spawnConditions_</name></member>
+      <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1policy_1_1SpawnCondition_1ae32fb7e2816360aa7d59d3b2a21c656a" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::policy::SpawnConditionAll</scope><name>~SpawnCondition</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

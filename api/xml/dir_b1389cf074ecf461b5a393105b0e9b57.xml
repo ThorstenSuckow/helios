@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_b1389cf074ecf461b5a393105b0e9b57" kind="dir">
+    <compoundname>systems</compoundname>
+    <innerfile refid="helios_2engine_2mechanics_2lifecycle_2systems_2__module_8ixx">helios/engine/mechanics/lifecycle/systems/_module.ixx</innerfile>
+    <innerfile refid="DelayedComponentEnablerSystem_8ixx">DelayedComponentEnablerSystem.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md179">
+<title>helios::engine::mechanics::lifecycle::systems</title><para>Systems for processing entity lifecycle transitions.</para>
+</sect1>
+<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md180">
+<title>Overview</title><para>This module provides systems that process lifecycle-related components each frame. The primary system handles delayed component activation by decrementing timers and enabling components when their delay expires.</para>
+</sect1>
+<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md181">
+<title>Key Classes</title><para><table rows="2" cols="2"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>DelayedComponentEnablerSystem</computeroutput>  </para>
+</entry><entry thead="no"><para>Processes delayed activations each frame  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md182">
+<title>System Behavior</title><para>Each frame, the system: 1. Iterates all entities with <computeroutput>DelayedComponentEnabler</computeroutput> 2. Decrements each deferred component&apos;s timer by <computeroutput>deltaTime</computeroutput> 3. Enables components whose timers reach zero 4. Removes activated entries from the deferred list</para>
+</sect1>
+<sect1 id="dir_b1389cf074ecf461b5a393105b0e9b57_1autotoc_md183">
+<title>Scheduling</title><para>Schedule in the gameplay phase after spawn systems but before collision/physics:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal">gameLoop.addSystem&lt;DelayedComponentEnablerSystem&gt;(Phase::Gameplay);</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/mechanics/lifecycle/systems/"/>
+  </compounddef>
+</doxygen>

@@ -54,9 +54,9 @@
 <codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>runtime<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Runtime<sp/>infrastructure</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>├──<sp/>world<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameWorld,<sp/>Level,<sp/>UpdateContext,<sp/>Manager</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>├──<sp/>gameloop<sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameLoop,<sp/>Phase,<sp/>Pass</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>├──<sp/>pooling<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameObjectPool,<sp/>PoolRegistry,<sp/>PoolFacade</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>├──<sp/>pooling<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameObjectPool,<sp/>PoolManager,<sp/>PoolRegistry</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>├──<sp/>messaging<sp/><sp/><sp/><sp/><sp/>#<sp/>CommandBuffer,<sp/>Dispatchers,<sp/>EventBus</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>└──<sp/>factory<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameObjectFactory</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>└──<sp/>spawn<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>SpawnManager,<sp/>SpawnScheduler,<sp/>behaviors,<sp/>policies</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>modules<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Domain-specific<sp/>components<sp/>and<sp/>systems</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>├──<sp/>physics<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Collision,<sp/>motion<sp/>systems</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>│<sp/><sp/><sp/>├──<sp/>spatial<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Transform<sp/>components</highlight></codeline>
@@ -391,17 +391,22 @@
 <codeline></codeline>
 <codeline><highlight class="normal">**Object<sp/>Pooling:**</highlight></codeline>
 <codeline><highlight class="normal">```cpp</highlight></codeline>
-<codeline><highlight class="normal">import<sp/>helios.engine.runtime.pooling.GameObjectPool;</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.engine.runtime.pooling.GameObjectPoolManager;</highlight></codeline>
+<codeline><highlight class="normal">import<sp/>helios.engine.runtime.spawn.SpawnManager;</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">//<sp/>Create<sp/>pool<sp/>for<sp/>projectiles</highlight></codeline>
-<codeline><highlight class="normal">auto<sp/>pool<sp/>=<sp/>std::make_unique&lt;GameObjectPool&gt;();</highlight></codeline>
-<codeline><highlight class="normal">gameWorld.addPool(bulletPoolId,<sp/>std::move(pool));</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Create<sp/>pool<sp/>manager</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>poolManager<sp/>=<sp/>std::make_unique&lt;GameObjectPoolManager&gt;();</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">//<sp/>Register<sp/>manager<sp/>for<sp/>spawn/despawn</highlight></codeline>
-<codeline><highlight class="normal">gameWorld.addManager&lt;ProjectilePoolManager&gt;(bulletPoolId,<sp/>factory,<sp/>spawnCondition);</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Create<sp/>spawn<sp/>manager<sp/>with<sp/>profiles</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>spawnManager<sp/>=<sp/>std::make_unique&lt;SpawnManager&gt;();</highlight></codeline>
+<codeline><highlight class="normal">spawnManager-&gt;addSpawnProfile(enemyProfileId,<sp/>std::move(enemyProfile));</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Add<sp/>managers<sp/>to<sp/>world</highlight></codeline>
+<codeline><highlight class="normal">gameWorld.addManager(std::move(poolManager));</highlight></codeline>
+<codeline><highlight class="normal">gameWorld.addManager(std::move(spawnManager));</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">See<sp/>[Component<sp/>System](core-concepts/component-system.md),<sp/>[Game<sp/>Loop<sp/>Architecture](core-concepts/gameloop-architecture.md),<sp/>and<sp/>[Command<sp/>System](core-concepts/command-system.md)<sp/>for<sp/>details.</highlight></codeline>
+<codeline><highlight class="normal">See<sp/>[Component<sp/>System](core-concepts/component-system.md),<sp/>[Game<sp/>Loop<sp/>Architecture](core-concepts/gameloop-architecture.md),<sp/>[Command<sp/>System](core-concepts/command-system.md),<sp/>and<sp/>[Spawn<sp/>System](core-concepts/spawn-system.md)<sp/>for<sp/>details.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">###<sp/>9.<sp/>Units<sp/>System</highlight></codeline>
 <codeline></codeline>
@@ -549,6 +554,7 @@
 <codeline><highlight class="normal">-<sp/>**[Game<sp/>Loop<sp/>Architecture](core-concepts/gameloop-architecture.md)**<sp/>-<sp/>Phase/Pass<sp/>structure<sp/>and<sp/>event<sp/>handling</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**[Command<sp/>System](core-concepts/command-system.md)**<sp/>-<sp/>Deferred<sp/>action<sp/>execution</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**[Event<sp/>System](core-concepts/event-system.md)**<sp/>-<sp/>Phase/Pass<sp/>event<sp/>propagation</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**[Spawn<sp/>System](core-concepts/spawn-system.md)**<sp/>-<sp/>Entity<sp/>lifecycle<sp/>with<sp/>spawn<sp/>scheduling<sp/>and<sp/>pooling</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**[Scene<sp/>Graph](core-concepts/scene-graph.md)**<sp/>-<sp/>Hierarchical<sp/>scene<sp/>organization</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**[Conventions](core-concepts/conventions.md)**<sp/>-<sp/>Coordinate<sp/>system,<sp/>units,<sp/>matrix<sp/>storage</highlight></codeline>
 <codeline></codeline>
@@ -560,6 +566,7 @@
 <codeline><highlight class="normal">-<sp/>**[Engine](../include/helios/engine/README.md)**<sp/>-<sp/>Game<sp/>engine<sp/>core<sp/>(ECS,<sp/>runtime,<sp/>modules)</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**[Modules](../include/helios/engine/modules/README.md)**<sp/>-<sp/>Domain-specific<sp/>components<sp/>and<sp/>systems</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**[Mechanics](../include/helios/engine/mechanics/README.md)**<sp/>-<sp/>Gameplay<sp/>mechanics<sp/>(combat,<sp/>spawn,<sp/>bounds)</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**[Spawn](../include/helios/engine/runtime/spawn/README.md)**<sp/>-<sp/>Spawn<sp/>scheduling,<sp/>profiles,<sp/>and<sp/>behaviors</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**[Input](../include/helios/input/README.md)**<sp/>-<sp/>Input<sp/>handling</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**[Tooling](../include/helios/engine/tooling/README.md)**<sp/>-<sp/>Performance<sp/>metrics<sp/>and<sp/>profiling</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**[Math](../include/helios/math/README.md)**<sp/>-<sp/>Mathematical<sp/>operations</highlight></codeline>
@@ -604,6 +611,6 @@
 <codeline></codeline>
 <codeline><highlight class="normal">`helios`<sp/>is<sp/>distributed<sp/>under<sp/>the<sp/>MIT-license.</highlight></codeline>
     </programlisting>
-    <location file="docs/heliosapi.md"/>
+    <location file="/tmp/h/docs/heliosapi.md"/>
   </compounddef>
 </doxygen>

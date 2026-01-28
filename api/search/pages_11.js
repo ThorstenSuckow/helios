@@ -1,12 +1,14 @@
 var searchData=
 [
-  ['imgui_20debug_20overlay_0',['6. ImGui Debug Overlay',['../index.html#autotoc_md351',1,'']]],
-  ['implement_20core_20interfaces_1',['1. Implement Core Interfaces',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md32',1,'']]],
-  ['implementation_20note_2',['Implementation Note',['../dir_4abfc5de19138d0df20e9d7e5fc1ea64.html#autotoc_md62',1,'']]],
-  ['implementing_20custom_20conditions_3',['Implementing Custom Conditions',['../dir_0144e79efb88b2f9510f76f8581e7dec.html#autotoc_md261',1,'']]],
-  ['initializers_4',['Available Initializers',['../dir_2ea8ff0daa39867284839e246c6ea23f.html#autotoc_md232',1,'']]],
-  ['input_20adapter_5',['Custom Input Adapter',['../index.html#autotoc_md362',1,'']]],
-  ['input_20system_6',['4. Input System',['../index.html#autotoc_md349',1,'']]],
-  ['interfaces_7',['1. Implement Core Interfaces',['../dir_106756a8ee71bdde7f7b779a3a0a52e4.html#autotoc_md32',1,'']]],
-  ['introduction_8',['Introduction',['../index.html#autotoc_md340',1,'']]]
+  ['ids_0',['Strongly-Typed IDs',['../dir_4f0da182a846ab23c4f0200a8e7a4684.html#autotoc_md104',1,'']]],
+  ['imgui_20debug_20overlay_1',['6. ImGui Debug Overlay',['../index.html#autotoc_md510',1,'']]],
+  ['implement_20core_20interfaces_2',['1. Implement Core Interfaces',['../dir_c65593c1e2ce5122a06a0735d96badb1.html#autotoc_md32',1,'']]],
+  ['implementation_20note_3',['Implementation Note',['../dir_6634d24428e27f0a06eb229019da5d06.html#autotoc_md119',1,'']]],
+  ['implementing_20custom_20conditions_4',['Implementing Custom Conditions',['../dir_b5d4d16eb8a35bef91bda898d9a12dca.html#autotoc_md419',1,'']]],
+  ['in_20custom_20types_5',['Supporting no_init in Custom Types',['../dir_4e12247f2bbe360a59cd98a83515e8f1.html#autotoc_md54',1,'']]],
+  ['initializers_6',['Available Initializers',['../dir_3dba072b2489bebe845ad485d4f2a8c5.html#autotoc_md390',1,'']]],
+  ['input_20adapter_7',['Custom Input Adapter',['../index.html#autotoc_md521',1,'']]],
+  ['input_20system_8',['4. Input System',['../index.html#autotoc_md508',1,'']]],
+  ['interfaces_9',['1. Implement Core Interfaces',['../dir_c65593c1e2ce5122a06a0735d96badb1.html#autotoc_md32',1,'']]],
+  ['introduction_10',['Introduction',['../index.html#autotoc_md499',1,'']]]
 ];

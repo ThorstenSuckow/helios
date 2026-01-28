@@ -1,22 +1,24 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
-  <compounddef id="classhelios_1_1engine_1_1ecs_1_1Component" kind="class" language="C++" prot="public">
+  <compounddef id="classhelios_1_1engine_1_1ecs_1_1Component" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>helios::engine::ecs::Component</compoundname>
     <derivedcompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; LevelBoundsBehaviorComponent &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; DelayedComponentEnabler &gt;</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; SpawnedByProfileComponent &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; ChaseComponent &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; SpinComponent &gt;</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; AabbColliderComponent &gt;</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; CollisionComponent &gt;</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; CollisionStateComponent &gt;</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; DirectionComponent &gt;</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; Move2DComponent &gt;</derivedcompoundref>
-    <derivedcompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; RotationStateComponent &gt;</derivedcompoundref>
-    <derivedcompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; SpinComponent &gt;</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; SteeringComponent &gt;</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; ModelAabbComponent &gt;</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; RenderableComponent &gt;</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; SceneNodeComponent &gt;</derivedcompoundref>
-    <derivedcompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; ScaleComponent &gt;</derivedcompoundref>
-    <derivedcompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; TransformComponent &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; ComposeTransformComponent &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; RotationStateComponent &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; ScaleStateComponent &gt;</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; TranslationStateComponent &gt;</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent" prot="public" virt="non-virtual">helios::engine::ecs::CloneableComponent&lt; Derived &gt;</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent" prot="public" virt="non-virtual">helios::engine::mechanics::combat::components::Aim2DComponent</derivedcompoundref>
@@ -37,10 +39,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/ecs/Component.ixx" line="77" column="20" bodyfile="include/helios/engine/ecs/Component.ixx" bodystart="77" bodyend="-1"/>
-        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1Component_1a3489588d238d04928e767908a0721be1" compoundref="Component_8ixx" startline="237" endline="239">gameObject</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1Component_1a081d44a554b723d719f7909638735819" compoundref="Component_8ixx" startline="140" endline="142">isAttached</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1Component_1ac08c7be419071c67780342322aa1e679" compoundref="Component_8ixx" startline="104" endline="106">onAttach</referencedby>
+        <location file="/tmp/h/include/helios/engine/ecs/Component.ixx" line="79" column="20" bodyfile="/tmp/h/include/helios/engine/ecs/Component.ixx" bodystart="79" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DelayedComponentEnabler_1a3a3c94d7f24461e1d9d89cc3084a9edc" compoundref="DelayedComponentEnabler_8ixx" startline="116" endline="134">helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler::defer</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1Component_1a3489588d238d04928e767908a0721be1" compoundref="Component_8ixx" startline="239" endline="241">gameObject</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1Component_1a081d44a554b723d719f7909638735819" compoundref="Component_8ixx" startline="142" endline="144">isAttached</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1Component_1ac08c7be419071c67780342322aa1e679" compoundref="Component_8ixx" startline="106" endline="108">onAttach</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classhelios_1_1engine_1_1ecs_1_1Component_1ab5895e14ca5df63711d46a492fb40c64" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -56,11 +59,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/ecs/Component.ixx" line="82" column="14" bodyfile="include/helios/engine/ecs/Component.ixx" bodystart="82" bodyend="-1"/>
-        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1Component_1a21492dd1100f113c7f049c3bd8a7a179" compoundref="Component_8ixx" startline="208" endline="210">disable</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1Component_1a8c2eb9405720e29d3a637061d523fb89" compoundref="Component_8ixx" startline="186" endline="188">enable</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1Component_1a58e0f3384ee76bb9961ffb46e3181bda" compoundref="Component_8ixx" startline="173" endline="175">isDisabled</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1Component_1a4edb1632c9901e8276f77ad53e773911" compoundref="Component_8ixx" startline="160" endline="162">isEnabled</referencedby>
+        <location file="/tmp/h/include/helios/engine/ecs/Component.ixx" line="84" column="14" bodyfile="/tmp/h/include/helios/engine/ecs/Component.ixx" bodystart="84" bodyend="-1"/>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1Component_1a21492dd1100f113c7f049c3bd8a7a179" compoundref="Component_8ixx" startline="210" endline="212">disable</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1Component_1a8c2eb9405720e29d3a637061d523fb89" compoundref="Component_8ixx" startline="188" endline="190">enable</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1Component_1a58e0f3384ee76bb9961ffb46e3181bda" compoundref="Component_8ixx" startline="175" endline="177">isDisabled</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1Component_1a4edb1632c9901e8276f77ad53e773911" compoundref="Component_8ixx" startline="162" endline="164">isEnabled</referencedby>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -77,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/ecs/Component.ixx" line="89" column="17"/>
+        <location file="/tmp/h/include/helios/engine/ecs/Component.ixx" line="91" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1Component_1a5b888a1acd1799700525f3eab51b1a62" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -92,7 +95,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/ecs/Component.ixx" line="94" column="9"/>
+        <location file="/tmp/h/include/helios/engine/ecs/Component.ixx" line="96" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1Component_1ac08c7be419071c67780342322aa1e679" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -102,7 +105,7 @@
         <qualifiedname>helios::engine::ecs::Component::onAttach</qualifiedname>
         <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1renderable_1_1components_1_1RenderableComponent_1a165d24e22dce365af85a54be24c35afe">onAttach</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1scene_1_1components_1_1SceneNodeComponent_1aaa22863fa82a7908ec12ecf49ab092bd">onAttach</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1ScaleComponent_1aa90b8058ac7e2c998f5c27e5d6745201">onAttach</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1ScaleStateComponent_1a812ee6487dc3dfd8675d65f1c5ca6f36">onAttach</reimplementedby>
         <param>
           <type><ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">GameObject</ref> *</type>
           <declname>gameObject</declname>
@@ -126,9 +129,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/ecs/Component.ixx" line="104" column="22" bodyfile="include/helios/engine/ecs/Component.ixx" bodystart="104" bodyend="106"/>
-        <references refid="classhelios_1_1engine_1_1ecs_1_1Component_1a3489588d238d04928e767908a0721be1" compoundref="Component_8ixx" startline="237" endline="239">gameObject</references>
-        <references refid="classhelios_1_1engine_1_1ecs_1_1Component_1aff1c0d42b10c04da6034ff5e49d42f12" compoundref="Component_8ixx" startline="77">gameObject_</references>
+        <location file="/tmp/h/include/helios/engine/ecs/Component.ixx" line="106" column="22" bodyfile="/tmp/h/include/helios/engine/ecs/Component.ixx" bodystart="106" bodyend="108"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1Component_1a3489588d238d04928e767908a0721be1" compoundref="Component_8ixx" startline="239" endline="241">gameObject</references>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1Component_1aff1c0d42b10c04da6034ff5e49d42f12" compoundref="Component_8ixx" startline="79">gameObject_</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1Component_1a9f6ca8f70b132c8d5ca1d0ffdb8f39f9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -136,9 +139,12 @@
         <argsstring>() noexcept</argsstring>
         <name>onAcquire</name>
         <qualifiedname>helios::engine::ecs::Component::onAcquire</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1AabbColliderComponent_1a768c6316e9902ae26932615630d76242">onAcquire</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionStateComponent_1a5223797413a58f2c3188e025c7b32d44">onAcquire</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1ScaleComponent_1a8a68102466d97676d2cedc58b99f425c">onAcquire</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1TransformComponent_1a7168796b10deb537fd9c910730328dd5">onAcquire</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1a9808fb82250d10b4fd5b0c1bdddfb477">onAcquire</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1ComposeTransformComponent_1a2c8e85ebe0baa8c1a27c8c6f8425ef70">onAcquire</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1ScaleStateComponent_1a575dac49e656fb2d7248428be91d299f">onAcquire</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1TranslationStateComponent_1a595d241523bc3602e17b0ed4135b8d1d">onAcquire</reimplementedby>
         <briefdescription>
 <para>Called when the component&apos;s <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">GameObject</ref> is re-acquired from a pool. </para>
         </briefdescription>
@@ -148,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/ecs/Component.ixx" line="118" column="22" bodyfile="include/helios/engine/ecs/Component.ixx" bodystart="118" bodyend="120"/>
+        <location file="/tmp/h/include/helios/engine/ecs/Component.ixx" line="120" column="22" bodyfile="/tmp/h/include/helios/engine/ecs/Component.ixx" bodystart="120" bodyend="122"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1Component_1aacc77dfd9a7a39b733e0f90a7e50d43e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -156,8 +162,11 @@
         <argsstring>() noexcept</argsstring>
         <name>onRelease</name>
         <qualifiedname>helios::engine::ecs::Component::onRelease</qualifiedname>
-        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1ScaleComponent_1a96c7d78b045d8785a096a9f632f02d3e">onRelease</reimplementedby>
-        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1TransformComponent_1a4a8df1550d4471401cf07951b60f0c4f">onRelease</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1AabbColliderComponent_1a333cafa927db2e35eb46820c94260802">onRelease</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent_1a93c9ddd73f4bc59cdf99cab98418f950">onRelease</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1ComposeTransformComponent_1a1ac905810210f9d230bc4d2ab3ae51d4">onRelease</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1ScaleStateComponent_1a981662f7b673a99a7d6167c69cc3b8e0">onRelease</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1TranslationStateComponent_1a139bc1e425cff20b02f77f3449397cd0">onRelease</reimplementedby>
         <briefdescription>
 <para>Called when the component&apos;s <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">GameObject</ref> is released to a pool. </para>
         </briefdescription>
@@ -167,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/ecs/Component.ixx" line="131" column="22" bodyfile="include/helios/engine/ecs/Component.ixx" bodystart="131" bodyend="133"/>
+        <location file="/tmp/h/include/helios/engine/ecs/Component.ixx" line="133" column="22" bodyfile="/tmp/h/include/helios/engine/ecs/Component.ixx" bodystart="133" bodyend="135"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1Component_1a081d44a554b723d719f7909638735819" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -185,8 +194,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/ecs/Component.ixx" line="140" column="15" bodyfile="include/helios/engine/ecs/Component.ixx" bodystart="140" bodyend="142"/>
-        <references refid="classhelios_1_1engine_1_1ecs_1_1Component_1aff1c0d42b10c04da6034ff5e49d42f12" compoundref="Component_8ixx" startline="77">gameObject_</references>
+        <location file="/tmp/h/include/helios/engine/ecs/Component.ixx" line="142" column="15" bodyfile="/tmp/h/include/helios/engine/ecs/Component.ixx" bodystart="142" bodyend="144"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1Component_1aff1c0d42b10c04da6034ff5e49d42f12" compoundref="Component_8ixx" startline="79">gameObject_</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1Component_1a4edb1632c9901e8276f77ad53e773911" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -212,9 +221,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/ecs/Component.ixx" line="160" column="15" bodyfile="include/helios/engine/ecs/Component.ixx" bodystart="160" bodyend="162"/>
-        <references refid="classhelios_1_1engine_1_1ecs_1_1Component_1ab5895e14ca5df63711d46a492fb40c64" compoundref="Component_8ixx" startline="82">isEnabled_</references>
-        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a398512331f26b4a44dda02476249f610" compoundref="GridCollisionDetectionSystem_8ixx" startline="406" endline="447">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::update</referencedby>
+        <location file="/tmp/h/include/helios/engine/ecs/Component.ixx" line="162" column="15" bodyfile="/tmp/h/include/helios/engine/ecs/Component.ixx" bodystart="162" bodyend="164"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1Component_1ab5895e14ca5df63711d46a492fb40c64" compoundref="Component_8ixx" startline="84">isEnabled_</references>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem_1a398512331f26b4a44dda02476249f610" compoundref="GridCollisionDetectionSystem_8ixx" startline="421" endline="462">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::update</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1Component_1a58e0f3384ee76bb9961ffb46e3181bda" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -235,8 +244,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/ecs/Component.ixx" line="173" column="15" bodyfile="include/helios/engine/ecs/Component.ixx" bodystart="173" bodyend="175"/>
-        <references refid="classhelios_1_1engine_1_1ecs_1_1Component_1ab5895e14ca5df63711d46a492fb40c64" compoundref="Component_8ixx" startline="82">isEnabled_</references>
+        <location file="/tmp/h/include/helios/engine/ecs/Component.ixx" line="175" column="15" bodyfile="/tmp/h/include/helios/engine/ecs/Component.ixx" bodystart="175" bodyend="177"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1Component_1ab5895e14ca5df63711d46a492fb40c64" compoundref="Component_8ixx" startline="84">isEnabled_</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1Component_1a8c2eb9405720e29d3a637061d523fb89" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -257,8 +266,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/ecs/Component.ixx" line="186" column="14" bodyfile="include/helios/engine/ecs/Component.ixx" bodystart="186" bodyend="188"/>
-        <references refid="classhelios_1_1engine_1_1ecs_1_1Component_1ab5895e14ca5df63711d46a492fb40c64" compoundref="Component_8ixx" startline="82">isEnabled_</references>
+        <location file="/tmp/h/include/helios/engine/ecs/Component.ixx" line="188" column="14" bodyfile="/tmp/h/include/helios/engine/ecs/Component.ixx" bodystart="188" bodyend="190"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1Component_1ab5895e14ca5df63711d46a492fb40c64" compoundref="Component_8ixx" startline="84">isEnabled_</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1Component_1a21492dd1100f113c7f049c3bd8a7a179" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -287,8 +296,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/ecs/Component.ixx" line="208" column="14" bodyfile="include/helios/engine/ecs/Component.ixx" bodystart="208" bodyend="210"/>
-        <references refid="classhelios_1_1engine_1_1ecs_1_1Component_1ab5895e14ca5df63711d46a492fb40c64" compoundref="Component_8ixx" startline="82">isEnabled_</references>
+        <location file="/tmp/h/include/helios/engine/ecs/Component.ixx" line="210" column="14" bodyfile="/tmp/h/include/helios/engine/ecs/Component.ixx" bodystart="210" bodyend="212"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1Component_1ab5895e14ca5df63711d46a492fb40c64" compoundref="Component_8ixx" startline="84">isEnabled_</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1Component_1ab9614bf06e8e2d970cca3d2eb03e2425" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -305,7 +314,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/ecs/Component.ixx" line="218" column="22" bodyfile="include/helios/engine/ecs/Component.ixx" bodystart="218" bodyend="220"/>
+        <location file="/tmp/h/include/helios/engine/ecs/Component.ixx" line="220" column="22" bodyfile="/tmp/h/include/helios/engine/ecs/Component.ixx" bodystart="220" bodyend="222"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1Component_1ae18881cca0af5463608e59d112b3f257" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -322,7 +331,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/ecs/Component.ixx" line="228" column="22" bodyfile="include/helios/engine/ecs/Component.ixx" bodystart="228" bodyend="230"/>
+        <location file="/tmp/h/include/helios/engine/ecs/Component.ixx" line="230" column="22" bodyfile="/tmp/h/include/helios/engine/ecs/Component.ixx" bodystart="230" bodyend="232"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1Component_1a3489588d238d04928e767908a0721be1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">GameObject</ref> *</type>
@@ -340,13 +349,53 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/ecs/Component.ixx" line="237" column="21" bodyfile="include/helios/engine/ecs/Component.ixx" bodystart="237" bodyend="239"/>
-        <references refid="classhelios_1_1engine_1_1ecs_1_1Component_1aff1c0d42b10c04da6034ff5e49d42f12" compoundref="Component_8ixx" startline="77">gameObject_</references>
-        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1Component_1ac08c7be419071c67780342322aa1e679" compoundref="Component_8ixx" startline="104" endline="106">onAttach</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1a8c6cf3e6ae421313e9d05f09e2e1a600" compoundref="ShootComponent_8ixx" startline="102" endline="109">helios::engine::mechanics::combat::components::ShootComponent::onAttach</referencedby>
+        <location file="/tmp/h/include/helios/engine/ecs/Component.ixx" line="239" column="21" bodyfile="/tmp/h/include/helios/engine/ecs/Component.ixx" bodystart="239" bodyend="241"/>
+        <references refid="classhelios_1_1engine_1_1ecs_1_1Component_1aff1c0d42b10c04da6034ff5e49d42f12" compoundref="Component_8ixx" startline="79">gameObject_</references>
+        <referencedby refid="classhelios_1_1engine_1_1ecs_1_1Component_1ac08c7be419071c67780342322aa1e679" compoundref="Component_8ixx" startline="106" endline="108">onAttach</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1a8c6cf3e6ae421313e9d05f09e2e1a600" compoundref="ShootComponent_8ixx" startline="114" endline="121">helios::engine::mechanics::combat::components::ShootComponent::onAttach</referencedby>
         <referencedby refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1renderable_1_1components_1_1RenderableComponent_1a165d24e22dce365af85a54be24c35afe" compoundref="RenderableComponent_8ixx" startline="75" endline="81">helios::engine::modules::rendering::renderable::components::RenderableComponent::onAttach</referencedby>
         <referencedby refid="classhelios_1_1engine_1_1modules_1_1scene_1_1components_1_1SceneNodeComponent_1aaa22863fa82a7908ec12ecf49ab092bd" compoundref="SceneNodeComponent_8ixx" startline="81" endline="88">helios::engine::modules::scene::components::SceneNodeComponent::onAttach</referencedby>
-        <referencedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1ScaleComponent_1aa90b8058ac7e2c998f5c27e5d6745201" compoundref="ScaleComponent_8ixx" startline="84" endline="86">helios::engine::modules::spatial::transform::components::ScaleComponent::onAttach</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1ScaleStateComponent_1a812ee6487dc3dfd8675d65f1c5ca6f36" compoundref="ScaleStateComponent_8ixx" startline="86" endline="88">helios::engine::modules::spatial::transform::components::ScaleStateComponent::onAttach</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1ecs_1_1Component_1a2876fe546eb8554ce9e4485e9eeee9da" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId" kindref="compound">helios::engine::core::data::ComponentTypeId</ref></type>
+        <definition>virtual helios::engine::core::data::ComponentTypeId helios::engine::ecs::Component::typeId</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>typeId</name>
+        <qualifiedname>helios::engine::ecs::Component::typeId</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent_1a50fe6fc0192507132da046040dac3563">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent_1a29199079c74b8dc5a2869428fe29fea7">typeId</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent_1a94557d55ba2c6d6381154bafa7486c9e">typeId</reimplementedby>
+        <briefdescription>
+<para>Returns the ComponentTypeId for this <ref refid="classhelios_1_1engine_1_1ecs_1_1Component" kindref="compound">Component</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The ComponentTypeId is a static, runtime dependent value that allows for managing ComponentTypeIds in a dense array, providing O(1) access to a <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">GameObject</ref>&apos;s component.</para>
+<para><simplesect kind="return"><para>The ComponentTypeId for this Component-Type. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/ecs/Component.ixx" line="251" column="62"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -376,31 +425,49 @@ Example usage: ```cpp class HealthComponent : public <ref refid="classhelios_1_1
 </para>
     </detaileddescription>
     <inheritancegraph>
-      <node id="34">
+      <node id="38">
         <label>helios::engine::ecs::CloneableComponent&lt; Derived &gt;</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="6">
+      <node id="12">
         <label>helios::engine::ecs::CloneableComponent&lt; AabbColliderComponent &gt;</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="8">
+        <label>helios::engine::ecs::CloneableComponent&lt; ChaseComponent &gt;</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
         <label>helios::engine::ecs::CloneableComponent&lt; CollisionComponent &gt;</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="10">
+      <node id="16">
         <label>helios::engine::ecs::CloneableComponent&lt; CollisionStateComponent &gt;</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="12">
+      <node id="30">
+        <label>helios::engine::ecs::CloneableComponent&lt; ComposeTransformComponent &gt;</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>helios::engine::ecs::CloneableComponent&lt; DelayedComponentEnabler &gt;</label>
+        <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="18">
         <label>helios::engine::ecs::CloneableComponent&lt; DirectionComponent &gt;</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
         <childnode refid="1" relation="public-inheritance">
@@ -412,67 +479,61 @@ Example usage: ```cpp class HealthComponent : public <ref refid="classhelios_1_1
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="22">
+      <node id="24">
         <label>helios::engine::ecs::CloneableComponent&lt; ModelAabbComponent &gt;</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="14">
+      <node id="20">
         <label>helios::engine::ecs::CloneableComponent&lt; Move2DComponent &gt;</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="24">
+      <node id="26">
         <label>helios::engine::ecs::CloneableComponent&lt; RenderableComponent &gt;</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="16">
+      <node id="32">
         <label>helios::engine::ecs::CloneableComponent&lt; RotationStateComponent &gt;</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="28">
-        <label>helios::engine::ecs::CloneableComponent&lt; ScaleComponent &gt;</label>
+      <node id="34">
+        <label>helios::engine::ecs::CloneableComponent&lt; ScaleStateComponent &gt;</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="26">
+      <node id="28">
         <label>helios::engine::ecs::CloneableComponent&lt; SceneNodeComponent &gt;</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="4">
+      <node id="6">
         <label>helios::engine::ecs::CloneableComponent&lt; SpawnedByProfileComponent &gt;</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="18">
+      <node id="10">
         <label>helios::engine::ecs::CloneableComponent&lt; SpinComponent &gt;</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="20">
+      <node id="22">
         <label>helios::engine::ecs::CloneableComponent&lt; SteeringComponent &gt;</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="30">
-        <label>helios::engine::ecs::CloneableComponent&lt; TransformComponent &gt;</label>
-        <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="32">
+      <node id="36">
         <label>helios::engine::ecs::CloneableComponent&lt; TranslationStateComponent &gt;</label>
         <link refid="classhelios_1_1engine_1_1ecs_1_1CloneableComponent"/>
         <childnode refid="1" relation="public-inheritance">
@@ -488,106 +549,118 @@ Example usage: ```cpp class HealthComponent : public <ref refid="classhelios_1_1
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="35">
+      <node id="39">
         <label>helios::engine::mechanics::combat::components::Aim2DComponent</label>
         <link refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1Aim2DComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="36">
+      <node id="40">
         <label>helios::engine::mechanics::combat::components::ShootComponent</label>
         <link refid="classhelios_1_1engine_1_1mechanics_1_1combat_1_1components_1_1ShootComponent"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="5">
-        <label>helios::engine::mechanics::spawn::components::SpawnedByProfileComponent</label>
-        <link refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent"/>
+        <label>helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1lifecycle_1_1components_1_1DelayedComponentEnabler"/>
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
       <node id="7">
-        <label>helios::engine::modules::physics::collision::components::AabbColliderComponent</label>
-        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1AabbColliderComponent"/>
+        <label>helios::engine::mechanics::spawn::components::SpawnedByProfileComponent</label>
+        <link refid="classhelios_1_1engine_1_1mechanics_1_1spawn_1_1components_1_1SpawnedByProfileComponent"/>
         <childnode refid="6" relation="public-inheritance">
         </childnode>
       </node>
       <node id="9">
-        <label>helios::engine::modules::physics::collision::components::CollisionComponent</label>
-        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent"/>
+        <label>helios::engine::modules::ai::components::ChaseComponent</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1ai_1_1components_1_1ChaseComponent"/>
         <childnode refid="8" relation="public-inheritance">
         </childnode>
       </node>
       <node id="11">
-        <label>helios::engine::modules::physics::collision::components::CollisionStateComponent</label>
-        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionStateComponent"/>
+        <label>helios::engine::modules::effects::gfx::components::SpinComponent</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1effects_1_1gfx_1_1components_1_1SpinComponent"/>
         <childnode refid="10" relation="public-inheritance">
         </childnode>
       </node>
       <node id="13">
-        <label>helios::engine::modules::physics::motion::components::DirectionComponent</label>
-        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1DirectionComponent"/>
+        <label>helios::engine::modules::physics::collision::components::AabbColliderComponent</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1AabbColliderComponent"/>
         <childnode refid="12" relation="public-inheritance">
         </childnode>
       </node>
       <node id="15">
-        <label>helios::engine::modules::physics::motion::components::Move2DComponent</label>
-        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent"/>
+        <label>helios::engine::modules::physics::collision::components::CollisionComponent</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionComponent"/>
         <childnode refid="14" relation="public-inheritance">
         </childnode>
       </node>
       <node id="17">
-        <label>helios::engine::modules::physics::motion::components::RotationStateComponent</label>
-        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1RotationStateComponent"/>
+        <label>helios::engine::modules::physics::collision::components::CollisionStateComponent</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1components_1_1CollisionStateComponent"/>
         <childnode refid="16" relation="public-inheritance">
         </childnode>
       </node>
       <node id="19">
-        <label>helios::engine::modules::physics::motion::components::SpinComponent</label>
-        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SpinComponent"/>
+        <label>helios::engine::modules::physics::motion::components::DirectionComponent</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1DirectionComponent"/>
         <childnode refid="18" relation="public-inheritance">
         </childnode>
       </node>
       <node id="21">
-        <label>helios::engine::modules::physics::motion::components::SteeringComponent</label>
-        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent"/>
+        <label>helios::engine::modules::physics::motion::components::Move2DComponent</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1Move2DComponent"/>
         <childnode refid="20" relation="public-inheritance">
         </childnode>
       </node>
       <node id="23">
-        <label>helios::engine::modules::rendering::model::components::ModelAabbComponent</label>
-        <link refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1model_1_1components_1_1ModelAabbComponent"/>
+        <label>helios::engine::modules::physics::motion::components::SteeringComponent</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1physics_1_1motion_1_1components_1_1SteeringComponent"/>
         <childnode refid="22" relation="public-inheritance">
         </childnode>
       </node>
       <node id="25">
-        <label>helios::engine::modules::rendering::renderable::components::RenderableComponent</label>
-        <link refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1renderable_1_1components_1_1RenderableComponent"/>
+        <label>helios::engine::modules::rendering::model::components::ModelAabbComponent</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1model_1_1components_1_1ModelAabbComponent"/>
         <childnode refid="24" relation="public-inheritance">
         </childnode>
       </node>
       <node id="27">
-        <label>helios::engine::modules::scene::components::SceneNodeComponent</label>
-        <link refid="classhelios_1_1engine_1_1modules_1_1scene_1_1components_1_1SceneNodeComponent"/>
+        <label>helios::engine::modules::rendering::renderable::components::RenderableComponent</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1rendering_1_1renderable_1_1components_1_1RenderableComponent"/>
         <childnode refid="26" relation="public-inheritance">
         </childnode>
       </node>
       <node id="29">
-        <label>helios::engine::modules::spatial::transform::components::ScaleComponent</label>
-        <link refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1ScaleComponent"/>
+        <label>helios::engine::modules::scene::components::SceneNodeComponent</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1scene_1_1components_1_1SceneNodeComponent"/>
         <childnode refid="28" relation="public-inheritance">
         </childnode>
       </node>
       <node id="31">
-        <label>helios::engine::modules::spatial::transform::components::TransformComponent</label>
-        <link refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1TransformComponent"/>
+        <label>helios::engine::modules::spatial::transform::components::ComposeTransformComponent</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1ComposeTransformComponent"/>
         <childnode refid="30" relation="public-inheritance">
         </childnode>
       </node>
       <node id="33">
+        <label>helios::engine::modules::spatial::transform::components::RotationStateComponent</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1RotationStateComponent"/>
+        <childnode refid="32" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>helios::engine::modules::spatial::transform::components::ScaleStateComponent</label>
+        <link refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1ScaleStateComponent"/>
+        <childnode refid="34" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="37">
         <label>helios::engine::modules::spatial::transform::components::TranslationStateComponent</label>
         <link refid="classhelios_1_1engine_1_1modules_1_1spatial_1_1transform_1_1components_1_1TranslationStateComponent"/>
-        <childnode refid="32" relation="public-inheritance">
+        <childnode refid="36" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
@@ -611,7 +684,7 @@ Example usage: ```cpp class HealthComponent : public <ref refid="classhelios_1_1
         <link refid="classhelios_1_1util_1_1Guid"/>
       </node>
     </collaborationgraph>
-    <location file="include/helios/engine/ecs/Component.ixx" line="68" column="5" bodyfile="include/helios/engine/ecs/Component.ixx" bodystart="68" bodyend="240"/>
+    <location file="/tmp/h/include/helios/engine/ecs/Component.ixx" line="70" column="5" bodyfile="/tmp/h/include/helios/engine/ecs/Component.ixx" bodystart="70" bodyend="252"/>
     <listofallmembers>
       <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a5b888a1acd1799700525f3eab51b1a62" prot="public" virt="non-virtual"><scope>helios::engine::ecs::Component</scope><name>Component</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a21492dd1100f113c7f049c3bd8a7a179" prot="public" virt="non-virtual"><scope>helios::engine::ecs::Component</scope><name>disable</name></member>
@@ -627,6 +700,7 @@ Example usage: ```cpp class HealthComponent : public <ref refid="classhelios_1_1
       <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1ac08c7be419071c67780342322aa1e679" prot="public" virt="virtual"><scope>helios::engine::ecs::Component</scope><name>onAttach</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1ae18881cca0af5463608e59d112b3f257" prot="public" virt="virtual"><scope>helios::engine::ecs::Component</scope><name>onDeactivate</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1aacc77dfd9a7a39b733e0f90a7e50d43e" prot="public" virt="virtual"><scope>helios::engine::ecs::Component</scope><name>onRelease</name></member>
+      <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1a2876fe546eb8554ce9e4485e9eeee9da" prot="public" virt="pure-virtual"><scope>helios::engine::ecs::Component</scope><name>typeId</name></member>
       <member refid="classhelios_1_1engine_1_1ecs_1_1Component_1aa014415a814f5252c94d040c2e80c83f" prot="public" virt="virtual"><scope>helios::engine::ecs::Component</scope><name>~Component</name></member>
     </listofallmembers>
   </compounddef>

@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_40abc66e1b4db114e64ae16d6ae11ca0" kind="dir">
+    <compoundname>ai</compoundname>
+    <innerdir refid="dir_edf47c1d8e77b52ba192443804668e20">components</innerdir>
+    <innerdir refid="dir_d085c729ee8a56dff1cc9d67ead9cf36">systems</innerdir>
+    <innerfile refid="helios_2engine_2modules_2ai_2__module_8ixx">helios/engine/modules/ai/_module.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md214">
+<title>helios::engine::modules::ai</title><para>AI behavior modules for game entities in the helios engine.</para>
+</sect1>
+<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md215">
+<title>Overview</title><para>This module provides components and systems for artificial intelligence behaviors. Currently focused on simple pursuit/chase mechanics, with architecture designed for expansion to more complex AI patterns.</para>
+</sect1>
+<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md216">
+<title>Submodules</title><sect2 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md217">
+<title>components/</title><para>Data components storing AI behavior state:</para>
+<para><table rows="2" cols="2"><row>
+<entry thead="yes"><para>Component  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ChaseComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Tracks a target entity and controls pursuit timing  </para>
+</entry></row>
+</table>
+</para>
+</sect2>
+<sect2 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md218">
+<title>systems/</title><para>Systems that process AI components:</para>
+<para><table rows="2" cols="2"><row>
+<entry thead="yes"><para>System  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ChaseSystem</computeroutput>  </para>
+</entry><entry thead="no"><para>Steers entities towards their chase targets  </para>
+</entry></row>
+</table>
+</para>
+</sect2>
+</sect1>
+<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md219">
+<title>Usage</title><sect2 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md220">
+<title>Basic Chase Behavior</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8modules_8ai" kindref="compound">helios.engine.modules.ai</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Create<sp/>enemy<sp/>that<sp/>chases<sp/>player</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>enemy<sp/>=<sp/>std::make_unique&lt;GameObject&gt;();</highlight></codeline>
+<codeline><highlight class="normal">enemy-&gt;add&lt;ChaseComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal">enemy-&gt;get&lt;ChaseComponent&gt;()-&gt;setTarget(player-&gt;guid());</highlight></codeline>
+<codeline><highlight class="normal">enemy-&gt;get&lt;ChaseComponent&gt;()-&gt;setCooldown(0.5f);<sp/><sp/></highlight><highlight class="comment">//<sp/>Update<sp/>direction<sp/>every<sp/>0.5s</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Required<sp/>companion<sp/>components</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">enemy-&gt;add&lt;SteeringComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal">enemy-&gt;add&lt;TranslationStateComponent&gt;();</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md221">
+<title>Using with GameObjectFactory</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>enemy<sp/>=<sp/>GameObjectFactory::gameObject()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withAi([&amp;](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ai)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ai.chasing()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.target(player-&gt;guid())</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.seekInterval(0.5f);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withMotion([](</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>m)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m.steering().instantSteering(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m.move2D().speed(3.0f);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.make(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+</programlisting></para>
+</sect2>
+</sect1>
+<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md222">
+<title>Chase Behavior Details</title><para>The <computeroutput>ChaseSystem</computeroutput> operates as follows:</para>
+<para>1. <bold>Target Lookup</bold>: Finds target entity by GUID in GameWorld 2. <bold>Cooldown Check</bold>: Only updates direction after cooldown expires 3. <bold>Direction Calculation</bold>: Computes normalized vector from entity to target 4. <bold>Steering Update</bold>: Sets steering intent to face target direction</para>
+<para><programlisting><codeline><highlight class="normal">┌─────────────────────────────────────────────────────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ChaseSystem<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>┌─────────────────────────────────────────────────────────┐│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>For<sp/>each<sp/>entity<sp/>with:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/>-<sp/>ChaseComponent<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/>-<sp/>SteeringComponent<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/>-<sp/>TranslationStateComponent<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>├─────────────────────────────────────────────────────────┤│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>1.<sp/>Find<sp/>target<sp/>by<sp/>GUID<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>2.<sp/>Update<sp/>cooldown<sp/>timer<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>3.<sp/>If<sp/>timer<sp/>&gt;=<sp/>cooldown:<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/><sp/>-<sp/>Calculate<sp/>direction<sp/>to<sp/>target<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/><sp/>-<sp/>Set<sp/>steering<sp/>intent<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/><sp/><sp/><sp/>-<sp/>Reset<sp/>timer<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>└─────────────────────────────────────────────────────────┘│</highlight></codeline>
+<codeline><highlight class="normal">└─────────────────────────────────────────────────────────────┘</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md223">
+<title>Component Dependencies</title><para><table rows="2" cols="2"><row>
+<entry thead="yes"><para>Component  </para>
+</entry><entry thead="yes"><para>Required Companions  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ChaseComponent</computeroutput>  </para>
+</entry><entry thead="no"><para><computeroutput>SteeringComponent</computeroutput>, <computeroutput>TranslationStateComponent</computeroutput>  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_40abc66e1b4db114e64ae16d6ae11ca0_1autotoc_md224">
+<title>Related Modules</title><para><table rows="4" cols="2"><row>
+<entry thead="yes"><para>Module  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1motion" kindref="compound">helios.engine.modules.physics.motion</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>SteeringComponent for direction control  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1modules_1_1spatial_1_1transform" kindref="compound">helios.engine.modules.spatial.transform</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>TranslationStateComponent for position  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1builder" kindref="compound">helios.engine.builder</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>ChaseConfig for fluent setup  </para>
+</entry></row>
+</table>
+</para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/modules/ai/"/>
+  </compounddef>
+</doxygen>

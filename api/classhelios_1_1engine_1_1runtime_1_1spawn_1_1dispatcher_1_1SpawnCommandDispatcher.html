@@ -135,19 +135,19 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a5d5a34455ac34b80f18b01880527140b" id="r_a5d5a34455ac34b80f18b01880527140b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5d5a34455ac34b80f18b01880527140b">dispatchTyped</a> (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a> &amp;gameWorld, const <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1SpawnCommand.html">helios::engine::runtime::spawn::commands::SpawnCommand</a> &amp;command) noexcept override</td></tr>
-<tr class="memdesc:a5d5a34455ac34b80f18b01880527140b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dispatches a SpawnCommand by creating a SpawnRequest.  <br /></td></tr>
+<tr class="memdesc:a5d5a34455ac34b80f18b01880527140b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dispatches a SpawnCommand to the registered handler.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Dispatcher that routes SpawnCommands to the appropriate handler. </p>
-<p><a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher.html" title="Dispatcher that routes SpawnCommands to the appropriate handler.">SpawnCommandDispatcher</a> is a typed command dispatcher that handles SpawnCommand instances. When a SpawnCommand is dispatched, it creates a SpawnRequest and submits it to the pool's registered SpawnRequestHandler.</p>
-<p>This enables the command-based spawn architecture where the GameObjectSpawnSystem emits SpawnCommands that are later processed by the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html" title="Manager for processing spawn and despawn requests.">SpawnManager</a> during the manager flush phase.</p>
+<p><a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1SpawnCommandDispatcher.html" title="Dispatcher that routes SpawnCommands to the appropriate handler.">SpawnCommandDispatcher</a> is a typed command dispatcher that handles SpawnCommand instances. When a SpawnCommand is dispatched, it submits the command directly to the pool's registered <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler.html" title="Interface for handlers that process spawn and despawn commands.">SpawnCommandHandler</a>.</p>
+<p>This enables the command-based spawn architecture where the GameObjectSpawnSystem emits SpawnCommands that are later processed by the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html" title="Manager for processing spawn and despawn commands.">SpawnManager</a> during the manager flush phase.</p>
 <dl class="section see"><dt>See also</dt><dd>SpawnCommand </dd>
 <dd>
-<a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html" title="Manager for processing spawn and despawn requests.">SpawnManager</a> </dd>
+<a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html" title="Manager for processing spawn and despawn commands.">SpawnManager</a> </dd>
 <dd>
-SpawnRequestHandler </dd></dl>
+<a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler.html" title="Interface for handlers that process spawn and despawn commands.">SpawnCommandHandler</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SpawnCommandDispatcher_8ixx_source.html#l00034">34</a> of file <a class="el" href="SpawnCommandDispatcher_8ixx_source.html">SpawnCommandDispatcher.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SpawnCommandDispatcher_8ixx_source.html#l00033">33</a> of file <a class="el" href="SpawnCommandDispatcher_8ixx_source.html">SpawnCommandDispatcher.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a70ee851347452f9ab784eca0d42b1a53" name="a70ee851347452f9ab784eca0d42b1a53"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a70ee851347452f9ab784eca0d42b1a53">&#9670;&#160;</a></span>SpawnCommandDispatcher()</h2>
@@ -202,8 +202,8 @@ SpawnRequestHandler </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Dispatches a SpawnCommand by creating a SpawnRequest. </p>
-<p>Creates a SpawnRequest from the command and submits it to the pool's registered SpawnRequestHandler for deferred processing.</p>
+<p>Dispatches a SpawnCommand to the registered handler. </p>
+<p>Looks up the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler.html" title="Interface for handlers that process spawn and despawn commands.">SpawnCommandHandler</a> for the command's profile ID and submits the command directly for deferred processing.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">gameWorld</td><td>The game world containing the pool. </td></tr>
@@ -214,12 +214,12 @@ SpawnRequestHandler </dd></dl>
 
 <p>Implements <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher.html#ae99b8d4dc66acf8340000f97c0fdd16d">helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::runtime::spawn::commands::SpawnCommand &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="SpawnCommandDispatcher_8ixx_source.html#l00048">48</a> of file <a class="el" href="SpawnCommandDispatcher_8ixx_source.html">SpawnCommandDispatcher.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SpawnCommandDispatcher_8ixx_source.html#l00047">47</a> of file <a class="el" href="SpawnCommandDispatcher_8ixx_source.html">SpawnCommandDispatcher.ixx</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>include/helios/engine/runtime/spawn/dispatcher/<a class="el" href="SpawnCommandDispatcher_8ixx_source.html">SpawnCommandDispatcher.ixx</a></li>
+<li><a class="el" href="SpawnCommandDispatcher_8ixx_source.html">SpawnCommandDispatcher.ixx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

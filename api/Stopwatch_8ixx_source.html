@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>helios: include/helios/util/time/Stopwatch.ixx Source File</title>
+<title>helios: Stopwatch.ixx Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
@@ -145,29 +145,46 @@ $(function() {
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">         * @brief Starts (or restarts) the timer.</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">         * Captures the current timestamp.</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1time_1_1Stopwatch.html#a9b8420e3f05247078e9bdf7c400b40fd">   39</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1util_1_1time_1_1Stopwatch.html#a9b8420e3f05247078e9bdf7c400b40fd">start</a>() noexcept;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment"></span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">         * @brief Returns the time elapsed since start() was called.</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">         * @return The elapsed time in milliseconds as a floating point value.</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1time_1_1Stopwatch.html#aaa33b220a4f5e2682f8408b81a1367d0">   46</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1util_1_1time_1_1Stopwatch.html#aaa33b220a4f5e2682f8408b81a1367d0">elapsedMs</a>() const noexcept;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment"></span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">         * @brief Returns the time elapsed in seconds.</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">         * @return The elapsed time in seconds as a floating point value.</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1time_1_1Stopwatch.html#ac25c9dc3b13ddef5e3d168036aec68a0">   53</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1util_1_1time_1_1Stopwatch.html#ac25c9dc3b13ddef5e3d168036aec68a0">elapsedSeconds</a>() const noexcept;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    };</div>
+<div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1time_1_1Stopwatch.html#a9b8420e3f05247078e9bdf7c400b40fd">   39</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classhelios_1_1util_1_1time_1_1Stopwatch.html#a9b8420e3f05247078e9bdf7c400b40fd">start</a>() noexcept {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            start_ = std::chrono::steady_clock::now();</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        }</div>
 </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>}</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"></span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">         * @brief Returns the time elapsed since start() was called.</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">         * @return The elapsed time in milliseconds as a floating point value.</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00048" data-start="{" data-end="}">
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1time_1_1Stopwatch.html#aaa33b220a4f5e2682f8408b81a1367d0">   48</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1util_1_1time_1_1Stopwatch.html#aaa33b220a4f5e2682f8408b81a1367d0">elapsedMs</a>() const noexcept {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            <span class="keyword">auto</span> end = std::chrono::steady_clock::now();</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            <span class="comment">// Wichtig: Expliziter Cast zu float Millisekunden</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            std::chrono::duration&lt;float, std::milli&gt; duration = end - start_;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            <span class="keywordflow">return</span> duration.count();</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        }</div>
+</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment"></span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">         * @brief Returns the time elapsed in seconds.</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">         * @return The elapsed time in seconds as a floating point value.</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00060" data-start="{" data-end="}">
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1time_1_1Stopwatch.html#ac25c9dc3b13ddef5e3d168036aec68a0">   60</a></span>        [[nodiscard]] <span class="keywordtype">float</span> <a class="code hl_function" href="classhelios_1_1util_1_1time_1_1Stopwatch.html#ac25c9dc3b13ddef5e3d168036aec68a0">elapsedSeconds</a>() const noexcept {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            <span class="keyword">auto</span> end = std::chrono::steady_clock::now();</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            std::chrono::duration&lt;float&gt; duration = end - start_;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <span class="keywordflow">return</span> duration.count();</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        }</div>
+</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    };</div>
+</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>}</div>
 <div class="ttc" id="aclasshelios_1_1util_1_1time_1_1Stopwatch_html_a1eee2ebce8dcd1f2b4d0b5d1a21fb09f"><div class="ttname"><a href="classhelios_1_1util_1_1time_1_1Stopwatch.html#a1eee2ebce8dcd1f2b4d0b5d1a21fb09f">helios::util::time::Stopwatch::Stopwatch</a></div><div class="ttdeci">Stopwatch() noexcept=default</div><div class="ttdoc">Constructs and starts the stopwatch.</div></div>
-<div class="ttc" id="aclasshelios_1_1util_1_1time_1_1Stopwatch_html_a9b8420e3f05247078e9bdf7c400b40fd"><div class="ttname"><a href="classhelios_1_1util_1_1time_1_1Stopwatch.html#a9b8420e3f05247078e9bdf7c400b40fd">helios::util::time::Stopwatch::start</a></div><div class="ttdeci">void start() noexcept</div><div class="ttdoc">Starts (or restarts) the timer. Captures the current timestamp.</div></div>
-<div class="ttc" id="aclasshelios_1_1util_1_1time_1_1Stopwatch_html_aaa33b220a4f5e2682f8408b81a1367d0"><div class="ttname"><a href="classhelios_1_1util_1_1time_1_1Stopwatch.html#aaa33b220a4f5e2682f8408b81a1367d0">helios::util::time::Stopwatch::elapsedMs</a></div><div class="ttdeci">float elapsedMs() const noexcept</div><div class="ttdoc">Returns the time elapsed since start() was called.</div></div>
-<div class="ttc" id="aclasshelios_1_1util_1_1time_1_1Stopwatch_html_ac25c9dc3b13ddef5e3d168036aec68a0"><div class="ttname"><a href="classhelios_1_1util_1_1time_1_1Stopwatch.html#ac25c9dc3b13ddef5e3d168036aec68a0">helios::util::time::Stopwatch::elapsedSeconds</a></div><div class="ttdeci">float elapsedSeconds() const noexcept</div><div class="ttdoc">Returns the time elapsed in seconds.</div></div>
+<div class="ttc" id="aclasshelios_1_1util_1_1time_1_1Stopwatch_html_a9b8420e3f05247078e9bdf7c400b40fd"><div class="ttname"><a href="classhelios_1_1util_1_1time_1_1Stopwatch.html#a9b8420e3f05247078e9bdf7c400b40fd">helios::util::time::Stopwatch::start</a></div><div class="ttdeci">void start() noexcept</div><div class="ttdoc">Starts (or restarts) the timer. Captures the current timestamp.</div><div class="ttdef"><b>Definition</b> <a href="#l00039">Stopwatch.ixx:39</a></div></div>
+<div class="ttc" id="aclasshelios_1_1util_1_1time_1_1Stopwatch_html_aaa33b220a4f5e2682f8408b81a1367d0"><div class="ttname"><a href="classhelios_1_1util_1_1time_1_1Stopwatch.html#aaa33b220a4f5e2682f8408b81a1367d0">helios::util::time::Stopwatch::elapsedMs</a></div><div class="ttdeci">float elapsedMs() const noexcept</div><div class="ttdoc">Returns the time elapsed since start() was called.</div><div class="ttdef"><b>Definition</b> <a href="#l00048">Stopwatch.ixx:48</a></div></div>
+<div class="ttc" id="aclasshelios_1_1util_1_1time_1_1Stopwatch_html_ac25c9dc3b13ddef5e3d168036aec68a0"><div class="ttname"><a href="classhelios_1_1util_1_1time_1_1Stopwatch.html#ac25c9dc3b13ddef5e3d168036aec68a0">helios::util::time::Stopwatch::elapsedSeconds</a></div><div class="ttdeci">float elapsedSeconds() const noexcept</div><div class="ttdoc">Returns the time elapsed in seconds.</div><div class="ttdef"><b>Definition</b> <a href="#l00060">Stopwatch.ixx:60</a></div></div>
 <div class="ttc" id="amodule__helios_8util_8time_8Stopwatch_html"><div class="ttname"><a href="module__helios_8util_8time_8Stopwatch.html">helios.util.time.Stopwatch</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1util_1_1time_html"><div class="ttname"><a href="namespacehelios_1_1util_1_1time.html">helios::util::time</a></div><div class="ttdoc">High-resolution timing helpers (Stopwatch, timers).</div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -176,7 +193,7 @@ $(function() {
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_08c09894bd9f0ab4b1e9fdc7a2628766.html">helios</a></li><li class="navelem"><a href="dir_7f0768799dd37ef2f2adcdfec91ab1e9.html">util</a></li><li class="navelem"><a href="dir_f5bf7461226e2ff6cddccbfb1a3604e3.html">time</a></li><li class="navelem"><a href="Stopwatch_8ixx.html">Stopwatch.ixx</a></li>
+    <li class="navelem"><a href="dir_8af83c0dc83a45a35ca6968cdc29a7af.html">tmp</a></li><li class="navelem"><a href="dir_25ba8c016aaabea63a88c40dc27775c8.html">h</a></li><li class="navelem"><a href="dir_b3f59628e993ded3576abd1cf1101eb8.html">include</a></li><li class="navelem"><a href="dir_1ac1243035b4576c146b8d2c8a6274f6.html">helios</a></li><li class="navelem"><a href="dir_3e2f71566425d27b6ac8140f1223a941.html">util</a></li><li class="navelem"><a href="dir_c9b58a77d30deaa217de876ce1e7823a.html">time</a></li><li class="navelem"><a href="Stopwatch_8ixx.html">Stopwatch.ixx</a></li>
     <li class="footer">Generated on <span class="timestamp"></span> for helios by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

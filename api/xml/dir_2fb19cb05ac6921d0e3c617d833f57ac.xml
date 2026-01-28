@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_2fb19cb05ac6921d0e3c617d833f57ac" kind="dir">
+    <compoundname>buffer</compoundname>
+    <innerfile refid="helios_2core_2buffer_2__module_8ixx">helios/core/buffer/_module.ixx</innerfile>
+    <innerfile refid="Buffer_8ixx">Buffer.ixx</innerfile>
+    <innerfile refid="DoubleBuffer_8ixx">DoubleBuffer.ixx</innerfile>
+    <innerfile refid="ReadBuffer_8ixx">ReadBuffer.ixx</innerfile>
+    <innerfile refid="ReadWriteBuffer_8ixx">ReadWriteBuffer.ixx</innerfile>
+    <innerfile refid="ReadWriteDoubleBuffer_8ixx">ReadWriteDoubleBuffer.ixx</innerfile>
+    <innerfile refid="TypeIndexedDoubleBuffer_8ixx">TypeIndexedDoubleBuffer.ixx</innerfile>
+    <innerfile refid="TypeIndexedReadWriteBuffer_8ixx">TypeIndexedReadWriteBuffer.ixx</innerfile>
+    <innerfile refid="WriteBuffer_8ixx">WriteBuffer.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_2fb19cb05ac6921d0e3c617d833f57ac_1autotoc_md43">
+<title>helios::core::buffer</title><para>Double-buffering infrastructure for thread-safe message passing.</para>
+<para>This module provides read and write buffers for implementing double-buffered message systems. Double-buffering enables safe producer-consumer patterns across frame boundaries, where messages pushed in one frame become available for reading in the next.</para>
+<para><bold>Components:</bold></para>
+<para><itemizedlist>
+<listitem><para><bold>Buffer</bold> - Abstract base class for type-erased buffer implementations.</para>
+</listitem><listitem><para><bold>DoubleBuffer</bold> - Abstract base class for double-buffered containers with swap semantics.</para>
+</listitem><listitem><para><bold>ReadBuffer</bold> - Read-only buffer for consuming messages (consumer-side of double-buffering).</para>
+</listitem><listitem><para><bold>WriteBuffer</bold> - Write-only buffer for producing messages (producer-side of double-buffering).</para>
+</listitem><listitem><para><bold>ReadWriteBuffer</bold> - Combined single-buffer with immediate visibility for same-phase access.</para>
+</listitem><listitem><para><bold>ReadWriteDoubleBuffer</bold> - Type-safe double-buffered container pairing ReadBuffer and WriteBuffer.</para>
+</listitem><listitem><para><bold>TypeIndexedDoubleBuffer</bold> - Type-indexed container managing multiple ReadWriteDoubleBuffers by message type.</para>
+</listitem><listitem><para><bold>TypeIndexedReadWriteBuffer</bold> - Type-indexed container for immediate-access single-buffered patterns.</para>
+</listitem></itemizedlist>
+</para>
+<para><bold>Usage patterns:</bold></para>
+<para><itemizedlist>
+<listitem><para><bold>Cross-phase communication:</bold> Use <computeroutput>TypeIndexedDoubleBuffer</computeroutput> with <computeroutput>swapBuffers()</computeroutput> at frame boundaries.</para>
+</listitem><listitem><para><bold>Same-phase communication:</bold> Use <computeroutput>TypeIndexedReadWriteBuffer</computeroutput> for immediate message visibility.</para>
+</listitem></itemizedlist>
+</para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/core/buffer/"/>
+  </compounddef>
+</doxygen>

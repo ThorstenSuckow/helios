@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_1e46d961eb277b2583ee5b095f5b4c8e" kind="dir">
+    <compoundname>engine</compoundname>
+    <innerdir refid="dir_a8f8c4b70d3587fcf7159bd2d30de216">builder</innerdir>
+    <innerdir refid="dir_5a58a2ffe8660a7fc51fed7e0c7c898d">core</innerdir>
+    <innerdir refid="dir_1ca916e0b9fbc882dbfbd9e6594e5e22">ecs</innerdir>
+    <innerdir refid="dir_e1a38fd6dc0543c7f97fb1ccf1615de7">mechanics</innerdir>
+    <innerdir refid="dir_87b9f5c33f5a8f4d48db11d48f10a572">modules</innerdir>
+    <innerdir refid="dir_fff8ef54a646d9df8d7b15d27474569f">runtime</innerdir>
+    <innerdir refid="dir_417701c4e551058911a40fafc2072bfe">tooling</innerdir>
+    <innerfile refid="helios_2engine_2__module_8ixx">helios/engine/_module.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_1e46d961eb277b2583ee5b095f5b4c8e_1autotoc_md336">
+<title>helios::engine</title><para>Main engine module aggregating core infrastructure and game systems.</para>
+</sect1>
+<sect1 id="dir_1e46d961eb277b2583ee5b095f5b4c8e_1autotoc_md337">
+<title>Overview</title><para>This module provides access to the complete helios engine functionality, including the ECS architecture, game systems, messaging infrastructure, and development tooling.</para>
+</sect1>
+<sect1 id="dir_1e46d961eb277b2583ee5b095f5b4c8e_1autotoc_md338">
+<title>Submodules</title><para><table rows="7" cols="2"><row>
+<entry thead="yes"><para>Module  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1core" kindref="compound">helios.engine.core</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>Data structures, messaging re-exports, units  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1ecs" kindref="compound">helios.engine.ecs</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>ECS base classes (GameObject, Component, System) and query system  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1runtime" kindref="compound">helios.engine.runtime</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>Runtime infrastructure (world, gameloop, pooling, messaging, factory)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1modules" kindref="compound">helios.engine.modules</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>Domain-specific components and systems (physics, spatial, scene)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1mechanics" kindref="compound">helios.engine.mechanics</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>Gameplay mechanics (bounds, combat, spawn, input)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1tooling" kindref="compound">helios.engine.tooling</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>Frame pacing and performance metrics  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_1e46d961eb277b2583ee5b095f5b4c8e_1autotoc_md339">
+<title>Architecture</title><para><programlisting><codeline><highlight class="normal">helios.engine</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>core/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Infrastructure</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>data/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Type-indexed<sp/>containers,<sp/>pool<sp/>IDs</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>units/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Measurement<sp/>units<sp/>(meters,<sp/>seconds)</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>ecs/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>ECS<sp/>base<sp/>classes</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>Component<sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Data<sp/>container<sp/>base</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>GameObject<sp/><sp/><sp/><sp/><sp/>#<sp/>Entity<sp/>container</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>System<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Logic<sp/>processor<sp/>base</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>query/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameObjectFilter,<sp/>GameObjectView</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>runtime/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Runtime<sp/>infrastructure</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>world/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameWorld,<sp/>Level,<sp/>UpdateContext,<sp/>Manager</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>gameloop/<sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameLoop,<sp/>Phase,<sp/>Pass</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>pooling/<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameObjectPool,<sp/>PoolRegistry,<sp/>PoolFacade</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>messaging/<sp/><sp/><sp/><sp/><sp/>#<sp/>CommandBuffer,<sp/>Dispatchers,<sp/>EventBus</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>factory/<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>GameObjectFactory</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>modules/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Domain-specific<sp/>components<sp/>and<sp/>systems</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>physics/<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Collision,<sp/>motion<sp/>systems</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>spatial/<sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Transform<sp/>components</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>scene/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Scene<sp/>graph<sp/>integration</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>rendering/<sp/><sp/><sp/><sp/><sp/>#<sp/>Renderable<sp/>components</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>pool/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Pool<sp/>ID<sp/>components</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>mechanics/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Gameplay<sp/>mechanics</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>bounds/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Level<sp/>boundary<sp/>behavior</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>combat/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Shooting,<sp/>projectiles</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>spawn/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Entity<sp/>spawning</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>input/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Twin-stick<sp/>input<sp/>systems</highlight></codeline>
+<codeline><highlight class="normal">└──<sp/>tooling/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Performance<sp/>monitoring</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_1e46d961eb277b2583ee5b095f5b4c8e_1autotoc_md340">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine" kindref="compound">helios.engine</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Access<sp/>ECS<sp/>classes</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld" kindref="compound">helios::engine::runtime::world::GameWorld</ref><sp/>world;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>entity<sp/>=<sp/>std::make_unique&lt;helios::engine::ecs::GameObject&gt;();</highlight></codeline>
+<codeline><highlight class="normal">world.<ref refid="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld_1a28a53dcdcfb8880867db35145d88d3e2" kindref="member">addGameObject</ref>(std::move(entity));</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Access<sp/>game<sp/>loop<sp/>-<sp/>systems<sp/>are<sp/>registered<sp/>with<sp/>phases/passes</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop" kindref="compound">helios::engine::runtime::gameloop::GameLoop</ref><sp/>gameLoop;</highlight></codeline>
+<codeline><highlight class="normal">gameLoop.<ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1GameLoop_1a72b7ba2e6461d61b0f384a3d7b940a82" kindref="member">phase</ref>(PhaseType::Main)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.<ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Phase_1ab6843bc03abe3867cd46c4888f88176f" kindref="member">addPass</ref>()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.<ref refid="classhelios_1_1engine_1_1runtime_1_1gameloop_1_1Pass_1a903a70bb72f46a10ecaee1ab7b89dcf1" kindref="member">addSystem</ref>&lt;Move2DSystem&gt;(&amp;world);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Access<sp/>tooling</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classhelios_1_1engine_1_1tooling_1_1FramePacer" kindref="compound">helios::engine::tooling::FramePacer</ref><sp/>pacer;</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/"/>
+  </compounddef>
+</doxygen>

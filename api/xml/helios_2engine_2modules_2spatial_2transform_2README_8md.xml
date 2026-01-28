@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="helios_2engine_2modules_2spatial_2transform_2README_8md" kind="file" language="Markdown">
-    <compoundname>README.md</compoundname>
+    <compoundname>helios/engine/modules/spatial/transform/README.md</compoundname>
     <innernamespace refid="namespacehelios_1_1engine_1_1modules_1_1spatial_1_1transform">helios::engine::modules::spatial::transform</innernamespace>
     <briefdescription>
     </briefdescription>
@@ -14,6 +14,63 @@
 <codeline></codeline>
 <codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>components<sp/>that<sp/>store<sp/>individual<sp/>transform<sp/>properties<sp/>and<sp/>systems<sp/>that<sp/>compose<sp/>them<sp/>into<sp/>final<sp/>world<sp/>transforms.</highlight></codeline>
 <codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Submodules</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Submodule<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-----------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`components/`<sp/>|<sp/>Per-frame<sp/>transform<sp/>deltas<sp/>and<sp/>composed<sp/>transform<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`systems/`<sp/>|<sp/>Transform<sp/>composition<sp/>and<sp/>cleanup<sp/>systems<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Class<sp/>|<sp/>Purpose<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|-------|---------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`TranslationStateComponent`<sp/>|<sp/>Translation<sp/>delta<sp/>for<sp/>the<sp/>current<sp/>frame<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`RotationStateComponent`<sp/>|<sp/>Rotation<sp/>delta<sp/>for<sp/>the<sp/>current<sp/>frame<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ScaleStateComponent`<sp/>|<sp/>Scale<sp/>delta<sp/>for<sp/>the<sp/>current<sp/>frame<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ComposeTransformComponent`<sp/>|<sp/>Final<sp/>composed<sp/>transform<sp/>matrix<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ComposeTransformSystem`<sp/>|<sp/>Builds<sp/>final<sp/>transform<sp/>from<sp/>component<sp/>deltas<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`ScaleSystem`<sp/>|<sp/>Applies<sp/>scale<sp/>state<sp/>to<sp/>composed<sp/>transform<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>`TransformClearSystem`<sp/>|<sp/>Clears<sp/>dirty<sp/>flags<sp/>after<sp/>scene<sp/>sync<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Transform<sp/>Workflow</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Each<sp/>frame,<sp/>transform<sp/>state<sp/>flows<sp/>through<sp/>the<sp/>pipeline:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">1.<sp/>**Input<sp/>Systems**<sp/>write<sp/>deltas<sp/>to<sp/>state<sp/>components</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>**ComposeTransformSystem**<sp/>combines<sp/>deltas<sp/>into<sp/>final<sp/>matrix</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>**SceneSyncSystem**<sp/>copies<sp/>matrix<sp/>to<sp/>SceneNode</highlight></codeline>
+<codeline><highlight class="normal">4.<sp/>**TransformClearSystem**<sp/>resets<sp/>dirty<sp/>flags</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Create<sp/>entity<sp/>with<sp/>transform<sp/>components<sp/>(via<sp/>builder)</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>entity<sp/>=<sp/>GameObjectFactory::gameObject()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withTransform([](auto&amp;<sp/>t)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t.transform()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.translate({0.0f,<sp/>0.0f,<sp/>0.0f})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.scale({1.0f,<sp/>1.0f,<sp/>1.0f});</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.make(true);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Direct<sp/>component<sp/>access<sp/>for<sp/>per-frame<sp/>updates</highlight></codeline>
+<codeline><highlight class="normal">auto*<sp/>translation<sp/>=<sp/>entity-&gt;get&lt;TranslationStateComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal">translation-&gt;add({1.0f,<sp/>0.0f,<sp/>0.0f});<sp/><sp/>//<sp/>Move<sp/>right</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">auto*<sp/>rotation<sp/>=<sp/>entity-&gt;get&lt;RotationStateComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal">rotation-&gt;add(helios::math::radians(45.0f),<sp/>helios::math::Z_AXISf);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Register<sp/>systems<sp/>in<sp/>correct<sp/>order</highlight></codeline>
+<codeline><highlight class="normal">gameLoop.phase(PhaseType::Main).addPass()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addSystem&lt;ComposeTransformSystem&gt;(&amp;gameWorld)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addSystem&lt;ScaleSystem&gt;(&amp;gameWorld);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">gameLoop.phase(PhaseType::Post).addPass()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addSystem&lt;SceneSyncSystem&gt;(&amp;gameWorld,<sp/>&amp;scene)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.addSystem&lt;TransformClearSystem&gt;(&amp;gameWorld);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
@@ -24,6 +81,6 @@
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
 <codeline></codeline>
     </programlisting>
-    <location file="include/helios/engine/modules/spatial/transform/README.md"/>
+    <location file="/tmp/h/include/helios/engine/modules/spatial/transform/README.md"/>
   </compounddef>
 </doxygen>

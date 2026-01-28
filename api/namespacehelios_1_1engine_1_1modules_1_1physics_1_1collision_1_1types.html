@@ -124,6 +124,15 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="memdesc:a9f9425c2d5920e53c8d1606d546022e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines how an entity responds to a collision event.  <a href="#a9f9425c2d5920e53c8d1606d546022e2">More...</a><br /></td></tr>
+<tr class="memitem:a6a9de8f399df76cc158f000a343f02a4" id="r_a6a9de8f399df76cc158f000a343f02a4"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6a9de8f399df76cc158f000a343f02a4">helios::engine::modules::physics::collision::types::CollisionResponse</a> : uint8_t { <a class="el" href="#a6a9de8f399df76cc158f000a343f02a4a6adf97f83acf6453d4a6a4b1070f3754">None</a> = 0
+, <a class="el" href="#a6a9de8f399df76cc158f000a343f02a4aadf82e824954b90d8d8f4efbadee8f8a">AlignHeadingToDirection</a> = 1 &lt;&lt; 0
+, <a class="el" href="#a6a9de8f399df76cc158f000a343f02a4a4eecfb50c5a20eb78bc4d5304e9d8618">size_</a> = 2
+ }</td></tr>
+<tr class="memdesc:a6a9de8f399df76cc158f000a343f02a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines how an entity responds to a collision event.  <a href="#a6a9de8f399df76cc158f000a343f02a4">More...</a><br /></td></tr>
+<tr class="memitem:a352b51a13f9e1b8e02f7d0e905db7cb1" id="r_a352b51a13f9e1b8e02f7d0e905db7cb1"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a352b51a13f9e1b8e02f7d0e905db7cb1">helios::engine::modules::physics::collision::types::HitPolicy</a> { <a class="el" href="#a352b51a13f9e1b8e02f7d0e905db7cb1a2cc49bbf7186136f477266c636d24b69">OneHit</a>
+, <a class="el" href="#a352b51a13f9e1b8e02f7d0e905db7cb1ab1c94ca2fbc3e78fc30069c8d0f01680">All</a>
+ }</td></tr>
+<tr class="memdesc:a352b51a13f9e1b8e02f7d0e905db7cb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specifies how many collision events an entity can receive per frame.  <a href="#a352b51a13f9e1b8e02f7d0e905db7cb1">More...</a><br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Type definitions for collision system behavior configuration. </p>
@@ -182,6 +191,91 @@ Enumerations</h2></td></tr>
 </table>
 
 <p class="definition">Definition at line <a class="el" href="CollisionBehavior_8ixx_source.html#l00030">30</a> of file <a class="el" href="CollisionBehavior_8ixx_source.html">CollisionBehavior.ixx</a>.</p>
+
+</div>
+</div>
+<a id="a6a9de8f399df76cc158f000a343f02a4" name="a6a9de8f399df76cc158f000a343f02a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a9de8f399df76cc158f000a343f02a4">&#9670;&#160;</a></span>CollisionResponse</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a6a9de8f399df76cc158f000a343f02a4">helios::engine::modules::physics::collision::types::CollisionResponse</a> : uint8_t</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Defines how an entity responds to a collision event. </p>
+<p><a class="el" href="#a6a9de8f399df76cc158f000a343f02a4" title="Defines how an entity responds to a collision event.">CollisionResponse</a> is a bitmask enum that specifies the behavior when a collision is detected.</p>
+<dl class="section see"><dt>See also</dt><dd>CollisionComponent </dd></dl>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a6a9de8f399df76cc158f000a343f02a4a6adf97f83acf6453d4a6a4b1070f3754" name="a6a9de8f399df76cc158f000a343f02a4a6adf97f83acf6453d4a6a4b1070f3754"></a>None&#160;</td><td class="fielddoc"><p>No collision response; collision is ignored. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a6a9de8f399df76cc158f000a343f02a4aadf82e824954b90d8d8f4efbadee8f8a" name="a6a9de8f399df76cc158f000a343f02a4aadf82e824954b90d8d8f4efbadee8f8a"></a>AlignHeadingToDirection&#160;</td><td class="fielddoc"><p>Aligns the entity's heading direction upon collision. </p>
+<p>Aligns the heading of the object to the the movement direction, typically used for bouncing or reflecting projectiles off surfaces. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a6a9de8f399df76cc158f000a343f02a4a4eecfb50c5a20eb78bc4d5304e9d8618" name="a6a9de8f399df76cc158f000a343f02a4a4eecfb50c5a20eb78bc4d5304e9d8618"></a>size_&#160;</td><td class="fielddoc"><p>Sentinel value indicating the number of response types. </p>
+</td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="CollisionResponse_8ixx_source.html#l00023">23</a> of file <a class="el" href="CollisionResponse_8ixx_source.html">CollisionResponse.ixx</a>.</p>
+
+</div>
+</div>
+<a id="a352b51a13f9e1b8e02f7d0e905db7cb1" name="a352b51a13f9e1b8e02f7d0e905db7cb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a352b51a13f9e1b8e02f7d0e905db7cb1">&#9670;&#160;</a></span>HitPolicy</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a352b51a13f9e1b8e02f7d0e905db7cb1">helios::engine::modules::physics::collision::types::HitPolicy</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel export">export</span><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Specifies how many collision events an entity can receive per frame. </p>
+<p><a class="el" href="#a352b51a13f9e1b8e02f7d0e905db7cb1" title="Specifies how many collision events an entity can receive per frame.">HitPolicy</a> controls the collision detection behavior when an entity overlaps multiple other entities in the same frame. This affects both performance and gameplay logic.</p>
+<p>## Policies</p>
+<p>| Policy | Behavior | |--------|----------| | `OneHit` | Reports only the first collision detected (default) | | `All` | Reports all collisions with overlapping entities |</p>
+<p>## Use Cases</p>
+<ul>
+<li>**OneHit:** Projectiles that destroy on first contact, pickups collected once</li>
+<li>**All:** Area-of-effect damage, entities affecting multiple targets simultaneously</li>
+</ul>
+<p>## Usage</p>
+<p>```cpp // Projectile: stops after first hit prototype.withCollision([](CollisionBuilder&amp; b) { b.collision() .layer(Layers::PROJECTILE) .hitPolicy(HitPolicy::OneHit); });</p>
+<p>// Explosion: damages all entities in range prototype.withCollision([](CollisionBuilder&amp; b) { b.collision() .layer(Layers::EXPLOSION) .hitPolicy(HitPolicy::All); }); ```</p>
+<dl class="section see"><dt>See also</dt><dd>CollisionComponent::setHitPolicy </dd>
+<dd>
+GridCollisionDetectionSystem </dd></dl>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a352b51a13f9e1b8e02f7d0e905db7cb1a2cc49bbf7186136f477266c636d24b69" name="a352b51a13f9e1b8e02f7d0e905db7cb1a2cc49bbf7186136f477266c636d24b69"></a>OneHit&#160;</td><td class="fielddoc"><p>Reports only the first collision per frame. </p>
+<p>Once a collision is detected, the entity skips further collision checks for the current frame. This is the default policy and provides optimal performance for typical projectile behavior. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a352b51a13f9e1b8e02f7d0e905db7cb1ab1c94ca2fbc3e78fc30069c8d0f01680" name="a352b51a13f9e1b8e02f7d0e905db7cb1ab1c94ca2fbc3e78fc30069c8d0f01680"></a>All&#160;</td><td class="fielddoc"><p>Reports all collisions with overlapping entities. </p>
+<p>The entity continues collision checks even after detecting a collision, generating events for every overlapping entity. Use for area-of-effect or multi-target interactions. </p>
+</td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="HitPolicy_8ixx_source.html#l00053">53</a> of file <a class="el" href="HitPolicy_8ixx_source.html">HitPolicy.ixx</a>.</p>
 
 </div>
 </div>

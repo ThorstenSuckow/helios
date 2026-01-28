@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_4e12247f2bbe360a59cd98a83515e8f1" kind="dir">
+    <compoundname>core</compoundname>
+    <innerdir refid="dir_2fb19cb05ac6921d0e3c617d833f57ac">buffer</innerdir>
+    <innerdir refid="dir_10cf350f37124dbdd00ea56cff4fe733">data</innerdir>
+    <innerdir refid="dir_c895596e1264bd44bfc4ab7e30749e4b">spatial</innerdir>
+    <innerfile refid="helios_2core_2__module_8ixx">helios/core/_module.ixx</innerfile>
+    <innerfile refid="algorithms_8ixx">algorithms.ixx</innerfile>
+    <innerfile refid="types_8ixx">types.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_4e12247f2bbe360a59cd98a83515e8f1_1autotoc_md47">
+<title>helios::core</title><para>Core-level utilities shared across the helios engine.</para>
+<para>This module provides foundational infrastructure including double-buffering for thread-safe message passing, spatial transformations, type definitions, hash algorithms, and data structures used by higher-level subsystems.</para>
+</sect1>
+<sect1 id="dir_4e12247f2bbe360a59cd98a83515e8f1_1autotoc_md48">
+<title>Modules</title><sect2 id="dir_4e12247f2bbe360a59cd98a83515e8f1_1autotoc_md49">
+<title>algorithms</title><para>The <computeroutput><ref refid="namespacehelios_1_1core_1_1algorithms" kindref="compound">helios.core.algorithms</ref></computeroutput> module provides core algorithms used throughout the engine.</para>
+<sect3 id="dir_4e12247f2bbe360a59cd98a83515e8f1_1autotoc_md50">
+<title>FNV-1a Hash</title><para>A fast, compile-time capable hash function for generating identifiers from strings:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8algorithms" kindref="compound">helios.core.algorithms</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Compile-time<sp/>hash</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal"><sp/>=<sp/><ref refid="namespacehelios_1_1core_1_1algorithms_1a3df283d4b3d4c5006c1bb3c30e03ab1e" kindref="member">helios::core::algorithms::fnv1a_hash</ref>(</highlight><highlight class="stringliteral">&quot;enemy_spawn&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Used<sp/>internally<sp/>by<sp/>strongly-typed<sp/>ID<sp/>constructors</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>GameObjectPoolId<sp/>POOL{</highlight><highlight class="stringliteral">&quot;bullets&quot;</highlight><highlight class="normal">};<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>calls<sp/>fnv1a_hash</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>SpawnProfileId<sp/>PROFILE{</highlight><highlight class="stringliteral">&quot;enemies&quot;</highlight><highlight class="normal">};<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>calls<sp/>fnv1a_hash</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>SpawnRuleId<sp/>RULE{</highlight><highlight class="stringliteral">&quot;wave_spawn&quot;</highlight><highlight class="normal">};<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>calls<sp/>fnv1a_hash</highlight></codeline>
+</programlisting></para>
+<para><blockquote><para><bold>Note:</bold> FNV-1a is not a cryptographic hash. Do not use for security purposes. </para>
+</blockquote></para>
+</sect3>
+</sect2>
+<sect2 id="dir_4e12247f2bbe360a59cd98a83515e8f1_1autotoc_md51">
+<title>types</title><para>The <computeroutput><ref refid="namespacehelios_1_1core_1_1types" kindref="compound">helios.core.types</ref></computeroutput> module provides core type definitions and tag types used throughout the engine.</para>
+<sect3 id="dir_4e12247f2bbe360a59cd98a83515e8f1_1autotoc_md52">
+<title>Tag Types</title><para><table rows="3" cols="2"><row>
+<entry thead="yes"><para>Type  </para>
+</entry><entry thead="yes"><para>Description  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>no_init_t</computeroutput>  </para>
+</entry><entry thead="no"><para>Tag type to skip default initialization  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>no_init</computeroutput>  </para>
+</entry><entry thead="no"><para>Convenience constant for uninitialized construction  </para>
+</entry></row>
+</table>
+</para>
+</sect3>
+<sect3 id="dir_4e12247f2bbe360a59cd98a83515e8f1_1autotoc_md53">
+<title>Uninitialized Construction</title><para>The <computeroutput>no_init</computeroutput> tag enables performance-critical code to skip default initialization when objects will be immediately overwritten:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8util_8Guid" kindref="compound">helios.util.Guid</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8types" kindref="compound">helios.core.types</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Generate<sp/>a<sp/>new<sp/>unique<sp/>Guid</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal"><sp/>=<sp/><ref refid="classhelios_1_1util_1_1Guid_1abec6ac186114474b23bfb8369e4080a9" kindref="member">helios::util::Guid::generate</ref>();</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Declare<sp/>uninitialized<sp/>Guid<sp/>for<sp/>later<sp/>assignment</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref><sp/>deferredId{<ref refid="namespacehelios_1_1core_1_1types_1a209d373c4d42ac831d2f6bfd1c4165ad" kindref="member">helios::core::types::no_init</ref>};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Assign<sp/>later<sp/>when<sp/>the<sp/>value<sp/>is<sp/>known</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">deferredId<sp/>=<sp/><ref refid="classhelios_1_1util_1_1Guid_1abec6ac186114474b23bfb8369e4080a9" kindref="member">helios::util::Guid::generate</ref>();</highlight></codeline>
+</programlisting></para>
+<para><blockquote><para><bold>Warning:</bold> Objects constructed with <computeroutput>no_init</computeroutput> are in an indeterminate state. Reading from them before assignment is undefined behavior. </para>
+</blockquote></para>
+</sect3>
+<sect3 id="dir_4e12247f2bbe360a59cd98a83515e8f1_1autotoc_md54">
+<title>Supporting no_init in Custom Types</title><para>The <computeroutput><ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref></computeroutput> class demonstrates how to add <computeroutput>no_init</computeroutput> support:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8core_8types" kindref="compound">helios.core.types</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Guid<sp/>final<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/>value_{};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Skip<sp/>initialization<sp/>for<sp/>deferred<sp/>assignment</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>Guid(helios::core::types::no_init_t)<sp/>{}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Factory<sp/>method<sp/>for<sp/>generating<sp/>valid<sp/>Guids</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>Guid<sp/>generate()<sp/>noexcept;</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect3>
+</sect2>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/core/"/>
+  </compounddef>
+</doxygen>

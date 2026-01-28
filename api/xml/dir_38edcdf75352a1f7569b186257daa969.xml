@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_38edcdf75352a1f7569b186257daa969" kind="dir">
+    <compoundname>policy</compoundname>
+    <innerdir refid="dir_56460c8bf6d65842b5b4db2aa49e5b8e">amount</innerdir>
+    <innerdir refid="dir_b5d4d16eb8a35bef91bda898d9a12dca">conditions</innerdir>
+    <innerfile refid="helios_2engine_2runtime_2spawn_2policy_2__module_8ixx">helios/engine/runtime/spawn/policy/_module.ixx</innerfile>
+    <innerfile refid="SpawnCondition_8ixx">SpawnCondition.ixx</innerfile>
+    <innerfile refid="SpawnConditionAll_8ixx">SpawnConditionAll.ixx</innerfile>
+    <innerfile refid="SpawnRule_8ixx">SpawnRule.ixx</innerfile>
+    <innerfile refid="SpawnRuleState_8ixx">SpawnRuleState.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_38edcdf75352a1f7569b186257daa969_1autotoc_md421">
+<title>helios::engine::runtime::spawn::policy</title><para>Spawn rules, conditions, and amount providers.</para>
+</sect1>
+<sect1 id="dir_38edcdf75352a1f7569b186257daa969_1autotoc_md422">
+<title>Overview</title><para>This module provides the policy layer for the spawn system. It defines rules that combine conditions (when to spawn) with amount providers (how many to spawn).</para>
+</sect1>
+<sect1 id="dir_38edcdf75352a1f7569b186257daa969_1autotoc_md423">
+<title>Key Classes</title><para><table rows="4" cols="2"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SpawnRule</computeroutput>  </para>
+</entry><entry thead="no"><para>Combines condition and amount provider into evaluatable rule  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SpawnCondition</computeroutput>  </para>
+</entry><entry thead="no"><para>Abstract interface for spawn timing conditions  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SpawnRuleState</computeroutput>  </para>
+</entry><entry thead="no"><para>Runtime state tracked per rule (e.g., time since last spawn)  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_38edcdf75352a1f7569b186257daa969_1autotoc_md424">
+<title>Submodules</title><para><table rows="3" cols="2"><row>
+<entry thead="yes"><para>Directory  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>amount/</computeroutput>  </para>
+</entry><entry thead="no"><para>SpawnAmountProvider implementations  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>conditions/</computeroutput>  </para>
+</entry><entry thead="no"><para>SpawnCondition implementations  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_38edcdf75352a1f7569b186257daa969_1autotoc_md425">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Create<sp/>a<sp/>rule:<sp/>spawn<sp/>3<sp/>enemies<sp/>every<sp/>2<sp/>seconds</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>rule<sp/>=<sp/>std::make_unique&lt;SpawnRule&gt;(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>std::make_unique&lt;TimerSpawnCondition&gt;(2.0f),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>std::make_unique&lt;FixedSpawnAmount&gt;(3),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>SpawnRuleId{1}</highlight></codeline>
+<codeline><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Add<sp/>to<sp/>scheduler</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">scheduler.addRule(enemyProfileId,<sp/>std::move(rule));</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/runtime/spawn/policy/"/>
+  </compounddef>
+</doxygen>

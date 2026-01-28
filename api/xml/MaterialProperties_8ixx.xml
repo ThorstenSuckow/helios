@@ -2,23 +2,23 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="MaterialProperties_8ixx" kind="file" language="C++">
     <compoundname>MaterialProperties.ixx</compoundname>
-    <includes refid="UniformSemantics_8ixx" local="no">helios.rendering.shader.UniformSemantics</includes>
     <includes refid="UniformValueMap_8ixx" local="no">helios.rendering.shader.UniformValueMap</includes>
     <includes refid="helios_2math_2types_2__module_8ixx" local="no">helios.math.types</includes>
+    <includes refid="UniformSemantics_8ixx" local="no">helios.rendering.shader.UniformSemantics</includes>
     <includes refid="MaterialPropertiesOverride_8ixx" local="no">helios.rendering.model.config.MaterialPropertiesOverride</includes>
     <incdepgraph>
-      <node id="7">
+      <node id="6">
         <label>helios.math.types</label>
         <link refid="helios_2math_2types_2__module_8ixx"/>
-        <childnode refid="7" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
       </node>
       <node id="1">
-        <label>include/helios/rendering/model/config/MaterialProperties.ixx</label>
+        <label>MaterialProperties.ixx</label>
         <link refid="MaterialProperties_8ixx"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="3" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
@@ -28,22 +28,24 @@
       <node id="8">
         <label>helios.rendering.model.config.MaterialPropertiesOverride</label>
         <link refid="MaterialPropertiesOverride_8ixx"/>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
+        <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
       </node>
-      <node id="2">
+      <node id="7">
         <label>helios.rendering.shader.UniformSemantics</label>
         <link refid="UniformSemantics_8ixx"/>
       </node>
-      <node id="3">
+      <node id="2">
         <label>helios.rendering.shader.UniformValueMap</label>
         <link refid="UniformValueMap_8ixx"/>
+        <childnode refid="3" relation="include">
+        </childnode>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
@@ -52,16 +54,14 @@
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="2" relation="include">
-        </childnode>
       </node>
-      <node id="4">
+      <node id="3">
         <label>array</label>
       </node>
-      <node id="5">
+      <node id="4">
         <label>optional</label>
       </node>
-      <node id="6">
+      <node id="5">
         <label>variant</label>
       </node>
     </incdepgraph>
@@ -150,7 +150,7 @@
 <codeline lineno="72" refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_1a7e80912edf28edf59686f5e344c26569" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_1a7e80912edf28edf59686f5e344c26569" kindref="member">MaterialProperties</ref>(</highlight></codeline>
 <codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacehelios_1_1math_1a08252f81850c5902e3c8dead272f3332" kindref="member">helios::math::vec4f</ref><sp/>baseColor,</highlight></codeline>
 <codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>roughness<sp/>=<sp/>0.0f</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>)<sp/>noexcept<sp/>:<sp/>baseColor_(baseColor),<sp/>roughness_(roughness){}</highlight></codeline>
 <codeline lineno="76"><highlight class="normal"></highlight></codeline>
 <codeline lineno="77"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="78"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
@@ -163,43 +163,61 @@
 <codeline lineno="85"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="86"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>new<sp/>immutable<sp/>instance<sp/>of<sp/>MaterialProperties<sp/>with<sp/>the<sp/>updated<sp/>base<sp/>color.</highlight></codeline>
 <codeline lineno="87"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="88" refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_1af37039d81ae928ad4f314bc99fa1e283" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_1af471bada8012ac6da20c56ffd1388426" kindref="member">MaterialProperties</ref><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_1af37039d81ae928ad4f314bc99fa1e283" kindref="member">withBaseColor</ref>(<ref refid="namespacehelios" kindref="compound">helios</ref>::<ref refid="namespacehelios_1_1math" kindref="compound">math</ref>::vec4f<sp/>baseColor)<sp/>const<sp/>noexcept;</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="90"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="91"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Creates<sp/>a<sp/>new<sp/>MaterialPropertiesOverride<sp/>instance<sp/>with<sp/>an<sp/>updated<sp/>base<sp/>color.</highlight></codeline>
-<codeline lineno="92"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="93"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>method<sp/>returns<sp/>a<sp/>new<sp/>MaterialPropertiesOverride<sp/>instance<sp/>where<sp/>only<sp/>the<sp/>base</highlight></codeline>
-<codeline lineno="94"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>color<sp/>has<sp/>been<sp/>changed<sp/>to<sp/>the<sp/>provided<sp/>value.</highlight></codeline>
-<codeline lineno="95"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="96"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>baseColor<sp/>The<sp/>new<sp/>base<sp/>color<sp/>for<sp/>the<sp/>material.</highlight></codeline>
+<codeline lineno="88" refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_1af37039d81ae928ad4f314bc99fa1e283" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_1af471bada8012ac6da20c56ffd1388426" kindref="member">MaterialProperties</ref><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_1af37039d81ae928ad4f314bc99fa1e283" kindref="member">withBaseColor</ref>(<ref refid="namespacehelios_1_1math_1a08252f81850c5902e3c8dead272f3332" kindref="member">helios::math::vec4f</ref><sp/>baseColor)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_1af471bada8012ac6da20c56ffd1388426" kindref="member">MaterialProperties</ref>(</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>baseColor,</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>roughness_</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="95"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="96"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Creates<sp/>a<sp/>new<sp/>MaterialPropertiesOverride<sp/>instance<sp/>with<sp/>an<sp/>updated<sp/>base<sp/>color.</highlight></codeline>
 <codeline lineno="97"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="98"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>new<sp/>instance<sp/>of<sp/>MaterialPropertiesOvrride<sp/>with<sp/>the<sp/>updated<sp/>base<sp/>color.</highlight></codeline>
-<codeline lineno="99"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="100" refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_1a5b40f12048960aa8dd03309c72ccfbf2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="structhelios_1_1rendering_1_1model_1_1config_1_1MaterialPropertiesOverride" kindref="compound">MaterialPropertiesOverride</ref><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_1a5b40f12048960aa8dd03309c72ccfbf2" kindref="member">overrideBaseColor</ref>(<ref refid="namespacehelios" kindref="compound">helios</ref>::<ref refid="namespacehelios_1_1math" kindref="compound">math</ref>::vec4f<sp/>baseColor)<sp/>const<sp/>noexcept;</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="102"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="103"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Creates<sp/>a<sp/>new<sp/>MaterialProperties<sp/>instance<sp/>with<sp/>an<sp/>updated<sp/>roughness<sp/>factor.</highlight></codeline>
-<codeline lineno="104"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="105"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>method<sp/>returns<sp/>a<sp/>new<sp/>MaterialProperties<sp/>instance<sp/>where<sp/>only<sp/>the<sp/>roughness<sp/>factor<sp/>has<sp/>been<sp/>changed<sp/>to<sp/>the</highlight></codeline>
-<codeline lineno="106"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>provided<sp/>value.</highlight></codeline>
-<codeline lineno="107"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="108"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>roughness<sp/>The<sp/>new<sp/>roughness<sp/>factor<sp/>for<sp/>the<sp/>material.</highlight></codeline>
-<codeline lineno="109"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="110"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>new<sp/>immutable<sp/>instance<sp/>of<sp/>MaterialProperties<sp/>with<sp/>the<sp/>updated<sp/>roughness<sp/>factor.</highlight></codeline>
-<codeline lineno="111"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="112" refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_1a92c5f004d75558b0211523bc10416667" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_1af471bada8012ac6da20c56ffd1388426" kindref="member">MaterialProperties</ref><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_1a92c5f004d75558b0211523bc10416667" kindref="member">withRoughness</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>roughness)<sp/>const<sp/>noexcept;</highlight></codeline>
-<codeline lineno="113"><highlight class="normal"></highlight></codeline>
-<codeline lineno="114"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="115"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="116"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Writes<sp/>the<sp/>current<sp/>properties<sp/>into<sp/>the<sp/>given<sp/>UniformValueMap.</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>method<sp/>returns<sp/>a<sp/>new<sp/>MaterialPropertiesOverride<sp/>instance<sp/>where<sp/>only<sp/>the<sp/>base</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>color<sp/>has<sp/>been<sp/>changed<sp/>to<sp/>the<sp/>provided<sp/>value.</highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="101"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>baseColor<sp/>The<sp/>new<sp/>base<sp/>color<sp/>for<sp/>the<sp/>material.</highlight></codeline>
+<codeline lineno="102"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="103"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>new<sp/>instance<sp/>of<sp/>MaterialPropertiesOvrride<sp/>with<sp/>the<sp/>updated<sp/>base<sp/>color.</highlight></codeline>
+<codeline lineno="104"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="105" refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_1a5b40f12048960aa8dd03309c72ccfbf2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="structhelios_1_1rendering_1_1model_1_1config_1_1MaterialPropertiesOverride" kindref="compound">MaterialPropertiesOverride</ref><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_1a5b40f12048960aa8dd03309c72ccfbf2" kindref="member">overrideBaseColor</ref>(<ref refid="namespacehelios_1_1math_1a08252f81850c5902e3c8dead272f3332" kindref="member">helios::math::vec4f</ref><sp/>baseColor)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1rendering_1_1model_1_1config_1_1MaterialPropertiesOverride" kindref="compound">MaterialPropertiesOverride</ref>(</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>baseColor,</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>roughness_</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="112"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="113"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Creates<sp/>a<sp/>new<sp/>MaterialProperties<sp/>instance<sp/>with<sp/>an<sp/>updated<sp/>roughness<sp/>factor.</highlight></codeline>
+<codeline lineno="114"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="115"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>method<sp/>returns<sp/>a<sp/>new<sp/>MaterialProperties<sp/>instance<sp/>where<sp/>only<sp/>the<sp/>roughness<sp/>factor<sp/>has<sp/>been<sp/>changed<sp/>to<sp/>the</highlight></codeline>
+<codeline lineno="116"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>provided<sp/>value.</highlight></codeline>
 <codeline lineno="117"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="118"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>uniformValueMap<sp/>Target<sp/>map<sp/>receiving<sp/>the<sp/>uniform<sp/>values.</highlight></codeline>
-<codeline lineno="119"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="120" refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_1a0179bfd58c6c4a0be0a4fd74775dcc34" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_1a0179bfd58c6c4a0be0a4fd74775dcc34" kindref="member">writeUniformValues</ref>(<ref refid="namespacehelios_1_1rendering_1_1shader" kindref="compound">shader</ref>::UniformValueMap&amp;<sp/>uniformValueMap)<sp/>const<sp/>noexcept;</highlight></codeline>
-<codeline lineno="121"><highlight class="normal"></highlight></codeline>
-<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="123"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="118"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>roughness<sp/>The<sp/>new<sp/>roughness<sp/>factor<sp/>for<sp/>the<sp/>material.</highlight></codeline>
+<codeline lineno="119"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="120"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>new<sp/>immutable<sp/>instance<sp/>of<sp/>MaterialProperties<sp/>with<sp/>the<sp/>updated<sp/>roughness<sp/>factor.</highlight></codeline>
+<codeline lineno="121"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="122" refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_1a92c5f004d75558b0211523bc10416667" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_1af471bada8012ac6da20c56ffd1388426" kindref="member">MaterialProperties</ref><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_1a92c5f004d75558b0211523bc10416667" kindref="member">withRoughness</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>roughness)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_1af471bada8012ac6da20c56ffd1388426" kindref="member">MaterialProperties</ref>(</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>baseColor_,</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>roughness</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="130"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="131"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Writes<sp/>the<sp/>current<sp/>properties<sp/>into<sp/>the<sp/>given<sp/>UniformValueMap.</highlight></codeline>
+<codeline lineno="132"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="133"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>uniformValueMap<sp/>Target<sp/>map<sp/>receiving<sp/>the<sp/>uniform<sp/>values.</highlight></codeline>
+<codeline lineno="134"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="135" refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_1a0179bfd58c6c4a0be0a4fd74775dcc34" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1rendering_1_1model_1_1config_1_1MaterialProperties_1a0179bfd58c6c4a0be0a4fd74775dcc34" kindref="member">writeUniformValues</ref>(<ref refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap" kindref="compound">shader::UniformValueMap</ref>&amp;<sp/>uniformValueMap)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uniformValueMap.set(<ref refid="namespacehelios_1_1rendering_1_1shader_1a0a320e03bcf6f60bc90428c450dfb329aaaf9abb4ecf0d3618eac3e02b50ab5a7" kindref="member">helios::rendering::shader::UniformSemantics::MaterialBaseColor</ref>,<sp/>baseColor_);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uniformValueMap.set(<ref refid="namespacehelios_1_1rendering_1_1shader_1a0a320e03bcf6f60bc90428c450dfb329ae555f11be67c1dc8afe22845d052682a" kindref="member">helios::rendering::shader::UniformSemantics::MaterialRoughness</ref>,<sp/>roughness_);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="141"><highlight class="normal">}</highlight></codeline>
     </programlisting>
-    <location file="include/helios/rendering/model/config/MaterialProperties.ixx"/>
+    <location file="/tmp/h/include/helios/rendering/model/config/MaterialProperties.ixx"/>
   </compounddef>
 </doxygen>

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="helios_2engine_2runtime_2pooling_2README_8md" kind="file" language="Markdown">
-    <compoundname>README.md</compoundname>
+    <compoundname>helios/engine/runtime/pooling/README.md</compoundname>
     <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1pooling">helios::engine::runtime::pooling</innernamespace>
     <briefdescription>
     </briefdescription>
@@ -37,6 +37,34 @@
 <codeline></codeline>
 <codeline><highlight class="normal">Spawn/despawn<sp/>request<sp/>handling<sp/>has<sp/>been<sp/>moved<sp/>to<sp/>`helios::engine::runtime::spawn`.</highlight></codeline>
 <codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>1.<sp/>Create<sp/>a<sp/>prefab<sp/>template</highlight></codeline>
+<codeline><highlight class="normal">auto<sp/>bulletPrefab<sp/>=<sp/>GameObjectFactory::gameObject()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withMotion([](auto&amp;<sp/>m)<sp/>{<sp/>m.move2D().speed(10.0f);<sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.withRendering([&amp;](auto&amp;<sp/>r)<sp/>{<sp/>r.renderable().shape(circleShape);<sp/>})</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.make(false);<sp/><sp/>//<sp/>inactive<sp/>initially</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>2.<sp/>Configure<sp/>and<sp/>create<sp/>pool</highlight></codeline>
+<codeline><highlight class="normal">GameObjectPoolConfig<sp/>config{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.poolId<sp/>=<sp/>GameObjectPoolId{1},</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.prefab<sp/>=<sp/>bulletPrefab.get(),</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>.initialSize<sp/>=<sp/>50</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">auto<sp/>poolManager<sp/>=<sp/>std::make_unique&lt;GameObjectPoolManager&gt;(&amp;gameWorld);</highlight></codeline>
+<codeline><highlight class="normal">poolManager-&gt;createPool(config);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>3.<sp/>Acquire/Release<sp/>via<sp/>SpawnManager<sp/>(preferred)</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Or<sp/>directly<sp/>via<sp/>poolManager<sp/>for<sp/>low-level<sp/>access</highlight></codeline>
+<codeline><highlight class="normal">auto*<sp/>bullet<sp/>=<sp/>poolManager-&gt;acquire(GameObjectPoolId{1});</highlight></codeline>
+<codeline><highlight class="normal">bullet-&gt;setActive(true);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Later:<sp/>release<sp/>back<sp/>to<sp/>pool</highlight></codeline>
+<codeline><highlight class="normal">poolManager-&gt;release(GameObjectPoolId{1},<sp/>bullet-&gt;guid());</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
 <codeline><highlight class="normal">---</highlight></codeline>
 <codeline><highlight class="normal">&lt;details&gt;</highlight></codeline>
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
@@ -46,6 +74,6 @@
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
 <codeline></codeline>
     </programlisting>
-    <location file="include/helios/engine/runtime/pooling/README.md"/>
+    <location file="/tmp/h/include/helios/engine/runtime/pooling/README.md"/>
   </compounddef>
 </doxygen>

@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_d085c729ee8a56dff1cc9d67ead9cf36" kind="dir">
+    <compoundname>systems</compoundname>
+    <innerfile refid="helios_2engine_2modules_2ai_2systems_2__module_8ixx">helios/engine/modules/ai/systems/_module.ixx</innerfile>
+    <innerfile refid="ChaseSystem_8ixx">ChaseSystem.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_d085c729ee8a56dff1cc9d67ead9cf36_1autotoc_md226">
+<title>helios::engine::modules::ai::systems</title><para>AI behavior processing systems.</para>
+</sect1>
+<sect1 id="dir_d085c729ee8a56dff1cc9d67ead9cf36_1autotoc_md227">
+<title>Overview</title><para>Systems that process AI components and update entity behavior. Registered with the GameLoop and executed during the appropriate phase.</para>
+</sect1>
+<sect1 id="dir_d085c729ee8a56dff1cc9d67ead9cf36_1autotoc_md228">
+<title>Systems</title><para><table rows="2" cols="2"><row>
+<entry thead="yes"><para>System  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ChaseSystem</computeroutput>  </para>
+</entry><entry thead="no"><para>Steers entities towards their chase targets  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_d085c729ee8a56dff1cc9d67ead9cf36_1autotoc_md229">
+<title>ChaseSystem</title><para>Processes entities with <computeroutput>ChaseComponent</computeroutput>, <computeroutput>SteeringComponent</computeroutput>, and <computeroutput>TranslationStateComponent</computeroutput>.</para>
+<sect2 id="dir_d085c729ee8a56dff1cc9d67ead9cf36_1autotoc_md230">
+<title>Behavior</title><para>1. <bold>Target Resolution</bold>: Looks up target entity by GUID 2. <bold>Timer Update</bold>: Advances cooldown timer by delta time 3. <bold>Cooldown Check</bold>: Only updates direction when timer exceeds cooldown 4. <bold>Direction Calculation</bold>: Computes normalized vector from entity to target 5. <bold>Steering Update</bold>: Sets steering intent to face calculated direction</para>
+</sect2>
+<sect2 id="dir_d085c729ee8a56dff1cc9d67ead9cf36_1autotoc_md231">
+<title>Required Components</title><para><table rows="4" cols="2"><row>
+<entry thead="yes"><para>Component  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ChaseComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Target GUID and timing configuration  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SteeringComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Receives steering intent updates  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>TranslationStateComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Provides current entity position  </para>
+</entry></row>
+</table>
+</para>
+</sect2>
+<sect2 id="dir_d085c729ee8a56dff1cc9d67ead9cf36_1autotoc_md232">
+<title>Registration</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8engine_8modules_8ai_8systems" kindref="compound">helios.engine.modules.ai.systems</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Register<sp/>with<sp/>GameLoop<sp/>main<sp/>phase</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">gameLoop.addSystem&lt;ChaseSystem&gt;(Phase::Main,<sp/>gameWorld);</highlight></codeline>
+</programlisting></para>
+</sect2>
+</sect1>
+<sect1 id="dir_d085c729ee8a56dff1cc9d67ead9cf36_1autotoc_md233">
+<title>Related Modules</title><para><table rows="4" cols="2"><row>
+<entry thead="yes"><para>Module  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1modules_1_1ai_1_1components" kindref="compound">helios.engine.modules.ai.components</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>ChaseComponent data  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1modules_1_1physics_1_1motion" kindref="compound">helios.engine.modules.physics.motion</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>SteeringComponent  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1modules_1_1spatial_1_1transform" kindref="compound">helios.engine.modules.spatial.transform</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>TranslationStateComponent  </para>
+</entry></row>
+</table>
+</para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/modules/ai/systems/"/>
+  </compounddef>
+</doxygen>

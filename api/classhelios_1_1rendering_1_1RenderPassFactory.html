@@ -140,7 +140,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 <div class="textblock"><p>A factory class for constructing `RenderPass` objects and populating their `RenderQueue`s based on a `helios::scene::Snapshot`. </p>
 <dl class="section note"><dt>Note</dt><dd>This class implements a singleton pattern. In the future, the conversion of high-level scene data (Snapshot/SnapshotItems) into lower-level rendering commands might be realized with strategies and/or separate factories. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RenderPassFactory_8ixx_source.html#l00035">35</a> of file <a class="el" href="RenderPassFactory_8ixx_source.html">RenderPassFactory.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RenderPassFactory_8ixx_source.html#l00036">36</a> of file <a class="el" href="RenderPassFactory_8ixx_source.html">RenderPassFactory.ixx</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="ab3de082b56a0e7b2ca11da66453252ef" name="ab3de082b56a0e7b2ca11da66453252ef"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab3de082b56a0e7b2ca11da66453252ef">&#9670;&#160;</a></span>buildRenderPass()</h2>
@@ -160,7 +160,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -175,6 +175,16 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A fully constructed `RenderPass` object. The returned object owns the `RenderQueue` and the frame-specific `UniformValueMap`.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd>::populateRenderQueue() </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="RenderPassFactory_8ixx_source.html#l00073">73</a> of file <a class="el" href="RenderPassFactory_8ixx_source.html">RenderPassFactory.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="RenderPassFactory_8ixx_source.html#l00104">populateRenderQueue()</a>, <a class="el" href="UniformSemantics_8ixx_source.html#l00035">helios::rendering::shader::ProjectionMatrix</a>, <a class="el" href="Snapshot_8ixx_source.html#l00129">helios::scene::Snapshot::projectionMatrix()</a>, <a class="el" href="UniformSemantics_8ixx_source.html#l00040">helios::rendering::shader::ViewMatrix</a>, <a class="el" href="Snapshot_8ixx_source.html#l00141">helios::scene::Snapshot::viewMatrix()</a>, and <a class="el" href="Snapshot_8ixx_source.html#l00117">helios::scene::Snapshot::viewport()</a>.</p>
+<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderPassFactory_ab3de082b56a0e7b2ca11da66453252ef_cgraph.svg" width="100%" height="581"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
 
 </div>
 </div>
@@ -196,13 +206,15 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel export">export</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel export">export</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Returns the singleton instance of `RenderPassFactory`. </p>
 <dl class="section return"><dt>Returns</dt><dd>A reference to the single `RenderPassFactory` instance. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="RenderPassFactory_8ixx_source.html#l00052">52</a> of file <a class="el" href="RenderPassFactory_8ixx_source.html">RenderPassFactory.ixx</a>.</p>
 
 </div>
 </div>
@@ -224,7 +236,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -238,7 +250,20 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A unique pointer to the newly created `RenderCommand`. Returns nullptr if the associated <a class="el" href="classhelios_1_1rendering_1_1Renderable.html" title="Representative of a configurable Renderable that references an immutable RenderPrototype and instance...">Renderable</a> is no longer available, or if the shader is not available from the `Renderable`'s material, or if the mesh is no longer available.</dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000020">Todo</a></b></dt><dd>future versions might want to use a FactoryMethod in <a class="el" href="classhelios_1_1rendering_1_1RenderCommand.html" title="DTO for storing rendering-specific command information to be passed to the RenderQueue.">RenderCommand</a> that takes a SnapshotItem and creates a <a class="el" href="classhelios_1_1rendering_1_1RenderCommand.html" title="DTO for storing rendering-specific command information to be passed to the RenderQueue.">RenderCommand</a> from it (e.g. `RenderCommand::fromSnapshotItem()`); or a Factory `RenderCommandBuilder()` with fluent configuration `.withShader().withMesh().build();` </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000025">Todo</a></b></dt><dd>future versions might want to use a FactoryMethod in <a class="el" href="classhelios_1_1rendering_1_1RenderCommand.html" title="DTO for storing rendering-specific command information to be passed to the RenderQueue.">RenderCommand</a> that takes a SnapshotItem and creates a <a class="el" href="classhelios_1_1rendering_1_1RenderCommand.html" title="DTO for storing rendering-specific command information to be passed to the RenderQueue.">RenderCommand</a> from it (e.g. `RenderCommand::fromSnapshotItem()`); or a Factory `RenderCommandBuilder()` with fluent configuration `.withShader().withMesh().build();` </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000026">Todo</a></b></dt><dd>when batching is implemented, this could be refactored out of this factory method </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="RenderPassFactory_8ixx_source.html#l00140">140</a> of file <a class="el" href="RenderPassFactory_8ixx_source.html">RenderPassFactory.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="RenderPassFactory_8ixx_source.html#l00042">logger_</a>, and <a class="el" href="UniformSemantics_8ixx_source.html#l00030">helios::rendering::shader::ModelMatrix</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="RenderPassFactory_8ixx_source.html#l00104">populateRenderQueue()</a>.</p>
+<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderPassFactory_a18d1346e8e3c78358ccb1872da3125a3_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
 
 </div>
 </div>
@@ -264,7 +289,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel export">export</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -280,10 +305,28 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 </dl>
 <dl class="section see"><dt>See also</dt><dd>::makeRenderCommand() </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="RenderPassFactory_8ixx_source.html#l00104">104</a> of file <a class="el" href="RenderPassFactory_8ixx_source.html">RenderPassFactory.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="RenderQueue_8ixx_source.html#l00084">helios::rendering::RenderQueue::add()</a>, <a class="el" href="RenderQueue_8ixx_source.html#l00107">helios::rendering::RenderQueue::clear()</a>, <a class="el" href="RenderPassFactory_8ixx_source.html#l00140">makeRenderCommand()</a>, and <a class="el" href="Snapshot_8ixx_source.html#l00108">helios::scene::Snapshot::snapshotItems()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="RenderPassFactory_8ixx_source.html#l00073">buildRenderPass()</a>.</p>
+<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderPassFactory_ab24ad189d343ee9bdc7ed6395ee76bcb_cgraph.svg" width="500" height="283"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderPassFactory_ab24ad189d343ee9bdc7ed6395ee76bcb_icgraph.svg" width="526" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>include/helios/rendering/<a class="el" href="RenderPassFactory_8ixx_source.html">RenderPassFactory.ixx</a></li>
+<li><a class="el" href="RenderPassFactory_8ixx_source.html">RenderPassFactory.ixx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

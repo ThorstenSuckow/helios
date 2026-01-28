@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="helios_2engine_2core_2data_2README_8md" kind="file" language="Markdown">
-    <compoundname>README.md</compoundname>
+    <compoundname>helios/engine/core/data/README.md</compoundname>
     <innernamespace refid="namespacehelios_1_1engine_1_1core_1_1data">helios::engine::core::data</innernamespace>
     <briefdescription>
     </briefdescription>
@@ -14,13 +14,37 @@
 <codeline></codeline>
 <codeline><highlight class="normal">This<sp/>module<sp/>provides<sp/>core<sp/>data<sp/>structures<sp/>used<sp/>for<sp/>managing<sp/>GameObjects<sp/>within<sp/>the<sp/>helios<sp/>engine.</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">**Components:**</highlight></codeline>
+<codeline><highlight class="normal">##<sp/>Components</highlight></codeline>
 <codeline></codeline>
+<codeline><highlight class="normal">-<sp/>**ComponentTypeId**<sp/>-<sp/>Compile-time<sp/>type<sp/>identifier<sp/>for<sp/>O(1)<sp/>component<sp/>indexing<sp/>within<sp/>GameObject.</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**GameObjectPool**<sp/>-<sp/>Low-level<sp/>O(1)<sp/>object<sp/>pooling<sp/>for<sp/>entity<sp/>recycling.</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**GameObjectPoolId**<sp/>-<sp/>Strongly-typed<sp/>identifier<sp/>for<sp/>referencing<sp/>pools.</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**GameObjectPoolRegistry**<sp/>-<sp/>Central<sp/>registry<sp/>managing<sp/>multiple<sp/>pools<sp/>by<sp/>ID.</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**GameObjectFilter**<sp/>-<sp/>Bitmask<sp/>enum<sp/>for<sp/>filtering<sp/>entities<sp/>by<sp/>active/inactive<sp/>state<sp/>and<sp/>component<sp/>state.</highlight></codeline>
 <codeline><highlight class="normal">-<sp/>**GameObjectView**<sp/>-<sp/>Lazy<sp/>range<sp/>adapter<sp/>for<sp/>component-filtered<sp/>iteration<sp/>with<sp/>structured<sp/>binding<sp/>support.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**SpawnProfileId**<sp/>-<sp/>Strongly-typed<sp/>identifier<sp/>for<sp/>spawn<sp/>profiles.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**SpawnRuleId**<sp/>-<sp/>Strongly-typed<sp/>identifier<sp/>for<sp/>spawn<sp/>rules.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Strongly-Typed<sp/>IDs</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>ID<sp/>types<sp/>(`GameObjectPoolId`,<sp/>`SpawnProfileId`,<sp/>`SpawnRuleId`)<sp/>provide<sp/>type-safe<sp/>identifiers<sp/>that<sp/>can<sp/>be<sp/>constructed<sp/>from<sp/>string<sp/>literals<sp/>using<sp/>FNV-1a<sp/>hashing:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>Compile-time<sp/>constant<sp/>IDs<sp/>from<sp/>strings</highlight></codeline>
+<codeline><highlight class="normal">constexpr<sp/>GameObjectPoolId<sp/>ENEMY_POOL{&quot;enemies&quot;};</highlight></codeline>
+<codeline><highlight class="normal">constexpr<sp/>SpawnProfileId<sp/>ENEMY_PROFILE{&quot;enemy_spawn&quot;};</highlight></codeline>
+<codeline><highlight class="normal">constexpr<sp/>SpawnRuleId<sp/>WAVE_RULE{&quot;wave_spawn&quot;};</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Use<sp/>in<sp/>registries<sp/>and<sp/>schedulers</highlight></codeline>
+<codeline><highlight class="normal">poolManager.createPool(ENEMY_POOL,<sp/>100);</highlight></codeline>
+<codeline><highlight class="normal">spawnManager.registerProfile(ENEMY_PROFILE,<sp/>profile);</highlight></codeline>
+<codeline><highlight class="normal">scheduler.addRule(ENEMY_PROFILE,<sp/>std::make_unique&lt;TimerSpawnRule&gt;(WAVE_RULE,<sp/>2.0f,<sp/>5));</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">All<sp/>ID<sp/>types<sp/>support:</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Hashing<sp/>for<sp/>`std::unordered_map`<sp/>/<sp/>`std::unordered_set`</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Comparison<sp/>operators<sp/>for<sp/>`std::map`<sp/>/<sp/>`std::set`</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Equality<sp/>comparison</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">&gt;<sp/>**Note:**<sp/>`GameObjectView.h`<sp/>is<sp/>intentionally<sp/>a<sp/>.h<sp/>header<sp/>instead<sp/>of<sp/>a<sp/>.ixx<sp/>module<sp/>interface<sp/>due<sp/>to<sp/>MSVC<sp/>ICE<sp/>issues<sp/>with<sp/>structured<sp/>bindings.</highlight></codeline>
 <codeline></codeline>
@@ -34,6 +58,6 @@
 <codeline><highlight class="normal">@details<sp/>This<sp/>namespace<sp/>provides<sp/>core<sp/>data<sp/>structures<sp/>for<sp/>managing<sp/>GameObjects,<sp/>including<sp/>object<sp/>pools<sp/>for<sp/>memory-efficient<sp/>entity<sp/>recycling<sp/>(GameObjectPool,<sp/>GameObjectPoolId,<sp/>GameObjectPoolRegistry),<sp/>filtered<sp/>views<sp/>for<sp/>querying<sp/>entities<sp/>based<sp/>on<sp/>state<sp/>or<sp/>components<sp/>(GameObjectFilter,<sp/>GameObjectView).<sp/>For<sp/>coordinated<sp/>pool/world<sp/>operations,<sp/>see<sp/>GameObjectPoolFacade.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
     </programlisting>
-    <location file="include/helios/engine/core/data/README.md"/>
+    <location file="/tmp/h/include/helios/engine/core/data/README.md"/>
   </compounddef>
 </doxygen>

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="helios_2engine_2runtime_2spawn_2commands_2README_8md" kind="file" language="Markdown">
-    <compoundname>README.md</compoundname>
+    <compoundname>helios/engine/runtime/spawn/commands/README.md</compoundname>
     <innernamespace refid="namespacehelios_1_1engine_1_1runtime_1_1spawn_1_1commands">helios::engine::runtime::spawn::commands</innernamespace>
     <briefdescription>
     </briefdescription>
@@ -14,7 +14,7 @@
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">This<sp/>module<sp/>contains<sp/>command<sp/>classes<sp/>that<sp/>represent<sp/>spawn<sp/>and<sp/>despawn<sp/>requests.<sp/>These<sp/>commands<sp/>are<sp/>emitted<sp/>by<sp/>systems<sp/>and<sp/>processed<sp/>by<sp/>dispatchers<sp/>during<sp/>the<sp/>command<sp/>flush<sp/>phase.</highlight></codeline>
+<codeline><highlight class="normal">This<sp/>module<sp/>contains<sp/>command<sp/>classes<sp/>that<sp/>represent<sp/>spawn<sp/>and<sp/>despawn<sp/>operations.<sp/>These<sp/>commands<sp/>are<sp/>emitted<sp/>by<sp/>systems<sp/>and<sp/>submitted<sp/>directly<sp/>to<sp/>the<sp/>SpawnCommandHandler<sp/>during<sp/>the<sp/>command<sp/>flush<sp/>phase.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Key<sp/>Classes</highlight></codeline>
 <codeline></codeline>
@@ -26,15 +26,23 @@
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Architecture</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">Commands<sp/>follow<sp/>the<sp/>visitor<sp/>pattern<sp/>with<sp/>dispatchers:</highlight></codeline>
+<codeline><highlight class="normal">Commands<sp/>follow<sp/>the<sp/>visitor<sp/>pattern<sp/>with<sp/>dispatchers.<sp/>Commands<sp/>are<sp/>submitted<sp/>directly<sp/>to<sp/>the<sp/>SpawnCommandHandler<sp/>(typically<sp/>SpawnManager):</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
-<codeline><highlight class="normal">┌─────────────────┐<sp/><sp/><sp/><sp/><sp/>┌───────────────┐<sp/><sp/><sp/><sp/><sp/>┌────────────┐<sp/><sp/><sp/><sp/><sp/>┌──────────────┐</highlight></codeline>
-<codeline><highlight class="normal">│<sp/>SpawnSystem<sp/><sp/><sp/><sp/><sp/>│────&gt;│<sp/>CommandBuffer<sp/>│────&gt;│<sp/>Dispatcher<sp/>│────&gt;│<sp/>SpawnManager<sp/>│</highlight></codeline>
-<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
-<codeline><highlight class="normal">│<sp/>-<sp/>SpawnCommand<sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/>flush()<sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/>dispatch()<sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/>submit()<sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
-<codeline><highlight class="normal">│<sp/>-<sp/>DespawnCommand│<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
-<codeline><highlight class="normal">└─────────────────┘<sp/><sp/><sp/><sp/><sp/>└───────────────┘<sp/><sp/><sp/><sp/><sp/>└────────────┘<sp/><sp/><sp/><sp/><sp/>└──────────────┘</highlight></codeline>
+<codeline><highlight class="normal">┌─────────────────┐<sp/><sp/><sp/><sp/><sp/>┌───────────────┐<sp/><sp/><sp/><sp/><sp/>┌────────────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/>SpawnSystem<sp/><sp/><sp/><sp/><sp/>│────&gt;│<sp/>CommandBuffer<sp/>│────&gt;│<sp/>Dispatcher<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/>-<sp/>SpawnCommand<sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/>flush()<sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/>dispatchTyped()<sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/>-<sp/>DespawnCommand│<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">└─────────────────┘<sp/><sp/><sp/><sp/><sp/>└───────────────┘<sp/><sp/><sp/><sp/><sp/>└─────────┬──────────┘</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>▼</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>┌────────────────────┐</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/>SpawnCommandHandler│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/>(SpawnManager)<sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│<sp/>submit(Command)<sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>└────────────────────┘</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
@@ -58,10 +66,10 @@
 <codeline><highlight class="normal">&lt;summary&gt;Doxygen&lt;/summary&gt;&lt;p&gt;</highlight></codeline>
 <codeline><highlight class="normal">@namespace<sp/>helios::engine::runtime::spawn::commands</highlight></codeline>
 <codeline><highlight class="normal">@brief<sp/>Commands<sp/>for<sp/>spawn<sp/>and<sp/>despawn<sp/>operations.</highlight></codeline>
-<codeline><highlight class="normal">@details<sp/>This<sp/>namespace<sp/>contains<sp/>command<sp/>classes<sp/>for<sp/>deferred<sp/>spawn<sp/>and<sp/>despawn<sp/>operations.<sp/>Commands<sp/>are<sp/>processed<sp/>during<sp/>the<sp/>command<sp/>buffer<sp/>flush<sp/>phase<sp/>and<sp/>routed<sp/>to<sp/>managers<sp/>via<sp/>dispatchers.</highlight></codeline>
+<codeline><highlight class="normal">@details<sp/>This<sp/>namespace<sp/>contains<sp/>command<sp/>classes<sp/>for<sp/>deferred<sp/>spawn<sp/>and<sp/>despawn<sp/>operations.<sp/>Commands<sp/>are<sp/>submitted<sp/>directly<sp/>to<sp/>SpawnCommandHandler<sp/>during<sp/>the<sp/>command<sp/>buffer<sp/>flush<sp/>phase<sp/>via<sp/>dispatchers.</highlight></codeline>
 <codeline><highlight class="normal">&lt;/p&gt;&lt;/details&gt;</highlight></codeline>
 <codeline></codeline>
     </programlisting>
-    <location file="include/helios/engine/runtime/spawn/commands/README.md"/>
+    <location file="/tmp/h/include/helios/engine/runtime/spawn/commands/README.md"/>
   </compounddef>
 </doxygen>

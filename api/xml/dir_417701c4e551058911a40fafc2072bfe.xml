@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_417701c4e551058911a40fafc2072bfe" kind="dir">
+    <compoundname>tooling</compoundname>
+    <innerfile refid="helios_2engine_2tooling_2__module_8ixx">helios/engine/tooling/_module.ixx</innerfile>
+    <innerfile refid="FpsMetrics_8ixx">FpsMetrics.ixx</innerfile>
+    <innerfile refid="FramePacer_8ixx">FramePacer.ixx</innerfile>
+    <innerfile refid="FrameStats_8ixx">FrameStats.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_417701c4e551058911a40fafc2072bfe_1autotoc_md450">
+<title>helios::engine::tooling</title><para>Utilities for runtime diagnostics and developer tooling such as FPS and frame timing metrics.</para>
+</sect1>
+<sect1 id="dir_417701c4e551058911a40fafc2072bfe_1autotoc_md451">
+<title>Key Classes</title><para><table rows="4" cols="2"><row>
+<entry thead="yes"><para>Class  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>FramePacer</computeroutput>  </para>
+</entry><entry thead="no"><para>Controls frame rate through timing and pacing (vsync-independent)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>FpsMetrics</computeroutput>  </para>
+</entry><entry thead="no"><para>Aggregates frame timing data over a rolling window for analysis  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>FrameStats</computeroutput>  </para>
+</entry><entry thead="no"><para>POD struct containing per-frame timing (work, wait, total)  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_417701c4e551058911a40fafc2072bfe_1autotoc_md452">
+<title>Usage</title><para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>stopwatch<sp/>=<sp/>std::make_unique&lt;helios::util::time::Stopwatch&gt;();</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classhelios_1_1engine_1_1tooling_1_1FramePacer" kindref="compound">helios::engine::tooling::FramePacer</ref><sp/>pacer(std::move(stopwatch));</highlight></codeline>
+<codeline><highlight class="normal">pacer.setTargetFps(60.0f);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics" kindref="compound">helios::engine::tooling::FpsMetrics</ref><sp/>metrics;</highlight></codeline>
+<codeline><highlight class="normal">metrics.<ref refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1aba1373724df39b46b8d19cc6f316e971" kindref="member">setHistorySize</ref>(120);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(running)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>pacer.beginFrame();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>...<sp/>game<sp/>logic<sp/>and<sp/>rendering<sp/>...</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>stats<sp/>=<sp/>pacer.sync();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>metrics.<ref refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1af833a6e7f41c5aa169c73ba6b96be9b2" kindref="member">addFrame</ref>(stats);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>fps<sp/>=<sp/>metrics.<ref refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1af6f7e9d36b9e499216e2b8f573ade6d5" kindref="member">getFps</ref>();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>avgFrameTime<sp/>=<sp/>metrics.<ref refid="classhelios_1_1engine_1_1tooling_1_1FpsMetrics_1a902c44f12d326e5f4cb4d3643b62dd8c" kindref="member">getFrameTimeMs</ref>();</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+ <details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/tooling/"/>
+  </compounddef>
+</doxygen>

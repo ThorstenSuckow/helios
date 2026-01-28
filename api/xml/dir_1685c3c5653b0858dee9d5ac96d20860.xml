@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_1685c3c5653b0858dee9d5ac96d20860" kind="dir">
+    <compoundname>components</compoundname>
+    <innerfile refid="helios_2engine_2modules_2spatial_2transform_2components_2__module_8ixx">helios/engine/modules/spatial/transform/components/_module.ixx</innerfile>
+    <innerfile refid="ComposeTransformComponent_8ixx">ComposeTransformComponent.ixx</innerfile>
+    <innerfile refid="RotationStateComponent_8ixx">RotationStateComponent.ixx</innerfile>
+    <innerfile refid="ScaleStateComponent_8ixx">ScaleStateComponent.ixx</innerfile>
+    <innerfile refid="TranslationStateComponent_8ixx">TranslationStateComponent.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_1685c3c5653b0858dee9d5ac96d20860_1autotoc_md324">
+<title>helios::engine::modules::spatial::transform::components</title><para>Transform state components for spatial management.</para>
+<para>This namespace contains components that store individual aspects of an entity&apos;s spatial state. These are composed by transform systems to produce final world transforms.</para>
+</sect1>
+<sect1 id="dir_1685c3c5653b0858dee9d5ac96d20860_1autotoc_md325">
+<title>Components</title><para><table rows="4" cols="2"><row>
+<entry thead="yes"><para>Component  </para>
+</entry><entry thead="yes"><para>Description  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ComposeTransformComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Local/world transform matrices with dirty tracking.  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ScaleStateComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Entity dimensions (width, height, depth) with unit.  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>TranslationStateComponent</computeroutput>  </para>
+</entry><entry thead="no"><para>Current position/translation vector.  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_1685c3c5653b0858dee9d5ac96d20860_1autotoc_md326">
+<title>Usage</title><para>Transform components are composed by the transform systems:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>transform<sp/>=<sp/>gameObject.add&lt;ComposeTransformComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/><ref refid="namespacehelios_1_1math_1ae230dbf0f416c8c868d5fea73d6babdb" kindref="member">scale</ref><sp/>=<sp/>gameObject.add&lt;ScaleStateComponent&gt;(1.0f,<sp/>1.0f,<sp/>1.0f,<sp/>Unit::Meter);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>translation<sp/>=<sp/>gameObject.add&lt;TranslationStateComponent&gt;();</highlight></codeline>
+<codeline><highlight class="normal">translation.setTranslation({0.0f,<sp/>0.0f,<sp/>-5.0f});</highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/modules/spatial/transform/components/"/>
+  </compounddef>
+</doxygen>

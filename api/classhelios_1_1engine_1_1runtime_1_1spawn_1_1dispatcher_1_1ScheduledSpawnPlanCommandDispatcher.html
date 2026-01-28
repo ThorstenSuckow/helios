@@ -136,19 +136,19 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:ad2f498d542d4f6364552373cd93d0d7a" id="r_ad2f498d542d4f6364552373cd93d0d7a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad2f498d542d4f6364552373cd93d0d7a">dispatchTyped</a> (<a class="el" href="classhelios_1_1engine_1_1runtime_1_1world_1_1GameWorld.html">helios::engine::runtime::world::GameWorld</a> &amp;gameWorld, const <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1commands_1_1ScheduledSpawnPlanCommand.html">helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand</a> &amp;command) noexcept override</td></tr>
-<tr class="memdesc:ad2f498d542d4f6364552373cd93d0d7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dispatches a ScheduledSpawnPlanCommand by creating a request.  <br /></td></tr>
+<tr class="memdesc:ad2f498d542d4f6364552373cd93d0d7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dispatches a ScheduledSpawnPlanCommand to the registered handler.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Dispatcher that routes ScheduledSpawnPlanCommands to the appropriate handler. </p>
-<p><a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1ScheduledSpawnPlanCommandDispatcher.html" title="Dispatcher that routes ScheduledSpawnPlanCommands to the appropriate handler.">ScheduledSpawnPlanCommandDispatcher</a> is a typed command dispatcher that handles ScheduledSpawnPlanCommand instances. When a command is dispatched, it creates a ScheduledSpawnPlanRequest and submits it to the pool's registered SpawnRequestHandler.</p>
-<p>This dispatcher bridges the SpawnScheduler output (ScheduledSpawnPlan) with the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html" title="Manager for processing spawn and despawn requests.">SpawnManager</a>'s request processing pipeline.</p>
+<p><a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1dispatcher_1_1ScheduledSpawnPlanCommandDispatcher.html" title="Dispatcher that routes ScheduledSpawnPlanCommands to the appropriate handler.">ScheduledSpawnPlanCommandDispatcher</a> is a typed command dispatcher that handles ScheduledSpawnPlanCommand instances. When a command is dispatched, it submits the command directly to the pool's registered <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler.html" title="Interface for handlers that process spawn and despawn commands.">SpawnCommandHandler</a>.</p>
+<p>This dispatcher bridges the SpawnScheduler output (ScheduledSpawnPlan) with the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html" title="Manager for processing spawn and despawn commands.">SpawnManager</a>'s command processing pipeline.</p>
 <dl class="section see"><dt>See also</dt><dd>ScheduledSpawnPlanCommand </dd>
 <dd>
 SpawnScheduler </dd>
 <dd>
-<a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html" title="Manager for processing spawn and despawn requests.">SpawnManager</a> </dd></dl>
+<a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnManager.html" title="Manager for processing spawn and despawn commands.">SpawnManager</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ScheduledSpawnPlanCommandDispatcher_8ixx_source.html#l00033">33</a> of file <a class="el" href="ScheduledSpawnPlanCommandDispatcher_8ixx_source.html">ScheduledSpawnPlanCommandDispatcher.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ScheduledSpawnPlanCommandDispatcher_8ixx_source.html#l00031">31</a> of file <a class="el" href="ScheduledSpawnPlanCommandDispatcher_8ixx_source.html">ScheduledSpawnPlanCommandDispatcher.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="adba3d6f1bb3b956a0e2a555887f44e2b" name="adba3d6f1bb3b956a0e2a555887f44e2b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adba3d6f1bb3b956a0e2a555887f44e2b">&#9670;&#160;</a></span>ScheduledSpawnPlanCommandDispatcher()</h2>
@@ -205,8 +205,8 @@ SpawnScheduler </dd>
 </table>
 </div><div class="memdoc">
 
-<p>Dispatches a ScheduledSpawnPlanCommand by creating a request. </p>
-<p>Creates a ScheduledSpawnPlanRequest from the command and submits it to the profile's registered SpawnRequestHandler for deferred processing.</p>
+<p>Dispatches a ScheduledSpawnPlanCommand to the registered handler. </p>
+<p>Looks up the <a class="el" href="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler.html" title="Interface for handlers that process spawn and despawn commands.">SpawnCommandHandler</a> for the command's profile ID and submits the command directly for deferred processing.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">gameWorld</td><td>The game world containing the pool. </td></tr>
@@ -217,12 +217,12 @@ SpawnScheduler </dd>
 
 <p>Implements <a class="el" href="classhelios_1_1engine_1_1runtime_1_1messaging_1_1command_1_1TypedWorldCommandDispatcher.html#ae99b8d4dc66acf8340000f97c0fdd16d">helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher&lt; helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="ScheduledSpawnPlanCommandDispatcher_8ixx_source.html#l00047">47</a> of file <a class="el" href="ScheduledSpawnPlanCommandDispatcher_8ixx_source.html">ScheduledSpawnPlanCommandDispatcher.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ScheduledSpawnPlanCommandDispatcher_8ixx_source.html#l00045">45</a> of file <a class="el" href="ScheduledSpawnPlanCommandDispatcher_8ixx_source.html">ScheduledSpawnPlanCommandDispatcher.ixx</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>include/helios/engine/runtime/spawn/dispatcher/<a class="el" href="ScheduledSpawnPlanCommandDispatcher_8ixx_source.html">ScheduledSpawnPlanCommandDispatcher.ixx</a></li>
+<li><a class="el" href="ScheduledSpawnPlanCommandDispatcher_8ixx_source.html">ScheduledSpawnPlanCommandDispatcher.ixx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

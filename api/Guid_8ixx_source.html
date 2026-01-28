@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>helios: include/helios/util/Guid.ixx Source File</title>
+<title>helios: Guid.ixx Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">var page_layout=1;</script>
 <script type="text/javascript" src="jquery.js"></script>
@@ -115,156 +115,154 @@ $(function() {
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;atomic&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">export</span> <span class="keyword">module</span> <a class="code" href="module__helios_8util_8Guid.html">helios.util.Guid</a>;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">export</span> <span class="keyword">module</span> <a class="code" href="module__helios_8util_8Guid.html">helios.util.Guid</a>;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">import</span> <a class="code" href="module__helios_8core_8types.html">helios.core.types</a>;</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">export</span> <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1util.html">helios::util</a> {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="structhelios_1_1util_1_1no__init__t.html">   16</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structhelios_1_1util_1_1no__init__t.html">no_init_t</a>{};</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="namespacehelios_1_1util.html#a823ac3cd0195df65873156bc76284364">   18</a></span>    <span class="keyword">inline</span> <span class="keyword">constexpr</span> <a class="code hl_struct" href="structhelios_1_1util_1_1no__init__t.html">no_init_t</a> <a class="code hl_variable" href="namespacehelios_1_1util.html#a823ac3cd0195df65873156bc76284364">no_init</a>;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"></span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">    /**</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">     * @brief Representative of a Globally Unique Identifier.</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">     * Generating GUIDs with this class is considered thread-safe.</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">     */</span></div>
-<div class="foldopen" id="foldopen00025" data-start="{" data-end="};">
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Guid.html">   25</a></span>    <span class="keyword">class </span>Guid final {</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keyword">explicit</span> Guid(uint64_t <a class="code hl_function" href="classhelios_1_1util_1_1Guid.html#a42652f894bf300b8d3060a1d8352458c">value</a>) noexcept : value_(<a class="code hl_function" href="classhelios_1_1util_1_1Guid.html#a42652f894bf300b8d3060a1d8352458c">value</a>) {}</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        uint64_t value_{};</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"></span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">         * @brief Unsafe Guid initializer for (local) var initialization.</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Guid.html#a9ac7d9af1cce2125dd8d19c22330c928">   35</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classhelios_1_1util_1_1Guid.html#a9ac7d9af1cce2125dd8d19c22330c928">Guid</a>(<a class="code hl_struct" href="structhelios_1_1util_1_1no__init__t.html">no_init_t</a>) {};</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"></span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">         * @brief Compares two Guid instances for equality.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">export</span> <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehelios_1_1util.html">helios::util</a> {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"></span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">    /**</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">     * @brief Representative of a Globally Unique Identifier.</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">     * Generating GUIDs with this class is considered thread-safe.</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">     */</span></div>
+<div class="foldopen" id="foldopen00023" data-start="{" data-end="};">
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Guid.html">   23</a></span>    <span class="keyword">class </span>Guid final {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keyword">explicit</span> Guid(uint64_t <a class="code hl_function" href="classhelios_1_1util_1_1Guid.html#a42652f894bf300b8d3060a1d8352458c">value</a>) noexcept : value_(<a class="code hl_function" href="classhelios_1_1util_1_1Guid.html#a42652f894bf300b8d3060a1d8352458c">value</a>) {}</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        uint64_t value_{};</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"></span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">         * @brief Unsafe Guid initializer for (local) var initialization.</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Guid.html#af6c85441262879332ee3ef017a326eb6">   33</a></span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classhelios_1_1util_1_1Guid.html#af6c85441262879332ee3ef017a326eb6">Guid</a>(<a class="code hl_struct" href="structhelios_1_1core_1_1types_1_1no__init__t.html">helios::core::types::no_init_t</a>) {};</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"></span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">         * @brief Compares two Guid instances for equality.</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">         * @param guid The Guid to compare against.</span></div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">         * @param guid The Guid to compare against.</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">         * @return `true` if both Guids have the same underlying value, `false` otherwise.</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Guid.html#a56c29dc3db8911269e868b4581e621ec">   44</a></span>        <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1util_1_1Guid.html#a56c29dc3db8911269e868b4581e621ec">operator==</a>(<span class="keyword">const</span> Guid&amp; guid) <span class="keyword">const</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"></span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">         * @brief Compares two Guid instances for inequality.</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">         * @return `true` if both Guids have the same underlying value, `false` otherwise.</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Guid.html#a56c29dc3db8911269e868b4581e621ec">   42</a></span>        <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1util_1_1Guid.html#a56c29dc3db8911269e868b4581e621ec">operator==</a>(<span class="keyword">const</span> Guid&amp; guid) <span class="keyword">const</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment"></span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">         * @brief Compares two Guid instances for inequality.</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">         * @param guid The Guid to compare against.</span></div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">         * @param guid The Guid to compare against.</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">         * @return `true` if the Guids have different underlying values, `false` otherwise.</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Guid.html#a2978dd83ba248095e02b05d8a33271d0">   53</a></span>        <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1util_1_1Guid.html#a2978dd83ba248095e02b05d8a33271d0">operator!=</a>(<span class="keyword">const</span> Guid&amp; guid) <span class="keyword">const</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment"></span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">         * @brief Less-than comparison operator, enabling ordering of Guid instances.</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">         * @return `true` if the Guids have different underlying values, `false` otherwise.</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">         */</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Guid.html#a2978dd83ba248095e02b05d8a33271d0">   51</a></span>        <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1util_1_1Guid.html#a2978dd83ba248095e02b05d8a33271d0">operator!=</a>(<span class="keyword">const</span> Guid&amp; guid) <span class="keyword">const</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment"></span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">         * @brief Less-than comparison operator, enabling ordering of Guid instances.</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">         * @param guid The Guid to compare against.</span></div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">         * @param guid The Guid to compare against.</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">         * @return `true` if this Guid&#39;s value is less than the other, `false` otherwise.</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00062" data-start="{" data-end="}">
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Guid.html#a7d0970d3c0663ba7305297a3bf80ea98">   62</a></span>        <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1util_1_1Guid.html#a7d0970d3c0663ba7305297a3bf80ea98">operator&lt;</a>(<span class="keyword">const</span> Guid&amp; guid) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <span class="keywordflow">return</span> value_ &lt; guid.value();</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        }</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">         * @return `true` if this Guid&#39;s value is less than the other, `false` otherwise.</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00060" data-start="{" data-end="}">
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Guid.html#a7d0970d3c0663ba7305297a3bf80ea98">   60</a></span>        <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1util_1_1Guid.html#a7d0970d3c0663ba7305297a3bf80ea98">operator&lt;</a>(<span class="keyword">const</span> Guid&amp; guid) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            <span class="keywordflow">return</span> value_ &lt; guid.value();</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        }</div>
 </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment"></span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">         * @brief Greater-than comparison operator, enabling ordering of Guid instances.</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment"></span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">         * @brief Greater-than comparison operator, enabling ordering of Guid instances.</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">         * @param guid The Guid to compare against.</span></div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">         * @param guid The Guid to compare against.</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">         * @return `true` if this Guid&#39;s value is greater than the other, `false` otherwise.</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00073" data-start="{" data-end="}">
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Guid.html#a8e11af4b0525df68918a3f3e8d2726af">   73</a></span>        <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1util_1_1Guid.html#a8e11af4b0525df68918a3f3e8d2726af">operator&gt;</a>(<span class="keyword">const</span> Guid&amp; guid) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            <span class="keywordflow">return</span> value_ &gt; guid.value();</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        }</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">         * @return `true` if this Guid&#39;s value is greater than the other, `false` otherwise.</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00071" data-start="{" data-end="}">
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Guid.html#a8e11af4b0525df68918a3f3e8d2726af">   71</a></span>        <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classhelios_1_1util_1_1Guid.html#a8e11af4b0525df68918a3f3e8d2726af">operator&gt;</a>(<span class="keyword">const</span> Guid&amp; guid) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            <span class="keywordflow">return</span> value_ &gt; guid.value();</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        }</div>
 </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment"></span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">         * @brief Generates a new Guid.</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">         * This function produces a new, unique Guid value. It is safe to call from</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">         * multiple threads.</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">         * @return A newly generated `Guid` instance.</span></div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00086" data-start="{" data-end="}">
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Guid.html#abec6ac186114474b23bfb8369e4080a9">   86</a></span>        <span class="keyword">static</span> Guid <a class="code hl_function" href="classhelios_1_1util_1_1Guid.html#abec6ac186114474b23bfb8369e4080a9">generate</a>() noexcept {</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            <span class="keyword">static</span> std::atomic&lt;uint64_t&gt; counter{1};</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            <span class="keywordflow">return</span> Guid(counter.fetch_add(1, std::memory_order_relaxed));</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        }</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment"></span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">         * @brief Generates a new Guid.</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">         * This function produces a new, unique Guid value. It is safe to call from</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">         * multiple threads.</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">         * @return A newly generated `Guid` instance.</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00084" data-start="{" data-end="}">
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Guid.html#abec6ac186114474b23bfb8369e4080a9">   84</a></span>        <span class="keyword">static</span> Guid <a class="code hl_function" href="classhelios_1_1util_1_1Guid.html#abec6ac186114474b23bfb8369e4080a9">generate</a>() noexcept {</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            <span class="keyword">static</span> std::atomic&lt;uint64_t&gt; counter{1};</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            <span class="keywordflow">return</span> Guid(counter.fetch_add(1, std::memory_order_relaxed));</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        }</div>
 </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment"></span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">         * @brief Returns the raw 64-bit value of this Guid.</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">         * @return The underlying uint64_t value representing this Guid.</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00096" data-start="{" data-end="}">
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Guid.html#a42652f894bf300b8d3060a1d8352458c">   96</a></span>        [[nodiscard]] <span class="keyword">constexpr</span> uint64_t <a class="code hl_function" href="classhelios_1_1util_1_1Guid.html#a42652f894bf300b8d3060a1d8352458c">value</a>() const noexcept {</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            <span class="keywordflow">return</span> value_;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        }</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment"></span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">         * @brief Returns the raw 64-bit value of this Guid.</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">         * @return The underlying uint64_t value representing this Guid.</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00094" data-start="{" data-end="}">
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Guid.html#a42652f894bf300b8d3060a1d8352458c">   94</a></span>        [[nodiscard]] <span class="keyword">constexpr</span> uint64_t <a class="code hl_function" href="classhelios_1_1util_1_1Guid.html#a42652f894bf300b8d3060a1d8352458c">value</a>() const noexcept {</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            <span class="keywordflow">return</span> value_;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        }</div>
 </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment"></span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">        /**</span></div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">         * @brief Calculates a hash fot this GUID.</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment"></span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">        /**</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">         * @brief Calculates a hash fot this GUID.</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">         *</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">         * The hash simply defaults to the value_ of this Guid.</span></div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">         * The hash simply defaults to the value_ of this Guid.</span></div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">         *</span></div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">         * @return The hash value for this Guid.</span></div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">         */</span></div>
-<div class="foldopen" id="foldopen00107" data-start="{" data-end="}">
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Guid.html#a2be0de1a0c0c0d321459531e9b308c34">  107</a></span>        [[nodiscard]] std::size_t <a class="code hl_function" href="classhelios_1_1util_1_1Guid.html#a2be0de1a0c0c0d321459531e9b308c34">hash</a>() const noexcept {</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            <span class="keywordflow">return</span> std::hash&lt;uint64_t&gt;{}(value_);</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        }</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">         * @return The hash value for this Guid.</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">         */</span></div>
+<div class="foldopen" id="foldopen00105" data-start="{" data-end="}">
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="classhelios_1_1util_1_1Guid.html#a2be0de1a0c0c0d321459531e9b308c34">  105</a></span>        [[nodiscard]] std::size_t <a class="code hl_function" href="classhelios_1_1util_1_1Guid.html#a2be0de1a0c0c0d321459531e9b308c34">hash</a>() const noexcept {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            <span class="keywordflow">return</span> std::hash&lt;uint64_t&gt;{}(value_);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        }</div>
+</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    };</div>
 </div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    };</div>
-</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>} <span class="comment">// namespace helios::util</span></div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>} <span class="comment">// namespace helios::util</span></div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="keyword">template</span>&lt;&gt;</div>
-<div class="foldopen" id="foldopen00117" data-start="{" data-end="};">
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4.html">  117</a></span><span class="keyword">struct </span>std::hash&lt;<a class="code hl_namespace" href="namespacehelios.html">helios</a>::util::Guid&gt; {</div>
-<div class="foldopen" id="foldopen00118" data-start="{" data-end="}">
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4.html#a60abc24fa057aaf88b4ee94437da80bf">  118</a></span>    std::size_t <a class="code hl_function" href="structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4.html#a60abc24fa057aaf88b4ee94437da80bf">operator()</a>(<span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</a>&amp; guid) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        <span class="keywordflow">return</span> guid.hash();</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    }</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="keyword">template</span>&lt;&gt;</div>
+<div class="foldopen" id="foldopen00115" data-start="{" data-end="};">
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4.html">  115</a></span><span class="keyword">struct </span>std::hash&lt;<a class="code hl_namespace" href="namespacehelios.html">helios</a>::util::Guid&gt; {</div>
+<div class="foldopen" id="foldopen00116" data-start="{" data-end="}">
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4.html#a60abc24fa057aaf88b4ee94437da80bf">  116</a></span>    std::size_t <a class="code hl_function" href="structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4.html#a60abc24fa057aaf88b4ee94437da80bf">operator()</a>(<span class="keyword">const</span> <a class="code hl_class" href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</a>&amp; guid) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="keywordflow">return</span> guid.hash();</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    }</div>
 </div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>};</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>};</div>
 </div>
-<div class="ttc" id="aclasshelios_1_1util_1_1Guid_html"><div class="ttname"><a href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</a></div><div class="ttdoc">Representative of a Globally Unique Identifier.</div><div class="ttdef"><b>Definition</b> <a href="#l00025">Guid.ixx:25</a></div></div>
+<div class="ttc" id="aclasshelios_1_1util_1_1Guid_html"><div class="ttname"><a href="classhelios_1_1util_1_1Guid.html">helios::util::Guid</a></div><div class="ttdoc">Representative of a Globally Unique Identifier.</div><div class="ttdef"><b>Definition</b> <a href="#l00023">Guid.ixx:23</a></div></div>
 <div class="ttc" id="aclasshelios_1_1util_1_1Guid_html_a2978dd83ba248095e02b05d8a33271d0"><div class="ttname"><a href="classhelios_1_1util_1_1Guid.html#a2978dd83ba248095e02b05d8a33271d0">helios::util::Guid::operator!=</a></div><div class="ttdeci">constexpr bool operator!=(const Guid &amp;guid) const =default</div><div class="ttdoc">Compares two Guid instances for inequality.</div></div>
-<div class="ttc" id="aclasshelios_1_1util_1_1Guid_html_a2be0de1a0c0c0d321459531e9b308c34"><div class="ttname"><a href="classhelios_1_1util_1_1Guid.html#a2be0de1a0c0c0d321459531e9b308c34">helios::util::Guid::hash</a></div><div class="ttdeci">std::size_t hash() const noexcept</div><div class="ttdoc">Calculates a hash fot this GUID.</div><div class="ttdef"><b>Definition</b> <a href="#l00107">Guid.ixx:107</a></div></div>
-<div class="ttc" id="aclasshelios_1_1util_1_1Guid_html_a42652f894bf300b8d3060a1d8352458c"><div class="ttname"><a href="classhelios_1_1util_1_1Guid.html#a42652f894bf300b8d3060a1d8352458c">helios::util::Guid::value</a></div><div class="ttdeci">constexpr uint64_t value() const noexcept</div><div class="ttdoc">Returns the raw 64-bit value of this Guid.</div><div class="ttdef"><b>Definition</b> <a href="#l00096">Guid.ixx:96</a></div></div>
+<div class="ttc" id="aclasshelios_1_1util_1_1Guid_html_a2be0de1a0c0c0d321459531e9b308c34"><div class="ttname"><a href="classhelios_1_1util_1_1Guid.html#a2be0de1a0c0c0d321459531e9b308c34">helios::util::Guid::hash</a></div><div class="ttdeci">std::size_t hash() const noexcept</div><div class="ttdoc">Calculates a hash fot this GUID.</div><div class="ttdef"><b>Definition</b> <a href="#l00105">Guid.ixx:105</a></div></div>
+<div class="ttc" id="aclasshelios_1_1util_1_1Guid_html_a42652f894bf300b8d3060a1d8352458c"><div class="ttname"><a href="classhelios_1_1util_1_1Guid.html#a42652f894bf300b8d3060a1d8352458c">helios::util::Guid::value</a></div><div class="ttdeci">constexpr uint64_t value() const noexcept</div><div class="ttdoc">Returns the raw 64-bit value of this Guid.</div><div class="ttdef"><b>Definition</b> <a href="#l00094">Guid.ixx:94</a></div></div>
 <div class="ttc" id="aclasshelios_1_1util_1_1Guid_html_a56c29dc3db8911269e868b4581e621ec"><div class="ttname"><a href="classhelios_1_1util_1_1Guid.html#a56c29dc3db8911269e868b4581e621ec">helios::util::Guid::operator==</a></div><div class="ttdeci">constexpr bool operator==(const Guid &amp;guid) const =default</div><div class="ttdoc">Compares two Guid instances for equality.</div></div>
-<div class="ttc" id="aclasshelios_1_1util_1_1Guid_html_a7d0970d3c0663ba7305297a3bf80ea98"><div class="ttname"><a href="classhelios_1_1util_1_1Guid.html#a7d0970d3c0663ba7305297a3bf80ea98">helios::util::Guid::operator&lt;</a></div><div class="ttdeci">constexpr bool operator&lt;(const Guid &amp;guid) const noexcept</div><div class="ttdoc">Less-than comparison operator, enabling ordering of Guid instances.</div><div class="ttdef"><b>Definition</b> <a href="#l00062">Guid.ixx:62</a></div></div>
-<div class="ttc" id="aclasshelios_1_1util_1_1Guid_html_a8e11af4b0525df68918a3f3e8d2726af"><div class="ttname"><a href="classhelios_1_1util_1_1Guid.html#a8e11af4b0525df68918a3f3e8d2726af">helios::util::Guid::operator&gt;</a></div><div class="ttdeci">constexpr bool operator&gt;(const Guid &amp;guid) const noexcept</div><div class="ttdoc">Greater-than comparison operator, enabling ordering of Guid instances.</div><div class="ttdef"><b>Definition</b> <a href="#l00073">Guid.ixx:73</a></div></div>
-<div class="ttc" id="aclasshelios_1_1util_1_1Guid_html_a9ac7d9af1cce2125dd8d19c22330c928"><div class="ttname"><a href="classhelios_1_1util_1_1Guid.html#a9ac7d9af1cce2125dd8d19c22330c928">helios::util::Guid::Guid</a></div><div class="ttdeci">Guid(no_init_t)</div><div class="ttdoc">Unsafe Guid initializer for (local) var initialization.</div><div class="ttdef"><b>Definition</b> <a href="#l00035">Guid.ixx:35</a></div></div>
-<div class="ttc" id="aclasshelios_1_1util_1_1Guid_html_abec6ac186114474b23bfb8369e4080a9"><div class="ttname"><a href="classhelios_1_1util_1_1Guid.html#abec6ac186114474b23bfb8369e4080a9">helios::util::Guid::generate</a></div><div class="ttdeci">static Guid generate() noexcept</div><div class="ttdoc">Generates a new Guid.</div><div class="ttdef"><b>Definition</b> <a href="#l00086">Guid.ixx:86</a></div></div>
+<div class="ttc" id="aclasshelios_1_1util_1_1Guid_html_a7d0970d3c0663ba7305297a3bf80ea98"><div class="ttname"><a href="classhelios_1_1util_1_1Guid.html#a7d0970d3c0663ba7305297a3bf80ea98">helios::util::Guid::operator&lt;</a></div><div class="ttdeci">constexpr bool operator&lt;(const Guid &amp;guid) const noexcept</div><div class="ttdoc">Less-than comparison operator, enabling ordering of Guid instances.</div><div class="ttdef"><b>Definition</b> <a href="#l00060">Guid.ixx:60</a></div></div>
+<div class="ttc" id="aclasshelios_1_1util_1_1Guid_html_a8e11af4b0525df68918a3f3e8d2726af"><div class="ttname"><a href="classhelios_1_1util_1_1Guid.html#a8e11af4b0525df68918a3f3e8d2726af">helios::util::Guid::operator&gt;</a></div><div class="ttdeci">constexpr bool operator&gt;(const Guid &amp;guid) const noexcept</div><div class="ttdoc">Greater-than comparison operator, enabling ordering of Guid instances.</div><div class="ttdef"><b>Definition</b> <a href="#l00071">Guid.ixx:71</a></div></div>
+<div class="ttc" id="aclasshelios_1_1util_1_1Guid_html_abec6ac186114474b23bfb8369e4080a9"><div class="ttname"><a href="classhelios_1_1util_1_1Guid.html#abec6ac186114474b23bfb8369e4080a9">helios::util::Guid::generate</a></div><div class="ttdeci">static Guid generate() noexcept</div><div class="ttdoc">Generates a new Guid.</div><div class="ttdef"><b>Definition</b> <a href="#l00084">Guid.ixx:84</a></div></div>
+<div class="ttc" id="aclasshelios_1_1util_1_1Guid_html_af6c85441262879332ee3ef017a326eb6"><div class="ttname"><a href="classhelios_1_1util_1_1Guid.html#af6c85441262879332ee3ef017a326eb6">helios::util::Guid::Guid</a></div><div class="ttdeci">Guid(helios::core::types::no_init_t)</div><div class="ttdoc">Unsafe Guid initializer for (local) var initialization.</div><div class="ttdef"><b>Definition</b> <a href="#l00033">Guid.ixx:33</a></div></div>
+<div class="ttc" id="amodule__helios_8core_8types_html"><div class="ttname"><a href="module__helios_8core_8types.html">helios.core.types</a></div></div>
 <div class="ttc" id="amodule__helios_8util_8Guid_html"><div class="ttname"><a href="module__helios_8util_8Guid.html">helios.util.Guid</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1util_html"><div class="ttname"><a href="namespacehelios_1_1util.html">helios::util</a></div><div class="ttdoc">Utility functions and helper classes.</div><div class="ttdef"><b>Definition</b> <a href="Colors_8ixx_source.html#l00009">Colors.ixx:9</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1util_html_a823ac3cd0195df65873156bc76284364"><div class="ttname"><a href="namespacehelios_1_1util.html#a823ac3cd0195df65873156bc76284364">helios::util::no_init</a></div><div class="ttdeci">constexpr no_init_t no_init</div><div class="ttdef"><b>Definition</b> <a href="#l00018">Guid.ixx:18</a></div></div>
-<div class="ttc" id="anamespacehelios_html"><div class="ttname"><a href="namespacehelios.html">helios</a></div><div class="ttdef"><b>Definition</b> <a href="GLFWApplication_8ixx_source.html#l00025">GLFWApplication.ixx:25</a></div></div>
-<div class="ttc" id="astructhelios_1_1util_1_1no__init__t_html"><div class="ttname"><a href="structhelios_1_1util_1_1no__init__t.html">helios::util::no_init_t</a></div><div class="ttdef"><b>Definition</b> <a href="#l00016">Guid.ixx:16</a></div></div>
-<div class="ttc" id="astructstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4_html_a60abc24fa057aaf88b4ee94437da80bf"><div class="ttname"><a href="structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4.html#a60abc24fa057aaf88b4ee94437da80bf">std::hash&lt; helios::util::Guid &gt;::operator()</a></div><div class="ttdeci">std::size_t operator()(const helios::util::Guid &amp;guid) const noexcept</div><div class="ttdef"><b>Definition</b> <a href="#l00118">Guid.ixx:118</a></div></div>
+<div class="ttc" id="anamespacehelios_html"><div class="ttname"><a href="namespacehelios.html">helios</a></div><div class="ttdef"><b>Definition</b> <a href="GLFWApplication_8ixx_source.html#l00029">GLFWApplication.ixx:29</a></div></div>
+<div class="ttc" id="astructhelios_1_1core_1_1types_1_1no__init__t_html"><div class="ttname"><a href="structhelios_1_1core_1_1types_1_1no__init__t.html">helios::core::types::no_init_t</a></div><div class="ttdoc">Tag type used to indicate skipping default initialization.</div><div class="ttdef"><b>Definition</b> <a href="types_8ixx_source.html#l00045">types.ixx:45</a></div></div>
+<div class="ttc" id="astructstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4_html_a60abc24fa057aaf88b4ee94437da80bf"><div class="ttname"><a href="structstd_1_1hash_3_01helios_1_1util_1_1Guid_01_4.html#a60abc24fa057aaf88b4ee94437da80bf">std::hash&lt; helios::util::Guid &gt;::operator()</a></div><div class="ttdeci">std::size_t operator()(const helios::util::Guid &amp;guid) const noexcept</div><div class="ttdef"><b>Definition</b> <a href="#l00116">Guid.ixx:116</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_08c09894bd9f0ab4b1e9fdc7a2628766.html">helios</a></li><li class="navelem"><a href="dir_7f0768799dd37ef2f2adcdfec91ab1e9.html">util</a></li><li class="navelem"><a href="Guid_8ixx.html">Guid.ixx</a></li>
+    <li class="navelem"><a href="dir_8af83c0dc83a45a35ca6968cdc29a7af.html">tmp</a></li><li class="navelem"><a href="dir_25ba8c016aaabea63a88c40dc27775c8.html">h</a></li><li class="navelem"><a href="dir_b3f59628e993ded3576abd1cf1101eb8.html">include</a></li><li class="navelem"><a href="dir_1ac1243035b4576c146b8d2c8a6274f6.html">helios</a></li><li class="navelem"><a href="dir_3e2f71566425d27b6ac8140f1223a941.html">util</a></li><li class="navelem"><a href="Guid_8ixx.html">Guid.ixx</a></li>
     <li class="footer">Generated on <span class="timestamp"></span> for helios by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

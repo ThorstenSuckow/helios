@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dir_918a2537f64cade110d64935620958ab" kind="dir">
+    <compoundname>builders</compoundname>
+    <innerdir refid="dir_c01646dfa756089b07ac7b4e7ae63e35">configs</innerdir>
+    <innerfile refid="helios_2engine_2builder_2gameObject_2builders_2__module_8ixx">helios/engine/builder/gameObject/builders/_module.ixx</innerfile>
+    <innerfile refid="AiBuilder_8ixx">AiBuilder.ixx</innerfile>
+    <innerfile refid="CollisionBuilder_8ixx">CollisionBuilder.ixx</innerfile>
+    <innerfile refid="EffectsBuilder_8ixx">EffectsBuilder.ixx</innerfile>
+    <innerfile refid="LifecycleBuilder_8ixx">LifecycleBuilder.ixx</innerfile>
+    <innerfile refid="MotionBuilder_8ixx">MotionBuilder.ixx</innerfile>
+    <innerfile refid="RenderingBuilder_8ixx">RenderingBuilder.ixx</innerfile>
+    <innerfile refid="SceneBuilder_8ixx">SceneBuilder.ixx</innerfile>
+    <innerfile refid="ShootingBuilder_8ixx">ShootingBuilder.ixx</innerfile>
+    <innerfile refid="SpawnBuilder_8ixx">SpawnBuilder.ixx</innerfile>
+    <innerfile refid="TransformBuilder_8ixx">TransformBuilder.ixx</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="dir_918a2537f64cade110d64935620958ab_1autotoc_md72">
+<title>helios::engine::builder::gameObject::builders</title><para>Domain-specific builders for configuring different aspects of GameObjects.</para>
+</sect1>
+<sect1 id="dir_918a2537f64cade110d64935620958ab_1autotoc_md73">
+<title>Overview</title><para>Each builder encapsulates a specific domain of entity configuration. Builders provide methods that return fine-grained config objects, which in turn add and configure the appropriate components on the target GameObject.</para>
+</sect1>
+<sect1 id="dir_918a2537f64cade110d64935620958ab_1autotoc_md74">
+<title>Builders</title><para><table rows="11" cols="3"><row>
+<entry thead="yes"><para>Builder  </para>
+</entry><entry thead="yes"><para>Domain  </para>
+</entry><entry thead="yes"><para>Configs Provided  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>MotionBuilder</computeroutput>  </para>
+</entry><entry thead="no"><para>Movement  </para>
+</entry><entry thead="no"><para><computeroutput>Move2DConfig</computeroutput>, <computeroutput>SteeringConfig</computeroutput>  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>RenderingBuilder</computeroutput>  </para>
+</entry><entry thead="no"><para>Visuals  </para>
+</entry><entry thead="no"><para><computeroutput>RenderableConfig</computeroutput>, <computeroutput>SceneNodeConfig</computeroutput>  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SceneBuilder</computeroutput>  </para>
+</entry><entry thead="no"><para>Scene Graph  </para>
+</entry><entry thead="no"><para><computeroutput>SceneNodeConfig</computeroutput>  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>CollisionBuilder</computeroutput>  </para>
+</entry><entry thead="no"><para>Physics  </para>
+</entry><entry thead="no"><para><computeroutput>CollisionConfig</computeroutput>, <computeroutput>LevelBoundsCollisionConfig</computeroutput>  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>TransformBuilder</computeroutput>  </para>
+</entry><entry thead="no"><para>Spatial  </para>
+</entry><entry thead="no"><para><computeroutput>TransformConfig</computeroutput>  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>EffectsBuilder</computeroutput>  </para>
+</entry><entry thead="no"><para>VFX  </para>
+</entry><entry thead="no"><para><computeroutput>GfxEffectsConfig</computeroutput>  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>SpawnBuilder</computeroutput>  </para>
+</entry><entry thead="no"><para>Spawning  </para>
+</entry><entry thead="no"><para><computeroutput>SpawnConfig</computeroutput>  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>AiBuilder</computeroutput>  </para>
+</entry><entry thead="no"><para>AI  </para>
+</entry><entry thead="no"><para><computeroutput>ChaseConfig</computeroutput>  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>ShootingBuilder</computeroutput>  </para>
+</entry><entry thead="no"><para>Combat  </para>
+</entry><entry thead="no"><para><computeroutput>WeaponConfig</computeroutput>  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput>LifecycleBuilder</computeroutput>  </para>
+</entry><entry thead="no"><para>Lifecycle  </para>
+</entry><entry thead="no"><para><computeroutput>LifecycleConfig</computeroutput>  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="dir_918a2537f64cade110d64935620958ab_1autotoc_md75">
+<title>Usage Pattern</title><para>Each builder follows the same pattern:</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="normal">prototype.withMotion([](MotionBuilder&amp;<sp/>builder)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>builder.move2D()<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Returns<sp/>Move2DConfig</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.speed(5.0f)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.acceleration(10.0f);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>builder.steering()<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Returns<sp/>SteeringConfig</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.instantSteering(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal">});</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_918a2537f64cade110d64935620958ab_1autotoc_md76">
+<title>Architecture</title><para><programlisting><codeline><highlight class="normal">┌─────────────────────────────────────────────────────────────┐</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Builder<sp/>(e.g.<sp/>MotionBuilder)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>┌─────────────────────────────────────────────────────────┐│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>GameObject*<sp/>gameObject_<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>├─────────────────────────────────────────────────────────┤│</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>move2D()<sp/><sp/><sp/><sp/><sp/>→<sp/>Move2DConfig{gameObject_}<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>│<sp/>steering()<sp/><sp/><sp/>→<sp/>SteeringConfig{gameObject_}<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>││</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/>└─────────────────────────────────────────────────────────┘│</highlight></codeline>
+<codeline><highlight class="normal">└─────────────────────────────────────────────────────────────┘</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="dir_918a2537f64cade110d64935620958ab_1autotoc_md77">
+<title>Related Modules</title><para><table rows="4" cols="2"><row>
+<entry thead="yes"><para>Module  </para>
+</entry><entry thead="yes"><para>Purpose  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1builder_1_1gameObject_1_1builders_1_1configs" kindref="compound">helios.engine.builder.gameObject.builders.configs</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>Config classes  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1modules" kindref="compound">helios.engine.modules</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>Component implementations  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><computeroutput><ref refid="namespacehelios_1_1engine_1_1mechanics" kindref="compound">helios.engine.mechanics</ref></computeroutput>  </para>
+</entry><entry thead="no"><para>Gameplay components  </para>
+</entry></row>
+</table>
+</para>
+<para><hruler/>
+</para>
+<para><details><summary>Doxygen</summary><para></para>
+<para></para>
+</details></para>
+</sect1>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/builder/gameObject/builders/"/>
+  </compounddef>
+</doxygen>

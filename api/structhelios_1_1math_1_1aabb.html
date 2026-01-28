@@ -128,6 +128,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a78c11f960ab2cd331e354bd274c85a27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the size of the AABB over all axes.  <br /></td></tr>
 <tr class="memitem:ab2281d98a7cb28b46ce163d96a2f4469" id="r_ab2281d98a7cb28b46ce163d96a2f4469"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab2281d98a7cb28b46ce163d96a2f4469">contains</a> (const <a class="el" href="structhelios_1_1math_1_1aabb.html">helios::math::aabb</a>&lt; T &gt; &amp;box) const noexcept</td></tr>
 <tr class="memdesc:ab2281d98a7cb28b46ce163d96a2f4469"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this AABB fully contains another AABB.  <br /></td></tr>
+<tr class="memitem:ac80d09d427091a95fd83ac30cc1196cc" id="r_ac80d09d427091a95fd83ac30cc1196cc"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac80d09d427091a95fd83ac30cc1196cc">contains</a> (const <a class="el" href="structhelios_1_1math_1_1vec3.html">helios::math::vec3</a>&lt; T &gt; &amp;point) const noexcept</td></tr>
 <tr class="memitem:ade126b97a45a33942359c01b5f268c24" id="r_ade126b97a45a33942359c01b5f268c24"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ade126b97a45a33942359c01b5f268c24">intersects</a> (const <a class="el" href="structhelios_1_1math_1_1aabb.html">helios::math::aabb</a>&lt; T &gt; &amp;box) const noexcept</td></tr>
 <tr class="memdesc:ade126b97a45a33942359c01b5f268c24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this AABB intersects or touches another AABB.  <br /></td></tr>
 <tr class="memitem:ab6aadb560a2c8ee5dd381592b653578b" id="r_ab6aadb560a2c8ee5dd381592b653578b"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="structhelios_1_1math_1_1aabb.html">helios::math::aabb</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab6aadb560a2c8ee5dd381592b653578b">translate</a> (const <a class="el" href="structhelios_1_1math_1_1vec3.html">helios::math::vec3</a>&lt; T &gt; &amp;v) const noexcept</td></tr>
@@ -152,7 +153,7 @@ struct helios::math::aabb&lt; T &gt;</div><p>Axis-Aligned Bounding Box for spati
 <dd>
 [DP11, pp. 304-311] Dunn, F., &amp; Parberry, I. (2011). 3D Math Primer for Graphics and Game Development </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00033">33</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00034">34</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa503a6e73ae299cc5e2cef2fe2513857" name="aa503a6e73ae299cc5e2cef2fe2513857"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa503a6e73ae299cc5e2cef2fe2513857">&#9670;&#160;</a></span>aabb() <span class="overload">[1/3]</span></h2>
@@ -182,9 +183,9 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
 <p>Constructs an empty AABB with inverted min/max values. </p>
 <p>The AABB is initialized with min set to the maximum representable value and max set to the minimum representable value. This allows the first `add()` call to properly establish the initial bounds. </p>
 
-<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00059">59</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00060">60</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="aabb_8ixx_source.html#l00222">helios::math::aabb&lt; float &gt;::applyTransform()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="aabb_8ixx_source.html#l00235">helios::math::aabb&lt; float &gt;::applyTransform()</a>.</p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
@@ -256,7 +257,7 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00074">74</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00075">75</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
 
 </div>
 </div>
@@ -298,7 +299,7 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00085">85</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00086">86</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
 
 </div>
 </div>
@@ -340,7 +341,7 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00196">196</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00209">209</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
 
 </div>
 </div>
@@ -381,7 +382,7 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
 <dl class="section return"><dt>Returns</dt><dd>A new AABB that fully contains the transformed bounding box.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd>[Gla95, pp. 548-550] "Transforming Axis-Aligned Bounding Boxes" by James Arvo </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00222">222</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00235">235</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
 
 </div>
 </div>
@@ -413,12 +414,12 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
 <p>Computes the center point of the AABB. </p>
 <dl class="section return"><dt>Returns</dt><dd>The center point, calculated as `(min + max) / 2`. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00113">113</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00114">114</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
 
 </div>
 </div>
 <a id="ab2281d98a7cb28b46ce163d96a2f4469" name="ab2281d98a7cb28b46ce163d96a2f4469"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab2281d98a7cb28b46ce163d96a2f4469">&#9670;&#160;</a></span>contains()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2281d98a7cb28b46ce163d96a2f4469">&#9670;&#160;</a></span>contains() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -452,7 +453,52 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the specified box is fully contained within this AABB, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00136">136</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00137">137</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="AxisSpawnPlacer_8ixx_source.html#l00105">helios::engine::runtime::spawn::behavior::placements::AxisSpawnPlacer::getPosition()</a>.</p>
+<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structhelios_1_1math_1_1aabb_ab2281d98a7cb28b46ce163d96a2f4469_icgraph.svg" width="424" height="66"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ac80d09d427091a95fd83ac30cc1196cc" name="ac80d09d427091a95fd83ac30cc1196cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac80d09d427091a95fd83ac30cc1196cc">&#9670;&#160;</a></span>contains() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::math::Numeric</a> T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="structhelios_1_1math_1_1aabb.html">helios::math::aabb</a>&lt; T &gt;::contains </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structhelios_1_1math_1_1vec3.html">helios::math::vec3</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>point</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Checks if this AABB fully contains the specified point.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">point</td><td>The <a class="el" href="structhelios_1_1math_1_1vec3.html" title="Represents a 3-dimensional vector of the generic type &lt;T&gt;.">vec3</a> to test for containment.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the specified point is fully contained within this AABB, otherwise false. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00154">154</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
 
 </div>
 </div>
@@ -490,13 +536,13 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the specified box intersects this AABB, false otherwise. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00153">153</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00166">166</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="GridCollisionDetectionSystem_8ixx_source.html#l00546">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::solveCell()</a>.</p>
-<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="GridCollisionDetectionSystem_8ixx_source.html#l00561">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::solveCell()</a>.</p>
+<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
 <div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="structhelios_1_1math_1_1aabb_ade126b97a45a33942359c01b5f268c24_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
@@ -530,14 +576,14 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
 <p>Returns the maximum corner point of the AABB. </p>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the maximum corner point. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00104">104</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00105">105</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="RandomSpawnPlacer_8ixx_source.html#l00043">helios::engine::runtime::spawn::behavior::placements::RandomSpawnPlacer::getPosition()</a>, <a class="el" href="aabb_8ixx_source.html#l00350">helios::math::operator*()</a>, <a class="el" href="GridCollisionDetectionSystem_8ixx_source.html#l00495">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::updateCollisionCandidate()</a>, and <a class="el" href="GridCollisionDetectionSystem_8ixx_source.html#l00460">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::worldBoundsToGridBounds()</a>.</p>
-<div id="dynsection-2" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="AxisSpawnPlacer_8ixx_source.html#l00105">helios::engine::runtime::spawn::behavior::placements::AxisSpawnPlacer::getPosition()</a>, <a class="el" href="ColumnSpawnPlacer_8ixx_source.html#l00061">helios::engine::runtime::spawn::behavior::placements::ColumnSpawnPlacer::getPosition()</a>, <a class="el" href="RandomSpawnPlacer_8ixx_source.html#l00044">helios::engine::runtime::spawn::behavior::placements::RandomSpawnPlacer::getPosition()</a>, <a class="el" href="aabb_8ixx_source.html#l00363">helios::math::operator*()</a>, <a class="el" href="GridCollisionDetectionSystem_8ixx_source.html#l00510">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::updateCollisionCandidate()</a>, and <a class="el" href="GridCollisionDetectionSystem_8ixx_source.html#l00475">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::worldBoundsToGridBounds()</a>.</p>
+<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="structhelios_1_1math_1_1aabb_aa5836a6c13c4a5ddd421adb3a168970e_icgraph.svg" width="100%" height="527"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="structhelios_1_1math_1_1aabb_aa5836a6c13c4a5ddd421adb3a168970e_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -570,14 +616,14 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
 <p>Returns the minimum corner point of the AABB. </p>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the minimum corner point. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00095">95</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00096">96</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="RandomSpawnPlacer_8ixx_source.html#l00043">helios::engine::runtime::spawn::behavior::placements::RandomSpawnPlacer::getPosition()</a>, <a class="el" href="aabb_8ixx_source.html#l00350">helios::math::operator*()</a>, <a class="el" href="GridCollisionDetectionSystem_8ixx_source.html#l00495">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::updateCollisionCandidate()</a>, and <a class="el" href="GridCollisionDetectionSystem_8ixx_source.html#l00460">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::worldBoundsToGridBounds()</a>.</p>
-<div id="dynsection-3" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="AxisSpawnPlacer_8ixx_source.html#l00105">helios::engine::runtime::spawn::behavior::placements::AxisSpawnPlacer::getPosition()</a>, <a class="el" href="ColumnSpawnPlacer_8ixx_source.html#l00061">helios::engine::runtime::spawn::behavior::placements::ColumnSpawnPlacer::getPosition()</a>, <a class="el" href="RandomSpawnPlacer_8ixx_source.html#l00044">helios::engine::runtime::spawn::behavior::placements::RandomSpawnPlacer::getPosition()</a>, <a class="el" href="aabb_8ixx_source.html#l00363">helios::math::operator*()</a>, <a class="el" href="GridCollisionDetectionSystem_8ixx_source.html#l00510">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::updateCollisionCandidate()</a>, and <a class="el" href="GridCollisionDetectionSystem_8ixx_source.html#l00475">helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem::worldBoundsToGridBounds()</a>.</p>
+<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="structhelios_1_1math_1_1aabb_ab53ba0c88b465fb3f9e6ae410c3f0b70_icgraph.svg" width="100%" height="527"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="structhelios_1_1math_1_1aabb_ab53ba0c88b465fb3f9e6ae410c3f0b70_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -610,7 +656,15 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
 <p>Computes the size of the AABB over all axes. </p>
 <dl class="section return"><dt>Returns</dt><dd>A vector representing the width, height, and depth of the AABB. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00122">122</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00123">123</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="AxisSpawnPlacer_8ixx_source.html#l00105">helios::engine::runtime::spawn::behavior::placements::AxisSpawnPlacer::getPosition()</a>, and <a class="el" href="ColumnSpawnPlacer_8ixx_source.html#l00061">helios::engine::runtime::spawn::behavior::placements::ColumnSpawnPlacer::getPosition()</a>.</p>
+<div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structhelios_1_1math_1_1aabb_a78c11f960ab2cd331e354bd274c85a27_icgraph.svg" width="446" height="144"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>
@@ -649,20 +703,20 @@ template&lt;<a class="el" href="concepthelios_1_1math_1_1Numeric.html">helios::m
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A new AABB translated by the given vector. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00178">178</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="aabb_8ixx_source.html#l00191">191</a> of file <a class="el" href="aabb_8ixx_source.html">aabb.ixx</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="aabb_8ixx_source.html#l00332">helios::math::operator+()</a>.</p>
-<div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
-<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
+<p class="reference">Referenced by <a class="el" href="AxisSpawnPlacer_8ixx_source.html#l00105">helios::engine::runtime::spawn::behavior::placements::AxisSpawnPlacer::getPosition()</a>, and <a class="el" href="aabb_8ixx_source.html#l00345">helios::math::operator+()</a>.</p>
+<div id="dynsection-6" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-4-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structhelios_1_1math_1_1aabb_ab6aadb560a2c8ee5dd381592b653578b_icgraph.svg" width="379" height="51"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div id="dynsection-6-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structhelios_1_1math_1_1aabb_ab6aadb560a2c8ee5dd381592b653578b_icgraph.svg" width="424" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>include/helios/math/types/<a class="el" href="aabb_8ixx_source.html">aabb.ixx</a></li>
+<li><a class="el" href="aabb_8ixx_source.html">aabb.ixx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

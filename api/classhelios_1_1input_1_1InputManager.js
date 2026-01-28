@@ -9,6 +9,6 @@ var classhelios_1_1input_1_1InputManager =
     [ "observe", "classhelios_1_1input_1_1InputManager.html#a0ad681204f4b9f65189340a0e3b87f28", null ],
     [ "observedWindow", "classhelios_1_1input_1_1InputManager.html#a73ff092ed6634db2dc52d8224700d35f", null ],
     [ "poll", "classhelios_1_1input_1_1InputManager.html#ab46c4ce60870839d557ba3d141964f01", null ],
-    [ "registerGamepads", "classhelios_1_1input_1_1InputManager.html#a138047fd0784a90715758d5e44afea3d", null ],
+    [ "registerGamepads", "classhelios_1_1input_1_1InputManager.html#a50c3854c194f5f40d1e5a724f5512c0c", null ],
     [ "logger_", "classhelios_1_1input_1_1InputManager.html#a29a9dd828ced10e5ddf6cbe757debf97", null ]
 ];

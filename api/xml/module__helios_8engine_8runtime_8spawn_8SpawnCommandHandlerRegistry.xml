@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="module__helios_8engine_8runtime_8spawn_8SpawnCommandHandlerRegistry" kind="module">
+    <compoundname>helios.engine.runtime.spawn.SpawnCommandHandlerRegistry</compoundname>
+    <innerfile refid="SpawnCommandHandlerRegistry_8ixx">SpawnCommandHandlerRegistry.ixx</innerfile>
+    <innerclass refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry" prot="public">helios::engine::runtime::spawn::SpawnCommandHandlerRegistry</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry_1ae5781cbd26fc7a8ab17755c6a9f264b6" prot="protected" static="no" mutable="no">
+        <type>std::unordered_map&lt; <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" kindref="compound">helios::engine::core::data::SpawnProfileId</ref>, <ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler" kindref="compound">helios::engine::runtime::spawn::SpawnCommandHandler</ref> * &gt;</type>
+        <definition>std::unordered_map&lt; helios::engine::core::data::SpawnProfileId, helios::engine::runtime::spawn::SpawnCommandHandler*&gt; helios::engine::runtime::spawn::SpawnCommandHandlerRegistry::registry_</definition>
+        <argsstring></argsstring>
+        <name>registry_</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry::registry_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Map from spawn profile IDs to their handlers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Stores non-owning pointers to handlers. Handlers must outlive this registry. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnCommandHandlerRegistry.ixx" line="49" column="2" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnCommandHandlerRegistry.ixx" bodystart="49" bodyend="49"/>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry_1a6376592ee663798823ba66bb792bae48" compoundref="SpawnCommandHandlerRegistry_8ixx" startline="64" endline="75">helios::engine::runtime::spawn::SpawnCommandHandlerRegistry::add</referencedby>
+        <referencedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry_1a49c0f210a6c9f1c6cb945c8551347721" compoundref="SpawnCommandHandlerRegistry_8ixx" startline="84" endline="93">helios::engine::runtime::spawn::SpawnCommandHandlerRegistry::get</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry_1a451b22ce9df5524b1bd16631210de83c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry::SpawnCommandHandlerRegistry</definition>
+        <argsstring>()=default</argsstring>
+        <name>SpawnCommandHandlerRegistry</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry::SpawnCommandHandlerRegistry</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnCommandHandlerRegistry.ixx" line="54" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry_1a6376592ee663798823ba66bb792bae48" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool helios::engine::runtime::spawn::SpawnCommandHandlerRegistry::add</definition>
+        <argsstring>(const helios::engine::core::data::SpawnProfileId spawnProfileId, helios::engine::runtime::spawn::SpawnCommandHandler &amp;poolManager)</argsstring>
+        <name>add</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry::add</qualifiedname>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" kindref="compound">helios::engine::core::data::SpawnProfileId</ref></type>
+          <declname>spawnProfileId</declname>
+        </param>
+        <param>
+          <type><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler" kindref="compound">helios::engine::runtime::spawn::SpawnCommandHandler</ref> &amp;</type>
+          <declname>poolManager</declname>
+        </param>
+        <briefdescription>
+<para>Registers a handler for a spawn profile ID. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>spawnProfileId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spawn profile ID to register. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>poolManager</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The handler to associate with the pool.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if registration succeeded, false if the ID was already registered. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnCommandHandlerRegistry.ixx" line="64" column="15" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnCommandHandlerRegistry.ixx" bodystart="64" bodyend="75"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry_1ae5781cbd26fc7a8ab17755c6a9f264b6" compoundref="SpawnCommandHandlerRegistry_8ixx" startline="49" endline="49">helios::engine::runtime::spawn::SpawnCommandHandlerRegistry::registry_</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry_1a49c0f210a6c9f1c6cb945c8551347721" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandler" kindref="compound">helios::engine::runtime::spawn::SpawnCommandHandler</ref> *</type>
+        <definition>helios::engine::runtime::spawn::SpawnCommandHandler * helios::engine::runtime::spawn::SpawnCommandHandlerRegistry::get</definition>
+        <argsstring>(helios::engine::core::data::SpawnProfileId spawnProfileId)</argsstring>
+        <name>get</name>
+        <qualifiedname>helios::engine::runtime::spawn::SpawnCommandHandlerRegistry::get</qualifiedname>
+        <param>
+          <type><ref refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" kindref="compound">helios::engine::core::data::SpawnProfileId</ref></type>
+          <declname>spawnProfileId</declname>
+        </param>
+        <briefdescription>
+<para>Retrieves the handler for a spawn profile ID. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>spawnProfileId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spawn profile ID to look up.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the handler if found, nullptr otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnCommandHandlerRegistry.ixx" line="84" column="62" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/SpawnCommandHandlerRegistry.ixx" bodystart="84" bodyend="93"/>
+        <references refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1SpawnCommandHandlerRegistry_1ae5781cbd26fc7a8ab17755c6a9f264b6" compoundref="SpawnCommandHandlerRegistry_8ixx" startline="49" endline="49">helios::engine::runtime::spawn::SpawnCommandHandlerRegistry::registry_</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/engine/runtime/spawn/SpawnCommandHandlerRegistry.ixx" line="11" column="15"/>
+  </compounddef>
+</doxygen>

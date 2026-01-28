@@ -2,7 +2,10 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
   <compounddef id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>helios::engine::runtime::spawn::behavior::SpawnInitializer</compoundname>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1DelayedComponentEnablerInitializer" prot="public" virt="non-virtual">helios::engine::runtime::spawn::behavior::initializers::DelayedComponentEnablerInitializer&lt; ComponentTypes &gt;</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1EmitterInitializer" prot="public" virt="non-virtual">helios::engine::runtime::spawn::behavior::initializers::EmitterInitializer</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1InitializerList" prot="public" virt="non-virtual">helios::engine::runtime::spawn::behavior::initializers::InitializerList&lt; N &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1MoveInitializer" prot="public" virt="non-virtual">helios::engine::runtime::spawn::behavior::initializers::MoveInitializer</derivedcompoundref>
     <derivedcompoundref refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1RandomDirectionInitializer" prot="public" virt="non-virtual">helios::engine::runtime::spawn::behavior::initializers::RandomDirectionInitializer</derivedcompoundref>
     <sectiondef kind="public-func">
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer_1ad5514051aaafea0f164769d695a96991" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
@@ -17,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/runtime/spawn/behavior/SpawnInitializer.ixx" line="55" column="17"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/behavior/SpawnInitializer.ixx" line="55" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer_1a0d6b4e625d18d579ec91ff33da128190" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -25,7 +28,10 @@
         <argsstring>(const helios::engine::ecs::GameObject &amp;gameObject, const SpawnPlanCursor &amp;cursor, const SpawnContext &amp;spawnContext)=0</argsstring>
         <name>initialize</name>
         <qualifiedname>helios::engine::runtime::spawn::behavior::SpawnInitializer::initialize</qualifiedname>
+        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1DelayedComponentEnablerInitializer_1adec2ca03061b3a18ca1c5872eeb909fe">initialize</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1EmitterInitializer_1a618402306c09bcb656c31f39715062a3">initialize</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1InitializerList_1ac1e943d133dc4cf55102bf5f5513af99">initialize</reimplementedby>
+        <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1MoveInitializer_1a382af58de739429d24a401b7c92f4566">initialize</reimplementedby>
         <reimplementedby refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1RandomDirectionInitializer_1acf5624e44f6f9ecdf519610807902bd2">initialize</reimplementedby>
         <param>
           <type>const <ref refid="classhelios_1_1engine_1_1ecs_1_1GameObject" kindref="compound">helios::engine::ecs::GameObject</ref> &amp;</type>
@@ -72,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="include/helios/engine/runtime/spawn/behavior/SpawnInitializer.ixx" line="64" column="22"/>
+        <location file="/tmp/h/include/helios/engine/runtime/spawn/behavior/SpawnInitializer.ixx" line="64" column="22"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -104,19 +110,37 @@
         <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer"/>
       </node>
       <node id="2">
+        <label>helios::engine::runtime::spawn::behavior::initializers::DelayedComponentEnablerInitializer&lt; ComponentTypes &gt;</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1DelayedComponentEnablerInitializer"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
         <label>helios::engine::runtime::spawn::behavior::initializers::EmitterInitializer</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1EmitterInitializer"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="3">
+      <node id="4">
+        <label>helios::engine::runtime::spawn::behavior::initializers::InitializerList&lt; N &gt;</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1InitializerList"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>helios::engine::runtime::spawn::behavior::initializers::MoveInitializer</label>
+        <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1MoveInitializer"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
         <label>helios::engine::runtime::spawn::behavior::initializers::RandomDirectionInitializer</label>
         <link refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1initializers_1_1RandomDirectionInitializer"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
-    <location file="include/helios/engine/runtime/spawn/behavior/SpawnInitializer.ixx" line="51" column="5" bodyfile="include/helios/engine/runtime/spawn/behavior/SpawnInitializer.ixx" bodystart="51" bodyend="71"/>
+    <location file="/tmp/h/include/helios/engine/runtime/spawn/behavior/SpawnInitializer.ixx" line="51" column="5" bodyfile="/tmp/h/include/helios/engine/runtime/spawn/behavior/SpawnInitializer.ixx" bodystart="51" bodyend="71"/>
     <listofallmembers>
       <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer_1a0d6b4e625d18d579ec91ff33da128190" prot="public" virt="pure-virtual"><scope>helios::engine::runtime::spawn::behavior::SpawnInitializer</scope><name>initialize</name></member>
       <member refid="classhelios_1_1engine_1_1runtime_1_1spawn_1_1behavior_1_1SpawnInitializer_1ad5514051aaafea0f164769d695a96991" prot="public" virt="virtual"><scope>helios::engine::runtime::spawn::behavior::SpawnInitializer</scope><name>~SpawnInitializer</name></member>

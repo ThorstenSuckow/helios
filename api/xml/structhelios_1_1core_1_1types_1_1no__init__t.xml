@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="structhelios_1_1core_1_1types_1_1no__init__t" kind="struct" language="C++" prot="public">
+    <compoundname>helios::core::types::no_init_t</compoundname>
+    <briefdescription>
+<para>Tag type used to indicate skipping default initialization. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>`no_init_t` is a tag type that signals to constructors or factory functions that default initialization should be skipped. This is useful for performance-critical code paths where objects will be immediately overwritten or initialized manually.</para>
+<para>## Usage</para>
+<para>Pass `no_init` as a constructor argument to request uninitialized storage:</para>
+<para>```cpp import <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios.util.Guid</ref>; import <ref refid="namespacehelios_1_1core_1_1types" kindref="compound">helios.core.types</ref>;</para>
+<para>// Generate a new unique Guid auto id = <ref refid="classhelios_1_1util_1_1Guid_1abec6ac186114474b23bfb8369e4080a9" kindref="member">helios::util::Guid::generate()</ref>;</para>
+<para>// Declare uninitialized Guid for later assignment <ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref> deferredId{<ref refid="namespacehelios_1_1core_1_1types_1a209d373c4d42ac831d2f6bfd1c4165ad" kindref="member">helios::core::types::no_init</ref>};</para>
+<para>// Assign later deferredId = <ref refid="classhelios_1_1util_1_1Guid_1abec6ac186114474b23bfb8369e4080a9" kindref="member">helios::util::Guid::generate()</ref>; ```</para>
+<para><simplesect kind="note"><para>Objects constructed with `no_init` are in an indeterminate state. Reading from them before assignment is undefined behavior.</para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="namespacehelios_1_1core_1_1types_1a209d373c4d42ac831d2f6bfd1c4165ad" kindref="member">no_init</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/core/types.ixx" line="45" column="5" bodyfile="/tmp/h/include/helios/core/types.ixx" bodystart="45" bodyend="45"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

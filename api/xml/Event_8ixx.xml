@@ -6,8 +6,12 @@
     <includes local="no">string</includes>
     <includes refid="Guid_8ixx" local="no">helios.util.Guid</includes>
     <incdepgraph>
+      <node id="7">
+        <label>helios.core.types</label>
+        <link refid="types_8ixx"/>
+      </node>
       <node id="1">
-        <label>include/helios/event/Event.ixx</label>
+        <label>Event.ixx</label>
         <link refid="Event_8ixx"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -22,6 +26,8 @@
         <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
         </childnode>
       </node>
       <node id="5">
@@ -93,7 +99,7 @@
 <codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
 <codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Constructs<sp/>a<sp/>new<sp/>event<sp/>with<sp/>a<sp/>unique<sp/>Guid<sp/>and<sp/>a<sp/>default<sp/>tag<sp/>of<sp/>0.</highlight></codeline>
 <codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="48" refid="classhelios_1_1event_1_1Event_1a6a32122b419e5513a9a76cdb4312bc71" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1event_1_1Event_1a6a32122b419e5513a9a76cdb4312bc71" kindref="member">Event</ref>();</highlight></codeline>
+<codeline lineno="48" refid="classhelios_1_1event_1_1Event_1a6a32122b419e5513a9a76cdb4312bc71" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhelios_1_1event_1_1Event_1a6a32122b419e5513a9a76cdb4312bc71" kindref="member">Event</ref>():<sp/>guid_(<ref refid="namespacehelios" kindref="compound">helios</ref>::<ref refid="namespacehelios_1_1util" kindref="compound">util</ref>::Guid::generate()),<sp/>tag_(0)<sp/>{}</highlight></codeline>
 <codeline lineno="49"><highlight class="normal"></highlight></codeline>
 <codeline lineno="50"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
@@ -101,7 +107,7 @@
 <codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>tag</highlight></codeline>
 <codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="56" refid="classhelios_1_1event_1_1Event_1a741350d083ce20aefbb749fd0a83e5f2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1event_1_1Event_1a741350d083ce20aefbb749fd0a83e5f2" kindref="member">Event</ref>(uint64_t<sp/><ref refid="classhelios_1_1event_1_1Event_1a6b7048ac1591c2decbbabbb2100e7db7" kindref="member">tag</ref>);</highlight></codeline>
+<codeline lineno="56" refid="classhelios_1_1event_1_1Event_1a741350d083ce20aefbb749fd0a83e5f2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1event_1_1Event_1a741350d083ce20aefbb749fd0a83e5f2" kindref="member">Event</ref>(uint64_t<sp/><ref refid="classhelios_1_1event_1_1Event_1a6b7048ac1591c2decbbabbb2100e7db7" kindref="member">tag</ref>):<sp/>guid_(<ref refid="namespacehelios" kindref="compound">helios</ref>::<ref refid="namespacehelios_1_1util" kindref="compound">util</ref>::Guid::generate()),<sp/>tag_(<ref refid="classhelios_1_1event_1_1Event_1a6b7048ac1591c2decbbabbb2100e7db7" kindref="member">tag</ref>)<sp/>{}</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"></highlight></codeline>
 <codeline lineno="58"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
 <codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
@@ -109,30 +115,36 @@
 <codeline lineno="61"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
 <codeline lineno="62"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return</highlight></codeline>
 <codeline lineno="63"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="64" refid="classhelios_1_1event_1_1Event_1ac85d4e33df6df0ec7dcd15de2a2cdf2e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref>&amp;<sp/><ref refid="classhelios_1_1event_1_1Event_1ac85d4e33df6df0ec7dcd15de2a2cdf2e" kindref="member">guid</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"></highlight></codeline>
-<codeline lineno="66"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>the<sp/>tag<sp/>for<sp/>this<sp/>event.</highlight></codeline>
-<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Will<sp/>be<sp/>0<sp/>if<sp/>none<sp/>was<sp/>specified.</highlight></codeline>
-<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return</highlight></codeline>
-<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="73" refid="classhelios_1_1event_1_1Event_1a6b7048ac1591c2decbbabbb2100e7db7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>uint64_t<sp/><ref refid="classhelios_1_1event_1_1Event_1a6b7048ac1591c2decbbabbb2100e7db7" kindref="member">tag</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"></highlight></codeline>
-<codeline lineno="75" refid="classhelios_1_1event_1_1Event_1a263ea103b6256d8b48c065e0b70b0212" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>std::string<sp/><ref refid="classhelios_1_1event_1_1Event_1a263ea103b6256d8b48c065e0b70b0212" kindref="member">toString</ref>()<sp/>const<sp/>noexcept<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="78"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Compares<sp/>two<sp/>event<sp/>instances<sp/>based<sp/>on<sp/>their<sp/>unique<sp/>Guids.</highlight></codeline>
-<codeline lineno="79"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>e</highlight></codeline>
-<codeline lineno="80"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return</highlight></codeline>
-<codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="82" refid="classhelios_1_1event_1_1Event_1a4121aa2496d80da96e2b521f72e45f75" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>operator==(const<sp/><ref refid="classhelios_1_1event_1_1Event_1a6a32122b419e5513a9a76cdb4312bc71" kindref="member">Event</ref>&amp;<sp/>e)<sp/>const;</highlight></codeline>
-<codeline lineno="83"><highlight class="normal"></highlight></codeline>
-<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"></highlight></codeline>
-<codeline lineno="86"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="64" refid="classhelios_1_1event_1_1Event_1ac85d4e33df6df0ec7dcd15de2a2cdf2e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classhelios_1_1util_1_1Guid" kindref="compound">helios::util::Guid</ref>&amp;<sp/><ref refid="classhelios_1_1event_1_1Event_1ac85d4e33df6df0ec7dcd15de2a2cdf2e" kindref="member">guid</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>guid_;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>the<sp/>tag<sp/>for<sp/>this<sp/>event.</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Will<sp/>be<sp/>0<sp/>if<sp/>none<sp/>was<sp/>specified.</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75" refid="classhelios_1_1event_1_1Event_1a6b7048ac1591c2decbbabbb2100e7db7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/>uint64_t<sp/><ref refid="classhelios_1_1event_1_1Event_1a6b7048ac1591c2decbbabbb2100e7db7" kindref="member">tag</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>tag_;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79" refid="classhelios_1_1event_1_1Event_1a263ea103b6256d8b48c065e0b70b0212" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>std::string<sp/><ref refid="classhelios_1_1event_1_1Event_1a263ea103b6256d8b48c065e0b70b0212" kindref="member">toString</ref>()<sp/>const<sp/>noexcept<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Compares<sp/>two<sp/>event<sp/>instances<sp/>based<sp/>on<sp/>their<sp/>unique<sp/>Guids.</highlight></codeline>
+<codeline lineno="83"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>e</highlight></codeline>
+<codeline lineno="84"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return</highlight></codeline>
+<codeline lineno="85"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86" refid="classhelios_1_1event_1_1Event_1a4121aa2496d80da96e2b521f72e45f75" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>operator==(const<sp/><ref refid="classhelios_1_1event_1_1Event_1a6a32122b419e5513a9a76cdb4312bc71" kindref="member">Event</ref>&amp;<sp/>e)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>guid_<sp/>==<sp/>e.guid();</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal">}</highlight></codeline>
     </programlisting>
-    <location file="include/helios/event/Event.ixx"/>
+    <location file="/tmp/h/include/helios/event/Event.ixx"/>
   </compounddef>
 </doxygen>

@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="namespacehelios_1_1core_1_1algorithms" kind="namespace" language="C++">
+    <compoundname>helios::core::algorithms</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespacehelios_1_1core_1_1algorithms_1a3df283d4b3d4c5006c1bb3c30e03ab1e" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t helios::core::algorithms::fnv1a_hash</definition>
+        <argsstring>(const std::string_view str) noexcept</argsstring>
+        <name>fnv1a_hash</name>
+        <qualifiedname>helios::core::algorithms::fnv1a_hash</qualifiedname>
+        <param>
+          <type>const std::string_view</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>Computes a 32-bit FNV-1a hash from a string. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Implements the Fowler–Noll–Vo hash function (FNV-1a variant), a fast, non-cryptographic hash suitable for hash tables and identifier generation. The function is `constexpr`, enabling compile-time hashing of string literals.</para>
+<para>## Algorithm</para>
+<para>1. Initialize hash with FNV offset basis (2166136261) 2. For each byte: XOR with hash, then multiply by FNV prime (16777619)</para>
+<para>## Usage</para>
+<para>```cpp // Compile-time hash for type-safe IDs constexpr uint32_t id = fnv1a_hash(&quot;enemy_spawn&quot;);</para>
+<para>// Used internally by strongly-typed ID constructors constexpr GameObjectPoolId POOL{&quot;bullets&quot;}; // calls fnv1a_hash ```</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The string view to hash.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>32-bit hash value.</para>
+</simplesect>
+<simplesect kind="note"><para>This is not a cryptographic hash. Do not use for security purposes.</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function">https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para>GameObjectPoolId </para>
+</simplesect>
+<simplesect kind="see"><para>SpawnProfileId </para>
+</simplesect>
+<simplesect kind="see"><para>SpawnRuleId </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/core/algorithms.ixx" line="50" column="25" bodyfile="/tmp/h/include/helios/core/algorithms.ixx" bodystart="50" bodyend="57"/>
+        <referencedby refid="structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId_1a1c616ea4117df2185265396a80c71356" compoundref="GameObjectPoolId_8ixx" startline="78" endline="79">helios::engine::core::data::GameObjectPoolId::GameObjectPoolId</referencedby>
+        <referencedby refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId_1a577730c89b83e4e404574dc17247dadf" compoundref="SpawnProfileId_8ixx" startline="95" endline="96">helios::engine::core::data::SpawnProfileId::SpawnProfileId</referencedby>
+        <referencedby refid="structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleId_1a46be7b5cf22d6fd59b4d4a8fd5108c33" compoundref="SpawnRuleId_8ixx" startline="78" endline="79">helios::engine::core::data::SpawnRuleId::SpawnRuleId</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/h/include/helios/core/algorithms.ixx" line="14" column="1"/>
+  </compounddef>
+</doxygen>

@@ -3,44 +3,50 @@
   <compounddef id="aabb_8ixx" kind="file" language="C++">
     <compoundname>aabb.ixx</compoundname>
     <includes local="no">memory</includes>
+    <includes local="no">cassert</includes>
     <includes refid="FloatingPointTypeTrait_8ixx" local="no">helios.math.traits.FloatingPointType</includes>
     <includes refid="helios_2math_2concepts_2__module_8ixx" local="no">helios.math.concepts</includes>
     <includes refid="helios_2math_2types_2__module_8ixx" local="no">helios.math.types:mat4</includes>
     <incdepgraph>
-      <node id="5">
+      <node id="6">
         <label>helios.math.concepts</label>
         <link refid="helios_2math_2concepts_2__module_8ixx"/>
-        <childnode refid="5" relation="include">
-        </childnode>
-      </node>
-      <node id="3">
-        <label>helios.math.traits.FloatingPointType</label>
-        <link refid="FloatingPointTypeTrait_8ixx"/>
-        <childnode refid="4" relation="include">
-        </childnode>
-      </node>
-      <node id="6">
-        <label>helios.math.types:mat4</label>
-        <link refid="helios_2math_2types_2__module_8ixx"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
+      <node id="4">
+        <label>helios.math.traits.FloatingPointType</label>
+        <link refid="FloatingPointTypeTrait_8ixx"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>helios.math.types:mat4</label>
+        <link refid="helios_2math_2types_2__module_8ixx"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
       <node id="1">
-        <label>include/helios/math/types/aabb.ixx</label>
+        <label>aabb.ixx</label>
         <link refid="aabb_8ixx"/>
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>cassert</label>
       </node>
       <node id="2">
         <label>memory</label>
       </node>
-      <node id="4">
+      <node id="5">
         <label>type_traits</label>
       </node>
     </incdepgraph>
@@ -60,376 +66,389 @@
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">module</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight></codeline>
-<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8math_8types" kindref="compound">helios.math.types:aabb</ref>;</highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight></codeline>
-<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>:vec3;</highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>:mat4;</highlight></codeline>
-<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8math_8concepts" kindref="compound">helios.math.concepts</ref>;</highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8math_8traits_8FloatingPointType" kindref="compound">helios.math.traits.FloatingPointType</ref>;</highlight></codeline>
-<codeline lineno="15"><highlight class="normal"></highlight></codeline>
-<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1math" kindref="compound">helios::math</ref><sp/>{</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Axis-Aligned<sp/>Bounding<sp/>Box<sp/>for<sp/>spatial<sp/>culling<sp/>and<sp/>collision<sp/>detection.</highlight></codeline>
-<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>An<sp/>AABB<sp/>is<sp/>defined<sp/>by<sp/>two<sp/>corner<sp/>points:<sp/>a<sp/>minimum<sp/>and<sp/>maximum<sp/>point<sp/>in<sp/>3D<sp/>space.</highlight></codeline>
-<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Depending<sp/>on<sp/>the<sp/>use<sp/>case,<sp/>the<sp/>box<sp/>is<sp/>aligned<sp/>to<sp/>the<sp/>world<sp/>or<sp/>local<sp/>coordinate<sp/>axes.</highlight></codeline>
-<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Common<sp/>use<sp/>cases<sp/>include<sp/>frustum<sp/>culling,<sp/>broad-phase<sp/>collision<sp/>detection,</highlight></codeline>
-<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>and<sp/>spatial<sp/>partitioning<sp/>in<sp/>scene<sp/>graphs.</highlight></codeline>
-<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@tparam<sp/>T<sp/>The<sp/>numeric<sp/>type<sp/>of<sp/>the<sp/>vector<sp/>components<sp/>(typically<sp/>`float`<sp/>or<sp/>`double`).</highlight></codeline>
-<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>[Gla95,<sp/>pp.<sp/>548-550]<sp/>Glassner,<sp/>A.<sp/>(1995).<sp/>Graphics<sp/>Gems</highlight></codeline>
-<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>[DP11,<sp/>pp.<sp/>304-311]<sp/>Dunn,<sp/>F.,<sp/>&amp;<sp/>Parberry,<sp/>I.<sp/>(2011).<sp/>3D<sp/>Math<sp/>Primer<sp/>for<sp/>Graphics<sp/>and<sp/>Game<sp/>Development</highlight></codeline>
-<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;helios::math::Numeric<sp/>T&gt;</highlight></codeline>
-<codeline lineno="33" refid="structhelios_1_1math_1_1aabb" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structhelios_1_1math_1_1aabb_1aa503a6e73ae299cc5e2cef2fe2513857" kindref="member">aabb</ref><sp/>{</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"></highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Minimum<sp/>corner<sp/>point<sp/>of<sp/>the<sp/>bounding<sp/>box.</highlight></codeline>
-<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Contains<sp/>the<sp/>smallest<sp/>x,<sp/>y,<sp/>and<sp/>z<sp/>coordinates<sp/>across<sp/>all<sp/>points<sp/>within<sp/>the<sp/>AABB.</highlight></codeline>
-<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref><sp/>min_;</highlight></codeline>
-<codeline lineno="42"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Maximum<sp/>corner<sp/>point<sp/>of<sp/>the<sp/>bounding<sp/>box.</highlight></codeline>
-<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Contains<sp/>the<sp/>largest<sp/>x,<sp/>y,<sp/>and<sp/>z<sp/>coordinates<sp/>across<sp/>all<sp/>points<sp/>within<sp/>the<sp/>AABB.</highlight></codeline>
-<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref><sp/>max_;</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"></highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="52"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Constructs<sp/>an<sp/>empty<sp/>AABB<sp/>with<sp/>inverted<sp/>min/max<sp/>values.</highlight></codeline>
-<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>AABB<sp/>is<sp/>initialized<sp/>with<sp/>min<sp/>set<sp/>to<sp/>the<sp/>maximum<sp/>representable<sp/>value</highlight></codeline>
-<codeline lineno="56"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>and<sp/>max<sp/>set<sp/>to<sp/>the<sp/>minimum<sp/>representable<sp/>value.<sp/>This<sp/>allows<sp/>the<sp/>first</highlight></codeline>
-<codeline lineno="57"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>`add()`<sp/>call<sp/>to<sp/>properly<sp/>establish<sp/>the<sp/>initial<sp/>bounds.</highlight></codeline>
-<codeline lineno="58"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="59" refid="structhelios_1_1math_1_1aabb_1aa503a6e73ae299cc5e2cef2fe2513857" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb_1aa503a6e73ae299cc5e2cef2fe2513857" kindref="member">aabb</ref>()<sp/>noexcept</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>min_{std::numeric_limits&lt;T&gt;::max(),<sp/>std::numeric_limits&lt;T&gt;::max(),<sp/>std::numeric_limits&lt;T&gt;::max()},</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>max_{std::numeric_limits&lt;T&gt;::lowest(),<sp/>std::numeric_limits&lt;T&gt;::lowest(),<sp/>std::numeric_limits&lt;T&gt;::lowest()}</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{}</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="64"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="65"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Constructs<sp/>an<sp/>AABB<sp/>from<sp/>individual<sp/>component<sp/>values.</highlight></codeline>
-<codeline lineno="66"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>minX<sp/>Minimum<sp/>X<sp/>coordinate.</highlight></codeline>
-<codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>minY<sp/>Minimum<sp/>Y<sp/>coordinate.</highlight></codeline>
-<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>minZ<sp/>Minimum<sp/>Z<sp/>coordinate.</highlight></codeline>
-<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>maxX<sp/>Maximum<sp/>X<sp/>coordinate.</highlight></codeline>
-<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>maxY<sp/>Maximum<sp/>Y<sp/>coordinate.</highlight></codeline>
-<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>maxZ<sp/>Maximum<sp/>Z<sp/>coordinate.</highlight></codeline>
-<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="74" refid="structhelios_1_1math_1_1aabb_1acc52c66b5209d36c8cf2e9d034f4595f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb_1acc52c66b5209d36c8cf2e9d034f4595f" kindref="member">aabb</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>minX,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>minY,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>minZ,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>maxX,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>maxY,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>maxZ)<sp/>noexcept</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>min_{minX,<sp/>minY,<sp/>minZ},</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>max_{maxX,<sp/>maxY,<sp/>maxZ}</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{}</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="79"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="80"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Constructs<sp/>an<sp/>AABB<sp/>from<sp/>two<sp/>corner<sp/>points.</highlight></codeline>
-<codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>min<sp/>The<sp/>minimum<sp/>corner<sp/>point<sp/>(smallest<sp/>x,<sp/>y,<sp/>z).</highlight></codeline>
-<codeline lineno="83"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>max<sp/>The<sp/>maximum<sp/>corner<sp/>point<sp/>(largest<sp/>x,<sp/>y,<sp/>z).</highlight></codeline>
-<codeline lineno="84"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="85" refid="structhelios_1_1math_1_1aabb_1a85ec864e5d6f50b7126ba22eb1a6c15a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb_1a85ec864e5d6f50b7126ba22eb1a6c15a" kindref="member">aabb</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref><sp/><ref refid="structhelios_1_1math_1_1aabb_1ab53ba0c88b465fb3f9e6ae410c3f0b70" kindref="member">min</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref><sp/><ref refid="structhelios_1_1math_1_1aabb_1aa5836a6c13c4a5ddd421adb3a168970e" kindref="member">max</ref>)<sp/>noexcept</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>min_(<ref refid="structhelios_1_1math_1_1aabb_1ab53ba0c88b465fb3f9e6ae410c3f0b70" kindref="member">min</ref>),</highlight></codeline>
-<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>max_(<ref refid="structhelios_1_1math_1_1aabb_1aa5836a6c13c4a5ddd421adb3a168970e" kindref="member">max</ref>)</highlight></codeline>
-<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{}</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="90"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="91"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>the<sp/>minimum<sp/>corner<sp/>point<sp/>of<sp/>the<sp/>AABB.</highlight></codeline>
-<codeline lineno="92"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="93"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>Const<sp/>reference<sp/>to<sp/>the<sp/>minimum<sp/>corner<sp/>point.</highlight></codeline>
-<codeline lineno="94"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="95" refid="structhelios_1_1math_1_1aabb_1ab53ba0c88b465fb3f9e6ae410c3f0b70" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref>&amp;<sp/><ref refid="structhelios_1_1math_1_1aabb_1ab53ba0c88b465fb3f9e6ae410c3f0b70" kindref="member">min</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>min_;</highlight></codeline>
-<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="98"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="99"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="100"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>the<sp/>maximum<sp/>corner<sp/>point<sp/>of<sp/>the<sp/>AABB.</highlight></codeline>
-<codeline lineno="101"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="102"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>Const<sp/>reference<sp/>to<sp/>the<sp/>maximum<sp/>corner<sp/>point.</highlight></codeline>
-<codeline lineno="103"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="104" refid="structhelios_1_1math_1_1aabb_1aa5836a6c13c4a5ddd421adb3a168970e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref>&amp;<sp/><ref refid="structhelios_1_1math_1_1aabb_1aa5836a6c13c4a5ddd421adb3a168970e" kindref="member">max</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>max_;</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="107"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="108"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="109"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Computes<sp/>the<sp/>center<sp/>point<sp/>of<sp/>the<sp/>AABB.</highlight></codeline>
-<codeline lineno="110"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="111"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>center<sp/>point,<sp/>calculated<sp/>as<sp/>`(min<sp/>+<sp/>max)<sp/>/<sp/>2`.</highlight></codeline>
-<codeline lineno="112"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="113" refid="structhelios_1_1math_1_1aabb_1ad9c6ae9ba53638b5acb98843d24d766b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref><sp/><ref refid="structhelios_1_1math_1_1aabb_1ad9c6ae9ba53638b5acb98843d24d766b" kindref="member">center</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(min_<sp/>+<sp/>max_)<sp/>*<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(0.5);</highlight></codeline>
-<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="116"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="117"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="118"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Computes<sp/>the<sp/>size<sp/>of<sp/>the<sp/>AABB<sp/>over<sp/>all<sp/>axes.</highlight></codeline>
-<codeline lineno="119"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="120"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>vector<sp/>representing<sp/>the<sp/>width,<sp/>height,<sp/>and<sp/>depth<sp/>of<sp/>the<sp/>AABB.</highlight></codeline>
-<codeline lineno="121"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="122" refid="structhelios_1_1math_1_1aabb_1a78c11f960ab2cd331e354bd274c85a27" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref><sp/><ref refid="structhelios_1_1math_1_1aabb_1a78c11f960ab2cd331e354bd274c85a27" kindref="member">size</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>max_<sp/>-<sp/>min_;</highlight></codeline>
-<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="125"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="126"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="127"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Checks<sp/>if<sp/>this<sp/>AABB<sp/>fully<sp/>contains<sp/>another<sp/>AABB.</highlight></codeline>
-<codeline lineno="128"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="129"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Tests<sp/>whether<sp/>all<sp/>corners<sp/>of<sp/>the<sp/>specified<sp/>bounding<sp/>box<sp/>lie<sp/>within</highlight></codeline>
-<codeline lineno="130"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>the<sp/>bounds<sp/>of<sp/>this<sp/>AABB.<sp/>Both<sp/>minimum<sp/>and<sp/>maximum<sp/>corners<sp/>must<sp/>be<sp/>contained.</highlight></codeline>
-<codeline lineno="131"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="132"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>box<sp/>The<sp/>AABB<sp/>to<sp/>test<sp/>for<sp/>containment.</highlight></codeline>
-<codeline lineno="133"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="134"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>True<sp/>if<sp/>the<sp/>specified<sp/>box<sp/>is<sp/>fully<sp/>contained<sp/>within<sp/>this<sp/>AABB,<sp/>false<sp/>otherwise.</highlight></codeline>
-<codeline lineno="135"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="136" refid="structhelios_1_1math_1_1aabb_1ab2281d98a7cb28b46ce163d96a2f4469" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb_1ab2281d98a7cb28b46ce163d96a2f4469" kindref="member">contains</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref>&amp;<sp/>box)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="137"><highlight class="normal"></highlight></codeline>
-<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>v_min<sp/>=<sp/>box.min();</highlight></codeline>
-<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>v_max<sp/>=<sp/>box.max();</highlight></codeline>
-<codeline lineno="140"><highlight class="normal"></highlight></codeline>
-<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>v_min[0]<sp/>&gt;=<sp/>min_[0]<sp/>&amp;&amp;<sp/>v_min[1]<sp/>&gt;=<sp/>min_[1]<sp/>&amp;&amp;<sp/>v_min[2]<sp/>&gt;=<sp/>min_[2]<sp/>&amp;&amp;</highlight></codeline>
-<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>v_max[0]<sp/>&lt;=<sp/>max_[0]<sp/>&amp;&amp;<sp/>v_max[1]<sp/>&lt;=<sp/>max_[1]<sp/>&amp;&amp;<sp/>v_max[2]<sp/>&lt;=<sp/>max_[2];</highlight></codeline>
-<codeline lineno="143"><highlight class="normal"></highlight></codeline>
-<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="145"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="146"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="147"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Checks<sp/>if<sp/>this<sp/>AABB<sp/>intersects<sp/>or<sp/>touches<sp/>another<sp/>AABB.</highlight></codeline>
-<codeline lineno="148"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="149"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>box<sp/>The<sp/>AABB<sp/>to<sp/>test<sp/>for<sp/>intersection.</highlight></codeline>
-<codeline lineno="150"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="151"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>True<sp/>if<sp/>the<sp/>specified<sp/>box<sp/>intersects<sp/>this<sp/>AABB,<sp/>false<sp/>otherwise.</highlight></codeline>
-<codeline lineno="152"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="153" refid="structhelios_1_1math_1_1aabb_1ade126b97a45a33942359c01b5f268c24" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb_1ade126b97a45a33942359c01b5f268c24" kindref="member">intersects</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref>&amp;<sp/>box)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="154"><highlight class="normal"></highlight></codeline>
-<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(max_[0]<sp/>&lt;<sp/>box.min()[0]<sp/>||<sp/>min_[0]<sp/>&gt;<sp/>box.max()[0])<sp/>{</highlight></codeline>
-<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(max_[1]<sp/>&lt;<sp/>box.min()[1]<sp/>||<sp/>min_[1]<sp/>&gt;<sp/>box.max()[1])<sp/>{</highlight></codeline>
-<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(max_[2]<sp/>&lt;<sp/>box.min()[2]<sp/>||<sp/>min_[2]<sp/>&gt;<sp/>box.max()[2])<sp/>{</highlight></codeline>
-<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="166"><highlight class="normal"></highlight></codeline>
-<codeline lineno="167"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="168"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="169"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Translates<sp/>the<sp/>AABB<sp/>by<sp/>a<sp/>given<sp/>vector.</highlight></codeline>
-<codeline lineno="170"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="171"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Creates<sp/>a<sp/>new<sp/>AABB<sp/>by<sp/>adding<sp/>the<sp/>components<sp/>of<sp/>the<sp/>given<sp/>translation<sp/>vector</highlight></codeline>
-<codeline lineno="172"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>to<sp/>the<sp/>minimum<sp/>and<sp/>maximum<sp/>corner<sp/>points<sp/>of<sp/>the<sp/>current<sp/>AABB.</highlight></codeline>
-<codeline lineno="173"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="174"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>v<sp/>The<sp/>translation<sp/>vector<sp/>to<sp/>apply<sp/>to<sp/>the<sp/>AABB.</highlight></codeline>
-<codeline lineno="175"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="176"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>new<sp/>AABB<sp/>translated<sp/>by<sp/>the<sp/>given<sp/>vector.</highlight></codeline>
-<codeline lineno="177"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="178" refid="structhelios_1_1math_1_1aabb_1ab6aadb560a2c8ee5dd381592b653578b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref><sp/><ref refid="structhelios_1_1math_1_1aabb_1ab6aadb560a2c8ee5dd381592b653578b" kindref="member">translate</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref>&amp;<sp/>v)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref>{</highlight></codeline>
-<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>min_<sp/>+<sp/>v,<sp/>max_<sp/>+<sp/>v</highlight></codeline>
-<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="183"><highlight class="normal"></highlight></codeline>
-<codeline lineno="184"><highlight class="normal"></highlight></codeline>
-<codeline lineno="185"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="186"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="187"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Expands<sp/>the<sp/>AABB<sp/>to<sp/>include<sp/>a<sp/>given<sp/>point.</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cassert&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">module</highlight><highlight class="normal"><sp/><ref refid="module__helios_8math_8types" kindref="compound">helios.math.types:aabb</ref>;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>:vec3;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>:mat4;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8math_8concepts" kindref="compound">helios.math.concepts</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/><ref refid="module__helios_8math_8traits_8FloatingPointType" kindref="compound">helios.math.traits.FloatingPointType</ref>;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">export</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1math" kindref="compound">helios::math</ref><sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Axis-Aligned<sp/>Bounding<sp/>Box<sp/>for<sp/>spatial<sp/>culling<sp/>and<sp/>collision<sp/>detection.</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>An<sp/>AABB<sp/>is<sp/>defined<sp/>by<sp/>two<sp/>corner<sp/>points:<sp/>a<sp/>minimum<sp/>and<sp/>maximum<sp/>point<sp/>in<sp/>3D<sp/>space.</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Depending<sp/>on<sp/>the<sp/>use<sp/>case,<sp/>the<sp/>box<sp/>is<sp/>aligned<sp/>to<sp/>the<sp/>world<sp/>or<sp/>local<sp/>coordinate<sp/>axes.</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Common<sp/>use<sp/>cases<sp/>include<sp/>frustum<sp/>culling,<sp/>broad-phase<sp/>collision<sp/>detection,</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>and<sp/>spatial<sp/>partitioning<sp/>in<sp/>scene<sp/>graphs.</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@tparam<sp/>T<sp/>The<sp/>numeric<sp/>type<sp/>of<sp/>the<sp/>vector<sp/>components<sp/>(typically<sp/>`float`<sp/>or<sp/>`double`).</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>[Gla95,<sp/>pp.<sp/>548-550]<sp/>Glassner,<sp/>A.<sp/>(1995).<sp/>Graphics<sp/>Gems</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>[DP11,<sp/>pp.<sp/>304-311]<sp/>Dunn,<sp/>F.,<sp/>&amp;<sp/>Parberry,<sp/>I.<sp/>(2011).<sp/>3D<sp/>Math<sp/>Primer<sp/>for<sp/>Graphics<sp/>and<sp/>Game<sp/>Development</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;helios::math::Numeric<sp/>T&gt;</highlight></codeline>
+<codeline lineno="34" refid="structhelios_1_1math_1_1aabb" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structhelios_1_1math_1_1aabb_1aa503a6e73ae299cc5e2cef2fe2513857" kindref="member">aabb</ref><sp/>{</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Minimum<sp/>corner<sp/>point<sp/>of<sp/>the<sp/>bounding<sp/>box.</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Contains<sp/>the<sp/>smallest<sp/>x,<sp/>y,<sp/>and<sp/>z<sp/>coordinates<sp/>across<sp/>all<sp/>points<sp/>within<sp/>the<sp/>AABB.</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref><sp/>min_;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Maximum<sp/>corner<sp/>point<sp/>of<sp/>the<sp/>bounding<sp/>box.</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Contains<sp/>the<sp/>largest<sp/>x,<sp/>y,<sp/>and<sp/>z<sp/>coordinates<sp/>across<sp/>all<sp/>points<sp/>within<sp/>the<sp/>AABB.</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref><sp/>max_;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="54"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Constructs<sp/>an<sp/>empty<sp/>AABB<sp/>with<sp/>inverted<sp/>min/max<sp/>values.</highlight></codeline>
+<codeline lineno="55"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="56"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>AABB<sp/>is<sp/>initialized<sp/>with<sp/>min<sp/>set<sp/>to<sp/>the<sp/>maximum<sp/>representable<sp/>value</highlight></codeline>
+<codeline lineno="57"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>and<sp/>max<sp/>set<sp/>to<sp/>the<sp/>minimum<sp/>representable<sp/>value.<sp/>This<sp/>allows<sp/>the<sp/>first</highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>`add()`<sp/>call<sp/>to<sp/>properly<sp/>establish<sp/>the<sp/>initial<sp/>bounds.</highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60" refid="structhelios_1_1math_1_1aabb_1aa503a6e73ae299cc5e2cef2fe2513857" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb_1aa503a6e73ae299cc5e2cef2fe2513857" kindref="member">aabb</ref>()<sp/>noexcept</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>min_{std::numeric_limits&lt;T&gt;::max(),<sp/>std::numeric_limits&lt;T&gt;::max(),<sp/>std::numeric_limits&lt;T&gt;::max()},</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>max_{std::numeric_limits&lt;T&gt;::lowest(),<sp/>std::numeric_limits&lt;T&gt;::lowest(),<sp/>std::numeric_limits&lt;T&gt;::lowest()}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{}</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="65"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="66"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Constructs<sp/>an<sp/>AABB<sp/>from<sp/>individual<sp/>component<sp/>values.</highlight></codeline>
+<codeline lineno="67"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="68"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>minX<sp/>Minimum<sp/>X<sp/>coordinate.</highlight></codeline>
+<codeline lineno="69"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>minY<sp/>Minimum<sp/>Y<sp/>coordinate.</highlight></codeline>
+<codeline lineno="70"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>minZ<sp/>Minimum<sp/>Z<sp/>coordinate.</highlight></codeline>
+<codeline lineno="71"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>maxX<sp/>Maximum<sp/>X<sp/>coordinate.</highlight></codeline>
+<codeline lineno="72"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>maxY<sp/>Maximum<sp/>Y<sp/>coordinate.</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>maxZ<sp/>Maximum<sp/>Z<sp/>coordinate.</highlight></codeline>
+<codeline lineno="74"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75" refid="structhelios_1_1math_1_1aabb_1acc52c66b5209d36c8cf2e9d034f4595f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb_1acc52c66b5209d36c8cf2e9d034f4595f" kindref="member">aabb</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>minX,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>minY,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>minZ,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>maxX,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>maxY,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>maxZ)<sp/>noexcept</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>min_{minX,<sp/>minY,<sp/>minZ},</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>max_{maxX,<sp/>maxY,<sp/>maxZ}</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{}</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="81"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Constructs<sp/>an<sp/>AABB<sp/>from<sp/>two<sp/>corner<sp/>points.</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="83"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>min<sp/>The<sp/>minimum<sp/>corner<sp/>point<sp/>(smallest<sp/>x,<sp/>y,<sp/>z).</highlight></codeline>
+<codeline lineno="84"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>max<sp/>The<sp/>maximum<sp/>corner<sp/>point<sp/>(largest<sp/>x,<sp/>y,<sp/>z).</highlight></codeline>
+<codeline lineno="85"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86" refid="structhelios_1_1math_1_1aabb_1a85ec864e5d6f50b7126ba22eb1a6c15a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb_1a85ec864e5d6f50b7126ba22eb1a6c15a" kindref="member">aabb</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref><sp/><ref refid="structhelios_1_1math_1_1aabb_1ab53ba0c88b465fb3f9e6ae410c3f0b70" kindref="member">min</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref><sp/><ref refid="structhelios_1_1math_1_1aabb_1aa5836a6c13c4a5ddd421adb3a168970e" kindref="member">max</ref>)<sp/>noexcept</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>min_(<ref refid="structhelios_1_1math_1_1aabb_1ab53ba0c88b465fb3f9e6ae410c3f0b70" kindref="member">min</ref>),</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>max_(<ref refid="structhelios_1_1math_1_1aabb_1aa5836a6c13c4a5ddd421adb3a168970e" kindref="member">max</ref>)</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{}</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="91"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="92"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>the<sp/>minimum<sp/>corner<sp/>point<sp/>of<sp/>the<sp/>AABB.</highlight></codeline>
+<codeline lineno="93"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="94"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>Const<sp/>reference<sp/>to<sp/>the<sp/>minimum<sp/>corner<sp/>point.</highlight></codeline>
+<codeline lineno="95"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="96" refid="structhelios_1_1math_1_1aabb_1ab53ba0c88b465fb3f9e6ae410c3f0b70" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref>&amp;<sp/><ref refid="structhelios_1_1math_1_1aabb_1ab53ba0c88b465fb3f9e6ae410c3f0b70" kindref="member">min</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>min_;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="101"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Returns<sp/>the<sp/>maximum<sp/>corner<sp/>point<sp/>of<sp/>the<sp/>AABB.</highlight></codeline>
+<codeline lineno="102"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="103"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>Const<sp/>reference<sp/>to<sp/>the<sp/>maximum<sp/>corner<sp/>point.</highlight></codeline>
+<codeline lineno="104"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="105" refid="structhelios_1_1math_1_1aabb_1aa5836a6c13c4a5ddd421adb3a168970e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref>&amp;<sp/><ref refid="structhelios_1_1math_1_1aabb_1aa5836a6c13c4a5ddd421adb3a168970e" kindref="member">max</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>max_;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="109"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="110"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Computes<sp/>the<sp/>center<sp/>point<sp/>of<sp/>the<sp/>AABB.</highlight></codeline>
+<codeline lineno="111"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="112"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>The<sp/>center<sp/>point,<sp/>calculated<sp/>as<sp/>`(min<sp/>+<sp/>max)<sp/>/<sp/>2`.</highlight></codeline>
+<codeline lineno="113"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114" refid="structhelios_1_1math_1_1aabb_1ad9c6ae9ba53638b5acb98843d24d766b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref><sp/><ref refid="structhelios_1_1math_1_1aabb_1ad9c6ae9ba53638b5acb98843d24d766b" kindref="member">center</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(min_<sp/>+<sp/>max_)<sp/>*<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(0.5);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="118"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="119"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Computes<sp/>the<sp/>size<sp/>of<sp/>the<sp/>AABB<sp/>over<sp/>all<sp/>axes.</highlight></codeline>
+<codeline lineno="120"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="121"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>vector<sp/>representing<sp/>the<sp/>width,<sp/>height,<sp/>and<sp/>depth<sp/>of<sp/>the<sp/>AABB.</highlight></codeline>
+<codeline lineno="122"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="123" refid="structhelios_1_1math_1_1aabb_1a78c11f960ab2cd331e354bd274c85a27" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref><sp/><ref refid="structhelios_1_1math_1_1aabb_1a78c11f960ab2cd331e354bd274c85a27" kindref="member">size</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>max_<sp/>-<sp/>min_;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="127"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="128"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Checks<sp/>if<sp/>this<sp/>AABB<sp/>fully<sp/>contains<sp/>another<sp/>AABB.</highlight></codeline>
+<codeline lineno="129"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="130"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@details<sp/>Tests<sp/>whether<sp/>all<sp/>corners<sp/>of<sp/>the<sp/>specified<sp/>bounding<sp/>box<sp/>lie<sp/>within</highlight></codeline>
+<codeline lineno="131"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>the<sp/>bounds<sp/>of<sp/>this<sp/>AABB.<sp/>Both<sp/>minimum<sp/>and<sp/>maximum<sp/>corners<sp/>must<sp/>be<sp/>contained.</highlight></codeline>
+<codeline lineno="132"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="133"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>box<sp/>The<sp/>AABB<sp/>to<sp/>test<sp/>for<sp/>containment.</highlight></codeline>
+<codeline lineno="134"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="135"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>True<sp/>if<sp/>the<sp/>specified<sp/>box<sp/>is<sp/>fully<sp/>contained<sp/>within<sp/>this<sp/>AABB,<sp/>false<sp/>otherwise.</highlight></codeline>
+<codeline lineno="136"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="137" refid="structhelios_1_1math_1_1aabb_1ab2281d98a7cb28b46ce163d96a2f4469" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb_1ab2281d98a7cb28b46ce163d96a2f4469" kindref="member">contains</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref>&amp;<sp/>box)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>v_min<sp/>=<sp/>box.min();</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>v_max<sp/>=<sp/>box.max();</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>v_min[0]<sp/>&gt;=<sp/>min_[0]<sp/>&amp;&amp;<sp/>v_min[1]<sp/>&gt;=<sp/>min_[1]<sp/>&amp;&amp;<sp/>v_min[2]<sp/>&gt;=<sp/>min_[2]<sp/>&amp;&amp;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>v_max[0]<sp/>&lt;=<sp/>max_[0]<sp/>&amp;&amp;<sp/>v_max[1]<sp/>&lt;=<sp/>max_[1]<sp/>&amp;&amp;<sp/>v_max[2]<sp/>&lt;=<sp/>max_[2];</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="147"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="148"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Checks<sp/>if<sp/>this<sp/>AABB<sp/>fully<sp/>contains<sp/>the<sp/>specified<sp/>point.</highlight></codeline>
+<codeline lineno="149"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="150"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>point<sp/>The<sp/>vec3<sp/>to<sp/>test<sp/>for<sp/>containment.</highlight></codeline>
+<codeline lineno="151"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="152"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>True<sp/>if<sp/>the<sp/>specified<sp/>point<sp/>is<sp/>fully<sp/>contained<sp/>within<sp/>this<sp/>AABB,<sp/>otherwise<sp/>false.</highlight></codeline>
+<codeline lineno="153"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="154" refid="structhelios_1_1math_1_1aabb_1ac80d09d427091a95fd83ac30cc1196cc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb_1ac80d09d427091a95fd83ac30cc1196cc" kindref="member">contains</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref>&amp;<sp/>point)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>point[0]<sp/>&gt;=<sp/>min_[0]<sp/>&amp;&amp;<sp/>point[1]<sp/>&gt;=<sp/>min_[1]<sp/>&amp;&amp;<sp/>point[2]<sp/>&gt;=<sp/>min_[2]<sp/>&amp;&amp;</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>point[0]<sp/>&lt;=<sp/>max_[0]<sp/>&amp;&amp;<sp/>point[1]<sp/>&lt;=<sp/>max_[1]<sp/>&amp;&amp;<sp/>point[2]<sp/>&lt;=<sp/>max_[2];</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="159"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="160"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Checks<sp/>if<sp/>this<sp/>AABB<sp/>intersects<sp/>or<sp/>touches<sp/>another<sp/>AABB.</highlight></codeline>
+<codeline lineno="161"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="162"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>box<sp/>The<sp/>AABB<sp/>to<sp/>test<sp/>for<sp/>intersection.</highlight></codeline>
+<codeline lineno="163"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="164"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>True<sp/>if<sp/>the<sp/>specified<sp/>box<sp/>intersects<sp/>this<sp/>AABB,<sp/>false<sp/>otherwise.</highlight></codeline>
+<codeline lineno="165"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="166" refid="structhelios_1_1math_1_1aabb_1ade126b97a45a33942359c01b5f268c24" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb_1ade126b97a45a33942359c01b5f268c24" kindref="member">intersects</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref>&amp;<sp/>box)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(max_[0]<sp/>&lt;<sp/>box.min()[0]<sp/>||<sp/>min_[0]<sp/>&gt;<sp/>box.max()[0])<sp/>{</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(max_[1]<sp/>&lt;<sp/>box.min()[1]<sp/>||<sp/>min_[1]<sp/>&gt;<sp/>box.max()[1])<sp/>{</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(max_[2]<sp/>&lt;<sp/>box.min()[2]<sp/>||<sp/>min_[2]<sp/>&gt;<sp/>box.max()[2])<sp/>{</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="181"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="182"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Translates<sp/>the<sp/>AABB<sp/>by<sp/>a<sp/>given<sp/>vector.</highlight></codeline>
+<codeline lineno="183"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="184"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Creates<sp/>a<sp/>new<sp/>AABB<sp/>by<sp/>adding<sp/>the<sp/>components<sp/>of<sp/>the<sp/>given<sp/>translation<sp/>vector</highlight></codeline>
+<codeline lineno="185"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>to<sp/>the<sp/>minimum<sp/>and<sp/>maximum<sp/>corner<sp/>points<sp/>of<sp/>the<sp/>current<sp/>AABB.</highlight></codeline>
+<codeline lineno="186"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="187"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>v<sp/>The<sp/>translation<sp/>vector<sp/>to<sp/>apply<sp/>to<sp/>the<sp/>AABB.</highlight></codeline>
 <codeline lineno="188"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="189"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Updates<sp/>the<sp/>minimum<sp/>and<sp/>maximum<sp/>bounds<sp/>to<sp/>ensure<sp/>the<sp/>specified<sp/>point</highlight></codeline>
-<codeline lineno="190"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>lies<sp/>within<sp/>the<sp/>AABB.<sp/>Each<sp/>component<sp/>is<sp/>compared<sp/>independently:</highlight></codeline>
-<codeline lineno="191"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>If<sp/>a<sp/>component<sp/>of<sp/>the<sp/>point<sp/>is<sp/>smaller<sp/>than<sp/>the<sp/>current<sp/>minimum,<sp/>the<sp/>minimum<sp/>is<sp/>updated.</highlight></codeline>
-<codeline lineno="192"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>If<sp/>a<sp/>component<sp/>of<sp/>the<sp/>point<sp/>is<sp/>larger<sp/>than<sp/>the<sp/>current<sp/>maximum,<sp/>the<sp/>maximum<sp/>is<sp/>updated.</highlight></codeline>
-<codeline lineno="193"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="194"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>point<sp/>The<sp/>3D<sp/>point<sp/>to<sp/>include<sp/>in<sp/>the<sp/>bounding<sp/>box.</highlight></codeline>
-<codeline lineno="195"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="196" refid="structhelios_1_1math_1_1aabb_1a92106c4efc1b1aae8466956903020665" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb_1a92106c4efc1b1aae8466956903020665" kindref="member">add</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref>&amp;<sp/>point)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>min_[0]<sp/>=<sp/>std::min(min_[0],<sp/>point[0]);</highlight></codeline>
-<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>min_[1]<sp/>=<sp/>std::min(min_[1],<sp/>point[1]);</highlight></codeline>
-<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>min_[2]<sp/>=<sp/>std::min(min_[2],<sp/>point[2]);</highlight></codeline>
-<codeline lineno="200"><highlight class="normal"></highlight></codeline>
-<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>max_[0]<sp/>=<sp/>std::max(max_[0],<sp/>point[0]);</highlight></codeline>
-<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>max_[1]<sp/>=<sp/>std::max(max_[1],<sp/>point[1]);</highlight></codeline>
-<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>max_[2]<sp/>=<sp/>std::max(max_[2],<sp/>point[2]);</highlight></codeline>
-<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="205"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="206"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="207"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Transforms<sp/>the<sp/>AABB<sp/>by<sp/>a<sp/>4x4<sp/>transformation<sp/>matrix.</highlight></codeline>
-<codeline lineno="208"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="209"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Applies<sp/>a<sp/>transformation<sp/>matrix<sp/>to<sp/>the<sp/>AABB<sp/>and<sp/>returns<sp/>a<sp/>new<sp/>axis-aligned<sp/>bounding<sp/>box</highlight></codeline>
-<codeline lineno="210"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>that<sp/>fully<sp/>contains<sp/>the<sp/>transformed<sp/>original.<sp/>This<sp/>method<sp/>preserves<sp/>the<sp/>axis-aligned<sp/>property</highlight></codeline>
-<codeline lineno="211"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>by<sp/>computing<sp/>new<sp/>min/max<sp/>bounds<sp/>from<sp/>the<sp/>transformed<sp/>corners.</highlight></codeline>
-<codeline lineno="212"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="213"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>algorithm<sp/>efficiently<sp/>transforms<sp/>only<sp/>the<sp/>min/max<sp/>corners<sp/>instead<sp/>of<sp/>all<sp/>8<sp/>vertices,</highlight></codeline>
-<codeline lineno="214"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>using<sp/>Arvo&apos;s<sp/>optimization<sp/>technique<sp/>from<sp/>Graphics<sp/>Gems.</highlight></codeline>
-<codeline lineno="215"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="216"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>mat<sp/>The<sp/>4x4<sp/>transformation<sp/>matrix<sp/>to<sp/>apply.</highlight></codeline>
-<codeline lineno="217"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="218"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>new<sp/>AABB<sp/>that<sp/>fully<sp/>contains<sp/>the<sp/>transformed<sp/>bounding<sp/>box.</highlight></codeline>
-<codeline lineno="219"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="220"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>[Gla95,<sp/>pp.<sp/>548-550]<sp/>&quot;Transforming<sp/>Axis-Aligned<sp/>Bounding<sp/>Boxes&quot;<sp/>by<sp/>James<sp/>Arvo</highlight></codeline>
-<codeline lineno="221"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="222" refid="structhelios_1_1math_1_1aabb_1aa1e69fb646399dae7c02c52e972532b5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="structhelios_1_1math_1_1aabb_1aa503a6e73ae299cc5e2cef2fe2513857" kindref="member">aabb&lt;T&gt;</ref><sp/><ref refid="structhelios_1_1math_1_1aabb_1aa1e69fb646399dae7c02c52e972532b5" kindref="member">applyTransform</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1mat4" kindref="compound">mat4&lt;T&gt;</ref>&amp;<sp/>mat)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="223"><highlight class="normal"></highlight></codeline>
-<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>translationX<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(mat(0,<sp/>3));</highlight></codeline>
-<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>translationY<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(mat(1,<sp/>3));</highlight></codeline>
-<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>translationZ<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(mat(2,<sp/>3));</highlight></codeline>
-<codeline lineno="227"><highlight class="normal"></highlight></codeline>
-<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">vec3&lt;T&gt;</ref><sp/>newMin<sp/>=<sp/>{translationX,<sp/>translationY,<sp/>translationZ};</highlight></codeline>
-<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">vec3&lt;T&gt;</ref><sp/>newMax<sp/>=<sp/>newMin;</highlight></codeline>
-<codeline lineno="230"><highlight class="normal"></highlight></codeline>
-<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>3;<sp/>++i)<sp/>{</highlight></codeline>
-<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>j<sp/>=<sp/>0;<sp/>j<sp/>&lt;<sp/>3;<sp/>++j)<sp/>{</highlight></codeline>
-<codeline lineno="233"><highlight class="normal"></highlight></codeline>
-<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>T<sp/>val<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(mat(j,<sp/>i));</highlight></codeline>
-<codeline lineno="235"><highlight class="normal"></highlight></codeline>
-<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>T<sp/>e<sp/>=<sp/>val<sp/>*<sp/>min_[i];</highlight></codeline>
-<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>T<sp/>f<sp/>=<sp/>val<sp/>*<sp/>max_[i];</highlight></codeline>
-<codeline lineno="238"><highlight class="normal"></highlight></codeline>
-<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(e<sp/>&lt;<sp/>f)<sp/>{</highlight></codeline>
-<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>newMin[j]<sp/>+=<sp/>e;</highlight></codeline>
-<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>newMax[j]<sp/>+=<sp/>f;</highlight></codeline>
-<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>newMin[j]<sp/>+=<sp/>f;</highlight></codeline>
-<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>newMax[j]<sp/>+=<sp/>e;</highlight></codeline>
-<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="189"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>new<sp/>AABB<sp/>translated<sp/>by<sp/>the<sp/>given<sp/>vector.</highlight></codeline>
+<codeline lineno="190"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="191" refid="structhelios_1_1math_1_1aabb_1ab6aadb560a2c8ee5dd381592b653578b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref><sp/><ref refid="structhelios_1_1math_1_1aabb_1ab6aadb560a2c8ee5dd381592b653578b" kindref="member">translate</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref>&amp;<sp/>v)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref>{</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>min_<sp/>+<sp/>v,<sp/>max_<sp/>+<sp/>v</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="normal"></highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="199"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="200"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Expands<sp/>the<sp/>AABB<sp/>to<sp/>include<sp/>a<sp/>given<sp/>point.</highlight></codeline>
+<codeline lineno="201"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="202"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Updates<sp/>the<sp/>minimum<sp/>and<sp/>maximum<sp/>bounds<sp/>to<sp/>ensure<sp/>the<sp/>specified<sp/>point</highlight></codeline>
+<codeline lineno="203"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>lies<sp/>within<sp/>the<sp/>AABB.<sp/>Each<sp/>component<sp/>is<sp/>compared<sp/>independently:</highlight></codeline>
+<codeline lineno="204"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>If<sp/>a<sp/>component<sp/>of<sp/>the<sp/>point<sp/>is<sp/>smaller<sp/>than<sp/>the<sp/>current<sp/>minimum,<sp/>the<sp/>minimum<sp/>is<sp/>updated.</highlight></codeline>
+<codeline lineno="205"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>-<sp/>If<sp/>a<sp/>component<sp/>of<sp/>the<sp/>point<sp/>is<sp/>larger<sp/>than<sp/>the<sp/>current<sp/>maximum,<sp/>the<sp/>maximum<sp/>is<sp/>updated.</highlight></codeline>
+<codeline lineno="206"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="207"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>point<sp/>The<sp/>3D<sp/>point<sp/>to<sp/>include<sp/>in<sp/>the<sp/>bounding<sp/>box.</highlight></codeline>
+<codeline lineno="208"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="209" refid="structhelios_1_1math_1_1aabb_1a92106c4efc1b1aae8466956903020665" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb_1a92106c4efc1b1aae8466956903020665" kindref="member">add</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref>&amp;<sp/>point)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>min_[0]<sp/>=<sp/>std::min(min_[0],<sp/>point[0]);</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>min_[1]<sp/>=<sp/>std::min(min_[1],<sp/>point[1]);</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>min_[2]<sp/>=<sp/>std::min(min_[2],<sp/>point[2]);</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>max_[0]<sp/>=<sp/>std::max(max_[0],<sp/>point[0]);</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>max_[1]<sp/>=<sp/>std::max(max_[1],<sp/>point[1]);</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>max_[2]<sp/>=<sp/>std::max(max_[2],<sp/>point[2]);</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="219"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="220"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Transforms<sp/>the<sp/>AABB<sp/>by<sp/>a<sp/>4x4<sp/>transformation<sp/>matrix.</highlight></codeline>
+<codeline lineno="221"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="222"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Applies<sp/>a<sp/>transformation<sp/>matrix<sp/>to<sp/>the<sp/>AABB<sp/>and<sp/>returns<sp/>a<sp/>new<sp/>axis-aligned<sp/>bounding<sp/>box</highlight></codeline>
+<codeline lineno="223"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>that<sp/>fully<sp/>contains<sp/>the<sp/>transformed<sp/>original.<sp/>This<sp/>method<sp/>preserves<sp/>the<sp/>axis-aligned<sp/>property</highlight></codeline>
+<codeline lineno="224"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>by<sp/>computing<sp/>new<sp/>min/max<sp/>bounds<sp/>from<sp/>the<sp/>transformed<sp/>corners.</highlight></codeline>
+<codeline lineno="225"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="226"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>algorithm<sp/>efficiently<sp/>transforms<sp/>only<sp/>the<sp/>min/max<sp/>corners<sp/>instead<sp/>of<sp/>all<sp/>8<sp/>vertices,</highlight></codeline>
+<codeline lineno="227"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>using<sp/>Arvo&apos;s<sp/>optimization<sp/>technique<sp/>from<sp/>Graphics<sp/>Gems.</highlight></codeline>
+<codeline lineno="228"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="229"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>mat<sp/>The<sp/>4x4<sp/>transformation<sp/>matrix<sp/>to<sp/>apply.</highlight></codeline>
+<codeline lineno="230"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="231"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>new<sp/>AABB<sp/>that<sp/>fully<sp/>contains<sp/>the<sp/>transformed<sp/>bounding<sp/>box.</highlight></codeline>
+<codeline lineno="232"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="233"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>@see<sp/>[Gla95,<sp/>pp.<sp/>548-550]<sp/>&quot;Transforming<sp/>Axis-Aligned<sp/>Bounding<sp/>Boxes&quot;<sp/>by<sp/>James<sp/>Arvo</highlight></codeline>
+<codeline lineno="234"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="235" refid="structhelios_1_1math_1_1aabb_1aa1e69fb646399dae7c02c52e972532b5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/><ref refid="structhelios_1_1math_1_1aabb_1aa503a6e73ae299cc5e2cef2fe2513857" kindref="member">aabb&lt;T&gt;</ref><sp/><ref refid="structhelios_1_1math_1_1aabb_1aa1e69fb646399dae7c02c52e972532b5" kindref="member">applyTransform</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1mat4" kindref="compound">mat4&lt;T&gt;</ref>&amp;<sp/>mat)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"></highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>translationX<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(mat(0,<sp/>3));</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>translationY<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(mat(1,<sp/>3));</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T<sp/>translationZ<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(mat(2,<sp/>3));</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"></highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">vec3&lt;T&gt;</ref><sp/>newMin<sp/>=<sp/>{translationX,<sp/>translationY,<sp/>translationZ};</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">vec3&lt;T&gt;</ref><sp/>newMax<sp/>=<sp/>newMin;</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"></highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>3;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>j<sp/>=<sp/>0;<sp/>j<sp/>&lt;<sp/>3;<sp/>++j)<sp/>{</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"></highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>T<sp/>val<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(mat(j,<sp/>i));</highlight></codeline>
 <codeline lineno="248"><highlight class="normal"></highlight></codeline>
-<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb_1aa503a6e73ae299cc5e2cef2fe2513857" kindref="member">aabb&lt;T&gt;</ref>(newMin,<sp/>newMax);</highlight></codeline>
-<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="252"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="253"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="254"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Computes<sp/>the<sp/>signed<sp/>dimensions<sp/>of<sp/>the<sp/>overlapping<sp/>region<sp/>between<sp/>two<sp/>axis-aligned</highlight></codeline>
-<codeline lineno="255"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>bounding<sp/>boxes<sp/>(AABBs).</highlight></codeline>
-<codeline lineno="256"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="257"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Given<sp/>two<sp/>AABBs,<sp/>this<sp/>function<sp/>calculates<sp/>the<sp/>intersection<sp/>bounds<sp/>along<sp/>each<sp/>axis.</highlight></codeline>
-<codeline lineno="258"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>resulting<sp/>vector<sp/>represents<sp/>the<sp/>size<sp/>(extents)<sp/>of<sp/>the<sp/>intersection.</highlight></codeline>
-<codeline lineno="259"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="260"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@tparam<sp/>T<sp/>The<sp/>numeric<sp/>type<sp/>used<sp/>for<sp/>the<sp/>vector<sp/>components<sp/>(e.g.,<sp/>`float`<sp/>or<sp/>`double`).</highlight></codeline>
-<codeline lineno="261"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>a<sp/>The<sp/>first<sp/>AABB.</highlight></codeline>
-<codeline lineno="262"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>b<sp/>The<sp/>second<sp/>AABB.</highlight></codeline>
-<codeline lineno="263"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="264"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>3D<sp/>vector<sp/>representing<sp/>the<sp/>dimensions<sp/>of<sp/>the<sp/>overlapping<sp/>region<sp/>between</highlight></codeline>
-<codeline lineno="265"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>the<sp/>AABBs.<sp/>If<sp/>no<sp/>overlap<sp/>exists,<sp/>the<sp/>resulting<sp/>vector<sp/>may<sp/>contain<sp/>non-positive</highlight></codeline>
-<codeline lineno="266"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>values<sp/>in<sp/>one<sp/>or<sp/>more<sp/>components.</highlight></codeline>
-<codeline lineno="267"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="269" refid="namespacehelios_1_1math_1af526a25ddc0ed10b47b832bedbde26cd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref><sp/><ref refid="namespacehelios_1_1math_1af526a25ddc0ed10b47b832bedbde26cd" kindref="member">overlap</ref>(</highlight></codeline>
-<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref><sp/>a,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref><sp/>b)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="271"><highlight class="normal"></highlight></codeline>
-<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>overlapMin<sp/>=<sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref>{</highlight></codeline>
-<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::max(a.min()[0],<sp/>b.min()[0]),</highlight></codeline>
-<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::max(a.min()[1],<sp/>b.min()[1]),</highlight></codeline>
-<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::max(a.min()[2],<sp/>b.min()[2])</highlight></codeline>
-<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="277"><highlight class="normal"></highlight></codeline>
-<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>overlapMax<sp/>=<sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref>{</highlight></codeline>
-<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::min(a.max()[0],<sp/>b.max()[0]),</highlight></codeline>
-<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::min(a.max()[1],<sp/>b.max()[1]),</highlight></codeline>
-<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::min(a.max()[2],<sp/>b.max()[2])</highlight></codeline>
-<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="283"><highlight class="normal"></highlight></codeline>
-<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>overlapMax<sp/>-<sp/>overlapMin;</highlight></codeline>
-<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="286"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="287"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="288"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Computes<sp/>the<sp/>center<sp/>of<sp/>intersection<sp/>of<sp/>the<sp/>overlapping<sp/>region<sp/>between<sp/>two<sp/>axis-aligned<sp/>bounding</highlight></codeline>
-<codeline lineno="289"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>boxes<sp/>(AABBs).</highlight></codeline>
-<codeline lineno="290"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="291"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>function<sp/>calculates<sp/>the<sp/>center<sp/>of<sp/>the<sp/>intersection<sp/>region<sp/>of<sp/>the<sp/>two<sp/>AABBs.</highlight></codeline>
-<codeline lineno="292"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/>If<sp/>the<sp/>AABBs<sp/>do<sp/>not<sp/>overlap,<sp/>the<sp/>returned<sp/>value<sp/>represents<sp/>the<sp/>midpoint<sp/>of<sp/>the<sp/>gap<sp/>between<sp/>them.</highlight></codeline>
-<codeline lineno="293"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="294"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@tparam<sp/>T<sp/>The<sp/>numeric<sp/>type<sp/>used<sp/>for<sp/>the<sp/>vector<sp/>components<sp/>(e.g.,<sp/>`float`<sp/>or<sp/>`double`).</highlight></codeline>
-<codeline lineno="295"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>a<sp/>The<sp/>first<sp/>AABB.</highlight></codeline>
-<codeline lineno="296"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>b<sp/>The<sp/>second<sp/>AABB.</highlight></codeline>
-<codeline lineno="297"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="298"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>3D<sp/>vector<sp/>representing<sp/>the<sp/>center<sp/>point<sp/>of<sp/>the<sp/>overlapping<sp/>or<sp/>gapping<sp/>region<sp/>between<sp/>the<sp/>AABBs.</highlight></codeline>
-<codeline lineno="299"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="300"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="301" refid="namespacehelios_1_1math_1a83d3fdd630c2f9d9179d0263fa515571" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref><sp/><ref refid="namespacehelios_1_1math_1a83d3fdd630c2f9d9179d0263fa515571" kindref="member">overlapCenter</ref>(</highlight></codeline>
-<codeline lineno="302"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref><sp/>a,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref><sp/>b)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="303"><highlight class="normal"></highlight></codeline>
-<codeline lineno="304"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>overlapMin<sp/>=<sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref>{</highlight></codeline>
-<codeline lineno="305"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::max(a.min()[0],<sp/>b.min()[0]),</highlight></codeline>
-<codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::max(a.min()[1],<sp/>b.min()[1]),</highlight></codeline>
-<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::max(a.min()[2],<sp/>b.min()[2])</highlight></codeline>
-<codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="309"><highlight class="normal"></highlight></codeline>
-<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>overlapMax<sp/>=<sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref>{</highlight></codeline>
-<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::min(a.max()[0],<sp/>b.max()[0]),</highlight></codeline>
-<codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::min(a.max()[1],<sp/>b.max()[1]),</highlight></codeline>
-<codeline lineno="313"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::min(a.max()[2],<sp/>b.max()[2])</highlight></codeline>
-<codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="315"><highlight class="normal"></highlight></codeline>
-<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(overlapMax<sp/>+<sp/>overlapMin)<sp/>*<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(0.5);</highlight></codeline>
-<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="318"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="319"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="320"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Adds<sp/>a<sp/>translation<sp/>vector<sp/>to<sp/>an<sp/>AABB.</highlight></codeline>
-<codeline lineno="321"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="322"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>operator<sp/>overload<sp/>allows<sp/>the<sp/>addition<sp/>of<sp/>a<sp/>translation<sp/>vector</highlight></codeline>
-<codeline lineno="323"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>to<sp/>an<sp/>axis-aligned<sp/>bounding<sp/>box<sp/>(AABB),<sp/>resulting<sp/>in<sp/>a<sp/>new<sp/>translated<sp/>AABB.</highlight></codeline>
-<codeline lineno="324"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="325"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@tparam<sp/>T<sp/>The<sp/>numeric<sp/>type<sp/>of<sp/>the<sp/>vector<sp/>components<sp/>(e.g.,<sp/>`float`<sp/>or<sp/>`double`).</highlight></codeline>
-<codeline lineno="326"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>aabb<sp/>The<sp/>AABB<sp/>to<sp/>be<sp/>translated.</highlight></codeline>
-<codeline lineno="327"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>v<sp/>The<sp/>translation<sp/>vector<sp/>to<sp/>apply.</highlight></codeline>
-<codeline lineno="328"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="329"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>new<sp/>AABB<sp/>translated<sp/>by<sp/>the<sp/>given<sp/>vector.</highlight></codeline>
-<codeline lineno="330"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="331"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="332" refid="namespacehelios_1_1math_1aee9df9ba24371aefd6a84af803813f1e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref><sp/><ref refid="namespacehelios_1_1math_1aee9df9ba24371aefd6a84af803813f1e" kindref="member">operator+</ref>(</highlight></codeline>
-<codeline lineno="333"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">aabb</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref><sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="334"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">aabb</ref>.<ref refid="structhelios_1_1math_1_1aabb_1ab6aadb560a2c8ee5dd381592b653578b" kindref="member">translate</ref>(v);</highlight></codeline>
-<codeline lineno="335"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="336"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="337"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="338"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Scales<sp/>an<sp/>AABB<sp/>by<sp/>a<sp/>given<sp/>vector.</highlight></codeline>
-<codeline lineno="339"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="340"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>operator<sp/>overload<sp/>allows<sp/>scaling<sp/>of<sp/>an<sp/>axis-aligned<sp/>bounding<sp/>box<sp/>(AABB)</highlight></codeline>
-<codeline lineno="341"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>by<sp/>multiplying<sp/>its<sp/>min<sp/>and<sp/>max<sp/>points<sp/>with<sp/>the<sp/>given<sp/>vector.</highlight></codeline>
-<codeline lineno="342"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="343"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@tparam<sp/>T<sp/>The<sp/>numeric<sp/>type<sp/>of<sp/>the<sp/>vector<sp/>components.</highlight></codeline>
-<codeline lineno="344"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>aabb<sp/>The<sp/>AABB<sp/>to<sp/>be<sp/>scaled.</highlight></codeline>
-<codeline lineno="345"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>v<sp/>The<sp/>scaling<sp/>vector,<sp/>for<sp/>which<sp/>only<sp/>positive<sp/>values<sp/>are<sp/>allowed.</highlight></codeline>
-<codeline lineno="346"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
-<codeline lineno="347"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>new<sp/>AABB<sp/>scaled<sp/>by<sp/>the<sp/>given<sp/>vector.</highlight></codeline>
-<codeline lineno="348"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="349"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="350" refid="namespacehelios_1_1math_1ac91a9a73632368c02a726bc3f070254d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref><sp/><ref refid="namespacehelios_1_1math_1ac91a9a73632368c02a726bc3f070254d" kindref="member">operator*</ref>(</highlight></codeline>
-<codeline lineno="351"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref>&amp;<sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">aabb</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref><sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="352"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assert(v[0]<sp/>&gt;=<sp/>0<sp/>&amp;&amp;<sp/>v[1]<sp/>&gt;=<sp/>0<sp/>&amp;&amp;<sp/>v[2]<sp/>&gt;=<sp/>0<sp/>&amp;&amp;<sp/></highlight><highlight class="stringliteral">&quot;unexpected<sp/>negative<sp/>value<sp/>for<sp/>scaling<sp/>vector&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="353"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref>{<ref refid="structhelios_1_1math_1_1aabb" kindref="compound">aabb</ref>.<ref refid="structhelios_1_1math_1_1aabb_1ab53ba0c88b465fb3f9e6ae410c3f0b70" kindref="member">min</ref>()<sp/>*<sp/>v,<sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">aabb</ref>.<ref refid="structhelios_1_1math_1_1aabb_1aa5836a6c13c4a5ddd421adb3a168970e" kindref="member">max</ref>()<sp/>*<sp/>v};</highlight></codeline>
-<codeline lineno="354"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="355"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="356"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="357"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Single-precision<sp/>floating-point<sp/>AABB.</highlight></codeline>
-<codeline lineno="358"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="359" refid="namespacehelios_1_1math_1a124c0492430aeecedc1c1a5ece4ba488" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1math_1a124c0492430aeecedc1c1a5ece4ba488" kindref="member">aabbf</ref><sp/>=<sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">aabb&lt;float&gt;</ref>;</highlight></codeline>
-<codeline lineno="360"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="361"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="362"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Integer<sp/>AABB.</highlight></codeline>
-<codeline lineno="363"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="364" refid="namespacehelios_1_1math_1a3c63775a7d6ff09058288223291660b7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1math_1a3c63775a7d6ff09058288223291660b7" kindref="member">aabbi</ref><sp/>=<sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">aabb&lt;int&gt;</ref>;</highlight></codeline>
-<codeline lineno="365"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="366"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="367"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Unsigned<sp/>Integer<sp/>AABB.</highlight></codeline>
-<codeline lineno="368"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="369" refid="namespacehelios_1_1math_1a55cd2251d2249ab35eb5f2ea9999f414" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1math_1a55cd2251d2249ab35eb5f2ea9999f414" kindref="member">aabbui</ref><sp/>=<sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">aabb&lt;unsigned int&gt;</ref>;</highlight></codeline>
-<codeline lineno="370"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
-<codeline lineno="371"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
-<codeline lineno="372"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Double-precision<sp/>floating-point<sp/>AABB.</highlight></codeline>
-<codeline lineno="373"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="374" refid="namespacehelios_1_1math_1a8cdcd5dfceca20081416ef7ac3374e01" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1math_1a8cdcd5dfceca20081416ef7ac3374e01" kindref="member">aabbd</ref><sp/>=<sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">aabb&lt;double&gt;</ref>;</highlight></codeline>
-<codeline lineno="375"><highlight class="normal"></highlight></codeline>
-<codeline lineno="376"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>helios::math</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>T<sp/>e<sp/>=<sp/>val<sp/>*<sp/>min_[i];</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>T<sp/>f<sp/>=<sp/>val<sp/>*<sp/>max_[i];</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"></highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(e<sp/>&lt;<sp/>f)<sp/>{</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>newMin[j]<sp/>+=<sp/>e;</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>newMax[j]<sp/>+=<sp/>f;</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>newMin[j]<sp/>+=<sp/>f;</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>newMax[j]<sp/>+=<sp/>e;</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"></highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb_1aa503a6e73ae299cc5e2cef2fe2513857" kindref="member">aabb&lt;T&gt;</ref>(newMin,<sp/>newMax);</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="266"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="267"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Computes<sp/>the<sp/>signed<sp/>dimensions<sp/>of<sp/>the<sp/>overlapping<sp/>region<sp/>between<sp/>two<sp/>axis-aligned</highlight></codeline>
+<codeline lineno="268"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>bounding<sp/>boxes<sp/>(AABBs).</highlight></codeline>
+<codeline lineno="269"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="270"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>Given<sp/>two<sp/>AABBs,<sp/>this<sp/>function<sp/>calculates<sp/>the<sp/>intersection<sp/>bounds<sp/>along<sp/>each<sp/>axis.</highlight></codeline>
+<codeline lineno="271"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>The<sp/>resulting<sp/>vector<sp/>represents<sp/>the<sp/>size<sp/>(extents)<sp/>of<sp/>the<sp/>intersection.</highlight></codeline>
+<codeline lineno="272"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="273"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@tparam<sp/>T<sp/>The<sp/>numeric<sp/>type<sp/>used<sp/>for<sp/>the<sp/>vector<sp/>components<sp/>(e.g.,<sp/>`float`<sp/>or<sp/>`double`).</highlight></codeline>
+<codeline lineno="274"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>a<sp/>The<sp/>first<sp/>AABB.</highlight></codeline>
+<codeline lineno="275"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>b<sp/>The<sp/>second<sp/>AABB.</highlight></codeline>
+<codeline lineno="276"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="277"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>3D<sp/>vector<sp/>representing<sp/>the<sp/>dimensions<sp/>of<sp/>the<sp/>overlapping<sp/>region<sp/>between</highlight></codeline>
+<codeline lineno="278"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>the<sp/>AABBs.<sp/>If<sp/>no<sp/>overlap<sp/>exists,<sp/>the<sp/>resulting<sp/>vector<sp/>may<sp/>contain<sp/>non-positive</highlight></codeline>
+<codeline lineno="279"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>values<sp/>in<sp/>one<sp/>or<sp/>more<sp/>components.</highlight></codeline>
+<codeline lineno="280"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="282" refid="namespacehelios_1_1math_1af526a25ddc0ed10b47b832bedbde26cd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref><sp/><ref refid="namespacehelios_1_1math_1af526a25ddc0ed10b47b832bedbde26cd" kindref="member">overlap</ref>(</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref><sp/>a,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref><sp/>b)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"></highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>overlapMin<sp/>=<sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref>{</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::max(a.min()[0],<sp/>b.min()[0]),</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::max(a.min()[1],<sp/>b.min()[1]),</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::max(a.min()[2],<sp/>b.min()[2])</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"></highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>overlapMax<sp/>=<sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref>{</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::min(a.max()[0],<sp/>b.max()[0]),</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::min(a.max()[1],<sp/>b.max()[1]),</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::min(a.max()[2],<sp/>b.max()[2])</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"></highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>overlapMax<sp/>-<sp/>overlapMin;</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="300"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="301"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Computes<sp/>the<sp/>center<sp/>of<sp/>intersection<sp/>of<sp/>the<sp/>overlapping<sp/>region<sp/>between<sp/>two<sp/>axis-aligned<sp/>bounding</highlight></codeline>
+<codeline lineno="302"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>boxes<sp/>(AABBs).</highlight></codeline>
+<codeline lineno="303"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="304"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>function<sp/>calculates<sp/>the<sp/>center<sp/>of<sp/>the<sp/>intersection<sp/>region<sp/>of<sp/>the<sp/>two<sp/>AABBs.</highlight></codeline>
+<codeline lineno="305"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/><sp/>If<sp/>the<sp/>AABBs<sp/>do<sp/>not<sp/>overlap,<sp/>the<sp/>returned<sp/>value<sp/>represents<sp/>the<sp/>midpoint<sp/>of<sp/>the<sp/>gap<sp/>between<sp/>them.</highlight></codeline>
+<codeline lineno="306"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="307"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@tparam<sp/>T<sp/>The<sp/>numeric<sp/>type<sp/>used<sp/>for<sp/>the<sp/>vector<sp/>components<sp/>(e.g.,<sp/>`float`<sp/>or<sp/>`double`).</highlight></codeline>
+<codeline lineno="308"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>a<sp/>The<sp/>first<sp/>AABB.</highlight></codeline>
+<codeline lineno="309"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>b<sp/>The<sp/>second<sp/>AABB.</highlight></codeline>
+<codeline lineno="310"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="311"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>3D<sp/>vector<sp/>representing<sp/>the<sp/>center<sp/>point<sp/>of<sp/>the<sp/>overlapping<sp/>or<sp/>gapping<sp/>region<sp/>between<sp/>the<sp/>AABBs.</highlight></codeline>
+<codeline lineno="312"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="314" refid="namespacehelios_1_1math_1a83d3fdd630c2f9d9179d0263fa515571" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref><sp/><ref refid="namespacehelios_1_1math_1a83d3fdd630c2f9d9179d0263fa515571" kindref="member">overlapCenter</ref>(</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref><sp/>a,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref><sp/>b)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"></highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>overlapMin<sp/>=<sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref>{</highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::max(a.min()[0],<sp/>b.min()[0]),</highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::max(a.min()[1],<sp/>b.min()[1]),</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::max(a.min()[2],<sp/>b.min()[2])</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"></highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>overlapMax<sp/>=<sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref>{</highlight></codeline>
+<codeline lineno="324"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::min(a.max()[0],<sp/>b.max()[0]),</highlight></codeline>
+<codeline lineno="325"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::min(a.max()[1],<sp/>b.max()[1]),</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::min(a.max()[2],<sp/>b.max()[2])</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="328"><highlight class="normal"></highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(overlapMax<sp/>+<sp/>overlapMin)<sp/>*<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(0.5);</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="331"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="332"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="333"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Adds<sp/>a<sp/>translation<sp/>vector<sp/>to<sp/>an<sp/>AABB.</highlight></codeline>
+<codeline lineno="334"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="335"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>operator<sp/>overload<sp/>allows<sp/>the<sp/>addition<sp/>of<sp/>a<sp/>translation<sp/>vector</highlight></codeline>
+<codeline lineno="336"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>to<sp/>an<sp/>axis-aligned<sp/>bounding<sp/>box<sp/>(AABB),<sp/>resulting<sp/>in<sp/>a<sp/>new<sp/>translated<sp/>AABB.</highlight></codeline>
+<codeline lineno="337"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="338"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@tparam<sp/>T<sp/>The<sp/>numeric<sp/>type<sp/>of<sp/>the<sp/>vector<sp/>components<sp/>(e.g.,<sp/>`float`<sp/>or<sp/>`double`).</highlight></codeline>
+<codeline lineno="339"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>aabb<sp/>The<sp/>AABB<sp/>to<sp/>be<sp/>translated.</highlight></codeline>
+<codeline lineno="340"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>v<sp/>The<sp/>translation<sp/>vector<sp/>to<sp/>apply.</highlight></codeline>
+<codeline lineno="341"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="342"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>new<sp/>AABB<sp/>translated<sp/>by<sp/>the<sp/>given<sp/>vector.</highlight></codeline>
+<codeline lineno="343"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="344"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="345" refid="namespacehelios_1_1math_1aee9df9ba24371aefd6a84af803813f1e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref><sp/><ref refid="namespacehelios_1_1math_1aee9df9ba24371aefd6a84af803813f1e" kindref="member">operator+</ref>(</highlight></codeline>
+<codeline lineno="346"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">aabb</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref><sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="347"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">aabb</ref>.<ref refid="structhelios_1_1math_1_1aabb_1ab6aadb560a2c8ee5dd381592b653578b" kindref="member">translate</ref>(v);</highlight></codeline>
+<codeline lineno="348"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="350"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="351"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Scales<sp/>an<sp/>AABB<sp/>by<sp/>a<sp/>given<sp/>vector.</highlight></codeline>
+<codeline lineno="352"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="353"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>operator<sp/>overload<sp/>allows<sp/>scaling<sp/>of<sp/>an<sp/>axis-aligned<sp/>bounding<sp/>box<sp/>(AABB)</highlight></codeline>
+<codeline lineno="354"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>by<sp/>multiplying<sp/>its<sp/>min<sp/>and<sp/>max<sp/>points<sp/>with<sp/>the<sp/>given<sp/>vector.</highlight></codeline>
+<codeline lineno="355"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="356"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@tparam<sp/>T<sp/>The<sp/>numeric<sp/>type<sp/>of<sp/>the<sp/>vector<sp/>components.</highlight></codeline>
+<codeline lineno="357"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>aabb<sp/>The<sp/>AABB<sp/>to<sp/>be<sp/>scaled.</highlight></codeline>
+<codeline lineno="358"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@param<sp/>v<sp/>The<sp/>scaling<sp/>vector,<sp/>for<sp/>which<sp/>only<sp/>positive<sp/>values<sp/>are<sp/>allowed.</highlight></codeline>
+<codeline lineno="359"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*</highlight></codeline>
+<codeline lineno="360"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@return<sp/>A<sp/>new<sp/>AABB<sp/>scaled<sp/>by<sp/>the<sp/>given<sp/>vector.</highlight></codeline>
+<codeline lineno="361"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="362"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="363" refid="namespacehelios_1_1math_1ac91a9a73632368c02a726bc3f070254d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref><sp/><ref refid="namespacehelios_1_1math_1ac91a9a73632368c02a726bc3f070254d" kindref="member">operator*</ref>(</highlight></codeline>
+<codeline lineno="364"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref>&amp;<sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">aabb</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">helios::math::vec3&lt;T&gt;</ref><sp/>v)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="365"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assert(v[0]<sp/>&gt;=<sp/>0<sp/>&amp;&amp;<sp/>v[1]<sp/>&gt;=<sp/>0<sp/>&amp;&amp;<sp/>v[2]<sp/>&gt;=<sp/>0<sp/>&amp;&amp;<sp/></highlight><highlight class="stringliteral">&quot;unexpected<sp/>negative<sp/>value<sp/>for<sp/>scaling<sp/>vector&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="366"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">helios::math::aabb&lt;T&gt;</ref>{<ref refid="structhelios_1_1math_1_1aabb" kindref="compound">aabb</ref>.<ref refid="structhelios_1_1math_1_1aabb_1ab53ba0c88b465fb3f9e6ae410c3f0b70" kindref="member">min</ref>()<sp/>*<sp/>v,<sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">aabb</ref>.<ref refid="structhelios_1_1math_1_1aabb_1aa5836a6c13c4a5ddd421adb3a168970e" kindref="member">max</ref>()<sp/>*<sp/>v};</highlight></codeline>
+<codeline lineno="367"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="368"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="369"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="370"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Single-precision<sp/>floating-point<sp/>AABB.</highlight></codeline>
+<codeline lineno="371"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="372" refid="namespacehelios_1_1math_1a124c0492430aeecedc1c1a5ece4ba488" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1math_1a124c0492430aeecedc1c1a5ece4ba488" kindref="member">aabbf</ref><sp/>=<sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">aabb&lt;float&gt;</ref>;</highlight></codeline>
+<codeline lineno="373"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="374"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="375"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Integer<sp/>AABB.</highlight></codeline>
+<codeline lineno="376"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="377" refid="namespacehelios_1_1math_1a3c63775a7d6ff09058288223291660b7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1math_1a3c63775a7d6ff09058288223291660b7" kindref="member">aabbi</ref><sp/>=<sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">aabb&lt;int&gt;</ref>;</highlight></codeline>
+<codeline lineno="378"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="379"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="380"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Unsigned<sp/>Integer<sp/>AABB.</highlight></codeline>
+<codeline lineno="381"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="382" refid="namespacehelios_1_1math_1a55cd2251d2249ab35eb5f2ea9999f414" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1math_1a55cd2251d2249ab35eb5f2ea9999f414" kindref="member">aabbui</ref><sp/>=<sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">aabb&lt;unsigned int&gt;</ref>;</highlight></codeline>
+<codeline lineno="383"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="384"><highlight class="comment"><sp/><sp/><sp/><sp/>/**</highlight></codeline>
+<codeline lineno="385"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>@brief<sp/>Double-precision<sp/>floating-point<sp/>AABB.</highlight></codeline>
+<codeline lineno="386"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="387" refid="namespacehelios_1_1math_1a8cdcd5dfceca20081416ef7ac3374e01" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespacehelios_1_1math_1a8cdcd5dfceca20081416ef7ac3374e01" kindref="member">aabbd</ref><sp/>=<sp/><ref refid="structhelios_1_1math_1_1aabb" kindref="compound">aabb&lt;double&gt;</ref>;</highlight></codeline>
+<codeline lineno="388"><highlight class="normal"></highlight></codeline>
+<codeline lineno="389"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>helios::math</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="include/helios/math/types/aabb.ixx"/>
+    <location file="/tmp/h/include/helios/math/types/aabb.ixx"/>
   </compounddef>
 </doxygen>

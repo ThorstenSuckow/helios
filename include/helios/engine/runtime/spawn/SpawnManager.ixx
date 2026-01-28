@@ -229,6 +229,8 @@ export namespace helios::engine::runtime::spawn {
                         tsc->setTranslation(position);
                     }
 
+                    assert(spawnProfile->spawnInitializer && "Unexpected missing spawn initializer");
+
                     spawnProfile->spawnInitializer->initialize(*go, spawnCursor, spawnContext);
                     sbp->setSpawnProfileId(spawnProfileId);
                     go->setActive(true);
@@ -296,6 +298,9 @@ export namespace helios::engine::runtime::spawn {
                     );
                     tsc->setTranslation(position);
                 }
+
+
+                assert(spawnProfile->spawnInitializer && "Unexpected missing spawn initializer");
 
                 spawnProfile->spawnInitializer->initialize(*go, {1, 1}, spawnContext);
                 sbp->setSpawnProfileId(spawnProfileId);

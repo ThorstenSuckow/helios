@@ -463,7 +463,7 @@ export namespace helios::math {
     using vec3d = vec3<double>;
 
     /**
-     * @brief Unit vector along the positiveX-axis (1, 0, 0).
+     * @brief Unit vector along the positive X-axis (1, 0, 0).
      *
      * @details Commonly used as the default "right" direction in helios's
      * left-handed coordinate system.

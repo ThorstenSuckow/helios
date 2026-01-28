@@ -42,6 +42,19 @@ export namespace helios::engine::modules::physics::collision::components {
         explicit AabbColliderComponent(const AabbColliderComponent& other ) :
         bounds_(other.bounds_) {}
 
+        /**
+         * @brief Resets the bounds to invalidate state when this Component is acquired.
+         */
+        void onAcquire() noexcept override {
+            bounds_ = {};
+        }
+
+        /**
+         * @brief Resets the bounds to invalidate state when this Component is acquired.
+         */
+        void onRelease() noexcept override {
+            bounds_ = {};
+        }
 
         /**
          * @brief Retrieves the bounds of the collider.

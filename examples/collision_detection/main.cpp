@@ -47,20 +47,29 @@ using namespace helios::math;
 // ============================================================================
 
 int main() {
-
     // ========================================
     // Constants
     // ========================================
-    constexpr float CELL_SIZE          = 5.0f;
-    constexpr float SPACESHIP_SIZE     = 5.0f;
+    constexpr float CELL_LENGTH          = 5.0f;
+    constexpr float SPACESHIP_LENGTH     = 5.0f;
     constexpr float GRID_X             = 29.0f;
     constexpr float GRID_Y             = 19.0f;
     constexpr float FOVY               = helios::math::radians(90.0f);
     constexpr float ASPECT_RATIO_NUMER = 16.0f;
     constexpr float ASPECT_RATIO_DENOM = 9.0f;
 
+    constexpr helios::math::vec3f GRID_SCALE{GRID_X * CELL_LENGTH, GRID_Y * CELL_LENGTH, 0.0f};
 
+    constexpr auto TOP_LEFT_COORDINATES = helios::math::vec3f(GRID_SCALE[0] * - 0.5f, GRID_SCALE[1] * 0.5f, 0.0f);
+    constexpr auto TOP_RIGHT_COORDINATES = helios::math::vec3f(GRID_SCALE[0] *  0.5f, GRID_SCALE[1] * 0.5f, 0.0f);
+    constexpr auto BOTTOM_LEFT_COORDINATES =  helios::math::vec3f(GRID_SCALE[0] * - 0.5f, GRID_SCALE[1] * -0.5f, 0.0f);
+    constexpr auto BOTTOM_RIGHT_COORDINATES =  helios::math::vec3f(GRID_SCALE[0] * 0.5f, GRID_SCALE[1] * -0.5f, 0.0f);
 
+    constexpr auto BLUE_ENEMY_SCALE = helios::math::vec3f{SPACESHIP_LENGTH, SPACESHIP_LENGTH/2.0f, 0.0f};
+
+    constexpr auto SPACESHIP_SPAWN_POSITION = helios::math::vec3f(0.0f, 0.0f, 0.0f);
+    constexpr auto SPACESHIP_SIZE  = helios::math::vec3f(SPACESHIP_LENGTH, SPACESHIP_LENGTH, 0.0f);
+    
     // ========================================
     // 1. Application and Window Setup
     // ========================================
@@ -150,7 +159,7 @@ int main() {
     );
     mainViewport->setCameraSceneNode(cameraSceneNode_ptr);
     cameraSceneNode_ptr->setTranslation(
-        helios::math::vec3f(0.0f, 0.0f, -100.0f)//-(GRID_Y*CELL_SIZE / 2.0f)/tan(FOVY/2))
+        helios::math::vec3f(0.0f, 0.0f, -100.0f)//-(GRID_Y*CELL_LENGTH / 2.0f)/tan(FOVY/2))
     );
     cameraSceneNode_ptr->camera().setPerspective(
         FOVY,
@@ -175,8 +184,8 @@ int main() {
     auto* levelPtr = level.get();
     level->setBounds(
         helios::math::aabb{
-     -(GRID_X * CELL_SIZE)/2.0f, -(GRID_Y * CELL_SIZE)/2.0f, 0.0f,
-            (GRID_X * CELL_SIZE)/2.0f, (GRID_Y * CELL_SIZE)/2.0f, 0.0f
+     -(GRID_X * CELL_LENGTH)/2.0f, -(GRID_Y * CELL_LENGTH)/2.0f, 0.0f,
+            (GRID_X * CELL_LENGTH)/2.0f, (GRID_Y * CELL_LENGTH)/2.0f, 0.0f
         },
         helios::core::units::Unit::Meter
     );
@@ -205,6 +214,7 @@ int main() {
             cb.collision()
               .layerId(helios::examples::collisionDetection::CollisionId::Projectile)
               .useBoundingBox()
+              .hitPolicy(helios::engine::modules::physics::collision::types::HitPolicy::OneHit)
               .reportCollisions(true)
               .solidCollisionMask(helios::examples::collisionDetection::CollisionId::Enemy)
               .onSolidCollision(
@@ -244,10 +254,10 @@ int main() {
             cb.collision()
               .useBoundingBox();
         })
-        .withTransform([](auto& tb) {
+        .withTransform([GRID_SCALE](auto& tb) {
             tb.transform()
               .translate(helios::math::vec3f(0.0f, 0.0f, 0.5f))
-              .scale(helios::math::vec3f(GRID_X * CELL_SIZE, GRID_Y * CELL_SIZE, 0.0f));
+              .scale(GRID_SCALE);
         })
         .make();
 
@@ -265,14 +275,16 @@ int main() {
                .shape(std::make_shared<helios::rendering::asset::shape::basic::Triangle>())
                .attachTo(&root);
         })
-        .withTransform([](auto& tb) {
+        .withTransform([&](auto& tb) {
             tb.transform()
-              .scale(helios::math::vec3f(SPACESHIP_SIZE, SPACESHIP_SIZE, 0.0f));
+              .scale(SPACESHIP_SIZE)
+              .translate(SPACESHIP_SPAWN_POSITION);
         })
         .withCollision([](auto& cb) {
             cb.collision()
               .layerId(helios::examples::collisionDetection::CollisionId::Player)
               .useBoundingBox()
+              .hitPolicy(helios::engine::modules::physics::collision::types::HitPolicy::OneHit)
               .reportCollisions(true)
               .solidCollisionMask(helios::examples::collisionDetection::CollisionId::Enemy)
               .onSolidCollision(
@@ -286,7 +298,7 @@ int main() {
         .withShooting([](auto& ccb) {
 
             ccb.weapon()
-               .fireRate(5.0f);
+               .fireRate(5.0f);//15.0f);//5.0f;
         })
         .withMotion([](auto& mcb) {
             mcb.move2D()
@@ -352,7 +364,7 @@ int main() {
 
 
     // purple enemy
-    auto purpleEnememyPrefab = helios::engine::builder::gameObject::GameObjectFactory::instance()
+    auto purpleEnemyPrefab = helios::engine::builder::gameObject::GameObjectFactory::instance()
         .gameObject()
         .withRendering([&defaultShader, &root = *levelPtr->rootNode()](auto& rnb) {
             rnb.renderable()
@@ -364,7 +376,7 @@ int main() {
         })
         .withTransform([](auto& tb) {
             tb.transform()
-              .scale(helios::math::vec3f(SPACESHIP_SIZE/2.0f, SPACESHIP_SIZE/2.0f, 0.0f));
+              .scale(helios::math::vec3f(SPACESHIP_LENGTH/2.0f, SPACESHIP_LENGTH/2.0f, 0.0f));
         })
         .withCollision([](auto& cb) {
             cb.collision()
@@ -414,7 +426,7 @@ int main() {
         })
         .withTransform([](auto& tb) {
             tb.transform()
-              .scale(helios::math::vec3f(SPACESHIP_SIZE/2.0f, SPACESHIP_SIZE/2.0f, 0.0f));
+              .scale(helios::math::vec3f(SPACESHIP_LENGTH/2.0f, SPACESHIP_LENGTH/2.0f, 0.0f));
         })
         .withCollision([](auto& cb) {
             cb.collision()
@@ -463,9 +475,9 @@ int main() {
                .shape(std::make_shared<helios::rendering::asset::shape::basic::Rhombus>())
                .attachTo(&root);
         })
-        .withTransform([](auto& tb) {
+        .withTransform([BLUE_ENEMY_SCALE](auto& tb) {
             tb.transform()
-              .scale(helios::math::vec3f{SPACESHIP_SIZE, SPACESHIP_SIZE/2.0f, 0.0f});
+              .scale(BLUE_ENEMY_SCALE);
         })
         .withCollision([](auto& cb) {
             cb.collision()
@@ -489,7 +501,7 @@ int main() {
         })
         .withMotion([&](auto& mcb) {
            mcb.move2D()
-              .speed( shipGameObject->get<helios::engine::modules::physics::motion::components::Move2DComponent>()->movementSpeed() - 3.0f)
+              .speed( shipGameObject->get<helios::engine::modules::physics::motion::components::Move2DComponent>()->movementSpeed()  * 0.5f)
               .instantAcceleration(true);
 
            mcb.steering()
@@ -500,6 +512,10 @@ int main() {
             sb.spawn()
               .useSpawnProfile();
         })
+        .withLifecycle([](auto& lcb) {
+            lcb.lifecycle()
+               .useDelayedComponentEnabler();
+        })
         .withAi([&](auto& aib) {
             aib.chasing()
                .target(shipGameObject->guid())
@@ -508,28 +524,25 @@ int main() {
         .make();
 
 
-
     using namespace helios::engine::runtime::spawn;
 
     // ========================================
     // 7. Spawn System Configuration
     // ========================================
+    auto spawnSchedulers = std::vector<std::unique_ptr<helios::engine::runtime::spawn::scheduling::SpawnScheduler>>();
 
-    constexpr helios::engine::core::data::GameObjectPoolId PurpleEnemyPoolId{1};
-    constexpr helios::engine::core::data::GameObjectPoolId OrangeEnemyPoolId{2};
-    constexpr helios::engine::core::data::GameObjectPoolId BlueEnemyPoolId{3};
-    constexpr helios::engine::core::data::GameObjectPoolId ProjectilePoolId{4};
+    constexpr helios::engine::core::data::GameObjectPoolId PurpleEnemyPoolId{"purple_pool"};
+    constexpr helios::engine::core::data::GameObjectPoolId OrangeEnemyPoolId{"orange_pool"};
+    constexpr helios::engine::core::data::GameObjectPoolId BlueEnemyPoolId{"blue_pool"};
+    constexpr helios::engine::core::data::GameObjectPoolId ProjectilePoolId{"projectile_pool"};
     
     // spawn profile ids
-    helios::engine::core::data::SpawnProfileId ProjectileSpawnSpawnProfileId{1};
-    helios::engine::core::data::SpawnProfileId RandomSpawnSpawnProfileId{2};
-    helios::engine::core::data::SpawnProfileId VerticalSpawnSpawnProfileId{3};
-    helios::engine::core::data::SpawnProfileId BlueSpawnSpawnProfileId{4};
+    helios::engine::core::data::SpawnProfileId ProjectileSpawnSpawnProfileId{"projectile_spawn"};
+    helios::engine::core::data::SpawnProfileId RandomSpawnSpawnProfileId{"random_spawn"};
 
     // spawn rule ids
-    helios::engine::core::data::SpawnRuleId PurpleEnemySpawnConditionId{1};
-    helios::engine::core::data::SpawnRuleId OrangeEnemySpawnConditionId{2};
-    helios::engine::core::data::SpawnRuleId BlueEnemySpawnConditionId{3};
+    helios::engine::core::data::SpawnRuleId PurpleEnemySpawnConditionId{"purple_spawn_rule"};
+
 
 
     // register the SpawnManager. This spawn manager will also be used as the SpawnCommandHandler for
@@ -545,42 +558,208 @@ int main() {
                 50
             )).addPoolConfig(std::make_unique<helios::engine::runtime::pooling::GameObjectPoolConfig>(
                 PurpleEnemyPoolId,
-                std::move(purpleEnememyPrefab),
+                std::move(purpleEnemyPrefab),
                 50
                 )).addPoolConfig(std::make_unique<helios::engine::runtime::pooling::GameObjectPoolConfig>(
                 BlueEnemyPoolId,
                 std::move(blueEnemyPrefab),
-                50
+                100
             )).addPoolConfig(std::make_unique<helios::engine::runtime::pooling::GameObjectPoolConfig>(
                 OrangeEnemyPoolId,
                 std::move(orangeEnememyPrefab),
-                static_cast<size_t>((GRID_Y * CELL_SIZE) / SPACESHIP_SIZE)
+                static_cast<size_t>((GRID_X * CELL_LENGTH) / SPACESHIP_LENGTH)
             ));
 
     // create spawn profiles
     auto randomSpawnSpawnProfile = std::make_unique<helios::engine::runtime::spawn::SpawnProfile>(
         PurpleEnemyPoolId,
         std::make_unique<helios::engine::runtime::spawn::behavior::placements::RandomSpawnPlacer>(),
-        std::make_unique<helios::engine::runtime::spawn::behavior::initializers::DirectionInitializer>(
-        helios::engine::runtime::spawn::behavior::initializers::Direction::Random
+        std::make_unique<helios::engine::runtime::spawn::behavior::initializers::MoveInitializer>(
+        helios::engine::runtime::spawn::behavior::initializers::DirectionType::Random
         )
     );
-    
-    auto blueSpawnSpawnProfile = std::make_unique<helios::engine::runtime::spawn::SpawnProfile>(
+
+    // +------------------------------------------------
+    // | Spawn Profiles and Scheduling for Blue Enemy
+    // +------------------------------------------------
+    auto blueEnemySpawnScheduler = std::make_unique<helios::engine::runtime::spawn::scheduling::DefaultSpawnScheduler>();
+    auto blueEnemyMassScheduler = std::make_unique<helios::engine::runtime::spawn::scheduling::DefaultSpawnScheduler>();
+
+    // random spawning
+    helios::engine::core::data::SpawnProfileId BlueRandomSpawnProfileId{"blue_spawn1"};
+    helios::engine::core::data::SpawnRuleId BlueRandomSpawnConditionId{"blue_spawn_rule_1"};
+    auto blueRandomSpawnProfile = std::make_unique<helios::engine::runtime::spawn::SpawnProfile>(
         BlueEnemyPoolId,
         std::make_unique<helios::engine::runtime::spawn::behavior::placements::RandomSpawnPlacer>(),
-        std::make_unique<helios::engine::runtime::spawn::behavior::initializers::DirectionInitializer>(
-        helios::engine::runtime::spawn::behavior::initializers::Direction::Random
+        std::make_unique<helios::engine::runtime::spawn::behavior::initializers::MoveInitializer>(
+        helios::engine::runtime::spawn::behavior::initializers::DirectionType::Random
         )
     );
-    
-    auto columnSpawnSpawnProfile = std::make_unique<helios::engine::runtime::spawn::SpawnProfile>(
+    auto blueRandomSpawnRule = std::make_unique<helios::engine::runtime::spawn::policy::SpawnRule>(
+        std::make_unique<helios::engine::runtime::spawn::policy::conditions::TimerSpawnCondition>(5.0f),
+        std::make_unique<helios::engine::runtime::spawn::policy::amount::FixedSpawnAmount>(1),
+        BlueRandomSpawnConditionId
+    );
+
+
+    // mass spawn
+    helios::engine::core::data::SpawnProfileId BlueMassSpawnProfileId{"blue_spawn_profile1"};
+    helios::engine::core::data::SpawnRuleId BlueMassSpawnConditionId{"blue_mass_spawn1"};
+    auto blueMassSpawnProfile = std::make_unique<helios::engine::runtime::spawn::SpawnProfile>(
+        BlueEnemyPoolId,
+        std::make_unique<helios::engine::runtime::spawn::behavior::placements::DistributedSpawnPlacer<4>>(
+            //make sure we do not spawn in the wall, otherwise the collision system is triggered
+            TOP_LEFT_COORDINATES + helios::math::vec3f(CELL_LENGTH, -CELL_LENGTH, 0.0f),
+            TOP_RIGHT_COORDINATES + helios::math::vec3f(-CELL_LENGTH, -CELL_LENGTH, 0.0f),
+            BOTTOM_LEFT_COORDINATES + helios::math::vec3f(CELL_LENGTH, CELL_LENGTH, 0.0f),
+            BOTTOM_RIGHT_COORDINATES + helios::math::vec3f(-CELL_LENGTH, CELL_LENGTH, 0.0f)
+        ),
+        std::make_unique<helios::engine::runtime::spawn::behavior::initializers::InitializerList<2>>(
+            std::make_unique<helios::engine::runtime::spawn::behavior::initializers::DelayedComponentEnablerInitializer<
+                helios::engine::modules::physics::motion::components::Move2DComponent
+            >>(0.5f, 25),
+            std::make_unique<helios::engine::runtime::spawn::behavior::initializers::MoveInitializer>(
+                helios::math::vec3f{0.0f}, helios::engine::runtime::spawn::behavior::initializers::DirectionType::Point
+            )
+        )
+    );
+    auto blueMassSpawnRule = std::make_unique<helios::engine::runtime::spawn::policy::SpawnRule>(
+        std::make_unique<helios::engine::runtime::spawn::policy::SpawnConditionAll>(
+            std::make_unique<helios::engine::runtime::spawn::policy::conditions::RequestedAmountIsAvailableCondition>(),
+            std::make_unique<helios::engine::runtime::spawn::policy::conditions::TimerSpawnCondition>(30.0f)
+        ),
+        std::make_unique<helios::engine::runtime::spawn::policy::amount::FixedSpawnAmount>(100),
+        BlueMassSpawnConditionId
+    );
+
+   // spawnManager.addSpawnProfile(BlueRandomSpawnProfileId, std::move(blueRandomSpawnProfile));
+    spawnManager.addSpawnProfile(BlueMassSpawnProfileId, std::move(blueMassSpawnProfile));
+
+    //blueEnemySpawnScheduler->addRule(BlueRandomSpawnProfileId, std::move(blueRandomSpawnRule));
+    blueEnemyMassScheduler->addRule(BlueMassSpawnProfileId, std::move(blueMassSpawnRule));
+  //  blueEnemyMassScheduler->addSpawnCommandModifier(std::make_unique<helios::engine::runtime::spawn::DeferSpawn>(1.0f));
+
+
+    spawnSchedulers.push_back(std::move(blueEnemyMassScheduler));
+    // +-------------------------------------
+    // | ^^ EO blue enemy spawn config
+    // +-------------------------------------
+
+
+    // +------------------------------------------------
+    // | Spawn Profiles and Scheduling for Orange Enemy
+    // +------------------------------------------------
+
+    helios::engine::core::data::SpawnProfileId LeftColumnSpawnProfileId{"orange_left_spawn1"};
+    auto leftColumnSpawnProfile = std::make_unique<helios::engine::runtime::spawn::SpawnProfile>(
         OrangeEnemyPoolId,
-        std::make_unique<helios::engine::runtime::spawn::behavior::placements::ColumnSpawnPlacer>(),
-        std::make_unique<helios::engine::runtime::spawn::behavior::initializers::DirectionInitializer>(
+        std::make_unique<helios::engine::runtime::spawn::behavior::placements::AxisSpawnPlacer>(
+            helios::math::vec3f(0.0f, -1.0f, 0.0f).normalize(),
+            TOP_LEFT_COORDINATES
+        ),
+        std::make_unique<helios::engine::runtime::spawn::behavior::initializers::MoveInitializer>(
             helios::math::X_AXISf
         )
     );
+    helios::engine::core::data::SpawnProfileId RightColumnSpawnProfileId{"orange_right_spawn_1"};
+    auto rightColumnSpawnProfile = std::make_unique<helios::engine::runtime::spawn::SpawnProfile>(
+        OrangeEnemyPoolId,
+        std::make_unique<helios::engine::runtime::spawn::behavior::placements::AxisSpawnPlacer>(
+            helios::math::vec3f(0.0f, -1.0f, 0.0f).normalize(),
+            TOP_RIGHT_COORDINATES
+        ),
+        std::make_unique<helios::engine::runtime::spawn::behavior::initializers::MoveInitializer>(
+            helios::math::X_AXISf * -1.0f
+        )
+    );
+
+    helios::engine::core::data::SpawnProfileId TopRowSpawnProfileId{"orange_top_spawn_1"};
+    auto topRowSpawnProfile = std::make_unique<helios::engine::runtime::spawn::SpawnProfile>(
+        OrangeEnemyPoolId,
+        std::make_unique<helios::engine::runtime::spawn::behavior::placements::AxisSpawnPlacer>(
+            helios::math::vec3f(1.0f, 0.0f, 0.0f).normalize(),
+             TOP_LEFT_COORDINATES
+        ),
+        std::make_unique<helios::engine::runtime::spawn::behavior::initializers::MoveInitializer>(
+            helios::math::Y_AXISf * -1.0f
+        )
+    );
+    helios::engine::core::data::SpawnProfileId BottomRowSpawnProfileId{"orange_bottom_spawn_1"};
+    auto bottomRowSpawnProfile = std::make_unique<helios::engine::runtime::spawn::SpawnProfile>(
+        OrangeEnemyPoolId,
+        std::make_unique<helios::engine::runtime::spawn::behavior::placements::AxisSpawnPlacer>(
+            helios::math::vec3f(1.0f, 0.0f, 0.0f).normalize(),
+            BOTTOM_LEFT_COORDINATES
+        ),
+        std::make_unique<helios::engine::runtime::spawn::behavior::initializers::MoveInitializer>(
+            helios::math::Y_AXISf
+        )
+    );
+
+    helios::engine::core::data::SpawnRuleId OrangeEnemySpawnConditionIdLeftColumn{"orange_spawn_rule_1"};
+    helios::engine::core::data::SpawnRuleId OrangeEnemySpawnConditionIdRightColumn{"orange_spawn_rule_2"};
+    helios::engine::core::data::SpawnRuleId OrangeEnemySpawnConditionIdTopRow{"orange_spawn_rule_3"};
+    helios::engine::core::data::SpawnRuleId OrangeEnemySpawnConditionIdBottomRow{"orange_spawn_ruke_4"};
+
+    constexpr size_t OBJECT_AMOUNT_X = GRID_X * CELL_LENGTH / SPACESHIP_LENGTH;
+    constexpr size_t OBJECT_AMOUNT_Y = GRID_Y * CELL_LENGTH / SPACESHIP_LENGTH;
+
+    auto leftColumnOrangeEnemySpawnRule = std::make_unique<helios::engine::runtime::spawn::policy::SpawnRule>(
+         std::make_unique<helios::engine::runtime::spawn::policy::SpawnConditionAll>(
+         std::make_unique<helios::engine::runtime::spawn::policy::conditions::TimerSpawnCondition>(15.0f),
+         std::make_unique<helios::engine::runtime::spawn::policy::conditions::RequestedAmountIsAvailableCondition>()
+         ),
+        std::make_unique<helios::engine::runtime::spawn::policy::amount::FixedSpawnAmount>(OBJECT_AMOUNT_Y),
+        OrangeEnemySpawnConditionIdLeftColumn
+    );
+
+    auto rightColumnOrangeEnemySpawnRule = std::make_unique<helios::engine::runtime::spawn::policy::SpawnRule>(
+        std::make_unique<helios::engine::runtime::spawn::policy::SpawnConditionAll>(
+            std::make_unique<helios::engine::runtime::spawn::policy::conditions::TimerSpawnCondition>(15.0f),
+            std::make_unique<helios::engine::runtime::spawn::policy::conditions::RequestedAmountIsAvailableCondition>()
+        ),std::make_unique<helios::engine::runtime::spawn::policy::amount::FixedSpawnAmount>(OBJECT_AMOUNT_Y),
+
+        OrangeEnemySpawnConditionIdRightColumn
+    );
+
+    auto topRowOrangeEnemySpawnRule = std::make_unique<helios::engine::runtime::spawn::policy::SpawnRule>(
+    std::make_unique<helios::engine::runtime::spawn::policy::SpawnConditionAll>(
+        std::make_unique<helios::engine::runtime::spawn::policy::conditions::TimerSpawnCondition>(15.0f),
+        std::make_unique<helios::engine::runtime::spawn::policy::conditions::RequestedAmountIsAvailableCondition>()
+        ),
+        std::make_unique<helios::engine::runtime::spawn::policy::amount::FixedSpawnAmount>(OBJECT_AMOUNT_X),
+
+        OrangeEnemySpawnConditionIdTopRow
+    );
+
+    auto bottomRowOrangeEnemySpawnRule = std::make_unique<helios::engine::runtime::spawn::policy::SpawnRule>(
+        std::make_unique<helios::engine::runtime::spawn::policy::SpawnConditionAll>(
+    std::make_unique<helios::engine::runtime::spawn::policy::conditions::TimerSpawnCondition>(15.0f),
+    std::make_unique<helios::engine::runtime::spawn::policy::conditions::RequestedAmountIsAvailableCondition>()
+    ),
+    std::make_unique<helios::engine::runtime::spawn::policy::amount::FixedSpawnAmount>(OBJECT_AMOUNT_X),
+        OrangeEnemySpawnConditionIdBottomRow
+    );
+
+    auto orangeEnemySpawnScheduler = std::make_unique<helios::engine::runtime::spawn::scheduling::CyclicSpawnScheduler<4>>();
+
+    orangeEnemySpawnScheduler
+        ->addRule(LeftColumnSpawnProfileId, std::move(leftColumnOrangeEnemySpawnRule))
+         .addRule(TopRowSpawnProfileId, std::move(topRowOrangeEnemySpawnRule))
+         .addRule(RightColumnSpawnProfileId, std::move(rightColumnOrangeEnemySpawnRule))
+         .addRule(BottomRowSpawnProfileId, std::move(bottomRowOrangeEnemySpawnRule));
+
+    spawnManager.addSpawnProfile(LeftColumnSpawnProfileId, std::move(leftColumnSpawnProfile));
+    spawnManager.addSpawnProfile(RightColumnSpawnProfileId, std::move(rightColumnSpawnProfile));
+    spawnManager.addSpawnProfile(TopRowSpawnProfileId, std::move(topRowSpawnProfile));
+    spawnManager.addSpawnProfile(BottomRowSpawnProfileId, std::move(bottomRowSpawnProfile));
+
+    spawnSchedulers.push_back(std::move(orangeEnemySpawnScheduler));
+
+    // +-------------------------------------
+    // | ^^ EO orange enemy spawn config
+    // +-------------------------------------
+
 
     auto projectileSpawnSpawnProfile = std::make_unique<helios::engine::runtime::spawn::SpawnProfile>(
         ProjectilePoolId,
@@ -588,52 +767,35 @@ int main() {
         std::make_unique<helios::engine::runtime::spawn::behavior::initializers::EmitterInitializer>()
     );
 
-    auto purpleEnemySpawnScheduler = std::make_unique<helios::engine::runtime::spawn::scheduling::SpawnScheduler>();
+    auto purpleEnemySpawnScheduler = std::make_unique<helios::engine::runtime::spawn::scheduling::DefaultSpawnScheduler>();
     auto purpleEnemySpawnRule = std::make_unique<helios::engine::runtime::spawn::policy::SpawnRule>(
         std::make_unique<helios::engine::runtime::spawn::policy::conditions::TimerSpawnCondition>(5.0f),
         std::make_unique<helios::engine::runtime::spawn::policy::amount::FixedSpawnAmount>(1),
         PurpleEnemySpawnConditionId
     );
 
-    auto orangeEnemySpawnScheduler = std::make_unique<helios::engine::runtime::spawn::scheduling::SpawnScheduler>();
-    auto orangeEnemySpawnRule = std::make_unique<helios::engine::runtime::spawn::policy::SpawnRule>(
-        std::make_unique<helios::engine::runtime::spawn::policy::conditions::TimerSpawnCondition>(2.0f),
-        std::make_unique<helios::engine::runtime::spawn::policy::amount::SpawnAll>(),
-        OrangeEnemySpawnConditionId
-    );
-    
-    auto blueEnemySpawnScheduler = std::make_unique<helios::engine::runtime::spawn::scheduling::SpawnScheduler>();
-    auto blueEnemySpawnRule = std::make_unique<helios::engine::runtime::spawn::policy::SpawnRule>(
-        std::make_unique<helios::engine::runtime::spawn::policy::conditions::TimerSpawnCondition>(5.0f),
-        std::make_unique<helios::engine::runtime::spawn::policy::amount::FixedSpawnAmount>(1),
-        BlueEnemySpawnConditionId
-    );
 
     // let the SpawnManager know which SpawnProfiles to manage
     spawnManager.addSpawnProfile(RandomSpawnSpawnProfileId, std::move(randomSpawnSpawnProfile));
-    spawnManager.addSpawnProfile(VerticalSpawnSpawnProfileId, std::move(columnSpawnSpawnProfile));
-    spawnManager.addSpawnProfile(BlueSpawnSpawnProfileId, std::move(blueSpawnSpawnProfile));
+
     spawnManager.addSpawnProfile(ProjectileSpawnSpawnProfileId, std::move(projectileSpawnSpawnProfile));
     
     // bind the spawn rules to the SpawnProfiles
     purpleEnemySpawnScheduler->addRule(RandomSpawnSpawnProfileId, std::move(purpleEnemySpawnRule));
-    orangeEnemySpawnScheduler->addRule(VerticalSpawnSpawnProfileId, std::move(orangeEnemySpawnRule));
-    orangeEnemySpawnScheduler->addRule(BlueSpawnSpawnProfileId, std::move(blueEnemySpawnRule));
 
+    spawnSchedulers.push_back(std::move(purpleEnemySpawnScheduler));
 
     // ========================================
     // 8. Command Dispatchers
     // ========================================
 
     gameLoop.commandBuffer().addDispatcher<helios::engine::runtime::spawn::commands::ScheduledSpawnPlanCommand>(
-        std::make_unique<helios::engine::runtime::spawn::dispatcher::ScheduledSpawnPlanCommandDispatcher>()
-    );
-    gameLoop.commandBuffer().addDispatcher<helios::engine::runtime::spawn::commands::SpawnCommand>(
-        std::make_unique<helios::engine::runtime::spawn::dispatcher::SpawnCommandDispatcher>()
-    );
-    gameLoop.commandBuffer().addDispatcher<helios::engine::runtime::spawn::commands::DespawnCommand>(
-        std::make_unique<helios::engine::runtime::spawn::dispatcher::DespawnCommandDispatcher>()
-    );
+                std::make_unique<helios::engine::runtime::spawn::dispatcher::ScheduledSpawnPlanCommandDispatcher>()
+            ).addDispatcher<helios::engine::runtime::spawn::commands::SpawnCommand>(
+                std::make_unique<helios::engine::runtime::spawn::dispatcher::SpawnCommandDispatcher>()
+            ).addDispatcher<helios::engine::runtime::spawn::commands::DespawnCommand>(
+                std::make_unique<helios::engine::runtime::spawn::dispatcher::DespawnCommandDispatcher>()
+            );
 
     // ========================================
     // 9. GameLoop Phase Configuration
@@ -649,16 +811,12 @@ int main() {
     // | PRE PHASE: Input, Spawning, Movement
     // +----------------------------------------------
 
-    auto spawnSchedulers = std::vector<std::unique_ptr<helios::engine::runtime::spawn::scheduling::SpawnScheduler>>();
-    spawnSchedulers.push_back(std::move(purpleEnemySpawnScheduler));
-    spawnSchedulers.push_back(std::move(orangeEnemySpawnScheduler));
-
     gameLoop.phase(helios::engine::runtime::gameloop::PhaseType::Pre)
             .addPass()
             .addSystem<helios::engine::mechanics::input::systems::TwinStickInputSystem>(*shipGameObject)
             .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::Structural)
             .addPass()
-            .addSystem<helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem>(spawnSchedulers)
+            .addSystem<helios::engine::mechanics::spawn::systems::GameObjectSpawnSystem>(std::move(spawnSchedulers))
             .addSystem<helios::engine::mechanics::combat::systems::ProjectileSpawnSystem>(ProjectileSpawnSpawnProfileId)
             .addCommitPoint(helios::engine::runtime::gameloop::CommitPoint::Structural)
             .addPass()
@@ -676,7 +834,7 @@ int main() {
             .addSystem<helios::engine::modules::physics::collision::systems::BoundsUpdateSystem>()
             .addSystem<helios::engine::mechanics::bounds::systems::LevelBoundsBehaviorSystem>()
             .addSystem<helios::engine::modules::physics::collision::systems::GridCollisionDetectionSystem>(
-                levelPtr->bounds(), CELL_SIZE/2.0f
+                levelPtr->bounds(), CELL_LENGTH/2.0f
              )
             .addCommitPoint()
             .addPass()
@@ -690,6 +848,7 @@ int main() {
              .addSystem<helios::engine::modules::spatial::transform::systems::ComposeTransformSystem>()
              .addSystem<helios::engine::modules::systems::scene::SceneSyncSystem>(scene.get())
              .addSystem<helios::engine::modules::spatial::transform::systems::TransformClearSystem>()
+             .addSystem<helios::engine::mechanics::lifecycle::systems::DelayedComponentEnablerSystem>()
              .addSystem<helios::engine::modules::physics::collision::systems::CollisionStateClearSystem>();
 
 
@@ -707,7 +866,10 @@ int main() {
 
     theGrid->setActive(true);
     std::ignore = gameWorld.addGameObject(std::move(theGrid));
-    std::ignore = shipGameObject->get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode()->addNode(std::move(cameraSceneNode));
+    std::ignore = scene
+    ->addNode(std::move(cameraSceneNode));
+
+    //std::ignore = shipGameObject->get<helios::engine::modules::scene::components::SceneNodeComponent>()->sceneNode()->addNode(std::move(cameraSceneNode));
 
     shipGameObject->setActive(true);
     auto* theShipPtr = gameWorld.addGameObject(std::move(shipGameObject));

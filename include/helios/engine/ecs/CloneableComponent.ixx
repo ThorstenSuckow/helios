@@ -10,6 +10,8 @@ export module helios.engine.ecs.CloneableComponent;
 
 import helios.engine.ecs.Component;
 
+import helios.engine.core.data.ComponentTypeId;
+
 export namespace helios::engine::ecs {
 
     /**
@@ -72,6 +74,15 @@ export namespace helios::engine::ecs {
          */
         [[nodiscard]] std::unique_ptr<Component> clone() const override {
             return std::make_unique<Derived>(static_cast<const Derived&>(*this));
+        }
+
+        /**
+         * @brief Returns the ComponentTypeId for this component's type.
+         *
+         * @return The ComponentTypeId for this Component's type.
+         */
+        [[nodiscard]] helios::engine::core::data::ComponentTypeId typeId() const noexcept final {
+            return helios::engine::core::data::ComponentTypeId::id<Derived>();
         }
 
     };

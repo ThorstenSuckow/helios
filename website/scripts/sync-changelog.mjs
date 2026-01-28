@@ -203,6 +203,16 @@ async function main() {
       meta: { title: 'Event System', description: 'Double-buffered event buses with phase/pass propagation for decoupled system communication.', slug: '/core-concepts/event-system', tags: ['gameplay', 'architecture', 'events'], keywords: ['helios', 'event system', 'EventBus', 'phase', 'pass', 'double-buffer', 'decoupled communication'], sidebar_label: 'Event System', sidebar_position: 6 }
     },
     {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'spawn-system.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'spawn-system.md'),
+      meta: { title: 'Spawn System', description: 'Entity lifecycle management with spawn scheduling, profiles, behaviors, and pool integration.', slug: '/core-concepts/spawn-system', tags: ['gameplay', 'architecture', 'spawn'], keywords: ['helios', 'spawn system', 'object pooling', 'entity lifecycle', 'SpawnManager', 'SpawnScheduler'], sidebar_label: 'Spawn System', sidebar_position: 7 }
+    },
+    {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'gameobject-builder.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'gameobject-builder.md'),
+      meta: { title: 'GameObject Builder', description: 'Fluent builder pattern for constructing GameObjects with their associated components.', slug: '/core-concepts/gameobject-builder', tags: ['gameplay', 'architecture', 'builder'], keywords: ['helios', 'builder pattern', 'GameObjectFactory', 'fluent API', 'entity construction'], sidebar_label: 'GameObject Builder', sidebar_position: 8 }
+    },
+    {
       src: path.join(repoRoot, 'examples', 'README.md'),
       dest: path.join(websiteRoot, 'docs', 'examples', 'overview.md'),
       meta: { title: 'Examples Overview', description: 'Example applications demonstrating helios features: rendering, input, scene graph, and more.', slug: '/examples', tags: ['examples', 'tutorial'], keywords: ['helios', 'examples', 'tutorials', 'getting started'], sidebar_label: 'Overview' }
@@ -226,6 +236,16 @@ async function main() {
       src: path.join(repoRoot, 'examples', 'spaceship_shooting', 'README.md'),
       dest: path.join(websiteRoot, 'docs', 'examples', 'spaceship-shooting.md'),
       meta: { title: 'Spaceship Shooting', description: 'Example: Twin-stick shooter with bullet pooling, shooting components, aim tracking, and arena collision.', slug: '/examples/spaceship-shooting', tags: ['examples', 'input', 'gameplay', 'bullet-pool', 'components'], keywords: ['helios', 'twin-stick', 'shooter', 'bullet pool', 'shooting', 'aiming', 'game system'], sidebar_label: 'Spaceship Shooting' }
+    },
+    {
+      src: path.join(repoRoot, 'examples', 'enemy_spawn', 'README.md'),
+      dest: path.join(websiteRoot, 'docs', 'examples', 'enemy-spawn.md'),
+      meta: { title: 'Enemy Spawn', description: 'Example: Timed enemy spawning with object pooling, spawn schedulers, and random placement.', slug: '/examples/enemy-spawn', tags: ['examples', 'spawn', 'pooling', 'gameplay'], keywords: ['helios', 'spawn system', 'object pool', 'enemy', 'timer', 'random placement'], sidebar_label: 'Enemy Spawn' }
+    },
+    {
+      src: path.join(repoRoot, 'examples', 'collision_detection', 'README.md'),
+      dest: path.join(websiteRoot, 'docs', 'examples', 'collision-detection.md'),
+      meta: { title: 'Collision Detection', description: 'Example: Grid-based collision detection with layers, masks, and collision events.', slug: '/examples/collision-detection', tags: ['examples', 'collision', 'physics', 'gameplay'], keywords: ['helios', 'collision detection', 'AABB', 'grid', 'spatial partitioning', 'collision events'], sidebar_label: 'Collision Detection' }
     },
   ];
 

@@ -57,7 +57,9 @@ export namespace helios::ext::glfw::window {
         /**
          * @brief Destructor. Delegates to #destroy()
          */
-        ~GLFWWindow() override;
+        ~GLFWWindow() override {
+            destroy();
+        }
 
 
         /**
@@ -69,7 +71,10 @@ export namespace helios::ext::glfw::window {
         explicit GLFWWindow(
             std::unique_ptr<helios::rendering::RenderTarget> renderTarget,
             const GLFWWindowConfig& cfg
-        );
+        ) :
+            Window(std::move(renderTarget), cfg),
+            frameBufferSizeCallback_(cfg.frameBufferSizeCallback) {
+        }
 
         /********************
          * Overrides
@@ -83,7 +88,27 @@ export namespace helios::ext::glfw::window {
          *
          * @see https://www.glfw.org/docs/latest/group__window.html#ga3555a418df92ad53f917597fe2f64aeb
          */
-        bool show() noexcept override;
+        bool show() noexcept override {
+            if (nativeHandle_ != nullptr) {
+                logger_.warn("Window already shown.");
+                return true;
+            }
+
+            logger_.info("Calling glfwCreateWindow().");
+            nativeHandle_ = glfwCreateWindow(
+                width_, height_, title_.c_str(), nullptr, nullptr);
+
+            if (aspectRatioDenom_ > 0 && aspectRatioNumer_ > 0) {
+                glfwSetWindowAspectRatio(nativeHandle_, aspectRatioNumer_, aspectRatioDenom_);
+            }
+
+            if (nativeHandle_ == nullptr) {
+                logger_.error("Failed to create GLFW window");
+                return false;
+            }
+
+            return true;
+        }
 
 
         /**
@@ -91,7 +116,9 @@ export namespace helios::ext::glfw::window {
          *
          * @see https://www.glfw.org/docs/latest/group__window.html#ga15a5a1ee5b3c2ca6b15ca209a12efd14
          */
-        void swapBuffers() const noexcept override;
+        void swapBuffers() const noexcept override {
+            glfwSwapBuffers(nativeHandle_);
+        }
 
 
         /**
@@ -101,7 +128,9 @@ export namespace helios::ext::glfw::window {
          *
          * @see https://www.glfw.org/docs/latest/group__window.html#ga37bd57223967b4211d60ca1a0bf3c832
          */
-        void pollEvents() const noexcept override;
+        void pollEvents() const noexcept override {
+            glfwPollEvents();
+        }
 
 
         /**
@@ -109,7 +138,9 @@ export namespace helios::ext::glfw::window {
          *
          * @see https://www.glfw.org/docs/latest/group__window.html#ga49c449dde2a6f87d996f4daaa09d6708
          */
-        void setShouldClose(bool close) override;
+        void setShouldClose(bool close) override {
+            glfwSetWindowShouldClose(nativeHandle_, close);
+        }
 
 
         /**
@@ -117,7 +148,12 @@ export namespace helios::ext::glfw::window {
          *
          * @see https://www.glfw.org/docs/latest/group__window.html#ga24e02fbfefbb81fc45320989f8140ab5
          */
-        [[nodiscard]] bool shouldClose() const override;
+        [[nodiscard]] bool shouldClose() const override {
+            if (nativeHandle_ == nullptr) {
+                return true;
+            }
+            return glfwWindowShouldClose(nativeHandle_);
+        }
 
 
         /********************
@@ -128,7 +164,9 @@ export namespace helios::ext::glfw::window {
          *
          * @return the `GLFWframebuffersizefun` currently registered with this Window.
          */
-        [[nodiscard]] GLFWframebuffersizefun frameBufferSizeCallback() const noexcept;
+        [[nodiscard]] GLFWframebuffersizefun frameBufferSizeCallback() const noexcept {
+            return frameBufferSizeCallback_;
+        }
 
 
         /**
@@ -140,7 +178,9 @@ export namespace helios::ext::glfw::window {
          *
          * @param framebufferSizeCallback The `GLFWframebuffersizefun` to set.
          */
-        void setFrameBufferSizeCallback(GLFWframebuffersizefun framebufferSizeCallback) noexcept;
+        void setFrameBufferSizeCallback(GLFWframebuffersizefun framebufferSizeCallback) noexcept {
+            frameBufferSizeCallback_ = framebufferSizeCallback;
+        }
 
 
         /**
@@ -151,7 +191,9 @@ export namespace helios::ext::glfw::window {
          *
          * @return The `GLFWwindow*` handle, or a `nullptr` if not available.
          */
-        [[nodiscard]] GLFWwindow* nativeHandle() const noexcept;
+        [[nodiscard]] GLFWwindow* nativeHandle() const noexcept {
+            return nativeHandle_;
+        }
 
 
         /**
@@ -159,7 +201,11 @@ export namespace helios::ext::glfw::window {
          *
          * @see https://www.glfw.org/docs/latest/group__window.html#gacdf43e51376051d2c091662e9fe3d7b2
          */
-        void destroy() const;
+        void destroy() const {
+            if (nativeHandle_) {
+                glfwDestroyWindow(nativeHandle_);
+            }
+        }
 
 
         /**
@@ -173,7 +219,10 @@ export namespace helios::ext::glfw::window {
          * Ownership is transferred to this Window-instance.
          * @return
          */
-        void setWindowUserPointer(std::unique_ptr<GLFWWindowUserPointer> windowUserPointer) noexcept;
+        void setWindowUserPointer(std::unique_ptr<GLFWWindowUserPointer> windowUserPointer) noexcept {
+            windowUserPointer_ = std::move(windowUserPointer);
+            glfwSetWindowUserPointer(nativeHandle_, windowUserPointer_.get());
+        }
 
 
         /**
@@ -181,7 +230,9 @@ export namespace helios::ext::glfw::window {
          *
          * @return A const reference to this object's `GLFWWindowUserPointer`.
          */
-        [[nodiscard]] const GLFWWindowUserPointer& windowUserPointer() const noexcept;
+        [[nodiscard]] const GLFWWindowUserPointer& windowUserPointer() const noexcept {
+            return *windowUserPointer_;
+        }
     };
 
 } // namespace helios::ext::glfw::window

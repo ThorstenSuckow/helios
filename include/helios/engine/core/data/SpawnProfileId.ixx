@@ -5,9 +5,13 @@
 module;
 
 #include <cstdint>
-#include <compare>
+#include <string_view>
 
 export module helios.engine.core.data.SpawnProfileId;
+
+import helios.core.types;
+import helios.core.algorithms;
+
 
 export namespace helios::engine::core::data {
 
@@ -22,17 +26,30 @@ export namespace helios::engine::core::data {
      * The ID supports hashing for use in unordered containers and comparison
      * operators for ordered containers.
      *
-     * Example usage:
-     * ```cpp
-     * constexpr SpawnProfileId enemyProfile{1};
-     * constexpr SpawnProfileId powerUpProfile{2};
+     * ## Construction
      *
+     * IDs can be constructed from string literals using FNV-1a hashing:
+     * ```cpp
+     * constexpr SpawnProfileId ENEMY_PROFILE{"enemy_spawn"};
+     * constexpr SpawnProfileId POWERUP_PROFILE{"powerup_spawn"};
+     * ```
+     *
+     * Uninitialized IDs for deferred assignment:
+     * ```cpp
+     * SpawnProfileId profileId{helios::core::types::no_init};
+     * profileId = SpawnProfileId{"assigned_later"};
+     * ```
+     *
+     * ## Usage
+     *
+     * ```cpp
      * std::unordered_map<SpawnProfileId, SpawnProfile> profiles;
-     * profiles[enemyProfile] = createEnemyProfile();
+     * profiles[ENEMY_PROFILE] = createEnemyProfile();
      * ```
      *
      * @see SpawnProfile
      * @see SpawnRuleId
+     * @see GameObjectPoolId
      */
     struct SpawnProfileId {
 
@@ -41,17 +58,43 @@ export namespace helios::engine::core::data {
         /**
          * @brief The underlying numeric identifier.
          */
-        uint32_t id_;
-
-    public:
+        uint32_t id_{};
 
         /**
          * @brief Constructs a SpawnProfileId with the given numeric value.
          *
          * @param id The numeric identifier value.
          */
-        explicit constexpr SpawnProfileId(uint32_t id) noexcept
+        explicit constexpr SpawnProfileId(const uint32_t id) noexcept
             : id_(id) {}
+
+    public:
+
+        /**
+         * @brief Constructs an uninitialized SpawnProfileId.
+         *
+         * @details Use this constructor when the ID will be assigned later.
+         * Reading from an uninitialized ID is undefined behavior.
+         *
+         * @see helios::core::types::no_init
+         */
+        explicit constexpr SpawnProfileId(helios::core::types::no_init_t) {}
+
+        /**
+         * @brief Constructs a SpawnProfileId from a string literal.
+         *
+         * @details Uses FNV-1a hashing to compute a numeric ID from the string.
+         * This enables readable, compile-time constant profile identifiers.
+         *
+         * ```cpp
+         * constexpr SpawnProfileId ENEMY_PROFILE{"enemy_spawn"};
+         * ```
+         *
+         * @param str The string to hash into an ID.
+         */
+        explicit constexpr SpawnProfileId(const std::string_view str) noexcept
+         : SpawnProfileId(helios::core::algorithms::fnv1a_hash(str)) {}
+
 
         /**
          * @brief Returns the underlying numeric value.

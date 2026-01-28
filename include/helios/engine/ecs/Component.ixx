@@ -8,6 +8,8 @@ module;
 
 export module helios.engine.ecs.Component;
 
+import helios.engine.core.data.ComponentTypeId;
+
 export namespace helios::engine::ecs {
 
     class GameObject;
@@ -237,6 +239,16 @@ export namespace helios::engine::ecs {
         [[nodiscard]] GameObject* gameObject() const noexcept {
             return gameObject_;
         }
+
+        /**
+         * @brief Returns the ComponentTypeId for this Component.
+         *
+         * @details The ComponentTypeId is a static, runtime dependent value that allows for managing
+         * ComponentTypeIds in a dense array, providing O(1) access to a GameObject's component.
+         *
+         * @return The ComponentTypeId for this Component-Type.
+         */
+        [[nodiscard]] virtual helios::engine::core::data::ComponentTypeId typeId() const noexcept = 0;
     };
 
 }

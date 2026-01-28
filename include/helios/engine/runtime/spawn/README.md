@@ -52,7 +52,6 @@ This module provides a complete spawning pipeline for managing entity lifecycle 
 | `dispatcher/` | Command dispatchers routing to managers |
 | `events/` | Frame-level events for spawn confirmation |
 | `policy/` | Spawn rules, conditions, and amount providers |
-| `requests/` | Data structures for spawn/despawn requests |
 | `scheduling/` | SpawnScheduler and SpawnPlan management |
 
 ## Key Classes

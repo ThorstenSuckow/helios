@@ -6,6 +6,7 @@ module;
 
 #include <memory>
 #include <string>
+#include <stdexcept>
 
 export module helios.window.Window;
 
@@ -100,7 +101,19 @@ export namespace helios::window {
         explicit Window(
             std::unique_ptr<helios::rendering::RenderTarget> renderTarget,
             const WindowConfig& cfg
-        );
+        ) :
+        renderTarget_(std::move(renderTarget)),
+        width_(cfg.width),
+        height_(cfg.height),
+        title_(cfg.title),
+        aspectRatioNumer_(cfg.aspectRatioNumer),
+        aspectRatioDenom_(cfg.aspectRatioDenom),
+        guid_(util::Guid::generate()) {
+
+            if (!renderTarget_) {
+                throw std::invalid_argument("Window received a nullptr renderTarget");
+            }
+        }
 
 
         /**
@@ -132,7 +145,9 @@ export namespace helios::window {
          *
          * @return A const reference to the Guid of this window.
          */
-        [[nodiscard]] const util::Guid& guid() const noexcept;
+        [[nodiscard]] const util::Guid& guid() const noexcept {
+            return guid_;
+        }
 
 
         /**
@@ -170,7 +185,9 @@ export namespace helios::window {
          *
          * @return The current width of this window.
          */
-        [[nodiscard]] int width() const noexcept;
+        [[nodiscard]] int width() const noexcept {
+            return width_;
+        }
 
 
         /**
@@ -178,7 +195,9 @@ export namespace helios::window {
          *
          * @return The current height of this window.
          */
-        [[nodiscard]] int height() const noexcept;
+        [[nodiscard]] int height() const noexcept {
+            return height_;
+        }
 
 
         /**
@@ -186,7 +205,9 @@ export namespace helios::window {
          *
          * @return A reference to the RenderTarget of this window.
          */
-        [[nodiscard]] helios::rendering::RenderTarget& renderTarget() const noexcept;
+        [[nodiscard]] helios::rendering::RenderTarget& renderTarget() const noexcept {
+            return *renderTarget_;
+        }
 
         /**
          * @brief Adds the viewport to the underlying RenderTarget of this Window.
@@ -195,7 +216,9 @@ export namespace helios::window {
          *
          * @return The Viewport added to the Window's RenderTarget as a shared pointer.
          */
-        std::shared_ptr<helios::rendering::Viewport> addViewport(std::shared_ptr<helios::rendering::Viewport> viewport) const;
+        std::shared_ptr<helios::rendering::Viewport> addViewport(std::shared_ptr<helios::rendering::Viewport> viewport) const {
+            return renderTarget_->addViewport(std::move(viewport));
+        }
 
         /**
          * @brief Compares two window instances for equality.
@@ -205,7 +228,9 @@ export namespace helios::window {
          * @param win The window to compare with this window.
          * @return true if both windows are equal, otherwise false.
          */
-        virtual bool operator==(const Window& win) const noexcept;
+        virtual bool operator==(const Window& win) const noexcept {
+            return guid_ == win.guid();
+        }
     };
 
 } // namespace helios::window

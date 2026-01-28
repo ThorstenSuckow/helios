@@ -5,6 +5,9 @@
 module;
 
 #include <memory>
+#include <thread>
+#include <chrono>
+#include <cassert>
 
 export module helios.engine.tooling.FramePacer;
 
@@ -60,7 +63,10 @@ export namespace helios::engine::tooling {
          * @param stopwatch Unique pointer to a valid `Stopwatch` instance. Ownership
          * is transferred to the FramePacer.
          */
-        explicit FramePacer(std::unique_ptr<helios::util::time::Stopwatch> stopwatch);
+        explicit FramePacer(std::unique_ptr<helios::util::time::Stopwatch> stopwatch) :
+            stopwatch_(std::move(stopwatch)) {
+            assert(stopwatch_ && "FramePacer requires a valid Stopwatch (non-null)");
+        }
 
         /**
          * @brief Sets the desired target frame rate.
@@ -68,7 +74,9 @@ export namespace helios::engine::tooling {
          * @param fps The target frame rate in Frames Per Second (FPS).
          * Set to 0.0f to disable pacing (unlocked framerate).
          */
-        void setTargetFps(float fps);
+        void setTargetFps(float fps) {
+            targetFps_ = fps;
+        }
 
         /**
          * @brief Retrieves the current target frame rate.
@@ -81,7 +89,9 @@ export namespace helios::engine::tooling {
          *
          * @note A return value of 0.0f indicates that the frame pacing mechanism is not active.
          */
-        [[nodiscard]] float getTargetFps() const noexcept;
+        [[nodiscard]] float getTargetFps() const noexcept {
+            return targetFps_;
+        }
 
         /**
          * @brief Marks the beginning of a new frame.
@@ -90,7 +100,9 @@ export namespace helios::engine::tooling {
          * This method must be called at the very beginning of each frame cycle,
          * before any game logic, physics, or rendering operations.
          */
-        void beginFrame();
+        void beginFrame() {
+            stopwatch_->start();
+        }
 
         /**
          * @brief Synchronizes frame timing and returns frame statistics.
@@ -108,6 +120,24 @@ export namespace helios::engine::tooling {
          * @todo Implement hybrid spinning for the last millisecond of the wait time
          * to improve timing precision and mitigate OS scheduler wake-up latency.
          */
-        [[nodiscard]] FrameStats sync();
+        [[nodiscard]] FrameStats sync() {
+            float workTime = stopwatch_->elapsedSeconds();
+
+            float waitTime = 0.0f;
+            float totalTime = workTime;
+
+            if (targetFps_ > 0.0f) {
+                float targetTime = 1.0f / targetFps_;
+                if (targetTime > workTime) {
+                    auto requestedWaitTime = targetTime - workTime;
+                    auto sleepDuration = std::chrono::duration<float>(requestedWaitTime);
+                    std::this_thread::sleep_for(sleepDuration);
+                    totalTime = stopwatch_->elapsedSeconds();
+                    waitTime = totalTime - workTime;
+                }
+            }
+
+            return FrameStats{ totalTime, workTime, waitTime };
+        }
     };
 }

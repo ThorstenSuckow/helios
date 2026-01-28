@@ -7,6 +7,7 @@ module;
 #include <deque>
 #include <functional>
 #include <memory>
+#include <algorithm>
 
 export module helios.event.DequeEventQueue;
 
@@ -41,7 +42,10 @@ export namespace helios::event {
          *
          * @return
          */
-        EventQueue& add(std::unique_ptr<const Event> event) override;
+        EventQueue& add(std::unique_ptr<const Event> event) override {
+            events.push_back(std::move(event));
+            return *this;
+        }
 
 
         /**
@@ -56,7 +60,14 @@ export namespace helios::event {
         EventQueue& addOrReplace(
             std::unique_ptr<const Event> event,
             const std::function<bool(const std::unique_ptr<const Event>& evt,
-                const std::unique_ptr<const Event>& e)>& cmpFunc) override;
+                const std::unique_ptr<const Event>& e)>& cmpFunc) override {
+
+            std::erase_if(events, [&event, cmpFunc](const std::unique_ptr<const Event>& e) {
+                return cmpFunc(event, e);
+            });
+            events.push_back(std::move(event));
+            return *this;
+        }
 
 
         /**
@@ -64,7 +75,9 @@ export namespace helios::event {
          *
          * @return True if the queue is empty, otherwise false.
          */
-        [[nodiscard]] bool empty() const noexcept override;
+        [[nodiscard]] bool empty() const noexcept override {
+            return events.empty();
+        }
 
 
         /**
@@ -73,7 +86,16 @@ export namespace helios::event {
          * @return A unique_ptr to the next event in teh queue, i.e. from the front
          * position of the queue.
          */
-        std::unique_ptr<const Event> next() override;
+        std::unique_ptr<const Event> next() override {
+            if (events.empty()) {
+                return nullptr;
+            }
+
+            auto event = std::move(events.front());
+            events.pop_front();
+
+            return event;
+        }
 
     };
 

@@ -14,7 +14,6 @@ An example showing the fundamentals of 3D rendering with helios:
 - Working with the scene graph
 - Implementing a basic render loop
 
-
 **Controls:**
 - `ESC` - Exit application
 
@@ -33,13 +32,17 @@ Demonstrates gamepad/controller input handling with helios.
 **Location:** `spaceship_control/`
 
 A complete game loop example featuring:
-- Gamepad input with command pattern
+- GameLoop architecture with Pre/Main/Post phases
+- GameObjectFactory fluent builder pattern
+- Gamepad input with TwinStickInputSystem
 - ImGui debug overlay with dockable widgets
 - Real-time logging with scope filtering
 - Frame pacing and performance metrics
+- Scene graph camera with transform inheritance
 
 **Controls:**
 - Left Stick - Move/Rotate spaceship
+- ESC - Exit application
 
 ---
 
@@ -48,11 +51,47 @@ A complete game loop example featuring:
 **Location:** `spaceship_shooting/`
 
 A twin-stick shooter example extending Spaceship Control with:
-- Component-based architecture with helios game framework
-- Projectile pooling system for efficient bullet management
-- Aiming and shooting via right analog stick
-- Level bounds with bounce behavior
-- 2D collision detection via AABB
+- Projectile spawning via ProjectileSpawnSystem
+- Object pooling with GameObjectPoolManager
+- ShootComponent with configurable fire rate
+- Aim2DComponent for direction tracking
+- Level bounds with bounce/despawn behavior
+
+**Controls:**
+- Left Stick - Move/Rotate spaceship
+- Right Stick - Aim and fire projectiles
+- ESC - Exit application
+
+---
+
+### 5. Enemy Spawn
+
+**Location:** `enemy_spawn/`
+
+Demonstrates the spawn system with:
+- Timed spawning via SpawnScheduler and SpawnRule
+- Object pooling with GameObjectPoolManager
+- RandomSpawnPlacer for random positioning
+- MoveInitializer for random movement
+- SpinComponent for visual rotation
+- Level bounds with reflect behavior
+
+**Controls:**
+- Left Stick - Move/Rotate spaceship
+- ESC - Exit application
+
+---
+
+### 6. Collision Detection
+
+**Location:** `collision_detection/`
+
+A comprehensive collision detection example featuring:
+- Grid-based spatial partitioning with GridCollisionDetectionSystem
+- Collision layers and masks for filtering
+- TriggerCollisionEvent and SolidCollisionEvent
+- Multiple collision behaviors (Bounce, Reflect, Despawn)
+- Enemy spawning and projectile systems combined
 
 **Controls:**
 - Left Stick - Move/Rotate spaceship

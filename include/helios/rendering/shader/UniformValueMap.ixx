@@ -68,7 +68,9 @@ export namespace helios::rendering::shader {
          * @param uniformSemantics The `UniformSemantics` identifier for the uniform.
          * @param mat4f A const ref to the mat4f value to set.
          */
-        void set(UniformSemantics uniformSemantics, const helios::math::mat4f& mat4f) noexcept;
+        void set(UniformSemantics uniformSemantics, const helios::math::mat4f& mat4f) noexcept {
+            map_[std::to_underlying(uniformSemantics)].emplace(mat4f);
+        }
 
         /**
          * @brief Returns a raw const pointer to the `mat4f` for the specified uniform semantics.
@@ -77,7 +79,22 @@ export namespace helios::rendering::shader {
          * @return A raw const pointer to the associated mat4f, or `nullptr` if no mat4f is
          * associated with this semantics.
          */
-        [[nodiscard]] const float* mat4f_ptr(UniformSemantics uniformSemantics) const noexcept;
+        [[nodiscard]] const float* mat4f_ptr(UniformSemantics uniformSemantics) const noexcept {
+
+            const auto index = std::to_underlying(uniformSemantics);
+
+            if (index >= map_.size()) {
+                return nullptr;
+            }
+
+            if (const auto& el = map_[index]; el.has_value()) {
+                if (const auto* it = std::get_if<helios::math::mat4f>(&el.value())) {
+                    return helios::math::value_ptr(*it);
+                }
+            }
+
+            return nullptr;
+        }
 
         /**
          * @brief Sets or updates a `helios::math::vec4f` uniform value for a given semantic.
@@ -85,7 +102,9 @@ export namespace helios::rendering::shader {
          * @param uniformSemantics The `UniformSemantics` identifier for the uniform.
          * @param vec4f A const ref to the vec4f value to set.
          */
-        void set(UniformSemantics uniformSemantics, const helios::math::vec4f& vec4f) noexcept;
+        void set(UniformSemantics uniformSemantics, const helios::math::vec4f& vec4f) noexcept {
+            map_[std::to_underlying(uniformSemantics)].emplace(vec4f);
+        }
 
         /**
          * @brief Returns a raw const pointer to the `vec4f` for the specified uniform semantics.
@@ -94,7 +113,22 @@ export namespace helios::rendering::shader {
          * @return A raw const pointer to the associated vec4f, or `nullptr` if no vec4f is
          * associated with this semantics.
          */
-        [[nodiscard]] const float* vec4f_ptr(UniformSemantics uniformSemantics) const noexcept;
+        [[nodiscard]] const float* vec4f_ptr(UniformSemantics uniformSemantics) const noexcept {
+
+            const auto index = std::to_underlying(uniformSemantics);
+
+            if (index >= map_.size()) {
+                return nullptr;
+            }
+
+            if (const auto& el = map_[index]; el.has_value()) {
+                if (const auto* it = std::get_if<helios::math::vec4f>(&el.value())) {
+                    return helios::math::value_ptr(*it);
+                }
+            }
+
+            return nullptr;
+        }
 
         /**
          * @brief Sets or updates a float uniform value for a given semantic.
@@ -102,7 +136,9 @@ export namespace helios::rendering::shader {
          * @param uniformSemantics The `UniformSemantics` identifier for the uniform.
          * @param value The float value to set.
          */
-        void set(UniformSemantics uniformSemantics, float value) noexcept;
+        void set(UniformSemantics uniformSemantics, float value) noexcept {
+            map_[std::to_underlying(uniformSemantics)].emplace(value);
+        }
 
         /**
          * @brief Returns a raw const pointer to the float value for the specified uniform semantics.
@@ -115,7 +151,22 @@ export namespace helios::rendering::shader {
          * @return A raw const pointer to the associated float value, or `nullptr` if no float value
          * is associated with this semantics.
          */
-        [[nodiscard]] const float* float_ptr(UniformSemantics uniformSemantics) const noexcept;
+        [[nodiscard]] const float* float_ptr(UniformSemantics uniformSemantics) const noexcept {
+
+            const auto index = std::to_underlying(uniformSemantics);
+
+            if (index >= map_.size()) {
+                return nullptr;
+            }
+
+            if (const auto& el = map_[index]; el.has_value()) {
+                if (const auto* floatPtr = std::get_if<float>(&el.value())) {
+                    return floatPtr;
+                }
+            }
+
+            return nullptr;
+        }
 
     };
 

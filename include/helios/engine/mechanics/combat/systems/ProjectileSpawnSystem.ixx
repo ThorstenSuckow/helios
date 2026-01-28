@@ -20,6 +20,8 @@ import helios.engine.runtime.spawn.SpawnContext;
 import helios.engine.runtime.spawn.EmitterContext;
 import helios.engine.core.data.SpawnProfileId;
 
+import helios.math;
+
 export namespace helios::engine::mechanics::combat::systems {
 
     /**
@@ -27,23 +29,34 @@ export namespace helios::engine::mechanics::combat::systems {
      *
      * @details ProjectileSpawnSystem iterates all entities that have a ShootComponent,
      * Aim2DComponent, and TranslationStateComponent. When a ShootComponent has non-zero
-     * intensity and a valid aim direction, the system creates a SpawnCommand to spawn
-     * a projectile from the configured spawn profile.
+     * intensity and the aim component has a valid frequency, the system calculates how
+     * many projectiles to spawn based on accumulated time and cooldown.
      *
-     * The system uses the EmitterContext to pass the emitter's position and
-     * the calculated projectile velocity (source velocity + aim direction * speed)
-     * to the spawn logic.
+     * ## Fire Rate Mechanics
+     *
+     * The system implements an intensity-based fire rate:
+     * 1. Accumulates `deltaTime * intensity` into the cooldown timer
+     * 2. When timer >= cooldownDelta, spawns `floor(timer / cooldownDelta)` projectiles
+     * 3. Reduces timer by spawned amount, preserving fractional remainder
+     *
+     * This allows continuous fire with variable intensity affecting the effective rate.
+     *
+     * ## Spawn Context
+     *
+     * Each SpawnCommand includes an EmitterContext containing:
+     * - **position:** Current translation from TranslationStateComponent
+     * - **velocity:** sourceVelocity + (aimDirection * projectileSpeed)
      *
      * Example setup:
      * ```cpp
-     * // Create system with projectile spawn profile
      * auto projectileSpawnSystem = std::make_unique<ProjectileSpawnSystem>(
      *     SpawnProfileId{1}  // ID of the projectile spawn profile
      * );
+     * mainPhase.addPass().add(std::move(projectileSpawnSystem));
      * ```
      *
-     * @note Entities must have all three required components (ShootComponent,
-     *       Aim2DComponent, TranslationStateComponent) to be processed.
+     * @note Entities must have ShootComponent, Aim2DComponent, and
+     *       TranslationStateComponent to be processed.
      *
      * @see ShootComponent
      * @see Aim2DComponent
@@ -59,6 +72,7 @@ export namespace helios::engine::mechanics::combat::systems {
          * projectiles are placed and initialized.
          */
         const helios::engine::core::data::SpawnProfileId spawnProfileId_;
+
 
     public:
 
@@ -78,9 +92,13 @@ export namespace helios::engine::mechanics::combat::systems {
          *
          * @details For each entity with ShootComponent, Aim2DComponent, and
          * TranslationStateComponent:
-         * 1. Checks if intensity > 0 and direction is valid (normalized)
-         * 2. Calculates projectile velocity from source velocity and aim direction
-         * 3. Enqueues a SpawnCommand with EmitterContext containing position and velocity
+         *
+         * 1. Skips if aim frequency or intensity are near zero
+         * 2. Accumulates `deltaTime * intensity` into the cooldown timer
+         * 3. If timer < cooldownDelta, updates timer and continues
+         * 4. Calculates projectile count as `floor(timer / cooldownDelta)`
+         * 5. Reduces timer by `count * cooldownDelta`
+         * 6. Enqueues SpawnCommands with EmitterContext for each projectile
          *
          * @param updateContext The current frame's update context.
          */
@@ -92,28 +110,53 @@ export namespace helios::engine::mechanics::combat::systems {
                 helios::engine::mechanics::combat::components::ShootComponent
             >().each()) {
 
-                float intensity = sc->intensity();
-                auto direction = ac->direction();
 
-                if (intensity == 0.0f || !direction.isNormalized()) {
+                const float intensity = sc->intensity();
+                const float cooldown  = sc->cooldownDelta();
+
+                float timer = sc->cooldownTimer();
+
+                // only process for meaningful values
+                assert(cooldown >  helios::math::EPSILON_LENGTH && "Unexpected cooldownDelta");
+                if (ac->frequency() <=  helios::math::EPSILON_LENGTH ||
+                    intensity <=  helios::math::EPSILON_LENGTH) {
+                    continue;
+                };
+
+                const float delta = updateContext.deltaTime();
+
+                // update the timer to accumulate frame times * intensity.
+                // will be updated in this frame if projectiles spawned,
+                timer += delta * intensity;
+
+                if (timer < cooldown) {
+                    sc->setCooldownTimer(timer);
                     continue;
                 }
 
-                //float cooldown  = sc->cooldownTime();
-                auto sourceVelocity = sc->sourceVelocity();
-                auto projectileSpeed = sc->projectileSpeed();
+                const unsigned int amount = static_cast<unsigned int>(timer / cooldown);
 
-                updateContext.commandBuffer().add<
-                    helios::engine::runtime::spawn::commands::SpawnCommand
-                >(
-                    spawnProfileId_,
-                    helios::engine::runtime::spawn::SpawnContext{
-                        helios::engine::runtime::spawn::EmitterContext{
-                            tsc->translation(),
-                            sourceVelocity + (direction.toVec3() * projectileSpeed)
+                // reduce timer by the product of projectiles and cooldown,
+                // which leaves a fractional part that did not add a whole projectile
+                // to this frame
+                sc->setCooldownTimer(timer - (amount * cooldown));
+
+                const auto aimDirection = ac->direction().toVec3();
+                assert(aimDirection.isNormalized() && "Unexpected aimDirection.length()");
+
+                for (unsigned int i = 0; i < amount; i++) {
+                    updateContext.commandBuffer().add<
+                        helios::engine::runtime::spawn::commands::SpawnCommand
+                    >(
+                        spawnProfileId_,
+                        helios::engine::runtime::spawn::SpawnContext{
+                            helios::engine::runtime::spawn::EmitterContext{
+                                tsc->translation(),
+                                sc->sourceVelocity() + (aimDirection * sc->projectileSpeed())
+                            }
                         }
-                    }
-                );
+                    );
+                }
             }
         }
 

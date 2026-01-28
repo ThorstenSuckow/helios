@@ -7,6 +7,9 @@ module;
 #include <memory>
 #include <vector>
 #include <list>
+#include <stdexcept>
+#include <format>
+#include <algorithm>
 
 export module helios.app.Application;
 
@@ -95,7 +98,12 @@ export namespace helios::app {
             std::unique_ptr<helios::rendering::RenderingDevice> renderingDevice,
             std::unique_ptr<helios::input::InputManager> inputManager,
             std::unique_ptr<helios::event::EventManager> eventManager
-            );
+            ):
+            renderingDevice_(std::move(renderingDevice)),
+            inputManager_(std::move(inputManager)),
+            eventManager_(std::move(eventManager))
+        {
+        }
 
 
         /**
@@ -106,7 +114,17 @@ export namespace helios::app {
          *
          * @param controller Unique pointer to the controller to add.
          */
-        void addController(std::unique_ptr<helios::app::controller::Controller> controller) noexcept;
+        void addController(std::unique_ptr<helios::app::controller::Controller> controller) noexcept {
+            if (initialized_) {
+                logger_.info(
+                    std::format("Controller {0} added to an already initialized Application, explicitly initializing.", controller->toString())
+                    );
+                if (controller->init()) {
+                    controller->subscribeTo(eventManager_->dispatcher());
+                }
+            }
+            controllers_.push_back(std::move(controller));
+        }
 
         /**
          * @brief Creates the container for the native window and performs all
@@ -131,7 +149,22 @@ export namespace helios::app {
          *
          * @throws std::runtime_error If the application was already initialized.
          */
-        virtual void init();
+        virtual void init() {
+            logger_.info("Initializing application.");
+
+            if (initialized_) {
+                std::string msg = "Application was already initialized.";
+                logger_.error(msg);
+                throw std::runtime_error(msg);
+            }
+            for (auto& ctrl: controllers_) {
+                if (ctrl->init()) {
+                    ctrl->subscribeTo(eventManager_->dispatcher());
+                }
+            }
+
+            initialized_ = true;
+        }
 
 
         /**
@@ -152,7 +185,14 @@ export namespace helios::app {
          *
          * @return True if the window is owned by this application, otherwise false.
          */
-        [[nodiscard]] bool hasWindow(const helios::window::Window& win) const noexcept;
+        [[nodiscard]] bool hasWindow(const helios::window::Window& win) const noexcept {
+            auto it = std::find_if(
+           windowList_.begin(),
+           windowList_.end(),
+           [&win](const auto& window){return *window == win;});
+
+            return it != windowList_.end();
+        }
 
 
         /**

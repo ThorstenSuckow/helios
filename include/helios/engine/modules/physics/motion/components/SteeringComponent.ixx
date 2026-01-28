@@ -119,6 +119,14 @@ export namespace helios::engine::modules::physics::motion::components {
          */
         bool useInstantRotation_ = false;
 
+        /**
+         * @brief Flag indicating if the direction component should be updated from steering.
+         *
+         * @details If true, the DirectionComponent of the entity will be synchronized
+         * with the steering input direction.
+         */
+        bool directionFromSteering_ = false;
+
     public:
 
         /**
@@ -127,12 +135,13 @@ export namespace helios::engine::modules::physics::motion::components {
         SteeringComponent() = default;
 
         /**
-         * @brief Constructs a SteeringComponent with specified instant rotation mode.
+         * @brief Constructs a SteeringComponent with specified settings.
          *
          * @param useInstantRotation If true, rotation snaps instantly to target.
+         * @param directionFromSteering If true, synchronizes DirectionComponent with steering.
          */
-        explicit SteeringComponent(bool useInstantRotation) :
-        useInstantRotation_(useInstantRotation) {}
+        explicit SteeringComponent(bool useInstantRotation, bool directionFromSteering = false) :
+        useInstantRotation_(useInstantRotation), directionFromSteering_(directionFromSteering) {}
 
         /**
          * @brief Copy constructor.
@@ -142,6 +151,7 @@ export namespace helios::engine::modules::physics::motion::components {
         explicit SteeringComponent(const SteeringComponent& other) :
             useInstantRotation_(other.useInstantRotation_),
             rotationSpeed_(other.rotationSpeed_),
+            directionFromSteering_(other.directionFromSteering_),
             rotationSpeedThreshold_(other.rotationSpeedThreshold_),
             rotationDampening_(other.rotationDampening_),
             rotationAxis_(other.rotationAxis_) {}
@@ -154,6 +164,24 @@ export namespace helios::engine::modules::physics::motion::components {
         }
 
         /**
+         * @brief Sets whether the direction component should be updated from steering.
+         *
+         * @param directionFromSteering True to enable synchronization, false to disable.
+         */
+        void setDirectionFromSteering(const bool directionFromSteering) noexcept {
+            directionFromSteering_ = directionFromSteering;
+        }
+
+        /**
+         * @brief Checks if direction synchronization is enabled.
+         *
+         * @return True if DirectionComponent is updated from steering, false otherwise.
+         */
+        bool directionFromSteering() const noexcept {
+            return directionFromSteering_;
+        }
+
+        /**
          * @brief Returns whether instant rotation mode is enabled.
          *
          * @return True if rotation snaps instantly, false for smooth interpolation.
@@ -161,6 +189,16 @@ export namespace helios::engine::modules::physics::motion::components {
         [[nodiscard]] bool useInstantRotation() const noexcept {
             return useInstantRotation_;
         }
+
+        /**
+         * @brief Sets the instant rotation mode.
+         *
+         * @param useInstantRotation True to snap instantly to target rotation, false for interpolation.
+         */
+        void setUseInstantRotation(const bool useInstantRotation)  noexcept {
+            useInstantRotation_ = useInstantRotation;
+        }
+
 
         /**
          * @brief Sets the heading direction and turn intensity from input.
@@ -187,7 +225,7 @@ export namespace helios::engine::modules::physics::motion::components {
                 return;
             }
 
-            assert(std::abs(direction.length() - 1.0f) <= 0.001f && "Unexpected direction vector - not normalized");
+            assert(direction.isNormalized() && "Unexpected direction vector - not normalized");
         }
 
         /**
@@ -288,6 +326,15 @@ export namespace helios::engine::modules::physics::motion::components {
          * @return Const reference to the 2D steering input vector.
          */
         [[nodiscard]] const helios::math::vec3f& steeringInput() const noexcept {
+            return steeringInput_;
+        }
+
+        /**
+         * @brief Returns the current steering intent (alias for steeringInput).
+         *
+         * @return Const reference to the steering input vector.
+         */
+        [[nodiscard]] const helios::math::vec3f& steeringIntent() const noexcept {
             return steeringInput_;
         }
 

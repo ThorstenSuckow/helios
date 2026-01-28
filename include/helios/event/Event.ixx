@@ -45,7 +45,7 @@ export namespace helios::event {
         /**
          * @brief Constructs a new event with a unique Guid and a default tag of 0.
          */
-        Event();
+        Event(): guid_(helios::util::Guid::generate()), tag_(0) {}
 
 
         /**
@@ -53,7 +53,7 @@ export namespace helios::event {
          *
          * @param tag
          */
-        explicit Event(uint64_t tag);
+        explicit Event(uint64_t tag): guid_(helios::util::Guid::generate()), tag_(tag) {}
 
 
         /**
@@ -61,7 +61,9 @@ export namespace helios::event {
          *
          * @return
          */
-        [[nodiscard]] const helios::util::Guid& guid() const;
+        [[nodiscard]] const helios::util::Guid& guid() const {
+            return guid_;
+        }
 
 
         /**
@@ -70,7 +72,9 @@ export namespace helios::event {
          *
          * @return
          */
-        [[nodiscard]] uint64_t tag() const;
+        [[nodiscard]] uint64_t tag() const {
+            return tag_;
+        }
 
         [[nodiscard]] virtual std::string toString() const noexcept = 0;
 
@@ -79,7 +83,9 @@ export namespace helios::event {
          * @param e
          * @return
          */
-        bool operator==(const Event& e) const;
+        bool operator==(const Event& e) const {
+            return guid_ == e.guid();
+        }
 
     };
 

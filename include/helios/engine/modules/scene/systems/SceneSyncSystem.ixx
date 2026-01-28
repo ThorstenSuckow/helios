@@ -16,7 +16,7 @@ import helios.engine.ecs.System;
 import helios.engine.runtime.world.UpdateContext;
 
 import helios.engine.modules.scene.components.SceneNodeComponent;
-import helios.engine.modules.spatial.transform.components.TransformComponent;
+import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
 
 export namespace helios::engine::modules::systems::scene {
 
@@ -54,11 +54,11 @@ export namespace helios::engine::modules::systems::scene {
         void update(helios::engine::runtime::world::UpdateContext& updateContext) noexcept override {
 
             auto view = gameWorld_->find<
-                helios::engine::modules::spatial::transform::components::TransformComponent,
+                helios::engine::modules::spatial::transform::components::ComposeTransformComponent,
                 helios::engine::modules::scene::components::SceneNodeComponent
             >();
 
-            // First pass: push local transforms from TransformComponent to SceneNode
+            // First pass: push local transforms from ComposeTransformComponent to SceneNode
             for (auto [entity, tc, nc] : view.each()) {
 
                 if (!tc->isDirty()) {
@@ -78,7 +78,7 @@ export namespace helios::engine::modules::systems::scene {
             // Propagate changes and update the nodes
             scene_->updateNodes();
 
-            // Second pass: read back world transforms from SceneNode to TransformComponent
+            // Second pass: read back world transforms from SceneNode to ComposeTransformComponent
             for (auto [entity, tc, nc] : view.each()) {
 
                 auto* sceneNode = nc->sceneNode();

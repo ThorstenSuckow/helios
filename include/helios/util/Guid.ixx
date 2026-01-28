@@ -7,15 +7,13 @@ module;
 #include <atomic>
 #include <cstdint>
 
-
 export module helios.util.Guid;
+
+import helios.core.types;
 
 
 export namespace helios::util {
 
-    struct no_init_t{};
-
-    inline constexpr no_init_t no_init;
 
     /**
      * @brief Representative of a Globally Unique Identifier.
@@ -32,7 +30,7 @@ export namespace helios::util {
         /**
          * @brief Unsafe Guid initializer for (local) var initialization.
          */
-        explicit Guid(no_init_t) {};
+        explicit Guid(helios::core::types::no_init_t) {};
 
         /**
          * @brief Compares two Guid instances for equality.

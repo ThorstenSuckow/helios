@@ -5,6 +5,7 @@
 module;
 
 #include <memory>
+#include <cassert>
 
 export module helios.math.types:aabb;
 
@@ -141,6 +142,18 @@ export namespace helios::math {
             return v_min[0] >= min_[0] && v_min[1] >= min_[1] && v_min[2] >= min_[2] &&
                    v_max[0] <= max_[0] && v_max[1] <= max_[1] && v_max[2] <= max_[2];
 
+        }
+
+        /**
+         * Checks if this AABB fully contains the specified point.
+         *
+         * @param point The vec3 to test for containment.
+         *
+         * @return True if the specified point is fully contained within this AABB, otherwise false.
+         */
+        [[nodiscard]] constexpr bool contains(const helios::math::vec3<T>& point) const noexcept {
+            return point[0] >= min_[0] && point[1] >= min_[1] && point[2] >= min_[2] &&
+                   point[0] <= max_[0] && point[1] <= max_[1] && point[2] <= max_[2];
         }
 
         /**

@@ -5,3 +5,4 @@
 export module helios.engine.runtime.spawn.policy.conditions;
 
 export import helios.engine.runtime.spawn.policy.conditions.TimerSpawnCondition;
+export import helios.engine.runtime.spawn.policy.conditions.RequestedAmountIsAvailableCondition;

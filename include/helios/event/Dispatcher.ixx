@@ -67,7 +67,15 @@ export namespace helios::event {
          *
          * @param event A unique_ptr to the event instance to be dispatched.
          */
-        void dispatch(std::unique_ptr<const Event> event);
+        void dispatch(std::unique_ptr<const Event> event) {
+            const auto idx = std::type_index(typeid(*event));
+
+            if (const auto cb = callbacks_.find(idx); cb != callbacks_.end()) {
+                for (const auto& callback : cb->second) {
+                    callback(*event);
+                }
+            }
+        }
 
     };
 

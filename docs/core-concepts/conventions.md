@@ -274,3 +274,10 @@ constexpr float HELIOS_UNITS_PER_METER = 1.0f;
 - `helios.scene.Camera` — Projection matrix management
 - `helios.scene.CameraSceneNode` — View matrix computation and scene graph integration
 - `helios.scene.InheritTransform` — Selective transform inheritance flags
+
+## Related Documentation
+
+- [Scene Graph](scene-graph.md) — Hierarchical scene organization
+- [Component System](component-system.md) — ECS-style composition
+- [Spawn System](spawn-system.md) — Entity lifecycle with pooling
+

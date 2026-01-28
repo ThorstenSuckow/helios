@@ -5,6 +5,7 @@
  */
 module;
 
+#include <cassert>
 #include <memory>
 #include <vector>
 
@@ -17,6 +18,7 @@ import helios.util.Guid;
 import helios.core.spatial.Transform;
 import helios.math.types;
 import helios.math.transform;
+import helios.math.TransformType;
 
 export namespace helios::scene {
 
@@ -142,7 +144,9 @@ export namespace helios::scene {
          *
          * @see addNode()
          */
-        void setParent(SceneNode* parentNode);
+        void setParent(SceneNode* parentNode) {
+            parent_ = parentNode;
+        }
 
         public:
             virtual ~SceneNode() = default;
@@ -170,7 +174,9 @@ export namespace helios::scene {
              * Nodes constructed in this way should be treated as transformation
              * nodes.
              */
-            SceneNode() noexcept;
+            SceneNode() noexcept :
+                guid_(util::Guid::generate())
+            {}
 
             /**
              * @brief Constructs a new SceneNode that represents no renderable object.
@@ -179,7 +185,10 @@ export namespace helios::scene {
              *
              * @param transform The initial transformation for this node.
              */
-            explicit SceneNode(const Transform& transform) noexcept;
+            explicit SceneNode(const Transform& transform) noexcept :
+                guid_(util::Guid::generate()),
+                localTransform_(transform)
+            {}
 
             /**
              * @brief Constructs a new SceneNode representing a renderable object.
@@ -191,7 +200,11 @@ export namespace helios::scene {
             explicit SceneNode(
                 std::shared_ptr<helios::rendering::Renderable> renderable,
                 const Transform& transform
-            ) noexcept;
+            ) noexcept :
+                guid_(util::Guid::generate()),
+                renderable_(std::move(renderable)),
+                localTransform_(transform)
+            {}
 
             /**
              * @brief Constructs a new SceneNode representing a renderable object.
@@ -201,14 +214,19 @@ export namespace helios::scene {
              */
             explicit SceneNode(
                 std::shared_ptr<helios::rendering::Renderable> renderable
-            ) noexcept;
+            ) noexcept :
+                guid_(util::Guid::generate()),
+                renderable_(std::move(renderable))
+            {}
 
             /**
              * @brief Returns the globally unique identifier for this SceneNode.
              *
              * @return The unique identifier for this SceneNode.
              */
-            [[nodiscard]] const helios::util::Guid& guid() const noexcept;
+            [[nodiscard]] const helios::util::Guid& guid() const noexcept {
+                return guid_;
+            }
 
             /**
              * @brief Adds a new child node to this SceneNode.
@@ -219,35 +237,47 @@ export namespace helios::scene {
              * @return The raw pointer to the newly added node, or nullptr if
              * adding failed
              */
-            [[nodiscard]] virtual SceneNode* addNode(std::unique_ptr<SceneNode> sceneNode);
+            [[nodiscard]] virtual SceneNode* addNode(std::unique_ptr<SceneNode> sceneNode) {
+                auto& ref = *children_.emplace_back(std::move(sceneNode));
+                ref.setParent(this);
+                return &ref;
+            }
 
             /**
              * @brief Returns a const ref to the list of this node's children.
              *
              * @return A const ref to the list of children of this node.
              */
-            [[nodiscard]] const std::vector<std::unique_ptr<SceneNode>>& children() const noexcept;
+            [[nodiscard]] const std::vector<std::unique_ptr<SceneNode>>& children() const noexcept {
+                return children_;
+            }
 
             /**
              * @brief Returns a shared pointer to the Renderable of this SceneNode.
              *
              * @return A shared_ptr to the Renderable, may be nullptr if none is set.
              */
-            [[nodiscard]] std::shared_ptr<const helios::rendering::Renderable> renderable() const noexcept;
+            [[nodiscard]] std::shared_ptr<const helios::rendering::Renderable> renderable() const noexcept {
+                return renderable_;
+            }
 
             /**
              * @brief Returns true if this SceneNode was configured with a Renderable.
              *
              * @return true if the SceneNode was configured with a Renderable, otherwise false.
              */
-            [[nodiscard]] bool hasRenderable() const noexcept;
+            [[nodiscard]] bool hasRenderable() const noexcept {
+                return renderable() != nullptr;
+            }
 
             /**
              * @brief Returns a shared pointer to the non-const Renderable of this SceneNode.
              *
              * @return A shared_ptr to the Renderable, may be nullptr if none is set.
              */
-            [[nodiscard]] std::shared_ptr<helios::rendering::Renderable> renderable() noexcept;
+            [[nodiscard]] std::shared_ptr<helios::rendering::Renderable> renderable() noexcept {
+                return renderable_;
+            }
 
             /**
              * @brief Applies a scaling transformation to this node's **local** transform.
@@ -258,7 +288,11 @@ export namespace helios::scene {
              *
              * @return A reference to this SceneNode.
              */
-            SceneNode& setScale(const helios::math::vec3f& scale) noexcept;
+            SceneNode& setScale(const helios::math::vec3f& scale) noexcept {
+                localTransform_.setScale(scale);
+                needsUpdate_ = true;
+                return *this;
+            }
 
             /**
              * @brief Applies rotation to this node's **local** transform.
@@ -269,7 +303,11 @@ export namespace helios::scene {
              *
              * @return A reference to this SceneNode.
              */
-            SceneNode& setRotation(const helios::math::mat4f& rotation) noexcept;
+            SceneNode& setRotation(const helios::math::mat4f& rotation) noexcept {
+                localTransform_.setRotation(rotation);
+                needsUpdate_ = true;
+                return *this;
+            }
 
             /**
              * @brief Applies translation to this node's **local** transform.
@@ -281,21 +319,29 @@ export namespace helios::scene {
              *
              * @return A reference to this SceneNode.
              */
-            SceneNode& setTranslation(const helios::math::vec3f& translation) noexcept;
+            SceneNode& setTranslation(const helios::math::vec3f& translation) noexcept {
+                localTransform_.setTranslation(translation);
+                needsUpdate_ = true;
+                return *this;
+            }
 
             /**
              * @brief Returns this SceneNode's localTransform.
              *
              * @return A const reference to this SceneNode's `Transform` object.
              */
-            [[nodiscard]] const Transform& localTransform() const noexcept;
+            [[nodiscard]] const Transform& localTransform() const noexcept {
+                return localTransform_;
+            }
 
             /**
              * @brief Returns this SceneNode's localTransform.
              *
              * @return A reference to this SceneNode's `Transform` object.
              */
-            [[nodiscard]] Transform& localTransform() noexcept;
+            [[nodiscard]] Transform& localTransform() noexcept {
+                return localTransform_;
+            }
 
             /**
              * @brief Returns a pointer to this node's parent node.
@@ -303,7 +349,9 @@ export namespace helios::scene {
              * @return The pointer to this node's parent, or nullptr if no parent exists,
              * e.g. for the root node.
              */
-            [[nodiscard]] SceneNode* parent() const noexcept;
+            [[nodiscard]] SceneNode* parent() const noexcept {
+                return parent_;
+            }
 
             /**
              * @brief Sets the world transform for this SceneNode.
@@ -319,8 +367,22 @@ export namespace helios::scene {
              * @return true if the world transform was updated, otherwise false.
              */
             [[nodiscard]] bool applyWorldTransform(
-                const helios::math::mat4f& wf, helios::scene::SceneGraphKey sceneGraphKey
-                ) noexcept;
+                const helios::math::mat4f& parentWorldTransform, helios::scene::SceneGraphKey sceneGraphKey
+                ) noexcept {
+
+                const auto newWt = inheritWorldTransform(parentWorldTransform);
+
+                if (!needsUpdate() && worldTransform_.same(newWt)) {
+                    return false;
+                }
+
+                worldTransform_ = newWt;
+                needsUpdate_ = false;
+
+
+                onWorldTransformUpdate();
+                return true;
+            }
 
             /**
              * @brief Computes and returns the world transform for this SceneNode.
@@ -331,7 +393,13 @@ export namespace helios::scene {
              *
              * @return The current world transform matrix for this scene node.
              */
-            const helios::math::mat4f& worldTransform() noexcept;
+            const helios::math::mat4f& worldTransform() noexcept {
+                if (needsUpdate()) {
+                    update();
+                }
+
+                return worldTransform_;
+            }
 
             /**
              * @brief Returns the current worldTransform matrix of this SceneNode
@@ -341,7 +409,9 @@ export namespace helios::scene {
              *
              * @return The current worldTransform matrix of this SceneNode.
              */
-            [[nodiscard]] const helios::math::mat4f& cachedWorldTransform() const noexcept;
+            [[nodiscard]] const helios::math::mat4f& cachedWorldTransform() const noexcept {
+                return worldTransform_;
+            }
 
             /**
              * @brief Checks whether this SceneNode needs to be updated.
@@ -351,7 +421,9 @@ export namespace helios::scene {
              *
              * @return true if this SceneNode is considered to be dirty, otherwise false.
              */
-            [[nodiscard]] bool needsUpdate() const noexcept;
+            [[nodiscard]] bool needsUpdate() const noexcept {
+                return needsUpdate_ || localTransform_.needsUpdate();
+            }
 
 
             /**
@@ -359,7 +431,13 @@ export namespace helios::scene {
              *
              * @return The AABB transformed to world space.
              */
-            [[nodiscard]] helios::math::aabbf aabb() noexcept;
+            [[nodiscard]] helios::math::aabbf aabb() noexcept {
+                if (needsUpdate()) {
+                    update();
+                }
+
+                return aabb_;
+            }
 
             /**
              * @brief Updates the world transform and axis-aligned bounding box of this SceneNode.
@@ -368,7 +446,17 @@ export namespace helios::scene {
              * this node's `localTransform_`. Also updates the `aabb_` to reflect the
              * current world-space bounds.
              */
-            void update() noexcept;
+            void update() noexcept {
+                needsUpdate_ = false;
+
+                if (parent_ == nullptr) {
+                    worldTransform_ = localTransform_.transform();
+                } else {
+                    worldTransform_ = inheritWorldTransform(parent_->worldTransform());
+                }
+
+                onWorldTransformUpdate();
+            }
 
             /**
              * @brief Virtual callback invoked after the world transform has been updated.
@@ -377,7 +465,14 @@ export namespace helios::scene {
              * when the node's world transform changes, such as updating dependent
              * resources or triggering view matrix recalculations in camera nodes.
              */
-            virtual void onWorldTransformUpdate() noexcept;
+            virtual void onWorldTransformUpdate() noexcept {
+                if (renderable_) {
+                    if (const auto prototype = renderable_->renderPrototype()) {
+                        const auto& localAABB = prototype->mesh().aabb();
+                        aabb_ = localAABB.applyTransform(worldTransform_);
+                    }
+                }
+            }
 
             /**
              * @brief Filters a parent world transform based on the node's inheritance flags.
@@ -393,7 +488,17 @@ export namespace helios::scene {
              * @see setInheritance()
              * @see helios::math::TransformType
              */
-            helios::math::mat4f inheritWorldTransform(const helios::math::mat4f& parentWorldTransform) noexcept;
+            helios::math::mat4f inheritWorldTransform(const helios::math::mat4f& parentWorldTransform) noexcept {
+                using namespace helios::math;
+
+                if (inheritance_ == helios::math::TransformType::All) {
+                    return parentWorldTransform * localTransform_.transform();
+                }
+
+                auto id = parentWorldTransform.decompose(inheritance_);
+
+                return id * localTransform_.transform();
+            }
 
             /**
              * @brief Sets which transform components this node inherits from its parent.
@@ -407,7 +512,10 @@ export namespace helios::scene {
              *
              * @see helios::math::TransformType
              */
-            void setInheritance(const helios::math::TransformType inherit) noexcept;
+            void setInheritance(const helios::math::TransformType inherit) noexcept {
+                inheritance_ = inherit;
+                needsUpdate_ = true;
+            }
 
             /**
              * @brief Returns the current transform inheritance flags for this node.
@@ -416,14 +524,18 @@ export namespace helios::scene {
              *
              * @see setInheritance()
              */
-            [[nodiscard]] helios::math::TransformType inheritance() const noexcept;
+            [[nodiscard]] helios::math::TransformType inheritance() const noexcept {
+                return inheritance_;
+            }
 
             /**
              * @brief Returns whether this SceneNode and its child nodes should be considered for rendering.
              *
              * @return true if the SceneNode should be considered for rendering, otherwise false.
              */
-            [[nodiscard]] bool isActive() const noexcept;
+            [[nodiscard]] bool isActive() const noexcept {
+                return isActive_;
+            }
 
             /**
              * @brief Sets the active state of this SceneNode.
@@ -432,7 +544,9 @@ export namespace helios::scene {
              *
              * @param active true to consider this SceneNodefor rendering, otherwise false.
              */
-            void setActive(bool active) noexcept;
+            void setActive(bool active) noexcept {
+                isActive_ = active;
+            }
      };
 
 } // namespace helios::scene

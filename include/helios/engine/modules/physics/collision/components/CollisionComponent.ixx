@@ -13,6 +13,7 @@ import helios.engine.ecs.CloneableComponent;
 import helios.engine.ecs.GameObject;
 
 import helios.engine.modules.physics.collision.types.CollisionBehavior;
+import helios.engine.modules.physics.collision.types.HitPolicy;
 
 export namespace helios::engine::modules::physics::collision::components {
 
@@ -96,6 +97,16 @@ export namespace helios::engine::modules::physics::collision::components {
             std::to_underlying(helios::engine::modules::physics::collision::types::CollisionBehavior::size_)
         > triggerCollisionBehavior_{};
 
+        /**
+         * @brief Controls how many collisions are reported per frame.
+         *
+         * @details Defaults to `OneHit`, reporting only the first collision.
+         * Set to `All` for multi-target collision detection.
+         *
+         * @see HitPolicy
+         */
+        helios::engine::modules::physics::collision::types::HitPolicy hitPolicy_ = types::HitPolicy::OneHit;
+
     public:
 
         /**
@@ -103,6 +114,8 @@ export namespace helios::engine::modules::physics::collision::components {
          *
          * @param layerId The collision layer this entity belongs to.
          * @param isCollisionReporter Whether this entity can emit collision events.
+         * @param solidCollisionMask Initial bitmask for solid collisions.
+         * @param triggerCollisionMask Initial bitmask for trigger collisions.
          */
         explicit CollisionComponent(uint32_t layerId, bool isCollisionReporter = true,
             uint32_t solidCollisionMask = 0, uint32_t triggerCollisionMask = 0
@@ -126,8 +139,46 @@ export namespace helios::engine::modules::physics::collision::components {
             solidCollisionMask_(other.solidCollisionMask_),
             triggerCollisionMask_(other.triggerCollisionMask_),
             solidCollisionBehavior_(other.solidCollisionBehavior_),
-            triggerCollisionBehavior_(other.triggerCollisionBehavior_)
+            triggerCollisionBehavior_(other.triggerCollisionBehavior_),
+            hitPolicy_(other.hitPolicy_)
         {}
+
+
+        /**
+         * @brief Sets whether this component should report collision events.
+         *
+         * @param isCollisionReporter True to enable event reporting, false to disable.
+         */
+        void setIsCollisionReporter(bool isCollisionReporter) {
+            isCollisionReporter_ = isCollisionReporter;
+        }
+
+        /**
+         * @brief Sets the hit policy for collision detection.
+         *
+         * @details Controls how many collision events this entity can receive
+         * per frame:
+         * - `OneHit`: Only the first collision is reported (default)
+         * - `All`: All collisions are reported
+         *
+         * @param hitPolicy The hit policy to apply.
+         *
+         * @see HitPolicy
+         */
+        void setHitPolicy(const helios::engine::modules::physics::collision::types::HitPolicy hitPolicy) {
+            hitPolicy_ = hitPolicy;
+        }
+
+        /**
+         * @brief Returns the current hit policy.
+         *
+         * @return The configured HitPolicy for this component.
+         *
+         * @see HitPolicy
+         */
+        [[nodiscard]] helios::engine::modules::physics::collision::types::HitPolicy hitPolicy() const noexcept {
+            return hitPolicy_;
+        }
 
         /**
          * @brief Returns whether this component can emit collision events.
@@ -301,3 +352,4 @@ export namespace helios::engine::modules::physics::collision::components {
 
 
 }
+

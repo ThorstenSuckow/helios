@@ -4,10 +4,13 @@
 module;
 
 #include <cstdint>
-#include <compare>
+#include <helios/helios_config.h>
+#include <string_view>
+#include <unordered_map>
 
 export module helios.engine.core.data.GameObjectPoolId;
 
+import helios.core.algorithms;
 
 
 export namespace helios::engine::core::data {
@@ -22,14 +25,23 @@ export namespace helios::engine::core::data {
      * The ID is hashable and comparable, making it suitable for use as a key
      * in associative containers like `std::unordered_map`.
      *
-     * Example usage:
-     * ```cpp
-     * constexpr GameObjectPoolId BULLET_POOL{1};
-     * constexpr GameObjectPoolId ENEMY_POOL{2};
+     * ## Construction
      *
+     * IDs can be constructed from string literals using FNV-1a hashing:
+     * ```cpp
+     * constexpr GameObjectPoolId BULLET_POOL{"bullets"};
+     * constexpr GameObjectPoolId ENEMY_POOL{"enemies"};
+     * ```
+     *
+     * ## Usage
+     *
+     * ```cpp
      * auto* bullets = registry.pool(BULLET_POOL);
      * auto* enemies = registry.pool(ENEMY_POOL);
      * ```
+     *
+     * @see SpawnProfileId
+     * @see SpawnRuleId
      */
     struct GameObjectPoolId {
 
@@ -40,15 +52,31 @@ export namespace helios::engine::core::data {
          */
         uint32_t id_;
 
-    public:
-
         /**
          * @brief Constructs a GameObjectPoolId with the specified value.
          *
          * @param id The numeric identifier for this pool.
          */
-        explicit constexpr GameObjectPoolId(uint32_t id) noexcept
-        : id_(id) {}
+        explicit constexpr GameObjectPoolId(const uint32_t id) noexcept
+        : id_(id) {
+        }
+
+    public:
+
+        /**
+         * @brief Constructs a GameObjectPoolId from a string literal.
+         *
+         * @details Uses FNV-1a hashing to compute a numeric ID from the string.
+         * This enables readable, compile-time constant pool identifiers.
+         *
+         * ```cpp
+         * constexpr GameObjectPoolId BULLET_POOL{"bullets"};
+         * ```
+         *
+         * @param str The string to hash into an ID.
+         */
+        explicit constexpr GameObjectPoolId(const std::string_view str) noexcept
+            : GameObjectPoolId(helios::core::algorithms::fnv1a_hash(str)) {}
 
         /**
          * @brief Returns the underlying numeric value.

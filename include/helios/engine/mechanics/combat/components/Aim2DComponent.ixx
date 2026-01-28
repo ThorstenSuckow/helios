@@ -10,6 +10,9 @@ import helios.math.types;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.ecs.Component;
 
+import helios.math;
+
+import helios.engine.core.data.ComponentTypeId;
 
 export namespace helios::engine::mechanics::combat::components {
 
@@ -46,6 +49,10 @@ export namespace helios::engine::mechanics::combat::components {
          * @param freq Fire frequency factor (0.0 to 1.0).
          */
         virtual void aim(helios::math::vec2f direction, float freq) {
+            if (freq <= helios::math::EPSILON_LENGTH) {
+                direction_ = {};
+                frequency_ = 0.0f;
+            }
             direction_ = direction;
             frequency_ = freq;
         }
@@ -68,6 +75,15 @@ export namespace helios::engine::mechanics::combat::components {
         [[nodiscard]] float frequency() const noexcept {
             return frequency_;
         }
+
+        /**
+         * @brief Returns the ComponentTypeId for this component's type.
+         *
+         * @return The ComponentTypeId for this Component's type.
+         */
+        [[nodiscard]] helios::engine::core::data::ComponentTypeId typeId() const noexcept final {
+            return helios::engine::core::data::ComponentTypeId::id<Aim2DComponent>();
+        };
     };
 
 

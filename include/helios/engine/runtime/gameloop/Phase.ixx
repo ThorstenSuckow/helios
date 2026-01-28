@@ -9,13 +9,18 @@ module;
 
 export module helios.engine.runtime.gameloop.Phase;
 
+import helios.engine.runtime.gameloop.PassCommitListener;
 import helios.engine.runtime.gameloop.Pass;
+
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.world.GameWorld;
+
+import helios.engine.runtime.gameloop.CommitPoint;
 
 export namespace helios::engine::runtime::gameloop {
 
     class GameLoop;
+
 
     /**
      * @brief Enumeration of game loop phase types.
@@ -64,6 +69,21 @@ export namespace helios::engine::runtime::gameloop {
         friend class helios::engine::runtime::gameloop::GameLoop;
 
         /**
+         * @brief Collection of listeners to be notified when a pass commits.
+         *
+         * @details Listeners are notified after each pass completes, receiving the
+         * pass's configured CommitPoint flags. The GameLoop registers itself as a
+         * listener to handle event buffer swapping, command flushing, and manager
+         * processing based on the commit point configuration.
+         *
+         * @see PassCommitListener
+         * @see notifyPassCommitListeners()
+         */
+        std::vector<PassCommitListener*> passCommitListeners_;
+
+
+
+        /**
          * @brief Initializes all passes within this phase.
          *
          * @param gameWorld Reference to the game world.
@@ -89,14 +109,37 @@ export namespace helios::engine::runtime::gameloop {
          * @see Pass::addCommitPoint()
          */
         void update(helios::engine::runtime::world::UpdateContext& updateContext){
+
             for (auto& pass : passEntries_) {
                 // every pass contains systems that are updated here
                 pass->update(updateContext);
-
-                // once all systems were updated, we commit based on the configured CommitPoint
-                pass->commit(pass->commitPoint(), updateContext);
+                notifyPassCommitListeners(pass->commitPoint(), updateContext);
             }
         };
+
+        /**
+         * @brief Notifies all registered listeners about a pass commit.
+         *
+         * @details Called after each pass completes its update cycle. Each registered
+         * PassCommitListener receives the commit point flags, allowing it to perform
+         * the appropriate synchronization actions (event swapping, command flushing,
+         * manager processing).
+         *
+         * @param commitPoint The CommitPoint flags from the completed pass.
+         * @param updateContext The current update context.
+         *
+         * @return Always returns true.
+         *
+         * @see PassCommitListener::onPassCommit()
+         * @see addPassCommitListener()
+         */
+        bool notifyPassCommitListeners(CommitPoint commitPoint, helios::engine::runtime::world::UpdateContext& updateContext) {
+
+            for (const auto & passCommitListener : passCommitListeners_) {
+                passCommitListener->onPassCommit(commitPoint, updateContext);
+            }
+            return true;
+        }
 
         /**
          * @brief Collection of passes belonging to this phase.
@@ -117,6 +160,38 @@ export namespace helios::engine::runtime::gameloop {
          */
         explicit Phase(helios::engine::runtime::gameloop::GameLoop& gameloop) : gameloop_(gameloop) {
 
+        }
+
+
+        /**
+         * @brief Registers a listener to be notified when passes commit.
+         *
+         * @details The listener will receive notifications for all passes within this phase.
+         * The GameLoop typically registers itself to handle event synchronization,
+         * command buffer flushing, and manager processing based on commit point flags.
+         *
+         * Duplicate registrations are prevented; attempting to add the same listener
+         * twice will return false and leave the listener list unchanged.
+         *
+         * @param passCommitListener Pointer to the listener to register. Must remain
+         *        valid for the lifetime of this Phase or until removed.
+         *
+         * @return True if the listener was added, false if it was already registered.
+         *
+         * @see PassCommitListener
+         * @see notifyPassCommitListeners()
+         */
+        bool addPassCommitListener(PassCommitListener* passCommitListener) {
+
+            for (int i = 0; i < passCommitListeners_.size(); i++) {
+                if (passCommitListeners_[i] == passCommitListener) {
+                    return false;
+                }
+            }
+
+            passCommitListeners_.emplace_back(passCommitListener);
+
+            return true;
         }
 
         /**

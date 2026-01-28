@@ -4,7 +4,7 @@ Data structures for efficient entity management and querying.
 
 This module provides core data structures used for managing GameObjects within the helios engine.
 
-**Components:**
+## Components
 
 - **ComponentTypeId** - Compile-time type identifier for O(1) component indexing within GameObject.
 - **GameObjectPool** - Low-level O(1) object pooling for entity recycling.
@@ -14,6 +14,27 @@ This module provides core data structures used for managing GameObjects within t
 - **GameObjectView** - Lazy range adapter for component-filtered iteration with structured binding support.
 - **SpawnProfileId** - Strongly-typed identifier for spawn profiles.
 - **SpawnRuleId** - Strongly-typed identifier for spawn rules.
+
+## Strongly-Typed IDs
+
+The ID types (`GameObjectPoolId`, `SpawnProfileId`, `SpawnRuleId`) provide type-safe identifiers that can be constructed from string literals using FNV-1a hashing:
+
+```cpp
+// Compile-time constant IDs from strings
+constexpr GameObjectPoolId ENEMY_POOL{"enemies"};
+constexpr SpawnProfileId ENEMY_PROFILE{"enemy_spawn"};
+constexpr SpawnRuleId WAVE_RULE{"wave_spawn"};
+
+// Use in registries and schedulers
+poolManager.createPool(ENEMY_POOL, 100);
+spawnManager.registerProfile(ENEMY_PROFILE, profile);
+scheduler.addRule(ENEMY_PROFILE, std::make_unique<TimerSpawnRule>(WAVE_RULE, 2.0f, 5));
+```
+
+All ID types support:
+- Hashing for `std::unordered_map` / `std::unordered_set`
+- Comparison operators for `std::map` / `std::set`
+- Equality comparison
 
 > **Note:** `GameObjectView.h` is intentionally a .h header instead of a .ixx module interface due to MSVC ICE issues with structured bindings.
 

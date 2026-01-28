@@ -121,23 +121,27 @@ export namespace helios::engine::runtime::messaging::command {
         /**
          * @brief Registers a dispatcher for a specific TargetedCommand type.
          *
+         * @details When flush() processes a command of type T, it will route the
+         * command through this dispatcher instead of calling execute() directly.
+         *
          * @tparam T The concrete TargetedCommand type to dispatch.
          *
          * @param d The dispatcher instance to register. Ownership is transferred.
          *
          * @pre No dispatcher for type T must already be registered.
          *
-         * @details When flush() processes a command of type T, it will route the
-         * command through this dispatcher instead of calling execute() directly.
+         * @return A reference to **this** CommandBuffer.
          */
         template<typename T>
         requires std::is_base_of_v<TargetedCommand, T>
-        void addDispatcher(std::unique_ptr<helios::engine::runtime::messaging::command::TypedTargetedCommandDispatcher<T>> d) {
+        CommandBuffer& addDispatcher(std::unique_ptr<helios::engine::runtime::messaging::command::TypedTargetedCommandDispatcher<T>> d) {
 
             assert(!hasDispatcher<T>() && "Dispatcher already added");
 
             const std::type_index key{ typeid(T) };
             targetedCommandDispatchers_[key] = std::move(d);
+
+            return *this;
         }
 
         /**
@@ -158,23 +162,27 @@ export namespace helios::engine::runtime::messaging::command {
         /**
          * @brief Registers a dispatcher for a specific WorldCommand type.
          *
+         * @details When flush() processes a command of type T, it will route the
+         * command through this dispatcher instead of calling execute() directly.
+         *
          * @tparam T The concrete WorldCommand type to dispatch.
          *
          * @param d The dispatcher instance to register. Ownership is transferred.
          *
          * @pre No dispatcher for type T must already be registered.
          *
-         * @details When flush() processes a command of type T, it will route the
-         * command through this dispatcher instead of calling execute() directly.
+         * @return A reference to **this** CommandBuffer.
          */
         template<typename T>
         requires std::is_base_of_v<WorldCommand, T>
-        void addDispatcher(std::unique_ptr<helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher<T>> d) {
+        CommandBuffer& addDispatcher(std::unique_ptr<helios::engine::runtime::messaging::command::TypedWorldCommandDispatcher<T>> d) {
 
             assert(!hasDispatcher<T>() && "Dispatcher already added");
 
             const std::type_index key{ typeid(T) };
             worldCommandDispatchers_[key] = std::move(d);
+
+            return *this;
         }
 
         /**

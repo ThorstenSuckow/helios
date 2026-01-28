@@ -225,7 +225,7 @@ export namespace helios::engine::modules::physics::motion::components {
                 return;
             }
 
-            assert(std::abs(direction.length() - 1.0f) <= 0.001f && "Unexpected direction vector - not normalized");
+            assert(direction.isNormalized() && "Unexpected direction vector - not normalized");
         }
 
         /**

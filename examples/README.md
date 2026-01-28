@@ -72,7 +72,7 @@ Demonstrates the spawn system with:
 - Timed spawning via SpawnScheduler and SpawnRule
 - Object pooling with GameObjectPoolManager
 - RandomSpawnPlacer for random positioning
-- DirectionInitializer for random movement
+- MoveInitializer for random movement
 - SpinComponent for visual rotation
 - Level bounds with reflect behavior
 

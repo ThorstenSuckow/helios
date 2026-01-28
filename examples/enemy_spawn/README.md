@@ -8,7 +8,7 @@ This example demonstrates the spawn system with timed enemy spawning, object poo
 - **Spawn System** - Timed spawning with `SpawnScheduler`, `SpawnProfile`, and `SpawnRule`
 - **Object Pooling** - Efficient enemy management via `GameObjectPoolManager`
 - **Random Placement** - Enemies spawn at random positions within level bounds
-- **DirectionInitializer** - Random initial movement direction for spawned entities
+- **MoveInitializer** - Random initial movement direction for spawned entities
 - **SpinComponent** - Visual rotation effect on enemies
 - **Level Bounds** - Enemies reflect off arena boundaries
 - **GameObjectFactory** - Fluent builder pattern for creating GameObjects
@@ -97,7 +97,7 @@ poolManager.addPoolConfig(std::make_unique<GameObjectPoolConfig>(
 auto spawnProfile = std::make_unique<SpawnProfile>(
     PoolId,
     std::make_unique<RandomSpawnPlacer>(),
-    std::make_unique<DirectionInitializer>(Direction::Random)
+    std::make_unique<MoveInitializer>(DirectionType::Random)
 );
 
 // 4. Configure spawn scheduler with rules

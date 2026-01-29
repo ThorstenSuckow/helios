@@ -36,6 +36,162 @@ The game loop is organized into **Phases** and **Passes**:
 
 For detailed event propagation rules, see [Event System](event-system.md).
 
+## Practical Example: Twin-Stick Shooter
+
+The following example demonstrates how to configure a complete game loop for a twin-stick shooter with spawning, physics, collision, and rendering:
+
+```cpp
+// Create core objects
+helios::engine::runtime::gameloop::GameLoop gameLoop{};
+helios::engine::runtime::world::GameWorld gameWorld{};
+
+// Register command dispatchers
+gameLoop.commandBuffer()
+    .addDispatcher<SpawnCommand>(
+        std::make_unique<SpawnCommandDispatcher>())
+    .addDispatcher<DespawnCommand>(
+        std::make_unique<DespawnCommandDispatcher>())
+    .addDispatcher<ScheduledSpawnPlanCommand>(
+        std::make_unique<ScheduledSpawnPlanCommandDispatcher>());
+
+// ═══════════════════════════════════════════════════════════════════
+// PRE PHASE: Input, Spawning, Motion Preparation
+// ═══════════════════════════════════════════════════════════════════
+gameLoop.phase(PhaseType::Pre)
+    // Pass 1: Input handling
+    .addPass()
+    .addSystem<TwinStickInputSystem>(*playerGameObject)
+    
+    // Commit Point: Structural changes (spawn/despawn) execute here
+    .addCommitPoint(CommitPoint::Structural)
+    
+    // Pass 2: Spawn scheduling (after input, before physics)
+    .addPass()
+    .addSystem<GameObjectSpawnSystem>(spawnSchedulers)
+    
+    // Commit Point: New entities are now active
+    .addCommitPoint(CommitPoint::Structural)
+    
+    // Pass 3: Motion systems (all entities including newly spawned)
+    .addPass()
+    .addSystem<ScaleSystem>()
+    .addSystem<SteeringSystem>()
+    .addSystem<SpinSystem>()
+    .addSystem<Move2DSystem>();
+
+// ═══════════════════════════════════════════════════════════════════
+// MAIN PHASE: Gameplay Logic, Collision, AI
+// ═══════════════════════════════════════════════════════════════════
+gameLoop.phase(PhaseType::Main)
+    // Pass 1: Update bounds and check collisions
+    .addPass()
+    .addSystem<BoundsUpdateSystem>()
+    .addSystem<LevelBoundsBehaviorSystem>()
+    .addSystem<GridCollisionDetectionSystem>(cellSize, levelBounds)
+    
+    // Commit Point: Collision events become readable
+    .addCommitPoint()
+    
+    // Pass 2: React to collisions (damage, despawn, etc.)
+    .addPass()
+    .addSystem<ProjectileCollisionSystem>()
+    .addSystem<EnemyCollisionSystem>();
+
+// ═══════════════════════════════════════════════════════════════════
+// POST PHASE: Scene Sync, Transform Cleanup
+// ═══════════════════════════════════════════════════════════════════
+gameLoop.phase(PhaseType::Post)
+    .addPass()
+    .addSystem<ComposeTransformSystem>()
+    .addSystem<SceneSyncSystem>(scene.get())
+    .addSystem<TransformClearSystem>()
+    .addSystem<DelayedComponentEnablerSystem>();
+
+// Initialize and run
+gameWorld.init();
+gameLoop.init(gameWorld);
+
+// Main loop
+while (running) {
+    float deltaTime = /* calculate delta */;
+    
+    UpdateContext ctx{deltaTime, gameWorld, /* ... */};
+    gameLoop.update(ctx);
+    
+    render();
+}
+```
+
+### Execution Flow for One Frame
+
+The following diagram shows how a projectile collision is processed:
+
+```
+Frame N
+═══════════════════════════════════════════════════════════════════════
+
+PRE PHASE
+┌─────────────────────────────────────────────────────────────────────┐
+│ Pass 1: TwinStickInputSystem                                        │
+│   → Player presses fire button                                      │
+│   → Pushes ShootCommand to CommandBuffer                            │
+├─────────────────────────────────────────────────────────────────────┤
+│ [Commit Point: Structural]                                          │
+│   → CommandBuffer.flush() executes ShootCommand                     │
+│   → SpawnManager creates projectile from pool                       │
+├─────────────────────────────────────────────────────────────────────┤
+│ Pass 2: GameObjectSpawnSystem                                       │
+│   → Evaluates spawn rules, schedules enemy spawns                   │
+├─────────────────────────────────────────────────────────────────────┤
+│ [Commit Point: Structural]                                          │
+│   → New enemies spawned and activated                               │
+├─────────────────────────────────────────────────────────────────────┤
+│ Pass 3: Move2DSystem, SteeringSystem                                │
+│   → All entities (including new projectile) move                    │
+└─────────────────────────────────────────────────────────────────────┘
+                              ↓
+                      [Phase Commit]
+                              ↓
+MAIN PHASE
+┌─────────────────────────────────────────────────────────────────────┐
+│ Pass 1: GridCollisionDetectionSystem                                │
+│   → Detects projectile-enemy collision                              │
+│   → Pushes TriggerCollisionEvent to Pass EventBus                   │
+├─────────────────────────────────────────────────────────────────────┤
+│ [Commit Point]                                                      │
+│   → Pass events become readable                                     │
+├─────────────────────────────────────────────────────────────────────┤
+│ Pass 2: ProjectileCollisionSystem                                   │
+│   → Reads TriggerCollisionEvent                                     │
+│   → Pushes DespawnCommand for projectile                            │
+│   → Pushes DamageCommand for enemy                                  │
+└─────────────────────────────────────────────────────────────────────┘
+                              ↓
+                      [Phase Commit]
+                              ↓
+POST PHASE
+┌─────────────────────────────────────────────────────────────────────┐
+│ Pass 1: SceneSyncSystem                                             │
+│   → Syncs transforms to scene graph                                 │
+│   → Despawned projectile removed from scene                         │
+└─────────────────────────────────────────────────────────────────────┘
+                              ↓
+                      [Phase Commit]
+                      [Frame Commit]
+                              ↓
+                          RENDER
+```
+
+### Key Observations
+
+1. **Commit Points control visibility**: The projectile spawned in Pre Phase Pass 1 is immediately available for physics in Pass 3 because of the structural commit point.
+
+2. **Pass events enable same-phase reactions**: The collision detected in Main Phase Pass 1 is readable in Pass 2, allowing the collision response in the same phase.
+
+3. **Commands execute at phase boundaries**: The `DespawnCommand` pushed in Main Phase executes at the Main Phase Commit, so the entity is removed before rendering.
+
+4. **Deterministic ordering**: Systems within a pass execute in registration order. This ensures predictable behavior across frames.
+
 ## Commands and CommandBuffer
 
 Systems can write Commands into the CommandBuffer during any phase. At each **Phase Commit**, the CommandBuffer is flushed — i.e., their `execute()` method is invoked. This method contains the logic that mutates the world state (e.g., spawning, despawning, health changes, component changes).

@@ -54,6 +54,8 @@ const sidebars: SidebarsConfig = {
         'examples/gamepad-input',
         'examples/spaceship-control',
         'examples/spaceship-shooting',
+        'examples/enemy-spawn',
+        'examples/collision-detection',
       ],
     },
     'testing',

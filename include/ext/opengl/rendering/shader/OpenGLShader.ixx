@@ -247,19 +247,6 @@ export namespace helios::ext::opengl::rendering::shader {
         void applyUniformValues(
             const helios::rendering::shader::UniformValueMap& uniformValueMap) const noexcept override {
 
-            logger_.info("Applying uniform values");
-
-            #ifdef HELIOS_DEBUG
-            if (static_cast<size_t>(helios::rendering::shader::UniformSemantics::size_) > 1) {
-                logger_.warn(
-                    std::format(
-                        "UniformSemantics has more entries ({0}) than considered in OpenGLShader::applyUniformSemantics",
-                        static_cast<size_t>(helios::rendering::shader::UniformSemantics::size_)
-                    )
-                );
-            }
-            #endif
-
             if (const auto viewMatrixUniform = uniformLocation(helios::rendering::shader::UniformSemantics::ViewMatrix); viewMatrixUniform != -1) {
                 if (const auto* mat4f_ptr = uniformValueMap.mat4f_ptr(helios::rendering::shader::UniformSemantics::ViewMatrix)) {
                     glUniformMatrix4fv(viewMatrixUniform, 1, false, mat4f_ptr);
@@ -280,6 +267,18 @@ export namespace helios::ext::opengl::rendering::shader {
             if (const auto materialBaseColorUniform = uniformLocation(helios::rendering::shader::UniformSemantics::MaterialBaseColor); materialBaseColorUniform != -1) {
                 if (const auto* vec4f_ptr = uniformValueMap.vec4f_ptr(helios::rendering::shader::UniformSemantics::MaterialBaseColor)) {
                     glUniform4fv(materialBaseColorUniform, 1, vec4f_ptr);
+                }
+            }
+
+            // texture
+            if (const auto textColorUniform = uniformLocation(helios::rendering::shader::UniformSemantics::TextColor); textColorUniform != -1) {
+                if (const auto* vec4f_ptr = uniformValueMap.vec4f_ptr(helios::rendering::shader::UniformSemantics::TextColor)) {
+                    glUniform4fv(textColorUniform, 1, vec4f_ptr);
+                }
+            }
+            if (const auto textTextureUniform = uniformLocation(helios::rendering::shader::UniformSemantics::TextTexture); textTextureUniform != -1) {
+                if (const auto* int_ptr = uniformValueMap.int_ptr(helios::rendering::shader::UniformSemantics::TextTexture)) {
+                    glUniform1i(textTextureUniform, *int_ptr);
                 }
             }
         }

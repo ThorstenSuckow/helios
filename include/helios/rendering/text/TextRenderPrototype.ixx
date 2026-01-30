@@ -82,7 +82,7 @@ export namespace helios::rendering::text {
         textProperties_(std::move(textProperties)) {
 
             if (!shader_) {
-                throw std::invalid_argument("RenderPrototype received shader");
+                throw std::invalid_argument("RenderPrototype received null shader");
             }
 
         }

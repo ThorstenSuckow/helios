@@ -96,12 +96,12 @@ export namespace helios::rendering {
         RenderPass& operator=(const RenderPass&) = delete;
 
         /**
-         * @brief Prevent move.
+         * @brief Allow move.
          */
         RenderPass(RenderPass&&) noexcept = default;
 
         /**
-         * @brief Prevent move assignment.
+         * @brief Allow move assignment.
          */
         RenderPass& operator=(RenderPass&&) noexcept = default;
 

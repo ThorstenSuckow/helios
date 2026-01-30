@@ -10,6 +10,7 @@ module;
 #include <iostream>
 #include <memory>
 #include <ostream>
+#include <ranges>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -32,63 +33,17 @@ import helios.rendering.shader.UniformValueMap;
 export namespace helios::ext::opengl::rendering {
 
     /**
-     * @brief OpenGL implementation of `TextRenderer` using FreeType for glyph rendering.
+     * @brief Renders and manages text using OpenGL and FreeType.
      *
-     * `OpenGLGlyphTextRenderer` provides hardware-accelerated text rendering using OpenGL.
-     * It uses the FreeType library to load font files and rasterize glyphs into textures,
-     * which are then rendered as textured quads.
+     * This class is responsible for rendering text using cached glyph textures and managing
+     * OpenGL resources for efficient rendering. It leverages FreeType to rasterize font glyphs
+     * and OpenGL to render them onto the screen. Text rendering is performed by positioning
+     * quads (one per character) with texture-mapped glyphs.
      *
-     * ## Features
+     * The class provides methods for initializing OpenGL resources, loading fonts into a cache,
+     * and rendering text at specified positions and scales.
      *
-     * - **FreeType Integration:** Loads TrueType (TTF) and OpenType (OTF) fonts.
-     * - **Per-Font Caching:** Caches glyph textures per font family for efficient rendering.
-     * - **Dynamic Text:** Updates VBO per character for flexible text positioning.
-     * - **Shader Integration:** Works with `OpenGLShader` for customizable text appearance.
-     *
-     * ## Architecture
-     *
-     * The renderer maintains:
-     * - A **VAO/VBO pair** for rendering glyph quads.
-     * - A **font cache** mapping `FontId` to pre-rendered glyph textures.
-     *
-     * ## Usage
-     *
-     * ```cpp
-     * // Create and initialize the renderer
-     * OpenGLGlyphTextRenderer renderer;
-     * renderer.init();
-     *
-     * // Load a font family
-     * renderer.addFontFamily(FontId{1}, "fonts/arial.ttf", 32, 127);
-     *
-     * // Create a text render command
-     * TextRenderCommand command(
-     *     "Hello, World!",
-     *     textPrototype,
-     *     DrawProperties{FontId{1}, {100.0f, 200.0f}, 1.0f},
-     *     uniformValues
-     * );
-     *
-     * // Render the text
-     * renderer.render(command, frameUniforms);
-     * ```
-     *
-     * ## OpenGL State Requirements
-     *
-     * Before calling `render()`, ensure:
-     * - Blending is enabled: `glEnable(GL_BLEND); glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);`
-     * - The text shader is configured to sample from texture unit 0.
-     *
-     * ## Performance Considerations
-     *
-     * - Each character results in a separate draw call (6 vertices per glyph).
-     * - For large amounts of text, consider batching or using a texture atlas approach.
-     *
-     * @see [Vri20, pp. 449-458].
-     *
-     * @see TextRenderer
-     * @see Glyph
-     * @see TextRenderCommand
+     * Inherits from the TextRenderer class in the helios rendering system.
      */
     class OpenGLGlyphTextRenderer : public helios::rendering::text::TextRenderer {
 
@@ -232,15 +187,17 @@ export namespace helios::ext::opengl::rendering {
         unsigned int vbo_{};
 
         /**
-         * @brief Renders a string of text at the specified position.
+         * @brief Renders text at a specified position using a specified font and scale.
          *
-         * Iterates through each character in the text, looks up the corresponding
-         * glyph from the cache, and renders it as a textured quad.
+         * This method uses OpenGL to render text, character by character, by updating vertex buffer
+         * objects (VBOs) and binding glyph textures. Each glyph is positioned relative to the given
+         * starting position, scaled according to the provided scale factor, and rendered using stored
+         * glyph information from a font cache.
          *
          * @param text The text string to render.
-         * @param position Screen-space position (x, y) for the text origin.
-         * @param scale Scaling factor for the text size.
-         * @param fontId The font to use for rendering.
+         * @param position The starting (x, y) position for the text, in screen space coordinates.
+         * @param scale The scale factor to apply to the size of each glyph.
+         * @param fontId The font identifier used to select the font from the font cache.
          */
         void renderText(
             const std::string_view text,
@@ -289,6 +246,32 @@ export namespace helios::ext::opengl::rendering {
 
 
     public:
+
+        /**
+         * @brief Destroys the OpenGLGlyphTextRenderer and releases all OpenGL resources.
+         *
+         * Cleans up the Vertex Array Object (VAO), Vertex Buffer Object (VBO),
+         * and all cached glyph textures for every loaded font.
+         *
+         * @note Must be called in a valid OpenGL context.
+         */
+        ~OpenGLGlyphTextRenderer() override {
+
+            if (vao_ != 0) {
+                glDeleteVertexArrays(1, &vao_);
+            }
+            if (vbo_ != 0) {
+                glDeleteBuffers(1, &vbo_);
+            }
+
+            // Cleanup texture memory for all loaded fonts
+            for (const auto& cache: fontCache_ | std::views::values) {
+                for (const auto& glyph : cache.characters) {
+                    // glDeleteTextures ignores 0, so this is safe even if textureId is uninitialized (0)
+                    glDeleteTextures(1, &glyph.textureId);
+                }
+            }
+        }
 
         /**
          * @brief Returns the texture unit used for text rendering.

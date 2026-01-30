@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="classhelios_1_1rendering_1_1text_1_1TextRenderer" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>helios::rendering::text::TextRenderer</compoundname>
+    <derivedcompoundref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLGlyphTextRenderer" prot="public" virt="non-virtual">helios::ext::opengl::rendering::OpenGLGlyphTextRenderer</derivedcompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextRenderer_1a374aec940343b0a76338d808e9bae0c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual helios::rendering::text::TextRenderer::~TextRenderer</definition>
+        <argsstring>()=default</argsstring>
+        <name>~TextRenderer</name>
+        <qualifiedname>helios::rendering::text::TextRenderer::~TextRenderer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/TextRenderer.ixx" line="59" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextRenderer_1adc04b64ba141e50cd7fc1366f2aba0da" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void helios::rendering::text::TextRenderer::render</definition>
+        <argsstring>(const TextRenderCommand &amp;command, const helios::rendering::shader::UniformValueMap &amp;frameUniformValues) noexcept=0</argsstring>
+        <name>render</name>
+        <qualifiedname>helios::rendering::text::TextRenderer::render</qualifiedname>
+        <reimplementedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLGlyphTextRenderer_1a18b6c32bb77b80c7aad6ee59877be457">render</reimplementedby>
+        <param>
+          <type>const <ref refid="classhelios_1_1rendering_1_1text_1_1TextRenderCommand" kindref="compound">TextRenderCommand</ref> &amp;</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap" kindref="compound">helios::rendering::shader::UniformValueMap</ref> &amp;</type>
+          <declname>frameUniformValues</declname>
+        </param>
+        <briefdescription>
+<para>Renders text based on the given command. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Processes a `TextRenderCommand` and renders the specified text using the associated shader and font. The implementation should apply both the command-specific uniform values and the frame-level uniform values.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>command</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The render command containing text, position, scale, and shader information. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frameUniformValues</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frame-level uniform values (e.g., projection matrix) to apply.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>This method is marked `noexcept` and must not throw exceptions. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/TextRenderer.ixx" line="73" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1rendering_1_1text_1_1TextRenderer_1a7d3841b67eb894de5bb6fff92be1b27d" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void helios::rendering::text::TextRenderer::addFontFamily</definition>
+        <argsstring>(const helios::engine::core::data::FontId fontId, std::string_view path, const unsigned short begin=0, const unsigned short end=128)=0</argsstring>
+        <name>addFontFamily</name>
+        <qualifiedname>helios::rendering::text::TextRenderer::addFontFamily</qualifiedname>
+        <reimplementedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLGlyphTextRenderer_1a59feb10e3137792e6fe42ec9b6230302">addFontFamily</reimplementedby>
+        <param>
+          <type>const <ref refid="structhelios_1_1engine_1_1core_1_1data_1_1FontId" kindref="compound">helios::engine::core::data::FontId</ref></type>
+          <declname>fontId</declname>
+        </param>
+        <param>
+          <type>std::string_view</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>const unsigned short</type>
+          <declname>begin</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>const unsigned short</type>
+          <declname>end</declname>
+          <defval>128</defval>
+        </param>
+        <briefdescription>
+<para>Registers a font family for text rendering. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Loads a font from the specified path and caches glyphs within the given character range. The font can later be referenced by its `FontId` when creating `TextRenderCommand` objects.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fontId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Unique identifier for this font family. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>File system path to the font file (e.g., TTF, OTF). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>begin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Start of the character range to load (inclusive, default: 0). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>end</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>End of the character range to load (exclusive, default: 128).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::runtime_error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the font file cannot be loaded. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>std::invalid_argument</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If `begin &gt; end`. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/rendering/text/TextRenderer.ixx" line="93" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Abstract interface for text rendering implementations. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>`TextRenderer` defines the contract for rendering text in the helios engine. Concrete implementations handle the specifics of text rendering for different graphics APIs (e.g., OpenGL, Vulkan).</para>
+<para>## Responsibilities</para>
+<para><itemizedlist>
+<listitem><para>**Font Management:** Load and cache font families for efficient glyph rendering.</para>
+</listitem><listitem><para>**Text Rendering:** Process `TextRenderCommand` objects and render text to screen.</para>
+</listitem></itemizedlist>
+</para>
+<para>## Usage</para>
+<para>Implementations must override both pure virtual methods:</para>
+<para>```cpp class MyTextRenderer : public <ref refid="classhelios_1_1rendering_1_1text_1_1TextRenderer" kindref="compound">TextRenderer</ref> { public: void addFontFamily(FontId fontId, std::string_view path,
+                       unsigned short begin, unsigned short end) override { // Load font and cache glyphs }</para>
+<para>void render(const TextRenderCommand&amp; command,
+                const UniformValueMap&amp; frameUniformValues) noexcept override { // Render text based on command properties } }; ```</para>
+<para><simplesect kind="see"><para>OpenGLGlyphTextRenderer </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1rendering_1_1text_1_1TextRenderCommand" kindref="compound">TextRenderCommand</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>helios::ext::opengl::rendering::OpenGLGlyphTextRenderer</label>
+        <link refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLGlyphTextRenderer"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>helios::rendering::text::TextRenderer</label>
+        <link refid="classhelios_1_1rendering_1_1text_1_1TextRenderer"/>
+      </node>
+    </inheritancegraph>
+    <location file="/tmp/h/include/helios/rendering/text/TextRenderer.ixx" line="53" column="5" bodyfile="/tmp/h/include/helios/rendering/text/TextRenderer.ixx" bodystart="53" bodyend="98"/>
+    <listofallmembers>
+      <member refid="classhelios_1_1rendering_1_1text_1_1TextRenderer_1a7d3841b67eb894de5bb6fff92be1b27d" prot="public" virt="pure-virtual"><scope>helios::rendering::text::TextRenderer</scope><name>addFontFamily</name></member>
+      <member refid="classhelios_1_1rendering_1_1text_1_1TextRenderer_1adc04b64ba141e50cd7fc1366f2aba0da" prot="public" virt="pure-virtual"><scope>helios::rendering::text::TextRenderer</scope><name>render</name></member>
+      <member refid="classhelios_1_1rendering_1_1text_1_1TextRenderer_1a374aec940343b0a76338d808e9bae0c4" prot="public" virt="virtual"><scope>helios::rendering::text::TextRenderer</scope><name>~TextRenderer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

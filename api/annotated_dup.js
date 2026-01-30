@@ -42,7 +42,8 @@ var annotated_dup =
               [ "OpenGLShader", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader.html", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLShader" ],
               [ "OpenGLUniformLocationMap", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLUniformLocationMap.html", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1shader_1_1OpenGLUniformLocationMap" ]
             ] ],
-            [ "OpenGLDevice", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice" ]
+            [ "OpenGLDevice", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice.html", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice" ],
+            [ "OpenGLGlyphTextRenderer", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLGlyphTextRenderer.html", "classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLGlyphTextRenderer" ]
           ] ]
         ] ]
       ] ],
@@ -110,6 +111,7 @@ var annotated_dup =
         [ "core", "namespacehelios_1_1engine_1_1core.html", [
           [ "data", "namespacehelios_1_1engine_1_1core_1_1data.html", [
             [ "ComponentTypeId", "classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId.html", "classhelios_1_1engine_1_1core_1_1data_1_1ComponentTypeId" ],
+            [ "FontId", "structhelios_1_1engine_1_1core_1_1data_1_1FontId.html", "structhelios_1_1engine_1_1core_1_1data_1_1FontId" ],
             [ "GameObjectPoolId", "structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId.html", "structhelios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId" ],
             [ "SpawnProfileId", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId.html", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnProfileId" ],
             [ "SpawnRuleId", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleId.html", "structhelios_1_1engine_1_1core_1_1data_1_1SpawnRuleId" ]
@@ -419,6 +421,18 @@ var annotated_dup =
           [ "Shader", "classhelios_1_1rendering_1_1shader_1_1Shader.html", "classhelios_1_1rendering_1_1shader_1_1Shader" ],
           [ "UniformValueMap", "classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html", "classhelios_1_1rendering_1_1shader_1_1UniformValueMap" ]
         ] ],
+        [ "text", "namespacehelios_1_1rendering_1_1text.html", [
+          [ "config", "namespacehelios_1_1rendering_1_1text_1_1config.html", [
+            [ "TextShaderProperties", "classhelios_1_1rendering_1_1text_1_1config_1_1TextShaderProperties.html", "classhelios_1_1rendering_1_1text_1_1config_1_1TextShaderProperties" ],
+            [ "TextShaderPropertiesOverride", "structhelios_1_1rendering_1_1text_1_1config_1_1TextShaderPropertiesOverride.html", "structhelios_1_1rendering_1_1text_1_1config_1_1TextShaderPropertiesOverride" ]
+          ] ],
+          [ "DrawProperties", "structhelios_1_1rendering_1_1text_1_1DrawProperties.html", "structhelios_1_1rendering_1_1text_1_1DrawProperties" ],
+          [ "Glyph", "structhelios_1_1rendering_1_1text_1_1Glyph.html", "structhelios_1_1rendering_1_1text_1_1Glyph" ],
+          [ "TextRenderable", "classhelios_1_1rendering_1_1text_1_1TextRenderable.html", "classhelios_1_1rendering_1_1text_1_1TextRenderable" ],
+          [ "TextRenderCommand", "classhelios_1_1rendering_1_1text_1_1TextRenderCommand.html", "classhelios_1_1rendering_1_1text_1_1TextRenderCommand" ],
+          [ "TextRenderer", "classhelios_1_1rendering_1_1text_1_1TextRenderer.html", "classhelios_1_1rendering_1_1text_1_1TextRenderer" ],
+          [ "TextRenderPrototype", "classhelios_1_1rendering_1_1text_1_1TextRenderPrototype.html", "classhelios_1_1rendering_1_1text_1_1TextRenderPrototype" ]
+        ] ],
         [ "Renderable", "classhelios_1_1rendering_1_1Renderable.html", "classhelios_1_1rendering_1_1Renderable" ],
         [ "RenderCommand", "classhelios_1_1rendering_1_1RenderCommand.html", "classhelios_1_1rendering_1_1RenderCommand" ],
         [ "RenderingDevice", "classhelios_1_1rendering_1_1RenderingDevice.html", "classhelios_1_1rendering_1_1RenderingDevice" ],
@@ -471,6 +485,7 @@ var annotated_dup =
     ] ],
     [ "std", null, [
       [ "hash&lt; helios::engine::core::data::ComponentTypeId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1ComponentTypeId_01_4" ],
+      [ "hash&lt; helios::engine::core::data::FontId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1FontId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1FontId_01_4" ],
       [ "hash&lt; helios::engine::core::data::GameObjectPoolId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1GameObjectPoolId_01_4" ],
       [ "hash&lt; helios::engine::core::data::SpawnProfileId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnProfileId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnProfileId_01_4" ],
       [ "hash&lt; helios::engine::core::data::SpawnRuleId &gt;", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnRuleId_01_4.html", "structstd_1_1hash_3_01helios_1_1engine_1_1core_1_1data_1_1SpawnRuleId_01_4" ],

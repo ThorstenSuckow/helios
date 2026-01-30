@@ -49,6 +49,22 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
+        <enumvalue id="namespacehelios_1_1rendering_1_1shader_1a0a320e03bcf6f60bc90428c450dfb329a3e73310ee12c338ad477262c33cc2ffa" prot="public">
+          <name>TextTexture</name>
+          <briefdescription>
+<para>Represents the texture sampler for text glyph rendering. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacehelios_1_1rendering_1_1shader_1a0a320e03bcf6f60bc90428c450dfb329aa055cffe44a2aae1849e81f6647fa9df" prot="public">
+          <name>TextColor</name>
+          <briefdescription>
+<para>Represents the text color for glyph rendering. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
         <enumvalue id="namespacehelios_1_1rendering_1_1shader_1a0a320e03bcf6f60bc90428c450dfb329a3dfc07093d1d9100437458bc54f55a7a" prot="public">
           <name>deltaTime</name>
           <briefdescription>
@@ -74,18 +90,27 @@
           </detaileddescription>
         </enumvalue>
         <briefdescription>
-<para>Enumeration class defining common semantic meanings for uniform variables in Shaders. </para>
+<para>Enumeration of semantic identifiers for shader uniform variables. </para>
         </briefdescription>
         <detaileddescription>
-<para>This enum class provides a strongly typed way to refer to **standard** uniform variables that represent essential matrices or other global data typically passed to shaders.</para>
-<para>Concrete shader implementations use these semantics to map actual uniform names and their respective uniform locations.</para>
+<para>`UniformSemantics` provides strongly-typed identifiers for standard uniform variables passed to shaders. These semantics abstract the actual uniform names, allowing the rendering pipeline to work with meaningful identifiers.</para>
+<para>## Categories</para>
+<para><itemizedlist>
+<listitem><para>**Transform Matrices:** `ModelMatrix`, `ViewMatrix`, `ProjectionMatrix`</para>
+</listitem><listitem><para>**Material Properties:** `MaterialBaseColor`, `MaterialRoughness`</para>
+</listitem><listitem><para>**Text Rendering:** `TextTexture`, `TextColor`</para>
+</listitem><listitem><para>**Time Values:** `deltaTime`, `totalTime`</para>
+</listitem></itemizedlist>
+</para>
+<para>## Usage</para>
+<para>```cpp <ref refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap" kindref="compound">UniformValueMap</ref> uniforms; uniforms.set(UniformSemantics::ModelMatrix, modelMat); uniforms.set(<ref refid="namespacehelios_1_1rendering_1_1shader_1a0a320e03bcf6f60bc90428c450dfb329aaaf9abb4ecf0d3618eac3e02b50ab5a7" kindref="member">UniformSemantics::MaterialBaseColor</ref>, vec4f{1.0f, 0.0f, 0.0f, 1.0f}); ```</para>
 <para><simplesect kind="see"><para><ref refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap" kindref="compound">UniformValueMap</ref> </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/rendering/shader/UniformSemantics.ixx" line="25" column="5" bodyfile="/tmp/h/include/helios/rendering/shader/UniformSemantics.ixx" bodystart="25" bodyend="66"/>
+        <location file="/tmp/h/include/helios/rendering/shader/UniformSemantics.ixx" line="36" column="5" bodyfile="/tmp/h/include/helios/rendering/shader/UniformSemantics.ixx" bodystart="36" bodyend="87"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

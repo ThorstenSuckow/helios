@@ -259,6 +259,20 @@
         </inbodydescription>
         <location file="/tmp/h/include/helios/math/types/vec2.ixx" line="209" column="5" bodyfile="/tmp/h/include/helios/math/types/vec2.ixx" bodystart="209" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="typedef" id="namespacehelios_1_1math_1a3c1f68b7b43e95236ecf07f545f4adb9" prot="public" static="no">
+        <type><ref refid="structhelios_1_1math_1_1vec2" kindref="compound">vec2</ref>&lt; unsigned int &gt;</type>
+        <definition>using helios::math::vec2ui =  vec2&lt;unsigned int&gt;</definition>
+        <argsstring></argsstring>
+        <name>vec2ui</name>
+        <qualifiedname>helios::math::vec2ui</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/math/types/vec2.ixx" line="210" column="5" bodyfile="/tmp/h/include/helios/math/types/vec2.ixx" bodystart="210" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="typedef" id="namespacehelios_1_1math_1a71f1e40e636f47229c3122bdb63099d5" prot="public" static="no">
         <type><ref refid="structhelios_1_1math_1_1vec3" kindref="compound">vec3</ref>&lt; float &gt;</type>
         <definition>using helios::math::vec3f =  vec3&lt;float&gt;</definition>
@@ -502,8 +516,105 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/math/transform/camera.ixx" line="35" column="18" bodyfile="/tmp/h/include/helios/math/transform/camera.ixx" bodystart="35" bodyend="46"/>
+        <location file="/tmp/h/include/helios/math/transform/camera.ixx" line="35" column="18" bodyfile="/tmp/h/include/helios/math/transform/camera.ixx" bodystart="35" bodyend="45"/>
         <referencedby refid="classhelios_1_1scene_1_1Camera_1a949fcc8b4e43f2a9afdad8eaafaeb07b" compoundref="Camera_8ixx" startline="78" endline="87">helios::scene::Camera::update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacehelios_1_1math_1a4b05da38fbe60019d6b5e32a72b4b5e3" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">mat4f</ref></type>
+        <definition>mat4f helios::math::ortho</definition>
+        <argsstring>(const float left, const float right, const float bottom, const float top, const float zNear=0.1f, const float zFar=100.0f) noexcept</argsstring>
+        <name>ortho</name>
+        <qualifiedname>helios::math::ortho</qualifiedname>
+        <param>
+          <type>const float</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>bottom</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>zNear</declname>
+          <defval>0.1f</defval>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>zFar</declname>
+          <defval>100.0f</defval>
+        </param>
+        <briefdescription>
+<para>Computes the 4x4 orthographic projection matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Creates a projection matrix that maps 3D coordinates to normalized device coordinates without perspective distortion. Parallel lines remain parallel, and object size does not change with distance from the camera.</para>
+<para>Suitable for 2D rendering, UI elements, and technical visualizations.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>left</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The left boundary of the view volume. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>right</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The right boundary of the view volume. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bottom</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The bottom boundary of the view volume. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>top</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The top boundary of the view volume. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>zNear</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The distance to the near clipping plane (default: 0.1). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>zFar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The distance to the far clipping plane (default: 100.0).</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A 4x4 orthographic projection matrix.</para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="namespacehelios_1_1math_1a3009ee1714550dc2af4d7e5e952e8a90" kindref="member">perspective()</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/helios/math/transform/camera.ixx" line="68" column="18" bodyfile="/tmp/h/include/helios/math/transform/camera.ixx" bodystart="68" bodyend="79"/>
       </memberdef>
       <memberdef kind="function" id="namespacehelios_1_1math_1aef6bef7ca3d31a4908a66e16c9771420" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="namespacehelios_1_1math_1ad422120d6e1f106140808f16e348f0b3" kindref="member">mat4f</ref></type>
@@ -551,7 +662,6 @@
 <parametername>up</parametername>
 </parameternamelist>
 <parameterdescription>
-<para></para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -561,7 +671,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/helios/math/transform/camera.ixx" line="71" column="18" bodyfile="/tmp/h/include/helios/math/transform/camera.ixx" bodystart="71" bodyend="82"/>
+        <location file="/tmp/h/include/helios/math/transform/camera.ixx" line="106" column="18" bodyfile="/tmp/h/include/helios/math/transform/camera.ixx" bodystart="106" bodyend="117"/>
         <references refid="namespacehelios_1_1math_1a82d2ab8d8240be4606a885c554b93fb5" compoundref="vec3_8ixx" startline="366" endline="372">cross</references>
         <references refid="namespacehelios_1_1math_1a7523e1a120cccd29674cf428bfdeb86c" compoundref="vec2_8ixx" startline="203" endline="205">dot</references>
       </memberdef>
@@ -1124,10 +1234,10 @@ Example usage: ```cpp using namespace <ref refid="namespacehelios_1_1math" kindr
         <inbodydescription>
         </inbodydescription>
         <location file="/tmp/h/include/helios/math/types/mat4.ixx" line="510" column="13" bodyfile="/tmp/h/include/helios/math/types/mat4.ixx" bodystart="510" bodyend="512"/>
-        <referencedby refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap_1aa1bb7e38a8043a669bcd8a1df783615e" compoundref="UniformValueMap_8ixx" startline="82" endline="97">helios::rendering::shader::UniformValueMap::mat4f_ptr</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap_1aa1bb7e38a8043a669bcd8a1df783615e" compoundref="UniformValueMap_8ixx" startline="102" endline="117">helios::rendering::shader::UniformValueMap::mat4f_ptr</referencedby>
         <referencedby refid="structhelios_1_1math_1_1mat4_1a33c47f9920f5e88b98caca96a889d0aa" compoundref="mat4_8ixx" startline="206" endline="218">helios::math::mat4&lt; float &gt;::operator==</referencedby>
         <referencedby refid="structhelios_1_1math_1_1mat4_1a11484773381edf083309360d6c940d3f" compoundref="mat4_8ixx" startline="181" endline="195">helios::math::mat4&lt; float &gt;::same</referencedby>
-        <referencedby refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap_1ab788a4eaa2575fe0209886f008b8aa9f" compoundref="UniformValueMap_8ixx" startline="116" endline="131">helios::rendering::shader::UniformValueMap::vec4f_ptr</referencedby>
+        <referencedby refid="classhelios_1_1rendering_1_1shader_1_1UniformValueMap_1ab788a4eaa2575fe0209886f008b8aa9f" compoundref="UniformValueMap_8ixx" startline="136" endline="151">helios::rendering::shader::UniformValueMap::vec4f_ptr</referencedby>
       </memberdef>
       <memberdef kind="function" id="namespacehelios_1_1math_1a581fd38f8554d49c33a42b46255cc983" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -1295,7 +1405,7 @@ Example usage: ```cpp using namespace <ref refid="namespacehelios_1_1math" kindr
         </inbodydescription>
         <location file="/tmp/h/include/helios/math/types/vec2.ixx" line="203" column="17" bodyfile="/tmp/h/include/helios/math/types/vec2.ixx" bodystart="203" bodyend="205"/>
         <referencedby refid="structhelios_1_1math_1_1mat4_1a85b80b06a1e1d401e9bf3f4f338a219a" compoundref="mat4_8ixx" startline="308" endline="344">helios::math::mat4&lt; float &gt;::inverse</referencedby>
-        <referencedby refid="namespacehelios_1_1math_1aef6bef7ca3d31a4908a66e16c9771420" compoundref="camera_8ixx" startline="71" endline="82">lookAt</referencedby>
+        <referencedby refid="namespacehelios_1_1math_1aef6bef7ca3d31a4908a66e16c9771420" compoundref="camera_8ixx" startline="106" endline="117">lookAt</referencedby>
       </memberdef>
       <memberdef kind="function" id="namespacehelios_1_1math_1ae21f80815ae495b8d521d6ad829ee7b6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -1653,7 +1763,7 @@ Example usage: ```cpp using namespace <ref refid="namespacehelios_1_1math" kindr
         </inbodydescription>
         <location file="/tmp/h/include/helios/math/types/vec3.ixx" line="366" column="20" bodyfile="/tmp/h/include/helios/math/types/vec3.ixx" bodystart="366" bodyend="372"/>
         <referencedby refid="structhelios_1_1math_1_1mat4_1a85b80b06a1e1d401e9bf3f4f338a219a" compoundref="mat4_8ixx" startline="308" endline="344">helios::math::mat4&lt; float &gt;::inverse</referencedby>
-        <referencedby refid="namespacehelios_1_1math_1aef6bef7ca3d31a4908a66e16c9771420" compoundref="camera_8ixx" startline="71" endline="82">lookAt</referencedby>
+        <referencedby refid="namespacehelios_1_1math_1aef6bef7ca3d31a4908a66e16c9771420" compoundref="camera_8ixx" startline="106" endline="117">lookAt</referencedby>
         <referencedby refid="classhelios_1_1scene_1_1CameraSceneNode_1ad57acd6f8c8b2e6b02707ba1424377cb" compoundref="CameraSceneNode_8ixx" startline="112" endline="148">helios::scene::CameraSceneNode::lookAt</referencedby>
         <referencedby refid="classhelios_1_1scene_1_1CameraSceneNode_1a92ffad9e05c9d43611cae562d43446d7" compoundref="CameraSceneNode_8ixx" startline="162" endline="182">helios::scene::CameraSceneNode::lookAtLocal</referencedby>
       </memberdef>

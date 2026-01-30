@@ -107,7 +107,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Manages a collection of values for mapping them to their <a class="el" href="namespacehelios_1_1rendering_1_1shader.html#a0a320e03bcf6f60bc90428c450dfb329" title="Enumeration class defining common semantic meanings for uniform variables in Shaders.">UniformSemantics</a> identifier.  
+<p>Maps uniform semantics to their values for shader parameter binding.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -122,19 +122,34 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aa8cf3644a91d4b3db938d5bfa7983dfd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets or updates a `helios::math::vec4f` uniform value for a given semantic.  <br /></td></tr>
 <tr class="memitem:ab788a4eaa2575fe0209886f008b8aa9f" id="r_ab788a4eaa2575fe0209886f008b8aa9f"><td class="memItemLeft" align="right" valign="top">const float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab788a4eaa2575fe0209886f008b8aa9f">vec4f_ptr</a> (<a class="el" href="namespacehelios_1_1rendering_1_1shader.html#a0a320e03bcf6f60bc90428c450dfb329">UniformSemantics</a> uniformSemantics) const noexcept</td></tr>
 <tr class="memdesc:ab788a4eaa2575fe0209886f008b8aa9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a raw const pointer to the `vec4f` for the specified uniform semantics.  <br /></td></tr>
+<tr class="memitem:a43c216300f5530e86146077c4beb2541" id="r_a43c216300f5530e86146077c4beb2541"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a43c216300f5530e86146077c4beb2541">set</a> (<a class="el" href="namespacehelios_1_1rendering_1_1shader.html#a0a320e03bcf6f60bc90428c450dfb329">UniformSemantics</a> uniformSemantics, int value) noexcept</td></tr>
+<tr class="memdesc:a43c216300f5530e86146077c4beb2541"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets or updates an integer uniform value for a given semantic.  <br /></td></tr>
 <tr class="memitem:ab68388ecafc93f8547049b3975ade28a" id="r_ab68388ecafc93f8547049b3975ade28a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab68388ecafc93f8547049b3975ade28a">set</a> (<a class="el" href="namespacehelios_1_1rendering_1_1shader.html#a0a320e03bcf6f60bc90428c450dfb329">UniformSemantics</a> uniformSemantics, float value) noexcept</td></tr>
 <tr class="memdesc:ab68388ecafc93f8547049b3975ade28a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets or updates a float uniform value for a given semantic.  <br /></td></tr>
 <tr class="memitem:a7b10983326d870ca7b33f26e2c71e830" id="r_a7b10983326d870ca7b33f26e2c71e830"><td class="memItemLeft" align="right" valign="top">const float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7b10983326d870ca7b33f26e2c71e830">float_ptr</a> (<a class="el" href="namespacehelios_1_1rendering_1_1shader.html#a0a320e03bcf6f60bc90428c450dfb329">UniformSemantics</a> uniformSemantics) const noexcept</td></tr>
 <tr class="memdesc:a7b10983326d870ca7b33f26e2c71e830"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a raw const pointer to the float value for the specified uniform semantics.  <br /></td></tr>
+<tr class="memitem:a90f7cae22a60e4f6944a08ff192c0d0e" id="r_a90f7cae22a60e4f6944a08ff192c0d0e"><td class="memItemLeft" align="right" valign="top">const int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90f7cae22a60e4f6944a08ff192c0d0e">int_ptr</a> (<a class="el" href="namespacehelios_1_1rendering_1_1shader.html#a0a320e03bcf6f60bc90428c450dfb329">UniformSemantics</a> uniformSemantics) const noexcept</td></tr>
+<tr class="memdesc:a90f7cae22a60e4f6944a08ff192c0d0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a raw const pointer to the integer value for the specified uniform semantics.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Manages a collection of values for mapping them to their <a class="el" href="namespacehelios_1_1rendering_1_1shader.html#a0a320e03bcf6f60bc90428c450dfb329" title="Enumeration class defining common semantic meanings for uniform variables in Shaders.">UniformSemantics</a> identifier. </p>
-<p>This class allows for storing different types of uniform values (e.g. mat4f, vec3f, ...) under a single semantic identifier, for convenient assignment to uniform locations of an underlying shader in the rendering process.</p>
-<dl class="section note"><dt>Note</dt><dd>this class intentionally avoids templates as we assume that instances of the value maps are used in the rendering hot path.</dd></dl>
+<div class="textblock"><p>Maps uniform semantics to their values for shader parameter binding. </p>
+<p>`UniformValueMap` stores uniform values (matrices, vectors, scalars) indexed by their `UniformSemantics` identifier. This allows the rendering pipeline to efficiently pass data to shaders without string-based lookups.</p>
+<p>## Supported Types</p>
+<ul>
+<li>`mat4f` – 4x4 transformation matrices</li>
+<li>`vec4f` – 4-component vectors (colors, positions)</li>
+<li>`float` – Scalar values (roughness, time)</li>
+<li>`int` – Integer values (texture units)</li>
+</ul>
+<p>## Usage</p>
+<p>```cpp <a class="el" href="classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html" title="Maps uniform semantics to their values for shader parameter binding.">UniformValueMap</a> uniforms;</p>
+<p>// Set transform matrices uniforms.set(UniformSemantics::ModelMatrix, modelMat); uniforms.set(UniformSemantics::ViewMatrix, viewMat);</p>
+<p>// Set material properties uniforms.set(<a class="el" href="namespacehelios_1_1rendering_1_1shader.html#a0a320e03bcf6f60bc90428c450dfb329aaaf9abb4ecf0d3618eac3e02b50ab5a7" title="Represents the (material&#39;s) base color.">UniformSemantics::MaterialBaseColor</a>, vec4f{1.0f, 0.0f, 0.0f, 1.0f});</p>
+<p>// Retrieve raw pointer for OpenGL const float* modelPtr = uniforms.mat4f_ptr(UniformSemantics::ModelMatrix); ```</p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000032">Todo</a></b></dt><dd>UniformMap must allow only one index for all data structures, i.e. if map_[semantics] contains a mat4f, other types should not be allowed for the same semantics.</dd></dl>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000033">Todo</a></b></dt><dd>UniformValueMaps should be scoped, e.g. per frame (world matrix, projection, view...), per material (colors, emissive...), per object (world matrix...), which allows for better handling of assigning uniforms: per-frame values change once per frame, while per-object values change per object. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="UniformValueMap_8ixx_source.html#l00051">51</a> of file <a class="el" href="UniformValueMap_8ixx_source.html">UniformValueMap.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UniformValueMap_8ixx_source.html#l00071">71</a> of file <a class="el" href="UniformValueMap_8ixx_source.html">UniformValueMap.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a8b461f354660a3b58e432b7fc3c5aae6" name="a8b461f354660a3b58e432b7fc3c5aae6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8b461f354660a3b58e432b7fc3c5aae6">&#9670;&#160;</a></span>~UniformValueMap()</h2>
@@ -220,7 +235,43 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A raw const pointer to the associated float value, or `nullptr` if no float value is associated with this semantics. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="UniformValueMap_8ixx_source.html#l00154">154</a> of file <a class="el" href="UniformValueMap_8ixx_source.html">UniformValueMap.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UniformValueMap_8ixx_source.html#l00186">186</a> of file <a class="el" href="UniformValueMap_8ixx_source.html">UniformValueMap.ixx</a>.</p>
+
+</div>
+</div>
+<a id="a90f7cae22a60e4f6944a08ff192c0d0e" name="a90f7cae22a60e4f6944a08ff192c0d0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90f7cae22a60e4f6944a08ff192c0d0e">&#9670;&#160;</a></span>int_ptr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int * helios::rendering::shader::UniformValueMap::int_ptr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1rendering_1_1shader.html#a0a320e03bcf6f60bc90428c450dfb329">UniformSemantics</a></td>          <td class="paramname"><span class="paramname"><em>uniformSemantics</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a raw const pointer to the integer value for the specified uniform semantics. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">uniformSemantics</td><td>The `UniformSemantics` identifier for the uniform.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A raw const pointer to the associated integer value, or `nullptr` if no integer value is associated with this semantics. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="UniformValueMap_8ixx_source.html#l00211">211</a> of file <a class="el" href="UniformValueMap_8ixx_source.html">UniformValueMap.ixx</a>.</p>
 
 </div>
 </div>
@@ -256,7 +307,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A raw const pointer to the associated mat4f, or `nullptr` if no mat4f is associated with this semantics. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="UniformValueMap_8ixx_source.html#l00082">82</a> of file <a class="el" href="UniformValueMap_8ixx_source.html">UniformValueMap.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UniformValueMap_8ixx_source.html#l00102">102</a> of file <a class="el" href="UniformValueMap_8ixx_source.html">UniformValueMap.ixx</a>.</p>
 
 <p class="reference">References <a class="el" href="mat4_8ixx_source.html#l00510">helios::math::value_ptr()</a>.</p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
@@ -269,7 +320,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="ad546c85f6f1f4370466b6ea7ab14c8df" name="ad546c85f6f1f4370466b6ea7ab14c8df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad546c85f6f1f4370466b6ea7ab14c8df">&#9670;&#160;</a></span>set() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad546c85f6f1f4370466b6ea7ab14c8df">&#9670;&#160;</a></span>set() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -304,12 +355,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="UniformValueMap_8ixx_source.html#l00071">71</a> of file <a class="el" href="UniformValueMap_8ixx_source.html">UniformValueMap.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UniformValueMap_8ixx_source.html#l00091">91</a> of file <a class="el" href="UniformValueMap_8ixx_source.html">UniformValueMap.ixx</a>.</p>
 
 </div>
 </div>
 <a id="aa8cf3644a91d4b3db938d5bfa7983dfd" name="aa8cf3644a91d4b3db938d5bfa7983dfd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa8cf3644a91d4b3db938d5bfa7983dfd">&#9670;&#160;</a></span>set() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8cf3644a91d4b3db938d5bfa7983dfd">&#9670;&#160;</a></span>set() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -344,12 +395,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="UniformValueMap_8ixx_source.html#l00105">105</a> of file <a class="el" href="UniformValueMap_8ixx_source.html">UniformValueMap.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UniformValueMap_8ixx_source.html#l00125">125</a> of file <a class="el" href="UniformValueMap_8ixx_source.html">UniformValueMap.ixx</a>.</p>
 
 </div>
 </div>
 <a id="ab68388ecafc93f8547049b3975ade28a" name="ab68388ecafc93f8547049b3975ade28a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab68388ecafc93f8547049b3975ade28a">&#9670;&#160;</a></span>set() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab68388ecafc93f8547049b3975ade28a">&#9670;&#160;</a></span>set() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -384,7 +435,48 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="UniformValueMap_8ixx_source.html#l00139">139</a> of file <a class="el" href="UniformValueMap_8ixx_source.html">UniformValueMap.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UniformValueMap_8ixx_source.html#l00171">171</a> of file <a class="el" href="UniformValueMap_8ixx_source.html">UniformValueMap.ixx</a>.</p>
+
+</div>
+</div>
+<a id="a43c216300f5530e86146077c4beb2541" name="a43c216300f5530e86146077c4beb2541"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43c216300f5530e86146077c4beb2541">&#9670;&#160;</a></span>set() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::rendering::shader::UniformValueMap::set </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacehelios_1_1rendering_1_1shader.html#a0a320e03bcf6f60bc90428c450dfb329">UniformSemantics</a></td>          <td class="paramname"><span class="paramname"><em>uniformSemantics</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets or updates an integer uniform value for a given semantic. </p>
+<p>Typically used for texture unit indices.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">uniformSemantics</td><td>The `UniformSemantics` identifier for the uniform. </td></tr>
+    <tr><td class="paramname">value</td><td>The integer value to set. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="UniformValueMap_8ixx_source.html#l00161">161</a> of file <a class="el" href="UniformValueMap_8ixx_source.html">UniformValueMap.ixx</a>.</p>
 
 </div>
 </div>
@@ -420,7 +512,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A raw const pointer to the associated vec4f, or `nullptr` if no vec4f is associated with this semantics. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="UniformValueMap_8ixx_source.html#l00116">116</a> of file <a class="el" href="UniformValueMap_8ixx_source.html">UniformValueMap.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UniformValueMap_8ixx_source.html#l00136">136</a> of file <a class="el" href="UniformValueMap_8ixx_source.html">UniformValueMap.ixx</a>.</p>
 
 <p class="reference">References <a class="el" href="mat4_8ixx_source.html#l00510">helios::math::value_ptr()</a>.</p>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>

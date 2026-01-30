@@ -107,7 +107,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Manages a collection of `RenderCommand` objects for a single rendering pass.  
+<p>Manages collections of render commands for geometry and text.  
  <a href="#details">More...</a></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Collaboration diagram for helios::rendering::RenderQueue:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -128,35 +128,57 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a87cdef75d6abae5fbf16cddf692bde88" id="r_a87cdef75d6abae5fbf16cddf692bde88"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a68f1afed9c85bf66442861dc17a389b9">RenderQueue</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87cdef75d6abae5fbf16cddf692bde88">operator=</a> (<a class="el" href="#a68f1afed9c85bf66442861dc17a389b9">RenderQueue</a> &amp;&amp;) noexcept=delete</td></tr>
 <tr class="memdesc:a87cdef75d6abae5fbf16cddf692bde88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete move assignment operator.  <br /></td></tr>
 <tr class="memitem:a99dfb53dfa0c18950a718db6d03a167b" id="r_a99dfb53dfa0c18950a718db6d03a167b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a99dfb53dfa0c18950a718db6d03a167b">RenderQueue</a> ()=default</td></tr>
-<tr class="memdesc:a99dfb53dfa0c18950a718db6d03a167b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new empty <a class="el" href="classhelios_1_1rendering_1_1RenderQueue.html" title="Manages a collection of `RenderCommand` objects for a single rendering pass.">RenderQueue</a>.  <br /></td></tr>
+<tr class="memdesc:a99dfb53dfa0c18950a718db6d03a167b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new empty <a class="el" href="classhelios_1_1rendering_1_1RenderQueue.html" title="Manages collections of render commands for geometry and text.">RenderQueue</a>.  <br /></td></tr>
 <tr class="memitem:ace107c45024c29efc237107e3307c2ab" id="r_ace107c45024c29efc237107e3307c2ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ace107c45024c29efc237107e3307c2ab">add</a> (std::unique_ptr&lt; const <a class="el" href="classhelios_1_1rendering_1_1RenderCommand.html">helios::rendering::RenderCommand</a> &gt; renderCommand)</td></tr>
 <tr class="memdesc:ace107c45024c29efc237107e3307c2ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a `RenderCommand` to this `RenderQueue`. Ownership of the `RenderCommand` is transferred to this `RenderQueue`.  <br /></td></tr>
+<tr class="memitem:ac0000b7ce392652ba62fdb234b540cc2" id="r_ac0000b7ce392652ba62fdb234b540cc2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac0000b7ce392652ba62fdb234b540cc2">add</a> (<a class="el" href="classhelios_1_1rendering_1_1text_1_1TextRenderCommand.html">helios::rendering::text::TextRenderCommand</a> renderCommand)</td></tr>
+<tr class="memdesc:ac0000b7ce392652ba62fdb234b540cc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a `TextRenderCommand` to this `RenderQueue`.  <br /></td></tr>
 <tr class="memitem:ae1dc0c33febdc505e85b0607f29594ce" id="r_ae1dc0c33febdc505e85b0607f29594ce"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; std::unique_ptr&lt; const <a class="el" href="classhelios_1_1rendering_1_1RenderCommand.html">helios::rendering::RenderCommand</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae1dc0c33febdc505e85b0607f29594ce">renderCommands</a> () const noexcept</td></tr>
 <tr class="memdesc:ae1dc0c33febdc505e85b0607f29594ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a const ref to the internal vector of `RenderCommand`.  <br /></td></tr>
+<tr class="memitem:a0f6fcefbc87bc726ecd313e4bab2cb23" id="r_a0f6fcefbc87bc726ecd313e4bab2cb23"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="classhelios_1_1rendering_1_1text_1_1TextRenderCommand.html">helios::rendering::text::TextRenderCommand</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0f6fcefbc87bc726ecd313e4bab2cb23">textRenderCommands</a> () const noexcept</td></tr>
+<tr class="memdesc:a0f6fcefbc87bc726ecd313e4bab2cb23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a const ref to the internal vector of `TextRenderCommand`.  <br /></td></tr>
 <tr class="memitem:a2d14f75f8f57728f71608dbfde485d80" id="r_a2d14f75f8f57728f71608dbfde485d80"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d14f75f8f57728f71608dbfde485d80">clear</a> ()</td></tr>
 <tr class="memdesc:a2d14f75f8f57728f71608dbfde485d80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all `RenderCommand` objects from the queue.  <br /></td></tr>
-<tr class="memitem:af3141c90009b7d87bc9f6a40ff6f852d" id="r_af3141c90009b7d87bc9f6a40ff6f852d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af3141c90009b7d87bc9f6a40ff6f852d">count</a> () const noexcept</td></tr>
-<tr class="memdesc:af3141c90009b7d87bc9f6a40ff6f852d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of `RenderCommand`s this queue contains.  <br /></td></tr>
+<tr class="memitem:a15b84c6df073fd8a56cefa484682a305" id="r_a15b84c6df073fd8a56cefa484682a305"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a15b84c6df073fd8a56cefa484682a305">renderCommandsSize</a> () const noexcept</td></tr>
+<tr class="memdesc:a15b84c6df073fd8a56cefa484682a305"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of `RenderCommand`s this queue contains.  <br /></td></tr>
+<tr class="memitem:ae7433d5f4ccda531baa9c9827f857249" id="r_ae7433d5f4ccda531baa9c9827f857249"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7433d5f4ccda531baa9c9827f857249">textRenderCommandsSize</a> () const noexcept</td></tr>
+<tr class="memdesc:ae7433d5f4ccda531baa9c9827f857249"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of `TextRenderCommand`s this queue contains.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a495b608f1570db9532d10ad81ac8cdb2" id="r_a495b608f1570db9532d10ad81ac8cdb2"><td class="memItemLeft" align="right" valign="top"><a id="a495b608f1570db9532d10ad81ac8cdb2" name="a495b608f1570db9532d10ad81ac8cdb2"></a>
 std::vector&lt; std::unique_ptr&lt; const <a class="el" href="classhelios_1_1rendering_1_1RenderCommand.html">helios::rendering::RenderCommand</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>renderCommands_</b></td></tr>
 <tr class="memdesc:a495b608f1570db9532d10ad81ac8cdb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the unique ptrs to the <a class="el" href="classhelios_1_1rendering_1_1RenderCommand.html" title="DTO for storing rendering-specific command information to be passed to the RenderQueue.">RenderCommand</a> objects of this queue. <br /></td></tr>
+<tr class="memitem:a5f2d84021596581e866de8cd828b63bd" id="r_a5f2d84021596581e866de8cd828b63bd"><td class="memItemLeft" align="right" valign="top"><a id="a5f2d84021596581e866de8cd828b63bd" name="a5f2d84021596581e866de8cd828b63bd"></a>
+std::vector&lt; <a class="el" href="classhelios_1_1rendering_1_1text_1_1TextRenderCommand.html">helios::rendering::text::TextRenderCommand</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>textRenderCommands_</b></td></tr>
+<tr class="memdesc:a5f2d84021596581e866de8cd828b63bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores text render commands for glyph-based text rendering. <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-static-attribs" class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
 <tr class="memitem:ad2922e913a2fefbca27cce2a0b0f8d5a" id="r_ad2922e913a2fefbca27cce2a0b0f8d5a"><td class="memItemLeft" align="right" valign="top"><a id="ad2922e913a2fefbca27cce2a0b0f8d5a" name="ad2922e913a2fefbca27cce2a0b0f8d5a"></a>
 static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">helios::util::log::Logger</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>logger_</b> = <a class="el" href="classhelios_1_1util_1_1log_1_1LogManager.html#a750d8fd5b3ee3678600644756b0631e7">helios::util::log::LogManager::loggerForScope</a>(<a class="el" href="OpenGLUniformLocationMap_8ixx.html#acbc04f24078582c7d42b2085be5d5750">HELIOS_LOG_SCOPE</a>)</td></tr>
-<tr class="memdesc:ad2922e913a2fefbca27cce2a0b0f8d5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shared logger instance for all <a class="el" href="classhelios_1_1rendering_1_1RenderQueue.html" title="Manages a collection of `RenderCommand` objects for a single rendering pass.">RenderQueue</a> objects. <br /></td></tr>
+<tr class="memdesc:ad2922e913a2fefbca27cce2a0b0f8d5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shared logger instance for all <a class="el" href="classhelios_1_1rendering_1_1RenderQueue.html" title="Manages collections of render commands for geometry and text.">RenderQueue</a> objects. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Manages a collection of `RenderCommand` objects for a single rendering pass. </p>
-<p>`RenderQueue` acts as a container for all render commands, represented by a `RenderCommand`. A `RenderQueue` holds unique ownership of the render commands.</p>
-<p>An instance of `RenderQueue` can be cleared after being processed in a `RenderPass` for reuse in subsequent render passes.</p>
-<p>The class is designed to be non-copyable. </p>
+<div class="textblock"><p>Manages collections of render commands for geometry and text. </p>
+<p>`RenderQueue` acts as a container for all render commands in a single rendering pass. It manages two separate command lists:</p>
+<ul>
+<li>**RenderCommands:** For geometry rendering (meshes, materials).</li>
+<li>**TextRenderCommands:** For text rendering (glyphs, fonts).</li>
+</ul>
+<p>A `RenderQueue` holds unique ownership of geometry render commands and value ownership of text render commands. It can be cleared after processing for reuse in subsequent passes.</p>
+<p>## Design</p>
+<ul>
+<li>**Non-copyable, non-movable:** Ensures unique queue identity during processing.</li>
+<li>**Separate command lists:** Allows different rendering strategies for geometry and text.</li>
+</ul>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1rendering_1_1RenderCommand.html" title="DTO for storing rendering-specific command information to be passed to the RenderQueue.">RenderCommand</a> </dd>
+<dd>
+TextRenderCommand </dd>
+<dd>
+<a class="el" href="classhelios_1_1rendering_1_1RenderPass.html" title="Encapsulates a single rendering pass with its associated resources.">RenderPass</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RenderQueue_8ixx_source.html#l00034">34</a> of file <a class="el" href="RenderQueue_8ixx_source.html">RenderQueue.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RenderQueue_8ixx_source.html#l00044">44</a> of file <a class="el" href="RenderQueue_8ixx_source.html">RenderQueue.ixx</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aeeb69af61f5744c4ca58825ecfe0b78d" name="aeeb69af61f5744c4ca58825ecfe0b78d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeeb69af61f5744c4ca58825ecfe0b78d">&#9670;&#160;</a></span>~RenderQueue()</h2>
@@ -284,7 +306,7 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a new empty <a class="el" href="classhelios_1_1rendering_1_1RenderQueue.html" title="Manages a collection of `RenderCommand` objects for a single rendering pass.">RenderQueue</a>. </p>
+<p>Constructs a new empty <a class="el" href="classhelios_1_1rendering_1_1RenderQueue.html" title="Manages collections of render commands for geometry and text.">RenderQueue</a>. </p>
 
 <p class="reference">References <a class="el" href="#a68f1afed9c85bf66442861dc17a389b9">RenderQueue()</a>.</p>
 <div id="dynsection-4" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
@@ -297,8 +319,46 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="ac0000b7ce392652ba62fdb234b540cc2" name="ac0000b7ce392652ba62fdb234b540cc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0000b7ce392652ba62fdb234b540cc2">&#9670;&#160;</a></span>add() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void helios::rendering::RenderQueue::add </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classhelios_1_1rendering_1_1text_1_1TextRenderCommand.html">helios::rendering::text::TextRenderCommand</a></td>          <td class="paramname"><span class="paramname"><em>renderCommand</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel export">export</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adds a `TextRenderCommand` to this `RenderQueue`. </p>
+<p>The command is moved into the queue. Text commands are processed separately from geometry commands during rendering.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderCommand</td><td>The text render command to add (moved). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="RenderQueue_8ixx_source.html#l00116">116</a> of file <a class="el" href="RenderQueue_8ixx_source.html">RenderQueue.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="RenderQueue_8ixx_source.html#l00055">textRenderCommands_</a>.</p>
+
+</div>
+</div>
 <a id="ace107c45024c29efc237107e3307c2ab" name="ace107c45024c29efc237107e3307c2ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ace107c45024c29efc237107e3307c2ab">&#9670;&#160;</a></span>add()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ace107c45024c29efc237107e3307c2ab">&#9670;&#160;</a></span>add() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -329,11 +389,11 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 </dl>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000027">Todo</a></b></dt><dd>prevent adding renderables while rendering </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RenderQueue_8ixx_source.html#l00084">84</a> of file <a class="el" href="RenderQueue_8ixx_source.html">RenderQueue.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RenderQueue_8ixx_source.html#l00099">99</a> of file <a class="el" href="RenderQueue_8ixx_source.html">RenderQueue.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="RenderQueue_8ixx_source.html#l00084">add()</a>, <a class="el" href="RenderQueue_8ixx_source.html#l00045">logger_</a>, and <a class="el" href="RenderQueue_8ixx_source.html#l00040">renderCommands_</a>.</p>
+<p class="reference">References <a class="el" href="RenderQueue_8ixx_source.html#l00099">add()</a>, <a class="el" href="RenderQueue_8ixx_source.html#l00060">logger_</a>, and <a class="el" href="RenderQueue_8ixx_source.html#l00050">renderCommands_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="RenderQueue_8ixx_source.html#l00084">add()</a>, and <a class="el" href="RenderPassFactory_8ixx_source.html#l00104">helios::rendering::RenderPassFactory::populateRenderQueue()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="RenderQueue_8ixx_source.html#l00099">add()</a>, and <a class="el" href="RenderPassFactory_8ixx_source.html#l00104">helios::rendering::RenderPassFactory::populateRenderQueue()</a>.</p>
 <div id="dynsection-5" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the call graph for this function:</div>
 <div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
@@ -376,9 +436,9 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 <p>This prepares this queue to be reused in a new rendering pass. </p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000028">Todo</a></b></dt><dd>strategy to decide whether shrink_to_fit should only be applied if expected numbers RenderCommands for the subsequent render passes is less than current size? </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RenderQueue_8ixx_source.html#l00107">107</a> of file <a class="el" href="RenderQueue_8ixx_source.html">RenderQueue.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RenderQueue_8ixx_source.html#l00143">143</a> of file <a class="el" href="RenderQueue_8ixx_source.html">RenderQueue.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="RenderQueue_8ixx_source.html#l00040">renderCommands_</a>.</p>
+<p class="reference">References <a class="el" href="RenderQueue_8ixx_source.html#l00050">renderCommands_</a>, and <a class="el" href="RenderQueue_8ixx_source.html#l00055">textRenderCommands_</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="RenderPassFactory_8ixx_source.html#l00104">helios::rendering::RenderPassFactory::populateRenderQueue()</a>.</p>
 <div id="dynsection-7" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
@@ -387,38 +447,6 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 <div id="dynsection-7-content" class="dyncontent" style="display:none;">
 <div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classhelios_1_1rendering_1_1RenderQueue_a2d14f75f8f57728f71608dbfde485d80_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
-
-</div>
-</div>
-<a id="af3141c90009b7d87bc9f6a40ff6f852d" name="af3141c90009b7d87bc9f6a40ff6f852d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af3141c90009b7d87bc9f6a40ff6f852d">&#9670;&#160;</a></span>count()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t helios::rendering::RenderQueue::count </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns the number of `RenderCommand`s this queue contains. </p>
-<dl class="section return"><dt>Returns</dt><dd>The number of RenderCommands in this queue. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="RenderQueue_8ixx_source.html#l00122">122</a> of file <a class="el" href="RenderQueue_8ixx_source.html">RenderQueue.ixx</a>.</p>
-
-<p class="reference">References <a class="el" href="RenderQueue_8ixx_source.html#l00040">renderCommands_</a>.</p>
 
 </div>
 </div>
@@ -518,9 +546,105 @@ static const <a class="el" href="classhelios_1_1util_1_1log_1_1Logger.html">heli
 <p>Returns a const ref to the internal vector of `RenderCommand`. </p>
 <dl class="section return"><dt>Returns</dt><dd>A const ref to the list of `RenderCommand`s of this queue. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="RenderQueue_8ixx_source.html#l00098">98</a> of file <a class="el" href="RenderQueue_8ixx_source.html">RenderQueue.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="RenderQueue_8ixx_source.html#l00125">125</a> of file <a class="el" href="RenderQueue_8ixx_source.html">RenderQueue.ixx</a>.</p>
 
-<p class="reference">References <a class="el" href="RenderQueue_8ixx_source.html#l00040">renderCommands_</a>.</p>
+<p class="reference">References <a class="el" href="RenderQueue_8ixx_source.html#l00050">renderCommands_</a>.</p>
+
+</div>
+</div>
+<a id="a15b84c6df073fd8a56cefa484682a305" name="a15b84c6df073fd8a56cefa484682a305"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15b84c6df073fd8a56cefa484682a305">&#9670;&#160;</a></span>renderCommandsSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t helios::rendering::RenderQueue::renderCommandsSize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the number of `RenderCommand`s this queue contains. </p>
+<dl class="section return"><dt>Returns</dt><dd>The number of RenderCommands in this queue. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="RenderQueue_8ixx_source.html#l00160">160</a> of file <a class="el" href="RenderQueue_8ixx_source.html">RenderQueue.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="RenderQueue_8ixx_source.html#l00050">renderCommands_</a>.</p>
+
+</div>
+</div>
+<a id="a0f6fcefbc87bc726ecd313e4bab2cb23" name="a0f6fcefbc87bc726ecd313e4bab2cb23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f6fcefbc87bc726ecd313e4bab2cb23">&#9670;&#160;</a></span>textRenderCommands()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt; <a class="el" href="classhelios_1_1rendering_1_1text_1_1TextRenderCommand.html">helios::rendering::text::TextRenderCommand</a> &gt; &amp; helios::rendering::RenderQueue::textRenderCommands </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a const ref to the internal vector of `TextRenderCommand`. </p>
+<dl class="section return"><dt>Returns</dt><dd>A const ref to the list of text render commands in this queue. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="RenderQueue_8ixx_source.html#l00134">134</a> of file <a class="el" href="RenderQueue_8ixx_source.html">RenderQueue.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="RenderQueue_8ixx_source.html#l00055">textRenderCommands_</a>.</p>
+
+</div>
+</div>
+<a id="ae7433d5f4ccda531baa9c9827f857249" name="ae7433d5f4ccda531baa9c9827f857249"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7433d5f4ccda531baa9c9827f857249">&#9670;&#160;</a></span>textRenderCommandsSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t helios::rendering::RenderQueue::textRenderCommandsSize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel export">export</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the number of `TextRenderCommand`s this queue contains. </p>
+<dl class="section return"><dt>Returns</dt><dd>The number of text render commands in this queue. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="RenderQueue_8ixx_source.html#l00169">169</a> of file <a class="el" href="RenderQueue_8ixx_source.html">RenderQueue.ixx</a>.</p>
+
+<p class="reference">References <a class="el" href="RenderQueue_8ixx_source.html#l00055">textRenderCommands_</a>.</p>
 
 </div>
 </div>

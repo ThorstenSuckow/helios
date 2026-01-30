@@ -151,59 +151,97 @@ $(function() {
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            0.0f, 0.0f , -(zFar + zNear)/(zFar - zNear), -1.0f,</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            0.0f, 0.0f, -2 * (zFar * zNear) / (zFar - zNear), 0.0f</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        };</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    }</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    }</div>
 </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment"></span> </div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">    /**</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">     * @brief Returns the 4x4 lookAt-matrix for transforming world coordinates</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">     * to camera space.</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">     * The method creates the camera coordinate system based on the</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">     * parameters eye, i.e. the vantage point in world space, the camera&#39;s</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">     * up direction and center, representing the point of interest.</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">     * Note that the returned matrix is essentially a composition of</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">     * a change of coordinates matrix P(C &lt;- W) and a translation</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">     * to the origin, i.e. the camera is sitting at the origin (0, 0, 0)</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">     * looking down the negative z-axis, i.e. conceptually</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">     *                      P(W&lt;-C) * T(-eye)</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">     * The 4x4 matrix can then be used for computing the perspective projection</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">     * for creating the clip space</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">     * @brief Computes the 4x4 orthographic projection matrix.</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">     * Creates a projection matrix that maps 3D coordinates to normalized device</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">     * coordinates without perspective distortion. Parallel lines remain parallel,</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">     * and object size does not change with distance from the camera.</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">     * Suitable for 2D rendering, UI elements, and technical visualizations.</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">     * @param left The left boundary of the view volume.</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">     * @param right The right boundary of the view volume.</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">     * @param bottom The bottom boundary of the view volume.</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">     * @param top The top boundary of the view volume.</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">     * @param zNear The distance to the near clipping plane (default: 0.1).</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">     * @param zFar The distance to the far clipping plane (default: 100.0).</span></div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">     *                    clip = P * V * W * M</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">     * @return A 4x4 orthographic projection matrix.</span></div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">     *</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">     * @param eye</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">     * @param center</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">     * @param up</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">     * @return</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">     */</span></div>
-<div class="foldopen" id="foldopen00071" data-start="{" data-end="}">
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="namespacehelios_1_1math.html#aef6bef7ca3d31a4908a66e16c9771420">   71</a></span>    <span class="keyword">inline</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">mat4f</a> <a class="code hl_function" href="namespacehelios_1_1math.html#aef6bef7ca3d31a4908a66e16c9771420">lookAt</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">vec3f</a>&amp; eye, <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">vec3f</a>&amp; center, <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">vec3f</a>&amp; up) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keyword">const</span> <span class="keyword">auto</span> z = (eye - center).normalize();</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keyword">const</span> <span class="keyword">auto</span> x = <a class="code hl_function" href="namespacehelios_1_1math.html#a82d2ab8d8240be4606a885c554b93fb5">cross</a>(up, z).normalize();</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keyword">const</span> <span class="keyword">auto</span> y = <a class="code hl_function" href="namespacehelios_1_1math.html#a82d2ab8d8240be4606a885c554b93fb5">cross</a>(z, x).normalize();</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">mat4f</a>{</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            x[0], y[0], z[0], 0.0f,</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            x[1], y[1], z[1], 0.0f,</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            x[2], y[2], z[2], 0.0f,</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            -<a class="code hl_function" href="namespacehelios_1_1math.html#a7523e1a120cccd29674cf428bfdeb86c">dot</a>(x, eye), -<a class="code hl_function" href="namespacehelios_1_1math.html#a7523e1a120cccd29674cf428bfdeb86c">dot</a>(y, eye), -<a class="code hl_function" href="namespacehelios_1_1math.html#a7523e1a120cccd29674cf428bfdeb86c">dot</a>(z, eye), 1.0f,</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        };</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    }</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">     * @see perspective()</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">     */</span></div>
+<div class="foldopen" id="foldopen00068" data-start="{" data-end="}">
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="namespacehelios_1_1math.html#a4b05da38fbe60019d6b5e32a72b4b5e3">   68</a></span>    <span class="keyword">inline</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">mat4f</a> <a class="code hl_function" href="namespacehelios_1_1math.html#a4b05da38fbe60019d6b5e32a72b4b5e3">ortho</a>(</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keyword">const</span> <span class="keywordtype">float</span> left , <span class="keyword">const</span> <span class="keywordtype">float</span> right,</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keyword">const</span> <span class="keywordtype">float</span> bottom, <span class="keyword">const</span> <span class="keywordtype">float</span> top,</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keyword">const</span> <span class="keywordtype">float</span> zNear = 0.1f, <span class="keyword">const</span> <span class="keywordtype">float</span> zFar = 100.0f) noexcept {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">mat4f</a>{</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            2.0f/(right - left), 0.0f,0.0f,0.0f,</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            0.0f, 2.0f/(top-bottom),0.0f,0.0f,</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            0.0f,  0.0f, -2.0f/(zFar - zNear),0.0f,</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            -(right +left)/(right-left),-(top+bottom)/(top-bottom),-(zFar+zNear)/(zFar-zNear),1.0f</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        };</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    }</div>
 </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>}</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment"></span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">    /**</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">     * @brief Returns the 4x4 lookAt-matrix for transforming world coordinates</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">     * to camera space.</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">     * The method creates the camera coordinate system based on the</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">     * parameters eye, i.e. the vantage point in world space, the camera&#39;s</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">     * up direction and center, representing the point of interest.</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">     * Note that the returned matrix is essentially a composition of</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">     * a change of coordinates matrix P(C &lt;- W) and a translation</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">     * to the origin, i.e. the camera is sitting at the origin (0, 0, 0)</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">     * looking down the negative z-axis, i.e. conceptually</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">     *                      P(W&lt;-C) * T(-eye)</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment">     * The 4x4 matrix can then be used for computing the perspective projection</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">     * for creating the clip space</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">     *                    clip = P * V * W * M</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">     * @param eye</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">     * @param center</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment">     * @param up</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">     *</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">     * @return</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">     */</span></div>
+<div class="foldopen" id="foldopen00106" data-start="{" data-end="}">
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="namespacehelios_1_1math.html#aef6bef7ca3d31a4908a66e16c9771420">  106</a></span>    <span class="keyword">inline</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">mat4f</a> <a class="code hl_function" href="namespacehelios_1_1math.html#aef6bef7ca3d31a4908a66e16c9771420">lookAt</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">vec3f</a>&amp; eye, <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">vec3f</a>&amp; center, <span class="keyword">const</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">vec3f</a>&amp; up) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <span class="keyword">const</span> <span class="keyword">auto</span> z = (eye - center).normalize();</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="keyword">const</span> <span class="keyword">auto</span> x = <a class="code hl_function" href="namespacehelios_1_1math.html#a82d2ab8d8240be4606a885c554b93fb5">cross</a>(up, z).normalize();</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        <span class="keyword">const</span> <span class="keyword">auto</span> y = <a class="code hl_function" href="namespacehelios_1_1math.html#a82d2ab8d8240be4606a885c554b93fb5">cross</a>(z, x).normalize();</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        <span class="keywordflow">return</span> <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">mat4f</a>{</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            x[0], y[0], z[0], 0.0f,</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            x[1], y[1], z[1], 0.0f,</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            x[2], y[2], z[2], 0.0f,</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            -<a class="code hl_function" href="namespacehelios_1_1math.html#a7523e1a120cccd29674cf428bfdeb86c">dot</a>(x, eye), -<a class="code hl_function" href="namespacehelios_1_1math.html#a7523e1a120cccd29674cf428bfdeb86c">dot</a>(y, eye), -<a class="code hl_function" href="namespacehelios_1_1math.html#a7523e1a120cccd29674cf428bfdeb86c">dot</a>(z, eye), 1.0f,</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        };</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    }</div>
+</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>}</div>
 <div class="ttc" id="amodule__helios_8math_8transform_html"><div class="ttname"><a href="module__helios_8math_8transform.html">helios.math.transform</a></div><div class="ttdoc">Transformation utilities for cameras, models, and scene graph inheritance.</div></div>
 <div class="ttc" id="amodule__helios_8math_8types_html"><div class="ttname"><a href="module__helios_8math_8types.html">helios.math.types</a></div><div class="ttdoc">Vector and matrix type definitions.</div></div>
 <div class="ttc" id="amodule__helios_8math_8utils_html"><div class="ttname"><a href="module__helios_8math_8utils.html">helios.math.utils</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1math_html"><div class="ttname"><a href="namespacehelios_1_1math.html">helios::math</a></div><div class="ttdoc">Mathematical operations and types.</div><div class="ttdef"><b>Definition</b> <a href="Numeric_8ixx_source.html#l00007">Numeric.ixx:7</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1math_html_a3009ee1714550dc2af4d7e5e952e8a90"><div class="ttname"><a href="namespacehelios_1_1math.html#a3009ee1714550dc2af4d7e5e952e8a90">helios::math::perspective</a></div><div class="ttdeci">mat4f perspective(float fovY, float aspect, float zNear, float zFar) noexcept</div><div class="ttdoc">Computes the 4x4 perspective projection matrix based on the specified field of view,...</div><div class="ttdef"><b>Definition</b> <a href="#l00035">camera.ixx:35</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1math_html_a4b05da38fbe60019d6b5e32a72b4b5e3"><div class="ttname"><a href="namespacehelios_1_1math.html#a4b05da38fbe60019d6b5e32a72b4b5e3">helios::math::ortho</a></div><div class="ttdeci">mat4f ortho(const float left, const float right, const float bottom, const float top, const float zNear=0.1f, const float zFar=100.0f) noexcept</div><div class="ttdoc">Computes the 4x4 orthographic projection matrix.</div><div class="ttdef"><b>Definition</b> <a href="#l00068">camera.ixx:68</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1math_html_a71f1e40e636f47229c3122bdb63099d5"><div class="ttname"><a href="namespacehelios_1_1math.html#a71f1e40e636f47229c3122bdb63099d5">helios::math::vec3f</a></div><div class="ttdeci">vec3&lt; float &gt; vec3f</div><div class="ttdoc">Single-precision floating-point 3D vector.</div><div class="ttdef"><b>Definition</b> <a href="vec3_8ixx_source.html#l00453">vec3.ixx:453</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1math_html_a7523e1a120cccd29674cf428bfdeb86c"><div class="ttname"><a href="namespacehelios_1_1math.html#a7523e1a120cccd29674cf428bfdeb86c">helios::math::dot</a></div><div class="ttdeci">constexpr T dot(const vec2&lt; T &gt; &amp;v1, const vec2&lt; T &gt; &amp;v2) noexcept</div><div class="ttdoc">Computes the dot product of two 2D vectors.</div><div class="ttdef"><b>Definition</b> <a href="vec2_8ixx_source.html#l00203">vec2.ixx:203</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1math_html_a82d2ab8d8240be4606a885c554b93fb5"><div class="ttname"><a href="namespacehelios_1_1math.html#a82d2ab8d8240be4606a885c554b93fb5">helios::math::cross</a></div><div class="ttdeci">constexpr vec3&lt; T &gt; cross(const vec3&lt; T &gt; &amp;v1, const vec3&lt; T &gt; &amp;v2) noexcept</div><div class="ttdoc">Computes the cross product of two 3D vectors.</div><div class="ttdef"><b>Definition</b> <a href="vec3_8ixx_source.html#l00366">vec3.ixx:366</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1math_html_ad422120d6e1f106140808f16e348f0b3"><div class="ttname"><a href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a></div><div class="ttdeci">mat4&lt; float &gt; mat4f</div><div class="ttdoc">Type alias for a 4x4 float matrix.</div><div class="ttdef"><b>Definition</b> <a href="mat4_8ixx_source.html#l00534">mat4.ixx:534</a></div></div>
-<div class="ttc" id="anamespacehelios_1_1math_html_aef6bef7ca3d31a4908a66e16c9771420"><div class="ttname"><a href="namespacehelios_1_1math.html#aef6bef7ca3d31a4908a66e16c9771420">helios::math::lookAt</a></div><div class="ttdeci">mat4f lookAt(const vec3f &amp;eye, const vec3f &amp;center, const vec3f &amp;up) noexcept</div><div class="ttdoc">Returns the 4x4 lookAt-matrix for transforming world coordinates to camera space. The method creates ...</div><div class="ttdef"><b>Definition</b> <a href="#l00071">camera.ixx:71</a></div></div>
+<div class="ttc" id="anamespacehelios_1_1math_html_aef6bef7ca3d31a4908a66e16c9771420"><div class="ttname"><a href="namespacehelios_1_1math.html#aef6bef7ca3d31a4908a66e16c9771420">helios::math::lookAt</a></div><div class="ttdeci">mat4f lookAt(const vec3f &amp;eye, const vec3f &amp;center, const vec3f &amp;up) noexcept</div><div class="ttdoc">Returns the 4x4 lookAt-matrix for transforming world coordinates to camera space. The method creates ...</div><div class="ttdef"><b>Definition</b> <a href="#l00106">camera.ixx:106</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

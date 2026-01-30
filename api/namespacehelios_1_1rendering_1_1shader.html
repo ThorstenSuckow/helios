@@ -115,12 +115,12 @@ Classes</h2></td></tr>
 <tr class="memitem:Shader" id="r_Shader"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1rendering_1_1shader_1_1Shader.html">Shader</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract representation of a <a class="el" href="classhelios_1_1rendering_1_1shader_1_1Shader.html" title="Abstract representation of a Shader program (e.g. composed of vertex/fragment shader).">Shader</a> program (e.g. composed of vertex/fragment shader).  <a href="classhelios_1_1rendering_1_1shader_1_1Shader.html#details">More...</a><br /></td></tr>
 <tr class="memitem:UniformValueMap" id="r_UniformValueMap"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html">UniformValueMap</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manages a collection of values for mapping them to their <a class="el" href="#a0a320e03bcf6f60bc90428c450dfb329" title="Enumeration class defining common semantic meanings for uniform variables in Shaders.">UniformSemantics</a> identifier.  <a href="classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maps uniform semantics to their values for shader parameter binding.  <a href="classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ab80163b13aee26b5d5a100c01e4804c9" id="r_ab80163b13aee26b5d5a100c01e4804c9"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab80163b13aee26b5d5a100c01e4804c9">helios::rendering::shader::UniformValue</a></td></tr>
-<tr class="memdesc:ab80163b13aee26b5d5a100c01e4804c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type alias for the variant containing all supported uniform types.  <br /></td></tr>
+<tr class="memitem:aa9d20b56bd13e24f7e7fbe64de6e37ba" id="r_aa9d20b56bd13e24f7e7fbe64de6e37ba"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa9d20b56bd13e24f7e7fbe64de6e37ba">helios::rendering::shader::UniformValue</a></td></tr>
+<tr class="memdesc:aa9d20b56bd13e24f7e7fbe64de6e37ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type alias for the variant containing all supported uniform types.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -131,19 +131,22 @@ Enumerations</h2></td></tr>
 , <a class="el" href="#a0a320e03bcf6f60bc90428c450dfb329aaaf9abb4ecf0d3618eac3e02b50ab5a7">MaterialBaseColor</a>
 , <br />
 &#160;&#160;<a class="el" href="#a0a320e03bcf6f60bc90428c450dfb329ae555f11be67c1dc8afe22845d052682a">MaterialRoughness</a>
+, <a class="el" href="#a0a320e03bcf6f60bc90428c450dfb329a3e73310ee12c338ad477262c33cc2ffa">TextTexture</a>
+, <a class="el" href="#a0a320e03bcf6f60bc90428c450dfb329aa055cffe44a2aae1849e81f6647fa9df">TextColor</a>
 , <a class="el" href="#a0a320e03bcf6f60bc90428c450dfb329a3dfc07093d1d9100437458bc54f55a7a">deltaTime</a>
-, <a class="el" href="#a0a320e03bcf6f60bc90428c450dfb329aa3c149391ffc055dbab3d968689307d6">totalTime</a>
+, <br />
+&#160;&#160;<a class="el" href="#a0a320e03bcf6f60bc90428c450dfb329aa3c149391ffc055dbab3d968689307d6">totalTime</a>
 , <a class="el" href="#a0a320e03bcf6f60bc90428c450dfb329a4eecfb50c5a20eb78bc4d5304e9d8618">size_</a>
 <br />
  }</td></tr>
-<tr class="memdesc:a0a320e03bcf6f60bc90428c450dfb329"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration class defining common semantic meanings for uniform variables in Shaders.  <a href="#a0a320e03bcf6f60bc90428c450dfb329">More...</a><br /></td></tr>
+<tr class="memdesc:a0a320e03bcf6f60bc90428c450dfb329"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration of semantic identifiers for shader uniform variables.  <a href="#a0a320e03bcf6f60bc90428c450dfb329">More...</a><br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classhelios_1_1rendering_1_1shader_1_1Shader.html" title="Abstract representation of a Shader program (e.g. composed of vertex/fragment shader).">Shader</a> program management. </p>
 <p>This namespace provides shader program management, uniform semantics, and value mapping for shader parameter configuration in the rendering pipeline. Manages shader programs and their parameters, providing a type-safe interface for configuring shader uniforms and semantics. </p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
-<a id="ab80163b13aee26b5d5a100c01e4804c9" name="ab80163b13aee26b5d5a100c01e4804c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab80163b13aee26b5d5a100c01e4804c9">&#9670;&#160;</a></span>UniformValue</h2>
+<a id="aa9d20b56bd13e24f7e7fbe64de6e37ba" name="aa9d20b56bd13e24f7e7fbe64de6e37ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9d20b56bd13e24f7e7fbe64de6e37ba">&#9670;&#160;</a></span>UniformValue</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -152,7 +155,7 @@ Enumerations</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#ab80163b13aee26b5d5a100c01e4804c9">helios::rendering::shader::UniformValue</a></td>
+          <td class="memname">using <a class="el" href="#aa9d20b56bd13e24f7e7fbe64de6e37ba">helios::rendering::shader::UniformValue</a></td>
         </tr>
       </table>
   </td>
@@ -164,7 +167,8 @@ Enumerations</h2></td></tr>
 <b>Initial value:</b><div class="fragment"><div class="line"> std::variant&lt;</div>
 <div class="line">        <a class="code hl_typedef" href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a>,</div>
 <div class="line">        <a class="code hl_typedef" href="namespacehelios_1_1math.html#a08252f81850c5902e3c8dead272f3332">helios::math::vec4f</a>,</div>
-<div class="line">        <span class="keywordtype">float</span></div>
+<div class="line">        float,</div>
+<div class="line">        <span class="keywordtype">int</span></div>
 <div class="line">    &gt;</div>
 <div class="ttc" id="anamespacehelios_1_1math_html_a08252f81850c5902e3c8dead272f3332"><div class="ttname"><a href="namespacehelios_1_1math.html#a08252f81850c5902e3c8dead272f3332">helios::math::vec4f</a></div><div class="ttdeci">vec4&lt; float &gt; vec4f</div><div class="ttdoc">Single-precision floating-point 4D vector.</div><div class="ttdef"><b>Definition</b> <a href="vec4_8ixx_source.html#l00149">vec4.ixx:149</a></div></div>
 <div class="ttc" id="anamespacehelios_1_1math_html_ad422120d6e1f106140808f16e348f0b3"><div class="ttname"><a href="namespacehelios_1_1math.html#ad422120d6e1f106140808f16e348f0b3">helios::math::mat4f</a></div><div class="ttdeci">mat4&lt; float &gt; mat4f</div><div class="ttdoc">Type alias for a 4x4 float matrix.</div><div class="ttdef"><b>Definition</b> <a href="mat4_8ixx_source.html#l00534">mat4.ixx:534</a></div></div>
@@ -197,10 +201,18 @@ Enumerations</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Enumeration class defining common semantic meanings for uniform variables in Shaders. </p>
-<p>This enum class provides a strongly typed way to refer to **standard** uniform variables that represent essential matrices or other global data typically passed to shaders.</p>
-<p>Concrete shader implementations use these semantics to map actual uniform names and their respective uniform locations.</p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html" title="Manages a collection of values for mapping them to their UniformSemantics identifier.">UniformValueMap</a> </dd></dl>
+<p>Enumeration of semantic identifiers for shader uniform variables. </p>
+<p>`UniformSemantics` provides strongly-typed identifiers for standard uniform variables passed to shaders. These semantics abstract the actual uniform names, allowing the rendering pipeline to work with meaningful identifiers.</p>
+<p>## Categories</p>
+<ul>
+<li>**Transform Matrices:** `ModelMatrix`, `ViewMatrix`, `ProjectionMatrix`</li>
+<li>**Material Properties:** `MaterialBaseColor`, `MaterialRoughness`</li>
+<li>**Text Rendering:** `TextTexture`, `TextColor`</li>
+<li>**Time Values:** `deltaTime`, `totalTime`</li>
+</ul>
+<p>## Usage</p>
+<p>```cpp <a class="el" href="classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html" title="Maps uniform semantics to their values for shader parameter binding.">UniformValueMap</a> uniforms; uniforms.set(UniformSemantics::ModelMatrix, modelMat); uniforms.set(<a class="el" href="#a0a320e03bcf6f60bc90428c450dfb329aaaf9abb4ecf0d3618eac3e02b50ab5a7" title="Represents the (material&#39;s) base color.">UniformSemantics::MaterialBaseColor</a>, vec4f{1.0f, 0.0f, 0.0f, 1.0f}); ```</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classhelios_1_1rendering_1_1shader_1_1UniformValueMap.html" title="Maps uniform semantics to their values for shader parameter binding.">UniformValueMap</a> </dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a0a320e03bcf6f60bc90428c450dfb329a3e04ff8d5f81e0e803be16ae79aaf3c6" name="a0a320e03bcf6f60bc90428c450dfb329a3e04ff8d5f81e0e803be16ae79aaf3c6"></a>ModelMatrix&#160;</td><td class="fielddoc"><p>Represents the object-to-world transformation matrix of an object. </p>
 </td></tr>
@@ -212,6 +224,10 @@ Enumerations</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="a0a320e03bcf6f60bc90428c450dfb329ae555f11be67c1dc8afe22845d052682a" name="a0a320e03bcf6f60bc90428c450dfb329ae555f11be67c1dc8afe22845d052682a"></a>MaterialRoughness&#160;</td><td class="fielddoc"><p>Represents the (material's) roughness factor. </p>
 </td></tr>
+<tr><td class="fieldname"><a id="a0a320e03bcf6f60bc90428c450dfb329a3e73310ee12c338ad477262c33cc2ffa" name="a0a320e03bcf6f60bc90428c450dfb329a3e73310ee12c338ad477262c33cc2ffa"></a>TextTexture&#160;</td><td class="fielddoc"><p>Represents the texture sampler for text glyph rendering. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a0a320e03bcf6f60bc90428c450dfb329aa055cffe44a2aae1849e81f6647fa9df" name="a0a320e03bcf6f60bc90428c450dfb329aa055cffe44a2aae1849e81f6647fa9df"></a>TextColor&#160;</td><td class="fielddoc"><p>Represents the text color for glyph rendering. </p>
+</td></tr>
 <tr><td class="fieldname"><a id="a0a320e03bcf6f60bc90428c450dfb329a3dfc07093d1d9100437458bc54f55a7a" name="a0a320e03bcf6f60bc90428c450dfb329a3dfc07093d1d9100437458bc54f55a7a"></a>deltaTime&#160;</td><td class="fielddoc"><p>Represents the time elapsed since the last frame. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a0a320e03bcf6f60bc90428c450dfb329aa3c149391ffc055dbab3d968689307d6" name="a0a320e03bcf6f60bc90428c450dfb329aa3c149391ffc055dbab3d968689307d6"></a>totalTime&#160;</td><td class="fielddoc"><p>Represents the total time elapsed since measuring frame times. </p>
@@ -220,7 +236,7 @@ Enumerations</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="UniformSemantics_8ixx_source.html#l00025">25</a> of file <a class="el" href="UniformSemantics_8ixx_source.html">UniformSemantics.ixx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="UniformSemantics_8ixx_source.html#l00036">36</a> of file <a class="el" href="UniformSemantics_8ixx_source.html">UniformSemantics.ixx</a>.</p>
 
 </div>
 </div>

@@ -121,11 +121,13 @@ var searchData=
   ['helios_3a_3arendering_3a_3amodel_118',['model',['../namespacehelios_1_1rendering_1_1model.html',1,'helios::rendering']]],
   ['helios_3a_3arendering_3a_3amodel_3a_3aconfig_119',['config',['../namespacehelios_1_1rendering_1_1model_1_1config.html',1,'helios::rendering::model']]],
   ['helios_3a_3arendering_3a_3ashader_120',['shader',['../namespacehelios_1_1rendering_1_1shader.html',1,'helios::rendering']]],
-  ['helios_3a_3ascene_121',['scene',['../namespacehelios_1_1scene.html',1,'helios']]],
-  ['helios_3a_3autil_122',['util',['../namespacehelios_1_1util.html',1,'helios']]],
-  ['helios_3a_3autil_3a_3aio_123',['io',['../namespacehelios_1_1util_1_1io.html',1,'helios::util']]],
-  ['helios_3a_3autil_3a_3alog_124',['log',['../namespacehelios_1_1util_1_1log.html',1,'helios::util']]],
-  ['helios_3a_3autil_3a_3atime_125',['time',['../namespacehelios_1_1util_1_1time.html',1,'helios::util']]],
-  ['helios_3a_3awindow_126',['window',['../namespacehelios_1_1window.html',1,'helios']]],
-  ['helios_3a_3awindow_3a_3aevent_127',['event',['../namespacehelios_1_1window_1_1event.html',1,'helios::window']]]
+  ['helios_3a_3arendering_3a_3atext_121',['text',['../namespacehelios_1_1rendering_1_1text.html',1,'helios::rendering']]],
+  ['helios_3a_3arendering_3a_3atext_3a_3aconfig_122',['config',['../namespacehelios_1_1rendering_1_1text_1_1config.html',1,'helios::rendering::text']]],
+  ['helios_3a_3ascene_123',['scene',['../namespacehelios_1_1scene.html',1,'helios']]],
+  ['helios_3a_3autil_124',['util',['../namespacehelios_1_1util.html',1,'helios']]],
+  ['helios_3a_3autil_3a_3aio_125',['io',['../namespacehelios_1_1util_1_1io.html',1,'helios::util']]],
+  ['helios_3a_3autil_3a_3alog_126',['log',['../namespacehelios_1_1util_1_1log.html',1,'helios::util']]],
+  ['helios_3a_3autil_3a_3atime_127',['time',['../namespacehelios_1_1util_1_1time.html',1,'helios::util']]],
+  ['helios_3a_3awindow_128',['window',['../namespacehelios_1_1window.html',1,'helios']]],
+  ['helios_3a_3awindow_3a_3aevent_129',['event',['../namespacehelios_1_1window_1_1event.html',1,'helios::window']]]
 ];

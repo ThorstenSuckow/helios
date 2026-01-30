@@ -3,6 +3,23 @@
   <compounddef id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice" kind="class" language="C++" prot="public">
     <compoundname>helios::ext::opengl::rendering::OpenGLDevice</compoundname>
     <basecompoundref refid="classhelios_1_1rendering_1_1RenderingDevice" prot="public" virt="non-virtual">helios::rendering::RenderingDevice</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a6e56bc8c44c9cab697a8805d528b3559" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLGlyphTextRenderer" kindref="compound">helios::ext::opengl::rendering::OpenGLGlyphTextRenderer</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;helios::ext::opengl::rendering::OpenGLGlyphTextRenderer&gt; helios::ext::opengl::rendering::OpenGLDevice::textRenderer_</definition>
+        <argsstring></argsstring>
+        <name>textRenderer_</name>
+        <qualifiedname>helios::ext::opengl::rendering::OpenGLDevice::textRenderer_</qualifiedname>
+        <briefdescription>
+<para>Text renderer for FreeType-based glyph rendering. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" line="102" column="25" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" bodystart="102" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="private-func">
       <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a232b9959fd6bc53b3e012b6a2587ddad" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>GLenum</type>
@@ -34,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" line="46" column="17" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" bodystart="46" bodyend="66"/>
+        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" line="77" column="17" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" bodystart="77" bodyend="97"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -50,7 +67,37 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" line="70" column="9"/>
+        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" line="106" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1af304fd0c9be110c190aaefe8728098d1" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>helios::ext::opengl::rendering::OpenGLDevice::OpenGLDevice</definition>
+        <argsstring>(std::unique_ptr&lt; helios::ext::opengl::rendering::OpenGLGlyphTextRenderer &gt; textRenderer)</argsstring>
+        <name>OpenGLDevice</name>
+        <qualifiedname>helios::ext::opengl::rendering::OpenGLDevice::OpenGLDevice</qualifiedname>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLGlyphTextRenderer" kindref="compound">helios::ext::opengl::rendering::OpenGLGlyphTextRenderer</ref> &gt;</type>
+          <declname>textRenderer</declname>
+        </param>
+        <briefdescription>
+<para>Constructs an <ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice" kindref="compound">OpenGLDevice</ref> with the given text renderer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>textRenderer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The text renderer to use for glyph-based text rendering. Ownership is transferred to this device. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" line="114" column="18" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" bodystart="114" bodyend="117"/>
+        <references refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a46305e5dba3c83f4bd05bf9059e44745" compoundref="OpenGLDevice_8ixx" startline="284" endline="286">textRenderer</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1aa97dd0a5a8fb57989616b7fac5139f8b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -72,9 +119,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" line="85" column="14" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" bodystart="85" bodyend="100"/>
-        <references refid="classhelios_1_1rendering_1_1RenderingDevice_1a4aa0809551525f58d3712a9aeb32dd6e" compoundref="RenderingDevice_8ixx" startline="35">helios::rendering::RenderingDevice::initialized_</references>
-        <references refid="classhelios_1_1rendering_1_1RenderingDevice_1a30cb723bfe96390f00716c2c80693248" compoundref="RenderingDevice_8ixx" startline="42">helios::rendering::RenderingDevice::logger_</references>
+        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" line="132" column="14" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" bodystart="132" bodyend="149"/>
+        <references refid="classhelios_1_1rendering_1_1RenderingDevice_1a4aa0809551525f58d3712a9aeb32dd6e" compoundref="RenderingDevice_8ixx" startline="53">helios::rendering::RenderingDevice::initialized_</references>
+        <references refid="classhelios_1_1rendering_1_1RenderingDevice_1a30cb723bfe96390f00716c2c80693248" compoundref="RenderingDevice_8ixx" startline="60">helios::rendering::RenderingDevice::logger_</references>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a2f589946c2ca4029fc3d3f3ba7820c99" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -109,11 +156,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" line="113" column="14" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" bodystart="113" bodyend="139"/>
+        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" line="162" column="14" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" bodystart="162" bodyend="189"/>
         <references refid="namespacehelios_1_1rendering_1aad4b10dc2924beaf3680fb245505290cacb5feb1b7314637725a2e73bdc9f7295" compoundref="ClearFlags_8ixx" startline="36">helios::rendering::Color</references>
         <references refid="namespacehelios_1_1rendering_1aad4b10dc2924beaf3680fb245505290ca675056ad1441b6375b2c5abd48c27ef1" compoundref="ClearFlags_8ixx" startline="41">helios::rendering::Depth</references>
         <references refid="classhelios_1_1rendering_1_1RenderTarget_1a3e4f37f9cfb37b3327ef7285319552fe" compoundref="RenderTarget_8ixx" startline="149" endline="151">helios::rendering::RenderTarget::height</references>
-        <references refid="classhelios_1_1rendering_1_1RenderingDevice_1a30cb723bfe96390f00716c2c80693248" compoundref="RenderingDevice_8ixx" startline="42">helios::rendering::RenderingDevice::logger_</references>
         <references refid="namespacehelios_1_1rendering_1aad4b10dc2924beaf3680fb245505290cad821e7ccd4d4c25a491ba1a9ea248895" compoundref="ClearFlags_8ixx" startline="46">helios::rendering::Stencil</references>
         <references refid="classhelios_1_1rendering_1_1RenderTarget_1a4e5e2981a9a80dcf74936038c14d21f6" compoundref="RenderTarget_8ixx" startline="140" endline="142">helios::rendering::RenderTarget::width</references>
       </memberdef>
@@ -129,15 +175,49 @@
           <declname>renderPass</declname>
         </param>
         <briefdescription>
-<para>Binds the VAOs and draws the elements based on the RenderCommands available with the RenderPass. </para>
+<para>Processes render commands and draws geometry and text. </para>
         </briefdescription>
         <detaileddescription>
+<para>Iterates through all render commands in the render queue, binds the appropriate shaders and VAOs, applies uniform values, and issues draw calls. After processing geometry, delegates any text render commands to `renderTextCommands()`.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>renderPass</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The render pass containing the render queue to be processed. </para>
+<para>The render pass containing the render queue to be processed.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1acebe1b8d87f4b83268e865e9297846b8" kindref="member">renderTextCommands()</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" line="202" column="14" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" bodystart="202" bodyend="244"/>
+        <references refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1acebe1b8d87f4b83268e865e9297846b8" compoundref="OpenGLDevice_8ixx" startline="254" endline="261">renderTextCommands</references>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1acebe1b8d87f4b83268e865e9297846b8" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void helios::ext::opengl::rendering::OpenGLDevice::renderTextCommands</definition>
+        <argsstring>(const helios::rendering::RenderPass &amp;renderPass) const noexcept</argsstring>
+        <name>renderTextCommands</name>
+        <qualifiedname>helios::ext::opengl::rendering::OpenGLDevice::renderTextCommands</qualifiedname>
+        <param>
+          <type>const <ref refid="classhelios_1_1rendering_1_1RenderPass" kindref="compound">helios::rendering::RenderPass</ref> &amp;</type>
+          <declname>renderPass</declname>
+        </param>
+        <briefdescription>
+<para>Renders all text commands in the render pass. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Iterates through the text render commands in the render queue and delegates each command to the `OpenGLGlyphTextRenderer` for rendering.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>renderPass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The render pass containing text render commands. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -145,9 +225,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" line="146" column="14" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" bodystart="146" bodyend="182"/>
-        <references refid="classhelios_1_1rendering_1_1RenderingDevice_1a30cb723bfe96390f00716c2c80693248" compoundref="RenderingDevice_8ixx" startline="42">helios::rendering::RenderingDevice::logger_</references>
-        <references refid="classhelios_1_1rendering_1_1model_1_1Mesh_1a0f0040d40bc06b1d36ca7ee9a7bbe2ca" compoundref="Mesh_8ixx" startline="191" endline="193">helios::rendering::model::Mesh::meshConfig</references>
+        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" line="254" column="14" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" bodystart="254" bodyend="261"/>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a205e92c86ad75f4a23903f80e092a9f0" compoundref="OpenGLDevice_8ixx" startline="202" endline="244">doRender</referencedby>
       </memberdef>
       <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1aa9b366cbdb4aa227567d8a32f0fdca95" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -178,13 +257,54 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" line="191" column="14" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" bodystart="191" bodyend="192"/>
+        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" line="272" column="14" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" bodystart="272" bodyend="273"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a46305e5dba3c83f4bd05bf9059e44745" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type><ref refid="classhelios_1_1rendering_1_1text_1_1TextRenderer" kindref="compound">helios::rendering::text::TextRenderer</ref> &amp;</type>
+        <definition>helios::rendering::text::TextRenderer &amp; helios::ext::opengl::rendering::OpenGLDevice::textRenderer</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>textRenderer</name>
+        <qualifiedname>helios::ext::opengl::rendering::OpenGLDevice::textRenderer</qualifiedname>
+        <reimplements refid="classhelios_1_1rendering_1_1RenderingDevice_1a58a78a837f226972c8b3294552eaeba5">textRenderer</reimplements>
+        <briefdescription>
+<para>Returns a reference to the text renderer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Use this to register font families before rendering text.</para>
+<para><simplesect kind="return"><para>Reference to the `TextRenderer` interface.</para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLGlyphTextRenderer_1a59feb10e3137792e6fe42ec9b6230302" kindref="member">OpenGLGlyphTextRenderer::addFontFamily()</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" line="284" column="48" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" bodystart="284" bodyend="286"/>
+        <referencedby refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1af304fd0c9be110c190aaefe8728098d1" compoundref="OpenGLDevice_8ixx" startline="114" endline="117">OpenGLDevice</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>OpenGL RenderingDevice representative. </para>
+<para>OpenGL implementation of `RenderingDevice`. </para>
     </briefdescription>
     <detaileddescription>
+<para>`OpenGLDevice` is the concrete OpenGL backend for the helios rendering system. It handles all OpenGL-specific operations including mesh rendering, shader management, and text rendering via `OpenGLGlyphTextRenderer`.</para>
+<para>## Responsibilities</para>
+<para><itemizedlist>
+<listitem><para>**Initialization:** Load OpenGL function pointers via GLAD.</para>
+</listitem><listitem><para>**Render Pass Execution:** Configure viewport, clear buffers, and process render commands.</para>
+</listitem><listitem><para>**Mesh Rendering:** Bind VAOs and issue draw calls for geometry.</para>
+</listitem><listitem><para>**Text Rendering:** Delegate text commands to `OpenGLGlyphTextRenderer`.</para>
+</listitem></itemizedlist>
+</para>
+<para>## Usage</para>
+<para>```cpp auto textRenderer = std::make_unique&lt;OpenGLGlyphTextRenderer&gt;(); auto device = std::make_unique&lt;OpenGLDevice&gt;(std::move(textRenderer));</para>
+<para>// After creating OpenGL context device-&gt;<ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1aa97dd0a5a8fb57989616b7fac5139f8b" kindref="member">init()</ref>;</para>
+<para>// Load fonts via the text renderer device-&gt;<ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a46305e5dba3c83f4bd05bf9059e44745" kindref="member">textRenderer()</ref>.addFontFamily(FontId{1}, &quot;fonts/arial.ttf&quot;); ```</para>
+<para><simplesect kind="see"><para>RenderingDevice </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLGlyphTextRenderer" kindref="compound">OpenGLGlyphTextRenderer</ref> </para>
+</simplesect>
+</para>
     </detaileddescription>
     <inheritancegraph>
       <node id="1">
@@ -217,7 +337,7 @@
         <link refid="classhelios_1_1util_1_1log_1_1Logger"/>
       </node>
     </collaborationgraph>
-    <location file="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" line="33" column="5" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" bodystart="33" bodyend="196"/>
+    <location file="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" line="64" column="5" bodyfile="/tmp/h/include/ext/opengl/rendering/OpenGLDevice.ixx" bodystart="64" bodyend="289"/>
     <listofallmembers>
       <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a2f589946c2ca4029fc3d3f3ba7820c99" prot="public" virt="virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>beginRenderPass</name></member>
       <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a205e92c86ad75f4a23903f80e092a9f0" prot="public" virt="virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>doRender</name></member>
@@ -226,7 +346,11 @@
       <member refid="classhelios_1_1rendering_1_1RenderingDevice_1ab900c2b99f512ccdf6c33435db3da8b0" prot="public" virt="non-virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>initialized</name></member>
       <member refid="classhelios_1_1rendering_1_1RenderingDevice_1a4aa0809551525f58d3712a9aeb32dd6e" prot="protected" virt="non-virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>initialized_</name></member>
       <member refid="classhelios_1_1rendering_1_1RenderingDevice_1a30cb723bfe96390f00716c2c80693248" prot="protected" virt="non-virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>logger_</name></member>
+      <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1af304fd0c9be110c190aaefe8728098d1" prot="public" virt="non-virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>OpenGLDevice</name></member>
       <member refid="classhelios_1_1rendering_1_1RenderingDevice_1abf7617082018d54e151c9399b57160f4" prot="public" virt="non-virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>render</name></member>
+      <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1acebe1b8d87f4b83268e865e9297846b8" prot="public" virt="non-virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>renderTextCommands</name></member>
+      <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a46305e5dba3c83f4bd05bf9059e44745" prot="public" virt="virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>textRenderer</name></member>
+      <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a6e56bc8c44c9cab697a8805d528b3559" prot="private" virt="non-virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>textRenderer_</name></member>
       <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a232b9959fd6bc53b3e012b6a2587ddad" prot="private" virt="non-virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>toOpenGL</name></member>
       <member refid="classhelios_1_1ext_1_1opengl_1_1rendering_1_1OpenGLDevice_1a8f15cee19cf071f05f1f320ca30243a8" prot="public" virt="non-virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>~OpenGLDevice</name></member>
       <member refid="classhelios_1_1rendering_1_1RenderingDevice_1a062e66375a1f27b648d73f5e9c903944" prot="public" virt="virtual"><scope>helios::ext::opengl::rendering::OpenGLDevice</scope><name>~RenderingDevice</name></member>

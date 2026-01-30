@@ -111,11 +111,12 @@ var searchData=
   ['helios_3a_3arendering_3a_3amodel_108',['helios::rendering::model',['../dir_24011ab7bf9b13a71275443ae89ee11c.html#autotoc_md478',1,'']]],
   ['helios_3a_3arendering_3a_3amodel_3a_3aconfig_109',['helios::rendering::model::config',['../dir_8cbb498b10c38bbe980f32a4e11e3f1d.html#autotoc_md476',1,'']]],
   ['helios_3a_3arendering_3a_3ashader_110',['helios::rendering::shader',['../dir_40d6abff8b874c940528bf00f676e818.html#autotoc_md482',1,'']]],
-  ['helios_3a_3ascene_111',['helios::scene',['../dir_dde1b4dbeafc450b8ae5525133d75a82.html#autotoc_md484',1,'']]],
-  ['helios_3a_3autil_112',['helios::util',['../dir_3e2f71566425d27b6ac8140f1223a941.html#autotoc_md490',1,'']]],
-  ['helios_3a_3autil_3a_3aio_113',['helios::util::io',['../dir_88d72e9224a6571ff92de546b5797538.html#autotoc_md486',1,'']]],
-  ['helios_3a_3autil_3a_3alog_114',['helios::util::log',['../dir_6be9dbf2110e7533160497dab56168f0.html#autotoc_md488',1,'']]],
-  ['helios_3a_3autil_3a_3atime_115',['helios::util::time',['../dir_c9b58a77d30deaa217de876ce1e7823a.html#autotoc_md492',1,'']]],
-  ['helios_3a_3awindow_116',['helios::window',['../dir_96c6bc0c43837fd044c9b580c42bd3e6.html#autotoc_md496',1,'']]],
-  ['helios_3a_3awindow_3a_3aevent_117',['helios::window::event',['../dir_e021a7b6d7780cf049a59f6ed951b06e.html#autotoc_md494',1,'']]]
+  ['helios_3a_3arendering_3a_3atext_111',['helios::rendering::text',['../dir_47f6e5c1c78efa66943ed2e8d43bef78.html#autotoc_md484',1,'']]],
+  ['helios_3a_3ascene_112',['helios::scene',['../dir_dde1b4dbeafc450b8ae5525133d75a82.html#autotoc_md486',1,'']]],
+  ['helios_3a_3autil_113',['helios::util',['../dir_3e2f71566425d27b6ac8140f1223a941.html#autotoc_md492',1,'']]],
+  ['helios_3a_3autil_3a_3aio_114',['helios::util::io',['../dir_88d72e9224a6571ff92de546b5797538.html#autotoc_md488',1,'']]],
+  ['helios_3a_3autil_3a_3alog_115',['helios::util::log',['../dir_6be9dbf2110e7533160497dab56168f0.html#autotoc_md490',1,'']]],
+  ['helios_3a_3autil_3a_3atime_116',['helios::util::time',['../dir_c9b58a77d30deaa217de876ce1e7823a.html#autotoc_md494',1,'']]],
+  ['helios_3a_3awindow_117',['helios::window',['../dir_96c6bc0c43837fd044c9b580c42bd3e6.html#autotoc_md498',1,'']]],
+  ['helios_3a_3awindow_3a_3aevent_118',['helios::window::event',['../dir_e021a7b6d7780cf049a59f6ed951b06e.html#autotoc_md496',1,'']]]
 ];

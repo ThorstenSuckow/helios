@@ -24,7 +24,8 @@ var searchData=
   ['glfwwindow_21',['GLFWWindow',['../classhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindow.html',1,'helios::ext::glfw::window']]],
   ['glfwwindowconfig_22',['GLFWWindowConfig',['../structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowConfig.html',1,'helios::ext::glfw::window']]],
   ['glfwwindowuserpointer_23',['GLFWWindowUserPointer',['../structhelios_1_1ext_1_1glfw_1_1window_1_1GLFWWindowUserPointer.html',1,'helios::ext::glfw::window']]],
-  ['grid_24',['Grid',['../structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Grid.html',1,'helios::rendering::asset::shape::basic']]],
-  ['gridcollisiondetectionsystem_25',['GridCollisionDetectionSystem',['../classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem.html',1,'helios::engine::modules::physics::collision::systems']]],
-  ['guid_26',['Guid',['../classhelios_1_1util_1_1Guid.html',1,'helios::util']]]
+  ['glyph_24',['Glyph',['../structhelios_1_1rendering_1_1text_1_1Glyph.html',1,'helios::rendering::text']]],
+  ['grid_25',['Grid',['../structhelios_1_1rendering_1_1asset_1_1shape_1_1basic_1_1Grid.html',1,'helios::rendering::asset::shape::basic']]],
+  ['gridcollisiondetectionsystem_26',['GridCollisionDetectionSystem',['../classhelios_1_1engine_1_1modules_1_1physics_1_1collision_1_1systems_1_1GridCollisionDetectionSystem.html',1,'helios::engine::modules::physics::collision::systems']]],
+  ['guid_27',['Guid',['../classhelios_1_1util_1_1Guid.html',1,'helios::util']]]
 ];

@@ -1,46 +1,9 @@
 #include <cstdlib>
 #include <iostream>
 
-// Helios Core Modules
-import helios.math.types;
-import helios.math;
 
-// Application Framework
-import helios.ext.glfw.app.GLFWFactory;
-import helios.ext.glfw.app.GLFWApplication;
-import helios.ext.glfw.window.GLFWWindow;
-
-// Input Management
-import helios.input.InputManager;
-import helios.input.types.Key;
-
-// Rendering System
-import helios.rendering.Renderable;
-import helios.rendering.RenderQueue;
-import helios.rendering.RenderPrototype;
-import helios.rendering.RenderPassFactory;
-import helios.rendering.model.Material;
-import helios.rendering.model.config.MeshConfig;
-import helios.rendering.model.config.MaterialProperties;
-import helios.rendering.model.config.PrimitiveType;
-import helios.rendering.asset.shape.basic.Cube;
-import helios.rendering.Viewport;
-
-// File I/O
-import helios.util.io.BasicStringFileReader;
-
-// OpenGL Backend
-import helios.ext.opengl.rendering.shader.OpenGLShader;
-import helios.ext.opengl.rendering.model.OpenGLMesh;
-import helios.ext.opengl.rendering.shader.OpenGLUniformLocationMap;
-import helios.rendering.shader.UniformSemantics;
-
-// Scene Management
-import helios.scene.Scene;
-import helios.scene.SceneNode;
-import helios.scene.CullNoneStrategy;
-import helios.scene.Camera;
-import helios.scene.CameraSceneNode;
+import helios;
+import helios.ext;
 
 using namespace helios::ext::glfw::app;
 using namespace helios::rendering;

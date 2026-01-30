@@ -24,6 +24,22 @@ TEST(UniformSemanticsTests, MaterialRoughnessFollowsMaterialBaseColor) {
     EXPECT_EQ(static_cast<int>(UniformSemantics::MaterialRoughness), 4);
 }
 
+TEST(UniformSemanticsTests, TextTextureFollowsMaterialRoughness) {
+    EXPECT_EQ(static_cast<int>(UniformSemantics::TextTexture), 5);
+}
+
+TEST(UniformSemanticsTests, TextColorFollowsTextTexture) {
+    EXPECT_EQ(static_cast<int>(UniformSemantics::TextColor), 6);
+}
+
+TEST(UniformSemanticsTests, DeltaTimeFollowsTextColor) {
+    EXPECT_EQ(static_cast<int>(UniformSemantics::deltaTime), 7);
+}
+
+TEST(UniformSemanticsTests, TotalTimeFollowsDeltaTime) {
+    EXPECT_EQ(static_cast<int>(UniformSemantics::totalTime), 8);
+}
+
 TEST(UniformSemanticsTests, SizeEnumRepresentsNumberOfEntries) {
-    EXPECT_EQ(static_cast<int>(UniformSemantics::size_), 7);
+    EXPECT_EQ(static_cast<int>(UniformSemantics::size_), 9);
 }

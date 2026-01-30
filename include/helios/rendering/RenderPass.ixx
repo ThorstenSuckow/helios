@@ -21,17 +21,36 @@ import helios.util.log.LogManager;
 export namespace helios::rendering {
 
     /**
-     * @brief Represents a single RenderPass under a set of specific uniform values.
+     * @brief Encapsulates a single rendering pass with its associated resources.
      *
-     * A `RenderPass` holds a `RenderQueue` that contains all `RenderCommands` that need
-     * to be processed in the subsequent rendering. The associated uniform values specified
-     * with this `RenderPass` remain constant during processing of the `RenderCommand`s.
+     * A `RenderPass` holds a `RenderQueue` containing all `RenderCommand` and
+     * `TextRenderCommand` objects to be processed. It also stores frame-level
+     * uniform values (e.g., view and projection matrices) that remain constant
+     * during the pass.
      *
-     * `RenderPass`es are typically processed sequentially by an API-specific implementation
-     * of the pure virtual `RenderingDevice` class.
+     * ## Components
      *
-     * @note A `RenderPass` should be configurable with other properties relevant to the underlying
-     * rendering backend, e.g. depth testing, draw mode etc.
+     * - **RenderQueue:** Contains geometry and text render commands.
+     * - **Viewport:** Defines the rendering area and clear settings.
+     * - **UniformValueMap:** Frame-level uniforms applied to all commands.
+     *
+     * ## Lifecycle
+     *
+     * ```
+     * RenderingDevice::beginRenderPass(pass)
+     *     → Clear buffers, configure viewport
+     * RenderingDevice::doRender(pass)
+     *     → Process RenderCommands and TextRenderCommands
+     * RenderingDevice::endRenderPass(pass)
+     *     → Finalize pass, unbind resources
+     * ```
+     *
+     * @note Future versions should support additional configuration like depth
+     *       testing, stencil operations, and draw modes.
+     *
+     * @see RenderQueue
+     * @see RenderingDevice
+     * @see Viewport
      */
     class RenderPass {
 
@@ -77,14 +96,14 @@ export namespace helios::rendering {
         RenderPass& operator=(const RenderPass&) = delete;
 
         /**
-         * @brief Prevent move.
+         * @brief Allow move.
          */
-        RenderPass(RenderPass&&) noexcept = delete;
+        RenderPass(RenderPass&&) noexcept = default;
 
         /**
-         * @brief Prevent move assignment.
+         * @brief Allow move assignment.
          */
-        RenderPass& operator=(RenderPass&&) noexcept = delete;
+        RenderPass& operator=(RenderPass&&) noexcept = default;
 
         /**
          * @brief Create a new `RenderPass` with the specified  `Viewport`, `RenderQueue` and the `UniformValueMap`.
@@ -106,17 +125,17 @@ export namespace helios::rendering {
             frameUniformValues_(std::move(frameUniformValues)) {
 
             if (!viewport_) {
-                logger_.error("Constructor received a nullptr Viewport. Creating a default empty Viewport.");
+                //logger_.error("Constructor received a nullptr Viewport. Creating a default empty Viewport.");
                 viewport_ = std::make_shared<Viewport>();
             }
 
             if (!renderQueue_) {
-                logger_.error("Constructor received a nullptr RenderQueue. Creating a default empty queue.");
+                //logger_.error("Constructor received a nullptr RenderQueue. Creating a default empty queue.");
                 renderQueue_ = std::make_unique<helios::rendering::RenderQueue>();
             }
 
             if (!frameUniformValues_) {
-                logger_.warn("Constructor received a nullptr UniformValueMap. Creating a default empty map.");
+                //logger_.warn("Constructor received a nullptr UniformValueMap. Creating a default empty map.");
                 frameUniformValues_ = std::make_unique<helios::rendering::shader::UniformValueMap>();
             }
         }

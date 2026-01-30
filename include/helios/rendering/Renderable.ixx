@@ -22,18 +22,33 @@ export namespace helios::rendering {
 
 
     /**
-     * @brief Representative of a configurable Renderable that references an immutable RenderPrototype
-     * and instance specific material property overrides.
+     * @brief Represents a renderable object that combines a shared prototype with instance-specific overrides.
      *
-     * A Renderable aggregates a reference to an immutable RenderPrototype (the shared asset definition)
-     * with optional instance-specific material property overrides. This separation enables efficient
-     * batching of shared RenderPrototypes while allowing individual visual adjustments per Renderable instance.
+     * A `Renderable` aggregates an immutable `RenderPrototype` (shared asset definition)
+     * with optional instance-specific `MaterialPropertiesOverride`. This separation enables
+     * efficient batching of shared prototypes while allowing per-instance visual adjustments.
      *
-     * The Renderable's interface is API-agnostic, enabling efficient batching and per-instance customization,
-     * while abstracting the underlying API-specific rendering resources bundled within the RenderPrototype.
+     * ## Design
      *
-     * Renderables are designed to be movable (e.g., in render queues) but not copyable to ensure unique
-     * instance identity in processing.
+     * - **Shared Prototype:** Multiple `Renderable` instances can reference the same `RenderPrototype`.
+     * - **Per-Instance Overrides:** Each instance can customize material properties.
+     * - **Move-Only:** Prevents accidental duplication during render queue processing.
+     *
+     * ## Data Flow
+     *
+     * ```
+     * RenderPrototype (shared)
+     *        │
+     *        ├── Renderable A (override: red color)
+     *        ├── Renderable B (override: blue color)
+     *        └── Renderable C (no override)
+     * ```
+     *
+     * @note For text rendering, use `TextRenderable` instead.
+     *
+     * @see RenderPrototype
+     * @see RenderCommand
+     * @see MaterialPropertiesOverride
      */
     class Renderable final {
 
@@ -92,8 +107,7 @@ export namespace helios::rendering {
          */
         explicit Renderable(
             std::shared_ptr<const helios::rendering::RenderPrototype> renderPrototype,
-            const std::optional<helios::rendering::model::config::MaterialPropertiesOverride>&
-            materialOverride = std::nullopt
+            const std::optional<helios::rendering::model::config::MaterialPropertiesOverride>& materialOverride = std::nullopt
         ) :
             renderPrototype_(std::move(renderPrototype)),
             materialOverride_(materialOverride)

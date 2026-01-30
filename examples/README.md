@@ -100,6 +100,22 @@ A comprehensive collision detection example featuring:
 
 ---
 
+### 7. Text Rendering Demo
+
+**Location:** `render_text_demo/`
+
+Demonstrates FreeType-based text rendering with:
+- Font loading with TextRenderer::addFontFamily()
+- TextRenderPrototype for shared shader configuration
+- TextRenderable for dynamic text display
+- Orthographic projection for screen-space positioning
+- Real-time text updates each frame
+
+**Controls:**
+- ESC - Exit application
+
+---
+
 ## Building the Examples
 
 All examples are automatically built when you build the helios project.

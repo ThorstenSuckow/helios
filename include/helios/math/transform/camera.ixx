@@ -42,8 +42,42 @@ export namespace helios::math {
             0.0f, 0.0f , -(zFar + zNear)/(zFar - zNear), -1.0f,
             0.0f, 0.0f, -2 * (zFar * zNear) / (zFar - zNear), 0.0f
         };
-
     }
+
+
+    /**
+     * @brief Computes the 4x4 orthographic projection matrix.
+     *
+     * Creates a projection matrix that maps 3D coordinates to normalized device
+     * coordinates without perspective distortion. Parallel lines remain parallel,
+     * and object size does not change with distance from the camera.
+     *
+     * Suitable for 2D rendering, UI elements, and technical visualizations.
+     *
+     * @param left The left boundary of the view volume.
+     * @param right The right boundary of the view volume.
+     * @param bottom The bottom boundary of the view volume.
+     * @param top The top boundary of the view volume.
+     * @param zNear The distance to the near clipping plane (default: 0.1).
+     * @param zFar The distance to the far clipping plane (default: 100.0).
+     *
+     * @return A 4x4 orthographic projection matrix.
+     *
+     * @see perspective()
+     */
+    inline mat4f ortho(
+        const float left , const float right,
+        const float bottom, const float top,
+        const float zNear = 0.1f, const float zFar = 100.0f) noexcept {
+
+        return mat4f{
+            2.0f/(right - left), 0.0f,0.0f,0.0f,
+            0.0f, 2.0f/(top-bottom),0.0f,0.0f,
+            0.0f,  0.0f, -2.0f/(zFar - zNear),0.0f,
+            -(right +left)/(right-left),-(top+bottom)/(top-bottom),-(zFar+zNear)/(zFar-zNear),1.0f
+        };
+    }
+    
 
     /**
      * @brief Returns the 4x4 lookAt-matrix for transforming world coordinates
@@ -66,6 +100,7 @@ export namespace helios::math {
      * @param eye
      * @param center
      * @param up
+     *
      * @return
      */
     inline mat4f lookAt(const vec3f& eye, const vec3f& center, const vec3f& up) noexcept {

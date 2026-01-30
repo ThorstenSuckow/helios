@@ -10,15 +10,26 @@ export module helios.rendering.shader.UniformSemantics;
 export namespace helios::rendering::shader {
 
     /**
-     * @brief Enumeration class defining common semantic meanings for uniform variables in
-     * Shaders.
+     * @brief Enumeration of semantic identifiers for shader uniform variables.
      *
-     * This enum class provides a strongly typed way to refer to **standard** uniform
-     * variables that represent essential matrices or other global data typically passed
-     * to shaders.
+     * `UniformSemantics` provides strongly-typed identifiers for standard uniform
+     * variables passed to shaders. These semantics abstract the actual uniform names,
+     * allowing the rendering pipeline to work with meaningful identifiers.
      *
-     * Concrete shader implementations use these semantics to map actual uniform names
-     * and their respective uniform locations.
+     * ## Categories
+     *
+     * - **Transform Matrices:** `ModelMatrix`, `ViewMatrix`, `ProjectionMatrix`
+     * - **Material Properties:** `MaterialBaseColor`, `MaterialRoughness`
+     * - **Text Rendering:** `TextTexture`, `TextColor`
+     * - **Time Values:** `deltaTime`, `totalTime`
+     *
+     * ## Usage
+     *
+     * ```cpp
+     * UniformValueMap uniforms;
+     * uniforms.set(UniformSemantics::ModelMatrix, modelMat);
+     * uniforms.set(UniformSemantics::MaterialBaseColor, vec4f{1.0f, 0.0f, 0.0f, 1.0f});
+     * ```
      *
      * @see UniformValueMap
      */
@@ -48,6 +59,16 @@ export namespace helios::rendering::shader {
          * @brief Represents the (material's) roughness factor.
          */
         MaterialRoughness,
+
+        /**
+         * @brief Represents the texture sampler for text glyph rendering.
+         */
+        TextTexture,
+
+        /**
+         * @brief Represents the text color for glyph rendering.
+         */
+        TextColor,
 
         /**
          * @brief Represents the time elapsed since the last frame.

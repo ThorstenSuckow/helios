@@ -12,6 +12,7 @@ module;
 export module helios.rendering.RenderQueue;
 
 import helios.rendering.RenderCommand;
+import helios.rendering.text.TextRenderCommand;
 
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
@@ -20,16 +21,25 @@ import helios.util.log.LogManager;
 export namespace helios::rendering {
 
     /**
-     * @brief Manages a collection of `RenderCommand` objects for a single rendering pass.
+     * @brief Manages collections of render commands for geometry and text.
      *
-     * `RenderQueue` acts as a container for all render commands, represented by a `RenderCommand`.
-     * A `RenderQueue` holds unique ownership of the render commands.
+     * `RenderQueue` acts as a container for all render commands in a single rendering pass.
+     * It manages two separate command lists:
      *
-     * An instance of `RenderQueue` can be cleared after being processed in a `RenderPass`
-     * for reuse in subsequent render passes.
+     * - **RenderCommands:** For geometry rendering (meshes, materials).
+     * - **TextRenderCommands:** For text rendering (glyphs, fonts).
      *
-     * The class is designed to be non-copyable.
+     * A `RenderQueue` holds unique ownership of geometry render commands and value ownership
+     * of text render commands. It can be cleared after processing for reuse in subsequent passes.
      *
+     * ## Design
+     *
+     * - **Non-copyable, non-movable:** Ensures unique queue identity during processing.
+     * - **Separate command lists:** Allows different rendering strategies for geometry and text.
+     *
+     * @see RenderCommand
+     * @see TextRenderCommand
+     * @see RenderPass
      */
     class RenderQueue {
 
@@ -38,6 +48,11 @@ export namespace helios::rendering {
          * @brief Stores the unique ptrs to the RenderCommand objects of this queue.
          */
         std::vector<std::unique_ptr<const helios::rendering::RenderCommand>> renderCommands_;
+
+        /**
+         * @brief Stores text render commands for glyph-based text rendering.
+         */
+        std::vector<helios::rendering::text::TextRenderCommand> textRenderCommands_;
 
         /**
          * @brief Shared logger instance for all RenderQueue objects.
@@ -91,6 +106,18 @@ export namespace helios::rendering {
         }
 
         /**
+         * @brief Adds a `TextRenderCommand` to this `RenderQueue`.
+         *
+         * The command is moved into the queue. Text commands are processed
+         * separately from geometry commands during rendering.
+         *
+         * @param renderCommand The text render command to add (moved).
+         */
+        void add(helios::rendering::text::TextRenderCommand renderCommand) {
+            textRenderCommands_.emplace_back(std::move(renderCommand));
+        }
+
+        /**
          * @brief Returns a const ref to the internal vector of `RenderCommand`.
          *
          * @return A const ref to the list of `RenderCommand`s of this queue.
@@ -100,12 +127,23 @@ export namespace helios::rendering {
         }
 
         /**
+         * @brief Returns a const ref to the internal vector of `TextRenderCommand`.
+         *
+         * @return A const ref to the list of text render commands in this queue.
+         */
+        [[nodiscard]] const std::vector<helios::rendering::text::TextRenderCommand>& textRenderCommands() const noexcept {
+            return textRenderCommands_;
+        }
+
+        /**
          * @brief Clears all `RenderCommand` objects from the queue.
          *
          * This prepares this queue to be reused in a new rendering pass.
          */
         void clear() {
             renderCommands_.clear();
+            textRenderCommands_.clear();
+
             /**
              * @todo strategy to decide whether shrink_to_fit should only be applied
              * if expected numbers RenderCommands for the subsequent render passes is
@@ -119,8 +157,17 @@ export namespace helios::rendering {
          *
          * @return The number of RenderCommands in this queue.
          */
-        [[nodiscard]] size_t count() const noexcept {
+        [[nodiscard]] size_t renderCommandsSize() const noexcept {
             return renderCommands_.size();
+        }
+
+        /**
+         * @brief Returns the number of `TextRenderCommand`s this queue contains.
+         *
+         * @return The number of text render commands in this queue.
+         */
+        [[nodiscard]] size_t textRenderCommandsSize() const noexcept {
+            return textRenderCommands_.size();
         }
     };
 

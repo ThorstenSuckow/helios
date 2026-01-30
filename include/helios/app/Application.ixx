@@ -10,6 +10,7 @@ module;
 #include <stdexcept>
 #include <format>
 #include <algorithm>
+#include <cassert>
 
 export module helios.app.Application;
 
@@ -103,6 +104,9 @@ export namespace helios::app {
             inputManager_(std::move(inputManager)),
             eventManager_(std::move(eventManager))
         {
+            assert(renderingDevice_ && "Unexpected nullptr for RenderingDevice");
+            assert(inputManager_ && "Unexpected nullptr for InputManager");
+            assert(eventManager_ && "Unexpected nullptr for EventManager");
         }
 
 

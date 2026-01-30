@@ -95,7 +95,7 @@ int main() {
     // ------------------------------
     // Rendering: Rendering Device, Renderable and Uniforms
     // ------------------------------
-    auto renderingDevice = dynamic_cast<helios::ext::opengl::rendering::OpenGLDevice&>(app->renderingDevice());
+    auto& renderingDevice = static_cast<helios::ext::opengl::rendering::OpenGLDevice&>(app->renderingDevice());
 
     // shader configuration
     auto shader = std::make_shared<helios::ext::opengl::rendering::shader::OpenGLShader>(

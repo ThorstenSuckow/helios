@@ -213,6 +213,11 @@ async function main() {
       meta: { title: 'GameObject Builder', description: 'Fluent builder pattern for constructing GameObjects with their associated components.', slug: '/core-concepts/gameobject-builder', tags: ['gameplay', 'architecture', 'builder'], keywords: ['helios', 'builder pattern', 'GameObjectFactory', 'fluent API', 'entity construction'], sidebar_label: 'GameObject Builder', sidebar_position: 8 }
     },
     {
+      src: path.join(repoRoot, 'docs', 'core-concepts', 'text-rendering.md'),
+      dest: path.join(websiteRoot, 'docs', 'core-concepts', 'text-rendering.md'),
+      meta: { title: 'Text Rendering', description: 'GPU-accelerated text rendering with FreeType and OpenGL.', slug: '/core-concepts/text-rendering', tags: ['rendering', 'text', 'freetype'], keywords: ['helios', 'text rendering', 'FreeType', 'OpenGL', 'glyph', 'font'], sidebar_label: 'Text Rendering', sidebar_position: 9 }
+    },
+    {
       src: path.join(repoRoot, 'examples', 'README.md'),
       dest: path.join(websiteRoot, 'docs', 'examples', 'overview.md'),
       meta: { title: 'Examples Overview', description: 'Example applications demonstrating helios features: rendering, input, scene graph, and more.', slug: '/examples', tags: ['examples', 'tutorial'], keywords: ['helios', 'examples', 'tutorials', 'getting started'], sidebar_label: 'Overview' }
@@ -246,6 +251,11 @@ async function main() {
       src: path.join(repoRoot, 'examples', 'collision_detection', 'README.md'),
       dest: path.join(websiteRoot, 'docs', 'examples', 'collision-detection.md'),
       meta: { title: 'Collision Detection', description: 'Example: Grid-based collision detection with layers, masks, and collision events.', slug: '/examples/collision-detection', tags: ['examples', 'collision', 'physics', 'gameplay'], keywords: ['helios', 'collision detection', 'AABB', 'grid', 'spatial partitioning', 'collision events'], sidebar_label: 'Collision Detection' }
+    },
+    {
+      src: path.join(repoRoot, 'examples', 'render_text_demo', 'README.md'),
+      dest: path.join(websiteRoot, 'docs', 'examples', 'render-text-demo.md'),
+      meta: { title: 'Text Rendering Demo', description: 'Example: FreeType-based text rendering with dynamic updates, font loading, and orthographic projection.', slug: '/examples/render-text-demo', tags: ['examples', 'text', 'rendering', 'freetype'], keywords: ['helios', 'text rendering', 'FreeType', 'font', 'glyph', 'OpenGL'], sidebar_label: 'Text Rendering' }
     },
   ];
 

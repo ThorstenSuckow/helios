@@ -39,7 +39,8 @@ const sidebars: SidebarsConfig = {
         'core-concepts/gameobject-builder',
         'core-concepts/command-system',
         'core-concepts/event-system',
-        'core-concepts/spawn-system'
+        'core-concepts/spawn-system',
+        'core-concepts/text-rendering'
       ],
     },
     {
@@ -56,6 +57,7 @@ const sidebars: SidebarsConfig = {
         'examples/spaceship-shooting',
         'examples/enemy-spawn',
         'examples/collision-detection',
+        'examples/render-text-demo',
       ],
     },
     'testing',

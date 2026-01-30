@@ -6,5 +6,6 @@
 export module helios.ext.opengl.rendering;
 
 export import helios.ext.opengl.rendering.OpenGLDevice;
+export import helios.ext.opengl.rendering.OpenGLGlyphTextRenderer;
 export import helios.ext.opengl.rendering.model;
 export import helios.ext.opengl.rendering.shader;

@@ -9,6 +9,7 @@ module;
 #include <format>
 #include <stdexcept>
 #include <utility>
+#include <cassert>
 
 export module helios.ext.opengl.rendering.OpenGLDevice;
 
@@ -22,13 +23,43 @@ import helios.rendering.ClearFlags;
 import helios.rendering.RenderTarget;
 import helios.rendering.Viewport;
 
+import helios.rendering.text.TextRenderer;
+
 import helios.ext.opengl.rendering.model.OpenGLMesh;
 import helios.ext.opengl.rendering.shader.OpenGLShader;
+import helios.ext.opengl.rendering.OpenGLGlyphTextRenderer;
 
 export namespace helios::ext::opengl::rendering {
 
     /**
-     * @brief OpenGL RenderingDevice representative.
+     * @brief OpenGL implementation of `RenderingDevice`.
+     *
+     * `OpenGLDevice` is the concrete OpenGL backend for the helios rendering system.
+     * It handles all OpenGL-specific operations including mesh rendering, shader management,
+     * and text rendering via `OpenGLGlyphTextRenderer`.
+     *
+     * ## Responsibilities
+     *
+     * - **Initialization:** Load OpenGL function pointers via GLAD.
+     * - **Render Pass Execution:** Configure viewport, clear buffers, and process render commands.
+     * - **Mesh Rendering:** Bind VAOs and issue draw calls for geometry.
+     * - **Text Rendering:** Delegate text commands to `OpenGLGlyphTextRenderer`.
+     *
+     * ## Usage
+     *
+     * ```cpp
+     * auto textRenderer = std::make_unique<OpenGLGlyphTextRenderer>();
+     * auto device = std::make_unique<OpenGLDevice>(std::move(textRenderer));
+     *
+     * // After creating OpenGL context
+     * device->init();
+     *
+     * // Load fonts via the text renderer
+     * device->textRenderer().addFontFamily(FontId{1}, "fonts/arial.ttf");
+     * ```
+     *
+     * @see RenderingDevice
+     * @see OpenGLGlyphTextRenderer
      */
     class OpenGLDevice : public  helios::rendering::RenderingDevice {
 
@@ -65,9 +96,25 @@ export namespace helios::ext::opengl::rendering {
             }
         }
 
+        /**
+         * @brief Text renderer for FreeType-based glyph rendering.
+         */
+        std::unique_ptr<helios::ext::opengl::rendering::OpenGLGlyphTextRenderer> textRenderer_;
+
 
     public:
         ~OpenGLDevice() override = default;
+
+        /**
+         * @brief Constructs an OpenGLDevice with the given text renderer.
+         *
+         * @param textRenderer The text renderer to use for glyph-based text rendering.
+         *                     Ownership is transferred to this device.
+         */
+        explicit OpenGLDevice(
+            std::unique_ptr<helios::ext::opengl::rendering::OpenGLGlyphTextRenderer> textRenderer
+        ) :
+        textRenderer_(std::move(textRenderer)) {}
 
         /**
          * @brief Initializes the OpenGL device to access modern OpenGL.
@@ -94,6 +141,8 @@ export namespace helios::ext::opengl::rendering {
                 throw std::runtime_error("Failed to load OpenGL");
             }
 
+            textRenderer_->init();
+
             logger_.info(std::format("OpenGL {0}.{1} loaded", GLAD_VERSION_MAJOR(gl_ver), GLAD_VERSION_MINOR(gl_ver)));
 
             initialized_ = true;
@@ -113,12 +162,7 @@ export namespace helios::ext::opengl::rendering {
         void beginRenderPass(helios::rendering::RenderPass& renderPass) const noexcept override {
             const auto& viewport = renderPass.viewport();
 
-            if (!viewport.renderTarget()) {
-                logger_.warn("Viewport has no render target, skipping renderPass");
-                return;
-            }
-
-            logger_.info("Begin RenderPass.");
+            assert(viewport.renderTarget() && "Unexpected missing render target for viewport");
 
             const helios::rendering::RenderTarget& renderTarget = *(viewport.renderTarget());
             const auto viewportBounds = viewport.bounds();
@@ -127,6 +171,12 @@ export namespace helios::ext::opengl::rendering {
                        static_cast<int>(renderTarget.height() * viewportBounds[1]),
                        static_cast<int>(renderTarget.width() * viewportBounds[2]),
                        static_cast<int>(renderTarget.height() * viewportBounds[3]));
+
+
+            // this is equally important for the GlpyhTextRenderer
+            // enable blending since the font's fragment shader uses the alpha channel
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 
             glClearColor(col[0], col[1], col[2], col[3]);
@@ -139,14 +189,21 @@ export namespace helios::ext::opengl::rendering {
         }
 
         /**
-         * @brief Binds the VAOs and draws the elements based on the RenderCommands available with the RenderPass.
+         * @brief Processes render commands and draws geometry and text.
+         *
+         * Iterates through all render commands in the render queue, binds the appropriate
+         * shaders and VAOs, applies uniform values, and issues draw calls. After processing
+         * geometry, delegates any text render commands to `renderTextCommands()`.
          *
          * @param renderPass The render pass containing the render queue to be processed.
+         *
+         * @see renderTextCommands()
          */
         void doRender(helios::rendering::RenderPass& renderPass) const noexcept override {
             const auto& renderQueue = renderPass.renderQueue();
 
-            logger_.info(std::format("Rendering {0} item(s)...", renderQueue.count()));
+            const helios::ext::opengl::rendering::shader::OpenGLShader* lastShader = nullptr;
+            unsigned int lastVao = 0;
 
             for (auto& rc: renderQueue.renderCommands()) {
 
@@ -154,32 +211,56 @@ export namespace helios::ext::opengl::rendering {
                     const auto& baseShader = renderPrototype_ptr->material().shader();
                     const auto& baseMesh = renderPrototype_ptr->mesh();
 
-                    const auto* shader = dynamic_cast<const helios::ext::opengl::rendering::shader::OpenGLShader*>(&baseShader);
-                    if (!shader) {
-                        logger_.error("Failed to cast shader to OpenGLShader.");
-                        continue;
+                    const auto* shader = static_cast<const helios::ext::opengl::rendering::shader::OpenGLShader*>(&baseShader);
+                    assert(shader && "Unexpected failure when casting to OpenGLShader.");
+
+                    if (shader != lastShader) {
+                        shader->use();
+                        lastShader = shader;
                     }
-                    logger_.info("activating shader...");
-                    shader->use();
+
                     shader->applyUniformValues(renderPass.frameUniformValues());
                     shader->applyUniformValues(rc->objectUniformValues());
                     shader->applyUniformValues(rc->materialUniformValues());
 
-                    const auto* mesh = dynamic_cast<const helios::ext::opengl::rendering::model::OpenGLMesh*>(&baseMesh);
-                    if (!mesh) {
-                        logger_.error("Failed to cast mesh to OpenGLMesh.");
-                        continue;
-                    }
+                    const auto* mesh = static_cast<const helios::ext::opengl::rendering::model::OpenGLMesh*>(&baseMesh);
+                    assert(mesh && "Unexpected failure when casting to OpenGLMesh.");
+
                     const auto [primitiveType] = mesh->meshConfig();
-                    logger_.info(std::format("Binding vao {0}", mesh->vao()));
-                    glBindVertexArray(mesh->vao());
-                    glEnable(GL_BLEND);
-                    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+                    if (mesh->vao() != lastVao) {
+                        glBindVertexArray(mesh->vao());
+                        lastVao = mesh->vao();
+                    }
+
                     glDrawElements(toOpenGL(primitiveType), mesh->indexCount(), GL_UNSIGNED_INT, nullptr);
                     glBindVertexArray(0);
                 }
             }
+
+            if (renderQueue.textRenderCommandsSize() > 0) {
+                renderTextCommands(renderPass);
+            }
         }
+
+        /**
+         * @brief Renders all text commands in the render pass.
+         *
+         * Iterates through the text render commands in the render queue and delegates
+         * each command to the `OpenGLGlyphTextRenderer` for rendering.
+         *
+         * @param renderPass The render pass containing text render commands.
+         */
+        void renderTextCommands(const helios::rendering::RenderPass& renderPass) const noexcept {
+            const auto& renderQueue = renderPass.renderQueue();
+
+            for (auto& rc: renderQueue.textRenderCommands()) {
+
+                textRenderer_->render(rc, renderPass.frameUniformValues());//shader, text, screenPosition, scale);
+            }
+        }
+
+
 
         /**
          * @brief Ends the specified render pass.
@@ -191,6 +272,18 @@ export namespace helios::ext::opengl::rendering {
         void endRenderPass(helios::rendering::RenderPass& renderPass) const noexcept override {
         }
 
+        /**
+         * @brief Returns a reference to the text renderer.
+         *
+         * Use this to register font families before rendering text.
+         *
+         * @return Reference to the `TextRenderer` interface.
+         *
+         * @see OpenGLGlyphTextRenderer::addFontFamily()
+         */
+        [[nodiscard]] helios::rendering::text::TextRenderer& textRenderer() const noexcept {
+            return *textRenderer_;
+        }
 
 
     };

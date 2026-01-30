@@ -11,13 +11,9 @@ module;
 
 export module helios.ext.glfw.app.GLFWFactory;
 
-import helios.window.Window;
-import helios.window.event.FrameBufferResizeEvent;
-import helios.input.InputManager;
-import helios.input.gamepad.RadialDeadzoneStrategy;
-import helios.event.BasicEventManager;
-import helios.event.DequeEventQueue;
-import helios.event.Dispatcher;
+import helios.window;
+import helios.input;
+import helios.event;
 import helios.app.controller.BasicWindowRenderingController;
 import helios.util.Guid;
 import helios.event.EventManager;
@@ -31,7 +27,7 @@ import helios.ext.glfw.input.GLFWInputAdapter;
 import helios.rendering.model.Material;
 import helios.rendering.RenderTarget;
 
-import helios.ext.opengl.rendering.OpenGLDevice;
+import helios.ext.opengl.rendering;
 
 export namespace helios::ext::glfw::app {
 
@@ -61,7 +57,9 @@ export namespace helios::ext::glfw::app {
             int width = 800, int height = 600,
             int aspectRatioNumer = 0, int aspectRatioDenom = 0
         ) {
-            auto openGLDevice = std::make_unique<helios::ext::opengl::rendering::OpenGLDevice>();
+            auto openGLDevice = std::make_unique<helios::ext::opengl::rendering::OpenGLDevice>(
+                std::make_unique<helios::ext::opengl::rendering::OpenGLGlyphTextRenderer>()
+            );
             auto deadzoneStrategy = std::make_unique<helios::input::gamepad::RadialDeadzoneStrategy>();
             auto inputManager = std::make_unique<helios::input::InputManager>(
                 std::make_unique<helios::ext::glfw::input::GLFWInputAdapter>(std::move(deadzoneStrategy))
@@ -98,7 +96,7 @@ export namespace helios::ext::glfw::app {
 
             app->setCurrent(win);
 
-            return app;
+            return std::move(app);
         }
 
 

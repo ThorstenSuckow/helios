@@ -25,19 +25,39 @@ export namespace helios::rendering::shader {
     using UniformValue = std::variant<
         helios::math::mat4f,
         helios::math::vec4f,
-        float
+        float,
+        int
     >;
 
     /**
-     * @brief Manages a collection of values for mapping them to their UniformSemantics
-     * identifier.
+     * @brief Maps uniform semantics to their values for shader parameter binding.
      *
-     * This class allows for storing different types of uniform values (e.g. mat4f, vec3f, ...)
-     * under a single semantic identifier, for convenient assignment to uniform locations
-     * of an underlying shader in the rendering process.
+     * `UniformValueMap` stores uniform values (matrices, vectors, scalars) indexed by
+     * their `UniformSemantics` identifier. This allows the rendering pipeline to
+     * efficiently pass data to shaders without string-based lookups.
      *
-     * @note this class intentionally avoids templates as we assume that instances of the
-     * value maps are used in the rendering hot path.
+     * ## Supported Types
+     *
+     * - `mat4f` – 4x4 transformation matrices
+     * - `vec4f` – 4-component vectors (colors, positions)
+     * - `float` – Scalar values (roughness, time)
+     * - `int` – Integer values (texture units)
+     *
+     * ## Usage
+     *
+     * ```cpp
+     * UniformValueMap uniforms;
+     *
+     * // Set transform matrices
+     * uniforms.set(UniformSemantics::ModelMatrix, modelMat);
+     * uniforms.set(UniformSemantics::ViewMatrix, viewMat);
+     *
+     * // Set material properties
+     * uniforms.set(UniformSemantics::MaterialBaseColor, vec4f{1.0f, 0.0f, 0.0f, 1.0f});
+     *
+     * // Retrieve raw pointer for OpenGL
+     * const float* modelPtr = uniforms.mat4f_ptr(UniformSemantics::ModelMatrix);
+     * ```
      *
      * @todo UniformMap must allow only one index for all data structures,
      * i.e. if map_[semantics] contains a mat4f, other types should not be allowed
@@ -131,6 +151,18 @@ export namespace helios::rendering::shader {
         }
 
         /**
+         * @brief Sets or updates an integer uniform value for a given semantic.
+         *
+         * Typically used for texture unit indices.
+         *
+         * @param uniformSemantics The `UniformSemantics` identifier for the uniform.
+         * @param value The integer value to set.
+         */
+        void set(UniformSemantics uniformSemantics, int value) noexcept {
+            map_[std::to_underlying(uniformSemantics)].emplace(value);
+        }
+
+        /**
          * @brief Sets or updates a float uniform value for a given semantic.
          *
          * @param uniformSemantics The `UniformSemantics` identifier for the uniform.
@@ -162,6 +194,31 @@ export namespace helios::rendering::shader {
             if (const auto& el = map_[index]; el.has_value()) {
                 if (const auto* floatPtr = std::get_if<float>(&el.value())) {
                     return floatPtr;
+                }
+            }
+
+            return nullptr;
+        }
+
+        /**
+         * @brief Returns a raw const pointer to the integer value for the specified uniform semantics.
+         *
+         * @param uniformSemantics The `UniformSemantics` identifier for the uniform.
+         *
+         * @return A raw const pointer to the associated integer value, or `nullptr` if no integer
+         *         value is associated with this semantics.
+         */
+        [[nodiscard]] const int* int_ptr(UniformSemantics uniformSemantics) const noexcept {
+
+            const auto index = std::to_underlying(uniformSemantics);
+
+            if (index >= map_.size()) {
+                return nullptr;
+            }
+
+            if (const auto& el = map_[index]; el.has_value()) {
+                if (const auto* intPtr = std::get_if<int>(&el.value())) {
+                    return intPtr;
                 }
             }
 

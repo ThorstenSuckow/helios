@@ -7,6 +7,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 include(FetchContent)
 
+# glfw
 set(GLFW_BUILD_DOCS     OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS    OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
@@ -16,21 +17,38 @@ FetchContent_Declare(glfw
         GIT_TAG        3.4
 )
 
+# Freetype
+set(FT_DISABLE_ZLIB        ON  CACHE BOOL "" FORCE)
+set(FT_DISABLE_PNG         ON  CACHE BOOL "" FORCE)
+set(FT_DISABLE_BZIP2       ON  CACHE BOOL "" FORCE)
+set(FT_DISABLE_BROTLI      ON  CACHE BOOL "" FORCE)
+set(FT_DISABLE_HARFBUZZ    ON  CACHE BOOL "" FORCE)
+set(FT_DISABLE_FREETYPE_DEBUGGER ON CACHE BOOL "" FORCE)
+
+FetchContent_Declare(freetype
+        GIT_REPOSITORY https://github.com/freetype/freetype.git
+        GIT_TAG        VER-2-14-1
+)
+
+
+# glad
 FetchContent_Declare(glad
         GIT_REPOSITORY https://github.com/Dav1dde/glad.git
         GIT_TAG        v2.0.8
         SOURCE_SUBDIR  cmake
 )
 
+#imgui
 FetchContent_Declare(imgui
         GIT_REPOSITORY https://github.com/ocornut/imgui.git
         GIT_TAG        docking
 )
-FetchContent_MakeAvailable(glfw glad imgui)
+FetchContent_MakeAvailable(freetype glfw glad imgui)
 
 # GLAD v2: Core GL 4.6
 glad_add_library(glad_gl_core_46 STATIC REPRODUCIBLE LOADER API gl:core=4.6)
 add_library(thirdparty::glad ALIAS glad_gl_core_46)
+add_library(thirdparty::freetype ALIAS freetype)
 add_library(thirdparty::glfw ALIAS glfw)
 add_library(thirdparty_opengl INTERFACE)
 target_link_libraries(thirdparty_opengl INTERFACE thirdparty::glad thirdparty::glfw)

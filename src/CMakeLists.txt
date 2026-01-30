@@ -22,6 +22,7 @@ add_library(helios STATIC)
 target_link_libraries(
         helios
         PUBLIC
+        thirdparty::freetype
         thirdparty::opengl
         thirdparty::imgui
 )

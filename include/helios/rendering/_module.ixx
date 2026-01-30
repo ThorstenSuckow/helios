@@ -18,3 +18,4 @@ export import helios.rendering.Renderable;
 export import helios.rendering.shader;
 export import helios.rendering.model;
 export import helios.rendering.asset;
+export import helios.rendering.text;
